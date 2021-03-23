@@ -66,7 +66,6 @@ export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', functio
         }
         _ctrl.updateGovernmentPA = function(role) {
             if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
-            // if(_.contains(['AbsNationalAuthorizedUser', 'AbsNationalAuthorizedUser-dev', 'AbsNationalAuthorizedUser-trg'],role.code)){
                 if(_ctrl.selectedRoles[role.roleId])
                     governmentPARole = role;
                 else {

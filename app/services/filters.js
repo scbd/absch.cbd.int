@@ -116,10 +116,6 @@ import 'services/main';
                     government = document.body.government.identifier;
 
 
-				// var relamPrefix = '';
-				// if((!_.contains(appConfigService.scbdSchemas, (document.schema_s||'').toLowerCase())))
-				// 	relamPrefix = (realm.value.toUpperCase().replace('ABS','').replace('-',''));
-
 				var unique = realm.uIdPrefix +
 						'-' + $filter("schemaShortName")(document.type||document.schema_s||document.schema) +
                         '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +

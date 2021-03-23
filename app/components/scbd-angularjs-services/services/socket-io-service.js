@@ -56,7 +56,7 @@ import './utilities';
                                 realms = message.data.realm;
                             else 
                                 realms = [message.data.realm];
-                            if(_.intersection(_.map(realms, _.upperCase), realmService.envRealms()).length == 0)
+                            if(_.intersection(_.map(realms, _.toUpper), realmService.envRealms()).length == 0)
                                 return;
                         }
                         $rootScope.$broadcast('event:server-pushNotification', message);
