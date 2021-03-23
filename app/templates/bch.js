@@ -12,6 +12,7 @@ import 'angular-loggly-logger';
 import 'components/scbd-angularjs-services/main';
 import 'views/directives/route-loading-directive';
 import 'services/main'; ;
+import 'views/directives/left-side-bar' 
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
@@ -85,6 +86,18 @@ import 'services/main'; ;
                 }
             });
             
+            $rootScope.$on('event:open-left-side-bar', function(evt, type){
+                
+                $("#wrapper").addClass("toggled");
+                if($scope.openSideBarType == type || type == undefined){
+                    $scope.openSideBarType = undefined;
+                }
+                else {
+                    $scope.openSideBarType = type;
+                    $("#wrapper").removeClass("toggled");
+                }
+            });
+
             //============================================================
             //
             //
@@ -128,7 +141,13 @@ import 'services/main'; ;
                 else
                     $('body#top').removeClass('validate-translation')
             }
-            setupTranslationValidation();
+
+            function init(){
+                setupTranslationValidation();
+                // $("#wrapper").toggleClass("toggled");
+            }
+
+            init();
         }
     ]);
     app.directive("mAppLoading", function ($animate) {

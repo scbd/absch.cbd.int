@@ -40,6 +40,15 @@ import 'components/scbd-angularjs-services/main';
                         connectWithToken();
                     });
 
+                    $scope.openSideBlock = function(type){
+                        if(type==$scope.activeHelpMenu)
+                            $scope.activeHelpMenu = undefined;
+                        else
+                            $scope.activeHelpMenu = type;
+                            
+                        $rootScope.$broadcast('event:open-left-side-bar', $scope.activeHelpMenu)
+                    }
+
                     function connectWithToken(){
                         apiToken.get()
                             .then(function(token){
