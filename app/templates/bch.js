@@ -12,7 +12,7 @@ import 'angular-loggly-logger';
 import 'components/scbd-angularjs-services/main';
 import 'views/directives/route-loading-directive';
 import 'services/main'; ;
-import 'views/directives/left-side-bar' 
+import 'views/directives/docked-side-bar' 
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 

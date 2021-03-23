@@ -12,11 +12,13 @@
             <div class="row">
                 <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" style="cursor:pointer;padding-top: 15px;;" class="col-xs-12">
                     <div class="card" style="padding: 2px 16px;" ng-class="{'article-open':showArticle}" >
-                        <div ng-click="showArticle=!showArticle">
+                        <div>
                             <img ng-src="{{getSizedImage(article.coverImage.url, '300x300')}}" style="width:100%;"></img>
-                            <h4 class="header" ng-bind="article.title | lstring:locale"></h4>
+                            <h4 class="header" ng-bind="article.title | lstring:locale" ng-click="showArticle=true">
+                                <button ng-show="showArticle" type="button" class="close pull-right" ng-click="showArticle=false"><span aria-hidden="true">×</span></button>
+                            </h4> 
                             <hr/>
-                            <p>
+                            <p ng-click="showArticle=true">
                                 <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
                                 <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
                                 <hr/>
@@ -35,10 +37,13 @@
             <div class="row">
                 <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" style="cursor:pointer;padding-top: 15px;;" class="col-xs-12">
                     <div class="card" style="padding: 2px 16px;" ng-class="{'article-open':showArticle}" >
-                        <div ng-click="showArticle=!showArticle">
-                            <h4 class="header" ng-bind="article.title | lstring:locale"></h4>
+                        <div>
+                            <h4 class="header">
+                                <span ng-bind="article.title | lstring:locale" ng-click="showArticle=true"></span>
+                                <button ng-show="showArticle" type="button" class="close pull-right" ng-click="showArticle=false"><span aria-hidden="true">×</span></button>
+                            </h4>
                             <hr/>
-                            <p>
+                            <p  ng-click="showArticle=true">
                                 <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
                                 <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
                                 <hr/>
