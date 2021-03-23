@@ -7,9 +7,14 @@
 	</div>
 	<div class="record-body panel-body">
 		<document-date></document-date>
+		<div>
+			<label>Type</label>
+			<div class="km-value" compare-val>				
+				<span ng-bind="document.type | lstring:locale"></span>
+			</div>
+		</div>
 		<div ng-show="document.type=='organization'">
 			
-            <legend>Organization</legend>
 			<div ng-show="document.government">
 				<label>Country</label>
 				<div class="km-value" compare-val>
@@ -34,7 +39,6 @@
 
 
 		<div ng-show="document.type=='person'">
-             <legend>Person</legend>
 			 <div ng-show="document.government">
   			   <label>Country</label>
   			   <div class="km-value" compare-val>
