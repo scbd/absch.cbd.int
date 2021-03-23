@@ -9,8 +9,8 @@ import "views/forms/view/bch/view-lmo.directive";
 import 'views/forms/directives/traits-selector.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q',
-		 function($http, $controller, thesaurusService, storage, $q) {
+	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm',
+		 function($http, $controller, thesaurusService, storage, $q, realm) {
 		
 		return {
 			restrict   : "EA",
@@ -36,7 +36,37 @@ import 'views/forms/directives/view-terms-hierarchy';
 					techniqueUsed	: thesaurusService.getDomainTerms('techniqueUsed', 		{other:true, otherType:'lstring', multiple:true}),
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true})			
 				});
-				
+
+				$scope.onContactQuery = function(searchText){
+
+					var queryOptions = {
+						realm     : realm.value,
+						fieldQueries: ['schema_s:contact AND type_s:person'],
+						searchText: searchText
+					}
+
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+				$scope.onRrecipientOrganismsQuery = function(searchText){
+
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['organism', 'modifiedOrganism'],
+						searchText: searchText
+					}
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+
+				$scope.onBuildQuery = function(searchText, schemasVal){
+
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : [schemasVal],
+						searchText: searchText
+					}
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
 				//==================================
 				//
 				//==================================

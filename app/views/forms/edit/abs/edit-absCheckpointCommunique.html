@@ -62,8 +62,8 @@
                                                             ABS-CH records, the record of the checkpoint/s that collected or
                                                             received the information.</div>
             
-                                                        <div document-selector ng-model="document.absCheckpoints" question="absCheckpoints"
-                                                            government="document.government" schema="absCheckpoint" filter="true"></div>
+                                                       <div document-selector on-build-query="onBuildQuery(searchText)"
+                                                                  ng-model="document.absCheckpoints" question="absCheckpoints" filter="true"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -94,9 +94,9 @@
                                                                 IRCC is not available you need to select the option “This
                                                                 information is not available” and the grey box below will be
                                                                 enabled.</div>
-                                                            <div document-selector ng-model="document.absIRCCs" question="absIRCCs"
-                                                                schema="absPermit" disabled="isAbsIRCCsNotAvailable()" filter="true"
-                                                                government="{'identifier':'*'}"></div>
+                                                           <div document-selector on-build-query="onBuildIRCCsQuery(searchText)"
+                                                                      ng-model="document.absIRCCs" question="absIRCCs"
+                                                                      disabled="isAbsIRCCsNotAvailable()" filter="true"></div>
                                                         </div>
                                                     </div>
             
@@ -239,9 +239,10 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="entityWhoGrantedPIC" caption="Person or entity who granted prior informed consent (PIC)">
-                                                        <div document-selector ng-model="document.entityWhoGrantedPIC" type="radio" skip-government="true" list-view="true"
-                                                            question="entityWhoGrantedPIC" schema="(contact authority)" government="document.government"
-                                                            filter="true" allow-new="true" allow-new-schema="contact"></div>
+                                                        <div document-selector on-build-query="onContactSkipGovernmentQuery(searchText)"
+                                                                  ng-model="document.entityWhoGrantedPIC" type="radio" list-view="true"
+                                                                  question="entityWhoGrantedPIC"
+                                                                  filter="true" allow-new="true" allow-new-schema="contact"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -250,9 +251,9 @@
                                                     <div class="km-control-group" name="entityToWhomPICGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
                                                         <span class="help-info">Please provide the contact details of the person or
                                                             entity to whom prior informed consent was granted.</span>
-                                                        <div document-selector ng-model="document.entityToWhomPICGranted" type="radio" skip-government="true" list-view="true"
-                                                            question="entityToWhomPICGranted" schema="(contact authority)"
-                                                            government="document.government" filter="true" allow-new="true" allow-new-schema="contact"></div>
+                                                        <div document-selector on-build-query="onContactSkipGovernmentQuery(searchText)"
+                                                                    ng-model="document.entityToWhomPICGranted" type="radio" list-view="true"
+                                                                    question="entityToWhomPICGranted" filter="true" allow-new="true" allow-new-schema="contact"></div>
             
                                                     </div>
                                                 </div>
@@ -305,8 +306,9 @@
                                                         is the same person or entity providing evidence of PIC and MAT at the
                                                         checkpoint. In case of discrepancy, providers can verify information and
                                                         conditions related to third party transfer.</div>
-                                                    <div document-selector ng-model="document.personsAtCheckpoint" question="personsAtCheckpoint"
-                                                        schema="(contact authority)" government="document.government" filter="true" allow-new="true" allow-new-schema="contact"></div>
+                                                    <div document-selector on-build-query="onContactQuery(searchText)"
+                                                               ng-model="document.personsAtCheckpoint" question="personsAtCheckpoint"
+                                                               filter="true" allow-new="true" allow-new-schema="contact"></div>
                                                 </div>
                                             </div>
                                         </div>

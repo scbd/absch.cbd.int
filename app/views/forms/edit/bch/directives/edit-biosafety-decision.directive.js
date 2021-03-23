@@ -6,8 +6,8 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-decision.directive";
 
-    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 
-        function($controller, thesaurusService, $routeParams, solr, editFormUtility) {
+    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm',
+        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -242,6 +242,43 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 //==================================
                 //
                 //==================================
+
+                $scope.onContactQuery = function(searchText){
+                  var queryOptions = {
+                       realm     : realm.value,
+                       fieldQueries: ['schema_s:contact AND type_s:person'],
+                       searchText: searchText
+                  }
+
+                  return $scope.onBuildDocumentSelectorQuery(queryOptions);
+
+                }
+
+                $scope.onBuildQuery = function(searchText,schemasVal){
+                    if (!$scope.document || !$scope.document.government)
+                         return;
+					
+                    var queryOptions = {
+                        realm     : realm.value,
+				        schemas	  : [schemasVal],
+                        searchText: searchText
+                    }
+				    queryOptions.government = $scope.document.government.identifier;
+                   
+				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+
+                $scope.onBuildSkipGovernmentQuery = function(searchText,schemasVal){
+
+                    var queryOptions = {
+                        realm     : realm.value,
+                        schemas	  : [schemasVal],
+                        searchText: searchText
+                    }
+                      return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+
+
                 $scope.getCleanDocument = function(document) {
 
                     document = document || $scope.document;

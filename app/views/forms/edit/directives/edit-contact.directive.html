@@ -88,10 +88,11 @@
 												<div class="col-md-12">
 													<div class="km-control-group" name="organization" caption="Organization">
 														<div document-selector ng-model="document.contactOrganization" type="radio"
-																					 question="contactOrganization" allow-new="{{allowNew}}"
-																					 government="document.government" ng-change="contactOrganizationChanged()"
-																					 schema="contact AND type_s:organization"
-																					 allow-new-schema="contact" allow-new-attributes="{{::newDialogAttributes()}}"></div>
+															question="contactOrganization" allow-new="{{allowNew}}"
+															government="document.government" ng-change="contactOrganizationChanged()"
+															on-build-query="onContactQuery(searchText)"
+															allow-new-schema="contact" allow-new-attributes="{{::newDialogAttributes()}}">
+														</div>
 													</div>
 												</div>
 											</div>

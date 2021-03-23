@@ -217,8 +217,8 @@
 											<div class="km-control-group" name="compatibleSpecies" caption="Cross-compatible species">
 												<div class="hel-block">Provide a list of species using the taxonomic classification (genus and species names) that
 													are known to cross-fertilize with the organism in the record.</div>
-												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies"  skip-government="true"
-													schema="organism" allow-new-schema="organism" skip-government="true"></div>
+												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies"
+													 on-build-query="onOrganismQuery(searchText)" allow-new-schema="organism"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">

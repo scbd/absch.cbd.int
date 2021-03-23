@@ -59,8 +59,8 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="developers" caption="Developer(s)">	
-												<div document-selector ng-model="document.developers" question="developers" skip-government="true"
-													schema="(contact)" caption="Contacts" allow-new="true" allow-new-schema="contact"></div>			
+												<div document-selector ng-model="document.developers" caption="Contacts" question="developers"
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -71,8 +71,8 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="recipientOrganisms" caption="“Recipient Organism” or “Parental Organisms”">	
 												<div class="help-block">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.</div>
-												<div document-selector required ng-model="document.recipientOrganisms" question="recipientOrganisms" skip-government="true"
-													schema="(organism modifiedOrganism)" caption="Add Organism / Living Modified Organism" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>			
+												<div document-selector required ng-model="document.recipientOrganisms" caption="Add Organism / Living Modified Organism" question="recipientOrganisms"
+														on-build-query="onRrecipientOrganismsQuery(searchText)" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>
 											</div>
 										</div>
 
@@ -84,8 +84,8 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="linkedModifiedOrganisms" caption="Related LMO(s)">	
 												<div class="help-block">This field relates to other LMOs with similar characteristics.</div>
-												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganisms" skip-government="true"
-													schema="(modifiedOrganism)" allow-new="true" allow-new-schema="modifiedOrganism"></div>			
+												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganism"
+															on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true" allow-new-schema="modifiedOrganism"></div>
 											</div>
 										</div>
 									</div>
@@ -111,8 +111,8 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="genes" caption="Introduced or modified genetic element(s)">	
 												<div class="help-block">Preferably all genetic elements that were introduced into this LMO, such as promoters, protein coding sequences and terminators, must be referenced in this section. At least ALL protein coding sequences are mandatory.</div>
-												<div document-selector ng-model="document.genes" question="genes" skip-government="true" ng-change="onModifiedGeneChange(document.genes)"
-													schema="(dnaSequence)" caption="Genetic element" allow-new="true" allow-new-schema="dnaSequence">
+												<div document-selector ng-model="document.genes" question="genes" ng-change="onModifiedGeneChange(document.genes)"
+															caption="Genetic element" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
 													</selected-records>
@@ -159,8 +159,8 @@
 												<div class="help-block">This section should be used to specify changes in the expression of
 													genes other than those that were inserted into the LMO; for example, gene silencing or
 													induction.</div>
-												<div document-selector ng-model="document.affectedGenes" question="affectedGenes" skip-government="true"
-													schema="(dnaSequence)" caption="Genetic element" allow-new="true" allow-new-schema="dnaSequence">
+												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
+														caption="Genetic element" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
 													</selected-records>

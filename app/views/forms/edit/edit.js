@@ -443,16 +443,20 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
         return v === undefined || v === null || (_.isObject(v) && _.isEmpty(v));
       }
     }
+    //to handle console errors
+    $scope.isGovernmentRequired = function(value){
+      return (value != undefined && value.government != undefined && value.government.identifier != undefined);
+    }
 
     $scope.onBuildDocumentSelectorQuery = function(options){
       var queries = {
-          fieldQueries : [],
-          query           : '*:*'
+          fieldQueries    : options.fieldQueries||[],
+          query           : options.query || '*:*'
       }
       if(options.schemas)
-        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(',') + ')')
+        queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')
       else if(options.schema)
-        queries.fieldQueries.push('realm_ss:'+solr.escape(options.schema))
+        queries.fieldQueries.push('schema_ss:'+solr.escape(options.schema))
 
       if(options.realm)
           queries.fieldQueries.push('realm_ss:'+solr.escape(options.realm))
@@ -468,9 +472,12 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
           if(options.searchText.indexOf('-')>0) 
               queryText = '"' + solr.escape(options.searchText) + '"'; // Add quotes if text contains - especially if search is by uid
           else
-              queryText = '(' + options.searchText + ')';
+              queryText = '(' + solr.escape(options.searchText) + ')';
               
-          queries.query   = (options.searchField||'text_EN_txt:') + queryText;
+          if(options.query!='' && options.query != undefined)
+            queries.query   += ' AND ('+(options.searchField||'text_EN_txt:') + queryText + ')'
+          else 
+            queries.query   = (options.searchField||'text_EN_txt:') + queryText;
       }
 
       return queries;

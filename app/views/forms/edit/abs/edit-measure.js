@@ -233,6 +233,46 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
             $scope.setDocument({});
 
+            $scope.onContactQuery = function(searchText){
+                
+                if (!$scope.document || !$scope.document.government)
+                     return;
+                var queryOptions = {
+                    schemas	  : ['authority', 'contact'],
+                    realm     : realm.value,
+                    searchText: searchText
+                }
+                queryOptions.government = $scope.document.government.identifier;
+
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
+            
+            $scope.onAmendedMeasuresQuery = function(searchText){
+                var queryOptions = {
+                schemas	  : ['measure'],
+                realm     : realm.value,
+                fieldQueries : [],
+                searchText: searchText
+                }
+                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+
+            $scope.onMeaureQuery = function(searchText){
+                
+                if (!$scope.document || !$scope.document.government)
+                    return;
+                var queryOptions = {
+                    schemas	  : ['measure'],
+                    realm     : realm.value,
+                    fieldQueries : [],
+                    searchText: searchText
+                }
+                //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
+
+                queryOptions.government = $scope.document.government.identifier;
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
             //==================================
             //
             //==================================

@@ -7,7 +7,7 @@ import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-laboratory-detection.directive";
 import 'views/forms/directives/view-terms-hierarchy';
 
-	app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", function($controller, thesaurusService) {
+	app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", 'realm', function($controller, thesaurusService, realm) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -60,6 +60,20 @@ import 'views/forms/directives/view-terms-hierarchy';
 				//==================================
 				//
 				//==================================
+
+
+				$scope.onBuildQuery = function(searchText, schemaVal){
+					
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : [schemaVal],
+                        searchText: searchText
+                    }
+										
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
+				
+
 				$scope.getCleanDocument = function(document) {
 
 					document = document || $scope.document;

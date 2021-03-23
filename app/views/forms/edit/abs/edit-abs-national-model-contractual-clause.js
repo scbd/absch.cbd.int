@@ -50,6 +50,20 @@ import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directiv
             });
         };
 
+        $scope.onBuildQuery = function(searchText){
+            if (!$scope.document || !$scope.document.government)
+                return;
+            var queryOptions = {
+                schemas	  : ['measure'],
+                realm     : realm.value,
+                searchText: searchText
+            }
+            queryOptions.government = $scope.document.government.identifier;
+
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+
         //==================================
         //
         //==================================

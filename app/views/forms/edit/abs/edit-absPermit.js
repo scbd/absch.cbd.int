@@ -50,7 +50,47 @@ import 'views/forms/view/abs/view-abs-permit.directive';
       });
     });
 
+       $scope.onContactQuery = function(searchText){
+        if (!$scope.document || !$scope.document.government)
+        return;
+           var queryOptions = {
+               schemas	  : ['authority', 'contact'],
+               realm     : realm.value,
+               searchText: searchText
+           }
+           queryOptions.government = $scope.document.government.identifier;
 
+           return $scope.onBuildDocumentSelectorQuery(queryOptions);
+       }
+
+       $scope.onBuildQuery = function(searchText, schema){
+        if (!$scope.document || !$scope.document.government)
+        return;
+           var queryOptions = {
+               schemas	  : [schema],
+               realm     : realm.value,
+               searchText: searchText
+           }
+           queryOptions.government = $scope.document.government.identifier;
+
+           return $scope.onBuildDocumentSelectorQuery(queryOptions);
+       }
+
+
+       $scope.onBuildHideSelfQuery = function(searchText){
+          if (!$scope.document || !$scope.document.government)
+          return;
+          var queryOptions = {
+              schemas	  : ['absPermit'],
+              realm     : realm.value,
+              fieldQueries : [],
+              searchText: searchText
+          }
+          //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
+          queryOptions.government = $scope.document.government.identifier;
+
+          return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
     //==================================
     //
     //==================================
