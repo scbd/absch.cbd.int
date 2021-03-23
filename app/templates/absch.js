@@ -26,7 +26,7 @@ import 'views/directives/route-loading-directive';
         }]);
 
 
-    app.controller('TemplateController', ['$scope', '$rootScope', 'showHelp',
+    app.controller('AbschTemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location', '$anchorScroll', 'toastr', '$route',
         '$window', '$element', 'localStorageService', 'appConfigService', 'LogglyLogger', 'locale', '$compile', 'ngMeta',
         function ($scope, $rootScope, showHelp, $location, $anchorScroll, toastr, $route,
