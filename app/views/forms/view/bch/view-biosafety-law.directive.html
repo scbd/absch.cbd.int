@@ -188,8 +188,9 @@
 
 			<div ng-if="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div class="km-value" compare-val ng-if="document.relevantDocuments" km-link-list 
-					ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	
+					<div class="km-value" compare-val>
+						<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+					</div>
 			</div>
 		</div>
 		

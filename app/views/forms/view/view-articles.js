@@ -76,7 +76,9 @@ import 'components/scbd-angularjs-controls/main';
             };
             
             itemCountQuery = articlesService.getArticles(qsCount).then(function(data){
-                return (data[0]||{}).mycount||0;
+                if(data)
+                  return (data[0]||{}).mycount||0;
+                return 0;
               })
         } 
         else{

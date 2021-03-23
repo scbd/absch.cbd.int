@@ -42,7 +42,9 @@ import _ from 'services/main';
                              };
                             
                             articlesService.getArticles(qsCount).then(function(data){
-                                $scope.articlesCount = (data[0]||{}).mycount||0;
+                                $scope.articlesCount = 0;
+                                if(data)
+                                    $scope.articlesCount = (data[0]||{}).mycount||0;
                               })
 
                           }
