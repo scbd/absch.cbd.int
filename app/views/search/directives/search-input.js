@@ -1,5 +1,9 @@
-﻿define(['text!./search-input.html', 'app', 'lodash', 'ngDialog'], function (template, app, _) {
-    'use strict';
+﻿
+
+import app from 'app';
+import template from 'text!./search-input.html';
+import 'ngDialog';
+
 
     app.directive('searchInput', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {
@@ -9,6 +13,4 @@
             link: function ($scope) {
             }
         }
-    }])
-
-});
+    }]);

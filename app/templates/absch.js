@@ -2,6 +2,7 @@ import app from 'app';
 import _ from 'lodash';
 import moment from 'moment';
 import angular from 'angular';
+import footerHtml from 'text!./absch-footer.html';
 import 'toastr';
 import 'bootstrap';
 import 'routes/absch';
@@ -10,6 +11,11 @@ import 'angular-animate';
 import 'components/scbd-branding/main';
 import 'services/main';
 import 'views/directives/route-loading-directive';
+
+
+    app.directive('abschFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
+
+
 
     app.config(["toastrConfig", function(toastrConfig) {
         angular.extend(toastrConfig, {

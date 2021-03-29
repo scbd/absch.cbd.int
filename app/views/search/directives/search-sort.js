@@ -1,5 +1,7 @@
-﻿define(['text!./search-sort.html', 'app', 'lodash', 'ngDialog'], function (template, app, _) {
-    'use strict';
+﻿
+import app from 'app';
+import template from 'text!./search-sort.html';
+import 'ngDialog';
 
     app.directive('searchSort', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {
@@ -9,6 +11,6 @@
             link: function ($scope) {
             }
         }
-    }])
+    }]);
 
-});
+

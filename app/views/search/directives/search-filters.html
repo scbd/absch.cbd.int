@@ -19,88 +19,86 @@
         </style>
 
 
-        <p style="text-transform:uppercase;color:#bbb;font-weight:bold; padding-bottom:8px;">
-                search filters</p>
+        <span style="text-transform:uppercase;color:#bbb;font-weight:bold; padding-bottom:8px;"> search filters</span>
 
-        <ul class="filters1" style="list-style-type: none;padding:0;margin:0;">
-
-                <li id="recordTypesFilterTab">
-                        <a rel="noopener" href="" ng-class="{'active':showFilters=='recordTypesFilter'}"
+     
+                <span id="recordTypesFilterTab">
+                        <a rel="noopener" href="" ng-class="{'active sftab':showFilters=='recordTypesFilter'}"
                                 ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
                                 class="btn color-grey ">
 
                                 Record types
-                                <div class="pull-right">
+                                <div class="pull-right" style="margin-left:5px;">
                                         <i ng-if="showFilters=='recordTypesFilter'" class="fa fa-times-circle"></i>
                                         <i ng-if="!showFilters || showFilters!='recordTypesFilter'"
-                                                class="fa fa-caret-right"></i>
+                                                class="fa fa-caret-down"></i>
                                 </div>
                         </a>
-                </li>
+                </span>
 
 
-                <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"> <a rel="noopener" href=""
-                                ng-class="{'active':showFilters=='keywordsFilter'}"
+                <span id="keywordsFilterTab" ng-show="!skipKeywordsFilter"> <a rel="noopener" href=""
+                                ng-class="{'active sftab':showFilters=='keywordsFilter'}"
                                 ng-click="showFilters=(showFilters=='keywordsFilter' ? false : 'keywordsFilter')"
                                 class="btn color-grey">
                                 Keywords
-                                <div class="pull-right">
+                                <div class="pull-right" style="margin-left:5px;">
                                         <i ng-if="showFilters=='keywordsFilter'" class="fa fa-times-circle"></i>
                                         <i ng-if="!showFilters || showFilters!='keywordsFilter'"
-                                                class="fa fa-caret-right"></i>
+                                                class="fa fa-caret-down"></i>
                                 </div>
                         </a>
-                </li>
+                </span>
 
-                <li id="countryFilterTab"> <a rel="noopener" href="" ng-class="{'active':showFilters=='countryFilter'}"
+                <span id="countryFilterTab"> <a rel="noopener" href="" ng-class="{'active sftab':showFilters=='countryFilter'}"
                                 ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
                                 class="btn color-grey">
                                 Country
-                                <div class="pull-right">
+                                <div class="pull-right" style="margin-left:5px;">
                                         <i ng-if="showFilters=='countryFilter'" class="fa fa-times-circle"></i>
                                         <i ng-if="!showFilters || showFilters!='countryFilter'"
-                                                class="fa fa-caret-right"></i>
+                                                class="fa fa-caret-down"></i>
                                 </div>
                         </a> </li>
 
 
-                <li id="regionFilterTab"> <a rel="noopener" href="" ng-class="{'active':showFilters=='regionFilter'}"
+                <span id="regionFilterTab"> <a rel="noopener" href="" ng-class="{'active sftab':showFilters=='regionFilter'}"
                                 ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
                                 class="btn color-grey">
                                 Regions
-                                <div class="pull-right">
+                                <div class="pull-right" style="margin-left:5px;">
                                         <i ng-if="showFilters =='regionFilter'" class="fa fa-times-circle"></i>
                                         <i ng-if="!showFilters || showFilters!='regionFilter'"
-                                                class="fa fa-caret-right"></i>
+                                                class="fa fa-caret-down"></i>
                                 </div>
-                        </a></li>
+                        </a></span>
 
 
-                <li id="dateFilterTab" ng-show="!skipDateFilter"> <a rel="noopener" href=""
-                                ng-class="{'active':showFilters=='dateFilter'}"
+                <span id="dateFilterTab" ng-show="!skipDateFilter"> <a rel="noopener" href=""
+                                ng-class="{'active sftab':showFilters=='dateFilter'}"
                                 ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
                                 class="btn color-grey">
                                 Date
-                                <div class="pull-right">
+                                <div class="pull-right" style="margin-left:5px;">
                                         <i ng-if="showFilters=='dateFilter'" class="fa fa-times-circle"></i>
                                         <i ng-if="!showFilters || showFilters!='dateFilter'"
-                                                class="fa fa-caret-right"></i>
+                                                class="fa fa-caret-down"></i>
                                 </div>
                         </a> </li>
 
-                <li id="searchFilterTab" ng-show="isUserAuthenticated()"> <a rel="noopener" href=""
-                                ng-class="{'active':showFilters=='userSearchFilter'}"
+                <span id="searchFilterTab" ng-show="isUserAuthenticated()"> <a rel="noopener" href=""
+                                ng-class="{'active sftab':showFilters=='userSearchFilter'}"
                                 ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
                                 class="btn color-green">
                                 My saved searches
-                                <div class="pull-right">
+                                <div class="pull-right" style="margin-left:5px;">
                                         <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
                                         <i ng-if="!showFilters || showFilters!='userSearchFilter'"
-                                                class="fa fa-caret-right"></i>
+                                                class="fa fa-caret-down"></i>
                                 </div>
-                        </a> </li>
+                        </a> </span>
 
-        </ul>
+        
 
 
       

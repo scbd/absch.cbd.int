@@ -1514,8 +1514,14 @@ div.recordDefault:hover {
     font-weight: bold;
 }
 #search-new .active {
-    background-color: #EEE
+    background-color: #EEE;
 }
+
+.sftab{
+    background-color: #DDD!important;
+}
+
+
 #search-new .nav-tabs>li.active>a,
 .nav-tabs>li.active>a:hover,
 .nav-tabs>li.active>a:focus {

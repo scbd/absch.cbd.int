@@ -1,15 +1,15 @@
 ﻿<div id="search-new">
     <div class="container-fluid" style="margin-top:20px;">
 
-        <div class="row">
-            <div class="col-xs-2">
-               <!-- filters -->
-               <search-chips ng-hide="isObjectEmpty(setFilters)"></search-chips>
-               <search-filters ></search-filters>
+        <div class="row" >
+            <div class="col-xs-3" ng-hide="isObjectEmpty(setFilters)" >
+               <!-- active filters -->
+               <!-- <search-chips ></search-chips> -->
+               <left-side-filter></left-side-filter>
             </div>
 
-            <div class="col-xs-10">
-              
+            <div class="col-xs-12" ng-class="{'col-xs-9':!isObjectEmpty(setFilters)}">
+
                 <div class="row">
                     <div class="col-md-5">
                         <!-- search input -->
@@ -18,6 +18,11 @@
                     <div class="col-md-7">
                         <!-- sortby options -->
                         <search-sort></search-sort>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <search-filters ></search-filters>
                     </div>
                 </div>
         
@@ -30,7 +35,7 @@
 
                     <div class="col-md-12">
                         <!-- results -->
-                        <search-results></search-results>
+                        <search-results-section></search-results-section>
                     </div>
                 </div>
 

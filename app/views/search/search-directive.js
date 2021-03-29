@@ -25,6 +25,12 @@ import 'views/search/search-results/list-view';
 import 'views/search/search-results/group-view';
 import 'toastr';
 import 'views/reports/matrix/data-matrix.directive';
+import 'views/search/directives/search-chips';
+import 'views/search/directives/search-input';
+import 'views/search/directives/search-subfilter-options';
+import 'views/search/directives/search-sort';
+import 'views/search/directives/search-filters';
+import 'views/search/directives/search-results-section';
 
     app.directive('searchDirective', function() {
         return {
@@ -98,6 +104,11 @@ import 'views/reports/matrix/data-matrix.directive';
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
+
+                    $scope.isObjectEmpty = function(x){
+                        return Object.keys(x).length === 0;
+                     }
+                     
 
                     $scope.saveFilter = function (doc) {
 

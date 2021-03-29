@@ -1,5 +1,7 @@
-﻿define(['text!./search-chips.html', 'app', 'lodash', 'ngDialog'], function (template, app, _) {
-    'use strict';
+﻿
+import app from 'app';
+import template from 'text!./search-chips.html';
+import 'ngDialog';
 
     app.directive('searchChips', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {
@@ -10,6 +12,4 @@
 
             }
         }
-    }])
-
-});
+    }]);
