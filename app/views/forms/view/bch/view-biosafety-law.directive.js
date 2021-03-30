@@ -23,8 +23,12 @@ app.directive("viewBiosafetyLaw", [function () {
 			//====================
 			//
 			//====================
+<<<<<<< HEAD
+
+=======
 			$scope.isAllOrganisms = undefined;
 			$scope.isAllSubjectArea = undefined;
+>>>>>>> d80163d04a0e9f1fd33f83b77d936b0b43b657d3
 			$scope.$watch('document.cpbOrganismTypes', function(value){
 				$scope.isAllOrganisms =_.find(value, {identifier: '8DAB2400-CF00-44B2-ADCF-49AABF66B9B0'});
 			});

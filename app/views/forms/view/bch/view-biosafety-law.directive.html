@@ -94,9 +94,15 @@
 				<label>Subject areas</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
+<<<<<<< HEAD
+						<span ng-if="isAllSubjectArea"><span ng-bind="isAllSubjectArea|term:locale"></span></span>
+						<li ng-repeat="item in document.cpbSubjectAreas" ng-if="!isAllSubjectArea">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+=======
 						<span ng-if="isAllSubjectArea != undefined"><span ng-bind="isAllSubjectArea|term:locale"></span></span>
 						<li ng-repeat="item in document.cpbSubjectAreas">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && isAllSubjectArea == undefined" ng-bind="item|term:locale"></span>
+>>>>>>> d80163d04a0e9f1fd33f83b77d936b0b43b657d3
 							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
 						</li>
 					</ul>
@@ -106,9 +112,15 @@
 				<label>Types of organisms addressed</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
+<<<<<<< HEAD
+						<span ng-if="isAllOrganisms"><span ng-bind="isAllOrganisms|term:locale"></span></span>
+						<li ng-repeat="item in document.cpbOrganismTypes" ng-if="!isAllOrganisms">
+							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+=======
 						<span ng-if="isAllOrganisms != undefined"><span ng-bind="isAllOrganisms|term:locale"></span></span>
 						<li ng-repeat="item in document.cpbOrganismTypes">
 							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED' && isAllOrganisms == undefined" ng-bind="item|term:locale"></span>
+>>>>>>> d80163d04a0e9f1fd33f83b77d936b0b43b657d3
 							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
 						</li>
 					</ul>
