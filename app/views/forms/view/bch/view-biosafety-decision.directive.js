@@ -33,8 +33,8 @@ app.directive("viewBiosafetyDecision", [function () {
 
 					if(identifier == "8979219B-330B-424F-A52C-209D4B4B65C0"){ $scope.isSimplifiedProcedure	= true; }
 					if(identifier == "D698B5F7-A434-49E2-A7FF-FE869AFBEE8D"){ $scope.isDecisionOnContainedUseOfLMOs = true;}
-					if(identifier == "E8C5A15C-A736-4fb7-A1B6-192412BE7E45"){$scope.isLmoDecisionForIntentionalIntroduction = true;}
-					if(identifier == "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"){$scope.isLmoDecisionForDirectUse = true;}
+					if(identifier == "E8C5A15C-A736-4fb7-A1B6-192412BE7E45"){$scope.document.isLmoDecisionForIntentionalIntroduction = true;}
+					if(identifier == "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"){$scope.document.isLmoDecisionForDirectUse = true;}
 					if(_.includes(identifiersForSectionF,identifier.toString())){
 						$scope.isTransboundaryMovement = true;
 					}
