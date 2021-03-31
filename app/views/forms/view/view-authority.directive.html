@@ -20,7 +20,7 @@
 
 		<div ng-show="document.government" >
 			<label name="country">Country</label>
-			<div class="km-value" compare-val>
+			<div class="km-value">
 				<span><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></span>
 				<span ng-party-status government="document.government" id="government"></span>
 			</div>
@@ -29,7 +29,7 @@
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
 			<label ng-if="document.header.schema!='supplementaryAuthority'" name="name">Name of the Competent National Authority</label>
 			<label ng-if="document.header.schema=='supplementaryAuthority'">Name of the Competent Authority</label>
-			<div class="km-value" compare-val>
+			<div class="km-value" compare-val="Competent Authority Name">
 				<div><strong>{{document.name | lstring:locale}}</strong></div>
 				<div ng-show="document.address">{{document.address | lstring:locale}}</div>
 				<div ng-show="document.city">{{document.city | lstring:locale}}<span ng-show="document.city">, </span></div>
@@ -58,7 +58,7 @@
 
 		<div ng-show="document.contacts">
 			<legend ng-if="document.contacts">Additional Contact Information</legend>
-			<div compare-val>
+			<div compare-val="Additional Contact Information">
 			<view-record-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-record-reference>
 			</div>
 		</div>
