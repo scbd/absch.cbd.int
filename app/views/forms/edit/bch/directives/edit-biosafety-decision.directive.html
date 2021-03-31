@@ -156,6 +156,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="addressesTransboundaryMovement" required caption="Was the decision triggered by a request for a transboundary movement of LMOs into your country?">
 												<div km-yes-no required ng-model="document.addressesTransboundaryMovement" locales="document.header.languages"></div>
+												<div km-yes-no required ng-model="document.addressesTransboundaryMovement" ng-click="changeTransboundaryMovement(document.addressesTransboundaryMovement)" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>		
@@ -445,7 +446,7 @@
 							</section>
 							<!-- ====================Section F End=================== -->
 							<!-- ====================Section G Strat=================== -->
-							<section ng-if="isDecisionOnContainedUseOfLMOs">
+							<section ng-if="isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
 								<div class="well no-shadow bg-white">
 									<legend>Information sharing with other databases</legend>
 									<div class="row">
@@ -464,7 +465,7 @@
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 													<div ng-if="document.isForFoodSafety" style="padding-left:57px; margin-top: 15px;">
 														<div class="help-block">
-															Was it conducted in accordance with the <em>Codex Alimentarius Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</em>
+															Was it conducted in accordance with the Codex Alimentarius <em>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</em>
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 														<div class="help-block" style="margin-top: 15px;">

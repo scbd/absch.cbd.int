@@ -356,7 +356,21 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     return $scope.sanitizeDocument(document);
                 };
-                
+				$scope.changeTransboundaryMovement = function ( isTransboundaryMovement ) {
+                    if (isTransboundaryMovement)
+                    {
+                        $scope.document.appliesToTransboundaryMovement = undefined;
+                        $scope.document.importers  = undefined;
+					} else {
+                        $scope.decisions.intentionDecisions = undefined;
+                        $scope.document.receiptDate = undefined;
+                        $scope.document.receiptAcknowledgementDate = undefined;
+                        $scope.document.communicationDate = undefined;
+                        $scope.document.exporters = undefined;
+                        $scope.document.importers  = undefined;
+					}
+				
+                }
                 function cleanLMOSection(){
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&&  !$scope.isLmoDecisionForDirectUse &&			
                         !$scope.isSimplifiedProcedure &&  !$scope.isDecisionOnTransitOfLMOs && !$scope.isDecisionOnContainedUseOfLMOs &&
