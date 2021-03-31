@@ -15,7 +15,10 @@ import 'components/scbd-angularjs-controls/main';
 import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/compare-val';
 
-	app.directive('recordLoader', [function () {
+	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
+	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
+	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
+		$http, $httpAWS, realm, $compile, searchService, IWorkflows, appLocale, ngMeta) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -30,21 +33,14 @@ import 'views/forms/directives/compare-val';
 				api: '=?',
 				documentInfo: "=?",
 			},
-			link: function ($scope) {
+			link: function ($scope, $element, $attr) {
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_new';
 				//debugger;
 				$scope.internalDocument = undefined;
 				$scope.internalDocumentInfo = undefined;
-
-				if (!$scope.document)
-					$scope.init();
-			},
-			controller: ['$scope', "$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-				"$filter", "$http", "$http", "realm", "$element", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
-				function ($scope, $route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-					$http, $httpAWS, realm, $element, $compile, searchService, IWorkflows, appLocale, ngMeta) {
+			
 					var htmlDiff;
 					$scope.realm = realm;
 					if(!$scope.locale)
@@ -267,12 +263,16 @@ import 'views/forms/directives/compare-val';
 
 					});
 
-					$scope.showDifference = function(){
-						if($scope.isComparing)return;
+					$scope.showDifference = function(revision){
+						if($scope.isComparing && !revision)return;
+	
+						if($scope.comparingRevision)// if comparingRevision has value meaning user compared a version, load the original document
+							loadViewDirective($scope.internalDocument.header.schema);
 
-						if(!$scope.showDifferenceOn){
+						if(!$scope.showDifferenceOn || revision){
 							$scope.isComparing = true;							
 							$scope.showDifferenceOn = true;
+							$scope.comparingRevision = revision;
 							require(['services/html-difference'], function(diffParser){
 								htmlDiff = diffParser;
 								loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
@@ -281,7 +281,7 @@ import 'views/forms/directives/compare-val';
 										directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
 									}
 								})
-								storage.documents.get($scope.internalDocumentInfo.identifier + '@' + $scope.internalDocumentInfo.latestRevision)
+								storage.documents.get($scope.internalDocumentInfo.identifier + '@' + (revision||$scope.internalDocumentInfo.latestRevision))
 									.then(function (result) { 
 										$scope.prevDocument = result.data
 									}).then(compareWithPrev)	
@@ -292,11 +292,32 @@ import 'views/forms/directives/compare-val';
 							loadViewDirective($scope.internalDocumentInfo.type);
 						}					
 					}
+
+					$scope.loadRecordRevisions = function(){
+						if(!$scope.recordRevisions){
+							$scope.loadingRevisions = true;
+							$scope.recordRevisions = [];
+							var uniqueId = $filter("uniqueID")($scope.internalDocument);
+							for (let i = 1; i < $scope.internalDocumentInfo.latestRevision; i++) {
+								$scope.recordRevisions.push({ uniqueIdentifier : uniqueId.replace(/\-\d$/, '-' + i), 
+															 revision:i})
+								
+							}
+							$scope.loadingRevisions = false;
+						}
+					}
+
 					$scope.updateComparision = function(){
 						if($scope.showDifferenceButton && $scope.showDifferenceOn)
 							loadViewDirective($scope.internalDocumentInfo.type).then(compareWithPrev);
 					}
 
+
+					$scope.closeComparison = function(){
+						$scope.comparingRevision = undefined;
+						loadViewDirective($scope.internalDocument.header.schema);
+					}
+					
 					//==================================
 					//
 					//==================================
@@ -312,6 +333,9 @@ import 'views/forms/directives/compare-val';
 								});
 							if($scope.internalDocumentInfo.revision > 1)
 								$scope.showDifferenceButton = true
+						}
+						else if($scope.internalDocumentInfo.latestRevision > 1){
+							$scope.showComparison = true;//$attr.showComparison == 'true'
 						}		
 					}
 
@@ -440,7 +464,10 @@ import 'views/forms/directives/compare-val';
 						$scope.printMode = true;
 						require(['css!/app/css/print-friendly'], function(){})
 					}
-				}]
+
+					if (!$scope.document)
+						$scope.init();
+			}
 		}
 	}]);
 

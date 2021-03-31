@@ -1,7 +1,7 @@
 import app from 'app';
 import _ from 'lodash';
 import template from 'text!./task-id-directive.html';
-import 'views/directives/forms/view/record-loader.directive';
+import 'views/forms/view/record-loader.directive';
 import 'toastr';
 import 'ngDialog';
 import 'views/directives/document-reference-history';
