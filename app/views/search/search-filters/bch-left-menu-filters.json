@@ -34,6 +34,13 @@
 			"relatedField":"decisionTypes_REL_ss"
 		},
 		{
+			"type": "thesaurus",
+			"term": "decisionResults",
+			"title": "Result of the decision",
+			"field": "decisionResult_ss",
+			"relatedField":"decisionResult_REL_ss"
+		},
+		{
 			"type": "date",
 			"title": "Date of the decision",
 			"field": "decisionDate_dt"
@@ -49,7 +56,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Related trait(s) or use(s) in biotechnology",
+			"title": "Modified traits",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
