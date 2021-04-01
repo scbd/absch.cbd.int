@@ -31,6 +31,13 @@ import 'views/forms/directives/view-terms-hierarchy';
 							$scope.policyBasisForCompetencyRef = _.map(data.authorities.docs, 'identifier')
 					}
 				}
+				$scope.$watch('document.functions', function(value){
+					$scope.isAllSubjectArea = _.find(value, {identifier: 'FE1AA9E9-3320-4112-9F9C-A22AD6563AE1'});
+				});
+
+				$scope.$watch('document.cpbOrganismTypes', function(value){
+					$scope.isAllOrganisms =_.find(value, {identifier: '8DAB2400-CF00-44B2-ADCF-49AABF66B9B0'});
+				});
 				$scope.display = function(field) {
 
 					if(!$scope.hide) return true; //show all fields

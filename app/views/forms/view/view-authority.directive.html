@@ -141,9 +141,17 @@
 			<legend>Responsibilities</legend>
 			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.functions)">
 				<label>Administrative functions</label>
-			<div compare-val>
-				<view-terms-hierarchy ng-if="document.header.schema!='supplementaryAuthority'" class="km-value" 
-				ng-model="(document.functions)" locale="locale" term-domain="subjectAreas"></view-terms-hierarchy>
+			<div ng-if="document.header.schema!='supplementaryAuthority'" class="km-value"  compare-val>
+				<ul class="list">
+					<span ng-if="isAllSubjectArea"><span ng-bind="isAllSubjectArea|term:locale"></span></span>
+					<li ng-repeat="item in document.functions" ng-if="!isAllSubjectArea">
+						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
+					</li>
+				</ul>
+
+				<!-- <view-terms-hierarchy ng-if="document.header.schema!='supplementaryAuthority'" class="km-value" 
+				ng-model="(document.functions)" locale="locale" term-domain="subjectAreas"></view-terms-hierarchy> -->
 			</div>
 			<div compare-val>
 				<view-terms-hierarchy ng-if="document.header.schema=='supplementaryAuthority'" class="km-value" 
@@ -153,9 +161,10 @@
 
 			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
 				<label>Types of organism(s) under its responsibility</label>
-				<div compare-val>
-				<view-terms-hierarchy class="km-value" ng-model="document.cpbOrganismTypes" locale="locale" 
-				term-domain="typeOfOrganisms"></view-terms-hierarchy>
+				<div class="km-value" compare-val>
+					<span ng-if="isAllOrganisms"><span ng-bind="isAllOrganisms|term:locale"></span></span>
+					<view-terms-hierarchy ng-if="!isAllOrganisms" ng-model="document.cpbOrganismTypes" locale="locale" 
+					term-domain="typeOfOrganisms" hide-identifier="8DAB2400-CF00-44B2-ADCF-49AABF66B9B0"></view-terms-hierarchy>
 				</div>
 			</div>
    
