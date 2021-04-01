@@ -303,6 +303,12 @@
 				<km-value-bool value="document.movementAllowedUnderA131A" locales="locale"></km-value-bool>
 			</div>
 		</div>
+		<div ng-show="document.appliesToSubsequentImports!=undefined">
+			<label>Does the decision apply to subsequent similar imports of LMOs?</label>
+			<div class="km-value" compare-val>
+				<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
+			</div>
+		</div>
 
 		<div ng-show="document.exemptedFromAIA!=undefined">
 			<label>Does the decision specify that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure?</label>
@@ -311,12 +317,7 @@
 			</div>
 		</div>
 
-		<div ng-show="document.appliesToSubsequentImports!=undefined">
-			<label>Does the decision apply to subsequent similar imports of LMOs?</label>
-			<div class="km-value" compare-val>
-				<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
-			</div>
-		</div>
+		
 	</div>
 	<!--=============SECTION E END======================== -->
 
