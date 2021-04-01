@@ -145,6 +145,7 @@ import 'services/main';
                 aichiTargets           : 'AICHI-TARGETS',
                 legislationAgreementTypes : 'Legislation And Agreement Types',
                 bchRaAuthorAffiliation  :   'Organization Types',
+                transboundaryMovementTypes : 'TransboundaryMovementTypes',
 
 
                 //===========================  Terms to be removed  ==========================\\
