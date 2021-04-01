@@ -13,8 +13,8 @@ import 'services/main';
             scope:{
                 binding: '=ngModel',
                 locales: '=',
-                termDomain:'@',
-                hideIdentifier : "@"
+                termDomain:'@'
+                
             },
             link: function ($scope, $element, $attr) {
                 $scope.view = $attr.view||'tree';
@@ -27,9 +27,9 @@ import 'services/main';
 					if($scope.termDomain && newTerms && (newTerms||[]).length){
 						thesaurusService.getDomainTerms($scope.termDomain, {other:true})
 						.then(function(terms){
-                            if($scope.hideIdentifier!=undefined){
+                            if($attr.hideIdentifier!=undefined){
                                 terms = _.filter( terms, function ( item ) {
-                                    return item.identifier != $scope.hideIdentifier
+                                    return item.identifier != $attr.hideIdentifier
                                    } );
                                 }
                             var OtherTerm = angular.copy(_.find(terms, {identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}))
