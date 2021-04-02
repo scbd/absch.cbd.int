@@ -435,7 +435,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                                 return _.includes(decisionTypesIdentifiers, o.identifier);
                             })
                             if(selectedOption)
-                                $scope.decisions.directUseDecisions =  {identifier:selectedOption.identifier}
+                                $scope.decisions.directUseDecisions =  [{identifier:selectedOption.identifier}]
                         })
                     }                    
                 });    
