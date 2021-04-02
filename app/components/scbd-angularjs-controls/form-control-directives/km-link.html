@@ -35,7 +35,7 @@
 					<h3>Editing link</h3>
 				</div>
 				<div class="modal-body"  ng-if="editor.visible && editor.type=='link'">
-					<div class="alert alert-info">Please provide the URL of the website (e.g. <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">http://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
+					<div class="alert alert-info">Please provide the URL of the website (e.g. <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">https://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
 					<form name="linkForm">
 						<fieldset>
 							<div class="alert alert-warning" ng-show="linkForm.$error.url">
@@ -45,6 +45,7 @@
 							</div>
 							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
 								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
+								<div class="help-block">Protocol is required (https:// or http://)</div>
 								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: https://www.cbd.int">
 							</div>
 
@@ -53,8 +54,9 @@
 								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website">
 							</div>
 
-							<div class="control-group">
-								<label>Language</label>
+							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
+								<label class="control-label" ng-required="editor.visible" for="Language">Language</label>
+								<div ng-if="editor.isLanguageSelect" style="color: #e32">Please select Language</div>
 								<div km-form-languages required name="linkLanguage" ng-model="editor.language" data-multiple="false" 
 								require-un-language="false"></div>
 							</div>
@@ -91,8 +93,9 @@
 						<label>File name</label>
 						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
 					</div>
-					<div class="control-group">
-						<label>Language</label>
+					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
+						<label class="control-label" ng-required="editor.visible" for="Language">Language</label>
+						<div ng-if="editor.isLanguageSelect" style="color: #e32">Please select Language</div>
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
 					</div>
 					<br/>
