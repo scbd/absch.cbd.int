@@ -100,7 +100,7 @@
 			<label>Subject(s) of the decision</label>
 			<div class="km-value" compare-val="decisionTypes">
 				<ul class="list">
-					<li ng-repeat="item in document.decisionTypes" ng-bind="item|term:locale"></li>
+					<li ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA') ? '40px' : '0'}" ng-repeat="item in document.decisionTypes" ng-bind="item|term:locale"></li>
 				</ul>
 			</div>
 		</div>
@@ -209,17 +209,17 @@
 	<div ng-show="document.isLmoDecisionForDirectUse">
 			<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFP)</legend>
 			<div ng-show="document.uses">
-				<label>Subject of the decision</label>
+				<label>Use(s) of LMO</label>
 				<div class="km-value" compare-val="uses">
 					<ul class="list">
 						<li ng-repeat="item in document.uses" ng-bind="item|term:locale"></li>
 					</ul>
 				</div>
 			</div>
-			<div ng-show="document.appliesToTransboundaryMovement!=undefined">
+			<div ng-show="document.takenInAccordanceWithA116!=undefined">
 				<label>Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?</label>
 				<div class="km-value">
-					<km-value-bool value="document.appliesToTransboundaryMovement" locales="locale"></km-value-bool>
+					<km-value-bool value="document.takenInAccordanceWithA116" locales="locale"></km-value-bool>
 				</div>
 			</div>
 
@@ -245,7 +245,7 @@
 				</div>
 		</div>
 			<div ng-show="document.importers">
-				<label>Importer’s or Applicant’s contact details</label>
+				<label>Importer's/Applicant's contact details</label>
 			<div class="km-value" compare-val="importers">
 					<ul class="list">
 						<li ng-repeat="item in document.importers">
