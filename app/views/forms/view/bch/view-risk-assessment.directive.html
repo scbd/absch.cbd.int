@@ -80,7 +80,7 @@
 			<div ng-if="document.scopes">
 				<label>Scope of the risk assessment</label>
 				<div class="km-value" compare-val>
-					<view-terms-hierarchy ng-model="document.scopes" locale="locale" term-domain="riskAssessmentScope"></view-terms-hierarchy>
+					<view-terms-hierarchy ng-model="document.scopes" locale="locale" term-domain="riskAssessmentScope" on-terms-loaded="onRiskAssessmentScopeTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 			<div ng-if="document.documents||document.documentsSummary">
