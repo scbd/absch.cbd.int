@@ -197,8 +197,8 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                       if(!$scope.decisions.isDecisionOnLmoImport && !$scope.decisions.isDecisionOnLmoDomesticUse)
                             $scope.document.importers = undefined;
-
-                        if(!$scope.decisions.isDecisionOnLmoDomesticUse)
+                        // TODO need to verify
+                       if(!$scope.decisions.isDecisionOnLmoImport)
                             $scope.document.exporters = undefined;
                     }
 
