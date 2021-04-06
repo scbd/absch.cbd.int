@@ -122,9 +122,10 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                       $scope.decisionResult = {}
                     }
                 }
-                
+
                
                 $scope.onCountryChange = function(code){
+                    $scope.isEu = false;
                     $scope.isEuMember = false;
                     $scope.waiting = true;
                     thesaurusService.getTerms(solr.escape('eu'),{relations:true})
@@ -132,9 +133,14 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         $scope.isEuMember = (o.narrowerTerms.indexOf(code) !== -1) ? true : false;
                         if(code == 'eu'){
                             $scope.isEuMember = true;
-                            $scope.authorityQuery = "schema_s:authority AND government_s="+ solr.escape(o.narrowerTerms.join());
+                            $scope.isEu = true;
+                            $scope.EuQuery = " AND government_s="+ solr.escape(o.narrowerTerms.join());
                         }
-                        else{ $scope.authorityQuery = 'schema_s:authority AND government_s='+ solr.escape(code);}
+                        else{
+                          $scope.isEu = false;
+                          $scope.EuQuery = ' AND government_s='+ solr.escape(code);
+                          }
+
                     })
                     .finally(function(){
                         $scope.waiting = false;
@@ -267,6 +273,44 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                    
 				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
+
+
+            $scope.onAuthorityBuildQuery = function(searchText){
+
+              if (!$scope.document || !$scope.document.government)
+                return;
+
+              var queryOptions = {
+                realm     : realm.value,
+                schemas	  : ['authority'],
+                searchText: searchText
+              }
+              if($scope.isEu){
+              queryOptions.fieldQueries = ['schema_s:authority '+$scope.EuQuery];
+              } else {
+                queryOptions.government = $scope.document.government.identifier;
+              }
+
+              return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+// for RiskAssesment
+             $scope.onRiskAssesmentBuildQuery = function(searchText){
+
+            if (!$scope.document || !$scope.document.government)
+              return;
+
+            var queryOptions = {
+              realm     : realm.value,
+              schemas	  : ['nationalRiskAssessment'],
+              searchText: searchText
+            }
+            if($scope.isEu){
+              queryOptions.fieldQueries = ['schema_s:nationalRiskAssessment '+$scope.EuQuery];
+            } else {
+              queryOptions.government = $scope.document.government.identifier;
+            }
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+          }
 
                 $scope.onBuildSkipGovernmentQuery = function(searchText,schemasVal){
 

@@ -72,7 +72,7 @@
 										<div class="col-xs-12">
 											<div  class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication" required>											
 												<div document-selector required ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-												 query="authorityQuery" on-build-query="onBuildQuery(searchText, 'authority')" ng-disabled="waiting"></div>			
+												 on-build-query="onAuthorityBuildQuery(searchText)" ng-disabled="waiting"></div>
 											</div>
 										</div>
 									</div>
@@ -497,7 +497,7 @@
 											<div class="km-control-group" name="riskAssessments" 
 												ng-required="isRiskAssessmentMandatory()" caption="Risk assessment">	
 												<div document-selector ng-model="document.riskAssessments" question="nationalRiskAssessment" allow-new="true" allow-new-schema="nationalRiskAssessment"
-													on-build-query="onBuildQuery(searchText,'nationalRiskAssessment')"></div>			
+													on-build-query="onRiskAssesmentBuildQuery(searchText)"></div>
 											</div>
 										</div>
 									</div>
