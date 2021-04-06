@@ -1,7 +1,7 @@
 import _ from 'lodash';
 
     export { default as template } from './edit-roles-dialog.html';
-export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', function ($scope, user, manageableRoles, governmentPARole) {
+export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', 'realm', function ($scope, user, manageableRoles, governmentPARole, realm) {
 
         var _ctrl = this;
 
@@ -65,11 +65,13 @@ export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', functio
             return false;
         }
         _ctrl.updateGovernmentPA = function(role) {
-            if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
-                if(_ctrl.selectedRoles[role.roleId])
-                    governmentPARole = role;
-                else {
-                    governmentPARole = null;
+            if(realm.is('ABS')){
+                if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],role.code)){
+                    if(_ctrl.selectedRoles[role.roleId])
+                        governmentPARole = role;
+                    else {
+                        governmentPARole = null;
+                    }
                 }
             }
         }

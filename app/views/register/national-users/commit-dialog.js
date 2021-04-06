@@ -1,5 +1,6 @@
 import _ from 'lodash';
 
+    export { default as template } from './commit-dialog.html';
     export default  ['$scope', '$http', '$q', 'user',       'government',     'grantRoles',   'revokeRoles',
     function ($scope,   $http,   $q,   targetUser,   targetGovernment, rolesToGrant,   rolesToRevoke) {
 
