@@ -1,4 +1,20 @@
 <div>
+	<style>
+		.communication-decisions ul .other-term label{
+			color: transparent;
+		}
+		.communication-decisions ul .other-term table>tbody>tr>td:first-child{
+			width: 33% !important;
+			margin-top: 20px !important;
+		}
+		.communication-decisions ul .other-term label:before{
+			content: "Any other decisions, notifications, declarations or communications";
+			color: #555;
+			position: absolute;
+			margin-left: 18px;
+			margin-top: 2px;
+		}
+	</style>
 	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
@@ -137,9 +153,9 @@
 										</div>
 										<div class="col-xs-12">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
-												<div class="km-control-group" name="otherDecisions" required caption="Communications, notifications and declarations">
+												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="Communications, notifications and declarations">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
-															terms="options.communicationDecisions()" binding-type="term" ng-change="onOtherDecisionChanged(decisions)">
+															terms="options.communicationDecisions()" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
 													</div>
 												</div>
 											</div>
@@ -567,6 +583,7 @@
 										<div class="km-control-group" name="notes">
 											<span class="help-block">
 												The “Notes” field is for personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information.
+											</span>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
