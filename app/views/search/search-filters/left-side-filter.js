@@ -19,7 +19,7 @@ import 'services/main';
                     $scope.onSchemaFilterChanged = function (schema, selected) {
                         if (!selected) {
                             if ($scope.leftMenuFilters)
-                                $scope.leftMenuFilters[schema] = undefined;
+                                delete $scope.leftMenuFilters[schema];
                             $scope.leftMenuFilters = _.omit($scope.leftMenuFilters, _.isUndefined);
                             if (_.isEmpty($scope.leftMenuFilters))
                                 $scope.leftMenuFilters = undefined;
