@@ -4,8 +4,8 @@ import _ from 'lodash';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
 
-app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$window', 'commonjs',
-    function (appLocale, $route, $timeout, appConfigService, $filter, $window, commonjs) {
+app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm',
+    function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm) {
         return {
             restrict: 'EAC',
             template : template,
@@ -55,7 +55,8 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
 
                 $scope.print = function(){
                     $scope.printing = true;
-                    require(['printThis', 'text!./print-footer.html'], function(printObj, header, footer){						
+                    require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){	
+                        header = $compile(header)($scope);					
                         $element.parent().parent().parent().find('#schemaView').printThis({
                             debug:false,
                             printContainer:true,

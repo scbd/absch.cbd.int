@@ -91,6 +91,16 @@
                     target="new">Click here to view the latest version of the record.</a>
             </h3>
         </div>
+        
+        <div class="alert alert-success" role="alert" ng-show="comparingRevision">
+            <h3>
+                <span class="fa fa-window-restore"></span>
+                Comparing version <strong ng-bind="comparingRevision"></strong> with latest version <strong ng-bind="internalDocumentInfo.latestRevision"></strong>
+                <button ng-disabled="isComparing" class="btn btn-default btn-success btn-xs pull-right" type="button"ng-click="closeComparison()">
+                    <span class="fa fa-times-circle"></span> Close comparison
+                </button> 
+            </h3>
+        </div>
 
 
         <div style="float:right; position:relative;top:7px;right:3px;" ng-if="!isIRCCRevoked && internalCanEdit">
@@ -104,8 +114,8 @@
                 </button>
             </div>
         </div>
-        <div ng-if="showDifferenceButton" class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
-            <button ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()">
+        <div ng-if="showDifferenceButton||showComparison" class="pull-right compare-buttons" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+            <button ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()">
                 <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference
             </button>
             <!-- for comparing with older versions -->
