@@ -132,14 +132,16 @@
 			<legend>Document details</legend>
 			<div ng-if="document.documents">
 				<label>Document text</label>
-				<div class="km-value" compare-val ng-if="document.documents" km-link-list 
-					ng-model="document.documents" style="margin-top: 5px;"></div>
+				<div class="km-value" compare-val>
+					<km-link-list  ng-model="document.documents"></km-link-list>
+				</div>
 			</div>
 
 			<div ng-if="document.unofficialDocuments">
 				<label>Unofficial Documents</label>
-				<div class="km-value" compare-val ng-if="document.unofficialDocuments" km-link-list 
-					ng-model="document.unofficialDocuments" style="margin-top: 5px;"></div>				
+				<div class="km-value" compare-val>
+					<km-link-list  ng-model="document.unofficialDocuments"></km-link-list>
+				</div>			
 			</div>
 			<div compare-val ng-if="document.documentsInfo">
 				<km-value-ml value="document.documentsInfo" html locales="locale"></km-value-ml>
