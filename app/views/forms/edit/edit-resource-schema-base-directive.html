@@ -14,7 +14,7 @@
 			
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="languages" required caption="Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required caption="Please select in which language(s) you wish to submit this record:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="documentLanguages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -57,8 +57,8 @@
 									</div>
 									<div class="row" ng-if="isBCH">
 										<div class="col-xs-6">
-											<div class="km-control-group" required name="languages" caption="Languages">
-												<div km-select multiple name="languages" placeholder="Select languages" required ng-model="document.languages" items="options.bchLanguages()"></div>
+											<div class="km-control-group" required name="header.languages" caption="Languages">
+												<div km-select multiple name="header.languages" placeholder="Select languages" required ng-model="document.languages" items="options.bchLanguages()"></div>
 											</div>
 										</div>
                                     </div>
