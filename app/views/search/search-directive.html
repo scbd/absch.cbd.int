@@ -56,11 +56,12 @@
                      
                     
                  </span>
+                 <a ng-if="(setFilters | json) != '{}'" rel="noopener" ng-href="#" class="search-bar-links link2"
+                    ng-click="clearFilter()"> <span class="hidden-xs hidden-sm"> Clear all</span></a>
                  
                  <span class="btn-group pull-right">
 
-                     <a rel="noopener" ng-href="#" class="help-tour link2"
-                         style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+                     <a rel="noopener" ng-href="#" class="help-tour link2 search-bar-links"
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
                                  aria-hidden="true"></i> Help using the search</span></a>
 
