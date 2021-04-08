@@ -115,11 +115,11 @@ import 'views/forms/edit/organization-selector';
 						required:true,
                     	mapping: function(item){ return item.identifier;},
 						options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
-							$scope.options.documentLinksExt[0].options = $filter("orderBy")(o.data, "name");
-							_.forEach($scope.options.documentLinksExt[0].options, function(element) {
+							var options = $filter("orderBy")(o.data, "name");
+							_.forEach(options, function(element) {
 									element.__value = element.name;
 								});
-							return $scope.options.documentLinksExt[0].options;
+							return options;
 						})
 					}],
 					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
@@ -140,10 +140,6 @@ import 'views/forms/edit/organization-selector';
 				for (var i = end; i > (end-100) ; i--) {
 					$scope.years.push({id:i, name: i});
 				}
-				//============================================================
-				//
-				//============================================================
-				$scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
 
 				//============================================================
 				//
@@ -267,11 +263,6 @@ import 'views/forms/edit/organization-selector';
 					if(type.length>1) 
 						type.splice($index, 1)
 				}
-				$q.when($scope.setDocument({}, true))
-				.then(function(doc){
-					if(doc.keywords)
-						$scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
-				});
                 //============================================================
 				//
 				//============================================================
@@ -352,5 +343,3 @@ import 'views/forms/edit/organization-selector';
 			}]
 		};
 	}]);
-
-
