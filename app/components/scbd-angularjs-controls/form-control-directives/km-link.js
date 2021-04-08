@@ -188,7 +188,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 				//==============================
 				$scope.editor.editLink = function(link)
 				{
-					link = link || {url:"http://www.", name:""};
+					link = link || {url:"https://www.", name:""};
 
 					$scope.editor.close();
 
@@ -199,6 +199,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 					$scope.editor.tag 	  = link.tag;
 					$scope.editor.language = link.language||"";
 					$scope.editor.visible = true;
+					$scope.editor.isLanguageSelect = false;
 				};
 				//==============================
 				//
@@ -241,6 +242,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 					$scope.editor.visible = false;
 					$scope.editor.tag     = null;
 					$scope.editor.language     = null;
+					$scope.editor.isLanguageSelect = false;
 				};
 
 				//==============================
@@ -248,6 +250,17 @@ app.directive('kmLink', ['IStorage', function (storage)
 				//==============================
 				$scope.editor.save = function()
 				{
+					$scope.editor.isLanguageSelect  = false;
+					$scope.editor.urlMissing 		= false;					
+					if($scope.editor.url == 'https://www.' || $scope.editor.url == 'http://www.'){
+						$scope.editor.urlMissing = true;
+					}
+					if(!$scope.editor.language){
+						$scope.editor.isLanguageSelect = true;
+					}
+					if($scope.editor.isLanguageSelect  || $scope.editor.urlMissing )
+						return;
+
 					var oLink = { url:  $scope.editor.url };
 
 					if($.trim($scope.editor.name||"")!=="")

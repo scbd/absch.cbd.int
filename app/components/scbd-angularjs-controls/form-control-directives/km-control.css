@@ -177,3 +177,7 @@ trix-toolbar .trix-dialog .trix-dialog__link-fields {
     margin-top: 8px;
 }
 trix-editor a:hover{cursor: pointer;color: #428bca !important;}
+
+.control-group{
+    padding-bottom: 10px;;
+}

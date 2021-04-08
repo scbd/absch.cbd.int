@@ -9,7 +9,7 @@ import 'services/main';
   //
   //============================================================
   //TODO: out of date, needs to be updated with current select, or select needs to be updated.
-  app.directive('kmFormLanguages', ['thesaurusService', '$timeout', function(thesaurusService, $timeout) {
+  app.directive('kmFormLanguages', ['thesaurusService', '$timeout', 'guid', function(thesaurusService, $timeout, guid) {
       return {
           restrict: 'EA',
           template: template,
@@ -23,6 +23,7 @@ import 'services/main';
             var unLanguages  = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
             $scope.ctrl      = $scope;
             $scope.multiple  = $attr.multiple=='true' || $attr.multiple==""; // incase if empty is defined
+            $scope.instanceId= guid();
 
             $scope.options = {
                 locales : function(){
@@ -31,7 +32,9 @@ import 'services/main';
                     })
                 },
                 otherLocales : function(){
-                    return thesaurusService.getDomainTerms('languages').then(formatLocales).then(function(locales){                      
+                    
+                    return thesaurusService.getDomainTerms('languages').then(formatLocales).then(function(locales){     
+                        $scope.$broadcast('event:km-select-enable-search', {enabled:true, instanceId:$scope.instanceId});
                         if($scope.locales) unLanguages = _.map($scope.locales, 'identifier');
                         return _(locales).map(function(lang){
                             if(!_.includes(unLanguages, lang.identifier))return lang;
@@ -52,9 +55,6 @@ import 'services/main';
                     }
                 }).compact().value()
             }
-            $scope.isVisible = function() {
-                return $scope.binding !== undefined && $scope.binding !== null;
-            };
 
             $scope.validateUNLanguage = function(){
                 
@@ -82,9 +82,11 @@ import 'services/main';
                         if(_.difference(binding, unLanguages).length){
                             $scope.selectApi.loadOtherSource();
                             bindingWatch();
-                        }
+                        }                        
                     }, 500)//delay while the km-select directive is initialized
                 }
+                if(newVal!==undefined)
+                    $scope.initialized = true;
             });
           }
       };

@@ -38,8 +38,9 @@ import 'components/scbd-angularjs-services/main';
         $scope.attr = $attrs;
         $scope.multiple = $attrs.multiple !== undefined && $attrs.multiple !== 'false';
         $scope.watchItems = $attrs.watchItems !== undefined && $attrs.watchItems !== null;
-        $scope.displayCount = $attrs.displayCount || 3;
-        $scope.filterType   = $attrs.filterType || 'contains';
+        $scope.displayCount  = $attrs.displayCount || 3;
+        $scope.filterType    = $attrs.filterType || 'contains';
+        $scope.searchEnabled = $attrs.searchEnabled=='true'||false;
 
         if ($scope.showDescription === undefined)
           $scope.showDescription = 'false';
@@ -64,7 +65,7 @@ import 'components/scbd-angularjs-services/main';
             event.stopPropagation();
         });
 
-        if ($scope.multiple && $attrs.showSelectionPopOver)
+        if ($scope.multiple && $attrs.showSelectionPopOver){
           $element.find('.dropdown-toggle').popover({
             trigger: "hover",
             html: true,
@@ -80,9 +81,14 @@ import 'components/scbd-angularjs-services/main';
               return "<ul><li style=\"width:500px;\">" + oNames.join("</li>\n<li>") + "</li></ul>";
             }
           });
+        }
 
-
-        
+        $scope.$on('event:km-select-enable-search', function (evt, data) {
+          if($attrs.instanceId){
+              if(data.instanceId == $attrs.instanceId)
+                $scope.searchEnabled = data.enabled;
+          }
+        });
         $scope.$on('clearSelectSelection', function(info) {
           $scope.clearSelection(info && info.data ? info.data.identifier : undefined);
         });
@@ -154,7 +160,7 @@ import 'components/scbd-angularjs-services/main';
         }
 
         function onSelectAll() {
-          _.forEach($scope.allItems || [], function(item) {
+          _.forEach(getAllItems(), function(item) {
             item.selected = true;
           });
           $scope.save();
@@ -163,7 +169,7 @@ import 'components/scbd-angularjs-services/main';
         function onSelectItem(item) {
 
           if (item.identifier) {
-            var element = _.find($scope.allItems || [], {identifier: item.identifier})
+            var element = _.find(getAllItems(), {identifier: item.identifier})
             if(element){
               element.selected = true;
               $scope.save();
@@ -172,7 +178,7 @@ import 'components/scbd-angularjs-services/main';
         }
 
         function onGetItem(identifier) {
-          return _.find($scope.allItems, {
+          return _.find(getAllItems(), {
             identifier: identifier
           });
         }
@@ -201,7 +207,7 @@ import 'components/scbd-angularjs-services/main';
         //==============================
         //
         //==============================
-        function flaten(subTree, parent) {
+        function flatten(subTree, parent) {
           var oResult = [];
 
           _.forEach(subTree, function(o) {
@@ -209,7 +215,7 @@ import 'components/scbd-angularjs-services/main';
             if(parent)
               o.parent = parent;
             if (o.children)
-              oResult = _.union(oResult, flaten(o.children, o.identifier));
+              oResult = _.union(oResult, flatten(o.children, o.identifier));
           });
 
           return oResult;
@@ -242,7 +248,7 @@ import 'components/scbd-angularjs-services/main';
               function(data) { // on success
                 $scope.__loading = false;
                 $scope.rootItems = transform(data); //clone values
-                $scope.allItems = flaten($scope.rootItems);
+                $scope.allItems = flatten($scope.rootItems);
 
                 deferred.resolve();
               },
@@ -279,7 +285,7 @@ import 'components/scbd-angularjs-services/main';
           else if (maxCount < 0 || oNames.length <= maxCount)
             return oNames.join(', ');
 
-          return "" + oNames.length + " of " + $scope.allItems.length + " selected";
+          return "" + oNames.length + " of " + getAllItems().length + " selected";
         };
 
         //==============================
@@ -318,21 +324,15 @@ import 'components/scbd-angularjs-services/main';
         //==============================
         // in tree order /deep first
         //==============================
-        $scope.getSelectedItems = function() {
-          var mainSource = $scope.allItems || [];
-          if($scope.secondarySource)
-            mainSource = _.union(mainSource, $scope.secondarySource);
-
-          return _.filter(mainSource, { selected: true });
+        $scope.getSelectedItems = function() {  
+          return _.filter(getAllItems(), { selected: true });
         };
 
         //==============================
         //
         //==============================
         $scope.hasSelectedItems = function(subItems) {
-          return _.find($scope.allItems || [], {
-            selected: true
-          }) !== undefined;
+          return _.find(getAllItems(), { selected: true }) !== undefined;
         };
 
         //==============================
@@ -398,14 +398,13 @@ import 'components/scbd-angularjs-services/main';
         //
         //==============================
         $scope.clearSelection = function(identifier) {
+          var items = _.union(($scope.secondarySource||[]), ($scope.allItems||[]));
           if (!identifier) {
-            _.forEach($scope.allItems || [], function(item) {
-              item.selected = false;
+            _.forEach(items, function(item) { 
+              item.selected = false; 
             });
           } else {
-            var item = _.find($scope.allItems, {
-              identifier: identifier
-            });
+            var item = _.find(items, { identifier: identifier });
             if (item)
               item.selected = false;
           }
@@ -422,7 +421,7 @@ import 'components/scbd-angularjs-services/main';
             if (item === null || $scope.getSelectedItems().indexOf(item) >= 0)
               return false;
 
-          if ($scope.getMaximum() < $scope.allItems.length && $scope.getSelectedItems().length >= $scope.getMaximum())
+          if ($scope.getMaximum() < getAllItems().length && $scope.getSelectedItems().length >= $scope.getMaximum())
             if (item !== null && $scope.getSelectedItems().indexOf(item) < 0)
               return false;
           return true;
@@ -440,9 +439,7 @@ import 'components/scbd-angularjs-services/main';
             clickedItem.selected = !clickedItem.selected;
 
           if (!$scope.multiple || !clickedItem) {
-            var source = $scope.allItems;
-              var source = _.union(source, $scope.secondarySource||[]);
-            _.forEach(source||[], function(item) {
+            _.forEach(getAllItems(), function(item) {
               item.selected = (item == clickedItem);
             });
           }
@@ -493,6 +490,14 @@ import 'components/scbd-angularjs-services/main';
         }
         $scope.showOtherSource = showOtherSource;
 
+
+        function getAllItems(){
+          var mainSource = $scope.allItems || [];
+          if($scope.secondarySource)
+            mainSource = _.union(mainSource, $scope.secondarySource);
+
+          return mainSource;
+        }
       }]
     };
   });
