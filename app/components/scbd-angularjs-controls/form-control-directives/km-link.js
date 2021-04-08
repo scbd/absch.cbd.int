@@ -250,11 +250,17 @@ app.directive('kmLink', ['IStorage', function (storage)
 				//==============================
 				$scope.editor.save = function()
 				{
-					$scope.editor.isLanguageSelect = false;
-					if($.trim($scope.editor.language)=="" || $.trim($scope.editor.language)==undefined){
-						$scope.editor.isLanguageSelect = true;
-						return;
+					$scope.editor.isLanguageSelect  = false;
+					$scope.editor.urlMissing 		= false;					
+					if($scope.editor.url == 'https://www.' || $scope.editor.url == 'http://www.'){
+						$scope.editor.urlMissing = true;
 					}
+					if(!$scope.editor.language){
+						$scope.editor.isLanguageSelect = true;
+					}
+					if($scope.editor.isLanguageSelect  || $scope.editor.urlMissing )
+						return;
+
 					var oLink = { url:  $scope.editor.url };
 
 					if($.trim($scope.editor.name||"")!=="")

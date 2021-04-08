@@ -46,6 +46,7 @@
 							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
 								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
 								<div class="help-block">Protocol is required (https:// or http://)</div>
+								<div ng-if="editor.urlMissing" style="color: #e32">Please provide valid URL</div>
 								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: https://www.cbd.int">
 							</div>
 
