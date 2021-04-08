@@ -83,6 +83,13 @@ import 'views/forms/view/view-resource.directive';
         return $scope.sanitizeDocument(documentCopy);
     };
 
-
+    //============================================================
+    //
+    //============================================================
+    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true)
+    .then(function(doc){
+        if(doc.keywords)
+            $scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
+    });
   }];
 
