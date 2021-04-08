@@ -9,6 +9,7 @@ export const bundleUrls = {
         'npm/angular-sanitize@1.7.4/angular-sanitize.min.js',
         'npm/angular-animate@1.7.4/angular-animate.min.js',
         'npm/angular-cache@4.6.0/dist/angular-cache.min.js',
+        'npm/jqueryui@1.11.1/jquery-ui.min.js',
         'npm/bootstrap@3.3.0/dist/js/bootstrap.min.js',
         'npm/linq@3.0.5/linq.min.js',
         'npm/lodash@4.17.15/lodash.min.js',
@@ -18,7 +19,6 @@ export const bundleUrls = {
     angularDependencies: [
         'npm/ngSmoothScroll@2.0.1/dist/angular-smooth-scroll.min.js',
         'npm/angular-breadcrumbs@0.5.3/dist/ng-breadcrumbs.min.js',
-        'npm/jqueryui@1.11.1/jquery-ui.min.js',
         'npm/angular-trix@1.0.2/dist/angular-trix.min.js',
         'npm/trix@0.12.0/dist/trix.js',
         'npm/angular-joyride@1.0.2/dist/joyride.min.js',
