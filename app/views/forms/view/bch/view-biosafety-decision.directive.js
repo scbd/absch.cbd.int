@@ -46,6 +46,15 @@ app.directive("viewBiosafetyDecision", [function () {
 					onOtherDecisionChanged(oldVal.decisionTypes);
 
 			})
+			//decision below needs to be indented and appear underneath First decision (intro into environment)
+			$scope.$watch("document.decisionTypes", function (decisionTypes) {
+			if(decisionTypes == undefined ) return;
+				var RegularTerm = _.find(decisionTypes, {identifier:'E8C5A15C-A736-4fb7-A1B6-192412BE7E45'})
+				if(RegularTerm == undefined ) return
+				decisionTypes.sort(function (a, b) {
+					return (a.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24') - (b.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24');
+				});
+			})
 			//====================
 			//
 			//====================
