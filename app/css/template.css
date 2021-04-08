@@ -2113,6 +2113,9 @@ a.disabled{
 .edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
     white-space: inherit;
 }
+.edit-biosafety-decision-directive .communication-decisions ul .other-term table>tbody>tr>td:first-child{
+    width: 35% !important;
+}
 
 .easing {
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);

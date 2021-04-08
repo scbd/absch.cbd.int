@@ -6,8 +6,8 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-decision.directive";
 
-    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm',
-        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm) {
+    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm','$timeout',
+        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm, $timeout) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -329,7 +329,9 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     if (!document)
                         return undefined;
-
+                    $timeout(function() {
+                        $element.find(".communication-decisions").find(".other-term").find("label").contents().eq(2).replaceWith('  Any other decisions, notifications, declarations or communications');
+                    },500);
                     if(!document.isAmendment){
                         document.amendedRecords     = undefined;
                         if(!$scope.documentExists && $scope.status == "ready")
