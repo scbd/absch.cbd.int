@@ -423,18 +423,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                             if(selectedOption)
                                 $scope.decisions.directUseDecisions =  {identifier:selectedOption.identifier}
                         })
-                    }
-                    
-                    if($routeParams.identifier){
-                        $scope.status = "loading";
-                        editFormUtility.documentExists(document.header.identifier)
-                            .then(function(exists){
-                                $scope.documentExists = exists;
-                            }).catch(function(e){})
-                            .finally(function(){
-                                $scope.status = "ready";
-                            });
-                    }
+                    }                    
                 });    
 			}
 		}
