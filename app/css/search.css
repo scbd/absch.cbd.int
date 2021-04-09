@@ -144,11 +144,3 @@
 .daterangepicker.show-ranges.show-calendar.opensright{
     z-index: 100000000;
 }
-.search-bar-links {
-    font-size:10px;
-    margin:5px 10px 0 5px;
-    text-transform: uppercase;
-    font-weight: 500;
-    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
-    cursor:pointer;
-}
