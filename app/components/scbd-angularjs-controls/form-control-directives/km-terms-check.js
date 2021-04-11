@@ -61,6 +61,7 @@ import 'components/scbd-angularjs-services/main'; ;
                 $element.addClass('terms-check');
            
                 $scope.enableSearch = $attr.enableSearch;
+                $scope.tabularShape = $attr.tabularShape;
                 //==============================   
                 //
                 //==============================
