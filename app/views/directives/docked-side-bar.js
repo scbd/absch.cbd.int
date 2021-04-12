@@ -92,10 +92,12 @@ function(realm, $rootScope, $route, $location, articlesService) {
 
                 var scrollHandlerfn = function() {                               
                     if ($(this).scrollTop() > 0){
-                        $('#sidebar-wrapper').css('top', '0px')
+                        $('#sidebar-wrapper').css('top', '0px');
+                        $('.side-bar-widget').css('height', 'calc(100vh - 86px)');
                     }
                     else{
-                        $('#sidebar-wrapper').css('top', 'unset')
+                        $('#sidebar-wrapper').css('top', 'unset');
+                        $('.side-bar-widget').css('height', 'calc(100vh - 118px)');
                     }
                 }
                 $(window).scroll(scrollHandlerfn);
