@@ -113,13 +113,7 @@
 					</table>
 				</script>
 				<td ng:repeat="term in rootTerms" ng-hide="otherTermIdentifier==term.identifier" ng-include="'term-check-tree-renderer.html'"></td>
-			 	<tr>
-					<div ng-if="tabularShape" class="header-text">
-						<h3><strong>OPTION LIST -  RESOURCE TYPE</strong></h3>
-						<div>(choose many options as needed in order to best describe resources)</div>
-					</div>
-				</tr>
-
+			 	
 				<style>
 				   tr td>label {
 					   font-weight: 600;
@@ -127,11 +121,6 @@
 					   margin: 5px;
 					   text-decoration: underline;
 				   }
-					.header-text{
-						text-align: center;
-						border: 1px solid #796969;
-						background-color: #e3e3e3
-					}
 				</style>
 			</table>
 
