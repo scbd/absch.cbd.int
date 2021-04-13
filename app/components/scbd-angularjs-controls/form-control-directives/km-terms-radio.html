@@ -9,7 +9,7 @@
 			<script type="text/ng-template"  id="term-radio-tree-renderer.html">
 				<label>
 					<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" ng-value="term.identifier" name="bindingName_{{uniqueId}}"/>
-						{{term.title||term.name | lstring:locale}}
+						{{term.title||term.name | lstring:locale}} {{term.identifier}}
 							<span ng-if="showDescription" class="km-term-radio-description">{{term.description | lstring:locale}}</span>
 				</label>
 

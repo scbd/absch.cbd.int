@@ -57,7 +57,12 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         });
                     },
                     communicationDecisions: function() {
-                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {					
+                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {	
+                            //special case to replace other text
+                            $timeout(function() {
+                                $element.find(".communication-decisions").find(".other-term label")
+                                .contents().eq(2).replaceWith('  Any other decisions, notifications, declarations or communications');
+                            },500);				
                             return _.filter(o, function(item){
                                 return _.includes([ decisionSubjects.DEC_8_6,  decisionSubjects.DEC_8_7,
                                                     decisionSubjects.DEC_8_8,  decisionSubjects.DEC_8_9,
@@ -329,9 +334,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     if (!document)
                         return undefined;
-                    $timeout(function() {
-                        $element.find(".communication-decisions").find(".other-term").find("label").contents().eq(2).replaceWith('  Any other decisions, notifications, declarations or communications');
-                    },500);
+                    
                     if(!document.isAmendment){
                         document.amendedRecords     = undefined;
                         if(!$scope.documentExists && $scope.status == "ready")
@@ -427,6 +430,12 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&& !$scope.isLmoDecisionForDirectUse && !$scope.isSimplifiedProcedure)
                         $scope.document.riskAssessments = undefined;
+
+                    if($scope.isLmoDecisionForIntentionalIntroduction){
+                        $scope.decisions.directUseDecisions = undefined;
+                        $scope.document.exporters           = undefined;
+                        $scope.document.importers           = undefined;
+                    }
                 }
 
                 $scope.setDocument({})
@@ -477,11 +486,11 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         })
                         $scope.options.directUseDecisions()
                         .then(function(options){
-                            var selectedOption =  _.find(options, function(o){
+                            var selectedOptions =  _.filter(options, function(o){
                                 return _.includes(decisionTypesIdentifiers, o.identifier);
                             })
-                            if(selectedOption)
-                                $scope.decisions.directUseDecisions =  [{identifier:selectedOption.identifier}]
+                            if(selectedOptions)
+                                $scope.decisions.directUseDecisions =  selectedOptions
                         })
                     }                    
                 });    

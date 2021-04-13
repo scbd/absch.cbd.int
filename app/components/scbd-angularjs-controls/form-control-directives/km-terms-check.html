@@ -42,7 +42,7 @@
 					<label>
 						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
 							ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/> 
-							{{term.title||term.name | lstring:locale}}
+							{{term.title||term.name | lstring:locale}}{{term.identifier}}
 					</label>
 					<div ng-if="otherTermIdentifier==term.identifier && !term.multiple && selectedItems[term.identifier].selected">
 						<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"

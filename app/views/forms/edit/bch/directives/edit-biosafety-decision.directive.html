@@ -280,7 +280,7 @@
 													</div>
 												</div>
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
-													<div class="km-control-group" name="importers" required caption="Please provide Importer/Applicant's contact details">											
+													<div class="km-control-group" name="importers" required caption="Please provide Importer's/Applicant's contact details">											
 														<div document-selector ng-model="document.importers" question="importers"
 														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 													</div>
@@ -451,22 +451,24 @@
 												<div km-yes-no required ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 												<div ng-if="document.isForCommercialUse" style="padding-left:50px; margin-top: 15px;">
 													<div class="control-group">
-														Should this decision be forwarded to the OECD Secretariat for possible inclusion in the 
-														<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?
+														<label>
+															Should this decision be forwarded to the OECD Secretariat for possible inclusion in the 
+															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?
+														</label>
 													</div>
 													<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 													<div class="control-group" style="margin-top: 15px;">
-														Is this decision related to food safety?
+														<label>Is this decision related to food safety?</label>
 													</div>
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 													<div ng-if="document.isForFoodSafety" style="padding-left:57px; margin-top: 15px;">
 														<div class="control-group">
-															Was it conducted in accordance with the Codex Alimentarius <em>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</em>
+															<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i></label>
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 														<div class="control-group" style="margin-top: 15px;">
-															Should this submission be forwarded to your country's FAO focal point for possible inclusion in the 
-															<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?
+															<label>Should this submission be forwarded to your country's FAO focal point for possible inclusion in the 
+															<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
 														</div>
 														<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 													</div>
@@ -492,7 +494,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse || isSimplifiedProcedure">
+									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse || isSimplifiedProcedure || isDecisionOnContainedUseOfLMOs">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="riskAssessments" 
 												ng-required="isRiskAssessmentMandatory()" caption="Risk assessment">	
@@ -505,7 +507,7 @@
 							</section>
 							<!-- ====================Section H End=================== -->
 							<!-- ====================Section I Strat=================== -->
-							<section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions)">								
+							<section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions || decisions.communicationDecision)">								
 								<div class="well no-shadow bg-white">
 									<legend>Decision document</legend>
 									<div class="row">

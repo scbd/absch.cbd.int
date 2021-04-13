@@ -35,26 +35,28 @@ app.directive("viewBiosafetyDecision", [function () {
 					if(identifier == "D698B5F7-A434-49E2-A7FF-FE869AFBEE8D"){ $scope.isDecisionOnContainedUseOfLMOs = true;}
 					if(identifier == "E8C5A15C-A736-4fb7-A1B6-192412BE7E45"){$scope.document.isLmoDecisionForIntentionalIntroduction = true;}
 					if(identifier == "BE64016A-C3BD-4C61-9620-C3FEF96B2A24"){$scope.document.isLmoDecisionForDirectUse = true;}
+					if(identifier == '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3')$scope.isDecisionOnLmoImport	       = true;
+					if(identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507')$scope.isDecisionOnLmoDomesticUse	   = true;
 					if(_.includes(identifiersForSectionF,identifier.toString())){
 						$scope.isTransboundaryMovement = true;
 					}
-				})
+
+				});
+				
+				//decision below needs to be indented and appear underneath First decision (intro into environment)
+				var regularTerm = _.find(decisionTypes, {identifier:'E8C5A15C-A736-4fb7-A1B6-192412BE7E45'})
+				if(regularTerm){
+					decisionTypes.sort(function (a, b) {
+						return (a.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24') - (b.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24');
+					});
+				}
 				
 			}
 			$scope.$watch("document", function (oldVal) {
 				if(oldVal && oldVal.decisionTypes)
 					onOtherDecisionChanged(oldVal.decisionTypes);
+			});
 
-			})
-			//decision below needs to be indented and appear underneath First decision (intro into environment)
-			$scope.$watch("document.decisionTypes", function (decisionTypes) {
-			if(decisionTypes == undefined ) return;
-				var RegularTerm = _.find(decisionTypes, {identifier:'E8C5A15C-A736-4fb7-A1B6-192412BE7E45'})
-				if(RegularTerm == undefined ) return
-				decisionTypes.sort(function (a, b) {
-					return (a.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24') - (b.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24');
-				});
-			})
 			//====================
 			//
 			//====================
