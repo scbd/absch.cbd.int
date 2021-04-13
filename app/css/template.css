@@ -1553,8 +1553,8 @@ div.recordDefault:hover {
 .registerpage-content table {
     width: 100%;
 }
-#Record * {
-    font-size: 14px;
+#Record blockquote {
+    font-size: inherit!important;
 }
 #Record .panel-body {
     padding: 10px;
