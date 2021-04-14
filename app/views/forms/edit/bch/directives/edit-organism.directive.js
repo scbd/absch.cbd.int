@@ -64,6 +64,14 @@ import "views/forms/view/bch/view-organism.directive";
 
 					if (!document)
 						return undefined;
+				//Disable Parent terms of types of organism
+				var parentIDs =['B19E9266-FA70-439C-BE18-0356850BB9FA',
+								'356629AD-5C7A-4026-9076-444BA3B97EF9',
+								'105F74DA-8439-42a8-9298-096A91C8458A',
+								'D6DA48D8-5158-4F20-A7E7-DCAF801EAEE7'];
+					_.forEach(parentIDs, function(opt) {
+						$element.find("input[value="+opt+"]").attr('disabled', 'disabled').parent().css({"color": "#ccc"});
+					});
 
 					if (/^\s*$/g.test(document.notes))
 						document.notes = undefined;

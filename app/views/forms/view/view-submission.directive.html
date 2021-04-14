@@ -85,11 +85,9 @@
                         </ul>
                     </div>
                 </div>
-                <div ng-if="document.cpbThematicAreas">            
+                <div ng-if="document.cpbThematicAreas">
                     <div class="km-value" compare-val>
-                        <ul  class="list">
-                            <li ng-repeat="term in document.cpbThematicAreas" ng-bind="term | term:locale"></li>
-                        </ul>
+                        <view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
                     </div>
                 </div>
             </div>
