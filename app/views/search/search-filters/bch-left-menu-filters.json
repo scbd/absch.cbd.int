@@ -35,6 +35,13 @@
 		},
 		{
 			"type": "thesaurus",
+			"term": "decisionLMOFFPSubject",
+			"title": "Use(s) of LMO",
+			"field": "uses_ss",
+			"relatedField":"uses_REL_ss"
+		},
+		{
+			"type": "thesaurus",
 			"term": "decisionResults",
 			"title": "Result of the decision",
 			"field": "decisionResult_ss",

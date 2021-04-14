@@ -248,7 +248,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 }
 
                 $scope.isRiskAssessmentMandatory = function(){
-                    return $scope.isLmoDecisionForIntentionalIntroduction	||  $scope.isLmoDecisionForDirectUse || $scope.isSimplifiedProcedure
+                    return $scope.isLmoDecisionForIntentionalIntroduction	||  ($scope.isLmoDecisionForDirectUse && $scope.decisions.isDecisionOnLmoDomesticUse) || $scope.isSimplifiedProcedure
                 }
                 //==================================
                 //
