@@ -92,7 +92,6 @@
 				</div>
 				</div>
 			</div>
-												
 		</div>
 
 		<div ng-if="isABS && (document.responsibilities ||document.responsibleForAll ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
@@ -141,30 +140,24 @@
 			<legend>Responsibilities</legend>
 			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.functions)">
 				<label>Administrative functions</label>
-			<div ng-if="document.header.schema!='supplementaryAuthority'" class="km-value"  compare-val>
-				<ul class="list">
-					<li ng-if="isAllSubjectArea" ng-bind="isAllSubjectArea|term:locale"></li>
-					<li ng-repeat="item in document.functions" ng-if="!isAllSubjectArea">
-						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
-						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
-					</li>
-				</ul>
-			</div>
-			<div compare-val>
-				<view-terms-hierarchy ng-if="document.header.schema=='supplementaryAuthority'" class="km-value" 
-				ng-model="(document.functions)" locale="locale" term-domain="supplementaryProtocolFunctions"></view-terms-hierarchy>
+				<!--TODO: ng-if="document.header.schema!='supplementaryAuthority'" was conflecting -->
+			<div  class="km-value" compare-val>
+				<view-terms-hierarchy  ng-model="document.functions" locale="locale" ng-if="document.header.schema!='supplementaryAuthority'"
+					term-domain="subjectAreas" on-terms-loaded="onFunctionsTerms(terms)"></view-terms-hierarchy>
+
+				<view-terms-hierarchy  ng-model="document.functions" locale="locale" ng-if="document.header.schema=='supplementaryAuthority'"
+				 term-domain="supplementaryProtocolFunctions" on-terms-loaded="onFunctionsTerms(terms)"></view-terms-hierarchy>
 			</div>
 			</div>
 
 			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
 				<label>Types of organism(s) under its responsibility</label>
 				<div class="km-value" compare-val>
-					<li ng-if="isAllOrganisms" ng-bind="isAllOrganisms|term:locale"></li>
-					<view-terms-hierarchy ng-if="!isAllOrganisms" ng-model="document.cpbOrganismTypes" locale="locale" 
-					term-domain="typeOfOrganisms" hide-identifier="8DAB2400-CF00-44B2-ADCF-49AABF66B9B0"></view-terms-hierarchy>
+					<view-terms-hierarchy  ng-model="document.cpbOrganismTypes" locale="locale"
+					term-domain="typeOfOrganisms" on-terms-loaded="onOrganismTypesTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
-   
+
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
 				<div ng-if="document.responsibleForAll!==undefined">
 					<label>Is this the only designated Competent Authority for the Supplementary Protocol in the country?</label>
