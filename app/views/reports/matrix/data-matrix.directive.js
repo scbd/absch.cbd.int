@@ -100,7 +100,7 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                                 Year             :   row.Year,
                                 ["Record Type"]  :   row.RecordType,
                                 Region           :   region ? region.title[locale] : 'No Region',
-                                ["Schema Type"]  :   row.schemaType.replace(/[a-z]/, function(match){ return match.toUpperCase()})
+                                ["Schema Type"]  :   (row.schemaType||'').replace(/[a-z]/, function(match){ return match.toUpperCase()})
                             }
                         });
 

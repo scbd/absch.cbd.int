@@ -6,8 +6,8 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-biosafety-decision.directive";
 
-    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm',
-        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm) {
+    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm','$timeout',
+        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm, $timeout) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -57,7 +57,12 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         });
                     },
                     communicationDecisions: function() {
-                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {					
+                        return thesaurusService.getDomainTerms('decisionTypes').then(function(o) {	
+                            //special case to replace other text
+                            $timeout(function() {
+                                $element.find(".communication-decisions").find(".other-term label")
+                                .contents().eq(2).replaceWith('  Any other decisions, notifications, declarations or communications');
+                            },500);				
                             return _.filter(o, function(item){
                                 return _.includes([ decisionSubjects.DEC_8_6,  decisionSubjects.DEC_8_7,
                                                     decisionSubjects.DEC_8_8,  decisionSubjects.DEC_8_9,
@@ -122,9 +127,10 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                       $scope.decisionResult = {}
                     }
                 }
-                
+
                
                 $scope.onCountryChange = function(code){
+                    $scope.isEu = false;
                     $scope.isEuMember = false;
                     $scope.waiting = true;
                     thesaurusService.getTerms(solr.escape('eu'),{relations:true})
@@ -132,9 +138,14 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         $scope.isEuMember = (o.narrowerTerms.indexOf(code) !== -1) ? true : false;
                         if(code == 'eu'){
                             $scope.isEuMember = true;
-                            $scope.authorityQuery = "schema_s:authority AND government_s="+ solr.escape(o.narrowerTerms.join());
+                            $scope.isEu = true;
+                            $scope.EuQuery = " AND government_s="+ solr.escape(o.narrowerTerms.join());
                         }
-                        else{ $scope.authorityQuery = 'schema_s:authority AND government_s='+ solr.escape(code);}
+                        else{
+                          $scope.isEu = false;
+                          $scope.EuQuery = ' AND government_s='+ solr.escape(code);
+                          }
+
                     })
                     .finally(function(){
                         $scope.waiting = false;
@@ -197,8 +208,8 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                       if(!$scope.decisions.isDecisionOnLmoImport && !$scope.decisions.isDecisionOnLmoDomesticUse)
                             $scope.document.importers = undefined;
-
-                        if(!$scope.decisions.isDecisionOnLmoDomesticUse)
+                        // TODO need to verify
+                       if(!$scope.decisions.isDecisionOnLmoImport)
                             $scope.document.exporters = undefined;
                     }
 
@@ -237,7 +248,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 }
 
                 $scope.isRiskAssessmentMandatory = function(){
-                    return $scope.isLmoDecisionForIntentionalIntroduction	||  $scope.isLmoDecisionForDirectUse || $scope.isSimplifiedProcedure
+                    return $scope.isLmoDecisionForIntentionalIntroduction	||  ($scope.isLmoDecisionForDirectUse && $scope.decisions.isDecisionOnLmoDomesticUse) || $scope.isSimplifiedProcedure
                 }
                 //==================================
                 //
@@ -268,6 +279,44 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 				      	return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 
+
+            $scope.onAuthorityBuildQuery = function(searchText){
+
+              if (!$scope.document || !$scope.document.government)
+                return;
+
+              var queryOptions = {
+                realm     : realm.value,
+                schemas	  : ['authority'],
+                searchText: searchText
+              }
+              if($scope.isEu){
+              queryOptions.fieldQueries = ['schema_s:authority '+$scope.EuQuery];
+              } else {
+                queryOptions.government = $scope.document.government.identifier;
+              }
+
+              return $scope.onBuildDocumentSelectorQuery(queryOptions);
+            }
+// for RiskAssesment
+             $scope.onRiskAssesmentBuildQuery = function(searchText){
+
+            if (!$scope.document || !$scope.document.government)
+              return;
+
+            var queryOptions = {
+              realm     : realm.value,
+              schemas	  : ['nationalRiskAssessment'],
+              searchText: searchText
+            }
+            if($scope.isEu){
+              queryOptions.fieldQueries = ['schema_s:nationalRiskAssessment '+$scope.EuQuery];
+            } else {
+              queryOptions.government = $scope.document.government.identifier;
+            }
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+          }
+
                 $scope.onBuildSkipGovernmentQuery = function(searchText,schemasVal){
 
                     var queryOptions = {
@@ -285,7 +334,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     if (!document)
                         return undefined;
-
+                    
                     if(!document.isAmendment){
                         document.amendedRecords     = undefined;
                         if(!$scope.documentExists && $scope.status == "ready")
@@ -356,7 +405,21 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     return $scope.sanitizeDocument(document);
                 };
-                
+				$scope.changeTransboundaryMovement = function ( isTransboundaryMovement ) {
+                    if (isTransboundaryMovement)
+                    {
+                        $scope.document.appliesToTransboundaryMovement = undefined;
+                        $scope.document.importers  = undefined;
+					} else {
+                        $scope.decisions.intentionDecisions = undefined;
+                        $scope.document.receiptDate = undefined;
+                        $scope.document.receiptAcknowledgementDate = undefined;
+                        $scope.document.communicationDate = undefined;
+                        $scope.document.exporters = undefined;
+                        $scope.document.importers  = undefined;
+					}
+				
+                }
                 function cleanLMOSection(){
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&&  !$scope.isLmoDecisionForDirectUse &&			
                         !$scope.isSimplifiedProcedure &&  !$scope.isDecisionOnTransitOfLMOs && !$scope.isDecisionOnContainedUseOfLMOs &&
@@ -367,6 +430,12 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&& !$scope.isLmoDecisionForDirectUse && !$scope.isSimplifiedProcedure)
                         $scope.document.riskAssessments = undefined;
+
+                    if($scope.isLmoDecisionForIntentionalIntroduction){
+                        $scope.decisions.directUseDecisions = undefined;
+                        $scope.document.exporters           = undefined;
+                        $scope.document.importers           = undefined;
+                    }
                 }
 
                 $scope.setDocument({})
@@ -417,11 +486,11 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         })
                         $scope.options.directUseDecisions()
                         .then(function(options){
-                            var selectedOption =  _.find(options, function(o){
+                            var selectedOptions =  _.filter(options, function(o){
                                 return _.includes(decisionTypesIdentifiers, o.identifier);
                             })
-                            if(selectedOption)
-                                $scope.decisions.directUseDecisions =  {identifier:selectedOption.identifier}
+                            if(selectedOptions)
+                                $scope.decisions.directUseDecisions =  selectedOptions
                         })
                     }                    
                 });    

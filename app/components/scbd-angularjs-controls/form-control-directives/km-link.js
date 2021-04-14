@@ -252,7 +252,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 				{
 					$scope.editor.isLanguageSelect  = false;
 					$scope.editor.urlMissing 		= false;					
-					if($scope.editor.url == 'https://www.' || $scope.editor.url == 'http://www.'){
+					if($scope.editor.url == 'https://www.' || $scope.editor.url == 'http://www.' || $.trim($scope.editor.url||'')==""){
 						$scope.editor.urlMissing = true;
 					}
 					if(!$scope.editor.language){

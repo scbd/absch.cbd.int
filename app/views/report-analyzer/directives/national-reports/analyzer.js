@@ -298,7 +298,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                     }
                     else{
                         
-                        require(['printThis', 'text!./print-footer.html'],
+                        require(['printThis', 'text!views/forms/view/print-footer.html'],
                          function(printObj, header, footer){						
                             var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
                             if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)

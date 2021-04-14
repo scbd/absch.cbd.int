@@ -1551,8 +1551,8 @@ div.recordDefault:hover {
 .registerpage-content table {
     width: 100%;
 }
-#Record * {
-    font-size: 14px;
+#Record blockquote {
+    font-size: inherit!important;
 }
 #Record .panel-body {
     padding: 10px;
@@ -2107,6 +2107,9 @@ a.disabled{
 }
 .edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
     white-space: inherit;
+}
+.edit-biosafety-decision-directive .communication-decisions ul .other-term table>tbody>tr>td:first-child{
+    width: 35% !important;
 }
 
 .easing {
