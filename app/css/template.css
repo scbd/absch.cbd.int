@@ -1653,7 +1653,7 @@ div.recordDefault:hover {
 }
 
 #Record .pre-wrap{
-	white-space: pre-wrap;
+white-space: pre-wrap;
 }
 
 .partystatus {
@@ -1846,7 +1846,7 @@ legend+ .help-info {
 .jr_next{
      background-color:#428bca!important;
 }
-.jr_target{box-shadow: none!important;} 
+.jr_target{box-shadow: none!important;}
 
 
 .label-party {font-size: 16px;background-color: #5F4586;color:white; min-width:30px}
@@ -2115,7 +2115,10 @@ a.disabled{
 
 #docketSideBar .news-date{
     float:unset;
-    font-size: 10px; text-transform: uppercase;             
+    font-size: 10px; text-transform: uppercase;
+}
+#docketSideBar.container-full{
+    padding-bottom: 10px;
 }
 #docketSideBar .noimage{
     display: table-cell; 
@@ -2125,30 +2128,185 @@ a.disabled{
 }
 
 #docketSideBar .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    background-color: #fff;
-    min-height: 100px;
+    background: #fff;
+    float: left;
+    width: 100%;
+    padding: 7px;
+    margin: 0;
 }
 
 #docketSideBar .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    background: #ddd;
+    background-color: rgb(235, 236, 240);
 }
 #docketSideBar .article-open {
     background: #fff!important;
 }
 
 
-#docketSideBar .card .header{
-    font-size:14px;
-    font-weight: 500;
+#docketSideBar .card h5{
+    padding: 0;
+    margin-top: 0;
+    font-size: 14px;
 }
-#docketSideBar .help-header{
-    min-height: 16.43px;
-    padding: 15px;
-    border-bottom: 1px solid #faf9f8;
-    background: #d1d1d1;
+#docketSideBar h5:after{
+    content: '';
+    display: block;
+    margin-left: 1px;
+    margin-top: 0.9rem;
+    border-top: #00405c solid 4px;
+    width: 40%;
+
+}
+#docketSideBar h5:hover:after{
+    border-top: #A05800 solid 4px;
+}
+#docketSideBar p{
+    font-size: 12px;
+    font-weight: normal;
+    line-height: 16px;
+    color: #656565;
+    margin-bottom: 5px
+}
+
+.box-bottom{
+    float: left;
+    width: 100%;
+    font-size: 11px;
+    color: #8c8c8c
+}
+.box-bottom i{
+    font-size: 16px;
+    color: #000;
+    padding-right: 5px
+}
+.box-bottom span {
+    text-align: right;
+    float: right;
+
+}
+.box-bottom span a  {
+
+    line-height: 16px;
+    padding: 0;
+
+}
+.box-bottom span a i {
+    text-align: right;
+    font-size: 18px;
+    color: #006692 !important;
+    font-weight: bold !important;
+}
+
+.box-bottom span a:hover{
+    padding-right: 5px
+}
+
+
+
+
+
+#docketSideBar .closebtn {
+    position: absolute;
+    right: 10px;
+    font-size: 24px;
+    padding: 2px 10px;
+    color: rgb(66, 82, 110) !important;
+
+}
+#docketSideBar .closebtn:hover{
+text-decoration: none;
+cursor: pointer;
+background: rgba(9, 30, 66, 0.08) !important;
+}
+#docketSideBar .sidenav-heading{
+float: left;
+width: 100%;
+background: #FAFBFD;
+padding: 7px 10px;
+color: #000;
+text-transform: capitalize;
+font-weight: 500;
+font-size: 16px;
+border-bottom: #EAEBED 1px solid;
+border-top: #EAEBED 1px solid;
+text-align: center;
+}
+#docketSideBar .search-field{
+float: left;
+width: 100%;
+margin-top: 5px;
+padding: 5px 8px;
+padding-bottom: 0px;
+margin-bottom: -10px;
+
+}
+#docketSideBar .search-field .has-search .form-control-feedback {
+    right: initial;
+    left: 0;
+    color: #333;
+}
+#docketSideBar .search-field .has-search .form-control {
+    padding-right: 12px;
+    padding-left: 34px;
+}
+
+#docketSideBar .search-field input[type="search"]::-webkit-search-cancel-button {
+-webkit-appearance: searchfield-cancel-button;
+    cursor: pointer;
+}
+
+.side-bar-widget::-webkit-scrollbar {
+width: 0.7em;
+}
+
+.side-bar-widget::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.side-bar-widget::-webkit-scrollbar-thumb {
+background-color: #b7b7b7;
+}
+.side-bar-widget div .help-articles{
+cursor:pointer;padding-top: 0px;
+}
+
+#docketSideBar  .side-nav-bottom{
+height: 40px;
+position:fixed;
+bottom:0;
+width: 100%;
+background: #00483A;
+padding: 7px;
+text-align: center;
+color: #fff;
+box-sizing: border-box;
+background-color: rgb(250, 251, 252);
+border-top: 2px solid rgb(235, 236, 240);
+-webkit-box-pack: justify;
+justify-content: space-between;
+}
+
+#docketSideBar  .side-nav-bottom ul li{
+float: left;
+padding: 0 7px;
+list-style: none;
+border-right: #fff 1px solid;
+}
+#docketSideBar  .side-nav-bottom ul li a{
+font-size: 11px;
+color: rgb(107, 119, 140) !important;
+padding: 0;
+font-weight: normal;
+cursor: pointer;
+
+}
+#docketSideBar  .side-nav-bottom ul li a:hover{
+    font-size: 11px;
+    color: rgb(107, 119, 140) !important;
+    padding: 0;
+    font-weight: normal;
+    cursor: pointer;
+    text-decoration: underline;
 }
 #docketSideBar .footer{
     bottom: 0px;
@@ -2162,6 +2320,18 @@ a.disabled{
     max-height: 100%;
 }
 
+#docketSideBar .side-bar-widget {
+display: flex;
+padding-left: 10px;
+padding-right: 10px;
+background-color: #fff;
+overflow-y: auto;
+overflow-x: hidden;
+height: calc(100vh - 158px);
+}
+
+
+
 
 #wrapper {
     padding-left: 0;
@@ -2174,27 +2344,29 @@ a.disabled{
 #wrapper.toggled {
     padding-right: 20%;
 }
-
+scbd-footer.toggled #CBD-Branding.footer {
+padding-right: 23%;
+}
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
     right: 0px;
     width: 0;
-    height: 100%;
+    height: auto;
     margin-right:0px;
-    overflow-y: auto;
     background: #000;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     background-color: #fff;
-    box-shadow: 0 5px 15px rgb(0 0 0 / 50%); 
+    box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
     padding: 0px 0px 0px 0px;
 }
-/* #sidebar-wrapper.activate{
-    padding:10px 
-} */
+ #sidebar-wrapper div div.container-full.page-content{
+    margin: 0;
+    background: #fff;
+    }
 
 #wrapper.toggled #sidebar-wrapper {
     width: 20%;
@@ -2215,7 +2387,7 @@ a.disabled{
 
 @media(min-width:768px) {
     #wrapper {
-        padding-right: 20%;
+        padding-right: 23%;
     }
 
     #wrapper.toggled {
@@ -2223,7 +2395,8 @@ a.disabled{
     }
 
     #sidebar-wrapper {
-        width: 20%;
+        width: 23%;
+        height: 100%;
     }
 
     #wrapper.toggled #sidebar-wrapper {

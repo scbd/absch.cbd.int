@@ -89,12 +89,14 @@ import 'views/directives/docked-side-bar'
             $rootScope.$on('event:open-left-side-bar', function(evt, type){
                 
                 $("#wrapper").addClass("toggled");
+                $("scbd-footer").removeClass("toggled");
                 if($scope.openSideBarType == type || type == undefined){
                     $scope.openSideBarType = undefined;
                 }
                 else {
                     $scope.openSideBarType = type;
                     $("#wrapper").removeClass("toggled");
+                    $("scbd-footer").addClass("toggled");
                 }
             });
 
