@@ -108,11 +108,24 @@ import "views/forms/view/view-resource.directive";
 					var queryOptions = {
 						realm     : realm.value,
 						//fieldQueries: ['schema_s:contact AND type_s:person'],
+						//fieldQueries: ['schema_s:organization'],
 						fieldQueries: ['schema_s:contact'],
 						searchText: searchText
 					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
+				$scope.onBuildAmendedVlrQuery = function(searchText){
+					if (!$scope.document || !$scope.document.government)
+       					 return;
+									
+                    var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['resource'],
+                        searchText: searchText
+                    }					
+					queryOptions.government = $scope.document.government.identifier;			
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                }
 				//============================================================
 				//
 				//============================================================

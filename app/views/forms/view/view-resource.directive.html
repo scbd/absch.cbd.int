@@ -43,14 +43,14 @@
 		<div ng-show="document.publisher">
 			<label>Publisher</label>
 			<div compare-val>
-				<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+				<km-value-ml html value="document.publisher" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.source">
 			<label>Source</label>
 			<div compare-val>
-				<km-value-ml value="document.source" locales="locale"></km-value-ml>
+				<km-value-ml html value="document.source" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.publicationDate">
@@ -67,7 +67,7 @@
 		<div ng-show="document.rights">
 			<label>Rights</label>
 			<div compare-val>
-			 	<km-value-ml value="document.rights" locales="locale"></km-value-ml>
+			 	<km-value-ml html value="document.rights" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -97,7 +97,12 @@
 		<!-- TODO need to convert the code, split the list into country and regions  -->
 		<div ng-show="document.countryRegions">
 			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
-			{{document.countryRegions}}
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="term in document.countryRegions" ng-bind="term|term|lstring:locale"></li>
+				</ul>
+			</div>
+			
 		</div>
 
 		<div ng-show="document.aichiTargets">
@@ -222,7 +227,7 @@
 			<div ng-show="document.relevantInformation">
 				<label>Any other relevant information</label>
 				<div compare-val="relevantInformation">
-				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				<km-value-ml html value="document.relevantInformation" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 

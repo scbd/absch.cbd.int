@@ -10,6 +10,42 @@
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
 								<div class="well no-shadow bg-white">
+									<legend>Amendment</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="isAmendment" required caption="Is this a new record or a modification to an existing record?">
+                                                
+                                                <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+    
+                                    <!-- IF NO SECTION -->
+                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}"  style="padding-top:0;padding-bottom:0;">
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">
+                                                    If no, the following information is not required.
+                                                </h3>
+												<div class="row">
+													<div class="col-xs-12">
+														<div class="km-control-group" name="amendedRecords" caption="Please provide the BCH record number of the record that is being updated">	
+
+																<div document-selector ng-model="document.amendedRecords" question="amendedRecords" caption="Update of an existing record"
+																on-build-query="onBuildAmendedVlrQuery(searchText)" allow-new="true"
+																allow-new-schema="resource"></div>
+														</div>
+													</div>
+													
+												</div>
+    
+                                            </div>
+                                        </div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
 									<legend>General information</legend>
 			
                                     <div class="row">
@@ -38,16 +74,15 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas">
-												<div class="help-info">This section provides a broad classification of biosafety thematic areas to assist BCH users 
-													in searching for the record (a full description is provided elsewhere in the record).</div>
+												<div class="help-info">this is a test section, we will replace with Type of resource later. </div>
 												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" ng-change="onThematicAreaChange(document.bchSubjects);" terms="options.bchSubjects()"
 														 binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
 											</div>
 										</div>
-                                    </div>
+                                    </div> -->
 
 									<div class="row">
 										<div class="col-xs-12">
@@ -56,7 +91,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row"><div class="col-xs-12 km-control-group">and/or</div></div>
+									<div class="row"><div class="col-xs-12"><div class="km-control-group">and/or</div></div></div>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="organizations" caption="Reference to the authoring organisation(s)">
@@ -83,7 +118,7 @@
 										</div>
 									</div>
 									<!-- TODO NEED TO CHANGE  -->
-									<div class="row">
+									<!-- <div class="row">
 										<div class="col-xs-6">
 											<div class="km-control-group" required name="publicationYear" caption="Publication year">
 												<select class="form-control" required name="publicationYear" ng-model="document.years" convert-to-number>
@@ -107,6 +142,13 @@
 													 <option value="11">November</option>
 													 <option value="12">December</option>
 												</select>
+											</div>
+										</div>
+									</div> -->
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="publicationDate" caption="Publication Date">	
+												<div km-textbox-ml name="publicationDate" ng-model="document.publicationDate" placeholder="mm-yyyy" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
