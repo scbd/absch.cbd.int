@@ -1,24 +1,16 @@
-﻿<div id="docketSideBar" class="container-full page-content">
-    <a class="closebtn" ng-click="closeLeftSideBar()">&times;</a>
-    <div class="sidenav-heading">help
-        <div class="search-field">
-            <form action="#">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="search">
-                    <div class="input-group-btn">
-                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                    </div>
-            </div>
-        </form>
-    </div></div>
+﻿<div id="docketSideBar">
+    <div class="help-header">
+        <button type="button" class="close pull-right" ng-click="closeLeftSideBar()"><span aria-hidden="true">×</span></button>
+        <h4 class="modal-title" id="myModalLabel2" ng-bind="type|uppercase"></h4>
+    </div>
 
-    <div class="side-bar-widget">
-        <div ng-if="loading" style="margin: 50%">
+    <div style="display: flex;padding-left: 10px;padding-right: 10px; background-color: #fff;">
+        <div ng-if="loading">
             <i class="fa fa-spin fa-spinner fa-3x"></i> Loading...
         </div>
-        <div ng-if="!loading && type=='announcements'">
+        <div   ng-if="!loading && type=='announcements'">
             <div class="row">
-                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
+                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" style="cursor:pointer;padding-top: 15px;;" class="col-xs-12">
                     <div class="card" style="padding: 2px 16px;" ng-class="{'article-open':showArticle}" >
                         <div>
                             <img ng-src="{{getSizedImage(article.coverImage.url, '300x300')}}" style="width:100%;"></img>
@@ -36,14 +28,14 @@
                             <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
                             <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                         </div>
-                    </div>
+                    </div>                           
                 </div>
             </div>
         </div>
 
         <div  ng-if="!loading && type=='help'">
             <div class="row">
-                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
+                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" style="cursor:pointer;padding-top: 15px;;" class="col-xs-12">
                     <div class="card" style="padding: 2px 16px;" ng-class="{'article-open':showArticle}" >
                         <div>
                             <h4 class="header">
@@ -61,15 +53,11 @@
                             <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
                             <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                         </div>
-                    </div>
+                    </div>                           
                 </div>
             </div>
         </div>
 
     </div>
-    <div class="side-nav-bottom"><ul>
-        <li><a>Help section</a></li>
-        <li><a>Help widget</a></li>
-        <li><a>Copyrights</a></li>
-    </ul></div>
+    
 </div>
