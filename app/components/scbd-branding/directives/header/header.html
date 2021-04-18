@@ -26,6 +26,11 @@
       .navbar .right-side-help-menus.active{
         background: #eee;
       }
+      @media (max-width: 768px) {
+        .navbar .right-side-help-menus{
+          display: none;
+        }
+      }
     </style>
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -54,6 +59,7 @@
         <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
         <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
       </ul>
+    </div>
   </nav>
 
   <login-account user="user" ></login-account>
