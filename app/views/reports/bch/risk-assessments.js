@@ -19,7 +19,7 @@ app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchSer
 			function loadLMORiskAssessments(identifier){			
 				var query = {
 					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + solr.escape(identifier),
-					additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b',
+					additionalFields : 'lmoTransformationEvents_ss,scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b,scopePharmaceutical_b,scopeTransit_b,',
 					sort: 'government_EN_t asc'
 				}
 				//  AND scopes_ss:*

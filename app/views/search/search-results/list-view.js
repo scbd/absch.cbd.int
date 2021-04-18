@@ -48,7 +48,7 @@ import 'views/search/search-results/result-default';
                     // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
                     if(realm.is('BCH')){
                         lQuery.additionalFields  = 'traitsDiseasesResistance_b,traitsHerbicidesResistance_b,traitsPhysiologyChanges_b,traitsQualityChanges_b,traitsMedicalProduction_b,traitsOther_b'
-                        lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b'
+                        lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b,scopePharmaceutical_b,scopeTransit_b,'
                         //'schema_s', 'government_s', 
                     }
                     if(sort && sort != 'relevance asc')
