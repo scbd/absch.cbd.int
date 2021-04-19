@@ -15,7 +15,7 @@
 		<div ng-if="searchKeyword && searchKeyword.length > 2"  class="optionsbox">
 			<table class="table table-condensed" >
 				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
-					<td  ng-class="{'no-border':$first}"> 
+					<td  ng-class="{'no-border':$first}">
 						<label>
 							<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
 								ng-required="IsRequired()" value="{{term.identifier}}"/> <span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span>
@@ -37,7 +37,7 @@
 
 				<button class="btn btn-default btn-xs pull-right" ng-click="clear()" ng-if="binding.length>0">
 						<i class="fa fa-remove"  ></i> Clear selection</button>
-			<ul ng-if="!tabularShape" >
+			<ul ng-if="!tabularShape" style="list-style: none;">
 				<script type="text/ng-template" id="term-check-tree-renderer.html">
 					<label>
 						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
@@ -115,12 +115,24 @@
 				<td ng:repeat="term in rootTerms" ng-hide="otherTermIdentifier==term.identifier" ng-include="'term-check-tree-renderer.html'"></td>
 			 	
 				<style>
-				   tr td>label {
+				  table tr td>label {
 					   font-weight: 600;
-					   padding-bottom: 25px;
-					   margin: 5px;
 					   text-decoration: underline;
 				   }
+				  table tr td ul {
+					  display: contents;
+					  list-style: none;
+				  }
+				  table tr {
+					  display: grid;
+					  grid-template-columns: repeat(5, 1fr);
+				  }
+				  @media (max-width: 767px){
+					  table tr {
+						  display: grid;
+						  grid-template-columns: repeat(2, 1fr);
+					  }
+				  }
 				</style>
 			</table>
 

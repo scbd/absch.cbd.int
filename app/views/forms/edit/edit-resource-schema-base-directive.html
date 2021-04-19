@@ -68,26 +68,17 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-												this section will be changed to table
-												<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
-														 binding-type="term[]" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-									<!-- <div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="bchSubjects" caption="Thematic areas">
-												<div class="help-info">this is a test section, we will replace with Type of resource later. </div>
-												<div km-term-check name="bchSubjects" required ng-model="document.bchSubjects" ng-change="onThematicAreaChange(document.bchSubjects);" terms="options.bchSubjects()"
+												this section will be changed to Cols..
+												<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypesVlr()"
 														 binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
 											</div>
 										</div>
-                                    </div> -->
+									</div>
 
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="authors" caption="Author(s)">
-												<div km-rich-textbox ng-model="document.authors" rows="2" locales="document.header.languages"></div>
+												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -96,7 +87,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="organizations" caption="Reference to the authoring organisation(s)">
 												<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
-												<div document-selector required type="radio" ng-model="document.organizations" question="organizations"
+												<div document-selector required type="checkbox" ng-model="document.organizations" question="organizations"
 													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true" question="organizations"
 													 allow-new-schema="contact"></div>
 											</div>
@@ -105,7 +96,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="publisher" caption="Publisher">
-												<div km-rich-textbox name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
+												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -113,42 +104,24 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="source" caption="Source">
 												<div class="help-block">A reference to a resource from which the present resource is derived, e.g. the name of a journal for an article published in a journal.</div>
-												<div km-rich-textbox name="source" ng-model="document.source" locales="document.header.languages"></div>
+												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
-									<!-- TODO NEED TO CHANGE  -->
 									<!-- <div class="row">
-										<div class="col-xs-6">
-											<div class="km-control-group" required name="publicationYear" caption="Publication year">
-												<select class="form-control" required name="publicationYear" ng-model="document.years" convert-to-number>
-													<option ng-repeat="option in years" value="{{option.id}}">{{option.name}}</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-xs-6">
-											<div class="km-control-group" required name="publicationMonth" caption="Publication month">
-												<select class="form-control" required name="publicationMonth" ng-model="document.publicationMonth" convert-to-number>
-													 <option value="1">January</option>
-													 <option value="2">February</option>
-													 <option value="3">March</option>
-													 <option value="4">April</option>
-													 <option value="5">May</option>
-													 <option value="6">June</option>
-													 <option value="7">July</option>
-													 <option value="8">August</option>
-													 <option value="9">September</option>
-													 <option value="10">October</option>
-													 <option value="11">November</option>
-													 <option value="12">December</option>
-												</select>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="publicationDate" caption="Publication Date">	
+												<div km-textbox-ml name="publicationDate" ng-model="document.publicationDate" placeholder="mm-yyyy" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div> -->
 									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="publicationDate" caption="Publication Date">	
-												<div km-textbox-ml name="publicationDate" ng-model="document.publicationDate" placeholder="mm-yyyy" locales="document.header.languages"></div>
+										<div class="col-md-12">
+											<div class="km-control-group" required name="publicationDate" caption="Publication Date"
+											help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: VLR">
+												<div km-date placeholder="YYYY-MM" name="publicationDate" required 
+												format="yyyy-mm" start-view="months" min-view-mode="months"
+												ng-model="document.publicationDate"></div>
 											</div>
 										</div>
 									</div>
@@ -157,7 +130,7 @@
 											<div class="km-control-group" name="rights" caption="Rights">
 												<div class="help-block">Information about rights held in and over the resource, such as copyright holder, 
 													and availability for reproduction for educational or non-profit purposes.</div>
-												<div km-rich-textbox name="rights" ng-model="document.rights" locales="document.header.languages"></div>
+												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -202,15 +175,41 @@
 											</div>
 										</div>
 									</div>
+									<!-- TODO need to convert the code, split the list into country and regions   -->
 									<div class="row">
-										<!-- TODO need to convert the code, split the list into country and regions  -->
+										 
 										<div class="col-xs-12">
-											<div class="km-control-group" name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
+											<div class="km-control-group" name="countryRegions" caption="Country(ies), Regional or Economic group(s) related to the resource">
 												<div km-select style="display: inline-block" name="regions" ng-model="document.countryRegions" items="options.countryRegions()"
 												 multiple placeholder="Select a country(ies) and/or region(s)..."></div>
 											</div>
 										</div>
 									</div>
+
+									<!-- <div class="row">
+    
+										<div class="col-xs-12">
+											<label>Country(ies), Regional or Economic group(s) related to the resource</label>
+										</div>
+									
+										<div class="col-md-5">
+											<div class="km-control-group small"  name="countryRegions.countries" caption="Countries">
+												<div km-select multiple name="countryRegions.countries" 
+												ng-model="countryRegions.countries" placeholder="Please select a country..." items="options.countries()"></div>
+											</div>
+										</div>
+									
+										<div class="col-md-1 small">and/or</div>
+									
+										<div class="col-md-6">
+											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Geographical or political/economic group(s)">
+												<div km-select multiple name="countryRegions.regions"
+													 ng-model="countryRegions.regions" placeholder="Please select one option"
+													 items="options.regions()"></div>
+											</div>
+										</div>
+										
+									</div> -->
 
 								</div>
 								
@@ -245,8 +244,8 @@
 								<legend>Keywords related to Biosafety</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="bchSubjects" caption="Biosafety Thematic Areas">
-											<div km-term-check name="bchSubjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
+										<div class="km-control-group" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
+											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
 											 binding-type="term[]"></div>
 										</div>
 									</div>
@@ -255,21 +254,21 @@
 						        
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="raRecommend" caption="Guidance on risk assessment of living modified organisms">
-												<div km-yes-no required ng-model="document.biosafety.raRecommend" ng-click="onRaRecommendChange(document.biosafety.raRecommend)"  locales="document.header.languages"></div>
+											<div class="km-control-group" name="biosafety.raRecommend" caption="Guidance on risk assessment of living modified organisms">
+												<div km-yes-no required name="biosafety.raRecommend" ng-model="document.biosafety.raRecommend" ng-click="onRaRecommendChange(document.biosafety.raRecommend)"  locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.raRecommend" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="raAuthorAffiliation"  caption="Author affiliation">
+														<div class="km-control-group" name="biosafety.raAuthorAffiliation"  caption="Author affiliation">
 															<div class="help-block">please provide information on the author affiliation</div>
-															<div km-term-check name="raAuthorAffiliation" ng-model="document.raAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
+															<div km-term-check name="biosafety.raAuthorAffiliation" ng-model="document.biosafety.raAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
 																 binding-type="term[]" locales="document.header.languages">
 															</div>
 														</div>
 													</div>
 
 													<div class="col-xs-12">
-														<div class="km-control-group" name="raSubjects" required  caption="Please indicate to which section(s) of the “Guidance” this background material is relevant">
-															<div km-term-check name="raSubjects" required ng-model="document.raSubjects" terms="options.bchRaSubjects()"
+														<div class="km-control-group" name="biosafety.raSubjects" required  caption="Please indicate to which section(s) of the “Guidance” this background material is relevant">
+															<div km-term-check name="biosafety.raSubjects" required ng-model="document.biosafety.raSubjects" terms="options.bchRaSubjects()"
 																 binding-type="term[]" locales="document.header.languages">
 															</div>
 														</div>
@@ -282,30 +281,29 @@
 									<!-- end of condation  -->
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="addressmodifiedOrganisms" caption="Does this resource address one or more specific LMOs?" required>
-												<div km-yes-no required ng-model="document.addressmodifiedOrganisms"  locales="document.header.languages"></div>
-												<div ng-if="document.addressmodifiedOrganisms" style="margin-top: 15px;">
+											<div class="km-control-group" name="biosafety.addressmodifiedOrganisms" caption="Does this resource address one or more specific LMOs?" required>
+												<div km-yes-no required name="biosafety.addressmodifiedOrganisms" ng-model="document.biosafety.addressmodifiedOrganisms"  locales="document.header.languages"></div>
+												<div ng-if="document.biosafety.addressmodifiedOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="modifiedOrganisms"  caption="LMO(s) identification">
-															<div document-selector required type="checkbox"  ng-model="document.modifiedOrganisms"
+														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="LMO(s) identification">
+															<div document-selector name="biosafety.modifiedOrganisms" required type="checkbox"  ng-model="document.biosafety.modifiedOrganisms"
 															   on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true"  filter="true"
 															   allow-new-schema="modifiedOrganism"></div>
+														</div>
 													</div>
-													
 												</div>
 											</div>
 										</div>
 									</div>
 
-
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="addressOrganisms" caption="Does this resource address one or more specific organisms?" required>
-												<div km-yes-no required ng-model="document.addressOrganisms"  locales="document.header.languages"></div>
-												<div ng-if="document.addressOrganisms" style="margin-top: 15px;">
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Does this resource address one or more specific organisms?" required>
+												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  locales="document.header.languages"></div>
+												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="organisms"  caption="Organism(s) identification">
-															<div document-selector required ng-model="document.organisms"
+														<div class="km-control-group" required name="biosafety.organisms"  caption="Organism(s) identification">
+															<div document-selector name="biosafety.organisms" required ng-model="document.biosafety.organisms"
 																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
 																 allow-new-schema="organisms"></div>
 														</div>
@@ -319,12 +317,12 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="addressGenes" caption="Does this resource address one or more specific genetic elements?" required>
-												<div km-yes-no required ng-model="document.addressGenes"  locales="document.header.languages"></div>
-												<div ng-if="document.addressGenes" style="margin-top: 15px;">
+											<div class="km-control-group" name="biosafety.addressGenes" caption="Does this resource address one or more specific genetic elements?" required>
+												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  locales="document.header.languages"></div>
+												<div ng-if="document.biosafety.addressGenes" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="genes"  caption="Gene(s)  identification">
-															<div document-selector required type="checkbox"  ng-model="document.genes"
+														<div class="km-control-group" required name="biosafety.genes"  caption="Gene(s)  identification">
+															<div document-selector name="biosafety.genes" required type="checkbox"  ng-model="document.biosafety.genes"
 																   on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true"  filter="true"
 																   allow-new-schema="dnaSequence"></div>
 														</div>
