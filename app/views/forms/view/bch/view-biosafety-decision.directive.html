@@ -81,16 +81,17 @@
 				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
 			</div>
 		</div>
-		<div ng-if="document.jurisdictions.length">
+		<!-- Not used -->
+		<!-- <div ng-if="document.jurisdictions.length">
 			<label>Jurisdiction</label>
 			<div class="km-value" compare-val="jurisdictions">
 				<ul class="list">
 					<li ng-repeat="item in document.jurisdictions" ng-bind="item|term:locale"></li>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 		<div ng-if="document.jurisdictionsDetails">
-			<label>Jurisdictions details</label>
+			<label>Jurisdiction</label>
 			<div compare-val>
 				<km-value-ml value="document.jurisdictionsDetails" locales="locale"></km-value-ml>
 			</div>
@@ -100,7 +101,7 @@
 			<label>Subject(s) of the decision</label>
 			<div class="km-value" compare-val="decisionTypes">
 				<ul class="list">
-					<li ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}" 
+					<li ng-class="{'decision-types-other':item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}" ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
 					ng-repeat="item in document.decisionTypes" ng-bind="item|term:locale"></li>
 				</ul>
 			</div>
@@ -437,7 +438,7 @@
 <!--=============SECTION H start ========================-->
 
 	<div ng-if="document.modifiedOrganisms || document.riskAssessments">
-		<legend>LMO & risk assessment</legend>
+		<legend>LMO identification & risk assessment</legend>
 		<div ng-if="document.modifiedOrganisms">
 			<label>LMO identification</label>
 			<div  class="km-value" compare-val>
