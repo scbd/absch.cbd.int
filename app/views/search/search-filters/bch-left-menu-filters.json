@@ -31,6 +31,7 @@
 			"term": "decisionTypes",
 			"title": "Type of Decision/Document",
 			"field": "decisionTypes_ss",
+			"otherTerm":false,
 			"relatedField":"decisionTypes_REL_ss"
 		},
 		{
@@ -38,6 +39,7 @@
 			"term": "decisionLMOFFPSubject",
 			"title": "Use(s) of LMO",
 			"field": "uses_ss",
+			"otherTerm":false,
 			"relatedField":"uses_REL_ss"
 		},
 		{
@@ -81,6 +83,7 @@
 		{
 			"type": "thesaurus",
 			"term": "techniqueUsed",
+			"otherTerm":false,
 			"title": "Techniques used for the modification",
 			"field": "lmoTechniquesUsed_ss"
 		},
