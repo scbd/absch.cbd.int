@@ -139,12 +139,12 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         if(code == 'eu'){
                             $scope.isEuMember = true;
                             $scope.isEu = true;
-                            $scope.EuQuery = " AND government_s="+ solr.escape(o.narrowerTerms.join());
+                            $scope.EuQuery = " AND government_s:("+ solr.escape(o.narrowerTerms.join(' ')) + ')';
                         }
                         else{
                           $scope.isEu = false;
-                          $scope.EuQuery = ' AND government_s='+ solr.escape(code);
-                          }
+                          $scope.EuQuery = ' AND government_s:'+ solr.escape(code);
+                        }
 
                     })
                     .finally(function(){
@@ -290,11 +290,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 schemas	  : ['authority'],
                 searchText: searchText
               }
-              if($scope.isEu){
               queryOptions.fieldQueries = ['schema_s:authority '+$scope.EuQuery];
-              } else {
-                queryOptions.government = $scope.document.government.identifier;
-              }
 
               return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
