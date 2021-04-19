@@ -53,7 +53,7 @@
                                     <div ng-if="document.isAmendment">
                                         <div class="row">
 											<div class="col-xs-12">
-												<div class="km-control-group" required name="amendedRecords" caption="Please select the record(s) containing the decision being amended">
+												<div class="km-control-group" required name="amendedRecords" caption="Please select the record(s) containing the decision or communication being amended">
 													<div class="alert alert-danger" ng-if="document.isAmendment && !document.government.identifier">
 														Please select a government.
 													</div>	
@@ -256,9 +256,9 @@
 									<div class="row" >
 										<div class="col-xs-12">
 											<div class="alert alert-danger" ng-if="isLmoDecisionForIntentionalIntroduction">
-												<strong>Note:</strong> The first two categories in the field Subject of the decision, notification, communication or declaration above have been selected
+												<strong>Note:</strong> The first two categories in the field <i>Subject of the decision, notification, communication or declaration</i> above have been selected
 												indicating that this record refers to a decision addressing an LMO for both intentional introduction into the environment
-												AND for direct use as food or feed, or for processing. Accordingly, the field below, Type of decision, is not active because the information (including information on the contact details of the importer/exporter or applicant) has already been provided. Should this not be the case, please create two different records, one for a decision on an LMO for intentional introduction into the environment and one for a decision on an LMO-FFP.
+												AND for direct use as food or feed, or for processing. Accordingly, the field below, <i>Type of decision</i>, is not active because the information (including information on the contact details of the importer/exporter or applicant) has already been provided. Should this not be the case, please create two different records, one for a decision on an LMO for intentional introduction into the environment and one for a decision on an LMO-FFP.
 											</div>
 										</div>
 									</div>
