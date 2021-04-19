@@ -20,37 +20,36 @@
 		<div ng-show="document.resourceTypes">
 			<label>Type(s) of resource</label>
 			<div class="km-value" compare-val>
-				<view-terms-hierarchy ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypes"></view-terms-hierarchy>
+				<view-terms-hierarchy ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
+				
 			</div>
 		</div>
 		<div ng-show="document.authors">
 			<label>Author(s)</label>
 			<div compare-val>
-				<km-value-ml html value="document.authors" locales="locale"></km-value-ml>
+				<km-value-ml value="document.authors" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.organizations">
 			<label>Name of the person or organization who has authored the publication or information resource.</label>
-			<div class="row">
 				<div class="km-value" compare-val="organizations">
-				<div class="col-sm-12" ng-repeat="organization in organizations">
-						<div view-record-reference ng-model="organization" locale="locale"></div>
+					<div class="col-sm-12" ng-repeat="organization in organizations">
+							<div view-record-reference ng-model="organization" locale="locale"></div>
+					</div>
 				</div>
-				</div>
-			</div>
 		</div>
 
 		<div ng-show="document.publisher">
 			<label>Publisher</label>
 			<div compare-val>
-				<km-value-ml html value="document.publisher" locales="locale"></km-value-ml>
+				<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.source">
 			<label>Source</label>
 			<div compare-val>
-				<km-value-ml html value="document.source" locales="locale"></km-value-ml>
+				<km-value-ml value="document.source" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.publicationDate">
@@ -67,7 +66,7 @@
 		<div ng-show="document.rights">
 			<label>Rights</label>
 			<div compare-val>
-			 	<km-value-ml html value="document.rights" locales="locale"></km-value-ml>
+			 	<km-value-ml value="document.rights" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -136,18 +135,14 @@
 				<div ng-show="document.biosafety.raAuthorAffiliation && document.biosafety.raRecommend">
 					<label>Author affiliation</label>
 					<div class="km-value" compare-val="raAuthorAffiliation">
-						<div ng-repeat="authorAffiliation in biosafety.raAuthorAffiliation">
-							<div view-record-reference ng-model="authorAffiliation" locale="locale"></div>
-						</div>
+						<view-terms-hierarchy ng-model="document.biosafety.raAuthorAffiliation" locale="locale" term-domain="bchRaAuthorAffiliation"></view-terms-hierarchy>
 					</div>
 				</div>
 
 				<div ng-show="document.biosafety.raSubjects && document.biosafety.raRecommend">
-					<label>Author affiliation</label>
+					<label>Guidance on Risk Assessment of Living Modified Organisms</label>
 					<div class="km-value" compare-val="raSubjects">
-						<div ng-repeat="raSubjects in biosafety.raSubjects">
-							<div view-record-reference ng-model="raSubjects" locale="locale"></div>
-						</div>
+						<view-terms-hierarchy ng-model="document.biosafety.raSubjects" locale="locale" term-domain="bchRaSubjects"></view-terms-hierarchy>
 					</div>
 				</div>
 				
@@ -163,9 +158,11 @@
 				<div ng-show="document.biosafety.modifiedOrganisms && document.biosafety.addressmodifiedOrganisms">
 					<label>LMO(s) identification</label>
 					<div class="km-value" compare-val="modifiedOrganisms">
-						<div ng-repeat="modifiedOrganism in biosafety.modifiedOrganisms">
-							<div view-record-reference ng-model="modifiedOrganism" locale="locale"></div>
-						</div>
+						<ul class="list">
+							<li ng-repeat="item in document.biosafety.modifiedOrganisms" >
+								<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+							</li>
+						</ul>
 					</div>
 				</div>		
 			</div>
@@ -179,9 +176,11 @@
 				<div ng-show="document.biosafety.organisms && document.biosafety.addressOrganisms">
 					<label>Organism(s) identification</label>
 					<div class="km-value" compare-val="organisms">
-						<div ng-repeat="organism in biosafety.organisms">
-							<div view-record-reference ng-model="organism" locale="locale"></div>
-						</div>
+						<ul class="list">
+							<li ng-repeat="item in document.biosafety.organisms" >
+								<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -195,9 +194,11 @@
 				<div ng-show="document.biosafety.genes && document.biosafety.addressGenes">
 					<label>Gene(s)  identification</label>
 					<div class="km-value" compare-val="genes">
-						<div ng-repeat="gene in biosafety.genes">
-							<div view-record-reference ng-model="gene" locale="locale"></div>
-						</div>
+						<ul class="list">
+							<li ng-repeat="item in document.biosafety.genes" >
+								<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</div>
@@ -227,7 +228,7 @@
 			<div ng-show="document.relevantInformation">
 				<label>Any other relevant information</label>
 				<div compare-val="relevantInformation">
-				<km-value-ml html value="document.relevantInformation" locales="locale" html></km-value-ml>
+				<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
 				</div>
 			</div>
 

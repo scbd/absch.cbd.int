@@ -33,6 +33,7 @@ import "views/forms/view/view-resource.directive";
 				$scope.isNationalUser = false;
 				$scope.keywords = [{}];
 				$scope.hasRiskAssessmentSubject = false;
+				//$scope.countryRegions		= {countries:[], regions:[]};
 
 				if ($scope.user.isAuthenticated) {
 					$scope.isNationalUser =  roleService.isNationalUser();
@@ -60,13 +61,19 @@ import "views/forms/view/view-resource.directive";
 						})
 					}],
 
-					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})},
+					resourceTypesVlr   : function() {return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})},
 					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
 					cbdSubjects		: function() {return thesaurusService.getDomainTerms('cbdSubjects',{other:true, otherType:'lstring'})}, // 14 CBD Subject Areas
 					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
 					bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');}, // raSubjects
 					absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');}, // ABS keyAreas
+
+					regions	: function() {return thesaurusService.getDomainTerms('regions')
+						.then(function(o){
+							return thesaurus.buildTree(o);
+							});
+					},
 					//absSubjects		: missing //absSubjects
 					// TODO: need to verify, need to remove unused
 					
@@ -87,13 +94,12 @@ import "views/forms/view/view-resource.directive";
 				// Useing
 				//==================================
 				$scope.onRaRecommendChange = function(value){
-					alert('ablove '+value);
 					if(!value){
-						alert('below '+value);
-						$scope.document.raAuthorAffiliation = undefined;
-						$scope.document.raSubjects = undefined;
+						$scope.document.biosafety.raAuthorAffiliation = undefined;
+						$scope.document.biosafety.raSubjects = undefined;
 					}
 				}
+				//need add more condations for lmo, gene as well
 				$scope.onBuildQuery = function(searchText, schema){
 					var queryOptions = {
 						realm     : realm.value,
@@ -149,6 +155,7 @@ import "views/forms/view/view-resource.directive";
 				//
 				//==================================
 				$scope.getCleanDocument = function(document) {
+					console.log('i am here at get cleanDocuemt');
 
 					document = document || $scope.document;
 					if ( !document )
@@ -184,6 +191,31 @@ import "views/forms/view/view-resource.directive";
 					if($scope.isABS) {
 						$scope.onResourceTypesChange( document.resourceTypes );
 					}
+
+					//TODO: add countryRegions 
+
+					// var countryRegions = []
+					// if($scope.countryRegions){
+
+					// 	if(($scope.countryRegions.countries||[]).length){
+					// 		countryRegions = $scope.countryRegions.countries
+					// 	}
+					// 	if(($scope.countryRegions.regions||[]).length){
+					// 		countryRegions = _.union(countryRegions, $scope.countryRegions.regions)
+					// 	}
+					// 	document.countryRegions = countryRegions;
+					// }
+
+					// if((doc.countryRegions||[]).length){
+					// 	$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
+					// 		$scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
+					// 			return _.find(countries, {identifier:country.identifier});
+					// 		});
+					// 		$scope.countryRegions.regions = _.filter(doc.countryRegions, function(region){
+					// 			return !_.find(countries, {identifier:region.identifier});
+					// 		});
+					// 	});
+					// }
 					
 					return $scope.sanitizeDocument(document);
 				};
