@@ -71,7 +71,7 @@ import "views/forms/view/view-resource.directive";
 
 					regions	: function() {return thesaurusService.getDomainTerms('regions')
 						.then(function(o){
-							return thesaurus.buildTree(o);
+							return Thesaurus.buildTree(o);
 							});
 					},
 					//absSubjects		: missing //absSubjects
@@ -95,8 +95,8 @@ import "views/forms/view/view-resource.directive";
 				//==================================
 				$scope.onRaRecommendChange = function(value){
 					if(!value){
-						$scope.document.biosafety.raAuthorAffiliation = undefined;
-						$scope.document.biosafety.raSubjects = undefined;
+						// $scope.document.biosafety.raAuthorAffiliation = undefined;
+						// $scope.document.biosafety.raSubjects = undefined;
 					}
 				}
 				//need add more condations for lmo, gene as well
@@ -155,7 +155,7 @@ import "views/forms/view/view-resource.directive";
 				//
 				//==================================
 				$scope.getCleanDocument = function(document) {
-					console.log('i am here at get cleanDocuemt');
+					console.log('i am getCleanDocument at directive ');
 
 					document = document || $scope.document;
 					if ( !document )

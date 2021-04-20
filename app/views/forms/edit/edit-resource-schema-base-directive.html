@@ -176,7 +176,7 @@
 										</div>
 									</div>
 									<!-- TODO need to convert the code, split the list into country and regions   -->
-									<div class="row">
+									<!-- <div class="row">
 										 
 										<div class="col-xs-12">
 											<div class="km-control-group" name="countryRegions" caption="Country(ies), Regional or Economic group(s) related to the resource">
@@ -184,23 +184,13 @@
 												 multiple placeholder="Select a country(ies) and/or region(s)..."></div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 
-									<!-- <div class="row">
+									<div class="row">
     
 										<div class="col-xs-12">
-											<label>Country(ies), Regional or Economic group(s) related to the resource</label>
+											<label>Country(ies), regional or economic group(s) covered by the resource</label>
 										</div>
-									
-										<div class="col-md-5">
-											<div class="km-control-group small"  name="countryRegions.countries" caption="Countries">
-												<div km-select multiple name="countryRegions.countries" 
-												ng-model="countryRegions.countries" placeholder="Please select a country..." items="options.countries()"></div>
-											</div>
-										</div>
-									
-										<div class="col-md-1 small">and/or</div>
-									
 										<div class="col-md-6">
 											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Geographical or political/economic group(s)">
 												<div km-select multiple name="countryRegions.regions"
@@ -208,8 +198,17 @@
 													 items="options.regions()"></div>
 											</div>
 										</div>
+
+										<div class="col-md-1 small">and/or</div>
+									
+										<div class="col-md-5">
+											<div class="km-control-group small"  name="countryRegions.countries" caption="Country name(s)">
+												<div km-select multiple name="countryRegions.countries" 
+												ng-model="document.countryRegions" placeholder="Please select a country..." items="options.countries()"></div>
+											</div>
+										</div>
 										
-									</div> -->
+									</div>
 
 								</div>
 								
