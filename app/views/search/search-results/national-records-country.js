@@ -9,7 +9,8 @@ define(['app', 'text!views/search/search-results/national-records-country.html',
             require:'^searchDirective',
             template: template, 
             scope: {
-                group:'='
+                group:'=',
+                groupQuery:'='
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                    var currentPage = 1;
@@ -26,7 +27,7 @@ define(['app', 'text!views/search/search-results/national-records-country.html',
 
                         schema.isLoading = true;
                         var query = {
-                            query   : 'schema_s:(' + key +') AND government_s:' + $scope.group.country.toLowerCase(),
+                            query   : $scope.groupQuery.query + ' AND schema_s:(' + key +') AND government_s:' + $scope.group.country.toLowerCase(),
                             sort    : 'government_EN_s asc, schemaSort_i asc, sort1_i asc, sort2_i asc, sort3_i asc, sort4_i asc, updatedDate_dt desc',
                             rowsPerPage    : number||5000,
                             start          : number ? undefined : (schema.start==0 ? 10 : schema.start),

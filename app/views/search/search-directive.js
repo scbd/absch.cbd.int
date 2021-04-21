@@ -333,7 +333,7 @@ define(['app', 'text!views/search/search-directive.html','lodash', 'json!app-dat
                                     $scope.tabs['nationalRecords'].pageCount = Math.ceil(data.data.grouped.governmentSchemaIdentifier_s.ngroups / $scope.itemsPerPage);
                                     
                                     $scope.searchResult.rawDocs = []; 
-                                    
+                                    $scope.searchResult.groupQuery = groupQuery;
                                     var countryRecords = {}
                                     _.each(data.data.grouped.governmentSchemaIdentifier_s.groups, function(record){
 

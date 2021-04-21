@@ -130,12 +130,12 @@
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
                         </div>
                         <div ng-repeat="country in searchResult.rawDocs" id="search-country-group">
-                            <national-records-country group='country'></national-records-country>
+                            <national-records-country group='country' group-query="searchResult.groupQuery"></national-records-country>
                         </div>
                         <div ng-if="nationalLoading">
                             <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
                         </div>
-                        <h4 class="bg-white" ng-if="!nationalLoading && !searchResult.rawDocs.groups.length"><br>no records found</h4>
+                        <h4 class="bg-white" ng-if="!nationalLoading && !searchResult.rawDocs.length"><br>no records found</h4>
                 </div>
                 <div class="tab-pane bg-white" ng-class="{'active':currentTab==='referenceRecords'}" ng-if="currentTab=='referenceRecords'">
                          <!-- <div block-region activate="referenceLoading"></div> -->
