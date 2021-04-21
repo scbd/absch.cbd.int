@@ -372,7 +372,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">											
-											<div class="help-block">For an unintentional transboundary movement, please provide the following</div>
+											<div class="help-block color-grey">For an unintentional transboundary movement, please provide the following</div>
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="km-control-group" name="releaseInformation" caption="Information on the place where the occurrence and/or release occurred">
@@ -390,7 +390,7 @@
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="releaseDate"  caption="Information on the estimated date of the release.">
+													<div class="km-control-group" name="releaseDate"  caption="Information on the estimated date of the release">
 														<div km-date placeholder="YYYY-MM-DD" name="releaseDate" required ng-model="document.releaseDate"></div>
 													</div>
 												</div>
@@ -421,9 +421,9 @@
 										<div class="col-xs-12" ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">											
 											<div class="row">
 												<div class="col-xs-12">		
-													<div class="km-control-group" name="illegalTransbondyMovementDetails" caption="For an illegal transboundary movement, please provide either of the following">
+													<div class="km-control-group" required name="illegalTransbondyMovementDetails" caption="For an illegal transboundary movement, please provide either of the following">
 														<div class="col-xs-12">														
-															<div class="km-control-group" required name="modifiedOrganisms" caption="LMO identification">
+															<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
 																	on-build-query="onBuildSkipGovernmentQuery(searchText, 'modifiedOrganism')"></div>
 															</div>
