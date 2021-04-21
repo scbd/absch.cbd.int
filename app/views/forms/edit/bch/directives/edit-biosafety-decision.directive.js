@@ -382,7 +382,8 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                    }
                    
                     if(!document.movementAllowedUnderA131A){
-                        document.exemptedFromAIA = undefined;
+                        //document.exemptedFromAIA = undefined;
+                        document.appliesToSubsequentImports = undefined;
                     }
                     if(!$scope.isUnintentionalTransboundaryMovement){
                         document.estimatedQuantities = undefined;
