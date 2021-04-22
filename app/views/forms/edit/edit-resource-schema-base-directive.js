@@ -266,7 +266,6 @@ import "views/forms/view/view-resource.directive";
 					return _.without(validList,badSubjectList);
 				}
 				
-				
 				//==================================
 				//
 				//==================================
@@ -292,6 +291,21 @@ import "views/forms/view/view-resource.directive";
 					}
 
 				};
+
+				// $q.when($scope.setDocument({}))
+				// .then(function(doc){
+				// 	console.log('I am at setDocument')
+				// 	if((doc.countryRegionsWorkedIn||[]).length){
+				// 		$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
+				// 			$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
+				// 				return _.find(countries, {identifier:country.identifier});
+				// 			});
+				// 			$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
+				// 				return !_.find(countries, {identifier:region.identifier});
+				// 			});
+				// 		});
+				// 	}
+				// });
 			}]
 		};
 	}]);
