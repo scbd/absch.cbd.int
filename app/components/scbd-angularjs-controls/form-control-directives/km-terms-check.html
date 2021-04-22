@@ -113,27 +113,6 @@
 					</table>
 				</script>
 				<td ng:repeat="term in rootTerms" ng-hide="otherTermIdentifier==term.identifier" ng-include="'term-check-tree-renderer.html'"></td>
-			 	
-				<style>
-				  table tr td>label {
-					   font-weight: 600;
-					   text-decoration: underline;
-				   }
-				  table tr td ul {
-					  display: contents;
-					  list-style: none;
-				  }
-				  table tr {
-					  display: grid;
-					  grid-template-columns: repeat(5, 1fr);
-				  }
-				  @media (max-width: 767px){
-					  table tr {
-						  display: grid;
-						  grid-template-columns: repeat(2, 1fr);
-					  }
-				  }
-				</style>
 			</table>
 
 		</div>
