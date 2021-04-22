@@ -10,39 +10,6 @@
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Amendment</legend>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="km-control-group" name="isAmendment" required caption="Is this a new record or a modification to an existing record?">
-                                                
-                                                <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-    
-                                    <!-- IF NO SECTION -->
-									<div ng-if="document.isAmendment">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-												<div class="row">
-													<div class="col-xs-12">
-														<div class="km-control-group" required name="amendedRecords" caption="Please provide the BCH record number of the record that is being updated">
-																
-															<div document-selector ng-model="document.amendedRecords" question="amendedRecords" caption="Update of an existing record"
-																on-build-query="onBuildAmendedVlrQuery(searchText)" allow-new="true"
-																allow-new-schema="resource"></div>			
-														</div>
-													</div>
-												</div>
-    
-                                            </div>
-                                        </div>
-									</div>
-                                    
-								</div>
-							</section>
-							<section>
-								<div class="well no-shadow bg-white">
 									<legend>General information</legend>
 			
                                     <div class="row">
@@ -63,23 +30,24 @@
 										</div>
 									</div>
 									<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
-											<div class="tabular-terms-header">
+											<!-- <div class="tabular-terms-header">
 												<h5><strong>OPTION LIST -  RESOURCE TYPE</strong></h5>
 												<div>(choose many options as needed in order to best describe resources)</div>
-											</div>
+											</div> -->
+											<div class="help-block">Choose many options as needed in order to best describe resources</div>
 											<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypesVlr()"
 													 binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
 										
 									</div>
-
 									<div class="row">
+										<div class="col-xs-12" style="margin-top: 10px; font-size: 17px;"><div class="km-control-group" required caption="Author(s)"></div></div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="authors" caption="Author(s)">
+											<div class="km-control-group" name="authors" caption="Author name(s)">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
-									<div class="row"><div class="col-xs-12"><div class="km-control-group">and/or</div></div></div>
+									<div class="row"><div class="col-xs-12"><div class="km-control-group"><strong>and/or</strong></div></div></div>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="organizations" caption="Reference to the authoring organisation(s)">
@@ -91,29 +59,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-6">
 											<div class="km-control-group" name="publisher" caption="Publisher">
 												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="source" caption="Source">
-												<div class="help-block">A reference to a resource from which the present resource is derived, e.g. the name of a journal for an article published in a journal.</div>
-												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div>
-									<!-- <div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" name="publicationDate" caption="Publication Date">	
-												<div km-textbox-ml name="publicationDate" ng-model="document.publicationDate" placeholder="mm-yyyy" locales="document.header.languages"></div>
-											</div>
-										</div>
-									</div> -->
-									<div class="row">
-										<div class="col-md-12">
+										<div class="col-md-6">
 											<div class="km-control-group" required name="publicationDate" caption="Publication Date"
 											help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: VLR">
 												<div km-date placeholder="YYYY-MM" name="publicationDate" required 
@@ -123,7 +74,13 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-6">
+											<div class="km-control-group" name="source" caption="Source">
+												<div class="help-block">A reference to a resource from which the present resource is derived, e.g. the name of a journal for an article published in a journal.</div>
+												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-6">
 											<div class="km-control-group" name="rights" caption="Rights">
 												<div class="help-block">Information about rights held in and over the resource, such as copyright holder, 
 													and availability for reproduction for educational or non-profit purposes.</div>
@@ -131,6 +88,7 @@
 											</div>
 										</div>
 									</div>
+									
 								</div>
 							</section>
 
@@ -191,12 +149,12 @@
 										<div class="col-md-6">
 											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Geographical or political/economic group(s)">
 												<div km-select multiple name="countryRegions.regions"
-													 ng-model="countryRegions.regions" placeholder="Please select one option"
+													 ng-model="document.countryRegions.regions" placeholder="Please select one option"
 													 items="options.regions()"></div>
 											</div>
 										</div>
 
-										<div class="col-md-1 small">and/or</div>
+										<div class="col-md-1">and/or</div>
 									
 										<div class="col-md-5">
 											<div class="km-control-group small"  name="countryRegions.countries" caption="Country name(s)">
