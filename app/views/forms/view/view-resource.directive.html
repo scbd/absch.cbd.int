@@ -58,10 +58,6 @@
 				<km-value-ml value="document.publicationDate" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<!-- <div ng-show="document.publicationYear">
-			<label>Publication date</label>
-			<div class="km-value" compare-val><span ng-bind="document.publicationYear"></span><span ng-if="!isABS && document.publicationMonth">-<span ng-bind="document.publicationMonth"></span></span></div>
-		</div> -->
 
 		<div ng-show="document.rights">
 			<label>Rights</label>
@@ -93,7 +89,7 @@
 			<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
 		</div>
 
-		<!-- TODO need to convert the code, split the list into country and regions  -->
+		
 		<div ng-show="document.countryRegions">
 			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
 			<div class="km-value" compare-val>
@@ -222,7 +218,7 @@
 			</div>
 		</div>
 		<!-- If ABS, End -->
-		<div ng-show="(document.relevantInformation||document.relevantDocuments) && isABS">
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">

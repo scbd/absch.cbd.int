@@ -33,6 +33,7 @@ import "views/forms/view/view-resource.directive";
 				$scope.isNationalUser = false;
 				$scope.keywords = [{}];
 				$scope.hasRiskAssessmentSubject = false;
+				$scope.countryRegions		= [];
 				//$scope.countryRegions		= {countries:[], regions:[]};
 
 				if ($scope.user.isAuthenticated) {
@@ -94,9 +95,33 @@ import "views/forms/view/view-resource.directive";
 				// Useing
 				//==================================
 				$scope.onRaRecommendChange = function(value){
+					if (!$scope.document || !$scope.document.biosafety)
+       					 return;
 					if(!value){
-						// $scope.document.biosafety.raAuthorAffiliation = undefined;
-						// $scope.document.biosafety.raSubjects = undefined;
+						$scope.document.biosafety.raAuthorAffiliation = undefined;
+						$scope.document.biosafety.raSubjects = undefined;
+					}
+				}
+
+				$scope.onAddressmodifiedOrganismsChange = function(value){
+					if (!$scope.document || !$scope.document.biosafety)
+       					 return;
+					if(!value){
+						$scope.document.biosafety.modifiedOrganisms = undefined;
+					}
+				}
+				$scope.onAddressOrganismsChange = function(value){
+					if (!$scope.document || !$scope.document.biosafety)
+       					 return;
+					if(!value){
+						$scope.document.biosafety.organisms = undefined;
+					}
+				}
+				$scope.onAddressGenesChange = function(value){
+					if (!$scope.document || !$scope.document.biosafety)
+       					 return;
+					if(!value){
+						$scope.document.biosafety.genes = undefined;
 					}
 				}
 				//need add more condations for lmo, gene as well
@@ -121,15 +146,13 @@ import "views/forms/view/view-resource.directive";
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 				$scope.onBuildAmendedVlrQuery = function(searchText){
-					if (!$scope.document || !$scope.document.government)
-       					 return;
 									
                     var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['resource'],
                         searchText: searchText
                     }					
-					queryOptions.government = $scope.document.government.identifier;			
+					//TODO: show only current user's records		
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 				//============================================================
@@ -166,21 +189,7 @@ import "views/forms/view/view-resource.directive";
 							document.keywords = undefined;
 					//set all bch fields to undefined for eg. addressLmoCategories etc
 					if(!$scope.isBCH){
-						document.addressLmoCategories = undefined;
-						document.keywords = undefined;
-						document.authorsInfo = undefined;
-						document.publicationMonth = undefined;
-						document.bchSubjects = undefined;
-						document.organisms = undefined;
-						document.genes = undefined;
-						document.modifiedOrganisms = undefined;
-						document.Identifier = undefined;
 						document.publisher = undefined;
-						document.languages  = undefined;
-						document.resourceAccess = undefined;
-						document.bchRaRecommend = undefined;
-						document.bchRaAuthorAffiliation = undefined;
-						document.bchRaSubjects = undefined;
 					}
 					if($scope.isBCH) {
 						$scope.onLmoCategoriesChange( document.addressLmoCategories );
@@ -193,19 +202,18 @@ import "views/forms/view/view-resource.directive";
 					}
 
 					//TODO: add countryRegions 
+					var countryRegions = []
+					if($scope.countryRegions){
 
-					// var countryRegions = []
-					// if($scope.countryRegions){
-
-					// 	if(($scope.countryRegions.countries||[]).length){
-					// 		countryRegions = $scope.countryRegions.countries
-					// 	}
-					// 	if(($scope.countryRegions.regions||[]).length){
-					// 		countryRegions = _.union(countryRegions, $scope.countryRegions.regions)
-					// 	}
-					// 	document.countryRegions = countryRegions;
-					// }
-
+						if(($scope.countryRegions.countries||[]).length){
+							countryRegions = $scope.countryRegions.countries
+						}
+						if(($scope.countryRegions.regions||[]).length){
+							countryRegions = _.union(countryRegions, $scope.countryRegions.regions)
+						}
+						document.countryRegions = countryRegions;
+					}
+					// TODO: move this code, once setDocument issue fixed
 					// if((doc.countryRegions||[]).length){
 					// 	$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
 					// 		$scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
