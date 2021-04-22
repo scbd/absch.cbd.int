@@ -26,6 +26,7 @@ import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 
 export default {
+    name:'kbHome',
     components:{
         CategoriesGroup,
         RightMenu,
@@ -40,7 +41,7 @@ export default {
     },
     watch: { 
         tokenReader: function(tokenReader) {  
-        if(tokenReader) addApiOptions({ tokenReader }) 
+        // if(tokenReader) addApiOptions({ tokenReader }) 
         }
     }
 }

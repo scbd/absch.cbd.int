@@ -5,7 +5,7 @@ import "services/main";
 import "components/scbd-angularjs-services/main";
 
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
-// import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
+import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 
 var baseUrl = require.toUrl("").replace(/\?v=.*$/, "");
@@ -79,7 +79,9 @@ const commonRouteUrls = {
     register_admin_subscriptions                : { component: ()=>import('~/views/register/admin/subscriptions') },
     register_admin_user_role_report             : { component: ()=>import('~/views/register/admin/user-role-report') },
     register_admin_common_issues                : { component: ()=>import('~/views/register/admin/common-issues') },
-    reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') }
+    reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
+
+    kb                                          : { component: ()=>import('~/views/kb/home.vue') },
 }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -151,8 +153,10 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     whenAsync('/register/admin/subscriptions',                      { ...mapView(angularViewWrapper),                    "label":"Subscriptions","resolve":{ ...commonRouteUrls.register_admin_subscriptions,                                "securized":securize(['Administrator'])},"param":"true","resolveController":true}). 
     whenAsync('/register/admin/user-role-report',                   { ...mapView(angularViewWrapper),                    "label":"user Role Report","resolve":{ ...commonRouteUrls.register_admin_user_role_report,                             "securized":securize(['Administrator'])},"param":"true","resolveController":true}). 
     whenAsync('/register/admin/common-issues',                      { ...mapView(angularViewWrapper),                    "label":"Common issues","resolve":{ ...commonRouteUrls.register_admin_common_issues,                                "securized":securize(['Administrator'])},"param":"true","resolveController":true}). 
-    whenAsync('/reports/matrix',                                    { ...mapView(angularViewWrapper),                    "label":"Matrix","resolve":{ ...commonRouteUrls.reports_matrix,                                              },"param":"true","resolveController":true})
-        
+    whenAsync('/reports/matrix',                                    { ...mapView(angularViewWrapper),                    "label":"Matrix","resolve":{ ...commonRouteUrls.reports_matrix,                                              },"param":"true","resolveController":true}).
+    
+    whenAsync('/kb',                                                { ...mapView(vueViewWrapper),                       "label":"KB","resolve":{ ...commonRouteUrls.kb,                                                              },"param":"true","resolveController":true})
+    
 }]);
 
 export default {
