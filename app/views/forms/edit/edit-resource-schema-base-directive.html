@@ -21,27 +21,24 @@
                                     </div>
     
                                     <!-- IF NO SECTION -->
-                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}"  style="padding-top:0;padding-bottom:0;">
+									<div ng-if="document.isAmendment">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">
-                                                    If no, the following information is not required.
-                                                </h3>
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="amendedRecords" caption="Please provide the BCH record number of the record that is being updated">	
-
-																<div document-selector ng-model="document.amendedRecords" question="amendedRecords" caption="Update of an existing record"
+														<div class="km-control-group" required name="amendedRecords" caption="Please provide the BCH record number of the record that is being updated">
+																
+															<div document-selector ng-model="document.amendedRecords" question="amendedRecords" caption="Update of an existing record"
 																on-build-query="onBuildAmendedVlrQuery(searchText)" allow-new="true"
-																allow-new-schema="resource"></div>
+																allow-new-schema="resource"></div>			
 														</div>
 													</div>
-													
 												</div>
     
                                             </div>
                                         </div>
 									</div>
+                                    
 								</div>
 							</section>
 							<section>
@@ -65,14 +62,14 @@
 											</div>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
-												this section will be changed to Cols..
-												<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypesVlr()"
-														 binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
+									<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
+											<div class="tabular-terms-header">
+												<h5><strong>OPTION LIST -  RESOURCE TYPE</strong></h5>
+												<div>(choose many options as needed in order to best describe resources)</div>
 											</div>
-										</div>
+											<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypesVlr()"
+													 binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
+										
 									</div>
 
 									<div class="row">
@@ -204,7 +201,7 @@
 										<div class="col-md-5">
 											<div class="km-control-group small"  name="countryRegions.countries" caption="Country name(s)">
 												<div km-select multiple name="countryRegions.countries" 
-												ng-model="document.countryRegions" placeholder="Please select a country..." items="options.countries()"></div>
+												ng-model="document.countryRegions.countries" placeholder="Please select a country..." items="options.countries()"></div>
 											</div>
 										</div>
 										
@@ -281,7 +278,8 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="biosafety.addressmodifiedOrganisms" caption="Does this resource address one or more specific LMOs?" required>
-												<div km-yes-no required name="biosafety.addressmodifiedOrganisms" ng-model="document.biosafety.addressmodifiedOrganisms"  locales="document.header.languages"></div>
+												<div km-yes-no required name="biosafety.addressmodifiedOrganisms" ng-model="document.biosafety.addressmodifiedOrganisms"  
+													ng-click="onAddressmodifiedOrganismsChange(document.biosafety.addressmodifiedOrganisms)"  locales="document.header.languages" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressmodifiedOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="LMO(s) identification">
@@ -298,7 +296,8 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Does this resource address one or more specific organisms?" required>
-												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  locales="document.header.languages"></div>
+												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
+													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="biosafety.organisms"  caption="Organism(s) identification">
@@ -317,7 +316,8 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="biosafety.addressGenes" caption="Does this resource address one or more specific genetic elements?" required>
-												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  locales="document.header.languages"></div>
+												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
+												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressGenes" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="biosafety.genes"  caption="Gene(s)  identification">
@@ -385,8 +385,20 @@
 									</div>
 								</div>
 							</div>
+						</section>
+						<section>
+							<legend>Notes</legend>
+
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="km-control-group" name="notes">
+										<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+										<div km-notes name="notes" ng-model="document.notes"></div>
+									</div>
+								</div>
+							</div>
 						</section>	
-						<!-- BCH COMPLETED HERE 	 -->
+						<!-- BCH and ABS COMPLETED HERE 	 -->
 							
 			
 					</div>
