@@ -2124,22 +2124,12 @@ a.disabled{
 
 .tabular-term-check table tr td>label {
     font-weight: 600;
-    text-decoration: underline;
-}
-.tabular-term-check table tr td ul {
-    display: contents;
-    list-style: none;
 }
 .tabular-term-check table tr {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
 }
-.tabular-terms-header {
-    text-align: center;
-    border: 1px solid #796969;
-    background-color: #e3e3e3;
-    margin-right: 15px;
-}
+
 
 @media (max-width: 767px){
    .tabular-term-check table tr {
