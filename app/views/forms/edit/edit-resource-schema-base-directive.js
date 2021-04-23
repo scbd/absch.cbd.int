@@ -87,11 +87,6 @@ import "views/forms/view/view-resource.directive";
 				});
 				}, 1000 );
 
-				$scope.years = [];
-				var end = new Date().getFullYear();
-				for (var i = end; i > (end-100) ; i--) {
-					$scope.years.push({id:i, name: i});
-				}
 				//==================================
 				// Using
 				//==================================
@@ -192,12 +187,11 @@ import "views/forms/view/view-resource.directive";
 					if(!$scope.isBCH){
 						document.publisher = undefined;
 					}
-					if($scope.isBCH) {
-						$scope.onLmoCategoriesChange( document.addressLmoCategories );
-						$scope.onRaRecommendChange( document.bchRaRecommend );
-						$scope.onThematicAreaChange(document.bchSubjects);
-						$scope.onRaRecommendChange(document.bchRaRecommend);
-					}
+					// if($scope.isBCH) {
+					// 	$scope.onLmoCategoriesChange( document.addressLmoCategories );
+					// 	$scope.onRaRecommendChange( document.bchRaRecommend );
+					// 	//$scope.onThematicAreaChange(document.bchSubjects);
+					// }
 					if($scope.isABS) {
 						$scope.onResourceTypesChange( document.resourceTypes );
 					}
@@ -214,17 +208,6 @@ import "views/forms/view/view-resource.directive";
 						}
 						document.countryRegions = countryRegions;
 					}
-					// TODO: move this code, once setDocument issue fixed
-					// if((doc.countryRegions||[]).length){
-					// 	$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
-					// 		$scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
-					// 			return _.find(countries, {identifier:country.identifier});
-					// 		});
-					// 		$scope.countryRegions.regions = _.filter(doc.countryRegions, function(region){
-					// 			return !_.find(countries, {identifier:region.identifier});
-					// 		});
-					// 	});
-					// }
 					
 					return $scope.sanitizeDocument(document);
 				};
@@ -253,10 +236,14 @@ import "views/forms/view/view-resource.directive";
 						$scope.document.modifiedOrganisms = undefined;
 					}
 				}
-				// TODO FBAF958B-14BF-45DD-BC6D-D34A9953BCEF REPLACED with 043C7F0D-2226-4E54-A56F-EE0B74CCC984 
 				$scope.onThematicAreaChange = function(value){
-					$scope.hasRiskAssessmentSubject = _.some(value||[], {identifier: "043C7F0D-2226-4E54-A56F-EE0B74CCC984"});
-					
+					$scope.hasRiskAssessmentSubject = _.find(value||[], {identifier: "FBAF958B-14BF-45DD-BC6D-D34A9953BCEF"});
+					if(!$scope.hasRiskAssessmentSubject){
+						$scope.document.biosafety.raRecommend = undefined;
+						$scope.document.biosafety.raAuthorAffiliation = undefined;
+						$scope.document.biosafety.raSubjects = undefined;
+					}
+
 				}
 
 				//============================================================
