@@ -67,6 +67,9 @@ import 'views/forms/view/view-resource.directive';
     .then(function(doc){
         if(doc.keywords)
             $scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
+            if(doc.countryregions){
+                $scope.setCountryRegions (doc.countryregions)
+            }
     });
 
 

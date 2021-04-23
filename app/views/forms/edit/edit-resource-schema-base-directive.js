@@ -5,6 +5,7 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/organization-selector';
 import "views/forms/view/view-resource.directive";
+
 	app.directive('convertToNumber', function() {
 		return {
 			require: 'ngModel',
@@ -84,7 +85,7 @@ import "views/forms/view/view-resource.directive";
 					expertiseLevels : function() {return thesaurusService.getDomainTerms('cbrLevel');},
 					bchLanguages    : function() {return thesaurusService.getDomainTerms('languages').then(function(o){return _.sortBy(o, 'name' );})},
 				});
-			}, 1000 );
+				}, 1000 );
 
 				$scope.years = [];
 				var end = new Date().getFullYear();
@@ -92,7 +93,7 @@ import "views/forms/view/view-resource.directive";
 					$scope.years.push({id:i, name: i});
 				}
 				//==================================
-				// Useing
+				// Using
 				//==================================
 				$scope.onRaRecommendChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
@@ -103,7 +104,7 @@ import "views/forms/view/view-resource.directive";
 					}
 				}
 
-				$scope.onAddressmodifiedOrganismsChange = function(value){
+				$scope.onAddressModifiedOrganismsChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
        					 return;
 					if(!value){
@@ -124,7 +125,7 @@ import "views/forms/view/view-resource.directive";
 						$scope.document.biosafety.genes = undefined;
 					}
 				}
-				//need add more condations for lmo, gene as well
+				//need add more conditions for lmo, gene as well
 				$scope.onBuildQuery = function(searchText, schema){
 					var queryOptions = {
 						realm     : realm.value,
@@ -165,7 +166,7 @@ import "views/forms/view/view-resource.directive";
 
 			        if (!document || !document.purpose)
 			            return false;
-
+						
 			        var purposes = _.map(document.purpose, 'identifier');
 
 			        return _.includes(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
@@ -292,20 +293,16 @@ import "views/forms/view/view-resource.directive";
 
 				};
 
-				// $q.when($scope.setDocument({}))
-				// .then(function(doc){
-				// 	console.log('I am at setDocument')
-				// 	if((doc.countryRegionsWorkedIn||[]).length){
-				// 		$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
-				// 			$scope.countryRegionsWorkedIn.countries = _.filter(doc.countryRegionsWorkedIn, function(country){
-				// 				return _.find(countries, {identifier:country.identifier});
-				// 			});
-				// 			$scope.countryRegionsWorkedIn.regions = _.filter(doc.countryRegionsWorkedIn, function(region){
-				// 				return !_.find(countries, {identifier:region.identifier});
-				// 			});
-				// 		});
-				// 	}
-				// });
+				$scope.setCountryRegions = function(countryRegions){
+					$q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
+						$scope.countryRegions.countries = _.filter(countryRegions, function(country){
+							return _.find(countries, {identifier:country.identifier});
+						});
+						$scope.countryRegions.regions = _.filter(countryRegions, function(region){
+							return !_.find(countries, {identifier:region.identifier});
+						});
+					});
+				}
 			}]
 		};
 	}]);
