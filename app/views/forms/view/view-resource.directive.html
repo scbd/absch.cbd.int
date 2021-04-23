@@ -94,13 +94,14 @@
 			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
-					<li ng-repeat="term in document.countryRegions" ng-bind="term|term|lstring:locale"></li>
+					<li ng-repeat="item in document.countryRegions">
+						<span ng-bind="item|term:locale"></span>
+					</li>
 				</ul>
 			</div>
-			
 		</div>
 
-		<div ng-show="document.aichiTargets">
+		<div ng-show="document.aichiTargets && !isBCH">
 			<label>Related Aichi target(s)</label>
 			<div class="km-value" compare-val="aichiTargets">
 				<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>

@@ -29,18 +29,18 @@
 											</div>
 										</div>
 									</div>
-									<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
-											<!-- <div class="tabular-terms-header">
-												<h5><strong>OPTION LIST -  RESOURCE TYPE</strong></h5>
-												<div>(choose many options as needed in order to best describe resources)</div>
-											</div> -->
-											<div class="help-block">Choose many options as needed in order to best describe resources</div>
-											<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypesVlr()"
-													 binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
-										
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
+													<div class="help-block">Choose many options as needed in order to best describe resources</div>
+													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypesVlr()"
+															binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
+												
+											</div>
+										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12" style="margin-top: 10px; font-size: 17px;"><div class="km-control-group" required caption="Author(s)"></div></div>
+										<div class="col-xs-12" style="margin-top: 30px; font-size: 17px; margin-bottom: -10px;"><div class="km-control-group" required caption="Author(s)"></div></div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="authors" caption="Author name(s)">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
@@ -158,7 +158,7 @@
 									
 										<div class="col-md-5">
 											<div class="km-control-group small"  name="countryRegions.countries" caption="Country name(s)">
-												<div km-select multiple name="countryRegions.countries" 
+												<div km-select multiple name="countryRegions.countries" filter-type="startsWith" 
 												ng-model="document.countryRegions.countries" placeholder="Please select a country..." items="options.countries()"></div>
 											</div>
 										</div>
@@ -171,7 +171,7 @@
 							<section>
 								<div class="well no-shadow bg-white">
 									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
-									<div class="row">
+									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
 											<div class="km-control-group" required name="aichiTargets" caption="Aichi Targets">
 												<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()"
@@ -200,13 +200,13 @@
 									<div class="col-xs-12">
 										<div class="km-control-group" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]"></div>
+											 binding-type="term[]" ng-change="onThematicAreaChange(document.biosafety.subjects)"></div>
 										</div>
 									</div>
 								</div>
 								<!-- TODO: need to apply a condation -->
 						        
-									<div class="row">
+									<div class="row" ng-if="hasRiskAssessmentSubject">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="biosafety.raRecommend" caption="Guidance on risk assessment of living modified organisms">
 												<div km-yes-no required name="biosafety.raRecommend" ng-model="document.biosafety.raRecommend" ng-click="onRaRecommendChange(document.biosafety.raRecommend)"  locales="document.header.languages"></div>
