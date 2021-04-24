@@ -106,6 +106,16 @@ function(realm, $rootScope, $route, $location, articlesService) {
                     $(window).off('scroll', scrollHandlerfn)
                 });
 
+                $scope.details =function(article)
+                {
+                    $scope.showArticle = true;
+                    $scope.articleData = article;
+                }
+                $scope.back =function()
+                {
+                    $scope.showArticle = false;
+                    $scope.articleData = undefined;
+                }
                 //---------------------------------------------------------------------
                     $scope.getSizedImage = function(url, size){
                     // return url;

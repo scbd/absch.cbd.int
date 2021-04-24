@@ -1,7 +1,7 @@
 ﻿<div id="docketSideBar" class="container-full page-content">
     <div class="sidebar-header">
         <a class="closebtn" ng-click="closeLeftSideBar()">&times;</a>
-        <div class="sidenav-heading">help
+        <div class="sidenav-heading"><span ng-click="back();" ng-if="showArticle"><i class="fa fa-arrow-left"></i>&nbsp; &nbsp; Back</span>Help
         </div>
         <div class="search-field">
            <div class="form-group has-feedback has-search">
@@ -40,15 +40,14 @@
         </div>
 
         <div  ng-if="!loading && type=='help'">
-            <div class="row">
-                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
-                    <div class="card"  ng-class="{'article-open':showArticle}" >
+            <div class="row" ng-if="!articleData" >
+                <div ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
+                    <div ng-click="details(article);" class="card"  ng-class="{'article-open':showArticle}" >
 
-                        <h5>
-                            <span ng-bind="article.title | lstring:locale" ng-click="showArticle=true"></span>
-                            <button ng-show="showArticle" type="button" class="close pull-right" ng-click="showArticle=false"><span aria-hidden="true">×</span></button>
-                        </h5>
-                        <p  ng-click="showArticle=true">
+                        <span class="article-heading">
+                            <span ng-bind="article.title | lstring:locale"></span>
+                        </span>
+                        <p class="article-info">
                             <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
                             <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
                         </p>
@@ -61,11 +60,55 @@
                     </div>
                 </div>
             </div>
+            <div class="row" ng-if="articleData" >
+                <div class="card"  ng-class="{'article-open':showArticle}">
+                    <h2 class="article-heading" ng-bind="articleData.title | lstring:locale" ng-click="showArticle=true" ></h2>
+                    <p class="article-info">
+                    <span class="summary" ng-if="articleData.summary && !showArticle" ng-bind-html="articleData.summary | lstring:locale|limitTo:200"></span>
+                    <span class="summary" ng-if="!articleData.summary || showArticle" ng-bind-html="articleData.content | lstring:locale|limitTo:(showArticle ? articleData.content.length : 200)"></span>
+                    </p>
+                    <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span>
+                    </div>
+                    <div class="footer">
+                        <a rel="noopener" ng-href="/articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="side-nav-bottom"><ul>
-        <li><a>Help section</a></li>
-        <li><a>Help widget</a></li>
-        <li><a>Copyrights</a></li>
-    </ul></div>
+
+    <div class="sidebar-widget-detail" >
+
+        <div class="card-detail" >
+
+            <h5>
+                <span  >Configure a company-managed Kanban or Scrum board</span>
+              
+            </h5>
+            <p >
+                You can customize your company-managed Kanban or Scrum board to suit your team’s working process and needs. 
+
+                Configuring a board lets you edit the mapping of workflow statuses to columns of a board, as well as edit the columns, swimlanes, and quick filters of a board, and customize the card colors and displayed issue fields.
+            </p>
+            <ul>
+                <li>If not already there, navigate to your company-managed project.</li>
+                <li>If not already there, navigate to your company-managed project.</li>
+                <li>If not already there, navigate to your company-managed project.</li>
+                <li>If not already there, navigate to your company-managed project.</li>
+            </ul>
+
+            
+            
+        </div>
+
+    </div>
+
+    <div class="side-nav-bottom">
+        <ul>
+            <li><a>Contact us</a></li>
+            <li><a>Site Map</a></li>
+            <li><a>Linkages Policy</a></li>
+            <li><a>Disclaimer</a></li>
+        </ul>
+    </div>
 </div>

@@ -2225,7 +2225,7 @@ padding-right: 23%;
 
 @media(min-width:768px) {
     #wrapper {
-        padding-right: 23%;
+        padding-right: 25%;
     }
 
     #wrapper.toggled {
@@ -2233,7 +2233,7 @@ padding-right: 23%;
     }
 
     #sidebar-wrapper {
-        width: 23%;
+        width: 25%;
         height: 100%;
     }
 
@@ -2252,169 +2252,283 @@ padding-right: 23%;
     }
 
 
-#docketSideBar .news-date{
-    float:unset;
-    font-size: 10px; text-transform: uppercase;
-}
-#docketSideBar.container-full{
-    padding-bottom: 10px;
-}
-#docketSideBar .noimage{
-    display: table-cell; 
-    vertical-align: middle; 
-    font-size:24px;padding:10px; 
-    top:-20px;position: relative; 
+    #docketSideBar .news-date {
+        float: unset;
+        font-size: 10px;
+        text-transform: uppercase;
+    }
+
+    #docketSideBar.container-full {
+        padding-bottom: 10px;
+    }
+
+    #docketSideBar .noimage {
+        display: table-cell;
+        vertical-align: middle;
+        font-size: 24px;
+        padding: 10px;
+        top: -20px;
+        position: relative;
+    }
+
+    #docketSideBar .card {
+        background: #fff;
+        float: left;
+        width: 98%;
+        padding: 10px;
+        margin: 0px 0 0 7px;
+        padding-bottom: 20px;
+    }
+
+    #docketSideBar .card:hover {
+        background-color: rgb(235, 236, 240);
+        border-radius: 3px;
+    }
+
+    #docketSideBar .article-open {
+        background: #fff !important;
+    }
+
+
+    #docketSideBar .card h5 {
+        padding: 0;
+        margin-top: 0;
+        font-size: 14px;
+    }
+
+    #docketSideBar h5:hover:after {
+        border-top: #A05800 solid 4px;
+    }
+
+    #docketSideBar p {
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 20px;
+        color: #656565;
+        margin-bottom: 10px
+    }
+
+    #docketSideBar p strong {
+        font-weight: normal;
+    }
+
+    #docketSideBar .closebtn {
+        position: absolute;
+        right: 10px;
+        font-size: 21px;
+        padding: 0px 8px;
+        color: rgb(66, 82, 110) !important;
+        top: 12px;
+
+    }
+
+    #docketSideBar .closebtn:hover {
+        text-decoration: none;
+        cursor: pointer;
+        background: rgba(9, 30, 66, 0.08) !important;
+        border-radius: 3px;
+    }
+
+    #docketSideBar .sidenav-heading {
+        float: left;
+        width: 100%;
+        background: #FAFBFD;
+        padding: 16px 10px;
+        color: #42526e;
+        text-transform: capitalize;
+        font-weight: 500;
+        font-size: 16px;
+        border-bottom: #EAEBED 2px solid;
+        border-top: #EAEBED 1px solid;
+        text-align: center;
+    }
+
+    #docketSideBar .sidenav-heading span {
+        font-size: 13px;
+        font-weight: normal;
+        padding: 5px 10px;
+        position: absolute;
+        left: 10px
+    }
+
+    #docketSideBar .sidenav-heading span:hover {
+        text-decoration: none;
+        cursor: pointer;
+        background: rgba(9, 30, 66, 0.08) !important;
+        border-radius: 3px;
+
+    }
+
+    #docketSideBar .search-field {
+        float: left;
+        width: 100%;
+        margin-top: 5px;
+        padding: 24px 16px 8px;
+        padding-bottom: 0;
+        margin-bottom: 0;
+
+    }
+
+    #docketSideBar .search-field .has-search .form-control-feedback {
+        right: initial;
+        left: 0;
+        color: #333;
+    }
+
+    #docketSideBar .search-field .has-search .form-control {
+        padding-right: 12px;
+        padding-left: 34px;
+        background: rgb(255, 255, 255);
+        background-color: rgb(250, 251, 252);
+        border-color: rgb(223, 225, 230);
+    }
+
+    #docketSideBar .search-field .has-search .form-control:focus {
+        border: #66afe9 2px solid;
+        outline: 0;
+        /* -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%); */
+        /* box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%), 0 0 8px rgb(102 175 233 / 60%); */
+    }
+
+    #docketSideBar .search-field input[type="search"]::-webkit-search-cancel-button {
+        -webkit-appearance: searchfield-cancel-button;
+        cursor: pointer;
+    }
+
+    #docketSideBar .side-nav-bottom {
+        height: 40px;
+        position: fixed;
+        bottom: 0;
+        width: 25%;
+        background: #00483A;
+        padding: 7px;
+        text-align: center;
+        color: #fff;
+        box-sizing: border-box;
+        background-color: rgb(250, 251, 252);
+        border-top: 2px solid rgb(235, 236, 240);
+        -webkit-box-pack: justify;
+        justify-content: space-between;
+    }
+
+    #docketSideBar .side-nav-bottom ul {
+        padding-left: 10px;
+        /* margin: 0 5%; */
+    }
+    #docketSideBar .side-nav-bottom ul li {
+        float: left;
+        padding: 0 10px;
+        list-style: none;
+        border-right: #fff 1px solid;
+    }
+
+    #docketSideBar .side-nav-bottom ul li a {
+        font-size: 11px;
+        color: rgb(107, 119, 140) !important;
+        padding: 0;
+        font-weight: normal;
+        cursor: pointer;
+
+    }
+
+    #docketSideBar .side-nav-bottom ul li a:hover {
+        font-size: 11px;
+        color: rgb(107, 119, 140) !important;
+        padding: 0;
+        font-weight: normal;
+        cursor: pointer;
+        text-decoration: underline;
+    }
+
+    #docketSideBar .footer {
+        bottom: 0px;
+    }
+
+    #docketSideBar .summary, #docketSideBar .summary h1, #docketSideBar .summary h2, #docketSideBar .summary h3, #docketSideBar .summary h4 {
+        font-size: 11px;
+    }
+
+    #docketSideBar img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    #docketSideBar .side-bar-widget {
+        display: flex;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #fff;
+        overflow-y: auto;
+        overflow-x: hidden;
+        height: calc(100vh - 158px);
+    }
+
+
+    #docketSideBar .sidebar-widget-detail {
+    display: flex;
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 158px);
 }
 
-#docketSideBar .card {
-    background: #fff;
-    float: left;
-    width: 100%;
-    padding: 7px;
-    margin: 0;
-}
-
-#docketSideBar .card:hover {
-    background-color: rgb(235, 236, 240);
-}
-#docketSideBar .article-open {
-    background: #fff!important;
-}
-
-
-#docketSideBar .card h5{
+    #docketSideBar .sidebar-widget-detail .card-detail h5 {
     padding: 0;
     margin-top: 0;
-    font-size: 14px;
+    font-size: 20px;
+    line-height: 30px;
 }
-#docketSideBar h5:after{
-    content: '';
-    display: block;
-    margin-left: 1px;
-    margin-top: 0.9rem;
-    border-top: #00405c solid 4px;
-    width: 40%;
 
-}
-#docketSideBar h5:hover:after{
+    #docketSideBar .sidebar-widget-detail h5:hover:after {
     border-top: #A05800 solid 4px;
 }
-#docketSideBar p{
-    font-size: 12px;
+
+    #docketSideBar .sidebar-widget-detail p {
+    font-size: 13px;
     font-weight: normal;
-    line-height: 16px;
+    line-height: 24px;
     color: #656565;
-    margin-bottom: 5px
+    margin-bottom: 10px
 }
 
-
-#docketSideBar .closebtn {
-    position: absolute;
-    right: 10px;
-    font-size: 24px;
-    padding: 2px 10px;
-    color: rgb(66, 82, 110) !important;
-
-}
-#docketSideBar .closebtn:hover{
-text-decoration: none;
-cursor: pointer;
-background: rgba(9, 30, 66, 0.08) !important;
-}
-#docketSideBar .sidenav-heading{
-float: left;
-width: 100%;
-background: #FAFBFD;
-padding: 7px 10px;
-color: #000;
-text-transform: capitalize;
-font-weight: 500;
-font-size: 16px;
-border-bottom: #EAEBED 1px solid;
-border-top: #EAEBED 1px solid;
-text-align: center;
-}
-#docketSideBar .search-field{
-float: left;
-width: 100%;
-margin-top: 5px;
-padding: 5px 8px;
-padding-bottom: 0px;
-margin-bottom: -10px;
-
-}
-#docketSideBar .search-field .has-search .form-control-feedback {
-    right: initial;
-    left: 0;
-    color: #333;
-}
-#docketSideBar .search-field .has-search .form-control {
-    padding-right: 12px;
-    padding-left: 34px;
-}
-
-#docketSideBar .search-field input[type="search"]::-webkit-search-cancel-button {
--webkit-appearance: searchfield-cancel-button;
-    cursor: pointer;
-}
-
-#docketSideBar  .side-nav-bottom{
-height: 40px;
-position:fixed;
-bottom:0;
-width: 100%;
-background: #00483A;
-padding: 7px;
-text-align: center;
-color: #fff;
-box-sizing: border-box;
-background-color: rgb(250, 251, 252);
-border-top: 2px solid rgb(235, 236, 240);
--webkit-box-pack: justify;
-justify-content: space-between;
-}
-
-#docketSideBar  .side-nav-bottom ul li{
-float: left;
-padding: 0 7px;
-list-style: none;
-border-right: #fff 1px solid;
-}
-#docketSideBar  .side-nav-bottom ul li a{
-font-size: 11px;
-color: rgb(107, 119, 140) !important;
-padding: 0;
-font-weight: normal;
-cursor: pointer;
-
-}
-#docketSideBar  .side-nav-bottom ul li a:hover{
-    font-size: 11px;
-    color: rgb(107, 119, 140) !important;
-    padding: 0;
+    #docketSideBar .sidebar-widget-detail p strong {
     font-weight: normal;
-    cursor: pointer;
-    text-decoration: underline;
 }
-#docketSideBar .footer{
-    bottom: 0px;
-}
-#docketSideBar .summary, #docketSideBar .summary h1, #docketSideBar .summary h2, #docketSideBar .summary h3, #docketSideBar .summary h4{
-    font-size: 11px;
-}
-
-#docketSideBar img {
-    max-width: 100%;
-    max-height: 100%;
-}
-
-#docketSideBar .side-bar-widget {
-display: flex;
-padding-left: 10px;
-padding-right: 10px;
-background-color: #fff;
-overflow-y: auto;
-overflow-x: hidden;
-height: calc(100vh - 158px);
-}
+    #docketSideBar .article-heading{
+        text-decoration: none;
+        color: rgb(23, 43, 77);
+        font-size: 14px;
+        font-weight: 600;
+        display: block;
+        line-height: 20px;
+        white-space: normal;
+        overflow-x: hidden;
+        margin-bottom: 8px;
+        margin-top: 0px;
     }
+    #docketSideBar h2.article-heading {
+        text-decoration: none;
+        color: rgb(23, 43, 77);
+        font-weight: 600;
+        display: block;
+        line-height: 20px;
+        white-space: normal;
+        overflow-x: hidden;
+        margin-bottom: 8px;
+        margin-top: 0px;
+        font-size: 1.7142857142857142em;
+        font-style: inherit;
+        line-height: 1.1666666666666667;
+        color: #172B4D;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+    }
+    #docketSideBar .article-info{
+        display: block;
+        line-height: 20px;
+        color: rgb(80, 95, 121);
+        margin: 0px;
+    }
+}
