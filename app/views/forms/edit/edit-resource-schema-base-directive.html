@@ -199,7 +199,7 @@
 									<div class="col-xs-12">
 										<div class="km-control-group" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" ng-change="onThematicAreaChange(document.biosafety.subjects)"></div>
+											 binding-type="term[]" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
