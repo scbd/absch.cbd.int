@@ -31,20 +31,9 @@ import "views/forms/view/view-resource.directive";
 				$scope.isABS = realm.is('ABS');
 				$scope.isBCH = realm.is('BCH');
 				$scope.user = $rootScope.user;
-				$scope.isNationalUser = false;
-				$scope.keywords = [{}];
-				$scope.hasRiskAssessmentSubject = false;
-				$scope.countryRegions		= [];
-				//$scope.countryRegions		= {countries:[], regions:[]};
-
-				if ($scope.user.isAuthenticated) {
-					$scope.isNationalUser =  roleService.isNationalUser();
-				}
-
+				$scope.countryRegions		= {};
 				// TODO: where this code is using
 				$scope.displayMCCWarning = false;
-				var changeParentFor = ['F7D357FEC3884D388FD49CECBCFF5083', '3A02804CB9AB43F2BADF23B6BC0F5661'];
-				var newParent = '5427EB8F-5532-4AE2-88EE-5B9619917480';
 
 				$timeout (function (){
 				_.extend($scope.options, {
@@ -63,27 +52,13 @@ import "views/forms/view/view-resource.directive";
 						})
 					}],
 
-					resourceTypesVlr   : function() {return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})},
+					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})},
 					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
 					cbdSubjects		: function() {return thesaurusService.getDomainTerms('cbdSubjects',{other:true, otherType:'lstring'})}, // 14 CBD Subject Areas
 					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
 					bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');}, // raSubjects
 					absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');}, // ABS keyAreas
-
-					regions	: function() {return thesaurusService.getDomainTerms('regions')
-						.then(function(o){
-							return Thesaurus.buildTree(o);
-							});
-					},
-					//absSubjects		: missing //absSubjects
-					// TODO: need to verify, need to remove unused
-					
-					fileFormats     : function() {return thesaurusService.getDomainTerms('cbrFormats');},
-					purposes    	: function() {return thesaurusService.getDomainTerms('cbrPurpose');},
-					targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience');},
-					expertiseLevels : function() {return thesaurusService.getDomainTerms('cbrLevel');},
-					bchLanguages    : function() {return thesaurusService.getDomainTerms('languages').then(function(o){return _.sortBy(o, 'name' );})},
 				});
 				}, 1000 );
 
@@ -151,24 +126,6 @@ import "views/forms/view/view-resource.directive";
 					//TODO: show only current user's records		
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
-				//============================================================
-				//
-				//============================================================
-				// TODO: need to verify ts use 
-			    $scope.IsLiterature = function(document) {
-
-			        document = document || $scope.document;
-
-			        if (!document || !document.purpose)
-			            return false;
-						
-			        var purposes = _.map(document.purpose, 'identifier');
-
-			        return _.includes(purposes, 'C1B32F41-89D1-4EDC-8EF2-335362B91F8D'); // Literature
-
-			    };
-
-				
 
 				//==================================
 				//
@@ -179,20 +136,21 @@ import "views/forms/view/view-resource.directive";
 					document = document || $scope.document;
 					if ( !document )
 						return undefined;
-						if ( !_.isEmpty( $scope.keywords )  && !$scope.isABS)
-							document.keywords = _( $scope.keywords ).map( 'value' ).compact().value();
-						if ( _.isEmpty( document.keywords )  || $scope.isABS)
-							document.keywords = undefined;
+
 					//set all bch fields to undefined for eg. addressLmoCategories etc
 					if(!$scope.isBCH){
 						document.publisher = undefined;
 					}
-					// if($scope.isBCH) {
-					// 	$scope.onLmoCategoriesChange( document.addressLmoCategories );
-					// 	$scope.onRaRecommendChange( document.bchRaRecommend );
-					// 	//$scope.onThematicAreaChange(document.bchSubjects);
-					// }
+					if($scope.isBCH) {
+						document.nagoya = undefined;
+						if(document.biosafety){
+							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
+							$scope.onRaRecommendChange( document.biosafety.raRecommend );
+							$scope.onThematicAreaChange(document.biosafety.subjects);
+						}
+					}
 					if($scope.isABS) {
+						document.biosafety = undefined;
 						$scope.onResourceTypesChange( document.resourceTypes );
 					}
 
@@ -209,16 +167,12 @@ import "views/forms/view/view-resource.directive";
 						document.countryRegions = countryRegions;
 					}
 					
+					if (/^\s*$/g.test(document.notes))
+						document.notes = undefined;
+				
 					return $scope.sanitizeDocument(document);
 				};
 
-				$scope.addItem = function(type){
-					type.push({});
-				}
-				$scope.removeItem = function(type, $index){
-					if(type.length>1) 
-						type.splice($index, 1)
-				}
                 //============================================================
 				//
 				//============================================================
@@ -238,7 +192,7 @@ import "views/forms/view/view-resource.directive";
 				}
 				$scope.onThematicAreaChange = function(value){
 					$scope.hasRiskAssessmentSubject = _.find(value||[], {identifier: "FBAF958B-14BF-45DD-BC6D-D34A9953BCEF"});
-					if(!$scope.hasRiskAssessmentSubject){
+					if(!$scope.hasRiskAssessmentSubject && $scope.document.biosafety){
 						$scope.document.biosafety.raRecommend = undefined;
 						$scope.document.biosafety.raAuthorAffiliation = undefined;
 						$scope.document.biosafety.raSubjects = undefined;
@@ -246,14 +200,6 @@ import "views/forms/view/view-resource.directive";
 
 				}
 
-				//============================================================
-				//
-				//============================================================
-				// TODO need to verify
-				function removeFromList(badSubjectList,validList){
-					return _.without(validList,badSubjectList);
-				}
-				
 				//==================================
 				//
 				//==================================
