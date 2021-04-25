@@ -2240,3 +2240,7 @@ a.disabled{
         grid-template-columns: repeat(2, 1fr);
     }
 }
+
+.easing {
+    transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
