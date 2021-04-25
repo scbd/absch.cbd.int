@@ -54,12 +54,25 @@ import "views/forms/view/view-resource.directive";
 
 					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})},
 					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
-					cbdSubjects		: function() {return thesaurusService.getDomainTerms('cbdSubjects',{other:true, otherType:'lstring'})}, // 14 CBD Subject Areas
 					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
 					bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');}, // raSubjects
 					absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');}, // ABS keyAreas
-				});
+					absSubjects	: function() {return thesaurusService.getDomainTerms('absSubjects');}, // ABS Thematic Areas
+
+					cbdSubjects : function() { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", { cache: true }).then(function(o){
+						var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
+						var items = [];
+						_.forEach(subjects, function(subject) {
+							var term = _.find(o.data, {'identifier': subject } );
+							items.push(term);
+							_(term.narrowerTerms).forEach(function (term) {
+								items.push(_.find(o.data, {'identifier':term}));
+							})
+						});
+						return items;
+					});
+					}, });
 				}, 1000 );
 
 				//==================================
@@ -95,7 +108,7 @@ import "views/forms/view/view-resource.directive";
 						$scope.document.biosafety.genes = undefined;
 					}
 				}
-				//need add more conditions for lmo, gene as well
+
 				$scope.onBuildQuery = function(searchText, schema){
 					var queryOptions = {
 						realm     : realm.value,
@@ -109,29 +122,16 @@ import "views/forms/view/view-resource.directive";
 				$scope.onAuthorContactQuery = function(searchText){
 					var queryOptions = {
 						realm     : realm.value,
-						//fieldQueries: ['schema_s:contact AND type_s:person'],
-						//fieldQueries: ['schema_s:organization'],
-						fieldQueries: ['schema_s:contact'],
+						fieldQueries: ['schema_s:organization'],
 						searchText: searchText
 					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
-				$scope.onBuildAmendedVlrQuery = function(searchText){
-									
-                    var queryOptions = {
-						realm     : realm.value,
-						schemas	  : ['resource'],
-                        searchText: searchText
-                    }					
-					//TODO: show only current user's records		
-					return $scope.onBuildDocumentSelectorQuery(queryOptions);
-                }
-
 				//==================================
 				//
 				//==================================
 				$scope.getCleanDocument = function(document) {
-					console.log('i am getCleanDocument at directive ');
+
 
 					document = document || $scope.document;
 					if ( !document )
@@ -176,7 +176,7 @@ import "views/forms/view/view-resource.directive";
                 //============================================================
 				//
 				//============================================================
-				// TODO: where this code is using
+				// TODO: will remove unused code once ABS tested, where this code is using
 				$scope.onResourceTypesChange = function(value){
 					if (value && _.indexOf((_.map(value, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
 						$scope.displayMCCWarning = true;

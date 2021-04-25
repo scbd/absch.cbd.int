@@ -97,8 +97,8 @@
 									<legend>Access to the resource(s)</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="resourceLinks" caption="Link to the resource(s)">
-												<div class="help-block">reproduction for educational or non-profit purposes.
+											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
+												<div class="help-block">Reproduction for educational or non-profit purposes.
 													Please always attach the relevant document(s) that will be stored in the database for
 													 users to download. When resources are available on the Internet, please also provide a 
 													 link to them. Please note that attachments are preferable to links because attachments 
@@ -125,21 +125,12 @@
 									<legend>Information on the content of the resource</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents (max 300 words)">
-												<div km-rich-textbox required ng-model="document.summary" rows="4" locales="document.header.languages"></div>
+											<div class="km-control-group"  name="summary" caption="Summary, abstract or table of contents (max 300 words)">
+												<div km-rich-textbox ng-model="document.summary" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
-									<!-- TODO need to convert the code, split the list into country and regions   -->
-									<!-- <div class="row">
-										 
-										<div class="col-xs-12">
-											<div class="km-control-group" name="countryRegions" caption="Country(ies), Regional or Economic group(s) related to the resource">
-												<div km-select style="display: inline-block" name="regions" ng-model="document.countryRegions" items="options.countryRegions()"
-												 multiple placeholder="Select a country(ies) and/or region(s)..."></div>
-											</div>
-										</div>
-									</div> -->
+									
 
 									<div class="row">
     
@@ -185,8 +176,9 @@
 											<div class="km-control-group"  name="cbdSubjects" caption="CBD Subject Areas">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" binding-type="term[]" locales="document.header.languages"></div>													
-										</div>
-                                    </div>
+											</div>
+                                   		</div>
+									</div>
 
 								</div>
 							</section>
@@ -208,6 +200,7 @@
 									<div class="row" ng-if="hasRiskAssessmentSubject">
 										<div  class="col-xs-12">
 											<div class="km-control-group" required name="biosafety.raRecommend" caption="Guidance on risk assessment of living modified organisms">
+												<div class="help-block">Would you like to recommend this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”?</div>
 												<div km-yes-no required name="biosafety.raRecommend" ng-model="document.biosafety.raRecommend" ng-click="onRaRecommendChange(document.biosafety.raRecommend)"  locales="document.header.languages"></div>												
 											</div>
 										</div>
