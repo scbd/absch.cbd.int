@@ -1346,7 +1346,9 @@ div.recordDefault:hover {
     }
 
     #CBD-Branding .locale a.set-languages {
-        margin-right: 45px;
+        margin-left: 5px;
+        position: absolute;
+        margin-top: -8px;
     }
 }
 #search-new .search> ul {
@@ -2149,21 +2151,6 @@ a.disabled{
     padding-right: 5px
 }
 
-.side-bar-widget::-webkit-scrollbar {
-width: 0.7em;
-}
-
-.side-bar-widget::-webkit-scrollbar-track {
--webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-}
-
-.side-bar-widget::-webkit-scrollbar-thumb {
-background-color: #b7b7b7;
-}
-.side-bar-widget div .help-articles{
-cursor:pointer;padding-top: 0px;
-}
-
 #wrapper {
     padding-left: 0;
     -webkit-transition: all 0.5s ease;
@@ -2277,7 +2264,7 @@ padding-right: 23%;
         width: 98%;
         padding: 10px;
         margin: 0px 0 0 7px;
-        padding-bottom: 20px;
+        padding-bottom: 0px;
     }
 
     #docketSideBar .card:hover {
@@ -2341,6 +2328,7 @@ padding-right: 23%;
         border-bottom: #EAEBED 2px solid;
         border-top: #EAEBED 1px solid;
         text-align: center;
+        text-transform: capitalize;
     }
 
     #docketSideBar .sidenav-heading span {
@@ -2417,7 +2405,7 @@ padding-right: 23%;
     }
     #docketSideBar .side-nav-bottom ul li {
         float: left;
-        padding: 0 10px;
+        padding: 0 6px;
         list-style: none;
         border-right: #fff 1px solid;
     }
@@ -2456,13 +2444,30 @@ padding-right: 23%;
     #docketSideBar .side-bar-widget {
         display: flex;
         padding-left: 10px;
-        padding-right: 10px;
+        padding-right: 18px;
         background-color: #fff;
         overflow-y: auto;
         overflow-x: hidden;
         height: calc(100vh - 158px);
     }
+    #docketSideBar .side-bar-widget::-webkit-scrollbar {
+        width: 0.7em;
+    }
 
+    #docketSideBar .side-bar-widget::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    #docketSideBar .side-bar-widget::-webkit-scrollbar-thumb {
+        background-color: #b7b7b7;
+    }
+    #docketSideBar .side-bar-widget div .help-articles{
+        cursor:pointer;
+        padding-top: 0px;
+    }
+    #docketSideBar .side-bar-widget div .help-articles:last-child{
+        padding-bottom: 25px;
+    }
 
     #docketSideBar .sidebar-widget-detail {
     display: flex;
@@ -2531,4 +2536,27 @@ padding-right: 23%;
         color: rgb(80, 95, 121);
         margin: 0px;
     }
+    #docketSideBar .details-articles::-webkit-scrollbar {
+        width: 0.7em;
+    }
+
+    #docketSideBar .details-articles::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    }
+
+    #docketSideBar .details-articles::-webkit-scrollbar-thumb {
+        background-color: #b7b7b7;
+    }
+    .details-articles{
+        overflow-y: scroll;
+        animation-name: articlesmoveLeft;
+        -webkit-animation-name: articlesmoveLeft;
+        animation-duration: 0.8s;
+        margin-left: 100%;
+    }
+    @keyframes articlesmoveLeft {
+        from {margin-left: 100%;}
+        to {margin-left: 7px;}
+    }
+
 }

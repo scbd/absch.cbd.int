@@ -1,7 +1,7 @@
 ﻿<div id="docketSideBar" class="container-full page-content">
     <div class="sidebar-header">
         <a class="closebtn" ng-click="closeLeftSideBar()">&times;</a>
-        <div class="sidenav-heading"><span ng-click="back();" ng-if="showArticle"><i class="fa fa-arrow-left"></i>&nbsp; &nbsp; Back</span>Help
+        <div class="sidenav-heading"><span ng-click="back();" ng-if="showArticle"><i class="fa fa-arrow-left"></i>&nbsp; &nbsp; Back</span>{{type}}
         </div>
         <div class="search-field">
            <div class="form-group has-feedback has-search">
@@ -15,23 +15,22 @@
             <i class="fa fa-spin fa-spinner fa-3x"></i> Loading...
         </div>
         <div ng-if="!loading && type=='announcements'">
-            <div class="row">
+            <div class="row" ng-if="!articleData">
                 <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
-                    <div class="card"  ng-class="{'article-open':showArticle}" >
+                    <div ng-click="details(article);" class="card"  ng-class="{'article-open':showArticle}" >
                         <div>
                             <img ng-src="{{getSizedImage(article.coverImage.url, '300x300')}}" style="width:100%;"></img>
-                            <h4 class="header" ng-bind="article.title | lstring:locale" ng-click="showArticle=true">
+                            <span class="header article-heading" ng-bind="article.title | lstring:locale" ng-click="showArticle=true">
                                 <button ng-show="showArticle" type="button" class="close pull-right" ng-click="showArticle=false"><span aria-hidden="true">×</span></button>
-                            </h4>
+                            </span>
                             <hr/>
-                            <p ng-click="showArticle=true">
+                            <p class="article-info">
                                 <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
                                 <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
                             <hr/>
                             </p>
                         </div>
                         <div class="footer">
-                            <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
                             <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                         </div>
                     </div>
@@ -52,29 +51,29 @@
                             <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
                         </p>
 
-                        <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>
-                        </div>
                         <div class="footer">
                             <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" ng-if="articleData" >
-                <div class="card"  ng-class="{'article-open':showArticle}">
-                    <h2 class="article-heading" ng-bind="articleData.title | lstring:locale" ng-click="showArticle=true" ></h2>
-                    <p class="article-info">
+        </div>
+
+        <div class="row" ng-if="articleData" >
+            <div class="card details-articles"  ng-class="{'article-open':showArticle}">
+                <h2 class="article-heading" ng-bind="articleData.title | lstring:locale" ng-click="showArticle=true" ></h2>
+                <p class="article-info">
                     <span class="summary" ng-if="articleData.summary && !showArticle" ng-bind-html="articleData.summary | lstring:locale|limitTo:200"></span>
                     <span class="summary" ng-if="!articleData.summary || showArticle" ng-bind-html="articleData.content | lstring:locale|limitTo:(showArticle ? articleData.content.length : 200)"></span>
-                    </p>
-                    <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span>
-                    </div>
-                    <div class="footer">
-                        <a rel="noopener" ng-href="/articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
-                    </div>
+                </p>
+                <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span>
+                </div>
+                <div class="footer">
+                    <a rel="noopener" ng-href="/articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                 </div>
             </div>
         </div>
+
     </div>
 
     <div class="sidebar-widget-detail" >
@@ -105,10 +104,10 @@
 
     <div class="side-nav-bottom">
         <ul>
-            <li><a>Contact us</a></li>
-            <li><a>Site Map</a></li>
-            <li><a>Linkages Policy</a></li>
-            <li><a>Disclaimer</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/contact-us/">  Contact us</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/resources/site-map/">Site Map</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/link-policy/"> Linkages Policy</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/disclaimer/">  Disclaimer </a></li>
         </ul>
     </div>
 </div>
