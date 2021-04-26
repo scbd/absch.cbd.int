@@ -397,6 +397,13 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                         document.otherTransboundryInformation = undefined;
                     }
 
+                    if(!(document.decisionTypes||[]).length){
+                        document.importers = undefined;
+                        document.exporters = undefined;
+                        document.forwardToOECD = undefined;
+                        document.isForCommercialUse = undefined;
+                    }
+
                     if (/^\s*$/g.test(document.notes))
                         document.notes = undefined;
 
@@ -418,20 +425,25 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 				
                 }
                 function cleanLMOSection(){
+                    if(!$scope.isLmoDecisionForIntentionalIntroduction	&& !$scope.isLmoDecisionForDirectUse){
+                        $scope.document.addressesTransboundaryMovement = undefined;
+                    }
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&&  !$scope.isLmoDecisionForDirectUse &&			
                         !$scope.isSimplifiedProcedure &&  !$scope.isDecisionOnTransitOfLMOs && !$scope.isDecisionOnContainedUseOfLMOs &&
                         !($scope.document.transboundaryMovementType||{}).identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'){
                         
                             $scope.document.modifiedOrganisms = undefined;
                     }
-
-                    if(!$scope.isLmoDecisionForIntentionalIntroduction	&& !$scope.isLmoDecisionForDirectUse && !$scope.isSimplifiedProcedure)
+                    
+                    if(!$scope.isLmoDecisionForIntentionalIntroduction	&& !$scope.isLmoDecisionForDirectUse && !$scope.isSimplifiedProcedure
+                        && !$scope.isDecisionOnContainedUseOfLMOs)
                         $scope.document.riskAssessments = undefined;
 
                     if($scope.isLmoDecisionForIntentionalIntroduction){
                         $scope.decisions.directUseDecisions = undefined;
-                        $scope.document.exporters           = undefined;
-                        $scope.document.importers           = undefined;
+                        if(!$scope.document.addressesTransboundaryMovement)
+                            $scope.document.exporters           = undefined;
+                        // $scope.document.importers           = undefined;
                     }
                 }
 
