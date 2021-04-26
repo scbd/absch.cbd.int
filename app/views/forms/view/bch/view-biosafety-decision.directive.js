@@ -16,7 +16,7 @@ app.directive("viewBiosafetyDecision", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", function ($scope)
+		controller : ["$scope" ,"$timeout" ,"$element", function ($scope, $timeout, $element)
 		{
 			function onOtherDecisionChanged (decisionTypes){
 				if(!decisionTypes){
@@ -50,7 +50,9 @@ app.directive("viewBiosafetyDecision", [function () {
 						return (a.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24') - (b.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24');
 					});
 				}
-				
+				$timeout(function() {
+					$element.find(".decision-types-other").contents().replaceWith('  Any other decisions, notifications, declarations or communications');
+				},50);
 			}
 			$scope.$watch("document", function (oldVal) {
 				if(oldVal && oldVal.decisionTypes)
@@ -68,9 +70,10 @@ app.directive("viewBiosafetyDecision", [function () {
 			}
 
 			$scope.onReferencedRecordsDataFetch = function(data){
-				if(data && (data.amendedRecords||{}).docs){
-					if(data.amendedRecords.docs.length)
-						$scope.amendedByRecords = _.map(data.amendedRecords.docs, 'identifier')
+				if(data && (data.biosafetyDecision||{}).fields){
+					var fields = data.biosafetyDecision.fields
+					if(fields.amendedRecords && fields.amendedRecords.docs.length)
+						$scope.amendedByRecords = _.map(fields.amendedRecords.docs, 'identifier')
 				}
 			}
 		}]
