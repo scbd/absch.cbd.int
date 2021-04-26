@@ -164,8 +164,8 @@
 									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
-											<div class="km-control-group" required name="aichiTargets" caption="Aichi Targets">
-												<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets" terms="options.aichiTargets()"
+											<div class="km-control-group" name="aichiTargets" caption="Aichi Targets">
+												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
 												 binding-type="term[]"></div>
 											</div>
 										</div>
@@ -289,8 +289,8 @@
 								<legend>Keywords related to Access and Benefit-Sharing</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="absSubjects" caption="ABS Thematic Areas">
-											<div km-term-check name="absSubjects" required ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
+										<div class="km-control-group"  name="nagoya.subjects" caption="ABS Thematic Areas">
+											<div km-term-check name="nagoya.subjects" required ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
 											 binding-type="term[]"></div>
 										</div>
 									</div>
@@ -298,8 +298,9 @@
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
-											<div km-term-check name="keyAreas" required ng-model="document.nagoya.keyAreas"  terms="options.keyAreas()"
+										<div class="km-control-group" name="nagoya.keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
+											<div class="help-block">If this is resource is related to capacity-building for the Nagoya Protocol, please provide appliable option(s) from</div>
+											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
 											 binding-type="term[]"></div>
 										</div>
 									</div>
