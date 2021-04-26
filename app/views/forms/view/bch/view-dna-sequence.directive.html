@@ -57,6 +57,7 @@
 			</div>
 		</div>
 	
+	<div ng-if="document.donorOrganisms || document.donorOrganismCollectionPoint || document.gisFiles ">
 		<legend>Donor organism</legend>
 
 		<div ng-show="document.donorOrganisms">
@@ -81,7 +82,7 @@
 			<label>Geographic coordinates</label>
 			<km-link-list class="km-value" ng-model="document.gisFiles"></km-link-list>
 		</div>
-
+	</div>
 		<legend>Characteristics of the protein coding sequence</legend>
 
 		<div ng-show="document.proteinName">

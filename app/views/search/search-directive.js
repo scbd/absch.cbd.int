@@ -382,7 +382,9 @@ import 'views/reports/matrix/data-matrix.directive';
                             })
                         }                
                     };
-
+                    $scope.canShowSaveFilter = function(){
+                        return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
+                    }
                     function saveRawQueryFilter(query){
                         $scope.setFilters['rawQuery'] = {
                             type     : 'rawQuery',
