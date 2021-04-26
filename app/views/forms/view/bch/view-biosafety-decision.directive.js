@@ -70,9 +70,10 @@ app.directive("viewBiosafetyDecision", [function () {
 			}
 
 			$scope.onReferencedRecordsDataFetch = function(data){
-				if(data && (data.amendedRecords||{}).docs){
-					if(data.amendedRecords.docs.length)
-						$scope.amendedByRecords = _.map(data.amendedRecords.docs, 'identifier')
+				if(data && (data.biosafetyDecision||{}).fields){
+					var fields = data.biosafetyDecision.fields
+					if(fields.amendedRecords && fields.amendedRecords.docs.length)
+						$scope.amendedByRecords = _.map(fields.amendedRecords.docs, 'identifier')
 				}
 			}
 		}]
