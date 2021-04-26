@@ -294,24 +294,24 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
 
               return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
-// for RiskAssesment
-             $scope.onRiskAssesmentBuildQuery = function(searchText){
+            // for RiskAssesment
+            $scope.onRiskAssesmentBuildQuery = function(searchText){
 
-            if (!$scope.document || !$scope.document.government)
-              return;
+                if (!$scope.document || !$scope.document.government)
+                return;
 
-            var queryOptions = {
-              realm     : realm.value,
-              schemas	  : ['nationalRiskAssessment'],
-              searchText: searchText
+                var queryOptions = {
+                realm     : realm.value,
+                schemas	  : ['nationalRiskAssessment'],
+                searchText: searchText
+                }
+                if($scope.isEu){
+                queryOptions.fieldQueries = ['schema_s:nationalRiskAssessment '+$scope.EuQuery];
+                } else {
+                queryOptions.government = $scope.document.government.identifier;
+                }
+                return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
-            if($scope.isEu){
-              queryOptions.fieldQueries = ['schema_s:nationalRiskAssessment '+$scope.EuQuery];
-            } else {
-              queryOptions.government = $scope.document.government.identifier;
-            }
-            return $scope.onBuildDocumentSelectorQuery(queryOptions);
-          }
 
                 $scope.onBuildSkipGovernmentQuery = function(searchText,schemasVal){
 
