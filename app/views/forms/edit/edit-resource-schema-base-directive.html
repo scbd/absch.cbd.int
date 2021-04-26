@@ -292,8 +292,8 @@
 								<legend>Keywords related to Access and Benefit-Sharing</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group"  name="nagoya.subjects" caption="ABS Thematic Areas">
-											<div km-term-check name="nagoya.subjects" required ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
+										<div class="km-control-group" required name="nagoya.subjects" caption="ABS Thematic Areas">
+											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
 											 binding-type="term[]"></div>
 										</div>
 									</div>
@@ -338,8 +338,8 @@
 							</div>
 						</section>
 						<section>
-							<legend>Notes</legend>
-
+							<div class="well no-shadow bg-white">
+								<legend>Notes</legend>
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="km-control-group" name="notes">
@@ -348,6 +348,7 @@
 										<div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>
+							</div>
 							</div>
 						</section>	
 						<!-- BCH and ABS COMPLETED HERE 	 -->
