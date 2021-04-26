@@ -2250,3 +2250,23 @@ a.disabled{
 #PreferencesPage .register-content, #RegisterPage .register-content, #SubmitPage .register-content, #searchPage .register-content {
     margin: 5px;
 }
+
+.tabular-term-check table tr td>label {
+    font-weight: 600;
+}
+.tabular-term-check table tr {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+
+
+@media (max-width: 767px){
+   .tabular-term-check table tr {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.easing {
+    transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}

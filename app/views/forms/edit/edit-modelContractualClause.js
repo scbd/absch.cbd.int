@@ -27,39 +27,18 @@ import 'views/forms/view/view-resource.directive';
       }
 
     });
-    //==================================
+
+    //============================================================
     //
-    //==================================
-    $scope.getCleanDocument = function() {
-
-      var document = $scope.document;
-
-      if (!document)
-        return undefined;
-
-      document = angular.fromJson(angular.toJson(document));
-
-      if (/^\s*$/g.test(document.notes))
-        document.notes = undefined;
-
-      document.aichiTargets = undefined;
-
-      if(!$scope.isOtherSelected(document.languages))
-          document.languageName = undefined;
-
-      if(!$scope.isOtherSelected(document.resourceTypes))
-          document.resourceTypeName = undefined;
-
-
-      if(document.organizations && document.organizations.length <=0)
-          document.organizations = undefined;
-
-        var documentCopy = _.clone(document)
-
-        delete documentCopy.organizationsRef;
-        return $scope.sanitizeDocument(documentCopy);
-    };
-
+    //============================================================
+    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true)
+    .then(function(doc){
+        if(doc.keywords)
+            $scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
+            if(doc.countryregions){
+                $scope.setCountryRegions (doc.countryregions)
+            }
+    });
 
 
 
