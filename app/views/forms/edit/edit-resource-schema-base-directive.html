@@ -98,12 +98,15 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
-												<div class="help-block">Reproduction for educational or non-profit purposes.
+												<div ng-show="isBCH" class="help-block">Reproduction for educational or non-profit purposes.
 													Please always attach the relevant document(s) that will be stored in the database for
 													 users to download. When resources are available on the Internet, please also provide a 
 													 link to them. Please note that attachments are preferable to links because attachments 
 													 are permanently accessible whereas links can become broken.
 												  </div>
+												  <div ng-show="isABS" class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download.
+													   When resources are available on the Internet, please also provide a link to them. Please note that attachments are preferable to 
+													  links because attachments are permanently accessible whereas links can become broken.</div>
 												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
 												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 											</div>
@@ -340,7 +343,8 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="km-control-group" name="notes">
-										<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+										<div class="help-block">The “Notes” field is for personal use. It can be seen only when the record is being edited but is not visible when the record is published. 
+											This field is not meant to be used for confidential information.</div>
 										<div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>
