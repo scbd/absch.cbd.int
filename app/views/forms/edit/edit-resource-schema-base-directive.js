@@ -76,7 +76,7 @@ import "views/forms/view/view-resource.directive";
 				}, 1000 );
 
 				//==================================
-				// Using
+				// 
 				//==================================
 				$scope.onRaRecommendChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
@@ -137,10 +137,6 @@ import "views/forms/view/view-resource.directive";
 					if ( !document )
 						return undefined;
 
-					//set all bch fields to undefined for eg. addressLmoCategories etc
-					if(!$scope.isBCH){
-						document.publisher = undefined;
-					}
 					if($scope.isBCH) {
 						document.nagoya = undefined;
 						if(document.biosafety){
@@ -151,10 +147,9 @@ import "views/forms/view/view-resource.directive";
 					}
 					if($scope.isABS) {
 						document.biosafety = undefined;
-						$scope.onResourceTypesChange( document.resourceTypes );
+						//$scope.onResourceTypesChange( document.resourceTypes );
 					}
 
-					//TODO: add countryRegions 
 					var countryRegions = []
 					if($scope.countryRegions){
 
@@ -177,12 +172,12 @@ import "views/forms/view/view-resource.directive";
 				//
 				//============================================================
 				// TODO: will remove unused code once ABS tested, where this code is using
-				$scope.onResourceTypesChange = function(value){
-					if (value && _.indexOf((_.map(value, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
-						$scope.displayMCCWarning = true;
-					else
-						$scope.displayMCCWarning = false;
-				}
+				// $scope.onResourceTypesChange = function(value){
+				// 	if (value && _.indexOf((_.map(value, "identifier")), '48D40B9E207B43948D95A0BA8F0D710F') >= 0)
+				// 		$scope.displayMCCWarning = true;
+				// 	else
+				// 		$scope.displayMCCWarning = false;
+				// }
 				$scope.onLmoCategoriesChange = function(value){
 					if(!value){
 						$scope.document.organisms = undefined;
