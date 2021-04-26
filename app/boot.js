@@ -134,7 +134,6 @@ export default function bootApp(window, require, defineX) {
             'datepicker-range'              : { 'deps': ['jquery', 'externalCss'] },  
             'ngStorage'                     : { 'deps': ['angular'] },
             'ngInfiniteScroll'              : { 'deps': ['angular'] },
-            'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             'cbd-forums'                    : { 'deps': ['angular', 'bootstrap']},
             'toastr'                        : { 'deps': ['angular', 'angular-animate'] },
             'ngDialog'                      : { 'deps': ['angular', 'externalCss'] },
@@ -153,6 +152,8 @@ export default function bootApp(window, require, defineX) {
 
             'pivottable'                    : { 'deps': ['jquery', 'jquery-ui', 'angular', 'externalCss']},
             'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
+
+            'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             
         },
         urlArgs: function(id, url){
@@ -196,8 +197,8 @@ export default function bootApp(window, require, defineX) {
         return Plotly;
     });
 
-    defineX('vue', ['Vue'], function(Vue){ return Vue; });
-    defineX('Vue', ['https://cdn.cbd.int/vue@2.6.12/dist/vue', cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min'], function(Vue, i18n){
+    defineX('vue', ['Vue'], function(Vue){ return Vue; });    
+    defineX('Vue', [cdnHost +'vue@2.6.12/dist/vue.min.js', 'vue-i18n'], function(Vue, i18n){
         window.Vue = Vue;
         window.VueI18n = i18n;
 
