@@ -204,8 +204,9 @@
 
 		<!-- If ABS, Start -->
 		<div ng-if="isABS">
-			<div ng-show="document.nagoya.subjects">
-				<label>Keywords related to Access and Benefit-Sharing</label>
+			<legend>Keywords related to Access and Benefit-Sharing</legend>
+			<div ng-show="document.nagoya.subjects">				
+				<label>ABS Thematic Areas</label>
 				<div class="km-value" compare-val="absSubjects">
 					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
 				</div>
