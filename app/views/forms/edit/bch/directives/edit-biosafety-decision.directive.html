@@ -341,16 +341,24 @@
 									<legend>Simplified procedure</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="movementAllowedUnderA131A" caption="Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?" required>
-												<div km-yes-no required ng-model="document.movementAllowedUnderA131A" locales="document.header.languages"></div>
-												<div class="km-control-group" name="appliesToSubsequentImports" caption="Does the decision apply to subsequent similar imports of LMOs?" required ng-if="document.movementAllowedUnderA131A" style="padding-left:50px; margin-top:15px;">
-													<div class="km-yes-no" required name="appliesToSubsequentImports" ng-model="document.appliesToSubsequentImports"></div>
+											<div class="km-control-group" name="simplifiedProcedure" caption="Subject of the decision the Simplified procedure" required>
+												<div>		
+													<input type="checkbox" id="movementAllowedUnderA131A" ng-model="document.movementAllowedUnderA131A" name="movementAllowedUnderA131A">
+													<label for="movementAllowedUnderA131A" class="light-label">
+														Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?
+													</label>	
+												</div>
+												<div>													
+													<input name="exemptedFromAIA" id="exemptedFromAIA" ng-model="document.exemptedFromAIA" type="checkbox"> 
+													<label for="exemptedFromAIA" class="light-label">
+														<span>Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure </span>
+													</label>
 												</div>
 											</div>
-										</div>
-										<div  class="col-xs-12">
-											<div class="km-control-group" name="exemptedFromAIA" caption="Does the decision specify that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure?" required>
-												<div km-yes-no required ng-model="document.exemptedFromAIA" locales="document.header.languages"></div>
+											
+											<div class="km-control-group" name="appliesToSubsequentImports" caption="Does the decision apply to subsequent similar imports of LMOs?" 
+												required ng-if="document.movementAllowedUnderA131A">
+												<div class="km-yes-no" required name="appliesToSubsequentImports" ng-model="document.appliesToSubsequentImports"></div>
 											</div>
 										</div>
 									</div>
