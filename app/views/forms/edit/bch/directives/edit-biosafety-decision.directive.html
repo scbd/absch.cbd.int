@@ -343,7 +343,7 @@
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="movementAllowedUnderA131A" caption="Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?" required>
 												<div km-yes-no required ng-model="document.movementAllowedUnderA131A" locales="document.header.languages"></div>
-												<div class="km-control-group" caption="Does the decision apply to subsequent similar imports of LMOs?" required ng-if="document.movementAllowedUnderA131A" style="padding-left:50px; margin-top:15px;">
+												<div class="km-control-group" name="appliesToSubsequentImports" caption="Does the decision apply to subsequent similar imports of LMOs?" required ng-if="document.movementAllowedUnderA131A" style="padding-left:50px; margin-top:15px;">
 													<div class="km-yes-no" required name="appliesToSubsequentImports" ng-model="document.appliesToSubsequentImports"></div>
 												</div>
 											</div>
