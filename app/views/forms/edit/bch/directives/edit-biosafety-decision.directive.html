@@ -18,9 +18,9 @@
 									<legend>General information</legend>
 									<div class="row">
 										<div class="col-xs-12" >
-											<div class="km-control-group" name="languages" required caption="Please select in which language(s) you wish to submit this record">
+											<div class="km-control-group" name="header.languages" required caption="Please select in which language(s) you wish to submit this record">
 												<div class="indent">
-													<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -50,30 +50,22 @@
                                     </div>    
                                     <div ng-if="document.isAmendment">
                                         <div class="row">
-                                            <div class="col-xs-12">
-												<div class="row">
-													<div class="col-xs-12">
-														<div class="km-control-group" required name="amendedRecords" caption="Please select the record(s) containing the decision being amended">
-															<div class="alert alert-danger" ng-if="document.isAmendment && !document.government.identifier">
-																Please select a government.
-															</div>	
-															<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyDecision"
-																 on-build-query="onBuildQuery(searchText, 'biosafetyDecision')"  caption="Country's Decision or any other Communication"
-																ng-disabled="!document.government.identifier"></div>			
-														</div>
+											<div class="col-xs-12">
+												<div class="km-control-group" required name="amendedRecords" caption="Please select the record(s) containing the decision being amended">
+													<div class="alert alert-danger" ng-if="document.isAmendment && !document.government.identifier">
+														Please select a government.
+													</div>	
+													<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyDecision"
+															on-build-query="onBuildQuery(searchText, 'biosafetyDecision')"  caption="Country's Decision or any other Communication"
+														ng-disabled="!document.government.identifier"></div>			
+												</div>
+												<div class="col-xs-12" ng-if="document.isAmendment">
+													<div class="km-control-group" ng-required="document.isAmendment ||documentExists" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
+														<div km-rich-textbox required name="amendmentsDetails" ng-model="document.amendmentsDetails" locales="document.header.languages"></div>
 													</div>
 												</div>
-    
-                                            </div>
-                                        </div>
-									</div>
-
-									<div class="row">
-										<div class="col-xs-12" ng-if="document.isAmendment ||documentExists">
-											<div class="km-control-group" ng-required="document.isAmendment ||documentExists" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
-												<div km-rich-textbox required name="amendmentsDetails" ng-model="document.amendmentsDetails" locales="document.header.languages"></div>
 											</div>
-										</div>
+                                        </div>
 									</div>
 
 									<div class="row">

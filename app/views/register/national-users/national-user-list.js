@@ -45,13 +45,15 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
                     u.canBeDropped = canDropUser(u);
                     u.showExtraRoles = true;
 
-                    var userRoles = _.forEach(u.roles, function(rid){
-                        var userRole = $scope.roles[rid];
-                        if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
-                            governmentPARole = userRole;
-                        }
-                        return
-                    });
+                    if(realm.is('ABS')){
+                        var userRoles = _.forEach(u.roles, function(rid){
+                            var userRole = $scope.roles[rid];
+                            if(_.includes(['AbsPublishingAuthorities', 'AbsPublishingAuthorities-dev', 'AbsPublishingAuthorities-trg'],userRole.code)){
+                                governmentPARole = userRole;
+                            }
+                            return
+                        });
+                    }
                 });
             }).catch(function(err){
                 $scope.error = err.data || err;
@@ -353,13 +355,13 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
 
             return $q(function(resolve, reject) {
 
-                require(['text!'+dialog+'.html', dialog+''], function(template, controller) {
+                require([dialog+''], function(controller) {
 
                     options.plain = true;
                     options.closeByDocument = false;
                     options.showClose = false;
-                    options.template = template;
-                    options.controller = controller;
+                    options.template = controller.template;
+                    options.controller = controller.default;
 
                     if(!options.controllerAs) {
                         var controllerAs = dialog.lastIndexOf('/')<0 ? dialog : dialog.substr(dialog.lastIndexOf('/')+1);
