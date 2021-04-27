@@ -83,8 +83,8 @@ import 'services/main';
 					$scope.tab = 'edit';
 					var href = $($event.target).attr("href");
 					$timeout(function (  ) {
-					 $('.pagination li a[href!="'+href+'"]').closest('li').removeClass('active');
-					 $('.pagination li a[href="'+href+'"]').closest('li').addClass('active');
+						$element.find('.pagination li a[href!="'+href+'"]').closest('li').removeClass('active');
+						$element.find('.pagination li a[href="'+href+'"]').closest('li').addClass('active');
 					},100);
 				   };
 
