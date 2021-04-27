@@ -35,30 +35,32 @@
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header" >
-        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
+        <span class="hidden-xs hidden-sm color-cbdlitegrey left-part" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
           <i class="fa fa-bars"></i> Convention on Biological Diversity
         </span>
 
-        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left">
+        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left left-part-mob">
           <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>
           <span class="brand">CBD</span>
         </span>
-
-        <account-header user="user" class="login-header" ng-class="{'is-auth':user.isAuthenticated}"></account-header>
-        <xuser-notifications-icon class="login-header" ng-class="{'is-auth':user.isAuthenticated}"></xuser-notifications-icon>
-        <locale-header class="account-header" id="CBD-Branding"></locale-header>
-        <a href="#" ng-class="{'active':activeHelpMenu=='help'}"class="right-side-help-menus" ng-click="openSideBlock('help')"style="position:absolute;right:50px;top:-1px;"><i class="fa fa-question"></i></a>
-        <a href="#" ng-class="{'active':activeHelpMenu=='announcements'}"class="right-side-help-menus" ng-click="openSideBlock('announcements')"style="position:absolute;right:20px;top:-1px;"><i class="fa fa-bullhorn"></i></a>
+        <ul class="navbar-left navlist hidden-xs hidden-sm menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
+          <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
+        </ul>
+        <div class="right-part">
+          <account-header user="user" class="rp-signin" ></account-header>
+          <xuser-notifications-icon class="rp-n"></xuser-notifications-icon>
+          <locale-header class="rp-lang" id="CBD-Branding"></locale-header>
+          <a href="#" ng-class="{'active':activeHelpMenu=='help'}"class="right-side-help-menus rp-ques" ng-click="openSideBlock('help')"><i class="fa fa-question"></i></a>
+          <a href="#" ng-class="{'active':activeHelpMenu=='announcements'}"class="right-side-help-menus rp-notification" ng-click="openSideBlock('announcements')"><i class="fa fa-bullhorn"></i></a>
+        </div>
       </div>
 
-      <ul class="navbar-left navlist hidden-xs hidden-sm"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
-        <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
-      </ul>
+      
     </div>
   </nav>
 

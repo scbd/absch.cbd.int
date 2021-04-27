@@ -2,10 +2,6 @@
   font-size: 60px;
   background-color: #fff;
 }
-#CBD-Branding .header h1 {
-  font-size: 60px;
-  background-color: #fff;
-}
 
 #CBD-Branding .header {
   font-size: 14px;
@@ -23,7 +19,7 @@
 
 #CBD-Branding .navlist {
     margin: 0;
-    padding: 0;
+    padding: 5px 0 0 0;
     display: inline;
 }
 
@@ -52,33 +48,10 @@
   /*color:white;*/
   color: #bdbdbd;
   min-height: 26px;
-  padding-top: 5px;
+ 
   list-style-type: none;
 }
-#CBD-Branding .container-cbd .navbar-header .account-header{
-    position:absolute;
-    right:130px;
-    top:7px;
-}
-#CBD-Branding .container-cbd .navbar-header .login-header{
-    position: absolute;
-    right: 110px;
-    top: 5px;
-}
-#CBD-Branding .container-cbd .navbar-header .login-header.is-auth{
-    position: absolute;
-    right: 130px;
-    top: 5px;
-}
-#CBD-Branding .container-cbd .navbar-header .login-header>div{
-    margin-right: 25px;
-    width: auto;
-}
-#CBD-Branding .container-cbd .navbar-header .account-header a.set-languages{
-    position: absolute;
-    margin-left: 5px;
-    margin-top: -8px;
-}
+
 #CBD-Branding .container-cbd-icon {
   color: #bdbdbd;
   cursor: pointer;
@@ -94,7 +67,7 @@
 
  #CBD-Branding .navlist {
   margin: 0;
-  padding: 0;
+  padding: 5px 0 0 0;
   display: inline;
   padding-left: 40px;
 }
@@ -174,29 +147,6 @@
 #CBD-Branding .header #CBD-Branding.navbar-default #CBD-Branding.navbar-nav #CBD-Branding.open #CBD-Branding.dropdown-menu li a {
     color: white;
   }
-    #CBD-Branding .container-cbd .navbar-header .account-header{
-        right: 60px;
-    }
-    #CBD-Branding .container-cbd .navbar-header .login-header{
-        position: absolute;
-        right: 40px;
-        top: 5px;
-    }
-    #CBD-Branding .container-cbd .navbar-header .login-header.is-auth{
-        right: 62px;
-    }
-    #CBD-Branding .container-cbd .navbar-header .account-header a.set-languages{
-        margin-left: 1px;
-    }
-    #bch-navbar .nav.navbar-nav li {
-        width: 10%;
-    }
-
-    #bch-navbar .nav.navbar-nav li>a {
-        padding-bottom: 2px;
-        line-height: 10px;
-        padding: 10px 23px;
-    }
 }
 #CBD-Branding .btn1 {
   color : rgb(49, 46, 46);
@@ -204,3 +154,62 @@
   border-radius: 10px 0 0 10px;
   font-size: 16px;
 }
+
+.navbar-header {
+  float: left;
+  width: 100%;
+}
+.navbar-header .left-part{
+  float: left;
+  padding-top: 5px;
+}
+.navbar-header .left-part-mob{
+  float: left;
+  padding-top: 5px;
+}
+.navbar-header .right-part{
+  float: right;
+}
+.rp-signin{
+  float: left;
+padding: 5px 10px 0 10px;
+}
+.rp-lang{
+  float: left;
+padding: 0 10px;
+}
+
+.rp-ques{
+  float: left;
+padding: 0 10px;
+}
+.rp-notification{
+  float: left;
+padding: 0 10px;
+}
+.rp-n{
+  padding: 8px 10px 0 10px;
+  float: left !important;
+}
+
+#CBD-Branding .locale-menu {
+  position: absolute;
+    right: 0;
+    width: 200px;
+    float: right;
+    left: inherit;
+}
+.navbar .right-side-help-menus {
+  font-size: 16px;
+  margin-bottom: 0;
+  border: 0;
+  z-index: 100;
+  list-style-type: none;
+  padding: 0 10px !important;
+  margin: 0;
+  line-height: 30px;
+  font-weight: 200;
+  width: auto !important;
+  text-align: center;
+}
+

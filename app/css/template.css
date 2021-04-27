@@ -1296,7 +1296,7 @@ div.recordDefault:hover {
 
 /* Home page */
 #Jumbotron {
-    margin: -10px -20px 0px -20px;
+    margin:0;
 }
 #search-map {
     background: transparent!important;
@@ -1345,11 +1345,7 @@ div.recordDefault:hover {
         font-size: 15px;
     }
 
-    #CBD-Branding .locale a.set-languages {
-        margin-left: 5px;
-        position: absolute;
-        margin-top: -8px;
-    }
+    
 }
 #search-new .search> ul {
     margin: 0;
@@ -2074,6 +2070,9 @@ a.disabled{
     .country-profile-list .link1 .label {
         display: contents;
     }
+    #bch-navbar .bch-navbar li{
+        width: 10%;
+    }
 }
 /* ammap */
 .map-disclaimer {
@@ -2160,7 +2159,7 @@ a.disabled{
 }
 
 #wrapper.toggled {
-    padding-right: 20%;
+    padding-right: 0%;
 }
 scbd-footer.toggled #CBD-Branding.footer {
 padding-right: 23%;
@@ -2197,10 +2196,10 @@ padding-right: 23%;
 }
 
 #wrapper.toggled #page-content-wrapper {
-    position: absolute;
+    position: relative;
 }
 .container-full.page-content{
-    margin: 5px;
+    margin: 0;
 }
 
 .container-breadcrumbs{
@@ -2401,6 +2400,7 @@ padding-right: 23%;
 
     #docketSideBar .side-nav-bottom ul {
         padding-left: 10px;
+        display: flex;
         /* margin: 0 5%; */
     }
     #docketSideBar .side-nav-bottom ul li {
@@ -2408,6 +2408,10 @@ padding-right: 23%;
         padding: 0 6px;
         list-style: none;
         border-right: #fff 1px solid;
+        flex: auto;
+    }
+    #docketSideBar .side-nav-bottom ul li:last-child{
+        border-right: none;
     }
 
     #docketSideBar .side-nav-bottom ul li a {
@@ -2559,4 +2563,20 @@ padding-right: 23%;
         to {margin-left: 7px;}
     }
 
+}
+
+/*---Footer css---*/
+.bch-footer, .scbd-footer{
+    float: left;
+    width: 100%;
+
+}
+.navbar-nav {
+    margin: 7.5px 5px;
+}
+
+.navbar-nav>li>a {
+    position: relative;
+    display: block;
+    padding: 10px 8px;
 }

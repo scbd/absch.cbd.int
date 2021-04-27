@@ -16,8 +16,8 @@
   color: #bdbdbd;
   cursor: pointer;
   font-size: 80%;
-  position: absolute;
   left: 0px;
+  float: right;
 }
 @media screen and (max-width: 480px) {
   #CBD-Branding .drop-menu-position {
