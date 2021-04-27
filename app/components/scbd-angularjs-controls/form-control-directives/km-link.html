@@ -107,7 +107,7 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-default" ng-click="editor.close()">Cancel</button>
-					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress">Save</button>
+					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress || !editor.isFileValid">Save</button>
 				</div>
 				<div id="uploadPlaceholder" style="display:none"></div>
 			</div>
