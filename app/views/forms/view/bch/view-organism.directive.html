@@ -101,7 +101,7 @@
 		<div ng-show="document.organismType">
 			<label>Type of organism</label>
 			<div compare-val> 
-			<view-terms-hierarchy  class="km-value" ng-model="document.organismType" locale="locale" term-domain="typeOfOrganisms"></view-terms-hierarchy>
+				<div class="km-value" ng-bind="document.organismType|term:locale"> </div>
 			</div>
 		</div>
 

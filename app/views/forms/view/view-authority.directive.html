@@ -92,7 +92,6 @@
 				</div>
 				</div>
 			</div>
-												
 		</div>
 
 		<div ng-if="isABS && (document.responsibilities ||document.responsibleForAll ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
@@ -141,24 +140,24 @@
 			<legend>Responsibilities</legend>
 			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.functions)">
 				<label>Administrative functions</label>
-			<div compare-val>
-				<view-terms-hierarchy ng-if="document.header.schema!='supplementaryAuthority'" class="km-value" 
-				ng-model="(document.functions)" locale="locale" term-domain="subjectAreas"></view-terms-hierarchy>
-			</div>
-			<div compare-val>
-				<view-terms-hierarchy ng-if="document.header.schema=='supplementaryAuthority'" class="km-value" 
-				ng-model="(document.functions)" locale="locale" term-domain="supplementaryProtocolFunctions"></view-terms-hierarchy>
+				<!--TODO: ng-if="document.header.schema!='supplementaryAuthority'" was conflecting -->
+			<div  class="km-value" compare-val>
+				<view-terms-hierarchy  ng-model="document.functions" locale="locale" ng-if="document.header.schema!='supplementaryAuthority'"
+					term-domain="subjectAreas" on-terms-loaded="onFunctionsTerms(terms)"></view-terms-hierarchy>
+
+				<view-terms-hierarchy  ng-model="document.functions" locale="locale" ng-if="document.header.schema=='supplementaryAuthority'"
+				 term-domain="supplementaryProtocolFunctions" on-terms-loaded="onFunctionsTerms(terms)"></view-terms-hierarchy>
 			</div>
 			</div>
 
 			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
 				<label>Types of organism(s) under its responsibility</label>
-				<div compare-val>
-				<view-terms-hierarchy class="km-value" ng-model="document.cpbOrganismTypes" locale="locale" 
-				term-domain="typeOfOrganisms"></view-terms-hierarchy>
+				<div class="km-value" compare-val>
+					<view-terms-hierarchy  ng-model="document.cpbOrganismTypes" locale="locale"
+					term-domain="typeOfOrganisms" on-terms-loaded="onOrganismTypesTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
-   
+
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
 				<div ng-if="document.responsibleForAll!==undefined">
 					<label>Is this the only designated Competent Authority for the Supplementary Protocol in the country?</label>

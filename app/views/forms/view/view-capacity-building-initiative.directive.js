@@ -2,6 +2,8 @@ import app from 'app';
 import template from "text!./view-capacity-building-initiative.directive.html";
 import 'views/directives/record-options';
 import 'views/forms/view/directives/view-record-reference.directive';
+import _ from "lodash";
+import 'views/forms/directives/view-terms-hierarchy';
 
 app.directive("viewCapacityBuildingInitiative", [function () {
 	return {
@@ -31,6 +33,37 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 									   }); }
     		};
 
+				$scope.onThematicAreasTerms = function(terms){
+					if(($scope.document||{}).cpbThematicAreas){
+						_.forEach(terms, function(item){
+							if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+								var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
+								if(parent){
+									terms = _.filter(terms, function(t){
+										return !_.includes(item.narrowerTerms, t.identifier)
+									})
+								}
+							}
+						});
+						return terms;
+					}
+				}
+
+				$scope.onTargetGroupsTerms = function(terms){
+					if(($scope.document||{}).targetGroups){
+						_.forEach(terms, function(item){
+							if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+								var parent =_.find($scope.document.targetGroups, {identifier: item.identifier});
+								if(parent){
+									terms = _.filter(terms, function(t){
+										return !_.includes(item.narrowerTerms, t.identifier)
+									})
+								}
+							}
+						});
+						return terms;
+					}
+			}
 			//====================
 			//
 			//====================

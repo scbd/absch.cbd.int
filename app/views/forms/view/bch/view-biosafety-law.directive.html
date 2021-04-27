@@ -93,23 +93,13 @@
 			<div ng-if="document.cpbSubjectAreas">
 				<label>Subject areas</label>
 				<div class="km-value" compare-val>
-					<ul class="list">
-						<li ng-repeat="item in document.cpbSubjectAreas">
-							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
-							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
-						</li>
-					</ul>
+					<view-terms-hierarchy  ng-model="document.cpbSubjectAreas" locale="locale" term-domain="subjectAreas" on-terms-loaded="onSubjectAreasTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 			<div ng-if="document.cpbOrganismTypes">
 				<label>Types of organisms addressed</label>
 				<div class="km-value" compare-val>
-					<ul class="list">
-						<li ng-repeat="item in document.cpbOrganismTypes">
-							<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
-							<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item.customValue|lstring:locale"></span>
-						</li>
-					</ul>
+					<view-terms-hierarchy ng-model="document.cpbOrganismTypes" locale="locale" term-domain="typeOfOrganisms" on-terms-loaded="onOrganismTypesTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 
