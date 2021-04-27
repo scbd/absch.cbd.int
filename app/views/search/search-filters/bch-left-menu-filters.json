@@ -48,7 +48,7 @@
 			"title": "Result of the decision",
 			"field": "decisionResult_ss",
 			"relatedField":"decisionResult_REL_ss",
-			"otherTerm":false,
+			"otherTerm":false
 		},
 		{
 			"type": "date",
