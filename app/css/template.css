@@ -2117,6 +2117,11 @@ a.disabled{
     width: 35% !important;
 }
 
+.light-label{
+    font-size: 14px;
+    font-weight: 400!important;
+}
+
 .easing {
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
