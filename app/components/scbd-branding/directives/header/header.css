@@ -57,17 +57,17 @@
 }
 #CBD-Branding .container-cbd .navbar-header .account-header{
     position:absolute;
-    right:110px;
+    right:130px;
     top:7px;
 }
 #CBD-Branding .container-cbd .navbar-header .login-header{
     position: absolute;
-    right: 90px;
+    right: 110px;
     top: 5px;
 }
 #CBD-Branding .container-cbd .navbar-header .login-header.is-auth{
     position: absolute;
-    right: 105px;
+    right: 130px;
     top: 5px;
 }
 #CBD-Branding .container-cbd .navbar-header .login-header>div{
