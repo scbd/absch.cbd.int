@@ -101,8 +101,16 @@
 			<label>Subject(s) of the decision</label>
 			<div class="km-value" compare-val="decisionTypes">
 				<ul class="list">
-					<li ng-class="{'decision-types-other':item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}" ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
-					ng-repeat="item in document.decisionTypes" ng-bind="item|term:locale"></li>
+					<li  ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
+					ng-repeat="item in document.decisionTypes" >
+						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+							Any other decisions, notifications, declarations or communications
+							<span ng-if="item.customValue">
+								(<span ng-bind="item.customValue|lstring:locale"></span>)
+							</span>
+						</span>
+					</li>
 				</ul>
 			</div>
 		</div>

@@ -61,7 +61,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                             //special case to replace other text
                             $timeout(function() {
                                 $element.find(".communication-decisions").find(".other-term label")
-                                .contents().eq(2).replaceWith('  Any other decisions, notifications, declarations or communications');
+                                .contents().eq(2).replaceWith($element.find('#otherSubject').text());
                             },500);				
                             return _.filter(o, function(item){
                                 return _.includes([ decisionSubjects.DEC_8_6,  decisionSubjects.DEC_8_7,
