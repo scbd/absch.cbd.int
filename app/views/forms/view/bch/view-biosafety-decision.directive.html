@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div ng-if="amendedByRecords">
-				<label>This decision has been amended by following decision</label>
+				<label>The decision/communication in this record has been amended by the decision(s)/communication(s) in the following record(s)</label>
 				<div class="km-value" compare-val="amendedByRecords">
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
@@ -101,8 +101,16 @@
 			<label>Subject(s) of the decision</label>
 			<div class="km-value" compare-val="decisionTypes">
 				<ul class="list">
-					<li ng-class="{'decision-types-other':item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}" ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
-					ng-repeat="item in document.decisionTypes" ng-bind="item|term:locale"></li>
+					<li  ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
+					ng-repeat="item in document.decisionTypes" >
+						<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
+						<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+							Any other decisions, notifications, declarations or communications
+							<span ng-if="item.customValue">
+								(<span ng-bind="item.customValue|lstring:locale"></span>)
+							</span>
+						</span>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -236,7 +244,7 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-if="document.exporters">
+			<div ng-if="document.exporters && isDecisionOnLmoImport">
 				<label>Exporter’s contact details</label>
 				<div class="km-value" compare-val="exporters">
 					<ul class="list">
@@ -246,7 +254,7 @@
 					</ul>
 				</div>
 		</div>
-		<div ng-if="document.importers">
+		<div ng-if="document.importers && isDecisionOnLmoImport">
 			<label ng-if="isDecisionOnLmoImport">Importer's/Applicant's contact details</label>
 			<label ng-if="isDecisionOnLmoDomesticUse">Applicant’s contact details</label>
 			<div class="km-value" compare-val="importers">
@@ -303,8 +311,8 @@
 		<div ng-if="document.movementAllowedUnderA131A || document.exemptedFromAIA">
 			<label>Subject of the decision under the simplified procedure</label>
 			<div class="km-value" compare-val>
-				<div ng-if="document.movementAllowedUnderA131A">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import.</div>
-				<div ng-if="document.exemptedFromAIA">Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure.</div>
+				<div ng-if="document.movementAllowedUnderA131A">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import</div>
+				<div ng-if="document.exemptedFromAIA">Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure</div>
 			</div>
 			<div ng-if="document.appliesToSubsequentImports!=undefined">
 				<label>Does the decision apply to subsequent similar imports of LMOs?</label>

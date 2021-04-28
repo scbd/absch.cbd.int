@@ -137,9 +137,9 @@ import 'views/directives/route-loading-directive';
                 if (!user)
                     return;
 
-                require(["https://www.cbd.int/app/js/slaask.js"], function (_slaask) {
+                require(["slaask"], function (_slaask) {
 
-                    if (user.isAuthenticated) {
+                    if (user.isAuthenticated && _slaask) {
                         _slaask.identify(user.name, {
                             'user-id': user.userID,
                             'name': user.name,
@@ -152,7 +152,7 @@ import 'views/directives/route-loading-directive';
                         }
                     }
 
-                    if (!_slaask.initialized) {
+                    if (_slaask && !_slaask.initialized) {
                         _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
                     }
                 });
