@@ -19,7 +19,7 @@
 
 #CBD-Branding .navlist {
     margin: 0;
-    padding: 0;
+    padding: 5px 0 0 0;
     display: inline;
 }
 
@@ -48,7 +48,7 @@
   /*color:white;*/
   color: #bdbdbd;
   min-height: 26px;
-  padding-top: 5px;
+ 
   list-style-type: none;
 }
 
@@ -67,7 +67,7 @@
 
  #CBD-Branding .navlist {
   margin: 0;
-  padding: 0;
+  padding: 5px 0 0 0;
   display: inline;
   padding-left: 40px;
 }
@@ -153,5 +153,63 @@
   background-color: rgba(255, 222, 121, 0.96);
   border-radius: 10px 0 0 10px;
   font-size: 16px;
+}
+
+.navbar-header {
+  float: left;
+  width: 100%;
+}
+.navbar-header .left-part{
+  float: left;
+  padding-top: 5px;
+}
+.navbar-header .left-part-mob{
+  float: left;
+  padding-top: 5px;
+}
+.navbar-header .right-part{
+  float: right;
+}
+.rp-signin{
+  float: left;
+padding: 5px 10px 0 10px;
+}
+.rp-lang{
+  float: left;
+padding: 0 10px;
+}
+
+.rp-ques{
+  float: left;
+padding: 0 10px;
+}
+.rp-notification{
+  float: left;
+padding: 0 10px;
+}
+.rp-n{
+  padding: 8px 10px 0 10px;
+  float: left !important;
+}
+
+#CBD-Branding .locale-menu {
+  position: absolute;
+    right: 0;
+    width: 200px;
+    float: right;
+    left: inherit;
+}
+.navbar .right-side-help-menus {
+  font-size: 16px;
+  margin-bottom: 0;
+  border: 0;
+  z-index: 100;
+  list-style-type: none;
+  padding: 0 10px !important;
+  margin: 0;
+  line-height: 30px;
+  font-weight: 200;
+  width: auto !important;
+  text-align: center;
 }
 
