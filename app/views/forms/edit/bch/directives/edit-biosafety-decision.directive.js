@@ -291,7 +291,8 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                 searchText: searchText
               }
               queryOptions.fieldQueries = ['schema_s:authority '+$scope.EuQuery];
-
+              queryOptions.government = $scope.document.government.identifier;
+              
               return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
             // for RiskAssesment
