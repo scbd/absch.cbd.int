@@ -236,7 +236,7 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-if="document.exporters">
+			<div ng-if="document.exporters && isDecisionOnLmoImport">
 				<label>Exporter’s contact details</label>
 				<div class="km-value" compare-val="exporters">
 					<ul class="list">
@@ -246,7 +246,7 @@
 					</ul>
 				</div>
 		</div>
-		<div ng-if="document.importers">
+		<div ng-if="document.importers && isDecisionOnLmoImport">
 			<label ng-if="isDecisionOnLmoImport">Importer's/Applicant's contact details</label>
 			<label ng-if="isDecisionOnLmoDomesticUse">Applicant’s contact details</label>
 			<div class="km-value" compare-val="importers">

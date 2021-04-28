@@ -205,11 +205,14 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
                     $scope.decisions.isDecisionOnLmoDomesticUse	   = _($scope.decisions.directUseDecisions||[]).map('identifier').includes('C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507');
 
                     if($scope.isLmoDecisionForDirectUse){
-
-                      if(!$scope.decisions.isDecisionOnLmoImport && !$scope.decisions.isDecisionOnLmoDomesticUse)
+				
+                      if(!$scope.decisions.isDecisionOnLmoImport 
+                        && !$scope.decisions.isDecisionOnLmoDomesticUse
+                        && !$scope.isLmoDecisionForIntentionalIntroduction)
                             $scope.document.importers = undefined;
                         // TODO need to verify
-                       if(!$scope.decisions.isDecisionOnLmoImport)
+                       if(!$scope.decisions.isDecisionOnLmoImport 
+                        && !$scope.isLmoDecisionForIntentionalIntroduction)
                             $scope.document.exporters = undefined;
                     }
 
@@ -292,7 +295,7 @@ import "views/forms/view/bch/view-biosafety-decision.directive";
               }
               queryOptions.fieldQueries = ['schema_s:authority '+$scope.EuQuery];
               queryOptions.government = $scope.document.government.identifier;
-              
+
               return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
             // for RiskAssesment
