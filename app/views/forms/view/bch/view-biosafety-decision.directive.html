@@ -1,4 +1,4 @@
-﻿<div id="Record" class="record panel panel-default">
+<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
 		<h4>
 			<span ng-bind="::document.header.schema|schemaName"></span>
@@ -34,7 +34,7 @@
 				</div>
 			</div>
 			<div ng-if="amendedByRecords">
-				<label>This decision has been amended by following decision</label>
+				<label>The decision/communication in this record has been amended by the decision(s)/communication(s) in the following record(s)</label>
 				<div class="km-value" compare-val="amendedByRecords">
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
