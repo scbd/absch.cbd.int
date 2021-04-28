@@ -34,6 +34,7 @@
     
     <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
     <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
+
     <div class="m-app-loading" ng-animate-children>
         <!--
             HACKY CODE WARNING: I'm putting Style block inside directive so that it
@@ -92,11 +93,11 @@
                 <h1>
                     <br/>                  
                    <div class="color-black" id="appLoadingMessage">
-                        loading the <br/>ABS Clearing-House                        
+                        loading the <br/> clearing-House                        
                     </div>
                     version <%=appVersion%>
                     <div class="color-red" id="appLoadingError" style="display: none;">
-                        <span>Error loading the <br/>ABS Clearing-House   </span>
+                        <span>Error loading the <br/>clearing-House   </span>
                         <br/>
                         <span>Please contact the Secretariat</span>
                         <div>
@@ -113,21 +114,29 @@
 
     </div>
     <!-- PAGE -->
-    <div>
+    
         <scbd-header></scbd-header>
-        
         <bch-header></bch-header>
 
-        <div class="container-full page-content">
+        <div class="container-full page-content" style="min-height:650px;" 
+        ng-class="{'training-bg':!production_env}">
             <route-loading></route-loading>
             <ng-view autoscroll="true"></ng-view>
         </div>
-
-        <bch-footer></bch-footer>
-
-        <scbd-footer></scbd-footer>
-    </div>
+    
+    
+        <div class="footer" style="margin-top:50px;">
+            <div class="footer-page" >
+                <div class="container-fluid footer-page-container">
+                    <a rel="noopener" translation-url  href="#"  ng-click="scrollToTop()" class="pull-right color-darkgrey"><i class="fa fa-arrow-circle-up"></i> back to top</a>
+                </div>
+            </div>
+        </div>
         
+        <bch-footer></bch-footer>
+        <cbd-footer></cbd-footer>
+        <!-- <scbd-footer></scbd-footer> -->
+
     <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
     <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>

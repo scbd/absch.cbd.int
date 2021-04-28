@@ -17,8 +17,6 @@
 
     <div ng-repeat="filter in setFilters" style="margin-bottom: 5px;">
 
-        <div class="row">
-            <div class="col-xs-12">
 
                 <!-- edit free text -->
                 <div ng-if="filter.edit" class="input-group edit" style="position: absolute;z-index: 100;">
@@ -93,6 +91,9 @@
                         <!-- <div ng-repeat="subfilter in getScope().leftMenuFilters[filter.id].selectedItems" style="display:block;margin:5px 0;" class="label label-selected-facet bg-blue">
                         {{subfilter}}
                     </div> -->
+                            
+                    
+
 
                     </div>
                     <div class="input-group-addon "
@@ -106,74 +107,9 @@
                     </div>
 
                 </div><!-- /input-group -->
-            </div><!-- /.col -->
-
-        </div><!-- /.row -->
+  
 
     </div>
 
-    <!-- <span class="btn filter-chip active" ng-class="{'exclude-filter':filter.excludeResult}" 
-    style="width:100%;border-radius: 4px;background-color:#ddd;" > -->
-
-    <!-- <span class="filter-chip-text dropdown pull-left" > -->
-
-    <!-- <span class="btn bold dropdown" style="padding:3px;cursor: pointer" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"  >
-                <i class="fa fa-check-square"  ng-if="!filter.excludeResult && !filter.disabled " aria-hidden="true"></i>
-                <i class="fa fa-minus-square" ng-if="filter.excludeResult" aria-hidden="true"></i> 
-                <i class="fa fa-eye-slash"   ng-if="filter.disabled" aria-hidden="true"></i>  
-            </span> -->
-
-    <!-- <button class="btn btn-xs bold filter-chips-remove"  ng-click="removeFilter(filter)">
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-            </button> -->
-
-    <!-- <ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit && filter.type!='date'" >
-                <li ng-if="filter.type=='freeText'" >
-                    <a rel="noopener" href="#" ng-click="onEditFreeTextFilter(filter)"><i class="fa fa-edit" aria-hidden="true"></i> Edit filter</a>
-                </li>
-                <li>
-                    <a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();">
-                        <i class="fa fa-eye-slash" aria-hidden="true"></i> Disable</a>
-                </li>
-                <li>
-                    <a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();">
-                    <i class="fa fa-eye" aria-hidden="true"></i> Enable</a>
-                </li>
-                <li>
-                    <a rel="noopener" href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();">
-                    <i class="fa fa-minus-square" aria-hidden="true"></i> Exclude results</a>
-                </li>
-                <li>
-                    <a rel="noopener" href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
-                    <i class="fa fa-plus-square" aria-hidden="true"></i> Include results</a>
-                </li>
-                <li>
-                    <a rel="noopener" href="#" ng-click="removeFilter(filter)">
-                    <i class="fa fa-times" aria-hidden="true"></i> Remove </a>
-                </li>
-            </ul> -->
-    <!-- </span> -->
-
-    <!-- <span ng-if="filter.edit" class="input-group edit">
-            <input type="textbox" ng-model="filter.editValue" ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small">
-            <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="Save filter"     ng-click="onEditFreeTextFilterDone(filter)">
-                <i class="fa fa-check"></i>
-            </span>
-            <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="Close editing"   ng-click="onEditFreeTextFilterCanceled(filter)">
-                <i class="fa fa-times"></i>
-            </span>
-        </span> -->
-
-    <!-- <a style="font-size: 11px;text-transform: uppercase; font-weight: bold;" ng-click="" >
-            <span style="white-space: normal;" ng-if="!filter.edit" ng-bind="filter.name|lstring:locale"></span> 
-            
-
-        <div class="pull-right" style="padding:3px;">
-            <i class="fa fa-caret-right"></i>
-        </div>
-        </a>
-
-    </span>
-     
- </span> -->
+  
 </div>

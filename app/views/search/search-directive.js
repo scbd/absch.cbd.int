@@ -21,6 +21,7 @@ import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main';
 import 'views/search/directives/result-view-options';
 import 'views/search/search-filters/left-side-filter';
+
 import 'views/search/search-results/list-view';
 import 'views/search/search-results/group-view';
 import 'toastr';

@@ -463,7 +463,9 @@ md-toast { position: fixed !important; }
 .container-links .last { border-right-width: 0px !important; }
 .container-links a:hover { color: rgb(0, 0, 0); font-weight: bold; text-shadow: rgba(255, 255, 255, 0.6) 0px 1px 1px; }
 .container-breadcrumbs { min-height: 30px; color: white; padding-top: 7px; font-size: 12px; }
-.container-breadcrumbs a { color: rgb(153, 153, 153); font-weight: bold; }
+.container-breadcrumbs a { color: rgb(153, 153, 153); 
+    /* font-weight: bold;  */
+}
 .container-full { padding-bottom: 20px; }
 .dropdown-menu { padding: 3px; background-color: white; }
 .dropdown-menu li { margin: 0px; padding: 0px; }

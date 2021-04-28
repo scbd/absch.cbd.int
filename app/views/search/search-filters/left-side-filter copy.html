@@ -1,5 +1,9 @@
 <div>
 
+    xxxx
+
+
+    
     <div ng-if="leftMenuFilters" id="Search-Filter" style="border:0;">
        <style>
 .sfilter-title{
@@ -23,17 +27,9 @@
             <span style="text-transform:uppercase;color:#bbb;font-weight:bold; padding-bottom:8px;">Active filters</span>
         </div>
         <ul class="list-group" style="border:0;">
-
-
-            <div ng-repeat="filter in setFilters" style="margin-bottom: 5px;">
-                {{filter}}
-            </div>
-
-
-
             <li class="list-group-item no-left-right-bottom-border " style="cursor: pointer;padding:0px; border:0;"
                 ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
-
+                    
                 <div class="sfilter" >
                     <div style="display:table-cell;">
                     <!-- check -->
@@ -65,7 +61,7 @@
                     </div>  
 
                     <div>
-                    <!-- subfilters leftMenuFilters -->
+                    <!-- subfilters -->
                             <div class="list-group-item filter-item" ng-repeat="filter in filters"  ng-show="!state[schema]">
                                 
                                 <div class="dropdown pull-left bring-to-front" ng-if="filter.filterValue!=undefined||hasItems(filter.selectedItems)">

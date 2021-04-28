@@ -3,6 +3,8 @@ import _ from 'lodash';
 import moment from 'moment';
 import angular from 'angular';
 import footerHtml from 'text!./absch-footer.html';
+import cbdFooterHtml from 'text!./cbd-footer.html';
+
 import 'toastr';
 import 'bootstrap';
 import 'routes/absch';
@@ -14,7 +16,7 @@ import 'views/directives/route-loading-directive';
 
 
     app.directive('abschFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
-
+    app.directive('cbdFooter', [function () { return { restrict: 'E', template: cbdFooterHtml }; }]);
 
 
     app.config(["toastrConfig", function(toastrConfig) {
