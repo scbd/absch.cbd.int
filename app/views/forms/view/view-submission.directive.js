@@ -18,29 +18,17 @@ import 'views/forms/directives/view-terms-hierarchy';
             },
             link:function($scope){
                 $scope.onThematicAreasTerms = function(terms){
-									if(($scope.document||{}).cpbThematicAreas){
-										_.forEach(terms, function(item){
-											if(item.broaderTerms.length == 0 || item.broaderTerms == []){
-												var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
-												if(parent){
-													terms = _.filter(terms, function(t){
-														return !_.includes(item.narrowerTerms, t.identifier)
-													})
-												}
-											}
-										});
-										return terms;
-									}
-                }
-
-                            var cpbThematicAreas = $scope.document.cpbThematicAreas;
-                             if (_(cpbThematicAreas).map('identifier').intersection(term.narrowerTerms).value().length == term.narrowerTerms.length) {
-                                terms = _.filter(terms, function (t) {
-                                    return !_.includes(term.narrowerTerms, t.identifier)
-                                })
+                    if(($scope.document||{}).cpbThematicAreas){
+                        _.forEach(terms, function(item){
+                            if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+                                var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
+                                if(parent){
+                                    terms = _.filter(terms, function(t){
+                                        return !_.includes(item.narrowerTerms, t.identifier)
+                                    })
+                                }
                             }
-                            }
-                        })
+                        });
                         return terms;
                     }
                 }
