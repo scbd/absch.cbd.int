@@ -1,4 +1,4 @@
-<div id="Record" class="record panel panel-default">
+﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
 		<h4>
 			<span ng-bind="::document.header.schema|schemaName"></span>
@@ -303,8 +303,8 @@
 		<div ng-if="document.movementAllowedUnderA131A || document.exemptedFromAIA">
 			<label>Subject of the decision under the simplified procedure</label>
 			<div class="km-value" compare-val>
-				<div ng-if="document.movementAllowedUnderA131A">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import.</div>
-				<div ng-if="document.exemptedFromAIA">Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure.</div>
+				<div ng-if="document.movementAllowedUnderA131A">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import</div>
+				<div ng-if="document.exemptedFromAIA">Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure</div>
 			</div>
 			<div ng-if="document.appliesToSubsequentImports!=undefined">
 				<label>Does the decision apply to subsequent similar imports of LMOs?</label>
