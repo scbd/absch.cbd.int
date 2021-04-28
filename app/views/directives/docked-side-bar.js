@@ -92,10 +92,12 @@ function(realm, $rootScope, $route, $location, articlesService) {
 
                 var scrollHandlerfn = function() {                               
                     if ($(this).scrollTop() > 0){
-                        $('#sidebar-wrapper').css('top', '0px')
+                        $('#sidebar-wrapper').css('top', '0px');
+                        $('#docketSideBar').css('height', '90vh');
                     }
                     else{
-                        $('#sidebar-wrapper').css('top', 'unset')
+                        $('#sidebar-wrapper').css('top', 'unset');
+                        $('#docketSideBar').css('height', '95vh');
                     }
                 }
                 $(window).scroll(scrollHandlerfn);
@@ -104,6 +106,16 @@ function(realm, $rootScope, $route, $location, articlesService) {
                     $(window).off('scroll', scrollHandlerfn)
                 });
 
+                $scope.details =function(article)
+                {
+                    $scope.showArticle = true;
+                    $scope.articleData = article;
+                }
+                $scope.back =function()
+                {
+                    $scope.showArticle = false;
+                    $scope.articleData = undefined;
+                }
                 //---------------------------------------------------------------------
                     $scope.getSizedImage = function(url, size){
                     // return url;

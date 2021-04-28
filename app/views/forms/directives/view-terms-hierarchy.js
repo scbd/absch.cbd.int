@@ -30,11 +30,6 @@ import 'services/main';
                             if($scope.onTermsLoaded && typeof $scope.onTermsLoaded == 'function'){
                                 terms = $scope.onTermsLoaded({terms:terms})
                             }
-                            if($attr.hideIdentifier!=undefined){
-                                terms = _.filter( terms, function ( item ) {
-                                    return item.identifier != $attr.hideIdentifier
-                                   } );
-                                }
                             var OtherTerm = angular.copy(_.find(terms, {identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'}))
 							_.forEach(_.compact(newTerms), function(term, index){
 								if(term.customValue){
