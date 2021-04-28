@@ -2207,7 +2207,7 @@ padding-right: 23%;
     position: relative;
 }
 .container-full.page-content{
-    margin: 0;
+    margin: 10px;
 }
 
 .container-breadcrumbs{

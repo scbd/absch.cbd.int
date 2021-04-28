@@ -238,7 +238,9 @@ export default function bootApp(window, require, defineX) {
     defineX('linqjs' ,  [],()=>window.Enumerable);
 // 
     defineX('externalCss', [], ()=>warnImport)
-
+    defineX('slaask', ['https://cdn.slaask.com/chat.js'], function (chat_js) {
+        return window._slaask;
+    });
 
     if(window.scbdApp.template){
         require(['/'+window.scbdApp.lang+'/app/hash-file-mapping.js'], function(hashMapping){
