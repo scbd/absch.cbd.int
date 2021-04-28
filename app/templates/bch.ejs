@@ -30,7 +30,7 @@
     <![endif]-->
 
 </head>
-<body  id="top" lang="<%=preferredLanguage||'en'%>">
+<body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
     
     <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
     <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
@@ -113,19 +113,31 @@
 
     </div>
     <!-- PAGE -->
-    <div>
+    <div class="ng-cloak">
         <scbd-header></scbd-header>
-        
-        <bch-header></bch-header>
-
-        <div class="container-full page-content">
-            <route-loading></route-loading>
-            <ng-view autoscroll="true"></ng-view>
+       
+        <div id="wrapper" class="toggled">
+            <div id="sidebar-wrapper" ng-class="{'activate':openSideBarType}">
+                <div  ng-if="openSideBarType" class="easing" >
+                    <docked-side-bar type="openSideBarType"></docked-side-bar>
+                </div>
+            </div>
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="easing">
+                        <bch-header></bch-header>
+                        <div class="container-full page-content">
+                            <route-loading></route-loading>
+                            <ng-view autoscroll="true"></ng-view>                
+                        </div>
+                    </div>
+                </div>
+            </div>    
         </div>
 
         <bch-footer></bch-footer>
-
         <scbd-footer></scbd-footer>
+
     </div>
         
     <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>

@@ -9,32 +9,59 @@
       .arabic-cbd-nav-bar {
           float : right!important;
       }
+      .navbar .right-side-help-menus{
+        font-size: 16px;
+        margin-bottom: 0;
+        border: 0;
+        z-index: 100;
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        line-height: 30px;
+        font-weight: 200;
+        width: 30px;
+        text-align: center;
+      }
+      .navbar .right-side-help-menus:hover,
+      .navbar .right-side-help-menus.active{
+        background: #eee;
+      }
+      @media (max-width: 768px) {
+        .navbar .right-side-help-menus{
+          display: none;
+        }
+      }
     </style>
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header" >
-        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
+        <span class="hidden-xs hidden-sm color-cbdlitegrey left-part" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
           <i class="fa fa-bars"></i> Convention on Biological Diversity
         </span>
 
-        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left">
+        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left left-part-mob">
           <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>
           <span class="brand">CBD</span>
         </span>
-
-        <account-header user="user" style="position:absolute;right:90px;top:7px;"></account-header>
-        <li class="pull-right" style="position:absolute;right:55px;top:5px;"><xuser-notifications-icon   ></xuser-notifications-icon></li>
-        <locale-header style="position:absolute;right:10px;top:-1px;" id="CBD-Branding"></locale-header>
+        <ul class="navbar-left navlist hidden-xs hidden-sm menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
+          <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
+          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
+        </ul>
+        <div class="right-part">
+          <account-header user="user" class="rp-signin" ></account-header>
+          <xuser-notifications-icon class="rp-n"></xuser-notifications-icon>
+          <locale-header class="rp-lang" id="CBD-Branding"></locale-header>
+          <a href="#" ng-class="{'active':activeHelpMenu=='help'}"class="right-side-help-menus rp-ques" ng-click="openSideBlock('help')"><i class="fa fa-question"></i></a>
+          <a href="#" ng-class="{'active':activeHelpMenu=='announcements'}"class="right-side-help-menus rp-notification" ng-click="openSideBlock('announcements')"><i class="fa fa-bullhorn"></i></a>
+        </div>
       </div>
 
-      <ul class="navbar-left navlist hidden-xs hidden-sm"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
-        <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
-      </ul>
+      
+    </div>
   </nav>
 
   <login-account user="user" ></login-account>
@@ -53,7 +80,18 @@
       </div>
     </div>
   </div> -->
-
+  <!-- <div class1="collapse navbar-collapse">
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <account-header user="user" class="pull-right" ></account-header></li>
+      <li>
+        <xuser-notifications-icon class="pull-right"></xuser-notifications-icon></li>
+      <li>
+        <locale-header id="CBD-Branding" class="pull-right"></locale-header></li>
+      <li>
+        <a href="#" class="pull-right"><i class="fa fa-cog"></i></a></li>
+    </ul>
+  </div> -->
 </div>
 
 <!-- <xuser-notifications ng-if="userNotifications.viewAll" ></xuser-notifications> -->

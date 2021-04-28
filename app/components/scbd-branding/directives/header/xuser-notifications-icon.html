@@ -1,20 +1,20 @@
-﻿<div class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
+﻿<div class="" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
 
     <a rel="noopener" id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
          <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
-                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
+           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey ':notificationUnreadCount}"></i>
+                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x not-count-circle"  data-badge="{{notificationUnreadCount}}"></span>
         </span>
     </a>
 
     <a rel="noopener" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll">
         <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
-                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
+           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey ':notificationUnreadCount}"></i>
+                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x not-count-circle"  data-badge="{{notificationUnreadCount}}"></span>
         </span>
     </a>
 
-    <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel" style="position:relative;top:22px;left:20px;">
+    <div class="dropdown-menu hidden-xs not-dropdown" role="menu" aria-labelledby="dLabel">
 
         <div class="n-drop-down" style="width:600px;padding:0;margin:0;z-index:1100;">
             <div>

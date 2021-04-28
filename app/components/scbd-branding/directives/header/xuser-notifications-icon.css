@@ -1,10 +1,10 @@
 #CBD-Branding .dropdown-menu {
     z-index: 1100;
+    left: inherit;
 }
 #CBD-Branding .fa-badge {
-    position: relative;
-    white-space: nowrap;
-    margin-right: 24px;
+   
+    
 }
 #CBD-Branding .fa-badge:not([data-badge]) {
     margin-right: auto;
@@ -57,3 +57,24 @@
     right: -7px;
     top: -8px;
 }
+.not-count-circle{
+    top: 13px;
+      position: absolute;
+      right: 177px;
+      left: inherit;
+  }
+  .not-dropdown{
+    position: absolute;
+    top: 29px;
+    right: 20px;
+  }
+
+  @media (max-width: 767px){
+    .not-count-circle{
+      
+          right: 126px;
+          
+      }
+  }
+
+  
