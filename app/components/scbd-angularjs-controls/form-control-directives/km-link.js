@@ -48,7 +48,6 @@ app.directive('kmLink', ['IStorage', function (storage)
 					error    : null,
 					type     : null,
 					visible  : false,
-					isFileValid : true,
 					uploadPlaceholder : $element.find("#uploadPlaceholder"),
 					mimeTypes : storage.attachments.mimeTypeWhitelist
 				});
@@ -252,7 +251,6 @@ app.directive('kmLink', ['IStorage', function (storage)
 				$scope.editor.save = function()
 				{
 					$scope.editor.isLanguageSelect  = false;
-					$scope.editor.isFileValid = true;
 					$scope.editor.urlMissing 		= false;					
 					if($scope.editor.url == 'https://www.' || $scope.editor.url == 'http://www.'){
 						$scope.editor.urlMissing = true;
@@ -307,7 +305,6 @@ app.directive('kmLink', ['IStorage', function (storage)
 						};
 
 						$scope.safeApply(function() {
-							$scope.editor.isFileValid = true;
 							if (onStartCallback)
 								onStartCallback();
 
@@ -318,7 +315,6 @@ app.directive('kmLink', ['IStorage', function (storage)
 
 							if ($scope.editor.mimeTypes.indexOf(type) < 0) {
 								$scope.editor.onUploadError(link, "File type not supported: " + type);
-								$scope.editor.isFileValid = false;
 								return;
 							}
 
