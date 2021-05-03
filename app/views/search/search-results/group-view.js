@@ -56,7 +56,7 @@ import 'views/search/search-results/result-default';
                     var additionalFields = _.map(fieldMapping, function(f){return f.titleField+'_groupTitle:'+f.titleField}).join(', ')
                     if(realm.is('BCH')){
                         additionalFields    += ' traitsDiseasesResistance_b,traitsHerbicidesResistance_b,traitsPhysiologyChanges_b,traitsQualityChanges_b,traitsMedicalProduction_b,traitsOther_b'
-                        additionalFields    += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b'
+                        additionalFields    += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b,scopePharmaceutical_b,scopeTransit_b,'
                     }
                     //'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t';
                     //'schema_s', 'government_s', 

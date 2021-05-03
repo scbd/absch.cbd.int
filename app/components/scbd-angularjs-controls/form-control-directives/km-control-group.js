@@ -53,7 +53,10 @@ import './km-info-tip'; ;
 
 					if($scope.name) {
 						var validationReport = findReportInParent($scope, 0)||{}
-						return !!_.find(validationReport.errors, { property : $scope.name });
+						return !!_.find(validationReport.errors, (error)=>{ 
+							return error.property == $scope.name ||
+									(error.properties||[]).map(p=>p.property).includes($scope.name)
+						});
 					}
 
 					return false;

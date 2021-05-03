@@ -1553,8 +1553,8 @@ div.recordDefault:hover {
 .registerpage-content table {
     width: 100%;
 }
-#Record * {
-    font-size: 14px;
+#Record blockquote {
+    font-size: inherit!important;
 }
 #Record .panel-body {
     padding: 10px;
@@ -2113,6 +2113,14 @@ a.disabled{
 .edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
     white-space: inherit;
 }
+.edit-biosafety-decision-directive .communication-decisions ul .other-term table>tbody>tr>td:first-child{
+    width: 35% !important;
+}
+
+.light-label{
+    font-size: 14px;
+    font-weight: 400!important;
+}
 
 .easing {
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -2199,7 +2207,7 @@ padding-right: 23%;
     position: relative;
 }
 .container-full.page-content{
-    margin: 0;
+    margin: 10px;
 }
 
 .container-breadcrumbs{

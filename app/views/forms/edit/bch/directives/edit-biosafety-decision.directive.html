@@ -1,5 +1,6 @@
 <div>
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+
+	<div  class="edit-biosafety-decision-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 		<div class="registerpage-content">
@@ -43,7 +44,8 @@
 									<div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a decision or communication already published on the BCH?">
-                                                <div class="help-block"></div>
+                                                <div class="help-block">This section is relevant when the decision being submitted is amending an existing decision. If the decision being published in the BCH is an amendment to an existing decision or a part of it, make sure that the decision being amended is already registered in the BCH in order to be able to provide a link to the existing record.
+													 This will allow the two records to be displayed together.</div>
                                                 <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -51,7 +53,7 @@
                                     <div ng-if="document.isAmendment">
                                         <div class="row">
 											<div class="col-xs-12">
-												<div class="km-control-group" required name="amendedRecords" caption="Please select the record(s) containing the decision being amended">
+												<div class="km-control-group" required name="amendedRecords" caption="Please select the record(s) containing the decision or communication being amended">
 													<div class="alert alert-danger" ng-if="document.isAmendment && !document.government.identifier">
 														Please select a government.
 													</div>	
@@ -72,13 +74,13 @@
 										<div class="col-xs-12">
 											<div  class="km-control-group" name="authorities" caption="Competent National Authority(ies) responsible for the decision or communication" required>											
 												<div document-selector required ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-												 query="authorityQuery" on-build-query="onBuildQuery(searchText, 'authority')" ng-disabled="waiting"></div>			
+												 on-build-query="onAuthorityBuildQuery(searchText)" ng-disabled="waiting"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="title" caption="Title / Reference number of the decision / communication">
+											<div class="km-control-group" required name="title" caption="Title / Reference number of the decision or communication">
 												<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -104,7 +106,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="jurisdictionsDetails" caption="Jurisdiction">
 												<div class="help-block">
-													Provide the jurisdiction where the decision applies if this is different from the country name provided in response to question 1.
+													Provide the jurisdiction where the decision applies if this is different from the country name indicated above.
 												</div>
 												<div km-textbox-ml ng-model="document.jurisdictionsDetails" rows="1" locales="document.header.languages" placeholder="jurisdiction"></div>
 											</div>
@@ -137,7 +139,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
-												<div class="km-control-group" name="otherDecisions" required caption="Communications, notifications and declarations">
+												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="Communications, notifications and declarations">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
 															terms="options.communicationDecisions()" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
 													</div>
@@ -155,7 +157,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="addressesTransboundaryMovement" required caption="Was the decision triggered by a request for a transboundary movement of LMOs into your country?">
-												<div km-yes-no required ng-model="document.addressesTransboundaryMovement" locales="document.header.languages"></div>
+												<div km-yes-no required ng-model="document.addressesTransboundaryMovement" ng-click="changeTransboundaryMovement(document.addressesTransboundaryMovement)" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>		
@@ -167,17 +169,17 @@
 											</div>									
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="receiptDate"  caption="Date on which the notification was received." style="width:40%">
+											<div class="km-control-group" name="receiptDate"  caption="Date on which the notification was received" style="width:40%">
 												<div km-date placeholder="YYYY-MM-DD" name="receiptDate" required ng-model="document.receiptDate"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="receiptAcknowledgementDate"  caption="Date on which acknowledgement of receipt of the notification was sent to the notifier." style="width:40%">
+											<div class="km-control-group" name="receiptAcknowledgementDate"  caption="Date on which acknowledgement of receipt of the notification was sent to the notifier" style="width:40%">
 												<div km-date placeholder="YYYY-MM-DD" name="receiptAcknowledgementDate" required ng-model="document.receiptAcknowledgementDate"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="communicationDate"  caption="Date on which the decision was communicated to the notifier." style="width:40%">
+											<div class="km-control-group" name="communicationDate"  caption="Date on which the decision was communicated to the notifier" style="width:40%">
 												<div km-date placeholder="YYYY-MM-DD" name="communicationDate" required ng-model="document.communicationDate"></div>
 											</div>
 										</div>
@@ -234,10 +236,10 @@
 							<!-- ====================Section C Start=================== -->
 							<section ng-if="isLmoDecisionForDirectUse">
 								<div class="well no-shadow bg-white">
-									<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFPs)</legend>
+									<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFP)</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="uses" required caption="Subject of the decision">
+											<div class="km-control-group" name="uses" required caption="Use(s) of LMO">
 												<div km-term-check required ng-model="document.uses" locales="document.header.languages"
 												terms="options.decisionLMOFFPSubject()"  binding-type="term[]"></div>
 											</div>
@@ -254,11 +256,9 @@
 									<div class="row" >
 										<div class="col-xs-12">
 											<div class="alert alert-danger" ng-if="isLmoDecisionForIntentionalIntroduction">
-												<strong>Note:</strong> The first two categories in the field Subject of the decision / communication at the top of this page have been selected	
-												indicating that this record refers to a decision addressing LMOs for both Intentional introduction into the environment (Articles 7-10)	
-												AND LMOs-FFPs (Article 11). Accordingly, the fields below, Type of decision and contact details of the importer/exporter or applicant,	
-												are therefore not active because the information has already been provided. Should this not be the case,	
-												please create two different records, one for intentional introduction into the environment and one for the LMOs-FFPs.
+												<strong>Note:</strong> The first two categories in the field <i>Subject of the decision, notification, communication or declaration</i> above have been selected
+												indicating that this record refers to a decision addressing an LMO for both intentional introduction into the environment
+												AND for direct use as food or feed, or for processing. Accordingly, the field below, <i>Type of decision</i>, is not active because the information (including information on the contact details of the importer/exporter or applicant) has already been provided. Should this not be the case, please create two different records, one for a decision on an LMO for intentional introduction into the environment and one for a decision on an LMO-FFP.
 											</div>
 										</div>
 									</div>
@@ -280,7 +280,7 @@
 													</div>
 												</div>
 												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
-													<div class="km-control-group" name="importers" required caption="Please provide Importer/Applicant's contact details">											
+													<div class="km-control-group" name="importers" required caption="Please provide Importer's/Applicant's contact details">											
 														<div document-selector ng-model="document.importers" question="importers"
 														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 													</div>
@@ -341,19 +341,24 @@
 									<legend>Simplified procedure</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="movementAllowedUnderA131A" caption="Does the decision specify cases in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import?" required>
-												<div km-yes-no required ng-model="document.movementAllowedUnderA131A" locales="document.header.languages"></div>
-												<div ng-if="document.movementAllowedUnderA131A" style="padding-left:50px; margin-top:15px;">
-													<div class="help-block">
-														Does the decision apply to subsequent similar imports of LMOs?
-													</div>
-													<div class="km-yes-no" required name="exemptedFromAIA" ng-model="document.exemptedFromAIA"></div>
+											<div class="km-control-group" name="simplifiedProcedure" caption="Subject of the decision under the simplified procedure" required>
+												<div>		
+													<input type="checkbox" id="movementAllowedUnderA131A" ng-model="document.movementAllowedUnderA131A" name="movementAllowedUnderA131A">
+													<label for="movementAllowedUnderA131A" class="light-label">
+														Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import
+													</label>	
+												</div>
+												<div>													
+													<input name="exemptedFromAIA" id="exemptedFromAIA" ng-model="document.exemptedFromAIA" type="checkbox"> 
+													<label for="exemptedFromAIA" class="light-label">
+														<span>Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure </span>
+													</label>
 												</div>
 											</div>
-										</div>
-										<div  class="col-xs-12">
-											<div class="km-control-group" name="appliesToSubsequentImports" caption="Does the decision specify that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure?" required>
-												<div km-yes-no required ng-model="document.appliesToSubsequentImports" locales="document.header.languages"></div>
+											
+											<div class="km-control-group" name="appliesToSubsequentImports" caption="Does the decision apply to subsequent similar imports of LMOs?" 
+												required ng-if="document.movementAllowedUnderA131A">
+												<div class="km-yes-no" required name="appliesToSubsequentImports" ng-model="document.appliesToSubsequentImports"></div>
 											</div>
 										</div>
 									</div>
@@ -375,7 +380,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">											
-											<div class="help-block">For an unintentional transboundary movement, please provide the following</div>
+											<div class="help-block color-grey">For an unintentional transboundary movement, please provide the following</div>
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="km-control-group" name="releaseInformation" caption="Information on the place where the occurrence and/or release occurred">
@@ -393,7 +398,7 @@
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="releaseDate"  caption="Information on the estimated date of the release.">
+													<div class="km-control-group" name="releaseDate"  caption="Information on the estimated date of the release">
 														<div km-date placeholder="YYYY-MM-DD" name="releaseDate" required ng-model="document.releaseDate"></div>
 													</div>
 												</div>
@@ -424,14 +429,14 @@
 										<div class="col-xs-12" ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">											
 											<div class="row">
 												<div class="col-xs-12">		
-													<div class="km-control-group" name="illegalTransbondyMovementDetails" caption="For an illegal transboundary movement, please provide either of the following">
-														<div class="col-xs-12">														
-															<div class="km-control-group" required name="modifiedOrganisms" caption="LMO identification">
+													<div class="km-control-group" required name="illegalTransbondyMovementDetails" caption="For an illegal transboundary movement, please provide either of the following">
+														<div class="col-xs-12 padding-left-2">														
+															<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
 																	on-build-query="onBuildSkipGovernmentQuery(searchText, 'modifiedOrganism')"></div>
 															</div>
 														</div>
-														<div class="col-sm-12">
+														<div class="col-sm-12 padding-left-2">
 															<div class="km-control-group" name="otherTransboundryInformation" caption="Brief description where it has not been possible to identify the LMO in question">
 																<div km-textbox-ml ng-model="document.otherTransboundryInformation" rows="1" locales="document.header.languages"></div>
 															</div>
@@ -445,7 +450,7 @@
 							</section>
 							<!-- ====================Section F End=================== -->
 							<!-- ====================Section G Strat=================== -->
-							<section ng-if="isDecisionOnContainedUseOfLMOs">
+							<section ng-if="isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
 								<div class="well no-shadow bg-white">
 									<legend>Information sharing with other databases</legend>
 									<div class="row">
@@ -453,23 +458,25 @@
 											<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?" required>
 												<div km-yes-no required ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 												<div ng-if="document.isForCommercialUse" style="padding-left:50px; margin-top: 15px;">
-													<div class="help-block">
-														Should this decision be forwarded to the OECD Secretariat for possible inclusion in the 
-														<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?
+													<div class="control-group">
+														<label>
+															Should this decision be forwarded to the OECD Secretariat for possible inclusion in the 
+															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?
+														</label>
 													</div>
 													<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
-													<div class="help-block" style="margin-top: 15px;">
-														Is this decision related to food safety?
+													<div class="control-group" style="margin-top: 15px;">
+														<label>Is this decision related to food safety?</label>
 													</div>
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 													<div ng-if="document.isForFoodSafety" style="padding-left:57px; margin-top: 15px;">
-														<div class="help-block">
-															Was it conducted in accordance with the Codex Alimentarius Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?
+														<div class="control-group">
+															<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i></label>
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
-														<div class="help-block" style="margin-top: 15px;">
-															Should this submission be forwarded to your country's FAO focal point for possible inclusion in the 
-															<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?
+														<div class="control-group" style="margin-top: 15px;">
+															<label>Should this submission be forwarded to your country's FAO focal point for possible inclusion in the 
+															<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
 														</div>
 														<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 													</div>
@@ -485,7 +492,7 @@
 											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs">
 
 								<div class="well no-shadow bg-white">
-									<legend>LMO & risk assessment</legend>
+									<legend>LMO identification & risk assessment</legend>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification"
@@ -495,12 +502,12 @@
 											</div>
 										</div>
 									</div>
-									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse || isSimplifiedProcedure">
+									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse || isSimplifiedProcedure || isDecisionOnContainedUseOfLMOs">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="riskAssessments" 
 												ng-required="isRiskAssessmentMandatory()" caption="Risk assessment">	
 												<div document-selector ng-model="document.riskAssessments" question="nationalRiskAssessment" allow-new="true" allow-new-schema="nationalRiskAssessment"
-													on-build-query="onBuildQuery(searchText,'nationalRiskAssessment')"></div>			
+													on-build-query="onRiskAssesmentBuildQuery(searchText)"></div>
 											</div>
 										</div>
 									</div>
@@ -508,12 +515,15 @@
 							</section>
 							<!-- ====================Section H End=================== -->
 							<!-- ====================Section I Strat=================== -->
-							<section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions)">								
+							<section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions || decisions.communicationDecision)">								
 								<div class="well no-shadow bg-white">
 									<legend>Decision document</legend>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="documents" required caption="Decision document">
+												<div class="help-block">An attachment is preferred. Otherwise, provide the location of the document
+													 (i.e. web address including the URL of the website (e.g. http://www.cbd.int) 
+													and the name of the website (e.g. “Convention on Biological Diversity”).</div>
 												<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 											</div>
 										</div>
@@ -554,6 +564,8 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents 
+													that will be stored in the database for users to download.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 											</div>
 										</div>
@@ -564,7 +576,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="notes">
 											<span class="help-block">
-												The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+												The “Notes” field is for personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information.
 											</span>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
@@ -581,5 +593,5 @@
 			</workflow-arrow-buttons>
 		</div>
 	</div>
-
+	<span style="display: none;" id="otherSubject"> Any other decisions, notifications, declarations or communications</span>
 </div>

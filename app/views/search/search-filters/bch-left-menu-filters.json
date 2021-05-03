@@ -31,7 +31,24 @@
 			"term": "decisionTypes",
 			"title": "Type of Decision/Document",
 			"field": "decisionTypes_ss",
+			"otherTerm":false,
 			"relatedField":"decisionTypes_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "decisionLMOFFPSubject",
+			"title": "Use(s) of LMO",
+			"field": "uses_ss",
+			"otherTerm":false,
+			"relatedField":"uses_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "decisionResults",
+			"title": "Result of the decision",
+			"field": "decisionResult_ss",
+			"relatedField":"decisionResult_REL_ss",
+			"otherTerm":false
 		},
 		{
 			"type": "date",
@@ -49,7 +66,7 @@
 		{
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
-			"title": "Related trait(s) or use(s) in biotechnology",
+			"title": "Modified traits",
 			"field": "lmoTraits_ss",
 			"relatedField":"lmoTraits_REL_ss"
 		},
@@ -67,6 +84,7 @@
 		{
 			"type": "thesaurus",
 			"term": "techniqueUsed",
+			"otherTerm":false,
 			"title": "Techniques used for the modification",
 			"field": "lmoTechniquesUsed_ss"
 		},
