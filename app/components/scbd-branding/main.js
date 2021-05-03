@@ -18,5 +18,6 @@ import './directives/header/accounts-validation.js';
 import './directives/header/header.js';
 import './directives/header/login.html';
 import './directives/header/xuser-notifications-icon.js';
+import 'css!components/scbd-branding/css/style';
     export default null;
 

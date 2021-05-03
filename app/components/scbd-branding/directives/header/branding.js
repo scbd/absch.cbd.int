@@ -1,7 +1,6 @@
 import app from 'app';
 import template from 'text!./account.html';
 import $ from 'jquery';
-import 'css!components/scbd-branding/directives/header/account';
 import 'components/scbd-angularjs-services/main';
      app.directive('scbdHeaderAccount', function() {
          return { restrict: 'E' ,

@@ -1,0 +1,712 @@
+
+.color-cbdgreen{
+    color:#069554;
+}
+.color-cbddarkgrey{
+    color:#333;
+}
+
+.color-white{
+    color:#fff;
+}
+.bg-white{
+    background-color:#FFF;
+    color:#555;
+}
+
+.bg-dropshadow{
+    -webkit-box-shadow: 5px 10px 50px 10px rgba(0,0,0,0.3);
+    -moz-box-shadow: 5px 10px 50px 10px rgba(0,0,0,0.3);
+    box-shadow: 5px 10px 50px 10px rgba(0,0,0,0.3);
+}
+
+/*.color-darkgreen{
+    color:#004844!important;
+}
+.color-litegrey{
+    color:#eee!important;
+}
+.color-grey{
+    color:#999!important;
+}*/
+.color-cbdorange{
+    color:#fa6938!important;
+}
+.color-cbdgrey{
+    color:#999;
+}
+.color-cbdlitegrey{
+    color:#bdbdbd;
+}
+/*.color-white{
+    color:#fff!important;
+}
+.color-blue{
+    color:#428bca!important;
+}
+.darkGreen {
+    color: #004844;
+}*/
+.bg-cbdorange{
+    background-color:#fa6938!important;
+    color:white!important;
+}
+.bg-cbdgreen{
+    background-color:#009b48!important;
+    color:#fff!important;
+}
+/*.bg-white{
+    background-color: #FFF!important;
+    color:#069554!important;
+}
+.bg-darkgreen{
+        background-color:#004844!important;
+}
+.bg-litegrey{
+    background-color: #F9F9F9!important;
+    color:#069554;
+}
+.color-black{
+    color:#111;
+}
+.bg-blue{
+    background-color:#428bca!important;
+    color:white!important;
+}*/
+.clearfix:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+
+
+#CBD-Branding.navbar-cbd-account {
+    font-size: 16px;
+    margin-bottom: 0;
+    z-index: 100;
+    list-style-type: none;
+    padding: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
+    line-height: 30px;
+    font-weight: 200;
+  }
+  #CBD-Branding#CBD-Branding.fa-fix {
+    left: 0px;
+  }
+  .user-logged-in {
+    color: #bdbdbd;
+    cursor: pointer;
+    font-size: 80%;
+    left: 0px;
+    float: right;
+  }
+  @media screen and (max-width: 480px) {
+    #CBD-Branding .drop-menu-position {
+      position: absolute;
+      left: -80px;
+      top: 23px;
+    }
+  }
+  @media screen and (min-width: 250px) {
+    #CBD-Branding.drop-menu-position {
+      position: absolute;
+      left: -80px;
+    }
+    #CBD-Branding.dropdown-menu li a {
+      font-size: 16px;
+    }
+    #CBD-Branding.dropdown-menu > li > a:hover {
+      color: #428bca!important;
+    }
+    #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a:focus {
+      background-color: #009b48;
+      color: white;
+    }
+    #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
+      background-image: none;
+    }
+  }
+  @media screen and (min-width: 480px) {
+    #dropdown-menu a {
+      color: black;
+      font-size: 14px;
+    }
+    #CBD-Branding.drop-menu-position {
+      position: absolute;
+      left: -80px;
+    }
+    #CBD-Branding.dropdown-menu {
+      background-color: white;
+      padding: 3px;
+    }
+    #CBD-Branding.navbar-default #CBD-Branding.navbar-nav #CBD-Branding.dropdown-menu li {
+      margin: 0;
+      padding: 0;
+    }
+    #CBD-Branding.dropdown-menu > li > a:hover {
+      color: #428bca!important;
+    }
+    #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a:focus {
+      background-color: #009b48;
+    }
+    #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.active>a, #CBD-Branding.navbar-default #CBD-Branding.navbar-nav>.open>a {
+      background-image: none;
+    }
+  }
+  @media screen and (min-width: 810px) {
+    #CBD-Branding.drop-menu-position {
+      position: absolute;
+      left: 0px;
+    }
+  }
+
+  #CBD-Branding .header h1 {
+    font-size: 60px;
+    background-color: #fff;
+  }
+  
+  #CBD-Branding .header {
+    font-size: 14px;
+  
+  }
+  #CBD-Branding .header span:focus {
+    -webkit-box-shadow: none;
+    outline: -webkit-focus-ring-color auto 0px;
+  }
+  #CBD-Branding .header a:hover{
+    color: #428bca!important;
+    text-decoration: none;
+  
+  }
+  
+  #CBD-Branding .navlist {
+      margin: 0;
+      padding: 5px 0 0 0;
+      display: inline;
+  }
+  
+  #CBD-Branding .header-nav-img {
+    max-height: 24px;
+    position: relative;
+    top: -2px;
+    padding: 0 0 0 0;
+    margin: 0;
+  }
+  #CBD-Branding .brand {
+    color:#333;
+    font-size: 15px;
+    padding: 0 10px 0 0;
+  }
+  #CBD-Branding .navbar-cbd {
+      min-height: 30px;
+      margin-bottom: 0;
+      border: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgb(231, 231, 231);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 5px rgba(0,0,0,.075);
+  }
+  #CBD-Branding .container-cbd {
+    /*background-color: #009b48!important;*/
+    /*color:white;*/
+    color: #bdbdbd;
+    min-height: 26px;
+   
+    list-style-type: none;
+  }
+  
+  #CBD-Branding .container-cbd-icon {
+    color: #bdbdbd;
+    cursor: pointer;
+  }
+  #CBD-Branding .cbd-toggle{
+    color: #bdbdbd;
+  
+    cursor: pointer;
+    font-size: 80%;
+  
+  }
+   #CBD-Branding .bump-up-one{bottom:1px;}
+  
+   #CBD-Branding .navlist {
+    margin: 0;
+    padding: 5px 0 0 0;
+    display: inline;
+    padding-left: 40px;
+  }
+   #CBD-Branding .navlist li {
+    display: inline;
+    list-style-type: none;
+    padding: 0 15px 0 0;
+    margin: 0;
+    line-height: 20px;
+  }
+   #CBD-Branding .header #CBD-Branding .navbar-default #CBD-Branding .navbar-nav li {
+    padding: 0 10px;
+  }
+  /*#CBD-Branding .navbar-default #CBD-Branding .navbar-nav li a {
+      color: #bdbdbd;
+      cursor:pointer;
+    padding: 0 0 0 5px;
+    line-height: 32px;
+    text-shadow: 0 0 0;
+    letter-spacing: 1.5px;
+    font-weight: 200;
+  }*/
+  /*#CBD-Branding .navbar-default #CBD-Branding .navbar-nav li a:hover {
+    color: white;     color: #428bca!important;
+  }*/
+   #CBD-Branding .mobi-menu-btn {
+    right: 30px;
+    float: none;
+    line-height: 32px;
+    cursor: pointer;
+  }
+   #CBD-Branding .header #CBD-Branding .navbar-toggle {
+    border: 0;
+    color: white;
+    padding: 0 5px;
+    margin: 0 0 0 15px;
+  }
+  #CBD-Branding .fa-fix2 {
+    left: 0;
+  }
+   #CBD-Branding .header .navbar-default .navbar-toggle {
+    background-color: #fff!important;
+  }
+  @media (max-width: 990px) {
+   #CBD-Branding .header #CBD-Branding .navbar-header {
+      float: none;
+    }
+   #CBD-Branding .header #CBD-Branding .navbar-toggle {
+      display: inline;
+    }
+   #CBD-Branding .header #CBD-Branding .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+   #CBD-Branding .header #CBD-Branding .navbar-collapse #CBD-Branding .collapse {
+      display: none!important;
+    }
+   #CBD-Branding .header #CBD-Branding .navbar-nav {
+      float: none!important;
+      margin: 7.5px -15px;
+    }
+  #CBD-Branding .header   #CBD-Branding .navbar-nav>li {
+      float: none;
+    }
+   #CBD-Branding .header #CBD-Branding .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+  #CBD-Branding .header #CBD-Branding .navbar-collapse #CBD-Branding .collapse.in {
+      display: block!important;
+    }
+  #CBD-Branding.header #CBD-Branding.collapsing {
+      overflow: hidden!important;
+    }
+  }
+  @media (max-width: 767px) {
+  #CBD-Branding .header #CBD-Branding.navbar-default #CBD-Branding.navbar-nav #CBD-Branding.open #CBD-Branding.dropdown-menu li a {
+      color: white;
+    }
+  }
+  #CBD-Branding .btn1 {
+    color : rgb(49, 46, 46);
+    background-color: rgba(255, 222, 121, 0.96);
+    border-radius: 10px 0 0 10px;
+    font-size: 16px;
+  }
+  
+  .navbar-header {
+    float: left;
+    width: 100%;
+  }
+  .navbar-header .left-part{
+    float: left;
+    padding-top: 5px;
+  }
+  .navbar-header .left-part-mob{
+    float: left;
+    padding-top: 5px;
+  }
+  .navbar-header .right-part{
+    float: right;
+  }
+  .rp-signin{
+    float: left;
+  padding: 5px 10px 0 10px;
+  }
+  .rp-lang{
+    float: left;
+  padding: 0 10px;
+  }
+  
+  .rp-ques{
+    float: left;
+  padding: 0 10px;
+  }
+  .rp-notification{
+    float: left;
+  padding: 0 10px;
+  }
+  .rp-n{
+    padding: 8px 10px 0 10px;
+    float: left !important;
+  }
+  
+  #CBD-Branding .locale-menu {
+    position: absolute;
+      right: 0;
+      width: 200px;
+      float: right;
+      left: inherit;
+  }
+  .navbar .right-side-help-menus {
+    font-size: 16px;
+    margin-bottom: 0;
+    border: 0;
+    z-index: 100;
+    list-style-type: none;
+    padding: 0 10px !important;
+    margin: 0;
+    line-height: 30px;
+    font-weight: 200;
+    width: auto !important;
+    text-align: center;
+  }
+  
+  #CBD-Branding .locale {
+    font-size: 16px;
+    margin-bottom: 0;
+    border: 0;
+    z-index: 100;
+    list-style-type: none;
+    padding: 0px 0px 0px 0px;
+    margin: 0 0 0 0;
+    line-height: 30px;
+    font-weight: 200;
+  }
+  #CBD-Branding .locale-menu{  position:absolute;
+    left:-58px;}
+    #CBD-Branding .badge {
+      display: inline-block;
+      min-width: 10px;
+      padding: 3px 7px;
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 100%;
+      color: #fff;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      background-color: #999;
+      border-radius: 10px;
+  }
+  #CBD-Branding .locale-menu.dropdown-menu{min-width: auto;}
+  /*@media screen and (min-width: 250px) {
+    .navbar-default .navbar-nav .dropdown-menu li a {
+      color: white;
+      font-size: 14px;
+    }
+    .navbar-default .navbar-nav .dropdown-menu > li > a:hover {
+      color: #428bca!important;
+    }
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus {
+      background-color: #009b48;
+      color: white;
+    }
+    .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+      background-image: none;
+    }
+  }
+  @media screen and (min-width: 480px) {
+    #dropdown-menu a {
+      color: black;
+      font-size: 14px;
+    }
+    .navbar-default .navbar-nav .dropdown-menu {
+      background-color: white;
+      padding: 3px;
+    }
+    .navbar-default .navbar-nav .dropdown-menu li {
+      margin: 0;
+      padding: 0;
+    }
+    .navbar-default .navbar-nav .dropdown-menu > li > a:hover {
+      color: #428bca!important;
+    }
+    .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus {
+      background-color: #009b48;
+      color: white;
+    }
+    .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.open>a {
+      background-image: none;
+    }
+  }*/
+
+  #CBD-Branding .login h1 {
+    text-rendering: optimizeLegibility;
+    font-size: 36px;
+    font-weight: 200;
+  }
+  #CBD-Branding .login a {
+    color: white;
+  }
+  #CBD-Branding .modal {
+    width: 250;
+  }
+  #CBD-Branding .modal-body {
+    color: white;
+    background-color: #009b48;
+  }
+  #CBD-Branding .dropshadow {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, .6)!important;
+  }
+  @media (min-width: 768px) {
+    #CBD-Branding .modal-dialog {
+      width: 400px;
+      margin: 30px auto;
+    }
+  }
+
+  #CBD-Branding .dropdown-menu {
+    z-index: 1100;
+    left: inherit;
+}
+#CBD-Branding .fa-badge {
+   
+    
+}
+#CBD-Branding .fa-badge:not([data-badge]) {
+    margin-right: auto;
+}
+#CBD-Branding .fa-badge[data-badge]:after {
+    content: attr(data-badge);
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: absolute;
+    top: -11px;
+    right: -24px;
+    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-weight: 600;
+    font-size: 9px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgb(217, 83, 79);
+    color: rgb(255, 255, 255);
+}
+#CBD-Branding .fa-button .fa-badge[data-badge]:after {
+    top: -10px;
+    right: -5px;
+}
+#CBD-Branding .fa-badge.fa-badge--no-background[data-badge]:after {
+    color: rgb(255, 64, 129);
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 1px gray;
+}
+#CBD-Branding .fa-badge.fa-badge--overlap {
+    margin-right: 3px;
+}
+#CBD-Branding .fa-badge.fa-badge--overlap:after {
+    right: -7px;
+    top: -8px;
+}
+.not-count-circle{
+    top: 13px;
+      position: absolute;
+      right: 177px;
+      left: inherit;
+  }
+  .not-dropdown{
+    position: absolute;
+    top: 29px;
+    right: 20px;
+  }
+
+  @media (max-width: 767px){
+    .not-count-circle{
+      
+          right: 126px;
+          
+      }
+  }
+
+  #NotificationsHeaderPanel * {
+    font-size:10px;
+}
+#NotificationsHeaderPanel i {
+    font-size:14px;
+    margin-right:5px;
+}
+
+#NotificationsHeaderPanel .notification-read * {
+    color:#bbb;
+    background-color:#FFF;
+    
+}
+
+#NotificationsHeaderPanel .notification-unread {
+    background-color:#EEE;
+    color:#111;
+}
+
+#NotificationsHeaderPanel .notification-panel-header {
+    margin:0;padding:0;border-bottom:1px solid #ccc;
+}
+#NotificationsHeaderPanel .notification-row {
+    min-height:80px;margin:0;padding:0;border-bottom:1px solid #ddd;
+}
+#NotificationsHeaderPanel .notification-icon-text{
+    white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+
+#NotificationsHeaderPanel .notification-message{
+    cursor:pointer;font-weight:500;font-size:11px;
+}
+#NotificationsHeaderPanel .notification-label{
+   text-transform:uppercase;
+}
+#NotificationsHeaderPanel .notification-spacing5{
+   margin-top:5px;
+}
+#NotificationsHeaderPanel .notification-spacing10{
+   margin-top:10px;
+}
+#NotificationsHeaderPanel .notification-spacing15{
+   margin-top:15px;
+}
+#NotificationsHeaderPanel .notification-timer{
+   white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+#NotificationsHeaderPanel .notification-title{
+   font-size:12px;
+}
+#CBD-Branding .footer{}
+
+  #CBD-Branding .copyright a, #CBD-Branding .copyright a:hover, #CBD-Branding .copyright a:focus {
+      color: #FFF;
+  }
+  #CBD-Branding .footer-page{
+      min-height:30px;
+      background-color:#ddd;
+
+  }
+  #CBD-Branding .footer-portal{
+      min-height:30px;
+      background-color:#999;
+  }
+
+  #CBD-Branding .footer-portal a{
+      color:#ccc;
+      font-size:12px;
+      font-weight:normal;
+  }
+  #CBD-Branding .footer-portal ul{
+      color:white;
+      list-style-type: none;
+     padding: 0px;
+     margin: 0px;
+  }
+  #CBD-Branding .footer-portal  h4{    font-weight: 200;}
+  #CBD-Branding .footer-cbd{
+      /*min-height:200px;*/
+      background-color:#009b48;
+
+  }
+
+#CBD-Branding .footer-page-container{
+    /*background: rgba(25, 25, 25, .05);*/
+    min-height:30px;
+    padding-top:5px;
+}
+#CBD-Branding .footer-portal-container{
+    /*background: rgba(25, 25, 25, .05);*/
+    min-height:30px;
+    color:white;
+    padding-top:10px;
+    border-bottom:1px solid #555;
+}
+#CBD-Branding .footer-cbd-container{
+    /*background: rgba(25, 25, 25, .05);*/
+    /*min-height:200px;*/
+    color:white;
+    padding:20px;
+    text-align:center!important;
+}
+
+#CBD-Branding .footer-links  ul{
+ display: inline;
+
+}
+
+#CBD-Branding .footer-links  li{
+    display: inline;
+    list-style-type: none;
+    padding-left:20px;
+}
+
+
+#NotificationsPanel .notification-read * {
+    color:#bbb;
+    background-color:#FFF;
+}
+
+#NotificationsPanel .notification-unread {
+    background-color:#EEE;
+}
+
+#NotificationsPanel .notification-panel-header {
+    margin:0;padding:0;border-bottom:1px solid #ccc;
+}
+#NotificationsPanel .notification-row {
+    min-height:80px;margin:0;padding:0;border-bottom:1px solid #ddd;
+}
+#NotificationsPanel .notification-icon-text{
+    white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+
+#NotificationsPanel .notification-message{
+    cursor:pointer;font-weight:500;font-size:11px;
+}
+#NotificationsPanel .notification-label{
+   text-transform:uppercase;
+}
+#NotificationsPanel .notification-spacing5{
+   margin-top:5px;
+}
+#NotificationsPanel .notification-spacing10{
+   margin-top:10px;
+}
+#NotificationsPanel .notification-spacing15{
+   margin-top:15px;
+}
+#NotificationsPanel .notification-timer{
+   white-space:nowrap;font-size:10px;font-weight:bold;text-transform:uppercase;
+}
+#NotificationsPanel .notification-title{
+   font-size:14px;
+}
