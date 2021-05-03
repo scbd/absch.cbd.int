@@ -2588,3 +2588,7 @@ padding-right: 23%;
     display: block;
     padding: 10px 8px;
 }
+.inner-padding {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
