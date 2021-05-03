@@ -39,7 +39,7 @@ export default async function() {
   const i18nDir = 'i18n-build'  
   let allApplicationFiles = [];
   const globOptions = {
-    pattern: '**/*.{js,html,json}',
+    pattern: '**/*.{js,html,json,vue}',
     ignore : ['hash-file-mapping.js', '**/views/pdf-viewer/pdfjs/**'],
   }
   //don't process i18n files when running locally
