@@ -112,7 +112,7 @@
 						<km-value-ml value="document.durationPeriod" locales="locale"></km-value-ml>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" style="margin-top: 20px;">
 					<km-value-ml value="document.durationText" locales="locale"></km-value-ml>
 				</div>
 			</div>
@@ -129,6 +129,12 @@
 				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
 			</div>
 		</div>
+			<div ng-show="document.projectProgrammeName">
+				<label>Project programme name</label>
+				<div compare-val>
+				<km-value-ml value="document.projectProgrammeName" locales="locale"></km-value-ml>
+				</div>
+			</div>
 			<div ng-show="document.broaderProjects">
 				<label>Clearing-house record number</label>
 				<div class="km-value" compare-val>
