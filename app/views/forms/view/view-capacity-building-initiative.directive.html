@@ -123,18 +123,16 @@
 			<label>Type of capacity development initiative</label>
 			<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
 		</div>
-		<div>
+		<div ng-show="document.isProjectProgramme!=undefind">
 			<label>Is this part of a larger project or programme</label>
 			<div compare-val>
-				<div class="km-value km-pre" ng-if="document.capacityBuildingType.isProjectProgramme">Yes</div>
-			</div>
-			<div compare-val>
-				<div class="km-value km-pre" ng-if="!document.capacityBuildingType.isProjectProgramme">No</div>
+				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
 			</div>
 
-			<div ng-show="document.broaderProjects">
+			<div>
+				<label>Clearing-house record number</label>
 				<div compare-val>
-				<km-value-ml value="document.broaderProjects | term:locale" locales="locale"></km-value-ml>
+				<div view-record-reference ng-model="document.broaderProjects" locale="locale"></div>
 				</div>
 			</div>
 		</div>
@@ -265,7 +263,7 @@
 			<legend>Information on funding</legend>
 
 			<div ng-show="document.fundingSourceTypes">
-				<label>Type(s) of funding source</label>
+				<label>Type(s) of funding source(s)</label>
 				<div class="km-value" compare-val="fundingSourceTypes">
 					<ul class="list">
 						<li ng-repeat="val in document.fundingSourceTypes" ng-bind="val | term:locale"></li>
@@ -320,22 +318,22 @@
 					<km-link-list class="km-value" ng-model="document.resultsOutputs"></km-link-list>
 					</div>
 				</div>
+				<div ng-show="document.resultsReference">
+					<!-- ToDo: what should be its title  -->
+					<label>Virtual library record</label>
+					<div class="km-value" compare-val>
+					  <div ng-repeat="contact in document.resultsReference">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					  </div>
+					</div>
+				  </div>
 
 				<div ng-show="document.bestPractices">
-					<label>Best practices and lessons learned</label>
+					<label>Good practices and lessons learned</label>
 					<div compare-val>
 					<km-value-ml value="document.bestPractices" locales="locale" html></km-value-ml>
 					</div>
 				</div>
-
-        <div ng-show="document.resultsReference">
-          <label>Results reference</label>
-          <div class="km-value" compare-val>
-            <div ng-repeat="contact in document.resultsReference">
-              <div view-record-reference ng-model="contact" locale="locale"></div>
-            </div>
-          </div>
-        </div>
 
 <!--		<div ng-show="document.absKeyAreas">-->
 <!--			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>-->
@@ -352,6 +350,7 @@
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
+				<label>Any other relevant information</label>
 				<div compare-val>
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>

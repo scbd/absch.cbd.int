@@ -255,7 +255,7 @@ import 'services/main';
       if($scope.realm.is('ABS'))
         $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
       if(doc.countryRegions){
-        $scope.setCountryRegions(document.countryRegions)
+        $scope.setCountryRegions(doc.countryRegions)
       }
     });
     // $scope.setDocument({}, true);
