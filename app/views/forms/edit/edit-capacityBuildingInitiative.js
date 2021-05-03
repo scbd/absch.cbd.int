@@ -169,6 +169,11 @@ import 'services/main';
 
         }
 
+    $scope.isBroaderProjectSelect = function(projectProgramme){
+      if(!projectProgramme){
+        $scope.document.broaderProjects = undefined;
+      }
+    }
 
     //==================================
     //
@@ -257,6 +262,7 @@ import 'services/main';
       if(doc.countryRegions){
         $scope.setCountryRegions(doc.countryRegions)
       }
+      $scope.isSelfFunding();
     });
     // $scope.setDocument({}, true);
     // if($scope.realm.is('ABS'))

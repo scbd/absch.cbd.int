@@ -190,7 +190,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Is this part of a larger project or programme?">
-												<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme"></div>
+												<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelect(!document.isProjectProgramme)"></div>
 											</div>
 											<div ng-if="document.isProjectProgramme" class="km-control-group" required name="broaderProjects" caption="Clearing-house record number">
 												<div document-selector ng-model="document.broaderProjects" question="broaderProjects"
@@ -363,7 +363,8 @@
 									</div>
 
 								<div class="km-control-group" ng-show="isSelfFunding()" name="selfFunding" caption="Please provide further information on funding">
-										<div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.fundingSourceTypes.customValue" placeholder="" locales="document.header.languages"></div>
+									<!-- ToDO: ng-model="document.fundingSourceTypes[document.fundingSourceTypes.length].customValue" -->
+										<div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.fundingSourceTypes[6].customValue" placeholder="" locales="document.header.languages"></div>
 									</div>
 
 									<div class="row">

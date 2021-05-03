@@ -125,17 +125,18 @@
 		</div>
 		<div ng-show="document.isProjectProgramme!=undefind">
 			<label>Is this part of a larger project or programme</label>
-			<div compare-val>
+			<div class="km-value" compare-val>
 				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
 			</div>
-
-			<div>
+		</div>
+			<div ng-show="document.broaderProjects">
 				<label>Clearing-house record number</label>
-				<div compare-val>
-				<div view-record-reference ng-model="document.broaderProjects" locale="locale"></div>
+				<div class="km-value" compare-val>
+					<div ng-repeat="broaderProject in document.broaderProjects">
+					<div view-record-reference ng-model="broaderProject" locale="locale"></div>
+					</div>
 				</div>
 			</div>
-		</div>
 		<div ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
 
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
@@ -270,12 +271,12 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-show="document.fundingSourceTypes.customValue">
+			<!-- <div ng-show="document.fundingSourceTypes.customValue">
 				<label>Please provide further information on funding</label>
 				<div class="km-value" compare-val="">
 					<km-value-ml value="document.fundingSourceTypes.customValue" locales="locale" html></km-value-ml>
 				</div>
-			</div>
+			</div> -->
 			<div ng-show="document.coreFundingSources">
 				<label>Primary funding-source(s)</label>
 				<div class="km-value" compare-val="coreFundingSources">
