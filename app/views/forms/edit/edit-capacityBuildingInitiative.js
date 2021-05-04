@@ -140,26 +140,22 @@ import 'services/main';
             $scope.document.endDate   = undefined;
         }
     };
-    // $scope.clearDuration = function () {
-    //   if($scope.document && ($scope.document.startDate || $scope.document.endDate))
-    //   {
-    //       $scope.document.startDate = undefined;
-    //       $scope.document.endDate   = undefined;
-    //   }
-    // };
 
-    // $scope.$watch("[document.startDate,document.endDate]", function () {
-    //   $scope.document.durationPeriod = undefined;
-    //   $scope.document.durationText = undefined;
+    $scope.$watch("[document.startDate,document.endDate]", function () {
+      $scope.document.durationPeriod = undefined;
+      $scope.document.durationText = undefined;
 
-    // });
+    });
     //============================================================
     //
     //============================================================
-    $scope.clearDuration = function () {
-        if($scope.document && $scope.document.duration)
-            $scope.document.duration = undefined;
-    };
+    // $scope.clearDuration = function () {
+    //   if($scope.document && ($scope.document.durationPeriod || $scope.document.durationText))
+    //   {
+    //       $scope.document.durationPeriod = undefined;
+    //       $scope.document.durationText   = undefined;
+    //   }
+    // };
 
         $scope.onBuildQuery = function(searchText, schema){
             var queryOptions = {
