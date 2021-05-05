@@ -2122,22 +2122,25 @@ a.disabled{
     font-weight: 400!important;
 }
 
-.tabular-term-check table tr td>label {
+.edit-resource-base-directive .regions-list #select-dropdown .btn {
+    white-space: initial;
+}
+.edit-resource-base-directive .country-list #select-dropdown .btn {
+    white-space: initial;
+}
+
+.tabular-term-check .tabular-terms  {
+    display: flex;
+    flex-flow: row wrap;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+.tabular-term-check .tabular-terms::before {
+    display: block;
+}
+.tabular-term-check .tabular-terms .terms>label {
     font-weight: 600;
 }
-.tabular-term-check table tr {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-}
-
-
-@media (max-width: 767px){
-   .tabular-term-check table tr {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
 
 .easing {
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);

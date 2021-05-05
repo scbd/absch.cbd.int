@@ -99,25 +99,9 @@
 				
 			</ul>
 
-			<table ng-if="tabularShape" class="table table-bordered">
-				<script type="text/ng-template" id="term-check-tree-renderer.html" >
-					<label>
-						<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)"
-							   ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/>
-						{{term.title||term.name | lstring:locale}}
-					</label>
-					<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
-						{{term.description}}
-					</div>
-					<table>
-						<tbody>
-						<tr ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'"></tr>
-						</tbody>
-					</table>
-				</script>
-				<td ng:repeat="term in rootTerms" ng-hide="otherTermIdentifier==term.identifier" ng-include="'term-check-tree-renderer.html'"></td>
-			</table>
-
+			<div ng-if="tabularShape" class="tabular-terms col-xs-12" style="border: 1px solid #eeee;">
+				<div class="col-md-4 col-xs-6 terms" ng:repeat="term in rootTerms" ng-hide="otherTermIdentifier==term.identifier" ng-include="'term-check-tree-renderer.html'"></div>
+			</div>
 		</div>
 	</div>
 
