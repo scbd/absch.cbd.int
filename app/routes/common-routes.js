@@ -59,7 +59,7 @@ const commonRouteUrls = {
     register_national_users                     : { component: ()=>import('~/views/register/national-users/national-user-list') },
     register_document_type                      : { component: ()=>import('~/views/register/record-list') },
     register_CON_new                            : { component: ()=>import('~/views/forms/edit/edit-contact') },
-    register_CNA_new                            : { component: ()=>import('~/views/forms/edit/edit-authority') },
+    register_CNA_new                            : { component: ()=>import('~/views/forms/edit/main').then((o)=>o.editAuthority) },
     register_NDB_new                            : { component: ()=>import('~/views/forms/edit/edit-database') },
     register_VLR_new                            : { component: ()=>import('~/views/forms/edit/edit-resource') },
     register_ORG_new                            : { component: ()=>import('~/views/forms/edit/edit-organization') },
