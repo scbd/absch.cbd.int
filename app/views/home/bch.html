@@ -1,29 +1,33 @@
-<div class="col-md-12" style="padding-left: 0px;padding-right:0px;background-color: #fff;">    
+<div>
     <link href="/app/css/index.css" rel="stylesheet">
-    <div id="Jumbotron" style="border-top:1px solid #555;border-bottom:2px solid #ddd;" >
-       <home-map></home-map>
-    </div>
-    <div class="padding-5">
-        <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="betaArticle.title | lstring:locale"></h1>
-        <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
-    </div>
 
-    <div class="padding-5">
-        <style>
-            #Announcements > h4{
-                margin-bottom:10px!important;
-            }
-            .padding-5{
-                padding:5px
-            }
-        </style>
-        <home-articles tags="BCH-Announcement"></home-articles>
+    <home-map style="margin:0 -30px!important;"></home-map>
+    
+    <div>
+
+        <div class="padding-5">
+            <h1 class="color-green bold" style="margin-bottom:30px;" ng-bind-html="betaArticle.title | lstring:locale">
+            </h1>
+            <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
+        </div>
+
+        <div class="padding-5">
+            <style>
+                #Announcements>h4 {
+                    margin-bottom: 10px !important;
+                }
+
+                .padding-5 {
+                    padding: 5px
+                }
+            </style>
+            <home-articles tags="BCH-Announcement"></home-articles>
+        </div>
+
+        <div class="padding-5">
+            <home-country-dashboard></home-country-dashboard>
+        </div>
+
+        <div class="clearfix"></div>
     </div>
-
-    <div class="padding-5">
-        <home-country-dashboard></home-country-dashboard>
-    </div>
-
-    <div class="clearfix"></div>
-
 </div>

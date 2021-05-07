@@ -1,20 +1,37 @@
-<div class="container">
-    <div class="row">
-        <div class="col-xs-12 text-center">
+<div class="clearfix"></div>
 
-            <a rel="noopener" href="https://bch.cbd.int/member/subscriptions.shtml"><i class="fa fa-fw fa-envelope"></i></a>
-            <a rel="noopener" href="https://bch.cbd.int/resources/rss.shtml">       <i class="fa fa-fw fa-rss"></i></a>
-            <a rel="noopener" href="http://twitter.com/bchcpb/">                    <i class="fa fa-fw fa-twitter"></i></a>
-            <a rel="noopener" href="http://www.facebook.com/UNBiodiversity/">       <i class="fa fa-fw fa-facebook"></i></a>
-            <a rel="noopener" href="http://www.youtube.com/user/bchcpb/">           <i class="fa fa-fw fa-youtube"></i></a>
-            
-            <span class="hidden-xs">|</span> 
-            <br class="visible-xs">
-            
-            <a rel="noopener" href="https://bch.cbd.int/about/contact-us/">  Contact us</a> | 
-            <a rel="noopener" href="https://bch.cbd.int/resources/site-map/">Site Map</a> | 
-            <a rel="noopener" href="https://bch.cbd.int/about/link-policy/"> Linkages Policy</a> | 
-            <a rel="noopener" href="https://bch.cbd.int/about/disclaimer/">  Disclaimer </a>
-        </div>
-    </div>
+<div style="margin-top:60px;padding:10px 0; background-color:#bbb;border-top: 1px solid #aaa;">
+
+    <a rel="noopener" translation-url  href="#top"  class="pull-right color-darkgrey" style="margin:3px 20px;"> <i class="fa fa-arrow-circle-up"></i> back to top </a>
+    <script>
+        $(document).ready(function(){
+          $("a").on('click', function(event) {
+        
+            if (this.hash !== "") {
+              event.preventDefault();
+              var hash = this.hash;
+        
+              $('html, body').animate({
+                scrollTop: $(hash).offset().top
+              }, 800, function(){
+           
+                window.location.hash = hash;
+              });
+            } // End if
+          });
+        });
+    </script>
+
+<div class="container text-center">
+    <h3 style="font-size:18px;color:#fff;">THE BIOSAFETY CLEARING-HOUSE</h3>
+
+        <span style="margin-left:30px;font-size:200%; ">
+        <a rel="noopener" href="https://bch.cbd.int/member/subscriptions.shtml"><i class="color-white fa fa-fw fa-envelope"></i></a>
+        <a rel="noopener" href="https://bch.cbd.int/resources/rss.shtml">       <i class="color-white fa fa-fw fa-rss"></i></a>
+        <a rel="noopener" href="http://twitter.com/bchcpb/">                    <i class="color-white fa fa-fw fa-twitter"></i></a>
+        <a rel="noopener" href="http://www.youtube.com/user/bchcpb/">           <i class="color-white fa fa-fw fa-youtube"></i></a>
+        </span>
+    
+
+</div>
 </div>

@@ -1,3 +1,4 @@
+    
 <style>
     #Header .header{background-color: #FFF;border-bottom: 1px solid #ddd;}
     #Header .small-header{padding: 5px 20px;}
@@ -10,32 +11,37 @@
     #Header .normal-header > .acronym{font-size:48px;font-weight:bold;padding-right:10px;}
     #Header .normal-header > .ch-name{text-transform:uppercase;font-size:18px;font-weight:bold;}
     #Header .normal-header > .ch-logo{position:relative;top:-10px;padding: 0; margin:20px 0;max-height:60px;}
-    #Header .normal-nav {padding:0 34px 2px 15px;}
+    #Header .normal-nav {padding:0 34px 2px 18px;}
     #Header .normal-nav > ul > li > .nav-link {font-size: 13px;text-transform: uppercase;color: #555;font-weight: 500; }
-
+    
     #Header .breadcrumbs {text-transform: uppercase;margin-left:26px;font-size:12px; padding:10px 3px;color:#111;font-weight:500}
 </style>
 
-<div  id="Header">
 
-<div class="header">
-
+<div id="Header">
+<div  class="header">
     <!-- Small screen header -->
     <div class="visible-xs hidden-sm hidden-md hidden-lg small-header">
-        <a class="color-orange acronym" role="button" data-toggle="collapse" href="#collapseSmallNavMenu"
+        <a class="color-green acronym" role="button" data-toggle="collapse" href="#collapseSmallNavMenu"
             aria-expanded="false" aria-controls="collapseSmallNavMenu">
-            <i class="fa fa-bars color-black"></i> Biosafety Clearing-House
+            <i class="fa fa-bars color-black"></i> ABS Clearing-House
         </a>
         <div class="collapse" id="collapseSmallNavMenu">
             <div class="small-nav">
                 <ul>
                     <li><a class="btn btn-default nav-link" rel="noopener" translation-url href=".">Home</a></li>
-                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/kb" >Help</a></li>
-                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/search" >Search</a></li>
-                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/register" >Submit</a></li>
-                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/countries" >Country Profiles</a></li>
-                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>
-                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/onlineconferences" >Forums</a></li>
+                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url
+                            ng-href="/about" ng-click="activeMenu='about'">Help</a></li>
+                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url
+                            ng-href="/search" ng-click="activeMenu='about'">Search</a></li>
+                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url
+                            ng-href="/submit" ng-click="activeMenu='about'">Submit</a></li>
+                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url
+                            ng-href="/countries" ng-click="activeMenu='about'">Country Profiles</a></li>
+                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url
+                            ng-href="/reports" ng-click="activeMenu='about'">National reports</a></li>
+                    <li><a class="btn btn-default nav-link" rel="noopener" translation-url
+                            ng-href="/forums" ng-click="activeMenu='about'">Forums</a></li>
                 </ul>
             </div>
         </div>
@@ -43,41 +49,19 @@
 
     <!-- Normal screen header -->
     <div class="hidden-xs normal-header">
-        <img src="/app/img/cbd-logo-spine-orange.png" class="spine-logo">
-        <a href="." class="acronym"><span class="color-orange">BCH</span></a>
-        <a href="." class="ch-name"><span class="color-grey" ng-if="!development_env && !training_env"> Biosafety Clearing-House</span></a>
+        <img src="/app/img/cbd-spine.png" class="spine-logo">
+        <a href="." class="acronym"><span class="color-green">ABSCH</span></a>
+        <a href="." class="ch-name"><span class="color-grey" ng-if="!development_env && !training_env"> Access and Benefit-sharing Clearing-House</span></a>
         <span class="color-pink ch-name" ng-if="development_env"> DEVELOPMENT</span>
         <img src="/app/img/cbd-logo-gray555-en.png" class="pull-right ch-logo hidden-sm" ng-class="{'arabic-cbd-logo-style' : locale=='ar'}" />
+
     </div>
 
     <div class="hidden-xs normal-nav">
         <ul class="nav nav-pills">
             <li><a rel="noopener" class="nav-link" translation-url href="."><i class="fa fa-home"></i></a></li>
-            <li hover-effect=".dropdown-menu">
-                <a rel="noopener" href="/kb" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                    aria-haspopup="true" aria-expanded="false" >
-                    Help <span class="fa fa-caret-down"></span></span>
-                </a>
-                <ul class="help dropdown-menu" style="border:0;margin:0;">
-                    <li>
-                        <a rel="noopener" translation-url href="/kb">Knowledge base</a>
-                    </li>
-                    <li>
-                        <a rel="noopener" translation-url href="/kb/faqs">FAQs</a>
-                    </li>
-                    <li>
-                        <a rel="noopener" translation-url href="/kb/articles">Articles</a>
-                    </li>
-                </ul>
-            </li>
-            <li hover-effect=".dropdown-menu">
-                <a rel="noopener" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                    aria-haspopup="true" aria-expanded="false">Search <span class="fa fa-caret-down"></span></a>
-                <ul class="search dropdown-menu" style="border:0;margin-top:0;">
-                    <li><a rel="noopener" translation-url ng-href="search"> Search </a></li>
-                    <li> <a rel="noopener" translation-url ng-href="/registries">Registries</a></li>
-                </ul>
-            </li>
+            <li><a rel="noopener" class="nav-link" translation-url href="/kb">Help</a></li>
+            <li><a rel="noopener" class="nav-link" translation-url href="/search">Search</a></li>
             <li><a rel="noopener" translation-url ng-href="register" class="nav-link">Submit</a></li>
             <li hover-effect=".dropdown-menu" class="country-dropdown">
                 <a rel="noopener" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"

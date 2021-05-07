@@ -78,7 +78,7 @@ background-color: white;
 .nav .open> a:hover,
 .nav .open> a:focus,
 .nav .dropdown> a:hover {
-    background-color: #fa6938;
+    background-color: #EEE;
 }
 
 .bg-darkgrey .nav .open> a,
@@ -2588,3 +2588,4 @@ padding-right: 23%;
     display: block;
     padding: 10px 8px;
 }
+

@@ -47,7 +47,7 @@ const bchRouteUrls = {
 
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.
-  whenAsync('/',                                                  { ...mapView(angularViewWrapper),                    "label":"The BCH", "resolve":{ ...bchRouteUrls.thBch }}). 
+  whenAsync('/',                                                  { ...mapView(angularViewWrapper),                    "label":"BCH", "resolve":{ ...bchRouteUrls.thBch }}). 
   whenAsync('/submit',                                            { ...mapView(angularViewWrapper),                    "label":"Submit","resolve":{ ...bchRouteUrls.submit,                                                      "user":securize()}}). 
   whenAsync('/database/reports*',                                 {"redirectTo":"/reports"}). 
   whenAsync('/register/BCHN/new',                                 { ...mapView(angularViewWrapper),                    "label":"New","param":"true","resolveController":true,"documentType":"BCHN","resolve":{ ...bchRouteUrls.register_BCHN_new,                                           "securized":securize(null,true,true)}}). 
