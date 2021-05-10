@@ -2238,6 +2238,7 @@ padding-right: 23%;
 }
 
 @media(min-width:768px) {
+
     #wrapper {
         padding-right: 25%;
     }
@@ -2607,4 +2608,10 @@ padding-right: 23%;
     position: relative;
     display: block;
     padding: 10px 8px;
+}
+
+@media (max-width:992px) {
+    .ngdialog-theme-default .ngdialog-content{
+        width:90% !important;
+    }
 }
