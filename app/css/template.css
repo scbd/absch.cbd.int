@@ -78,7 +78,7 @@ background-color: white;
 .nav .open> a:hover,
 .nav .open> a:focus,
 .nav .dropdown> a:hover {
-    background-color: #fa6938;
+    background-color: #EEE;
 }
 
 .bg-darkgrey .nav .open> a,
@@ -2588,3 +2588,23 @@ padding-right: 23%;
     display: block;
     padding: 10px 8px;
 }
+
+@media (min-width: 480px) {
+    .main-content {margin: 0 3px;}
+    .map-width{ margin: 0 3px;}
+  }
+  
+  @media (min-width: 768px) {
+    .main-content {margin: 0 10px;}
+    .map-width{ margin: 0 -10px;}
+  }
+  
+  @media (min-width: 992px) {
+    .main-content {margin: 0 40px;}
+    .map-width{ margin: 0 -40px;}
+  }
+  
+  @media (min-width: 1200px) {
+    .main-content {margin: 0 120px;}
+    .map-width{ margin: 0 -120px;}
+  }
