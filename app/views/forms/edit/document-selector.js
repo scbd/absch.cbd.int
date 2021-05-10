@@ -579,11 +579,12 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 dialogId = dialog.id;
                 dialog.closePromise.then(function(data){
                     $scope.isDialogOpen = false;
-                    console.log(data)
                 })
                 
                 function onDialogOpened(name){
                     $scope.openingDialog = false;
+                    var height = ($(window).height()/2)+20; 
+                    $(`#${dialogId} .modal-body .tab-content`).css('max-height', height + 'px');  
                 }
 			};
 
