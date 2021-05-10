@@ -2589,3 +2589,22 @@ padding-right: 23%;
     padding: 10px 8px;
 }
 
+@media (min-width: 480px) {
+    .main-content {margin: 0 3px;}
+    .map-width{ margin: 0 3px;}
+  }
+  
+  @media (min-width: 768px) {
+    .main-content {margin: 0 10px;}
+    .map-width{ margin: 0 -10px;}
+  }
+  
+  @media (min-width: 992px) {
+    .main-content {margin: 0 40px;}
+    .map-width{ margin: 0 -40px;}
+  }
+  
+  @media (min-width: 1200px) {
+    .main-content {margin: 0 120px;}
+    .map-width{ margin: 0 -120px;}
+  }
