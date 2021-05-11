@@ -97,16 +97,7 @@
 									<legend>Access to the resource(s)</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
-												<div ng-show="isBCH" class="help-block">Reproduction for educational or non-profit purposes.
-													Please always attach the relevant document(s) that will be stored in the database for
-													 users to download. When resources are available on the Internet, please also provide a 
-													 link to them. Please note that attachments are preferable to links because attachments 
-													 are permanently accessible whereas links can become broken.
-												  </div>
-												  <div ng-show="isABS" class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download.
-													   When resources are available on the Internet, please also provide a link to them. Please note that attachments are preferable to 
-													  links because attachments are permanently accessible whereas links can become broken.</div>
+											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">												
 												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
 												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 											</div>
