@@ -131,7 +131,7 @@
 										<div class="col-xs-12">
 											<label>Country(ies), regional or economic group(s) covered by the resource</label>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-3">
 											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Geographical or political/economic group(s)">
 												<div km-select multiple name="countryRegions.regions"
 													 ng-model="countryRegions.regions" placeholder="Please select one option"
@@ -139,9 +139,10 @@
 											</div>
 										</div>
 
-										<div class="col-md-1">and/or</div>
+										<div class="col-md-1">
+											<div class="km-control-group small country-list" name="countryRegions.countries" caption="and/or"></div></div>
 									
-										<div class="col-md-5">
+										<div class="col-md-3">
 											<div class="km-control-group small country-list" name="countryRegions.countries" caption="Country name(s)">
 												<div km-select multiple name="countryRegions.countries" filter-type="startsWith" 
 												ng-model="countryRegions.countries" placeholder="Please select a country..." items="options.countries()"></div>
