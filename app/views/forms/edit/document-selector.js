@@ -352,7 +352,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                     rawQuery.fieldQueries.push(myRecordsQuery)
                 }
-
+                rawQuery = rawQuery || {};
 
                 var queryParameters = {
                     fields        : rawQuery.fields,

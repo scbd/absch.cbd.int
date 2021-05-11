@@ -2131,7 +2131,7 @@ a.disabled{
 
 .tabular-term-check .tabular-terms  {
     display: flex;
-    flex-flow: row wrap;
+    /* flex-flow: row wrap; */
     padding-left: 10px;
     padding-top: 10px;
 }
