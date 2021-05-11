@@ -2141,7 +2141,36 @@ a.disabled{
 .tabular-term-check .tabular-terms .terms>label {
     font-weight: 600;
 }
+.tabular-term-check table tr td>label {
+    font-weight: 600;
+    text-decoration: underline;
+}
+.tabular-term-check table tr td ul {
+    display: contents;
+    list-style: none;
+}
+.tabular-term-check table tr {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+}
+.tabular-terms-header {
+    text-align: center;
+    border: 1px solid #796969;
+    background-color: #e3e3e3;
+    margin-right: 15px;
+}
 
+@media (max-width: 767px){
+   .tabular-term-check table tr {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 992px){    
+     .tabular-term-check .tabular-terms  {        
+         flex-flow: row wrap;
+     }
+ }
 .easing {
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
 }
