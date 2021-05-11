@@ -264,6 +264,9 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="biosafety.addressGenes" caption="Does this resource address one or more specific genetic elements?" required>
+												<div class="hekp-block">
+													Information on genetic elements refers to DNA sequences, including genes, regulatory DNA sequences and other nucleic acids used to create a living modified organism. They may encode a protein or may have a specific regulatory function.
+												</div>
 												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
 												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressGenes" style="margin-top: 15px;">
