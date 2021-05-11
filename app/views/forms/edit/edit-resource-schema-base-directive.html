@@ -40,7 +40,11 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12" style="margin-top: 30px; font-size: 17px; margin-bottom: -10px;"><div class="km-control-group" required caption="Author(s)"></div></div>
+										<div class="col-xs-12" style="margin-top: 30px; font-size: 17px; margin-bottom: -10px;">
+											<div class="km-control-group" required caption="Author(s)">
+												<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
+											</div>
+										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="authors" caption="Author name(s)">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
@@ -50,8 +54,7 @@
 									<div class="row"><div class="col-xs-12"><strong>and/or</strong></div></div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s)">
-												<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
+											<div class="km-control-group" name="organizations" caption="Reference to the authoring organization(s)">
 												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
 													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true" question="organizations"
 													 allow-new-schema="contact"></div>
