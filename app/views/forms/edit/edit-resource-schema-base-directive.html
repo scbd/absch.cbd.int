@@ -40,10 +40,11 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12" style="margin-top: 30px; font-size: 17px; margin-bottom: -10px;">
-											<div class="km-control-group" required caption="Author(s)">
+										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
+											<!-- <div class="km-control-group" required caption="Author(s)"> -->
+												<legend>Authors(s)</legend>
 												<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
-											</div>
+											<!-- </div> -->
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="authors" caption="Author name(s)">
@@ -51,7 +52,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="row"><div class="col-xs-12"><strong>and/or</strong></div></div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" caption="and/or" style="margin-bottom: 10px;"></div>
+										</div>
+									</div>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Reference to the authoring organization(s)">
@@ -370,4 +375,12 @@
 		</div>
 
 	</div>
+
+
+	<script src="http://localhost:2010/app/assets/widgets.js"></script>
+	<div class="scbd-ch-embed" data-type="record" data-record-id="sdsdas"></div>
+	<!-- <script>
+		scbdChEmbed.embedRecord();
+		console.log(scbdChEmbed)
+	</script> -->
 </div>
