@@ -51,7 +51,10 @@ export default async function() {
                       }));
     i18nFiles.forEach(m=>{
       externals.push(m);
-      bundleFiles.push(bundle(m)); 
+      if(/assets\/widgets\.js$/.test(m))
+        bundleFiles.push(bundleWidget(m)); 
+      else 
+        bundleFiles.push(bundle(m)); 
     }); 
   }
   else{ //en files only
