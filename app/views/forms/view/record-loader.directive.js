@@ -468,7 +468,7 @@ import 'views/forms/directives/compare-val';
 
 					if(queryString && queryString.embed){
 						$scope.embed=true;
-
+						$('body').addClass('embed');
 						window.addEventListener('message', (evt)=>{
 							if(evt.data){
 								const data = JSON.parse(evt.data);
