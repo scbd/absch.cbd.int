@@ -34,7 +34,7 @@
 
 scbd-header, nav, .navbar.navbar-portal, #PortalLinks1, .footer, scbd-footer, .slaask-button, .hidden-print, .pdf-download-buttons,
 .slaask-alert-overlay, .slaask-alert, .hidden-print, .lang-alert, .expander, .fa-chevron-circle-up, .fa-chevron-circle-down,
-bch-footer,.bch-header, #reference-records-table, .animated-container,
+bch-header, bch-footer,.bch-header, #reference-records-table, .animated-container,
 .compare-buttons, .compare-message  {
     display: none!important
 }
@@ -45,11 +45,13 @@ html, body, .container-full {
     background: #fff;
 }
 #page-content-wrapper,
-.container-full.page-content{
+.container-full.page-content,
+#wrapper .container-full{
     margin: 0px!important;
     padding:0px!important;
 }
-.container-full.page-content .container{
+.container-full.page-content .container,
+#wrapper .container-full .container{
     width           : 100%!important;
     padding-right   : 0px!important;
     padding-left    : 0px!important;
