@@ -1,5 +1,5 @@
 
-const origin = 'https://absch.cbddev.xyz';
+const origin = 'http://localhost:2010';//'https://absch.cbddev.xyz';
 
 let iframeCommunicationReceived = false;
 function embedIFrame(widget, options){
