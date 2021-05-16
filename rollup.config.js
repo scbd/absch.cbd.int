@@ -52,7 +52,7 @@ export default async function() {
     i18nFiles.forEach(m=>{
       externals.push(m);
       if(/assets\/widgets\.js$/.test(m))
-        bundleFiles.push(bundleWidget(m, 'app')); 
+        bundleFiles.push(bundleWidget(m)); 
       else 
         bundleFiles.push(bundle(m)); 
     }); 
