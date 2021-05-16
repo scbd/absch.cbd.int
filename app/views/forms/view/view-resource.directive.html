@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div ng-show="document.authors">
-			<label>Author(s) name</label>
+			<label>Author name(s)</label>
 			<div compare-val>
 				<km-value-ml value="document.authors" locales="locale"></km-value-ml>
 			</div>
@@ -91,7 +91,7 @@
 
 		
 		<div ng-show="document.countryRegions">
-			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
+			<label>Country(ies), regional or economic group(s) related to the resource</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.countryRegions">
@@ -231,7 +231,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div compare-val>
 				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 				</div>
