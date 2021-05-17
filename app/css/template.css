@@ -2588,3 +2588,8 @@ padding-right: 23%;
     display: block;
     padding: 10px 8px;
 }
+
+body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
+body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
+    display: none!important
+}

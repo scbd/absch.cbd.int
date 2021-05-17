@@ -436,26 +436,9 @@ import 'views/forms/directives/compare-val';
 					}
 
 					var queryString = $location.search();
-					if(queryString && queryString.print){
-						$scope.printMode = true;
-					}
-					if($scope.printMode || queryString.embed)
-						require(['css!/app/css/print-friendly'], function(){})
-
-					if(queryString && queryString.embed){
-						$scope.embed=true;
-						$('body').addClass('embed');
-						window.addEventListener('message', (evt)=>{
-							if(evt.data){
-								const data = JSON.parse(evt.data);
-								if(data.type == 'getClientHeight'){
-									var height = $('#recordContent').height()+20;
-									data.height = height;
-									data.type = 'setClientHeight';
-									window.parent.postMessage(JSON.stringify(data), evt.origin);
-								}
-							}
-						});
+					if(queryString ){
+						$scope.printMode = queryString.print
+						$scope.embed 	 = queryString.embed
 					}
 				}]
 		}
