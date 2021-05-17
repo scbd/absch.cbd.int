@@ -206,17 +206,21 @@
 									</div>
 								</div>
 								<!-- TODO: need to apply a condition -->
-						        
-									<div class="row" ng-if="hasRiskAssessmentSubject">
+						        <div ng-if="hasRiskAssessmentSubject">
+									<legend>Guidance on risk assessment of living modified organisms</legend>
+									<div class="alert alert-danger">
+										<strong>Note:</strong> the function for recommending a resource as background material for the “Guidance on Risk Assessment of Living Modified Organisms” is under development.
+									</div>
+									<!-- TODO: section hidden for now -->
+									<!-- <div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" required name="biosafety.raRecommend" caption="Guidance on risk assessment of living modified organisms">
-												<div class="help-block">Would you like to recommend this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”?</div>
+											<div class="km-control-group" required name="biosafety.raRecommend" caption="Would you like to recommend this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”?">
 												<div km-yes-no required name="biosafety.raRecommend" ng-model="document.biosafety.raRecommend" ng-click="onRaRecommendChange(document.biosafety.raRecommend)"  locales="document.header.languages"></div>												
 											</div>
 										</div>
 										<div class="col-xs-12" ng-if="document.biosafety.raRecommend">
 											<div class="km-control-group" required name="biosafety.raAuthorAffiliation"  caption="Author affiliation">
-												<div class="help-block">please provide information on the author affiliation</div>
+												<div class="help-block">Please provide information on the author affiliation</div>
 												<div km-term-check required name="biosafety.raAuthorAffiliation" ng-model="document.biosafety.raAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
 													binding-type="term[]" locales="document.header.languages">
 												</div>
@@ -290,8 +294,8 @@
 												</div>
 											</div>
 										</div>
-									</div>
-								
+									</div> -->
+								</div>
 							</div>
 						</section>
 						<!-- IF BCH END -->
@@ -375,12 +379,4 @@
 		</div>
 
 	</div>
-
-
-	<script src="http://localhost:2010/app/assets/widgets.js"></script>
-	<div class="scbd-ch-embed" data-type="record" data-record-id="sdsdas"></div>
-	<!-- <script>
-		scbdChEmbed.embedRecord();
-		console.log(scbdChEmbed)
-	</script> -->
 </div>
