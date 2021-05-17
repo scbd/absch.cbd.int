@@ -25,7 +25,8 @@ import "views/forms/view/view-resource.directive";
 			restrict: 'EAC',
 			template: template ,
 			replace: true,
-			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", "realm","thesaurusService", function ($rootScope, $scope, $http, $filter, storage, roleService, realm,thesaurusService)
+			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", "realm","thesaurusService", "$element",
+			 function ($rootScope, $scope, $http, $filter, storage, roleService, realm,thesaurusService, $element)
 			{
 
 				$scope.isABS = realm.is('ABS');
@@ -52,7 +53,23 @@ import "views/forms/view/view-resource.directive";
 						})
 					}],
 
-					resourceTypes   : function() {return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})},
+					resourceTypes   : function() {
+						return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})
+						.then((terms)=>{
+
+							$timeout(()=>{
+								terms.forEach(term=>{
+									if(!(term.broaderTerms||[]).length && term.identifier!=thesaurusService.otherTerm.identifier){
+										const selector = `#chk_${term.identifier}`
+										$element.find(selector).attr('disabled', true);
+										$element.find(selector).css("display", "none");
+									}
+								})
+							}, 500)
+                               
+                            return terms;
+						})
+					},
 					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
 					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
