@@ -2644,3 +2644,8 @@ padding-right: 23%;
         width:90% !important;
     }
 }
+
+body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
+body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
+    display: none!important
+}
