@@ -13,6 +13,7 @@ import 'components/scbd-angularjs-services/main';
 import 'views/directives/route-loading-directive';
 import 'services/main'; ;
 import 'views/directives/docked-side-bar' 
+import './app-loading.directive';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 
@@ -152,23 +153,7 @@ import 'views/directives/docked-side-bar'
             init();
         }
     ]);
-    app.directive("mAppLoading", function ($animate) {
-            // Return the directive configuration.
-            return ({
-                link: link,
-                restrict: "C"
-            });
-            function link(scope, element, attributes) {
-                $animate.leave(element.children().eq(1)).then(
-                    function cleanupAfterAnimation() {
-                        element.remove();
-                        scope = element = attributes = null;
-                    }
-                );
-            }
-        }
-    );
-    
+        
     try{
         angular.bootstrap(document, [app.name]);
     }

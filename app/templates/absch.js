@@ -10,6 +10,7 @@ import 'angular-animate';
 import 'components/scbd-branding/main';
 import 'services/main';
 import 'views/directives/route-loading-directive';
+import './app-loading.directive';
 
     app.config(["toastrConfig", function(toastrConfig) {
         angular.extend(toastrConfig, {
@@ -221,25 +222,7 @@ import 'views/directives/route-loading-directive';
             init();
         }
     ]);
-    app.directive(
-        "mAppLoading",
-        function ($animate) {
-            // Return the directive configuration.
-            return ({
-                link: link,
-                restrict: "C"
-            });
-            function link(scope, element, attributes) {
-                $animate.leave(element.children().eq(1)).then(
-                    function cleanupAfterAnimation() {
-                        element.remove();
-                        scope = element = attributes = null;
-                    }
-                );
-            }
-        }
-    );
-
+    
     try{
         angular.bootstrap(document, [app.name]);
     }
