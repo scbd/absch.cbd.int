@@ -2681,3 +2681,9 @@ padding-right: 23%;
 .document-selection-modal .nav .dropdown> a:hover {
     background-color: #fff!important;
 }
+
+
+body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
+body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
+    display: none!important
+}
