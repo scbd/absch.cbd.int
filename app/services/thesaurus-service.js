@@ -7,6 +7,10 @@ import 'services/main';
 
         return new function () {
 
+            var terms = {
+                other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                eu   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
+            }
 
             this.getDomains = function(domainIdentifier, params){
 
@@ -23,6 +27,7 @@ import 'services/main';
                     return termData.data;
                 });;
             };
+            this.otherTerm = { identifier : terms.other };
 
             function fn_getDomainTerms(termIdentifier, options){
                 if(!termIdentifier)
@@ -63,10 +68,6 @@ import 'services/main';
                             .then(function(data){
                                 return data.data;
                             });
-            }
-            var terms = {
-                other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
-                eu   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
             }
 
             var domainTerms = {

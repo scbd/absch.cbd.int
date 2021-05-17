@@ -34,7 +34,7 @@
 											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
 													<div class="help-block">Choose many options as needed in order to best describe resources</div>
 													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
-															binding-type="term[]" tabular-shape="true" static-header="true" locales="document.header.languages"></div>
+															binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
 												
 											</div>
 										</div>
@@ -172,20 +172,13 @@
 												 binding-type="term[]"></div>
 											</div>
 										</div>
-
-										<div class="col-xs-6">
-											<div class="km-control-group" name="cbdSubjects" caption="CBD Subject Areas">
-												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
-												terms="options.cbdSubjects()" binding-type="term[]" locales="document.header.languages"></div>													
-											</div>
-                                   		</div>
 									</div>
 
-									<div class="row" ng-if="isBCH">
+									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group"  name="cbdSubjects" caption="CBD Subject Areas">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
-												terms="options.cbdSubjects()" binding-type="term[]" locales="document.header.languages"></div>													
+												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
                                    		</div>
 									</div>
@@ -201,7 +194,7 @@
 									<div class="col-xs-12">
 										<div class="km-control-group" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
@@ -308,7 +301,7 @@
 									<div class="col-xs-12">
 										<div class="km-control-group" required name="nagoya.subjects" caption="ABS Thematic Areas">
 											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
-											 binding-type="term[]"></div>
+											 binding-type="term[]" tabular-shape="true"></div>
 										</div>
 									</div>
 								</div>
@@ -318,7 +311,7 @@
 										<div class="km-control-group tabular-term-check" name="nagoya.keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
 											<div class="help-block">If this is resource is related to capacity-building for the Nagoya Protocol, please provide appliable option(s) from</div>
 											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
-											 binding-type="term[]" tabular-shape="true"></div>
+											 binding-type="term[]" tabular-shape="true" tabular-shape="true" ></div>
 										</div>
 									</div>
 								</div>
