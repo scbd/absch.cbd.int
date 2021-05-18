@@ -2649,3 +2649,7 @@ body.embed scbd-header, body.embed bch-header,  body.embed bch-footer,
 body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     display: none!important
 }
+
+.tabular-term-check.abs-resource-keywords .tabular-terms {
+    flex-flow: row wrap;
+}

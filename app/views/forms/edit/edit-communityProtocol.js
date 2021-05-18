@@ -6,22 +6,23 @@ import 'views/forms/view/view-resource.directive';
 
   export { default as template } from './edit-communityProtocol.html';
 
-  export default ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
-                function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
+  export default ["$scope", "thesaurusService", "$controller", "$location",
+                function ($scope, thesaurusService, $controller, $location) {
 
 
     $scope.path=$location.path();
 
     $controller('editController', {$scope: $scope});
 
+    _.extend($scope.options, {
+        resourceTypes : function() {return thesaurusService.getDomainTerms('cppResourceTypes');}, 
+      });
     //============================================================
     //
     //============================================================
     $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true)
     .then(function(doc){
-        if(doc.keywords)
-            $scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
-
+        $scope.isCpp = true
         if(doc.countryRegions){
             $scope.setCountryRegions (doc.countryRegions)
         }

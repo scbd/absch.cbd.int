@@ -61,7 +61,11 @@ import 'components/scbd-angularjs-services/main'; ;
                 $element.addClass('terms-check');
            
                 $scope.enableSearch = $attr.enableSearch;
-                $scope.tabularShape = $attr.tabularShape;
+                $scope.tabularShape = false;
+                if($attr.hasOwnProperty('tabularShape')){
+                    $scope.tabularShape = $attr.tabularShape == '' || $attr.tabularShape=="true";
+                }
+                
                 //==============================   
                 //
                 //==============================
@@ -327,12 +331,6 @@ import 'components/scbd-angularjs-services/main'; ;
                             displayTitle: buildDisplayTitle(term, 1)
                         });
                         if(term.narrowerTerms){
-                            if($attr.staticHeader) {
-                                $scope.$applyAsync( function () {
-                                    $element.find('#chk_'+term.identifier).attr('disabled', true);
-                                    $element.find( '#chk_' + term.identifier ).css("display", "none");
-                                });
-                            }
                             hasNarrowerTerms = true;                            
                             buildSearchList(term.narrowerTerms, searchList)
                          }

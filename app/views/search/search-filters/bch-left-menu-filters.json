@@ -624,6 +624,13 @@
 			"relatedField":"bchSubjects_REL_ss"
 		},
 		{
+			"type": "thesaurus",
+			"term": "bchRaSubjects",
+			"title": "Guidance on Risk Assessment of LMOs",
+			"field": "bchRaSubjects_ss",
+			"relatedField":"bchRaSubjects_REL_ss"
+		},
+		{
 			"type": "date",
 			"title": "Publication Date",
 			"field": "publicationDate_dt"
