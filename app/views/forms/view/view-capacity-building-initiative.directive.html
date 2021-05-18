@@ -34,7 +34,7 @@
 		</div>
 		
 		<div ng-if="document.contacts">
-			<label>Contact person(s)</label>
+			<label>Contact person</label>
 			<div class="km-value" compare-val="contacts">
 			<div ng-repeat="contact in document.contacts">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -44,7 +44,7 @@
 		
 
 		<div ng-show="document.geographicScope">
-			<label>Geographic Scope</label>
+			<label>Geographic scope</label>
 			<div compare-val>
 			<km-value-ml value="document.geographicScope | term:locale" locales="locale"></km-value-ml>
 			</div>
@@ -59,20 +59,6 @@
             </div>
 		</div>
 
-<!--		<div ng-show="document.geographicScope.customValue">-->
-<!--			<label>Jurisdiction Custom value</label>-->
-<!--			<div compare-val>-->
-<!--			<km-value-ml value="document.geographicScope.customValue" locales="locale"></km-value-ml>-->
-<!--			</div>-->
-<!--		</div>-->
-
-<!--		<div ng-show="document.geographicScope && document.geographicScope.community">-->
-<!--			<label>Community</label>-->
-<!--			<div compare-val>-->
-<!--			<km-value-ml value="document.geographicScope.community" locales="locale"></km-value-ml>-->
-<!--			</div>-->
-<!--		</div>-->
-		<!-- Need to verify from backend -->
 		<div ng-show="document.geographicScope.countries">
 			<label>Countries</label>
 			<div class="km-value" compare-val="geographicScope.countries">
@@ -173,22 +159,6 @@
 			</div>
 		</div>
 
-<!--		<div ng-if="isABS && document.contacts">-->
-<!--			<label>Contact person(s)</label>-->
-<!--			<div class="km-value" compare-val="contacts">-->
-<!--			<div  ng-repeat="contact in document.contacts">-->
-<!--				<div view-record-reference ng-model="contact" locale="locale"></div>-->
-<!--			</div>-->
-<!--			</div>-->
-<!--		</div>-->
-
-<!--		<div ng-if="isABS && document.projectDocument">-->
-<!--			<label>Project document or document describing the initiative</label>-->
-<!--			<div compare-val>-->
-<!--			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>-->
-<!--			</div>-->
-<!--		</div>-->
-
 		<legend>Detailed information</legend>
 
 		<div ng-show="document.description">
@@ -212,15 +182,6 @@
 			</div>
 		</div>
 
-
-<!--		<div ng-show="document.cpbThematicAreas">-->
-<!--			<label>General thematic area</label>-->
-<!--			<div class="km-value" compare-val="cpbThematicAreas">-->
-<!--				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>-->
-<!--			</div>-->
-<!--		</div>-->
-
-
 		<div ng-show="document.cbdSubjects || document.aichiTargets">
 
 			<legend>Information on the thematic coverage of the initiative</legend>
@@ -228,9 +189,6 @@
 			<div ng-show="document.cbdSubjects">
 				<label>Related CBD subject area(s)</label>
 				<div class="km-value">
-<!--					<ul class="list">-->
-<!--						<li ng-repeat="term in document.cbdSubjects">{{term | term:locale}}</li>-->
-<!--					</ul>-->
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects" on-terms-loaded="onCbdSubjectsTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
@@ -239,9 +197,6 @@
 					<label>Aichi target(s)</label>
 					<div class="km-value">
 						<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets" on-terms-loaded="onAichiTargetsTerms(terms)"></view-terms-hierarchy>
-<!--						<ul class="list">-->
-<!--							<li ng-repeat="term in document.aichiTargets">{{term | term:locale}}</li>-->
-<!--						</ul>-->
 					</div>
 			</div>
 		</div>
@@ -259,7 +214,7 @@
 
 		<div ng-show="document.cpbThematicAreas">
 			<legend>Biosafety thematic areas</legend>
-			<label>General thematic area</label>
+			<!-- <label>General thematic area</label> -->
 			<div class="km-value" compare-val="cpbThematicAreas">
 				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
 			</div>
@@ -277,12 +232,6 @@
 					</ul>
 				</div>
 			</div>
-			<!-- <div ng-show="document.fundingSourceTypes.customValue">
-				<label>Please provide further information on funding</label>
-				<div class="km-value" compare-val="">
-					<km-value-ml value="document.fundingSourceTypes.customValue" locales="locale" html></km-value-ml>
-				</div>
-			</div> -->
 			<div ng-show="document.coreFundingSources">
 				<label>Primary funding-source(s)</label>
 				<div class="km-value" compare-val="coreFundingSources">
@@ -342,35 +291,25 @@
 					</div>
 				</div>
 
-<!--		<div ng-show="document.absKeyAreas">-->
-<!--			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>-->
 
-<!--			<label>Key areas and strategic measures for capacity-building and development</label>-->
-<!--			<div class="km-value" compare-val="absKeyAreas">-->
-<!--				<ul class="list">-->
-<!--					<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>-->
-<!--				</ul>-->
-<!--			</div>-->
-<!--		</div>-->
+				<div ng-show="document.relevantInformation||document.relevantDocuments">
+					<legend>Additional Information</legend>
 
-		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+					<div ng-show="document.relevantInformation">
+						<label>Any other relevant information</label>
+						<div compare-val>
+						<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+					</div>
+					</div>
 
-			<div ng-show="document.relevantInformation">
-				<label>Any other relevant information</label>
-				<div compare-val>
-				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
-			</div>
-			</div>
-
-			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
-				<div compare-val>
-				<km-link-list class="km-value" ng-model="document.relevantDocuments"></km-link-list>
+					<div ng-show="document.relevantDocuments">
+						<label>Other relevant website address or attached documents</label>
+						<div compare-val>
+						<km-link-list class="km-value" ng-model="document.relevantDocuments"></km-link-list>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div>
+			<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
 
