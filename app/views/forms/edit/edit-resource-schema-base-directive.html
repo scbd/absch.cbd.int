@@ -30,11 +30,11 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-12" ng-if="isVlr||isMcc||isCpp">
 											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
 													<div class="help-block">Select as many options as needed in order to best describe the resource(s)</div>
 													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
-															binding-type="term[]" tabular-shape="true" locales="document.header.languages"></div>
+															binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" locales="document.header.languages"></div>
 												
 											</div>
 										</div>
@@ -297,18 +297,26 @@
 							<div class="well no-shadow bg-white">
 								<a rel="noopener" translation-url name="#AdditionalInformation"></a>
 								<legend>Keywords related to Access and Benefit-Sharing</legend>
+								<div class="row" ng-if="isMcc">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="nagoya.mccKeywords" required caption="Please select the relevant keywords for describing the content of  the code of conduct, guidelines and best practices and/or standards being submitted">
+											<div km-term-check name="nagoya.mccKeywords" required ng-model="document.nagoya.mccKeywords" terms="options.mccKeywords()"
+											 binding-type="term[]"></div>
+										</div>
+									</div>
+								</div>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" required name="nagoya.subjects" caption="ABS Thematic Areas">
 											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
-											 binding-type="term[]" tabular-shape="true"></div>
+											 binding-type="term[]" tabular-shape="false"></div>
 										</div>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group tabular-term-check" name="nagoya.keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
+										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
 											<div class="help-block">If this is resource is related to capacity-building for the Nagoya Protocol, please provide appliable option(s) from</div>
 											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
 											 binding-type="term[]" tabular-shape="true" tabular-shape="true" ></div>

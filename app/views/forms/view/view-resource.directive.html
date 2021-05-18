@@ -20,7 +20,9 @@
 		<div ng-show="document.resourceTypes">
 			<label>Type of resource</label>
 			<div class="km-value" compare-val>
-				<view-terms-hierarchy ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
+				<view-terms-hierarchy ng-if="document.header.schema=='resource'" ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
+				<view-terms-hierarchy ng-if="document.header.schema=='modelContractualClause'" ng-model="document.resourceTypes" locale="locale" term-domain="mCC_types"></view-terms-hierarchy>
+				<view-terms-hierarchy ng-if="document.header.schema=='communityProtocol'" ng-model="document.resourceTypes" locale="locale" term-domain="cppResourceTypes"></view-terms-hierarchy>
 				
 			</div>
 		</div>
