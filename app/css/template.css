@@ -2648,3 +2648,7 @@ padding-right: 23%;
         width:90% !important;
     }
 }
+
+.tabular-term-check.abs-resource-keywords .tabular-terms {
+    flex-flow: row wrap;
+}

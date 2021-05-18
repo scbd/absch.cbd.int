@@ -47,9 +47,7 @@ import 'views/forms/view/view-resource.directive';
 
     $scope.setDocument(newDocument, true)
     .then(function(doc){
-        if(doc.keywords)
-            $scope.keywords = _.map(doc.keywords, function(t){return { value: t};});
-        
+        $scope.isVlr = true;
         if(doc.countryRegions){
             $scope.setCountryRegions (doc.countryRegions)
         }
