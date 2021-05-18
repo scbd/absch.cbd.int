@@ -78,7 +78,7 @@
 
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" required name="geographicScope" caption="Geographic Scope">
+											<div class="km-control-group" required name="geographicScope" caption="Geographic scope">
 												<div km-select name="geographicScope" required ng-model="document.geographicScope"
 														placeholder="Please select one option" items="options.geographicScope()"></div>
 											</div>
@@ -191,7 +191,7 @@
 										<div class="col-md-12">
 											<div class="km-control-group" name="activityScope" caption="Type of capacity development initiative">
 												<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
-														description="true" binding-type="term" show-other="true" required locales="document.header.languages"></div>
+														description="true" binding-type="term" required locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -283,21 +283,7 @@
 											</div>
 										</div>
 									</div>
-									<!--										<div class="row" ng-if="isABS">-->
-									<!--											<div class="col-md-12">-->
-									<!--												<div class="km-control-group" required name="categories" caption="12. Category(ies) of capacity-building activities">-->
-									<!--													<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.absCategories()" binding-type="term[]"></div>-->
-									<!--												</div>-->
-									<!--											</div>-->
-									<!--										</div>-->
-									<!--										<div class="row" ng-show="isBCH">-->
-									<!--										  <div class="col-md-12">-->
-									<!--											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area(s)">-->
-									<!--												<div class="help-info">Key areas and strategic measures for capacity-building and development</div>-->
-									<!--											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]" locales="document.header.languages"></div>-->
-									<!--											</div>-->
-									<!--										  </div>-->
-									<!--										</div>-->
+									
 								</div>
 							</section>
 
@@ -331,7 +317,7 @@
 									<legend>ABS thematic areas</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="absKeyAreas" required
+											<div class="km-control-group" name="absKeyAreas"
 													caption="Key areas and strategic measures for capacity-building and development">
 												<div class="help-info">The key areas have been identified by the Strategic Framework for
 													capacity-building and development to support the effective implementation of the Nagoya Protocol
@@ -343,12 +329,12 @@
 									</div>
 								</div>
 							</section>
-							<section>
+							<section ng-if="isBCH">
 								<div class="well no-shadow bg-white">
 									<legend>Biosafety thematic areas</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="cpbThematicAreas" required
+											<div class="km-control-group" name="cpbThematicAreas" 
 													caption="Biosafety thematic areas">
 												<div class="help-info">The key areas have been identified by the Strategic Framework for
 													capacity-building and development to support the effective implementation of the Nagoya Protocol
@@ -398,25 +384,11 @@
 										</div>
 									</div>
 
-									<!--										<div class="row">-->
-									<!--											<div class="col-md-12">-->
-									<!--												<div class="km-control-group" name="coFinancingSources" caption="">-->
-									<!--													<label name="coFinancingSources" class="control-label" for="coFinancingSources">-->
-									<!--														<span ng-if="isABS">15. Co-financing source(s)</span>-->
-									<!--														<span ng-if="isBCH">15.	Co-funding source(s)</span>-->
-									<!--													</label>-->
-									<!--													<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources"-->
-									<!--													on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>-->
-
-									<!--												</div>-->
-									<!--											</div>-->
-									<!--										</div>-->
 
 									<div class="row">
 										<div class="col-md-3">
 											<div class="km-control-group" name="totalBudget" caption="Total budget (amount, in US dollars)">
 												<div class="help-info">This may include in kind contributions expressed in monetary terms.</div>
-												<!-- <div km-textbox-ml name="totalBudget" ng-model="document.totalBudget" rows="1" locales="document.header.languages"></div> -->
 												<div class="input-group">
 													<span class="input-group-addon">USD$</span>
 													<input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
