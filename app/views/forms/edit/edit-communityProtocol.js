@@ -14,9 +14,10 @@ import 'views/forms/view/view-resource.directive';
 
     $controller('editController', {$scope: $scope});
 
+    $scope.setOptions();
     _.extend($scope.options, {
         resourceTypes : function() {return thesaurusService.getDomainTerms('cppResourceTypes');}, 
-      });
+    });
     //============================================================
     //
     //============================================================

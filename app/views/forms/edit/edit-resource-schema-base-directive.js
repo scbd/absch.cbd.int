@@ -36,61 +36,62 @@ import "views/forms/view/view-resource.directive";
 				// TODO: where this code is using
 				$scope.displayMCCWarning = false;
 
-				$timeout (function (){
-				_.extend($scope.options, {
+				$scope.setOptions = function (){
+					_.extend($scope.options, {
 					 
-					documentLinksExt : [{
-						model:"language",
-						title:"Language",
-						required:true,
-                    	mapping: function(item){ return item.identifier;},
-						options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
-							var options = $filter("orderBy")(o.data, "name");
-							_.forEach(options, function(element) {
-									element.__value = element.name;
-								});
-							return options;
-						})
-					}],
-
-					resourceTypes   : function() {
-						return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})
-						.then((terms)=>{
-
-							$timeout(()=>{
-								terms.forEach(term=>{
-									if(!(term.broaderTerms||[]).length && term.identifier!=thesaurusService.otherTerm.identifier){
-										const selector = `#chk_${term.identifier}`
-										$element.find(selector).attr('disabled', true);
-										$element.find(selector).css("display", "none");
-									}
-								})
-							}, 500)
-                               
-                            return terms;
-						})
-					},
-					aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
-					bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
-					bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
-					bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');}, // raSubjects
-					absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');}, // ABS keyAreas
-					absSubjects	: function() {return thesaurusService.getDomainTerms('absSubjects');}, // ABS Thematic Areas
-
-					cbdSubjects : function() { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", { cache: true }).then(function(o){
-						var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
-						var items = [];
-						_.forEach(subjects, function(subject) {
-							var term = _.find(o.data, {'identifier': subject } );
-							items.push(term);
-							_(term.narrowerTerms).forEach(function (term) {
-								items.push(_.find(o.data, {'identifier':term}));
+						documentLinksExt : [{
+							model:"language",
+							title:"Language",
+							required:true,
+							mapping: function(item){ return item.identifier;},
+							options: $http.get("/api/v2013/thesaurus/domains/ISO639-2/terms", { cache: true }).then(function(o){
+								var options = $filter("orderBy")(o.data, "name");
+								_.forEach(options, function(element) {
+										element.__value = element.name;
+									});
+								return options;
 							})
+						}],
+
+						resourceTypes   : function() {
+							return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})
+							.then((terms)=>{
+
+								$timeout(()=>{
+									terms.forEach(term=>{
+										if(!(term.broaderTerms||[]).length && term.identifier!=thesaurusService.otherTerm.identifier){
+											const selector = `#chk_${term.identifier}`
+											$element.find(selector).attr('disabled', true);
+											$element.find(selector).css("display", "none");
+										}
+									})
+								}, 500)
+								
+								return terms;
+							})
+						},
+						aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
+						bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
+						bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
+						bchRaSubjects	: function() {return thesaurusService.getDomainTerms('bchRaSubjects');}, // raSubjects
+						absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');}, // ABS keyAreas
+						absSubjects	: function() {return thesaurusService.getDomainTerms('absSubjects');}, // ABS Thematic Areas
+
+						cbdSubjects : function() { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", { cache: true }).then(function(o){
+							var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
+							var items = [];
+							_.forEach(subjects, function(subject) {
+								var term = _.find(o.data, {'identifier': subject } );
+								items.push(term);
+								_(term.narrowerTerms).forEach(function (term) {
+									items.push(_.find(o.data, {'identifier':term}));
+								})
+							});
+							return items;
 						});
-						return items;
+						}, 
 					});
-					}, });
-				}, 1000 );
+				};
 
 				//==================================
 				// 
