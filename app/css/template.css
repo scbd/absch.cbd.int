@@ -2653,3 +2653,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .tabular-term-check.abs-resource-keywords .tabular-terms {
     flex-flow: row wrap;
 }
+.inner-padding {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}

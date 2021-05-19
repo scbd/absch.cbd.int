@@ -27,7 +27,7 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
+											<div class="km-control-group" name="government" required caption="Country submitting a law, regulation, guideline or agreement">
 												<div class="help-block" ng-if="isEuMember">
 													<u><i>Important note for European Union (EU) Members only</i></u>: 
 													if the law, regulation, guideline or agreement applies to <u>all</u> EU Member States, the record must be published by 
@@ -43,7 +43,10 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?">
-												<div class="help-block"></div>
+												<div class="help-block">This section is relevant when the law/regulation being submitted is amending an existing 
+													law/regulation. If the law/regulation being published in the BCH is an amendment to an existing law/regulation 
+													or a part of it, make sure that the law/regulation being amended is already registered in the BCH in order to 
+													be able to provide a link to the existing record. This will allow the two records to be displayed together.</div>
 												<div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
 											</div>
 										</div>
