@@ -30,58 +30,6 @@ app.directive("viewResource", [function () {
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			};
 
-			//====================
-			//
-			//====================
-			$scope.$watch("document.organizations", function(_new)
-			{
-				$scope.organizations = angular.fromJson(angular.toJson(_new||[]));
-
-				if($scope.organizations)
-					$scope.loadReferences($scope.organizations);
-			});
-
-			//====================
-			//
-			//====================
-			$scope.loadReferences = function(targets) {
-
-				angular.forEach(targets, function(ref){
-
-					storage.documents.get(ref.identifier, { cache : true})
-					.then(function(res){return res.data}).then(function (data){
-							ref.document = data;
-						})
-						.catch(function(error){
-							if (error.status == 404) {
-
-								storage.drafts.get(ref.identifier, { cache : true})
-								.then(function(res){return res.data}).then(function (data){
-										ref.document = data;
-									})
-									.catch(function(){
-										ref.document  = undefined;
-										ref.error     = error.data;
-										ref.errorCode = error.status;
-									});
-							}
-
-							ref.document  = undefined;
-							ref.error     = error.data;
-							ref.errorCode = error.status;
-
-						});
-				});
-
-
-			};
-
-			$scope.getTerm = function(term){
-
-				return {
-					identifier : term
-				}
-			}
 			
 		}]
 	};

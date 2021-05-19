@@ -10,114 +10,128 @@
 
 
 		<document-date></document-date> <br>
-
-		<div ng-show="document.title">
-			<label>Title</label>
-			<div compare-val>
-				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+		<section>
+			<legend>General Information</legend>
+			<div ng-show="document.title">
+				<label>Title</label>
+				<div compare-val>
+					<km-value-ml value="document.title" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.resourceTypes">
-			<label>Type of resource</label>
-			<div class="km-value" compare-val>
-				<view-terms-hierarchy ng-if="document.header.schema=='resource'" ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
-				<view-terms-hierarchy ng-if="document.header.schema=='modelContractualClause'" ng-model="document.resourceTypes" locale="locale" term-domain="mCC_types"></view-terms-hierarchy>
-				<view-terms-hierarchy ng-if="document.header.schema=='communityProtocol'" ng-model="document.resourceTypes" locale="locale" term-domain="cppResourceTypes"></view-terms-hierarchy>
-				
+			<div ng-show="document.resourceTypes">
+				<label>Type of resource</label>
+				<div class="km-value" compare-val>
+					<view-terms-hierarchy ng-if="document.header.schema=='resource'" ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
+					<ul class="list" ng-if="document.header.schema=='communityProtocol' || document.header.schema=='modelContractualClause'">
+						<li ng-repeat="item in document.resourceTypes">
+							<span ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.authors">
-			<label>Author name(s)</label>
-			<div compare-val>
-				<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+			<div ng-show="document.authors">
+				<label>Author name(s)</label>
+				<div compare-val>
+					<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.organizations">
-			<label>Name of the person or organization who has authored the publication or information resource.</label>
+			<div ng-show="document.organizations">
+				<label>Reference to the authoring organization(s)</label>
 				<div class="km-value" compare-val="organizations">
-					<div class="col-sm-12" ng-repeat="organization in organizations">
+					<div class="col-sm-12" ng-repeat="organization in document.organizations">
 							<div view-record-reference ng-model="organization" locale="locale"></div>
 					</div>
 				</div>
-		</div>
+			</div>
 
-		<div ng-show="document.publisher">
-			<label>Publisher</label>
-			<div compare-val>
-				<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+			<div ng-show="document.publisher">
+				<label>Publisher</label>
+				<div compare-val>
+					<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
 
-		<div ng-show="document.source">
-			<label>Source</label>
-			<div compare-val>
-				<km-value-ml value="document.source" locales="locale"></km-value-ml>
+			<div ng-show="document.publicationDate">
+				<label>Publication date</label>
+				<div compare-val>
+					<km-value-ml value="document.publicationDate" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.publicationDate">
-			<label>Publication date</label>
-			<div compare-val>
-				<km-value-ml value="document.publicationDate" locales="locale"></km-value-ml>
+			<div ng-show="document.source">
+				<label>Source</label>
+				<div compare-val>
+					<km-value-ml value="document.source" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
 
-		<div ng-show="document.rights">
-			<label>Rights</label>
-			<div compare-val>
-			 	<km-value-ml value="document.rights" locales="locale"></km-value-ml>
+			<div ng-show="document.rights">
+				<label>Rights</label>
+				<div compare-val>
+					<km-value-ml value="document.rights" locales="locale"></km-value-ml>
+				</div>
 			</div>
-		</div>
+		</section>
 
-		<div ng-show="document.resourceLinks">
-			<label>Link to the resource(s)</label>
-			<div compare-val>
-			<km-link-list class="km-value"  ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
+		<section>
+			<legend>Access to the resource(s)</legend>
+			<div ng-show="document.resourceLinks">
+				<label>Link to the resource(s)</label>
+				<div compare-val>
+				<km-link-list class="km-value"  ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.covers">
-			<label>Cover image(s)</label>
-			<div class="km-value" compare-val="covers">
-				<ul class="list">
-					<li ng-repeat="link in document.covers">
-						<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
-							<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')|encodeURIComponent}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
-						</a>
-					</li>
-				</ul>
+			<div ng-show="document.covers">
+				<label>Cover image(s)</label>
+				<div class="km-value" compare-val="covers">
+					<ul class="list">
+						<li ng-repeat="link in document.covers">
+							<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
+								<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')|encodeURIComponent}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+							</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-		</div>
-		<div ng-show="document.summary">
-			<label>Summary, abstract or table of contents</label>
-			<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
-		</div>
-
+		</section>
 		
-		<div ng-show="document.countryRegions">
-			<label>Country(ies), regional or economic group(s) related to the resource</label>
-			<div class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.countryRegions">
-						<span ng-bind="item|term:locale"></span>
-					</li>
-				</ul>
+		<section>
+			<legend>Information on the content of the resource</legend>
+			<div ng-show="document.summary">
+				<label>Summary, abstract or table of contents</label>
+				<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
 			</div>
-		</div>
+			<div ng-show="document.countryRegions">
+				<label>Country(ies), regional or economic group(s) related to the resource</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.countryRegions">
+							<span ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
 
-		<div ng-show="document.aichiTargets && !isBCH">
-			<label>Related Aichi target(s)</label>
-			<div class="km-value" compare-val="aichiTargets">
-				<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+		<section>
+			<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
+			<div ng-show="document.aichiTargets && !isBCH">
+				<label>Related Aichi target(s)</label>
+				<div class="km-value" compare-val="aichiTargets">
+					<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets"></view-terms-hierarchy>
+				</div>
 			</div>
-		</div>
 
-		<div ng-show="document.cbdSubjects">
-			<label>CBD Subject Areas</label>
-			<div class="km-value" compare-val="cbdSubjects">
-				<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
+			<div ng-show="document.cbdSubjects">
+				<label>CBD Subject Areas</label>
+				<div class="km-value" compare-val="cbdSubjects">
+					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"></view-terms-hierarchy>
+				</div>
 			</div>
-		</div>
+		</section>
+
 		<!-- If BCH, Start -->
-		<div ng-if="isBCH">
+		<section ng-if="isBCH">
+			<!-- <legend>Keywords related to Biosafety</legend> -->
 			<div ng-show="document.biosafety.subjects">
 				<label>Biosafety Thematic Areas</label>
 				<div class="km-value" compare-val="bchSubjects">
@@ -201,12 +215,12 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</section>
 		<!-- If BCH, End -->
 
 		<!-- If ABS, Start -->
-		<div ng-if="isABS">
-			<legend>Keywords related to Access and Benefit-Sharing</legend>
+		<section ng-if="isABS">
+			<!-- <legend>Keywords related to Access and Benefit-Sharing</legend> -->
 			<div ng-show="document.nagoya.subjects">				
 				<label>ABS Thematic Areas</label>
 				<div class="km-value" compare-val="absSubjects">
@@ -220,9 +234,22 @@
 					<view-terms-hierarchy ng-model="document.nagoya.keyAreas" locale="locale" term-domain="keyAreas"></view-terms-hierarchy>
 				</div>
 			</div>
-		</div>
+
+			<div ng-show="document.nagoya.mccKeywords">
+				<label>Keywords for describing the content of  the code of conduct, guidelines and best practices and/or standards being submitted</label>
+				<div class="km-value" compare-val="mccKeywords">
+					<ul class="list">
+						<li ng-repeat="item in document.nagoya.mccKeywords">
+							<span ng-bind="item|term:locale"></span>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</section>
 		<!-- If ABS, End -->
-		<div ng-show="document.relevantInformation||document.relevantDocuments">
+
+
+		<section ng-if="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
@@ -238,7 +265,7 @@
 				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 				</div>
 			</div>
-		</div>
+		</section>
 
 
 		<div>
