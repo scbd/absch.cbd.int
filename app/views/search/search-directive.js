@@ -297,55 +297,57 @@ import 'views/reports/matrix/data-matrix.directive';
 
                     function init(){
 
-                        loadFilters();
+                        loadFilters().then(()=>{
 
-                        var query =  $location.search();
-                        var currentpage = query.currentPage||1;
-                        if(query.currentpage)
-                            $scope.searchResult.currentpage = currentpage;
-                        if(query.rowsPerPage)
-                            $scope.searchResult.rowsPerPage = query.rowsPerPage;
-                        if(query.tab)
-                            $scope.searchResult.currentTab = query.tab;
-                        if(query.group){
-                            if(typeof query.group == 'string')
-                                query.group = [query.group]
-                            $scope.searchResult.groupByFields = query.group;
-                        }
-                        if(query.sort){
-                            if(typeof query.sort == 'string')
-                                query.sort = [query.sort]
-                            $scope.searchResult.sortFields = query.sort;
-                        }
-                        if(query.viewType)
-                            $scope.searchResult.viewType = query.viewType;
-
-                        if($routeParams.recordType){
-                            if($routeParams.recordType == 'run-query'){
-                                var queryFilter = localStorageService.get("run-query");                            
-                                setSearchFilters(queryFilter);
+                            var query =  $location.search();
+                            var currentpage = query.currentPage||1;
+                            if(query.currentpage)
+                                $scope.searchResult.currentpage = currentpage;
+                            if(query.rowsPerPage)
+                                $scope.searchResult.rowsPerPage = query.rowsPerPage;
+                            if(query.tab)
+                                $scope.searchResult.currentTab = query.tab;
+                            if(query.group){
+                                if(typeof query.group == 'string')
+                                    query.group = [query.group]
+                                $scope.searchResult.groupByFields = query.group;
                             }
-                            else{
-                                if(query){
-                                    if(query.text){
-                                        $scope.saveFreeTextFilter(query.text);
-                                    }
-                                    if(query.country){
-                                        $scope.saveFilter(query.country);
-                                    }
-                                    if(query.schema){
-                                        $scope.saveFilter(query.schema);
+                            if(query.sort){
+                                if(typeof query.sort == 'string')
+                                    query.sort = [query.sort]
+                                $scope.searchResult.sortFields = query.sort;
+                            }
+                            if(query.viewType)
+                                $scope.searchResult.viewType = query.viewType;
+
+                            if($routeParams.recordType){
+                                if($routeParams.recordType == 'run-query'){
+                                    var queryFilter = localStorageService.get("run-query");                            
+                                    setSearchFilters(queryFilter);
+                                }
+                                else{
+                                    if(query){
+                                        if(query.text){
+                                            $scope.saveFreeTextFilter(query.text);
+                                        }
+                                        if(query.country){
+                                            $scope.saveFilter(query.country);
+                                        }
+                                        if(query.schema){
+                                            $scope.saveFilter(query.schema);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        if(query["raw-query"]){
-                            saveRawQueryFilter(query["raw-query"]);
-                        }
+                            if(query["raw-query"]){
+                                saveRawQueryFilter(query["raw-query"]);
+                            }
 
-                        $timeout(function(){updateQueryResult(currentpage);}, 200)
+                            $timeout(function(){updateQueryResult(currentpage);}, 200)
+                        });
 
-                        loadleftMenuFieldMapping();
+                        loadLeftMenuFieldMapping();
+                        
                     }
 
                     
@@ -364,7 +366,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             else if (isBCH)
                                 chKeywordsFilter = loadBCHKeywordFilters();
 
-                            $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
+                            return $q.all([loadSchemaFilters(), loadCountryFilters(), loadRegionsFilters(), loadDateFilters(), chKeywordsFilter])
                             .then(function(){
                                 var query =  $location.search();
                                 if(query.schema){
@@ -1034,7 +1036,7 @@ import 'views/reports/matrix/data-matrix.directive';
                         updateQueryResult();
                     }
 
-                    function loadleftMenuFieldMapping(){
+                    function loadLeftMenuFieldMapping(){
                         var file = 'views/search/search-filters/bch-left-menu-filters.json';
                         if(isABS)
                             file = 'views/search/search-filters/abs-left-menu-filters.json';
