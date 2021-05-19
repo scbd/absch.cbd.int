@@ -116,7 +116,7 @@ import 'components/scbd-angularjs-services/main';
                     }
                     // console.log("group:" + q + searchQuery.query);
 
-                    return $http.get('/api/v2013/index/select', { params: queryGroupParameters, timeout: queryCanceler})
+                    return $http.post('/api/v2013/index/select', queryGroupParameters,{ timeout: queryCanceler})
                                 .then(function(data){
                                     if(searchQuery.facet){ /// Normalize Facets                                   
                                         data.data.facet_counts.facet_fields = facetsToObject(data.data.facet_counts.facet_fields, searchQuery.facetFields)
