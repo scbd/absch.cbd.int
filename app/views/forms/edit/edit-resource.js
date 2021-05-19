@@ -15,6 +15,7 @@ import 'views/forms/view/view-resource.directive';
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
 
+    $scope.setOptions();
     //============================================================
     //
     //============================================================

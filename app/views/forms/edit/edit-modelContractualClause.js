@@ -15,11 +15,11 @@ import 'views/forms/view/view-resource.directive';
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
 
+    $scope.setOptions();
     _.extend($scope.options, {
-      resourceTypes : function() {return thesaurusService.getDomainTerms('mCC_types');}, 
+      resourceTypes : function() {return thesaurusService.getDomainTerms('mccResourceTypes');}, 
       mccKeywords   : function() {return thesaurusService.getDomainTerms('mccKeywords');}
     });
-
     //============================================================
     //
     //============================================================
