@@ -182,7 +182,7 @@
                         <a rel="noopener" translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Select</a>
                         <a rel="noopener" translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Clear selected records</a>
 
-                        <div class="dropdown  pull-left"  ng-hide="!allowNew.schema || allowNew.editingOn" style="margin-left:5px;">
+                        <div class="dropdown  pull-left"  ng-if="allowNew.schemas && allowNew.schemas.length>1 && !allowNew.editingOn" style="margin-left:5px;">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">
                             <span ng-if="!allowNew.title">Create</span>
                             <span ng-if="allowNew.title" ng-bind="allowNew.title"></span>
@@ -195,6 +195,11 @@
                                 </li>
                             </ul>
                         </div>
+                        <a rel="noopener" href="#" type="button" class="btn btn-primary bold pull-left" ng-if="allowNew.schemas && allowNew.schemas.length==1 && !allowNew.editingOn"
+                            ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(allowNew.schemas[0])">
+                            Create <span ng-bind="allowNew.schemas[0]|schemaName"></span>
+                        </a>
+                        
 
                         <a rel="noopener" translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
                        
