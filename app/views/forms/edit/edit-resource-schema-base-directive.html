@@ -34,17 +34,14 @@
 											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
 													<div class="help-block">Select as many options as needed in order to best describe the resource(s).</div>
 													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
-															binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" locales="document.header.languages"></div>
-												
+															binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" locales="document.header.languages"></div>												
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
-											<!-- <div class="km-control-group" required caption="Author(s)"> -->
-												<legend>Authors(s)</legend>
-												<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
-											<!-- </div> -->
+											<legend>Author(s)</legend>
+											<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="authors" caption="Author name(s)">
