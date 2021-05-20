@@ -54,12 +54,12 @@ import "views/forms/view/view-resource.directive";
 						}],
 
 						resourceTypes   : function() {
-							return thesaurusService.getDomainTerms('resourceTypesVlr',{other:true, otherType:'lstring'})
+							return thesaurusService.getDomainTerms('resourceTypesVlr')
 							.then((terms)=>{
 
 								$timeout(()=>{
 									terms.forEach(term=>{
-										if(!(term.broaderTerms||[]).length && term.identifier!=thesaurusService.otherTerm.identifier){
+										if(!(term.broaderTerms||[]).length){
 											const selector = `#chk_${term.identifier}`
 											$element.find(selector).attr('disabled', true);
 											$element.find(selector).css("display", "none");
@@ -105,7 +105,7 @@ import "views/forms/view/view-resource.directive";
 					}
 				}
 
-				$scope.onAddressModifiedOrganismsChange = function(value){
+				$scope.onaddressModifiedOrganismsChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
        					 return;
 					if(!value){
