@@ -105,7 +105,7 @@ import "views/forms/view/view-resource.directive";
 					}
 				}
 
-				$scope.onAddressModifiedOrganismsChange = function(value){
+				$scope.onaddressModifiedOrganismsChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
        					 return;
 					if(!value){
