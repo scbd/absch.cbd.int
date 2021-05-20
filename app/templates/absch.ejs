@@ -112,14 +112,24 @@
         <a rel="noopener" href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
          <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
     </div>
-    <div>
-        <absch-header></absch-header>
+    <div class="ng-cloak">
+        <scbd-header></scbd-header>
+       
+        <div id="wrapper" class="toggled">
+            <div id="sidebar-wrapper" ng-class="{'activate':openSideBarType}">
+                <div  ng-if="openSideBarType" class="easing" >
+                    <docked-side-bar type="openSideBarType"></docked-side-bar>
+                </div>
+            </div>
 
-        <div class="container-full"  style="margin: 0 30px;">
-            <route-loading></route-loading>
-            <ng-view autoscroll="true"></ng-view>                
+            <absch-header></absch-header>
+
+            <div class="container-full"  style="margin: 0 30px;">
+                <route-loading></route-loading>
+                <ng-view autoscroll="true"></ng-view>                
+            </div>
+
         </div>
-        
         <absch-footer></absch-footer>
         <cbd-footer></cbd-footer>
 
