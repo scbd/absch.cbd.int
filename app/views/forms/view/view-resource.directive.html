@@ -162,13 +162,13 @@
 			</div>
 
 
-			<div ng-show="document.biosafety.addressmodifiedOrganisms != undefined">
+			<div ng-show="document.biosafety.addressModifiedOrganisms != undefined">
 				<label>Does this resource address one or more specific LMOs?</label>
 				<div class="km-value" compare-val>
-					<km-value-bool value="document.biosafety.addressmodifiedOrganisms" locales="locale"></km-value-bool>
+					<km-value-bool value="document.biosafety.addressModifiedOrganisms" locales="locale"></km-value-bool>
 				</div>
 
-				<div ng-show="document.biosafety.modifiedOrganisms && document.biosafety.addressmodifiedOrganisms">
+				<div ng-show="document.biosafety.modifiedOrganisms && document.biosafety.addressModifiedOrganisms">
 					<label>LMO(s) identification</label>
 					<div class="km-value" compare-val="modifiedOrganisms">
 						<ul class="list">
