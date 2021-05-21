@@ -13,10 +13,10 @@ import 'views/directives/workflow-arrow-buttons';
   
 app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 
-                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm", 'solr',
+                                   "breadcrumbs", "appConfigService", "locale", 'ngMeta', "realm", 'solr', 'Thesaurus',
                                     function ($rootScope, $scope, $http, $window, guid, $filter, thesaurusService, $q, $location, storage,
                                               authentication, editFormUtility, $routeParams, $timeout, $route, 
-                                              breadcrumbs, appConfigService, locale, ngMeta, realm, solr) {
+                                              breadcrumbs, appConfigService, locale, ngMeta, realm, solr, Thesaurus) {
 
     $scope.realm = realm;
     //incase if open from dialog use the type passed by the dialog
@@ -69,6 +69,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
           return countryRegions;
         });
       },
+      regions	: function() {return thesaurusService.getDomainTerms('regions').then(Thesaurus.buildTree);}
     };
 
     $scope.genericFilter = function($query, items) {

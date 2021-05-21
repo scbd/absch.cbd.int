@@ -7,6 +7,10 @@ import 'services/main';
 
         return new function () {
 
+            var terms = {
+                other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+                eu   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
+            }
 
             this.getDomains = function(domainIdentifier, params){
 
@@ -23,6 +27,7 @@ import 'services/main';
                     return termData.data;
                 });;
             };
+            this.otherTerm = { identifier : terms.other };
 
             function fn_getDomainTerms(termIdentifier, options){
                 if(!termIdentifier)
@@ -64,10 +69,6 @@ import 'services/main';
                                 return data.data;
                             });
             }
-            var terms = {
-                other: "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
-                eu   : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"
-            }
 
             var domainTerms = {
                 other                  : "5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
@@ -96,7 +97,8 @@ import 'services/main';
                 absGeneticResourceAreas: '545CD54C-CFF3-41E8-A003-FDD278426A3A',
                 absFunctions           : '8102E184-E282-47F7-A49F-4C219B0EE235',
                 usage                  : "A7B77788-8C90-4849-9327-E181E9522F3A",
-                resourceTypes          : "83BA4728-A843-442B-9664-705F55A8EC52",
+                resourceTypesVlr       : "A762DF7E-B8D1-40D6-9DAC-D25E48C65528", //TODO used in VLR only need to rename
+                resourceTypes          : "83BA4728-A843-442B-9664-705F55A8EC52", // TODO: will move to duplicate
                 jurisdictions          : '4D4413D8-36F9-4CD2-8CC1-4F3C866DDE5A', 
                 dnaSequenceFamily      : '82DAAF04-6698-4CA6-81D5-F200AE64C63A',
                 dnaSequenceTraits      : 'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',

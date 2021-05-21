@@ -15,17 +15,7 @@ import 'views/forms/view/view-resource.directive';
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
 
-    _.extend($scope.options, {
-        resourceTypes   : function() {
-            return $q.when(
-                          $http.get("/api/v2013/thesaurus/domains/7E688641-F642-4C46-A024-70ED76D3DF40/terms", { cache: true })
-                      ).then(function(o) {
-                          var data = o.data;
-                          return  Thesaurus.buildTree(data);
-                      });
-        }
-    });
-
+    $scope.setOptions();
     //============================================================
     //
     //============================================================
@@ -49,40 +39,19 @@ import 'views/forms/view/view-resource.directive';
         }
     };
 
-    //==================================
+    //============================================================
     //
-    //==================================
-    $scope.getCleanDocument = function() {
+    //============================================================
+    var newDocument = {};
+    if($scope.isABS)
+        newDocument = {aichiTargets: [{identifier: "AICHI-TARGET-16"}]}
 
-      $scope.setTarget16();
-
-      var document = $scope.document;
-
-      if (!document)
-        return undefined;
-
-      document = angular.fromJson(angular.toJson(document));
-
-      if (/^\s*$/g.test(document.notes))
-        document.notes = undefined;
-
-        document.languages = undefined;
-        document.languageName = undefined;
-
-
-      if(!$scope.isOtherSelected(document.resourceTypes))
-          document.resourceTypeName = undefined;
-
-      if(document.organizations && document.organizations.length <=0)
-          document.organizations = undefined;
-
-        var documentCopy = _.clone(document);
-
-        delete documentCopy.organizationsRef;
-
-        return $scope.sanitizeDocument(documentCopy);
-    };
-
-
+    $scope.setDocument(newDocument, true)
+    .then(function(doc){
+        $scope.isVlr = true;
+        if(doc.countryRegions){
+            $scope.setCountryRegions (doc.countryRegions)
+        }
+    });
   }];
 

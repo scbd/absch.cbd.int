@@ -105,7 +105,7 @@ export default function bootApp(window, require, defineX) {
 
             'chart-js'                  : cdnHost + 'chart.js@1.1.1/Chart.min',
             'printThis'                 : cdnHost + 'print-this@1.9.0/printThis',
-            'diacritics'                : cdnHost + 'diacritic@0.0.2//diacritics',
+            'diacritics'                : cdnHost + 'diacritic@0.0.2/diacritics',
             'pdfjs-dist/build/pdf'      : cdnHost + 'pdfjs-dist@2.0.489/build/pdf.min',
         'pdfjs-dist/build/pdf.worker': cdnHost + 'pdfjs-dist@2.0.489/build/pdf.worker.min ',       
             'pdf-object'                : cdnHost + 'pdfobject@2.0.201604172/pdfobject.min',

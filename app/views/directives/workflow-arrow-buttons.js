@@ -8,10 +8,10 @@ import 'toastr';
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog',
+    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
             $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, 
-            articlesService, roleService, locale, commonjs, ngDialog){
+            articlesService, roleService, locale, commonjs, ngDialog, $window){
 
     	return{
     		restrict: 'EA',
@@ -629,7 +629,7 @@ import 'toastr';
 
                 $scope.$on('$destroy', function(){
 					$timeout.cancel(saveDraftVersionTimer);
-					window.removeEventListener('beforeunload', onBeforeUnload)
+					$window.onbeforeunload = undefined;
                 });
                 
                 $scope.$on("documentError", showError);
@@ -972,7 +972,7 @@ import 'toastr';
                         $rootScope.next_url = undefined;
                     });
 
-                    window.addEventListener('beforeunload', onBeforeUnload);
+                    $window.onbeforeunload = onBeforeUnload;
 
                     function onBeforeUnload(e) {
                         if($rootScope.isFormLeaving)
@@ -981,8 +981,14 @@ import 'toastr';
                         if(!originalDocument || !formChanged){
                             return;
                         }
+                        console.log(e);
                         e.preventDefault();	// Cancel the event as stated by the standard.					
-                        e.returnValue = '';// Chrome requires returnValue to be set.
+                        if (e) {
+                            e.returnValue = '';// Chrome requires returnValue to be set.
+                        }
+                      
+                        // For Safari
+                        return '';
                     }
 
                     $rootScope.$on('event:sessionExpired-signIn', function(evt, data){
@@ -991,7 +997,7 @@ import 'toastr';
                         validate();
                     })
 
-                //////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////
 
 
                 if($scope.tab!='edit') 

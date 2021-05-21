@@ -6,8 +6,8 @@ import 'views/forms/view/view-resource.directive';
 
   export { default as template } from './edit-modelContractualClause.html';
 
-  export default ["$scope", "$http", "$filter", "Thesaurus", "$q", "Enumerable", "$controller", "IStorage", "$location",
-                function ($scope, $http, $filter, Thesaurus, $q, Enumerable, $controller, storage, $location) {
+  export default ["$scope", "thesaurusService", "$controller", "$location",
+                function ($scope, thesaurusService, $controller, $location) {
 
 
     $scope.path=$location.path();
@@ -15,51 +15,21 @@ import 'views/forms/view/view-resource.directive';
     //$scope.organizationsRef = [];
     $controller('editController', {$scope: $scope});
 
+    $scope.setOptions();
     _.extend($scope.options, {
-      resourceTypes : function() {
-        return $q.when($http.get("/api/v2013/thesaurus/domains/840427E5-E5AC-4578-B238-C81EAEEDBDD8/terms", { cache: true })).then(function(o) {
-          return  Thesaurus.buildTree(o.data);
-        })
-      }, mccKeywords : function() {
-        return $q.when($http.get("/api/v2013/thesaurus/domains/ABS-A1920-Keywords/terms", { cache: true })).then(function(o) {
-          return  Thesaurus.buildTree(o.data);
-        })
-      }
-
+      resourceTypes : function() {return thesaurusService.getDomainTerms('mccResourceTypes');}, 
+      mccKeywords   : function() {return thesaurusService.getDomainTerms('mccKeywords');}
     });
-    //==================================
+    //============================================================
     //
-    //==================================
-    $scope.getCleanDocument = function() {
-
-      var document = $scope.document;
-
-      if (!document)
-        return undefined;
-
-      document = angular.fromJson(angular.toJson(document));
-
-      if (/^\s*$/g.test(document.notes))
-        document.notes = undefined;
-
-      document.aichiTargets = undefined;
-
-      if(!$scope.isOtherSelected(document.languages))
-          document.languageName = undefined;
-
-      if(!$scope.isOtherSelected(document.resourceTypes))
-          document.resourceTypeName = undefined;
-
-
-      if(document.organizations && document.organizations.length <=0)
-          document.organizations = undefined;
-
-        var documentCopy = _.clone(document)
-
-        delete documentCopy.organizationsRef;
-        return $scope.sanitizeDocument(documentCopy);
-    };
-
+    //============================================================
+    $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true)
+    .then(function(doc){
+        $scope.isMcc = true
+        if(doc.countryRegions){
+            $scope.setCountryRegions (doc.countryRegions)
+        }
+    });
 
 
 
