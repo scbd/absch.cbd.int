@@ -26,11 +26,6 @@
                         <span style="font-weight:bold;color:#428bca">Party</span>
                     </div>
                     
-                     <div ng-click="updateMap('signatory')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;" ng-class="{'bg-grey1':type=='signatory'}" >
-                        <span class="badge pull-right">{{npSignatory}}</span>
-                        <span style="font-weight:bold;color:#5bc0de">Signatory</span>
-                    </div>
-                    
                     <div ng-click="updateMap('nonParties')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='nonParties'}">
                         <span class="badge pull-right">{{nonParty}}</span>
                         <span style="font-weight:bold;color:#888">Non-Party</span>
@@ -128,7 +123,6 @@
                 <ul>
                   <li><a rel="noopener" translation-url  ng-click="updateMap('all')">All <span class="badge pull-right">{{countries.length}}</span></a></li>
                   <li><a rel="noopener" translation-url  style="font-weight:bold;color:#428bca" ng-click="updateMap('party');selected=': Parties'"  >Party <span class="badge pull-right">{{npParty}}</span></a></li>
-                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#5bc0de" ng-click="updateMap('signatory');selected=': Signatories'" >Signatory <span class="badge pull-right">{{npSignatory}}</span></a></li>
                   <li><a rel="noopener" translation-url  style="font-weight:bold;color:#888" ng-click="updateMap('nonParties');selected=': Non-Parties'" >Non-Party <span class="badge pull-right">{{nonParty}}</span></a></li>
                 </ul>
              </div>
@@ -143,9 +137,8 @@
                     <ul class="list-group">
                         <li class="row list-group-item" style="min-width:300px;" ng-click="navigateCountry(country.code)"
                         ng-repeat="country in countries | filter:countryFilter | filter:searchFilter | orderBy:'name.en'"
-                        ng-class="{'list-group-item-info':country.isSignatory && !country.isParty,
-                                'list-group-item-primary':country.isParty,
-                                'list-group-item-default':!country.isParty && !country.isSignatory}">
+                        ng-class="{'list-group-item-primary':country.isParty,
+                                'list-group-item-default':!country.isParty}">
     
                             <div class="col-xs-12">{{country.name |lstring}}</div>
                         </li>
