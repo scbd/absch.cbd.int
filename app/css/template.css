@@ -2676,3 +2676,13 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     .main-content {margin: 0 120px;}
     .map-width{ margin: 0 -120px;}
   }
+
+@media (max-width:992px) {
+    .ngdialog-theme-default .ngdialog-content{
+        width:90% !important;
+    }
+}
+
+.tabular-term-check.abs-resource-keywords .tabular-terms {
+    flex-flow: row wrap;
+}
