@@ -605,7 +605,7 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "resourceTypes",
+			"term": "resourceTypesVlr",
 			"title": "Type(s) of resource",
 			"field": "resourceTypes_ss",
 			"relatedField":"resourceTypes_REL_ss"
@@ -618,10 +618,17 @@
 		},
 		{
 			"type": "thesaurus",
-			"term": "thematicArea",
-			"title": "Thematic Area",
+			"term": "cpbThematicAreas",
+			"title": "Biosafety Thematic Areas",
 			"field": "bchSubjects_ss",
 			"relatedField":"bchSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbdSubjects",
+			"title": "CBD Subject Areas",
+			"field": "cbdSubjects_ss",
+			"relatedField":"cbdSubjects_REL_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -629,6 +636,30 @@
 			"title": "Guidance on Risk Assessment of LMOs",
 			"field": "bchRaSubjects_ss",
 			"relatedField":"bchRaSubjects_REL_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fq": [ "schema_s:modifiedOrganism"]
+			},
+			"title": "Living modified organism",
+			"field": "bchModifiedOrganisms_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fq": [ "schema_s:organism"]
+			},
+			"title": "Organism",
+			"field": "bchOrganisms_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"fq": [ "schema_s:dnaSequence"]
+			},
+			"title": "Genetic elements(s)",
+			"field": "bchGenes_ss"
 		},
 		{
 			"type": "date",
