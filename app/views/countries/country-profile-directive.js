@@ -23,7 +23,6 @@ app.directive('countryProfile', function() {
                 }
                 $scope.loadRecords  = loadRecords;
                 $scope.sortMeasure  = "[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
-                $scope.isEuMember = false;
                 var countryRecords  = {};
                 var nationalSchemas = []
                 var eUSchemas = [];
