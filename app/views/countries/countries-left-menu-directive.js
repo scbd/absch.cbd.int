@@ -29,7 +29,6 @@ import 'services/main';
                         $scope.countries = countries;
 
                         $scope.npParty = _.filter($scope.countries,{isParty:true}).length;
-                        $scope.npSignatory = _.filter($scope.countries,{isSignatory:true}).length;
                         $scope.nonParty = _.filter($scope.countries,{isParty:false}).length;
 
                     });
@@ -39,10 +38,8 @@ import 'services/main';
                          $scope.type = type;
                          if(type=='party')
                              $scope.searchFilter=commonjs.isParty;
-                         else if(type=='signatory')
-                             $scope.searchFilter=commonjs.isSignatory;
                          else if(type=='nonParties')
-                             $scope.searchFilter=function(entity){ return !commonjs.isParty(entity) && !commonjs.isSignatory(entity);};
+                             $scope.searchFilter=function(entity){ return !commonjs.isParty(entity);};
                          else if(type=='all')
                              $scope.searchFilter=function(entity){return entity;};
 

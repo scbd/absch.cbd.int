@@ -432,7 +432,6 @@ import 'views/reports/matrix/data-matrix.directive';
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
                         addFilter('inbetween'           , { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol' , 'id': 'inbetween'           , 'description': '' });
                         addFilter('nonParty'            , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'            , 'description': '' });
-                        addFilter('signatoryToProtocol' , { 'sort': 4, 'type': 'partyStatus', 'name': 'Signatory to the Protocol'               , 'id': 'signatoryToProtocol' , 'description': '' });
 
                         //SCBD
                         _.forEach(scbdSchemas, function (schema, key) {
@@ -449,7 +448,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             _.forEach(countries, function (country, index) {
                                 addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name, 
                                 'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isParty": country.isParty, 
-                                "isParty": country.isParty, "isSignatory": country.isSignatory, "isRatified": country.isRatified, 
+                                "isParty": country.isParty,  "isRatified": country.isRatified, 
                                 "isInbetweenParty": country.isInbetweenParty, "entryIntoForce": country.entryIntoForce});
                             });
                         });
@@ -1017,8 +1016,6 @@ import 'views/reports/matrix/data-matrix.directive';
                             else if (id === 'nonParty' && item.isParty === false)
                                 return item;
                             else if (id === 'inbetween' && item.isInbetweenParty === true)
-                                return item;
-                            else if (id === 'signatoryToProtocol' && item.isSignatory === true)
                                 return item;
                         });
 
