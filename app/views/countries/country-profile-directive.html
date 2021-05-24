@@ -7,13 +7,14 @@
     </div>
     <br/>
     <br/> -->
-    <div class="country-profile-list" ng-repeat="(key, schema) in countryRecords" ng-if="schema">
+    <div class="country-profile-list" ng-repeat="schema in countryRecords | orderBy:'index'" ng-if="schema">
 
         <h4 id="div{{schema.shortCode}}" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" 
-        ng-click="showHideRecords(key, schema)"
+        ng-click="showHideRecords(schema)"
         ng-class="{'color-litegrey': schema.numFound == 0}">
             <i class="fa" ng-class="{'fa-plus':!schema.display, 'fa-minus':schema.display}" style="font-size:14px;font-weight:normal;"></i> 
             <span ng-bind="schema.title|lstring:locale"></span> (<span ng-bind="schema.shortCode"></span>)  
+            <span ng-if="schema.isRegional"> - <span ng-bind="schema.government"></span></span>
             <span class="badge pull-right" ng-class="{'bg-grey3': schema.numFound==0, 'bg-black': schema.numFound > 0}" ng-bind="schema.numFound"></span>
             <div ng-if="schema.docs[0].rec_date" class="pull-right label">
                 Last updated on: <span ng-bind="schema.docs[0].rec_date|formatDate"></span>
@@ -25,14 +26,14 @@
                     <result-grouped-national-record doc='doc'></result-grouped-national-record>
                 </div>
                 <div class="btn-group" ng-if="schema.numFound >  schema.docs.length">
-                    <button class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(key, schema,10)" ng-disabled="schema.isLoading">
+                    <button class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(schema,10)" ng-disabled="schema.isLoading">
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show next 10 records 
                     </button>
                     <button ng-if="schema.isLoading" class="btn btn-default" ng-disabled="true" style="font-size: 10px;text-transform: uppercase;"   >
                         <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                     </button>
-                    <button class="btn btn-default bold" ng-click="loadRecords(key, schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show all {{schema.numFound}} records
+                    <button class="btn btn-default bold" ng-click="loadRecords(schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show remaining {{schema.numFound-schema.docs.length}} records
                     </button>
                 </div>
             </div>
