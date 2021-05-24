@@ -6,9 +6,10 @@ import "views/forms/view/view-organization.directive";
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'views/forms/edit/editFormUtility';
+import 'services/main';
 
-app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm',
-                function($controller, $filter, $q, guid, editFormUtility, locale, thesaurusService, realm) {
+app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm',
+                function($controller, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, realm) {
 
 	return {
 		restrict   : "E",
@@ -32,7 +33,7 @@ app.directive("editOrganization", [ "$controller",  "$filter", "$q", 'guid', 'ed
                 organizationTypes: function() { return thesaurusService.getDomainTerms('organizationTypes', {other:true})
                     .then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); }) },
                 cpbThematicAreas   : function() { return thesaurusService.getDomainTerms('cbdSubjects') },
-                geographicRegions  : function() { return thesaurusService.getDomainTerms('regions', {other:true}) }
+                geographicRegions  : function() { return thesaurusService.getDomainTerms('regions').then(thesaurus.buildTree) }
             });
 
 
