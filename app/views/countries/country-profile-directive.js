@@ -1,4 +1,4 @@
- import app from 'app';
+import app from 'app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
 import 'views/measure-matrix/measure-matrix-countries-directive';
@@ -6,44 +6,47 @@ import 'views/search/search-results/result-grouped-national-record';
 import 'services/main';
 import 'views/directives/export-directive';
 
-    app.directive('countryProfile', function() {
-        return {
-            restrict: 'EAC',
-            template: template,
-            replace: true,
-            scope: {
-                api : '=?',
-                code : '='
-            },
-            controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr',
-                function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr) {
+app.directive('countryProfile', function() {
+    return {
+        restrict: 'EAC',
+        template: template,
+        replace: true,
+        scope: {
+            api : '=?',
+            code : '='
+        },
+        controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService',
+            function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService) {
 
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
                 }
                 $scope.loadRecords  = loadRecords;
                 $scope.sortMeasure  = "[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
-
+                $scope.isEuMember = false;
                 var countryRecords  = {};
                 var nationalSchemas = []
+                var eUSchemas = [];
                 var index=0;
-                _(realm.schemas).map(function(schema, key){ 
-                    if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
-                        countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
-                        nationalSchemas.push(key);
-                    }
-                }).value();
 
+                function init(){
+                    _(realm.schemas).map(function(schema, key){
+                        if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
+                            countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
+                            nationalSchemas.push(key);
+                        }
+                    }).value();
+                }
 
                 $scope.$watch('code', function(newVal){
                     if(newVal){
                         loadCountryRecords(newVal.toLowerCase());
                     }
                 })
-                $scope.showHideRecords = function(key, schema){
+                $scope.showHideRecords = function(schema){
                     schema.display = !schema.display;
-                    if(key == 'measure'){ //for measure load all remaining records to build the measure matrix
-                        loadRecords(key, schema)
+                    if(schema.key == 'measure'){ //for measure load all remaining records to build the measure matrix
+                        loadRecords(schema)
                     }
 
                 }
@@ -56,13 +59,13 @@ import 'views/directives/export-directive';
 
                     var searchQuery = $scope.exportQuery = {
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
-                        query   : 'schema_s:(' +_.map(nationalSchemas, solr.escape).join(' ') +') AND government_s:' + solr.escape(code),
+                        fieldQuery     : [`schema_s:(${nationalSchemas.map(solr.escape).join(' ')})`],
                         rowsPerPage    : 500,
                         sort           : 'updatedDate_dt desc',
                         groupField     : 'government_schema_s',
                         groupLimit     : 10
                     };
-
+                    searchQuery.query = [`government_s:${solr.escape(code)} OR (countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`]
                     searchService.group(searchQuery)
                     .then(function(result){
 
@@ -78,11 +81,22 @@ import 'views/directives/export-directive';
                             if(schema=='measure'){
                                 formatting(group.doclist.docs);
                             }
+                            if(gpDetails[0]!= code){
+                                schema += `${gpDetails[0]}`;
+                                if(!countryRecords[schema])
+                                    countryRecords[schema] = {docs:[], index:0, numFound:0, ...countryRecords[gpDetails[1]] };
+                                countryRecords[schema].isRegional = true;
+                                if(group.doclist.numFound){
+                                    countryRecords[schema].numFound = group.doclist.numFound
+                                    countryRecords[schema].code = group.doclist.docs[0].government_s
+                                    countryRecords[schema].government = group.doclist.docs[0].government_EN_t
+                                }
+                            }
                             countryRecords[schema]     = _.extend(countryRecords[schema], group.doclist);
 
                         });
                         var schemaName = $filter('mapSchema')($routeParams.schema);
-                        if($routeParams.code && $routeParams.schema && $routeParams.schema == countryRecords[schemaName].shortCode){                            
+                        if($routeParams.code && $routeParams.schema && $routeParams.schema == countryRecords[schemaName].shortCode){
                             countryRecords[schemaName].display = true;
 
                             $timeout(function(){                    
@@ -92,25 +106,33 @@ import 'views/directives/export-directive';
                                 }
                             }, 500)
                         }
-                        $scope.countryRecords = countryRecords;
+                        $scope.countryRecords = [];
+                        Object.keys(countryRecords).forEach((key)=>{
+                            $scope.countryRecords.push({
+                                key, ...countryRecords[key]
+                            })
+                        });
                     });
                 }
 
-                function loadRecords(key, schema, number){
-
+                function loadRecords(schema, number){
+                    let key = schema.key;
+                    if(schema.isRegional)
+                        key = key.replace(new RegExp(`${schema.code}$`), '');
                     schema.isLoading = true;
+                    schema.start = schema.start||10;
                     var query = {
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
-                        query   : 'schema_s:(' + key +') AND government_s:' + $scope.code.toLowerCase(),
+                        query   : 'schema_s:(' + key +') AND government_s:' + solr.escape(schema.code || $scope.code.toLowerCase()),
                         rowsPerPage    : number||5000,
                         sort           : 'updatedDate_dt desc',
-                        start          : number ? undefined : (schema.start==0 ? 10 : schema.start),
-                        currentPage    : schema.start==0 ? 1 : Math.ceil((schema.start+number)/10)
+                        start          : schema.start,
+                        currentPage    : Math.ceil(schema.start/10)
                     }
                     return searchService.list(query)
                     .then(function(result){
-                        schema.start = query.currentPage*10
-
+                        schema.start = (query.currentPage+1)*10
+                        
                         if(key=='measure'){
                             formatting(result.data.response.docs);
                         }
@@ -129,10 +151,10 @@ import 'views/directives/export-directive';
                         }
                     });
                 }
-                // loadCountryRecords($scope.code.toLowerCase());
 
+                init();
             }]
 
-        };
-    });
+    };
+});
 
