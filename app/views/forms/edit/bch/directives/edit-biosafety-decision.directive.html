@@ -125,7 +125,7 @@
 											<div block-region activate="decisions.otherDecisions.identifier || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">
 												<div class="km-control-group" name="commonDecisions" required caption="Common decisions">
 														<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
-														terms="options.commonDecisions()"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
+														terms="options.commonDecisions()" show-description="true"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
 												</div>
 											</div>
 										</div>
@@ -133,7 +133,7 @@
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group " name="otherDecisions" required caption="Other decisions">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
-															terms="options.otherDecisions()" binding-type="term" ng-change="onOtherDecisionChanged(decisions)">
+															terms="options.otherDecisions()" show-description="true" binding-type="term" ng-change="onOtherDecisionChanged(decisions)">
 													</div>
 												</div>
 											</div>
@@ -142,7 +142,7 @@
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="Communications, notifications and declarations">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
-															terms="options.communicationDecisions()" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
+															terms="options.communicationDecisions()" show-description="true" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
 													</div>
 												</div>
 											</div>
