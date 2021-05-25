@@ -348,7 +348,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 if($scope.activeTab == 'myRecords'){
                     var myRecordsQuery = '_contributor_is:' + solr.escape($scope.$root.user.userID);
                     if($scope.userGov)
-                        myRecordsQuery += ' OR _ownership_s:'+solr.escape($scope.userGov.toLowerCase());
+                        myRecordsQuery += ' OR _ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
 
                     rawQuery.fieldQueries.push(myRecordsQuery)
                 }
