@@ -343,17 +343,17 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     }
                     rawQuery.query = query;
                 }
-
+                rawQuery = rawQuery || {fieldQueries:[]};
                 //tabs query
                 if($scope.activeTab == 'myRecords'){
                     var myRecordsQuery = '_contributor_is:' + solr.escape($scope.$root.user.userID);
-                    if($scope.userGov)
-                        myRecordsQuery += ' OR _ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
-
-                    rawQuery.fieldQueries.push(myRecordsQuery)
+                    rawQuery.fieldQueries.push(myRecordsQuery);
                 }
-                rawQuery = rawQuery || {};
-
+                else if($scope.activeTab == 'myGovernmentRecords' && $scope.userGov){
+                    var myGovernmentQuery = '_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
+                    rawQuery.fieldQueries.push(myGovernmentQuery);
+                }
+            
                 var queryParameters = {
                     fields        : rawQuery.fields,
                     fieldQuery    : rawQuery.fieldQueries,
@@ -484,7 +484,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
             $scope.changeTab = function(tab){
                 $scope.activeTab = tab;
-                if(tab=='allRecords' || tab=='myRecords'){
+                if(['allRecords', 'myRecords', 'myGovernmentRecords'].includes(tab)){
                     showToolTip();
                     $scope.searchFreeText($scope.search.keyword)
                 }
