@@ -92,14 +92,12 @@
 			</div>
 
 			<div class="row" ng-show="document.durationPeriod || document.durationText">
-				<div class="col-md-6">
+				<div class="col-md-12">
 					<label>Duration</label>
-					<div compare-val>
-						<km-value-ml value="document.durationPeriod" locales="locale"></km-value-ml>
+					<div class="km-value" compare-val>
+						<span  ng-bind="document.durationPeriod | lstring:locale"></span>
+						<span  ng-bind="document.durationText | lstring:locale"></span>
 					</div>
-				</div>
-				<div class="col-md-6" style="margin-top: 20px;">
-					<km-value-ml value="document.durationText" locales="locale"></km-value-ml>
 				</div>
 			</div>
 		</div>
@@ -140,7 +138,7 @@
 			</div>
 			</div>
 
-			<div ng-show="document.isImplementedByAgencies && document.executingAgencies">
+			<div ng-show="document.isExecutededByAgencies && document.executingAgencies">
 				<label>Executing agency(ies) or organization(s)</label>
 				<div class="km-value" compare-val="executingAgencies">
 				<div ng-repeat="contact in document.executingAgencies">
@@ -149,7 +147,7 @@
 			</div>
 			</div>
 
-			<div ng-show="document.collaboratingPartners && document.collaboratingPartners">
+			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
 				<label>Collaborating partner(s)</label>
 				<div class="km-value" compare-val="collaboratingPartners">
 				<div ng-repeat="contact in document.collaboratingPartners">
