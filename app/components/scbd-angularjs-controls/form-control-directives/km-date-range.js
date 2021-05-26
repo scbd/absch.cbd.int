@@ -20,8 +20,9 @@ import 'datepicker-range';
         ngDisabledFn: '&ngDisabled'
       },
       link: function($scope, $element, $attr, ngModelController) {
+        const dateFormat = $attr.dateFormat||'DD-MM-YYYY';
         
-         $element.daterangepicker({
+        $element.daterangepicker({
             showDropdowns: true,
             alwaysShowCalendars:true,
             ranges: {
@@ -32,12 +33,15 @@ import 'datepicker-range';
               'Last 12 months'  : [moment().subtract(12,  'month' ).startOf('month'), moment()],
               'Last 2 years'    : [moment().subtract(2,   'year'  ).startOf('month'), moment()],
               'Last 5 years'    : [moment().subtract(5,   'year'  ).startOf('month'), moment()]
+            },
+            locale: {
+              format: dateFormat
             }
         });
         $element.on('apply.daterangepicker', function(ev, picker) {
             $scope.binding = {
-                  start : picker.startDate.format('YYYY-MM-DD'),
-                  end   : picker.endDate.format('YYYY-MM-DD'),
+                  start : picker.startDate,
+                  end   : picker.endDate,
                   label : picker.chosenLabel
                 }
                 ngModelController.$setViewValue($scope.binding);
@@ -47,12 +51,12 @@ import 'datepicker-range';
             var newVal = newVal || {}
             var format;
             if(newVal.start)
-              format = newVal.start;//.format('YYYY-MM-DD');
+              format = newVal.start.format(dateFormat)
 
             if(newVal.end)
-              format = (format ? (format + ' - ') : '') + newVal.end;//.format('YYYY-MM-DD')
+              format = (format ? (format + ' - ') : '') + newVal.end.format(dateFormat);//.format('YYYY-MM-DD')
 
-            $scope.formatedDate = format||'';
+            $scope.formattedDate = format||'';
         });
       }
     };
