@@ -1,8 +1,9 @@
 import app from 'app';
 import template from 'text!./search-directive.html';
 import _ from 'lodash';
-import scbdSchemas from 'app-data/search-tour.json';
-import joyRideText from 'services/main';
+import joyRideText from 'app-data/search-tour.json';
+import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
+import 'services/main';
 import 'views/search/search-filters/keyword-filter';
 import 'views/search/search-filters/national-filter';
 import 'views/search/search-filters/reference-filter';
@@ -17,7 +18,6 @@ import 'views/register/user-preferences/user-alerts';
 import 'views/directives/export-directive';
 import 'angular-animate';
 import 'angular-joyride';
-import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main';
 import 'views/search/directives/result-view-options';
 import 'views/search/search-filters/left-side-filter';
@@ -425,8 +425,8 @@ import 'views/reports/matrix/data-matrix.directive';
                     function loadSchemaFilters() {
 
                         _.forEach(realm.schemas, function (schema, key) {
-                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title.en, 'id': key, 
-                                        'description': (schema.description || {}).en, otherType:schema.type });
+                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                                        'description': $filter('lstring')((schema.description || {})), otherType:schema.type });
                         })
 
                         addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
@@ -434,9 +434,9 @@ import 'views/reports/matrix/data-matrix.directive';
                         addFilter('nonParty'            , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'            , 'description': '' });
 
                         //SCBD
-                        _.forEach(scbdSchemas, function (schema, key) {
-                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': schema.title, 'id': key, 
-                                    'description': (schema.description || {}), otherType:'scbd' });
+                        _.forEach(scbdSchemas.defaults, function (schema, key) {
+                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                                    'description': $filter('lstring')((schema.description || {})), otherType:'scbd' });
                         });
                     };
 

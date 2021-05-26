@@ -2686,3 +2686,10 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .tabular-term-check.abs-resource-keywords .tabular-terms {
     flex-flow: row wrap;
 }
+
+.document-selection-modal .nav .open> a,
+.document-selection-modal .nav .open> a:hover,
+.document-selection-modal .nav .open> a:focus,
+.document-selection-modal .nav .dropdown> a:hover {
+    background-color: #fff!important;
+}

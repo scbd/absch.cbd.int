@@ -17,6 +17,7 @@ app.config(["$provide", $provide => {
     let localGet = templateCache.get;
     let localPut = templateCache.put;
     templateCache.get = (key) => {
+      console.warn('still getting from template cache provider', key)
         return localGet(key.toLowerCase())
     }
     templateCache.put = (key, value) => {
