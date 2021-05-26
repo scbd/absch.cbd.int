@@ -15,7 +15,7 @@
     <div ng-transclude="selectRecords">   
         <div class="row">
             <div class="col-xs-12">             
-                <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled">
+                <button type="button" style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled">
                     <i class="fa fa-plus" ng-if="!openingDialog"></i>
                     <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}
                 </button>
