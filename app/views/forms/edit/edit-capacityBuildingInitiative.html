@@ -166,14 +166,14 @@
 															</div>
 														</div>
 														<div class="col-md-1 text-center" ng-show="!document.status || isProposedOrApproved()">
-															<div class="km-control-group bold" name="enddate" style="margin-top:30px;" > OR </div>
+															<div class="km-control-group bold" style="margin-top:30px;" > OR </div>
 														</div>
 														<div class="col-md-5">
 															<div class="km-control-group" name="duration" caption="Duration" ng-show="!document.status || isProposedOrApproved()">
 																<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
 																			minlength="1" placeholder="eg. 24" ng-change="clearDates()" class="form-control"
 																			style="display:inline-block;width:100px"/>
-																<select name="durationText" ng-model="document.durationText"  class="form-control"
+																<select name="durationText" ng-model="document.durationText"  class="form-control" convert-to-number
 																				style="display:inline-block;width:100px" placeholder="eg. Months">
 																	<option value=""></option>
 																	<option value="days">Days</option>
@@ -191,7 +191,7 @@
 										<div class="col-md-12">
 											<div class="km-control-group" name="activityScope" caption="Type of capacity development initiative">
 												<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
-														description="true" binding-type="term" required locales="document.header.languages"></div>
+														description="true" binding-type="term" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -394,7 +394,7 @@
 									<div class="row">
 										<div class="col-md-3">
 											<div class="km-control-group" name="totalBudget" caption="Total budget (amount, in US dollars)">
-												<div class="help-info">This may include in-kind contributions expressed in monetary terms.</div>
+												<div class="help-info">This may include in-kind contributions expressed in monetary terms. Please do not use spaces, periods or commas when you enter the amount.</div>
 												<div class="input-group">
 													<span class="input-group-addon">USD$</span>
 													<input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
