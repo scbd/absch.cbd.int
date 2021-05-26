@@ -301,10 +301,10 @@
 									<legend>Information on thematic coverage of the initiative</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="cbdSubjects"
+											<div class="km-control-group tabular-term-check" name="cbdSubjects"
 													caption="Related CBD subject areas">
 												<div km-term-check name="cbdSubjects" ng-model="document.cbdSubjects"
-														terms="options.cbdSubjects()" binding-type="term[]"></div>
+														terms="options.cbdSubjects()" binding-type="term[]" tabular-shape="true"></div>
 											</div>
 										</div>
 									</div>
@@ -343,10 +343,10 @@
 									<legend>Biosafety thematic areas</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" required name="cpbThematicAreas"
+											<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
 													caption="Biosafety thematic areas">
 													<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
-													terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true"></div>
+													terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
 											</div>
 										</div>
 									</div>
