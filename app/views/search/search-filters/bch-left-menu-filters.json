@@ -606,7 +606,7 @@
 		{
 			"type": "thesaurus",
 			"term": "resourceTypesVlr",
-			"title": "Type(s) of resource",
+			"title": "Type of resource",
 			"field": "resourceTypes_ss",
 			"relatedField":"resourceTypes_REL_ss"
 		},
@@ -658,7 +658,7 @@
 			"query": {
 				"fq": [ "schema_s:dnaSequence"]
 			},
-			"title": "Genetic elements(s)",
+			"title": "Genetic elements",
 			"field": "bchGenes_ss"
 		},
 		{
