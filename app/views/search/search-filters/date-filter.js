@@ -29,8 +29,8 @@ import 'bootstrap-datepicker';
                     var query;
 
                     if($scope.dateFilter.value.start || $scope.dateFilter.value.end) {
-                        var start = $scope.dateFilter.value.start ? solr.escape($scope.dateFilter.value.start + 'T00:00:00.000Z') : '*';
-                        var end = $scope.dateFilter.value.end ? solr.escape($scope.dateFilter.value.end + 'T23:59:59.999Z') : '*';
+                        var start = $scope.dateFilter.value.start ? solr.escape($scope.dateFilter.value.start.format('YYYY-MM-DD') + 'T00:00:00.000Z') : '*';
+                        var end = $scope.dateFilter.value.end ? solr.escape($scope.dateFilter.value.end.format('YYYY-MM-DD') + 'T23:59:59.999Z') : '*';
 
                         query = '[ ' + start + ' TO ' + end + ' ]';
                     } 

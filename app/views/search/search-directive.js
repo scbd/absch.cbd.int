@@ -160,7 +160,7 @@ import 'views/reports/matrix/data-matrix.directive';
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         var name = dateVal.field.replace('_dt', '').replace(/[A-Z]/g, ' $&') + ' (' +
-                                    dateVal.value.start + ' - ' + dateVal.value.end + ')' 
+                                    dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' 
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
                             query: query,
