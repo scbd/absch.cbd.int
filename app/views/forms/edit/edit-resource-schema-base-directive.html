@@ -232,7 +232,7 @@
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="biosafety.addressModifiedOrganisms" caption="Does this resource address one or more specific LMOs?" required>
 												<div km-yes-no required name="biosafety.addressModifiedOrganisms" ng-model="document.biosafety.addressModifiedOrganisms"  
-													ng-click="onaddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms)"  locales="document.header.languages" locales="document.header.languages"></div>
+													ng-click="onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms)"  locales="document.header.languages" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressModifiedOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
 														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="LMO(s) identification">
@@ -333,7 +333,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="address" caption="Any other relevant information">
-											<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+											<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>
 									</div>
