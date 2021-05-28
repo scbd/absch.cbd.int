@@ -614,7 +614,7 @@
 			"type": "thesaurus",
 			"term": "languages",
 			"title": "Language",
-			"field": "language_ss"
+			"field": "resourceLinksLanguage_ss"
 		},
 		{
 			"type": "thesaurus",
