@@ -106,7 +106,7 @@ import "views/forms/view/view-resource.directive";
 					}
 				}
 
-				$scope.onaddressModifiedOrganismsChange = function(value){
+				$scope.onAddressModifiedOrganismsChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
        					 return;
 					if(!value){
@@ -162,6 +162,9 @@ import "views/forms/view/view-resource.directive";
 							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
 							$scope.onRaRecommendChange( document.biosafety.raRecommend );
 							$scope.onThematicAreaChange(document.biosafety.subjects);
+							$scope.onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms);
+							$scope.onAddressOrganismsChange(document.biosafety.addressOrganisms);
+							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}
 					}
 					if($scope.isABS) {
