@@ -11,3 +11,4 @@ import './services/mime.type.service';
 import './services/locale';
 import './services/extended-route';
 import './services/apiUrl';
+export * as scbdSchemas from './filters/schema-name.json'

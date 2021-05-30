@@ -15,7 +15,7 @@
     <div ng-transclude="selectRecords">   
         <div class="row">
             <div class="col-xs-12">             
-                <button style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled">
+                <button type="button" style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled">
                     <i class="fa fa-plus" ng-if="!openingDialog"></i>
                     <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}
                 </button>
@@ -69,7 +69,7 @@
     <!-- Modal -->
 
     <script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
-        <div class="rounded bg-dropshadow" id="{{question}}">
+        <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header bg-grey ">
                 <div ng-if="!allowNew.editingOn">
                     <h3>Please select from the list of published record(s) below:</h3>
@@ -79,8 +79,18 @@
                             <li class="nav-item active">
                                 <a rel="noopener" data-toggle="tab" class="nav-link" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
                             </li>
-                            <li class="nav-item">
-                                <a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My Records</a>
+                            <li class="dropdown nav-item" ng-if="userGov">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span ng-if="activeTab!='myGovernmentRecords'">My records</span>
+                                    <span ng-if="activeTab=='myGovernmentRecords'">My government records</span>
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li><a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My records</a></li>
+                                  <li><a rel="noopener" data-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">My government records</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item" ng-if="!userGov">
+                                <a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My records</a>
                             </li>
                             <li class="nav-item"style="padding-right: 25px;">
                                 <a rel="noopener" data-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Selected <span ng-if="recordCount"></span></a>
@@ -115,6 +125,11 @@
                     </div>
                     <div id="myRecords" class="tab-pane fade in" style="background-color:#fff">
                         <div ng-if="activeTab=='myRecords'">
+                            <div ng-include="'documentSelectionRecordDisplay'"></div>
+                        </div>                        
+                    </div>
+                    <div id="myGovernmentRecords" class="tab-pane fade in" style="background-color:#fff">
+                        <div ng-if="activeTab=='myGovernmentRecords'">
                             <div ng-include="'documentSelectionRecordDisplay'"></div>
                         </div>                        
                     </div>

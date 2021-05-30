@@ -2652,3 +2652,10 @@ padding-right: 23%;
 .tabular-term-check.abs-resource-keywords .tabular-terms {
     flex-flow: row wrap;
 }
+
+.document-selection-modal .nav .open> a,
+.document-selection-modal .nav .open> a:hover,
+.document-selection-modal .nav .open> a:focus,
+.document-selection-modal .nav .dropdown> a:hover {
+    background-color: #fff!important;
+}
