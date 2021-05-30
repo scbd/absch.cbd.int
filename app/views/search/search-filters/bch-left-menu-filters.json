@@ -613,7 +613,7 @@
 		{
 			"type": "thesaurus",
 			"term": "languages",
-			"title": "Language",
+			"title": "Language of resource",
 			"field": "resourceLinksLanguage_ss"
 		},
 		{
@@ -658,7 +658,7 @@
 			"query": {
 				"fq": [ "schema_s:dnaSequence"]
 			},
-			"title": "Genetic elements",
+			"title": "Genetic element",
 			"field": "bchGenes_ss"
 		},
 		{
