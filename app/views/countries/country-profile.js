@@ -1,5 +1,5 @@
 import app from 'app';
-import 'views/countries/country-profile-directive';
+import 'views/countries/main';
 import 'views/directives/block-region-directive';
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
