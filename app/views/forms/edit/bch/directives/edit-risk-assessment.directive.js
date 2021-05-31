@@ -4,7 +4,7 @@ import template from 'text!./edit-risk-assessment.directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-risk-assessment.directive";
+import "views/forms/view/bch/main";
 
 	var riskAssessmentDirective = ["$controller", "thesaurusService", "$routeParams", "realm", function($controller, thesaurusService, $routeParams, realm) {
 		return {

@@ -7,7 +7,7 @@ import 'services/main';
 import 'views/forms/directives/nr-yes-no';
 import 'views/forms/edit/document-selector';
 import 'views/directives/block-region-directive';
-import 'views/forms/view/bch/view-national-report-4.directive';
+import 'views/forms/view/bch/main';
 import 'components/scbd-angularjs-services/main';
 import 'ngDialog';
     

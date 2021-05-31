@@ -5,7 +5,7 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/bch/directives/lmo-construct';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-lmo.directive";
+import "views/forms/view/bch/main";
 import 'views/forms/directives/traits-selector.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 

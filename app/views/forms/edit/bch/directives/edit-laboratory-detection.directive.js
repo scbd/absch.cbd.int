@@ -4,7 +4,7 @@ import template from 'text!./edit-laboratory-detection.directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-laboratory-detection.directive";
+import "views/forms/view/bch/main";
 import 'views/forms/directives/view-terms-hierarchy';
 
 	app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", 'realm', function($controller, thesaurusService, realm) {
