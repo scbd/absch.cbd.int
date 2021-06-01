@@ -3,9 +3,10 @@ import _ from 'lodash';
 import './local-storage-service';
 import './app-config-service';
 import 'components/scbd-angularjs-services/main';
+import './solr';
 
-    app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService', 'locale',
-        function($http, $q, realm, localStorageService, appConfigService, locale) {
+    app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService', 'locale', 'solr',
+        function($http, $q, realm, localStorageService, appConfigService, locale, solr) {
             return new function() {
 
                 var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
@@ -147,9 +148,8 @@ import 'components/scbd-angularjs-services/main';
                             'facet.limit': 512,
                             'facet.mincount': 1
                         };
-                        var queryAction = $http.get('/api/v2013/index/select', {
-                            params: queryFacetsParameters
-                        });
+                        var queryAction = $http.post('/api/v2013/index/select', queryFacetsParameters);
+
                         return $q.when(queryAction)
                             .then(function(data) {
                                 var facets;                               
@@ -190,9 +190,8 @@ import 'components/scbd-angularjs-services/main';
                             'facet.limit': 512,
                             'facet.mincount': 1
                         };
-                        var queryAction = $http.get('/api/v2013/index/select', {
-                            params: queryFacetsParameters
-                        });
+                        var queryAction = $http.post('/api/v2013/index/select', queryFacetsParameters);
+                        
                         return $q.when(queryAction)
                             .then(function(data) {
 
@@ -225,7 +224,7 @@ import 'components/scbd-angularjs-services/main';
                     var schemas = _.without(appConfigService.nationalSchemas, 'contact');
                     var nationalRecordsQuery = {
                         fields: 'government_s,schema_s',
-                        query: 'NOT virtual_b:* AND schema_s:(' + schemas.join(' ') + ')'
+                        query: 'NOT virtual_b:* AND schema_s:(' + schemas.map(solr.escape).join(' ') + ')'
                     };
                     return this.facetsPivot(nationalRecordsQuery, 'governmentFacets', country);
 
