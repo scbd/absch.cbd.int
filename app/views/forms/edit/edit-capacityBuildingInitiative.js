@@ -14,6 +14,7 @@ import 'services/main';
         $scope.isBCH = realm.is('BCH');
         $scope.path = $location.path();
         $scope.countryRegions		= {};
+        $scope.timing = [{ "value": 'Days', "text": "Days" }, { "value": "Months", "text": "Months" }, { "value": "Years", "text": "Years" }]; // Values for durationText
     $timeout (function (){
         _.extend($scope.options, {
            
@@ -28,22 +29,7 @@ import 'services/main';
             regions	: function() {return thesaurusService.getDomainTerms('regions').then(Thesaurus.buildTree);},
             countries       : function() {return thesaurusService.getDomainTerms('countries').then(function(o){return _.sortBy(o, 'name' );})},
             fundingSources	: function() {return thesaurusService.getDomainTerms('cbiFundingsrc').then(function(o){return _.sortBy(o, 'name' );})},
-            languages       : function() {return thesaurusService.getDomainTerms('unLanguages').then(function(o){return _.sortBy(o, 'name' );})},
-
-              cbdSubjects    : function() { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", { cache: true }).then(function(o){
-                var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
-                var items = [];
-                _.forEach(subjects, function(subject) {
-                  var term = _.find(o.data, {'identifier': subject } );
-                  items.push(term);
-                  _(term.narrowerTerms).forEach(function (term) {
-                    items.push(_.find(o.data, {'identifier':term}));
-                  })
-                });
-                return items;
-              });
-            },
-            
+            languages       : function() {return thesaurusService.getDomainTerms('unLanguages').then(function(o){return _.sortBy(o, 'name' );})},           
         });
     }, 100 );
 
@@ -64,10 +50,7 @@ import 'services/main';
     //
     //============================================================
     $scope.isSubnational = function () {
-        if($scope.document && $scope.document.geographicScope){
-            return $scope.document.geographicScope.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E";
-        }
-        return false;
+         return $scope.document?.geographicScope?.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E"; 
     };
 
 
@@ -76,20 +59,14 @@ import 'services/main';
     //
     //============================================================
     $scope.isCommunity = function () {
-        if($scope.document && $scope.document.geographicScope){
-            return $scope.document.geographicScope.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5";
-        }
-        return false;
+        return $scope.document?.geographicScope?.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5";
     };
 
     //============================================================
     //
     //============================================================
     $scope.isPartofBroaderInitiative = function () {
-        if($scope.document && $scope.document.type){
-            return $scope.document.type.identifier == "8E66C5C7-194C-4A27-9218-26ED003E6D30";
-        }
-        return false;
+        return $scope.document?.type?.identifier == "8E66C5C7-194C-4A27-9218-26ED003E6D30";
     };
 
     //============================================================
@@ -146,7 +123,7 @@ import 'services/main';
 
         }
 
-    $scope.isBroaderProjectSelect = function(projectProgramme){
+    $scope.isBroaderProjectSelected = function(projectProgramme){
       if(!projectProgramme){
         $scope.document.broaderProjects = undefined;
       }
@@ -208,24 +185,19 @@ import 'services/main';
         return $scope.sanitizeDocument(document);
       };
 
-    $scope.setCountryRegions = function(countryRegions){
-      $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
-        $scope.countryRegions.countries = _.filter(countryRegions, function(country){
-          return _.find(countries, {identifier:country.identifier});
-        });
-        $scope.countryRegions.regions = _.filter(countryRegions, function(region){
-          return !_.find(countries, {identifier:region.identifier});
-        });
-      });
-    }
-
-    $scope.setDocument({}, true).then(function (doc) {
-      //why we were using this ?
-      // if($scope.realm.is('ABS'))
-      //   $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
-      if(doc.countryRegions){
-        $scope.setCountryRegions(doc.countryRegions)
-      }
+      $scope.setDocument({}, true).then(function (doc) {
+        if($scope.realm.is('ABS'))
+          $scope.setDocument({aichiTargets: [{identifier: "AICHI-TARGET-16"}]}, true);
+        if(doc.countryRegions){
+          $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
+              $scope.countryRegions.countries = _.filter(doc.countryRegions, function(country){
+              return _.find(countries, {identifier:country.identifier});
+            });
+              $scope.countryRegions.regions = _.filter(doc.countryRegions, function(region){
+              return !_.find(countries, {identifier:region.identifier});
+            });
+          });
+        }
       $scope.isSelfFunding();
     });
   }];

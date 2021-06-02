@@ -24,15 +24,6 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 
 			$scope.isABS = realm.is('ABS');
 			$scope.isBCH = realm.is('BCH');
-			$scope.options  = {
-
-				regions       : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
-					$http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
-					return Enumerable.From($filter('orderBy')(o[0].data, 'name')).Union(
-						Enumerable.From($filter('orderBy')(o[1].data, 'name'))).ToArray();
-				}); }
-			};
-
 			$scope.onThematicAreasTerms = function(terms){
 			if(($scope.document||{}).cpbThematicAreas){
 				_.forEach(terms, function(item){

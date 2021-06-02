@@ -200,7 +200,7 @@
 		</div>
 
 		<div ng-show="document.absKeyAreas">
-			<legend>ABS thematic areas</legend>
+			<label>ABS thematic areas</label>
 
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<div class="km-value" compare-val="absKeyAreas">
@@ -211,7 +211,7 @@
 		</div>
 
 		<div ng-show="document.cpbThematicAreas">
-			<legend>Biosafety thematic areas</legend>
+			<label>Thematic areas</label>
 			<div class="km-value" compare-val="cpbThematicAreas">
 				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
 			</div>
@@ -259,7 +259,7 @@
 				<legend>Capacity development outcomes</legend>
 
 				<div ng-show="document.resultsAchievements">
-					<div>Results</div>
+					<div><strong>Results</strong></div>
 					<label>Main achievements</label>
 					<div compare-val>
 					<km-value-ml value="document.resultsAchievements" locales="locale" html></km-value-ml>

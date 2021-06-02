@@ -84,11 +84,11 @@
 											</div>
 										</div>
 									</div>
-									<div class="row" ng-show="document.geographicScope && (isGlobalOrRegional() || isNational())">
+									<div class="row" ng-if="document.geographicScope && (isGlobalOrRegional() || isNational())">
 										<div class="col-md-12">
 											<div class="km-control-group"  required style="padding:10px;">
 												<div class="row">
-													<div class="col-md-4" ng-show="!isNational()">
+													<div class="col-md-3" ng-show="!isNational()">
 
 														<div class="km-control-group" required name="regions" caption="">
 																<label name="countryRegions" class="control-label" for="countryRegions">Geographical or political/economic group(s)</label>
@@ -100,7 +100,7 @@
 													<div class="col-md-1" ng-hide="!isGlobalOrRegional()">
 														and/or
 													</div>
-													<div class="col-md-7">
+													<div class="col-md-3">
 														<div class="km-control-group" style="text-align: left;" required  caption="">
 															<label name="countryRegions" class="control-label" for="countryRegions">
 																Country(ies)
@@ -173,12 +173,9 @@
 																<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
 																			minlength="1" placeholder="eg. 24" ng-change="clearDates()" class="form-control"
 																			style="display:inline-block;width:100px"/>
-																<select name="durationText" ng-model="document.durationText"  class="form-control" convert-to-number
-																				style="display:inline-block;width:100px" placeholder="eg. Months">
-																	<option value=""></option>
-																	<option value="days">Days</option>
-																	<option value="months">Months</option>
-																	<option value="years">Years</option>
+																<select name="durationText" ng-model="document.durationText"  class="form-control"
+																		style="display:inline-block;width:100px" placeholder="eg. Months"
+																	ng-options="obj.value as obj.text for obj in timing">
 																</select>
 															</div>
 														</div>
@@ -198,7 +195,7 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Is this part of a larger project or programme?">
-												<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelect(!document.isProjectProgramme)"></div>
+												<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
 											</div>
 										</div>
 										<div class="col-md-12" ng-if="document.isProjectProgramme">
@@ -304,7 +301,7 @@
 											<div class="km-control-group tabular-term-check" name="cbdSubjects"
 													caption="Related CBD subject areas">
 												<div km-term-check name="cbdSubjects" ng-model="document.cbdSubjects"
-														terms="options.cbdSubjects()" binding-type="term[]" tabular-shape="true"></div>
+														terms="cbdSubjects()" binding-type="term[]" tabular-shape="true"></div>
 											</div>
 										</div>
 									</div>
@@ -318,13 +315,8 @@
 											</div>
 										</div>
 									</div>
-								</div>
-							</section>
 
-							<section ng-if="isABS">
-								<div class="well no-shadow bg-white">
-									<legend>ABS thematic areas</legend>
-									<div class="row">
+									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
 											<div class="km-control-group" name="absKeyAreas"
 													caption="Key areas and strategic measures for capacity-building and development">
@@ -336,20 +328,16 @@
 											</div>
 										</div>
 									</div>
-								</div>
-							</section>
-							<section ng-if="isBCH">
-								<div class="well no-shadow bg-white">
-									<legend>Biosafety thematic areas</legend>
-									<div class="row">
+									<div class="row" ng-if="isBCH">
 										<div class="col-md-12">
 											<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
-													caption="Biosafety thematic areas">
+													caption="Thematic areas">
 													<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
 													terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
 											</div>
 										</div>
 									</div>
+
 								</div>
 							</section>
 
@@ -408,8 +396,9 @@
 							<section>
 								<div class="well no-shadow bg-white">
 									<legend>Capacity development outcomes</legend>
+									<strong>Results</strong>
 									<div class="help-info">This information can be provided once there are some results (outputs, outcomes or impacts) or best practices and lessons learned from the ongoing or completed initiative.</div>
-										<div class="km-control-group" name="resultsAchievements" caption="Results">
+										<div class="km-control-group" name="resultsAchievements" caption="">
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" name="resultsAchievements" caption="Main achievements">
