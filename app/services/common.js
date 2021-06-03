@@ -19,9 +19,9 @@ import 'components/scbd-angularjs-services/main';
              return Enumerable;
         }])
 
-    app.factory('commonjs', ['$http', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
+    app.factory('commonjs', ['$http', 'thesaurusService', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus',
-        function($http, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
+        function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
 
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
@@ -29,10 +29,6 @@ import 'components/scbd-angularjs-services/main';
                     abs: 'XXVII8b',
                     bch: 'XXVII8a'
                 }
-                // {"_id":"560c75ffc99b3c1b0b91c4ba","code":"XXVII8","name":"Convention on Biological Diversity","acronym":"CBD"},
-                // {"_id":"560c7620c99b3c1b0b91c4bb","code":"XXVII8a","name":"Cartagena Protocol on Biosafety","acronym":"CP"},
-                // {"_id":"560c768ec99b3c1b0b91c4bc","code":"XXVII8b","name":"Nagoya Protocol on Access and Benefit-sharing","acronym":"NP"},
-                // {"_id":"560c76d3c99b3c1b0b91c4bd","code":"XXVII8c","name":"Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress","acronym":"NKLSP"}
                 //==================================================================================
                 this.getReferenceRecordIndex = function(schema, documentId) {
 
@@ -277,103 +273,7 @@ import 'components/scbd-angularjs-services/main';
                 }
 
                 //==================================================================================
-             this.getThematicAreas= function() {return thesaurusService.getDomainTerms('thematicAreas');}
-                //==================================================================================
-                this.getKeyAreas= function(){
-                     return $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
-                        var termsTree = thesaurus.buildTree(response.data);
-                        return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms;});
-                    });
-                }
-                //==================================================================================
-                this.getMSR_types= function() {return thesaurusService.getDomainTerms('msrTypes');}
-                //==================================================================================
-                this.getJurisdictions= function() {return thesaurusService.getDomainTerms('jurisdictions');}
-                //==================================================================================
-                this.getMSR_jurisdictions= function() {return thesaurusService.getDomainTerms('msrJurisdictions');}
-                //==================================================================================
-                this.getMSR_modelcontract= function() {return thesaurusService.getDomainTerms('msrModelcontract');}
-                //==================================================================================
-                this.getMSR_elements= function() {return thesaurusService.getDomainTerms('msrElements');}
-                //==================================================================================
-                this.getMSR_status= function() {return thesaurusService.getDomainTerms('msrStatus');}
-                //==================================================================================
-                this.getCNA_jurisdictions= function() {return thesaurusService.getDomainTerms('cnaJurisdictions');}
-                //==================================================================================
-                this.getCNA_scope= function() {return thesaurusService.getDomainTerms('cnaScope');}
-                //==================================================================================
-                this.getMCC_keywords= function() {return thesaurusService.getDomainTerms('mccKeywords');}
-                //==================================================================================
-                this.getCBI_cats= function() {return thesaurusService.getDomainTerms('cbiCats');}
-                 //==================================================================================
-                this.getCBI_types= function() {return thesaurusService.getDomainTerms('cbiTypes');}
-                //==================================================================================
-                this.getCBI_types1= function() {return thesaurusService.getDomainTerms('cbiCpbTypes');}
-                //==================================================================================
-                this.getCBI_trainingTypes= function() {return thesaurusService.getDomainTerms('cbiTrainingTypes');}
-                //==================================================================================
-                this.getCBI_audience= function() {return thesaurusService.getDomainTerms('cbiAudience');}
-                //==================================================================================
-                this.getCBI_fundingsrc= function() {return thesaurusService.getDomainTerms('cbiFundingsrc');}
-                //==================================================================================
-                this.getCBI_status= function() {return thesaurusService.getDomainTerms('cbiStatus');}
-                //==================================================================================
-                this.getCBR_level= function() {return thesaurusService.getDomainTerms('cbrLevel');}
-                //==================================================================================
-                this.getCBR_purpose= function() {return thesaurusService.getDomainTerms('cbrPurpose');}
-                //==================================================================================
-                this.getCBR_formats= function() {return thesaurusService.getDomainTerms('cbrFormats');}
-                //==================================================================================
-                this.getCPP_types= function() {return thesaurusService.getDomainTerms('cppTypes');}
-                //==================================================================================
-                this.getMCC_types= function() {return thesaurusService.getDomainTerms('mccTypes');}
-                //==================================================================================
-                this.getAichiTargets= function() {return thesaurusService.getDomainTerms('aichiTargets');}
-
-                // //==================================================================================
-                // this.getAllKeywords = function(){
-
-
-                //     var termsTree;
-                //      retrun $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
-                //         var termsTree = thesaurus.buildTree(response.data);
-                //         return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
-                //     });
-
-                //     //ABS key areas
-                //      keywords['keyAreas'] =  $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
-                //         termsTree = thesaurus.buildTree(response.data);
-                //         return _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
-                //     });
-
-                //     return  keywords;
-
-                // }
-
-                //==================================================================================
-                this.getAllKeywords = function(){
-
-                    var keywords = [];
-                    var thematicAreas;
-                    var keyAreas;
-                    var termsTree;
-
-                    //ABS thematic areas
-                   keywords['thematicAreas'] =  $http.get('/api/v2013/thesaurus/domains/CA9BBEA9-AAA7-4F2F-B3A3-7ED180DE1924/terms').then(function (response) {
-                        termsTree = thesaurus.buildTree(response.data);
-                        return  _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
-                    });
-
-                    //ABS key areas
-                     keywords['keyAreas'] =  $http.get('/api/v2013/thesaurus/domains/2B2A5166-F949-4B1E-888F-A7976E76320B/terms').then(function (response) {
-                        termsTree = thesaurus.buildTree(response.data);
-                        return _.filter(termsTree, function where (o) { return !!o.narrowerTerms && o.identifier!='1796f3f3-13ae-4c71-a5d2-0df261e4f218';});
-                    });
-
-                    return  keywords;
-
-                }
-
+                //==================================================================================             
                 this.loadJsonFile = function(filePath){
                     var deferred = $q.defer();  
 
