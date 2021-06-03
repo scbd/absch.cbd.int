@@ -238,14 +238,11 @@
                         </div>
                         <div class="map-filters-bg map-container-mainbody" ng-class="{'reduced-height':reduceDetailsHeight, 'bch-height':isBCH}" >
                             <div ng-if="isBCH && currentCountry"> 
-                                <ng-include  onload="country=countryMapScope.currentCountry" 
-                                    src="'/app/views/countries/pin-popup-bch.html'" ></ng-include>
+                                <pin-popup-bch></pin-popup-bch>
                             </div>   
                             <div ng-if="isABS && currentCountry"> 
-                                <ng-include onload="country=countryMapScope.currentCountry" 
-                                src="'/app/views/countries/pin-popup-abs.html'" ></ng-include>
-                            </div>
-               
+                                <pin-popup-abs></pin-popup-abs>
+                            </div>               
                         </div>
                         <div class="map-container-footer">
                         </div>

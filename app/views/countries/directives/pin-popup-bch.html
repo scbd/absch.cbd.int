@@ -13,22 +13,22 @@
         </div>
 
         <div class="row abs-exception-tooltip"
-        ng-if="country.exceptionCountry=='dk'||country.code.toLowerCase()=='dk'||
-                country.code.toLowerCase()=='fk'||country.code.toLowerCase()=='eh'||
-                country.exceptionCountry=='gb'||country.code.toLowerCase()=='gb'">
+        ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
+                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
+                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
             <div class="col-lg-12">
-                <div class="small" ng-if="(country.code.toLowerCase()=='dk')"
+                <div class="small" ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')"
                     style="margin-top:5px;white-space: normal;padding:3px;">
                     Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.
                 </div>
-                <div ng-if="country.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;">
+                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;">
                     A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern
                     Ireland concerning sovereignty over the Falkland Islands (Malvinas).
                 </div>
-                <div ng-if="country.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
                     Non-Self Governing Territory.
                 </div>
-                <div ng-if="(country.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;">
+                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;">
                     The UK’s ratification of the Cartagena Protocol does not extend to the
                     <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
                     data-container="body" data-toggle="tooltip" data-placement="top" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">13 Overseas Territories </a>
@@ -40,16 +40,19 @@
         </div>
     </div>
     <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
-            <tr ng-repeat="schema in country.schemas" style="border:none;">
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
                 <td >
                     <span class="badge bg-black">{{schema.count}}</span>
                 </td>
                 <td>
                     <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
-                        {{schema.title | lstring:locale}}
+                        <span ng-bind="schema.title | lstring:locale"></span>
+                        <span ng-if="schema.isRegional">
+                            - <span ng-bind="schema.regionalGovernment|term:locale"></span>
+                        </span>
                     </a>
                     <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords"  style="color:#fff">
-                        {{schema.title | lstring:locale}}
+                        <span ng-bind="schema.title | lstring:locale"></span>
                     </a>
                 </td>
             </tr>
