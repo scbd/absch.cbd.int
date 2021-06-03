@@ -95,7 +95,7 @@
 						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
 					</div>
 					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
-						<label class="control-label" ng-required="editor.visible" for="Language">Language</label>
+						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">Language</label>
 						<div ng-if="editor.isLanguageSelect" style="color: #e32">Please select Language</div>
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
 					</div>

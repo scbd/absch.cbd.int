@@ -62,8 +62,9 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="date"
-                                                caption="Date of submission">
-                                                <div km-date name="date" ng-model="document.date"></div>
+                                                caption="Date of submission"
+                                                 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Submission">
+                                                <div km-date placeholder="YYYY-MM-DD" name="date" ng-model="document.date"></div>
                                             </div>
                                         </div>
                                     </div>
