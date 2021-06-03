@@ -6,7 +6,7 @@ import $ from 'jquery';
 import './analyzer-section';
 import '../../filters/cases';
 import 'components/scbd-angularjs-services/main';
-import 'views/directives/view-reference-document';
+import 'views/directives/index';
 import 'views/report-analyzer/reportAnalyzerService'; ;
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');

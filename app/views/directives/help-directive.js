@@ -6,7 +6,7 @@ import 'angular-joyride';
                         restrict: 'EAC',
                         replace: true,
                         // transclude: true,
-                        // templateUrl: 'views/directives/help-directive.html',
+                        // templateUrl: 'views/directives/index',
                         scope: {
                                 schema: '@',
                                 delay: '@'

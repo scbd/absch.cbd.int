@@ -3,7 +3,7 @@ import _ from 'lodash';
 import template from 'text!./data-matrix.directive.html';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'pivottable';
 import 'ngDialog'; ;
 

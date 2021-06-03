@@ -9,7 +9,7 @@ import 'angular-loggly-logger';
 import 'angular-animate';
 import 'components/scbd-branding/main';
 import 'services/main';
-import 'views/directives/route-loading-directive';
+import 'views/directives/index';
 import './app-loading.directive';
 
     app.config(["toastrConfig", function(toastrConfig) {
@@ -168,7 +168,7 @@ import './app-loading.directive';
 
                 require(['angular-animate', 'components/scbd-angularjs-services/main',
                 'angular-animate', 'components/scbd-branding/main',
-                'views/directives/nav/portal-branding', 'views/directives/nav/portal-nav'], 
+                'views/directives/index'], 
                     function () {
 
                             $('#divHeader').append('<scbd-header></scbd-header><portal-branding></portal-branding><portal-nav></portal-nav>');

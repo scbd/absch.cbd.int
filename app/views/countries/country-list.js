@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'components/scbd-angularjs-controls/main';
 
     export { default as template } from './country-list.html';

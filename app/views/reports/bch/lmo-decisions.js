@@ -4,7 +4,7 @@ import template from 'text!./lmo-decisions.html';
 import 'angular-cookies';
 import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'angucomplete-alt';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'services/main'; ;
 
 app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q',

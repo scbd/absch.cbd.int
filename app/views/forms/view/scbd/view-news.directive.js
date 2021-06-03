@@ -1,6 +1,6 @@
 import app from 'app';
 import template from 'text!./view-news.directive.html';
-import 'views/directives/record-options';
+import 'views/directives/index';
 
 app.directive('viewNews', [function() {
 	return {

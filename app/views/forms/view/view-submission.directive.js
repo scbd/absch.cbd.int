@@ -1,7 +1,7 @@
 ﻿import app from 'app';
 import _ from 'lodash';
 import template from "text!./view-submission.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 import 'services/main';
 import 'views/forms/directives/view-terms-hierarchy';
 

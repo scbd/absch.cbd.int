@@ -1,6 +1,6 @@
 import app from 'app';
 import template from 'text!./route-loading-directive.html';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 
     app.directive('routeLoading', ['$rootScope', function($rootScope){
         return {

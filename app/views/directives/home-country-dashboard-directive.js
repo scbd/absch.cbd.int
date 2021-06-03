@@ -2,7 +2,7 @@ import app from 'app';
 import template from 'text!./home-country-dashboard-directive.html';
 import _ from 'lodash';
 import 'services/main';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
         app.directive('homeCountryDashboard', function($http) {
             return {
                 restrict: 'EAC',

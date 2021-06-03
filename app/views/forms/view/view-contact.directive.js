@@ -1,7 +1,7 @@
 import app from 'app';
 import template from "text!./view-contact.directive.html";
 import "views/forms/view/directives/view-record-reference.directive";
-import 'views/directives/party-status';
+import 'views/directives/index';
 
     app.directive("viewContact", [function() {
         return {

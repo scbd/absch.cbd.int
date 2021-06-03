@@ -1,7 +1,7 @@
 import app from 'app';
 import _ from 'lodash';
 import template from "text!./view-abs-checkpoint-communique.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 
 app.directive("viewAbsCheckpointCommunique", [function () {
 

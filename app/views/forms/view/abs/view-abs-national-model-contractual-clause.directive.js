@@ -1,6 +1,6 @@
 import app from "app";
 import template from "text!./view-abs-national-model-contractual-clause.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 import 'views/forms/view/directives/view-record-reference.directive';
 
        app.directive("viewAbsNationalModelContractualClause", [function () {

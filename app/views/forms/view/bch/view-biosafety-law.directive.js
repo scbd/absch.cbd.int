@@ -1,6 +1,6 @@
 import app from 'app';
 import template from "text!./view-biosafety-law.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 import 'views/forms/directives/view-terms-hierarchy';
 import _ from 'lodash';
 import 'services/main';

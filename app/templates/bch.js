@@ -10,9 +10,8 @@ import 'angular-animate';
 import 'components/scbd-branding/main';
 import 'angular-loggly-logger';
 import 'components/scbd-angularjs-services/main';
-import 'views/directives/route-loading-directive';
-import 'services/main'; ;
-import 'views/directives/docked-side-bar' 
+import 'views/directives/index';
+import 'services/main';
 import './app-loading.directive';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);

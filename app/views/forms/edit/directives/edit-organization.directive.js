@@ -1,7 +1,7 @@
 import app from 'app';
 import template from "text!./edit-organization.directive.html";
 import _ from 'lodash';
-import 'views/directives/workflow-arrow-buttons';
+import 'views/directives/index';
 import "views/forms/view/view-organization.directive";
 import 'services/main';
 import 'components/scbd-angularjs-services/main';

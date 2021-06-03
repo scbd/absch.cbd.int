@@ -3,7 +3,7 @@ import template from 'text!./national-records-country.html';
 import _ from 'lodash';
 import 'views/search/search-results/result-grouped-national-record';
 import 'services/main';
-import 'views/directives/party-status';
+import 'views/directives/index';
 
     app.directive('nationalRecordsCountry', ['searchService', 'solr', function(searchService, solr) {
         return {

@@ -4,7 +4,7 @@ import 'components/scbd-angularjs-services/main';
 import 'services/main';
 import 'components/scbd-angularjs-controls/main';
 import 'views/register/directives/register-top-menu';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'views/forms/edit/editFormUtility';
 import 'ngDialog';
         

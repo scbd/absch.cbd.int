@@ -1,7 +1,6 @@
 import app from 'app';
 import 'services/main';
-import 'views/directives/map/home-map';
-import 'views/directives/home-articles';
+import 'views/directives/index';
     export { default as template } from './bch.html';
 export default ['$scope', 'articlesService', function ($scope, articlesService) {
         

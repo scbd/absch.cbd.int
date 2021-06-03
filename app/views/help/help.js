@@ -1,5 +1,5 @@
 import app from 'app';
-import 'views/directives/help-directive';
+import 'views/directives/index';
 import '/app/services/role-service';
 
 	export { default as template } from './help.html';

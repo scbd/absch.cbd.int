@@ -1,9 +1,7 @@
 import app from 'app';
 import moment from 'moment';
 import 'services/main';
-import 'views/directives/home-country-dashboard-directive';
-import 'views/directives/map/home-map';
-import 'views/directives/home-articles-small';
+import 'views/directives/index';
 import 'angular-cookies';
     export { default as template } from './index.html';
 export default ['$scope',
@@ -39,7 +37,7 @@ export default ['$scope',
         //     console.log('page loading completed');
 
             
-                // require(['views/directives/map/home-map'], function(map){
+                // require(['views/directives/index'], function(map){
                 //     $scope.loading = false;
                 //     $scope.$apply(function(){
                 //         var mapElement = $element.find('#Jumbotron')

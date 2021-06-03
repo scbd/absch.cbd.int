@@ -1,7 +1,7 @@
 import app from 'app';
 import _ from 'lodash';
 import template from "text!./view-abs-permit.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 import 'views/forms/view/directives/view-reference-records.directive';
 //,'views/forms/view/view-releated-checkpoint-communique-directive.html'
 app.directive("viewAbsPermit", [function () {

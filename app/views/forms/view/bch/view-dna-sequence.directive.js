@@ -1,7 +1,7 @@
 import app from 'app';
 import template from "text!./view-dna-sequence.directive.html";
 import 'views/forms/directives/view-terms-hierarchy';
-import 'views/directives/record-options';
+import 'views/directives/index';
 
 app.directive("viewDnaSequence", [function () {
 	return {

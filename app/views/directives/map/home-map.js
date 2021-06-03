@@ -1,7 +1,7 @@
 import template from 'text!./home-map.html';
 import app from 'app';
 import _ from 'lodash';
-import popoverTemplate from 'views/directives/block-region-directive';
+import popoverTemplate from 'views/directives/index';
 import 'services/main';
   ;
 

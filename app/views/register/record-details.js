@@ -3,9 +3,8 @@ import _ from 'lodash';
 import 'views/forms/view/record-loader.directive';
 import 'services/main';
 import 'toastr';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'views/register/directives/register-top-menu';
-import 'views/directives/task-id-directive';
     
     export { default as template } from './record-details.html';
 

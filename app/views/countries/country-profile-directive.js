@@ -4,7 +4,7 @@ import _ from 'lodash';
 import 'views/measure-matrix/measure-matrix-countries-directive';
 import 'views/search/search-results/result-grouped-national-record';
 import 'services/main';
-import 'views/directives/export-directive';
+import 'views/directives/index';
 
 app.directive('countryProfile', function() {
     return {

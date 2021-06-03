@@ -9,7 +9,7 @@ import 'views/forms/view/view-history-directive';
 import 'views/forms/edit/document-selector';
 import 'views/register/directives/register-top-menu';
 import 'components/scbd-angularjs-services/main';
-import 'views/directives/workflow-arrow-buttons';
+import 'views/directives/index';
   
 app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "guid", "$filter", "thesaurusService", "$q", "$location", "IStorage",
                                    "authentication", "editFormUtility", "$routeParams", "$timeout", "$route", 

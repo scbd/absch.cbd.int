@@ -1,6 +1,6 @@
 import app from 'app';
 import template from "text!./view-resource.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 import 'views/forms/directives/view-terms-hierarchy';
 app.directive("viewResource", [function () {
 	return {

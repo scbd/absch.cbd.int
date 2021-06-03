@@ -1,6 +1,6 @@
 import app from 'app';
 import template from "text!./view-biosafety-news.directive.html";
-import 'views/directives/record-options';
+import 'views/directives/index';
 app.directive("viewBiosafetyNews", [function () {
 	return {
 		restrict   : "EA",

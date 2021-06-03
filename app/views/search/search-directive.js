@@ -15,7 +15,7 @@ import 'views/search/search-results/result-default';
 import 'views/search/search-results/national-records-country';
 import 'ngDialog';
 import 'views/register/user-preferences/user-alerts';
-import 'views/directives/export-directive';
+import 'views/directives/index';
 import 'angular-animate';
 import 'angular-joyride';
 import 'components/scbd-angularjs-controls/main';

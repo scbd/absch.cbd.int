@@ -49,7 +49,7 @@ import 'services/main';
 
 				$scope.loadReportRecord = function(schema, identifier,title){
                     
-                        require(['views/directives/report-record'], function() {
+                        require(['views/directives/index'], function() {
 
                             var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema +  "' title='" +  title + "'></div>";
 

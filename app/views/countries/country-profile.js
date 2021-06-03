@@ -1,6 +1,6 @@
 import app from 'app';
 import 'views/countries/main';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';

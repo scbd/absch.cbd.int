@@ -1,7 +1,7 @@
 import app from 'app';
 import template from 'text!./workflow-arrow-buttons.html';
 import 'lodash';
-import 'views/directives/workflow-history-directive';
+import 'views/directives/index';
 import 'services/main';
 import 'ngDialog';
 import 'toastr';

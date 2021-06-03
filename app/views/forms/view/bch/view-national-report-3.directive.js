@@ -3,7 +3,7 @@ import template from "text!./view-national-report-3.directive.html";
 import _ from 'lodash';
 import nr3Data from 'app-data/bch/report-analyzer/cpbNationalReport3.json';
 import 'views/forms/view/bch/view-national-report.directive';
-import 'views/directives/record-options';
+import 'views/directives/index';
 
 	app.directive("viewCpbNationalReport3", [function () {
 		return {

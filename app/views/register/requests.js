@@ -4,7 +4,7 @@ import 'services/main';
 import 'moment';
 import 'components/scbd-angularjs-controls/main';
 import 'views/register/directives/register-top-menu';
-import 'views/directives/task-id-directive';
+import 'views/directives/index';
 import 'components/scbd-angularjs-services/main';
 import 'views/forms/view/record-loader.directive';
 

@@ -3,7 +3,7 @@ import _ from 'lodash';
 import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'services/main';
 import 'angucomplete-alt';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'views/reports/bch/lmo-decisions';
 import 'views/reports/bch/risk-assessments';
 import 'views/forms/view/record-loader.directive'; ;

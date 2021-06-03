@@ -3,7 +3,7 @@ import _ from 'lodash';
 import template from "text!./edit-measure-matrix-directive.html";
 import measureMatrixUpdatedTitles from 'app-data/measure-matrix-updated-title.json';
 import elementsForOthers from 'app-data/measure-matrix-other-elements.json';
-import 'views/directives/block-region-directive';
+import 'views/directives/index';
 import 'components/scbd-angularjs-services/main';
 
 

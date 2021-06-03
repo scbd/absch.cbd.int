@@ -1,6 +1,6 @@
 import app from 'app';
 import _ from 'lodash';
-import 'services/articles-service';
+import 'services/main';
 import template from './docked-side-bar.html';
 
 app.directive('dockedSideBar', ['realm','$rootScope', '$route', '$location', 'articlesService',
