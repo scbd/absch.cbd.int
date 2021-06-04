@@ -1,8 +1,8 @@
 ﻿<div style="margin-bottom:20px">
 	<div>
 		<div ng-transclude="linkControls" style="padding-bottom: 5px;">
-			<button type="button" class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o"></i> Add file</button>
-			<button type="button" class="btn btn-default" ng-click="addLink()" ng-show="isAllowLink()"><i class="fa fa-globe"></i> Add link</button>
+			<button type="button" class="btn btn-default" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o"></i> Add file</button>
+			<button type="button" class="btn btn-default" ng-click="addLink()" ng-if="isAllowLink()"><i class="fa fa-globe"></i> Add link</button>
 		</div>
 
 		<div ng-transclude="linkDisplay">
@@ -11,9 +11,9 @@
 					<table style="width:100%">
 						<tr>
 							<td>
-								<span ng-show="link.language">{{locales[link.language]||locales['lang-'+link.language]||(stringToETerm('lang-'+link.language)|term:locale)}} | </span>
+								<span ng-if="link.language" ng-bind="locales[link.language]||locales['lang-'+link.language]||(stringToETerm('lang-'+link.language)|term:locale)"></span>
 								<a rel="noopener" translation-url target="_blank" ng-href="{{link.url|encodeURI}}">{{link.name||link.url}}</a>
-								<span ng-show="link.tag">({{link.tag}})</span>
+								<span ng-if="link.tag">({{link.tag}})</span>
 							</td>
 							<td style="white-space:nowrap;text-align:right;vertical-align:top">
 								<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
@@ -38,7 +38,7 @@
 					<div class="alert alert-info">Please provide the URL of the website (e.g. <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">https://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
 					<form name="linkForm">
 						<fieldset>
-							<div class="alert alert-warning" ng-show="linkForm.$error.url">
+							<div class="alert alert-warning" ng-if="linkForm.$error.url">
 								<strong>Warning!</strong>
 								Specified value is not a valid URL.
 								<ul><li> make sure the URL starts with http:// or https://</li></ul>
@@ -80,11 +80,11 @@
 					<h3>Uploading file</h3>
 				</div>
 				<div class="modal-body" ng-if="editor.visible && editor.type=='file'">
-					<div class="alert alert-danger" ng-show="editor.error!=null">
+					<div class="alert alert-danger" ng-if="editor.error!=null">
 						<h4>An error has occurred</h4>
 						{{editor.error}}
 					</div>
-					<div ng-show="editor.progress">
+					<div ng-if="editor.progress">
 						<label>Uploading {{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)</label>
 						<div class="progress progress-striped {{editor.progress.style}}">
 							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width:{{editor.progress.percent}}%;"></div>
