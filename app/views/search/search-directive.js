@@ -160,7 +160,7 @@ import 'views/reports/matrix/data-matrix.directive';
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
                         var name = dateVal.field.replace('_dt', '').replace(/[A-Z]/g, ' $&') + ' (' +
-                                    dateVal.value.start + ' - ' + dateVal.value.end + ')' 
+                                    dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' 
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
                             query: query,
@@ -865,8 +865,8 @@ import 'views/reports/matrix/data-matrix.directive';
                     function buildDateFieldQuery(field, date) {
 
                         if(date.start || date.end) {
-                            var start   = date.start ? solr.escape(date.start   + 'T00:00:00.000Z')  : '*';
-                            var end     = date.end   ? solr.escape(date.end     + 'T23:59:59.999Z') : '*';
+                            var start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
+                            var end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
     
                             return  field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 

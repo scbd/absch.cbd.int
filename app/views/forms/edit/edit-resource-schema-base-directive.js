@@ -77,18 +77,19 @@ import "views/forms/view/view-resource.directive";
 						absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');}, // ABS keyAreas
 						absSubjects	: function() {return thesaurusService.getDomainTerms('absSubjects');}, // ABS Thematic Areas
 
-						cbdSubjects : function() { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", { cache: true }).then(function(o){
+						cbdSubjects : function() { return thesaurusService.getDomainTerms('cbdSubjects')
+							.then(function(o){
 							var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
 							var items = [];
-							_.forEach(subjects, function(subject) {
-								var term = _.find(o.data, {'identifier': subject } );
-								items.push(term);
-								_(term.narrowerTerms).forEach(function (term) {
-									items.push(_.find(o.data, {'identifier':term}));
-								})
+								_.forEach(subjects, function(subject) {
+									var term = _.find(o, {'identifier': subject } );
+									items.push(term);
+									_(term.narrowerTerms).forEach(function (term) {
+										items.push(_.find(o, {'identifier':term}));
+									})
+								});
+								return items;
 							});
-							return items;
-						});
 						}, 
 					});
 				};
@@ -105,7 +106,7 @@ import "views/forms/view/view-resource.directive";
 					}
 				}
 
-				$scope.onaddressModifiedOrganismsChange = function(value){
+				$scope.onAddressModifiedOrganismsChange = function(value){
 					if (!$scope.document || !$scope.document.biosafety)
        					 return;
 					if(!value){
@@ -161,6 +162,9 @@ import "views/forms/view/view-resource.directive";
 							$scope.onLmoCategoriesChange( document.biosafety.addressLmoCategories );
 							$scope.onRaRecommendChange( document.biosafety.raRecommend );
 							$scope.onThematicAreaChange(document.biosafety.subjects);
+							$scope.onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms);
+							$scope.onAddressOrganismsChange(document.biosafety.addressOrganisms);
+							$scope.onAddressGenesChange(document.biosafety.addressGenes);
 						}
 					}
 					if($scope.isABS) {

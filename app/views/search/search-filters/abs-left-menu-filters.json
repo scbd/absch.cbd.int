@@ -150,11 +150,59 @@
 		"title": "Free Text",
 		"field": "text_EN_txt"
 		}],
-	"resource" : [{
-		"type": "freeText",
-		"title": "Free Text",
-		"field": "text_EN_txt"
-		}],
+	"resource": [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "resourceTypesVlr",
+			"title": "Type(s) of resource",
+			"field": "resourceTypes_ss",
+			"relatedField":"resourceTypes_REL_ss"
+		},
+		{
+			"type": "date",
+			"title": "Publication Date",
+			"field": "publicationDate_dt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "languages",
+			"title": "Language of the resource",
+			"field": "resourceLinksLanguage_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "aichiTargets",
+			"title": "Aichi Targets",
+			"field": "bchSubjects_ss",
+			"relatedField":"bchSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbdSubjects",
+			"title": "CBD Subject Areas",
+			"field": "cbdSubjects_ss",
+			"relatedField":"cbdSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": "ABS keywords",
+			"field": "absSubjects_ss",
+			"relatedField":"absSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "keyAreas",
+			"title": "ABS key areas",
+			"field": "absKeyAreas_ss",
+			"relatedField":"absKeyAreas_REL_ss"
+		}
+	],
 	"organization" : [{
 		"type": "freeText",
 		"title": "Free Text",
@@ -170,15 +218,117 @@
 		"title": "Free Text",
 		"field": "text_EN_txt"
 		}],
-	"modelContractualClause" : [{
-		"type": "freeText",
-		"title": "Free Text",
-		"field": "text_EN_txt"
-		}],
-	"communityProtocol" : [{
-		"type": "freeText",
-		"title": "Free Text",
-		"field": "text_EN_txt"
+	"communityProtocol" : [
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cppResourceTypes",
+			"title": "Type(s) of resource",
+			"field": "resourceTypes_ss",
+			"relatedField":"resourceTypes_REL_ss"
+		},
+		{
+			"type": "date",
+			"title": "Publication Date",
+			"field": "publicationDate_dt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "languages",
+			"title": "Language of the resource",
+			"field": "resourceLinksLanguage_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "aichiTargets",
+			"title": "Aichi Targets",
+			"field": "bchSubjects_ss",
+			"relatedField":"bchSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbdSubjects",
+			"title": "CBD Subject Areas",
+			"field": "cbdSubjects_ss",
+			"relatedField":"cbdSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": "ABS keywords",
+			"field": "absSubjects_ss",
+			"relatedField":"absSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "keyAreas",
+			"title": "ABS key areas",
+			"field": "absKeyAreas_ss",
+			"relatedField":"absKeyAreas_REL_ss"
+		}
+	],
+	"modelContractualClause" :[
+		{
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "mccResourceTypes",
+			"title": "Type(s) of resource",
+			"field": "resourceTypes_ss",
+			"relatedField":"resourceTypes_REL_ss"
+		},
+		{
+			"type": "date",
+			"title": "Publication Date",
+			"field": "publicationDate_dt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "languages",
+			"title": "Language of the resource",
+			"field": "resourceLinksLanguage_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "aichiTargets",
+			"title": "Aichi Targets",
+			"field": "bchSubjects_ss",
+			"relatedField":"bchSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbdSubjects",
+			"title": "CBD Subject Areas",
+			"field": "cbdSubjects_ss",
+			"relatedField":"cbdSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "mccKeywords",
+			"title": "MCC Keywords",
+			"field": "mccKeywords_ss",
+			"relatedField":"mccKeywords_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": "ABS keywords",
+			"field": "absSubjects_ss",
+			"relatedField":"absSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "keyAreas",
+			"title": "ABS key areas",
+			"field": "absKeyAreas_ss",
+			"relatedField":"absKeyAreas_REL_ss"
 		}
 	]
 }
