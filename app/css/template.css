@@ -2108,7 +2108,7 @@ a.disabled{
 .edit-authority-directive .type-of-organism .terms-check .other-term,
 .edit-law-directive .subject-areas .terms-check .other-term,
 .edit-law-directive .type-of-organism .terms-check .other-term {
-    margin-left:40px;
+    margin-left:20px;
 }
 .edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
     white-space: inherit;
@@ -2138,9 +2138,7 @@ a.disabled{
 .tabular-term-check .tabular-terms::before {
     display: block;
 }
-.tabular-term-check .tabular-terms .terms>label {
-    font-weight: 600;
-}
+
 .tabular-term-check table tr td>label {
     font-weight: 600;
     text-decoration: underline;
@@ -2711,3 +2709,11 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     .main-content {margin: 0 120px;}
     .map-width{ margin: 0 -120px;}
   }
+
+
+.document-selection-modal .nav .open> a,
+.document-selection-modal .nav .open> a:hover,
+.document-selection-modal .nav .open> a:focus,
+.document-selection-modal .nav .dropdown> a:hover {
+    background-color: #fff!important;
+}

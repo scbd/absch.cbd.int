@@ -2,8 +2,9 @@ import $ from 'jquery';
 import 'components/scbd-branding/main';
 
     export { default as template } from './login-dialog.html';
-export default ["$scope", "$location", "authentication", function ($scope, $location, authentication){
-
+export default ["$scope", "$location", "authentication", "realm", function ($scope, $location, authentication, realm){
+				$scope.chShortName = realm.chShortName;
+				$scope.email = realm.originalObject.email;
 				$scope.$on('signIn', function(evt, data){
 					redirectUser();
 				});

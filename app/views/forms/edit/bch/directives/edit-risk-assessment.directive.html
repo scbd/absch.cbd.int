@@ -45,7 +45,8 @@
 		
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="date" required caption="Date of the risk assessment">
+													<div class="km-control-group" name="date" required caption="Date of the risk assessment"
+															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
 														<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
 													</div>
 												</div>
@@ -193,12 +194,12 @@
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="control-group inner-padding">
-																<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the
+																<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the
 															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
 															</div>
 															<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 															<div class="control-group inner-padding">
-																<label>Is this decision related to food safety?</label>
+																<label>Is this risk assessment related to food safety?</label>
 															</div>
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
@@ -207,7 +208,7 @@
 																</div>															
 																<div class="km-yes-no" name="codexConduted" ng-model="document.codexConduted"></div>
 																<div class="control-group inner-padding">
-																	<label>Should this submission be forwarded to your country's FAO focal point for possible inclusion in the
+																	<label>Should this risk assessment be forwarded to your country's FAO focal point for possible inclusion in the
 																	<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
 																</div>
 																<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>

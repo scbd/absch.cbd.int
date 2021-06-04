@@ -48,6 +48,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 					error    : null,
 					type     : null,
 					visible  : false,
+					isLanguageMandatory   :false,
 					uploadPlaceholder : $element.find("#uploadPlaceholder"),
 					mimeTypes : storage.attachments.mimeTypeWhitelist
 				});
@@ -218,7 +219,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 					$scope.editor.name = link.name;
 					$scope.editor.type = "file";
 					$scope.editor.tag = link.tag;
-					$scope.editor.language = link.language;
+					$scope.editor.language = link.language||"";
 					if(!isEdit){
 						$scope.editor.startUploadProcess(function() {
 							$scope.editor.visible = true;
@@ -226,6 +227,10 @@ app.directive('kmLink', ['IStorage', function (storage)
 					}
 					else{
 						$scope.editor.visible = true;
+						$scope.editor.isLanguageMandatory  = true;
+						if (  languageOptional($scope.editor.name) ){
+							$scope.editor.isLanguageMandatory = false;
+						}
 					}
 				};
 				
@@ -248,6 +253,13 @@ app.directive('kmLink', ['IStorage', function (storage)
 				//==============================
 				//
 				//==============================
+
+				function languageOptional(name){
+				  return (/\.(gif|jpe?g|tiff?|jfif|png|webp|bmp)$/i).test(name);
+				}
+				//==============================
+				//
+				//==============================
 				$scope.editor.save = function()
 				{
 					$scope.editor.isLanguageSelect  = false;
@@ -255,8 +267,12 @@ app.directive('kmLink', ['IStorage', function (storage)
 					if($scope.editor.url == 'https://www.' || $scope.editor.url == 'http://www.' || $.trim($scope.editor.url||'')==""){
 						$scope.editor.urlMissing = true;
 					}
-					if(!$scope.editor.language){
+					if(!$scope.editor.language) {
 						$scope.editor.isLanguageSelect = true;
+						if (  languageOptional($scope.editor.name) ){
+							$scope.editor.isLanguageSelect = false;
+						}
+
 					}
 					if($scope.editor.isLanguageSelect  || $scope.editor.urlMissing )
 						return;
@@ -312,6 +328,11 @@ app.directive('kmLink', ['IStorage', function (storage)
 
 							if ($scope.editor.name == "" && file.name != "")// jshint ignore:line
 								$scope.editor.name = file.name;
+								$scope.editor.isLanguageMandatory = true;
+								if ( languageOptional($scope.editor.name) ){
+									 $scope.editor.isLanguageSelect = false;
+									 $scope.editor.isLanguageMandatory = false;
+								}
 
 							if ($scope.editor.mimeTypes.indexOf(type) < 0) {
 								$scope.editor.onUploadError(link, "File type not supported: " + type);

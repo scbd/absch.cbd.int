@@ -263,7 +263,7 @@ import 'components/scbd-angularjs-controls/main';
                 require(['tableexport'], function(){
                     $element.find('#forExport').tableExport({
                         formats: ["xlsx", "xls", "csv"],
-                        filename: "ABSCH-Country-List",
+                        filename: realm.chShortName+"-Country-List",
                     });
                     $element.find('.xlsx').click();
                     $timeout(function(){                        
