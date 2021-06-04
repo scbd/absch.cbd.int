@@ -10,7 +10,7 @@ import './form-control-directives/km-document-validation';
 import './form-control-directives/km-form-languages';
 import './form-control-directives/km-form-std-buttons';
 import './form-control-directives/km-info-tip';
-import './form-control-directives/km-inputtext-ac.html';
+import './form-control-directives/km-inputtext-ac';
 import './form-control-directives/km-inputtext-list';
 import './form-control-directives/km-inputtext-ml';
 import './form-control-directives/km-link-list';

@@ -2108,7 +2108,7 @@ a.disabled{
 .edit-authority-directive .type-of-organism .terms-check .other-term,
 .edit-law-directive .subject-areas .terms-check .other-term,
 .edit-law-directive .type-of-organism .terms-check .other-term {
-    margin-left:40px;
+    margin-left:20px;
 }
 .edit-biosafety-expert-directive .regions-list #select-dropdown .dropdown-toggle {
     white-space: inherit;
