@@ -194,7 +194,9 @@
 			<div ng-show="document.aichiTargets && isABS">
 					<label>Aichi target(s)</label>
 					<div class="km-value">
-						<view-terms-hierarchy ng-model="document.aichiTargets" locale="locale" term-domain="aichiTargets" on-terms-loaded="onAichiTargetsTerms(terms)"></view-terms-hierarchy>
+						<ul class="list">
+							<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
+						</ul>
 					</div>
 			</div>
 		</div>
