@@ -23,47 +23,54 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 		{
 
 			$scope.isABS = realm.is('ABS');
-       		$scope.isBCH = realm.is('BCH'); 
-            $scope.options  = {
-
-    			regions       : function() { return $q.all([$http.get("/api/v2013/thesaurus/domains/countries/terms", { cache: true }),
-									    $http.get("/api/v2013/thesaurus/domains/regions/terms",   { cache: true })]).then(function(o) {
-									    	return Enumerable.From($filter('orderBy')(o[0].data, 'name')).Union(
-												   Enumerable.From($filter('orderBy')(o[1].data, 'name'))).ToArray();
-									   }); }
-    		};
-
-				$scope.onThematicAreasTerms = function(terms){
-					if(($scope.document||{}).cpbThematicAreas){
-						_.forEach(terms, function(item){
-							if(item.broaderTerms.length == 0 || item.broaderTerms == []){
-								var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
-								if(parent){
-									terms = _.filter(terms, function(t){
-										return !_.includes(item.narrowerTerms, t.identifier)
-									})
-								}
-							}
-						});
-						return terms;
+			$scope.isBCH = realm.is('BCH');
+			$scope.onThematicAreasTerms = function(terms){
+			if(($scope.document||{}).cpbThematicAreas){
+				_.forEach(terms, function(item){
+					if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+						var parent =_.find($scope.document.cpbThematicAreas, {identifier: item.identifier});
+						if(parent){
+							terms = _.filter(terms, function(t){
+								return !_.includes(item.narrowerTerms, t.identifier)
+							})
+						}
 					}
-				}
-
-				$scope.onTargetGroupsTerms = function(terms){
-					if(($scope.document||{}).targetGroups){
-						_.forEach(terms, function(item){
-							if(item.broaderTerms.length == 0 || item.broaderTerms == []){
-								var parent =_.find($scope.document.targetGroups, {identifier: item.identifier});
-								if(parent){
-									terms = _.filter(terms, function(t){
-										return !_.includes(item.narrowerTerms, t.identifier)
-									})
-								}
-							}
-						});
-						return terms;
-					}
+				});
+				return terms;
 			}
+		}
+
+			$scope.onTargetGroupsTerms = function(terms){
+				if(($scope.document||{}).targetGroups){
+					_.forEach(terms, function(item){
+						if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+							var parent =_.find($scope.document.targetGroups, {identifier: item.identifier});
+							if(parent){
+								terms = _.filter(terms, function(t){
+									return !_.includes(item.narrowerTerms, t.identifier)
+								})
+							}
+						}
+					});
+					return terms;
+				}
+			}
+			$scope.onCbdSubjectsTerms = function(terms){
+				if(($scope.document||{}).cbdSubjects){
+					_.forEach(terms, function(item){
+						if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+							var parent =_.find($scope.document.cbdSubjects, {identifier: item.identifier});
+							if(parent){
+								terms = _.filter(terms, function(t){
+									return !_.includes(item.narrowerTerms, t.identifier)
+								})
+							}
+						}
+					});
+					return terms;
+				}
+			}
+
 			//====================
 			//
 			//====================
@@ -77,5 +84,3 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 		}]
 	};
 }]);
-
-

@@ -95,6 +95,23 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     $scope.genericMapping = function(item) {
       return {identifier: item.identifier};
     };
+    //==================================
+    //
+    //==================================
+    
+    $scope.cbdSubjects  = function() { return $http.get("/api/v2013/thesaurus/domains/CBD-SUBJECTS/terms", { cache: true }).then(function(o){
+      var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
+      var items = [];
+      _.forEach(subjects, function(subject) {
+        var term = _.find(o.data, {'identifier': subject } );
+        items.push(term);
+        _(term.narrowerTerms).forEach(function (term) {
+          items.push(_.find(o.data, {'identifier':term}));
+        })
+      });
+      return items;
+    });
+  };
 
     //==================================
     //
