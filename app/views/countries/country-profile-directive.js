@@ -1,8 +1,8 @@
 import app from 'app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
-import 'views/measure-matrix/measure-matrix-countries-directive';
-import 'views/search/search-results/result-grouped-national-record';
+import '~/views/measure-matrix/measure-matrix-countries-directive';
+import '~/views/search/search-results/result-grouped-national-record';
 import 'services/main';
 import 'views/directives/index';
 

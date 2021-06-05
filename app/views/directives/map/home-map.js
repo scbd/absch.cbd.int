@@ -53,12 +53,10 @@ import 'services/main';
               // Delay loading map by 2 sec
               $scope.loadingMap = true;
               angular.element(document).ready(function () {
-                  require(['views/countries/country-map'], function(map){
-                      $scope.$apply(function(){
+                  require(['views/countries/index'], function(map){
                           var mapElement = $element.find('#homeMap')
                           $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
                           $scope.loadingMap = false;
-                      });
                   });
               });
             }

@@ -21,7 +21,7 @@ const asyncGlob = util.promisify(glob)
 const outputDir = 'dist';
 let globalHashMapping = {};
 
-const externals = [ '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'angular-animate', 'css', 
+const externals = ['app', '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'angular-animate', 'css', 
 'text', 'json', 'linqjs', 'async', 'domReady', 'bootstrap-datepicker', 'datepicker-range', 'jquery', 'bootstrap', 'lodash', 'moment', 
 'ng-breadcrumbs', 'ngSmoothScroll', 'angular-joyride', 'toastr', 'ngStorage', 'ngDialog', 'ngInfiniteScroll', 'tableexport', 'blobjs', 'file-saverjs', 'xlsx', 'jszip', 
 'webui-popover', 'chart-js', 'printThis', 'diacritics', 'pdfjs-dist/build/pdf', 'pdfjs-dist/build/pdf.worker', 'pdf-object', 'angular-trix', 'trix', 'ngMeta', 
