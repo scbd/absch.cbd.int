@@ -6,10 +6,18 @@
                 <div class="col-md-8 padding-20">
                     <categories-group></categories-group>
                 </div>
-                <div class="col-md-4 padding-20">
-                    <right-menu></right-menu>        
+            </div>
+            <div class="row">
+                <div class="col-md-12 padding-20">
+                    <component-one></component-one>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 padding-20">
+                    <component-two></component-two>
+                </div>
+            </div>
+
         </div>
     </div>
 </template>
@@ -19,18 +27,23 @@
 </style>
 
 <script>
-
 import CategoriesGroup from '../../components/kb/categories-group.vue';
 import RightMenu from '../../components/kb/right-menu.vue';
 import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
+import componentOne from "../../components/kb/emebed/component-one.vue";
+import componentTwo from "../../components/kb/emebed/component-two.vue";
+
+
 
 
 export default {
     name:'kbHome',
     components:{
+        componentOne,
+        componentTwo,
         CategoriesGroup,
         RightMenu,
-        AutoCompleteSearch
+        AutoCompleteSearch,
     },
     props:{
         tokenReader: { type: Function, required: false },
