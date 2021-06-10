@@ -32,6 +32,13 @@
 			"title": "Type of Decision/Document",
 			"field": "decisionTypes_ss",
 			"otherTerm":false,
+			"additionalTerms":[
+				{
+					"identifier":"5B6177DD-5E5E-434E-8CB7-D63D67D5EBED",
+					"name":"Other",
+					"title":{"en":"Any other decisions, notifications, declarations or communications"}
+				}
+			],
 			"relatedField":"decisionTypes_REL_ss"
 		},
 		{
