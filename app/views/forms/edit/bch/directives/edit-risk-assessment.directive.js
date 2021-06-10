@@ -65,32 +65,26 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 
 				//use for RA only 
 				$scope.onBuildAuthorityQuery = function(searchText){
-					if (!$scope.document || !$scope.document.government)
-        				return;
+					
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['authority'],
 						searchText: searchText
 					}
-					queryOptions.government = $scope.document.government.identifier;
+					if ($scope.document && $scope.document.government)
+        				queryOptions.government = $scope.document.government.identifier;
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
 				//use for RA and IRA, 
 				$scope.onBuildContactQuery = function(searchText){
-					//incase of RA, government is required
-					if($scope.isNational && (!$scope.document || !$scope.document.government)){
-						return;
-					}
+					
 					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['contact'],
 						searchText: searchText
 					}
-					//incase of RA
-					if($scope.isNational && ($scope.document || $scope.document.government)){
-						queryOptions.government = $scope.document.government.identifier;
-					}
+					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 

@@ -6,9 +6,9 @@ import 'views/forms/view/abs/view-abs-permit.directive';
 
   export { default as template } from './edit-absPermit.html';
 
-  export default ["$scope", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
+  export default ["$scope", "realm", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
                                     "editFormUtility", "$controller","IStorage","$location", "commonjs",
-   function ($scope, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
+   function ($scope, realm, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
     $controller('editController', {$scope: $scope});
 
     $scope.path= $location.path();
@@ -51,35 +51,34 @@ import 'views/forms/view/abs/view-abs-permit.directive';
     });
 
        $scope.onContactQuery = function(searchText){
-        if (!$scope.document || !$scope.document.government)
-        return;
+        
            var queryOptions = {
                schemas	  : ['authority', 'contact'],
                realm     : realm.value,
                searchText: searchText
            }
-           queryOptions.government = $scope.document.government.identifier;
+           if ($scope.document && $scope.document.government)
+                queryOptions.government = $scope.document.government.identifier;
 
            return $scope.onBuildDocumentSelectorQuery(queryOptions);
        }
 
        $scope.onBuildQuery = function(searchText, schema){
-        if (!$scope.document || !$scope.document.government)
-        return;
+        
            var queryOptions = {
                schemas	  : [schema],
                realm     : realm.value,
                searchText: searchText
            }
-           queryOptions.government = $scope.document.government.identifier;
+           if ($scope.document && $scope.document.government)
+                queryOptions.government = $scope.document.government.identifier;
 
            return $scope.onBuildDocumentSelectorQuery(queryOptions);
        }
 
 
        $scope.onBuildHideSelfQuery = function(searchText){
-          if (!$scope.document || !$scope.document.government)
-          return;
+         
           var queryOptions = {
               schemas	  : ['absPermit'],
               realm     : realm.value,
@@ -87,7 +86,8 @@ import 'views/forms/view/abs/view-abs-permit.directive';
               searchText: searchText
           }
           //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
-          queryOptions.government = $scope.document.government.identifier;
+          if ($scope.document && $scope.document.government)
+                queryOptions.government = $scope.document.government.identifier;
 
           return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
