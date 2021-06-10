@@ -47,16 +47,14 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 				//use for RA and IRA
 				$scope.onBuildModifiedOrganismQuery = function(searchText){
 					//incase of RA, government is required
-					if($scope.isNational && (!$scope.document || !$scope.document.government)){
-						return;
-					}
-						var queryOptions = {
+					
+					var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['modifiedOrganism'],
 						searchText: searchText
 					}
 					//incase of RA
-					if($scope.isNational && ($scope.document || $scope.document.government)){
+					if($scope.isNational && $scope.document.government){
 						queryOptions.government = $scope.document.government.identifier;
 					}
 					
