@@ -102,7 +102,7 @@
 			"query": {
 				"fl": "identifier_s,rec_title:scientificName_s",
 				"fq": [ "schema_s:organism AND scientificName_s:*"],
-				"searchFields":["scientificName_s"]
+				"searchFields":["scientificName_t"]
 			},
 			"title": "Parental organism (scientific name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -219,7 +219,7 @@
 			"query": {
 				"fl": "identifier_s,rec_title:scientificName_s",
 				"fq": [ "schema_s:organism AND scientificName_s:*"],
-				"searchFields":["scientificName_s"]
+				"searchFields":["scientificName_t"]
 			},
 			"title": "Donor organism scientific name",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -325,7 +325,7 @@
 			"query": {
 				"fl": "identifier_s,rec_title:scientificName_s",
 				"fq": [ "schema_s:organism AND scientificName_s:*"],
-				"searchFields":["scientificName_s"]
+				"searchFields":["scientificName_t"]
 			},
 			"title": "Parental organism (scientific name)",
 			"field": "geneDonorOrganismIdentifiers_ss"
@@ -398,7 +398,7 @@
 			"query": {
 				"fl": "identifier_s,rec_title:scientificName_s",
 				"fq": [ "schema_s:organism AND scientificName_s:*"],
-				"searchFields":["scientificName_s"]
+				"searchFields":["scientificName_t"]
 			},
 			"title": "Recipient organism scientific name",
 			"field": "lmoIdentifiers_ss"
@@ -418,7 +418,7 @@
 			"query": {
 				"fl": "identifier_s,rec_title:scientificName_s",
 				"fq": [ "schema_s:organism AND scientificName_s:*"],
-				"searchFields":["scientificName_s"]
+				"searchFields":["scientificName_t"]
 			},
 			"title": "Donor organism scientific name",
 			"field": "geneDonorOrganismIdentifiers_ss"
