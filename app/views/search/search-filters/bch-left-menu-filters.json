@@ -46,8 +46,7 @@
 			"type": "thesaurus",
 			"term": "decisionResults",
 			"title": "Result of the decision",
-			"field": "decisionResult_ss",
-			"relatedField":"decisionResult_REL_ss",
+			"field": "decisionResult_s",
 			"otherTerm":false
 		},
 		{
