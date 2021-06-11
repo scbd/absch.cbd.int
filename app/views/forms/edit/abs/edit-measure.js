@@ -9,8 +9,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
     export { default as template } from './edit-measure.html';
 
-  export default ["$scope", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
-        function($scope, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {
+  export default ["$scope", "realm", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
+        function($scope, realm, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {
             $controller('editController', {
                 $scope: $scope
             });
@@ -235,14 +235,13 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
             $scope.onContactQuery = function(searchText){
                 
-                if (!$scope.document || !$scope.document.government)
-                     return;
                 var queryOptions = {
                     schemas	  : ['authority', 'contact'],
                     realm     : realm.value,
                     searchText: searchText
                 }
-                queryOptions.government = $scope.document.government.identifier;
+                if ($scope.document && $scope.document.government)
+                    queryOptions.government = $scope.document.government.identifier;
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
@@ -260,17 +259,14 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
             $scope.onMeaureQuery = function(searchText){
                 
-                if (!$scope.document || !$scope.document.government)
-                    return;
                 var queryOptions = {
                     schemas	  : ['measure'],
                     realm     : realm.value,
                     fieldQueries : [],
                     searchText: searchText
                 }
-                //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
-
-                queryOptions.government = $scope.document.government.identifier;
+                if ($scope.document && $scope.document.government)
+                    queryOptions.government = $scope.document.government.identifier;
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
             //==================================
