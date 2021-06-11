@@ -401,7 +401,7 @@
 	<div ng-if="isDecisionOnContainedUseOfLMOs || document.isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || document.isLmoDecisionForDirectUse">
 		<legend>Information sharing with other databases</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
-			<label>Is this risk assessment related to an LMO for commercial use ?</label>
+			<label>Is this decision related to an LMO for commercial use ?</label>
 			<div  class="km-value" compare-val>
 				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 			</div>
@@ -424,7 +424,7 @@
 				</div>
 			</div>
 			<div ng-if="document.forwardToFAO!=undefined">
-				<label>Should this submission be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform ?</label>
+				<label>Should this decision be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform ?</label>
 				<div  class="km-value" compare-val>
 					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 				</div>
