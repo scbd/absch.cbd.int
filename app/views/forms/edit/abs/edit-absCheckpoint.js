@@ -5,7 +5,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
 
     export { default as template } from './edit-absCheckpoint.html';
 
-  export default ["$scope", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, $http, $filter, $q, $routeParams, $controller, $location) {
+  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, realm, $http, $filter, $q, $routeParams, $controller, $location) {
         $controller('editController', {
             $scope: $scope
         });
@@ -45,15 +45,14 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
         };
 
         $scope.onContactQuery = function(searchText){
-            if (!$scope.document || !$scope.document.government)
-             return;
-
+           
             var queryOptions = {
                 schemas	  : ['contact', 'authority'],
                 realm     : realm.value,
                 searchText: searchText
             }
-            queryOptions.government = $scope.document.government.identifier;
+            if ($scope.document && $scope.document.government)
+                queryOptions.government = $scope.document.government.identifier;
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
 

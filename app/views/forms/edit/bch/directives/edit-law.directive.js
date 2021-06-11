@@ -108,41 +108,39 @@ import "views/forms/view/bch/view-biosafety-law.directive";
 					}
                 }
 				$scope.onBuildAmendedLawQuery = function(searchText){
-					if (!$scope.document || !$scope.document.government)
-       					 return;
-									
+														
                     var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
-                    }					
-					queryOptions.government = $scope.document.government.identifier;			
+                    }	
+					if ($scope.document && $scope.document.government)				
+							queryOptions.government = $scope.document.government.identifier;			
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 
 				$scope.onBuildLawQuery = function(searchText){
-					if (!$scope.document || !$scope.document.government)
-       					 return;
-					
+										
                     var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
                     }
-					queryOptions.government = $scope.document.government.identifier;
+					if ($scope.document && $scope.document.government)
+							queryOptions.government = $scope.document.government.identifier;
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }
 				$scope.onBuildAuthoritiesQuery = function(searchText){
-					if (!$scope.document || !$scope.document.government)
-        				return;
+					
 					
                     var queryOptions = {
 						realm     : realm.value,
 						schemas	  : ['authority', 'supplementaryAuthority'],
                         searchText: searchText
                     }
-					queryOptions.government = $scope.document.government.identifier;
+					if ($scope.document && $scope.document.government)
+        					queryOptions.government = $scope.document.government.identifier;
 					
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
                 }

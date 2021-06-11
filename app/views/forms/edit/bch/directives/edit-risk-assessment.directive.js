@@ -46,60 +46,56 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 						}					
 						return $scope.onBuildDocumentSelectorQuery(queryOptions);
 					}
-					//use for RA and IRA
-					$scope.onBuildModifiedOrganismQuery = function(searchText){
-						//incase of RA, government is required
-						if($scope.isNational && (!$scope.document || !$scope.document.government)){
-							return;
-						}
-							var queryOptions = {
-							realm     : realm.value,
-							schemas	  : ['modifiedOrganism'],
-							searchText: searchText
-						}
-						//incase of RA
-						if($scope.isNational && ($scope.document || $scope.document.government)){
-							queryOptions.government = $scope.document.government.identifier;
-						}
-						
-						return $scope.onBuildDocumentSelectorQuery(queryOptions);
-					}
-
-					//use for RA only 
-					$scope.onBuildAuthorityQuery = function(searchText){
-						if (!$scope.document || !$scope.document.government)
-							return;
+					
+				});
+				//use for IRA only
+				$scope.onBuildOrganizationQuery = function(searchText){
 						var queryOptions = {
-							realm     : realm.value,
-							schemas	  : ['authority'],
-							searchText: searchText
-						}
+						realm     : realm.value,
+						schemas	  : ['organization'],
+						searchText: searchText
+					}					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
+				//use for RA and IRA
+				$scope.onBuildModifiedOrganismQuery = function(searchText){
+					//incase of RA, government is required
+					
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['modifiedOrganism'],
+						searchText: searchText
+					}
+					//incase of RA
+					if($scope.isNational && $scope.document.government){
 						queryOptions.government = $scope.document.government.identifier;
 						return $scope.onBuildDocumentSelectorQuery(queryOptions);
 					}
 
-					//use for RA and IRA, 
-					$scope.onBuildContactQuery = function(searchText){
-						//incase of RA, government is required
-						if($scope.isNational && (!$scope.document || !$scope.document.government)){
-							return;
-						}
-						var queryOptions = {
-							realm     : realm.value,
-							schemas	  : ['contact'],
-							searchText: searchText
-						}
-						//incase of RA
-						if($scope.isNational && ($scope.document || $scope.document.government)){
-							queryOptions.government = $scope.document.government.identifier;
-						}
-						return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				//use for RA only 
+				$scope.onBuildAuthorityQuery = function(searchText){
+					
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['authority'],
+						searchText: searchText
 					}
+					if ($scope.document && $scope.document.government)
+        				queryOptions.government = $scope.document.government.identifier;
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
 
-					//==================================
-					//
-					//==================================
-					$scope.getCleanDocument = function(document) {
+				//use for RA and IRA, 
+				$scope.onBuildContactQuery = function(searchText){
+					
+					var queryOptions = {
+						realm     : realm.value,
+						schemas	  : ['contact'],
+						searchText: searchText
+					}
+					
+					return $scope.onBuildDocumentSelectorQuery(queryOptions);
+				}
 
 						document = document || $scope.document;
 

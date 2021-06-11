@@ -7,7 +7,7 @@ import 'services/main';
 
     export { default as template } from './edit-absCheckpointCommunique.html';
 
-  export default ["$scope", "$http", "$filter", "$q", "$controller", "IStorage",
+  export default ["$scope", "realm", "$http", "$filter", "$q", "$controller", "IStorage",
          "Thesaurus", "Enumerable", "$location", 'commonjs',
         function($scope, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
             $controller('editController', {
@@ -45,13 +45,13 @@ import 'services/main';
             });
 
             $scope.onBuildQuery = function(searchText){
-                if (!$scope.document || !$scope.document.government)
-                 return;
+                
                 var queryOptions = {
                     schemas	  : ['absCheckpoint'],
                     searchText: searchText
                 }
-                queryOptions.government = $scope.document.government.identifier;
+                if ($scope.document && $scope.document.government)
+                     queryOptions.government = $scope.document.government.identifier;
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
@@ -66,13 +66,13 @@ import 'services/main';
             }
 
             $scope.onContactQuery = function(searchText){
-                if (!$scope.document || !$scope.document.government)
-                 return;
+                
                 var queryOptions = {
                     schemas	  : ['contact', 'authority'],
                     realm     : realm.value,
                     searchText: searchText
                 }
+                if ($scope.document && $scope.document.government)
                 queryOptions.government = $scope.document.government.identifier;
 
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);

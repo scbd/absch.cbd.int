@@ -2138,7 +2138,9 @@ a.disabled{
 .tabular-term-check .tabular-terms::before {
     display: block;
 }
-
+.tabular-terms .terms>label {
+    font-weight: 400;
+}
 .tabular-term-check table tr td>label {
     font-weight: 600;
     text-decoration: underline;
