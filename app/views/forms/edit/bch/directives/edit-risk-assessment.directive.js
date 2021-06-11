@@ -6,32 +6,45 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "views/forms/view/bch/view-risk-assessment.directive";
 
-	var riskAssessmentDirective = ["$controller", "thesaurusService", "$routeParams", "realm", function($controller, thesaurusService, $routeParams, realm) {
-		return {
-			restrict   : "EA",
-			template: template,
-			replace    : true,
-			require    : '?ngModel',
-			scope:{
-				onPostSubmitFn   : "&onPostSubmit"
-			},
-			link: function($scope, $element, $attr){
+	const riskAssessmentDirective = (type)=>{
 
-				$scope.scientificNameSynonyms = [{}];
-				$scope.commonNames = [{}];
-				$scope.container        = $attr.container;
-    			$scope.isDialog         = $attr.isDialog;  
-				$scope.type 			= $attr.documentType;    
-				$scope.isNational = $routeParams.isNational;
-		
-				$controller('editController', {
-					$scope: $scope
-				});
+		return ["$controller", "thesaurusService", "$routeParams", "realm", function($controller, thesaurusService, $routeParams, realm) {
+			return {
+				restrict   : "EA",
+				template: template,
+				replace    : true,
+				require    : '?ngModel',
+				scope:{
+					onPostSubmitFn   : "&onPostSubmit"
+				},
+				link: function($scope, $element, $attr){
 
-				_.extend($scope.options, {
+					$scope.scientificNameSynonyms = [{}];
+					$scope.commonNames = [{}];
+					$scope.container        = $attr.container;
+					$scope.isDialog         = $attr.isDialog;  
+					$scope.type 			= $attr.documentType;    
+					$scope.isNational = $routeParams.isNational||type=='national';
+					
+					$controller('editController', {
+						$scope: $scope
+					});
 
-					riskAssessmentScope: function() {
-						return thesaurusService.getDomainTerms('riskAssessmentScope', {other:true, otherType:'lstring'});
+					_.extend($scope.options, {
+
+						riskAssessmentScope: function() {
+							return thesaurusService.getDomainTerms('riskAssessmentScope', {other:true, otherType:'lstring'});
+						}
+						
+					});
+					//use for IRA only
+					$scope.onBuildOrganizationQuery = function(searchText){
+							var queryOptions = {
+							realm     : realm.value,
+							schemas	  : ['organization'],
+							searchText: searchText
+						}					
+						return $scope.onBuildDocumentSelectorQuery(queryOptions);
 					}
 					
 				});
@@ -56,10 +69,8 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 					//incase of RA
 					if($scope.isNational && $scope.document.government){
 						queryOptions.government = $scope.document.government.identifier;
+						return $scope.onBuildDocumentSelectorQuery(queryOptions);
 					}
-					
-					return $scope.onBuildDocumentSelectorQuery(queryOptions);
-				}
 
 				//use for RA only 
 				$scope.onBuildAuthorityQuery = function(searchText){
@@ -86,46 +97,41 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
-				//==================================
-				//
-				//==================================
-				$scope.getCleanDocument = function(document) {
+						document = document || $scope.document;
 
-					document = document || $scope.document;
+						if (!document)
+							return undefined;
 
-					if (!document)
-						return undefined;
+						if(!$scope.isNational && document.government){
+							document.government = undefined;
+						}
 
-					if(!$scope.isNational && document.government){
-						document.government = undefined;
-					}
+						if(!document.isForCommercialUse){
+							document.forwardToOECD = undefined;
+							document.isForFoodSafety = undefined;
+							document.codexConduted = undefined;
+							document.forwardToFAO = undefined;
+						}
 
-					if(!document.isForCommercialUse){
-						document.forwardToOECD = undefined;
-						document.isForFoodSafety = undefined;
-						document.codexConduted = undefined;
-						document.forwardToFAO = undefined;
-					}
+						if(!document.isForFoodSafety){
+							document.codexConduted = undefined;
+							document.forwardToFAO = undefined;
+						}
 
-					if(!document.isForFoodSafety){
-						document.codexConduted = undefined;
-						document.forwardToFAO = undefined;
-					}
+						if (/^\s*$/g.test(document.notes))
+							document.notes = undefined;
 
-					if (/^\s*$/g.test(document.notes))
-						document.notes = undefined;
-
-					return $scope.sanitizeDocument(document);
-				};
-				
-				$scope.setDocument({});
+						return $scope.sanitizeDocument(document);
+					};
+					
+					$scope.setDocument({});
 
 
+				}
 			}
-		}
-	}];
+		}];
+	}
 	   
-	app.directive("editRiskAssessment", 			riskAssessmentDirective);
-	app.directive("editNationalRiskAssessment", 	riskAssessmentDirective);
-	app.directive("editIndependentRiskAssessment", 	riskAssessmentDirective);
+	app.directive("editNationalRiskAssessment", 	riskAssessmentDirective('national'));
+	app.directive("editIndependentRiskAssessment", 	riskAssessmentDirective('independent'));
 
