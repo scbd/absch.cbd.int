@@ -60,7 +60,7 @@
                         <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                     </button>
                     <button type="button" class="btn btn-default bold" ng-click="loadRecords(group)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="group.isLoading"  >
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show all {{::group.numFound}} records
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show all {{group.numFound-group.docs.length}} records
                     </button>
                 </div>
             </div>
