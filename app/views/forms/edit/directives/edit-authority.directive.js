@@ -143,14 +143,14 @@ import 'views/forms/view/view-authority.directive';
                 }
 
                 $scope.onContactQuery = function(searchText){
-                    if (!$scope.document || !$scope.document.government)
-                        return;
+                  
                     var queryOptions = {
                         realm     : realm.value,
                         fieldQueries: ['type_s: person'],
                         searchText: searchText
                     }
-                    queryOptions.government = $scope.document.government.identifier;
+                    if ($scope.document && $scope.document.government)
+                         queryOptions.government = $scope.document.government.identifier;
                     
                     if($scope.isAbs)
                         queryOptions.schemas = ['contact', 'authority']
@@ -163,14 +163,14 @@ import 'views/forms/view/view-authority.directive';
 
 
                 $scope.onMeasureQuery = function(searchText){
-                    if (!$scope.document || !$scope.document.government)
-                        return;
+                    
                     var queryOptions = {
                         realm     : realm.value,
                         schemas     : ['measure'],
                         searchText  : searchText
                     }
-                    queryOptions.government = $scope.document.government.identifier;
+                    if ($scope.document && $scope.document.government)
+                        queryOptions.government = $scope.document.government.identifier;
                                       
                     return $scope.onBuildDocumentSelectorQuery(queryOptions);
 
