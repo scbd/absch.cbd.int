@@ -102,7 +102,6 @@
             </h3>
         </div>
 
-
         <div style="float:right; position:relative;top:7px;right:3px;" ng-if="!isIRCCRevoked && internalCanEdit">
             <div>
                 <a rel="noopener" translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
@@ -120,6 +119,19 @@
             </button>
             <!-- for comparing with older versions -->
             <!-- ng-if="showDifferenceButton"  style="display: none;"-->
+            <button ng-if="showComparison" ng-disabled="isComparing" class="btn btn-default btn-success btn-xs dropdown-toggle" type="button" id="comparisonMenu"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="loadRecordRevisions()">
+                <span ng-if="!comparingRevision">Compare</span> 
+                <span ng-if="comparingRevision">Comparing <span ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span> 
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
+                <li ng-if="loadingRevisions"  ng-disabled="isComparing">
+                    <a ng-href="#"><i class="fa fa-spin fa-spinner" ></i> Loading...</a></li>
+                <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions"  ng-disabled="isComparing" ng-class="{'active':revision.revision==comparingRevision}">
+                    <a ng-href="#" ng-click="showDifference(revision.revision)">{{revision.uniqueIdentifier}}</a>
+                </li>
+            </ul>
             <div ng-if="isComparing">
                 <div id="compareSchemaView"></div>
             </div>
