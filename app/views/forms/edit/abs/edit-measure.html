@@ -245,7 +245,7 @@
                                                     if the measure being submitted is implementing an existing law. The two measures will then be displayed together.
                                                 </div>
                                                 <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
-                                                <div document-selector on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
+                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
     
                                             </div>
                                         </div>
@@ -283,7 +283,7 @@
                                         <div class="col-sm-12">
                                             <div class="km-control-group" required name="authorities" caption="Contact Institution">
     
-                                                <div document-selector on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
+                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
                                                            allow-new="true" allow-new-schema="contact"></div>
 
                                             </div>

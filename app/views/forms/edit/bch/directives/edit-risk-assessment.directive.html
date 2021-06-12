@@ -62,7 +62,7 @@
 											</div>	
 											<div class="row" ng-if="isNational">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
+													<div class="km-control-group" ng-disabled="!document.government.identifier" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
 														<div document-selector ng-model="document.authorities" question="authorities"
 																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true"></div>
 
@@ -87,7 +87,7 @@
 											<legend>Risk assessment details</legend>
 											<div class="row">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="modifiedOrganisms" required caption="Living modified organism(s)">											
+													<div class="km-control-group" ng-disabled="!document.government.identifier" name="modifiedOrganisms" required caption="Living modified organism(s)">											
 														<div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" 
 																on-build-query="onBuildModifiedOrganismQuery(searchText)" allow-new-schema="modifiedOrganism" allow-new="true"></div>
 													</div>
