@@ -34,84 +34,79 @@
     
     <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
     <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
-    <div class="m-app-loading" ng-animate-children>
-        <!--
-            HACKY CODE WARNING: I'm putting Style block inside directive so that it
-            will be removed from the DOM when we remove the directive container.
-        -->
-        <style type="text/css">
-            div.m-app-loading div.animated-container {
-                background-color: #FFFFFF ;
-                bottom: 0px ;
-                left: 0px ;
-                opacity: 1.0 ;
-                right: 0px ;
-                top: 0px ;
-                z-index: 999999 ;
-            }
-            /* Used to initialize the ng-leave animation state. */
-            div.m-app-loading div.animated-container.ng-leave {
-                opacity: 1.0 ;
-                transition: all linear 200ms ;
-                    -webkit-transition: all linear 200ms ;
-            }
-            /* Used to set the end properties of the ng-leave animation state. */
-            div.m-app-loading div.animated-container.ng-leave-active {
-                opacity: 0 ;
-            }
-            div.m-app-loading div.messaging {
-                color: #1FA65D ;
-                font-family: monospace ;
-                left: 0px ;
-                margin-top: -37px ;
-                position: absolute ;
-                right: 0px ;
-                text-align: center ;
-                top: 30% ;
-            }
-            div.m-app-loading h1 {
-                font-size: 26px ;
-                line-height: 35px ;
-                margin: 0px 0px 20px 0px ;
-            }
-            div.m-app-loading p {
-                font-size: 18px ;
-                line-height: 14px ;
-                margin: 0px 0px 0px 0px ;
-            }
-        </style>
-
-
-        <!-- BEGIN: Actual animated container. -->
-        <div class="animated-container">
-            <div class="messaging">
-                <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
-                    <img src="https://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:80px;">
-                </span>
-               
-                <h1>
-                    <br/>                  
-                   <div class="color-black" id="appLoadingMessage">
-                        loading the <br/>BCH Clearing-House                        
-                    </div>
-                    version <%=appVersion%>
-                    <div class="color-red" id="appLoadingError" style="display: none;">
-                        <span>Error loading the <br/>BCH Clearing-House   </span>
-                        <br/>
-                        <span>Please contact the Secretariat</span>
-                        <div>
-                            <button type="button" class="btn btn-danger" id="showError">Show detail error</button>
-                            <code style="display: none;word-break: break-all;color: #fff;background-color: #d9534f;border-color: #d43f3a;" id="detailErrorMessage"></code>                            
+    <app-loading>
+        <div class="m-app-loading" ng-animate-children>
+    
+            <style type="text/css">
+                div.m-app-loading div.animated-container {
+                    background-color: #FFFFFF ;
+                    bottom: 0px ;
+                    left: 0px ;
+                    opacity: 1.0 ;
+                    right: 0px ;
+                    top: 0px ;
+                    z-index: 999999 ;
+                }
+                /* Used to initialize the ng-leave animation state. */
+                div.m-app-loading div.animated-container.ng-leave {
+                    opacity: 1.0 ;
+                    transition: all linear 200ms ;
+                        -webkit-transition: all linear 200ms ;
+                }
+                /* Used to set the end properties of the ng-leave animation state. */
+                div.m-app-loading div.animated-container.ng-leave-active {
+                    opacity: 0 ;
+                }
+                div.m-app-loading div.messaging {
+                    color: #1FA65D ;
+                    font-family: monospace ;
+                    left: 0px ;
+                    margin-top: -37px ;
+                    position: absolute ;
+                    right: 0px ;
+                    text-align: center ;
+                    top: 30% ;
+                }
+                div.m-app-loading h1 {
+                    font-size: 26px ;
+                    line-height: 35px ;
+                    margin: 0px 0px 20px 0px ;
+                }
+                div.m-app-loading p {
+                    font-size: 18px ;
+                    line-height: 14px ;
+                    margin: 0px 0px 0px 0px ;
+                }
+            </style>
+        
+            <div class="animated-container">
+                <div class="messaging">
+                    <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
+                        <img src="https://bch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:80px;">
+                    </span>
+                   
+                    <h1>
+                        <br/>                  
+                       <div class="color-black" id="appLoadingMessage">
+                            loading the <br/>BCH Clearing-House                        
                         </div>
-                    </div>
-                    <br/><br/>
-                    <i class="fa fa-spin fa-3x fa-circle-o-notch app-loading-icon"></i> 
-                </h1>
+                        version <%=appVersion%>
+                        <div class="color-red" id="appLoadingError" style="display: none;">
+                            <span>Error loading the <br/>BCH Clearing-House   </span>
+                            <br/>
+                            <span>Please contact the Secretariat</span>
+                            <div>
+                                <button type="button" class="btn btn-danger" id="showError">Show detail error</button>
+                                <code style="display: none;word-break: break-all;color: #fff;background-color: #d9534f;border-color: #d43f3a;" id="detailErrorMessage"></code>                            
+                            </div>
+                        </div>
+                        <br/><br/>
+                        <i class="fa fa-spin fa-3x fa-circle-o-notch app-loading-icon"></i> 
+                    </h1>
+                </div>
             </div>
         </div>
-        <!-- END: Actual animated container. -->
-
-    </div>
+    </app-loading>
     <!-- PAGE -->
     <div class="ng-cloak">
         <scbd-header></scbd-header>

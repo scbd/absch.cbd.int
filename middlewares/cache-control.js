@@ -4,6 +4,7 @@
 //============================================================
 function setCustomCacheControl(res, path) {
 
+    let exceptionFiles = ['assets/widgets.js']
     let oneYear              = 365*24*60*60;
 	let versionWrong = false;
 	let versionMatch = false;
@@ -19,7 +20,7 @@ function setCustomCacheControl(res, path) {
         versionMatch |= res.req.cookies && res.req.cookies.VERSION && res.req.cookies.VERSION==global.app.version;
     }
 
-	if(!isHashFile && (versionWrong || !versionMatch))
+	if((!isHashFile && (versionWrong || !versionMatch)) || exceptionFiles.indexOf(res.req.originalUrl))
 		return res.setHeader('Cache-Control', 'public, max-age=0');
 
 	res.setHeader('Cache-Control', `public, max-age=${oneYear}`);

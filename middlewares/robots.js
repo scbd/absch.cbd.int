@@ -1,7 +1,7 @@
 ﻿
 module.exports = function(req, res){
 
-    var isValidHost = ['absch.cbd.int'].includes(req.headers['host']);
+    var isValidHost = ['absch.cbd.int', 'beta.bch.cbd.int', 'bch.cbd.int'].includes(req.headers['host']);
 
     var text = isValidHost ? 'Allow: /' : 'Disallow: /';
 

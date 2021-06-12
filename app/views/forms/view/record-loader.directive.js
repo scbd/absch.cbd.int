@@ -436,9 +436,9 @@ import 'views/forms/directives/compare-val';
 					}
 
 					var queryString = $location.search();
-					if(queryString && queryString.print){
-						$scope.printMode = true;
-						require(['css!/app/css/print-friendly'], function(){})
+					if(queryString ){
+						$scope.printMode = queryString.print
+						$scope.embed 	 = queryString.embed
 					}
 				}]
 		}

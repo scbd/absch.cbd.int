@@ -45,6 +45,7 @@ if(process.env.COMPRESS=='true'){
 
 // Set routes
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/widgets.js',                               require('./middlewares/widget'));
 app.use('(/en)?/app',                                express.static(`${__dirname}/dist/en/app`, { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/ar/app',                                   express.static(`${__dirname}/dist/ar/app`, { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/es/app',                                   express.static(`${__dirname}/dist/es/app`, { setHeaders: cacheControl.setCustomCacheControl }));

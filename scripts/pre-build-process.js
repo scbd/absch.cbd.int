@@ -5,7 +5,6 @@ const fs        = require("fs");
 const path      = require("path");
 const util      = require("util");
 const _         = require('lodash');
-    const git   = require('./scripts/git-file-info');
 const touch     = require("touch")
 const { rename, copyFile, mkdir, stat, readDir } = require('fs').promises;
 const asyncGlob = util.promisify(glob)
@@ -25,6 +24,8 @@ process.on('uncaughtException', (error) => {
 });
 
 export const processFiles = async () =>{
+
+    const git       = require('./scripts/git-file-info');
     const baseDir   = path.resolve('./');
     const languages = ['en'];//['ar', 'en', 'fr', 'es', 'ru', 'zh'];
     const enDir     = 'app';

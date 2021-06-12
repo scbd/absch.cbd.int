@@ -51,7 +51,10 @@ export default async function() {
                       }));
     i18nFiles.forEach(m=>{
       externals.push(m);
-      bundleFiles.push(bundle(m)); 
+      if(/assets\/widgets\.js$/.test(m))
+        bundleFiles.push(bundleWidget(m)); 
+      else 
+        bundleFiles.push(bundle(m)); 
     }); 
   }
   else{ //en files only
@@ -66,7 +69,10 @@ export default async function() {
                     }));
     enFiles.forEach(m=>{
           externals.push(m);
-          bundleFiles.push(bundle(m, 'app')); 
+          if(/assets\/widgets\.js$/.test(m))
+            bundleFiles.push(bundleWidget(m, 'app')); 
+          else 
+            bundleFiles.push(bundle(m, 'app')); 
       });
   }
 
@@ -130,6 +136,45 @@ function bundle(relativePath, baseDir='i18n-build') {
         mangle:false
       }),
       saveHashFileNames(),
+    ], 
+  }
+}
+
+function bundleWidget(relativePath, baseDir='i18n-build') {
+ 
+  const extension = path.extname(relativePath);
+  let outputFileExt = extension;  
+  let outputFileName   = `[name]${outputFileExt}`;
+   
+  //when running for local development add en folder path else the i18n-build has good path so need for adjustments
+  let enFolder='en/app'; 
+  if(!isLocalDev)
+    enFolder = '';
+
+  return {
+    input : path.join(baseDir||'', relativePath),
+    output: [{
+      format   : 'iife',
+      sourcemap: true,
+      dir : path.join(outputDir, enFolder, path.dirname(relativePath)),
+      name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}`,
+      entryFileNames: outputFileName,
+      chunkFileNames: outputFileName,      
+    }],
+    plugins : [
+      alias({ entries : [
+          { find: /^~\/(.*)/, replacement:`${process.cwd()}/app/$1` }
+        ] 
+      }), 
+      getBabelOutputPlugin({
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        allowAllFormats: true,
+        exclude: [ '*.json' ],
+      }),
+      (isLocalDev) ? null : terser({
+        ecma: 5,
+        mangle:true
+      })
     ], 
   }
 }

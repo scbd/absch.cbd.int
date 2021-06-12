@@ -18,10 +18,17 @@ import './apiUrl';
 
     })()
 
-    app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "$timeout", function($q, $rootScope, $window, $document, $timeout) {
+    app.factory('apiToken', ["$q", "$rootScope", "$window", "$document", "$timeout", "$location",
+     function($q, $rootScope, $window, $document, $timeout, $location) {
 
         var pToken;
         var authenticationFrameQ = $q(function(resolve, reject){
+            var search = $location.search();
+            if(search.embed){
+                resolve();
+                console.warn('accounts is not available app loaded for embed purpose.')
+                return;
+            }
 
 			var frame = $('<iframe src="'+ACCOUNTS_URL+'/app/authorize.html'+'" style="display:none"></iframe>');
 
