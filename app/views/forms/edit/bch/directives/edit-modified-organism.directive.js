@@ -33,7 +33,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 
 
 				_.extend($scope.options, {
-					techniqueUsed : function () {return $http.get("/api/v2013/thesaurus/domains/ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B/terms", { cache: true }).then(function(o){return o.data;});},
+					techniqueUsed	: thesaurusService.getDomainTerms('techniqueUsed', 		{other:true, otherType:'lstring', multiple:true}),
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true})			
 				});
 
