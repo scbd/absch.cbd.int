@@ -26,13 +26,13 @@
                     <result-grouped-national-record doc='doc'></result-grouped-national-record>
                 </div>
                 <div class="btn-group" ng-if="schema.numFound >  schema.docs.length">
-                    <button class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(schema,10)" ng-disabled="schema.isLoading">
+                    <button type="button" class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(schema,10)" ng-disabled="schema.isLoading">
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show next 10 records 
                     </button>
-                    <button ng-if="schema.isLoading" class="btn btn-default" ng-disabled="true" style="font-size: 10px;text-transform: uppercase;"   >
+                    <button type="button" ng-if="schema.isLoading" class="btn btn-default" ng-disabled="true" style="font-size: 10px;text-transform: uppercase;"   >
                         <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                     </button>
-                    <button class="btn btn-default bold" ng-click="loadRecords(schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
+                    <button type="button" class="btn btn-default bold" ng-click="loadRecords(schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show remaining {{schema.numFound-schema.docs.length}} records
                     </button>
                 </div>

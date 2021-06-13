@@ -68,8 +68,8 @@
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
                                                                         <div class="pull-right" style="margin-bottom:5px;">
-                                                                            <button ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                            <button ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
@@ -86,8 +86,8 @@
                                                                                         ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
                                                                                     <div class="pull-right" style="margin-bottom:5px;">
-                                                                                        <button ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                                        <button ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
