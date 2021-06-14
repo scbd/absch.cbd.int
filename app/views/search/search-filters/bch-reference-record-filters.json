@@ -1,0 +1,273 @@
+{
+	"authority": [
+		{
+		"referenceField":"contacts",
+		"schema":"contact",
+		"title": "Contact person"
+		},
+		{
+		"referenceField":"policyBasisForCompetencyRef",
+		"schema":"measure",
+		"title": "Contact person"
+		}
+	],
+
+	"biosafetyLaw": [
+		{
+		"referenceField":"amendedRecords",
+		"schema":"biosafetyLaw",
+		"title": "Record(s) containing the law/regulation being amended"
+		},
+		{
+		"referenceField":"relatedRecords",
+		"schema":"biosafetyLaw",
+		"title": "Law, Regulation or Guideline"
+		},
+		{
+		"referenceField":"authorities",
+		"schema":"authority",
+		"title": "Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress."
+		}
+	],
+
+	"biosafetyDecision": [
+		{
+		"referenceField":"amendedRecords",
+		"schema":"biosafetyDecision",
+		"title": "Country's Decision or any other Communication"
+		},
+		{
+			"referenceField":"authorities",
+			"schema":"authority",
+			"title": "Competent National Authority(ies) responsible for the decision or communication"
+		},
+		{
+			"referenceField":"exporters",
+			"schema":"contact",
+			"title": "Exporter’s contact details"
+		},
+		{
+			"referenceField":"importers",
+			"schema":"contact",
+			"title": "Importer’s contact details"
+		},
+		{
+			"referenceField":"pointOfContact",
+			"schema":"contact",
+			"title": "A point of contact for further information"
+		},
+		{
+			"referenceField":"modifiedOrganisms",
+			"schema":"modifiedOrganism",
+			"title": "LMO identification"
+		},
+		{
+			"referenceField":"riskAssessments",
+			"schema":"nationalRiskAssessment",
+			"title": "Risk assessment"
+		}
+	],
+
+	"nationalRiskAssessment": [
+		{
+		"referenceField":"organizations",
+		"schema":"organization",
+		"title": "Institution responsible for the risk assessment"
+		},
+		{
+		"referenceField":"authorities",
+		"schema":"authority",
+		"title": "Competent National Authority(ies) responsible for the risk assessment"
+		},
+		{
+		"referenceField":"contacts",
+		"schema":"contact",
+		"title": "Contact details of the main responsible risk assessor"
+		},
+		{
+		"referenceField":"modifiedOrganisms",
+		"schema":"modifiedOrganisms",
+		"title": "Living modified organism(s)"
+		}
+	],
+
+	"biosafetyExpert": [
+		{
+		"referenceField":"contact",
+		"schema":"contact",
+		"title": "Contact details"
+		}
+	],
+
+	"organization": [
+		{
+		"referenceField":"contacts",
+		"schema":"contact",
+		"title": "Contact details"
+		},
+		{
+		"referenceField":"linkedOrganizations",
+		"schema":"organization",
+		"title": "Link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF)"
+		}
+	],
+
+	"laboratoryDetection": [
+		{
+		"referenceField":"organization",
+		"schema":"organization",
+		"title": "Laboratory name and coordinates"
+		},
+		{
+		"referenceField":"organization",
+		"schema":"organization",
+		"title": "Related Organization"
+		},
+		{
+		"referenceField":"detectableLmos",
+		"schema":"modifiedOrganism",
+		"title": "LMO(s) detectable by the laboratory"
+		},
+		{
+		"referenceField":"detectableGenes",
+		"schema":"dnaSequence",
+		"title": "Genetic element(s) detectable by the laboratory"
+		}
+		
+	],
+
+	"resource": [
+		{
+		"referenceField":"organizations",
+		"schema":"contact",
+		"title": "Authoring organisation(s)"
+		},
+		{
+			"referenceField":"modifiedOrganisms",
+			"schema":"modifiedOrganism",
+			"title": "LMO(s) identification"
+		},
+		{
+			"referenceField":"organisms",
+			"schema":"organism",
+			"title": "Organism(s) identification"
+		},
+		{
+			"referenceField":"genes",
+			"schema":"dnaSequence",
+			"title": "Gene(s)  identification"
+		}
+	],
+
+	"modifiedOrganisms": [
+		{
+		"referenceField":"developers",
+		"schema":"contact",
+		"title": "Developer(s)"
+		},
+		{
+			"referenceField":"linkedModifiedOrganisms",
+			"schema":"modifiedOrganism",
+			"title": "Related LMO(s)"
+		},
+		{
+			"referenceField":"recipientOrganisms",
+			"schema":"organism",
+			"title": "Recipient Organism” or “Parental Organisms"
+		},
+		{
+			"referenceField":"genes",
+			"schema":"dnaSequence",
+			"title": "Introduced or modified genetic element(s)"
+		},
+		{
+			"referenceField":"affectedGenes",
+			"schema":"dnaSequence",
+			"title": "Other gene(s) whose expression was affected by the transformation"
+		}
+	],
+
+	"dnaSequence": [
+		{
+		"referenceField":"donorOrganisms",
+		"schema":"organism",
+		"title": "Donor organism(s)"
+		}
+	],
+
+	"organism": [
+		{
+		"referenceField":"linkedOrganizations",
+		"schema":"organization",
+		"title": "Link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF)"
+		},
+		{
+		"referenceField":"contacts",
+		"schema":"contact",
+		"title": "Contact person(s)"
+		}
+	],
+
+	"capacityBuildingInitiative": [
+		{
+		"referenceField":"contacts",
+		"schema":"contact",
+		"title": "Contact person"
+		},
+		{
+			"referenceField":"broaderProjects",
+			"schema":"capacityBuildingInitiative",
+			"title": "Clearing-house record about this project or programme"
+		},
+		{
+			"referenceField":"implementingAgencies",
+			"schema":"organization",
+			"title": "Implementing agency(ies) or organization(s)"
+		},
+		{
+			"referenceField":"executingAgencies",
+			"schema":"organization",
+			"title": "executing agency(ies) or organization(s)"
+		},
+		{
+			"referenceField":"collaboratingPartners",
+			"schema":"organization",
+			"title": "Collaborating partner(s)"
+		},
+		{
+			"referenceField":"coreFundingSources",
+			"schema":"organization",
+			"title": "Funding source(s)"
+		},
+				{
+			"referenceField":"coFinancingSources",
+			"schema":"organization",
+			"title": "Co-funding source(s)"
+		},
+		{
+			"referenceField":"resultsReference",
+			"schema":"resource",
+			"title": "Virtual library record number"
+		}
+  	],
+	  
+	"submission": [
+		{
+		"referenceField":"organizations",
+		"schema":"organization",
+		"title": "Organization(s)"
+		},
+		{
+		"referenceField":"records",
+		"schema":"records",
+		"title": "Related record(s)"
+		},
+		{
+		"referenceField":"notifications",
+		"schema":"notification",
+		"title": "Related notification(s)"
+		}
+	]
+	
+	
+}
