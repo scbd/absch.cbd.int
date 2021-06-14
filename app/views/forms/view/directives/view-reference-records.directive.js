@@ -16,13 +16,13 @@ app.directive("viewReferencedRecords", [function () {
 			target: "@linkTarget",
 			onDataFetch: "&?"
 		},
-		controller: ["$scope", "solr", '$q', 'searchService', 'realm', function ($scope, solr, $q, searchService, realm) {
+		controller: ["$scope", "solr", '$q', 'searchService', 'realm','$filter', '$routeParams', function ($scope, solr, $q, searchService, realm, $filter, $routeParams) {
 
 			// //==================================
-		    // //
-		    // //==================================
-		    $scope.$watch('model', function(newValue, oldValue){
-		        if(newValue){
+			// //
+			// //==================================
+			$scope.$watch('model', function(newValue, oldValue){
+				if(newValue){
 
 					var searchQuery = {
 						rowsPerPage:5000,
@@ -35,7 +35,7 @@ app.directive("viewReferencedRecords", [function () {
 					$q.when(searchService.list(searchQuery))
 					.then(function(data) {
 
-						if(data.data.response.docs.length > 0){							
+						if(data.data.response.docs.length > 0){
 							_.forEach(data.data.response.docs, function(record){
 								_.forEach(record.referenceRecord_info_ss, function(info){
 									info = JSON.parse(info);
@@ -52,13 +52,16 @@ app.directive("viewReferencedRecords", [function () {
 													fields : {}
 												};
 
-											$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count:0, docs:[], schema:record.schema}
-											
-											$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
-											$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push(record)
+											 getTitle(info.field)
+											.then(function(response) {
+												if (response == undefined) return;
+													$scope.referenceRecords[record.schemaCode].fields[response] = $scope.referenceRecords[record.schemaCode].fields[response] || {count : 0, docs : [], schema : record.schema}
+													$scope.referenceRecords[record.schemaCode].fields[response].count += 1;
+													$scope.referenceRecords[record.schemaCode].fields[response].docs.push( record );
+											});
 										}
-									})
-								});								
+									});
+								});
 							})
 							if(typeof $scope.onDataFetch == 'function'){
 								$scope.onDataFetch({data:$scope.referenceRecords})
@@ -66,18 +69,39 @@ app.directive("viewReferencedRecords", [function () {
 						}
 					});
 
-		        }
+				}
 			});
-			
+
 			$scope.encode = function(query){
 				return encodeURIComponent(query);
+			}
+
+			function loadJsonFile(filePath){
+				var deferred = $q.defer();
+				require([filePath], function(res){
+					deferred.resolve(res);
+				});
+
+				return deferred.promise;
+			}
+
+			function getTitle(referenceField){
+				return loadJsonFile('views/search/search-filters/bch-reference-record-filters.json')
+				.then(function(keywords){
+					let terms = {};
+					_.forEach(keywords, function(item){
+							terms =_.find(item, {referenceField: referenceField});
+					});
+					return terms.title;
+				});
 			}
 
 			function removeRevisonNumber(identifier){
 				return identifier.replace(/@[0-9]+$/, '');
 			}
 
-		 }] //controller
+		}] //controller
 	};
 }]);
+
 
