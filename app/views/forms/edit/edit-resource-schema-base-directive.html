@@ -125,8 +125,8 @@
 									<legend>Information on the content of the resource</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="summary" caption="Summary, abstract or table of contents (max 300 words)">
-												<div km-rich-textbox ng-model="document.summary" rows="4" locales="document.header.languages"></div>
+											<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents (max 300 words)">
+												<div km-textbox-ml required ng-model="document.summary" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
