@@ -49,7 +49,7 @@
 		<legend>General information</legend>
 
 		<div ng-if="document.government">
-			<label name="country">Country</label>
+			<label name="country">Country submitting a law, regulation, guideline or agreement</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
 				<span ng-party-status government="document.government" id="government"></span>
