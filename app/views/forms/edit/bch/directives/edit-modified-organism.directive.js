@@ -32,7 +32,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 				});
 
 
-				_.extend($scope.options, {		
+				_.extend($scope.options, {
 					techniqueUsed	: thesaurusService.getDomainTerms('techniqueUsed', 		{other:true, otherType:'lstring', multiple:true}),
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true})			
 				});
