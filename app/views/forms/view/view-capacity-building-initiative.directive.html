@@ -11,9 +11,7 @@
 
 		<legend>General information</legend>
     <div ng-show="document.title">
-			<label>
-				<span>Title of the initiative</span>
-			</label>
+			<label>Title of the initiative</label>
 			<div compare-val>
 			<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
@@ -35,7 +33,7 @@
 		
 		<div ng-if="document.contacts">
 			<label>Contact person</label>
-			<div class="km-value" compare-val="contacts">
+			<div class="km-value" compare-val="Contact person">
 			<div ng-repeat="contact in document.contacts">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
@@ -52,7 +50,7 @@
 
 		<div ng-show="document.countryRegions">
 			<label>Geographical or political/economic group(s) and/or country(ies)</label>
-			<div class="km-value" compare-val>
+			<div class="km-value" compare-val="Geographical or political/economic">
                 <ul  class="list">
                     <li ng-repeat="val in document.countryRegions" ng-bind="val | term:locale"></li>
                 </ul>
@@ -61,7 +59,7 @@
 
 		<div ng-show="document.geographicScope.countries">
 			<label>Countries</label>
-			<div class="km-value" compare-val="geographicScope.countries">
+			<div class="km-value" compare-val="Countries">
 				<ul  class="list">
 					<li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
 				</ul>
@@ -105,23 +103,25 @@
 
 		<div ng-show="document.activityScope">
 			<label>Type of capacity development initiative</label>
-			<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
+			<div compare-val>
+				<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
+			</div>
 		</div>
 		<div ng-show="document.isProjectProgramme!=undefind">
 			<label>Is this part of a larger project or programme?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
 			</div>
 		</div>
 			<div ng-show="document.projectProgrammeName">
 				<label>Name of project or programme</label>
 				<div compare-val>
-				<km-value-ml value="document.projectProgrammeName" locales="locale"></km-value-ml>
+					<km-value-ml value="document.projectProgrammeName" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.broaderProjects">
 				<label>Clearing-house record about this project or programme</label>
-				<div class="km-value" compare-val>
+				<div class="km-value" compare-val="Clearing-house record">
 					<div ng-repeat="broaderProject in document.broaderProjects">
 					<div view-record-reference ng-model="broaderProject" locale="locale"></div>
 					</div>
@@ -131,7 +131,7 @@
 
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
 				<label>Implementing agency(ies) or organization(s)</label>
-				<div class="km-value" compare-val="implementingAgencies">
+				<div class="km-value" compare-val="Implementing agency(ies)">
 				<div ng-repeat="contact in document.implementingAgencies">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -140,7 +140,7 @@
 
 			<div ng-show="document.isExecutededByAgencies && document.executingAgencies">
 				<label>Executing agency(ies) or organization(s)</label>
-				<div class="km-value" compare-val="executingAgencies">
+				<div class="km-value" compare-val="Executing agency(ies)">
 				<div ng-repeat="contact in document.executingAgencies">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -149,7 +149,7 @@
 
 			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
 				<label>Collaborating partner(s)</label>
-				<div class="km-value" compare-val="collaboratingPartners">
+				<div class="km-value" compare-val="Collaborating partner(s)">
 				<div ng-repeat="contact in document.collaboratingPartners">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -175,7 +175,7 @@
 		</div>
 		<div ng-show="document.targetGroups">
 			<label>Main target group(s)/beneficiary(ies)</label>
-			<div class="km-value" compare-val="targetGroups">
+			<div class="km-value" compare-val="Main target group(s)">
 				<view-terms-hierarchy ng-model="document.targetGroups" locale="locale" term-domain="cbiAudience" on-terms-loaded="onTargetGroupsTerms(terms)"></view-terms-hierarchy>
 			</div>
 		</div>
@@ -186,14 +186,14 @@
 
 			<div ng-show="document.cbdSubjects">
 				<label>Related CBD subject areas</label>
-				<div class="km-value">
+				<div class="km-value" compare-val="Related CBD subject areas">
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects" on-terms-loaded="onCbdSubjectsTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 
 			<div ng-show="document.aichiTargets && isABS">
 					<label>Aichi target(s)</label>
-					<div class="km-value">
+					<div class="km-value" compare-val="Aichi target(s)">
 						<ul class="list">
 							<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
 						</ul>
@@ -205,7 +205,7 @@
 			<label>ABS thematic areas</label>
 
 			<label>Key areas and strategic measures for capacity-building and development</label>
-			<div class="km-value" compare-val="absKeyAreas">
+			<div class="km-value" compare-val="Key areas and strategic measures">
 				<ul class="list">
 					<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>
 				</ul>
@@ -214,7 +214,7 @@
 
 		<div ng-show="document.cpbThematicAreas">
 			<label>Thematic areas</label>
-			<div class="km-value" compare-val="cpbThematicAreas">
+			<div class="km-value" compare-val="Thematic areas">
 				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
 			</div>
 		</div>
@@ -225,7 +225,7 @@
 
 			<div ng-show="document.fundingSourceTypes">
 				<label>Type(s) of funding source(s)</label>
-				<div class="km-value" compare-val="fundingSourceTypes">
+				<div class="km-value" compare-val="Type(s) of funding source(s)">
 					<ul class="list">
 						<li ng-repeat="val in document.fundingSourceTypes" ng-bind="val | term:locale"></li>
 					</ul>
@@ -233,7 +233,7 @@
 			</div>
 			<div ng-show="document.coreFundingSources">
 				<label>Primary funding source(s)</label>
-				<div class="km-value" compare-val="coreFundingSources">
+				<div class="km-value" compare-val="Primary funding source(s)">
 				<div ng-repeat="contact in document.coreFundingSources">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -242,7 +242,7 @@
 
 			<div ng-show="document.coFinancingSources">
 				<label>Co-financing source(s)</label>
-				<div class="km-value" compare-val>
+				<div class="km-value" compare-val="Co-financing source(s)">
 				<div ng-repeat="contact in document.coFinancingSources">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -270,13 +270,13 @@
 
 				<div ng-show="document.resultsOutputs">
 					<label>Main outputs</label>
-					<div compare-val>
+					<div compare-val="Main outputs">
 					<km-link-list class="km-value" ng-model="document.resultsOutputs"></km-link-list>
 					</div>
 				</div>
 				<div ng-show="document.resultsReference">
 					<label>Virtual library record number</label>
-					<div class="km-value" compare-val>
+					<div class="km-value" compare-val="Virtual library record number">
 					  <div ng-repeat="contact in document.resultsReference">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
 					  </div>
@@ -297,14 +297,14 @@
 					<div ng-show="document.relevantInformation">
 						<label>Any other relevant information</label>
 						<div compare-val>
-						<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
-					</div>
+							<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+						</div>
 					</div>
 
 					<div ng-show="document.relevantDocuments">
 						<label>Other relevant website addresses and/or attached documents</label>
-						<div compare-val>
-						<km-link-list class="km-value" ng-model="document.relevantDocuments"></km-link-list>
+						<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+						<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 						</div>
 					</div>
 				</div>
