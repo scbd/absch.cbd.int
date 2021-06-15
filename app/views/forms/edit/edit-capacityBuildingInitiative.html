@@ -275,14 +275,14 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="km-control-group" required name="description" caption="Short description of the initiative, including its goals and objectives (max 150 words)">
-												<div km-rich-textbox required ng-model="document.description" rows="4" locales="document.header.languages"></div>
+												<div km-textbox-ml required ng-model="document.description" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group"  name="categories" caption="Category(ies) of capacity development activities">
-												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.absCategories()" binding-type="term[]" locales="document.header.languages"></div>
+											<div class="km-control-group" required  name="categories" caption="Category(ies) of capacity development activities">
+												<div km-term-check required show-description="true" name="categories" ng-model="document.categories" terms="options.absCategories()" binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>

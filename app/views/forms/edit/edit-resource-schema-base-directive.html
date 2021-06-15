@@ -125,8 +125,8 @@
 									<legend>Information on the content of the resource</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="summary" caption="Summary, abstract or table of contents (max 300 words)">
-												<div km-rich-textbox ng-model="document.summary" rows="4" locales="document.header.languages"></div>
+											<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents (max 300 words)">
+												<div km-textbox-ml required ng-model="document.summary" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -164,7 +164,7 @@
 								<div class="well no-shadow bg-white">
 									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
 									<div class="row" ng-if="isABS">
-										<div class="col-md-6">
+										<div class="col-md-12">
 											<div class="km-control-group" name="aichiTargets" caption="Aichi Targets">
 												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
 												 binding-type="term[]"></div>

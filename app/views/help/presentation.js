@@ -129,7 +129,7 @@ export { default as template } from './presentation.html';
         }
 
         function add_navigation(text, target) {
-            $("#response").append("<button class=navigation data-target=" + target + ">" + text + "</button>");
+            $("#response").append("<button type=\"button\" class=navigation data-target=" + target + ">" + text + "</button>");
 
         }
 

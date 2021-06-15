@@ -16,7 +16,7 @@
             <td colspan="4" style="padding: 0px;">
                 <table class="table table-bordered" style="margin-bottom: 0px;">
                     <tr ng-repeat-start="(fieldKey, field) in record.fields">
-                        <td width="15%"><button class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">Show records</button></td>
+                        <td width="15%"><button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">Show records</button></td>
                         <td width="60%"> {{record.schema}}</td>
                         <td width="15%" ng-bind="fieldKey"></td>
                         <td width="10%" ng-bind="field.count"></td>             

@@ -228,8 +228,8 @@
     <script type="text/ng-template" trados-translation="true" id="documentSelectionRecordDisplay">
         <div class="col-md-12">
             <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
-                <button class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
-                <button class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
+                <button type="button" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
+                <button type="button" class="btn btn-default" data-placement="bottom" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
            <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
@@ -305,8 +305,8 @@
 
         <div class="col-md-12">
             <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
-                <button class="btn btn-default" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
-                <button class="btn btn-default" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
+                <button type="button" class="btn btn-default" data-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
             <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
