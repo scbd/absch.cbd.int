@@ -136,7 +136,7 @@
 					<div  km-select required name="regions" ng-model="regions" items="options.regions()"
 						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true" icon="fa-object-group"></div>
 					
-					<button class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
+					<button type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
 						<i class="fa fa-download" ></i> 
 						<span class="hidden-sm hidden-xs">Export</span>
 				</button>

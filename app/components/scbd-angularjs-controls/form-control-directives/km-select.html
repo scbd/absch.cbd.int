@@ -22,7 +22,7 @@
 
 	<span>
 		<div class="btn-group" id="select-dropdown">
-			<button class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">
+			<button type="button" class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">
 				{{getTitle(displayCount, true)}}
 				<span class="caret"></span>
 			</button>
@@ -41,7 +41,7 @@
 						</span>
 					</div>
 					<div>
-						<button class="btn btn-xs btn-default" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
+						<button type="button" class="btn btn-xs btn-default" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
 						<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
 					</div>
 				</li>

@@ -42,7 +42,7 @@
                 <div id="divTable"  style="font-size:11px; ">
                     <div>                         
                         <li ng-repeat="field in sortByFields" class="btn-group" style="margin:5px">
-                            <button ng-click="selectField(field)" class="btn btn-sm" ng-class="{'btn-primary':field.selected}">
+                            <button type="button" ng-click="selectField(field)" class="btn btn-sm" ng-class="{'btn-primary':field.selected}">
                                 <i class="fa" ng-class="{'fa-check-square-o':field.selected, 'fa-square-o':!field.selected }"></i> 
                                 <span ng-bind="field.title"></span>
                             </button>
@@ -98,7 +98,7 @@
                 <div id="divTable"  style="max-height:300px;overflow:scroll; font-size:11px; ">
                     <div>                         
                         <li ng-repeat="group in groupByFields" class="btn-group" style="margin:5px">
-                            <button ng-click="selectField(group)" class="btn btn-sm" ng-class="{'btn-primary':group.selected}">
+                            <button type="button" ng-click="selectField(group)" class="btn btn-sm" ng-class="{'btn-primary':group.selected}">
                                 <i class="fa" ng-class="{'fa-check-square-o':group.selected, 'fa-square-o':!group.selected }"></i> 
                                 <span ng-include="'groupByFields'" onload="field=group.field"></span>
                             </button>                            
