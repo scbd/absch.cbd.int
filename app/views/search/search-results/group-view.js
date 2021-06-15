@@ -207,7 +207,7 @@ import 'views/search/search-results/result-default';
                     else 
                         recQuery += ' AND (' + groupFieldQuery(group) + ')'
                     var query = {
-                        fieldQuery     : _.uniq(queryOptions.tagQueries),
+                        fieldQuery     : _.uniq($scope.searchResult.groupOptions.tagQueries),
                         query          : recQuery,
                         sort           : $scope.searchResult.groupSort,
                         rowsPerPage    : number||5000,

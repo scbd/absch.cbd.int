@@ -1911,9 +1911,9 @@ legend+ .help-info {
 .animate-if.ng-enter.ng-enter-active {
     opacity:1;
 }
-
+.webui-popover.webui-popover-popover-style1.pop.in,
 .datepicker.datepicker-dropdown{
-    z-index:1000!important;
+    z-index:10010!important;
 }
 sup {
     font-size: 8px;;

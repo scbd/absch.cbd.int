@@ -87,7 +87,7 @@
 									</div>
 
 									<div class="row">
-										<div class="col-sm-12">
+										<div class="col-sm-12 col-md-3">
 											<div class="km-control-group" required name="date" caption="Date of the decision"
 													 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Country's Decision">
 												<div km-date required placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
@@ -125,7 +125,7 @@
 											<div block-region activate="decisions.otherDecisions.identifier || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">
 												<div class="km-control-group" name="commonDecisions" required caption="Common decisions">
 														<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
-														terms="options.commonDecisions()"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
+														terms="options.commonDecisions()" show-description="true"  binding-type="term[]" ng-change="onCommonDecisionChanged()"  ></div>
 												</div>
 											</div>
 										</div>
@@ -133,7 +133,7 @@
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group " name="otherDecisions" required caption="Other decisions">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
-															terms="options.otherDecisions()" binding-type="term" ng-change="onOtherDecisionChanged(decisions)">
+															terms="options.otherDecisions()" show-description="true" binding-type="term" ng-change="onOtherDecisionChanged(decisions)">
 													</div>
 												</div>
 											</div>
@@ -142,7 +142,7 @@
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="Communications, notifications and declarations">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
-															terms="options.communicationDecisions()" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
+															terms="options.communicationDecisions()" show-description="true" binding-type="term" show-other="true" ng-change="onOtherDecisionChanged(decisions)">
 													</div>
 												</div>
 											</div>
@@ -309,7 +309,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="decisionResult" required caption="Result of the decision">
 													<div km-term-radio required ng-model="document.decisionResult" locales="document.header.languages"
-														terms="options.decisionResult()" binding-type="term" ng-change="onResultDecisionSelected(document.decisionResult.identifier);" >
+														terms="options.decisionResult()" binding-type="term" show-description="true"  ng-change="onResultDecisionSelected(document.decisionResult.identifier);" >
 													</div>
 											</div>
 										</div>
@@ -496,7 +496,7 @@
 											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs">
 
 								<div class="well no-shadow bg-white">
-									<legend>LMO identification & risk assessment</legend>
+									<legend>LMO identification & decision</legend>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification"
