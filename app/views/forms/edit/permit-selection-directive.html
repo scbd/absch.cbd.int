@@ -35,7 +35,7 @@
 
 
 
-    <button class="btn btn-default" ng-click="openDialog();" ng-disabled="disabled" >
+    <button type="button" class="btn btn-default" ng-click="openDialog();" ng-disabled="disabled" >
 	  {{caption||'Add link to existing IRCCs »'}}
 	</button>
 
@@ -55,7 +55,7 @@
                             <span  class="dateBox" search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
 
                             <div class="btn-group" >
-                                <button style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+                                <button type="button" style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
                                     <span>Amendments</span>
                                     <span ng-show="amendmentIntent==0"  style="color:#428BCA">: Amended </span>
                                     <span ng-show="amendmentIntent==1"  style="color:#428BCA">: Revoked </span>

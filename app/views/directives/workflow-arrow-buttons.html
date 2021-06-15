@@ -305,16 +305,16 @@
                 <button type="button" class="btn btn-sm btn-default " ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
                     <span class="glyphicon glyphicon-backward"></span>
                 </button>
-                        <button  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
+                        <button type="button"  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
                             <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Intro</span>
                         </button>
-                        <button   class="btn btn-sm btn-default "ng-class="{'btnSelected': workflowScope.tab=='edit'}">
+                        <button type="button"   class="btn btn-sm btn-default "ng-class="{'btnSelected': workflowScope.tab=='edit'}">
                             <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Form</span>
                         </button>
-                        <button  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='review'}">
+                        <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='review'}">
                             <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</span>
                         </button>
-                        <button  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
+                        <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
                             <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
                         </button>
                 <button type="button" class="btn btn-sm btn-default  " ng-click="goNextTab(workflowScope.tab)"  ng-disabled="disableNextBtn">

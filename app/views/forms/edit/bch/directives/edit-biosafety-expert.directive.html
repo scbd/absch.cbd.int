@@ -484,9 +484,9 @@
 															<div ng-repeat="lang in motherTongue.otherLanguages" style="max-width: 200px;padding-left: 15px;padding-bottom: 10px;">
 																<div afc-autocomplete name="otherMotherTongue{{$index}}" ng-model="motherTongue.otherLanguages[$index]" source="options.otherLanguages" style="display: inline-block;"
 																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a language..." ng-change="onLangChange()"></div>
-																<button class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">Remove</button>
+																<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">Remove</button>
 															</div>
-															<button class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">Add other language</button>
+															<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">Add other language</button>
 														</div>
 													</div>
 												</div>
@@ -520,13 +520,13 @@
 																					Fair
 																				</label>
 																			</div>
-																			<button class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">Clear</button>
-																			<button class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >Remove</button>
+																			<button type="button" class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">Clear</button>
+																			<button type="button" class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >Remove</button>
 																		</td>
 																	</tr>
 																	<tr>
 																		<td colspan="2">
-																			<button class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">Add other language</button>
+																			<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">Add other language</button>
 																		</td>
 																	</tr>
 																</table>

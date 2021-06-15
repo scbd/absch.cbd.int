@@ -76,8 +76,8 @@
 			<legend>Access to the resource(s)</legend>
 			<div ng-show="document.resourceLinks">
 				<label>Link to the resource(s)</label>
-				<div compare-val>
-				<km-link-list class="km-value"  ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
+				<div class="km-value" compare-val="Link to the resource(s)">
+				<km-link-list  ng-model="document.resourceLinks" style="margin-top: 5px;"></km-link-list>
 				</div>
 			</div>
 			<div ng-show="document.covers">
@@ -98,7 +98,9 @@
 			<legend>Information on the content of the resource</legend>
 			<div ng-show="document.summary">
 				<label>Summary, abstract or table of contents</label>
-				<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
+				<div compare-val>
+					<km-value-ml html value="document.summary" locales="locale"></km-value-ml>
+				</div>
 			</div>
 			<div ng-show="document.countryRegions">
 				<label>Country(ies), regional or economic group(s) related to the resource</label>
@@ -260,8 +262,8 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div compare-val>
-				<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+					<km-link-list  ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 				</div>
 			</div>
 		</section>

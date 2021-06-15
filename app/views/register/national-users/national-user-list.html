@@ -94,7 +94,7 @@
                             <th>Organization/Division</th>
                             <th style="max-width:200px">Roles</th>
                             <th class="text-right">
-                                <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
+                                <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
                             </th>
                         </tr>
                         <tr ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
@@ -126,8 +126,8 @@
                             </td>
                             <td class="text-right">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button class="btn btn-default" ng-click="edit(u)" ng-disabled="!canEdit(u)"><i class="fa fa-list  fa-fw"></i></button>
-                                    <button class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!canDrop(u)"><i class="fa fa-trash fa-fw"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="edit(u)" ng-disabled="!canEdit(u)"><i class="fa fa-list  fa-fw"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!canDrop(u)"><i class="fa fa-trash fa-fw"></i></button>
                                 </div>
                             </td>
 
@@ -144,7 +144,7 @@
                                 <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
                             </td>
                             <td class="text-right">
-                                <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
+                                <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
                             </td>
                         </tr>
                     </table>

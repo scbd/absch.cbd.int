@@ -57,7 +57,7 @@
                         </div>
                         <!--<a rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="showReference(schema);">
                         <span class="glyphicon glyphicon-random"></span> Show Reference</a>-->
-                        <button class="btn btn-sm btn-default margin-left-2" ng-click="refreshList(schema);" ng-if="showAddButton()">
+                        <button type="button" class="btn btn-sm btn-default margin-left-2" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="fa fa-refresh"></i> Refresh</button>
                         <a rel="noopener" translation-url  ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new" class="btn btn-sm btn-primary bold" 
                             style="color:#fff;" id="new_button" ng-if="showAddButton()">

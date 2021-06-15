@@ -299,7 +299,7 @@ import 'views/forms/directives/compare-val';
 							$scope.recordRevisions = [];
 							var uniqueId = $filter("uniqueID")($scope.internalDocument);
 							for (let i = 1; i < $scope.internalDocumentInfo.latestRevision; i++) {
-								$scope.recordRevisions.push({ uniqueIdentifier : uniqueId.replace(/\-\d$/, '-' + i), 
+								$scope.recordRevisions.push({ uniqueIdentifier : uniqueId.replace(/\-\d+$/, '-' + i),
 															 revision:i})
 								
 							}
