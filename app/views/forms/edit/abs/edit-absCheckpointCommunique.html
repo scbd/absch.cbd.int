@@ -62,7 +62,7 @@
                                                             ABS-CH records, the record of the checkpoint/s that collected or
                                                             received the information.</div>
             
-                                                       <div document-selector on-build-query="onBuildQuery(searchText)"
+                                                       <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildQuery(searchText)"
                                                                   ng-model="document.absCheckpoints" question="absCheckpoints" filter="true"></div>
                                                     </div>
                                                 </div>
@@ -306,7 +306,7 @@
                                                         is the same person or entity providing evidence of PIC and MAT at the
                                                         checkpoint. In case of discrepancy, providers can verify information and
                                                         conditions related to third party transfer.</div>
-                                                    <div document-selector on-build-query="onContactQuery(searchText)"
+                                                    <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)"
                                                                ng-model="document.personsAtCheckpoint" question="personsAtCheckpoint"
                                                                filter="true" allow-new="true" allow-new-schema="contact"></div>
                                                 </div>

@@ -36,8 +36,6 @@ import 'services/main';
     } 
 
      $scope.onNotificationQuery = function(searchText){
-      if (!$scope.document.organizations && !$scope.document.government)
-        return;
        var queryOptions = {
         realm       : realm.value,
          schemas	  : ['notification'],
