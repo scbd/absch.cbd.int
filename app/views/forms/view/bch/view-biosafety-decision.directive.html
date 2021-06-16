@@ -13,7 +13,7 @@
 			<legend>Amendment</legend>
 			<div ng-if="document.isAmendment!=undefined">
 				<label>Is this an amendment to a decision or communication already published on the BCH?</label>
-				<div  class="km-value" compare-val>
+				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 		</div>
 		<div ng-if="document.takenPriorEntryIntoForce != undefined">
 			<label>Is the decision taken prior to entry into force of the Protocol?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
 			</div>
 		</div>
@@ -122,7 +122,7 @@
 
 		<div ng-if="document.addressesTransboundaryMovement!=undefined">
 			<label>Was the decision triggered by a request for a transboundary movement of LMOs into your country ?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.addressesTransboundaryMovement" locales="locale"></km-value-bool>
 			</div>
 		</div>
@@ -178,7 +178,7 @@
 
 		<div ng-if="document.appliesToTransboundaryMovement!=undefined">
 			<label>Does the decision apply to transboundary movements of LMO(s) into the country?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.appliesToTransboundaryMovement" locales="locale"></km-value-bool>
 			</div>
 		</div>
@@ -195,19 +195,19 @@
 
 		<div ng-if="document.involvesFieldTrial!=undefined">
 			<label>Does the decision involve field trials?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.involvesFieldTrial" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-if="document.involvesCommercialRelease!=undefined">
 			<label>Does the decision involve commercial release?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.involvesCommercialRelease" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-if="document.appliesToSubsequentIntroductions!=undefined">
 			<label>Will the decision apply to subsequent introductions of the same LMO(s) into the environment?</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.appliesToSubsequentIntroductions" locales="locale"></km-value-bool>
 			</div>
 		</div>
@@ -228,7 +228,7 @@
 			</div>
 			<div ng-if="document.takenInAccordanceWithA116!=undefined">
 				<label>Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?</label>
-				<div class="km-value">
+				<div comapre-val>
 					<km-value-bool value="document.takenInAccordanceWithA116" locales="locale"></km-value-bool>
 				</div>
 			</div>
@@ -316,7 +316,7 @@
 			</div>
 			<div ng-if="document.appliesToSubsequentImports!=undefined">
 				<label>Does the decision apply to subsequent similar imports of LMOs?</label>
-				<div class="km-value" compare-val>
+				<div compare-val>
 					<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
 				</div>
 			</div>
@@ -402,30 +402,30 @@
 		<legend>Information sharing with other databases</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>Is this decision related to an LMO for commercial use ?</label>
-			<div  class="km-value" compare-val>
+			<div compare-val>
 				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 			</div>
 			<div ng-if="document.forwardToOECD!=undefined">
 				<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database ?</label>
-				<div  class="km-value" compare-val>
+				<div  compare-val>
 					<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.isForFoodSafety!=undefined">
 				<label>Is this decision related to food safety ?</label>
-				<div  class="km-value" compare-val>
+				<div  compare-val>
 					<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.codexConducted!=undefined">
 				<label>Was it conducted in accordance with the Codex Alimentarius <em>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants ?</em></label>
-				<div  class="km-value" compare-val>
+				<div  compare-val>
 					<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.forwardToFAO!=undefined">
 				<label>Should this decision be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform ?</label>
-				<div  class="km-value" compare-val>
+				<div compare-val>
 					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 				</div>
 			</div>
@@ -477,7 +477,7 @@
 	<div ng-if="document.expires!=undefined">
 		<legend>Timeframe for confirmation or updating of information</legend>
 		<label>If the answer to this question is "Yes", after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as "Not Confirmed".</label>
-		<div  class="km-value" compare-val>
+		<div compare-val>
 			<km-value-bool value="document.expires" locales="locale"></km-value-bool>
 		</div>
 	</div>

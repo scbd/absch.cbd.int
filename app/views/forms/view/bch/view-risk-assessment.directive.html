@@ -156,30 +156,30 @@
 			<legend>Information sharing with other databases</legend>
 			<div ng-if="document.isForCommercialUse!=undefined">
 				<label>Is this risk assessment related to an LMO for commercial use?</label>
-				<div  class="km-value">
+				<div compare-val>
 					<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 				</div>
 				<div ng-if="document.forwardToOECD!=undefined">
 					<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?</label>
-					<div  class="km-value">
+					<div compare-val>
 						<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.isForFoodSafety!=undefined">
 					<label>Is this risk assessment related to food safety?</label>
-					<div  class="km-value">
+					<div compare-val>
 						<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.codexConduted!=undefined">
 					<label>Was it conducted in accordance with the Codex Alimentarius Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</label>
-					<div  class="km-value">
+					<div  compare-val>
 						<km-value-bool value="document.codexConduted" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.forwardToFAO!=undefined">
 					<label>Should this risk assessment be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform?</label>
-					<div  class="km-value">
+					<div  compare-val>
 						<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 					</div>
 				</div>
