@@ -173,14 +173,26 @@
 															<div class="km-control-group bold" style="margin-top:30px;" > OR </div>
 														</div>
 														<div class="col-md-5">
+															
 															<div class="km-control-group" name="duration" caption="Duration" ng-show="!document.status || isProposedOrApproved()">
-																<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
+																<div class="row">
+																	<div class="col-md-2">
+																		<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
 																			minlength="1" placeholder="eg. 24" ng-change="clearDates()" class="form-control"
 																			style="display:inline-block;width:100px"/>
-																<select name="durationText" ng-model="document.durationText"  class="form-control"
-																		style="display:inline-block;width:100px" placeholder="eg. Months"
-																	ng-options="obj.value as obj.text for obj in timing">
-																</select>
+																	</div>
+																	<div class="col-md-2">
+																		<div class="km-control-group" name="durationText" caption="">
+																			<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																				<label name="durationText" for="durationText">Duration period in day(s)/month(s)/year(s)</label>
+																			</div>
+																			<select name="durationText" ng-model="document.durationText"  class="form-control"
+																				style="display:inline-block;width:100px" placeholder="eg. Months"
+																				ng-options="obj.value as obj.text for obj in timing">
+																			</select>
+																		</div>
+																	</div>
+																</div>
 															</div>
 														</div>
 													</div>
@@ -384,7 +396,7 @@
 
 
 									<div class="row">
-										<div class="col-md-3">
+										<div class="col-md-12">
 											<div class="km-control-group" name="totalBudget" caption="Total budget (amount, in US dollars)">
 												<div class="help-info">This may include in-kind contributions expressed in monetary terms. Please do not use spaces, periods or commas when you enter the amount.</div>
 												<div class="input-group">
