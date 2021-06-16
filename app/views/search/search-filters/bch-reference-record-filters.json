@@ -8,7 +8,7 @@
 		{
 		"referenceField":"policyBasisForCompetencyRef",
 		"schema":"measure",
-		"title": "Contact person"
+		"title": "Link to any relevant legal, administrative or policy measures"
 		}
 	],
 
@@ -116,12 +116,7 @@
 		{
 		"referenceField":"organization",
 		"schema":"organization",
-		"title": "Laboratory name and coordinates"
-		},
-		{
-		"referenceField":"organization",
-		"schema":"organization",
-		"title": "Related Organization"
+		"title": "Laboratory name and coordinates/Related Organization"
 		},
 		{
 		"referenceField":"detectableLmos",

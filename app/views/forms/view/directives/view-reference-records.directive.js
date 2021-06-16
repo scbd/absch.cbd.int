@@ -52,9 +52,9 @@ app.directive("viewReferencedRecords", [function () {
 													fields : {}
 												};
 
-											 getTitle(info.field)
+											 getTitle(info.field,record.schemaCode)
 											.then(function(response) {
-												if (response == undefined) return;
+												if (response == undefined) { response = info.field;}
 													$scope.referenceRecords[record.schemaCode].fields[response] = $scope.referenceRecords[record.schemaCode].fields[response] || {count : 0, docs : [], schema : record.schema}
 													$scope.referenceRecords[record.schemaCode].fields[response].count += 1;
 													$scope.referenceRecords[record.schemaCode].fields[response].docs.push( record );
@@ -85,14 +85,16 @@ app.directive("viewReferencedRecords", [function () {
 				return deferred.promise;
 			}
 
-			function getTitle(referenceField){
+			function getTitle(referenceField, schema){
 				return loadJsonFile('views/search/search-filters/bch-reference-record-filters.json')
 				.then(function(keywords){
 					let terms = {};
-					_.forEach(keywords, function(item){
-							terms =_.find(item, {referenceField: referenceField});
+					_.forEach(keywords[schema], function(item){
+						if(item.referenceField == referenceField) {
+							terms = item.title;
+						}
 					});
-					return terms.title;
+					return terms;
 				});
 			}
 
