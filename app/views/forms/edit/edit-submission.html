@@ -75,7 +75,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="notifications" caption="Related notification(s)">
-                                                <div document-selector identifier-without-revision="true"
+                                                <div document-selector ng-disabled="!document.organizations && !document.government.identifier"
+                                                    identifier-without-revision="true"
                                                     question="notifications" type="checkbox"
                                                     display-fields="{{::notificationQuery.fl}}"
                                                     free-text-query-field="symbol_s" lookup-field="symbol_s"

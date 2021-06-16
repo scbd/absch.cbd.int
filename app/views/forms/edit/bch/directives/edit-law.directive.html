@@ -56,7 +56,7 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
 
-													<div document-selector ng-model="document.amendedRecords" question="amendedRecords" caption="Law, Regulation or Guideline"
+													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.amendedRecords" question="amendedRecords" caption="Law, Regulation or Guideline"
 													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true"
 													allow-new-schema="biosafetyLaw"></div>
 											</div>
@@ -227,7 +227,7 @@
 													Please indicate if there is any relationship between this document/measure and other laws, regulations, guidelines or agreements published in the BCH, e.g. a regulation to implement an existing law.
 												</div>										
 													
-													<div document-selector ng-model="document.relatedRecords" question="relatedRecords" caption="Law, Regulation or Guideline"
+													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.relatedRecords" question="relatedRecords" caption="Law, Regulation or Guideline"
 													on-build-query="onBuildLawQuery(searchText)"  allow-new="true"
 																allow-new-schema="biosafetyLaw">
 													</div>
@@ -252,7 +252,7 @@
 													Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress.
 												</div>
 												 	
-													<div document-selector ng-model="document.authorities" question="authorities" 
+													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities" 
 																on-build-query="onBuildAuthoritiesQuery(searchText)" allow-new="true"
 																allow-new-schema="authority,supplementaryAuthority"></div>
 											</div>

@@ -103,7 +103,7 @@
                                                         <div class="help-info">Sometimes a permit can be related to other previously issued permits, for instance to a permit for accessing a soil sample. Depending on the MAT, it is possible that some countries decide to issue specific permits
                                                             for subsequently identified genetic resources from the taken soil sample. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. IRCCs linked through this mechanism
                                                             will be displayed together and thus facilitate tracking of the IRCCs. </div>
-                                                            <div document-selector on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
+                                                            <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -115,7 +115,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="absCNA" required caption="Competent national authority (CNA) responsible for issuing this permit or its equivalent">
-                                                    <div document-selector on-build-query="onBuildQuery(searchText, 'authority')" ng-model="document.absCNA" question="absCNA" type="radio"></div>
+                                                    <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildQuery(searchText, 'authority')" ng-model="document.absCNA" question="absCNA" type="radio"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -178,7 +178,7 @@
                                                         <div class="km-control-group " name="providers" required caption="The provider" style="margin-top:0;">
                                                             <span class="help-info">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
                                                             <div ng-show="!document.providersConfidential">
-                                                                <div document-selector on-build-query="onContactQuery(searchText)" ng-model="document.providers" question="providers"
+                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.providers" question="providers"
                                                                            allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
                                                         </div>
@@ -231,7 +231,7 @@
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
                                                                 <div class="help-info">Please provide the name and contact details of the person or entity to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the
                                                                     courtesy copy of the IRCC or the CPC. </div>
-                                                               <div document-selector on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
+                                                               <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
                                                         </div>
