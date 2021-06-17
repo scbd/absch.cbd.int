@@ -265,7 +265,7 @@ import 'services/main';
 			//if(schema.toLowerCase()=="news"		 			  ||	schema.toLowerCase()=="nfp"	) return "News";
 			if(schema.toLowerCase()=="modelcontractualclause" 	  ||	schema.toLowerCase()=="a19a20"	) return "folder";
 			if(schema.toLowerCase()=="communityprotocol" 		  ||	schema.toLowerCase()=="cpp"	) return "folder";
-			if(schema.toLowerCase()=="capacitybuildinginitiative" ||	schema.toLowerCase()=="cbi"	) return "insert_drive_file";
+			if(schema.toLowerCase()=="capacitybuildinginitiative" ||	schema.toLowerCase()=="cdi"	) return "insert_drive_file";
 			if(schema.toLowerCase()=="capacitybuildingresource"   ||	schema.toLowerCase()=="cbr"	) return "insert_drive_file";
 			if(schema.toLowerCase()=="endorsement" 				||	schema.toLowerCase()=="edr"	) return "folder";
 

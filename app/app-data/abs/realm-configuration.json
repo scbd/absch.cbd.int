@@ -228,15 +228,15 @@
           "notify" : [ 
               "AbsPACapacityBuildingInitiative-dev"
           ],
-          "title" : {
-              "en" : "Capacity-development Initiative"
+          "title": {
+            "en": "Capacity development Initiative"
           },
           "description" : {
               "en" : "Information on capacity-development Initiatives at national, regional and international levels, including activities and outcomes."
           },
-          "shortCode" : "CDI",
-          "titlePlural" : {
-              "en" : "Capacity-development Initiatives"
+          "shortCode": "CDI",
+          "titlePlural": {
+            "en": "Capacity development Initiatives"
           }
       },
       "capacityBuildingResource" : {

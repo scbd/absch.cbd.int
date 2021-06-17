@@ -374,8 +374,21 @@
       },
       "capacityBuildingInitiative" : {
           "type" : "reference",
-          "title" : {
-              "en" : "Capacity Development Initiative"
+            "title" : {
+                "en" : "Capacity development Initiative"
+            },
+            "description" : {
+                "en" : "Information on capacity-building initiatives at national, regional and international levels, including activities and outcomes."
+            },
+            "shortCode" : "CDI",
+            "titlePlural" : {
+                "en" : "Capacity development Initiatives"
+            }
+        },
+        "biosafetyNews": {
+          "type": "reference",
+          "title": {
+            "en": "BCH News"
           },
           "description" : {
               "en" : "Information on capacity development initiatives at national, regional and international levels, including activities and outcomes."
