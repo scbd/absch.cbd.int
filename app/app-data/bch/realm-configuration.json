@@ -368,14 +368,14 @@
         "capacityBuildingInitiative": {
           "type" : "reference",
             "title" : {
-                "en" : "Capacity-Building Initiative"
+                "en" : "Capacity development Initiative"
             },
             "description" : {
                 "en" : "Information on capacity-building initiatives at national, regional and international levels, including activities and outcomes."
             },
-            "shortCode" : "CBI",
+            "shortCode" : "CDI",
             "titlePlural" : {
-                "en" : "Capacity-Building Initiatives"
+                "en" : "Capacity development Initiatives"
             }
         },
         "biosafetyNews": {

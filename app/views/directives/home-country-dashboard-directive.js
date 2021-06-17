@@ -41,7 +41,7 @@ import 'views/directives/block-region-directive';
                                  a19a20 : helpService.getInfo('a19a20'),
                                  cpp : helpService.getInfo('cpp'),
                                  cbr : helpService.getInfo('cbr'),
-                                 cbi : helpService.getInfo('cbi'),
+                                 cdi : helpService.getInfo('cdi'),
                                  vlr : helpService.getInfo('vlr'),
                             };
                         }

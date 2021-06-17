@@ -89,7 +89,7 @@ import 'ngStorage'; ;
                      
                      case "vlr": return "<i class='fa fa-info-circle color-litegrey'></i> The virtual library in the ABS Clearing-House hosts a number of ABS relevant resources submitted by any registered user of the ABS Clearing-House. This includes, among others, general literature on ABS, awareness-raising materials, case studies, videos, capacity-building resources, etc.";
                     
-                     case "cbi": return "<i class='fa fa-info-circle color-litegrey'></i> Information on Capacity-building Initiatives at national, regional and international levels, are shared to promote synergy and coordination on capacity-building and development for access and benefit-sharing.";
+                     case "cdi": return "<i class='fa fa-info-circle color-litegrey'></i> Information on Capacity-building Initiatives at national, regional and international levels, are shared to promote synergy and coordination on capacity-building and development for access and benefit-sharing.";
                         
                          
                     case "scbdRecords": return "<i class='fa fa-info-circle color-litegrey'></i> Information published by the SCBD. These include meetings, news stories, notifications and statements.";
