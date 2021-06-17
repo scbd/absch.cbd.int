@@ -77,7 +77,12 @@ app.directive("viewReferencedRecords", [function () {
 			}
 
 			function getTitle(schema, referenceField){
-				return commonjs.loadJsonFile('views/search/search-filters/bch-reference-record-filters.json')
+				var isABS = realm.is('ABS');
+				var file = 'views/search/search-filters/bch-reference-record-filters.json';
+				if(isABS)
+					file = 'views/search/search-filters/abs-reference-record-filters.json';
+
+				return commonjs.loadJsonFile(file)
 					.then(function(keywords){
 						return keywords[schema+"."+referenceField];
 				});
@@ -85,6 +90,10 @@ app.directive("viewReferencedRecords", [function () {
 
 			function removeRevisonNumber(identifier){
 				return identifier.replace(/@[0-9]+$/, '');
+			}
+
+			$scope.toggleTitle = function(event){
+				event.target.classList.toggle("text-truncate");
 			}
 
 		}] //controller
