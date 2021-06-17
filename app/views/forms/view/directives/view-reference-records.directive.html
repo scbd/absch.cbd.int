@@ -1,4 +1,15 @@
 ﻿<div id="reference-records-table" ng-show="referenceRecords">
+    <style>
+        .text-truncate {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 48px;
+            cursor: pointer;
+        }
+    </style>
     <legend>
         Reference records
         <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
