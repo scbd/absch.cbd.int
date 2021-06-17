@@ -1,7 +1,7 @@
 <div>
-    <!-- <exportDetails ng-vue="vueOptions" ></exportDetails> -->
-    <export-details ng-vue="vueOptions" ></export-details>
+    <div  ng-if="vueOptions">
+        <export-details ng-vue="vueOptions"></export-details>
+    </div>
    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
    <edit-authority></edit-authority>
-
 </div>
