@@ -148,18 +148,59 @@
 			"relatedField":"cpbSubjectAreas_REL_ss"
 		}
 	],
-	"capacityBuildingActivities": [
+	"capacityBuildingInitiative": [
 		{
 			"type": "freeText",
 			"title": "Free Text",
 			"field": "text_EN_txt"
-		}
-	],
-	"capacityBuildingNeeds": [
+		},
 		{
-			"type": "freeText",
-			"title": "Free Text",
-			"field": "text_EN_txt"
+			"type": "thesaurus",
+			"term": "jurisdictions",
+			"title": "Geographic scope",
+			"field": "scope_s",
+			"otherTerm":false
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbiStatus",
+			"title": "Status",
+			"field": "status_s"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbiCats",
+			"title": "Category(ies) of capacity development activities",
+			"field": "categories_ss",
+			"relatedField":"categories_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbiAudience",
+			"title": "Main target group(s)/beneficiary(ies)",
+			"field": "targetGroups_ss",
+			"relatedField":"targetGroups_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cpbThematicAreas",
+			"title": "Biosafety Thematic Areas",
+			"field": "bchSubjects_ss",
+			"relatedField":"bchSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbdSubjects",
+			"title": "CBD Subject Areas",
+			"field": "cbdSubjects_ss",
+			"relatedField":"cbdSubjects_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cbiFundingsrc",
+			"title": "Type(s) of funding source(s)",
+			"field": "fundingSourceTypes_ss",
+			"relatedField":"fundingSourceTypes_REL_ss"
 		}
 	],
 	"cpbNationalReportInterim": [
