@@ -16,7 +16,7 @@ app.directive("viewReferencedRecords", [function () {
 			target: "@linkTarget",
 			onDataFetch: "&?"
 		},
-		controller: ["$scope", "solr", '$q', 'searchService', 'realm','$filter', '$routeParams', function ($scope, solr, $q, searchService, realm, $filter, $routeParams) {
+		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', function ($scope, solr, $q, searchService, realm, commonjs) {
 
 			// //==================================
 			// //
@@ -52,7 +52,7 @@ app.directive("viewReferencedRecords", [function () {
 													fields : {}
 												};
 
-											 getTitle(info.field,record.schemaCode)
+											 getTitle(record.schemaCode, info.field)
 											.then(function(response) {
 												if (response == undefined) { response = info.field;}
 													$scope.referenceRecords[record.schemaCode].fields[response] = $scope.referenceRecords[record.schemaCode].fields[response] || {count : 0, docs : [], schema : record.schema}
@@ -76,25 +76,10 @@ app.directive("viewReferencedRecords", [function () {
 				return encodeURIComponent(query);
 			}
 
-			function loadJsonFile(filePath){
-				var deferred = $q.defer();
-				require([filePath], function(res){
-					deferred.resolve(res);
-				});
-
-				return deferred.promise;
-			}
-
-			function getTitle(referenceField, schema){
-				return loadJsonFile('views/search/search-filters/bch-reference-record-filters.json')
-				.then(function(keywords){
-					let terms = {};
-					_.forEach(keywords[schema], function(item){
-						if(item.referenceField == referenceField) {
-							terms = item.title;
-						}
-					});
-					return terms;
+			function getTitle(schema, referenceField){
+				return commonjs.loadJsonFile('views/search/search-filters/bch-reference-record-filters.json')
+					.then(function(keywords){
+						return keywords[schema+"."+referenceField];
 				});
 			}
 
