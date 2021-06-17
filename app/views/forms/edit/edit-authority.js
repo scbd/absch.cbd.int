@@ -1,7 +1,9 @@
 import app from 'app';
 import 'views/forms/edit/directives/edit-authority.directive';
 import 'views/forms/edit/edit';
-// ,'components/test'// , 'angular-vue', testVue
+import  'angular-vue';
+import exportDetails from "components/embed/export-details.vue";
+
     export { default as template } from './edit-authority.html';
 
   export default ["$scope", "$controller", function($scope, $controller) {
@@ -10,9 +12,9 @@ import 'views/forms/edit/edit';
             $scope: $scope
         });
 
-        // $scope.vueOptions = {
-        //     components: { testvue: testVue }
-        //   };
+        $scope.vueOptions = {
+            components: { exportDetails: exportDetails }
+        };
 
     }];
 
