@@ -2,7 +2,10 @@ import app from 'app';
 import 'views/forms/edit/directives/edit-authority.directive';
 import 'views/forms/edit/edit';
 import  'angular-vue';
-import exportDetails from "components/embed/export-details.vue";
+// import exportDetails from "components/export-details.vue";
+// import exportDetails from "app/components/export-details.vue";
+import exportDetails from "~/components/export-details.vue";
+
 
     export { default as template } from './edit-authority.html';
 
