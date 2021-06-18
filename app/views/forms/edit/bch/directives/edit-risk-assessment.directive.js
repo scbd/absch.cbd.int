@@ -64,11 +64,7 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 							schemas	  : ['modifiedOrganism'],
 							searchText: searchText
 						}
-						//incase of RA
-						if($scope.isNational && $scope.document.government){
-							queryOptions.government = $scope.document.government.identifier;
-						}
-							return $scope.onBuildDocumentSelectorQuery(queryOptions);
+						return $scope.onBuildDocumentSelectorQuery(queryOptions);
 					}
 					//use for RA only 
 					$scope.onBuildAuthorityQuery = function(searchText){
