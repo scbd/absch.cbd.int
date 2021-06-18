@@ -6,19 +6,32 @@
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-            height: 48px;
+            max-height: 48px;
             cursor: pointer;
+        }
+        table tr td {
+            border-top: none !important;
+            border-bottom: none !important;
+        }
+        @media (max-width: 500px) {
+             #reference-records-table{
+                 overflow-x: auto;
+             }
+            .text-truncate {
+                -webkit-line-clamp: 5;
+                max-height: 112px;
+            }
         }
     </style>
     <legend>
-        Reference records
+        Linked records
         <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
     </legend>
     <table class="table table-bordered" style="width: 100%;">
         <tr>
             <th width="10%"></th>            
-            <th width="45%">Schema</th>
-            <th width="40%">Field</th>
+            <th width="44%">Schema</th>
+            <th width="39%">Field</th>
             <th width="5%">Count</th>
         </tr>
 
@@ -26,10 +39,10 @@
             <td colspan="4" style="padding: 0px;">
                 <table class="table table-bordered" style="margin-bottom: 0px;">
                     <tr ng-repeat-start="(fieldKey, field) in record.fields">
-                        <td width="15%"><button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">Show records</button></td>
-                        <td width="60%"> {{record.schema}}</td>
-                        <td width="15%" ng-bind="fieldKey"></td>
-                        <td width="10%" ng-bind="field.count"></td>             
+                        <td width="10%"><button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">{{field.showRecords?'close':'Show'}} records</button></td>
+                        <td width="45%"> {{record.schema}}</td>
+                        <td max-width="40%" class="text-truncate" ng-bind="fieldKey" ng-click="toggleTitle($event)"></td>
+                        <td width="5.2%" ng-bind="field.count"></td>
                     </tr>
                     <tr ng-if="field.showRecords">
                         <td width="15%" colspan="4" style="padding:0px">

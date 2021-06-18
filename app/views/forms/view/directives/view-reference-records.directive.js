@@ -77,11 +77,10 @@ app.directive("viewReferencedRecords", [function () {
 			}
 
 			function getTitle(schema, referenceField){
-				var isABS = realm.is('ABS');
-				var file = 'views/search/search-filters/bch-reference-record-filters.json';
+				let isABS = realm.is('ABS');
+				let file = 'app-data/bch/linked-records-field-titles.json';
 				if(isABS)
-					file = 'views/search/search-filters/abs-reference-record-filters.json';
-
+					file = 'app-data/abs/linked-records-field-titles.json';
 				return commonjs.loadJsonFile(file)
 					.then(function(keywords){
 						return keywords[schema+"."+referenceField];
