@@ -180,13 +180,8 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div class="km-value" compare-val>
-					<ul class="list">
-						<li ng-repeat="item in document.relevantDocuments">
-							<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-							<i ng-show="item.language">({{item.language|uppercase}})</i>
-						</li>
-					</ul>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 				</div>
 			</div>
 		</div>
