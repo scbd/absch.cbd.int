@@ -1,0 +1,39 @@
+{
+
+	"authority.contacts":"Contact person",
+	"authority.policyBasisForCompetencyRef":"Link to any relevant legal, administrative or policy measures",
+
+	
+	"organization.contacts":"Contact details",
+	"organization.linkedOrganizations":"Link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF)",
+
+
+	"resource.organizations":"Authoring organisation(s)",
+	"resource.modifiedOrganisms":"LMO(s) identification",
+	"resource.organisms":"Organism(s) identification",
+	"resource.genes":"Gene(s)  identification",
+
+	"modifiedOrganisms.developers":"Developer(s)",
+	"modifiedOrganisms.linkedModifiedOrganisms":"Related LMO(s)",
+	"modifiedOrganisms.recipientOrganisms":"Recipient Organism” or “Parental Organisms",
+	"modifiedOrganisms.genes":"Introduced or modified genetic element(s)",
+	"modifiedOrganisms.affectedGenes":"Other gene(s) whose expression was affected by the transformation",
+
+	"dnaSequence.donorOrganisms":"Donor organism(s)",
+
+	"organism.linkedOrganizations":"Link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF)",
+	"organism.contacts":"Contact person(s)",
+
+	"capacityBuildingInitiative.contacts":"Contact person",
+	"capacityBuildingInitiative.broaderProjects":"Clearing-house record about this project or programme",
+	"capacityBuildingInitiative.implementingAgencies":"Implementing agency(ies) or organization(s)",
+	"capacityBuildingInitiative.executingAgencies":"executing agency(ies) or organization(s)",
+	"capacityBuildingInitiative.collaboratingPartners":"Collaborating partner(s)",
+	"capacityBuildingInitiative.coreFundingSources":"Funding source(s)",
+	"capacityBuildingInitiative.coFinancingSources":"Co-funding source(s)",
+	"capacityBuildingInitiative.resultsReference":"Virtual library record number",
+
+	"submission.organizations":"Organization(s)",
+	"submission.records":"Related record(s)",
+	"submission.notifications":"Related notification(s)"
+}
