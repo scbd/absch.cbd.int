@@ -265,6 +265,9 @@
                 ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                     <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                     Save Draft</button>
+                <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
+                identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
+        
             </div>
 
             <!-- one page form -->

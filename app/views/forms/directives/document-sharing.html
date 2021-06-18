@@ -1,0 +1,153 @@
+﻿<span>
+    <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="shareDocument()">Share</button>
+    <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="getPdf()">PDF</button>
+    <style>
+        /* .ngdialog-content {
+                background: transparent !important;
+            } */
+
+        .ngdialog.ngdialog-theme-default .ngdialog-content {
+            width: 70% !important;
+        }
+
+        .tab-pane .content {
+            margin: 2%;
+        }
+    </style>
+
+    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
+            <div class="modal-header">
+                <h1>{{title}}</h1>
+            </div>
+            <div class="modal-body">
+                <div role="tabpanel">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active">
+                            <a translation-url href="#url" aria-controls="url" role="tab" data-toggle="tab">
+                                <span class="sub-header">Send by URL</span>
+                            </a>
+                        </li>
+                        <li role="presentation">
+                            <a translation-url href="#email" aria-controls="email" role="tab" data-toggle="tab">
+                                <span class="sub-header">Send by email</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content padding-left-10 padding-right-10" style="background:#fff">
+                        <div role="tabpanel" class="tab-pane active" id="url">
+                            <div class="row">
+                                <div ng-if="isLoading">
+                                        <i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> loading...
+                                </div>
+                                <div class="content" ng-hide="isLoading">
+                                    <label>Anyone with the link can view this draft document and will continue to see the updates until the draft has been published or deleted.</label>
+                                    <div style="margin:auto" class="pull-right">
+                                        <a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">Create link</a>
+                                        <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i>
+                                    </div>
+                                    <div>
+                                        <table class="table table-stripped" style="width:100%">
+                                            <tr>
+                                                <td>#</td>
+                                                <td>Expiry/Status</td>
+                                                <td>Link</td>
+                                                <td>Created on</td>
+                                            </tr>
+                                            <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
+                                                <td>{{$index+1}}</td>
+                                                <td>
+                                                    {{link.expiry|formatDateWithTime}}
+                                                    <span ng-if="hasStatus('active', link)"class="label label-success">Active</span>
+                                                    <span ng-if="hasStatus('expired', link)"class="label label-danger">Expired</span>
+                                                    <span ng-if="hasStatus('revoked', link)"class="label label-danger">Revoked</span>
+                                                </td>
+                                                <td width="70%">
+                                                    <div class="btn-group" style="width:100%">
+                                                        <div class="input-group" >
+                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
+                                                            <span style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)">
+                                                                <i class="fa fa-copy"> </i> Copy</span>
+                                                            <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)">
+                                                                <i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i>
+                                                                <i class="fa fa-thumbs-down"> </i> Revoke</span>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{link.meta.createdOn|formatDateWithTime}}</td>
+                                            </tr>
+                                            <tr ng-if="!sharedLinks.length">
+                                                <td colspan="4">
+                                                    <strong>No shared links found this document.</strong>
+                                                </td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="email">
+                            <div class="row">
+                                <div class="content">
+                                    <div>
+                                        We will send the recipients an email with the link to view this draft document.
+                                    </div>
+                                    <hr/>Emails
+                                    <br/>
+                                    <input type="text" placeholder="enter email" class="form-control" ng-model="document.sharedWith.emails" />
+                                    <div>
+                                        <span style="font-size: smaller;color: #777575;">Separate multiple emails with commas. This users will have to login to CBD using this emails
+                                            before viewing the draft record</span>
+                                    </div>
+                                    <div>
+                                        <span ng-if="status=='creatingLink'">
+                                            <i class="fa fa-spin fa-spinner" /> updating... </span>
+                                        <button type="button" class="btn btn-primary pull-right" ng-click="shareEmail()" ng-disabled="status=='creatingLink'">Send</button>
+                                    </div>
+                                    <br/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Close</button>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+        <h1>{{title}}</h1>
+        <br/>
+        <div role="tabpanel">
+            <div class="tab-content" style="background:#fff">
+                <div role="tabpanel" class="tab-pane active" id="email">
+                    <div class="row">
+                        <div class="content">
+
+                            <div class="alert alert-warning" role="alert">
+                            <strong>Please Note!</strong> Generating draft documents pdf take longer time. The recommended way to share draft documents is using thing <strong>Share</strong> functionality.
+                            </div>
+                            <div class="alert alert-success" role="alert">
+                                <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
+                            </div>
+                            <div class="alert alert-info" role="alert">
+                                <div class="btn-group">
+                                    <a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
+                                    ng-bind="lang|uppercase"></a>
+                                </div> 
+                                Generate individual language PDF
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+
+</span>
