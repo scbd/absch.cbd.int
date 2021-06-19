@@ -5,6 +5,7 @@ import 'views/directives/workflow-history-directive';
 import 'services/main';
 import 'ngDialog';
 import 'toastr';
+import '~/views/forms/directives/document-sharing'
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
@@ -501,8 +502,10 @@ import 'toastr';
                                            return storage.drafts.put(document.header.identifier, document);
                                         })
                                         .then(function(draftInfo){
-                                           $location.search('workflow', null);
-                                           return afterDraftSaved(draftInfo);
+                                            $location.search('workflow', null);
+
+							                showShareDocument(draftInfo)
+                                            return afterDraftSaved(draftInfo);
                                         }).catch(function(error){
                                             showError(null,  { action: "saveDraft", error: error })
                                         }).finally(function(){
@@ -887,6 +890,33 @@ import 'toastr';
                         })
                     }
                 }
+
+				function showShareDocument(document){
+					if(document && !$scope.documentShare){
+						if(document.workingDocumentID){
+							$scope.documentShare = {
+								workingDocumentID : document.workingDocumentID, 
+								identifier: document.identifier,
+								title: document.title
+							};
+						}
+						else{
+							storage.drafts.get(document.identifier, {info:true})
+							.then(function(response){
+								if(response.data && response.data.workingDocumentID){
+									$scope.documentShare = {
+										workingDocumentID : response.data.workingDocumentID, 
+										identifier: response.data.identifier,
+										title: response.data.title
+									};
+								}
+							})
+							.catch(function(err){
+								console.log(err);
+							});
+						}
+					}
+				}
                 //============================================================
                 $scope.loadSecurity();
                 loadOfflineFormatDetails();
@@ -936,6 +966,8 @@ import 'toastr';
                     }
                     $rootScope.$on("loadDocument", function(event, data) {
                         originalDocument = angular.copy(data.document);
+
+						showShareDocument({identifier:originalDocument.header.identifier});
                         $timeout(function(){
                             if(!saveDraftVersionTimer)
                                 saveDraftVersion();

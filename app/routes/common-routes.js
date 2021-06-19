@@ -83,6 +83,10 @@ const commonRouteUrls = {
     reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
 
     kb                                          : { component: ()=>import('~/views/kb/home.vue') },
+
+    shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
+    draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
+    
 }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -110,6 +114,8 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     whenAsync('/reports/analyzer',                                  { ...mapView(angularViewWrapper),                    "label":"Analyzer","resolve":{ ...commonRouteUrls.reports_analyzer,                                            },"resolveController":true}). 
     whenAsync('/articles',                                          { ...mapView(angularViewWrapper),                    "label":"Announcements","resolve":{ ...commonRouteUrls.articles,                                                    },"resolveController":true,"resolveUser":true}). 
     whenAsync('/articles/:id',                                      { ...mapView(angularViewWrapper),                    "label":"articleTitle","resolve":{ ...commonRouteUrls.articles,                                                 },"resolveController":true,"resolveUser":true,"param":"true"}). 
+    whenAsync('/database/share/:code',                              { ...mapView(angularViewWrapper),                    "label":"Shared document","resolve":{ ...commonRouteUrls.shareDocument,                      },"param":"true","resolveController":true}).
+    whenAsync('/pdf-links/draft-documents/:documentId/:lang?',      { ...mapView(angularViewWrapper),                    "label":"Record","resolve":{ ...commonRouteUrls.draftDocumentPdf,                            },"param":"true","resolveController":true}).
     whenAsync('/database/record',                                   { ...mapView(angularViewWrapper),                    "label":"Record","resolve":{ ...commonRouteUrls.database_record,                                             },"resolveController":true,"resolveUser":true}). 
     whenAsync('/database/record/:documentID',                       { ...mapView(angularViewWrapper),                    "label":"Record","resolve":{ ...commonRouteUrls.database_record_documentID,                                  },"resolveController":true,"resolveUser":true}). 
     whenAsync('/database/record/:documentID/:revision',             { ...mapView(angularViewWrapper),                    "label":"Record","resolve":{ ...commonRouteUrls.database_record_documentID,                         },"resolveController":true,"resolveUser":true}). 
@@ -158,6 +164,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     
     whenAsync('/kb',                                                { ...mapView(vueViewWrapper),                       "label":"KB","resolve":{ ...commonRouteUrls.kb,                                                              },"param":"true","resolveController":true})
     
+   
 }]);
 
 export default {
