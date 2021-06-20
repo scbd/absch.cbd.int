@@ -92,7 +92,7 @@ app.directive("viewReferencedRecords", [function () {
 			}
 
 			$scope.toggleTitle = function(event){
-				event.target.classList.toggle("text-truncate");
+				event.target.classList.toggle("truncate-record");
 			}
 
 		}] //controller
