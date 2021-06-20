@@ -7,7 +7,7 @@
 				<i class="fa fa-search" ></i>
 			</span>
 		</div>
-		<span style="position: relative; top:10px; margin-left:20px"> <i class="color-blue">{{ binding.length || "0"}} keywords selected.</i></span>
+		<span style="position: relative; top:10px; margin-left:20px"> <i class="color-blue"><span ng-bind="binding.length || '0'"></span> keywords selected.</i></span>
 		
 
 	</div>
@@ -43,8 +43,7 @@
 				<li ng:repeat="term in rootTerms" ng-class="{'other-term': otherTermIdentifier==term.identifier}" ng-include="'term-check-tree-renderer.html'"></li>
 
 				<li ng-show="error">
-					<div class="alert">
-						{{error}}
+					<div class="alert" ng-bind="error">
 					</div>
 				</li>
 
@@ -62,7 +61,7 @@
 				<label>
 					<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
 						ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/> 
-						{{term.title||term.name | lstring:locale}}
+						<span ng-bind="term.title||term.name | lstring:locale"></span>
 				</label>
 				<div ng-if="otherTermIdentifier==term.identifier && !term.multiple && selectedItems[term.identifier].selected">
 					<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
@@ -85,8 +84,7 @@
 						</tr>
 					</table>
 				</span>
-				<div class="km-select-description" ng-if="showDescription && term.description" style="padding: 3px 25px;">
-					{{term.description}}
+				<div class="km-select-description" ng-if="showDescription && term.description" ng-bind="term.description" style="padding: 3px 25px;">
 				</div>
 				<ul style="list-style:none">
 					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">

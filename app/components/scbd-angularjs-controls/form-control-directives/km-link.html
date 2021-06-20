@@ -12,8 +12,8 @@
 						<tr>
 							<td>
 								<span ng-if="link.language" ng-bind="locales[link.language]||locales['lang-'+link.language]||(stringToETerm('lang-'+link.language)|term:locale)"></span>
-								<a rel="noopener" translation-url target="_blank" ng-href="{{link.url|encodeURI}}">{{link.name||link.url}}</a>
-								<span ng-if="link.tag">({{link.tag}})</span>
+								<a rel="noopener" translation-url target="_blank" ng-href="{{link.url|encodeURI}}" ng-bind="link.name||link.url"></a>
+								<span ng-if="link.tag" ng-bind="link.tag"></span>
 							</td>
 							<td style="white-space:nowrap;text-align:right;vertical-align:top">
 								<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
@@ -82,10 +82,10 @@
 				<div class="modal-body" ng-if="editor.visible && editor.type=='file'">
 					<div class="alert alert-danger" ng-if="editor.error!=null">
 						<h4>An error has occurred</h4>
-						{{editor.error}}
+						<span ng-bind="editor.error"></span>
 					</div>
 					<div ng-if="editor.progress">
-						<label>Uploading {{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)</label>
+						<label>Uploading <span ng-bind="editor.name"></span> <span ng-bind="editor.progress.size/1024 | number:1"></span> kB</label>
 						<div class="progress progress-striped {{editor.progress.style}}">
 							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width:{{editor.progress.percent}}%;"></div>
 						</div>

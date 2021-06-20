@@ -15,7 +15,7 @@
                 <span class="hidden-xs">Prev</span></a>
         </li>
         <li ng-repeat="n in range(pageCount)" ng-class="{active: n+1 == currentPage}" ng-click="actionSetPage(n+1)" class="pagination-btn-page-number">
-            <a rel="noopener" translation-url href>{{n+1}}</a>
+           <a rel="noopener" translation-url href ng-bind="n+1"></a>
         </li>
         <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}" class=" pagination-btn-next">
             <a rel="noopener" ng-disabled="currentPage-1 >= pageCount - 1" 
