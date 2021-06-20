@@ -1,6 +1,6 @@
 ﻿<div id="reference-records-table" ng-show="referenceRecords">
     <style>
-        .text-truncate {
+        .truncate-record {
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -9,7 +9,7 @@
             max-height: 48px;
             cursor: pointer;
         }
-        table tr td {
+        #reference-records-table table tr td {
             border-top: none !important;
             border-bottom: none !important;
         }
@@ -17,7 +17,7 @@
              #reference-records-table{
                  overflow-x: auto;
              }
-            .text-truncate {
+            .truncate-record {
                 -webkit-line-clamp: 5;
                 max-height: 112px;
             }
@@ -39,9 +39,9 @@
             <td colspan="4" style="padding: 0px;">
                 <table class="table table-bordered" style="margin-bottom: 0px;">
                     <tr ng-repeat-start="(fieldKey, field) in record.fields">
-                        <td width="10%"><button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">{{field.showRecords?'close':'Show'}} records</button></td>
+                        <td width="10%"><button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords" ng-bind="field.showRecords?'close records':'Show records'"></button></td>
                         <td width="45%"> {{record.schema}}</td>
-                        <td max-width="40%" class="text-truncate" ng-bind="fieldKey" ng-click="toggleTitle($event)"></td>
+                        <td max-width="40%" class="truncate-record" ng-bind="fieldKey" ng-click="toggleTitle($event)"></td>
                         <td width="5.2%" ng-bind="field.count"></td>
                     </tr>
                     <tr ng-if="field.showRecords">
