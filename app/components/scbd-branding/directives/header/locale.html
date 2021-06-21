@@ -1,7 +1,7 @@
 ﻿<div hover-effect=".dropdown-menu" class="locale" id="{{idname}}" >
     <a rel="noopener"  ng-href="#"class="set-languages" data-toggle="dropdown">
-      <span class="badge badge-default color-white">
-        {{currentLanguage|uppercase}}<span class="caret"></span>
+      <span class="badge badge-default color-white" ng-bind="currentLanguage|uppercase">
+        <span class="caret"></span>
       </span>
     </a>
     <style>
