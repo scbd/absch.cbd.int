@@ -1,24 +1,19 @@
-﻿<span>
-    <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="shareDocument()">Share</button>
-    <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="getPdf()">PDF</button>
-    <style>
-        /* .ngdialog-content {
-                background: transparent !important;
-            } */
-
-        .ngdialog.ngdialog-theme-default .ngdialog-content {
-            width: 70% !important;
-        }
-
-        .tab-pane .content {
-            margin: 2%;
-        }
-    </style>
+﻿<span class="document-sharing">
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
+    title="Share">
+        <i class="fa fa-firefox"></i>
+        <span class="hidden-xs">Share</span>
+    </button>
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
+    title="PDF">
+        <i class="fa fa-file-pdf-o"></i>
+        <span class="hidden-xs">PDF</span>    
+    </button>
 
     <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header">
-                <h1>{{title}}</h1>
+                Share draft document : <span ng-bind="title"></span>
             </div>
             <div class="modal-body">
                 <div role="tabpanel">
@@ -57,9 +52,9 @@
                                                 <td>Created on</td>
                                             </tr>
                                             <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
-                                                <td>{{$index+1}}</td>
+                                                <td ng-bind="$index+1"></td>
                                                 <td>
-                                                    {{link.expiry|formatDateWithTime}}
+                                                    <span ng-bind="link.expiry|formatDateWithTime"></span>
                                                     <span ng-if="hasStatus('active', link)"class="label label-success">Active</span>
                                                     <span ng-if="hasStatus('expired', link)"class="label label-danger">Expired</span>
                                                     <span ng-if="hasStatus('revoked', link)"class="label label-danger">Revoked</span>
@@ -76,7 +71,7 @@
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>{{link.meta.createdOn|formatDateWithTime}}</td>
+                                                <td  ng-bind="link.meta.createdOn|formatDateWithTime"></td>
                                             </tr>
                                             <tr ng-if="!sharedLinks.length">
                                                 <td colspan="4">
@@ -122,30 +117,32 @@
     </script>
 
     <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
-        <h1>{{title}}</h1>
-        <br/>
-        <div role="tabpanel">
-            <div class="tab-content" style="background:#fff">
-                <div role="tabpanel" class="tab-pane active" id="email">
-                    <div class="row">
-                        <div class="content">
+        <div class="rounded bg-dropshadow document-selection-modal">
+            <div class="modal-header">Generating draft document PDF : 
+                <span  ng-bind="title"></span>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
 
-                            <div class="alert alert-warning" role="alert">
-                            <strong>Please Note!</strong> Generating draft documents pdf take longer time. The recommended way to share draft documents is using thing <strong>Share</strong> functionality.
-                            </div>
-                            <div class="alert alert-success" role="alert">
-                                <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
-                            </div>
-                            <div class="alert alert-info" role="alert">
-                                <div class="btn-group">
-                                    <a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
-                                    ng-bind="lang|uppercase"></a>
-                                </div> 
-                                Generate individual language PDF
-                            </div> 
+                        <div class="alert alert-warning" role="alert">
+                        <strong>Please Note!</strong> Generating draft documents pdf take longer time. The recommended way to share draft documents is using thing <strong>Share</strong> functionality.
                         </div>
+                        <!-- <div class="alert alert-success" role="alert">
+                            <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
+                        </div> -->
+                        <div class="alert alert-info" role="alert">
+                            <div class="btn-group">
+                                <a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
+                                ng-bind="lang|uppercase"></a>
+                            </div> 
+                            Generate individual language PDF
+                        </div> 
                     </div>
                 </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Close</button>
             </div>
         </div>
     </script>
