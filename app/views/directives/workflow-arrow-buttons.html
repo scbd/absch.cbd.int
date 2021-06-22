@@ -265,6 +265,9 @@
                 ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                     <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                     Save Draft</button>
+                <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
+                identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
+        
             </div>
 
             <!-- one page form -->
@@ -305,18 +308,18 @@
                 <button type="button" class="btn btn-sm btn-default " ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
                     <span class="glyphicon glyphicon-backward"></span>
                 </button>
-                        <button type="button"  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
-                            <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Intro</span>
-                        </button>
-                        <button type="button"   class="btn btn-sm btn-default "ng-class="{'btnSelected': workflowScope.tab=='edit'}">
-                            <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Form</span>
-                        </button>
-                        <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='review'}">
-                            <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</span>
-                        </button>
-                        <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
-                            <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
-                        </button>
+                <button type="button"  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
+                    <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Intro</span>
+                </button>
+                <button type="button"   class="btn btn-sm btn-default "ng-class="{'btnSelected': workflowScope.tab=='edit'}">
+                    <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Form</span>
+                </button>
+                <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='review'}">
+                    <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</span>
+                </button>
+                <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
+                    <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
+                </button>
                 <button type="button" class="btn btn-sm btn-default  " ng-click="goNextTab(workflowScope.tab)"  ng-disabled="disableNextBtn">
                     <span class="glyphicon glyphicon-forward"> </span>
                 </button>
@@ -325,7 +328,11 @@
             <button type="button" class="btn btn-sm btn-default bg-draft pull-right" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
             ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                 <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
-                <i class="fa fa-save"></i></button>
+                <i class="fa fa-save"></i>
+            </button>
+            <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" style="padding-top:0px;margin-top:-1px"
+            class="btn btn-sm pull-right" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
+            identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
          
         </div>
     </script>

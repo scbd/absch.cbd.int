@@ -323,7 +323,7 @@ import 'views/forms/directives/compare-val';
 					//==================================
 
 					function loadWorkflowDetails(){
-						if ($scope.internalDocumentInfo.workingDocumentLock) {
+						if ($scope.internalDocumentInfo?.workingDocumentLock) {
 							IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
 								.then(function (workflow) {
 									if (workflow && workflow.type.name == 'delete-record')
@@ -334,7 +334,7 @@ import 'views/forms/directives/compare-val';
 							if($scope.internalDocumentInfo.revision > 1)
 								$scope.showDifferenceButton = true
 						}
-						else if($scope.internalDocumentInfo.latestRevision > 1){
+						else if($scope.internalDocumentInfo?.latestRevision > 1){
 							$scope.showComparison = true;//$attr.showComparison == 'true'
 						}		
 					}
