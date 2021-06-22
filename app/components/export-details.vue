@@ -6,8 +6,9 @@
               <button  >
                 <strong>  export static !</strong>
               </button>
+              <slot/>
             </div>
-            <table class="table" id="lmoExport">
+            <!-- <table class="table" id="lmoExport">
               <thead>
               <tr>
                 <th class="display-18">Record ID</th>
@@ -34,7 +35,7 @@
                 </td>
               </tr>
               </tbody>
-            </table>
+            </table> -->
           </form>
         </div>
     </div>
@@ -49,9 +50,9 @@ export default {
 	methods: {
 		async exportedData(){
 			require(['tableexport'], function () {
-				$('#lmoExport').tableExport({
+				$('#angTable').tableExport({
 					formats: ['xlsx'],
-					filename: 'LMO-registry',
+					filename: 'registry',
 				});
 				$('.xlsx').click();
 				$('.xlsx').remove();

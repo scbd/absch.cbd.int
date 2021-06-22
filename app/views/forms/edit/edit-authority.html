@@ -1,6 +1,7 @@
 <div>
-    <div  ng-if="vueOptions">
+    <div ng-if="vueOptions">
         <export-details ng-vue="vueOptions"></export-details>
+        <export-button ng-vue="vueOptions"></export-button>
     </div>
    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
    <edit-authority></edit-authority>

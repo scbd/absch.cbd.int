@@ -3,7 +3,7 @@ import 'views/forms/edit/directives/edit-authority.directive';
 import 'views/forms/edit/edit';
 import 'angular-vue'
 import exportDetails from "~/components/export-details.vue";
-
+import exportButton from "~/components/export-button.vue";
 
     export { default as template } from './edit-authority.html';
 
@@ -15,9 +15,15 @@ import exportDetails from "~/components/export-details.vue";
 
         $scope.vueOptions = {
             components: { 
-                exportDetails
+                exportDetails,
+                exportButton,
+                pdfButton
             }
         };
+
+        // let element =document.querySelector('#lmoExport')
+        // console.log(element)
+        // let name = 'hello'
 
     }];
 
