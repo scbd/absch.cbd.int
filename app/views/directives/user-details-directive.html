@@ -15,8 +15,8 @@
 						<span class="glyphicon glyphicon-remove" ng-click="removeFromRole(user,this)" ></span>
 					</div>
 					 <div>{{user.firstName + ' ' + user.lastName}}</div>
-		             <div >{{user.email}}</div>
-		             <div>{{user.role}}</div>
+		             <div ><span ng-bind="user.email"></span></div>
+		             <div><span ng-bind="user.role"></span></div>
 				</div>
 			</div>
 		</div>
@@ -45,8 +45,8 @@
 						<input type="button" class="btn btn-primary" ng-click="addToRole(user,this)"  value="NA"/>
 					</div>
 					 <div>{{user.firstName + ' ' + user.lastName}}</div>
-		             <div >{{user.email}}</div>
-		             <div>{{user.role}}</div>
+		             <div ><span ng-bind="user.email"></span></div>
+		             <div><span ng-bind="user.role"></span></div>
 				</div>
 			</div>
 		</div>

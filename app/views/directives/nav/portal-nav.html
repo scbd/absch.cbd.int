@@ -84,7 +84,7 @@
                                     <li  style="border:0!important;" ng-repeat="c in countries | filter:startsWith track by c.code" >
                                         <a rel="noopener" translation-url style="color:#666!important;font-size:14px;" ng-href="/countries/{{::c.code|encodeURIComponent}}" >
                                             <span class="bold" ng-class="{'color-party': c.isParty, 'color-grey':!c.isParty}">
-                                                {{::c.name | lstring:locale}}
+                                                <span ng-bind="::c.name | lstring:locale"></span>
                                             </span>
                                         </a>
                                     </li>
