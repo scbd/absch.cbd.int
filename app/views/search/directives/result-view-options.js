@@ -118,6 +118,36 @@ import 'ngDialog';
                 $scope.onExportClick = function(){
                     $scope.onExport()
                 }
+                //---------------------------------------------------------------    
+                $scope.onEmbedClick = function($event){
+                    var my_template = "";
+                    var target = "recordsContent";
+                    var url = "http://localhost:2010/en/search";
+                    url += "?initialWidth=1519&childId=recordsContent&parentTitle=SBCD&parentUrl=http://localhost:2010/en/search";    
+
+                    //alert("hay nasir "+$($event.currentTarget).closest("body").attr("id"));
+                    //console.log($event.currentTarget.rel);
+                    //alert( $("#recordsContent").height() );
+                    my_template = '<div id="msg_alert" class="panel panel-success">'+
+                        '<div class="panel-heading">'+
+                            '<h3 class="panel-title">Cope and Paste this below code into your website</h3>'+
+                        '</div>'+ 
+                            '<div class="panel-body">'+
+                                '<h3>'+
+                                    '<code>'+
+                                        '&lt;div data-pym-src="'+url+'" id="recordsContent" data-pym-allowfullscreen &gt;Loading...&lt;/div&gt;'+
+                                        '&lt;script type="text/javascript" src="https://pym.nprapps.org/pym.v1.min.js" async &gt;&lt;/script&gt;'+ 
+                                    '</code>'+
+                                '</h3>'+
+                                '<div data-pym-src="'+url+'" id="recordsContent" data-pym-allowfullscreen >Loading...</div>'+
+                                '<iframe target="'+target+'" id="ifrm" src="'+url+'" frameborder="0" scrolling="no" style="background-color:transparent; position:relative; height:550px; width:100%;"></iframe>'+
+                            '</div>'+
+                        '</div>';
+                    if( $("#msg_alert").length == 0  )   
+                        $("#main").before(my_template);    
+
+                } 
+                //---------------------------------------------------------------    
 
                 function showGroupByDialog(){
                     var selectedFields = $scope.groupByFields
