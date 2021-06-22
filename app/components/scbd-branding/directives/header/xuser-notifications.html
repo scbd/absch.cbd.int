@@ -193,7 +193,7 @@
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="fa fa-lg fa-bolt"> </i>
                         <span class="notification-title">Alert :
-                            <span ng-bind="notification.data.message || 'A new record has been published'"></span>
+                            {{notification.data.message || 'A new record has been published'}}
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label" ng-bind="notification.data.documentInfo.metadata.schema | schemaName">: </span>
