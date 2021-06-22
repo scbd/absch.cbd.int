@@ -6,7 +6,7 @@
         <!-- <a rel="noopener" ng-href="/countries/status/inbetween" ng-if="partyStatus.isInbetweenParty" 
         class="color-inbetween bold partystatus">Ratified, not yet Party</a> -->
         <span ng-if="partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit" class="bold color-grey color-non-party partystatus">
-            Entry into force: <span ng-bind="(partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit)|formatDate"></span></span>
+            Entry into force: {{(partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit)|formatDate}}</span>
     </span>
     <span ng-if="isAbs">
         <a rel="noopener" ng-href="/countries/status/nonparty" ng-if="!partyStatus.isParty && !partyStatus.isInbetweenParty" 
