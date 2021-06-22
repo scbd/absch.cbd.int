@@ -91,14 +91,14 @@
 					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="true">
                             <i ng-if="sortTerm==='name.en'" class="fa" ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}" style="width:20px;"></i>
-                            <span ng-if="sortTerm!=='name.en'">Ordered by: <strong> {{sortTerm|schemaShortName}}</strong></span>
+						<span ng-if="sortTerm!=='name.en'">Ordered by: <strong> <span ng-bind="sortTerm|schemaShortName"></span></strong></span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                         <li><a rel="noopener" translation-url  href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Sort alphabetical A-Z </a></li>
                         <li><a rel="noopener" translation-url  href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Sort alphabetical Z-A</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a rel="noopener" translation-url  href="#" ng-repeat="header in headerCount" ng-click="sortTable(header.schema)"> {{ header.schema |schemaNamePlural}} </a></li>
+                       ccccc <li><a rel="noopener" translation-url  href="#" ng-repeat="header in headerCount" ng-click="sortTable(header.schema)" ng-bind="header.schema |schemaNamePlural"> </a></li>
                     </ul>
                     </div>
 
@@ -145,8 +145,8 @@
 				<div ng-repeat="header in headerCount">
 					<span style="cursor:pointer;" ng-click="sortTable(header.schema)" data-toggle="tooltip" title="{{header.title|lstring:locale}}"
 						data-container="body">
-                        <span id="nrCount" class="bold color-black">{{header.shortCode}}&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
-					<span class="badge bg-black">{{header.count}}</span>
+                        <span id="nrCount" class="bold color-black" ng-bind="header.shortCode">&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
+					<span class="badge bg-black" ng-bind="header.count"></span>
 					</span>
 				</div>
 			</div>
@@ -156,11 +156,11 @@
 			ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
 			<div class="col-md-6">
 
-				<div style="text-align:left;width:30px;display:inline-block;"> {{$index+1}} </div>
+				<div style="text-align:left;width:30px;display:inline-block;"> <span ng-bind="$index+1"></span> </div>
 
 				<div style="display:inline;">
 					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isParty, 'color-grey color-non-party':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
-                                    {{country.name|lstring:locale}}</span>
+                                    <span ng-bind="country.name|lstring:locale"></span></span>
 				</div>
 				<div style="margin-left:35px;text-transform:uppercase;font-weight:500;">
 					<div ng-if="isABS">
@@ -168,7 +168,7 @@
 						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
 						<span ng-if="country.isInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
 						<span ng-if="country.isSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
-						<span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">Entry into force: {{country.entryIntoForce|formatDate}}</span>
+						<span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">Entry into force: <span ng-bind="country.entryIntoForce|formatDate"></span></span>
 					</div>
 					<div ng-if="isBCH">
 						<span ng-if="!country.isParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">Non-Party</span>
@@ -179,9 +179,9 @@
 
 			<div class="col-md-6 evenly-spaced center-text hidden-xs" style="white-space:nowrap;margin-top:5px;">
 				<span class="color-litegrey" style="margin-right:5px;" ng-repeat="schema in country.schemas" ng-click="gotoCountryProfile(country.code, schema, $event)"> 
-					{{schema.shortCode}} <br class="hidden-sm">
+					<span ng-bind="schema.shortCode"></span> <br class="hidden-sm">
 					<span class="label label-default"  ng-class="{'zero':schema.count==0, 'bg-green':schema.count>0}" >
-						{{schema.count }}
+						<span ng-bind="schema.count"></span>
 					</span>
 				</span>
 			</div>

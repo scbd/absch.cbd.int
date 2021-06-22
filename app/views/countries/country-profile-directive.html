@@ -33,7 +33,7 @@
                         <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                     </button>
                     <button type="button" class="btn btn-default bold" ng-click="loadRecords(schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show remaining {{schema.numFound-schema.docs.length}} records
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show remaining <span ng-bind="schema.numFound-schema.docs.length"></span> records
                     </button>
                 </div>
             </div>
@@ -47,23 +47,23 @@
                         <div> 
                             <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" />
                             <a rel="noopener" translation-url  target="_blank" ng-href="database/record/{{measure|uniqueID|encodeURIComponent}}"> 
-                               <span class="color-black" style="margin-left:10px;">{{$index+1}}.</span>
-                               <span class="bold">{{measure.rec_title}} </span> 
+                               <span class="color-black" style="margin-left:10px;" ng-bind="$index+1">.</span>
+                               <span class="bold" ng-bind="measure.rec_title"> </span>
                             </a>
                         </div>
                         <div class="recordDefault">
                            <ul class="metadata bold" style="margin-left:20px;font-size:10px!important;">
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta1">{{measure.rec_meta1[0]}}</span></li>
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_type">{{measure.rec_type}}</span></li>
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3">{{measure.rec_meta3[0]}}</span></li>
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5">{{measure.rec_meta5[0]}}</span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta1" ng-bind="measure.rec_meta1[0]"></span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_type" ng-bind="measure.rec_type"></span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3" ng-bind="measure.rec_meta3[0]"></span></li>
+                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5" ng-bind="measure.rec_meta5[0]"></span></li>
                                 <li style="border:0;">
                                     <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">
-                                        Entry into force: {{measure.entryIntoForce_dt|formatDate}} <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;"  ng-if="measure.limitedApplication_dt"> until {{measure.limitedApplication_dt|formatDate}} </span></span>
+                                        Entry into force: <span ng-bind="measure.entryIntoForce_dt|formatDate"></span> <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;"  ng-if="measure.limitedApplication_dt"> until <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span></span>
                                     <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">
-                                        Adoption: {{measure.adoption_dt|formatDate}}  <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;" ng-if="measure.limitedApplication_dt">until {{measure.limitedApplication_dt|formatDate}} </span> </span>
+                                        Adoption: <span ng-bind="measure.adoption_dt|formatDate"></span>  <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;" ng-if="measure.limitedApplication_dt">until  <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span> </span>
                                    
-                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: {{measure.retired_dt|formatDate}}</span>
+                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: <span ng-bind="measure.retired_dt|formatDate"></span></span>
                                 </li>
                            </ul>
                         </div>
