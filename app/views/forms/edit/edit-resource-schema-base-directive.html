@@ -58,8 +58,8 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="organizations" caption="Reference to the authoring organization(s)">
 												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
-													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true" question="organizations"
-													 allow-new-schema="contact"></div>
+													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true"
+													 schema="(organization contact)"  allow-new-schema="organization,contact"></div>
 											</div>
 										</div>
 									</div>
@@ -256,7 +256,7 @@
 														<div class="km-control-group" required name="biosafety.organisms"  caption="Organism(s) identification">
 															<div document-selector name="biosafety.organisms" required ng-model="document.biosafety.organisms"
 																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
-																 allow-new-schema="organisms"></div>
+																 allow-new-schema="organism"></div>
 														</div>
 													</div>
 													
