@@ -2758,3 +2758,28 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .document-sharing .tab-pane .content {
     margin: 2%;
 }
+.cursor-pointer{
+    cursor: pointer;
+}
+#reference-records-table .truncate-record {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 48px;
+    cursor: pointer;
+}
+#reference-records-table table tr td {
+    border-top: none !important;
+    border-bottom: none !important;
+}
+@media (max-width: 500px) {
+     #reference-records-table{
+         overflow-x: auto;
+     }
+    #reference-records-table .truncate-record {
+        -webkit-line-clamp: 5;
+        max-height: 112px;
+    }
+}
