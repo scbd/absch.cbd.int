@@ -177,7 +177,7 @@
                                                     displayed as part of their legal framework in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that
                                                     share the same measure.</div>
                                                 <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
-                                                    <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0">{{document.jurisdictionRegions[0]|term}}</button>
+                                                    <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0"><span ng-bind="document.jurisdictionRegions[0]|term"></span></button>
                                                 </div>
                                             </div>
     
@@ -308,8 +308,8 @@
                                                     </strong>
                                             </h4>
                                             <span ng-repeat="elm in document.absMeasuresForDelete">
-                                                {{$index+1}}. {{elm|term}} <span ng-if="elm.customValue">{{elm.customValue}}</span> &nbsp;
-                                            <span ng-if="elm.section">({{elm.section|lstring}})</span>
+                                                <span ng-bind="$index+1"></span>. <span ng-bind="elm|term"></span> <span ng-if="elm.customValue" ng-bind="elm.customValue"></span> &nbsp;
+                                            <span ng-if="elm.section">(<span ng-bind="elm.section|lstring"></span>)</span>
                                             <br/>
                                             </span>
                                         </div>
