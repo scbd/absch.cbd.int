@@ -40,7 +40,6 @@ app.directive("viewReferencedRecords", [function () {
 
 						if(data.data.response.docs.length > 0){
 							return getFieldTitles().then(fieldTitles=>{
-console.log(fieldTitles)
 								_.forEach(data.data.response.docs, function(record){
 									_.forEach(record.referenceRecord_info_ss, function(info){
 										info = JSON.parse(info);
