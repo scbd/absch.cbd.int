@@ -31,7 +31,9 @@
 
 		<div ng-show="document.description">
 			<label>Brief description</label>
-			<div class="km-value km-pre" compare-val ng-bind-html="document.description | lstring:locale"></div>
+			<div compare-val>
+				<km-value-ml value="document.description" locales="locale"></km-value-ml>
+			</div>
 		</div>
 
 		<div ng-show="document.jurisdiction">
@@ -55,8 +57,8 @@
 
 		<div ng-show="document.status">
 			<label>Current status of the measure</label>
-			<div class="km-value" compare-val>
-				<span ng-bind="document.status|term:locale"></span>
+			<div compare-val>
+				<km-value-ml value="document.status" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -83,8 +85,8 @@
 
 		<div ng-show="document.type">
 			<label>Type of document / measure</label>
-			<div class="km-value" compare-val>
-				<span ng-bind="document.type|term:locale"></span>
+			<div  compare-val>
+				<km-value-ml value="document.type" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -128,7 +130,9 @@
 			</div>
 			<div ng-show="document.amendmentsDescription">
 				<label>Summary of the amendments</label>
-				<div class="km-value km-pre" compare-val ng-bind-html="document.amendmentsDescription | lstring:review.locale"></div>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDescription" locales="locale"></km-value-ml>
+				</div>
 			</div>
 
 		</div>
