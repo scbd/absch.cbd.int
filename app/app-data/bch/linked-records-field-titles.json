@@ -3,6 +3,8 @@
 	"authority.contacts":"Contact person",
 	"authority.policyBasisForCompetencyRef":"Link to any relevant legal, administrative or policy measures",
 
+	"supplementaryAuthority.contacts":"Contact person",
+
 	"biosafetyLaw.amendedRecords":"Record(s) containing the law/regulation being amended",
 	"biosafetyLaw.relatedRecords":"Law, Regulation or Guideline",
 	"biosafetyLaw.authorities":"Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress.",
@@ -20,6 +22,11 @@
 	"nationalRiskAssessment.contacts":"Contact details of the main responsible risk assessor",
 	"nationalRiskAssessment.modifiedOrganisms":"Living modified organism(s)",
 
+	"independentRiskAssessment.organizations":"Institution responsible for the risk assessment",
+	"independentRiskAssessment.authorities":"Competent National Authority(ies) responsible for the risk assessment",
+	"independentRiskAssessment.contacts":"Contact details of the main responsible risk assessor",
+	"independentRiskAssessment.modifiedOrganisms":"Living modified organism(s)",
+
 	"biosafetyExpert.contact":"Contact details",
 
 	"organization.contacts":"Contact details",
@@ -34,11 +41,11 @@
 	"resource.organisms":"Organism(s) identification",
 	"resource.genes":"Gene(s)  identification",
 
-	"modifiedOrganisms.developers":"Developer(s)",
-	"modifiedOrganisms.linkedModifiedOrganisms":"Related LMO(s)",
-	"modifiedOrganisms.recipientOrganisms":"Recipient Organism” or “Parental Organisms",
-	"modifiedOrganisms.genes":"Introduced or modified genetic element(s)",
-	"modifiedOrganisms.affectedGenes":"Other gene(s) whose expression was affected by the transformation",
+	"modifiedOrganism.developers":"Developer(s)",
+	"modifiedOrganism.linkedModifiedOrganisms":"Related LMO(s)",
+	"modifiedOrganism.recipientOrganisms":"Recipient Organism” or “Parental Organisms",
+	"modifiedOrganism.genes":"Introduced or modified genetic element(s)",
+	"modifiedOrganism.affectedGenes":"Other gene(s) whose expression was affected by the transformation",
 
 	"dnaSequence.donorOrganisms":"Donor organism(s)",
 
