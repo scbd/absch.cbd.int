@@ -13,9 +13,12 @@
           </span>
         </p>
         <style>
-            .contact-spacing{
-              margin-top: 25px;
-            }          
+          .contact-spacing{
+            margin-top: 25px;
+          }
+          strong{
+              color:#555;
+          }
         </style>
         <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])" ng-class="{'contact-spacing': doc.id=='contact'}">
             

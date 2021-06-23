@@ -141,7 +141,7 @@ import "views/forms/view/view-resource.directive";
 				$scope.onAuthorContactQuery = function(searchText){
 					var queryOptions = {
 						realm     : realm.value,
-						fieldQueries: ['schema_s:organization'],
+						schemas	  : ['contact', 'organization'],
 						searchText: searchText
 					}
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);

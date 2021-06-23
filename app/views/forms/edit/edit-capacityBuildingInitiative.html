@@ -92,8 +92,8 @@
 												<div class="row">
 													<div class="col-md-3" ng-show="!isNational()">
 
-														<div class="km-control-group" required name="regions" caption="">
-																<label name="countryRegions" class="control-label" for="countryRegions">Geographical or political/economic group(s)</label>
+														<div class="km-control-group" required name="geographicScope" caption="">
+																<label name="countryRegions" class="control-label" for="geographicScope">Geographical or political/economic group(s)</label>
 															<div km-select multiple required name="regions"
 																	ng-model="countryRegions.regions" placeholder="Please select option(s)"
 																	items="options.regions()"></div>
@@ -103,8 +103,8 @@
 														and/or
 													</div>
 													<div class="col-md-3">
-														<div class="km-control-group" style="text-align: left;" required  caption="">
-															<label name="countryRegions" class="control-label" for="countryRegions">
+														<div class="km-control-group" style="text-align: left;"  caption="">
+															<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">
 																Country(ies)
 															</label>
 															<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
@@ -116,31 +116,37 @@
 
 									<div class="row" ng-if="document.geographicScope && isSubnational()">
 										<div class="col-md-12">
-											<div class="km-control-group" required name="countryRegions" caption="">
-												<label name="countryRegions" class="control-label" for="countryRegions">
+											<div class="km-control-group"  name="countryRegions" caption="">
+												<label name="countryRegions" required class="control-label" for="countryRegions">
 													Country(ies)
 												</label>
 												<div km-select multiple required  ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="km-control-group" required="isSubnational()"  caption="Name of the sub-national jurisdiction">
+											<div class="km-control-group"  name="geographicScope.customValue" caption="">
+												<label name="geographicScope.customValue" required="isSubnational()" class="control-label" for="geographicScope.customValue">
+													Name of the sub-national jurisdiction
+												</label>
 												<div km-textbox-ml required="isSubnational()"  ng-model="document.geographicScope.customValue" placeholder="Please select option(s)" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row" ng-if="document.geographicScope && isCommunity()">
 										<div class="col-md-12">
-											<div class="km-control-group" required name="countries" caption="">
-												<label name="countryRegions" class="control-label" for="countryRegions">
+											<div class="km-control-group"  name="countries" caption="">
+												<label name="countryRegions" required class="control-label" for="countryRegions">
 													Country(ies)
 												</label>
 												<div km-select multiple required ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
 											</div>
 										</div>
 										<div class="col-md-12">
-											<div class="km-control-group" required="isCommunity()"   caption="Community name">
-												<div km-textbox-ml required="isCommunity()"   ng-model="document.geographicScope.customValue" placeholder="" locales="document.header.languages"></div>
+											<div class="km-control-group" name="geographicScope.customValue" caption="">
+												<label name="geographicScope.customValue" required="isCommunity()" class="control-label" for="geographicScope.customValue">
+													Community name
+												</label>
+												<div km-textbox-ml required="isCommunity()" ng-model="document.geographicScope.customValue" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -347,7 +353,7 @@
 									<div class="row" ng-if="isBCH">
 										<div class="col-md-12">
 											<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
-													caption="Thematic areas">
+													caption="Biosafety thematic areas">
 													<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
 													terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
 											</div>
