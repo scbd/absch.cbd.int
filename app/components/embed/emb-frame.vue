@@ -33,11 +33,10 @@ export default {
                 value.classList.add("hide");
             });
             //here call function that loads the specif page content and set frame height.....
-            
             //alert(document.getElementById('ifrm').contentDocument.body.scrollHeight);
-            document.getElementById('ifrm').addEventListener('scroll', this.scrollEvent);
+            //document.getElementById('ifrm').addEventListener('scroll', this.scrollEvent);
 
-            if(parseInt(ele.offsetHeight) == 0){
+            if(ele != undefined && ele.offsetHeight != null && parseInt(ele.offsetHeight) == 0){
                 setTimeout(() => {
                     //alert(ele.offsetHeight);
                     document.getElementById('ifrm').style.height = parseInt(ele.offsetHeight+20)+'px';  
@@ -56,15 +55,7 @@ export default {
             //------------------------------------------------------------
 
         },
-        mounted() {
-            const $iframe = document.getElementById('ifrm');
-            // method 1
-            $iframe.addEventListener('scroll', this.scrollEvent);
-            // method 2
-            $iframe.contentDocument.addEventListener('scroll',this.scrollEvent);
-            // method 3
-            this.$refs.frame.addEventListener('scroll', this.scrollEvent);
-        },
+       
         /*
 		async exportedData(){ 
 			require(['tableexport'], function () {
@@ -78,5 +69,15 @@ export default {
 		}
         */
 	},
+    mounted() {
+        const $iframe = document.getElementById('ifrm');
+        //alert($($iframe).length);
+        // method 1
+        $iframe.addEventListener('scroll', this.scrollEvent);
+        // method 2
+        $iframe.contentDocument.addEventListener('scroll',this.scrollEvent);
+        // method 3
+        this.$refs.frame.addEventListener('scroll', this.scrollEvent);
+    },
 }
 </script> 

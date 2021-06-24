@@ -5,6 +5,8 @@ import 'views/search/search-results/result-grouped-national-record';
 import 'services/main';
 import 'views/directives/party-status';
 import 'views/search/search-results/result-default';
+import pym from 'https://pym.nprapps.org/pym.v1.min.js';
+
 
     app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', function(searchService, realm, $timeout, $location) {
         return {
@@ -27,6 +29,7 @@ import 'views/search/search-results/result-default';
                     pageCount  : 0,
                     rowsPerPage: 25
                 } 
+                
                 // ,                    sortBy     : 'updatedDate_dt desc'
                 function updateResult(queryOptions, sort, pageNumber){
                    
@@ -76,7 +79,15 @@ import 'views/search/search-results/result-default';
                                     doc.highlight = result.data.highlighting[doc.id];
                             });
                         }
+                       
+                        setTimeout(() => {
+                            $("#recordsContent").closest(".container-fluid").siblings().hide()
+                            .closest(".page-content").siblings().hide()
+                            .closest(".toggled").siblings().hide()                          
+                            var pymChild = new pym.Child();
+                        }, 300);
                         return $scope.searchResult;
+
                     })
                     .catch(function(e){
                         $scope.searchResult.docs     = []

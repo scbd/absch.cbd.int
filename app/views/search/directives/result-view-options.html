@@ -30,9 +30,14 @@
             </a>
         </li>
         <li>
-            <a rel="noopener" href ng-click="onEmbedClick($event)"><i class="fa fa-code" aria-hidden="true"></i> Embed </a>
-        </li>
+           <!-- <div ng-if="vueOptions">
+                <emb-frame ng-vue="vueOptions"></emb-frame>
+                <emb-gen ng-if="vueOptions" ng-vue="vueOptions"></emb-gen>
+                <emb-btn ng-if="vueOptions" ng-vue="vueOptions" url='asd' target="element_id"></emb-btn>
+            </div> -->
+            <emb-dialog ng-if="vueOptions" ng-vue="vueOptions"></emb-dialog>
 
+        </li>
     </ul>
 
     <div>
