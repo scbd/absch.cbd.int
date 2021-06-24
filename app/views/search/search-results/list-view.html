@@ -7,7 +7,7 @@
         <div ng-if="loading">
             <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
         </div>
-        <div ng-repeat="doc in searchResult.docs">
+        <div ng-repeat="doc in searchResult.docs" id="statement">
             <result-default doc="doc" external-link="true" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>  
         </div>
         <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">no records found</h4>

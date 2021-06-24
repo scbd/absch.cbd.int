@@ -3,7 +3,9 @@ import template from 'text!./record-options.html';
 import _ from 'lodash';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
-
+import 'angular-vue';
+import pdfButton from "~/components/pdf-button.vue";
+import { jsPDF } from "jspdf";
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm',
     function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm) {
         return {
@@ -14,6 +16,11 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 if(!$scope.currentLocale){
                     $scope.currentLocale = appLocale;
                     $scope.downloadLocale = appLocale;
+                };
+                $scope.vueOptions = {
+                    components: { 
+                        pdfButton
+                    }
                 }
 
                 $scope.$watch('::internalDocument', function(newVal){
@@ -89,6 +96,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                                                         .replace(':documentId'  , documentId)
                                                         .replace(':revision'    , ($scope.internalDocumentInfo||{}).revision||'')
                                                         .replace(':schema'      , $scope.internalDocument.header.schema);
+                    console.log("PDF URL", pdfDownloadUrl);
                     return pdfDownloadUrl;
                     // $window.open(pdfDownloadUrl);
                 }

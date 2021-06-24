@@ -56,6 +56,11 @@
                                 </div>
                             </section>
 
+                            <div ng-if="vueOptions">
+                                <export-details ng-vue="vueOptions"></export-details>
+                                <export-button ng-vue="vueOptions"></export-button>
+                            </div>
+
                              <table class="table" id="angTable">
                                 <thead>
                                 <tr>

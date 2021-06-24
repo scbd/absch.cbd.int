@@ -16,8 +16,7 @@ import exportButton from "~/components/export-button.vue";
         $scope.vueOptions = {
             components: { 
                 exportDetails,
-                exportButton,
-                pdfButton
+                exportButton
             }
         };
 
