@@ -13,14 +13,14 @@
     <div class="recordDefault nationalRecords national card card-1 easing" style="margin-bottom:10px;" ng-show="!showDoc" ng-click="showDoc=!showDoc">
 
        
-        <div class="title bold"  style="font-size:108%;" >{{doc.rec_title}}</div>     
+        <div class="title bold"  style="font-size:108%;" ng-bind="doc.rec_title"></div>
         <div ng-if="!doc.highlight">
             <!-- TODO: need to remove description field from index and use summary -->
-            <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t">{{doc.summary_t|limitTo:500}}
+            <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t" ng-bind="doc.summary_t|limitTo:500">
                 <span ng-if="doc.summary_t.length > 500">...</span>
             </div>
             <!-- TODO: record summary copied descriptioninto rec_summary which needs to be replaced by summary_t in frontend and backend -->
-            <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">{{doc.rec_summary|limitTo:500}}
+            <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary" ng-bind="doc.rec_summary|limitTo:500">
                 <span ng-if="doc.rec_summary.length > 500">...</span>
             </div>
         </div> 
@@ -35,41 +35,40 @@
         </div>
         <ul class="metadata bold" style="padding-top:0;margin-top:0;">
             <li class="hidden-xs">
-             <span class="color-blue">{{doc.rec_type ? doc.rec_type + " ("+ (doc.schema_s | schemaShortName) +")": (doc.schema_s | schemaName) }}</span>
-             </li>
+              <span class="color-blue" ng-bind="doc.rec_type ? doc.rec_type + '('+ (doc.schema_s | schemaShortName) +')': (doc.schema_s | schemaName)"></span>
+            </li>
             <li ng-if="doc.rec_countryName" class="hidden-xs">
-                <span>{{doc.rec_countryName}}</span>
+                <span ng-bind="doc.rec_countryName"></span>
             </li>
             <li ng-if="doc.uniqueIdentifier_s" >
-                <span>{{doc.uniqueIdentifier_s}}</span>
+                <span ng-bind="doc.uniqueIdentifier_s"></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database'"  id="meta1">
                 <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;" >CHECKPOINT:</span>
-                <span  ng-repeat="meta in doc.rec_meta1">{{meta}}{{$last ? '':', '}}</span>
+                <span  ng-repeat="meta in doc.rec_meta1"><span ng-bind="::meta"></span><span ng-bind="::($last ? '':', ')"></span></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta2 && doc.schema_s !=='absPermit'" id="meta2" >
                 <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;" >SOURCE:</span>
-                <span  ng-repeat="meta in doc.rec_meta2">{{meta}}{{$last ? '':', '}}</span>
+                <span  ng-repeat="meta in doc.rec_meta2"><span ng-bind="::meta"></span><span ng-bind="::($last ? '':', ')"></span></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta3" id="meta3">
-                <span  ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}">{{meta}}{{$last ? '':', '}}</span>
+                <span  ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}"><span ng-bind="::meta"></span><span ng-bind="::($last ? '':', ')"></span></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta5" id="meta5">
-                <span ng-repeat="meta in doc.rec_meta5">{{meta}}</span>
+                <span ng-repeat="meta in doc.rec_meta5" ng-bind="meta"></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta4" id="meta4">
-                <span  ng-repeat="meta in doc.rec_meta4">{{meta}}</span>
+                <span  ng-repeat="meta in doc.rec_meta4" ng-bind="meta"></span>
             </li>
             <li> 
                 <span  ng-if="doc.schema_s =='absNationalReport' && compareDate(doc.rec_date, doc.rec_creationDate)">
                     <span class="xlabel">submitted on:</span>
-                    <span class="date">
-                            {{doc.rec_creationDate | formatDate}} 
+                    <span class="date" ng-bind="doc.rec_creationDate | formatDate">
                     </span>
                 </span>                
                 <span class="last-span">
                     <label class="xlabel" ng-if="doc.schema_s =='absNationalReport' && compareDate(doc.rec_date, doc.rec_creationDate)">&nbsp;last updated:</label>
-                    {{doc.rec_date | formatDate}}
+                    <span ng-bind="doc.rec_date | formatDate"></span>
                 </span>
             </li>
         </ul>
