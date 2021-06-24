@@ -15,6 +15,8 @@ import 'components/scbd-angularjs-controls/main';
 import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/compare-val';
 
+import pym from 'https://pym.nprapps.org/pym.v1.min.js';
+
 	app.directive('recordLoader', [function () {
 		return {
 			restrict: 'EAC',
@@ -242,6 +244,13 @@ import 'views/forms/directives/compare-val';
 						})
 						.finally(function () {
 							$scope.loading = false;
+							if ( self !== top ) {
+								$("scbd-header, bch-header, scbd-footer, bch-footer").hide();
+								setTimeout(() => {
+									var pymChild = new pym.Child();	
+								}, 500);
+							}
+							
 						})
 
 					};

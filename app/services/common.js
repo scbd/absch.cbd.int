@@ -383,7 +383,6 @@ import 'components/scbd-angularjs-services/main';
                         entity.treaties[appTreaties[appName]].instrument == "accession" ||
                         entity.treaties[appTreaties[appName]].instrument == "acceptance" || entity.treaties[appTreaties[appName]].instrument == "approval");
                 }
-
                 //==================================================================================
                 function showHelp(entity) {
 

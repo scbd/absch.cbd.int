@@ -80,12 +80,6 @@ import pym from 'https://pym.nprapps.org/pym.v1.min.js';
                             });
                         }
                        
-                        setTimeout(() => {
-                            $("#recordsContent").closest(".container-fluid").siblings().hide()
-                            .closest(".page-content").siblings().hide()
-                            .closest(".toggled").siblings().hide()                          
-                            var pymChild = new pym.Child();
-                        }, 300);
                         return $scope.searchResult;
 
                     })
@@ -99,6 +93,34 @@ import pym from 'https://pym.nprapps.org/pym.v1.min.js';
                     })
                     .finally(function(){
                         $scope.loading = false;
+                        if ( self !== top ) {
+                            $("scbd-header, bch-header, scbd-footer, bch-footer").hide();
+                            setTimeout(() => {
+
+                                //$("body > div").hide();    
+                                //$("body").prepend( $("#recordsContent").closest(".row") ).children(":first").removeClass("hide");
+
+                                var childEle = "recordsContent";
+                                //----------------------- lis view redering page
+                                var url = new URL(document.location.href).searchParams.get("childId");
+                                if(url != undefined && url != "")
+                                    childEle = url;
+                                
+                                console.log(childEle);
+                                $("#"+url+"").siblings().hide().closest(".container-fluid").siblings().hide()
+                                .closest(".page-content").siblings().hide()
+                                .closest(".toggled").siblings().hide()
+                                // //----------------------- for directive view redering page
+                                // //alert($("#schemaView").length);
+                                // $("#Record").closest("#recordContent")
+                                // .closest(".page-content").siblings().hide()
+                                // .closest(".toggled").siblings().hide()
+
+                                //console.log("Nasir "+pymChild+"\n"+$("#recordsContent").length);
+                                var pymChild = new pym.Child();
+                            
+                            }, 500);
+                        }
                     })
                 }
 
@@ -118,6 +140,7 @@ import pym from 'https://pym.nprapps.org/pym.v1.min.js';
                     doc.showDoc =!doc.showDoc;
                     $timeout(function(){
                         $scope.recordLoader.api.loadDocument(doc.schema_s, doc.identifier_s);
+                        var pymChild = new pym.Child();
                     },10)
                 };
             },

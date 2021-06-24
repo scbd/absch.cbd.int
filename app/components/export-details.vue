@@ -51,6 +51,7 @@
             </div>
           </div>
           <div id="sampletest" v-show="toggle" v-bind:data-pym-src="loc.url"></div>
+          <EmbedBtn  :url="loc.url" :target="loc.ele" />
           <div v-show="toggle"><EmbedExternal  :url="loc.url" :target="loc.ele" /></div>
         <!--- embed frame --------->
         </div>
@@ -60,10 +61,12 @@
 <script>
 //-------------------------------------------------------- add template here
 import EmbedExternal from './embed/emb-frame.vue';
+import EmbedBtn from './embed/emb-button.vue';
+import py from 'pym.js';
 //--------------------------------------------------------
 export default {
   components: {
-    EmbedExternal    
+    EmbedExternal, EmbedBtn    
   },
   data:  () => {
     return {   

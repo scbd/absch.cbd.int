@@ -185,7 +185,9 @@ import pym from 'https://pym.nprapps.org/pym.v1.min.js';
                     $scope.onViewTypeChange({options:{ viewType:'group', fields:$scope.groupByFields}})
                 }
             }
+
         }
+
     }])
 
 
