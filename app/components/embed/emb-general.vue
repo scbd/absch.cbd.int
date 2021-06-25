@@ -29,7 +29,7 @@
   <div class="form-group">
     <div class="col-sm-12">
       <textarea id="code_result" name="code_result" v-html="txt" class="form-control" rows="5"></textarea>
-      <div ref="script" :data-script="`<div data-pym-src='${url}' id='${target_element}' class='scbd-ch-embed' data-pym-allowfullscreen >Loading...</div><script type='text/javascript' src='${lib}'></script>`"></div>
+      <div ref="script" :data-script="`<div data-pym-src='${url}' id='${target}' class='scbd-ch-embed' data-pym-allowfullscreen >Loading...</div><script type='text/javascript' src='${lib}'></script>`"></div>
     </div>
   </div>
 </form>
@@ -37,25 +37,28 @@
 
 <script>
 export default {
-    name:'embGeneralForm',
-    props: {
-    },
+    name:'embGeneral',
+
     data:  () => {
         return { 
-            target_element : "recordsContent",
+            // target_element : "",
             url : window.location.href,
             lib : 'https://pym.nprapps.org/pym.v1.min.js',
-            txt : "",           
+            txt : "",
         }
     },
+  props: {
+    target: String
+  },
 	methods: {
-        getData(e) {
-            let fele = e.target.elements;
-            this.txt = this.$refs.script.getAttribute('data-script');
-        }
+
+      getData(e) {
+          let fele = e.target.elements;
+          this.txt = this.$refs.script.getAttribute('data-script');
+      }
  	},
     mounted() {
-        //alert("General form mounted.");
+
     },
 }
 </script>

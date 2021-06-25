@@ -28,7 +28,11 @@
                     ng-click="setCurrentLocale(loc)" data-toggle="tooltip" data-title="{{termLocales[loc]|term}}">
                     <span ng-bind="loc | uppercase"></span>
                 </button>
-            </div>            
+            </div>  
+            &nbsp;
+                <div ng-if="vueOptions" class="btn btn-lang btn-default btn-xs lang-tooltip" >
+                    <emb-dialog target="schemaView" ng-vue="vueOptions"></emb-dialog>
+                </div>          
         </div>
 
     </div>

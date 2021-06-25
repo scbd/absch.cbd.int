@@ -13,7 +13,7 @@
                 <h5 class="modal-title"><i class="text-info fa fa-code"></i> <strong class="text-primary"> Embed Utility</strong></h5>
               </div>
               <div class="modal-body">
-                  <embGeneral />
+                  <embGeneral :target="target" />
               </div>
             </div>
           </div>
@@ -22,7 +22,7 @@
     </transition>
   </div>
   <!-- <button id="show-modal" @click="showModal = true">Show Modal</button> -->
-  <a rel="noopener" :target="targert"  :href="url"  @click="showModal = true"><i class="fa fa-code" aria-hidden="true"></i> Embed</a>
+  <a rel="noopener" :target="target" @click="showModal = true"><i class="fa fa-code" aria-hidden="true"></i> Embed</a>
  </span>
  </template>
 <style>
@@ -56,7 +56,6 @@ export default {
         embGeneral    
     },
     props: {
-        url:String,
         target: String
     },
     data:  () => {
@@ -67,7 +66,7 @@ export default {
 	methods: {
  	},
     mounted()  {
-        //alert("Dialog mounted.");
+      //  alert("Dialog mounted. url = "+this.url+", target = "+this.target);
     },
 }
 </script>

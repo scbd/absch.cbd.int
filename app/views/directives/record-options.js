@@ -3,6 +3,7 @@ import template from 'text!./record-options.html';
 import _ from 'lodash';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
+import embDialog from "~/components/embed/emb-dialog.vue";
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm',
     function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm) {
@@ -71,7 +72,12 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     });
                     
                 }
-
+                $scope.vueOptions = {
+                    components: {
+                        //embGen,
+                        embDialog
+                    },
+                };
                 function getPdfUrl(){
                     var documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);
                     

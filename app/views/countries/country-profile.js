@@ -5,6 +5,7 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
+import embDialog from "~/components/embed/emb-dialog.vue";
 
   export { default as template } from './country-profile.html';
 
@@ -32,7 +33,12 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
           loadCountryProfile($scope.country.code);
 
       });
-      
+      $scope.vueOptions = {
+        components: {
+            //embGen,
+            embDialog
+        },
+    };
       function loadCountryProfile(code){
 
         var searchQuery = $scope.exportQuery = {
