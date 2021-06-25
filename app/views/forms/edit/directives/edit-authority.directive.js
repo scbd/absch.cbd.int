@@ -7,8 +7,8 @@ import 'views/forms/edit/document-selector';
 import 'views/forms/edit/warning-message-cna';
 import 'views/forms/view/view-authority.directive';
 
-	app.directive("editAuthority", ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',
-    function($http, Thesaurus, $q, $controller, $location, realm, solr,thesaurusService) {
+    const authorityController = ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',
+        function($http, Thesaurus, $q, $controller, $location, realm, solr,thesaurusService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -189,7 +189,9 @@ import 'views/forms/view/view-authority.directive';
 
 			}
 		}
+    }]
 
-   }]);
+	app.directive("editAuthority", authorityController);
+	app.directive("editSupplementaryAuthority", authorityController);
 
 
