@@ -13,7 +13,7 @@
 							<td>
 								<span ng-if="link.language" ng-bind="locales[link.language]||locales['lang-'+link.language]||(stringToETerm('lang-'+link.language)|term:locale)"></span>
 								<a rel="noopener" translation-url target="_blank" ng-href="{{link.url|encodeURI}}" ng-bind="link.name||link.url"></a>
-								<span ng-if="link.tag" ng-bind="link.tag"></span>
+								<span ng-if="link.tag" ng-bind="'('+link.tag+')'"></span>
 							</td>
 							<td style="white-space:nowrap;text-align:right;vertical-align:top">
 								<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
