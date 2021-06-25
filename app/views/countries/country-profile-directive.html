@@ -47,7 +47,7 @@
                         <div> 
                             <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" />
                             <a rel="noopener" translation-url  target="_blank" ng-href="database/record/{{measure|uniqueID|encodeURIComponent}}"> 
-                               <span class="color-black" style="margin-left:10px;" ng-bind="$index+1">.</span>
+                               <span class="color-black" style="margin-left:10px;" ng-bind="$index+1 + '.'"></span>
                                <span class="bold" ng-bind="measure.rec_title"> </span>
                             </a>
                         </div>

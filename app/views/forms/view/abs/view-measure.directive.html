@@ -97,7 +97,9 @@
 			</div>
 		</div>
 		<div ng-show="document.registeredMeasuresDescription">
-			<div class="km-value km-pre" compare-val><span ng-bind="document.registeredMeasuresDescription | lstring:locale"></span></div>
+			<div class="km-value km-pre" compare-val>
+				<km-value-ml value="document.registeredMeasuresDescription | lstring:locale"></km-value-ml>
+			</div>
 		</div>
 
 		<div ng-show="document.documents">
