@@ -160,7 +160,7 @@
                          <i class="fa check"
                              ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i>
                          Free text search:
-                         <span class="color-blue" ng-bind="searchKeyword"></span>
+                         <span class="color-blue">"<span ng-bind="searchKeyword"></span>"</span>
                      </a>
                  </div>
                  <div id="recordTypesFilterTab">
