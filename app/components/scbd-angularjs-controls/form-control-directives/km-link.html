@@ -85,7 +85,7 @@
 						<span ng-bind="editor.error"></span>
 					</div>
 					<div ng-if="editor.progress">
-						<label>Uploading <span ng-bind="editor.name"></span> <span ng-bind="editor.progress.size/1024 | number:1"></span> kB</label>
+						<label>Uploading <span ng-bind="editor.name"></span> (<span ng-bind="editor.progress.size/1024 | number:1"></span> kB)</label>
 						<div class="progress progress-striped {{editor.progress.style}}">
 							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width:{{editor.progress.percent}}%;"></div>
 						</div>
