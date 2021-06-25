@@ -680,6 +680,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     "independentRiskAssessment" : 'views/forms/edit/bch/directives/edit-risk-assessment.directive',
 
                     'authority'                 : 'views/forms/edit/directives/edit-authority.directive',
+                    'supplementaryAuthority'    : 'views/forms/edit/directives/edit-authority.directive',
                     'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
                     'organization'              : 'views/forms/edit/directives/edit-organization.directive',
                     'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive'
