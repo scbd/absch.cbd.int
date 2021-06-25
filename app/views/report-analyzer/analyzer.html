@@ -1,13 +1,12 @@
 <div class="container-fluid" id="secNrAnalyzer">
         <h1 ng-show="!self.showAnalyzer" >
-                {{self.activeReport.title}}
+                <span ng-bind="self.activeReport.title"></span>
                <!-- <span class="hidden-xs">National Report<span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span> -->
         </h1>
 
         <h1 ng-show="self.showAnalyzer" >
             <span class="bold">Report: </span>
-            <span  style="font-weight:normal;">
-                {{self.activeReport.title}}
+            <span  style="font-weight:normal;" ng-bind="self.activeReport.title">
                 <!-- <span > Interim <span class="hidden-sm hidden-md hidden-lg">NR</span>
                 <span class="hidden-xs">National Report<span> 
                 <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span></span> -->

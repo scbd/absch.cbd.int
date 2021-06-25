@@ -13,7 +13,7 @@
                                 <th>Report</th>
                                 <th style="text-align:center;" class="hidden-xs">Deadline </th>
                                 <th style="text-align:center;">Number of Parties <br/>at the deadline</th>
-                                <th style="text-align:center;" class="hidden-xs" ng-repeat="region in reportData[0].regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>                                
+                                <th style="text-align:center;" class="hidden-xs" ng-repeat="region in reportData[0].regionMapping"><span ng-bind="(region.shortTitle|lstring:locale).replace('CBD - ', '')"></span> </th>
                                 <th style="text-align:center;" class="hidden-xs">By Parties* </th>
                                 <th style="text-align:center;" class="hidden-xs">By Non-Parties* </th>
                                 <th style="text-align:center;">Total</th>
@@ -22,23 +22,23 @@
                         <tbody>
                             <tr ng-repeat="activeReport in reportData ">
                                 <td>
-                                    <span style="margin-right:10px;">{{activeReport.title}}</span>
+                                    <span style="margin-right:10px;" ng-bind="activeReport.title"></span>
                                     <span style="display:inline-block;" ng-if="activeReport.offlineFormats && activeReport.offlineFormats.length>0">    
                                         <i class="fa fa-file-word-o" aria-hidden="true"></i>  | 
                                         <span ng-repeat="format in activeReport.offlineFormats">
-                                            <a rel="noopener" ng-href="{{format.url|encodeURI}}" target="_blank">{{format.lang}}</a> 
+                                            <a rel="noopener" ng-href="{{format.url|encodeURI}}" target="_blank" ng-bind="format.lang"></a>
                                             <i ng-if="!$last">|</i> 
                                         </span>
                                     </span>
                                 </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.deadline|formatDate}}</td>
-                                <td style="text-align:center;">{{activeReport.partyCount}} </td>
-                                <td style="text-align:center;" class="hidden-xs" ng-repeat="region in activeReport.regionMapping">{{region.count}} </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.partyReportCount}} </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.nonPartyReportCount}} </td>
+                                <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.deadline|formatDate"></td>
+                                <td style="text-align:center;" ng-bind="activeReport.partyCount"> </td>
+                                <td style="text-align:center;" class="hidden-xs" ng-repeat="region in activeReport.regionMapping"><span ng-bind="region.count"></span> </td>
+                                <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.partyReportCount"> </td>
+                                <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.nonPartyReportCount"> </td>
                                 <td style="text-align:center;">
                                     <!-- <a rel="noopener" href="/search/nationalRecords?schema=absNationalReport"> -->
-                                        <b>{{activeReport.partyReportCount + activeReport.nonPartyReportCount}}</b>
+                                        <b><span ng-bind="activeReport.partyReportCount + activeReport.nonPartyReportCount"></span></b>
                                     <!-- </a> -->
                                 </td>
                             </tr>
