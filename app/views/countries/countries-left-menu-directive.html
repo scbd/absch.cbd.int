@@ -17,17 +17,17 @@
                 <hr  style="padding-bottom:5px;margin:0;">
          
                     <div ng-click="updateMap('all')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='all'}">
-                        <span class="badge pull-right">{{countries.length}}</span>
+                        <span class="badge pull-right"  ng-bind="countries.length"></span>
                         <span>All</span>
                     </div>
                     
                      <div ng-click="updateMap('party')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='party'}">
-                        <span class="badge   pull-right">{{npParty}}</span>
+                        <span class="badge   pull-right" ng-bind="npParty"></span>
                         <span style="font-weight:bold;color:#428bca">Party</span>
                     </div>
                     
                     <div ng-click="updateMap('nonParties')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='nonParties'}">
-                        <span class="badge pull-right">{{nonParty}}</span>
+                        <span class="badge pull-right" ng-bind="nonParty"></span>
                         <span style="font-weight:bold;color:#888">Non-Party</span>
                     </div>
              </div>
@@ -57,10 +57,10 @@
                          <div class="clearfix"></div>
                          <div ng-click="selected_facet=facet[0];updateMap(facet[0]);" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;" >
                              <div class="col-xs-2 text-center"  ng-class="{'bg-grey1': selected_facet==facet[0], 'bg-white':selected_facet!=facet[0]}" style="height:28px!important;">
-                                 <span class="stats-count">{{facet[1].countryCount}}</span></div>
+                                 <span class="stats-count" ng-bind="facet[1].countryCount"></span></div>
                              <div class="col-xs-10" ng-class="{'bg-grey1': selected_facet==facet[0], 'bg-white':selected_facet!=facet[0]}" style="height:28px!important;">
-                                 <span class="badge   pull-right">{{facet[1].facetCount}}</span>
-                                 <div  style="padding-top:3px;line-height:1;font-size:11px;text-transform:uppercase;">{{facet[0]|lowercase|schemaNamePlural}}</div> 
+                                 <span class="badge   pull-right" ng-bind="facet[1].facetCount"></span>
+                                 <div  style="padding-top:3px;line-height:1;font-size:11px;text-transform:uppercase;"><span ng-bind="facet[0]|lowercase|schemaNamePlural"></span></div>
                              </div>
                          </div>
                         </div>
@@ -121,9 +121,9 @@
                 <strong>Filter by Nagoya Protocol Party Status</strong>
                
                 <ul>
-                  <li><a rel="noopener" translation-url  ng-click="updateMap('all')">All <span class="badge pull-right">{{countries.length}}</span></a></li>
-                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#428bca" ng-click="updateMap('party');selected=': Parties'"  >Party <span class="badge pull-right">{{npParty}}</span></a></li>
-                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#888" ng-click="updateMap('nonParties');selected=': Non-Parties'" >Non-Party <span class="badge pull-right">{{nonParty}}</span></a></li>
+                  <li><a rel="noopener" translation-url  ng-click="updateMap('all')">All <span class="badge pull-right"><span ng-bind="countries.length"></span></span></a></li>
+                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#428bca" ng-click="updateMap('party');selected=': Parties'"  >Party <span class="badge pull-right" ng-bind="npParty"></span></a></li>
+                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#888" ng-click="updateMap('nonParties');selected=': Non-Parties'" >Non-Party <span class="badge pull-right" ng-bind="nonParty"></span></a></li>
                 </ul>
              </div>
     
@@ -140,7 +140,7 @@
                         ng-class="{'list-group-item-primary':country.isParty,
                                 'list-group-item-default':!country.isParty}">
     
-                            <div class="col-xs-12">{{country.name |lstring}}</div>
+                            <div class="col-xs-12"><span ng-bind="country.name |lstring"></span></div>
                         </li>
                     </ul>
                 </div>

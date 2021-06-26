@@ -27,13 +27,13 @@
     style="position:relative;background-color: #fff;">
         <div class="row">
             <div class="col-md-5">
-                <span class="label label-party">{{numParty}}</span>
+                <span class="label label-party" ng-bind="numParty"></span>
                 <a rel="noopener" translation-url href="/countries/status/party" class="link od-label">Parties to the <span ng-bind="options.protocol"></span>
                 </a>
             </div>
 
             <div class="col-md-4">
-                <span class="label label-inbetween">{{numRatified}}</span>
+                <span class="label label-inbetween" ng-bind="numRatified"></span>
                 <a rel="noopener" translation-url href="/countries/status/inbetween" class="link od-label">Ratified, not yet Party</a>
                 <a rel="noopener" translation-url href="#" class="helpinfoInline fa fa-info-circle color-grey" data-toggle="tooltip" 
                 data-title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. "
@@ -41,7 +41,7 @@
             </div>
 
             <div class="col-md-3">
-                 <span class="label label-non-party" style="font-size: 16px;">{{numNonParty}}</span>
+                 <span class="label label-non-party" ng-bind="numNonParty" style="font-size: 16px;"></span>
                 <a rel="noopener" translation-url href="/countries/status/nonparty" class="link od-label">Non-Parties</a>
             </div>
         </div>
