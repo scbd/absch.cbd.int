@@ -26,11 +26,8 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
         $scope.pdf = {};
         $scope.loading = true;
         
-        var uniqueId = ($route.current.params.documentId + '-' + $route.current.params.revision||'').replace(/-$/, '')
-        $scope.pdf.uniqueId = uniqueId;
-        $scope.pdf.src = getPdfSrc($scope.pdfLocale);
-
-
+        var uniqueId = ($route.current.params.documentId + '-' + ($route.current.params.revision||'')).replace(/-$/, '')
+       
         $scope.pageLoaded = function(){
             $scope.loading = false;
         }
@@ -75,14 +72,42 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 baseApiUrl = '';
 
             var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
-            return src .replace("{{realm}}", realm.value)
+            src = src .replace("{{realm}}", realm.value)
                                  .replace("{{locale}}", pdfLocale)
                                  .replace("{{type}}", $route.current.params.type)
                                  .replace("{{documentId}}", $route.current.params.documentId)
+                                 .replace("documentID", $route.current.params.type == 'draft-documents' ? 'code':'')
                                  .replace("{{revision}}", $route.current.params.revision)
                                  .replace("{{schema}}", $route.current.params.schema);
+
+            console.log(src);
+            return src;
         }
-        $scope.loadLangPdf(locale||'en')
+
+        function loadPdfDocumentDetails(code){
+            $scope.pdf.uniqueId = uniqueId;
+            $scope.pdf.fileName = uniqueId + '-' + locale + '.pdf';
+            $scope.pdf.src = getPdfSrc($scope.pdfLocale);
+            if($route.current.params.type == 'draft-documents'){
+                $http.get('/api/v2018/document-sharing/'+ code)
+                .then(function(result){
+                    
+                    if(result.status == 200){
+                        $scope.sharedData = result.data.sharedData;
+                        $scope.pdf.uniqueId = uniqueId;
+                    }
+                })
+                .then(()=>$scope.loadLangPdf(locale||'en'))
+                .catch(e=>{
+                    $scope.error = e.data
+                })
+            }
+            else{
+                $scope.loadLangPdf(locale||'en')
+            }
+        }
+
+        loadPdfDocumentDetails($route.current.params.documentId)
     }];
 
 
