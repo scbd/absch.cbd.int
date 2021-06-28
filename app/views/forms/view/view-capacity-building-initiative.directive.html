@@ -78,13 +78,13 @@
 				<div class="col-md-6">
 					<label>Start date</label>
 					<div compare-val>
-					<km-value-ml value="document.startDate | date : 'longDate'" locales="locale"></km-value-ml>
+						<div class="km-value" ng-bind-html="document.startDate | date : 'longDate'"></div>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<label>End date</label>
 					<div compare-val>
-					<km-value-ml value="document.endDate | date : 'longDate'" locales="locale"></km-value-ml>
+						<div class="km-value" ng-bind-html="document.endDate | date : 'longDate'"></div>
 					</div>
 				</div>
 			</div>
