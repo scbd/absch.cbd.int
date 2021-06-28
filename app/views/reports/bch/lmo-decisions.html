@@ -1,6 +1,59 @@
 ﻿<div>
 	<style>
 		.tableHeaderTop { font-weight:bold; padding:3px; text-align:center; } .tableHeaderBottom { border-bottom:solid 2px #444; padding:3px; text-align:center; } .tableRow { border-bottom:solid 1px #888; padding:3px; text-align:center; } .back99 { background-color:#ffffff; } .back95 { background-color:#f4f4f4; } .back80 { background-color:#f0f0f4; } .backConflict { background-color:#ffffc0; }
+
+		th.tableHeaderTop {
+			height: 30px;
+		}
+
+		td.countryName, th.countryName {
+			width: 180px;
+			white-space:nowrap;
+		}
+
+		td.linkID
+		{
+			width:60px;
+			max-width:60px;
+			min-width:60px;
+			overflow:hidden;
+			text-overflow:ellipsis;
+		}
+		td.bch-icon      { width: 10%; }
+		td.biotrade-icon { width: 17%; }
+		th.left-border, td.left-border
+		{
+			padding-left:5px;
+			border-left:dotted 1px #d0d0d0
+		}
+
+		div.icon
+		{
+			width:22px;
+			max-width:22px;
+			min-width:22px;
+			position: relative;
+		}
+
+		div.icon > img.icon-overlay    { width:22px; }
+		div.icon > img.off.svg { opacity: 0.25; }
+
+		div.icon > .overlay
+		{
+			font-size: 24px;
+			position: absolute;
+			display: block;
+			top: -6px;
+    		left: -3px;
+			text-align:center;
+			vertical-align:middle;
+			overflow:visible;
+		}
+
+		div.approvedWithCondition {	color: green; }
+		div.requestInformation    {	color: blue;  }
+		div.requestExtension      {	color: green; }
+
 	</style>
 
 	
