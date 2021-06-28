@@ -1,24 +1,47 @@
 <template>
-     <div class="searchfield bg-hed-six">
-        <div class="container" style="padding-top: 20px; padding-bottom: 20px;">
-            <div class="row text-center margin-bottom-20">
-                <h1 class="white"> Knowledge Base</h1>
-                <span class="nested"> Start typing to search </span>
+    <div>
+        <title>Knowledge Base</title>
+        <link href="css/kb-style.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"  crossorigin="anonymous"/>
+
+        <div  class="map-bg overlay">
+
+            <div class="masthead text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <h1>Knowledge Base</h1>
+
+                            <form>
+                                <input type="text" class="search-field" placeholder="Search Something ... ">
+                                <button type="submit"><i class="fa fa-search"></i></button>
+                            </form>
+                            <a href="#" class="btn btn-kb"> Github Project<span class="icon-right"></span></a>
+                            <a href="#" class="btn btn-kb-dark"> Github Project<span class="icon-right"></span></a>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <br>
-            <div class="row search-row">
-                <input type="text" class="search" placeholder="What do you need help with?">
-                <a class="buttonsearch btn btn-info btn-lg" href="search-results.html">Search</a>
+        </div>
+
+        <div class="kb-breadcrumbs">
+            <div class="container">
+                <ol>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Knowledge Base</a></li>
+                    <li class="active">Explore Topics</li>
+                </ol>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-export default {
-    data:  () => {
-        return {            
+    export default {
+        data:  () => {
+            return {
+            }
         }
     }
-}
 </script> 

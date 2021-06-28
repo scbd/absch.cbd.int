@@ -1,60 +1,121 @@
 <template>
 
-    <!-- ARTICLE CATEGORIES SECTION -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="fb-heading">
-                {{ $t("categories.title") }}
+    <div class="col-lg-8">
+
+        <header>
+            <h2><span class="icon-pages"></span>Explore Topics</h2>
+            <p>We did our best to cover all topics related to this product. Each section have number which represent
+                number of topic in each category.</p>
+        </header>
+
+        <div class="row match-height">
+            <div class="col-md-6 col-sm-12">
+                <div class="categories-list">
+                    <h3><span class="badge">19</span>Competent National Authorities</h3>
+                    <ul>
+                        <li><a href="single-article.html"> How to use this documentation? </a></li>
+                        <li><a href="single-article.html"> How to find topics? </a></li>
+                        <li><a href="single-article.html"> What is included and why? </a></li>
+                        <li><a href="single-article.html"> Basic knowledge requirments. </a></li>
+                        <li><a href="single-article.html"> Getting Started &amp; What is next. </a></li>
+                    </ul>
+                </div>
             </div>
-            <hr class="style-three">
-            <div class="row">
-                <div class="col-md-6 margin-bottom-20">
-                    <div class="fat-heading-abb">
-                        <a href="single-category.html">
-                            <i class="fa fa-folder"></i> General
-                            <span class="cat-count">(10)</span>
-                        </a>
-                    </div>
-                    <div class="fat-content-small padding-left-30">
-                        <ul>
-                            <li>
-                                <a href="single-article.html">
-                                    <i class="fa fa-file-text-o"></i> How to change account password?</a>
-                            </li>
-                            <li>
-                                <a href="single-article.html">
-                                    <i class="fa fa-file-text-o"></i> How to edit order details?</a>
-                            </li>
-                            <li>
-                                <a href="single-article.html">
-                                    <i class="fa fa-file-text-o"></i> Add new user</a>
-                            </li>
-                            <li>
-                                <a href="single-article.html">
-                                    <i class="fa fa-file-text-o"></i> Change customer details</a>
-                            </li>
-                            <li>
-                                <a href="single-article.html">
-                                    <i class="fa fa-file-text-o"></i> Lookup existing customer in order form</a>
-                            </li>
-                        </ul>
-                    </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="categories-list">
+                    <h3><span class="badge">19</span>Supplementary Protocol Competent Authorities</h3>
+                    <ul>
+                        <li><a href="single-article.html"> How to use this documentation? </a></li>
+                        <li><a href="single-article.html"> How to find topics? </a></li>
+                        <li><a href="single-article.html"> What is included and why? </a></li>
+                        <li><a href="single-article.html"> Basic knowledge requirments. </a></li>
+                        <li><a href="single-article.html"> Getting Started &amp; What is next. </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row match-height">
+            <div class="col-md-6 col-sm-12">
+                <div class="categories-list">
+                    <h3><span class="badge">19</span>Biosafety Laws, Regulations, Guidelines and Agreements</h3>
+                    <ul>
+                        <li><a href="single-article.html"> How to use this documentation? </a></li>
+                        <li><a href="single-article.html"> How to find topics? </a></li>
+                        <li><a href="single-article.html"> What is included and why? </a></li>
+                        <li><a href="single-article.html"> Basic knowledge requirments. </a></li>
+                        <li><a href="single-article.html"> Getting Started &amp; What is next. </a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="categories-list">
+                    <h3><span class="badge">19</span>Countries' Decisions or any other Communications</h3>
+                    <ul>
+                        <li><a href="single-article.html"> How to use this documentation? </a></li>
+                        <li><a href="single-article.html"> How to find topics? </a></li>
+                        <li><a href="single-article.html"> What is included and why? </a></li>
+                        <li><a href="single-article.html"> Basic knowledge requirments. </a></li>
+                        <li><a href="single-article.html"> Getting Started &amp; What is next. </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="row match-height">
+            <div class="col-md-6 col-sm-12">
+                <div class="categories-list">
+                    <h3><span class="badge">19</span>Risk Assessments generated by a regulatory process</h3>
+                    <ul>
+                        <li><a href="single-article.html"> How to use this documentation? </a></li>
+                        <li><a href="single-article.html"> How to find topics? </a></li>
+                        <li><a href="single-article.html"> What is included and why? </a></li>
+                        <li><a href="single-article.html"> Basic knowledge requirments. </a></li>
+                        <li><a href="single-article.html"> Getting Started &amp; What is next. </a></li>
+                    </ul>Popular Tags
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="categories-list">
+                    <h3><span class="badge">19</span>National Biosafety Websites or Databases</h3>
+                    <div><i v-show="!articles.length" class="fa fa-spinner fa-spin"></i></div>
+                    <ul v-for="(title, index) in articles">
+                        <li><a> {{title.title.en}} </a></li>
+                        <li class="tag" v-if="title.adminTags != undefined">
+                            <span class="tagcloud" v-for="tag in title.adminTags">
+                                <a href="#" class="btn btn-mini">{{tag}}</a>
+                            </span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
-    <!-- END ARTICLES CATEOGIRES SECTION -->
-
 </template>
 
 <script>
-import i18n from '../../locales/en/components/kb/categories-group';
+     import VueResource from 'https://cdn.jsdelivr.net/npm/vue-resource@1.5.3'; //will be from npm 'vue-resource'
+    Vue.use(VueResource)
+    export default {
+        data:  () => {
+            return {
+                articles: []
+            }
+        },
+        mounted() {
+            var self = this;
+            var ag = [];
+            var agLimit = [];
+            agLimit.push({"$limit" : 20});
+            var qs = {
+                "ag" : JSON.stringify(agLimit)
+            };
+            return Vue.http.get('/api/v2017/articles', {params: qs}).then(function (results) {
+                if ((results || {}).data && results.data.length > 0) {
 
-export default {
-    data:  () => {
-        return {            
-        }
-    },
-    i18n: { messages:{ en: i18n }}
-}
+                    self.articles = results.data;
+                }
+            });
+        },
+        // i18n: { messages:{ en: i18n }} //will be used for locales language
+    }
 </script> 
