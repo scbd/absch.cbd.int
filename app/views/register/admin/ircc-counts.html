@@ -117,7 +117,7 @@
             <div class="registerpage-content">
 
                 <div class="alert alert-danger" ng-show="__error">
-                    <strong>Error: </strong>{{__error}}
+                    <strong>Error: </strong><span ng-bind="__error"></span>
                 </div>
                 <div class="box box-info">
                     <div class="box-header with-border">
@@ -162,7 +162,7 @@
                         <div class="col-xs-12">
                             <div class="box box-info">
                                 <div class="box-header with-border">
-                                    <h3 class="box-title"> Number of IRCC {{irccCounts.irccCount}}</h3>
+                                    <h3 class="box-title"> Number of IRCC <span ng-bind="irccCounts.irccCount"></span></h3>
                                 </div>
                                 </div>
                         </div>
@@ -175,19 +175,19 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr>
-                                                <td>Commercial</td><td>{{irccCounts.NumberOfIRCC.commercial}}</td>
+                                                <td>Commercial</td><td ng-bind="irccCounts.NumberOfIRCC.commercial"></td>
                                             </tr>
                                             <tr>
-                                                <td>Non commercial</td><td>{{irccCounts.NumberOfIRCC.nonCommercial}}</td>
+                                                <td>Non commercial</td><td ng-bind="irccCounts.NumberOfIRCC.nonCommercial"></td>
                                             </tr>
                                             <tr>
-                                                <td>Commercial and non commercial</td><td>{{irccCounts.NumberOfIRCC.commercialAndNonCommercial}}</td>
+                                                <td>Commercial and non commercial</td><td ng-bind="irccCounts.NumberOfIRCC.commercialAndNonCommercial"></td>
                                             </tr>
                                             <tr>
-                                                <td>Confidential</td><td>{{irccCounts.NumberOfIRCC.confidential}}</td>
+                                                <td>Confidential</td><td ng-bind="irccCounts.NumberOfIRCC.confidential"></td>
                                             </tr>
                                             <tr>
-                                                <td>Non confidential</td><td>{{irccCounts.NumberOfIRCC.nonConfidential}}</td>
+                                                <td>Non confidential</td><td ng-bind="irccCounts.NumberOfIRCC.nonConfidential"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -208,16 +208,16 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr>
-                                                <td>National</td><td>{{irccCounts.GrantedTo.national}}</td>
+                                                <td>National</td><td ng-bind="irccCounts.GrantedTo.national"></td>
                                             </tr>
                                             <tr>
-                                                <td>Foreigners</td><td>{{irccCounts.GrantedTo.foreign}}</td>
+                                                <td>Foreigners</td><td ng-bind="irccCounts.GrantedTo.foreign"></td>
                                             </tr>
                                             <tr>
-                                                <td>Confidential</td><td>{{irccCounts.GrantedTo.confidential}}</td>
+                                                <td>Confidential</td><td ng-bind="irccCounts.GrantedTo.confidential"></td>
                                             </tr>
                                             <tr>
-                                                <td>Non confidential</td><td>{{irccCounts.GrantedTo.nonConfidential}}</td>
+                                                <td>Non confidential</td><td ng-bind="irccCounts.GrantedTo.nonConfidential"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -239,16 +239,16 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr>
-                                                <td>Commercial - National</td><td>{{irccCounts.UsageAndGranted.commercialNational}}</td>
+                                                <td>Commercial - National</td><td ng-bind="irccCounts.UsageAndGranted.commercialNational"></td>
                                             </tr>
                                             <tr>
-                                                <td>Non commercial - National</td><td>{{irccCounts.UsageAndGranted.nonCommercialNational}}</td>
+                                                <td>Non commercial - National</td><td ng-bind="irccCounts.UsageAndGranted.nonCommercialNational"></td>
                                             </tr>
                                             <tr>
-                                                <td>Commercial - Foreign</td><td>{{irccCounts.UsageAndGranted.commercialForeign}}</td>
+                                                <td>Commercial - Foreign</td><td ng-bind="irccCounts.UsageAndGranted.commercialForeign"></td>
                                             </tr>
                                             <tr>
-                                                <td>Non commercial - Foreign</td><td>{{irccCounts.UsageAndGranted.nonCommercialForeign}}</td>
+                                                <td>Non commercial - Foreign</td><td ng-bind="irccCounts.UsageAndGranted.nonCommercialForeign"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -267,7 +267,7 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr ng-repeat="(key, count) in irccCounts.countries">
-                                                <td>{{key}}</td><td>{{count}}</td>
+                                                <td ng-bind="key"></td><td ng-bind="count"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -286,7 +286,7 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr ng-repeat="(key, count) in irccCounts.userCountries">
-                                                <td>{{key}}</td><td>{{count}}</td>
+                                                <td ng-bind="key"></td><td ng-bind="count"></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -307,7 +307,7 @@
                                     <table class="table table-hover" style="text-align: left">
                                         <tbody>
                                             <tr ng-repeat="(key, count) in irccCounts.subjectMatter">
-                                                <td>{{key}}</td><td>{{count}}</td>
+                                                <td ng-bind="key"></td><td ng-bind="count"></td>
                                             </tr>
                                         </tbody>
                                     </table>
