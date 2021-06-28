@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-lg-4">
         <div class="row margin-bottom-30">
             <div class="col-md-12 ">
                 <div class="support-container">
@@ -10,112 +10,70 @@
             </div>
         </div>
 
-        <div class="row margin-top-20">
-            <div class="col-md-12">
-                <div class="fb-heading-small">
-                    Popular Articles
-                </div>
-                <hr class="style-three">
-                <div class="fat-content-small padding-left-10">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to change account password?</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to edit order details?</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> Add new user</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> Change customer details</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> Lookup existing customer in order form</a>
-                        </li>
-                    </ul>
-                </div>
+        <div class="sidebar" style="margin-top: 5px">
+            <div class="widget fix widget_categories">
+                <span class="icon icon-folder"></span>
+                <h4>Popular Articles</h4>
+                <ul>
+                    <li><a href="#"> Installation &amp; Activation </a></li>
+                    <li><a href="#"> Premium Members Features </a></li>
+                    <li><a href="#"> API Usage &amp; Guide lines </a></li>
+                    <li><a href="#"> Getting Started &amp; What is next. </a></li>
+                    <li><a href="#"> Installation &amp; Activation </a></li>
+                    <li><a href="#"> Premium Members Features </a></li>
+                    <li><a href="#"> API Usage &amp; Guide lines </a></li>
+                    <li><a href="#"> Getting Started &amp; What is next. </a></li>
+                </ul>
             </div>
-        </div>
+            <div class="widget fix widget_categories mt-2">
+                <span class="icon icon-folder"></span>
+                <h4>Latest Articles</h4>
+                <ul>
+                    <li><a href="#"> Installation &amp; Activation </a></li>
+                    <li><a href="#"> Premium Members Features </a></li>
+                    <li><a href="#"> API Usage &amp; Guide lines </a></li>
+                    <li><a href="#"> Getting Started &amp; What is next. </a></li>
+                    <li><a href="#"> Installation &amp; Activation </a></li>
+                    <li><a href="#"> Premium Members Features </a></li>
+                    <li><a href="#"> API Usage &amp; Guide lines </a></li>
+                    <li><a href="#"> Getting Started &amp; What is next. </a></li>
+                </ul>
+            </div>
+            <div class="widget fix widget_categories mt-2">
+                <span class="icon icon-folder"></span>
+                <h4>Popular Tags</h4>
 
-        <div class="row margin-top-20">
-            <div class="col-md-12">
-                <div class="fb-heading-small">
-                    Latest Articles
-                </div>
-                <hr class="style-three">
-                <div class="fat-content-small padding-left-10">
-                    <ul>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to change username?</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to change currency in gomac?</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to edit order details?</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to print stock barcode?</a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-file-text-o"></i> How to generate barcode?</a>
-                        </li>
-                    </ul>
+                <div class="tagcloud">
+                    <a href="#" class="btn btn-mini">basic</a>
+                    <a href="#" class="btn btn-mini">beginner</a>
+                    <a href="#" class="btn btn-mini">blogging</a>
+                    <a href="#" class="btn btn-mini">colour</a>
+                    <a href="#" class="btn btn-mini">css</a>
+                    <a href="#" class="btn btn-mini">date</a>
+                    <a href="#" class="btn btn-mini">design</a>
+                    <a href="#" class="btn btn-mini">files</a>
+                    <a href="#" class="btn btn-mini">format</a>
+                    <a href="#" class="btn btn-mini">header</a>
+                    <a href="#" class="btn btn-mini">images</a>
+                    <a href="#" class="btn btn-mini">plugins</a>
+                    <a href="#" class="btn btn-mini">setting</a>
+                    <a href="#" class="btn btn-mini">templates</a>
+                    <a href="#" class="btn btn-mini">theme</a>
+                    <a href="#" class="btn btn-mini">time</a>
+                    <a href="#" class="btn btn-mini">videos</a>
+                    <a href="#" class="btn btn-mini">website</a>
+                    <a href="#" class="btn btn-mini">wordpress</a>
                 </div>
             </div>
         </div>
-
-        <!-- POPULAR TAGS (SHOW MAX 20 TAGS) -->
-        <div class="row margin-top-20">
-            <div class="col-md-12">
-                <div class="fb-heading-small">
-                    Popular Tags
-                </div>
-                <hr class="style-three">
-                <div class="fat-content-tags padding-left-10">
-                    <a href="#" class="btn btn-default btn-o btn-sm">password</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">settings</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">sign up</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">currency</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">payment</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">user</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">database</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">storage</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">export</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">email</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">import</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">campaign</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">edit</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">orders</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">help</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">billing</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">user</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">configure</a>
-                    <a href="#" class="btn btn-default btn-o btn-sm">customer</a>
-                </div>
-            </div>
-        </div>
-        <!-- END POPULAR TAGS (SHOW MAX 20 TAGS) -->
     </div>
-    <!-- END SIDEBAR STUFF -->
 </template>
 
 <script>
-export default {
-    data:  () => {
-        return {            
+    export default {
+        data:  () => {
+            return {
+            }
         }
     }
-}
 </script> 
