@@ -3,7 +3,12 @@
     <div class="row top-border">
         <div class="clearfix"></div>
         <div class="col-xs-8" style="font-size:12px;">
-            Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+            <span ng-if="isABS">
+                Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+            </span>
+            <span ng-if="isBCH">
+                Questions about the Cartagena Protocol on Biosafety or the operation of the Biosafety Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
+            </span>            
         </div>
         <div class="col-xs-4" style="font-size:12px;">
             <strong>Secretariat of the Convention on Biological Diversity</strong>

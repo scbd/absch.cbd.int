@@ -59,3 +59,76 @@ html, body, .container-full {
     margin-top      : 0px!important;
     margin-left     : 0px!important;
 }
+
+/* for prince pdf */
+@page{
+
+    @font-face {
+        font-family: "FontAwesome";
+        src: url("https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/fonts/fontawesome-webfont.woff2?v=4.7.0") format("woff");
+        font-weight: normal;
+        font-style: normal;
+    }
+
+}
+
+body{
+    margin:20px;
+    margin-top: -30px;
+}
+#printContentHeader .unep-logo {
+    padding-top: 10px;
+    height: 80px;
+    display: block;
+    margin: 0 auto;
+}
+
+#printContentHeader .cbd-logo {
+    height: 70px;
+    display: block;
+    margin: 0 auto;
+}
+
+#printContentHeader .un-logo {
+    height: 80px;
+    padding-top: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+@media print {
+    #printContentHeader .unep-logo {
+        height: 60px;
+    }
+    #printContentHeader .cbd-logo {
+        height: 50px;
+    }
+    #printContentHeader .un-logo {
+        height: 60px;
+    }
+}
+@media (max-width:768px) {
+    #printContentHeader .unep-logo {
+        height: 40px;
+        padding-top: 0px;
+    }
+    #printContentHeader .cbd-logo {
+        height: 40px;
+    }
+    #printContentHeader .un-logo {
+        height: 40px;
+    }
+}
+#printContentHeader .image-row{
+    padding-bottom:10px;
+    border-bottom:1px solid #ddd;   
+    display: table;
+    width: 100%;
+    margin: auto;
+}
+
+@media (max-width:768px) {
+    body{
+        padding:20px;
+    }
+}

@@ -43,6 +43,9 @@ import 'views/forms/directives/compare-val';
 			
 					var htmlDiff;
 					$scope.realm = realm;
+					$scope.isABS = realm.is('ABS');
+					$scope.isBCH = realm.is('BCH');
+					
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					
