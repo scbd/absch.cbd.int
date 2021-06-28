@@ -2,7 +2,7 @@
     <script type="text/ng-template" id="child-items">
         <div class="checkbox">
           <label>
-            <input type="checkbox" ng-model="item.selected" indeterminate="item.selected===null" ng-change="onSelect(item)"> {{item.title|lstring}}
+            <input type="checkbox" ng-model="item.selected" indeterminate="item.selected===null" ng-change="onSelect(item)"> <span ng-bind="item.title|lstring"></span>
           </label>
 
           <div ng-repeat="item in item.children" ng-include="'child-items'" style="margin-left:22px"></div>

@@ -16,7 +16,7 @@
         <!-- &nbsp; | &nbsp; print &nbsp; | &nbsp; email  -->
     </div> 
     <br>
-    <h2 class="color-green bold" > {{format.summary| lstring:locale}} </h2>  
+    <h2 class="color-green bold" > <span ng-bind="format.summary| lstring:locale"></span> </h2>
     <hr>
         <div>
             <span ng-click="show_introABSCH=!show_introABSCH" ng-class="{'color-grey':!showFAQ, 'color-black':showFAQ}" style="font-weight:normal;font-size:1.4em; cursor:pointer;">

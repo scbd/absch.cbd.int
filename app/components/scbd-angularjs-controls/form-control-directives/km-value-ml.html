@@ -11,7 +11,7 @@
 				ng-class="{'markdown':self.markdown, 'km-pre':self.kmPre }"></div>
 				<!-- <div style="clear: both;"></div>	 -->
 			</div>
-			<span class="input-group-addon" style="cursor:default">{{self.value|lstringLocale:locale | uppercase }}</span>
+			<span class="input-group-addon" style="cursor:default" ng-bind="self.value|lstringLocale:locale | uppercase"></span>
 		</div>
 	</div>  
 	

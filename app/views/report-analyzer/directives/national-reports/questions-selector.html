@@ -14,7 +14,7 @@
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" >
-                        {{report.title}}
+                        <span ng-bind="report.title"></span>
                     </option>
                     
                 </select>
@@ -79,8 +79,8 @@
             <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)"></td>
             <td ng-click="question.selected=!question.selected; questionClicked(question)" class="text-nowrap">
                 <span ng-switch="question.key[0]">
-                    <span ng-switch-when="S">Survey Question {{::question.number}}.</span>
-                    <span ng-switch-default>Question {{::question.number}}.</span>
+                    <span ng-switch-when="S">Survey Question <span ng-bind="::question.number"></span>.</span>
+                    <span ng-switch-default>Question <span ng-bind="::question.number"></span>.</span>
                 </span>
 
             </td>

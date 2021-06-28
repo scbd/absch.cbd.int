@@ -60,15 +60,15 @@
                             <th style="white-space:nowrap;" class="tableexport-string">Info 3 </th>
                             <th style="white-space:nowrap;" class="tableexport-string">Info 4 </th>
                             <th style="white-space:nowrap;" class="tableexport-string">Published on</th>
-                            <th style="white-space:nowrap;" class="tableexport-string" ng-if="customFieldList.length>0" ng-repeat="field in  customFieldList">{{field}}</th>
+                            <th style="white-space:nowrap;" class="tableexport-string" ng-if="customFieldList.length>0" ng-repeat="field in  customFieldList"><span ng-bind="field"></span></th>
                         </tr>
                         </thead>
                         
                         <tr ng-repeat="row in downloadDocs">
-                            <td class="tableexport-string">{{row.schema_s|schemaName}}</td>
-                            <td class="tableexport-string"><a rel="noopener" ng-href="https://absch.cbd.int/database/{{row.uniqueIdentifier_s|uppercase|encodeURIComponent}}">{{row.uniqueIdentifier_s|uppercase}}</a></td>
-                            <td class="tableexport-string">{{row.government}}</td>
-                            <td class="tableexport-string">{{row.rec_title}}</td>
+                            <td class="tableexport-string" ng-bind="row.schema_s|schemaName"></td>
+                            <td class="tableexport-string"><a rel="noopener" ng-href="https://absch.cbd.int/database/{{row.uniqueIdentifier_s|uppercase|encodeURIComponent}}" ng-bind="row.uniqueIdentifier_s|uppercase"></a></td>
+                            <td class="tableexport-string" ng-bind="row.government"></td>
+                            <td class="tableexport-string" ng-bind="row.rec_title"></td>
                             <td class="tableexport-string">{{getMeta(row.rec_meta1)}}</td>
                             <td class="tableexport-string">{{getMeta(row.rec_meta2)}}</td>
                             <td class="tableexport-string">{{getMeta(row.rec_meta3)}}</td>
@@ -110,8 +110,8 @@
                         </tr>
                         <tr ng-repeat="field in fields | filter:fieldSearch">
                             <td><input type="checkbox" ng-model="field.selected"/></td>
-                            <td>{{field.title}}</td>
-                            <td>{{field.description}}</td>                   
+                            <td ng-bind="field.title"></td>
+                            <td ng-bind="field.description"></td>
                         </tr>
                         <!-- <tr ng-repeat="field in customFields">
                             <td><input type="checkbox" ng-model="field.selected"/></td>

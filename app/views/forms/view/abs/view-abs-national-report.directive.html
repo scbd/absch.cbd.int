@@ -24,7 +24,7 @@
 				<div ng-show="document.title">
 					<label>1. Title of this national report</label>
 					<div class="km-value" compare-val>
-						<strong>{{document.title | lstring:locale}}</strong>
+						<strong><span ng-bind="document.title | lstring:locale"></span></strong>
 					</div>
 				</div>
 				<div>
@@ -47,11 +47,11 @@
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question3.answer)}}</div>
 						<div  ng-show="document.question3.challengesInfo" >
 							<label>Please provide a summary of the main difficulties and challenges encountered and answer all the following questions.</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question3.challengesInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question3.challengesInfo | lstring:locale"></span></div>
 						</div>
 						<div ng-show="document.question3.additionalInfo">
 							<label>Please provide further information</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question3.additionalInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question3.additionalInfo | lstring:locale"></span></div>
 						</div>
 					</ul>
 				</div>
@@ -63,11 +63,11 @@
 
 						<div ng-show="document.question4.challengesInfo">
 							<label>Please provide a summary of the main difficulties and challenges encountered in setting up these measures</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question4.challengesInfo | lstring:locale}} &nbsp;</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question4.challengesInfo | lstring:locale"></span> &nbsp;</div>
 						</div>
 						<div ng-show="document.question4.additionalInfo">
 							<label>Please provide further information</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question4.additionalInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question4.additionalInfo | lstring:locale"></span></div>
 						</div>
 						<div ng-show="document.question4.documentReferenceIDs && !documentReferenceIDsEmpty(document.question4.documentReferenceIDs)">
 							<label>The ABS Clearing-House unique ID containing relevant information</label>
@@ -89,12 +89,12 @@
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question5.answer)}}</div>
 						<div ng-show="document.question5.challengesInfo">
 							<label>Please provide a summary of the main difficulties and challenges encountered for designating a national focal point</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question5.challengesInfo | lstring:locale}} &nbsp;</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question5.challengesInfo | lstring:locale"></span> &nbsp;</div>
 						</div>
 						<div ng-show="document.question5.furtherInfo">
 							<label>Use the text entry to provide further information</label>
 							<div compare-val>
-							<div class="km-value pre-wrap">{{document.question5.furtherInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap"><span ng-bind="document.question5.furtherInfo | lstring:locale"></span></div>
 							</div>
 						</div>
 						<div ng-show="document.question5.documentReferenceIDs && !documentReferenceIDsEmpty(document.question5.documentReferenceIDs)">
@@ -117,12 +117,12 @@
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question6.answer)}}</div>
 						<div ng-show="document.question6.challengesInfo">
 							<label>Please provide a summary of the main difficulties and challenges encountered for designating one or more competent national authority</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question6.challengesInfo | lstring:locale}} &nbsp;</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question6.challengesInfo | lstring:locale"></span>&nbsp;</div>
 						</div>
 						<div ng-show="document.question6.furtherInfo">
 							<label>Use the text entry to provide further information</label>
 							<div compare-val>
-							<div class="km-value pre-wrap">{{document.question6.furtherInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap"><span ng-bind="document.question6.furtherInfo | lstring:locale"></span></div>
 							</div>
 						</div>
 						<div ng-show="document.question6.documentReferenceIDs && !documentReferenceIDsEmpty(document.question6.documentReferenceIDs)">
@@ -146,12 +146,12 @@
 						<div class="km-value km-pre" compare-val ng-show="(!document.question7.notApplicable)">{{booleanToText(document.question7.answer)}}</div>
 						<div ng-show="document.question7.challengesInfo">
 							<label>Please provide a summary of the main difficulties and challenges encountered for making this information available</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question7.challengesInfo | lstring:locale}} &nbsp;</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question7.challengesInfo | lstring:locale"></span> &nbsp;</div>
 						</div>
 						<div ng-show="document.question7.furtherInfo">
 							<label>Use the text entry to provide further information.</label>
 							<div compare-val>
-							<div class="km-value pre-wrap">{{document.question7.furtherInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap"><span ng-bind="document.question7.furtherInfo | lstring:locale"></span></div>
 						</div>
 						</div>
 						<div ng-show="document.question7.documentReferenceIDs && !documentReferenceIDsEmpty(document.question7.documentReferenceIDs)">
@@ -176,7 +176,7 @@
 						<div ng-show="document.question8.furtherInfo">
 							<label>Use the text entry to provide further information</label>
 							<div compare-val>
-							<div class="km-value pre-wrap">{{document.question8.furtherInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap"><span ng-bind="document.question8.furtherInfo | lstring:locale"></span></div>
 							</div>
 						</div>
 						<div ng-show="document.question8.documentReferenceIDs && !documentReferenceIDsEmpty(document.question8.documentReferenceIDs)">
@@ -199,12 +199,12 @@
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question9.answer)}}</div>
 						<div  ng-show="document.question9.challengesInfo">
 							<label>Please provide a summary of the main difficulties and challenges encountered for designating one or more checkpoints</label>
-							<div class="km-value pre-wrap" compare-val>{{document.question9.challengesInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question9.challengesInfo | lstring:locale"></span></div>
 						</div>
 						<div ng-show="document.question9.furtherInfo">
 							<label>Use the text entry to provide further information</label>
 							<div compare-val>
-							<div class="km-value pre-wrap">{{document.question9.furtherInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap"><span ng-bind="document.question9.furtherInfo | lstring:locale"></span></div>
 							</div>
 						</div>
 						<div ng-show="document.question9.documentReferenceIDs && !documentReferenceIDsEmpty(document.question9.documentReferenceIDs)">
@@ -227,7 +227,7 @@
 						<div class="km-value" compare-val ng-show="!document.question10.challengesInfo && !document.question10.relevantDocuments && (!document.question10.documentReferenceIDs || documentReferenceIDsEmpty(document.question10.documentReferenceIDs))">No additional information provided</div>
 						<div ng-show="document.question10.challengesInfo">
 							<label>Please provide a summary of the main difficulties and challenges </label>
-							<div class="km-value pre-wrap" compare-val>{{document.question10.challengesInfo | lstring:locale}}</div>
+							<div class="km-value pre-wrap" compare-val><span ng-bind="document.question10.challengesInfo | lstring:locale"></span></div>
 						</div>
 						<div ng-show="document.question10.documentReferenceIDs && !documentReferenceIDsEmpty(document.question10.documentReferenceIDs)">
 							<label>The ABS Clearing-House unique ID containing relevant information</label>
@@ -244,7 +244,7 @@
 							<label>Any other relevant documents</label>
 							<div compare-val>
 								<div class="km-value" ng-repeat="item in document.question10.relevantDocuments">
-									<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+									<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a>
 									<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
 								</div>
 							</div>
@@ -270,7 +270,7 @@
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question11.answer)}}</div>
 								<div ng-show="document.question11.challengesInfo">
 									<label>Please provide further information including indicating if there is any other system in place in relation to access to genetic resources </label>
-									<div class="km-value pre-wrap" compare-val>{{document.question11.challengesInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap" compare-val><span ng-bind="document.question11.challengesInfo | lstring:locale"></span></div>
 								</div>
 								<div ng-show="document.question11.furtherInfo">
 									<label>Use the text entry to provide further information</label>
@@ -299,7 +299,7 @@
 								<div ng-show="document.question12.furtherInfo">
 									<label>Use the text entry to provide further information</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question12.furtherInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap"><span ng-bind="document.question12.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question12.documentReferenceIDs && !documentReferenceIDsEmpty(document.question12.documentReferenceIDs)">
@@ -323,7 +323,7 @@
 								<div ng-show="document.question13.furtherInfo">
 									<label>Use the text entry to provide further information</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question13.furtherInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap"><span ng-bind="document.question13.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question13.documentReferenceIDs && !documentReferenceIDsEmpty(document.question13.documentReferenceIDs)">
@@ -347,7 +347,7 @@
 								<div ng-show="document.question14.furtherInfo">
 									<label>Use the text entry to provide further information.</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question14.furtherInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap"><span ng-bind="document.question14.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question14.documentReferenceIDs && !documentReferenceIDsEmpty(document.question14.documentReferenceIDs)">
@@ -371,7 +371,7 @@
 								<div ng-show="document.question15.furtherInfo">
 									<label>Use the text entry to provide further information</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question15.furtherInfo | lstring:locale}}</div>
+										<div class="km-value pre-wrap"><span ng-bind="document.question15.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question15.documentReferenceIDs && !documentReferenceIDsEmpty(document.question15.documentReferenceIDs)">
@@ -396,7 +396,7 @@
 								<div ng-show="document.question16.furtherInfo">
 									<label>Use the text entry to provide further information</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question16.furtherInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap"><span ng-bind="document.question16.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question16.documentReferenceIDs && !documentReferenceIDsEmpty(document.question16.documentReferenceIDs)">
@@ -420,7 +420,7 @@
 								<div ng-show="document.question17.furtherInfo">
 									<label>Use the text entry to provide further information</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question17.furtherInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap"><span ng-bind="document.question17.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question17.documentReferenceIDs && !documentReferenceIDsEmpty(document.question17.documentReferenceIDs)">
@@ -451,7 +451,7 @@
 											<label>Monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.geneticResources.monetary)}}</div>
 											<div ng-show="document.question18.geneticResources.monetaryInfo">
-												<div class="km-value pre-wrap" compare-val>{{document.question18.geneticResources.monetaryInfo | lstring:locale}}</div>
+												<div class="km-value pre-wrap" compare-val><span ng-bind="document.question18.geneticResources.monetaryInfo | lstring:locale"></span></div>
 											</div>
 										</ul>
 										<ul ng-if="document.question18.geneticResources.nonMonetary">
@@ -471,7 +471,7 @@
 											<label>Monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.tk.monetary)}}</div>
 											<div ng-show="document.question18.tk.monetaryInfo">
-												<div class="km-value pre-wrap" compare-val>{{document.question18.tk.monetaryInfo | lstring:locale}}</div>
+												<div class="km-value pre-wrap" compare-val><span ng-bind="document.question18.tk.monetaryInfo | lstring:locale"></span></div>
 											</div>
 										</ul>
 
@@ -479,7 +479,7 @@
 											<label>Non-monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.tk.nonMonetary)}}</div>
 											<div ng-show="document.question18.tk.nonMonetaryInfo">
-												<div class="km-value pre-wrap" compare-val>{{document.question18.tk.nonMonetaryInfo | lstring:locale}}</div>
+												<div class="km-value pre-wrap" compare-val><span ng-bind="document.question18.tk.nonMonetaryInfo | lstring:locale"></span></div>
 											</div>
 										</ul>
 									</ul>
@@ -487,7 +487,7 @@
 								<div ng-show="document.question18.furtherInfo">
 									<label>Use the text entry to provide further information</label>
 									<div compare-val>
-									<div class="km-value pre-wrap">{{document.question18.furtherInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap"><span ng-bind="document.question18.furtherInfo | lstring:locale"></span></div>
 									</div>
 								</div>
 								<div ng-show="document.question18.documentReferenceIDs && !documentReferenceIDsEmpty(document.question18.documentReferenceIDs)">
@@ -510,7 +510,7 @@
 								<div class="km-value" compare-val ng-show="!document.question19.challengesInfo && !document.question19.relevantDocuments && (!document.question19.documentReferenceIDs ||  documentReferenceIDsEmpty(document.question19.documentReferenceIDs))">No additional information provided</div>
 								<div ng-show="document.question19.challengesInfo">
 									<label>Please provide a summary of the main difficulties and challenges </label>
-									<div class="km-value pre-wrap" compare-val>{{document.question19.challengesInfo | lstring:locale}}</div>
+									<div class="km-value pre-wrap" compare-val><span ng-bind="document.question19.challengesInfo | lstring:locale"></span></div>
 								</div>
 								<div ng-show="document.question19.documentReferenceIDs && !documentReferenceIDsEmpty(document.question19.documentReferenceIDs)">
 									<label>The ABS Clearing-House unique ID containing relevant information</label>
@@ -525,11 +525,8 @@
 								</div>
 								<div ng-show="document.question19.relevantDocuments">
 									<label>Any other relevant documents</label>
-									<div compare-val>
-										<div class="km-value" ng-repeat="item in document.question19.relevantDocuments">
-											<a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-											<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-										</div>
+									<div class="km-value" compare-val="question19.relevantDocuments">
+										<km-link-list ng-model="document.question19.relevantDocuments"></km-link-list>
 									</div>
 								</div>
 							</ul>

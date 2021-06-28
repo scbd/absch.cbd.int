@@ -15,9 +15,10 @@ app.directive("appLoading", ['$animate', '$location', function ($animate, $locat
             );
 
             var queryString = $location.search();
-            if(queryString && (queryString.print || queryString.embed))
+            if(queryString && (queryString.print || queryString.embed)){
                 require(['css!/app/css/print-friendly'], function(){})
-
+                $('body').addClass('print');
+            }
             if(queryString && queryString.embed){
                 $('body').addClass('embed');
                 window.addEventListener('message', (evt)=>{

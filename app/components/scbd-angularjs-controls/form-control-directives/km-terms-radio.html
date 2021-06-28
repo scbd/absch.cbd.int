@@ -9,8 +9,8 @@
 			<script type="text/ng-template"  id="term-radio-tree-renderer.html">
 				<label>
 					<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" ng-value="term.identifier" name="bindingName_{{uniqueId}}"/>
-						{{term.title||term.name | lstring:locale}}
-							<span ng-if="showDescription" class="km-term-radio-description">{{term.description | lstring:locale}}</span>
+						<span ng-bind="term.title||term.name | lstring:locale"></span>
+							<span ng-if="showDescription" class="km-term-radio-description" ng-bind="term.description | lstring:locale"></span>
 				</label>
 
 				<ul style="list-style:none">
@@ -24,7 +24,7 @@
 						<td style="width:5%">
 							<label>
 								<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" value="{{other.identifier}}" name="bindingName_{{uniqueId}}"/>
-								{{other | term:locale}} {{locale}}
+								   <span ng-bind="other | term:locale"></span> <span ng-bind="locale"></span>
 							</label>
 						</td>
 						<td >
@@ -34,8 +34,7 @@
 				</table>
 			</li>
 			<li ng-show="error">
-				<div class="alert">
-					{{error}}
+				<div class="alert" ng-bind="error">
 				</div>
 			</li>
 

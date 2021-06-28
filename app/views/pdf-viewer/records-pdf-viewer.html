@@ -22,14 +22,15 @@
     </style>
     <div class="row">
         <div class="row">
-            <div class="title-bar">
+            <div class="title-bar" style="overflow: scroll;">
                 {{pdf.fileName|uppercase}}
             </div>
         </div>
-        <div class="row" style="background:#fff">
+        <div class="row" style="background:#fff" ng-if="!error">
             <div class="col-md-2">
-                <div class="" style="width:100%;">
-                    <br> File Name : {{pdf.fileName|uppercase}}
+                <div class=""  style="overflow: scroll;width:100%;">
+                    <br> File Name : 
+                    <span ng-bind="pdf.fileName|uppercase" ></span>
                     <br>
                     <br>
                     <a rel="noopener" ng-href="{{pdf.src|encodeURIComponent}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-success" target="_blank">
@@ -52,6 +53,12 @@
                     <div id="viewPdf" style="min-height: 1000px;">
                     </div>                        
                 </div>
+            </div>
+        </div>
+        <div ng-if="error">
+            <div class="alert alert-danger">
+                Error!
+                <div ng-bind="error"></div>
             </div>
         </div>
     </div>

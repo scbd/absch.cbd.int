@@ -1,8 +1,9 @@
 ﻿
 <div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange">
-		<h4>{{document.header.schema| schemaName }}
-			<span class="color-black"> ({{document.header.schema|schemaShortName}})</span>
+		<h4>
+			<span ng-bind="::document.header.schema|schemaName"></span>
+			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
 		</h4>
 
 	</div>
@@ -83,13 +84,7 @@
 			<div ng-show="document.covers">
 				<label>Cover image(s)</label>
 				<div class="km-value" compare-val="covers">
-					<ul class="list">
-						<li ng-repeat="link in document.covers">
-							<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
-								<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')|encodeURIComponent}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
-							</a>
-						</li>
-					</ul>
+					<km-link-list ng-model="document.covers"></km-link-list>
 				</div>
 			</div>
 		</section>

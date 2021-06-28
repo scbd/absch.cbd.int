@@ -54,7 +54,7 @@
             </th>
             <!-- show countries if expanded[region.identifier] -->
             <th style="width:25px" ng-if="expanded[region.identifier]" ng-repeat="country in region.countries|filter:{visible:true} track by country.identifier">
-                <a rel="noopener" href="/database/records/{{::reportsMap[country.identifier].documentId}}" target="_report" data-toggle="tooltip" data-original-title="{{::country.title|lstring}}">{{::(country.identifier|uppercase)}}</a>
+                <a rel="noopener" href="/database/records/{{::reportsMap[country.identifier].documentId}}" target="_report" data-toggle="tooltip" data-original-title="{{::country.title|lstring}}" ng-bind="::(country.identifier|uppercase)"></a>
             </th>
             <th ng-repeat-end ng-show="::false"></th>
             <th style="width:10px;background-color:white"></th>
@@ -66,23 +66,23 @@
                 <i ng-if="::row.fullSum"  class="fa fa-filter fa-lg" style="cursor:pointer" ng-click="toggleFilter(row)" data-toggle="popover" data-placement="top" data-content="Filter: Include only reports which have this answer selected."></i>
                 <i ng-if="::!row.fullSum" class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
             </td>
-            <td>{{::row.title}}</td>
+            <td ng-bind="::row.title"></td>
             <td class="text-center" >
-                <span>{{row.sum}}</span>
+                <span ng-bind="row.sum"></span>
                 <div ng-if="row.previous">
-                    <span class="cell-delta value"  ng-class="{ 'inc' : row.previous.sum.delta>0, 'dec' : row.previous.sum.delta<0, 'stable' : row.previous.sum.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.sum.value}}">{{row.previous.sum.delta}}</span>
+                    <span class="cell-delta value"  ng-class="{ 'inc' : row.previous.sum.delta>0, 'dec' : row.previous.sum.delta<0, 'stable' : row.previous.sum.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.sum.value}}" ng-bind="row.previous.sum.delta"></span>
                 </div>
             </td>
             <td class="text-center">
-                <span class="cell-percent">{{row.percent}}</span>
+                <span class="cell-percent" ng-bind="row.percent"></span>
                 <div ng-if="row.previous">
-                    <span class="cell-delta percent"  ng-class="{ 'inc' : row.previous.percent.delta>0, 'dec' : row.previous.percent.delta<0, 'stable' : row.previous.percent.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.percent.value}}%">{{row.previous.percent.delta | number : digits}}</span>
+                    <span class="cell-delta percent"  ng-class="{ 'inc' : row.previous.percent.delta>0, 'dec' : row.previous.percent.delta<0, 'stable' : row.previous.percent.delta==0 }" data-toggle="tooltip" data-original-title="{{row.previous.percent.value}}%" ng-bind="row.previous.percent.delta | number : digits"></span>
                 </div>
             </td>
             <td class="text-center region" ng-class="{ first: $first, last: $last, expanded: expanded[cell.identifier] }" ng-style="  { 'background-color': cell.backgroundColor[sumType], 'color' : cell.textColor[sumType] }" ng-repeat-start="cell in ::row.cells" >
                 <span class="cell-value">{{cell[sumType] | number : sumType=='sum'? 0 : digits}}</span>
                 <div ng-if="cell.previous">
-                    <span class="cell-delta" ng-class="{ 'inc' : cell.previous[sumType].delta>0, 'dec' : cell.previous[sumType].delta<0, 'stable' : cell.previous[sumType].delta==0 }" data-toggle="tooltip" data-original-title="{{cell.previous[sumType].value}}{{sumType!='sum'?'%':''}}">{{cell.previous[sumType].delta  | number : sumType=='sum'? 0 : digits}}</span>
+                    <span class="cell-delta" ng-class="{ 'inc' : cell.previous[sumType].delta>0, 'dec' : cell.previous[sumType].delta<0, 'stable' : cell.previous[sumType].delta==0 }" data-toggle="tooltip" data-original-title="{{cell.previous[sumType].value}}{{sumType!='sum'?'%':''}}" ng-bind="cell.previous[sumType].delta  | number : sumType=='sum'? 0 : digits"></span>
                 </div>
             </td>
             <!-- show countries if expanded[region.identifier] -->
@@ -106,12 +106,12 @@
             <td class="filter">
                 <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
             </td>
-            <td>{{question.subTitle||'Free text'}}</td>
-            <td class="text-center">{{question.options[0].sum||rows[0].sum}}</td>
+            <td ng-bind="question.subTitle||'Free text'"></td>
+            <td class="text-center" ng-bind="question.options[0].sum||rows[0].sum"></td>
             <td class="text-center"><img ng-if="::question.options[0].sum||rows[0].sum" src="/app/views/report-analyzer/resources/nr-documents.png" 
                 ng-click="showTexts(undefined, question.field, question.type)" style="cursor:pointer"></td>
             <td class="text-center text-nowrap region" class="bchCellGroup text-nowrap" ng-repeat-start="region in ::regions track by region.identifier">
-                {{rows[0].cells[region.identifier].sum}}
+                <span ng-bind="rows[0].cells[region.identifier].sum"></span>
                 <img ng-if="rows[0].cells[region.identifier].sum"  ng-click="showTexts(region.countries, question.field, question.type)" src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">
             </td>
             <!-- show countries if expanded[region.identifier] -->
@@ -128,13 +128,13 @@
             <td class="filter">
                 <!-- <i class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i> -->
             </td>
-            <td>{{info.title}}
+            <td ng-bind="info.title">
             </td>
-            <td class="text-center">{{additionalInfo[info.field+'_sum']}}</td>
+            <td class="text-center" ng-bind="additionalInfo[info.field+'_sum']"></td>
             <td class="text-center"><img ng-if="::additionalInfo[info.field+'_sum']" src="/app/views/report-analyzer/resources/nr-documents.png" 
                 ng-click="showTexts(undefined, info.field, info.type)" style="cursor:pointer"></td>
             <td class="text-center text-nowrap region" class="bchCellGroup text-nowrap" ng-repeat-start="region in ::regions track by region.identifier">
-                {{rows[0].cells[region.identifier]['additionalInfo'][info.field+'_sum']}}
+                <span ng-bind="rows[0].cells[region.identifier]['additionalInfo'][info.field+'_sum']"></span>
                 <img ng-if="rows[0].cells[region.identifier]['additionalInfo'][info.field+'_sum']"  ng-click="showTexts(region.countries, info.field, info.type)" 
                 src="/app/views/report-analyzer/resources/nr-documents.png" style="cursor:pointer">
             </td>

@@ -2,7 +2,7 @@
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
 		<h4>
-		<span>{{schema.title|lstring:locale}} <span class="color-black"> ({{schema.shortCode}}) </span> </span>
+			<span><span ng-bind="schema.title|lstring:locale"></span> <span class="color-black"> (<span ng-bind="schema.shortCode"></span>) </span> </span>
 		</h4>	
 	</div>
 
@@ -15,7 +15,7 @@
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value" compare-val>
-				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
                 <span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
@@ -31,7 +31,7 @@
 		<div ng-show="document.jurisdiction">
 			<label>Area of Jurisdiction</label>
 			<div class="km-value" compare-val>
-				{{document.jurisdiction|term}}
+				<span ng-bind="document.jurisdiction|term"></span>
 			</div>
 		</div>
 
@@ -42,10 +42,9 @@
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
-			<div compare-val="links">
-				<div class="km-value" ng-repeat="item in document.links" ng-show="document.links">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+			<div ng-show="document.links">
+				<div class="km-value" compare-val="links">
+					<km-link-list ng-model="document.links"></km-link-list>
 				</div>
 			</div>
 		</div>
@@ -63,18 +62,17 @@
 			<div compare-val>
 				<km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>
 			</div>
-			<div compare-val="descriptionLinks">
-			<div class="km-value" ng-repeat="item in document.descriptionLinks" ng-show="document.descriptionLinks">
-				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+			<div ng-show="document.descriptionLinks">
+			<div class="km-value" compare-val="descriptionLinks">
+				<km-link-list ng-model="document.descriptionLinks"></km-link-list>
 			</div>
 			</div>
 		</div>
 
 		<div ng-show="document.hasApplicationDocuments!=undefined">
 			<legend>Does the applicant need to provide any documents</legend>
-			<div compare-val="document.hasApplicationDocuments">
-				<div class="km-value">{{document.hasApplicationDocuments ? 'Yes':'No'}}</div>
+			<div class="km-value" compare-val>
+				<km-value-bool value="document.hasApplicationDocuments" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-show="document.applicationInformation">
@@ -85,12 +83,10 @@
 		</div>
 		<div ng-show="document.applicationLinks">
 			<label>Relevant application form/documents or a link to website</label>
-			<div compare-val>
-				<div class="km-value" ng-repeat="item in document.applicationLinks">
-				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				<div class="km-value" compare-val="applicationLinks">
+					<km-link-list ng-model="document.applicationLinks"></km-link-list>
 				</div>
-			</div>
+
 		</div>
 
 		<div ng-show="document.applicationContacts">
@@ -104,8 +100,8 @@
 
 		<div ng-show="document.hasApplicationFees!=undefined">
 			<legend>Are there application fees</legend>
-				<div compare-val="document.hasApplicationFees">
-					<div  class="km-value">{{document.hasApplicationFees ? 'Yes':'No'}}</div>
+				<div class="km-value" compare-val>
+					<km-value-bool value="document.hasApplicationFees" locales="locale"></km-value-bool>
 				</div>
 			
 		</div>
@@ -119,7 +115,7 @@
 		<div ng-show="document.applicationFeesInformation">
 			<label>How long does the application process take</label>
 			<div class="km-value" compare-val>
-				<strong>{{document.duration}} {{document.durationPeriod}}</strong>
+				<strong><span ng-bind="document.duration"></span> <span ng-bind="document.durationPeriod"></span></strong>
 			</div>
 		</div>
 
@@ -152,11 +148,8 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant links or attached documents</label>
-				<div compare-val>
-					<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</div>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
 			</div>
 		</div>

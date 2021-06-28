@@ -2,7 +2,7 @@
 
         <div class="panel-heading bg-blue" ng-show="display('header')">
             <h4>
-            <span>{{schema.title|lstring:locale}} <span class="color-black"> ({{schema.shortCode}}) </span> </span>
+              <span><span ng-bind="schema.title|lstring:locale"></span> <span class="color-black"> (<span ng-bind="schema.shortCode"></span>) </span> </span>
             </h4>	
         </div>
     
@@ -15,7 +15,7 @@
             <div ng-show="document.government">
                 <label name="country">Country</label>
                 <div class="km-value" compare-val>
-                    <a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+                    <a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
                     <span ng-party-status government="document.government" id="government"></span>
                 </div>
             </div>
@@ -24,7 +24,7 @@
              <div ng-show="document.title">
                  <label>Title</label>
                  <div class="km-value" compare-val>
-                 <strong>{{document.title | lstring:locale}}</strong>
+                 <strong><span ng-bind="document.title | lstring:locale"></span></strong>
                  </div>
              </div>
              <div ng-show="document.description">
@@ -36,7 +36,7 @@
             <div ng-show="document.jurisdiction">
                 <label>Area of Jurisdiction</label>
                 <div class="km-value" compare-val>
-                    {{document.jurisdiction|term}}
+                    <span ng-bind="document.jurisdiction|term"></span>
                 </div>
             </div>
     
@@ -53,7 +53,7 @@
                 <label>Keywords</label>
                 <div class="km-value" compare-val>
                     <ul class="list">
-                        <li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
+                        <li ng-repeat="term in document.keywords"><span ng-bind="term | term:locale"></span></li>
                     </ul>
                 </div>
             </div>
@@ -62,7 +62,7 @@
                 <label>Thematic area(s)</label>
                 <div class="km-value" compare-val>
                     <ul>
-                        <li ng-repeat="term in document.thematicAreas">{{term | term:locale}}</li>
+                      <li ng-repeat="term in document.thematicAreas"><span ng-bind="term | term:locale"></span></li>
                     </ul>
                 </div>
             </div>
@@ -78,13 +78,8 @@
     
                 <div ng-show="document.relevantDocuments">
                         <label>Links or attached files or documents</label>
-                    <div class="km-value" compare-val>
-                        <ul >
-                            <li ng-repeat="item in document.relevantDocuments">
-                                <a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-                                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                            </li>
-                        </ul>
+                    <div class="km-value" compare-val="relevantDocuments">
+                        <km-link-list ng-model="document.relevantDocuments"></km-link-list>
                     </div>
                 </div>
             </div>
@@ -97,4 +92,3 @@
          <div document-metadata class="panel-footer"></div>
     
     </div>
-    

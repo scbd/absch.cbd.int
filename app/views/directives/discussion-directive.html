@@ -5,7 +5,7 @@
         <div class="panel-body">
             <div class="row">
                 <div class="col-xs-12 col-md-12 col-lg-12">
-                    <div ng-show="discussionMessage" class="alert alert-info">{{discussionMessage}}</div>
+                    <div ng-show="discussionMessage" class="alert alert-info"><span ng-bind="discussionMessage"></span></div>
                 </div>
             </div>
             <div class="row">
@@ -14,7 +14,7 @@
                         <div class="col-xs-12">
                             <div class="control-group">
                                 <div style="border-bottom: 1px solid #eee;padding: 5px 0px 5px 0px;">
-                                    <strong>{{commentsCount}}</strong> Comments &nbsp;&nbsp;&nbsp;
+                                    <strong><span ng-bind="commentsCount"></span></strong> Comments &nbsp;&nbsp;&nbsp;
                                     <div class="btn-group">
                                         <button type="button" style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                             <span ng-show="newest==false" style="color:#428BCA">Oldest to newest</span>

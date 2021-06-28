@@ -19,7 +19,7 @@
 		<div ng-show="document.government">
 			<label name="country">Country</label>
 			<div class="km-value" compare-val>
-				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
+				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
                 <span ng-party-status government="document.government" id="government"></span>
 			</div>
 		</div>
@@ -27,7 +27,7 @@
 		 <div ng-show="display('title') && document.name">
 		 <label>Name of the checkpoint</label>
 		 	<div class="km-value" compare-val>
-		 	<strong>{{document.name | lstring:locale}}</strong>
+		 	<strong><span ng-bind="document.name | lstring:locale"></span></strong>
 		 	</div>
 		 </div>
 
@@ -46,8 +46,8 @@
 				<label>Area of Jurisdiction</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
-						<li>{{document.jurisdiction|term}}
-							<span ng-if="isSubNational() ||isCommunity() || isOthers()">({{document.jurisdictionName | lstring:locale}})</span>
+						<li><span ng-bind="document.jurisdiction|term"></span>
+							<span ng-if="isSubNational() ||isCommunity() || isOthers()">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span>
 						</li>
 					</ul>
 				</div>
@@ -65,7 +65,7 @@
 
 			<div class="help-info" style="padding-top:10px;">The contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint.</div>
 			<div class="km-value" ng-show="document.informAllAuthorities">
-					 All Competent National Authorities designated for <strong>{{document.government|term:locale}}</strong> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.</li>
+					 All Competent National Authorities designated for <strong><span ng-bind="document.government|term:locale"></span></strong> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.</li>
 
 			</div>
 			       
@@ -102,11 +102,8 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant links or attached documents</label>
-				<div compare-val>
-				<div class="km-value"  ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-				</div>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
 			</div>
 		</div>

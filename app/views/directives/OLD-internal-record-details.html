@@ -12,9 +12,7 @@
                     <table style="width:100%!important;">
                             <tr>
                                 <td><label> Unique Identifier: </label></td>
-                                <td class="bold"> 
-                                        {{doc | uniqueID}}
-                                </td>
+                                <td class="bold" ng-bind="doc | uniqueID"></td>
                             </tr>
                             <tr>
                                 <td><label> Record Status: </label></td>
@@ -36,12 +34,12 @@
                             </tr>
                             <tr>
                                 <td><label> Record Type: </label></td>
-                                <td class="bold">{{docInfo.metadata.schema | schemaName}}</td>
+                                <td class="bold" ng-bind="docInfo.metadata.schema | schemaName"></td>
                             </tr>
                             
                              <tr  ng-if="docInfo.revision > 0">
                                 <td><label> Record Versions: </label></td>
-                                <td class="bold">{{docInfo.revision}}</td>
+                                <td class="bold" ng-bind="docInfo.revision"></td>
                             </tr>
                             <tr ng-if="docInfo.metadata.government">
                                 <td><label> Record Owner: </label></td>
