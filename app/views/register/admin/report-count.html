@@ -117,7 +117,7 @@
             <div class="registerpage-content">
 
                 <div class="alert alert-danger" ng-show="__error">
-                    <strong>Error: </strong>{{__error}}
+                    <strong>Error: </strong> <span ng-bind="__error"></span>
                 </div>
                 <div class="box box-info">
                     <div class="box-header with-border">
@@ -183,7 +183,7 @@
                                                     </li>
                                                     <li ng-repeat="(key, legend) in nationalRecords" ng-if="legend.includeInGraph">
                                                         <span style="background-color:{{legend.color}}">&nbsp;&nbsp;&nbsp;</span>
-                                                        {{key|schemaShortName}}
+                                                        <span ng-bind="key|schemaShortName"></span>
                                                     </li>
                                                 </ul>
                                                 <div class="chart">
@@ -195,11 +195,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <th ng-repeat="(key, col) in nationalRecordsTableData[0]">
-                                                                {{key | schemaShortName}}
+                                                               <span ng-bind="key | schemaShortName"></span>
                                                             </th>
                                                         </tr>
                                                         <tr ng-repeat="record in nationalRecordsTableData" >                                                            
-                                                            <td ng-repeat="col in record">{{col}}</td>
+                                                            <td ng-repeat="col in record" ng-bind="col"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -210,12 +210,12 @@
                                             ng-hide="filters.excludeNFP && key=='focalPoint'">
                                                 <a rel="noopener" translation-url class="statsBox color-white" ng-href="/search/nationalRecords/?schema={{key|encodeURIComponent}}">
                                                     <div style="vertical-align:middle!important;">
-                                                        <span class="countryCount badge bg-white">{{schema.countryCount}}</span> &nbsp;
+                                                        <span class="countryCount badge bg-white" ng-bind="schema.countryCount"></span> &nbsp;
                                                         <span class="countryText">Countries</span>
                                                     </div>
                                                     <div class="havePublished label"> - have published
-                                                        <span class="color-white">{{schema.recordCount}}</span> - </div>
-                                                    <div class="recordText">{{key | schemaName}}</div>
+                                                        <span class="color-white" ng-bind="schema.recordCount"></span> - </div>
+                                                    <div class="recordText"><span ng-bind="key | schemaName"></span></div>
                                                 </a>
                                             </div>
                                            
@@ -228,7 +228,7 @@
                                                         <label class="checkbox-inline" style="margin-left: 10px;"><input ng-disabled="!nationalChart"  class="flat-red" type="checkbox" ng-model="filters.includeAllSchemas"  ng-change="checkAll(nationalRecords, filters.includeAllSchemas)"/> All Schemas</label>
                                                         <label class="checkbox-inline" ng-repeat="(key, schema) in nationalRecords"
                                                             ng-hide="filters.excludeNFP && key=='focalPoint'">
-                                                            <input ng-disabled="!nationalChart" class="flat-red" type="checkbox" ng-model="schema.includeInGraph" ng-change="loadSchemaGraphData(schema, key)" /> {{key | schemaName}}
+                                                            <input ng-disabled="!nationalChart" class="flat-red" type="checkbox" ng-model="schema.includeInGraph" ng-change="loadSchemaGraphData(schema, key)" /> <span ng-bind="key | schemaName"></span>
                                                         </label>
                                                         <span ng-if="!nationalChart"></br></br> * schema selection only available in graph mode, switch to graph to enable</span>
                                                     </div>
@@ -268,7 +268,7 @@
                                                     </li>
                                                     <li ng-repeat="(key, legend) in referenceRecords" ng-if="legend.includeInGraph">
                                                         <span style="background-color:{{legend.color}}">&nbsp;&nbsp;&nbsp;</span>
-                                                        {{key|schemaShortName}}
+                                                       <span ng-bind="key|schemaShortName"></span>
                                                     </li>
                                                 </ul>
                                                 <div class="chart">
@@ -280,11 +280,11 @@
                                                     <tbody>
                                                         <tr>
                                                             <th ng-repeat="(key, col) in referenceRecordsTableData[0]">
-                                                                {{key | schemaShortName}}
+                                                               <span ng-bind="key | schemaShortName"></span>
                                                             </th>
                                                         </tr>
                                                         <tr ng-repeat="record in referenceRecordsTableData" >                                                            
-                                                            <td ng-repeat="col in record">{{col}}</td>
+                                                            <td ng-repeat="col in record" ng-bind="col"></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -294,9 +294,9 @@
                                             <div class="col-sm-6 col-md-4 flex" style="vertical-align:middle!important;margin-bottom:5px" ng-repeat="(key, schema) in referenceRecords">
                                                 <a rel="noopener" translation-url class="statsBox color-white" ng-href="/search/referenceRecords/?schema={{key|encodeURIComponent}}">                                                    
                                                     <div style="vertical-align:middle!important;">
-                                                        <span class="countryCount badge bg-white">{{schema.recordCount}}</span> 
+                                                        <span class="countryCount badge bg-white" ng-bind="schema.recordCount"></span> 
                                                     </div>                                                   
-                                                    <div class="recordText">{{key | schemaName}}</div>
+                                                    <div class="recordText"> <span ng-bind="key | schemaName"></span></div>
                                                 </a>
                                             </div>
                                            
@@ -308,7 +308,7 @@
                                                     <div class="box-body">                                                        
                                                         <label class="checkbox-inline" style="margin-left: 10px;"><input  ng-disabled="!referenceChart" class="flat-red" type="checkbox" ng-model="filters.includeAllReferenceSchemas"  ng-change="checkAll(referenceRecords, filters.includeAllReferenceSchemas)"/> All Schemas</label>
                                                         <label class="checkbox-inline" ng-repeat="(key, schema) in referenceRecords">
-                                                            <input  ng-disabled="!referenceChart" class="flat-red" type="checkbox" ng-model="schema.includeInGraph" ng-change="loadSchemaGraphData(schema, key)" /> {{key | schemaName}}
+                                                            <input  ng-disabled="!referenceChart" class="flat-red" type="checkbox" ng-model="schema.includeInGraph" ng-change="loadSchemaGraphData(schema, key)" /> <span ng-bind="key | schemaName"></span>
                                                         </label>
                                                         <span ng-if="!nationalChart"></br></br> * schema selection only available in graph mode, switch to graph to enable</span>
                                                     </div>
