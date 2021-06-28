@@ -9,8 +9,8 @@
        </div>
        <div class="box-body no-padding">
          <div class="mailbox-read-info">
-           <h3>{{mail.data.subject}}</h3>
-           <h5>From: {{mail.createdBy_info.firstName + ' ' + mail.createdBy_info.lastName}} &lt;{{mail.createdBy_info.email}}&gt; <span class="mailbox-read-time pull-right">{{mail.createdOn|formatDate}}</span></h5>
+           <h3 ng-bind="mail.data.subject"></h3>
+             <h5>From: <span ng-bind="(mail.createdBy_info.firstName) + ' ' + (mail.createdBy_info.lastName)"></span> &lt;<span ng-bind="mail.createdBy_info.email"></span>&gt; <span class="mailbox-read-time pull-right" ng-bind="mail.createdOn|formatDate"></span></h5>
          </div>
          <div class="mailbox-controls with-border text-center">
            <div class="btn-group">
@@ -20,8 +20,7 @@
            </div>
            <button type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Print"><i class="fa fa-print"></i></button>
          </div>
-         <div class="mailbox-read-message">
-           {{mail.data.message}}
+         <div class="mailbox-read-message" ng-bind="mail.data.message">
          </div>
        </div>
        <div class="box-footer">
