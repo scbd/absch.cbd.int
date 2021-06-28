@@ -94,14 +94,14 @@
 
 			<div class="col-sm-12 well" ng-repeat="measure in measures">
 				<div ng-click="loadMatrix(measure)" style="cursor:pointer">
-					<strong>{{measure.government_EN_t}}</strong> |
-					<strong>{{measure.title_t}}</strong>
-					| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
+					<strong ng-bind="measure.government_EN_t"></strong> |
+					<strong ng-bind="measure.title_t"></strong>
+					| <span ng-bind="measure.status_EN_t"></span> | <span ng-bind="measure.type_EN_t"></span> | <span ng-bind="measure.jurisdiction_EN_t"></span> |
 					<span ng-show="measure.adoption_dt">Adopted on </span>
 					<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
 					<span ng-show="measure.retired_dt">Retired on </span>
-					{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
-					<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>
+					<span ng-bind="(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate"></span>
+					<span ng-show="measure.limitedApplication_dt"> - <span ng-bind="measure.limitedApplication_dt|formatDate"></span></span>
 
 					<i class="fa fa-chevron-circle-down"></i>
 				</div>
@@ -116,7 +116,7 @@
 							<tr>
 								<td> <b>Amended by:</b></td>
 								<td>
-									<div ng-repeat="amended in measure.document[0].amendedMeasures">{{amended.measure.title|lstring}}</div>
+									<div ng-repeat="amended in measure.document[0].amendedMeasures"><span ng-bind="amended.measure.title|lstring"></span></div>
 								</td>
 							</tr>
 							<tr>
@@ -128,7 +128,7 @@
 							<tr>
 								<td><b>Related to:</b></td>
 								<td>
-									<div ng-repeat="linkedMeasure in measure.document[0].linkedMeasures">{{linkedMeasure.measure.title|lstring}}</div>
+									<div ng-repeat="linkedMeasure in measure.document[0].linkedMeasures"><span ng-bind="linkedMeasure.measure.title|lstring"></span></div>
 								</td>
 							</tr>
 							<tr>

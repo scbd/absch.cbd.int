@@ -129,7 +129,7 @@
     }
 </style>
 <legend>
-    {{title}}
+    <span ng-bind="title"></span>
 
     <a rel="noopener" translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
     <a rel="noopener" translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
@@ -162,9 +162,9 @@
         <table class="table">
             <tr>
                 <td>
-                    {{$index}}. {{element.title|lstring:locale}}
+                    <span ng-bind="$index"></span>. <span ng-bind="element.title|lstring:locale"></span>
                     <span ng-if="element.section">
-                        ({{element.section|lstring:locale}})
+                        (<span ng-bind="element.section|lstring:locale"></span>)
                     </span>
                 </td>
             </tr>
@@ -182,25 +182,25 @@
                 ng:class="{'paddingleft0':term.level==1, 'paddingleft3':term.level==2 && !term.isMeasure , 'paddingleft6':term.level==3, 'paddingleft9':term.level==4}">
                         &nbsp;
                         <strong ng-if="!term.broaderTerms">
-                           {{  term.title||term.name | lstring:locale|uppercase}}
-                           <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
+                             <span ng-bind="term.title||term.name | lstring:locale|uppercase"></span>
+                           <span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0 && otherCustomValues[term.identifier]">: <span ng-bind="otherCustomValues[term.identifier]| lstring:locale"></span></span>
                         </strong>
                         <!--exception for TK-->
                         <span ng-if="term.broaderTerms && !term.isMeasure" ng-style="{'boldLabel':term.identifier=='B8A150E054154AD3AD97856ABD485E90'}">
-                            {{(term.title||term.name)  | lstring:locale}}
+                            <span ng-bind="(term.title||term.name)  | lstring:locale"></span>
                             <!--<span ng-if="term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')>=0">: {{otherCustomValues[term.identifier]  | lstring:locale}}</span>-->
                         </span>
                         <span ng-if="term.broaderTerms && term.isMeasure">
                             <span ng-if="term.measureType=='linked'">Related to</span>
                             <span ng-if="term.measureType=='amended'">Amended by</span>
                             <span class="color-blue">
-                                <a rel="noopener" translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueIDWithoutRevision|encodeURIComponent}}/{{term.measure.revision|encodeURIComponent}}" >{{term.title||term.name | lstring:locale}} </a>
-                                <span class="color-blue bold" ng-if="otherCustomValues[term.identifier]">: {{otherCustomValues[term.identifier]| lstring:locale}}</span>
+                                <a rel="noopener" translation-url  target="new" ng-href="/database/record/{{term.measure|uniqueIDWithoutRevision|encodeURIComponent}}/{{term.measure.revision|encodeURIComponent}}" ng-bind="term.title||term.name | lstring:locale"></a>
+                                <span class="color-blue bold" ng-if="otherCustomValues[term.identifier]">: <span ng-bind="otherCustomValues[term.identifier]| lstring:locale"></span></span>
                             </span>
                         </span>
                          <span ng-if="sections[term.identifier] && !isEmpty(sections[term.identifier]) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0" 
-                         class="color-blue bold"> ( {{sections[term.identifier] | lstring:locale}} )</span>
-                         <span ng-if="term.isMeasure && term.measure.amendedFor"> amending {{term.measure.amendedFor}}</span>
+                         class="color-blue bold"> ( <span ng-bind="sections[term.identifier] | lstring:locale"></span> )</span>
+                         <span ng-if="term.isMeasure && term.measure.amendedFor"> amending <span ng-bind="term.measure.amendedFor"></span></span>
                         <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
                         <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 
@@ -241,7 +241,7 @@
             <tbody>
               <tr ng-repeat="element in otherElements">
                     <td>
-                      - &nbsp; {{element.name|lstring:locale}} ({{element.section|lstring:locale}})
+                      - &nbsp;<span ng-bind="element.name|lstring:locale"></span> (<span ng-bind="element.section|lstring:locale"></span>)
                     </td>
               </tr>
             </tbody>
@@ -252,7 +252,7 @@
         <div ng-repeat="element in elements" style="padding-left:25px;">
             
             <span ng-repeat="area in element.types">
-               - &nbsp; {{area|term}}
+               - &nbsp; <span ng-bind="area|term"></span>
                 <span ng-if="area.identifier=='4E2974DF-216E-46C8-8797-8E3A33D6A048'"></span>
                 <span ng-if="!$last && area.identifier!='4E2974DF-216E-46C8-8797-8E3A33D6A048'">,</span>
                 <span ng-if="$last && hasIdentifier('4E2974DF-216E-46C8-8797-8E3A33D6A048', element.types)"></span>
@@ -260,12 +260,12 @@
             <span> <i class="bold"> - found in - </i> </span>
             <span ng-repeat="area in element.areas">
                 <span ng-if="area.identifier=='2C87B4AD-684C-48DC-91B7-82938CE37B5A'  && hasIdentifier('48BCA72F-1458-4393-9448-09B4F501CB25', element.areas)"></span>
-                {{area|term:locale}} 
+                <span ng-bind="area|term:locale"></span>
                 <span ng-if="area.identifier=='A862ABFC-B97D-4E6A-9A70-812A82A7CC19' || area.identifier=='48BCA72F-1458-4393-9448-09B4F501CB25'"></span>
                 <span ng-if="!$last && (area.identifier!='A862ABFC-B97D-4E6A-9A70-812A82A7CC19' && area.identifier!='48BCA72F-1458-4393-9448-09B4F501CB25')">,</span>
                 <span ng-if="$last  && (hasIdentifier('A862ABFC-B97D-4E6A-9A70-812A82A7CC19', element.areas) ||  ( hasIdentifier('48BCA72F-1458-4393-9448-09B4F501CB25', element.areas) && !hasIdentifier('A862ABFC-B97D-4E6A-9A70-812A82A7CC19', element.areas)))"></span>
             </span>
-            <span ng-if="element.section" class="color-blue bold">({{element.section|lstring:locale}})</span>
+            <span ng-if="element.section" class="color-blue bold">(<span ng-bind="element.section|lstring:locale"></span>)</span>
         </div>
     </script>
 
