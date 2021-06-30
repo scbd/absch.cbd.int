@@ -99,7 +99,7 @@
                                                     <td ng-bind="country.count"></td>
                                                     <td ng-bind="country.region"></td>
                                                     <td><span ng-repeat="user in country.users">
-                                                        <a rel="noopener" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}" ng-bind="user.firstName + ' ' +user.lastName + '('user.email +')'"></a>,</span></td>
+                                                        <a rel="noopener" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}" ng-bind="user.firstName + ' ' +user.lastName + '('+user.email +')'"></a>,</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
