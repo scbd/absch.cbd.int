@@ -15,6 +15,7 @@
                     <ul v-for="title in titles.slice(0,5)">
                       <li><a href="#">{{title.en}}</a></li>
                     </ul>
+                    <a href="#" class="btn btn-primary">View More</a>
                 </div>
             </div>
         </div>
