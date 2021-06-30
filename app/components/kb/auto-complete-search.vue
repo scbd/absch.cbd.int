@@ -2,9 +2,6 @@
     <div>
         <title>Knowledge Base</title>
         <link href="css/kb-style.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"  crossorigin="anonymous"/>
-
         <div  class="map-bg overlay">
 
             <div class="masthead text-center">
@@ -44,4 +41,4 @@
             }
         }
     }
-</script> 
+</script>
