@@ -1,8 +1,5 @@
 .knowledge-base .map-bg {
-	background: url(/app/img/kb/bg1.png);
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: relative;
+	background-color: #88939b;
 }
 .knowledge-base .masthead {
 	padding: 40px 0 40px 0;
@@ -144,6 +141,10 @@
 }
 .knowledge-base .categories-list li a:hover {
 	color: #7dc855;
+}
+
+.knowledge-base .categories-list .tagcloud .btn-mini {
+	border: none;
 }
 .knowledge-base .match-height > [class*=col] {
 	display: flex;
