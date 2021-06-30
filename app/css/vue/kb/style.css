@@ -156,6 +156,21 @@
 .knowledge-base .categories-list h3 {
 	margin: 0
 }
+.knowledge-base .categories-list h3 a{
+	text-transform: capitalize;
+	font-size: 18px;
+	text-decoration: none;
+	color: #43484d
+}
+.knowledge-base .categories-list h3 a:hover{
+	text-transform: capitalize;
+	font-size: 18px;
+	text-decoration: underline;
+	color: #428bca
+}
+.knowledge-base .categories-list .btn-primary{
+	margin-top: 20px;
+}
 .knowledge-base .categories h3 {
 	font-size: 16px;
 	font-weight: 400;
