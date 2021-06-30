@@ -163,7 +163,7 @@
 	                 					<i class="fa fa-chevron-circle-down" ng-show="closeSection"></i>
 											 
 										<span ng-if="matrixGroupBy=='jurisdiction'"
-										  ng-bind="(jurisdiction.measures[0].jurisdiction_EN_t) + (jurisdiction.measures[0].document.jurisdictionName|lstring)">
+										  ng-bind="(jurisdiction.measures[0].jurisdiction_EN_t) +' '+ (jurisdiction.measures[0].document.jurisdictionName|lstring)">
 										</span>
 										<span class="panel-title" ng-if="matrixGroupBy=='type'" ng-bind="jurisdiction.measures[0].type_EN_t"></span>
 										<span class="panel-title" ng-if="matrixGroupBy=='status'" ng-bind="jurisdiction.measures[0].status_EN_t">
