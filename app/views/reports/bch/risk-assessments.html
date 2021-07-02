@@ -11,15 +11,15 @@
 
         <tr ng-repeat="doc in riskAssessments.docs">
             <td style="width:5%" class="tableRow back80 countryName">
-                <a rel="noopener" ng-href="{{doc.url_ss[0]|encodeURIComponent}}" target="_self">{{doc.id}}</a>
+                <a rel="noopener" ng-href="{{doc.url_ss[0]|encodeURIComponent}}" target="_self" ng-bind="doc.id"></a>
             </td>
             <td style="width:60%">
                 <div>
                     <strong ng-bind="doc.government_EN_t"></strong>
                 </div>
-                {{doc.rec_title}}
+                <span ng-bind="doc.rec_title"></span>
             </td>
-            <td style="width:20%">{{doc.lmoTransformationEvents_ss.join(' ')}}</td>
+            <td style="width:20%" ng-bind="doc.lmoTransformationEvents_ss.join(' ')"></td>
             <td>
                 <div ng-include="'/app/views/forms/view/bch/icons.html'"></div>
             </td>
