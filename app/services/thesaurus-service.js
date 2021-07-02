@@ -104,11 +104,10 @@ import 'services/main';
                 dnaSequenceTraits      : 'B8EB2261-7695-4DC5-9C4E-026D380DA7CB',
                 domestication          : 'B89720B8-81BF-4A6B-8084-8D464403C25A',
                 techniqueUsed          : 'ABE9DCE3-92BA-4D5D-8948-7F7E541EEC6B',
-                expertiseArea          : '31855BDF-ADFF-460A-8FB8-975C8C325DAA',
                 services               : 'DE2D1321-AD01-4C49-8D48-E7BD4EA14226',
                 detectionMethods       : '81EE782D-810C-4107-8E8F-F7A6EE4CD1B5',
                 unLanguages            : '52AFC0EE-7A02-4EFA-9277-8B6C327CE21F',
-                areasOfExpertise       : 'E4D79BA6-12F8-48D5-B396-25951FA1E07E',
+                areasOfExpertise       : '2523EDCE-9D44-4A9D-A952-FF5A78046886',
                 cpbThematicAreas       : '043C7F0D-2226-4E54-A56F-EE0B74CCC984',
                 supplementaryProtocolFunctions: 'CD613FCE-7A2A-475C-85A1-C2D1C208EC0C',
 

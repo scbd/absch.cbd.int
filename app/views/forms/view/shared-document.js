@@ -19,7 +19,6 @@ function($scope, $http, $q, $route, locale){
                     delete result.data.sharedData.document.body;
                     // $scope.documentInfo = {...result.data.sharedData.document};
                     $scope.status = 'ready'
-                    console.log('hello')
                 }
             })
             .catch(function(error){
@@ -35,6 +34,6 @@ function($scope, $http, $q, $route, locale){
 
     if(qs.print){
         $scope.printMode = true;
-        $scope.options = { locale : '*'};
+        $scope.options.locale = '*';
     }
 }]
