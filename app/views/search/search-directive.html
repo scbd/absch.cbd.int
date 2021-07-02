@@ -160,7 +160,7 @@
                          <i class="fa check"
                              ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i>
                          Free text search:
-                         <span class="color-blue">"{{searchKeyword}}"</span>
+                         <span class="color-blue">"<span ng-bind="searchKeyword"></span>"</span>
                      </a>
                  </div>
                  <div id="recordTypesFilterTab">
@@ -190,7 +190,7 @@
                      <user-alerts run-query-in-page="true"></user-alerts>
                  </div>
                 <div class="sticky-bar" ng-if="searchResult.loading">
-                    <span style="vertical-align:middle"><i class="fa fa-spin fa-spinner"></i>Updating results...</span?>
+                    <span style="vertical-align:middle"><i class="fa fa-spin fa-spinner"></i>Updating results...</span>
                 </div>
              </div>
          </div>
@@ -211,24 +211,24 @@
                      <ul class="nav nav-tabs search-tab-title">
                         <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}">
                             <a rel="noopener" translation-url href="#" ng-click="switchTab('allRecords')">
-                                All <span class="hidden-xs">records</span> 
-                                <span class="badge" style="margin-left:10px;">{{searchResult.data.facets.schemaTypes.all||0}}</span>
+                               All <span class="hidden-xs">records</span>
+                                <span class="badge" style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span>
                             </a>
                         </li>
                          <li id="nationalRecordsTab" ng-class="{'active':searchResult.currentTab==='nationalRecords'}">
                              <a rel="noopener" translation-url href="#" class="color-blue"
                                  ng-click="switchTab('nationalRecords')">
                                  National <span class="hidden-xs">records</span> <span class="badge bg-blue"
-                                     style="margin-left:10px;">{{searchResult.data.facets.schemaTypes.national||0}}</span></a></li>
+                                     style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a></li>
                          <li id="referenceRecordsTab" ng-class="{'active':searchResult.currentTab==='referenceRecords'}"><a
                                  translation-url href="#" class="color-orange"
                                  ng-click="switchTab('referenceRecords')">Reference <span
                                      class="hidden-xs">records</span> <span class=" badge bg-orange"
-                                     style="margin-left:10px;">{{searchResult.data.facets.schemaTypes.reference||0}}</span></a></li>
+                                     style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a></li>
                          <li id="scbdRecordsTab" ng-class="{'active':searchResult.currentTab==='scbdRecords'}">
                              <a rel="noopener" translation-url href="#" class="color-darkgrey" ng-click="switchTab('scbdRecords')">
                                 SCBD <span class="hidden-xs">records</span> 
-                                 <span class="badge" style="margin-left:10px;">{{searchResult.data.facets.schemaTypes.scbd||0}}</span>
+                                 <span class="badge" style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span>
                             </a>
                         </li>
                      </ul>
@@ -331,7 +331,7 @@
                         <label for="filters">Filters</label><br/>
                         <span id="filters" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                             <span class="label label-info">
-                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
+                                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span><span ng-bind="filter.name"></span>
                                 <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
                             </span>
                         </span>

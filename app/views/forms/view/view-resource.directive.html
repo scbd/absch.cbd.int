@@ -84,7 +84,14 @@
 			<div ng-show="document.covers">
 				<label>Cover image(s)</label>
 				<div class="km-value" compare-val="covers">
-					<km-link-list ng-model="document.covers"></km-link-list>
+					<ul class="list">
+						<li ng-repeat="link in document.covers">
+							<a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank">
+								<!-- ToDo : add encodeURIComponent  -->
+								<img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
+							</a>
+						</li>
+					</ul>
 				</div>
 			</div>
 		</section>

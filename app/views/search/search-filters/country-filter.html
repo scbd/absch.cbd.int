@@ -6,7 +6,7 @@
              <!--<i ng-class="{'fa-check-square':!cf_countryFilter && !cf_partyFilter}" class="fa fa-square color-black"></i> -->
              All</a>
         <span ng-repeat="letter in alphabet">
-            <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter" ng-class="{'letter-active':cf_countryFilter == letter}">{{letter}}</a>
+            <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter" ng-class="{'letter-active':cf_countryFilter == letter}" ng-bind="letter"></a>
         </span>
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;white-space:nowrap;" class="letter color-party" ng-class="{'letter-active':cf_partyFilter == 'party'}"> 
             <!--<i ng-class="{'fa-check-square':cf_partyFilter == 'party'}" class="fa fa-square color-party"></i> -->
@@ -27,8 +27,8 @@
             ng-class="::{'disabled':!$parent.searchResult.data.facets.countries[doc.id]}">
                 <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                 <span  class="bold" ng-class="{'color-party': doc.isParty, 'color-inbetween':doc.isInbetweenParty,
-                 'color-non-party':!doc.isParty && !doc.isInbetweenParty }">{{::doc.name|lstring:locale}}</span>
-                 <strong>({{$parent.searchResult.data.facets.countries[doc.id]||0}})</strong>
+                 'color-non-party':!doc.isParty && !doc.isInbetweenParty }" ng-bind="::doc.name|lstring:locale"></span>
+                <strong>(<span ng-bind="$parent.searchResult.data.facets.countries[doc.id]||0"></span>)</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon"></i>
                 <span ng-class="{'color-party': doc.isParty}">
