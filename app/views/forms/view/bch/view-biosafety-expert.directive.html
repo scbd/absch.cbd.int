@@ -258,7 +258,7 @@
 				</div>
 			</section>
 
-			<div ng-if="document.professionalQualification" class="padding-top-10">
+			<div ng-if="document.professionalQualification.length" class="padding-top-10">
 				<strong>B. Other professional qualifications</strong>
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -270,7 +270,7 @@
 			</div>
 		</section>
 		<section>
-			<div ng-if="document.expertise">
+			<div ng-if="document.expertise.length">
 				<legend>Areas of expertise</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -282,7 +282,7 @@
 				</div>
 			</div>
 
-			<div ng-if="document.relevantPublication">
+			<div ng-if="document.relevantPublication.length">
 				<legend>Publications</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -293,7 +293,7 @@
 				</div>
 			</div>
 
-			<div ng-if="document.professionalMemberships">
+			<div ng-if="document.professionalMemberships.length">
 				<legend>Professional memberships</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -304,7 +304,7 @@
 				</div>
 			</div>
 
-			<div ng-if="document.panelServed">
+			<div ng-if="document.panelServed.length">
 				<label>Technical committees, expert panels or advisory bodies served</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -318,7 +318,7 @@
 
 		<section>
 			<legend>Language proficiency</legend>
-			<div ng-if="document.motherTongue">
+			<div ng-if="document.motherTongue.length">
 				<label>Mother tongue</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -328,9 +328,9 @@
 					</ul>
 				</div>
 			</div>
-			<div ng-if="document.languageRating">
+			<div ng-if="document.languageRating.length">
 				<label>Other languages</label>
-				<div class="km-value1" compare-val>
+				<div compare-val>
 					<table class="table table-bordered">
 						<tr>
 							<th style="width: 10%; font-size: 12px;">Language</th>
