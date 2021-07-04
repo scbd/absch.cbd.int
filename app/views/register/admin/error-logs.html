@@ -39,7 +39,7 @@
 			<div class="registerpage-content">
 
 				<div class="alert alert-danger" ng-show="__error">
-					<strong>Error: </strong>{{__error}}
+					<strong>Error: </strong><span ng-bind="__error"></span>
 				</div>
 				<legend>Filters </legend>
 				<div class="row">
@@ -80,16 +80,16 @@
 								</thead>
 								<tbody ng-repeat="error  in errors">
 									<tr>
-										<td>{{recordCount - $index}}</td>
+										<td ng-bind="recordCount - $index"></td>
 										<td>
 											<!--https://github.com/scbd/absch.cbd.int/releases/tag/2016.49.3-->
 											<a rel="noopener" target="_blank" ng-href="https://github.com/scbd/absch.cbd.int/commit/{{getGitHash(error.appVersion)|encodeURIComponent}}">
-										{{error.appVersion|limitTo:20}}...
+									<span ng-bind="error.appVersion|limitTo:20"></span>...
 									</a>
 										</td>
-										<td> {{error.level}}</td>
-										<td>{{error.timestamp|formatDateWithTime}}</td>
-										<td> {{error.message|limitTo:100}}</td>
+										<td ng-bind="error.level"></td>
+										<td ng-bind="error.timestamp|formatDateWithTime"></td>
+										<td ng-bind="error.message|limitTo:100"></td>
 										<td>
 											<button type="button" class="btn btn-primary" ng-click="error.showDetails=!error.showDetails">Show Details</button>
 										</td>
@@ -98,18 +98,18 @@
 										<td colspan="6">
 											<div class="message_body">
 													<span class="">
-														<b>URL:</b> {{error.url}}<br>
+														<b>URL:</b> <span ng-bind="error.url"></span><br>
 													</span><br>
 													<span class="">
 														<b>User:</b> 
-														<a rel="noopener" ng-if="error.user != 1" ng-href="https://accounts.cbd.int/admin/users/{{error.user|encodeURIComponent}}">{{error.user}}</a>
+														<a rel="noopener" ng-if="error.user != 1" ng-href="https://accounts.cbd.int/admin/users/{{error.user|encodeURIComponent}}" ng-bind="error.user"></a>
 													<span ng-if="error.user == 1">Anonymous</span>
 														</span><br><br>
 													<span class="">
-														<b>User Agent:</b> {{error.userAgent.trim()}}<br>
+														<b>User Agent:</b> <span ng-bind="error.userAgent.trim()"></span><br>
 													</span><br>
 													<p class="hyphenate">
-														<b>Message:</b> {{error.message.trim()}}
+														<b>Message:</b> <span ng-bind="error.message.trim()"></span>
 													</p><br>
 													<pre class="special_formatting ">													
 														<p class="language-html pull-left hyphenate" data-lang="html" style="margin:0px" ng-bind-html="error.stack">

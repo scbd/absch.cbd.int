@@ -23,7 +23,7 @@
 			<div class="registerpage-content">
 
 				<div class="alert alert-danger" ng-show="__error">
-					<strong>Error: </strong>{{__error}}
+					<strong>Error: </strong> <span ng-bind="__error"></span>
 				</div>
 				<legend>Filters </legend>
 				<div class="row">
@@ -61,13 +61,13 @@
 								<li class="list-group-item clearfix" style="background-color:#eee;"
 								ng-repeat="record in subscriptions | orderBy:'reportedOn':'desc'">
 									<h4>
-										<a rel="noopener" class="text-bold mb0 color-blue"  >{{record.queryTitle}}</a>
-										<a rel="noopener" class="label label-warning" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{record.meta.createdBy|encodeURIComponent}}" >{{record.meta.createdBy}}</a>
+										<a rel="noopener" class="text-bold mb0 color-blue" ng-bind="record.queryTitle"></a>
+										<a rel="noopener" class="label label-warning" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{record.meta.createdBy|encodeURIComponent}}" ng-bind="record.meta.createdBy"></a>
 										<span class="label label-danger" ng-if="record.isSystemAlert"> System alert</span>
 									</h4>
 									<span style="color:#bbb;">FILTERS:</span><span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
 											<span class="label label-info">                    
-													<span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>{{filter.name}}
+													<span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span><span ng-bind="filter.name"></span>
 													<span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&#34;</span>
 											</span>
 										</span>

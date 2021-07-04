@@ -26,18 +26,18 @@
                 ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
                     <div ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
                         <div class="col-xs-2">
-                            {{record.schema|schemaName}}
+                           <span ng-bind="record.schema|schemaName"></span>
                         </div>
                         <div class="col-xs-2">
-                            {{record.reportedBy}}
+                           <span ng-bind="record.reportedBy"></span>
                         </div>
                         <div class="col-xs-2">
-                            <span ng-if="record.meta">{{record.meta.createdOn|formatDateWithTime}}</span>
+                            <span ng-if="record.meta" ng-bind="record.meta.createdOn|formatDateWithTime"></span>
                         </div>
                         <div class="col-xs-3">
                             <span ng-if="record.incorrect">incorrect or inappropriate |</span>
                             <span ng-if="record.broken">broken link or outdated information |</span>
-                            <span ng-if="record.copyright">copyright infringement</span><br> {{record.additionalInformation}}
+                            <span ng-if="record.copyright">copyright infringement</span><br> <span ng-bind="record.additionalInformation"></span>
                         </div>
                         <div class="col-xs-3">
                             <input type="button" class="btn btn-primary" value="View Record" ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)" />
@@ -55,17 +55,17 @@
                                 <td>comments</td>
                             </thead>
                             <tbody class="row table-striped table-hover" >                
-                                <td>{{record.history.length+1}}</td>
-                                <td>{{record.meta.modifiedOn|formatDateWithTime}} by {{record.meta.modifiedBy}}</td>
-                                <td>{{record.status}}</td>
-                                <td>{{record.comments}}</td>
+                                <td ng-bind="record.history.length+1"></td>
+                                <td ng-bind="record.meta.modifiedOn|formatDateWithTime + ' by ' + record.meta.modifiedBy"></td>
+                                <td ng-bind="record.status"></td>
+                                <td ng-bind="record.comments"></td>
                             </tbody>
                              <tbody class="row table-striped table-hover" 
                              ng-repeat="history in record.history | orderBy:'version':'asc'">                
-                                <td>{{history.meta.version}}</td>
-                                <td>{{history.meta.modifiedOn|formatDateWithTime}} by {{history.meta.modifiedBy}}</td>
-                                <td>{{history.status}}</td>
-                                <td>{{history.comments||history.additionalInformation}}</td>
+                                <td ng-bind="history.meta.version"></td>
+                                <td ng-bind="history.meta.modifiedOn|formatDateWithTime + ' by ' + history.meta.modifiedBy"></td>
+                                <td ng-bind="history.status"></td>
+                                <td ng-bind="history.comments||history.additionalInformation"></td>
                             </tbody>
                         </table>
                         <!--<div class="col-xs-1"></div>-->
@@ -84,7 +84,7 @@
     <script type="text/ng-template" trados-translation="true" id="addCommentsDialog">
         <div class="modal-header">           
             <h3 class="modal-title">
-               {{record.schema|schemaName}} : - {{record.reportedBy}}
+              <span ng-bind="record.schema|schemaName + ' : -' + record.reportedBy"></span>
             </h3> 
         </div>
 
@@ -123,18 +123,18 @@
 
         <div class="modal-body">             
                 <div class="col-xs-12 col-form-label">
-                   Schema : {{record.schema|schemaName}}
+                   Schema : <span ng-bind="record.schema|schemaName"></span>
                 </div>
                 <div class="col-xs-12 col-form-label">
-                   Reported By : {{record.reportedBy}}
+                   Reported By : <span ng-bind="record.reportedBy"></span>
                 </div>
                 <div class="col-xs-12 col-form-label">
-                    Reported On : <span ng-if="record.meta">{{record.meta.createdOn|formatDate}}</span>
+                    Reported On : <span ng-if="record.meta"><span ng-bind="record.meta.createdOn|formatDate"></span>
                 </div>
                 <div class="col-xs-12 col-form-label">
                    Information : <span ng-if="record.incorrect">incorrect or inappropriate |</span>
                     <span ng-if="record.broken">broken link or outdated information |</span>
-                    <span ng-if="record.copyright">copyright infringement</span><br> {{record.additionalInformation}}
+                    <span ng-if="record.copyright">copyright infringement</span><br> <span ng-bind="record.additionalInformation"></span>
                 </div>
         </div>
 
