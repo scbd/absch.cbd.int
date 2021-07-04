@@ -3,8 +3,10 @@ import moment from 'angular-cookies';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
     export { default as template } from './lang.html';
-export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService',
-		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService){
+export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService', 'realm',
+		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService, realm){
+				$scope.chShortName = realm.chShortName;
+				$scope.email = realm.originalObject.email;
 			    var lang = 'en';
 				if($routeParams.langCode)
 					lang = $routeParams.langCode;

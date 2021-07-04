@@ -13,7 +13,7 @@
     <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header">
-                Share draft document : <span ng-bind="title"></span>
+                Share draft record: <span ng-bind="title"></span>
             </div>
             <div class="modal-body">
                 <div role="tabpanel">
@@ -49,7 +49,7 @@
                                                 <td>#</td>
                                                 <td>Expiry/Status</td>
                                                 <td>Link</td>
-                                                <td>Created on</td>
+                                                <td class="hidden-xs">Created on</td>
                                             </tr>
                                             <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
                                                 <td ng-bind="$index+1"></td>
@@ -62,16 +62,20 @@
                                                 <td width="70%">
                                                     <div class="btn-group" style="width:100%">
                                                         <div class="input-group" >
-                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
+                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
+                                                            <span style="cursor:pointer" class="input-group-addon" id="basic-addon1">
+                                                                <a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"> </i> 
+                                                                    <span class="hidden-xs">Open</span></a>
+                                                            </span>
                                                             <span style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)">
-                                                                <i class="fa fa-copy"> </i> Copy</span>
+                                                                <i class="fa fa-copy"> </i> <span class="hidden-xs">Copy</span></span>
                                                             <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)">
                                                                 <i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i>
-                                                                <i class="fa fa-thumbs-down"> </i> Revoke</span>
+                                                                <i class="fa fa-thumbs-down"> </i> <span class="hidden-xs">Revoke</span></span>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td  ng-bind="link.meta.createdOn|formatDateWithTime"></td>
+                                                <td class="hidden-xs" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
                                             </tr>
                                             <tr ng-if="!sharedLinks.length">
                                                 <td colspan="4">
@@ -89,14 +93,13 @@
                             <div class="row">
                                 <div class="content">
                                     <div>
-                                        We will send the recipients an email with the link to view this draft document.
+                                        Recipients will receive an email with a link to view this draft document.
                                     </div>
                                     <hr/>Emails
                                     <br/>
                                     <input type="text" placeholder="enter email" class="form-control" ng-model="document.sharedWith.emails" />
                                     <div>
-                                        <span style="font-size: smaller;color: #777575;">Separate multiple emails with commas. This users will have to login to CBD using this emails
-                                            before viewing the draft record</span>
+                                        <span style="font-size: smaller;color: #777575;">Use commas to separate multiple email addresses. Recipients must log in to the Clearing-House with this email address in order to view the draft record.</span>
                                     </div>
                                     <div>
                                         <span ng-if="status=='creatingLink'">
@@ -118,7 +121,7 @@
 
     <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal">
-            <div class="modal-header">Generating draft document PDF : 
+            <div class="modal-header">Generate a PDF of this draft record:
                 <span  ng-bind="title"></span>
             </div>
             <div class="modal-body">
@@ -126,7 +129,7 @@
                     <div class="col-xs-12">
 
                         <div class="alert alert-warning" role="alert">
-                        <strong>Please Note!</strong> Generating draft documents pdf take longer time. The recommended way to share draft documents is using thing <strong>Share</strong> functionality.
+                        <strong>Please Note!</strong> This process takes a long time to load. The recommended method to share draft records is to use the "<strong>Share</strong>" function.
                         </div>
                         <!-- <div class="alert alert-success" role="alert">
                             <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
@@ -136,7 +139,7 @@
                                 <a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
                                 ng-bind="lang|uppercase"></a>
                             </div> 
-                            Generate individual language PDF
+                            Select a language to initiate the PDF generation process.
                         </div> 
                     </div>
                 </div>

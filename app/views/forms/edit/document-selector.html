@@ -17,16 +17,19 @@
             <div class="col-xs-12">             
                 <button type="button" style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled">
                     <i class="fa fa-plus" ng-if="!openingDialog"></i>
-                    <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> {{caption || 'Add record'}}{{type!=='radio' ? "(s)" : ""}}
+                    <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> 
+                    <span ng-if="caption" ng-bind="caption"> </span>
+                    <span ng-if="!caption && type=='radio'">Add record</span>
+                    <span ng-if="!caption && type!=='radio'">Add record(s)</span>
                 </button>
 
                 <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
 
                 <a rel="noopener" translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
-                    <i class="fa fa-chevron-circle-right"></i> {{model.length}} linked records.
+                    <i class="fa fa-chevron-circle-right"></i><span ng-bind="model.length"></span> linked records.
                 </a>
                 <a rel="noopener" translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
-                    <i class="fa fa-chevron-circle-down"></i> {{model.length}} linked records.
+                    <i class="fa fa-chevron-circle-down"></i><span ng-bind="model.length"></span> linked records.
                 </a>
             </div>
         </div>
@@ -161,21 +164,22 @@
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="doc in tempSelectedDocuments" id="rec">
-                                        <td style="width:0;"><span class="bold">{{$index+1}}.</span></td>
+                                        <td style="width:0;"><span class="bold" ng-bind="$index+1"></span>.</td>
                                         <td  style="width:0;">
                                             <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" style="width: 16px; height: 16px;" />
                                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" 
                                                 style="width: 16px; height: 16px;" />
                                         </td>
-                                        <td class="type"> {{doc.schema_s | schemaShortName}}</td>
-                                        <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.rec_title}}</a></td>
-                                        <td > {{doc.rec_countryName}}</td>
-                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
-                                        <td class="summary"> {{doc.rec_summary | limitTo:20 }}</td>
+                                        <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
+                                        <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
+                                        <td ng-bind="doc.rec_countryName"></td>
+                                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:20"></td>
                                         <td class="meta"  data-title="doc.rec_summary"> 
-                                            <span ng-repeat="meta  in doc.rec_meta1 track by $index"  >{{meta}}{{$last ? '':', '}}</span>
-                                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index">, {{meta1}}</span>
-                                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index">, {{meta2}}</span>
+                                            <span ng-repeat="meta  in doc.rec_meta1 track by $index"><span ng-bind="(meta)+($last ? '' : ',')"></span></span>
+
+                                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index"><span ng-bind="','+ meta1"></span></span>
+                                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index"><span ng-bind="','+ meta2"></span></span>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -286,15 +290,15 @@
                             <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" />
                         </td>
-                        <td class="type"> {{doc.schema_s | schemaShortName}}</td>
-                        <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.rec_title}}</a></td>
-                        <td > {{doc.rec_countryName}}</td>
-                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank">{{doc.uniqueIdentifier_s}}</a></td>
-                        <td class="summary" data-title="doc.rec_summary"> {{doc.rec_summary | limitTo:20 }}</td>
+                        <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
+                        <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
+                        <td ng-bind="doc.rec_countryName"></td>
+                        <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                        <td class="summary" data-title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:20"></td>
                         <td class="meta"> 
-                            <span ng-repeat="meta in doc.rec_meta1  track by $index">{{meta}}{{$last ? '':', '}}</span>
-                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index">, {{meta1}}</span>
-                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index">, {{meta2}}</span>
+                            <span ng-repeat="meta in doc.rec_meta1  track by $index"><span ng-bind="(meta) + ($last ? '' : ',')"></span></span>
+                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index"><span ng-bind="','+ meta1"></span></span>
+                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index"><span ng-bind="','+ meta2"></span></span>
                         </td>
                     </tr>
                 </tbody>

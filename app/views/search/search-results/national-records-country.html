@@ -5,12 +5,12 @@
             </a>
             <ng-party-status code="name" style="margin-left:10px;"></ng-party-status>
 
-            <span class="badge pull-right">{{numFound}}</span>
+            <span class="badge pull-right" ng-bind="numFound"></span>
         </h4>
         <div ng-repeat="(key, schema) in schemas" ng-if="schema.docs.length>0">
-            <div class="schemaTitle color-darkgrey" class="animate-if">{{schema.title |lstring:locale}}
-                <span class="schema color-blue">({{schema.shortCode}})</span>
-                <span class="badge color-darkgrey pull-right" style="background-color:#777">{{schema.numFound}}</span>
+            <div class="schemaTitle color-darkgrey" class="animate-if" ng-bind="schema.title |lstring:locale">
+                <span class="schema color-blue">(<span ng-bind="schema.shortCode"></span>)</span>
+                <span class="badge color-darkgrey pull-right" style="background-color:#777" ng-bind="schema.numFound"></span>
             </div>
             <div ng-repeat="row in schema.docs">
                 <result-grouped-national-record doc='row'></result-grouped-national-record>
@@ -23,7 +23,7 @@
                     <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                 </button>
                 <button type="button" class="btn btn-default bold" ng-click="loadRecords(key, schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
-                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show all {{schema.numFound}} records
+                    <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show all <span ng-bind="schema.numFound"></span> records
                 </button>
             </div>
         </div>

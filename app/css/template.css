@@ -1868,16 +1868,19 @@ legend+ .help-info {
         font-weight: 500;
         text-transform: uppercase;
     }
+    .record-Options-div{
+        position: relative; 
+        top:210px;
+        padding-right: 10px;
+    }
+    @media (max-width:420px) {
+        
+        .record-Options-div{
+            top:230px;
+        }
+    }
     .record-Options-div .date{
-        font-size:11px!important;
-        font-weight: 500;
         text-transform: uppercase;
-        padding:3px;
-        background-color: #f5f5f5;
-       
-            border-radius: 4px;
-    
-        border: 1px solid rgba(0, 0, 0, 0.15);
     }
     .record-Options-div .xlabel{
         font-size:11px!important;
