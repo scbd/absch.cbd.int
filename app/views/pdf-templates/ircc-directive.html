@@ -12,7 +12,7 @@
         <div class="row1">
             <div class="col-xs-12 bg-green">
                 <h1 class="color-litegreen  text-center" style="padding:0;font-size:20;">
-                    <div class="color-white">{{documentInfo |uniqueID:true}}</div>
+                    <div class="color-white" ng-bind="documentInfo |uniqueID:true"></div>
                     Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available
                     to the Access and Benefit-sharing Clearing-House
                 </h1>
@@ -45,7 +45,7 @@
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <label>Issuing country</label>
-                    <div class="text">{{document.government|term |uppercase}}</div>
+                    <div class="text" ng-bind="document.government|term |uppercase"></div>
                 </div>
 
 
@@ -68,7 +68,7 @@
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <label>ABS-CH Unique Identifier (UID)</label>
-                    <div class="text"> {{documentInfo|uniqueID:true}} </div>
+                    <div class="text" ng-bind="documentInfo|uniqueID:true"> </div>
                 </div>
             </div>
 
@@ -87,7 +87,7 @@
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <label>Reference number of the permit or its equivalent</label>
-                    <div class="text">{{document.title| lstring:locale}}</div>
+                    <div class="text" ng-bind="document.title| lstring:locale"></div>
                 </div>
 
                 <div class="col-xs-12" ng-if="document.referenceToNationalPermit">
@@ -260,7 +260,7 @@
                 <div class="col-xs-12">
                     <label>Type of use allowed by the permit or its equivalent</label>
                     <div class="text" ng-class="{'confidential':document.usagesConfidential}">
-                        <span ng-show="!document.usagesConfidential" ng-repeat="term in document.usages">{{term|term}}{{$last ? '' : ' and '}}</span>
+                        <span ng-show="!document.usagesConfidential" ng-repeat="term in document.usages"><span ng-bind="term|term"></span><span ng-bind="$last ? '' : ' and '"></span></span>
                         <span ng-show="document.usagesConfidential">Confidential information</span>
                     </div>
                 </div>
@@ -290,7 +290,7 @@
                         </div>
                         <ul style="list-style-type: none;" class="text" class="text" ng-show="document.permitFiles">
                             <li ng-repeat="item in document.permitFiles">
-                                <strong>{{item.name}}</strong> (https://absch.cbd.int/{{item.url}}) </span>
+                                <strong ng-bind="item.name"></strong> (https://absch.cbd.int/{{item.url}}) </span>
                             </li>
                         </ul>
                     </div>
@@ -305,7 +305,7 @@
                     </div>
                     <ul style="list-style-type: none;" class="text" class="text" ng-show="document.relevantDocuments">
                         <li ng-repeat="item in document.relevantDocuments">
-                            <strong>{{item.name}}</strong> (https://absch.cbd.int/{{item.url}}) </span>
+                            <strong ng-bind="item.name"></strong> (https://absch.cbd.int/{{item.url}}) </span>
                         </li>
                     </ul>
 
@@ -336,7 +336,7 @@
                     <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
                         <!-- <hr style="border-color:#FFF;margin:3;padding:3;"> -->
                         <td class="col-xs-2 history-text-date" >
-                            <strong>{{document.createdOn |formatDateWithTime}}</strong>
+                            <strong ng-bind="document.createdOn |formatDateWithTime"></strong>
                         </td>
                         <td class="col-xs-2">
                             <span ng-show="document.body.amendmentIntent==1">
@@ -353,8 +353,7 @@
                             <span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span>
                             <span ng-show="document.body.amendmentIntent==undefined">Permit information published to the ABS clearing-house and certificate constituted.</span>
                         </td>
-                        <td class="col-xs-4">
-                            {{document | uniqueID}}
+                        <td class="col-xs-4" ng-bind="document | uniqueID">
                         </td>
                     </tr>
 

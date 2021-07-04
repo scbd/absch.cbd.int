@@ -162,14 +162,11 @@
 										<i class="fa fa-chevron-circle-up"   ng-show="!closeSection"></i>
 	                 					<i class="fa fa-chevron-circle-down" ng-show="closeSection"></i>
 											 
-										<span ng-if="matrixGroupBy=='jurisdiction'">
-											{{jurisdiction.measures[0].jurisdiction_EN_t}} {{jurisdiction.measures[0].document.jurisdictionName|lstring}}
+										<span ng-if="matrixGroupBy=='jurisdiction'"
+										  ng-bind="(jurisdiction.measures[0].jurisdiction_EN_t) +' '+ (jurisdiction.measures[0].document.jurisdictionName|lstring)">
 										</span>
-										<span class="panel-title" ng-if="matrixGroupBy=='type'">
-											{{jurisdiction.measures[0].type_EN_t}}
-										</span>
-										<span class="panel-title" ng-if="matrixGroupBy=='status'">
-											{{jurisdiction.measures[0].status_EN_t}}
+										<span class="panel-title" ng-if="matrixGroupBy=='type'" ng-bind="jurisdiction.measures[0].type_EN_t"></span>
+										<span class="panel-title" ng-if="matrixGroupBy=='status'" ng-bind="jurisdiction.measures[0].status_EN_t">
 										</span>
 									</h3>
 								</div>
@@ -180,13 +177,13 @@
 	                                            <div class="row border" ng-click="measure.displayDetails = !measure.displayDetails;" style="cursor:pointer">
 														<i class="fa fa-chevron-circle-up" ng-show="measure.displayDetails"></i>
 														<i class="fa fa-chevron-circle-down" ng-show="!measure.displayDetails"></i>
-														<span>&nbsp;{{measure.title_t}}</span>	  	                                                
-														| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
+														<span>&nbsp;<span ng-bind="measure.title_t"></span></span>
+														| <span ng-bind="measure.status_EN_t"></span> | <span ng-bind="measure.type_EN_t"></span> | <span ng-bind="measure.jurisdiction_EN_t"></span> |
 														<span ng-show="measure.adoption_dt">Adopted on </span>
 														<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
 														<span ng-show="measure.retired_dt">Retired on </span>
-														{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
-														<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>													        
+													<span ng-bind="(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate"></span>
+														<span ng-show="measure.limitedApplication_dt"> - <span ng-bind="measure.limitedApplication_dt|formatDate"></span></span>
 	                                            </div>
 												<div class="row" ng-if="measure.displayDetails">													
                                                     <div class="col-xs-12 details document-show-hide" record-loader document="measure.document"></div>
