@@ -22,15 +22,13 @@
     </style>
     <div class="row">
         <div class="row">
-            <div class="title-bar" style="overflow: scroll;">
-                {{pdf.fileName|uppercase}}
+            <div class="title-bar" style="overflow: scroll;" ng-bind="pdf.fileName|uppercase">
             </div>
         </div>
         <div class="row" style="background:#fff" ng-if="!error">
             <div class="col-md-2">
-                <div class=""  style="overflow: scroll;width:100%;">
-                    <br> File Name : 
-                    <span ng-bind="pdf.fileName|uppercase" ></span>
+                <div class="" style="width:100%;">
+                    <br> File Name : <span ng-bind="pdf.fileName|uppercase"></span>
                     <br>
                     <br>
                     <a rel="noopener" ng-href="{{pdf.src|encodeURIComponent}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-success" target="_blank">
@@ -39,7 +37,7 @@
                     <br>
                     <br> View in
                     <span ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']">
-                        <a rel="noopener" ng-href="#" ng-click="loadLangPdf(lang)">{{lang}}</a> | </span>
+                        <a rel="noopener" ng-href="#" ng-click="loadLangPdf(lang)" ng-bind="lang"></a> | </span>
                 </div>
             </div>
             <div class="col-md-10" style="padding:0px;border-right: 1px solid #ddd">

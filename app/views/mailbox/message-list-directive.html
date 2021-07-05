@@ -1,7 +1,7 @@
 ﻿<div>
    <div class="box box-primary  no-padding">
        <div class="box-header with-border">
-         <h3 class="box-title">{{mailFolder|uppercase}}</h3>
+         <h3 class="box-title" ng-bind="mailFolder|uppercase"></h3>
 <!--         <div class="box-tools pull-right">
            <div class="has-feedback">
              <input type="text" class="form-control input-sm" placeholder="Search Mail"/>
@@ -27,8 +27,7 @@
            </div>
          </div>
          <div class="table-responsive mailbox-messages">
-            <div class="alert alert-danger" role="alert" ng-show="errorMessage">
-             {{errorMessage}}
+            <div class="alert alert-danger" role="alert" ng-show="errorMessage" ng-bind="errorMessage">
           </div>
            <p ng-if="!(mails).length && !erroMessage" class="lead text-center">No mails here</p>
            <table class="table table-hover table-striped" ng-if="(mails).length">
@@ -37,9 +36,9 @@
    <!--                           ng-class="{'active': mail.state == 'unread'}"-->
                  <td><input type="checkbox" ng-model="mail.mailSelected"/></td>
                  <td class="mailbox-star"><a rel="noopener" translation-url  href="#"><i class="fa fa-star text-yellow"></i></a></td>
-                 <td class="mailbox-name"><a rel="noopener" translation-url  ng-click="messageSelection('mailMessage', mail)">{{mail.createdBy_info.firstName+ ' ' + mail.createdBy_info.lastName}}</a></td>
-                 <td class="mailbox-subject"><b>{{mail.data.subject}}</b> - {{mail.data.message | limitTo:100}}...</td>
-                 <td class="mailbox-date">{{mail.createdOn|formatDate}}</td>
+                 <td class="mailbox-name"><a rel="noopener" translation-url  ng-click="messageSelection('mailMessage', mail)" ng-bind="(mail.createdBy_info.firstName)+ ' ' + (mail.createdBy_info.lastName)"></a></td>
+                   <td class="mailbox-subject"><b><span ng-bind="mail.data.subject"></span></b> - <span ng-bind="mail.data.message | limitTo:100"></span>...</td>
+                 <td class="mailbox-date" ng-bind="mail.createdOn|formatDate"></td>
                </tr>
              </tbody>
            </table>

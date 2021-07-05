@@ -1869,9 +1869,7 @@ legend+ .help-info {
         text-transform: uppercase;
     }
     .record-Options-div{
-        position: relative; 
         top:210px;
-        padding-right: 10px;
     }
     @media (max-width:420px) {
         

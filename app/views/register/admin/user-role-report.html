@@ -19,7 +19,7 @@
             <div class="registerpage-content">
 
                 <div class="alert alert-danger" ng-show="__error">
-                    <strong>Error: </strong>{{__error}}
+                    <strong>Error: </strong> <span ng-bind="__error"></span>
                 </div>
 
                 <div class="box box-info">
@@ -71,7 +71,7 @@
                                             }
                                             
                                         </style>
-                                        {{reverse}}
+                                        <span ng-bind="reverse"></span>
                                         <table class="table table-hover" style="text-align: left">
                                             <tbody>
                                                 <tr>
@@ -91,20 +91,20 @@
                                                 </tr>
 
                                                 <tr ng-repeat="country in countriesToShow | orderBy:sortByField:reverse">
-                                                    <td>{{$index+1}}</td>
+                                                    <td ng-bind="$index+1"></td>
                                                     <td>
-                                                        <a rel="noopener" target="_blank" href="https://accounts.cbd.int/admin/users?government={{country.code}}&role={{role}}">
-                                                            {{country.name|lstring:locale}}</a>
+                                                        <a rel="noopener" target="_blank" href="https://accounts.cbd.int/admin/users?government={{country.code}}&role={{role}}" 
+                                                        ng-bind="country.name|lstring:locale"></a>
                                                     </td>
-                                                    <td>{{country.count}}</td>
-                                                    <td>{{country.region}}</td>
+                                                    <td ng-bind="country.count"></td>
+                                                    <td ng-bind="country.region"></td>
                                                     <td><span ng-repeat="user in country.users">
-                                                        <a rel="noopener" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}">{{user.firstName }} {{user.lastName}} ({{user.email}})</a>,</span></td>
+                                                        <a rel="noopener" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}" ng-bind="user.firstName + ' ' +user.lastName + '('+user.email +')'"></a>,</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td></td>
                                                     <td>Total</td>
-                                                    <td>{{totalCount}}</td>
+                                                    <td ng-bind="totalCount"></td>
                                                 </tr>
                                             </tbody>
 
@@ -125,9 +125,9 @@
                                             <th>Email</th>
                                         </tr>
                                         <tr ng-repeat="user in usersToExport">
-                                            <td>{{user.country|lstring:locale}}</td>
-                                            <td>{{user.userName}}</td>
-                                            <td>{{user.userEmail}}</td>
+                                            <td ng-bind="user.country|lstring:locale"></td>
+                                            <td ng-bind="user.userName"></td>
+                                            <td ng-bind="user.userEmail"></td>
                                         </tr>
                                     </tbody>
                                 </table>
