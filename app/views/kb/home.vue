@@ -4,8 +4,8 @@
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <categories-group></categories-group>
-                    <right-menu></right-menu>
+                    <categories-group :is-bch="isBch" :locale="locale"></categories-group>
+                    <right-menu :is-bch="isBch" :locale="locale"></right-menu>
                 </div>
             </div>
         </section>
@@ -31,11 +31,15 @@
             RightMenu,
             AutoCompleteSearch
         },
+
         props:{
             tokenReader: { type: Function, required: false },
+            isBch: String,
+            locale: String
         },
         data:  () => {
             return {
+
             }
         },
         watch: {
@@ -44,4 +48,4 @@
             }
         }
     }
-</script> 
+</script>

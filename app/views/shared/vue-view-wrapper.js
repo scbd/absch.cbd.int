@@ -4,10 +4,11 @@ import 'components/scbd-branding/main';
 
 export { default as template } from './vue-view-wrapper.html';
 
-export default ['$scope', 'apiToken', '$route', 'component', function ($scope, apiToken, $route, component) {
+export default ['$scope', 'apiToken', '$route', 'component','realm', 'locale', function ($scope, apiToken, $route, component, realm, locale) {
 
   component = component.default || component;
-
+  $scope.locale = locale;
+  $scope.isBch = realm.is('BCH');
   $scope.tokenReader = function(){ return apiToken.get()}
   $scope.route       = { params : $route.current.params }
   $scope.vueOptions  = {
