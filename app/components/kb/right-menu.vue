@@ -11,6 +11,15 @@
         </div>
 
         <div class="sidebar" style="margin-top: 5px">
+            <div class="widget fix widget_categories mt-2">
+                <span class="icon icon-folder"></span>
+                <h4>Latest Articles</h4>
+                <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
+                <ul v-for="title in articles">
+                    <li><a href="#" @click="goToArticle(title.content[locale], title.title[locale])">{{title.title[locale]}}</a></li>
+                </ul>
+            </div>
+            
             <div class="widget fix widget_categories">
                 <span class="icon icon-folder"></span>
                 <h4>Popular Articles</h4>
@@ -25,20 +34,7 @@
                     <li><a href="#"> Getting Started &amp; What is next. </a></li>
                 </ul>
             </div>
-            <div class="widget fix widget_categories mt-2">
-                <span class="icon icon-folder"></span>
-                <h4>Latest Articles</h4>
-                <ul>
-                    <li><a href="#"> Installation &amp; Activation </a></li>
-                    <li><a href="#"> Premium Members Features </a></li>
-                    <li><a href="#"> API Usage &amp; Guide lines </a></li>
-                    <li><a href="#"> Getting Started &amp; What is next. </a></li>
-                    <li><a href="#"> Installation &amp; Activation </a></li>
-                    <li><a href="#"> Premium Members Features </a></li>
-                    <li><a href="#"> API Usage &amp; Guide lines </a></li>
-                    <li><a href="#"> Getting Started &amp; What is next. </a></li>
-                </ul>
-            </div>
+            
             <div class="widget fix widget_categories mt-2">
                 <span class="icon icon-folder"></span>
                 <h4>Popular Tags</h4>
@@ -70,10 +66,51 @@
 </template>
 
 <script>
+    import i18n from '../../locales/en/components/kb/categories-group';
+    import CategoriesGroup from './categories-group.vue';
+    import axios from 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js';
+
     export default {
+        components:{
+            CategoriesGroup
+        },
+        props:{
+            isBch: String,
+            locale: String
+        },
         data:  () => {
             return {
+                articles: [],
+                loading: true
             }
-        }
+        },
+        mounted() {
+            let self = this;
+            let isBch = this.isBch?'bch':'absch';
+            let locale = this.locale;
+            let titleField = `title.${locale}`;
+            let contentField = `content.${locale}`;
+            let ag = [];
+            let agLimit = [];
+            ag.push({"$match":{"$and":[{"adminTags":isBch}]}});
+            ag.push({"$project" : {[titleField]:1,[contentField]:1}});
+            agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
+            agLimit.push({"$limit" : 10});
+            const qs = {
+                "ag" : JSON.stringify(agLimit)
+            };
+            return axios.get('/api/v2017/articles', {params: qs}).then(function (results) {
+                if ((results || {}).data && results.data.length > 0) {
+                    self.articles =  results.data;
+                    self.loading = false;
+                }
+            });
+        },
+        methods: {
+            goToArticle(content, title){
+                this.$parent.$children[1].goToArticle(content, title)
+            },
+        },
+        i18n: { messages:{ en: i18n }} //will be used for locales language
     }
-</script> 
+</script>
