@@ -142,7 +142,9 @@
 .knowledge-base .categories-list li a:hover {
 	color: #7dc855;
 }
-
+.knowledge-base .widget_categories ul li a:hover {
+	color: #7dc855;
+}
 .knowledge-base .categories-list .tagcloud .btn-mini {
 	border: none;
 }
@@ -152,6 +154,9 @@
 }
 .knowledge-base .match-height > [class*=col] > .categories-list {
 	flex: 1 1 auto;
+}
+.knowledge-base .match-height .loading {
+	margin: 10% 50%;
 }
 .knowledge-base .categories-list h3 {
 	margin: 0
@@ -168,8 +173,15 @@
 	text-decoration: underline;
 	color: #428bca
 }
-.knowledge-base .categories-list .btn-primary{
-	margin-top: 20px;
+.knowledge-base .categories-list .view-more{
+	text-align: end;
+	position: absolute;
+	bottom: 10px;
+	right: 10px;
+}
+.knowledge-base .categories-list .view-more:hover{
+	color: #428bca;
+	text-decoration: underline;
 }
 .knowledge-base .categories h3 {
 	font-size: 16px;
@@ -199,6 +211,9 @@
 	margin: 10px 0 0 0;
 	padding: 0
 }
+.knowledge-base .categories-list ul:nth-child(6) {
+	padding-bottom: 20px;
+}
 .knowledge-base .categories-list li {
 	list-style: none;
 	padding-left: 5px;
@@ -211,9 +226,9 @@
 	font-size: 18px;
 }
 .knowledge-base  .categories-list li.tag:before {
-	 content: "";
-	 font-size: 18px;
- }
+	content: "";
+	font-size: 18px;
+}
 .knowledge-base .categories-list li a {
 	padding-left: 5px;
 	color: #5e6977;
@@ -344,6 +359,9 @@
 	margin: 0;
 	color: #333333;
 	padding-bottom: 15px;
+}
+.knowledge-base .full-details .image {
+	overflow: auto;
 }
 
 @media only screen and (min-width: 768px)  {
