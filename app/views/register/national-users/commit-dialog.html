@@ -16,9 +16,9 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title">
-            Actions - {{commitDialogCtrl.user.firstName}} {{commitDialogCtrl.user.lastName}}
+            Actions - <span ng-bind="commitDialogCtrl.user.firstName+' '+commitDialogCtrl.user.lastName"></span>
         </h3>
-        {{commitDialogCtrl.user.email}}
+        <span ng-bind="commitDialogCtrl.user.email"></span>
     </div>
 
     <div class="modal-body">
@@ -31,7 +31,7 @@
                 </div>
                 <div class="alert alert-danger" ng-switch-default>
                     <b>Oops...</b> We're sorry, but something went wrong.
-                    <br> {{commitDialogCtrl.error|json}}
+                    <br> <span ng-bind="commitDialogCtrl.error|json"></span>
                 </div>
             </div>
 
@@ -50,12 +50,10 @@
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw" ng-class="{ 'fa-cog' : tran.loading, 'fa-spin' : tran.loading, 'fa-check' : tran.success, 'fa-plus-circle' : !(tran.loading||tran.success) }" style="font-size:150%"></i>
                 </td>
-                <td style="width:90%">
-                    {{tran.user.firstName}} {{tran.user.lastName}} ({{tran.user.email}})
-                    <br> {{tran.user.organization}}
+                <td style="width:90%" ng-bind="tran.user.firstName+' '+tran.user.lastName+'('+tran.user.email+')'">
+                    <br> <span ng-bind="tran.user.organization"></span>
                 </td>
-                <td style="width:5%">
-                    {{tran.error.code || tran.error}}
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
                 </td>
             </tr>
 
@@ -71,11 +69,9 @@
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw" ng-class="{ 'fa-cog' : tran.loading, 'fa-spin' : tran.loading, 'fa-check' : tran.success, 'fa-plus-circle' : !(tran.loading||tran.success) }" style="font-size:150%"></i>
                 </td>
-                <td style="width:90%">
-                    {{tran.governmentName|lstring}}
+                <td style="width:90%" ng-bind="tran.governmentName|lstring">
                 </td>
-                <td style="width:5%">
-                    {{tran.error.code || tran.error}}
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
                 </td>
             </tr>
 
@@ -90,13 +86,11 @@
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw" ng-class="{ 'fa-cog' : tran.loading, 'fa-spin' : tran.loading, 'fa-check' : tran.success, 'fa-plus-circle' : !(tran.loading||tran.success) }" style="font-size:150%"></i>
                 </td>
-                <td style="width:90%">
-                    {{tran.role.name}}
+                <td style="width:90%" ng-bind="tran.role.name">
                     <br>
-                    <i>{{tran.role.description}}</i>
+                    <i ng-bind="tran.role.description"></i>
                 </td>
-                <td style="width:5%">
-                    {{tran.error.code || tran.error}}
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
                 </td>
             </tr>
 
@@ -111,13 +105,11 @@
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw" ng-class="{ 'fa-cog' : tran.loading, 'fa-spin' : tran.loading, 'fa-check' : tran.success, 'fa-minus-circle' : !(tran.loading||tran.success) }" style="font-size:150%"></i>
                 </td>
-                <td style="width:90%">
-                    {{tran.role.name}}
+                <td style="width:90%" ng-bind="tran.role.name">
                     <br>
-                    <i>{{tran.role.description}}</i>
+                    <i ng-bind="tran.role.description"></i>
                 </td>
-                <td style="width:5%">
-                    {{tran.error.code || tran.error}}
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
                 </td>
             </tr>
 
@@ -133,11 +125,9 @@
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw" ng-class="{ 'fa-cog' : tran.loading, 'fa-spin' : tran.loading, 'fa-check' : tran.success, 'fa-minus-circle' : !(tran.loading||tran.success) }" style="font-size:150%"></i>
                 </td>
-                <td style="width:90%">
-                    {{tran.governmentName|lstring}}
+                <td style="width:90%" ng-bind="tran.governmentName|lstring">
                 </td>
-                <td style="width:5%">
-                    {{tran.error.code || tran.error}}
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
                 </td>
             </tr>
 
