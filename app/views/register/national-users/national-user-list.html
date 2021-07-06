@@ -72,7 +72,7 @@
                             <b>Oups...</b> We're sorry, but you are not authorized access this page.
                         </div>
                         <div class="alert alert-danger" ng-switch-default>
-                            <b>Oops...</b> We're sorry, but something went wrong. {{error|json}}
+                            <b>Oops...</b> We're sorry, but something went wrong.<span ng-bind="error|json"></span>
                         </div>
                     </div>
 
@@ -99,16 +99,15 @@
                         </tr>
                         <tr ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
                             <td>
-                                <b>{{u.firstName}} {{u.lastName}}</b>
+                                <b> <span ng-bind="u.firstName+' '+u.lastName"></span></b>
                                 <br>
-                                <a rel="noopener" translation-url  href="mailto:{{u.email}}">{{u.email}}</a>
+                                <a rel="noopener" translation-url  href="mailto:{{u.email}}" ng-bind="u.email"></a>
                             </td>
-                            <td>
-                                {{u.organization}}
+                            <td ng-bind="u.organization">
                             </td>
                             <td>
                                 <span ng-repeat="rid in u.roles|filter:isContextRole">
-                                <span class="label label-default" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
+                                <span class="label label-default" style="font-size:10px;margin-right:4px" ng-bind="roles[rid].name"></span>
                                 <br>
                                 </span>
 
@@ -119,7 +118,7 @@
 
                                 <div ng-if="u.showExtraRoles">
                                     <span ng-repeat="rid in u.roles|filter:isNotContextRole">
-                                    <span class="label label-info" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
+                                    <span class="label label-info" style="font-size:10px;margin-right:4px" ng-bind="roles[rid].name"></span>
                                     <br>
                                     </span>
                                 </div>
@@ -138,8 +137,7 @@
                             </td>
                         </tr>
                         <tr ng-if="!!users">
-                            <td colspan="3">
-                                {{(users | filter:defaultFilter | filter:searchText).length}} of {{users.length}} |
+                            <td colspan="3" ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"> |
                                 <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
                                 <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
                             </td>
