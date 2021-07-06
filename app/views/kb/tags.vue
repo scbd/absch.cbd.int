@@ -3,10 +3,7 @@
         <auto-complete-search></auto-complete-search>
         <section class="categories">
             <div class="container">
-                <div class="row">
-                    <categories-group :ng-vue="ngVue"></categories-group>
-                    <right-menu :ng-vue="ngVue"></right-menu>
-                </div>
+                <div>tags</div>
             </div>
         </section>
     </div>
@@ -25,7 +22,7 @@
 
 
     export default {
-        name:'kbHome',
+        name:'kbTags',
         components:{
             CategoriesGroup,
             RightMenu,
@@ -34,7 +31,8 @@
 
         props:{
             tokenReader: { type: Function, required: false },
-            ngVue: {}
+            isBch: String,
+            locale: String
         },
         data:  () => {
             return {

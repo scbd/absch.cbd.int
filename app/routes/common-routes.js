@@ -83,7 +83,8 @@ const commonRouteUrls = {
     reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
 
     kb                                          : { component: ()=>import('~/views/kb/home.vue') },
-
+     kbArticles: { component: () => import('~/views/kb/articles.vue') },
+    // kbTags: { component: () => import('~/views/kb/tags.vue') },
     shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
     draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
     
@@ -162,9 +163,13 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
     whenAsync('/register/admin/common-issues',                      { ...mapView(angularViewWrapper),                    "label":"Common issues","resolve":{ ...commonRouteUrls.register_admin_common_issues,                                "securized":securize(['Administrator'])},"param":"true","resolveController":true}). 
     whenAsync('/reports/matrix',                                    { ...mapView(angularViewWrapper),                    "label":"Matrix","resolve":{ ...commonRouteUrls.reports_matrix,                                              },"param":"true","resolveController":true}).
     
-    whenAsync('/kb',                                                { ...mapView(vueViewWrapper),                       "label":"KB","resolve":{ ...commonRouteUrls.kb,                                                              },"param":"true","resolveController":true})
-    
-   
+    whenAsync('/kb',                                                { ...mapView(vueViewWrapper),                       "label":"KB","resolve":{ ...commonRouteUrls.kb,                                                              },"param":"true","resolveController":true}).
+    whenAsync('/kb/articles/:id',                                                { ...mapView(vueViewWrapper),                       "label":"kbArticles","resolve":{ ...commonRouteUrls.kbArticles,                                     },"param":"true","resolveController":true})
+    // whenAsync('kb/articles/tags/:tag',                                                { ...mapView(vueViewWrapper),                       "label":"kbTags","resolve":{ ...commonRouteUrls.kbTags,                                     },"param":"true","resolveController":true})
+            // whenAsync('/kb/articles/', { ...mapView(vueViewWrapper), "label": "kbArticles", "resolve": { ...commonRouteUrls.kbArticles, }, "param": "true", "resolveController": true })
+  //whenAsync('/kb/articles/:id/title', { ...mapView(vueViewWrapper), "label": "kbArticles", "resolve": { ...commonRouteUrls.kbArticles, }, "param": "true", "resolveController": true })
+    // whenAsync('/kb/articles/tags/:tag', { ...mapView(vueViewWrapper), "label": "kbTags", "resolve": { ...commonRouteUrls.kbTags, }, "param": "true", "resolveController": true })
+
 }]);
 
 export default {
