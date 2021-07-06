@@ -50,10 +50,10 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title">New user - {{editUserDialogCtrl.user.firstName}} {{editUserDialogCtrl.user.lastName}}
+        <h3 class="modal-title">New user - <span ng-bind="editUserDialogCtrl.user.firstName+' '+editUserDialogCtrl.user.lastName">
             <span ng-if="!editUserDialogCtrl.user.firstName && !editUserDialogCtrl.user.lastName">contact details</span>
         </h3>
-        <h4 class="modal-title">{{editUserDialogCtrl.user.email}}</h4>
+        <h4 class="modal-title" ng-bind="editUserDialogCtrl.user.email"></h4>
     </div>
 
     <div class="modal-body">
