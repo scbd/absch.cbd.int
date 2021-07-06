@@ -16,7 +16,7 @@
                 <h4>Latest Articles</h4>
                 <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
                 <ul v-for="title in articles">
-                    <li><a href="#" @click="goToArticle(title.content[locale], title.title[locale])">{{title.title[locale]}}</a></li>
+                    <li><a href="#" @click="goToArticle(title._id)">{{title.title[ngVue.locale]}}</a></li>
                 </ul>
             </div>
             
@@ -75,8 +75,7 @@
             CategoriesGroup
         },
         props:{
-            isBch: String,
-            locale: String
+            ngVue: {},
         },
         data:  () => {
             return {
@@ -86,14 +85,13 @@
         },
         mounted() {
             let self = this;
-            let isBch = this.isBch?'bch':'absch';
-            let locale = this.locale;
+            let isBch = this.ngVue.realm.is('BCH')?'bch':'absch';
+            let locale = this.ngVue.locale;
             let titleField = `title.${locale}`;
-            let contentField = `content.${locale}`;
             let ag = [];
             let agLimit = [];
             ag.push({"$match":{"$and":[{"adminTags":isBch}]}});
-            ag.push({"$project" : {[titleField]:1,[contentField]:1}});
+            ag.push({"$project" : {[titleField]:1}});
             agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
             agLimit.push({"$limit" : 10});
             const qs = {
@@ -107,8 +105,8 @@
             });
         },
         methods: {
-            goToArticle(content, title){
-                this.$parent.$children[1].goToArticle(content, title)
+            goToArticle(id){
+                window.location =  "/kb/articles/"+id;
             },
         },
         i18n: { messages:{ en: i18n }} //will be used for locales language

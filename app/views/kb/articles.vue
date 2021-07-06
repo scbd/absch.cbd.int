@@ -4,8 +4,7 @@
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <categories-group :ng-vue="ngVue"></categories-group>
-                    <right-menu :ng-vue="ngVue"></right-menu>
+                    <article-details :ng-vue="ngVue"></article-details>
                 </div>
             </div>
         </section>
@@ -19,16 +18,14 @@
 
 <script>
 
-    import CategoriesGroup from '../../components/kb/categories-group.vue';
-    import RightMenu from '../../components/kb/right-menu.vue';
+    import articleDetails from '../../components/kb/article-details.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 
     export default {
         name:'kbHome',
         components:{
-            CategoriesGroup,
-            RightMenu,
+            articleDetails,
             AutoCompleteSearch
         },
 
