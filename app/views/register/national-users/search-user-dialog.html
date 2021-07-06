@@ -87,7 +87,7 @@
                 </div>
                 <div class="alert alert-danger" ng-switch-default>
                     <b>Oops...</b> We're sorry, but something went wrong.
-                    <br> {{searchUserDialogCtrl.error|json}}
+                    <br> <span ng-bind="searchUserDialogCtrl.error|json"></span>
                 </div>
             </div>
 
@@ -102,7 +102,7 @@
 
                     <div class="alert alert-warning" role="alert">
                         <p>
-                            <b>User not found: </b> <i>{{searchUserDialogCtrl.email}}</i>
+                            <b>User not found: </b> <i ng-bind="searchUserDialogCtrl.email"></i>
                         </p>
                         <p>
                             Please note the specified email address does not correspond to any existing User Account.
@@ -113,7 +113,7 @@
 
                     <button type="button" class="btn btn-lg btn-block btn-success" ng-click="searchUserDialogCtrl.save()">
                         Nominate a new user using following email address<br>
-                        <b>{{searchUserDialogCtrl.user.email}}</b>
+                        <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b>
                     </button>
 
                 </div>
@@ -165,8 +165,8 @@
                     </div>
 
                     <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="searchUserDialogCtrl.save()">
-                        Continue with <b>{{searchUserDialogCtrl.user.firstName}} {{searchUserDialogCtrl.user.lastName}}</b><br>
-                        <b>{{searchUserDialogCtrl.user.email}}</b>
+                        Continue with <b><span ng-bind="searchUserDialogCtrl.user.firstName+' '+searchUserDialogCtrl.user.lastName"></span></b><br>
+                        <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b>
                     </button>
                 </div>
 
