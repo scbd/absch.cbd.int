@@ -13,7 +13,7 @@
                 <div class="categories-list" v-for="(titles,tag) in article">
                     <h3><span class="badge">{{titles.length}}</span><a href="#">{{tag}}</a></h3>
                     <ul v-for="title in titles.slice(0,5)">
-                       <li><a href="#" @click="goToArticle(title.id)">{{title.title}}</a></li>
+                       <li><a href="#" @click="goToArticle(title.id,title.title)">{{title.title}}</a></li>
                     </ul>
                     <a class="view-more" v-if="titles.length>5" href="#">View More</a>
                 </div>
@@ -65,8 +65,9 @@
 
         },
         methods: {
-            goToArticle(id){
-                window.location =  "/kb/articles/"+id
+            goToArticle(id,title){
+                const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+                this.ngVue.location.path("/kb/articles/"+id+ "/" + url  );
             }
         },
         i18n: { messages:{ en: i18n }} //will be used for locales language
