@@ -159,8 +159,15 @@ import 'views/reports/matrix/data-matrix.directive';
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
-                        var name = dateVal.field.replace('_dt', '').replace(/[A-Z]/g, ' $&') + ' (' +
-                                    dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' 
+                        if(dateVal.field=='updatedDate_dt') 
+                        {
+                             var name = 'Date published ('+dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' ;
+                        }
+
+                        if(dateVal.field=='createdDate_dt') 
+                        {
+                             var name = 'Date created ('+dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' ;
+                        }
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
                             query: query,
