@@ -50,7 +50,8 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                     page: 1
                 },
                 forcePDFJS: true,
-                PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.b10e641f.html"
+                PDFJS_URL: "/app/views/pdf-viewer/pdfjs/web/viewer.b10e641f.html",
+                originalUrl:$scope.pdf.fileName
             };
             pdfObject.embed($scope.pdf.src, '#viewPdf', options)
             
@@ -72,15 +73,13 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 baseApiUrl = '';
 
             var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
-            src = src .replace("{{realm}}", realm.value)
-                                 .replace("{{locale}}", pdfLocale)
-                                 .replace("{{type}}", $route.current.params.type)
-                                 .replace("{{documentId}}", $route.current.params.documentId)
-                                 .replace("documentID", $route.current.params.type == 'draft-documents' ? 'code':'')
-                                 .replace("{{revision}}", $route.current.params.revision)
-                                 .replace("{{schema}}", $route.current.params.schema);
-
-            console.log(src);
+            src = src   .replace("{{realm}}", realm.value)
+                        .replace("{{locale}}", pdfLocale)
+                        .replace("{{type}}", $route.current.params.type)
+                        .replace("{{documentId}}", $route.current.params.documentId)
+                        .replace("documentID", $route.current.params.type == 'draft-documents' ? 'code':'documentID')
+                        .replace("{{revision}}", $route.current.params.revision)
+                        .replace("{{schema}}", $route.current.params.schema);
             return src;
         }
 
@@ -103,7 +102,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 })
             }
             else{
-                $scope.loadLangPdf(locale||'en')
+                $timeout(()=>$scope.loadLangPdf(locale||'en'), 100);    
             }
         }
 
