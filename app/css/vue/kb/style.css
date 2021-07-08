@@ -214,6 +214,9 @@
 .knowledge-base .categories-list ul:nth-child(6) {
 	padding-bottom: 20px;
 }
+.knowledge-base .categories-list.tag ul:nth-child(6) {
+	padding-bottom: 0;
+}
 .knowledge-base .categories-list li {
 	list-style: none;
 	padding-left: 5px;
