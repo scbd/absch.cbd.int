@@ -683,7 +683,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'supplementaryAuthority'    : 'views/forms/edit/directives/edit-authority.directive',
                     'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
                     'organization'              : 'views/forms/edit/directives/edit-organization.directive',
-                    'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive'
+                    'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive',
+                    'resource'                  : 'views/forms/edit/directives/edit-resource.directive'
                 }
                 $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];

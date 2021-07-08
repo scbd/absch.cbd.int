@@ -1,7 +1,11 @@
 ﻿<div>
 	<div class="registerpage-content edit-resource-base-directive">
-
-		<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab">
+		<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" 
+			hide-timer="false" tab="tab"
+			validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+			data-container="{{container}}" is-dialog="{{isDialog}}">
 			<edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
 
@@ -379,7 +383,7 @@
 			</review-form>
 			<!-- <publish-form></publish-form> -->
 			<!-- use when you wan to display more than publish buttons -->
-		</div>
+		</workflow-arrow-buttons>
 
 	</div>
 </div>
