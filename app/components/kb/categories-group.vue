@@ -11,9 +11,11 @@
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
             <div class="col-md-6 col-sm-12" v-for="article in articles">
                 <div class="categories-list" v-for="(titles,tag) in article">
-                    <h3><span class="badge">{{titles.length}}</span><a href="#">{{tag}}</a></h3>
+                    <h3><span class="badge">{{titles.length}}</span><a href="#" @click="goToTag(tag,titles.length)">{{tag}}</a></h3>
                     <ul v-for="title in titles.slice(0,5)">
+<!--                       <li><a href="#" @click="goToArticle(title.id,title.title)">{{title.title}}</a></li>-->
                        <li><a href="#" @click="goToArticle(title.id,title.title)">{{title.title}}</a></li>
+<!--                        <li><a v-bind:href="'kb/articles/'+title.id">{{title.title}}</a></li>-->
                     </ul>
                     <a class="view-more" v-if="titles.length>5" href="#">View More</a>
                 </div>
@@ -68,6 +70,9 @@
             goToArticle(id,title){
                 const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
                 this.ngVue.location.path("/kb/articles/"+id+ "/" + url  );
+            },
+            goToTag(tag,size){
+                this.ngVue.location.path("/kb/articlex/tags/"+tag+"/"+size );
             }
         },
         i18n: { messages:{ en: i18n }} //will be used for locales language
