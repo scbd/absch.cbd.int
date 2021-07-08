@@ -45,8 +45,6 @@ app.directive("viewReferencedRecords", [function () {
 										info = JSON.parse(info);
 										_.forEach(info.identifiers, function(identifier){
 											if(removeRevisonNumber(identifier) == $scope.model){
-												if(record.schemaCode=='modifiedOrganism' || record.schemaCode=='nationalRiskAssessment' || record.schemaCode=='independentRiskAssessment')
-													record.showIcons = true;
 												if(!$scope.referenceRecords)
 													$scope.referenceRecords = {};
 
