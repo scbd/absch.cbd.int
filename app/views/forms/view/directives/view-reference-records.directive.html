@@ -1,4 +1,4 @@
-﻿<div id="reference-records-table" ng-show="referenceRecords">
+<div id="reference-records-table" ng-show="referenceRecords">
     <legend>
         Linked records
         <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
@@ -13,7 +13,7 @@
 
         <tr ng-repeat="(key, record) in referenceRecords">
             <td colspan="4" style="padding: 0px;">
-                <table class="table table-bordered" style="margin-bottom: 0px;">
+                <table class="table table-bordered" style="margin-bottom: 0px;width: 100%;">
                     <tr ng-repeat-start="(fieldKey, field) in record.fields" ng-class="{'active':field.showRecords}">
                         <td width="10%">
                             <button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">
