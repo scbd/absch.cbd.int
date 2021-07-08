@@ -3,13 +3,11 @@
         <auto-complete-search></auto-complete-search>
         <section class="categories">
             <div class="container">
-                <div class="row">
-                    <categories-group :ng-vue="ngVue"></categories-group>
-                    <right-menu :ng-vue="ngVue"></right-menu>
-                </div>
+                <article-tags :ng-vue="ngVue"></article-tags>
             </div>
         </section>
     </div>
+
 </template>
 
 <style>
@@ -18,22 +16,19 @@
 
 <script>
 
-    import CategoriesGroup from '../../components/kb/categories-group.vue';
-    import RightMenu from '../../components/kb/right-menu.vue';
+    import articleTags from '../../components/kb/article-tags.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
-
     export default {
-        name:'kbHome',
+        name:'kbAdminTags',
         components:{
-            CategoriesGroup,
-            RightMenu,
+            articleTags,
             AutoCompleteSearch
         },
 
         props:{
             tokenReader: { type: Function, required: false },
-            ngVue: {}
+            ngVue:{}
         },
         data:  () => {
             return {

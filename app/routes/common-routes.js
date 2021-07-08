@@ -83,8 +83,8 @@ const commonRouteUrls = {
     reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
 
     kb                                          : { component: ()=>import('~/views/kb/home.vue') },
-     kbArticles: { component: () => import('~/views/kb/articles.vue') },
-    // kbTags: { component: () => import('~/views/kb/tags.vue') },
+    kbArticles: { component: () => import('~/views/kb/articles.vue') },
+    kbTags: { component: () => import('~/views/kb/adminTags.vue') },
     shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
     draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
     
