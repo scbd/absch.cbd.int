@@ -76,6 +76,17 @@
                             <span> Cancel request</span>                           
                         </button>
                     </div>
+                    <div ng-if="isAdmin()">
+                        <br/>
+                        <strong>The workflow is assigned to following users</strong>(visible only to admin users)
+                        <table class="table table-bordered">
+                            <tr ng-repeat="user in activity.assignedTo_info">
+                                <td ng-bind="user.userID"></td>
+                                <td ng-bind="user.firstName + ' ' + user.lastName"></td>
+                                <td ng-bind="user.email"></td>
+                            </tr>
+                        </table>
+                    </div>
             </div>
 
         </div>
