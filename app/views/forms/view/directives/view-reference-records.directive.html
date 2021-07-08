@@ -1,14 +1,14 @@
-<div id="reference-records-table" ng-show="referenceRecords">
+﻿<div id="reference-records-table" ng-show="referenceRecords">
     <legend>
-        Linked records
+        Records referencing this document
         <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
     </legend>
     <table class="table table-bordered table-condensed" style="width: 100%;">
         <tr>
             <th width="10%"></th>            
-            <th width="45%">Schema</th>
+            <th width="43%">Record type</th>
             <th width="40%">Field</th>
-            <th width="5%">Count</th>
+            <th width="7%">Record(s)</th>
         </tr>
 
         <tr ng-repeat="(key, record) in referenceRecords">
@@ -22,9 +22,9 @@
                                 <span ng-if="!field.showRecords" class="hidden-xs">Show</span>
                             </button>
                         </td>
-                        <td width="45%"> {{record.schema}}</td>
+                        <td width="43%"> {{record.schema}}</td>
                         <td max-width="40%" class="truncate-record" ng-bind="fieldKey" ng-click="toggleTitle($event)"></td>
-                        <td width="5%" ng-bind="field.count"></td>
+                        <td width="7%" ng-bind="field.count"></td>
                     </tr>
                     <tr ng-if="field.showRecords">
                         <td width="15%" colspan="4" style="padding:0px">
@@ -40,7 +40,7 @@
                                    <td ng-class="{'bold':sortField=='uniqueId'}">UId
                                         <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='uniqueId'; reverse=!reverse"></i>
                                     </td> 
-                                   <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs">Update on
+                                   <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs">Updated on
                                         <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='updatedOn'; reverse=!reverse"></i>
                                     </td> 
                                 </tr>
@@ -50,10 +50,10 @@
                                     </td>
                                     <td width="50%">
                                         <span ng-bind="doc.title"></span>                                        
-                                        <div class="pull-right" ng-if="doc.showIcons" ng-include="'/app/views/forms/view/bch/icons.html'"></div>
                                     </td>
                                     <td  width="20%">
                                         <a rel="noopener" target="_blank" ng-href="/database/{{doc.uniqueId|uppercase|encodeURIComponent}}" ng-bind="doc.uniqueId|uppercase" ></a>
+                                        <div ng-include="'/app/views/forms/view/bch/icons.html'"></div>
                                     </td>
                                     <td  width="15%" class="hidden-xs">
                                         <span ng-bind="doc.updatedOn|formatDateWithTime"></span>
