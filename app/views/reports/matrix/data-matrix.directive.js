@@ -14,11 +14,12 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
 			template:template,
 			restrict:'EA',
 			replace:true,
+            require:'^searchDirective',
 			scope:{ 
                 'api' : '=',
                 'onRecordFormatting'    : '&'
             },
-			link($scope, $element){
+			link($scope, $element, $attr, searchDirectiveCtrl){
                 
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
 
@@ -56,7 +57,9 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                         fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s,schemaType:schemaType_s,countryRegions_ss',
                         fieldQuery  : _.uniq(queryOptions.tagQueries),
                         query       : queryOptions.query||undefined,
-                        
+                        facet          : true,
+                        facetFields    : queryOptions.facetFields,
+                        pivotFacetFields    : queryOptions.pivotFacetFields,
                         rowsPerPage    : pageSize
                     }
                     return fetchRecords(query, {rows:[], pageNumber:0})
@@ -64,8 +67,7 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                                 queryCanceler   = null;                               
                                 pivotResult     = result;
                                 pivotUI(pivotResult);
-
-                                return result.rows;
+                                return result;
 
                         })
                         .catch(function(err){
@@ -104,7 +106,11 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                             }
                         });
 
-                        return { rows : data, numFound:result.data.response.numFound };
+                        return { 
+                                rows : data, 
+                                numFound:result.data.response.numFound, 
+                                facets: result.data.facet_counts ? searchDirectiveCtrl.sanitizeFacets(result.data.facet_counts) : undefined
+                        };
                     }); 
                 }
 
@@ -121,7 +127,9 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                                 result.rows         = _.union(result.rows, data.rows);
                                 result.numFound     = data.numFound;
                                 result.pageNumber  += 1;
+                                result.facets       = result.facets || data.facets;
                                 if(result.rows.length < result.numFound){
+                                    query.facet = false;
                                     return fetchRecords(query, result);
                                 }
 
