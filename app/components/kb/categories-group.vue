@@ -12,15 +12,14 @@
             <div class="col-md-6 col-sm-12" v-for="article in articles">
                 <div class="categories-list" v-for="(titles,tag) in article">
                     <h3><span class="badge">{{titles[0].count}}</span>
-                        <a href="#" @click="goToTag(tag,titles.length)">{{tag}}</a>
-                        <!--                        <a href="#" v-bind:href="'/kb/articlex/tags/'+tag+'/'+titles.length">{{tag}}</a> Using href, the page hard refresh-->
+                        <a href="#" @click="goToTag(tag,titles[0].count)">{{tag}}</a>
+                        <!--<a href="#" v-bind:href="'/kb/articlex/tags/'+tag+'/'+titles.length">{{tag}}</a> Using href, the page hard refresh-->
                     </h3>
-                    <ul v-for="title in titles.slice(0,5)">
-<!--                    ss&#45;&#45;{{titles}}-->
-                    <!--                        <li><a v-bind:href="'kb/articles/'+title.id+'/'+title.title">{{title.title}}</a></li> Using href, the page hard refresh-->
+                    <ul v-for="title in titles">
+                    <!--<li><a v-bind:href="'kb/articles/'+title.id+'/'+title.title">{{title.title}}</a></li> Using href, the page hard refresh-->
                         <li><a href="#" @click="goToArticle(title.id,title.title)">{{title.title}}</a></li>
                     </ul>
-                    <a class="view-more" v-if="titles.length>5" href="#" @click="goToTag(tag,titles.length)">View More</a>
+                    <a class="view-more" v-if="titles[0].count>5" href="#" @click="goToTag(tag,titles[0].count)">View More</a>
                 </div>
             </div>
         </div>
@@ -73,7 +72,7 @@
                                 .filter(d => d.adminTags.includes(t))
                             .map((d,i,v) =>
                                 ({title:d.title[locale],id:d._id, count:v.length})
-                            )
+                            ).slice(0, 5)
                     }));
                     self.loading = false;
                 }

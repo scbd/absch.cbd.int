@@ -2,8 +2,8 @@
 
     <div class="col-lg-12">
             <section class="categories">
-                <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
                 <div class="categories-list mt-0 single">
+                  <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
                     <header>
                         <h2 v-if="articles.title != undefined">{{articles.title[locale]}}</h2>
                     </header>
