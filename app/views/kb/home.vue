@@ -4,8 +4,8 @@
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <categories-group :ng-vue="ngVue"></categories-group>
-                    <right-menu :ng-vue="ngVue"></right-menu>
+                    <categories-group :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></categories-group>
+                    <right-menu :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></right-menu>
                 </div>
             </div>
         </section>

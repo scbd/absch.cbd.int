@@ -22,7 +22,7 @@
                 currentPage: 1,
                 totalPages:0,
                 bootstrapPaginationClasses: {
-                    ul: 'pagination',
+                    ul: 'pagination pagination-sm flex-sm-wrap',
                     li: 'page-item',
                     liActive: 'active',
                     liDisable: 'disabled',

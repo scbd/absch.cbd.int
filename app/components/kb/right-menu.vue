@@ -16,7 +16,7 @@
                 <h4>Latest Articles</h4>
                 <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
                 <ul v-for="title in articles">
-                    <li><a href="#" @click="goToArticle(title._id,title.title[ngVue.locale])">{{title.title[ngVue.locale]}}</a></li>
+                    <li><a href="#" @click="goToArticle(title._id,title.title[locale])">{{title.title[locale]}}</a></li>
                 </ul>
             </div>
             
@@ -75,7 +75,9 @@
             CategoriesGroup
         },
         props:{
-            ngVue: {},
+            realm:{},
+            locale:String,
+            location:String
         },
         data:  () => {
             return {
@@ -85,8 +87,8 @@
         },
         mounted() {
             let self = this;
-            let isBch = this.ngVue.realm.is('BCH')?'bch':'absch';
-            let locale = this.ngVue.locale;
+            let isBch = this.realm.is('BCH')?'bch':'absch';
+            let locale = this.locale;
             let titleField = `title.${locale}`;
             let ag = [];
             let agLimit = [];
@@ -107,7 +109,7 @@
         methods: {
             goToArticle(id,title){
                 const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-                this.ngVue.location.path("/kb/articles/"+id+ "/" + url  );
+                this.location.path("/kb/articles/"+id+ "/" + url  );
             },
         },
         i18n: { messages:{ en: i18n }} //will be used for locales language
