@@ -1,10 +1,9 @@
 <template>
     <div class="knowledge-base">
-        <auto-complete-search></auto-complete-search>
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <article-details :ng-vue="ngVue"></article-details>
+                    <article-details :locale="ngVue.locale"></article-details>
                 </div>
             </div>
         </section>
