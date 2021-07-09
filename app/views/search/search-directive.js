@@ -609,8 +609,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                                 return lfield
                                             }).join('_');
                                             
-                            combinations.push(group.field)
-                            combinations.push(groupField + '_' + otherComb)
+                            combinations.push('grp_'+group.field)
+                            combinations.push('grp_'+groupField + '_' + otherComb)
                             combinations = _.union(combinations, otherComb);
                         })   
                         return combinations
@@ -622,7 +622,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             return groupMap && (!groupMap.tabs || ~groupMap.tabs.indexOf($scope.searchResult.currentTab))
                         })
                         var map = {
-                            groupField : fields.join('_') + '_s',
+                            groupField : 'grp_'+fields.join('_') + '_s',
                             sortFields:[]
                         };
                         _.forEach(fields, function(field){
