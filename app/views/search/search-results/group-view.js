@@ -88,8 +88,7 @@ import 'views/search/search-results/result-default';
                             queryCanceler = null;
                             $scope.searchResult.rawDocs = [];
     
-                            var countryRecords = {}
-                            
+                            var countryRecords = {};
                             _.forEach(result.data.grouped[groupField].groups, function (record) {
                                 // if(groupField == 'government_schema_s'){
                                     var gpDetails = (record.groupValue || 'other').split('_');
@@ -130,12 +129,13 @@ import 'views/search/search-results/result-default';
                                     if(!countryRecords[groupLevels.levelKey])
                                         countryRecords[groupLevels.levelKey] = groupLevels;
                                     else{                                        
-                                        countryRecords[groupLevels.levelKey].subLevels = _(countryRecords[groupLevels.levelKey].subLevels||[]).concat(groupLevels.subLevels||[]).value();
+                                        countryRecords[groupLevels.levelKey].subLevels = concatGroupLevels(countryRecords[groupLevels.levelKey].subLevels||[], groupLevels.subLevels||[]);
                                     }
-                                    if(gpDetails.length > 1)
-                                        countryRecords[groupLevels.levelKey].numFound  = _.reduce(countryRecords[groupLevels.levelKey].subLevels, function(count, level){return count + level.numFound}, 0)
+                                    if(gpDetails.length > 1){
+                                        countryRecords[groupLevels.levelKey].numFound  = countGroupRecords(countryRecords[groupLevels.levelKey].subLevels)
+                                    }
                                     else
-                                        countryRecords[groupLevels.levelKey].numFound  = groupLevels.numFound;
+                                        countryRecords[groupLevels.levelKey].numFound  = groupLevels.numFound||0;
                                 // }
                                 // else{                                    
                                 //     countryRecords[record.groupValue] = {}
@@ -259,6 +259,33 @@ import 'views/search/search-results/result-default';
                     })
 
                     return fieldMapping;
+                }
+
+                function countGroupRecords(subLevels){
+                    const count = _.reduce(subLevels, function(count, level){
+                                        if(level.subLevels){
+                                            const levelCount = countGroupRecords(level.subLevels);
+                                            level.numFound = levelCount;
+                                        }
+                                        return count + (level.numFound||0);
+                                    }, 0);
+                    return count;
+                }
+
+                function concatGroupLevels(mainLevels, subLevels){
+                    _.map(subLevels, (level)=>{
+                        
+                        const existing = mainLevels.find(e=>e.field == level.field && e.levelKey == level.levelKey)
+                        if(existing){
+                            concatGroupLevels(existing.subLevels, level.subLevels) 
+                        }
+                        else{
+                            mainLevels.push(level);
+                        }
+                    })
+
+
+                    return mainLevels
                 }
 
             }
