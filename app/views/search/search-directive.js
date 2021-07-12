@@ -137,7 +137,7 @@ import 'views/reports/matrix/data-matrix.directive';
                         updateQueryResult();
                     };
 
-                    $scope.saveFreeTextFilter = function(text) {
+                    $scope.saveFreeTextFilter = function(text, $event) {
 
                         if(!text && text.length <= 0)
                             return;
@@ -156,6 +156,9 @@ import 'views/reports/matrix/data-matrix.directive';
                         }
 
                         updateQueryResult();
+
+                        if($event)
+                            $event.preventDefault();
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
