@@ -106,7 +106,7 @@ import 'views/search/search-results/result-default';
 
                                         if(fieldMapping[i].field == 'government' && (groupValue!='reference' && groupValue!='scbd')){
                                             group[groupValue].partyStatus = true;
-                                            group[groupValue].href = '/countries/' + (groupValue||'').toUpperCase()
+                                            group[groupValue].href = '/countries/' + encodeURIComponent(groupValue||'').toUpperCase()
                                         }
 
                                         if(gpDetails.length-1 == i){ //add docs to the last group field
