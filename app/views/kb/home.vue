@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="row">
                     <categories-group :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></categories-group>
-                    <right-menu :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></right-menu>
+                    <side-bar :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></side-bar>
                 </div>
             </div>
         </section>
@@ -19,7 +19,7 @@
 <script>
 
     import CategoriesGroup from '../../components/kb/categories-group.vue';
-    import RightMenu from '../../components/kb/right-menu.vue';
+    import sideBar from '../../components/kb/side-bar.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 
@@ -27,7 +27,7 @@
         name:'kbHome',
         components:{
             CategoriesGroup,
-            RightMenu,
+            sideBar,
             AutoCompleteSearch
         },
 

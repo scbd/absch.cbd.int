@@ -12,12 +12,12 @@
             <div class="col-md-6 col-sm-12" v-for="article in articles">
                 <div class="categories-list" v-for="(titles,tag) in article">
                     <h3><span class="badge">{{titles[0].count}}</span>
-                        <a href="#" @click="goToTag(tag,titles[0].count)">{{tag}}</a>
+                        <a href="#" @click="goToTag(tag)">{{tag}}</a>
                         <!--<a href="#" v-bind:href="'/kb/articlex/tags/'+tag+'/'+titles.length">{{tag}}</a> Using href, the page hard refresh-->
                     </h3>
                     <ul v-for="title in titles">
                     <!--<li><a v-bind:href="'kb/articles/'+title.id+'/'+title.title">{{title.title}}</a></li> Using href, the page hard refresh-->
-                        <li><a href="#" @click="goToArticle(title.id,title.title)">{{title.title}}</a></li>
+                        <li><a href="#" @click="goToArticle(title.id,title.title,tag)">{{title.title}}</a></li>
                     </ul>
                     <a class="view-more" v-if="titles[0].count>5" href="#" @click="goToTag(tag,titles[0].count)">View More</a>
                 </div>
@@ -80,12 +80,12 @@
 
         },
         methods: {
-            goToArticle(id,title){
+            goToArticle(id,title,tag){
                 const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-                this.location.path("/kb/articles/"+id+ "/" + url  );
+                this.location.path("/kb/articles/"+id+ "/" + url + "/" + tag);
             },
-            goToTag(tag,size){
-                this.location.path("/kb/articlex/tags/"+tag+"/"+size );
+            goToTag(tag){
+                this.location.path("/kb/tags/"+tag);
             }
         },
         i18n: { messages:{ en: i18n }} //will be used for locales language

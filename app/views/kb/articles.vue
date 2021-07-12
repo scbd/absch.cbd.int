@@ -2,9 +2,7 @@
     <div class="knowledge-base">
         <section class="categories">
             <div class="container">
-                <div class="row">
-                    <article-details :locale="ngVue.locale"></article-details>
-                </div>
+                <article-details :location="ngVue.location" :locale="ngVue.locale"></article-details>
             </div>
         </section>
     </div>
