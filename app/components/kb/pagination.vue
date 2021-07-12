@@ -15,7 +15,8 @@
     export default {
         components: { vPagination },
         props:{
-            tagCount: Number
+            tagCount: Number,
+            items: Number
         },
         data() {
             return {
@@ -37,7 +38,7 @@
             }
         },
         mounted() {
-            this.totalPages = Math.ceil(this.tagCount / 10);
+            this.totalPages = Math.ceil(this.tagCount / this.items);
         },
         methods: {
             setPage() {

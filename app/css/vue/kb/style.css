@@ -291,7 +291,8 @@
 	margin-top: 2rem
 }
 .knowledge-base .tagcloud{
-	margin-top: 15px
+	margin-top: 15px;
+	display: inline-block;
 }
 
 .knowledge-base .tagcloud a {
@@ -299,41 +300,30 @@
 	font-size: 11px;
 }
 .knowledge-base .tagcloud .btn {
-	border-color: #c5c5c5;
-	border-color: rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.15) rgba(0, 0, 0, 0.25);
 	display: inline-block;
 	*display: inline;
 	*zoom: 1;
-	padding: 4px 12px;
+	padding: 4px 15px;
 	margin-bottom: 5px;
-	font-size: 11px;
+	font-size: 12px;
 	line-height: 22px;
 	text-align: center;
 	vertical-align: middle;
 	cursor: pointer;
 	color: #333333;
-	text-shadow: 0 1px 1px rgb(255 255 255 / 75%);
-	background-color: whitesmoke;
-	background-image: -moz-linear-gradient(top, white, #e6e6e6);
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#e6e6e6));
-	background-image: -webkit-linear-gradient(top, white, #e6e6e6);
-	background-image: -o-linear-gradient(top, white, #e6e6e6);
-	background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-	background-repeat: repeat-x;
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFE6E6E6', GradientType=0);
-	border: 1px solid #bbbbbb;
-	*border: 0;
-	border-bottom-color: #a2a2a2;
+
+	background-color: #fff;
+
+	border: 1px solid #eee;
+
 	-webkit-border-radius: 4px;
 	-moz-border-radius: 4px;
 	border-radius: 4px;
 	*margin-left: .3em;
-	-webkit-box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 1px 2px rgb(0 0 0 / 5%);
-	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
-	box-shadow: inset 0 1px 0 rgb(255 255 255 / 20%), 0 1px 2px rgb(0 0 0 / 5%);
+
 }
 .knowledge-base .tagcloud .btn-mini {
-	padding: 0px 6px;
+	padding: 0px 8px;
 
 	-webkit-border-radius: 3px;
 	-moz-border-radius: 3px;
@@ -341,12 +331,78 @@
 
 }
 
-.knowledge-base .tagcloud .btn:hover, .tagcloud .btn:active, .tagcloud .btn.active, .tagcloud .btn.disabled, .tagcloud .btn[disabled] {
+.knowledge-base .tagcloud .btn:hover, .knowledge-base .tagcloud .btn:active, .knowledge-base .tagcloud .btn.active, .knowledge-base .tagcloud .btn.disabled, .knowledge-base .tagcloud .btn[disabled] {
 	color: #333333;
 	background-color: #e6e6e6;
 	*background-color: #d9d9d9;
 }
+.knowledge-base  .meta {
+	text-align: left;
 
+	border-bottom: 1px solid #F2F2F2;
+	margin: 10px 0 20px 0 !important;
+	padding: 0 0 20px 0 !important;
+
+}
+.knowledge-base .meta {
+	text-align: left;
+
+	border-bottom: 1px solid #F2F2F2;
+	margin: 10px 0 20px 0 !important;
+	padding: 0 0 20px 0 !important;
+
+}
+.knowledge-base .meta li {
+	display: inline-block;
+	font-weight: 300;
+	color: #86939e;
+}
+
+.knowledge-base .meta li span {
+	color: #43484d;
+}
+.knowledge-base .meta li::before {
+	display: none
+}
+.knowledge-base .meta li::after {
+	content: "|";
+	padding: 0 20px;
+}
+.knowledge-base .meta li:last-child::after {
+	content: none;
+}
+
+.knowledge-base .single p{
+	font-size: 14px;
+	font-weight: normal;
+	color: #777;
+	line-height: 26px;
+	text-align: justify;
+	font-family: "Roboto",sans-serif;
+}
+
+.knowledge-base .alert .fa{
+	display:table-cell;
+	float: left;
+	color: black
+}
+
+.knowledge-base .alert div{
+	padding-left: 5px;
+	display:table-cell;
+	float: left;
+	width: 88%;
+	margin-left: 15px
+}
+.knowledge-base .fa-3 {
+	font-size: 4em;
+}
+
+.knowledge-base .alert-info {
+	color: #888;
+	background-color: #F6FAFD;
+	border-color: #CAEDF3;
+}
 .knowledge-base .support-container {
 	background-color: #fdf8c8;
 	border: 1px solid #e7e0a1;

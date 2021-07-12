@@ -17,7 +17,7 @@
 <script>
 
     import CategoriesGroup from '../../components/kb/categories-group.vue';
-    import RightMenu from '../../components/kb/right-menu.vue';
+    import sideBar from '../../components/kb/side-bar.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 
@@ -25,7 +25,7 @@
         name:'kbTags',
         components:{
             CategoriesGroup,
-            RightMenu,
+            sideBar,
             AutoCompleteSearch
         },
 

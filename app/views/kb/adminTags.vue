@@ -3,7 +3,7 @@
         <auto-complete-search></auto-complete-search>
         <section class="categories">
             <div class="container">
-                <article-tags :ng-vue="ngVue"></article-tags>
+                <article-tags :location="ngVue.location" :locale="ngVue.locale"></article-tags>
             </div>
         </section>
     </div>
