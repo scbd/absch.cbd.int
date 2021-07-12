@@ -31,20 +31,32 @@
 <script>
 
 
+    import axios from 'axios';
     import i18n from '../../locales/en/components/kb/categories-group';
-    import axios from 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js';
-	  import globalPagination from './pagination.vue';
-		import relevantArticles from "./relevant-articles.vue";
+    import globalPagination from './pagination.vue';
+    import relevantArticles from "./relevant-articles.vue";
+    import ArticlesApi from './article-api';
 
     export default {
-			components:{
-				relevantArticles,
-        globalPagination
+		components:{
+			relevantArticles,
+            globalPagination
 				//jwPagination
-			},
+		},
         props:{
             location: String,
             locale: String,
+        },
+        created(){
+            this.articlesApi = new ArticlesApi();//this.tokenReader
+            console.log(this.articlesApi);
+        },
+        mounted() {
+            const tag =   JSON.stringify(this.$root.route.params.tag).replace(/"/g, "");
+            if(tag != undefined && tag != null) {
+                this.tag = tag;
+                this.getCount(tag);
+            }
         },
         data:  () => {
             return {
@@ -56,21 +68,14 @@
                 contentId:String
             }
         },
-        mounted() {
-            const tag =   JSON.stringify(this.$root.route.params.tag).replace(/"/g, "");
-            if(tag != undefined && tag != null) {
-                this.tag = tag;
-                this.getCount(tag);
-            }
-        },
-       methods: {
+        methods: {
            goToArticle(id,title){
               if(this.tag.toLowerCase() == 'faq' || this.tag.toLowerCase() == 'bch') {
                   this.isVisibile = !this.isVisibile;
                   this.contentId = id;
               } else {
                   const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-                  this.location.path("/kb/articles/" + id + "/" + url + "/" + this.tag);
+                  this.location.path(`/kb/articles/${id}/${url}/${this.tag}`);
               }
            },
            onChangePage(offset) {
@@ -79,50 +84,48 @@
               this.loadArticles((offset-1)*10, this.tag);
            },
            async getCount(tag){
-               let self = this;
-               let Count = [];
-               Count.push({"$match":{"$and":[{"adminTags":{"$all":[this.tag]}}]}});
-               Count.push({ "$count" : 'count' });
-               const cs = {
-                   "ag" : JSON.stringify(Count)
-               };
-               await axios.get('/api/v2017/articles', {params: cs}).then(function (results) {
-                   if ((results || {}).data && results.data[0] != undefined) {
-                       self.tagCount = results.data[0].count;
-                       self.loadArticles(0, tag);
-                   } else{
-                       self.tagCount = 0;
-                       self.loading = false;
-                       return false;
-                   }
-               });
+                let self = this;
+                let Count = [];
+                Count.push({"$match":{"$and":[{"adminTags":{"$all":[this.tag]}}]}});
+                Count.push({ "$count" : 'count' });
+                const cs = {
+                    "ag" : JSON.stringify(Count)
+                };
+                const articleCount = await axios.get('/api/v2017/articles', {params: cs});
+               
+                if (articleCount?.data?.length) {
+                    self.tagCount = articleCount.data[0].count;
+                    await self.loadArticles(0, tag);
+                } 
+                else{
+                    self.tagCount = 0;
+                    self.loading = false;
+                    return false;
+                }
            },
-           loadArticles(offset,tag){
-               let self = this;
-               this.locale = this.locale;
-               let titleField = `title.${this.locale}`;
-               let contentField = `content.${this.locale}`;
-               let ag = [];
-               let agLimit = [];
-               ag.push({"$match":{"$and":[{"adminTags":tag}]}});
-               if(tag.toLowerCase() == 'faq' || tag.toLowerCase() == 'bch') {
-                   ag.push({"$project": {[titleField]: 1, [contentField]: 1, "adminTags": 1}});
-               } else {
-                   ag.push({"$project": {[titleField]: 1,}});
-               }
-               agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
-               ag.push({"$sort" : {"meta.modifiedOn":-1}});
-               agLimit.push({"$limit" : (offset+10)});
-               agLimit.push({"$skip" : offset});
-               const qs = {
-                   "ag" : JSON.stringify(agLimit)
-               };
-              return axios.get('/api/v2017/articles', {params: qs}).then(function (results) {
-                   if ((results || {}).data && results.data.length > 0) {
-                       self.article =  results.data;
-                       self.loading = false;
-                   }
-               });
+           async loadArticles(offset, tag){
+                
+                let ag = [];
+                let agLimit = [];
+
+                ag.push({"$match":{"$and":[{"adminTags":tag}]}});
+                if(tag.toLowerCase() == 'faq' || tag.toLowerCase() == 'bch') {
+                    ag.push({"$project": {[`title.${this.locale}`]: 1, [`content.${this.locale}`]: 1, "adminTags": 1}});
+                } else {
+                    ag.push({"$project": {[`content.${this.locale}`]: 1,}});
+                }
+                agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
+                ag.push({"$sort" : {"meta.modifiedOn":-1}});
+                agLimit.push({"$limit" : (offset+10)});
+                agLimit.push({"$skip" : offset});
+                const qs = {
+                    "ag" : JSON.stringify(agLimit)
+                };
+                const articles = await this.articlesApi.queryArticles(qs);
+                if((articles || []).length) {
+                    this.article =  articles;
+                    this.loading = false;
+                }
 
            },
         },
