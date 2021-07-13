@@ -7,9 +7,9 @@ import './app-config-service';
             return new function() {
 
                 //================================================================================================================
-                this.getArticles = function(qs, openInNew) {
+                this.getArticles = function(qs, openInNew, canceler) {
                       
-                        return $http.get('/api/v2017/articles', {params: qs})
+                        return $http.get('/api/v2017/articles', {params: qs, timeout: canceler})
                           .then(function(results){
                                 if((results||{}).data && results.data.length > 0)
                                 {    
