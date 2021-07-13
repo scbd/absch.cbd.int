@@ -5,6 +5,7 @@ import 'components/scbd-angularjs-services/main';
 import 'services/main';
 import 'ng-breadcrumbs';
 import 'components/scbd-angularjs-controls/main';
+import 'ck-editor-css';
 
   export { default as template } from './view-articles.html';
 
