@@ -1385,15 +1385,18 @@ div.recordDefault:hover {
 
 
 @media (max-width: 600px){
-.search-tab-title > li > a{font-size: 12px!important;}
-.search-tab-title > li > a > span{font-size: 12px!important;}
-
+    #search-new .search-tab-title > li > a{font-size: 9px!important;
+    padding: 10px 3px;}
+    #search-new .search-tab-title > li > a > span{font-size: 8px!important;}
 .short-text-display{
     display: inline-block !important;
     }
 .full-text-display{
         display: none !important;
         }
+}
+#recordsContent{
+    padding: 0;
 }
 
 
