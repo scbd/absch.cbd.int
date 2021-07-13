@@ -1394,6 +1394,10 @@ div.recordDefault:hover {
 .full-text-display{
         display: none !important;
         }
+    /* Fix the lengthy searched text or record types  */
+    #search-new .filter-chip-text .btn{
+        white-space: inherit;
+    }
 }
 #recordsContent{
     padding: 0;
