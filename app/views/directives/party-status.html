@@ -2,16 +2,18 @@
     <span ng-if="isBch">
         <a rel="noopener" ng-href="/countries/status/nonparty" ng-if="!partyStatus.isParty" 
         class="color-grey color-non-party bold partystatus">Non-Party</a>
-        <a rel="noopener" ng-href="/countries/status/party" ng-if="partyStatus.isParty" class="color-party bold partystatus">Party to the  Cartagena Protocol on Biosafety</a>
+        <a rel="noopener" ng-href="/countries/status/party" ng-if="partyStatus.isParty" class="color-party bold partystatus">Party to the <span class="short-text-display" aria-label="Cartagena">CPB</span> <span class="full-text-display">Cartagena Protocol on Biosafety</span></a>
         <!-- <a rel="noopener" ng-href="/countries/status/inbetween" ng-if="partyStatus.isInbetweenParty" 
         class="color-inbetween bold partystatus">Ratified, not yet Party</a> -->
         <span ng-if="partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit" class="bold color-grey color-non-party partystatus">
-            Entry into force: {{(partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit)|formatDate}}</span>
+           <span class="full-text-display">Entry into force: </span>
+           <span ng-bind="(partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit)|formatDate"></span>
+        </span>
     </span>
     <span ng-if="isAbs">
         <a rel="noopener" ng-href="/countries/status/nonparty" ng-if="!partyStatus.isParty && !partyStatus.isInbetweenParty" 
         class="color-grey color-non-party bold partystatus">Non-Party</a>
-        <a rel="noopener" ng-href="/countries/status/party" ng-if="partyStatus.isParty" class="color-party bold partystatus">Party to the Nagoya Protocol</a>
+        <a rel="noopener" ng-href="/countries/status/party" ng-if="partyStatus.isParty" class="color-party bold partystatus">Party to the <span class="short-text-display" aria-label="Cartagena">NP</span> <span class="full-text-display">Nagoya Protocol</span></a>
         <a rel="noopener" ng-href="/countries/status/inbetween" ng-if="partyStatus.isInbetweenParty" 
         class="color-inbetween bold partystatus">Ratified, not yet Party</a>
         <span ng-if="partyStatus.isSignatory" class="bold partystatus">Signatory</span>
