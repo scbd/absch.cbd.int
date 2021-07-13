@@ -3,13 +3,11 @@
         <auto-complete-search></auto-complete-search>
         <section class="categories">
             <div class="container">
-                <div class="row">
-                    <categories-group :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></categories-group>
-                    <side-bar :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></side-bar>
-                </div>
+                <article-tags :location="ngVue.location" :locale="ngVue.locale"></article-tags>
             </div>
         </section>
     </div>
+
 </template>
 
 <style>
@@ -18,22 +16,19 @@
 
 <script>
 
-    import CategoriesGroup from '../../components/kb/categories-group.vue';
-    import sideBar from '../../components/kb/side-bar.vue';
+    import articleTags from '../../components/kb/article-tags.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
-
     export default {
-        name:'kbHome',
+        name:'kbAdminTags',
         components:{
-            CategoriesGroup,
-            sideBar,
+            articleTags,
             AutoCompleteSearch
         },
 
         props:{
             tokenReader: { type: Function, required: false },
-            ngVue: {}
+            ngVue:{}
         },
         data:  () => {
             return {

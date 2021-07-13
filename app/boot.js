@@ -127,7 +127,8 @@ export default function bootApp(window, require, defineX) {
             'cbd-forums'                :           'libs/cbd-forums/cbd-forums',
             'shim'                      :           'libs/require-shim/src/shim',
             
-            'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min'
+            'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
+            'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
         },
         'shim': {
             'bootstrap-datepicker'          : { 'deps': ['jquery'] },
