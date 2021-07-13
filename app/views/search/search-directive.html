@@ -125,7 +125,7 @@
                              <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                              &nbsp; My saved searches</a> </li>
                      <li class="pull-right" style="line-height: 5px">
-                         <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
+                         <result-view-options current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
                              group-by-fields="searchResult.groupByFields" on-sort-by-change="onSortByChange(fields)"
                              on-view-type-change="onViewTypeChange(options)" on-export="onExportClick()"></result-view-options>
                      </li>

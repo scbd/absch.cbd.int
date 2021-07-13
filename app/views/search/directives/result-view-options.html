@@ -9,7 +9,7 @@
                     <option value="group">Group</option>
                     <option value="matrix">Matrix</option>
                 </select>
-                <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i>
+                <i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
             </a>
         </li>        
         <li>
