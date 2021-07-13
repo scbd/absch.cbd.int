@@ -42,7 +42,8 @@ import 'ngDialog';
                                 {field:'relevance'                            , title: 'Relevance'       ,direction: 'asc'},
                                 {field:'updatedDate_dt'                       , title: 'Last Updated On' ,direction: 'asc'},
                                 {field:'schema_EN_s'.replace('EN', locale.toUpperCase())    , title: 'Record Type'     ,direction: 'asc'},
-                                {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'}
+                                {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'},
+                                {field:'uniqueIdentifier_s', title: 'UID'         ,direction: 'asc'}
                             ]
 
                             _.forEach(selectedFields, function(field){
