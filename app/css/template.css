@@ -765,6 +765,15 @@ footer .logo {
         background-color: #eee;
         padding: 10px 0 0 0;
     }
+    .default-result-page .title.bold.truncate-mobile-title , #result-grouped-national-record .title.bold.truncate-mobile-title{
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 65px;
+        cursor: pointer;
+    }
 }
 .ng-hide-add-active,
 .ng-hide-remove {
