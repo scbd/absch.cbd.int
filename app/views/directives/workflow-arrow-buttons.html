@@ -169,7 +169,7 @@
                 <a rel="noopener" class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
                 <h2 ng-bind="article.title|lstring:locale"></h2>
                 <br>
-                <p ng-bind-html="article.content| lstring:locale | toTrusted"></p>
+                <p class="ck ck-content ck-rounded-corners ck-blurred" ng-bind-html="article.content| lstring:locale | toTrusted"></p>
             </div>
         </div>
     </div>

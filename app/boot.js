@@ -193,6 +193,7 @@ export default function bootApp(window, require, defineX) {
         throw err;
     };
 
+    defineX('ck-editor-css', [`css!${cdnHost}@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css`]);
     defineX('plotly.js', [cdnHost + 'plotly.js-basic-dist-min@1.57.1/plotly-basic.min.js'], function(Plotly){
         return Plotly;
     });
