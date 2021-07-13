@@ -1387,6 +1387,13 @@ div.recordDefault:hover {
 @media (max-width: 600px){
 .search-tab-title > li > a{font-size: 12px!important;}
 .search-tab-title > li > a > span{font-size: 12px!important;}
+
+.short-text-display{
+    display: inline-block !important;
+    }
+.full-text-display{
+        display: none !important;
+        }
 }
 
 
@@ -2783,4 +2790,10 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
         -webkit-line-clamp: 5;
         max-height: 112px;
     }
+}
+.short-text-display{
+  display:none;
+}
+.full-text-display{
+    display: inline-block  ;
 }
