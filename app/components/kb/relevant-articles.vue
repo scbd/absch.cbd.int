@@ -12,10 +12,9 @@
 </template>
 
 <script>
+    import ArticlesApi from './article-api';
     import i18n from '../../locales/en/components/kb/categories-group';
     import CategoriesGroup from './categories-group.vue';
-    import axios from 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js';
-
     export default {
         components:{
             CategoriesGroup
@@ -31,30 +30,29 @@
                 loading: true
             }
         },
-        mounted() {
-            let self = this;
-            let locale = this.locale;
-            let titleField = `title.${locale}`;
+        created(){
+            this.articlesApi = new ArticlesApi();
+        },
+        async mounted() {
             let ag = [];
             let agLimit = [];
             ag.push({"$match":{"$and":[{"adminTags":this.tag}]}});
-            ag.push({"$project" : {[titleField]:1}});
+            ag.push({"$project" : {[`title.${this.locale}`]:1}});
             agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
             agLimit.push({"$limit" : 10});
             const qs = {
                 "ag" : JSON.stringify(agLimit)
             };
-            return axios.get('/api/v2017/articles', {params: qs}).then(function (results) {
-                if ((results || {}).data && results.data.length > 0) {
-                    self.articles =  results.data;
-                    self.loading = false;
-                }
-            });
+            const articlesList = await this.articlesApi.queryArticles(qs);
+            if((articlesList || []).length) {
+                this.articles =  articlesList;
+                this.loading = false;
+            }
         },
         methods: {
             goToArticle(id,title){
                 const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-                this.location.path("/kb/articles/"+id+ "/" + url + "/" + this.tag);
+                this.location.path(`/kb/articles/${id}/${url}/${this.tag}`);
             },
         },
         i18n: { messages:{ en: i18n }} //will be used for locales language

@@ -1,6 +1,5 @@
 <template>
 <div v-if="totalPages>1">
-<!--        <p>Current page: {{ currentPage }}</p>-->
         <v-pagination v-model="currentPage"
                       :page-count="totalPages"
                       :click="setPage()"
