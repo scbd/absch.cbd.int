@@ -5,20 +5,24 @@
             <section class="categories">
                 <div class="categories-list mt-0 single">
                   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
+                  <div v-if="!loading">
                     <header>
-                        <h2 v-if="articles.title != undefined">{{articles.title[locale]}}</h2>
+                        <h2>{{article.title[locale]}}</h2>
                     </header>
-                    <!--TODO:this section will be used for future-->
-                    <!--                <ul class="meta">-->
-                    <!--                    <li><span>Created :</span> Feb, 04, 2016</li>-->
-                    <!--                    <li><span>Last Updated:</span> April, 15, 2016</li>-->
-                    <!--                </ul>-->
+                  <div class="col-xs-12 alert alert-info">
+                    <i class="fa fa-info-circle fa-3" aria-hidden="true"></i>
+                    <div>{{article.customTag}}</div>
+                  </div>
+                  <!--TODO:this section will be used for future-->
+                  <ul class="meta">
+                    <li><span>Created :</span> Feb, 04, 2016</li>
+                    <li><span>Last Updated:</span> April, 15, 2016</li>
+                  </ul>
+                    <div v-if="article.content != undefined" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[locale]"></div>
+                </div>
 
-                    <!--                <div class="col-xs-12 alert alert-info">-->
-                    <!--                    <i class="fa fa-info-circle fa-3" aria-hidden="true"></i>-->
-                    <!--                    <div>My message here. Lots of text for several lines! My message here. Lots of text for several lines! My message here. Lots of text for several lines! My message here. Lots of text for several lines!</div>-->
-                    <!--                </div>-->
-                    <div v-if="articles.content != undefined" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="articles.content[locale]"></div>
+              <h3>Tags:</h3>
+              <p v-for="tag in article.adminTags">{{tag}}</p>
                 </div>
             </section>
             <button class="btn btn-primary pull-right" href="#" @click="back()">Back</button>
@@ -33,33 +37,33 @@
 
 <script>
     import i18n from '../../locales/en/components/kb/categories-group';
-    import axios from 'https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js';
     import relevantArticles from "./relevant-articles.vue";
-    export default {
-        components: {relevantArticles},
-        props:{
-			locale:String,
-			location:String
-        },
-        data:  () => {
-            return {
-                articles: [],
-                loading: true
-
-            }
-        },
-        mounted() {
-            if(this.$root.route.params == undefined) return;
-            let id =   JSON.stringify(this.$root.route.params.id).replace(/"/g, "");
-            this.tag = JSON.stringify(this.$root.route.params.tag).replace(/"/g, "");
-            let self = this;
-            return axios.get('/api/v2017/articles/'+id).then(function (results) {
-                if ((results || {}).data) {
-                    self.articles =  results.data;
-                    self.loading = false;
-                }
-            });
-        },
+		import ArticlesApi from './article-api';
+		export default {
+			components: {relevantArticles},
+			props:{
+				locale:String,
+				location:String
+			},
+			data:  () => {
+				return {
+					article: [],
+					loading: true
+				}
+			},
+			created(){
+				this.tag = JSON.stringify(this.$root.route.params.tag).replace(/"/g, "");
+				this.articlesApi = new ArticlesApi();
+			},
+			async mounted() {
+				if(this.$root.route.params == undefined) return;
+				let id =   JSON.stringify(this.$root.route.params.id).replace(/"/g, "");
+				const article = await this.articlesApi.getArticleById(id);
+				if (article?.content != undefined) {
+					this.article =  article;
+					this.loading = false;
+				}
+			},
         methods: {
             back(){
                 window.history.back();
