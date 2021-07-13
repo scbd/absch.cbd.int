@@ -1,10 +1,11 @@
 import app from 'app';
 import _ from 'lodash';
-import 'services/articles-service';
+import 'services/main';
 import template from './docked-side-bar.html';
+import 'ck-editor-css';
 
-app.directive('dockedSideBar', ['realm','$rootScope', '$route', '$location', 'articlesService',
-function(realm, $rootScope, $route, $location, articlesService) {
+app.directive('dockedSideBar', ['realm','$rootScope', '$route', '$location', 'articlesService', '$q',
+function(realm, $rootScope, $route, $location, articlesService, $q) {
     return {
         restrict: 'AE',
         replace: true,
@@ -14,15 +15,21 @@ function(realm, $rootScope, $route, $location, articlesService) {
             type: '='
         },
         link: function($scope, $element){
-            
-                $scope.status   = "loading";
-                $scope.error    = null;
+                let canceler = null;
 
-                $scope.articles = [];
+                $scope.search = (text)=>{                    
+                    loadArticles({queryTags:$scope.type == 'announcements' ? 'announcement' : 'context-help', searchText:text, skipRefetch:true});
+                }
+
+                $scope.showTagArticles = (tag)=>{
+                    $scope.back();
+                    loadArticles({queryTags:tag, skipRefetch:true});
+                }
 
                 //---------------------------------------------------------------------
-                function loadArticles(queryTags, isRetry){
+                function loadArticles({queryTags, skipRefetch, searchText}){
                     $scope.loading = true;
+                    $scope.articles = undefined;
 
                     var ag        = [];
                     var agLimit   = [];
@@ -35,21 +42,21 @@ function(realm, $rootScope, $route, $location, articlesService) {
                                 }).value();
                     else{
                         if(realm.is('ABS')){
-                            tags =  [{"adminTags":encodeURIComponent("absch-announcement")}]
+                            tags =  [{"adminTags":encodeURIComponent("announcement")}]
                         }
                         else if(realm.is('BCH')){
                             if($scope.type == 'announcements')
-                                tags =  [{"adminTags":encodeURIComponent("bch-announcement")}];
+                                tags =  [{"adminTags":encodeURIComponent("announcement")}];
                             else{
                                 var paths = $location.path().split('/')
                                 if($location.path() == '/')
                                     paths = ['home'];
                                 
-                                paths = _.union(paths, ['context-help']);
+                                paths = [...paths, ...['context-help']];
 
                                 if(paths){
                                     tags =  _(paths).compact().map(function(path){
-                                        return {"adminTags":encodeURIComponent(_.trim(path))}
+                                        return {"adminTags":encodeURIComponent(path.trim())}
                                     }).value();
                                 }
                             }
@@ -61,7 +68,12 @@ function(realm, $rootScope, $route, $location, articlesService) {
                     if(tags.length)
                         ag.push({"$match":{"$and":tags}});
 
-                    ag.push({"$project" : {"title":1, "coverImage":1, "meta":1, "content":1, "summary":1}});
+                    if((searchText||'').trim()!=''){
+                        ag.push({"$match" : {"$or" : [{"title.en": { "$$contains" : encodeURIComponent(searchText)}}, 
+                                                    {"content.en": { "$$contains" : encodeURIComponent(searchText)}}]}});
+                    }
+
+                    ag.push({"$project" : {"title":1, "coverImage":1, "meta":1, "content":1, "summary":1, "adminTags":1}});
                     ag.push({"$sort" : {"meta.modifiedOn":-1}});
 
                     agLimit = JSON.parse(JSON.stringify(ag))
@@ -72,12 +84,18 @@ function(realm, $rootScope, $route, $location, articlesService) {
                     };
 
 
-                    articlesService.getArticles(qs)
+                    if (canceler) {
+                        canceler.resolve(true);
+                    }
+                    canceler = $q.defer();
+
+                    return articlesService.getArticles(qs, false, canceler.promise)
                     .then(function(data){
+                        canceler = null;
                         if((data||[]).length)
                             $scope.articles = data;
-                        else if(!isRetry){
-                            return loadArticles('context-help', true);
+                        else if(!skipRefetch){
+                            return loadArticles({queryTags:'context-help', skipRefetch:true});
                         }
                     })
                     .finally(function(){
@@ -86,8 +104,9 @@ function(realm, $rootScope, $route, $location, articlesService) {
                 }
 
                 var evtRouteChangeSuccess = $rootScope.$on('$routeChangeSuccess', function (evt, current) {
+                    $scope.freeText = '';
                     if($scope.type == 'help')
-                        loadArticles();
+                        loadArticles({});
                 });
 
                 var scrollHandlerfn = function() {                               
@@ -117,7 +136,7 @@ function(realm, $rootScope, $route, $location, articlesService) {
                     $scope.articleData = undefined;
                 }
                 //---------------------------------------------------------------------
-                    $scope.getSizedImage = function(url, size){
+                $scope.getSizedImage = function(url, size){
                     // return url;
     
                     return url && url
@@ -131,7 +150,7 @@ function(realm, $rootScope, $route, $location, articlesService) {
                 }
 
                 if($scope.type)
-                    loadArticles();
+                    loadArticles({});
 
         }                
     };

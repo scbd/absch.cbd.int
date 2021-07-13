@@ -6,39 +6,17 @@
         <div class="search-field">
            <div class="form-group has-feedback has-search">
               <span class="glyphicon glyphicon-search form-control-feedback"></span>
-              <input type="search" class="form-control"  placeholder="Search..." class="form-control" />
+              <input type="search" class="form-control"  placeholder="Search..." class="form-control" ng-model="freeText" 
+                ng-change="search(freeText);"
+                ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0, '*': 1000 } }"/>
            </div>
         </div>
     </div>
     <div class="side-bar-widget">
         <div ng-if="loading" style="margin: 50%">
             <i class="fa fa-spin fa-spinner fa-3x"></i> Loading...
-        </div>
-        <div ng-if="!loading && type=='announcements'">
-            <div class="row" ng-if="!articleData">
-                <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
-                    <div ng-click="details(article);" class="card"  ng-class="{'article-open':showArticle}" >
-                        <div>
-                            <img ng-src="{{getSizedImage(article.coverImage.url, '300x300')}}" style="width:100%;"></img>
-                            <span class="header article-heading" ng-bind="article.title | lstring:locale" ng-click="showArticle=true">
-                                <button ng-show="showArticle" type="button" class="close pull-right" ng-click="showArticle=false"><span aria-hidden="true">×</span></button>
-                            </span>
-                            <hr/>
-                            <p class="article-info">
-                                <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
-                                <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
-                            <hr/>
-                            </p>
-                        </div>
-                        <div class="footer">
-                            <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div  ng-if="!loading && type=='help'">
+        </div>        
+        <div  ng-if="!loading && (type=='announcements' || type=='help')">
             <div class="row" ng-if="!articleData" >
                 <div ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
                     <div ng-click="details(article);" class="card"  ng-class="{'article-open':showArticle}" >
@@ -47,13 +25,18 @@
                             <span ng-bind="article.title | lstring:locale"></span>
                         </span>
                         <p class="article-info">
-                            <span class="summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
-                            <span class="summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
+                            <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
+                            <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
                         </p>
 
                         <div class="footer">
                             <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                         </div>
+                    </div>
+                </div>
+                <div ng-if="!articles.length" class="easing">
+                    <div class="card details-articles" >
+                        <h2 class="article-heading" >No help available.</h2>
                     </div>
                 </div>
             </div>
@@ -63,8 +46,13 @@
             <div class="card details-articles"  ng-class="{'article-open':showArticle}">
                 <h2 class="article-heading" ng-bind="articleData.title | lstring:locale" ng-click="showArticle=true" ></h2>
                 <p class="article-info">
-                    <span class="summary" ng-if="articleData.summary && !showArticle" ng-bind-html="articleData.summary | lstring:locale|limitTo:200"></span>
-                    <span class="summary" ng-if="!articleData.summary || showArticle" ng-bind-html="articleData.content | lstring:locale|limitTo:(showArticle ? articleData.content.length : 200)"></span>
+                    <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="articleData.summary && !showArticle" ng-bind-html="articleData.summary | lstring:locale|limitTo:200|unsafe"></span>
+                    <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!articleData.summary || showArticle" ng-bind-html="articleData.content | lstring:locale|limitTo:(showArticle ? articleData.content.length : 200)|unsafe"></span>
+                </p>
+                <hr/>
+                <p>
+                    <span ng-if="articleData.adminTags" ng-repeat="tag in articleData.adminTags" class="badge badge-light" style="cursor: pointer;margin:5px;"
+                        ng-bind="tag" ng-click="showTagArticles(tag)"></span>                                
                 </p>
                 <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span>
                 </div>
@@ -73,39 +61,13 @@
                 </div>
             </div>
         </div>
-
-    </div>
-
-    <div class="sidebar-widget-detail" >
-
-        <div class="card-detail" >
-
-            <h5>
-                <span  >Configure a company-managed Kanban or Scrum board</span>
-              
-            </h5>
-            <p >
-                You can customize your company-managed Kanban or Scrum board to suit your team’s working process and needs. 
-
-                Configuring a board lets you edit the mapping of workflow statuses to columns of a board, as well as edit the columns, swimlanes, and quick filters of a board, and customize the card colors and displayed issue fields.
-            </p>
-            <ul>
-                <li>If not already there, navigate to your company-managed project.</li>
-                <li>If not already there, navigate to your company-managed project.</li>
-                <li>If not already there, navigate to your company-managed project.</li>
-                <li>If not already there, navigate to your company-managed project.</li>
-            </ul>
-
-            
-            
-        </div>
-
+        
     </div>
 
     <div class="side-nav-bottom">
         <ul>
             <li><a rel="noopener" href="https://bch.cbd.int/about/contact-us/">  Contact us</a></li>
-            <li><a rel="noopener" href="https://bch.cbd.int/resources/site-map/">Site Map</a></li>
+            <!-- <li><a rel="noopener" href="https://bch.cbd.int/resources/site-map/">Site Map</a></li> -->
             <li><a rel="noopener" href="https://bch.cbd.int/about/link-policy/"> Linkages Policy</a></li>
             <li><a rel="noopener" href="https://bch.cbd.int/about/disclaimer/">  Disclaimer </a></li>
         </ul>
