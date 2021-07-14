@@ -1,11 +1,11 @@
 <template>
     <div class="knowledge-base">
-        <section class="categories">
-            <div class="container">
-                <article-details :location="ngVue.location" :locale="ngVue.locale"></article-details>
-            </div>
-        </section>
-    </div>
+      <section class="categories">
+        <div class="container">
+          <article-details :location="ngVue.location" :locale="ngVue.locale"></article-details>
+        </div>
+      </section>
+  </div>
 
 </template>
 
@@ -15,30 +15,29 @@
 
 <script>
 
-    import articleDetails from '../../components/kb/article-details.vue';
-    import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
+  import articleDetails from '../../components/kb/article-details.vue';
+  import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
+  export default {
+    name:'kbHome',
+    components:{
+      articleDetails,
+     AutoCompleteSearch
+    },
 
-    export default {
-        name:'kbHome',
-        components:{
-            articleDetails,
-            AutoCompleteSearch
-        },
+    props:{
+      tokenReader: { type: Function, required: false },
+      ngVue: {}
+    },
+    data:  () => {
+      return {
 
-        props:{
-            tokenReader: { type: Function, required: false },
-            ngVue: {}
-        },
-        data:  () => {
-            return {
-
-            }
-        },
-        watch: {
-            tokenReader: function(tokenReader) {
-                // if(tokenReader) addApiOptions({ tokenReader })
-            }
-        }
+      }
+    },
+    watch: {
+      tokenReader: function(tokenReader) {
+        // if(tokenReader) addApiOptions({ tokenReader })
+      }
     }
+  }
 </script>
