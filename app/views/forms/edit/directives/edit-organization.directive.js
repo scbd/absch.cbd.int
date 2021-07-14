@@ -50,9 +50,10 @@ app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', '
                 
                 var queryOptions = {
                     realm     : realm.value,
-                    fieldQueries: ['schema_s:contact AND type_s:person'],
                     searchText: searchText
                 }
+                if($scope.isAbs) { queryOptions.fieldQueries = ['schema_s:contact AND type_s:person']; }
+                else { queryOptions.fieldQueries = ['schema_s:contact']; }
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 

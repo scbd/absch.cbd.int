@@ -73,7 +73,7 @@ import 'services/main';
                 $scope.onContactQuery = function(searchText){
 					var queryOptions = {
 						realm     : realm.value,
-						fieldQueries: ['schema_s:contact AND type_s:person'],
+						fieldQueries: ['schema_s:contact'],
 						searchText: searchText
 					}		
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);

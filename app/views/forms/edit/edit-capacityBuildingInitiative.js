@@ -115,9 +115,10 @@ import 'services/main';
           $scope.onContactQuery = function(searchText){
             var queryOptions = {
               realm     : realm.value,
-              fieldQueries: ['schema_s:contact AND type_s:person'],
               searchText: searchText
             }
+              if($scope.isABS) { queryOptions.fieldQueries = ['schema_s:contact AND type_s:person']; }
+                else { queryOptions.fieldQueries = ['schema_s:contact']; }
 
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
 
