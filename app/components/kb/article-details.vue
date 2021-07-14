@@ -10,8 +10,8 @@
               <h2>{{article.title[locale]}}</h2>
             </header>
             <div class="detail-custom-tag">
-              <div class="inner-area" v-if="article.meta.createdOn"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;12-10-2021</div>
-              <div class="inner-area"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.meta.createdByInfo.firstName}}</div>
+              <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn}}</div> <!-- need apply filter here-->
+              <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTags}}</div>
             </div>
             <div v-if="article.content != undefined" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[locale]"></div>
           </div>

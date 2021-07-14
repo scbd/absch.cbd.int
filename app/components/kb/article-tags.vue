@@ -10,7 +10,7 @@
               <li>
                 <a href="#" @click="goToArticle(title._id,title.title[locale])">&nbsp;{{title.title[locale]}}</a>
                 <div class="date-sec">
-                  <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;12-10-2021</div>
+                  <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;12-10-2021</div> <!-- we are not getting date here-->
                   <div class="inner-area"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp  <a href="#" class="btn btn-mini" v-for="tag in title.adminTags">{{tag}}</a></div>
                 </div>
               </li>
