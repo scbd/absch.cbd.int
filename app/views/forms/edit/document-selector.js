@@ -326,10 +326,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     
                     if($scope.search.keyword){
                         var queryText = $scope.search.keyword;
-                        if(queryText.indexOf('-')>0) 
-                            queryText = '"' + solr.escape(queryText) + '"'; // Add quotes if text contains - especially if search is by uid
-                        else
-                            queryText = '(' + solr.escape(queryText) + ')';
+                        queryText = '(' + solr.escape(queryText) + ')';
 
                         if(($attr.freeTextQueryField||'')!='')
                             query = $attr.freeTextQueryField + ':' + queryText;

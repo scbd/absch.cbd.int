@@ -932,16 +932,12 @@ import 'views/reports/matrix/data-matrix.directive';
 
                         var freeTextVals = _(filters).map(function(filter){
                                                 if(!filter.disabled && !filter.excludeResult){ 
-                                                    if(filter.name.indexOf('-')>0) 
-                                                        return '"' + solr.escape(_.trim(filter.name)) + '"'; 
                                                     return solr.escape(_.trim(filter.name))
                                                 }
                                             }).compact().uniq().value();
 
                         var excludedValues =  _(filters).map(function(filter){
                                                 if(!filter.disabled && filter.excludeResult){ 
-                                                    if(filter.name.indexOf('-')>0) 
-                                                        return '"' + solr.escape(_.trim(filter.name)) + '"'; 
                                                     return solr.escape(_.trim(filter.name))
                                                 }
                                             }).compact().uniq().value();

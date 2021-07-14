@@ -1,4 +1,4 @@
-﻿import app from 'app';
+import app from 'app';
 import template from 'text!./left-side-filter.html';
 import _ from 'lodash';
 import 'ngDialog';
@@ -223,10 +223,7 @@ import 'services/main';
                             var queryText;
                             var searchFields = filter.query.searchFields||['text_EN_txt'];
 
-                            if(searchText.indexOf('-')>0) 
-                                queryText = '"' + solr.escape(searchText) + '"'; // Add quotes if text contains - especially if search is by uid
-                            else
-                                queryText = '(' + solr.escape(searchText) + ')';
+                            queryText = '(' + solr.escape(searchText) + ')';
                               
                             var freeTextQuery   = _.map(searchFields, function(field, i){
                                                     return field + ':' + queryText + '^' + ((searchFields.length-i)+1);
