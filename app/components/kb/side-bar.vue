@@ -16,10 +16,10 @@
         <h4>Latest Articles</h4>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
         <ul v-for="title in articles">
-            <li><a href="#" @click="goToArticle(title._id,title.title[locale])">{{title.title[locale]}}</a></li>
+            <li><a href="#" @click="goToArticle(title._id,title.title[$locale])">{{title.title[$locale]}}</a></li>
         </ul>
       </div>
-      <popular-tags :locale="locale" :location="location"></popular-tags>
+      <popular-tags></popular-tags>
     </div>
   </div>
 </template>
@@ -35,9 +35,6 @@
       popularTags
     },
     props:{
-    realm:{},
-    locale:String,
-    location:String
     },
     data:  () => {
       return {
@@ -49,11 +46,11 @@
       this.articlesApi = new ArticlesApi();
     },
     async mounted() {
-      let isBch = this.realm.is('BCH')?'bch':'absch';
+      let isBch = this.$realm.is('BCH')?'bch':'absch';
       let ag = [];
       let agLimit = [];
       ag.push({"$match":{"$and":[{"adminTags":isBch}]}});
-      ag.push({"$project" : {[`title.${this.locale}`]:1}});
+      ag.push({"$project" : {[`title.${this.$locale}`]:1}});
       agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
       agLimit.push({"$limit" : 10});
       const qs = {
@@ -68,9 +65,9 @@
   methods: {
     goToArticle(id,title){
         const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-        this.location.path("/kb/articles/"+id+ "/" + url +"/bch" );
+        this.$router.push({path:"/kb/articles/"+id+ "/" + url +"/bch" });
     },
   },
-  i18n: { messages:{ en: i18n }} //will be used for locales language
+  i18n: { messages:{ en: i18n }} 
 }
 </script>

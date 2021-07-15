@@ -8,7 +8,7 @@
           <div class="kb-listing">
             <ul v-for="title in articles">
               <li>
-                <a href="#" @click="goToArticle(title._id,title.title[locale])">&nbsp;{{title.title[locale]}}</a>
+                <a href="#" @click="goToArticle(title._id,title.title[$locale])">&nbsp;{{title.title[$locale]}}</a>
                 <div class="date-sec">
                   <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;12-10-2021</div> <!-- we are not getting date here-->
                   <div class="inner-area"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp  <a href="#" class="btn btn-mini" v-for="tag in title.adminTags">{{tag}}</a></div>
@@ -28,10 +28,10 @@
     </div>
     <div class="col-lg-4">
       <div v-if="tag != undefined">
-        <relevant-articles :locale="locale" :location="location" :tag="tag"></relevant-articles>
+        <relevant-articles :tag="tag"></relevant-articles>
       </div>
       <div>
-        <popular-tags :locale="locale" :location="location"></popular-tags>
+        <popular-tags></popular-tags>
       </div>
     </div>
   </div>
@@ -52,14 +52,12 @@
 			popularTags
 		},
 		props:{
-			location: String,
-			locale: String,
 		},
 		created(){
 			this.articlesApi = new ArticlesApi();
 		},
 		mounted() {
-			const tag =   JSON.stringify(this.$root.route.params.tag).replace(/"/g, "");
+			const tag =   JSON.stringify(this.$route.params.tag).replace(/"/g, "");
 			if(tag != undefined && tag != null) {
 				this.tag = tag;
 				this.getCount(tag);
@@ -75,7 +73,7 @@
 		methods: {
 			goToArticle(id,title){
 				const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				this.location.path(`/kb/articles/${id}/${url}/${this.tag}`);
+				this.$router.push({path:`/kb/articles/${id}/${url}/${this.tag}`});
 			},
 			onChangePage(offset) {
 				this.article=[];
@@ -103,7 +101,7 @@
 			async loadArticles(offset, tag){
 				let ag = [];
 				ag.push({"$match":{"$and":[{"adminTags":tag}]}});
-				ag.push({"$project": {[`title.${this.locale}`]: 1, "adminTags": 1}});
+				ag.push({"$project": {[`title.${this.$locale}`]: 1, "adminTags": 1}});
 				ag.push({"$sort" : {"meta.modifiedOn":-1}});
 				ag.push({"$limit" : (offset+10)});
 				ag.push({"$skip" : offset});
@@ -111,7 +109,7 @@
 				const query = {
 					"ag" : JSON.stringify(ag)
 				};
-				console.log(query)
+				console.log(this.$realm)
 				const articlesList = await this.articlesApi.queryArticles(query);
 				if((articlesList || []).length) {
 					this.articles =  articlesList;
@@ -120,6 +118,6 @@
 
 			},
 		},
-		i18n: { messages:{ en: i18n }} //will be used for locales language
+		i18n: { messages:{ en: i18n }} 
 	}
 </script>

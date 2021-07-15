@@ -3,7 +3,7 @@
       <auto-complete-search></auto-complete-search>
       <section class="categories">
         <div class="container">
-          <article-tags :location="ngVue.location" :locale="ngVue.locale"></article-tags>
+          <article-tags></article-tags>
         </div>
     </section>
   </div>
@@ -26,8 +26,6 @@
       },
 
       props:{
-        tokenReader: { type: Function, required: false },
-        ngVue:{}
       },
       data:  () => {
         return {

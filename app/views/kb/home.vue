@@ -4,8 +4,8 @@
     <section class="categories">
       <div class="container">
         <div class="row">
-          <categories-group :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></categories-group>
-          <side-bar :location="ngVue.location" :realm="ngVue.realm" :locale="ngVue.locale"></side-bar>
+          <categories-group></categories-group>
+          <side-bar></side-bar>
         </div>
       </div>
     </section>
@@ -31,8 +31,6 @@ export default {
   },
 
   props:{
-    tokenReader: { type: Function, required: false },
-    ngVue: {}
   },
   data:  () => {
     return {

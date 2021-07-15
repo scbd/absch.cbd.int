@@ -16,8 +16,6 @@ import ArticlesApi from './article-api';
 import i18n from '../../locales/en/components/kb/categories-group';
 export default {
   props:{
-    locale:String,
-    location:String
   },
   data:  () => {
     return {
@@ -44,10 +42,10 @@ export default {
   },
   methods: {
     goToTag(tag){
-      this.location.path(`/kb/tags/${tag}`);
+      this.$router.push({path:`/kb/tags/${tag}`});
     }
   },
-  i18n: { messages:{ en: i18n }} //will be used for locales language
+  i18n: { messages:{ en: i18n }} 
 }
 </script>
 

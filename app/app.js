@@ -4,7 +4,10 @@ import "angular-sanitize";
 import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
-;
+import CreateAngularVuePlug from "./vue/angular-vue-plug";
+import AngularVueRoutePlugin from "./vue/angular-vue-route-plugin";
+import AngularVueRouterPlugin from "./vue/angular-vue-router-plugin";
+
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", "angularVue"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
   var logToConsole = true;
@@ -40,4 +43,21 @@ app.run(["ngMeta", "LogglyLogger", "realm", "$window", function (ngMeta, logglyL
   });
   ngMeta.init();
 }]);
+
+
+app.run(["realm", "$location", "locale", '$route', function (realm, $location, locale, $route) {
+
+  registerVuePlugin('$realm', realm);
+  registerVuePlugin('$locale', locale);
+
+  window.Vue.use(new AngularVueRoutePlugin ($location, $route));
+  window.Vue.use(new AngularVueRouterPlugin($location));
+
+}]);
+
+function registerVuePlugin(name, service){
+  const newPlugin = new CreateAngularVuePlug(name, service)
+  window.Vue.use(newPlugin);
+}
+
 export default app;

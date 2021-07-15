@@ -2,7 +2,7 @@
     <div class="knowledge-base">
       <section class="categories">
         <div class="container">
-          <article-details :location="ngVue.location" :locale="ngVue.locale"></article-details>
+          <article-details ></article-details>
         </div>
       </section>
   </div>
@@ -26,8 +26,6 @@
     },
 
     props:{
-      tokenReader: { type: Function, required: false },
-      ngVue: {}
     },
     data:  () => {
       return {

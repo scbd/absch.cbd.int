@@ -7,13 +7,13 @@
           <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</div>
           <div v-if="!loading">
             <header>
-              <h2>{{article.title[locale]}}</h2>
+              <h2>{{article.title[$locale]}}</h2>
             </header>
             <div class="detail-custom-tag">
               <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn}}</div> <!-- need apply filter here-->
               <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTags}}</div>
             </div>
-            <div v-if="article.content != undefined" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[locale]"></div>
+            <div v-if="article.content != undefined" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[$locale]"></div>
           </div>
         </div>
         <div v-if="article.adminTags != undefined">
@@ -25,10 +25,10 @@
     </div>
     <div class="col-lg-4">
       <div v-if="tag != undefined">
-        <relevant-articles :locale="locale" :location="location" :tag="tag"></relevant-articles>
+        <relevant-articles :tag="tag"></relevant-articles>
       </div>
       <div>
-        <popular-tags :locale="locale" :location="location"></popular-tags>
+        <popular-tags></popular-tags>
       </div>
     </div>
   </div>
@@ -43,8 +43,6 @@
 	export default {
 		components: {relevantArticles,popularTags},
 		props:{
-			locale:String,
-			location:String
 		},
 		data:  () => {
 			return {
@@ -53,12 +51,12 @@
 			}
 		},
 		created(){
-			this.tag = JSON.stringify(this.$root.route.params.tag).replace(/"/g, "");
+			this.tag = JSON.stringify(this.$route.params.tag).replace(/"/g, "");
 			this.articlesApi = new ArticlesApi();
 		},
 		async mounted() {
-			if(this.$root.route.params == undefined) return;
-			let id =   JSON.stringify(this.$root.route.params.id).replace(/"/g, "");
+			if(this.$route.params == undefined) return;
+			let id =   JSON.stringify(this.$route.params.id).replace(/"/g, "");
 			const article = await this.articlesApi.getArticleById(id);
 			if (article?.content != undefined) {
 				this.article =  article;
@@ -70,6 +68,6 @@
 				window.history.back();
 			}
 		},
-		i18n: { messages:{ en: i18n }} //will be used for locales language
+		i18n: { messages:{ en: i18n }} 
 	}
 </script>

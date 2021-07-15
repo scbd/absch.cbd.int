@@ -27,9 +27,6 @@
   import i18n from '../../locales/en/components/kb/categories-group';
   export default {
     props:{
-      realm:{},
-      locale:String,
-      location:String
     },
     data:  () => {
       return {
@@ -41,12 +38,12 @@
       this.articlesApi = new ArticlesApi();
     },
     async mounted() {
-      let isBch = this.realm.is('BCH')?'bch':'absch';
+      let isBch = this.$realm.is('BCH')?'bch':'absch';
       let ag = [];
       let agLimit = [];
       const exclude = ['BCH','ABS', 'ABSCH','Faq','Faqs','bch','abs', 'absch','faq','faqs'];
       ag.push({"$match":{"$and":[{"adminTags":isBch}]}});
-      ag.push({"$project" : {[`title.${this.locale}`]:1,"adminTags":1}});
+      ag.push({"$project" : {[`title.${this.$locale}`]:1,"adminTags":1}});
       agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
       ag.push({"$sort" : {"meta.modifiedOn":-1}});
       agLimit.push({"$limit" : 200});
@@ -64,7 +61,7 @@
           t => ({ [t]: article
           .filter(d => d.adminTags.includes(t))
           .map((d,i,v) =>
-            ({title:d.title[this.locale],id:d._id, count:v.length})
+            ({title:d.title[this.$locale],id:d._id, count:v.length})
           ).slice(0, 5)
         }));
         this.loading = false;
@@ -73,12 +70,12 @@
     methods: {
       goToArticle(id,title,tag){
         const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-        this.location.path(`/kb/articles/${id}/${url}/${tag}`);
+        this.$router.push({path:`/kb/articles/${id}/${url}/${tag}`});
       },
       goToTag(tag){
-        this.location.path(`/kb/tags/${tag}`);
+        this.$router.push({path:`/kb/tags/${tag}`});
       }
     },
-    i18n: { messages:{ en: i18n }} //will be used for locales language
+    i18n: { messages:{ en: i18n }} 
   }
 </script>
