@@ -1395,7 +1395,7 @@ div.recordDefault:hover {
 
 @media (max-width: 600px){
     #search-new .search-tab-title > li > a{font-size: 9px!important;
-    padding: 10px 3px;}
+    padding: 10px 2px;}
     #search-new .search-tab-title > li > a > span{font-size: 8px!important;}
 .short-text-display{
     display: inline-block !important;
