@@ -84,7 +84,7 @@
 			},
 			async getCount(tag){
 				let Count = [];
-				Count.push({"$match":{"$and":[{"adminTags":{"$all":[this.tag]}}]}});
+				Count.push({"$match":{"$and":[{"adminTags":this.tag}]}});
 				Count.push({ "$count" : 'count' });
 				const cs = {
 					"ag" : JSON.stringify(Count)
@@ -109,8 +109,9 @@
 				ag.push({"$skip" : offset});
 
 				const query = {
-					"ag" : [...ag]
+					"ag" : JSON.stringify(ag)
 				};
+				console.log(query)
 				const articlesList = await this.articlesApi.queryArticles(query);
 				if((articlesList || []).length) {
 					this.articles =  articlesList;
