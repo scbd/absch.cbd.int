@@ -765,6 +765,15 @@ footer .logo {
         background-color: #eee;
         padding: 10px 0 0 0;
     }
+    .default-result-page .title.bold.truncate-mobile-title , #result-grouped-national-record .title.bold.truncate-mobile-title{
+        display: -webkit-box !important;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-height: 65px;
+        cursor: pointer;
+    }
 }
 .ng-hide-add-active,
 .ng-hide-remove {
@@ -1385,8 +1394,22 @@ div.recordDefault:hover {
 
 
 @media (max-width: 600px){
-.search-tab-title > li > a{font-size: 12px!important;}
-.search-tab-title > li > a > span{font-size: 12px!important;}
+    #search-new .search-tab-title > li > a{font-size: 9px!important;
+    padding: 10px 2px;}
+    #search-new .search-tab-title > li > a > span{font-size: 8px!important;}
+.short-text-display{
+    display: inline-block !important;
+    }
+.full-text-display{
+        display: none !important;
+        }
+    /* Fix the lengthy searched text or record types  */
+    #search-new .filter-chip-text .btn{
+        white-space: inherit;
+    }
+}
+#recordsContent{
+    padding: 0;
 }
 
 
@@ -2195,6 +2218,11 @@ a.disabled{
     .tabular-term-check .tabular-terms  {
         flex-flow: row wrap;
     }
+
+    #search-new .bg-grey1 .pull-right.color-black{
+        position: relative;
+        z-index: 1;
+    }
 }
 .easing {
     transition: all 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940);
@@ -2783,4 +2811,10 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
         -webkit-line-clamp: 5;
         max-height: 112px;
     }
+}
+.short-text-display{
+  display:none;
+}
+.full-text-display{
+    display: inline-block  ;
 }

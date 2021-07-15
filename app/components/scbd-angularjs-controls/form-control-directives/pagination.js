@@ -24,9 +24,12 @@ import app from 'app';
                         end = start;
                         start = 0;
                     }
-
-                    var maxCount = Number($attr.maxPageCount || 6);
-                    var middle = maxCount/2;
+                    var showPages = 6;
+                    if(window.innerWidth <= 768){
+                        showPages = 3;
+                    }
+                    var maxCount = Number($attr.maxPageCount || showPages);
+                    var middle = Math.floor(maxCount/2);
                     var count = end - start;
 
                     if (count > maxCount) {

@@ -10,6 +10,7 @@ import 'ngDialog';
             template: template,
             require:'^searchDirective',
             scope: {
+                currentTab      : '=' ,
                 viewType        : '=' ,
                 sortFields      : '=' ,
                 groupByFields   : '=' ,
@@ -100,7 +101,10 @@ import 'ngDialog';
                     })
                 }
 
-                $scope.viewTypeChange = function(type){
+                $scope.viewTypeChange = function(type,currentTab){
+                    if(type == 'default' && currentTab == 'nationalRecords'){
+                        showGroupByDialog();
+                    }
                     if(type == 'default'){
                         $scope.groupByFields = ['government', 'schema'];
                         $scope.onViewTypeChange({options:{viewType:type}})
