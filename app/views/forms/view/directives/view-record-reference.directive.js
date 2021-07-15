@@ -49,7 +49,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 						$scope.options.isNFP 	   					= $scope.document.schema_s == 'focalPoint';
 						$scope.options.isCNA 	   					= isCNA(data);
 						$scope.options.isContactTypePerson   		= isContactTypePerson(data) && !$scope.isNFP;
-						$scope.options.isContactTypeOrganization 	= !$scope.isContactTypePerson && !$scope.isNFP;
+						$scope.options.isContactTypeOrganization 	= !$scope.options.isContactTypePerson && !$scope.isNFP;
 
 						if(_.isEmpty($scope.document.workingDocumentSummary))
 							$scope.document.workingDocumentSummary = undefined;
@@ -122,7 +122,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 			function isContactTypePerson(doc) {
 				if(!doc)
 					return false;
-				if(doc.type==="person")
+				if(doc.body.type==="person")
 					return true;
 				if(!doc.type && (doc.firstName))
 					return true; //default behaviour
