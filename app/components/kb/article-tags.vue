@@ -102,17 +102,16 @@
 			},
 			async loadArticles(offset, tag){
 				let ag = [];
-				let agLimit = [];
 				ag.push({"$match":{"$and":[{"adminTags":tag}]}});
 				ag.push({"$project": {[`title.${this.locale}`]: 1, "adminTags": 1}});
-				agLimit = JSON.parse(JSON.stringify(ag)); // if remove this line it will break the network call
 				ag.push({"$sort" : {"meta.modifiedOn":-1}});
-				agLimit.push({"$limit" : (offset+10)});
-				agLimit.push({"$skip" : offset});
-				const qs = {
-					"ag" : JSON.stringify(agLimit)
+				ag.push({"$limit" : (offset+10)});
+				ag.push({"$skip" : offset});
+
+				const query = {
+					"ag" : [...ag]
 				};
-				const articlesList = await this.articlesApi.queryArticles(qs);
+				const articlesList = await this.articlesApi.queryArticles(query);
 				if((articlesList || []).length) {
 					this.articles =  articlesList;
 				}
