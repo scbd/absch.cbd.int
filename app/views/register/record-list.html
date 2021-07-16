@@ -24,8 +24,8 @@
                 <strong>{{msg}}</strong>
             </div>
             <div class="row">
-                <div class="col-xs-7">
-                    <div class="btn-group-sm">
+                <div class="col-md-7 col-xs-12">
+                    <div class="btn-group-sm cf-xs-btn">
                         <button type="button" ng-click="statusFilter=''" class="filterbtn btn btn-primary">
                         <i  class="fa fa-2 fa-square" ng-class="{'fa-check-square':!statusFilter}"></i>
                         <strong>All</strong> <span class="badge badge-default">{{(records||[]).length}}</span>
@@ -43,11 +43,11 @@
                         <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter==isDraft}"></i> Drafts
                         <span class="badge badge-default">{{(records | filter:schemaFilter | filter:isDraft).length}}</span>
                     </button>
-                        <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group" style="width:160px;display:inline;font-size:12px;height:31px;">
+                        <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group">
                     </div>
                 </div>
-                <div class="col-xs-5 ">
-                    <div class="btn-group-sm pull-right">
+                <div class="col-md-5 col-xs-12">
+                    <div class="btn-group-sm pull-right cf-xs-filters">
                         <div class="btn margin-left-2" style="border: 1px solid #ccc;" ng-if="offlineFormats">Offline format:
                             <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
                                 ng-show="::offlineFormats[schema][code]" class="padding-left-right-2">
@@ -58,10 +58,10 @@
                         <!--<a rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="showReference(schema);">
                         <span class="glyphicon glyphicon-random"></span> Show Reference</a>-->
                         <button type="button" class="btn btn-sm btn-default margin-left-2" ng-click="refreshList(schema);" ng-if="showAddButton()">
-                            <i class="fa fa-refresh"></i> Refresh</button>
+                            <i class="fa fa-refresh"></i> <span class="hidden-xs">Refresh</span></button>
                         <a rel="noopener" translation-url  ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new" class="btn btn-sm btn-primary bold" 
                             style="color:#fff;" id="new_button" ng-if="showAddButton()">
-                            <i class="fa fa-plus-square"></i> Add New </a>
+                            <i class="fa fa-plus-square"></i> <span class="hidden-xs">Add New</span> </a>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
                         <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Type</th>
                         <th style="width:200px;" ng-click="toggleOrderBy('SubmittedBy')" id="createdOnHeader">Last published</th>
-                        <th style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
+                        <th class="hidden-xs" style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
                         <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
                         <th style="width:100px;">{{filteredRecords.length}} Record(s)</th>
                     </tr>
@@ -128,7 +128,7 @@
                                 <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
                             </div>
                         </td>
-                        <td>
+                        <td class="hidden-xs">
                             <div ng-if="record.workingDocumentUpdatedBy">
                                 <a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
                                     <strong>{{record.workingDocumentUpdatedBy.firstName}} {{record.workingDocumentUpdatedBy.lastName}}</strong>

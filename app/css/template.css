@@ -1566,6 +1566,76 @@ div.recordDefault:hover {
     background-color: #333!important;
     color: white!important;
 }
+#SubmitPage .register-content-content .cf-xs-btn .keyword.input-group {
+    width:160px;
+    display:inline;
+    font-size:12px;
+    height:31px;
+}
+@media (max-width: 767px) {
+    #SubmitPage .register-content-content .cf-xs-btn .btn {
+        padding: 5px 8px 2px;
+    }
+    #SubmitPage .register-content-content .cf-xs-btn .keyword.input-group {
+        width: auto;
+        margin: 2px;
+    }
+    #SubmitPage .register-content-content .cf-xs-filters.pull-right {
+        float: left!important;
+    }
+    #SubmitPage .register-content-header .helpinfoInline a>i {
+        margin: -5px;
+        font-size: initial;
+    }
+    #SubmitPage .register-content-content .cf-xs-filters a.btn-sm {
+        padding: 5px 10px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+}
+@media (max-width: 700px) {
+    #SubmitPage .register-content-content .cf-xs-filters button {
+        position: absolute;
+        margin-top: -33px;
+        margin-left: 42px;
+    }
+    #SubmitPage .register-content-content .cf-xs-filters a.btn-sm {
+        position: absolute;
+        margin-top: -33px;
+        margin-left: 76px;
+    }
+}
+@media (max-width: 412px) {
+    #SubmitPage .register-content-content .cf-xs-btn .keyword.input-group {
+        width: 150px;
+    }
+    #SubmitPage .register-content-content .cf-xs-filters button {
+        position: absolute;
+        margin-top: -33px;
+        margin-left: 5px;
+    }
+    #SubmitPage .register-content-content .cf-xs-btn .btn {
+        padding: 5px 5px 2px;
+        font-size: 10px;
+    }
+    #SubmitPage .register-content-content #new_button {
+        padding: 5px 5px 2px;
+        font-size: 10px;
+    }
+    #SubmitPage .register-content-content .margin-left-2 {
+       margin-left: 0px;
+    }
+    #SubmitPage .register-content-content .cf-xs-filters a.btn-sm {
+        position: absolute;
+        margin-top: -33px;
+        margin-left: 40px;
+        padding: 5px 10px !important;
+        font-size: 12px !important;
+        line-height: 1.5;
+        border-radius: 3px;
+    }
+}
 .help-block {
     font-size: 0.9em;
     color: #999;
