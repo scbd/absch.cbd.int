@@ -64,7 +64,8 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fq": [ "schema_s:modifiedOrganism"]
+				"fq": [ "schema_s:modifiedOrganism"],
+				"searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
@@ -329,7 +330,8 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fq": [ "schema_s:modifiedOrganism"]
+				"fq": [ "schema_s:modifiedOrganism"],
+				"searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
@@ -488,7 +490,8 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fq": [ "schema_s:modifiedOrganism"]
+				"fq": [ "schema_s:modifiedOrganism"],
+				"searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
 			},
 			"title": "Living modified organism",
 			"field": "modifiedOrganisms_ss"
@@ -630,7 +633,8 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fq": [ "schema_s:modifiedOrganism"]
+				"fq": [ "schema_s:modifiedOrganism"],
+				"searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
 			},
 			"title": "LMO(s) detectable by the laboratory",
 			"field": "detectableLmos_ss"
@@ -687,7 +691,8 @@
 		{
 			"type": "solrRecords",
 			"query": {
-				"fq": [ "schema_s:modifiedOrganism"]
+				"fq": [ "schema_s:modifiedOrganism"],
+				"searchFields":["uniqueIdentification_t", "uniqueIdentificationVariants_txt", "text_EN_txt"]
 			},
 			"title": "Living modified organism",
 			"field": "bchModifiedOrganisms_ss"

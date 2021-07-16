@@ -5,11 +5,12 @@ import 'components/scbd-angularjs-services/main';
 import 'services/main';
 import 'ng-breadcrumbs';
 import 'components/scbd-angularjs-controls/main';
+import 'ck-editor-css';
 
   export { default as template } from './view-articles.html';
 
-  export default ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService',
-    function($scope,$route, $http,  $location, locale, $q, breadcrumbs, articlesService) {
+  export default ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService','ngMeta',
+    function($scope,$route, $http,  $location, locale, $q, breadcrumbs, articlesService, ngMeta) {
       
       $scope.currentPage=0;
       $scope.itemCount=0;
@@ -43,6 +44,10 @@ import 'components/scbd-angularjs-controls/main';
           if($scope.article){
             //breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
             breadcrumbs.options = {'articleTitle':  $scope.article.title[locale] };
+            
+            ngMeta.resetMeta();   
+            ngMeta.setTitle( $scope.article.title[locale]);
+            ngMeta.setTag('description',  $scope.article.summary[locale]);
          }
         })
       }

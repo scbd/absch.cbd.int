@@ -487,10 +487,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
 
       if((options.searchText||'')!=''){
         var queryText
-          if(options.searchText.indexOf('-')>0) 
-              queryText = '"' + solr.escape(options.searchText) + '"'; // Add quotes if text contains - especially if search is by uid
-          else
-              queryText = '(' + solr.escape(options.searchText) + ')';
+          queryText = '(' + solr.escape(options.searchText) + ')';
               
           if(options.query!='' && options.query != undefined)
             queries.query   += ' AND ('+(options.searchField||'text_EN_txt:') + queryText + ')'

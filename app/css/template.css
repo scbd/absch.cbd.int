@@ -2398,15 +2398,15 @@ padding-right: 23%;
     }
 
     #docketSideBar p {
-        font-size: 13px;
+        /* font-size: 13px;
         font-weight: normal;
         line-height: 20px;
-        color: #656565;
+        color: #656565; */
         margin-bottom: 10px
     }
 
     #docketSideBar p strong {
-        font-weight: normal;
+        /* font-weight: normal; */
     }
 
     #docketSideBar .closebtn {
@@ -2547,9 +2547,9 @@ padding-right: 23%;
         bottom: 0px;
     }
 
-    #docketSideBar .summary, #docketSideBar .summary h1, #docketSideBar .summary h2, #docketSideBar .summary h3, #docketSideBar .summary h4 {
+    /* #docketSideBar .summary, #docketSideBar .summary h1, #docketSideBar .summary h2, #docketSideBar .summary h3, #docketSideBar .summary h4 {
         font-size: 11px;
-    }
+    } */
 
     #docketSideBar img {
         max-width: 100%;
@@ -2557,7 +2557,7 @@ padding-right: 23%;
     }
 
     #docketSideBar .side-bar-widget {
-        display: flex;
+        /* display: flex; */
         padding-left: 10px;
         padding-right: 18px;
         background-color: #fff;
@@ -2585,7 +2585,7 @@ padding-right: 23%;
     }
 
     #docketSideBar .sidebar-widget-detail {
-    display: flex;
+    /* display: flex; */
     padding-left: 15px;
     padding-right: 15px;
     background-color: #fff;
@@ -2606,10 +2606,10 @@ padding-right: 23%;
 }
 
     #docketSideBar .sidebar-widget-detail p {
-    font-size: 13px;
+    /* font-size: 13px;
     font-weight: normal;
     line-height: 24px;
-    color: #656565;
+    color: #656565; */
     margin-bottom: 10px
 }
 
@@ -2647,8 +2647,8 @@ padding-right: 23%;
     }
     #docketSideBar .article-info{
         display: block;
-        line-height: 20px;
-        color: rgb(80, 95, 121);
+        /* line-height: 20px;
+        color: rgb(80, 95, 121); */
         margin: 0px;
     }
     #docketSideBar .details-articles::-webkit-scrollbar {

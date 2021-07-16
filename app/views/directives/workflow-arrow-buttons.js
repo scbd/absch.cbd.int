@@ -5,7 +5,8 @@ import 'views/directives/workflow-history-directive';
 import 'services/main';
 import 'ngDialog';
 import 'toastr';
-import '~/views/forms/directives/document-sharing'
+import '~/views/forms/directives/document-sharing';
+import 'ck-editor-css';
     
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 

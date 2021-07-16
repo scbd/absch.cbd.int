@@ -21,7 +21,8 @@
 .noimagetable{display: table; height: 200px; overflow: hidden; width: 100%;}
 </style>
 
-    <h3 style="border-bottom:1px solid #ddd;"> <a rel="noopener" href="/articles/" class="color-grey"> Announcements </a>
+    <h3 style="border-bottom:1px solid #ddd;"> 
+        <!-- <a rel="noopener" href="/articles/" class="color-grey"> Announcements </a> -->
         <a rel="noopener"  ng-if="article" class="pull-right" href="/articles/"> <i class="fa fa-arrow-circle-left"></i> view all </a>
     </h3>
         
@@ -39,7 +40,7 @@
             </div>
 
             <div class="col-md-12" style="padding-top:10px;" >
-                <p ng-bind-html="article.content  | lstring:locale | toTrusted"></p>
+                <p class="ck ck-content ck-rounded-corners ck-blurred" ng-bind-html="article.content  | lstring:locale | toTrusted"></p>
             </div>
         </div>
     </div>  

@@ -137,7 +137,7 @@ import 'views/reports/matrix/data-matrix.directive';
                         updateQueryResult();
                     };
 
-                    $scope.saveFreeTextFilter = function(text) {
+                    $scope.saveFreeTextFilter = function(text, $event) {
 
                         if(!text && text.length <= 0)
                             return;
@@ -156,6 +156,9 @@ import 'views/reports/matrix/data-matrix.directive';
                         }
 
                         updateQueryResult();
+
+                        if($event)
+                            $event.preventDefault();
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
@@ -609,8 +612,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                                 return lfield
                                             }).join('_');
                                             
-                            combinations.push(group.field)
-                            combinations.push(groupField + '_' + otherComb)
+                            combinations.push('grp_'+group.field)
+                            combinations.push('grp_'+groupField + '_' + otherComb)
                             combinations = _.union(combinations, otherComb);
                         })   
                         return combinations
@@ -622,7 +625,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             return groupMap && (!groupMap.tabs || ~groupMap.tabs.indexOf($scope.searchResult.currentTab))
                         })
                         var map = {
-                            groupField : fields.join('_') + '_s',
+                            groupField : 'grp_'+fields.join('_') + '_s',
                             sortFields:[]
                         };
                         _.forEach(fields, function(field){
@@ -673,11 +676,11 @@ import 'views/reports/matrix/data-matrix.directive';
                             if(($scope.searchResult.sortFields||[]).length > 0)
                                 sortFields = $scope.searchResult.sortFields.join(', ');
                             
-                            // if(queryOptions.highlight){ 
-                            //     //if highlight is enabled that means there is freetext, if the sort is by only lastUpdated use relevance
-                            //     if(sortFields == 'updatedDate_dt desc')
-                            //         sortFields   = ['relevance asc'];
-                            // }
+                            if(queryOptions.highlight){ 
+                                //if highlight is enabled that means there is freetext, if the sort is by only lastUpdated use relevance
+                                if(sortFields == 'updatedDate_dt desc')
+                                    sortFields   = ['relevance asc'];
+                            }
 
                             var viewType = $scope.searchResult.viewType;
                             if(viewType=='default' && $scope.searchResult.currentTab == 'allRecords')
@@ -728,11 +731,9 @@ import 'views/reports/matrix/data-matrix.directive';
 
                         var dateQuery           = buildDateQuery();
 
-                        // if(schemaSubQuery.freeTextQuery){ //append subquery freeText query to general query to benefit highlighting
-                        //     textQuery = solr.andOr(_.compact([textQuery, schemaSubQuery.freeTextQuery]), 'AND')
-                        // }
                         var queries            = _.compact([dateQuery, textQuery, rawQuery]);
                         var query              = '';
+                        const highlight        = !textQuery||schemaSubQuery.freeTextQuery;
                         if(queries.length)
                             query              = solr.andOr(queries, 'AND');
                         if(schemaQuery != '(*:*)')
@@ -747,6 +748,9 @@ import 'views/reports/matrix/data-matrix.directive';
                         //special query for Contact as only records which have reference contact are searchable.
                         tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
                        
+                        if(schemaSubQuery.freeTextQuery){ //append subfilters query to general query to benefit highlighting and relevance
+                            query = solr.andOr(_.compact([query, tagQueries.schemaSub]), 'AND')
+                        }
 
                         return {
                             query      :  query||'',
@@ -758,9 +762,9 @@ import 'views/reports/matrix/data-matrix.directive';
                                 '{!ex=keywords}all_terms_ss', 
                                 '{!ex=region}countryRegions_REL_ss'
                             ],
-                            pivotFacetFields : 'schema_s, all_Terms_ss',
-                            highlight:textQuery ? true : false,
-                            highlightFields:'text_EN_txt'
+                            pivotFacetFields: 'schema_s, all_Terms_ss',
+                            highlight       : highlight,
+                            highlightFields :'text_EN_txt'
                         };
                     }
 
@@ -928,16 +932,12 @@ import 'views/reports/matrix/data-matrix.directive';
 
                         var freeTextVals = _(filters).map(function(filter){
                                                 if(!filter.disabled && !filter.excludeResult){ 
-                                                    if(filter.name.indexOf('-')>0) 
-                                                        return '"' + solr.escape(_.trim(filter.name)) + '"'; 
                                                     return solr.escape(_.trim(filter.name))
                                                 }
                                             }).compact().uniq().value();
 
                         var excludedValues =  _(filters).map(function(filter){
                                                 if(!filter.disabled && filter.excludeResult){ 
-                                                    if(filter.name.indexOf('-')>0) 
-                                                        return '"' + solr.escape(_.trim(filter.name)) + '"'; 
                                                     return solr.escape(_.trim(filter.name))
                                                 }
                                             }).compact().uniq().value();
