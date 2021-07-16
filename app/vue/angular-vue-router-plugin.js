@@ -1,7 +1,11 @@
-const AngularVueRouterPlugin = ($location) =>{
+const AngularVueRouterPlugin = ($injector) =>{
 
+    if(!$injector)
+        throw new Error('Angular $injector not provided, cannot use AngularVueRouterPlugin plugin');
+
+    const $location = $injector.get('$location');
     if(!$location)
-        throw new Error('Angular $location not provided, cannot use AngularVueRouterPlugin plugin');
+        throw new Error('Angular $location service not available, cannot use AngularVueRouterPlugin plugin');
 
     var router ={
         push ({path, query}){

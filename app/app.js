@@ -45,13 +45,13 @@ app.run(["ngMeta", "LogglyLogger", "realm", "$window", function (ngMeta, logglyL
 }]);
 
 
-app.run(["realm", "$location", "locale", '$route', function (realm, $location, locale, $route) {
+app.run(["realm", "locale", '$injector', function (realm, locale, $injector) {
 
   registerVuePlugin('$realm', realm);
   registerVuePlugin('$locale', locale);
 
-  window.Vue.use(new AngularVueRoutePlugin ($location, $route));
-  window.Vue.use(new AngularVueRouterPlugin($location));
+  window.Vue.use(new AngularVueRoutePlugin ($injector));
+  window.Vue.use(new AngularVueRouterPlugin($injector));
 
 }]);
 
