@@ -44,10 +44,19 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-4">
 													<div class="km-control-group" name="date" required caption="Date of the risk assessment"
 															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
 														<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
+													</div>
+												</div>
+												<div class="col-md-1">
+													<div class="km-control-group" style="margin-left: 20px;" caption="or"></div>
+												</div>
+												<div class="col-md-4">
+													<div class="km-control-group" name="dateOfRaNotAvailable" caption="">
+														<label for="dateOfRaNotAvailable">
+														<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" name="dateOfRaNotAvailable"/> Date not available</label>
 													</div>
 												</div>
 											</div>
