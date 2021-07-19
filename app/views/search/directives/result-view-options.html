@@ -9,7 +9,7 @@
                     <option value="group">Group</option>
                     <option value="matrix">Matrix</option>
                 </select>
-                <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i>
+                <i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
             </a>
         </li>        
         <li>
@@ -21,10 +21,7 @@
             <a rel="noopener" > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send              
             </a>
         </li>     
-        <li>
-            <a rel="noopener" > <i class="fa fa-print" aria-hidden="true"></i> Print
-            </a>
-        </li>   
+   
         <li>
             <a rel="noopener" href ng-click="onExportClick()"><i class="fa fa-download" aria-hidden="true"></i> Export
             </a>

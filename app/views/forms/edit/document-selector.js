@@ -326,10 +326,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     
                     if($scope.search.keyword){
                         var queryText = $scope.search.keyword;
-                        if(queryText.indexOf('-')>0) 
-                            queryText = '"' + solr.escape(queryText) + '"'; // Add quotes if text contains - especially if search is by uid
-                        else
-                            queryText = '(' + solr.escape(queryText) + ')';
+                        queryText = '(' + solr.escape(queryText) + ')';
 
                         if(($attr.freeTextQueryField||'')!='')
                             query = $attr.freeTextQueryField + ':' + queryText;
@@ -683,7 +680,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'supplementaryAuthority'    : 'views/forms/edit/directives/edit-authority.directive',
                     'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
                     'organization'              : 'views/forms/edit/directives/edit-organization.directive',
-                    'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive'
+                    'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive',
+                    'resource'                  : 'views/forms/edit/directives/edit-resource.directive'
                 }
                 $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];

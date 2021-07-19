@@ -73,7 +73,7 @@
              </div>
 
              <div id="freeText" class="col-md-12" ng-show="!skipTextFilter">
-                 <form ng-submit="saveFreeTextFilter(searchKeyword)" class="input-group">
+                 <form ng-submit="saveFreeTextFilter(searchKeyword, $event)" class="input-group">
                      <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the Clearing-House"
                          style="font-weight:bold;">
                      <span type="submit" style="cursor:pointer" ng-click="saveFreeTextFilter(searchKeyword)" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
@@ -83,7 +83,7 @@
                  <ul>
                      <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;"
                          ng-click="showFilters=null">
-                         <span style="cursor: pointer">search filters:</span></li>
+                         <span style="cursor: pointer">GLOBAL FILTERS:</span></li>
                      <li id="recordTypesFilterTab"> <a rel="noopener" href="" ng-class="{'active':showFilters=='recordTypesFilter'}"
                              ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
                              class="btn color-grey ">
@@ -125,7 +125,7 @@
                              <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                              &nbsp; My saved searches</a> </li>
                      <li class="pull-right" style="line-height: 5px">
-                         <result-view-options sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
+                         <result-view-options current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
                              group-by-fields="searchResult.groupByFields" on-sort-by-change="onSortByChange(fields)"
                              on-view-type-change="onViewTypeChange(options)" on-export="onExportClick()"></result-view-options>
                      </li>
@@ -212,23 +212,23 @@
                         <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}">
                             <a rel="noopener" translation-url href="#" ng-click="switchTab('allRecords')">
                                All <span class="hidden-xs">records</span>
-                                <span class="badge" style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span>
+                                <span class="badge"  ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span>
                             </a>
                         </li>
                          <li id="nationalRecordsTab" ng-class="{'active':searchResult.currentTab==='nationalRecords'}">
                              <a rel="noopener" translation-url href="#" class="color-blue"
                                  ng-click="switchTab('nationalRecords')">
                                  National <span class="hidden-xs">records</span> <span class="badge bg-blue"
-                                     style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a></li>
+                                      ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a></li>
                          <li id="referenceRecordsTab" ng-class="{'active':searchResult.currentTab==='referenceRecords'}"><a
                                  translation-url href="#" class="color-orange"
                                  ng-click="switchTab('referenceRecords')">Reference <span
                                      class="hidden-xs">records</span> <span class=" badge bg-orange"
-                                     style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a></li>
+                                      ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a></li>
                          <li id="scbdRecordsTab" ng-class="{'active':searchResult.currentTab==='scbdRecords'}">
                              <a rel="noopener" translation-url href="#" class="color-darkgrey" ng-click="switchTab('scbdRecords')">
                                 SCBD <span class="hidden-xs">records</span> 
-                                 <span class="badge" style="margin-left:10px;" ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span>
+                                 <span class="badge"  ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span>
                             </a>
                         </li>
                      </ul>

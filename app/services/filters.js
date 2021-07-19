@@ -302,3 +302,7 @@ import 'services/main';
 		    return "" + number + end;
 		};
 	});
+	
+	app.filter('unsafe', function ($sce) {
+        return $sce.trustAsHtml;
+    });

@@ -28,7 +28,13 @@ import 'services/main';
             cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas', {other:true, otherType:'lstring'});},
             regions	: function() {return thesaurusService.getDomainTerms('regions').then(Thesaurus.buildTree);},
             countries       : function() {return thesaurusService.getDomainTerms('countries').then(function(o){return _.sortBy(o, 'name' );})},
-            fundingSources	: function() {return thesaurusService.getDomainTerms('cbiFundingsrc').then(function(o){return _.sortBy(o, 'name' );})},
+            fundingSources	: function() {return thesaurusService.getDomainTerms('cbiFundingsrc')
+            .then(function(o){
+              const OtherMultilateral = o.find(e=>e.identifier == "E5A02FED-E87E-4D95-8AAF-BB44E6B22BC4");
+              if(OtherMultilateral)
+                OtherMultilateral.type = 'lstring';
+              return _.sortBy(o, 'name' );
+            })},
             languages       : function() {return thesaurusService.getDomainTerms('unLanguages').then(function(o){return _.sortBy(o, 'name' );})},           
         });
     }, 100 );

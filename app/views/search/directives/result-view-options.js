@@ -10,6 +10,7 @@ import 'ngDialog';
             template: template,
             require:'^searchDirective',
             scope: {
+                currentTab      : '=' ,
                 viewType        : '=' ,
                 sortFields      : '=' ,
                 groupByFields   : '=' ,
@@ -41,7 +42,8 @@ import 'ngDialog';
                                 {field:'relevance'                            , title: 'Relevance'       ,direction: 'asc'},
                                 {field:'updatedDate_dt'                       , title: 'Last Updated On' ,direction: 'asc'},
                                 {field:'schema_EN_s'.replace('EN', locale.toUpperCase())    , title: 'Record Type'     ,direction: 'asc'},
-                                {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'}
+                                {field:'government_EN_s'.replace('EN', locale.toUpperCase()), title: 'Country'         ,direction: 'asc'},
+                                {field:'uniqueIdentifier_s', title: 'UID'         ,direction: 'asc'}
                             ]
 
                             _.forEach(selectedFields, function(field){
@@ -100,7 +102,10 @@ import 'ngDialog';
                     })
                 }
 
-                $scope.viewTypeChange = function(type){
+                $scope.viewTypeChange = function(type,currentTab){
+                    if(type == 'default' && currentTab == 'nationalRecords'){
+                        showGroupByDialog();
+                    }
                     if(type == 'default'){
                         $scope.groupByFields = ['government', 'schema'];
                         $scope.onViewTypeChange({options:{viewType:type}})

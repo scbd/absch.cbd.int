@@ -24,7 +24,8 @@ import template from 'text!./traits-selector.directive.html';
                     '3B427EA6-5260-47F1-B424-FAAA5960FB52':{ items: [] },
                     '5B9DB3B4-90A1-451A-A10C-E3A47995344F':{ items: [] },
                     'C8C662E2-D633-4C69-96EA-C9853997A3A5':{ items: [] },
-                    'D39FE35E-8BFE-459C-B640-E70E00BC0D20':{ items: [] }
+                    'D39FE35E-8BFE-459C-B640-E70E00BC0D20':{ items: [] },
+                    '75DE5726-4C52-442C-8BF8-B77A6EBE48E2':{ items: [] }
                 }
                 
                 $scope.options = {
