@@ -1,4 +1,4 @@
-﻿{
+﻿export default {
     "24E809DA-20F4-4457-9A8A-87C08DF81E8A" : {
         "title" : "Reference to any other relevant articles and sections", "description" : ""
     },

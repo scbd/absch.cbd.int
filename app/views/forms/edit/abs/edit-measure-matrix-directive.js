@@ -2,7 +2,7 @@ import app from 'app';
 import _ from 'lodash';
 import template from "text!./edit-measure-matrix-directive.html";
 import measureMatrixUpdatedTitles from 'app-data/measure-matrix-updated-title';
-import elementsForOthers from 'app-data/measure-matrix-other-elements.json';
+import elementsForOthers from 'app-data/measure-matrix-other-elements';
 import 'views/directives/block-region-directive';
 import 'components/scbd-angularjs-services/main';
 
