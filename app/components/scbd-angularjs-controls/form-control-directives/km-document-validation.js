@@ -1,7 +1,7 @@
 import app from 'app';
 import template from 'text!./km-document-validation.html';
 import $ from 'jquery';
-import messages from 'app-data/validation-errors.json'; ;
+import messages from 'app-data/validation-errors';
 
     //============================================================
     //

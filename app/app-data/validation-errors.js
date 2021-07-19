@@ -1,4 +1,4 @@
-﻿{
+﻿export default {
 "unknown"           : "Unknown error",
 "mandatory"         : "Field is mandatory" ,
 "mandatoryAnyOf"    : "One of the field is mandatory",
