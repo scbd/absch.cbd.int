@@ -7,7 +7,7 @@ export default ['$scope', '$location', 'realm', '$timeout',
         
         $scope.showAnalyzer = false;
         $scope.self = $scope;
-        require(['app-data/report-analyzer-mapping.json'], function(res){
+        require(['app-data/report-analyzer-mapping'], function(res){
             var appName = realm.value.replace(/-.*/,'').toLowerCase();
             
             $scope.reportData = res[appName];

@@ -37,7 +37,7 @@ import 'views/report-analyzer/directives/national-reports/questions-selector';
             // $scope.regionMapping = {};
             
 
-            require(['app-data/report-analyzer-mapping.json'], function(res){
+            require(['app-data/report-analyzer-mapping'], function(res){
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
                 
                 $scope.reportData = res[appName];

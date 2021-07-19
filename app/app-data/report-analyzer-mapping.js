@@ -1,4 +1,4 @@
-﻿{
+﻿export default {
     "abs" : [
         {
             "type"         : "npInterimNationalReport1",
