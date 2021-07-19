@@ -1,4 +1,4 @@
-﻿{
+﻿export default {
     "08B2CDEC-786F-4977-AD0A-6A709695528D": "Does the measure cover access?",
     "1E824A31-BDFB-4C47-9593-8006B5FC7D60": "Does it cover access to genetic resources?",
     "5427EB8F-5532-4AE2-88EE-5B9619917480": "Does it cover access to traditional knowledge associated with genetic resources?",
