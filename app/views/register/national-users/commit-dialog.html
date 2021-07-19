@@ -50,7 +50,8 @@
                 <td style="vertical-align:middle;width:2em">
                     <i class="fa fa-fw" ng-class="{ 'fa-cog' : tran.loading, 'fa-spin' : tran.loading, 'fa-check' : tran.success, 'fa-plus-circle' : !(tran.loading||tran.success) }" style="font-size:150%"></i>
                 </td>
-                <td style="width:90%" ng-bind="tran.user.firstName+' '+tran.user.lastName+'('+tran.user.email+')'">
+                <td style="width:90%" >
+                <span ng-bind="tran.user.firstName+' '+tran.user.lastName+'('+tran.user.email+')'"></span>
                     <br> <span ng-bind="tran.user.organization"></span>
                 </td>
                 <td style="width:5%" ng-bind="tran.error.code || tran.error">
