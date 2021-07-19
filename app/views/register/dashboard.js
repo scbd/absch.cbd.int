@@ -106,8 +106,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             function init(){                      
                 loadFacets();
                 if($scope.isBch){
-                    commonjs.loadJsonFile('app-data/bch/offline-formats.json')
-                    .then(function(data){
+                    require(['app-data/bch/offline-formats'], function(data){
                         $scope.offlineFormats = data;
                     })
                     loadArticle();

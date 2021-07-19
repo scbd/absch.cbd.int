@@ -606,8 +606,7 @@ import 'ngDialog';
 
                 function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('app-data/bch/offline-formats.json')
-                        .then(function(data){
+                        require(['app-data/bch/offline-formats'], function(data){
                             $scope.offlineFormats = data;
                             $timeout(function(){
                                 $element.find("[data-toggle='tooltip']").tooltip({

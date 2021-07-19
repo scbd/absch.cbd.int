@@ -1,4 +1,4 @@
-{
+export default {
     "authority": {
         "ar": "http://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_ar.doc?download",
         "en": "http://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_en.doc?download",
