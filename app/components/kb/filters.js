@@ -1,4 +1,5 @@
 import { DateTime } from 'moment'
+import moment from 'moment';
 
 //https://moment.github.io/luxon/docs/manual/formatting#table-of-tokens
 export function dateTimeFilterUTC(dateTime, format='T') { 
@@ -16,4 +17,10 @@ export function asDateTime(date) {
     if(typeof(date) === 'string') return DateTime.fromISO(date)
 
     throw Error('Unknown date/time format');
+}
+
+export function formatDateWithUtc(date) {
+    if (date) {
+        return moment(String(date)).format('MM-DD-YYYY');
+    }
 }

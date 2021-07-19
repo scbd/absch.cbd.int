@@ -1,16 +1,16 @@
 <template>
     <div class="knowledge-base">
-      <section class="categories">
-        <div class="container">
-          <article-details ></article-details>
-        </div>
-      </section>
-  </div>
+        <section class="categories">
+            <div class="container">
+                <article-details ></article-details>
+            </div>
+        </section>
+    </div>
 
 </template>
 
 <style>
-    @import url('app/css/vue/kb/style.css');
+  @import url('app/css/vue/kb/style.css');
 </style>
 
 <script>
@@ -22,7 +22,7 @@
     name:'kbHome',
     components:{
       articleDetails,
-     AutoCompleteSearch
+      AutoCompleteSearch
     },
 
     props:{

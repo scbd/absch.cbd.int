@@ -55,15 +55,6 @@
 	color: #fff;
 	background: #0577B5;
 }
-.knowledge-base .btn-kb .icon-right, .btn-kb-dark .icon-right {
-	background: url(/app/img/kb/icon-right.png);
-	background-repeat: no-repeat;
-	display: inline-block;
-	width: 35px;
-	height: 35px;
-	vertical-align: middle;
-	margin-left: 40px;
-}
 .knowledge-base .kb-breadcrumbs {
 	background: #f9f9f9;
 	padding-top: 15px;
@@ -105,15 +96,6 @@
 	font-family: "Roboto", sans-serif;
 	color: #43484d;
 }
-.knowledge-base .categories header .icon-pages {
-	background: url(/app/img/kb/icon-pages.png);
-	background-repeat: no-repeat;
-	display: inline-block;
-	width: 40px;
-	height: 48px;
-	vertical-align: middle;
-	margin-right: 10px;
-}
 .knowledge-base .categories header p {
 	font-size: 16px;
 	font-weight: 300;
@@ -141,7 +123,7 @@
 	margin-bottom: 10px
 }
 .knowledge-base .categories-list li a:hover {
-	color: #7dc855;
+	color: #000;
 }
 .knowledge-base .widget_categories ul li a:hover {
 	color: #7dc855;
@@ -164,6 +146,10 @@
 }
 .knowledge-base .categories-list h3 {
 	margin: 0
+}
+.knowledge-base .categories-list.tag-count h3 {
+	border-bottom: #efefef 1px solid;
+	padding-bottom: 15px;
 }
 .knowledge-base .categories-list h3 a{
 	text-transform: capitalize;
@@ -537,8 +523,8 @@
 .knowledge-base .kb-listing ul li:hover{
 	border:rgb(218, 218, 218) 1px solid;
 }
-.knowledge-base .kb-listing ul li:hover a{
-color: #7dc855;
+.knowledge-base .kb-listing ul li>a:hover{
+    color: #7dc855;
 }
 .knowledge-base .kb-listing ul li:hover .date-sec{
 	background: #f8f8f8;
@@ -555,6 +541,7 @@ color: #7dc855;
 	background: #eee;
 	padding: 10px;
 	margin: 10px 0;
+	color: #5e6977;
 }
 
 .knowledge-base .kb-listing ul li .date-sec .inner-area{
@@ -562,6 +549,12 @@ color: #7dc855;
 	width: auto;
 	margin-right: 15px;
 	color: #a3a3a3;
+}
+.knowledge-base .kb-listing ul li .date-sec .inner-area a{
+	color: #5e6977;
+}
+.knowledge-base .kb-listing ul li .date-sec .inner-area a:hover{
+	color: #000;
 }
 .knowledge-base .kb-listing ul li .date-sec .inner-area:nth-child(2){
 	margin-top: -8px;
@@ -584,4 +577,49 @@ color: #7dc855;
 }
 .knowledge-base .categories-list .detail-custom-tag .inner-area .fa{
 	color: rgb(145, 145, 145);
+}
+.knowledge-base .kb-faq h3{
+	font-size: 28px !important;
+	margin: 20px 0 0 0
+}
+.knowledge-base .kb-faq main {
+	margin-top: 30px
+}
+.knowledge-base .kb-faq summary {
+	font-size: 1.8rem;
+	font-weight: 500;
+	background-color: #fafafa;
+	border: #EEEEEE 1px solid;
+	color: #000;
+	padding: 1.5rem;
+	margin-bottom: 1rem;
+	outline: none;
+	border-radius: 0.25rem;
+	text-align: left;
+	cursor: pointer;
+	position: relative;
+}
+.knowledge-base .kb-faq p { text-align: left;
+	padding: 15px 10px;
+	font-size: 16px;
+	color: #555}
+.knowledge-base .kb-faq details[open] summary ~ * {
+	animation: sweep .5s ease-in-out;
+}
+@keyframes sweep {
+	0%    {opacity: 0; margin-top: -10px}
+	100%  {opacity: 1; margin-top: 0px}
+}
+.knowledge-base .kb-faq details > summary::after {
+	position: absolute;
+	content: "+";
+	right: 25px;
+}
+.knowledge-base .kb-faq details[open] > summary::after {
+	position: absolute;
+	content: "-";
+	right: 25px;
+}
+.knowledge-base .kb-faq details > summary::-webkit-details-marker {
+	display: none;
 }
