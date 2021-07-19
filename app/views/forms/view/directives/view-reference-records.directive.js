@@ -81,9 +81,9 @@ app.directive("viewReferencedRecords", [function () {
 
 			function getFieldTitles(){
 				let isABS = realm.is('ABS');
-				let file = 'app-data/bch/linked-records-field-titles.json';
+				let file = 'app-data/bch/linked-records-field-titles';
 				if(isABS)
-					file = 'app-data/abs/linked-records-field-titles.json';
+					file = 'app-data/abs/linked-records-field-titles';
 				return commonjs.loadJsonFile(file)
 			}
 

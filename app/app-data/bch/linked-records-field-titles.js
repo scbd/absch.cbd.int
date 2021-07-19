@@ -1,4 +1,4 @@
-{
+export default {
 
 	"authority.contacts":"Contact person",
 	"authority.policyBasisForCompetencyRef":"Link to any relevant legal, administrative or policy measures",
