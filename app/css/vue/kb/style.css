@@ -620,6 +620,13 @@
 	content: "-";
 	right: 25px;
 }
+.knowledge-base .kb-faq details[open]{
+	background-color: #fafafa;
+}
+.knowledge-base .kb-faq details[open] summary {
+	 border-bottom: none;
+
+ }
 .knowledge-base .kb-faq details > summary::-webkit-details-marker {
 	display: none;
 }
