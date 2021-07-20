@@ -12,21 +12,23 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb/categories-group';
+	import i18n from '../../locales/en/components/kb-group';
 	import tagJson from '../../app-data/kb-categories.json';
 	export default {
 		props:{
 		},
 		data:  () => {
 			return {
-				tags: [],
 				tags: tagJson,
 				loading: true
 			}
 		},
 		methods: {
 			goToTag(tag){
-				this.$router.push({path:`/kb/tags/${tag}`});
+			    if(tag =='faq')
+                    this.$router.push({path:'/kb/faqs'});
+			    else
+			        this.$router.push({path:`/kb/tags/${tag}`});
 			}
 		},
 		mounted(){

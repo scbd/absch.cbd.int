@@ -23,7 +23,7 @@
 
 <script>
 	import ArticlesApi from './article-api';
-	import i18n from '../../locales/en/components/kb/categories-group';
+	import i18n from '../../locales/en/components/kb-group';
 	export default {
 		props:{
 		},

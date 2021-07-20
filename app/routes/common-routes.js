@@ -83,6 +83,7 @@ const commonRouteUrls = {
     reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
 
     kb                                          : { component: ()=>import('~/views/kb/home.vue') },
+    kbFaqs                                          : { component: ()=>import('~/views/kb/faqs.vue') },
     kbArticles: { component: () => import('~/views/kb/articles.vue') },
     kbTags: { component: () => import('~/views/kb/adminTags.vue') },
     shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },

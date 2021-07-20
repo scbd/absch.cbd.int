@@ -7,8 +7,8 @@
             <ul v-for="title in articles">
                 <li><a href="#" @click="goToArticle(title._id,title.title[$locale])">{{title.title[$locale]}}</a></li>
             </ul>
-            <div v-if="articles.length<1 && !loading">
-                <p>{{ $t("noResultFound") }}</p>
+            <div v-if="articles.length<1 && !loading" class="alert alert-warning">
+                <strong>{{ $t("noResultFound") }}</strong>
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
 
 <script>
 import ArticlesApi from './article-api';
-  import i18n from '../../locales/en/components/kb/categories-group';
+  import i18n from '../../locales/en/components/kb-group';
   import CategoriesGroup from './categories-group.vue';
 
 export default {

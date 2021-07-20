@@ -35,7 +35,7 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb/categories-group';
+	import i18n from '../../locales/en/components/kb-group';
 	import relevantArticles from "./relevant-articles.vue";
 	import ArticlesApi from './article-api';
 	import {formatDateWithUtc} from './filters';

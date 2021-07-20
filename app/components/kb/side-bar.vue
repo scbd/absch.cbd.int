@@ -4,7 +4,7 @@
             <div class="col-md-12 ">
                 <div class="support-container">
                     <h2 class="support-heading">{{ $t("needSupport") }}?</h2>
-                     {{ $t("suuportedText") }}
+                     {{ $t("supportedText") }}
                     <a href="#">{{ $t("concontactUs") }}</a> {{ $t("furtherHelp") }}.
                 </div>
             </div>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb/categories-group';
+	import i18n from '../../locales/en/components/kb-group';
 	import CategoriesGroup from './categories-group.vue';
 	import popularTags from './popular-tags.vue';
 	import ArticlesApi from './article-api';
