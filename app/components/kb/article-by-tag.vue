@@ -4,7 +4,7 @@
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
             <div class="row match-height" v-if="!loading">
                 <div class="categories-list tag" v-if="articles">
-                    <h2>{{tag}}&nbsp;<span><small>({{articlesCount}})</small></span></h2>
+                    <h2> {{tagHeading[0].title}}&nbsp;<span><small>({{articlesCount}})</small></span></h2>
                     <div class="kb-listing">
                         <ul v-for="title in articles">
                             <li>
@@ -22,8 +22,8 @@
             <div v-if="articlesCount>10">
                 <global-pagination :items="10" :tag-count="articlesCount" @changePage="onChangePage"></global-pagination>
             </div>
-            <div v-if="articlesCount<1 && !loading">
-                <p>{{ $t("noResultFound") }}</p>
+            <div v-if="articlesCount<1 && !loading" class="alert alert-warning">
+                <strong>{{ $t("noResultFound") }}</strong>
             </div>
         </div>
         <div class="col-lg-4">
@@ -38,12 +38,13 @@
 </template>
 <script>
 
-	import i18n from '../../locales/en/components/kb/categories-group';
+	import i18n from '../../locales/en/components/kb-group';
 	import globalPagination from './pagination.vue';
 	import relevantArticles from "./relevant-articles.vue";
 	import ArticlesApi from './article-api';
 	import {formatDateWithUtc} from './filters';
 	import popularTags from './popular-tags.vue';
+    import tagJson from '../../app-data/kb-categories.json';
 
 	export default {
 		components:{
@@ -56,18 +57,23 @@
 		created(){
 			this.articlesApi = new ArticlesApi();
 		},
+        data:  () => {
+            return {
+                articles: [],
+                loading: true,
+                tagJson: tagJson,
+                tagHeading: '',
+                articlesCount:0,
+            }
+        },
 		mounted() {
 			const tag = (this.$route.params.tag).replace(/"/g, "");
 			if(tag != undefined && tag != null) {
+                this.tagHeading =  this.tagJson.filter(function (item) {
+                    return item.adminTags[0] == tag;
+                });
 				this.tag = tag;
 				this.getArticlesCount(tag);
-			}
-		},
-		data:  () => {
-			return {
-				articles: [],
-				loading: true,
-				articlesCount:0,
 			}
 		},
 		filters: {
