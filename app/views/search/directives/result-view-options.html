@@ -1,7 +1,7 @@
 ﻿<div>
     <ul class="pagination" style="margin-bottom:0px" ng-if="viewType">        
         <li>
-            <a rel="noopener" href="#" style="max-height:38px;">
+            <a id="viewType" rel="noopener" href="#" style="max-height:38px;">
                 <i class="fa fa-eye" aria-hidden="true"></i> View Type
                 <select ng-model="viewType" ng-change="viewTypeChange(viewType);">
                     <option value="default">Default</option>
@@ -13,17 +13,17 @@
             </a>
         </li>        
         <li>
-            <a rel="noopener" href ng-click="showSortDialog()">
+            <a  id="sortBy" rel="noopener" href ng-click="showSortDialog()">
                 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort By
             </a>
         </li>     
         <li>
-            <a rel="noopener" > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send              
+            <a id="sendRecords" rel="noopener" > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
             </a>
         </li>     
    
         <li>
-            <a rel="noopener" href ng-click="onExportClick()"><i class="fa fa-download" aria-hidden="true"></i> Export
+            <a id="exportRecords" rel="noopener" href ng-click="onExportClick()"><i class="fa fa-download" aria-hidden="true"></i> Export
             </a>
         </li>
     </ul>
