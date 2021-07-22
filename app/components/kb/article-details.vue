@@ -14,11 +14,13 @@
                             <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTagsInfo[0].title[$locale]}}</div>
                         </div>
                         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[$locale]"></div>
+						<div v-if="article.adminTags" class="detail-custom-tag">
+							<div class="tagcloud">
+								<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
+                    			<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+							</div>
+						</div>
                     </div>
-                </div>
-                <div v-if="article.adminTags">
-                    <h3>Tags:</h3>
-                    <div class="tagcloud"><a href="#" class="btn btn-mini" v-for="tag in article.adminTags">{{tag}}</a></div>
                 </div>
             </div>
             <button class="btn btn-primary pull-right" @click="back()">Back</button>
@@ -35,13 +37,17 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb-group';
-	import relevantArticles from "./relevant-articles.vue";
+	import i18n from '../../locales/en/components/kb.json';
+	import relevantArticles from "./articles-by-relation.vue";
+	import KbCategories from '~/app-data/kb-categories.json'
 	import ArticlesApi from './article-api';
-	import {formatDateWithUtc} from './filters';
+	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
 	export default {
-		components: {relevantArticles,popularTags},
+		components: {
+			relevantArticles,
+			popularTags
+		},
 		props:{
 		},
 		data:  () => {
@@ -65,12 +71,20 @@
 		},
 		filters: {
 			dateFormate: function ( date ) {
-				return formatDateWithUtc(date)
+				return formatDate(date)
 			}
 		},
 		methods: {
 			back(){
-				window.location.href = '/kb';
+				this.$router.push({path: '/kb'});
+			},
+			tagUrl(tag){
+				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
+				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+				return `/kb/tags/${tag}/${tagTitle}`
+			},
+			goToTag(tag){
+				this.$router.push({path: this.tagUrl(tag)});
 			}
 		},
 		i18n: { messages:{ en: i18n }} 

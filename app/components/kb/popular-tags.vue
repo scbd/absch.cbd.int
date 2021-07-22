@@ -12,7 +12,7 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb-group';
+	import i18n from '../../locales/en/components/kb.json';
 	import tagJson from '../../app-data/kb-categories.json';
 	export default {
 		props:{

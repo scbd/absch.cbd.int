@@ -44,6 +44,10 @@ export default class ArticlesApi
     this.http = http;
   }
 
+  async queryArticleGroup(groupKey, params)  {
+    return this.http.get(`api/v2017/articles/grouping/${groupKey}`, { params }).then(res => res.data).catch(tryCastToApiError);
+  }
+
   async queryArticles(params)  {
     return this.http.get(`api/v2017/articles`, { params }).then(res => res.data).catch(tryCastToApiError);
   }

@@ -19,8 +19,8 @@
 
 <script>
 import ArticlesApi from './article-api';
-  import i18n from '../../locales/en/components/kb.json';
-  import CategoriesGroup from './article-categories.vue';
+import i18n from '../../locales/en/components/kb.json';
+import CategoriesGroup from './article-categories.vue';
 
 export default {
     components:{
@@ -41,7 +41,7 @@ export default {
     async mounted() {
         let ag = [];
         ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs', encodeURIComponent(this.tag) ]}}]}});
-        ag.push({"$project" : {[`title.${this.$locale}`]:1}});
+        ag.push({"$project" : {[`title.${this.$locale}`]:1, _id:1}});
         ag.push({"$limit" : 10});
         const query = {
             "ag" : JSON.stringify(ag)

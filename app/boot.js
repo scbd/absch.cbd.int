@@ -129,6 +129,8 @@ export default function bootApp(window, require, defineX) {
             
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
+            'vue-pagination-2'          : `${cdnHost}vue-pagination-2@3.0.91/dist/vue-pagination-2.min`,
+            
         },
         'shim': {
             'bootstrap-datepicker'          : { 'deps': ['jquery'] },
@@ -155,6 +157,7 @@ export default function bootApp(window, require, defineX) {
             'plotly-renderers'              : { 'deps': ['jquery', 'jquery-ui', 'plotly.js']},
 
             'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
+            'vue-pagination-2'              : { 'deps': ['angular-vue'] },
             
         },
         urlArgs: function(id, url){

@@ -18,8 +18,8 @@
 
 <script>
 
-    import CategoriesGroup from '../../components/kb/categories-group.vue';
-    import sideBar from '../../components/kb/side-bar.vue';
+    import CategoriesGroup from '../../components/kb/article-categories.vue';
+    import sideBar from '../../components/kb/right-side-bar.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 export default {

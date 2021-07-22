@@ -30,7 +30,7 @@
     },
     { 
         "title"    : "Informal Advisory Committee (IAC)",
-        "adminTags": ["iac", "meetings"]
+        "adminTags": ["meetings", "iac"]
     },
     { 
         "title"    : "Getting help",

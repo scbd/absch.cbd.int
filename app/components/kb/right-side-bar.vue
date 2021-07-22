@@ -25,8 +25,8 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb-group';
-	import CategoriesGroup from './categories-group.vue';
+	import i18n from '../../locales/en/components/kb.json';
+	import CategoriesGroup from './article-categories.vue';
 	import popularTags from './popular-tags.vue';
 	import ArticlesApi from './article-api';
 	export default {
@@ -46,7 +46,7 @@
 			this.articlesApi = new ArticlesApi();
 		},
 		async mounted() {
-			const adminTags = this.$realm.is('BCH')?'bch':'absch';
+			const adminTags = this.$realm.is('BCH')?'bch':'abs';
 			let ag = [];
 			ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(adminTags)}]}});
 			ag.push({"$project" : {[`title.${this.$locale}`]:1}});

@@ -19,7 +19,7 @@
 <script>
 
     import Faqs from '../../components/kb/faqs.vue';
-    import sideBar from '../../components/kb/side-bar.vue';
+    import sideBar from '../../components/kb/right-side-bar.vue';
     import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
     export default {

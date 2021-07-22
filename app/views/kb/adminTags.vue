@@ -15,7 +15,7 @@
 
 <script>
 
-	import articleByTag from '../../components/kb/article-by-tag.vue';
+	import articleByTag from '../../components/kb/articles-by-tag.vue';
 	import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 	export default {
