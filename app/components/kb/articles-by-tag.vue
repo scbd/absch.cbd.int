@@ -118,7 +118,7 @@
 				this.articles 	  = [];
 				const q = { 
 					$and : [
-						{ adminTags : { $all : [this.$realm.is('BCH') ? 'bch' : 'abs', 'faq' ]}},
+						{ adminTags : this.$realm.is('BCH') ? 'bch' : 'abs' },
 						{ adminTags : { $all : [encodeURIComponent(tag)]} }
 					]
 				};
