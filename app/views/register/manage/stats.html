@@ -36,7 +36,7 @@
 						<!-- /.box-header -->
 						<div class="box-body">
 							<div class="row">
-								<div class="col-md-6">{{filters}}
+								<div class="col-md-6"><span ng-bind="filters"></span>
 									 <div km-select ng-model="filters.government" binding-type="string" placeholder="Government" items="options.countries()"></div>
 								</div>
 							</div>
@@ -90,8 +90,8 @@
 										<span class="info-box-icon"><i class="fa fa-times"></i></span>
 										<div class="info-box-content">
 											<div>
-												<span class="info-box-text">{{schema.label}}</span>
-												<span class="info-box-number">{{schema.value}}</span>
+												<span class="info-box-text" ng-bind="schema.label"></span>
+												<span class="info-box-number" ng-bind="schema.value"></span>
 
 												<div class="progress">
 													<div class="progress-bar" style="width: 70%"></div>
@@ -99,7 +99,7 @@
 												<span class="progress-description">
 
 													<div ng-if="schema.value>0 && schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0">
-														You have {{measureElementMissing.length}} MSR which are missing ABS elements of measures
+														You have <span ng-bind="measureElementMissing.length"></span> MSR which are missing ABS elements of measures
 														<span class="pull-right text-black">
 															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
 															aria-expanded="false" aria-controls="list{{schema.schema}}_Elm"> 
@@ -115,15 +115,15 @@
 																<tbody>
 																	<tr ng-repeat="document in measureElementMissing">
 																	<th >#</th>
-																	<th>{{document.title|lstring}}</th>
-																	<th>{{document|uniqueID}}</th>
+																	<th ng-bind="document.title|lstring"></th>
+																	<th ng-bind="document|uniqueID"></th>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
 													<div ng-if="schema.value>0 && getDocumentsForUpdate(schema.schema).length > 0">
-														You have {{schema.value}} {{schema.schema|schemaShortName}}, {{getDocumentsForUpdate(schema.schema).length}} of which require updates
+														You have <span ng-bind="schema.value+' '+schema.schema|schemaShortName+', '+getDocumentsForUpdate(schema.schema).length"></span> of which require updates
 														<span class="pull-right text-black">
 															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
 															aria-expanded="false" aria-controls="list{{schema.schema}}"> 
@@ -132,7 +132,7 @@
 														</span>
 													</div>
 													<div ng-if="schema.value==0">
-														You have not published any {{schema.schema|schemaShortName}} in ABS-CH 
+														You have not published any <span ng-bind="schema.schema|schemaShortName"></span> in ABS-CH 
 														<a rel="noopener" ng-href="/register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="pull-right link-color"> 
 															click to add
 														</a>
@@ -145,8 +145,8 @@
 													<li ng-repeat="document in getDocumentsForUpdate(schema.schema)">
 															<a rel="noopener" href="/database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_blank">  
 																<div>
-																	<span class=" text-green">{{document.uniqueIdentifier_s|uppercase}}</span>
-																	{{document.title_t}}
+																	<span class=" text-green" ng-bind="document.uniqueIdentifier_s|uppercase"></span>
+																	<span ng-bind="document.title_t"></span>
 																</div>
 															</a>
 															<div class="box-body">
@@ -154,8 +154,8 @@
 																	<tbody>
 																		<tr ng-repeat="documentUpdate in document.idForUpdate">
 																		<th >#</th>
-																		<th>{{documentUpdate.uid|uppercase}}</th>
-																		<th>{{documentUpdate.newVersion}}</th>
+																		<th ng-bind="documentUpdate.uid|uppercase"></th>
+																		<th ng-bind="documentUpdate.newVersion"></th>
 																		</tr>
 																	</tbody>
 																</table>
@@ -188,7 +188,7 @@
 								<!-- /.col -->
 								<div class="col-md-2 pull-right">
 									<ul class="chart-legend clearfix">
-										<li ng-repeat="schema in schemas"><i class="fa fa-circle-o {{schema.class}}"></i> {{schema.value}} {{schema.schema|schemaShortName}}</li>
+										<li ng-repeat="schema in schemas"><i class="fa fa-circle-o {{schema.class}}"></i><span ng-bind="schema.value+' '+schema.schema|schemaShortName"></span></li>
 									</ul>
 								</div>
 								<!-- /.col -->
@@ -198,8 +198,14 @@
 						<!-- /.box-body -->
 						<div class="box-footer no-padding">
 							<ul class="nav nav-pills nav-stacked">
-								<li ng-repeat="schema in schemas"><a rel="noopener" href="#"> {{schema.label}}
-                  					<span class="pull-right text-red"><i class="fa fa-search"></i> {{schema.value}}</span></a>
+								<li ng-repeat="schema in schemas">
+									<a rel="noopener" href="#"> 
+										<span ng-bind="schema.label"></span>
+                  						<span class="pull-right text-red">
+											  <i class="fa fa-search"></i>
+											  <span ng-bind="schema.value"></span>
+										</span>
+									</a>
 								</li>
 							</ul>
 						</div>

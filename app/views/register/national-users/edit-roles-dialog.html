@@ -13,9 +13,9 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title">
-            Grant / Revoke Roles - {{editRolesDialogCtrl.user.firstName}} {{editRolesDialogCtrl.user.lastName}}
+            Grant / Revoke Roles - <span ng-biind="editRolesDialogCtrl.user.firstName+' '+editRolesDialogCtrl.user.lastName"></span>
         </h3>
-        {{editRolesDialogCtrl.user.email}}
+        <span ng-bind="editRolesDialogCtrl.user.email"></span>
     </div>
 
     <div class="modal-body">
@@ -32,9 +32,8 @@
                        ng-class=" { 'fa-check-square-o' : editRolesDialogCtrl.selectedRoles[role.roleId], 'fa-square-o' : !editRolesDialogCtrl.selectedRoles[role.roleId] }"
                        ng-click="editRolesDialogCtrl.selectedRoles[role.roleId]=!editRolesDialogCtrl.selectedRoles[role.roleId];editRolesDialogCtrl.updateGovernmentPA(role)"></i>
                 </td>
-                <td style="width:90%">
-                    {{role.name}}
-                    <div><i>{{role.description}}</i></div>
+                <td style="width:90%" ng-bind="role.name">
+                    <div><i ng-bind="role.description"></i></div>
                 </td>
             </tr>
         </table>
