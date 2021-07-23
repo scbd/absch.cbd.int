@@ -2095,6 +2095,9 @@ a.disabled{
     padding-right: 2px;
 }
 
+.padding-left-0{
+    padding-left: 0px;
+}
 .padding-left-2{
     padding-left: 2px;
 }
@@ -2826,8 +2829,11 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .padding-left-40 {
 	padding-left: 40px;
 }
+.padding-top-5 {
+	padding-top: 5px;
+}
 .padding-top-10 {
-	padding-top: 30px;
+	padding-top: 10px;
 }
 .padding-top-15 {
 	padding-top: 30px;
