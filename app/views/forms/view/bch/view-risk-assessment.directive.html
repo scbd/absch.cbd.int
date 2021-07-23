@@ -28,10 +28,11 @@
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<div ng-show="document.date">
+		<div ng-show="document.date || document.dateOfRaNotAvailable">
 			<label>Date of the risk assessment </label>
 			<div compare-val>
-			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
+				<div ng-if="document.date" class="km-value" ng-bind="document.date | formatDate"></div>
+				<div ng-if="document.dateOfRaNotAvailable" class="km-value">Date not available</div>
 			</div>
 		</div>
 		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">

@@ -44,15 +44,26 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-4">
 													<div class="km-control-group" name="date" required caption="Date of the risk assessment"
 															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
-														<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
+
+														<div class="col-md-8 padding-left-0">
+															<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date" ng-disabled="document.dateOfRaNotAvailable"></div>	
+														</div>
+														<div class="col-md-4 padding-left-0 ">
+															<div class="checkbox">
+																<label for="dateOfRaNotAvailable">
+																	<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" id="dateOfRaNotAvailable" name="dateOfRaNotAvailable"> 
+																	Date not available
+																</label>
+															</div>
+														</div>														
 													</div>
 												</div>
 											</div>
 											
-											<div class="row" ng-if="!isNational">
+											<div class="row padding-top-10" ng-if="!isNational">
 												<div class="col-xs-12">
 													<div class="km-control-group" name="organizations" required caption="Institution responsible for the risk assessment">											
 														<div document-selector ng-model="document.organizations" question="organizations"

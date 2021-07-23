@@ -99,6 +99,8 @@ import "views/forms/view/bch/view-risk-assessment.directive";
 						if(!$scope.isNational && document.government){
 							document.government = undefined;
 						}
+						if(document.dateOfRaNotAvailable) document.date = undefined;
+						if(document.date) document.dateOfRaNotAvailable = undefined;
 
 						if(!document.isForCommercialUse){
 							document.forwardToOECD = undefined;
