@@ -12,8 +12,8 @@
 			</h3>
             <main>
                 <details v-for="article in faqs">
-                    <summary>{{article[`title_${$locale}`]}}</summary>
-                    <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article[`content_${$locale}`]"></div>                    
+                    <summary>{{article.title[`${$locale}`]}}</summary>
+                    <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[`${$locale}`]"></div>                    
 					<div v-if="article.adminTags" class="detail-custom-tag">
 						<div class="tagcloud">
 							<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
