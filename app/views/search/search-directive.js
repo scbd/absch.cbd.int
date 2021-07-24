@@ -103,79 +103,80 @@ import 'views/reports/matrix/data-matrix.directive';
                         var joyride = joyrideService;
                         
                         joyride.config = {
+                            overlay: false,
                             onStepChange: function(){  },
                             onStart: function(){  },
                             onFinish: function(){ 
                                 joyride.start = false;
                                 $scope.tourOn = false; 
                                 $scope.showFilters = false;                                
-                                $scope.showDownloadDialog = false;                                
+                                delete $scope.leftMenuFilters;                               
                                 $('#recordsContent').removeClass('active jr_target'); 
                             },
                             steps : [
                                         {   
                                             appendToBody:true,
-                                            title: joyRideText.step1.title,
-                                            content: joyRideText.step1.content
+                                            title: joyRideText.welcome.title,
+                                            content: joyRideText.welcome.content
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#globalSearch",
-                                            title: joyRideText.step2.title,
-                                            content: joyRideText.step2.content,
+                                            title: joyRideText.globalSearch.title,
+                                            content: joyRideText.globalSearch.content,
                                             placement: 'top'
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#freeText",
-                                            title: joyRideText.step3.title,
-                                            content: joyRideText.step3.content,
+                                            title: joyRideText.freeText.title,
+                                            content: joyRideText.freeText.content,
                                             placement: 'bottom'
                                         },  
                                         {   
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#recordTypesFilterTab",
-                                            title: joyRideText.step4.title,
-                                            content: joyRideText.step4.content,
+                                            selector: "#recordTypesFilterTabJR",
+                                            title: joyRideText.recordTypesFilterTab.title,
+                                            content: joyRideText.recordTypesFilterTab.content,
                                             placement: 'top',
                                             beforeStep: openFilterTab
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#keywordsFilterTab",
-                                            title: joyRideText.step5.title,
-                                            content: joyRideText.step5.content,
+                                            selector: "#keywordsFilterTabJR",
+                                            title: joyRideText.keywordsFilterTab.title,
+                                            content: joyRideText.keywordsFilterTab.content,
                                             placement: 'top',
                                             beforeStep: openFilterTab
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#countryFilterTab",
-                                            title: joyRideText.step6.title,
-                                            content: joyRideText.step6.content,
+                                            selector: "#countryFilterTabJR",
+                                            title: joyRideText.countryFilterTab.title,
+                                            content: joyRideText.countryFilterTab.content,
                                             placement: 'top',
                                             beforeStep: openFilterTab
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#regionFilterTab",
-                                            title: joyRideText.step7.title,
-                                            content: joyRideText.step7.content,
+                                            selector: "#regionFilterTabJR",
+                                            title: joyRideText.regionFilterTab.title,
+                                            content: joyRideText.regionFilterTab.content,
                                             placement: 'top',
                                             beforeStep: openFilterTab
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#dateFilterTab",
-                                            title: joyRideText.step8.title,
-                                            content: joyRideText.step8.content,
+                                            selector: "#dateFilterTabJR",
+                                            title: joyRideText.dateFilterTab.title,
+                                            content: joyRideText.dateFilterTab.content,
                                             placement: 'top',
                                             beforeStep: openFilterTab
                                         },
@@ -183,8 +184,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#closeFilterTab",
-                                            title: joyRideText.step9.title,
-                                            content: joyRideText.step9.content,
+                                            title: joyRideText.searchResults.title,
+                                            content: joyRideText.searchResults.content,
                                             placement: 'left',
                                             beforeStep: openFilterTab
                                         },
@@ -192,8 +193,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#referenceRecordsTab",
-                                            title: joyRideText.step10.title,
-                                            content: joyRideText.step10.content,
+                                            title: joyRideText.SearchResultsTab.title,
+                                            content: joyRideText.SearchResultsTab.content,
                                             placement: 'top',
                                             beforeStep: closeFilterTab
                                         },
@@ -201,8 +202,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#Search-Filter",
-                                            title: joyRideText.step11.title,
-                                            content: joyRideText.step11.content,
+                                            title: joyRideText.SubFilters.title,
+                                            content: joyRideText.SubFilters.content,
                                             placement: 'top',
                                             beforeStep: openSubFilters
                                         },
@@ -210,8 +211,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#record1",
-                                            title: joyRideText.step12.title,
-                                            content: joyRideText.step12.content,
+                                            title: joyRideText.ViewingRecords.title,
+                                            content: joyRideText.ViewingRecords.content,
                                             placement: 'top',
                                             beforeStep: closeSubFilters
                                         },
@@ -219,32 +220,32 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#viewType",
-                                            title: joyRideText.step13.title,
-                                            content: joyRideText.step13.content,
+                                            title: joyRideText.viewType.title,
+                                            content: joyRideText.viewType.content,
                                             placement: 'top'
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#sortBy",
-                                            title: joyRideText.step14.title,
-                                            content: joyRideText.step14.content,
+                                            title: joyRideText.sortBy.title,
+                                            content: joyRideText.sortBy.content,
                                             placement: 'bottom'
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#sendRecords",
-                                            title: joyRideText.step15.title,
-                                            content: joyRideText.step15.content,
+                                            title: joyRideText.sendRecords.title,
+                                            content: joyRideText.sendRecords.content,
                                             placement: 'top'
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#exportRecords",
-                                            title: joyRideText.step16.title,
-                                            content: joyRideText.step16.content,
+                                            title: joyRideText.exportRecords.title,
+                                            content: joyRideText.exportRecords.content,
                                             placement: 'left'
                                         },
 
@@ -257,7 +258,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             if(step.selector == "#closeFilterTab") { 
                                 $scope.showFilters = "recordTypesFilter"; }
                             else {
-                                $scope.showFilters = step.selector.replace('#','').replace('Tab', ''); }
+                                $scope.showFilters = step.selector.replace('#','').replace('TabJR', ''); }
                             resumeJoyride();
                         }
 
@@ -272,6 +273,12 @@ import 'views/reports/matrix/data-matrix.directive';
                         function closeSubFilters(resumeJoyride){
                             delete $scope.leftMenuFilters;
                             resumeJoyride();
+                        }
+
+                        function skipJoyride ()
+                        {
+                            delete $scope.leftMenuFilters;
+                            $scope.showFilters = false;
                         }
                     }
 

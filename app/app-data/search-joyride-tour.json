@@ -1,68 +1,68 @@
 ﻿{
-    "step1" :  {
+    "welcome" :  {
       "title": "Welcome to the Search Page",
       "content": "<p>The search page allows you to query all information published in the BCH. To retrieve records of interest, you can use a combination of filters to narrow your search.</p>"
     },
-    "step2" :  {
+    "globalSearch" :  {
       "title": "Global Search Filters",
       "content": "<p>Global filters allow you to search the entire database through all record categories by selecting one or multiple options within the <strong> Record types, Keywords, Country, Regions</strong> and <strong>Date</strong> filters.</p>"
     },
-    "step3" :  {
+    "freeText" :  {
       "title": "Free text search",
       "content": "<p>This search box allows you to query the entire database using word(s) of your choice.</p>"
     },
-    "step4" :  {
+    "recordTypesFilterTab" :  {
       "title": "Filter by Record Type",
       "content": "<p>Select one or more record types to search by specific category(ies) of records: National, Reference or SCBD.</p>"
     },
-    "step5" :  {
+    "keywordsFilterTab" :  {
       "title": "Search by Keyword",
       "content": "<p>Select one or more keyword(s) from the list. If you have already filtered by record type, the keyword filters displayed will be applicable specifically to that record type.</p>"
     },
-    "step6" :  {
+    "countryFilterTab" :  {
       "title": "Search by Country",
       "content": "<p>Select one or more countries from the list.<br><br>Tip: Click on a letter to view all countries that start with that letter. You can also filter by countries that are 'Parties', 'Non-Parties' and 'Ratified, not yet Party'</p>"
     },
-    "step7" :  {
+    "regionFilterTab" :  {
       "title": "Search by Region",
       "content": "<p>Select from the pre-defined list of regions and/or regional groups.</p>"
     },
-    "step8" :  {
+    "dateFilterTab" :  {
       "title": "Search by Date",
       "content": "<p>Search for records published or created on a specific date or time period.</p>"
     },
-    "step9" :  {
+    "searchResults" :  {
       "title": "Search Results",
       "content": "<p>To view search results, scroll down or click on the (x) button at the top right corner.</p>"
     },
-    "step10" :  {
+    "SearchResultsTab" :  {
       "title": "Search Results: Tabs",
       "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br>Note: The black circle indicates the total number of records in each category and will automatically change based on your search selections.<br><br>Tip: To view search results, scroll down or click on the (X) button at the top right corner.</p>"
     },
-    "step11" :  {
+    "SubFilters" :  {
       "title": "Sub-filters",
       "content": "<p>Sub-filters appear when you select one or more record types within the <strong>Record types</strong> global filter.<br>They appear on the left-hand side and apply exclusively to the selected record type.<br>You can use sub-filters in combination </p>"
     },
-    "step12" :  {
+    "ViewingRecords" :  {
       "title": "Search Results: Viewing Records",
       "content": "<p>Once you locate the record of interest, click on it to view full details.</p>"
 
     },
-    "step13" :  {
+    "viewType" :  {
       "title": "Search Results: View Type",
       "content": "<p>Select the preferred display of results from the 'View Type' drop-down list.</p>"
 
     },
-    "step14" :  {
+    "sortBy" :  {
       "title": "Search Results: Sorting",
       "content": "<p>Sort your search results by selecting one or more fields.</p>"
 
     },
-    "step15" :  {
+    "sendRecords" :  {
       "title": "Search Results: Send",
       "content": "<p>Click here to share your search results.</p>"
     },
-    "step16" :  {
+    "exportRecords" :  {
       "title": "Search Results: Export",
       "content": "<p>Click here to export the information to a spreadsheet format.</p>"
 
