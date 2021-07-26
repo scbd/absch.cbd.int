@@ -103,7 +103,7 @@ import 'views/reports/matrix/data-matrix.directive';
                         var joyride = joyrideService;
                         
                         joyride.config = {
-                            overlay: false,
+                            overlay: true,
                             onStepChange: function(){  },
                             onStart: function(){  },
                             onFinish: function(){ 

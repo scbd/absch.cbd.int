@@ -1912,7 +1912,7 @@ legend+ .help-info {
 
 .jr_overlay{
      left:0; 
-    opacity: 0!important;
+    opacity: 0.5 !important;
 }
 .jr_container {
     border-radius: 5px;
