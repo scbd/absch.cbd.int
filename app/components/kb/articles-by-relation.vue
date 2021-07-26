@@ -1,6 +1,6 @@
 <template>
     <div class="sidebar">
-        <div class="widget fix widget_categories mt-2">
+        <div class="widget fix widget_categories mt-2 right-side-articles">
             <span class="icon icon-folder"></span>
             <h4>{{ $t("relevantArticles") }}</h4>
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
@@ -10,9 +10,6 @@
 							    <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
                 </li>
             </ul>
-            <div v-if="articles.length<1 && !loading" class="alert alert-warning">
-                <strong>{{ $t("noResultFound") }}</strong>
-            </div>
         </div>
     </div>
 </template>

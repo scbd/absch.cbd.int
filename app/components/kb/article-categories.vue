@@ -6,20 +6,22 @@
         </header>
         <div class="row match-height">
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-            <div class="col-md-6 col-sm-12 " v-for="category in KbCategories">
-                <div class="categories-list widget_categories tag-count">
-                    <h3><span class="badge">{{category.count}}</span>
-                        <a href="#" @click="goToTag(category)">{{category.title}}</a>
-						<a style="display:none" :href="`${tagUrl(category)}`">{{category.title}}</a>
-                    </h3>
-                    <ul style="list-style: none;">
-                        <li v-for="article in category.articles">
-							<a style="display:none" :href="`${articleUrl(article)}`">{{article.title[$locale]}}</a>
-							<a href="#" @click="goToArticle(article, category.adminTags[0])">{{article.title[$locale]}}</a>
-						</li>
-                    </ul>
-					<a style="display:none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
-                    <a class="view-more" v-if="category.count>5" href="#" @click="goToTag(category)">{{ $t("viewMore") }}</a>
+            <div v-if="!loading">
+                <div class="col-md-6 col-sm-12 " v-for="category in KbCategories">
+                    <div class="categories-list widget_categories tag-count">
+                        <h3><span class="badge">{{category.count}}</span>
+                            <a href="#" @click="goToTag(category)">{{category.title}}</a>
+                            <a style="display:none" :href="`${tagUrl(category)}`">{{category.title}}</a>
+                        </h3>
+                        <ul class="cate-list-ul" style="list-style: none;">
+                            <li class="cate-list-li" v-for="article in category.articles">
+                                <a style="display:none" :href="`${articleUrl(article)}`">{{article.title[$locale]}}</a>
+                                <a href="#" @click="goToArticle(article, category.adminTags[0])">{{article.title[$locale]}}</a>
+                            </li>
+                        </ul>
+                        <a style="display:none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
+                        <a class="view-more" v-if="category.count>5" href="#" @click="goToTag(category)">{{ $t("viewMore") }}</a>
+                    </div>
                 </div>
             </div>
         </div>

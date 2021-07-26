@@ -21,10 +21,12 @@
 </template>
 
 <script>
+    import i18n from '../../locales/en/components/kb.json';
     export default {
         data:  () => {
             return {
             }
-        }
+        },
+        i18n: { messages:{ en: i18n }}
     }
 </script>

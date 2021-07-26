@@ -3,7 +3,7 @@
         <div class="col-lg-8">
             <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
             <div>
-                <div class="categories-list mt-0 single">
+                <div class="article-description mt-0 single">
                     <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
                     <div v-if="!loading">
                         <header>

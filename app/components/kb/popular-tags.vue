@@ -1,5 +1,5 @@
 <template>
-    <div class="widget fix widget_categories mt-2">
+    <div class="widget fix widget_categories mt-2 right-side-articles">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <span class="icon icon-folder"></span>
         <h4>{{ $t("popularTags") }}</h4>

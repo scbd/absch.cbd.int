@@ -110,7 +110,7 @@
 	margin-right: -1rem;
 	margin-left: -1rem;
 }
-.knowledge-base .categories-list {
+.knowledge-base .categories-list, .knowledge-base .article-description, .knowledge-base .article-by-tags {
 	padding: 20px;
 	box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
 	border-radius: 3px;
@@ -179,6 +179,7 @@
 	line-height: 29px;
 	color: #43484d;
 	text-decoration: none;
+	margin-left: 5px;
 }
 .knowledge-base .categories-list .badge {
 	background-color: #A15603;
@@ -197,32 +198,32 @@
 	margin-right: 10px;
 	padding: 0;
 }
-.knowledge-base .categories-list ul.cate-list-ul {
+.knowledge-base .categories-list .cate-list-ul {
 	margin: 10px 0 0 0;
 	padding: 0
 }
-.knowledge-base .categories-list ul:nth-child(6) {
+.knowledge-base .categories-list .cate-list-ul:nth-child(6) {
 	padding-bottom: 20px;
 }
-.knowledge-base .categories-list.tag ul:nth-child(6) {
+.knowledge-base .article-by-tags .kb-listing .article-with-tags-ul:nth-child(6) {
 	padding-bottom: 0;
 }
-.knowledge-base .categories-list ul.cate-list-ul li {
+.knowledge-base .categories-list .cate-list-ul .cate-list-li {
 	list-style: none;
 	padding-left: 5px;
 	padding-top: 10px;
 }
-.knowledge-base .categories-list li:before {
+.knowledge-base .categories-list .cate-list-ul .cate-list-li:before {
 	font: normal normal normal 14px/1 FontAwesome;
 	content: "\f016";
 	color: #b5bfc7;
 	font-size: 18px;
 }
-.knowledge-base  .categories-list li.tag:before {
+.knowledge-base .categories-list .cate-list-ul .cate-list-li.tag:before {
 	content: "";
 	font-size: 18px;
 }
-.knowledge-base .categories-list li a {
+.knowledge-base .categories-list .cate-list-ul .cate-list-li a {
 	padding-left: 5px;
 	color: #5e6977;
 	font-size: 14px;
@@ -281,6 +282,9 @@
 }
 .knowledge-base .mt-2{
 	margin-top: 2rem
+}
+.knowledge-base .mt-2.right-side-articles{
+	margin-top: 1rem
 }
 .knowledge-base .tagcloud{
 	margin-top: 3px;
@@ -419,6 +423,7 @@
 	font-weight: lighter;
 	background-repeat: no-repeat;
 	background-position: right 10px top 10px;
+	margin-top: 30px;
 }
 .knowledge-base h2.support-heading {
 	font-size: 20px;
@@ -470,7 +475,7 @@
 	width: 100%;
 }
 
-.knowledge-base .kb-listing ul li{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li{
 	border:#eee 1px solid;
 	padding: 20px;
 	float: left;
@@ -478,22 +483,22 @@
 	margin-bottom: 20px;
 	list-style-type:none;
 }
-.knowledge-base .kb-listing ul li:hover{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li:hover{
 	border:rgb(218, 218, 218) 1px solid;
 }
-.knowledge-base .kb-listing ul li>a:hover{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li>a:hover{
     /* color: #7dc855; */
 }
-.knowledge-base .kb-listing ul li:hover .date-sec{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li:hover .date-sec{
 	background: #f8f8f8;
 }
 
-.knowledge-base .kb-listing ul li a{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li a{
 	font-weight: 600;
 	font-size: 16px;
 	color: #000;
 }
-.knowledge-base .kb-listing ul li .date-sec{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec{
 	float: left;
 	width: 100%;
 	background: #eee;
@@ -502,32 +507,32 @@
 	color: #5e6977;
 }
 
-.knowledge-base .kb-listing ul li .date-sec .inner-area{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec .inner-area{
 	float: left;
 	width: auto;
 	margin-right: 15px;
 	color: #a3a3a3;
 }
-.knowledge-base .kb-listing ul li .date-sec .inner-area a{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec .inner-area a{
 	color: #5e6977;
 }
-.knowledge-base .kb-listing ul li .date-sec .inner-area a:hover{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec .inner-area a:hover{
 	color: #000;
 }
-.knowledge-base .kb-listing ul li .date-sec .inner-area:nth-child(2){
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec .inner-area:nth-child(2){
 	margin-top: -8px;
 }
-.knowledge-base .kb-listing ul li .date-sec .inner-area .fa{
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec .inner-area .fa{
 	color: rgb(145, 145, 145);
 }
-.knowledge-base .categories-list .detail-custom-tag {
+.knowledge-base .article-description .detail-custom-tag {
 	float: left;
 	width: 100%;
 	background: #eee;
 	padding: 10px;
 	margin: 10px 0;
 }
-.knowledge-base .categories-list .detail-custom-tag .inner-area{
+.knowledge-base .article-description .detail-custom-tag .inner-area{
 	float: left;
 	width: auto;
 	margin-right: 15px;
@@ -562,7 +567,7 @@
 	color: #555} */
 .knowledge-base .kb-faq details{
 	border: #EEEEEE 1px solid;
-	margin-bottom: 5px;
+	margin-bottom: 10px;
 }
 
 .knowledge-base .kb-faq details[open] .faq-content{

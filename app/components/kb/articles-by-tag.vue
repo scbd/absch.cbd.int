@@ -3,15 +3,15 @@
         <div class="col-lg-8">
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
             <div class="row match-height" v-if="!loading">
-                <div class="categories-list tag" v-if="articles">
+                <div class="article-by-tags" v-if="articles">
                     <h2> 
 						{{tagDetails.title}} <span><small>({{articlesCount}})</small></span>
 						<hr style="color:#eee">
 					</h2>
 					
                     <div class="kb-listing">
-                        <ul>
-                            <li v-for="article in articles">
+                        <ul class="article-with-tags-ul">
+                            <li class="article-with-tags-li" v-for="article in articles">
                                 <a href="#" @click="goToArticle(article, tag)"> {{article.title[$locale]}}</a>
                                 <div class="date-sec">
 									<div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.meta.modifiedOn|dateFormat}}</div>
@@ -24,15 +24,16 @@
                             </li>
                         </ul>
                     </div>
+                    <div v-if="articlesCount<1" class="alert alert-warning">
+                        <strong>{{ $t("noResultFound") }}</strong>
+                    </div>
                 </div>
             </div>
 
             <div v-if="articlesCount>10">
 				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>                
             </div>
-            <div v-if="articlesCount<1 && !loading" class="alert alert-warning">
-                <strong>{{ $t("noResultFound") }}</strong>
-            </div>
+
         </div>
         <div class="col-lg-4">
             <div v-if="tag">

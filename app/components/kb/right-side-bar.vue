@@ -11,7 +11,7 @@
         </div>
 
         <div class="sidebar" style="margin-top: 5px">
-            <div class="widget fix widget_categories mt-2" style="margin-top: 0rem">
+            <div class="widget fix widget_categories mt-2 right-side-articles">
                 <span class="icon icon-folder"></span>
                 <h4>{{ $t("latestArticles") }}</h4>
                 <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
