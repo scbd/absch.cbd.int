@@ -47,13 +47,12 @@
         <div ng-repeat="record in userFilters | orderBy:'meta.createdOn'">
             <div class="row" ng-hide="record.pendingStatus || del" style="padding:10px 0;background-color:#eee;margin-top:10px;">
                 <div class="col-xs-7 col-sm-8">
-                    <span class="bold">{{record.queryTitle}}
-                    </span>
+                    <span class="bold" ng-bind="record.queryTitle"></span>
                     <br>
                     <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                         <span class="label label-info">
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
-                            {{filter.name}}
+                            <span ng-bind="filter.name"></span>
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
                         </span>
                     </span>
@@ -108,7 +107,7 @@
             </div>
             <div>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
-                    <p ng-repeat="error in errors">{{error}}</p>
+                    <p ng-repeat="error in errors" ng-bind="error"></p>
                 </div>
             </div>
             <br>
