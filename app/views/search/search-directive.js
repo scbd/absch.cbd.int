@@ -1,7 +1,7 @@
 import app from 'app';
 import template from 'text!./search-directive.html';
 import _ from 'lodash';
-import joyRideText from 'app-data/search-joyride-tour.json';
+import joyRideText from '~/app-data/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import 'services/main';
 import 'views/search/search-filters/keyword-filter';
@@ -111,7 +111,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                 $scope.tourOn = false; 
                                 $scope.showFilters = false;                                
                                 delete $scope.leftMenuFilters;                               
-                                $('#recordsContent').removeClass('active jr_target'); 
+                                $('#searchResult').removeClass('active jr_target'); 
                             },
                             steps : [
                                         {   
@@ -184,17 +184,17 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#closeFilterTab",
-                                            title: joyRideText.searchResults.title,
-                                            content: joyRideText.searchResults.content,
+                                            title: joyRideText.closeFilterTab.title,
+                                            content: joyRideText.closeFilterTab.content,
                                             placement: 'left',
                                             beforeStep: openFilterTab
                                         },
                                         {
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#referenceRecordsTab",
-                                            title: joyRideText.SearchResultsTab.title,
-                                            content: joyRideText.SearchResultsTab.content,
+                                            selector: "#searchResult",
+                                            title: joyRideText.searchResult.title,
+                                            content: joyRideText.searchResult.content,
                                             placement: 'top',
                                             beforeStep: closeFilterTab
                                         },
@@ -202,8 +202,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#Search-Filter",
-                                            title: joyRideText.SubFilters.title,
-                                            content: joyRideText.SubFilters.content,
+                                            title: joyRideText.subFilters.title,
+                                            content: joyRideText.subFilters.content,
                                             placement: 'top',
                                             beforeStep: openSubFilters
                                         },
@@ -211,8 +211,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             appendToBody:true,
                                             type: 'element',
                                             selector: "#record1",
-                                            title: joyRideText.ViewingRecords.title,
-                                            content: joyRideText.ViewingRecords.content,
+                                            title: joyRideText.recordView.title,
+                                            content: joyRideText.recordView.content,
                                             placement: 'top',
                                             beforeStep: closeSubFilters
                                         },
@@ -259,20 +259,31 @@ import 'views/reports/matrix/data-matrix.directive';
                                 $scope.showFilters = "recordTypesFilter"; }
                             else {
                                 $scope.showFilters = step.selector.replace('#','').replace('TabJR', ''); }
-                            resumeJoyride();
+                            
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
                         }
 
                         function closeFilterTab(resumeJoyride){
                             $scope.showFilters = false;
-                            resumeJoyride();
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
                         }
                         function openSubFilters(resumeJoyride){
                            $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
-                            resumeJoyride();
+                           
+                           $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
                         }
                         function closeSubFilters(resumeJoyride){
                             delete $scope.leftMenuFilters;
-                            resumeJoyride();
+                            
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
                         }
 
                         function skipJoyride ()

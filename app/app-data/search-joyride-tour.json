@@ -31,19 +31,19 @@
       "title": "Search by Date",
       "content": "<p>Search for records published or created on a specific date or time period.</p>"
     },
-    "searchResults" :  {
+    "closeFilterTab" :  {
       "title": "Search Results",
       "content": "<p>To view search results, scroll down or click on the (x) button at the top right corner.</p>"
     },
-    "SearchResultsTab" :  {
+    "searchResult" :  {
       "title": "Search Results: Tabs",
-      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br>Note: The black circle indicates the total number of records in each category and will automatically change based on your search selections.<br><br>Tip: To view search results, scroll down or click on the (X) button at the top right corner.</p>"
+      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br>Note: The black circle indicates the total number of records in each category and will automatically change based on your search selections.</p>"
     },
-    "SubFilters" :  {
+    "subFilters" :  {
       "title": "Sub-filters",
       "content": "<p>Sub-filters appear when you select one or more record types within the <strong>Record types</strong> global filter.<br>They appear on the left-hand side and apply exclusively to the selected record type.<br>You can use sub-filters in combination </p>"
     },
-    "ViewingRecords" :  {
+    "recordView" :  {
       "title": "Search Results: Viewing Records",
       "content": "<p>Once you locate the record of interest, click on it to view full details.</p>"
 

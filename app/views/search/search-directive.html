@@ -206,7 +206,7 @@
              </div>
              <!-- Different view for list/group -->
              <div class="col-xs-12" style="margin:0;border: 1px solid #eee;"
-                 id="recordsContent" ng-class="{'col-xs-10':leftMenuFilters}">
+                 id="searchResult" ng-class="{'col-xs-10':leftMenuFilters}">
                  <div class="col-xs-12" style="padding:0;margin:0;">
                      <ul class="nav nav-tabs search-tab-title">
                         <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}">
@@ -234,7 +234,7 @@
                      </ul>
                  </div>
                  <!-- Tab panes -->
-                <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;" id="recordsContent">
+                <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
                     <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='allRecords'}" 
                     ng-if="searchResult.currentTab==='allRecords'">                             
                         <div ng-switch="searchResult.viewType">
