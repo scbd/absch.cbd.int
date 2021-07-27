@@ -5,7 +5,7 @@
                 <div class="support-container">
                     <h2 class="support-heading">{{ $t("needSupport") }}?</h2>
                      {{ $t("supportedText") }}
-                    <a href="#">{{ $t("concontactUs") }}</a> {{ $t("furtherHelp") }}.
+                    <a href="#" @click="openSlaask()">{{ $t("concontactUs") }}</a> {{ $t("furtherHelp") }}.
                 </div>
             </div>
         </div>
@@ -65,6 +65,9 @@
 				const url = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
 				this.$router.push({path:`/kb/articles/${id}/${url}/bch`});
 			},
+			openSlaask(){
+				$('#slaask-button-cross').click();
+			}
 		},
 		i18n: { messages:{ en: i18n }}
 	}
