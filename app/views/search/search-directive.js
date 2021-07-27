@@ -1,7 +1,7 @@
 import app from 'app';
 import template from 'text!./search-directive.html';
 import _ from 'lodash';
-import joyRideText from 'app-data/search-tour.json';
+import joyRideText from '~/app-data/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import 'services/main';
 import 'views/search/search-filters/keyword-filter';
@@ -98,6 +98,200 @@ import 'views/reports/matrix/data-matrix.directive';
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
+                    $scope.tour = function(){
+                        $scope.tourOn = true;
+                        var joyride = joyrideService;
+                        
+                        joyride.config = {
+                            overlay: true,
+                            onStepChange: function(){  },
+                            onStart: function(){  },
+                            onFinish: function(){ 
+                                joyride.start = false;
+                                $scope.tourOn = false; 
+                                $scope.showFilters = false;                                
+                                delete $scope.leftMenuFilters;                               
+                                $('#searchResult').removeClass('active jr_target'); 
+                            },
+                            steps : [
+                                        {   
+                                            appendToBody:true,
+                                            title: joyRideText.welcome.title,
+                                            content: joyRideText.welcome.content
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#globalSearch",
+                                            title: joyRideText.globalSearch.title,
+                                            content: joyRideText.globalSearch.content,
+                                            placement: 'top'
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#freeText",
+                                            title: joyRideText.freeText.title,
+                                            content: joyRideText.freeText.content,
+                                            placement: 'bottom'
+                                        },  
+                                        {   
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#recordTypesFilterTabJR",
+                                            title: joyRideText.recordTypesFilterTab.title,
+                                            content: joyRideText.recordTypesFilterTab.content,
+                                            placement: 'top',
+                                            beforeStep: openFilterTab
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#keywordsFilterTabJR",
+                                            title: joyRideText.keywordsFilterTab.title,
+                                            content: joyRideText.keywordsFilterTab.content,
+                                            placement: 'top',
+                                            beforeStep: openFilterTab
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#countryFilterTabJR",
+                                            title: joyRideText.countryFilterTab.title,
+                                            content: joyRideText.countryFilterTab.content,
+                                            placement: 'top',
+                                            beforeStep: openFilterTab
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#regionFilterTabJR",
+                                            title: joyRideText.regionFilterTab.title,
+                                            content: joyRideText.regionFilterTab.content,
+                                            placement: 'top',
+                                            beforeStep: openFilterTab
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#dateFilterTabJR",
+                                            title: joyRideText.dateFilterTab.title,
+                                            content: joyRideText.dateFilterTab.content,
+                                            placement: 'top',
+                                            beforeStep: openFilterTab
+                                        },
+                                        {   
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#closeFilterTab",
+                                            title: joyRideText.closeFilterTab.title,
+                                            content: joyRideText.closeFilterTab.content,
+                                            placement: 'left',
+                                            beforeStep: openFilterTab
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#searchResult",
+                                            title: joyRideText.searchResult.title,
+                                            content: joyRideText.searchResult.content,
+                                            placement: 'top',
+                                            beforeStep: closeFilterTab
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#Search-Filter",
+                                            title: joyRideText.subFilters.title,
+                                            content: joyRideText.subFilters.content,
+                                            placement: 'top',
+                                            beforeStep: openSubFilters
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#record1",
+                                            title: joyRideText.recordView.title,
+                                            content: joyRideText.recordView.content,
+                                            placement: 'top',
+                                            beforeStep: closeSubFilters
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#viewType",
+                                            title: joyRideText.viewType.title,
+                                            content: joyRideText.viewType.content,
+                                            placement: 'top'
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#sortBy",
+                                            title: joyRideText.sortBy.title,
+                                            content: joyRideText.sortBy.content,
+                                            placement: 'bottom'
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#sendRecords",
+                                            title: joyRideText.sendRecords.title,
+                                            content: joyRideText.sendRecords.content,
+                                            placement: 'top'
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#exportRecords",
+                                            title: joyRideText.exportRecords.title,
+                                            content: joyRideText.exportRecords.content,
+                                            placement: 'left'
+                                        },
+
+                                    ]
+                        };
+                        joyride.start = true;
+
+                        function openFilterTab(resumeJoyride){
+                            var step = joyride.config.steps[joyride.current];
+                            if(step.selector == "#closeFilterTab") { 
+                                $scope.showFilters = "recordTypesFilter"; }
+                            else {
+                                $scope.showFilters = step.selector.replace('#','').replace('TabJR', ''); }
+                            
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
+                        }
+
+                        function closeFilterTab(resumeJoyride){
+                            $scope.showFilters = false;
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
+                        }
+                        function openSubFilters(resumeJoyride){
+                           $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
+                           
+                           $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
+                        }
+                        function closeSubFilters(resumeJoyride){
+                            delete $scope.leftMenuFilters;
+                            
+                            $timeout(function(){
+                                resumeJoyride();
+                            }, 100);
+                        }
+
+                        function skipJoyride ()
+                        {
+                            delete $scope.leftMenuFilters;
+                            $scope.showFilters = false;
+                        }
+                    }
 
                     $scope.saveFilter = function (doc) {
 
