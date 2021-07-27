@@ -18,7 +18,7 @@
             <div class="registerpage-content">
 
                 <div class="alert alert-danger" ng-show="__error">
-                    <strong>Error: </strong>{{__error}}
+                    <strong>Error: </strong><span ng-bind="__error"></span>
                 </div>
 
                 <table>
@@ -55,7 +55,7 @@
                                     </div>
                         </td>
                         <td style="width:100%">
-                                <div style="margin: 5px 0 0 20px; text-transform: lowercase;" ><span class="badge">{{itemCount}}</span> {{filterStatus == "All" ? "" : filterStatus}} requests found</div>
+                                <div style="margin: 5px 0 0 20px; text-transform: lowercase;" ><span class="badge" ng-bind="itemCount"></span> {{filterStatus == "All" ? "" : filterStatus}} requests found</div>
                         </td>
                     </tr>
                 </table>
@@ -101,27 +101,26 @@
                                             <span ng-if="task.workflow.type.name=='deleteRecord'" class=" color-red">
                                                 DELETE </span>
                                             <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}">
-                                                <span> - {{task.workflow.data.metadata.schema|schemaName}}</span>
+                                                <span ng-bind="' - '+task.workflow.data.metadata.schema|schemaName"></span>
                                             </span>
                                         </span>
                                         <br>
-                                        <span class="bold" style="font-size: 14px;padding-left:28px;">{{task.workflow.data.title | lstring}}</span>
+                                        <span class="bold" style="font-size: 14px;padding-left:28px;" ng-bind="task.workflow.data.title | lstring"></span>
                                     </a>
                                 </div>
 
                                 <div class="col-md-2 hidden-xs hidden-sm" style="text-transform: uppercase;font-size:12px;font-weight: 450">
                                     <!-- schema -->
-                                    <span style="color:#888;">{{task.workflow.data.metadata.schema|schemaName}}</span>
+                                    <span style="color:#888;" ng-bind="task.workflow.data.metadata.schema|schemaName"></span>
                                 </div>
 
                                 <div class="col-sm-3 col-md-2 hidden-xs ">
                                     <!-- Requested on -->
-                                    <div style="text-transform: uppercase;font-weight: bold; font-size:12px; ">{{task.workflow.createdOn
-                                        | moment:'fromNow'}}</div>
+                                    <div style="text-transform: uppercase;font-weight: bold; font-size:12px; " ng-bind="task.workflow.createdOn | moment:'fromNow'"></div>
                                     <a rel="noopener"  style="font-size: 12px;color:#888;" href="mailto:{{task.workflow.createdBy_info.email}}">
-                                        by {{task.workflow.createdBy_info.firstName}}
-                                        {{task.workflow.createdBy_info.lastName}}
-                                        ({{task.workflow.createdBy_info.email}})
+                                        by <span ng-bind="task.workflow.createdBy_info.firstName"></span>
+                                        <span ng-bind="task.workflow.createdBy_info.lastName"></span>
+                                        (<span ng-bind="task.workflow.createdBy_info.email"></span>)
                                     </a>
                                 </div>
                                 <div class="col-sm-3 col-md-2 hidden-xs" >
@@ -133,28 +132,26 @@
                                                 <span ng-switch-when="approve">
                                                     <span class="bold color-green">APPROVED</span>
                                                     <span ng-if="task.activity.result.reason">
-                                                        ({{task.activity.result.reason}})</span>
-                                                    <div style="text-transform: uppercase;font-weight: bold; font-size: 12px; padding-top:5px;">
-                                                        {{task.activity.completedOn | moment:'fromNow'}}
-                                                    </div>
+                                                        (<span ng-bind="task.activity.result.reason"></span>)
+                                                    </span>
+                                                    <div style="text-transform: uppercase;font-weight: bold; font-size: 12px; padding-top:5px;" ng-bind="task.activity.completedOn | moment:'fromNow'"></div>
                                                     <a rel="noopener" style="font-size: 12px;color:#888;" href="mailto:{{task.activity.completedBy_info.email}}">
-                                                        by {{task.activity.completedBy_info.firstName}}
-                                                        {{task.activity.completedBy_info.lastName}}
-                                                        ({{task.activity.completedBy_info.email}})
+                                                        by <span ng-bind="task.activity.completedBy_info.firstName"></span>
+                                                        <span ng-bind="task.activity.completedBy_info.lastName"></span>
+                                                        (<span ng-bind="task.activity.completedBy_info.email"></span>)
                                                     </a>
                                                 </span>
 
                                                 <span ng-switch-when="reject">
                                                     <span class="bold color-red">REJECTED</span>
                                                     <span ng-if="task.activity.result.reason">
-                                                        ({{task.activity.result.reason}})</span>
-                                                    <div style="text-transform: uppercase;font-weight: bold; font-size: 12px;">
-                                                        {{task.activity.completedOn | moment:'fromNow'}}
-                                                    </div>
+                                                        (<span ng-bind="task.activity.result.reason"></span>)
+                                                    </span>
+                                                    <div style="text-transform: uppercase;font-weight: bold; font-size: 12px;" ng-bind="task.activity.completedOn | moment:'fromNow'"></div>
                                                     <a rel="noopener" style="font-size: 12px;color:#888;" href="mailto:{{task.activity.completedBy_info.email}}">
-                                                        by {{task.activity.completedBy_info.firstName}}
-                                                        {{task.activity.completedBy_info.lastName}}
-                                                        ({{task.activity.completedBy_info.email}})
+                                                        by <span ng-bind="task.activity.completedBy_info.firstName"></span>
+                                                        <span ng-bind="task.activity.completedBy_info.lastName"></span>
+                                                        (<span ng-bind="task.activity.completedBy_info.email"></span>)
                                                     </a>
                                                 </span>
                                             </div>
@@ -182,7 +179,8 @@
                                             </div>
                                             <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating">
                                                 <span style="font-size: 12px;color:#888;">Expires on
-                                                    {{task.workflow.workflowExpiryDate|formatDate}}</span>
+                                                    <span ng-bind="task.workflow.workflowExpiryDate|formatDate"></span>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -205,23 +203,21 @@
                                     <div class="col-xs-5 col-lg-5 col-md-5">
                                         <!-- Description -->
                                         <strong ng-show="history.workflow.result.documentID||history.workflow.data.documentID"><a
-                                                translation-url ng-href="/database/record/{{(history.workflow.result.documentID||history.workflow.data.documentID)|encodeURIComponent}}">{{history.workflow.data.title
-                                                | lstring}}</a>
+                                                translation-url ng-href="/database/record/{{(history.workflow.result.documentID||history.workflow.data.documentID)|encodeURIComponent}}" ng-bind="history.workflow.data.title | lstring"></a>
                                         </strong>
                                         <strong ng-hide="history.workflow.result.documentID||history.workflow.data.documentID"><a
-                                                translation-url href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;">{{history.workflow.data.title
-                                                | lstring}}</a>
+                                                translation-url href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;" ng-bind="history.workflow.data.title | lstring"></a>
                                         </strong>
                                         <br>
-                                        <span ng-show="history.workflow.data.additionalInfo">{{history.workflow.data.additionalInfo}}</span>
+                                        <span ng-show="history.workflow.data.additionalInfo" ng-bind="history.workflow.data.additionalInfo"></span>
                                     </div>
                                     <div class="col-xs-2 col-lg-2 col-md-2">
                                         <!-- Requested on -->
-                                        <div>{{history.workflow.createdOn|date:'short'}}</div>
+                                        <div ng-bind="history.workflow.createdOn|date:'short'"></div>
                                         <div>
-                                            <em> by {{history.workflow.createdBy_info.firstName}}
-                                                {{history.workflow.createdBy_info.lastName}}
-                                                ({{task.workflow.createdBy_info.email}})</em>
+                                            <em> by <span ng-bind="history.workflow.createdBy_info.firstName"></span>
+                                                <span ng-bind="history.workflow.createdBy_info.lastName"></span>
+                                                (<span ng-bind="task.workflow.createdBy_info.email"></span>)</em>
                                         </div>
                                     </div>
                                     <div class="col-xs-2 col-lg-2 col-md-2" style="padding-left:0px">
@@ -234,16 +230,16 @@
                                                             Approved</span>
                                                         <span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i>
                                                             Rejected</span>
-                                                        <span ng-show="history.activity.result.reason"><STRONG> for
-                                                                {{history.activity.result.reason | limitTo:50}}
-                                                            </STRONG></span>
+                                                        <span ng-show="history.activity.result.reason">
+                                                            <STRONG ng-bind="'for'+history.activity.result.reason | limitTo:50"></STRONG>
+                                                        </span>
                                                     </span>
-                                                    {{history.workflow.activities.name}}
+                                                    <span ng-bind="history.workflow.activities.name"></span>
                                                 </div>
                                             </div>
                                         </div>
                                         <div ng-show="history.workflow.state!='completed'">
-                                            <div ng-hide="history.activity.name='publishRecord'">{{history.activity.name}}*</div>
+                                            <div ng-hide="history.activity.name='publishRecord'" ng-bind="history.activity.name+'*'"></div>
                                         </div>
                                     </div>
                                     <!-- </div> -->
@@ -252,7 +248,7 @@
 
                         </div>
                         <h4 style="margin:20px;color:#999; " ng-show="!tasks || tasks.length==0">
-                            No <span style="text-transform: lowercase">{{filterStatus}}</span> requests found.
+                            No <span style="text-transform: lowercase" ng-bind="filterStatus"></span> requests found.
                         </h4>
                     </div>
                 </div>
