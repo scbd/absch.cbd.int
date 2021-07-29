@@ -19,10 +19,10 @@
 
         <div class="alert alert-danger text-center" ng-show="error" ng-if="error">
             <strong>Error as occured...</strong>
-            <div>{{error}}</div>
+            <div ng-bind="error"></div>
         </div>
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentSuccess">
-            <h2>Thank you for downloading document {{documentUID}}.</h2>
+            <h2>Thank you for downloading document <span ng-bind="documentUID"></span>.</h2>
             <p>If the document did not download try clicking
                 <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">here...</a>
             </p>
@@ -30,11 +30,11 @@
             </br>
             </br>
             </br>
-            This window will close automatically in {{timeLaspe}} seconds.
+            This window will close automatically in <span ng-bind="timeLaspe"></span> seconds.
         </div>
 
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentError">
-            <h2>Thank you for requesting document {{documentUID}}.</h2>
+            <h2>Thank you for requesting document <span ng-bind="documentUID"></span>.</h2>
             <p>The document does not exists, if you think this file should be available, please report to
                 <a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a>
             </p>
@@ -46,8 +46,8 @@
                     <div class="well">
                         <h3 style="margin:0 0 10px 0;padding:0;border-bottom:1px solid #999;">Record Information</h3>
                         <div> 
-                            <span style="font-size:12px">Type: </span> 
-                            {{internalDocumentInfo.metadata.schema | schemaName}} </div>
+                            <span style="font-size:12px">Type: </span>
+                            <span ng-bind="internalDocumentInfo.metadata.schema | schemaName"></span> </div>
                         <div>
                             <span style="font-size:12px">Status: </span>
                             <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
@@ -57,7 +57,7 @@
                                 PUBLISHED
                             </span>
                             <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
-                                [Locked: Pending {{workflowRequestType}} request]
+                                [Locked: Pending <span ng-bind="workflowRequestType"></span> request]
                             </span>
                             <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
                                 DELETED
@@ -129,7 +129,7 @@
                 <li ng-if="loadingRevisions"  ng-disabled="isComparing">
                     <a ng-href="#"><i class="fa fa-spin fa-spinner" ></i> Loading...</a></li>
                 <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions"  ng-disabled="isComparing" ng-class="{'active':revision.revision==comparingRevision}">
-                    <a ng-href="#" ng-click="showDifference(revision.revision)">{{revision.uniqueIdentifier}}</a>
+                    <a ng-href="#" ng-click="showDifference(revision.revision)" ng-bind="revision.uniqueIdentifier"></a>
                 </li>
             </ul>
             <div ng-if="isComparing">

@@ -57,14 +57,14 @@
 					ng-if="status=='error'">
 					<div class="col-md-12" ng-if="!printMode">
 						<div class="alert alert-danger" style="margin:20px;">
-							<strong>{{error}}</strong>
+							<strong ng-bind="error"></strong>
 						</div> </div>
 					</div>
 					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
 					ng-if="status=='ready'" ng-class="{'no-border':printMode}">
 						<div class="col-md-2" ng-if="!printMode">
 							<div class="" style="width:100%;">
-								<br> This draft document was shared with you by : {{sharedData.sharedBy_Info.firstName}} {{sharedData.sharedBy_Info.lastName}}
+								<br> This draft document was shared with you by : <span ng-bind="sharedData.sharedBy_Info.firstName"></span> <span ng-bind="sharedData.sharedBy_Info.lastName"></span>
 								<br>
 								<br>
 								
