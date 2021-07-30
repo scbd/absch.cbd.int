@@ -23,6 +23,7 @@
 <script>
     import i18n from '../../locales/en/components/kb.json';
     export default {
+        name:'kbAutoCompleteSearch',
         data:  () => {
             return {
             }

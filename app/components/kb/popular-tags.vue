@@ -15,6 +15,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import tagJson from '../../app-data/kb-categories.json';
 	export default {
+    name:'kbpopularTags',
 		props:{
 		},
 		data:  () => {

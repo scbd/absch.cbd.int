@@ -20,6 +20,7 @@ import i18n from '../../locales/en/components/kb.json';
 import CategoriesGroup from './article-categories.vue';
 
 export default {
+    name:'KbArticleByRelation',
     components:{
         CategoriesGroup
     },

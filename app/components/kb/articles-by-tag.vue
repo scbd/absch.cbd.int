@@ -56,6 +56,7 @@
     import KbCategories from '../../app-data/kb-categories.json';
 
 	export default {
+	  name:'KbArticlesByTag',
 		components:{
 			relevantArticles,
 			globalPagination,

@@ -19,7 +19,7 @@
   import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
   export default {
-    name:'kbHome',
+    name:'kbArticles',
     components:{
       articleDetails,
       AutoCompleteSearch

@@ -30,6 +30,7 @@
 	import popularTags from './popular-tags.vue';
 	import ArticlesApi from './article-api';
 	export default {
+      name:'kbRightSideBar',
 		components:{
 			CategoriesGroup,
 			popularTags

@@ -9,6 +9,7 @@
 import Pagination from 'vue-pagination-2';
 
 export default {
+    name:'kbPagination',
     components: { vPagination : window["Pagination"] },
     props:{
         recordCount     : Number,

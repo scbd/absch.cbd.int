@@ -44,6 +44,7 @@
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
 	export default {
+    name:'KbArticleDetails',
 		components: {
 			relevantArticles,
 			popularTags

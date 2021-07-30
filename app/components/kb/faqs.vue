@@ -38,6 +38,7 @@
     import KbCategories from '../../app-data/kb-categories.json';
 
 	export default {
+		name:'kbFaqsList',
 		components:{
 			Paginate
 		},

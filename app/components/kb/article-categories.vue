@@ -33,6 +33,7 @@
 	import KbCategories from '~/app-data/kb-categories.json'
 	import i18n from '../../locales/en/components/kb.json';
 	export default {
+    name:'KbArticleCategories',
 		props:{
 		},
 		data:  () => {

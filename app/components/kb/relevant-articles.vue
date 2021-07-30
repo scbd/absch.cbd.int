@@ -20,6 +20,7 @@ import ArticlesApi from './article-api';
   import CategoriesGroup from './article-categories.vue';
 
 export default {
+    name:'kbRelevantArticles',
     components:{
         CategoriesGroup
     },
