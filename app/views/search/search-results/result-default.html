@@ -18,16 +18,19 @@
        
                 <div class="title bold truncate-mobile-title" style="font-size:108%;">
                     <span ng-bind="doc.rec_title"></span>
-                    <span ng-if="doc.publicationYear_i" ng-bind="'('+doc.publicationYear_i+')'"></span>
-                  </div>
+                </div>
                 <div ng-if="!doc.highlight">
                     <!-- TODO: need to remove description field from index and use summary -->
                     <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t"><span  ng-bind="doc.summary_t|limitTo:500"></span>
                         <span ng-if="doc.summary_t.length > 500">...</span>
+                        <span class="pull-right" ng-if="::canShowIcons(doc.schema_s)"
+                            ng-include="'/app/views/forms/view/bch/icons.html'"></span>
                     </div>
                     <!-- TODO: record summary copied description into rec_summary which needs to be replaced by summary_t in frontend and backend -->
                     <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary"><span ng-bind="doc.rec_summary|limitTo:500"></span>
                         <span ng-if="doc.rec_summary.length > 500">...</span>
+                        <span class="pull-right" ng-if="::canShowIcons(doc.schema_s)"
+                            ng-include="'/app/views/forms/view/bch/icons.html'"></span>
                     </div>
 
                     <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
@@ -100,10 +103,7 @@
                         <span class="last-span">
                             <span ng-bind="doc.startDate_dt | moment:'utc' | formatDate"></span> - <span ng-bind="doc.endDate_dt | moment:'utc' | formatDate"></span>
                             | <span ng-bind="doc.eventCity_s"></span> | <span ng-bind="doc.eventCountry_EN_t"></span></span>
-                    </li>
-                    <li  ng-if="::canShowIcons(doc.schema_s)" style="position: absolute;">
-                        <div ng-include="'/app/views/forms/view/bch/icons.html'"></div>
-                    </li>
+                    </li>                  
                 </ul>
             </div>
         </div>

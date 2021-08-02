@@ -26,7 +26,7 @@ import 'views/forms/view/record-loader.directive';
                 });
 
                 $scope.canShowIcons = function(schema){
-                    return _.includes(['modifiedOrganism', 'nationalRiskAssessment', 'independentRiskAssessment', 'biosafetyDecision'], schema);
+                    return _.includes(['modifiedOrganism', 'nationalRiskAssessment', 'independentRiskAssessment', 'biosafetyDecision', 'biosafetyLaw', 'authority'], schema);
                 }
 
                 
