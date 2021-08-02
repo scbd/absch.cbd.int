@@ -2213,7 +2213,9 @@ a.disabled{
 .edit-biosafety-decision-directive .communication-decisions ul .other-term table>tbody>tr>td:first-child{
     width: 35% !important;
 }
-
+.edit-biosafety-decision-directive .indent-subject-decision .km-control-group div[km-term-radio]{
+   margin-left: 20px;
+}
 .light-label{
     font-size: 14px;
     font-weight: 400!important;
