@@ -86,16 +86,16 @@
 			</div>
 			<div ng-if="document.documents||document.documentsSummary">
 				<label>Risk assessment report / summary</label>
- 			<div class="km-value" compare-val>
-				<km-link-list  ng-model="document.documents"></km-link-list>
-				<div ng-if="document.documentsSummary">
-				<div compare-val>
-					<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
+				<div class="km-value" compare-val>
+					<km-link-list  ng-model="document.documents"></km-link-list>
+					<div ng-if="document.documentsSummary">
+						<div compare-val>
+							<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-		</div>
-		
 		<div ng-if="document.adverseEffects || document.adverseEffectsLikelihood || document.adverseEffectsConsequence ||
 			document.adverseEffectsOverallRisk || document.adverseEffectsRecommendation || document.riskManagementStrategies ||
 			document.receivingEnvironment || document.detectionMethod">
