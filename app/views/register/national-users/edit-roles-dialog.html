@@ -42,8 +42,8 @@
     <div class="modal-footer">
 
         <div class="pull-left" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
-            <div ng-show="editRolesDialogCtrl.stats().grant" ><em>{{editRolesDialogCtrl.stats().grant}} role(s) will be granted</em></div>
-            <div ng-show="editRolesDialogCtrl.stats().revoke"><em>{{editRolesDialogCtrl.stats().revoke}} role(s) will be revoked</em></div>
+            <div ng-show="editRolesDialogCtrl.stats().grant" ><em><span ng-bind="editRolesDialogCtrl.stats().grant"></span> role(s) will be granted</em></div>
+            <div ng-show="editRolesDialogCtrl.stats().revoke"><em><span ng-bind="editRolesDialogCtrl.stats().revoke"></span> role(s) will be revoked</em></div>
         </div>
 
         <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">Cancel</button>
