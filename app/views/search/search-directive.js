@@ -686,7 +686,7 @@ import 'views/reports/matrix/data-matrix.directive';
 
                     function loadBCHKeywordFilters() {
                         var promises = []
-                        promises.push(focalPointTypes().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(getFocalPointTypes().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'decisionTypes'             )}));
                         promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'legislationAgreementTypes' )}));
                         promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
@@ -728,16 +728,17 @@ import 'views/reports/matrix/data-matrix.directive';
                     
                     }
 
-                    function focalPointTypes(){
-                        return loadJsonFile('app-data/bch/focalpoint-category.json')
-                                .then(function(keywords){
-                                    return _.map(keywords, function (title, key) {
-                                        var keyword = { identifier:key };
-                                        keyword.title = {};
-                                        keyword.title[locale] = title;
-                                        return keyword;
-                                    });
-                                })
+                    async function getFocalPointTypes(){
+                        const chFolder = realm.is('BCH') ? 'bch' : 'abs';
+                        const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
+
+                        categories.map(category=>{
+                            return { 
+                                identifier: category.key,
+                                title     : { [locale] : category.title },
+                                functions : category.categories
+                            };
+                        });
                     }
                     function loadJsonFile(filePath){
                         var deferred = $q.defer();                        
@@ -1258,7 +1259,7 @@ import 'views/reports/matrix/data-matrix.directive';
                     this.combinationField         = combinationField        ;
                     this.sanitizeFacets           = sanitizeFacets          ;
 
-                    this.focalPointTypes          = focalPointTypes
+                    this.getFocalPointTypes       = getFocalPointTypes
             }]//controller
         };
     });

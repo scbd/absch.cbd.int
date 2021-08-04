@@ -152,7 +152,7 @@
            
             <div id="divTable"  style="max-height:480px;overflow:scroll; font-size:11px; ">               
                 <div class="col-md-12">
-                    <label class="pull-right" style="position: absolute;right:3%">
+                    <label class="pull-right" style="position: absolute;right:3%" ng-if="filter.relatedField">
                         <input type="checkbox" ng-model="searchRelated"> Search related
                     </label>
                     <div km-term-check ng-model="treeViewSelected" terms="treeOptions()" binding-type="term[]" 

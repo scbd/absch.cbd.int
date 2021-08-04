@@ -1,11 +1,15 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading  bg-blue"> <h4>{{getNFPText(document.categories) | uppercase}}</h4></div>
-	<div class="record-body panel-body">
-		
+	<div class="panel-heading  bg-blue"> 
+		<h4>
+			<span ng-bind="::document.header.schema|schemaName"></span>
+			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
+		</h4>
+	</div>
+	<div class="record-body panel-body">	
 			
 		<document-date></document-date><br>
 
-		<div ng-show="document.government">
+		<div ng-if="document.government">
 			<label>Country</label>
 			<span class="km-value">
 				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
@@ -13,27 +17,34 @@
 			</span>
 		</div>
 
-		<div ng-show="document.firstName||document.lastName">
+		<div ng-if="document.firstName||document.lastName">
 			<label>Name</label>
 			<span class="km-value">
 				{{document.title | lstring:locale}} {{document.firstName | lstring:locale}} {{document.lastName | lstring:locale}}
 			</span>
 		</div>
-
-		<div ng-show="focalPointDetails.description_EN_t">
+		<div ng-if="document.categories">
+			<label>Functions</label>
+			<span class="km-value">
+				<ul class="list">
+					<li ng-repeat="category in document.categories" ng-bind="nfpCategory(category)||category"></li>
+				</ul>
+			</span>
+		</div>
+		<div ng-if="focalPointDetails.description_EN_t">
 			<label>Description</label>
 			<span class="km-value" ng-bind-html="focalPointDetails.description_EN_t">
 			</span>
 		</div>
 
-		<div ng-show="document.designation">
-			<label>Function</label>
+		<div ng-if="document.designation">
+			<label>Designation</label>
 			<span class="km-value">
 				{{document.designation|lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.department">
+		<div ng-if="document.department">
 			<label>Department</label>
 			<span class="km-value">
 				{{document.department|lstring:locale}}
@@ -41,17 +52,17 @@
 		</div>
 
 
-		<div ng-show="document.organization">
+		<div ng-if="document.organization">
 			<label>Organization</label>
 			<span class="km-value">
 				{{document.organization|lstring:locale}}
 			</span>
 		</div>
 
-		<div ng-show="document.emails">
+		<div ng-if="document.emails">
 			<label>Email</label>
 			<span class="km-value">
-				<ul style="list-style-type: none;padding-left:0;">
+				<ul class="list">
 					<li ng-repeat="item in document.emails">
 						<a rel="noopener" translation-url  href="mailto:{{item}}"><i class="fa fa-envelope-o" ></i> {{item}}</a>
 					</li>
@@ -59,10 +70,10 @@
 			</span>
 		</div>
 
-		<div ng-show="document.phones||document.mobiles">
+		<div ng-if="document.phones||document.mobiles">
 			<label>Telephone</label>
 			<span class="km-value">
-				<ul style="list-style-type: none;padding-left:0;">
+				<ul class="list">
 					<li ng-repeat="item in document.phones" ng-if="document.phones">
 						<i class="fa fa-phone" ></i> {{item}}
 					</li>
@@ -75,10 +86,10 @@
 
 
 
-		<div ng-show="document.faxes">
+		<div ng-if="document.faxes">
 			<label>Fax</label>
 			<span class="km-value">
-				<ul style="list-style-type: none;padding-left:0;">
+				<ul class="list">
 					<li ng-repeat="item in document.faxes">
 						<i class="fa fa-fax" ></i> {{item}}
 					</li>
@@ -86,7 +97,7 @@
 			</span>
 		</div>
 
-		<div ng-show="focalPointDetails.treaty_CEN_ss">
+		<div ng-if="focalPointDetails.treaty_CEN_ss">
 				<label>Treaties</label>
 				<div class="km-value" >
 					<ul class="list">
@@ -94,7 +105,7 @@
 					</ul>
 				</div>
 			</div>
-		<div ng-show="focalPointDetails.url_ss">
+		<div ng-if="focalPointDetails.url_ss">
 			<label>Link to the information on the CBD website</label>
 			<span class="km-value">
 				<a rel="noopener" translation-url  ng-href="{{focalPointDetails.url_ss[0]|encodeURIComponent}}" target="_blank">{{focalPointDetails.url_ss[0]}}</a>
