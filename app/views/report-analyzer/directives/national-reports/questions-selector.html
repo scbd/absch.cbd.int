@@ -46,10 +46,10 @@
                     <li ng-repeat="c in selectedRegions">
                         <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties'">
                             <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i>
-                            {{regionsMap[c].title|lstring}}
+                            <span ng-bind="regionsMap[c].title|lstring"></span>
                         </span>
                         <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties'">                            
-                            {{npCountries[c].title|lstring}}
+                            <span ng-bind="npCountries[c].title|lstring"></span>
                         </span>
                     </li>
                 </ul>

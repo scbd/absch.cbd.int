@@ -34,8 +34,8 @@
     </span>
 
     <span ng-switch="::question.key[0]">
-        <b ng-switch-when="S">Survey Question {{::cleanupQuestionNumber(question.number)}}</b>
-        <b ng-switch-default> Question {{::cleanupQuestionNumber(question.number)}}</b>
+        <b ng-switch-when="S">Survey Question <span ng-bind="::cleanupQuestionNumber(question.number)"></span></b>
+        <b ng-switch-default> Question <span ng-bind="::cleanupQuestionNumber(question.number)"></span></b>
     </span>
 
     <div><b style="white-space:pre-line" ng-bind-html="::question.title"></b></div>
@@ -80,7 +80,7 @@
                 </div>
             </td>
             <td class="text-center region" ng-class="{ first: $first, last: $last, expanded: expanded[cell.identifier] }" ng-style="  { 'background-color': cell.backgroundColor[sumType], 'color' : cell.textColor[sumType] }" ng-repeat-start="cell in ::row.cells" >
-                <span class="cell-value">{{cell[sumType] | number : sumType=='sum'? 0 : digits}}</span>
+                <span class="cell-value" ng-bind="cell[sumType] | number : sumType=='sum'? 0 : digits"></span>
                 <div ng-if="cell.previous">
                     <span class="cell-delta" ng-class="{ 'inc' : cell.previous[sumType].delta>0, 'dec' : cell.previous[sumType].delta<0, 'stable' : cell.previous[sumType].delta==0 }" data-toggle="tooltip" data-original-title="{{cell.previous[sumType].value}}{{sumType!='sum'?'%':''}}" ng-bind="cell.previous[sumType].delta  | number : sumType=='sum'? 0 : digits"></span>
                 </div>
