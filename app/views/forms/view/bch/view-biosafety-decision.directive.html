@@ -290,7 +290,7 @@
 		<div ng-if="document.reasons">
 			<label>Reasons</label>
 			<div compare-val>
-				<km-value-ml value="document.reasons" locales="locale"></km-value-ml>
+				<km-value-ml html value="document.reasons" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
@@ -466,7 +466,7 @@
 <!--=============SECTION I Start ========================-->
 
 	<div ng-if="document.documents">
-		<legend>Decision document</legend>
+		<legend>Document on the decision, communication, notification or declaration</legend>
 		<div class="km-value" compare-val="documents">
 			<km-link-list  ng-model="document.documents"></km-link-list>
 			

@@ -30,9 +30,9 @@
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
 												<div class="help-block" ng-if="isEuMember">
-													<u><i>Important note for European Union (EU) Members only</i></u>: if the decision applies to <i>all</i> EU Member States, 
+													<u><i>Important note for European Union (EU) Members only:</i></u> if the decision applies to EU Member States,
 													the record must be published by the EU’s BCH focal point. The EU BCH focal point should select "European Union" 
-													in response to this question and the published record will appear in the country profiles of all EU Member States.
+													in response to this question and the published record will appear in the country profiles of the EU Member States.
 												</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
 													filter="genericFilter" mapping="genericMapping" selectbox="true" ng-change="onCountryChange(document.government.identifier)" placeholder="Please select a country...">
@@ -129,7 +129,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-12">
+										<div class="col-xs-12 indent-subject-decision">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group " name="otherDecisions" required caption="Other decisions">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
@@ -138,7 +138,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-12">
+										<div class="col-xs-12 indent-subject-decision">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="Communications, notifications and declarations">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
@@ -332,7 +332,7 @@
 									<div class="row" ng-if="decisionResult.reasons">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="reasons" caption="Provide reasons">
-												<div km-textbox-ml name="reasons" required ng-model="document.reasons" locales="document.header.languages"></div>
+												<div km-rich-textbox ng-model="document.reasons" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
@@ -521,10 +521,10 @@
 							<!-- ====================Section I Strat=================== -->
 							<section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions || decisions.communicationDecision)">								
 								<div class="well no-shadow bg-white">
-									<legend>Decision document</legend>
+									<legend>Document on the decision, communication, notification or declaration</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="documents" required caption="Decision document">
+											<div class="km-control-group" name="documents" required caption="Document text">
 												<div class="help-block">An attachment is preferred. Otherwise, provide the location of the document
 													 (i.e. web address including the URL of the website (e.g. http://www.cbd.int) 
 													and the name of the website (e.g. “Convention on Biological Diversity”).</div>

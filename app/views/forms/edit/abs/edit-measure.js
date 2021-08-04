@@ -234,15 +234,12 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
             $scope.setDocument({});
 
             $scope.onContactQuery = function(searchText){
-                
                 var queryOptions = {
-                    schemas	  : ['authority', 'contact'],
-                    realm     : realm.value,
-                    searchText: searchText
+                schemas : ['contact', 'authority'],
+                realm : realm.value,
+                searchText: searchText,
+                query : `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact)`
                 }
-                if ($scope.document && $scope.document.government)
-                    queryOptions.government = $scope.document.government.identifier;
-
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
