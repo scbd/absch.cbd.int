@@ -40,16 +40,14 @@ import 'services/main';
 
       return $scope.onBuildDocumentSelectorQuery(queryOptions);
     }
+    // ToDo: not tested
     $scope.oncontactQuery = function(searchText){
-        
       var queryOptions = {
         schemas	  : ['contact', 'authority', 'focalPoint'],
         realm     : realm.value,
-        searchText: searchText
+        searchText: searchText,  
+        query : `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact) OR (schema_s:focalPoint) `
       }
-      if ($scope.document && $scope.document.government)
-             queryOptions.government = $scope.document.government.identifier;
-
       return $scope.onBuildDocumentSelectorQuery(queryOptions);
     }
     //==================================
