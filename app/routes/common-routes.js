@@ -4,14 +4,12 @@ import "angular-route";
 import "services/main";
 import "components/scbd-angularjs-services/main";
 import routesLabels from '~/app-data/common-routes-labels.json';
-import realmConfigurations from 'realmConf';
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 
 var baseUrl = require.toUrl("").replace(/\?v=.*$/, "");
 var lang = window.scbdApp.lang;
-var realmConfig = _.find(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
 
 app.config(["$provide", $provide => {
   $provide.decorator("$templateCache", ["$delegate", $delegate => {
@@ -130,8 +128,8 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/dashboard',                                         {"redirectTo":"/register/dashboard","label":routesLabels.dashboard,"resolve":{}}). 
   whenAsync('/register/dashboard',                                { ...mapView(angularViewWrapper),                    "label":routesLabels.dashboard,"resolve":{ ...commonRouteUrls.register,                                          "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/requests',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.pendingRequests,"resolve":{ ...commonRouteUrls.register_requests,                                           "securized":securize()},"param":"true","resolveController":true}). 
-  whenAsync('/register/user-preferences/:tab?',                   { ...mapView(angularViewWrapper),                    "label":(realmConfig.protocolShortName+" "+routesLabels.admin),"resolve":{ ...commonRouteUrls.register_user_preferences_tab,                               "securized":securize()},"param":"true","resolveController":true}).
-  whenAsync('/register/admin',                                    { ...mapView(angularViewWrapper),                    "label":(realmConfig.protocolShortName+" "+routesLabels.admin),"resolve":{ ...commonRouteUrls.register_admin,                                              "securized":securize(['Administrator'])},"param":"true","resolveController":true}).
+  whenAsync('/register/user-preferences/:tab?',                   { ...mapView(angularViewWrapper),                    "label":routesLabels.admin,"resolve":{ ...commonRouteUrls.register_user_preferences_tab,                               "securized":securize()},"param":"true","resolveController":true}).
+  whenAsync('/register/admin',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.admin,"resolve":{ ...commonRouteUrls.register_admin,                                              "securized":securize(['Administrator'])},"param":"true","resolveController":true}).
   whenAsync('/register/notifications',                            { ...mapView(angularViewWrapper),                    "label":routesLabels.registerNotifications,"resolve":{ ...commonRouteUrls.register_notifications,                                      "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/stats',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.registerStats,"resolve":{ ...commonRouteUrls.register_stats,                                              "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/reports',                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.reports,"resolve":{ ...commonRouteUrls.register_reports,                                            "securized":securize()},"resolveController":true}). 
