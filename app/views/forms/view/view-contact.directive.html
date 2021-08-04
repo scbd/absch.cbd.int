@@ -18,20 +18,20 @@
 			<div ng-show="document.government">
 				<label>Country</label>
 				<div class="km-value" compare-val>
-					{{document.government | term:locale}}
+					<span ng-bind="document.government | term:locale"></span>
 					<span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
 			<div>
                 <label>Name</label>
 				<div class="km-value" compare-val>
-					{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i>
+					<span ng-bind="document.organization | lstring:locale"></span> <i ng-show="document.organizationAcronym">(<span ng-bind="document.organizationAcronym | lstring:locale"></span>)</i>
 				</div>
 			</div>
 			<div ng-show="document.organizationType">
 				<label>Type of organization</label>
 				<div class="km-value" compare-val>
-					{{document.organizationType | term:locale}}
+					<span ng-bind="document.organizationType | term:locale"></span>
 				</div>
 			</div>
 
@@ -42,7 +42,7 @@
 			 <div ng-show="document.government">
   			   <label>Country</label>
   			   <div class="km-value" compare-val>
-  				   {{document.government | term:locale}}
+  				   <span ng-bind="document.government | term:locale"></span>
 				   <span ng-party-status government="document.government" id="government"></span>
   			   </div>
   		   </div>
@@ -50,7 +50,7 @@
             <div>
 				<label>Name</label>
 				<div class="km-value" compare-val>
-					{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}
+					<span ng-bind="document.prefix | lstring:locale"></span> <span ng-bind="document.firstName"></span> <span ng-bind="document.middleName"></span> <span ng-bind="document.lastName"></span>
 				</div>
 			</div>
 
@@ -58,14 +58,14 @@
 			<div ng-show="document.designation">
 				<label>Job title</label>
 				<div class="km-value" compare-val>
-					{{document.designation| lstring:locale}}
+					<span ng-bind="document.designation| lstring:locale"></span>
 				</div>
 			</div>
 
             <div ng-show="document.department">
 				<label>Department / Division / Unit</label>
 				<div class="km-value" compare-val>
-					{{document.department| lstring:locale}}
+					<span ng-bind="document.department| lstring:locale"></span>
 				</div>
 			</div>
 
@@ -93,7 +93,7 @@
             <label>Phone number(s)</label>
             	<div class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="item in document.phones">{{item}}</li>
+						<li ng-repeat="item in document.phones"><span ng-bind="item"></span></li>
 					</ul>
 				</div>
         </div>
@@ -102,7 +102,7 @@
             <label>Fax number(s)</label>
             	<div class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="item in document.faxes">{{item}}</li>
+						<li ng-repeat="item in document.faxes"><span ng-bind="item"></span></li>
 					</ul>
 				</div>
         </div>
@@ -112,7 +112,7 @@
             <div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.emails">
-						<a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a></li>
+						<a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}" ng-bind="item"></a></li>
 				</ul>
 			</div>
         </div>
@@ -121,7 +121,7 @@
 			<label>Website address(es)</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="item in document.websites">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a>
 				</div>
 			</div>
         </div>
@@ -138,7 +138,7 @@
 					<label>Other relevant website addresses and/or attached documents</label>
 					<div compare-val>
 						<div class="km-value" ng-repeat="item in document.relevantDocuments">
-							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a>
 						</div>
 					</div>
 				</div>
