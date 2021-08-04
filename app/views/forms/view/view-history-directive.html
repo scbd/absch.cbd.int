@@ -16,7 +16,7 @@
             <tr>
                 <td style="white-space:nowrap;">
                     <a rel="noopener" translation-url  ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
-                        <strong>{{document | uniqueID}}</strong>
+                        <strong  ng-bind="document | uniqueID"></strong>
                     </a>
                 </td>
                 <td>
@@ -25,7 +25,7 @@
                             <span class="bold color-red"> REVOKED</span>
                         </span>
                         <span ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))">
-                            <span class="bold color-grey" >{{(document.type | schemaShortName) === 'IRCC' ? "NOT VALID" : "OLD VERSION"}}</span>
+                            <span class="bold color-grey" ><span ng-bind='(document.type | schemaShortName) === "IRCC" ? "NOT VALID" : "OLD VERSION"'></span></span>
                         </span>
                         <span ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))">
                             <span class="bold color-green"> PUBLISHED</span>
@@ -37,11 +37,11 @@
                 </td>
                 <td  class="hidden-xs" >
                     <div ng-show="!publicView">
-                        <span>{{document.updatedBy.firstName}} {{document.updatedBy.lastName}} ({{document.updatedBy.email}})</span> 
-                        <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold">{{document.updatedOn | formatDateWithTime}}</span>
+                        <span><span ng-bind="document.updatedBy.firstName"></span> <span ng-bind="document.updatedBy.lastName"></span> (<span ng-bind="document.updatedBy.email"><span>)</span>
+                        <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold" ng-bind="document.updatedOn | formatDateWithTime"></span>
                         </div>
-                        
-                        <div ng-show="publicView"> on <span style="font-weight:500;">{{document.updatedOn | formatDateWithTime}}</span></div>
+
+                        <div ng-show="publicView"> on <span style="font-weight:500;" ng-bind="document.updatedOn | formatDateWithTime"></span></div>
 
                     <div ng-show="document.body.amendmentDescription">
                         <span ng-show="document.body.amendmentDescription">
@@ -61,12 +61,12 @@
                 </td>
                 <td ng-if="!publicView"  class="hidden-xs">
                     <div> 
-                        <span>{{document.submittedBy.firstName}} {{document.submittedBy.lastName}} ({{document.submittedBy.email}})
-                            </span> <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold">{{document.submittedOn | formatDateWithTime}}</span></div>
+                        <span><span ng-bind="document.submittedBy.firstName"></span> <span ng-bind="document.submittedBy.lastName"></span> (<span ng-bind="document.submittedBy.email"></span>)
+                            </span> <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold" ng-bind="document.submittedOn | formatDateWithTime"></span></div>
                 </td>
             </tr>
         </tbody>
     </table>
-    <span ng-if="error">{{error}}</span>
+    <span ng-if="error" ng-bind="error"></span>
 
 </div>
