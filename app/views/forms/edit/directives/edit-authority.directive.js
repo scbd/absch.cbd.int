@@ -143,19 +143,18 @@ import 'views/forms/view/view-authority.directive';
                 }
 
                 $scope.onContactQuery = function(searchText){
-                  
                     var queryOptions = {
                         realm     : realm.value,
-                        fieldQueries: ['type_s: person'],
                         searchText: searchText
                     }
-                    if ($scope.document && $scope.document.government)
-                         queryOptions.government = $scope.document.government.identifier;
-                    
-                    if($scope.isAbs)
-                        queryOptions.schemas = ['contact', 'authority']
-                    else
-                        queryOptions.schemas = ['contact']
+                    if($scope.isAbs){
+                        queryOptions.schemas = ['contact', 'authority'];
+                        queryOptions.query = `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact AND type_s: person)`;
+                    }
+                    else{
+                        queryOptions.schemas = ['contact'];
+                        queryOptions.fieldQueries = ['type_s: person'];
+                    }
 
                     return $scope.onBuildDocumentSelectorQuery(queryOptions);
 
