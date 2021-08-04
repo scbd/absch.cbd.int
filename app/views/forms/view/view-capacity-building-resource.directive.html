@@ -12,33 +12,33 @@
 
 		 <div ng-show="document.title">
 			<label>Title</label>
-			<div class="km-value km-pre">{{document.title | lstring:locale}}</div>
+			<div class="km-value km-pre" ng-bind="document.title | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.resourceTypes">
 			<label>Type of resource</label>
             <div class="km-value">
 			<ul class="list">
-				<li ng-repeat="resourceType in document.resourceTypes">{{resourceType | term:locale}}</li>
+				<li ng-repeat="resourceType in document.resourceTypes"><span ng-bind="resourceType | term:locale"></span></li>
 			</ul>
             </div>
 		</div>
 
 		<div ng-show="document.fileFormat">
 			<label>Format/File type</label>
-			<div class="km-value">{{document.fileFormat | term:locale}} </div>
+			<div class="km-value" ng-bind="document.fileFormat | term:locale"> </div>
 		</div>
 
 		<div ng-show="document.formatDetails">
 			<label>Format details</label>
-			<div class="km-value km-pre">{{document.formatDetails | lstring:locale}}</div>
+			<div class="km-value km-pre" ng-bind="document.formatDetails | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.purpose">
 			<label>Please identify the main purpose of the resource</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.purpose">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.purpose"><span ng-bind="term | term:locale"></span></li>
 			</ul>
             </div>
 		</div>
@@ -47,19 +47,19 @@
 			<label>Main target group(s)/beneficiaries</label>
             <div class="km-value">
                 <ul class="list">
-                    <li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
+                    <li ng-repeat="term in document.targetGroups"><span ng-bind="term | term:locale"></span></li>
                 </ul>
             </div>
 		</div>
 
 		<div ng-show="document.expertiseLevel">
 			<label>Level of the content or   level of knowledge/expertise of the audience for which the resource is intended</label>
-			<div class="km-value">{{document.expertiseLevel | term:locale}} </div>
+			<div class="km-value" ng-bind="document.expertiseLevel | term:locale"> </div>
 		</div>
 
 		<div ng-show="document.authors">
 			<label>Author(s)</label>
-			<div class="km-value km-pre">{{document.authors | lstring:locale}}</div>
+			<div class="km-value km-pre" ng-bind="document.authors | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.organizations">
@@ -71,26 +71,25 @@
 
 		<div ng-show="document.publicationYear">
 			<label>Publication year</label>
-			<div class="km-value">{{document.publicationYear}}</div>
+			<div class="km-value" ng-bind="document.publicationYear"></div>
 		</div>
 
 		<div ng-show="document.rights">
 			<label>Rights</label>
-			<div class="km-value km-pre">{{document.rights | lstring:locale}}</div>
+			<div class="km-value km-pre" ng-bind="document.rights | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.source">
 			<label>Source</label>
-			<div class="km-value km-pre">{{document.source | lstring:locale}}</div>
+			<div class="km-value km-pre" ng-bind="document.source | lstring:locale"></div>
 		</div>
 
 		<legend ng-show="document.resourceLinks || document.covers">Access to the resource</legend>
 
 		<div ng-show="document.resourceLinks">
 			<label>Link to the resource(s)</label>
-			<div class="km-value" ng-repeat="item in document.resourceLinks">
-				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+			<div class="km-value" compare-val="Link to the resource(s)">
+				<km-link-list  ng-model="document.resourceLinks"></km-link-list>
 			</div>
 		</div>
 
@@ -107,14 +106,14 @@
 
 		<div ng-show="document.summary">
 			<label>Summary</label>
-			<div class="km-value km-pre">{{document.summary | lstring:locale}}</div>
+			<div class="km-value km-pre" ng-bind="document.summary | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.regions">
 			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
 			<div class="km-value">
             <ul class="list">
-				<li ng-repeat="term in document.regions | orderBy:name">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.regions | orderBy:name"><span ng-bind="term | term:locale"></span></li>
 			</ul>
             </div>
 		</div>
@@ -128,7 +127,7 @@
 				<label>Subject/Topic/Issue</label>
 					<div class="km-value">
 						<ul class="list">
-							<li ng-repeat="term in document.cbdSubjects">{{term | term:locale}}</li>
+							<li ng-repeat="term in document.cbdSubjects"><span ng-bind="term | term:locale"></span></li>
 						</ul>
 					</div>
 			</div>
@@ -138,7 +137,7 @@
 					<label>Related Aichi Biodiversity Target(s)</label>
 					<div class="km-value">
                      <ul class="list">
-						<li ng-repeat="term in document.aichiTargets">{{term | term:locale}}</li>
+						<li ng-repeat="term in document.aichiTargets"><span ng-bind="term | term:locale"></span></li>
 					</ul>
                     </div>
 				</div>
@@ -151,7 +150,7 @@
 			<label>Key areas and strategic measures for capacity-building and development</label>
 			<div class="km-value">
               <ul class="list">
-				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
+				<li ng-repeat="term in document.absKeyAreas"><span ng-bind="term | term:locale"></span></li>
 			</ul>
             </div>
 		</div>
@@ -164,7 +163,7 @@
 				<label>Thematic areas(s)</label>
 				<div class="km-value">
                 <ul class="list">
-					<li ng-repeat="term in document.bchSubjects">{{term | term:locale}}</li>
+					<li ng-repeat="term in document.bchSubjects"><span ng-bind="term | term:locale"></span></li>
 				</ul>
 			</div>
             </div>
@@ -179,9 +178,8 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Other relevant website addresses and/or attached documents</label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
 			</div>
 		</div>
