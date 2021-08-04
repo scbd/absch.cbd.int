@@ -187,8 +187,8 @@ function (app, _, moment, angular) {
                 if (!user)
                     return;
 
-                require(["https://www.cbd.int/app/js/slaask.js"], function (_slaask) {
-
+                require(["https://cdn.slaask.com/chat.js"], function () {
+                    var _slaask = window._slaask;
                     if (user.isAuthenticated) {
                         _slaask.identify(user.name, {
                             'user-id': user.userID,
