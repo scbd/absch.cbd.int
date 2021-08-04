@@ -29,12 +29,12 @@
                     <span ng-show="document.body.acronym" ng-bind="'(' + (document.body.acronym | lstring:locale) + ')'"></span>
                 </b>&nbsp;	
                 <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i> {{document | uniqueID}}
+                    <i class="fa fa-external-link-square" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
                 </a>
-                <span ng-include="'workflow-status-section'">
+                <span ng-include="'workflow-status-section'"></span>
             </div>	
             <div km-terms ng-model="document.body.organizationType">
-                <span ng-repeat="term in terms">{{term.name}}</span>
+                <span ng-repeat="term in terms"><span ng-bind="term.name"></span></span>
             </div>
             
             <div ng-include="'reference-contact-address'" onload="contactAddress=document.body"></div>            
@@ -67,23 +67,23 @@
                 <span class="selected-reference-uid">
                     
                     <span ng-if="options.isCNA"> <span class="color-blue"> Competent National Authority:</span>
-                        {{(document || document) | uniqueID}} </span>
+                        <span ng-bind="(document || document) | uniqueID"></span> </span>
                     <span ng-if="options.isNFP"><span class="color-blue uppercase">National Focal Point:</span>
-                        {{document.body.prefix | lstring:locale}} {{document.body.firstName}} {{document.body.middleName}}
-                        {{document.body.lastName}}</span>
+                        <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
+                        <span ng-bind="document.body.lastName"></span></span>
                     <span ng-if="options.isContactTypePerson && !options.isNFP"><span class="color-blue uppercase-sm">Person:</span>
-                        {{document.body.prefix | lstring:locale}} {{document.body.firstName}} {{document.body.middleName}}
-                        {{document.body.lastName}}</span>
+                        <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
+                        <span ng-bind="document.body.lastName"></span></span>
                     <span ng-if="options.isContactTypeOrganization && !options.isCNA"><span class="color-blue">Organization:</span>
-                        {{(document.body.name||document.body.organization) | lstring:locale}}
-                        <span ng-show="document.body.acronym">({{(document.body.acronym||document.body.organizationAcronym) | lstring:locale}})</span>
+                        <span ng-bind="(document.body.name||document.body.organization) | lstring:locale"></span>
+                        <span ng-show="document.body.acronym">(<span ng-bind="(document.body.acronym||document.body.organizationAcronym) | lstring:locale"></span>)</span>
                     </span>      
                 </span>
             </span>   | 
             <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.body.revision|encodeURIComponent}}" target="_blank">
-                {{document | uniqueID}} <i class="fa fa-external-link-square" aria-hidden="true"></i> 
+              <span ng-bind="document | uniqueID"></span> <i class="fa fa-external-link-square" aria-hidden="true"></i>
             </a>   
-            <span ng-include="'workflow-status-section'">  
+            <span ng-include="'workflow-status-section'"></span>
         </div>
 
         <blockquote ng-show="options.showContact">
@@ -93,20 +93,20 @@
                 <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
                     ng-if="options.isCNA">Competent National Authority</div>
                 <div>
-                    <span style="font-weight:500;">{{(document.body.name||document.body.organization) | lstring:locale}}</span>
+                    <span style="font-weight:500;" ng-bind="(document.body.name||document.body.organization) | lstring:locale"></span>
                     <span
-                        ng-show="document.body.acronym">({{(document.body.acronym||document.body.organizationAcronym) | lstring:locale}})</span>
+                      ng-show="document.body.acronym">(<span ng-bind="(document.body.acronym||document.body.organizationAcronym) | lstring:locale"></span>)</span>
                 </div>
                 <div ng-if="document.body.organizationType">
-                    {{document.body.organizationType|term}}
+                    <span ng-bind="document.body.organizationType|term"></span>
                 </div>
                 <div ng-if="document.body.firstName||document.body.lastName">
-                    {{document.body.prefix | lstring:locale}} {{document.body.firstName}} {{document.body.middleName}}
-                    {{document.body.lastName}}
+                    <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
+                    <span ng-bind="document.body.lastName"></span>
                 </div>
                 <div ng-if="document.body.designation || document.body.department">
-                    {{document.body.designation | lstring:locale}}<span ng-show="document.body.designation && document.body.department">,
-                    </span> {{document.body.department | lstring:locale}}
+                    <span ng-bind="document.body.designation | lstring:locale"></span><span ng-show="document.body.designation && document.body.department">,
+                    </span> <span ng-bind="document.body.department | lstring:locale"></span>
                 </div>
             </div>
             <div ng-if="options.isContactTypePerson||options.isNFP">                
@@ -115,17 +115,17 @@
                 <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
                     ng-if="!options.isCNA && options.isNFP">National Focal Point</div>
                 <div>
-                    <span style="font-weight:500;">{{document.body.prefix | lstring:locale}} {{document.body.firstName}}
-                        {{document.body.middleName}} {{document.body.lastName}}</span>
+                    <span style="font-weight:500;"><span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span>
+                        <span ng-bind="document.body.middleName"></span> <span ng-bind="document.body.lastName"></span></span>
                 </div>
                 <div ng-if="document.body.designation || document.body.department">
-                    {{document.body.designation | lstring:locale}}<span ng-show="document.body.designation && document.body.department">,
-                    </span> {{document.body.department | lstring:locale}}
+                    <span ng-bind="document.body.designation | lstring:locale"></span><span ng-show="document.body.designation && document.body.department">,
+                    </span> <span ng-bind="document.body.department | lstring:locale"></span>
                 </div>
 
                 <div ng-if="document.body.organization">
-                    {{document.body.organization | lstring:locale}} <i ng-show="document.body.organizationAcronym">
-                        ({{document.body.organizationAcronym | lstring:locale}})</i>
+                    <span ng-bind="document.body.organization | lstring:locale"></span> <i ng-show="document.body.organizationAcronym">
+                    (<span ng-bind="document.body.organizationAcronym | lstring:locale"></span>)</i>
                 </div>
 
             </div>
@@ -143,13 +143,13 @@
                     <span class="label label-danger">This linked record has been deleted.</span>
                 </span>
                 <div ng-if="document.body.contactOrganization">
-                    <b>{{document.body.contactOrganization.organization | lstring:locale}}</b>
+                    <b><span ng-bind="document.body.contactOrganization.organization | lstring:locale"></span></b>
                     <span ng-show="document.body.contactOrganization.organizationAcronym">
-                        ({{document.body.contactOrganization.organizationAcronym | lstring:locale}})
+                        (<span ng-bind="document.body.contactOrganization.organizationAcronym | lstring:locale"></span>)
                     </span>
                 </div>
                 <div ng-if="document.body.contactOrganization.organizationType">
-                    {{document.body.contactOrganization.organizationType|term}}
+                    <span ng-bind="document.body.contactOrganization.organizationType|term"></span>
                 </div>
                 <span ng-if="document.body.contactOrganization" onload="contactAddress=document.body.contactOrganization"
                     ng-include="'reference-contact-address'"></span>
@@ -161,29 +161,29 @@
         <address ng-if="contactAddress.address || contactAddress.country || contactAddress.city || contactAddress.state || contactAddress.postalCode" style="margin-bottom:2px!important">
             <span ng-show="contactAddress.addressHTML" ng-bind-html="contactAddress.addressHTML | lstring:locale"></span>
             <div ng-bind-html="contactAddress.address | lstring:locale"></div>
-            {{contactAddress.city | lstring:locale}}<span ng-show="contactAddress.city && contactAddress.state">, </span>
-            {{contactAddress.state | lstring:locale}}<br ng-show="contactAddress.city || contactAddress.state" />
-            {{contactAddress.postalCode | lstring:locale}}<span ng-show="contactAddress.postalCode && contactAddress.country">, </span>
-            {{contactAddress.country|term}}
+            <span ng-bind="contactAddress.city | lstring:locale"></span><span ng-show="contactAddress.city && contactAddress.state">, </span>
+            <span ng-bind="contactAddress.state | lstring:locale"></span><br ng-show="contactAddress.city || contactAddress.state" />
+            <span ng-bind="contactAddress.postalCode | lstring:locale"></span><span ng-show="contactAddress.postalCode && contactAddress.country">, </span>
+            <span ng-bind="contactAddress.country|term"></span>
         </address>
 
         <div ng-show="contactAddress.phones">
-            Phone: <span ng-repeat="item in contactAddress.phones">{{item}}<span ng-show="!$last">, </span></span>
+            Phone: <span ng-repeat="item in contactAddress.phones"><span ng-bind="item"></span><span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="contactAddress.faxes">
-            Fax: <span ng-repeat="item in contactAddress.faxes">{{item}}<span ng-show="!$last">, </span></span>
+            Fax: <span ng-repeat="item in contactAddress.faxes"><span ng-bind="item"></span><span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="contactAddress.emails">
-            Email: <span ng-repeat="item in contactAddress.emails track by $index"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}}</a><span ng-show="!$last">, </span></span>
+            Email: <span ng-repeat="item in contactAddress.emails track by $index"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-show="contactAddress.websites">
-            Website: <span ng-repeat="item in contactAddress.websites"><a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">{{item.url}}</a><span ng-show="!$last">, </span></span>
+            Website: <span ng-repeat="item in contactAddress.websites"><a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}" ng-bind="item.url"></a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-if="options.isCNA">
             <!--website url is used when generating certificates-->
             <a rel="noopener" translation-url  ng-href="{{websiteUrl}}/database/{{contactAddress.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(contactAddress) | uniqueIDWithoutRevision|encodeURIComponent}}/{{contactAddress.info.revision|encodeURIComponent}}" target="_blank">
                 <i class="fa fa-external-link-square" aria-hidden="true"></i> 
-                {{(contactAddress) | uniqueID}}
+                <span ng-bind="(contactAddress) | uniqueID"></span>
             </a>
             <!--{{options.isCNA}}
         {{contactAddress | uniqueID}}{{contactAddress}}-->
