@@ -96,7 +96,7 @@ require.config({
             return '';
 
         if(url.indexOf('worldEUHigh.js')>0)
-            return 'v=1';
+            return '?v=1';
         
         return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version
     }

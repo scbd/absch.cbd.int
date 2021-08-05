@@ -244,7 +244,8 @@ function(require, template, app, _) {
             var code = event.mapObject.id;
             if($scope.currentCountry && $scope.currentCountry.code== code)
                 return;
-
+            if(_.includes(['isHa','isSh','isKu', 'isEt'], code))
+              return;
           
             if(exceptionRegionMapping[code]){
                 code = exceptionRegionMapping[code];
