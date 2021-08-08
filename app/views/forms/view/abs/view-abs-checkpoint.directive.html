@@ -34,8 +34,15 @@
 
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
-			document.jurisdictionName">
+			document.jurisdictionName || document.responsibleFunctions">
 			<legend name="Responsibilities">Checkpoint Responsibilities</legend>
+			<div ng-show="document.responsibleFunctions">
+				<label>Responsible functions</label>
+				<div  class="km-value" compare-val>
+					<view-terms-hierarchy  ng-model="document.responsibleFunctions" locale="locale"
+						term-domain="responsibleFunctions" on-terms-loaded="onResponsibleFunctionsTerms(terms)"></view-terms-hierarchy>
+				</div>
+			</div>
 			<div ng-show="document.responsibilities">
 				<!--<label>Short description of responsibilities</label>-->
 				<div compare-val="responsibilities">
