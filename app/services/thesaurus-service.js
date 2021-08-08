@@ -147,6 +147,7 @@ import 'services/main';
                 legislationAgreementTypes : 'Legislation And Agreement Types',
                 bchRaAuthorAffiliation  :   'Organization Types',
                 transboundaryMovementTypes : 'TransboundaryMovementTypes',
+                responsibleFunctions   : '72E01D51-E205-4A6B-8D50-8A6F240FDA19',
 
 
                 //===========================  Terms to be removed  ==========================\\
@@ -174,7 +175,7 @@ import 'services/main';
                 cBI_types1       : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',
                 cBI_audience     : 'AFB155C4-93A6-402C-B812-CFC7488ED651',
                 cBI_status       : '4E7731C7-791E-46E9-A579-7272AF261FED',
-                cBI_fundingsrc   : 'Capacity Building Project Funding Types',
+                cBI_fundingsrc   : 'Capacity Building Project Funding Types'
             }
         }
     }]);
