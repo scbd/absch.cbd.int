@@ -1,4 +1,4 @@
-<div>
+<span>
     <!-- Traits -->
     <img ng-if="doc.traitsDiseasesResistance_b"	 ng-src="/app/img/bch/indicators/ind-resistance-pest-on.png"	    title="Resistance to diseases and pests"/>
     <img ng-if="doc.traitsHerbicidesResistance_b" ng-src="/app/img/bch/indicators/ind-resistance-herbicide-on.png"	title="Tolerance to herbicides"/>
@@ -16,6 +16,14 @@
     <img ng-if="doc.scopePharmaceutical_b"  ng-src="/app/img/bch/indicators/ind-pharma-on.png"         title="Pharmaceutical">
     <img ng-if="doc.scopeTransit_b"         ng-src="/app/img/bch/indicators/ind-transit-on.png"        title="Transit">
 
+    <!-- Organism -->
+    <img ng-if="doc.animals_b"      ng-src="/bch/images/organism/ind-animal-on.png"   title="Animals">
+    <img ng-if="doc.plants_b"       ng-src="/bch/images/organism/ind-plant-on.png"    title="Plants">
+    <img ng-if="doc.fungi_b"        ng-src="/bch/images/organism/ind-fungi-on.png"    title="Fungi">
+    <img ng-if="doc.bacteria_b"     ng-src="/bch/images/organism/ind-bacteria-on.png" title="Bacterias">
+    <img ng-if="doc.viruses_b"      ng-src="/bch/images/organism/ind-virus-on.png"    title="Viruses">
+
     <!-- common other -->
     <img ng-if="doc.traitsOther_b || doc.scopeOther_b"		ng-src="/app/img/bch/indicators/ind-other-on.png"		    title="Other"/>
-</div>
+
+</span>

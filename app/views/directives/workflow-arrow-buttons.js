@@ -68,7 +68,7 @@ import 'ck-editor-css';
                 $scope.offlineLanguages            = commonjs.languages;
                 $scope.blockText                   = 'loading form...'
                 if(!$scope.tab)
-                    $scope.tab = 'edit';
+                    $scope.tab = 'intro';
 
                 $attr.$observe('isDialog', function(){
                     isDialog = $attr.isDialog||false

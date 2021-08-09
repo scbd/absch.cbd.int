@@ -207,7 +207,7 @@ import 'services/main';
                             if(filter.query.fl)
                                 queries.fields = filter.query.fl
 
-                            if(filter.query.s)
+                            if(filter.query.s && !searchText)
                                 queries.sort = filter.query.s
 
                             if(filter.query.fq)

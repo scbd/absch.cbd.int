@@ -300,6 +300,8 @@ import './directives/pin-popup-abs';
             var code = event.mapObject.id;
             if($scope.currentCountry && $scope.currentCountry.code== code)
                 return;
+            if(['isHa','isSh','isKu', 'isEt'].includes(code))
+              return;
 
             if(exceptionRegionMapping[code]){
               exceptionRegion = code;

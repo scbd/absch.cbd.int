@@ -41,7 +41,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             $scope.selectedDocuments=[];
             $scope.tempSelectedDocuments=[];
 			$scope.areVisible = false;
-            $scope.userGov = $scope.$root.user.government;
+            $scope.userGov = $scope.$root.user?.government;
             $scope.showAddButton = false;
             $scope.listView     = $attr.listView=="true";
             $scope.search       = {keyword:''}

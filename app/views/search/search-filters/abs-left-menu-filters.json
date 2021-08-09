@@ -6,16 +6,35 @@
 		},
 		{
 			"type": "thesaurus",
+			"term": "cnaJurisdictions",
+			"title": "Type",
+			"field": "type_s"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaJurisdictions",
+			"title": "Organization type",
+			"field": "organizationType_s"
+		},
+		{
+			"type": "thesaurus",
 			"term": "countries",
-			"title": "Country of the person/entity to whom PIC was granted",
-			"fieldfn": "buildContactsUserCountryfn"
+			"title": "Address country",
+			"field": "country_s"
 		}
 	],
 	"focalPoint" : [{
-		"type": "freeText",
-		"title": "Free Text",
-		"field": "text_EN_txt"
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "focalPointTypes",
+			"title": "Additional responsibilities",
+			"field": "type_ss"
 		}
+		
 	],
 	"authority" : [{
 		"type": "freeText",
@@ -33,6 +52,11 @@
 			"term": "cnaKeywords",
 			"title": "Keywords",
 			"field": "absGeneticResourceTypes_REL_ss"
+		},
+		{
+			"type": "yesNo",
+			"title": "CNAs that have been indicated as the permit issuing authority or authority granting PIC for IRCC/CPC records",
+			"field": "isResponsibleForAll_b"
 		}
 	],
 	"measure" : [{
@@ -43,7 +67,7 @@
 		{
 			"type": "thesaurus",
 			"term": "status",
-			"title": "Status",
+			"title": "Legal status",
 			"field": "status_s"
 		},
 		{
@@ -77,16 +101,51 @@
 		"type": "freeText",
 		"title": "Free Text",
 		"field": "text_EN_txt"
-		}],
+		},
+		{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": "Keywords",
+			"field": "jurisdiction_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaJurisdictions",
+			"title": "Jurisdiction",
+			"field": "jurisdiction_ss"
+		}
+	],
 	"absNationalModelContractualClause" : [{
 		"type": "freeText",
 		"title": "Free Text",
 		"field": "text_EN_txt"
-		}],
+		},
+		{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": "Keywords",
+			"field": "jurisdiction_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaJurisdictions",
+			"title": "Jurisdiction",
+			"field": "jurisdiction_ss"
+		}
+	],
 	"absPermit" : [{
 		"type": "freeText",
 		"title": "Free Text",
 		"field": "text_EN_txt"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact authority)",
+				"sort":"title_s"
+			},
+			"title": "Issuing Authority",
+			"field": "absCNA_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -97,22 +156,43 @@
 		{
 			"type": "thesaurus",
 			"term": "cnaKeywords",
-			"title": "Keywords",
+			"title": "Subject matter keywords",
 			"field": "absGeneticResourceTypes_REL_ss"
 		},
 		{
 			"type": "solrRecords",
 			"query": {
-				"q": "schema_s:(contact authority)"
+				"q": "schema_s:(contact authority)",
+				"sort":"title_s"
 			},
 			"title": "Provider",
 			"field": "providers_ss"
 		},
 		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact contact)",
+				"sort":"title_s"
+			},
+			"title": "Person or entity to whom prior informed consent (PIC) was granted",
+			"field": "entitiesToWhomPICGranted_ss"
+		},
+		{
 			"type": "thesaurus",
 			"term": "countries",
-			"title": "User country",
+			"title": "Country of Person or entity to whom prior informed consent (PIC) was granted",
 			"field": "entitiesToWhomPICGrantedCountry_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "usage",
+			"title": "Usage",
+			"field": "usages_ss"
+		},
+		{
+			"type": "yesNo",
+			"title": "IRCCs that have a related checkpoint communique",
+			"field": "needtobuild"
 		},
 		{
 			"type": "yesNo",
@@ -134,17 +214,111 @@
 		"type": "freeText",
 		"title": "Free Text",
 		"field": "text_EN_txt"
-		}],
+		}
+	],
 	"absCheckpoint" : [{
-		"type": "freeText",
-		"title": "Free Text",
-		"field": "text_EN_txt"
-		}],
+			"type": "freeText",
+			"title": "Free Text",
+			"field": "text_EN_txt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaJurisdictions",
+			"title": "Jurisdiction",
+			"field": "jurisdiction_s"
+		}
+	],
 	"absCheckpointCommunique" : [{
 		"type": "freeText",
 		"title": "Free Text",
 		"field": "text_EN_txt"
-		}],
+		},
+		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": "Source country",
+			"field": "sourceCountry_ss",
+			"comments" : "TODO: need to dd sountryCountry from IRCC"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(absCheckpoint)",
+				"sort":"title_s"
+			},
+			"title": "Checkpoint that gathered the information",
+			"field": "_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact absPermit)",
+				"sort":"title_s"
+			},
+			"title": "Related IRCC",
+			"field": "_ss"
+		},		
+		{
+			"type": "date",
+			"title": "Date of information was gathered",
+			"field": "date_dt"
+		},
+		{
+			"type": "date",
+			"title": "Date of access",
+			"field": "dateOfExpiry_dt"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact authority)",
+				"sort":"title_s"
+			},
+			"title": "Provider",
+			"field": "providers_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact contact)",
+				"sort":"title_s"
+			},
+			"title": "Person or entity to whom prior informed consent (PIC) was granted",
+			"field": "entitiesToWhomPICGranted_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": "Country of Person or entity to whom prior informed consent (PIC) was granted",
+			"field": "entitiesToWhomPICGrantedCountry_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaKeywords",
+			"title": "Keywords",
+			"field": "absGeneticResourceTypes_REL_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "usage",
+			"title": "Usage type",
+			"field": "usages_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact)",
+				"sort":"title_s"
+			},
+			"title": "Person or entity making information available to the checkpoint on the utilization of the genetic resource",
+			"field": "entitiesToWhomPICGranted_ss"
+		},
+		{
+			"type": "yesNo",
+			"title": "CPCs that have a related IRCC",
+			"field": "needtobuild"
+		}
+	],
 	"absNationalReport" : [{
 		"type": "freeText",
 		"title": "Free Text",
@@ -379,6 +553,15 @@
 			"title": "ABS key areas",
 			"field": "absKeyAreas_ss",
 			"relatedField":"absKeyAreas_REL_ss"
+		}
+	],
+
+	"test" : [
+		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": "Country of the person/entity to whom PIC was granted",
+			"fieldfn": "buildContactsUserCountryfn"
 		}
 	]
 }
