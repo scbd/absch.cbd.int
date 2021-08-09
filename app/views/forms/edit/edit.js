@@ -30,7 +30,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
     $scope.status   = "loading";
     $scope.error    = null;
     if(!$scope.tab)
-      $scope.tab      = "edit";
+      $scope.tab      = "intro";
     $scope.review   = { locale: locale };
 
     if(!$scope.isDialog){
@@ -386,7 +386,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
 
       return $q.when(qDocument).then(function(doc) {
         if(!$scope.tab)
-          $scope.tab    = "edit";
+          $scope.tab    = "intro";
         $scope.document = doc;
 
         $scope.origanalDocument = angular.copy(doc);
