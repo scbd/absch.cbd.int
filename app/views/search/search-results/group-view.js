@@ -37,8 +37,17 @@ import 'views/search/search-results/result-default';
                         pageNumber = $scope.searchResult.currentPage;
 
                     // TODO create mapping, need to be redone
-                    var groupMapping
-                    var groupFieldMapping = searchDirectiveCtrl.combinationField(options.groupByFields);
+                    var groupMapping;
+                    const mappedFields = [];
+                    const groupByFields = options.groupByFields||[];
+                    const groupByMappings = searchDirectiveCtrl.groupByFields();
+                    groupByMappings.forEach(e=>{
+                        if(groupByFields.includes(e.field))
+                            mappedFields.push(e.field);
+                    });
+
+                    var groupFieldMapping = searchDirectiveCtrl.combinationField(mappedFields);
+
                     var groupField = groupFieldMapping.groupField;
                     var fieldMapping = groupFieldMappings(groupField);
 
@@ -87,7 +96,33 @@ import 'views/search/search-results/result-default';
 
                             queryCanceler = null;
                             $scope.searchResult.rawDocs = [];
-    
+                            //////////
+                            //  REVERSING FIELDS TO AVOID COMPLEX GROUPING in SOLR
+                            // The user can select any combination of fields, still the solr query is based 
+                            // on sequence fields based in solr, once result is received reverse the fields and field values to the
+                            // original sequence.
+                            var originalGroupMapping = searchDirectiveCtrl.combinationField(options.groupByFields);
+                            result.data.grouped[originalGroupMapping.groupField] = { ...result.data.grouped[groupField] };
+                            result.data.grouped[originalGroupMapping.groupField].groups.forEach(e=>{
+                                if(e.groupValue){
+                                    const groupValues = e.groupValue.split('_');
+                                    const groupFields = groupField.replace(/^grp_/, '').replace(/_s$/, '').split('_');
+                                    const groupValue = {}
+                                    groupFields.forEach((key, i)=>{ 
+                                        groupValue[key] = groupValues[i] 
+                                    });
+
+                                    const originalFields = originalGroupMapping.groupField.replace(/^grp_/, '').replace(/_s$/, '').split('_');
+                                    e.groupValue         = originalFields.map(f=>groupValue[f]).join('_')
+                                }
+                            });
+                            if(groupField!= originalGroupMapping.groupField){
+                                delete result.data.grouped[groupField];
+                                groupField = originalGroupMapping.groupField;
+                                fieldMapping = groupFieldMappings(originalGroupMapping.groupField);
+                            }
+                            /////////////////////
+
                             var countryRecords = {};
                             _.forEach(result.data.grouped[groupField].groups, function (record) {
                                 // if(groupField == 'government_schema_s'){

@@ -14,7 +14,7 @@ import 'services/main';
     $scope.showHelp = { hasHelp : true };
 
     $scope.setTab = function () {
-        $scope.tab = 'edit';
+        $scope.tab = 'intro';
     };
 
     $scope.$watch('tab', function(newValue){

@@ -27,6 +27,10 @@ import 'views/forms/view/record-loader.directive';
                     return moment.utc(published) > moment.utc(createdOn) && !moment.utc(createdOn).isSame(moment.utc(published), 'day');
                 }
 
+                $scope.isRevoked = function(values){
+                    return values.includes('Revoked')
+                }
+
             },
         };
     }]);

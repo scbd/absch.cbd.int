@@ -301,10 +301,10 @@
 			"field": "text_EN_txt"
 		},
 		{
-			"type"	: "customListFn",
-			"fn"	: "getFocalPointTypes",
-			"title" : "Type of Focal point",
-			"field": "ctgList_ss"
+			"type": "thesaurus",
+			"term": "focalPointTypes",
+			"title": "Type of Focal point",
+			"field": "type_ss"
 		}
 	],
 	"independentRiskAssessment": [

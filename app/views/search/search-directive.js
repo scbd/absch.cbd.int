@@ -828,7 +828,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             map.sortFields.push(group.sortFields)
                         })
                         map.sortFields = _.flatten(map.sortFields);
-                        return map
+                        return map;
                     }
 
                     function sanitizeFacets(facets){

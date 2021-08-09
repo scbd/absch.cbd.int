@@ -83,16 +83,16 @@
                     <li ng-if="::doc.uniqueIdentifier_s">
                         <span ng-bind="::doc.uniqueIdentifier_s"></span>
                     </li>
-                    <li class="hidden-xs" ng-if="::doc.rec_meta1 && doc.schema_s !=='database' && type != reference" id="meta1">
+                    <li class="hidden-xs meta-border" ng-if="::doc.rec_meta1 && doc.schema_s !=='database' && type != reference" id="meta1">
                         <span ng-if="::doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">CP:</span>
-                        <span ng-repeat="meta in ::doc.rec_meta1"><span ng-bind="::meta"></span><span ng-bind="::($last ? '':', ')"></span></span>
+                        <span ng-bind="doc.rec_meta1.join(', ')"></span>
                     </li>
                     <li class="hidden-xs" ng-if="::doc.rec_meta2 && doc.schema_s !=='absPermit' && type != reference" id="meta2">
                         <span ng-if="::doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">SOURCE:</span>
-                        <span ng-repeat="meta in ::doc.rec_meta2"><span ng-bind="::meta"></span><span ng-bind="::($last ? '':', ')"></span></span>
+                        <span ng-bind="doc.rec_meta2.join(', ')"></span>
                     </li>
                     <li class="hidden-xs" ng-if="::doc.rec_meta3 && type != reference" id="meta3">
-                        <span ng-repeat="meta in ::doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}"><span ng-bind="::meta"></span><span ng-bind="::($last ? '':', ')"></span></span>
+                        <span ng-bind="doc.rec_meta3.join(', ')"  ng-class="{'color-red':isRevoked(doc.rec_meta3)}"></span>
                     </li>
 
                     <li ng-if="::doc.schema_s !=='meeting'">

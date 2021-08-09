@@ -40,7 +40,7 @@ import './solr';
 
                     var queryListParameters = {
                         df    : localizeFields(searchQuery.df||'text_EN_txt'),
-                        fq    : _.flatten(fieldQueries),
+                        fq    : _(fieldQueries).flatten().compact().uniq().value(),
                         q     : searchQuery.query,
                         sort  : localizeFields(searchQuery.sort),
                         fl    : localizeFields(searchQuery.fields),
@@ -89,7 +89,7 @@ import './solr';
                     // searchQuery.fieldQuery.push('realm_ss:' + appConfigService.currentRealm.toLowerCase())
                     var queryGroupParameters = {
                         df    : localizeFields(searchQuery.df||'text_EN_txt'),
-                        fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], searchQuery.fieldQuery),
+                        fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(searchQuery.fieldQuery).flatten().compact().uniq().value(),
                         'q': searchQuery.query,
                         'sort': localizeFields(searchQuery.sort),
                         'fl': localizeFields(searchQuery.fields),
@@ -138,7 +138,7 @@ import './solr';
 
                     if (facetQuery) {
                         var queryFacetsParameters = {
-                            fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], facetQuery.fieldQuery),
+                            fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(facetQuery.fieldQuery).flatten().compact().uniq().value(),
                             'q': facetQuery.query,
                             'wt': 'json',
                             'rows': 0,
@@ -180,7 +180,7 @@ import './solr';
                     if (facetQuery) {
 
                         var queryFacetsParameters = {
-                            fq    : _.union(['realm_ss:' + appConfigService.currentRealm.toLowerCase()], facetQuery.fieldQuery),
+                            fq    : _(['realm_ss:' + appConfigService.currentRealm.toLowerCase()]).union(facetQuery.fieldQuery).flatten().compact().uniq().value(),
                             'q': facetQuery.query,
                             'fl': '',
                             'wt': 'json',

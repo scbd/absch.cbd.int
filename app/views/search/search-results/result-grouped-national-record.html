@@ -45,20 +45,20 @@
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta1 && doc.schema_s !=='database'"  id="meta1">
                 <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;" >CHECKPOINT:</span>
-                <span  ng-repeat="meta in doc.rec_meta1"><span ng-bind="meta"></span><span ng-bind="($last ? '':', ')"></span></span>
+                <span ng-bind="doc.rec_meta1.join(', ')"></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta2 && doc.schema_s !=='absPermit'" id="meta2" >
                 <span ng-if="doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;" >SOURCE:</span>
-                <span  ng-repeat="meta in doc.rec_meta2"><span ng-bind="meta"></span><span ng-bind="($last ? '':', ')"></span></span>
+                <span ng-bind="doc.rec_meta2.join(', ')"></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta3" id="meta3">
-                <span  ng-repeat="meta in doc.rec_meta3" ng-class="{'color-red':meta==='Revoked'}"><span ng-bind="meta"></span><span ng-bind="($last ? '':', ')"></span></span>
-            </li>
-            <li class="hidden-xs" ng-if="doc.rec_meta5" id="meta5">
-                <span ng-repeat="meta in doc.rec_meta5" ng-bind="meta"></span>
+                <span ng-bind="doc.rec_meta3.join(', ')" ng-class="{'color-red':isRevoked(doc.rec_meta3)}"></span>
             </li>
             <li class="hidden-xs" ng-if="doc.rec_meta4" id="meta4">
-                <span  ng-repeat="meta in doc.rec_meta4" ng-bind="meta"></span>
+                <span ng-bind="doc.rec_meta4.join(', ')"></span>
+            </li>
+            <li class="hidden-xs" ng-if="doc.rec_meta5" id="meta5">
+                <span ng-bind="doc.rec_meta5.join(', ')"></span>
             </li>
             <li> 
                 <span  ng-if="doc.schema_s =='absNationalReport' && compareDate(doc.rec_date, doc.rec_creationDate)">

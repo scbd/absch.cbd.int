@@ -29,6 +29,9 @@ import 'views/forms/view/record-loader.directive';
                     return _.includes(['modifiedOrganism', 'nationalRiskAssessment', 'independentRiskAssessment', 'biosafetyDecision', 'biosafetyLaw', 'authority'], schema);
                 }
 
+                $scope.isRevoked = function(values){
+                    return values.includes('Revoked')
+                }
                 
             },
         };
