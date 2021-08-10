@@ -2951,3 +2951,9 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     padding-right: 0px!important;
     margin-right: 0px!important;
 }
+.edit-measure-status .planing-plc{
+    display: block;
+}
+.edit-measure-status .planing-plc input{
+    margin-right: 5px;
+}
