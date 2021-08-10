@@ -1,0 +1,113 @@
+<template>
+    <div class="col-lg-8">
+        <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
+        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
+        <div class="mt-0 kb-faq" v-if="!loading">
+            <h3>
+				{{ $t("faqs") }} 
+				<span v-if="faqFilterTag && faqFilterTag!='faq'">
+					{{ $t("for") }} <strong>{{faqFilterTag}}</strong></span> 
+				<strong>({{faqCount}})</strong>
+				<hr/>
+			</h3>
+            <main>
+                <details v-for="article in faqs">
+                    <summary>{{article.title[`${$locale}`]}}</summary>
+                    <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[`${$locale}`]"></div>                    
+					<div v-if="article.adminTags" class="detail-custom-tag">
+						<div class="tagcloud">
+							<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
+							<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+						</div>
+					</div>
+                </details>
+            </main>
+
+        </div>
+
+		<div v-if="faqCount>10">
+			<paginate :records-per-page="recordsPerPage" :record-count="faqCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
+		</div>
+    </div>
+</template>
+<script>
+
+	import i18n from '../../locales/en/components/kb.json';
+	import Paginate from './pagination.vue';
+	import ArticlesApi from './article-api';
+    import KbCategories from '../../app-data/kb-categories.json';
+
+	export default {
+		name:'kbFaqsList',
+		components:{
+			Paginate
+		},
+		props:{
+		},
+		created(){
+			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, "");	
+			this.articlesApi = new ArticlesApi();
+		},
+		mounted() {
+		    this.loadFaqs(1);
+		},
+		data:  () => {
+			return {
+				faqFilterTag:'',
+				faqs: [],
+				loading: true,
+				faqCount:0,
+				pageNumber:1,
+				recordsPerPage:10
+			}
+		},
+		methods: {
+			tagUrl(tag){
+				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
+				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+				return `/kb/faqs/${tag}/${tagTitle}`
+			},
+			goToTag(tag){
+				this.$router.push({path: this.tagUrl(tag)});
+			},
+			onChangePage(pageNumber) {
+				this.pageNumber = pageNumber;
+				this.article=[];
+				this.loading = true;
+				this.loadFaqs(pageNumber);
+			},
+			async loadFaqs(pageNumber){
+				
+				this.faqCount = 0;
+				this.faqs = [];
+
+				const q = { 
+					$and : [
+						{ adminTags : { $all : [this.$realm.is('BCH') ? 'bch' : 'abs', 'faq' ]}},
+						{ adminTags : { $all : [ this.faqFilterTag ? this.faqFilterTag : 'faq']} }
+					]
+				};
+				const f = { 
+					[`title.${this.$locale}`]	: 1,
+					[`content.${this.$locale}`]	: 1,
+					adminTags 					: 1, _id:1
+				} ;
+				const groupTags = JSON.stringify([this.faqFilterTag ? this.faqFilterTag : 'faq']);
+				const groupLimit = this.recordsPerPage;
+				const groupSkip  = (pageNumber-1) * this.recordsPerPage
+				const groupSort  = { "meta.modifiedOn":-1 };
+				
+				const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags, groupSkip });
+				if(result?.length){
+
+					result.forEach(element => {						
+						this.faqCount = this.faqCount + element.count;
+						this.faqs 	  = [...this.faqs, ...element.articles];
+					});
+				}
+				this.loading = false;
+			},
+		},
+		i18n: { messages:{ en: i18n }}
+	}
+</script>

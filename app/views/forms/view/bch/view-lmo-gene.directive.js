@@ -16,7 +16,7 @@ app.directive("viewLmoGene", [function () {
 			locale: "=",
 			target: "@linkTarget"
 		},
-		controller: ["$scope", "solr", '$q', 'searchService', function ($scope, solr, $q, searchService) {
+		controller: ["locale", "$scope", "solr", '$q', 'searchService', '$location', function (appLocale, $scope, solr, $q, searchService, $location) {
 
 			// //==================================
 		    // //
@@ -28,10 +28,13 @@ app.directive("viewLmoGene", [function () {
 					if(geneIdentifiers.length==0)
 						return;
 
+					var queryString = $location.search();
+					console.log(queryString);
 					var searchQuery = {
 						query 	: "identifier_s:(" +_.map(geneIdentifiers, solr.escape).join(' ') + ")",
-						fields	: 'identifier_s,identity:identity_EN_s, uniqueIdentifier:uniqueIdentifier_s, urls:url_ss, title:name_EN_t'
+						fields	: solr.localizeFields(`identifier_s,identity:identity_EN_s,uniqueIdentifier:uniqueIdentifier_s, urls:url_ss, title:${queryString?.print=='true' ? 'abbreviation_EN_s' : 'name_EN_t'}`, $scope.locale||appLocale)
 					}
+
 					$scope.dnaDetails = {};
 					$q.when(searchService.list(searchQuery))
 					.then(function(data) {
@@ -43,7 +46,7 @@ app.directive("viewLmoGene", [function () {
 		        }
 		    });
 
-			$scope.removeRevsion = function(identifier){
+			$scope.removeRevision = function(identifier){
 				return identifier && identifier.replace(/@.*/, '');
 			}
 

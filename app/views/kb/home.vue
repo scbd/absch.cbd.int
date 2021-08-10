@@ -1,17 +1,15 @@
 <template>
     <div class="knowledge-base">
         <auto-complete-search></auto-complete-search>
-        <div class="container featured-area-default padding-30">
-            <div class="row">
-                <div class="col-md-8 padding-20">
-                    <categories-group></categories-group>
-                </div>
-                <div class="col-md-4 padding-20">
-                    <right-menu></right-menu>        
+        <section class="categories">
+            <div class="container">
+                <div class="row">
+                  <categories-group></categories-group>
+                  <side-bar></side-bar>
                 </div>
             </div>
-        </div>
-    </div>
+      </section>
+  </div>
 </template>
 
 <style>
@@ -20,29 +18,29 @@
 
 <script>
 
-import CategoriesGroup from '../../components/kb/categories-group.vue';
-import RightMenu from '../../components/kb/right-menu.vue';
-import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
-
+    import CategoriesGroup from '../../components/kb/article-categories.vue';
+    import sideBar from '../../components/kb/right-side-bar.vue';
+    import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
 
 export default {
     name:'kbHome',
     components:{
         CategoriesGroup,
-        RightMenu,
+        sideBar,
         AutoCompleteSearch
     },
+
     props:{
-        tokenReader: { type: Function, required: false },
     },
     data:  () => {
-        return {            
+        return {
+
         }
     },
-    watch: { 
-        tokenReader: function(tokenReader) {  
-        // if(tokenReader) addApiOptions({ tokenReader }) 
+    watch: {
+        tokenReader: function(tokenReader) {
+        // if(tokenReader) addApiOptions({ tokenReader })
         }
     }
-}
-</script> 
+  }
+</script>
