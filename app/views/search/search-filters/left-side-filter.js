@@ -5,7 +5,8 @@ import 'ngDialog';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
 
-        app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', function (ngDialog, locale, solr, realm) {
+        app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeout',
+         function (ngDialog, locale, solr, realm, $timeout) {
             return {
                 restrict: 'EA',
                 replace: true,
@@ -134,14 +135,17 @@ import 'services/main';
                         }
                     }
 
-                    $scope.ngRepeatFinished = function () {                        
-                        $element.find('[data-toggle="tooltip"]').tooltip();                       
+                    $scope.ngRepeatFinished = function () {
+                        $timeout(()=>{
+                            $element.find('[data-toggle="tooltip"]').tooltip();
+                        }, 0);                      
                     }
 
                     $scope.removeSchemaFilters = function (option, filter) {
-                        // $scope.ngRepeatFinished();
-                        $element.find('#' + (option.identifier||option.identifier_s)).tooltip('destroy')
-                        // $timeout(function(){
+                        //for some reason the tooltip currently focused is not removed on removeSchemaFilters evt, so remove all tooltip since 
+                        // it will be the only tooltip open. 
+                        $element.find('[data-toggle="tooltip"]').tooltip('hide');
+                        $timeout(function(){
                             if(filter.type=='solrRecords'){
                                 var index = _.findIndex(filter.selectedItems, function(item){ return item.identifier == option.identifier_s });//+ '@' + option._revision_i
                                 filter.selectedItems.splice(index, 1);
@@ -151,7 +155,7 @@ import 'services/main';
                             }
 
                             searchDirectiveCtrl.onLeftFilterUpdate($scope.leftMenuFilters);
-                        // }, 300)
+                        }, 200)
                         
                     }
                     $scope.RemoveLeftMenuFilters = function(){
