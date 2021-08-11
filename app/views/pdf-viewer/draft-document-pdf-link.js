@@ -1,5 +1,5 @@
 ﻿import as from '~/app'
-import 'scbd-angularjs-services/locale'
+import 'components/scbd-angularjs-services/main';
 
 export { default as template } from './draft-document-pdf-link.html'
 export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
