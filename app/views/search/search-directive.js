@@ -732,21 +732,13 @@ import 'views/reports/matrix/data-matrix.directive';
                         const chFolder = realm.is('BCH') ? 'bch' : 'abs';
                         const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
 
-                        categories.map(category=>{
+                        return categories.map(category=>{
                             return { 
                                 identifier: category.key,
                                 title     : { [locale] : category.title },
                                 functions : category.categories
                             };
                         });
-                    }
-                    function loadJsonFile(filePath){
-                        var deferred = $q.defer();                        
-                        require([filePath], function(res){
-                            deferred.resolve(res);
-                        });
-
-                        return deferred.promise;
                     }
 
                     function loopKeywords(keywords, schemaFieldKey){
@@ -1235,14 +1227,11 @@ import 'views/reports/matrix/data-matrix.directive';
                         updateQueryResult();
                     }
 
-                    function loadLeftMenuFieldMapping(){
+                    async function loadLeftMenuFieldMapping(){
                         var file = 'views/search/search-filters/bch-left-menu-filters.json';
                         if(isABS)
                             file = 'views/search/search-filters/abs-left-menu-filters.json';
-
-                        $q.when(loadJsonFile(file)).then(function(mapping){
-                            leftMenuSchemaFieldMapping = mapping;
-                        })
+                        leftMenuSchemaFieldMapping = await import(file)
                     }
 
 

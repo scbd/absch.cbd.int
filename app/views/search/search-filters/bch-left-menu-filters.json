@@ -301,8 +301,8 @@
 			"field": "text_EN_txt"
 		},
 		{
-			"type": "thesaurus",
-			"term": "focalPointTypes",
+			"type": "customListFn",
+			"fn": "getFocalPointTypes",
 			"title": "Type of Focal point",
 			"field": "type_ss"
 		}
