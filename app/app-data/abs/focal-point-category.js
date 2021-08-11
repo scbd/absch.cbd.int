@@ -24,7 +24,7 @@ export const categories = [
     },
     { 
         "title": fpCategoryTitle.cpNfp, 
-        "key" : "CPB-FP1 CPB-FP2" 
+        "key" : "CPB-FP1" 
     },
     { 
         "title": fpCategoryTitle.bchNfp, 
