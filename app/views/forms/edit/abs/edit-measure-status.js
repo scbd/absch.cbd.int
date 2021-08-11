@@ -119,16 +119,28 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
                  });
              }
          });
-
-        $scope.onBuildQuery = function(searchText, schema) {
+         $scope.onMeaureQuery = function(searchText){    
             var queryOptions = {
-                schemas : [schema],
-                realm : realm.value,
-                searchText : searchText,
+                schemas	  : ['measure'],
+                realm     : realm.value,
+                searchText: searchText
             }
-            return $scope.onBuildDocumentSelectorQuery( queryOptions );
-        };
-        // new functions 
+            if ($scope.document && $scope.document.government)
+                queryOptions.government = $scope.document.government.identifier;
+
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+        $scope.onRecordQuery = function(searchText){
+            var queryOptions = {
+              schemas	  : ['absProcedure', 'database', 'communityProtocol', 'authority'],
+              realm     : realm.value,
+              searchText: searchText
+            }
+            if ($scope.document && $scope.document.government)
+                  queryOptions.government = $scope.document.government.identifier;
+      
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+          }
 
         $scope.isSubnational = function () {
             return $scope.document?.jurisdiction?.identifier == "DEBB019D-8647-40EC-8AE5-10CA88572F6E"; 

@@ -146,8 +146,8 @@
                                             </div>
                                             <div class="col-xs-12" ng-if="document.isSubjectToPic">
                                                 <div class="km-control-group" required name="picMeasures " caption="Please select the relevant ABS measure/s from the following list regulating access to genetic resources. ">
-                                                    <div document-selector name="picMeasures" ng-model="document.picMeasures" question="measure"
-                                                         on-build-query="onBuildQuery(searchText,'measure')" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                                    <div document-selector ng-disabled="!document.government.identifier" name="picMeasures" ng-model="document.picMeasures" question="measure"
+                                                         on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined">
@@ -189,13 +189,13 @@
                                                 <input type="radio" ng-model="document.isIplcRightFullyImplemented" ng-value="false" name="isIplcRightFullyImplemented" />To some extent</label>
 
                                             <div class="km-control-group" name="iplcMeasures" required caption="Please select the relevant ABS measure/s from the following list concerning access to genetic resources hold by indigenous peoples and local communities.">
-                                                <div document-selector name="iplcMeasures" ng-model="document.iplcMeasures" question="measure"
-                                                     on-build-query="onBuildQuery(searchText,'measure')" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                                <div document-selector ng-disabled="!document.government.identifier" name="iplcMeasures" ng-model="document.iplcMeasures" question="measure"
+                                                on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
                                             </div>
 
                                             <div class="km-control-group" required name="otherIplcRelatedRecords" caption="Please select other relevant applicable information related to ABS procedures, national websites or databases, community protocols and procedures and customary law and/or competent national authorities from the following list.">
-                                                <div document-selector name="otherIplcRelatedRecords"  ng-model="document.otherIplcRelatedRecords" question="measure"
-                                                     on-build-query="onBuildQuery(searchText,'measure')" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                                <div document-selector ng-disabled="!document.government.identifier" name="otherIplcRelatedRecords"  ng-model="document.otherIplcRelatedRecords" question="measure"
+                                                     on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                             </div>
 
                                         </div>
@@ -225,13 +225,13 @@
 
 
                                             <div class="km-control-group" required name="iplcApprovalMeasures" caption="Please select the relevant ABS measure/s from the following list concerning access to genetic resources hold by indigenous peoples and local communities">
-                                                <div document-selector name="iplcApprovalMeasures"  ng-model="document.iplcApprovalMeasures" question="measure"
-                                                     on-build-query="onBuildQuery(searchText,'measure')" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                                <div document-selector ng-disabled="!document.government.identifier" name="iplcApprovalMeasures"  ng-model="document.iplcApprovalMeasures" question="measure"
+                                                    on-build-query="onMeaureQuery(searchText)"allow-new-schema="measure" allow-new="true" filter="true"></div>
                                             </div>
 
                                             <div class="km-control-group" required name="otherIplcApprovalRecords" caption="Please select other relevant applicable information related to ABS procedures, national websites or databases, community protocols and procedures and customary law and/or competent national authorities from the following list ">
-                                                <div document-selector name="otherIplcApprovalRecords" ng-model="document.otherIplcApprovalRecords" question="measure"
-                                                     on-build-query="onBuildQuery(searchText,'measure')" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                                <div document-selector ng-disabled="!document.government.identifier" name="otherIplcApprovalRecords" ng-model="document.otherIplcApprovalRecords" question="measure"
+                                                     on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                             </div>
 
                                         </div>
