@@ -96,13 +96,12 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- ToDo: need to verify , add contact only or both contact and Authority ? -->
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="contactsToInform" caption="Contact information for inquires related to the information gathered or the functioning of this checkpoint:">
+                                            <div class="km-control-group" name="inquiryContact" caption="Contact information for inquires related to the information gathered or the functioning of this checkpoint:">
                                                 <div document-selector on-build-query="onContactQuery(searchText)"
-                                                     ng-model="document.contactsToInform"
-                                                     question="contactsToInform" allow-new="true" allow-new-schema="contact">
+                                                     ng-model="document.inquiryContact"
+                                                     question="inquiryContact" allow-new="true" allow-new-schema="contact">
                                                 </div>
                                             </div>
                                         </div>
