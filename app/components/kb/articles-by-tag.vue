@@ -12,14 +12,12 @@
                     <div class="kb-listing">
                         <ul class="article-with-tags-ul">
                             <li class="article-with-tags-li" v-for="article in articles">
-                                <a href="#" @click="goToArticle(article, tag)"> {{article.title[$locale]}}</a>
+                                <i class="fa fa-file-text-o"></i> <a class="article-title" @click="goToArticle(article, tag)" href="#">
+                                {{article.title[$locale]}}</a>
                                 <div class="date-sec">
-									<div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.meta.modifiedOn|dateFormat}}</div>
-                                    <div class="inner-area">
-										<i class="fa fa-tag" aria-hidden="true"></i> 
-										<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-										<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
-									</div>
+                                    <div class="inner-area"><i aria-hidden="true" class="fa fa-calendar"></i>
+                                        {{article.meta.modifiedOn|dateFormat}}
+                                    </div>
                                 </div>
                             </li>
                         </ul>
