@@ -117,7 +117,7 @@
                                     </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority for approval."></span></span>
                                
-                                <span class="comma" ng-if="roles.isUser">
+                                <span class="comma" ng-if="roles.isUser && !(roles.isNationalFocalPoint && roles.isPublishingAuthority && roles.isNationalAuthorizedUser)">
                                     Registered User 
                                     <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="Regular users can create draft reference records and request their publication from the CBD Secretariat."></span></span>

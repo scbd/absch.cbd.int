@@ -37,10 +37,10 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             if ($scope.user.isAuthenticated) {
                 $scope.roles = {
                     is                      : roleService.is.bind(roleService),
-                    isPublishingAuthority   : roleService.isPublishingAuthority(),
+                    isPublishingAuthority   : roleService.isPublishingAuthority() || checkNationalSchemaRoles('publishingAuthorities'),
                     isNationalFocalPoint    : roleService.isNationalFocalPoint(),
                     isAdministrator         : roleService.isAdministrator(),
-                    isNationalAuthorizedUser: roleService.isNationalAuthorizedUser(),
+                    isNationalAuthorizedUser: roleService.isNationalAuthorizedUser() || checkNationalSchemaRoles('nationalAuthorizedUser'),
                     isUser                  : roleService.isUser(),
                     isNationalSchemaUser    : roleService.isNationalSchemaUser,
                     isNationalUser          : roleService.isNationalUser(),
@@ -200,6 +200,15 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         $scope.betaArticle = article;
                     });
                 }
+            }
+
+            function checkNationalSchemaRoles(role){
+                for (let i = 0; i < realm.nationalSchemas.filter(e=>e!='contact').length; i++) {
+                    const schema = realm.nationalSchemas[i];
+                    if(roleService.is(role, schema))
+                        return true; 
+                }
+                return false;
             }
 
             init();
