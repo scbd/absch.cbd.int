@@ -53,6 +53,15 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
         //==================================
         //
         //==================================
+        $scope.onCountryChange = function(identifier){
+            if(!identifier) return;
+            $scope.document.picMeasures = undefined;
+            $scope.document.iplcMeasures = undefined;
+            $scope.document.otherIplcRelatedRecords = undefined;
+            $scope.document.iplcApprovalMeasures = undefined;
+            $scope.document.otherIplcApprovalRecords = undefined;
+        }
+
         $scope.getCleanDocument = function (document) {
 
             document = document || $scope.document;

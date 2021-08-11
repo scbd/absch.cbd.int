@@ -32,7 +32,8 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="government" required caption="Country">
-                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" ng-change="onCountryChange(document.government.identifier)"
+                                                     source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                                             </div>
                                         </div>
                                     </div>
@@ -91,7 +92,7 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="adoption" caption="Adoption">
+                                        <div class="km-control-group" required name="adoption" caption="Date of publication of the record">
                                             <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
                                         </div>
                                     </div>
@@ -100,7 +101,7 @@
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="km-control-group" required name="title" caption="Title">
-                                            <div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
+                                            <div km-textbox-ml ng-disable="true" name="title" required ng-model="document.title" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>
