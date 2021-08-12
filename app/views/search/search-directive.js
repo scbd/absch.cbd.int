@@ -920,7 +920,7 @@ import 'views/reports/matrix/data-matrix.directive';
 
                         var queries            = _.compact([dateQuery, textQuery, rawQuery]);
                         var query              = '';
-                        const highlight        = !textQuery||schemaSubQuery.freeTextQuery;
+                        const highlight        = textQuery!=undefined||schemaSubQuery.freeTextQuery!=undefined;
                         if(queries.length)
                             query              = solr.andOr(queries, 'AND');
                         if(schemaQuery != '(*:*)')
