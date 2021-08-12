@@ -12,8 +12,14 @@
                     <div class="kb-listing">
                         <ul class="article-with-tags-ul">
                             <li class="article-with-tags-li" v-for="article in articles">
-                                <i class="fa fa-file-text-o"></i> <a class="article-title" @click="goToArticle(article, tag)" href="#">
-                                {{article.title[$locale]}}</a>
+								<a href="#" @click="goToArticle(article, tag)">
+									<span class="article-title">
+										{{article.title[$locale]}}
+									</span>
+									<div class="article-summary" @click="goToArticle(article, tag)">
+										{{article.summary ? article.summary[$locale] : ''}}...
+									</div>
+								</a>
                                 <div class="date-sec">
                                     <div class="inner-area"><i aria-hidden="true" class="fa fa-calendar"></i>
                                         {{article.meta.modifiedOn|dateFormat}}
@@ -124,6 +130,7 @@
 				};
 				const f = { 
 					[`title.${this.$locale}`]	: 1,
+					[`summary.${this.$locale}`]	: 1,
 					adminTags 					: 1,
 					"meta.modifiedOn":1, _id:1
 				} ;

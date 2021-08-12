@@ -482,7 +482,7 @@
 	border: 1px solid #e6ecf5 !important;
 }
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li:hover .article-title,.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li>i{
-	color: #e01865!important;
+	/* color: #e01865!important; */
 	font-size: 22px;
 }
 
@@ -526,7 +526,18 @@
 .knowledge-base .kb-faq main {
 	margin-top: 30px
 }
-.knowledge-base .kb-faq summary {
+
+.knowledge-base .article-summary{
+	margin: 5px 0 11px;
+	padding: 1.5rem 1.5rem 1.5rem 0.5rem;
+	outline: none;
+	border-radius: 0.25rem;
+	text-align: left;
+	cursor: pointer;
+	position: relative;
+	color: #000;
+}
+.knowledge-base .kb-faq summary{
 	font-size: 1.8rem;
 	font-weight: 500;
 	background-color: #fafafa;
