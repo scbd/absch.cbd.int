@@ -76,6 +76,19 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             }
         });
 
+        $scope.onHasStepsChange = function(){
+            $scope.document.isStepsForIplcApprovalImplemented = undefined;
+            $scope.document.iplcApprovalMeasures = undefined;
+            $scope.document.otherIplcApprovalRecords = undefined;
+            $scope.document.isStepsForIplcApprovalInPlan = undefined;
+        }
+
+        $scope.onHasIplcRightChange = function(){
+            $scope.document.isIplcRightFullyImplemented = undefined;
+            $scope.document.iplcMeasures = undefined;
+            $scope.document.otherIplcRelatedRecords = undefined;
+            $scope.document.isIplcRightInPlan = undefined;
+        }
 
         $scope.onCountryChange = function(identifier){
             if(!identifier) return;
@@ -95,7 +108,6 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
 
             if (!$scope.isJurisdictionRegional(document))
                 document.jurisdictionRegions = undefined;
-
 
             if (!document.hasIplc)
                 document.iplcType = undefined;
@@ -142,8 +154,6 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             return $scope.sanitizeDocument(document);
         };
 
-
-
          $scope.setDocument({}).then(function (doc) {
              if(doc.jurisdictionRegions){
                  $q.when(thesaurusService.getDomainTerms('countries')).then(function(countries){
@@ -156,6 +166,7 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
                  });
              }
          });
+
          $scope.onMeaureQuery = function(searchText){    
             let queryOptions = {
                 schemas	  : ['measure'],

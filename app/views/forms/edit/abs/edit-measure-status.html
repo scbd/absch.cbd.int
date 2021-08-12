@@ -180,7 +180,7 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasIplcRightEstablished" required caption="Do indigenous peoples and local communities have the established right to grant access to genetic resources according to your domestic law? ">
-                                                <div km-yes-no required ng-model="document.hasIplcRightEstablished" locales="document.header.languages"></div>
+                                                <div km-yes-no required ng-model="document.hasIplcRightEstablished" ng-click="onHasIplcRightChange()" locales="document.header.languages"></div>
                                             </div>
 
                                         <div class="col-xs-12" ng-if="document.hasIplcRightEstablished">
@@ -216,7 +216,7 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasStepsForIplcApproval" required caption="Has your country (or the jurisdiction indicated) taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous peoples and local communities within your country is accessed with the PIC or approval and involvement of these indigenous peoples and local communities and that MAT have been established?">
-                                                <div km-yes-no required ng-model="document.hasStepsForIplcApproval"  locales="document.header.languages"></div>
+                                                <div km-yes-no required ng-model="document.hasStepsForIplcApproval" ng-click="onHasStepsChange()" locales="document.header.languages"></div>
                                             </div>
                                         <div class="col-xs-12" ng-if="document.hasStepsForIplcApproval">
                                             <label class="control-label planing-plc">
