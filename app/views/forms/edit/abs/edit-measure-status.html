@@ -44,7 +44,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="jurisdiction" caption="This record refers to the current status of ABS Measures at which level of jurisdiction?">
-                                                <div km-select name="jurisdiction" ng-model="document.jurisdiction" items="options.jurisdictions()"></div>
+                                                <div km-select name="jurisdiction" ng-model="document.jurisdiction" ng-value="document.jurisdiction | term"  locales="document.header.languages" items="options.jurisdictions()"></div>
                                                 <div ng-if="isJurisdictionRegional()">
                                                     <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
                                                 </div>
@@ -99,9 +99,9 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-sm-12">
+                                    <div class="col-sm-12 jurisdiction-title">
                                         <div class="km-control-group" required name="title" caption="Title">
-                                            <div km-textbox-ml ng-disable="true" name="title" required ng-model="document.title" locales="document.header.languages"></div>
+                                            <div km-textbox-ml disabled ng-disable="true" name="title" required ng-model="document.title" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>

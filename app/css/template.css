@@ -2957,3 +2957,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .edit-measure-status .planing-plc input{
     margin-right: 5px;
 }
+.edit-measure-status .jurisdiction-title [km-textbox-ml][disabled] input{
+    pointer-events: none;
+    background-color: #f5f5f5;
+}

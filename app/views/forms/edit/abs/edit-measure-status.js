@@ -8,14 +8,15 @@ import 'views/forms/view/abs/view-measure-status.directive';
 
 export { default as template } from './edit-measure-status.html';
 
-export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","Thesaurus",
-    function($scope, realm, $q, $controller ,thesaurusService, Thesaurus) {
+export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","Thesaurus","locale","$filter","$timeout",
+    function($scope, realm, $q, $controller ,thesaurusService, Thesaurus, locale, $filter, $timeout) {
         $controller('editController', {
             $scope: $scope
         });
         $scope.jurisdictionRegions		= {};
-        var isStatusOptions = ["6F26C635-3257-4CF1-A066-96269610002B", "52D97280-53CB-4456-9F1C-6CC0319BE3A9", "18DCC1C4-A12F-4AE6-A735-A457CB8AB0AD"];
-        var notStatusOptions = ["9B78633E-653E-4C60-995E-6EFEA06D2A7C", "6AB1229B-9C68-4858-893A-2193DA4D43DB", "97EE08DD-1E98-4FC8-8865-95B5A4D9977F"];
+        $scope.jurisdictionTitle = "";
+        const isStatusOptions = ["6F26C635-3257-4CF1-A066-96269610002B", "52D97280-53CB-4456-9F1C-6CC0319BE3A9", "18DCC1C4-A12F-4AE6-A735-A457CB8AB0AD"];
+        const notStatusOptions = ["9B78633E-653E-4C60-995E-6EFEA06D2A7C", "6AB1229B-9C68-4858-893A-2193DA4D43DB", "97EE08DD-1E98-4FC8-8865-95B5A4D9977F"];
 
         _.extend($scope.options, {
             jurisdictions: function () {
@@ -53,6 +54,29 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
         //==================================
         //
         //==================================
+        function getTitle(){
+            return {[locale]: `Status of ${$scope.jurisdictionTitle} ABS measures as of ${$scope.document.adoption.toString()}`};
+        }
+
+        $scope.$watch("document.adoption", function () {
+            if($scope.document.jurisdiction && $scope.document.adoption) {
+                $scope.document.title = getTitle();
+            }
+        });
+
+        $scope.$watch("document.jurisdiction", function (value) {
+          if(value) {
+              $timeout(function () {
+                  $scope.jurisdictionTitle = $filter("term")(value);
+                  if ($scope.document.adoption){
+                      $scope.document.title = getTitle();
+                  }
+              },100);
+
+            }
+        });
+
+
         $scope.onCountryChange = function(identifier){
             if(!identifier) return;
             $scope.document.picMeasures = undefined;
@@ -95,7 +119,7 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
                 document.otherIplcApprovalRecords = undefined;
             }
 
-            var jurisdictionRegions = []
+            let jurisdictionRegions = []
             if ($scope.jurisdictionRegions) {
 
                 if (($scope.jurisdictionRegions.countries || []).length) {
@@ -108,6 +132,10 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             }
             if (!$scope.isJurisdictionRegional(document))
                 document.jurisdictionRegions = undefined;
+
+            if(document.jurisdiction && document.adoption) {
+                document.title = getTitle();
+            }
 
             if (/^\s*$/g.test(document.notes))
                 document.notes = undefined;
@@ -129,7 +157,7 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
              }
          });
          $scope.onMeaureQuery = function(searchText){    
-            var queryOptions = {
+            let queryOptions = {
                 schemas	  : ['measure'],
                 realm     : realm.value,
                 searchText: searchText
@@ -140,7 +168,7 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
         $scope.onRecordQuery = function(searchText){
-            var queryOptions = {
+            let queryOptions = {
               schemas	  : ['absProcedure', 'database', 'communityProtocol', 'authority'],
               realm     : realm.value,
               searchText: searchText
