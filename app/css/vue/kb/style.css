@@ -506,6 +506,10 @@
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec:hover{
 	background: #ffffff;
 }
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .inner-area .btn-mini:hover{
+	color: #428bca;
+	text-decoration: underline;
+}
 
 .knowledge-base .article-description .detail-custom-tag {
 	float: left;

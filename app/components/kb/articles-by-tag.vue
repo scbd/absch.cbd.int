@@ -20,11 +20,16 @@
 										{{article.summary ? article.summary[$locale] : ''}}...
 									</div>
 								</a>
-                                <div class="date-sec">
-                                    <div class="inner-area"><i aria-hidden="true" class="fa fa-calendar"></i>
-                                        {{article.meta.modifiedOn|dateFormat}}
-                                    </div>
-                                </div>
+                              <div class="inner-area">
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
+                                <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+                              </div>
+                              <div class="date-sec">
+                                  <div class="inner-area"><i aria-hidden="true" class="fa fa-calendar"></i>
+                                      {{article.meta.modifiedOn|dateFormat}}
+                                  </div>
+                              </div>
                             </li>
                         </ul>
                     </div>
