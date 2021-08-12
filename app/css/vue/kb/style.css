@@ -493,7 +493,6 @@
 	font-size: 22px;
 	line-height: 1.4;
 	color: #515365;
-	margin-left: 6px;
 }
 
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec{
@@ -506,6 +505,12 @@
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec:hover{
 	background: #ffffff;
 }
+.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .inner-area .btn-mini{
+	color: #515365;
+	padding: 5px;
+	font-weight: bold;
+}
+
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .inner-area .btn-mini:hover{
 	color: #428bca;
 	text-decoration: underline;
