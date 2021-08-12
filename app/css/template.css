@@ -2896,3 +2896,18 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .full-text-display{
     display: inline-block  ;
 }
+
+.edit.capacity-building-initiative {
+    padding: 24px;
+    background-color:#FFF;
+    border-bottom:2px solid #ccc;
+}
+.edit.capacity-building-initiative .km-control-group .control-label{
+    display: block;
+}
+.edit.capacity-building-initiative .km-control-group .control-label[for="startDate"]{
+    display: inline-block;
+}
+.edit.capacity-building-initiative .km-control-group .control-label[for="endDate"]{
+    display: inline-block;
+}
