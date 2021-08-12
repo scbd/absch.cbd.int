@@ -64,14 +64,14 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             }
         });
 
-        $scope.$watch("document.jurisdiction", function (value) {
+        $scope.$watch("[document.jurisdiction,document.jurisdiction.customValue]", function (value) {
           if(value) {
               $timeout(function () {
-                  $scope.jurisdictionTitle = $filter("term")(value);
+                  $scope.jurisdictionTitle = $filter("term")(value[0]);
                   if ($scope.document.adoption){
                       $scope.document.title = getTitle();
                   }
-              },100);
+              },500);
 
             }
         });
