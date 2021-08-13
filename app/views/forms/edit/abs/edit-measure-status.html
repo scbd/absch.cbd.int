@@ -44,68 +44,78 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="jurisdiction" caption="This record refers to the current status of ABS Measures at which level of jurisdiction?">
-                                                <div km-select name="jurisdiction" ng-model="document.jurisdiction" ng-value="document.jurisdiction | term"  locales="document.header.languages" items="options.jurisdictions()"></div>
-                                                <div ng-if="isJurisdictionRegional()">
-                                                    <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
-                                                </div>
+                                                <div km-select name="jurisdiction" ng-model="document.jurisdiction" ng-disabled="!document.government.identifier" 
+                                                    locales="document.header.languages" items="options.jurisdictions()" ng-change="updateTitle()"></div>                                                
+                                            </div>
+                                        </div>
+                                    
+                                        <div class="col-md-12" ng-if="document.jurisdiction && isSubnational()">
+                                            <div class="km-control-group"  name="jurisdiction.customValue" caption="">
+                                                <label name="jurisdiction.customValue" required="isSubnational()" class="control-label" for="jurisdiction.customValue">
+                                                    Name of the sub-national jurisdiction
+                                                </label>
+                                                <div km-textbox-ml required="isSubnational()"  ng-model="document.jurisdiction.customValue" ng-change="updateTitle()"
+                                                    locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" ng-if="document.jurisdiction && isCommunity()">
+                                            <div class="km-control-group" name="jurisdiction.customValue" caption="">
+                                                <label name="jurisdiction.customValue" required="isCommunity()" class="control-label" for="jurisdiction.customValue">
+                                                    Community name
+                                                </label>
+                                                <div km-textbox-ml required="isCommunity()" ng-model="document.jurisdiction.customValue" placeholder=""
+                                                ng-change="updateTitle()" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                    <div class="col-md-12" ng-if="document.jurisdiction && isSubnational()">
-                                        <div class="km-control-group"  name="jurisdiction.customValue" caption="">
-                                            <label name="jurisdiction.customValue" required="isSubnational()" class="control-label" for="jurisdiction.customValue">
-                                                Name of the sub-national jurisdiction
-                                            </label>
-                                            <div km-textbox-ml required="isSubnational()"  ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
+                                    <div ng-if="isJurisdictionRegional() && !isEu()">
+                                        <div class="alert alert-warning">
+                                            <h4>
+                                                Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the
+                                                countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in
+                                                their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or
+                                                the group of countries that share the same measure.
+                                            </h4>
                                         </div>
                                     </div>
-                                    <div class="col-md-12" ng-if="document.jurisdiction && isCommunity()">
-                                        <div class="km-control-group" name="jurisdiction.customValue" caption="">
-                                            <label name="jurisdiction.customValue" required="isCommunity()" class="control-label" for="jurisdiction.customValue">
-                                                Community name
-                                            </label>
-                                            <div km-textbox-ml required="isCommunity()" ng-model="document.jurisdiction.customValue" placeholder="" locales="document.header.languages"></div>
+                                    <div class="row" ng-if="isJurisdictionRegional() && isEu()"> <!--  for EU only-->
+                                        <div class="col-xs-3">
+                                            <div class="km-control-group form-group" required name="jurisdictionRegions" caption="">
+                                                <label name="jurisdictionRegions" class="control-label" for="jurisdictionRegions">Jurisdiction region(s)</label>
+                                                <div km-select multiple required name="regions"
+                                                    ng-model="jurisdictionRegions.regions" placeholder="Please select option(s)"
+                                                    items="options.regions()"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                               <div class="row" ng-if="isJurisdictionRegional() && isEu()"> <!--  for EU only-->
-                                    <div class="col-xs-3">
-                                        <div class="km-control-group form-group" required name="jurisdictionRegions" caption="">
-                                            <label name="jurisdictionRegions" class="control-label" for="jurisdictionRegions">Jurisdiction region(s)</label>
-                                            <div km-select multiple required name="regions"
-                                                 ng-model="jurisdictionRegions.regions" placeholder="Please select option(s)"
-                                                 items="options.regions()"></div>
+                                        <div class="col-xs-1">
+                                            and/or
                                         </div>
+                                        <div class="col-xs-3">
+                                        <div class="km-control-group form-group" name="jurisdictionCountries" caption="">
+                                                <label name="jurisdictionCountries" required class="control-label" for="jurisdictionCountries">
+                                                    Jurisdiction country(ies)
+                                                </label>
+                                                <div km-select multiple required  ng-model="jurisdictionRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+                                            </div>
+                                        </div>
+
                                     </div>
-                                    <div class="col-xs-1">
-                                        and/or
-                                    </div>
-                                    <div class="col-xs-3">
-                                       <div class="km-control-group form-group" name="jurisdictionCountries" caption="">
-                                            <label name="jurisdictionCountries" required class="control-label" for="jurisdictionCountries">
-                                                Jurisdiction country(ies)
-                                            </label>
-                                            <div km-select multiple required  ng-model="jurisdictionRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="km-control-group" required name="adoption" caption="Date of publication of the record">
+                                                <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption" ng-change="updateTitle()"></div>
+                                            </div>
                                         </div>
                                     </div>
 
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="km-control-group" required name="adoption" caption="Date of publication of the record">
-                                            <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
+                                    <div class="row">
+                                        <div class="col-sm-12 jurisdiction-title">
+                                            <div class="km-control-group" required name="title" caption="Title">
+                                                <div km-textbox-ml disabled ng-disable="true" name="title" required ng-model="document.title" locales="document.header.languages"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-sm-12 jurisdiction-title">
-                                        <div class="km-control-group" required name="title" caption="Title">
-                                            <div km-textbox-ml disabled ng-disable="true" name="title" required ng-model="document.title" locales="document.header.languages"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
+                                    <div class="row">
                                        <div class="col-xs-12">
                                         <div class="km-control-group" name="measureEstablished " required caption="Status of your country’s (or jurisdiction indicated) ABS Measures?">
                                             <div km-yes-no required ng-model="document.measureEstablished" locales="document.header.languages"></div>
@@ -218,6 +228,7 @@
                                             <div class="km-control-group" name="hasStepsForIplcApproval" required caption="Has your country (or the jurisdiction indicated) taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous peoples and local communities within your country is accessed with the PIC or approval and involvement of these indigenous peoples and local communities and that MAT have been established?">
                                                 <div km-yes-no required ng-model="document.hasStepsForIplcApproval" ng-click="onHasStepsChange()" locales="document.header.languages"></div>
                                             </div>
+                                        </div>
                                         <div class="col-xs-12" ng-if="document.hasStepsForIplcApproval">
                                             <label class="control-label planing-plc">
                                                 <input type="radio" ng-model="document.isStepsForIplcApprovalImplemented" ng-value="true" name="isStepsForIplcApprovalImplemented" />Yes(fully implemented)</label>
@@ -249,7 +260,6 @@
                                                 <div km-textbox-ml name="iplcApprovalDescription" required ng-model="document.iplcApprovalDescription" locales="document.header.languages"></div>
                                             </div>
                                        </div>
-                                    </div>
                                     </div>
                                 </section>
 

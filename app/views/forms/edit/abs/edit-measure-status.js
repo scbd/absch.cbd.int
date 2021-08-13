@@ -10,6 +10,7 @@ export { default as template } from './edit-measure-status.html';
 
 export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","Thesaurus","locale","$filter","$timeout",
     function($scope, realm, $q, $controller ,thesaurusService, Thesaurus, locale, $filter, $timeout) {
+        let jurisdictionsTerms = [];
         $controller('editController', {
             $scope: $scope
         });
@@ -20,7 +21,7 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
 
         _.extend($scope.options, {
             jurisdictions: function () {
-                return thesaurusService.getDomainTerms('jurisdiction');
+                return thesaurusService.getDomainTerms('jurisdiction').then((data)=>jurisdictionsTerms=data);
             },
             regions: function () {
                 return thesaurusService.getDomainTerms('regions')
@@ -58,23 +59,23 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             return {[locale]: `Status of ${$scope.jurisdictionTitle} ABS measures as of ${$scope.document.adoption.toString()}`};
         }
 
-        $scope.$watch("document.adoption", function () {
-            if($scope.document.jurisdiction && $scope.document.adoption) {
-                $scope.document.title = getTitle();
-            }
-        });
+        $scope.updateTitle = function(){
+            const document   = $scope.document;
+            const jurisdiction = jurisdictionsTerms.find(e=>e.identifier == document.jurisdiction.identifier);
+            const title = { };
+            document.header.languages.forEach(lang=>{
 
-        $scope.$watch("[document.jurisdiction,document.jurisdiction.customValue]", function (value) {
-          if(value) {
-              $timeout(function () {
-                  $scope.jurisdictionTitle = $filter("term")(value[0]);
-                  if ($scope.document.adoption){
-                      $scope.document.title = getTitle();
-                  }
-              },500);
+                title[lang] = jurisdiction ? `Status of ${(jurisdiction||{}).title[lang]||''}` : ''
 
-            }
-        });
+                if(document.jurisdiction?.customValue)
+                    title[lang] += ` (${document.jurisdiction.customValue[lang]||document.jurisdiction.customValue[0]})`;
+
+                if($scope.document.adoption)
+                    title[lang] += ` ABS measures as of ${$scope.document.adoption||''}` ;
+            });
+
+            $scope.document.title = title;
+        }
 
         $scope.onHasStepsChange = function(){
             $scope.document.isStepsForIplcApprovalImplemented = undefined;
@@ -198,7 +199,7 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
         //
         //============================================================
         $scope.isCommunity = function () {
-        return $scope.document?.jurisdiction?.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5";
+            return $scope.document?.jurisdiction?.identifier == "9627DF2B-FFAC-4F85-B075-AF783FF2A0B5";
         }; 
 
         $scope.isEu = function () {
