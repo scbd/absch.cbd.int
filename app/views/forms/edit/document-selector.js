@@ -58,7 +58,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 show    : $attr.allowNew=='true',
                 schema  : $attr.allowNewSchema,
                 title   : $attr.allowNewButtonTitle,
-                schemas : ($attr.allowNewSchema||'').split(','),
+                schemas : _.compact(($attr.allowNewSchema||'').split(',')),
             };     
 
             //==================================
