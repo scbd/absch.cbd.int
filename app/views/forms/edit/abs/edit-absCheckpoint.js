@@ -5,7 +5,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
 
     export { default as template } from './edit-absCheckpoint.html';
 
-  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, realm, $http, $filter, $q, $routeParams, $controller, $location) {
+  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location","thesaurusService", function($scope, realm, $http, $filter, $q, $routeParams, $controller, $location, thesaurusService) {
         $controller('editController', {
             $scope: $scope
         });
@@ -33,6 +33,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
                     return jurisdictions;
                 });
             },
+            responsibleFunctions: function() {return thesaurusService.getDomainTerms('responsibleFunctions')},
         });
 
         $scope.ac_jurisdictions = function() {

@@ -34,8 +34,15 @@
 
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
-			document.jurisdictionName">
+			document.jurisdictionName || document.responsibleFunctions">
 			<legend name="Responsibilities">Checkpoint Responsibilities</legend>
+			<div ng-show="document.responsibleFunctions">
+				<label>Responsible functions</label>
+				<div  class="km-value" compare-val>
+					<view-terms-hierarchy  ng-model="document.responsibleFunctions" locale="locale"
+						term-domain="responsibleFunctions" on-terms-loaded="onResponsibleFunctionsTerms(terms)"></view-terms-hierarchy>
+				</div>
+			</div>
 			<div ng-show="document.responsibilities">
 				<!--<label>Short description of responsibilities</label>-->
 				<div compare-val="responsibilities">
@@ -50,6 +57,14 @@
 							<span ng-if="isSubNational() ||isCommunity() || isOthers()">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span>
 						</li>
 					</ul>
+				</div>
+			</div>
+			<div  ng-show="document.inquiryContact">
+				<label>Contact information for inquires related to the information gathered or the functioning of this checkpoint</label>
+				<div compare-val="inquiryContact">
+					<div class="km-value"  ng-repeat="contact in document.inquiryContact" >
+						<span view-record-reference ng-model="contact" locale="locale"></span>
+					</div>
 				</div>
 			</div>
 			<!--<div ng-show="document.jurisdictionName">
