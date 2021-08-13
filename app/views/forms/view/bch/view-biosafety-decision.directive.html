@@ -473,15 +473,6 @@
 		</div>
 	</div>
 	<!--=============SECTION I END ========================-->
-	<!--=============SECTION J START ========================-->
-	<div ng-if="document.expires!=undefined">
-		<legend>Timeframe for confirmation or updating of information</legend>
-		<label>If the answer to this question is "Yes", after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as "Not Confirmed".</label>
-		<div compare-val>
-			<km-value-bool value="document.expires" locales="locale"></km-value-bool>
-		</div>
-	</div>
-	<!--=============SECTION J END ========================-->
 
 	<!--=============SECTION K START ========================-->
 	<div ng-if="document.relevantInformation||document.relevantDocuments">
