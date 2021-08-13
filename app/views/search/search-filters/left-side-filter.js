@@ -148,7 +148,7 @@ import 'services/main';
                         $timeout(function(){
                             if(filter.type=='solrRecords'){
                                 var index = _.findIndex(filter.selectedItems, function(item){ return item.identifier == option.identifier_s });//+ '@' + option._revision_i
-                                filter.selectedItems.splice(index, 1);
+                                filter.selectedItems?.splice(index, 1);
                             }
                             else{
                                 delete filter.selectedItems[option.identifier];
@@ -196,15 +196,15 @@ import 'services/main';
                     }
 
                     $scope.hasItems = function(items){
-                            return items && _.keys(items).length;
+                        return items && _.keys(items).length;
                     }
 
-                    $scope.onBuildQuery = function(searchText, tab, filter){
-                        console.log((searchText, tab, filter))
-                        var lQueries = [];
-                        var queries = {
+                    $scope.onBuildQuery = function(searchText, tab, lFilter){
+                        const filter = angular.copy(lFilter);
+                        const lQueries = [];
+                        let queries = {
                             fieldQueries : [],
-                            query           : '*:*'
+                            query        : '*:*'
                         }
 
                         if(filter.query){
@@ -239,7 +239,51 @@ import 'services/main';
                         if(lQueries.length)
                             queries.query = solr.andOr(lQueries, 'AND')
                         
-                        return queries;
+                        if(filter.customQueryFn)
+                            queries = $scope.customQueries[filter.customQueryFn](filter, queries);
+
+                        return angular.copy(queries);
+                    }
+
+                    $scope.onRecordsFetched = function(data, query, filter){
+                        if(filter.customResultFn)
+                            data = $scope.customResult[filter.customResultFn](filter, data, query);
+                        return data;
+                    }
+
+                    $scope.customQueries = {
+                        organismNamesQuery
+                    }
+                    $scope.customResult = {
+                        organismNamesResult
+                    }
+
+                    function organismNamesQuery(filter, query){
+                        query = query || {};
+
+                        query.rowsPerPage = 2000;
+
+                        return query;
+                    }
+                    function organismNamesResult(filter, data, query){
+                        const newResult = [];
+
+                        data.docs.forEach(e=>{
+                            if(e.rec_title){                               
+                                e.rec_title.forEach((c, i)=>{
+                                    newResult.push({
+                                        ...e,
+                                        identifier_s : `${e.identifier_s}@${i}`,
+                                        rec_title : c
+                                    })
+                                })
+                            }
+                        })
+                        return {
+                            docs : _.sortBy(newResult, 'rec_title'),
+                            pageCount: newResult.length,
+                            start   : 0
+                        }
                     }
 
                     function clearFilterOptions(filter){

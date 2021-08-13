@@ -350,7 +350,12 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     var myGovernmentQuery = '_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 }
-            
+                //if the custom query wants custom pagination
+                if(rawQuery.currentPage)
+                    $scope.searchResult.currentPage = rawQuery.currentPage;
+                if(rawQuery.rowsPerPage)
+                    $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+
                 var queryParameters = {
                     fields        : rawQuery.fields,
                     fieldQuery    : rawQuery.fieldQueries,
@@ -380,7 +385,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                        if(!$scope.onRecordsFetched) 
                             $scope.rawDocuments = data.data.response;
                        else 
-                            $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response})||data.data.response;
+                            $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response, query:queryParameters})||data.data.response;
 
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        

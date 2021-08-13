@@ -994,7 +994,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                             subQuery = q;
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
-                                        var ids = _.map(filter.selectedItems, 'identifier');
+                                        var ids = filter.selectedItems.map(s=>s.identifier.replace(/\@[0-9]{1,3}$/, ''));
                                         if(filter.type == 'freeText'){                                          
                                             ids = _.map(filter.selectedItems,  function(filter){
                                                 return {name:filter.title};
