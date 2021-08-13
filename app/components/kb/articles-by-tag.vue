@@ -40,7 +40,7 @@
             </div>
 
             <div v-if="articlesCount>10">
-				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>                
+				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>																
             </div>
 
         </div>
@@ -57,7 +57,7 @@
 <script>
 
 	import i18n from '../../locales/en/components/kb.json';
-	import globalPagination from './pagination.vue';
+	import paginate from './pagination.vue';
 	import relevantArticles from "./articles-by-relation.vue";
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
@@ -68,7 +68,7 @@
 	  name:'KbArticlesByTag',
 		components:{
 			relevantArticles,
-			globalPagination,
+            paginate,
 			popularTags
 		},
 		props:{

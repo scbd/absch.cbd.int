@@ -457,7 +457,9 @@
 	float: left;
 	width: 100%;
 }
-
+.knowledge-base .kb-listing .article-with-tags-ul{
+	margin-left: -40px;
+}
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li{
 	background-color: #fff;
 	border-radius: 4px;
