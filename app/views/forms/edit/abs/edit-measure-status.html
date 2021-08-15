@@ -45,10 +45,10 @@
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="jurisdiction" caption="This record refers to the current status of ABS Measures at which level of jurisdiction?">
                                                 <div km-select name="jurisdiction" ng-model="document.jurisdiction" ng-disabled="!document.government.identifier" 
-                                                    locales="document.header.languages" items="options.jurisdictions()" ng-change="updateTitle()"></div>                                                
+                                                    locales="document.header.languages" items="options.jurisdictions()" ng-change="updateTitle()"></div>
                                             </div>
                                         </div>
-                                    
+
                                         <div class="col-md-12" ng-if="document.jurisdiction && isSubnational()">
                                             <div class="km-control-group"  name="jurisdiction.customValue" caption="">
                                                 <label name="jurisdiction.customValue" required="isSubnational()" class="control-label" for="jurisdiction.customValue">
@@ -81,7 +81,7 @@
                                     <div class="row" ng-if="isJurisdictionRegional() && isEu()"> <!--  for EU only-->
                                         <div class="col-xs-3">
                                             <div class="km-control-group form-group" required name="jurisdictionRegions" caption="">
-                                                <label name="jurisdictionRegions" class="control-label" for="jurisdictionRegions">Jurisdiction region(s)</label>
+                                                <label name="jurisdictionRegions" for="jurisdictionRegions">Jurisdiction region(s)</label>
                                                 <div km-select multiple required name="regions"
                                                     ng-model="jurisdictionRegions.regions" placeholder="Please select option(s)"
                                                     items="options.regions()"></div>
@@ -115,23 +115,33 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <!-- ToDo: labels need to verify -->
                                     <div class="row">
                                        <div class="col-xs-12">
-                                        <div class="km-control-group" name="measureEstablished " required caption="Status of your country’s (or jurisdiction indicated) ABS Measures?">
-                                            <div km-yes-no required ng-model="document.measureEstablished" locales="document.header.languages"></div>
-                                        </div>
-
-                                         <div class="col-xs-12" ng-if="document.measureEstablished">
-                                            <div class="km-control-group" name="status" required caption="">
-                                                <div km-term-radio required ng-model="document.status" locales="document.header.languages"
-                                                     terms="options.yesStatus()" show-description="true" binding-type="term">
-                                                 </div>
+                                        <div class="km-control-group" name="measureEstablished" required caption="Status of your country’s (or jurisdiction indicated) ABS Measures?">
+                                        
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.measureEstablished" ng-value="true" name="measureEstablished" ng-click="onMeasureEstablished()" />Yes, ABS measures have been established
+                                            </label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.measureEstablished" ng-value="false" name="measureEstablished" ng-click="onMeasureEstablished()" />No, ABS measures have not been established
+                                            </label>
+                                            <!-- <div km-yes-no required name="measureEstablished" ng-model="document.measureEstablished" locales="document.header.languages"></div> -->
+                                        
+                                            <div class="col-xs-12" ng-if="document.measureEstablished">
+                                                <label name="status" for="status">Please select status</label>
+                                                <div class="km-control-group" name="status" required caption="">
+                                                    <div km-term-radio name="noStatus" required ng-model="document.status" locales="document.header.languages"
+                                                        terms="options.yesStatus()" show-description="true" binding-type="term">
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-xs-12" ng-if="document.measureEstablished != undefined && !document.measureEstablished">
-                                            <div class="km-control-group" name="status" required caption="">
-                                                <div km-term-radio required ng-model="document.status" locales="document.header.languages"
-                                                     terms="options.noStatus()" show-description="true" binding-type="term">
+                                            <div class="col-xs-12" ng-if="document.measureEstablished != undefined && !document.measureEstablished">
+                                                <label name="status" for="status">Please select status</label>
+                                                <div class="km-control-group" name="status" required caption="">
+                                                    <div km-term-radio required name="yesStatus" ng-model="document.status" locales="document.header.languages"
+                                                        terms="options.noStatus()" show-description="true" binding-type="term">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -144,19 +154,20 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="isSubjectToPic " required caption="Is access to genetic resources subject to prior informed consent (PIC) as provided in Article 6.1?">
-                                                <div km-yes-no required ng-model="document.isSubjectToPic" locales="document.header.languages"></div>
+                                            <div class="km-control-group" name="isSubjectToPic" required caption="Is access to genetic resources subject to prior informed consent (PIC) as provided in Article 6.1?">
+                                                <div km-yes-no required name="isSubjectToPic" ng-model="document.isSubjectToPic" locales="document.header.languages"></div>
                                             </div>
 
                                             <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined && !document.isSubjectToPic">
-                                                <div class="km-control-group" name="noPicStatus " required caption="">
-                                                    <div km-term-radio required ng-model="document.noPicStatus" locales="document.header.languages"
+                                                <div class="km-control-group" name="noPicStatus" required caption="">
+                                                    <label name="noPicStatus" for="noPicStatus">Please select Pic Status</label>
+                                                    <div km-term-radio required name="noPicStatus" ng-model="document.noPicStatus" locales="document.header.languages"
                                                          terms="options.noPicStatus()" show-description="true" binding-type="term">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-xs-12" ng-if="document.isSubjectToPic">
-                                                <div class="km-control-group" required name="picMeasures " caption="Please select the relevant ABS measure/s from the following list regulating access to genetic resources. ">
+                                                <div class="km-control-group" required name="picMeasures" caption="Please select the relevant ABS measure/s from the following list regulating access to genetic resources. ">
                                                     <div document-selector ng-disabled="!document.government.identifier" name="picMeasures" ng-model="document.picMeasures" question="measure"
                                                          on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
                                                 </div>
@@ -171,11 +182,11 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasIplc" required caption="Does your country (or jurisdiction indicated) have indigenous peoples and local communities?">
-                                                <div km-yes-no required ng-model="document.hasIplc" locales="document.header.languages"></div>
+                                                <div km-yes-no required name="hasIplc" ng-model="document.hasIplc" locales="document.header.languages"></div>
                                             </div>
                                         <div class="col-xs-12" ng-if="document.hasIplc">
                                             <div class="km-control-group" name="iplcType" required caption="">
-                                                <div km-term-radio required ng-model="document.iplcType" locales="document.header.languages"
+                                                <div km-term-radio required name="iplcType" ng-model="document.iplcType" locales="document.header.languages"
                                                      terms="options.iplcType()" show-description="true" binding-type="term">
                                                 </div>
                                             </div>
@@ -190,10 +201,11 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasIplcRightEstablished" required caption="Do indigenous peoples and local communities have the established right to grant access to genetic resources according to your domestic law? ">
-                                                <div km-yes-no required ng-model="document.hasIplcRightEstablished" ng-click="onHasIplcRightChange()" locales="document.header.languages"></div>
+                                                <div km-yes-no ng-model="document.hasIplcRightEstablished" ng-click="onHasIplcRightChange()" locales="document.header.languages"></div>
                                             </div>
 
                                         <div class="col-xs-12" ng-if="document.hasIplcRightEstablished">
+                                            <label name="isIplcRightFullyImplemented" for="isIplcRightFullyImplemented">Is iplc right fully implemented</label>
                                             <label class="control-label planing-plc">
                                                 <input type="radio" ng-model="document.isIplcRightFullyImplemented" ng-value="true" name="isIplcRightFullyImplemented" />Yes(fully implemented)</label>
                                             <label class="control-label planing-plc">
@@ -211,6 +223,7 @@
 
                                         </div>
                                         <div class="col-xs-12" ng-if="document.hasIplcRightEstablished != undefined && !document.hasIplcRightEstablished">
+                                            <label name="isIplcRightInPlan" for="isIplcRightInPlan">Is iplc right in plan</label>
                                             <label class="control-label planing-plc">
                                                 <input type="radio" ng-model="document.isIplcRightInPlan" ng-value="true" name="isIplcRightInPlan" />But in a draft or planning</label>
                                             <label class="control-label planing-plc">
@@ -230,11 +243,11 @@
                                             </div>
                                         </div>
                                         <div class="col-xs-12" ng-if="document.hasStepsForIplcApproval">
-                                            <label class="control-label planing-plc">
+                                          <label  name="isStepsForIplcApprovalImplemented" for="isStepsForIplcApprovalImplemented">Is steps for iplc approval implemented</label>
+                                                 <label class="control-label planing-plc">
                                                 <input type="radio" ng-model="document.isStepsForIplcApprovalImplemented" ng-value="true" name="isStepsForIplcApprovalImplemented" />Yes(fully implemented)</label>
                                             <label class="control-label planing-plc">
                                                 <input type="radio" ng-model="document.isStepsForIplcApprovalImplemented" ng-value="false" name="isStepsForIplcApprovalImplemented" />To some extent</label>
-
 
                                             <div class="km-control-group" required name="iplcApprovalMeasures" caption="Please select the relevant ABS measure/s from the following list concerning access to genetic resources hold by indigenous peoples and local communities">
                                                 <div document-selector ng-disabled="!document.government.identifier" name="iplcApprovalMeasures"  ng-model="document.iplcApprovalMeasures" question="measure"
@@ -248,7 +261,7 @@
 
                                         </div>
                                         <div class="col-xs-12" ng-if="!document.hasStepsForIplcApproval && document.hasStepsForIplcApproval != undefined">
-
+                                            <label  name="isStepsForIplcApprovalInPlan" for="isStepsForIplcApprovalInPlan">Is steps for iplc approvalIn plan</label>
                                             <label class="control-label planing-plc">
                                                 <input type="radio" ng-model="document.isStepsForIplcApprovalInPlan" ng-value="true" name="isStepsForIplcApprovalInPlan" />But in a draft or planning</label>
                                             <label class="control-label planing-plc">

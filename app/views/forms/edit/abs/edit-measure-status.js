@@ -84,6 +84,10 @@ export default ["$scope", "realm", "$q",  "$controller", "thesaurusService","The
             $scope.document.isStepsForIplcApprovalInPlan = undefined;
         }
 
+        $scope.onMeasureEstablished = function(){
+            $scope.document.status = undefined;
+        }
+
         $scope.onHasIplcRightChange = function(){
             $scope.document.isIplcRightFullyImplemented = undefined;
             $scope.document.iplcMeasures = undefined;
