@@ -1,0 +1,38 @@
+{
+    "welcome" :  {
+      "title": "Welcome to the Submit page: Dashboard",
+      "content": "<p>The Dashboard is your personal workspace. It gives you an overview of the status of various records in the Clearing-House. Information is colour-coded to simplify navigation.Here you are able to submit, review and edit records, depending on your user role.</p>"
+    },
+    "personalInformation" :  {
+      "title": "Your personal information",
+      "content": "<p>Here you can find and update your profile information.</p>"
+    },
+    "yourRecordsStatus" :  {
+      "title": "Your records: status",
+      "content": "<p>The numbers in each column indicate the number of records that are published, drafts and requests pending approval.<br><br>Tip: click on any number to see the summary list of all the records and their status for the selected record type.</p>"
+    },
+    "yourRecordsOffline" :  {
+      "title": "Your records: offline formats",
+      "content": "<p>In this column, you can view and download offline formats in the language of your preference. <br><br>Offline formats are Word files that contain the same information as the online Submission form. Their main goal is to help you gather information before submitting in online.</p>"
+    },
+    "quickView" :  {
+      "title": "Quick view",
+      "content": "<p>Click here to view the latest 10 published records.</p>"
+    },
+    "addNewRecord" :  {
+      "title": "Add new record",
+      "content": "<p>Click on the “+” to create a new record.</p>"
+    },
+    "viewAllRecords" :  {
+      "title": "View all records",
+      "content": "<p>Click here to view all your records for the corresponding record type. On the page that opens, you will be able to filter existing records and create new ones, as well as duplicate, edit or delete a record. <br><br>Tip: To achieve the same result, you can also click on the title of the record type (for example, click on “Competent National Authorities (CNA)”.</p>"
+    },
+    "needHelp" :  {
+      "title": "Need help?",
+      "content": "<br><br><b>Need help?</b><br><br><p>Click here for more contextual help.</p>"
+    },
+  "needMoreHelp" :  {
+      "title": "Need more help?",
+      "content": "<p>Us the Chat feature to message us for additional support.</p>"
+    }
+}
