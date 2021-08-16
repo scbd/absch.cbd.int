@@ -1,27 +1,10 @@
-<style>
-    #Header .header{background-color: #FFF;border-bottom: 1px solid #ddd;}
-    #Header .small-header{padding: 5px 20px;}
-    #Header .small-header > .acronym{font-size:24px;font-weight:bold;padding-right:10px;}
-    #Header .small-nav > ul > li > .nav-link {width:100%;padding:10px; margin:5px 0;font-size: 16px;text-transform: uppercase;color: #555;font-weight: 500}
-    #Header .small-nav > ul {list-style-type: none; padding:0; margin:0;}
-    
-    #Header .normal-header {padding:20px 20px 0 20px;height:80px;}
-    #Header .normal-header > .spine-logo{height:44px;position:relative;top:-13px;padding:0 5px 0 0;margin:0;}
-    #Header .normal-header > .acronym{font-size:48px;font-weight:bold;padding-right:10px;}
-    #Header .normal-header > .ch-name{text-transform:uppercase;font-size:18px;font-weight:bold;}
-    #Header .normal-header > .ch-logo{position:relative;top:-10px;padding: 0; margin:20px 0;max-height:60px;}
-    #Header .normal-nav {padding:0 34px 2px 15px;}
-    #Header .normal-nav > ul > li > .nav-link {font-size: 13px;text-transform: uppercase;color: #555;font-weight: 500; }
 
-    #Header .breadcrumbs {text-transform: uppercase;margin-left:26px;font-size:12px; padding:10px 3px;color:#111;font-weight:500}
-</style>
-
-<div  id="Header">
+<div  id="pageHeader">
 
 <div class="header">
 
     <!-- Small screen header -->
-    <div class="visible-xs hidden-sm hidden-md hidden-lg small-header">
+    <div ng-if="deviceSize=='xs'" class="small-header">
         <a class="color-orange acronym" role="button" data-toggle="collapse" href="#collapseSmallNavMenu"
             aria-expanded="false" aria-controls="collapseSmallNavMenu">
             <i class="fa fa-bars color-black"></i> Biosafety Clearing-House
@@ -43,11 +26,11 @@
 
     <!-- Normal screen header -->
     <div class="hidden-xs normal-header">
-        <img src="/app/img/cbd-logo-spine-orange.png" class="spine-logo">
+        <img src="/app/img/cbd-logo-spine-orange.svg" class="spine-logo">
         <a href="." class="acronym"><span class="color-orange">BCH</span></a>
         <a href="." class="ch-name"><span class="color-grey" ng-if="!development_env && !training_env"> Biosafety Clearing-House</span></a>
         <span class="color-pink ch-name" ng-if="development_env"> DEVELOPMENT</span>
-        <img src="/app/img/cbd-logo-gray555-en.png" class="pull-right ch-logo hidden-sm" ng-class="{'arabic-cbd-logo-style' : locale=='ar'}" />
+        <img src="/app/img/cbd-logo-gray555-en.svg" class="pull-right ch-logo hidden-sm" ng-class="{'arabic-cbd-logo-style' : locale=='ar'}" />
     </div>
 
     <div class="hidden-xs normal-nav">

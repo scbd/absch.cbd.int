@@ -1,12 +1,12 @@
 import app from 'app';
-import html from 'text!./bch-header.html';
+import html from 'text!./absch-header.html';
 import _ from 'lodash';
 import 'ng-breadcrumbs';
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
-import 'components/scbd-angularjs-controls/main'; ;
+import 'components/scbd-angularjs-controls/main'; 
 
-    app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
+    app.directive('abschHeader', ['$rootScope','locale', '$location','breadcrumbs', 'commonjs', '$q',  function ($rootScope,locale, $location, breadcrumbs, commonjs, $q) {
         return {
             restrict: 'E',
             template: html,

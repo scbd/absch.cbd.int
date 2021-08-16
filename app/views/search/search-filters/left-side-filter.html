@@ -1,15 +1,57 @@
-<div>
-    <div ng-if="leftMenuFilters" id="Search-Filter" class="left-menu-filters">
+<div ng-if="leftMenuFilters" id="Search-Filter" >
+    <div >
        <style>
-            
+            .sfilter-title{
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #666;
+    white-space: normal;
+}
+.sfilter{
+    background-color:#DDD;
+    margin-bottom:10px;
+    border:1px solid #ccc;
+    padding:3px;
+    border-radius: 3px;
+}
+.list-group-item {background-color:transparent;padding:px 0;border:0;}
+
        </style>
-        <div style="border-bottom: 1px solid #eee">
-            <h1>Filters</h1>
+
+
+       <div style="border-bottom: 1px solid #eee; margin-bottom:20px;">
+            <span style="text-transform:uppercase;color:#bbb;font-weight:bold; padding-bottom:8px;">Active filters</span>
         </div>
+
+
+
         <ul class="list-group">
-            <li class="list-group-item no-left-right-bottom-border" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
-                ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
+            <li class="list-group-item"  ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
                     
+
+
+                <div class="sfilter" >
+                    <div style="display:table-cell;">
+                    <!-- check -->
+                            <div class="dropdown">
+                                <button class="btn btn-xs btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="margin:0;padding:0;background-color:#ddd;border: none;">
+                                    <i class="fa fa-check-square" style="margin: 0 5px;" aria-hidden="true"></i>
+                                </button>
+                                <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
+                                    <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
+                                        <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
+                                    <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
+                                        <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                                    <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
+                                        <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
+                                    <li><a rel="noopener" href="#">
+                                        <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
+                                </ul>
+                            </div>
+                    </div>
+
+
                     <div class="dropdown pull-left bring-to-front1">
                         <button class="btn btn-xs btn-default dropdown-toggle" type="button"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;vertical-align: unset;">
@@ -26,6 +68,8 @@
                                 <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
                         </ul>
                     </div>
+
+
                     <div class="bold color-darkgrey" style="cursor: pointer;padding-left:2px;padding-right:2px;padding-bottom:5px;" 
                     ng-click="state[schema]=!state[schema]">
                         <span ng-bind="schema | schemaNamePlural"></span>
@@ -68,7 +112,7 @@
                                 <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
                             </div>
                             <div ng-if="filter.type=='freeText'">
-                                    <label ng-bind="filter.title" ng-if="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
+                                    <!-- <label ng-bind="filter.title" ng-if="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label> -->
                                 <form ng-submit="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group" >
                                     <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaNamePlural}}"
                                         style="font-weight:bold;" ng-disabled="filter.disabled">

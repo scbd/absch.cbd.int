@@ -59,7 +59,7 @@ async function renderLanguageFile(req, res, next) {
     if(!urlPreferredLang && preferredLang)//&& preferredLang!= 'en'
         return res.redirect('/'+preferredLang + (req.originalUrl||''));
 
-    req.url = `${global.app.rootPath}/dist/${preferredLang}/app/templates/${process.env.CLEARINGHOUSE}.ejs`;
+    req.url = `${global.app.rootPath}/dist/${preferredLang}/app/templates/${process.env.CLEARINGHOUSE}/${process.env.CLEARINGHOUSE}.ejs`;
  
     let langFilepath =  req.url;//await getLanguageFile(req, preferredLang);
     let options = { 
@@ -77,7 +77,7 @@ async function renderLanguageFile(req, res, next) {
         return res.render(langFilepath, options);
     } 
 
-    return res.render(`${global.app.rootPath}/app/templates/${process.env.CLEARINGHOUSE}.ejs`, options);
+    return res.render(`${global.app.rootPath}/app/templates/${process.env.CLEARINGHOUSE}/${process.env.CLEARINGHOUSE}.ejs`, options);
  }
  
  function getPreferredLanguage(req){

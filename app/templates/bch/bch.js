@@ -1,7 +1,7 @@
 import app from 'app';
 import angular from 'angular';
 import footerHtml from 'text!./bch-footer.html';
-import cbdFooter from 'text!./cbd-footer.html';
+import cbdFooter from 'text!templates/cbd-footer.html';
 import './bch-header';
 import 'bootstrap';
 import 'routes/bch';
@@ -27,13 +27,7 @@ import 'views/directives/docked-side-bar'
                 $window.location.reload();
             });
 
-            //============================================================
-            //
-            //
-            //============================================================
-            function basePath() { 
-                return (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
-            }
+        
 
             //============================================================
             //
@@ -76,9 +70,7 @@ import 'views/directives/docked-side-bar'
                 ngMeta.setTag('canonical', $window.location.href)
             });
 
-            $scope.$on('signOut', function (evt, data) {
-                $window.location.reload();
-            });
+           
             $rootScope.$on('event:server-pushNotification', function (evt, pushNotification) {
                 if (pushNotification.type == 'documentNotification') {
                     if (pushNotification.data && pushNotification.data.realm == realm.value) {
