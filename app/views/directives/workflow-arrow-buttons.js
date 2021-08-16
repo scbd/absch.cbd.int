@@ -57,7 +57,8 @@ import 'ck-editor-css';
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
-                $scope.documentType = $filter("mapSchema")($route.current.$$route.documentType);
+                
+                $scope.documentType       = $filter("mapSchema")($attr.documentType||$route.current.$$route.documentType);
                 $scope.container                   = $attr.container;
                 $scope.cancelDialogDefered         = [];
                 $scope.AdditionalInfoDialogDefered = [];
@@ -76,6 +77,9 @@ import 'ck-editor-css';
                 $attr.$observe('container', function(){
                     $scope.container  = $attr.container; 
                 })
+                $attr.$observe('documentType', function(){
+                    $scope.documentType  = $filter("mapSchema")($attr.documentType||$route.current.$$route.documentType);
+                });
 
 
                 
@@ -606,7 +610,7 @@ import 'ck-editor-css';
                         $scope.updateStep(tab);
                     
                     if(tab == "intro"){
-                        loadArticle($scope.documentType);
+                        loadArticle();
                         $scope.disablePreviousBtn = true;
                     }
 
@@ -809,32 +813,36 @@ import 'ck-editor-css';
                 };
 
                 //============================================================
-                function loadArticle(schema){
-                    
-                    if($scope.article)
-                        return;
+                async function loadArticle(schema){
+                    $timeout(()=>{
+                        schema = schema || $scope.documentType;
 
-                    $scope.loading = true;
-                    $scope.blockText        = 'loading Information about the form';
-                    var ag = [];
-                    ag.push({"$match":{"adminTags.title.en": { "$all" :
-                        [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
-                            encodeURIComponent($filter("urlSchemaShortName")($scope.documentType))]}}
-                    });
-                    ag.push({"$project" : {"title":1, "content":1, "_id":1}});
-                    
-                    var qs = {
-                      "ag" : JSON.stringify(ag)
-                    };
+                        if($scope.article)
+                            return;
 
-                    articlesService.getArticles(qs, true).then(function(data){
-                        if(data)
-                            $scope.article = data[0];
-                    })
-                    .finally(function(){
-                        $scope.loading = false;
-                        $scope.blockText        = undefined;
-                    })
+                        $scope.loading = true;
+                        $scope.blockText        = 'loading Information about the form';
+
+                        var ag = [];
+                        ag.push({"$match":{"adminTags.title.en": { "$all" :
+                            [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
+                                encodeURIComponent($filter("urlSchemaShortName")(schema))]}}
+                        });
+                        ag.push({"$project" : {"title":1, "content":1, "_id":1}});
+                        
+                        var qs = {
+                        "ag" : JSON.stringify(ag)
+                        };
+
+                        articlesService.getArticles(qs, true).then(function(data){
+                            if(data)
+                                $scope.article = data[0];
+                        })
+                        .finally(function(){
+                            $scope.loading = false;
+                            $scope.blockText        = undefined;
+                        });
+                    }, 300);
                 }
 
                 function updateDocumentViewLanguage(){
