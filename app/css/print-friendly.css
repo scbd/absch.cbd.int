@@ -37,6 +37,8 @@
 .slaask-alert-overlay, .slaask-alert, .hidden-print, .lang-alert, .expander, .fa-chevron-circle-up, .fa-chevron-circle-down,
 .bch-header, #reference-records-table, .animated-container,
 scbd-header, bch-header, bch-footer, absch-header, absch-footer, scbd-footer,
+.fa-chevron-circle-up,
+.fa-external-link-square,
 .compare-buttons, .compare-message  {
     display: none!important
 }
