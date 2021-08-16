@@ -29,7 +29,6 @@ app.directive("viewLmoGene", [function () {
 						return;
 
 					var queryString = $location.search();
-					console.log(queryString);
 					var searchQuery = {
 						query 	: "identifier_s:(" +_.map(geneIdentifiers, solr.escape).join(' ') + ")",
 						fields	: solr.localizeFields(`identifier_s,identity:identity_EN_s,uniqueIdentifier:uniqueIdentifier_s, urls:url_ss, title:${queryString?.print=='true' ? 'abbreviation_EN_s' : 'name_EN_t'}`, $scope.locale||appLocale)

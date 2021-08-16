@@ -5,7 +5,8 @@
     .report-record,
     .document-languages,
     .expander,
-    .fa-chevron-circle-up {
+    .fa-chevron-circle-up,
+    .fa-external-link-square {
         display: none;
     }
     body,
