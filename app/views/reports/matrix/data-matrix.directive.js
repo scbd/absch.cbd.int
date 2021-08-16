@@ -51,10 +51,10 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
 
                     $scope.api.isBusy = $scope.loading = true;
                     queryOptions = queryOptions||{};
-                    queryOptions.query   = queryOptions.query||'government_submissionYear_s:*';
+                    queryOptions.query   = queryOptions.query||'grp_government_submissionYear_s:*';
 
                     var query = {
-                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:government_submissionYear_s, government_s,schemaType:schemaType_s,countryRegions_ss',
+                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:grp_government_submissionYear_s, government_s,schemaType:schemaType_s,countryRegions_ss',
                         fieldQuery  : _.uniq(queryOptions.tagQueries),
                         query       : queryOptions.query||undefined,
                         facet          : true,
