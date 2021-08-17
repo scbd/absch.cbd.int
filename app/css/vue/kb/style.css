@@ -164,6 +164,21 @@
 	text-decoration: none;
 	margin-left: 5px;
 }
+.categories-list.widget_categories.tag-count, .article-description.mt-0.single{
+	padding: 20px;
+	box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
+	border-radius: 3px;
+	margin-top: 15px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	word-wrap: break-word;
+	background-color: #fff;
+	background-clip: border-box;
+	flex: 1 1 auto;
+	margin-bottom: 10px;
+}
 .knowledge-base .categories-list .badge {
 	background-color: #A15603;
 	border-radius: 50%;
