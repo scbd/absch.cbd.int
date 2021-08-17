@@ -81,13 +81,19 @@
 		</div>		
 		<div class="row" style="margin-top:10px">
 			<div class="col-xs-12" >
-				
+				<span class="btn-group pull-right">
+					<a rel="noopener" ng-href="#" class="help-tour link2"
+						style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+						ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
+								aria-hidden="true"></i> Help using the country profile</span></a>
+								<span id="closeTab"></span>
+				</span>
 			</div>
 		</div>
-		<div class="row bg-grey1" style="margin:10px 0 5px 0;padding:10px 0 5px 0;border:1px solid #d5d5d5;">
+		<div id="listOfRecords" class="row bg-grey1" style="margin:10px 0 5px 0;padding:10px 0 5px 0;border:1px solid #d5d5d5;">
 			<div class="col-sm-12 col-md-6">
 
-				<div class="dropdown" style="display:inline;">
+				<div class="dropdown" style="display:inline;" id="sortingRecords">
 					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
 						aria-expanded="true">
                             <i ng-if="sortTerm==='name.en'" class="fa" ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}" style="width:20px;"></i>
@@ -102,10 +108,10 @@
                     </ul>
                     </div>
 
-					<div  km-select required name="countryFilter" ng-model="countryFilter" items="options.countries()"
+					<div id="sortingRecordsCountries"  km-select required name="countryFilter" ng-model="countryFilter" items="options.countries()"
 						 multiple placeholder="Countries" display-count="0" show-selection-pop-over="true" icon="fa-globe"></div>
 
-				   <div class="dropdown" style="display:inline;">
+				   <div id="sortingRecordsPartyStatus" class="dropdown" style="display:inline;">
 					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						<span>
 							<strong ng-if="partyFilter==='All' || !partyFilter" >
@@ -133,19 +139,20 @@
                     </ul>
                     </div>
 
-					<div  km-select required name="regions" ng-model="regions" items="options.regions()"
-						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true" icon="fa-object-group"></div>
+					<div id="sortingRecordsRegions"  km-select required name="regions" ng-model="regions" items="options.regions()"
+						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true" icon="fa-object-group">
+					</div>
 					
-					<button type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
+					<button id="exportingRecords" type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
 						<i class="fa fa-download" ></i> 
 						<span class="hidden-sm hidden-xs">Export</span>
-				</button>
-              </div>
+					</button>
+            </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >                            
 				<div ng-repeat="header in headerCount">
 					<span style="cursor:pointer;" ng-click="sortTable(header.schema)" data-toggle="tooltip" title="{{header.title|lstring:locale}}"
 						data-container="body">
-                        <span id="nrCount" class="bold color-black" ng-bind="header.shortCode">&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
+                        <span id="nrCount-{{header.shortCode}}" class="bold color-black" ng-bind="header.shortCode">&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
 					<span class="badge bg-black" ng-bind="header.count"></span>
 					</span>
 				</div>
@@ -190,6 +197,6 @@
 
 	</div>
 	<!--end loading-->
-
+	<joyride ng-if="tourOn"></joyride>
 </div>
 <!--end controller-->
