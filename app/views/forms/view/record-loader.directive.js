@@ -14,7 +14,14 @@ import 'views/forms/directives/document-date';
 import 'components/scbd-angularjs-controls/main';
 import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/compare-val';
+import printHeaderTemplate from 'text!./print-header.html';
+import printFooterTemplate from 'text!./print-footer.html';
 
+	app.run(function($templateCache){
+		$templateCache.put('/app/views/forms/view/print-header.html', printHeaderTemplate)
+		$templateCache.put('/app/views/forms/view/print-footer.html', printFooterTemplate)
+	});
+	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
 	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,

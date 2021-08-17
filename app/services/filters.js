@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import scbdSchemas from 'components/scbd-angularjs-services/main';
 import './common';
-import 'services/main';
 
 
 	//============================================================
