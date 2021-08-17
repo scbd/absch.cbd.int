@@ -2123,10 +2123,6 @@ a.disabled{
     text-transform: none;
 }
 
-#search-new .metadata.bold li:not(:first-child){
-    padding-left: 5px;
-}
-
 .space-left-right{
     padding-left:5px;
     padding-right: 5px;;
@@ -2943,6 +2939,10 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     text-shadow: 0px 1px 0px rgba(255,255,255,.5);
     cursor:pointer;
     color: #fff;
+}
+.search-icons bch-icons{
+    position: relative;
+    top: -5px;
 }
 .search-icons bch-icons > span{
     border-right: 0!important;
