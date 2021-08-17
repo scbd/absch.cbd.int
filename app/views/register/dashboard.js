@@ -1,6 +1,9 @@
 import app from 'app';
 import _ from 'lodash';
 import ng from 'angular';
+import 'angular-animate';
+import 'angular-joyride';
+import joyRideText from '~/app-data/dashboard-joyride-tour.json';
 import 'services/main';
 import 'views/register/directives/register-top-menu';
 import 'toastr';
@@ -12,9 +15,9 @@ import 'ngDialog';
     export { default as template } from './dashboard.html';
 export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
-                    'IWorkflows', 'commonjs',
+                    'IWorkflows', 'commonjs',"joyrideService","$element",
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
-                $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs) {
+                $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs, joyrideService, $element) {
             
             $scope.schemas          = realm.schemas        
             $scope.languages        = commonjs.languages;
@@ -52,6 +55,133 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
 
             }
 
+            $scope.tour = function(){
+                $scope.tourOn = true;
+                var joyride = joyrideService;
+                joyride.config = {
+                    overlay: true,
+                    onStepChange: function(){  },
+                    onStart: function(){  },
+                    onFinish: function(){
+                        joyride.start = false;
+                        $scope.tourOn = false;
+                        $scope.showProfileInfo = false;
+                        if($scope.topRecords["CNA"]) {
+                            $scope.topRecords["CNA"] = false;
+                            $element.find("#quickViewCNA").click();
+                        }
+                    },
+                    steps : [
+                        {
+                            appendToBody:true,
+                            title: joyRideText.welcome.title,
+                            content: joyRideText.welcome.content
+                        },
+                        {
+                            appendToBody:true,
+                            type: 'element',
+                            selector: "#showProfileInfo",
+                            title: joyRideText.personalInformation.title,
+                            content: joyRideText.personalInformation.content,
+                            placement: 'top',
+                            beforeStep: showProfileInfo
+                            
+                        },
+                        {
+                            appendToBody: true,
+                            type: 'element',
+                            selector: "#publishFormate",
+                            title: joyRideText.yourRecordsStatus.title,
+                            content: joyRideText.yourRecordsStatus.content,
+                            placement: 'top',
+                            beforeStep: hideProfileInfo
+                            
+                        },
+                        {
+                            appendToBody: true,
+                            type: 'element',
+                            selector: "#offlineFormate",
+                            title: joyRideText.yourRecordsOffline.title,
+                            content: joyRideText.yourRecordsOffline.content,
+                            placement: 'top'
+                        },
+                        {
+                            appendToBody: true,
+                            type: 'element',
+                            selector: "#quickViewCNA",
+                            title: joyRideText.quickView.title,
+                            content: joyRideText.quickView.content,
+                            placement: 'right',
+                            beforeStep: showTopRecord
+                            
+                        },
+                        {
+                            appendToBody: true,
+                            type: 'element',
+                            selector: "#addNewRecordCNA",
+                            title: joyRideText.addNewRecord.title,
+                            content: joyRideText.addNewRecord.content,
+                            placement: 'right',
+                            beforeStep: showTopRecord
+                        },
+                        {
+                            appendToBody: true,
+                            type: 'element',
+                            selector: "#viewListCNA",
+                            title: joyRideText.viewAllRecords.title,
+                            content: joyRideText.viewAllRecords.content,
+                            placement: 'right'
+                        },
+                        {
+                            appendToBody:true,
+                            type: 'element',
+                            selector: "#needHelp",
+                            title: joyRideText.needHelp.title,
+                            content: joyRideText.needHelp.content,
+                            placement: 'left',
+                            beforeStep: gotoSectionHelp
+                            
+                        },
+                        {
+                            appendToBody:true,
+                            type: 'element',
+                            selector: "#slaask-button-cross",
+                            title: joyRideText.needMoreHelp.title,
+                            content: joyRideText.needMoreHelp.content,
+                            placement: 'left'
+                        }
+                    ]
+                };
+                joyride.start = true;
+
+                function showProfileInfo(resumeJoyride){
+                    $scope.showProfileInfo = true;
+                    $timeout(function(){
+                        resumeJoyride();
+                    }, 100);
+                }
+
+                function hideProfileInfo(resumeJoyride){
+                   $scope.showProfileInfo = false;
+                   $timeout(function(){
+                       resumeJoyride();
+                   }, 100);
+                }
+                function gotoSectionHelp (resumeJoyride){
+                    $timeout(function(){
+                        $('html,body').scrollTop(0);
+                        resumeJoyride();
+                    }, 100);
+                }
+                function showTopRecord(resumeJoyride){
+                    $element.find("#quickViewCNA").click();
+                    $scope.topRecords["CNA"] = !$scope.topRecords["CNA"];
+                    $timeout(function(){
+                        resumeJoyride();
+                    }, 100);
+                }
+
+            }
 
             $scope.showTopRecords = function($event, schema) {
                 $event.stopPropagation();
