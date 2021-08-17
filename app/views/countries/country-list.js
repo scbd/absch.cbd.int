@@ -4,13 +4,15 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'views/directives/block-region-directive';
 import 'components/scbd-angularjs-controls/main';
+import 'angular-joyride';
+import joyRideText from '~/app-data/country-profile-joyride-tour.json';
 
     export { default as template } from './country-list.html';
 
   export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
-    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta',
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
-            $timeout, locale, realm, ngMeta) {
+            $timeout, locale, realm, ngMeta, joyrideService) {
             var regionRelations = {};            
             $scope.isBCH        = realm.is('BCH');
             $scope.isABS        = realm.is('ABS');    
@@ -232,6 +234,140 @@ import 'components/scbd-angularjs-controls/main';
                 }
                 
             };
+            //==================================================================================
+            $scope.tour = function(){
+                $scope.tourOn = true;
+                var joyride = joyrideService;
+                joyride.config = {
+                    overlay: true,
+                    onStepChange: function(){  },
+                    onStart: function(){  },
+                    onFinish: function(){ 
+                        joyride.start = false;
+                        $scope.tourOn = false;
+                        closeSortingRecords();
+                    },
+                    steps : [
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#countryProfile",
+                                    title: joyRideText.countryProfiles.title,
+                                    content: joyRideText.countryProfiles.content,
+                                    placement: 'left',                    
+                                    beforeStep: openCountryDropdown
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#listOfRecords",
+                                    title: joyRideText.listOfRecords.title,
+                                    content: joyRideText.listOfRecords.content,
+                                    placement: 'top',          
+                                    beforeStep: closeTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#sortingRecords",
+                                    title: joyRideText.sortingRecords.title,
+                                    content: joyRideText.sortingRecords.content,
+                                    placement: 'top',
+                                    beforeStep: openSortingRecords
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#nrCount-NFP",
+                                    title: joyRideText.sortingRecordsNFP.title,
+                                    content: joyRideText.sortingRecordsNFP.content,
+                                    placement: 'top',
+                                    beforeStep: closeTab
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#sortingRecordsCountries",
+                                    title: joyRideText.sortingRecordsCountries.title,
+                                    content: joyRideText.sortingRecordsCountries.content,
+                                    placement: 'top'
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#sortingRecordsPartyStatus",
+                                    title: joyRideText.sortingRecordsPartyStatus.title,
+                                    content: joyRideText.sortingRecordsPartyStatus.content,
+                                    placement: 'top'
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#sortingRecordsRegions",
+                                    title: joyRideText.sortingRecordsRegions.title,
+                                    content: joyRideText.sortingRecordsRegions.content,
+                                    placement: 'top'
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#exportingRecords",
+                                    title: joyRideText.exportingRecords.title,
+                                    content: joyRideText.exportingRecords.content,
+                                    placement: 'top'
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#needHelp",
+                                    title: joyRideText.needHelp.title,
+                                    content: joyRideText.needHelp.content,
+                                    placement: 'left',
+                                    beforeStep: gotoSectionHelp
+
+                                },
+                                {
+                                    appendToBody:true,
+                                    type: 'element',
+                                    selector: "#slaask-button-cross",
+                                    title: joyRideText.needMoreHelp.title,
+                                    content: joyRideText.needMoreHelp.content,
+                                    placement: 'left'
+                                }
+
+                            ]
+                };
+                joyride.start = true;
+
+                function gotoSectionHelp (resumeJoyride){
+                    $('html,body').scrollTop(0);
+                    $timeout(function(){
+                        resumeJoyride();
+                    }, 100);
+                }
+                function closeTab (resumeJoyride){
+                    $timeout(function(){
+                        $element.find('#closeTab').click();
+                        resumeJoyride();
+                    }, 100);
+                }
+                
+                function openCountryDropdown(resumeJoyride){
+                    $('html,body').scrollTop(0);
+                    $timeout(function(){
+                         // $element.find('#countryProfile').click(); // not working
+                        document.getElementById('countryProfile').click();
+                        resumeJoyride();
+                    }, 100);
+                }
+
+                function openSortingRecords(resumeJoyride){
+                    $timeout(function(){
+                        $element.find('#dropdownMenu1').click();
+                        resumeJoyride();
+                    }, 100);
+                }
+            }
 
             //==================================================================================
             $scope.gotoCountryProfile = function (code, schema, evt) {
