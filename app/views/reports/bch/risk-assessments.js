@@ -4,7 +4,8 @@ import template from 'text!./risk-assessments.html';
 import 'services/main';
 import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'angucomplete-alt';
-import 'views/directives/block-region-directive'; ;
+import 'views/directives/block-region-directive';
+import '~/views/forms/view/bch/icons';
 
 app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchService, solr) {
 	return{

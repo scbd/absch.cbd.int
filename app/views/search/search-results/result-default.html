@@ -1,8 +1,5 @@
 ﻿<div class="default-result-page" style="padding:0!important;margin:0 0 20px 0!important;">
-    <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName|encodeURIComponent}}/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" 
-        class="pull-right link" ng-show="!doc.showDoc" title="open in new tab">
-        <i class="fa fa-external-link"></i>
-    </a>
+    
     <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="showDoc" >
         <span style="color:#ddd" > | </span> &nbsp; 
         <a rel="noopener" translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false">&times;</a>
@@ -18,6 +15,10 @@
        
                 <div class="title bold truncate-mobile-title" style="font-size:108%;">
                     <span ng-bind="doc.rec_title"></span>
+                    <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName|encodeURIComponent}}/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" 
+                        class="pull-right link" ng-show="!doc.showDoc" title="open in new tab">
+                        <i class="fa fa-external-link"></i>
+                    </a>
                 </div>
                 <div ng-if="!doc.highlight">
                     <!-- TODO: need to remove description field from index and use summary -->
@@ -99,9 +100,8 @@
                             <span ng-bind="doc.startDate_dt | moment:'utc' | formatDate"></span> - <span ng-bind="doc.endDate_dt | moment:'utc' | formatDate"></span>
                             | <span ng-bind="doc.eventCity_s"></span> | <span ng-bind="doc.eventCountry_EN_t"></span></span>
                     </li>
-                    <li class="pull-right" style="border-right: unset;padding-right: unset; right: 10px;position: absolute;">
-                        <span class="last-span" ng-if="::canShowIcons(doc.schema_s)" style="border-right: unset;padding-right: unset;"
-                            ng-include="'/app/views/forms/view/bch/icons.html'"></span>
+                    <li class="pull-right search-icons" ng-if="::canShowIcons(doc.schema_s)">
+                        <bch-icons></bch-icons>
                     </li>                  
                 </ul>
             </div>

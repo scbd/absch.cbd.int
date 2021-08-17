@@ -2944,3 +2944,8 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     cursor:pointer;
     color: #fff;
 }
+.search-icons bch-icons > span{
+    border-right: 0!important;
+    padding-right: 0px!important;
+    margin-right: 0px!important;
+}
