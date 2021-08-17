@@ -118,72 +118,72 @@
                                     <!-- ToDo: labels need to verify -->
                                     <div class="row">
                                        <div class="col-xs-12">
-                                        <div class="km-control-group" name="measureEstablished" required caption="Status of your country’s (or jurisdiction indicated) ABS Measures?">
-                                        
-                                            <label class="control-label planing-plc">
-                                                <input type="radio" ng-model="document.measureEstablished" ng-value="true" name="measureEstablished" ng-click="onMeasureEstablished()" />Yes, ABS measures have been established
-                                            </label>
-                                            <label class="control-label planing-plc">
-                                                <input type="radio" ng-model="document.measureEstablished" ng-value="false" name="measureEstablished" ng-click="onMeasureEstablished()" />No, ABS measures have not been established
-                                            </label>
-                                            <!-- <div km-yes-no required name="measureEstablished" ng-model="document.measureEstablished" locales="document.header.languages"></div> -->
-                                        
-                                            <div class="col-xs-12" ng-if="document.measureEstablished">
-                                                <label name="status" for="status">Please select status</label>
-                                                <div class="km-control-group" name="status" required caption="">
-                                                    <div km-term-radio name="noStatus" required ng-model="document.status" locales="document.header.languages"
-                                                        terms="options.yesStatus()" show-description="true" binding-type="term">
-                                                    </div>
-                                                </div>
+                                            <div class="km-control-group" name="measureEstablished" required caption="Status of your country’s (or jurisdiction indicated) ABS Measures?">
+
+                                                <label class="control-label planing-plc">
+                                                    <input type="radio" ng-model="document.measureEstablished" ng-value="true" name="measureEstablished" ng-click="onMeasureEstablished()" />Yes, ABS measures have been established
+                                                </label>
+                                                <label class="control-label planing-plc">
+                                                    <input type="radio" ng-model="document.measureEstablished" ng-value="false" name="measureEstablished" ng-click="onMeasureEstablished()" />No, ABS measures have not been established
+                                                </label>
                                             </div>
-                                            <div class="col-xs-12" ng-if="document.measureEstablished != undefined && !document.measureEstablished">
-                                                <label name="status" for="status">Please select status</label>
-                                                <div class="km-control-group" name="status" required caption="">
-                                                    <div km-term-radio required name="yesStatus" ng-model="document.status" locales="document.header.languages"
-                                                        terms="options.noStatus()" show-description="true" binding-type="term">
-                                                    </div>
+                                       </div>
+                                        <div class="col-xs-12" ng-if="document.measureEstablished">
+                                            <label name="status" for="status">Please select status</label>
+                                            <div class="km-control-group" name="status" required caption="">
+                                                <div km-term-radio name="noStatus" required ng-model="document.status" locales="document.header.languages"
+                                                    terms="options.yesStatus()" show-description="true" binding-type="term">
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-xs-12" ng-if="document.measureEstablished != undefined">
-                                                <div class="km-control-group" name="statusDescription"  caption="Please provide more information about the current progress in establishing ABS Measures and/or a summary of the main difficulties and challenges encountered.">
-                                                    <div km-textbox-ml name="statusDescription" required ng-model="document.statusDescription" locales="document.header.languages"></div>
+                                        <div class="col-xs-12" ng-if="document.measureEstablished != undefined && !document.measureEstablished">
+                                            <label name="status" for="status">Please select status</label>
+                                            <div class="km-control-group" name="status" required caption="">
+                                                <div km-term-radio required name="yesStatus" ng-model="document.status" locales="document.header.languages"
+                                                    terms="options.noStatus()" show-description="true" binding-type="term">
                                                 </div>
                                             </div>
-                                         </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12" ng-if="document.measureEstablished != undefined">
+                                        <div class="km-control-group" name="statusDescription"  caption="Please provide more information about the current progress in establishing ABS Measures and/or a summary of the main difficulties and challenges encountered.">
+                                            <div km-textbox-ml name="statusDescription" required ng-model="document.statusDescription" locales="document.header.languages"></div>
+                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="isSubjectToPic" required caption="Is access to genetic resources subject to prior informed consent (PIC) as provided in Article 6.1?">
                                                 <div km-yes-no required name="isSubjectToPic" ng-model="document.isSubjectToPic" locales="document.header.languages"></div>
                                             </div>
+                                        </div>
 
-                                            <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined && !document.isSubjectToPic">
-                                                <div class="km-control-group" name="noPicStatus" required caption="">
-                                                    <label name="noPicStatus" for="noPicStatus">Please select Pic Status</label>
-                                                    <div km-term-radio required name="noPicStatus" ng-model="document.noPicStatus" locales="document.header.languages"
-                                                         terms="options.noPicStatus()" show-description="true" binding-type="term">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12" ng-if="document.isSubjectToPic">
-                                                <div class="km-control-group" required name="picMeasures" caption="Please select the relevant ABS measure/s from the following list regulating access to genetic resources. ">
-                                                    <div document-selector ng-disabled="!document.government.identifier" name="picMeasures" ng-model="document.picMeasures" question="measure"
-                                                         on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined">
-                                                <div class="km-control-group" name="picMeasuresDescription"  caption="Please further explain your response.">
-                                                    <div km-textbox-ml name="picMeasuresDescription" required ng-model="document.picMeasuresDescription" locales="document.header.languages"></div>
+                                        <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined && !document.isSubjectToPic">
+                                            <div class="km-control-group" name="noPicStatus" required caption="">
+                                                <label name="noPicStatus" for="noPicStatus">Please select Pic Status</label>
+                                                <div km-term-radio required name="noPicStatus" ng-model="document.noPicStatus" locales="document.header.languages"
+                                                     terms="options.noPicStatus()" show-description="true" binding-type="term">
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-xs-12" ng-if="document.isSubjectToPic">
+                                            <div class="km-control-group" required name="picMeasures" caption="Please select the relevant ABS measure/s from the following list regulating access to genetic resources. ">
+                                                <div document-selector ng-disabled="!document.government.identifier" name="picMeasures" ng-model="document.picMeasures" question="measure"
+                                                     on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined">
+                                            <div class="km-control-group" name="picMeasuresDescription"  caption="Please further explain your response.">
+                                                <div km-textbox-ml name="picMeasuresDescription" required ng-model="document.picMeasuresDescription" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasIplc" required caption="Does your country (or jurisdiction indicated) have indigenous peoples and local communities?">
                                                 <div km-yes-no required name="hasIplc" ng-model="document.hasIplc" locales="document.header.languages"></div>
                                             </div>
+                                        </div>
                                         <div class="col-xs-12" ng-if="document.hasIplc">
                                             <div class="km-control-group" name="iplcType" required caption="">
                                                 <div km-term-radio required name="iplcType" ng-model="document.iplcType" locales="document.header.languages"
@@ -196,14 +196,13 @@
                                                 <div km-textbox-ml name="iplcDescription" required ng-model="document.iplcDescription" locales="document.header.languages"></div>
                                             </div>
                                         </div>
-                                        </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasIplcRightEstablished" required caption="Do indigenous peoples and local communities have the established right to grant access to genetic resources according to your domestic law? ">
                                                 <div km-yes-no ng-model="document.hasIplcRightEstablished" ng-click="onHasIplcRightChange()" locales="document.header.languages"></div>
                                             </div>
-
+                                        </div>
                                         <div class="col-xs-12" ng-if="document.hasIplcRightEstablished">
                                             <label name="isIplcRightFullyImplemented" for="isIplcRightFullyImplemented">Is iplc right fully implemented</label>
                                             <label class="control-label planing-plc">
@@ -235,7 +234,6 @@
                                                 </div>
                                           </div>
                                        </div>
-                                    </div>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="hasStepsForIplcApproval" required caption="Has your country (or the jurisdiction indicated) taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous peoples and local communities within your country is accessed with the PIC or approval and involvement of these indigenous peoples and local communities and that MAT have been established?">
