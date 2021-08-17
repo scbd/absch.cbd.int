@@ -29,8 +29,8 @@
 			"field": "text_EN_txt"
 		},
 		{
-			"type": "thesaurus",
-			"term": "focalPointTypes",
+			"type": "customListFn",
+			"fn": "getFocalPointTypes",
 			"title": "Additional responsibilities",
 			"field": "type_ss"
 		}

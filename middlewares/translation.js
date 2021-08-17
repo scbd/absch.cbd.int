@@ -1,8 +1,6 @@
-﻿let fs      = require('fs');
-let util    = require('util');
+﻿import { stat } from 'fs/promises';
 let _       = require('lodash');
 let url     = require('url');
-    fs.stat = util.promisify(fs.stat);
 
 let cacheControl = require('./cache-control')
 
@@ -31,12 +29,12 @@ async function renderLanguageFile(req, res, next) {
  
          let statsLang;
          try{
-             statsLang  = await fs.stat(global.app.rootPath + path);
+             statsLang  = await stat(global.app.rootPath + path);
          }catch(e){}
 
          if (statsLang && statsLang.isFile()) {
              
-             let statsEN    = await fs.stat(`${global.app.rootPath}/app${requestedUrl}`);
+             let statsEN    = await stat(`${global.app.rootPath}/app${requestedUrl}`);
  
              let mLangtime  = new Date(util.inspect(statsLang.mtime));
              let mENtime    = new Date(util.inspect(statsEN.mtime));
@@ -51,6 +49,15 @@ async function renderLanguageFile(req, res, next) {
 
     let urlPreferredLang;
     let preferredLang = getPreferredLanguage(req);
+
+    let dirExists;
+    try{
+        dirExists = await stat(`${global.app.rootPath}/dist/${preferredLang}`)
+    }
+    catch(e){} 
+    if(!dirExists || !dirExists.isDirectory())
+        preferredLang = 'en';
+
     let hashMapping   = require(`${global.app.rootPath}/dist/${preferredLang}/app/hash-file-mapping.js.json`);
     
     if(req.params.lang)

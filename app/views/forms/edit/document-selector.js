@@ -58,7 +58,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 show    : $attr.allowNew=='true',
                 schema  : $attr.allowNewSchema,
                 title   : $attr.allowNewButtonTitle,
-                schemas : ($attr.allowNewSchema||'').split(','),
+                schemas : _.compact(($attr.allowNewSchema||'').split(',')),
             };     
 
             //==================================
@@ -350,7 +350,12 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     var myGovernmentQuery = '_ownership_s:country\\:'+solr.escape($scope.userGov.toLowerCase());
                     rawQuery.fieldQueries.push(myGovernmentQuery);
                 }
-            
+                //if the custom query wants custom pagination
+                if(rawQuery.currentPage)
+                    $scope.searchResult.currentPage = rawQuery.currentPage;
+                if(rawQuery.rowsPerPage)
+                    $scope.searchResult.rowsPerPage = rawQuery.rowsPerPage;
+
                 var queryParameters = {
                     fields        : rawQuery.fields,
                     fieldQuery    : rawQuery.fieldQueries,
@@ -380,7 +385,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                        if(!$scope.onRecordsFetched) 
                             $scope.rawDocuments = data.data.response;
                        else 
-                            $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response})||data.data.response;
+                            $scope.rawDocuments = $scope.onRecordsFetched({data:data.data.response, query:queryParameters})||data.data.response;
 
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
@@ -681,7 +686,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
                     'organization'              : 'views/forms/edit/directives/edit-organization.directive',
                     'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive',
-                    'resource'                  : 'views/forms/edit/directives/edit-resource.directive'
+                    'resource'                  : 'views/forms/edit/directives/edit-resource.directive',
+                    'capacityBuildingInitiative': 'views/forms/edit/directives/edit-capacity-building-initiative.directive',
                 }
                 $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];

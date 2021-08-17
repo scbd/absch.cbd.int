@@ -55,20 +55,20 @@ app.directive('countryProfile', function() {
                 }
 
                 function loadCountryRecords(code){
-
+                    const groupField = 'grp_government_schema_s';
                     var searchQuery = $scope.exportQuery = {
                         fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
                         fieldQuery     : [`schema_s:(${nationalSchemas.map(solr.escape).join(' ')})`],
                         rowsPerPage    : 500,
                         sort           : 'updatedDate_dt desc',
-                        groupField     : 'government_schema_s',
+                        groupField     : groupField,
                         groupLimit     : 10
                     };
                     searchQuery.query = [`government_s:${solr.escape(code)} OR (countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`]
                     searchService.group(searchQuery)
                     .then(function(result){
 
-                        var countryResult   = result.data.grouped.government_schema_s;
+                        var countryResult   = result.data.grouped[groupField];
                         var totalCount      = countryResult.ngroups;
 
                         _.forEach(countryResult.groups, function(group){

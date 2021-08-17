@@ -40,7 +40,7 @@
                     <span ng-bind="task.workflow.createdOn | moment:'fromNow'"></span>
                 </div>
                 <a rel="noopener" style="color:#888; font-size: 12px;" href="mailto:{{task.workflow.createdBy_info.email}}">
-                    by <span ng-bind="task.workflow.createdBy_info.firstName+' '+task.workflow.createdBy_info.lastName+'('task.workflow.createdBy_info.email')'"></span>
+                    by <span ng-bind="task.workflow.createdBy_info.firstName+' '+task.workflow.createdBy_info.lastName+'('+task.workflow.createdBy_info.email+')'"></span>
                 </a>
             </div>
             <div class="col-xs-3  hidden-xs">

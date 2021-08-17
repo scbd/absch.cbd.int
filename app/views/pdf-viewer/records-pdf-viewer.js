@@ -84,15 +84,13 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
         }
 
         function loadPdfDocumentDetails(code){
-            $scope.pdf.uniqueId = uniqueId;
-            $scope.pdf.fileName = uniqueId + '-' + locale + '.pdf';
-            $scope.pdf.src = getPdfSrc($scope.pdfLocale);
             if($route.current.params.type == 'draft-documents'){
                 $http.get('/api/v2018/document-sharing/'+ code)
                 .then(function(result){
-                    
-                    if(result.status == 200){
+                    if(result.data.sharedData){
                         $scope.sharedData = result.data.sharedData;
+                        $scope.pdf.uniqueId = uniqueId = $scope.sharedData.document.workingDocumentID + '-draft';
+                        $scope.pdf.fileName = uniqueId + '-' + locale + '.pdf';
                         $scope.pdf.uniqueId = uniqueId;
                     }
                 })
@@ -102,6 +100,9 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 })
             }
             else{
+                $scope.pdf.uniqueId = uniqueId;
+                $scope.pdf.fileName = uniqueId + '-' + locale + '.pdf';
+                $scope.pdf.src = getPdfSrc($scope.pdfLocale);
                 $timeout(()=>$scope.loadLangPdf(locale||'en'), 100);    
             }
         }
