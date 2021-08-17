@@ -245,7 +245,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                     onFinish: function(){ 
                         joyride.start = false;
                         $scope.tourOn = false;
-                        closeSortingRecords();
+                        closeTab();
                     },
                     steps : [
                                 {
