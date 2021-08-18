@@ -1,4 +1,4 @@
-{
+  {
     "welcome" :  {
       "title": "Welcome to the Submit page: Dashboard",
       "content": "<p>The Dashboard is your personal workspace. It gives you an overview of the status of various records in the Clearing-House. Information is colour-coded to simplify navigation.Here you are able to submit, review and edit records, depending on your user role.</p>"
@@ -29,10 +29,10 @@
     },
     "needHelp" :  {
       "title": "Need help?",
-      "content": "<br><br><b>Need help?</b><br><br><p>Click here for more contextual help.</p>"
+      "content": "<p>Click here for more contextual help.</p>"
     },
   "needMoreHelp" :  {
       "title": "Need more help?",
       "content": "<p>Us the Chat feature to message us for additional support.</p>"
     }
-}
+  }

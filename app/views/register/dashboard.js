@@ -66,9 +66,9 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         joyride.start = false;
                         $scope.tourOn = false;
                         $scope.showProfileInfo = false;
-                        if($scope.topRecords["CNA"]) {
-                            $scope.topRecords["CNA"] = false;
-                            $element.find("#quickViewCNA").click();
+                        if($scope.topRecords["CON"]) {
+                            $scope.topRecords["CON"] = false;
+                            $element.find("#quickViewContact").click();
                         }
                     },
                     steps : [
@@ -85,22 +85,20 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             content: joyRideText.personalInformation.content,
                             placement: 'top',
                             beforeStep: showProfileInfo
-                            
                         },
                         {
                             appendToBody: true,
                             type: 'element',
-                            selector: "#publishFormate",
+                            selector: "#publishFormat",
                             title: joyRideText.yourRecordsStatus.title,
                             content: joyRideText.yourRecordsStatus.content,
                             placement: 'top',
                             beforeStep: hideProfileInfo
-                            
                         },
                         {
                             appendToBody: true,
                             type: 'element',
-                            selector: "#offlineFormate",
+                            selector: "#offlineFormat",
                             title: joyRideText.yourRecordsOffline.title,
                             content: joyRideText.yourRecordsOffline.content,
                             placement: 'top'
@@ -108,17 +106,17 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type: 'element',
-                            selector: "#quickViewCNA",
+                            selector: "#quickViewContact",
                             title: joyRideText.quickView.title,
                             content: joyRideText.quickView.content,
                             placement: 'right',
                             beforeStep: showTopRecord
-                            
+
                         },
                         {
                             appendToBody: true,
                             type: 'element',
-                            selector: "#addNewRecordCNA",
+                            selector: "#addNewRecordContact",
                             title: joyRideText.addNewRecord.title,
                             content: joyRideText.addNewRecord.content,
                             placement: 'right',
@@ -127,7 +125,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type: 'element',
-                            selector: "#viewListCNA",
+                            selector: "#viewListContact",
                             title: joyRideText.viewAllRecords.title,
                             content: joyRideText.viewAllRecords.content,
                             placement: 'right'
@@ -138,9 +136,8 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#needHelp",
                             title: joyRideText.needHelp.title,
                             content: joyRideText.needHelp.content,
-                            placement: 'left',
+                            placement: 'bottom',
                             beforeStep: gotoSectionHelp
-                            
                         },
                         {
                             appendToBody:true,
@@ -148,7 +145,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#slaask-button-cross",
                             title: joyRideText.needMoreHelp.title,
                             content: joyRideText.needMoreHelp.content,
-                            placement: 'left'
+                            placement: 'top'
                         }
                     ]
                 };
@@ -173,10 +170,14 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         resumeJoyride();
                     }, 100);
                 }
+
                 function showTopRecord(resumeJoyride){
-                    $element.find("#quickViewCNA").click();
-                    $scope.topRecords["CNA"] = !$scope.topRecords["CNA"];
                     $timeout(function(){
+                    document.querySelector('#quickViewContact').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    $element.find("#quickViewContact").click();
+                    $scope.topRecords["CON"] = !$scope.topRecords["CON"];
                         resumeJoyride();
                     }, 100);
                 }
