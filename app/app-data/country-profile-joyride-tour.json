@@ -33,7 +33,7 @@
     },
     "needHelp" :  {
       "title": "Need Help?",
-      "content": "<br><b>Need Help?</b><br>Click here for more contextual help."
+      "content": "Click here for more contextual help."
     },
     "needMoreHelp" :  {
       "title": "Need more help?",
