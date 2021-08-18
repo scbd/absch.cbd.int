@@ -1,55 +1,8 @@
 ﻿<div id="RegisterPage">
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
-    <style>
-        .popover {
-            margin-top: 3px;
-            background-color: #d9534f !important;
-            border: 1px solid #ccc;
-            border: 1px solid rgba(0, 0, 0, .2);
-        }
-
-        .popover.right>.arrow {
-            border-right-color: #999;
-            border-right-color: rgba(0, 0, 0, .25);
-        }
-
-        .popover.right>.arrow:after {
-            border-right-color: #d9534f;
-        }
-
-        .cursor {
-            cursor: pointer;
-        }
-
-        .overview>tbody>tr>td {
-            padding: 3px !important;
-            border: 0;
-        }
-        #jr_7{
-            top: 50px !important;
-            margin-left: -30px;
-        }
-        #jr_8{
-            margin-left: -30px;
-        }
-        #jr_7.jr_pos_bottom:after {
-            left: auto;
-            right: 42px;
-        }
-        #jr_8.jr_pos_top:after{
-            left: auto;
-            right: 25px;
-        }
-    </style>
-    <span register-top-menu></span>
-    <span class="btn-group pull-right">
-                     <a rel="noopener" ng-href="#" class="help-tour link2"
-                        style="font-size:13px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
-                        ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
-                                                                                 aria-hidden="true"></i> Help using the search</span></a>
-                 </span>
-    <div class="register-content card card-1-notrans" style="margin-top: 30px">
+    <register-top-menu></register-top-menu>
+    <div class="register-content card card-1-notrans">
         <div ng-if="isBch && betaArticle" style="margin:10px;">
             <h1 class="color-green bold" style="margin-bottom:30px;padding-top:15px;"
                 ng-bind-html="betaArticle.title | lstring:locale"></h1>
@@ -59,12 +12,14 @@
         <div class="register-content-header bg-darkgrey color-white">
 
             <div style="padding:10px 10px;">
+                <span class="btn-group pull-right dashboard-tour">
+                    <a rel="noopener" ng-href="#" class="help-tour link2" ng-click="tour()"> 
+                        <i class="fa fa-question-circle" aria-hidden="true"></i> 
+                        <span class="hidden-xs hidden-sm"> Take Dashboard tour</span>
+                    </a>
+                </span>
                 <h3>Dashboard </h3>
-                <span class="btn-group pull-right">
-
-            </span>
-            </div>
-            
+            </div>            
         </div>
         <div class="register-content-content">
             <div style="margin:10px 0 20px 0;">

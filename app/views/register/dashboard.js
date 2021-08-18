@@ -136,7 +136,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#needHelp",
                             title: joyRideText.needHelp.title,
                             content: joyRideText.needHelp.content,
-                            placement: 'bottom',
+                            placement: 'left',
                             beforeStep: gotoSectionHelp
                         },
                         {
@@ -145,7 +145,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#slaask-button-cross",
                             title: joyRideText.needMoreHelp.title,
                             content: joyRideText.needMoreHelp.content,
-                            placement: 'top'
+                            placement: 'left'
                         }
                     ]
                 };
