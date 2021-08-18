@@ -7,13 +7,13 @@ import 'ngDialog';
 import 'toastr';
 import '~/views/forms/directives/document-sharing';
 import 'ck-editor-css';
-    
+
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
     'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
             $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, 
-            articlesService, roleService, locale, commonjs, ngDialog, $window){
+            articlesService, roleService, locale, commonjs, ngDialog, $window, joyrideService){
 
     	return{
     		restrict: 'EA',
@@ -91,7 +91,6 @@ import 'ck-editor-css';
                     next_fs.addClass("active");
 
                 });
-
 
                 //====================            
                 $scope.goNextTab = function(currentTab)

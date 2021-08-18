@@ -261,10 +261,13 @@
                         <span ng-if="::!$last"> | </span>
                     </span>
                 </div>
-                <button type="button" class="btn  btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
+                <button id="workflowSaveDraft" type="button" class="btn  btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
                 ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                     <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                     Save Draft</button>
+                <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" class="btn btn-primary" 
+                        style="color:#fff;" id="close_button">
+                        <i class="fa fa-times-circle"></i></a>
                 <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
                 identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
         
@@ -281,16 +284,16 @@
                 <div class="col-xs-10">
                     <ul class="steps">
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
+                            <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
+                            <a id="workflowSubFor" rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
+                            <a id="workflowReview" rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
                         </li>
                         <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
+                            <a id="workflowPublish" rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
                         </li>
                     </ul>
                 </div>
@@ -330,6 +333,10 @@
                 <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                 <i class="fa fa-save"></i>
             </button>
+            <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" 
+            class="btn btn-sm btn-primary pull-right" style="color:#fff;" id="close_button">
+                    <i class="fa fa-times-circle"></i> <span class="hidden-xs">Close</span> 
+            </a>
             <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" style="padding-top:0px;margin-top:-1px"
             class="btn btn-sm pull-right" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
             identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
@@ -417,4 +424,5 @@
             <button type="button" ng-click="closeAccessDialog()" class="btn btn-default">Close</button>
         </div>
     </script>
+    <joyride ng-if="tourOn"></joyride>
 </div>
