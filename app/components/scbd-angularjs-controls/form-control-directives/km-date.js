@@ -32,10 +32,12 @@ import 'bootstrap-datepicker';
           $element.find('input').focus();
         });
 
-        $scope.$watch('binding', function(newVal) {
+        $scope.onDateChange = function(){
           ngModelController.$setViewValue($scope.binding);
+        }
+        $scope.$watch('binding', function(newVal) {
           if($scope.binding)
-          $element.datepicker('update', $scope.binding)
+            $element.datepicker('update', $scope.binding)
         });
 
       }

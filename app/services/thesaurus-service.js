@@ -147,6 +147,9 @@ import _ from 'lodash';
                 bchRaAuthorAffiliation  :   'Organization Types',
                 transboundaryMovementTypes : 'TransboundaryMovementTypes',
                 responsibleFunctions   : '72E01D51-E205-4A6B-8D50-8A6F240FDA19',
+                smsrStatus   : '611F123A-A329-412B-868B-A16D73603FD2',
+                smsrNoPicStatus   : '13EDEB08-60A8-4595-9511-3EE4EEB8C5A5',
+				smsrIplcType   : '6EA23B4D-1A86-4C61-B2CE-4698E0D2E612',
 
 
                 //===========================  Terms to be removed  ==========================\\

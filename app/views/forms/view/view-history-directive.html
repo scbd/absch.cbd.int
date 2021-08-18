@@ -25,7 +25,14 @@
                             <span class="bold color-red"> REVOKED</span>
                         </span>
                         <span ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))">
-                            <span class="bold color-grey" ><span ng-bind='(document.type | schemaShortName) === "IRCC" ? "NOT VALID" : "OLD VERSION"'></span></span>
+                            <span class="bold color-grey" >
+                                <span ng-if="document.type === 'permit'">
+                                    NOT VALID
+                                </span>
+                                <span ng-if="document.type !== 'permit'">
+                                    OLD VERSION
+                                </span>                                
+                            </span>
                         </span>
                         <span ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))">
                             <span class="bold color-green"> PUBLISHED</span>
