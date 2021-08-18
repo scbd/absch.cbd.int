@@ -53,7 +53,7 @@
                                     </td>
                                     <td  width="20%">
                                         <a rel="noopener" target="_blank" ng-href="/database/{{doc.uniqueId|uppercase|encodeURIComponent}}" ng-bind="doc.uniqueId|uppercase" ></a>
-                                        <div ng-include="'/app/views/forms/view/bch/icons.html'"></div>
+                                        <bch-icons></bch-icons>
                                     </td>
                                     <td  width="15%" class="hidden-xs">
                                         <span ng-bind="doc.updatedOn|formatDateWithTime"></span>

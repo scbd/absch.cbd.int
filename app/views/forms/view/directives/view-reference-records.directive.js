@@ -3,6 +3,7 @@ import _ from 'lodash';
 import template from "text!./view-reference-records.directive.html";
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
+import '~/views/forms/view/bch/icons';
 
 app.directive("viewReferencedRecords", [function () {
 	return {
