@@ -322,7 +322,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                                     selector: "#needHelp",
                                     title: joyRideText.needHelp.title,
                                     content: joyRideText.needHelp.content,
-                                    placement: 'left',
+                                    placement: 'bottom',
                                     beforeStep: gotoSectionHelp
 
                                 },
@@ -332,7 +332,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                                     selector: "#slaask-button-cross",
                                     title: joyRideText.needMoreHelp.title,
                                     content: joyRideText.needMoreHelp.content,
-                                    placement: 'left'
+                                    placement: 'top'
                                 }
 
                             ]

@@ -1,0 +1,38 @@
+{
+    "welcome" :  {
+      "title": "Summary of records",
+      "content": "<p>On this page, you can view a list of all the records under the record type you selected, and their status. <br><br>You can filter existing records and create new ones, as well as duplicate, edit or delete a record.</p>"
+    },
+    "filters" :  {
+      "title": "Filters",
+      "content": "<p>Use these filters to see a list of all, published, draft records or requests pending approval.</p>"
+    },
+    "Keyword" :  {
+      "title": "Keyword",
+      "content": "<p>Search the list by a word of your choice.</p>"
+    },
+    "adding" :  {
+      "title": "Adding a new record",
+      "content": "<p>Click on the “Add New” button to start creating a new record.</p>"
+    },
+    "duplicate" :  {
+      "title": "Duplicating a record",
+      "content": "<p>Click here to create a duplicate of the existing record.</p>"
+    },
+    "edit" :  {
+      "title": "Editing a record",
+      "content": "<p>Click here to edit an existing record.</p>"
+    },
+    "delete" :  {
+      "title": "Deleting a record",
+      "content": "<p>Click here to delete a record.</p>"
+    },
+    "needHelp" :  {
+      "title": "Need help?",
+      "content": "<p>Click here for more contextual help.</p>"
+    },
+  "needMoreHelp" :  {
+      "title": "Need more help?",
+      "content": "<p>Us the Chat feature to message us for additional support.</p>"
+    }
+}

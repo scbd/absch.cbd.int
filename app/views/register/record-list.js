@@ -7,15 +7,17 @@ import 'views/register/directives/register-top-menu';
 import 'views/directives/block-region-directive';
 import 'views/forms/edit/editFormUtility';
 import 'ngDialog';
-        
+import 'angular-animate';
+import 'angular-joyride';
+import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
 
         export { default as template } from './record-list.html';
 
         export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
-            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr',
+            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr','joyrideService',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr) {
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService) {
 
                 $scope.languages = commonjs.languages;
                 $scope.orderBy = ['-updatedOn'];
@@ -33,6 +35,102 @@ import 'ngDialog';
                     };
                     ngMeta.resetMeta();                       
                     ngMeta.setTitle('List | ', $filter("schemaName")(type));
+                }
+                $scope.tour = function(){
+                    $scope.tourOn = true;
+                    var joyride = joyrideService;
+                    joyride.config = {
+                        overlay: true,
+                        onStepChange: function(){  },
+                        onStart: function(){  },
+                        onFinish: function(){
+                            joyride.start = false;
+                            $scope.tourOn = false;
+                        },
+                        steps : [
+                            {
+                                appendToBody:true,
+                                title: joyRideText.welcome.title,
+                                content: joyRideText.welcome.content
+                            },
+                            {
+                                appendToBody:true,
+                                type: 'element',
+                                selector: "#publishedRecords",
+                                title: joyRideText.filters.title,
+                                content: joyRideText.filters.content,
+                                placement: 'top',
+
+                            },
+                            {
+                                appendToBody: true,
+                                type: 'element',
+                                selector: "#searchKeyword",
+                                title: joyRideText.Keyword.title,
+                                content: joyRideText.Keyword.content,
+                                placement: 'top',
+                            },
+                            {
+                                appendToBody: true,
+                                type: 'element',
+                                selector: "#new_button",
+                                title: joyRideText.adding.title,
+                                content: joyRideText.adding.content,
+                                placement: 'left'
+                            },
+                            {
+                                appendToBody: true,
+                                type: 'element',
+                                selector: "#duplicateRecord",
+                                title: joyRideText.duplicate.title,
+                                content: joyRideText.duplicate.content,
+                                placement: 'left'
+
+                            },
+                            {
+                                appendToBody: true,
+                                type: 'element',
+                                selector: "#editRecord",
+                                title: joyRideText.edit.title,
+                                content: joyRideText.edit.content,
+                                placement: 'left'
+                            },
+                            {
+                                appendToBody: true,
+                                type: 'element',
+                                selector: "#deleteRecord",
+                                title: joyRideText.delete.title,
+                                content: joyRideText.delete.content,
+                                placement: 'left'
+                            },
+                            {
+                                appendToBody:true,
+                                type: 'element',
+                                selector: "#needHelp",
+                                title: joyRideText.needHelp.title,
+                                content: joyRideText.needHelp.content,
+                                placement: 'left',
+                                beforeStep: gotoSectionHelp
+
+                            },
+                            {
+                                appendToBody:true,
+                                type: 'element',
+                                selector: "#slaask-button-cross",
+                                title: joyRideText.needMoreHelp.title,
+                                content: joyRideText.needMoreHelp.content,
+                                placement: 'right'
+                            }
+                        ]
+                    };
+                    joyride.start = true;
+                    function gotoSectionHelp (resumeJoyride){
+                        $timeout(function(){
+                            $('html,body').scrollTop(0);
+                            resumeJoyride();
+                        }, 100);
+                    }
+
                 }
                 $scope.toggleOrderBy = function (key) {
                     if (key == $scope.orderBy[0].substr(1))
