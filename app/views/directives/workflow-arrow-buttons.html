@@ -136,9 +136,28 @@
         .ngdialog.ngdialog-theme-default.unauthorized-access-dialog .ngdialog-content {
             width: 50%!important;
         }
+        #jr_2,#jr_5,#jr_6{
+            margin-left: -30px;
+        }
+        #jr_5{
+            top: 50px !important;
+        }
+        #jr_5.jr_pos_bottom:after,#jr_2.jr_pos_bottom:after {
+            left: auto;
+            right: 42px;
+        }
+        #jr_6.jr_pos_top:after{
+            left: auto;
+            right: 25px;
+        }
     </style>
     <span block-region activate="loading" ng-if="loading" update-parent-position="true" dynamic-text="blockText" block-text="Processing..."></span>
-    
+    <span class="btn-group pull-right" style="margin-top: -80px">
+														<a rel="noopener" ng-href="#" class="help-tour link2"
+                                                           style="font-size:13px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+                                                           ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
+                                                                                                                    aria-hidden="true"></i> Help using the Submission Form </span></a>
+													</span>
     <div class="workflow-arrows margin-bottom-20"  >
         <ng-include onload="workflowScope=workflowScope;schema=documentType;languages=languages" src="'template/workflow-arrows'"></ng-include>
     </div>
@@ -261,7 +280,7 @@
                         <span ng-if="::!$last"> | </span>
                     </span>
                 </div>
-                <button type="button" class="btn  btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
+                <button id="workflowSaveDraft" type="button" class="btn  btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
                 ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                     <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                     Save Draft</button>
@@ -281,16 +300,16 @@
                 <div class="col-xs-10">
                     <ul class="steps">
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
+                            <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
+                            <a id="workflowSubFor" rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
+                            <a id="workflowReview" rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
                         </li>
                         <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
-                            <a rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
+                            <a id="workflowPublish" rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
                         </li>
                     </ul>
                 </div>
@@ -417,4 +436,5 @@
             <button type="button" ng-click="closeAccessDialog()" class="btn btn-default">Close</button>
         </div>
     </script>
+    <joyride ng-if="tourOn"></joyride>
 </div>
