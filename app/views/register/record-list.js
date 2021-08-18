@@ -119,7 +119,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 selector: "#slaask-button-cross",
                                 title: joyRideText.needMoreHelp.title,
                                 content: joyRideText.needMoreHelp.content,
-                                placement: 'right'
+                                placement: 'left'
                             }
                         ]
                     };

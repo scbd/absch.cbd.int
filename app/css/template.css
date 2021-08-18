@@ -2932,6 +2932,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     border: 0;
 }
 
+.editHeader .dashboard-tour .help-tour,
 #SubmitPage .dashboard-tour .help-tour,
 #RegisterPage .dashboard-tour .help-tour{
     font-size:13px;

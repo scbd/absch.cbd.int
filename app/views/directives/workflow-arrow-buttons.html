@@ -136,28 +136,9 @@
         .ngdialog.ngdialog-theme-default.unauthorized-access-dialog .ngdialog-content {
             width: 50%!important;
         }
-        #jr_2,#jr_5,#jr_6{
-            margin-left: -30px;
-        }
-        #jr_5{
-            top: 50px !important;
-        }
-        #jr_5.jr_pos_bottom:after,#jr_2.jr_pos_bottom:after {
-            left: auto;
-            right: 42px;
-        }
-        #jr_6.jr_pos_top:after{
-            left: auto;
-            right: 25px;
-        }
     </style>
     <span block-region activate="loading" ng-if="loading" update-parent-position="true" dynamic-text="blockText" block-text="Processing..."></span>
-    <span class="btn-group pull-right" style="margin-top: -80px">
-														<a rel="noopener" ng-href="#" class="help-tour link2"
-                                                           style="font-size:13px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
-                                                           ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
-                                                                                                                    aria-hidden="true"></i> Help using the Submission Form </span></a>
-													</span>
+    
     <div class="workflow-arrows margin-bottom-20"  >
         <ng-include onload="workflowScope=workflowScope;schema=documentType;languages=languages" src="'template/workflow-arrows'"></ng-include>
     </div>
@@ -284,6 +265,9 @@
                 ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                     <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                     Save Draft</button>
+                <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" class="btn btn-primary" 
+                        style="color:#fff;" id="close_button">
+                        <i class="fa fa-times-circle"></i></a>
                 <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
                 identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
         
@@ -349,6 +333,10 @@
                 <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                 <i class="fa fa-save"></i>
             </button>
+            <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" 
+            class="btn btn-sm btn-primary pull-right" style="color:#fff;" id="close_button">
+                    <i class="fa fa-times-circle"></i> <span class="hidden-xs">Close</span> 
+            </a>
             <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" style="padding-top:0px;margin-top:-1px"
             class="btn btn-sm pull-right" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
             identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
