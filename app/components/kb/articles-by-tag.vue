@@ -12,15 +12,24 @@
                     <div class="kb-listing">
                         <ul class="article-with-tags-ul">
                             <li class="article-with-tags-li" v-for="article in articles">
-                                <a href="#" @click="goToArticle(article, tag)"> {{article.title[$locale]}}</a>
-                                <div class="date-sec">
-									<div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i> {{article.meta.modifiedOn|dateFormat}}</div>
-                                    <div class="inner-area">
-										<i class="fa fa-tag" aria-hidden="true"></i> 
-										<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-										<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+								<a href="#" @click="goToArticle(article, tag)">
+									<span class="article-title">
+										{{article.title[$locale]}}
+									</span>
+									<div class="article-summary" @click="goToArticle(article, tag)">
+										{{article.summary ? article.summary[$locale] : ''}}...
 									</div>
-                                </div>
+								</a>
+                              <div class="inner-area">
+                                <i class="fa fa-tag" aria-hidden="true"></i>
+                                <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
+                                <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+                              </div>
+                              <div class="date-sec">
+                                  <div class="inner-area"><i aria-hidden="true" class="fa fa-calendar"></i>
+                                      {{article.meta.modifiedOn|dateFormat}}
+                                  </div>
+                              </div>
                             </li>
                         </ul>
                     </div>
@@ -31,7 +40,7 @@
             </div>
 
             <div v-if="articlesCount>10">
-				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>                
+				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>																
             </div>
 
         </div>
@@ -48,7 +57,7 @@
 <script>
 
 	import i18n from '../../locales/en/components/kb.json';
-	import globalPagination from './pagination.vue';
+	import paginate from './pagination.vue';
 	import relevantArticles from "./articles-by-relation.vue";
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
@@ -59,7 +68,7 @@
 	  name:'KbArticlesByTag',
 		components:{
 			relevantArticles,
-			globalPagination,
+            paginate,
 			popularTags
 		},
 		props:{
@@ -126,6 +135,7 @@
 				};
 				const f = { 
 					[`title.${this.$locale}`]	: 1,
+					[`summary.${this.$locale}`]	: 1,
 					adminTags 					: 1,
 					"meta.modifiedOn":1, _id:1
 				} ;
