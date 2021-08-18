@@ -1,4 +1,21 @@
-﻿<div id="SubmitPage" >
+﻿<style>
+    #jr_7{
+            top: 50px !important;
+            margin-left: -30px;
+        }
+        #jr_8{
+            margin-left: -30px;
+        }
+        #jr_7.jr_pos_bottom:after {
+            left: auto;
+            right: 42px;
+        }
+        #jr_8.jr_pos_top:after{
+            left: auto;
+            right: 25px;
+        }
+</style>
+<div id="SubmitPage" >
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
 
@@ -18,6 +35,11 @@
                     </div>
                 </div>
 
+        <span class="btn-group pull-right">
+                <a rel="noopener" ng-href="#" class="help-tour link2"
+                   style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+                   ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle" aria-hidden="true"></i> Help using the Submit</span></a>
+        </span>
         <div class="register-content-content">
             <div ng-show="msg" class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
@@ -35,7 +57,7 @@
                         Requests
                         <span class="badge badge-default" ng-bind="(records | filter:schemaFilter | filter:isRequest).length"></span>
                     </button>
-                        <button type="button" ng-click="statusFilter=isPublished" class="filterbtn btn btn-success">
+                        <button id="publishedRecords" type="button" ng-click="statusFilter=isPublished" class="filterbtn btn btn-success">
                         <i  class="fa fa-2 fa-square"  ng-class="{'fa-check-square':statusFilter==isPublished}"></i> Published
                         <span class="badge badge-default" ng-bind="(records | filter:schemaFilter | filter:isPublished).length"></span>
                     </button>
@@ -43,7 +65,7 @@
                         <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter==isDraft}"></i> Drafts
                         <span class="badge badge-default" ng-bind="(records | filter:schemaFilter | filter:isDraft).length"></span>
                     </button>
-                        <input type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group">
+                        <input id="searchKeyword" type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group">
                     </div>
                 </div>
                 <div class="col-md-5 col-xs-12">
@@ -184,14 +206,15 @@
                                         </a>
                                     </div>
                                 </div>
+                            </div>
                         </td>
                         <td>
                             <div class="btn-group document_buttons btn-group-sm" style="width:100px;" ng-show="record.workflowActivityStatus!='pending'">
-                                <button ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
+                                <button id="duplicateRecord" ng-show="showAddButton()" title="Duplicate" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
                                 <button title="Locked for edit" ng-show="!record.revoked && isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
                                 <button title="Cancel request" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askRecallWorkflowRequest(record)"><i class="fa fa-undo"></i></button>
-                                <a rel="noopener" translation-url  title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
-                                <button title="Delete" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                                <a id="editRecord" rel="noopener" translation-url  title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a>
+                                <button id="deleteRecord" title="Delete" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -339,4 +362,5 @@
             </div>
         </div>
     </div>
+    <joyride ng-if="tourOn"></joyride>
 </div>
