@@ -11,7 +11,7 @@
 				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
 				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
 				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-				data-container="{{container}}" is-dialog="{{isDialog}}">
+				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div ng-show="tab=='edit'" km-tab="edit">

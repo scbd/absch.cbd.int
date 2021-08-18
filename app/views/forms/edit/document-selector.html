@@ -190,7 +190,9 @@
                 
                 </div>
                 <div  ng-show="allowNew.editingOn" class="row" style="max-width:100%">
-                    <div id="divNewRecord" class="col-lg-12" style="margin:20px"></div>
+                    <span ng-if="loadingEditDirective" style="margin:40%"><i class="fa fa-spin fa-spinner"></i> loading...</span>
+                    <div id="divNewRecord" class="col-lg-12" style="margin:20px">
+                    </div>
                 </div>
             </div> 
 

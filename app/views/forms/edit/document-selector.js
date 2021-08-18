@@ -689,6 +689,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'resource'                  : 'views/forms/edit/directives/edit-resource.directive',
                     'capacityBuildingInitiative': 'views/forms/edit/directives/edit-capacity-building-initiative.directive',
                 }
+                $scope.loadingEditDirective = true;
                 $scope.allowNew.activeSchema = lschema;
                 var schemaDetails = schemaMapping[lschema];
                 var divSelector = ' #divNewRecord'
@@ -712,7 +713,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     $scope.$apply(function () {                        
                         $('#'+dialogId + divSelector).empty()
                                 .append($compile(directiveHtml)($scope));
-                        defer.resolve('')
+                        defer.resolve('');
+                        $scope.loadingEditDirective = false;
                     });
                 });
 
