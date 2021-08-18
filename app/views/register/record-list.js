@@ -109,7 +109,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 selector: "#needHelp",
                                 title: joyRideText.needHelp.title,
                                 content: joyRideText.needHelp.content,
-                                placement: 'bottom',
+                                placement: 'left',
                                 beforeStep: gotoSectionHelp
 
                             },
@@ -119,7 +119,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 selector: "#slaask-button-cross",
                                 title: joyRideText.needMoreHelp.title,
                                 content: joyRideText.needMoreHelp.content,
-                                placement: 'top'
+                                placement: 'right'
                             }
                         ]
                     };

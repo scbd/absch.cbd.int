@@ -1,45 +1,24 @@
-﻿<style>
-    #jr_7{
-            top: 50px !important;
-            margin-left: -30px;
-        }
-        #jr_8{
-            margin-left: -30px;
-        }
-        #jr_7.jr_pos_bottom:after {
-            left: auto;
-            right: 42px;
-        }
-        #jr_8.jr_pos_top:after{
-            left: auto;
-            right: 25px;
-        }
-</style>
-<div id="SubmitPage" >
+﻿<div id="SubmitPage" >
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
 
     <span register-top-menu></span>
     <div class="card card-1-notrans bg-white">
         
-            <div>
-                <div class="register-content-header" style="margin-top:20px;" ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
-                         <div style="padding:5px 5px;">
-                            <h3 style="padding: 0 5px 0 5px; margin: 0; font-weight: normal;">
-                                <a rel="noopener" href="/register" class="color-white"><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)  </a>
-                                <span class="helpinfoInline"  >
-                                        <a rel="noopener" href="/register"><i class="glyphicon glyphicon-remove pull-right color-white"></i></a>
-                                </span>
-                             </h3>
-                        </div>
-                    </div>
-                </div>
-
-        <span class="btn-group pull-right">
-                <a rel="noopener" ng-href="#" class="help-tour link2"
-                   style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
-                   ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle" aria-hidden="true"></i> Help using the Submit</span></a>
-        </span>
+        <div class="register-content-header" style="margin-top:20px;" ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
+            <div style="padding:5px 5px;">
+                <span class="btn-group pull-right dashboard-tour">
+                    <a rel="noopener" ng-href="#" class="help-tour link2" ng-click="tour()"> 
+                        <i class="fa fa-question-circle" aria-hidden="true"></i> 
+                        <span class="hidden-xs hidden-sm"> Take tour</span>
+                    </a>
+                </span>
+                <h3 style="padding: 0 5px 0 5px; margin: 0; font-weight: normal;">
+                <a rel="noopener" href="/register" class="color-white"><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)  </a>                                
+                </h3>
+            </div>
+        </div>
+        
         <div class="register-content-content">
             <div ng-show="msg" class="alert alert-success alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button>
@@ -84,6 +63,9 @@
                         <a rel="noopener" translation-url  ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new" class="btn btn-sm btn-primary bold" 
                             style="color:#fff;" id="new_button" ng-if="showAddButton()">
                             <i class="fa fa-plus-square"></i> <span class="hidden-xs">Add New</span> </a>
+                        <a rel="noopener" translation-url  ng-href="/register" class="btn btn-sm btn-primary bold" 
+                            style="color:#fff;" id="close_button">
+                            <i class="fa fa-times-circle"></i> <span class="hidden-xs">Close</span> </a>
                     </div>
                 </div>
             </div>
