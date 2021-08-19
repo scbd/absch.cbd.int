@@ -45,7 +45,7 @@ app.directive("viewReferencedRecords", [function () {
 									_.forEach(record.referenceRecord_info_ss, function(info){
 										info = JSON.parse(info);
 										_.forEach(info.identifiers, function(identifier){
-											if(removeRevisonNumber(identifier) == $scope.model){
+											if(removeRevisionNumber(identifier) == $scope.model){
 												if(!$scope.referenceRecords)
 													$scope.referenceRecords = {};
 
@@ -80,15 +80,14 @@ app.directive("viewReferencedRecords", [function () {
 				return encodeURIComponent(query);
 			}
 
-			function getFieldTitles(){
-				let isABS = realm.is('ABS');
-				let file = 'app-data/bch/linked-records-field-titles.json';
-				if(isABS)
-					file = 'app-data/abs/linked-records-field-titles.json';
-				return commonjs.loadJsonFile(file)
+			async function getFieldTitles(){
+				if(realm.is('ABS'))
+					return (await import('~/app-data/abs/linked-records-field-titles.json')).default;
+
+				return (await import('~/app-data/bch/linked-records-field-titles.json')).default;
 			}
 
-			function removeRevisonNumber(identifier){
+			function removeRevisionNumber(identifier){
 				return identifier.replace(/@[0-9]+$/, '');
 			}
 

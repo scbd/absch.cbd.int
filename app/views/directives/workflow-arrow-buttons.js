@@ -885,17 +885,15 @@ import 'ck-editor-css';
 					});
 				}
 
-                function loadOfflineFormatDetails(){
+                async function loadOfflineFormatDetails(){
                     if(realm.is('BCH')){
-                        commonjs.loadJsonFile('app-data/bch/offline-formats.json')
-                        .then(function(data){
-                            $scope.offlineFormats = data;
-                            $timeout(function(){
-                                $element.find("[data-toggle='tooltip']").tooltip({
-                                    trigger: 'hover'
-                                });
-                            }, 100)
-                        })
+                        const data = await import('~/app-data/bch/offline-formats.json');                        
+                        $scope.offlineFormats = data.default
+                        $timeout(function(){
+                            $element.find("[data-toggle='tooltip']").tooltip({
+                                trigger: 'hover'
+                            });
+                        }, 100)
                     }
                 }
 

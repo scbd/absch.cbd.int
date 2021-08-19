@@ -4,7 +4,11 @@ import require from 'require';
 import app from 'app';
 import 'ngDialog';
 import 'services/main';
-import 'views/register/directives/register-top-menu'; ;
+import 'views/register/directives/register-top-menu'; 
+import * as searchUserDialog from './search-user-dialog';
+import * as editUserDialog   from './edit-user-dialog';
+import * as editRolesDialog  from './edit-roles-dialog';
+import * as commitDialog     from './commit-dialog';
 
 export { default as template } from './national-user-list.html';
 
@@ -126,7 +130,7 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
         //===========================
         function search() {
 
-            return openDialog('views/register/national-users/search-user-dialog', {
+            return openDialog('search-user-dialog', {
 
                 className : 'ngdialog-theme-default wide',
                 resolve : { government : _literal(authenticatedUser.government) }
@@ -140,7 +144,7 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
                 if(!user) throw "$BREAK";
 
                 if(!user.userID) {
-                    return openDialog('views/register/national-users/edit-user-dialog', {
+                    return openDialog('edit-user-dialog', {
                         resolve : { user : _literal(user) }
                     }).then(function(dialog) {
                         return dialog.closePromise.then(function (r) { return r.value; });
@@ -171,7 +175,7 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
 
             var user = ng.fromJson(ng.toJson(editedUser||{})); // clean & clone object
 
-            return openDialog('views/register/national-users/edit-roles-dialog', {
+            return openDialog('edit-roles-dialog', {
 
                 className : 'ngdialog-theme-default wide',
                 resolve : {
@@ -191,7 +195,7 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
                 var rolesToGrant  = _.difference(user.roles, editedUser.roles);
                 var rolesToRevoke = _.difference(editedUser.roles, user.roles);
 
-                return openDialog('views/register/national-users/commit-dialog', {
+                return openDialog('commit-dialog', {
                     className : 'ngdialog-theme-default wide',
                     resolve : {
                         user : _literal(user),
@@ -242,7 +246,7 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
 
             // Show transaction
 
-            return openDialog('views/register/national-users/commit-dialog', {
+            return openDialog('commit-dialog', {
                 className : 'ngdialog-theme-default wide',
                 resolve : {
                     user : _literal(user),
@@ -353,35 +357,37 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
 
             options = options || {};
 
-            return $q(function(resolve, reject) {
+            return $q(async function(resolve, reject) {
 
-                require([dialog+''], function(controller) {
+                let controller;
+                if(dialog == 'search-user-dialog') controller = searchUserDialog; 
+                if(dialog == 'edit-user-dialog'  ) controller = editUserDialog  ; 
+                if(dialog == 'edit-roles-dialog' ) controller = editRolesDialog ; 
+                if(dialog == 'commit-dialog'     ) controller = commitDialog    ; 
 
-                    options.plain = true;
-                    options.closeByDocument = false;
-                    options.showClose = false;
-                    options.template = controller.template;
-                    options.controller = controller.default;
+                options.plain = true;
+                options.closeByDocument = false;
+                options.showClose = false;
+                options.template = controller.template;
+                options.controller = controller.default;
 
-                    if(!options.controllerAs) {
-                        var controllerAs = dialog.lastIndexOf('/')<0 ? dialog : dialog.substr(dialog.lastIndexOf('/')+1);
-                        options.controllerAs = _.camelCase(controllerAs)+'Ctrl';
-                    }
+                if(!options.controllerAs) {
+                    options.controllerAs = _.camelCase(dialog)+'Ctrl';
+                }
 
-                    var dialogWindow = ngDialog.open(options);
+                var dialogWindow = ngDialog.open(options);
 
-                    dialogWindow.closePromise.then(function(res){
+                dialogWindow.closePromise.then(function(res){
 
-                        if(res.value=="$escape")      delete res.value;
-                        if(res.value=="$document")    delete res.value;
-                        if(res.value=="$closeButton") delete res.value;
+                    if(res.value=="$escape")      delete res.value;
+                    if(res.value=="$document")    delete res.value;
+                    if(res.value=="$closeButton") delete res.value;
 
-                        return res;
-                    });
+                    return res;
+                });
 
-                    resolve(dialogWindow);
+                return resolve(dialogWindow);
 
-                }, reject);
             });
         }
     }];

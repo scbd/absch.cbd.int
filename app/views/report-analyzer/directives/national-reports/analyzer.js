@@ -284,7 +284,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                 //
                 //
                 //====================================
-                $scope.print = function(sectionToPrint) {
+                $scope.print = async function(sectionToPrint) {
                     $scope.printing = true;
                     if(sectionToPrint =='#secNrAnalyzer' && _.some($scope.sections, function(section){return !section.expanded})){
                         _.forEach($scope.sections, function(section){
@@ -298,25 +298,25 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                     }
                     else{
                         
-                        require(['printThis', 'text!views/forms/view/print-footer.html'],
-                         function(printObj, header, footer){						
-                            var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
-                            if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)
-                                printObject = $element.find(sectionToPrint);
+                        await import('printThis');
+                        let  header = (await import('~/views/forms/view/print-header.html')).default;
+                        let  footer = (await import('~/views/forms/view/print-footer.html')).default;
+                        var printObject = $element.parent().parent().parent().find('#secNrAnalyzer');
+                        if(sectionToPrint !='#secNrAnalyzer' && sectionToPrint)
+                            printObject = $element.find(sectionToPrint);
 
-                            printObject.printThis({
-                                debug:false,
-                                printContainer:true,
-                                importCSS:true,
-                                importStyle : true,
-                                pageTitle : 'Report Analyzer : Interim National Report on the Implementation of the Nagoya Protocol',
-                                loadCSS : 'css/print-friendly.css',
-                                header : header,
-                                footer : footer
-                            });	
+                        printObject.printThis({
+                            debug:false,
+                            printContainer:true,
+                            importCSS:true,
+                            importStyle : true,
+                            pageTitle : 'Report Analyzer : Interim National Report on the Implementation of the Nagoya Protocol',
+                            loadCSS : 'css/print-friendly.css',
+                            header : header,
+                            footer : footer
+                        });	
 
-                            $timeout(function(){$scope.printing = false;},200);
-                        });
+                        $timeout(function(){$scope.printing = false;},200);
                     }
                 };
 

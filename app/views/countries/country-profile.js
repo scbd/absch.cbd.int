@@ -56,13 +56,12 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
       
       if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
         $scope.loadingMap = true;
-        angular.element(document).ready(function () {
-            require(['views/countries/country-map'], function(map){
-                $scope.$apply(function(){
-                    var mapElement = $element.find('#Jumbotron');
-                    $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
-                    $scope.loadingMap = false;                    
-                });
+        angular.element(document).ready(async function () {
+            await import('~/views/countries/country-map')
+            $scope.$apply(function(){
+                var mapElement = $element.find('#Jumbotron');
+                $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
+                $scope.loadingMap = false;                    
             });
         });
       }

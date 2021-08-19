@@ -47,19 +47,16 @@ import 'services/main';
                     return  uid;
                 }
 
-				$scope.loadReportRecord = function(schema, identifier,title){
+				$scope.loadReportRecord = async function(schema, identifier,title){
                     
-                        require(['views/directives/report-record'], function() {
-
-                            var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema +  "' title='" +  title + "'></div>";
-
-                            $scope.$apply(function() {
-                                $element.find('#divReportRecord')
-                                    .empty()
-                                    .append($compile(directiveHtml)($scope));
-                                $element.find('#reportRecordCtl').click();
-                            });
-                        });
+                    await import('~/views/directives/report-record');
+                    var directiveHtml = "<div report-record uid='"+ identifier + "' schema='" +  schema +  "' title='" +  title + "'></div>";
+                    $scope.$apply(function() {
+                        $element.find('#divReportRecord')
+                            .empty()
+                            .append($compile(directiveHtml)($scope));
+                        $element.find('#reportRecordCtl').click();
+                    });
                 }
                 
                 $scope.showReportedRecord = function(){

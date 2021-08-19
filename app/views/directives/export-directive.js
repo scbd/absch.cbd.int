@@ -140,7 +140,7 @@ import 'ngDialog';
                                         var fieldsDialog = ngDialog.open({
                                             name     : 'customFields',
                                             template : 'customFieldsDialog',
-                                            controller : ['$scope', '$q', '$http', 'realm', '$timeout', function($scope, $q, $http, realm, $timeout){
+                                            controller : ['$scope', '$q', '$http', 'realm', '$timeout',async function($scope, $q, $http, realm, $timeout){
                                                     $scope.fields = [
                                                         { name : 'partyStatus', title : 'Party Status',  description : '', field : 'partyStatus'},
                                                         { name : 'createdOn', title : 'Created on', description : '', field : 'createdDate_dt'},
@@ -158,20 +158,19 @@ import 'ngDialog';
                                                         
                                                     }
                                                     
-                                                    require(['views/directives/field-list'], function(data){
-                                                        var fields = ((data||{}).fields||{}).split(',')
-                                                        $timeout(function(){
-                                                            $scope.fields = _.union($scope.fields, _.map(fields, function(field){
-                                                                            return {name: field, title:field, field: field}
-                                                                        }));
-                                                            if(customFields && customFields.length > 0){
-                                                                customFields.forEach(function(f){
-                                                                    var field = _.find($scope.fields, {'field':f})
-                                                                    if(field)
-                                                                        field.selected = true;
-                                                                })
-                                                            }
-                                                        })
+                                                    const data = await import('~/views/directives/field-list')
+                                                    var fields = ((data||{}).fields||{}).split(',')
+                                                    $timeout(function(){
+                                                        $scope.fields = _.union($scope.fields, _.map(fields, function(field){
+                                                                        return {name: field, title:field, field: field}
+                                                                    }));
+                                                        if(customFields && customFields.length > 0){
+                                                            customFields.forEach(function(f){
+                                                                var field = _.find($scope.fields, {'field':f})
+                                                                if(field)
+                                                                    field.selected = true;
+                                                            })
+                                                        }
                                                     });
                                             }]
                                         })

@@ -1,7 +1,8 @@
 ﻿import _ from 'lodash';
 import moment from 'moment';
 import 'views/report-analyzer/directives/national-reports/questions-selector';
-;
+import analyzerData from '~/app-data/report-analyzer-mapping.json';
+
     export { default as template } from './reports.html'
     export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
     function($scope, $location, commonjs, $q, $http, realm) {
@@ -37,33 +38,31 @@ import 'views/report-analyzer/directives/national-reports/questions-selector';
             // $scope.regionMapping = {};
             
 
-            require(['app-data/report-analyzer-mapping.json'], function(res){
-                var appName = realm.value.replace(/-.*/,'').toLowerCase();
-                
-                $scope.reportData = res[appName];
+            var appName = realm.value.replace(/-.*/,'').toLowerCase();            
+            $scope.reportData = analyzerData[appName];        
+            var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
+            var regionMapping = {}
             
-                var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
-                var regionMapping = {}
-                $q.all(regionsQuery)
-                .then(function(data){            
-                    _.map(data, function(regionData){
-                        var region = regionData.data;
-                        regionMapping[region.identifier] = {
-                            countries : region.narrowerTerms, shortTitle : region.shortTitle, title : region.title, identifier: region.identifier, 
-                            count:0 , reportCountries:[]
-                        }
-                    });      
+            $q.all(regionsQuery)
+            .then(function(data){            
+                _.map(data, function(regionData){
+                    var region = regionData.data;
+                    regionMapping[region.identifier] = {
+                        countries : region.narrowerTerms, shortTitle : region.shortTitle, title : region.title, identifier: region.identifier, 
+                        count:0 , reportCountries:[]
+                    }
+                });      
+            })
+            .then(function(){
+                _.forEach($scope.reportData, function(report){
+                    if(report.stats && report.stats.regionMapping)
+                        report.stats.regionMapping =  _.defaultsDeep({}, report.stats.regionMapping, regionMapping);
+                    else
+                        report.regionMapping = angular.copy(regionMapping);                       
+                    getReportCount(report.type);
                 })
-                .then(function(){
-                    _.forEach($scope.reportData, function(report){
-                        if(report.stats && report.stats.regionMapping)
-                            report.stats.regionMapping =  _.defaultsDeep({}, report.stats.regionMapping, regionMapping);
-                        else
-                            report.regionMapping = angular.copy(regionMapping);                       
-                        getReportCount(report.type);
-                    })
-                });
             });
+            
             $scope.$watch('selectedReportType', function(newVal){
                 
                 if(newVal){

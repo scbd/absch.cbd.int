@@ -380,17 +380,14 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
             
             if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
                 $scope.loadingMap = true;
-                angular.element($element).ready(function () {
-                    $timeout(function(){
-                        require(['views/countries/country-map'], function(map){
-                            $scope.$apply(function(){
-                                var mapElement = $element.find('#Jumbotron')
-                                mapElement.html('<span country-map></span>')
-                                $compile(mapElement.contents())($scope);
-                                $scope.loadingMap = false;
-                            });
-                        });
-                    }, 500);
+                angular.element($element).ready(async function () {                    
+                    await import('~/views/countries/country-map')
+                    $scope.$apply(function(){
+                        var mapElement = $element.find('#Jumbotron')
+                        mapElement.html('<span country-map></span>')
+                        $compile(mapElement.contents())($scope);
+                        $scope.loadingMap = false;
+                    });
                 });
             }
 

@@ -13,7 +13,7 @@ import 'services/main';
                 require: '^searchDirective',
                 template: template,
                 scope: false,
-                link: function ($scope, $element, $attrs, searchDirectiveCtrl) {
+                link:async function ($scope, $element, $attrs, searchDirectiveCtrl) {
                     var freeTextKeys = 0;
                     // $scope.leftMenuFilters = {}
                     $scope.locale = locale;
@@ -299,7 +299,7 @@ import 'services/main';
                     }
 
                     //load dependant directive
-                    require(['views/forms/edit/document-selector'], function(){})
+                    await import('~/views/forms/edit/document-selector')
                 }
             };
         }]);
