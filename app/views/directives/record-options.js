@@ -49,26 +49,28 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                     $scope.currentLocale=loc
                     $scope.locale=loc
                     $scope.downloadLocale = loc;
-                    $scope.updateComparision();
+                    $scope.updateComparison();
                 }
 
 
-                $scope.print = function(){
+                $scope.print = async function(){
                     $scope.printing = true;
-                    require(['printThis', 'text!views/forms/view/print-header.html', 'text!views/forms/view/print-footer.html'], function(printObj, header, footer){	
-                        header = $compile(header)($scope);					
-                        $element.parent().parent().parent().find('#schemaView').printThis({
-                            debug:false,
-                            printContainer:true,
-                            importCSS:true,
-                            importStyle : true,
-                            pageTitle : ($route.current.params.documentID||'')+$('title').text(),
-                            loadCSS : '/app/css/print-friendly.css',
-                            header : header,
-                            footer : footer
-                        });	
-                        $timeout(function(){$scope.printing = false;},200);
-                    });
+
+                                  await import('printThis');
+                    let  header = (await import('~/views/forms/view/print-header.html')).default;
+                    let  footer = (await import('~/views/forms/view/print-footer.html')).default;	
+                    header = $compile(header)($scope);					
+                    $element.parent().parent().parent().find('#schemaView').printThis({
+                        debug:false,
+                        printContainer:true,
+                        importCSS:true,
+                        importStyle : true,
+                        pageTitle : ($route.current.params.documentID||'')+$('title').text(),
+                        loadCSS : '/app/css/print-friendly.css',
+                        header : header,
+                        footer : footer
+                    });	
+                    $timeout(function(){$scope.printing = false;},200);
                     
                 }
 

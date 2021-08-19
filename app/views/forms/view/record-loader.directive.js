@@ -56,52 +56,6 @@ import printFooterTemplate from 'text!./print-footer.html';
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					
-					var schemaMapping = {
-
-						absNationalReport			: 'views/forms/view/abs/view-abs-national-report.directive',
-						absCheckpoint				: 'views/forms/view/abs/view-abs-checkpoint.directive',
-						absCheckpointCommunique		: 'views/forms/view/abs/view-abs-checkpoint-communique.directive',
-						absPermit					: 'views/forms/view/abs/view-abs-permit.directive',
-						measure						: 'views/forms/view/abs/view-measure.directive',	
-						absNationalModelContractualClause	: 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive',
-						absProcedure						: 'views/forms/view/abs/view-abs-procedure.directive',		
-
-						capacityBuildingInitiative	: 'views/forms/view/view-capacity-building-initiative.directive',
-						capacityBuildingResource	: 'views/forms/view/view-capacity-building-resource.directive',
-
-						contact						: 'views/forms/view/view-contact.directive',
-						authority					: 'views/forms/view/view-authority.directive',
-						supplementaryAuthority		: 'views/forms/view/view-supplementary-authority.directive',
-						database					: 'views/forms/view/view-database.directive',						
-						organization				: 'views/forms/view/view-organization.directive',
-						resource					: 'views/forms/view/view-resource.directive',
-
-						focalPoint					: 'views/forms/view/scbd/view-focalpoint.directive',
-						meeting						: 'views/forms/view/scbd/view-meeting.directive',
-						statement					: 'views/forms/view/scbd/view-statement.directive',
-						pressRelease				: 'views/forms/view/scbd/view-pressrelease.directive',
-						new							: 'views/forms/view/scbd/view-new.directive',
-						notification				: 'views/forms/view/scbd/view-notification.directive',
-						news						: 'views/forms/view/scbd/view-news.directive',
-						biosafetyNews				: 'views/forms/view/bch/view-biosafety-news.directive',
-						biosafetyLaw				: 'views/forms/view/bch/view-biosafety-law.directive',
-						biosafetyDecision	 		: 'views/forms/view/bch/view-biosafety-decision.directive',
-						nationalRiskAssessment	 	: 'views/forms/view/bch/view-risk-assessment.directive',
-						cpbNationalReport2	 		: 'views/forms/view/bch/view-national-report-2.directive',
-						cpbNationalReport3	 		: 'views/forms/view/bch/view-national-report-3.directive',
-						cpbNationalReport4	 		: 'views/forms/view/bch/view-national-report-4.directive',
-						expert	 					: 'views/forms/view/bch/view-biosafety-expert.directive',
-						expertAssignment			: 'views/forms/view/bch/view-expert-assignment.directive',
-						independentRiskAssessment	: 'views/forms/view/bch/view-risk-assessment.directive',
-						modifiedOrganism	 		: 'views/forms/view/bch/view-lmo.directive',
-						dnaSequence	 				: 'views/forms/view/bch/view-dna-sequence.directive',
-						organism	 				: 'views/forms/view/bch/view-organism.directive',
-						laboratoryDetection	 		: 'views/forms/view/bch/view-laboratory-detection.directive',
-						biosafetyExpert		 		: 'views/forms/view/bch/view-biosafety-expert.directive',
-						countryProfile		 		: 'views/forms/view/bch/view-country-profile.directive',
-						submission	 				: 'views/forms/view/view-submission.directive',
-					}
-
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
 						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
@@ -273,7 +227,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 
 					});
 
-					$scope.showDifference = function(revision){
+					$scope.showDifference = async function(revision){
 						if($scope.isComparing && !revision)return;
 	
 						if($scope.comparingRevision)// if comparingRevision has value meaning user compared a version, load the original document
@@ -283,19 +237,17 @@ import printFooterTemplate from 'text!./print-footer.html';
 							$scope.isComparing = true;							
 							$scope.showDifferenceOn = true;
 							$scope.comparingRevision = revision;
-							require(['services/html-difference'], function(diffParser){
-								htmlDiff = diffParser;
-								loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
-									return  { 
-										divSelector 	: '#compareSchemaView',
-										directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
-									}
-								})
-								storage.documents.get($scope.internalDocumentInfo.identifier + '@' + (revision||$scope.internalDocumentInfo.latestRevision))
-									.then(function (result) { 
-										$scope.prevDocument = result.data
-									}).then(compareWithPrev)	
+							htmlDiff = (await import('~/services/main')).htmlDifference;
+							loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
+								return  { 
+									divSelector 	: '#compareSchemaView',
+									directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
+								}
 							})
+							storage.documents.get($scope.internalDocumentInfo.identifier + '@' + (revision||$scope.internalDocumentInfo.latestRevision))
+							.then(function (result) { 
+								$scope.prevDocument = result.data
+							}).then(compareWithPrev)	
 						}	
 						else{
 							$scope.showDifferenceOn = false;
@@ -317,7 +269,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 						}
 					}
 
-					$scope.updateComparision = function(){
+					$scope.updateComparison = function(){
 						if($scope.showDifferenceButton && $scope.showDifferenceOn)
 							loadViewDirective($scope.internalDocumentInfo.type).then(compareWithPrev);
 					}
@@ -409,7 +361,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 						}, 300)
 					}
 
-					function loadViewDirective(schema, beforeReplace) {
+					async function loadViewDirective(schema, beforeReplace) {
 
 						if (!schema)
 							return;
@@ -424,27 +376,22 @@ import printFooterTemplate from 'text!./print-footer.html';
 						else if (_.includes(["NFP", "ST", "NT", "MT", "PR", "MTD"], lschema.toUpperCase()))
 							lschema = $filter("mapSchema")(lschema);
 
-						var schemaDetails = schemaMapping[lschema];
-						var defer = $q.defer();
-						require([schemaDetails], function () {
-							var divSelector = '#schemaView'
-							var name 		= snake_case(lschema);
-							var directiveHtml =
-								"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
-									.replace(/DIRECTIVE/g, 'view-' + name);
-							$scope.$apply(function () {
-								if(typeof beforeReplace == 'function'){
-									var dirInfo 	= beforeReplace(directiveHtml)
-									divSelector 	= dirInfo.divSelector || divSelector;
-									directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
-								}
-								$element.find(divSelector).empty().append($compile(directiveHtml)($scope));
-								$timeout(function(){canEdit()}, 1000) //verify if user can edit to show edit button
-								defer.resolve('')
-							});
-						});
+						await fetchEditDirectives(lschema);
 
-						return defer.promise
+						var divSelector = '#schemaView'
+						var name 		= snake_case(lschema);
+						var directiveHtml =
+							"<DIRECTIVE ng-show='internalDocument' ng-model='internalDocument' document-info='internalDocumentInfo' link-target={{linkTarget}} locale='locale'></DIRECTIVE>"
+								.replace(/DIRECTIVE/g, 'view-' + name);
+						$scope.$apply(function () {
+							if(typeof beforeReplace == 'function'){
+								var dirInfo 	= beforeReplace(directiveHtml)
+								divSelector 	= dirInfo.divSelector || divSelector;
+								directiveHtml 	= dirInfo.directiveHtml || directiveHtml;
+							}
+							$element.find(divSelector).empty().append($compile(directiveHtml)($scope));
+							$timeout(function(){canEdit()}, 1000) //verify if user can edit to show edit button
+						});
 
 					}
 					function snake_case(name, separator) {
@@ -461,6 +408,50 @@ import printFooterTemplate from 'text!./print-footer.html';
 							if ($scope.internalDocument.amendmentIntent == 1)
 								$scope.isIRCCRevoked = true;
 						}
+					}
+
+					async function fetchEditDirectives(schema){
+
+						if(schema == 'absNationalReport'                ){ return await import('~/views/forms/view/abs/view-abs-national-report.directive') };
+						if(schema == 'absCheckpoint'                    ){ return await import('~/views/forms/view/abs/view-abs-checkpoint.directive') };
+						if(schema == 'absCheckpointCommunique'          ){ return await import('~/views/forms/view/abs/view-abs-checkpoint-communique.directive') };
+						if(schema == 'absPermit'                        ){ return await import('~/views/forms/view/abs/view-abs-permit.directive') };
+						if(schema == 'measure'                          ){ return await import('~/views/forms/view/abs/view-measure.directive') };
+						if(schema == 'absNationalModelContractualClause'){ return await import('~/views/forms/view/abs/view-abs-national-model-contractual-clause.directive') };
+						if(schema == 'absProcedure'                     ){ return await import('~/views/forms/view/abs/view-abs-procedure.directive') };
+						if(schema == 'capacityBuildingInitiative'       ){ return await import('~/views/forms/view/view-capacity-building-initiative.directive') };
+						if(schema == 'capacityBuildingResource'         ){ return await import('~/views/forms/view/view-capacity-building-resource.directive') };
+						if(schema == 'contact'                          ){ return await import('~/views/forms/view/view-contact.directive') };
+						if(schema == 'authority'                        ){ return await import('~/views/forms/view/view-authority.directive') };
+						if(schema == 'supplementaryAuthority'           ){ return await import('~/views/forms/view/view-supplementary-authority.directive') };
+						if(schema == 'database'                         ){ return await import('~/views/forms/view/view-database.directive') };
+						if(schema == 'organization'                     ){ return await import('~/views/forms/view/view-organization.directive') };
+						if(schema == 'resource'                         ){ return await import('~/views/forms/view/view-resource.directive') };
+						if(schema == 'focalPoint'                       ){ return await import('~/views/forms/view/scbd/view-focalpoint.directive') };
+						if(schema == 'meeting'                          ){ return await import('~/views/forms/view/scbd/view-meeting.directive') };
+						if(schema == 'statement'                        ){ return await import('~/views/forms/view/scbd/view-statement.directive') };
+						if(schema == 'pressRelease'                     ){ return await import('~/views/forms/view/scbd/view-pressrelease.directive') };
+						if(schema == 'new'                              ){ return await import('~/views/forms/view/scbd/view-new.directive') };
+						if(schema == 'notification'                     ){ return await import('~/views/forms/view/scbd/view-notification.directive') };
+						if(schema == 'news'                             ){ return await import('~/views/forms/view/scbd/view-news.directive') };
+						if(schema == 'biosafetyNews'                    ){ return await import('~/views/forms/view/bch/view-biosafety-news.directive') };
+						if(schema == 'biosafetyLaw'                     ){ return await import('~/views/forms/view/bch/view-biosafety-law.directive') };
+						if(schema == 'biosafetyDecision'                ){ return await import('~/views/forms/view/bch/view-biosafety-decision.directive') };
+						if(schema == 'nationalRiskAssessment'           ){ return await import('~/views/forms/view/bch/view-risk-assessment.directive') };
+						if(schema == 'cpbNationalReport2'               ){ return await import('~/views/forms/view/bch/view-national-report-2.directive') };
+						if(schema == 'cpbNationalReport3'               ){ return await import('~/views/forms/view/bch/view-national-report-3.directive') };
+						if(schema == 'cpbNationalReport4'               ){ return await import('~/views/forms/view/bch/view-national-report-4.directive') };
+						if(schema == 'expert'                           ){ return await import('~/views/forms/view/bch/view-biosafety-expert.directive') };
+						if(schema == 'expertAssignment'                 ){ return await import('~/views/forms/view/bch/view-expert-assignment.directive') };
+						if(schema == 'independentRiskAssessment'        ){ return await import('~/views/forms/view/bch/view-risk-assessment.directive') };
+						if(schema == 'modifiedOrganism'                 ){ return await import('~/views/forms/view/bch/view-lmo.directive') };
+						if(schema == 'dnaSequence'                      ){ return await import('~/views/forms/view/bch/view-dna-sequence.directive') };
+						if(schema == 'organism'                         ){ return await import('~/views/forms/view/bch/view-organism.directive') };
+						if(schema == 'laboratoryDetection'              ){ return await import('~/views/forms/view/bch/view-laboratory-detection.directive') };
+						if(schema == 'biosafetyExpert'                  ){ return await import('~/views/forms/view/bch/view-biosafety-expert.directive') };
+						if(schema == 'countryProfile'                   ){ return await import('~/views/forms/view/bch/view-country-profile.directive') };
+						if(schema == 'submission'                       ){ return await import('~/views/forms/view/view-submission.directive') };
+
 					}
 
 					$scope.api = {
