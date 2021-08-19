@@ -49,7 +49,6 @@ import 'ck-editor-css';
 
                 var originalDocument;
                 var next_fs;                
-                var isDialog      = $attr.isDialog||false;
                 var saveDraftVersionTimer;
                 var previousDraftVersion;
                 
@@ -58,7 +57,8 @@ import 'ck-editor-css';
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
 				var qWorkflowDraftDialog  = $element.find("#divWorkflowDraft");
                 
-                $scope.documentType       = $filter("mapSchema")($attr.documentType||$route.current.$$route.documentType);
+                $scope.isDialog                    = $attr.isDialog||false;
+                $scope.documentType                = $filter("mapSchema")($attr.documentType||$route.current.$$route.documentType);
                 $scope.container                   = $attr.container;
                 $scope.cancelDialogDefered         = [];
                 $scope.AdditionalInfoDialogDefered = [];
@@ -72,7 +72,7 @@ import 'ck-editor-css';
                     $scope.tab = 'intro';
 
                 $attr.$observe('isDialog', function(){
-                    isDialog = $attr.isDialog||false
+                    $scope.isDialog = $attr.isDialog||false
                 })
                 $attr.$observe('container', function(){
                     $scope.container  = $attr.container; 
@@ -533,7 +533,7 @@ import 'ck-editor-css';
                             $('form').filter('.dirty').removeClass('dirty');
                             originalDocument = angular.copy($scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
-                            if(!isDialog)
+                            if(!$scope.isDialog)
                                 $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
                             return draftInfo;
                         }
@@ -781,7 +781,7 @@ import 'ck-editor-css';
                         workflowId : workflowId
                     });
 
-                    if(!isDialog){
+                    if(!$scope.isDialog){
                         $timeout(function() {
                             $location.path('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                         }, 1000);
@@ -804,7 +804,7 @@ import 'ck-editor-css';
                             workflowId : workflowId
                         });
                     }
-                    if(!isDialog){
+                    if(!$scope.isDialog){
                         $timeout(function() {
                             $location.path('/register/' + $filter("urlSchemaShortName")($scope.documentType));
                         }, 1000);
