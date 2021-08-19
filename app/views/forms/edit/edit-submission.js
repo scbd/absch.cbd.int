@@ -2,7 +2,6 @@
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/view/view-submission.directive';
-import 'views/forms/edit/organization-selector';
 import 'services/main';
 
   export { default as template } from './edit-submission.html';

@@ -2,7 +2,6 @@ import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/view/view-capacity-building-initiative.directive';
-import 'views/forms/edit/organization-selector';
 import 'services/main';
 import template from './edit-capacity-building-initiative.directive.html';
 

@@ -3,7 +3,6 @@ import _ from 'lodash';
 import template from 'text!./edit-resource-schema-base-directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
-import 'views/forms/edit/organization-selector';
 import "views/forms/view/view-resource.directive";
 
 	app.directive('convertToNumber', function() {
