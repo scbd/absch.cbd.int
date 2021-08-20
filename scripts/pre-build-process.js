@@ -23,11 +23,11 @@ process.on('uncaughtException', (error) => {
         log(error);
 });
 
-export const processFiles = async () =>{
+export const processFiles = async (ignoreForRollupFiles) =>{
 
     const git       = require('./scripts/git-file-info');
     const baseDir   = path.resolve('./');
-    const languages = ['en'];//['ar', 'en', 'fr', 'es', 'ru', 'zh'];
+    const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];// ['en'];//
     const enDir     = 'app';
     const i18nDir   = 'i18n';
     const buildDir  = 'i18n-build';

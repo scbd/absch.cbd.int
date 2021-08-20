@@ -14,6 +14,7 @@ import { terser                                 } from 'rollup-plugin-terser';
 import { string                                 } from "rollup-plugin-string";
 import { getBabelOutputPlugin                   } from '@rollup/plugin-babel';
 import { readFileSync, writeFileSync, mkdirSync } from 'fs'
+import _                                          from 'lodash';
 
 const isLocalDev = process.argv.includes('--watch');// || true;
 
@@ -21,7 +22,7 @@ const asyncGlob = util.promisify(glob)
 const outputDir = 'dist';
 let globalHashMapping = {};
 
-const externals = [ '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'angular-animate', 'css', 
+const externals = ['app', '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'angular-animate', 'css', 
 'text', 'json', 'linqjs', 'async', 'domReady', 'bootstrap-datepicker', 'datepicker-range', 'jquery', 'bootstrap', 'lodash', 'moment', 
 'ng-breadcrumbs', 'ngSmoothScroll', 'angular-joyride', 'toastr', 'ngStorage', 'ngDialog', 'ngInfiniteScroll', 'tableexport', 'blobjs', 'file-saverjs', 'xlsx', 'jszip', 
 'webui-popover', 'chart-js', 'printThis', 'diacritics', 'pdfjs-dist/build/pdf', 'pdfjs-dist/build/pdf.worker', 'pdf-object', 'angular-trix', 'trix', 'ngMeta', 
@@ -31,20 +32,26 @@ const externals = [ '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angula
 ];  
 const bundleFiles = [ ];
 const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
+const ignoreForRollupFiles = {
+  cpbNationalReport2 : 'app-data/bch/report-analyzer/cpbNationalReport2.js',
+  cpbNationalReport3 : 'app-data/bch/report-analyzer/cpbNationalReport3.js',
+  cpbNationalReport4 : 'app-data/bch/report-analyzer/cpbNationalReport4.js',
+};
+const ignoreFileGlobPattern = _(ignoreForRollupFiles).values().map(e=>`**/${e}`).value();
 
 export default async function() {
 
   const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
   const appDir = 'i18n';
-  const i18nDir = 'i18n-build'  
-  let allApplicationFiles = [];
+  const i18nDir = 'i18n-build';
   const globOptions = {
     pattern: '**/*.{js,html,json,vue}',
     ignore : ['hash-file-mapping.js', '**/views/pdf-viewer/pdfjs/**'],
   }
+  
   //don't process i18n files when running locally
   if(!isLocalDev){
-    await processFiles();
+    await processFiles(ignoreForRollupFiles);
     const i18nFiles = (await  asyncGlob(globOptions.pattern, { 
                         cwd: path.join(process.cwd(), i18nDir),
                         ignore:globOptions.ignore
@@ -88,11 +95,7 @@ function bundle(relativePath, baseDir='i18n-build') {
   if(extension=='.html')outputFileExt = '.html.js';
 
   let outputFileName   = `[name].[hash]${outputFileExt}`;
-  // if(isLocalDev)
-  //   outputFileName     = `[name].fakehash${outputFileExt}`;
-  // if(isLocalDev && relativePath.indexOf('boot.js')>=0)
-  //   outputFileName     = `[name]${outputFileExt}`;  
-
+  
   if(/\.json\.js/.test(extension) || /\.json/.test(extension))
     requireSourcemap=false;
  
@@ -124,17 +127,14 @@ function bundle(relativePath, baseDir='i18n-build') {
       addLanguageAttribute(),     
       json({namedExports:false}),  
       string({ include: "**/*.html"}),
-      amd({ include: `**/*.js`, }),
+      amd({ include: `**/*.js`, exclude: ignoreFileGlobPattern }),
       vue(),
       getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
         allowAllFormats: true,
-        exclude: [ '*.json' ],
+        exclude: [ '*.json', ..._(ignoreForRollupFiles).values() ],
       }),
-      (isLocalDev || 1==1) ? null : terser({
-        ecma: 5,
-        mangle:false
-      }),
+      // isLocalDev ? null : terser({ ecma: 5, mangle:false }),
       saveHashFileNames(),
     ], 
   }
@@ -171,10 +171,7 @@ function bundleWidget(relativePath, baseDir='i18n-build') {
         allowAllFormats: true,
         exclude: [ '*.json' ],
       }),
-      (isLocalDev) ? null : terser({
-        ecma: 5,
-        mangle:true
-      })
+      isLocalDev ? null : terser({ ecma: 5, mangle:true })
     ], 
   }
 }
