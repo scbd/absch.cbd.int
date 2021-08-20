@@ -10,7 +10,7 @@ const { rename, copyFile, mkdir, stat, readDir } = require('fs').promises;
 const asyncGlob = util.promisify(glob)
 
 const log = function(...args) {
-    console.log(...args);
+    console.timeLog('preBuildProcess', ...args);
 };
 
 log.error = (e, ...args) => {
@@ -24,6 +24,7 @@ process.on('uncaughtException', (error) => {
 });
 
 export const processFiles = async (ignoreForRollupFiles) =>{
+    console.time('preBuildProcess');
 
     const git       = require('./scripts/git-file-info');
     const baseDir   = path.resolve('./');
@@ -125,6 +126,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
 
     log('********* Finish pre build process **********')
     
+    console.timeEnd('preBuildProcess')
 
     return;    
 
