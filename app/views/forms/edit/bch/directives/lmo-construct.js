@@ -6,7 +6,7 @@ import 'css!/app/css/bch/lmo-construct.css';
 import 'ngDialog';
 import 'views/forms/edit/document-selector';
 import 'components/scbd-angularjs-services/main';
-import 'views/forms/view/bch/view-lmo-gene.directive';
+import '~/views/forms/view/bch/view-lmo-gene.directive';
 
     app.directive('lmoConstruct', ['IStorage', 'ngDialog', function (storage, ngDialog) {
         return {

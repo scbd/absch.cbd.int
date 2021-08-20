@@ -2,7 +2,7 @@ import app from 'app';
 import _ from 'lodash';
 import template from 'text!./edit-biosafety-news.directive.html';
 import 'views/forms/edit/edit';
-import "views/forms/view/bch/view-biosafety-news.directive"; 
+import "~/views/forms/view/bch/view-biosafety-news.directive"; 
 	app.directive("editBiosafetyNews", ["$controller", function($controller) {
 		return {
 			restrict   : "EA",

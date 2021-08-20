@@ -2,7 +2,7 @@
 import template from "text!./edit-contact.directive.html";
 import _ from 'lodash';
 import 'views/directives/workflow-arrow-buttons';
-import "views/forms/view/view-contact.directive";
+import "~/views/forms/view/view-contact.directive";
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'views/forms/edit/editFormUtility';

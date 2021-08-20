@@ -2,7 +2,7 @@ import app from 'app';
 import _ from 'lodash';
 import commonjs from 'services/main';
 import template from "text!./permit-selection-directive.html";
-import 'views/directives/search-filter-dates.partial';
+import '~/views/directives/search-filter-dates.partial';
 
 app.directive("existingPermit", [ function () {
 

@@ -4,7 +4,7 @@ import template from 'text!./edit-organism.directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-organism.directive";
+import "~/views/forms/view/bch/view-organism.directive";
 
 	app.directive("editOrganism", ["$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService", "realm",
 	function($routeParams, $route, Thesaurus, $q, $controller, thesaurusService, realm) {

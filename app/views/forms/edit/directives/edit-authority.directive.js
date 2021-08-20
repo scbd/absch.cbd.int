@@ -4,8 +4,8 @@ import template from 'text!./edit-authority.directive.html';
 import 'services/main';
 import 'views/forms/edit/edit';
 import 'views/forms/edit/document-selector';
-import 'views/forms/edit/warning-message-cna';
-import 'views/forms/view/view-authority.directive';
+import '~/views/forms/edit/warning-message-cna';
+import '~/views/forms/view/view-authority.directive';
 
     const authorityController = ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',
         function($http, Thesaurus, $q, $controller, $location, realm, solr,thesaurusService) {

@@ -4,7 +4,7 @@ import template from 'text!./edit-biosafety-decision.directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-biosafety-decision.directive";
+import "~/views/forms/view/bch/view-biosafety-decision.directive";
 
     app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm','$timeout',
         function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm, $timeout) {

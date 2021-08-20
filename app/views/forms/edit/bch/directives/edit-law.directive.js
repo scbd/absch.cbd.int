@@ -4,7 +4,7 @@ import template from 'text!./edit-law.directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-biosafety-law.directive";
+import "~/views/forms/view/bch/view-biosafety-law.directive";
 
 	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", "realm", function($controller, thesaurusService, $q, $filter,Enumerable, realm) {
 		return {
