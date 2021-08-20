@@ -4,8 +4,8 @@ import template from 'text!./edit-dna-sequence.directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-dna-sequence.directive";
-import 'views/forms/directives/traits-selector.directive';
+import "~/views/forms/view/bch/view-dna-sequence.directive";
+import '~/views/forms/directives/traits-selector.directive';
 
 	app.directive("editDnaSequence", ["$controller", "thesaurusService", "realm", function($controller, thesaurusService, realm) {
 		return {
