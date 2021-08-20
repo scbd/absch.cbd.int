@@ -69,7 +69,9 @@ export const processFiles = async (ignoreForRollupFiles) =>{
         return f.replace(/^(ar|fr|es|ru|zh)\//, `${i18nDir}/$1/`)
         .replace(/^en\//, '')
     });
-    console.log(allApplicationFiles.length);
+
+    log(`Files found to process git touch:`, allApplicationFiles.length);
+
     const enTouchPromise = allApplicationFiles.map(async file=>{
         // log('starting touch process for ',file)
         const modifiedEpoch = await git.getModifiedDate(`${file}`, {dst:baseDir});
