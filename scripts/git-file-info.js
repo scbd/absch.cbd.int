@@ -2,6 +2,9 @@ const util = require('util');
 const process = require('child_process');
 const execPromise = util.promisify(process.exec)
 
+const simpleGit = require('simple-git');
+const git = simpleGit();
+
 const executeCommand = async (command, options) => {
 
         let dst = options.dst || __dirname;
@@ -22,12 +25,16 @@ const gitFileLastModifiedCommand= revision => `git show --pretty=format:%at --ab
 
 const getModifiedDate = async (filePath, options) => {
 
-    const command       = gitFileLastRevisionCommand(filePath)
-    const revision      = await executeCommand(command, options);
+    const log = await git.log({ file: filePath });
+    const modifiedDate = new Date(log.latest.date);
+    return modifiedDate.getTime();
+
+    // const command       = gitFileLastRevisionCommand(filePath)
+    // const revision      = await executeCommand(command, options);
   
-    const modifiedDate  = await executeCommand(gitFileLastModifiedCommand(revision), options);
+    // const modifiedDate  = await executeCommand(gitFileLastModifiedCommand(revision), options);
   
-    return modifiedDate;
+    // return modifiedDate;
 }
 
 module.exports = {
