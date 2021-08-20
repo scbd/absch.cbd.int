@@ -1,9 +1,9 @@
 import app from 'app';
 import template from 'text!./national-records-country.html';
 import _ from 'lodash';
-import 'views/search/search-results/result-grouped-national-record';
+import './result-grouped-national-record';
 import 'services/main';
-import 'views/directives/party-status';
+import '~/views/directives/party-status';
 
     app.directive('nationalRecordsCountry', ['searchService', 'solr', function(searchService, solr) {
         return {
