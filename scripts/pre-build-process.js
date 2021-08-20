@@ -71,9 +71,9 @@ export const processFiles = async (ignoreForRollupFiles) =>{
     });
     console.log(allApplicationFiles.length);
     const enTouchPromise = allApplicationFiles.map(async file=>{
-        log('starting touch process for ',file)
+        // log('starting touch process for ',file)
         const modifiedEpoch = await git.getModifiedDate(`${file}`, {dst:baseDir});
-        log('modifiedEpoch fetched for ',file, modifiedEpoch);
+        // log('modifiedEpoch fetched for ',file, modifiedEpoch);
         const modifiedDate = new Date(Number(modifiedEpoch)* 1000);
         const filePath = `${baseDir}/${buildDir}/${file.replace(/i18n\//, '').replace(/^app\//, 'en/app/')}`;
         const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
@@ -82,7 +82,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
 
         fileModifiedDates[lang][filePath] = modifiedDate
         await touch(filePath,  { time : modifiedDate });
-        log('Finished touch process for ',file)
+        // log('Finished touch process for ',file)
     });
     await Promise.all(enTouchPromise);
     log('Finish touching files');
