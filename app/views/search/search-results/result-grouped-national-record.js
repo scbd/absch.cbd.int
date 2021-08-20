@@ -3,7 +3,7 @@ import template from 'text!./result-grouped-national-record.html';
 import _ from 'lodash';
 import moment from 'moment';
 import 'services/main';
-import 'views/forms/view/record-loader.directive';
+import '~/views/forms/view/record-loader.directive';
 
     app.directive('resultGroupedNationalRecord', ["$timeout", function($timeout) {
         return {
