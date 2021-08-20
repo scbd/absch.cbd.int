@@ -18,6 +18,7 @@
     "ky": "0.26.0",
     "lodash": "4.17.15",
     "mime": "1.4.1",
+    "simple-git": "^2.44.0",
     "superagent": "5.0.8"
   },
   "devDependencies": {
