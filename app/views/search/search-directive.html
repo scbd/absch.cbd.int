@@ -1,27 +1,30 @@
-﻿ <div id="search-new">
-     <style>
-         
-
-     </style>
-     <div class="container-fluid">
+﻿ <div id="innerPage">
+    <div class="mastHead">
+            <h1 style="color:white;">Search</h1>
+     <div  id="search-new" >
          <div class="row">
-             <div class="col-md-12" style="padding-bottom:10px;">
+             <div class="col-md-12 " style="padding-bottom:10px;">
                  <span ng-repeat="filter in setFilters">
-                    <span class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}">
-                        <span class="filter-chip-text dropdown bring-to-front" >
+                    <span class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}" style="background-color: #333;border:1px solid;color:#fff;">
+                        <span class="filter-chip-text dropdown bring-to-front"  >
                             <span ng-if="filter.edit" class="input-group edit">
+
                                 <input type="textbox" ng-model="filter.editValue" ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small">
                                 <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="Save filter"     ng-click="onEditFreeTextFilterDone(filter)">
                                     <i class="fa fa-check"></i>
                                 </span>
-                                <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="Close editing"   ng-click="onEditFreeTextFilterCanceled(filter)">
+                                <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon"  title="Close editing"   ng-click="onEditFreeTextFilterCanceled(filter)">
                                     <i class="fa fa-times"></i>
                                 </span>
                             </span>
-                            <span class="btn btn-xs  bold filter-chip-text dropdown bring-to-front" style="cursor: pointer"type="button"
+                            <span class="btn btn-xs color-white bold filter-chip-text dropdown bring-to-front" style="cursor: pointer;" type="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"  ng-class="{'strikeout':filter.disabled}">
                                 <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
-                                <span ng-bind="filter.name|lstring:locale"></span>                                
+                                
+                                <i class="fa fa-cog color-white" aria-hidden="true"></i>
+                                <span ng-bind="filter.name|lstring:locale" style="color:white;"></span>   
+                                
+                                
                             </span>
                             <ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit && filter.type!='date'" >
                                 <li ng-if="filter.type=='freeText'" >
@@ -49,20 +52,22 @@
                                 </li>
                             </ul>
                         </span>
-                        <button type="button" class="btn btn-xs bold filter-chips-remove"  ng-click="removeFilter(filter)">
-                            <span aria-hidden="true">x</span>
-                        </button>
+
+                        <!-- <button type="button" class="btn btn-xs bold filter-chips-remove" style="background-color: transparent;" ng-click="removeFilter(filter)">
+                            <i class="fa fa-times-circle" aria-hidden="true"></i>
+                        </button> -->
+
                     </span>
                      
                     
                  </span>
                  <button ng-href="#" ng-if="canShowSaveFilter()" class="btn btn-sm btn-default bold"
-                    style="cursor:pointer;margin-top:5px;" ng-click="clearFilter()"> <i class="fa fa-times-circle"
+                    style="cursor:pointer;" ng-click="clearFilter()"> <i class="fa fa-times-circle"
                     aria-hidden="true"></i> Clear filters </button>
                  <span class="btn-group pull-right">
 
                      <a rel="noopener" ng-href="#" class="help-tour link2"
-                         style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+                         style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;cursor:pointer;"
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
                                  aria-hidden="true"></i> Help using the search</span></a>
 
@@ -71,14 +76,28 @@
                          ng-click="showSaveFilter()">Save this search</a> -->
                  </span>
              </div>
-
-             <div id="freeText" class="col-md-12" ng-show="!skipTextFilter">
-                 <form ng-submit="saveFreeTextFilter(searchKeyword, $event)" class="input-group">
-                     <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the Clearing-House"
-                         style="font-weight:bold;">
-                     <span type="submit" style="cursor:pointer" ng-click="saveFreeTextFilter(searchKeyword)" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
-                 </form>
              </div>
+
+            <div class="row">
+                <div id="freeText" class="col-md-7" ng-show="!skipTextFilter">
+                    <form ng-submit="saveFreeTextFilter(searchKeyword, $event)" class="input-group">
+                        <input type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the Clearing-House"
+                            style="font-weight:bold;">
+                        <span type="submit" style="cursor:pointer" ng-click="saveFreeTextFilter(searchKeyword)"
+                            class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span>
+                    </form>
+                </div>
+                <div class="col-md-1" ></div>
+                <div class="col-md-4" >
+                    <result-view-options class="pull-right" style="display: inline-block;" current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
+                        view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
+                        on-sort-by-change="onSortByChange(fields)" on-view-type-change="onViewTypeChange(options)"
+                        on-export="onExportClick()"></result-view-options>
+                </div>
+            </div>
+
+
+            <div class="row">
              <div class="col-md-12 search hidden-xs" style="padding-top:5px;">
                  <ul>
                      <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;"
@@ -86,33 +105,33 @@
                          <span id="globalSearch" style="cursor: pointer">GLOBAL FILTERS:</span></li>
                      <li id="recordTypesFilterTab"> <a id="recordTypesFilterTabJR" rel="noopener" href="" ng-class="{'active':showFilters=='recordTypesFilter'}"
                              ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
-                             class="btn color-grey ">
+                             class="btn color-white ">
                              <i ng-if="showFilters=='recordTypesFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='recordTypesFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Record types</a> </li>
                      <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"> <a id="keywordsFilterTabJR" rel="noopener" href=""
                              ng-class="{'active':showFilters=='keywordsFilter'}"
                              ng-click="showFilters=(showFilters=='keywordsFilter' ? false : 'keywordsFilter')"
-                             class="btn color-grey">
+                             class="btn color-white">
                              <i ng-if="showFilters=='keywordsFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='keywordsFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Keywords</a> </li>
                      <li id="countryFilterTab"> <a id="countryFilterTabJR" rel="noopener" href="" ng-class="{'active':showFilters=='countryFilter'}"
                              ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
-                             class="btn color-grey">
+                             class="btn color-white">
                              <i ng-if="showFilters=='countryFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='countryFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Country</a> </li>
                      <li id="regionFilterTab"> <a id="regionFilterTabJR" rel="noopener" href="" ng-class="{'active':showFilters=='regionFilter'}"
                              ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
-                             class="btn color-grey">
+                             class="btn color-white">
                              <i ng-if="showFilters =='regionFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='regionFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Regions</a></li>
                      <li id="dateFilterTab" ng-show="!skipDateFilter"> <a id="dateFilterTabJR" rel="noopener" href=""
                              ng-class="{'active':showFilters=='dateFilter'}"
                              ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
-                             class="btn color-grey">
+                             class="btn color-white">
                              <i ng-if="showFilters=='dateFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='dateFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Date</a> </li>
@@ -124,16 +143,16 @@
                              <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                              &nbsp; My saved searches</a> </li>
-                     <li class="pull-right" style="line-height: 5px">
-                         <result-view-options current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields" view-type="searchResult.viewType"
-                             group-by-fields="searchResult.groupByFields" on-sort-by-change="onSortByChange(fields)"
-                             on-view-type-change="onViewTypeChange(options)" on-export="onExportClick()"></result-view-options>
-                     </li>
+                 
                  </ul>
              </div>
 
          </div>
      </div>
+
+    
+
+
      <div class="container-fluid" ng-show="showFilters || searchKeyword"
          style="z-index:10!important;top:-2px;position:relative;">
          <style>
@@ -192,21 +211,33 @@
                 <div class="sticky-bar" ng-if="searchResult.loading">
                     <span style="vertical-align:middle"><i class="fa fa-spin fa-spinner"></i>Updating results...</span>
                 </div>
+
+                <div class="text-center">
+                    <button ng-href="#top"  class="btn btn-sm btn-default bold"  
+                    style="cursor:pointer;" ng-click="showFilters=false;searchKeyword='';scrollToTop();"> 
+                    <i class="fa fa-times-circle" aria-hidden="true"></i> CLOSE </button> 
+                </div>
              </div>
          </div>
      </div>
+    </div>
+
+  <div id="search-new" class=" innerPageContent register-content ">
+    
+    <div class="register-content-content" >
+        <div class="main" id="main" >
 
      <div class="container-fluid" style="margin-top:10px;">
          <!-- ng-if="!skipResults" -->
          <div class="row" style="padding:10px 0 0 0;margin:0px;">
              <!-- Search Result -->
-             <div class="bg-white hidden-xs" ng-class="{'col-xs-2':leftMenuFilters}" 
-             style="border:1px solid #eee;padding:0px" ng-show="leftMenuFilters ">
+             <div class="hidden-xs" ng-class="{'col-xs-3':leftMenuFilters}" 
+             style="border:1px solid #eee;padding:0 20px 0 0; margin:0;" ng-show="leftMenuFilters ">
                  <div left-side-filter></div>
              </div>
              <!-- Different view for list/group -->
              <div class="col-xs-12" style="margin:0;border: 1px solid #eee;"
-                 id="searchResult" ng-class="{'col-xs-10':leftMenuFilters}">
+                 id="searchResult" ng-class="{'col-xs-9':leftMenuFilters}">
                  <div class="col-xs-12" style="padding:0;margin:0;">
                      <ul class="nav nav-tabs search-tab-title">
                         <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}">
@@ -234,7 +265,7 @@
                      </ul>
                  </div>
                  <!-- Tab panes -->
-                <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;">
+                <div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;border-right:1px solid #ddd;border-left:1px solid #ddd;border-bottom:1px solid #ddd;">
                     <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='allRecords'}" 
                     ng-if="searchResult.currentTab==='allRecords'">                             
                         <div ng-switch="searchResult.viewType">
@@ -308,6 +339,10 @@
          </div>
      </div>
 
+    </div>
+</div>
+</div>
+
      <style>
          .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
              width: 70% !important;
@@ -356,3 +391,6 @@
     </div>
      <joyride ng-if="tourOn"></joyride>
  </div>
+
+
+
