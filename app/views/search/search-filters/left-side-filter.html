@@ -7,35 +7,31 @@
              <h5 class="bold">SUB-FILTERS</h5> 
         </div>
         <ul class="list-group">
-            <li class="list-group-item no-left-right-bottom-border" style=" cursor: pointer;padding:0px;padding-top:0px; margin-bottom:20px;"
+            <li class="list-group-item no-left-right-bottom-border" style="background-color: rgb(250, 250, 250); cursor: pointer;padding:0px;padding-top: 10px;"
                 ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
                     
-                    <div  style="background-color:#333;padding:5px;">
-                        <div class="dropdown pull-left bring-to-front1">
-                            <button class="btn btn-xs btn-default dropdown-toggle" type="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="background-color:transparent;border: none; vertical-align: unset;">
-                                <i class="fa fa-cog color-white" aria-hidden="true"></i>
-                            </button>
-                            <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
-                                <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
-                                    <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
-                                <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
-                                <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
-                                    <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
-                                <li><a rel="noopener" href="#">
-                                    <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
-                            </ul>
-                        </div>
-                        <div class="bold color-white" style="cursor: pointer;padding-left:2px;padding-right:2px;" 
-                        ng-click="state[schema]=!state[schema]">
-                            <span ng-bind="schema | schemaNamePlural"></span>
-                            <i class="fa pull-right" style="font-size:1.5em; " 
-                            ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
-                        </div>
+                    <div class="dropdown pull-left bring-to-front1">
+                        <button class="btn btn-xs btn-default dropdown-toggle" type="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="border: none;vertical-align: unset;">
+                            <i class="fa fa-cog" aria-hidden="true"></i>
+                        </button>
+                        <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
+                            <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
+                                <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
+                            <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
+                                <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                            <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
+                                <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
+                            <li><a rel="noopener" href="#">
+                                <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
+                        </ul>
                     </div>
-
-
+                    <div class="bold color-darkgrey" style="cursor: pointer;padding-left:2px;padding-right:2px;padding-bottom:5px;" 
+                    ng-click="state[schema]=!state[schema]">
+                        <span ng-bind="schema | schemaNamePlural"></span>
+                        <i class="fa pull-right" style="font-size:1.5em; " 
+                        ng-class="{'fa-sort-down':state[schema], 'fa-sort-up':!state[schema]}"></i>
+                    </div>
                     <div class="list-group-item filter-item" ng-repeat="filter in filters"  ng-show="!state[schema]">
                         
                         <div class="dropdown pull-left bring-to-front" ng-if="filter.filterValue!=undefined||hasItems(filter.selectedItems)">
@@ -154,7 +150,7 @@
         </div>
         <div class="modal-body">	
            
-            <div id="divTable"  style="max-height:480px;overflow:scroll; ">               
+            <div id="divTable"  style="max-height:480px;overflow:scroll; font-size:11px; ">               
                 <div class="col-md-12">
                     <label class="pull-right" style="position: absolute;right:3%" ng-if="filter.relatedField">
                         <input type="checkbox" ng-model="searchRelated"> Search related

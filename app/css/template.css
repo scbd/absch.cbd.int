@@ -1486,6 +1486,7 @@ div.recordDefault:hover {
 #RegisterPage .register-content,
 #SubmitPage .register-content,
 #PreferencesPage .register-content {
+    background-color: #FFF;
     margin: 20px 0;
     
 }
@@ -2122,10 +2123,6 @@ a.disabled{
     text-transform: none;
 }
 
-#search-new .metadata.bold li:not(:first-child){
-    padding-left: 5px;
-}
-
 .space-left-right{
     padding-left:5px;
     padding-right: 5px;;
@@ -2141,8 +2138,6 @@ a.disabled{
     padding-left: 0px; 
     padding-right: 0px; 
 }
-
-
 
 .amcharts-chart-div a{
     top: unset!important;
@@ -2392,7 +2387,7 @@ padding-right: 23%;
     padding-left: 10px!important;
 }
 #PreferencesPage .register-content, #RegisterPage .register-content, #SubmitPage .register-content, #searchPage .register-content {
-    margin: 20px;
+    margin: 5px;
 }
 
 @media(min-width:768px) {
@@ -2898,53 +2893,71 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     display: inline-block  ;
 }
 
-
-#searchSortOptions .sort-options{
+.edit.capacity-building-initiative {
+    padding: 24px;
+    background-color:#FFF;
+    border-bottom:2px solid #ccc;
+}
+.edit.capacity-building-initiative .km-control-group .control-label{
+    display: block;
+}
+.edit.capacity-building-initiative .km-control-group .control-label[for="startDate"]{
     display: inline-block;
-    margin-top:8px;
-    white-space: nowrap;
 }
-#searchSortOptions .sort-options > li{
-    display: inline;
-    margin:0;
-    margin-left:10px;
-    background-color: #fff;
-    padding:5px;
-    border-radius: 4px;
+.edit.capacity-building-initiative .km-control-group .control-label[for="endDate"]{
+    display: inline-block;
+}
+#RegisterPage .popover {
+    margin-top: 3px;
+    background-color: #d9534f !important;
     border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .2);
 }
-#searchSortOptions .sort-options > li > a{
-    font-size: 12px;
+
+#RegisterPage .popover.right>.arrow {
+    border-right-color: #999;
+    border-right-color: rgba(0, 0, 0, .25);
+}
+
+#RegisterPage .popover.right>.arrow:after {
+    border-right-color: #d9534f;
+}
+
+#RegisterPage .cursor {
+    cursor: pointer;
+}
+
+#RegisterPage .overview>tbody>tr>td {
+    padding: 3px !important;
+    border: 0;
+}
+
+.editHeader .dashboard-tour .help-tour,
+#SubmitPage .dashboard-tour .help-tour,
+#RegisterPage .dashboard-tour .help-tour{
+    font-size:13px;
     text-transform: uppercase;
-    color:#555;
-    font-weight: bold;
-    
+    font-weight: 500;
+    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
+    cursor:pointer;
+    color: #fff;
 }
-
-#innerPage .mastHead{
-	background-color: #333;
-	color:white;
-	padding:40px 20px 40px 20px;
-	margin:0;
+.search-icons bch-icons{
+    position: relative;
+    top: -5px;
 }
-
-#innerPage .innerPageContent{
-	padding:20px;
-	margin:0 0 40px 0;
+.search-icons bch-icons > span{
+    border-right: 0!important;
+    padding-right: 0px!important;
+    margin-right: 0px!important;
 }
-
-#pageHeader .header{background-color: #FFF;border-bottom: 1px solid #ddd;}
-#pageHeader .small-header{padding: 5px 20px;}
-#pageHeader .small-header > .acronym{font-size:24px;font-weight:bold;padding-right:10px;}
-#pageHeader .small-nav > ul > li > .nav-link {width:100%;padding:10px; margin:5px 0;font-size: 16px;text-transform: uppercase;color: #555;font-weight: 500}
-#pageHeader .small-nav > ul {list-style-type: none; padding:0; margin:0;}
-
-#pageHeader .normal-header {padding:20px 20px 0 20px;height:80px;}
-#pageHeader .normal-header > .spine-logo{height:44px;position:relative;top:-13px;padding:0 5px 0 0;margin:0;}
-#pageHeader .normal-header > .acronym{font-size:48px;font-weight:bold;padding-right:10px;}
-#pageHeader .normal-header > .ch-name{text-transform:uppercase;font-size:18px;font-weight:bold;}
-#pageHeader .normal-header > .ch-logo{position:relative;top:-10px;padding: 0; margin:20px 0;max-height:60px;}
-#pageHeader .normal-nav {padding:0 34px 2px 15px;}
-#pageHeader .normal-nav > ul > li > .nav-link {font-size: 13px;text-transform: uppercase;color: #555;font-weight: 500; }
-
-#pageHeader .breadcrumbs {text-transform: uppercase;margin-left:26px;font-size:12px; padding:10px 3px;color:#111;font-weight:500}
+.edit-measure-status .planing-plc{
+    display: block;
+}
+.edit-measure-status .planing-plc input{
+    margin-right: 5px;
+}
+.edit-measure-status .jurisdiction-title [km-textbox-ml][disabled] input{
+    pointer-events: none;
+    background-color: #f5f5f5;
+}

@@ -10,11 +10,7 @@ import 'angular-animate';
 import 'components/scbd-branding/main';
 import 'services/main';
 import 'views/directives/route-loading-directive';
-import '../app-loading.directive';
-import footerHtml from 'text!./absch-footer.html';
-import cbdFooterHtml from 'text!../cbd-footer.html';
-import './absch-header';
-
+import './app-loading.directive';
 
     app.config(["toastrConfig", function(toastrConfig) {
         angular.extend(toastrConfig, {
@@ -30,11 +26,6 @@ import './absch-header';
             });
         }]);
 
-
-        app.directive('abschFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
-        app.directive('cbdFooter', [function () { return { restrict: 'E', template: cbdFooterHtml }; }]);
-
-        
 
     app.controller('AbschTemplateController', ['$scope', '$rootScope', 'showHelp',
         '$location', '$anchorScroll', 'toastr', '$route',
