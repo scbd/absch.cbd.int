@@ -130,6 +130,7 @@ export default function bootApp(window, require, defineX) {
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
             'vue-pagination-2'          : `${cdnHost}vue-pagination-2@3.0.91/dist/vue-pagination-2.min`,
+            'semantic-ui-vue'           : `${cdnHost}semantic-ui-vue@0.11.0/dist/umd/semantic-ui-vue.min`
             
         },
         'shim': {
@@ -158,6 +159,8 @@ export default function bootApp(window, require, defineX) {
 
             'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             'vue-pagination-2'              : { 'deps': ['angular-vue'] },
+
+            'semantic-ui-vue'               : { deps : ['angular-vue', ]}
             
         },
         urlArgs: function(id, url){
@@ -203,7 +206,9 @@ export default function bootApp(window, require, defineX) {
     });
 
     defineX('vue', ['Vue'], function(Vue){ return Vue; });    
-    defineX('Vue', [cdnHost +'vue@2.6.12/dist/vue.min.js', 'vue-i18n'], function(Vue, i18n){
+    defineX('Vue', [cdnHost +'vue@2.6.12/dist/vue.min.js', 'vue-i18n',
+    'css!https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css'
+    ], function(Vue, i18n){
         window.Vue = Vue;
         window.VueI18n = i18n;
 

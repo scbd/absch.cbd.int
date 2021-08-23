@@ -1,4 +1,7 @@
 <div class="col-md-12" style="padding-left: 0px;padding-right:0px;background-color: #fff;">    
+    <div ng-if="vueOptions">
+        <table-export ng-vue="vueOptions"></table-export>
+    </div>
     <link href="/app/css/index.css" rel="stylesheet">
     <div id="Jumbotron" style="border-top:1px solid #555;border-bottom:2px solid #ddd;" >
        <home-map></home-map>
