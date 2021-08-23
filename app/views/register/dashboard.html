@@ -1,15 +1,17 @@
-﻿<div id="RegisterPage">
+﻿<div id="RegisterPage" >
     <link href="/app/css/register.css" rel="stylesheet">
     <link href="/app/css/record.css" rel="stylesheet">
     <register-top-menu></register-top-menu>
-    <div class="register-content card card-1-notrans">
+
+    <div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+        
         <div ng-if="isBch && betaArticle" style="margin:10px;">
             <h1 class="color-green bold" style="margin-bottom:30px;padding-top:15px;"
                 ng-bind-html="betaArticle.title | lstring:locale"></h1>
             <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
         </div>
 
-        <div class="register-content-header bg-darkgrey color-white">
+        <div class="register-content-header bg-darkgrey color-white" >
 
             <div style="padding:10px 10px;">
                 <span class="btn-group pull-right dashboard-tour">
@@ -21,7 +23,7 @@
                 <h3>Dashboard </h3>
             </div>            
         </div>
-        <div class="register-content-content">
+        <div class="register-content-content" style="background-color: #fff!important;">
             <div style="margin:10px 0 20px 0;">
 
                 <h4 style="margin-top:0; margin-bottom:0; padding:0 0 5px 0;border-bottom:1px solid #ddd;">

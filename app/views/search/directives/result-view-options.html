@@ -1,29 +1,41 @@
-﻿<div>
-    <ul class="pagination" style="margin-bottom:0px" ng-if="viewType">        
+﻿<div id="searchSortOptions" style="min-width: 450px;overflow: hidden;display: inline-block;">
+    
+
+    <ul class="sort-options" >        
         <li>
-            <a id="viewType" rel="noopener" href="#" style="max-height:38px;">
-                <i class="fa fa-eye" aria-hidden="true"></i> View Type
-                <select ng-model="viewType" ng-change="viewTypeChange(viewType);">
-                    <option value="default">Default</option>
-                    <option value="list">List</option>
-                    <option value="group">Group</option>
-                    <option value="matrix">Matrix</option>
+            <a rel="noopener" href="#" style="color:#555;max-height:38px;">
+                <!-- <i class="fa fa-eye" aria-hidden="true"></i>  -->
+                <select style="border:0;color:#555;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
+                    <option ng-value="'default'">DEFAULT VIEW</option>
+                    <option ng-value="'list'">LIST</option>
+                    <option ng-value="'group'">GROUP</option>
+                    <option ng-value="'matrix'">MATRIX</option>
                 </select>
-                <i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
+                <!-- <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i> -->
             </a>
         </li>        
         <li>
-            <a  id="sortBy" rel="noopener" href ng-click="showSortDialog()">
-                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> Sort By
+            <a rel="noopener" href ng-click="showSortDialog()">
+                Sort
+                <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> 
             </a>
         </li>     
         <li>
-            <a id="sendRecords" rel="noopener" > <i class="fa fa-paper-plane" aria-hidden="true"></i> Send
+            <a rel="noopener" > 
+                Send 
+                <i class="fa fa-paper-plane" aria-hidden="true"></i> 
             </a>
         </li>     
-   
         <li>
-            <a id="exportRecords" rel="noopener" href ng-click="onExportClick()"><i class="fa fa-download" aria-hidden="true"></i> Export
+            <a rel="noopener" > 
+                Print
+                <i class="fa fa-print" aria-hidden="true"></i> 
+            </a>
+        </li>   
+        <li>
+            <a rel="noopener" href ng-click="onExportClick()">
+                Export
+                <i class="fa fa-download" aria-hidden="true"></i> 
             </a>
         </li>
     </ul>
@@ -36,7 +48,7 @@
                 </strong>
             </div>
             <div class="modal-body">		
-                <div id="divTable"  style="font-size:11px; ">
+                <div id="divTable">
                     <div>                         
                         <li ng-repeat="field in sortByFields" class="btn-group" style="margin:5px">
                             <button type="button" ng-click="selectField(field)" class="btn btn-sm" ng-class="{'btn-primary':field.selected}">
@@ -92,7 +104,7 @@
                 </h3>
             </div>
             <div class="modal-body">		
-                <div id="divTable"  style="max-height:300px;overflow:scroll; font-size:11px; ">
+                <div id="divTable"  style="max-height:300px;overflow:scroll;  ">
                     <div>                         
                         <li ng-repeat="group in groupByFields" class="btn-group" style="margin:5px">
                             <button type="button" ng-click="selectField(group)" class="btn btn-sm" ng-class="{'btn-primary':group.selected}">
