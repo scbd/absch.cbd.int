@@ -201,7 +201,7 @@
                                 <div class="col-md-12">
                                     <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
                                         <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF).</div>
-                                        <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
+                                        <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization" hide-self="document.header.identifier"
                                              question="linkedOrganizations"
                                              on-build-query="onBuildQuery(searchText)"
                                              filter="true"></div>
