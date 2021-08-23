@@ -97,6 +97,9 @@ body{
 }
 
 @media print {
+    #printContentHeader .image-row {
+        padding-top: 10px;
+    }
     #printContentHeader .unep-logo {
         height: 60px;
     }
