@@ -34,6 +34,10 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
                 });
             },
             responsibleFunctions: function() {return thesaurusService.getDomainTerms('responsibleFunctions')},
+            // ToDo: need to change as per schema
+            legislationAgreementTypes : 	function(){
+                return thesaurusService.getDomainTerms('legislationAgreementTypes')
+            },
         });
 
         $scope.ac_jurisdictions = function() {

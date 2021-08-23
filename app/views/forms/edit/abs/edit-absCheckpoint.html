@@ -52,20 +52,37 @@
               
                                     <section>
               
-                                    <legend name="responsibilities–title">Responsibilities</legend>                                  
+                                    <legend name="responsibilities–title">Responsibilities</legend>
+                                    <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization.</div>                                 
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="responsibleFunctions" required caption="Responsible functions">
-                                                <div km-term-check required ng-model="document.responsibleFunctions" locales="document.header.languages"
-                                                     terms="options.responsibleFunctions()"  binding-type="term[]"></div>
+                                            <div class="km-control-group" name="responsibleFunctions" required caption="Responsibilities of checkpoints designated under Article 17 of the Nagoya Protocol:">
+                                                <!-- ToDo: change isPointToCollect as per schema  -->
+                                                <label for="isPointToCollect">
+                                                    <input type="checkbox" ng-model="document.isPointToCollect" id="isPointToCollect" name="isPointToCollect"> 
+                                                    Serve as a point to collect or receive relevant information for monitoring the utilization of foreign genetic resources made available through the checkpoint communiques
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.isPointToCollect">
+                                            <div class="km-control-group" name="responsibleFunctions" caption="Stage at which information is collected or received:">
+                                                <div km-term-check ng-model="document.type" locales="document.header.languages"
+													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization. </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="responsibilities" caption="Short description of responsibilities">
-                                                   <div class="help-info">A short description of the responsibilities of the checkpoint will help users of genetic resources and others to identify and clarify the role and functioning of the checkpoint in the collection of relevant information about the utilization of resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization. (maximum 300 characters)</div>
+                                            <div class="km-control-group" required name="responsibilities" caption="Other responsibilities related to compliance:">
+                                                <div km-term-check required ng-model="document.type" locales="document.header.languages"
+													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="responsibilities" caption="Short description of any additional responsibilities (maximum 300 characters)">
+                                                   <div class="help-info">A short description of the responsibilities of the checkpoint will help users of genetic resources and others to identify and clarify the role and functioning of the checkpoint in the collection of relevant information about the utilization of resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization.</div>
                                                 <div km-rich-textbox name="responsibilities" rows="6" ng-model="document.responsibilities" locales="document.header.languages"></div>
                                             </div>
                                         </div>
