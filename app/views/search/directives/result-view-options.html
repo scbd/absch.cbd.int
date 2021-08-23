@@ -1,17 +1,15 @@
 ﻿<div id="searchSortOptions" style="min-width: 450px;overflow: hidden;display: inline-block;">
     
-
     <ul class="sort-options" >        
         <li>
-            <a rel="noopener" href="#" style="color:#555;max-height:38px;">
-                <!-- <i class="fa fa-eye" aria-hidden="true"></i>  -->
-                <select style="border:0;color:#555;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
+            <a id="viewType" rel="noopener" href="#" style="color:#555!important;max-height:38px;">
+                <select style="border:0;color:#555!important;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
                     <option ng-value="'default'">DEFAULT VIEW</option>
                     <option ng-value="'list'">LIST</option>
                     <option ng-value="'group'">GROUP</option>
                     <option ng-value="'matrix'">MATRIX</option>
                 </select>
-                <!-- <i class="fa fa-cog" ng-if="viewType=='group'" ng-click="viewTypeChange(viewType);"></i> -->
+                <i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
             </a>
         </li>        
         <li>
@@ -26,12 +24,7 @@
                 <i class="fa fa-paper-plane" aria-hidden="true"></i> 
             </a>
         </li>     
-        <li>
-            <a rel="noopener" > 
-                Print
-                <i class="fa fa-print" aria-hidden="true"></i> 
-            </a>
-        </li>   
+      
         <li>
             <a rel="noopener" href ng-click="onExportClick()">
                 Export
