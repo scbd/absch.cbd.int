@@ -106,7 +106,7 @@
                                                         <div class="help-info">Sometimes a permit can be related to other previously issued permits, for instance to a permit for accessing a soil sample. Depending on the MAT, it is possible that some countries decide to issue specific permits
                                                             for subsequently identified genetic resources from the taken soil sample. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. IRCCs linked through this mechanism
                                                             will be displayed together and thus facilitate tracking of the IRCCs. </div>
-                                                            <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
+                                                            <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs" hide-self="document.header.identifier"></div>
                                                     </div>
                                                 </div>
                                             </div>
