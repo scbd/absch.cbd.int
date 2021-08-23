@@ -340,6 +340,9 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     }
                     rawQuery.query = query;
                 }
+                if($scope.hideSelf){
+                    rawQuery.fieldQueries.push("NOT (identifier_s:" + solr.escape($scope.hideSelf) + ")");
+                }
                 rawQuery = rawQuery || {fieldQueries:[]};
                 //tabs query
                 if($scope.activeTab == 'myRecords'){
