@@ -3,7 +3,7 @@ import template from 'text!./edit-header.html';
 import 'angular-joyride';
 import joyRideText from '~/app-data/submit-intro-joyride-tour.json';
 
-app.directive('editHeader', ['joyrideService', function(joyrideService){
+app.directive('editHeader', ['joyrideService', '$timeout', function(joyrideService, $timeout){
     return {
         restrict   : "E",
 		template: template,
@@ -16,9 +16,9 @@ app.directive('editHeader', ['joyrideService', function(joyrideService){
                 joyride.config = {
                     overlay: true,
                     onStepChange: function(){  },
-                    onStart: function(){  },
+                    onStart: function(){ document.body.classList.add("jr-submit-tour"); },
                     onFinish: function(){
-                        closeSubmitForm();
+						document.body.classList.remove("jr-submit-tour");
                         joyride.start = false;
                         $scope.tourOn = false;
                     },
@@ -29,7 +29,8 @@ app.directive('editHeader', ['joyrideService', function(joyrideService){
                             selector: "#workflowIntro",
                             title: joyRideText.introduction.title,
                             content: joyRideText.introduction.content,
-                            placement: 'top'
+                            placement: 'top',
+                            beforeStep: openIntroduction
                         },
                         {
                             appendToBody:true,
@@ -73,8 +74,7 @@ app.directive('editHeader', ['joyrideService', function(joyrideService){
                             selector: "#needHelp",
                             title: joyRideText.needHelp.title,
                             content: joyRideText.needHelp.content,
-                            placement: 'left',
-                            // beforeStep: gotoSectionHelp
+                            placement: 'bottom'
                         },
                         {
                             appendToBody:true,
@@ -82,7 +82,7 @@ app.directive('editHeader', ['joyrideService', function(joyrideService){
                             selector: "#slaask-button-cross",
                             title: joyRideText.needMoreHelp.title,
                             content: joyRideText.needMoreHelp.content,
-                            placement: 'left'
+                            placement: 'top'
                         }
                     ]
                 };
@@ -91,18 +91,17 @@ app.directive('editHeader', ['joyrideService', function(joyrideService){
                 function openSubmitForm(resumeJoyride){
                     $('html,body').scrollTop(0);
                     $timeout(function(){
-                         // $element.find('#countryProfile').click(); // not working
                         $('#workflowSubFor').click();
                         resumeJoyride();
                     }, 100);
                 }
-
-                function closeSubmitForm (resumeJoyride){
-                    $element.find('#workflowIntro').click();
+                function openIntroduction(resumeJoyride){
                     $timeout(function(){
+                        $('#workflowIntro').click();
                         resumeJoyride();
-                    }, 500);
+                    }, 100);
                 }
+
             }
         }
     }
