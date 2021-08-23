@@ -149,7 +149,7 @@
                                     <div class="km-control-group" name="contacts" caption="Contact person">
                                         <div document-selector ng-model="document.contacts" question="contacts"
                                             on-build-query="onContactQuery(searchText)" allow-new="true"
-                                            allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
+                                            allow-new-schema="contact{{isAbs ? ',authority':''}}" hide-self="document.header.identifier"></div>
 
                                     </div>
                                 </div>
