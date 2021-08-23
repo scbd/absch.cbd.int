@@ -57,7 +57,7 @@
 											<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
 
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.amendedRecords" question="amendedRecords" caption="Law, Regulation or Guideline"
-													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true"
+													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true" hide-self="document.header.identifier"
 													allow-new-schema="biosafetyLaw"></div>
 											</div>
 										</div>
@@ -228,7 +228,7 @@
 												</div>										
 													
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.relatedRecords" question="relatedRecords" caption="Law, Regulation or Guideline"
-													on-build-query="onBuildLawQuery(searchText)"  allow-new="true"
+													on-build-query="onBuildLawQuery(searchText)"  allow-new="true" hide-self="document.header.identifier"
 																allow-new-schema="biosafetyLaw">
 													</div>
 											</div>
