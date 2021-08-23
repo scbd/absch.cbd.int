@@ -62,7 +62,9 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     overlay: true,
                     onStepChange: function(){  },
                     onStart: function(){  },
+                    onStart: function(){ document.body.classList.add("jr-dashboard-tour"); },
                     onFinish: function(){
+                        document.body.classList.remove("jr-dashboard-tour");
                         joyride.start = false;
                         $scope.tourOn = false;
                         $scope.showProfileInfo = false;
@@ -136,7 +138,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#needHelp",
                             title: joyRideText.needHelp.title,
                             content: joyRideText.needHelp.content,
-                            placement: 'left',
+                            placement: 'bottom',
                             beforeStep: gotoSectionHelp
                         },
                         {
@@ -145,7 +147,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#slaask-button-cross",
                             title: joyRideText.needMoreHelp.title,
                             content: joyRideText.needMoreHelp.content,
-                            placement: 'left'
+                            placement: 'top'
                         }
                     ]
                 };

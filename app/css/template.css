@@ -2961,3 +2961,19 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     pointer-events: none;
     background-color: #f5f5f5;
 }
+.jr-submit-tour #jr_2,.jr-submit-tour #jr_5,.jr-submit-tour #jr_6, .jr-country-tour #jr_8, .jr-country-tour #jr_9,
+.jr-dashboard-tour #jr_7, .jr-dashboard-tour #jr_8, .jr-RecordList-tour #jr_7, .jr-RecordList-tour #jr_8{
+    margin-left: -30px;
+}
+.jr-submit-tour #jr_5, .jr-country-tour #jr_8, .jr-dashboard-tour #jr_7, .jr-RecordList-tour #jr_7{
+    top: 50px !important;
+}
+.jr-submit-tour #jr_5.jr_pos_bottom:after,.jr-submit-tour #jr_2.jr_pos_bottom:after,.jr-country-tour #jr_8.jr_pos_bottom:after,
+.jr-dashboard-tour #jr_7.jr_pos_bottom:after, .jr-RecordList-tour #jr_7.jr_pos_bottom:after {
+    left: auto;
+    right: 42px;
+}
+.jr-submit-tour #jr_6.jr_pos_top:after, .jr-country-tour #jr_9.jr_pos_top:after, .jr-dashboard-tour #jr_8.jr_pos_top:after, .jr-RecordList-tour #jr_7.jr_pos_top:after, .jr-RecordList-tour #jr_8.jr_pos_top:after{
+    left: auto;
+    right: 25px;
+}
