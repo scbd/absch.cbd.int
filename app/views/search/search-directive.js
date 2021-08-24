@@ -1227,10 +1227,11 @@ import 'views/reports/matrix/data-matrix.directive';
                     }
 
                     async function loadLeftMenuFieldMapping(){
-                        var file = 'views/search/search-filters/bch-left-menu-filters.json';
+                        
                         if(isABS)
-                            file = 'views/search/search-filters/abs-left-menu-filters.json';
-                        leftMenuSchemaFieldMapping = await import(file)
+                            leftMenuSchemaFieldMapping = await import('./search-filters/abs-left-menu-filters.json')
+                        else
+                            leftMenuSchemaFieldMapping = await import('./search-filters/bch-left-menu-filters.json');
                     }
 
 

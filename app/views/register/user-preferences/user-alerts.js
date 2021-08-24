@@ -3,7 +3,6 @@ import template from "text!./user-alerts.html";
 import _ from 'lodash';
 import moment from 'moment';
 import 'ngDialog';
-import '~/views/search/search-directive';
 import 'services/main';
 import 'views/register/directives/register-top-menu';
 import 'views/register/user-preferences/user-alerts';

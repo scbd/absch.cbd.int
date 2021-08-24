@@ -4,6 +4,7 @@ import _ from 'lodash';
 import 'ngDialog';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
+import 'views/forms/edit/document-selector'
 
         app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeout',
          function (ngDialog, locale, solr, realm, $timeout) {
