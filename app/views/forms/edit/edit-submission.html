@@ -111,7 +111,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="records"caption="Related record(s)">
-                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
+                                                <div document-selector ng-model="document.records" question="records" filter="true"
+                                                     on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
                                         </div>
                                     </div>
