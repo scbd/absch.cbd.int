@@ -9,8 +9,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
 
     export { default as template } from './edit-measure.html';
 
-  export default ["$scope", "realm", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs',
-        function($scope, realm, $http, $filter, $q, Enumerable, $controller, $location, commonjs) {
+  export default ["$scope", "realm", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs','solr',
+        function($scope, realm, $http, $filter, $q, Enumerable, $controller, $location, commonjs, solr) {
             $controller('editController', {
                 $scope: $scope
             });
@@ -251,6 +251,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
                 fieldQueries : [],
                 searchText: searchText
                 }
+                if($scope.document?.header.identifier)
+                    queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
                  return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
@@ -262,6 +264,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
                     fieldQueries : [],
                     searchText: searchText
                 }
+                if($scope.document?.header.identifier)
+                    queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
                 if ($scope.document && $scope.document.government)
                     queryOptions.government = $scope.document.government.identifier;
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
