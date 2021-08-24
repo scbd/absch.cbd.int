@@ -234,14 +234,12 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                 }, 200)
             }
             
-            function init(){                      
+            async function init(){                      
                 loadFacets();
                 if($scope.isBch){
-                    commonjs.loadJsonFile('app-data/bch/offline-formats.json')
-                    .then(function(data){
-                        $scope.offlineFormats = data;
-                    })
                     loadArticle();
+                    const data = await import('~/app-data/bch/offline-formats.json');
+                    $scope.offlineFormats = data.default;
                 }
             }
 

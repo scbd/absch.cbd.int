@@ -3,7 +3,7 @@ import _ from 'lodash';
 import template from 'text!./edit-biosafety-expert.directive.html';
 import 'views/forms/edit/edit';
 import 'views/forms/edit/document-selector';
-import "views/forms/view/bch/view-biosafety-expert.directive";
+import "~/views/forms/view/bch/view-biosafety-expert.directive";
 import 'components/scbd-angularjs-controls/main';
 import 'services/main';
 

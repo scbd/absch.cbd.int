@@ -52,14 +52,13 @@ import 'services/main';
             if($rootScope.deviceSize !== 'sm' && $rootScope.deviceSize !== 'xs'){
               // Delay loading map by 2 sec
               $scope.loadingMap = true;
-              angular.element(document).ready(function () {
-                  require(['views/countries/country-map'], function(map){
-                      $scope.$apply(function(){
-                          var mapElement = $element.find('#homeMap')
-                          $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
-                          $scope.loadingMap = false;
-                      });
-                  });
+              angular.element(document).ready(async function () {
+                await import('~/views/countries/country-map')
+                $scope.$apply(function(){
+                    var mapElement = $element.find('#homeMap')
+                    $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
+                    $scope.loadingMap = false;
+                });
               });
             }
 

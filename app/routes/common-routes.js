@@ -11,27 +11,6 @@ import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 var baseUrl = require.toUrl("").replace(/\?v=.*$/, "");
 var lang = window.scbdApp.lang;
 
-app.config(["$provide", $provide => {
-  $provide.decorator("$templateCache", ["$delegate", $delegate => {
-    let templateCache = $delegate;
-    let localGet = templateCache.get;
-    let localPut = templateCache.put;
-    templateCache.get = (key) => {
-      console.warn('still getting from template cache provider', key)
-        return localGet(key.toLowerCase())
-    }
-    templateCache.put = (key, value) => {
-        var t = templateCache.get(key)
-      if (typeof value == "string" && value.indexOf("define(function") >= 0) {
-        var amdTemplate = value.match(/=\s"(.*)"/);
-        if (amdTemplate) value = amdTemplate[1].replace(/\\n|\\t/g, "").replace(/\\/g, "");
-      }
-      return localPut(key.toLowerCase(), value);
-    };
-    return $delegate;
-  }]);
-}]);
-
 const commonRouteUrls = {
     lang_langCode                               : { component: ()=>import('~/views/shared/lang') },
     signin                                      : { component: ()=>import('~/views/shared/login-dialog') },

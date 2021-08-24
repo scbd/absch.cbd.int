@@ -1,29 +1,28 @@
 import app from 'app';
-import template from 'text!./search-directive.html';
 import _ from 'lodash';
-import joyRideText from '~/app-data/search-joyride-tour.json';
-import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
-import 'services/main';
-import 'views/search/search-filters/keyword-filter';
-import 'views/search/search-filters/national-filter';
-import 'views/search/search-filters/reference-filter';
-import 'views/search/search-filters/scbd-filter';
-import 'views/search/search-filters/country-filter';
-import 'views/search/search-filters/region-filter';
-import 'views/search/search-filters/date-filter';
-import 'views/search/search-results/result-default';
-import 'views/search/search-results/national-records-country';
 import 'ngDialog';
-import 'views/register/user-preferences/user-alerts';
-import 'views/directives/export-directive';
 import 'angular-animate';
 import 'angular-joyride';
-import 'components/scbd-angularjs-controls/main';
-import 'views/search/directives/result-view-options';
-import 'views/search/search-filters/left-side-filter';
-import 'views/search/search-results/list-view';
-import 'views/search/search-results/group-view';
 import 'toastr';
+import joyRideText      from '~/app-data/search-joyride-tour.json';
+import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
+import template         from 'text!./search-directive.html';
+import 'services/main';
+import '~/views/directives/export-directive';
+import 'components/scbd-angularjs-controls/main';
+import './search-filters/keyword-filter';
+import './search-filters/national-filter';
+import './search-filters/reference-filter';
+import './search-filters/scbd-filter';
+import './search-filters/country-filter';
+import './search-filters/region-filter';
+import './search-filters/date-filter';
+import './search-filters/left-side-filter';
+import './search-results/result-default';
+import './search-results/national-records-country';
+import './search-results/list-view';
+import './search-results/group-view';
+import './directives/result-view-options';
 import 'views/reports/matrix/data-matrix.directive';
 
     app.directive('searchDirective', function() {
@@ -994,7 +993,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                             subQuery = q;
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
-                                        var ids = _.map(filter.selectedItems, s=>s.identifier.replace(/\@[0-9]{1,3}$/, ''));
+                                        var ids = _.map(filter.selectedItems, s=>s.identifier.toString().replace(/\@[0-9]{1,3}$/, ''));
                                         if(filter.type == 'freeText'){                                          
                                             ids = _.map(filter.selectedItems,  function(filter){
                                                 return {name:filter.title};

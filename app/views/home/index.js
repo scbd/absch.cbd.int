@@ -35,18 +35,5 @@ export default ['$scope',
         $scope.monthsSinceEntry = months;
         $scope.daysSinceEntry = days;
 
-        // angular.element(document).ready(function () {
-        //     console.log('page loading completed');
-
-            
-                // require(['views/directives/map/home-map'], function(map){
-                //     $scope.loading = false;
-                //     $scope.$apply(function(){
-                //         var mapElement = $element.find('#Jumbotron')
-                //         $compile(mapElement.contents())($scope);
-                        
-                //     });
-                // });
-        // });
     }];
 

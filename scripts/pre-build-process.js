@@ -10,7 +10,7 @@ const { rename, copyFile, mkdir, stat, readDir } = require('fs').promises;
 const asyncGlob = util.promisify(glob)
 
 const log = function(...args) {
-    console.log(...args);
+    console.timeLog('preBuildProcess', ...args);
 };
 
 log.error = (e, ...args) => {
@@ -23,11 +23,12 @@ process.on('uncaughtException', (error) => {
         log(error);
 });
 
-export const processFiles = async () =>{
+export const processFiles = async (ignoreForRollupFiles) =>{
+    console.time('preBuildProcess');
 
     const git       = require('./scripts/git-file-info');
     const baseDir   = path.resolve('./');
-    const languages = ['en'];//['ar', 'en', 'fr', 'es', 'ru', 'zh'];
+    const languages = ['en'];//['ar', 'en', 'fr', 'es', 'ru', 'zh'];// 
     const enDir     = 'app';
     const i18nDir   = 'i18n';
     const buildDir  = 'i18n-build';
@@ -68,9 +69,13 @@ export const processFiles = async () =>{
         return f.replace(/^(ar|fr|es|ru|zh)\//, `${i18nDir}/$1/`)
         .replace(/^en\//, '')
     });
-    // console.log(allApplicationFiles);
+
+    log(`Files found to process git touch:`, allApplicationFiles.length);
+
     const enTouchPromise = allApplicationFiles.map(async file=>{
+        // log('starting touch process for ',file)
         const modifiedEpoch = await git.getModifiedDate(`${file}`, {dst:baseDir});
+        // log('modifiedEpoch fetched for ',file, modifiedEpoch);
         const modifiedDate = new Date(Number(modifiedEpoch)* 1000);
         const filePath = `${baseDir}/${buildDir}/${file.replace(/i18n\//, '').replace(/^app\//, 'en/app/')}`;
         const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
@@ -79,6 +84,7 @@ export const processFiles = async () =>{
 
         fileModifiedDates[lang][filePath] = modifiedDate
         await touch(filePath,  { time : modifiedDate });
+        // log('Finished touch process for ',file)
     });
     await Promise.all(enTouchPromise);
     log('Finish touching files');
@@ -125,6 +131,7 @@ export const processFiles = async () =>{
 
     log('********* Finish pre build process **********')
     
+    console.timeEnd('preBuildProcess')
 
     return;    
 

@@ -1,8 +1,8 @@
 import app from 'app';
-import template from "text!./document-selector.html";
+import template from 'text!./document-selector.html';
 import _ from 'lodash';
-import 'views/directives/search-filter-dates.partial';
-import 'views/search/search-results/result-default';
+import '~/views/directives/search-filter-dates.partial';
+import '~/views/search/search-results/result-default';
 import 'components/scbd-angularjs-controls/main';
 import 'ngDialog';
 import 'services/main'; // jshint ignore:line
@@ -665,60 +665,37 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 			}
 
 
-            $scope.loadEditDirective = function(schema){
+            $scope.loadEditDirective = async function(schema){
 
                 if (!schema)
                     return;
 
-                var lschema = _.clone(schema);
-                var schemaMapping = {
-                    "modifiedOrganism" 			: 'views/forms/edit/bch/directives/edit-modified-organism.directive',
-                    "dnaSequence" 				: 'views/forms/edit/bch/directives/edit-dna-sequence.directive',
-                    "organism" 					: 'views/forms/edit/bch/directives/edit-organism.directive',
-
-                    "biosafetyDecision" 		: 'views/forms/edit/bch/directives/edit-biosafety-decision.directive',
-                    "biosafetyLaw" 				: 'views/forms/edit/bch/directives/edit-law.directive',
-                    "nationalRiskAssessment"    : 'views/forms/edit/bch/directives/edit-risk-assessment.directive',
-                    "independentRiskAssessment" : 'views/forms/edit/bch/directives/edit-risk-assessment.directive',
-
-                    'authority'                 : 'views/forms/edit/directives/edit-authority.directive',
-                    'supplementaryAuthority'    : 'views/forms/edit/directives/edit-authority.directive',
-                    'contact'                   : 'views/forms/edit/directives/edit-contact.directive',
-                    'organization'              : 'views/forms/edit/directives/edit-organization.directive',
-                    'biosafetyNews'             : 'views/forms/edit/directives/edit-biosafety-news.directive',
-                    'resource'                  : 'views/forms/edit/directives/edit-resource.directive',
-                    'capacityBuildingInitiative': 'views/forms/edit/directives/edit-capacity-building-initiative.directive',
-                }
-                $scope.loadingEditDirective = true;
-                $scope.allowNew.activeSchema = lschema;
-                var schemaDetails = schemaMapping[lschema];
                 var divSelector = ' #divNewRecord'
-                var name 		= snake_case(lschema);
+                var name 		= snake_case(schema);
+                
+                $scope.loadingEditDirective = true;
+                $scope.allowNew.activeSchema = schema;
                 $('#'+dialogId + divSelector).empty()
-                var defer = $q.defer();
-                require([schemaDetails], function () {
+                
+                await fetchEditDirective(schema);
                     
-                    var additionalAttributes = '';
-                    if($attr.allowNewAttributes)
-                        additionalAttributes = $attr.allowNewAttributes;
+                var additionalAttributes = '';
+                if($attr.allowNewAttributes)
+                    additionalAttributes = $attr.allowNewAttributes;
 
-                    var directiveHtml = ("<DIRECTIVE on-post-submit='onNewRecordSubmitted(data)' additionalAttributes document-type='documentType'" +
-                                         " allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'>"  +
-                                         "</DIRECTIVE>")
-                            .replace(/DIRECTIVE/g, 'edit-' + name)
-                            .replace(/\.ngdialog/, '#'+dialogId)
-                            .replace('documentType', $filter("schemaShortName")(schema))
-                            .replace('additionalAttributes', additionalAttributes);
+                var directiveHtml = ("<DIRECTIVE on-post-submit='onNewRecordSubmitted(data)' additionalAttributes document-type='documentType'" +
+                                        " allow-new='false' is-dialog='true' container='.ngdialog' link-target={{linkTarget}} locales='locales'>"  +
+                                        "</DIRECTIVE>")
+                        .replace(/DIRECTIVE/g, 'edit-' + name)
+                        .replace(/\.ngdialog/, '#'+dialogId)
+                        .replace('documentType', $filter("schemaShortName")(schema))
+                        .replace('additionalAttributes', additionalAttributes);
 
-                    $scope.$apply(function () {                        
-                        $('#'+dialogId + divSelector).empty()
-                                .append($compile(directiveHtml)($scope));
-                        defer.resolve('');
-                        $scope.loadingEditDirective = false;
-                    });
+                $scope.$apply(function () {                        
+                    $('#'+dialogId + divSelector).empty()
+                            .append($compile(directiveHtml)($scope));
+                    $scope.loadingEditDirective = false;
                 });
-
-                return defer.promise
 
             }
             function snake_case(name, separator) {
@@ -727,6 +704,23 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 return name.replace(/[A-Z]/g, function (letter, pos) {
                     return (pos ? separator : '') + letter.toLowerCase();
                 });
+            }
+
+            async function fetchEditDirective(schema){
+                if(schema == 'modifiedOrganism' 			){ return await import('~/views/forms/edit/bch/directives/edit-modified-organism.directive'); }
+                if(schema == 'dnaSequence' 				    ){ return await import('~/views/forms/edit/bch/directives/edit-dna-sequence.directive'); }
+                if(schema == 'organism' 					){ return await import('~/views/forms/edit/bch/directives/edit-organism.directive'); }
+                if(schema == 'biosafetyDecision' 		    ){ return await import('~/views/forms/edit/bch/directives/edit-biosafety-decision.directive'); }
+                if(schema == 'biosafetyLaw' 				){ return await import('~/views/forms/edit/bch/directives/edit-law.directive'); }
+                if(schema == 'nationalRiskAssessment'       ){ return await import('~/views/forms/edit/bch/directives/edit-risk-assessment.directive'); }
+                if(schema == 'independentRiskAssessment'    ){ return await import('~/views/forms/edit/bch/directives/edit-risk-assessment.directive'); }
+                if(schema == 'biosafetyNews'                ){ return await import('~/views/forms/edit/bch/directives/edit-biosafety-news.directive'); }
+                if(schema == 'authority'                    ){ return await import('~/views/forms/edit/directives/edit-authority.directive'); }
+                if(schema == 'supplementaryAuthority'       ){ return await import('~/views/forms/edit/directives/edit-authority.directive'); }
+                if(schema == 'contact'                      ){ return await import('~/views/forms/edit/directives/edit-contact.directive'); }
+                if(schema == 'organization'                 ){ return await import('~/views/forms/edit/directives/edit-organization.directive'); }                
+                if(schema == 'resource'                     ){ return await import('~/views/forms/edit/directives/edit-resource.directive'); }
+                if(schema == 'capacityBuildingInitiative'   ){ return await import('~/views/forms/edit/directives/edit-capacity-building-initiative.directive'); }
             }
 		},
 
