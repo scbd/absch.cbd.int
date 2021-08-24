@@ -41,8 +41,7 @@ import './utilities';
 
 
             function onConnect() {
-                console.log("connected from the client side");
-
+                
                 subscribe('push-notification', function(msg){
                     if(isJSON(msg)){
                         var message = JSON.parse(msg);

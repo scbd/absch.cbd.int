@@ -12,7 +12,7 @@ import realmConfigurations from 'realmConf';
         realmConfig         = _.find(realmConfigurations,{ host : window.location.host}) || _.head(realmConfigurations);
         
         if(!realmConfig)
-            throw new Error("Unknow realm for host: "+window.location.host + ' clearingHouseHost: ' + window.scbdApp.host);
+            throw new Error("Unknown realm for host: "+window.location.host + ' clearingHouseHost: ' + window.scbdApp.host);
 
         nationalSchemas  = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='national'  ? key : undefined; }));
         referenceSchemas = _.compact(_.map(realmConfig.schemas, function(schema, key){ return schema.type=='reference' ? key : undefined; }));
@@ -21,7 +21,8 @@ import realmConfigurations from 'realmConf';
             return key; 
         }));
 
-        console.log("Realm:", (realmConfig||{}).realm || 'NOT_FOUND');     
+        if(!realmConfig?.realm)
+            console.info("Realm NOT_FOUND!!!!");     
         
         app.provider("realm", function() {
             
