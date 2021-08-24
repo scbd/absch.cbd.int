@@ -89,8 +89,9 @@ import './common';
                 else
                     document = document;
 
-                var government = '';
-				var documentId;
+                let government = '';
+				let uIdPrefix	= realm.uIdPrefix;
+				let documentId;
 
 				if(document.documentID)
 					documentId = document.documentID;
@@ -114,11 +115,13 @@ import './common';
                 else if(document.body && document.body.government)
                     government = document.body.government.identifier;
 
-
-				var unique = realm.uIdPrefix +
-						'-' + $filter("schemaShortName")(document.type||document.schema_s||document.schema) +
-                        '-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
-                        '-' + documentId;
+				if(document.type == 'focalPoint')
+					uIdPrefix = 'CHM';
+					
+				var unique = uIdPrefix +
+							'-' + $filter("schemaShortName")(document.type||document.schema_s||document.schema) +
+							'-' + (government != '' ?  $filter("uppercase")(government) : 'SCBD') +
+							'-' + documentId;
 
 				if(document.revision === 'draft'){
                     document.revision = "0";
