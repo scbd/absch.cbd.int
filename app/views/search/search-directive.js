@@ -19,7 +19,6 @@ import './search-filters/region-filter';
 import './search-filters/date-filter';
 import './search-filters/left-side-filter';
 import './search-results/result-default';
-import './search-results/national-records-country';
 import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
