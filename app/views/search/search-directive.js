@@ -503,9 +503,9 @@ import 'views/reports/matrix/data-matrix.directive';
                         loadFilters().then(()=>{
 
                             var query =  $location.search();
-                            var currentpage = query.currentPage||1;
-                            if(query.currentpage)
-                                $scope.searchResult.currentpage = currentpage;
+                            var currentPage = query.currentPage||1;
+                            if(query.currentPage)
+                                $scope.searchResult.currentPage = currentPage;
                             if(query.rowsPerPage)
                                 $scope.searchResult.rowsPerPage = query.rowsPerPage;
                             if(query.tab)
@@ -546,7 +546,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                 saveRawQueryFilter(query["raw-query"]);
                             }
 
-                            $timeout(function(){updateQueryResult(currentpage);}, 200)
+                            $timeout(function(){updateQueryResult(currentPage);}, 200)
                         });
 
                         loadLeftMenuFieldMapping();
