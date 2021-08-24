@@ -534,7 +534,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             function getSortField(sortFields){
                 //, rec_meta:meta1_EN_txt, rec_meta:meta2_EN_txt, rec_meta:meta3_EN_txt
                 var field  = $scope.search.sort;
-                var fields = sortFields||$attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
+                var fields = sortFields||$attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t,rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt,rec_meta3:meta3_EN_txt'
                 if(~fields.indexOf(field)){
                     var sortField = _(fields.split(',')).map(function(f){
                                         if(~f.indexOf(field))

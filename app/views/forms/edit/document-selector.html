@@ -268,8 +268,6 @@
                         <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">title</a> 
                             <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_countryName', search.sortSequence)">owner</a>
-                            <span ng-show="search.sort == 'rec_countryName'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
                         <th style="white-space:nowrap;">
                             <a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">
@@ -294,7 +292,6 @@
                         </td>
                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
                         <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
-                        <td ng-bind="doc.rec_countryName"></td>
                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
                         <td class="summary" data-title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:20"></td>
                         <td class="meta"> 
