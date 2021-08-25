@@ -549,7 +549,6 @@ import 'views/reports/matrix/data-matrix.directive';
                         });
 
                         leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
-                        console.log('left i', leftMenuSchemaFieldMapping)
                         $scope.pageInitialized = true;
                     }
 

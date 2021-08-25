@@ -2,7 +2,6 @@
 import app from 'app';
 import _ from 'lodash';
 import 'ngDialog';
-    ;
 
     app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {

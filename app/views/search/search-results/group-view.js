@@ -64,7 +64,7 @@ import { iconFields } from '~/views/forms/view/bch/icons';
                     }
                     var additionalFields = _.map(fieldMapping, function(f){return f.titleField+'_groupTitle:'+f.titleField}).join(', ')
                     if(realm.is('BCH')){
-                        additionalFields+= `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
+                        additionalFields+= `,${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
                     }
                     //'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t';
                     //'schema_s', 'government_s', 
