@@ -18,15 +18,13 @@
                                 </span>
                             </span>
                             <span class="btn btn-xs color-white bold filter-chip-text dropdown bring-to-front" style="cursor: pointer;" type="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"  ng-class="{'strikeout':filter.disabled}">
-                                <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
-                                
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"  
+                                ng-class="{'strikeout':filter.disabled}">
                                 <i class="fa fa-cog color-white" aria-hidden="true"></i>
-                                <span ng-bind="filter.name|lstring:locale" style="color:white;"></span>   
-                                
-                                
+                                <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                <span ng-bind="filter.name|lstring:locale" style="color:white;"></span>                                
                             </span>
-                            <ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit && filter.type!='date'" >
+                            <ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit" >
                                 <li ng-if="filter.type=='freeText'" >
                                     <a rel="noopener" href="#" ng-click="onEditFreeTextFilter(filter)"><i class="fa fa-edit" aria-hidden="true"></i> Edit filter</a>
                                 </li>

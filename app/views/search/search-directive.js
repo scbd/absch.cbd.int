@@ -1019,7 +1019,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                         }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){
-                                        subQuery = buildDateFieldQuery(filter.field, filter.filterValue);
+                                        subQuery = buildDateFieldQuery(filter);
                                     }
                                     else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
@@ -1056,24 +1056,32 @@ import 'views/reports/matrix/data-matrix.directive';
 
                     function buildDateQuery(){
                         var filters = getSelectedFilters('date')
-                        if (!(filters||[]).length){     
+                        if (!filters?.length){     
                             return;
                         }
                         var values = [];
-                        _.forEach(filters, function (item) {
-                            values.push(item.dateField+':' + item.query)
+                        _.forEach(filters, function (filter) {
+                            if(filter.exclude)
+                                return;
+                                
+                            let dateQuery = filter.dateField+':' + filter.query;
+
+                            if(filter.excludeResult)
+                                dateQuery = `(*:* NOT (${dateQuery}))`;
+
+                            values.push(dateQuery)
                         });
                         if(values.length)
                             return solr.andOr(values, 'AND')
                     }
 
-                    function buildDateFieldQuery(field, date) {
-
+                    function buildDateFieldQuery({ field, date }) {
+                        
                         if(date.start || date.end) {
-                            var start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
-                            var end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
+                            const end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
     
-                            return  field + ':[ ' + start + ' TO ' + end + ' ]';
+                            return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
                     }
 
