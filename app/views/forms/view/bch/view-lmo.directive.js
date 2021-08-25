@@ -6,7 +6,7 @@ import 'views/forms/view/bch/view-lmo-gene.directive';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 
-app.directive("viewModifiedOrganism", [function () {
+app.directive("viewModifiedOrganism", ['$location', function ($location) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -18,10 +18,11 @@ app.directive("viewModifiedOrganism", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope", function ($scope)
-		{
-			
-			
+		link : function ($scope)
+		{	
+			var queryString = $location.search();
+			if(queryString )
+				$scope.printMode = queryString.print
 			
 			//====================
 			//
@@ -33,7 +34,7 @@ app.directive("viewModifiedOrganism", [function () {
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
 
-		}]
+		}
 	};
 }]);
 

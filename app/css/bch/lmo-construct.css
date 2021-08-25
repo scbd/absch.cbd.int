@@ -97,7 +97,7 @@
             /*border-top:    25px solid #CBDDEF;
             border-bottom: 25px solid #CBDDEF;
             border-left:   25px solid transparent;*/			
-            background:url('https://bch.cbd.int/bch/images/LmoConstruct/right.svg') 5px 0px no-repeat;
+            background:url('/app/img/bch/lmo-construct/right.svg') 5px 0px no-repeat;
             line-height:0px;
             font-size  :0px;
             /* IE6 Hack */
@@ -113,7 +113,7 @@
             /*border-top:    25px solid transparent;
             border-bottom: 25px solid transparent;
             border-right:  25px solid #CBDDEF;*/			
-            background:url('https://bch.cbd.int/bch/images/LmoConstruct/left.svg') -1px 0px no-repeat;
+            background:url('/app/img/bch/lmo-construct/left.svg') -1px 0px no-repeat;
             line-height:0px;
             font-size  :0px;
             /* IE6 Hack */
@@ -140,7 +140,7 @@
             /*border-top:    25px solid #CBDDEF;
             border-bottom: 25px solid #CBDDEF;
             border-right:  25px solid transparent;*/			
-            background:url('https://bch.cbd.int/bch/images/LmoConstruct/left.svg') -30px 0px no-repeat;
+            background:url('/app/img/bch/lmo-construct/left.svg') -30px 0px no-repeat;
             line-height:0px;
             font-size  :0px;
             /* IE6 Hack */
@@ -156,7 +156,7 @@
             /*border-top:    25px solid transparent;
             border-bottom: 25px solid transparent;
             border-left:   25px solid #CBDDEF;*/
-            background:url('https://bch.cbd.int/bch/images/LmoConstruct/right.svg') -32px 0px no-repeat;
+            background:url('/app/img/bch/lmo-construct/right.svg') -32px 0px no-repeat;
             line-height:0px;
             font-size  :0px;
             /* IE6 Hack */
@@ -166,4 +166,9 @@
         }		
         .lmo-gene-construct-viewer div {
             margin-bottom:0px!important;
+        }
+        .lmo-gene-construct-scroll{
+            overflow: scroll;
+            width: auto;
+            white-space: nowrap;
         }
