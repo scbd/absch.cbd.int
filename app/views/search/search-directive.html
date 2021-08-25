@@ -88,7 +88,7 @@
                     </form>
                 </div>
                 <div class="col-md-1" ></div>
-                <div class="col-md-4" >
+                <div class="col-md-4" ng-if="pageInitialized">
                     <result-view-options class="pull-right" style="display: inline-block;" current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
                         view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
                         on-sort-by-change="onSortByChange(fields)" on-view-type-change="onViewTypeChange(options)"

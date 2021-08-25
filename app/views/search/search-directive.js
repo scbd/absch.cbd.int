@@ -497,7 +497,7 @@ import 'views/reports/matrix/data-matrix.directive';
                     ////// internal functions
                     ////////////////////////////////////////////
 
-                    function init(){
+                    async function init(){
 
                         loadFilters().then(()=>{
 
@@ -548,8 +548,9 @@ import 'views/reports/matrix/data-matrix.directive';
                             $timeout(function(){updateQueryResult(currentPage);}, 200)
                         });
 
-                        loadLeftMenuFieldMapping();
-                        
+                        leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
+                        console.log('left i', leftMenuSchemaFieldMapping)
+                        $scope.pageInitialized = true;
                     }
 
                     
@@ -1228,9 +1229,9 @@ import 'views/reports/matrix/data-matrix.directive';
                     async function loadLeftMenuFieldMapping(){
                         
                         if(isABS)
-                            leftMenuSchemaFieldMapping = await import('./search-filters/abs-left-menu-filters.json')
+                            return (await import('./search-filters/abs-left-menu-filters.json')).default
                         else
-                            leftMenuSchemaFieldMapping = await import('./search-filters/bch-left-menu-filters.json');
+                            return (await import('./search-filters/bch-left-menu-filters.json')).default;
                     }
 
 
