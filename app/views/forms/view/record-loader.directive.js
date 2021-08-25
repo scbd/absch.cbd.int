@@ -99,7 +99,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 						if ($route.current.params.documentNumber)
 							var documentID = $route.current.params.documentNumber;
 
-						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID))) {
+						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID) || /^chm\-nfp/i.test(documentID))) {
 							documentID = documentID.replace(/-(dev|trg)/i, '');
 							var docNum = documentID.split('-');
 							if (docNum.length == 5) {

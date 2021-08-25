@@ -1,10 +1,10 @@
 ﻿import app from 'app';
 import template from 'text!./group-view.html';
 import _ from 'lodash';
-import './result-grouped-national-record';
 import 'services/main';
 import '~/views/directives/party-status';
 import './result-default';
+import { iconFields } from '~/views/forms/view/bch/icons';
 
     app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 
     function(searchService, realm, $timeout, $location, $q, solr) {
@@ -64,8 +64,7 @@ import './result-default';
                     }
                     var additionalFields = _.map(fieldMapping, function(f){return f.titleField+'_groupTitle:'+f.titleField}).join(', ')
                     if(realm.is('BCH')){
-                        additionalFields    += ' traitsDiseasesResistance_b,traitsHerbicidesResistance_b,traitsPhysiologyChanges_b,traitsQualityChanges_b,traitsMedicalProduction_b,traitsOther_b'
-                        additionalFields    += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b,scopePharmaceutical_b,scopeTransit_b,'
+                        additionalFields+= `,${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
                     }
                     //'schema_s_groupTitle:schema_EN_t, government_s_groupTitle:government_EN_t';
                     //'schema_s', 'government_s', 

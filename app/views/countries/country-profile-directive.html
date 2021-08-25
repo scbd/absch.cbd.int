@@ -23,7 +23,7 @@
         <div ng-if="schema.display && schema.numFound > 0" class="well bg-white">
             <div  ng-if="schema.shortCode!='MSR'">
                 <div ng-repeat="doc in schema.docs|orderBy:title_t">
-                    <result-grouped-national-record doc='doc'></result-grouped-national-record>
+                    <result-default doc="doc" external-link="true" type="national"></result-default>  
                 </div>
                 <div class="btn-group" ng-if="schema.numFound >  schema.docs.length">
                     <button type="button" class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(schema,10)" ng-disabled="schema.isLoading">

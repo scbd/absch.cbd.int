@@ -1,10 +1,11 @@
 import app from 'app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
-import 'views/measure-matrix/measure-matrix-countries-directive';
-import 'views/search/search-results/result-grouped-national-record';
+
+import '~/views/search/search-results/result-default';
 import 'services/main';
 import 'views/directives/export-directive';
+import { iconFields } from '~/views/forms/view/bch/icons';
 
 app.directive('countryProfile', function() {
     return {
@@ -28,13 +29,16 @@ app.directive('countryProfile', function() {
                 var eUSchemas = [];
                 var index=0;
 
-                function init(){
+                async function init(){
                     _(realm.schemas).map(function(schema, key){
                         if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
                             countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
                             nationalSchemas.push(key);
                         }
                     }).value();
+
+                    if(realm.is('ABS'))
+                        await import('~/views/measure-matrix/measure-matrix-countries-directive')
                 }
 
                 $scope.$watch('code', function(newVal){
@@ -64,6 +68,9 @@ app.directive('countryProfile', function() {
                         groupField     : groupField,
                         groupLimit     : 10
                     };
+                    if(realm.is('BCH')){
+                        searchQuery.additionalFields = `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
+                    }
                     searchQuery.query = [`government_s:${solr.escape(code)} OR (countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`]
                     searchService.group(searchQuery)
                     .then(function(result){
@@ -127,6 +134,9 @@ app.directive('countryProfile', function() {
                         sort           : 'updatedDate_dt desc',
                         start          : schema.start,
                         currentPage    : Math.ceil(schema.start/10)
+                    }
+                    if(realm.is('BCH')){
+                        query.additionalFields = `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
                     }
                     return searchService.list(query)
                     .then(function(result){

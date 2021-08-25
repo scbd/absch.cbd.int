@@ -19,7 +19,6 @@ import './search-filters/region-filter';
 import './search-filters/date-filter';
 import './search-filters/left-side-filter';
 import './search-results/result-default';
-import './search-results/national-records-country';
 import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
@@ -498,14 +497,14 @@ import 'views/reports/matrix/data-matrix.directive';
                     ////// internal functions
                     ////////////////////////////////////////////
 
-                    function init(){
+                    async function init(){
 
                         loadFilters().then(()=>{
 
                             var query =  $location.search();
-                            var currentpage = query.currentPage||1;
-                            if(query.currentpage)
-                                $scope.searchResult.currentpage = currentpage;
+                            var currentPage = query.currentPage||1;
+                            if(query.currentPage)
+                                $scope.searchResult.currentPage = currentPage;
                             if(query.rowsPerPage)
                                 $scope.searchResult.rowsPerPage = query.rowsPerPage;
                             if(query.tab)
@@ -546,11 +545,11 @@ import 'views/reports/matrix/data-matrix.directive';
                                 saveRawQueryFilter(query["raw-query"]);
                             }
 
-                            $timeout(function(){updateQueryResult(currentpage);}, 200)
+                            $timeout(function(){updateQueryResult(currentPage);}, 200)
                         });
 
-                        loadLeftMenuFieldMapping();
-                        
+                        leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
+                        $scope.pageInitialized = true;
                     }
 
                     
@@ -1227,10 +1226,11 @@ import 'views/reports/matrix/data-matrix.directive';
                     }
 
                     async function loadLeftMenuFieldMapping(){
-                        var file = 'views/search/search-filters/bch-left-menu-filters.json';
+                        
                         if(isABS)
-                            file = 'views/search/search-filters/abs-left-menu-filters.json';
-                        leftMenuSchemaFieldMapping = await import(file)
+                            return (await import('./search-filters/abs-left-menu-filters.json')).default
+                        else
+                            return (await import('./search-filters/bch-left-menu-filters.json')).default;
                     }
 
 

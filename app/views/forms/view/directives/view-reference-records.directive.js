@@ -4,6 +4,7 @@ import template from "text!./view-reference-records.directive.html";
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
 import '~/views/forms/view/bch/icons';
+import { iconFields } from '~/views/forms/view/bch/icons';
 
 app.directive("viewReferencedRecords", [function () {
 	return {
@@ -34,7 +35,7 @@ app.directive("viewReferencedRecords", [function () {
 						sort	: 'updatedDate_dt desc'
 					}
 					if(realm.is('BCH')){
-						searchQuery.fields += 'scopeRelease_b,scopeConfined_b,scopeFood_b,scopeFeed_b,scopeProcessing _b,scopeOther_b,scopePharmaceutical_b,scopeTransit_b,traitsDiseasesResistance_b,traitsHerbicidesResistance_b,traitsPhysiologyChanges_b,traitsQualityChanges_b,traitsMedicalProduction_b,traitsOther_b'
+						searchQuery.fields += `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
 					}
 					$q.when(searchService.list(searchQuery))
 					.then(function(data) {

@@ -1,10 +1,10 @@
 import app from 'app';
 import template from 'text!./list-view.html';
 import _ from 'lodash';
-import './result-grouped-national-record';
 import 'services/main';
 import '~/views/directives/party-status';
 import './result-default';
+import { iconFields } from '~/views/forms/view/bch/icons';
 
     app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', function(searchService, realm, $timeout, $location) {
         return {
@@ -47,10 +47,9 @@ import './result-default';
                     }
                     // if(lQuery=='*:*' || lQuery) TODO: add this fields only when req
                     if(realm.is('BCH')){
-                        lQuery.additionalFields  = 'traitsDiseasesResistance_b,traitsHerbicidesResistance_b,traitsPhysiologyChanges_b,traitsQualityChanges_b,traitsMedicalProduction_b,traitsOther_b'
-                        lQuery.additionalFields += ',scopeRelease_b,scopeFood_b,scopeFeed_b,scopeProcessing_b,scopeConfined_b,scopeOther_b,scopePharmaceutical_b,scopeTransit_b,'
-                        //'schema_s', 'government_s', 
+                        lQuery.additionalFields = `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
                     }
+
                     if(sort && sort != 'relevance asc')
                         lQuery.sort    = $scope.searchResult.sort = sort;
 
