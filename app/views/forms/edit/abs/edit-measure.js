@@ -251,8 +251,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
                 fieldQueries : [],
                 searchText: searchText
                 }
-                if($scope.document?.header.identifier)
-                    queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+                if($scope.document?.header?.identifier)
+                    queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
                  return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
 
@@ -264,9 +264,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
                     fieldQueries : [],
                     searchText: searchText
                 }
-                if($scope.document?.header.identifier)
-                    queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
-                if ($scope.document && $scope.document.government)
+                if($scope.document?.header?.identifier)
+                    queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];                if ($scope.document && $scope.document.government)
                     queryOptions.government = $scope.document.government.identifier;
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }

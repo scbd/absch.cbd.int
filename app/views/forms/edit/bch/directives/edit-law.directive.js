@@ -113,9 +113,9 @@ import "~/views/forms/view/bch/view-biosafety-law.directive";
 						realm     : realm.value,
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
-                    }	
-					if($scope.document?.header.identifier)
-                    	queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+                    }
+					if($scope.document?.header?.identifier)
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
 					if ($scope.document && $scope.document.government)				
 							queryOptions.government = $scope.document.government.identifier;			
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -128,8 +128,8 @@ import "~/views/forms/view/bch/view-biosafety-law.directive";
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
                     }
-					if($scope.document?.header.identifier)
-                    	queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+					if($scope.document?.header?.identifier)
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
 					if ($scope.document && $scope.document.government)
 							queryOptions.government = $scope.document.government.identifier;
 					

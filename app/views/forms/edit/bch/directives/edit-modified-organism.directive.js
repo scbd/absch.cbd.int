@@ -55,8 +55,8 @@ import '~/views/forms/directives/view-terms-hierarchy';
 						schemas	  : ['organism', 'modifiedOrganism'],
 						searchText: searchText
 					}
-					if($scope.document?.header.identifier)
-                   		 queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+					if($scope.document?.header?.identifier)
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
@@ -67,8 +67,8 @@ import '~/views/forms/directives/view-terms-hierarchy';
 						schemas	  : [schemasVal],
 						searchText: searchText
 					}
-					if(schemasVal=="modifiedOrganism" && $scope.document?.header.identifier){
-                        queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+					if(schemasVal=="modifiedOrganism" && $scope.document?.header?.identifier){
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
                     }
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}

@@ -148,8 +148,8 @@ import '~/views/forms/view/view-authority.directive';
                         searchText: searchText
                     }
                     if($scope.isAbs){
-                        if($scope.document?.header.identifier){
-                            queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+                        if($scope.document?.header?.identifier)
+                            queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
                         }
                         queryOptions.schemas = ['contact', 'authority'];
                         queryOptions.query = `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact AND type_s: person)`;

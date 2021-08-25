@@ -277,8 +277,8 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
 				        schemas	  : [schemasVal],
                         searchText: searchText
                     }
-                    if(schemasVal=="biosafetyDecision" && $scope.document?.header.identifier){
-                        queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+                    if(schemasVal=="biosafetyDecision" && $scope.document?.header?.identifier){
+                        queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
                     }
 				    queryOptions.government = $scope.document.government.identifier;
                    

@@ -83,8 +83,8 @@ import 'views/forms/view/abs/view-abs-permit.directive';
               fieldQueries : [],
               searchText: searchText
           }
-           if($scope.document?.header.identifier)
-               queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+           if($scope.document?.header?.identifier)
+               queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
           if ($scope.document && $scope.document.government)
                 queryOptions.government = $scope.document.government.identifier;
 

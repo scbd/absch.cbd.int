@@ -38,8 +38,8 @@ import 'services/main';
            realm       : realm.value,
            searchText  : searchText
        }
-       if($scope.document?.header.identifier)
-           queryOptions.fieldQueries = ["NOT (identifier_s:" + solr.escape($scope.document.header.identifier)+ ")"];
+       if($scope.document?.header?.identifier)
+            queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
        return  $scope.onBuildDocumentSelectorQuery(queryOptions);
    }
 
