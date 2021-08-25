@@ -117,11 +117,12 @@
                     <docked-side-bar type="openSideBarType"></docked-side-bar>
                 </div>
             </div>
+        
             <div id="page-content-wrapper">
                 <div class="container-fluid">
                     <div class="easing">
                         <bch-header></bch-header>
-                        <div class="container-full page-content">
+                        <div class="page-content">
                             <route-loading></route-loading>
                             <ng-view autoscroll="true"></ng-view>                
                         </div>
@@ -131,7 +132,7 @@
         </div>
 
         <bch-footer></bch-footer>
-        <scbd-footer></scbd-footer>
+        <cbd-footer></cbd-footer>
 
     </div>
         
@@ -144,7 +145,7 @@
         // In IE boot.js is executing before this script was executed so move it before boot.js       
         
         window.scbdApp = {
-            template         : 'templates/bch',
+            template         : 'templates/bch/bch',
             host             : '<%=clearingHouseHost%>',
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',

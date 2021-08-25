@@ -436,7 +436,7 @@ form label[required]:before
   -o-transform:rotatey(-180deg); /* Opera */
 }
 .card {
-  width: 100%;
+	
   height: 100%;
   -webkit-transform-style: preserve-3d;
   -webkit-transition: 0.5s;

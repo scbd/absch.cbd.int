@@ -1,6 +1,8 @@
 import app from 'app';
 import angular from 'angular';
 import footerHtml from 'text!./bch-footer.html';
+import cbdFooterHtml from 'text!../cbd-footer.html';
+
 import './bch-header';
 import 'bootstrap';
 import 'routes/bch';
@@ -13,9 +15,11 @@ import 'components/scbd-angularjs-services/main';
 import 'views/directives/route-loading-directive';
 import 'services/main'; ;
 import 'views/directives/docked-side-bar' 
-import './app-loading.directive';
+import '../app-loading.directive';
 
     app.directive('bchFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
+    app.directive('cbdFooter', [function () { return { restrict: 'E', template: cbdFooterHtml }; }]);
+
 
     app.controller('BchTemplateController', ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
         function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger, ngMeta) {

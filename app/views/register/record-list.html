@@ -3,9 +3,9 @@
     <link href="/app/css/record.css" rel="stylesheet">
 
     <span register-top-menu></span>
-    <div class="card card-1-notrans bg-white">
+    <div id="innerPage" class="card card-1-notrans bg-white innerPageContent" style="margin:20px"  >
         
-        <div class="register-content-header" style="margin-top:20px;" ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
+        <div class="register-content-header"  ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
             <div style="padding:5px 5px;">
                 <span class="btn-group pull-right dashboard-tour">
                     <a rel="noopener" ng-href="#" class="help-tour link2" ng-click="tour()"> 
