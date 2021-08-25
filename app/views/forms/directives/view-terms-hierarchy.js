@@ -34,6 +34,7 @@ import 'services/main';
 							_.forEach(_.compact(newTerms), function(term, index){
 								if(term.customValue){
 									var otherTerm = angular.copy(OtherTerm);
+									if(otherTerm == undefined) return;
 									var parentTerm = _.find(terms, {identifier:term.identifier});
 									
                                     otherTerm.identifier = otherTerm.identifier + '#' + index;

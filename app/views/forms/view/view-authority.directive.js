@@ -47,11 +47,22 @@ import 'views/forms/directives/view-terms-hierarchy';
 				$scope.onFunctionsTerms = function(terms){
 					if(($scope.document||{}).functions){
 						_.forEach(terms, function(item){
-							if(item.broaderTerms.length == 0 || item.broaderTerms == []){
-								var root =_.find($scope.document.functions, {identifier: item.identifier});
-								terms = removeTerms(terms, root, item.identifier);
+							var root = _.find( $scope.document.functions, { identifier : 'FE1AA9E9-3320-4112-9F9C-A22AD6563AE1' } );
+							if( root ){
+								terms = _.filter( terms, function ( t ) {
+									return _.includes( root, t.identifier );
+								} );
+							} else {
+								if ( item.narrowerTerms != undefined && item.narrowerTerms.length > 0 ) {
+									terms = _.filter( terms, function ( t ) {
+										return item.identifier != t.identifier;
+									} );
+								}
 							}
-						});
+							if(root && item.identifier =="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED") { 
+								terms.push(item)
+							}
+						} );
 						return terms;
 					}
 				}
