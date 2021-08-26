@@ -145,12 +145,11 @@ import '~/views/forms/view/view-authority.directive';
                 $scope.onContactQuery = function(searchText){
                     var queryOptions = {
                         realm     : realm.value,
-                        searchText: searchText
+                        searchText: searchText,
+                        fieldQueries:[]
                     }
                     if($scope.isAbs){
-                        if($scope.document?.header?.identifier)
-                            queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
-                        }
+                        
                         queryOptions.schemas = ['contact', 'authority'];
                         queryOptions.query = `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact AND type_s: person)`;
                     }
@@ -159,6 +158,9 @@ import '~/views/forms/view/view-authority.directive';
                         queryOptions.fieldQueries = ['type_s: person'];
                     }
 
+                    if($scope.document?.header?.identifier)
+                        queryOptions.fieldQueries.push(`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`);
+                        
                     return $scope.onBuildDocumentSelectorQuery(queryOptions);
 
                 }
