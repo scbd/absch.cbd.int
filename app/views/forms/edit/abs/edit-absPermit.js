@@ -7,8 +7,8 @@ import 'views/forms/view/abs/view-abs-permit.directive';
   export { default as template } from './edit-absPermit.html';
 
   export default ["$scope", "realm", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
-                                    "editFormUtility", "$controller","IStorage","$location", "commonjs",
-   function ($scope, realm, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs) {
+                                    "editFormUtility", "$controller","IStorage","$location", "commonjs","solr",
+   function ($scope, realm, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs, solr) {
     $controller('editController', {$scope: $scope});
 
     $scope.path= $location.path();
@@ -83,7 +83,8 @@ import 'views/forms/view/abs/view-abs-permit.directive';
               fieldQueries : [],
               searchText: searchText
           }
-          //queryOptions.identifier = (($scope.document||{​​​​​}​​​​​).header||{​​​​​}​​​​​).identifier
+           if($scope.document?.header?.identifier)
+               queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
           if ($scope.document && $scope.document.government)
                 queryOptions.government = $scope.document.government.identifier;
 

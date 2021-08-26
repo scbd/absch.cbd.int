@@ -32,7 +32,16 @@ import 'services/main';
       }
       
      return  $scope.onBuildDocumentSelectorQuery(queryOptions);
-    } 
+    }
+   $scope.onRecordsQuery = function(searchText){
+       var queryOptions = {
+           realm       : realm.value,
+           searchText  : searchText
+       }
+       if($scope.document?.header?.identifier)
+            queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
+       return  $scope.onBuildDocumentSelectorQuery(queryOptions);
+   }
 
      $scope.onNotificationQuery = function(searchText){
        var queryOptions = {

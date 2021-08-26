@@ -9,8 +9,8 @@ import "~/views/forms/view/bch/view-lmo.directive";
 import '~/views/forms/directives/traits-selector.directive';
 import '~/views/forms/directives/view-terms-hierarchy';
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm',
-		 function($http, $controller, thesaurusService, storage, $q, realm) {
+	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr',
+		 function($http, $controller, thesaurusService, storage, $q, realm, solr) {
 		
 		return {
 			restrict   : "EA",
@@ -55,6 +55,8 @@ import '~/views/forms/directives/view-terms-hierarchy';
 						schemas	  : ['organism', 'modifiedOrganism'],
 						searchText: searchText
 					}
+					if($scope.document?.header?.identifier)
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
@@ -65,6 +67,9 @@ import '~/views/forms/directives/view-terms-hierarchy';
 						schemas	  : [schemasVal],
 						searchText: searchText
 					}
+					if(schemasVal=="modifiedOrganism" && $scope.document?.header?.identifier){
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
+                    }
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 				//==================================

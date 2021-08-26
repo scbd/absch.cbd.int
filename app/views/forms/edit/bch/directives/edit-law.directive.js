@@ -6,7 +6,7 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-biosafety-law.directive";
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", "realm", function($controller, thesaurusService, $q, $filter,Enumerable, realm) {
+	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", "realm", "solr", function($controller, thesaurusService, $q, $filter,Enumerable, realm, solr) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -113,7 +113,9 @@ import "~/views/forms/view/bch/view-biosafety-law.directive";
 						realm     : realm.value,
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
-                    }	
+                    }
+					if($scope.document?.header?.identifier)
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
 					if ($scope.document && $scope.document.government)				
 							queryOptions.government = $scope.document.government.identifier;			
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
@@ -126,6 +128,8 @@ import "~/views/forms/view/bch/view-biosafety-law.directive";
 						schemas	  : ['biosafetyLaw'],
                         searchText: searchText
                     }
+					if($scope.document?.header?.identifier)
+						queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
 					if ($scope.document && $scope.document.government)
 							queryOptions.government = $scope.document.government.identifier;
 					

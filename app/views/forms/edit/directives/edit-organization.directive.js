@@ -8,8 +8,8 @@ import 'components/scbd-angularjs-services/main';
 import 'views/forms/edit/editFormUtility';
 import 'services/main';
 
-app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm',
-                function($controller, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, realm) {
+app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm', 'solr',
+                function($controller, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, realm, solr) {
 
 	return {
 		restrict   : "E",
@@ -43,7 +43,8 @@ app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', '
                     schemas	  : ['organization'],
                     searchText: searchText
                 }
-
+                if($scope.document?.header?.identifier)
+                    queryOptions.fieldQueries = [`NOT identifier_s:${solr.escape($scope.document.header.identifier)}`];
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
             $scope.onContactQuery = function(searchText){
