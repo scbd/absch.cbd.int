@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="panel-body">
                                     <a rel="noopener" ng-href="/database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase|encodeURIComponent}}" ng-bind="contact.title_t"></a>
-                                    <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                                    <div ng-show="contact.summary_t" ng-bind-html="contact.summary_t"></div>
                                     <ul ng-show="contact.telephones || contact.telephone_ss || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">                                        
                                         <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss">
                                             <span ng-bind="item"></span></li>

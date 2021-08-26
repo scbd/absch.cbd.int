@@ -25,7 +25,7 @@ export default ['$scope', '$http', '$location', '$routeParams', '$filter', '$q',
 
         var queryURL = '/api/v2013/index/select';
         var params = {
-            fl  : 'id,identifier_s,title_t,description_t,uniqueIdentifier_s,url_ss,schema_EN_t,date_dt,' +
+            fl  : 'id,identifier_s,title_t,summary_t,uniqueIdentifier_s,url_ss,schema_EN_t,date_dt,' +
                     'government_s,government_EN_t,schema_s,number_d,aichiTarget_ss,reference_s,sender_s,meeting_ss,recipient_ss,' +
                     'symbol_s,eventCity_EN_t,eventCountry_EN_t,startDate_s,endDate_s,body_s,code_s,meeting_s,group_s,function_t,' +
                     'department_t,organization_t,summary_EN_t,reportType_EN_t,completion_EN_t,jurisdiction_EN_t,development_EN_t,' +
@@ -44,12 +44,12 @@ export default ['$scope', '$http', '$location', '$routeParams', '$filter', '$q',
                 $scope.absch_nfp.forEach(function(document){
                     document.identifier = document.identifier_s
                     if(document.schema_s == "focalPoint" ){
-                        document.description_t = document.description_t.replace(/\n/g, '<br/>');
+                        document.summary_t = document.summary_t.replace(/\n/g, '<br/>');
                         document.documentId = hexToInteger(document.identifier_s);
                     }
                     else if(document.schema_s == "authority" || document.schema_s == "database" ||
                     document.schema_s == "absCheckpoint"){
-                        document.description_t = '';
+                        document.summary_t = '';
                         $q.when($http.get('/api/v2013/documents/' +  document.identifier_s, { info:""}))
                         .then(function(data) {
                             var doc = data.data
@@ -63,7 +63,7 @@ export default ['$scope', '$http', '$location', '$routeParams', '$filter', '$q',
                             if(document.government_CEN_s)
                                 details += $filter("lstring")(JSON.parse(document.government_CEN_s));
 
-                            document.description_t = details;
+                            document.summary_t = details;
                             document.telephones = doc.phones;
                             document.emails = doc.emails;
                             document.doc = data.data;
