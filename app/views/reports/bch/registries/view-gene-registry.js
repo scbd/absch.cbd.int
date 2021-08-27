@@ -14,9 +14,9 @@ function($scope,searchService,$element, $rootScope) {
 
 			$scope.isLoading = true;
 			var searchQuery = {
-				fields:  'recordId:uniqueIdentifier_s,name:name_EN_s,trait:summary_t,organismCommonNames:geneDonorOrganismCommonNames_EN_txt,organismScientificNames:geneDonorOrganismScientificNames_ss,geneFunction:biologicalFunction_EN_t,url_ss',
+				fields:  'recordId:uniqueIdentifier_s,name:name_EN_s,trait:summary_t,organismCommonNames:geneDonorOrganismsCommonNames_EN_txt,organismScientificNames:geneDonorOrganismsScientificNames_ss,geneFunction:biologicalFunction_EN_t,url_ss',
 				query:  'schema_s:dnaSequence',
-				sort:	'name_EN_s asc, geneDonorOrganismScientificNames_ss asc',
+				sort:	'name_EN_s asc, geneDonorOrganismsScientificNames_ss asc',
 				rowsPerPage: 10000
 				
 			};
