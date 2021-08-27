@@ -82,7 +82,7 @@
                             <li class="nav-item active">
                                 <a rel="noopener" data-toggle="tab" class="nav-link" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
                             </li>
-                            <li class="dropdown nav-item" ng-if="userGov">
+                            <li class="dropdown nav-item" ng-if="userGov && showMyGovFilter">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                                     <span ng-if="activeTab!='myGovernmentRecords'">My records</span>
                                     <span ng-if="activeTab=='myGovernmentRecords'">My government records</span>
@@ -92,7 +92,7 @@
                                   <li><a rel="noopener" data-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">My government records</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item" ng-if="!userGov">
+                            <li class="nav-item" ng-if="!userGov || !showMyGovFilter">
                                 <a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My records</a>
                             </li>
                             <li class="nav-item"style="padding-right: 25px;">

@@ -61,6 +61,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 schemas : _.compact(($attr.allowNewSchema||'').split(',')),
             };     
 
+            $scope.showMyGovFilter = $scope.allowNew.schemas.includes('contact')
             //==================================
             //
             //==================================
