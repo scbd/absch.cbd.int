@@ -61,6 +61,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                 schemas : _.compact(($attr.allowNewSchema||'').split(',')),
             };     
 
+            $scope.showMyGovFilter = $scope.allowNew.schemas.includes('contact')
             //==================================
             //
             //==================================
@@ -298,48 +299,18 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     rawQuery = $scope.onBuildQuery({searchText:$scope.search.keyword, tab:$scope.activeTab});
                 }
                 else{
-                    //TODO: obsolete code, remove after upgrading forms using directive
-                    console.warn('document-selector no longer supports attributed queries, use onBuildQuery to pass query from parent');
-                        rawQuery.fieldQueries = [];
-                    var query                 = '*:*';
-                    var schema                = "*";
-                    rawQuery.fields           = ($attr.displayFields||'')!= '' ? $attr.displayFields : undefined
-
-                    if ($scope.schema)
-                        schema = $scope.schema;
-
-                    rawQuery.fieldQueries.push(["schema_s:"+ schema]); // cannot escape for backward compatibility
-
-                    if($scope.query){ //if query is mentioned ignore schema field in query
-                        rawQuery.fieldQueries = [$scope.query];
-                    }
-
-                    if(!$attr.skipGovernment){
-                        if($scope.government)
-                            rawQuery.fieldQueries.push("government_s:" + solr.escape($scope.government.identifier));
-                        if(!$scope.government &&  $scope.userGov)
-                            rawQuery.fieldQueries.push("government_s:" + solr.escape($scope.userGov));
-                    }
-                    if($scope.hideSelf){
-                        rawQuery.fieldQueries.push("NOT (identifier_s:" + solr.escape($scope.hideSelf) + ")");
-                    }
-                    
-                    if($scope.search.keyword){
-                        var queryText = $scope.search.keyword;
-                        queryText = '(' + solr.escape(queryText) + ')';
-
-                        if(($attr.freeTextQueryField||'')!='')
-                            query = $attr.freeTextQueryField + ':' + queryText;
-                        else
-                            query = 'text_'+(locale||'en').toUpperCase()+'_txt:' + queryText;
-                            
-                        // // Add boost query give more boost to title and summary fields
-                        // var boostQuery = 'title_'+(locale||'en').toUpperCase()+'_txt:' + queryText+'*^10';
-
-                        // query = boostQuery + ' OR ' + query;
-                    }
-                    rawQuery.query = query;
+                    throw Error('Obsolete code called in document-selector');
                 }
+                if(rawQuery.fields){
+                    const metaFields = ['rec_meta1:meta1_EN_txt', 'rec_meta2:meta2_EN_txt', 'rec_meta3:meta3_EN_txt',
+                    'uniqueIdentifier_s:uniqueIdentifier_s', 'rec_summary:summary_t']
+                    metaFields.forEach(f=>{
+                        if(rawQuery.fields.indexOf(f)<0)
+                            rawQuery.fields += `,${f}`;
+                    });
+                
+                }
+                
                 rawQuery = rawQuery || {fieldQueries:[]};
                 //tabs query
                 if($scope.activeTab == 'myRecords'){
@@ -390,23 +361,25 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                        $scope.rawDocuments.pageCount = Math.ceil($scope.rawDocuments.numFound / $scope.searchResult.rowsPerPage)
                        
                        _.forEach($scope.rawDocuments.docs, function(doc){
-                           //convert meta fields to [] if it is of type string
                             
-                           if(doc.rec_meta1 || doc.rec_meta2 || doc.rec_meta3){
-                               if(_.isString(doc.rec_meta1))
-                                    doc.rec_meta1 = [doc.rec_meta1];
-                                if(_.isString(doc.rec_meta2))
-                                    doc.rec_meta2 = [doc.rec_meta2];
-                                if(_.isString(doc.rec_meta3))
-                                    doc.rec_meta3 = [doc.rec_meta3];
-                           }
-                           else{
-                                //incase if the directive receives fl list from view, convert _txt to string 
-                                _.forEach(doc, function(val, key){
+                            _.forEach(doc, function(val, key){
+                                //convert meta fields to [] if it is of type string
+                                if(['rec_meta1', 'rec_meta2', 'rec_meta3'].includes(key)){
+                                    if(_.isString(doc.rec_meta1))
+                                        doc.rec_meta1 = [doc.rec_meta1];
+                                    if(_.isString(doc.rec_meta2))
+                                        doc.rec_meta2 = [doc.rec_meta2];
+                                    if(_.isString(doc.rec_meta3))
+                                        doc.rec_meta3 = [doc.rec_meta3];
+                                    
+                                    doc.meta = [...(doc.rec_meta1||[]), ...(doc.rec_meta2||[]), ...(doc.rec_meta3||[])].join(', ')
+                                }
+                                else{
+                                    //incase if the directive receives fl list from view, convert _txt to string 
                                     if(_.isArray(val)) 
                                         doc[key] = val.join(', ');
-                                })
-                            }
+                                }
+                            })
                             return doc;
                        });
                        
@@ -534,7 +507,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             function getSortField(sortFields){
                 //, rec_meta:meta1_EN_txt, rec_meta:meta2_EN_txt, rec_meta:meta3_EN_txt
                 var field  = $scope.search.sort;
-                var fields = sortFields||$attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t'
+                var fields = sortFields||$attr.displayFields||'rec_date:updatedDate_dt,uniqueIdentifier_s:uniqueIdentifier_s,rec_title:title_EN_t, rec_summary:description_t,rec_type:type_EN_t,rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt,rec_meta3:meta3_EN_txt'
                 if(~fields.indexOf(field)){
                     var sortField = _(fields.split(',')).map(function(f){
                                         if(~f.indexOf(field))
