@@ -174,12 +174,9 @@
                                         <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
                                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
-                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:20"></td>
-                                        <td class="meta"  data-title="doc.rec_summary"> 
-                                            <span ng-repeat="meta  in doc.rec_meta1 track by $index"><span ng-bind="(meta)+($last ? '' : ',')"></span></span>
-
-                                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index"><span ng-bind="','+ meta1"></span></span>
-                                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index"><span ng-bind="','+ meta2"></span></span>
+                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:20"  data-title="doc.rec_summary"></td>
+                                        <td class="meta"> 
+                                            <span ng-bind="doc.meta"></span>  
                                         </td>
                                     </tr>
                                 </tbody>
@@ -295,9 +292,7 @@
                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
                         <td class="summary" data-title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:20"></td>
                         <td class="meta"> 
-                            <span ng-repeat="meta in doc.rec_meta1  track by $index"><span ng-bind="(meta) + ($last ? '' : ',')"></span></span>
-                            <span ng-repeat="meta1 in doc.rec_meta2 track by $index"><span ng-bind="','+ meta1"></span></span>
-                            <span ng-repeat="meta2 in doc.rec_meta3 track by $index"><span ng-bind="','+ meta2"></span></span>
+                            <span ng-bind="doc.meta"></span>                            
                         </td>
                     </tr>
                 </tbody>
