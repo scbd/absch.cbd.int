@@ -29,7 +29,7 @@
     },
     "dateFilterTab" :  {
       "title": "Search by Date",
-      "content": "<p>The Date filter allows you to search for records published within (i) a pre-determined date range (e.g. “Last 7 Days”); or (ii) a date range that you can specify (“Custom Range”); or (iii) on a specific day of any year. </p>"
+      "content": "<p>The <b>Date</b> filter allows you to search for records published within (i) a pre-determined date range (e.g. “Last 7 Days”); or (ii) a date range that you can specify (“Custom Range”); or (iii) on a specific day of any year. </p>"
     },
     "closeFilterTab" :  {
       "title": "Search Results",
@@ -37,7 +37,7 @@
     },
     "searchResult" :  {
       "title": "Search Results: Tabs",
-      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br><u>Note:</u> The black circle indicates the total number of records in each category and will automatically change based on your search selections.</p>"
+      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br><br><u>Note:</u> The black circle indicates the total number of records in each category and will automatically change based on your search selections.</p>"
     },
     "subFilters" :  {
       "title": "Sub-filters",

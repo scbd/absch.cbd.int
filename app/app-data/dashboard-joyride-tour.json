@@ -1,7 +1,7 @@
   {
     "welcome" :  {
       "title": "Welcome to the Submit page: Dashboard",
-      "content": "<p>Welcome to the Submit page: Dashboard The Dashboard is your personal workspace. Here you can view, submit, review and edit records, depending on your user role, as well as update your profile information.This slide will appear in the center on top of the Dashboard page.</p>"
+      "content": "<p>The Dashboard is your personal workspace. Here you can view, submit, review and edit records, depending on your user role, as well as update your profile information.</p>"
     },
     "personalInformation" :  {
       "title": "Your personal information",
@@ -9,7 +9,7 @@
     },
     "recordOverview" :  {
       "title": "Record overview",
-      "content": "<p>The “Welcome” section opens when you click on the “down arrow”. Here you can view and update your profile information.</p>"
+      "content": "<p>This section categorizes records into National Records and Reference Records and displays them according to your user role. It also shows the status of various records.</p>"
     },
     "yourRecordsStatus" :  {
       "title": "Your records: status",
@@ -29,7 +29,7 @@
     },
     "viewAllRecords" :  {
       "title": "View all records",
-      "content": "<p>Click on the “list” icon to view a summary of all your records for the corresponding record type. On the page that opens, you will be able to filter existing records and create new ones, as well as duplicate, edit or delete a record.<u>Tip:</u>  You can also click on the title of the record type (for example, click on “Contact (CON)”).</p>"
+      "content": "<p>Click on the “list” icon to view a summary of all your records for the corresponding record type. On the page that opens, you will be able to filter existing records and create new ones, as well as duplicate, edit or delete a record.<br><u>Tip:</u>  You can also click on the title of the record type (for example, click on “Contact (CON)”).</p>"
     },
     "needHelp" :  {
       "title": "Need help?",

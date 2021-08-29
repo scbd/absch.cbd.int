@@ -13,7 +13,7 @@
     },
     "adding" :  {
       "title": "Adding a new record",
-      "content": "<p>Click on the “Add New” button to start creating a new record.</p>"
+      "content": "<p>Click on the <b>“Add New”</b> button to start creating a new record.</p>"
     },
     "duplicate" :  {
       "title": "Duplicating a record",

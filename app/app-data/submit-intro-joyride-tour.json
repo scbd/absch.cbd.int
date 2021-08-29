@@ -1,11 +1,11 @@
 {
     "welcome" :  {
       "title": "Welcome to adding a new record",
-      "content": "<p>On this page you can add (create) a new record.<br>Adding a new record is divided into 4 main steps:<br><br>Step 1: Introduction<br>Step 2: Submission form<br>Step 3: Review<br>Step 4: Publish</p>"
+      "content": "<p>On this page you can add (create) a new record.<br>Adding a new record is divided into 4 main steps:<br>Step 1: Introduction<br>Step 2: Submission form<br>Step 3: Review<br>Step 4: Publish</p>"
     },
     "introduction" :  {
       "title": "Adding a new record: Introduction",
-      "content": "<p>'Introduction' contains a short summary about the selected record type and brief instructions on how to submit the information..</p>"
+      "content": "<p>“Introduction” contains a short summary about the selected record type and brief instructions on how to submit the information.</p>"
     },
     "submissionForm" :  {
       "title": "Adding a new record: Submission form",
