@@ -3005,3 +3005,23 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 #pageHeader .normal-nav > ul > li > .nav-link {font-size: 13px;text-transform: uppercase;color: #555;font-weight: 500; }
 
 #pageHeader .breadcrumbs {text-transform: uppercase;margin-left:26px;font-size:12px; padding:10px 3px;color:#111;font-weight:500}
+.jr-search-tour #jr_16,.jr-search-tour #jr_17,.jr-submit-tour #jr_3,.jr-submit-tour #jr_6,.jr-submit-tour #jr_7, .jr-country-tour #jr_8, .jr-country-tour #jr_9,
+.jr-dashboard-tour #jr_8, .jr-dashboard-tour #jr_9, .jr-RecordList-tour #jr_7, .jr-RecordList-tour #jr_8{
+    margin-left: -30px;
+}
+.jr-submit-tour #jr_6, .jr-search-tour #jr_16,.jr-country-tour #jr_8, .jr-dashboard-tour #jr_8, .jr-RecordList-tour #jr_7{
+    top: 50px !important;
+}
+.jr-search-tour #jr_16.jr_pos_bottom:after,.jr-submit-tour #jr_6.jr_pos_bottom:after,.jr-country-tour #jr_8.jr_pos_bottom:after,
+.jr-dashboard-tour #jr_8.jr_pos_bottom:after, .jr-RecordList-tour #jr_7.jr_pos_bottom:after {
+    left: auto;
+    right: 42px;
+}
+.jr-submit-tour #jr_3.jr_pos_bottom:after{
+    right: 80px;
+    left: auto;
+}
+.jr-search-tour #jr_17.jr_pos_top:after,.jr-submit-tour #jr_7.jr_pos_top:after, .jr-country-tour #jr_9.jr_pos_top:after, .jr-dashboard-tour #jr_9.jr_pos_top:after, .jr-RecordList-tour #jr_7.jr_pos_top:after, .jr-RecordList-tour #jr_8.jr_pos_top:after{
+    left: auto;
+    right: 25px;
+}

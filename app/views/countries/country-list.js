@@ -241,8 +241,9 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 joyride.config = {
                     overlay: true,
                     onStepChange: function(){  },
-                    onStart: function(){  },
+                    onStart: function(){ document.body.classList.add("jr-country-tour");  },
                     onFinish: function(){ 
+                        document.body.classList.remove("jr-country-tour");
                         joyride.start = false;
                         $scope.tourOn = false;
                         closeTab();
@@ -348,6 +349,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 function closeTab (resumeJoyride){
                     $timeout(function(){
                         $element.find('#closeTab').click();
+                        if(resumeJoyride)
                         resumeJoyride();
                     }, 100);
                 }

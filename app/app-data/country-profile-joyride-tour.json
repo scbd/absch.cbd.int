@@ -1,11 +1,11 @@
 ﻿{
     "countryProfiles" :  {
       "title": "Country Profiles",
-      "content": "Click on <span title='this is tooltip'>'Country Profiles'</span> to open the list of countries.<br>You can select a particular country of interest to view the profile page for that country. You can also select an overview of all the countries.<br>Let’s click on 'Overview - List all countries'."
+      "content": "The “Country Profiles” drop-down list on the top navigation bar allows you to select a country of interest to view its profile page.<br>You can also access an overview of national records for all the countries.<br>Let’s explore the “Overview - List all countries”."
     },
     "listOfRecords" :  {
       "title": "List of records",
-      "content": "On this page, you see an overview of all the national records. The numbers shown in the black circles represent the total number of records published under each record type. The numbers shown in the <span style='background-color:#1FA65D;'>green squares</span> indicate how many records for this type exist for a given country.<br> <u>Tip</u>: place the cursor over an acronym (for example: NFP) to see the full title of the national record type."
+      "content": "On this page, you see an overview of all the national records. The numbers shown in the black circles represent the total number of records published under each record type. The numbers shown in the <span style='background-color:#1FA65D;'>green squares</span> indicate how many records for this type exist for a given country.<br> <u>Tip:</u> place the cursor over an acronym (for example: NFP) to see the full title of the national record type."
     },
     "sortingRecords" :  {
       "title": "Sorting records",
@@ -17,7 +17,7 @@
     },
     "sortingRecordsCountries" :  {
       "title": "Sorting records: Countries",
-      "content": "Click here to select one or multiple countries of your choice.<br><u>Tip</u>: Click on a country name or on the <span style='background-color:#1FA65D;'>green square</span> to go directly to that country’s profile page."
+      "content": "Click here to select one or multiple countries of your choice.<br><u>Tip:</u> Click on a country name or on the <span style='background-color:#1FA65D;'>green square</span> to go directly to that country’s profile page."
     },
     "sortingRecordsPartyStatus" :  {
       "title": "Sorting records: Party Status",
@@ -25,7 +25,7 @@
     },
     "sortingRecordsRegions" :  {
       "title": "Sorting records: Regions",
-      "content": "Click here to filter by Region. You can select multiple regions or sub-regions.<br><u>Tip</u>: To search by the 5 UN regional groups, type 'CBD' in the search box and then select the region(s) of interest."
+      "content": "Click here to filter by Region. You can select multiple regions or sub-regions.<br><u>Tip:</u> To search by the 5 UN regional groups, type 'CBD' in the search box and then select the region(s) of interest."
     },
     "exportingRecords" :  {
       "title": "Exporting records",
@@ -33,7 +33,7 @@
     },
     "needHelp" :  {
       "title": "Need Help?",
-      "content": "Click here for more contextual help."
+      "content": "Click here to access contextual help where you can find more information related to the Country Profiles page."
     },
     "needMoreHelp" :  {
       "title": "Need more help?",
