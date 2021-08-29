@@ -5,11 +5,11 @@
     },
     "filters" :  {
       "title": "Filters",
-      "content": "<p>Use these filters to see a list of all, published, draft records or requests pending approval.</p>"
+      "content": "<p>Use these filters to see a list of all records, published, draft or records pending approval.</p>"
     },
     "Keyword" :  {
       "title": "Keyword",
-      "content": "<p>Search the list by a word of your choice.</p>"
+      "content": "<p>Search the list by typing a word of your choice.</p>"
     },
     "adding" :  {
       "title": "Adding a new record",
@@ -29,7 +29,7 @@
     },
     "needHelp" :  {
       "title": "Need help?",
-      "content": "<p>Click here for more contextual help.</p>"
+      "content": "<p>Click here to access contextual help where you can find more information related to this page.</p>"
     },
   "needMoreHelp" :  {
       "title": "Need more help?",
