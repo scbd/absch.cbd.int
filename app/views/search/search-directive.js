@@ -103,8 +103,9 @@ import 'views/reports/matrix/data-matrix.directive';
                         joyride.config = {
                             overlay: true,
                             onStepChange: function(){  },
-                            onStart: function(){  },
-                            onFinish: function(){ 
+                            onStart: function(){ document.body.classList.add("jr-search-tour");  },
+                            onFinish: function(){
+                                document.body.classList.add("jr-search-tour");
                                 joyride.start = false;
                                 $scope.tourOn = false; 
                                 $scope.showFilters = false;                                
@@ -120,19 +121,19 @@ import 'views/reports/matrix/data-matrix.directive';
                                         {
                                             appendToBody:true,
                                             type: 'element',
-                                            selector: "#globalSearch",
-                                            title: joyRideText.globalSearch.title,
-                                            content: joyRideText.globalSearch.content,
-                                            placement: 'top'
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
                                             selector: "#freeText",
                                             title: joyRideText.freeText.title,
                                             content: joyRideText.freeText.content,
                                             placement: 'bottom'
-                                        },  
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#globalSearch",
+                                            title: joyRideText.globalSearch.title,
+                                            content: joyRideText.globalSearch.content,
+                                            placement: 'top'
+                                        },                                         
                                         {   
                                             appendToBody:true,
                                             type: 'element',
@@ -246,6 +247,23 @@ import 'views/reports/matrix/data-matrix.directive';
                                             content: joyRideText.exportRecords.content,
                                             placement: 'left'
                                         },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#needHelp",
+                                            title: joyRideText.needHelp.title,
+                                            content: joyRideText.needHelp.content,
+                                            placement: 'bottom'
+
+                                        },
+                                        {
+                                            appendToBody:true,
+                                            type: 'element',
+                                            selector: "#slaask-button-cross",
+                                            title: joyRideText.needMoreHelp.title,
+                                            content: joyRideText.needMoreHelp.content,
+                                            placement: 'top'
+                                        }
 
                                     ]
                         };
