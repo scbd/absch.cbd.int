@@ -126,7 +126,7 @@
                 <span ng-if="breadcrumb.param">
                     <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
                         ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                    <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+                    <span ng-if="$last" ng-bind="breadcrumb.param|mapSchema|schemaName"></span>
                 </span>
             </span>
         </div>
