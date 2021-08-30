@@ -58,12 +58,12 @@ import 'views/reports/matrix/data-matrix.directive';
                                 solrField:'schema_s',
                                 titleField:'schema_'+locale.toUpperCase()+'_s'
                             },
-                            {
-                                field:'submissionYear', 
-                                sortFields:['submissionYear_s asc'],
-                                solrField:'submissionYear_s',
-                                titleField:'submissionYear_s'
-                            }
+                            // {
+                            //     field:'submissionYear', 
+                            //     sortFields:['submissionYear_s asc'],
+                            //     solrField:'submissionYear_s',
+                            //     titleField:'submissionYear_s'
+                            // }
                         ];    
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
