@@ -61,9 +61,8 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                 joyride.config = {
                     overlay: true,
                     onStepChange: function(){  },
-                    onStart: function(){ document.body.classList.add("jr-dashboard-tour"); },
+                    onStart: function(){ },
                     onFinish: function(){
-                        document.body.classList.remove("jr-dashboard-tour");
                         joyride.start = false;
                         $scope.tourOn = false;
                         $scope.showProfileInfo = false;
@@ -154,7 +153,8 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             selector: "#slaask-button-cross",
                             title: joyRideText.needMoreHelp.title,
                             content: joyRideText.needMoreHelp.content,
-                            placement: 'top'
+                            placement: 'top',
+                            beforeStep: moreHelp
                         }
                     ]
                 };
@@ -173,9 +173,21 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                        resumeJoyride();
                    }, 100);
                 }
+
                 function gotoSectionHelp (resumeJoyride){
                     $timeout(function(){
                         $('html,body').scrollTop(0);
+                        $(document).on('DOMNodeInserted', function(e) {
+                            $(e.target).addClass('tour-need-help');
+                        });
+                        resumeJoyride();
+                    }, 100);
+                }
+                function moreHelp(resumeJoyride) {
+                    $timeout(function(){
+                        $(document).on('DOMNodeInserted', function(e) {
+                            $(e.target).addClass('tour-more-help');
+                        });
                         resumeJoyride();
                     }, 100);
                 }

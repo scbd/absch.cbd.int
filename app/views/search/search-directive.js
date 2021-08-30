@@ -103,9 +103,8 @@ import 'views/reports/matrix/data-matrix.directive';
                         joyride.config = {
                             overlay: true,
                             onStepChange: function(){  },
-                            onStart: function(){ document.body.classList.add("jr-search-tour");  },
+                            onStart: function(){   },
                             onFinish: function(){
-                                document.body.classList.add("jr-search-tour");
                                 joyride.start = false;
                                 $scope.tourOn = false; 
                                 $scope.showFilters = false;                                
@@ -245,7 +244,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             selector: "#exportRecords",
                                             title: joyRideText.exportRecords.title,
                                             content: joyRideText.exportRecords.content,
-                                            placement: 'left'
+                                            placement: 'left',
+                                            beforeStep: gotoSectionHelp
                                         },
                                         {
                                             appendToBody:true,
@@ -253,7 +253,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             selector: "#needHelp",
                                             title: joyRideText.needHelp.title,
                                             content: joyRideText.needHelp.content,
-                                            placement: 'bottom'
+                                            placement: 'bottom',
+                                            beforeStep: moreHelp
 
                                         },
                                         {
@@ -268,7 +269,22 @@ import 'views/reports/matrix/data-matrix.directive';
                                     ]
                         };
                         joyride.start = true;
-
+                        function gotoSectionHelp (resumeJoyride){
+                            $timeout(function(){
+                                $(document).on('DOMNodeInserted', function(e) {
+                                    $(e.target).addClass('tour-need-help');
+                                });
+                                resumeJoyride();
+                            }, 100);
+                        }
+                        function moreHelp(resumeJoyride) {
+                            $timeout(function(){
+                                $(document).on('DOMNodeInserted', function(e) {
+                                    $(e.target).addClass('tour-more-help');
+                                });
+                                resumeJoyride();
+                            }, 100);
+                        }
                         function openFilterTab(resumeJoyride){
                             var step = joyride.config.steps[joyride.current];
                             if(step.selector == "#closeFilterTab") { 
@@ -302,11 +318,7 @@ import 'views/reports/matrix/data-matrix.directive';
                             }, 100);
                         }
 
-                        function skipJoyride ()
-                        {
-                            delete $scope.leftMenuFilters;
-                            $scope.showFilters = false;
-                        }
+
                     }
 
                     $scope.saveFilter = function (doc) {

@@ -42,9 +42,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     joyride.config = {
                         overlay: true,
                         onStepChange: function(){  },
-                        onStart: function(){ document.body.classList.add("jr-RecordList-tour"); },
+                        onStart: function(){  },
                         onFinish: function(){
-                            document.body.classList.remove("jr-RecordList-tour");
                             joyride.start = false;
                             $scope.tourOn = false;
                         },
@@ -120,7 +119,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 selector: "#slaask-button-cross",
                                 title: joyRideText.needMoreHelp.title,
                                 content: joyRideText.needMoreHelp.content,
-                                placement: 'top'
+                                placement: 'top',
+                                beforeStep: moreHelp
                             }
                         ]
                     };
@@ -128,6 +128,17 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     function gotoSectionHelp (resumeJoyride){
                         $timeout(function(){
                             $('html,body').scrollTop(0);
+                            $(document).on('DOMNodeInserted', function(e) {
+                                $(e.target).addClass('tour-need-help');
+                            });
+                            resumeJoyride();
+                        }, 100);
+                    }
+                    function moreHelp(resumeJoyride) {
+                        $timeout(function(){
+                            $(document).on('DOMNodeInserted', function(e) {
+                                $(e.target).addClass('tour-more-help');
+                            });
                             resumeJoyride();
                         }, 100);
                     }

@@ -16,9 +16,8 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                 joyride.config = {
                     overlay: true,
                     onStepChange: function(){  },
-                    onStart: function(){ document.body.classList.add("jr-submit-tour"); },
+                    onStart: function(){ },
                     onFinish: function(){
-                        document.body.classList.remove("jr-submit-tour");
                         closeSubmitForm();
                         joyride.start = false;
                         $scope.tourOn = false;
@@ -83,7 +82,7 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                             title: joyRideText.needHelp.title,
                             content: joyRideText.needHelp.content,
                             placement: 'bottom',
-                            // beforeStep: gotoSectionHelp
+                            beforeStep: gotoSectionHelp
                         },
                         {
                             appendToBody:true,
@@ -91,7 +90,8 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                             selector: "#slaask-button-cross",
                             title: joyRideText.needMoreHelp.title,
                             content: joyRideText.needMoreHelp.content,
-                            placement: 'top'
+                            placement: 'top',
+                            beforeStep: moreHelp
                         }
                     ]
                 };
@@ -113,6 +113,22 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                             resumeJoyride();
                         }, 500);
                     }
+                }
+                function gotoSectionHelp (resumeJoyride){
+                    $timeout(function(){
+                        $(document).on('DOMNodeInserted', function(e) {
+                            $(e.target).addClass('tour-need-help');
+                        });
+                        resumeJoyride();
+                    }, 100);
+                }
+                function moreHelp(resumeJoyride) {
+                    $timeout(function(){
+                        $(document).on('DOMNodeInserted', function(e) {
+                            $(e.target).addClass('tour-more-help');
+                        });
+                        resumeJoyride();
+                    }, 100);
                 }
             }
         }

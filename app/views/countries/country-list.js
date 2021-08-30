@@ -241,9 +241,8 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 joyride.config = {
                     overlay: true,
                     onStepChange: function(){  },
-                    onStart: function(){ document.body.classList.add("jr-country-tour");  },
-                    onFinish: function(){ 
-                        document.body.classList.remove("jr-country-tour");
+                    onStart: function(){   },
+                    onFinish: function(){
                         joyride.start = false;
                         $scope.tourOn = false;
                         closeTab();
@@ -333,7 +332,8 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                                     selector: "#slaask-button-cross",
                                     title: joyRideText.needMoreHelp.title,
                                     content: joyRideText.needMoreHelp.content,
-                                    placement: 'top'
+                                    placement: 'top',
+                                    beforeStep: moreHelp
                                 }
 
                             ]
@@ -341,8 +341,19 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 joyride.start = true;
 
                 function gotoSectionHelp (resumeJoyride){
-                    $('html,body').scrollTop(0);
                     $timeout(function(){
+                        $('html,body').scrollTop(0);
+                        $(document).on('DOMNodeInserted', function(e) {
+                            $(e.target).addClass('tour-need-help');
+                        });
+                        resumeJoyride();
+                    }, 100);
+                }
+                function moreHelp(resumeJoyride) {
+                    $timeout(function(){
+                        $(document).on('DOMNodeInserted', function(e) {
+                            $(e.target).addClass('tour-more-help');
+                        });
                         resumeJoyride();
                     }, 100);
                 }
