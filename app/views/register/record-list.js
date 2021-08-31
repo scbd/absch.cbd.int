@@ -534,6 +534,9 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     $scope.listResult.sort          = sortField;
                     loadRecords(1);
                 }
+                $scope.searchRecord = function () {
+                    loadRecords(1);
+                }
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
@@ -556,6 +559,9 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         $skip: $scope.listResult.rowsPerPage*(pageNumebr-1),
                         $orderby: $scope.listResult.sort
                     };
+                    if($scope.keywords){
+                        publishedParams.text_EN_txt = $scope.keywords;
+                    }
 
                     if (schema == "contact")
                         publishedParams.body = true;

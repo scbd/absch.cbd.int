@@ -44,7 +44,7 @@
                         <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter=='isDraft'}"></i> Drafts
                         <span class="badge badge-default" ng-bind="listCount.draft"></span>
                     </button>
-                        <input id="searchKeyword" type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group">
+                        <input id="searchKeyword" type="text" ng-model="keywords" ng-keyup="searchRecord()" placeholder=" Keyword " class="form-control keyword input-group">
                     </div>
                 </div>
                 <div class="col-md-5 col-xs-12">
