@@ -233,6 +233,9 @@
                     </tr>
                 </tbody>
             </table>
+            <pagination class="text-center" ng-if="listResult.recordsFound>25 && !isDraftRecord" current-page="listResult.currentPage"
+                page-count="listResult.pageCount" on-page-change="onPageChange(page)" page-size="listResult.rowsPerPage"
+                num-found="listResult.recordsFound" on-page-size-changed="onPageSizeChanged(size)"></pagination>
 
             <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
                 

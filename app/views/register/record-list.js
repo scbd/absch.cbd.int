@@ -26,7 +26,19 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 $element.find("[data-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
-
+                $scope.listResult = {
+                    currentPage: 1,
+                    pageCount  : 0,
+                    rowsPerPage: 25
+                }
+                // //ToDo: get counts from the backend
+                $scope.listCount = {
+                    //all: 0,
+                    publish  : 0,
+                    request: 0,
+                    draft:0
+                }
+                // $scope.statusType = 'allRecords';
                 if ($routeParams.document_type) {
                     var type =  $filter("mapSchema")($routeParams.document_type);
                     $scope.schema = type;
@@ -147,7 +159,16 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 $scope.schemaType = 'nationalRecords';
                 else
                 $scope.schemaType = 'referenceRecords';
-       
+
+                $scope.onPageChange = function(pageNumber){
+                     loadRecords(pageNumber);
+                }
+
+                $scope.onPageSizeChanged = function(size){
+                   $scope.listResult.rowsPerPage = size;
+                   $scope.listResult.currentPage = 1; //reset to page 1
+                   $scope.onPageChange($scope.listResult.currentPage);
+                }
                 //============================================================
                 //
                 //
@@ -465,7 +486,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 })
 
                 $scope.refreshList = function (schema) {
-                    loadRecords();
+                    loadRecords(1);
                 };
 
                 $scope.closeDialog = function(){
@@ -487,9 +508,9 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
 
                 }
 
-                function loadRecords() {
+                function loadRecords(pageNumebr) {
                     $scope.loading = true;
-
+                    $scope.records = [];
                     var schema = $filter("mapSchema")($routeParams.document_type);
 
                     if (schema === null || schema == undefined)
@@ -500,11 +521,16 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         return $scope.records = null;
 
                     var qAnd = [];
+
                     qAnd.push("(type eq '" + schema + "')");
                     
                     var publishedParams = {
-                        cache: false
+                        cache: false,
+                        $top: $scope.listResult.rowsPerPage,
+                        $skip: $scope.listResult.rowsPerPage*(pageNumebr-1),
+                        $orderby: $scope.listResult.sort
                     };
+
                     if (schema == "contact")
                         publishedParams.body = true;
                         
@@ -516,19 +542,27 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     if (schema == "contact")
                         draftParams.body = true;
 
-                    var qDrafts = storage.drafts.query(qAnd.join(" and ") || undefined, draftParams);
+                    let qDrafts = undefined;
+                    if(pageNumebr==1) {
+                        qDrafts = storage.drafts.query( qAnd.join( " and " ) || undefined, draftParams );
+                    }
 
                     $q.all([qDocuments, qDrafts, getRevokedDocuments(schema), loadmyTasks(schema)])
                       .then(function (results) {
-                        $scope.records = [];
                         var documents = results[0].data.Items;
-                        var drafts = results[1].data.Items;
+                        let drafts = [];
+                        if(pageNumebr == 1) {
+                            drafts = results[1].data.Items;
+                        }
 
                         var wokflowActive = localStorageService.get('workflow-activity-status');
                         var revoked = schema!='absPermit' ? [] : results[2].data.response.docs;
+                        $scope.listResult.recordsFound = results[0].data.Count;                       
                         
+                        $scope.listResult.pageCount   = Math.ceil(results[0].data.Count / $scope.listResult.rowsPerPage);
+                        $scope.listResult.currentPage = pageNumebr;
                         var myTasks = results[3];
-                        
+
 
                         var map = {};
 
@@ -548,7 +582,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 }else{
                                     localStorageService.remove('workflow-activity-status');
                                 }
-                            }                         
+                            }
                             if(_.some(revoked, function(doc){ return doc.identifier_s == row.identifier})){
                                 row.revoked = true;
                             }
@@ -558,7 +592,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         $("a[role*='button']").toggleClass('ui-disabled');
 
                         myTasks.forEach(function(workflow) { //tweaks
-                            
+
                             if(workflow.data && !_.find($scope.records, {identifier: workflow.data.identifier})){
                                 $scope.records.push({
                                     identifier  : workflow.data.identifier,
@@ -568,7 +602,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 });
                             }
                             updateDocumentStatus(workflow.data.identifier, 'status', true)
-                            
+
                         });
 
                         return $scope.records;
@@ -714,7 +748,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         
                     }
                 }
-                loadRecords();
+                loadRecords(1);
                 loadOfflineFormatDetails();
 
             }];
