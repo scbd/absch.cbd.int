@@ -2,6 +2,7 @@
 import app from 'app';
 import _ from 'lodash';
 import 'ngDialog';
+import tableExport from '~/components/common/export.vue';
 
     app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {
@@ -119,8 +120,17 @@ import 'ngDialog';
                     }
                 }
 
-                $scope.onExportClick = function(){
+                $scope.onMatrixExportClick = function(){
                     $scope.onExport()
+                }
+
+                $scope.exportVueComponent = {
+                    components:{tableExport}
+                }
+                $scope.getDownloadRecords = function(options){                        
+                    // const  { docs, numFound } = $scope.searchResult.data;
+                    // return { docs, numFound };
+                    return $scope.onExport({options});
                 }
 
                 function showGroupByDialog(){

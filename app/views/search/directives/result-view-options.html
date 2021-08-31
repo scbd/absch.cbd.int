@@ -25,11 +25,14 @@
             </a>
         </li>     
       
-        <li>
-            <a id="exportRecords" rel="noopener" href ng-click="onExportClick()">
+        <li ng-if="viewType=='matrix'">
+            <a rel="noopener" href ng-click="onMatrixExportClick()">
                 Export
                 <i class="fa fa-download" aria-hidden="true"></i> 
             </a>
+        </li>
+        <li  ng-if="viewType!='matrix' && exportVueComponent">
+            <table-export ng-vue="exportVueComponent" :get-download-records="getDownloadRecords"></table-export>           
         </li>
     </ul>
 

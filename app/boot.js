@@ -120,7 +120,7 @@ export default function bootApp(window, require, defineX) {
             'plotly-renderers'          : cdnHost + 'pivottable@2.23.0/dist/plotly_renderers',
 
 
-            'angular-vue'               : cdnHost + '@scbd/angular-vue@2.0.0/dist/angular-vue.min',
+            'angular-vue'               : cdnHost + '@scbd/angular-vue@3.1.0/dist/angular-vue.min',
             'ky'                        :           'libs/globals/ky',
 
             'socket.io'                 :           'https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min',

@@ -7,6 +7,8 @@ import "ngMeta";
 import CreateAngularVuePlug from "./vue/angular-vue-plug";
 import AngularVueRoutePlugin from "./vue/angular-vue-route-plugin";
 import AngularVueRouterPlugin from "./vue/angular-vue-router-plugin";
+import AngularVueDynamicPlugin from "./vue/angular-vue-dynamic-plugin";
+import AngularVueNgDialogPlugin from './vue/angular-vue-ng-dialog-plugin';
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", "angularVue"]));
 app.config(["LogglyLoggerProvider", "ngMetaProvider", function (LogglyLoggerProvider, ngMetaProvider) {
@@ -59,6 +61,9 @@ app.run(["realm", "locale", '$injector', function (realm, locale, $injector) {
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
 
+  window.Vue.use(new AngularVueNgDialogPlugin($injector));
+  // window.Vue.use(new AngularVueDynamicPlugin($injector, 'ngDialog'));
+  
 }]);
 
 function registerVuePlugin(name, service){
