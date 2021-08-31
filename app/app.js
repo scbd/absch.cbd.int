@@ -35,13 +35,19 @@ app.factory("$exceptionHandler", ["$log", function ($log) {
     $log.error(exception);
   };
 }]);
-app.run(["ngMeta", "LogglyLogger", "realm", "$window", function (ngMeta, logglyLogger, realm, $window) {
+app.run(["ngMeta", "LogglyLogger", "realm", "$window",'$templateCache', 
+async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
+  
   var appVersion = $window.scbdApp.version || "localhost";
   logglyLogger.fields({
     realm: realm.value,
     appVersion: appVersion
   });
   ngMeta.init();
+
+  const joyrideTemplate = (await import('~/views/directives/joyride-template.html')).default;
+  $templateCache.put('ngJoyrideDefault.html', joyrideTemplate)
+
 }]);
 
 

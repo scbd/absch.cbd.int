@@ -113,34 +113,35 @@ import 'views/reports/matrix/data-matrix.directive';
                             },
                             steps : [
                                         {   
-                                            appendToBody:true,
-                                            title: joyRideText.welcome.title,
-                                            content: joyRideText.welcome.content
+                                            appendToBody: true,
+                                            title       : joyRideText.welcome.title,
+                                            content     : joyRideText.welcome.content
                                         },
                                         {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#freeText",
-                                            title: joyRideText.freeText.title,
-                                            content: joyRideText.freeText.content,
-                                            placement: 'bottom'
+                                            appendToBody: true,
+                                            type        : 'element',
+                                            selector    : "#freeText",
+                                            title       : joyRideText.freeText.title,
+                                            content     : joyRideText.freeText.content,
+                                            placement   : 'bottom'
                                         },
                                         {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#globalSearch",
-                                            title: joyRideText.globalSearch.title,
-                                            content: joyRideText.globalSearch.content,
-                                            placement: 'top'
+                                            appendToBody: true,
+                                            type        : 'element',
+                                            selector    : "#globalSearch",
+                                            title       : joyRideText.globalSearch.title,
+                                            content     : joyRideText.globalSearch.content,
+                                            placement   : 'top'
                                         },                                         
                                         {   
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#recordTypesFilterTabJR",
-                                            title: joyRideText.recordTypesFilterTab.title,
-                                            content: joyRideText.recordTypesFilterTab.content,
-                                            placement: 'top',
-                                            beforeStep: openFilterTab
+                                            appendToBody: true,
+                                            type        : 'element',
+                                            selector    : "#recordTypesFilterTabJR",
+                                            title       : joyRideText.recordTypesFilterTab.title,
+                                            content     : joyRideText.recordTypesFilterTab.content,
+                                            placement   : 'top',
+                                            beforeStep  : openFilterTab,
+                                            customClass : "my-custom-class-for-recordTypesFilterTabJR"
                                         },
                                         {
                                             appendToBody:true,
@@ -149,7 +150,8 @@ import 'views/reports/matrix/data-matrix.directive';
                                             title: joyRideText.keywordsFilterTab.title,
                                             content: joyRideText.keywordsFilterTab.content,
                                             placement: 'top',
-                                            beforeStep: openFilterTab
+                                            beforeStep: openFilterTab,
+                                            customClass:"my-custom-class-for-keywordsFilterTabJR"
                                         },
                                         {
                                             appendToBody:true,
