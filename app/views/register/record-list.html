@@ -27,22 +27,22 @@
             <div class="row">
                 <div class="col-md-7 col-xs-12">
                     <div class="btn-group-sm cf-xs-btn">
-                        <button type="button" ng-click="statusFilter=''" class="filterbtn btn btn-primary">
+                        <button type="button" ng-click="changeFilter('')" class="filterbtn btn btn-primary">
                         <i  class="fa fa-2 fa-square" ng-class="{'fa-check-square':!statusFilter}"></i>
-                        <strong>All</strong> <span class="badge badge-default" ng-bind="(records||[]).length"></span>
+                        <strong>All</strong> <span class="badge badge-default" ng-bind="::listCount.all"></span>
                     </button>
-                        <button type="button" ng-click="statusFilter=isRequest" class="filterbtn btn btn-danger">
-                        <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter==isRequest}"></i> 
+                        <button type="button" ng-click="changeFilter('isRequest')"  class="filterbtn btn btn-danger">
+                        <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter=='isRequest'}"></i>
                         Requests
-                        <span class="badge badge-default" ng-bind="(records | filter:schemaFilter | filter:isRequest).length"></span>
+                        <span class="badge badge-default" ng-bind="listCount.request"></span>
                     </button>
-                        <button id="publishedRecords" type="button" ng-click="statusFilter=isPublished" class="filterbtn btn btn-success">
-                        <i  class="fa fa-2 fa-square"  ng-class="{'fa-check-square':statusFilter==isPublished}"></i> Published
-                        <span class="badge badge-default" ng-bind="(records | filter:schemaFilter | filter:isPublished).length"></span>
+                        <button id="publishedRecords" type="button" ng-click="changeFilter('isPublished')" class="filterbtn btn btn-success">
+                        <i  class="fa fa-2 fa-square"  ng-class="{'fa-check-square':statusFilter=='isPublished'}"></i> Published
+                        <span class="badge badge-default" ng-bind="listCount.publish"></span>
                     </button>
-                        <button type="button" ng-click="statusFilter=isDraft" class="filterbtn btn btn-draft">
-                        <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter==isDraft}"></i> Drafts
-                        <span class="badge badge-default" ng-bind="(records | filter:schemaFilter | filter:isDraft).length"></span>
+                        <button type="button" ng-click="changeFilter('isDraft')" class="filterbtn btn btn-draft">
+                        <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':statusFilter=='isDraft'}"></i> Drafts
+                        <span class="badge badge-default" ng-bind="listCount.draft"></span>
                     </button>
                         <input id="searchKeyword" type="text" ng-model="keywords" placeholder=" Keyword " class="form-control keyword input-group">
                     </div>
@@ -88,7 +88,7 @@
                     <td colspan="6" style="text-align:center;padding:30px;"> <strong>No records found.</strong></td>
                 </tr>
 
-                <tbody ng-repeat="record in (filteredRecords = (records | filter:schemaFilter | filter:statusFilter | filter:keywords | orderBy:orderBy))">
+                <tbody ng-repeat="record in  records">
 
                     <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
 

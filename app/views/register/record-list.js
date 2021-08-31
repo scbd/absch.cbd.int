@@ -31,14 +31,15 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     pageCount  : 0,
                     rowsPerPage: 25
                 }
-                // //ToDo: get counts from the backend
+                $scope.isDraftRecord = false;
+                $scope.statusType = 'allRecords';
+                // //ToDo: if get counts from the backend
                 $scope.listCount = {
-                    //all: 0,
                     publish  : 0,
                     request: 0,
                     draft:0
                 }
-                // $scope.statusType = 'allRecords';
+
                 if ($routeParams.document_type) {
                     var type =  $filter("mapSchema")($routeParams.document_type);
                     $scope.schema = type;
@@ -507,7 +508,32 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
 
 
                 }
-
+                $scope.changeFilter = function (type ) {
+                    $scope.statusFilter = type;
+                    $scope.isDraftRecord = false;
+                    if(type==''){
+                        $scope.statusType = 'allRecords';
+                        loadRecords(1);
+                    } else if(type=='isPublished'){
+                        $scope.statusType = 'my';
+                        loadRecords(1);
+                    }
+                    else if(type=='isDraft'){
+                        $scope.statusType = 'mydraft';
+                        $scope.records = $scope.drafts;
+                        $scope.isDraftRecord = true;
+                    }
+                    //TODO: this giving error, need backend param
+                    else if(type=='isRequest'){
+                        $scope.statusType = 'requests';
+                        loadRecords(1);
+                    }
+                }
+                $scope.onSort = function(sortField, sortSequence){
+                    $scope.listResult.sortSequence  = sortSequence == ' desc' ? ' asc' : ' desc';
+                    $scope.listResult.sort          = sortField;
+                    loadRecords(1);
+                }
                 function loadRecords(pageNumebr) {
                     $scope.loading = true;
                     $scope.records = [];
@@ -534,7 +560,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     if (schema == "contact")
                         publishedParams.body = true;
                         
-                    var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined, undefined, publishedParams);
+                    var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined ,undefined, publishedParams);
 
                     var draftParams = {
                         cache: false
@@ -543,7 +569,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         draftParams.body = true;
 
                     let qDrafts = undefined;
-                    if(pageNumebr==1) {
+                    if(pageNumebr==1 && ($scope.statusType == 'mydraft' || $scope.statusType == 'allRecords')) {
                         qDrafts = storage.drafts.query( qAnd.join( " and " ) || undefined, draftParams );
                     }
 
@@ -551,25 +577,29 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                       .then(function (results) {
                         var documents = results[0].data.Items;
                         let drafts = [];
-                        if(pageNumebr == 1) {
-                            drafts = results[1].data.Items;
+                        if(pageNumebr == 1 && ($scope.statusType == 'mydraft' || $scope.statusType == 'allRecords')) {
+                            $scope.drafts = results[1].data.Items;
+                            $scope.listCount.draft = results[1].data.Count;
                         }
 
                         var wokflowActive = localStorageService.get('workflow-activity-status');
                         var revoked = schema!='absPermit' ? [] : results[2].data.response.docs;
-                        $scope.listResult.recordsFound = results[0].data.Count;                       
-                        
+                        $scope.listResult.recordsFound = results[0].data.Count;
+                        // TODO: count will go from here
+                        $scope.listCount.all = $scope.listResult.recordsFound + $scope.listCount.draft;
+                        $scope.listCount.publish = $scope.listResult.recordsFound;
                         $scope.listResult.pageCount   = Math.ceil(results[0].data.Count / $scope.listResult.rowsPerPage);
                         $scope.listResult.currentPage = pageNumebr;
                         var myTasks = results[3];
 
 
                         var map = {};
-
+                        if($scope.statusType == 'allRecords' && pageNumebr == 1){
+                            _.map($scope.drafts, function (o) {
+                                map[o.identifier] = o;
+                            });
+                        }
                         _.map(documents, function (o) {
-                            map[o.identifier] = o;
-                        });
-                        _.map(drafts, function (o) {
                             map[o.identifier] = o;
                         });
 
