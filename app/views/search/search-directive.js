@@ -42,7 +42,7 @@ import 'views/reports/matrix/data-matrix.directive';
                         var leftMenuSchemaFieldMapping;
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:description_t,summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+                        var en_fields =  'rec_countryName:government_EN_t, rec_title       :title_EN_t, rec_summary:description_t,summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
     
                         var groupFieldMapping = [
                             {
@@ -112,212 +112,189 @@ import 'views/reports/matrix/data-matrix.directive';
                                 $('#searchResult').removeClass('active jr_target'); 
                             },
                             steps : [
-                                        {   
-                                            appendToBody: true,
-                                            title       : joyRideText.welcome.title,
-                                            content     : joyRideText.welcome.content
-                                        },
-                                        {
-                                            appendToBody: true,
-                                            type        : 'element',
-                                            selector    : "#freeText",
-                                            title       : joyRideText.freeText.title,
-                                            content     : joyRideText.freeText.content,
-                                            placement   : 'bottom'
-                                        },
-                                        {
-                                            appendToBody: true,
-                                            type        : 'element',
-                                            selector    : "#globalSearch",
-                                            title       : joyRideText.globalSearch.title,
-                                            content     : joyRideText.globalSearch.content,
-                                            placement   : 'top'
-                                        },                                         
-                                        {   
-                                            appendToBody: true,
-                                            type        : 'element',
-                                            selector    : "#recordTypesFilterTabJR",
-                                            title       : joyRideText.recordTypesFilterTab.title,
-                                            content     : joyRideText.recordTypesFilterTab.content,
-                                            placement   : 'top',
-                                            beforeStep  : openFilterTab,
-                                            customClass : "my-custom-class-for-recordTypesFilterTabJR"
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#keywordsFilterTabJR",
-                                            title: joyRideText.keywordsFilterTab.title,
-                                            content: joyRideText.keywordsFilterTab.content,
-                                            placement: 'top',
-                                            beforeStep: openFilterTab,
-                                            customClass:"my-custom-class-for-keywordsFilterTabJR"
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#countryFilterTabJR",
-                                            title: joyRideText.countryFilterTab.title,
-                                            content: joyRideText.countryFilterTab.content,
-                                            placement: 'top',
-                                            beforeStep: openFilterTab
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#regionFilterTabJR",
-                                            title: joyRideText.regionFilterTab.title,
-                                            content: joyRideText.regionFilterTab.content,
-                                            placement: 'top',
-                                            beforeStep: openFilterTab
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#dateFilterTabJR",
-                                            title: joyRideText.dateFilterTab.title,
-                                            content: joyRideText.dateFilterTab.content,
-                                            placement: 'top',
-                                            beforeStep: openFilterTab
-                                        },
-                                        {   
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#closeFilterTab",
-                                            title: joyRideText.closeFilterTab.title,
-                                            content: joyRideText.closeFilterTab.content,
-                                            placement: 'left',
-                                            beforeStep: openFilterTab
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#searchResult",
-                                            title: joyRideText.searchResult.title,
-                                            content: joyRideText.searchResult.content,
-                                            placement: 'top',
-                                            beforeStep: closeFilterTab
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#Search-Filter",
-                                            title: joyRideText.subFilters.title,
-                                            content: joyRideText.subFilters.content,
-                                            placement: 'top',
-                                            beforeStep: openSubFilters
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#record1",
-                                            title: joyRideText.recordView.title,
-                                            content: joyRideText.recordView.content,
-                                            placement: 'top',
-                                            beforeStep: closeSubFilters
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#viewType",
-                                            title: joyRideText.viewType.title,
-                                            content: joyRideText.viewType.content,
-                                            placement: 'top'
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#sortBy",
-                                            title: joyRideText.sortBy.title,
-                                            content: joyRideText.sortBy.content,
-                                            placement: 'bottom'
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#sendRecords",
-                                            title: joyRideText.sendRecords.title,
-                                            content: joyRideText.sendRecords.content,
-                                            placement: 'top'
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#exportRecords",
-                                            title: joyRideText.exportRecords.title,
-                                            content: joyRideText.exportRecords.content,
-                                            placement: 'left',
-                                            beforeStep: gotoSectionHelp
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#needHelp",
-                                            title: joyRideText.needHelp.title,
-                                            content: joyRideText.needHelp.content,
-                                            placement: 'bottom',
-                                            beforeStep: moreHelp
+                                {
+                                    appendToBody: true,
+                                    title       : joyRideText.welcome.title,
+                                    content     : joyRideText.welcome.content
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#freeText",
+                                    title       : joyRideText.freeText.title,
+                                    content     : joyRideText.freeText.content,
+                                    placement   : 'bottom'
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#globalSearch",
+                                    title       : joyRideText.globalSearch.title,
+                                    content     : joyRideText.globalSearch.content,
+                                    placement   : 'top'
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#recordTypesFilterTabJR",
+                                    title       : joyRideText.recordTypesFilterTab.title,
+                                    content     : joyRideText.recordTypesFilterTab.content,
+                                    placement   : 'top',
+                                    beforeStep  : openFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#keywordsFilterTabJR",
+                                    title       : joyRideText.keywordsFilterTab.title,
+                                    content     : joyRideText.keywordsFilterTab.content,
+                                    placement   : 'top',
+                                    beforeStep  : openFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#countryFilterTabJR",
+                                    title       : joyRideText.countryFilterTab.title,
+                                    content     : joyRideText.countryFilterTab.content,
+                                    placement   : 'top',
+                                    beforeStep  : openFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#regionFilterTabJR",
+                                    title       : joyRideText.regionFilterTab.title,
+                                    content     : joyRideText.regionFilterTab.content,
+                                    placement   : 'top',
+                                    beforeStep  : openFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#dateFilterTabJR",
+                                    title       : joyRideText.dateFilterTab.title,
+                                    content     : joyRideText.dateFilterTab.content,
+                                    placement   : 'top',
+                                    beforeStep  : openFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#closeFilterTab",
+                                    title       : joyRideText.closeFilterTab.title,
+                                    content     : joyRideText.closeFilterTab.content,
+                                    placement   : 'left',
+                                    beforeStep  : openFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#searchResult",
+                                    title       : joyRideText.searchResult.title,
+                                    content     : joyRideText.searchResult.content,
+                                    placement   : 'top',
+                                    beforeStep  : closeFilterTab
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#Search-Filter",
+                                    title       : joyRideText.subFilters.title,
+                                    content     : joyRideText.subFilters.content,
+                                    placement   : 'top',
+                                    beforeStep  : openSubFilters
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#record1",
+                                    title       : joyRideText.recordView.title,
+                                    content     : joyRideText.recordView.content,
+                                    placement   : 'top',
+                                    beforeStep  : closeSubFilters
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#viewType",
+                                    title       : joyRideText.viewType.title,
+                                    content     : joyRideText.viewType.content,
+                                    placement   : 'top'
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#sortBy",
+                                    title       : joyRideText.sortBy.title,
+                                    content     : joyRideText.sortBy.content,
+                                    placement   : 'bottom'
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#sendRecords",
+                                    title       : joyRideText.sendRecords.title,
+                                    content     : joyRideText.sendRecords.content,
+                                    placement   : 'top'
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#exportRecords",
+                                    title       : joyRideText.exportRecords.title,
+                                    content     : joyRideText.exportRecords.content,
+                                    placement   : 'left'
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#needHelp",
+                                    title       : joyRideText.needHelp.title,
+                                    content     : joyRideText.needHelp.content,
+                                    placement   : 'bottom',
+                                    beforeStep  : gotoSectionHelp,
+                                    customClass : "my-custom-class-for-needHelpJR"
+                                },
+                                {
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#slaask-button-cross",
+                                    title       : joyRideText.needMoreHelp.title,
+                                    content     : joyRideText.needMoreHelp.content,
+                                    placement   : 'top',
+                                    customClass : "my-custom-class-for-needMoreHelpJR"
+                                }
 
-                                        },
-                                        {
-                                            appendToBody:true,
-                                            type: 'element',
-                                            selector: "#slaask-button-cross",
-                                            title: joyRideText.needMoreHelp.title,
-                                            content: joyRideText.needMoreHelp.content,
-                                            placement: 'top'
-                                        }
-
-                                    ]
+                            ]
                         };
                         joyride.start = true;
-                        function gotoSectionHelp (resumeJoyride){
-                            $timeout(function(){
-                                $(document).on('DOMNodeInserted', function(e) {
-                                    $(e.target).addClass('tour-need-help');
-                                });
-                                resumeJoyride();
-                            }, 100);
-                        }
-                        function moreHelp(resumeJoyride) {
-                            $timeout(function(){
-                                $(document).on('DOMNodeInserted', function(e) {
-                                    $(e.target).addClass('tour-more-help');
-                                });
-                                resumeJoyride();
-                            }, 100);
-                        }
+
                         function openFilterTab(resumeJoyride){
                             var step = joyride.config.steps[joyride.current];
                             if(step.selector == "#closeFilterTab") { 
                                 $scope.showFilters = "recordTypesFilter"; }
                             else {
                                 $scope.showFilters = step.selector.replace('#','').replace('TabJR', ''); }
-                            
-                            $timeout(function(){
-                                resumeJoyride();
-                            }, 100);
+                            $timeout(resumeJoyride, 100);
+                        }
+
+                        function gotoSectionHelp (resumeJoyride){
+                            $('html,body').scrollTop(0);
+                            $timeout(resumeJoyride, 100);
                         }
 
                         function closeFilterTab(resumeJoyride){
                             $scope.showFilters = false;
-                            $timeout(function(){
-                                resumeJoyride();
-                            }, 100);
+                            $timeout(resumeJoyride, 100);
                         }
                         function openSubFilters(resumeJoyride){
-                           $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
-                           
-                           $timeout(function(){
-                                resumeJoyride();
-                            }, 100);
+                            $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
+                            $timeout(resumeJoyride, 100);
                         }
                         function closeSubFilters(resumeJoyride){
                             delete $scope.leftMenuFilters;
-                            
-                            $timeout(function(){
-                                resumeJoyride();
-                            }, 100);
+                            $timeout(resumeJoyride, 100);
                         }
 
 

@@ -73,88 +73,89 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     },
                     steps : [
                         {
-                            appendToBody:true,
-                            title: joyRideText.welcome.title,
-                            content: joyRideText.welcome.content
-                        },
-                        {
-                            appendToBody:true,
-                            type: 'element',
-                            selector: "#showProfileInfo",
-                            title: joyRideText.personalInformation.title,
-                            content: joyRideText.personalInformation.content,
-                            placement: 'top',
-                            beforeStep: showProfileInfo
-                        },
-                        {
-                            appendToBody:true,
-                            type: 'element',
-                            selector: "#recordOverview",
-                            title: joyRideText.recordOverview.title,
-                            content: joyRideText.recordOverview.content,
-                            placement: 'top'
+                            appendToBody: true,
+                            title       : joyRideText.welcome.title,
+                            content     : joyRideText.welcome.content
                         },
                         {
                             appendToBody: true,
-                            type: 'element',
-                            selector: "#publishFormat",
-                            title: joyRideText.yourRecordsStatus.title,
-                            content: joyRideText.yourRecordsStatus.content,
-                            placement: 'top',
-                            beforeStep: hideProfileInfo
+                            type        : 'element',
+                            selector    : "#showProfileInfo",
+                            title       : joyRideText.personalInformation.title,
+                            content     : joyRideText.personalInformation.content,
+                            placement   : 'top',
+                            beforeStep  : showProfileInfo
                         },
                         {
                             appendToBody: true,
-                            type: 'element',
-                            selector: "#offlineFormat",
-                            title: joyRideText.yourRecordsOffline.title,
-                            content: joyRideText.yourRecordsOffline.content,
-                            placement: 'top'
+                            type        : 'element',
+                            selector    : "#recordOverview",
+                            title       : joyRideText.recordOverview.title,
+                            content     : joyRideText.recordOverview.content,
+                            placement   : 'top'
                         },
                         {
                             appendToBody: true,
-                            type: 'element',
-                            selector: "#quickViewContact",
-                            title: joyRideText.quickView.title,
-                            content: joyRideText.quickView.content,
-                            placement: 'right',
-                            beforeStep: showTopRecord
+                            type        : 'element',
+                            selector    : "#publishFormat",
+                            title       : joyRideText.yourRecordsStatus.title,
+                            content     : joyRideText.yourRecordsStatus.content,
+                            placement   : 'top',
+                            beforeStep  : hideProfileInfo
+                        },
+                        {
+                            appendToBody: true,
+                            type        : 'element',
+                            selector    : "#offlineFormat",
+                            title       : joyRideText.yourRecordsOffline.title,
+                            content     : joyRideText.yourRecordsOffline.content,
+                            placement   : 'top'
+                        },
+                        {
+                            appendToBody: true,
+                            type        : 'element',
+                            selector    : "#quickViewContact",
+                            title       : joyRideText.quickView.title,
+                            content     : joyRideText.quickView.content,
+                            placement   : 'right',
+                            beforeStep  : showTopRecord
 
                         },
                         {
                             appendToBody: true,
-                            type: 'element',
-                            selector: "#addNewRecordContact",
-                            title: joyRideText.addNewRecord.title,
-                            content: joyRideText.addNewRecord.content,
-                            placement: 'right',
-                            beforeStep: showTopRecord
+                            type        : 'element',
+                            selector    : "#addNewRecordContact",
+                            title       : joyRideText.addNewRecord.title,
+                            content     : joyRideText.addNewRecord.content,
+                            placement   : 'right',
+                            beforeStep  : showTopRecord
                         },
                         {
                             appendToBody: true,
-                            type: 'element',
-                            selector: "#viewListContact",
-                            title: joyRideText.viewAllRecords.title,
-                            content: joyRideText.viewAllRecords.content,
-                            placement: 'right'
+                            type        : 'element',
+                            selector    : "#viewListContact",
+                            title       : joyRideText.viewAllRecords.title,
+                            content     : joyRideText.viewAllRecords.content,
+                            placement   : 'right'
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#needHelp",
-                            title: joyRideText.needHelp.title,
-                            content: joyRideText.needHelp.content,
-                            placement: 'bottom',
-                            beforeStep: gotoSectionHelp
+                            type        : 'element',
+                            selector    : "#needHelp",
+                            title       : joyRideText.needHelp.title,
+                            content     : joyRideText.needHelp.content,
+                            placement   : 'bottom',
+                            customClass : "my-custom-class-for-needHelpJR",
+                            beforeStep  : gotoSectionHelp
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#slaask-button-cross",
-                            title: joyRideText.needMoreHelp.title,
-                            content: joyRideText.needMoreHelp.content,
-                            placement: 'top',
-                            beforeStep: moreHelp
+                            type        : 'element',
+                            selector    : "#slaask-button-cross",
+                            title       : joyRideText.needMoreHelp.title,
+                            content     : joyRideText.needMoreHelp.content,
+                            placement   : 'top',
+                            customClass : "my-custom-class-for-needMoreHelpJR"
                         }
                     ]
                 };
@@ -162,45 +163,26 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
 
                 function showProfileInfo(resumeJoyride){
                     $scope.showProfileInfo = true;
-                    $timeout(function(){
-                        resumeJoyride();
-                    }, 100);
+                    $timeout(resumeJoyride, 100);
                 }
 
                 function hideProfileInfo(resumeJoyride){
                    $scope.showProfileInfo = false;
-                   $timeout(function(){
-                       resumeJoyride();
-                   }, 100);
+                    $timeout(resumeJoyride, 100);
                 }
 
                 function gotoSectionHelp (resumeJoyride){
-                    $timeout(function(){
-                        $('html,body').scrollTop(0);
-                        $(document).on('DOMNodeInserted', function(e) {
-                            $(e.target).addClass('tour-need-help');
-                        });
-                        resumeJoyride();
-                    }, 100);
-                }
-                function moreHelp(resumeJoyride) {
-                    $timeout(function(){
-                        $(document).on('DOMNodeInserted', function(e) {
-                            $(e.target).addClass('tour-more-help');
-                        });
-                        resumeJoyride();
-                    }, 100);
+                    $('html,body').scrollTop(0);
+                    $timeout(resumeJoyride, 100);
                 }
 
                 function showTopRecord(resumeJoyride){
-                    $timeout(function(){
                     document.querySelector('#quickViewContact').scrollIntoView({
                         behavior: 'smooth'
                     });
                     $element.find("#quickViewContact").click();
                     $scope.topRecords["CON"] = !$scope.topRecords["CON"];
-                        resumeJoyride();
-                    }, 100);
+                    $timeout(resumeJoyride, 100);
                 }
 
             }

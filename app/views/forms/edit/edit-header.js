@@ -25,73 +25,75 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                     steps : [
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#workflowPublish",
-                            title: joyRideText.welcome.title,
-                            content: joyRideText.welcome.content,
-                            placement: 'right'
+                            type        : 'element',
+                            selector    : "#workflowPublish",
+                            title       : joyRideText.welcome.title,
+                            content     : joyRideText.welcome.content,
+                            placement   : 'right'
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#workflowIntro",
-                            title: joyRideText.introduction.title,
-                            content: joyRideText.introduction.content,
-                            placement: 'top'
+                            type        : 'element',
+                            selector    : "#workflowIntro",
+                            title       : joyRideText.introduction.title,
+                            content     : joyRideText.introduction.content,
+                            placement   : 'top'
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#workflowSubFor",
-                            title: joyRideText.submissionForm.title,
-                            content: joyRideText.submissionForm.content,
-                            placement: 'top',
-                            beforeStep: openSubmitForm
+                            type        : 'element',
+                            selector    : "#workflowSubFor",
+                            title       : joyRideText.submissionForm.title,
+                            content     : joyRideText.submissionForm.content,
+                            placement   : 'top',
+                            beforeStep  : openSubmitForm
 
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#workflowSaveDraft",
-                            title: joyRideText.saveDraft.title,
-                            content: joyRideText.saveDraft.content,
-                            placement: 'bottom'
+                            type        : 'element',
+                            selector    : "#workflowSaveDraft",
+                            title       : joyRideText.saveDraft.title,
+                            content     : joyRideText.saveDraft.content,
+                            placement   : 'bottom',
+                            customClass : "my-custom-class-for-workFlowSaveDraftJR",
                         },
                         {
-                            appendToBody:true,
-                            type: 'element',
-                            selector: "#workflowReview",
-                            title: joyRideText.review.title,
-                            content: joyRideText.review.content,
-                            placement: 'bottom'
+                            appendToBody: true,
+                            type        : 'element',
+                            selector    : "#workflowReview",
+                            title       : joyRideText.review.title,
+                            content     : joyRideText.review.content,
+                            placement   : 'bottom'
+
+                        },
+                        {
+                            appendToBody: true,
+                            type        : 'element',
+                            selector    : "#workflowPublish",
+                            title       : joyRideText.publish.title,
+                            content     : joyRideText.publish.content,
+                            placement   : 'top'
 
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#workflowPublish",
-                            title: joyRideText.publish.title,
-                            content: joyRideText.publish.content,
-                            placement: 'top'
-
+                            type        : 'element',
+                            selector    : "#needHelp",
+                            title       : joyRideText.needHelp.title,
+                            content     : joyRideText.needHelp.content,
+                            placement   : 'bottom',
+                            beforeStep  : gotoSectionHelp,
+                            customClass : "my-custom-class-for-needHelpJR",
                         },
                         {
                             appendToBody:true,
-                            type: 'element',
-                            selector: "#needHelp",
-                            title: joyRideText.needHelp.title,
-                            content: joyRideText.needHelp.content,
-                            placement: 'bottom',
-                            beforeStep: gotoSectionHelp
-                        },
-                        {
-                            appendToBody:true,
-                            type: 'element',
-                            selector: "#slaask-button-cross",
-                            title: joyRideText.needMoreHelp.title,
-                            content: joyRideText.needMoreHelp.content,
-                            placement: 'top',
-                            beforeStep: moreHelp
+                            type        : 'element',
+                            selector    : "#slaask-button-cross",
+                            title       : joyRideText.needMoreHelp.title,
+                            content     : joyRideText.needMoreHelp.content,
+                            placement   : 'top',
+                            customClass : "my-custom-class-for-needMoreHelpJR"
                         }
                     ]
                 };
@@ -99,36 +101,19 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
 
                 function openSubmitForm(resumeJoyride){
                     $('html,body').scrollTop(0);
-                    $timeout(function(){
-                         // $element.find('#countryProfile').click(); // not working
-                        $('#workflowSubFor').click();
-                        resumeJoyride();
-                    }, 100);
+                    $('#workflowSubFor').click();
+                    $timeout(resumeJoyride, 100);
                 }
 
                 function closeSubmitForm (resumeJoyride){
                     $element.find('#workflowIntro').click();
                     if(resumeJoyride){
-                        $timeout(function(){
-                            resumeJoyride();
-                        }, 500);
+                       $timeout(resumeJoyride, 100);
                     }
                 }
                 function gotoSectionHelp (resumeJoyride){
-                    $timeout(function(){
-                        $(document).on('DOMNodeInserted', function(e) {
-                            $(e.target).addClass('tour-need-help');
-                        });
-                        resumeJoyride();
-                    }, 100);
-                }
-                function moreHelp(resumeJoyride) {
-                    $timeout(function(){
-                        $(document).on('DOMNodeInserted', function(e) {
-                            $(e.target).addClass('tour-more-help');
-                        });
-                        resumeJoyride();
-                    }, 100);
+                    $('html,body').scrollTop(0);
+                    $timeout(resumeJoyride, 100);
                 }
             }
         }

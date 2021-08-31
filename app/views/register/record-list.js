@@ -49,98 +49,86 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         },
                         steps : [
                             {
-                                appendToBody:true,
-                                title: joyRideText.welcome.title,
-                                content: joyRideText.welcome.content
+                                appendToBody: true,
+                                title       : joyRideText.welcome.title,
+                                content     : joyRideText.welcome.content
                             },
                             {
-                                appendToBody:true,
-                                type: 'element',
-                                selector: "#publishedRecords",
-                                title: joyRideText.filters.title,
-                                content: joyRideText.filters.content,
-                                placement: 'top',
+                                appendToBody: true,
+                                type        : 'element',
+                                selector    : "#publishedRecords",
+                                title       : joyRideText.filters.title,
+                                content     : joyRideText.filters.content,
+                                placement   : 'top',
 
                             },
                             {
                                 appendToBody: true,
-                                type: 'element',
-                                selector: "#searchKeyword",
-                                title: joyRideText.Keyword.title,
-                                content: joyRideText.Keyword.content,
-                                placement: 'top',
+                                type        : 'element',
+                                selector    : "#searchKeyword",
+                                title       : joyRideText.Keyword.title,
+                                content     : joyRideText.Keyword.content,
+                                placement   : 'top',
                             },
                             {
                                 appendToBody: true,
-                                type: 'element',
-                                selector: "#new_button",
-                                title: joyRideText.adding.title,
-                                content: joyRideText.adding.content,
-                                placement: 'left'
+                                type        : 'element',
+                                selector    : "#new_button",
+                                title       : joyRideText.adding.title,
+                                content     : joyRideText.adding.content,
+                                placement   : 'left'
                             },
                             {
                                 appendToBody: true,
-                                type: 'element',
-                                selector: "#duplicateRecord",
-                                title: joyRideText.duplicate.title,
-                                content: joyRideText.duplicate.content,
-                                placement: 'left'
+                                type        : 'element',
+                                selector    : "#duplicateRecord",
+                                title       : joyRideText.duplicate.title,
+                                content     : joyRideText.duplicate.content,
+                                placement   : 'left'
 
                             },
                             {
                                 appendToBody: true,
-                                type: 'element',
-                                selector: "#editRecord",
-                                title: joyRideText.edit.title,
-                                content: joyRideText.edit.content,
-                                placement: 'left'
+                                type        : 'element',
+                                selector    : "#editRecord",
+                                title       : joyRideText.edit.title,
+                                content     : joyRideText.edit.content,
+                                placement   : 'left'
                             },
                             {
                                 appendToBody: true,
-                                type: 'element',
-                                selector: "#deleteRecord",
-                                title: joyRideText.delete.title,
-                                content: joyRideText.delete.content,
-                                placement: 'left'
+                                type        : 'element',
+                                selector    : "#deleteRecord",
+                                title       : joyRideText.delete.title,
+                                content     : joyRideText.delete.content,
+                                placement   : 'left'
                             },
                             {
                                 appendToBody:true,
-                                type: 'element',
-                                selector: "#needHelp",
-                                title: joyRideText.needHelp.title,
-                                content: joyRideText.needHelp.content,
-                                placement: 'bottom',
-                                beforeStep: gotoSectionHelp
+                                type        : 'element',
+                                selector    : "#needHelp",
+                                title       : joyRideText.needHelp.title,
+                                content     : joyRideText.needHelp.content,
+                                placement   : 'bottom',
+                                beforeStep  : gotoSectionHelp,
+                                customClass : "my-custom-class-for-needHelpJR"
 
                             },
                             {
                                 appendToBody:true,
-                                type: 'element',
-                                selector: "#slaask-button-cross",
-                                title: joyRideText.needMoreHelp.title,
-                                content: joyRideText.needMoreHelp.content,
-                                placement: 'top',
-                                beforeStep: moreHelp
+                                type        : 'element',
+                                selector    : "#slaask-button-cross",
+                                title       : joyRideText.needMoreHelp.title,
+                                content     : joyRideText.needMoreHelp.content,
+                                placement   : 'top',
+                                customClass : "my-custom-class-for-needMoreHelpJR"
                             }
                         ]
                     };
                     joyride.start = true;
                     function gotoSectionHelp (resumeJoyride){
-                        $timeout(function(){
-                            $('html,body').scrollTop(0);
-                            $(document).on('DOMNodeInserted', function(e) {
-                                $(e.target).addClass('tour-need-help');
-                            });
-                            resumeJoyride();
-                        }, 100);
-                    }
-                    function moreHelp(resumeJoyride) {
-                        $timeout(function(){
-                            $(document).on('DOMNodeInserted', function(e) {
-                                $(e.target).addClass('tour-more-help');
-                            });
-                            resumeJoyride();
-                        }, 100);
+                        $('html,body').scrollTop(0);
+                        $timeout(resumeJoyride, 100);
                     }
 
                 }

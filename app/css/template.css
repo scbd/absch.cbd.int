@@ -1946,20 +1946,24 @@ legend+ .help-info {
 }
 .jr_target{box-shadow: none!important;}
 
-.tour-need-help.jr_pos_bottom,.tour-more-help.jr_pos_top{
+.my-custom-class-for-needHelpJR.jr_pos_bottom,.my-custom-class-for-needMoreHelpJR.jr_pos_top, .my-custom-class-for-workFlowSaveDraftJR.jr_pos_bottom{
     margin-left: -30px !important;
 }
-.tour-need-help.jr_pos_bottom{
+.my-custom-class-for-needHelpJR.jr_pos_bottom{
     top: 50px !important;
 }
-.tour-need-help.jr_pos_bottom:after {
+.my-custom-class-for-needHelpJR.jr_pos_bottom:after {
     left: auto !important;
     right: 42px !important;
 }
-.tour-more-help.jr_pos_top:after{
+.my-custom-class-for-needMoreHelpJR.jr_pos_top:after{
     left: auto !important;
     right: 25px !important;
 }
+.my-custom-class-for-workFlowSaveDraftJR.jr_pos_bottom:after {
+    margin-right: 90px;
+}
+
 .label-party {font-size: 16px;background-color: #5F4586;color:white; min-width:30px}
 .label-nonparty {font-size: 16px;background-color: #333;color:white; min-width:30px}
 .label-inbetween {font-size: 16px;background-color: #EC971F;color:white; min-width:30px}
