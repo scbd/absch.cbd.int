@@ -530,7 +530,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     }
                 }
                 $scope.onSort = function(sortField, sortSequence){
-                    $scope.listResult.sortSequence  = sortSequence == ' desc' ? ' asc' : ' desc';
+                    $scope.listResult.sequence  = sortSequence == ' desc' ? ' asc' : ' desc';
                     $scope.listResult.sort          = sortField;
                     loadRecords(1);
                 }
@@ -557,7 +557,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         cache: false,
                         $top: $scope.listResult.rowsPerPage,
                         $skip: $scope.listResult.rowsPerPage*(pageNumebr-1),
-                        $orderby: $scope.listResult.sort
+                        $orderby: $scope.listResult.sort||'updatedOn'
+                        //$sortSequence: $scope.listResult.sequence
                     };
                     if($scope.keywords){
                         publishedParams.text_EN_txt = $scope.keywords;
