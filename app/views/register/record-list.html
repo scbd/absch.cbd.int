@@ -73,8 +73,9 @@
             <table class="table table-hover table-striped" style="width:100%;margin-top:20px;">
                 <thead>
                     <tr>
+                        <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Title</th>
                         <!-- ToDo: need to pass correct field -->
-                        <th ng-click="onSort('title', 'asc')" id="titleHeader">Title</th>
+                        <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> -->
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Type</th>
                         <th style="width:200px;" ng-click="toggleOrderBy('SubmittedBy')" id="createdOnHeader">Last published</th>
                         <th class="hidden-xs" style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
@@ -90,6 +91,7 @@
                 </tr>
 
                 <tbody ng-repeat="record in  records">
+                    <!-- <tbody ng-repeat="record in (filteredRecords = (records | orderBy:orderBy))"></tbody> -->
 
                     <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
 

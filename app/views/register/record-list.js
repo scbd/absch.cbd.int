@@ -523,10 +523,10 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         $scope.records = $scope.drafts;
                         $scope.isDraftRecord = true;
                     }
-                    //TODO: this giving error, need backend param
                     else if(type=='isRequest'){
-                        $scope.statusType = 'requests';
-                        loadRecords(1);
+                        $scope.statusType = 'mydraft';
+                        $scope.records = $scope.requestsList;
+                        $scope.isDraftRecord = true;
                     }
                 }
                 $scope.onSort = function(sortField, sortSequence){
@@ -583,10 +583,16 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     $q.all([qDocuments, qDrafts, getRevokedDocuments(schema), loadmyTasks(schema)])
                       .then(function (results) {
                         var documents = results[0].data.Items;
-                        let drafts = [];
-                        if(pageNumebr == 1 && ($scope.statusType == 'mydraft' || $scope.statusType == 'allRecords')) {
+                        if(pageNumebr == 1 && results[1]?.data?.Items && ($scope.statusType == 'mydraft' || $scope.statusType == 'allRecords')) {
                             $scope.drafts = results[1].data.Items;
                             $scope.listCount.draft = results[1].data.Count;
+                            $scope.requestsList = [];
+                            _.forEach($scope.drafts, function(item){
+                                if(item.workingDocumentLock) {
+                                    $scope.requestsList.push(item)
+                                }
+                            });
+                             $scope.listCount.request = $scope.requestsList.length;
                         }
 
                         var wokflowActive = localStorageService.get('workflow-activity-status');
