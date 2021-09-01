@@ -32,6 +32,10 @@ import 'components/scbd-angularjs-controls/main'; ;
                     $event.stopPropagation()
                 }
 
+                $scope.filterBreadcrumbs = function(options){
+                    return _.uniqBy(options, item => { return item.path; });
+                }
+
                 $scope.startsWith = function(item){
                    return !$scope.countrySearchQuery || _.startsWith(item.name[locale].toLowerCase(), $scope.countrySearchQuery.toLowerCase());
                 }

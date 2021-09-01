@@ -116,7 +116,7 @@
     
         <div class="breadcrumbs">
             <a rel="noopener" translation-url href="https://www.cbd.int" class="margin-right-xs">CBD</a>
-            <span ng-repeat="breadcrumb in breadcrumbs.get()">
+            <span ng-repeat="breadcrumb in filterBreadcrumbs(breadcrumbs.get())">
                 &nbsp;&nbsp;/&nbsp;&nbsp;
                 <span ng-if="!breadcrumb.param">
                     <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
