@@ -509,7 +509,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
 
                 }
                 $scope.changeFilter = function (type ) {
-                    $scope.statusFilter = type;
+                    $scope.recordFilter = type;
                     $scope.isDraftRecord = false;
                     if(type==''){
                         $scope.statusType = 'allRecords';
