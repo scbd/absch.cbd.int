@@ -323,7 +323,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                                     title       : joyRideText.needHelp.title,
                                     content     : joyRideText.needHelp.content,
                                     placement   : 'bottom',
-                                    customClass : "my-custom-class-for-needHelpJR",
+                                    customClass : "need-help-jr",
                                     beforeStep  : gotoSectionHelp
 
                                 },
@@ -334,7 +334,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                                     title       : joyRideText.needMoreHelp.title,
                                     content     : joyRideText.needMoreHelp.content,
                                     placement   : 'top',
-                                    customClass : "my-custom-class-for-needMoreHelpJR"
+                                    customClass : "need-more-help-jr"
                                 }
 
                             ]

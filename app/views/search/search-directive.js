@@ -254,7 +254,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                     content     : joyRideText.needHelp.content,
                                     placement   : 'bottom',
                                     beforeStep  : gotoSectionHelp,
-                                    customClass : "my-custom-class-for-needHelpJR"
+                                    customClass : "need-help-jr"
                                 },
                                 {
                                     appendToBody: true,
@@ -263,7 +263,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                     title       : joyRideText.needMoreHelp.title,
                                     content     : joyRideText.needMoreHelp.content,
                                     placement   : 'top',
-                                    customClass : "my-custom-class-for-needMoreHelpJR"
+                                    customClass : "need-more-help-jr"
                                 }
 
                             ]

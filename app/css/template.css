@@ -1946,21 +1946,21 @@ legend+ .help-info {
 }
 .jr_target{box-shadow: none!important;}
 
-.my-custom-class-for-needHelpJR.jr_pos_bottom,.my-custom-class-for-needMoreHelpJR.jr_pos_top, .my-custom-class-for-workFlowSaveDraftJR.jr_pos_bottom{
+.need-help-jr.jr_pos_bottom,.need-more-help-jr.jr_pos_top, .work-flow-save-draft-jr.jr_pos_bottom{
     margin-left: -30px !important;
 }
-.my-custom-class-for-needHelpJR.jr_pos_bottom{
+.need-help-jr.jr_pos_bottom{
     top: 50px !important;
 }
-.my-custom-class-for-needHelpJR.jr_pos_bottom:after {
+.need-help-jr.jr_pos_bottom:after {
     left: auto !important;
     right: 42px !important;
 }
-.my-custom-class-for-needMoreHelpJR.jr_pos_top:after{
+.need-more-help-jr.jr_pos_top:after{
     left: auto !important;
     right: 25px !important;
 }
-.my-custom-class-for-workFlowSaveDraftJR.jr_pos_bottom:after {
+.work-flow-save-draft-jr.jr_pos_bottom:after {
     margin-right: 90px;
 }
 

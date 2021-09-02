@@ -145,7 +145,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             title       : joyRideText.needHelp.title,
                             content     : joyRideText.needHelp.content,
                             placement   : 'bottom',
-                            customClass : "my-custom-class-for-needHelpJR",
+                            customClass : "need-help-jr",
                             beforeStep  : gotoSectionHelp
                         },
                         {
@@ -155,7 +155,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                             title       : joyRideText.needMoreHelp.title,
                             content     : joyRideText.needMoreHelp.content,
                             placement   : 'top',
-                            customClass : "my-custom-class-for-needMoreHelpJR"
+                            customClass : "need-more-help-jr"
                         }
                     ]
                 };

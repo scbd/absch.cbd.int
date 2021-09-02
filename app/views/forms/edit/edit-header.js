@@ -56,7 +56,7 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                             title       : joyRideText.saveDraft.title,
                             content     : joyRideText.saveDraft.content,
                             placement   : 'bottom',
-                            customClass : "my-custom-class-for-workFlowSaveDraftJR",
+                            customClass : "work-flow-save-draft-jr",
                         },
                         {
                             appendToBody: true,
@@ -84,7 +84,7 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                             content     : joyRideText.needHelp.content,
                             placement   : 'bottom',
                             beforeStep  : gotoSectionHelp,
-                            customClass : "my-custom-class-for-needHelpJR",
+                            customClass : "need-help-jr",
                         },
                         {
                             appendToBody:true,
@@ -93,7 +93,7 @@ app.directive('editHeader', ['joyrideService','$timeout', function(joyrideServic
                             title       : joyRideText.needMoreHelp.title,
                             content     : joyRideText.needMoreHelp.content,
                             placement   : 'top',
-                            customClass : "my-custom-class-for-needMoreHelpJR"
+                            customClass : "need-more-help-jr"
                         }
                     ]
                 };

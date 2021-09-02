@@ -111,7 +111,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 content     : joyRideText.needHelp.content,
                                 placement   : 'bottom',
                                 beforeStep  : gotoSectionHelp,
-                                customClass : "my-custom-class-for-needHelpJR"
+                                customClass : "need-help-jr"
 
                             },
                             {
@@ -121,7 +121,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 title       : joyRideText.needMoreHelp.title,
                                 content     : joyRideText.needMoreHelp.content,
                                 placement   : 'top',
-                                customClass : "my-custom-class-for-needMoreHelpJR"
+                                customClass : "need-more-help-jr"
                             }
                         ]
                     };
