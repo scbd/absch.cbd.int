@@ -1946,6 +1946,23 @@ legend+ .help-info {
 }
 .jr_target{box-shadow: none!important;}
 
+.need-help-jr.jr_pos_bottom,.need-more-help-jr.jr_pos_top, .work-flow-save-draft-jr.jr_pos_bottom{
+    margin-left: -30px !important;
+}
+.need-help-jr.jr_pos_bottom{
+    top: 50px !important;
+}
+.need-help-jr.jr_pos_bottom:after {
+    left: auto !important;
+    right: 42px !important;
+}
+.need-more-help-jr.jr_pos_top:after{
+    left: auto !important;
+    right: 25px !important;
+}
+.work-flow-save-draft-jr.jr_pos_bottom:after {
+    margin-right: 90px;
+}
 
 .label-party {font-size: 16px;background-color: #5F4586;color:white; min-width:30px}
 .label-nonparty {font-size: 16px;background-color: #333;color:white; min-width:30px}

@@ -241,98 +241,100 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 joyride.config = {
                     overlay: true,
                     onStepChange: function(){  },
-                    onStart: function(){  },
-                    onFinish: function(){ 
+                    onStart: function(){   },
+                    onFinish: function(){
                         joyride.start = false;
                         $scope.tourOn = false;
                         closeTab();
                     },
                     steps : [
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#countryProfile",
-                                    title: joyRideText.countryProfiles.title,
-                                    content: joyRideText.countryProfiles.content,
-                                    placement: 'left',                    
-                                    beforeStep: openCountryDropdown
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#countryProfile",
+                                    title       : joyRideText.countryProfiles.title,
+                                    content     : joyRideText.countryProfiles.content,
+                                    placement   : 'left',                    
+                                    beforeStep  : openCountryDropdown
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#listOfRecords",
-                                    title: joyRideText.listOfRecords.title,
-                                    content: joyRideText.listOfRecords.content,
-                                    placement: 'top',          
-                                    beforeStep: closeTab
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#listOfRecords",
+                                    title       : joyRideText.listOfRecords.title,
+                                    content     : joyRideText.listOfRecords.content,
+                                    placement   : 'top',          
+                                    beforeStep  : closeTab
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#sortingRecords",
-                                    title: joyRideText.sortingRecords.title,
-                                    content: joyRideText.sortingRecords.content,
-                                    placement: 'top',
-                                    beforeStep: openSortingRecords
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#sortingRecords",
+                                    title       : joyRideText.sortingRecords.title,
+                                    content     : joyRideText.sortingRecords.content,
+                                    placement   : 'top',
+                                    beforeStep  : openSortingRecords
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#nrCount-NFP",
-                                    title: joyRideText.sortingRecordsNFP.title,
-                                    content: joyRideText.sortingRecordsNFP.content,
-                                    placement: 'top',
-                                    beforeStep: closeTab
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#nrCount-NFP",
+                                    title       : joyRideText.sortingRecordsNFP.title,
+                                    content     : joyRideText.sortingRecordsNFP.content,
+                                    placement   : 'top',
+                                    beforeStep  : closeTab
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#sortingRecordsCountries",
-                                    title: joyRideText.sortingRecordsCountries.title,
-                                    content: joyRideText.sortingRecordsCountries.content,
-                                    placement: 'top'
+                                    appendToBody:  true,
+                                    type        : 'element',
+                                    selector    : "#sortingRecordsCountries",
+                                    title       : joyRideText.sortingRecordsCountries.title,
+                                    content     : joyRideText.sortingRecordsCountries.content,
+                                    placement   : 'top'
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#sortingRecordsPartyStatus",
-                                    title: joyRideText.sortingRecordsPartyStatus.title,
-                                    content: joyRideText.sortingRecordsPartyStatus.content,
-                                    placement: 'top'
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#sortingRecordsPartyStatus",
+                                    title       : joyRideText.sortingRecordsPartyStatus.title,
+                                    content     : joyRideText.sortingRecordsPartyStatus.content,
+                                    placement   : 'top'
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#sortingRecordsRegions",
-                                    title: joyRideText.sortingRecordsRegions.title,
-                                    content: joyRideText.sortingRecordsRegions.content,
-                                    placement: 'top'
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#sortingRecordsRegions",
+                                    title       : joyRideText.sortingRecordsRegions.title,
+                                    content     : joyRideText.sortingRecordsRegions.content,
+                                    placement   : 'top'
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#exportingRecords",
-                                    title: joyRideText.exportingRecords.title,
-                                    content: joyRideText.exportingRecords.content,
-                                    placement: 'top'
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#exportingRecords",
+                                    title       : joyRideText.exportingRecords.title,
+                                    content     : joyRideText.exportingRecords.content,
+                                    placement   : 'top'
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#needHelp",
-                                    title: joyRideText.needHelp.title,
-                                    content: joyRideText.needHelp.content,
-                                    placement: 'bottom',
-                                    beforeStep: gotoSectionHelp
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#needHelp",
+                                    title       : joyRideText.needHelp.title,
+                                    content     : joyRideText.needHelp.content,
+                                    placement   : 'bottom',
+                                    customClass : "need-help-jr",
+                                    beforeStep  : gotoSectionHelp
 
                                 },
                                 {
-                                    appendToBody:true,
-                                    type: 'element',
-                                    selector: "#slaask-button-cross",
-                                    title: joyRideText.needMoreHelp.title,
-                                    content: joyRideText.needMoreHelp.content,
-                                    placement: 'top'
+                                    appendToBody: true,
+                                    type        : 'element',
+                                    selector    : "#slaask-button-cross",
+                                    title       : joyRideText.needMoreHelp.title,
+                                    content     : joyRideText.needMoreHelp.content,
+                                    placement   : 'top',
+                                    customClass : "need-more-help-jr"
                                 }
 
                             ]
@@ -341,31 +343,26 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
 
                 function gotoSectionHelp (resumeJoyride){
                     $('html,body').scrollTop(0);
-                    $timeout(function(){
-                        resumeJoyride();
-                    }, 100);
+                    $timeout(resumeJoyride, 100);
                 }
+
                 function closeTab (resumeJoyride){
-                    $timeout(function(){
-                        $element.find('#closeTab').click();
-                        resumeJoyride();
-                    }, 100);
+                    $element.find('#closeTab').click();
+                    if(resumeJoyride)
+                        $timeout(resumeJoyride, 100);
                 }
                 
                 function openCountryDropdown(resumeJoyride){
-                    $('html,body').scrollTop(0);
-                    $timeout(function(){
-                         // $element.find('#countryProfile').click(); // not working
-                        document.getElementById('countryProfile').click();
+                    $timeout(function (  ) {
+                        $('html,body').scrollTop(0);
+                        $('#countryProfile').click();
                         resumeJoyride();
-                    }, 100);
+                    })
                 }
 
                 function openSortingRecords(resumeJoyride){
-                    $timeout(function(){
-                        $element.find('#dropdownMenu1').click();
-                        resumeJoyride();
-                    }, 100);
+                    $element.find('#dropdownMenu1').click();
+                    $timeout(resumeJoyride, 100);
                 }
             }
 

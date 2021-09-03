@@ -1,15 +1,15 @@
 ﻿{
     "welcome" :  {
       "title": "Welcome to the Search Page",
-      "content": "<p>The search page allows you to query all information published in the BCH. To retrieve records of interest, you can use a combination of filters to narrow your search.</p>"
+      "content": "<p>The search page allows you to query all information published in the Clearing-House. Records can be found by typing a word in the free text search field and/or by using  a combination of filters to narrow your search.</p>"
     },
     "globalSearch" :  {
-      "title": "Global Search Filters",
+      "title": "Global Filters",
       "content": "<p>Global filters allow you to search the entire database through all record categories by selecting one or multiple options within the <strong> Record types, Keywords, Country, Regions</strong> and <strong>Date</strong> filters.</p>"
     },
     "freeText" :  {
       "title": "Free text search",
-      "content": "<p>This search box allows you to query the entire database using word(s) of your choice.</p>"
+      "content": "<p>This search box allows you to query the entire database by typing word(s) of your choice.<br><u>Tip:</u> Change the language of the website (top right corner) before typing in that language.</p>"
     },
     "recordTypesFilterTab" :  {
       "title": "Filter by Record Type",
@@ -17,11 +17,11 @@
     },
     "keywordsFilterTab" :  {
       "title": "Search by Keyword",
-      "content": "<p>Select one or more keyword(s) from the list. If you have already filtered by record type, the keyword filters displayed will be applicable specifically to that record type.</p>"
+      "content": "<p>Select one or more keywords from the list.<br>If you have already filtered by record type, the keyword filters displayed will be applicable specifically to that record type.</p>"
     },
     "countryFilterTab" :  {
       "title": "Search by Country",
-      "content": "<p>Select one or more countries from the list.<br><br>Tip: Click on a letter to view all countries that start with that letter. You can also filter by countries that are 'Parties', 'Non-Parties' and 'Ratified, not yet Party'</p>"
+      "content": "<p>Select one or more countries from the list.<br><br><u>Tip:</u> Click on a letter to view all countries that start with that letter. You can also filter by countries that are 'Parties', 'Non-Parties' and 'Ratified, not yet Party'.</p>"
     },
     "regionFilterTab" :  {
       "title": "Search by Region",
@@ -29,19 +29,19 @@
     },
     "dateFilterTab" :  {
       "title": "Search by Date",
-      "content": "<p>Search for records published or created on a specific date or time period.</p>"
+      "content": "<p>The <b>Date</b> filter allows you to search for records published within (i) a pre-determined date range (e.g. “Last 7 Days”); or (ii) a date range that you can specify (“Custom Range”); or (iii) on a specific day of any year. </p>"
     },
     "closeFilterTab" :  {
       "title": "Search Results",
-      "content": "<p>To view search results, scroll down or click on the (x) button at the top right corner.</p>"
+      "content": "<p>To view search results, scroll down or click on the <b>(x)</b> button at the top right corner.</p>"
     },
     "searchResult" :  {
       "title": "Search Results: Tabs",
-      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br>Note: The black circle indicates the total number of records in each category and will automatically change based on your search selections.</p>"
+      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br><br><u>Note:</u> The black circle indicates the total number of records in each category and will automatically change based on your search selections.</p>"
     },
     "subFilters" :  {
       "title": "Sub-filters",
-      "content": "<p>Sub-filters appear when you select one or more record types within the <strong>Record types</strong> global filter.<br>They appear on the left-hand side and apply exclusively to the selected record type.<br>You can use sub-filters in combination </p>"
+      "content": "<p>Sub-filters appear when you select a one or more record types within the Record types global filter.<br>They appear on the left-hand side and are associated with each selected record type.<br>You can use sub-filters in combination with global filters to further narrow your search.</p>"
     },
     "recordView" :  {
       "title": "Search Results: Viewing Records",
@@ -50,7 +50,7 @@
     },
     "viewType" :  {
       "title": "Search Results: View Type",
-      "content": "<p>Select the preferred display of results from the 'View Type' drop-down list.</p>"
+      "content": "<p>You can change the display of records by selecting the preferred option from the drop-down list.</p>"
 
     },
     "sortBy" :  {
@@ -59,12 +59,19 @@
 
     },
     "sendRecords" :  {
-      "title": "Search Results: Send",
+      "title": "Search Results: Share",
       "content": "<p>Click here to share your search results.</p>"
     },
     "exportRecords" :  {
       "title": "Search Results: Export",
       "content": "<p>Click here to export the information to a spreadsheet format.</p>"
-
+    },
+    "needHelp" :  {
+      "title": "Need Help?",
+      "content": "Click here to access contextual help where you can find more information related to the Country Profiles page."
+    },
+    "needMoreHelp" :  {
+      "title": "Need more help?",
+      "content": "Use the Chat feature to message us for additional support."
     }
 }
