@@ -19,7 +19,9 @@ import { iconFields } from '~/views/forms/view/bch/icons';
                 
                 $scope.recordLoader = {};
                 $scope.api = {
-                    updateResult : updateResult
+                    updateResult : updateResult,
+                    onExport     : onExport,
+                    isBusy       : false
                 };
                 $scope.searchResult = {
                     schemas    : realm.schemas,
@@ -108,6 +110,49 @@ import { iconFields } from '~/views/forms/view/bch/icons';
                         $scope.recordLoader.api.loadDocument(doc.schema_s, doc.identifier_s);
                     },10)
                 };
+
+
+                function onExport(options){
+
+                    if($scope.loading)
+                        return;
+                    
+                    if(options.listType == 'initial'){
+                        return executeExportQuery(false, 25, 0);
+                    }
+                    else if(options.listType == 'all'){
+                        return executeExportQuery(true, 1000, 0);
+                    }
+                    
+                    async function executeExportQuery(loadAll, rowsPerPage, pageNumber, docs){
+                        loadAll     = loadAll     || false
+                        rowsPerPage = rowsPerPage || 25
+                        pageNumber  = pageNumber  || 0
+                        docs        = docs        || []
+
+                        const queryOptions = $scope.searchResult.queryOptions;
+                        const lQuery = {
+                            fields         : options.fields.join(','),
+                            fieldQuery     : _.uniq(queryOptions.tagQueries),
+                            query          : queryOptions.query||undefined,
+                            rowsPerPage    : rowsPerPage||1000,
+                            currentPage    : pageNumber
+                        }
+
+                        if($scope.searchResult?.sort != 'relevance asc')
+                            lQuery.sort    = $scope.searchResult.sort;
+
+                        const result = await searchService.list(lQuery)
+                        let    { docs:newDocs, numFound } = result.data.response; 
+                        docs    = [...docs, ...newDocs];
+
+                        if(loadAll && docs.length < numFound){
+                            ({ docs, numFound } = await executeExportQuery(true,1000, pageNumber+1, docs));
+                        }
+                        
+                        return  { docs, numFound };
+                    }
+                }
             },
         };
     }]);

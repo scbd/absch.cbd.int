@@ -10,14 +10,13 @@
 	// import ArticlesApi from './article-api';
 	// import {formatDate} from './filters';
     import exportDialogtemplate from './export-dialog-template.html';
-
+    import exportTable from './export-table.vue';
 	export default {
-		props:['getDownloadRecords'],
+		props:['getDownloadRecords', 'fileName'],
 		data:  () => {
 			return {
 				records: [],
-                numFound:0,
-				loading: true,
+                numFound:0
 			}
 		},
 		created(){
@@ -30,27 +29,30 @@
 			}
 		},
 		methods: {
-			showExportDialog() {
+			async showExportDialog() {
 
-                this.getDownloadRecords({fields:['title'], listType:'initial'});
-
-                this.dialogService.open({ 
+                // const {docs, numFound } = await this.getDownloadRecords({fields:['title'], listType:'initial'});
+                // const fileName = this.fileName||`${this.$realm.uIdPrefix}-data`;
+                const getDownloadRecords = this.getDownloadRecords;
+                const closeDialog        = this.closeDialog
+                const dialog = this.dialogService.open({ 
                     name     : 'exportDialog',
                     plain: true,
                     template : exportDialogtemplate,
                     scope: {               
-                        closeDialog : this.closeDialog,
-                        exportRecords : this.exportRecords
+                        downloadDocs  : [],//docs,
+                        downloadFormat : 'xlsx',
+                        loading         : false,
+                        tableComponentOptions : {
+                            components:{exportTable}
+                        },
+                        closeDialog         : closeDialog,
+                        getDownloadRecords  : getDownloadRecords
                     }
                 });
             },
             closeDialog(){
                 this.dialogService.close();
-            },
-            exportRecords(){
-                console.log('export records', this)
-                 var val = this.getDownloadRecords({fields:['title'], listType:'all'});
-                 console.log(val);
             }
 		},
 		i18n: { messages:{ en: i18n }} 

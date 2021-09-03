@@ -455,9 +455,10 @@ import 'angular-vue'
                         
                         var viewType = $scope.searchResult.viewType;
                         if(viewType == 'list'){
-                            return $scope.searchResult.listViewApi.export({listType, queryOptions, sortFields});
+                            return $scope.searchResult.listViewApi.onExport({listType, fields});
                         }
                         else if(viewType == 'group'){
+                            return $scope.searchResult.listViewApi.onExport({listType, fields});
                             // resultQuery = $scope.searchResult.groupViewApi.export(queryOptions, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'matrix'){

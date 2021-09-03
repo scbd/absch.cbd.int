@@ -9,12 +9,12 @@ const AngularVueNgDialogPlugin = ($injector) =>{
     
     const ngDialogService ={
         close(id, value){
-            ngDialog.close(id, value);
+            return ngDialog.close(id, value);
         },
         open(opts){
             const options = {...opts, scope : $rootScope.$new(true)}
             angular.extend(options.scope, opts.scope, );
-            ngDialog.open(options);
+            return ngDialog.open(options);
         }
     }
 
