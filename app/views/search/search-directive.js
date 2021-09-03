@@ -454,7 +454,7 @@ import 'angular-vue'
                     $scope.onExportClick = function({listType, fields}){
                         
                         var viewType = $scope.searchResult.viewType;
-                        if(viewType == 'list'){
+                        if(['default', 'list', 'group'].includes(viewType)){
                             return $scope.searchResult.listViewApi.onExport({listType, fields});
                         }
                         else if(viewType == 'group'){

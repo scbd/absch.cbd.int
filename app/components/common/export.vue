@@ -31,8 +31,6 @@
 		methods: {
 			async showExportDialog() {
 
-                // const {docs, numFound } = await this.getDownloadRecords({fields:['title'], listType:'initial'});
-                // const fileName = this.fileName||`${this.$realm.uIdPrefix}-data`;
                 const getDownloadRecords = this.getDownloadRecords;
                 const closeDialog        = this.closeDialog
                 const dialog = this.dialogService.open({ 
