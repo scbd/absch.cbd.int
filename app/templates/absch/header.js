@@ -1,5 +1,5 @@
 import app from 'app';
-import html from 'text!./absch-header.html';
+import html from 'text!./header.html';
 import _ from 'lodash';
 import 'ng-breadcrumbs';
 import 'services/main';

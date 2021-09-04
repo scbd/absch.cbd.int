@@ -58,7 +58,8 @@
     
                     <ul class="dropdown-menu" style="border:0;margin-top:0;">
                         <li style="border-bottom: 1px solid #eee;"> <a rel="noopener"
-                                style="color:#111!important;font-size:16px;" ng-href="/countries"> Overview - List all
+                                style="color:#111!important;font-size:16px;" translation-url
+                                ng-href="/countries"> Overview - List all
                                 countries </a></li>
                         <li style="padding:5px;border-bottom: 1px solid #eee;">
                             <input type="text" class="form-control" ng-click="countrySearch($event)"
@@ -112,26 +113,6 @@
         </div>
     </div>
     
-    <div ng-hide="breadcrumbs.get().length == 1">
+    <breadcrumbs></breadcrumbs>
     
-        <div class="breadcrumbs">
-            <a rel="noopener" translation-url href="https://www.cbd.int" class="margin-right-xs">CBD</a>
-            <span ng-repeat="breadcrumb in filterBreadcrumbs(breadcrumbs.get())">
-                &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span ng-if="!breadcrumb.param">
-                    <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
-                        ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                    <span ng-if="$last" ng-bind="breadcrumb.label"></span>
-                </span>
-                <span ng-if="breadcrumb.param">
-                    <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
-                        ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                        <span ng-if="$last && breadcrumb.originalPath!='/register/:document_type'" ng-bind="breadcrumb.label"></span>
-                        <!-- originalPath /register/:document_type is only using for Schemas  -->
-                    <span ng-if="$last && breadcrumb.originalPath=='/register/:document_type'" ng-bind="breadcrumb.param|mapSchema|schemaName"></span>
-                </span>
-            </span>
-        </div>
-    </div>
-    
-    </div>
+</div>
