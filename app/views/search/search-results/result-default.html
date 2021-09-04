@@ -22,11 +22,13 @@
                 </div>
                 <div ng-if="!doc.highlight">
                     <!-- TODO: need to remove description field from index and use summary -->
-                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t"><span  ng-bind="doc.summary_t|limitTo:500"></span>
+                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t">
+                        <span  ng-bind="doc.summary_t|limitTo:500"></span>
                         <span ng-if="doc.summary_t.length > 500">...</span>
                     </div>
                     <!-- TODO: record summary copied description into rec_summary which needs to be replaced by summary_t in frontend and backend -->
-                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary"><span ng-bind="doc.rec_summary|limitTo:500"></span>
+                    <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">
+                        <span ng-bind="doc.rec_summary|limitTo:500"></span>
                         <span ng-if="doc.rec_summary.length > 500">...</span>
                     </div>
 

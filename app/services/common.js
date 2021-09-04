@@ -181,7 +181,7 @@ import 'components/scbd-angularjs-services/main';
 
                     var queryParameters = {
                         'q': q,
-                        'fl': 'id,identifier_s,title_t,createdDate_dt,description_t,url_ss,schema_EN_t,jurisdiction_EN_t,jurisdiction_s,uniqueIdentifier_s,schema_s,' +
+                        'fl': 'id,identifier_s,title_t,createdDate_dt,summary_t,url_ss,schema_EN_t,jurisdiction_EN_t,jurisdiction_s,uniqueIdentifier_s,schema_s,' +
                             'government_s,status_EN_t,type_EN_t,endDate_dt,startDate_dt,amendmentIntent_i,resourceLinksLanguage_ss,type_ss,jurisdictionRegions_REL_ss,jurisdictionRegions_ss',
                         'wt': 'json',
                         'start': 0,

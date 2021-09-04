@@ -42,7 +42,7 @@ import 'views/reports/matrix/data-matrix.directive';
                         var leftMenuSchemaFieldMapping;
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
-                        var en_fields =  'rec_countryName:government_EN_t, rec_title       :title_EN_t, rec_summary:description_t,summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
+                        var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
     
                         var groupFieldMapping = [
                             {
@@ -58,12 +58,12 @@ import 'views/reports/matrix/data-matrix.directive';
                                 solrField:'schema_s',
                                 titleField:'schema_'+locale.toUpperCase()+'_s'
                             },
-                            {
-                                field:'submissionYear', 
-                                sortFields:['submissionYear_s asc'],
-                                solrField:'submissionYear_s',
-                                titleField:'submissionYear_s'
-                            }
+                            // {
+                            //     field:'submissionYear', 
+                            //     sortFields:['submissionYear_s asc'],
+                            //     solrField:'submissionYear_s',
+                            //     titleField:'submissionYear_s'
+                            // }
                         ];    
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
@@ -1019,7 +1019,7 @@ import 'views/reports/matrix/data-matrix.directive';
                                         }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){
-                                        subQuery = buildDateFieldQuery(filter.field, filter.filterValue);
+                                        subQuery = buildDateFieldQuery(filter);
                                     }
                                     else if(filter.type == 'yesNo' && filter.filterValue!== undefined){
                                         subQuery = filter.field + ':' + solr.escape(filter.filterValue);
@@ -1056,24 +1056,32 @@ import 'views/reports/matrix/data-matrix.directive';
 
                     function buildDateQuery(){
                         var filters = getSelectedFilters('date')
-                        if (!(filters||[]).length){     
+                        if (!filters?.length){     
                             return;
                         }
                         var values = [];
-                        _.forEach(filters, function (item) {
-                            values.push(item.dateField+':' + item.query)
+                        _.forEach(filters, function (filter) {
+                            if(filter.exclude)
+                                return;
+
+                            let dateQuery = filter.dateField+':' + filter.query;
+
+                            if(filter.excludeResult)
+                                dateQuery = `(*:* NOT (${dateQuery}))`;
+
+                            values.push(dateQuery)
                         });
                         if(values.length)
                             return solr.andOr(values, 'AND')
                     }
 
-                    function buildDateFieldQuery(field, date) {
-
+                    function buildDateFieldQuery({ field, date }) {
+                        
                         if(date.start || date.end) {
-                            var start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
-                            var end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
+                            const end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
     
-                            return  field + ':[ ' + start + ' TO ' + end + ' ]';
+                            return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
                     }
 

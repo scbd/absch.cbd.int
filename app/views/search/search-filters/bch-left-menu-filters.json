@@ -104,7 +104,7 @@
 				"s":"commonNames_RU_ss asc"
 			},
 			"title": "Parental organism (common name)",
-			"field": "geneDonorOrganismIdentifiers_ss",
+			"field": "geneDonorOrganismsIdentifiers_ss",
 			"customResultFn":"organismNamesResult",
 			"customQueryFn":"organismNamesQuery"
 			
@@ -118,7 +118,7 @@
 				"s":"scientificName_s asc"
 			},
 			"title": "Parental organism (scientific name)",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		}
 	],
 	"biosafetyNews": [
@@ -267,7 +267,7 @@
 				"s":"commonNames_RU_ss"
 			},
 			"title": "Donor organism common name",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		},
 		{
 			"type": "solrRecords",
@@ -278,7 +278,7 @@
 				"s":"scientificName_s"
 			},
 			"title": "Donor organism scientific name",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		}
 	],
 	"biosafetyExpert": [
@@ -375,7 +375,7 @@
 				"searchFields":["commonNames_EN_txt"]
 			},
 			"title": "Parental organism (common name)",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		},
 		{
 			"type": "solrRecords",
@@ -385,7 +385,7 @@
 				"searchFields":["scientificName_t"]
 			},
 			"title": "Parental organism (scientific name)",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		},
 		{
 			"type": "date",
@@ -468,7 +468,7 @@
 				"searchFields":["commonNames_EN_txt"]
 			},
 			"title": "Donor organism common name",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		},
 		{
 			"type": "solrRecords",
@@ -478,7 +478,7 @@
 				"searchFields":["scientificName_t"]
 			},
 			"title": "Donor organism scientific name",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		}
 	],
 	"nationalRiskAssessment": [
@@ -535,7 +535,7 @@
 				"searchFields":["commonNames_EN_txt"]
 			},
 			"title": "Parental organism (common name)",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		},
 		{
 			"type": "solrRecords",
@@ -545,7 +545,7 @@
 				"searchFields":["scientificName_s"]
 			},
 			"title": "Parental organism (scientific name)",
-			"field": "geneDonorOrganismIdentifiers_ss"
+			"field": "geneDonorOrganismsIdentifiers_ss"
 		},
 		{
 			"type": "date",
