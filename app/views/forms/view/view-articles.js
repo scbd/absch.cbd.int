@@ -43,7 +43,7 @@ import 'ck-editor-css';
           
           if($scope.article){
             //breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
-            breadcrumbs.options = {'articleTitle':  $scope.article.title[locale] };
+            breadcrumbs.options = {'article_title':  $scope.article.title[locale] };
             
             ngMeta.resetMeta();   
             ngMeta.setTitle( $scope.article.title[locale]);

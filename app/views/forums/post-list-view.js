@@ -25,7 +25,7 @@ export default ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$r
 
             console.log(breadcrumbs);
 
-            breadcrumbs.options = {'Thread-Subject': response.data.subject};
+            breadcrumbs.options = {'thread_subject': response.data.subject};
 
         });
 

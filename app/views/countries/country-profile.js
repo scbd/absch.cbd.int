@@ -21,7 +21,7 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
           $scope.country.code = $scope.country.code.toLowerCase();
           $scope.country.name = $scope.country.name[locale];
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
-          breadcrumbs.options = { 'Country Profile': $scope.country.name };
+          breadcrumbs.options = { 'country_name': $scope.country.name };
 
           ngMeta.resetMeta();  
           var title = $scope.country.name + ' | Country Profile';

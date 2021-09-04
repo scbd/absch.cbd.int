@@ -33,7 +33,7 @@ import 'ng-breadcrumbs';
       function init(){
         if($scope.id == "guides" && $scope.type){
           $scope.show = "guides";
-          breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
+          breadcrumbs.options = {'about_code': "Step-by-step guides" };
         }
         else if($scope.id == "faqs"){
           //$scope.faqs = "ABSCH-About, faqs"; 
@@ -78,7 +78,7 @@ import 'ng-breadcrumbs';
           $scope.articles = data;
 
           if($scope.articles){
-            breadcrumbs.options = {'aboutCode': $scope.articles[0].title[locale] };
+            breadcrumbs.options = {'about_code': $scope.articles[0].title[locale] };
             $scope.setMetaTags()
           }
         })
@@ -101,7 +101,7 @@ import 'ng-breadcrumbs';
       //---------------------------------------------------------------------
       $scope.loadGuides = function(){
         $scope.show = "guides";
-        breadcrumbs.options = {'aboutCode': "Step-by-step guides" };
+        breadcrumbs.options = {'about_code': "Step-by-step guides" };
       }
 
       //==================================================
@@ -115,7 +115,7 @@ import 'ng-breadcrumbs';
           title = title||'';          
           if(title!='')
             title += ' | ';
-          title += breadcrumbs.options.aboutCode + ' | About ' + realm.chShortName;
+          title += breadcrumbs.options.about_code + ' | About ' + realm.chShortName;
 
           ngMeta.resetMeta();  
           ngMeta.setTitle(title);
@@ -131,7 +131,7 @@ import 'ng-breadcrumbs';
           $scope.showSearch = false;
         }
         $scope.show = "faqs";
-        breadcrumbs.options = {'aboutCode': "FAQs" };
+        breadcrumbs.options = {'about_code': "FAQs" };
         $scope.setMetaTags();
       }
 
