@@ -4,8 +4,6 @@ import "angular-sanitize";
 import "angular-loggly-logger";
 import "angular-joyride";
 import "ngMeta";
-// import AngularVueDynamicPlugin from "./angular-vue-plugins/angular-vue-dynamic-plugin";
-import AngularVueNgDialogPlugin from './angular-vue-plugins/angular-vue-ng-dialog-plugin';
 import { CreateAngularVuePlainPlugin, AngularVueRoutePlugin, AngularVueRouterPlugin } from 'angular-vue-plugins';
 
 var app = angular.module("app", angular.defineModules(["ngAnimate", "ngSanitize", "ngRoute", "ngCookies", "chieffancypants.loadingBar", "toastr", "angular-intro", "scbdControls", "angularTrix", "cbd-forums", "ng-breadcrumbs", "scbdServices", "scbdFilters", "smoothScroll", "ngMessages", "ngStorage", "ngDialog", "infinite-scroll", "logglyLogger", "angular-joyride", "ngMeta", "dndLists", "angucomplete-alt", "angular-cache", "angularVue"]));
@@ -58,9 +56,6 @@ app.run(["realm", "locale", '$injector', function (realm, locale, $injector) {
 
   window.Vue.use(new AngularVueRoutePlugin ($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
-
-  window.Vue.use(new AngularVueNgDialogPlugin($injector));
-  // window.Vue.use(new AngularVueDynamicPlugin($injector, 'ngDialog'));
   
 }]);
 

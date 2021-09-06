@@ -1,0 +1,25 @@
+{
+    "exportButton" : "Export",
+    "dialogTitle" : "Export result",
+    "downloadFormat":"Download Format",
+    "xls":"XLS (Excel)",
+    "xlsx":"XLSX (Excel)",
+    "csv":"CSV (comma separated values)",
+    "processing":"Processing...",
+    "recordsFound":"Records found",
+    "type":"Type",
+    "uid":"UID",
+    "government":"Government",
+    "title":"Title",
+    "info1":"Info 1",
+    "info2":"Info 2",
+    "info3":"Info 3",
+    "info4":"Info 4",
+    "publishedDate":"Published date",
+    "sampleMessage":"This is only sample of the information to be exported. All records retrieved by this search will be included in the export.",
+    "cancel":"Cancel",
+    "download":"Download"
+    
+    
+    
+}

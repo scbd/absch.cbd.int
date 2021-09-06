@@ -2980,7 +2980,8 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     border-radius: 4px;
     border: 1px solid #ccc;
 }
-#searchSortOptions .sort-options > li > a{
+#searchSortOptions .sort-options > li > a,
+.table-export-button{
     font-size: 12px;
     text-transform: uppercase;
     color:#555;
