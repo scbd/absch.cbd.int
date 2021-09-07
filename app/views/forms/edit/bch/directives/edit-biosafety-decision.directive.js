@@ -260,7 +260,7 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                 $scope.onContactQuery = function(searchText){
                   var queryOptions = {
                        realm     : realm.value,
-                       fieldQueries: ['schema_s:contact AND type_s:person'],
+                       fieldQueries: ['schema_s:contact'],
                        searchText: searchText
                   }
 
