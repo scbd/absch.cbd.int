@@ -168,7 +168,7 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                 
                 $scope.onOtherDecisionChanged = function(terms){
                     
-                    var decision = terms.otherDecisions || terms.communicationDecision;
+                    var decision = terms.otherDecisions?.identifier ? terms.otherDecisions : terms.communicationDecision;
 
                     $scope.isSimplifiedProcedure                = false;
                     $scope.isDecisionOnTransitOfLMOs            = false;
@@ -185,8 +185,9 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                     if(decision){
                         if(decision.identifier == decisionSubjects.DEC_8_3){ $scope.isSimplifiedProcedure	= true; }
                         if(decision.identifier == decisionSubjects.DEC_8_4){ $scope.isDecisionOnTransitOfLMOs	= true;}
-                        if(decision.identifier == decisionSubjects.DEC_8_5){ $scope.isDecisionOnContainedUseOfLMOs = true;}
-                        
+                        if(decision.identifier == decisionSubjects.DEC_8_5){ $scope.isDecisionOnContainedUseOfLMOs = true;}                        
+                        if(decision.identifier == decisionSubjects.DEC_8_9) $scope.domesticRegulationsNotification = true;
+
                         if(decision.identifier == decisionSubjects.DEC_8_6){ 
                             $scope.isUnintentionalTransboundaryMovement = true;
                             $scope.document.transboundaryMovementType = {identifier : transboundaryMovementType.unintentional}
@@ -198,7 +199,6 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                             $scope.onTransboundaryMovementTypeChange(document.transboundaryMovementType) 
                         }
                         if(_.includes(identifiersForSectionI,decision.identifier)){ $scope.isShowDecisionDocument = true;}
-                        if(decision.identifier == decisionSubjects.DEC_8_9) $scope.domesticRegulationsNotification = true;
                     }
 
 
@@ -451,13 +451,14 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                     }
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&&  !$scope.isLmoDecisionForDirectUse &&			
                         !$scope.isSimplifiedProcedure &&  !$scope.isDecisionOnTransitOfLMOs && !$scope.isDecisionOnContainedUseOfLMOs &&
-                        !($scope.document.transboundaryMovementType||{}).identifier==transboundaryMovementType.illegal){
+                        $scope.document.transboundaryMovementType?.identifier!=transboundaryMovementType.illegal && 
+                        !$scope.domesticRegulationsNotification){
                         
-                            $scope.document.modifiedOrganisms = undefined;
+                        $scope.document.modifiedOrganisms = undefined;
                     }
                     
                     if(!$scope.isLmoDecisionForIntentionalIntroduction	&& !$scope.isLmoDecisionForDirectUse && !$scope.isSimplifiedProcedure
-                        && !$scope.isDecisionOnContainedUseOfLMOs)
+                        && !$scope.isDecisionOnContainedUseOfLMOs && !$scope.isDecisionOnTransitOfLMOs && !$scope.domesticRegulationsNotification)
                         $scope.document.riskAssessments = undefined;
 
                     if($scope.isLmoDecisionForIntentionalIntroduction){
