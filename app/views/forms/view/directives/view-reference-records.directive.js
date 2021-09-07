@@ -45,6 +45,7 @@ app.directive("viewReferencedRecords", [function () {
 								_.forEach(data.data.response.docs, function(record){
 									_.forEach(record.referenceRecord_info_ss, function(info){
 										info = JSON.parse(info);
+										const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
 										_.forEach(info.identifiers, function(identifier){
 											if(removeRevisionNumber(identifier) == $scope.model){
 												if(!$scope.referenceRecords)
@@ -54,14 +55,14 @@ app.directive("viewReferencedRecords", [function () {
 													$scope.referenceRecords[record.schemaCode] = {
 														schema	  : record.schema,
 														fields 	  : {},
-														schemaType: record.schemaType
+														schemaType: record.schemaType,
+														fieldTitle: fieldTitle
 													};
 												}
 
-												const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;														
-												$scope.referenceRecords[record.schemaCode].fields[fieldTitle] = $scope.referenceRecords[record.schemaCode].fields[fieldTitle] || {count : 0, docs : [], schema : record.schema};
-												$scope.referenceRecords[record.schemaCode].fields[fieldTitle].count += 1;
-												$scope.referenceRecords[record.schemaCode].fields[fieldTitle].docs.push( record );
+												$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
+												$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
+												$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push( record );
 											}
 										});
 									});
