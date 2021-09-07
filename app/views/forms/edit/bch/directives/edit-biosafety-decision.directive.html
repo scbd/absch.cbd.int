@@ -276,8 +276,8 @@
 														</div>											
 													</div>
 												</div>
-												<div class="col-xs-12 "ng-if="decisions.isDecisionOnLmoImport">
-													<div class="km-control-group" name="exporters" required caption="Please provide Exporter’s contact details">											
+												<div class="col-xs-12" ng-if="decisions.isDecisionOnLmoImport">
+													<div class="km-control-group" name="exporters" caption="Please provide Exporter’s contact details">											
 														<div document-selector ng-model="document.exporters" question="exporters"
 														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 													</div>
@@ -374,8 +374,8 @@
 									<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group other-decision" name="transboundaryMovementType" required caption="Please select the type of transboundary movement">
-												<div km-term-radio required ng-model="document.transboundaryMovementType" locales="document.header.languages"
+											<div class="km-control-group other-decision" name="transboundaryMovementType" required caption="Type of transboundary movement">
+												<div km-term-radio required ng-model="document.transboundaryMovementType" locales="document.header.languages" ng-disabled="true"
 													 terms="options.transboundaryMovementType()" binding-type="term" ng-change="onTransboundaryMovementTypeChange(document.transboundaryMovementType)">
 												</div>
 											</div>
@@ -492,7 +492,8 @@
 							<!-- ====================Section G End=================== -->
 							<!-- ====================Section H Strat=================== -->
 							<section ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse ||			
-											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs">
+											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs ||
+											domesticRegulationsNotification">
 
 								<div class="well no-shadow bg-white">
 									<legend>LMO identification & risk assessment</legend>
@@ -500,12 +501,13 @@
 										<div class="col-xs-12">
 											<div class="km-control-group" name="modifiedOrganisms" caption="LMO identification"
 												ng-required="isLmoMandatory()">
-                        <div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
+                        						<div document-selector ng-model="document.modifiedOrganisms" question="modifiedOrganisms" allow-new="true" allow-new-schema="modifiedOrganism"
 												on-build-query="onBuildSkipGovernmentQuery(searchText,'modifiedOrganism')"></div>
 											</div>
 										</div>
 									</div>
-									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse || isSimplifiedProcedure || isDecisionOnContainedUseOfLMOs">
+									<div class="row" ng-if="isLmoDecisionForIntentionalIntroduction	||  isLmoDecisionForDirectUse || isSimplifiedProcedure ||
+									 	isDecisionOnContainedUseOfLMOs || isDecisionOnTransitOfLMOs || domesticRegulationsNotification">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="riskAssessments" 
 												ng-required="isRiskAssessmentMandatory()" caption="Risk assessment">	
