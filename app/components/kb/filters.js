@@ -1,4 +1,5 @@
 import moment from 'moment';
+import Vue from 'Vue';
 
 export function formatDate(datetime, format) {
     if (format === undefined)
@@ -11,3 +12,9 @@ export function formatMomentDate(datetime, method, arg1, arg2, arg3) {
     if(datetime)
         return moment.utc(datetime)[method](arg1, arg2, arg3);    
 }
+
+
+Vue.filter('formatDate'         , formatDate);
+Vue.filter('capitalize'         , val=>val.toUpperCase());
+Vue.filter('encodeURIComponent' , encodeURIComponent);
+Vue.filter('encodeURI'          , encodeURI);

@@ -23,6 +23,7 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import 'views/reports/matrix/data-matrix.directive';
+import 'angular-vue'
 
     app.directive('searchDirective', function() {
         return {
@@ -450,13 +451,14 @@ import 'views/reports/matrix/data-matrix.directive';
                         updateQueryResult();
                     };
 
-                    $scope.onExportClick = function(){
+                    $scope.onExportClick = function({listType, fields}){
                         
                         var viewType = $scope.searchResult.viewType;
-                        if(viewType == 'list'){
-                            // $scope.searchResult.listViewApi.export(queryOptions, sortFields, pageNumber||1);
+                        if(['default', 'list', 'group'].includes(viewType)){
+                            return $scope.searchResult.listViewApi.onExport({listType, fields});
                         }
                         else if(viewType == 'group'){
+                            return $scope.searchResult.listViewApi.onExport({listType, fields});
                             // resultQuery = $scope.searchResult.groupViewApi.export(queryOptions, sortFields, pageNumber||1);
                         }
                         else if($scope.searchResult.viewType == 'matrix'){
