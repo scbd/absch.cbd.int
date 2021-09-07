@@ -4,7 +4,7 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
-import joyRideText      from '~/app-data/search-joyride-tour.json';
+import tourText      from '~/app-data/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
 import 'services/main';
@@ -23,6 +23,8 @@ import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
 import 'views/reports/matrix/data-matrix.directive';
+import 'angular-vue'
+import * as hopscotch from 'hopscotch'
 
     app.directive('searchDirective', function() {
         return {
@@ -31,9 +33,9 @@ import 'views/reports/matrix/data-matrix.directive';
             template: template, 
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
-             'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log',
+             '$timeout', 'locale', 'solr', 'toastr','$log',
             function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, 
                     $timeout, locale, solr, toastr, $log) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
@@ -97,204 +99,231 @@ import 'views/reports/matrix/data-matrix.directive';
                     ////// scope functions
                     ////////////////////////////////////////////
                     $scope.tour = function(){
-                        $scope.tourOn = true;
-                        var joyride = joyrideService;
                         
-                        joyride.config = {
-                            overlay: true,
-                            onStepChange: function(){  },
-                            onStart: function(){   },
-                            onFinish: function(){
-                                joyride.start = false;
-                                $scope.tourOn = false; 
-                                $scope.showFilters = false;                                
-                                delete $scope.leftMenuFilters;                               
-                                $('#searchResult').removeClass('active jr_target'); 
-                            },
-                            steps : [
+                        var tour = {
+                            id: "searchTour",
+                            steps: [                                
                                 {
-                                    appendToBody: true,
-                                    title       : joyRideText.welcome.title,
-                                    content     : joyRideText.welcome.content
+                                    title       : tourText.welcome.title,
+                                    content     : tourText.welcome.content,
+                                    target      : 'searchHeader',
+                                    placement   : 'top'
                                 },
                                 {
-                                    appendToBody: true,
-                                    type        : 'element',
-                                    selector    : "#freeText",
-                                    title       : joyRideText.freeText.title,
-                                    content     : joyRideText.freeText.content,
+                                    target    : "freeText",
+                                    title       : tourText.freeText.title,
+                                    content     : tourText.freeText.content,
                                     placement   : 'bottom'
                                 },
                                 {
-                                    appendToBody: true,
-                                    type        : 'element',
-                                    selector    : "#globalSearch",
-                                    title       : joyRideText.globalSearch.title,
-                                    content     : joyRideText.globalSearch.content,
+                                    target    : "globalSearch",
+                                    title       : tourText.globalSearch.title,
+                                    content     : tourText.globalSearch.content,
                                     placement   : 'top'
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#recordTypesFilterTabJR",
-                                    title       : joyRideText.recordTypesFilterTab.title,
-                                    content     : joyRideText.recordTypesFilterTab.content,
+                                    target    : "recordTypesFilterTabJR",
+                                    title       : tourText.recordTypesFilterTab.title,
+                                    content     : tourText.recordTypesFilterTab.content,
                                     placement   : 'top',
-                                    beforeStep  : openFilterTab
+                                    onNext  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#keywordsFilterTabJR",
-                                    title       : joyRideText.keywordsFilterTab.title,
-                                    content     : joyRideText.keywordsFilterTab.content,
+                                    target    : "keywordsFilterTabJR",
+                                    title       : tourText.keywordsFilterTab.title,
+                                    content     : tourText.keywordsFilterTab.content,
                                     placement   : 'top',
-                                    beforeStep  : openFilterTab
+                                    onNext  : openFilterTab,
+                                    onPrev  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#countryFilterTabJR",
-                                    title       : joyRideText.countryFilterTab.title,
-                                    content     : joyRideText.countryFilterTab.content,
+                                    target    : "countryFilterTabJR",
+                                    title       : tourText.countryFilterTab.title,
+                                    content     : tourText.countryFilterTab.content,
                                     placement   : 'top',
-                                    beforeStep  : openFilterTab
+                                    onNext  : openFilterTab,
+                                    onPrev  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#regionFilterTabJR",
-                                    title       : joyRideText.regionFilterTab.title,
-                                    content     : joyRideText.regionFilterTab.content,
+                                    target    : "regionFilterTabJR",
+                                    title       : tourText.regionFilterTab.title,
+                                    content     : tourText.regionFilterTab.content,
                                     placement   : 'top',
-                                    beforeStep  : openFilterTab
+                                    onNext  : openFilterTab,
+                                    onPrev  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#dateFilterTabJR",
-                                    title       : joyRideText.dateFilterTab.title,
-                                    content     : joyRideText.dateFilterTab.content,
+                                    target    : "dateFilterTabJR",
+                                    title       : tourText.dateFilterTab.title,
+                                    content     : tourText.dateFilterTab.content,
                                     placement   : 'top',
-                                    beforeStep  : openFilterTab
+                                    onNext  : openFilterTab,
+                                    onPrev  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#closeFilterTab",
-                                    title       : joyRideText.closeFilterTab.title,
-                                    content     : joyRideText.closeFilterTab.content,
+                                    target    : "closeFilterTab",
+                                    title       : tourText.closeFilterTab.title,
+                                    content     : tourText.closeFilterTab.content,
                                     placement   : 'left',
-                                    beforeStep  : openFilterTab
+                                    onNext  : openFilterTab,
+                                    onPrev  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#searchResult",
-                                    title       : joyRideText.searchResult.title,
-                                    content     : joyRideText.searchResult.content,
+                                    target    : "searchResult",
+                                    title       : tourText.searchResult.title,
+                                    content     : tourText.searchResult.content,
                                     placement   : 'top',
-                                    beforeStep  : closeFilterTab
+                                    onNext  : closeFilterTab,
+                                    onPrev  : openFilterTab,
+                                    delay   : 200
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#Search-Filter",
-                                    title       : joyRideText.subFilters.title,
-                                    content     : joyRideText.subFilters.content,
+                                    target    : "Search-Filter",
+                                    title       : tourText.subFilters.title,
+                                    content     : tourText.subFilters.content,
                                     placement   : 'top',
-                                    beforeStep  : openSubFilters
+                                    onNext  : openSubFilters,
+                                    onPrev  : closeFilterTab
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#record1",
-                                    title       : joyRideText.recordView.title,
-                                    content     : joyRideText.recordView.content,
+                                    target    : "record1",
+                                    title       : tourText.recordView.title,
+                                    content     : tourText.recordView.content,
                                     placement   : 'top',
-                                    beforeStep  : closeSubFilters
+                                    onNext  : closeSubFilters,
+                                    onPrev  : openSubFilters,
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#viewType",
-                                    title       : joyRideText.viewType.title,
-                                    content     : joyRideText.viewType.content,
-                                    placement   : 'top'
+                                    target    : "viewType",
+                                    title       : tourText.viewType.title,
+                                    content     : tourText.viewType.content,
+                                    placement   : 'top',
+                                    onPrev  : closeSubFilters,
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#sortBy",
-                                    title       : joyRideText.sortBy.title,
-                                    content     : joyRideText.sortBy.content,
-                                    placement   : 'bottom'
+                                    target    : "sortBy",
+                                    title       : tourText.sortBy.title,
+                                    content     : tourText.sortBy.content,
+                                    placement   : 'left',
+                                    yOffset     : -20
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#sendRecords",
-                                    title       : joyRideText.sendRecords.title,
-                                    content     : joyRideText.sendRecords.content,
-                                    placement   : 'top'
+                                    target    : "sendRecords",
+                                    title       : tourText.sendRecords.title,
+                                    content     : tourText.sendRecords.content,
+                                    placement   : 'left',
+                                    yOffset     : -20
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#exportRecords",
-                                    title       : joyRideText.exportRecords.title,
-                                    content     : joyRideText.exportRecords.content,
-                                    placement   : 'left'
+                                    target    : "exportRecords",
+                                    title       : tourText.exportRecords.title,
+                                    content     : tourText.exportRecords.content,
+                                    placement   : 'left',
+                                    yOffset     : -20
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#needHelp",
-                                    title       : joyRideText.needHelp.title,
-                                    content     : joyRideText.needHelp.content,
+                                    target    : "needHelp",
+                                    title       : tourText.needHelp.title,
+                                    content     : tourText.needHelp.content,
                                     placement   : 'bottom',
-                                    beforeStep  : gotoSectionHelp,
-                                    customClass : "need-help-jr"
+                                    onNext  : gotoSectionHelp,
+                                    customClass : "need-help-jr",
+                                    placement   : 'left',
+                                    yOffset     : -15
                                 },
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#slaask-button-cross",
-                                    title       : joyRideText.needMoreHelp.title,
-                                    content     : joyRideText.needMoreHelp.content,
+                                    target    : "slaask-button-cross",
+                                    title       : tourText.needMoreHelp.title,
+                                    content     : tourText.needMoreHelp.content,
                                     placement   : 'top',
-                                    customClass : "need-more-help-jr"
+                                    customClass : "need-more-help-jr",
+                                    placement   : 'left',
+                                    fixedElement:true,
+                                    yOffset     : -30
                                 }
-
-                            ]
+                            ],
+                            showPrevButton: true,
+                            scrollTopMargin: 100,
+                            onError : (a,b)=>{
+                                console.log('error',a,b)
+                                // hopscotch.endTour()
+                            },
+                            onEnd : (a,b)=>{
+                                console.log('end', a,b)
+                            },
+                            onClose : (a,b)=>{
+                                console.log('close', a,b)
+                            },
+                            onStart: function() {
+                              $('#article').addClass('selected');
+                            }
                         };
-                        joyride.start = true;
-
+                    
+                        // Start the tour!
+                        hopscotch.startTour(tour);
+                       
                         function openFilterTab(resumeJoyride){
-                            var step = joyride.config.steps[joyride.current];
-                            if(step.selector == "#closeFilterTab") { 
-                                $scope.showFilters = "recordTypesFilter"; }
-                            else {
-                                $scope.showFilters = step.selector.replace('#','').replace('TabJR', ''); }
-                            $timeout(resumeJoyride, 100);
+                            const stepNum = hopscotch.getCurrStepNum();
+                            var step = tour.steps[stepNum]
+                            console.log(step)
+                            $scope.$apply(()=>{
+                                if(step.selector == "closeFilterTab") { 
+                                    $scope.showFilters = "recordTypesFilter"; }
+                                else {
+                                    $scope.showFilters = step.target.replace('TabJR', ''); }
+                            })
+                            
                         }
 
-                        function gotoSectionHelp (resumeJoyride){
+                        function gotoSectionHelp (){
                             $('html,body').scrollTop(0);
                             $timeout(resumeJoyride, 100);
                         }
 
-                        function closeFilterTab(resumeJoyride){
+                        function closeFilterTab(){
                             $scope.showFilters = false;
-                            $timeout(resumeJoyride, 100);
                         }
-                        function openSubFilters(resumeJoyride){
+                        function openSubFilters(){
                             $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
-                            $timeout(resumeJoyride, 100);
                         }
-                        function closeSubFilters(resumeJoyride){
+                        function closeSubFilters(){
                             delete $scope.leftMenuFilters;
-                            $timeout(resumeJoyride, 100);
                         }
 
 

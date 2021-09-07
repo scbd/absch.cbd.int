@@ -28,7 +28,7 @@ const externals = ['app', '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', '
 'webui-popover', 'chart-js', 'printThis', 'diacritics', 'pdfjs-dist/build/pdf', 'pdfjs-dist/build/pdf.worker', 'pdf-object', 'angular-trix', 'trix', 'ngMeta', 
 'angular-loggly-logger', 'drag-and-drop', 'angucomplete-alt', 'angular-cache', 'jquery-ui', 'pivottable', 'plotly-renderers', 'angular-vue', 'ky', 'socket.io', 
 'cbd-forums', 'shim', 'view-abs-checkpoint', 'angular-flex', 'babel-polyfill', 'realmConf',
-'css!components/scbd-branding/directives/footer'
+'css!components/scbd-branding/directives/footer', 'angular-vue-plugins', 'hopscotch'
 ];  
 const bundleFiles = [ ];
 const langRegex = /\/(ar|en|fr|es|ru|zh)\//;

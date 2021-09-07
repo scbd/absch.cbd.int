@@ -130,7 +130,8 @@ export default function bootApp(window, require, defineX) {
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
             'vue-pagination-2'          : `${cdnHost}vue-pagination-2@3.0.91/dist/vue-pagination-2.min`,
-            
+            'vue-2-bootstrap-3'         : `${cdnHost}uiv@1.4.0/dist/uiv.min`,
+            'hopscotch'                 : `${cdnHost}hopscotch@0.3.1/dist/js/hopscotch`
         },
         'shim': {
             'bootstrap-datepicker'          : { 'deps': ['jquery'] },
@@ -158,7 +159,8 @@ export default function bootApp(window, require, defineX) {
 
             'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             'vue-pagination-2'              : { 'deps': ['angular-vue'] },
-            
+            'vue-2-bootstrap-3'             : { 'deps': ['angular-vue'] },
+            'hopscotch'                     : { 'deps': ['angular-vue', `css!${cdnHost}hopscotch@0.3.1/dist/css/hopscotch.min.css`] },
         },
         urlArgs: function(id, url){
             
