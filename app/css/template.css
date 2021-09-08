@@ -1980,6 +1980,9 @@ legend+ .help-info {
 .search-global-search-jr.jr_pos_top:after{
     margin-left: 30px;
 }
+.country-sorting-records-jr.jr_pos_top:after {
+    margin-left: 30px;
+}
 .label-party {font-size: 16px;background-color: #5F4586;color:white; min-width:30px}
 .label-nonparty {font-size: 16px;background-color: #333;color:white; min-width:30px}
 .label-inbetween {font-size: 16px;background-color: #EC971F;color:white; min-width:30px}
