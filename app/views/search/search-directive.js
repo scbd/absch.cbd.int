@@ -132,7 +132,8 @@ import 'angular-vue'
                                     selector    : "#globalSearch",
                                     title       : joyRideText.globalSearch.title,
                                     content     : joyRideText.globalSearch.content,
-                                    placement   : 'top'
+                                    placement   : 'top',
+                                    customClass : "search-global-search-jr"
                                 },
                                 {
                                     appendToBody: true,
@@ -221,7 +222,8 @@ import 'angular-vue'
                                     selector    : "#viewType",
                                     title       : joyRideText.viewType.title,
                                     content     : joyRideText.viewType.content,
-                                    placement   : 'top'
+                                    placement   : 'top',
+                                    customClass : "search-view-type-records-jr"
                                 },
                                 {
                                     appendToBody: true,
@@ -229,7 +231,8 @@ import 'angular-vue'
                                     selector    : "#sortBy",
                                     title       : joyRideText.sortBy.title,
                                     content     : joyRideText.sortBy.content,
-                                    placement   : 'bottom'
+                                    placement   : 'bottom',
+                                    customClass : "search-sort-by-records-jr"
                                 },
                                 {
                                     appendToBody: true,
@@ -237,7 +240,8 @@ import 'angular-vue'
                                     selector    : "#sendRecords",
                                     title       : joyRideText.sendRecords.title,
                                     content     : joyRideText.sendRecords.content,
-                                    placement   : 'top'
+                                    placement   : 'top',
+                                    customClass : "search-send-records-jr"
                                 },
                                 {
                                     appendToBody: true,
@@ -245,7 +249,8 @@ import 'angular-vue'
                                     selector    : "#exportRecords",
                                     title       : joyRideText.exportRecords.title,
                                     content     : joyRideText.exportRecords.content,
-                                    placement   : 'left'
+                                    placement   : 'left',
+                                    customClass : "search-export-records-jr"
                                 },
                                 {
                                     appendToBody: true,
