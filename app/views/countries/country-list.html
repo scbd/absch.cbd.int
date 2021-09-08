@@ -49,7 +49,7 @@
 	style="border-top:1px solid #555;border-bottom:2px solid #ddd;position:relative;" 
 	block-region activate="loadingMap"  ng-style="{'height': isBCH ? '450px' : '350px'}">	
 	</div>
-	<div block-region activate="loading" block-text=" Loading country details">
+	<div class="countries-country-list" block-region activate="loading" block-text=" Loading country details">
 		<div style="height:0px;width:0px;opacity: 0;" ng-if="readyForExport">
 			<table id="forExport" style="height:0px;width:0px">
 					<tr>
@@ -76,8 +76,7 @@
 		<div class="row" style="margin-top:10px">
 			<div class="col-xs-12" >
 				<span class="btn-group pull-right">
-					<a rel="noopener" ng-href="#" class="help-tour link2"
-						style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+					<a rel="noopener" ng-href="#" class="help-tour"
 						ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
 								aria-hidden="true"></i> TAKE COUNTRY PROFILES TOUR</span></a>
 								<span id="closeTab"></span>
