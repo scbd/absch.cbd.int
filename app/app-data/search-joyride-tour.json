@@ -1,7 +1,7 @@
 ﻿{
     "welcome" :  {
       "title": "Welcome to the Search Page",
-      "content": "<p>The search page allows you to query all information published in the Clearing-House. Records can be found by typing a word in the free text search field and/or by using  a combination of filters to narrow your search.</p>"
+      "content": "<p>The Search page allows you to query all information published in the Clearing-House. Records can be found by typing a word in the free text search field and/or by using  a combination of filters to narrow your search.</p>"
     },
     "globalSearch" :  {
       "title": "Global Filters",
@@ -41,7 +41,7 @@
     },
     "subFilters" :  {
       "title": "Sub-filters",
-      "content": "<p>Sub-filters appear when you select a one or more record types within the Record types global filter.<br>They appear on the left-hand side and are associated with each selected record type.<br>You can use sub-filters in combination with global filters to further narrow your search.</p>"
+      "content": "<p>Sub-filters appear when you select one or more record types within the <b>Record types</b> global filter.<br>They appear on the left-hand side and are associated with each selected record type.<br>You can use sub-filters in combination with global filters to further narrow your search.</p>"
     },
     "recordView" :  {
       "title": "Search Results: Viewing Records",
@@ -68,7 +68,7 @@
     },
     "needHelp" :  {
       "title": "Need Help?",
-      "content": "Click here to access contextual help where you can find more information related to the Country Profiles page."
+      "content": "Click here to access contextual help where you can find more information related to the Search page."
     },
     "needMoreHelp" :  {
       "title": "Need more help?",

@@ -1963,7 +1963,26 @@ legend+ .help-info {
 .work-flow-save-draft-jr.jr_pos_bottom:after {
     margin-right: 90px;
 }
-
+.search-export-records-jr.jr_pos_left {
+    margin-top: 12px !important;
+    margin-left: 5px !important;
+}
+.search-send-records-jr.jr_pos_top{
+    margin-left: 15px !important;
+}
+.search-sort-by-records-jr.jr_pos_bottom{
+    margin-left: 30px !important;
+    margin-top: 25px !important;
+}
+.search-view-type-records-jr.jr_pos_top{
+    margin-left: 60px !important;
+}
+.search-global-search-jr.jr_pos_top:after{
+    margin-left: 30px;
+}
+.country-sorting-records-jr.jr_pos_top:after {
+    margin-left: 30px;
+}
 .label-party {font-size: 16px;background-color: #5F4586;color:white; min-width:30px}
 .label-nonparty {font-size: 16px;background-color: #333;color:white; min-width:30px}
 .label-inbetween {font-size: 16px;background-color: #EC971F;color:white; min-width:30px}
@@ -2945,6 +2964,14 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     text-shadow: 0px 1px 0px rgba(255,255,255,.5);
     cursor:pointer;
     color: #fff;
+}
+.countries-country-list .help-tour{
+    font-size:13px;
+    margin:5px 10px 0 5px;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
+    cursor:pointer;
 }
 .search-icons bch-icons{
     position: relative;

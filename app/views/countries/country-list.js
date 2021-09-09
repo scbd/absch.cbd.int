@@ -273,6 +273,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                                     title       : joyRideText.sortingRecords.title,
                                     content     : joyRideText.sortingRecords.content,
                                     placement   : 'top',
+                                    customClass: "country-sorting-records-jr",
                                     beforeStep  : openSortingRecords
                                 },
                                 {
