@@ -1167,7 +1167,10 @@ import 'angular-vue'
                         // search has multiple words put text inside ()                            
                         return  '(' + 
                                     _(boostFields).map(function(boost, boostField){
-                                        return '(' + boostField + ':(' + val + ')^'+ boost + ')';
+                                        if(~val.indexOf('-'))//not sure if its good idea
+                                            return `(${boostField}:("${val}")^${boost})`;
+
+                                        return `(${boostField}:(${val})^${boost})`;
                                     }).value().join(' OR ') +
                                 ')'
                     }
