@@ -100,8 +100,9 @@
 								<tr ng-repeat="decision in country.bch">
 
 									<td class="linkID" style="text-align:right;padding-right:3px;width:80px">
+										<!-- ToDo: get uniqueIdentifier from API and replace decision.decisionID with decision.uniqueIdentifier -->
 										<a rel="noopener" target="_self"
-											href="/database/{{decision.decisionID|encodeURIComponent}}">{{decision.decisionID}}</a>
+											href="/database/DEC/{{decision.decisionID|encodeURIComponent}}" ng-bind="decision.decisionID"></a>
 									</td>
 									<td style="width:15px; min-width:15px;font-size:14px;text-align:center">
 										<div ng-show="decision.decision=='approvedWithCondition'"
