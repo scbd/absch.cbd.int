@@ -372,7 +372,7 @@
 							<section ng-if="isUnintentionalTransboundaryMovement">
 								<div class="well no-shadow bg-white">
 									<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
-									<div class="row">
+									<div class="row" ng-hide="true">
 										<div class="col-xs-12">
 											<div class="km-control-group other-decision" name="transboundaryMovementType" required caption="Type of transboundary movement">
 												<div km-term-radio required ng-model="document.transboundaryMovementType" locales="document.header.languages" ng-disabled="true"
