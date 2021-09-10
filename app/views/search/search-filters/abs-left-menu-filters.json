@@ -357,7 +357,7 @@
 		},
 		{
 			"type" : "customListFn",
-			"fn"   : "cbdShortRecord",
+			"fn"   : "cbdSubjectsCustomFn",
 			"title": "CBD Subject Areas",
 			"field": "cbdSubjects_ss",
 			"relatedField":"cbdSubjects_REL_ss"
@@ -429,7 +429,7 @@
 		},
 		{
 			"type" : "customListFn",
-			"fn"   : "cbdShortRecord",
+			"fn"   : "cbdSubjectsCustomFn",
 			"title": "CBD Subject Areas",
 			"field": "cbdSubjects_ss",
 			"relatedField":"cbdSubjects_REL_ss"

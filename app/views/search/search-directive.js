@@ -701,7 +701,7 @@ import 'angular-vue'
                     function loadBCHKeywordFilters() {
                         var promises = []
                         promises.push(getFocalPointTypes().then(function(keywords){loopKeywords(keywords);}));
-                        promises.push(cbdShortRecord().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'decisionTypes'             )}));
                         promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'legislationAgreementTypes' )}));
                         promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
@@ -729,7 +729,7 @@ import 'angular-vue'
 
                     function loadABSKeywordFilters() {
                         var promises = []
-                        promises.push(cbdShortRecord().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
                         promises.push(thesaurusService.getDomainTerms('thematicAreas'       ).then(function(keywords){loopKeywords(keywords, 'thematicAreas'        )}));
                         promises.push(thesaurusService.getDomainTerms('keyAreas'            ).then(function(keywords){loopKeywords(keywords, 'keyAreas'             )}));
@@ -757,7 +757,7 @@ import 'angular-vue'
                         });
                     }
 
-                    async function cbdShortRecord() { return thesaurusService.getDomainTerms('cbdSubjects')
+                    async function cbdSubjectsCustomFn() { return thesaurusService.getDomainTerms('cbdSubjects')
                         .then(function(o){
                         var subjects = ['CBD-SUBJECT-BIOMES', 'CBD-SUBJECT-CROSS-CUTTING'];
                         var items = [];
@@ -1287,7 +1287,7 @@ import 'angular-vue'
                     this.groupingCombination      = groupingCombination     ;
                     this.combinationField         = combinationField        ;
                     this.sanitizeFacets           = sanitizeFacets          ;
-                    this.cbdShortRecord           = cbdShortRecord          ;
+                    this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
 
                     this.getFocalPointTypes       = getFocalPointTypes
             }]//controller
