@@ -75,13 +75,13 @@
 		
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
 			<div class="row" ng-show="document.startDate && document.endDate">
-				<div class="col-md-6">
+				<div class="col-md-6" ng-if="document.startDate">
 					<label>Start date</label>
 					<div compare-val>
 						<div class="km-value" ng-bind="document.startDate | formatDate"></div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" ng-if="document.endDate">
 					<label>End date</label>
 					<div compare-val>
 						<div class="km-value" ng-bind="document.endDate | formatDate"></div>
