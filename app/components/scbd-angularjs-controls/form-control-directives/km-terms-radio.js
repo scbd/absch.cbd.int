@@ -24,7 +24,8 @@ import 'components/scbd-angularjs-services/main'; ;
                 description: "=?",
                 layout: "@",
                 required: "@",
-                locales: '=?'
+                locales: '=?',
+                ngDisabledFn  : '&ngDisabled'
             },
             link: function($scope, $element, $attr, ngModelController) {
 
