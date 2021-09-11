@@ -2257,6 +2257,11 @@ a.disabled{
 .edit-biosafety-decision-directive .indent-subject-decision .km-control-group div[km-term-radio]{
    margin-left: 20px;
 }
+.edit-biosafety-decision-directive .decision-result div[km-term-radio] ul>li:nth-child(2) .km-term-radio-description{
+    font-size: 0.9em;
+    color: #999;
+    padding: 8px 15px 0px;
+}
 .light-label{
     font-size: 14px;
     font-weight: 400!important;

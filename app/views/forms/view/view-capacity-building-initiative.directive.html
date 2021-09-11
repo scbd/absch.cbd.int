@@ -75,16 +75,16 @@
 		
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
 			<div class="row" ng-show="document.startDate && document.endDate">
-				<div class="col-md-6">
+				<div class="col-md-6" ng-if="document.startDate">
 					<label>Start date</label>
 					<div compare-val>
-						<div class="km-value" ng-bind="document.startDate | date : 'longDate'"></div>
+						<div class="km-value" ng-bind="document.startDate | formatDate"></div>
 					</div>
 				</div>
-				<div class="col-md-6">
+				<div class="col-md-6" ng-if="document.endDate">
 					<label>End date</label>
 					<div compare-val>
-						<div class="km-value" ng-bind="document.endDate | date : 'longDate'"></div>
+						<div class="km-value" ng-bind="document.endDate | formatDate"></div>
 					</div>
 				</div>
 			</div>
@@ -107,7 +107,7 @@
 				<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<div ng-show="document.isProjectProgramme!=undefind">
+		<div ng-show="document.isProjectProgramme!=undefined">
 			<label>Is this part of a larger project or programme?</label>
 			<div compare-val>
 				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
@@ -156,30 +156,30 @@
 			</div>
 			</div>
 		</div>
+		<div ng-if="document.description || document.categories || document.targetGroups">
+			<legend>Detailed information</legend>
 
-		<legend>Detailed information</legend>
-
-		<div ng-show="document.description">
-			<label>Short description of the initiative, including its goals and objectives</label>
-			<div compare-val>
-			<km-value-ml value="document.description" locales="locale" html></km-value-ml>
+			<div ng-show="document.description">
+				<label>Short description of the initiative, including its goals and objectives</label>
+				<div compare-val>
+				<km-value-ml value="document.description" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.categories">
+				<label>Category(ies) of capacity development activities</label>
+				<div class="km-value" compare-val="categories">
+					<ul class="list">
+						<li ng-repeat="val in document.categories" ng-bind="val | term:locale"></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.targetGroups">
+				<label>Main target group(s)/beneficiary(ies)</label>
+				<div class="km-value" compare-val="Main target group(s)">
+					<view-terms-hierarchy ng-model="document.targetGroups" locale="locale" term-domain="cbiAudience" on-terms-loaded="onTargetGroupsTerms(terms)"></view-terms-hierarchy>
+				</div>
 			</div>
 		</div>
-		<div ng-show="document.categories">
-			<label>Category(ies) of capacity development activities</label>
-			<div class="km-value" compare-val="categories">
-				<ul class="list">
-					<li ng-repeat="val in document.categories" ng-bind="val | term:locale"></li>
-				</ul>
-			</div>
-		</div>
-		<div ng-show="document.targetGroups">
-			<label>Main target group(s)/beneficiary(ies)</label>
-			<div class="km-value" compare-val="Main target group(s)">
-				<view-terms-hierarchy ng-model="document.targetGroups" locale="locale" term-domain="cbiAudience" on-terms-loaded="onTargetGroupsTerms(terms)"></view-terms-hierarchy>
-			</div>
-		</div>
-
 		<div ng-show="document.cbdSubjects || document.aichiTargets">
 
 			<legend>Information on thematic coverage of the initiative</legend>

@@ -213,7 +213,7 @@ import './xuser-notification-config-service';
 
                         function processNotifications(data) {
                             var localNotifications;
-                            if ($scope.notifications) {
+                            if ($scope.notifications && $scope.notifications.length>0) {
                                 localNotifications = _.clone($scope.notifications);
                                 _.forEach(data, function (message) {
                                     var exists = _.forEach(localNotifications, { 'id': message.id });
