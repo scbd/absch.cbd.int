@@ -356,8 +356,8 @@
 			"relatedField":"bchSubjects_REL_ss"
 		},
 		{
-			"type": "thesaurus",
-			"term": "cbdSubjects",
+			"type" : "customListFn",
+			"fn"   : "cbdSubjectsCustomFn",
 			"title": "CBD Subject Areas",
 			"field": "cbdSubjects_ss",
 			"relatedField":"cbdSubjects_REL_ss"
@@ -428,8 +428,8 @@
 			"relatedField":"absKeyAreas_REL_ss"
 		},
 		{
-			"type": "thesaurus",
-			"term": "cbdSubjects",
+			"type" : "customListFn",
+			"fn"   : "cbdSubjectsCustomFn",
 			"title": "CBD Subject Areas",
 			"field": "cbdSubjects_ss",
 			"relatedField":"cbdSubjects_REL_ss"
