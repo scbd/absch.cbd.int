@@ -83,25 +83,24 @@
 						<th class="tableHeaderTop tableHeaderBottom">BCH Decisions</th>
 						<th class="tableHeaderTop tableHeaderBottom left-border"
 							ng-if="showDatabase=='showBiostradestatus'">
-							<a rel="noopener" target="showBiostradestatus" href="/database/info_biotradestatus.shtml">Biostradestatus</a>
-							<a rel="noopener" target="showBiostradestatus" target="biotradestatus"
-								href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">
+							<a rel="noopener" translation-url target="_blank" href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">Biostradestatus
 								<i class="fa fa-external-link"></i>
 							</a>
 						</th>
 					</tr>
 
 					<tr ng-repeat="country in lmo.countries | filter:isCountryVisible | orderBy:getCountryName">
-						<td class="tableRow back80 countryName"><a
-								href="/about/countryprofile.shtml?country={{country.country}}"
+						<td class="tableRow back80 countryName">
+							<a rel="noopener" translation-url href="/countries/{{country.country|encodeURIComponent}}"
 								target="_self">{{getCountryName(country)}}</a></td>
 						<td class="tableRow" style="text-align:left">
 							<table cellpadding="0" cellspacing="0">
 								<tr ng-repeat="decision in country.bch">
 
 									<td class="linkID" style="text-align:right;padding-right:3px;width:80px">
-										<a rel="noopener" target="_self"
-											href="/database/record.shtml?documentid={{decision.decisionID}}">{{decision.decisionID}}</a>
+										<!-- ToDo: get uniqueIdentifier from API and replace decision.decisionID with decision.uniqueIdentifier -->
+										<a rel="noopener" translation-url target="_self"
+											href="/database/DEC/{{decision.decisionID|encodeURIComponent}}" ng-bind="decision.decisionID"></a>
 									</td>
 									<td style="width:15px; min-width:15px;font-size:14px;text-align:center">
 										<div ng-show="decision.decision=='approvedWithCondition'"
