@@ -1,22 +1,17 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange" ng-show="display('header')">
-		<h4>
-			<span ng-bind="::document.header.schema|schemaName"></span>
-			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
-		</h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
     </div>
 	<div class="record-body panel-body">
 
 			
-		<document-date></document-date> <br>
-
-		 <div ng-show="document.title">
-			<label>Title</label>
+		<document-date></document-date><br><div ng-show="document.title">
+			<label>称谓</label>
 			<div class="km-value km-pre">{{document.title | lstring:locale}}</div>
 		</div>
 
 		<div ng-show="document.resourceTypes">
-			<label>Type of resource</label>
+			<label>资源类型</label>
             <div class="km-value">
 			<ul class="list">
 				<li ng-repeat="resourceType in document.resourceTypes">{{resourceType | term:locale}}</li>
@@ -25,17 +20,17 @@
 		</div>
 
 		<div ng-show="document.fileFormat">
-			<label>Format/File type</label>
-			<div class="km-value">{{document.fileFormat | term:locale}} </div>
+			<label>格式/文件类型</label>
+			<div class="km-value">{{document.fileFormat | term:locale}}</div>
 		</div>
 
 		<div ng-show="document.formatDetails">
-			<label>Format details</label>
+			<label>格式详细信息</label>
 			<div class="km-value km-pre">{{document.formatDetails | lstring:locale}}</div>
 		</div>
 
 		<div ng-show="document.purpose">
-			<label>Please identify the main purpose of the resource</label>
+			<label>请确定此资源的主要目的</label>
 			<div class="km-value">
             <ul class="list">
 				<li ng-repeat="term in document.purpose">{{term | term:locale}}</li>
@@ -44,7 +39,7 @@
 		</div>
 
 		<div ng-show="document.targetGroups">
-			<label>Main target group(s)/beneficiaries</label>
+			<label>主要目标群体/受益人</label>
             <div class="km-value">
                 <ul class="list">
                     <li ng-repeat="term in document.targetGroups">{{term | term:locale}}</li>
@@ -53,65 +48,58 @@
 		</div>
 
 		<div ng-show="document.expertiseLevel">
-			<label>Level of the content or   level of knowledge/expertise of the audience for which the resource is intended</label>
-			<div class="km-value">{{document.expertiseLevel | term:locale}} </div>
+			<label>资源拟定受众的内容水平或知识/专业能力水平</label>
+			<div class="km-value">{{document.expertiseLevel | term:locale}}</div>
 		</div>
 
 		<div ng-show="document.authors">
-			<label>Author(s)</label>
+			<label>作者</label>
 			<div class="km-value km-pre">{{document.authors | lstring:locale}}</div>
 		</div>
 
 		<div ng-show="document.organizations">
-			<label>Organization(s) involved in the publication of this resource</label>
+			<label>参与本资源发布的组织</label>
 			<div class="km-value" ng-repeat="contact in document.organizations">
 				<div view-record-reference ng-model="contact" locale="locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.publicationYear">
-			<label>Publication year</label>
+			<label>公布年份</label>
 			<div class="km-value">{{document.publicationYear}}</div>
 		</div>
 
 		<div ng-show="document.rights">
-			<label>Rights</label>
+			<label>权利</label>
 			<div class="km-value km-pre">{{document.rights | lstring:locale}}</div>
 		</div>
 
 		<div ng-show="document.source">
-			<label>Source</label>
+			<label>来源</label>
 			<div class="km-value km-pre">{{document.source | lstring:locale}}</div>
 		</div>
 
-		<legend ng-show="document.resourceLinks || document.covers">Access to the resource</legend>
+		<legend ng-show="document.resourceLinks || document.covers">获取资源</legend>
 
 		<div ng-show="document.resourceLinks">
-			<label>Link to the resource(s)</label>
-			<div class="km-value" ng-repeat="item in document.resourceLinks">
-				<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-				<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-			</div>
+			<label>资源链接</label>
+			<div class="km-value" ng-repeat="item in document.resourceLinks"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></div>
 		</div>
 
 		<div ng-show="document.covers">
-			<label >Cover image(s)</label>
-			<div class="km-value">
-				<a rel="noopener" translation-url  ng-repeat="link in document.covers" ng-href="{{link.url|encodeURI}}" target="{{target}}">
-					<img class="img-polaroid" ng-src="{{link.url}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" />
-				</a>
-			</div>
+			<label >封面图片</label>
+			<div class="km-value"><a rel="noopener" translation-url  ng-repeat="link in document.covers" ng-href="{{link.url|encodeURI}}" target="{{target}}"> <img class="img-polaroid" ng-src="{{link.url}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" /> </a></div>
 		</div>
 
-		<legend ng-show="document.summary || document.regions">Information on the content of resource</legend>
+		<legend ng-show="document.summary || document.regions">有关资源内容的信息</legend>
 
 		<div ng-show="document.summary">
-			<label>Summary</label>
+			<label>摘要</label>
 			<div class="km-value km-pre">{{document.summary | lstring:locale}}</div>
 		</div>
 
 		<div ng-show="document.regions">
-			<label>Country(ies), Regional or Economic group(s) related to the resource</label>
+			<label>与资源相关的国家、区域或经济组织</label>
 			<div class="km-value">
             <ul class="list">
 				<li ng-repeat="term in document.regions | orderBy:name">{{term | term:locale}}</li>
@@ -122,10 +110,10 @@
 
 		<div ng-show="document.cbdSubjects || document.aichiTargets">
 
-			<legend>Subject areas and the Aichi Biodiversity Targets covered by the resource</legend>
+			<legend>主题领域和资源所涵盖的爱知生物多样性目标</legend>
 
 			<div ng-show="document.cbdSubjects">
-				<label>Subject/Topic/Issue</label>
+				<label>主题/话题/问题</label>
 					<div class="km-value">
 						<ul class="list">
 							<li ng-repeat="term in document.cbdSubjects">{{term | term:locale}}</li>
@@ -135,7 +123,7 @@
 
 			<div ng-show="document.aichiTargets">
 				<div ng-show="document.aichiTargets">
-					<label>Related Aichi Biodiversity Target(s)</label>
+					<label>相关爱知生物多样性目标</label>
 					<div class="km-value">
                      <ul class="list">
 						<li ng-repeat="term in document.aichiTargets">{{term | term:locale}}</li>
@@ -146,9 +134,9 @@
 		</div>
 
 		<div ng-show="document.absKeyAreas">
-			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
+			<legend>获取和惠益分享信息交换所（ABS-CH）</legend>
 
-			<label>Key areas and strategic measures for capacity-building and development</label>
+			<label>能力建设和发展的关键领域和战略措施</label>
 			<div class="km-value">
               <ul class="list">
 				<li ng-repeat="term in document.absKeyAreas">{{term | term:locale}}</li>
@@ -158,10 +146,10 @@
 
 		<div ng-show="document.bchSubjects">
 
-			<legend>Cartagena Protocol on Biosafety</legend>
+			<legend>卡塔赫纳生物安全议定书</legend>
 
 			<div ng-show="document.bchSubjects">
-				<label>Thematic areas(s)</label>
+				<label>专题领域</label>
 				<div class="km-value">
                 <ul class="list">
 					<li ng-repeat="term in document.bchSubjects">{{term | term:locale}}</li>
@@ -171,18 +159,15 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>更多信息</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div class="km-value km-pre" ng-bind-html="document.relevantInformation | lstring:locale | markdown"></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-				</div>
+				<label>其他相关网站地址和/或附加文件</label>
+				<div class="km-value" ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></div>
 			</div>
 		</div>
 		<div>

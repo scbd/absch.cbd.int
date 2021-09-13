@@ -1,551 +1,459 @@
-﻿<style>
-	.km-control-group .control-label{
-		display: block;
-}
-</style>
-<div class="md-whiteframe-z2" ng-controller="editCapacityBuildingInitiative">
+﻿<style> .km-control-group .control-label{ display: block; } .km-control-group .control-label[for="startDate"]{display: inline-block;} .km-control-group .control-label[for="endDate"]{display: inline-block;} </style>
+<div class="md-whiteframe-z2" >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+	<div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-                <span block-region activate="isLoading()" ng-if="isLoading()"></span>
-        <div class="registerpage-content">
+			<div class="alert alert-success alert-dismissable" ng-show="msg">
+				<button aria-hidden="true" class="close" data-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong><span ng-bind="msg"></span></strong></div>
 
-            <div class="alert alert-success alert-dismissable" ng-show="msg">
-                <button aria-hidden="true" class="close" data-dismiss="alert" ng-click="msg=''" type="button">&times;</button>
-                <strong><span ng-bind="msg"></span></strong>
-            </div>
+			<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()"
+					languages="document.header.languages" tab="tab">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-                languages="document.header.languages" tab="tab">
+				<edit-form>
+					<form name="editForm" style="margin-top:10px">
 
-                    <edit-form>
-							<form name="editForm" style="margin-top:10px">
 
-									
-									<div ng-show="tab=='edit'" km-tab="edit">
+						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
 								<div class="well no-shadow bg-white">
-											
-										<legend>General information</legend>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
-													<div class="indent">
-														<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-				
-											<div class="col-md-12">
-												<div class="km-control-group" required name="title" caption="">
-													<label name="title" class="control-label" required for="title">
-														<span ng-if="isABS">1. Title</span>
-														<span ng-if="isBCH">1. Title of the initiative</span>
-													</label>
-													<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-show="isBCH">
-											<div class="col-md-12">
-											  <div class="km-control-group" required name="projectDocument" caption="2. Website address(es)">
-												<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
-												<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
-											  </div>
-											</div>
-										</div>
-				
-										<div class="row" ng-show="isBCH">
-											<div class="col-md-12">
-											  <div class="km-control-group" required name="contacts" caption="3. Contact person">
-													<div document-selector  ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
-															question="contacts"
-															schema="((schema_s:contact AND type_s:person))"
-															filter="true" skip-government="true">
-														</div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-if="isABS">
-											<div class="col-md-12">
-												<div class="km-control-group" name="projectNumber" caption="2. Project number or identifier">
-													<div class="help-info">Please provide any project number, identifier or reference number, if applicable.</div>
-													<div km-textbox-ml name="projectNumber" ng-model="document.projectNumber" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="geographicScope" caption="">
-													<label name="geographicScope" class="control-label" required for="geographicScope">
-														<span ng-if="isABS">3. Geographic Scope</span>
-														<span ng-if="isBCH">4. Geographic Scope</span>
-													</label>
-													<div km-select name="geographicScope" required ng-model="document.geographicScope.scope"
-													 placeholder="Please select one option" items="options.geographicScope()" ng-change="clearGeographicSelection()"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-show="document.geographicScope.scope && (isGlobalOrRegional() || isNational())">
-											
-												<div class="col-md-12">
-												<div class="km-control-group well well-sm" name="regionsOrCountries" required style="padding:10px;">
-													<div class="row">
-														<div class="col-md-5" ng-show="!isNational()">
 
-															<div class="km-control-group"  name="regions" 
-															caption="Geographical or political/economic group(s)">
-																<div km-select multiple required name="geographicalRegions" 
-																ng-model="document.geographicScope.regions" placeholder="Please select one option" 
-																items="options.countryRegions()"></div>
-															</div>
-														</div>
-														<div class="col-md-2" ng-hide="!isGlobalOrRegional()">
-															 And / Or
-														</div>
-														<div class="col-md-5">
-															<div class="km-control-group" required name="countries" caption="Country(ies)">
-																<div km-select multiple required name="geographicalCountries" ng-model="document.geographicScope.countries" placeholder="Please select one option" items="options.countries()"></div>
-															</div>
-														</div>
-													</div>
-												</div></div>
-										</div>
-				
-										<div class="row" ng-show="isSubnational()">
-											<div class="col-md-12">
-												<div class="km-control-group" required="isSubnational()" name="jurisdiction" caption="Jusrisdiction">
-													<div km-textbox-ml required="isSubnational()" name="jurisdiction" ng-model="document.geographicScope.jurisdiction" placeholder="" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-show="isCommunity()">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="countries" caption="Country(ies)">
-													<div km-select multiple required name="geographicalCountries" ng-model="document.geographicScope.countries" placeholder="Please select one option" items="options.countries()"></div>
-												</div>
-											</div>
-											<div class="col-md-12">
-												<div class="km-control-group" required="isCommunity()" name="community" caption="Community">
-													<div km-textbox-ml required="isCommunity()" name="community" ng-model="document.geographicScope.community" placeholder="" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-				
-										<div class="row" ng-if="isABS">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="capacityBuildingType" caption="4. Type of capacity-building initiative">
-													<label for="capacityBuildingTypeYes" style="width:0px;height:0px;display:inline">
-														<span style="display:none">4. Atleast one question should be answered yes</span>
-													</label>
-													<div style="padding-left:20px" class="well">
-														<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="a. Is this a dedicated ABS capacity-building project/programme? ">
-															<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.capacityBuildingType.isProjectProgramme"></div>
-														</div>
-														<div class="km-control-group"  bold="true" required name="isBroaderProjectPart" caption="b. Is this an ABS activity or component which is part of a broader capacity-building project or programme?">
-															<div class="km-yes-no" required name="isBroaderProjectPart" ng-model="document.capacityBuildingType.isBroaderProjectPart"></div>
-														</div>
-														<div class="km-control-group" name="broaderProjects" caption="Please identify the broader project" ng-show="document.capacityBuildingType.isBroaderProjectPart">
-																
-															<div document-selector ng-model="document.capacityBuildingType.broaderProjects"
-																							question="capacityBuildingInitiative"
-																							schema="capacityBuildingInitiative" filter="true" skip-government="true"></div>
-														</div>
-														<div class="km-control-group"  bold="true" required name="isStandaloneProject" caption="c. Is this a stand-alone ABS activity that is not part of a broader capacity-building project or programme? ">
-															<div class="km-yes-no" required name="isStandaloneProject" ng-model="document.capacityBuildingType.isStandaloneProject"></div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="status" caption="">
-													<label name="status" class="control-label" required for="status">
-														<span ng-if="isABS">5. Status of the document</span>
-														<span ng-if="isBCH">5. Status</span>
-													</label>
-													<div km-select name="status" required ng-model="document.status" id="documentStatus"
-													placeholder="Please select one option" items="options.status()"  show-description="true"></div>
-												</div>
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="timeframe" required caption="6. Timeframe">
-													<div class=" well well-sm">
-														<div class="row">
-															<div class="col-md-3">
-																<div class="km-control-group" name="startDate" caption="">
-																	<label name="startDate" class="control-label" for="startDate">
-																		<span ng-if="isABS">Start date</span>
-																		<span ng-if="isBCH">Starting date</span>
-																	</label>
-																	<div km-date name="startDate" ng-model="document.startDate" ng-change="clearDuration()"></div>
-																</div>
-															</div>
-															<div class="col-md-3">
-																<div class="km-control-group" name="endDate" caption="">
-																	<label name="endDate" class="control-label" for="endDate">
-																		<span ng-if="isABS">End date</span>
-																		<span ng-if="isBCH">Ending date</span>
-																	</label>
-																	<div km-date name="endDate" ng-model="document.endDate" ng-change="clearDuration()"></div>
-																</div>
-															</div>
-															<div class="col-md-1 text-center" ng-show="!document.status || isProposedOrApproved()">
-																<div class="km-control-group bold" name="enddate" style="margin-top:30px;" > OR </div>
-															</div>
-															<div class="col-md-5">
-																<div class="km-control-group" name="duration" caption="Duration" ng-show="!document.status || isProposedOrApproved()">
-																	<label for="durationPeriod" style="width:0px;height:0px;display:inline">
-																		<span style="display:none">6. Please enter duration in number for eg. 24</span>
-																	</label>
-																	<label for="durationText" style="width:0px;height:0px;display:inline">
-																		<span style="display:none">6. Please identify whether the duration is expressed in years, months or days</span>
-																	</label>
-																	<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
-																	minlength="1" placeholder="eg. 24" ng-change="clearDates()" class="form-control"
-																	style="display:inline-block;width:100px"/>
-																	<select name="durationText" ng-model="document.durationText"  class="form-control"
-																	style="display:inline-block;width:100px" placeholder="eg. Months">
-																		<option value=""></option>	
-																		<option value="days">Days</option>
-																		<option value="months">Months</option>
-																		<option value="years">Years</option>
-																	</select>
-																</div>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-show="isBCH">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="activityScope" caption="7. Scope of activity">
-													<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()" 
-														description="true" binding-type="term" show-other="true" required locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="organizations" caption="">
-													<label name="organizations" class="control-label" required for="organizations">
-														<span ng-if="isABS">7. Agency(ies) or organisation(s) implementing and/or executing the initiative</span>
-														<span ng-if="isBCH">8. Agency(ies) or organisation(s) implementing and/or executing the initiative</span>
-													</label>
-												<div class="help-info">In some instances, an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
-												<div class="checkbox"><label><input type="checkbox" ng-model="document.isImplementedByAgencies">Implementing agency(ies) or organization(s)</label></div>
-				
-												<div class="row" >
-													<div class="col-md-12">
-														<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
-															<div class="help-info">Implementing agency refers to the organisation or legal entity responsible for developing the initiative and overseeing its
-																implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
-																assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
-																responsible for the completion of the initiative and is accountable to the donor.</div>
-															
-															<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies" schema="organization"
-																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-															</div>
-														</div>
-													</div>
-												</div>
-				
-												<div class="checkbox"><label><input type="checkbox" ng-model="document.isExecutededByAgencies">Executing agency(ies) or organization(s)</label></div>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
-															<div class="help-info">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to- day planning,
-															coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
-															(staff, funds, equipment, etc.), and carrying out other project management functions.</div>
-														
-															<div document-selector ng-model="document.executingAgencies" question="executingAgencies" schema="organization"
-																allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-															</div>
-														</div>
-													</div>
-												</div>
-				
-												<div class="checkbox"><label><input type="checkbox" ng-model="document.isCollaboratededByPartners">Collaborating partner(s)</label></div>
-												<div class="row">
-													<div class="col-md-12">
-														<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
-															<div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
-																	actively supporting or collaborating in the implementation of the initiative.
-															</div>
-															<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners" schema="organization"
-																	allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-															</div>
-														</div>
-													</div>
-												</div>
-												</div>
-											</div>
-										</div>
-				
-				
-										<div class="row" ng-show="isABS">
-											<div class="col-md-12">
-												<div class="km-control-group" name="contacts" caption="8. Contact person(s)">
-													 <div document-selector ng-model="document.contacts" contact-type='person' allow-new="true" allow-new-schema="contact"
-														question="contacts"
-														schema="((schema_s:contact AND type_s:person))"
-														filter="true" skip-government="true">
-													</div>
-												</div>
-											</div>
-										</div>
-				
-				
-				
-										<div class="row" ng-if="isABS">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="projectDocument" caption="9. Project document or document describing the initiative">
-													<div class="help-info">Please always attach the relevant document(s) that will be stored in the database for users to download. When documents are available on the Internet, please also provide a link to them.</div>
-													<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-												</div>
-											</div>
-										</div>
-								</div>
-							</section>
-							<section>
-								  <div class="well no-shadow bg-white">
-										<legend>Detailed information</legend>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="description" caption="">
-													<label name="description" class="control-label" required for="description">
-														<span ng-if="isABS">10. Short description of the initiative, including its goals and objectives (max 150 words)</span>
-														<span ng-if="isBCH">9. Short description of the initiative, including its goals and objectives (max 150 words)</span>
-													</label>
-													<div km-textbox-ml required ng-model="document.description" rows="3" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-if="isBCH">
-											<div class="col-md-12">
-											  <div class="km-control-group"  name="categories" caption="10. Category(ies) of capacity-building activities">
-												<div km-term-check show-description="true" name="categories" ng-model="document.categories" terms="options.absCategories()" binding-type="term[]" locales="document.header.languages"></div>
-											  </div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="targetGroups" caption="">
-													<label name="targetGroups" class="control-label" required for="targetGroups">
-														<span ng-if="isABS">11. Target group(s)/beneficiary(ies)</span>
-														<span ng-if="isBCH">11. Main target group(s)/beneficiary(ies)"</span>
-													</label>
-													<div km-term-check name="targetGroups" required ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-if="isABS">
-											<div class="col-md-12">
-												<div class="km-control-group" required name="categories" caption="12. Category(ies) of capacity-building activities">
-													<div km-term-check show-description="true" name="categories" required ng-model="document.categories" terms="options.absCategories()" binding-type="term[]"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-show="isBCH">
-										  <div class="col-md-12">
-											<div class="km-control-group" required name="cpbThematicAreas" caption="12. General thematic area(s)">
-												<div class="help-info">Key areas and strategic measures for capacity-building and development</div>
-											  <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()" binding-type="term[]" locales="document.header.languages"></div>
-											</div>
-										  </div>
-										</div>
-								</div>
-							</section>
-							<section>
-								<div class="well no-shadow bg-white">
-										<legend>Information on funding</legend>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group"  ng-required="isABS" name="fundingSourceTypes" caption="13. Type(s) of funding source(s)">
-													<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" terms="options.fundingSources()" binding-type="term[]"></div>
-												</div>
-											</div>
-										</div>
-										<div class="row" ng-show="isSelfFunding()">
-											<div class="col-md-12">
-				
-												<div class="km-control-group" required="isSelfFunding()" name="selfFunding" caption="Please provide further information on funding">
-													<div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.selfFundingInfo" placeholder="" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-				
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="corefundingsources" caption="">
-													<label name="corefundingsources" class="control-label" for="corefundingsources">
-														<span ng-if="isABS">14. Core funding-source(s)</span>
-														<span ng-if="isBCH">14. Primary funding-source(s)</span>
-													</label>
-													<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources" schema="organization"
-														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-													</div>
-													
-												</div>
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="coFinancingSources" caption="">
-													<label name="coFinancingSources" class="control-label" for="coFinancingSources">
-														<span ng-if="isABS">15. Co-financing source(s)</span>
-														<span ng-if="isBCH">15.	Co-funding source(s)</span>
-													</label>
-													<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources" schema="organization"
-														allow-new="true" allow-new-schema="organization" filter="true" skip-government="true">
-													</div>
-													
-												</div>
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-3">
-												<div class="km-control-group" name="totalBudget" caption="16. Total budget (amount, in US dollars)">
-													 <div class="help-info">This may include in kind contributions expressed in monetary terms.</div>
-													<!-- <div km-textbox-ml name="totalBudget" ng-model="document.totalBudget" rows="1" locales="document.header.languages"></div> -->
-													<div class="input-group">
-													  <span class="input-group-addon">USD$</span>
-													  <input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
-													</div>
-												</div>
-											</div>
-										</div>
-				
-								</div>
-							</section>
-							<section>
-								<div class="well no-shadow bg-white">
-										<legend>Capacity-building outcomes</legend>
-										<div class="help-info">This information can be provided once that there are some results (outputs, outcomes or impacts) or best practices and lessons learned from the ongoing or completed initiative.</div>
-										<div class="well">
-											<div class="km-control-group" name="totalBudget" caption="17. Results">
-												<div class="row">
-													<div class="col-md-12">
-														<div class="km-control-group" name="resultsAchievements" caption="Main achievements">
-															<span class="help-info">Please provide a short summary of the main achievements of the initiative, including those related to advancing gender equality in achieving the objectives of the Convention and its Protocols, if applicable. (max 200 words)</span>
-															<div km-textbox-ml name="resultsAchievements" ng-model="document.resultsAchievements" rows="4" locales="document.header.languages"></div>
-														</div>
-													</div>
-												</div>
-				
-												<div class="row">
-													<div class="col-md-12">
-														<div class="km-control-group" name="resultsOutputs" caption="Main outputs">
-															<span class="help-info">Please provide a web link to, or attach a copy of, the relevant products (e.g. tools and materials) developed by the initiative and/or reports</span>
-															<div km-link name="resultsOutputs" ng-model="document.resultsOutputs" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
-														</div>
-													</div>
-												</div>								
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="bestPractices" caption="18. Best practices and lessons learned">
-													<span class="help-info">Please provide a short summary of the best practices and lessons learned (max 500 words)</span>
-													<div km-textbox-ml name="bestPractices" ng-model="document.bestPractices" rows="4" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-										</div>
-									</section>
-									<section ng-if="isABS">
-										<div class="well no-shadow bg-white">
-											<legend>Information on the thematic coverage of the initiative</legend>
-									
-											<div class="row">
-												<div class="col-md-12">
-													<div class="km-control-group" required name="aichiTargets"
-														caption="19. Related Aichi Biodiversity Target(s)">
-														<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets"
-															terms="options.aichiTargets()" binding-type="term[]"></div>
-													</div>
-												</div>
-											</div>
-									
-											<div class="row">
-												<div class="col-md-12">
-													<div class="km-control-group" name="absKeyAreas" required
-														caption="20. Key areas and strategic measures for capacity-building and development">
-														<div class="help-info">The key areas have been identified by the Strategic Framework for
-															capacity-building and development to support the effective implementation of the Nagoya Protocol
-															(decision NP-1/8).</div>
-														<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
-															binding-type="term[]"></div>
-													</div>
-												</div>
-											</div>
-									
-									
-											<a rel="noopener" translation-url name="#AdditionalInformation"></a>
-										</div>
-									</section>
-								<section>
-								  <div class="well no-shadow bg-white">
-									<legend><span ng-if="isBCH">19</span><span ng-if="isABS">21</span>. Additional information</legend>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="address" caption=" Any other relevant information" >
-													<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
-													<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
-												</div>
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-													<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
-												</div>
-											</div>
-										</div>
-				
-										<div class="row">
-											<div class="col-md-12">
-												<div class="km-control-group" name="notes">
-													<legend><span ng-if="isBCH">20</span><span ng-if="isABS">22</span>. Notes</legend>
-													<span class="help-info">
-														The field “Notes” is for personal reference and can be seen only when the record is being edited.
-													</span>
-													<div km-notes name="notes" ng-model="document.notes"></div>
+									<legend>Общая информация</legend>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="header.languages" required caption="Выберите язык(и) для представления этой записи:">
+												<div class="indent">
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
 									</div>
-								
-								</section>
-								</div>
-								</form>
-                    </edit-form>
-                    <review-form>
-                        <view-capacity-building-initiative ng-model="review.document" locale="review.locale" allow-drafts="true"></view-capacity-building-initiative>
-                    </review-form>
-                    <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
-                </div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required name="title" caption="Название инициативы">
+												<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
 
-        </div>
-    </div>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="km-control-group" name="projectNumber" caption="Номер или идентификатор проекта">
+											<div class="help-info">Просьба указать номер, идентификатор или регистрационный номер проекта (если применимо)</div>
+											<div km-textbox-ml name="projectNumber" ng-model="document.projectNumber" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-md-12">
+										<div class="km-control-group" name="projectDocument" caption="Адрес(а) веб-сайта(-ов)">
+										<div class="help-info">Укажите URL-адрес (например, http://www.cbd.int) и название веб-сайта (например, «Конвенция о биологическом разнообразии»).</div>
+										<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+										</div>
+									</div>
+								</div>
+			
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required name="contacts" caption="Контактное лицо">
+												<div document-selector ng-model="document.contacts" question="contacts"
+														on-build-query="onContactQuery(searchText)" allow-new="true" filter="true"
+														allow-new-schema="contact"></div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required name="geographicScope" caption="Географический охват">
+												<div km-select name="geographicScope" required ng-model="document.geographicScope"
+														placeholder="Выберите один из вариантов" items="options.geographicScope()"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="document.geographicScope && (isGlobalOrRegional() || isNational())">
+										<div class="col-md-12">
+											<div class="km-control-group"  required style="padding:10px;">
+												<div class="row">
+													<div class="col-md-3" ng-show="!isNational()">
+
+														<div class="km-control-group" required name="geographicScope" caption="">
+																<label name="countryRegions" class="control-label" for="geographicScope">Географическая(-ие) или политическая(-ие)/экономическая(-ие) группа(-ы)</label>
+															<div km-select multiple required name="regions"
+																	ng-model="countryRegions.regions" placeholder="Выберите вариант(ы)"
+																	items="options.regions()"></div>
+														</div>
+													</div>
+													<div class="col-md-1" ng-hide="!isGlobalOrRegional()">и/или</div>
+													<div class="col-md-3">
+														<div class="km-control-group" style="text-align: left;"  caption="">
+															<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">Страна(-ы)</label>
+															<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
+														</div>
+													</div>
+												</div>
+											</div></div>
+									</div>
+
+									<div class="row" ng-if="document.geographicScope && isSubnational()">
+										<div class="col-md-12">
+											<div class="km-control-group"  name="countryRegions" caption="">
+												<label name="countryRegions" required class="control-label" for="countryRegions">Страна(-ы)</label>
+												<div km-select multiple required  ng-model="countryRegions.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="km-control-group"  name="geographicScope.customValue" caption="">
+												<label name="geographicScope.customValue" required="isSubnational()" class="control-label" for="geographicScope.customValue">Название субнациональной юрисдикции</label>
+												<div km-textbox-ml required="isSubnational()"  ng-model="document.geographicScope.customValue" placeholder="Выберите вариант(ы)" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="document.geographicScope && isCommunity()">
+										<div class="col-md-12">
+											<div class="km-control-group"  name="countries" caption="">
+												<label name="countryRegions" required class="control-label" for="countryRegions">Страна(-ы)</label>
+												<div km-select multiple required ng-model="countryRegions.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="km-control-group" name="geographicScope.customValue" caption="">
+												<label name="geographicScope.customValue" required="isCommunity()" class="control-label" for="geographicScope.customValue">Имя сообщества</label>
+												<div km-textbox-ml required="isCommunity()" ng-model="document.geographicScope.customValue" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required name="status" caption="Статус">
+												<div km-select name="status" required ng-model="document.status" id="documentStatus"
+														placeholder="Выберите один из вариантов" items="options.status()"  show-description="true"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="timeframe" required caption="Сроки">
+													<div class="row">
+														<div class="col-md-3">
+															<div class="km-control-group" name="startDate" caption="Дата начала"
+																	 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: CDI, Start date">
+																<div km-date name="startDate" ng-model="document.startDate"></div>
+															</div>
+														</div>
+														<div class="col-md-3">
+															<div class="km-control-group" name="endDate" caption="Дата окончания"
+																	 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: CDI, End date">
+																<div km-date name="startDate" ng-model="document.endDate"></div>
+															</div>
+														</div>
+														<div class="col-md-1 text-center" ng-show="!document.status || isProposedOrApproved()">
+															<div class="km-control-group bold" style="margin-top:30px;" >ИЛИ</div>
+														</div>
+														<div class="col-md-5">
+															
+															<div class="km-control-group" name="duration" caption="Продолжительность" ng-show="!document.status || isProposedOrApproved()">
+																<div class="row">
+																	<div class="col-md-2">
+																		<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
+																			minlength="1" placeholder="например, 24" ng-change="clearDates()" class="form-control"
+																			style="display:inline-block;width:100px"/>
+																	</div>
+																	<div class="col-md-2">
+																		<div class="km-control-group" name="durationText" caption="">
+																			<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																				<label name="durationText" for="durationText">Продолжительность периода в днях/месяцах/годах</label>
+																			</div>
+																			<select name="durationText" ng-model="document.durationText"  class="form-control"
+																				style="display:inline-block;width:100px" placeholder="eg. Months"
+																				ng-options="obj.value as obj.text for obj in timing">
+																			</select>
+																		</div>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="activityScope" caption="Тип инициативы по развитию потенциала">
+												<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
+														description="true" binding-type="term" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Является ли она частью более крупного проекта или более крупной программы?">
+												<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
+											</div>
+										</div>
+										<div class="col-md-12" ng-if="document.isProjectProgramme">
+											<div class="col-md-5">
+											<div class="km-control-group" required name="projectProgrammeName" caption="Указать название проекта или программы.">
+												<div km-textbox-ml required ng-model="document.projectProgrammeName" locales="document.header.languages"></div>
+											</div>
+											</div>
+											<div class="col-md-2 text-center">и/или</div>
+											<div class="col-md-5">
+											<div class="km-control-group" required name="broaderProjects" caption="Укажите ссылку на запись в механизме посредничества о данном проекте или данной программе.">
+												<div document-selector ng-model="document.broaderProjects" question="broaderProjects"
+														on-build-query="onBuildQuery(searchText,'capacityBuildingInitiative')" allow-new-schema="capacityBuildingInitiative" allow-new="true" filter="true"></div>
+											</div>
+											</div>
+											</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required  caption="Учреждение(-я) или организация(-и), являющиеся исполнителями и/или организаторами инициативы">
+												<div class="help-info">В некоторых случаях учреждение может выполнять функции как исполнителя, так и организатора. В таких случаях отметьте обе ячейки.</div>
+												<div class="checkbox"><label for="isImplementedByAgencies"><input type="checkbox" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)">Учреждение(-я) или организация(-и)-исполнитель(-и)</label></div>
+
+												<div class="row" >
+													<div class="col-md-12">
+														<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Выберите учреждение(-я) или организацию(-и)-исполнитель(-и)">
+															<div class="help-info">Учреждение-исполнитель – это организация или юридическое лицо, которое отвечает за разработку инициативы и надзор за ее осуществлением, контроль и оценку, включая привлечение средств, обеспечение соблюдения фидуциарных стандартов и контроля качества, а также подготовку докладов о завершении проектов. В конечном счете, именно учреждение-исполнитель отвечает за реализацию инициативы, и оно подотчетно донору.</div>
+
+															<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
+																	on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+														</div>
+													</div>
+												</div>
+
+												<div class="checkbox"><label for="isExecutededByAgencies"><input id="isExecutededByAgencies" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)">Учреждение(-я) или организация(-и)-организатор(ы)</label></div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Выберите учреждение(-я) или организацию(-и)-организатор(ы)">
+															<div class="help-info">Учреждение-организатор — это организация/учреждение, которое непосредственно занимается управлением инициативой, в том числе повседневной деятельностью по планированию, координацией и организацией ее мероприятий, отслеживанием хода осуществления и представлением соответствующей отчетности, закупочной деятельностью и управлением ресурсами (персоналом, средствами, оборудованием и т. д.), а также выполнением других функций по управлению проектами.</div>
+															<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
+																	on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
+														</div>
+													</div>
+												</div>
+												<div class="checkbox"><label for="isCollaboratededByPartners"><input type="checkbox" id="isCollaboratededByPartners" ng-model="document.isCollaboratededByPartners">Сотрудничающий(-ие) партнер(ы)</label></div>
+												<div class="row">
+													<div class="col-md-12">
+														<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Выберите сотрудничающего(-их) партнера(-ов)">
+															<div class="help-info">Сотрудничающие партнеры — это учреждения или организации, которые вносят значительный финансовый или другой вклад в инициативу и/или оказывают активную поддержку осуществлению инициативы или сотрудничают в осуществлении инициативы.</div>
+															<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
+																	on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Подробная информация</legend>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required name="description" caption="Краткое описание инициативы, включая ее цели и задачи (не более 150 слов).">
+												<div km-textbox-ml required ng-model="document.description" rows="4" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" required  name="categories" caption="Категория(-ии) мероприятий по развитию потенциала">
+												<div km-term-check required show-description="true" name="categories" ng-model="document.categories" terms="options.absCategories()" binding-type="term[]" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="targetGroups" caption="Основная(-ые) целевая(-ые) группа(-ы)/бенефициар(ы)">
+												<div km-term-check name="targetGroups"  ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</section>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Информация о тематическом охвате инициативы</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group tabular-term-check" name="cbdSubjects"
+													caption="Связанные предметные области КБР">
+												<div km-term-check name="cbdSubjects" ng-model="document.cbdSubjects"
+														terms="cbdSubjects()" binding-type="term[]" tabular-shape="true"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row" ng-if="isABS">
+										<div class="col-md-12">
+											<div class="km-control-group" name="aichiTargets"
+													caption="Айтинские целевые задачи:">
+												<div km-term-check name="aichiTargets" required ng-model="document.aichiTargets"
+														terms="options.aichiTargets()" binding-type="term[]"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row" ng-if="isABS">
+										<div class="col-md-12">
+											<div class="km-control-group" name="absKeyAreas"
+													caption="Ключевые области и стратегические меры по созданию и развитию потенциала">
+												<div class="help-info">Ключевые области, определенные в стратегической структуре для создания и развития потенциала в поддержку эффективного осуществления Нагойского протокола (решение NP-1/8).</div>
+												<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
+														binding-type="term[]"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row" ng-if="isBCH">
+										<div class="col-md-12">
+											<div class="km-control-group tabular-term-check fourth-column" required name="cpbThematicAreas"
+													caption="Тематические области биобезопасности">
+													<div km-term-check required name="cpbThematicAreas" ng-model="document.cpbThematicAreas" locales="document.header.languages"
+													terms="options.cpbThematicAreas()" binding-type="term[]" show-description="true" tabular-shape="true"></div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</section>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Информация о финансировании</legend>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="fundingSourceTypes" caption="Тип(ы) источника(-ов) финансирования">
+												<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" 
+													terms="options.fundingSources()" binding-type="term[]" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+
+								<div class="km-control-group" ng-show="isSelfFunding()" name="selfFunding" caption="Представьте дополнительную информацию о финансировании"><!-- ToDO: isSelfFunding method can also be used --><div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.fundingSourceTypes[document.fundingSourceTypes.length-1].customValue" placeholder="" locales="document.header.languages"></div>
+								</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="coFinancingSources" caption="Основной(-ые) источник(и) финансирования">
+												<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources"
+														on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="coFinancingSources" caption="Источник(и) совместного финансирования">
+												<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources"
+														on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
+
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="totalBudget" caption="Общий бюджет (сумма в долл. США)">
+												<div class="help-info">Может включать взносы натурой в денежном выражении. При вводе суммы не используйте пробелы, точки или запятые.</div>
+												<div class="input-group"><span class="input-group-addon">долл. США</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
+												</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Итоги мероприятий по развитию потенциала</legend><strong>Результаты</strong><div class="help-info">Данная информация может предоставляться после того, как будут получены некоторые результаты (промежуточные, конечные результаты или отдача) или подытожены передовые методы и уроки, извлеченные из реализуемой или завершенной инициативы.</div>
+										<div class="km-control-group" name="resultsAchievements" caption="">
+											<div class="row">
+												<div class="col-md-12">
+													<div class="km-control-group" name="resultsAchievements" caption="Основные достижения"><span class="help-info">Кратко опишите основные достижение инициативы, включая те, которые касаются поощрения гендерного равенства в деле достижения целей Конвенции и протоколов к ней, если применимо (не более 200 слов).</span><div km-rich-textbox name="resultsAchievements" ng-model="document.resultsAchievements" rows="4" locales="document.header.languages"></div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="km-control-group" name="resultsOutputs" caption="Основные промежуточные результаты"><span class="help-info">Укажите веб-ссылку на соответствующие продукты (например, инструменты и материалы), разработанные инициативой, и/или доклады или прикрепите их копии.</span><div km-link name="resultsOutputs" ng-model="document.resultsOutputs" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
+													</div>
+												</div>
+											</div>
+
+											<div class="row">
+												<div class="col-md-12">
+													<div class="km-control-group" name="resultsReference" caption="Введите номер записи в виртуальной библиотеке, в которой содержится соответствующая информация.">
+														<div document-selector ng-model="document.resultsReference" question="resultsReference"
+														on-build-query="onBuildQuery(searchText,'resource')" allow-new="true" filter="true"
+																allow-new-schema="resource"></div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="bestPractices" caption="Передовые практические методы и извлеченные уроки"><span class="help-info">Кратко опишите передовые практические методы и извлеченные уроки (не более 500 слов).</span><div km-rich-textbox name="bestPractices" ng-model="document.bestPractices" rows="4" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Дополнительная информация</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="address" caption="Любая другая актуальная информация" >
+												<div class="help-info">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
+												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="relevantDocuments" caption="Любые другие соответствующие документы">
+												<div class="help-info">Укажите в этом поле адреса любых других соответствующих веб-сайтов и/или один или более соответствующих документов, которые будут храниться в базе данных и будут доступны для загрузки пользователями.</div>
+												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="notes">
+												<legend>Примечания</legend><span class="help-info">Поле «Примечания» предназначено для использования в личных целях. Оно появляется только при редактировании записи и скрыто после ее публикации. Данное поле не предназначено для конфиденциальной информации.</span><div km-notes name="notes" ng-model="document.notes"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+
+							</section>
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<view-capacity-building-initiative ng-model="review.document" locale="review.locale" allow-drafts="true"></view-capacity-building-initiative>
+				</review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
+
+		</div>
+	</div>
 </div>

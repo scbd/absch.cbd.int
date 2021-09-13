@@ -1,147 +1,111 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
-		<h4 ng-show="display('header')">
-			<span ng-bind="::document.header.schema|schemaName"></span>
-			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
-		</h4>
+		<h4 ng-show="display('header')"><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
 	<div class="record-body panel-body">
 
 			
 		<document-date></document-date>
 
-		<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">
-			General information</legend>
+		<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">Informations générales</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country</label>
-			<div class="km-value">
-				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
-				<span ng-party-status government="document.government" id="government"></span>
-			</div>
+			<label name="country">Pays</label>
+			<div class="km-value"><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a><km-value-ml value="document.name" locales="locale"></km-value-ml><span ng-party-status government="document.government" id="government"></span></div>
 		</div>
 
 		<div ng-show="document.title">
-			<label>Title</label>
-			<div class="km-value" compare-val>
-				<strong>{{document.title | lstring:locale}}</strong>
-			</div>
+			<label>Titre</label>
+			<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
 		</div>
 
 		<div ng-show="document.description">
-			<label>Brief description</label>
-			<div class="km-value km-pre" compare-val ng-bind-html="document.description | lstring:locale"></div>
+			<label>Brève description</label>
+			<div compare-val>
+				<km-value-ml value="document.description" locales="locale"></km-value-ml>
+			</div>
 		</div>
 
 		<div ng-show="document.jurisdiction">
-			<label>Jurisdiction(s)</label>
-			<div class="km-value" compare-val>
-				{{document.jurisdiction|term:locale}}
-				<span ng-if="document.jurisdictionName ">({{document.jurisdictionName | lstring:locale}})</span>
-			</div>
+			<label>Juridiction(s)</label>
+			<div class="km-value" compare-val><span ng-bind="document.jurisdiction|term:locale"></span> <span ng-if="document.jurisdictionName ">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span></div>
 		</div>
 
 
 		<div ng-show="document.jurisdictionRegions">
-			<label>Country name and/or Geographical or political/economic group(s)</label>
+			<label>Nom du/des pays et du/des groupe(s) politique(s) ou économique(s)</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
-					<li ng-repeat="term in document.jurisdictionRegions">{{term|term:locale}}</li>
+					<li ng-repeat="term in document.jurisdictionRegions"><span ng-bind="term|term:locale"></span></li>
 				</ul>
 			</div>
 		</div>
 
 
 		<div ng-show="document.status">
-			<label>Current status of the measure</label>
-			<div class="km-value" compare-val>
-				{{document.status|term:locale}}
+			<label>Statut actuel de la mesure</label>
+			<div compare-val>
+				<km-value-ml value="document.status" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.adoption">
-			<label>Date of adoption</label>
-			<div class="km-value" compare-val>{{document.adoption | formatDate}}</div>
+			<label>Date d'adoption</label>
+			<div class="km-value" compare-val><span ng-bind="document.adoption | formatDate"></span></div>
 		</div>
 
 		<div ng-show="document.entryIntoForce">
-			<label>Date of entry into force</label>
-			<div class="km-value" compare-val>{{document.entryIntoForce | formatDate}}</div>
+			<label>Date d'entrée en vigueur</label>
+			<div class="km-value" compare-val><span ng-bind="document.entryIntoForce | formatDate"></span></div>
 		</div>
 
 		<div ng-show="document.retired">
-			<label>Date of retirement</label>
-			<div class="km-value" compare-val>{{document.retired | formatDate}}</div>
+			<label>Date de retrait</label>
+			<div class="km-value" compare-val><span ng-bind="document.retired | formatDate"></span></div>
 		</div>
 
 		<div ng-show="document.limitedApplication">
-			<label>Date of measure no longer in force</label>
-			<div class="km-value" compare-val>{{document.limitedApplication | formatDate}}</div>
+			<label>Date à partir de laquelle la mesure n'est plus en vigueur</label>
+			<div class="km-value" compare-val><span ng-bind="document.limitedApplication | formatDate"></span></div>
 		</div>
 
 
 		<div ng-show="document.type">
-			<label>Type of document / measure</label>
-			<div class="km-value" compare-val>
-				{{document.type|term:locale}}
+			<label>Type de document/mesure</label>
+			<div  compare-val>
+				<km-value-ml value="document.type" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.isModelContractualClause">
-			<label>The measure contains model contractual clauses</label>
-			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription">
-				{{document.modelContractualClauseDescription|lstring:locale}}
-			</div>
+			<label>La mesure comporte des clauses contractuelles types</label>
+			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription"><span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span></div>
 		</div>
 		<div ng-show="document.registeredMeasuresDescription">
-			<div class="km-value km-pre" compare-val>{{document.registeredMeasuresDescription | lstring:locale}}</div>
+			<div class="km-value km-pre" compare-val>
+				<km-value-ml value="document.registeredMeasuresDescription | lstring:locale"></km-value-ml>
+			</div>
 		</div>
 
 		<div ng-show="document.documents">
-			<legend>Document details</legend>
-			<label>Document text</label>
-			<div class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.documents">
-						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a>
-						<i ng-show="item.language">({{getTerm(item.language)|term:locale}})</i>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</li>
-				</ul>
+			<legend>Détails du document</legend>
+			<label>Texte du document</label>
+			<div class="km-value" compare-val="documents">
+				<km-link-list ng-model="document.documents"></km-link-list>
 			</div>
 		</div>
 
 		<div ng-show="document.documentTranslations">
-			<label>Translation</label>
-			<div class="km-value" compare-val>
-				<ul class="list">
-					<li ng-repeat="item in document.documentTranslations">
-						<a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}">
-							<i class="fa fa-external-link-square" aria-hidden="true"></i> {{item.name||item.url}}
-						</a>
-						<i ng-show="item.language">({{getTerm(item.language)|term:locale}})</i>
-						<i ng-show="item.translationType">({{getTerm(item.translationType)|term:locale}})</i>
-						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-					</li>
-				</ul>
+			<label>Traduction</label>
+			<div class="km-value" compare-val="documentTranslations">
+				<km-link-list ng-model="document.documentTranslations"></km-link-list>
 			</div>
 		</div>
-		<!--<div ng-show="document.linkedMeasures">
-			<label>Related measures</label>
-			<div class="km-value">
-				<ul>
-					<li ng-repeat="item in document.linkedMeasures">
-						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
-					</li>
-				</ul>
-			</div>
-		</div>-->
-
 
 		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
-			<legend>Amendments</legend>
+			<legend>Amendements</legend>
 			<div ng-show="document.amendedMeasures">
-				<label>This measure is amending the following:</label>
+				<label>Cette mesure modifie les points suivants :</label>
 
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -152,22 +116,24 @@
 				</div>
 			</div>
 			<div ng-show="document.amendmentsDescription">
-				<label>Summary of the amendments</label>
-				<div class="km-value km-pre" compare-val ng-bind-html="document.amendmentsDescription | lstring:review.locale"></div>
+				<label>Résumé de la/des modification(s)</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDescription" locales="locale"></km-value-ml>
+				</div>
 			</div>
 
 		</div>
 
 		<div ng-show="document.authorities ">
-			<legend>Regulatory contact information</legend>
+			<legend>Coordonnées du correspondant pour la réglementation</legend>
 			<div ng-repeat="item in document.authorities">
 				<div view-record-reference ng-model="item" locale="locale" class="km-value"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
-			<legend>Amendments</legend>
-			<label>This measure has been amended by:</label>
+			<legend>Amendements</legend>
+			<label>Cette mesure a été amendée par :</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.measureAmendedBy">
@@ -178,9 +144,9 @@
 		</div>
 
 		<div ng-show="(document.linkedMeasures && document.linkedMeasures.length>0) || document.linkedMeasuresDescription">
-			<legend>Relationships</legend>			
+			<legend>Liens</legend>			
 			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
-				<label>This measure is related to:</label>
+				<label>Cette mesure est liée à :</label>
 				<ul class="list">
 					<li ng-repeat="item in document.linkedMeasures">
 						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
@@ -188,14 +154,12 @@
 				</ul>
 			</div>
 			<div ng-show="document.linkedMeasuresDescription">
-				<label>Relationships description</label>
+				<label>Description des liens</label>
 				<div class="km-value km-pre" compare-val ng-bind-html="document.linkedMeasuresDescription | lstring:review.locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.absMesasureNotApplicable">
-			<legend>Elements of the measure</legend>
-			<span class="km-value confidential-text">The elements of the measure are not applicable for this measure.</span>
-		</div>
+			<legend>Éléments de la mesure</legend><span class="km-value confidential-text">Les éléments ne s’appliquent pas à la mesure.</span></div>
 		<div ng-if="document.absMeasures">
 			<div measure-matrix-elements name="absMeasures" type="single" ng-model="document.absMeasures" 
 			locale="locale" document="document" api="measureMatrixApi">
@@ -203,22 +167,16 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>Informations supplémentaires</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val="relevantInformation" class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
+				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
 				<div class="km-value" compare-val="relevantDocuments">
-					<ul class="list">
-						<li ng-repeat="item in document.relevantDocuments">
-							<i class="fa fa-external-link-square" aria-hidden="true"></i>
-							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-						</li>
-					</ul>
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
 			</div>
 		</div>

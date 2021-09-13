@@ -1,8 +1,7 @@
-﻿<div ng-show="showWarning">
+﻿<div ng-show="showWarning" dir="rtl">
     <div class="well" ng-if="responsibleCNA && responsibleCNA.numFound > 0">
-        <h3 class="color-red">A CNA has already been published which is indicated as the only designated CNA for your country. 
-            </h3>
-            <h5 class="color-red"> You can save drafts however you will not be able publish a new CNA before updating the following record:</h5>
+        <h3 class="color-red">تم بالفعل نشر سلطة وطنية مختصة، تم تعيينها باعتبارها السلطة الوطنية المختصة الوحيدة لبلدك.</h3>
+            <h5 class="color-red">يمكنك حفظ المسودات، ومع ذلك لن يمكنك نشر سلطة وطنية مختصة جديدة قبل تحديث السجل التالي:</h5>
             <div>
             <div ng-repeat="rec in responsibleCNA.docs">
                 <result-default doc='rec' type="nationalRecords"></result-default>

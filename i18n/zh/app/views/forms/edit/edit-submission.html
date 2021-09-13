@@ -1,4 +1,4 @@
-﻿<div ng-controller="editSubmission">
+﻿<div >
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
     <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
@@ -13,36 +13,34 @@
                         <div ng-show="tab=='edit'" km-tab="edit">
                             <section>
                                 <div class="well no-shadow bg-white">
-                                    <legend>General Information</legend>
+                                    <legend>一般信息</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="languages" required
-                                                caption=" Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required
+                                                caption="请选择您希望提交之记录的语言：">
                                                 <div class="indent">
-                                                    <div km-form-languages multiple required name="languages"
+                                                    <div km-form-languages multiple required name="header.languages"
                                                         ng-model="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-5">
-                                            <div class="km-control-group" required name="government" caption="Country"
+                                            <div class="km-control-group" required name="government" caption="国家"
                                                 required>
                                                 <div afc-autocomplete required name="government"
                                                     ng-disabled="document.organizations" ng-model="document.government"
                                                     source="options.countries" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true"
-                                                    placeholder="Please select a country..."></div>
+                                                    placeholder="请选择一个国家..."></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">或者</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
-                                                caption="Organization(s)" required>
-                                                <div document-selector ng-disabled="document.government"
-                                                    question="organizations" type="checkbox" query="organizationQuery"
-                                                    skip-government="true"
-                                                    ng-model="document.organizations" allow-new-schema="organization">
+                                                caption="机构" required>
+                                                <div document-selector ng-model="document.organizations"  type="checkbox" ng-disabled="document.government" question="organizations"
+                                                     on-build-query="onContactQuery(searchText)" allow-new-schema="organization">
                                                 </div>
                                             </div>
                                         </div>
@@ -52,20 +50,21 @@
 
                             <section>
                                 <div class="well no-shadow bg-white">
-                                    <legend>Submission Information</legend>
+                                    <legend>提交信息的内容</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="title"
-                                                caption="Title of the submission">
+                                                caption="提交信息的标题">
                                                 <div km-textbox-ml ng-model="document.title" placeholder=""
                                                     locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="date"
-                                                caption="Date of submission">
-                                                <div km-date name="date" ng-model="document.date"></div>
+                                                caption="提交日期"
+                                                 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Submission">
+                                                <div km-date placeholder="YYYY-MM-DD" name="date" ng-model="document.date"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -75,30 +74,26 @@
                                 <div class="well no-shadow bg-white">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notifications" caption="Related notification(s)">
-                                                <div document-selector identifier-without-revision="true"
-                                                    question="notifications" type="checkbox" query="notificationQuery.q"
+                                            <div class="km-control-group" name="notifications" caption="相关通知">
+                                                <div document-selector ng-disabled="!document.organizations && !document.government.identifier"
+                                                    identifier-without-revision="true"
+                                                    question="notifications" type="checkbox"
                                                     display-fields="{{::notificationQuery.fl}}"
                                                     free-text-query-field="symbol_s" lookup-field="symbol_s"
                                                     skip-sync-documents="true" ng-change="onNotificationSelected()"
                                                     filter="true" ng-change="recordSelected(item, filter)"
-                                                    skip-government="true" ng-model="document.notifications"
-                                                    on-records-fetched="onRecordsFetched(data)" list-view="view">
-
+                                                    ng-model="document.notifications"
+                                                    on-records-fetched="onRecordsFetched(data)" list-view="view"
+                                                    on-build-query="onNotificationQuery(searchText)">
                                                     <selected-records>
                                                         <table class="table" id="search-new"
                                                             style="padding-bottom:3px;width:100%;padding-top: 5ps;">
                                                             <tr ng-repeat="doc in notifications">
-                                                                <td style="margin-bottom:15px;width:15px;">
-                                                                    <a rel="noopener" translation-url
+                                                                <td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url
                                                                         class="btn btn-default"
                                                                         ng-click="$parent.$parent.removeDocument(doc)"
-                                                                        class="link color-red">
-                                                                        <i class="fa fa-times"></i></a>
-                                                                </td>
-                                                                <td style="margin-bottom:20px;">
-                                                                    <span ng-bind="doc.rec_title"></span>
-                                                                    <div ng-bind="doc.rec_summary"></div>
+                                                                        class="link color-red"><i class="fa fa-times"></i></a></td>
+                                                                <td style="margin-bottom:20px;"><span ng-bind="doc.rec_title"></span><div ng-bind="doc.rec_summary"></div>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -110,7 +105,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="records"caption="Related record(s)">
+                                            <div class="km-control-group" name="records"caption="相关记录">
                                                 <div document-selector ng-model="document.records" question="records" filter="true"></div>
                                             </div>
                                         </div>
@@ -120,7 +115,7 @@
                             </section>
                             <section ng-if="isAbs">
                                 <div class="well no-shadow bg-white">
-                                    <legend>Thematic areas</legend>
+                                    <legend>专题领域</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -136,7 +131,7 @@
 
                             <section ng-if="isBch">
                                 <div class="well no-shadow bg-white">
-                                    <legend>Thematic areas</legend>
+                                    <legend>专题领域</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -151,10 +146,10 @@
                             </section>
                             <section>
                                 <div class="well no-shadow bg-white">
-                                    <legend>Documents</legend>
+                                    <legend>文件</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="relevantDocuments" required caption="Documents">
+                                            <div class="km-control-group" name="relevantDocuments" required caption="文件">
                                                 <div km-link name="relevantDocuments"
                                                     ng-model="document.relevantDocuments" allow-link="true"
                                                     allow-file="true" identifier="document.header.identifier"></div>
@@ -164,10 +159,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="relevantInformation"
-                                                caption="Any other relevant information">
-                                                <div class="help-block">Please use this field to provide any other
-                                                    relevant information that may not have been addressed elsewhere in
-                                                    the record.</div>
+                                                caption="其它相关信息">
+                                                <div class="help-block">请在此处提供记录中其它位置未能提到的任何其它相关信息。</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4"
                                                     placeholder="" locales="document.header.languages"></div>
                                             </div>
@@ -178,19 +171,11 @@
                             </section>
                             <section>
                                 <div class="well no-shadow bg-white">
-                                    <legend>Notes</legend>
+                                    <legend>备注</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notes">
-                                                <span class="help-block">
-                                                    The “Notes” field is for your personal use.
-                                                    It can only be seen when the record is being edited but is not
-                                                    visible
-                                                    when the record is published.
-                                                    This field is not meant to be used for confidential information.
-                                                </span>
-                                                <div km-notes name="notes" ng-model="document.notes"></div>
+                                            <div class="km-control-group" name="notes"><span class="help-block">“注释”字段仅供个人使用。仅当编辑记录时才显示，但不会在记录发布时显示。此字段不适用于保密信息。</span><div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
                                     </div>

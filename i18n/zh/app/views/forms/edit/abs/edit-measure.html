@@ -1,56 +1,40 @@
-﻿<div ng-controller="editMeasure">
+﻿<div >
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-
-        <span block-region activate="isLoading()" ng-if="isLoading()"></span>
-        <div class="registerpage-content">
+    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
             <div>
                 <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-                languages="document.header.languages" tab="tab">
-                    <!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required -->
-                    <edit-form>
+                languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         
                     <form class="editForm" name="editForm" style="margin-top:10px">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <legend name="formInfo" style="display:none"></legend>
                                 <section>
-                                    <legend>Is this an amendment to previous legislative, administrative or policy measure? </legend>
-                                    <div class="help-info">This section is only relevant when the measure being submitted is amending an existing measure. If the measure being registered in the ABS Clearing-House is an amendment to an existing measure or a part of it, make sure
-                                        that the measure being amended is already registered in the ABS Clearing-House in order to be able to provide a link to the existing record. This will allow the two records to be displayed together.</div>
+                                    <legend>这是对先前立法、行政或政策措施的修正？</legend>
+                                    <div class="help-info">仅当所提交的措施会修正某个现有措施时才与本部分相关。如果将在获取和惠益分享信息交换所注册的措施是对现有措施或其一部分的修正，请确保被修正的措施已在获取和惠益分享信息交换所中注册，以便能够提供指向现有记录的链接。这将让两个记录能够一起显示。</div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to previous legislative, administrative or policy measure? ">
+                                            <div class="km-control-group" name="isAmendment" required caption="这是对先前立法、行政或政策措施的修正？">
                                                 <div class="help-block"></div>
                                                 <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
                                             </div>
                                         </div>
-                                    </div>
-    
-                                    <!-- IF NO SECTION -->
-                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    </div><!-- IF NO SECTION --><div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">
-                                                    If no, the following information is not required.
-                                                </h3>
-                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">
-                                                    Please select the previously registered record that is being amended.
-                                                </h3>
+                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">如为否，则不需要以下信息。</h3>
+                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">请选择先前注册且将要修正的记录。</h3>
     
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
-                                                        <div class="help-info">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
-                                                        <div document-selector hide-self="document.header.identifier" ng-model="document.amendedMeasures" question="amendedMeasures" government="document.government" schema="measure"></div>
-    
-                                                        <!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
-                                                    </div>
+                                                    <div class="km-control-group" name="amendedMeasures" caption="获修正措施清单">
+                                                        <div class="help-info">请通过提供指向获修正措施的交叉引用链接，说明此措施是否修正了一项先前注册的措施。</div>
+                                                      <div document-selector on-build-query="onAmendedMeasuresQuery(searchText)" ng-model="document.amendedMeasures" question="amendedMeasures"></div><!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>--></div>
                                                 </div>
     
-                                                <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
-                                                    <div class="help-info">This will help users to understand the relationship between the two measures. The summary should be as simple and as a concise as possible.</div>
+                                                <div class="km-control-group" name="amendmentsDescription" caption="修正摘要">
+                                                    <div class="help-info">这将有助于用户了解这两个措施之间的关系。摘要应尽可能简洁明了。</div>
                                                     <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                                                 </div>
     
@@ -61,64 +45,57 @@
     
     
                                 <section>
-                                    <legend>General information</legend>
+                                    <legend>一般信息</legend>
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required caption="请选择您希望提交之记录的语言：">
                                                 <div class="indent">
-                                                    <div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+                                                    <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="government" required caption="Country">
-                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                            <div class="km-control-group" name="government" required caption="国家">
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="请选择一个国家..."></div>
                                             </div>
                                         </div>
                                     </div>
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="title" caption="Title of the legislative administrative or policy measures on access and benefit-sharing">
+                                            <div class="km-control-group" required name="title" caption="有关获取和惠益分享的立法、行政或政策措施的标题">
                                                 <div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div required class="km-control-group" name="status" caption="Legal status of the measure">
-                                                <div class="help-info">
-                                                    Examples of non-legally binding ABS measures are national strategies, policy documents, guidelines, etc. For non-legally binding ABS measure, the date of adoption is to be provided. A measure is legally binding when it creates obligations and rights which
-                                                    are legally enforceable. In this case, the date of entry into force of the ABS measure is to be provided. Measures in draft form can also be included in the ABS Clearing-House with a view to sharing information
-                                                    on progress towards implementation. Once the draft measure is adopted or entered into force, the status of the measure can be updated without needing to register the existing information again. Sometimes
-                                                    measures have a limited applicability in time. If you are introducing this type of measure, you are required to include the expiry date. Including retired measures can be useful for providing legal certainty
-                                                    about genetic resources and associated traditional knowledge accessed under a previous legal framework. If a measure already registered in the ABS Clearing-House is retired or is no longer applicable, you
-                                                    only need to edit the measure and change its status to retired, indicating the date from which the measure was no longer applicable.
-                                                </div>
-                                                <div style="width:250px;" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select legal status..."></div>
+                                            <div required class="km-control-group" name="status" caption="措施的法律地位">
+                                                <div class="help-info">不具法律约束力的获取和惠益分享措施，例如国家战略、政策文件、指导方针等。对于不具法律约束力的获取和惠益分享措施，将提供措施获得通过的日期。在一项措施创造出在法律上可执行的义务和权利时，其就具有了法律约束力。在这种情况下，将提供获取和惠益分享措施的生效日期。获取和惠益分享信息交换所也收纳草案形式的措施，以便分享有关执行进展情况的信息。一旦措施草案获得通过或生效，可更新措施的状态，而无需重新注册现有信息。有时，措施具有时限性。如果您要纳入此类措施，则必须包括失效日期。纳入已淘汰的措施可有助于就按先前法律框架获得的遗传资源和相关传统知识提供法律确定性。如果一项已在获取和惠益分享信息交换所中注册的措施已淘汰或不再适用，则您只需要编辑该措施并将其状态更改为已淘汰，指明该措施不再适用的日期。</div>
+                                                <div style="width:250px;" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="选择法律状态..."></div>
                                             </div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12">
                                             <div ng-show="isNotLegallyBinded()">
-                                                <div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
+                                                <div class="km-control-group" name="adoption" required caption="请提供通过日期">
                                                     <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
                                                 </div>
                                             </div>
                                             <div ng-show="isLegallyBinded()">
-                                                <div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
+                                                <div class="km-control-group" name="entryIntoForce" required caption="请提供生效日期">
                                                     <div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
                                                 </div>
                                             </div>
                                             <div ng-show="isRetired()">
-                                                <div class="km-control-group" name="retired" required caption="Please provide the date from which the measure was no longer applicable">
+                                                <div class="km-control-group" name="retired" required caption="请提供该措施不再适用的日期">
                                                     <div km-date placeholder="YYYY-MM-DD" name="retired" required ng-model="document.retired">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div ng-show="isLegallyBinded() || isNotLegallyBinded()" class="km-control-group" name="limitedApplication" caption="Indicate the date the measure is no longer in force if the measure has a limited application in time">
+                                            <div ng-show="isLegallyBinded() || isNotLegallyBinded()" class="km-control-group" name="limitedApplication" caption="如果措施存在时效性，则指明该措施不再有效的日期">
                                                 <div km-date placeholder="YYYY-MM-DD" name="limitedApplication" ng-model="document.limitedApplication"></div>
                                             </div>
                                         </div>
@@ -127,7 +104,7 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="type" caption="Type of document/measure">
+                                            <div class="km-control-group" required name="type" caption="文件/措施类型">
                                                 <div km-term-radio name="type" ng-model="document.type" terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
     
                                             </div>
@@ -135,7 +112,7 @@
                                     </div>
                                     <div class="row" ng-show="isTypeOther()">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="otherTypeName" caption="Name of the other type of document/measure">
+                                            <div class="km-control-group" required name="otherTypeName" caption="其他类型文件/措施的名称">
                                                 <div km-textbox-ml required ng-model="document.otherTypeName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -145,16 +122,12 @@
                                     <div class="row">
     
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
-                                                <div class="help-info">
-                                                    Please specify the geographical area of application of the ABS measure. The measure could apply at regional or multilateral, national or federal, subnational or community levels. For multilateral or regional measures, please indicate which countries are
-                                                    covered by the measure by selecting from the drop down menu the relevant geographical or political/economic group. The list is extensive; therefore it is likely that that the specific group to which the
-                                                    measure applies is already listed. However, if the measure applies to a group of countries that is not covered by any of the existing groups, select each of the countries concerned by the measure separately
-                                                    from the drop down menu.</div>
+                                            <div class="km-control-group" required name="jurisdiction" caption="辖区">
+                                                <div class="help-info">请说明应用获取和惠益分享措施的地理区域。此措施适用于区域或多边、国家或联邦，次国家或社区层面。对于多边或区域措施，请通过从下拉菜单中选择相关的地理或政治/经济集团，以指明措施所涵盖的国家。此列表涵盖广泛；因此该措施适用的具体集团很可能已经列出。但是，如果该措施适用于未被任何现有集团涵盖的一组国家，则可以从下拉菜单中分别逐个选择该措施涉及的国家。</div>
     
-                                                <div style="width:250px;" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select area of jurisdiction..."></div>
+                                                <div style="width:250px;" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="选择辖区"></div>
                                                 <div ng-if="isJurisdictionRegional()">
-                                                    <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
+                                                    <div class="color-red" ng-if="!document.government.identifier">请先选择一个国家。</div>
                                                 </div>
     
                                             </div>
@@ -164,26 +137,19 @@
     
                                             <div ng-if="isJurisdictionRegional() && !canAddRegionalMeasure()">
                                                 <div class="alert alert-warning">
-                                                    <h4>
-                                                        Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the
-                                                        countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in
-                                                        their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or
-                                                        the group of countries that share the same measure.
-                                                    </h4>
+                                                    <h4>请注意，区域或多边措施只需在获取和惠益分享信息交换所中登记一次，并且区域措施选中且涵盖的每个国家都将在其国家概况中将该措施作为其法律框架的一部分显示。建议一个国家同意代表区域组织或具有相同措施的国家集团登记该措施。</h4>
                                                 </div>
                                             </div>
     
                                             <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
-                                                <div class="help-info">Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure
-                                                    displayed as part of their legal framework in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that
-                                                    share the same measure.</div>
-                                                <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
-                                                    <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0">{{document.jurisdictionRegions[0]|term}}</button>
+                                                <div class="help-info">请注意，区域或多边措施只需在获取和惠益分享信息交换所中登记一次，并且区域措施选中且涵盖的每个国家都将在其国家概况中将该措施作为其法律框架的一部分显示。建议一个国家同意代表区域组织或具有相同措施的国家集团登记该措施。</div>
+                                                <div class="km-control-group" required name="jurisdictionRegions" caption="国家名称和/或地理或政治/经济集团">
+                                                    <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0"><span ng-bind="document.jurisdictionRegions[0]|term"></span></button>
                                                 </div>
                                             </div>
     
                                             <div ng-show="isJurisdictionSubNationalOrCommunity()">
-                                                <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national / community / other jurisdiction">
+                                                <div class="km-control-group" required name="jurisdictionName" caption="次国家/社区/其他辖区名称">
                                                     <div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -193,9 +159,8 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
-                                                <div class="help-info">The brief description of the document including objective and scope is meant to serve as a short summary of the measure. This information will be displayed in the summary of the record, so it is important that
-                                                    the description is clear and concise.</div>
+                                            <div class="km-control-group" name="description" caption="文件简要描述，包括目标和范围（最多 300 单词）">
+                                                <div class="help-info">文件简要描述，包括目标和范围，旨在用作该措施的简要摘要。此信息将在记录的摘要中显示，因此描述务必清楚简洁。</div>
                                                 <div km-rich-textbox ng-model="document.description" rows="4" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -203,10 +168,10 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain model contractual clauses?">
+                                            <div class="km-control-group" name="isModelContractualClause" caption="该措施是否包含示范合同条款？">
                                                 <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                                                 <div ng-show="document.isModelContractualClause">
-                                                    <div class="km-control-group" style="margin:10px;" name="modelContractualClauseDescription" caption="Please provide further information">
+                                                    <div class="km-control-group" style="margin:10px;" name="modelContractualClauseDescription" caption="请提供进一步信息">
                                                         <div km-textbox-ml ng-model="document.modelContractualClauseDescription" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -218,13 +183,11 @@
     
     
                                 <section>
-                                    <legend name="documentsDetails">Document details</legend>
+                                    <legend name="documentsDetails">文档细节</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="documents" caption="Document text (in its original language)">
-                                                <div class="help-info">An attachment is preferred. Otherwise, provide the location of the document, i.e. web address including the URL of the website (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing
-                                                    Clearing-House”).
-                                                </div>
+                                            <div class="km-control-group" required name="documents" caption="文件文字（原语言）">
+                                                <div class="help-info">最好提供附件。否则，请提供文件的位置，即网址，包括网站的 URL（例如http://absch.cbd.int/）和网站名称（例如“获取和惠益分享信息交换所”）。</div>
                                                 <div km-link required name="documents" ng-model="document.documents" extensions="options.documentLinksExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -232,7 +195,7 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="documentTranslations" caption="Translation in one of the official UN languages">
+                                            <div class="km-control-group" name="documentTranslations" caption="采用联合国官方语言之一的译文">
                                                 <div km-link name="documentTranslations" ng-model="document.documentTranslations" extensions="options.documentTranslationsExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -240,15 +203,8 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
-                                                <div class="help-info">Please indicate if there is any relationship between this document/measure and other law, regulation, guidelines, administrative or policy measures. For example, if the measure being submitted is implementing
-                                                    an existing law. This information will assist in displaying information on the national legal framework. This section of the form will allow you to link two measures in case they are related, for example
-                                                    if the measure being submitted is implementing an existing law. The two measures will then be displayed together.
-                                                </div>
-                                                <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
-    
-                                                <div document-selector hide-self="document.header.identifier" ng-model="document.linkedMeasures" question="linkedMeasures" government="document.government" schema="measure"></div>
-    
+                                            <div class="km-control-group" name="linkedMeasures" caption="与其他措施的关系">
+                                                <div class="help-info">请说明本文件/措施与其他法律、法规、指导方针、行政或政策措施之间是否存在任何关系。例如，所提交的措施是否是在实施某个现行法律。此信息将协助显示有关国家法律框架的信息。表格的这个部分将让您能够将之间存在关系的两个措施联系起来，例如，所提交的措施正在实施某个现行法律。然后，这两个措施将在一起显示。</div><!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>--><div document-selector ng-disabled="!document.government.identifier" on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
     
                                             </div>
                                         </div>
@@ -256,12 +212,11 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="linkedMeasuresDescription" caption="Please describe the relationship ">
+                                            <div class="km-control-group" name="linkedMeasuresDescription" caption="请描述关系">
                                                 <div km-rich-textbox ng-model="document.linkedMeasuresDescription" rows="4" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <!-- <hr>
+                                    </div><!-- <hr>
                                         <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="otherDocuments" caption="Any other relevant information">
@@ -278,18 +233,16 @@
                                         </div>
                                         </div>
     
-                                -->
-                                </section>
+                                --></section>
                                 <section>
-                                    <legend>Regulatory contact information</legend>
+                                    <legend>监管联系方式</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="authorities" caption="Contact Institution">
+                                            <div class="km-control-group" required name="authorities" caption="联系机构">
     
-                                                <div document-selector ng-model="document.authorities" question="authorities"
-                                                allow-new="true" allow-new-schema="contact" government="document.government" schema="(authority contact)"></div>
-    
-    
+                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
+                                                           allow-new="true" allow-new-schema="contact"></div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -297,43 +250,24 @@
     
                                 <section>
                                     <legend>
-                                        <label for="absMeasures"> Elements of the measure</label>
+                                        <label for="absMeasures">措施要素</label>
                                     </legend>
                                    
     
     
                                     <div ng-if="document.absMeasuresForDelete">
                                         <div class="alert alert-warning">
-                                            <h4 class="color-blue">
-                                                    <i class='fa fa-info-circle'></i>
-                                                    <strong>
-                                                    The format for saving the <i>Elements of Measures</i> has changed. This record must be manually updated.
-                                                    The below list of <i>Elments of measures</i> is from the previous version and is meant for reference purposes in order to help you update this record.
-                                                    </strong>
-                                            </h4>
-                                            <span ng-repeat="elm in document.absMeasuresForDelete">
-                                                {{$index+1}}. {{elm|term}} <span ng-if="elm.customValue">{{elm.customValue}}</span> &nbsp;
-                                            <span ng-if="elm.section">({{elm.section|lstring}})</span>
-                                            <br/>
-                                            </span>
-                                        </div>
+                                            <h4 class="color-blue"><i class='fa fa-info-circle'></i> <strong>保存<i>措施要素</i>的格式已变化。必须手动更新此记录。下面的<i>措施要素</i>列表来自上一版本，仅供参考，以帮助您更新此记录。</strong></h4><span ng-repeat="elm in document.absMeasuresForDelete"><span ng-bind="$index+1"></span>。<span ng-bind="elm|term"></span> <span ng-if="elm.customValue" ng-bind="elm.customValue"></span>&nbsp; <span ng-if="elm.section">（<span ng-bind="elm.section|lstring"></span>）</span> <br/> </span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                    <span ng-class="{'confidential-text':document.absMesasureNotApplicable}">
-                                                        <input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items> Elements are not applicable for this measure.</input>
-                                                    </span>
-                                                </div>
+                                                <div class="panel-heading"><span ng-class="{'confidential-text':document.absMesasureNotApplicable}"><input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items>要素不适用于此措施。</input></span></div>
                                                 <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absMesasureNotApplicable}">
                                                     <div class="km-control-group"  name="absMeasures" required caption="">
                                                         <div class="help-info"></div>
                                                         <div layout="row" style="margin-bottom:20px;">
-                                                             <div class="help-info" >Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. This information will assist in displaying information
-                                                                on the national legal framework and help potential users to understand the access, benefit-sharing and /or compliance requirements of your country. Sometimes the content and elements of the measure relate to goals and
-                                                                plans to implement ABS domestically. This could be the case, for instance, for some ABS strategies or action plans. In such cases, you may indicate that the elements of the measure are not applicable by clicking the checkbox above.
-                                                            </div>
+                                                             <div class="help-info" >请选择所注册措施要包含哪些要素，并为每个选定要素查明该措施的相关文章或部分。此信息将协助显示有关国家法律框架的信息，帮助潜在用户了解贵国在获取、惠益分享和/或合规方面的要求。有时，措施的内容和要素涉及在国内实施获取和惠益分享的目标和计划。比如说，对于某些获取和惠益分享战略或行动计划来说情况就是这样的。在此类情况下，您可以通过单击上面的复选框，指明该措施的要素不适用。</div>
                                                         </div>
                                                         <div edit-measure-matrix name="absMeasuresMatrix" required ng-model="document.absMeasures" locales="document.header.languages" document="document" ng-disabled="document.absMesasureNotApplicable"
                                                             validation-report="validationReport"></div>
@@ -348,12 +282,12 @@
     
     
                                 <section>
-                                    <legend>Additional information</legend>
+                                    <legend>补充信息</legend>
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="address" caption="Any other relevant information">
-                                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                            <div class="km-control-group" name="address" caption="其它相关信息">
+                                                <div class="help-block">请在此处提供记录中其它位置未能提到的任何其它相关信息。</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -361,18 +295,18 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                            <div class="km-control-group" name="relevantDocuments" caption="任何其他相关文件">
                                                 <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
                                 <section>
-                                    <legend>Notes</legend>
+                                    <legend>备注</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+                                                <div class="help-block">“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。</div>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
@@ -384,9 +318,7 @@
                     </edit-form>
                     <review-form>
                         <view-measure ng-model="review.document" locale="review.locale" allow-drafts="true"></view-measure>
-                    </review-form>
-                    <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
-                </div>
+                    </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
 
             </div>
         </div>

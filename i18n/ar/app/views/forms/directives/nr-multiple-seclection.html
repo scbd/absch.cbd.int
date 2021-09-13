@@ -1,12 +1,8 @@
-﻿<div >
-<!-- class="km-control-group" bold="true" name="question{{question.number}}" caption="{{question.number + '. ' + question.title}}" -->
-    <div >
+﻿<div  dir="rtl"><!-- class="km-control-group" bold="true" name="question{{question.number}}" caption="{{question.number + '. ' + question.title}}" --><div >
    
         <div ng-repeat="option in question.options">
             <label class="radio-inline">
-                <input type="radio" ng-model="selection.answer" ng-value="{{$index}}" name="{{question.key}}"  ng-disabled="ngDisabledFn()" ng-change="updateAnswer()"/>
-                <span ng-bind="option.title"></span>
-            </label>
+                <input type="radio" ng-model="selection.answer" ng-value="{{$index}}" name="{{question.key}}"  ng-disabled="ngDisabledFn()" ng-change="updateAnswer()"/><span ng-bind="option.title"></span></label>
         </div>
     </div>
 

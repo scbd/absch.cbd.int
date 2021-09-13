@@ -1,26 +1,18 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading  bg-darkgrey"><h4>News</h4></div>
+	<div class="panel-heading  bg-darkgrey"><h4>Noticias</h4></div>
 	<div class="record-body panel-body">
 
 			
 		<document-date></document-date>
 
 		<div ng-show="document.title_EN_t">
-			<label>Title</label>
-			<span class="km-value">
-				{{document.title_EN_t | lstring:locale}}
-			</span>
-		</div>
+			<label>Título</label><span class="km-value">{{document.title_EN_t | lstring:locale}}</span></div>
 
 		<div ng-show="document.description_EN_t">
-			<label>Description</label>
-			<span class="km-value">
-				{{document.description_EN_t}}
-			</span>
-		</div>
+			<label>Descripción</label><span class="km-value">{{document.description_EN_t}}</span></div>
 
 		<div ng-show="document.themes_CEN_ss">
-			<label>Themes</label>
+			<label>Temas</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -29,7 +21,7 @@
 		</div>
 
 		<div ng-show="document.thematicAreas_CEN_ss">
-			<label>Thematic Areas</label>
+			<label>Áreas temáticas</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -38,11 +30,7 @@
 		</div>
 
 		<div ng-show="document.url_ss">
-			<label>Document Link</label>
-			<span class="km-value">
-				<a rel="noopener" translation-url  ng-href="{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">{{document.url_ss | lstring:locale}}</a>
-			</span>
-		</div>
+			<label>Enlace a documentos</label><span class="km-value"><a rel="noopener" translation-url  ng-href="{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">{{document.url_ss | lstring:locale}}</a></span></div>
 
 	</div>
     <div document-metadata  class="panel-footer"></div>

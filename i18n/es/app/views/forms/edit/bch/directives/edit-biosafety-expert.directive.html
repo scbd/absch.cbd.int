@@ -1,9 +1,6 @@
 <div>
 
-	<div class="edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div class="registerpage-content">
+	<div class="edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -14,14 +11,14 @@
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <ul class="pagination" id="expertTabs" ng-click="setTab()">
-                                <li class="active"><a translation-url href="#part1" data-toggle="tab">Part I</a></li>
-                                <li><a translation-url href="#part2" data-toggle="tab">Part II</a></li>
-                                <li><a translation-url href="#part3" data-toggle="tab">Part III</a></li>
-                                <li><a translation-url href="#part4" data-toggle="tab">Part IV</a></li>
-                                <li><a translation-url href="#part5" data-toggle="tab">Part V</a></li>
-								<li><a translation-url href="#part6" data-toggle="tab">Part VI</a></li>
-								<li><a translation-url href="#part7" data-toggle="tab">Part VII</a></li>
+                            <ul class="pagination" id="expertTabs" ng-click="setTab($event)">
+                                <li class="active"><a translation-url href="#part1" data-toggle="tab">Parte I</a></li>
+                                <li><a translation-url href="#part2" data-toggle="tab">Parte II</a></li>
+                                <li><a translation-url href="#part3" data-toggle="tab">Parte III</a></li>
+                                <li><a translation-url href="#part4" data-toggle="tab">Parte IV</a></li>
+                                <li><a translation-url href="#part5" data-toggle="tab">Parte V</a></li>
+								<li><a translation-url href="#part6" data-toggle="tab">Parte VI</a></li>
+								<li><a translation-url href="#part7" data-toggle="tab">Parte VII</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,21 +30,21 @@
 
                                         <section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>General information</legend>
+                                                <legend>Información general</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                                        <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
                                                             <div class="indent">
-                                                                <div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+                                                                <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                             </div>
                                                         </div>
                                                     </div>
 												</div>  
 												<div class="row">
 													<div class="col-sm-12">
-														<div class="km-control-group" name="government" required caption="Country">
+														<div class="km-control-group" name="government" required caption="País">
 															<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione un país..."></div>
 														</div>
 													</div>
 												</div>
@@ -58,11 +55,11 @@
                                     <div class="tab-pane" id="part2">
 
 										<div class="well no-shadow bg-white">
-											<legend>Profile of the expert</legend>
+											<legend>Perfil del experto</legend>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" required name="profile" caption="Brief profile">
-														<div class="help-block">Briefly describe the relevant experience of the expert (150 words).</div>
+													<div class="km-control-group" required name="profile" caption="Perfil resumido">
+														<div class="help-block">Describa brevemente la experiencia pertinente del experto (150 palabras).</div>
 														<div km-rich-textbox name="profile" required ng-model="document.profile" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -70,11 +67,11 @@
 											<div class="row">
 				
 												<div class="col-xs-12">
-													<div class="km-control-group" required name="contact" caption="Contact details">
-														<div document-selector required type="radio" ng-model="document.contact" contact-type='person' allow-new="true" allow-new-schema="contact"
-															 question="contact"
-															 schema="contact"
-															 filter="true" skip-government="true">
+													<div class="km-control-group" required name="contact" caption="Información de contacto">
+														<div document-selector required type="radio" ng-model="document.contact" allow-new="true" allow-new-schema="contact"
+															question="contact"
+															on-build-query="onContactQuery(searchText)"
+															filter="true">
 														</div>
 													</div>
 												</div>
@@ -84,19 +81,19 @@
 											<div class="row">
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthYear" caption="Year of birth">
+													<div class="km-control-group" name="birthYear" caption="Año de nacimiento">
 														<input type="number" class="form-control" name="birthYear" ng-model="document.birthYear" min="1950" />
 													</div>
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthCountry" caption="Country of birth">
+													<div class="km-control-group" name="birthCountry" caption="País de nacimiento">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group" name="nationalities"  caption="Nationality(ies)">
+													<div class="km-control-group" name="nationalities"  caption="Nacionalidad(es)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -109,25 +106,25 @@
 										
                                         <section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>Details of current employment</legend>
+                                                <legend>Información sobre el empleo actual</legend>
                                                 <div class="row">
 		
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="currentEmployment.name" caption="Name of Employer / Organization / Company">
+														<div class="km-control-group" required name="currentEmployment.name" caption="Nombre del empleador/Organización/Empresa">
 															<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
-																placeholder="example: University of Montreal" pause="400" 
+																placeholder="ejemplo: Universidad de Montreal" pause="400" 
 																on-search="onSearchOrganizations(text, locale)" 
 																data-field="suggestions" title-field="title" description-field="summary" 
 																input-class="form-control-small"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.title" caption="Job title">
+														<div class="km-control-group" required name="currentEmployment.title" caption="Título del puesto">
 															<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.department" caption="Department / Division / Unit">
+														<div class="km-control-group" required name="currentEmployment.department" caption="Departamento / División / Unidad">
 															<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -135,20 +132,20 @@
 		
 												<div class="row">
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.startDate" caption="Start date"
-														help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="YYYY-MM" name="currentEmployment.startDate" required 
+														<div class="km-control-group" required name="currentEmployment.startDate" caption="Fecha de inicio"
+														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+															<div km-date placeholder="AAAA-MM" name="currentEmployment.startDate" required 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.currentEmployment.startDate"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.organizationType" caption="Type of organization">
+														<div class="km-control-group" required name="currentEmployment.organizationType" caption="Tipo de organización">
 															<div km-select name="currentEmployment.organizationType" required ng-model="document.currentEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="padding-top: 5px;;">
-																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="Other type of organization">
-																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
+																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="Otro tipo de organización">
+																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="ejemplo: Secretaría del CDB" locales="document.header.languages"></div>
 																</div>
 																
 															</div>
@@ -158,10 +155,8 @@
 						
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" required name="currentEmployment.responsibilities" caption="Main Areas of Responsibility">
-															<div class="help-block">
-																Briefly describe how your work relates to biosafety and the area(s) of expertise for which you are being nominated.
-															</div>
+														<div class="km-control-group" required name="currentEmployment.responsibilities" caption="Principales esferas de incumbencia">
+															<div class="help-block">Describa brevemente cómo se relaciona su trabajo con la seguridad de la biotecnología y las esferas de conocimiento especializado para las cuales se presenta su candidatura.</div>
 															<div km-rich-textbox name="currentEmployment.responsibilities" ng-model="document.currentEmployment.responsibilities" rows="2" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -171,49 +166,46 @@
 										
 										<section>
                                             <div class="well no-shadow bg-white">
-												<legend>Employment history</legend>
-												<div class="help-block">
-													Please give details of relevant previous employment.
-												</div>
+												<legend>Experiencia laboral</legend>
+												<div class="help-block">Sírvase detallar los empleos anteriores pertinentes.</div>
 												
                                                 <div class="row">
 													<div class="col-xs-12">
-														<label>Countries or regions where you have worked</label>
+														<label>Países o regiones donde ha trabajado</label>
 													</div>
 	
 													<div class="col-md-5">
 														
-														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Countries">
+														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Países">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
-															ng-model="countryRegionsWorkedIn.countries" placeholder="Please select a country..." items="options.countries()"></div>
+															ng-model="countryRegionsWorkedIn.countries" placeholder="Por favor, seleccione opción(es)" items="options.countries()"></div>
 														</div>
 													</div>
-													<div class="col-md-1 small">and/or</div>
+													<div class="col-md-1 small">y/o</div>
 
 													 <div class="col-md-6">
-														<div class="km-control-group small regions-list"  name="countryRegionsWorkedIn.regions" caption="Geographical or political/economic group(s)">
+														<div class="km-control-group small regions-list"  name="countryRegionsWorkedIn.regions" caption="Grupo(s) geográfico(s) o político-económico(s)">
 															<div km-select multiple name="countryRegionsWorkedIn.regions"
-																 ng-model="countryRegionsWorkedIn.regions" placeholder="Please select one option"
+																 ng-model="countryRegionsWorkedIn.regions" placeholder="Por favor, seleccione opción(es)"
 																 items="options.regions()"></div>
 														</div>
 													</div>
 													
 													<div class="col-xs-12">
-														<div class="help-block">
-															Most recent previous professional experience<hr/>
+														<div class="help-block">Experiencia profesional previa más reciente<hr/>
 														</div>
 													</div>
 													<div class="col-xs-6">
-														<div class="km-control-group" name="previousEmployment.name" caption="Name of Previous Employer / Organization / Company">
+														<div class="km-control-group" name="previousEmployment.name" caption="Nombre del empleador/organización/empresa anteriores">
 															<div km-textbox-ac name="previousEmployment.name" ng-model="document.previousEmployment.name" locales="document.header.languages"
-															placeholder="example: University of Montreal" pause="400" 
+															placeholder="ejemplo: Universidad de Montreal" pause="400" 
 															on-search="onSearchOrganizations(text, locale)" 
 															data-field="suggestions" title-field="title" description-field="summary" 
 															input-class="form-control-small"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.department" caption="Department / Division / Unit">
+														<div class="km-control-group" name="previousEmployment.department" caption="Departamento / División / Unidad">
 															<div km-textbox-ml name="previousEmployment.department" ng-model="document.previousEmployment.department" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -221,17 +213,17 @@
 												
 												<div class="row">
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.startDate" caption="Start date"
-														help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="YYYY-MM" name="previousEmployment.startDate" 
+														<div class="km-control-group" name="previousEmployment.startDate" caption="Fecha de inicio"
+														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+															<div km-date placeholder="AAAA-MM" name="previousEmployment.startDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.startDate"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.endDate" caption="End date"
-														help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="YYYY-MM" name="previousEmployment.endDate" 
+														<div class="km-control-group" name="previousEmployment.endDate" caption="Fecha de finalización"
+														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+															<div km-date placeholder="AAAA-MM" name="previousEmployment.endDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.endDate"></div>
 														</div>
@@ -240,13 +232,13 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.organizationType" caption="Type of organization">
+														<div class="km-control-group" name="previousEmployment.organizationType" caption="Tipo de organización">
 															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="Other type of organization">
-																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
+															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="Otro tipo de organización">
+																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="ejemplo: Secretaría del CDB" locales="document.header.languages"></div>
 															</div>
 														</div>
 													</div>
@@ -254,8 +246,8 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.responsibilities" caption="Main Areas of Responsibility">
-															<div class="help-block">Briefly describe how your work relates to biosafety and the area(s) of expertise for which you are being nominated.</div>
+														<div class="km-control-group" name="previousEmployment.responsibilities" caption="Principales esferas de incumbencia">
+															<div class="help-block">Describa brevemente cómo se relaciona su trabajo con la seguridad de la biotecnología y las esferas de conocimiento especializado para las cuales se presenta su candidatura.</div>
 															<div km-rich-textbox name="previousEmployment.responsibilities" ng-model="document.previousEmployment.responsibilities" rows="2" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -268,24 +260,24 @@
     
                                         <section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>Post-secondary education</legend>
+                                                <legend>Educación posterior a la escuela secundaria</legend>
 
 												<section>
 													<div class="well no-shadow bg-white">
-														<legend><h3>A.	Formal education</h3></legend>
+														<legend><h3>A. Educación formal</h3></legend>
 														<div class="panel panel-default" name="primaryEducation">
-															<div class="panel-heading">First Degree (e.g. B.Sc. in Microbiology)</div>
+															<div class="panel-heading">Primer diploma (por ej., Licenciatura en microbiología)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.title" caption="Title of the Degree or other academic distinction and subject">
-																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="example: B.Sc. in Microbiology" locales="document.header.languages"></div>
+																		<div class="km-control-group" required name="primaryEducation.title" caption="Título del diploma u otros méritos académicos y asignatura">
+																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="ejemplo: Licenciado en Microbiología" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.institution" caption="Name of academic institution">
+																		<div class="km-control-group" required name="primaryEducation.institution" caption="Nombre de la institución académica">
 																			<div km-textbox-ac name="primaryEducation.institution" required ng-model="document.primaryEducation.institution"  
-																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
+																			placeholder="ejemplo: Universidad de Montreal" locales="document.header.languages" pause="400" 
 																			on-search="onSearchOrganizations(text, locale)" 
 																			data-field="suggestions" title-field="title" description-field="summary" 
 																			input-class="form-control-small"></div>
@@ -295,38 +287,36 @@
 																
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.startDate" caption="Start date"
-																		help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-																			<div km-date placeholder="YYYY-MM" name="primaryEducation.startDate" required 
+																		<div class="km-control-group" required name="primaryEducation.startDate" caption="Fecha de inicio"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																			<div km-date placeholder="AAAA-MM" name="primaryEducation.startDate" required 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			ng-model="document.primaryEducation.startDate"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.endDate" caption="End date"
-																		help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-																			<div km-date placeholder="YYYY-MM" name="primaryEducation.endDate" required 
+																		<div class="km-control-group" required name="primaryEducation.endDate" caption="Fecha de finalización"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																			<div km-date placeholder="AAAA-MM" name="primaryEducation.endDate" required 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			ng-model="document.primaryEducation.endDate"></div>
 																		</div>
 																	</div>
 																</div>															
 															</div>
-														</div>
-														<br/>
-														<div class="panel panel-default">
-															<div class="panel-heading">Second Degree (e.g. M.Sc. in Microbiology)</div>
+														</div><br/><div class="panel panel-default">
+															<div class="panel-heading">Segundo diploma (por ej., Máster en Microbiología)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.title" caption="Title of the Degree or other academic distinction and subject">
-																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="example: B.Sc. in Microbiology" locales="document.header.languages"></div>
+																		<div class="km-control-group"  name="secondaryEducation.title" caption="Título del diploma u otros méritos académicos y asignatura">
+																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="ejemplo: Licenciado en Microbiología" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.institution" caption="Name of academic institution">
+																		<div class="km-control-group"  name="secondaryEducation.institution" caption="Nombre de la institución académica">
 																			<div km-textbox-ac name="secondaryEducation.institution"  ng-model="document.secondaryEducation.institution"  
-																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
+																			placeholder="ejemplo: Universidad de Montreal" locales="document.header.languages" pause="400" 
 																			on-search="onSearchOrganizations(text, locale)" 
 																			data-field="suggestions" title-field="title" description-field="summary" 
 																			input-class="form-control-small"></div>
@@ -336,38 +326,36 @@
 																
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.startDate" caption="Start date"
-																		help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-																			<div km-date placeholder="YYYY-MM" name="secondaryEducation.startDate" 
+																		<div class="km-control-group"  name="secondaryEducation.startDate" caption="Fecha de inicio"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																			<div km-date placeholder="AAAA-MM" name="secondaryEducation.startDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			 ng-model="document.secondaryEducation.startDate"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.endDate" caption="End date"
-																		help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-																			<div km-date placeholder="YYYY-MM" name="secondaryEducation.endDate" 
+																		<div class="km-control-group"  name="secondaryEducation.endDate" caption="Fecha de finalización"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																			<div km-date placeholder="AAAA-MM" name="secondaryEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			 ng-model="document.secondaryEducation.endDate"></div>
 																		</div>
 																	</div>
 																</div>																
 															</div>
-														</div>
-														<br/>
-														<div class="panel panel-default">
-															<div class="panel-heading">Third Degree (e.g. Ph.D. in Microbiology)</div>
+														</div><br/><div class="panel panel-default">
+															<div class="panel-heading">Tercer diploma (por ej., Doctorado en Microbiología)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.title" caption="Title of the Degree or other academic distinction and subject">
-																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="example: B.Sc. in Microbiology" locales="document.header.languages"></div>
+																		<div class="km-control-group"  name="thirdEducation.title" caption="Título del diploma u otros méritos académicos y asignatura">
+																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="ejemplo: Licenciado en Microbiología" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.institution" caption="Name of academic institution">
+																		<div class="km-control-group"  name="thirdEducation.institution" caption="Nombre de la institución académica">
 																			<div km-textbox-ac name="thirdEducation.institution"  ng-model="document.thirdEducation.institution" 
-																			 placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
+																			 placeholder="ejemplo: Universidad de Montreal" locales="document.header.languages" pause="400" 
 																			 on-search="onSearchOrganizations(text, locale)" 
 																			 data-field="suggestions" title-field="title" description-field="summary" 
 																			 input-class="form-control-small"></div>
@@ -377,17 +365,17 @@
 																
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.startDate" caption="Start date"
-																		help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-																			<div km-date placeholder="YYYY-MM" name="thirdEducation.startDate"  
+																		<div class="km-control-group"  name="thirdEducation.startDate" caption="Fecha de inicio"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																			<div km-date placeholder="AAAA-MM" name="thirdEducation.startDate"  
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			ng-model="document.thirdEducation.startDate"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.endDate" caption="End date"
-																		help-content="<img src='/app/img/help-images/Datetime_control_gif.gif' />"  help-title="Help: Biosafety Expert">
-																			<div km-date placeholder="YYYY-MM" name="thirdEducation.endDate" 
+																		<div class="km-control-group"  name="thirdEducation.endDate" caption="Fecha de finalización"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																			<div km-date placeholder="AAAA-MM" name="thirdEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			 ng-model="document.thirdEducation.endDate"></div>
 																		</div>
@@ -399,11 +387,11 @@
 												</section>
 												<section>
 													<div class="well no-shadow bg-white">
-														<legend>B. Other professional qualifications</legend>
+														<legend>B. Otras cualificaciones profesionales</legend>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="km-control-group" name="professionalQualification" caption="List a maximum of three other relevant professional qualifications.">
-																	<div class="help-block">(e.g. specialized training, certifications obtained, etc.)</div>
+																<div class="km-control-group" name="professionalQualification" caption="Enumere un máximo de otras tres cualificaciones profesionales pertinentes.">
+																	<div class="help-block">(por ejemplo, capacitación especializada, certificaciones obtenidas, etc.)</div>
 																	<div  km-inputtext-list max-entries="3" type="lstring" name="professionalQualification" ng-model="document.professionalQualification" locales="document.header.languages"></div>
 																</div>
 															</div>
@@ -417,14 +405,12 @@
     
                                         <section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>Areas of expertise</legend>
+                                                <legend>Esferas de especialización</legend>
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="expertise" required caption="Expertise">
-															<div class="help-block">
-																Please select one or more areas of academic and professional expertise that most closely match the experience of the nominee. 
-															</div>
+														<div class="km-control-group" name="expertise" required caption="Conocimientos especializados">
+															<div class="help-block">Sírvase seleccionar una o más esferas de conocimientos especializados académicos y profesionales que más se corresponden con la experiencia del candidato.</div>
 															<div km-term-check required ng-model="document.expertise" locales="document.header.languages"
 																terms="options.areaOfExpertise" show-other="true" binding-type="term[]"></div>
 														</div>
@@ -435,12 +421,12 @@
 										
 										<section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>Publications</legend>
+                                                <legend>Publicaciones</legend>
 
 												<div class="row">
 													<div class="col-md-12">
 														<div class="km-control-group" name="relevantPublication" caption="">
-															<div class="help-block">List your three most important publications related to your main field of expertise.</div>
+															<div class="help-block">Enumere sus tres publicaciones más importantes relacionadas con su área principal de especialización.</div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="relevantPublication" ng-model="document.relevantPublication" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -450,19 +436,19 @@
 										
 										<section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>Professional memberships </legend>
+                                                <legend>Membresías profesionales</legend>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="professionalMemberships" caption="Professional memberships">
-															<div class="help-block">List <u>up to three</u> relevant professional societies or organizations of which you are a member.</div>
+														<div class="km-control-group" name="professionalMemberships" caption="Membresías profesionales">
+															<div class="help-block">Enumere <u>hasta tres</u> sociedades u organizaciones profesionales pertinentes de las que es miembro.</div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="professionalMemberships" ng-model="document.professionalMemberships" locales="document.header.languages"></div>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="panelServed" caption="Technical committees, expert panels or advisory bodies served">
-															<div class="help-block">List <u>up to three</u> relevant technical committees, expert panels or advisory bodies on which you have served and briefly describe your specific responsibilities.</div>
+														<div class="km-control-group" name="panelServed" caption="Comités técnicos, grupos de expertos u órganos consultivos a los que se haya prestado servicios">
+															<div class="help-block">Enumere <u>hasta tres</u> comités técnicos, grupos de expertos u órganos consultivos pertinentes a los que haya prestado servicios y describa brevemente sus responsabilidades específicas.</div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="panelServed" ng-model="document.panelServed" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -474,19 +460,19 @@
     
                                         <section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>Language proficiency</legend>
+                                                <legend>Dominio de idiomas</legend>
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="motherTongue" required caption="Mother tongue">
+														<div class="km-control-group" name="motherTongue" required caption="Lengua materna">
 															<div km-term-check required ng-model="motherTongue.unLanguages" locales="document.header.languages"
 																terms="options.languages" show-other="false" binding-type="term[]"></div>
 															<div ng-repeat="lang in motherTongue.otherLanguages" style="max-width: 200px;padding-left: 15px;padding-bottom: 10px;">
 																<div afc-autocomplete name="otherMotherTongue{{$index}}" ng-model="motherTongue.otherLanguages[$index]" source="options.otherLanguages" style="display: inline-block;"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a language..." ng-change="onLangChange()"></div>
-																<button class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">Remove</button>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione un idioma..." ng-change="onLangChange()"></div>
+																<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">Eliminar</button>
 															</div>
-															<button class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">Add other language</button>
+															<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">Agregue otro idioma</button>
 														</div>
 													</div>
 												</div>
@@ -494,39 +480,31 @@
 												
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="otherTongue" caption="Other languages">
+														<div class="km-control-group" name="otherTongue" caption="Otros idiomas">
 															<div>
 																<table>
 																	<tr ng-repeat="language in languageRating | orderBy:'name'">																		
-																		<td style="width:250px; vertical-align: middle;">
-																			<span ng-if="language.isUNLanguage" ng-bind="language.title|lstring:locale"></span>
-																			<div  ng-if="!language.isUNLanguage" class="input-group">
+																		<td style="width:250px; vertical-align: middle;"><span ng-if="language.isUNLanguage" ng-bind="language.title|lstring:locale"></span><div  ng-if="!language.isUNLanguage" class="input-group">
 																				<div afc-autocomplete name="otherLanguageRating{{$index}}" ng-model="languageRating[$index]" source="options.otherLanguages" style="display: inline-block;"
-																				filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a language..."></div>																				
+																				filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione un idioma..."></div>																				
 																			</div>
 																		</td>
 																		<td>
 																			<div class="btn-group">
 																				<label class="btn">
-																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="excellent" />
-																					Excellent
-																				</label>
+																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="excellent" />Excelente</label>
 																				<label class="btn">
-																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="good" />
-																					Good
-																				</label>
+																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="good" />Bueno</label>
 																				<label class="btn">
-																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="fair" />
-																					Fair
-																				</label>
+																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="fair" />Aceptable</label>
 																			</div>
-																			<button class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">Clear</button>
-																			<button class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >Remove</button>
+																			<button type="button" class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">Borrar</button>
+																			<button type="button" class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >Eliminar</button>
 																		</td>
 																	</tr>
 																	<tr>
 																		<td colspan="2">
-																			<button class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">Add other language</button>
+																			<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">Agregue otro idioma</button>
 																		</td>
 																	</tr>
 																</table>
@@ -543,21 +521,19 @@
     
                                         <section>
                                             <div class="well no-shadow bg-white">
-												<legend>Timeframe for confirmation or updating of information</legend>
-												<div class="help-info">
-													Please note that according to decision BS-IV/4, experts’ records are maintained on the roster for a period of <u>four</u> years from the last update of their information, after which they will be deleted from the roster unless re-nominated.
-												</div>
+												<legend>Plazo para la confirmación o actualización de la información</legend>
+												<div class="help-info">Por favor, considere que, de conformidad con la decisión BS-IV/4, los registros de expertos permanecen en la lista por un período de <u>cuatro</u> años a partir de la última actualización de su información, luego de lo cual se eliminan de la lista a menos que se vuelva a presentar su candidatura.</div>
 
                                             </div>
 										</section>
 										
                                         <section>
                                             <div class="well no-shadow bg-white">
-												<legend>Any other relevant information</legend>
+												<legend>Cualquier otra información pertinente</legend>
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="additionalInformation" caption="Additional Information">
-															<div class="help-info">Please provide any other information relevant to your role as an expert (max. 300 words).</div>
+														<div class="km-control-group" name="additionalInformation" caption="Información adicional">
+															<div class="help-info">Por favor, proporcione cualquier otra información relevante para su rol de experto (máx. 300 palabras).</div>
 															<div km-rich-textbox name="additionalInformation" rows="6" ng-model="document.additionalInformation"
 																locales="document.header.languages"></div>
 														</div>
@@ -566,8 +542,8 @@
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="additionalDocuments" caption="Any other relevant documents">
-															<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+														<div class="km-control-group" name="additionalDocuments" caption="Otros documentos pertinentes">
+															<div class="help-info">Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen.</div>
 															<div km-link name="additionalDocuments" ng-model="document.additionalDocuments"
 																identifier="document.header.identifier"></div>
 														</div>
@@ -581,14 +557,10 @@
                                 </div>
 
                                 <section>
-                                    <legend>Notes</legend>								
+                                    <legend>Notas</legend>								
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notes">
-                                                <span class="help-block">
-                                                    The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
-                                                </span>
-                                                <div km-notes name="notes" ng-model="document.notes"></div>
+                                            <div class="km-control-group" name="notes"><span class="help-block">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.</span><div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -600,6 +572,19 @@
 							
 						</div>
 					</form>
+					<div class="row">
+                        <div class="col-xs-12">
+                            <ul class="pagination" id="expertTabs" ng-click="setTab($event)">
+                                <li class="active"><a translation-url href="#part1" data-toggle="tab">Parte I</a></li>
+                                <li><a translation-url href="#part2" data-toggle="tab">Parte II</a></li>
+                                <li><a translation-url href="#part3" data-toggle="tab">Parte III</a></li>
+                                <li><a translation-url href="#part4" data-toggle="tab">Parte IV</a></li>
+                                <li><a translation-url href="#part5" data-toggle="tab">Parte V</a></li>
+								<li><a translation-url href="#part6" data-toggle="tab">Parte VI</a></li>
+								<li><a translation-url href="#part7" data-toggle="tab">Parte VII</a></li>
+                            </ul>
+                        </div>
+                    </div>
 				</edit-form>
 				<review-form>
 					<div view-biosafety-expert ng-model="review.document" locale="review.locale" allow-drafts="true"></div>

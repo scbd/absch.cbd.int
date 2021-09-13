@@ -1,85 +1,74 @@
-﻿<div ng-controller="editDatabase">
+﻿<div >
 
 	<div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div class="registerpage-content">
-
-			<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab">
-				<!-- <intro-form></intro-form> -->
-				<!--only use it if default article intro is not required -->
-				<edit-form>
+			<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<legend name="formInfo" style="display:none"></legend>
 							<div class="row">
 								<div class="col-xs-12" >
-									<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+									<div class="km-control-group" name="header.languages" required caption="Выберите язык(и) для представления этой записи:">
 										<div class="indent">
-											<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+											<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<section>
 
-								<legend>Website or Database details </legend>
+								<legend>Сведения о веб-сайте или базе данных</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="government" required caption="Country">
+										<div class="km-control-group" name="government" required caption="Страна">
 											<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
-											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Выберите страну..."></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="title" required caption="Website or database name">
-											<div class="help-info">Please enter the name of the website or database as you would like it to appear in
-												the title of the record.</div>
+										<div class="km-control-group" name="title" required caption="Название веб-сайта или базы данных">
+											<div class="help-info">Введите название веб-сайта или базы данных в том виде, в котором вы хотели бы, чтобы оно было представлено в заголовке записи.</div>
 											<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages"
-											 placeholder="example: The title"></div>
+											 placeholder="пример: Название"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="description" required caption="Description">
-											<div class="help-info">Please enter a short description of the national website or database, such as its
-												function or information it makes available.</div>
+										<div class="km-control-group" name="description" required caption="Описание">
+											<div class="help-info">Кратко опишите национальный веб-сайт или национальную базу данных (например, их функции или информацию, доступ к которой они обеспечивают).</div>
 											<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages"
-											 placeholder="example: The description"></div>
+											 placeholder="пример: Описание"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="websites" required caption="Website address">
-											<div class="help-info">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
-											<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div>
+										<div class="km-control-group" name="websites" required caption="Адрес веб-сайта">
+											<div class="help-info">Укажите полный URL-адрес веб-сайта (например, http://www.cbd.int).</div>
+											<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="пример: http://www.cbd.int"></div>
 										</div>
 									</div>
 								</div>
 							</section>
 
 							<section ng-if="realm.is('BCH')">
-								<legend>Timeframe for confirmation or updating of information</legend>
-								<div class="help-info">
-									Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.
-								</div>
+								<legend>Срок подтверждения или обновления информации</legend>
+								<div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. По истечении установленного предельного срока вам будет предложено подтвердить или обновить запись в течение трех месяцев. При отсутствии подтверждения по истечении этого периода запись будет помечена как «Неподтвержденная».</div>
 							</section>
 
 							<section>
 
-								<legend>Additional information</legend>
+								<legend>Дополнительная информация</legend>
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="address" caption="Any other relevant information">
-											<div class="help-info">Please use this field to provide any other relevant information that may not have
-												been addressed elsewhere in the record.</div>
+										<div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+											<div class="help-info">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -87,9 +76,8 @@
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-											<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more 
-												relevant documents that will be stored in the database for users to download.</div>
+										<div class="km-control-group" name="relevantDocuments" caption="Любые другие соответствующие документы">
+											<div class="help-info">Укажите в этом поле адреса любых других соответствующих веб-сайтов и/или один или более соответствующих документов, которые будут храниться в базе данных и будут доступны для загрузки пользователями.</div>
 											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 											 identifier="document.header.identifier"></div>
 										</div>
@@ -99,11 +87,11 @@
 
 							<section>
 
-								<legend>Notes</legend>
+								<legend>Примечания</legend>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+											<div class="help-info">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи. Оно будет скрыто после опубликования записи. Данное поле не предназначено для конфиденциальной информации.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
@@ -115,10 +103,7 @@
 				</edit-form>
 				<review-form>
 					<view-database ng-model="review.document" locale="review.locale" allow-drafts="true"></view-database>
-				</review-form>
-				<!-- <publish-form></publish-form> -->
-				<!-- use when you wan to display more than publish buttons -->
-			</div>
+				</review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
 
 		</div>
 	</div>

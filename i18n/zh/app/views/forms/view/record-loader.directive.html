@@ -1,74 +1,30 @@
 ﻿<div>
     <link rel="stylesheet" href="/app/css/record.css">
     <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>
-    <style>
-        ins {
-                text-decoration: none;
-                background-color: #d4fcbc;
-        }
-
-        del {
-                text-decoration: line-through;
-                background-color: #fbb6c2;
-                color: #555;
-        }
-    </style>
+    <style> ins { text-decoration: none; background-color: #d4fcbc; } del { text-decoration: line-through; background-color: #fbb6c2; color: #555; } </style>
     <div id="recordContent">
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
         <div block-region activate="loading||isComparing"></div>
 
-        <div class="alert alert-danger text-center" ng-show="error" ng-if="error">
-            <strong>Error as occured...</strong>
-            <div>{{error}}</div>
+        <div class="alert alert-danger text-center" ng-show="error" ng-if="error"><strong>发生错误...</strong><div>{{error}}</div>
         </div>
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentSuccess">
-            <h2>Thank you for downloading document {{documentUID}}.</h2>
-            <p>If the document did not download try clicking
-                <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">here...</a>
-            </p>
-            </br>
-            </br>
-            </br>
-            </br>
-            This window will close automatically in {{timeLaspe}} seconds.
-        </div>
+            <h2>感谢您下载文件 {{documentUID}}。</h2>
+            <p>如果该文件未下载，请尝试单击<a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">此处...</a></p></br> </br> </br> </br> 本窗口将在 {{timeLaspe}} 秒后自动关闭。</div>
 
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentError">
-            <h2>Thank you for requesting document {{documentUID}}.</h2>
-            <p>The document does not exists, if you think this file should be available, please report to
-                <a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a>
-            </p>
+            <h2>感谢您索要文件 {{documentUID}}。</h2>
+            <p>该文件不存在，如果您认为应该提供该文件，请发送报告至<a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a>。</p>
         </div>
 
         <div id="RecordDetails" ng-if="showDetails">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="well">
-                        <h3 style="margin:0 0 10px 0;padding:0;border-bottom:1px solid #999;">Record Information</h3>
-                        <div> 
-                            <span style="font-size:12px">Type: </span> 
-                            {{internalDocumentInfo.metadata.schema | schemaName}} </div>
-                        <div>
-                            <span style="font-size:12px">Status: </span>
-                            <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
-                                DRAFT
-                            </span>
-                            <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
-                                PUBLISHED
-                            </span>
-                            <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
-                                [Locked: Pending {{workflowRequestType}} request]
-                            </span>
-                            <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
-                                DELETED
-                            </span>
-                            <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
-                                <span class="bold color-red"> REVOKED</span>
-                            </span>
-                        </div>
-                        <div>
-                            <span style="font-size:12px">History: </span>
-                            <div view-history document-id="internalDocumentInfo.identifier"></div>
+                        <h3 style="margin:0 0 10px 0;padding:0;border-bottom:1px solid #999;">记录信息</h3>
+                        <div><span style="font-size:12px">类型：</span>{{internalDocumentInfo.metadata.schema | schemaName}}</div>
+                        <div><span style="font-size:12px">状态：</span><span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">草稿</span><span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">已发布</span><span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">[已锁定：正在等待 {{workflowRequestType}} 请求 ]</span><span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">已删除</span><span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'"><span class="bold color-red"> 已撤销</span></span></div>
+                        <div><span style="font-size:12px">历史：</span><div view-history document-id="internalDocumentInfo.identifier"></div>
                         </div>
 
                        
@@ -78,47 +34,40 @@
         </div>
 
         <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
-            <h3>
-                You are viewing a DELETED record. 
-            </h3>
-            <p>This record information is displayed for reference purpose only and should be not used.</p>
+            <h3>您正在查看一条已删除记录。</h3>
+            <p>该记录信息仅供参考，不应使用。</p>
         </div>
 
         <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
-            <h3>
-                This document has been updated. This is not the latest published version. 
-                <a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName|encodeURIComponent}}/{{internalDocument | uniqueIDWithoutRevision|encodeURIComponent}}"
-                    target="new">Click here to view the latest version of the record.</a>
+            <h3>本文档已更新。这不是最新发布的版本。 <a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName|encodeURIComponent}}/{{internalDocument | uniqueIDWithoutRevision|encodeURIComponent}}"
+                    target="new"> 单击此处查看该记录的最新版本。</a></h3>
+        </div>
+        
+        <div class="alert alert-success comapre-message" role="alert" ng-show="comparingRevision">
+            <h3><span class="fa fa-window-restore"></span> 将第<strong ng-bind="comparingRevision"></strong>版与最新版本比较 <strong ng-bind="internalDocumentInfo.latestRevision"></strong><button ng-disabled="isComparing" class="btn btn-default btn-success btn-xs pull-right" type="button"ng-click="closeComparison()"><span class="fa fa-times-circle"></span> 关闭比较</button> 
             </h3>
         </div>
 
-
         <div style="float:right; position:relative;top:7px;right:3px;" ng-if="!isIRCCRevoked && internalCanEdit">
-            <div>
-                <a rel="noopener" translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
-                    class="btn btn-default btn-xs" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit">
-                    <i class="fa fa-edit"></i> edit </a>
-                <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}"
-                    type="button" class="btn btn-default" ng-click="askDelete(record)">
-                    <i class="fa fa-trash-o"></i>
-                </button>
+            <div><a rel="noopener" translation-url title="编辑" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
+                    class="btn btn-default btn-xs" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit"><i class="fa fa-edit"></i> 编辑</a><button title="删除" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}"
+                    type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
         </div>
-        <div ng-if="showDifferenceButton" class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
-            <button ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()">
-                <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference
-            </button>
-            <!-- for comparing with older versions -->
-            <!-- ng-if="showDifferenceButton"  style="display: none;"-->
+        <div ng-if="showDifferenceButton||showComparison" class="pull-right compare-buttons" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+            <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()"><i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> 显示差异</button><!-- for comparing with older versions --> <!-- ng-if="showDifferenceButton"  style="display: none;"--><button ng-if="showComparison" ng-disabled="isComparing" class="btn btn-default btn-success btn-xs dropdown-toggle" type="button" id="comparisonMenu"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="loadRecordRevisions()"><span ng-if="!comparingRevision">比较</span> <span ng-if="comparingRevision">正在比较 <span ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span> <span class="caret"></span></button>
+            <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
+                <li ng-if="loadingRevisions"  ng-disabled="isComparing"><a ng-href="#"><i class="fa fa-spin fa-spinner" ></i> 正在加载...</a></li>
+                <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions"  ng-disabled="isComparing" ng-class="{'active':revision.revision==comparingRevision}"><a ng-href="#" ng-click="showDifference(revision.revision)">{{revision.uniqueIdentifier}}</a></li>
+            </ul>
             <div ng-if="isComparing">
                 <div id="compareSchemaView"></div>
             </div>
         </div>
         <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
             <div record-options></div>
-        </div>
-        <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>
-        <div id="schemaView" ng-show="internalDocument"></div>
+        </div><span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> 正在加载...</span><div id="schemaView" ng-show="internalDocument"></div>
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'/app/views/forms/view/print-footer.html'"></div>
 

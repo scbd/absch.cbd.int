@@ -1,19 +1,6 @@
-﻿<div ng-controller="editBchNationalReport4Controller">
+﻿<div dir="rtl">
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-    <style>
-        .disabled {
-            -moz-opacity:.50;filter:alpha(opacity=50);opacity:.50;
-        }
-        .inverted.dimmer {
-            background-color: rgba(255, 255, 255, .85);
-        }
-        .km-terms-check-add-input-int{
-            width:50px;
-        }
-        .block-position{
-            position: relative;
-        }
-    </style>
+    <style> .disabled { -moz-opacity:.50;filter:alpha(opacity=50);opacity:.50; } .inverted.dimmer { background-color: rgba(255, 255, 255, .85); } .km-terms-check-add-input-int{ width:50px; } .block-position{ position: relative; } </style>
     <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
 
         
@@ -27,11 +14,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >
-                                        Question <span ng-bind="::tab.title"></span>
-                                    </a>
-                                </li>
+                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand"><a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >الأسئلة <span ng-bind="::tab.title"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -42,16 +25,12 @@
                                 <div class="col-xs-12">
                                     <div class="tab-content">
 
-                                        <div class="tab-pane" ng-repeat="tab in nr4Tabs" id="tab{{$index+1}}" ng-class="{'active': $index==0}" ng-if="tab.render" >
-                                            <!-- ng-if="activeTab==$index+1" -->
-                                            <div style="margin-bottom:20px;">
+                                        <div class="tab-pane" ng-repeat="tab in nr4Tabs" id="tab{{$index+1}}" ng-class="{'active': $index==0}" ng-if="tab.render" ><!-- ng-if="activeTab==$index+1" --><div style="margin-bottom:20px;">
 
                                                 <div class="section-pane panel panel-default" ng-repeat="section in tab.sections"
                                                     id="section{{$index+1}}" style="margin-bottom:3px!important">
 
-                                                    <div class="panel-heading">
-                                                        <strong  ng-bind-html="::section.title"></strong>
-                                                        <div ng-bind-html="::section.description" ng-if="section.description"></div>
+                                                    <div class="panel-heading"><strong  ng-bind-html="::section.title"></strong><div ng-bind-html="::section.description" ng-if="section.description"></div>
                                                     </div>
                                                     <div class="panel-body" style="padding:0px">
                                                         <div ng-if="section.footnote" ng-bind-html="::section.footnote" style="font-size:10px;padding:10px"></div>
@@ -68,15 +47,13 @@
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
                                                                         <div class="pull-right" style="margin-bottom:5px;">
-                                                                            <button ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                            <button ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">عرض الإجابة السابقة</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">إخفاء الإجابة السابقة</button>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
 
-                                                                <div ng-if="question.type !='legend'">
-                                                                    <!-- Incase of subquestion wrap questions inside new section -->
-                                                                    <div ng-if="question.type=='sub-section'" style="padding:20px">
+                                                                <div ng-if="question.type !='legend'"><!-- Incase of subquestion wrap questions inside new section --><div ng-if="question.type=='sub-section'" style="padding:20px">
                                                                         <div ng-repeat="subQuestion in question.questions" style="border:1px solid #eee;margin:5px;padding:10px"
                                                                             class="row" ng-class="{'disabled': isQuestionDisabled(subQuestion)}"  ng-if="subQuestion.visible">
                                                                             <div class="col-md-12" style="padding-left:0px;padding-right: 0px;" block-region activate="isQuestionDisabled(subQuestion)" skip-loading-icon="true">
@@ -86,8 +63,8 @@
                                                                                         ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
                                                                                     <div class="pull-right" style="margin-bottom:5px;">
-                                                                                        <button ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                                        <button ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">عرض الإجابة السابقة</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">إخفاء الإجابة السابقة</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -105,9 +82,7 @@
                                                 <div ng-if="tab.tab==1"  class="section-pane panel panel-default" id="section1" 
                                                     style="margin-bottom:3px!important">
                                                     
-                                                    <div class="panel-heading">
-                                                        <strong>General information</strong>
-                                                    </div>
+                                                    <div class="panel-heading"><strong>معلومات عامة</strong></div>
                                                     <div class="panel-body" style="padding:0px">
                                                         <div ng-include="'contact'"></div>
                                                     </div>
@@ -123,11 +98,7 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">
-                                        Question <span ng-bind="::tab.title"></span>
-                                    </a>
-                                </li>
+                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand"><a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">أسئلة <span ng-bind="::tab.title"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -141,28 +112,28 @@
 
     <div>
         <script type="text/ng-template" id="contact" trados-translation="true">
-            <div style="margin:20px">
+            <div style="margin:20px" dir="rtl">
                 <div class="row">
                     <div class="col-xs-12" >
-                        <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                        <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
                             <div class="indent">
-                                <div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+                                <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="km-control-group" name="government" required caption="Country">
+                        <div class="km-control-group" name="government" required caption="البلد">
                             <div afc-autocomplete required name="government" ng-disabled="userHasGovernment()" ng-model="document.government" source="options.countries"
-                                filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..." ng-change="onGovernmentChange(document.government)"></div>
+                                filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..." ng-change="onGovernmentChange(document.government)"></div>
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="km-control-group" name="contact" caption="Contact person submitting the report" required>											
+                        <div class="km-control-group" name="contact" caption="مسؤول الاتصال الذي أرسل التقرير" required>											
                             <div document-selector ng-model="document.contact" question="contact"  type="radio"
                                 government="document.government" schema="(contact focalPoint)" allow-new="true" allow-new-schema="contact"></div>			
                         </div>
@@ -170,7 +141,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="km-control-group" required name="stakeholders" caption="9.	Organizations/stakeholders who were consulted or participated in the preparation of this report">
+                        <div class="km-control-group" required name="stakeholders" caption="9. المنظمات/الجهات المعنية التي شاركت أو قدمت استشارتها أثناء إعداد هذا التقرير">
                             <div km-textbox-ml name="stakeholders" required ng-model="document.stakeholders" locales="document.header.languages"></div>
                         </div>
                     </div>
@@ -178,15 +149,13 @@
 
                 <div class="row">
                         <div class="col-sm-6">
-                            <div class="km-control-group" required name="stakeholders" caption="10.	Time period covered by this report">
+                            <div class="km-control-group" required name="stakeholders" caption="10. الفترة الزمنية التي يغطيها هذا التقرير">
                                 <div class="col-sm-5">
-                                    <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
+                                    <div km-date placeholder="يوم - شهر - سنة" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
                                 </div> 
-                                <div class="col-sm-1">
-                                    <strong>TO</strong>
-                                </div>
+                                <div class="col-sm-1"><strong>إلى</strong></div>
                                 <div class="col-sm-5">
-                                    <div km-date placeholder="YYYY-MM-DD" name="reportPeriodEndDate" required ng-model="document.reportPeriodEndDate"></div>
+                                    <div km-date placeholder="يوم - شهر - سنة" name="reportPeriodEndDate" required ng-model="document.reportPeriodEndDate"></div>
                                 </div>                                
                             </div>
                         </div>
@@ -195,7 +164,7 @@
             </div>
         </script>
         <script type="text/ng-template" id="question" trados-translation="true">
-            <div style="background-color: #eee;padding:10px 3px" class="col-md-12">
+            <div style="background-color: #eee;padding:10px 3px" class="col-md-12" dir="rtl">
                 <div class="col-md-8" style="padding-left: 5px;">
                     <div ng-switch="question.type">
                         <div ng-switch-when="option|term" ng-switch-when-separator="|">
@@ -217,19 +186,13 @@
                             <div km-textbox-ml rows=4 name="question.key" 
                                 ng-model="document[question.key]" locales="document.header.languages" ></div>
                         </div>
-                        <div ng-switch-default>
-                            {{question}}
-                        </div>
+                        <div ng-switch-default>{{question}}</div>
                     </div>
                 </div>
                 <div class="col-md-4" ng-if="question.showPrevious">
                     <div style="border: 2px solid #fff;padding:5px">
-                        <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">
-                            * Please note that the period covered by this question is different in each reporting format.  
-                        </div>
-                        <div>
-                            <strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
-                        </div>
+                        <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">* يرُجى مراعاة أن الفترة التي يغطيها هذا السؤال تختلف من نموذج تقرير لآخر.</div>
+                        <div><strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong></div>
                         <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
                             ng-bind="::(previousAnswerMapping[question.key].previousQuestion.answer|lstring)"></div>
                         <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
@@ -242,16 +205,15 @@
             </div>
         </script>
         <script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
-            <div style="margin:10px;">
-                <h1>Fourth national report</h1>
+            <div style="margin:10px;" dir="rtl">
+                <h1>التقرير الوطني الرابع</h1>
                 <hr>
                 <div class=" alert alert-danger">
                     <div class="glyphicon glyphicon-exclamation-sign"></div>
-                    <div>Only one record of the fourth national report is allowed for each government, the fourth national report already exists
-                        for your government, you will be redirected to the record in {{alertSeconds}} seconds.</div>
+                    <div>لا يُسمح سوى بسجل واحد للتقرير الوطني السادس لكل حكومة، مع العلم بأن التقرير الوطني الرابع موجود بالفعل لحكومتكم، ولذا سيتم توجيهك إلى هذا السجل في غضون ثوانٍ.</div>
                 </div>
                 <div class="ngdialog-buttons">
-                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirect now</button>
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">إعادة التوجيه الآن</button>
                 </div>
             </div>
         </script>

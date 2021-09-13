@@ -1,10 +1,7 @@
 ﻿<div id="Record" class="record panel panel-default" >
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4>
-			<span ng-bind="::document.header.schema|schemaName"></span>
-			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
-		</h4>	
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
 	</div>
 
 	<div class="record-body panel-body" help schema="ViewCP" >
@@ -14,85 +11,67 @@
 
 		 <div name="article17-1-a"></div>
 
-		<legend ng-if="document.government || document.name">General information</legend>
+		<legend ng-if="document.government || document.name">一般信息</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country</label>
-			<div class="km-value" compare-val>
-				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
-                <span ng-party-status government="document.government" id="government"></span>
-			</div>
+			<label name="country">国家</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
 		</div>
 
 		 <div ng-show="display('title') && document.name">
-		 <label>Name of the checkpoint</label>
-		 	<div class="km-value" compare-val>
-		 	<strong>{{document.name | lstring:locale}}</strong>
-		 	</div>
+		 <label>检查点名称</label>
+		 	<div class="km-value" compare-val><strong><span ng-bind="document.name | lstring:locale"></span></strong></div>
 		 </div>
 
 
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
 			document.jurisdictionName">
-			<legend name="Responsibilities">Checkpoint Responsibilities</legend>
-			<div ng-show="document.responsibilities">
-				<!--<label>Short description of responsibilities</label>-->
-				<div compare-val="responsibilities">
+			<legend name="Responsibilities">检查点职责</legend>
+			<div ng-show="document.responsibilities"><!--<label>Short description of responsibilities</label>--><div compare-val="responsibilities">
 				<div class="km-value km-pre" ng-bind-html="document.responsibilities|lstring:locale"></div>
 				</div>
 			</div>
 			<div ng-show="document.jurisdiction">
-				<label>Area of Jurisdiction</label>
+				<label>辖区</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
-						<li>{{document.jurisdiction|term}}
-							<span ng-if="isSubNational() ||isCommunity() || isOthers()">({{document.jurisdictionName | lstring:locale}})</span>
-						</li>
+						<li><span ng-bind="document.jurisdiction|term"></span> <span ng-if="isSubNational() ||isCommunity() || isOthers()">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span></li>
 					</ul>
 				</div>
-			</div>
-			<!--<div ng-show="document.jurisdictionName">
+			</div><!--<div ng-show="document.jurisdictionName">
 				<label ng-show="isSubNational()">Name of the sub-national jurisdiction</label>
 				<label ng-show="isCommunity()">Name of the community jurisdiction</label>
 				<label ng-show="isOthers()">Other jurisdiction</label>
 				<div class="km-value">{{document.jurisdictionName | lstring:locale}}</div>
-			</div>-->
-		</div>
+			</div>--></div>
 
 		<div ng-if="document.informAllAuthorities || document.contactsToInform" >
-			<legend>Authority/ies to receive courtesy copies of checkpoint communiqués</legend>
+			<legend>接收检查站公报抄送本的机构</legend>
 
-			<div class="help-info" style="padding-top:10px;">The contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint.</div>
-			<div class="km-value" ng-show="document.informAllAuthorities">
-					 All Competent National Authorities designated for <strong>{{document.government|term:locale}}</strong> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.</li>
+			<div class="help-info" style="padding-top:10px;">以下所示的联络人将以电子邮件方式收取含此检查站收集或收到并发布之信息的检查站公报。</div>
+			<div class="km-value" ng-show="document.informAllAuthorities">已选中为<strong><span ng-bind="document.government|term:locale"></span></strong>指定的全部国家主管部门；这些主管部分将自动以电子邮件方式接收此检查站发布的检查站公报。</li>
 
 			</div>
 			       
 			
 			<div  ng-show="document.contactsToInform">
 				<div compare-val="contactsToInform">
-					<div class="km-value"  ng-repeat="authority in document.contactsToInform" >
-						<span view-record-reference ng-model="authority" locale="locale"></span>
-					</div>
+					<div class="km-value"  ng-repeat="authority in document.contactsToInform" ><span view-record-reference ng-model="authority" locale="locale"></span></div>
 				</div>
-				</div>
-			<!--<div ng-show="document.contactsToInform" class="row">
+				</div><!--<div ng-show="document.contactsToInform" class="row">
 				<div ng-repeat="contact in document.contactsToInform">
 					<div class="col-xs-12">
 						<div view-record-reference ng-model="contact" locale="locale" class="well"></div>
 					</div>
 				</div>
-			</div>-->
-			<div compare-val>
-			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform">
-				<span >No additional authorities have been selected to receive the automatic email copies of checkpoint communiqués published from this checkpoint. </span>
-			</div>
+			</div>--><div compare-val>
+			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform"><span >未选任何其他当局以电子邮件方式自动接收此检查站发布的检查站公报。</span></div>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>更多信息</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val="relevantInformation">
@@ -101,12 +80,9 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant links or attached documents</label>
-				<div compare-val>
-				<div class="km-value"  ng-repeat="item in document.relevantDocuments">
-					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-				</div>
+				<label>其他相关链接或附件</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
 			</div>
 		</div>

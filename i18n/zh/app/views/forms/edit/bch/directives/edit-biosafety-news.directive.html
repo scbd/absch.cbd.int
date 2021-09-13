@@ -1,7 +1,5 @@
 <div>
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div class="registerpage-content">
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
 				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -14,13 +12,13 @@
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>一般信息</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="languages" required
-												caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required
+												caption="请选择您希望提交之记录的语言：">
 												<div class="indent">
-													<div km-form-languages multiple required name="languages"
+													<div km-form-languages multiple required name="header.languages"
 														ng-model="document.header.languages"></div>
 												</div>
 											</div>
@@ -29,18 +27,18 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="country" required
-												caption="Country">
+												caption="国家">
 												<div afc-autocomplete required name="country"
 													ng-model="document.country" source="options.countries"
 													filter="startsWithFilter" mapping="genericMapping" selectbox="true"
-													placeholder="Please select a country..."></div>
+													placeholder="请选择一个国家..."></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="title"
-												caption="Title of the record">
+												caption="记录标题">
 												<div km-textbox-ml name="title" required ng-model="document.title"
 													locales="document.header.languages"></div>
 											</div>
@@ -49,10 +47,8 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="nodeAddress"
-												caption="Relevant link(s)">
-												<div class="help-info">
-													Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. ‘Convention on Biological Diversity’). 
-												</div>
+												caption="相关链接">
+												<div class="help-info">请提供网站网址（如：http://bch.cbd.int）和网站名称（如“生物安全信息交换所”）。</div>
                                         			
 												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
 													allow-link="true" allow-file="false"></div>
@@ -61,8 +57,8 @@
 									</div> 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="newsAbstract" caption="Abstract">
-												<div class="help-block">(max. 80 words)</div>
+											<div class="km-control-group" name="newsAbstract" caption="摘要">
+												<div class="help-block">（最多80单词）</div>
 												<div km-rich-textbox ng-model="document.newsAbstract" rows="4"
 													placeholder="" locales="document.header.languages"></div>
 											</div>
@@ -70,8 +66,8 @@
 									</div> 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="newsText" caption="News text">
-												<div class="help-block">(max. 300 words)</div>
+											<div class="km-control-group" required name="newsText" caption="新闻文本">
+												<div class="help-block">（最多300单词）</div>
 												<div km-rich-textbox required ng-model="document.newsText" rows="4"
 													placeholder="" locales="document.header.languages"></div>
 											</div>
@@ -79,34 +75,25 @@
 									</div>  
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantInformation" caption="Any other relevant information">
-												<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+											<div class="km-control-group" name="relevantInformation" caption="其它相关信息">
+												<div class="help-block">请在此处提供记录中其它位置未能提到的任何其它相关信息。</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div> 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-												<div class="help-block">
-														Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.
-												</div>
+											<div class="km-control-group" name="relevantDocuments" caption="任何其他相关文件">
+												<div class="help-block">请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档。</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
 										</div>
 									</div>  
-									<legend>Notes</legend>
+									<legend>备注</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="notes">
-												<span class="help-block">
-													The “Notes” field is for personal reference and can be seen only
-													when the record is being edited. It will be hidden once the
-													record is published. This field is not meant to be used for
-													confidential information.
-												</span>
-												<div km-notes name="notes" ng-model="document.notes"></div>
+											<div class="km-control-group" name="notes"><span class="help-block">“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。</span><div km-notes name="notes" ng-model="document.notes"></div>
 											</div>
 										</div>
 									</div> 

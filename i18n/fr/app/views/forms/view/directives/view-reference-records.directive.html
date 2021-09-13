@@ -1,40 +1,39 @@
-﻿<div ng-show="referenceRecords">
-    <legend>
-        Reference records
-        <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">Show in search</a>
-    </legend>
-    <table class="table table-bordered" style="width: 100%;">
+﻿<div id="reference-records-table" ng-show="referenceRecords">
+    <legend>Fichiers qui font référence à ce document <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}" class="pull-right btn btn-primary btn-xs">dans une recherche</a></legend>
+    <table class="table table-bordered table-condensed" style="width: 100%;">
         <tr>
-            <th width="15%"></th>
-            
-            <th width="60%">Schema</th>
-            <th width="15%">Field</th>
-            <th width="10%">Count</th>
+            <th width="10%"></th>            
+            <th width="43%">Type de fichier</th>
+            <th width="40%">Champs</th>
+            <th width="7%">Fichier(s) :</th>
         </tr>
 
         <tr ng-repeat="(key, record) in referenceRecords">
             <td colspan="4" style="padding: 0px;">
-                <table class="table table-bordered" style="margin-bottom: 0px;">
-                    <tr ng-repeat-start="(fieldKey, field) in record.fields">
-                        <td width="15%"><button class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords">Show records</button></td>
-                        <td width="60%"> {{record.schema}}</td>
-                        <td width="15%" ng-bind="fieldKey"></td>
-                        <td width="10%" ng-bind="field.count"></td>             
+                <table class="table table-bordered" style="margin-bottom: 0px;width: 100%;">
+                    <tr ng-repeat-start="(fieldKey, field) in record.fields" ng-class="{'active':field.showRecords}">
+                        <td width="10%">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords"><i class="fa fa-folder-open-o"></i> <span ng-if="field.showRecords" class="hidden-xs">cacher</span> <span ng-if="!field.showRecords" class="hidden-xs">montrer</span></button>
+                        </td>
+                        <td width="43%">{{record.schema}}</td>
+                        <td max-width="40%" class="truncate-record" ng-bind="fieldKey" ng-click="toggleTitle($event)"></td>
+                        <td width="7%" ng-bind="field.count"></td>
                     </tr>
                     <tr ng-if="field.showRecords">
                         <td width="15%" colspan="4" style="padding:0px">
-                            <table class="table table-bordered" style="width: 100%;margin-bottom: 0px;">
-                                <tr ng-repeat="doc in field.docs">
-                                    <td>
-                                        <a rel="noopener" target="_blank" ng-href="/countries/{{doc.government_s|encodeURIComponent}}" ng-bind="doc.government" ></a>
+                            <table class="table table-bordered table-condensed" style="width: 100%;margin-bottom: 0px;">
+                                <tr style="border-bottom: 1px solid #eee;">
+                                   <td  ng-show="record.schemaType=='national'" ng-class="{'bold':sortField=='government'}">Pays <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='government'; reverse=!reverse"></i></td> 
+                                   <td ng-class="{'bold':sortField=='title'}">Titre <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='title'; reverse=!reverse"></i></td> 
+                                   <td ng-class="{'bold':sortField=='uniqueId'}">UId <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='uniqueId'; reverse=!reverse"></i></td> 
+                                   <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs">Mis à jour le <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='updatedOn'; reverse=!reverse"></i></td> 
+                                </tr>
+                                <tr ng-repeat="doc in field.docs | orderBy:sortField:reverse" style="border-bottom: 1px solid #eee;">
+                                    <td ng-show="record.schemaType=='national'"><a rel="noopener" target="_blank" ng-href="/countries/{{doc.government_s|encodeURIComponent}}" ng-bind="doc.government" ></a></td>
+                                    <td width="50%"><span ng-bind="doc.title"></span></td>
+                                    <td  width="20%"><a rel="noopener" target="_blank" ng-href="/database/{{doc.uniqueId|uppercase|encodeURIComponent}}" ng-bind="doc.uniqueId|uppercase" ></a><div ng-include="'/app/views/forms/view/bch/icons.html'"></div>
                                     </td>
-                                    <td width="60%">
-                                        <span ng-bind="doc.title"></span>                                        
-                                        <div class="pull-right" ng-if="doc.showIcons" ng-include="'/app/views/forms/view/bch/icons.html'"></div>
-                                    </td>
-                                    <td  width="25%">
-                                        <a rel="noopener" target="_blank" ng-href="/database/{{doc.uniqueId|uppercase|encodeURIComponent}}" ng-bind="doc.uniqueId|uppercase" ></a>
-                                    </td>
+                                    <td  width="15%" class="hidden-xs"><span ng-bind="doc.updatedOn|formatDateWithTime"></span></td>
                                 </tr>
                             </table>
                         </td>

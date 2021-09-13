@@ -1,9 +1,6 @@
-<div>
+<div dir="rtl">
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div class="registerpage-content">
+<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -16,12 +13,12 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>معلومات عامة</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
 												<div class="indent">
-													<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
@@ -31,61 +28,60 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Identity of the living modified organism (LMO)</legend>
+									<legend>هوية الكائن الحي المحوّر</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="identity" caption="LMO name">
-												<div class="help-block">Name commonly used to identify the LMO, such as the commercial name (e.g. Roundup soy, NewLeaf® potato, etc.)</div>
+											<div class="km-control-group"  name="identity" caption="اسم الكائن الحي المحوّر">
+												<div class="help-block">الاسم الشائع استخدامه لتحديد الكائن الحى المحوّر، على سبيل المثال الاسم التجارى ( مثل Roundup soy ،NewLeaf® potato, وما إلى ذلك)</div>
 												<div km-textbox-ml name="identity"  ng-model="document.identity" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="transformationEvent" caption="Transformation event">
-												<div class="help-block">Name of the transformation event, e.g. MON810</div>
+											<div class="km-control-group" required name="transformationEvent" caption="حدث التحور">
+												<div class="help-block">اسم حدث التحوّر، على سبيل المثال MON810</div>
 												<input type="text" class="form-control" name="transformationEvent" required ng-model="document.transformationEvent"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="hasUniqueIdentification" required caption="Does this LMO have a unique identifier?">
-												<div class="help-block">The BCH is currently using the Unique Identifier system as set out in the OECD Guidance for the Designation of Unique Identifiers for Transgenic Plants (example MON-ØØ81Ø-6). 
-													For more information see <a rel="noopener" href="http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml</a>.</div>
+											<div class="km-control-group" name="hasUniqueIdentification" required caption="هل هذا الكائن الحي المحور للكائن له معرف فريد من نوعه؟">
+												<div class="help-block">تستخدم غرفة تبادل معلومات السلامة الأحيائية نظاما من المعرفات الفريدة يتوافق مع إرشادات منظمة التعاون الاقتصادي والتنمية لوضع المعرفات الفريدة للنباتات المعدلة وراثيًا (على سبيل المثال: MON-ØØ81Ø-6). لمعرفة المزيد من المعلومات، يُرجى زيارة الرابط <a rel="noopener" href="http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml"> http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml</a>.</div>
 												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12" ng-if="document.hasUniqueIdentification">
-											<div class="km-control-group" required name="uniqueIdentification" caption="Unique identifier">
+											<div class="km-control-group" required name="uniqueIdentification" caption="المُعرِّف الفريد">
 												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="developers" caption="Developer(s)">	
-												<div document-selector ng-model="document.developers" question="developers" skip-government="true"
-													schema="(contact)" caption="Contacts" allow-new="true" allow-new-schema="contact"></div>			
+											<div class="km-control-group" required name="developers" caption="المطوّر (المطورون)">	
+												<div document-selector ng-model="document.developers" caption="الاتصال" question="developers"
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="description" caption="Description">
+											<div class="km-control-group" required name="description" caption="الوصف">
 												<div km-rich-textbox rows="4" name="description" required ng-model="document.description" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="recipientOrganisms" caption="“Recipient Organism” or “Parental Organisms”">	
-												<div class="help-block">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.</div>
-												<div document-selector required ng-model="document.recipientOrganisms" question="recipientOrganisms" skip-government="true"
-													schema="(organism modifiedOrganism)" caption="Add Organism / Living Modified Organism" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>			
+											<div class="km-control-group" required name="recipientOrganisms" caption=""الكائن المتلقّي" أو "الكائنات المصدر"">	
+												<div class="help-block">يشير مصطلح "الكائن المتلقي" إلى الكائن (المحور بالفعل أو غير المحور) الذي تعرض للتحوير الوراثي، بينما يشير مصطلح "الكائنات المصدر" إلى الكائنات التي تشترك في التهجين أو مزج الخلايا.</div>
+												<div document-selector required ng-model="document.recipientOrganisms" caption="إضافة كائن حي /كائن حي مُحوَّر" question="recipientOrganisms"
+														on-build-query="onRrecipientOrganismsQuery(searchText)" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>
 											</div>
 										</div>
 
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="recipientOrganismCollectionPoint" caption="Point of collection or acquisition of the recipient organism or parental organisms">
+											<div class="km-control-group"  name="recipientOrganismCollectionPoint" caption="نقاط جمع الكائن المتلقّى أو "الكائنات المصدر" أو الحصول عليهما">
 												<div km-textbox-ml name="recipientOrganismCollectionPoint"  ng-model="document.recipientOrganismCollectionPoint" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="linkedModifiedOrganisms" caption="Related LMO(s)">	
-												<div class="help-block">This field relates to other LMOs with similar characteristics.</div>
-												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganisms" skip-government="true"
-													schema="(modifiedOrganism)" allow-new="true" allow-new-schema="modifiedOrganism"></div>			
+											<div class="km-control-group" name="linkedModifiedOrganisms" caption="الكائنات الحية المحورة ذات الصلة">	
+												<div class="help-block">هذه الخانة مخصصة للربط بالكائنات الحية المُحوًّرة الأخرى ذات الخصائص المماثلة.</div>
+												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganism"
+															on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true" allow-new-schema="modifiedOrganism"></div>
 											</div>
 										</div>
 									</div>
@@ -95,24 +91,25 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Characteristics of the modification process</legend>
+									<legend>خصائص عملية التحول</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="vector" caption="Vector">
-												<div class="help-block">Vectors are used to incorporate a DNA sequence (typically the promoter-gene-terminator construct) to assist its transfer into the recipient organism. Examples: Agrobacterium Ti plasmid and pBIN19.</div>
+											<div class="km-control-group" required name="vector" caption="الناقل">
+												<div class="help-block">تستخدم النواقل في احتواء تسلسل الحمض النووي (خاصة في تكوين المحفز-الجين-المثبط) للمساعدة في نقله إلى الكائن المستقبل. أمثلة: Agrobacterium Ti plasmid و pBIN19.</div>
 												<div km-textbox-ml name="vector"  ng-model="document.vector" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="techniqueUsed" caption="Techniques used for the modification">
-												<div km-term-check name="techniqueUsed" required layout="list" locales="document.header.languages" ng-model="document.techniqueUsed" terms="options.techniqueUsed" binding-type="term[]"></div>
+											<div class="km-control-group" required name="techniqueUsed" caption="التقنيات المستخدمة فى التعديل">
+												<div km-term-check name="techniqueUsed" required ng-model="document.techniqueUsed"
+													 terms="options.techniqueUsed" binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="genes" caption="Introduced or modified genetic element(s)">	
-												<div class="help-block">Preferably all genetic elements that were introduced into this LMO, such as promoters, protein coding sequences and terminators, must be referenced in this section. At least ALL protein coding sequences are mandatory.</div>
-												<div document-selector ng-model="document.genes" question="genes" skip-government="true" ng-change="onModifiedGeneChange(document.genes)"
-													schema="(dnaSequence)" caption="Genetic element" allow-new="true" allow-new-schema="dnaSequence">
+											<div class="km-control-group" required name="genes" caption="العناصر الوراثية التي تم إدخالها أو تحويرها">	
+												<div class="help-block">ومن الأفضل أن يُشار في هذا القسم إلى جميع العناصر الجينية التي تم إدخالها في هذا الكائن الحي المُحوَّر، مثل عناصر التحفيز وتسلسلات ترميز البروتين والمثبطات. على الأقل جميع تسلسلات ترميز البروتين إجبارية.</div>
+												<div document-selector ng-model="document.genes" question="genes" ng-change="onModifiedGeneChange(document.genes)"
+															caption="العنصر الوراثي" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
 													</selected-records>
@@ -120,13 +117,13 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="geneConstructs" caption="Genetic elements construct">
+											<div class="km-control-group" name="geneConstructs" caption="تكوين العناصر الجينية">
 												<lmo-construct ng-model="document.geneConstructs" ng-change="onConstructChange()"></lmo-construct>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="geneNotes" caption="Notes regarding the genetic elements present in this LMO">	
-												<div class="help-block">Please specify if any of these elements have been modified from the sequence registered in the BCH Genetic Element Registry and how they relate to each other in this LMO, for instance “<i>epsps</i> protein coding sequence under control of the <i>35S</i> promoter and <i>nos</i> terminator”.</div>
+											<div class="km-control-group" name="geneNotes" caption="ملاحظات بشأن العناصر الجينية في هذا الكائن الحي المحور">	
+												<div class="help-block">يُرجى تحديد إذا كان أي من هذه العناصر قد تم تعديله من التسلسل المُسجل في "سجل العناصر الجينية في غرفة تبادل معلومات السلامة الأحيائية"، ومدى ارتباطها ببعضها البعض في هذا الكائن الحي المُحوَّر. على سبيل المثال "تسلسل ترميز البروتين <i>epsps</i> تحت تأثير المحفز <i>35S</i> والمثبط <i>nos</i>".</div>
 												<div km-rich-textbox name="geneNotes" rows="4"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
 											</div>
 										</div>
@@ -137,30 +134,26 @@
 							
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>LMO characteristics</legend>
-									<div class="row">
-										<!-- <div class="col-xs-12">
+									<legend>خصائص الكائن الحى المُحوّر</legend>
+									<div class="row"><!-- <div class="col-xs-12">
 											<div class="km-control-group" name="isGeneEdited" required
 												caption="Was this LMO produced through a gene editing technique?">
 												<div km-yes-no required ng-model="document.isGeneEdited" locales="document.header.languages">
 												</div>
 											</div>
-										</div> -->
-										<div class="col-sm-12">
+										</div> --><div class="col-sm-12">
 											<div  block-region activate="loadingGeneTraits" block-text="Updating trait...">
-												<div class="km-control-group" required name="traits" caption="Modified traits">												
+												<div class="km-control-group" required name="traits" caption="السمات المحوّرَة">												
 													<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
 												</div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGenes"
-												caption="Other gene(s) whose expression was affected by the transformation">
-												<div class="help-block">This section should be used to specify changes in the expression of
-													genes other than those that were inserted into the LMO; for example, gene silencing or
-													induction.</div>
-												<div document-selector ng-model="document.affectedGenes" question="affectedGenes" skip-government="true"
-													schema="(dnaSequence)" caption="Genetic element" allow-new="true" allow-new-schema="dnaSequence">
+												caption="الجين (الجينات) التي تأثر تعبيرها بالتحول">
+												<div class="help-block">يجب استخدام هذا القسم في تحديد التغيرات التي تطرأ على تعبير الجينات بعيداّ عن تلك التغييرات المدخلة في الكائن الحى المحوّر: على سبيل المثال، تثبيط الجين أو تنشيطه.</div>
+												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
+														caption="العنصر الوراثي" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
 													</selected-records>
@@ -169,14 +162,14 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGeneNotes"
-												caption="Please describe how the expression of the gene(s) was affected">
+												caption="يُرجى وصف مدى التأثير على تعبير الجين (الجينات)">
 												<div km-rich-textbox name="affectedGeneNotes" ng-model="document.affectedGeneNotes"
 													locales="document.header.languages" rows="4"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="commonUses" caption="Common use(s) of the LMO">
-												<div class="help-block">Choose as many options as applicable.</div>
+											<div class="km-control-group" name="commonUses" caption="الاستخدامات الشائعة للكائن الحي المحور">
+												<div class="help-block">اختر أكبر عدد ممكن من الخيارات الممكنة.</div>
 												<div km-term-check name="commonUses" required ng-model="document.commonUses"
 													terms="options.commonUses" binding-type="term[]" locales="document.header.languages"></div>
 											</div>
@@ -186,23 +179,16 @@
 							</section>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Detection method(s)</legend>
+									<legend>وسائل الرصد</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethodLinks" caption="External link(s)">
+											<div class="km-control-group" name="detectionMethodLinks" caption="الرابط (الروابط) الخارجية">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
 													identifier="document.header.identifier">
 													<link-controls>												
-														<button type="button" class="btn btn-default" ng-click="$parent.addLink()"><i class="fa fa-globe"></i> Add link</button>
-														<button type="button" class="btn btn-default" ng-click="$parent.addFile()"><i class="fa fa-file-o"></i> Add file</button>
-														
-														<!-- TODO: find better way to get parent func incase of transclude -->
-														<button class="btn btn-default" ng-click="$parent.$parent.$parent.$parent.$parent.$parent.lookupDetections()" 
-															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections">
-															<i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> 
-															<i class="fa fa-database" aria-hidden="true"></i> 
-															Look up Detection methods 
-														</button>
+														<button type="button" class="btn btn-default" ng-click="$parent.addLink()"><i class="fa fa-globe"></i> إضافة رابط</button>
+														<button type="button" class="btn btn-default" ng-click="$parent.addFile()"><i class="fa fa-file-o"></i> إضافة ملف</button><!-- TODO: find better way to get parent func incase of transclude --><button class="btn btn-default" ng-click="$parent.$parent.$parent.$parent.$parent.$parent.lookupDetections()" 
+															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections"><i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> <i class="fa fa-database" aria-hidden="true"></i> البحث عن وسائل الرصد</button>
 													</link-controls>
 												</div>
 											</div>
@@ -210,7 +196,7 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethod" caption="Additional information">
+											<div class="km-control-group" name="detectionMethod" caption="معلومات إضافية">
 												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -219,13 +205,11 @@
 							</section>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Additional information</legend>
+									<legend>معلومات إضافية</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="address" caption="Any other relevant information">
-												<div class="help-block">Please use this field to provide any other relevant information that may not have
-													been addressed elsewhere in
-													the record.</div>
+											<div class="km-control-group" name="address" caption="أي معلومات أخرى ذات صلة">
+												<div class="help-block">يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -233,11 +217,8 @@
 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-												<div class="help-block">
-													Please use this field to provide any other relevant website addresses and/or one or more
-													relevant documents that will be stored in the database for users to download.
-												</div>
+											<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
+												<div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -246,12 +227,12 @@
 								</div>
 							</section>
 							<section>
-								<legend>Notes</legend>
+								<legend>ملاحظات</legend>
 
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+											<div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
@@ -269,15 +250,12 @@
 	</div>
 	<div id="constructSection">
 		<script type="text/ng-template" trados-translation="true" id="geneConstructModal">
-			<lmo-construct ng-model="geneConstruct" close-dialog="closeDialog(updatedConstruct)"></lmo-construct>
+			<lmo-construct ng-model="geneConstruct" close-dialog="closeDialog(updatedConstruct)" dir="rtl"></lmo-construct>
 		</script>
 		<script type="text/ng-template" trados-translation="true" id="lmo-reference-display">			
-			<table class="table" style="padding-bottom:3px;width:100%;margin-top:5px;">
+			<table class="table" style="padding-bottom:3px;width:100%;margin-top:5px;" dir="rtl">
 				<tr ng-repeat="doc in docSelector.model"  >
-					<td style="margin-bottom:15px;width:15px;">
-						<a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.$parent.removeDocument(doc);" class="link color-red">
-							<i class="fa fa-times"></i></a>
-					</td>
+					<td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.$parent.removeDocument(doc);" class="link color-red" dir="rtl"><i class="fa fa-times"></i></a></td>
 					<td style="margin-bottom:20px;">
 						<div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
 					</td>

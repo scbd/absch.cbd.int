@@ -1,184 +1,147 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange" ng-show="display('header')">
-		<h4>
-			<span ng-bind="::document.header.schema|schemaName"></span>
-			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
-		</h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
     </div>
 	<div class="record-body panel-body">
 
-		<document-date></document-date> <br>
-
-			     
-        <div ng-show="document.title">
-			<label>
-				<span ng-if="isABS">Title</span>
-				<span ng-if="isBCH">Title of the initiative</span>
-			</label>
+		<document-date></document-date><br><legend>一般信息</legend>
+    <div ng-show="document.title">
+			<label>活动标题</label>
 			<div compare-val>
 			<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<div ng-if="isBCH && document.projectDocument">
-			<label>Website address(es)</label>
-			<div compare-val>
-			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
-			</div>
-		</div>
-		<div ng-if="isBCH && document.contacts">
-			<label>Contact person(s)</label>
-			<div class="km-value" compare-val="contacts">
-			<div ng-repeat="contact in document.contacts">
-				<div view-record-reference ng-model="contact" locale="locale"></div>
-			</div>
-			</div>
-		</div>
+
 		<div ng-show="document.projectNumber">
-			<label>Project number or identifier</label>
+			<label>项目编号或标识符</label>
 			<div compare-val>
 			<km-value-ml value="document.projectNumber" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
-		<div ng-show="document.geographicScope">
-			<label>Geographic Scope</label>
+		<div ng-if="document.projectDocument">
+			<label>网站地址</label>
 			<div compare-val>
-			<km-value-ml value="document.geographicScope.scope | term:locale" locales="locale"></km-value-ml>
+			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
+			</div>
+		</div>
+		
+		<div ng-if="document.contacts">
+			<label>联系人</label>
+			<div class="km-value" compare-val="Contact person">
+			<div ng-repeat="contact in document.contacts">
+				<div view-record-reference ng-model="contact" locale="locale"></div>
+			</div>
+			</div>
+		</div>
+		
+
+		<div ng-show="document.geographicScope">
+			<label>地理范围</label>
+			<div compare-val>
+			<km-value-ml value="document.geographicScope | term:locale" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
-		<div ng-show="document.geographicScope && (document.geographicScope.regions || document.geographicScope.countries) && !document.geographicScope.community">
-			<label>Geographical or political/economic group(s) and/or country(ies)</label>
-			<div class="km-value" compare-val>
-                <ul  class="list" ng-show="document.geographicScope.regions || document.geographicScope.countries">
-                    <li ng-repeat="val in document.geographicScope.regions" ng-bind="val | term:locale"></li>
-                    <li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
+		<div ng-show="document.countryRegions">
+			<label>地区或政治/经济集团和/或国家</label>
+			<div class="km-value" compare-val="Geographical or political/economic">
+                <ul  class="list">
+                    <li ng-repeat="val in document.countryRegions" ng-bind="val | term:locale"></li>
                 </ul>
             </div>
 		</div>
 
-		<div ng-show="document.geographicScope && document.geographicScope.jurisdiction">
-			<label>Jurisdiction</label>
-			<div compare-val>
-			<km-value-ml value="document.geographicScope.jurisdiction" locales="locale"></km-value-ml>
-			</div>
-		</div>
-
-		<div ng-show="document.geographicScope && document.geographicScope.community">
-			<label>Community</label>
-			<div compare-val>
-			<km-value-ml value="document.geographicScope.community" locales="locale"></km-value-ml>
-			</div>
-		</div>
-		<!-- Need to verify from backend -->
-		<div ng-show="document.geographicScope.countries && document.geographicScope.community">
-			<label>Countries</label>
-			<div class="km-value" compare-val="geographicScope.countries">
+		<div ng-show="document.geographicScope.countries">
+			<label>国家/地区</label>
+			<div class="km-value" compare-val="Countries">
 				<ul  class="list">
 					<li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
 				</ul>
 			</div>
 		</div>
-		<div ng-if="isABS">
-			<label>Type of capacity-building initiative</label>
-			<div style="padding-left:20px" >
-				<div>
-					<label>a. Is this a dedicated ABS capacity-building project/programme? </label>
-					<div compare-val>
-					<div class="km-value km-pre" ng-if="document.capacityBuildingType.isProjectProgramme">Yes</div>
-					</div>
-					<div compare-val>
-					<div class="km-value km-pre" ng-if="!document.capacityBuildingType.isProjectProgramme">No</div>
-					</div>
-				</div>
-				<div>
-					<label>b. Is this an ABS activity or component which is part of a broader capacity-building project or programme?</label>
-					<div compare-val>
-					<div class="km-value km-pre" ng-if="document.capacityBuildingType.isBroaderProjectPart">Yes</div>
-					</div>
-					<div compare-val>
-					<div class="km-value km-pre" ng-if="!document.capacityBuildingType.isBroaderProjectPart">No</div>
-					</div>
-					<div ng-if="document.capacityBuildingType.broaderProjects">
-						<label>Broader projects</label>
-						<div class="km-value" compare-val="capacityBuildingType.broaderProjects">
-							<ul class="list">
-								<li ng-repeat="item in document.capacityBuildingType.broaderProjects">
-									<div view-record-reference ng-model="item.identifier" locale="locale"></div>
-								</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-				<div>
-					<label>c. Is this a stand-alone ABS activity that is not part of a broader capacity-building project or programme? </label>
-					<div compare-val>
-					<div class="km-value km-pre" ng-if="document.capacityBuildingType.isStandaloneProject">Yes</div>
-					</div>
-					<div compare-val>
-					</div>
-					<div class="km-value km-pre" ng-if="!document.capacityBuildingType.isStandaloneProject">No</div>
-				</div>
-			</div>
-		</div>
+
 		<div ng-show="document.status">
-			<label><span ng-if="isABS">Status of the document</span> <span ng-if="isBCH">Status</span></label>
+			<label>状态</label>
 			<div compare-val>
 			<km-value-ml value="document.status | term:locale" locales="locale"></km-value-ml>
 			</div>
 		</div>
-
+		
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
 			<div class="row" ng-show="document.startDate && document.endDate">
 				<div class="col-md-6">
-					<label>Start date</label>
+					<label>开始日期</label>
 					<div compare-val>
-					<km-value-ml value="document.startDate | date : 'longDate'" locales="locale"></km-value-ml>
+						<div class="km-value" ng-bind="document.startDate | date : 'longDate'"></div>
 					</div>
 				</div>
 				<div class="col-md-6">
-					<label>End date</label>
+					<label>结束日期</label>
 					<div compare-val>
-					<km-value-ml value="document.endDate | date : 'longDate'" locales="locale"></km-value-ml>
+						<div class="km-value" ng-bind="document.endDate | date : 'longDate'"></div>
 					</div>
 				</div>
 			</div>
 
-			<div ng-show="document.durationPeriod || document.durationText">
-				<label>Duration</label>
-				<div compare-val>
-				<km-value-ml value="document.durationPeriod" locales="locale"></km-value-ml>
-				<km-value-ml value="document.durationText" locales="locale"></km-value-ml>
+			<div class="row" ng-show="document.durationPeriod || document.durationText">
+				<div class="col-md-12">
+					<label>持续时间</label>
+					<div class="km-value" compare-val><span  ng-bind="document.durationPeriod | lstring:locale"></span> <span  ng-bind="document.durationText | lstring:locale"></span></div>
 				</div>
 			</div>
 		</div>
+
+
 		<div ng-show="document.activityScope">
-			<label>Scope of activity</label>
-			<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
+			<label>能力发展倡议类型</label>
+			<div compare-val>
+				<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
+			</div>
 		</div>
+		<div ng-show="document.isProjectProgramme!=undefind">
+			<label>是否是更大项目或方案的组成部分？</label>
+			<div compare-val>
+				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
+			</div>
+		</div>
+			<div ng-show="document.projectProgrammeName">
+				<label>项目或方案的名称</label>
+				<div compare-val>
+					<km-value-ml value="document.projectProgrammeName" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.broaderProjects">
+				<label>关于此项目或方案的信息交换所记录</label>
+				<div class="km-value" compare-val="Clearing-house record">
+					<div ng-repeat="broaderProject in document.broaderProjects">
+					<div view-record-reference ng-model="broaderProject" locale="locale"></div>
+					</div>
+				</div>
+			</div>
 		<div ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
 
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
-				<label>Implementing agency(ies) or organization(s)</label>
-				<div class="km-value" compare-val="implementingAgencies">
+				<label>实施机构或组织</label>
+				<div class="km-value" compare-val="Implementing agency(ies)">
 				<div ng-repeat="contact in document.implementingAgencies">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 			</div>
 
-			<div ng-show="document.isImplementedByAgencies && document.executingAgencies">
-				<label>Executing agency(ies) or organization(s)</label>
-				<div class="km-value" compare-val="executingAgencies">
+			<div ng-show="document.isExecutededByAgencies && document.executingAgencies">
+				<label>执行机构或组织</label>
+				<div class="km-value" compare-val="Executing agency(ies)">
 				<div ng-repeat="contact in document.executingAgencies">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
 			</div>
 			</div>
 
-			<div ng-show="document.collaboratingPartners && document.collaboratingPartners">
-				<label>Collaborating partner(s)</label>
-				<div class="km-value" compare-val="collaboratingPartners">
+			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
+				<label>合作伙伴</label>
+				<div class="km-value" compare-val="Collaborating partner(s)">
 				<div ng-repeat="contact in document.collaboratingPartners">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -186,71 +149,83 @@
 			</div>
 		</div>
 
-		<div ng-if="isABS && document.contacts">
-			<label>Contact person(s)</label>
-			<div class="km-value" compare-val="contacts">
-			<div  ng-repeat="contact in document.contacts">
-				<div view-record-reference ng-model="contact" locale="locale"></div>
-			</div>
-			</div>
-		</div>
-
-		<div ng-if="isABS && document.projectDocument">
-			<label>Project document or document describing the initiative</label>
-			<div compare-val>
-			<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
-			</div>
-		</div>
-
-		<legend>Detailed information</legend>
+		<legend>详细信息</legend>
 
 		<div ng-show="document.description">
-			<label>Short description of the initiative, including its goals and objectives</label>
+			<label>倡议的简短描述，包括其目标和子目标</label>
 			<div compare-val>
 			<km-value-ml value="document.description" locales="locale" html></km-value-ml>
 			</div>
 		</div>
-
-		<div ng-show="document.targetGroups">
-			<label><span ng-if="isABS">Target group(s)/beneficiary(ies)</span> <span ng-if="isBCH">Main target group(s)/beneficiary(ies)</span></label>
-			<div class="km-value" compare-val="targetGroups">
-				<ul class="list">
-					<li ng-repeat="val in document.targetGroups" ng-bind="val | term:locale"></li>
-				</ul>
-			</div>
-		</div>
-
 		<div ng-show="document.categories">
-			<label>Category(ies) of capacity-building activities</label>
+			<label>能力发展活动的类别</label>
 			<div class="km-value" compare-val="categories">
 				<ul class="list">
 					<li ng-repeat="val in document.categories" ng-bind="val | term:locale"></li>
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.cpbThematicAreas">
-			<label>General thematic area</label>
-			<div class="km-value" compare-val="cpbThematicAreas">
+		<div ng-show="document.targetGroups">
+			<label>主要目标群体/受益人</label>
+			<div class="km-value" compare-val="Main target group(s)">
+				<view-terms-hierarchy ng-model="document.targetGroups" locale="locale" term-domain="cbiAudience" on-terms-loaded="onTargetGroupsTerms(terms)"></view-terms-hierarchy>
+			</div>
+		</div>
+
+		<div ng-show="document.cbdSubjects || document.aichiTargets">
+
+			<legend>与对该倡议的主题报道相关信息</legend>
+
+			<div ng-show="document.cbdSubjects">
+				<label>相关生物多样性公约主题领域</label>
+				<div class="km-value" compare-val="Related CBD subject areas">
+					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects" on-terms-loaded="onCbdSubjectsTerms(terms)"></view-terms-hierarchy>
+				</div>
+			</div>
+
+			<div ng-show="document.aichiTargets && isABS">
+					<label>爱知目标</label>
+					<div class="km-value" compare-val="Aichi target(s)">
+						<ul class="list">
+							<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
+						</ul>
+					</div>
+			</div>
+		</div>
+
+		<div ng-show="document.absKeyAreas">
+			<label>获取和惠益分享专题领域</label>
+
+			<label>能力建设和发展的关键领域和战略措施</label>
+			<div class="km-value" compare-val="Key areas and strategic measures">
 				<ul class="list">
-					<li ng-repeat="val in document.cpbThematicAreas" ng-bind="val | term:locale"></li>
+					<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>
 				</ul>
 			</div>
 		</div>
+
+		<div ng-show="document.cpbThematicAreas">
+			<label>生物安全专题领域</label>
+			<div class="km-value" compare-val="Biosafety thematic areas">
+				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
+			</div>
+		</div>
+
+
 		<div ng-show="document.fundingSourceTypes || document.coreFundingSources || document.coFinancingSources || document.totalBudget">
-			<legend>Information on funding</legend>
+			<legend>资金信息</legend>
 
 			<div ng-show="document.fundingSourceTypes">
-				<label>Type(s) of funding source</label>
-				<div class="km-value" compare-val="fundingSourceTypes">
+				<label>资金来源类型</label>
+				<div class="km-value" compare-val="Type(s) of funding source(s)">
 					<ul class="list">
 						<li ng-repeat="val in document.fundingSourceTypes" ng-bind="val | term:locale"></li>
 					</ul>
 				</div>
 			</div>
-
 			<div ng-show="document.coreFundingSources">
-				<label><span ng-if="isABS">Core funding-source(s)</span> <span ng-if="isBCH">Primary funding-source(s)</span></label>
-				<div class="km-value" compare-val="coreFundingSources">
+				<label>主要资金来源</label>
+				<div class="km-value" compare-val="Primary funding source(s)">
 				<div ng-repeat="contact in document.coreFundingSources">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -258,8 +233,8 @@
 			</div>
 
 			<div ng-show="document.coFinancingSources">
-				<label><span ng-if="isABS">Co-financing source(s)</span> <span ng-if="isBCH">Co-funding source(s)</span></label>
-				<div class="km-value" compare-val>
+				<label>共同出资来源</label>
+				<div class="km-value" compare-val="Co-financing source(s)">
 				<div ng-repeat="contact in document.coFinancingSources">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
 				</div>
@@ -267,72 +242,70 @@
 			</div>
 
 			<div ng-show="document.totalBudget">
-				<label>Total budget (amount, in US dollars)</label>
+				<label>总预算（金额，美元）</label>
 				<div compare-val>
 				<km-value-ml value="document.totalBudget | currency:'USD$'" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
-
+		</div>
 			<div ng-show="document.resultsAchievements || document.resultsOutputs || document.bestPractices">
-				<legend>Capacity-building outcomes</legend>
+				<legend>能力发展成果</legend>
 
 				<div ng-show="document.resultsAchievements">
-					<label>Results</label>
+					<div><strong>结果</strong></div>
+					<label>主要成就</label>
 					<div compare-val>
 					<km-value-ml value="document.resultsAchievements" locales="locale" html></km-value-ml>
 					</div>
 				</div>
 
 				<div ng-show="document.resultsOutputs">
-					<label>Main outputs</label>
-					<div compare-val>
+					<label>主要产出</label>
+					<div compare-val="Main outputs">
 					<km-link-list class="km-value" ng-model="document.resultsOutputs"></km-link-list>
 					</div>
 				</div>
+				<div ng-show="document.resultsReference">
+					<label>虚拟记录馆记录编号</label>
+					<div class="km-value" compare-val="Virtual library record number">
+					  <div ng-repeat="contact in document.resultsReference">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					  </div>
+					</div>
+				  </div>
 
 				<div ng-show="document.bestPractices">
-					<label>Best practices and lessons learned</label>
+					<label>良好做法和经验教训</label>
 					<div compare-val>
 					<km-value-ml value="document.bestPractices" locales="locale" html></km-value-ml>
 					</div>
 				</div>
-			</div>
-		</div>
 
-		<div ng-show="document.absKeyAreas">
-			<legend>Access and Benefit Sharing Clearing-House (ABS-CH)</legend>
 
-			<label>Key areas and strategic measures for capacity-building and development</label>
-			<div class="km-value" compare-val="absKeyAreas">
-				<ul class="list">
-					<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>
-				</ul>
-			</div>
-		</div>
+				<div ng-show="document.relevantInformation||document.relevantDocuments">
+					<legend>更多信息</legend>
 
-		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+					<div ng-show="document.relevantInformation">
+						<label>其它相关信息</label>
+						<div compare-val>
+							<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+						</div>
+					</div>
 
-			<div ng-show="document.relevantInformation">
-				<div compare-val>
-				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
-			</div>
-			</div>
-
-			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website address or attached documents</label>
-				<div compare-val>
-				<km-link-list class="km-value" ng-model="document.relevantDocuments"></km-link-list>
+					<div ng-show="document.relevantDocuments">
+						<label>其他相关网站地址和/或附加文件</label>
+						<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+						<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div>
+			<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
 
 	</div>
-
+	</div>
 	<div document-metadata class="panel-footer" ></div>
 
 </div>

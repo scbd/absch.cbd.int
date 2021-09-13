@@ -1,12 +1,8 @@
 ﻿<div ng-show="referenceCheckpointCommunique">
-  <legend >Related checkpoint communique(s)</legend>
+  <legend >Соответствующее(-ие) коммюнике контрольных пунктов</legend>
   <div class="km-value">
     <ul>
-      <li ng-repeat="cpc in referenceCheckpointCommunique">
-        <a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{cpc.documentID}}">
-          Checkpoint Communiqué {{cpc | uniqueIDWithoutRevision}} - {{cpc.createdOn | formatDateWithTime }}
-        </a>
-      </li>
+      <li ng-repeat="cpc in referenceCheckpointCommunique"><a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{cpc.documentID}}">Коммюнике контрольных пунктов {{cpc | uniqueIDWithoutRevision}} - {{cpc.createdOn | formatDateWithTime }}</a></li>
     </ul>
   </div>
 

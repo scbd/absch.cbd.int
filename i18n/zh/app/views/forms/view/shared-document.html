@@ -1,0 +1,53 @@
+﻿
+<div class="container" >
+	<link rel="stylesheet" href="/app/css/record.css">
+   <style> #Record .record-body{ background-color: #fff; } </style>
+   <div class="row">
+	   <div class="col-md-12">
+		   
+			<div style="margin-left:1%;margin-right:1%">
+
+				<style> .title-bar { min-height: 50px; background: #fff; border-bottom: 1px solid #ddd; text-align: center; padding-top: 10px; } #viewPdf{ position: inherit!important; } .no-border{ border:0px!important; } .loading-info { left: 50%; top: 50%; z-index: 1; border: 16px solid #f3f3f3; } .width-100{ width:100%!important; } </style><br/><div class="row">
+					<div class="row" style="border: 1px solid #ddd; border-bottom:0px;" ng-if="!printMode">
+						<div class="title-bar" >文档草案</div>
+					</div>
+					<div class="row loading-info" ng-if="!printMode && status=='loading'">
+						<div class="col-xs-12" style="left: 40%;"><br> <br> <i class="fa fa-spin fa-3x fa-circle-o-notch" style="color:#1FA65D;"></i> 请等待我们加载文档详细信息 <br> <br></div>
+					</div>
+					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
+					ng-if="status=='error'">
+					<div class="col-md-12" ng-if="!printMode">
+						<div class="alert alert-danger" style="margin:20px;"><strong>{{error}}</strong></div></div>
+					</div>
+					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
+					ng-if="status=='ready'" ng-class="{'no-border':printMode}">
+						<div class="col-md-2" ng-if="!printMode">
+							<div class="" style="width:100%;"><br> 本文档草稿通过以下方式与您分享：{{sharedData.sharedBy_Info.firstName}} {{sharedData.sharedBy_Info.lastName}} <br> <br> <br> <br><div class="btn-group" ng-if="!printMode && document.header.languages.length>1">
+									<input type="button" class="btn" ng-class="{'btn-default' : options.locale!='*', 'btn-info' :options.locale=='*'}"
+									ng-click="options.locale='*'" value="*" title="所有语言" />
+									<input type="button" class="btn" ng-class="{'btn-default' : options.locale!=locale, 'btn-info' :options.locale==locale}"
+										ng-repeat="locale in document.header.languages" ng-click="options.locale = locale" value="{{locale | uppercase}}"
+										title="{{locale|languageLongName}}" />
+								</div>
+							</div>
+						</div>
+						<div class="col-md-10" style="padding:0px;border-left: 1px solid #ddd;background:#fff"
+						ng-class="{'no-border':printMode, 'width-100':printMode}">
+							<div class="file-viewer-preview file-preview">
+								
+								<div class="container database-record" style="margin: 0px;padding: 0px;width: 100%!important;;">
+									
+									<div class="row" style="padding-bottom:20px;" ng-if="status=='ready'">
+										<div class="col-xs-12 ">	
+												<div class="pull-right record-Options-div" ng-if="printMode"><span class="hidden-xs">文档状态</span> <span class="label label-warning">草案</span> <span class="hidden-xs">生成日期：</span> <span class="date label label-default" ng-bind="options.currentDate | formatDateWithTime"></span></div>
+											<record-loader link-target="_blank" document="document" document-info="documentInfo" locale="options.locale"></record-loader>
+										</div>
+									</div>
+								</div>                       
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div><!-- end col        --></div><!-- end row --></div><!-- end container -->

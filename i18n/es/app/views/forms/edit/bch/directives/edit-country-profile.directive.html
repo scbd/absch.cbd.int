@@ -1,7 +1,5 @@
 <div>
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div ng-class="{'block-position' : blockEditForm }">
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
 			<div block-region activate="blockEditForm"></div> 
 		</div>   
 		<div class="registerpage-content">
@@ -17,44 +15,37 @@
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>Información general</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="languages" required
-												caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required
+												caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
 												<div class="indent">
-													<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="government" required caption="Country">
+											<div class="km-control-group" name="government" required caption="País">
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-													filter="startsWithFilter" ng-change="onGovernmentChange()" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+													filter="startsWithFilter" ng-change="onGovernmentChange()" mapping="genericMapping" selectbox="true" placeholder="Seleccione un país..."></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="profile" caption="Additional information for the country profile">
-												<div class="help-block">Please use this field to provide any relevant additional information that will appear as part of your country profile.</div>
+											<div class="km-control-group" required name="profile" caption="Información adicional para el perfil del país">
+												<div class="help-block">Utilice este campo para aportar información adicional pertinente que aparecerá como parte del perfil del país.</div>
 												<div km-rich-textbox required ng-model="document.profile" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div> 
-									<legend>Notes</legend>
+									<legend>Notas</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="notes">
-												<span class="help-block">
-													The “Notes” field is for personal reference and can be seen only
-													when the record is being edited. It will be hidden once the
-													record is published. This field is not meant to be used for
-													confidential information.
-												</span>
-												<div km-notes name="notes" ng-model="document.notes"></div>
+											<div class="km-control-group" name="notes"><span class="help-block">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.</span><div km-notes name="notes" ng-model="document.notes"></div>
 											</div>
 										</div>
 									</div> 
@@ -70,15 +61,14 @@
 		</div>
 		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
 			<div style="margin:10px;">
-				<h1>Country Profile for Biosafety Clearing-House</h1>
+				<h1>Perfil del país para el Centro de Intercambio de la Información sobre Seguridad de la Biotecnología</h1>
 				<hr>
 				<div class=" alert alert-danger">
 					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
-					<div style="display:inline-block">Only one country profile record is allowed in the Biosafety Clearing-House for each government. The country profile 
-						for your government already exists in the Biosafety Clearing-House. You will be redirected to that record in {{alertSeconds}} seconds.</div>
+					<div style="display:inline-block">Se permite que cada gobierno presente un solo registro de perfil del país en el Centro de Intercambio de Información sobre Seguridad de la Biotecnología.  El perfil del país de su gobierno ya existe en el Centro de Intercambio de Información sobre Seguridad de la Biotecnología. Se lo redirigirá a ese registro en <span ng-bind="alertSeconds"></span> algunos segundos.</div>
 				</div>
 				<div class="ngdialog-buttons" >
-					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirect now</button>
+					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirigir ahora</button>
 				</div>
 			</div>
 		</script>

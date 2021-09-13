@@ -1,7 +1,5 @@
 <div>
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div class="registerpage-content">
+	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
 				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -14,13 +12,13 @@
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>Общая информация</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="languages" required
-												caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required
+												caption="Выберите язык(и) для представления этой записи:">
 												<div class="indent">
-													<div km-form-languages multiple required name="languages"
+													<div km-form-languages multiple required name="header.languages"
 														ng-model="document.header.languages"></div>
 												</div>
 											</div>
@@ -29,18 +27,18 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="country" required
-												caption="Country">
+												caption="Страна">
 												<div afc-autocomplete required name="country"
 													ng-model="document.country" source="options.countries"
 													filter="startsWithFilter" mapping="genericMapping" selectbox="true"
-													placeholder="Please select a country..."></div>
+													placeholder="Выберите страну..."></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="title"
-												caption="Title of the record">
+												caption="Название записи">
 												<div km-textbox-ml name="title" required ng-model="document.title"
 													locales="document.header.languages"></div>
 											</div>
@@ -49,10 +47,8 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="nodeAddress"
-												caption="Relevant link(s)">
-												<div class="help-info">
-													Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. ‘Convention on Biological Diversity’). 
-												</div>
+												caption="Актуальная(-ые) ссылка(-и)">
+												<div class="help-info">Укажите URL-адрес (например, http://www.cbd.int) и название веб-сайта (например, «Конвенция о биологическом разнообразии»).</div>
                                         			
 												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
 													allow-link="true" allow-file="false"></div>
@@ -61,8 +57,8 @@
 									</div> 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="newsAbstract" caption="Abstract">
-												<div class="help-block">(max. 80 words)</div>
+											<div class="km-control-group" name="newsAbstract" caption="Резюме">
+												<div class="help-block">(не более 80 слов)</div>
 												<div km-rich-textbox ng-model="document.newsAbstract" rows="4"
 													placeholder="" locales="document.header.languages"></div>
 											</div>
@@ -70,8 +66,8 @@
 									</div> 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="newsText" caption="News text">
-												<div class="help-block">(max. 300 words)</div>
+											<div class="km-control-group" required name="newsText" caption="Текст новостей">
+												<div class="help-block">(не более 300 слов)</div>
 												<div km-rich-textbox required ng-model="document.newsText" rows="4"
 													placeholder="" locales="document.header.languages"></div>
 											</div>
@@ -79,34 +75,25 @@
 									</div>  
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantInformation" caption="Any other relevant information">
-												<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+											<div class="km-control-group" name="relevantInformation" caption="Любая другая актуальная информация.">
+												<div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div> 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-												<div class="help-block">
-														Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.
-												</div>
+											<div class="km-control-group" name="relevantDocuments" caption="Любые другие соответствующие документы">
+												<div class="help-block">Укажите в этом поле адреса любых других соответствующих веб-сайтов и/или один или более соответствующих документов, которые будут храниться в базе данных и будут доступны для загрузки пользователями.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
 										</div>
 									</div>  
-									<legend>Notes</legend>
+									<legend>Примечания</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="notes">
-												<span class="help-block">
-													The “Notes” field is for personal reference and can be seen only
-													when the record is being edited. It will be hidden once the
-													record is published. This field is not meant to be used for
-													confidential information.
-												</span>
-												<div km-notes name="notes" ng-model="document.notes"></div>
+											<div class="km-control-group" name="notes"><span class="help-block">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи. Оно будет скрыто после опубликования записи. Данное поле не предназначено для конфиденциальной информации.</span><div km-notes name="notes" ng-model="document.notes"></div>
 											</div>
 										</div>
 									</div> 

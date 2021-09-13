@@ -1,31 +1,20 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading  bg-darkgrey"><h4>Press Release</h4></div>
+	<div class="panel-heading  bg-darkgrey"><h4>新闻简报</h4></div>
 	<div class="record-body panel-body">
 
 			
 		<document-date></document-date>
 		<div ng-show="document.title_EN_t">
-			<label>Title</label>
-			<span class="km-value">
-				{{document.title_EN_t}}
-			</span>
-		</div>
+			<label>称谓</label><span class="km-value">{{document.title_EN_t}}</span></div>
 
 		<div ng-show="document.description_EN_t">
-			<label>Description</label>
-			<span class="km-value">
-				{{document.description_EN_t}}
-			</span>
-		</div>
-
-		<!-- <div ng-show="document.text_EN_txt">
+			<label>说明</label><span class="km-value">{{document.description_EN_t}}</span></div><!-- <div ng-show="document.text_EN_txt">
 			<label>Text</label>
 			<span class="km-value">
 				{{document.text_EN_txt | lstring:locale}}
 			</span>
 		</div>
-		 -->
-<!--
+		 --> <!--
 		<div ng-show="document.themes_CEN_ss">
 			<label>Themes</label>
 			<div class="km-value" >
@@ -33,10 +22,8 @@
 					<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
 				</ul>
 			</div>
-		</div> -->
-
-		<div ng-show="document.thematicAreas_CEN_ss">
-			<label>Thematic Areas</label>
+		</div> --><div ng-show="document.thematicAreas_CEN_ss">
+			<label>专题领域</label>
 			<div class="km-value" >
 				<ul class="list">
 					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
@@ -47,11 +34,7 @@
 
 
 		<div ng-show="document.url_ss">
-			<label>Document</label>
-			<span class="km-value">
-				<a rel="noopener" translation-url  ng-href="http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'|encodeURIComponent}}/{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}</a>
-			</span>
-		</div>
+			<label>文档</label><span class="km-value"><a rel="noopener" translation-url  ng-href="http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'|encodeURIComponent}}/{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">http://www.cbd.int/doc/press/{{document.date_s| formatDate:'YYYY'}}/{{document.url_ss | lstring:locale}}</a></span></div>
 	</div>
 	<div document-metadata  class="panel-footer"></div>
 </div>

@@ -1,47 +1,38 @@
 ﻿<div id="Record" class="record panel panel-default" >
 
         <div class="panel-heading bg-blue" ng-show="display('header')">
-            <h4>
-            <span>{{schema.title|lstring:locale}} <span class="color-black"> ({{schema.shortCode}}) </span> </span>
-            </h4>	
+            <h4><span><span ng-bind="schema.title|lstring:locale"></span> <span class="color-black">(<span ng-bind="schema.shortCode"></span>)</span></span></h4>	
         </div>
     
         <div class="record-body panel-body" help schema="ViewCP" >
             
             <document-date></document-date>
     
-            <legend ng-if="document.government || document.name">General information</legend>
+            <legend ng-if="document.government || document.name">一般信息</legend>
     
             <div ng-show="document.government">
-                <label name="country">Country</label>
-                <div class="km-value" compare-val>
-                    <a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
-                    <span ng-party-status government="document.government" id="government"></span>
-                </div>
+                <label name="country">国家</label>
+                <div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
             </div>
     
-            <legend>General Information</legend>
+            <legend>一般信息</legend>
              <div ng-show="document.title">
-                 <label>Title</label>
-                 <div class="km-value" compare-val>
-                 <strong>{{document.title | lstring:locale}}</strong>
-                 </div>
+                 <label>称谓</label>
+                 <div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
              </div>
              <div ng-show="document.description">
-                <label> Summary or abstract</label>
+                <label>摘要</label>
                  <div compare-val>
                 <km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>
                  </div>
             </div>
             <div ng-show="document.jurisdiction">
-                <label>Area of Jurisdiction</label>
-                <div class="km-value" compare-val>
-                    {{document.jurisdiction|term}}
-                </div>
+                <label>辖区</label>
+                <div class="km-value" compare-val><span ng-bind="document.jurisdiction|term"></span></div>
             </div>
     
             <div ng-show="document.relevantMeasures">
-                <label>Relevant ABS Measure(s)</label>
+                <label>相关获取和惠益分享措施</label>
                 <div compare-val>
                 <div class="km-value" ng-repeat="measure in document.relevantMeasures">
                     <div view-record-reference ng-model="measure.identifier" locale="locale"></div>
@@ -50,41 +41,36 @@
             </div>
     
             <div ng-show="document.keywords">
-                <label>Keywords</label>
+                <label>关键词</label>
                 <div class="km-value" compare-val>
                     <ul class="list">
-                        <li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
+                        <li ng-repeat="term in document.keywords"><span ng-bind="term | term:locale"></span></li>
                     </ul>
                 </div>
             </div>
     
             <div ng-show="document.keywords">
-                <label>Thematic area(s)</label>
+                <label>专题领域</label>
                 <div class="km-value" compare-val>
                     <ul>
-                        <li ng-repeat="term in document.thematicAreas">{{term | term:locale}}</li>
+                      <li ng-repeat="term in document.thematicAreas"><span ng-bind="term | term:locale"></span></li>
                     </ul>
                 </div>
             </div>
             <div ng-show="document.relevantInformation||document.relevantDocuments">
-                <legend>Attached files, documents, or resources </legend>
+                <legend>附加文件、文档或资源</legend>
     
                 <div ng-show="document.relevantInformation">
-                        <label>Additional information</label>
+                        <label>补充信息</label>
                     <div compare-val>
                     <km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>
                     </div>
                 </div>
     
                 <div ng-show="document.relevantDocuments">
-                        <label>Links or attached files or documents</label>
-                    <div class="km-value" compare-val>
-                        <ul >
-                            <li ng-repeat="item in document.relevantDocuments">
-                                <a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-                                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                            </li>
-                        </ul>
+                        <label>链接或附加文件或文档</label>
+                    <div class="km-value" compare-val="relevantDocuments">
+                        <km-link-list ng-model="document.relevantDocuments"></km-link-list>
                     </div>
                 </div>
             </div>
@@ -97,4 +83,3 @@
          <div document-metadata class="panel-footer"></div>
     
     </div>
-    

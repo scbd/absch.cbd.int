@@ -1,68 +1,38 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-darkgrey"><h4>Meetings</h4></div>
+	<div class="panel-heading bg-darkgrey"><h4>会议</h4></div>
 	<div class="record-body panel-body">
 
 			
-		<document-date></document-date>
-		<!-- <div ng-show="document.symbol_s">
+		<document-date></document-date><!-- <div ng-show="document.symbol_s">
 			<label>Symbol</label>
 			<span class="km-value">
 				{{document.symbol_s}}
 			</span>
-		</div> -->
-
-		<div ng-show="document.title_s">
-			<label>Title</label>
-			<span class="km-value">
-				{{document.title_s}}
-			</span>
-		</div>
+		</div> --><div ng-show="document.title_s">
+			<label>称谓</label><span class="km-value">{{document.title_s}}</span></div>
 
 		<div ng-show="document.startDate_dt">
-			<label>Start date</label>
-			<span class="km-value">
-				{{document.startDate_dt | moment:'utc' | formatDate}}
-			</span>
-		</div>
+			<label>开始日期</label><span class="km-value">{{document.startDate_dt | moment:'utc' | formatDate}}</span></div>
 		<div ng-show="document.endDate_dt">
-			<label>End date</label>
-			<span class="km-value">
-				{{document.endDate_dt | moment:'utc' | formatDate}}
-			</span>
-		</div>
+			<label>结束日期</label><span class="km-value">{{document.endDate_dt | moment:'utc' | formatDate}}</span></div>
 
 		<div ng-show="document.eventCountry_CEN_s">
-			<label>Event Country</label>
-			<span class="km-value">
-				{{document.eventCountry_CEN_s |stringToJSON | lstring:locale}}
-			</span>
-		</div>
+			<label>活动国家</label><span class="km-value">{{document.eventCountry_CEN_s |stringToJSON | lstring:locale}}</span></div>
 
 		<div ng-show="document.eventCity_s">
-			<label>Event City</label>
-			<span class="km-value">
-				{{document.eventCity_s}}
-			</span>
-		</div>
+			<label>活动城市</label><span class="km-value">{{document.eventCity_s}}</span></div>
 		<div ng-show="document.symbol_s">
-			<label>Meeting Documents</label>
-			<span class="km-value">
-			<a rel="noopener" translation-url  target="_blank" ng-href="http://www.cbd.int/doc/?meeting={{document.symbol_s|encodeURIComponent}}">http://www.cbd.int/doc/?meeting={{document.symbol_s}}</a>
-			</span>
-		</div>
-<!--
+			<label>会议文件</label><span class="km-value"><a rel="noopener" translation-url  target="_blank" ng-href="http://www.cbd.int/doc/?meeting={{document.symbol_s|encodeURIComponent}}">http://www.cbd.int/doc/?meeting={{document.symbol_s}}</a></span></div><!--
 		<div ng-show="document.themes_CEN_ss">
 			<label>Themes</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON  | lstring:locale}}</li>
 			</ul>
-		</div> -->
-
-		<div ng-show="document.thematicAreas_CEN_ss">
-			<label>Thematic Areas</label>
+		</div> --><div ng-show="document.thematicAreas_CEN_ss">
+			<label>专题领域</label>
 			<div class="km-value">
 				<ul >
-					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON  | lstring:locale}}</li>
+					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
 				</ul>
 			</div>
 		</div>

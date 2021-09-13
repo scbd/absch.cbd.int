@@ -1,9 +1,6 @@
 <div>
 
-	<div class="edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-
-		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
-		<div class="registerpage-content">
+	<div class="edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -15,72 +12,53 @@
 						<div>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Amendment</legend>
-                                    <div class="row">
-                                        <div class="col-xs-12">
-                                            <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?">
-                                                <div class="help-block"></div>
-                                                <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
-                                            </div>
-                                        </div>
-                                    </div>
-    
-                                    <!-- IF NO SECTION -->
-                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}"  style="padding-top:0;padding-bottom:0;">
-                                        <div class="row">
-                                            <div class="col-xs-12">
-                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">
-                                                    If no, the following information is not required.
-                                                </h3>
-												<div class="row">
-													<div class="col-xs-12">
-														<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
-															<div document-selector ng-model="document.amendedRecords" question="amendedRecords" allow-new="true" allow-new-schema="biosafetyLaw"
-																government="document.government" schema="(biosafetyLaw)" caption="Law, Regulation or Guideline"></div>			
-														</div>
-													</div>
-													<div class="col-sm-12">
-														<div class="km-control-group" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
-															<div km-rich-textbox ng-model="document.amendmentsDetails" rows="4" placeholder="" locales="document.header.languages"></div>
-														</div>
-													</div>
-												</div>
-    
-                                            </div>
-                                        </div>
-									</div>
-								</div>
-							</section>
-							<section>
-								<div class="well no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>Informations générales</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
 												<div class="indent">
-													<div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="government" required caption="Country submitting the decision or communication">
-												<div class="help-block" ng-if="isEuMember">
-													<u><i>Important note for European Union (EU) Members only</i></u>: 
-													if the law, regulation, guideline or agreement applies to <u>all</u> EU Member States, the record must be published by 
-													the EU’s BCH focal point. The EU BCH focal point should select "European Union" in response to this question and the 
-													published record will appear in the country profiles of all EU Member States.
-												</div>
+											<div class="km-control-group" name="government" required caption="Country submitting a law, regulation, guideline or agreement">
+												<div class="help-block" ng-if="isEuMember"><u><i>Important note for European Union (EU) Members only</i></u>: if the law, regulation, guideline or agreement applies to <u>all</u> EU Member States, the record must be published by the EU’s BCH focal point. The EU BCH focal point should select "European Union" in response to this question and the published record will appear in the country profiles of all EU Member States.</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
 												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" 
-												 placeholder="Please select a country..." ng-change="onCountryChange(document.government)"></div>
+												 placeholder="Veuillez choisir un pays..." ng-change="onCountryChange(document.government)"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?">
+												<div class="help-block">This section is relevant when the law/regulation being submitted is amending an existing law/regulation. If the law/regulation being published in the BCH is an amendment to an existing law/regulation or a part of it, make sure that the law/regulation being amended is already registered in the BCH in order to be able to provide a link to the existing record. Cela permettra aux deux fichiers d’être publiés ensemble.</div>
+												<div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+	
+									<div class="row" ng-if="document.isAmendment">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
+
+													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.amendedRecords" question="amendedRecords" caption="Loi, réglementation ou directive"
+													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true"
+													allow-new-schema="biosafetyLaw"></div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
+												<div km-rich-textbox ng-model="document.amendmentsDetails" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="title" caption="Title of document">
+											<div class="km-control-group" required name="title" caption="Titre du document">
 												<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -90,17 +68,11 @@
 							</section>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Legislative details</legend>
+									<legend>Détails législatifs</legend>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="type" required caption="Type of Law / Regulation">
-												<div class="help-block">
-													A <i>law</i> is usually legislation (a statute) enacted by state government; a <i>regulation</i> is usually an act or process 
-													of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government; 
-													a <i>guideline</i> is usually a document that announces the policy an agency intends to implement in future decision-making, 
-													or which will otherwise guide the agency in the exercise of its administrative discretion; a <i>regulatory summary</i> is a
-													 text summary of the national biosafety regulatory framework in place, or being developed in a country.
-												</div>
+												<div class="help-block">A <i>law</i> is usually legislation (a statute) enacted by state government; a <i>regulation</i> is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government; a <i>guideline</i> is usually a document that announces the policy an agency intends to implement in future decision-making, or which will otherwise guide the agency in the exercise of its administrative discretion; a <i>regulatory summary</i> is a text summary of the national biosafety regulatory framework in place, or being developed in a country.</div>
 												<div km-term-radio required ng-model="document.type" locales="document.header.languages"
 													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
 											</div>
@@ -109,9 +81,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="jurisdiction" required caption="Area of jurisdiction">
-												<div class="help-block">
-													Provide the jurisdiction where the law, regulation, guideline or agreement applies. This field can also be used to indicate territorial exclusions to measures.
-												</div>
+												<div class="help-block">Provide the jurisdiction where the law, regulation, guideline or agreement applies. This field can also be used to indicate territorial exclusions to measures.</div>
 												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdiction" items="options.lawJurisdictions"
 													ng-change="onJurisdictionChange(document.jurisdiction)"></div>
 											</div>
@@ -119,7 +89,7 @@
 												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other jurisdiction">
 													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdiction.customValue" placeholder="" locales="document.header.languages"></div>
 												</div>
-												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Name of the sub-national jurisdiction">
+												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Nom de la juridiction sous-nationale">
 													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdiction.customValue" placeholder="Eg. Lower Austria" locales="document.header.languages"></div>
 												</div>
 
@@ -127,19 +97,13 @@
 													<div ng-if="!regionalMeasuresMapping[document.government.identifier]">
 														<div class="alert alert-warning">
 															<h4>
-																<label for="invalidJurisdiction">
-																	Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. 
-																	It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that share the same measure. 
-																	For assistance, contact the Secretariat at <a class="color-blue" href="mailto:bch@cbd.int">bch@cbd.int</a>.																	
-																</label>
+																<label for="invalidJurisdiction">Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure. For assistance, contact the Secretariat at <a class="color-blue" href="mailto:bch@cbd.int">bch@cbd.int</a>.</label>
 															</h4>
 														</div>
 													</div>
 			
 													<div ng-if="regionalMeasuresMapping[document.government.identifier]">
-														<div class="help-info"> Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. 
-															It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that share the same measure. 
-															For assistance, contact the Secretariat at <a href="mailto:bch@cbd.int">bch@cbd.int</a>.</div>
+														<div class="help-info">Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure. For assistance, contact the Secretariat at <a href="mailto:bch@cbd.int">bch@cbd.int</a>.</div>
 														<div class="km-control-group" required name="jurisdictionScope" caption="Country name(s) or Geographical or political/economic group(s)">
 															<button type="button" class="btn btn-info" ng-bind="document.jurisdictionScope[0]|term"></button>
 														</div>
@@ -151,10 +115,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group subject-areas" name="cpbSubjectAreas" required caption="Subject areas">
-												<div class="help-block">
-													This section provides keywords relevant to the subject matter addressed to assist in searching for and translation of the record. 
-													More details may be provided below.
-												</div>
+												<div class="help-block">This section provides keywords relevant to the subject matter addressed to assist in searching for and translation of the record. More details may be provided below.</div>
 												<div km-term-check required ng-model="document.cpbSubjectAreas" locales="document.header.languages"
 													terms="options.subjectAreas()" show-other="true" binding-type="term[]"></div>
 											</div>
@@ -163,9 +124,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group type-of-organism" name="type" required caption="Types of organisms addressed">
-												<div class="help-block">
-													This section provides keywords relevant to the categories of LMOs addressed to assist in searching for and translation of the record. More details may be provided below.
-												</div>
+												<div class="help-block">This section provides keywords relevant to the categories of LMOs addressed to assist in searching for and translation of the record. More details may be provided below.</div>
 												<div km-term-check required ng-model="document.cpbOrganismTypes" locales="document.header.languages"
 													terms="options.typeOfOrganisms()" show-other="true" binding-type="term[]"></div>
 											</div>
@@ -173,20 +132,17 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="description" caption="Brief description of the document including objective and scope">
-												<div class="help-block">
-													<i>Objective</i> Example: "The objective of this Act is to contribute to ensuring an adequate level of protection in the field of the safe transfer, handling and use of living modified organisms resulting from modern biotechnology that may have adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, and specifically focusing on transboundary movements."
-													<br/> <br/>
-													<i>Scope</i> Example: "These regulations apply to the transboundary movement, transit, handling and use of all living modified plants that may have adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health."
-												</div>
+											<div class="km-control-group" name="description" caption="Courte description du document, comprenant l'objectif et le champ d'application">
+												<div class="help-block">Exemple d'<i>objectif </i>: « L'objectif de la présente Loi est de contribuer à assurer un degré adéquat de protection pour le transfert, la manipulation et l'utilisation sans danger des organismes vivants modifiés résultant de la biotechnologie qui peuvent avoir des effets défavorables sur la conservation et l'utilisation durable de la diversité biologique, compte tenu également des risques pour la santé humaine, en mettant plus précisément l'accent sur les mouvements transfrontières.» <br/> <br/> Exemple de <i>champ d'<i>ap</i>plication </i>: « La présente réglementation s'applique aux mouvements transfrontières, au transit, à la manipulation et à l'utilisation de tout organisme vivant modifié qui pourrait avoir des effets défavorables sur la conversation et l'utilisation durable de la diversité biologique, compte tenu également des risques pour la santé humaine. »</div>
 												<div km-rich-textbox ng-model="document.description" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="entryIntoForce" caption="Date of entry into force">
-												<div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" ng-model="document.entryIntoForce"></div>
+											<div class="km-control-group" name="entryIntoForce" caption="Date d'entrée en vigueur"
+													 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Law">
+												<div km-date placeholder="AAAA-MM-JJ" name="entryIntoForce" ng-model="document.entryIntoForce"></div>
 											</div>
 										</div>
 									</div>
@@ -195,15 +151,11 @@
 							
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Document details</legend>
+									<legend>Détails du document</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="documents" caption="Document text">
-												<div class="help-block">
-													An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website 
-													(e.g. <a rel="noopener" translation-url   href="https://www.cbd.int" target="_blank">http://www.cbd.int</a>)
-													 and the name of the website (e.g. “Convention on Biological Diversity”).
-												</div>
+											<div class="km-control-group" name="documents" caption="Texte du document">
+												<div class="help-block">Il est préférable d'annexer le document. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. <a rel="noopener" translation-url   href="https://www.cbd.int" target="_blank">http://www.cbd.int</a>) and the name of the website (e.g. “Convention on Biological Diversity”).</div>
 												<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -211,10 +163,8 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="unofficialDocuments" caption="Unofficial Documents">
-												<div class="help-block">
-													Unofficial document and / or courtesy translation
-												</div>
+											<div class="km-control-group" name="unofficialDocuments" caption="Documents non officiels">
+												<div class="help-block">Unofficial document and / or courtesy translation</div>
 												<div km-link name="unofficialDocuments" ng-model="document.unofficialDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -223,9 +173,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="documentsInfo" caption="">
-												<div class="help-block">
-													Only use this field to provide details of how to obtain a copy of the document if it is not available as an attachment or online.
-												</div>
+												<div class="help-block">Only use this field to provide details of how to obtain a copy of the document if it is not available as an attachment or online.</div>
 												<div km-rich-textbox ng-model="document.documentsInfo" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -233,12 +181,12 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="relatedRecords" caption="Relationship with other laws/regulations">	
-												<div class="help-block">
-													Please indicate if there is any relationship between this document/measure and other laws, regulations, guidelines or agreements published in the BCH, e.g. a regulation to implement an existing law.
-												</div>										
-												<div document-selector ng-model="document.relatedRecords" question="relatedRecords" allow-new="true" 
-													allow-new-schema="biosafetyLaw" government="document.government" schema="(biosafetyLaw)" 
-													caption="Law, Regulation or Guideline"></div>			
+												<div class="help-block">Please indicate if there is any relationship between this document/measure and other laws, regulations, guidelines or agreements published in the BCH, e.g. a regulation to implement an existing law.</div>										
+													
+													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.relatedRecords" question="relatedRecords" caption="Loi, réglementation ou directive"
+													on-build-query="onBuildLawQuery(searchText)"  allow-new="true"
+																allow-new-schema="biosafetyLaw">
+													</div>
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -256,11 +204,11 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="authorities" caption="Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)" required>	
-												<div class="help-block">
-													Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress.
-												</div>
-												<div document-selector ng-model="document.authorities" question="authorities" allow-new="true" allow-new-schema="authority"
-													government="document.government" schema="(authority supplementaryAuthority)"></div>			
+												<div class="help-block">Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress.</div>
+												 	
+													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities" 
+																on-build-query="onBuildAuthoritiesQuery(searchText)" allow-new="true"
+																allow-new-schema="authority,supplementaryAuthority"></div>
 											</div>
 										</div>
 									</div>
@@ -273,9 +221,7 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="expires" caption="Should this information be confirmed or updated after two years from the date of submission?" required>	
-												<div class="help-block">
-													If the answer to this question is “Yes”, after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.
-												</div>     
+												<div class="help-block">If the answer to this question is “Yes”, after two years from the date of submission you will be asked to confirm or update the record within 3 months. Passé ce délai, si aucune confirmation n'a été reçue, le fichier portera la mention "non confirmé".</div>     
 												<div class="km-yes-no" name="expires" ng-model="document.expires"></div>			
 											</div>
 										</div>
@@ -285,7 +231,7 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Additional information</legend>
+									<legend>Information supplémentaire</legend>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="address" caption="Any other relevant information">
@@ -297,10 +243,8 @@
 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-												<div class="help-block">
-														Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.
-												</div>
+											<div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
+												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -314,10 +258,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">
-												The “Notes” field is for personal use only. It can be seen only when the record is being edited but is not visible 
-												when the record is published. This field is not meant to be used for confidential information.	
-											</div>
+											<div class="help-block">Le champs ‘Notes’ est réservé à votre usage personnel. Il peut seulement être vu lorsqu’un dossier est en mode édition mais n’est pas visible lorsque celui-ci est publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>

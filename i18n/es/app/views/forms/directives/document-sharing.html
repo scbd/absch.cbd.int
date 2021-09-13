@@ -1,0 +1,87 @@
+﻿<span class="document-sharing"><button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
+    title="Compartir"><i class="fa fa-firefox"></i> <span class="hidden-xs">Compartir</span></button>
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>
+
+    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
+            <div class="modal-header">Compartir el registro borrador: <span ng-bind="title"></span></div>
+            <div class="modal-body">
+                <div role="tabpanel"><!-- Nav tabs --><ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a translation-url href="#url" aria-controls="url" role="tab" data-toggle="tab"><span class="sub-header">Enviar por URL</span></a></li>
+                        <li role="presentation"><a translation-url href="#email" aria-controls="email" role="tab" data-toggle="tab"><span class="sub-header">Enviar por correo electrónico</span></a></li>
+                    </ul><!-- Tab panes --><div class="tab-content padding-left-10 padding-right-10" style="background:#fff">
+                        <div role="tabpanel" class="tab-pane active" id="url">
+                            <div class="row">
+                                <div ng-if="isLoading"><i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> cargando...</div>
+                                <div class="content" ng-hide="isLoading">
+                                    <label>Cualquier persona que posea el enlace puede ver este documento borrador y seguirá viendo las actualizaciones hasta que el borrador se haya publicado o eliminado.</label>
+                                    <div style="margin:auto" class="pull-right"><a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">Crear enlace</a> <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i></div>
+                                    <div>
+                                        <table class="table table-stripped" style="width:100%">
+                                            <tr>
+                                                <td>#</td>
+                                                <td>Vencimiento/Estado</td>
+                                                <td>Enlace</td>
+                                                <td class="hidden-xs">Creado el</td>
+                                            </tr>
+                                            <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
+                                                <td ng-bind="$index+1"></td>
+                                                <td><span ng-bind="link.expiry|formatDateWithTime"></span> <span ng-if="hasStatus('active', link)"class="label label-success">Activo</span> <span ng-if="hasStatus('expired', link)"class="label label-danger">Vencido</span> <span ng-if="hasStatus('revoked', link)"class="label label-danger">Revocado</span></td>
+                                                <td width="70%">
+                                                    <div class="btn-group" style="width:100%">
+                                                        <div class="input-group" >
+                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/><span style="cursor:pointer" class="input-group-addon" id="basic-addon1"><a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"></i> <span class="hidden-xs">Abierto</span></a></span> <span style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)"><i class="fa fa-copy"></i> <span class="hidden-xs">Copiar</span></span> <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)"><i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i> <i class="fa fa-thumbs-down"></i> <span class="hidden-xs">Revocar</span></span></div>
+                                                    </div>
+                                                </td>
+                                                <td class="hidden-xs" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
+                                            </tr>
+                                            <tr ng-if="!sharedLinks.length">
+                                                <td colspan="4"><strong>No se encontraron enlaces compartidos para este documento.</strong></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="email">
+                            <div class="row">
+                                <div class="content">
+                                    <div>Los destinatarios recibirán un correo electrónico con un enlace para ver este documento borrador.</div>
+                                    <hr/>Correos electrónicos <br/><input type="text" placeholder="ingrese correo electrónico" class="form-control" ng-model="document.sharedWith.emails" />
+                                    <div><span style="font-size: smaller;color: #777575;">Utilice comas para separar direcciones de correo electrónico múltiples. Los destinatarios deben registrarse en el Centro de Intercambio de Información con esa dirección de correo electrónico para poder ver el registro borrador. </span></div>
+                                    <div><span ng-if="status=='creatingLink'"> <i class="fa fa-spin fa-spinner" /> actualizando...</span><button type="button" class="btn btn-primary pull-right" ng-click="shareEmail()" ng-disabled="status=='creatingLink'">Enviar</button>
+                                    </div><br/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal">
+            <div class="modal-header">Generar un PDF de este registro borrador: <span  ng-bind="title"></span></div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="alert alert-warning" role="alert"><strong>¡Por favor, tener en cuenta!</strong> Este proceso tarde bastante en cargar. El método recomendado para compartir registros borrador es usar la función "<strong>Compartir</strong>".</div><!-- <div class="alert alert-success" role="alert">
+                            <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
+                        </div> --><div class="alert alert-info" role="alert">
+                            <div class="btn-group"><a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
+                                ng-bind="lang|uppercase"></a></div>Seleccione un idioma para iniciar el proceso de generación de PDF.</div> 
+                    </div>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Cerrar</button>
+            </div>
+        </div>
+    </script></span>

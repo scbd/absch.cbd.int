@@ -1,48 +1,38 @@
 ﻿<div>
     <div class="section-pane panel panel-default" style="margin-bottom:3px!important">
 
-        <div class="panel-heading">General Information</div>
+        <div class="panel-heading">一般信息</div>
         <div class="panel-body" style="padding:0px">
             <div style="margin:5px" class="row">
                 <div ng-show="document.government">
-                    <label name="country">Country</label>
-                    <div class="km-value" comapre-val>
-                        <a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
-                            target={{target}}>{{document.government|term:locale}}</a>
-                        <span ng-party-status government="document.government" id="government"></span>
-                    </div>
+                    <label name="country">国家</label>
+                    <div class="km-value" comapre-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
+                            target={{target}}>{{document.government|term:locale}}</a> <span ng-party-status government="document.government" id="government"></span></div>
                 </div>
 
-                <div ng-show="document.contact">
-                    </br>
-                    <label>Contact person submitting the report</label>
+                <div ng-show="document.contact"></br><label>提交报告的联系人</label>
                     <div class="km-value" comapre-val>
                         <view-record-reference ng-model='document.contact' locale="locale">
                         </view-record-reference>
                     </div>
                 </div>
 
-                <div ng-show="document.stakeholders">
-                    </br>
-                    <label>9. Organizations/stakeholders who were consulted or participated in the preparation of
-                        this report </label>
+                <div ng-show="document.stakeholders"></br><label>9.被咨询或参与编写本报告的组织/利益攸关方：</label>
                     <div comapre-val>
                     <km-value-ml value="document.stakeholders" locales="locale"></km-value-ml>
                     </div>
                 </div>
 
-                <div ng-show="document.reportPeriodStartDate || document.reportPeriodEndDate">
-                    </br>
-                    <label>10. Time period covered by this report</label>
+                <div ng-show="document.reportPeriodStartDate || document.reportPeriodEndDate"></br><label>10.本报告的时间跨度：</label>
                     <div class="row">
                         <div class="col-xs-6" ng-if="document.reportPeriodStartDate">
-                            <label>From</label>
+                            <label>发件人</label>
                             <div comapre-val>
                                 <div class="km-value" ng-bind="document.reportPeriodStartDate|formatDate"></div>
                             </div>
                         </div>
                         <div class="col-xs-6" ng-if="document.reportPeriodEndDate">
-                            <label>To</label>
+                            <label>收件人</label>
                             <div comapre-val>
                                 <div class="km-value" ng-bind="document.reportPeriodEndDate|formatDate"></div>
                             </div>
@@ -57,9 +47,7 @@
         style="margin-bottom:3px!important">
 
         <div class="panel-heading">
-            <div comapre-val>
-            <strong  ng-bind-html="section.title"></strong>
-            </div>
+            <div comapre-val><strong  ng-bind-html="section.title"></strong></div>
             <div comapre-val>
             <div ng-bind-html="section.description" ng-if="section.description"></div>
             </div>
@@ -84,14 +72,10 @@
 
             <div style="padding:10px;">
 
-                <div style="padding-left:0px;padding-right: 0px;">
-                    <strong>
-                        <div comapre-val>
+                <div style="padding-left:0px;padding-right: 0px;"><strong><div comapre-val>
                         <label name="{{question.key}}" for="{{question.key}}"
                                 ng-bind-html="::spaceSubQuestion(question.number) + question.title" ></label>
-                        </div>
-                    </strong>
-                </div>
+                        </div></strong></div>
                 <div ng-if="document[question.key]">
                     <div ng-if="question.type!='text' && question.type!='lstring'">
                         <div comapre-val>
@@ -100,14 +84,11 @@
                         </div>
                         <div ng-if="question.multiple" class="km-value" comapre-val>
                             <ul class="list">
-                                <li ng-repeat="item in document[question.key]" >
-                                    <span ng-bind="displayText(item.value, question)"></span>
-                                    <span ng-if="item.additionalInformation!=undefined" ng-bind="'(' + (item.additionalInformation|lstring:locale) + ')'"></span>
-                                </li>
+                                <li ng-repeat="item in document[question.key]" ><span ng-bind="displayText(item.value, question)"></span> <span ng-if="item.additionalInformation!=undefined" ng-bind="'(' + (item.additionalInformation|lstring:locale) + ')'"></span></li>
                             </ul>                            
                         </div>
                         <div ng-if="document[question.key].additionalInformation">
-                            <label>Additional Information</label>
+                            <label>更多信息</label>
                             <div comapre-val>
                             <km-value-ml value="::document[question.key].additionalInformation" locales="locale"></km-value-ml>
                             </div>
@@ -118,11 +99,9 @@
                         <km-value-ml value="document[question.key]" locales="locale"></km-value-ml>
                         </div>
                     </div>
-                </div>
-                <!-- <div ng-if="!document[question.key] && question.type!= 'legend' && !question.questions">
+                </div><!-- <div ng-if="!document[question.key] && question.type!= 'legend' && !question.questions">
                     <div class="km-value" >No answer provided</div>
-                </div> -->
-            </div>
+                </div> --></div>
         </script>
     </div>
     

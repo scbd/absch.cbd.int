@@ -1,28 +1,25 @@
 <div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange">
-		<h4>
-			<span ng-bind="::document.header.schema|schemaName"></span>
-			<span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span>
-		</h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
 	<div class="record-body panel-body">
 
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>Informations générales</legend>
 		<div ng-if="document.organization">
-			<legend>Laboratory name and coordinates</legend>
+			<legend>Nom du laboratoire et coordonnées</legend>
 			<div class="km-value" compare-val>
 				<div view-record-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.relatedOrganization">
-			<legend>Related Organization</legend>
+			<legend>Organisations reliées</legend>
 			<div class="km-value" compare-val>
 				<div view-record-reference ng-model="document.relatedOrganization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.services">
-			<label>Services and activities performed</label>
+			<label>Services et activités menés</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.services" ng-bind="term|term"></li>
@@ -30,34 +27,31 @@
 			</div>
 		</div>
 		<div ng-if="document.agreements || document.agreementLinks">
-			<label>Collaborative agreements</label>
+			<label>Accords de collaboration</label>
 			<div compare-val>
 				<km-value-ml value="document.agreements" locales="locale" html></km-value-ml>
 			</div>
-			<div class="km-value" ng-if="document.agreementLinks">
-				<br ng-if="document.agreement"/>
-				<div compare-val>
-					<div ng-repeat="item in document.agreementLinks">
-						<a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-					</div>
+			<div class="km-value" ng-if="document.agreementLinks"><br ng-if="document.agreement"/><div compare-val>
+					<km-link-list  ng-model="document.agreementLinks"></km-link-list>
+					
 				</div>
 			</div>
 		</div>
 		<div ng-if="document.certifications">
-			<label>Accreditations and certifications of the laboratory</label>
+			<label>Accréditations et certifications du laboratoire</label>
 			<div compare-val>
 				<km-value-ml value="document.certifications" locales="locale" html></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.detectionMethods">
-			<label>Types of detection/identification method(s) available for use in the laboratory</label>
+			<label>Types de méthodes de détection/identification utilisés par le laboratoire</label>
 			<div compare-val>
-			<view-terms-hierarchy class="km-value" ng-model="document.detectionMethods" locale="locale" term-domain="detectionMethods"></view-terms-hierarchy>	
+				<view-terms-hierarchy class="km-value" ng-model="document.detectionMethods" locale="locale" term-domain="detectionMethods" on-terms-loaded="onDetectionTerms(terms)"></view-terms-hierarchy>
 			</div>		
 		</div>			
 
 		<div ng-if="document.lmoTypes">
-			<label>Types of LMOs</label>
+			<label>Types d'OVM</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.lmoTypes" ng-bind="term|term"></li>
@@ -66,7 +60,7 @@
 		</div>	
 
 		<div ng-if="document.detectableLmos">
-			<label>LMO(s) detectable by the laboratory</label>
+			<label>OVM(s) détectable(s) par le laboratoire</label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableLmos">
@@ -80,7 +74,7 @@
 		</div>
 
 		<div ng-if="document.detectableGenes">
-			<label>Genetic element(s) detectable by the laboratory</label>
+			<label>Élément(s) génétique(s) détectable(s) par le laboratoire</label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableGenes">
@@ -93,14 +87,14 @@
 		</div>
 
 		<div ng-if="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>Informations supplémentaires</legend>
 
 			<div compare-val ng-if="document.relevantInformation">
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
 				<div compare-val>
 					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
 				</div>		

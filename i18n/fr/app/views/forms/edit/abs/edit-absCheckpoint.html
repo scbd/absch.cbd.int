@@ -1,28 +1,23 @@
-﻿<div  ng-controller="editAbsCheckpoint" >
+﻿<div   >
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
-
-        <span block-region activate="isLoading()" ng-if="isLoading()"></span>
-        <div class="registerpage-content" >
+    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" >
 
             <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab">
-                <!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required -->
-                <edit-form>
+            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <form name="editForm" style="margin-top:10px" class="editForm" >
                                 <div class="editForm" ng-show="tab=='edit'" km-tab="edit">
                                     <legend name="formInfo" style="display:none"></legend>
                                     <section>
-                                    <legend name="generalInfo">General information</legend>
+                                    <legend name="generalInfo">Informations générales</legend>
               
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
                                                 <div class="indent">
-                                                    <div km-form-languages multiple required name="languages" ng-model="document.header.languages"></div>
+                                                    <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -30,8 +25,8 @@
                                     <div class="row">
               
                                      <div class="col-xs-12">
-                                            <div class="km-control-group" name="government" required caption="Country">
-                                              <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                            <div class="km-control-group" name="government" required caption="Pays">
+                                              <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Veuillez choisir un pays..."></div>
                                             </div>
                                         </div>
               
@@ -39,8 +34,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                                <div class="km-control-group" name="name" required caption="Name of the checkpoint">
-                                                    <div class="help-info">Bear in mind that the name of the checkpoint will help to identify the record in the ABS Clearing-House.</div>
+                                                <div class="km-control-group" name="name" required caption="Nom du point de contrôle">
+                                                    <div class="help-info">Noter que le nom du point de contrôle aidera à identifier le fichier au Centre d’échange APA.</div>
                                                     <div km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                         </div>
@@ -49,41 +44,41 @@
               
                                     <section>
               
-                                    <legend name="responsibilities–title">Responsibilities</legend>
-                                    <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization. </div>
+                                    <legend name="responsibilities–title">Responsabilités</legend>
+                                    <div class="help-info">Le paragraphe 1 (a) (i) de l'article 17 prévoit que les points de contrôle désignés recueillent ou reçoivent des informations pertinentes relatives au consentement préalable en connaissance de cause, à la source de la ressource génétique, à l'établissement de termes convenus d’un commun accord et/ou à l'utilisation de ressources génétiques, le cas échéant, le sous-alinéa (iv) prévoit que les points de contrôle doivent comporter des fonctions pertinentes pour l'utilisation des ressources génétiques, ou la collecte d'informations pertinentes, entre autres, à toutes les étapes de recherche, de développement, d'innovation, de pré-commercialisation ou de commercialisation.</div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="responsibilities" caption="Short description of responsibilities">
-                                                   <div class="help-info">A short description of the responsibilities of the checkpoint will help users of genetic resources and others to identify and clarify the role and functioning of the checkpoint in the collection of relevant information about the utilization of resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization. (maximum 300 characters)</div>
+                                            <div class="km-control-group" required name="responsibilities" caption="Brève description des responsabilités">
+                                                   <div class="help-info">Une brève description des responsabilités du point de contrôle aidera les utilisateurs des ressources génétiques et d'autres personnes à identifier et à clarifier le rôle et le fonctionnement du point de contrôle dans la collecte d'informations pertinentes sur l'utilisation des ressources, entre autres, dans n'importe quelle étape de recherche, de développement, d'innovation, de pré-commercialisation ou de commercialisation. (max. 300 caractères)</div>
                                                 <div km-rich-textbox name="responsibilities" rows="6" ng-model="document.responsibilities" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                                <div class="km-control-group" name="jurisdiction" caption="Area of jurisdiction">
-                                                    <div class="help-info">The information on the area of jurisdiction (national/federal, subnational, or community level) can help mapping different geographical responsibilities if there is more than one checkpoint.</div>
+                                                <div class="km-control-group" name="jurisdiction" caption="Zone de juridiction">
+                                                    <div class="help-info">Les informations sur la zone de juridiction (à l’échelle nationale/fédérale, sous-nationale  ou communautaire) peuvent aider à cartographier les différentes responsabilités géographiques dans le cas où il existe plus d’un point de contrôle.</div>
                                                      <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
                                                 </div>
                                         </div>
                                     </div>
                                     <div class="row" ng-show="isSubNational()">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="Nom de la juridiction sous-nationale">
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row" ng-show="isCommunity()">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="Nom de la communauté">
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row" ng-show="isOthers()">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="Nom de d’autres juridictions">
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -93,27 +88,19 @@
               
                                     <section>
               
-                                    <legend name="nationalAuthorities">National authority/ies to receive the information collected or received by the designated checkpoint</legend>
-                                    <div class="help-info">
-                                        In accordance with Article 17, paragraph 1 (a) (i) and (iii), of the Nagoya Protocol, the information collected or received by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate. On the basis of the information provided, the ABS Clearing-House will issue a communiqué and automatically send a courtesy copy to the designated national authority/ies of your country.
-                                       <br><br>
-                                      Therefore, the contacts included in the following section on national authority/ies will be the ones to receive the information collected or received by the designated checkpoint (and communicated to the ABS Clearing-House through the checkpoint communique (CPC)). For multiple authorities, please include multiple record numbers or contact detail forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.
-                                      Please indicate to which national authority or contact person in your country you wish to send the information collected or received by the designated checkpoint. For multiple authorities, please include multiple record numbers or contact details forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.
-                                     
-                                      </div>
+                                    <legend name="nationalAuthorities">Autorités nationales devant recevoir les informations collectées ou reçues par le point de contrôle désigné.</legend>
+                                    <div class="help-info">Conformément au paragraphe 1  (a) (i) et (iii) de l'article 17 du Protocole de Nagoya, les informations recueillies ou reçues par le point de contrôle liées au consentement préalable en connaissance de cause, à la source de la ressource génétique, à l'établissement des termes convenus d'un commun accord et/ou à l'utilisation de ressources génétiques, y compris du certificat de conformité internationalement reconnu, doivent être fournies aux autorités nationales compétentes, à la Partie fournissant un consentement préalable en connaissance de cause et au Centre d'échange APA, le cas échéant. Sur la base de l’information fournie, le Centre d'échange APA émettra un communiqué et enverra automatiquement une copie de courtoisie à l’autorité(s) nationale(s) désignée (s) de votre pays. <br><br> Par conséquent, les contacts inclus dans la section suivante sur les autorités nationales seront ceux qui recevront les informations recueillies ou reçues par le point de contrôle désigné (et communiquées au centre d'échange APA par le biais du communiqué du point de contrôle (CPC)). Pour des autorités multiples, veuillez inclure les numéros des fichiers ou les formulaires de coordonnées. Veuillez noter que la Partie qui fournit le consentement préalable en connaissance de cause recevra automatiquement l’information collectée ou reçues par le point de contrôle. Veuillez indiquer à quelle autorité nationale ou à quelle personne contact dans votre pays désirez-vous envoyer les informations collectées ou reçues par le point de contrôle désigné. Pour des autorités multiples, veuillez inclure les numéros des fichiers ou les formulaires de coordonnées. Veuillez noter que la Partie qui fournit le consentement préalable en connaissance de cause recevra automatiquement l’information collectée ou reçues par le point de contrôle.</div>
                                     
                                     
                                     
               
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="informAllAuthorities" caption="Send a copy of the communiqué to all competent national authorities within my country">
+                                            <div class="km-control-group" required name="informAllAuthorities" caption="Envoyez une copie du communiqué à toutes les autorités nationales compétentes du pays.">
                                                 <div class="km-yes-no" name="informAllAuthorities" ng-model="document.informAllAuthorities"></div>
                                             </div>
                                         </div>
-                                    </div>
-              
-                                   <!--  <div class="row" ng-show="document.informAllAuthorities==false">
+                                    </div><!--  <div class="row" ng-show="document.informAllAuthorities==false">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" required name="authoritiesToInform" caption="Please select which competent national authority/ies from the list to whom you wish to send a copy of the communiqué">
                                                 <div km-reference required name="authoritiesToInform" ng-model="document.authoritiesToInform" loader="loadRecords(identifier, 'authority')">
@@ -126,31 +113,23 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div> -->
-              
-                                    <div class="row">
+                                    </div> --><div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="contactsToInform" caption="Please select any national authorities whom you wish to send a copy of the communiqué">
-                                                
-                                                <div document-selector ng-model="document.contactsToInform"
-                                                                             question="contactsToInform" allow-new="true" allow-new-schema="contact"
-                                                                             government="document.government"
-                                                                             schema="(authority contact)"></div>
-                                                
-                                                <!--<organization-selector multiple ng-model="document.contactsToInform" locales="document.header.languages" caption="Add an organisation or a contact »" ></organization-selector>-->
-              
-                                            </div>
+                                            <div class="km-control-group" name="contactsToInform" caption="Veuillez sélectionnez tout autorité nationale à qui vous désirez envoyer une copie du communiqué.">
+                                                <div document-selector on-build-query="onContactQuery(searchText)"
+                                                     ng-model="document.contactsToInform"
+                                                     question="contactsToInform" allow-new="true" allow-new-schema="contact"></div><!--<organization-selector multiple ng-model="document.contactsToInform" locales="document.header.languages" caption="Add an organisation or a contact »" ></organization-selector>--></div>
                                         </div>
                                     </div>
                                     </section>
               
                                     <section>
               
-                                    <legend>Additional Information</legend>
+                                    <legend>Informations supplémentaires</legend>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="relevantInformation" caption="Additional Information">
-                                                <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                            <div class="km-control-group" name="relevantInformation" caption="Informations supplémentaires">
+                                                <div class="help-info">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordé ailleurs dans le fichier.</div>
                                                 <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -158,7 +137,7 @@
               
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="relevantDocuments" caption="Other relevant website address or attached documents">
+                                            <div class="km-control-group" name="relevantDocuments" caption="Autres sites web pertinents ou documents en pièce jointe">
                                                 <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -170,7 +149,7 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>                                                
+                                                <div class="help-info">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>                                                
 											    <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
@@ -182,9 +161,7 @@
                 </edit-form>
                 <review-form>
                     <view-abs-checkpoint ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-checkpoint>
-                </review-form>
-                <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
-            </div>
+                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
 
         </div>
       </div>
