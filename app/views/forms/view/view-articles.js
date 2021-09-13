@@ -9,8 +9,8 @@ import 'ck-editor-css';
 
   export { default as template } from './view-articles.html';
 
-  export default ["$scope","$route", "$http", "$location", "locale", '$q', 'breadcrumbs','articlesService','ngMeta',
-    function($scope,$route, $http,  $location, locale, $q, breadcrumbs, articlesService, ngMeta) {
+  export default ["$scope","$route", "realm", "$location", "locale", '$q', 'breadcrumbs','articlesService','ngMeta', '$routeParams',
+    function($scope,$route, realm,  $location, locale, $q, breadcrumbs, articlesService, ngMeta, $routeParams) {
       
       $scope.currentPage=0;
       $scope.itemCount=0;
@@ -27,13 +27,6 @@ import 'ck-editor-css';
         
         loadArticles(0);
 
-        var breadcrumb = {    
-          label : 'Announcement',
-          originalPath : "articles",
-          param:'articles',
-          path:"/articles/"
-        }
-
       //---------------------------------------------------------------------
       function loadArticle(id){
         
@@ -42,8 +35,7 @@ import 'ck-editor-css';
           $scope.article = data;
           
           if($scope.article){
-            //breadcrumbs.breadcrumbs.splice(1, 0 , breadcrumb);
-            breadcrumbs.options = {'article_title':  $scope.article.title[locale] };
+              breadcrumbs.options = {'article_title':  $scope.article.title[locale] };
             
             ngMeta.resetMeta();   
             ngMeta.setTitle( $scope.article.title[locale]);
@@ -54,13 +46,17 @@ import 'ck-editor-css';
 
       //---------------------------------------------------------------------
       function loadArticles(page){
-        var tag = "ABSCH-Announcement";
         var ag = [];
         var agLimit = [];
         var agCount = [];
         var itemCountQuery;
 
-        ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(tag)}]}});
+console.log($routeParams);
+        const tags = [encodeURIComponent($routeParams.type)]
+        tags.push(encodeURIComponent(realm.value.replace(/\-.*/, '')))
+
+
+        ag.push({"$match":{"$and":[{"adminTags": { $in : tags}}]}});
         ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
 
         agLimit = JSON.parse(JSON.stringify(ag))
