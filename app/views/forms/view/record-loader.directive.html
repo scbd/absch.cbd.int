@@ -1,6 +1,6 @@
 ﻿<div>
     <link rel="stylesheet" href="/app/css/record.css">
-    <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>
+    <div id="printContentHeader" ng-include="'view-print-header.html'" ng-if="printMode"></div>
     <style>
         ins {
                 text-decoration: none;
@@ -142,6 +142,6 @@
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>
-    <div id="printContentFooter" ng-if="printMode" ng-include="'/app/views/forms/view/print-footer.html'"></div>
+    <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>
 
 </div>
