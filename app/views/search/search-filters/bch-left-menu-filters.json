@@ -415,8 +415,8 @@
 			"type": "thesaurus",
 			"term": "dnaSequenceTraits",
 			"title": "Modified traits",
-			"field": "trait_ss",
-			"relatedField":"trait_REL_ss"
+			"field": "geneTraits_ss",
+			"relatedField":"geneTraits_REL_ss"
 		},
 		{
 			"type": "solrRecords",
