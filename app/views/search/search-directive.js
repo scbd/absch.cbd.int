@@ -192,7 +192,7 @@ import 'angular-vue'
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#searchResult",
+                                    selector    : "#referenceRecordsTab",
                                     title       : joyRideText.searchResult.title,
                                     content     : joyRideText.searchResult.content,
                                     placement   : 'top',
@@ -295,7 +295,7 @@ import 'angular-vue'
                             $timeout(resumeJoyride, 100);
                         }
                         function openSubFilters(resumeJoyride){
-                            $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
+                            $scope.leftMenuFilters = {"authority":[{"type":"freeText","title":"Free Text","field":"text_EN_txt"},{"type":"thesaurus","term":"subjectAreas","title":"Administrative functions","field":"functions_ss","relatedField":"functions_REL_ss"},{"type":"thesaurus","term":"typeOfOrganisms","title":"Types of organism(s) under its responsibility","field":"cpbOrganismTypes_ss","relatedField":"cpbOrganismTypes_REL_ss"}]};
                             $timeout(resumeJoyride, 100);
                         }
                         function closeSubFilters(resumeJoyride){

@@ -5,11 +5,11 @@
     },
     "globalSearch" :  {
       "title": "Global Filters",
-      "content": "<p>Global filters allow you to search the entire database through all record categories by selecting one or multiple options within the <strong> Record types, Keywords, Country, Regions</strong> and <strong>Date</strong> filters.</p>"
+      "content": "<p>Global filters allow you to search the entire database through all record categories by selecting one or multiple options within the <b> Record types, Keywords, Country, Regions</b> and <b>Date</b> filters.</p>"
     },
     "freeText" :  {
       "title": "Free text search",
-      "content": "<p>This search box allows you to query the entire database by typing word(s) of your choice.<br><u>Tip:</u> Change the language of the website (top right corner) before typing in that language.</p>"
+      "content": "<p>This search box allows you to query the entire database by typing word(s) of your choice.<br><br><u>Tip:</u> Change the language of the website (top right corner) before typing in that language.</p>"
     },
     "recordTypesFilterTab" :  {
       "title": "Filter by Record Type",
