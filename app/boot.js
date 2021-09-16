@@ -184,7 +184,8 @@ export default function bootApp(window, require, defineX) {
         if(isHashUrl){//remove version param from url since its a hash url
             url = removeParamFromUrl(url, 'v')
         }
-        else if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
+        
+        if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
             url = '/'+window.scbdApp.lang + url;
         }
         
