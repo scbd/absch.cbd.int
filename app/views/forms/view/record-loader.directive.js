@@ -18,8 +18,8 @@ import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
 
 	app.run(function($templateCache){
-		$templateCache.put('/app/views/forms/view/print-header.html', printHeaderTemplate)
-		$templateCache.put('/app/views/forms/view/print-footer.html', printFooterTemplate)
+		$templateCache.put('view-print-header.html', printHeaderTemplate)
+		$templateCache.put('view-print-footer.html', printFooterTemplate)
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
