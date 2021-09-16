@@ -40,7 +40,7 @@ import 'views/forms/edit/document-selector'
                     }
 
                     $scope.showFilterDialog = function (schema, filter, facets) {
-                        ngDialog.open({
+                        let filterDialog = ngDialog.open({
                             template: 'filtersDialog', 
                             className: 'search-filters ngdialog-theme-default wide',
                             controller: ['$scope', 'thesaurusService', 'searchService', function ($scope, thesaurusService, searchService) {
@@ -87,7 +87,7 @@ import 'views/forms/edit/document-selector'
                                 };
 
                                 $scope.closeDialog = function () {
-                                    ngDialog.close();
+                                    ngDialog.close(filterDialog.id);
                                 }
                                 $scope.applyFilter = function () {
 
@@ -96,7 +96,7 @@ import 'views/forms/edit/document-selector'
                                         selectedItems[item.identifier] = _.find(options, { identifier: item.identifier });
                                     })
                                     updateBaseFilter(selectedItems, schema, filter, $scope.searchRelated);
-                                    ngDialog.close();
+                                    ngDialog.close(filterDialog.id);
                                 }
                                 $scope.onBeforeSearch = function(keyword){
                                     keyword = keyword.replace(/[0]/g, "Ø");
