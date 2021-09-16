@@ -295,11 +295,17 @@ import 'angular-vue'
                             $timeout(resumeJoyride, 100);
                         }
                         function openSubFilters(resumeJoyride){
-                            $scope.leftMenuFilters = {"authority":[{"type":"freeText","title":"Free Text","field":"text_EN_txt"},{"type":"thesaurus","term":"subjectAreas","title":"Administrative functions","field":"functions_ss","relatedField":"functions_REL_ss"},{"type":"thesaurus","term":"typeOfOrganisms","title":"Types of organism(s) under its responsibility","field":"cpbOrganismTypes_ss","relatedField":"cpbOrganismTypes_REL_ss"}]};
+                            var authorityFilter = $scope.searchFilters['authority'];
+                            if(!$scope.setFilters[authorityFilter.id]){
+                                $scope.saveFilter(authorityFilter);
+                            }
                             $timeout(resumeJoyride, 100);
                         }
                         function closeSubFilters(resumeJoyride){
-                            delete $scope.leftMenuFilters;
+                            var authorityFilter = $scope.searchFilters['authority'];
+                            if($scope.setFilters[authorityFilter.id]){
+                                $scope.removeFilter(authorityFilter);
+                            }
                             $timeout(resumeJoyride, 100);
                         }
 
