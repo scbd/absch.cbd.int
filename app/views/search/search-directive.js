@@ -192,7 +192,7 @@ import 'angular-vue'
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#searchResult",
+                                    selector    : "#referenceRecordsTab",
                                     title       : joyRideText.searchResult.title,
                                     content     : joyRideText.searchResult.content,
                                     placement   : 'top',
@@ -295,11 +295,17 @@ import 'angular-vue'
                             $timeout(resumeJoyride, 100);
                         }
                         function openSubFilters(resumeJoyride){
-                            $scope.leftMenuFilters = {authority:[{"type":"freeText","title":"Free Text","field":"text_EN_txt"}]};
+                            var authorityFilter = $scope.searchFilters['authority'];
+                            if(!$scope.setFilters[authorityFilter.id]){
+                                $scope.saveFilter(authorityFilter);
+                            }
                             $timeout(resumeJoyride, 100);
                         }
                         function closeSubFilters(resumeJoyride){
-                            delete $scope.leftMenuFilters;
+                            var authorityFilter = $scope.searchFilters['authority'];
+                            if($scope.setFilters[authorityFilter.id]){
+                                $scope.removeFilter(authorityFilter);
+                            }
                             $timeout(resumeJoyride, 100);
                         }
 

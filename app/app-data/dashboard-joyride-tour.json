@@ -29,7 +29,7 @@
     },
     "viewAllRecords" :  {
       "title": "View all records",
-      "content": "<p>Click on the “list” icon to view a summary of all your records for the corresponding record type. On the page that opens, you will be able to filter existing records and create new ones, as well as duplicate, edit or delete a record.<br><br><u>Tip:</u>  You can also click on the title of the record type (for example, click on “Contact (CON)”).</p>"
+      "content": "<p>Click on the “list” icon to view a summary of all the records for the corresponding record type. On the page that opens, you will be able to filter existing records and create new ones, as well as duplicate, edit or delete a record.<br><br><u>Tip:</u>  You can also click on the title of the record type (for example, click on “Contact (CON)”).</p>"
     },
     "needHelp" :  {
       "title": "Need help?",
