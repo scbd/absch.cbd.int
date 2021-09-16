@@ -236,7 +236,12 @@ import 'components/scbd-angularjs-services/main';
                                 className: 'ngdialog-theme-default wide user-search-alert',
                                 template: 'newFilterDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
-
+                                    $timeout(function () {
+                                        if(document.getElementById("clearSearchFilter")) {
+                                            document.getElementById( "clearSearchFilter" ).click(); // to remove sub-filter from Dom as well
+                                        }
+                                        $scope.clearFilter();
+                                    }, 100);
                                     if (existingFilter) {
                                         $scope.document = angular.copy(existingFilter);
                                         $timeout(function () {
