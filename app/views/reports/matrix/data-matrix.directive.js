@@ -7,8 +7,8 @@ import 'views/directives/block-region-directive';
 import 'pivottable';
 import 'ngDialog'; ;
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog',
-function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog) {
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter',
+function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter) {
 	
 		return{
 			template:template,
@@ -51,10 +51,10 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
 
                     $scope.api.isBusy = $scope.loading = true;
                     queryOptions = queryOptions||{};
-                    queryOptions.query   = queryOptions.query||'grp_government_submissionYear_s:*';
+                    queryOptions.query   = queryOptions.query||'grp_government_schema_s:*';
 
                     var query = {
-                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, Year:grp_government_submissionYear_s, government_s,schemaType:schemaType_s,countryRegions_ss',
+                        fields      : 'Government:government_EN_t,RecordType:schema_EN_t, updatedOn:updatedDate_dt, government_s,schemaType:schemaType_s,countryRegions_ss',
                         fieldQuery  : _.uniq(queryOptions.tagQueries),
                         query       : queryOptions.query||undefined,
                         facet          : true,
@@ -87,8 +87,8 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                         data = _.map(data, function(row){
 
                             // $scope.onRecordFormatting({row:row});
-                            if(row.Year)
-                                row.Year = row.Year.replace(/([a-z]+)?_/i, '')
+                            if(row.updatedOn)
+                                row.Year = $filter("formatDate")(row.updatedOn, "YYYY");
                             
                             var region;
                             if(row.government_s){

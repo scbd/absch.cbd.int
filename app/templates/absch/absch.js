@@ -17,7 +17,6 @@ import './footer';
 import './header';
 import { templateController, bootstrapApp} from '../template-controller';
 
-app.directive('abschFooter', [function () { return { restrict: 'E', template: footerHtml }; }]);
 app.controller('AbschTemplateController', templateController);
 
 bootstrapApp();
