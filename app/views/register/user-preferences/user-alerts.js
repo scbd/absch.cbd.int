@@ -21,8 +21,8 @@ import 'components/scbd-angularjs-services/main';
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService',
-                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService','solr',
+                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr) {
 
                     var systemSearches = [];
                     $scope.user = $rootScope.user;
@@ -33,23 +33,23 @@ import 'components/scbd-angularjs-services/main';
                     $scope.skipKeywordsFilter = true;
                     $scope.skipTextFilter = true;
                 
-                    systemSearches = [{
-                        system: true,
-                        "filters": [{
-                            "type": "custom",
-                            "isSystemAlert":"true",
-                            "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                            "id": "entitiesToWhomPICGrantedCountry",
-                            "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
-                        }],
-                        "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                        "meta": {
-                            "createdOn": moment.utc().format()
+                    if ($scope.user?.government) {
+                        if($scope.realm.is('ABS')){
+                            systemSearches = [{
+                                system: true,
+                                "filters": [{
+                                    "type": "custom",
+                                    "isSystemAlert":"true",
+                                    "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                                    "id": "entitiesToWhomPICGrantedCountry",
+                                    "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
+                                }],
+                                "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                                "meta": {
+                                    "createdOn": moment.utc().format()
+                                }
+                            }];
                         }
-                    }];
-                    
-
-                    if ($scope.user.government) {
                         if (roleService.isPublishingAuthority() ||
                             roleService.isNationalAuthorizedUser() ||
                             roleService.isNationalFocalPoint()) {
@@ -233,7 +233,7 @@ import 'components/scbd-angularjs-services/main';
                             var collection = $scope.collection;
 
                             ngDialog.open({
-                                className: 'ngdialog-theme-default wide',
+                                className: 'ngdialog-theme-default wide user-search-alert',
                                 template: 'newFilterDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
 
@@ -262,7 +262,33 @@ import 'components/scbd-angularjs-services/main';
                                         var operation;
 
                                         document.isSystemAlert = false;
+                                        //ToDo: will update as per API accepted format
+                                        let userAlertSearchFilter = $scope.getLeftSubFilters();
+                                        let leftFilterQuery = {}
+                                        _.forEach(userAlertSearchFilter, function(filters, key){
+                                            console.log(key, filters)
+                                            _.forEach(filters, function(filter){
+                                                 if(!_.isEmpty(filter.selectedItems)){
+                                                    leftFilterQuery[key] = leftFilterQuery[key] || [];
+                                                     let selectedItemsIds = _.map(filter.selectedItems, s=>s.identifier.toString().replace(/\@[0-9]{1,3}$/, ''));
+                                                    const  {field,
+                                                        relatedField,
+                                                        searchRelated,
+                                                        term,
+                                                        title,
+                                                        type } = filter
+                                                    leftFilterQuery[key].push({field,
+                                                        relatedField,
+                                                        searchRelated,
+                                                        selectedItemsIds,
+                                                        term,
+                                                        title,
+                                                        type});
+                                                }
+                                            });
+                                        });
                                         document.filters = _.values($scope.setFilters);
+                                        document.subFilters = leftFilterQuery; // pass only selected sub-filters query 
                                         document.realm = realm.value;
                                         if (!document._id)
                                             operation = IGenericService.create('v2016', 'me/subscriptions', document);

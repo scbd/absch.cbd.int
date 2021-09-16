@@ -75,6 +75,7 @@ import 'angular-vue'
                         $scope.searchFilters = {};
                         $scope.setFilters    = {};
                         $scope.relatedKeywords = {};
+                        $scope.isAlertSearch = $attrs.isAlertSearch,
                         $scope.searchResult = {
                             sortFields      : ['updatedDate_dt desc'],
                             currentTab      : 'allRecords',
@@ -548,7 +549,7 @@ import 'angular-vue'
                             if($routeParams.recordType){
                                 if($routeParams.recordType == 'run-query'){
                                     var queryFilter = localStorageService.get("run-query");                            
-                                    setSearchFilters(queryFilter);
+									$scope.setFilters = queryFilter;
                                 }
                                 else{
                                     if(query){
@@ -1288,6 +1289,9 @@ import 'angular-vue'
                         updateQueryResult();
                     }
 
+                    $scope.getLeftSubFilters = function(){
+                        return leftMenuFilters
+                    }
                     async function loadLeftMenuFieldMapping(){
                         
                         if(isABS)
