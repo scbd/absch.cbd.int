@@ -120,6 +120,9 @@
              <br>
                 <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
                 <label for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
+                <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
+                    <p ng-repeat="error in errors" ng-bind="error"></p>
+                </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-primiary pull-left bold" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
