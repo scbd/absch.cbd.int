@@ -237,8 +237,8 @@ import 'components/scbd-angularjs-services/main';
                                 template: 'newFilterDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
                                     $timeout(function () {
-                                        if(document.getElementById("clearSearchFilter")) {
-                                            document.getElementById( "clearSearchFilter" ).click(); // to remove sub-filter from Dom as well
+                                        if($("#clearSearchFilter")) {
+                                            $("#clearSearchFilter" ).trigger( "click" ); // to remove sub-filter from Dom as well
                                         }
                                         $scope.clearFilter();
                                     }, 100);
