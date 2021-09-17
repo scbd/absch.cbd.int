@@ -549,7 +549,11 @@ import 'angular-vue'
                             if($routeParams.recordType){
                                 if($routeParams.recordType == 'run-query'){
                                     var queryFilter = localStorageService.get("run-query");                            
-									$scope.setFilters = queryFilter;
+									$scope.setFilters = queryFilter[0];
+									if(queryFilter[1]) {
+                                       //leftMenuFilters = queryFilter[1];
+                                        onLeftFilterUpdate(queryFilter[1]);
+                                    }
                                 }
                                 else{
                                     if(query){
@@ -1286,6 +1290,7 @@ import 'angular-vue'
 
                     function onLeftFilterUpdate(filters){
                         leftMenuFilters = filters;
+                        console.log('leftMenuFilters is :'+JSON.stringify(leftMenuFilters))
                         updateQueryResult();
                     }
 

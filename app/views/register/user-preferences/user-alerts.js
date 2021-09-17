@@ -105,11 +105,14 @@ import 'components/scbd-angularjs-services/main';
                         $scope.runFilter(systemSearches[0].filters);
                      }
                     //==============================================================
-                    $scope.runFilter = function (filters) {
+                    $scope.runFilter = function (filters, subFilters) {
                         
                         if(filters) {
-                            
-                            localStorageService.set("run-query", filters);
+                          let filtersData = [filters]
+                            if(subFilters){
+                                filtersData = [filters,subFilters];
+                            }
+                            localStorageService.set("run-query", filtersData);
 
                             if(!$scope.runQueryInPage){
                                 window.open(
