@@ -259,6 +259,13 @@ import 'views/forms/edit/document-selector'
                         organismNamesResult
                     }
 
+                    $scope.$on('evt:updateLeftMenuFilters', (evt, leftMenuFilters)=>{
+                        console.log(leftMenuFilters);
+                        $scope.leftMenuFilters = leftMenuFilters;
+                        $scope.recordSelected();
+                    });
+
+
                     function organismNamesQuery(filter, query){
                         query = query || {};
 

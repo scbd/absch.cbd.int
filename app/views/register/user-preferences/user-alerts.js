@@ -278,20 +278,8 @@ import 'components/scbd-angularjs-services/main';
                                             _.forEach(filters, function(filter){
                                                  if(!_.isEmpty(filter.selectedItems)){
                                                     leftFilterQuery[key] = leftFilterQuery[key] || [];
-                                                     let selectedItemsIds = _.map(filter.selectedItems, s=>s.identifier.toString().replace(/\@[0-9]{1,3}$/, ''));
-                                                    const  {field,
-                                                        relatedField,
-                                                        searchRelated,
-                                                        term,
-                                                        title,
-                                                        type } = filter
-                                                    leftFilterQuery[key].push({field,
-                                                        relatedField,
-                                                        searchRelated,
-                                                        selectedItemsIds,
-                                                        term,
-                                                        title,
-                                                        type});
+                                                    const  {field, relatedField, searchRelated, term, title, type } = filter
+                                                    leftFilterQuery[key].push({field, relatedField, searchRelated, selectedItems:filter.selectedItems, term, title, type});
                                                 }
                                             });
                                         });

@@ -110,8 +110,7 @@ import 'angular-vue'
                             onFinish: function(){
                                 joyride.start = false;
                                 $scope.tourOn = false; 
-                                $scope.showFilters = false;                                
-                                delete $scope.leftMenuFilters;                               
+                                $scope.showFilters = false;                             
                                 $('#searchResult').removeClass('active jr_target'); 
                             },
                             steps : [
@@ -549,10 +548,21 @@ import 'angular-vue'
                             if($routeParams.recordType){
                                 if($routeParams.recordType == 'run-query'){
                                     var queryFilter = localStorageService.get("run-query");                            
-									$scope.setFilters = queryFilter[0];
+									 queryFilter[0].forEach(e=>{
+                                        $scope.saveFilter(e);
+                                     });
+                                     
+                                     //$scope.setFilters =
 									if(queryFilter[1]) {
-                                       //leftMenuFilters = queryFilter[1];
-                                        onLeftFilterUpdate(queryFilter[1]);
+                                        for(const subFilterKey in queryFilter[1]){
+                                            const subFilter = queryFilter[1][subFilterKey];
+                                            subFilter.forEach(filter=>{
+                                                var filterItem = leftMenuFilters[subFilterKey].find(q=>q.field == filter.field);
+                                                filterItem.selectedItems = filter.selectedItemsIds||filter.selectedItems;
+                                            })
+                                        }
+                                      console.log( leftMenuFilters)
+                                      $scope.$emit('evt:updateLeftMenuFilters', leftMenuFilters);
                                     }
                                 }
                                 else{
@@ -1290,7 +1300,6 @@ import 'angular-vue'
 
                     function onLeftFilterUpdate(filters){
                         leftMenuFilters = filters;
-                        console.log('leftMenuFilters is :'+JSON.stringify(leftMenuFilters))
                         updateQueryResult();
                     }
 
