@@ -9,7 +9,7 @@
 
 		<document-date></document-date>
 
-		<div ng-if="document.isAmendment || amendedByRecords">
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
 			<legend>Amendment</legend>
 			<div ng-if="document.isAmendment!=undefined">
 				<label>Is this an amendment to a decision or communication already published on the BCH?</label>
@@ -398,7 +398,7 @@
 
 <!--=============SECTION G START========================-->
 
-	<!-- <div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+	<div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
 		<legend>Information sharing with other databases</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>Is this decision related to an LMO for commercial use ?</label>
@@ -430,7 +430,7 @@
 				</div>
 			</div>
 		</div>
-	</div> -->
+	</div>
 
 
 <!--=============SECTION G END ========================-->
