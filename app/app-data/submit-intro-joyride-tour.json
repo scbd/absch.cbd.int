@@ -17,7 +17,7 @@
     },
     "review" :  {
       "title": "Adding a new record: Review",
-      "content": "Once you have filled out the submission form, click here to  review it.<br>If the mandatory fields were not completed, the “Review” will highlight them. Make sure to complete them in order to proceed to publishing your record."
+      "content": "Once you have filled out the “Submission form”, click here to review it.<br>If the mandatory fields were not completed, the “Review” will highlight them. Make sure to complete them in order to proceed to publishing your record."
     },
     "publish" :  {
       "title": "Publish",

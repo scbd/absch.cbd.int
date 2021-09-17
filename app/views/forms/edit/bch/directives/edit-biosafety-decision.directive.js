@@ -393,12 +393,12 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                     if(!document.isForCommercialUse){
                         document.forwardToOECD = undefined;
                         document.isForFoodSafety = undefined;
-                        document.codexConduted = undefined;
+                        document.codexConducted = undefined;
                         document.forwardToFAO = undefined;
                     }
 
                    if(!document.isForFoodSafety){
-                    document.codexConduted = undefined;
+                    document.codexConducted = undefined;
                     document.forwardToFAO = undefined;
                    }
                    
