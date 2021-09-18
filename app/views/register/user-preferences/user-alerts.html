@@ -87,10 +87,10 @@
     <br>
     <button type="button" class="btn btn-primary pull-right" ng-click="addEdit()"><i class="fa fa-plus-circle"></i> Add new</button>
     <div class="clearfix"></div>
-
+    <div ng-if="loading" class="text-center" style="margin-bottom: 30px;"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
         <div class="alert  bg-grey" role="alert" style="margin-top:20px;">
-            <span ng-if="user.isAuthenticated">You do not have any saved alerts.
+            <span ng-if="user.isAuthenticated">You do not have any saved alerts.</span>
             <span ng-if="!user.isAuthenticated">Please log in to view your saved alerts.</span>
         </div>
     </div>

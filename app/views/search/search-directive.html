@@ -134,7 +134,7 @@
                              <i ng-if="!showFilters || showFilters!='dateFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Date</a> </li>
 
-                     <li id="searchFilterTab" > <a rel="noopener" href=""
+                     <li id="searchFilterTab" ng-show="user && user.isAuthenticated"> <a rel="noopener" href=""
                              ng-class="{'active':showFilters=='userSearchFilter'}"
                              ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
                              class="btn color-green">
