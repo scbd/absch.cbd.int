@@ -1250,6 +1250,9 @@ div.recordDefault:hover {
     cursor: pointer;
     font-weight: 500;
 }
+#Search-Filter .filter .published-on-label label{
+   margin: 10px 25px;
+}
 #Search-Filter .check:hover,
 #Search-Filter .filter:hover {
     color: #000;
