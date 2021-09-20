@@ -94,9 +94,9 @@ import 'components/scbd-angularjs-services/main';
                 this.getLimitedTerms = function(domainTerm, excludedTerms) {
                     return thesaurusService.getDomainTerms(domainTerm)
                     .then((terms)=>{
-                        let items = [];
-                        let includedTerms  = [];
                         if(excludedTerms && excludedTerms.length>0){
+                            let items = [];
+                            let includedTerms  = [];
                             _.forEach(excludedTerms, function ( exTerm ) {
                                 includedTerms = _.filter(terms, function(item){
                                     return !_.includes(item.broaderTerms, exTerm)
@@ -111,9 +111,9 @@ import 'components/scbd-angularjs-services/main';
                             return terms;
                         }
                         
-                    })
+                    });
 
-                }                
+                }               
                 //==================================================================================
                 this.getCountry = function(code) {
 

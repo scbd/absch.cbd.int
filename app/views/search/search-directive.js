@@ -766,8 +766,7 @@ import 'angular-vue'
 
                     async function vlrResourceCustomFn () {
                         let AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
-                        let   items = commonjs.getLimitedTerms( 'resourceTypesVlr', AbsRelated );
-                        return items;
+                        return commonjs.getLimitedTerms( 'resourceTypesVlr', AbsRelated );
                     }
 
                     async function cbdSubjectsCustomFn() { return thesaurusService.getDomainTerms('cbdSubjects')
