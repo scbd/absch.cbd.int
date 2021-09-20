@@ -708,6 +708,7 @@ import 'angular-vue'
                         var promises = []
                         promises.push(getFocalPointTypes().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'decisionTypes'             )}));
                         promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'legislationAgreementTypes' )}));
                         promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
@@ -761,6 +762,36 @@ import 'angular-vue'
                                 functions : category.categories
                             };
                         });
+                    }
+
+                    async function vlrResourceCustomFn () {
+                            return thesaurusService.getDomainTerms('resourceTypesVlr')
+                                .then((terms)=>{
+                                    let items = [];
+                                    if(isBCH) {
+                                        const rTypes = ['6E27B530-7639-4091-AF58-9D61A77B4A28', '68E089F9-D33F-417F-B013-4DD03225884F', '2EEC1A39-A7BD-495F-A160-833A909B52DA', '9456EBD7-5DDD-4423-82BD-B117D109667C', '435557E2-0933-4D6D-811B-077F2896F850'];
+                                        _.forEach( rTypes, function ( type ) {
+                                            var item = _.find( terms, { 'identifier' : type } );
+                                            items.push( item );
+                                            _( item.narrowerTerms ).forEach( function ( term ) {
+                                                items.push( _.find( terms, { 'identifier' : term } ) );
+                                            } )
+                                        } );
+                                    } else {
+                                        items = terms;
+                                    }
+
+                                    $timeout(()=>{
+                                        items.forEach(term=>{
+                                            if(!(term.broaderTerms||[]).length){
+                                                const selector = `#chk_${term.identifier}`
+                                                $element.find(selector).attr('disabled', true);
+                                                $element.find(selector).css("display", "none");
+                                            }
+                                        })
+                                    }, 500)
+                                    return items;
+                                })
                     }
 
                     async function cbdSubjectsCustomFn() { return thesaurusService.getDomainTerms('cbdSubjects')
@@ -1297,6 +1328,7 @@ import 'angular-vue'
                     this.combinationField         = combinationField        ;
                     this.sanitizeFacets           = sanitizeFacets          ;
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
+                    this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
 
                     this.getFocalPointTypes       = getFocalPointTypes
             }]//controller
