@@ -90,6 +90,30 @@ import 'components/scbd-angularjs-services/main';
                             return countries;
                         });
                 };
+                //=================================================================================
+                this.getLimitedTerms = function(domainTerm, excludedTerms) {
+                    return thesaurusService.getDomainTerms(domainTerm)
+                    .then((terms)=>{
+                        let items = [];
+                        let includedTerms  = [];
+                        if(excludedTerms && excludedTerms.length>0){
+                            _.forEach(excludedTerms, function ( exTerm ) {
+                                includedTerms = _.filter(terms, function(item){
+                                    return !_.includes(item.broaderTerms, exTerm)
+                                });
+                                items = _.filter(includedTerms, function(t){
+                                    return !_.includes(exTerm, t.identifier)
+                                })
+                            });
+                            return items;
+                        }
+                        else{
+                            return terms;
+                        }
+                        
+                    })
+
+                }                
                 //==================================================================================
                 this.getCountry = function(code) {
 
