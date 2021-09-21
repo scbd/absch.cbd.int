@@ -107,24 +107,19 @@ import 'components/scbd-angularjs-services/main';
                         $scope.runFilter(systemSearches[0].filters);
                      }
                     //==============================================================
-                    $scope.runFilter = function (filters, subFilters) {
-                        
-                        if(filters) {
-                          let filtersData = [filters]
-                            if(subFilters){
-                                filtersData = [filters,subFilters];
-                            }
-                            localStorageService.set("run-query", filtersData);
-
+                    $scope.runFilter = function (id)
+                    {
+                        if(id)
+                        {
                             if(!$scope.runQueryInPage){
                                 window.open(
-                                        '/search/run-query/',
-                                        '_blank' 
-                                    ); 
+                                '/search/'+id,
+                                '_blank'
+                                ); 
                             }
                             else
                             {
-                                window.location.href =  '/search/run-query';
+                                window.location.href =  '/search/'+id;
                             }
                         }
                     };
@@ -242,7 +237,7 @@ import 'components/scbd-angularjs-services/main';
                                 template: 'newFilterDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
                                     $timeout(function () {
-                                        localStorageService.set("run-query", '');
+                                       // localStorageService.set("run-query", '');
                                         $scope.clearFilter();
                                     }, 100);
                                     if (existingFilter) {

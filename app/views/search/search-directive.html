@@ -69,9 +69,9 @@
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
                                  aria-hidden="true"></i>TAKE SEARCH TOUR</span></a>
 
-                     <!-- <a rel="noopener" ng-href="#" ng-if="setFilters()" class="link2"
+                     <a rel="noopener" ng-href="#" ng-if="canShowSaveFilter()" class="link2"
                          style="font-size:10px;;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
-                         ng-click="showSaveFilter()">Save this search</a> -->
+                         ng-click="showSaveFilter()">Save this search</a>
                  </span>
              </div>
              </div>
@@ -221,7 +221,9 @@
     </div>
 
   <div id="search-new" class=" innerPageContent register-content ">
-    
+    <div class="alert alert-danger" role="alert" ng-if="searchAlertError && searchAlertError.length>0">
+      <p ng-bind="searchAlertError"></p>
+    </div>
     <div class="register-content-content" >
         <div class="main" id="main" >
 
