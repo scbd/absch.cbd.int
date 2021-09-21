@@ -1118,7 +1118,7 @@ import 'angular-vue'
                             return solr.andOr(values, 'AND')
                     }
 
-                    function buildDateFieldQuery({ field, date }) {
+                    function buildDateFieldQuery({ field, filterValue:date }) {
                         
                         if(date.start || date.end) {
                             const start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
