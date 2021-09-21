@@ -561,8 +561,10 @@ import 'angular-vue'
                                             for ( const subFilterKey in subFilters) {
                                                 const subFilter = subFilters[subFilterKey];
                                                 subFilter.forEach( filter => {
-                                                    var filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
+                                                if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
+                                                    let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
                                                     filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
+                                                }
                                                 } )
                                             }
                                             console.log( leftMenuFilters )
@@ -578,7 +580,6 @@ import 'angular-vue'
                                     }
                                 });
                                 }
-                                else{
                                     if(query){
                                         if(query.text){
                                             $scope.saveFreeTextFilter(query.text);
@@ -590,7 +591,7 @@ import 'angular-vue'
                                             $scope.saveFilter(query.schema);
                                         }
                                     }
-                                }
+
                             if(query["raw-query"]){
                                 saveRawQueryFilter(query["raw-query"]);
                             }

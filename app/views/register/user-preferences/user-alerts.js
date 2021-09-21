@@ -243,7 +243,7 @@ import 'components/scbd-angularjs-services/main';
                                     if (existingFilter) {
                                         $scope.document = angular.copy(existingFilter);
                                         $timeout(function () {
-                                            $scope.setSearchFilters(existingFilter.filters);
+                                            $scope.setFilters = existingFilter.filters;
                                         }, 100);
                                     }
                                     $scope.save = function (document) {
