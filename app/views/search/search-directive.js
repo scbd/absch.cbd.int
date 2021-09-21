@@ -739,7 +739,6 @@ import 'angular-vue'
                         var promises = []
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
-                        promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
                         promises.push(thesaurusService.getDomainTerms('thematicAreas'       ).then(function(keywords){loopKeywords(keywords, 'thematicAreas'        )}));
                         promises.push(thesaurusService.getDomainTerms('keyAreas'            ).then(function(keywords){loopKeywords(keywords, 'keyAreas'             )}));
@@ -768,12 +767,12 @@ import 'angular-vue'
                     }
 
                     async function vlrResourceCustomFn () {
-                        let AbsRelated = [];
+                        let excludeTerms = [];
                         if(isBCH){
-                            AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
+                            excludeTerms = ['6B245045-8379-4582-A081-2565B67F8B3A'];//AbsRelated
                         }
                         return thesaurusService.getDomainTerms('resourceTypesVlr').then((terms)=>{
-                        return getLimitedTerms(terms, AbsRelated );
+                            return getLimitedTerms(terms, excludeTerms);
                         })
                     }
 

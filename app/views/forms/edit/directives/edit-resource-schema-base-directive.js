@@ -54,14 +54,11 @@ import {getLimitedTerms} from 'services/common';
 						}],
 
 						resourceTypes   : function() {
-							let AbsRelated = [];
-							if($scope.isBCH)
-							{
-								AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
-							}
+							
 							return thesaurusService.getDomainTerms('resourceTypesVlr')
 							.then((resourceTypesVlr)=>{
-								let terms = getLimitedTerms(resourceTypesVlr, AbsRelated );
+								let AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
+								let terms = getLimitedTerms(resourceTypesVlr, $scope.isBCH ? [] : AbsRelated );
 								$timeout(()=>{
 									terms.forEach(term=>{
 										if(!(term.broaderTerms||[]).length){
