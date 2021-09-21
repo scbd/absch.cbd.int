@@ -20,10 +20,6 @@ import 'bootstrap-datepicker';
                     field:'updatedDate_dt',
                     value:{start : null, end : null}
                 };
-                
-                $scope.onFiedlChange = function(){
-                    $scope.dateFilter.value = {start : null, end : null}
-                }
 
                 $scope.onChange = function(){
                     var query;

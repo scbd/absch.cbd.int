@@ -4,6 +4,7 @@ import template from 'text!./edit-resource-schema-base-directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import "~/views/forms/view/view-resource.directive";
+import {getLimitedTerms} from 'services/common';
 
 	app.directive('convertToNumber', function() {
 		return {
@@ -18,7 +19,7 @@ import "~/views/forms/view/view-resource.directive";
 			}
 		};
 	});
-	app.directive('editSchemaResourceBase', ["$q", "$timeout", "Thesaurus", function ($q, $timeout, Thesaurus)
+	app.directive('editSchemaResourceBase', ["$q", "commonjs", "$timeout", "Thesaurus", function ($q, commonjs, $timeout, Thesaurus)
 	{
 		return {
 			restrict: 'EAC',
@@ -53,9 +54,11 @@ import "~/views/forms/view/view-resource.directive";
 						}],
 
 						resourceTypes   : function() {
+							
 							return thesaurusService.getDomainTerms('resourceTypesVlr')
-							.then((terms)=>{
-
+							.then((resourceTypesVlr)=>{
+								let AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
+								let terms = getLimitedTerms(resourceTypesVlr, $scope.isBCH ? [] : AbsRelated );
 								$timeout(()=>{
 									terms.forEach(term=>{
 										if(!(term.broaderTerms||[]).length){
@@ -255,5 +258,4 @@ import "~/views/forms/view/view-resource.directive";
 			}]
 		};
 	}]);
-
 

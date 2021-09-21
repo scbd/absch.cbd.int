@@ -90,6 +90,8 @@ import 'components/scbd-angularjs-services/main';
                             return countries;
                         });
                 };
+                //=================================================================================
+                            
                 //==================================================================================
                 this.getCountry = function(code) {
 
@@ -397,3 +399,22 @@ import 'components/scbd-angularjs-services/main';
             }
         }
     ]);
+
+    export function getLimitedTerms(terms, excludedTerms) {
+        if(excludedTerms && excludedTerms.length>0){
+            let items = [];
+            let includedTerms  = [];
+            excludedTerms.forEach(exTerm=> {
+                includedTerms = _.filter(terms, function(item){
+                    return !_.includes(item.broaderTerms, exTerm)
+                });
+                items = _.filter(includedTerms, function(t){
+                    return !_.includes(exTerm, t.identifier)
+                })
+            });
+            return items;
+        }
+        else{
+            return terms;
+        }
+} 

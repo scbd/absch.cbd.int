@@ -7,6 +7,7 @@ import 'toastr';
 import joyRideText      from '~/app-data/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
+import {getLimitedTerms} from 'services/common';
 import 'services/main';
 import '~/views/directives/export-directive';
 import 'components/scbd-angularjs-controls/main';
@@ -708,6 +709,7 @@ import 'angular-vue'
                         var promises = []
                         promises.push(getFocalPointTypes().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('decisionTypes'             ).then(function(keywords){loopKeywords(keywords, 'decisionTypes'             )}));
                         promises.push(thesaurusService.getDomainTerms('legislationAgreementTypes' ).then(function(keywords){loopKeywords(keywords, 'legislationAgreementTypes' )}));
                         promises.push(thesaurusService.getDomainTerms('subjectAreas'              ).then(function(keywords){loopKeywords(keywords, 'subjectAreas'              )}));
@@ -736,6 +738,7 @@ import 'angular-vue'
                     function loadABSKeywordFilters() {
                         var promises = []
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
                         promises.push(thesaurusService.getDomainTerms('thematicAreas'       ).then(function(keywords){loopKeywords(keywords, 'thematicAreas'        )}));
                         promises.push(thesaurusService.getDomainTerms('keyAreas'            ).then(function(keywords){loopKeywords(keywords, 'keyAreas'             )}));
@@ -761,6 +764,16 @@ import 'angular-vue'
                                 functions : category.categories
                             };
                         });
+                    }
+
+                    async function vlrResourceCustomFn () {
+                        let excludeTerms = [];
+                        if(isBCH){
+                            excludeTerms = ['6B245045-8379-4582-A081-2565B67F8B3A'];//AbsRelated
+                        }
+                        return thesaurusService.getDomainTerms('resourceTypesVlr').then((terms)=>{
+                            return getLimitedTerms(terms, excludeTerms);
+                        })
                     }
 
                     async function cbdSubjectsCustomFn() { return thesaurusService.getDomainTerms('cbdSubjects')
@@ -1297,6 +1310,7 @@ import 'angular-vue'
                     this.combinationField         = combinationField        ;
                     this.sanitizeFacets           = sanitizeFacets          ;
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
+                    this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
 
                     this.getFocalPointTypes       = getFocalPointTypes
             }]//controller
