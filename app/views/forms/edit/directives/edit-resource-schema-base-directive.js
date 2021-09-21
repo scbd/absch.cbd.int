@@ -4,6 +4,7 @@ import template from 'text!./edit-resource-schema-base-directive.html';
 import 'views/forms/edit/edit';
 import 'services/main';
 import "~/views/forms/view/view-resource.directive";
+import {getLimitedTerms} from 'services/common';
 
 	app.directive('convertToNumber', function() {
 		return {
@@ -37,7 +38,7 @@ import "~/views/forms/view/view-resource.directive";
 
 				$scope.setOptions = function (){
 					_.extend($scope.options, {
-						
+					 
 						documentLinksExt : [{
 							model:"language",
 							title:"Language",
@@ -52,7 +53,28 @@ import "~/views/forms/view/view-resource.directive";
 							})
 						}],
 
-
+						resourceTypes   : function() {
+							let AbsRelated = [];
+							if($scope.isBCH)
+							{
+								AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
+							}
+							return thesaurusService.getDomainTerms('resourceTypesVlr')
+							.then((resourceTypesVlr)=>{
+								let terms = getLimitedTerms(resourceTypesVlr, AbsRelated );
+								$timeout(()=>{
+									terms.forEach(term=>{
+										if(!(term.broaderTerms||[]).length){
+											const selector = `#chk_${term.identifier}`
+											$element.find(selector).attr('disabled', true);
+											$element.find(selector).css("display", "none");
+										}
+									})
+								}, 500)
+								
+								return terms;
+							})
+						},
 						aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
 						bchSubjects   	: function() {return thesaurusService.getDomainTerms('cpbThematicAreas',{other:true, otherType:'lstring'})}, // Biosafety Thematic Areas
 						bchRaAuthorAffiliation : function() {return thesaurusService.getDomainTerms('bchRaAuthorAffiliation',{other:true, otherType:'lstring'})}, // Author affiliation
@@ -76,26 +98,6 @@ import "~/views/forms/view/view-resource.directive";
 						}, 
 					});
 				};
-
-				let AbsRelated = [];
-				if($scope.isBCH)
-				{
-					AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
-				}
-				$timeout(()=> {
-					$scope.options.resourceTypes = commonjs.getLimitedTerms( 'resourceTypesVlr', AbsRelated ).then((terms)=>{
-						terms.forEach( term => {
-							if ( !(term.broaderTerms || []).length ) {
-								$timeout(()=> {
-									const selector = `#chk_${term.identifier}`
-									$element.find(selector).attr( 'disabled', true );
-									$element.find(selector ).css( "display", "none" );
-								},100);
-							}
-						})
-						return terms;
-					})
-				},100);
 
 				//==================================
 				// 
@@ -150,7 +152,7 @@ import "~/views/forms/view/view-resource.directive";
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 				//==================================
-
+				//
 				//==================================
 				$scope.getCleanDocument = function(document) {
 
@@ -259,5 +261,4 @@ import "~/views/forms/view/view-resource.directive";
 			}]
 		};
 	}]);
-
 

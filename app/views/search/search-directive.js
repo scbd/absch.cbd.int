@@ -7,6 +7,7 @@ import 'toastr';
 import joyRideText      from '~/app-data/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
+import {getLimitedTerms} from 'services/common';
 import 'services/main';
 import '~/views/directives/export-directive';
 import 'components/scbd-angularjs-controls/main';
@@ -737,6 +738,8 @@ import 'angular-vue'
                     function loadABSKeywordFilters() {
                         var promises = []
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
+                        promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
                         promises.push(thesaurusService.getDomainTerms('thematicAreas'       ).then(function(keywords){loopKeywords(keywords, 'thematicAreas'        )}));
                         promises.push(thesaurusService.getDomainTerms('keyAreas'            ).then(function(keywords){loopKeywords(keywords, 'keyAreas'             )}));
@@ -765,8 +768,13 @@ import 'angular-vue'
                     }
 
                     async function vlrResourceCustomFn () {
-                        let AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
-                        return commonjs.getLimitedTerms( 'resourceTypesVlr', AbsRelated );
+                        let AbsRelated = [];
+                        if(isBCH){
+                            AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
+                        }
+                        return thesaurusService.getDomainTerms('resourceTypesVlr').then((terms)=>{
+                        return getLimitedTerms(terms, AbsRelated );
+                        })
                     }
 
                     async function cbdSubjectsCustomFn() { return thesaurusService.getDomainTerms('cbdSubjects')
