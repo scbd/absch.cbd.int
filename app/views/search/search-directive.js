@@ -547,7 +547,7 @@ import 'angular-vue'
                             if(query.viewType)
                                 $scope.searchResult.viewType = query.viewType;
 
-                                if($routeParams.id) {
+                                 if($routeParams.id && !$scope.isAlertSearch) {
                                     $scope.searchAlertError = '';
                                     IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
                                     .then(function (data) {
