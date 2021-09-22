@@ -408,7 +408,7 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                     }
                     if(!$scope.isUnintentionalTransboundaryMovement){
                         document.estimatedQuantities = undefined;
-                        document.releaseCurcumstance = undefined;
+                        document.releaseCircumstance = undefined;
                         document.releaseDate = undefined;
                         document.lmoUseInformation = undefined;
                         document.adverseEffectInformation = undefined;
