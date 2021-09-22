@@ -24,7 +24,7 @@
 			</span>
 		</div>
 		<div ng-if="document.categories">
-			<label>Functions</label>
+			<label>Type of Focal Point</label>
 			<span class="km-value">
 				<ul class="list">
 					<li ng-repeat="category in document.categories" ng-bind="nfpCategory(category)||category"></li>
@@ -32,13 +32,13 @@
 			</span>
 		</div>
 		<div ng-if="focalPointDetails.description_EN_t">
-			<label>Description</label>
+			<label>Personal Details</label>
 			<span class="km-value" ng-bind-html="focalPointDetails.description_EN_t">
 			</span>
 		</div>
 
 		<div ng-if="document.designation">
-			<label>Designation</label>
+			<label>Function</label>
 			<span class="km-value">
 				{{document.designation|lstring:locale}}
 			</span>
