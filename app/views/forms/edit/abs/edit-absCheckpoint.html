@@ -3,7 +3,7 @@
     <edit-header></edit-header>
 
 
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-abs-checkpoints"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
 
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content" >
@@ -64,7 +64,8 @@
                                     <div class="row" ng-if="hasPointToCollect">
                                         <div class="col-xs-12">
                                             <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization. </div>
-                                            <div class="km-control-group" name="valueChainStage" caption="Stage at which information is collected or received">
+                                            <label>Stage at which information is collected or received</label>
+                                            <div class="km-control-group chain-stage-value" name="valueChainStage" caption="">
                                                 <div km-term-radio ng-model="document.valueChainStage" locales="document.header.languages"
                                                      terms="options.valueChainStage()"  binding-type="term" show-other="true"></div>
                                             </div>
