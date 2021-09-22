@@ -191,12 +191,12 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
                         if(decision.identifier == decisionSubjects.DEC_8_6){ 
                             $scope.isUnintentionalTransboundaryMovement = true;
                             $scope.document.transboundaryMovementType = {identifier : transboundaryMovementType.unintentional}
-                            $scope.onTransboundaryMovementTypeChange(document.transboundaryMovementType) 
+                            $scope.onTransboundaryMovementTypeChange($scope.document.transboundaryMovementType) 
                         }
                         if(decision.identifier == decisionSubjects.DEC_8_7){ 
                             $scope.isUnintentionalTransboundaryMovement = true;
                             $scope.document.transboundaryMovementType = {identifier : transboundaryMovementType.illegal}
-                            $scope.onTransboundaryMovementTypeChange(document.transboundaryMovementType) 
+                            $scope.onTransboundaryMovementTypeChange($scope.document.transboundaryMovementType) 
                         }
                         if(_.includes(identifiersForSectionI,decision.identifier)){ $scope.isShowDecisionDocument = true;}
                     }
