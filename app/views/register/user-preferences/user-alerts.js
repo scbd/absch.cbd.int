@@ -21,8 +21,8 @@ import 'components/scbd-angularjs-services/main';
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService','solr',
-                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService','solr','locale',
+                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale) {
 
                     var systemSearches = [];
                     $scope.user = $rootScope.user;
@@ -327,6 +327,11 @@ import 'components/scbd-angularjs-services/main';
                         }
                     };
 
+                    $scope.getFilterName = function (name) {
+                        if(typeof name === "object")
+                            return name[locale]
+                        else return name;
+                    }
 
                     loadSavedFilters();
                 }
