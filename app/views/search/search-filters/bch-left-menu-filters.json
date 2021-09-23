@@ -310,7 +310,7 @@
 		{
 			"type": "customListFn",
 			"fn": "getFocalPointTypes",
-			"title": "Type of Focal point",
+			"title": "Type of Focal Point",
 			"field": "type_ss"
 		}
 	],
