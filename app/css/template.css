@@ -3058,3 +3058,15 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 #pageHeader .normal-nav > ul > li > .nav-link {font-size: 13px;text-transform: uppercase;color: #555;font-weight: 500; }
 
 #pageHeader .breadcrumbs {text-transform: uppercase;margin-left:26px;font-size:12px; padding:10px 3px;color:#111;font-weight:500}
+#search-new .isAlertUserSearch{
+    width: 100%;
+}
+#search-new .isAlertUserSearch #Search-Filter ul.list-group{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+}
+.user-search-alert .modal-body {
+    max-height: 100vh;
+    overflow-y: scroll;
+}

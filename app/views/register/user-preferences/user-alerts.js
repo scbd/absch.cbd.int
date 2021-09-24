@@ -21,8 +21,8 @@ import 'components/scbd-angularjs-services/main';
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService',
-                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService','solr','locale',
+                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale) {
 
                     var systemSearches = [];
                     $scope.user = $rootScope.user;
@@ -33,23 +33,23 @@ import 'components/scbd-angularjs-services/main';
                     $scope.skipKeywordsFilter = true;
                     $scope.skipTextFilter = true;
                 
-                    systemSearches = [{
-                        system: true,
-                        "filters": [{
-                            "type": "custom",
-                            "isSystemAlert":"true",
-                            "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                            "id": "entitiesToWhomPICGrantedCountry",
-                            "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
-                        }],
-                        "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
-                        "meta": {
-                            "createdOn": moment.utc().format()
+                    if ($scope.user?.government) {
+                        if($scope.realm.is('ABS')){
+                            systemSearches = [{
+                                system: true,
+                                "filters": [{
+                                    "type": "custom",
+                                    "isSystemAlert":"true",
+                                    "name": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                                    "id": "entitiesToWhomPICGrantedCountry",
+                                    "query": 'entitiesToWhomPICGrantedCountry_ss:' + $scope.user.government
+                                }],
+                                "queryTitle": "Search certificate(s) (IRCC) that are constituted indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+                                "meta": {
+                                    "createdOn": moment.utc().format()
+                                }
+                            }];
                         }
-                    }];
-                    
-
-                    if ($scope.user.government) {
                         if (roleService.isPublishingAuthority() ||
                             roleService.isNationalAuthorizedUser() ||
                             roleService.isNationalFocalPoint()) {
@@ -69,11 +69,12 @@ import 'components/scbd-angularjs-services/main';
 
                     //==============================================================
                     function loadSavedFilters() {
+                        $scope.loading = false;
                         if ($scope.user && $scope.user.isAuthenticated) {
                             var query = {};
                             if ($scope.collectionFilter)
                                 query = JSON.parse($scope.collectionFilter);
-
+                            $scope.loading = true;
                             query.realm = realm.value;
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
@@ -81,7 +82,8 @@ import 'components/scbd-angularjs-services/main';
                                     //     _.first(systemSearches).filters[0].query += $scope.user.government;
                                     //     $scope.userFilters = _.union(systemSearches, data);
                                     // } else
-                                        $scope.userFilters = data;
+                                    $scope.loading = false;
+                                    $scope.userFilters = data;
                                 });
                         }
                     }
@@ -105,21 +107,19 @@ import 'components/scbd-angularjs-services/main';
                         $scope.runFilter(systemSearches[0].filters);
                      }
                     //==============================================================
-                    $scope.runFilter = function (filters) {
-                        
-                        if(filters) {
-                            
-                            localStorageService.set("run-query", filters);
-
+                    $scope.runFilter = function (id)
+                    {
+                        if(id)
+                        {
                             if(!$scope.runQueryInPage){
                                 window.open(
-                                        '/search/run-query/',
-                                        '_blank' 
-                                    ); 
+                                '/search/'+id,
+                                '_blank'
+                                ); 
                             }
                             else
                             {
-                                window.location.href =  '/search/run-query';
+                                window.location.href =  '/search/'+id;
                             }
                         }
                     };
@@ -233,14 +233,17 @@ import 'components/scbd-angularjs-services/main';
                             var collection = $scope.collection;
 
                             ngDialog.open({
-                                className: 'ngdialog-theme-default wide',
+                                className: 'ngdialog-theme-default wide user-search-alert',
                                 template: 'newFilterDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
-
+                                    $timeout(function () {
+                                       // localStorageService.set("run-query", '');
+                                        $scope.clearFilter();
+                                    }, 100);
                                     if (existingFilter) {
                                         $scope.document = angular.copy(existingFilter);
                                         $timeout(function () {
-                                            $scope.setSearchFilters(existingFilter.filters);
+                                            $scope.setFilters = existingFilter.filters;
                                         }, 100);
                                     }
                                     $scope.save = function (document) {
@@ -262,7 +265,21 @@ import 'components/scbd-angularjs-services/main';
                                         var operation;
 
                                         document.isSystemAlert = false;
+                                        //ToDo: will update as per API accepted format
+                                        let userAlertSearchFilter = $scope.getLeftSubFilters();
+                                        let leftFilterQuery = {}
+                                        _.forEach(userAlertSearchFilter, function(filters, key){
+                                            console.log(key, filters)
+                                            _.forEach(filters, function(filter){
+                                                 if(!_.isEmpty(filter.selectedItems)){
+                                                    leftFilterQuery[key] = leftFilterQuery[key] || [];
+                                                    const  {field, relatedField, searchRelated, term, title, type } = filter
+                                                    leftFilterQuery[key].push({field, relatedField, searchRelated, selectedItems:filter.selectedItems, term, title, type});
+                                                }
+                                            });
+                                        });
                                         document.filters = _.values($scope.setFilters);
+                                        document.subFilters = leftFilterQuery; // pass only selected sub-filters query 
                                         document.realm = realm.value;
                                         if (!document._id)
                                             operation = IGenericService.create('v2016', 'me/subscriptions', document);
@@ -310,6 +327,11 @@ import 'components/scbd-angularjs-services/main';
                         }
                     };
 
+                    $scope.getFilterName = function (name) {
+                        if(typeof name === "object")
+                            return name[locale]
+                        else return name;
+                    }
 
                     loadSavedFilters();
                 }

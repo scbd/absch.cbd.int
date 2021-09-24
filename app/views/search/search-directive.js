@@ -33,10 +33,10 @@ import 'angular-vue'
             template: template, 
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
-             'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log',
+             'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log','IGenericService',
             function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
-                    $timeout, locale, solr, toastr, $log) {
+                    $timeout, locale, solr, toastr, $log, IGenericService) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn
@@ -71,10 +71,12 @@ import 'angular-vue'
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
                         var leftMenuFilters  = [];
+                        $scope.searchAlertError = '';
                         $scope.realm         = realm
                         $scope.searchFilters = {};
                         $scope.setFilters    = {};
                         $scope.relatedKeywords = {};
+                        $scope.isAlertSearch = $attrs.isAlertSearch,
                         $scope.searchResult = {
                             sortFields      : ['updatedDate_dt desc'],
                             currentTab      : 'allRecords',
@@ -109,8 +111,7 @@ import 'angular-vue'
                             onFinish: function(){
                                 joyride.start = false;
                                 $scope.tourOn = false; 
-                                $scope.showFilters = false;                                
-                                delete $scope.leftMenuFilters;                               
+                                $scope.showFilters = false;                             
                                 $('#searchResult').removeClass('active jr_target'); 
                             },
                             steps : [
@@ -456,6 +457,7 @@ import 'angular-vue'
                     }
 
                     $scope.clearFilter = function(){
+                        console.log('i am called')
                         updateQueryString('schema');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
@@ -545,12 +547,39 @@ import 'angular-vue'
                             if(query.viewType)
                                 $scope.searchResult.viewType = query.viewType;
 
-                            if($routeParams.recordType){
-                                if($routeParams.recordType == 'run-query'){
-                                    var queryFilter = localStorageService.get("run-query");                            
-                                    setSearchFilters(queryFilter);
+                                 if($routeParams.id && !$scope.isAlertSearch) {
+                                    $scope.searchAlertError = '';
+                                    IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
+                                    .then(function (data) {
+                                        const mainFilters = data.filters;
+                                        mainFilters.forEach( e => {
+                                            $scope.saveFilter( e );
+                                        } );
+
+                                        if ( data.subFilters ) {
+                                            const subFilters = data.subFilters;
+                                            for ( const subFilterKey in subFilters) {
+                                                const subFilter = subFilters[subFilterKey];
+                                                subFilter.forEach( filter => {
+                                                if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
+                                                    let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
+                                                    filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
+                                                }
+                                                } )
+                                            }
+                                            console.log( leftMenuFilters )
+                                            $scope.$emit( 'evt:updateLeftMenuFilters', leftMenuFilters );
+                                        }
+                                    })
+                                .catch(function (err) {
+                                    console.log(err)//ToDo: will update for correct error text
+                                    $scope.searchAlertError = err?.statusText;
+                                    if (err && err.status == 404) {
+                                        delay = (delay || 0) + 1000
+                                        $timeout(updateRecord(document, delay), delay);
+                                    }
+                                });
                                 }
-                                else{
                                     if(query){
                                         if(query.text){
                                             $scope.saveFreeTextFilter(query.text);
@@ -562,8 +591,7 @@ import 'angular-vue'
                                             $scope.saveFilter(query.schema);
                                         }
                                     }
-                                }
-                            }
+
                             if(query["raw-query"]){
                                 saveRawQueryFilter(query["raw-query"]);
                             }
@@ -612,6 +640,39 @@ import 'angular-vue'
                     $scope.canShowSaveFilter = function(){
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
                     }
+
+                $scope.showSaveFilter = function (  ) { //ToDo: will shift to commonjs for working
+                    if ( $rootScope.user && !$rootScope.user.isAuthenticated ) {
+                        var signIn = $scope.$on( 'signIn', function ( evt, data ) {
+                            $scope.addEdit();
+                            signIn();
+                        } );
+
+                        $( '#loginDialog' ).modal( "show" );
+                    } else {
+                        // open search in popup
+
+                        // var collection = $scope.collection;
+                        //
+                        // ngDialog.open( {
+                        //     className : 'ngdialog-theme-default wide user-search-alert',
+                        //     template : 'newFilterDialog',
+                        //     controller : ['$scope', 'IGenericService', '$timeout', 'realm', function ( $scope, IGenericService, $timeout, realm ) {
+                        //         $timeout( function () {
+                        //             if ( $( "#clearSearchFilter" ) ) {
+                        //                 $( "#clearSearchFilter" ).trigger( "click" ); // to remove sub-filter from Dom as well
+                        //             }
+                        //             $scope.clearFilter();
+                        //         }, 100 );
+                        //         $scope.closeDialog = function () {
+                        //             ngDialog.close();
+                        //         };
+                        //
+                        //     }]
+                        // } );
+                    }
+                }
+
                     function saveRawQueryFilter(query){
                         $scope.setFilters['rawQuery'] = {
                             type     : 'rawQuery',
@@ -1288,6 +1349,9 @@ import 'angular-vue'
                         updateQueryResult();
                     }
 
+                    $scope.getLeftSubFilters = function(){
+                        return leftMenuFilters
+                    }
                     async function loadLeftMenuFieldMapping(){
                         
                         if(isABS)

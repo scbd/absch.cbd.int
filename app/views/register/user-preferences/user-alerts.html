@@ -52,7 +52,7 @@
                     <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
                         <span class="label label-info">
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
-                            <span ng-bind="filter.name"></span>
+                            <span ng-bind="getFilterName(filter.name)"></span>
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
                         </span>
                     </span>
@@ -68,7 +68,7 @@
                 </div>
                 <div class="col-xs-1 text-center color-darkgray">
                     <small class="hidden-xs">Search</small>
-                    <div style="cursor:pointer" ng-hide="del" ng-click="runFilter(record.filters)" >
+                    <div style="cursor:pointer" ng-hide="del" ng-click="runFilter(record._id)" >
                         <i class="fa fa-play fa-2x"></i> </div>
                 </div>
                 <div class="col-xs-1 text-center color-darkgray">
@@ -87,10 +87,10 @@
     <br>
     <button type="button" class="btn btn-primary pull-right" ng-click="addEdit()"><i class="fa fa-plus-circle"></i> Add new</button>
     <div class="clearfix"></div>
-
+    <div ng-if="loading" class="text-center" style="margin-bottom: 30px;"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
         <div class="alert  bg-grey" role="alert" style="margin-top:20px;">
-            <span ng-if="user.isAuthenticated">You do not have any saved alerts.
+            <span ng-if="user.isAuthenticated">You do not have any saved alerts.</span>
             <span ng-if="!user.isAuthenticated">Please log in to view your saved alerts.</span>
         </div>
     </div>
@@ -113,16 +113,19 @@
             <br>
             <label for="filterTitle">Select search filters:</label>
             <div class="bg-white" style="border:1px solid #ccc; border-radius: 5px;">
-                <search-directive skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
+                <search-directive is-alert-search="true" skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
                     skip-text-filter="{{skipTextFilter}}">
                 </search-directive>
              </div>
              <br>
                 <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
                 <label for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
+                <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
+                    <p ng-repeat="error in errors" ng-bind="error"></p>
+                </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-primiary pull-left bold" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-default pull-left" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
             <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
         </div>
     </script>
