@@ -34,6 +34,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
                 });
             },
             responsibleFunctions: function() {return thesaurusService.getDomainTerms('responsibleFunctions')},
+            valueChainStage: function() {return thesaurusService.getDomainTerms('valueChainStage')},
         });
 
         $scope.ac_jurisdictions = function() {
@@ -53,6 +54,12 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
             query : `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact)`
             }
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
+        $scope.onResponsibleFunctionsChange = function(value){
+            $scope.hasPointToCollect = _.find(value||[], {identifier: "022C5155-1859-45AA-B7D8-4F67E4334626"});
+            if(!$scope.hasPointToCollect){
+                $scope.document.valueChainStage = undefined;
+            }
         }
 
         //==================================
@@ -112,5 +119,9 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
             return $scope.sanitizeDocument(document);
         };
 
-        $scope.setDocument();
+        $scope.setDocument({}, true)
+        .then(function (doc) {
+            if(doc.responsibleFunctions)
+            $scope.onResponsibleFunctionsChange(doc.responsibleFunctions)
+        });
     }];

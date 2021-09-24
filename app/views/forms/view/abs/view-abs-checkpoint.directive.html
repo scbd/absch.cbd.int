@@ -34,7 +34,7 @@
 
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
-			document.jurisdictionName || document.responsibleFunctions">
+			document.jurisdictionName || document.responsibleFunctions || document.valueChainStage">
 			<legend name="Responsibilities">Checkpoint Responsibilities</legend>
 			<div ng-show="document.responsibleFunctions">
 				<label>Responsible functions</label>
@@ -43,6 +43,14 @@
 						term-domain="responsibleFunctions" on-terms-loaded="onResponsibleFunctionsTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
+	
+			<div ng-if="document.valueChainStage">
+				<label>Stage at which information is collected or received</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.valueChainStage | term:locale"></div>
+				</div>
+			</div>
+
 			<div ng-show="document.responsibilities">
 				<!--<label>Short description of responsibilities</label>-->
 				<div compare-val="responsibilities">
