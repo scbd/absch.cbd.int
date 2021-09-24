@@ -573,10 +573,18 @@ import 'angular-vue'
                                     })
                                 .catch(function (err) {
                                     console.log(err)//ToDo: will update for correct error text
-                                    $scope.searchAlertError = err?.statusText;
+
                                     if (err && err.status == 404) {
-                                        delay = (delay || 0) + 1000
+                                       let delay = 1000
                                         $timeout(updateRecord(document, delay), delay);
+                                    }
+                                    else{
+                                        if(err.status == 403){
+                                            $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
+                                        }
+                                        else{
+                                            $scope.searchAlertError = err?.statusText;
+                                        }
                                     }
                                 });
                                 }
