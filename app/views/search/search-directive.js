@@ -1354,10 +1354,14 @@ import 'angular-vue'
                     }
                     async function loadLeftMenuFieldMapping(){
                         
-                        if(isABS)
-                            return (await import('./search-filters/abs-left-menu-filters.json')).default
-                        else
-                            return (await import('./search-filters/bch-left-menu-filters.json')).default;
+                        if(isABS) {
+                            const {absLeftMenuFilters} = await import('./search-filters/abs-left-menu-filters.js');
+                            return absLeftMenuFilters;
+                        }
+                        else {
+                            const { bchLeftMenuFilters } = await import('./search-filters/bch-left-menu-filters.js');
+                            return bchLeftMenuFilters;
+                        }
                     }
 
 
