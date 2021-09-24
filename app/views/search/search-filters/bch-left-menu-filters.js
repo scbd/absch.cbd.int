@@ -417,8 +417,8 @@ export const bchLeftMenuFilters = {
             "type": "thesaurus",
             "term": "dnaSequenceTraits",
             "title": bchFilters.modifiedTraits,
-            "field": "geneTraits_ss",
-            "relatedField":"geneTraits_REL_ss"
+            "field": "traits_ss",
+            "relatedField":"traits_REL_ss"
         },
         {
             "type": "solrRecords",
