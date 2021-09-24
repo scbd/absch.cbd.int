@@ -26,7 +26,6 @@ import 'views/search/search-results/result-default';
 
                     if(!$scope.doc.government)
                     {
-                        console.log($scope.doc);
                         return;
                     }
                     

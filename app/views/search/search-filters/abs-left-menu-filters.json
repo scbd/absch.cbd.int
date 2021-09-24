@@ -45,7 +45,7 @@
 			"type": "thesaurus",
 			"term": "cnaJurisdictions",
 			"title": "Area of jurisdiction",
-			"field": "jurisdiction_s"
+			"field": "jurisdiction_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -106,13 +106,13 @@
 			"type": "thesaurus",
 			"term": "absSubjects",
 			"title": "Keywords",
-			"field": "jurisdiction_ss"
+			"field": "keywords_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "cnaJurisdictions",
 			"title": "Jurisdiction",
-			"field": "jurisdiction_ss"
+			"field": "jurisdiction_s"
 		}
 	],
 	"absNationalModelContractualClause" : [{
@@ -124,13 +124,13 @@
 			"type": "thesaurus",
 			"term": "absSubjects",
 			"title": "Keywords",
-			"field": "jurisdiction_ss"
+			"field": "keywords_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "cnaJurisdictions",
 			"title": "Jurisdiction",
-			"field": "jurisdiction_ss"
+			"field": "jurisdiction_s"
 		}
 	],
 	"absPermit" : [{

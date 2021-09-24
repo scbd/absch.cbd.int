@@ -534,7 +534,7 @@ import 'ck-editor-css';
                             originalDocument = angular.copy($scope.getDocumentFn());
                             documentDraftSaved(draftInfo);
                             if(!$scope.isDialog)
-                                $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit'));
+                                $location.path($location.path().replace(/\/new/, '/'+ draftInfo.identifier + '/edit')).search({softReload:'true'});
                             return draftInfo;
                         }
 
@@ -1038,6 +1038,11 @@ import 'ck-editor-css';
                 /////////////////////////////////////////////////////////////////////
 
 
+                if($location.search().softReload == 'true'){
+                    $timeout(()=>{
+                        $scope.tab = 'edit';
+                    }, 300)
+                }
                 if($scope.tab!='edit') 
                     $scope.switchTab($scope.tab, true)
             }
