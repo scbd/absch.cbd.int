@@ -330,12 +330,22 @@ import 'angular-vue'
                             delete $scope.setFilters[doc.id];
                         }
                         else {
-                            $scope.setFilters[doc.id] = filter = {
-                                type     : doc.type,
-                                otherType: doc.otherType,
-                                name     : doc.name,
-                                id       : doc.id
-                            };
+                            if(doc.type == 'date' && doc.dateField =='updatedDate_dt'){
+                                $scope.setFilters[doc.id] = filter = {
+                                    type : doc.type,
+                                    dateField : doc.dateField,
+                                    name : doc.name,
+                                    query : doc.query
+                                };
+                            }
+                            else {
+                                $scope.setFilters[doc.id] = filter = {
+                                    type : doc.type,
+                                    otherType : doc.otherType,
+                                    name : doc.name,
+                                    id : doc.id
+                                };
+                            }
                         }
                         if((filter||{}).type == 'schema'){
                             $scope.leftMenuEnabled = true;
@@ -457,7 +467,6 @@ import 'angular-vue'
                     }
 
                     $scope.clearFilter = function(){
-                        console.log('i am called')
                         updateQueryString('schema');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
@@ -553,6 +562,7 @@ import 'angular-vue'
                                     .then(function (data) {
                                         const mainFilters = data.filters;
                                         mainFilters.forEach( e => {
+                                            console.log("x",e)
                                             $scope.saveFilter( e );
                                         } );
 
@@ -575,7 +585,7 @@ import 'angular-vue'
                                     console.log(err)//ToDo: will update for correct error text
 
                                     if (err && err.status == 404) {
-                                       let delay = 1000
+                                        delay = (delay || 0) + 1000
                                         $timeout(updateRecord(document, delay), delay);
                                     }
                                     else{
