@@ -314,12 +314,13 @@ import 'angular-vue'
 
                     }
 
-                    $scope.saveFilter = function (doc) {
+                    function savedFilters(doc,subFilters){
+                        if(!subFilters && $scope.isAlertSubFilter) return;
 
                         // if(!$scope.searchResult.data.facets[doc.id])
                         //     return;
-                        //TODO: if free text check to see if there is a UID and convert to identifier                    
-                        
+                        //TODO: if free text check to see if there is a UID and convert to identifier
+
                         // if (typeof doc === 'string') {
                         //     filterID = doc;
                         //     termID = $scope.searchFilters[filterID].id;
@@ -329,7 +330,6 @@ import 'angular-vue'
                         if ($scope.setFilters[doc.id]){
                             delete $scope.setFilters[doc.id];
                         }
-                        else {
                             if(doc.type == 'date' && doc.dateField =='updatedDate_dt'){
                                 $scope.setFilters[doc.id] = filter = {
                                     type : doc.type,
@@ -346,20 +346,37 @@ import 'angular-vue'
                                     id : doc.id
                                 };
                             }
-                        }
                         if((filter||{}).type == 'schema'){
                             $scope.leftMenuEnabled = true;
                             if($scope.onSchemaFilterChanged){
-                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
-                                leftMenuFilters = leftFilters
+                                leftMenuFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
+                                if(subFilters){
+                                    for ( const subFilterKey in subFilters) {
+                                        const subFilter = subFilters[subFilterKey];
+                                        subFilter.forEach( filter => {
+                                            if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
+                                                let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
+                                                filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
+                                            }
+                                        } )
+                                    }
+                                }
                             }
                         }
-                        // if(!_.isEmpty($scope.setFilters)){ 
-                        //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
-                        //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
-                        //         $scope.searchResult.sortFields = [];
-                        // }
+
                         updateQueryResult();
+                    }
+
+                    $scope.savedAlertFilter = function(doc, subFilters){
+                        $scope.isAlertSubFilter = false;
+                        if(subFilters){
+                            $scope.isAlertSubFilter = true;
+                        }
+                        savedFilters(doc, subFilters);
+                    }
+
+                    $scope.saveFilter = function (doc) {
+                        savedFilters(doc);
                     };
 
                     $scope.saveFreeTextFilter = function(text, $event) {
@@ -562,7 +579,6 @@ import 'angular-vue'
                                     .then(function (data) {
                                         const mainFilters = data.filters;
                                         mainFilters.forEach( e => {
-                                            console.log("x",e)
                                             $scope.saveFilter( e );
                                         } );
 

@@ -155,7 +155,6 @@ import 'components/scbd-angularjs-services/main';
                         IGenericService.create('v2016', 'me/subscriptions', document)
                             .then(function (data) {
                                 document._id = data.id;
-                                console.log("ID=" + data.id)
                                 $scope.systemAlertsSubscription.push(document);
                             });
                     };
@@ -237,13 +236,15 @@ import 'components/scbd-angularjs-services/main';
                                 template: 'newFilterDialog',
                                 controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
                                     $timeout(function () {
-                                       // localStorageService.set("run-query", '');
                                         $scope.clearFilter();
                                     }, 100);
                                     if (existingFilter) {
                                         $scope.document = angular.copy(existingFilter);
                                         $timeout(function () {
-                                            $scope.setFilters = existingFilter.filters;
+                                            existingFilter.filters.forEach( f => {
+                                              $scope.savedAlertFilter( f,existingFilter.subFilters );
+                                            } );
+                                               //$scope.setFilters = existingFilter.filters;
                                         }, 100);
                                     }
                                     $scope.save = function (document) {
@@ -269,7 +270,6 @@ import 'components/scbd-angularjs-services/main';
                                         let userAlertSearchFilter = $scope.getLeftSubFilters();
                                         let leftFilterQuery = {}
                                         _.forEach(userAlertSearchFilter, function(filters, key){
-                                            console.log(key, filters)
                                             _.forEach(filters, function(filter){
                                                  if(!_.isEmpty(filter.selectedItems)){
                                                     leftFilterQuery[key] = leftFilterQuery[key] || [];
