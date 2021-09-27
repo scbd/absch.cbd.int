@@ -16,6 +16,7 @@ import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/compare-val';
 import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
+import shareRecord from '~/components/common/share-record.vue';
 
 	app.run(function($templateCache){
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
@@ -23,9 +24,9 @@ import printFooterTemplate from 'text!./print-footer.html';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
+	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$routeParams',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		$http, $httpAWS, realm, $compile, searchService, IWorkflows, appLocale, ngMeta) {
+		$http, $httpAWS, realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $routeParams ) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -52,7 +53,8 @@ import printFooterTemplate from 'text!./print-footer.html';
 					$scope.realm = realm;
 					$scope.isABS = realm.is('ABS');
 					$scope.isBCH = realm.is('BCH');
-					
+				  $scope.isEmbed = $routeParams.embed;
+
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					
@@ -70,6 +72,15 @@ import printFooterTemplate from 'text!./print-footer.html';
 						}
 					});
 
+					$scope.shareVueComponent = {
+						components:{shareRecord}
+					}
+
+					$scope.getQuery = function(){
+						let query = [$scope.loaderSchema,$scope.loaderID];
+						const type = "document";
+						return {type, query}
+					}
 
 					$scope.getUserCountry = function (id) {
                         var term = {};
@@ -140,6 +151,8 @@ import printFooterTemplate from 'text!./print-footer.html';
 
 							$scope.load(documentID, documentRevision);
 						}
+						$scope.loaderID = documentID;
+						$scope.loaderSchema = $filter("urlSchemaShortName")(documentSchema);
 					};
 
 					$scope.timeLaspe = 20;
