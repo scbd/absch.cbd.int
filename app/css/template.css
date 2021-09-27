@@ -3077,3 +3077,16 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .capitalize-first-letter {
     text-transform:capitalize;
 }
+#recordContent .share-single-document{
+    display: inline-block;
+    position: absolute;
+    margin: 10px 50%;
+    width: 70px;
+}
+#recordContent .share-single-document .table-export-button{
+    color: #fff;
+}
+#search-new  .input-option label.heading {
+    font-weight: normal !important;
+    margin-top: 15px;
+}
