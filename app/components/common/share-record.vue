@@ -40,14 +40,13 @@
                  >
                  <label class="color-red" v-if="emailRequired">{{$t('domainError')}}</label>
               </div>
-              <div class="input-option" v-if="shareType =='embed'">
-                  <input
+              <div class="input-option" v-if="shareType =='embed' && domain">
+                  <textarea
                     type="text"
                     v-model="domain"
                     name="name"
-                    placeholder="website url"
-                  >
-                 <label class="color-red" v-if="domainRequired">{{$t('domainError')}}</label>
+                    disabled="disabled"
+                  ></textarea>
               </div>
 
             </div>
@@ -65,15 +64,6 @@
     import CommonApi from './common-api';
     import { Modal } from 'vue-2-bootstrap-3'
     import i18n from '../../locales/en/components/export.json';
-    //TODO: remove it
-    // "shareType": "email | embed",
-    // "type": "searchResults | document | countryProfile | article ",
-    // "searchQuery": "", //only required where Type is searchResults,
-    // "documentID": "", //only required where Type is document,
-    // "countryCode": "", //only required where Type is countryProfile,
-    // "articleID": "", //only required where Type is article
-    // "emails": "", //only required where shareType is email
-    // "domain": "", //only required where shareType is embed
 
     export default {
         components : {Modal},
@@ -83,8 +73,8 @@
                 loading        : false,
                 open           : false,
                 emailRequired  : false,
-                domainRequired : false,
-							  shareType      :'email',
+				shareType      :'email',
+				domain         :'',
                 query          :'',
                 type           :''
             }
@@ -97,7 +87,6 @@
         methods: {
                 async onShowDialog(){
                 this.emailRequired = false;
-                this.domainRequired = false;
                 this.shareType = 'email';
                 const {type, query } = await this.getQuery();
                 this.query = query
@@ -117,24 +106,16 @@
                 }
                 this.loading = false;
             },
-            async embed(){// for testing check network call
-                this.domainRequired = false;
-                if(!this.domain) {
-                    this.domainRequired = true;
-                    return;
-				}
-                this.loading      = true;
-                const param = {"$shareType": "embed", "$domain": this.domain, "$type": this.type, "&query": this.query};
-                const response = await this.CommonApi.queryShare(param);
-                if((response || []).length) {
-                //
-                }
-                this.loading = false;
+            async embed(){
+                let pageUrl = location.href;
+                setTimeout(()=> {
+                    pageUrl += ( pageUrl.match( /[\?]/g ) ? '&' : '?' )+'embed=true';
+                    this.domain = '<iframe src="' + pageUrl + '" width="100%" height="100%"></iframe>';
+                },100);
             },
 
             sendRecord(){
                 this.emailRequired = false;
-                this.domainRequired = false;
                 if(this.shareType == 'email')
                     this.send();
                     else
@@ -154,7 +135,7 @@
     .share-body{
         margin: auto 10%;
     }
-    .input-option input {
+    .input-option input, .input-option textarea  {
         width: 100%;
         padding: 12px;
         border: 1px solid #ccc;

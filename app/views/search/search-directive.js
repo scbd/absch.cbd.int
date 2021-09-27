@@ -70,6 +70,7 @@ import 'angular-vue'
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
+                        $scope.isEmbed = $routeParams.embed;
                         var leftMenuFilters  = [];
                         $scope.searchAlertError = '';
                         $scope.realm         = realm
@@ -1021,6 +1022,10 @@ import 'angular-vue'
                         }, 0)
                     }
 
+                    function getSearchQuery() {
+                        return buildSearchQuery();
+                    }
+
                     function buildSearchQuery(){
                         var tagQueries          = {};
                         var tabQuery            = buildTabQuery();
@@ -1455,9 +1460,8 @@ import 'angular-vue'
                     this.combinationField         = combinationField        ;
                     this.sanitizeFacets           = sanitizeFacets          ;
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
-                    this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
-
-                    this.getFocalPointTypes       = getFocalPointTypes
+                    this.getSearchQuery           =  getSearchQuery         ;
+                    this.getFocalPointTypes       = getFocalPointTypes      ;
             }]//controller
         };
     });

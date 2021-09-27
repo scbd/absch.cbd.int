@@ -64,7 +64,7 @@
                     aria-hidden="true"></i> Clear filters </button>
                  <span class="btn-group pull-right">
 
-                     <a rel="noopener" ng-href="#" class="help-tour link2"
+                     <a rel="noopener" ng-href="#" class="help-tour link2" ng-class="{'hidden':isEmbed}"
                          style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;cursor:pointer;"
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
                                  aria-hidden="true"></i>TAKE SEARCH TOUR</span></a>
@@ -86,7 +86,7 @@
                     </form>
                 </div>
                 <div class="col-md-1" ></div>
-                <div class="col-md-4" ng-if="pageInitialized && !isAlertSearch">
+                <div class="col-md-4" ng-if="pageInitialized && !isAlertSearch" ng-class="{'hidden':isEmbed}">
                     <result-view-options class="pull-right" style="display: inline-block;" current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
                         view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
                         on-sort-by-change="onSortByChange(fields)" on-view-type-change="onViewTypeChange(options)"

@@ -3,6 +3,7 @@ import app from 'app';
 import _ from 'lodash';
 import 'ngDialog';
 import tableExport from '~/components/common/export.vue';
+import shareRecord from '~/components/common/share-record.vue';
 
     app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
         return {
@@ -127,6 +128,17 @@ import tableExport from '~/components/common/export.vue';
                 $scope.exportVueComponent = {
                     components:{tableExport}
                 }
+
+                $scope.shareVueComponent = {
+                    components:{shareRecord}
+                }
+
+                $scope.getQuery = function(){
+                    const query = searchDirectiveCtrl.getSearchQuery();
+                    const type = "searchResults"
+                    return {type, query}
+                }
+
                 $scope.getDownloadRecords = function(options){                        
                     // const  { docs, numFound } = $scope.searchResult.data;
                     // return { docs, numFound };
