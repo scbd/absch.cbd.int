@@ -58,7 +58,7 @@ import {getLimitedTerms} from 'services/common';
 							return thesaurusService.getDomainTerms('resourceTypesVlr')
 							.then((resourceTypesVlr)=>{
 								let AbsRelated = ['6B245045-8379-4582-A081-2565B67F8B3A'];
-								let terms = getLimitedTerms(resourceTypesVlr, $scope.isBCH ? [] : AbsRelated );
+								let terms = getLimitedTerms(resourceTypesVlr, $scope.isBCH ? AbsRelated : [] );
 								$timeout(()=>{
 									terms.forEach(term=>{
 										if(!(term.broaderTerms||[]).length){
