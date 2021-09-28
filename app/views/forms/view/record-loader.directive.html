@@ -113,9 +113,6 @@
                 </button>
             </div>
         </div>
-        <div class="share-single-document" ng-if="shareVueComponent" ng-class="{'hidden':isEmbed}">
-            <share-record ng-vue="shareVueComponent" :get-query="getQuery"></share-record>
-        </div>
         <div ng-if="showDifferenceButton||showComparison" class="full-text-display pull-right compare-buttons" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
             <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()">
                 <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference
@@ -138,6 +135,9 @@
             <div ng-if="isComparing">
                 <div id="compareSchemaView"></div>
             </div>
+        </div>
+        <div ng-if="shareVueComponent" ng-class="{'hidden':isEmbed}" class="share-single-document full-text-display pull-right compare-buttons">
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery"></share-record>
         </div>
         <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
             <div record-options></div>
