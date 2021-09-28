@@ -1,5 +1,5 @@
 ﻿<div id="innerPage">
-    <div class="mastHead">
+    <div class="mastHead" ng-class="{'hidden':isEmbed}">
             <h1 style="color:white;">Search</h1>
      <div  id="search-new" >
          <div class="row">
@@ -64,7 +64,7 @@
                     aria-hidden="true"></i> Clear filters </button>
                  <span class="btn-group pull-right">
 
-                     <a rel="noopener" ng-href="#" class="help-tour link2" ng-class="{'hidden':isEmbed}"
+                     <a rel="noopener" ng-href="#" class="help-tour link2"
                          style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;cursor:pointer;"
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
                                  aria-hidden="true"></i>TAKE SEARCH TOUR</span></a>
@@ -86,7 +86,7 @@
                     </form>
                 </div>
                 <div class="col-md-1" ></div>
-                <div class="col-md-4" ng-if="pageInitialized && !isAlertSearch" ng-class="{'hidden':isEmbed}">
+                <div class="col-md-4" ng-if="pageInitialized && !isAlertSearch">
                     <result-view-options class="pull-right" style="display: inline-block;" current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
                         view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
                         on-sort-by-change="onSortByChange(fields)" on-view-type-change="onViewTypeChange(options)"
@@ -231,13 +231,13 @@
          <!-- ng-if="!skipResults" -->
          <div class="row" style="padding:10px 0 0 0;margin:0px;">
              <!-- Search Result -->
-             <div class="hidden-xs" ng-class="{'col-xs-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch}"
+             <div class="hidden-xs"  ng-class="{'col-xs-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch, 'hidden':isEmbed}"
              style="border:1px solid #eee;padding:0 20px 0 0; margin:0;" ng-show="(leftMenuFilters && leftMenuFilters.length != 0)">
                  <div left-side-filter></div>
              </div>
              <!-- Different view for list/group -->
              <div class="col-xs-12"  style="margin:0;border: 1px solid #eee;"
-                 id="searchResult" ng-class="{'col-xs-9':(leftMenuFilters && leftMenuFilters.length != 0), 'hidden' : isAlertSearch}">
+                 id="searchResult" ng-class="{'col-xs-9':(leftMenuFilters && leftMenuFilters.length != 0 && !isEmbed), 'hidden' : isAlertSearch}">
                  <div class="col-xs-12" style="padding:0;margin:0;">
                      <ul class="nav nav-tabs search-tab-title">
                         <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}">
