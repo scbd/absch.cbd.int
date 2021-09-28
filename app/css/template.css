@@ -3070,3 +3070,6 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     max-height: 100vh;
     overflow-y: scroll;
 }
+.capitalize-first-letter {
+    text-transform:capitalize;
+}
