@@ -575,7 +575,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined ,undefined, publishedParams);
 
                     var draftParams = {
-                        cache: false
+                        cache: false,
+                        $orderby: $scope.listResult.sort||'updatedOn desc'
                     };
                     if (schema == "contact")
                         draftParams.body = true;
