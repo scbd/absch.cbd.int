@@ -77,7 +77,7 @@
                         <!-- ToDo: need to pass correct field -->
                         <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> -->
                         <th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Type</th>
-                        <th style="width:200px;" ng-click="toggleOrderBy('SubmittedBy')" id="createdOnHeader">Last published</th>
+                        <th style="width:200px;" ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Last published</th>
                         <th class="hidden-xs" style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Last updated</th>
                         <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Status</th>
                         <th style="width:100px;" ng-bind="filteredRecords.length+' Record(s)'"></th>
