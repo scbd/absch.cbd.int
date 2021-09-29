@@ -20,7 +20,6 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService) {
 
                 $scope.languages = commonjs.languages;
-                $scope.orderBy = ['-updatedOn'];
                 $scope.amendmentDocument = {locales:['en']};
 
                 $element.find("[data-toggle='tooltip']").tooltip({
@@ -31,6 +30,12 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     pageCount  : 0,
                     rowsPerPage: 25
                 }
+	             $scope.orderBy = ['-updatedOn'];
+	             if($scope.listResult.currentPage == 1){
+		             $scope.orderBy = ['workflowActivityStatus'];
+	             } else {
+		             $scope.orderBy = ['-updatedOn'];
+	             }
                 $scope.isDraftRecord = false;
                 $scope.statusType = 'allRecords';
                 // //ToDo: if get counts from the backend
@@ -405,7 +410,6 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 $scope.isPublished = function (entity) {
                     return entity && entity.documentID;
                 };
-
                 if ($routeParams.status) {
                     var status = $routeParams.status;
                     if (status === 'published')
@@ -558,7 +562,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         cache: false,
                         $top: $scope.listResult.rowsPerPage,
                         $skip: $scope.listResult.rowsPerPage*(pageNumebr-1),
-                        $orderby: $scope.listResult.sort||'updatedOn'
+                        $orderby: $scope.listResult.sort||'updatedOn desc'
                         //$sortSequence: $scope.listResult.sequence
                     };
                     if($scope.keywords){
@@ -571,7 +575,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     var qDocuments = storage.documents.query(qAnd.join(" and ") || undefined ,undefined, publishedParams);
 
                     var draftParams = {
-                        cache: false
+                        cache: false,
+                        $orderby: $scope.listResult.sort||'updatedOn desc'
                     };
                     if (schema == "contact")
                         draftParams.body = true;

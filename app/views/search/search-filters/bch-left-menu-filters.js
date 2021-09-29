@@ -664,8 +664,8 @@ export const bchLeftMenuFilters = {
             "field": "text_EN_txt"
         },
         {
-            "type": "thesaurus",
-            "term": "resourceTypesVlr",
+            "type": "customListFn",
+			"fn"   : "vlrResourceCustomFn",
             "title": bchFilters.resourceResourceTypesVlr,
             "field": "resourceTypes_ss",
             "relatedField":"resourceTypes_REL_ss"
