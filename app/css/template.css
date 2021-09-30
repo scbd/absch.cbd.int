@@ -3081,7 +3081,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     padding-right:10px;
     position:relative;
     top:7px;
-    color:#FFF;
+    /* color:#FFF; */
 }
 #recordContent .share-single-document .table-export-button{
     color: #fff;
