@@ -121,7 +121,7 @@
 		<legend>LMOs for intentional introduction into the environment</legend>
 
 		<div ng-if="document.addressesTransboundaryMovement!=undefined">
-			<label>Was the decision triggered by a request for a transboundary movement of LMOs into your country ?</label>
+			<label>Was the decision triggered by a request for a transboundary movement of LMOs into your country?</label>
 			<div compare-val>
 				<km-value-bool value="document.addressesTransboundaryMovement" locales="locale"></km-value-bool>
 			</div>
@@ -401,30 +401,30 @@
 	<div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
 		<legend>Information sharing with other databases</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
-			<label>Is this decision related to an LMO for commercial use ?</label>
+			<label>Is this decision related to an LMO for commercial use?</label>
 			<div compare-val>
 				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 			</div>
 			<div ng-if="document.forwardToOECD!=undefined">
-				<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database ?</label>
+				<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
 				<div  compare-val>
 					<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.isForFoodSafety!=undefined">
-				<label>Is this decision related to food safety ?</label>
+				<label>Is this decision related to food safety?</label>
 				<div  compare-val>
 					<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.codexConducted!=undefined">
-				<label>Was it conducted in accordance with the Codex Alimentarius <em>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants ?</em></label>
+				<label>Was it conducted in accordance with the Codex Alimentarius <em>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</em></label>
 				<div  compare-val>
 					<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.forwardToFAO!=undefined">
-				<label>Should this decision be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform ?</label>
+				<label>Should this decision be forwarded to your country's FAO focal point for possible inclusion in the <a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
 				<div compare-val>
 					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 				</div>
