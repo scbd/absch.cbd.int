@@ -10,7 +10,7 @@
 		<div>
 			<label>Type</label>
 			<div class="km-value" compare-val>				
-				<span ng-bind="document.type | lstring:locale"></span>
+				<span class="capitalize-first-letter" ng-bind="document.type | lstring:locale"></span>
 			</div>
 		</div>
 		<div ng-show="document.type=='organization'">
@@ -22,7 +22,7 @@
 					<span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
-			<div>
+			<div ng-show="document.organization || document.organizationAcronym">
                 <label>Name</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.organization | lstring:locale"></span> <i ng-show="document.organizationAcronym">(<span ng-bind="document.organizationAcronym | lstring:locale"></span>)</i>

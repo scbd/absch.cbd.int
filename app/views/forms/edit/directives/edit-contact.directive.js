@@ -74,6 +74,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
                 if(document.organizationType && document.organizationType.identifier=='B3699A74-EF2E-467A-A82F-EF2149A2EFC5')
                     document.organizationType = undefined;
                 if(document.type == "organization"){
+                    document.prefix = undefined;
                     document.firstName = undefined; 
                     document.middleName = undefined;
                     document.lastName = undefined;
