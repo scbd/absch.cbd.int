@@ -4,8 +4,8 @@
      <div  id="search-new" >
          <div class="row">
              <div class="col-md-12 " style="padding-bottom:10px;">
-                 <span ng-repeat="filter in setFilters">
-                    <span class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}" style="background-color: #333;border:1px solid;color:#fff;">
+                <span ng-repeat="filter in setFilters">
+                     <span ng-if="filter.type" class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}" style="background-color: #333;border:1px solid;color:#fff;">
                         <span class="filter-chip-text dropdown bring-to-front"  >
                             <span ng-if="filter.edit" class="input-group edit">
 
@@ -69,9 +69,9 @@
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
                                  aria-hidden="true"></i>TAKE SEARCH TOUR</span></a>
 
-                     <a rel="noopener" ng-href="#" ng-if="canShowSaveFilter()" class="link2"
+                     <a rel="noopener" ng-href="#" ng-if="canShowSaveFilter() && !isAlertSearch" class="link2"
                          style="font-size:10px;;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
-                         ng-click="showSaveFilter()">Save this search</a>
+                         ng-click="showSaveFilter(setFilters)">Save this search</a>
                  </span>
              </div>
              </div>
@@ -390,6 +390,40 @@
         <span id="exportDisabledMessage">Please wait for the query to finish before exporting.</span>
     </div>
      <joyride ng-if="tourOn"></joyride>
+    <script type="text/ng-template" trados-translation="true" id="saveMySearchDialog">
+        <div class="modal-header">
+            <h3 class="modal-title">
+                Add/Edit filter
+            </h3>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="filterTitle">Alert title:</label>
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
+            </div>
+            <div>
+                <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
+                    <p ng-repeat="error in errors" ng-bind="error"></p>
+                </div>
+            </div>
+            <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
+            <label for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
+            <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
+                <p ng-repeat="error in errors" ng-bind="error"></p>
+            </div>
+        </div>
+        <span class="saved-filters-list" ng-repeat="filter in saveThisFilter">
+            <span ng-if="filter.type" class="label label-info">
+                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
+                <span ng-bind="getFilterName(filter.name)"></span>
+                <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
+            </span>
+        </span>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
+        </div>
+    </script>
  </div>
 
 

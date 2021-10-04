@@ -3070,6 +3070,12 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     max-height: 100vh;
     overflow-y: scroll;
 }
+
+.save-this-search-alert .saved-filters-list .label-info{
+    margin-bottom: 10px;
+    margin-right: 10px;
+    margin-left: 10px;
+}
 .capitalize-first-letter {
     text-transform:capitalize;
 }

@@ -314,12 +314,13 @@ import 'angular-vue'
 
                     }
 
-                    $scope.saveFilter = function (doc) {
+                    function savedFilters(doc,subFilters){
+                        if(!subFilters && $scope.isAlertSubFilter) return;
 
                         // if(!$scope.searchResult.data.facets[doc.id])
                         //     return;
-                        //TODO: if free text check to see if there is a UID and convert to identifier                    
-                        
+                        //TODO: if free text check to see if there is a UID and convert to identifier
+
                         // if (typeof doc === 'string') {
                         //     filterID = doc;
                         //     termID = $scope.searchFilters[filterID].id;
@@ -329,27 +330,55 @@ import 'angular-vue'
                         if ($scope.setFilters[doc.id]){
                             delete $scope.setFilters[doc.id];
                         }
-                        else {
-                            $scope.setFilters[doc.id] = filter = {
-                                type     : doc.type,
-                                otherType: doc.otherType,
-                                name     : doc.name,
-                                id       : doc.id
-                            };
-                        }
+                        else{
+                            if(doc.type == 'date' && doc.dateField =='updatedDate_dt'){
+                                $scope.setFilters[doc.id] = filter = {
+                                    type : doc.type,
+                                    dateField : doc.dateField,
+                                    name : doc.name,
+                                    query : doc.query
+                                };
+                            }
+                            else {
+                                $scope.setFilters[doc.id] = filter = {
+                                    type : doc.type,
+                                    otherType : doc.otherType,
+                                    name : doc.name,
+                                    id : doc.id
+                                };
+                            }
+                      }
                         if((filter||{}).type == 'schema'){
                             $scope.leftMenuEnabled = true;
                             if($scope.onSchemaFilterChanged){
-                                var leftFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
-                                leftMenuFilters = leftFilters
+                                leftMenuFilters = $scope.onSchemaFilterChanged(doc.id, $scope.setFilters[doc.id])
+                                if(subFilters){
+                                    for ( const subFilterKey in subFilters) {
+                                        const subFilter = subFilters[subFilterKey];
+                                        subFilter.forEach( filter => {
+                                            if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
+                                                let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
+                                                filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
+                                            }
+                                        } )
+                                    }
+                                }
                             }
                         }
-                        // if(!_.isEmpty($scope.setFilters)){ 
-                        //     //if not empty and the default sort is not set by the user then remove sort to default to relevance
-                        //     if($scope.searchResult.sortFields.length == 1 && $scope.searchResult.sortFields[0]=='updatedDate_dt')
-                        //         $scope.searchResult.sortFields = [];
-                        // }
+
                         updateQueryResult();
+                    }
+
+                    $scope.savedAlertFilter = function(doc, subFilters){
+                        $scope.isAlertSubFilter = false;
+                        if(subFilters){
+                            $scope.isAlertSubFilter = true;
+                        }
+                        savedFilters(doc, subFilters);
+                    }
+
+                    $scope.saveFilter = function (doc) {
+                        savedFilters(doc);
                     };
 
                     $scope.saveFreeTextFilter = function(text, $event) {
@@ -457,7 +486,6 @@ import 'angular-vue'
                     }
 
                     $scope.clearFilter = function(){
-                        console.log('i am called')
                         updateQueryString('schema');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
@@ -567,16 +595,24 @@ import 'angular-vue'
                                                 }
                                                 } )
                                             }
-                                            console.log( leftMenuFilters )
+
                                             $scope.$emit( 'evt:updateLeftMenuFilters', leftMenuFilters );
                                         }
                                     })
                                 .catch(function (err) {
                                     console.log(err)//ToDo: will update for correct error text
-                                    $scope.searchAlertError = err?.statusText;
+
                                     if (err && err.status == 404) {
                                         delay = (delay || 0) + 1000
                                         $timeout(updateRecord(document, delay), delay);
+                                    }
+                                    else{
+                                        if(err.status == 403){
+                                            $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
+                                        }
+                                        else{
+                                            $scope.searchAlertError = err?.statusText;
+                                        }
                                     }
                                 });
                                 }
@@ -640,38 +676,6 @@ import 'angular-vue'
                     $scope.canShowSaveFilter = function(){
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
                     }
-
-                $scope.showSaveFilter = function (  ) { //ToDo: will shift to commonjs for working
-                    if ( $rootScope.user && !$rootScope.user.isAuthenticated ) {
-                        var signIn = $scope.$on( 'signIn', function ( evt, data ) {
-                            $scope.addEdit();
-                            signIn();
-                        } );
-
-                        $( '#loginDialog' ).modal( "show" );
-                    } else {
-                        // open search in popup
-
-                        // var collection = $scope.collection;
-                        //
-                        // ngDialog.open( {
-                        //     className : 'ngdialog-theme-default wide user-search-alert',
-                        //     template : 'newFilterDialog',
-                        //     controller : ['$scope', 'IGenericService', '$timeout', 'realm', function ( $scope, IGenericService, $timeout, realm ) {
-                        //         $timeout( function () {
-                        //             if ( $( "#clearSearchFilter" ) ) {
-                        //                 $( "#clearSearchFilter" ).trigger( "click" ); // to remove sub-filter from Dom as well
-                        //             }
-                        //             $scope.clearFilter();
-                        //         }, 100 );
-                        //         $scope.closeDialog = function () {
-                        //             ngDialog.close();
-                        //         };
-                        //
-                        //     }]
-                        // } );
-                    }
-                }
 
                     function saveRawQueryFilter(query){
                         $scope.setFilters['rawQuery'] = {
@@ -1363,6 +1367,77 @@ import 'angular-vue'
                             return bchLeftMenuFilters;
                         }
                     }
+
+	                $scope.showSaveFilter = function ( filters ) {
+
+                    if ( $rootScope.user && !$rootScope.user.isAuthenticated ) {
+                        var signIn = $scope.$on( 'signIn', function ( evt, data ) {
+                            $scope.addEdit();
+                            signIn();
+                        } );
+
+                        $( '#loginDialog' ).modal( "show" );
+                    } else {
+
+                        ngDialog.open({
+                            className: 'ngdialog-theme-default wide save-this-search-alert',
+                            template: 'saveMySearchDialog',
+                            controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
+                                $scope.saveThisFilter = filters;
+                                $scope.save = function (document) {
+                                    $scope.errors = [];
+                                    if (!document || document.queryTitle == '') {
+                                        $scope.errors.push('Please enter title of the alert')
+                                    }
+                                    if (!$scope.saveThisFilter || _.isEmpty($scope.saveThisFilter)) {
+                                        $scope.errors.push('Please select at least one filter')
+                                    }
+                                    if ($scope.errors && $scope.errors.length > 0) {
+                                        $("#dialog-errors").animate({
+                                            scrollTop: 0
+                                        }, 600);
+                                        return;
+                                    }
+
+                                    $scope.loading = true;
+                                    var operation;
+
+                                    document.isSystemAlert = false;
+                                    let leftFilterQuery = {}
+                                    _.forEach(leftMenuFilters, function(f, key){
+                                        _.forEach(f, function(filter){
+                                            if(!_.isEmpty(filter.selectedItems)){
+                                                leftFilterQuery[key] = leftFilterQuery[key] || [];
+                                                const  {field, relatedField, searchRelated, term, title, type } = filter
+                                                leftFilterQuery[key].push({field, relatedField, searchRelated, selectedItems:filter.selectedItems, term, title, type});
+                                            }
+                                        });
+                                    });
+                                    document.filters = _.values($scope.saveThisFilter);
+                                    document.subFilters = leftFilterQuery; // pass only selected sub-filters query
+                                    document.realm = realm.value;
+                                    if (!document._id)
+                                        operation = IGenericService.create('v2016', 'me/subscriptions', document);
+                                    else
+                                        operation = IGenericService.update('v2016', 'me/subscriptions', document._id, document);
+
+                                    operation.then(function (data) {
+                                        $scope.closeDialog();
+                                        if (!document._id)
+                                            document._id = data.id;
+                                    });
+                                };
+		                            $scope.getFilterName = function (name) {
+			                            return (typeof name === "object")?name[locale]:name;
+		                            }
+                                $scope.closeDialog = function () {
+                                    ngDialog.close();
+                                };
+
+                            }]
+                        });
+                    }
+                }
 
 
                     init();
