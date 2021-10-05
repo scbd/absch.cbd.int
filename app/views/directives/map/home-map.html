@@ -1,51 +1,161 @@
-﻿<div class="bg-texture-green app-bg-texture" style="position:relative;">
-    
-    <!-- <div class="container-fluid tag-line-container protocol-map-header-bg bg-green color-white " style="position:relative;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 ng-if="options.isAbs">The <span ng-bind="options.chLongName"></span> (<span ng-bind="options.chShortName"></span>) 
-                        is a platform for exchanging information on <span ng-bind="options.protocolShortName"></span> and a key tool for 
-                        facilitating the implementation of the <span ng-bind="options.protocol"></span>.
-                        <a rel="noopener" translation-url  href="/about" ng-click="toggleTooltip()"> 
-                            <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" 
-                            data-title="Click here to find out more about the Clearing-house" data-container="body"></i></a>
-                    </h3>
-                    <h3 ng-if="options.isBch">
-                        The Biosafety Clearing-House (BCH) is an online platform for exchanging information and a key tool for facilitating the implementation of the Cartagena Protocol on Biosafety.
-                    </h3>
+﻿<div class="new-ch-map-page">
+    <div class="new-ch-map">
+        <!-- <div class="new-ch-map-filters-bg" ></div> -->
+        <div class="new-ch-body-container" style="width: 292px;">
+            <div class="new-ch-map-container" style="height: 450px;">
+                <div class="new-ch-map-container-header">
+                    <div class="row col-xs-12">
+
+                        <h3 class="new-ch-custom-title"
+                            style="margin-top:10px;margin-bottom:5px;width:60%;display:inline;">
+                            <!-- ngIf: !currentCountry.code --><a rel="noopener"
+                                                                  translation-url="" href="/en/search?tab=nationalRecords"
+                                                                  style="color: rgb(255, 255, 255);" class="ng-scope">
+                            <!-- ngIf: !currentCountry.code --><span
+                                                                     class="ng-scope" style="color:#00405C;padding-left: 16px"> National Records
+                                    </span><!-- end ngIf: !currentCountry.code -->
+                        </a><!-- end ngIf: !currentCountry.code -->
+                            <!-- ngIf: currentCountry.code -->
+                        </h3>
+
+                    </div>
                 </div>
+                <div class="new-ch-map-filters-bg new-ch-map-container-mainbody new-ch-bch-height"
+                     ng-class="{'new-ch-reduced-height':reduceDetailsHeight, 'new-ch-bch-height':isBCH}" style="">
+                    <!-- ngIf: isBCH && currentCountry -->
+                    <div ng-if="isBCH &amp;&amp; currentCountry" class="ng-scope" style="">
+                        <div lang="en">
+
+                            <!-- ngIf: currentCountry.code -->
+                            <table class="new-ch-table new-ch-table-map new-ch-table-condensed"
+                                   style="display: block;overflow-x: auto;">
+                                <tbody>
+                                <tr ng-repeat="schema in countryMapScope.currentCountry.schemas"
+                                    style="border:none;" class="ng-scope">
+                                    <td>
+                                        <span class="badge " ng-bind="schema.count">95</span>
+                                    </td>
+                                    <td>
+                                        <!-- ngIf: currentCountry.code -->
+                                        <!-- ngIf: !currentCountry.code --><a rel="noopener"
+                                                                               translation-url=""
+                                                                              href="/en/search?schema=focalPoint&amp;tab=nationalRecords"
+                                                                              style="color:#fff" class="ng-scope">
+                                                    <span ng-bind="schema.title | lstring:locale"
+                                                          class="new-ch-binding">National Focal Points</span>
+                                    </a><!-- end ngIf: !currentCountry.code -->
+                                    </td>
+                                </tr><!-- end ngRepeat: schema in countryMapScope.currentCountry.schemas -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div><!-- end ngIf: isBCH && currentCountry -->
+                    <!-- ngIf: isABS && currentCountry -->
+                </div>
+
             </div>
         </div>
-    </div> -->
-
-    <div id="homeMap" class="hidden-sm hidden-xs" style="padding:0; margin-bottom:-15px;margin-top:0;" 
-        block-region activate="loadingMap" ng-style="{'height': options.isBch ? '450px' : '350px'}">
     </div>
-
-    <div id="Parties" class="container-fluid  party-container text-center hidden-sm hidden-xs" 
-    style="position:relative;background-color: #fff;">
-        <div class="row">
-            <div class="col-md-5">
-                <span class="label label-party" ng-bind="numParty"></span>
-                <a rel="noopener" translation-url href="/countries/status/party" class="link od-label">Parties to the <span ng-bind="options.protocol"></span>
-                </a>
-            </div>
-
-            <div class="col-md-4">
-                <span class="label label-inbetween" ng-bind="numRatified"></span>
-                <a rel="noopener" translation-url href="/countries/status/inbetween" class="link od-label">Ratified, not yet Party</a>
-                <a rel="noopener" translation-url href="#" class="helpinfoInline fa fa-info-circle color-grey" data-toggle="tooltip" 
-                data-title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. "
-                    data-container="body"></a>
-            </div>
-
-            <div class="col-md-3">
-                 <span class="label label-non-party" ng-bind="numNonParty" style="font-size: 16px;"></span>
-                <a rel="noopener" translation-url href="/countries/status/nonparty" class="link od-label">Non-Parties</a>
-            </div>
+    <div class="new-ch-map-container-footer">
+        <div class="new-ch-bottom-map-numbers">
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;" class="ng-scope">
+                <td>
+                        <span class="new-ch-map-number1 " ng-bind="schema.count"
+                              style="padding-top:4px;padding-left:7px;padding-right: 7px;padding-bottom: 4px;">172</span>
+                </td>
+                <td>
+<!--                    <a rel="noopener" ng-if="!currentCountry.code" translation-url="" -->
+                    <a rel="noopener" translation-url=""
+                       href="/en/search?schema=cpbNationalReport3&amp;tab=nationalRecords" style="color:#fff"
+                       class="ng-scope">
+                            <span ng-bind="schema.title | lstring:locale" class="new-ch-binding">Parties to the
+                                Cartagena Protocol</span>
+                    </a><!-- end ngIf: !currentCountry.code -->
+                </td>
+            </tr>
+        </div>
+        <div class="new-ch-bottom-map-numbers">
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;" class="ng-scope">
+                <td>
+                        <span class="new-ch-map-number2 " ng-bind="schema.count"
+                              style="padding-top:4px;padding-left:7px;padding-right: 7px;padding-bottom: 4px;">200</span>
+                </td>
+                <td>
+                    <a rel="noopener" translation-url=""
+                       href="/en/search?schema=cpbNationalReport3&amp;tab=nationalRecords" style="color:#fff"
+                       class="ng-scope">
+                            <span ng-bind="schema.title | lstring:locale" class="new-ch-binding">Ratified, not yet
+                                Party</span>
+                    </a><!-- end ngIf: !currentCountry.code -->
+                </td>
+            </tr>
+        </div>
+        <div class="new-ch-bottom-map-numbers">
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;" class="ng-scope">
+                <td>
+                        <span class="new-ch-map-number3 " ng-bind="schema.count"
+                              style="padding-top:4px;padding-left:7px;padding-right: 7px;padding-bottom: 4px;">26</span>
+                </td>
+                <td>
+                    <a rel="noopener"  translation-url=""
+                       href="/en/search?schema=cpbNationalReport3&amp;tab=nationalRecords" style="color:#fff"
+                       class="ng-scope">
+                        <span ng-bind="schema.title | lstring:locale" class="new-ch-binding">Non-Parties</span>
+                    </a><!-- end ngIf: !currentCountry.code -->
+                </td>
+            </tr>
         </div>
     </div>
-
-   
 </div>
+<!--<div class="bg-texture-green app-bg-texture" style="position:relative;">-->
+
+<!--    &lt;!&ndash; <div class="container-fluid tag-line-container protocol-map-header-bg bg-green color-white " style="position:relative;">-->
+<!--        <div class="container">-->
+<!--            <div class="row">-->
+<!--                <div class="col-md-12">-->
+<!--                    <h3 ng-if="options.isAbs">The <span ng-bind="options.chLongName"></span> (<span ng-bind="options.chShortName"></span>)-->
+<!--                        is a platform for exchanging information on <span ng-bind="options.protocolShortName"></span> and a key tool for-->
+<!--                        facilitating the implementation of the <span ng-bind="options.protocol"></span>.-->
+<!--                        <a rel="noopener" translation-url  href="/about" ng-click="toggleTooltip()">-->
+<!--                            <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip"-->
+<!--                            data-title="Click here to find out more about the Clearing-house" data-container="body"></i></a>-->
+<!--                    </h3>-->
+<!--                    <h3 ng-if="options.isBch">-->
+<!--                        The Biosafety Clearing-House (BCH) is an online platform for exchanging information and a key tool for facilitating the implementation of the Cartagena Protocol on Biosafety.-->
+<!--                    </h3>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div> &ndash;&gt;-->
+
+<!--    <div id="homeMap" class="hidden-sm hidden-xs" style="padding:0; margin-bottom:-15px;margin-top:0;"-->
+<!--        block-region activate="loadingMap" ng-style="{'height': options.isBch ? '450px' : '350px'}">-->
+<!--    </div>-->
+
+<!--    <div id="Parties" class="container-fluid  party-container text-center hidden-sm hidden-xs"-->
+<!--    style="position:relative;background-color: #fff;">-->
+<!--        <div class="row">-->
+<!--            <div class="col-md-5">-->
+<!--                <span class="label label-party" ng-bind="numParty"></span>-->
+<!--                <a rel="noopener" translation-url href="/countries/status/party" class="link od-label">Parties to the <span ng-bind="options.protocol"></span>-->
+<!--                </a>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-4">-->
+<!--                <span class="label label-inbetween" ng-bind="numRatified"></span>-->
+<!--                <a rel="noopener" translation-url href="/countries/status/inbetween" class="link od-label">Ratified, not yet Party</a>-->
+<!--                <a rel="noopener" translation-url href="#" class="helpinfoInline fa fa-info-circle color-grey" data-toggle="tooltip"-->
+<!--                data-title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. "-->
+<!--                    data-container="body"></a>-->
+<!--            </div>-->
+
+<!--            <div class="col-md-3">-->
+<!--                 <span class="label label-non-party" ng-bind="numNonParty" style="font-size: 16px;"></span>-->
+<!--                <a rel="noopener" translation-url href="/countries/status/nonparty" class="link od-label">Non-Parties</a>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+
+
+<!--</div>-->
