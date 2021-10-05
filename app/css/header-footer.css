@@ -204,7 +204,7 @@ top: 0.5vh;
 
 .new-ch-containter{
       width: 100%;
-    height: 100px;
+      height: 25px;
 }
 .new-ch-nav{
    padding-top: 1%;
@@ -333,6 +333,13 @@ box-sizing: border-box;
     display: block !important;
   }
 }
+
+.new-ch-nav-list li a {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+}
 #new-ch-nav-toggle {
   position: absolute;
   left: 18px;
@@ -420,4 +427,7 @@ color: #FFFFFF;
 }
 .new-ch-first-page{
   height: 100vh;
+}
+.showList{
+    display: block !important;
 }

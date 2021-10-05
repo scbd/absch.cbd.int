@@ -61,11 +61,11 @@
                                    style="    font-family: Roboto, FontAwesome;font-style: normal;font-weight: normal; width: 320px; margin-left: 24px;margin-bottom: 10px;margin-top: 4.167%"
                                    class="form-control ng-pristine ng-untouched ng-valid ng-empty"
                                    ng-click="countrySearch($event)" ng-model="countrySearchQuery">
-                            <li style="border: 0px !important;"
+                            <li style="border: 0px !important;color:#000"
                                 ng-repeat="c in countries | filter:startsWith track by c.code"
                                 class="ng-scope">
                                 <a class="new-ch-a-header-nation" translation-url=""
-                                   ng-href="/countries/AF" href=" #countries/AF">
+                                   ng-href="/countries/{{::c.code|encodeURIComponent}}">
                                                     <span class="new-ch-a-header-a"
                                                           ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
                                                         {{::c.name | lstring:locale}}
@@ -80,7 +80,7 @@
                                  style="padding-left: 38px;padding-right: 24px;">
                                 <a class="new-ch-cardFooterLink2 "
                                    style="font-weight: normal;color: white;font-size: 18px;text-decoration: underline;padding-left: 15px; line-height: 220%;"
-                                   href="#">overview - LIST ALL COUNTRIES </a>
+                                   translation-url ng-href="/countries">overview - LIST ALL COUNTRIES </a>
                             </div>
                         </li>
                     </ul>
