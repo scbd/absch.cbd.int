@@ -1,99 +1,201 @@
-﻿<div class="header bg-white" id="CBD-Branding">
-  <!-- sign in -->
-  <accounts-validation-header></accounts-validation-header>
-  <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop">
-    <style>
-      .arabic-Header {
-          margin-right: 200px;
-      }
-      .arabic-cbd-nav-bar {
-          float : right!important;
-      }
-      .navbar .right-side-help-menus{
-        font-size: 16px;
-        margin-bottom: 0;
-        border: 0;
-        z-index: 100;
-        list-style-type: none;
-        padding: 0;
-        margin: 0;
-        line-height: 30px;
-        font-weight: 200;
-        width: 30px;
-        text-align: center;
-      }
-      .navbar .right-side-help-menus:hover,
-      .navbar .right-side-help-menus.active{
-        background: #eee;
-      }
-      @media (max-width: 768px) {
-        .navbar .right-side-help-menus{
-          display: none;
-        }
-      }
-    </style>
-    <div class="container-fluid container-cbd bg-white">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header" >
-        <span class="hidden-xs hidden-sm color-cbdlitegrey left-part" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
-          <i class="fa fa-bars"></i> Convention on Biological Diversity
-        </span>
-
-        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left left-part-mob">
-          <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>
-          <span class="brand">CBD</span>
-        </span>
-        <ul class="navbar-left navlist hidden-xs hidden-sm menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
-          <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
-          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
-          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
-          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
-          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
-          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
-        </ul>
-        <div class="right-part">
-          <account-header user="user" class="rp-signin" ></account-header>
-          <xuser-notifications-icon class="rp-n"></xuser-notifications-icon>
-          <locale-header class="rp-lang" id="CBD-Branding"></locale-header>
-          <a id="needHelp" href="#" ng-class="{'active':activeHelpMenu=='help'}"class="right-side-help-menus rp-ques" ng-click="openSideBlock('help')"><i class="fa fa-question"></i></a>
-          <a href="#" ng-class="{'active':activeHelpMenu=='announcements'}"class="right-side-help-menus rp-notification" ng-click="openSideBlock('announcements')"><i class="fa fa-bullhorn"></i></a>
-        </div>
-      </div>
-
-      
+﻿<div class="new-ch-nav">
+  <!-- top Manus scbd-header starts -->
+  <div>
+    <a href="#home" id="mykLinks" class="new-ch-active"
+       style="display: inline;color:#29a329;padding-left: 8px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;">Convention
+      on Biological Diversity </a>
+    <div id="myLinks">
+      <a href="#Cartagena Protocol"
+         style="padding-left: 16px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;">The
+        Convention</a>
+      <a href="#Cartagena Protocol"
+         style="padding-left: 16px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;">Cartagena
+        Protocol</a>
+      <a href="#Nagoya Protocol"
+         style="padding-left: 16px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;">Nagoya
+        Protocol</a>
+      <a href="#Programmes"
+         style="padding-left: 16px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;"
+         ;>Programmes</a>
+      <a href="#Information"
+         style="padding-left: 16px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;"
+         ;>Information</a>
+      <a href="#Secretariat"
+         style="padding-left: 16px;font-style: normal;font-weight: normal;font-size: 20px;line-height: 140%;"
+         ;>Secretariat</a>
     </div>
-  </nav>
+    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+      <i class="new-ch-fa fa-bars" style="padding-left: 15px;"></i>
+    </a>
 
-  <login-account user="user" ></login-account>
-  <!-- <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Error: {{errorMessage.title}}</h4>
+    <a href="#"><img src="/app/icons/megaphone-fill.svg" style="margin-top: 4px;padding-right: 15px;" /></a>
+
+
+    <a href="#"><img src="/app/icons/question-lg.svg" style="margin-top: 4px;padding-right: 10px" /></a>
+
+    <div class="lang">
+      <locale-header class="rp-lang ng-isolate-scope" id="CBD-Branding">
+        <div hover-effect=".dropdown-menu" class="locale ng-isolate-scope" id="CBD-Branding"
+             lang="en">
+          <a rel="noopener" ng-href="#" class="set-languages" data-toggle="dropdown" href="#">
+                                    <span class="new-ch-badge1 ">
+                                        <span ng-bind="currentLanguage|uppercase" class="ng-binding"
+                                              style="position: relative;bottom: 3px;color: black;font-size: 16px;">EN</span><img
+                                            src="/app/icons/caret-down-fill.svg"
+                                            style="height: 15px;padding-left: 1px;position: relative;bottom: 2px" />
+                                    </span>
+          </a>
+          <style>
+            .arabic-new-ch-locale-menu {
+              right: initial;
+            }
+          </style>
+          <ul id="new-ch-dropdown-menu" class="dropdown-menu new-ch-locale-menu" role="menu"
+              ng-class="{'arabic-new-ch-locale-menu':currentLanguage=='ar'}">
+            <li class="disabled"
+                style="    font-size: 16px; color: #000; margin-left: 10px;margin-right: 10px;margin-top: 4.16%; ">
+              Languages</li>
+            <hr style="    padding: 0;
+                                                    margin-left: 10px;
+                                                    margin-right: 10px;
+                                                    margin-top: 2.083%;
+                                                    margin-bottom: 2.083%;">
+            <li><a class="new-ch-a-language" style="margin-left: 10px" translation-url=""
+                   ng-class="{'bold':currentLanguage=='ar'}" ng-click="changeLanguage('ar')"
+                   ng-href="#" href="#">العربية</a></li>
+            <!--ng-click="changeLanguage('ar')"-->
+            <li><a class="new-ch-a-language" style="margin-left: 10px" translation-url=""
+                   ng-class="{'bold':currentLanguage=='zh'}" ng-click="changeLanguage('zh')"
+                   ng-href="#" href="#">中文</a></li>
+            <li><a class="new-ch-a-language" style="margin-left: 10px" translation-url=""
+                   ng-class="{'bold':currentLanguage=='en'}" ng-click="changeLanguage('en')"
+                   ng-href="#" href="#" class="bold">English</a></li>
+            <li><a class="new-ch-a-language" style="margin-left: 10px" translation-url=""
+                   ng-class="{'bold':currentLanguage=='es'}" ng-click="changeLanguage('es')"
+                   ng-href="#" href="#">Español</a></li>
+            <li><a class="new-ch-a-language" style="margin-left: 10px" translation-url=""
+                   ng-class="{'bold':currentLanguage=='fr'}" ng-click="changeLanguage('fr')"
+                   ng-href="#" href="#">Français</a></li>
+            <li><a class="new-ch-a-language" style="margin-left: 10px;margin-bottom:30px"
+                   translation-url="" ng-class="{'bold':currentLanguage=='ru'}"
+                   ng-click="changeLanguage('ru')" ng-href="#" href="#">Русский</a></li>
+          </ul>
         </div>
-        <div class="modal-body">
-          <p compile="errorMessage.body"></p>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
+      </locale-header>
     </div>
-  </div> -->
-  <!-- <div class1="collapse navbar-collapse">
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <account-header user="user" class="pull-right" ></account-header></li>
-      <li>
-        <xuser-notifications-icon class="pull-right"></xuser-notifications-icon></li>
-      <li>
-        <locale-header id="CBD-Branding" class="pull-right"></locale-header></li>
-      <li>
-        <a href="#" class="pull-right"><i class="fa fa-cog"></i></a></li>
-    </ul>
-  </div> -->
+
+    <a href="#"> <img src="/app/icons/bell-fill.svg"
+                      style="height: 19px;padding-right: 10px;margin-top: 4px;" /></a>
+
+    <a href="#"><img src="/app/icons/person-fill.svg"
+                     style=" padding-top: 0px;padding-right: 10px;padding-bottom: 3px;padding-left: 10px;;height: 28px;" />
+    </a>
+
+    <hr class="new-ch-red-line">
+    <h1 class="new-ch-h1-header">BCH</h1>
+    <h4 class="new-ch-h4-header" style="display:inline" ;>BIOSAFETY CLEARING HOUSE</h4>
+  </div>
+  <!-- top Manus scbd-header ends -->
+  <!-- Main Manus bch-header starts -->
+
+  <!-- Main Manus bch-header ends -->
 </div>
+<!--<div class="header bg-white" id="CBD-Branding">-->
+<!--  &lt;!&ndash; sign in &ndash;&gt;-->
+<!--  <accounts-validation-header></accounts-validation-header>-->
+<!--  <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop">-->
+<!--    <style>-->
+<!--      .arabic-Header {-->
+<!--          margin-right: 200px;-->
+<!--      }-->
+<!--      .arabic-cbd-nav-bar {-->
+<!--          float : right!important;-->
+<!--      }-->
+<!--      .navbar .right-side-help-menus{-->
+<!--        font-size: 16px;-->
+<!--        margin-bottom: 0;-->
+<!--        border: 0;-->
+<!--        z-index: 100;-->
+<!--        list-style-type: none;-->
+<!--        padding: 0;-->
+<!--        margin: 0;-->
+<!--        line-height: 30px;-->
+<!--        font-weight: 200;-->
+<!--        width: 30px;-->
+<!--        text-align: center;-->
+<!--      }-->
+<!--      .navbar .right-side-help-menus:hover,-->
+<!--      .navbar .right-side-help-menus.active{-->
+<!--        background: #eee;-->
+<!--      }-->
+<!--      @media (max-width: 768px) {-->
+<!--        .navbar .right-side-help-menus{-->
+<!--          display: none;-->
+<!--        }-->
+<!--      }-->
+<!--    </style>-->
+<!--    <div class="container-fluid container-cbd bg-white">-->
+<!--      &lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+<!--      <div class="navbar-header" >-->
+<!--        <span class="hidden-xs hidden-sm color-cbdlitegrey left-part" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">-->
+<!--          <i class="fa fa-bars"></i> Convention on Biological Diversity-->
+<!--        </span>-->
 
-<!-- <xuser-notifications ng-if="userNotifications.viewAll" ></xuser-notifications> -->
+<!--        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left left-part-mob">-->
+<!--          <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>-->
+<!--          <span class="brand">CBD</span>-->
+<!--        </span>-->
+<!--        <ul class="navbar-left navlist hidden-xs hidden-sm menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">-->
+<!--          <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>-->
+<!--          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>-->
+<!--          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>-->
+<!--          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>-->
+<!--          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>-->
+<!--          <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>-->
+<!--        </ul>-->
+<!--        <div class="right-part">-->
+<!--          <account-header user="user" class="rp-signin" ></account-header>-->
+<!--          <xuser-notifications-icon class="rp-n"></xuser-notifications-icon>-->
+<!--          <locale-header class="rp-lang" id="CBD-Branding"></locale-header>-->
+<!--          <a id="needHelp" href="#" ng-class="{'active':activeHelpMenu=='help'}"class="right-side-help-menus rp-ques" ng-click="openSideBlock('help')"><i class="fa fa-question"></i></a>-->
+<!--          <a href="#" ng-class="{'active':activeHelpMenu=='announcements'}"class="right-side-help-menus rp-notification" ng-click="openSideBlock('announcements')"><i class="fa fa-bullhorn"></i></a>-->
+<!--        </div>-->
+<!--      </div>-->
 
-<!-- class="hidden-md hidden-lg" -->
+<!--      -->
+<!--    </div>-->
+<!--  </nav>-->
+
+<!--  <login-account user="user" ></login-account>-->
+<!--  &lt;!&ndash; <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">-->
+<!--    <div class="modal-dialog">-->
+<!--      <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>-->
+<!--          <h4 class="modal-title" id="myModalLabel">Error: {{errorMessage.title}}</h4>-->
+<!--        </div>-->
+<!--        <div class="modal-body">-->
+<!--          <p compile="errorMessage.body"></p>-->
+<!--        </div>-->
+<!--        <div class="modal-footer">-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div> &ndash;&gt;-->
+<!--  &lt;!&ndash; <div class1="collapse navbar-collapse">-->
+<!--    <ul class="nav navbar-nav navbar-right">-->
+<!--      <li>-->
+<!--        <account-header user="user" class="pull-right" ></account-header></li>-->
+<!--      <li>-->
+<!--        <xuser-notifications-icon class="pull-right"></xuser-notifications-icon></li>-->
+<!--      <li>-->
+<!--        <locale-header id="CBD-Branding" class="pull-right"></locale-header></li>-->
+<!--      <li>-->
+<!--        <a href="#" class="pull-right"><i class="fa fa-cog"></i></a></li>-->
+<!--    </ul>-->
+<!--  </div> &ndash;&gt;-->
+<!--</div>-->
+
+<!--&lt;!&ndash; <xuser-notifications ng-if="userNotifications.viewAll" ></xuser-notifications> &ndash;&gt;-->
+
+<!--&lt;!&ndash; class="hidden-md hidden-lg" &ndash;&gt;-->
