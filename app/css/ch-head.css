@@ -1,5 +1,4 @@
 
-    <style type="text/css" data-tag-name="trix-editor">
         trix-editor {
             display: block;
         }
@@ -94,10 +93,7 @@
         .ng-anchor {
             position: absolute;
         }
-    </style>
-    
-   
-    <style type="text/css" class="slaask-style-sheet">
+
         @import url(https://fonts.googleapis.com/css?family=Nunito:300,400,600,700);
 
         body.slaask-iframe {
@@ -1416,8 +1412,7 @@
                 opacity: 0
             }
         }
-    </style>
-    <style type="text/css" class="slaask-style-sheet">
+
         body .slaask-alert {
             z-index: 2147483647;
             position: fixed;
@@ -1649,8 +1644,7 @@
                 display: none
             }
         }
-    </style>
-    <style type="text/css" class="slaask-style-sheet">
+
         .slaask-fixed {
             position: fixed !important
         }
@@ -1725,8 +1719,7 @@
             -webkit-transform: scale(1);
             transform: scale(1)
         }
-    </style>
-    <style type="text/css" class="slaask-style-sheet">
+
         .slaask-button {
             text-align: left !important
         }
@@ -1897,4 +1890,4 @@
             -webkit-animation-direction: forwards;
             animation-direction: forwards
         }
-    </style>
+

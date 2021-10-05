@@ -1,55 +1,56 @@
 <div class="new-ch-containter">
     <section class="new-ch-nav-bar">
         <nav class="new-ch-nav1">
-            <div class="new-ch-nav-mobile"><a id="new-ch-nav-toggle" href="#"><span></span></a></div>
+            <div class="new-ch-nav-mobile"><a id="new-ch-nav-toggle" href=""><span></span></a></div>
             <ul class="new-ch-nav-list">
                 <li>
                     <a class="new-ch-a-header" style=" padding-right: 0px; margin-left: 42px;"
-                       href="#">HOME</a>
+                       href="">HOME</a>
                 </li>
                 <li>
                     <a class="new-ch-a-header" style="  padding-right: 0px;margin-left: 32px;"
-                       href="#">ABOUT</a>
+                       href="">ABOUT</a>
                 </li>
-                <li>
+                <li hover-effect=".new-ch-nav-dropdown">
                     <a class="new-ch-a-header" style="  padding-right: 0px;margin-left: 32px;"
-                       href="#!">SEARCH<i class="new-ch-fa fa-caret-down"></i></a>
+                       href="">SEARCH<i class="new-ch-fa fa-caret-down"></i></a>
                     <ul style="width: 282px;    border: 1px solid #00405C; border-radius: 8px;"
                         class="new-ch-nav-dropdown">
                         <li>
                             <a class="new-ch-a-header"
                                style="font-weight: 500;font-size: 18px;border-top-right-radius: 8px;border-top-left-radius: 8px"
-                               href="#">RECORDS</a>
+                               translation-url ng-href="search">RECORDS</a>
                         </li>
                         <li>
                             <a class="new-ch-a-header" style=" font-weight: 500;font-size: 18px;"
-                               href="#">REGISTRIES: </a>
+                               translation-url ng-href="/registries">REGISTRIES: </a>
                         </li>
                         <li>
-                            <a class="new-ch-a-header" href="#"
+                            <a class="new-ch-a-header" href=""
                                style="  padding-top: 0px; font-weight: 500;  font-size: 16px; text-decoration: underline;padding-left: 50px;">LMO</a>
                         </li>
                         <li>
-                            <a class="new-ch-a-header" href="#"
+                            <a class="new-ch-a-header" href=""
                                style="    padding-top: 0px;font-weight: 500;font-size: 16px;text-decoration: underline;padding-left: 50px;">ORGANISM</a>
                         </li>
                         <li>
-                            <a class="new-ch-a-header" href="#"
+                            <a class="new-ch-a-header" href=""
                                style="    padding-top: 0px;  font-weight: 500;  font-size: 16px; text-decoration: underline;padding-left: 50px;">GENE</a>
                         </li>
                         <li>
-                            <a class="new-ch-a-header" href="#"
-                               style="font-weight: 500;font-size: 18px;padding-bottom:32px;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px">NATIONAL
+                            <a class="new-ch-a-header" href=""
+                               style="font-weight: 500;font-size: 18px;padding-bottom:32px;border-bottom-left-radius: 8px;border-bottom-right-radius: 8px" translation-url href="reports" >NATIONAL
                                 REPORTS</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a class="new-ch-a-header" style="  padding-right: 0px;margin-left: 32px;"
-                       href="#!">SUBMIT</a>
+                       translation-url ng-href="register" >SUBMIT</a>
                 </li>
-                <li>
-                    <a class="new-ch-a-header" href="#"
+
+                <li hover-effect=".new-ch-nav-dropdown">
+                    <a class="new-ch-a-header" href=""
                        style="  padding-right: 0px;margin-left: 32px;">COUNTRY PROFILES<i
                             class="new-ch-fa fa-caret-down"></i></a>
                     <ul class="new-ch-nav-dropdown" style="width: 380px">
@@ -84,23 +85,23 @@
                         </li>
                     </ul>
                 </li>
-                <li>
+                <li hover-effect=".new-ch-nav-dropdown">
                     <a class="new-ch-a-header" style="  padding-right: 0px;margin-left: 32px;"
-                       href="#!">HELP<i class="new-ch-fa fa-caret-down"></i></a>
+                       href="">HELP<i class="new-ch-fa fa-caret-down"></i></a>
                     <ul class="new-ch-nav-dropdown"
                         style="width: 282px;     border: 1px solid #00405C; border-radius: 8px;">
                         <li>
                             <a class="new-ch-a-header"
                                style="border-top-right-radius: 8px;border-top-left-radius: 8px;font-weight: 500;font-size: 18px"
-                               href="#">KNOWLEDGE BASE</a>
+                               translation-url href="/kb/">KNOWLEDGE BASE</a>
                         </li>
                         <li>
                             <a class="new-ch-a-header" style="font-weight: 500;font-size: 18px"
-                               href="#">FAQs</a>
+                               translation-url href="/kb/faqs">FAQs</a>
                         </li>
                         <li>
                             <a class="new-ch-a-header" style="font-weight: 500;font-size: 18px"
-                               href="#">TRAINING MATERIALS</a>
+                               translation-url href="/kb/articles">TRAINING MATERIALS</a>
                         </li>
                         <li>
                             <a class="new-ch-a-header" style="font-weight: 500;font-size: 18px"
@@ -120,10 +121,10 @@
 
                 <li>
                     <a class="new-ch-a-header" style="  padding-right: 0px;margin-left: 32px;"
-                       href="#">FORUM</a>
+                       translation-url ng-href="/onlineconferences">FORUM</a>
                 </li>
-                <li style="float:right;">
-                    <a class="new-ch-a-header" style="margin-right: 47px" href="#">PROTOCOL<i
+                <li hover-effect=".new-ch-nav-dropdown" style="float:right;">
+                    <a class="new-ch-a-header" style="margin-right: 47px" translation-url href="http://bch.cbd.int/protocol">PROTOCOL<i
                             class="new-ch-fa fa-caret-down"></i></a>
                     <ul style="right: 0px; top:110%!important;width: 350px;    border: 1px solid #00405C; border-radius: 8px;"
                         class="new-ch-nav-dropdown">
@@ -142,11 +143,12 @@
             </ul>
         </nav>
     </section>
+  <breadcrumbs></breadcrumbs>
 </div>
 <!--<div  id="pageHeader">-->
 
 <!--    <div class="header">-->
-<!--    -->
+
 <!--        &lt;!&ndash; Small screen header &ndash;&gt;-->
 <!--        <div ng-if="deviceSize=='xs'" class="small-header">-->
 <!--            <a class="color-orange acronym" role="button" data-toggle="collapse" href="#collapseSmallNavMenu"-->
@@ -167,18 +169,18 @@
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->
-<!--    -->
+
 <!--        &lt;!&ndash; Normal screen header &ndash;&gt;-->
 <!--        <div class="hidden-xs normal-header">-->
 <!--            <img src="/app/img/cbd-green-spine.png" class="spine-logo">-->
 <!--            <a href="." class="acronym"><span class="color-orange">BCH</span></a>-->
 <!--            <a href="." class="ch-name"><span class="color-grey" ng-if="!development_env && !training_env"> Biosafety Clearing-House</span></a>-->
 <!--            <span class="color-pink ch-name" ng-if="development_env"> DEVELOPMENT</span>-->
-<!--            -->
+
 <!--            &lt;!&ndash; <img src="/app/img/cbd-logo-black-en.svg" style="height:60px;position: absolute;top:0px;right:20px;" class="pull-right ch-logo hidden-sm" ng-class="{'arabic-cbd-logo-style' : locale=='ar'}"> &ndash;&gt;-->
 
 <!--        </div>-->
-<!--    -->
+
 <!--        <div class="hidden-xs normal-nav" style="width:100%;">-->
 <!--            <ul class="nav nav-pills" >-->
 <!--                <li><a rel="noopener" class="nav-link" translation-url href=".">HOME</a></li>-->
@@ -200,7 +202,7 @@
 <!--                        aria-haspopup="true" aria-expanded="false">-->
 <!--                        <span class="visible-sm">Countries <i class="fa fa-caret-down"></i></span><span-->
 <!--                            class="hidden-sm">Country Profiles <i class="fa fa-caret-down"></i></span> </a>-->
-<!--    -->
+
 <!--                    <ul class="dropdown-menu" style="border:0;margin-top:0;">-->
 <!--                        <li style="border-bottom: 1px solid #eee;"> <a rel="noopener"-->
 <!--                                style="color:#111!important;font-size:16px;" translation-url-->
@@ -253,11 +255,11 @@
 <!--                <li class="pull-right">-->
 <!--                    <a rel="noopener" translation-url href="http://bch.cbd.int/protocol" class="nav-link">CARTAGENA PROTOCOL</a>-->
 <!--                </li>-->
-<!--    -->
+
 <!--            </ul>-->
 <!--        </div>-->
 <!--    </div>-->
-<!--    -->
+
 <!--    <breadcrumbs></breadcrumbs>-->
-<!--    -->
+
 <!--</div>-->
