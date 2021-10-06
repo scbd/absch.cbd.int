@@ -148,7 +148,8 @@
 }
 .knowledge-base .categories-list .view-more{
 	text-align: end;
-	position: absolute;
+	/* position: absolute; */
+	margin-top: 10px;
 	bottom: 10px;
 	right: 10px;
 }

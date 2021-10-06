@@ -5,7 +5,7 @@
                 <div class="support-container">
                     <h2 class="support-heading">{{ $t("needSupport") }}?</h2>
                      {{ $t("supportedText") }}
-                    <a href="#" @click="openSlaask()">{{ $t("concontactUs") }}</a> {{ $t("furtherHelp") }}.
+                    <a href="#" @click="openSlaask()">{{ $t("contactUs") }}</a> {{ $t("furtherHelp") }}.
                 </div>
             </div>
         </div>

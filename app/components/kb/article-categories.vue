@@ -8,7 +8,7 @@
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
             <div v-if="!loading">
                 <div class="col-md-6 col-sm-12 " v-for="category in KbCategories">
-                    <div class="categories-list widget_categories tag-count">
+                    <div v-if="category.count>0" class="categories-list widget_categories tag-count">
                         <h3><span class="badge">{{category.count}}</span>
                             <a href="#" @click="goToTag(category)">{{category.title}}</a>
                             <a style="display:none" :href="`${tagUrl(category)}`">{{category.title}}</a>
