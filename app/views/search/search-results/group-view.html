@@ -2,15 +2,20 @@
     <style>
         .level_1{
             font-size: 2em;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 1rem;
+            padding-top: 2rem;
         }
         .level_2{
             font-size: 1.5em;
+            padding-bottom: 1rem;
+            padding-top: 1rem;
         }
         .level_3{
             font-size: 1em;
         }
         .search-result-heading{
-            border-bottom:#ddd solid 1px;
+            
             margin-top:5px;margin-bottom:5px;
         }
         @media (max-width: 767px){
@@ -75,7 +80,7 @@
                 </div>
             </div>
             <div ng-if="!group.isClosed && group.subLevels">
-                <div ng-repeat="level in group.subLevels"  ng-include="'group-result'" onload="group = level" style="margin-left:10px;padding:5px;border:#ddd solid 1px;">
+                <div ng-repeat="level in group.subLevels"  ng-include="'group-result'" onload="group = level" style="margin-left:10px;padding:5px;">
                 </div>
             </div>
     </script>
