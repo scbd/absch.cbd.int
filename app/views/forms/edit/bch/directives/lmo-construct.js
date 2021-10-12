@@ -8,7 +8,7 @@ import 'views/forms/edit/document-selector';
 import 'components/scbd-angularjs-services/main';
 import '~/views/forms/view/bch/view-lmo-gene.directive';
 
-    app.directive('lmoConstruct', ['IStorage', 'ngDialog', function (storage, ngDialog) {
+    app.directive('lmoConstruct', ['IStorage', 'ngDialog','solr','realm', function (storage, ngDialog, solr, realm) {
         return {
             restrict: 'EA',
             template: lmoConstructTemplate,
@@ -67,6 +67,49 @@ import '~/views/forms/view/bch/view-lmo-gene.directive';
                                 ngDialog.close();
                             }
 
+                            //=========================
+                            $scope.onBuildDocumentSelectorQuery = function(options){
+                                var queries = {
+                                    fieldQueries    : options.fieldQueries||[],
+                                    query           : options.query || '*:*'
+                                }
+                                if(options.schemas)
+                                    queries.fieldQueries.push('schema_s:(' + _.map(options.schemas, solr.escape).join(' ') + ')')
+                                else if(options.schema)
+                                    queries.fieldQueries.push('schema_ss:'+solr.escape(options.schema))
+
+                                if(options.realm)
+                                    queries.fieldQueries.push('realm_ss:'+solr.escape(options.realm))
+
+                                if(options.identifier)
+                                    queries.fieldQueries.push("NOT identifier_s:" + solr.escape(options.identifier));
+
+                                if(options.government)
+                                    queries.fieldQueries.push('government_s:'+solr.escape(options.government));
+
+                                if((options.searchText||'')!=''){
+                                    var queryText
+                                    queryText = '(' + solr.escape(options.searchText) + ')';
+
+                                    if(options.query!='' && options.query != undefined)
+                                        queries.query   += ' AND ('+(options.searchField||'text_EN_txt:') + queryText + ')'
+                                    else 
+                                        queries.query   = (options.searchField||'text_EN_txt:') + queryText;
+                                }
+
+                                return queries;
+
+                            } 
+
+                            $scope.onDnaSequenceQuery = function(searchText){
+                                var queryOptions = {
+                                    realm     : realm.value,
+                                    schemas     : ['dnaSequence'],
+                                    searchText  : searchText
+                                }                                                  
+                                return $scope.onBuildDocumentSelectorQuery(queryOptions);
+                            }
+                            //==========================
                             $scope.geneSelected = function(geneItem){
                                 if(!(geneItem.selectedGene||{}).identifier)
                                     return;
