@@ -1,4 +1,5 @@
 @charset "UTF-8";
+<<<<<<< HEAD
 .bs5 {
   /*!
    * Bootstrap v5.1.2 (https://getbootstrap.com/)
@@ -27,6 +28,9 @@
   /* rtl:begin:remove */
   /* rtl:end:remove */
 }
+=======
+
+>>>>>>> ba74ed97... homepage new-css
 .bs5 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -434,61 +438,109 @@ a > .bs5 code {
   font-weight: 300;
   line-height: 1.2;
 }
+<<<<<<< HEAD
 @media (min-width: 1200px) {
   .bs5 .display-1 {
     font-size: 5rem;
   }
 }
+=======
+/* @media (min-width: 1200px) {
+  .bs5 .display-1 {
+    font-size: 5rem;
+  }
+} */
+>>>>>>> ba74ed97... homepage new-css
 .bs5 .display-2 {
   font-size: calc(1.575rem + 3.9vw);
   font-weight: 300;
   line-height: 1.2;
 }
+<<<<<<< HEAD
 @media (min-width: 1200px) {
   .bs5 .display-2 {
     font-size: 4.5rem;
   }
 }
+=======
+/* @media (min-width: 1200px) {
+  .bs5 .display-2 {
+    font-size: 4.5rem;
+  }
+} */
+>>>>>>> ba74ed97... homepage new-css
 .bs5 .display-3 {
   font-size: calc(1.525rem + 3.3vw);
   font-weight: 300;
   line-height: 1.2;
 }
+<<<<<<< HEAD
 @media (min-width: 1200px) {
   .bs5 .display-3 {
     font-size: 4rem;
   }
 }
+=======
+/* @media (min-width: 1200px) {
+  .bs5 .display-3 {
+    font-size: 4rem;
+  }
+} */
+>>>>>>> ba74ed97... homepage new-css
 .bs5 .display-4 {
   font-size: calc(1.475rem + 2.7vw);
   font-weight: 300;
   line-height: 1.2;
 }
+<<<<<<< HEAD
 @media (min-width: 1200px) {
   .bs5 .display-4 {
     font-size: 3.5rem;
   }
 }
+=======
+/* @media (min-width: 1200px) {
+  .bs5 .display-4 {
+    font-size: 3.5rem;
+  }
+} */
+>>>>>>> ba74ed97... homepage new-css
 .bs5 .display-5 {
   font-size: calc(1.425rem + 2.1vw);
   font-weight: 300;
   line-height: 1.2;
 }
+<<<<<<< HEAD
 @media (min-width: 1200px) {
   .bs5 .display-5 {
     font-size: 3rem;
   }
 }
+=======
+/* @media (min-width: 1200px) {
+  .bs5 .display-5 {
+    font-size: 3rem;
+  }
+} */
+>>>>>>> ba74ed97... homepage new-css
 .bs5 .display-6 {
   font-size: calc(1.375rem + 1.5vw);
   font-weight: 300;
   line-height: 1.2;
 }
+<<<<<<< HEAD
 @media (min-width: 1200px) {
   .bs5 .display-6 {
     font-size: 2.5rem;
   }
 }
+=======
+/* @media (min-width: 1200px) {
+  .bs5 .display-6 {
+    font-size: 2.5rem;
+  }
+} */
+>>>>>>> ba74ed97... homepage new-css
 .bs5 .list-unstyled {
   padding-left: 0;
   list-style: none;

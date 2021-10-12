@@ -1,0 +1,138 @@
+/* HEADER */
+.new-css-main-nav-link {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 500;
+    color: #333 !important;
+}
+
+.new-css-main-nav-link:hover {
+    background-color: #eee !important;
+}
+
+.new-css-acronym {
+    font-weight: 500;
+    text-decoration: none !important;
+    font-size: 48px;
+}
+
+.new-css-ch-name {
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: 550;
+}
+
+.new-css-sm-header {
+    display: none;
+}
+
+.new-css-lg-header {
+    display: block;
+}
+
+@media (max-width: 575.98px) {
+    .new-css-sm-header {
+        display: block;
+    }
+.new-css-acronym {
+    font-weight: 500;
+    text-decoration: none !important;
+    font-size: 32px;
+}
+
+    .new-css-lg-header {
+        display: none;
+    }
+}
+
+.new-css-header {
+    height: 80px;
+}
+
+
+.new-css-dropdown-menu {
+    font-size: 1.5rem !important;
+}
+.new-css-navbar-sm{
+    position: relative;
+    display: block!important;
+    flex-wrap:nowrap!important;
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    margin-bottom: 0!important;;
+}
+ .new-css-navbar-toggler{
+    position:relative;
+    top:-8px;
+    margin-right:5px!important;
+}
+
+
+/* FOOTER */
+.new-css-footer-bch {
+    padding: 20px 0;
+    background-color: #00405C;
+    color: #FFF;
+}
+.new-css-footer-absch {
+    padding: 20px 0;
+    background-color: #00405C;
+    color: #FFF;
+}
+
+
+/* HOMEPAGE */
+.new-css-home-section-top-bch {
+    background-color: plum;
+}
+.new-css-home-section-top-absch {
+    background-color: firebrick;
+}
+.new-css-home-section-map {
+    background-color: firebrick;
+}
+.new-css-home-section {
+    background-color: #fff;
+}
+.new-css-card-footer {
+    background-color: #00405C !important;
+}
+.new-css-card-footer>a {
+    color: #FFF !important;
+}
+.new-css-home-btn-map {
+    font-size: 4rem !important;
+    background-color: #00405C !important;
+    color: #FFF !important;
+}
+#new-css-map {
+    height: 100%;
+    width: 100%;
+}
+#new-css-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.new-css-home-map-wrapper {
+    position: relative;
+}
+.new-css-home-map-controls {
+    background-color: #EEE !important;
+}
+.new-css-callout {
+    padding: 1.25rem !important;
+    margin: 1.25rem !important;
+    border: 1px solid #e9ecef !important;
+    border-left-width: .25rem !important;
+    border-radius: .25rem !important;
+    background-color: #FFF !important;
+}
+.new-css-callout-reference {
+    border-left-color: #fa6938 !important;
+}
+.new-css-callout-national {
+    border-left-color: #428BCA !important;
+}
