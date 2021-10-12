@@ -85,13 +85,14 @@
 
 /* HOMEPAGE */
 .new-css-home-section-top-bch {
-    background-color: plum;
+    background-color: #00405C;
 }
 .new-css-home-section-top-absch {
     background-color: firebrick;
 }
 .new-css-home-section-map {
-    background-color: firebrick;
+    /* background-color: #E1F0F5; */
+    background-color: #fff;
 }
 .new-css-home-section {
     background-color: #fff;
@@ -120,7 +121,7 @@
     position: relative;
 }
 .new-css-home-map-controls {
-    background-color: #EEE !important;
+    /* background-color: #EEE !important; */
 }
 .new-css-callout {
     padding: 1.25rem !important;
@@ -136,3 +137,7 @@
 .new-css-callout-national {
     border-left-color: #428BCA !important;
 }
+
+.new-css-bg-party{background-color:#00405C;}
+.new-css-bg-nonparty{background-color:#636363; }
+.new-css-bg-inbetween{background-color:#EC971F;}
