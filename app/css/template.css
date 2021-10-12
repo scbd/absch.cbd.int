@@ -763,7 +763,7 @@ footer .logo {
 @media (max-width: 768px) {
     .page-content {
         background-color: #eee;
-        padding: 10px 0 0 0;
+        /* padding: 10px 0 0 0; */
     }
     .default-result-page .title.bold.truncate-mobile-title , #result-grouped-national-record .title.bold.truncate-mobile-title{
         display: -webkit-box !important;
@@ -2426,7 +2426,7 @@ padding-right: 23%;
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    /* padding: 15px; */
 }
 
 #wrapper.toggled #page-content-wrapper {
