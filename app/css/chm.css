@@ -12,7 +12,7 @@
 .uppercase{text-transform: uppercase;}
 
 .navlist {margin:0;padding:0; display: inline;}
-.navlist li
+/* .navlist li
 {
     display: inline;
     list-style-type: none;
@@ -23,7 +23,7 @@
 .navbar-nav a:hover {color:#000!important;}
 .navbar-brand{margin:0!important;padding:0!important;color:white!important;}
 .navbar-nav li
-{padding:0 10px;}
+{padding:0 10px;} */
 
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus
 {

@@ -1,84 +1,69 @@
-<div  id="pageHeader">
-
-    <div class="header">
-    
-        <!-- Small screen header -->
-        <div ng-if="deviceSize=='xs'" class="small-header">
-            <a class="color-orange acronym" role="button" data-toggle="collapse" href="#collapseSmallNavMenu"
-                aria-expanded="false" aria-controls="collapseSmallNavMenu">
-                <i class="fa fa-bars color-black"></i> Biosafety Clearing-House
-            </a>
-            <div class="collapse" id="collapseSmallNavMenu">
-                <div class="small-nav">
-                    <ul>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url href=".">Home</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/kb" >Help</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/search" >Search</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/register" >Submit</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/countries" >Country Profiles</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/onlineconferences" >Forums</a></li>
-                    </ul>
-                </div>
+<div class="bs5 bg-white ">
+    <header class="bs5 new-css-sm-header px-3">
+        <nav class="bs5 navbar new-css-navbar-sm navbar-light bg-light rounded" >
+            <div ng-click="showNav = !showNav"  style="cursor: pointer;" >
+                <button class="bs5 navbar-toggler new-css-navbar-toggler collapsed" type="button" >
+                    <span class="bs5 navbar-toggler-icon"></span>
+                </button>   
+                <span class="bs5 new-css-acronym fw-bold color-orange "> BCH  </span> 
+                <span class="bs5 fw-bold  fs-4 text-uppercase link-dark">Biosafety Clearing-House</span>
             </div>
-        </div>
-    
-        <!-- Normal screen header -->
-        <div class="hidden-xs normal-header">
-            <img src="/app/img/cbd-green-spine.png" class="spine-logo">
-            <a href="." class="acronym"><span class="color-orange">BCH</span></a>
-            <a href="." class="ch-name"><span class="color-grey" ng-if="!development_env && !training_env"> Biosafety Clearing-House</span></a>
-            <span class="color-pink ch-name" ng-if="development_env"> DEVELOPMENT</span>
             
-            <!-- <img src="/app/img/cbd-logo-black-en.svg" style="height:60px;position: absolute;top:0px;right:20px;" class="pull-right ch-logo hidden-sm" ng-class="{'arabic-cbd-logo-style' : locale=='ar'}"> -->
+              <div ng-if="showNav" class="bs5 navbar-collapse">
+                <ul class="bs5 navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+                </ul>
+              </div>
+          </nav>
+    </header>
 
+    <header class="bs5 new-css-header pt-4 new-css-lg-header">
+        <div class="bs5">
+            <a href="." class="bs5 new-css-acronym color-orange mx-3 mx-md-3 px-md-3 px-lg-5">
+                BCH
+                <span class="bs5 new-css-ch-name">Biosafety Clearing-House</span>
+            </a>
         </div>
-    
-        <div class="hidden-xs normal-nav" style="width:100%;">
-            <ul class="nav nav-pills" >
-                <li><a rel="noopener" class="nav-link" translation-url href=".">HOME</a></li>
-                <li><a rel="noopener" class="nav-link" translation-url href=".">ABOUT</a></li>
+    </header>
 
-                <li hover-effect=".dropdown-menu">
-                    <a rel="noopener" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-haspopup="true" aria-expanded="false">Search <span class="fa fa-caret-down"></span></a>
-                    <ul class="search dropdown-menu" style="border:0;margin-top:0;">
-                        <li><a rel="noopener" translation-url ng-href="search"> Search </a></li>
-                        <li> <a rel="noopener" translation-url ng-href="/registries">Registries</a></li>
-                        <li><a rel="noopener" translation-url href="reports" class="nav-link">National Report Analyzer</a></li>
+    <nav class="bs5 border-bottom mt-2 new-css-lg-header">
+        <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
+            <ul class="bs5 nav me-auto mx-2">
+                <li class="bs5 nav-item"><a href="." class="bs5 new-css-main-nav-link nav-link link-dark  px-2 px-md-4 active"
+                        aria-current="page">
+                        <span class="hidden-sm hidden-xs">Home</span> 
+                        <span class="hidden-md hidden-lg"> <i class="fa fa-home"></i> </span> 
+                    </a></li>
+                <li class="bs5 nav-item"><a href="/about"
+                        class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a></li>
+                <li class="bs5 nav-item dropdown">
+                    <a href="/search" class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
+                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                        aria-expanded="false">search</a>
+                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
+                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
+                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
-
-                <li><a rel="noopener" translation-url ng-href="register" class="nav-link">Submit</a></li>
-                <li hover-effect=".dropdown-menu" class="country-dropdown" >
-                    <a id="countryProfile" rel="noopener" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-haspopup="true" aria-expanded="false">
-                        <span class="visible-sm">Countries <i class="fa fa-caret-down"></i></span><span
-                            class="hidden-sm">Country Profiles <i class="fa fa-caret-down"></i></span> </a>
-    
-                    <ul class="dropdown-menu" style="border:0;margin-top:0;">
-                        <li style="border-bottom: 1px solid #eee;"> <a rel="noopener"
-                                style="color:#111!important;font-size:16px;" translation-url
-                                ng-href="/countries"> Overview - List all
-                                countries </a></li>
-                        <li style="padding:5px;border-bottom: 1px solid #eee;">
-                            <input type="text" class="form-control" ng-click="countrySearch($event)"
-                                ng-model="countrySearchQuery" />
-                        </li>
-                        <li>
-                            <ul class="country-list-dd" style="padding-left: 10px;max-height:340px;overflow-y:scroll; ">
-                                <li style="border:0!important;"
-                                    ng-repeat="c in countries | filter:startsWith track by c.code">
-                                    <a rel="noopener" translation-url style="color:#666!important;font-size:14px;"
-                                        ng-href="/countries/{{::c.code|encodeURIComponent}}">
-                                        <span class="bold"
-                                            ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
-                                            {{::c.name | lstring:locale}}
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
+                <li class="bs5 nav-item"><a href="/register"
+                        class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">submit</a></li>
+                <li class="bs5 nav-item dropdown">
+                    <a href="countries" class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
+                        type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="hidden-sm hidden-xs">country profiles</span> 
+                        <span class="hidden-md hidden-lg"> countries </span></a>
+                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
+                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
+                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
                     </ul>
                 </li>
 
@@ -99,20 +84,24 @@
                         </li>
                     </ul>
                 </li>
+                <li class="bs5 nav-item"><a href="/forums"
+                        class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">forums</a></li>
+            </ul>
+            <ul class="bs5 nav">
+                <li class="bs5 nav-item dropdown">
+                    <a href="." class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle" type="button"
+                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span class="hidden-sm hidden-xs">Cartagena Protocol</span> 
+                        <span class="hidden-md hidden-lg"> Protocol </span> 
+                    </a>
 
-                <li>
-                    <a rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/"
-                        class="nav-link">Forums</a>
+                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton4">
+                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
+                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
+                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
+                    </ul>
                 </li>
-
-                <li class="pull-right">
-                    <a rel="noopener" translation-url href="http://bch.cbd.int/protocol" class="nav-link">CARTAGENA PROTOCOL</a>
-                </li>
-    
             </ul>
         </div>
-    </div>
-    
-    <breadcrumbs></breadcrumbs>
-    
+    </nav>
 </div>
