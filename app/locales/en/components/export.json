@@ -22,9 +22,11 @@
     "download":"Download",
     "emailError" : "Please enter a valid email(s)",
     "domainError" : "Please enter a domain name",
-    "embed" : "Embed",
-    "send" : "Send"
-    
-    
-    
+    "embed" : "EMBED",
+    "send" : "Send",
+    "share" : "Share",
+    "link" : "LINK",
+    "email" :"EMAIL",
+    "domain" : "Domain",
+    "copyCode" : "Copy code"
 }
