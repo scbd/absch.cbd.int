@@ -2,9 +2,9 @@
 
 
     <div ng-if="currentCountry.code" class="bs5 p-2 color-white text-start" ng-class="{' new-css-bg-party': currentCountry.isParty, ' new-css-bg-nonparty':!currentCountry.isParty, ' new-css-bg-inbetween': currentCountry.isInbetweenParty}">
-            <span class="fw-bold" ng-if="currentCountry.isParty">Party to the Biosafety Protocol</span>
+            <span class="fw-bold" ng-if="currentCountry.isParty">Party to the Cartagena Protocol</span>
             <span class="fw-bold" ng-if="currentCountry.isInbetweenParty">Ratified, not yet Party</span>
-            <span class="fw-bold" ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty">Not a Party to the Biosafety Protocol</span>
+            <span class="fw-bold" ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty">Not a Party to the Cartagena Protocol</span>
 
         <span class="mt-2" ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
                 countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
