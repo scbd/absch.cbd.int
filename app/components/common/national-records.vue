@@ -14,11 +14,14 @@
     <div class="bs5 col" v-for="record in nationalRecords">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
-        <h4>{{record.rec_title}}</h4>
+        <h4><a :href="record.url_ss" class="bs5 text-dark text-decoration-none stretched-link">{{record.rec_title}}</a></h4>
         <p v-if="record.rec_summary">{{record.rec_summary}}</p>
-        <span class="bs5 badge bg-light text-dark new-css-rectype-national">{{record.rec_countryName}}</span>
-        <span class="bs5 badge bg-light text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
-        <span class="bs5 badge bg-light text-dark new-css-rectype-national">{{record.schema_s}}</span>
+        
+        <div style="position:absolute;bottom:5px;">
+          <span class="bs5 badge text-uppercase new-css-bg-national new-css-rectype-national">{{record.schema_s}}</span>
+          <span class="bs5 badge text-dark new-css-rectype-national"><i class="bs5 pe-1 flag-icon" v-bind:class="'flag-icon-'+record.government_s"></i> {{record.rec_countryName}}</span>
+          <span class="bs5 text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
+        </div>
       </div>
     </div>
   </div>
