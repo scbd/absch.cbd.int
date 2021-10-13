@@ -87,7 +87,7 @@ function onReady(callbackFunc) {
 function registerIframeCommunication(iframe, data){
     if(!iframeCommunicationReceived){
         setTimeout(function(){
-            iframe.contentWindow.postMessage(JSON.stringify(data), '*');//'http://absch-widget.cbddev.xyz:2010');  
+            iframe.contentWindow.postMessage(JSON.stringify(data), '*');//'http://absch-widget.cbddev.xyz:2010');
             registerIframeCommunication(iframe, data)          
         }, 2000);
     }

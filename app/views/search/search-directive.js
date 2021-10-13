@@ -1023,8 +1023,48 @@ import 'angular-vue'
                     }
 
                     function getSearchQuery() {
-                        return buildSearchQuery();
+                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+                      var signIn = $scope.$on('signIn', function (evt, data) {
+                        $scope.addEdit();
+                        signIn();
+                      });
+                      $('#loginDialog').modal("show");
+                    } else {
+                      $scope.loading = true;
+                      let shareDoc = {};
+                      shareDoc.isSystemAlert = false;
+                      //ToDo: will update as per API accepted format
+                      //TODO: move it to commonjs
+                      let userAlertSearchFilter = $scope.getLeftSubFilters();
+                      let leftFilterQuery = {}
+                      _.forEach( userAlertSearchFilter, function ( filters, key ) {
+                        console.log( key, filters )
+                        _.forEach( filters, function ( filter ) {
+                          if ( !_.isEmpty( filter.selectedItems ) ) {
+                            leftFilterQuery[key] = leftFilterQuery[key] || [];
+                            const { field, relatedField, searchRelated, term, title, type } = filter
+                            leftFilterQuery[key].push( {
+                              field,
+                              relatedField,
+                              searchRelated,
+                              selectedItems : filter.selectedItems,
+                              term,
+                              title,
+                              type
+                            } );
+                          }
+                        } );
+                      } );
+                      shareDoc.filters = _.values( $scope.setFilters );
+                      shareDoc.subFilters = leftFilterQuery; // pass only selected sub-filters query
+                      shareDoc.realm = realm.value;
+                      shareDoc.queryTitle = "SHARE DOCS";
+                      IGenericService.create( 'v2016', 'me/subscriptions', shareDoc )
+                      .then( function ( data ) {
+                        return data.id
+                      } );
                     }
+                  };
 
                     function buildSearchQuery(){
                         var tagQueries          = {};
