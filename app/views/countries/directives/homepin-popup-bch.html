@@ -46,7 +46,7 @@
                 <span ng-bind="schema.title | lstring:locale"></span>
             </a>
 
-            <span class="bs5 badge ms-2"  ng-bind="schema.count"></span>
+            <span class="bs5 badge ms-2"  ng-class="{'bg-gray-300' : schema.count==0}" ng-bind="schema.count"></span>
 
 
           
