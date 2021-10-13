@@ -71,6 +71,13 @@ export default class ArticlesApi
     return tags
   }
 
+  async getRecords(params){
+
+    const tags = await this.http.post(`api/v2013/index/select`, params).then(res => res.data).catch(tryCastToApiError);
+
+    return tags
+  }
+
 }
 
 async function loadAsyncHeaders(baseConfig) {
