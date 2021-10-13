@@ -233,10 +233,9 @@
                         <span ng-if="item.type=='antisense'"     >transcription element</span>
                         <span ng-if="item.type=='antisenseStop'" >transcription stop</span>
                     </div>
-                    <div>                            
-                            <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="contacts" caption="(sense)" type="radio"
-                                schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)" skip-government="true" 
-                                allow-new="true" allow-new-schema="dnaSequence">
+
+                         <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="dnaSequence" caption="(sense)" type="radio"
+                                on-build-query="onDnaSequenceQuery(searchText)" filter="true" ng-change="geneSelected(item)" allow-new="true" allow-new-schema="dnaSequence">
                                 <select-records>
                                     <a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">select gene</a>
                                     <a rel="noopener" ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a>

@@ -34,7 +34,7 @@ app.directive("viewBiosafetyLaw", [function () {
 			$scope.onSubjectAreasTerms = function(terms){
 				if(($scope.document||{}).cpbSubjectAreas){
 					_.forEach(terms, function(item){
-						if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+						if((item.broaderTerms.length == 0 || item.broaderTerms == []) && item.identifier !="5B6177DD-5E5E-434E-8CB7-D63D67D5EBED"){
 							var root =_.find($scope.document.cpbSubjectAreas, {identifier: item.identifier});
 							terms = removeTerms(terms, root, item.identifier);
 						}
