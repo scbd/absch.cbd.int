@@ -137,7 +137,7 @@
             </div>
         </div>
         <div ng-if="shareVueComponent" ng-class="{'hidden':isEmbed}" class="share-single-document full-text-display pull-right compare-buttons">
-            <share-record ng-vue="shareVueComponent" :get-query="getQuery"></share-record>
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader"></share-record>
         </div>
         <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
             <div record-options></div>

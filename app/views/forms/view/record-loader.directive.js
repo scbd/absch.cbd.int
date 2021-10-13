@@ -24,9 +24,9 @@ import shareRecord from '~/components/common/share-record.vue';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$routeParams',
+	"$filter", "$http", "apiToken", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$routeParams',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		$http, $httpAWS, realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $routeParams ) {
+		$http, apiToken, realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $routeParams ) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -42,6 +42,8 @@ import shareRecord from '~/components/common/share-record.vue';
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
+
+				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_new';

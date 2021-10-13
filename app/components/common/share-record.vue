@@ -89,7 +89,7 @@
 
     export default {
         components : {Modal},
-        props:['getQuery'],
+        props:['getQuery', 'tokenReader'],
         data:  () => {
             return {
                 loading        : false,
@@ -106,7 +106,9 @@
             }
         },
         created(){
-            this.ArticleApi = new ArticleApi();
+            console.log(this.tokenReader);
+            this.ArticleApi = new ArticleApi(this.tokenReader);
+            console.log(this.ArticleApi);
         },
         async mounted() {
         },
