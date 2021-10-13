@@ -77,7 +77,7 @@ import shareRecord from '~/components/common/share-record.vue';
 					}
 
 					$scope.getQuery = function(){
-						let query = [$scope.loaderSchema,$scope.loaderID];
+						let query = $scope.internalDocument.info;
 						const type = "document";
 						return {type, query}
 					}
@@ -151,7 +151,6 @@ import shareRecord from '~/components/common/share-record.vue';
 
 							$scope.load(documentID, documentRevision);
 						}
-						$scope.loaderID = documentID;
 						$scope.loaderSchema = $filter("urlSchemaShortName")(documentSchema);
 					};
 
@@ -196,7 +195,7 @@ import shareRecord from '~/components/common/share-record.vue';
 							$scope.internalDocument = results[0];
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
-							
+
 							if (version)
 								$scope.revisionNo = version
 

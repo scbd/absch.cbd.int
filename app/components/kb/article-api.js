@@ -52,6 +52,9 @@ export default class ArticlesApi
     return this.http.get(`api/v2017/articles`, { params }).then(res => res.data).catch(tryCastToApiError);
   }
 
+  async shareData(params)  {
+    return this.http.post(`api/v2018/document-sharing`,params).then(res => res.data).catch(tryCastToApiError);
+  }
   async getArticleById(id)  {
 
     return this.http.get(`api/v2017/articles/${id}`).then(res => res.data).catch(tryCastToApiError);

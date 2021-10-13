@@ -129,14 +129,14 @@ import shareRecord from '~/components/common/share-record.vue';
                     components:{tableExport}
                 }
 
-                $scope.shareVueComponent = {
-                    components:{shareRecord}
-                }
-
                 $scope.getQuery = function(){
                     const query = searchDirectiveCtrl.getSearchQuery();
                     const type = "searchResults"
                     return {type, query}
+                }
+
+                $scope.shareVueComponent = {
+                    components:{shareRecord}
                 }
 
                 $scope.getDownloadRecords = function(options){                        
