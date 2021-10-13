@@ -13,6 +13,13 @@ export function formatMomentDate(datetime, method, arg1, arg2, arg3) {
         return moment.utc(datetime)[method](arg1, arg2, arg3);    
 }
 
+export function formatDateOnly(datetime, format) {
+  if (format === undefined)
+    format = 'DD MMM YYYY';
+
+  return formatMomentDate(datetime, 'format',format);
+}
+
 
 Vue.filter('formatDate'         , formatDate);
 Vue.filter('capitalize'         , val=>val.toUpperCase());
