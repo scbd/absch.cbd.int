@@ -141,3 +141,33 @@
 .new-css-bg-party{background-color:#00405C;}
 .new-css-bg-nonparty{background-color:#636363; }
 .new-css-bg-inbetween{background-color:#EC971F;}
+
+.new-css-nav-country-profiles {
+    padding-left: 10px;
+    max-height:340px;
+    min-width:240px;
+    overflow-y:scroll;
+}
+
+.new-css-nav-country-profiles-search {
+    padding:5px;
+    border-bottom: 1px solid #eee;
+}
+.new-css-nav-country-profiles-footer {
+    background-color: #00405C;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: auto;
+    width: 100%;
+    position: absolute;
+    padding: 1.5%;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5px;
+    border-top: none;
+    text-align: center;
+    font-size:16px;
+}
+.new-css-nav-country-profiles-footer a{
+    color:#fff !important;
+}
