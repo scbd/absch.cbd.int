@@ -313,7 +313,9 @@ import 'angular-vue'
 
 
                     }
-
+                    if($routeParams.openTour){
+                        $scope.tour();
+                    }
                     function savedFilters(doc,subFilters){
                         if(!subFilters && $scope.isAlertSubFilter) return;
 
