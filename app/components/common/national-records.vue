@@ -18,9 +18,9 @@
         <p v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div style="position:absolute;bottom:5px;">
-          <span class="bs5 badge text-uppercase new-css-bg-national new-css-rectype-national">{{record.schema_s}}</span>
-          <span class="bs5 badge text-dark new-css-rectype-national"><i class="bs5 pe-1 flag-icon" v-bind:class="'flag-icon-'+record.government_s"></i> {{record.rec_countryName}}</span>
-          <span class="bs5 text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
+          <span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_s}}</span>
+          <span class="bs5 badge bg-light text-dark new-css-rectype-national"><i class="bs5 pe-1 flag-icon" v-bind:class="'flag-icon-'+record.government_s"></i> {{record.rec_countryName}}</span>
+          <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
     </div>

@@ -17,11 +17,11 @@
         <h4> <a :href="record.url_ss" class="bs5 text-dark text-decoration-none stretched-link stretched-link" >{{record.rec_title}}</a></h4>
         <p v-if="record.rec_summary">{{record.rec_summary}}</p>
         <div style="position:absolute;bottom:5px;">
-        <span class="bs5 badge text-uppercase new-css-bg-reference new-css-rectype-reference">{{record.schema_s}}</span>
-        <span class="bs5 text-uppercase badge text-dark new-css-rectype-reference">{{record.uniqueIdentifier_s}}</span>
-        <span class="bs5 badge text-dark new-css-rectype-reference" v-if="record.rec_meta1">{{record.rec_meta1[0]}}</span>
-        <span class="bs5 badge text-dark new-css-rectype-reference" v-if="record.rec_meta2">{{record.rec_meta2[0]}}</span>
-        <span class="bs5 badge text-dark new-css-rectype-reference" v-if="record.rec_meta3">{{record.rec_meta3[0]}}</span>
+        <span class="bs5 badge text-uppercase bg-light new-css-text-reference new-css-rectype-reference">{{record.schema_s}}</span>
+        <span class="bs5 text-uppercase badge bg-light text-dark new-css-rectype-reference">{{record.uniqueIdentifier_s}}</span>
+        <span class="bs5 badge text-dark bg-light  new-css-rectype-reference" v-if="record.rec_meta1">{{record.rec_meta1[0]}}</span>
+        <span class="bs5 badge text-dark bg-light  new-css-rectype-reference" v-if="record.rec_meta2">{{record.rec_meta2[0]}}</span>
+        <span class="bs5 badge text-dark bg-light new-css-rectype-reference" v-if="record.rec_meta3">{{record.rec_meta3[0]}}</span>
         </div>
       </div>
     </div>
