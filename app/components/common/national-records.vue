@@ -27,8 +27,8 @@
   </div>
 
   <div class="bs5 text-end mt-4">
-    <a class="bs5 nav-link fs-4 text-muted text-uppercase" href="" @click="seeMore()">See more <i
-      class="fa fa-arrow-right"></i> </a>
+    <a class="bs5 nav-link fs-4 text-muted text-uppercase cursor-pointer"  @click="seeMore()">See more 
+      <i class="fa fa-arrow-right"></i> </a>
   </div>
 </div>
 </template>
@@ -93,7 +93,7 @@
           this.loading = false;
       },
       seeMore(){
-        window.location.href= `/${this.$locale}/search?/currentPage=1&tab=${encodeURIComponent('nationalRecords')}&group=${encodeURIComponent('government')}&group=${encodeURIComponent('schema')}`;
+          this.$router.push({path: '/search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
       },
   },
 		i18n: { messages:{ en: i18n }} 
