@@ -33,7 +33,7 @@ app.directive('loginAccount', [function() {
                     .then(function(user){
                           
                           $scope.user=user;
-                          $timeout(function(){$('#loginDialog').modal('hide');});
+                          $timeout(function () { $("#loginDialog .close").trigger('click')});
                           if($scope.sessionExpiredAlert){
                             $scope.sessionExpiredAlert = false;
                             $rootScope.$broadcast('event:sessionExpired-signIn', user);
