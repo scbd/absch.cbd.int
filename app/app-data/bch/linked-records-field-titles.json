@@ -46,7 +46,6 @@
 	"modifiedOrganism.recipientOrganisms":"Recipient Organism” or “Parental Organisms",
 	"modifiedOrganism.genes":"Introduced or modified genetic element(s)",
 	"modifiedOrganism.affectedGenes":"Other gene(s) whose expression was affected by the transformation",
-	"modifiedOrganism.geneConstructs":"Genetic elements construct",
 
 	"dnaSequence.donorOrganisms":"Donor organism(s)",
 

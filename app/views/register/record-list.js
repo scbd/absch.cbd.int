@@ -30,10 +30,15 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                     pageCount  : 0,
                     rowsPerPage: 25
                 }
-	            $scope.orderBy = ['-updatedOn'];
+	             $scope.orderBy = ['-updatedOn'];
+	             if($scope.listResult.currentPage == 1){
+		             $scope.orderBy = ['workflowActivityStatus'];
+	             } else {
+		             $scope.orderBy = ['-updatedOn'];
+	             }
                 $scope.isDraftRecord = false;
                 $scope.statusType = 'allRecords';
-                //ToDo: if get counts from the backend
+                // //ToDo: if get counts from the backend
                 $scope.listCount = {
                     publish  : 0,
                     request: 0,
