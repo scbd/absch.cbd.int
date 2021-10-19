@@ -2,10 +2,10 @@
 
   <a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap pull-right color-cbdlitegrey" id="btnSignIn" data-slug="signin"
    data-toggle="modal" data-target="#loginDialog" data-keyboard="false" data-backdrop="false">
-   <i  class="fa fa-power-off"></i> <strong>SIGN IN </strong>
+   <i  class="fa fa-user"></i> <strong>SIGN IN </strong>
   </a>
   <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown">
-    <span class="text-nowrap color-cbdlitegrey"><i class="fa fa-chevron-down"></i> <span ng-bind="user.name"></span></span>
+    <span class="text-nowrap color-cbdlitegrey"><i class="fa fa-user"></i> <span ng-bind="user.name"></span></span>
   </a>
   <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-md hidden-lg" href="#" data-toggle="dropdown" id="dropdownMenu1">
     <span class="hidden-md hidden-lg color-cbdlitegrey user-logged-in">
