@@ -46,7 +46,7 @@
 #CBD-Branding .container-cbd {
   /*background-color: #009b48!important;*/
   /*color:white;*/
-  /* color: #bdbdbd; */
+  color: #bdbdbd;
   min-height: 26px;
  
   list-style-type: none;
@@ -162,9 +162,6 @@
 .navbar-header .left-part{
   float: left;
   padding-top: 5px;
-  color: #009B48;
-  font-size: 20px;
-  font-family: Nunito;
 }
 .navbar-header .left-part-mob{
   float: left;
