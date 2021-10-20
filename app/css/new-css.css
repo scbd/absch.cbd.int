@@ -171,8 +171,10 @@
 .new-css-nav-country-profiles {
     padding-left: 10px;
     max-height:340px;
-    min-width:240px;
+    width:280px;
     overflow-y:scroll;
+    overflow-x: hidden;
+    list-style-type: none;
 }
 
 .new-css-nav-country-profiles-search {
@@ -196,6 +198,7 @@
 }
 .new-css-nav-country-profiles-footer a{
     color:#fff !important;
+    text-decoration: none;
 }
 .cursor-pointer {cursor: pointer;}
 
