@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar">
+    <div class="side-bar">
         <div class="widget fix widget_categories mt-2 right-side-articles">
             <span class="icon icon-folder"></span>
             <h4>{{ $t("relevantArticles") }}</h4>
