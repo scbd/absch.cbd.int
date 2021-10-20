@@ -6,7 +6,7 @@
                 <latest-faqs></latest-faqs>
                 <getting-help></getting-help>
                 </div>
-                <popular-tags></popular-tags>
+                  <popular-tags is-categories="true"></popular-tags>
         </div>
     </div>
 </template>

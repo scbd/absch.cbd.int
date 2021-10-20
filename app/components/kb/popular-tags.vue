@@ -1,5 +1,5 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles">
+    <div class="widget fix widget_categories mt-2 right-side-articles" v-bind:class="{ 'side-popular-tags': !isCategories }">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <h4>{{ $t("popularTags") }}</h4>
 				<hr>
@@ -17,6 +17,7 @@
 	export default {
     name:'kbpopularTags',
 		props:{
+			isCategories:Boolean
 		},
 		data:  () => {
 			return {

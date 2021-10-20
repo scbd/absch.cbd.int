@@ -1,8 +1,7 @@
 <template>
 <div>
      <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
-
+   
     <div class="knowledge-base">
         <auto-complete-search></auto-complete-search>
         <section class="categories">

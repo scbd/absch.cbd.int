@@ -77,7 +77,7 @@
 .categories header {
 	position: relative;
 }
-.knowledge-base .side-bar{
+.knowledge-base .side-bar, .right-side-articles.side-popular-tags{
 	margin-left: 20px;
 }
 .categories .side-bar .getting-help{
@@ -212,7 +212,7 @@
 	padding: 0;
 }
 .knowledge-base .categories-list .cate-list-ul {
-	margin: -10px 0 -10px 0;
+	margin: -10px 0 0 0;
 	padding: 0;
 }
 .knowledge-base .categories-list .cate-list-ul:nth-child(6) {
@@ -268,9 +268,6 @@
 	color: #000;
 }
 
-.knowledge-base .mt-2.right-side-articles{
-	margin-top: 2rem
-}
 .knowledge-base .tagcloud{
 	margin-top: 3px;
 	display: inline-block;
@@ -442,7 +439,7 @@
 		top: 98px;
 	}
 }
-/*  */
+
 .knowledge-base h2.title-heading {
 	font-size: 24px;
 	text-overflow: ellipsis;
@@ -489,7 +486,6 @@
 	border: 1px solid #e6ecf5 !important;
 }
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li:hover .article-title,.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li>i{
-	/* color: #e01865!important; */
 	font-size: 22px;
 }
 
