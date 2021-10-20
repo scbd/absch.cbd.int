@@ -1,15 +1,17 @@
 <template>
     <div class="col-lg-8">
         <header>
-            <h2><i class="fa fa-file-text-o"></i>&nbsp;{{ $t("exploreTopics") }}</h2>
-            <p>{{ $t("exploreParagraph") }}.</p>
+            <p>The {{$realm.chShortName+ " "}}{{ $t("knowledgeBase") }} is an online tool to help users learn about the BCH, learn how to submit records, how to search for information and complete important tasks related to the BCH.</p>
+
+						<p>In these sections you will find answers to your questions categorized into different topics:.</p>
         </header>
         <div class="row match-height">
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
             <div v-if="!loading">
-                <div class="col-md-6 col-sm-12 " v-for="category in KbCategories">
+                <div v-if="category.count>0" class="col-md-12 col-sm-12 " v-for="category in KbCategories">
                     <div class="categories-list widget_categories tag-count">
-                        <h3><span class="badge">{{category.count}}</span>
+                        <h3>
+													<!-- <span class="badge">{{category.count}}</span> -->
                             <a href="#" @click="goToTag(category)">{{category.title}}</a>
                             <a style="display:none" :href="`${tagUrl(category)}`">{{category.title}}</a>
                         </h3>
@@ -20,7 +22,7 @@
                             </li>
                         </ul>
                         <a style="display:none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
-                        <a class="view-more" v-if="category.count>5" href="#" @click="goToTag(category)">{{ $t("viewMore") }}</a>
+                        <a class="view-more" v-if="category.count>6" href="#" @click="goToTag(category)">+  {{ $t("viewMore") }}</a>
                     </div>
                 </div>
             </div>
@@ -78,7 +80,7 @@
 					};
 					const f = { [`title.${this.$locale}`]:1,"adminTags":1, _id:1} ;
 					const groupTags = JSON.stringify(adminTags.map(e=>encodeURIComponent(e)));
-					const groupLimit = 5;
+					const groupLimit = 6;
 					const groupSort  = { "meta.modifiedOn":-1 };
 					
 					const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags });

@@ -7,7 +7,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            <h1>{{ $t("knowledgeBase") }}</h1>
+                            <h1>{{$realm.chShortName+ " "}}{{ $t("knowledgeBase") }}</h1>
                             <form>
                                 <input type="text" class="search-field" placeholder="Search Something ... ">
                                 <button type="submit"><i class="fa fa-search"></i></button>

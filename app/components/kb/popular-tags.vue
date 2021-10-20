@@ -1,8 +1,8 @@
 <template>
     <div class="widget fix widget_categories mt-2 right-side-articles">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-        <span class="icon icon-folder"></span>
         <h4>{{ $t("popularTags") }}</h4>
+				<hr>
         <div class="tag-scroll" v-if="!loading">
             <div class="tagcloud" v-for="tag in tags">
                 <a href="#" class="btn btn-mini" @click="goToTag(tag.adminTags[0])">{{tag.title}}</a>
