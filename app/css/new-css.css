@@ -209,3 +209,26 @@ body.modal-open .modal-backdrop.show{
 body.modal-open .modal-backdrop.fade.show{
     opacity: 0;
 } 
+
+.new-css-boxes-icons{
+    align-self: flex-start;
+}
+
+.new-card{
+    width: 100%;
+}
+
+.new-display-flex{
+    display: flex;
+}
+
+.new-explore-btn{
+    background: #00405C;
+    border-radius: 8px;
+
+    text-transform: uppercase;
+}
+
+.new-color-red{
+    color:#DA3B01;
+}
