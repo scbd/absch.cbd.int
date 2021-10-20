@@ -104,7 +104,7 @@
 	color: #43484d;
 }
 .knowledge-base .categories .categerios-parahraph{
-	font-family: "Nunito", sans-serif;
+	font-family: "roboto", sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 16px;
@@ -263,7 +263,7 @@
 }
 
 .knowledge-base .widget_categories li a {
-	font-family: Nunito;
+	font-family: "Roboto", sans-serif;
 	font-style: normal;
 	font-weight: normal;
 	font-size: 16px;
