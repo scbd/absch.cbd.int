@@ -205,6 +205,12 @@
     color:#fff !important;
     text-decoration: none;
 }
+
+.dropdown-menu> li.new-css-nav-country-profiles-footer> a:hover {
+    color:#fff !important;
+    text-decoration: underline;
+    background-color: transparent;
+}
 .cursor-pointer {cursor: pointer;}
 
 body.modal-open .modal-backdrop.show{
@@ -236,4 +242,55 @@ body.modal-open .modal-backdrop.fade.show{
 
 .new-color-red{
     color:#DA3B01;
+}
+.new-css-nav-country-profiles .dropdown-item {
+    white-space: inherit;
+} 
+.map-country-list {
+    width: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    float: right;
+}
+
+.map-country-list .display-6{
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 27px;
+    color: #485466;
+}
+.map-country-list .justify-content-between{
+    justify-content: flex-start !important
+}
+.map-country-list li.list-group-item-action .badge {
+    min-width: 50px;
+    background: #00405C;
+    border-radius: 4px;
+    margin-left: 0.5rem !important;
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 72%;
+    text-align: center;
+    color: #FFFFFF;
+}
+.map-country-list li.list-group-item-action a{
+    font-family: Nunito;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 100%;
+    color: #4F4F4F;
+    margin-left: 8px;
+}
+.map-country-list .list-group{
+    border-radius: 8px;
+}
+.map-country-list .list-group .list-group-item:first-child{
+    padding-top: 10px;
+}
+.map-country-list .list-group .list-group-item:last-child{
+    padding-bottom: 180px;
 }
