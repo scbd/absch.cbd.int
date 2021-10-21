@@ -46,11 +46,18 @@
                 <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
                     <a rel="noopener" translation-url href="#" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
                         type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">search</a>
+                        aria-expanded="false">records</a>
                     <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item" href="search"> Search </a></li>
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item" href="/registries">Registries</a></li>
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item" href="reports">National Report Analyzer</a></li>
+                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="search"> Search </a></li>
+                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="#">Registries</a>
+                            <ul>
+                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/living-modified-organisms">LMO</a></li>
+                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/organisms">ORGANISMS</a></li>
+                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/genetic-elements">GENE</a></li>
+                                
+                            </ul>
+                        </li>
+                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="reports">National Report Analyzer</a></li>
                     </ul>
                 </li>
                 <li class="bs5 nav-item"><a rel="noopener" translation-url href="/register"
@@ -73,7 +80,7 @@
                         <li>
                             <ul class="new-css-nav-country-profiles">
                                 <li ng-repeat="c in countries | filter:startsWith track by c.code">
-                                    <a rel="noopener" translation-url  class="bs5 dropdown-item" ng-href="/countries/{{::c.code|encodeURIComponent}}">
+                                    <a rel="noopener" translation-url  class="bs5 dropdown-item text-uppercase" ng-href="/countries/{{::c.code|encodeURIComponent}}">
                                         <span class="bold"
                                             ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
                                             {{::c.name | lstring:locale}}
@@ -91,9 +98,12 @@
                     <a href="/kb" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
                         type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
                     <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="bs5 dropdown-item" rel="noopener" translation-url href="/kb">Knowledge Base</a></li>
-                        <li><a class="bs5 dropdown-item" rel="noopener" translation-url href="/kb/faqs">FAQs</a></li>
-                        <li><a class="bs5 dropdown-item" rel="noopener" translation-url href="/kb/articles">Articles</a></li>
+                        <li><a class="bs5 dropdown-item new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb">KB</a></li>
+                        <li><a class="bs5 dropdown-item new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/faqs">FAQs</a></li>
+                        <li><a class="bs5 dropdown-item new-css-dropdown-menu-item" rel="noopener" translation-url href="#">TRAINING MATERIALS</a></li>
+                        <li><a class="bs5 dropdown-item new-css-dropdown-menu-item" rel="noopener" translation-url href="#">TRAINING SITES</a></li>
+                        <li><a class="bs5 dropdown-item new-css-dropdown-menu-item" rel="noopener" translation-url href="#">BCH ON BCH FORUM</a></li>
+                        <li><a class="bs5 dropdown-item new-css-dropdown-menu-item" rel="noopener" translation-url href="#">CONTACT US</a></li>
                     </ul>
                 </li>
                 <li class="bs5 nav-item"><a href="/forums"
@@ -101,14 +111,14 @@
             </ul>
             <ul class="bs5 nav">
                 <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
-                    <a href="#" class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle" type="button"
+                    <a href="#"  class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle" type="button"
                         id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
                         <span> Protocol </span> 
                     </a>
 
                     <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item" href="http://bch.cbd.int/protocol">CARTAGENA PROTOCOL</a></li>
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item" href="http://bch.cbd.int/protocol/supplementary/">SUPPLEMENTARY PROTOCOL</a></li>
+                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="http://bch.cbd.int/protocol">CARTAGENA PROTOCOL</a></li>
+                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="http://bch.cbd.int/protocol/supplementary/">SUPPLEMENTARY PROTOCOL</a></li>
                     </ul>
                 </li>
             </ul>
