@@ -46,14 +46,14 @@
                 <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
                     <a rel="noopener" translation-url href="#" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
                         type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">records</a>
+                        aria-expanded="false">Search</a>
                     <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="search"> Search </a></li>
+                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="search"> Records </a></li>
                         <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="#">Registries</a>
                             <ul>
-                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/living-modified-organisms">LMO</a></li>
-                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/organisms">ORGANISMS</a></li>
-                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/genetic-elements">GENE</a></li>
+                                <li class="list-unstyled"><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/living-modified-organisms">LMO</a></li>
+                                <li class="list-unstyled"><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/organisms">ORGANISMS</a></li>
+                                <li class="list-unstyled"><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item" href="/registries/genetic-elements">GENE</a></li>
                                 
                             </ul>
                         </li>
@@ -80,7 +80,7 @@
                         <li>
                             <ul class="new-css-nav-country-profiles">
                                 <li ng-repeat="c in countries | filter:startsWith track by c.code">
-                                    <a rel="noopener" translation-url  class="bs5 dropdown-item text-uppercase" ng-href="/countries/{{::c.code|encodeURIComponent}}">
+                                    <a rel="noopener" translation-url  class="bs5 dropdown-item" ng-href="/countries/{{::c.code|encodeURIComponent}}">
                                         <span class="bold"
                                             ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
                                             {{::c.name | lstring:locale}}
