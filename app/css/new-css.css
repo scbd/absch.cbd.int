@@ -246,6 +246,12 @@ body.modal-open .modal-backdrop.fade.show{
 .new-css-nav-country-profiles .dropdown-item {
     white-space: inherit;
 } 
+.new-css-summary-text {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
 .map-country-list {
     width: auto;
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
