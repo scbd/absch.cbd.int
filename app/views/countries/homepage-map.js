@@ -35,14 +35,7 @@ import './directives/homepin-popup-abs';
           "longitude": -167.66
         };
         var mapOptions = {
-          "titles": [
-            {
-              "text": "Parties to the Cartagena Protocol",
-              "size": 16,
-              "marginTop": 50
-            }
-          ],
-            "type": "map",
+           "type": "map",
             "theme": "light",
             "projection": "equirectangular",
             "zoomDuration": 0.1,
