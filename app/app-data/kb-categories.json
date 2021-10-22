@@ -33,6 +33,10 @@
         "adminTags": ["meetings", "iac"]
     },
     { 
+        "title"    : "Getting help",
+        "adminTags": ["getting-help"]
+    },
+    { 
         "title"    : "Frequently Asked Questions (FAQs)",
         "adminTags": ["faq"]
     }

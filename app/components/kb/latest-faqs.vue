@@ -1,5 +1,5 @@
 <template>
-    <div class="getting-help">
+    <div class="latest-faq">
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
 				   <h4>FAQs</h4>
 						<hr>
@@ -7,7 +7,9 @@
 						<ul v-for="title in help">
 								<li><a href="#" @click="goToArticle(title._id,title.title[$locale])">{{title.title[$locale]}}</a></li>
 						</ul>
-            <a class="view-more" href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
+						<div class="view-more">
+            				<a href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
+						</div>
     </div>
 </template>
 <script>
