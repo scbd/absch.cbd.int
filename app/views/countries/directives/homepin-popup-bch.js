@@ -5,6 +5,15 @@ app.directive('homepinPopupBch', function(){
     return {
         restrict:'E',
         replace: true,
-        template:template
+        template:template,
+        
+        link: function ($scope) {
+            $scope.hideCartagena = function(code){
+                if (code == 'NRI' || code == 'NR1' || code == 'NR2') return false;
+                else return true;
+            }
+        }
+
     }
+
 })

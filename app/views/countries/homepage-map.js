@@ -35,6 +35,13 @@ import './directives/homepin-popup-abs';
           "longitude": -167.66
         };
         var mapOptions = {
+          "titles": [
+            {
+              "text": "Parties to the Cartagena Protocol",
+              "size": 16,
+              "marginTop": 50
+            }
+          ],
             "type": "map",
             "theme": "light",
             "projection": "equirectangular",
@@ -67,7 +74,7 @@ import './directives/homepin-popup-abs';
               "enabled": true,
               "position": "bottom-right"
             }
-          };
+        };
         var lmoDecisions;
         var countries         = {};
         var prevCountryColor  = {clicked:{}, mouseOver:{}};
