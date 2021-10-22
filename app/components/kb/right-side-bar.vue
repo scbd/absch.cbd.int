@@ -1,14 +1,12 @@
 <template>
     <div class="col-lg-4">
-
-
+        
         <div class="side-bar">
             <div class="widget fix widget_categories mt-2 right-side-articles">
-                
-						<latest-faqs></latest-faqs>
-						<getting-help></getting-help>
-						</div>
-            <popular-tags></popular-tags>
+                <latest-faqs></latest-faqs>
+                <getting-help></getting-help>
+                </div>
+                  <popular-tags is-categories="true"></popular-tags>
         </div>
     </div>
 </template>

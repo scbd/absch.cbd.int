@@ -9,8 +9,10 @@
                         <div class="col-md-8 col-md-offset-2">
                             <h1>{{$realm.chShortName+ " "}}{{ $t("knowledgeBase") }}</h1>
                             <form>
-                                <input type="text" class="search-field" placeholder="Search Something ... ">
-                                <button type="submit"><i class="fa fa-search"></i></button>
+                                 <div class="searchbar">
+                                    <input class="search_input" type="text" name="" placeholder="Search the knowledge base...">
+                                    <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+                                </div>
                             </form>
                         </div>
                     </div>

@@ -6,8 +6,8 @@
                 <div class="article-by-tags" v-if="articles">
                     <h2> 
 						{{tagDetails.title}} <span><small>({{articlesCount}})</small></span>
-						<hr style="color:#eee">
 					</h2>
+					<hr>
 					
                     <div class="kb-listing">
                         <ul class="article-with-tags-ul">
@@ -25,11 +25,7 @@
                                 <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
                                 <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
                               </div>
-                              <div class="date-sec">
-                                  <div class="inner-area"><i aria-hidden="true" class="fa fa-calendar"></i>
-                                      {{article.meta.modifiedOn|dateFormat}}
-                                  </div>
-                              </div>
+                        
                             </li>
                         </ul>
                     </div>
