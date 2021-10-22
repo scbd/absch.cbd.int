@@ -2216,17 +2216,7 @@ a.disabled{
     }
 }
 /* ammap */
-.map-disclaimer {
-    position: absolute;
-    font-family: Verdana;
-    font-size: 11px;
-    opacity: .7;
-    display: block;
-    bottom: 30px;
-    right: 0px;
-    cursor: pointer;
-    left: 70%;
-}
+
 .tag-line {
     position: relative;
     font-family: Verdana;

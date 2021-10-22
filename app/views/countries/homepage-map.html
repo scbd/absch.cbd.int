@@ -7,11 +7,11 @@
 
         .map-disclaimer {
             position: absolute;
-            font-size: 11px;
-            opacity: .7;
+            font-size: 12px;
             display: block;
-            bottom: 50px;
-            right: 0px;
+            bottom: 22px;
+            left: 15px;
+            cursor: pointer;
         }
 
         /* .amcharts-main-div, .amcharts-chart-div{
@@ -196,15 +196,16 @@
 
     <div class="bs5">
 
-        <div class="bs5 row border-top border-bottom">
+        <div class="bs5 row border-top border-bottom border-top ">
 
-            
+                <p class="display-6 text-center pt-3">Parties to the 
+                    <span ng-bind="options.protocol"></span></p>
 
-            <div class="bs5 col-10 col-md-9 g-0">
-                <div id="chartdiv" class="bs5" style="min-height:625px;"></div>
+            <div class="bs5 col-10 col-md-9 g-0  bg-white">
 
-                <div class="map-disclaimer pull-right" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
+                <div id="chartdiv" class="bs5 px-3" style="min-height:625px;"></div>
 
+                <div class="map-disclaimer" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
                 <div id="dialogDisclaimer" class="modal fade">
                     <div class="modal-dialog">
                         <div class="modal-content">
@@ -226,42 +227,16 @@
                     </div>
                 </div>
 
-                <div id="Parties" class="text-center">
-                    <div class="row">
-                        <div class="col-md-4  fs-2 text-center ">
-                            <span class="label new-css-bg-party" ng-bind="numParty"></span>
-                            <a rel="noopener" translation-url href="/countries/status/party"
-                                class="link-dark text-decoration-none new-css-party-counts">Parties to the <span ng-bind="options.protocol"></span>
-                            </a>
-                        </div>
-
-                        <div class="col-md-4  fs-2 text-center" data-bs-toggle="tooltip" delay="0"
-                        title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. ">
-                            <span class="label new-css-bg-inbetween" ng-bind="numRatified"></span>
-                            <a rel="noopener" translation-url href="/countries/status/inbetween" 
-                                class="link-dark text-decoration-none new-css-party-counts">Ratified, not yet Party <i class="fa fa-info-circle"></i></a>
-                      
-                        </div>
-
-                        <div class="col-md-4 fs-2 text-center">
-                            <span class="label new-css-bg-nonparty" ng-bind="numNonParty" ></span>
-                            <a rel="noopener" translation-url href="/countries/status/nonparty"
-                                class="link-dark text-decoration-none new-css-party-counts">Non-Parties</a>
-                        </div>
-                    </div>
-                </div>
-
-
-
+            
             </div>
 
-            <div class="bs5 col-2 col-md-3 g-0 border-end">
-                <div class="bs5 p-4 map-country-list">
-                    <a rel="noopener" class="bs5 display-6 link-dark text-decoration-none " ng-if="!currentCountry.code"
+            <div class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
+                <div class="bs5 p-4 map-country-list border-top">
+                    <a rel="noopener" class="bs5 fs-2 fw-bold link-dark text-decoration-none " ng-if="!currentCountry.code"
                         translation-url href="{{translationUrl}}/search?tab=nationalRecords">
                         <span ng-if="!currentCountry.code"> National Records </span>
                     </a>
-                    <a rel="noopener" class="bs5 display-6  link-dark text-decoration-none" ng-if="currentCountry.code"
+                    <a rel="noopener" class="bs5 fs-2 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
                         translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}">
                         <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i>
                         <span ng-bind="currentCountry.name|lstring"></span>
@@ -274,6 +249,31 @@
                     <div ng-if="isABS && currentCountry">
                         <homepin-popup-abs>
                             </pin-popup-abs>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Parties" class="text-center bs5 mt-3">
+                <div class="row">
+                    <div class="col-md-4  fs-2 text-center ">
+                        <span class="label new-css-bg-party" ng-bind="numParty"></span>
+                        <a rel="noopener" translation-url href="/countries/status/party"
+                            class="link-dark text-decoration-none new-css-party-counts">Parties to the <span ng-bind="options.protocol"></span>
+                        </a>
+                    </div>
+
+                    <div class="col-md-4  fs-2 text-center" data-bs-toggle="tooltip" delay="0"
+                    title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. ">
+                        <span class="label new-css-bg-inbetween" ng-bind="numRatified"></span>
+                        <a rel="noopener" translation-url href="/countries/status/inbetween" 
+                            class="link-dark text-decoration-none new-css-party-counts">Ratified, not yet Party <i class="fa fa-info-circle"></i></a>
+                  
+                    </div>
+
+                    <div class="col-md-4 fs-2 text-center">
+                        <span class="label new-css-bg-nonparty" ng-bind="numNonParty" ></span>
+                        <a rel="noopener" translation-url href="/countries/status/nonparty"
+                            class="link-dark text-decoration-none new-css-party-counts">Non-Parties</a>
                     </div>
                 </div>
             </div>
