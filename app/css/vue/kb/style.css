@@ -50,9 +50,6 @@
 	padding-bottom: 5px;
 	border-bottom: #eee 1px solid
 }
-.knowledge-base .kb-breadcrumbs ol {
-	padding: 0;
-}
 .knowledge-base .kb-breadcrumbs ol li {
 	display: inline-block;
 	color: #5e6977;
@@ -101,13 +98,16 @@
     margin-bottom: 6px;
     width: 100%;
 }
-.knowledge-base .categories header h2 {
-	font-size: 38px;
-	font-weight: 300;
-	font-family: "Roboto", sans-serif;
+.knowledge-base .categories header h2, .article-by-tags h2, .kb-faq h2{
+	text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  letter-spacing: 0.015em;
 	color: #43484d;
 }
-.knowledge-base .categories .categerios-parahraph{
+.knowledge-base .categories .categories-paragraph{
 	font-family: "roboto", sans-serif;
 	font-style: normal;
 	font-weight: normal;
@@ -218,7 +218,7 @@
 	padding: 0;
 }
 .knowledge-base .categories-list .cate-list-ul {
-	margin: -10px 0 0 0;
+	margin: 0;
 	padding: 0;
 }
 .knowledge-base .categories-list .cate-list-ul:nth-child(6) {
@@ -238,6 +238,9 @@
 	padding-left: 0px;
 }
 
+.knowledge-base .categories-list .cate-list-ul .cate-list-li{
+	padding-top: 20px;
+}
 .knowledge-base .categories-list .cate-list-ul .cate-list-li a {
 	padding-left: 0px;
 	color: #000;
@@ -266,11 +269,12 @@
 	color: #6054BA;
 }
 .knowledge-base .widget_categories ul{
-	padding: 0
+	padding: 10px 0;
 }
-.knowledge-base .widget_categories li {
-	padding-top: 0;
+.knowledge-base .widget_categories .latest-faq ul,.knowledge-base .widget_categories .getting-help ul,.knowledge-base .kb-breadcrumbs ol{
+	padding: 0;
 }
+
 .knowledge-base .widget_categories li a {
 	color: #000;
 	font-size: 14px;
@@ -477,7 +481,7 @@
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li{
 	background-color: #fff;
 	border-radius: 0.25rem;
-	padding: 30px;
+	padding: 30px 30px 10px 30px;
 	position: relative;
 	z-index: 3;
 	text-decoration: none;
@@ -502,24 +506,14 @@
 }
 
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .article-title{
-	font-weight: 400;
+	font-weight: 600;
 	margin: 5px 0 11px;
 	text-decoration: none;
 	font-size: 22px;
 	line-height: 1.4;
 	color: #515365;
+	font-family: "Roboto", sans-serif;
 }
-
-/* .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec{
-	float: left;
-	width: 100%;
-	background: #ffffff;
-	margin-top: 15px;
-	color: #5e6977;
-}
-.knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .date-sec:hover{
-	background: #ffffff;
-} */
 .knowledge-base .kb-listing .article-with-tags-ul .article-with-tags-li .inner-area .btn-mini{
 	color: #515365;
 	padding: 5px;
@@ -548,7 +542,7 @@
 	color: rgb(145, 145, 145);
 }
 .knowledge-base .kb-faq {
-  margin-top: 4.2rem;
+  margin-top: 4.5rem;
 }
 
 .knowledge-base .kb-faq main {
