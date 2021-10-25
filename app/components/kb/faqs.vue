@@ -3,13 +3,13 @@
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <div class="mt-0 kb-faq" v-if="!loading">
-            <h3>
+            <h2>
 				{{ $t("faqs") }} 
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
 					{{ $t("for") }} <strong>{{faqFilterTag}}</strong></span> 
 				<strong>({{faqCount}})</strong>
 				<hr/>
-			</h3>
+			</h2>
             <main>
                 <details v-for="article in faqs">
                     <summary>{{article.title[`${$locale}`]}}</summary>

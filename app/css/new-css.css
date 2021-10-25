@@ -293,3 +293,9 @@ body.modal-open .modal-backdrop.fade.show{
 .card-footer:last-child,.map-country-list .list-group{
     border-radius: 0.25rem;
 }
+.new-css-breadcrumbs{
+    font-size: 18px;
+    font-family: 'Roboto';
+    font-weight: 700;
+    padding: 15px 0px 15px 15px;
+}
