@@ -1,4 +1,3 @@
-
 <div class="bs5">
     <div class="bs5 new-css-home-section-top-bch min-vh-100" style="background-image:url('/app/img/new-home/bch-background.gif');
     background-position: bottom; background-size: cover; background-repeat: no-repeat;">
@@ -9,9 +8,9 @@
                 Organisms (LMOs) and a key tool for facilitating the implementation of the Cartagena Protocol on
                 Biosafety.</h1>
 
-            <div class="bs5 row justify-content-md-center p-0 pt-sm-2 pt-sm-3 pt-lg-4 ">
-                <div class="bs5 col-md-12 col-lg-4">
-                    <div class="bs5 card shadow-lg border-0 m-3 m-lg-4">
+            <div class="bs5 row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
+                <div class="bs5 col-md-12 col-lg-4 new-display-flex">
+                    <div class="bs5 rounded card new-card shadow-lg border-0 m-3 m-lg-4">
                         <div class="bs5 card-body">
                             <div class="bs5 d-flex position-relative ">
                                
@@ -34,8 +33,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="bs5 col-md-12 col-lg-4">
-                    <div class="bs5 card shadow-lg border-0 m-3 m-lg-4">
+                <div class="bs5 rounded col-md-12 col-lg-4 new-display-flex">
+                    <div class="bs5 card new-card shadow-lg border-0 m-3 m-lg-4">
                         <div class="bs5 card-body">
                             <div class="bs5 d-flex position-relative ">
                                 <img src="/app/img/new-home/search_dna (1).svg" alt="search bch" class="new-css-boxes-icons">
@@ -54,14 +53,13 @@
                             </div>
                         </div>
                         <div class="bs5 card-footer new-css-card-footer text-muted">
-                            <a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="#">Get
-                                Started <i class="fa fa-arrow-right"></i> </a>
+                            <a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/search">Search <i class="fa fa-arrow-right"></i> </a>
                         </div>
                     </div>
 
                 </div>
-                <div class="bs5 col-md-12 col-lg-4">
-                    <div class="bs5 card shadow-lg border-0 m-3 m-lg-4">
+                <div class="bs5 rounded col-md-12 col-lg-4 new-display-flex">
+                    <div class="bs5 card new-card shadow-lg border-0 m-3 m-lg-4">
                         <div class="bs5 card-body">
                             <div class="bs5 d-flex position-relative ">
                                 <img src="/app/img/new-home/Upload (1).svg" alt="submit bch" class="new-css-boxes-icons">
@@ -79,27 +77,21 @@
                             </div>
                         </div>
                         <div class="bs5 card-footer new-css-card-footer text-muted">
-                            <a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="#">Get
-                                Started
+                            <a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/register">Submit
                                 <i class="fa fa-arrow-right"></i> </a>
                         </div>
                     </div>
 
                 </div>
             </div>
-            <div class="bs5 my-2 my-lg-5 mt-lg-5 p-2 pt-lg-5 text-center   hidden-sm hidden-xs">
-                <span class="bs5 display-3 p-3 color-white">Explore the map <i class="fa  fa-arrow-down"></i></span>
-            </div>
+            <explore-more-on-click></explore-more-on-click>
+            
         </div>
     </div>
 
-
-
-    <div class="bs5 new-css-home-section-map hidden-sm hidden-xs"  >
+    <div id="hpmePageMapSection" class="bs5 min-vh-100 new-css-home-section-map hidden-sm hidden-xs" >
             <home-map></home-map>
     </div>
-
-
 
     <div class="bs5 min-vh-100 ">
         <div class="bs5 container ">
@@ -113,10 +105,7 @@
             </div>
         </div>
     </div>
-
-
-
-    <div class="bs5 min-vh-100">
+    <div class="bs5 min-vh-100 home-page-record">
         <div class="bs5 container ">
             <p class="bs5 display-6 ">National records
                 <hr>
@@ -124,9 +113,7 @@
             <national-record></national-record>
         </div>
     </div>
-
-
-    <div class="bs5 min-vh-100">
+    <div class="bs5 min-vh-100 home-page-record">
         <div class="bs5 container ">
             <p class="bs5 display-6">Reference records
                 <hr>
@@ -137,51 +124,6 @@
 
 </div>
 
-<<<<<<< HEAD
-
-<script src="http://maps.googleapis.com/maps/api/js?sensor=false&extension=.js"></script>
-<script>
-    $(document).ready(function () {
-        var map;
-
-        var style = [
-            {
-                stylers: [
-                    { saturation: "-100" },
-                    { lightness: "50" }
-                ]
-            }, {
-                featureType: "poi",
-                stylers: [
-                    { visibility: "off" }
-                ]
-            }, {
-                featureType: "transit",
-                stylers: [
-                    { visibility: "off" }
-                ]
-            }, {
-                featureType: "road",
-                stylers: [
-                    { lightness: "50" },
-                    { visibility: "on" }
-                ]
-            }, {
-                featureType: "landscape",
-                stylers: [
-                    { lightness: "50" }
-                ]
-            }
-        ]
-
-        var options = {
-            zoom: 7,
-            center: new google.maps.LatLng(45.50867, -73.553992),
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-            disableDefaultUI: true
-        };
-=======
->>>>>>> e9d94260... update homepage
 
 
 <script>
