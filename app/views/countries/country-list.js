@@ -356,7 +356,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 function openCountryDropdown(resumeJoyride){
                     $timeout(function (  ) {
                         $('html,body').scrollTop(0);
-                        $('#countryProfile').click();
+                        document.getElementById('countryProfile').click();
                         resumeJoyride();
                     })
                 }

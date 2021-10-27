@@ -1,16 +1,14 @@
 <template>
-    <div class="sidebar">
-        <div class="widget fix widget_categories mt-2 right-side-articles">
-            <span class="icon icon-folder"></span>
-            <h4>{{ $t("relevantArticles") }}</h4>
-            <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-            <ul>
-                <li v-for="article in articles">
-                  <a style="display:none" :href="`${articleUrl(article)}`">{{article.title[$locale]}}</a>
-							    <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
-                </li>
-            </ul>
-        </div>
+    <div class="widget fix widget_categories mt-2 right-side-articles">
+        <h4>{{ $t("relevantArticles") }}</h4>
+        <hr>
+        <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
+        <ul>
+            <li v-for="article in articles">
+                <a style="display:none" :href="`${articleUrl(article)}`">{{article.title[$locale]}}</a>
+                            <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
+            </li>
+        </ul>
     </div>
 </template>
 

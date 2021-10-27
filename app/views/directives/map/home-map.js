@@ -34,42 +34,22 @@ import 'services/main';
             $scope.isBCH          = realm.is('BCH');
             $scope.isABS          = realm.is('ABS');  
             
-            $q.when(commonjs.getCountries(), function(countries) {
-
-              if($scope.options.isBch){
-                  $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
-                  $scope.numParty     = _.filter(countries, {isParty:     true}).length;
-              }
-              else {                
-                  $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
-                  $scope.numParty     = _.filter(countries, {isParty:     true}).length;
-              }
-              $scope.numNonParty  = countries.length -  $scope.numParty;
-                
-
-            });
+            
 
             if($rootScope.deviceSize !== 'sm' && $rootScope.deviceSize !== 'xs'){
               // Delay loading map by 2 sec
               $scope.loadingMap = true;
               angular.element(document).ready(async function () {
-                await import('~/views/countries/country-map')
+                await import('~/views/countries/homepage-map')
                 $scope.$apply(function(){
                     var mapElement = $element.find('#homeMap')
-                    $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
+                    $compile(mapElement.append('<homepage-map zoom-to="{{code}}" height="350px" ></homepage-map>'))($scope);
                     $scope.loadingMap = false;
                 });
               });
             }
 
-            $scope.options = {
-              isBch       : realm.is('BCH'),
-              isAbs       : realm.is('ABS'),
-              protocol    : realm.protocol,
-              protocolShortName  :realm.protocolShortName,
-              chShortName :realm.chShortName,
-              chLongName  :realm.chLongName
-            }
+           
 
         }] //controlerr
     }; //return

@@ -186,7 +186,9 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                 }
 
             }
-
+            if($routeParams.openTour){
+                $scope.tour();
+            }
             $scope.showTopRecords = function($event, schema) {
                 $event.stopPropagation();
                 $scope.topRecords[schema] = !$scope.topRecords[schema];

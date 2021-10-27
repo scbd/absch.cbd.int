@@ -1,0 +1,295 @@
+/* HEADER */
+.new-css-main-nav-link {
+    text-transform: uppercase;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333 !important;
+}
+
+.new-css-main-nav-link:hover {
+    background-color: #eee !important;
+}
+
+.new-css-acronym {
+    font-weight: 500;
+    text-decoration: none !important;
+    font-size: 48px;
+}
+
+.new-css-ch-name {
+    font-size: 17px;
+    text-transform: uppercase;
+    font-weight: 550;
+}
+
+.new-css-sm-header {
+    display: none;
+}
+
+.new-css-lg-header {
+    display: block;
+}
+
+@media (max-width: 575.98px) {
+    .new-css-sm-header {
+        display: block;
+    }
+.new-css-acronym {
+    font-weight: 500;
+    text-decoration: none !important;
+    font-size: 32px;
+}
+
+    .new-css-lg-header {
+        display: none;
+    }
+}
+
+.new-css-header {
+    height: 80px;
+}
+
+
+.new-css-dropdown-menu {
+    font-size: 1.5rem !important;
+   
+}
+.new-css-dropdown-menu-item {
+    font-size: 1.4rem !important;
+    color:#495057!important;
+}
+.new-css-navbar-sm{
+    position: relative;
+    display: block!important;
+    flex-wrap:nowrap!important;
+    align-items:flex-start!important;
+    justify-content:flex-start!important;
+    padding-top: 0.5rem!important;
+    padding-bottom: 0.5rem!important;
+    margin-bottom: 0!important;;
+}
+ .new-css-navbar-toggler{
+    position:relative;
+    top:-8px;
+    margin-right:5px!important;
+}
+
+
+/* FOOTER */
+.new-css-footer-bch {
+    padding: 20px 0;
+    background-color: #00405C;
+    color: #FFF;
+}
+.new-css-footer-absch {
+    padding: 20px 0;
+    background-color: #00405C;
+    color: #FFF;
+}
+
+
+/* HOMEPAGE */
+.new-css-home-section-top-bch {
+    background-color: #00405C;
+}
+.new-css-home-section-top-absch {
+    background-color: firebrick;
+}
+.new-css-home-section-map {
+    /* background-color: #E1F0F5; */
+    background-color: #fff;
+}
+.new-css-home-section {
+    background-color: #fff;
+}
+.new-css-card-footer {
+    background-color: #00405C !important;
+}
+.new-css-card-footer>a {
+    color: #FFF !important;
+}
+.new-css-home-btn-map {
+    font-size: 4rem !important;
+    background-color: #00405C !important;
+    color: #FFF !important;
+}
+#new-css-map {
+    height: 100%;
+    width: 100%;
+}
+#new-css-menu {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.new-css-home-map-wrapper {
+    position: relative;
+}
+.new-css-home-map-controls {
+    /* background-color: #EEE !important; */
+}
+.new-css-callout {
+    padding: 1.25rem !important;
+    margin: 1.25rem !important;
+    border: 1px solid #e9ecef !important;
+    border-left-width: .25rem !important;
+    border-radius: .25rem !important;
+    background-color: #FFF !important;
+}
+.new-css-callout-reference {
+    border-left-color: #fa6938 !important;
+    min-height:120px;
+}
+.new-css-callout-national {
+    border-left-color: #428BCA !important;
+    min-height:120px;
+    
+}
+
+.new-css-rectype-national {
+    background-color: #eee !important; 
+}
+
+.new-css-rectype-reference {
+    background-color: #eee !important; 
+}
+.new-css-party-counts{font-size: 1.5rem !important;}
+.new-css-bg-party{background-color:#00405C;}
+.new-css-bg-nonparty{background-color:#636363; }
+.new-css-bg-inbetween{background-color:#EC971F;}
+.new-css-bg-national{background-color:#428bca!important;color:white!important;}
+.new-css-bg-reference{background-color:#fa6938!important;color:white!important;}
+.bg-white{background-color:#FFF!important;}
+.bg-gray-100{background-color:#f8f9fa!important;}
+.bg-gray-200{background-color:#e9ecef!important;}
+.bg-gray-300{background-color:#dee2e6!important;}
+.bg-gray-400{background-color:#ced4da!important;}
+.bg-gray-500{background-color:#adb5bd!important;}
+.bg-gray-600{background-color:#6c757d!important;}
+.bg-gray-700{background-color:#495057!important;}
+.bg-gray-800{background-color:#343a40!important;}
+.bg-gray-900{background-color:#212529!important;}
+
+.new-css-text-national{color:#428bca!important;}
+.new-css-text-reference{color:#fa6938!important;}
+
+
+.new-css-nav-country-profiles {
+    padding-left: 10px;
+    max-height:340px;
+    width:280px;
+    overflow-y:scroll;
+    overflow-x: hidden;
+    list-style-type: none;
+}
+
+.new-css-nav-country-profiles-search {
+    padding:5px;
+    border-bottom: 1px solid #eee;
+}
+.new-css-nav-country-profiles-footer {
+    background-color: #00405C;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    margin: auto;
+    width: 100%;
+    position: absolute;
+    padding: 1.5%;
+    border-style: solid;
+    border-color: black;
+    border-width: 0.5px;
+    border-top: none;
+    text-align: center;
+    font-size:16px;
+}
+.new-css-nav-country-profiles-footer a{
+    color:#fff !important;
+    text-decoration: none;
+}
+
+.dropdown-menu> li.new-css-nav-country-profiles-footer> a:hover {
+    color:#fff !important;
+    text-decoration: underline;
+    background-color: transparent;
+}
+.cursor-pointer {cursor: pointer;}
+
+body.modal-open .modal-backdrop.show{
+    opacity: 0.5;
+    z-index: 2;
+}
+body.modal-open .modal-backdrop.fade.show{
+    opacity: 0;
+} 
+
+.new-css-boxes-icons{
+    align-self: flex-start;
+}
+
+.new-card{
+    width: 100%;
+}
+
+.new-display-flex{
+    display: flex;
+}
+
+.new-explore-btn{
+    background: #00405C;
+    text-transform: uppercase;
+}
+
+.new-color-red{
+    color:#DA3B01;
+}
+.new-css-nav-country-profiles .dropdown-item {
+    white-space: inherit;
+} 
+.new-css-summary-text {
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+/* .map-country-list {
+    width: auto;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    float: right;
+} */
+
+.map-country-list .justify-content-between{
+    justify-content: flex-start !important
+}
+
+.map-country-list li.list-group-item-action .badge {
+    min-width: 50px;
+    background: #00405C;
+    margin-left: 0.5rem !important;
+
+    font-size: 14px;
+    line-height: 72%;
+    text-align: center;
+    color: #FFFFFF;
+}
+
+
+.map-country-list li.list-group-item-action a{
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 100%;
+    color: #4F4F4F;
+    margin-left: 8px;
+}
+
+.map-country-list .list-group .list-group-item:first-child{
+    padding-top: 10px;
+}
+
+.new-css-nav-country-profiles-search .form-control::placeholder {
+    font-size: 13px;
+}
+.card-footer:last-child,.map-country-list .list-group{
+    border-radius: 0.25rem;
+}

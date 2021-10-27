@@ -763,7 +763,7 @@ footer .logo {
 @media (max-width: 768px) {
     .page-content {
         background-color: #eee;
-        padding: 10px 0 0 0;
+        /* padding: 10px 0 0 0; */
     }
     .default-result-page .title.bold.truncate-mobile-title , #result-grouped-national-record .title.bold.truncate-mobile-title{
         display: -webkit-box !important;
@@ -2216,17 +2216,7 @@ a.disabled{
     }
 }
 /* ammap */
-.map-disclaimer {
-    position: absolute;
-    font-family: Verdana;
-    font-size: 11px;
-    opacity: .7;
-    display: block;
-    bottom: 30px;
-    right: 0px;
-    cursor: pointer;
-    left: 70%;
-}
+
 .tag-line {
     position: relative;
     font-family: Verdana;
@@ -2426,7 +2416,7 @@ padding-right: 23%;
 #page-content-wrapper {
     width: 100%;
     position: absolute;
-    padding: 15px;
+    /* padding: 15px; */
 }
 
 #wrapper.toggled #page-content-wrapper {
@@ -3025,11 +3015,19 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 }
 
 #innerPage .mastHead{
-	background-color: #333;
+	background-color: #00405C;
 	color:white;
 	padding:40px 20px 40px 20px;
 	margin:0;
 }
+
+#innerPage .absch .mastHead{
+	background-color: #00405C;
+	color:white;
+	padding:40px 20px 40px 20px;
+	margin:0;
+}
+
 
 #innerPage .innerPageContent{
 	padding:20px;

@@ -5,7 +5,7 @@
          <div class="row">
              <div class="col-md-12 " style="padding-bottom:10px;">
                 <span ng-repeat="filter in setFilters">
-                     <span ng-if="filter.type" class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}" style="background-color: #333;border:1px solid;color:#fff;">
+                     <span ng-if="filter.type" class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}" style="background-color:transparent;border:1px solid;color:#fff;">
                         <span class="filter-chip-text dropdown bring-to-front"  >
                             <span ng-if="filter.edit" class="input-group edit">
 
@@ -70,7 +70,7 @@
                                  aria-hidden="true"></i>TAKE SEARCH TOUR</span></a>
 
                      <a rel="noopener" ng-href="#" ng-if="canShowSaveFilter() && !isAlertSearch" class="link2"
-                         style="font-size:10px;;text-transform: uppercase;font-weight: 500;text-shadow: 0px 1px 0px rgba(255,255,255,.5);cursor:pointer;"
+                         style="font-size:10px;;text-transform: uppercase;font-weight: 500;cursor:pointer;"
                          ng-click="showSaveFilter(setFilters)">Save this search</a>
                  </span>
              </div>

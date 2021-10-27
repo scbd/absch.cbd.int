@@ -2,14 +2,17 @@
 
     <a rel="noopener" id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
          <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey ':notificationUnreadCount}"></i>
+            <img src="/app/img/new-home/bell-fill.svg" alt="Notification" ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey ':notificationUnreadCount}">
+          
                     <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x not-count-circle"  data-badge="{{notificationUnreadCount}}"></span>
         </span>
     </a>
 
     <a rel="noopener" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll">
         <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey ':notificationUnreadCount}"></i>
+            <img src="/app/img/new-home/bell-fill.svg" alt="Notification" ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey ':notificationUnreadCount}">
+          
+           <i class="fa " ></i>
                     <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x not-count-circle"  data-badge="{{notificationUnreadCount}}"></span>
         </span>
     </a>

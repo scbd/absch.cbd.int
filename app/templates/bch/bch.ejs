@@ -20,8 +20,10 @@
     <link rel="stylesheet" type="text/css" href="/app/css/template.css?v=<%=appVersion%>">
     <link rel="stylesheet" type="text/css" href="/app/css/colors.css?v=<%=appVersion%>">
     <link rel="stylesheet" type="text/css" href="/app/css/bch/template.css?v=<%=appVersion%>">
-    <link rel="stylesheet" type="text/css" href="/app/css/custom-bs5.css">
 
+    <link rel="stylesheet" type="text/css" href="/app/css/custom-bs5.css">
+    <link rel="stylesheet" type="text/css" href="/app/css/new-css.css">
+  
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -31,9 +33,9 @@
 
 </head>
 <body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
-    
     <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
     <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
+    <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
     <app-loading>
         <div class="m-app-loading" ng-animate-children>
     
@@ -140,6 +142,7 @@
     <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
     <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
     <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
 
