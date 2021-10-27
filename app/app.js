@@ -49,12 +49,14 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
 }]);
 
 
-app.run(["realm", "locale", '$injector', function (realm, locale, $injector) {
+app.run(["realm", "locale", '$injector', '$filter', function (realm, locale, $injector, $filter) {
 
   registerVuePlugin('$realm', realm);
   registerVuePlugin('$locale', locale);
+  registerVuePlugin('$filter', $filter);
 
   window.Vue.use(new AngularVueRoutePlugin ($injector));
+  window.Vue.use(new AngularVueRouterPlugin($injector));
   window.Vue.use(new AngularVueRouterPlugin($injector));
   
 }]);
