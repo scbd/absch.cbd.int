@@ -157,11 +157,6 @@
 }
 .knowledge-base .categories-list .view-more{
 	text-align: end;
-<<<<<<< HEAD
-	/* position: absolute; */
-	margin-top: 10px;
-=======
->>>>>>> c7e0286f... WIP: change cards section
 	bottom: 10px;
 	right: 10px;
 	color: #00405C;

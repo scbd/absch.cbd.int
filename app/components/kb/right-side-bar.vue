@@ -1,17 +1,5 @@
 <template>
     <div class="col-lg-4">
-<<<<<<< HEAD
-        <div class="row margin-bottom-30">
-            <div class="col-md-12 ">
-                <div class="support-container">
-                    <h2 class="support-heading">{{ $t("needSupport") }}?</h2>
-                     {{ $t("supportedText") }}
-                    <a href="#" @click="openSlaask()">{{ $t("contactUs") }}</a> {{ $t("furtherHelp") }}.
-                </div>
-            </div>
-        </div>
-=======
->>>>>>> ef49df0f... KB updates
 
 
         <div class="side-bar">
