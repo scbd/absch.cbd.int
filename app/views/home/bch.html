@@ -110,7 +110,9 @@
             <p class="bs5 display-6 ">National records
                 <hr>
             </p>
-            <homepage-record type="national"></homepage-record>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="national"></homepage-records>
+            </div>
         </div>
     </div>
     <div class="bs5 min-vh-100 home-page-record">
@@ -118,7 +120,9 @@
             <p class="bs5 display-6">Reference records
                 <hr>
             </p>
-            <homepage-record type="reference"></homepage-record>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="reference"></homepage-records>
+            </div>
         </div>
     </div>
 
