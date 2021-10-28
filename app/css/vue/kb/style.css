@@ -82,6 +82,9 @@
 .knowledge-base .right-side-articles{
 	margin-top: 3.6rem;
 }
+.knowledge-base .right-side-articles.relevant-articles{
+	margin-left: 20px;
+}
 .categories .side-bar .getting-help{
 	margin-top: 50px;
 	margin-bottom: 50px;
