@@ -38,7 +38,7 @@
 
 <script>
 	import i18n from '../../locales/en/components/kb.json';
-	import relevantArticles from "./articles-by-relation.vue";
+	import relevantArticles from "./relevant-articles.vue";
 	import KbCategories from '~/app-data/kb-categories.json'
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
