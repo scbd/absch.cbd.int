@@ -18,7 +18,7 @@
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div style="position:absolute;bottom:5px; width:95%">
-          <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{getSchemaName(record.schema_s)}}</span></a>
+          <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
           <a v-if="record.government_s" target="_blank" :href="`/countries/${encodeURIComponent(record.government_s)}`"><span class="bs5 badge bg-light text-dark new-css-rectype-national"><i class="bs5 pe-1 flag-icon" v-bind:class="'flag-icon-'+record.government_s"></i> {{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark pull-right new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
@@ -81,7 +81,7 @@
               "fq": ["{!tag=version}(*:* NOT version_s:*)", "{!tag=schemaType}schemaType_s:"+this.type, "{!tag=contact}(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))", "realm_ss:"+this.$realm.value],
               "q": "''",
               "sort": this.sort,
-            "fl": "id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt",
+            "fl": "id, schema_EN_t, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt",
               "wt": "json",
               "start": 0,
               "rows": 8,
@@ -99,10 +99,6 @@
            if(this.type == 'reference') 
               this.$router.push({path: '/search', query: { currentPage: '1', tab: 'referenceRecords' }});
            else this.$router.push({path: '/search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
-      },
-
-      getSchemaName(schema){
-          return this.$filter('schemaName')(schema);
       }
   },
 		i18n: { messages:{ en: i18n }} 

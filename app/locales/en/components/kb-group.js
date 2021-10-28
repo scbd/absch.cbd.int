@@ -11,7 +11,7 @@ export default {
   'noResultFound': 'No result found for this tag',
   'needSupport': 'Need more Support',
   'supportedText': 'If you cannot find an answer in the knowledgebase, you can',
-  'contactUs': 'contact us',
+  'contactUs': 'Contact us',
   'furtherHelp': 'for further help',
   'faqs': 'Frequently asked questions',
 }
