@@ -45,17 +45,16 @@ app.directive("viewBiosafetyLaw", [function () {
 			$scope.onOrganismTypesTerms = function(terms) {
 				if (($scope.document || {}).cpbOrganismTypes) {
 					_.forEach( terms, function ( item ) {
-						var root = _.find( $scope.document.cpbOrganismTypes, { identifier : '8DAB2400-CF00-44B2-ADCF-49AABF66B9B0' } );
+						const rootId = "8DAB2400-CF00-44B2-ADCF-49AABF66B9B0";
+						let root = _.find($scope.document.cpbOrganismTypes, { identifier: rootId } );
 						if ( root ) {
 							terms = _.filter( terms, function ( t ) {
-								return _.includes( root, t.identifier );
+								return _.includes(root, t.identifier)
 							} );
 						} else {
-							if ( item.narrowerTerms != undefined && item.narrowerTerms.length > 0 ) {
-								terms = _.filter( terms, function ( t ) {
-									return item.identifier != t.identifier;
-								} );
-							}
+							terms = _.filter( terms, function ( t ) {
+								return !_.includes(rootId, t.identifier)
+							} );
 						}
 					} );
 					return terms;
