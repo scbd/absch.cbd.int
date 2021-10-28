@@ -1,5 +1,5 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles">
+    <div class="widget fix widget_categories mt-2 right-side-articles" v-bind:class="{ 'relevant-articles': tag != ''}">
         <h4>
             <span v-if="type != 'faq' &&  type != 'help'">{{ $t("relevantArticles") }}</span>
             <span v-if="type == 'faq'">{{ $t("faqs") }}</span>
