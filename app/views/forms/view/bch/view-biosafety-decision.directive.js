@@ -43,13 +43,6 @@ app.directive("viewBiosafetyDecision", [function () {
 
 				});
 				
-				//decision below needs to be indented and appear underneath First decision (intro into environment)
-				var regularTerm = _.find(decisionTypes, {identifier:'E8C5A15C-A736-4fb7-A1B6-192412BE7E45'})
-				if(regularTerm){
-					decisionTypes.sort(function (a, b) {
-						return (a.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24') - (b.identifier === 'BE64016A-C3BD-4C61-9620-C3FEF96B2A24');
-					});
-				}
 			}
 			$scope.$watch("document", function (oldVal) {
 				if(oldVal && oldVal.decisionTypes)
