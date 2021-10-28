@@ -3,8 +3,8 @@
         
         <div class="side-bar">
             <div class="widget fix widget_categories mt-2 right-side-articles">
-                <latest-faqs></latest-faqs>
-                <getting-help></getting-help>
+                <relevant-articles type="faq"></relevant-articles>
+                <relevant-articles type="help"></relevant-articles>
                 </div>
                   <popular-tags is-categories="true"></popular-tags>
         </div>
@@ -13,15 +13,13 @@
 
 <script>
 	import i18n from '../../locales/en/components/kb.json';
-	import gettingHelp from './getting-help.vue';
-	import latestFaqs from './latest-faqs.vue';
+	import relevantArticles from './relevant-articles.vue';
 	import popularTags from './popular-tags.vue';
 	export default {
       name:'kbRightSideBar',
 		components:{
 			popularTags,
-			gettingHelp,
-			latestFaqs
+			relevantArticles
 		},
 
 		i18n: { messages:{ en: i18n }}

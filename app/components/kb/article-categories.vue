@@ -66,7 +66,8 @@
 			async loadArticleByCategories(){
 				try{
 					this.KbCategories.forEach(category => {category.articles=undefined,	category.count=undefined});
-					const adminTags = KbCategories.map(e=>e.adminTags).flat();
+					const exclude = ['getting-help', 'faq'];
+					const adminTags = KbCategories.map(e=>e.adminTags.filter((v) => !exclude.includes(v))).flat();
 					const q = { 
 						$and : [
 							{ adminTags : this.$realm.is('BCH') ? 'bch' : 'abs'},
@@ -81,7 +82,6 @@
 					const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags });
 
 					this.KbCategories.forEach(category => {
-						if(category.adminTags[0] == "getting-help" || category.adminTags[0] == "faq") return false;
 						const groupArticles = result.find(e=>category.adminTags.includes(e.group));
 						category.articles 	= [...category.articles||[], ...groupArticles?.articles||[]];
 						category.count		= (category.count||0) + (groupArticles?.count||0);
