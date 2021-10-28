@@ -2,8 +2,9 @@
 .new-css-main-nav-link {
     text-transform: uppercase;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 700;
     color: #333 !important;
+    font-family: "Roboto", sans-serif;
 }
 
 .new-css-main-nav-link:hover {
@@ -143,9 +144,12 @@
 .new-css-callout-national {
     border-left-color: #428BCA !important;
     min-height:120px;
-    
 }
 
+.new-css-callout-national .stretched-link::after, #Announcements .stretched-link::after{
+   z-index: 0 !important;
+   cursor: pointer;
+}
 .new-css-rectype-national {
     background-color: #eee !important; 
 }
@@ -245,11 +249,14 @@ body.modal-open .modal-backdrop.fade.show{
 .new-css-nav-country-profiles .dropdown-item {
     white-space: inherit;
 } 
-.new-css-summary-text {
+.new-css-summary-text, .new-css-callout h4 a {
     -webkit-line-clamp: 2;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+.new-css-callout h4 a {
+max-width: 90%;
 }
 /* .map-country-list {
     width: auto;

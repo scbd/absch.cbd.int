@@ -49,7 +49,7 @@ async function (ngMeta, logglyLogger, realm, $window, $templateCache) {
 }]);
 
 
-app.run(["realm", "locale", '$injector', function (realm, locale, $injector) {
+app.run(["realm", "locale", '$injector', function (realm, locale, $injector,) {
 
   registerVuePlugin('$realm', realm);
   registerVuePlugin('$locale', locale);

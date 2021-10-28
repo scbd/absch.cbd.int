@@ -1,7 +1,7 @@
 export default {
   'categories.title': 'Article categories',
   'loading': 'loading',
-  'knowledgeBase': 'Knowledge Base',
+  'knowledgeBase': 'Knowledge base',
   'exploreTopics': 'Explore topics',
   'exploreParagraph': 'We did our best to cover all topics related to this product. Each section have number which represent number of topic in each category',
   'viewMore': 'View more',
@@ -10,8 +10,8 @@ export default {
   'relevantArticles': 'Relevant articles',
   'noResultFound': 'No result found for this tag',
   'needSupport': 'Need more Support',
-  'supportedText': 'If you cannot find an answer in the Knowledge Base, you can',
-  'contactUs': 'ContactUs',
+  'supportedText': 'If you cannot find an answer in the knowledgebase, you can',
+  'contactUs': 'Contact us',
   'furtherHelp': 'for further help',
   'faqs': 'Frequently asked questions',
 }
