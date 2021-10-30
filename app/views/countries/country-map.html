@@ -22,7 +22,7 @@
                 height: 270px;
                 color: #fff;
             }
-            #map-filters {                
+            #map-filters {
                 /* right: 20px; */
                 padding: 10px;
                 position: absolute;
@@ -41,7 +41,7 @@
                 max-width:200px;
             }
         </style>
-        
+
         <style >
             /* ng-if="options.mapType=='lmoDecisions'" */
             /* .amcharts-main-div, .amcharts-chart-div{
@@ -138,7 +138,7 @@
                 z-index: 1000;
             }
         </style>
-        
+
         <div class="row">
             <div class="col-md-9" >
                     <!-- <div class="zoom" ng-if="isBCH">
@@ -146,14 +146,14 @@
                         <div class="col-md-12">
                             <label class="checkbox-inline"><input ng-model="options.showLmos" type="checkbox" value="" ng-change="showLmos_changed()">Show LMO's</label>
                         </div>
-                        <div class="col-md-12"  ng-if="options.showLmos">                            
+                        <div class="col-md-12"  ng-if="options.showLmos">
                             <select ng-model="options.lmo" class="form-control" ng-options="lmo.identifier as lmo.title for lmo in lmos" ng-change="lmo_changed()">
                             </select>
                         </div>
                     </div> -->
                 <div id="chartdiv" style="height:350px;" ng-style="{'height': isBCH ? '450px' : '350px'}"></div>
             </div>
-            
+
             <div class="col-md-3 protocol-map-header-bg" style="height:350px;padding-right: 0px!important; margin-left: 0px;padding-left: 0px;"
             ng-style="{'height': isBCH ? '450px' : '350px'}">
                     <style>
@@ -172,23 +172,23 @@
                                 text-transform: uppercase;
                                 vertical-align: middle;
                             }
-                    
+
                             .map-container {
                                 max-height: 350px;
                             }
-                    
+
                             .map-container-header,
                             .map-container-footer {
                                 padding: 5px;
                             }
-                    
+
                             .map-container-mainbody {
                                 margin-top: 0;
                                 min-height: 150px;
                                 height: 270px!important;
                                 overflow: auto;
                             }
-                    
+
                             .map-container-header {
                                 min-height: 40px;
                                 border-bottom: 1px solid #999;
@@ -196,7 +196,7 @@
                                 overflow: hidden;
                                 margin-top:10px;
                             }
-                    
+
                             .map-container-footer {
                                 height: 0px;
                             }
@@ -223,7 +223,7 @@
                 <div class="bs5 map-container card"  ng-style="{'height': isBCH ? '450px' : '350px'}">
                         <div class="map-container-header">
                             <div class="row col-xs-12" >
-                                
+
                                 <h3>
                                     <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?tab=nationalRecords" style="color:#fff">
                                         <span ng-if="!currentCountry.code"> National Records </span>
@@ -237,12 +237,12 @@
                             </div>
                         </div>
                         <div class="map-filters-bg map-container-mainbody" ng-class="{'reduced-height':reduceDetailsHeight, 'bch-height':isBCH}" >
-                            <div ng-if="isBCH && currentCountry"> 
+                            <div ng-if="isBCH && currentCountry">
                                 <pin-popup-bch></pin-popup-bch>
-                            </div>   
-                            <div ng-if="isABS && currentCountry"> 
+                            </div>
+                            <div ng-if="isABS && currentCountry">
                                 <pin-popup-abs></pin-popup-abs>
-                            </div>               
+                            </div>
                         </div>
                         <div class="map-container-footer">
                         </div>

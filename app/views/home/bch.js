@@ -25,7 +25,7 @@ app.directive('exploreMoreOnClick', ['$anchorScroll', function ($anchorScroll) {
     link: function (scope, element) {
       element.on('click', function () {
         $('html, body').animate({
-          scrollTop: $("#hpmePageMapSection").offset().top
+          scrollTop: $("#homePageMapSection").offset().top
         }, 1000);
       });
     }

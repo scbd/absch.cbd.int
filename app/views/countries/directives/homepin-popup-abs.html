@@ -40,7 +40,7 @@
         <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
             <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
                 <td >
-                    <span class="badge bg-black"><span ng-bind="schema.count"></span></span>
+                    <span class="badge" ng-class="{'bg-gray-300' : schema.count==0}"><span ng-bind="schema.count" ng-class="{'bg-gray-300' : schema.count==0}"></span></span>
                 </td>
                 <td>
                     <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">

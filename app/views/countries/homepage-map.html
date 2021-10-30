@@ -198,7 +198,7 @@
 
         <div class="bs5 row border-top border-bottom border-top ">
 
-                <p class="display-6 text-center pt-3">Parties to the 
+                <p class="display-6 text-center pt-3">Parties to the
                     <span ng-bind="options.protocol"></span></p>
 
             <div class="bs5 col-10 col-md-9 g-0  bg-white">
@@ -227,7 +227,7 @@
                     </div>
                 </div>
 
-            
+
             </div>
 
             <div class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
@@ -246,7 +246,7 @@
                         <homepin-popup-bch>
                             </pin-popup-bch>
                     </div>
-                    <div ng-if="isABS && currentCountry">
+                    <div ng-if="isABS && currentCountry" class="country-item-name">
                         <homepin-popup-abs>
                             </pin-popup-abs>
                     </div>
@@ -265,9 +265,9 @@
                     <div class="col-md-4  fs-2 text-center" data-bs-toggle="tooltip" delay="0"
                     title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. ">
                         <span class="label new-css-bg-inbetween" ng-bind="numRatified"></span>
-                        <a rel="noopener" translation-url href="/countries/status/inbetween" 
+                        <a rel="noopener" translation-url href="/countries/status/inbetween"
                             class="link-dark text-decoration-none new-css-party-counts">Ratified, not yet Party <i class="fa fa-info-circle"></i></a>
-                  
+
                     </div>
 
                     <div class="col-md-4 fs-2 text-center">

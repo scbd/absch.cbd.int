@@ -174,8 +174,7 @@
 .bg-gray-800{background-color:#343a40!important;}
 .bg-gray-900{background-color:#212529!important;}
 
-.new-css-text-national{color:#428bca!important;}
-.new-css-text-reference{color:#fa6938!important;}
+.new-css-text-national{color:#428bca!important; white-space: break-spaces !important;}
 
 
 .new-css-nav-country-profiles {
@@ -299,4 +298,32 @@ max-width: 90%;
 }
 .card-footer:last-child,.map-country-list .list-group{
     border-radius: 0.25rem;
+}
+.new-css-abs-card-footer {
+    background-color: #009B48 !important;
+}
+.new-css-abs-card-footer>a {
+    color: #FFF !important;
+}
+@media (max-width: 768px) {
+    .new-css-callout-national {
+        min-height: 130px;
+    }
+    .new-css-callout h4 a {
+        max-width: 82%;
+    }
+}
+.country-item-name .table-map tr td:nth-child(1) span{
+    min-width: 50px;
+    background-color: #00405C;
+    font-size: 14px;
+    line-height: 72%;
+}
+.country-item-name .table-map tr td:nth-child(2) span{
+    color: #4F4F4F;
+    font-family: 'Roboto', sans-serif;
+    font-style: normal;
+    font-weight: bold;
+    margin-left: 8px;
+    text-decoration: none;
 }
