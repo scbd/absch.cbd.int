@@ -1,7 +1,7 @@
 {
   "categories.title": "Article categories",
   "loading"         : "loading",
-  "knowledgeBase"   : "KNOWLEDGE BASE",
+  "knowledgeBase"   : "Knowledge base",
   "exploreTopics"   : "Explore topics",
   "exploreParagraph": "We did our best to cover all topics related to this product. Each section have number which represent number of topic in each category",
   "viewMore"        : "View more",
@@ -13,7 +13,7 @@
   "needSupport"     : "Need more Support",
   "frequentlyAskedQuestions": "Frequently asked questions",
   "supportedText"   : "If you cannot find an answer in the Knowledge Base, you can",
-  "contactUs"       : "contact us",
+  "contactUs"       : "Contact us",
   "furtherHelp"     : "for further help",
   "for"             : "for",
   "faqs"            : "FAQs"

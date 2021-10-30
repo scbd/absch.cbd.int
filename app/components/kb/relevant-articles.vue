@@ -43,15 +43,16 @@ export default {
         this.articlesApi = new ArticlesApi();
     },
     async mounted() {
-        let adminTagsList = [this.$realm.is('BCH') ? 'bch' : 'abs', encodeURIComponent(this.tag)];
+        let relevantTag = this.tag;
+        const realmType = this.$realm.is('BCH') ? 'bch' : 'abs';
         if(this.type == "help"){
-            adminTagsList = ['getting-help'];
+            relevantTag = 'getting-help';
         }
         if(this.type == "faq"){
-            adminTagsList = [this.$realm.is('BCH') ? 'bch' : 'abs', 'faq'];
+            relevantTag = 'faq';
         }
         let ag = [];
-        ag.push({"$match":{"$and":[{"adminTags": { $all : adminTagsList}}]}});
+        ag.push({"$match":{"$and":[{"adminTags": { $all : [realmType, encodeURIComponent(relevantTag)]}}]}});
         ag.push({"$project" : {[`title.${this.$locale}`]:1}});
         ag.push({"$limit" : 10});
         const query = {
