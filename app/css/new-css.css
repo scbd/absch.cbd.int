@@ -82,6 +82,7 @@
     color: #FFF;
 }
 .new-css-footer-absch {
+    margin-top:50px;
     padding: 20px 0;
     background-color: #009B48 !important;
     color: #FFF;
@@ -159,6 +160,8 @@
 }
 .new-css-party-counts{font-size: 1.5rem !important;}
 .new-css-bg-party{background-color:#00405C;}
+.new-css-bg-party-abs{background-color:#069554;}
+
 .new-css-bg-nonparty{background-color:#636363; }
 .new-css-bg-inbetween{background-color:#EC971F;}
 .new-css-bg-national{background-color:#428bca!important;color:white!important;}
@@ -266,12 +269,15 @@ max-width: 90%;
 .map-country-list .justify-content-between{
     justify-content: flex-start !important
 }
-
+.bg-abs{
+    background: #069554!important;
+}
+.bg-bch{
+    background: #00405C!important;
+}
 .map-country-list li.list-group-item-action .badge {
     min-width: 50px;
-    background: #00405C;
     margin-left: 0.5rem !important;
-
     font-size: 14px;
     line-height: 72%;
     text-align: center;

@@ -232,16 +232,17 @@
 
             <div class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
                 <div class="bs5 p-4 map-country-list border-top">
-                    <a rel="noopener" class="bs5 fs-2 fw-bold link-dark text-decoration-none " ng-if="!currentCountry.code"
+                    <div class="bs5 pb-3">
+                    <a rel="noopener" class="bs5 fs-1 fw-bold link-dark text-decoration-none " ng-if="!currentCountry.code"
                         translation-url href="{{translationUrl}}/search?tab=nationalRecords">
-                        <span ng-if="!currentCountry.code"> National Records </span>
+                        <span class="bs5 mb-2" ng-if="!currentCountry.code"> National Records </span>
                     </a>
-                    <a rel="noopener" class="bs5 fs-2 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
+                    <a rel="noopener" class="bs5  mb-5 fs-2 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
                         translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}">
                         <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i>
                         <span ng-bind="currentCountry.name|lstring"></span>
                     </a>
-
+                </div>
                     <div ng-if="isBCH && currentCountry">
                         <homepin-popup-bch>
                             </pin-popup-bch>
@@ -256,7 +257,7 @@
             <div id="Parties" class="text-center bs5 mt-3">
                 <div class="row">
                     <div class="col-md-4  fs-2 text-center ">
-                        <span class="label new-css-bg-party" ng-bind="numParty"></span>
+                        <span class="label new-css-bg-party-abs" ng-bind="numParty"></span>
                         <a rel="noopener" translation-url href="/countries/status/party"
                             class="link-dark text-decoration-none new-css-party-counts">Parties to the <span ng-bind="options.protocol"></span>
                         </a>
