@@ -3,8 +3,7 @@
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 700;
-    color: #333 !important;
-    font-family: "Roboto", sans-serif;
+    color: #666 !important;
 }
 
 .new-css-main-nav-link:hover {
@@ -84,7 +83,7 @@
 }
 .new-css-footer-absch {
     padding: 20px 0;
-    background-color: #00405C;
+    background-color: #009B48 !important;
     color: #FFF;
 }
 
@@ -94,7 +93,10 @@
     background-color: #00405C;
 }
 .new-css-home-section-top-absch {
-    background-color: firebrick;
+    background-image:url('/app/img/new-home/absch-homebg.gif');
+    background-position: bottom; 
+    background-size: cover; 
+    background-repeat: no-repeat;
 }
 .new-css-home-section-map {
     /* background-color: #E1F0F5; */
@@ -126,9 +128,7 @@
 .new-css-home-map-wrapper {
     position: relative;
 }
-.new-css-home-map-controls {
-    /* background-color: #EEE !important; */
-}
+
 .new-css-callout {
     padding: 1.25rem !important;
     margin: 1.25rem !important;

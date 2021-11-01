@@ -21,7 +21,7 @@ import _ from 'services/main';
                         //---------------------------------------------------------------------
                         function loadArticles(){
                             var ag = [];
-                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent($scope.tags||"ABSCH-Announcement")}]}});
+                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent($scope.tags||"absch-announcement")}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
                             
                             var qs = {
