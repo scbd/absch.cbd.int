@@ -50,7 +50,7 @@ import './directives/homepin-popup-abs';
             "areasSettings": {
                "alpha": 1,
                 "autoZoom": true,
-                "selectedColor": '#428BCA',
+                "selectedColor": '#111111',
                 "rollOverColor": '#000000',
                 "selectable": true,
                 "color": '#636363',
