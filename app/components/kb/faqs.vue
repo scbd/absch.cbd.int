@@ -4,7 +4,7 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <div class="mt-0 kb-faq" v-if="!loading">
             <h2>
-				{{ $t("faqs") }} 
+				{{ $t("frequentlyAskedQuestions") }} 
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
 					{{ $t("for") }} <strong>{{faqFilterTag}}</strong></span> 
 				<strong>({{faqCount}})</strong>

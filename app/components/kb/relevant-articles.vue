@@ -1,14 +1,20 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles">
-        <h4>{{ $t("relevantArticles") }}</h4>
+    <div class="widget fix widget_categories mt-2 right-side-articles" v-bind:class="{ 'relevant-articles': tag != ''}">
+        <h4>
+            <span v-if="type != 'faq' &&  type != 'help'">{{ $t("relevantArticles") }}</span>
+            <span v-if="type == 'faq'">{{ $t("faqs") }}</span>
+        </h4>
         <hr>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <ul>
             <li v-for="article in articles">
                 <a style="display:none" :href="`${articleUrl(article)}`">{{article.title[$locale]}}</a>
-                            <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
+                                <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
             </li>
         </ul>
+        <div v-if="type == 'faq'" class="view-more">
+        	<a href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
+		</div>
     </div>
 </template>
 
@@ -23,7 +29,8 @@ export default {
         CategoriesGroup
     },
     props:{
-        tag:String
+        tag:  String,
+        type: String,
     },
     data:  () => {
         return {
@@ -35,8 +42,13 @@ export default {
         this.articlesApi = new ArticlesApi();
     },
     async mounted() {
+        let relevantTag = this.tag;
+        const realmType = this.$realm.is('BCH') ? 'bch' : 'abs';
+        if(this.type == "faq"){
+            relevantTag = 'faq';
+        }
         let ag = [];
-        ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs', encodeURIComponent(this.tag) ]}}]}});
+        ag.push({"$match":{"$and":[{"adminTags": { $all : [realmType, encodeURIComponent(relevantTag)]}}]}});
         ag.push({"$project" : {[`title.${this.$locale}`]:1}});
         ag.push({"$limit" : 10});
         const query = {
@@ -49,14 +61,22 @@ export default {
         this.loading = false;
     },
     methods: {
-			articleUrl(article,){
+			articleUrl(article,tag){
 				const urlTitle = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
 				return `/kb/tags/${encodeURIComponent(this.tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(article._id)}`
 			},
-			goToArticle(article, tag){
-				this.$router.push({
-					path:this.articleUrl(article, tag)
-				});
+			goToArticle(article){
+                if(this.type =="faq"){
+                    const url = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+				    this.$router.push({path:`/kb/articles/${article._id}/${url}/bch`});
+                } else {
+                    this.$router.push({
+                        path:this.articleUrl(article)
+                    });
+                }
+            },
+            goToFaq(category){
+				this.$router.push({path:`/kb/faqs`});
 			},
     },
     i18n: { messages:{ en: i18n }}
