@@ -205,8 +205,8 @@ export const bchLeftMenuFilters = {
         },
         {
             "type": "thesaurus",
-            "term": "cbiFundingsrc",
-            "title": bchFilters.capacityBuildingInitiativeCbiFundingsrc,
+            "term": "cbiFundingSrc",
+            "title": bchFilters.capacityBuildingInitiativecbiFundingSrc,
             "field": "fundingSourceTypes_ss",
             "relatedField":"fundingSourceTypes_REL_ss"
         }

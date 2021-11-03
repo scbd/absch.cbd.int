@@ -47,7 +47,7 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "cnaJurisdictions",
 			"title": absFilters.areaOfJurisdiction,
-			"field": "jurisdiction_s"
+			"field": "jurisdiction_ss"
 		},
 		{
 			"type": "thesaurus",
@@ -108,13 +108,13 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "absSubjects",
 			"title": absFilters.keywords,
-			"field": "jurisdiction_ss"
+			"field": "keywords_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
-			"field": "jurisdiction_ss"
+			"field": "jurisdiction_s"
 		}
 	],
 	"absNationalModelContractualClause" : [{
@@ -126,13 +126,13 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "absSubjects",
 			"title": absFilters.keywords,
-			"field": "jurisdiction_ss"
+			"field": "thematicAreas_ss"
 		},
 		{
 			"type": "thesaurus",
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
-			"field": "jurisdiction_ss"
+			"field": "jurisdiction_s"
 		}
 	],
 	"absPermit" : [{
@@ -147,59 +147,7 @@ export const absLeftMenuFilters = {
 				"sort":"title_s"
 			},
 			"title": absFilters.absPermitIssuingAuthority,
-			"field": "absCNA_ss"
-		},
-		{
-			"type": "thesaurus",
-			"term": "cnaJurisdictions",
-			"title": absFilters.areaOfJurisdiction,
-			"field": "jurisdiction_s"
-		},
-		{
-			"type": "thesaurus",
-			"term": "cnaKeywords",
-			"title": absFilters.absPermitSubjectMK,
-			"field": "absGeneticResourceTypes_REL_ss"
-		},
-		{
-			"type": "solrRecords",
-			"query": {
-				"q": "schema_s:(contact authority)",
-				"sort":"title_s"
-			},
-			"title": absFilters.provider,
-			"field": "providers_ss"
-		},
-		{
-			"type": "solrRecords",
-			"query": {
-				"q": "schema_s:(contact contact)",
-				"sort":"title_s"
-			},
-			"title": absFilters.absPermitEntitiesToWhomPICGranted,
-			"field": "entitiesToWhomPICGranted_ss"
-		},
-		{
-			"type": "thesaurus",
-			"term": "countries",
-			"title": absFilters.absPermitCountries,
-			"field": "entitiesToWhomPICGrantedCountry_ss"
-		},
-		{
-			"type": "thesaurus",
-			"term": "usage",
-			"title": absFilters.usage,
-			"field": "usages_ss"
-		},
-		{
-			"type": "yesNo",
-			"title": absFilters.absPermitNeedToBuild,
-			"field": "needtobuild"
-		},
-		{
-			"type": "yesNo",
-			"title": absFilters.absPermitExpiredPermits,
-			"fieldfn": "buildExpiredPermitQuery"
+			"field": "absCNA_s"
 		},
 		{
 			"type": "date",
@@ -210,6 +158,34 @@ export const absLeftMenuFilters = {
 			"type": "date",
 			"title": absFilters.absPermitDateOfExpiry,
 			"field": "dateOfExpiry_dt"
+		},
+		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": absFilters.absPermitCountries,
+			"field": "entitiesToWhomPICGrantedCountry_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "cnaKeywords",
+			"title": absFilters.absPermitSubjectMK,
+			"field": "keywords_ss"
+		},
+		{
+			"type": "thesaurus",
+			"term": "usage",
+			"title": absFilters.usage,
+			"field": "usages_ss"
+		},
+		{
+			"type": "yesNo",
+			"title": absFilters.absPermitHasThirdParty,
+			"field": "hasThirdPartyTransferCondition_b"
+		},
+		{
+			"type": "yesNo",
+			"title": absFilters.absPermitReferencedByCPC,
+			"field": "referencedByCPC_ss"
 		}
 	],
 	"database" : [{
@@ -228,7 +204,14 @@ export const absLeftMenuFilters = {
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
 			"field": "jurisdiction_s"
+		},
+		{
+			"type": "thesaurus",
+			"term": "responsibleFunctions",
+			"title": absFilters.jurisdiction,
+			"field": "responsibleFunctions_ss"
 		}
+		
 	],
 	"absCheckpointCommunique" : [{
 		"type": "freeText",
@@ -236,89 +219,24 @@ export const absLeftMenuFilters = {
 		"field": "text_EN_txt"
 		},
 		{
-			"type": "thesaurus",
-			"term": "countries",
-			"title": absFilters.absCCSourceCountry,
-			"field": "sourceCountry_ss",
-			"comments" : "TODO: need to dd sountryCountry from IRCC"
-		},
-		{
 			"type": "solrRecords",
 			"query": {
-				"q": "schema_s:(absCheckpoint)",
+				"q": "schema_s:(absPermit)",
 				"sort":"title_s"
 			},
-			"title": absFilters.absCCCheckpointGranted,
-			"field": "_ss"
-		},
-		{
-			"type": "solrRecords",
-			"query": {
-				"q": "schema_s:(contact absPermit)",
-				"sort":"title_s"
-			},
-			"title": absFilters.absCCRIC,
-			"field": "_ss"
+			"title": absFilters.relatedIRCC,
+			"field": "absIRCCs_ss"
 		},		
 		{
 			"type": "date",
-			"title": absFilters.absCCDateOfGranted,
-			"field": "date_dt"
-		},
-		{
-			"type": "date",
-			"title": absFilters.absCCDateOfAccess,
-			"field": "dateOfExpiry_dt"
-		},
-		{
-			"type": "solrRecords",
-			"query": {
-				"q": "schema_s:(contact authority)",
-				"sort":"title_s"
-			},
-			"title": absFilters.provider,
-			"field": "providers_ss"
-		},
-		{
-			"type": "solrRecords",
-			"query": {
-				"q": "schema_s:(contact contact)",
-				"sort":"title_s"
-			},
-			"title": absFilters.absPermitEntitiesToWhomPICGranted,
-			"field": "entitiesToWhomPICGranted_ss"
-		},
-		{
-			"type": "thesaurus",
-			"term": "countries",
-			"title": absFilters.absPermitCountries,
-			"field": "entitiesToWhomPICGrantedCountry_ss"
+			"title": absFilters.cpcAccessDate,
+			"field": "dateOfAccess_dt"
 		},
 		{
 			"type": "thesaurus",
 			"term": "cnaKeywords",
 			"title": absFilters.keywords,
-			"field": "absGeneticResourceTypes_REL_ss"
-		},
-		{
-			"type": "thesaurus",
-			"term": "usage",
-			"title": absFilters.absCCCUsages,
-			"field": "usages_ss"
-		},
-		{
-			"type": "solrRecords",
-			"query": {
-				"q": "schema_s:(contact)",
-				"sort":"title_s"
-			},
-			"title": absFilters.absCCCQuery,
-			"field": "entitiesToWhomPICGranted_ss"
-		},
-		{
-			"type": "yesNo",
-			"title": absFilters.absCCCNeedToBuild,
-			"field": "needtobuild"
+			"field": "keywords_ss"
 		}
 	],
 	"absNationalReport" : [{
@@ -438,8 +356,8 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "thesaurus",
-			"term": "cbiFundingsrc",
-			"title": absFilters.cbiFundingsrc,
+			"term": "cbiFundingSrc",
+			"title": absFilters.cbiFundingSrc,
 			"field": "fundingSourceTypes_ss",
 			"relatedField":"fundingSourceTypes_REL_ss"
 		}
