@@ -66,7 +66,7 @@
 			async loadArticleByCategories(){
 				try{
 					this.KbCategories.forEach(category => {category.articles=undefined,	category.count=undefined});
-					const exclude = ['getting-help', 'faq'];
+					const exclude = ['faq'];
 					const adminTags = KbCategories.map(e=>e.adminTags.filter((v) => !exclude.includes(v))).flat();
 					const q = { 
 						$and : [

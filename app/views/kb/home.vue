@@ -10,7 +10,7 @@
                     <header>
 					<div class="categerios-parahraph">
                         <div class="col">
-                            <p>The <b>{{$realm.chShortName+ " "}}{{ $t("knowledgeBase") }}</b> is an online tool designed to help users become familiar with the BCH, learn how to submit records, search for information and complete other important tasks.</p>
+                            <p>{{ $t("the") }} <b>{{$realm.chShortName+ " "}}<span class="text-capitalize">{{ $t("knowledgeBase") }}</span></b> {{ $t("kbParagraph")}}</p>
                         </div>
                         </div>
                                     
