@@ -12,17 +12,19 @@
                     Clearing-House</span>
             </div>
             
-              <div ng-if="showNav" class="bs5 navbar-collapse">
-                <ul class="bs5 navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" href="#">Links</a></li>
+              <div ng-if="showNav" class="bs5 list-group navbar-collapse">
+                <div class="bs5 list-group w-100" >
+                <ul class="bs5 list-group mb-2 mb-lg-0">
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/about">About the ABSCH</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/search">Search</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/reports">National Report Analyzer</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/register">Submit</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/countries">Country Profiles</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/kb">Help</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="/forums">Forums</a></li>
+                    <li class="bs5 list-group-item list-group-item-action"><a class="bs5 link-dark fw-bold nav-link " aria-current="page" href="https://www.cbd.int/abs">About the Nagoya Protocol</a></li>
                 </ul>
+                </div>
               </div>
           </nav>
     </header>
@@ -38,206 +40,93 @@
             </a>
         </div>
     </header>
+<nav class="bs5 border-bottom mt-2 new-css-lg-header">
+    <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
+        <ul class="bs5 nav me-auto mx-2">
+            <li class="bs5 nav-item"><a rel="noopener" translation-url href="."
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark  px-2 px-md-4 active"
+                    aria-current="page">
+                    <span class="hidden-sm hidden-xs">Home</span>
+                    <span class="hidden-md hidden-lg"> <i class="fa fa-home"></i> </span>
+                </a>
+            </li>
+            <li class="bs5 nav-item"><a rel="noopener" translation-url href="/kb/tags/about/About"
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a></li>
 
-    <nav class="bs5 border-bottom mt-2 new-css-lg-header">
-        <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
-            <ul class="bs5 nav me-auto mx-2">
-                <li class="bs5 nav-item"><a href="." class="bs5 new-css-main-nav-link nav-link link-dark  px-2 px-md-4 active"
-                        aria-current="page">
-                        <span class="hidden-sm hidden-xs">Home</span> 
-                        <span class="hidden-md hidden-lg"> <i class="fa fa-home"></i> </span> 
-                    </a></li>
-                <li class="bs5 nav-item"><a href="/about"
-                        class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a></li>
-                <li class="bs5 nav-item dropdown">
-                    <a href="/search" class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
-                        type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                        aria-expanded="false">search</a>
-                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="bs5 nav-item"><a href="/register"
-                        class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">submit</a></li>
-                <li class="bs5 nav-item dropdown">
-                    <a href="countries" class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                        type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="hidden-sm hidden-xs">country profiles</span> 
-                        <span class="hidden-md hidden-lg"> countries </span></a>
-                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="bs5 nav-item dropdown">
-                    <a href="/kb" class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
-                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-                <li class="bs5 nav-item"><a href="/forums"
-                        class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">forums</a></li>
-            </ul>
-            <ul class="bs5 nav">
-                <li class="bs5 nav-item dropdown">
-                    <a href="." class="bs5 new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle" type="button"
-                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span class="hidden-sm hidden-xs">Nagoya Protocol</span> 
-                        <span class="hidden-md hidden-lg"> Protocol </span> 
-                    </a>
+            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
+                <a rel="noopener" translation-url href="#"
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
+                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Search</a>
+                <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item"
+                            href="search">Search records</a></li>
+                    </li>
+                    <li><a rel="noopener" translation-url
+                            class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold link-dark "
+                            href="reports">National Report Analyzer</a></li>
+                </ul>
+            </li>
+            <li class="bs5 nav-item"><a rel="noopener" translation-url href="/register"
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">submit</a>
+            </li>
 
-                    <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <li><a class="bs5 dropdown-item" href="#">Action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Another action</a></li>
-                        <li><a class="bs5 dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
-    </nav>
+
+
+
+            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
+                <a id="countryProfile" role="button" rel="noopener" href="#"
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
+                    type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <span class="hidden-sm hidden-xs">country profiles</span>
+                    <span class="hidden-md hidden-lg"> countries </span></a>
+                <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                    <li class="new-css-nav-country-profiles-search">
+                        <input type="text" class="form-control" placeholder="Search countries"
+                            ng-click="countrySearch($event)" ng-model="countrySearchQuery" />
+                    </li>
+                    <li>
+                        <ul class="new-css-nav-country-profiles">
+                            <li ng-repeat="c in countries | filter:startsWith track by c.code">
+                                <a rel="noopener" translation-url class="bs5 dropdown-item"
+                                    ng-href="/countries/{{::c.code|encodeURIComponent}}">
+                                    <span class="bold"
+                                        ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
+                                        {{::c.name | lstring:locale}}
+                                    </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="new-css-nav-country-profiles-footer">
+                        <a rel="noopener" translation-url href="/countries"> Overview - List all countries <i
+                                class="fa fa-arrow-right"></i> </a>
+                    </li>
+                </ul>
+            </li>
+            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
+                <a href="/kb" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
+                    type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
+                <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
+                            href="/kb">Knowledge Base (KB)</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
+                            href="/kb/faqs">FAQs</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
+                            href="#">Training material</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
+                            href="#">Training site</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
+                            href="#">Contact us</a></li>
+                </ul>
+            </li>
+            <li class="bs5 nav-item"><a href="/forums"
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">forums</a></li>
+        </ul>
+        <ul class="bs5 nav">
+            <li class="bs5 nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"
+                class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 "><span class="hiddex-xs hidden-sm">Nagoya</span> Protocol </a></li>
+            </li>
+        </ul>
+    </div>
+</nav>
 </div>
-
-
-
-
-
-
-<!-- <div  id="pageHeader">
-
-    <div class="header">
-    
-        <div ng-if="deviceSize=='xs'" class="small-header">
-            <a class="color-orange acronym" role="button" data-toggle="collapse" href="#collapseSmallNavMenu"
-                aria-expanded="false" aria-controls="collapseSmallNavMenu">
-                <i class="fa fa-bars color-black"></i> ABS Clearing-House
-            </a>
-            <div class="collapse" id="collapseSmallNavMenu">
-                <div class="small-nav">
-                    <ul>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url href=".">Home</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/kb" >Help</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/search" >Search</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/register" >Submit</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/countries" >Country Profiles</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>
-                        <li><a class="btn btn-default nav-link" rel="noopener" translation-url ng-href="/onlineconferences" >Forums</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    
-    
-        <div class="hidden-xs normal-header">
-            <img src="/app/img/cbd-green-spine.png" class="spine-logo">
-            <a href="." class="acronym"><span class="color-green">ABSCH</span></a>
-            <a href="." class="ch-name"><span class="color-grey" ng-if="!development_env && !training_env"> ABS Clearing-House</span></a>
-            <span class="color-pink ch-name" ng-if="development_env"> DEVELOPMENT</span>
-            
-
-
-        </div>
-    
-        <div class="hidden-xs normal-nav" style="width:100%;">
-            <ul class="nav nav-pills" >
-                <li><a rel="noopener" class="nav-link" translation-url href=".">HOME</a></li>
-                <li><a rel="noopener" class="nav-link" translation-url href="about">ABOUT</a></li>
-
-                <li hover-effect=".dropdown-menu">
-                    <a rel="noopener" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-haspopup="true" aria-expanded="false">Search <span class="fa fa-caret-down"></span></a>
-                    <ul class="search dropdown-menu" style="border:0;margin-top:0;">
-                        <li><a rel="noopener" translation-url ng-href="search"> Search </a></li>
-                        <li><a rel="noopener" translation-url href="reports" class="nav-link">National Report Analyzer</a></li>
-                    </ul>
-                </li>
-
-                <li><a rel="noopener" translation-url ng-href="register" class="nav-link">Submit</a></li>
-                <li hover-effect=".dropdown-menu" class="country-dropdown">
-                    <a rel="noopener" href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-haspopup="true" aria-expanded="false">
-                        <span class="visible-sm">Countries <i class="fa fa-caret-down"></i></span><span
-                            class="hidden-sm">Country Profiles <i class="fa fa-caret-down"></i></span> </a>
-    
-                    <ul class="dropdown-menu" style="border:0;margin-top:0;">
-                        <li style="border-bottom: 1px solid #eee;"> <a rel="noopener"
-                                style="color:#111!important;font-size:16px;" translation-url ng-href="/countries"> Overview - List all
-                                countries </a></li>
-                        <li style="padding:5px;border-bottom: 1px solid #eee;">
-                            <input type="text" class="form-control" ng-click="countrySearch($event)"
-                                ng-model="countrySearchQuery" />
-                        </li>
-                        <li>
-                            <ul class="country-list-dd" style="padding-left: 10px;max-height:340px;overflow-y:scroll; ">
-                                <li style="border:0!important;"
-                                    ng-repeat="c in countries | filter:startsWith track by c.code">
-                                    <a rel="noopener" translation-url style="color:#666!important;font-size:14px;"
-                                        ng-href="/countries/{{::c.code|encodeURIComponent}}">
-                                        <span class="bold"
-                                            ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
-                                            {{::c.name | lstring:locale}}
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
-
-                <li hover-effect=".dropdown-menu">
-                    <a rel="noopener" href="/kb" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
-                        aria-haspopup="true" aria-expanded="false" >
-                        Help <span class="fa fa-caret-down"></span></span>
-                    </a>
-                    <ul class="help dropdown-menu" style="border:0;margin:0;">
-                        <li>
-                            <a rel="noopener" translation-url href="/kb">Knowledge Base</a>
-                        </li>
-                        <li>
-                            <a rel="noopener" translation-url href="/kb/faqs">FAQs</a>
-                        </li>
-                        <li>
-                            <a rel="noopener" translation-url href="/kb/articles">Articles</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li>
-                    <a rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/"
-                        class="nav-link">Forums</a>
-                </li>
-
-                <li class="pull-right">
-                    <a rel="noopener" translation-url href="http://www.cbd.int/abs" class="nav-link">NAGOYA PROTOCOL</a>
-                </li>
-    
-            </ul>
-        </div>
-    </div>
-    
-    <div ng-hide="breadcrumbs.get().length == 1">
-    
-        <div class="breadcrumbs">
-            <a rel="noopener" translation-url href="https://www.cbd.int" class="margin-right-xs">CBD</a>
-            <span ng-repeat="breadcrumb in breadcrumbs.get()">
-                &nbsp;&nbsp;/&nbsp;&nbsp;
-                <span ng-if="!breadcrumb.param">
-                    <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
-                        ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                    <span ng-if="$last" ng-bind="breadcrumb.label"></span>
-                </span>
-                <span ng-if="breadcrumb.param">
-                    <a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
-                        ng-bind="breadcrumb.label" class="margin-right-xs"></a>
-                    <span ng-if="$last" ng-bind="breadcrumb.label"></span>
-                </span>
-            </span>
-        </div>
-    </div>
-    
-    </div> -->
