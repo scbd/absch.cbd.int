@@ -79,11 +79,11 @@ body > div:first-child, .page-content {
 
 #government .color-party,
 .color-party{
-    color:#9e6621!important;
+    color:#5F4586!important;
 }
 #government .color-non-party,
 .color-non-party{
-    color:#00405C!important;
+    color:#888!important;
 }
 .label-party,
 .bg-party {
