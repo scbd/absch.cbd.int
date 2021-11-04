@@ -12,7 +12,7 @@
   <div class="bs5 row row-cols-1 row-cols-md-2 ">
 
     <div class="bs5 col" v-for="record in recordList">
-      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow">
+      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
         <h4><a :href="record.url_ss" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
