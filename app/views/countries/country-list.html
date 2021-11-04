@@ -143,7 +143,7 @@
             </div>
               <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >                            
 				<div ng-repeat="header in headerCount">
-					<span style="cursor:pointer;" ng-click="sortTable(header.schema)" data-toggle="tooltip" title="{{header.title|lstring:locale}}"
+					<span style="cursor:pointer;" ng-click="sortTable(header.schema)" data-bs-toggle="tooltip" title="{{header.title|lstring:locale}}"
 						data-container="body">
                         <span id="nrCount-{{header.shortCode}}" class="bold color-black" ng-bind="header.shortCode">&nbsp;<i class="fa fa-info-circle color-litegrey" ></i> </span><br>
 					<span class="badge bg-black" ng-bind="header.count"></span>
