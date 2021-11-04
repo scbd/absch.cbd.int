@@ -82,6 +82,9 @@
 .knowledge-base .right-side-articles{
 	margin-top: 3.6rem;
 }
+.knowledge-base .right-side-articles.relevant-articles{
+	margin-left: 20px;
+}
 .categories .side-bar .getting-help{
 	margin-top: 50px;
 	margin-bottom: 50px;
@@ -157,7 +160,7 @@
 	text-decoration: underline;
 	color: #6054BA
 }
-.knowledge-base .categories-list .view-more,.side-bar .latest-faq .view-more{
+.knowledge-base .categories-list .view-more,.side-bar .right-side-articles .view-more{
 	text-align: end;
 	bottom: 10px;
 	right: 10px;
@@ -169,7 +172,7 @@
 	line-height: 170%;
 	margin-top: 25px;
 }
-.latest-faq .view-more a{
+.right-side-articles .view-more a{
 	color: #00405C;
 }
 
@@ -231,14 +234,10 @@
 }
 .knowledge-base .categories-list .cate-list-ul .cate-list-li, .knowledge-base .widget_categories li {
 	list-style: disc;
-	padding-top: 10px;
+	padding-top: 20px;
 	margin-left: 20px;
 	font-size: 16px;
 	padding-left: 0px;
-}
-
-.knowledge-base .categories-list .cate-list-ul .cate-list-li{
-	padding-top: 20px;
 }
 .knowledge-base .categories-list .cate-list-ul .cate-list-li a {
 	padding-left: 0px;
@@ -270,7 +269,7 @@
 .knowledge-base .widget_categories ul{
 	padding: 10px 0;
 }
-.knowledge-base .widget_categories .latest-faq ul,.knowledge-base .widget_categories .getting-help ul,.knowledge-base .kb-breadcrumbs ol{
+.knowledge-base .widget_categories .getting-help ul,.knowledge-base .kb-breadcrumbs ol{
 	padding: 0;
 }
 
@@ -285,7 +284,8 @@
 
 .knowledge-base .tagcloud{
 	margin-top: 3px;
-	display: inline-block;
+	display: inline-flex;
+	flex-wrap: wrap;
 }
 .knowledge-base .widget_categories .tag-scroll{
 	height: 250px;
