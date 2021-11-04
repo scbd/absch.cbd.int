@@ -12,15 +12,15 @@
   <div class="bs5 row row-cols-1 row-cols-md-2 ">
 
     <div class="bs5 col" v-for="record in recordList">
-      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow">
+      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
         <h4><a :href="record.url_ss" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div style="position:absolute;bottom:5px; width:95%">
+          <span class="bs5 bg-light text-uppercase badge text-dark pull-left new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
           <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
           <a v-if="record.government_s" target="_blank" :href="`/countries/${encodeURIComponent(record.government_s)}`"><span class="bs5 badge bg-light text-dark new-css-rectype-national"><i class="bs5 pe-1 flag-icon" v-bind:class="'flag-icon-'+record.government_s"></i> {{record.rec_countryName}}</span></a>
-          <span class="bs5 bg-light text-uppercase badge text-dark pull-right new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
     </div>

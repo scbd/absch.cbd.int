@@ -138,12 +138,12 @@
     border-radius: .25rem !important;
     background-color: #FFF !important;
 }
-.new-css-callout-reference {
-    border-left-color: #fa6938 !important;
-    min-height:120px;
-}
 .new-css-callout-national {
     border-left-color: #428BCA !important;
+    min-height:120px;
+}
+.new-css-callout-reference {
+    border-left-color: #fa6938 !important;
     min-height:120px;
 }
 

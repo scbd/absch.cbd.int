@@ -12,22 +12,10 @@ export default ['$scope', 'articlesService', function ($scope, articlesService) 
         .then(function(article){
             $scope.betaArticle = article;
         })
-    }];
 
-app.directive('exploreMoreOnClick', ['$anchorScroll', function ($anchorScroll) {
-  return {
-    restrict: 'E',
-    replace: true,
-    transclude: true,
-    template: '<div class="cursor-pointer bs5 my-2 my-lg-5 mt-lg-5 p-2 pt-lg-5 text-center   hidden-sm hidden-xs"><a class= "text-decoration-none"><span class="bs5 display-6 fs-1 rounded  py-3 px-5 color-white new-explore-btn">Explore the map <i class="fa  fa-arrow-down"></i></span></a></div >',
-    scope: {
-    },
-    link: function (scope, element) {
-      element.on('click', function () {
+      $scope.exploreMore = function (  ){
         $('html, body').animate({
           scrollTop: $("#homePageMapSection").offset().top
         }, 1000);
-      });
-    }
-  };
-}]);
+      }
+    }];

@@ -18,16 +18,16 @@
                                 <div class="ps-3">
                                     <h2 class="bs5 fw-bold text-left mt-2 mb-4">Learn about the BCH</h2>
                                     <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="/kb/tags/about/About">About the BCH</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="/kb">About the BCH</a></li>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="http://bch.cbd.int/protocol">About the Protocol</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/search/capacity-building">Capacity-building</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="http://bch.cbd.int/protocol/cpb_art22.shtml">Capacity-building</a></li>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/faqs">FAQs</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="bs5 card-footer new-css-card-footer text-muted">
-                            <a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/kb/tags/about/About">
+                            <a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/kb">
                                 Get Started
                                 <i class="fa fa-arrow-right"></i> </a>
                         </div>
@@ -43,9 +43,9 @@
 
                                     <ul>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/search?openTour">Take the Tour</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="#">Help using the search</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/tags/finding-information/Searching-for-information-in-the-BCH/5ffe522c261fe900012a104b">Help using the search</a></li>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/registries">Registries: LMO-Organism-Gene</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/reports">National Reports</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/search?currentPage=1&schema=cpbNationalReport3&schema=cpbNationalReport2&schema=cpbNationalReport1&schema=cpbNationalReportInterim&schema=cpbNationalReport4">National Reports</a></li>
                                     </ul>
 
 
@@ -67,10 +67,9 @@
                                     <h2 class="bs5 fw-bold text-left mt-2  mb-4">Submit records</h2>
                                     
                                     <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="#">Sign-in</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="#">Get your account</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">Sign in</a></li>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/register?openTour">Take the Tour</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Submitting-information">Help submitting records</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/5ffe5700261fe900012a1057">Help submitting records</a></li>
                                     </ul>
                                    
                                 </div>
@@ -84,7 +83,11 @@
 
                 </div>
             </div>
-            <explore-more-on-click></explore-more-on-click>
+            <div class="cursor-pointer bs5 my-2 my-lg-5 mt-lg-5 p-2 pt-lg-5 text-center   hidden-sm hidden-xs">
+                <a class= "text-decoration-none" ng-click="exploreMore();">
+                  <span class="bs5 display-6 fs-1 rounded  py-3 px-5 color-white new-explore-btn">Explore the map <i class="fa  fa-arrow-down"></i></span>
+                </a>
+              </div >
             
         </div>
     </div>
