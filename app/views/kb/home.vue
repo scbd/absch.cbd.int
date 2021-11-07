@@ -3,7 +3,7 @@
      <link href='http://fonts.googleapis.com/css?family=Nunito' rel='stylesheet' type='text/css'>
    
     <div class="knowledge-base">
-        <auto-complete-search></auto-complete-search>
+        <search></search>
         <section class="categories">
             <div class="container">
                 <div class="row">
@@ -32,7 +32,7 @@
 
     import CategoriesGroup from '../../components/kb/article-categories.vue';
     import sideBar from '../../components/kb/right-side-bar.vue';
-    import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
+    import search from '../../components/kb/search.vue';
     import i18n from '../../locales/en/components/kb.json';
     
 export default {
@@ -40,7 +40,7 @@ export default {
     components:{
         CategoriesGroup,
         sideBar,
-        AutoCompleteSearch
+        search
     },
 
     props:{

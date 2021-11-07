@@ -15,8 +15,11 @@
 									<span class="article-title">
 										{{article.title[$locale]}}
 									</span>
-                  <div class="article-summary" @click="goToArticle(article, realmTag)">
-                    {{article.summary ? article.summary[$locale] : ''}}...
+                  <div v-if="article.content" class="article-summary" @click="goToArticle(article, realmTag)">
+                    {{article.content[$locale]}}
+                  </div>
+                  <div v-if="article.summary" class="article-summary" @click="goToArticle(article, realmTag)">
+                    {{article.summary[$locale]}}
                   </div>
                 </a>
                 <div class="inner-area">
@@ -61,8 +64,6 @@ export default {
     return {
       articles: [],
       loading: true,
-      tagDetails: {},
-      articlesCount:0,
       pageNumber:1,
       recordsPerPage:10,
       realmTag:'',
@@ -100,47 +101,54 @@ export default {
       this.$router.push({path: this.tagUrl(tag)});
     },
     onChangePage(pageNumber) {
-      this.pageNumber = pageNumber;
       this.article=[];
       this.loading = true;
       this.loadArticles(pageNumber);
     },
     async loadArticles(pageNumber, text){
+      this.pageNumber = pageNumber;
       if(text){
         this.search = text;
       }
       this.articlesCount= 0;
       this.articles 	  = [];
       this.loading = true;
-      const q = {
-        $and : [
-          { adminTags : this.realmTag },
-        ]
-      };
-      const f = {
-        [`title.${this.$locale}`]	: 1,
-        [`summary.${this.$locale}`]	: 1,
-        adminTags 					: 1,
-        "meta.modifiedOn":1, _id:1
-      } ;
+      let countAg = [];
+      let searchAg = [];
       if(this.search){
-                    q.$and.push({"$or" : [{[`title.${this.$locale}`]: { "$$contains" : encodeURIComponent(this.search)}},
-                                              {[`summary.${this.$locale}`]: { "$$contains" : encodeURIComponent(this.search)}}]});
-                }
-      const groupTags = JSON.stringify([encodeURIComponent(this.realmTag)]);
-      const groupLimit = this.recordsPerPage;
-      const groupSkip  = (pageNumber-1) * this.recordsPerPage
-      const groupSort  = { "meta.modifiedOn":-1 };
-
-      const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags, groupSkip });
-      if(result?.length){
-
-        result.forEach(element => {
-          this.articlesCount= this.articlesCount + element.count;
-          this.articles 	  = [...this.articles, ...element.articles];
-        });
+        const match = {"$match":{"$and":[{"$or":[{[`title.${this.$locale}`]:{"$$contains":encodeURIComponent(this.search)}},
+                {[`summary.${this.$locale}`]: { "$$contains" : encodeURIComponent(this.search)}},
+                {[`content.${this.$locale}`]: { "$$contains" : encodeURIComponent(this.search)}}]},
+              {"adminTags": { $all : [this.realmTag]}}]}};
+        searchAg.push(match);
+        countAg.push(match);
+      } else {
+        const matchTag = {"$match":{"$and":[{"adminTags": { $all : [ this.realmTag]}}]}};
+        searchAg.push(matchTag);
+        countAg.push(matchTag);
       }
+      countAg.push({"$match":{"$and":[{"adminTags": { $all : [ this.realmTag]}}]}});
+      searchAg.push({"$project" :
 
+            {[`title.${this.$locale}`]	: 1,
+              [`summary.${this.$locale}`]	: 1,
+              adminTags 					: 1,
+              "meta.modifiedOn":1, _id:1}});
+      searchAg.push({"$limit" : pageNumber * this.recordsPerPage});
+      searchAg.push({"$skip" : (pageNumber-1) * this.recordsPerPage});
+      countAg.push({"$count":"count"})
+      const countQuery = {
+        "ag" : JSON.stringify(countAg)
+      };
+      const searchQuery = {
+        "ag" : JSON.stringify(searchAg)
+      };
+
+      const [count, articlesList]  = await Promise.all([ this.articlesApi.queryArticles(countQuery), this.articlesApi.queryArticles(searchQuery)]);
+      if((articlesList || []).length) {
+        this.articles =  articlesList;
+        this.articlesCount = count[0].count;
+      }
       this.loading = false;
 
     },

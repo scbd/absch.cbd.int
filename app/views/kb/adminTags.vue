@@ -1,6 +1,6 @@
 <template>
     <div class="knowledge-base">
-        <auto-complete-search></auto-complete-search>
+        <search></search>
         <section class="categories">
             <div class="container">
                 <article-by-tag></article-by-tag>
@@ -16,13 +16,13 @@
 <script>
 
 	import articleByTag from '../../components/kb/articles-by-tag.vue';
-	import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
+	import search from '../../components/kb/search.vue';
 
 	export default {
 		name:'kbAdminTags',
 		components:{
 			articleByTag,
-			AutoCompleteSearch
+			search
 		},
 
 		props:{
