@@ -52,7 +52,7 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
       } 
 
       if($scope.code.toUpperCase() == 'GB')
-            $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300); 
+            $timeout(function(){$element.find('[data-bs-toggle="tooltip"]').tooltip()}, 300); 
       
       if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
         $scope.loadingMap = true;

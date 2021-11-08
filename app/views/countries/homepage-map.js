@@ -350,7 +350,7 @@ import './directives/homepin-popup-abs';
 
                         if(($scope.currentCountry.exceptionCountry||'').toLowerCase()=='gb' || ($scope.currentCountry.code||'').toLowerCase() == 'gb'){
                             $timeout(function(){
-                                $element.find('[data-toggle="tooltip"]').tooltip(); 
+                                $element.find('[data-bs-toggle="tooltip"]').tooltip(); 
                             },300)
                         }
                         return;

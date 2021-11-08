@@ -19,7 +19,7 @@
                 <strong>(<span ng-bind="$parent.searchResult.data.facets.schemas[doc.id]||0"></span>)</strong>
             </a>
             <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>-->
-           <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{doc.description}}" data-container="body"></span>
+           <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-white" data-bs-toggle="tooltip" data-html="true" data-title="{{doc.description}}" data-container="body"></span>
 
     </div>
     <div ng-if="(searchKeyword && !showFilters) && rf_filters.length" style="margin-bottom:10px;"></div>  

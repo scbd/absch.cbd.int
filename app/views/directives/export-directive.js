@@ -184,7 +184,7 @@ import 'ngDialog';
                     }
 
                     $timeout(function(){
-                        $element.find('[data-toggle="tooltip"]').tooltip();
+                        $element.find('[data-bs-toggle="tooltip"]').tooltip();
                     },50);
 
                     $scope.closeDialog = function(){

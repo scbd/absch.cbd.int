@@ -138,14 +138,14 @@ import 'views/forms/edit/document-selector'
 
                     $scope.ngRepeatFinished = function () {
                         $timeout(()=>{
-                            $element.find('[data-toggle="tooltip"]').tooltip();
+                            $element.find('[data-bs-toggle="tooltip"]').tooltip();
                         }, 0);                      
                     }
 
                     $scope.removeSchemaFilters = function (option, filter) {
                         //for some reason the tooltip currently focused is not removed on removeSchemaFilters evt, so remove all tooltip since 
                         // it will be the only tooltip open. 
-                        $element.find('[data-toggle="tooltip"]').tooltip('hide');
+                        $element.find('[data-bs-toggle="tooltip"]').tooltip('hide');
                         $timeout(function(){
                             if(filter.type=='solrRecords'){
                                 var index = _.findIndex(filter.selectedItems, function(item){ return item.identifier == option.identifier_s });//+ '@' + option._revision_i

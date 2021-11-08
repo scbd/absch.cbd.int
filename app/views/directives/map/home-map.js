@@ -16,11 +16,11 @@ import 'services/main';
 
         $scope.showTagLine = 1;
         $scope.showPartyTagLine = 1;
-        $element.find('[data-toggle="tooltip"]').tooltip();
+        $element.find('[data-bs-toggle="tooltip"]').tooltip();
         
         //=======================================================================
         $scope.toggleTooltip = function(){
-             $element.find('[data-toggle="tooltip"]').tooltip('hide');
+             $element.find('[data-bs-toggle="tooltip"]').tooltip('hide');
         }
 
       }, //link

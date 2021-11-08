@@ -80,28 +80,28 @@
                             <td>
                                 <span class="comma" ng-if="roles.isNationalFocalPoint">
                                     National Focal Point
-                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body"
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
                                         data-title="The National Focal Points are responsible for liaison with the Secretariat as well as for designating themselves or another user as a BCH focal point. The National Focal Point can create draft national records and submit them to the BCH focal point for publication.">
-                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body"
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
                                         data-title="The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a Publishing Authority."></span></span>
                                
                                 <span class="comma" ng-if="roles.isPublishingAuthority">
                                     Publishing Authority (PA)                 
-                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
-                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA."></span></span>
                                
                                 <span class="comma" ng-if="roles.isNationalAuthorizedUser">
                                     National Authorized User (NAU) 
-                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="National Authorized User (NAU) can create draft national records and submit them to the BCH focal point to verify and publish.">
-                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority for approval."></span></span>
                                
                                 <span class="comma" ng-if="roles.isUser && !(roles.isNationalFocalPoint && roles.isPublishingAuthority && roles.isNationalAuthorizedUser)">
                                     Registered User 
-                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" 
+                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         data-title="Regular users can create draft reference records and request their publication from the CBD Secretariat."></span></span>
                                 
                                 <span class="comma" ng-if="roles.isAdministrator">
@@ -169,10 +169,10 @@
 
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-blue">National records</span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
                                 data-title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant for the implementation of the Protocol.">
                             </span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" ng-if="isBch"
+                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isBch"
                                 data-title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant to the implementation of the Protocol.">
                             </span>                            
                         </div>
@@ -184,16 +184,16 @@
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip" ><i class="fa fa-chevron-circle-down cursor"></i></button>
-                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip" ><i class="fa fa-plus"></i></button>
-                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip" ><i class="fa fa-list"></i></button>
+                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-chevron-circle-down cursor"></i></button>
+                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="Add new record" data-bs-toggle="tooltip" ><i class="fa fa-plus"></i></button>
+                                                <button disabled type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-bs-toggle="tooltip" ><i class="fa fa-list"></i></button>
                                             </div>
                                         </td>
                                         <td style="min-width:180px!important;">
                                             <a rel="noopener" translation-url href="/search" class="color-darkgrey" style="font-weight:500;">
                                                National Focal Points (NFP)</a>
                                             <span ng-if="schemas['focalPoint'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
-                                            data-toggle="tooltip" data-html="true" data-title="{{schemas['focalPoint'].description|lstring:locale}}" data-container="body"></span>
+                                            data-bs-toggle="tooltip" data-html="true" data-title="{{schemas['focalPoint'].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='focalPoint'"></span>
@@ -213,15 +213,15 @@
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip"
+                                                <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
                                                     <i class="fa fa-chevron-circle-down cursor"
                                                         ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
                                                         aria-hidden="true"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
                                                             class="fa fa-plus"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-bs-toggle="tooltip"
                                                         ng-click="gotoList($event,schema)"><i
                                                             class="fa fa-list"></i></button>
                                             </div>
@@ -231,7 +231,7 @@
                                                 class="color-darkgrey" style="font-weight:500;">
                                                 <span ng-bind="schema|schemaNamePlural"></span> (<span ng-bind="schema|urlSchemaShortName"></span>)</a>
                                             <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
-                                                data-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
+                                                data-bs-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
@@ -272,15 +272,15 @@
                                 <tr>
                                     <td style="width:70px;">
                                         <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                            <button id="quickViewContact" type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip"
+                                            <button id="quickViewContact" type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                 ng-click="showTopRecords($event,'contact')">
                                                 <i class="fa fa-chevron-circle-down cursor"
                                                     ng-class="{'fa-chevron-circle-down':!topRecords['contact'], 'fa-chevron-circle-up':topRecords['contact']}"
                                                    aria-hidden="true"></i></button>
-                                                <button id="addNewRecordContact" type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip"
+                                                <button id="addNewRecordContact" type="button" class="btn btn-xs btn-default" data-title="Add new record" data-bs-toggle="tooltip"
                                                     ng-click="gotoNew($event,'contact')"><i
                                                         class="fa fa-plus"></i></button>
-                                                <button  id="viewListContact" type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip"
+                                                <button  id="viewListContact" type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-bs-toggle="tooltip"
                                                     ng-click="gotoList($event,'contact')"><i
                                                         class="fa fa-list"></i></button>
                                         </div>
@@ -292,7 +292,7 @@
                                             (<span ng-bind="schemas['contact'].shortCode|lstring:locale"></span>)
                                         </a>
                                             <span ng-if="schemas['contact'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
-                                            data-toggle="tooltip" data-html="true" data-title="{{schemas['contact'].description|lstring:locale}}" data-container="body"></span>
+                                            data-bs-toggle="tooltip" data-html="true" data-title="{{schemas['contact'].description|lstring:locale}}" data-container="body"></span>
 
                                     </td>
                                     <td style="max-width:10%">
@@ -326,9 +326,9 @@
                     <div>
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-orange"> Reference records
-                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
+                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
                                     data-title="Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
-                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-toggle="tooltip" data-html="true" data-container="body"  ng-if="isBch"
+                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"  ng-if="isBch"
                                     data-title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
                             </span>
                         </div>
@@ -340,15 +340,15 @@
                                     <tr>
                                         <td style="width:70px;">
                                             <div class="btn-group btn-group-xs" style="width:70px;" role="group">
-                                                <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-toggle="tooltip"
+                                                <button type="button" class="btn btn-xs btn-default" data-title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
                                                     <i class="fa fa-chevron-circle-down cursor"
                                                         ng-class="{'fa-chevron-circle-down':!topRecords[schema], 'fa-chevron-circle-up':topRecords[schema]}"
                                                         aria-hidden="true"></i>
-                                                    <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-toggle="tooltip"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
                                                             class="fa fa-plus"></i></button>
-                                                    <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-toggle="tooltip"
+                                                    <button type="button" class="btn btn-xs btn-default" data-title="View list of all records" data-bs-toggle="tooltip"
                                                         ng-click="gotoList($event,schema)"><i
                                                             class="fa fa-list"></i></button>
                                             </div>
@@ -359,7 +359,7 @@
                                                <span ng-bind="schema|schemaNamePlural"></span> (<span ng-bind="schema|urlSchemaShortName"></span>)</a>
 
                                             <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
-                                            data-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
+                                            data-bs-toggle="tooltip" data-html="true" data-title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
                                         <td style="max-width:10%">
                                             <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
@@ -412,7 +412,7 @@
             </script>
 
             <script type="text/ng-template" trados-translation="true" id="offline-formats">                
-                <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-toggle="tooltip" data-container="body" 
+                <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
                     ng-if="::offlineFormats[schema][code]">
                     <a rel="noopener" target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
                     <span ng-if="::!$last"> | </span>
