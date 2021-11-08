@@ -45,7 +45,7 @@
                 <div class="col-xs-12">
                     <div class="well">
                         <h3 style="margin:0 0 10px 0;padding:0;border-bottom:1px solid #999;">Record Information</h3>
-                        <div> 
+                        <div>
                             <span style="font-size:12px">Type: </span>
                             <span ng-bind="internalDocumentInfo.metadata.schema | schemaName"></span> </div>
                         <div>
@@ -71,7 +71,7 @@
                             <div view-history document-id="internalDocumentInfo.identifier"></div>
                         </div>
 
-                       
+
                     </div>
                 </div>
             </div>
@@ -79,26 +79,26 @@
 
         <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
             <h3>
-                You are viewing a DELETED record. 
+                You are viewing a DELETED record.
             </h3>
             <p>This record information is displayed for reference purpose only and should be not used.</p>
         </div>
 
         <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision != internalDocumentInfo.revision && revisionNo != 'draft'">
             <h3>
-                This document has been updated. This is not the latest published version. 
+                This document has been updated. This is not the latest published version.
                 <a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName|encodeURIComponent}}/{{internalDocument | uniqueIDWithoutRevision|encodeURIComponent}}"
                     target="new">Click here to view the latest version of the record.</a>
             </h3>
         </div>
-        
+
         <div class="alert alert-success comapre-message" role="alert" ng-show="comparingRevision">
             <h3>
                 <span class="fa fa-window-restore"></span>
                 Comparing version <strong ng-bind="comparingRevision"></strong> with latest version <strong ng-bind="internalDocumentInfo.latestRevision"></strong>
                 <button ng-disabled="isComparing" class="btn btn-default btn-success btn-xs pull-right" type="button"ng-click="closeComparison()">
                     <span class="fa fa-times-circle"></span> Close comparison
-                </button> 
+                </button>
             </h3>
         </div>
 
@@ -121,8 +121,8 @@
             <!-- ng-if="showDifferenceButton"  style="display: none;"-->
             <button ng-if="showComparison" ng-disabled="isComparing" class="btn btn-default btn-success btn-xs dropdown-toggle" type="button" id="comparisonMenu"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="loadRecordRevisions()">
-                <span ng-if="!comparingRevision">Compare</span> 
-                <span ng-if="comparingRevision">Comparing <span ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span> 
+                <span ng-if="!comparingRevision">Compare</span>
+                <span ng-if="comparingRevision">Comparing <span ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span>
                 <span class="caret"></span>
             </button>
             <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
@@ -136,10 +136,10 @@
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div ng-if="shareVueComponent" ng-class="{'hidden':isEmbed}" class="share-single-document full-text-display pull-right compare-buttons">
-            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader"></share-record>
+        <div ng-if="shareVueComponent && chDocumentId" class="share-single-document full-text-display pull-right compare-buttons">
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus" :ch-document-id="chDocumentId"></share-record>
         </div>
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">
             <div record-options></div>
         </div>
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>

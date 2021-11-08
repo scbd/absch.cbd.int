@@ -30,12 +30,12 @@ import 'angular-vue'
         return {
             restrict: 'EAC',
             replace: true,
-            template: template, 
+            template: template,
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
              'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log','IGenericService',
-            function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
+            function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus,
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService,
                     $timeout, locale, solr, toastr, $log, IGenericService) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
@@ -45,31 +45,31 @@ import 'angular-vue'
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                         var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
-    
+
                         var groupFieldMapping = [
                             {
-                                field:'government', 
+                                field:'government',
                                 sortFields:['government_EN_s asc'],
                                 tabs: ['nationalRecords', 'allRecords'],
                                 solrField:'government_s',
                                 titleField:'government_'+locale.toUpperCase()+'_s'
                             },
                             {
-                                field:'schema', 
+                                field:'schema',
                                 sortFields:['schema_EN_s asc'],
                                 solrField:'schema_s',
                                 titleField:'schema_'+locale.toUpperCase()+'_s'
                             },
                             // {
-                            //     field:'submissionYear', 
+                            //     field:'submissionYear',
                             //     sortFields:['submissionYear_s asc'],
                             //     solrField:'submissionYear_s',
                             //     titleField:'submissionYear_s'
                             // }
-                        ];    
-                        var queryCanceler = null;                        
+                        ];
+                        var queryCanceler = null;
                         var isABS = realm.is('ABS');
-                        var isBCH = realm.is('BCH');   
+                        var isBCH = realm.is('BCH');
                         $scope.isEmbed = $routeParams.embed;
                         var leftMenuFilters  = [];
                         $scope.searchAlertError = '';
@@ -85,18 +85,18 @@ import 'angular-vue'
                             rowsPerPage     : 25,
                             groupByFields   : ['government', 'schema'],
                             viewType        : 'default',
-    
+
                             skipResults       : $attrs.skipResults,
                             skipDateFilter    : $attrs.skipDateFilter,
                             skipSaveFilter    : $attrs.skipSaveFilter,
                             skipTextFilter    : $attrs.skipTextFilter,
                             skipKeywordsFilter: $attrs.skipKeywordsFilter,
-    
+
                             searchFilters   : {},
                             countriesFilters: {},
                             regionsFilter   : {},
                             searchKeyword   : ''
-                        }   
+                        }
 
                     ////////////////////////////////////////////
                     ////// scope functions
@@ -104,16 +104,16 @@ import 'angular-vue'
                     $scope.tour = function(){
                         $scope.tourOn = true;
                         var joyride = joyrideService;
-                        
+
                         joyride.config = {
                             overlay: true,
                             onStepChange: function(){  },
                             onStart: function(){   },
                             onFinish: function(){
                                 joyride.start = false;
-                                $scope.tourOn = false; 
-                                $scope.showFilters = false;                             
-                                $('#searchResult').removeClass('active jr_target'); 
+                                $scope.tourOn = false;
+                                $scope.showFilters = false;
+                                $('#searchResult').removeClass('active jr_target');
                             },
                             steps : [
                                 {
@@ -281,7 +281,7 @@ import 'angular-vue'
 
                         function openFilterTab(resumeJoyride){
                             var step = joyride.config.steps[joyride.current];
-                            if(step.selector == "#closeFilterTab") { 
+                            if(step.selector == "#closeFilterTab") {
                                 $scope.showFilters = "recordTypesFilter"; }
                             else {
                                 $scope.showFilters = step.selector.replace('#','').replace('TabJR', ''); }
@@ -398,7 +398,7 @@ import 'angular-vue'
                            $scope.setFilters[fid] = {'type':'freeText', 'name': text, 'id':fid};
 
                            $scope.searchKeyword = "";
-                          
+
                            $scope.searchResult.sortFields = ['relevance asc']
                         }
 
@@ -409,12 +409,12 @@ import 'angular-vue'
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
-                        if(dateVal.field=='updatedDate_dt') 
+                        if(dateVal.field=='updatedDate_dt')
                         {
                              var name = 'Date published ('+dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' ;
                         }
 
-                        if(dateVal.field=='createdDate_dt') 
+                        if(dateVal.field=='createdDate_dt')
                         {
                              var name = 'Date created ('+dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' ;
                         }
@@ -440,7 +440,7 @@ import 'angular-vue'
                         delete $scope.setFilters[filterID];
 
                         if($scope.searchFilters[filterID] && $scope.searchFilters[filterID].type == 'schema' && $scope.onSchemaFilterChanged){
-                            var leftFilters = $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID]);                            
+                            var leftFilters = $scope.onSchemaFilterChanged(filterID, $scope.setFilters[filterID]);
                             leftMenuFilters = leftFilters;
                             updateQueryString('schema');
                         }
@@ -462,7 +462,7 @@ import 'angular-vue'
                         updateQueryResult();
                     }
 
-                    $scope.onViewTypeChange = function(options){                        
+                    $scope.onViewTypeChange = function(options){
                         $scope.searchResult.viewType = options.viewType;
                         updateQueryString('viewType',options.viewType);
 
@@ -494,10 +494,11 @@ import 'angular-vue'
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
+                        $rootScope.shareSearchId = "";
                     };
 
                     $scope.onExportClick = function({listType, fields}){
-                        
+
                         var viewType = $scope.searchResult.viewType;
                         if(['default', 'list', 'group'].includes(viewType)){
                             return $scope.searchResult.listViewApi.onExport({listType, fields});
@@ -509,7 +510,7 @@ import 'angular-vue'
                         else if($scope.searchResult.viewType == 'matrix'){
                             if($scope.searchResult.matrixViewApi.isBusy)
                                 toastr.info($element.find('#exportDisabledMessage').text())
-                            else 
+                            else
                                 $scope.searchResult.matrixViewApi.onExport();
                         }
                     }
@@ -519,7 +520,7 @@ import 'angular-vue'
                         var oldKey =  filter.id;
                         filter.edit         =   false;
                         filter.name         = _.clone(filter.editValue);
-                        filter.id           = filter.name 
+                        filter.id           = filter.name
                         filter.editValue    = undefined;
 
                         $scope.setFilters = _.mapKeys($scope.setFilters, function(value, key) {
@@ -548,7 +549,7 @@ import 'angular-vue'
                     ////////////////////////////////////////////
 
                     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                    
+
                     ////////////////////////////////////////////
                     ////// internal functions
                     ////////////////////////////////////////////
@@ -642,16 +643,16 @@ import 'angular-vue'
                         $scope.pageInitialized = true;
                     }
 
-                    
+
                     function loadFilters() {
-                
+
                         if (_.isEmpty($scope.searchFilters)) {
                             $scope.searchFilters = {};
                             $scope.searchFilters = localStorageService.get("searchFilters");
                         }
                         if (_.isEmpty($scope.searchFilters)) {
                             $scope.searchFilters = {};
-                            
+
                             var chKeywordsFilter;
                             if (isABS)
                                 chKeywordsFilter = loadABSKeywordFilters();
@@ -674,7 +675,7 @@ import 'angular-vue'
                                 // console.log($scope.searchFilters)
                                 // localStorageService.set("searchFilters", $scope.searchFilters);
                             })
-                        }                
+                        }
                     };
                     $scope.canShowSaveFilter = function(){
                         return !$scope.skipSaveFilter && !_.isEmpty($scope.setFilters);
@@ -688,7 +689,7 @@ import 'angular-vue'
                         };
                     }
 
-                    function addFilter(filterKey, filterInfo) {                        
+                    function addFilter(filterKey, filterInfo) {
                         $scope.searchFilters[filterKey] = filterInfo;
                     };
 
@@ -700,7 +701,7 @@ import 'angular-vue'
                             if (item.type === type && (fn==undefined || fn(item)))  return item;
                         });
                     };
-                    
+
                     function getSelectedFilters(type, fn) {
                         if (!type)
                             return $scope.setFilters;
@@ -718,7 +719,7 @@ import 'angular-vue'
                     function loadSchemaFilters() {
 
                         _.forEach(realm.schemas, function (schema, key) {
-                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                                addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key,
                                         'description': $filter('lstring')((schema.description || {})), otherType:schema.type });
                         })
 
@@ -728,7 +729,7 @@ import 'angular-vue'
 
                         //SCBD
                         _.forEach(scbdSchemas.defaults, function (schema, key) {
-                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
+                            addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key,
                                     'description': $filter('lstring')((schema.description || {})), otherType:'scbd' });
                         });
                     };
@@ -739,9 +740,9 @@ import 'angular-vue'
                             var countries = data;
 
                             _.forEach(countries, function (country, index) {
-                                addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name, 
-                                'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isParty": country.isParty, 
-                                "isParty": country.isParty,  "isRatified": country.isRatified, 
+                                addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name,
+                                'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isParty": country.isParty,
+                                "isParty": country.isParty,  "isRatified": country.isRatified,
                                 "isInbetweenParty": country.isInbetweenParty, "entryIntoForce": country.entryIntoForce});
                             });
                         });
@@ -758,18 +759,18 @@ import 'angular-vue'
 
                     function addRegionFilter(region, parent) {
 
-                        addFilter(region.identifier, { 'type': 'region', 'name': region.title, 'id': region.identifier, 
+                        addFilter(region.identifier, { 'type': 'region', 'name': region.title, 'id': region.identifier,
                         'description': '', 'parent': parent });
 
                         _.forEach(region.narrowerTerms, function (narrower) {
                             addRegionFilter(narrower, region.identifier);
                         });
                     }
-                    
+
                     function loadDateFilters() {
-                        addFilter('updatedDate_dt', { 'sort': 1, 'type': 'date', 'name': 'Published On', 'id': 'updatedDate_dt', 
+                        addFilter('updatedDate_dt', { 'sort': 1, 'type': 'date', 'name': 'Published On', 'id': 'updatedDate_dt',
                         'description': 'Date range when the record was published' });
-                        addFilter('createdDate_dt', { 'sort': 1, 'type': 'date', 'name': 'Created On', 'id': 'createdDate_dt', 
+                        addFilter('createdDate_dt', { 'sort': 1, 'type': 'date', 'name': 'Created On', 'id': 'createdDate_dt',
                         'description': 'Date range when the record was created' });
                     };
 
@@ -789,18 +790,18 @@ import 'angular-vue'
                         promises.push(thesaurusService.getDomainTerms('typeOfOrganisms'           ).then(function(keywords){loopKeywords(keywords, 'typeOfOrganisms'           )}));
                         promises.push(thesaurusService.getDomainTerms('domestication'             ).then(function(keywords){loopKeywords(keywords, 'domestication'             )}));
                         promises.push(thesaurusService.getDomainTerms('OrganismCommonUses'        ).then(function(keywords){loopKeywords(keywords, 'OrganismCommonUses'        )}));
-                        promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequenceFamily'         )})); 
+                        promises.push(thesaurusService.getDomainTerms('dnaSequenceFamily'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequenceFamily'         )}));
                         promises.push(thesaurusService.getDomainTerms('dnaSequenceTraits'         ).then(function(keywords){loopKeywords(keywords, 'dnaSequenceTraits'         )}));
                         promises.push(thesaurusService.getDomainTerms('techniqueUsed'             ).then(function(keywords){loopKeywords(keywords, 'techniqueUsed'             )}));
                         promises.push(thesaurusService.getDomainTerms('decisionLMOFFPSubject'     ).then(function(keywords){loopKeywords(keywords, 'decisionLMOFFPSubject'     )}));
                         promises.push(thesaurusService.getDomainTerms('decisionResults'           ).then(function(keywords){loopKeywords(keywords, 'decisionResults'           )}));
                         promises.push(thesaurusService.getDomainTerms('organizationTypes'         ).then(function(types){ return _.filter(types, function(type){return type.identifier!='B3699A74-EF2E-467A-A82F-EF2149A2EFC5'}); })
                                                       .then(function(keywords){loopKeywords(keywords, 'organizationTypes'         )}));
-                        
-                        
-                        
+
+
+
                         return $q.all(promises);
-                    
+
                     }
 
                     function loadABSKeywordFilters() {
@@ -816,9 +817,9 @@ import 'angular-vue'
 
 
                         promises.push(thesaurusService.getDomainTerms('msrElements'         ).then(function(keywords){loopKeywords(keywords, 'msrElements'          )}));
-                                                                        
+
                         return $q.all(promises);
-                    
+
                     }
 
                     async function getFocalPointTypes(){
@@ -826,7 +827,7 @@ import 'angular-vue'
                         const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
 
                         return categories.map(category=>{
-                            return { 
+                            return {
                                 identifier: category.key,
                                 title     : { [locale] : category.title },
                                 functions : category.categories
@@ -876,12 +877,12 @@ import 'angular-vue'
                         var existingFilter = _.find($scope.searchFilters, function(fil){
                             return fil.name[locale] == $filter('lstring')(keyword.title)
                         })
-                        if(existingFilter){                           
+                        if(existingFilter){
                             // _.each(schemaFieldMap, function(field){
                             //     field.identifier = keyword.identifier
                             // })
                             existingFilter.identifiers  = _([existingFilter.id]).union([keyword.identifier], existingFilter.identifiers||[]).compact().uniq().value()
-                            // existingFilter.schemaFields = _.union(schemaFieldMap, existingFilter.schemaFields||[])                            
+                            // existingFilter.schemaFields = _.union(schemaFieldMap, existingFilter.schemaFields||[])
                         }
                         else{
                             var filter = {  'type': 'keyword', 'name': keyword.title, 'id': keyword.identifier, 'description': '', 'broader': broader };
@@ -916,15 +917,15 @@ import 'angular-vue'
                                                 combinations.push(groupField + '_' + lfield)
                                                 return lfield
                                             }).join('_');
-                                            
+
                             combinations.push('grp_'+group.field)
                             combinations.push('grp_'+groupField + '_' + otherComb)
                             combinations = _.union(combinations, otherComb);
-                        })   
+                        })
                         return combinations
                     }
 
-                    function combinationField(fields){      
+                    function combinationField(fields){
                         fields = _.filter(fields, function(f){
                             var groupMap = _.find(groupFieldMapping, {field:f})
                             return groupMap && (!groupMap.tabs || ~groupMap.tabs.indexOf($scope.searchResult.currentTab))
@@ -948,10 +949,10 @@ import 'angular-vue'
                             schemaTypes.all = schemaTypes.all + (schemaTypes[key]||0);
                         });
                         var facets = {
-                                        schemaTypes: schemaTypes, 
-                                        schemas   : facets.facet_fields['schema_s'], 
+                                        schemaTypes: schemaTypes,
+                                        schemas   : facets.facet_fields['schema_s'],
                                         keywords  : facets.facet_fields['all_terms_ss'],
-                                        countries : facets.facet_fields['countryRegions_ss'], 
+                                        countries : facets.facet_fields['countryRegions_ss'],
                                         regions   : facets.facet_fields['countryRegions_REL_ss']
                                     };
                         //combine regions and countries facets to match the count.
@@ -980,8 +981,8 @@ import 'angular-vue'
                             var resultQuery;
                             if(($scope.searchResult.sortFields||[]).length > 0)
                                 sortFields = $scope.searchResult.sortFields.join(', ');
-                            
-                            if(queryOptions.highlight){ 
+
+                            if(queryOptions.highlight){
                                 //if highlight is enabled that means there is freetext, if the sort is by only lastUpdated use relevance
                                 if(sortFields == 'updatedDate_dt desc')
                                     sortFields   = ['relevance asc'];
@@ -999,7 +1000,7 @@ import 'angular-vue'
                                 resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
                             else if(viewType == 'group'){
-                                queryOptions.groupByFields = $scope.searchResult.groupByFields;                                
+                                queryOptions.groupByFields = $scope.searchResult.groupByFields;
                                 updateQueryString('group', queryOptions.groupByFields);
                                 resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
@@ -1015,7 +1016,7 @@ import 'angular-vue'
                                     data    :  e.data||e.message, status:e.status,
                                     url     : (e.config||{}).url, params: (e.config||{}).params,
                                     stack   : e.stack
-                                }                                
+                                }
                                 $log.error(JSON.stringify(exception))
                             })
                             .finally(function(){$scope.searchResult.loading = false;})
@@ -1023,54 +1024,19 @@ import 'angular-vue'
                     }
 
                     function getSearchQuery() {
-                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
-                      var signIn = $scope.$on('signIn', function (evt, data) {
-                        $scope.addEdit();
-                        signIn();
-                      });
-                      $('#loginDialog').modal("show");
-                    } else {
-                      $scope.loading = true;
-                      let shareDoc = {};
-                      shareDoc.isSystemAlert = false;
-                      //ToDo: will update as per API accepted format
-                      //TODO: move it to commonjs
-                      let userAlertSearchFilter = $scope.getLeftSubFilters();
-                      let leftFilterQuery = {}
-                      _.forEach( userAlertSearchFilter, function ( filters, key ) {
-                        console.log( key, filters )
-                        _.forEach( filters, function ( filter ) {
-                          if ( !_.isEmpty( filter.selectedItems ) ) {
-                            leftFilterQuery[key] = leftFilterQuery[key] || [];
-                            const { field, relatedField, searchRelated, term, title, type } = filter
-                            leftFilterQuery[key].push( {
-                              field,
-                              relatedField,
-                              searchRelated,
-                              selectedItems : filter.selectedItems,
-                              term,
-                              title,
-                              type
-                            } );
-                          }
-                        } );
-                      } );
-                      shareDoc.filters = _.values( $scope.setFilters );
-                      shareDoc.subFilters = leftFilterQuery; // pass only selected sub-filters query
-                      shareDoc.realm = realm.value;
-                      shareDoc.queryTitle = "SHARE DOCS";
-                      IGenericService.create( 'v2016', 'me/subscriptions', shareDoc )
-                      .then( function ( data ) {
-                        return data.id
-                      } );
+                        if ($routeParams.id) {
+                            $rootScope.shareSearchId = $routeParams.id;
+                            $timeout(function () {
+                                $('#shareSearchDomId')[0].click();
+                            },500);
+                        } else $scope.showSaveFilter($scope.setFilters, true);
                     }
-                  };
 
                     function buildSearchQuery(){
                         var tagQueries          = {};
                         var tabQuery            = buildTabQuery();
-                        var schemaQuery         = buildSchemaQuery();                        
-                        var schemaSubQuery      = buildSchemaSubQuery()||{};                        
+                        var schemaQuery         = buildSchemaQuery();
+                        var schemaSubQuery      = buildSchemaSubQuery()||{};
                         var keywordQuery        = buildFieldQuery('keyword',  'all_terms_ss')
                         var countryQuery        = _.compact([buildFieldQuery('country',  'countryRegions_ss'), buildFieldQuery('country',  'countryRegions_REL_ss')]).join(' OR ');
                         var partyStatusQuery    = buildPartyStatusQuery();
@@ -1096,7 +1062,7 @@ import 'angular-vue'
                         tagQueries.region      =  regionQuery;
                         //special query for Contact as only records which have reference contact are searchable.
                         tagQueries.contact     =  '(*:* NOT schema_s:contact) OR (schema_s:contact AND (refReferenceRecords_ss:* OR refNationalRecords_ss:*))';
-                       
+
                         if(schemaSubQuery.freeTextQuery){ //append subfilters query to general query to benefit highlighting and relevance
                             query = solr.andOr(_.compact([query, tagQueries.schemaSub]), 'AND')
                         }
@@ -1106,9 +1072,9 @@ import 'angular-vue'
                             tagQueries : _(tagQueries).map(function(f, t){if(f) return '{!tag='+t+'}' + f;}).compact().value(),
                             facetFields : [
                                 '{!ex=schemaType}schemaType_s',
-                                '{!ex=schema,schemaType,schemaSub}schema_s', 
-                                '{!ex=government}countryRegions_ss', 
-                                '{!ex=keywords}all_terms_ss', 
+                                '{!ex=schema,schemaType,schemaSub}schema_s',
+                                '{!ex=government}countryRegions_ss',
+                                '{!ex=keywords}all_terms_ss',
                                 '{!ex=region}countryRegions_REL_ss'
                             ],
                             pivotFacetFields: 'schema_s, all_Terms_ss',
@@ -1118,12 +1084,12 @@ import 'angular-vue'
                     }
 
                     function buildSchemaQuery() {
-                        
+
                         var filters = getSelectedFilters('schema')
-                        if (!(filters||[]).length){  
+                        if (!(filters||[]).length){
                             return "(*:*)";
-                        }                                            
-                                                
+                        }
+
                         var query = buildAdvanceSettingsQuery(filters, 'schema_s');
 
                         updateQueryString('schema',  _.map(filters, 'id'));
@@ -1136,7 +1102,7 @@ import 'angular-vue'
                         // loop and add or conditions on schemas when sub filters exists else just make schema array query
                         if(!_.isEmpty(leftMenuFilters)){
                             var schemaQueries = []
-                            var freeTexQueries = []    
+                            var freeTexQueries = []
                             _.forEach(leftMenuFilters, function(filters, key){
 
                                 // If main filter has been disabled than exclude results
@@ -1144,25 +1110,25 @@ import 'angular-vue'
                                 if(!mainFilter || mainFilter.disabled || mainFilter.excludeResult)
                                     return;
 
-                                var subQueries = [];                            
+                                var subQueries = [];
                                 subQueries.push('schema_s:'+ key)
                                 _.forEach(filters, function(filter){
                                     var subQuery;
                                     if(filter.disabled)
                                         return;
-                                    if(filter.fieldfn!=undefined){ //custom function                                            
+                                    if(filter.fieldfn!=undefined){ //custom function
                                         var q = customQueryFn[filter.fieldfn](filter);
                                         if(q)
                                             subQuery = q;
                                     }
                                     else if(!_.isEmpty(filter.selectedItems)){
                                         var ids = _.map(filter.selectedItems, s=>s.identifier.toString().replace(/\@[0-9]{1,3}$/, ''));
-                                        if(filter.type == 'freeText'){                                          
+                                        if(filter.type == 'freeText'){
                                             ids = _.map(filter.selectedItems,  function(filter){
                                                 return {name:filter.title};
                                             });
                                             subQuery = buildFreeTextQuery('freeText', filter.field, ids);
-                                            
+
                                             if(!filter.excludeResult)
                                                 freeTexQueries.push(subQuery)
                                         }
@@ -1186,7 +1152,7 @@ import 'angular-vue'
                                     }
                                 });
                                 // if(subQueries.length>1){
-                                    subQueries = _.uniq(subQueries)                                       
+                                    subQueries = _.uniq(subQueries)
                                     schemaQueries.push(solr.andOr(subQueries, 'AND'))
                                 // }
                             })
@@ -1200,7 +1166,7 @@ import 'angular-vue'
                     }
 
                     function buildTabQuery(){
-                        var tab = $scope.searchResult.currentTab; 
+                        var tab = $scope.searchResult.currentTab;
                         if(tab == 'nationalRecords')
                             return 'schemaType_s:national'
                         if(tab == 'referenceRecords')
@@ -1211,7 +1177,7 @@ import 'angular-vue'
 
                     function buildDateQuery(){
                         var filters = getSelectedFilters('date')
-                        if (!filters?.length){     
+                        if (!filters?.length){
                             return;
                         }
                         var values = [];
@@ -1231,19 +1197,19 @@ import 'angular-vue'
                     }
 
                     function buildDateFieldQuery({ field, filterValue:date }) {
-                        
+
                         if(date.start || date.end) {
                             const start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
                             const end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
-    
+
                             return field + ':[ ' + start + ' TO ' + end + ' ]';
-                        } 
+                        }
                     }
 
-                    function buildPartyStatusQuery() {                        
-                        
+                    function buildPartyStatusQuery() {
+
                         var filters = getSelectedFilters('partyStatus')
-                        if (!(filters||[]).length){     
+                        if (!(filters||[]).length){
                             return;
                         }
                         var values;
@@ -1256,20 +1222,20 @@ import 'angular-vue'
                     }
 
                     function buildFieldQuery(filterType, field) {
-                        
+
                         var filters = getSelectedFilters(filterType)
-                        if (!(filters||[]).length){     
+                        if (!(filters||[]).length){
                             return;
                         }
                         var query = buildAdvanceSettingsQuery(filters, field);
-                        
+
                         return query;
                     }
 
                     function buildFreeTextQuery(filterType, field, filters) {
-                        
+
                         filters = filters || getSelectedFilters(filterType);
-                        if (!(filters||[]).length){     
+                        if (!(filters||[]).length){
                             return;
                         }
                         var query = '';
@@ -1288,17 +1254,17 @@ import 'angular-vue'
                             boostField[field] = 1;
 
                         var freeTextVals = _(filters).map(function(filter){
-                                                if(!filter.disabled && !filter.excludeResult){ 
+                                                if(!filter.disabled && !filter.excludeResult){
                                                     return solr.escape(_.trim(filter.name))
                                                 }
                                             }).compact().uniq().value();
 
                         var excludedValues =  _(filters).map(function(filter){
-                                                if(!filter.disabled && filter.excludeResult){ 
+                                                if(!filter.disabled && filter.excludeResult){
                                                     return solr.escape(_.trim(filter.name))
                                                 }
                                             }).compact().uniq().value();
-                        
+
                         if(freeTextVals.length)
                             query = _.map(freeTextVals, function(val){return buildBoostQuery(boostFields, val)}).join(' AND ');
 
@@ -1310,15 +1276,15 @@ import 'angular-vue'
                             else
                                 query = excludeQuery
                         }
-                        
+
                         return query;
 
                     }
 
                     function buildBoostQuery(boostFields, val){
-                        // to avoid solr falling back to default field when 
-                        // search has multiple words put text inside ()                            
-                        return  '(' + 
+                        // to avoid solr falling back to default field when
+                        // search has multiple words put text inside ()
+                        return  '(' +
                                     _(boostFields).map(function(boost, boostField){
                                         if(~val.indexOf('-'))//not sure if its good idea
                                             return `(${boostField}:("${val}")^${boost})`;
@@ -1334,10 +1300,10 @@ import 'angular-vue'
                         }
                         else if(filter.filterValue == false)
                             return 'dateOfExpiry_dt:[NOW TO *]'
-                        
+
                     }
                     function buildContactsUserCountryfn(filter){
-                        var countries =  _.map(filter.selectedItems, 'identifier') 
+                        var countries =  _.map(filter.selectedItems, 'identifier')
                         if(countries.length){
                             return 'country_s:(' + solr.escape(countries.join(' ')) + ') AND referencedPermits_ss:*';
                         }
@@ -1346,12 +1312,12 @@ import 'angular-vue'
 
                         var validValues     =   _(filters).map(function(filter){
                                                     if(!filter.disabled && !filter.excludeResult)
-                                                        return solr.escape(filter.id);                                                        
+                                                        return solr.escape(filter.id);
                                                 }).compact().uniq().value();
 
                         var excludedValues =   _(filters).map(function(filter){
                                                     if(!filter.disabled && filter.excludeResult)
-                                                        return solr.escape(filter.id);                                                        
+                                                        return solr.escape(filter.id);
                                                 }).compact().uniq().value();
 
                         var query = '';
@@ -1366,7 +1332,7 @@ import 'angular-vue'
                             else
                                 query = excludeQuery
                         }
-                        
+
                         return query;
                     }
 
@@ -1404,7 +1370,7 @@ import 'angular-vue'
                         return leftMenuFilters
                     }
                     async function loadLeftMenuFieldMapping(){
-                        
+
                         if(isABS) {
                             const {absLeftMenuFilters} = await import('./search-filters/abs-left-menu-filters.js');
                             return absLeftMenuFilters;
@@ -1415,11 +1381,13 @@ import 'angular-vue'
                         }
                     }
 
-	                $scope.showSaveFilter = function ( filters ) {
+	                $scope.showSaveFilter = function ( filters, isShare ) {
 
                     if ( $rootScope.user && !$rootScope.user.isAuthenticated ) {
                         var signIn = $scope.$on( 'signIn', function ( evt, data ) {
-                            $scope.addEdit();
+                            if(!isShare) {
+                                $scope.addEdit();
+                            }
                             signIn();
                         } );
 
@@ -1470,8 +1438,13 @@ import 'angular-vue'
 
                                     operation.then(function (data) {
                                         $scope.closeDialog();
-                                        if (!document._id)
+                                        if (!document._id) {
                                             document._id = data.id;
+                                        }
+                                        if(isShare){
+                                            $rootScope.shareSearchId = data.id;
+                                             $('#shareSearchDomId')[0].click();
+                                        }
                                     });
                                 };
 		                            $scope.getFilterName = function (name) {

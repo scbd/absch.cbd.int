@@ -22,11 +22,11 @@ import shareRecord from '~/components/common/share-record.vue';
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
 		$templateCache.put('view-print-footer.html', printFooterTemplate)
 	});
-	
+
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-	"$filter", "$http", "apiToken", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$routeParams',
+	"$filter", "$http", "apiToken", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$routeParams','$rootScope',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		$http, apiToken, realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $routeParams ) {
+		$http, apiToken, realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $routeParams, $rootScope ) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -50,7 +50,7 @@ import shareRecord from '~/components/common/share-record.vue';
 				//debugger;
 				$scope.internalDocument = undefined;
 				$scope.internalDocumentInfo = undefined;
-			
+
 					var htmlDiff;
 					$scope.realm = realm;
 					$scope.isABS = realm.is('ABS');
@@ -59,7 +59,7 @@ import shareRecord from '~/components/common/share-record.vue';
 
 					if(!$scope.locale)
 						$scope.locale = appLocale;
-					
+
 					$scope.$watch("document", function (_new) {
 						$scope.error = null;
 						if(!_new)return;// due to cache loaddocument calls first before the first watch on documents gets called.
@@ -78,58 +78,79 @@ import shareRecord from '~/components/common/share-record.vue';
 						components:{shareRecord}
 					}
 
-					$scope.getQuery = function(){
-						let query = $scope.internalDocument.info;
-						const type = "document";
-						return {type, query}
-					}
 
-					$scope.getUserCountry = function (id) {
-                        var term = {};
-                        term.identifier = id
-                        return $filter('term')(term);
-					}
-					//==================================
-					//
-					//==================================
-					$scope.init = function () {
 
-						if ($scope.internalDocument && !$scope.revisionNo)
-							return;
+          $scope.getQuery = function () {
+			let query = $scope.internalDocument.info;
+            const type = "document";
+            return {type, query}
+          }
 
-						if ($scope.document || $scope.schema)
-							return;
+		  $scope.chDocumentId = function () {
+			  const id =$filter("uniqueID")($scope.internalDocument.info);
+			 return  id;
+		 }
 
-						var documentSchema = $route.current.params.documentSchema;
-						var documentRevision = $route.current.params.revision;
+          $scope.userStatus = function () {
+            if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+              var signIn = $scope.$on('signIn', function (evt, data) {
+                signIn();
+              });
+              $('#loginDialog').modal("show");
+              return false;
+            } else {
+              return true;
+            }
+          }
 
-						var documentID = $route.current.params.documentID||$route.current.params.documentId
-						//documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
 
-						if ($scope.revisionNo)
-							documentRevision = $scope.revisionNo;
 
-						if ($route.current.params.documentNumber)
-							var documentID = $route.current.params.documentNumber;
+				$scope.getUserCountry = function (id) {
+					var term = {};
+					term.identifier = id
+					return $filter('term')(term);
+				}
+				//==================================
+				//
+				//==================================
+				$scope.init = function () {
 
-						if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID) || /^chm\-nfp/i.test(documentID))) {
-							documentID = documentID.replace(/-(dev|trg)/i, '');
-							var docNum = documentID.split('-');
-							if (docNum.length == 5) {
-								documentID 		 = docNum[3];
-								documentRevision = docNum[4];
-							}
-							else if (docNum.length == 4)
-								documentID = docNum[3];
+					if ($scope.internalDocument && !$scope.revisionNo)
+						return;
 
+					if ($scope.document || $scope.schema)
+						return;
+
+					var documentSchema = $route.current.params.documentSchema;
+					var documentRevision = $route.current.params.revision;
+
+					var documentID = $route.current.params.documentID||$route.current.params.documentId
+					//documentSchema ? commonjs.integerToHex($route.current.params.documentID, documentSchema) : $route.current.params.documentID;
+
+					if ($scope.revisionNo)
+						documentRevision = $scope.revisionNo;
+
+					if ($route.current.params.documentNumber)
+						var documentID = $route.current.params.documentNumber;
+
+					if (documentID && (/^bch/i.test(documentID) || /^abs/i.test(documentID) || /^chm\-nfp/i.test(documentID))) {
+						documentID = documentID.replace(/-(dev|trg)/i, '');
+						var docNum = documentID.split('-');
+						if (docNum.length == 5) {
+							documentID 		 = docNum[3];
+							documentRevision = docNum[4];
 						}
-						documentID = commonjs.integerToHex(documentID, documentSchema);
-
-						$scope.loadDocument(documentSchema, documentID, documentRevision);
-						// else
-						// 	$scope.error = "documentID not specified";
+						else if (docNum.length == 4)
+							documentID = docNum[3];
 
 					}
+					documentID = commonjs.integerToHex(documentID, documentSchema);
+
+					$scope.loadDocument(documentSchema, documentID, documentRevision);
+					// else
+					// 	$scope.error = "documentID not specified";
+
+				}
 
 
 					//==================================
@@ -163,8 +184,8 @@ import shareRecord from '~/components/common/share-record.vue';
 						$scope.timeLaspe--;
 						$timeout(function () { closeWindow(); }, 1000)
 					}
-					
-					
+
+
 					//==================================
 					//
 					//==================================
@@ -173,14 +194,14 @@ import shareRecord from '~/components/common/share-record.vue';
 						$scope.error = undefined;
 						var qDocument;
 						var qDocumentInfo;
-						
-						var config = {};						
+
+						var config = {};
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier, undefined, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.drafts.get(identifier, { info: true }, config).then(function (result) { return result.data || result });
 						}
-						else if (version == undefined) {							
+						else if (version == undefined) {
 							config.params = {skipRealmHeader : true};
 							qDocument = storage.documents.get(identifier, {'include-deleted':true}, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true }, config).then(function (result) { return result.data || result });
@@ -197,13 +218,12 @@ import shareRecord from '~/components/common/share-record.vue';
 							$scope.internalDocument = results[0];
 							$scope.internalDocumentInfo = results[1];
 							$scope.internalDocument.info = results[1];
-
 							if (version)
 								$scope.revisionNo = version
 
 							checkIfPermitRevoked();
 							loadWorkflowDetails()
-		
+
 							if (version)
 								$scope.revisionNo = version
 
@@ -243,30 +263,30 @@ import shareRecord from '~/components/common/share-record.vue';
 
 					$scope.showDifference = async function(revision){
 						if($scope.isComparing && !revision)return;
-	
+
 						if($scope.comparingRevision)// if comparingRevision has value meaning user compared a version, load the original document
 							loadViewDirective($scope.internalDocument.header.schema);
 
 						if(!$scope.showDifferenceOn || revision){
-							$scope.isComparing = true;							
+							$scope.isComparing = true;
 							$scope.showDifferenceOn = true;
 							$scope.comparingRevision = revision;
 							htmlDiff = (await import('~/services/main')).htmlDifference;
 							loadViewDirective($scope.internalDocumentInfo.type, function(directiveHtml){
-								return  { 
+								return  {
 									divSelector 	: '#compareSchemaView',
 									directiveHtml 	: directiveHtml.replace("ng-model='internalDocument'", "ng-model='prevDocument'")
 								}
 							})
 							storage.documents.get($scope.internalDocumentInfo.identifier + '@' + (revision||$scope.internalDocumentInfo.latestRevision))
-							.then(function (result) { 
+							.then(function (result) {
 								$scope.prevDocument = result.data
-							}).then(compareWithPrev)	
-						}	
+							}).then(compareWithPrev)
+						}
 						else{
 							$scope.showDifferenceOn = false;
 							loadViewDirective($scope.internalDocumentInfo.type);
-						}					
+						}
 					}
 
 					$scope.loadRecordRevisions = function(){
@@ -277,7 +297,7 @@ import shareRecord from '~/components/common/share-record.vue';
 							for (let i = 1; i < $scope.internalDocumentInfo.latestRevision; i++) {
 								$scope.recordRevisions.push({ uniqueIdentifier : uniqueId.replace(/\-\d+$/, '-' + i),
 															 revision:i})
-								
+
 							}
 							$scope.loadingRevisions = false;
 						}
@@ -293,7 +313,7 @@ import shareRecord from '~/components/common/share-record.vue';
 						$scope.comparingRevision = undefined;
 						loadViewDirective($scope.internalDocument.header.schema);
 					}
-					
+
 					//==================================
 					//
 					//==================================
@@ -312,7 +332,7 @@ import shareRecord from '~/components/common/share-record.vue';
 						}
 						else if($scope.internalDocumentInfo?.latestRevision > 1){
 							$scope.showComparison = true;//$attr.showComparison == 'true'
-						}		
+						}
 					}
 
 					function canEdit() {
@@ -357,7 +377,7 @@ import shareRecord from '~/components/common/share-record.vue';
 					function compareWithPrev(){
 						//timeout so that the directive is rendered.
 						$timeout(function(){
-										
+
 							var view1 = $element.find('#compareSchemaView .compare-diff');
 
 							_.forEach(view1, function(e, i){

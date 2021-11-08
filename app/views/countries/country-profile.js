@@ -9,22 +9,22 @@ import shareRecord from '~/components/common/share-record.vue';
 
   export { default as template } from './country-profile.html';
 
-  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
-    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
+  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService','apiToken', '$rootScope',
+    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService, apiToken, $rootScope) {
       $scope.code      = $route.current.params.code;
       $scope.isBCH     = realm.is('BCH');
       $scope.isABS     = realm.is('ABS');
       $scope.locale    = locale;
-
+      $scope.tokenReader = function(){ return apiToken.get()}
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
-      .then(function(country){ 
+      .then(function(country){
           $scope.country = country;
           $scope.country.code = $scope.country.code.toLowerCase();
           $scope.country.name = $scope.country.name[locale];
           $scope.country.cssClass='flag-icon-'+$scope.country.code;
           breadcrumbs.options = { 'country_name': $scope.country.name };
 
-          ngMeta.resetMeta();  
+          ngMeta.resetMeta();
           var title = $scope.country.name + ' | Country Profile';
           var url   = realm.originalObject.baseURL + '/' + locale  + '/countries/' + $scope.country.code.toUpperCase()
           ngMeta.setTitle(title);
@@ -33,16 +33,16 @@ import shareRecord from '~/components/common/share-record.vue';
           loadCountryProfile($scope.country.code);
 
       });
-      
+
       function loadCountryProfile(code){
 
         var searchQuery = $scope.exportQuery = {
             fields  : 'identifier_s',
-            query   : 'schema_s:countryProfile AND government_s:' + code 
+            query   : 'schema_s:countryProfile AND government_s:' + code
         };
 
         searchService.list(searchQuery)
-        .then(function(result){   
+        .then(function(result){
           if(result.data.response.docs.length){
             IStorage.documents.get(result.data.response.docs[0].identifier_s)
             .then(function (document) {
@@ -50,11 +50,11 @@ import shareRecord from '~/components/common/share-record.vue';
             });
           }
         });
-      } 
+      }
 
       if($scope.code.toUpperCase() == 'GB')
-            $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300); 
-      
+            $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300);
+
       if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
         $scope.loadingMap = true;
         angular.element(document).ready(async function () {
@@ -62,10 +62,24 @@ import shareRecord from '~/components/common/share-record.vue';
             $scope.$apply(function(){
                 var mapElement = $element.find('#Jumbotron');
                 $compile(mapElement.append('<country-map zoom-to="{{code}}" height="350px" ></country-map>'))($scope);
-                $scope.loadingMap = false;                    
+                $scope.loadingMap = false;
             });
         });
       }
+
+        $scope.userStatus = function () {
+          if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+            var signInEvent = $scope.$on('signIn', function (evt, data) {
+              signInEvent();
+            });
+            $('#loginDialog').on('hidden.bs.modal', function () {
+              signInEvent();
+            });
+            return false;
+          } else {
+            return true;
+          }
+        }
 
         $scope.shareVueComponent = {
             components:{shareRecord}

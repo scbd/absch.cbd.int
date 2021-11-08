@@ -1,6 +1,6 @@
 <template>
     <span>
-        <a rel="noopener" href="#" class="table-export-button" @click="open=true">
+        <a id="shareSearchDomId" rel="noopener" href="#" class="table-export-button" @click="openMpdel()">
             {{$t('share')}}
             <i class="fa fa-paper-plane" aria-hidden="true"></i>
         </a>
@@ -15,15 +15,7 @@
                 <div v-if="loading" class="alert alert-info">
                     <i class="fa fa-spin fa-spinner" v-if="loading" ></i> {{$t('processing')}}
                 </div>
-                <div class="row share-link" v-if="shareType =='link'">
-                    <input
-                        type="url"
-                        v-model="pageUrl"
-                        ref="link"
-                    >
-                  <button @click="copyLink()" >Copy</button>
-                </div>
-                <div class="row icon-list">
+              <div class="row icon-list">
                     <div @click="shareType='link'" :disabled="loading" class="col-md-2" v-bind:class="{ selected: shareType=='link'}">
                         <div class="icon-with-labels">
                             <i class="fa fa-link fa-lg" aria-hidden="true"></i>
@@ -42,42 +34,55 @@
                             <label>{{$t('email')}}</label>
                         </div>
                     </div>
-                    </div>
-              <div class="input-option" v-if="shareType =='email'">
+                 </div>
+                <div class="row share-link web-site" v-if="shareType =='link'">
+                    <input
+                        type="url"
+                        v-model="pageUrl"
+                        ref="link"
+                    >
+                  <button @click="copyLink()" >Copy</button>
+                </div>
+               <div class="row share-link" v-if="shareType =='email'">
                   <label class="heading">{{$t('email')}}</label>
-                 <input
+                    <input
                         type="email"
                         v-model="email"
                         placeholder="Email(s)"
-                 >
-                 <label class="color-red" v-if="emailRequired">{{$t('domainError')}}</label>
-              </div>
-                <div class="input-option" v-if="shareType =='embed'">
+                    >
+                  <button @click="sendRecord()" :disabled="loading && !email"  v-bind:class="{ 'disabled': loading || !email}">Send</button>
+                 <label class="color-red" v-if="emailRequired">{{$t('emailError')}}</label>
+                 <label class="success-message" v-if="sendResponse && !email">{{sendResponse}}</label>
+                </div>
+
+
+                <div class="row share-link" v-if="shareType =='embed'">
                   <label class="heading">{{$t('domain')}}</label>
                   <input
                       v-model="domain"
                       type="url"
                       placeholder="https://example.com"
+                      ref="domainTag"
+                      :data-script="`<script src='/app/assets/widgets.js'></script>`"
                   >
+                  <button @click="sendRecord()" :disabled="loading && !domain"  v-bind:class="{ 'disabled': loading || !domain}">Get code</button>
                  <label class="color-red" v-if="domainRequired">{{$t('domainError')}}</label>
               </div>
 
-          <div class="input-option" v-if="shareType =='embed' && frame">
-                <textarea
-                  ref="text"
-                  v-model="frame"
+              <div class="input-option" v-if="shareType =='embed' && frame">
+                 <textarea
+                    type="text"
+                    v-model="frame"
+                    ref="scriptTag"
                   rows="4"
                 ></textarea>
                   <button type="button" class="btn btn-primary pull-right" @click="copyCode()">
                     {{$t('copyCode')}}
                 </button>
               </div>
+
             </div>
-            <div slot="footer" v-bind:class="{ 'shared-footer': (shareType != 'link')}" v-if="shareType != 'link'">
-              <button type="button" class="btn btn-primary pull-left" @click="sendRecord()" :disabled="loading">
-                    {{$t(shareType=='email'?'Send':'Embed')}}
-                </button>
-            </div>
+
         </modal>
     </span>
 </template>
@@ -89,30 +94,42 @@
 
     export default {
         components : {Modal},
-        props:['getQuery', 'tokenReader'],
+        props:['getQuery', 'tokenReader', 'userStatus','chDocumentId'],
         data:  () => {
             return {
                 loading        : false,
                 open           : false,
                 emailRequired  : false,
                 domainRequired : false,
-				shareType      :'link',
+                shareType      :'link',
                 frame          :'',
-				domain         :'',
+                domain         :'',
                 query          :'',
                 type           :'',
                 pageUrl        :location.href,
                 iframeCommunicationReceived : false,
+                documentId      :'',
+                sendResponse    :'',
+                email           :'',
             }
         },
         created(){
-            console.log(this.tokenReader);
             this.ArticleApi = new ArticleApi(this.tokenReader);
             console.log(this.ArticleApi);
         },
         async mounted() {
         },
         methods: {
+            async openMpdel(){
+                const isLogin = await this.userStatus();
+                if(!isLogin) {
+                    this.open = false;
+                    return;
+                } else {
+                    this.open = true;
+                    return true;
+                }
+            },
             async onShowDialog() {
                 this.emailRequired = false;
                 this.domainRequired = false;
@@ -126,15 +143,13 @@
                 const origin = document.location.origin;
 
                 if(this.type == 'document'){
-                    this.storageType = "ch-document";
                     this.pageUrl = origin+"/"+this.$locale+"/database/"+this.query.identifier;
                 }
-                if(this.type == 'search'){
-                    this.storageType = "ch-search-result";
+                if(this.type == 'searchResults'){
                     this.pageUrl = origin+"/"+this.$locale+"/search/"+this.query;
                 }
                 if(this.type == 'countryProfile'){
-                    this.storageType = "ch-country-profile";
+                   // this.storageType = "ch-country-profile";
                     this.pageUrl = origin+"/"+this.$locale+"/countries/"+this.query;
                 }
             },
@@ -145,68 +160,80 @@
                     return;
                 }
                 this.loading = true;
-                //const emails = this.email.toString().replace(/\s*\,\s*/g, ",").trim().split(",");
-                const param = {"shareType": "email", "email": this.email.toString().replace(/\s*\,\s*/g, ",").trim(), "type": this.type, "query": this.query};
                 try{
-                  // const body = {
-                  //   storageType: this.storageType,
-                  //   sharedWith:{"emails":emails},
-                  //   urlHash: this.pageUrl
-                  // };
-                  const body = { //TODO: expiry and restrictionFieldValue is not available
-                    "storageType":"ch-document",
-                    "expiry":"2021-10-22T09:07:42.633Z",
-                    "forPdf":false,"sharedBy":this.query.submittedBy.userID,
-                    "sharedWith":{"link":true,"emails":this.email.toString().replace(/\s*\,\s*/g, ",").trim()},
-                    "sharedData":{"identifier":this.query.identifier,
-                      "restrictionField":"workingDocumentID","restrictionFieldValue":"228966",
-                      "referenceFields":[],"realm":this.query.Realm},"urlHash":this.pageUrl,
-                    "meta":{"modifiedBy":this.query.updatedBy.userID,"createdBy":this.query.createdBy.userID,"modifiedOn":this.query.updatedOn,"createdOn":this.query.createdOn,"version":this.query.latestRevision}};
-                const response = await this.ArticleApi.shareData(body);
-                if ((response || []).length) {
-                    console.log(response)
+
+                  let params = {};
+                  console.log("query",this.query)
+                  if(this.type == 'document') {
+                    params = {
+                      "storageType" : "ch-document",
+                      "expiry" : "2022-10-22T09:07:42.633Z",
+                      "forPdf" : false, "sharedBy" : this.query.submittedBy.userID,
+                      "sharedWith" : {
+                        "link" : true,
+                        "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
+                      },
+                      "sharedData" : {
+                        "identifier" : this.query.identifier,
+                        "restrictionField" : "workingDocumentID", "restrictionFieldValue" : "228966",
+                        "referenceFields" : [], "realm" : this.query.Realm
+                      }, "urlHash" : this.pageUrl,
+                      "meta" : {
+                        "modifiedBy" : this.query.updatedBy.userID,
+                        "createdBy" : this.query.createdBy.userID,
+                        "modifiedOn" : this.query.updatedOn,
+                        "createdOn" : this.query.createdOn,
+                        "version" : this.query.revision
+                      }
+                    };
+                  }
+                  if(this.type == 'searchResults') {
+                    params = {
+                      "storageType" : "ch-search-result",
+                      "expiry" : "2022-10-22T09:07:42.633Z",
+                      "sharedData" : {
+                        "id" : this.query,
+                      },
+                      "sharedWith" : {
+                        "link" : true,
+                        "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
+                      },
+                     "urlHash" : this.pageUrl
+                    };
+                  }
+                    if(this.type == 'countryProfile') {
+                        params = {
+                            "storageType" : "ch-country-profile",
+                            "expiry" : "2022-10-22T09:07:42.633Z",
+                            "sharedData" : {
+                                "code" : this.query,
+                            },
+                            "sharedWith" : {
+                                "link" : true,
+                                "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
+                            },
+                            "urlHash" : this.pageUrl
+                        };
+                    }
+                  const response = await this.ArticleApi.shareData( params );
+
+                if (response) {
+                  console.log("res",response)
+                  this.sendResponse = "Email send successfully!";
+                  this.email = "";
+                } else{
+                  this.sendResponse = "Error in sending email";
                 }
             } catch(err) {
             } finally {
                 this.loading = false;
             }
             },
-            embedIFrame(options){
-
-                if(!options.src)
-                    return;
-
-                var iframe = document.createElement('iframe');
-                iframe.setAttribute('name', Math.floor((1 + Math.random()) * 0x10000).toString(16));
-                iframe.setAttribute('src', options.src);
-                iframe.setAttribute('width', options.width);
-                iframe.setAttribute('height', options.height);
-                iframe.setAttribute('frameborder', '0');
-                this.registerIframeCommunication(iframe, {type:'getClientHeight', iframe:iframe.name});
-                window.addEventListener('message', function(evt){
-                    this.iframeCommunicationReceived = true;
-                    if(evt.data){
-                        var data = JSON.parse(evt.data);
-                        if(data.type == 'setClientHeight' && data.iframe == iframe.name){
-                            iframe.setAttribute('height', data.height||iframe.height);
-                        }
-                    }
-                })
-            },
-            registerIframeCommunication(iframe, data){
-                let that = this;
-                if(!this.iframeCommunicationReceived){
-                    setTimeout(function(){
-                        that.frame = iframe.src;
-                        
-                        //TODO iframe.contentWindow.postMessage give error
-                        iframe.contentWindow.postMessage(JSON.stringify(data), that.domain);//'http://absch-widget.cbddev.xyz:2010');
-                      //   this.registerIframeCommunication(iframe, data) //TODO : whe need to repeat
-
-                    }, 500);
-                }
-            },
             async embed(){
+              console.log("this", this.query);
+              if(typeof this.chDocumentId == 'function'){
+                this.documentId = await this.chDocumentId();
+              }
                 this.domainRequired = false;
                 this.frame='';
                 if(!this.domain) {
@@ -219,27 +246,18 @@
                     return;
                 }
                 this.loading      = true;
-                 const param = {"shareType": "embed", "domain": this.domain, "type": this.type, "query": this.query};
                 try {
-                // TODO: const response = await this.ArticleApi.queryShare(param);
-                // if((response || []).length) {
-                // in success case create emebede string
-                // setTimeout(()=> {
-                //     this.pageUrl += ( this.pageUrl.match( /[\?]/g ) ? '&' : '?' )+'embed=true';
-                //     this.frame = '<iframe src="' + this.pageUrl + '" width="100%" height="100%"></iframe>';
-                // },100);
-                // }
-                    this.pageUrl += ( this.pageUrl.match( /[\?]/g ) ? '&' : '?' )+'embed=true';
-                    let iframeSrc = this.pageUrl;
-                    var width = '300';
-                    var height = '500';
-
-                    var options = {
-                        src : iframeSrc,
-                        width : width,
-                        height: height
-                    }
-                    this.embedIFrame(options)
+                  let scriptTag = this.$refs.domainTag.getAttribute('data-script');
+                  console.log("domainTag",scriptTag)
+                  if(this.type == 'document') {
+                    this.frame = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.documentId}" width="100%"></div>`
+                  }
+                  if(this.type == 'searchResults') {
+                    this.frame = `${scriptTag}<div class="ch-search-result" data-type="Search" data-record-id="${this.query}" width="100%"></div>`
+                  }
+                  if(this.type == 'countryProfile') {
+                    this.frame = `${scriptTag}<div class="ch-country-profile" data-type="Country-profile" data-record-id="${this.query}" width="100%"></div>`
+                  }
                 } catch (err) {
                 } finally {
                     this.loading = false;
@@ -257,7 +275,7 @@
             },
             copyCode(){
                 try {
-                    this.$refs.text.select();
+                    this.$refs.scriptTag.select();
                     let successful = document.execCommand('copy');
                     if (!successful) throw successful;
                 } catch (err) {
@@ -292,6 +310,7 @@
     .input-option input, .input-option textarea  {
         width: 100%;
         padding: 12px;
+        margin-top: 20px;
         border: 1px solid #ccc;
         border-radius: 4px;
         box-sizing: border-box;
@@ -299,7 +318,8 @@
         resize: vertical;
         display: block;
     }
-    .input-option label.heading {
+     label.heading {
+        display: block;
         font-weight: normal;
         margin-top: 15px;
         color: #000;
@@ -365,23 +385,26 @@
         padding-bottom: 40px;
         border-radius: 0px 0px 4px 4px;
     }
-    .share-link {
+    .share-link.web-site{
         padding-bottom: 20px;
-        margin-top: 60px;
+        margin-top: 30px;
     }
     .share-link input {
         font-size: 17px;
         border: 1px solid grey;
         float: left;
-        width: 80%;
+        width: 77%;
         background: #f1f1f1;
         border-radius: 4px 0px 0px 4px;
         padding: 5px;
     }
-
+    .share-link button.disabled {
+        pointer-events:none;
+        cursor: not-allowed;
+    }
     .share-link button {
         float: left;
-        width: 20%;
+        width: 23%;
         padding: 10px;
         background: #E1F0F5;
         color: #000;
@@ -400,9 +423,9 @@
         padding: 8px;
         font-size: 12px;
     }
-    #share-modal .modal-footer .shared-footer button{
-      margin: 5px 20px;
-    }
+    /*#share-modal .modal-footer .shared-footer button{*/
+    /*  margin: 5px 20px;*/
+    /*}*/
     #share-modal .modal-header .modal-title {
       margin-left: 10px;
       font-size: 16px;
@@ -418,4 +441,10 @@
       opacity: 0.7;
     }
 
+    #share-modal .success-message {
+      border: 1px solid;
+      margin-top: 20px;
+      background-color: #fff;
+      padding: 5px;
+    }
 </style>

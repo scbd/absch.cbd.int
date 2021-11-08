@@ -52,7 +52,7 @@
 
 .new-css-dropdown-menu {
     font-size: 1.5rem !important;
-   
+
 }
 .new-css-dropdown-menu-item {
     font-size: 1.4rem !important;
@@ -95,8 +95,8 @@
 }
 .new-css-home-section-top-absch {
     background-image:url('/app/img/new-home/absch-homebg.gif');
-    background-position: bottom; 
-    background-size: cover; 
+    background-position: bottom;
+    background-size: cover;
     background-repeat: no-repeat;
 }
 .new-css-home-section-map {
@@ -152,11 +152,11 @@
    cursor: pointer;
 }
 .new-css-rectype-national {
-    background-color: #eee !important; 
+    background-color: #eee !important;
 }
 
 .new-css-rectype-reference {
-    background-color: #eee !important; 
+    background-color: #eee !important;
 }
 .new-css-party-counts{font-size: 1.5rem !important;}
 .new-css-bg-party{background-color:#00405C;}
@@ -226,7 +226,7 @@ body.modal-open .modal-backdrop.show{
 }
 body.modal-open .modal-backdrop.fade.show{
     opacity: 0;
-} 
+}
 
 .new-css-boxes-icons{
     align-self: flex-start;
@@ -250,7 +250,7 @@ body.modal-open .modal-backdrop.fade.show{
 }
 .new-css-nav-country-profiles .dropdown-item {
     white-space: inherit;
-} 
+}
 .new-css-summary-text, .new-css-callout h4 a {
     -webkit-line-clamp: 2;
     display: -webkit-box;
@@ -332,4 +332,14 @@ max-width: 90%;
     font-weight: bold;
     margin-left: 8px;
     text-decoration: none;
+}
+.new-css-share-country-profile-button {
+    float: right;
+    padding: 5px;
+    border: 2px solid #000;
+    border-radius: 4px;
+    margin-top: 20px;
+    margin-right: 20px;
+    background-color: #fff;
+    cursor: pointer;
 }
