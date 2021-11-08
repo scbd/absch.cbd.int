@@ -1,6 +1,6 @@
 <template>
     <div class="knowledge-base">
-        <auto-complete-search></auto-complete-search>
+        <search></search>
         <section class="categories">
             <div class="container">
                 <div class="row">
@@ -20,14 +20,14 @@
 
     import Faqs from '../../components/kb/faqs.vue';
     import sideBar from '../../components/kb/right-side-bar.vue';
-    import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
+    import search from '../../components/kb/search.vue';
 
     export default {
         name:'kbFaqs',
         components:{
             Faqs,
             sideBar,
-            AutoCompleteSearch
+            search
         },
 
         props:{

@@ -63,11 +63,12 @@ const commonRouteUrls = {
 
     kb                                          : { component: ()=>import('~/views/kb/home.vue') },
     kbFaqs                                          : { component: ()=>import('~/views/kb/faqs.vue') },
+    kbSearch                                          : { component: ()=>import('~/views/kb/article-search.vue') },
     kbArticles: { component: () => import('~/views/kb/articles.vue') },
     kbTags: { component: () => import('~/views/kb/adminTags.vue') },
     shareDocument                               : { component: ()=>import('~/views/forms/view/shared-document') },
     draftDocumentPdf                            : { component: ()=>import('~/views/pdf-viewer/draft-document-pdf-link') },
-    
+
 }
 
 app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
@@ -146,6 +147,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/reports/matrix',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.matrix,           "resolve":{ ...commonRouteUrls.reports_matrix,                               },"param":"true","resolveController":true}).
   whenAsync('/kb',                                                { ...mapView(vueViewWrapper),                        "label":routesLabels.kb,               "resolve":{ ...commonRouteUrls.kb,                                           },"param":"true","resolveController":true}).
   whenAsync('/kb/faqs',                                           { ...mapView(vueViewWrapper),                        "label":"FAQs",                        "resolve":{ ...commonRouteUrls.kbFaqs,                                       },"param":"true","resolveController":true}).
+  whenAsync('/kb/kbSearch/:search?',                                           { ...mapView(vueViewWrapper),                        "label":"kbSearch",                        "resolve":{ ...commonRouteUrls.kbSearch,                                       },"param":"true","resolveController":true}).
   whenAsync('/kb/faqs/:tag/:title?',                              { ...mapView(vueViewWrapper),                        "label":"FAQs",                        "resolve":{ ...commonRouteUrls.kbFaqs,                                       },"param":"true","resolveController":true}).
   whenAsync('/kb/tags',                                           { ...mapView(vueViewWrapper),                        "label":"Tags",                        "resolve":{ ...commonRouteUrls.kb,                                           },"param":"true","resolveController":true}).
   whenAsync('/kb/tags/:tag/:title?',                              { ...mapView(vueViewWrapper),                        "label":"Articles by tag",             "resolve":{ ...commonRouteUrls.kbTags,                                       },"param":"true","resolveController":true}).

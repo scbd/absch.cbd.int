@@ -16,13 +16,10 @@
 <script>
 
   import articleDetails from '../../components/kb/article-details.vue';
-  import AutoCompleteSearch from '../../components/kb/auto-complete-search.vue';
-
   export default {
     name:'kbArticles',
     components:{
-      articleDetails,
-      AutoCompleteSearch
+      articleDetails
     },
 
     props:{
