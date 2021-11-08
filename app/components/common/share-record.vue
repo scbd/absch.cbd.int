@@ -63,7 +63,7 @@
                       type="url"
                       placeholder="https://example.com"
                       ref="domainTag"
-                      :data-script="`<script src='/app/assets/widgets.js'></script>`"
+                      :data-script="`<script src='https://bch.cbddev.xyz/app/assets/widgets.js'></script>`"
                   >
                   <button @click="sendRecord()" :disabled="loading && !domain"  v-bind:class="{ 'disabled': loading || !domain}">Get code</button>
                  <label class="color-red" v-if="domainRequired">{{$t('domainError')}}</label>
