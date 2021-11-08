@@ -63,7 +63,7 @@
                       type="url"
                       placeholder="https://example.com"
                       ref="domainTag"
-                      :data-script="`<script src='https://bch.cbddev.xyz/app/assets/widgets.js'></script>`"
+                      :data-script="`<script src='${$realm.originalObject.baseURL}/app/assets/widgets.js'></script>`"
                   >
                   <button @click="sendRecord()" :disabled="loading && !domain"  v-bind:class="{ 'disabled': loading || !domain}">Get code</button>
                  <label class="color-red" v-if="domainRequired">{{$t('domainError')}}</label>
@@ -115,7 +115,7 @@
         },
         created(){
             this.ArticleApi = new ArticleApi(this.tokenReader);
-            console.log(this.ArticleApi);
+           // console.log();
         },
         async mounted() {
         },
@@ -153,9 +153,9 @@
                     this.pageUrl = origin+"/"+this.$locale+"/countries/"+this.query;
                 }
             },
-            async send() { // for testing check network call
+            async send() { 
                 this.emailRequired = false;
-                if (!this.email) {
+                if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))) {
                     this.emailRequired = true;
                     return;
                 }
@@ -163,21 +163,21 @@
                 try{
 
                   let params = {};
-                  console.log("query",this.query)
                   if(this.type == 'document') {
                     params = {
                       "storageType" : "ch-document",
-                      "expiry" : "2022-10-22T09:07:42.633Z",
-                      "forPdf" : false, "sharedBy" : this.query.submittedBy.userID,
+                     
+                      "forPdf" : false, 
+                      "sharedBy" : this.query.submittedBy.userID,
                       "sharedWith" : {
                         "link" : true,
                         "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
                       },
                       "sharedData" : {
                         "identifier" : this.query.identifier,
-                        "restrictionField" : "workingDocumentID", "restrictionFieldValue" : "228966",
                         "referenceFields" : [], "realm" : this.query.Realm
-                      }, "urlHash" : this.pageUrl,
+                      },
+                      "urlHash" : this.pageUrl,
                       "meta" : {
                         "modifiedBy" : this.query.updatedBy.userID,
                         "createdBy" : this.query.createdBy.userID,
@@ -190,7 +190,6 @@
                   if(this.type == 'searchResults') {
                     params = {
                       "storageType" : "ch-search-result",
-                      "expiry" : "2022-10-22T09:07:42.633Z",
                       "sharedData" : {
                         "id" : this.query,
                       },
@@ -204,7 +203,6 @@
                     if(this.type == 'countryProfile') {
                         params = {
                             "storageType" : "ch-country-profile",
-                            "expiry" : "2022-10-22T09:07:42.633Z",
                             "sharedData" : {
                                 "code" : this.query,
                             },
@@ -218,7 +216,6 @@
                   const response = await this.ArticleApi.shareData( params );
 
                 if (response) {
-                  console.log("res",response)
                   this.sendResponse = "Email send successfully!";
                   this.email = "";
                 } else{
@@ -230,7 +227,6 @@
             }
             },
             async embed(){
-              console.log("this", this.query);
               if(typeof this.chDocumentId == 'function'){
                 this.documentId = await this.chDocumentId();
               }
@@ -248,15 +244,14 @@
                 this.loading      = true;
                 try {
                   let scriptTag = this.$refs.domainTag.getAttribute('data-script');
-                  console.log("domainTag",scriptTag)
                   if(this.type == 'document') {
                     this.frame = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.documentId}" width="100%"></div>`
                   }
                   if(this.type == 'searchResults') {
-                    this.frame = `${scriptTag}<div class="ch-search-result" data-type="Search" data-record-id="${this.query}" width="100%"></div>`
+                    this.frame = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.query}" width="100%"></div>`
                   }
                   if(this.type == 'countryProfile') {
-                    this.frame = `${scriptTag}<div class="ch-country-profile" data-type="Country-profile" data-record-id="${this.query}" width="100%"></div>`
+                    this.frame = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.query}" width="100%"></div>`
                   }
                 } catch (err) {
                 } finally {
