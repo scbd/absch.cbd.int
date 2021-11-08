@@ -32,7 +32,7 @@
 			<div ng-show="document.absCheckpoints">
 				<legend>Checkpoint/s that collected or received the information</legend>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li ng-repeat="item in document.absCheckpoints">
 								<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -72,7 +72,7 @@
 				<div ng-show="document.absIRCCs">
 					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li  ng-repeat="item in document.absIRCCs">
 								 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
