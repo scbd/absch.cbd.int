@@ -177,7 +177,7 @@
                                         <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td>
                                         <!-- <td ng-bind="doc.rec_countryName"></td> -->
                                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
-                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:20"  data-title="doc.rec_summary"></td>
+                                        <td class="summary" ng-bind="doc.rec_summary | limitTo:20"  title="doc.rec_summary"></td>
                                         <td class="meta"> 
                                             <span ng-bind="doc.meta"></span>  
                                         </td>
@@ -234,8 +234,8 @@
     <script type="text/ng-template" trados-translation="true" id="documentSelectionRecordDisplay">
         <div class="col-md-12">
             <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
-                <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
-                <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
+                <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
+                <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
            <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
@@ -295,7 +295,7 @@
                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
                         <td style="min-width:30%" class="title"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
                         <td class="id color-blue"> <a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
-                        <td class="summary" data-title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:20"></td>
+                        <td class="summary" title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:20"></td>
                         <td class="meta"> 
                             <span ng-bind="doc.meta"></span>                            
                         </td>
@@ -308,8 +308,8 @@
 
         <div class="col-md-12">
             <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
-                <button type="button" class="btn btn-default" data-bs-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
-                <button type="button" class="btn btn-default" data-bs-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
+                <button type="button" class="btn btn-default" data-bs-toggle="tooltip" title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
+                <button type="button" class="btn btn-default" data-bs-toggle="tooltip" title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
             <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
