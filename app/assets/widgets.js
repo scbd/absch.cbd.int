@@ -31,15 +31,23 @@ function embedIFrame(widget, options){
 }
 
 function embedRecord(){
-    // if(!id)id, options
-    //     return; widget.dataset
     var widgetInfo;
-    widgetInfo = [...document.getElementsByClassName('scbd-ch-embed')];
+    widgetInfo = [...document.getElementsByClassName('scbd-ch-embed'), ...document.getElementsByClassName('ch-country-profile'),
+        ...document.getElementsByClassName('ch-search-result')];
+    if (widgetInfo == []) return;
     for (var key in widgetInfo) {
         if (Object.hasOwnProperty.call(widgetInfo, key)) {
-            const widget = widgetInfo[key];                
+            const widget = widgetInfo[key];   
+            let iframeSrc =""             ;
             if(widget.dataset.type == 'record' && widget.dataset.recordId){            
-                var iframeSrc = `${origin}/database/${widget.dataset.recordId}?embed=true`
+                iframeSrc = `${origin}/database/${widget.dataset.recordId}?embed=true`
+            }
+            if (widget.dataset.type == 'country-profile' && widget.dataset.recordId) {
+                iframeSrc = `${origin}/countries/${widget.dataset.recordId}?embed=true`
+            }
+            if (widget.dataset.type == 'search-result' && widget.dataset.recordId) {
+                iframeSrc = `${origin}/search/${widget.dataset.recordId}?embed=true`
+            }
                 var width = getAttributeValue(widget, 'width') || '300';
                 var height = getAttributeValue(widget, 'height') || '500';
                 
@@ -53,9 +61,8 @@ function embedRecord(){
         }
     }
 
-}
 
-function embedCountryProfile(code, options){
+function embedCountryProfile(){
 
 }
 
@@ -87,7 +94,7 @@ function onReady(callbackFunc) {
 function registerIframeCommunication(iframe, data){
     if(!iframeCommunicationReceived){
         setTimeout(function(){
-            iframe.contentWindow.postMessage(JSON.stringify(data), '*');//'http://absch-widget.cbddev.xyz:2010');  
+            iframe.contentWindow.postMessage(JSON.stringify(data), '*');//'http://absch-widget.cbddev.xyz:2010');
             registerIframeCommunication(iframe, data)          
         }, 2000);
     }
