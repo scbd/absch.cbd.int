@@ -138,7 +138,10 @@
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading && !error">            
+        <div ng-if="shareVueComponent && chDocumentId" class="share-single-document full-text-display pull-right compare-buttons">
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus" :ch-document-id="chDocumentId"></share-record>
+        </div>
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
             <div record-options></div>
         </div>
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>

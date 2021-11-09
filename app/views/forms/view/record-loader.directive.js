@@ -16,16 +16,17 @@ import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/compare-val';
 import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
+import shareRecord from '~/components/common/share-record.vue';
 
 	app.run(function($templateCache){
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
 		$templateCache.put('view-print-footer.html', printFooterTemplate)
 	});
-	
+
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
+	"$filter", "$http", "apiToken", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$routeParams','$rootScope',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		$http, $httpAWS, realm, $compile, searchService, IWorkflows, appLocale, ngMeta) {
+		$http, apiToken, realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $routeParams, $rootScope ) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -42,6 +43,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 			},
 			link: function ($scope, $element, $attr) {
 
+				$scope.tokenReader = function(){ return apiToken.get()}
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_new';
 				//debugger;
@@ -52,7 +54,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 					$scope.realm = realm;
 					$scope.isABS = realm.is('ABS');
 					$scope.isBCH = realm.is('BCH');
-					
+				  $scope.isEmbed = $routeParams.embed;
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					
@@ -70,6 +72,32 @@ import printFooterTemplate from 'text!./print-footer.html';
 						}
 					});
 
+					$scope.shareVueComponent = {
+						components:{shareRecord}
+					}
+
+					$scope.getQuery = function () {
+						let query = $scope.internalDocument.info;
+						const type = "document";
+						return {type, query}
+					}
+
+					$scope.chDocumentId = function () {
+						const id =$filter("uniqueID")($scope.internalDocument.info);
+						return  id;
+					}
+
+					$scope.userStatus = function () {
+						if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+						var signIn = $scope.$on('signIn', function (evt, data) {
+							signIn();
+						});
+						$('#loginDialog').modal("show");
+						return false;
+						} else {
+						return true;
+						}
+					}
 
 					$scope.getUserCountry = function (id) {
                         var term = {};
@@ -138,6 +166,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 							const skipRealm = _.includes(['focalpoint', 'nfp'], (documentSchema||'').toLowerCase()) 
 							$scope.load(documentID, documentRevision, skipRealm);
 						}
+						$scope.loaderSchema = $filter("urlSchemaShortName")(documentSchema);
 					};
 
 					$scope.timeLaspe = 20;
