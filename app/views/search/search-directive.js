@@ -70,7 +70,6 @@ import 'angular-vue'
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
-                        $scope.isEmbed = $routeParams.embed;
                         var leftMenuFilters  = [];
                         $scope.searchAlertError = '';
                         $scope.realm         = realm
