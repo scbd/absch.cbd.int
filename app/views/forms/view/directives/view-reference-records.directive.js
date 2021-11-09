@@ -46,7 +46,7 @@ app.directive("viewReferencedRecords", [function () {
 									_.forEach(record.referenceRecord_info_ss, function(info){
 										info = JSON.parse(info);
 										const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
-										_.forEach(info.identifiers, function(identifier){
+										_.uniq(info.identifiers).forEach((identifier)=>{
 											if(removeRevisionNumber(identifier) == $scope.model){
 												if(!$scope.referenceRecords)
 													$scope.referenceRecords = {};
