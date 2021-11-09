@@ -34,8 +34,8 @@ import 'angular-vue'
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
              'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log','IGenericService',
-            function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
-                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
+            function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus,
+                    appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService,
                     $timeout, locale, solr, toastr, $log, IGenericService) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
@@ -70,6 +70,7 @@ import 'angular-vue'
                         var queryCanceler = null;                        
                         var isABS = realm.is('ABS');
                         var isBCH = realm.is('BCH');   
+                        $scope.isEmbed = $routeParams.embed;
                         var leftMenuFilters  = [];
                         $scope.searchAlertError = '';
                         $scope.realm         = realm
@@ -84,18 +85,18 @@ import 'angular-vue'
                             rowsPerPage     : 25,
                             groupByFields   : ['government', 'schema'],
                             viewType        : 'default',
-    
+
                             skipResults       : $attrs.skipResults,
                             skipDateFilter    : $attrs.skipDateFilter,
                             skipSaveFilter    : $attrs.skipSaveFilter,
                             skipTextFilter    : $attrs.skipTextFilter,
                             skipKeywordsFilter: $attrs.skipKeywordsFilter,
-    
+
                             searchFilters   : {},
                             countriesFilters: {},
                             regionsFilter   : {},
                             searchKeyword   : ''
-                        }   
+                        }
 
                     ////////////////////////////////////////////
                     ////// scope functions
@@ -103,7 +104,7 @@ import 'angular-vue'
                     $scope.tour = function(){
                         $scope.tourOn = true;
                         var joyride = joyrideService;
-                        
+
                         joyride.config = {
                             overlay: true,
                             onStepChange: function(){  },
@@ -493,6 +494,7 @@ import 'angular-vue'
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
                         updateQueryResult();
+                        $rootScope.shareSearchId = "";
                     };
 
                     $scope.onExportClick = function({listType, fields}){
@@ -1026,6 +1028,15 @@ import 'angular-vue'
                         }, 0)
                     }
 
+                    function getSearchQuery() {
+                        if ($routeParams.id) {
+                            $rootScope.shareSearchId = $routeParams.id;
+                            $timeout(function () {
+                                $('#shareSearchDomId')[0].click();
+                            },500);
+                        } else $scope.showSaveFilter($scope.setFilters, true);
+                    }
+
                     function buildSearchQuery(){
                         var tagQueries          = {};
                         var tabQuery            = buildTabQuery();
@@ -1326,7 +1337,7 @@ import 'angular-vue'
                             else
                                 query = excludeQuery
                         }
-                        
+
                         return query;
                     }
 
@@ -1369,7 +1380,7 @@ import 'angular-vue'
                         return leftMenuFilters
                     }
                     async function loadLeftMenuFieldMapping(){
-                        
+
                         if(isABS) {
                             const {absLeftMenuFilters} = await import('./search-filters/abs-left-menu-filters.js');
                             return absLeftMenuFilters;
@@ -1380,11 +1391,13 @@ import 'angular-vue'
                         }
                     }
 
-	                $scope.showSaveFilter = function ( filters ) {
+	                $scope.showSaveFilter = function ( filters, isShare ) {
 
                     if ( $rootScope.user && !$rootScope.user.isAuthenticated ) {
                         var signIn = $scope.$on( 'signIn', function ( evt, data ) {
-                            $scope.addEdit();
+                            if(!isShare) {
+                                $scope.addEdit();
+                            }
                             signIn();
                         } );
 
@@ -1435,8 +1448,13 @@ import 'angular-vue'
 
                                     operation.then(function (data) {
                                         $scope.closeDialog();
-                                        if (!document._id)
+                                        if (!document._id) {
                                             document._id = data.id;
+                                        }
+                                        if(isShare){
+                                            $rootScope.shareSearchId = data.id;
+                                             $('#shareSearchDomId')[0].click();
+                                        }
                                     });
                                 };
 		                            $scope.getFilterName = function (name) {
@@ -1466,9 +1484,8 @@ import 'angular-vue'
                     this.combinationField         = combinationField        ;
                     this.sanitizeFacets           = sanitizeFacets          ;
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
-                    this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
-
-                    this.getFocalPointTypes       = getFocalPointTypes
+                    this.getSearchQuery           =  getSearchQuery         ;
+                    this.getFocalPointTypes       = getFocalPointTypes      ;
             }]//controller
         };
     });

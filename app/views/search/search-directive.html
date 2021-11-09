@@ -228,13 +228,13 @@
          <!-- ng-if="!skipResults" -->
          <div class="row" style="padding:10px 0 0 0;margin:0px;">
              <!-- Search Result -->
-             <div class="hidden-xs" ng-class="{'col-xs-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch}"
+             <div class="hidden-xs" ng-class="{'col-xs-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch, 'hidden':isEmbed}"
              style="border:1px solid #eee;padding:0 20px 0 0; margin:0;" ng-show="(leftMenuFilters && leftMenuFilters.length != 0)">
                  <div left-side-filter></div>
              </div>
              <!-- Different view for list/group -->
              <div class="col-xs-12"  style="margin:0;border: 1px solid #eee;"
-                 id="searchResult" ng-class="{'col-xs-9':(leftMenuFilters && leftMenuFilters.length != 0), 'hidden' : isAlertSearch}">
+                 id="searchResult" ng-class="{'col-xs-9':(leftMenuFilters && leftMenuFilters.length != 0 && !isEmbed), 'hidden' : isAlertSearch}">
                  <div class="col-xs-12" style="padding:0;margin:0;">
                      <ul class="nav nav-tabs search-tab-title">
                         <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}">
