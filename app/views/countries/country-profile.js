@@ -5,16 +5,17 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
+import shareRecord from '~/components/common/share-record.vue';
 
   export { default as template } from './country-profile.html';
 
-  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
-    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
+  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService','apiToken', '$rootScope',
+    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService, apiToken, $rootScope) {
       $scope.code      = $route.current.params.code;
       $scope.isBCH     = realm.is('BCH');
       $scope.isABS     = realm.is('ABS');
       $scope.locale    = locale;
-
+      $scope.tokenReader = function(){ return apiToken.get()}
       $q.when(commonjs.getCountry($scope.code.toUpperCase()))
       .then(function(country){ 
           $scope.country = country;
@@ -66,6 +67,30 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
         });
       }
 
+        $scope.userStatus = function () {
+          if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+            var signInEvent = $scope.$on('signIn', function (evt, data) {
+              signInEvent();
+            });
+            $('#loginDialog').on('hidden.bs.modal', function () {
+              signInEvent();
+            });
+            return false;
+          } else {
+            return true;
+          }
+        }
+
+        $scope.shareVueComponent = {
+            components:{shareRecord}
+        }
+
+        $scope.getQuery = function(){
+            //const countryCode = $scope.code;
+            const query = $scope.code;
+            const type = "countryProfile"
+            return {type, query}
+        }
     }
   ];
 
