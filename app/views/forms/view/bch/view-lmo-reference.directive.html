@@ -1,6 +1,6 @@
 ﻿
 <div class="default-reference-viewer">
-    <span ng-if="errorCode==404" class="label label-warning">Reference record not found ({{model}})</span>
+    <span ng-if="errorCode==404" class="alert alert-warning">Reference record not found ({{model}})</span>
 	<div ng-if="!errorCode">					
         <div class="selected-reference-uid">
             <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="{{target||'_blank'}}">

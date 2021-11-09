@@ -1,8 +1,13 @@
 ﻿
 <div class="default-reference-viewer">
-    <span ng-if="loading"><i class="fa fa-spin fa-spinner" aria-hidden="true"></i> loading record details...</span>
-    <span ng-if="errorCode==404" class="label label-warning">Reference record not found (<span ng-bind="model"></span>)</span>
-    <span ng-if="error" class="label label-warning">Error loading details for (<span ng-bind="model"></span>)</span>
+    <div style="padding:10px">
+        <span ng-if="loading"><i class="fa fa-spin fa-spinner" aria-hidden="true"></i> loading record details...</span>
+        <span ng-if="errorCode==404" class="alert alert-warning" role="alert">
+            <strong>The reference is <i>invalid</i>, the item may have been unpublished.</strong> 
+            (<span ng-bind="model.identifier||model"></span>)
+        </span>
+        <span ng-if="error" class="alert alert-warning" role="alert">Error loading details for (<span ng-bind="model"></span>)</span>
+    </div>
 	<div ng-if="!loading && !errorCode && !error">
         
         <span ng-transclude="default">		
