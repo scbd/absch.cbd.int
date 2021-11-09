@@ -18,8 +18,15 @@
     "publishedDate":"Published date",
     "sampleMessage":"This is only sample of the information to be exported. All records retrieved by this search will be included in the export.",
     "cancel":"Cancel",
-    "download":"Download"
-    
-    
-    
+    "shareDialogTitle" : "Share result",
+    "download":"Download",
+    "emailError" : "Please enter a valid email(s)",
+    "domainError" : "Please enter a domain name",
+    "embed" : "Embed",
+    "send" : "Send",
+    "share" : "Share",
+    "link" : "Link",
+    "email" :"Email",
+    "domain" : "Domain",
+    "copyCode" : "Copy code"
 }
