@@ -34,7 +34,7 @@ import 'components/scbd-angularjs-services/main';
                     $scope.skipTextFilter = true;
                 
                     if ($scope.user?.government) {
-                        if($scope.realm.is('ABS')){
+                        if(realm.is('ABS')){
                             systemSearches = [{
                                 system: true,
                                 "filters": [{
