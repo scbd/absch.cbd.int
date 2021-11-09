@@ -324,11 +324,7 @@ max-width: 90%;
     border-radius: 0.25rem;
 }
 .new-css-abs-card-footer {
-<<<<<<< HEAD
     background-color: #1FA65D !important;
-=======
-    background-color: #009B48 !important;
->>>>>>> ABS new homepage (#626)
 }
 .new-css-abs-card-footer>a {
     color: #FFF !important;
