@@ -15,7 +15,7 @@
 <script>
 
 	import i18n from '../../locales/en/components/kb.json';
-	import ArticlesApi from './article-api';
+	import ArticleApi from '~/api/articles';
 
 	export default {
 		name:'kbLatestFaqs',

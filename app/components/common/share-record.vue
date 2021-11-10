@@ -66,7 +66,7 @@
                       type="url"
                       placeholder="https://example.com"
                       ref="domainTag"
-                      :data-script="`<script src='${$realm.originalObject.baseURL}/app/assets/widgets.js'></script>`"
+                      :data-script="`<script src='${$realm.baseURL}/app/assets/widgets.js'></script>`"
                   >
                   <button @click="sendRecord()" :disabled="loading && !domain"  v-bind:class="{ 'disabled': loading || !domain}">Get code</button>
                  <label class="color-red" v-if="domainRequired">{{$t('domainError')}}</label>
@@ -91,7 +91,7 @@
 </template>
 
 <script>
-    import ArticleApi from '../kb/article-api';
+    import ArticleApi from '~/api/articles';
     import { Modal } from 'vue-2-bootstrap-3'
     import i18n from '../../locales/en/components/export.json';
 
@@ -119,13 +119,13 @@
         },
         created(){
             this.ArticleApi = new ArticleApi(this.tokenReader);
-           // console.log();
         },
         async mounted() {
         },
         methods: {
-            async openMpdel(){
-                const isLogin = await this.userStatus();
+            async openMpdel(){ //TODO: spell mistake
+                const isLogin = await this.userStatus(); //use isUserLoggedIn
+                //TODO: if tokenReader is resolved and has value that mean the user is loggedin
                 if(!isLogin) {
                     this.open = false;
                     return;
@@ -141,22 +141,23 @@
                 this.populateData();
             },
             async populateData(){
-                const {query, type} = await this.getQuery();
+                const {query, type} = await this.getQuery(); //TODO:use getSearchFilterQuery
                 this.query = query;
                 this.type = type;
 
+                //TODO:pageUrl use shareLink
                 if(this.type == 'document'){
-                    this.pageUrl = this.$realm.originalObject.baseURL+"/"+this.$locale+"/database/"+this.query.identifier;
+                  //TODO: why this.query.identifier; in case of document and this.query in countryProfile 
+                    this.pageUrl = this.$realm.baseURL+"/"+this.$locale+"/database/"+this.query.identifier;
                 }
                 if(this.type == 'searchResults'){
                     this.pageUrl = "";
                 }
                 if(this.type == 'countryProfile'){
-                   // this.storageType = "ch-country-profile";
-                    this.pageUrl = this.$realm.originalObject.baseURL+"/"+this.$locale+"/countries/"+this.query;
+                    this.pageUrl = this.$realm.baseURL+"/"+this.$locale+"/countries/"+this.query;
                 }
             },
-            async send() {
+            async send() {// TODO: use shareLinkByEmail
                 this.emailRequired = false;
                 if (!(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
                     this.emailRequired = true;
@@ -179,14 +180,7 @@
                         "identifier" : this.query.identifier,
                         "referenceFields" : [], "realm" : this.query.Realm
                       },
-                      "urlHash" : this.pageUrl,
-                      "meta" : {
-                        "modifiedBy" : this.query.updatedBy.userID,
-                        "createdBy" : this.query.createdBy.userID,
-                        "modifiedOn" : this.query.updatedOn,
-                        "createdOn" : this.query.createdOn,
-                        "version" : this.query.revision
-                      }
+                      "urlHash" : this.pageUrl
                     };
                   }
                   if(this.type == 'searchResults') {
@@ -244,12 +238,26 @@
                     return;
                 }
                   this.loading      = true;
-                  const param = {"shareType": "embed", "domain": this.domain, "type": this.type, "query": this.query};
+                  const param = {
+                      "storageType" : "ch-search-result",
+                      "forPdf" : false,
+                      "sharedBy" : this.query.submittedBy.userID,
+                      "sharedWith" : {
+                        "link" : true,
+                      },
+                      "sharedData" : {
+                        "domain": this.domain, 
+                        "shareType": "embed", 
+                        searchFilters : this.query,
+                        "referenceFields" : [], 
+                        "realm" : this.query.Realm
+                      }
+                    };
                   try {
-                   // const response = await this.ArticleApi.shareData(param);
+                   const response = await this.ArticleApi.shareData(param);
                    // if((response || []).length) {
                       setTimeout(() => {
-
+                        //TODO : what is frame, can yu use better names?
                         let scriptTag = this.$refs.domainTag.getAttribute('data-script');
                         if (this.type == 'document') {
                           this.frame = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.documentId}" width="100%"></div>`
@@ -262,15 +270,19 @@
                         }
                       }, 100);
                    // }
-                    } catch (err) {
-                } finally {
+                  } 
+                  catch (err) {
+                    //TODO what happens if there is an error?
+                  } 
+                  finally {
                     this.loading = false;
-                }
+                  }
             },
 
             sendRecord(){
                 this.emailRequired = false;
                 this.domainRequired = false;
+                //TODO : formatting?
                 if(this.shareType == 'email')
                     this.send();
                     else
@@ -289,14 +301,16 @@
             generateSearchLink(){
                 setTimeout(() => {
                     let _this = this;
+                    //TODO : use await?
                     this.generateLink().then(function(data) {
                       _this.searchId = data.id;
-                      _this.pageUrl = _this.$realm.originalObject.baseURL+"/"+_this.$locale+"/search/"+data.id;
+                      _this.pageUrl = _this.$realm.baseURL+"/"+_this.$locale+"/search/"+data.id;
                     })
 
                   },100);
-            },
+            },//TODO formatting?
 
+            //TODO can copyCode and Copy link not be one funtion ????
              copyLink(){
                 try {
                   this.$refs.link.select();

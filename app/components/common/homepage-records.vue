@@ -49,7 +49,7 @@
 </template>
 
 <script>
-    import ArticlesApi  from '../kb/article-api';
+    import ArticlesApi  from '~/api/articles';
 	  import i18n from '../../locales/en/components/export.json';
     import "../kb/filters";
 

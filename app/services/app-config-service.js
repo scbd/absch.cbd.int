@@ -33,7 +33,8 @@ import realmConfigurations from 'realmConf';
                 if(!realmConfig)
                     throw new Error("Unknown realm for host: "+window.location.host);
 
-                return { 
+                return {
+                    ...realmConfig, 
                     value               :   realmConfig.realm,
                     uIdPrefix           :   realmConfig.uIdPrefix,
                     schemas             :   realmConfig.schemas,

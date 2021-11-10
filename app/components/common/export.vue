@@ -103,7 +103,6 @@
 			}
 		},
 		created(){
-			// this.articlesApi = new ArticlesApi();
 		},
 		async mounted() {
         },

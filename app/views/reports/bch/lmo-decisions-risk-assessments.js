@@ -18,11 +18,11 @@ export default ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$t
 		
 		$scope.$watch('newLmo', function(newVal){
 			if(newVal){
-				$scope.identifier = newVal.originalObject.identifier_s;
+				$scope.identifier = newVal.identifier_s;
 				//commonjs.hexToInteger();
                 var tab = $scope.tab;
                 $scope.tab = undefined;	
-                $route.updateParams({documentId:newVal.originalObject.identifier_s})
+                $route.updateParams({documentId:newVal.identifier_s})
                 $timeout(function(){$scope.tab = tab}, 100);			
 			}
 		})

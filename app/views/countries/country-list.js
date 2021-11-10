@@ -68,7 +68,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
 
 
                     ngMeta.resetMeta();  
-                    var url   = realm.originalObject.baseURL + '/' + locale  + '/countries'
+                    var url   = realm.baseURL + '/' + locale  + '/countries'
                     // ngMeta.setTag('description', summary || window.scbdApp.title);
                     ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
                 });

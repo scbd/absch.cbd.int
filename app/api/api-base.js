@@ -1,6 +1,5 @@
-
 import axios from 'axios'
-import { isFunction, isEmpty, cloneDeep } from 'lodash'
+import { isFunction } from 'lodash'
 
 let sitePrefixUrl = 'https://api.cbd.int';
 
@@ -11,7 +10,7 @@ if(/\localhost$/i   .test(window.location.hostname)) sitePrefixUrl= '/';
 const cache          = new Map()
 const defaultOptions = { prefixUrl: sitePrefixUrl, timeout  : 30 * 1000 }
 
-export default class ArticlesApi
+export default class ApiBase
 {
   constructor(options) {
 
@@ -25,6 +24,7 @@ export default class ArticlesApi
     const baseConfig = {
       baseURL : prefixUrl,
       timeout,
+      tokenType,
       tokenReader
     }
 
@@ -43,60 +43,21 @@ export default class ArticlesApi
 
     this.http = http;
   }
-
-  async queryArticleGroup(groupKey, params)  {
-    return this.http.get(`api/v2017/articles/grouping/${groupKey}`, { params }).then(res => res.data).catch(tryCastToApiError);
-  }
-
-  async queryArticles(params)  {
-    return this.http.get(`api/v2017/articles`, { params }).then(res => res.data).catch(tryCastToApiError);
-  }
-
-  async shareData(params)  {
-    return this.http.post(`api/v2018/document-sharing`,params).then(res => res.data).catch(tryCastToApiError);
-  }
-  async getArticleById(id)  {
-
-    return this.http.get(`api/v2017/articles/${id}`).then(res => res.data).catch(tryCastToApiError);
-  }
-
-  async getArticlesByTag(tag, options={})  {
-
-    const q = { tag : tag };
-
-    return this.queryArticles({...options, q, fo: 1 });
-  }
-
-  async getArticleAdminTags(params){
-
-    const tags = await this.http.get(`api/v2021/article-admin-tags`, { params }).then(res => res.data).catch(tryCastToApiError);
-
-    return tags
-  }
-
-  async getRecords(params){
-
-    const tags = await this.http.post(`api/v2013/index/select`, params).then(res => res.data).catch(tryCastToApiError);
-
-    return tags
-  }
-
 }
 
 async function loadAsyncHeaders(baseConfig) {
 
-  const { tokenReader, tokenType, ...config } = { ...baseConfig };
+  const { tokenReader, tokenType, ...config } = baseConfig || {}
 
   const headers = { ...(config.headers || {}) };
 
   if(tokenReader) {
-    const tokenDetails = await tokenReader();
-    headers.Authorization = `${tokenType||'Token'} ${tokenDetails.token||tokenDetails}`;
+    const token = await tokenReader();
+    headers.Authorization = `${tokenType||'Bearer'} ${token}`;
   }
 
   return axios.create({ ...config, headers } );
 }
-
 
 //////////////////////////
 // Helpers
@@ -110,4 +71,12 @@ export function tryCastToApiError(error) {
   }
 
   throw error
+}
+
+export function mapObjectId(id){
+  return isObjectId(id)? { $oid: id } : id
+}
+
+export function isObjectId(id){
+  return /^[a-f0-9]{24}/i.test(id);
 }

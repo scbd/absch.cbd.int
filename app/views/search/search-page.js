@@ -12,7 +12,7 @@ export default ["$scope", '$sce', 'ngMeta', 'realm', 'locale',
             $('[role="tooltip"]').hide();
             
             ngMeta.resetMeta();  
-            var url   = realm.originalObject.baseURL + '/' + locale + '/search'
+            var url   = realm.baseURL + '/' + locale + '/search'
             ngMeta.setTitle('Search')
             ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
         }

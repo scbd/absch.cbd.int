@@ -42,13 +42,13 @@ import 'services/main';
                             //       eg http://absch.cbd.int/database/MSR/ABSCH-MSR-HT-206856
                             // if(indexDoc.url_ss.length>0){
                             //     var url = _.find(indexDoc.url_ss, function(url){
-                            //         return ~url.indexOf(realm.originalObject.baseURL)
+                            //         return ~url.indexOf(realm.baseURL)
                             //     })
                             //     ngMeta.setTag('canonical', url)
                             // }
                             if(indexDoc.uniqueIdentifier_s){
                                 var uniqueId = indexDoc.uniqueIdentifier_s.replace(/\-[0-9]{1,2}$/, '').toUpperCase()
-                                var url = realm.originalObject.baseURL + '/' + locale  + '/' + schemaShortCode + '/' + uniqueId
+                                var url = realm.baseURL + '/' + locale  + '/' + schemaShortCode + '/' + uniqueId
                                 ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
                             }
                         }
