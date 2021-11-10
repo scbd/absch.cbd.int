@@ -35,7 +35,8 @@
                         </div>
                     </div>
                  </div>
-                 <button class="generate-link" v-if="type == 'searchResults' && !searchId" @click="generateSearchLink()" >Generate Link</button>
+	            <button v-if="type == 'searchResults' && !searchId" type="button" class="btn-labeled" @click="generateSearchLink()">
+                <span class="btn-label"><i class="fa fa-link"></i></span>Generate Link</button>
                 <div class="row share-link web-site" v-if="shareType =='link' && pageUrl">
                     <input
                         type="url"
@@ -48,6 +49,7 @@
                   <label class="heading">{{$t('email')}}</label>
                     <input
                         type="email"
+                        multiple pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$"
                         v-model="email"
                         placeholder="Email(s)"
                     >
@@ -142,22 +144,21 @@
                 const {query, type} = await this.getQuery();
                 this.query = query;
                 this.type = type;
-                const origin = document.location.origin;
 
                 if(this.type == 'document'){
-                    this.pageUrl = origin+"/"+this.$locale+"/database/"+this.query.identifier;
+                    this.pageUrl = this.$realm.originalObject.baseURL+"/"+this.$locale+"/database/"+this.query.identifier;
                 }
                 if(this.type == 'searchResults'){
-                    this.pageUrl = "";//origin+"/"+this.$locale+"/search/"+this.query;
+                    this.pageUrl = "";
                 }
                 if(this.type == 'countryProfile'){
                    // this.storageType = "ch-country-profile";
-                    this.pageUrl = origin+"/"+this.$locale+"/countries/"+this.query;
+                    this.pageUrl = this.$realm.originalObject.baseURL+"/"+this.$locale+"/countries/"+this.query;
                 }
             },
-            async send() { 
+            async send() {
                 this.emailRequired = false;
-                if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))) {
+                if (!(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
                     this.emailRequired = true;
                     return;
                 }
@@ -168,12 +169,11 @@
                   if(this.type == 'document') {
                     params = {
                       "storageType" : "ch-document",
-                     
-                      "forPdf" : false, 
+                      "forPdf" : false,
                       "sharedBy" : this.query.submittedBy.userID,
                       "sharedWith" : {
                         "link" : true,
-                        "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
+                        "emails" : this.email
                       },
                       "sharedData" : {
                         "identifier" : this.query.identifier,
@@ -197,7 +197,7 @@
                       },
                       "sharedWith" : {
                         "link" : true,
-                        "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
+                        "emails" : this.email
                       },
                      "urlHash" : this.pageUrl
                     };
@@ -210,7 +210,7 @@
                             },
                             "sharedWith" : {
                                 "link" : true,
-                                "emails" : this.email.toString().replace( /\s*\,\s*/g, "," ).trim()
+                                "emails" : this.email
                             },
                             "urlHash" : this.pageUrl
                         };
@@ -287,14 +287,13 @@
                 }
             },
             generateSearchLink(){
-                setTimeout(() => { 
-                    let a = this;
+                setTimeout(() => {
+                    let _this = this;
                     this.generateLink().then(function(data) {
-                      console.log("link",data.id)
-                      a.searchId = data.id;
-                      a.pageUrl = document.location.origin+"/"+a.$locale+"/search/"+data.id;
+                      _this.searchId = data.id;
+                      _this.pageUrl = _this.$realm.originalObject.baseURL+"/"+_this.$locale+"/search/"+data.id;
                     })
-                    
+
                   },100);
             },
 
@@ -362,6 +361,16 @@
         margin-left: -5px;
         font-size: 10px;
     }
+     .share-body .btn-labeled{
+        width:100%;
+        display: block;
+        margin-top: 20px;
+        margin-left: -10px;
+    }
+    .share-body .btn-labeled i{
+        margin: 10px;
+    }
+
     .share-body .icon-list label:hover, .share-body .icon-list .selected label{
         opacity: 1;
         margin-top: 18px;
@@ -444,7 +453,7 @@
         padding: 8px;
         font-size: 12px;
     }
- 
+
     #share-modal .modal-header .modal-title {
       margin-left: 10px;
       font-size: 16px;
@@ -462,8 +471,9 @@
 
     #share-modal .success-message {
       border: 1px solid;
-      margin-top: 20px;
+      margin-top: 50px;
       background-color: #fff;
       padding: 5px;
+      display: block;
     }
 </style>
