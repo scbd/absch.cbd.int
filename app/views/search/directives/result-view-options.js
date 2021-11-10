@@ -125,9 +125,17 @@ import shareRecord from '~/components/common/share-record.vue';
                     $scope.onExport()
                 }
 
+                $scope.generateLink = function () {
+                   return searchDirectiveCtrl.getSearchQuery();
+                }
+
                 $scope.userStatus = function () {
-                    if(!$rootScope.shareSearchId) {
-                        searchDirectiveCtrl.getSearchQuery();
+                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+                        var signIn = $scope.$on('signIn', function (evt, data) {
+                            signIn();
+                        });
+                        $('#loginDialog').modal("show");
+                        return false;
                     } else {
                         return true;
                     }
@@ -139,8 +147,7 @@ import shareRecord from '~/components/common/share-record.vue';
                 $scope.tokenReader = function(){ return apiToken.get()};
 
                 $scope.getQuery = function(){
-                    console.log("query 2222",$rootScope.shareSearchId);
-                    const query = $rootScope.shareSearchId;
+                    const query = "    ";
                     const type = "searchResults"
                     return {type, query}
                 }

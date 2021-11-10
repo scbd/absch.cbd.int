@@ -19,7 +19,8 @@
             </a>
         </li>
         <li ng-if="shareVueComponent">
-            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"
+                          :generate-link="generateLink"></share-record>
         </li>
         <li id="exportRecords" ng-if="viewType=='matrix'">
             <a rel="noopener" href ng-click="onMatrixExportClick()">

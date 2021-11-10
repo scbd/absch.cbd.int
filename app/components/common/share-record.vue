@@ -22,26 +22,27 @@
                             <label>{{$t('link')}}</label>
                         </div>
                     </div>
-                     <div @click="shareType='embed'" :disabled="loading" class="col-md-2" v-bind:class="{ selected: shareType=='embed'}">
+                     <div @click="shareType='embed'" :disabled="loading" class="col-md-2" v-bind:class="{ selected: shareType=='embed', 'disabled': (type == 'searchResults' && !searchId)}">
                         <div class="icon-with-labels embed">
                             <i class="fa fa-code fa-lg" aria-hidden="true"></i>
                              <label>{{$t('embed')}}</label>
                         </div>
                     </div>
-                    <div @click="shareType='email'" :disabled="loading" class="col-md-2" v-bind:class="{ selected: shareType=='email'}">
+                    <div @click="shareType='email'" :disabled="loading" class="col-md-2" v-bind:class="{ selected: shareType=='email', 'disabled': (type == 'searchResults' && !searchId)}">
                         <div class="icon-with-labels">
                             <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>
                             <label>{{$t('email')}}</label>
                         </div>
                     </div>
                  </div>
-                <div class="row share-link web-site" v-if="shareType =='link'">
+                 <button class="generate-link" v-if="type == 'searchResults' && !searchId" @click="generateSearchLink()" >Generate Link</button>
+                <div class="row share-link web-site" v-if="shareType =='link' && pageUrl">
                     <input
                         type="url"
                         v-model="pageUrl"
                         ref="link"
                     >
-                  <button @click="copyLink()" >Copy</button>
+                  <button @click="copyLink()">Copy</button>
                 </div>
                <div class="row share-link" v-if="shareType =='email'">
                   <label class="heading">{{$t('email')}}</label>
@@ -94,7 +95,7 @@
 
     export default {
         components : {Modal},
-        props:['getQuery', 'tokenReader', 'userStatus','chDocumentId'],
+        props:['getQuery', 'tokenReader', 'userStatus','chDocumentId', 'generateLink'],
         data:  () => {
             return {
                 loading        : false,
@@ -106,11 +107,12 @@
                 domain         :'',
                 query          :'',
                 type           :'',
-                pageUrl        :location.href,
+                pageUrl        :'',
                 iframeCommunicationReceived : false,
                 documentId      :'',
                 sendResponse    :'',
                 email           :'',
+                searchId        :'',
             }
         },
         created(){
@@ -146,7 +148,7 @@
                     this.pageUrl = origin+"/"+this.$locale+"/database/"+this.query.identifier;
                 }
                 if(this.type == 'searchResults'){
-                    this.pageUrl = origin+"/"+this.$locale+"/search/"+this.query;
+                    this.pageUrl = "";//origin+"/"+this.$locale+"/search/"+this.query;
                 }
                 if(this.type == 'countryProfile'){
                    // this.storageType = "ch-country-profile";
@@ -191,7 +193,7 @@
                     params = {
                       "storageType" : "ch-search-result",
                       "sharedData" : {
-                        "id" : this.query,
+                        "id" : this.searchId,
                       },
                       "sharedWith" : {
                         "link" : true,
@@ -241,19 +243,26 @@
                     this.domainRequired = true;
                     return;
                 }
-                this.loading      = true;
-                try {
-                  let scriptTag = this.$refs.domainTag.getAttribute('data-script');
-                  if(this.type == 'document') {
-                    this.frame = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.documentId}" width="100%"></div>`
-                  }
-                  if(this.type == 'searchResults') {
-                    this.frame = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.query}" width="100%"></div>`
-                  }
-                  if(this.type == 'countryProfile') {
-                    this.frame = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.query}" width="100%"></div>`
-                  }
-                } catch (err) {
+                  this.loading      = true;
+                  const param = {"shareType": "embed", "domain": this.domain, "type": this.type, "query": this.query};
+                  try {
+                   // const response = await this.ArticleApi.shareData(param);
+                   // if((response || []).length) {
+                      setTimeout(() => {
+
+                        let scriptTag = this.$refs.domainTag.getAttribute('data-script');
+                        if (this.type == 'document') {
+                          this.frame = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.documentId}" width="100%"></div>`
+                        }
+                        if (this.type == 'searchResults') {
+                          this.frame = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.searchId}" width="100%"></div>`
+                        }
+                        if (this.type == 'countryProfile') {
+                          this.frame = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.query}" width="100%"></div>`
+                        }
+                      }, 100);
+                   // }
+                    } catch (err) {
                 } finally {
                     this.loading = false;
                 }
@@ -277,11 +286,23 @@
                 } finally {
                 }
             },
-            copyLink(){
+            generateSearchLink(){
+                setTimeout(() => { 
+                    let a = this;
+                    this.generateLink().then(function(data) {
+                      console.log("link",data.id)
+                      a.searchId = data.id;
+                      a.pageUrl = document.location.origin+"/"+a.$locale+"/search/"+data.id;
+                    })
+                    
+                  },100);
+            },
+
+             copyLink(){
                 try {
-                    this.$refs.link.select();
-                    let successful = document.execCommand('copy');
-                    if (!successful) throw successful;
+                  this.$refs.link.select();
+                  let successful = document.execCommand('copy');
+                  if (!successful) throw successful;
                 } catch (err) {
                 } finally {
                 }
@@ -379,6 +400,8 @@
         background-color: #428bca;
         padding-bottom: 40px;
         border-radius: 0px 0px 4px 4px;
+        padding-left: 0;
+        padding-right: 0;
     }
     .share-link.web-site{
         padding-bottom: 20px;
@@ -393,7 +416,7 @@
         border-radius: 4px 0px 0px 4px;
         padding: 5px;
     }
-    .share-link button.disabled {
+    .share-link button.disabled, .share-body .icon-list .disabled {
         pointer-events:none;
         cursor: not-allowed;
     }
@@ -410,6 +433,9 @@
         border-radius: 0px 4px 4px 0px;
         padding: 5px;
     }
+    .generate-link {
+      margin: 20px -10px;
+    }
     #share-modal .modal-footer{
       padding: 0;
       border: 0;
@@ -418,9 +444,7 @@
         padding: 8px;
         font-size: 12px;
     }
-    /*#share-modal .modal-footer .shared-footer button{*/
-    /*  margin: 5px 20px;*/
-    /*}*/
+ 
     #share-modal .modal-header .modal-title {
       margin-left: 10px;
       font-size: 16px;
