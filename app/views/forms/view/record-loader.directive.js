@@ -54,7 +54,6 @@ import shareRecord from '~/components/common/share-record.vue';
 					$scope.realm = realm;
 					$scope.isABS = realm.is('ABS');
 					$scope.isBCH = realm.is('BCH');
-				  $scope.isEmbed = $routeParams.embed;
 					if(!$scope.locale)
 						$scope.locale = appLocale;
 					
@@ -166,7 +165,6 @@ import shareRecord from '~/components/common/share-record.vue';
 							const skipRealm = _.includes(['focalpoint', 'nfp'], (documentSchema||'').toLowerCase()) 
 							$scope.load(documentID, documentRevision, skipRealm);
 						}
-						$scope.loaderSchema = $filter("urlSchemaShortName")(documentSchema);
 					};
 
 					$scope.timeLaspe = 20;
