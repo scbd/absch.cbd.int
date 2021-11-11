@@ -4,7 +4,10 @@ import ApiBase, { tryCastToApiError } from './api-base';
 
 export default class ArticlesApi extends ApiBase
 {
-
+  constructor(options) {
+    super(options);
+  }
+  
   async queryArticleGroup(groupKey, params)  {
     return this.http.get(`api/v2017/articles/grouping/${groupKey}`, { params })
                     .then(res => res.data)

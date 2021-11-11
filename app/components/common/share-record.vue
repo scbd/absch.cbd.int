@@ -91,7 +91,7 @@
 </template>
 
 <script>
-    import sharingApi from '~/api/document-share';
+    import DocumentShareApi from '~/api/document-share';
     import { Modal } from 'vue-2-bootstrap-3'
     import i18n from '../../locales/en/components/export.json';
 
@@ -100,39 +100,38 @@
         props:['getQuery', 'tokenReader', 'userStatus', 'generateLink'],
         data:  () => {
             return {
-                loading        : false,
-                open           : false,
-                emailRequired  : false,
-                domainRequired : false,
-                shareType      :'link',
-                embedScript          :'',
-                domain         :'',
-                recordKey          :'',
-                type           :'',
-                shareLink        :'',
-                iframeCommunicationReceived : false,
-                sendResponse    :'',
-                email           :'',
-                storageType     :''
-
+                loading                    : false,
+                open                       : false,
+                emailRequired              : false,
+                domainRequired             : false,
+                shareType                  : 'link',
+                embedScript                : '',
+                domain                     : '',
+                recordKey                  : '',
+                type                       : '',
+                shareLink                  : '',
+                sendResponse               : '',
+                email                      : '',
+                storageType                : '',
+                documentShareId            : ''
             }
         },
         created(){
-            this.sharingApi = new sharingApi(this.tokenReader);
+          this.documentShareApi = new DocumentShareApi(this.tokenReader);
         },
         async mounted() {
         },
         methods: {
             async openModel(){
-                  const token = await this.tokenReader();
-                  if(!token) {
-                        await this.userStatus();
-                        this.open = false;
-                        return;
-                  } else {
-                        this.open = true;
-                        return true;
-                  }
+              const token = await this.tokenReader();
+              if(!token) {
+                    await this.userStatus();
+                    this.open = false;
+                    return;
+              } else {
+                    this.open = true;
+                    return true;
+              }
             },
             async onShowDialog() {
                 this.emailRequired = false;
@@ -178,7 +177,7 @@
                       },
                       "urlHash" : this.shareLink
                   };
-                  const response = await this.sharingApi.shareDocument( params );
+                  const response = await this.documentShareApi.shareDocument( params );
 
                 if (response) {
                   this.sendResponse = "Email send successfully!";
@@ -206,31 +205,33 @@
                   this.loading      = true;
 
                   const param = {
-                      "storageType" : this.storageType,
-                      "forPdf" : false,
+                      "storageType": this.storageType,
+                      "forPdf"     : false,
                       "sharedWith" : {
-                        "link" : true,
+                        "link"     : true,
                       },
                       "sharedData" : {
-                        "domain": this.domain, 
-                        "shareType": "embed", 
-                         "id" : this.recordKey
+                        "domain"       : this.domain,
+                        "shareType"    : "embed",
+                        "searchQueryId": this.recordKey
                       }
                     };
                   try {
-                    //ToDo: API issue, not accepting
-                    const response = await this.sharingApi.shareDocument(param);
-                   if((response || []).length) {
+                    if(this.documentShareId == ''){
+                      const shareDetails = await this.documentShareApi.shareDocument(param);
+                      this.documentShareId = shareDetails?.id
+                    }
+                    if(this.documentShareId) {
                       setTimeout(() => {
                         let scriptTag = this.$refs.domainTag.getAttribute('data-script');
                         if (this.type == 'document') {
-                          this.embedScript = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.recordKey}" width="100%"></div>`
+                          this.embedScript = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
                         }
-                        if (this.type == 'searchResults') {
-                          this.embedScript = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.recordKey}" width="100%"></div>`
+                        else if (this.type == 'searchResults') {
+                          this.embedScript = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
                         }
-                        if (this.type == 'countryProfile') {
-                          this.embedScript = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.recordKey}" width="100%"></div>`
+                        else if (this.type == 'countryProfile') {
+                          this.embedScript = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
                         }
                       }, 100);
                     }
