@@ -7,6 +7,10 @@
                 </button>   
                 <span class="bs5 new-css-acronym fw-bold new-color-red "> BCH  </span> 
                 <span class="bs5 fw-bold  fs-4 text-uppercase new-color-red">Biosafety Clearing-House</span>
+                <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">
+                    DEVELOPEMENT</span>
+                <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                        TRAINING</span>
             </div>
             
               <div ng-if="showNav" class="bs5 navbar-collapse">
@@ -28,6 +32,11 @@
             <a href="." class="bs5 fw-bold new-css-acronym color-orange mx-3 mx-md-3 px-md-3 px-lg-5">
                 BCH
                 <span class="bs5 fw-bold new-css-ch-name">Biosafety Clearing-House</span>
+                <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">
+                    DEVELOPEMENT</span>
+                <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                        TRAINING</span>
+
             </a>
         </div>
     </header>
@@ -49,11 +58,11 @@
                         aria-expanded="false">Search</a>
                     <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="search">Records</a></li>
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item  fw-bold new-css-dropdown-menu-item" href="#">Registries</a>
-                            <ul>
-                                <li class="list-unstyled"><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/living-modified-organisms">- LMO</a></li>
-                                <li class="list-unstyled"><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/organisms"> - Organism</a></li>
-                                <li class="list-unstyled"><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/genetic-elements">- Gene</a></li>
+                        <li><span rel="noopener" translation-url class="bs5 dropdown-item text-muted fw-bold new-css-dropdown-menu-item" >Registries</span>
+                            <ul class="new-css-nav-menu-list">
+                                <li class=""><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/living-modified-organisms"> LMO</a></li>
+                                <li class=""><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/organisms"> Organism</a></li>
+                                <li class=""><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/genetic-elements"> Gene</a></li>
                                 
                             </ul>
                         </li>
@@ -124,4 +133,6 @@
             </ul>
         </div>
     </nav>
+
+    <breadcrumbs></breadcrumbs>
 </div>

@@ -43,7 +43,7 @@ import 'services/main';
                 await import('~/views/countries/homepage-map')
                 $scope.$apply(function(){
                     var mapElement = $element.find('#homeMap')
-                    $compile(mapElement.append('<homepage-map zoom-to="{{code}}" height="350px" ></homepage-map>'))($scope);
+                    $compile(mapElement.append('<homepage-map zoom-to="{{code}}" style="min-height:650px" ></homepage-map>'))($scope);
                     $scope.loadingMap = false;
                 });
               });

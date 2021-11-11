@@ -1,12 +1,19 @@
 ﻿<div>
-    <div ng-if="currentCountry.code" style="padding:5px;" ng-class="{'bg-abs': currentCountry.isParty, 'bg-darkgrey':!currentCountry.isParty, 'bg-inbetween': currentCountry.isInbetweenParty}">
+    <div ng-if="currentCountry.code" style="padding:5px;margin-bottom:10px;" ng-class="{
+    'bg-abs': isABS && currentCountry.isParty && !currentCountry.isInbetweenParty,
+    'bg-bch': isBCH && currentCountry.isParty && !currentCountry.isInbetweenParty, 
+    'bg-darkgrey':!currentCountry.isParty && !currentCountry.isInbetweenParty, 
+    'bg-inbetween': currentCountry.isInbetweenParty}">
         <div>
-            <span class="color-white bs5 fw-bold" ng-if="(isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)"
-                >Party to the Nagoya Protocol</span>
-            <span  class="color-white  bs5 fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)"
-                >Ratified, not yet Party</span>
-            <span  class="color-white  bs5 fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)"
-                >Not a Party to the Nagoya Protocol</span>
+            <span class="color-white bs5 fw-bold" ng-if="((isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)) && !currentCountry.isInbetweenParty">
+                Party to the Nagoya Protocol</span>
+            
+                <span  class="color-white bs5 fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)">
+                    Ratified, not yet Party</span>
+
+                <span  class="color-white  bs5 fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)">
+                    Not a Party to the Nagoya Protocol</span>
+
         </div>
 
         <div class="row abs-exception-tooltip"

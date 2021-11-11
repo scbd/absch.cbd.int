@@ -42,13 +42,22 @@
 		.zero {
 			background-color: #DDD!important;
 		}
+
+            .breadcrumbs {background-color:#FFF!important; }
+            .breadcrumbs { font-size: 12px; color:#111; text-decoration: none;}
+            .breadcrumbs a { font-size: 12px; color:#999; text-decoration: none;}
+   
 	</style>
 
 
-	<div id="Jumbotron" class="bg-texture-green app-bg-texture color-black hidden-sm hidden-xs" 
-	style="border-top:1px solid #555;border-bottom:2px solid #ddd;position:relative;" 
-	block-region activate="loadingMap"  ng-style="{'height': isBCH ? '450px' : '350px'}">	
+	<div id="Jumbotron" class="bg-white hidden-sm hidden-xs" 
+	style="position:relative;" 
+	block-region activate="loadingMap"
+	>	
 	</div>
+
+
+
 	<div class="countries-country-list" block-region activate="loading" block-text=" Loading country details">
 		<div style="height:0px;width:0px;opacity: 0;" ng-if="readyForExport">
 			<table id="forExport" style="height:0px;width:0px">

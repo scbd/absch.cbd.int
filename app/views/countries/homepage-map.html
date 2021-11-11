@@ -183,27 +183,25 @@
             border: none !important;
 
         }
-
         .custom-title {
             font-size: 20px !important;
             font-weight: bold;
         }
 
-        #chartdiv {
-            height: 625px;
-        }
     </style>
 
-    <div class="bs5">
+    <div class="bs5" >
 
-        <div class="bs5 row border-top border-bottom border-top ">
+        <div class="bs5 row border-bottom">
 
-                <p class="display-6 text-center pt-3">Parties to the
+                <p ng-if="showTitle" class="display-6 text-center pt-3"> Parties to the
                     <span ng-bind="options.protocol"></span></p>
 
-            <div class="bs5 col-10 col-md-9 g-0  bg-white">
+                  
 
-                <div id="chartdiv" class="bs5 px-3" style="min-height:625px;"></div>
+            <div class="bs5 bg-white" ng-class="{'col-10 col-md-9':showDetails, 'col-12':hideDetails}">
+
+                <div id="chartdiv" style="min-height:350px" class="bs5 px-3"></div>
 
                 <div class="map-disclaimer" data-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
                 <div id="dialogDisclaimer" class="modal fade">
@@ -230,16 +228,16 @@
 
             </div>
 
-            <div class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
+            <div ng-if="showDetails" class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
                 <div class="bs5 p-4 map-country-list border-top">
                     <div class="bs5 pb-3">
                     <a rel="noopener" class="bs5 fs-1 fw-bold link-dark text-decoration-none " ng-if="!currentCountry.code"
                         translation-url href="{{translationUrl}}/search?tab=nationalRecords">
                         <span class="bs5 mb-2" ng-if="!currentCountry.code"> National Records </span>
                     </a>
-                    <a rel="noopener" class="bs5  mb-5 fs-2 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
+                    <a rel="noopener" class="bs5  mb-5 fs-1 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
                         translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}">
-                        <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i>
+                        <!-- <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i> -->
                         <span ng-bind="currentCountry.name|lstring"></span>
                     </a>
                 </div>
@@ -266,9 +264,9 @@
                     <div class="col-md-4  fs-2 text-center" data-bs-toggle="tooltip" delay="0"
                     title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. ">
                         <span class="label new-css-bg-inbetween" ng-bind="numRatified"></span>
+                        
                         <a rel="noopener" translation-url href="/countries/status/inbetween"
                             class="link-dark text-decoration-none new-css-party-counts">Ratified, not yet Party <i class="fa fa-info-circle"></i></a>
-
                     </div>
 
                     <div class="col-md-4 fs-2 text-center">
