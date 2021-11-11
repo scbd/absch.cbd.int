@@ -22,8 +22,8 @@
 								</a>
                               <div class="inner-area">
                                 <i class="fa fa-tag" aria-hidden="true"></i>
-                                <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                                <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+                                <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" v-bind:key="tag._id">{{tag}}</a>
+                                <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags" v-bind:key="tag._id">{{tag}}</a>
                               </div>
 
                             </li>

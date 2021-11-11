@@ -10,7 +10,7 @@
 
           <div class="kb-listing">
             <ul class="article-with-tags-ul">
-              <li class="article-with-tags-li" v-for="article in articles">
+              <li class="article-with-tags-li" v-for="article in articles" v-bind:key="article._id">
                 <a href="#" @click="goToArticle(article, realmTag)">
 									<span class="article-title">
 										{{article.title|lstring($locale)}}
@@ -24,8 +24,8 @@
                 </a>
                 <div class="inner-area">
                   <i class="fa fa-tag" aria-hidden="true"></i>
-                  <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                  <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+                  <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" v-bind:key="tag._id">{{tag}}</a>
+                  <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags" v-bind:key="tag._id">{{tag}}</a>
                 </div>
 
               </li>

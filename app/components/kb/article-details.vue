@@ -16,8 +16,8 @@
                         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[$locale]"></div>
 						<div v-if="article.adminTags" class="detail-custom-tag">
 							<div class="tagcloud">
-								<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                    			<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+								<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags" v-bind:key="tag._id">{{tag}}</a>
+                    			<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags" v-bind:key="tag._id">{{tag}}</a>
 							</div>
 						</div>
                     </div>

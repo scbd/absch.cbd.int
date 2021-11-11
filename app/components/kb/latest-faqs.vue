@@ -4,8 +4,8 @@
 				   <h4>FAQs</h4>
 						<hr>
 						<div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-						<ul v-for="title in help">
-								<li><a href="#" @click="goToArticle(title._id,title.title[$locale])">{{title.title[$locale]}}</a></li>
+						<ul v-for="article in help" v-bind:key="article._id">
+								<li><a href="#" @click="goToArticle(article._id,article.title[$locale])">{{article.title[$locale]}}</a></li>
 						</ul>
 						<div class="view-more">
             				<a href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
@@ -15,7 +15,7 @@
 <script>
 
 	import i18n from '../../locales/en/components/kb.json';
-	import ArticleApi from '~/api/articles';
+	import ArticlesApi from '~/api/articles';
 
 	export default {
 		name:'kbLatestFaqs',

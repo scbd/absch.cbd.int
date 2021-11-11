@@ -50,6 +50,7 @@
 
 <script>
     import ArticlesApi  from '~/api/articles';
+    import SolrApi      from '~/api/solr';
 	  import i18n from '../../locales/en/components/export.json';
     import "../kb/filters";
 
@@ -67,6 +68,7 @@
 		},
 		created(){
 			this.articlesApi = new ArticlesApi();
+      this.solrApi     = new SolrApi();
 		},
     mounted() {
         this.records();
@@ -89,7 +91,7 @@
               "start": 0,
               "rows": this.rows
           };
-          const responseList = await this.articlesApi.getRecords(query);
+          const responseList = await this.solrApi.query(query);
           if ((responseList?.response?.docs || []).length) {
               this.recordList = responseList?.response?.docs;
           }
