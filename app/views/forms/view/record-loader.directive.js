@@ -76,14 +76,9 @@ import shareRecord from '~/components/common/share-record.vue';
 					}
 
 					$scope.getQuery = function () {
-						let query = $scope.internalDocument.info;
+						let recordKey = $filter("uniqueID")($scope.internalDocument.info);
 						const type = "document";
-						return {type, query}
-					}
-
-					$scope.chDocumentId = function () {
-						const id =$filter("uniqueID")($scope.internalDocument.info);
-						return  id;
+						return {type, recordKey}
 					}
 
 					$scope.userStatus = function () {

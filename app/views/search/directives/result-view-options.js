@@ -147,7 +147,7 @@ import shareRecord from '~/components/common/share-record.vue';
                 $scope.tokenReader = function(){ return apiToken.get()};
 
                 $scope.getQuery = function(){
-                    const query = "    ";
+                    const query = "";
                     const type = "searchResults"
                     return {type, query}
                 }

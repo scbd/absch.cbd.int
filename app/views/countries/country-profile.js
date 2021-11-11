@@ -86,10 +86,9 @@ import shareRecord from '~/components/common/share-record.vue';
         }
 
         $scope.getQuery = function(){
-            //const countryCode = $scope.code;
-            const query = $scope.code;
+            const recordKey = $scope.code;
             const type = "countryProfile"
-            return {type, query}
+            return {type, recordKey}
         }
     }
   ];
