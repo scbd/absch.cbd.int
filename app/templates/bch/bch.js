@@ -15,6 +15,7 @@ import 'views/directives/route-loading-directive';
 import '~/views/directives/docked-side-bar';
 import './header';
 import './footer';
+import '../directives/cbd-footer';
 import '../directives/app-loading';
 import { templateController, bootstrapApp} from '../template-controller';
 

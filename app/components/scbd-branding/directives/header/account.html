@@ -2,7 +2,8 @@
 
   <a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap pull-right color-darkgrey" id="btnSignIn" data-slug="signin"
    data-toggle="modal" data-target="#loginDialog" data-keyboard="false" data-backdrop="false">
-   <img src="/app/img/new-home/person-fill.svg" alt="Signin"><strong>SIGN IN </strong>
+   <img src="/app/img/new-home/person-fill.svg" alt="Signin">
+   <strong style="position: relative; top:2px;">SIGN IN </strong>
   </a>
   <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown">
     <span class="text-nowrap color-black"><span ng-bind="user.name" style="margin:2px"></span><i class="fa fa-chevron-down"></i> </span>

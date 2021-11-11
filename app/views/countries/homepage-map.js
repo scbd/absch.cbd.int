@@ -18,7 +18,10 @@ import './directives/homepin-popup-abs';
       replace: true,
       require: ['^homepageMap'],
       scope: {
-        zoomTo: '@zoomTo'
+        zoomTo: '@zoomTo',
+        hideTitle: '@hideTitle',
+        hideDetails: '@hideDetails',
+        mapHeight: '@mapHeight'
       },
       link: function($scope, $element, $attr, requiredDirectives) {
 
@@ -68,6 +71,12 @@ import './directives/homepin-popup-abs';
               "position": "bottom-right"
             }
         };
+
+
+        if(!$scope.mapHeight)
+          $scope.mapHeight = "lg";
+
+
         var lmoDecisions;
         var countries         = {};
         var prevCountryColor  = {clicked:{}, mouseOver:{}};
@@ -77,6 +86,7 @@ import './directives/homepin-popup-abs';
           nonParty       : '#636363',
           inBetweenParty : '#EC971F'
         };
+
         if(realm.is('BCH')){
           $scope.isBCH          = true;
           mapColors = {
@@ -147,7 +157,13 @@ import './directives/homepin-popup-abs';
         };
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
+        $scope.showTitle = true; 
+        if($scope.hideTitle)
+          $scope.showTitle = false;
 
+        $scope.showDetails = true; 
+          if($scope.hideDetails)
+            $scope.showDetails = false;
 
         var map = AmCharts.makeChart( "chartdiv", mapOptions );
         

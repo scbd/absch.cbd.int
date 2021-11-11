@@ -1,4 +1,5 @@
-<div class="bs5 bg-white ">
+<div class="bs5">
+
     <header class="bs5 new-css-sm-header px-3">
         <nav class="bs5 navbar new-css-navbar-sm navbar-light bg-light rounded" >
             <div ng-click="showNav = !showNav"  style="cursor: pointer;" >
@@ -6,11 +7,18 @@
                     <span class="bs5 navbar-toggler-icon"></span>
                 </button>   
                 <span class="bs5 new-css-acronym fw-bold color-green "> ABSCH </span> 
-                <span class="bs5 fs-5 fw-bold text-uppercase link-dark">
+                <span ng-if="!isDEV && !isTRG" class="bs5 fs-5 fw-bold text-uppercase link-dark">
                     <span class="bs5 hidden-xs hidden-sm"> Access and Benefit-sharing </span> 
                     <span class="bs5 hidden-md hidden-lg"> ABS </span> 
                     Clearing-House</span>
-            </div>
+
+                    <span ng-if="isDEV" class="bs5 fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                        DEVELOPEMENT</span>
+
+                        <span ng-if="isTRG" class="bs5 fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                            TRAINING</span>
+
+                </div>
             
               <div ng-if="showNav" class="bs5 list-group navbar-collapse">
                 <div class="bs5 list-group w-100" >
@@ -33,10 +41,17 @@
         <div class="bs5">
             <a href="." class="bs5 new-css-acronym color-green mx-3 mx-md-3 px-md-3 px-lg-5">
                 ABSCH
-                <span class="bs5 new-css-ch-name fw-bold text-uppercase link-dark">
+                <span if="!isDEV && !isTRG" class="bs5 new-css-ch-name fw-bold text-uppercase link-dark">
                     <span class="bs5 hidden-xs hidden-sm"> Access and Benefit-sharing </span> 
                     <span class="bs5 hidden-md hidden-lg"> ABS </span> 
                     Clearing-House</span>
+
+                    <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">
+                        DEVELOPEMENT</span>
+
+                        <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                            TRAINING</span>
+
             </a>
         </div>
     </header>
@@ -152,4 +167,7 @@
         </ul>
     </div>
 </nav>
+
+<breadcrumbs></breadcrumbs>
+
 </div>

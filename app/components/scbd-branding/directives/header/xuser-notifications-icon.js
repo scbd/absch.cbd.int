@@ -14,7 +14,7 @@ import './xuser-notifications';
                     $scope.userNotifications=userNotifications;
 
                     $scope.showInView =function(){
-                      userNotifications.viewAll=!userNotifications.viewAll;
+                      userNotifications.viewAll=true;
                     }
 
                     $scope.viewAllUrl = cfgUserNotification.notificationUrls.viewAllNotificationUrl;
