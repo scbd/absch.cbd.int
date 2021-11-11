@@ -219,8 +219,8 @@
                     };
                   try {
                     //ToDo: API issue, not accepting
-                    // const response = await this.sharingApi.shareDocument(param);
-                   // if((response || []).length) {
+                    const response = await this.sharingApi.shareDocument(param);
+                   if((response || []).length) {
                       setTimeout(() => {
                         let scriptTag = this.$refs.domainTag.getAttribute('data-script');
                         if (this.type == 'document') {
@@ -233,7 +233,7 @@
                           this.embedScript = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.recordKey}" width="100%"></div>`
                         }
                       }, 100);
-                   // }
+                    }
                   } 
                   catch (err) {
                     //TODO what happens if there is an error?
