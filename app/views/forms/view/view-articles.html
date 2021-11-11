@@ -44,7 +44,8 @@
             </div>
         </div>
     </div>  
-        <div pagination ng-if="itemCount > itemsPerPage" class="text-center"  current-page="currentPage"  page-count="pageCount" on-page-change="onPageChange(page)"></div> 
+        <div pagination ng-if="itemCount > itemsPerPage" num-found="itemCount" class="text-center" page-size="itemsPerPage" current-page="currentPage" page-count="pageCount" on-page-change="onPageChange(page)" on-page-size-changed="onPageSizeChanged(itemsPerPage)"></div> 
+
         <div class="row"  ng-if="articles">
             <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true" style="cursor:pointer;" class="col-xs-12 col-md-6 col-lg-4"  >
                 <div  class='row' style="margin:0px 0px;">

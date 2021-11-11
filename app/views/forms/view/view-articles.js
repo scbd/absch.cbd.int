@@ -12,7 +12,7 @@ import 'ck-editor-css';
   export default ["$scope","$route", "realm", "$location", "locale", '$q', 'breadcrumbs','articlesService','ngMeta', '$routeParams',
     function($scope,$route, realm,  $location, locale, $q, breadcrumbs, articlesService, ngMeta, $routeParams) {
       
-      $scope.currentPage=0;
+      $scope.currentPage=1;
       $scope.itemCount=0;
       $scope.itemsPerPage=9;
 
@@ -25,7 +25,7 @@ import 'ck-editor-css';
         loadArticle(id);
       else
         
-        loadArticles(0);
+        loadArticles(1);
 
       //---------------------------------------------------------------------
       function loadArticle(id){
@@ -61,7 +61,7 @@ console.log($routeParams);
 
         agLimit = JSON.parse(JSON.stringify(ag))
         agLimit.push({"$sort" : {"meta.modifiedOn":-1}});
-        agLimit.push({"$skip" : (page||0)*$scope.itemsPerPage});
+        agLimit.push({"$skip" : (page||1)*$scope.itemsPerPage});
         agLimit.push({"$limit": $scope.itemsPerPage });
 
         var qsLimit = {
