@@ -100,7 +100,7 @@
 
 /* HOMEPAGE */
 .new-css-home-section-top-bch {
-    background-color: #00405C;
+    background-color: hsl(198, 100%, 18%);
 }
 .new-css-home-section-top-absch {
     background-image:url('/app/img/new-home/absch-homebg-min.png');
@@ -108,7 +108,7 @@
     background-size: cover; 
     background-repeat: no-repeat;
 }
-}
+
 .new-css-home-section-top-bch {
     background-image:url('/app/img/new-home/bch-homebg-min.png');
     background-position: bottom; 
