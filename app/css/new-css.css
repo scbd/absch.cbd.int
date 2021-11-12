@@ -179,6 +179,7 @@
 .new-css-party-counts{font-size: 1.5rem !important;}
 .new-css-bg-party{background-color:#00405C;}
 .new-css-bg-party-abs{background-color:#069554;}
+.new-css-bg-party-bch{background-color:#00405C;}
 
 .new-css-bg-nonparty{background-color:#636363; }
 .new-css-bg-inbetween{background-color:#EC971F;}
@@ -196,6 +197,8 @@
 .bg-gray-900{background-color:#212529!important;}
 
 .new-css-text-national{color:#428bca!important; white-space: break-spaces !important;}
+.new-css-text-national-country{color:#111!important; white-space: break-spaces !important;}
+
 
 
 .new-css-nav-country-profiles {

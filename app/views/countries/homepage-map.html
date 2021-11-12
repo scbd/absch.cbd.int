@@ -256,7 +256,7 @@
             <div id="Parties" class="text-center bs5 mt-3">
                 <div class="row">
                     <div class="col-md-4  fs-2 text-center ">
-                        <span class="label new-css-bg-party-abs" ng-bind="numParty"></span>
+                        <span class="label" ng-class="{'new-css-bg-party-abs': isABS,'new-css-bg-party-bch': isBCH }" ng-bind="numParty"></span>
                         <a rel="noopener" translation-url href="/countries/status/party"
                             class="link-dark text-decoration-none new-css-party-counts">Parties to the <span ng-bind="options.protocol"></span>
                         </a>
