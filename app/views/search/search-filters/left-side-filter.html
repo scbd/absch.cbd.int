@@ -104,19 +104,19 @@
                                                     <i class="fa fa-clog fa-spin"></i> loading...
                                                 </div>
                                                 <div style="height:1px;width:0px"></div>
-                                                <div  ng-repeat="option in $parent.selectedRawDocuments" ng-click="removeSchemaFilters(option, filter);$parent.$parent.removeDocument(option);" 
+                                             <div  ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter);$parent.$parent.removeDocument(option);"
                                                     class="list-group-item-expand filter" role="button" id="{{option.identifier_s}}"
                                                     data-bs-toggle="tooltip" data-title="{{option.rec_title|lstring:locale}}" data-container="body" data-placement="right"> 
                                                     <div class="label label-selected-facet" aria-hidden="false">
                                                         <div class="fa fa-remove pull-right"></div>                                                    
                                                         <span class="truncate">
                                                             <!-- ({{searchResult.data.facets.keywords[option.id]||0}})  -->
-                                                            <span ng-bind="option.rec_title|lstring:locale|limitTo:50"></span>
-                                                            <span ng-if="(option.rec_title|lstring:locale).length>50">...</span>                                    
+                                                            <span ng-bind="option.title|lstring:locale|limitTo:50"></span>
+                                                            <span ng-if="(option.title|lstring:locale).length>50">...</span>
                                                         </span>
                                                     </div>
-                                                       
-                                                    <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
+
+                                                    <div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div>
                                                 </div>
                                             </selected-records>
                                         </div>

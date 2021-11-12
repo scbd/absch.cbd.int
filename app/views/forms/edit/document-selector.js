@@ -78,7 +78,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                             currentModel=[];
                         $scope.selectedRawDocuments.push(doc);
 
-                        var document = {identifier: doc.identifier_s};
+                        let document = {identifier: doc.identifier_s, title:doc.rec_title};
                         if($attr.identifierWithoutRevision!='true')
                             document.identifier += "@"+ doc._revision_i;
 
