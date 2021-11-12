@@ -24,7 +24,7 @@
   "capacityBuildingInitiativeCbiAudience": "Main target group(s)/beneficiary(ies)",
   "biosafetyThematicAreas": "Biosafety Thematic Areas",
   "CbdSubjects": "CBD Subject Areas",
-  "capacityBuildingInitiativeCbiFundingsrc": "Type(s) of funding source(s)",
+  "capacityBuildingInitiativecbiFundingSrc": "Type(s) of funding source(s)",
   "dnaSequenceFamily": "Category",
   "dnaSequenceIsSynthetic": "Synthetic molecule",
   "dnaSequenceTraits": "Related trait(s) or use(s) in biotechnology",

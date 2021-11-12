@@ -114,7 +114,7 @@ import _ from 'lodash';
                 cbiTypes               : 'D935D0C8-F5A5-43B8-9E06-45A57BF3C731',    // was cBI_types, updated in CBI
                 cbiCpbTypes            : '5CA7AACE-CB79-4146-BF12-B3B1955AFF17',    // was cBI_types1, used in BCH CBI scope of activity
                 cbiAudience            : 'AFB155C4-93A6-402C-B812-CFC7488ED651',    // was cBI_audience, updated in CBI
-                cbiFundingsrc          : 'Capacity Building Project Funding Types', // was cBI_fundingsrc, updated in CBI
+                cbiFundingSrc          : 'Capacity Building Project Funding Types', // was cBI_fundingsrc, updated in CBI
                 cbiStatus              : '4E7731C7-791E-46E9-A579-7272AF261FED',    // was cBI_status, updated in CBI
                 msrElements            : '50616B56-12F3-4C46-BC43-2DFC26679177',    // was mSR_elements, used in search-directive.js   
 

@@ -11,7 +11,7 @@
     <img ng-if="doc.scopeFood_b"		    ng-src="/app/img/bch/indicators/ind-food-on.png"			title="Direct use as food"/>
     <img ng-if="doc.scopeFeed_b"		    ng-src="/app/img/bch/indicators/ind-feed-on.png"			title="Direct use as feed"/>
     <img ng-if="doc.scopeProcessing_b"	    ng-src="/app/img/bch/indicators/ind-transform-on.png"	    title="Processing"/>
-    <img ng-if="doc.scopeConfined_b"	    ng-src="/app/img/bch/indicators/ind-confined-on.png"	    title="Contained Use"/>
+    <img ng-if="doc.scopeConfined_b||doc.scopeContainedUse_b" ng-src="/app/img/bch/indicators/ind-confined-on.png"	    title="Contained Use"/>
 
     <img ng-if="doc.scopePharmaceutical_b"  ng-src="/app/img/bch/indicators/ind-pharma-on.png"         title="Pharmaceutical">
     <img ng-if="doc.scopeTransit_b"         ng-src="/app/img/bch/indicators/ind-transit-on.png"        title="Transit">

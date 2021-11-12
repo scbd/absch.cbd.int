@@ -117,12 +117,18 @@ import '~/views/forms/view/bch/view-lmo-gene.directive';
                                 if(genes[geneItem.selectedGene.identifier]){
                                     geneItem.gene = genes[geneItem.selectedGene.identifier];
                                 }
-                                else{
-                                    //load gene details
-                                    storage.documents.get(geneItem.selectedGene.identifier, {info:true, body:false})
+                                else{//load gene details                                    
+                                    storage.documents.get(geneItem.selectedGene.identifier, {info:true, body:true})
                                     .then(function(data){
                                         geneItem.gene = data.data;
                                         genes[geneItem.selectedGene.identifier] = data.data;
+                                    })
+                                    .catch(e=>{
+                                        storage.drafts.get(geneItem.selectedGene.identifier, {info:true, body:true})
+                                        .then(function(data){
+                                            geneItem.gene = data.data;
+                                            genes[geneItem.selectedGene.identifier] = data.data;
+                                        })
                                     });
                                 }
                             }
