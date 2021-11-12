@@ -1,5 +1,5 @@
 ﻿<div id="innerPage">
-    <div class="mastHead">
+    <div class="mastHead" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
             <h1 style="color:white;">Search</h1>
      <div  id="search-new" >
          <div class="row">
@@ -67,7 +67,7 @@
                      <a rel="noopener" ng-href="#" class="help-tour link2"
                          style="font-size:10px;margin:5px 10px 0 5px; text-transform: uppercase;cursor:pointer;"
                          ng-click="tour()"> <span class="hidden-xs hidden-sm"> <i class="fa fa-question-circle"
-                                 aria-hidden="true"></i>TAKE SEARCH TOUR</span></a>
+                                 aria-hidden="true"></i> TAKE SEARCH TOUR</span></a>
 
                      <a rel="noopener" ng-href="#" ng-if="canShowSaveFilter() && !isAlertSearch" class="link2"
                          style="font-size:10px;;text-transform: uppercase;font-weight: 500;cursor:pointer;"

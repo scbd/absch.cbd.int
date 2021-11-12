@@ -45,6 +45,11 @@
     }
 }
 
+.breadcrumbs {background-color:#00405C;}
+.breadcrumbs { font-size: 12px; color:#eee; text-decoration: none;}
+.breadcrumbs a { font-size: 12px; color:#999; text-decoration: none;}
+
+
 .new-css-header {
     height: 80px;
 }
@@ -58,6 +63,10 @@
     font-size: 1.4rem !important;
     color:#495057!important;
 }
+
+.new-css-nav-menu-list {  list-style-type:disc;}
+.new-css-nav-menu-list li{   margin-left:20px;}
+
 .new-css-navbar-sm{
     position: relative;
     display: block!important;
@@ -94,11 +103,20 @@
     background-color: #00405C;
 }
 .new-css-home-section-top-absch {
-    background-image:url('/app/img/new-home/absch-homebg.gif');
+    background-image:url('/app/img/new-home/absch-homebg-min.png');
     background-position: bottom; 
     background-size: cover; 
     background-repeat: no-repeat;
 }
+}
+.new-css-home-section-top-bch {
+    background-image:url('/app/img/new-home/bch-homebg-min.png');
+    background-position: bottom; 
+    background-size: cover; 
+    background-repeat: no-repeat;
+}
+
+
 .new-css-home-section-map {
     /* background-color: #E1F0F5; */
     background-color: #fff;
@@ -270,7 +288,7 @@ max-width: 90%;
     justify-content: flex-start !important
 }
 .bg-abs{
-    background: #069554!important;
+    background: #564c4d!important;
 }
 .bg-bch{
     background: #00405C!important;
@@ -306,7 +324,7 @@ max-width: 90%;
     border-radius: 0.25rem;
 }
 .new-css-abs-card-footer {
-    background-color: #009B48 !important;
+    background-color: #1FA65D !important;
 }
 .new-css-abs-card-footer>a {
     color: #FFF !important;

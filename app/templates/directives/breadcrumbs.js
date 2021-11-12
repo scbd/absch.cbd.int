@@ -11,6 +11,7 @@ app.directive('breadcrumbs', ['breadcrumbs',function (breadcrumbs) {
             $scope.getBreadcrumbs = function(){
                 return _.uniqBy(breadcrumbs.get(), item => { return item.path; });
             }
+
         }
     }; 
 }]);   

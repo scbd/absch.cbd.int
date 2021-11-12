@@ -139,6 +139,10 @@ import './xuser-notification-config-service';
                                     });
                             }
                         };
+
+                        
+
+
                         //============================================================
                         //
                         //
@@ -239,7 +243,7 @@ import './xuser-notification-config-service';
                             $scope.loading = true;
 
                             pageNumber = pageNumber + pageLength;
-                            getNotification(null, 'unread');
+                            getNotification(null, 'all');
                         }
 
                         $scope.markAllRead = function(evt){

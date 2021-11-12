@@ -6,12 +6,17 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main'; ;
 
-app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q',  function (locale, $location, breadcrumbs, commonjs, $q) {
+app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q','realm',  function (locale, $location, breadcrumbs, commonjs, $q, realm) {
     return {
         restrict: 'E',
         template: html,
         link: function($scope) {
             $scope.locale = locale
+            $scope.isABS = realm.is('ABS');
+            $scope.isBCH = realm.is('BCH');
+            $scope.isDEV = realm.value.includes("DEV");
+            $scope.isTRG = realm.value.includes("TRG");
+
             $scope.breadcrumbs     = breadcrumbs;
             
             var sortField = 'name.'+(locale||'en');

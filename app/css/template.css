@@ -3017,17 +3017,9 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 #innerPage .mastHead{
 	background-color: #00405C;
 	color:white;
-	padding:40px 20px 40px 20px;
+	padding:10px 20px 40px 20px;
 	margin:0;
 }
-
-#innerPage .absch .mastHead{
-	background-color: #00405C;
-	color:white;
-	padding:40px 20px 40px 20px;
-	margin:0;
-}
-
 
 #innerPage .innerPageContent{
 	padding:20px;
