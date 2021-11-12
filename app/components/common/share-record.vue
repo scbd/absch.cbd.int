@@ -43,7 +43,7 @@
                         v-model="shareLink"
                         ref="link"
                     >
-                  <button @click="copyLink()">Copy</button>
+                  <button @click="copyCode('link')">Copy</button>
                 </div>
                <div class="row share-link" v-if="shareType =='email'">
                   <label class="heading">{{$t('email')}}</label>
@@ -95,202 +95,194 @@
     import { Modal } from 'vue-2-bootstrap-3'
     import i18n from '../../locales/en/components/export.json';
 
-    export default {
-        components : {Modal},
-        props:['getQuery', 'tokenReader', 'userStatus', 'generateLink'],
-        data:  () => {
-            return {
-                loading                    : false,
-                open                       : false,
-                emailRequired              : false,
-                domainRequired             : false,
-                shareType                  : 'link',
-                embedScript                : '',
-                domain                     : '',
-                recordKey                  : '',
-                type                       : '',
-                shareLink                  : '',
-                sendResponse               : '',
-                email                      : '',
-                storageType                : '',
-                documentShareId            : ''
+export default {
+    components: {
+        Modal
+    },
+    props: ['getQuery', 'tokenReader', 'userStatus', 'generateLink'],
+    data: () => {
+        return {
+            loading          : false,
+            open             : false,
+            emailRequired    : false,
+            domainRequired   : false,
+            shareType        : 'link',
+            embedScript      : '',
+            domain           : '',
+            recordKey        : '',
+            type             : '',
+            shareLink        : '',
+            sendResponse     : '',
+            email            : '',
+            storageType      : '',
+            documentShareId  : ''
+        }
+    },
+    created() {
+        this.documentShareApi = new DocumentShareApi(this.tokenReader);
+    },
+    async mounted() {},
+    methods: {
+        async openModel() {
+            const token = await this.tokenReader();
+            if (!token) {
+                await this.userStatus();
+                this.open = false;
+                return;
+            } else {
+                this.open = true;
+                return true;
             }
         },
-        created(){
-          this.documentShareApi = new DocumentShareApi(this.tokenReader);
+        async onShowDialog() {
+            this.emailRequired = false;
+            this.domainRequired = false;
+            this.shareType = 'link';
+            this.populateData();
         },
-        async mounted() {
-        },
-        methods: {
-            async openModel(){
-              const token = await this.tokenReader();
-              if(!token) {
-                    await this.userStatus();
-                    this.open = false;
-                    return;
-              } else {
-                    this.open = true;
-                    return true;
-              }
-            },
-            async onShowDialog() {
-                this.emailRequired = false;
-                this.domainRequired = false;
-                this.shareType = 'link';
-                this.populateData();
-            },
-            async populateData(){
-              // Ans: getQuery is gereric name used for all three CP, Documet and search 
-                const {recordKey, type} = await this.getQuery(); //TODO:use getSearchFilterQuery
-                this.recordKey = recordKey;
-                this.type = type;
+        async populateData() {
+            const {
+                recordKey,
+                type
+            } = await this.getQuery();
+            this.recordKey = recordKey;
+            this.type = type;
 
-                if(this.type == 'document'){
-                    this.storageType = "ch-document";
-                    this.shareLink = this.$realm.baseURL+"/"+this.$locale+"/database/"+this.recordKey;
-                }
-                if(this.type == 'searchResults'){
-                    this.storageType = "ch-search-result";
-                    this.shareLink = "";
-                }
-                if(this.type == 'countryProfile'){
-                    this.storageType = "ch-country-profile";
-                    this.shareLink = this.$realm.baseURL+"/"+this.$locale+"/countries/"+this.recordKey;
-                }
-            },
-            async shareLinkByEmail() {
-                this.emailRequired = false;
-                if (!(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
-                    this.emailRequired = true;
-                    return;
-                }
-                this.loading = true;
-                try{
-                  const params = {
-                      "storageType" : this.storageType,
-                      "sharedData" : {
-                          "code" : this.recordKey,
-                      },
-                      "sharedWith" : {
-                          "link" : true,
-                          "emails" : this.email
-                      },
-                      "urlHash" : this.shareLink
-                  };
-                  const response = await this.documentShareApi.shareDocument( params );
+            if (this.type == 'document') {
+                this.storageType = "ch-document";
+                this.shareLink = this.$realm.baseURL + "/" + this.$locale + "/database/" + this.recordKey;
+            }
+            if (this.type == 'searchResults') {
+                this.storageType = "ch-search-result";
+                this.shareLink = "";
+            }
+            if (this.type == 'countryProfile') {
+                this.storageType = "ch-country-profile";
+                this.shareLink = this.$realm.baseURL + "/" + this.$locale + "/countries/" + this.recordKey;
+            }
+        },
+        async shareLinkByEmail() {
+            this.emailRequired = false;
+            if (!(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)) {
+                this.emailRequired = true;
+                return;
+            }
+            this.loading = true;
+            try {
+                const params = {
+                    "storageType": this.storageType,
+                    "sharedData": {
+                        "code": this.recordKey,
+                    },
+                    "sharedWith": {
+                        "link": true,
+                        "emails": this.email
+                    },
+                    "urlHash": this.shareLink
+                };
+                const response = await this.documentShareApi.shareDocument(params);
 
                 if (response) {
-                  this.sendResponse = "Email send successfully!";
-                  this.email = "";
-                } else{
-                  this.sendResponse = "Error in sending email";
+                    this.sendResponse = "Email send successfully!";
+                    this.email = "";
+                } else {
+                    this.sendResponse = "Error in sending email";
                 }
-            } catch(err) {
+            } catch (err) {
+                this.sendResponse = err;
             } finally {
                 this.loading = false;
             }
-            },
-            async embed(){
-                this.domainRequired = false;
-                this.embedScript='';
-                if(!this.domain) {
-                    this.domainRequired = true;
-                    return;
-                }
-                const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
-                if (!regexp.test(this.domain)) {
-                    this.domainRequired = true;
-                    return;
-                }
-                  this.loading      = true;
+        },
+        async embed() {
+            this.domainRequired = false;
+            this.embedScript = '';
+            if (!this.domain) {
+                this.domainRequired = true;
+                return;
+            }
+            const regexp = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+            if (!regexp.test(this.domain)) {
+                this.domainRequired = true;
+                return;
+            }
+            this.loading = true;
 
-                  const param = {
-                      "storageType": this.storageType,
-                      "forPdf"     : false,
-                      "sharedWith" : {
-                        "link"     : true,
-                      },
-                      "sharedData" : {
-                        "domain"       : this.domain,
-                        "shareType"    : "embed",
-                        "searchQueryId": this.recordKey
-                      }
-                    };
-                  try {
-                    if(this.documentShareId == ''){
-                      const shareDetails = await this.documentShareApi.shareDocument(param);
-                      this.documentShareId = shareDetails?.id
-                    }
-                    if(this.documentShareId) {
-                      setTimeout(() => {
+            const param = {
+                "storageType": this.storageType,
+                "forPdf": false,
+                "sharedWith": {
+                    "link": true,
+                },
+                "sharedData": {
+                    "domain": this.domain,
+                    "shareType": "embed",
+                    "searchQueryId": this.recordKey
+                }
+            };
+            try {
+                if (this.documentShareId == '') {
+                    const shareDetails = await this.documentShareApi.shareDocument(param);
+                    this.documentShareId = shareDetails?.id
+                }
+                if (this.documentShareId) {
+                    setTimeout(() => {
                         let scriptTag = this.$refs.domainTag.getAttribute('data-script');
                         if (this.type == 'document') {
-                          this.embedScript = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
+                            this.embedScript = `${scriptTag}<div class="scbd-ch-embed" data-type="record" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
+                        } else if (this.type == 'searchResults') {
+                            this.embedScript = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
+                        } else if (this.type == 'countryProfile') {
+                            this.embedScript = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
                         }
-                        else if (this.type == 'searchResults') {
-                          this.embedScript = `${scriptTag}<div class="ch-search-result" data-type="search-result" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
-                        }
-                        else if (this.type == 'countryProfile') {
-                          this.embedScript = `${scriptTag}<div class="ch-country-profile" data-type="country-profile" data-record-id="${this.recordKey}" data-document-share-id="${this.documentShareId}" width="100%"></div>`
-                        }
-                      }, 100);
-                    }
-                  } 
-                  catch (err) {
-                    //TODO what happens if there is an error?
-                  } 
-                  finally {
-                    this.loading = false;
-                  }
-            },
-
-            sendRecord()
-            {
-                this.emailRequired = false;
-                this.domainRequired = false;
-                if(this.shareType == 'email')
-                    this.shareLinkByEmail();
-                else
-                    this.embed();
-            },
-            copyCode(){
-                try {
-                    this.$refs.scriptTag.select();
-                    let successful = document.execCommand('copy');
-                    if (!successful) throw successful;
-                } 
-                catch (err) {
+                    }, 100);
                 }
-                finally {
-                }
-            },
-            generateSearchLink(){
-                setTimeout(() => {
-                    let _this = this;
-                    this.generateLink().then(function(data) {
-                      _this.recordKey = data.id;
-                      _this.shareLink = _this.$realm.baseURL+"/"+_this.$locale+"/search/"+data.id;
-                    })
-
-                },100);
-            },
-
-            //TODO can copyCode and Copy link not be one funtion ????
-          copyLink(){
-            try {
-              this.$refs.link.select();
-              let successful = document.execCommand('copy');
-              if (!successful) throw successful;
             } catch (err) {
+                this.sendResponse = err;
             } finally {
+                this.loading = false;
             }
-          },
-          closeDialog(){
-              this.open = false;
-          }
         },
-        i18n: { messages:{ en: i18n }}
+
+        sendRecord() {
+            this.emailRequired = false;
+            this.domainRequired = false;
+            if (this.shareType == 'email')
+                this.shareLinkByEmail();
+            else
+                this.embed();
+        },
+        copyCode(type) {
+            if(type == 'link'){
+                  this.$refs.link.select();
+              } else {
+                  this.$refs.scriptTag.select();
+            }
+            let successful = document.execCommand('copy');
+            if (!successful) throw successful;
+              
+        },
+        generateSearchLink() {
+            setTimeout(() => {
+                let _this = this;
+                this.generateLink().then(function(data) {
+                    _this.recordKey = data.id;
+                    _this.shareLink = _this.$realm.baseURL + "/" + _this.$locale + "/search/" + data.id;
+                })
+
+            }, 100);
+        },
+
+        closeDialog() {
+            this.open = false;
+        }
+    },
+    i18n: {
+        messages: {
+            en: i18n
+        }
     }
+} 
 </script>
 
 <style>
