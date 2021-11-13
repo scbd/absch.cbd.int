@@ -116,9 +116,10 @@ export default {
       let countAg = [];
       let searchAg = [];
       if(this.search){
-        const match = {"$match":{"$and":[{"$or":[{[`title.${this.$locale}`]:{"$$contains":encodeURIComponent(this.search)}},
-                {[`summary.${this.$locale}`]: { "$$contains" : encodeURIComponent(this.search)}},
-                {[`content.${this.$locale}`]: { "$$contains" : encodeURIComponent(this.search)}}]},
+        const match = {"$match":{"$and":[{"$or":[
+                {[`title.${this.$locale}`]  : {"$$contains"  : (this.search)}},
+                {[`summary.${this.$locale}`]: { "$$contains" : (this.search)}},
+                {[`content.${this.$locale}`]: { "$$contains" : (this.search)}}]},
               {"adminTags": { $all : [this.realmTag]}}]}};
         searchAg.push(match);
         countAg.push(match);

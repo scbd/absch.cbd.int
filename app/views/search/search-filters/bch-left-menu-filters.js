@@ -193,8 +193,8 @@ export const bchLeftMenuFilters = {
             "type": "thesaurus",
             "term": "cpbThematicAreas",
             "title": bchFilters.biosafetyThematicAreas,
-            "field": "bchSubjects_ss",
-            "relatedField":"bchSubjects_REL_ss"
+            "field": "cpbThematicAreas_ss",
+            "relatedField":"cpbThematicAreas_REL_ss"
         },
         {
             "type" : "customListFn",

@@ -29,12 +29,12 @@ import 'components/scbd-angularjs-services/main';
                     $scope.skipKeywordsFilter = false;
                     $scope.skipTextFilter = false;
                     $scope.systemAlertsSubscription = [];
-
+                    $scope.isABS = realm.is('ABS');
                     $scope.skipKeywordsFilter = true;
                     $scope.skipTextFilter = true;
                 
                     if ($scope.user?.government) {
-                        if(realm.is('ABS')){
+                        if($scope.isABS){
                             systemSearches = [{
                                 system: true,
                                 "filters": [{
