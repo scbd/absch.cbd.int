@@ -8,7 +8,7 @@
         }
     </style>
     <div class="container-fluid">
-        <div ng-if="showSystemAlerts">
+        <div ng-if="showSystemAlerts && isABS">
             <div class="row" style="padding:10px 0;background-color:#eee;">
                 <div class="col-xs-7 col-sm-8">
                     <small class="color-red">system alert</small><br>
@@ -44,7 +44,7 @@
             </div>
         </div>
 
-        <div ng-repeat="record in userFilters | orderBy:'meta.createdOn'">
+        <div ng-repeat="record in userFilters | orderBy:'-meta.modifiedOn'">
             <div class="row" ng-hide="record.pendingStatus || del" style="padding:0; margin:0; padding:10px 0;background-color:#eee;margin-top:10px;">
                 <div class="col-xs-7 col-sm-8">
                     <span class="bold" ng-bind="record.queryTitle"></span>
