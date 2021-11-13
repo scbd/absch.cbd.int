@@ -260,9 +260,11 @@ import 'views/forms/edit/document-selector'
                     }
 
                     $scope.$on('evt:updateLeftMenuFilters', (evt, leftMenuFilters)=>{
-                        console.log(leftMenuFilters);
                         $scope.leftMenuFilters = leftMenuFilters;
-                        $scope.recordSelected();
+                        $timeout(()=>{
+                            $scope.recordSelected();
+                            $scope.$broadcast( 'evt:loadDocumentSelectorSelectedRecords', leftMenuFilters );
+                        }, 200)
                     });
 
 

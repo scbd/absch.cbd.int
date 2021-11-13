@@ -577,32 +577,33 @@ import 'angular-vue'
                             if(query.viewType)
                                 $scope.searchResult.viewType = query.viewType;
 
-                                 if($routeParams.id && !$scope.isAlertSearch) {
-                                    $scope.searchAlertError = '';
-                                    IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
-                                    .then(function (data) {
-                                        const mainFilters = data.filters;
-                                        mainFilters.forEach( e => {
-                                            $scope.saveFilter( e );
-                                        } );
+                            if($routeParams.id && !$scope.isAlertSearch) {
+                                $scope.clearFilter();
+                                $scope.searchAlertError = '';
+                                IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
+                                .then(function (data) {
+                                    const mainFilters = data.filters;
+                                    mainFilters.forEach( e => {
+                                        $scope.saveFilter( e );
+                                    } );
 
-                                        if ( data.subFilters ) {
-                                            const subFilters = data.subFilters;
-                                            for ( const subFilterKey in subFilters) {
-                                                const subFilter = subFilters[subFilterKey];
-                                                subFilter.forEach( filter => {
-                                                if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
-                                                    let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
-                                                    filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
-                                                }
-                                                } )
+                                    if ( data.subFilters ) {
+                                        const subFilters = data.subFilters;
+                                        for ( const subFilterKey in subFilters) {
+                                            const subFilter = subFilters[subFilterKey];
+                                            subFilter.forEach( filter => {
+                                            if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
+                                                let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
+                                                filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
                                             }
-
-                                            $scope.$emit( 'evt:updateLeftMenuFilters', leftMenuFilters );
+                                            } )
                                         }
-                                    })
+
+                                        $scope.$emit( 'evt:updateLeftMenuFilters', leftMenuFilters );
+                                    }
+                                })
                                 .catch(function (err) {
-                                    console.log(err)//ToDo: will update for correct error text
+                                    console.error(err)//ToDo: will update for correct error text
 
                                     if (err && err.status == 404) {
                                         delay = (delay || 0) + 1000
@@ -617,18 +618,18 @@ import 'angular-vue'
                                         }
                                     }
                                 });
+                            }
+                            else if(query){
+                                if(query.text){
+                                    $scope.saveFreeTextFilter(query.text);
                                 }
-                                    if(query){
-                                        if(query.text){
-                                            $scope.saveFreeTextFilter(query.text);
-                                        }
-                                        if(query.country){
-                                            $scope.saveFilter(query.country);
-                                        }
-                                        if(query.schema){
-                                            $scope.saveFilter(query.schema);
-                                        }
-                                    }
+                                if(query.country){
+                                    $scope.saveFilter(query.country);
+                                }
+                                if(query.schema){
+                                    $scope.saveFilter(query.schema);
+                                }
+                            }
 
                             if(query["raw-query"]){
                                 saveRawQueryFilter(query["raw-query"]);

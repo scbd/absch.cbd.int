@@ -285,6 +285,18 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     console.warn('event:remove-selected-record raised without unique instance id, please set instance-id attribute on the element to process the event')
                 }
             });
+
+            $scope.$on('evt:loadDocumentSelectorSelectedRecords', async (evt)=>{
+                $scope.isLoadingSelectedRawDocuments = true
+                try{
+                    $scope.selectedRawDocuments = await loadSelectedDocumentDetails();
+                }
+                catch(e){
+                    console.error(e);
+                }
+                finally{$scope.isLoadingSelectedRawDocuments = undefined};
+                
+            })
              //==================================
             //
             //==================================
@@ -477,7 +489,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
             }
 
             function loadSelectedDocumentDetails(){
-                                
+                
                 if(!$scope.model || ($scope.type == "checkbox" && !$scope.model.length))
                     return;
 
@@ -496,8 +508,8 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
                     'query'      : queryField + ':("' +_.map(identifiers,solr.escape).join('" "') +'")',
                     'rowsPerPage': $scope.searchResult.rowsPerPage                    
                 };
-                searchService.list(queryParameters, null).then(function(result){                    
-                    $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
+                return searchService.list(queryParameters, null).then(function(result){                    
+                    return $scope.tempSelectedDocuments = _.map(result.data.response.docs, function(doc){
                         doc.__checked=true;
                         return doc;
                     });
