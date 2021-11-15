@@ -58,7 +58,8 @@
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
-    import KbCategories from '../../app-data/kb-categories.json';
+	import bchKbCategories from '../../app-data/bch/bch-kb-categories.json';
+	import absKbCategories from '../../app-data/abs/abs-kb-categories.json';
 
 	export default {
 	  name:'KbArticlesByTag',
@@ -85,6 +86,7 @@
 		mounted() {
 			const tag = (this.$route.params.tag).replace(/"/g, "");
 			if(tag != undefined && tag != null) {
+				const KbCategories =  this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
                 this.tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))||{title : tag};
 				this.tag = tag;
 				this.loadArticles(1, tag);
@@ -106,6 +108,7 @@
 				});
 			},
 			tagUrl(tag){
+				const KbCategories =  this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
 				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
 				return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`

@@ -4,7 +4,6 @@
         <div class="side-bar">
             <div class="widget fix widget_categories mt-2 right-side-articles">
                 <relevant-articles type="faq"></relevant-articles>
-                <relevant-articles type="help"></relevant-articles>
                 </div>
                   <popular-tags is-categories="true"></popular-tags>
         </div>

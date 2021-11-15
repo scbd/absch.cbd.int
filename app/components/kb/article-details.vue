@@ -39,7 +39,8 @@
 <script>
 	import i18n from '../../locales/en/components/kb.json';
 	import relevantArticles from "./relevant-articles.vue";
-	import KbCategories from '~/app-data/kb-categories.json'
+	import bchKbCategories from '~/app-data/bch/bch-kb-categories.json';
+    import absKbCategories from '~/app-data/abs/abs-kb-categories.json';
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
@@ -80,6 +81,7 @@
 				this.$router.push({path: '/kb'});
 			},
 			tagUrl(tag){
+				const KbCategories =  this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
 				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
 				return `/kb/tags/${tag}/${tagTitle}`

@@ -35,7 +35,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
-    import KbCategories from '../../app-data/kb-categories.json';
+    import bchKbCategories from '../../app-data/bch/bch-kb-categories.json';
 
 	export default {
 		name:'kbFaqsList',
@@ -63,7 +63,7 @@
 		},
 		methods: {
 			tagUrl(tag){
-				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
+				const tagDetails = bchKbCategories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
 				return `/kb/faqs/${tag}/${tagTitle}`
 			},
@@ -83,7 +83,7 @@
 
 				const q = { 
 					$and : [
-						{ adminTags : { $all : [this.$realm.is('BCH') ? 'bch' : 'abs', 'faq' ]}},
+						{ adminTags : { $all : ['bch', 'faq']}},
 						{ adminTags : { $all : [ this.faqFilterTag ? this.faqFilterTag : 'faq']} }
 					]
 				};

@@ -4,7 +4,7 @@
         <h4>{{ $t("popularTags") }}</h4>
 				<hr>
         <div class="tag-scroll" v-if="!loading">
-            <div class="tagcloud" v-for="tag in tags">
+            <div class="tagcloud" v-for="tag in popularTags">
                 <a href="#" class="btn btn-mini" @click="goToTag(tag.adminTags[0])">{{tag.title}}</a>
             </div>
         </div>
@@ -13,7 +13,8 @@
 
 <script>
 	import i18n from '../../locales/en/components/kb.json';
-	import tagJson from '../../app-data/kb-categories.json';
+	import bchKbCategories from '../../app-data/bch/bch-kb-categories.json';
+	import absKbCategories from '../../app-data/abs/abs-kb-categories.json';
 	export default {
     name:'kbpopularTags',
 		props:{
@@ -21,7 +22,7 @@
 		},
 		data:  () => {
 			return {
-				tags: tagJson,
+				popularTags:'',
 				loading: true
 			}
 		},
@@ -34,6 +35,7 @@
 			}
 		},
 		mounted(){
+			this.popularTags = this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
 			this.loading= false;
 		},
 		i18n: { messages:{ en: i18n }}
