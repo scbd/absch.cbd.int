@@ -37,7 +37,7 @@
             <span class="xlabel hidden-xs hidden-sm color-white" ng-if="internalDocument.header.languages.length>1" style="color:#fff">languages available:</span>
             <div class="btn-group  btn-group-xs" role="group" ng-if="internalDocument.header.languages.length>1">
                 <button type="button" class="btn btn-lang btn-default btn-xs lang-tooltip" ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"
-                    ng-click="setCurrentLocale(loc)" data-toggle="tooltip" data-title="{{termLocales[loc]|term}}">
+                    ng-click="setCurrentLocale(loc)" data-bs-toggle="tooltip" data-title="{{termLocales[loc]|term}}">
                     <span ng-bind="loc | uppercase"></span>
                 </button>
             </div>            

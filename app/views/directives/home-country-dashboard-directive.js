@@ -67,7 +67,7 @@ import 'views/directives/block-region-directive';
 								$scope.nationalRecords = nationalRecords;
                                 
                                 $timeout(function(){
-                                    $element.find('[data-toggle="tooltip"]').tooltip();
+                                    $element.find('[data-bs-toggle="tooltip"]').tooltip();
                                 },500);
                             })
                             .finally(function() {

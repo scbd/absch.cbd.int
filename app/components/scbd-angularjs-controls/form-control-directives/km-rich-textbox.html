@@ -4,7 +4,7 @@
 		<trix-editor angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]" ng-change="onchange()" ng-disabled="ngDisabledFn()"
 		    placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block;width:100%" trix-initialize="trixInitialize(e, ed)">
 		</trix-editor>
-		<span class="input-group-addon lang-tooltip" disabled-ng-show="isShowLocale()" style="cursor:default" data-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
+		<span class="input-group-addon lang-tooltip" disabled-ng-show="isShowLocale()" style="cursor:default" data-bs-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
 			<span ng-bind="locale | uppercase"></span>
 		</span>
 	</div>

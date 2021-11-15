@@ -56,7 +56,7 @@
                             </div>
 
                             <div ng-show="isPublished(recordToDelete)" class="well">
-                                <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                                <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
                                     Unpublish and delete the record</button>
                                 <em>Published record <span ng-bind="recordToDelete.documentID"></span></em>
                                 <p><b ng-bind="recordToDelete.title|lstring"></b></p>

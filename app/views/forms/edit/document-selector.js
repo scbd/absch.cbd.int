@@ -646,7 +646,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
             function showToolTip(){
                 $timeout(function(){              
-                    $('#' + dialogId + ' [data-toggle="tooltip"]').tooltip()
+                    $('#' + dialogId + ' [data-bs-toggle="tooltip"]').tooltip()
                 }, 300); 
             }
 

@@ -19,7 +19,7 @@
                     <span ng-bind="::doc.name|lstring:locale"></span>
                     <strong>(<span ng-bind="::$parent.searchResult.data.facets.keywords[doc.id]||0"></span>)</strong>
                     <span class="pull-right">
-                        <span ng-repeat="rel in ::doc.schemaFields" data-toggle="tooltip" data-title="{{::rel.schema|schemaName}}" data-container="body" >
+                        <span ng-repeat="rel in ::doc.schemaFields" data-bs-toggle="tooltip" data-title="{{::rel.schema|schemaName}}" data-container="body" >
                             <span  ng-bind="::rel.schema|schemaShortName"></span><span ng-if="!$last"> |</span>
                         </span>
                     </span>

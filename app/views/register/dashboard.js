@@ -235,7 +235,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
 
             $scope.toggleTooTip = function(){
                 $timeout(function(){
-                    ng.element('#welcomeSection').find('[data-toggle="tooltip"]').tooltip();  
+                    ng.element('#welcomeSection').find('[data-bs-toggle="tooltip"]').tooltip();  
                 }, 200)
             }
             
@@ -348,7 +348,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             init();
 
             $timeout(function(){
-                ng.element('#RegisterPage').find('[data-toggle="tooltip"]').tooltip();                
+                ng.element('#RegisterPage').find('[data-bs-toggle="tooltip"]').tooltip();                
             },100);
         }
     ];
