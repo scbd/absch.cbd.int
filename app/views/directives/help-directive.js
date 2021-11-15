@@ -198,7 +198,7 @@ import 'angular-joyride';
                                                         joyRideTemplate += '</ol></div>'
                                                         if($scope.showHelp.hasTour){
                                                             $element.append(joyRideTemplate);
-                                                            $('[data-toggle="tooltip"]').tooltip();
+                                                            $('[data-bs-toggle="tooltip"]').tooltip();
                                                         }
                                                         joyride = true;
                                                 }

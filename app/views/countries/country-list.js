@@ -64,7 +64,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                     $scope.loading = false;
                     $scope.countries
                     $scope.allcountries = _.clone($scope.countries);
-                    $timeout(function(){$element.find('[data-toggle="tooltip"]').tooltip()}, 300);
+                    $timeout(function(){$element.find('[data-bs-toggle="tooltip"]').tooltip()}, 300);
 
 
                     ngMeta.resetMeta();  

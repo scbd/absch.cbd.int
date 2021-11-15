@@ -11,7 +11,7 @@ import 'views/register/directives/register-top-menu';
         function($rootScope, $scope, roleService, workflows, realm, $q, $routeParams, $location, $filter, $http, $element, $timeout) {
 
             $timeout(function(){
-                $element.find('[data-toggle="tooltip"]').tooltip();
+                $element.find('[data-bs-toggle="tooltip"]').tooltip();
             },50);    
                         
             $scope.user = $rootScope.user;

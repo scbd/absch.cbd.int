@@ -18,7 +18,7 @@ import template from 'text!./national-filter.html';
                
                
                   $timeout(function(){
-                                $element.find('[data-toggle="tooltip"]').tooltip();
+                                $element.find('[data-bs-toggle="tooltip"]').tooltip();
                             },50);
    
             }//link
