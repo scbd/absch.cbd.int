@@ -137,10 +137,12 @@
                      <li id="searchFilterTab" ng-show="user && user.isAuthenticated"> <a rel="noopener" href=""
                              ng-class="{'active':showFilters=='userSearchFilter'}"
                              ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
-                             class="btn color-green">
+                             class="btn color-orange">
                              <i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
                              &nbsp; My saved searches</a> </li>
+                       <li ng-if="canShowSaveFilter() && !isAlertSearch" class="pull-right"><a rel="noopener" ng-href="#" class="link2 cursor-pointer color-orange"
+                           ng-click="showSaveFilter(setFilters)"><i class="fa fa-bookmark color-orange" style="margin-right:5px;"></i>Save this search</a></li>
                  
                  </ul>
              </div>
@@ -203,7 +205,7 @@
                  <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
                  <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
                  <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
-                     <h4>Your predefined searches <small> - keep up to date when records are published </small></h4>
+                     <h4>Your saved searches <small> - Select or edit items from the list below</small></h4>
                      <user-alerts run-query-in-page="true"></user-alerts>
                  </div>
                 <div class="sticky-bar" ng-if="searchResult.loading">
@@ -374,7 +376,7 @@
                     <div class="form-group">
                         <label for="sendEmail">
                             <input type="checkbox" name="sendEmail" ng-model="record.sendEmail">
-                             Send me an email when records relevant to this search are added or updated.                        
+                             Send me an email when records relevant to this search are added or updated.
                         </label>
                     </div>
                 </fieldset>
@@ -393,12 +395,12 @@
     <script type="text/ng-template" trados-translation="true" id="saveMySearchDialog">
         <div class="modal-header">
             <h3 class="modal-title">
-                Add/Edit filter
+                Create or edit a saved search filter
             </h3>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label for="filterTitle">Alert title:</label>
+                <label for="filterTitle">Title for this saved search:</label>
                 <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
             </div>
             <div>
