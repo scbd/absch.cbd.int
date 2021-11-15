@@ -21,7 +21,7 @@ import _ from 'lodash';
                 }
 
                 $scope.ngRepeatFinished = function(){
-                    $element.find('[data-toggle="tooltip"]').tooltip();
+                    $element.find('[data-bs-toggle="tooltip"]').tooltip();
                 }
             }
         };

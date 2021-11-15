@@ -16,7 +16,7 @@ import template from 'text!./reference-filter.html';
                
                
                   $timeout(function(){
-                                $element.find('[data-toggle="tooltip"]').tooltip();
+                                $element.find('[data-bs-toggle="tooltip"]').tooltip();
                             },50);
                
             }//link
