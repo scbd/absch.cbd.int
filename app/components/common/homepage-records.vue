@@ -2,10 +2,7 @@
 <div>
   <ul class="bs5 mx-lg-3 nav nav-pills">
     <li class="bs5 nav-item">
-      <a class="bs5 nav-link" v-bind:class="{ active: sort == 'updatedDate_dt desc' }" aria-current="page" href="" @click="recordSort()">Recently added</a>
-    </li>
-    <li class="bs5 nav-item">
-      <a class="bs5 nav-link" v-bind:class="{ active: sort == 'createdDate_dt desc' }" href="" @click="recordSort()">Recently updated</a>
+      <a class="bs5 nav-link active">Recently published</a>
     </li>
   </ul>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
@@ -62,18 +59,6 @@
             this.records();
         },
     methods:{
-
-      recordSort()
-      {
-          if (this.sort == "updatedDate_dt desc") {
-              this.sort = "createdDate_dt desc"
-          } else {
-              this.sort = "updatedDate_dt desc"
-          }
-          this.loading = true;
-          this.recordList = [];
-          this.records();
-      },
 
       async records()
       {
