@@ -23,7 +23,7 @@ import 'components/scbd-angularjs-services/main';
             link: function ($scope, element, attrs) {},
             controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService','solr','locale',
                 function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale) {
-
+                    $scope.realm = realm;
                     var systemSearches = [];
                     $scope.user = $rootScope.user;
                     $scope.skipKeywordsFilter = false;
