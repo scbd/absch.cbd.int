@@ -265,6 +265,8 @@ import './directives/homepin-popup-abs';
                 exceptionCountryData.code = exceptionRegion;
                 exceptionCountryData.exceptionCountry  = code.toLowerCase();
                 addImageData(exceptionCountryData)
+                const countryObj = getMapObject(code)
+                changeSelectedColor(exceptionRegion, countryObj.colorReal)
               }
               //if(exceptionRegion[c])
           });
