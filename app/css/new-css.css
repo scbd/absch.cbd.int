@@ -346,6 +346,9 @@ max-width: 90%;
     .new-css-summary-text, .new-css-callout h4 a {
         -webkit-line-clamp: 1;
     }
+    .new-css-home-section-top-bch h1.display-6{
+        font-size: 1.5rem !important;
+    }
 }
 .country-item-name .table-map tr td:nth-child(1) span{
     min-width: 50px;
