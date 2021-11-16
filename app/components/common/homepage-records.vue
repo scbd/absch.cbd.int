@@ -11,10 +11,10 @@
     <div class="bs5 col" v-for="record in recordList">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
-        <h4><a :href="record.url_ss" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
-        <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
+        <h4 class="fw-bold"><a :href="record.url_ss" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
+        <p class="bs5 fs-5 new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
-        <div style="position:absolute;bottom:5px; width:95%">
+        <div class="new-css-records-sub-options">
           <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
           <a v-if="record.government_s"  target="_blank" :href="`/countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="bs5 text-end mt-4">
+  <div class="bs5 text-end mt-4" style="margin-bottom: 30px;">
     <a class="bs5 nav-link fs-4 text-muted text-uppercase cursor-pointer"  @click="seeMore()">See more 
       <i class="fa fa-arrow-right"></i> </a>
   </div>
@@ -38,7 +38,8 @@
 
 	export default {
     props:{
-        type:String
+        type:String,
+        rows: Number
     },
 		data:  () => {
 			return {
@@ -70,7 +71,7 @@
             "fl": "id, schema_EN_t, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt",
               "wt": "json",
               "start": 0,
-              "rows": 8,
+              "rows": this.rows,
               "facet": true,
               "facet.field": ["{!ex=schemaType}schemaType_s", "{!ex=schema,schemaType,schemaSub}schema_s", "{!ex=government}countryRegions_ss", "{!ex=keywords}all_terms_ss", "{!ex=region}countryRegions_REL_ss"]
           };

@@ -2,7 +2,7 @@
     <div class="bs5 new-css-home-section-top-bch min-vh-100" >
         <div class="bs5 container">
 
-            <h1 class="bs5 display-6 fs-1 color-white mx-3 my-3 pt-md-5 pb-md-2 my-lg-5 pt-lg-5 pb-lg-2">
+            <h1 class="bs5 display-6 fs-1 fs-sm-4 lh-sm color-white mx-3 my-3 pt-md-5 pb-md-2 my-lg-5 pt-lg-5 pb-lg-2">
                 The Biosafety Clearing-House (BCH) is an online platform for exchanging information on Living Modified
                 Organisms (LMOs) and a key tool for facilitating the implementation of the Cartagena Protocol on
                 Biosafety.</h1>
@@ -96,11 +96,11 @@
 
     <div class="bs5 min-vh-100 ">
         <div class="bs5 container ">
-            <p class="bs5 display-6 pt-5 mt-5">Announcements
+            <p class="bs5 display-6 pt-5 mt-5 fw-bold">Announcements
                 <hr>
             </p>
             <home-articles tags="BCH-Announcement"></home-articles>
-            <div class="bs5 text-end mt-4">
+            <div class="bs5 text-end mt-4" style="margin-bottom: 30px;">
                 <a class="bs5 nav-link fs-4 text-muted fw-bold text-uppercase" href="/kb/tags/bch-announcement/">
                     See more <i class="fa fa-arrow-right"></i> </a>
             </div>
@@ -108,21 +108,21 @@
     </div>
     <div class="bs5 min-vh-100 home-page-record">
         <div class="bs5 container ">
-            <p class="bs5 display-6 ">National records
+            <p class="bs5 display-6 fw-bold">National records
                 <hr>
             </p>
             <div ng-if="exportVueComponent">
-                <homepage-records ng-vue="exportVueComponent" type="national"></homepage-records>
+                <homepage-records ng-vue="exportVueComponent" type="national" :rows="recordCount"></homepage-records>
             </div>
         </div>
     </div>
     <div class="bs5 min-vh-100 home-page-record">
         <div class="bs5 container ">
-            <p class="bs5 display-6">Reference records
+            <p class="bs5 display-6 fw-bold">Reference records
                 <hr>
             </p>
             <div ng-if="exportVueComponent">
-                <homepage-records ng-vue="exportVueComponent" type="reference"></homepage-records>
+                <homepage-records ng-vue="exportVueComponent" type="reference" :rows="recordCount"></homepage-records>
             </div>
         </div>
     </div>
