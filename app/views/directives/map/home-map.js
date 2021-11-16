@@ -40,10 +40,10 @@ import 'services/main';
               // Delay loading map by 2 sec
               $scope.loadingMap = true;
               angular.element(document).ready(async function () {
-                await import('~/views/countries/homepage-map')
+                await import('~/views/countries/country-map')
                 $scope.$apply(function(){
                     var mapElement = $element.find('#homeMap')
-                    $compile(mapElement.append('<homepage-map zoom-to="{{code}}" style="min-height:650px" ></homepage-map>'))($scope);
+                    $compile(mapElement.append('<country-map zoom-to="{{code}}" style="min-height:650px" ></country-map>'))($scope);
                     $scope.loadingMap = false;
                 });
               });
