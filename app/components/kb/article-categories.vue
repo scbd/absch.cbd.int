@@ -10,7 +10,7 @@
                    <hr>
                     <ul class="cate-list-ul" style="list-style: none;">
                         <li class="cate-list-li" v-for="article in category.articles">
-                            <a style="display:none" :href="`${articleUrl(article)}`">{{article.title}}</a>
+                            <a v-if="article.identifier" style="display:none" :href="`${articleUrl(article)}`">{{article.title}}</a>
                             <a href="#" @click="goToArticle(article, category.adminTags[0])">{{article.title}}</a>
                         </li>
                     </ul>
@@ -23,8 +23,6 @@
 </template>
 
 <script>
-	import bchKbCategories from '~/app-data/bch/bch-kb-categories.json';
-    import absKbCategories from '~/app-data/abs/abs-kb-categories.json';
 	import i18n from '../../locales/en/components/kb.json';
 	export default {
     name:'KbArticleCategories',
@@ -37,10 +35,21 @@
 			}
 		},
 		async mounted() {
-            this.KbCategories = this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
-      		this.KbCategories = this.KbCategories.filter(tag => tag.adminTags[0] != "faq");
+			const categories = await this.loadKbCategories();
+			this.KbCategories = categories.filter(tag => tag.adminTags[0] != "faq");
 		},
 		methods: {
+			async loadKbCategories(){
+				if(!this.$realm.is('BCH')) {
+					const { categories } = await import('~/app-data/abs/kb-categories.js');
+					return categories;
+				}
+				else {
+					const { categories } = await import('~/app-data/bch/kb-categories.js');
+					return categories;
+				}
+      	},
+
 			articleUrl(article, tag){
 				if(article.identifier){
 					const urlTitle = article.title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');

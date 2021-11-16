@@ -13,8 +13,6 @@
 
 <script>
 	import i18n from '../../locales/en/components/kb.json';
-	import bchKbCategories from '../../app-data/bch/bch-kb-categories.json';
-	import absKbCategories from '../../app-data/abs/abs-kb-categories.json';
 	export default {
     name:'kbpopularTags',
 		props:{
@@ -26,16 +24,27 @@
 				loading: true
 			}
 		},
-		methods: {
-			goToTag(tag){
-			    if(tag =='faq')
-                    this.$router.push({path:'/kb/faqs'});
-			    else
-			        this.$router.push({path:`/kb/tags/${tag}`});
+	methods: {
+		async loadKbCategories(){
+			if(!this.$realm.is('BCH')) {
+			const { categories } = await import('~/app-data/abs/kb-categories.js');
+			return categories;
+			}
+			else {
+			const { categories } = await import('~/app-data/bch/kb-categories.js');
+			return categories;
 			}
 		},
-		mounted(){
-			this.popularTags = this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
+		goToTag(tag){
+			if(tag =='faq')
+				this.$router.push({path:'/kb/faqs'});
+			else
+				this.$router.push({path:`/kb/tags/${tag}`});
+		}
+	},
+	async mounted(){
+      const categories = await this.loadKbCategories();
+			this.popularTags = categories;
 			this.loading= false;
 		},
 		i18n: { messages:{ en: i18n }}

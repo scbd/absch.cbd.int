@@ -48,8 +48,6 @@ import i18n from '../../locales/en/components/kb.json';
 import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
 import {formatDate} from './filters';
-import bchKbCategories from '../../app-data/bch/bch-kb-categories.json';
-import absKbCategories from '../../app-data/abs/abs-kb-categories.json';
 
 export default {
   name:'KbArticlesByTag',
@@ -84,6 +82,16 @@ export default {
     }
   },
   methods: {
+    async loadKbCategories(){
+      if(!this.$realm.is('BCH')) {
+        const { categories } = await import('~/app-data/abs/kb-categories.js');
+        return categories;
+      }
+      else {
+        const { categories } = await import('~/app-data/bch/kb-categories.js');
+        return categories;
+      }
+    },
     articleUrl(article, tag){
       const urlTitle = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
       return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(article._id)}`
@@ -93,9 +101,9 @@ export default {
         path:this.articleUrl(article, tag)
       });
     },
-    tagUrl(tag){
-      const KbCategories =  this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
-      const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
+    async tagUrl(tag){
+      const categories = await this.loadKbCategories();
+      const tagDetails = categories.find(e=>e.adminTags.includes(tag))
       const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
       return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
     },

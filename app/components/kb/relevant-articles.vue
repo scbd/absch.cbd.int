@@ -24,12 +24,10 @@
 <script>
 import ArticlesApi from './article-api';
   import i18n from '../../locales/en/components/kb.json';
-  import CategoriesGroup from './article-categories.vue';
-import bchKbCategories from '../../app-data/bch/bch-kb-categories.json';
+  import {categories} from '~/app-data/bch/kb-categories.js';
 export default {
     name:'kbRelevantArticles',
     components:{
-        CategoriesGroup
     },
     props:{
         tag:  String,
@@ -49,7 +47,7 @@ export default {
         const realmType = this.$realm.is('BCH') ? 'bch' : 'abs';
         if(realmType == "bch" && this.type == "faq"){
             this.isFaqArticle = true;
-            const faqArticles = bchKbCategories.filter(tag => tag.adminTags[0] == "faq");
+            const faqArticles = categories.filter(tag => tag.adminTags[0] == "faq");
              if((faqArticles || []).length) {
                  this.articles = faqArticles[0].articles;
              }

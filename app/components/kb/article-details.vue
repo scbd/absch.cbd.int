@@ -39,8 +39,6 @@
 <script>
 	import i18n from '../../locales/en/components/kb.json';
 	import relevantArticles from "./relevant-articles.vue";
-	import bchKbCategories from '~/app-data/bch/bch-kb-categories.json';
-    import absKbCategories from '~/app-data/abs/abs-kb-categories.json';
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
@@ -55,6 +53,7 @@
 		data:  () => {
 			return {
 				article: [],
+          		categories: [],
 				loading: true
 			}
 		},
@@ -63,6 +62,7 @@
 			this.articlesApi = new ArticlesApi();
 		},
 		async mounted() {
+      		this.categories = await this.loadKbCategories();
 			if(this.$route.params == undefined) return;
 			let id =   (this.$route.params.id).replace(/"/g, "");
 			const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
@@ -77,14 +77,28 @@
 			}
 		},
 		methods: {
+			async loadKbCategories(){
+				if(!this.$realm.is('BCH')) {
+				const { categories } = await import('~/app-data/abs/kb-categories.js');
+				return categories;
+				}
+				else {
+				const { categories } = await import('~/app-data/bch/kb-categories.js');
+				return categories;
+				}
+			},
 			back(){
 				this.$router.push({path: '/kb'});
 			},
 			tagUrl(tag){
-				const KbCategories =  this.$realm.is('BCH') ? bchKbCategories:absKbCategories;
-				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
+				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				return `/kb/tags/${tag}/${tagTitle}`
+				if(tagTitle) {
+					return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
+				} 
+				else {
+					return `kb/tags/${tag}`
+				}
 			},
 			goToTag(tag){
 				this.$router.push({path: this.tagUrl(tag)});
