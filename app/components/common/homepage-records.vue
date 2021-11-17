@@ -24,7 +24,7 @@
     </div>
   </div>
 
-  <div class="bs5 text-end mt-4" style="margin-bottom: 30px;">
+  <div class="bs5 text-end mt-4 new-css-down-margin">
     <a class="bs5 nav-link fs-4 text-muted text-uppercase cursor-pointer"  @click="seeMore()">See more 
       <i class="fa fa-arrow-right"></i> </a>
   </div>

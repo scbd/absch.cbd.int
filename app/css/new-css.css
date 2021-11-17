@@ -349,6 +349,9 @@ max-width: 90%;
     .new-css-home-section-top-bch h1.display-6{
         font-size: 1.5rem !important;
     }
+    .new-css-down-margin{
+        margin-bottom: 30px
+    }
 }
 .country-item-name .table-map tr td:nth-child(1) span{
     min-width: 50px;
