@@ -5,7 +5,7 @@
 				<hr>
         <div class="tag-scroll" v-if="!loading">
             <div class="tagcloud" v-for="tag in popularTags">
-                <a href="#" class="btn btn-mini" @click="goToTag(tag.adminTags[0])">{{tag.title}}</a>
+                <a href="#" class="btn btn-mini" @click="goToAdminTag(tag.adminTags[0])">{{tag.title}}</a>
             </div>
         </div>
     </div>
@@ -13,6 +13,7 @@
 
 <script>
 	import i18n from '../../locales/en/components/kb.json';
+  import loadCategories from './load-categories';
 	export default {
     name:'kbpopularTags',
 		props:{
@@ -25,25 +26,16 @@
 			}
 		},
 	methods: {
-		async loadKbCategories(){
-			if(!this.$realm.is('BCH')) {
-			const { categories } = await import('~/app-data/abs/kb-categories.js');
-			return categories;
-			}
-			else {
-			const { categories } = await import('~/app-data/bch/kb-categories.js');
-			return categories;
-			}
-		},
-		goToTag(tag){
+    goToAdminTag(tag){
 			if(tag =='faq')
 				this.$router.push({path:'/kb/faqs'});
 			else
-				this.$router.push({path:`/kb/tags/${tag}`});
+				this.$router.push({path:`/kb/tags/${encodeURIComponent(tag)}`});
 		}
 	},
+    mixins: [loadCategories],
 	async mounted(){
-      const categories = await this.loadKbCategories();
+      const categories = await this.loadKbCategories(this.$realm.is('BCH'));
 			this.popularTags = categories;
 			this.loading= false;
 		},

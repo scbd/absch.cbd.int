@@ -53,122 +53,126 @@
 <script>
 
 	import i18n from '../../locales/en/components/kb.json';
-	import paginate from './pagination.vue';
-	import relevantArticles from "./relevant-articles.vue";
-	import ArticlesApi from './article-api';
-	import {formatDate} from './filters';
-	import popularTags from './popular-tags.vue';
+import paginate from './pagination.vue';
+import relevantArticles from "./relevant-articles.vue";
+import ArticlesApi from './article-api';
+import {formatDate} from './filters';
+import popularTags from './popular-tags.vue';
+import loadCategories from './load-categories';
 
-	export default {
-	  name:'KbArticlesByTag',
-		components:{
-			relevantArticles,
-            paginate,
-			popularTags
-		},
-		props:{
-		},
-		created(){
-			this.articlesApi = new ArticlesApi();
-		},
-        data:  () => {
-            return {
-                articles: [],
-                loading: true,
-                tagDetails: {},
-                categories:{},
-                articlesCount:0,
-				pageNumber:1,
-				recordsPerPage:10
+export default {
+    name: 'KbArticlesByTag',
+    components: {
+        relevantArticles,
+        paginate,
+        popularTags
+    },
+    props: {},
+    created() {
+        this.articlesApi = new ArticlesApi();
+    },
+    data: () => {
+        return {
+            articles: [],
+            loading: true,
+            tagDetails: {},
+            categories: {},
+            articlesCount: 0,
+            pageNumber: 1,
+            recordsPerPage: 10
+        }
+    },
+    mixins: [loadCategories],
+    async mounted() {
+        const tag = (this.$route.params.tag).replace(/"/g, "");
+        if (tag != undefined && tag != null) {
+            this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
+            this.tagDetails = this.categories.find(e => e.adminTags.includes(tag)) || {
+                title: tag
+            };
+            this.tag = tag;
+            this.loadArticles(1, tag);
+        }
+    },
+    filters: {
+        dateFormat: function(date) {
+            return formatDate(date)
+        }
+    },
+    methods: {
+        tagUrl(tag) {
+            const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
+            const tagTitle = (tagDetails?.title || '').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+            if (tagTitle) {
+                return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
+            } else {
+                return `kb/tags/${encodeURIComponent(tag)}`
             }
         },
-		async mounted() {
-			const tag = (this.$route.params.tag).replace(/"/g, "");
-			if(tag != undefined && tag != null) {
-				this.categories = await this.loadKbCategories();
-				this.tagDetails = this.categories.find(e=>e.adminTags.includes(tag))||{title : tag};
-				this.tag = tag;
-				this.loadArticles(1, tag);
-			}
-		},
-		filters: {
-			dateFormat: function ( date ) {
-				return formatDate(date)
-			}
-		},
-		methods: {
-		async loadKbCategories(){
-			if(!this.$realm.is('BCH')) {
-				const { categories } = await import('~/app-data/abs/kb-categories.js');
-				return categories;
-			}
-			else {
-				const { categories } = await import('~/app-data/bch/kb-categories.js');
-				return categories;
-			}
-		},
-		articleUrl(article, tag){
-			const urlTitle = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-			return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(article._id)}`
-		},
-		goToArticle(article, tag){
-			this.$router.push({
-				path:this.articleUrl(article, tag)
-			});
-		},
-		tagUrl(tag){
-			const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
-			const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-			if(tagTitle) {
-				return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
-			} 
-			else {
-				return `kb/tags/${tag}`
-			}
-		},
-		goToTag(tag){
-			this.$router.push({path: this.tagUrl(tag)});
-		},
-		onChangePage(pageNumber) {
-			this.pageNumber = pageNumber;
-			this.article=[];
-			this.loading = true;
-			this.loadArticles(pageNumber, this.tag);
-		},
-		async loadArticles(pageNumber, tag){
+        onChangePage(pageNumber) {
+            this.pageNumber = pageNumber;
+            this.article = [];
+            this.loading = true;
+            this.loadArticles(pageNumber, this.tag);
+        },
+        async loadArticles(pageNumber, tag) {
 
-			this.articlesCount= 0;
-			this.articles 	  = [];
-			const q = { 
-				$and : [
-					{ adminTags : this.$realm.is('BCH') ? 'bch' : 'abs' },
-					{ adminTags : { $all : [encodeURIComponent(tag)]} }
-				]
-			};
-			const f = { 
-				[`title.${this.$locale}`]	: 1,
-				[`summary.${this.$locale}`]	: 1,
-				adminTags 					: 1,
-				"meta.modifiedOn":1, _id:1
-			} ;
-			const groupTags = JSON.stringify([encodeURIComponent(tag)]);
-			const groupLimit = this.recordsPerPage;
-			const groupSkip  = (pageNumber-1) * this.recordsPerPage
-			const groupSort  = { "meta.modifiedOn":-1 };
-			
-			const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags, groupSkip });
-			if(result?.length){
+            this.articlesCount = 0;
+            this.articles = [];
+            const q = {
+                $and: [{
+                        adminTags: this.$realm.is('BCH') ? 'bch' : 'abs'
+                    },
+                    {
+                        adminTags: {
+                            $all: [encodeURIComponent(tag)]
+                        }
+                    }
+                ]
+            };
+            const f = {
+                [`title.${this.$locale}`]: 1,
+                [`summary.${this.$locale}`]: 1,
+                adminTags: 1,
+                "meta.modifiedOn": 1,
+                _id: 1
+            };
+            const groupTags = JSON.stringify([encodeURIComponent(tag)]);
+            const groupLimit = this.recordsPerPage;
+            const groupSkip = (pageNumber - 1) * this.recordsPerPage
+            const groupSort = {
+                "meta.modifiedOn": -1
+            };
 
-				result.forEach(element => {						
-					this.articlesCount= this.articlesCount + element.count;
-					this.articles 	  = [...this.articles, ...element.articles];
-				});
-			}
+            try {
+                const result = await this.articlesApi.queryArticleGroup('adminTags', {
+                  q,
+                  f,
+                  groupLimit,
+                  groupSort,
+                  groupTags,
+                  groupSkip
+                });
+                if (result?.length) {
 
-			this.loading = false;
-
-		},
-	},
-		i18n: { messages:{ en: i18n }}
-	}
+                  result.forEach(element => {
+                    this.articlesCount = this.articlesCount + element.count;
+                    this.articles = [...this.articles, ...element.articles];
+                  });
+                }
+            }
+            catch(e) {
+                console.error(e);
+            }
+            finally {
+                this.loading = false;
+            }
+        },
+    },
+    i18n: {
+        messages: {
+            en: i18n
+        }
+    }
+}
 </script>

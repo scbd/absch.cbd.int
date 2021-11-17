@@ -48,122 +48,167 @@ import i18n from '../../locales/en/components/kb.json';
 import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
 import {formatDate} from './filters';
+import loadCategories from './load-categories';
 
 export default {
-  name:'KbArticlesByTag',
-  components:{
-    paginate,
-  },
-  props:{
-  },
-  created(){
-    this.articlesApi = new ArticlesApi();
-  },
-  data:  () => {
-    return {
-      articles: [],
-      loading: true,
-      pageNumber:1,
-      recordsPerPage:10,
-      realmTag:'',
-      search:''
-    }
-  },
-  mounted() {
-    if(this.$route.params.search){
-       this.search = (this.$route.params.search).replace(/"/g, "");
-    }
-    this.realmTag = this.$realm.is('BCH') ? 'bch' : 'abs';
-      this.loadArticles(1);
-  },
-  filters: {
-    dateFormat: function ( date ) {
-      return formatDate(date)
-    }
-  },
-  methods: {
-    async loadKbCategories(){
-      if(!this.$realm.is('BCH')) {
-        const { categories } = await import('~/app-data/abs/kb-categories.js');
-        return categories;
-      }
-      else {
-        const { categories } = await import('~/app-data/bch/kb-categories.js');
-        return categories;
-      }
+    name: 'KbArticlesByTag',
+    components: {
+        paginate,
     },
-    articleUrl(article, tag){
-      const urlTitle = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-      return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(article._id)}`
+    props: {},
+    created() {
+        this.articlesApi = new ArticlesApi();
     },
-    goToArticle(article, tag){
-      this.$router.push({
-        path:this.articleUrl(article, tag)
-      });
+    data: () => {
+        return {
+            articles: [],
+            loading: true,
+            pageNumber: 1,
+            recordsPerPage: 10,
+            realmTag: '',
+            categories: [],
+            search: ''
+        }
     },
-    async tagUrl(tag){
-      const categories = await this.loadKbCategories();
-      const tagDetails = categories.find(e=>e.adminTags.includes(tag))
-      const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-      return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
+    mixins: [loadCategories],
+    async mounted() {
+        this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
+        if (this.$route.params.search) {
+            this.search = (this.$route.params.search).replace(/"/g, "");
+        }
+        this.realmTag = this.$realm.is('BCH') ? 'bch' : 'abs';
+        this.loadArticles(1);
     },
-    goToTag(tag){
-      this.$router.push({path: this.tagUrl(tag)});
+    filters: {
+        dateFormat: function(date) {
+            return formatDate(date)
+        }
     },
-    onChangePage(pageNumber) {
-      this.article=[];
-      this.loading = true;
-      this.loadArticles(pageNumber);
-    },
-    async loadArticles(pageNumber, text){
-      this.pageNumber = pageNumber;
-      if(text){
-        this.search = text;
-      }
-      this.articlesCount= 0;
-      this.articles 	  = [];
-      this.loading = true;
-      let countAg = [];
-      let searchAg = [];
-      if(this.search){
-        const match = {"$match":{"$and":[{"$or":[
-                {[`title.${this.$locale}`]  : {"$$contains"  : (this.search)}},
-                {[`summary.${this.$locale}`]: { "$$contains" : (this.search)}},
-                {[`content.${this.$locale}`]: { "$$contains" : (this.search)}}]},
-              {"adminTags": { $all : [this.realmTag]}}]}};
-        searchAg.push(match);
-        countAg.push(match);
-      } else {
-        const matchTag = {"$match":{"$and":[{"adminTags": { $all : [ this.realmTag]}}]}};
-        searchAg.push(matchTag);
-        countAg.push(matchTag);
-      }
-      countAg.push({"$match":{"$and":[{"adminTags": { $all : [ this.realmTag]}}]}});
-      searchAg.push({"$project" :
+    methods: {
+        tagUrl(tag) {
+            const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
+            const tagTitle = (tagDetails?.title || '').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+            if(tagTitle) {
+              return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
+            }
+            else {
+              return `kb/tags/${encodeURIComponent(tag)}`
+            }
+        },
+        onChangePage(pageNumber) {
+            this.article = [];
+            this.loading = true;
+            this.loadArticles(pageNumber);
+        },
+        async loadArticles(pageNumber, text) {
+            this.pageNumber = pageNumber;
+            if (text) {
+                this.search = text;
+            }
+            this.articlesCount = 0;
+            this.articles = [];
+            this.loading = true;
+            let countAg = [];
+            let searchAg = [];
+            if (this.search) {
+                const match = {
+                    "$match": {
+                        "$and": [{
+                                "$or": [{
+                                        [`title.${this.$locale}`]: {
+                                            "$$contains": (this.search)
+                                        }
+                                    },
+                                    {
+                                        [`summary.${this.$locale}`]: {
+                                            "$$contains": (this.search)
+                                        }
+                                    },
+                                    {
+                                        [`content.${this.$locale}`]: {
+                                            "$$contains": (this.search)
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "adminTags": {
+                                    $all: [this.realmTag]
+                                }
+                            }
+                        ]
+                    }
+                };
+                searchAg.push(match);
+                countAg.push(match);
+            } else {
+                const matchTag = {
+                    "$match": {
+                        "$and": [{
+                            "adminTags": {
+                                $all: [this.realmTag]
+                            }
+                        }]
+                    }
+                };
+                searchAg.push(matchTag);
+                countAg.push(matchTag);
+            }
+            countAg.push({
+                "$match": {
+                    "$and": [{
+                        "adminTags": {
+                            $all: [this.realmTag]
+                        }
+                    }]
+                }
+            });
+            searchAg.push({
+                "$project":
 
-            {[`title.${this.$locale}`]	: 1,
-              [`summary.${this.$locale}`]	: 1,
-              adminTags 					: 1,
-              "meta.modifiedOn":1, _id:1}});
-      searchAg.push({"$limit" : pageNumber * this.recordsPerPage});
-      searchAg.push({"$skip" : (pageNumber-1) * this.recordsPerPage});
-      countAg.push({"$count":"count"})
-      const countQuery = {
-        "ag" : JSON.stringify(countAg)
-      };
-      const searchQuery = {
-        "ag" : JSON.stringify(searchAg)
-      };
+                {
+                    [`title.${this.$locale}`]: 1,
+                    [`summary.${this.$locale}`]: 1,
+                    adminTags: 1,
+                    "meta.modifiedOn": 1,
+                    _id: 1
+                }
+            });
+            searchAg.push({
+                "$limit": pageNumber * this.recordsPerPage
+            });
+            searchAg.push({
+                "$skip": (pageNumber - 1) * this.recordsPerPage
+            });
+            countAg.push({
+                "$count": "count"
+            })
+            const countQuery = {
+                "ag": JSON.stringify(countAg)
+            };
+            const searchQuery = {
+                "ag": JSON.stringify(searchAg)
+            };
 
-      const [count, articlesList]  = await Promise.all([ this.articlesApi.queryArticles(countQuery), this.articlesApi.queryArticles(searchQuery)]);
-      if((articlesList || []).length) {
-        this.articles =  articlesList;
-        this.articlesCount = count[0].count;
-      }
-      this.loading = false;
-
+            try {
+                const [count, articlesList] = await Promise.all([this.articlesApi.queryArticles(countQuery), this.articlesApi.queryArticles(searchQuery)]);
+                if ((articlesList || []).length) {
+                    this.articles = articlesList;
+                    this.articlesCount = count[0].count;
+                }
+            }
+            catch(e) {
+                console.error(e);
+            }
+            finally {
+                this.loading = false;
+            }
+        },
     },
-  },
-  i18n: { messages:{ en: i18n }}
+    i18n: {
+        messages: {
+            en: i18n
+        }
+    }
 }
 </script>

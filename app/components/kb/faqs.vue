@@ -35,7 +35,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
-  	import {categories} from '../../app-data/bch/kb-categories.js';
+  import loadCategories from './load-categories';
 
 	export default {
 		name:'kbFaqsList',
@@ -48,7 +48,9 @@
 			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, "");	
 			this.articlesApi = new ArticlesApi();
 		},
-		mounted() {
+    mixins: [loadCategories],
+		async mounted() {
+        this.categories = await this.loadKbCategories(true);
 		    this.loadFaqs(1);
 		},
 		data:  () => {
@@ -56,6 +58,7 @@
 				faqFilterTag:'',
 				faqs: [],
 				loading: true,
+        categories: [],
 				faqCount:0,
 				pageNumber:1,
 				recordsPerPage:10
@@ -63,12 +66,9 @@
 		},
 		methods: {
 			tagUrl(tag){
-				const tagDetails = categories.find(e=>e.adminTags.includes(tag))
+				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				return `/kb/faqs/${tag}/${tagTitle}`
-			},
-			goToTag(tag){
-				this.$router.push({path: this.tagUrl(tag)});
+				return `/kb/faqs/${tag}/${encodeURIComponent(tagTitle)}`
 			},
 			onChangePage(pageNumber) {
 				this.pageNumber = pageNumber;
@@ -96,16 +96,30 @@
 				const groupLimit = this.recordsPerPage;
 				const groupSkip  = (pageNumber-1) * this.recordsPerPage
 				const groupSort  = { "meta.modifiedOn":-1 };
-				
-				const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags, groupSkip });
-				if(result?.length){
 
-					result.forEach(element => {						
-						this.faqCount = this.faqCount + element.count;
-						this.faqs 	  = [...this.faqs, ...element.articles];
-					});
-				}
-				this.loading = false;
+			try {
+            const result = await this.articlesApi.queryArticleGroup('adminTags', {
+              q,
+              f,
+              groupLimit,
+              groupSort,
+              groupTags,
+              groupSkip
+            });
+            if (result?.length) {
+
+              result.forEach(element => {
+                this.faqCount = this.faqCount + element.count;
+                this.faqs = [...this.faqs, ...element.articles];
+              });
+            }
+        }
+        catch(e) {
+            console.error(e);
+        }
+        finally {
+            this.loading = false;
+        }
 			},
 		},
 		i18n: { messages:{ en: i18n }}

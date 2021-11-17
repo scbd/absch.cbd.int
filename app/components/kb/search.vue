@@ -23,25 +23,31 @@
 </template>
 
 <script>
-    import i18n from '../../locales/en/components/kb.json';
-    export default {
-        name:'kbAutoCompleteSearch',
-      data:  () => {
+import i18n from '../../locales/en/components/kb.json';
+export default {
+    name: 'kbAutoCompleteSearch',
+    data: () => {
         return {
-          search:''
+            search: ''
         }
-      },
-      methods:{
-        goToSearchArticles(){
-          if(this.search) {
-            if(this.$route.params.search){
-              this.$emit('changeSearch', this.search);
-            }else {
-            this.$router.push( { path : `/kb/kbSearch/${encodeURIComponent( this.search )}` } );
+    },
+    methods: {
+        goToSearchArticles() {
+            if (this.search) {
+                if (this.$route.params.search) {
+                    this.$emit('changeSearch', this.search);
+                } else {
+                    this.$router.push({
+                        path: `/kb/kbSearch/${encodeURIComponent( this.search )}`
+                    });
+                }
             }
-          }
         },
-      },
-        i18n: { messages:{ en: i18n }}
+    },
+    i18n: {
+        messages: {
+            en: i18n
+        }
     }
+}
 </script>

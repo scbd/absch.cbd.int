@@ -42,6 +42,7 @@
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
+    import loadCategories from './load-categories';
 	export default {
     name:'KbArticleDetails',
 		components: {
@@ -51,42 +52,40 @@
 		props:{
 		},
 		data:  () => {
-			return {
-				article: [],
-          		categories: [],
-				loading: true
-			}
+        return {
+            article: [],
+            categories: [],
+            loading: true
+        }
 		},
 		created(){
 			this.tag = (this.$route.params.tag).replace(/"/g, "");
 			this.articlesApi = new ArticlesApi();
 		},
-		async mounted() {
-      		this.categories = await this.loadKbCategories();
-			if(this.$route.params == undefined) return;
-			let id =   (this.$route.params.id).replace(/"/g, "");
-			const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
-			if (article?.content != undefined) {
-				this.article =  article;
-			}
-			this.loading = false;
-		},
+    mixins: [loadCategories],
+	async mounted() {
+      this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
+	  if(this.$route.params == undefined) return;
+      try {
+          let id = (this.$route.params.id).replace(/"/g, "");
+          const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
+          if (article?.content != undefined) {
+            this.article = article;
+          }
+      }
+      catch(e){
+        console.error(e);
+        }
+      finally {
+          this.loading = false;
+      }
+	},
 		filters: {
 			dateFormate: function ( date ) {
 				return formatDate(date)
 			}
 		},
 		methods: {
-			async loadKbCategories(){
-				if(!this.$realm.is('BCH')) {
-				const { categories } = await import('~/app-data/abs/kb-categories.js');
-				return categories;
-				}
-				else {
-				const { categories } = await import('~/app-data/bch/kb-categories.js');
-				return categories;
-				}
-			},
 			back(){
 				this.$router.push({path: '/kb'});
 			},
@@ -97,11 +96,8 @@
 					return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
 				} 
 				else {
-					return `kb/tags/${tag}`
+					return `kb/tags/${encodeURIComponent(tag)}`
 				}
-			},
-			goToTag(tag){
-				this.$router.push({path: this.tagUrl(tag)});
 			}
 		},
 		i18n: { messages:{ en: i18n }} 
