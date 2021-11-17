@@ -242,17 +242,15 @@
 
                     <a rel="noopener" class="bs5  mb-5 fs-1 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
                         translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}">
-                        <!-- <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i> -->
+                        <i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i>
                         <span ng-bind="currentCountry.name|lstring"></span>
                     </a>
                 </div>
                     <div ng-if="isBCH && currentCountry">
                         <homepin-popup-bch>
-                            </pin-popup-bch>
                     </div>
                     <div ng-if="isABS && currentCountry" class="country-item-name">
                         <homepin-popup-abs>
-                            </pin-popup-abs>
                     </div>
                 </div>
             </div>
