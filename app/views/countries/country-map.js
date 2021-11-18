@@ -7,8 +7,8 @@ import 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]';
 import 'services/main';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import 'components/scbd-angularjs-services/main';
-import './directives/pin-popup-bch';
-import './directives/pin-popup-abs';
+import './directives/homepin-popup-bch';
+import './directives/homepin-popup-abs';
 
 
   app.directive('countryMap', ['$timeout', function($timeout) {
@@ -18,7 +18,10 @@ import './directives/pin-popup-abs';
       replace: true,
       require: ['^countryMap'],
       scope: {
-        zoomTo: '@zoomTo'
+        zoomTo: '@zoomTo',
+        hideTitle: '@hideTitle',
+        hideDetails: '@hideDetails',
+        mapHeight: '@mapHeight'
       },
       link: function($scope, $element, $attr, requiredDirectives) {
 
@@ -35,7 +38,7 @@ import './directives/pin-popup-abs';
           "longitude": -167.66
         };
         var mapOptions = {
-            "type": "map",
+           "type": "map",
             "theme": "light",
             "projection": "equirectangular",
             "zoomDuration": 0.1,
@@ -50,38 +53,45 @@ import './directives/pin-popup-abs';
             "areasSettings": {
                "alpha": 1,
                 "autoZoom": true,
-                "selectedColor": '#428BCA',
+                "selectedColor": '#111111',
                 "rollOverColor": '#000000',
                 "selectable": true,
-                "color": '#333',
-                "outlineColor": '#666',
+                "color": '#636363',
+                "outlineColor": '#FFF',
             },
             "smallMap": {
               "enabled": false,
               "rectangleColor": '#069554',
               "backgroundAlpha": 0.5,
-              "mapColor": '#069554',
+              "mapColor": '#FFF',
             },
             "export": {
               "libs": { "autoLoad": false},
               "enabled": true,
               "position": "bottom-right"
             }
-          };
+        };
+
+
+        if(!$scope.mapHeight)
+          $scope.mapHeight = "lg";
+
+
         var lmoDecisions;
         var countries         = {};
         var prevCountryColor  = {clicked:{}, mouseOver:{}};
         var latlong           = {};
         var mapColors = {
-          party          : '#5F4586',
-          nonParty       : '#333',
+          party          : '#069554',
+          nonParty       : '#636363',
           inBetweenParty : '#EC971F'
         };
+
         if(realm.is('BCH')){
           $scope.isBCH          = true;
           mapColors = {
-            party          : '#9e6621',
-            nonParty       : '#00405C',
+            party          : '#00405C',
+            nonParty       : '#636363',
             inBetweenParty : '#EC971F'
           }
         }
@@ -147,13 +157,41 @@ import './directives/pin-popup-abs';
         };
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
+        $scope.showTitle = true; 
+        if($scope.hideTitle)
+          $scope.showTitle = false;
 
+        $scope.showDetails = true; 
+          if($scope.hideDetails)
+            $scope.showDetails = false;
 
         var map = AmCharts.makeChart( "chartdiv", mapOptions );
         
         ////////////////scope functions///////////////////
 
+        $q.when(commonjs.getCountries(), function(countries) {
 
+          if($scope.options.isBch){
+              $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
+              $scope.numParty     = _.filter(countries, {isParty:     true}).length;
+          }
+          else {                
+              $scope.numRatified  = _.filter(countries, {isInbetweenParty:  true}).length;
+              $scope.numParty     = _.filter(countries, {isParty:     true}).length;
+          }
+          $scope.numNonParty  = countries.length -  $scope.numParty;
+            
+
+        });
+
+        $scope.options = {
+          isBch       : realm.is('BCH'),
+          isAbs       : realm.is('ABS'),
+          protocol    : realm.protocol,
+          protocolShortName  :realm.protocolShortName,
+          chShortName :realm.chShortName,
+          chLongName  :realm.chLongName
+        }
         ///////////////////////////////////////////////////
 
 
@@ -227,6 +265,8 @@ import './directives/pin-popup-abs';
                 exceptionCountryData.code = exceptionRegion;
                 exceptionCountryData.exceptionCountry  = code.toLowerCase();
                 addImageData(exceptionCountryData)
+                const countryObj = getMapObject(code)
+                changeSelectedColor(exceptionRegion, countryObj.colorReal)
               }
               //if(exceptionRegion[c])
           });

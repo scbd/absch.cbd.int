@@ -379,10 +379,10 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
             if($scope.$root.deviceSize !== 'sm' && $scope.$root.deviceSize !== 'xs'){
                 $scope.loadingMap = true;
                 angular.element($element).ready(async function () {                    
-                    await import('~/views/countries/homepage-map')
+                    await import('~/views/countries/country-map')
                     $scope.$apply(function(){
                         var mapElement = $element.find('#Jumbotron')
-                        mapElement.html("<span homepage-map hide-details='1' hide-title='1'></span>")
+                        mapElement.html("<span country-map hide-details='1' hide-title='1'></span>")
                         $compile(mapElement.contents())($scope);
                         $scope.loadingMap = false;
                     });

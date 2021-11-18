@@ -18,21 +18,25 @@
     <div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
         <div class="register-content-header bg-darkgrey color-white">
             <div style="padding:1px 10px;">
-                <h3>ABSCH Reports </h3>
+                <h3>Reports </h3>
             </div>
         </div>
         <div class="register-content-content bg-white">
             <div class="row" style="padding:10px">
                 <div class="col-md-12 cp-header">
 
-                    <div class="card sub-card">
-                        <img src="https://attachments.cbd.int/abs-permit-screen.png" alt="Avatar" style="width:100%;">
+                    <div class="card sub-card" ng-repeat="report in reports">
+                        <img src="{{report.img}}" alt="Avatar" style="width:100%;">
                         <div class="container">
-                            <h4><b>ABS Permit</b></h4>
-                            <p><a rel="noopener" href="/register/reports/abs-permit">view</a></p>
+                            <h4><b ng-bind="report.title"></b></h4>
+                            <p><a rel="noopener" href="{{report.url}}">view</a></p>
                         </div>
                     </div>
-                    
+                    <div ng-if="!reports.length">
+                        <div class="alert alert-info">
+                            No reports are available at this movement.
+                        </div>
+                    </div>
                 </div>
 
             </div>
