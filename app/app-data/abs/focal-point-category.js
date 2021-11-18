@@ -1,4 +1,4 @@
-import fpCategoryTitle from '~/app-data/bch/focal-point-category.json'
+import fpCategoryTitle from '~/app-data/abs/focal-point-category.json'
 
 
 export const categories = [
@@ -21,13 +21,5 @@ export const categories = [
     { 
         "title": fpCategoryTitle.gNfp, 
         "key" : "GTI NFP"
-    },
-    { 
-        "title": fpCategoryTitle.cpNfp, 
-        "key" : "CPB-FP1" 
-    },
-    { 
-        "title": fpCategoryTitle.bchNfp, 
-        "key" : "BCH-FP"
     }
 ];
