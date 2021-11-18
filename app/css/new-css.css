@@ -380,3 +380,15 @@ max-width: 90%;
     width: 100%;
     margin-left: -5px;
 }
+.new-css-notification-bell {
+    position: relative;
+    top:2px;
+    font-size: 18px !important;
+}
+.new-css-notification-count {
+    position: relative;
+    font-size: 9px !important;
+    text-align: center;
+    margin-top: -15px;
+    margin-left: -10px;
+}

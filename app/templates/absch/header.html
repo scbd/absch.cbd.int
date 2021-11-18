@@ -66,40 +66,26 @@
                 </a>
             </li>
             <li class="bs5 nav-item"><a rel="noopener" translation-url href="/kb/tags/about/About"
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a></li>
-
+                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a>
+            </li>
             <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
-                <a rel="noopener" translation-url href="#"
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
-                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Search</a>
+                <a rel="noopener" translation-url href="#" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
+                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                    aria-expanded="false">Search</a>
                 <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item"
-
-                            href="search">Search records</a></li>
-                            href="search">Records</a></li>
-                    <li><a rel="noopener" translation-url class="bs5 dropdown-item  fw-bold new-css-dropdown-menu-item"
-                            href="#">Registries</a>
-                        <ul>
-                            <li class="list-unstyled"><a rel="noopener" translation-url
-                                    class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold "
-                                    href="/registries/living-modified-organisms">- LMO</a></li>
-                            <li class="list-unstyled"><a rel="noopener" translation-url
-                                    class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold "
-                                    href="/registries/organisms"> - Organism</a></li>
-                            <li class="list-unstyled"><a rel="noopener" translation-url
-                                    class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold "
-                                    href="/registries/genetic-elements">- Gene</a></li>
-
+                    <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="search">Records</a></li>
+                    <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="/registries">Registries</a>
+                        <ul class="new-css-nav-menu-list">
+                            <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/living-modified-organisms"> LMO</a></li>
+                            <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/organisms"> Organism</a></li>
+                            <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/genetic-elements"> Gene</a></li>
+                            
                         </ul>
-
-                            href="search">Search records</a></li>
-
                     </li>
-                    <li><a rel="noopener" translation-url
-                            class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold link-dark "
-                            href="reports">National Report Analyzer</a></li>
+                    <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold link-dark " href="/reports">National Report Analyzer</a></li>
                 </ul>
             </li>
+            
             <li class="bs5 nav-item"><a rel="noopener" translation-url href="/register"
                     class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">submit</a>
             </li>
@@ -108,21 +94,19 @@
 
 
             <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
-                <a id="countryProfile" role="button" rel="noopener" href="#"
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
+                <a id="countryProfile" role="button" rel="noopener" href="#" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
                     type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
-                    <span class="hidden-sm hidden-xs">country profiles</span>
+                    <span class="hidden-sm hidden-xs">country profiles</span> 
                     <span class="hidden-md hidden-lg"> countries </span></a>
                 <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton2">
                     <li class="new-css-nav-country-profiles-search">
-                        <input type="text" class="form-control" placeholder="Search countries"
-                            ng-click="countrySearch($event)" ng-model="countrySearchQuery" />
+                        <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
+                            ng-model="countrySearchQuery" />
                     </li>
                     <li>
                         <ul class="new-css-nav-country-profiles">
                             <li ng-repeat="c in countries | filter:startsWith track by c.code">
-                                <a rel="noopener" translation-url class="bs5 dropdown-item"
-                                    ng-href="/countries/{{::c.code|encodeURIComponent}}">
+                                <a rel="noopener" translation-url  class="bs5 dropdown-item" ng-href="/countries/{{::c.code|encodeURIComponent}}">
                                     <span class="bold"
                                         ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
                                         {{::c.name | lstring:locale}}
@@ -132,8 +116,7 @@
                         </ul>
                     </li>
                     <li class="new-css-nav-country-profiles-footer">
-                        <a rel="noopener" translation-url href="/countries"> Overview - List all countries <i
-                                class="fa fa-arrow-right"></i> </a>
+                        <a rel="noopener" translation-url href="/countries"> Overview - List all countries <i class="fa fa-arrow-right"></i> </a>
                     </li>
                 </ul>
             </li>
@@ -141,16 +124,12 @@
                 <a href="/kb" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
                     type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
                 <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
-                            href="/kb">Knowledge Base (KB)</a></li>
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
-                            href="/kb/faqs">FAQs</a></li>
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
-                            href="#">Training material</a></li>
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
-                            href="#">Training site</a></li>
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url
-                            href="#">Contact us</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb">Knowledge Base</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/faqs">FAQs</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="https://bch3-vle.unep.org/" target="_blank">Training Materials</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="#">Training Site</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold  new-css-dropdown-menu-item" rel="noopener" translation-url href="http://bch.cbd.int/onlineconferences/portal_art20/nfps/newBCHforum.shtml">BCH on BCH Forum</a></li>
+                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/articles/60df8a891d6d9f0001e45410/Contact-us/bch">Contact us</a></li>
                 </ul>
             </li>
             <li class="bs5 nav-item"><a href="/forums"

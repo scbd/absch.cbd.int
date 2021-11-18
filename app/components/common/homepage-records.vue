@@ -7,8 +7,24 @@
   </ul>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
   <div class="bs5 row row-cols-1 row-cols-md-2 ">
-
-    <div class="bs5 col" v-for="record in recordList">
+  <div class="bs5 d-block row row-cols-1 row-cols-md-1 ">
+    <div class="bs5 col" v-for="record in recordList.slice(0,4)">
+      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
+        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
+        <h4><a :href="record.url_ss" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
+        <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
+        
+        <div style="position:absolute;bottom:5px; width:95%">
+          <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a v-if="record.government_s"  target="_blank" :href="`/countries/${encodeURIComponent(record.government_s)}`">
+          <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
+          <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
+        </div>
+      </div>
+    </div>
+  </div>  
+   <div class="bs5 d-none d-lg-block row row-cols-1 row-cols-md-1">
+    <div class="bs5 col" v-for="record in recordList.slice(4,8)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
         <h4 class="fw-bold"><a :href="record.url_ss" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
@@ -22,6 +38,7 @@
         </div>
       </div>
     </div>
+  </div>  
   </div>
 
   <div class="bs5 text-end mt-4 new-css-down-margin">
