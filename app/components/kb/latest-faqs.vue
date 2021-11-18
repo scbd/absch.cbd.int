@@ -62,15 +62,29 @@
 				} ;
 				const groupTags = JSON.stringify(['faq']);
 				const groupSort  = { "meta.modifiedOn":-1 };
-		  	const groupLimit = 6;	
-				const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags });
-				if(result?.length){
+		  	const groupLimit = 6;
 
-					result.forEach(element => {						
-						this.help 	  = [...this.help, ...element.articles];
-					});
-				}
-				this.loading = false;
+        try {
+            const result = await this.articlesApi.queryArticleGroup('adminTags', {
+              q,
+              f,
+              groupLimit,
+              groupSort,
+              groupTags
+            });
+            if (result?.length) {
+
+              result.forEach(element => {
+                this.help = [...this.help, ...element.articles];
+              });
+            }
+        }
+        catch(e) {
+            console.error(e);
+        }
+        finally {
+            this.loading = false;
+        }
 			},
 		},
 		i18n: { messages:{ en: i18n }}

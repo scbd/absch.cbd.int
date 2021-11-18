@@ -35,7 +35,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
-    import KbCategories from '../../app-data/kb-categories.json';
+  import articlesMaxin from '../maxin/article';
 
 	export default {
 		name:'kbFaqsList',
@@ -45,10 +45,12 @@
 		props:{
 		},
 		created(){
-			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, "");	
+			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, ""); 
 			this.articlesApi = new ArticlesApi();
 		},
-		mounted() {
+    	mixins: [articlesMaxin],
+		async mounted() {
+        this.categories = await this.loadKbCategories(true);
 		    this.loadFaqs(1);
 		},
 		data:  () => {
@@ -56,6 +58,7 @@
 				faqFilterTag:'',
 				faqs: [],
 				loading: true,
+        categories: [],
 				faqCount:0,
 				pageNumber:1,
 				recordsPerPage:10
@@ -63,12 +66,20 @@
 		},
 		methods: {
 			tagUrl(tag){
-				const tagDetails = KbCategories.find(e=>e.adminTags.includes(tag))
-				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				return `/kb/faqs/${tag}/${tagTitle}`
+				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
+				const tagTitle 	 = (tagDetails?.title||'');
+                return this.getUrl(tagTitle, undefined, tag);
 			},
-			goToTag(tag){
-				this.$router.push({path: this.tagUrl(tag)});
+			articleUrl(article, tag){
+				return this.getUrl(article.title[this.$locale], article._id, tag);
+			},
+			goToArticle(article, tag){
+				this.$router.push({
+				path:this.articleUrl(article, tag)
+				});
+			},
+			goToTag(category){
+				this.$router.push({path: this.tagUrl(category)});
 			},
 			onChangePage(pageNumber) {
 				this.pageNumber = pageNumber;
@@ -77,13 +88,13 @@
 				this.loadFaqs(pageNumber);
 			},
 			async loadFaqs(pageNumber){
-				
+
 				this.faqCount = 0;
 				this.faqs = [];
 
 				const q = { 
 					$and : [
-						{ adminTags : { $all : [this.$realm.is('BCH') ? 'bch' : 'abs', 'faq' ]}},
+						{ adminTags : { $all : ['bch', 'faq']}},
 						{ adminTags : { $all : [ this.faqFilterTag ? this.faqFilterTag : 'faq']} }
 					]
 				};
@@ -96,16 +107,30 @@
 				const groupLimit = this.recordsPerPage;
 				const groupSkip  = (pageNumber-1) * this.recordsPerPage
 				const groupSort  = { "meta.modifiedOn":-1 };
-				
-				const result = await this.articlesApi.queryArticleGroup('adminTags', { q, f, groupLimit, groupSort, groupTags, groupSkip });
-				if(result?.length){
 
-					result.forEach(element => {						
-						this.faqCount = this.faqCount + element.count;
-						this.faqs 	  = [...this.faqs, ...element.articles];
-					});
-				}
-				this.loading = false;
+			try {
+            const result = await this.articlesApi.queryArticleGroup('adminTags', {
+              q,
+              f,
+              groupLimit,
+              groupSort,
+              groupTags,
+              groupSkip
+            });
+            if (result?.length) {
+
+              result.forEach(element => {
+                this.faqCount = this.faqCount + element.count;
+                this.faqs = [...this.faqs, ...element.articles];
+              });
+            }
+        }
+        catch(e) {
+            console.error(e);
+        }
+        finally {
+            this.loading = false;
+        }
 			},
 		},
 		i18n: { messages:{ en: i18n }}
