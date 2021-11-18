@@ -7,7 +7,7 @@
   </ul>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
   <div class="bs5 row row-cols-1 row-cols-md-2 ">
-  <div class="bs5 row row-cols-1 row-cols-md-1 ">
+  <div class="bs5 d-block row row-cols-1 row-cols-md-1 ">
     <div class="bs5 col" v-for="record in recordList.slice(0,4)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
@@ -23,7 +23,7 @@
       </div>
     </div>
   </div>  
-   <div class="bs5 row row-cols-1 row-cols-md-1 ">
+   <div class="bs5 d-none d-lg-block row row-cols-1 row-cols-md-1">
     <div class="bs5 col" v-for="record in recordList.slice(4,8)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
