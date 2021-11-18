@@ -42,7 +42,7 @@
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
-    import loadCategories from './load-categories';
+    import loadCategories from '../maxin/article';
 	export default {
     name:'KbArticleDetails',
 		components: {
@@ -62,24 +62,24 @@
 			this.tag = (this.$route.params.tag).replace(/"/g, "");
 			this.articlesApi = new ArticlesApi();
 		},
-    mixins: [loadCategories],
-	async mounted() {
-      this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
-	  if(this.$route.params == undefined) return;
-      try {
-          let id = (this.$route.params.id).replace(/"/g, "");
-          const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
-          if (article?.content != undefined) {
-            this.article = article;
-          }
-      }
-      catch(e){
-        console.error(e);
+        mixins: [loadCategories],
+        async mounted() {
+        this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
+        if(this.$route.params == undefined) return;
+        try {
+            let id = (this.$route.params.id).replace(/"/g, "");
+            const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
+            if (article?.content != undefined) {
+                this.article = article;
+            }
         }
-      finally {
-          this.loading = false;
-      }
-	},
+        catch(e){
+            console.error(e);
+            }
+        finally {
+            this.loading = false;
+        }
+        },
 		filters: {
 			dateFormate: function ( date ) {
 				return formatDate(date)
@@ -91,15 +91,21 @@
 			},
 			tagUrl(tag){
 				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
-				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				if(tagTitle) {
-					return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
-				} 
-				else {
-					return `kb/tags/${encodeURIComponent(tag)}`
-				}
-			}
+				const tagTitle 	 = (tagDetails?.title||'');
+                return this.getUrl(tagTitle, undefined, tag);
+            },
+            articleUrl(article, tag){
+                return this.getUrl(article.title[this.$locale], article._id, tag);
+            },
+            goToArticle(article, tag){
+                this.$router.push({
+                path:this.articleUrl(article, tag)
+                });
+            },
+            goToTag(category){
+                this.$router.push({path: this.tagUrl(category)});
+            }
 		},
-		i18n: { messages:{ en: i18n }} 
+		i18n: { messages:{ en: i18n }}
 	}
 </script>

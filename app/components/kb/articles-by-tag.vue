@@ -4,11 +4,11 @@
             <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
             <div class="row match-height" v-if="!loading">
                 <div class="article-by-tags" v-if="articles">
-                    <h2> 
+                    <h2>
 						{{tagDetails.title}} <span><small>({{articlesCount}})</small></span>
 					</h2>
 					<hr>
-					
+
                     <div class="kb-listing">
                         <ul class="article-with-tags-ul">
                             <li class="article-with-tags-li" v-for="article in articles">
@@ -25,7 +25,7 @@
                                 <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
                                 <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
                               </div>
-                        
+
                             </li>
                         </ul>
                     </div>
@@ -36,7 +36,7 @@
             </div>
 
             <div v-if="articlesCount>10">
-				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>																
+				<paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
             </div>
 
         </div>
@@ -58,7 +58,7 @@ import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
 import {formatDate} from './filters';
 import popularTags from './popular-tags.vue';
-import loadCategories from './load-categories';
+import loadCategories from '../maxin/article';
 
 export default {
     name: 'KbArticlesByTag',
@@ -102,12 +102,19 @@ export default {
     methods: {
         tagUrl(tag) {
             const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
-            const tagTitle = (tagDetails?.title || '').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-            if (tagTitle) {
-                return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
-            } else {
-                return `kb/tags/${encodeURIComponent(tag)}`
-            }
+            const tagTitle = (tagDetails?.title || '');
+            return this.getUrl(tagTitle, undefined, tag);
+        },
+        articleUrl(article, tag){
+            return this.getUrl(article.title[this.$locale], article._id, tag);
+        },
+        goToArticle(article, tag){
+            this.$router.push({
+            path:this.articleUrl(article, tag)
+            });
+        },
+        goToTag(category){
+            this.$router.push({path: this.tagUrl(category)});
         },
         onChangePage(pageNumber) {
             this.pageNumber = pageNumber;

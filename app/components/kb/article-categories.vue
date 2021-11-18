@@ -24,7 +24,7 @@
 
 <script>
 import i18n from '../../locales/en/components/kb.json';
-import loadCategories from './load-categories';
+import loadCategories from '../maxin/article';
 export default {
     name: 'KbArticleCategories',
     props: {},
@@ -41,8 +41,22 @@ export default {
     },
     methods: {
         tagUrl(category) {
-            const tagTitle = category.title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-            return `/kb/tags/${encodeURIComponent(category.adminTags[0])}/${encodeURIComponent(tagTitle)}`
+            return this.getUrl(category.title, undefined, category.adminTags[0]);
+        },
+        articleUrl(article, tag){
+          if(article.url){
+            window.open(article.url,'_blank'); //will redirect to external static url as mentioned in abs json
+          } else {
+            return this.getUrl(article.title, article.identifier, tag);
+          }
+        },
+        goToArticle(article, tag){
+          this.$router.push({
+            path:this.articleUrl(article, tag)
+          });
+        },
+        goToTag(category){
+          this.$router.push({path: this.tagUrl(category)});
         }
     },
     i18n: {

@@ -48,7 +48,7 @@ import i18n from '../../locales/en/components/kb.json';
 import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
 import {formatDate} from './filters';
-import loadCategories from './load-categories';
+import loadCategories from '../maxin/article';
 
 export default {
     name: 'KbArticlesByTag',
@@ -87,13 +87,19 @@ export default {
     methods: {
         tagUrl(tag) {
             const tagDetails = this.categories.find(e => e.adminTags.includes(tag))
-            const tagTitle = (tagDetails?.title || '').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-            if(tagTitle) {
-              return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(tagTitle)}`
-            }
-            else {
-              return `kb/tags/${encodeURIComponent(tag)}`
-            }
+            const tagTitle = (tagDetails?.title || '');
+            return this.getUrl(tagTitle, undefined, tag);
+        },
+        articleUrl(article, tag){
+        return this.getUrl(article.title[this.$locale], article._id, tag);
+        },
+        goToArticle(article, tag){
+            this.$router.push({
+            path:this.articleUrl(article, tag)
+            });
+        },
+        goToTag(category){
+            this.$router.push({path: this.tagUrl(category)});
         },
         onChangePage(pageNumber) {
             this.article = [];

@@ -12,34 +12,34 @@
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb.json';
-  import loadCategories from './load-categories';
-	export default {
-    name:'kbpopularTags',
-		props:{
-			isCategories:Boolean
-		},
-		data:  () => {
-			return {
-				popularTags:'',
-				loading: true
-			}
-		},
-	methods: {
-    goToAdminTag(tag){
-			if(tag =='faq')
-				this.$router.push({path:'/kb/faqs'});
-			else
-				this.$router.push({path:`/kb/tags/${encodeURIComponent(tag)}`});
-		}
-	},
+    import i18n from '../../locales/en/components/kb.json';
+    import loadCategories from '../maxin/article';
+    export default {
+        name:'kbpopularTags',
+        props:{
+          isCategories:Boolean
+        },
+        data:  () => {
+          return {
+              popularTags:'',
+              loading: true
+          }
+        },
+    methods: {
+        goToAdminTag(tag){
+            if(tag =='faq')
+                this.$router.push({path:'/kb/faqs'});
+            else
+                this.$router.push({path:`/kb/tags/${encodeURIComponent(tag)}`});
+        }
+    },
     mixins: [loadCategories],
-	async mounted(){
-      const categories = await this.loadKbCategories(this.$realm.is('BCH'));
-			this.popularTags = categories;
-			this.loading= false;
-		},
-		i18n: { messages:{ en: i18n }}
-	}
+    async mounted(){
+        const categories = await this.loadKbCategories(this.$realm.is('BCH'));
+        this.popularTags = categories;
+        this.loading= false;
+      },
+      i18n: { messages:{ en: i18n }}
+    }
 </script>
 

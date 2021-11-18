@@ -35,7 +35,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
-  import loadCategories from './load-categories';
+  import loadCategories from '../maxin/article';
 
 	export default {
 		name:'kbFaqsList',
@@ -45,10 +45,10 @@
 		props:{
 		},
 		created(){
-			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, "");	
+			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, ""); 
 			this.articlesApi = new ArticlesApi();
 		},
-    mixins: [loadCategories],
+    	mixins: [loadCategories],
 		async mounted() {
         this.categories = await this.loadKbCategories(true);
 		    this.loadFaqs(1);
@@ -67,8 +67,19 @@
 		methods: {
 			tagUrl(tag){
 				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
-				const tagTitle 	 = (tagDetails?.title||'').replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				return `/kb/faqs/${tag}/${encodeURIComponent(tagTitle)}`
+				const tagTitle 	 = (tagDetails?.title||'');
+                return this.getUrl(tagTitle, undefined, tag);
+			},
+			articleUrl(article, tag){
+				return this.getUrl(article.title[this.$locale], article._id, tag);
+			},
+			goToArticle(article, tag){
+				this.$router.push({
+				path:this.articleUrl(article, tag)
+				});
+			},
+			goToTag(category){
+				this.$router.push({path: this.tagUrl(category)});
 			},
 			onChangePage(pageNumber) {
 				this.pageNumber = pageNumber;
@@ -77,7 +88,7 @@
 				this.loadFaqs(pageNumber);
 			},
 			async loadFaqs(pageNumber){
-				
+
 				this.faqCount = 0;
 				this.faqs = [];
 

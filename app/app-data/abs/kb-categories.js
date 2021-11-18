@@ -182,7 +182,7 @@ export const categories  =
     },
     {
       "title": "Nov 2017 - 3rd IAC Meeting",
-      "identifier": "https://www.cbd.int/meetings/ABSCHIAC-2017-01"
+      "url": "https://www.cbd.int/meetings/ABSCHIAC-2017-01"
     },
     {
       "title": "Jun 2016 - 2nd IAC Meeting",
@@ -190,11 +190,11 @@ export const categories  =
     },
     {
       "title": "Oct 2015 - 1st IAC Meeting",
-      "identifier": "https://www.cbd.int/meetings/ABSCH-IAC-01"
+      "url": "https://www.cbd.int/meetings/ABSCH-IAC-01"
     },
     {
       "title": "Pilot phase IAC Meeting",
-      "identifier": "https://www.cbd.int/meetings/ABS-IAC-CH-01"
+      "url": "https://www.cbd.int/meetings/ABS-IAC-CH-01"
     }
   ]
 }
