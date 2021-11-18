@@ -12,7 +12,7 @@ export default ['$scope','$rootScope',
     function ($scope, $rootScope) {
 
         $scope.recordCount = 4;
-        if($rootScope.deviceSize !=undefined && $rootScope.deviceSize == 'lg'){
+        if($rootScope.deviceSize == 'lg'){
           $scope.recordCount = 8;
         }
         $scope.locale = 'en';
