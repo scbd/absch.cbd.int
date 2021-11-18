@@ -8,9 +8,13 @@ import homepageRecords from '~/components/common/homepage-records.vue';
 
 import 'angular-cookies';
     export { default as template } from './index.html';
-export default ['$scope',
-    function ($scope) {
+export default ['$scope','$rootScope',
+    function ($scope, $rootScope) {
 
+        $scope.recordCount = 4;
+        if($rootScope.deviceSize == 'lg'){
+          $scope.recordCount = 8;
+        }
         $scope.locale = 'en';
         var today= moment.utc();
         var entry= moment.utc("2014-10-12");

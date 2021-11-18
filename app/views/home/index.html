@@ -94,34 +94,34 @@
 
     <div class="bs5 min-vh-100 ">
         <div class="bs5 container ">
-            <p class="bs5 display-6 pt-5 mt-5">Announcements
+            <p class="bs5 display-6 pt-5 mt-5 fw-bold">Announcements
                 <hr>
             </p>
 
            <home-articles tags="ABSCH"></home-articles>
-            <div class="bs5 text-end mt-4">
-                <a class="bs5 nav-link fs-4 text-muted fw-bold text-uppercase" href="/articles/">
+            <div class="bs5 text-end mt-4 new-css-down-margin">
+                <a class="bs5 nav-link fs-4 text-muted fw-bold text-uppercase" href="/kb/tags/bas-announcement/">
                     See more <i class="fa fa-arrow-right"></i> </a>
             </div>
         </div>
     </div>
     <div class="bs5 min-vh-100 home-page-record">
         <div class="bs5 container ">
-            <p class="bs5 display-6 ">National records
+            <p class="bs5 display-6 fw-bold">National records
                 <hr>
             </p>
             <div ng-if="exportVueComponent">
-                <homepage-records ng-vue="exportVueComponent" type="national"></homepage-records>
+                <homepage-records ng-vue="exportVueComponent" type="national" :rows="recordCount"></homepage-records>
             </div>
         </div>
     </div>
     <div class="bs5 min-vh-100 home-page-record">
         <div class="bs5 container ">
-            <p class="bs5 display-6">Reference records
+            <p class="bs5 display-6 fw-bold">Reference records
                 <hr>
             </p>
             <div ng-if="exportVueComponent">
-                <homepage-records ng-vue="exportVueComponent" type="reference"></homepage-records>
+                <homepage-records ng-vue="exportVueComponent" type="reference" :rows="recordCount"></homepage-records>
             </div>
         </div>
     </div>

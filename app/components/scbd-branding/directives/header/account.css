@@ -25,6 +25,9 @@
     left: -80px;
     top: 23px;
   }
+  #CBD-Branding .navbar-header .user-logged-in span img{
+    margin: 0px 3px 5px;
+  }
 }
 @media screen and (min-width: 250px) {
   #CBD-Branding.drop-menu-position {
@@ -76,5 +79,10 @@
   #CBD-Branding.drop-menu-position {
     position: absolute;
     left: 0px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #CBD-Branding .navbar-header .user-logged-in span img{
+    margin: 0px 3px 5px;
   }
 }

@@ -171,6 +171,7 @@
 }
 .new-css-rectype-national {
     background-color: #eee !important; 
+    text-align: inherit !important;
 }
 
 .new-css-rectype-reference {
@@ -339,6 +340,18 @@ max-width: 90%;
     .new-css-callout h4 a {
         max-width: 82%;
     }
+    .new-css-home-section-top-bch .container h1.bs5.display-6{
+      font-size: calc(1.0rem + 1.25vw);
+    }
+    .new-css-summary-text, .new-css-callout h4 a {
+        -webkit-line-clamp: 1;
+    }
+    .new-css-home-section-top-bch h1.display-6{
+        font-size: 1.5rem !important;
+    }
+    .new-css-down-margin{
+        margin-bottom: 30px
+    }
 }
 .country-item-name .table-map tr td:nth-child(1) span{
     min-width: 50px;
@@ -360,4 +373,10 @@ max-width: 90%;
 }
 .new-css-list-circle-style a{
     padding-left: 0 !important;
+}
+.new-css-records-sub-options{
+    position: absolute;
+    bottom: 5px;
+    width: 100%;
+    margin-left: -5px;
 }
