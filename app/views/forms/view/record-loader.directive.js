@@ -194,11 +194,12 @@ import printFooterTemplate from 'text!./print-footer.html';
 								$scope.revisionNo = version
 
 							loadViewDirective($scope.internalDocument.header.schema);
-
+							$scope.error = undefined;
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
 								$scope.load(identifier, 'draft');
-							}
+								$scope.error = error;
+							}								
 						})
 						.finally(function () {
 							$scope.loading = false;
