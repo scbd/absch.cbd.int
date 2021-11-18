@@ -4,39 +4,42 @@
         <h4>{{ $t("popularTags") }}</h4>
 				<hr>
         <div class="tag-scroll" v-if="!loading">
-            <div class="tagcloud" v-for="tag in tags">
-                <a href="#" class="btn btn-mini" @click="goToTag(tag.adminTags[0])">{{tag.title}}</a>
+            <div class="tagcloud" v-for="tag in popularTags">
+                <a href="#" class="btn btn-mini" @click="goToAdminTag(tag.adminTags[0])">{{tag.title}}</a>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-	import i18n from '../../locales/en/components/kb.json';
-	import tagJson from '../../app-data/kb-categories.json';
-	export default {
-    name:'kbpopularTags',
-		props:{
-			isCategories:Boolean
-		},
-		data:  () => {
-			return {
-				tags: tagJson,
-				loading: true
-			}
-		},
-		methods: {
-			goToTag(tag){
-			    if(tag =='faq')
-                    this.$router.push({path:'/kb/faqs'});
-			    else
-			        this.$router.push({path:`/kb/tags/${tag}`});
-			}
-		},
-		mounted(){
-			this.loading= false;
-		},
-		i18n: { messages:{ en: i18n }}
-	}
+    import i18n from '../../locales/en/components/kb.json';
+    import articlesMaxin from '../maxin/article';
+    export default {
+        name:'kbpopularTags',
+        props:{
+          isCategories:Boolean
+        },
+        data:  () => {
+          return {
+              popularTags:'',
+              loading: true
+          }
+        },
+    methods: {
+        goToAdminTag(tag){
+            if(tag =='faq')
+                this.$router.push({path:'/kb/faqs'});
+            else
+                this.$router.push({path:`/kb/tags/${encodeURIComponent(tag)}`});
+        }
+    },
+    mixins: [articlesMaxin],
+    async mounted(){
+        const categories = await this.loadKbCategories(this.$realm.is('BCH'));
+        this.popularTags = categories;
+        this.loading= false;
+      },
+      i18n: { messages:{ en: i18n }}
+    }
 </script>
 

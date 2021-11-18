@@ -1,8 +1,7 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles" v-bind:class="{ 'relevant-articles': tag != ''}">
+    <div class="widget fix widget_categories mt-2 right-side-articles relevant-articles">
         <h4>
-            <span v-if="type != 'faq' &&  type != 'help'">{{ $t("relevantArticles") }}</span>
-            <span v-if="type == 'faq'">{{ $t("faqs") }}</span>
+            <span>{{ $t("relevantArticles") }}</span>
         </h4>
         <hr>
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
@@ -12,73 +11,69 @@
                                 <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
             </li>
         </ul>
-        <div v-if="type == 'faq'" class="view-more">
-        	<a href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
-		</div>
+        <div v-if="articles.length<1 && !loading" class="alert alert-warning">
+            <strong>{{ $t("noResultFound") }}</strong>
+        </div>
     </div>
 </template>
 
 <script>
 import ArticlesApi from './article-api';
-  import i18n from '../../locales/en/components/kb.json';
-  import CategoriesGroup from './article-categories.vue';
-
+import i18n from '../../locales/en/components/kb.json';
+import articlesMaxin from '../maxin/article';
 export default {
-    name:'kbRelevantArticles',
-    components:{
-        CategoriesGroup
+    name: 'kbRelevantArticles',
+    components: {},
+    props: {
+        tag: String,
+        type: String
     },
-    props:{
-        tag:  String,
-        type: String,
-    },
-    data:  () => {
+    data: () => {
         return {
             articles: [],
             loading: true
         }
     },
-    created(){
+    created() {
         this.articlesApi = new ArticlesApi();
     },
+    mixins: [articlesMaxin],
     async mounted() {
-        let relevantTag = this.tag;
-        const realmType = this.$realm.is('BCH') ? 'bch' : 'abs';
-        if(this.type == "faq"){
-            relevantTag = 'faq';
-        }
         let ag = [];
-        ag.push({"$match":{"$and":[{"adminTags": { $all : [realmType, encodeURIComponent(relevantTag)]}}]}});
+        ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
+        ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(this.tag)}]}});
         ag.push({"$project" : {[`title.${this.$locale}`]:1}});
         ag.push({"$limit" : 10});
         const query = {
-            "ag" : JSON.stringify(ag)
+          "ag" : JSON.stringify(ag)
         };
-        const articlesList = await this.articlesApi.queryArticles(query);
-        if((articlesList || []).length) {
-            this.articles =  articlesList;
+        try {
+            const articlesList = await this.articlesApi.queryArticles(query);
+            if ((articlesList || []).length) {
+              this.articles = articlesList;
+            }
         }
-        this.loading = false;
+        catch(e) {
+           console.error(e);
+        }
+        finally {
+            this.loading = false;
+        }
     },
     methods: {
-			articleUrl(article,tag){
-				const urlTitle = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				return `/kb/tags/${encodeURIComponent(this.tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(article._id)}`
-			},
-			goToArticle(article){
-                if(this.type =="faq"){
-                    const url = article.title[this.$locale].replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
-				    this.$router.push({path:`/kb/articles/${article._id}/${url}/bch`});
-                } else {
-                    this.$router.push({
-                        path:this.articleUrl(article)
-                    });
-                }
-            },
-            goToFaq(category){
-				this.$router.push({path:`/kb/faqs`});
-			},
+      articleUrl(article) {
+            return this.getUrl(article.title[this.$locale], article._id, this.tag);
+        },
+      goToArticle(article) {
+            this.$router.push({
+                path: this.articleUrl(article)
+            });
+        },
     },
-    i18n: { messages:{ en: i18n }}
+    i18n: {
+        messages: {
+            en: i18n
+        }
+    }
 }
 </script>
