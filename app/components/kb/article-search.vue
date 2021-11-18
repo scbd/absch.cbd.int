@@ -48,7 +48,7 @@ import i18n from '../../locales/en/components/kb.json';
 import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
 import {formatDate} from './filters';
-import loadCategories from '../maxin/article';
+import articlesMaxin from '../maxin/article';
 
 export default {
     name: 'KbArticlesByTag',
@@ -70,7 +70,7 @@ export default {
             search: ''
         }
     },
-    mixins: [loadCategories],
+    mixins: [articlesMaxin],
     async mounted() {
         this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
         if (this.$route.params.search) {

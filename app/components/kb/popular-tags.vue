@@ -13,7 +13,7 @@
 
 <script>
     import i18n from '../../locales/en/components/kb.json';
-    import loadCategories from '../maxin/article';
+    import articlesMaxin from '../maxin/article';
     export default {
         name:'kbpopularTags',
         props:{
@@ -33,7 +33,7 @@
                 this.$router.push({path:`/kb/tags/${encodeURIComponent(tag)}`});
         }
     },
-    mixins: [loadCategories],
+    mixins: [articlesMaxin],
     async mounted(){
         const categories = await this.loadKbCategories(this.$realm.is('BCH'));
         this.popularTags = categories;

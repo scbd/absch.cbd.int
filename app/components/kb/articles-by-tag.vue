@@ -58,7 +58,7 @@ import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
 import {formatDate} from './filters';
 import popularTags from './popular-tags.vue';
-import loadCategories from '../maxin/article';
+import articlesMaxin from '../maxin/article';
 
 export default {
     name: 'KbArticlesByTag',
@@ -82,7 +82,7 @@ export default {
             recordsPerPage: 10
         }
     },
-    mixins: [loadCategories],
+    mixins: [articlesMaxin],
     async mounted() {
         const tag = (this.$route.params.tag).replace(/"/g, "");
         if (tag != undefined && tag != null) {

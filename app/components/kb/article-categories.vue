@@ -10,8 +10,8 @@
                    <hr>
                     <ul class="cate-list-ul" style="list-style: none;">
                         <li class="cate-list-li" v-for="article in category.articles">
-                            <a v-if="article.identifier" style="display:none" :href="`${articleUrl(article)}`">{{article.title}}</a>
-                            <a href="#" @click="goToArticle(article, category.adminTags[0])">{{article.title}}</a>
+                            <a v-show="article.url" style="display:none" :href="`${articleUrl(article, category.adminTags[0])}`">{{article.title}}</a>
+                            <a v-if="article.identifier" href="#" @click="goToArticle(article, category.adminTags[0])">{{article.title}}</a>
                         </li>
                     </ul>
                     <a style="display:none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
@@ -24,7 +24,7 @@
 
 <script>
 import i18n from '../../locales/en/components/kb.json';
-import loadCategories from '../maxin/article';
+import articlesMaxin from '../maxin/article';
 export default {
     name: 'KbArticleCategories',
     props: {},
@@ -34,7 +34,7 @@ export default {
             loading: true,
         }
     },
-    mixins: [loadCategories],
+    mixins: [articlesMaxin],
     async mounted() {
         const categories = await this.loadKbCategories(this.$realm.is('BCH'));
         this.KbCategories = categories.filter(tag => tag.adminTags[0] != "faq");
@@ -45,8 +45,8 @@ export default {
         },
         articleUrl(article, tag){
           if(article.url){
-            window.open(article.url,'_blank'); //will redirect to external static url as mentioned in abs json
-          } else {
+           return article.url
+           } else {
             return this.getUrl(article.title, article.identifier, tag);
           }
         },

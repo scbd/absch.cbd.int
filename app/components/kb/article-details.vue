@@ -42,7 +42,7 @@
 	import ArticlesApi from './article-api';
 	import {formatDate} from './filters';
 	import popularTags from './popular-tags.vue';
-    import loadCategories from '../maxin/article';
+    import articlesMaxin from '../maxin/article';
 	export default {
     name:'KbArticleDetails',
 		components: {
@@ -62,7 +62,7 @@
 			this.tag = (this.$route.params.tag).replace(/"/g, "");
 			this.articlesApi = new ArticlesApi();
 		},
-        mixins: [loadCategories],
+        mixins: [articlesMaxin],
         async mounted() {
         this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
         if(this.$route.params == undefined) return;

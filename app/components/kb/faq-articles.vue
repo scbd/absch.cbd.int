@@ -16,7 +16,7 @@
 
 <script>
 import i18n from '../../locales/en/components/kb.json';
-import loadCategories from '../maxin/article';
+import articlesMaxin from '../maxin/article';
 export default {
     name: 'KbRightSideFaqs',
     props: {},
@@ -25,7 +25,7 @@ export default {
             articles: [],
         }
     },
-    mixins: [loadCategories],
+    mixins: [articlesMaxin],
     async mounted() {
         const categories = await this.loadKbCategories(this.$realm.is('BCH'));
         const faqArticles = categories.filter(tag => tag.adminTags[0] === "faq");

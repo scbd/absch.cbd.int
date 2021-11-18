@@ -35,7 +35,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
-  import loadCategories from '../maxin/article';
+  import articlesMaxin from '../maxin/article';
 
 	export default {
 		name:'kbFaqsList',
@@ -48,7 +48,7 @@
 			this.faqFilterTag = (this.$route.params.tag||'').replace(/"/g, ""); 
 			this.articlesApi = new ArticlesApi();
 		},
-    	mixins: [loadCategories],
+    	mixins: [articlesMaxin],
 		async mounted() {
         this.categories = await this.loadKbCategories(true);
 		    this.loadFaqs(1);

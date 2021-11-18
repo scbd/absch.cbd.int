@@ -20,7 +20,7 @@
 <script>
 import ArticlesApi from './article-api';
 import i18n from '../../locales/en/components/kb.json';
-import loadCategories from '../maxin/article';
+import articlesMaxin from '../maxin/article';
 export default {
     name: 'kbRelevantArticles',
     components: {},
@@ -37,7 +37,7 @@ export default {
     created() {
         this.articlesApi = new ArticlesApi();
     },
-    mixins: [loadCategories],
+    mixins: [articlesMaxin],
     async mounted() {
         let ag = [];
         ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
