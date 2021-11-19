@@ -57,6 +57,11 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "yesNo",
+			"title": absFilters.showCNAsindicatedAsTheOnlyCNAIntheCountry,
+			"field": "isShowCNAsindicatedAsTheOnlyCNAIntheCountry"
+		},
+		{
+			"type": "yesNo",
 			"title": absFilters.authorityIsResponsibleForAll,
 			"field": "isResponsibleForAll_b"
 		}
@@ -70,7 +75,14 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "status",
 			"title": absFilters.measureLegalStatus,
-			"field": "status_s"
+			"field": "status_s",
+			"otherTerm":false
+		},
+		{
+			"type": "thesaurus",
+			"term": "typeOfDocuments",
+			"title": absFilters.typeOfDocuments,
+			"field": "type"
 		},
 		{
 			"type": "thesaurus",
@@ -115,7 +127,22 @@ export const absLeftMenuFilters = {
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
 			"field": "jurisdiction_s"
+		},
+		{
+		"type": "yesNo",
+		"title": absFilters.doesTheApplicantNeedToProvideAnyDocuments,
+		"field": "hasApplicationDocuments"
+		},
+		{
+		"type": "yesNo",
+		"title": absFilters.areThereApplicationFees,
+		"field": "hasApplicationFees"
 		}
+		// ,{
+		// "type": "date",
+		// "title": absFilters.howLongDoesApplicationProcessTake,
+		// "field": "duration"
+		// }
 	],
 	"absNationalModelContractualClause" : [{
 		"type": "freeText",
@@ -124,8 +151,13 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "thesaurus",
-			"term": "absSubjects",
+			"term": "mccKeywords",
 			"title": absFilters.keywords,
+			"field": "keywords_ss"
+		},{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": absFilters.cbiTAkeyAreas,
 			"field": "thematicAreas_ss"
 		},
 		{
@@ -137,7 +169,7 @@ export const absLeftMenuFilters = {
 	],
 	"absPermit" : [{
 		"type": "freeText",
-		"title": absFilters.freeText,
+		"title": absFilters.IRRCFreeText,
 		"field": "text_EN_txt"
 		},
 		{
@@ -207,8 +239,14 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "thesaurus",
+			"term": "valueChainStage",
+			"title": absFilters.informationCollectedReceived,
+			"field": "valueChainStage"
+		},
+		{
+			"type": "thesaurus",
 			"term": "responsibleFunctions",
-			"title": absFilters.jurisdiction,
+			"title": absFilters.addFilterForResponsibilities,
 			"field": "responsibleFunctions_ss"
 		}
 		
@@ -226,7 +264,7 @@ export const absLeftMenuFilters = {
 			},
 			"title": absFilters.relatedIRCC,
 			"field": "absIRCCs_ss"
-		},		
+		},  
 		{
 			"type": "date",
 			"title": absFilters.cpcAccessDate,
