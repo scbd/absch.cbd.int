@@ -58,7 +58,7 @@ export const absLeftMenuFilters = {
 		{
 			"type": "yesNo",
 			"title": absFilters.showCNAsindicatedAsTheOnlyCNAIntheCountry,
-			"field": "isShowCNAsindicatedAsTheOnlyCNAIntheCountry"
+			"field": "isResponsibleForAll_b"
 		},
 		{
 			"type": "yesNo",
@@ -82,7 +82,7 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "typeOfDocuments",
 			"title": absFilters.typeOfDocuments,
-			"field": "type"
+			"field": "type_s"
 		},
 		{
 			"type": "thesaurus",
@@ -131,12 +131,12 @@ export const absLeftMenuFilters = {
 		{
 		"type": "yesNo",
 		"title": absFilters.doesTheApplicantNeedToProvideAnyDocuments,
-		"field": "hasApplicationDocuments"
+		"field": "hasApplicationDocuments_b"
 		},
 		{
 		"type": "yesNo",
 		"title": absFilters.areThereApplicationFees,
-		"field": "hasApplicationFees"
+		"field": "hasApplicationFees_b"
 		}
 		// ,{
 		// "type": "date",
