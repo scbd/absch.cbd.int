@@ -167,14 +167,14 @@ import printFooterTemplate from 'text!./print-footer.html';
 							qDocumentInfo = storage.drafts.get(identifier, { info: true }, config).then(function (result) { return result.data || result });
 						}
 						else if (version == undefined) {							
-							config.params = {skipRealmHeader : true};
-							qDocument = storage.documents.get(identifier, {'include-deleted':true}, config).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier, { info: true, 'include-deleted':true }, config).then(function (result) { return result.data || result });
+							// config.params = {skipRealmHeader : true};'include-deleted':true
+							qDocument = storage.documents.get(identifier, {}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier, { info: true}, config).then(function (result) { return result.data || result });
 						}
 						else {
-							config.params = {skipRealmHeader : true};
-							qDocument = storage.documents.get(identifier + '@' + version, {'include-deleted':true}, config).then(function (result) { return result.data || result });
-							qDocumentInfo = storage.documents.get(identifier + '@' + version, {'include-deleted':true, info: true }, config).then(function (result) { return result.data || result });
+							// config.params = {skipRealmHeader : true};'include-deleted':false
+							qDocument = storage.documents.get(identifier + '@' + version, {}, config).then(function (result) { return result.data || result });
+							qDocumentInfo = storage.documents.get(identifier + '@' + version, {info: true }, config).then(function (result) { return result.data || result });
 
 						}
 						$scope.loading = true;
@@ -194,11 +194,12 @@ import printFooterTemplate from 'text!./print-footer.html';
 								$scope.revisionNo = version
 
 							loadViewDirective($scope.internalDocument.header.schema);
-
+							$scope.error = undefined;
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
 								$scope.load(identifier, 'draft');
-							}
+								$scope.error = error;
+							}								
 						})
 						.finally(function () {
 							$scope.loading = false;

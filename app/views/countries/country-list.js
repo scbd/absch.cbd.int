@@ -382,7 +382,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                     await import('~/views/countries/country-map')
                     $scope.$apply(function(){
                         var mapElement = $element.find('#Jumbotron')
-                        mapElement.html("<span country-map hide-details='1' hide-title='1'></span>")
+                        mapElement.html("<span country-map zoom-to='' hide-title='1'></span>")
                         $compile(mapElement.contents())($scope);
                         $scope.loadingMap = false;
                     });
