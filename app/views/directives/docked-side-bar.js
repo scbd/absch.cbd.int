@@ -41,24 +41,31 @@ function(realm, $rootScope, $route, $location, articlesService, $q) {
                                     return {"adminTags":encodeURIComponent(_.trim(tag))}
                                 }).value();
                     else{
-                        if(realm.is('ABS')){
-                            tags =  [{"adminTags":encodeURIComponent("announcement")}]
-                        }
-                        else if(realm.is('BCH')){
-                            if($scope.type == 'announcements')
-                                tags =  [{"adminTags":encodeURIComponent("announcement")}];
-                            else{
-                                var paths = $location.path().split('/')
-                                if($location.path() == '/')
-                                    paths = ['home'];
-                                
-                                paths = [...paths, ...['context-help']];
+                        if($scope.type == 'announcements')
+                            tags =  [{"adminTags":encodeURIComponent("announcement")}];
+                        else{
+                            let paths = $route.current.originalPath.split('/')
+                            if($location.path() == '/')
+                                paths = ['home'];
+                            else {
+                                const pathParamKeys = _.keys($route.current.pathParams);
+                                paths = paths.filter(e=>{
+                                            return !pathParamKeys.includes(e.replace(':', ''))
+                                        });
 
-                                if(paths){
-                                    tags =  _(paths).compact().map(function(path){
-                                        return {"adminTags":encodeURIComponent(path.trim())}
-                                    }).value();
-                                }
+                                const validParams = ['tag', 'status', 'tab'];
+                                const paramsTags = _.values($route.current.pathParams).filter(e=>{
+                                    return _.intersection(pathParamKeys, validParams).length
+                                });
+                                if(paramsTags.length)
+                                    paths = [...paths, ...paramsTags]
+                            }
+                            paths = [...paths, ...['context-help']];
+
+                            if(paths){
+                                tags =  _(paths).compact().map(function(path){
+                                    return {"adminTags":encodeURIComponent(path.trim())}
+                                }).value();
                             }
                         }
                     }

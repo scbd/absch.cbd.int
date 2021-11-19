@@ -22,7 +22,7 @@ import _ from 'services/main';
                         function loadArticles(){
                             var ag = [];
                             var agLimit = [];
-                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent($scope.tags||"ABSCH-Announcement")}]}});
+                            ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent($scope.tags||"ABSCH-Announcement")}]}});
                             ag.push({"$project" : {"title":1, "coverImage":1, "meta":1, "summary":1}});
                             ag.push({"$sort" : {"meta.modifiedOn":-1}});
 

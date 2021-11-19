@@ -1,5 +1,17 @@
 import angular from 'angular-flex';
 import app from 'app';
+import 'bootstrap';
+import 'ng-breadcrumbs';
+import 'toastr';
+import 'angular-animate';
+import 'angular-loggly-logger';
+import 'services/main'; 
+import 'components/scbd-branding/main';
+import 'components/scbd-angularjs-services/main';
+import 'views/directives/route-loading-directive';
+import '~/views/directives/docked-side-bar';
+import './directives/cbd-footer';
+import './directives/app-loading';
 
 app.config(["toastrConfig", function(toastrConfig) {
     angular.extend(toastrConfig, {

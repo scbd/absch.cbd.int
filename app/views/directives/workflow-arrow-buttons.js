@@ -824,7 +824,7 @@ import 'ck-editor-css';
                         $scope.blockText        = 'loading Information about the form';
 
                         var ag = [];
-                        ag.push({"$match":{"adminTags.title.en": { "$all" :
+                        ag.push({"$match":{"adminTags": { "$all" :
                             [   encodeURIComponent('edit-form'), encodeURIComponent(realm.value.replace(/(\-[a-zA-Z]{1,5})/, '')),
                                 encodeURIComponent($filter("urlSchemaShortName")(schema))]}}
                         });

@@ -21,9 +21,10 @@ import _ from 'services/main';
                         //---------------------------------------------------------------------
                         function loadArticles(){
                             var ag = [];
-                            ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent($scope.tags||"absch-announcement")}]}});
+                            ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent($scope.tags||"absch-announcement")}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
-                            
+                            ag.push({"$limit":20});
+                            ag.push({"$sort": { 'meta.createdOn': -1 }})
                             var qs = {
                               "ag" : JSON.stringify(ag)
                             };

@@ -91,10 +91,10 @@
 
 				this.faqCount = 0;
 				this.faqs = [];
-
+				const realmTag = this.$realm.is('bhc') ? 'bch' : 'abs';
 				const q = { 
 					$and : [
-						{ adminTags : { $all : ['bch', 'faq']}},
+						{ adminTags : { $all : [realmTag, 'faq']}},
 						{ adminTags : { $all : [ this.faqFilterTag ? this.faqFilterTag : 'faq']} }
 					]
 				};
@@ -109,16 +109,8 @@
 				const groupSort  = { "meta.modifiedOn":-1 };
 
 			try {
-            const result = await this.articlesApi.queryArticleGroup('adminTags', {
-              q,
-              f,
-              groupLimit,
-              groupSort,
-              groupTags,
-              groupSkip
-            });
+            const result = await this.articlesApi.queryArticleGroup('adminTags', {  q, f, groupLimit, groupSort, groupTags, groupSkip });
             if (result?.length) {
-
               result.forEach(element => {
                 this.faqCount = this.faqCount + element.count;
                 this.faqs = [...this.faqs, ...element.articles];

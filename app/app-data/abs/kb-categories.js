@@ -130,7 +130,7 @@ export const categories  =
       "identifier": "5be48690e9f3c10001911a01"
     },
     {
-      "title": "MFlow of information",
+      "title": "Flow of information",
       "identifier": "5be4876871ac250001aadc45"
     }
   ]

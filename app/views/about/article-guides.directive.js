@@ -36,7 +36,7 @@ app.directive("articleGuides", [ function () {
           function loadArticles(str){
             var ag = [];
             
-            ag.push({"$match":{"adminTags.title.en":{"$in":[encodeURIComponent("ABSCH-Guide"), "ABSCH-Guide-"  + $scope.type.toUpperCase() ]}}});
+            ag.push({"$match":{"adminTags":{"$in":[encodeURIComponent("ABSCH-Guide"), "ABSCH-Guide-"  + $scope.type.toUpperCase() ]}}});
             ag.push({"$project" : {"title":1, "summary":1,"content":1,"meta":1, "adminTags":1}});
             
             var qs = {
