@@ -38,7 +38,7 @@ app.directive("articleSearch", [ function () {
             var ag = [];
             
             for(var i=0;i < adminTags.length;++i){
-              ag.push({"$match":{"$and":[{"adminTags.title.en":encodeURIComponent(adminTags[i].trim())}]}});
+              ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(adminTags[i].trim())}]}});
             }
             if(tags){
               for(var i=0;i < tags.length;++i){
