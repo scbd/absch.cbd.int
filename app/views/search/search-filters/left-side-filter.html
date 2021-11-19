@@ -17,13 +17,13 @@
                                 <i class="fa fa-cog color-white" aria-hidden="true"></i>
                             </button>
                             <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
-                                <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
+                                <!-- <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
                                     <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
                                 <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li> -->
                                 <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
-                                <li><a rel="noopener" href="#">
+                                <li><a rel="noopener" href="#" ng-click="removeSchema(schema)">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
                             </ul>
                         </div>
@@ -61,7 +61,7 @@
                                 ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)" ng-class="{'disabled strikeout':filter.disabled}">
                                 <div ng-class="{'exclude-filter':filter.excludeResult}">
                                     <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
-                                    <span ng-bind="filter.title"></span>
+                                    <strong ng-bind="filter.title"></strong>
                                     <span class="fa fa-chevron-right pull-right"></span>    
                                     <!-- <i class="fa fa-chevron-right pull-right" style="margin-top:5px" aria-hidden="true"></i>           -->
                                 </div>
@@ -95,7 +95,7 @@
                                             filter="true" ng-change="recordSelected(item, filter)" skip-government="true" list-view="true">
                                             <select-records>
                                                 <div class="color-darkgrey not" style="cursor: pointer;" ng-click="$parent.openAddDialog();">
-                                                    <span ng-bind="filter.title"></span>
+                                                    <strong ng-bind="filter.title"></strong>
                                                     <span  class="fa fa-chevron-right pull-right"></span> 
                                                 </div>
                                             </select-records>
@@ -152,7 +152,7 @@
         <div class="modal-header">
             <h3 class="modal-title">
                 <!-- {{schema|schemaName}} filter options for  -->
-                <span ng-bind="filter.title"></span>
+                <strong ng-bind="filter.title"></strong>
             </h3>
         </div>
         <div class="modal-body">	

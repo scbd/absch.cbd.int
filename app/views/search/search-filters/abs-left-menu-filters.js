@@ -7,8 +7,7 @@ export const absLeftMenuFilters = {
 			"field": "text_EN_txt"
 		},
 		{
-			"type": "thesaurus",
-			"term": "cnaJurisdictions",
+			"type": "yesNo",
 			"title": absFilters.contactType,
 			"field": "type_s"
 		},
@@ -57,6 +56,11 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "yesNo",
+			"title": absFilters.showCNAsindicatedAsTheOnlyCNAIntheCountry,
+			"field": "isResponsibleForAll_b"
+		},
+		{
+			"type": "yesNo",
 			"title": absFilters.authorityIsResponsibleForAll,
 			"field": "isResponsibleForAll_b"
 		}
@@ -70,7 +74,14 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "status",
 			"title": absFilters.measureLegalStatus,
-			"field": "status_s"
+			"field": "status_s",
+			"otherTerm":false
+		},
+		{
+			"type": "thesaurus",
+			"term": "typeOfDocuments",
+			"title": absFilters.typeOfDocuments,
+			"field": "type_s"
 		},
 		{
 			"type": "thesaurus",
@@ -115,7 +126,22 @@ export const absLeftMenuFilters = {
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
 			"field": "jurisdiction_s"
+		},
+		{
+		"type": "yesNo",
+		"title": absFilters.doesTheApplicantNeedToProvideAnyDocuments,
+		"field": "hasApplicationDocuments_b"
+		},
+		{
+		"type": "yesNo",
+		"title": absFilters.areThereApplicationFees,
+		"field": "hasApplicationFees_b"
 		}
+		// ,{
+		// "type": "date",
+		// "title": absFilters.howLongDoesApplicationProcessTake,
+		// "field": "duration"
+		// }
 	],
 	"absNationalModelContractualClause" : [{
 		"type": "freeText",
@@ -124,8 +150,13 @@ export const absLeftMenuFilters = {
 		},
 		{
 			"type": "thesaurus",
-			"term": "absSubjects",
+			"term": "mccKeywords",
 			"title": absFilters.keywords,
+			"field": "keywords_ss"
+		},{
+			"type": "thesaurus",
+			"term": "absSubjects",
+			"title": absFilters.cbiTAkeyAreas,
 			"field": "thematicAreas_ss"
 		},
 		{
@@ -137,7 +168,7 @@ export const absLeftMenuFilters = {
 	],
 	"absPermit" : [{
 		"type": "freeText",
-		"title": absFilters.freeText,
+		"title": absFilters.IRRCFreeText,
 		"field": "text_EN_txt"
 		},
 		{
@@ -187,6 +218,26 @@ export const absLeftMenuFilters = {
 			"title": absFilters.absPermitReferencedByCPC,
 			"field": "referencedByCPC_ss"
 		}
+		,
+		{
+			"type": "yesNo",
+			"title": absFilters.informationIsConfidential,
+			"field": "providersConfidential_b"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact authority)",
+				"sort":"title_s"
+			},
+			"title": absFilters.theProvider,
+			"field": "providers_s"
+		},
+		{
+			"type": "yesNo",
+			"title": absFilters.SubjectMatter,
+			"field": "subjectMatterConfidential_b"
+		}
 	],
 	"database" : [{
 		"type": "freeText",
@@ -204,13 +255,19 @@ export const absLeftMenuFilters = {
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
 			"field": "jurisdiction_s"
-		},
-		{
-			"type": "thesaurus",
-			"term": "responsibleFunctions",
-			"title": absFilters.jurisdiction,
-			"field": "responsibleFunctions_ss"
 		}
+		// ,{
+		// 	"type": "thesaurus",
+		// 	"term": "valueChainStage",
+		// 	"title": absFilters.informationCollectedReceived,
+		// 	"field": "valueChainStage_ss"
+		// },
+		// {
+		// 	"type": "thesaurus",
+		// 	"term": "responsibleFunctions",
+		// 	"title": absFilters.otherResponsibilities,
+		// 	"field": "responsibleFunctions_ss"
+		// }
 		
 	],
 	"absCheckpointCommunique" : [{
@@ -221,16 +278,68 @@ export const absLeftMenuFilters = {
 		{
 			"type": "solrRecords",
 			"query": {
+				"q": "schema_s:(absCheckpoint)",
+				"sort":"title_s"
+			},
+			"title": absFilters.IRRCCollectedReceivedInformation,
+			"field": "absCheckpoints_ss"
+		}, 
+		{
+			"type": "solrRecords",
+			"query": {
 				"q": "schema_s:(absPermit)",
 				"sort":"title_s"
 			},
 			"title": absFilters.relatedIRCC,
 			"field": "absIRCCs_ss"
-		},		
+		},  
+		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": absFilters.sourceGeneticResourceOrATK,
+			"field": "sourceCountries_ss"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(entityWhoGrantedPIC)",
+				"sort":"title_s"
+			},
+			"title": absFilters.personEntityWhoGrantedConsent,
+			"field": "entityWhoGrantedPIC_ss"
+		}, 
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(personsAtCheckpoint)",
+				"sort":"title_s"
+			},
+			"title": absFilters.personsAtCheckpointUtilizing,
+			"field": "personsAtCheckpoint_ss"
+		}, 
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(entityToWhomPICGranted)",
+				"sort":"title_s"
+			},
+			"title": absFilters.personEntityWhoGrantedConsentGranted,
+			"field": "entityToWhomPICGranted_ss"
+		},  
 		{
 			"type": "date",
 			"title": absFilters.cpcAccessDate,
 			"field": "dateOfAccess_dt"
+		},
+		{
+			"type": "date",
+			"title": absFilters.cpcInformationCollectedDateFrom,
+			"field": "dateCollectedFrom_dt"
+		},
+		{
+			"type": "date",
+			"title": absFilters.cpcInformationCollectedDateTo,
+			"field": "dateCollectedTo_dt"
 		},
 		{
 			"type": "thesaurus",
@@ -272,8 +381,7 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "aichiTargets",
 			"title": absFilters.aichiTargets,
-			"field": "bchSubjects_ss",
-			"relatedField":"bchSubjects_REL_ss"
+			"field": "aichiTargets_ss"
 		},
 		{
 			"type" : "customListFn",

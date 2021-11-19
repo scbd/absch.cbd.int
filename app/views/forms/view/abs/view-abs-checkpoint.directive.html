@@ -36,13 +36,13 @@
 		<div ng-show="document.responsibilities || document.jurisdiction ||
 			document.jurisdictionName || document.responsibleFunctions || document.valueChainStage">
 			<legend name="Responsibilities">Checkpoint Responsibilities</legend>
-			<div ng-show="document.responsibleFunctions">
+			<!-- <div ng-show="document.responsibleFunctions">
 				<label>Responsible functions</label>
 				<div  class="km-value" compare-val>
 					<view-terms-hierarchy  ng-model="document.responsibleFunctions" locale="locale"
 						term-domain="responsibleFunctions" on-terms-loaded="onResponsibleFunctionsTerms(terms)"></view-terms-hierarchy>
 				</div>
-			</div>
+			</div> -->
 	
 			<div ng-if="document.valueChainStage">
 				<label>Stage at which information is collected or received</label>
@@ -67,14 +67,14 @@
 					</ul>
 				</div>
 			</div>
-			<div  ng-show="document.inquiryContact">
+			<!-- <div  ng-show="document.inquiryContact">
 				<label>Contact information for inquires related to the information gathered or the functioning of this checkpoint</label>
 				<div compare-val="inquiryContact">
 					<div class="km-value"  ng-repeat="contact in document.inquiryContact" >
 						<span view-record-reference ng-model="contact" locale="locale"></span>
 					</div>
 				</div>
-			</div>
+			</div> -->
 			<!--<div ng-show="document.jurisdictionName">
 				<label ng-show="isSubNational()">Name of the sub-national jurisdiction</label>
 				<label ng-show="isCommunity()">Name of the community jurisdiction</label>
