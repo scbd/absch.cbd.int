@@ -17,13 +17,13 @@
                                 <i class="fa fa-cog color-white" aria-hidden="true"></i>
                             </button>
                             <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
-                                <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
+                                <!-- <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true">
                                     <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
                                 <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li> -->
                                 <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
                                     <i class="fa fa-times-circle" aria-hidden="true"></i> Clear all filters</a></li>
-                                <li><a rel="noopener" href="#">
+                                <li><a rel="noopener" href="#" ng-click="removeSchema(schema)">
                                     <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
                             </ul>
                         </div>

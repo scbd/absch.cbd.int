@@ -692,6 +692,10 @@ import 'angular-vue'
                         $scope.searchFilters[filterKey] = filterInfo;
                     };
 
+                    function removeGlobalFilter(schema){
+                        $scope.removeFilter({id:schema})
+                    }
+
                     function getSearchFilters(type, fn) {
                         if (!type)
                             return $scope.searchFilters;
@@ -1447,6 +1451,7 @@ import 'angular-vue'
 
                     this.getSearchFilters         = getSearchFilters        ;
                     this.addFilter                = addFilter               ;
+                    this.removeGlobalFilter       = removeGlobalFilter      ;
                     this.getFilter                = getFilter               ;
                     this.getSchemaFieldMapping    = getSchemaFieldMapping   ;
                     this.onLeftFilterUpdate       = onLeftFilterUpdate      ;

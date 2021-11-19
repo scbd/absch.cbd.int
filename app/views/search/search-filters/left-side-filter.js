@@ -141,7 +141,10 @@ import 'views/forms/edit/document-selector'
                             $element.find('[data-bs-toggle="tooltip"]').tooltip();
                         }, 0);                      
                     }
-
+                    $scope.removeSchema = (schema)=>{
+                        console.log($scope.leftMenuFilters)
+                        searchDirectiveCtrl.removeGlobalFilter(schema);
+                    }
                     $scope.removeSchemaFilters = function (option, filter) {
                         //for some reason the tooltip currently focused is not removed on removeSchemaFilters evt, so remove all tooltip since 
                         // it will be the only tooltip open. 
