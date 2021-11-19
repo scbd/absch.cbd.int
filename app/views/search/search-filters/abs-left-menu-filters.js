@@ -297,7 +297,7 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "countries",
 			"title": absFilters.sourceGeneticResourceOrATK,
-			"field": "sourceCountries"
+			"field": "sourceCountries_ss"
 		},
 		{
 			"type": "solrRecords",
@@ -381,8 +381,7 @@ export const absLeftMenuFilters = {
 			"type": "thesaurus",
 			"term": "aichiTargets",
 			"title": absFilters.aichiTargets,
-			"field": "bchSubjects_ss",
-			"relatedField":"bchSubjects_REL_ss"
+			"field": "aichiTargets_ss"
 		},
 		{
 			"type" : "customListFn",
