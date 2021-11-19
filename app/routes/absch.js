@@ -80,14 +80,14 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/register/CPP/:identifier/edit',                     { ...mapView(angularViewWrapper),                    "label":routesLabels.edit,"param":"true","resolveController":true,"documentType":"CPP","resolve":{ ...abschRouteUrls.register_CPP_edit,                                "securized":securize(null,true,true)}}).
   whenAsync('/register/ORG/:identifier/edit',                     { ...mapView(angularViewWrapper),                    "label":routesLabels.edit,"param":"true","resolveController":true,"documentType":"ORG","resolve":{ ...abschRouteUrls.register_ORG_edit,                                "securized":securize(null,true,true)}}).
   whenAsync('/register/NMCC/:identifier/edit',                    { ...mapView(angularViewWrapper),                    "label":routesLabels.edit,"param":"true","resolveController":true,"documentType":"NMCC","resolve":{ ...abschRouteUrls.register_NMCC_edit,                               "securized":securize(null,true,true)}}).
-  whenAsync('/guides',                                            {"redirectTo":"/about/guides"}). 
+  whenAsync('/guides',                                            {"redirectTo":"/kb/tags/getting-help/Step-by-step-guides/5bc4d04bd70fbc00017d1fd6"}). 
   whenAsync('/faqs',                                              {"redirectTo":"/about/faqs"}). 
   whenAsync('/commonformats',                                     {"redirectTo":"/about/offline"}). 
   whenAsync('/common-formats',                                    {"redirectTo":"/about/offline"}). 
   whenAsync('/nationalreport',                                    {"redirectTo":"/about/interimReport"}). 
   whenAsync('/help',                                              {"redirectTo":"/about"}). 
   whenAsync('/help/faq',                                          {"redirectTo":"/about/faqs"}). 
-  whenAsync('/help/guides',                                       {"redirectTo":"/about/guides"}). 
+  whenAsync('/help/guides',                                       {"redirectTo":"/kb/tags/getting-help/Step-by-step-guides/5bc4d04bd70fbc00017d1fd6"}). 
   whenAsync('/help/about',                                        {"redirectTo":"/about"}). 
   whenAsync('/help/national-report',                              {"redirectTo":"/about/interimReport"}). 
   whenAsync('/help/guides/:guideId?',                             {"redirectTo":"/about/guide/:guideId?"}). 
