@@ -132,21 +132,21 @@ import 'views/directives/record-options';
 								   document.jurisdiction.identifier == "DEEEDB35-A34B-4755-BF77-D713017195E3";
 						};
 
-						$scope.onResponsibleFunctionsTerms = function(terms) {
-							if(($scope.document||{}).responsibleFunctions){
-								_.forEach(terms, function(item){
-									if(item.broaderTerms.length == 0 || item.broaderTerms == []){
-										var parent =_.find($scope.document.responsibleFunctions, {identifier: item.identifier});
-										if(parent){
-											terms = _.filter(terms, function(t){
-												return !_.includes(item.narrowerTerms, t.identifier)
-											})
-										}
-									}
-								});
-								return terms;
-							}
-						};
+						// $scope.onResponsibleFunctionsTerms = function(terms) {
+						// 	if(($scope.document||{}).responsibleFunctions){
+						// 		_.forEach(terms, function(item){
+						// 			if(item.broaderTerms.length == 0 || item.broaderTerms == []){
+						// 				var parent =_.find($scope.document.responsibleFunctions, {identifier: item.identifier});
+						// 				if(parent){
+						// 					terms = _.filter(terms, function(t){
+						// 						return !_.includes(item.narrowerTerms, t.identifier)
+						// 					})
+						// 				}
+						// 			}
+						// 		});
+						// 		return terms;
+						// 	}
+						// };
 
 					}]
 				};

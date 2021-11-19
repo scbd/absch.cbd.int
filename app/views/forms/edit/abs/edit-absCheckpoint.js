@@ -33,7 +33,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
                     return jurisdictions;
                 });
             },
-            responsibleFunctions: function() {return thesaurusService.getDomainTerms('responsibleFunctions')},
+            // responsibleFunctions: function() {return thesaurusService.getDomainTerms('responsibleFunctions')},
             valueChainStage: function() {return thesaurusService.getDomainTerms('valueChainStage')},
         });
 
@@ -55,12 +55,12 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
             }
             return $scope.onBuildDocumentSelectorQuery(queryOptions);
         }
-        $scope.onResponsibleFunctionsChange = function(value){
-            $scope.hasPointToCollect = _.find(value||[], {identifier: "022C5155-1859-45AA-B7D8-4F67E4334626"});
-            if(!$scope.hasPointToCollect){
-                $scope.document.valueChainStage = undefined;
-            }
-        }
+        // $scope.onResponsibleFunctionsChange = function(value){
+        //     $scope.hasPointToCollect = _.find(value||[], {identifier: "022C5155-1859-45AA-B7D8-4F67E4334626"});
+        //     if(!$scope.hasPointToCollect){
+        //         $scope.document.valueChainStage = undefined;
+        //     }
+        // }
 
         //==================================
         //
@@ -121,7 +121,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
 
         $scope.setDocument({}, true)
         .then(function (doc) {
-            if(doc.responsibleFunctions)
-            $scope.onResponsibleFunctionsChange(doc.responsibleFunctions)
+            // if(doc.responsibleFunctions)
+            // $scope.onResponsibleFunctionsChange(doc.responsibleFunctions)
         });
     }];
