@@ -22,7 +22,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.schemas          = realm.schemas        
             $scope.languages        = commonjs.languages;
             $scope.Math             = window.Math;
-            $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint');
+            $scope.nationalSchemas  = _.without(realm.nationalSchemas, 'contact', 'focalPoint', 'absMeasureStatus');
             $scope.referenceSchemas = _.without(realm.referenceSchemas, 'capacityBuildingResource');
             $scope.topRecords       = {};
             $scope.user             = $rootScope.user;
