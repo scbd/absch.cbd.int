@@ -11,14 +11,8 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
 #link-content p {padding:0;margin:0;}
 
 </style>
-        <div class=" container">
-
-            <div  id="guides-content" ng-if="show=='guides'" style="margin-top:30px;">
-                <article-guides type="{{type}}" locale="{{locale}}"  title="Step-by-step guide" show-faqs="true" on-finish-loading="setMetaTags(title)"></article-guides>
-            </div>
-
-            
-                <div class="row" ng-if="show!='guides'">
+        <div class="container">
+                <div class="row">
                   <div class="col-sm-3 col-xs-12" style="background-color: #f9f9f9;">
                     <br>
                     <input style="width:100%;border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" ng-model="searchText" placeholder="Search this page "> 
@@ -34,7 +28,7 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                             <div ng-bind-html="article.content | lstring:locale | toTrusted"></div>
                          </div>
 
-                        <div  id="faq-content" ng-if="show=='faqs'" >
+                        <div  id="faq-content" ng-if="show=='faqs'">
                             <br>
                             <article-search admin-tags="{{faqs}}" locale="{{locale}}"  title="Frequently Asked Questions (FAQs)" search="showSearch"></article-search>
                         </div>
@@ -53,6 +47,6 @@ p.list-title{ margin-bottom:0;padding-bottom:0;}
                         </div>
 
                     </div>
-                </div> 
+                </div>
         </div>
 </div>
