@@ -36,7 +36,7 @@ app.directive("articleGuides", [ function () {
           function loadArticles(str){
             var ag = [];
             
-            ag.push({"$match":{"adminTags.title.en":{"$in":[encodeURIComponent("ABSCH-Guide"), "ABSCH-Guide-"  + $scope.type.toUpperCase() ]}}});
+            ag.push({"$match":{"adminTags.title.en":{"$in":[encodeURIComponent("absch-guide"), "absch-guide-"  + $scope.type.toLowerCase() ]}}});
             ag.push({"$project" : {"title":1, "summary":1,"content":1,"meta":1, "adminTags":1}});
             
             var qs = {
@@ -50,12 +50,12 @@ app.directive("articleGuides", [ function () {
 
                   var admintags = JSON.stringify(data[i].adminTags);
 
-                  if(admintags.indexOf("ABSCHIntroduction") > 0 ){
+                  if(admintags.indexOf("abschintroduction") > 0 ){
                     $scope.introABSCH = data[i];
                     continue;
                   }
                   
-                  if(admintags.indexOf("Requirements") >  0){
+                  if(admintags.indexOf("requirements") >  0){
                     $scope.requirements = data[i];
                     continue;
                   }
@@ -65,34 +65,34 @@ app.directive("articleGuides", [ function () {
                     continue;
                   }
 
-                  if(admintags.indexOf("Introduction") > 0 && admintags.indexOf($scope.type.toUpperCase()) > 0){
+                  if(admintags.indexOf("introduction") > 0 && admintags.indexOf($scope.type.toLowerCase()) > 0){
                     $scope.intro = data[i];
                     continue;
                   }
 
 
-                  if(admintags.indexOf("SignIn") > 0){
+                  if(admintags.indexOf("signin") > 0){
                     $scope.signIn = data[i];
                     continue;
                   }
 
-                  if(admintags.indexOf("Dashboard") > 0){
+                  if(admintags.indexOf("dashboard") > 0){
                     $scope.dashboard = data[i];
                     continue;
                   }
                  
-                  if(admintags.indexOf("Review") > 0){
+                  if(admintags.indexOf("review") > 0){
                     $scope.review = data[i];
                     continue;
                   }
 
-                  if(admintags.indexOf(("ABSCH-Guide-" + $scope.type.toUpperCase())) > 0){
+                  if(admintags.indexOf(("absch-guide-" + $scope.type.toLowerCase())) > 0){
                     $scope.format = data[i];
                     $scope.onFinishLoading({title:data[i].summary[$scope.locale]})
                     continue;
                   }
 
-                  if(admintags.indexOf("Publish") > 0){
+                  if(admintags.indexOf("publish") > 0){
                     $scope.publish = data[i];
                     continue;
                   }
