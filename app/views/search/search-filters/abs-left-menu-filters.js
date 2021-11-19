@@ -7,8 +7,7 @@ export const absLeftMenuFilters = {
 			"field": "text_EN_txt"
 		},
 		{
-			"type": "thesaurus",
-			"term": "cnaJurisdictions",
+			"type": "yesNo",
 			"title": absFilters.contactType,
 			"field": "type_s"
 		},
@@ -219,6 +218,26 @@ export const absLeftMenuFilters = {
 			"title": absFilters.absPermitReferencedByCPC,
 			"field": "referencedByCPC_ss"
 		}
+		,
+		{
+			"type": "yesNo",
+			"title": absFilters.informationIsConfidential,
+			"field": "providersConfidential_b"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(contact authority)",
+				"sort":"title_s"
+			},
+			"title": absFilters.theProvider,
+			"field": "providers_s"
+		},
+		{
+			"type": "yesNo",
+			"title": absFilters.SubjectMatter,
+			"field": "subjectMatterConfidential_b"
+		}
 	],
 	"database" : [{
 		"type": "freeText",
@@ -236,19 +255,19 @@ export const absLeftMenuFilters = {
 			"term": "cnaJurisdictions",
 			"title": absFilters.jurisdiction,
 			"field": "jurisdiction_s"
-		},
-		{
-			"type": "thesaurus",
-			"term": "valueChainStage",
-			"title": absFilters.informationCollectedReceived,
-			"field": "valueChainStage"
-		},
-		{
-			"type": "thesaurus",
-			"term": "responsibleFunctions",
-			"title": absFilters.addFilterForResponsibilities,
-			"field": "responsibleFunctions_ss"
 		}
+		// ,{
+		// 	"type": "thesaurus",
+		// 	"term": "valueChainStage",
+		// 	"title": absFilters.informationCollectedReceived,
+		// 	"field": "valueChainStage_ss"
+		// },
+		// {
+		// 	"type": "thesaurus",
+		// 	"term": "responsibleFunctions",
+		// 	"title": absFilters.otherResponsibilities,
+		// 	"field": "responsibleFunctions_ss"
+		// }
 		
 	],
 	"absCheckpointCommunique" : [{
@@ -259,6 +278,15 @@ export const absLeftMenuFilters = {
 		{
 			"type": "solrRecords",
 			"query": {
+				"q": "schema_s:(absCheckpoint)",
+				"sort":"title_s"
+			},
+			"title": absFilters.IRRCCollectedReceivedInformation,
+			"field": "absCheckpoints_ss"
+		}, 
+		{
+			"type": "solrRecords",
+			"query": {
 				"q": "schema_s:(absPermit)",
 				"sort":"title_s"
 			},
@@ -266,9 +294,52 @@ export const absLeftMenuFilters = {
 			"field": "absIRCCs_ss"
 		},  
 		{
+			"type": "thesaurus",
+			"term": "countries",
+			"title": absFilters.sourceGeneticResourceOrATK,
+			"field": "sourceCountries"
+		},
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(entityWhoGrantedPIC)",
+				"sort":"title_s"
+			},
+			"title": absFilters.personEntityWhoGrantedConsent,
+			"field": "entityWhoGrantedPIC_ss"
+		}, 
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(personsAtCheckpoint)",
+				"sort":"title_s"
+			},
+			"title": absFilters.personsAtCheckpointUtilizing,
+			"field": "personsAtCheckpoint_ss"
+		}, 
+		{
+			"type": "solrRecords",
+			"query": {
+				"q": "schema_s:(entityToWhomPICGranted)",
+				"sort":"title_s"
+			},
+			"title": absFilters.personEntityWhoGrantedConsentGranted,
+			"field": "entityToWhomPICGranted_ss"
+		},  
+		{
 			"type": "date",
 			"title": absFilters.cpcAccessDate,
 			"field": "dateOfAccess_dt"
+		},
+		{
+			"type": "date",
+			"title": absFilters.cpcInformationCollectedDateFrom,
+			"field": "dateCollectedFrom_dt"
+		},
+		{
+			"type": "date",
+			"title": absFilters.cpcInformationCollectedDateTo,
+			"field": "dateCollectedTo_dt"
 		},
 		{
 			"type": "thesaurus",
