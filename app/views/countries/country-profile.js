@@ -60,7 +60,7 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
             await import('~/views/countries/country-map')
             $scope.$apply(function(){
                 var mapElement = $element.find('#Jumbotron');
-                $compile(mapElement.append('<country-map  hide-title="1" hide-details="1" zoom-to="{{code}}" ></country-map>'))($scope);
+                $compile(mapElement.append('<country-map  hide-title="1" zoom-to="{{code}}" ></country-map>'))($scope);
                 $scope.loadingMap = false;                    
             });
         });

@@ -20,7 +20,6 @@ import './directives/homepin-popup-abs';
       scope: {
         zoomTo: '@zoomTo',
         hideTitle: '@hideTitle',
-        hideDetails: '@hideDetails',
         mapHeight: '@mapHeight'
       },
       link: function($scope, $element, $attr, requiredDirectives) {
@@ -161,10 +160,6 @@ import './directives/homepin-popup-abs';
         if($scope.hideTitle)
           $scope.showTitle = false;
 
-        $scope.showDetails = true; 
-          if($scope.hideDetails)
-            $scope.showDetails = false;
-
         var map = AmCharts.makeChart( "chartdiv", mapOptions );
         
         ////////////////scope functions///////////////////
@@ -227,7 +222,7 @@ import './directives/homepin-popup-abs';
                 })
                 map.addListener("clickMapObject", function(evt){
 
-                  if($scope.zoomTo){
+                  if($scope.zoomTo!=undefined){
                     var url = '/countries/'+(exceptionRegionMapping[evt.mapObject.id]||evt.mapObject.id);
                     $scope.$apply(function(){$location.url(url)});
                   }
