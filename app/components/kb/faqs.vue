@@ -91,7 +91,7 @@
 
 				this.faqCount = 0;
 				this.faqs = [];
-				const realmTag = this.$realm.is('bch') ? 'bch' : 'abs';
+				const realmTag = this.$realm.is('BCH') ? 'bch' : 'abs';
 				const q = { 
 					$and : [
 						{ adminTags : { $all : [realmTag, 'faq']}},
