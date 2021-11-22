@@ -19,18 +19,18 @@
         <div  ng-if="!loading && (type=='announcements' || type=='help')">
             <div class="row" ng-if="!articleData" >
                 <div ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
-                    <div ng-click="details(article);" class="card"  ng-class="{'article-open':showArticle}" >
-
-                        <span class="article-heading">
-                            <span ng-bind="article.title | lstring:locale"></span>
-                        </span>
-                        <p class="article-info">
-                            <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
-                            <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
-                        </p>
-
+                    <div ng-class="{'article-open':showArticle}" >
+                        <div class="card" ng-click="details(article);">
+                            <span class="article-heading">
+                                <span ng-bind="article.title | lstring:locale"></span>
+                            </span>
+                            <p class="article-info">
+                                <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span>
+                                <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span>
+                            </p>
+                        </div>
                         <div class="footer">
-                            <a rel="noopener" ng-href="/articles/{{article.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
+                            <a rel="noopener" ng-href="/articles/{{article._id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
                         </div>
                     </div>
                 </div>
