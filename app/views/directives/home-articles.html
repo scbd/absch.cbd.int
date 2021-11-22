@@ -1,7 +1,7 @@
 ﻿<div id="Announcements">
 
     <div class=" bs5 row row-cols-1 row-cols-md-2 row-cols-lg-3">
-        <div class="bs5 col" ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:6">
+        <div class="bs5 col" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
             <div style="height:256px" class="bs5 card m-3 m-lg-3 position-relative shadow" style="cursor: pointer;">
                 <span class="bs5 badge position-absolute top-0 end-0"><span
                         ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>

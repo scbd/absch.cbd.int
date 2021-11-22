@@ -12,8 +12,10 @@ export default ['$scope','$rootScope',
     function ($scope, $rootScope) {
 
         $scope.recordCount = 4;
+        $scope.announcementCounts = 3;
         if($rootScope.deviceSize == 'lg'){
           $scope.recordCount = 8;
+          $scope.announcementCounts = 6;
         }
         $scope.locale = 'en';
         var today= moment.utc();
