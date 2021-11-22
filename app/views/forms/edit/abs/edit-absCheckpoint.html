@@ -162,6 +162,7 @@
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="contactsToInform" caption="Please select any national authorities whom you wish to send a copy of the communiqué">
                                                 <div document-selector on-build-query="onContactQuery(searchText)"
+                                                     ng-disabled="!document.government.identifier"
                                                      ng-model="document.contactsToInform"
                                                      question="contactsToInform" allow-new="true" allow-new-schema="contact"></div>
                                             </div>
