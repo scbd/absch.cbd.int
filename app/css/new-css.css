@@ -410,3 +410,6 @@ max-width: 90%;
     margin-top: -15px;
     margin-left: -10px;
 }
+.new-css-modal-header {
+    min-height: 4rem !important;
+}
