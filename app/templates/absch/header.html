@@ -101,7 +101,7 @@
                             <li ng-repeat="c in countries | filter:startsWith track by c.code">
                                 <a rel="noopener" translation-url  class="bs5 dropdown-item" ng-href="/countries/{{::c.code|encodeURIComponent}}">
                                     <span class="bold"
-                                        ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
+                                        ng-class="{'color-green': c.isParty, 'color-non-party':!c.isParty}">
                                         {{::c.name | lstring:locale}}
                                     </span>
                                 </a>
