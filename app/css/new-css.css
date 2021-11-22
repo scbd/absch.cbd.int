@@ -284,7 +284,10 @@ body.modal-open .modal-backdrop.fade.show{
     background: #00405C;
     text-transform: uppercase;
 }
-
+.new-explore-btn-abs{
+    background: #1FA65D;
+    text-transform: uppercase;
+}
 .new-color-red{
     color:#DA3B01;
 }
