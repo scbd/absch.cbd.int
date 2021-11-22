@@ -28,7 +28,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
 
     const git       = require('./scripts/git-file-info');
     const baseDir   = path.resolve('./');
-    const languages = ['en'];//['ar', 'en', 'fr', 'es', 'ru', 'zh'];// 
+    const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];// ['en', 'fr', 'es',];//
     const enDir     = 'app';
     const i18nDir   = 'i18n';
     const buildDir  = 'i18n-build';
@@ -53,7 +53,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
     ///     copy files to en folder i18n
     ///////////////////////////////////////////////////
     log('copy files to en folder i18n');
-    await copyFiles(baseDir, enDir, ['en'], buildDir, '**/*.{html,json,ejs}');
+    await copyFiles(baseDir, enDir, ['en'], buildDir, '**/*.{html,json,ejs,vue}');
 
     //replace .json file extension  with .json.js
     // await changeJsonToJsExt(baseDir, buildDir);
@@ -64,7 +64,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
     log('Begin touch files');
     var fileModifiedDates = {};
     languages.forEach(e=>{fileModifiedDates[e]={};})
-    const allApplicationFiles = (await asyncGlob('**/*.{html,json,ejs}', { cwd: path.join(baseDir, buildDir) }))
+    const allApplicationFiles = (await asyncGlob('**/*.{html,json,ejs,vue}', { cwd: path.join(baseDir, buildDir) }))
     .map(f=>{
         return f.replace(/^(ar|fr|es|ru|zh)\//, `${i18nDir}/$1/`)
         .replace(/^en\//, '')

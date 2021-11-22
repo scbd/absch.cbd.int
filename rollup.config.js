@@ -66,7 +66,7 @@ export default async function() {
   }
   else{ //en files only
     //copy ejs files to dist folder
-    await copyFiles(process.cwd(), 'app', ['en'], 'dist', '**/*.ejs');
+    await copyFiles(process.cwd(), 'app', languages, 'dist', '**/*.ejs');
       
     //copy pdfviewer files //TODO: find best way, for now it can be in /app to avoid duplication
     // await copyFiles(process.cwd(), 'app', languages, 'dist', '**/views/pdf-viewer/pdfjs/**');
@@ -100,10 +100,15 @@ function bundle(relativePath, baseDir='i18n-build') {
     requireSourcemap=false;
  
   //when running for local development add en folder path else the i18n-build has good path so need for adjustments
-  let enFolder='en/app'; 
-  if(!isLocalDev)
+  let enFolder='en/app';
+  let absolutePath = '';
+  if(!isLocalDev){
+    let language = relativePath.match(/(ar|en|fr|es|ru|zh)\//)
     enFolder = '';
-
+    if(language.length)
+      absolutePath = `/i18n-build/${language[1]}`; 
+  } 
+ 
   return {
     input : path.join(baseDir||'', relativePath),
     output: [{
@@ -118,7 +123,7 @@ function bundle(relativePath, baseDir='i18n-build') {
     external: externals,
     plugins : [
       alias({ entries : [
-          { find: /^~\/(.*)/, replacement:`${process.cwd()}/app/$1` },
+          { find: /^~\/(.*)/, replacement:`${process.cwd()}${absolutePath}/app/$1` },
           { find: /^json!(.*)/, replacement:`$1` },
           { find: /^text!(.*)/, replacement:`$1` },
         ] 
