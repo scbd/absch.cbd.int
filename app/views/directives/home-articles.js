@@ -7,14 +7,17 @@ import _ from 'services/main';
                 replace: true,
                 template: template,
                 scope   : {
-                    tags: '@?'
+                    tags: '@?',
+                    counts: '@'
                 },
                 controller: ['$scope', '$http','$q', '$filter', '$location', 'articlesService',
                     function($scope, $http, $q, $filter, $location, articlesService) {
                     
                         $scope.status   = "loading";
                         $scope.error    = null;
-
+                        if (!$scope.counts) {
+                            $scope.counts = 20;
+                        }
                         $scope.articles = [];
 
                         loadArticles();
@@ -23,7 +26,7 @@ import _ from 'services/main';
                             var ag = [];
                             ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent($scope.tags||"absch-announcement")}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
-                            ag.push({"$limit":20});
+                            ag.push({ "$limit": parseInt($scope.counts)});
                             ag.push({"$sort": { 'meta.createdOn': -1 }})
                             var qs = {
                               "ag" : JSON.stringify(ag)
