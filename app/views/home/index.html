@@ -81,7 +81,11 @@
 
                     </div>
                 </div>
-            <explore-more-on-click></explore-more-on-click>
+                <div class="cursor-pointer bs5 my-2 my-lg-5 mt-lg-5 p-2 pt-lg-5 text-center hidden-sm hidden-xs">
+                      <a class= "text-decoration-none" ng-click="exploreMore();">
+                        <span class="bs5 display-6 fs-1 rounded  py-3 px-5 color-white new-explore-btn bg-green">Explore the map <i class="fa  fa-arrow-down"></i></span>
+                      </a>
+                </div >
         </div>
     </div>
 
@@ -96,7 +100,9 @@
             <p class="bs5 display-6 pt-5 mt-5 fw-bold">Announcements
                 <hr>
             </p>
-           <home-articles tags="absch-announcement"></home-articles>
+            <div ng-if="announcementCounts">
+                <home-articles tags="absch-announcement" counts="{{announcementCounts}}"></home-articles>
+            </div>
             <div class="bs5 text-end mt-4 new-css-down-margin">
                 <a class="bs5 nav-link fs-4 text-muted fw-bold text-uppercase" href="/kb/tags/absch-announcement/">
                     See more <i class="fa fa-arrow-right"></i> </a>

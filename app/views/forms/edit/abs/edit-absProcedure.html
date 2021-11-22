@@ -145,7 +145,8 @@
                                                 <div km-link name="applicationLinks" ng-model="document.applicationLinks" identifier="document.header.identifier"></div>
                                                 <br>
                                                 <div class=" help-info"> Please provide information on whom the application should be sent to:</div>
-                                                <div document-selector on-build-query="onContactQuery(searchText)" ng-model="document.applicationContacts" question="applicationContacts"
+                                                <div document-selector on-build-query="onContactQuery(searchText)" ng-disabled="!document.government.identifier"
+                                                    ng-model="document.applicationContacts" question="applicationContacts"
                                                          allow-new="true" allow-new-schema="contact"></div>
                                             </div>
                                         </div>
