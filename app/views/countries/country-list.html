@@ -168,7 +168,7 @@
 				<div style="text-align:left;width:30px;display:inline-block;"> <span ng-bind="$index+1"></span> </div>
 
 				<div style="display:inline;">
-					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': country.isParty, 'color-grey color-non-party':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
+					<span style="font-size:18px;font-weight:500;" ng-class="{'color-party': (country.isParty && isBCH), 'color-green': (country.isParty && isABS), 'color-grey color-non-party':!country.isParty, 'color-inbetween': country.isInbetweenParty}">
                                     <span ng-bind="country.name|lstring:locale"></span></span>
 				</div>
 				<div style="margin-left:35px;text-transform:uppercase;font-weight:500;">

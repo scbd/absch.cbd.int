@@ -119,7 +119,7 @@ import 'views/forms/view/abs/view-abs-checkpoint.directive';
             return $scope.sanitizeDocument(document);
         };
 
-        $scope.setDocument({}, true)
+        $scope.setDocument({})
         .then(function (doc) {
             // if(doc.responsibleFunctions)
             // $scope.onResponsibleFunctionsChange(doc.responsibleFunctions)

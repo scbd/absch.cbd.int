@@ -1776,7 +1776,7 @@ white-space: pre-wrap;
     text-transform: uppercase;
 }
 #search-country-group .color-party {
-    background-color: #5F4586!important;
+    background-color: #00405C!important;
     color: #fff!important;
     border: 1px solid #333;
 }
@@ -1806,10 +1806,10 @@ white-space: pre-wrap;
     text-transform: uppercase;
 }
 #government .color-party {
-    color: #5F4586!important;
+    color: #00405C!important;
 }
 #government .color-non-party {
-    color: #333!important;
+    color: #636363!important;
 }
 #government .color-inbetween {
     color: #EC971F!important;
