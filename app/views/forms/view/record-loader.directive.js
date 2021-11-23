@@ -135,10 +135,9 @@ import printFooterTemplate from 'text!./print-footer.html';
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
-							// if(_.includes(['FOCALPOINT', 'NFP'], documentSchema.toUpperCase()))
-							// 	documentID = commonjs.integerToHex(documentID);
-
-							$scope.load(documentID, documentRevision);
+							console.log(documentSchema);
+							const skipRealm = _.includes(['focalpoint', 'nfp'], documentSchema.toLowerCase()) 
+							$scope.load(documentID, documentRevision, skipRealm);
 						}
 					};
 
@@ -154,25 +153,27 @@ import printFooterTemplate from 'text!./print-footer.html';
 					//==================================
 					//
 					//==================================
-					$scope.load = function (identifier, version) {
+					$scope.load = function (identifier, version, skipRealm) {
 
 						$scope.error = undefined;
 						var qDocument;
 						var qDocumentInfo;
 						
 						var config = {};						
+						if(skipRealm)					
+							config.headers = {realm : undefined};
 
 						if (version == 'draft') {
 							qDocument = storage.drafts.get(identifier, undefined, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.drafts.get(identifier, { info: true }, config).then(function (result) { return result.data || result });
 						}
-						else if (version == undefined) {							
-							// config.params = {skipRealmHeader : true};'include-deleted':true
+						else if (version == undefined) {		
+							//'include-deleted':true
 							qDocument = storage.documents.get(identifier, {}, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.documents.get(identifier, { info: true}, config).then(function (result) { return result.data || result });
 						}
 						else {
-							// config.params = {skipRealmHeader : true};'include-deleted':false
+							//'include-deleted':false
 							qDocument = storage.documents.get(identifier + '@' + version, {}, config).then(function (result) { return result.data || result });
 							qDocumentInfo = storage.documents.get(identifier + '@' + version, {info: true }, config).then(function (result) { return result.data || result });
 
@@ -197,7 +198,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 							$scope.error = undefined;
 						}).catch(function (error) {
 							if (error.status == 404 && version != 'draft') {
-								$scope.load(identifier, 'draft');
+								$scope.load(identifier, 'draft', skipRealm);
 								$scope.error = error;
 							}								
 						})
