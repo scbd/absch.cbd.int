@@ -13,13 +13,13 @@
               <li class="article-with-tags-li" v-for="article in articles">
                 <a href="#" @click="goToArticle(article, realmTag)">
 									<span class="article-title">
-										{{article.title[$locale]}}
+										{{article.title|lstring($locale)}}
 									</span>
                   <div v-if="article.content" class="article-summary" @click="goToArticle(article, realmTag)">
-                    {{article.content[$locale]}}
+                    {{article.content|lstring($locale)}}
                   </div>
                   <div v-if="article.summary" class="article-summary" @click="goToArticle(article, realmTag)">
-                    {{article.summary[$locale]}}
+                    {{article.summary|lstring($locale)}}
                   </div>
                 </a>
                 <div class="inner-area">
@@ -47,7 +47,7 @@
 import i18n from '../../locales/en/components/kb.json';
 import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
-import {formatDate} from './filters';
+import {formatDate, lstring} from './filters';
 import articlesMaxin from '../maxin/article';
 
 export default {
@@ -82,7 +82,11 @@ export default {
     filters: {
         dateFormat: function(date) {
             return formatDate(date)
-        }
+        },
+        lstring: function ( text, locale ) {
+            if(!text) return;
+			return lstring(text, locale);
+		}
     },
     methods: {
         tagUrl(tag) {

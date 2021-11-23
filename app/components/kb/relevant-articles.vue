@@ -7,8 +7,8 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <ul>
             <li v-for="article in articles">
-                <a style="display:none" :href="`${articleUrl(article)}`">{{article.title[$locale]}}</a>
-                                <a href="#" @click="goToArticle(article)">{{article.title[$locale]}}</a>
+                <a style="display:none" :href="`${articleUrl(article)}`">{{article.title|lstring($locale)}}</a>
+                                <a href="#" @click="goToArticle(article)">{{article.title|lstring($locale)}}</a>
             </li>
         </ul>
         <div v-if="articles.length<1 && !loading" class="alert alert-warning">
@@ -21,6 +21,7 @@
 import ArticlesApi from './article-api';
 import i18n from '../../locales/en/components/kb.json';
 import articlesMaxin from '../maxin/article';
+import { lstring } from './filters';
 export default {
     name: 'kbRelevantArticles',
     components: {},
@@ -69,6 +70,12 @@ export default {
                 path: this.articleUrl(article)
             });
         },
+    },
+    filters: {
+        lstring: function ( text, locale ) {
+            if(!text) return;
+			return lstring(text, locale);
+        }
     },
     i18n: {
         messages: {
