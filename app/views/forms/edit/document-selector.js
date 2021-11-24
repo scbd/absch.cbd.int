@@ -233,12 +233,12 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 
                 if($scope.selectedDocuments){
                     $scope.selectedDocuments =  _.filter($scope.selectedDocuments, function (doc) {
-                        if(((doc.header||{}).identifier||doc.identifier_s) !== removeRevisionNumber(removeId) ){
+                        if(removeRevisionNumber((doc.header||{}).identifier||doc.identifier_s) !== removeRevisionNumber(removeId) ){
                             return doc;
                         }
                     });
                     $scope.selectedRawDocuments =  _.filter($scope.selectedRawDocuments, function (doc) {
-                        if(doc.identifier_s !== removeRevisionNumber(removeId) ){
+                        if(removeRevisionNumber(doc.identifier_s) !== removeRevisionNumber(removeId) ){
                         return doc;
                         }
                     });
