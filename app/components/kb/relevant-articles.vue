@@ -21,7 +21,7 @@
 import ArticlesApi from './article-api';
 import i18n from '../../locales/en/components/kb.json';
 import articlesMaxin from '../maxin/article';
-import { lstring } from './filters';
+import './filters';
 export default {
     name: 'kbRelevantArticles',
     components: {},
@@ -70,12 +70,6 @@ export default {
                 path: this.articleUrl(article)
             });
         },
-    },
-    filters: {
-        lstring: function ( text, locale ) {
-            if(!text) return;
-			return lstring(text, locale);
-        }
     },
     i18n: {
         messages: {

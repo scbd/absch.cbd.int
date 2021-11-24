@@ -36,7 +36,7 @@
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
     import articlesMaxin from '../maxin/article';
-    import { lstring } from './filters';
+    import './filters';
 
 	export default {
 		name:'kbFaqsList',
@@ -126,13 +126,6 @@
         }
 			},
 		},
-		filters: {
-    
-        	lstring: function ( text, locale ) {
-				if(!text) return;
-				return lstring(text, locale);
-			}
-    	},
 		i18n: { messages:{ en: i18n }}
 	}
 </script>

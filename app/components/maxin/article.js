@@ -11,7 +11,7 @@ export default {
             }
         },
         getUrl(title, id, tag){
-            const urlTitle = title.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+            const urlTitle = title ? title.trim().replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') : undefined;
             if(title && id){
                 return `/kb/tags/${encodeURIComponent(tag)}/${encodeURIComponent(urlTitle)}/${encodeURIComponent(id)}`;
             } else if (title && !id) {

@@ -10,7 +10,7 @@
   <div class="bs5 d-block row-cols-1 row-cols-md-1 ">
     <div class="bs5 col" v-for="record in recordList.slice(0,4)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
-        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
+        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
         <h4><a :href="record.url_ss" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
@@ -26,7 +26,7 @@
    <div class="bs5 d-none d-lg-block row-cols-1 row-cols-md-1">
     <div class="bs5 col" v-for="record in recordList.slice(4,8)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
-        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|dateFormat}}</span>
+        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
         <h4 class="fw-bold"><a :href="record.url_ss" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="bs5 fs-5 new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
@@ -51,7 +51,7 @@
 <script>
     import ArticlesApi  from '../kb/article-api';
 	  import i18n from '../../locales/en/components/export.json';
-    import {formatDateOnly} from "../kb/filters";
+    import "../kb/filters";
 
 	export default {
     props:{
@@ -68,14 +68,9 @@
 		created(){
 			this.articlesApi = new ArticlesApi();
 		},
-        filters: {
-            dateFormat: function ( date ) {
-                return formatDateOnly(date)
-            }
-        },
-        mounted() {
-            this.records();
-        },
+    mounted() {
+        this.records();
+    },
     methods:{
 
       async records()

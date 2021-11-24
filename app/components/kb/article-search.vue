@@ -47,7 +47,7 @@
 import i18n from '../../locales/en/components/kb.json';
 import paginate from './pagination.vue';
 import ArticlesApi from './article-api';
-import {formatDate, lstring} from './filters';
+import './filters';
 import articlesMaxin from '../maxin/article';
 
 export default {
@@ -78,15 +78,6 @@ export default {
         }
         this.realmTag = this.$realm.is('BCH') ? 'bch' : 'abs';
         this.loadArticles(1);
-    },
-    filters: {
-        dateFormat: function(date) {
-            return formatDate(date)
-        },
-        lstring: function ( text, locale ) {
-            if(!text) return;
-			return lstring(text, locale);
-		}
     },
     methods: {
         tagUrl(tag) {

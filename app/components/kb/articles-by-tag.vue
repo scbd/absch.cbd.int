@@ -56,7 +56,7 @@
 import paginate from './pagination.vue';
 import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
-import {formatDate, lstring} from './filters';
+import './filters';
 import popularTags from './popular-tags.vue';
 import articlesMaxin from '../maxin/article';
 
@@ -92,15 +92,6 @@ export default {
             };
             this.tag = tag;
             this.loadArticles(1, tag);
-        }
-    },
-    filters: {
-        dateFormat: function(date) {
-            return formatDate(date)
-        },
-        lstring: function ( text, locale ) {
-            if(!text) return;
-			return lstring(text, locale);
         }
     },
     methods: {

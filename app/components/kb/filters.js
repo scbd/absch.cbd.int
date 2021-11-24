@@ -1,6 +1,5 @@
 import moment from 'moment';
 import Vue from 'Vue';
-import 'app/components/scbd-angularjs-services/services/locale';
 
 export function formatDate(datetime, format) {
     if (format === undefined)
@@ -14,16 +13,10 @@ export function formatMomentDate(datetime, method, arg1, arg2, arg3) {
         return moment.utc(datetime)[method](arg1, arg2, arg3);    
 }
 
-export function formatDateOnly(datetime, format) {
-  if (format === undefined)
-    format = 'DD MMM YYYY';
-
-  return formatMomentDate(datetime, 'format',format);
-}
-
 export function lstring(ltext, locale) {
+  
     if(Number.isInteger(ltext)) //is number to handle generic implementation of NR
-    return ltext;
+      return ltext;
   
     if (!ltext)
       return "";
@@ -66,9 +59,9 @@ function normalizeText(text) {
   return entry;
 }
 
-
 Vue.filter('formatDate'         , formatDate);
 Vue.filter('capitalize'         , val=>val.toUpperCase());
 Vue.filter('encodeURIComponent' , encodeURIComponent);
 Vue.filter('encodeURI'          , encodeURI);
+Vue.filter('lstring'            , lstring)
 
