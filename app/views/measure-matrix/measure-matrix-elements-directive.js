@@ -94,7 +94,7 @@ import 'views/directives/block-region-directive';
                  };
 
 
-
+                 let initialized = false;
                 //==============================
                 //
                 //==============================
