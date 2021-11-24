@@ -85,7 +85,6 @@
 				this.$router.push({path: '/kb'});
 			},
 			tagUrl(tag){
-                console.log(tag)
 				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'');
                 return this.getUrl(tagTitle, undefined, tag);

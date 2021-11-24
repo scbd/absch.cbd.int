@@ -5,57 +5,65 @@ export const categories  =
     "adminTags": [
       "about"
     ],
-    "articles": [
-      {
-        "title": "What is the Biosafety Clearing-House (BCH)?",
-        "identifier": "5ffe49d5261fe900012a1043"
-      },
-      {
-        "title": "BCH benefits for Parties and non-Parties",
-        "identifier": "60b63de7e122760001b1dd90"
-      },
-      {
-        "title": "Modalities of operation of the BCH (Annex to BS-I/3)",
-        "identifier": "5fda2ec88d15b10001fadd3c"
-      },
-      {
-        "title": "Relationship between BCH and the other clearing-houses of the Convention",
-        "identifier": "60b65027e122760001b1ddaa"
-      },
-      {
-        "title": "Categories of information in the BCH",
-        "identifier": "60b667e3e122760001b1ddbb"
-      }
-    ]
-  },
-  {
-    "title": "Getting started",
-    "adminTags": [
-      "getting-started"
-    ],
-    "articles": [
-      {
-        "title": "Signing up for an account",
-        "identifier": "60df91a41d6d9f0001e4541f"
-      },
-      {
-        "title": "Types of users who can submit information in the BCH",
-        "identifier": "5ffe5417261fe900012a104f"
-      },
-      {
-        "title": "BCH National Focal Points",
-        "identifier": "60b64315e122760001b1dd95"
-      },
-      {
-        "title": "Procedure for nominating National Focal Points",
-        "identifier": "5ffe5451261fe900012a1051"
-      },
-      {
-        "title": "National Authorized Users (NAUs)",
-        "identifier": "5ffe552868d1ca0001a71350"
-      }
-    ]
-  },
+  "articles": [
+    {
+      "title": "What is the Biosafety Clearing-House (BCH)?",
+      "identifier": "619c553658029700017ff43b"
+    },
+    {
+      "title": "BCH benefits for Parties and non-Parties",
+      "identifier": "619c55594f1f30000140eeec"
+    },
+    {
+      "title": "Modalities of operation of the BCH (Annex to BS-I/3)",
+      "identifier": "619c553c0c1ff000011c1c22"
+    },
+    {
+      "title": "Relationship between BCH and the other clearing-houses of the Convention",
+      "identifier": "619c553e0c1ff000011c1c24"
+    },
+    {
+      "title": "Categories of information in the BCH",
+      "identifier": "619c553f4f1f30000140eeba"
+    },
+    {
+      "title": "BCH on BCH Forum",
+      "identifier": "619c554e58029700017ff467"
+    }
+  ]
+},
+{
+  "title": "Getting started",
+  "adminTags": [
+    "getting-started"
+  ],
+  "articles": [
+    {
+      "title": "Signing up for an account",
+      "identifier": "619c554258029700017ff447"
+    },
+    {
+      "title": "Types of users who can submit information in the BCH",
+      "identifier": "619c555c58029700017ff475"
+    },
+    {
+      "title": "BCH National Focal Points",
+      "identifier": "619c553d58029700017ff445"
+    },
+    {
+      "title": "Procedure for nominating National Focal Points",
+      "identifier": "619c555d4f1f30000140eef4"
+    },
+    {
+      "title": "National Authorized Users (NAUs)",
+      "identifier": "619c55374f1f30000140eeae"
+    },
+    {
+      "title": "Designating or updating National Authorized Users (NAUs)",
+      "identifier": "619c554558029700017ff44d"
+    }
+  ]
+},
   {
     "title": "Submitting information",
     "adminTags": [
@@ -64,23 +72,27 @@ export const categories  =
     "articles": [
       {
         "title": "Common formats",
-        "identifier": "5ffe56c868d1ca0001a71356"
+        "identifier": "619c55464f1f30000140eec8"
       },
       {
         "title": "Record validation process",
-        "identifier": "5ffe55d068d1ca0001a71354"
+        "identifier": "619c55384f1f30000140eeb0"
       },
       {
         "title": "Step-by-step guide for submitting and publishing a new record in the BCH",
-        "identifier": "5ffe5700261fe900012a1057"
+        "identifier": "619c554858029700017ff45f"
       },
       {
         "title": "Updating information on the Country Profile page",
-        "identifier": "614e03576c0fea000150a4ab"
+        "identifier": "619c554d4f1f30000140eed6"
       },
       {
         "title": "Managing records as a BCH Focal Point",
-        "identifier": "614e18cf6c0fea000150a4c5"
+        "identifier": "619c554e58029700017ff465"
+      },
+      {
+        "title": "Workflow and record status tracking",
+        "identifier": "619c554f4f1f30000140eeda"
       }
     ]
   },
@@ -92,23 +104,27 @@ export const categories  =
     "articles": [
       {
         "title": "Searching for the information in the BCH",
-        "identifier": "5ffe522c261fe900012a104b"
+        "identifier": "619c553a4f1f30000140eeb2"
       },
       {
         "title": "Searching by Record Number",
-        "identifier": "6059f86c71c101000135e0f5"
+        "identifier": "619c555058029700017ff46b"
       },
       {
         "title": "Finding National Reports",
-        "identifier": "5ffe539f261fe900012a104d"
+        "identifier": "619c556b4f1f30000140ef06"
       },
       {
         "title": "Country Profiles",
-        "identifier": "5ffe4b38261fe900012a1047"
+        "identifier": "619c555258029700017ff46d"
       },
       {
         "title": "Displaying search results",
-        "identifier": "6155fdde4ce1b1000161a3b2"
+        "identifier": "619c55534f1f30000140eee0"
+      },
+      {
+        "title": "BCH icons",
+        "identifier": "619c55440c1ff000011c1c2e"
       }
     ]
   },
@@ -120,23 +136,27 @@ export const categories  =
     "articles": [
       {
         "title": "Submitting a new LMO in the BCH",
-        "identifier": "5ffe5730261fe900012a1059"
+        "identifier": "619c55390c1ff000011c1c20"
       },
       {
         "title": "Building a genetic element construct",
-        "identifier": "615b14364ce1b1000161a422"
+        "identifier": "619c55550c1ff000011c1c44"
       },
       {
         "title": "LMO, Genetic element and Organism registries",
-        "identifier": "5ffe4b7d68d1ca0001a7134a"
+        "identifier": "619c55564f1f30000140eee6"
       },
       {
         "title": "LMO Unique Identifiers (UIDs)",
-        "identifier": "5ff77cb5261fe900012a0fef"
+        "identifier": "619c55400c1ff000011c1c28"
       },
       {
         "title": "LMO Quick-link",
-        "identifier": "5fdc54fd0d1f2e00010fc135"
+        "identifier": "619c53c148780824013af838"
+      },
+      {
+        "title": "Information about the BioTradeStatus database",
+        "identifier": "619c55410c1ff000011c1c2a"
       }
     ]
   },
@@ -148,11 +168,11 @@ export const categories  =
     "articles": [
       {
         "title": "Interoperability with the BCH",
-        "identifier": "5ffe5ccc261fe900012a1061"
+        "identifier": "619c553958029700017ff43d"
       },
       {
         "title": "Hermes and Ajax plug-in national website tools",
-        "identifier": "616092bd4ce1b1000161a748"
+        "identifier": "619c55640c1ff000011c1c4e"
       }
     ]
   },
@@ -165,11 +185,11 @@ export const categories  =
     "articles": [
       {
         "title": "BCH Informal Advisory Committee (BCH-IAC) and its role",
-        "identifier": "5fff5e6d68d1ca0001a71395"
+        "identifier": "619c553a58029700017ff441"
       },
       {
         "title": "BCH-IAC Meetings",
-        "identifier": "615b48094ce1b1000161a4e4"
+        "identifier": "619c55564f1f30000140eee8"
       }
     ]
   },
@@ -181,15 +201,15 @@ export const categories  =
     "articles": [
       {
         "title": "Help material available in the BCH",
-        "identifier": "615c50c84ce1b1000161a4f2"
+        "identifier": "619c55574f1f30000140eeea"
       },
       {
         "title": "Information about the BCH Training Site",
-        "identifier": "5ffe58a768d1ca0001a7135c"
+        "identifier": "619c555758029700017ff471"
       },
       {
         "title": "Contact us",
-        "identifier": "60df8a891d6d9f0001e45410"
+        "identifier": "619c55580c1ff000011c1c46"
       }
     ]
   },
@@ -201,43 +221,43 @@ export const categories  =
     "articles": [
       {
         "title": "What are “National Records”, “Reference Records” and “SCBD records”?",
-        "identifier": "616058e64ce1b1000161a657"
+        "identifier": "619c55594f1f30000140eeee"
       },
       {
         "title": "What is the general process for submitting a record in the BCH",
-        "identifier": "616078be4ce1b1000161a6e8"
+        "identifier": "619c556058029700017ff479"
       },
       {
         "title": "What is the Dashboard?",
-        "identifier": "616077b54ce1b1000161a6e2"
+        "identifier": "619c555f4f1f30000140eef8"
       },
       {
         "title": "What steps do I take to submit and publish a new record in the BCH?",
-        "identifier": "6160799d4ce1b1000161a6eb"
+        "identifier": "619c556058029700017ff47b"
       },
       {
         "title": "How do I edit an already published record?",
-        "identifier": "61607d8c4ce1b1000161a706"
+        "identifier": "619c556158029700017ff47f"
       },
       {
         "title": "How can I share my draft record?",
-        "identifier": "61607fe44ce1b1000161a714"
+        "identifier": "619c55620c1ff000011c1c4c"
       },
       {
         "title": "What is “inline” record creation and how do I create a record inline?",
-        "identifier": "616082374ce1b1000161a71d"
+        "identifier": "619c55634f1f30000140eefc"
       },
       {
         "title": "How can I search for information in the BCH?",
-        "identifier": "6160a0c54ce1b1000161a758"
+        "identifier": "619c55664f1f30000140eefe"
       },
       {
         "title": "What is Record UID?",
-        "identifier": "6160a2594ce1b1000161a75e"
+        "identifier": "619c55664f1f30000140ef00"
       },
       {
         "title": "How do I reset my password?",
-        "identifier": "61605f5b4ce1b1000161a662"
+        "identifier": "619c555b0c1ff000011c1c48"
       }
     ]
   }
