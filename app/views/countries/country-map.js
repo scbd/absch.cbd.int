@@ -154,6 +154,10 @@ import './directives/homepin-popup-abs';
             WF : 'FR', //Wallis and Futuna
             YT : 'FR' //Mayotte
         };
+        var exceptionRegionColorMapping = {
+          HK : 'CN', //Hong Kong
+          TW : 'CN', //Taiwan
+      };
         $scope.options = {lmo:'all'};
         $scope.self = $scope;
         $scope.showTitle = true; 
@@ -200,7 +204,7 @@ import './directives/homepin-popup-abs';
                   countries[country.code] = country;                            
                   changeAreaColor(country);
                   if(!$scope.zoomTo){
-                    if(_.invert(exceptionRegionMapping)[country.code])
+                    if(_.invert(exceptionRegionColorMapping)[country.code])
                       addExceptionRegionsImage(country)
                   }
                   var mapObject = getMapObject(country.code);
@@ -222,7 +226,7 @@ import './directives/homepin-popup-abs';
                 })
                 map.addListener("clickMapObject", function(evt){
 
-                  if($scope.zoomTo!=undefined){
+                  if($scope.zoomTo){
                     var url = '/countries/'+(exceptionRegionMapping[evt.mapObject.id]||evt.mapObject.id);
                     $scope.$apply(function(){$location.url(url)});
                   }
@@ -254,7 +258,7 @@ import './directives/homepin-popup-abs';
 
         function addExceptionRegionsImage(country){
 
-          _.forEach(exceptionRegionMapping, function(code, exceptionRegion) {
+          _.forEach(exceptionRegionColorMapping, function(code, exceptionRegion) {
               if(code == country.code){
                 var exceptionCountryData = angular.copy(country);
                 exceptionCountryData.code = exceptionRegion;
@@ -478,11 +482,11 @@ import './directives/homepin-popup-abs';
         // when China is clicked or hovered Hongkong color is set to same as china. 
         function dynamicColor(code, color, type){
 
-          if(exceptionRegionMapping[code]){
-            code = exceptionRegionMapping[code];
+          if(exceptionRegionColorMapping[code]){
+            code = exceptionRegionColorMapping[code];
           }
           if(prevCountryColor[type] && prevCountryColor[type].code){
-              var prevSelTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == prevCountryColor[type].code}).value();
+              var prevSelTerritories = _(exceptionRegionColorMapping).keys().filter(function(k){return exceptionRegionColorMapping[k] == prevCountryColor[type].code}).value();
               if(prevSelTerritories.length){
                 changeSelectedColor(prevCountryColor[type].code, prevCountryColor[type].colorReal);
                 _.forEach(prevSelTerritories, function(territory){
@@ -492,7 +496,7 @@ import './directives/homepin-popup-abs';
             
           }
           prevCountryColor[type] = { code : code };
-          var otherTerritories = _(exceptionRegionMapping).keys().filter(function(k){return exceptionRegionMapping[k] == code}).value()
+          var otherTerritories = _(exceptionRegionColorMapping).keys().filter(function(k){return exceptionRegionColorMapping[k] == code}).value()
           if(code){
             if(otherTerritories.length){
               prevCountryColor[type].colorReal = getMapObject(prevCountryColor[type].code).originalColorReal;

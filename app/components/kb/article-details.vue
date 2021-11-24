@@ -7,11 +7,11 @@
                     <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
                     <div v-if="!loading">
                         <header>
-                            <h2>{{article.title[$locale]}}</h2>
+                            <h2>{{article.title|lstring($locale)}}</h2>
                         </header>
                         <div class="detail-custom-tag">
-                            <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn|dateFormate}}</div>
-                            <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTagsInfo[0].title[$locale]}}</div>
+                            <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn|formatDate}}</div>
+                            <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTagsInfo[0].title|lstring($locale)}}</div>
                         </div>
                         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[$locale]"></div>
 						<div v-if="article.adminTags" class="detail-custom-tag">
@@ -40,7 +40,7 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import relevantArticles from "./relevant-articles.vue";
 	import ArticlesApi from './article-api';
-	import {formatDate} from './filters';
+	import './filters';
 	import popularTags from './popular-tags.vue';
     import articlesMaxin from '../maxin/article';
 	export default {
@@ -64,32 +64,28 @@
 		},
         mixins: [articlesMaxin],
         async mounted() {
-        this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
-        if(this.$route.params == undefined) return;
-        try {
-            let id = (this.$route.params.id).replace(/"/g, "");
-            const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
-            if (article?.content != undefined) {
-                this.article = article;
+            this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
+            if(this.$route.params == undefined) return;
+            try {
+                let id = (this.$route.params.id).replace(/"/g, "");
+                const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
+                if (article?.content != undefined) {
+                    this.article = article;
+                }
             }
-        }
-        catch(e){
-            console.error(e);
+            catch(e){
+                console.error(e);
+                }
+            finally {
+                this.loading = false;
             }
-        finally {
-            this.loading = false;
-        }
-        },
-		filters: {
-			dateFormate: function ( date ) {
-				return formatDate(date)
-			}
-		},
+        },		
 		methods: {
 			back(){
 				this.$router.push({path: '/kb'});
 			},
 			tagUrl(tag){
+                console.log(tag)
 				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'');
                 return this.getUrl(tagTitle, undefined, tag);

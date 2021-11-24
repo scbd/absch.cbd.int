@@ -12,7 +12,7 @@
 			</h2>
             <main>
                 <details v-for="article in faqs">
-                    <summary>{{article.title[`${$locale}`]}}</summary>
+                    <summary>{{article.title|lstring($locale)}}</summary>
                     <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[`${$locale}`]"></div>                    
 					<div v-if="article.adminTags" class="detail-custom-tag">
 						<div class="tagcloud">
@@ -35,7 +35,8 @@
 	import i18n from '../../locales/en/components/kb.json';
 	import Paginate from './pagination.vue';
 	import ArticlesApi from './article-api';
-  import articlesMaxin from '../maxin/article';
+    import articlesMaxin from '../maxin/article';
+    import './filters';
 
 	export default {
 		name:'kbFaqsList',

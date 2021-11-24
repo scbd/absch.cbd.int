@@ -14,10 +14,10 @@
                             <li class="article-with-tags-li" v-for="article in articles">
 								<a class="cursor-pointer" @click="goToArticle(article, tag)">
 									<span class="article-title">
-										{{article.title[$locale]}}
+										{{article.title|lstring($locale)}}
 									</span>
-									<div class="article-summary" @click="goToArticle(article, tag)">
-										{{article.summary ? article.summary[$locale] : ''}}...
+									<div v-if="article.summary" class="article-summary" @click="goToArticle(article, tag)">
+										{{article.summary|lstring($locale)}}...
 									</div>
 								</a>
                               <div class="inner-area">
@@ -56,7 +56,7 @@
 import paginate from './pagination.vue';
 import relevantArticles from "./relevant-articles.vue";
 import ArticlesApi from './article-api';
-import {formatDate} from './filters';
+import './filters';
 import popularTags from './popular-tags.vue';
 import articlesMaxin from '../maxin/article';
 
@@ -92,11 +92,6 @@ export default {
             };
             this.tag = tag;
             this.loadArticles(1, tag);
-        }
-    },
-    filters: {
-        dateFormat: function(date) {
-            return formatDate(date)
         }
     },
     methods: {

@@ -57,7 +57,7 @@
                                     <td class="tableexport-string">{{(row.rec_meta2||[]).join(', ')}}</td>
                                     <td class="tableexport-string">{{(row.rec_meta3||[]).join(', ')}}</td>
                                     <td class="tableexport-string">{{(row.rec_meta4||[]).join(', ')}}</td>  
-                                    <td class="tableexport-string">{{row.rec_date|dateFormat}}</td>                          
+                                    <td class="tableexport-string">{{row.rec_date|formatDate}}</td>                          
                                 </tr>
                             </tbody>
                         </table>
@@ -77,7 +77,7 @@
 <script>
     import { Modal } from 'vue-2-bootstrap-3'
 	import i18n from '../../locales/en/components/export.json';
-	import { formatDate } from '../kb/filters';
+	import '../kb/filters';
     
     const fields = [
         'rec_schema:schema_EN_s',
@@ -107,11 +107,7 @@
 		},
 		async mounted() {
         },
-		filters: {
-			dateFormate: function ( date ) {
-				return formatDate(date)
-			}
-		},
+		
 		methods: {
             async onShowDialog(){
                  const {docs, numFound } = await this.getDownloadRecords({fields, listType:'initial'});

@@ -22,7 +22,7 @@ export default {
     props: {},
     data: () => {
         return {
-            articles: [],
+            articles: [], 
         }
     },
     mixins: [articlesMaxin],
