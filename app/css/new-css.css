@@ -367,7 +367,7 @@ max-width: 90%;
     .new-css-summary-text, .new-css-callout h4 a {
         -webkit-line-clamp: 1;
     }
-    .new-css-home-section-top-bch h1.display-6{
+    .new-css-home-section-top-bch h1.display-6, .new-css-home-section-top-absch h1.display-6{
         font-size: 1.5rem !important;
     }
     .new-css-down-margin{

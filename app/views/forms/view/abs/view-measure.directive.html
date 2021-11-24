@@ -32,7 +32,7 @@
 		<div ng-show="document.description">
 			<label>Brief description</label>
 			<div compare-val>
-				<km-value-ml value="document.description" locales="locale"></km-value-ml>
+				<div class="km-value" ng-bind-html="document.description | lstring:locale"></div>
 			</div>
 		</div>
 
