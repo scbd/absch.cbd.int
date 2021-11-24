@@ -22,7 +22,7 @@ export function formatDateOnly(datetime, format) {
 }
 
 export function lstring(ltext, locale) {
-    if(Number.isInteger(ltext)) //is number to handle generic implementation of NR
+    if(Number.isInteger(ltext))  
     return ltext;
   
     if (!ltext)
@@ -66,7 +66,7 @@ function normalizeText(text) {
   return entry;
 }
 
-
+Vue.filter('lstring'            , lstring);
 Vue.filter('formatDate'         , formatDate);
 Vue.filter('capitalize'         , val=>val.toUpperCase());
 Vue.filter('encodeURIComponent' , encodeURIComponent);

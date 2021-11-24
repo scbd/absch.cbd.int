@@ -94,15 +94,6 @@ export default {
             this.loadArticles(1, tag);
         }
     },
-    filters: {
-        dateFormat: function(date) {
-            return formatDate(date)
-        },
-        lstring: function ( text, locale ) {
-            if(!text) return;
-			return lstring(text, locale);
-        }
-    },
     methods: {
         tagUrl(tag) {
             const tagDetails = this.categories.find(e => e.adminTags.includes(tag))

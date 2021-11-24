@@ -126,13 +126,6 @@
         }
 			},
 		},
-		filters: {
-    
-        	lstring: function ( text, locale ) {
-				if(!text) return;
-				return lstring(text, locale);
-			}
-    	},
 		i18n: { messages:{ en: i18n }}
 	}
 </script>

@@ -80,15 +80,6 @@
             this.loading = false;
         }
         },
-		filters: {
-			dateFormate: function ( date ) {
-				return formatDate(date)
-			},
-            lstring: function ( text, locale ) {
-                if(!text) return;
-				return lstring(text, locale);
-			}
-		},
 		methods: {
 			back(){
 				this.$router.push({path: '/kb'});
