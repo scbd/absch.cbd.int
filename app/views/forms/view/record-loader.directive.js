@@ -135,7 +135,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 							loadViewDirective(documentSchema);
 						}
 						else if (documentID) {
-							const skipRealm = _.includes(['focalpoint', 'nfp'], documentSchema.toLowerCase()) 
+							const skipRealm = _.includes(['focalpoint', 'nfp'], (documentSchema||'').toLowerCase()) 
 							$scope.load(documentID, documentRevision, skipRealm);
 						}
 					};

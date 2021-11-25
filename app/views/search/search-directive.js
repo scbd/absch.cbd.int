@@ -1331,7 +1331,12 @@ import 'angular-vue'
                     }
 
                     function buildRawQuery(){
-                        return solr.escape(($scope.setFilters['rawQuery']||{}).id);
+                        // console.log($scope.setFilters['rawQuery']||{});
+                        const query = ($scope.setFilters['rawQuery']||{}).id;
+                        // const parseQuery = query.split(':').map(e=>)
+                        // return solr.escape(();
+
+                        return query;
                     }
 
                     function getCountryList(id, list){
