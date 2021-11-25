@@ -106,7 +106,7 @@ export const bchLeftMenuFilters = {
                 "s":"commonNames_RU_ss asc"
             },
             "title": bchFilters.ParentalOrganismCommonName,
-            "field": "geneDonorOrganismsIdentifiers_ss",
+            "field": "lmoIdentifiers_ss",
             "customResultFn":"organismNamesResult",
             "customQueryFn":"organismNamesQuery"
 
@@ -120,7 +120,7 @@ export const bchLeftMenuFilters = {
                 "s":"scientificName_s asc"
             },
             "title": bchFilters.ParentalOrganismScientificName,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "lmoIdentifiers_ss"
         }
     ],
     "biosafetyNews": [
