@@ -16,8 +16,10 @@
 			</div>
 		</div>	
 		<div ng-if="document.profile">
-			<label>Additional information for the country profile</label>  
-			 <km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
+			<label>Additional information for the country profile</label> 
+			<div compare-val> 
+			 	<km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
+			 </div>
 		</div>
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
