@@ -1,4 +1,4 @@
-﻿{
+{
     "abs" : [
         {
             "type"         : "npInterimNationalReport1",
@@ -89,12 +89,12 @@
                                 {"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-2.json"}
                               ],
             "offlineFormats": [
-                                  {"lang": "en", "url":"http://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_en.doc?download"},
-                                  {"lang": "fr", "url":"http://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_fr.doc?download"},
-                                  {"lang": "es", "url":"http://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_es.doc?download"},
-                                  {"lang": "ru", "url":"http://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_ru.doc?download"},
-                                  {"lang": "ar", "url":"http://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_ar.doc?download"},
-                                  {"lang": "zh", "url":"http://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_zh.doc?download"}
+                                  {"lang": "en", "url":"https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_en.doc?download"},
+                                  {"lang": "fr", "url":"https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_fr.doc?download"},
+                                  {"lang": "es", "url":"https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_es.doc?download"},
+                                  {"lang": "ru", "url":"https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_ru.doc?download"},
+                                  {"lang": "ar", "url":"https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_ar.doc?download"},
+                                  {"lang": "zh", "url":"https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_zh.doc?download"}
                               ]
         }
     ]
