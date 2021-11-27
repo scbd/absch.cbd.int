@@ -373,8 +373,6 @@ import 'angular-sanitize';
                 //==============================================
                 function analyze() {
 
-                    console.log($scope.digits)
-
                     if(!$scope.reports) return;
                     if(!$scope.regions) return;
                     if(!$scope.question) return;

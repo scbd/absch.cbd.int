@@ -33,9 +33,9 @@ const externals = ['app', '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', '
 const bundleFiles = [ ];
 const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
 const ignoreForRollupFiles = {
-  cpbNationalReport2 : 'app-data/bch/report-analyzer/cpbNationalReport2.js',
-  cpbNationalReport3 : 'app-data/bch/report-analyzer/cpbNationalReport3.js',
-  cpbNationalReport4 : 'app-data/bch/report-analyzer/cpbNationalReport4.js',
+  // cpbNationalReport2 : 'app-data/bch/report-analyzer/cpbNationalReport2.js',
+  // cpbNationalReport3 : 'app-data/bch/report-analyzer/cpbNationalReport3.js',
+  // cpbNationalReport4 : 'app-data/bch/report-analyzer/cpbNationalReport4.js',
 };
 const ignoreFileGlobPattern = _(ignoreForRollupFiles).values().map(e=>`**/${e}`).value();
 
