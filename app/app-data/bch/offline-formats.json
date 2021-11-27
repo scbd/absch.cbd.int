@@ -1,181 +1,195 @@
 {
+    "focalPoint": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_01_nfps_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_01_nfps_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_01_nfps_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_01_nfps_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_01_nfps_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_01_nfps_final_zh.docx"
+    },
     "authority": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_03_compnationalauthorities_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_02_competentauthority_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_02_competentauthority_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_02_competentauthority_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_02_competentauthority_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_02_competentauthority_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_02_competentauthority_final_zh.docx"
     },
-    "bchNews": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_zh.doc?download"
-    },
-    "biosafetyDecision": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_05_decisions_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_05_decisions_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_05_decisions_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_05_decisions_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_05_decisions_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_05_decisions_zh.doc?download"
+    "supplementaryAuthority": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_03_spca_competentauthority_final_ar.doc",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_03_spca_competentauthority_final_en.doc",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_03_spca_competentauthority_final_es.doc",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_03_spca_competentauthority_final_fr.doc",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_03_spca_competentauthority_final_ru.doc",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_03_spca_competentauthority_final_zh.doc"
     },
     "biosafetyLaw": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_04_lawregguidelinesagreem_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_04_lawregguidelinesagreem_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_04_lawregguidelinesagreem_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_04_lawregguidelinesagreem_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_04_lawregguidelinesagreem_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_04_lawregguidelinesagreem_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_04_lawregguidelinesagreement_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_04_lawregguidelinesagreement_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_04_lawregguidelinesagreement_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_04_lawregguidelinesagreement_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_04_lawregguidelinesagreement_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_04_lawregguidelinesagreement_final_zh.docx"
     },
-    "capacityBuildingActivities": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02a_CapacityBuilding_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02a_CapacityBuilding_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02a_CapacityBuilding_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02a_CapacityBuilding_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02a_CapacityBuilding_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02a_CapacityBuilding_zh.doc?download"
-    },
-    "capacityBuildingNeeds": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02b_CapacityBuilding_CountryNeeds_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02b_CapacityBuilding_CountryNeeds_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02b_CapacityBuilding_CountryNeeds_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02b_CapacityBuilding_CountryNeeds_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02b_CapacityBuilding_CountryNeeds_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_02b_CapacityBuilding_CountryNeeds_zh.doc?download"
-    },
-    "cpbNationalReportInterim": {},
-    "database": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_02_webdatabases_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_02_webdatabases_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_02_webdatabases_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_02_webdatabases_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_02_webdatabases_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_02_webdatabases_zh.doc?download"
-    },
-    "dnaSequence": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_08_geneticelement_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_08_geneticelement_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_08_geneticelement_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_08_geneticelement_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_08_geneticelement_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_08_geneticelement_zh.doc?download"
-    },
-    "expert": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_07_biosafetyexperts_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_07_biosafetyexperts_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_07_biosafetyexperts_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_07_biosafetyexperts_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_07_biosafetyexperts_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_07_biosafetyexperts_zh.doc?download"
-    },
-    "expertAssignment": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_08_repbiosafetyexpertassignments_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_08_repbiosafetyexpertassignments_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_08_repbiosafetyexpertassignments_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_08_repbiosafetyexpertassignments_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_08_repbiosafetyexpertassignments_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_08_repbiosafetyexpertassignments_zh.doc?download"
-    },
-    "focalPoint": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_01_nfps_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_01_nfps_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_01_nfps_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_01_nfps_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_01_nfps_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_01_nfps_zh.doc?download"
-    },
-    "independentRiskAssessment": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_06_indipendentriskassessments_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_06_indipendentriskassessments_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_06_indipendentriskassessments_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_06_indipendentriskassessments_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_06_indipendentriskassessments_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_06_indipendentriskassessments_zh.doc?download"
-    },
-    "modifiedOrganism": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_07_lmos_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_07_lmos_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_07_lmos_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_07_lmos_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_07_lmos_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_07_lmos_zh.doc?download"
+    "biosafetyDecision": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_05_decisions_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_05_decisions_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_05_decisions_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_05_decisions_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_05_decisions_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_05_decisions_final_zh.docx"
     },
     "nationalRiskAssessment": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/nationalrecord_06_nationalriskassessments_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/nationalrecord_06_nationalriskassessments_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/nationalrecord_06_nationalriskassessments_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/nationalrecord_06_nationalriskassessments_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/nationalrecord_06_nationalriskassessments_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/nationalrecord_06_nationalriskassessments_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_06_nationalriskassessment_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_06_nationalriskassessment_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_06_nationalriskassessment_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_06_nationalriskassessment_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_06_nationalriskassessment_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_06_nationalriskassessment_final_zh.docx"
     },
-    "organization": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_03_organizations_and_labs_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_03_organizations_and_labs_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_03_organizations_and_labs_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_03_organizations_and_labs_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_03_organizations_and_labs_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_03_organizations_and_labs_zh.doc?download"
-    },
-    "organism": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_09_organisms_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_09_organisms_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_09_organisms_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_09_organisms_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_09_organisms_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_09_organisms_zh.doc?download"
+    "database": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_07_webdatabases_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_07_webdatabases_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_07_webdatabases_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_07_webdatabases_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_07_webdatabases_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_07_webdatabases_final_zh.docx"
     },
     "submission": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_10_submissions_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_10_submissions_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_10_submissions_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_10_submissions_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_10_submissions_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_10_submissions_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_08_submissions_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_08_submissions_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_08_submissions_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_08_submissions_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_08_submissions_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_08_submissions_final_zh.docx"
     },
-    "supplementaryAuthority": {},
+    "cpbNationalReportInterim": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_interim_nationalreportcartagenaprotocol_ar.doc",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_interim_nationalreportcartagenaprotocol_en.doc",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_interim_nationalreportcartagenaprotocol_es.doc",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_interim_nationalreportcartagenaprotocol_fr.doc",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_interim_nationalreportcartagenaprotocol_ru.doc",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_interim_nationalreportcartagenaprotocol_zh.doc"
+    },
+    "cpbNationalReport1": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_ar.doc",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_en.doc",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_es.doc",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_fr.doc",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_ru.doc",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_zh.doc"
+    },
+    "cpbNationalReport2": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_ar.doc",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_en.doc",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_es.doc",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_fr.doc",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_ru.doc",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_1st_nationalreportcartagenaprotocol_zh.doc"
+    },
     "cpbNationalReport3": {
-        "ar": "https://bch.cbd.int/protocol/3rdnationalreport/format3rdnationalreportcartagenaprotocol_ar.doc?download",
-        "en": "https://bch.cbd.int/protocol/3rdnationalreport/format3rdnationalreportcartagenaprotocol_en.doc?download",
-        "es": "https://bch.cbd.int/protocol/3rdnationalreport/format3rdnationalreportcartagenaprotocol_es.doc?download",
-        "fr": "https://bch.cbd.int/protocol/3rdnationalreport/format3rdnationalreportcartagenaprotocol_fr.doc?download",
-        "ru": "https://bch.cbd.int/protocol/3rdnationalreport/format3rdnationalreportcartagenaprotocol_ru.doc?download",
-        "zh": "https://bch.cbd.int/protocol/3rdnationalreport/format3rdnationalreportcartagenaprotocol_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_3rd_nationalreportcartagenaprotocol_ar.doc",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_3rd_nationalreportcartagenaprotocol_en.doc",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_3rd_nationalreportcartagenaprotocol_es.doc",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_3rd_nationalreportcartagenaprotocol_fr.doc",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_3rd_nationalreportcartagenaprotocol_ru.doc",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_3rd_nationalreportcartagenaprotocol_zh.doc"
     },
     "cpbNationalReport4": {
-        "ar": "https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_ar.doc?download",
-        "en": "https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_en.doc?download",
-        "es": "https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_es.doc?download",
-        "fr": "https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_fr.doc?download",
-        "ru": "https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_ru.doc?download",
-        "zh": "https://bch.cbd.int/protocol/4thnationalreport/format4thnationalreportcartagenaprotocol_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_zh.docx"
     },
     "contact": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_01_ContactDetails_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_01_ContactDetails_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_01_ContactDetails_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_01_ContactDetails_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_01_ContactDetails_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/ReferenceRecord_01_ContactDetails_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalreferencerecord_contact_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalreferencerecord_contact_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalreferencerecord_contact_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalreferencerecord_contact_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalreferencerecord_contact_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalreferencerecord_contact_final_zh.docx"
     },
     "resource": {
-        "ar": "https://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_ar.doc?download",
-        "en": "https://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_en.doc?download",
-        "es": "https://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_es.doc?download",
-        "fr": "https://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_fr.doc?download",
-        "ru": "https://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_ru.doc?download",
-        "zh": "https://bch.cbd.int/resources/common%20formats/referencerecord_04_birc_zh.doc?download"
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_01_virtuallibraryresource_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_01_virtuallibraryresource_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_01_virtuallibraryresource_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_01_virtuallibraryresource_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_01_virtuallibraryresource_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_01_virtuallibraryresource_final_zh.docx"
+    },
+    "organization": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_02_biosafetyorganization_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_02_biosafetyorganization_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_02_biosafetyorganization_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_02_biosafetyorganization_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_02_biosafetyorganization_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_02_biosafetyorganization_final_zh.docx"
+    },
+    "laboratoryDetection": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_03_lab_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_03_lab_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_03_lab_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_03_lab_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_03_lab_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_03_lab_final_zh.docx"
+    },
+    "modifiedOrganism": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_04_lmos_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_04_lmos_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_04_lmos_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_04_lmos_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_04_lmos_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_04_lmos_final_zh.docx"
+    },
+    "dnaSequence": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_05_geneticelement_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_05_geneticelement_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_05_geneticelement_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_05_geneticelement_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_05_geneticelement_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_05_geneticelement_final_zh.docx"
+    },
+    "organism": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_06_organism_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_06_organism_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_06_organism_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_06_organism_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_06_organism_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_06_organism_final_zh.docx"
+    },
+    "independentRiskAssessment": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_07_indipendentriskassessments_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_07_indipendentriskassessments_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_07_indipendentriskassessments_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_07_indipendentriskassessments_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_07_indipendentriskassessments_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_07_indipendentriskassessments_final_zh.docx"
+    },
+    "expert": {
+        "ar": "https://bch.cbd.int/resources/common-formats/nationalrecord_08_biosafetyexpert_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/nationalrecord_08_biosafetyexpert_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/nationalrecord_08_biosafetyexpert_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/nationalrecord_08_biosafetyexpert_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/nationalrecord_08_biosafetyexpert_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/nationalrecord_08_biosafetyexpert_final_zh.docx"
+    },
+    "capacityBuildingInitiative": {
+        "ar": "https://bch.cbd.int/resources/common-formats/referencerecord_09_capacitydevelopmentinitiative_final_ar.docx",
+        "en": "https://bch.cbd.int/resources/common-formats/referencerecord_09_capacitydevelopmentinitiative_final_en.docx",
+        "es": "https://bch.cbd.int/resources/common-formats/referencerecord_09_capacitydevelopmentinitiative_final_es.docx",
+        "fr": "https://bch.cbd.int/resources/common-formats/referencerecord_09_capacitydevelopmentinitiative_final_fr.docx",
+        "ru": "https://bch.cbd.int/resources/common-formats/referencerecord_09_capacitydevelopmentinitiative_final_ru.docx",
+        "zh": "https://bch.cbd.int/resources/common-formats/referencerecord_09_capacitydevelopmentinitiative_final_zh.docx"
     },
     "biosafetyNews": {
-        "ar" :" https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_ar.doc?download",
-        "en" : "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_en.doc?download",
-        "es" : "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_es.doc?download",
-        "fr" : "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_fr.doc?download",
-        "ru" : "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_ru.doc?download",
-        "zh" : "https://bch.cbd.int/resources/common%20formats/referencerecord_05_bchnews_zh.doc?download"
+        "ar" :" https://bch.cbd.int/resources/common-formats/referencerecord_10_bchnews_final_ar.docx",
+        "en" : "https://bch.cbd.int/resources/common-formats/referencerecord_10_bchnews_final_en.docx",
+        "es" : "https://bch.cbd.int/resources/common-formats/referencerecord_10_bchnews_final_es.docx",
+        "fr" : "https://bch.cbd.int/resources/common-formats/referencerecord_10_bchnews_final_fr.docx",
+        "ru" : "https://bch.cbd.int/resources/common-formats/referencerecord_10_bchnews_final_ru.docx",
+        "zh" : "https://bch.cbd.int/resources/common-formats/referencerecord_10_bchnews_final_zh.docx"
     }
 
 }
