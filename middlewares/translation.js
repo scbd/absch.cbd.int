@@ -49,7 +49,8 @@ async function renderLanguageFile(req, res, next) {
 
     let urlPreferredLang;
     let preferredLang = getPreferredLanguage(req);
-
+    preferredLang = preferredLang || 'en';
+    
     let dirExists;
     try{
         dirExists = await stat(`${global.app.rootPath}/dist/${preferredLang}`)

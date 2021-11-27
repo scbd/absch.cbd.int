@@ -28,7 +28,7 @@
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
                                 <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >
+                                    <a rel="noopener" translation-url href="#tab{{$index}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >
                                         Question <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>
@@ -42,7 +42,7 @@
                                 <div class="col-xs-12">
                                     <div class="tab-content">
 
-                                        <div class="tab-pane" ng-repeat="tab in nr4Tabs" id="tab{{$index+1}}" ng-class="{'active': $index==0}" ng-if="tab.render" >
+                                        <div class="tab-pane" ng-repeat="tab in nr4Tabs" id="tab{{$index}}" ng-class="{'active': $index==0}" ng-if="tab.render" >
                                             <!-- ng-if="activeTab==$index+1" -->
                                             <div style="margin-bottom:20px;">
 
@@ -124,7 +124,7 @@
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs">
                                 <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a rel="noopener" translation-url href="#tab{{$index+1}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">
+                                    <a rel="noopener" translation-url href="#tab{{$index}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">
                                         Question <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>

@@ -64,12 +64,12 @@
         "zh": "https://www.cbd.int/abs/common-formats/zh/ABSCH-CP-zh.doc"
     },
     "absCheckpointCommunique": {
-        "ar": "https://www.cbd.int/abs/common-formats/ar/ABSCH-CPP-ar.doc",
-        "en": "https://www.cbd.int/abs/common-formats/en/ABSCH-CPP-en.doc",
-        "es": "https://www.cbd.int/abs/common-formats/es/ABSCH-CPP-es.doc",
-        "fr": "https://www.cbd.int/abs/common-formats/fr/ABSCH-CPP-fr.doc",
-        "ru": "https://www.cbd.int/abs/common-formats/ru/ABSCH-CPP-ru.doc",
-        "zh": "https://www.cbd.int/abs/common-formats/zh/ABSCH-CPP-zh.doc"
+        "ar": "https://www.cbd.int/abs/common-formats/ar/ABSCH-CPC-ar.doc",
+        "en": "https://www.cbd.int/abs/common-formats/en/ABSCH-CPC-en.doc",
+        "es": "https://www.cbd.int/abs/common-formats/es/ABSCH-CPC-es.doc",
+        "fr": "https://www.cbd.int/abs/common-formats/fr/ABSCH-CPC-fr.doc",
+        "ru": "https://www.cbd.int/abs/common-formats/ru/ABSCH-CPC-ru.doc",
+        "zh": "https://www.cbd.int/abs/common-formats/zh/ABSCH-CPC-zh.doc"
     },
     "absNationalReport": {
         "ar": "https://www.cbd.int/abs/common-formats/ar/ABSCH-NR-ar.doc",

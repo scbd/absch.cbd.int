@@ -124,26 +124,30 @@ export const templateController = ['$rootScope', '$location', '$window', '$scope
 
             if (!user)
                 return;
+            var queryString = $location.search();
+            
+            if(!queryString.print && !queryString.embed){
+                
+                require(["slaask"], function (_slaask) {
 
-            require(["slaask"], function (_slaask) {
+                    if (user.isAuthenticated && _slaask) {
+                        _slaask.identify(user.name, {
+                            'user-id': user.userID,
+                            'name': user.name,
+                            'email': user.email,
+                        });
 
-                if (user.isAuthenticated && _slaask) {
-                    _slaask.identify(user.name, {
-                        'user-id': user.userID,
-                        'name': user.name,
-                        'email': user.email,
-                    });
-
-                    if (_slaask.initialized) {
-                        if (_slaask.slaaskSendUserInfos)
-                            _slaask.slaaskSendUserInfos();
+                        if (_slaask.initialized) {
+                            if (_slaask.slaaskSendUserInfos)
+                                _slaask.slaaskSendUserInfos();
+                        }
                     }
-                }
 
-                if (_slaask && !_slaask.initialized) {
-                    _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
-                }
-            });
+                    if (_slaask && !_slaask.initialized) {
+                        _slaask.init('8b989bd6ee0cf49384761d4f86ddd945');
+                    }
+                });
+            }
 
             var fields = logglyLogger.fields()
             fields.user = user.userID;
