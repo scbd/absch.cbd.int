@@ -377,7 +377,7 @@ export const bchLeftMenuFilters = {
                 "searchFields":["commonNames_EN_txt"]
             },
             "title": bchFilters.ParentalOrganismCommonName,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "lmoIdentifiers_ss"
         },
         {
             "type": "solrRecords",
@@ -387,7 +387,7 @@ export const bchLeftMenuFilters = {
                 "searchFields":["scientificName_t"]
             },
             "title": bchFilters.ParentalOrganismScientificName,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "lmoIdentifiers_ss"
         },
         {
             "type": "date",
@@ -537,7 +537,7 @@ export const bchLeftMenuFilters = {
                 "searchFields":["commonNames_EN_txt"]
             },
             "title": bchFilters.ParentalOrganismCommonName,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "lmoIdentifiers_ss"
         },
         {
             "type": "solrRecords",
@@ -547,7 +547,7 @@ export const bchLeftMenuFilters = {
                 "searchFields":["scientificName_s"]
             },
             "title": bchFilters.ParentalOrganismScientificName,
-            "field": "geneDonorOrganismsIdentifiers_ss"
+            "field": "lmoIdentifiers_ss"
         },
         {
             "type": "date",

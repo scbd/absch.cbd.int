@@ -41,7 +41,7 @@
             </div>
     
             <div ng-show="document.keywords">
-                <label>الكلمات المفتاحية</label>
+                <label>Keywords</label>
                 <div class="km-value" compare-val>
                     <ul class="list">
                         <li ng-repeat="term in document.keywords"><span ng-bind="term | term:locale"></span></li>
@@ -52,7 +52,7 @@
             <div ng-show="document.keywords">
                 <label>المجالات والموضوعات</label>
                 <div class="km-value" compare-val>
-                    <ul>
+                    <ul class="list">
                       <li ng-repeat="term in document.thematicAreas"><span ng-bind="term | term:locale"></span></li>
                     </ul>
                 </div>

@@ -9,9 +9,9 @@
 		<document-date></document-date>
 
 
-		<div ng-if="document.isAmendment || amendedByRecords">
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
 			<legend>التعديل</legend>
-			<div ng-if="document.isAmendment">
+			<div ng-if="document.isAmendment!=undefined">
 				<label>هل هذا التعديل على القانون أو التشريع أو الإرشاد أو الاتفاق منشور بالفعل في غرفة تبادل معلومات السلامة الأحيائية؟</label>
 				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
@@ -59,7 +59,7 @@
 		<legend>التفاصيل التشريعية</legend>
 		<div>
 			<div ng-if="document.type">
-				<label>نوع القانون/التشريعات</label>
+				<label>Type of Law / Regulation</label>
 				<div class="km-value" compare-val><span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span> <span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span></div>
 			</div>
 			<div ng-if="document.jurisdiction">
@@ -145,7 +145,7 @@
 
 		<div ng-if="document.authorities">
 			<legend>معلومات جهات الاتصال التنظيمية</legend>
-			<label>السلطة (السلطات) الوطنية المختصة والسلطة (السلطات) المختصة بالبروتوكول التكميلي أو أيهما</label>
+			<label>Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
@@ -163,7 +163,7 @@
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 					<div class="km-value" compare-val>
 						<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 					</div>

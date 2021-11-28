@@ -38,7 +38,7 @@
 
 
 		<div ng-show="document.phones">
-			<label>رقم (أرقام) الهواتف</label>
+			<label>Phone number(s)</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.phones" ng-bind="item"></li>
@@ -47,7 +47,7 @@
 		</div>
 
 		<div ng-show="document.faxes">
-			<label>رقم (أرقام) الفاكس</label>
+			<label>Fax Number(s)</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.faxes" ng-bind="item"></li>
@@ -56,7 +56,7 @@
 		</div>
 
 		<div ng-show="document.emails">
-			<label>عنوان (عناوين) البريد الإلكتروني</label>
+			<label>Email(s)</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a></li>
@@ -65,7 +65,7 @@
 		</div>
 
 		<div ng-show="document.websites">
-			<label>عنوان (عناوين) الموقع الإلكتروني</label>
+			<label>عناوين المواقع الإلكتروني</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a></div>
 			</div>
@@ -85,7 +85,7 @@
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="areaOfWork in document.areasOfWork" style="margin-bottom: 5px;">
-							<km-value-ml value="areaOfWork" locales="locale"></km-value-ml>
+							<km-value-ml value="areaOfWork" html pre locales="locale"></km-value-ml>
 						</li>
 					</ul>
 				</div>
@@ -127,7 +127,7 @@
 			</div>
 		</div>
 
-		<div ng-show="linkedOrganizations">
+		<div ng-show="document.linkedOrganizations">
 			<legend>المنظمات المرتبطة</legend>
 			<div class="km-value" compare-val>
 				<ul class="list">
@@ -146,7 +146,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div compare-val>
 					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
 				</div>		

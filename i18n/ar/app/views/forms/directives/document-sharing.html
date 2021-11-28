@@ -1,9 +1,7 @@
 ﻿<span class="document-sharing" dir="rtl"><button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
-    title="مشاركة"><i class="fa fa-firefox"></i> <span class="hidden-xs">مشاركة</span></button>
+    title="Share"><i class="fa fa-firefox"></i> <span class="hidden-xs">مشاركة</span></button>
     <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
-    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>
-
-    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>  </span><script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}" dir="rtl">
             <div class="modal-header">إرسال مسودة السجل: <span ng-bind="title" dir="rtl"></span></div>
             <div class="modal-body">
@@ -13,7 +11,7 @@
                     </ul><!-- Tab panes --><div class="tab-content padding-left-10 padding-right-10" style="background:#fff">
                         <div role="tabpanel" class="tab-pane active" id="url">
                             <div class="row">
-                                <div ng-if="isLoading"><i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> قيد التحميل...</div>
+                                <div ng-if="isLoading"><i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> التحميل قيد التنفيذ...</div>
                                 <div class="content" ng-hide="isLoading">
                                     <label>كل من لديه الرابط يستطيع عرض مسودة الوثيقة، وسيظل يرى التحديثات حتى نشر المسودة أو حذفها.</label>
                                     <div style="margin:auto" class="pull-right"><a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">إنشاء رابط</a> <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i></div>
@@ -63,9 +61,7 @@
                 </div>
             </div>
         </div>
-    </script>
-
-    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+    </script><script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" dir="rtl">
             <div class="modal-header">إنشاء نسخة بصيغة PDF من مسودة السجل: <span  ng-bind="title" dir="rtl"></span></div>
             <div class="modal-body">
@@ -84,4 +80,4 @@
                 <button type="button" class="btn btn-primary pull-right" ng-click="close()" >إغلاق</button>
             </div>
         </div>
-    </script></span>
+    </script>

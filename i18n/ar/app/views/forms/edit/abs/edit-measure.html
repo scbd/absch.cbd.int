@@ -1,18 +1,21 @@
 ﻿<div  dir="rtl">
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
             <div>
-                <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-                languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+                <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         
                     <form class="editForm" name="editForm" style="margin-top:10px">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <legend name="formInfo" style="display:none"></legend>
                                 <section>
-                                    <legend>هل تحتوي هذه التدابير على تعديل على التدابير التشريعية أو الإدارية أو السياساتية السابقة؟</legend>
+                                    <legend>Is this an amendment to previous legislative, administrative or policy measure?</legend>
                                     <div class="help-info">يستخدم هذا القسم فقط إذا كانت التدابير الجاري إرسالها تنطوي على تعديل على التدابير الحالية. إذا كان التدبير الجاري تسجيله في غرفة تبادل المعلومات بشأن الحصول على الموارد الجينية وتقاسم المنافع يحتوي على تعديلات في تدبير موجود أو جزء منه، فاحرص على أن يكون التدبير الجاري تعديله مُسجّل بالفعل في غرفة تبادل المعلومات بشأن الحصول على الموارد الجينية وتقاسم المنافع من أجل إضافة رابط للسجل الحالي. يتيح ذلك عرض سجلين معًا.</div>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -33,7 +36,7 @@
                                                       <div document-selector on-build-query="onAmendedMeasuresQuery(searchText)" ng-model="document.amendedMeasures" question="amendedMeasures"></div><!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>--></div>
                                                 </div>
     
-                                                <div class="km-control-group" name="amendmentsDescription" caption="موجز التعديل (التعديلات)">
+                                                <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
                                                     <div class="help-info">سيُساعد ذلك المستخدمين في فهم العلاقة بين التدبيرين. ينبغي أن يكون الموجز بسيطًا ومختصرًا بقدر الإمكان.</div>
                                                     <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                                                 </div>
@@ -48,7 +51,7 @@
                                     <legend>معلومات عامة</legend>
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                            <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -58,7 +61,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="government" required caption="البلد">
-                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."></div>
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                                             </div>
                                         </div>
                                     </div>
@@ -85,7 +88,7 @@
                                                 </div>
                                             </div>
                                             <div ng-show="isLegallyBinded()">
-                                                <div class="km-control-group" name="entryIntoForce" required caption="يرجى تحديد تاريخ بدء السريان">
+                                                <div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
                                                     <div km-date placeholder="يوم - شهر - سنة" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
                                                 </div>
                                             </div>
@@ -143,7 +146,7 @@
     
                                             <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
                                                 <div class="help-info">يُرجى ملاحظة أنه ينبغي تسجيل التدابير الإقليمية أو متعددة الأطراف مرة واحدة فقط في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع، وأن التدبير سيظهر كجزء من الإطار القانوني لكل البلاد المحددة ضمن نطاق تغطية التدبير الإقليمي في صفحة المعلومات الخاصة بها. من الأفضل أن يوافق بلد واحد على تسجيل التدابير بالنيابة عن المنظمة الإقليمية أو مجموعة البلاد التي تشترك في التدبير نفسه.</div>
-                                                <div class="km-control-group" required name="jurisdictionRegions" caption="اسم (أسماء) البلد و/أو المجموعة (المجموعات) الجغرافية أو السياسية/الاقتصادية">
+                                                <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
                                                     <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0"><span ng-bind="document.jurisdictionRegions[0]|term"></span></button>
                                                 </div>
                                             </div>
@@ -187,7 +190,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" required name="documents" caption="نص الوثيقة (بلغتها الأصلية)">
-                                                <div class="help-info">يُفضل إرفاق المستند. أو اذكر موقع الوثيقة (على سبيل المثال عنوان الويب الذي يشتمل على عنوان الموقع، مثال:  http://absch.cbd.int/) واسم موقع الويب (على سبيل المثال: الحصول على الموارد وتقاسم المنافع").</div>
+                                                <div class="help-info">يُفضل إرفاق المستند. Otherwise, provide the location of the document, i.e. web address including the URL of the website (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing Clearing-House”).</div>
                                                 <div km-link required name="documents" ng-model="document.documents" extensions="options.documentLinksExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -204,7 +207,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="linkedMeasures" caption="العلاقة مع التدابير الأخرى">
-                                                <div class="help-info">يُرجى توضيح إذا كانت هناك أي علاقة بين هذه الوثيقة/التدبير والقوانين أو اللوائح أو الإرشادات أو التدابير الإدارية أو السياساتية الأخرى. على سبيل المثال، إذا كان التدبير الجاري إرساله يطبق أحد القوانين الحالية. تساعد هذه المعلومات في عرض المعلومات بشأن الإطار القانوني الوطني. يتيح لك هذا القسم من النموذج الربط بين تدبيرين إذا كانا مرتبطين، على سبيل المثال إذا كان التدبير الجاري إرساله يطبق قانونًا حاليًا. سيُعرض التدبيران جنبًا إلى جنب</div><!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>--><div document-selector ng-disabled="!document.government.identifier" on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
+                                                <div class="help-info">يُرجى توضيح إذا كانت هناك أي علاقة بين هذه الوثيقة/التدبير والقوانين أو اللوائح أو الإرشادات أو التدابير الإدارية أو السياساتية الأخرى. على سبيل المثال، إذا كان التدبير الجاري إرساله يطبق أحد القوانين الحالية. تساعد هذه المعلومات في عرض المعلومات بشأن الإطار القانوني الوطني. يتيح لك هذا القسم من النموذج الربط بين تدبيرين إذا كانا مرتبطين، على سبيل المثال إذا كان التدبير الجاري إرساله يطبق قانونًا حاليًا. The two measures will then be displayed together.</div><!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>--><div document-selector ng-disabled="!document.government.identifier" on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
     
                                             </div>
                                         </div>
@@ -257,7 +260,7 @@
     
                                     <div ng-if="document.absMeasuresForDelete">
                                         <div class="alert alert-warning">
-                                            <h4 class="color-blue"><i class='fa fa-info-circle'></i> <strong>تم تغيير صيغة حفظ <i>عناصر التدابير</i>. يجب تحديث هذا السجل بصورة يدوية. قائمة <i>عناصر التدابير</i> التالية هي من النسخة السابقة، وهي لهدف مرجعي من أجل مساعدتك على تحديث هذا السجل.</strong></h4><span ng-repeat="elm in document.absMeasuresForDelete"><span ng-bind="$index+1"></span>. <span ng-bind="elm|term"></span> <span ng-if="elm.customValue" ng-bind="elm.customValue"></span>&nbsp; <span ng-if="elm.section">(<span ng-bind="elm.section|lstring"></span>)</span> <br/> </span></div>
+                                            <h4 class="color-blue"><i class='fa fa-info-circle'></i> <strong>The format for saving the <i>Elements of Measures</i> has changed. يجب تحديث هذا السجل بصورة يدوية. قائمة <i>عناصر التدابير</i> التالية هي من النسخة السابقة، وهي لهدف مرجعي من أجل مساعدتك على تحديث هذا السجل.</strong></h4><span ng-repeat="elm in document.absMeasuresForDelete"><span ng-bind="$index+1"></span>. <span ng-bind="elm|term"></span> <span ng-if="elm.customValue" ng-bind="elm.customValue"></span>&nbsp; <span ng-if="elm.section">(<span ng-bind="elm.section|lstring"></span>)</span> <br/> </span></div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
@@ -306,7 +309,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في إضافة أو حفظ أي معلومات سرية.</div>
+                                                <div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>

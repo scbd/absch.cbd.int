@@ -1,17 +1,17 @@
-<div id="editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;" dir="rtl"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true" dir="rtl"></span><div class="registerpage-content">
+<div id="innerPageEditForm editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;" dir="rtl"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true" dir="rtl"></span><div class="registerpage-content">
 
         <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="well no-shadow bg-white">
                         <legend>معلومات عامة</legend>
                         <div class="row">
                             <div class="col-xs-12" >
-                                <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                     <div class="indent">
                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                     </div>
@@ -29,7 +29,7 @@
                             <div class="col-md-8 col-xs-12">
                                 <div class="km-control-group" name="relatedOrganization" caption="منظمة ذات صلة">
                                     <div class="help-block">يُرجى استخدام هذه الخانة للارتباط بأي منظمات أخرى ذات صلة ربما تكون مسجلة في قاعدة البيانات (على سبيل المثال المنظمة الأم).</div>
-                                   <div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
+                                   <div document-selector required ng-model="document.relatedOrganization" allow-new="true" allow-new-schema="organization"
                                         type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
                             </div>
                             </div>
@@ -82,7 +82,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                               <div class="km-control-group" name="detectableLmos" caption="الكائنات الحية المُحوَّرة التي يرصدها المعمل">
+                               <div class="km-control-group" name="detectableLmos" caption="LMO(s) detectable by the laboratory">
                                     <div document-selector ng-model="document.detectableLmos" allow-new="true" allow-new-schema="modifiedOrganism"
                                         question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true">
                                         
@@ -112,7 +112,7 @@
                     </div>
                     <div class="well no-shadow bg-white">
                         <legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
-                        <div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. بعد انقضاء الموعد النهائي، سيُطلب منك تأكيد السجل أو تحديثه في غضون 3 أشهر. وإذا لم يصلك أي تأكيد بعد انقضاء هذه المدة سيتم تمييز السجل بالوصف "غير مؤكد".</div>
+                        <div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. After the deadline you will be asked to confirm or update the record within 3 months. وإذا لم يصلك أي تأكيد بعد انقضاء هذه المدة سيتم تمييز السجل بالوصف "غير مؤكد".</div>
                     </div>
 
                     <div class="well no-shadow bg-white">
@@ -129,7 +129,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-                                    <div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+                                    <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
@@ -139,7 +139,7 @@
                         <legend>ملاحظات</legend>								
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
                                 </div>
                             </div>
                         </div>

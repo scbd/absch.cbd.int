@@ -1,12 +1,12 @@
 <div dir="rtl">
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -16,7 +16,7 @@
 									<legend>معلومات عامة</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+											<div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
 												<div class="indent">
 													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
@@ -44,7 +44,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="hasUniqueIdentification" required caption="هل هذا الكائن الحي المحور للكائن له معرف فريد من نوعه؟">
-												<div class="help-block">تستخدم غرفة تبادل معلومات السلامة الأحيائية نظاما من المعرفات الفريدة يتوافق مع إرشادات منظمة التعاون الاقتصادي والتنمية لوضع المعرفات الفريدة للنباتات المعدلة وراثيًا (على سبيل المثال: MON-ØØ81Ø-6). لمعرفة المزيد من المعلومات، يُرجى زيارة الرابط <a rel="noopener" href="http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml"> http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml</a>.</div>
+												<div class="help-block">تستخدم غرفة تبادل معلومات السلامة الأحيائية نظاما من المعرفات الفريدة يتوافق مع إرشادات منظمة التعاون الاقتصادي والتنمية لوضع المعرفات الفريدة للنباتات المعدلة وراثيًا (على سبيل المثال: MON-ØØ81Ø-6). للمزيد من المعلومات انظر  <a rel="noopener" href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">https://bch.cbddev.xyz/en/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef</a>.</div>
 												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -95,7 +95,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="vector" caption="الناقل">
-												<div class="help-block">تستخدم النواقل في احتواء تسلسل الحمض النووي (خاصة في تكوين المحفز-الجين-المثبط) للمساعدة في نقله إلى الكائن المستقبل. أمثلة: Agrobacterium Ti plasmid و pBIN19.</div>
+												<div class="help-block">تستخدم النواقل في احتواء تسلسل الحمض النووي (خاصة في تكوين المحفز-الجين-المثبط) للمساعدة في نقله إلى الكائن المستقبل. أمثلة: Agrobacterium Ti plasmid and pBIN19.</div>
 												<div km-textbox-ml name="vector"  ng-model="document.vector" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -143,14 +143,14 @@
 											</div>
 										</div> --><div class="col-sm-12">
 											<div  block-region activate="loadingGeneTraits" block-text="Updating trait...">
-												<div class="km-control-group" required name="traits" caption="السمات المحوّرَة">												
+												<div class="km-control-group" required name="traits" caption="Modified traits">												
 													<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
 												</div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGenes"
-												caption="الجين (الجينات) التي تأثر تعبيرها بالتحول">
+												caption="Other gene(s) whose expression was affected by the transformation">
 												<div class="help-block">يجب استخدام هذا القسم في تحديد التغيرات التي تطرأ على تعبير الجينات بعيداّ عن تلك التغييرات المدخلة في الكائن الحى المحوّر: على سبيل المثال، تثبيط الجين أو تنشيطه.</div>
 												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
 														caption="العنصر الوراثي" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
@@ -162,7 +162,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGeneNotes"
-												caption="يُرجى وصف مدى التأثير على تعبير الجين (الجينات)">
+												caption="Please describe how the expression of the gene(s) was affected">
 												<div km-rich-textbox name="affectedGeneNotes" ng-model="document.affectedGeneNotes"
 													locales="document.header.languages" rows="4"></div>
 											</div>
@@ -179,10 +179,10 @@
 							</section>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>وسائل الرصد</legend>
+									<legend>Detection method(s)</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethodLinks" caption="الرابط (الروابط) الخارجية">
+											<div class="km-control-group" name="detectionMethodLinks" caption="External link(s)">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
 													identifier="document.header.identifier">
 													<link-controls>												
@@ -218,7 +218,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-												<div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -232,7 +232,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</div>
+											<div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>

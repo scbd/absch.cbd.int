@@ -1,35 +1,25 @@
-﻿<div id="SubmitPage">
+﻿<div id="SubmitPage" dir="rtl">
     
     <div class="container">
         
-        <h1>BCH Information Submission</h1>
+        <h1>إرسال المعلومات</h1>
     
-        <h2>Registering National Records</h2>
-        <p>
-            The submission of records in this category is restricted to Biosafety Clearing-House National Focal Points (BCH-NFPs) and National Authorized Users (NAUs). 
-            All records submitted by NAUs will be forwarded to the BCH-NFP for review and validation prior to publication (see FAQs).
-        </p>
+        <h2>تسجيل السجلات الوطنية</h2>
+        <p>إرسال السجلات ضمن هذه الفئة مقصور علي ‏المستخدمين الوطنيين المرخصين ‏‏والمستخدمين الوطنيين المرخصين. سيتم توجيه كل السجلات التي يرسلها المستخدمون الوطنيون المفوضون إلى نقطة الاتصال الوطنية في غرفة تبادل معلومات السلامة الأحيائية للمراجعة والتحقق قبل النشر (انظر الأسئلة الشائعة.</p>
         
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.national" >
-                <h3 style="font-size:auto">{{::s.title}}</h3>
-                <p style="min-height:100px">{{::s.description}}</p>
-                <a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
-            </div>
+                <h3 style="font-size:auto" ng-bind="::s.title"></h3>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">إرسال</a></div>
         </div>
         
-        <h2>Registering Reference Records</h2>
-        <p>
-            Records in this category may be submitted by all registered users. 
-            These records will be subject to review and validation by the Secretariat prior to publication (see FAQs).
-        </p>
+        <h2>تسجيل السجلات المرجعية</h2>
+        <p>يستطيع كل المستخدمين المُسجلين إرسال السجلات في هذه الفئة. هذه السجلات ستراجعها الأمانة وتصادق على صحتها قبل النشر (انظر الأسئلة السائعة).</p>
         
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.reference" >
-                <h3 style="font-size:auto">{{::s.title}}</h3>
-                <p style="min-height:100px">{{::s.description}}</p>
-                <a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
-            </div>
+                <h3 style="font-size:auto" ng-bind="::s.title"></h3>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">إرسال</a></div>
         </div>
     </div>
 </div>

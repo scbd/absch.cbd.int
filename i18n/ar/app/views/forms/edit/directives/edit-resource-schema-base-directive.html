@@ -5,7 +5,7 @@
 			validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			data-container="{{container}}" is-dialog="{{isDialog}}">
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 			<edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
 
@@ -18,7 +18,7 @@
 			
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                            <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="documentLanguages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -44,18 +44,18 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
-											<legend>المؤلف (جهات التأليف):</legend>
+											<label name="authors" style="font-size: 21px !important;" required for="authors">المؤلف (جهات التأليف):</label>
 											<div class="help-block">اسم المؤلف أو المنظمة التي ألفت المنشور أو وثيقة المعلومات.</div>
 										</div>
-										<div class="col-xs-12">
-											<div class="km-control-group" name="authors" caption="اسم المؤلف/أسماء المؤلفين">
+										<div class="col-xs-12" style="margin-top: 20px;">
+											<div class="km-control-group" name="authors" caption="Author name(s)">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" caption="و/أو" style="margin-bottom: 10px;"></div>
+											<div class="km-control-group" caption="أو" style="margin-bottom: 10px;"></div>
 										</div>
 									</div>
 									<div class="row">
@@ -68,12 +68,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="publisher" caption="الناشر">
 												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" required name="publicationDate" caption="تاريخ النشر"
 											help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: VLR">
 												<div km-date placeholder="السنة - الشهر" name="publicationDate" required 
@@ -83,15 +83,15 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="source" caption="المصدر">
 												<div class="help-block">إشارة مرجعية للمصدر الذي أُعدَّت منه الوثيقة الحالية، على سبيل المثال اسم دورية لمقال منشور في إحدى الدوريات.</div>
 												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="rights" caption="الحقوق">
-												<div class="help-block">المعلومات عن الحقوق الخاصة بالوثيقة المرجعية مثل صاحب حقوق النشر وإمكانية إعادة النشر لأغراض تعليمية أو غير ربحية.</div>
+												<div class="help-block">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
 												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -106,7 +106,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceLinks" caption="رابط للوثائق المرجعية">		
-												<div class="help-block">يُرجى دائما إرفاق المستندات ذات الصلة التي سيتم تخزينها في قاعدة البيانات حتى يتسنى للمستخدمين تنزيلها. عند نشر الوثائق المرجعية عبر الإنترنت، يُرجى أيضًا إضافة الروابط الخاصة بها. يرجى ملاحظة أن تحميل المرفقات له الأفضلية على وضع الروابط لأن الملفات المرفقة متاحة باستمرار أما الروابط فتتعرض للانتهاء أو التغيير.</div>										
+												<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. عند نشر الوثائق المرجعية عبر الإنترنت، يُرجى أيضًا إضافة الروابط الخاصة بها. يرجى ملاحظة أن تحميل المرفقات له الأفضلية على وضع الروابط لأن الملفات المرفقة متاحة باستمرار أما الروابط فتتعرض للانتهاء أو التغيير.</div>										
 												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
 												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 											</div>
@@ -114,7 +114,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="cover" caption="صورة/صور الغلاف">
+											<div class="km-control-group" name="cover" caption="صورة (صور) الغلاف">
 												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -149,7 +149,7 @@
 										</div>
 
 										<div class="col-md-1">
-											<div class="km-control-group small country-list" name="countryRegions.countries" caption="و/أو"></div></div>
+											<div class="km-control-group small country-list" name="countryRegions.countries" caption="and/or"></div></div>
 									
 										<div class="col-md-3">
 											<div class="km-control-group small country-list" name="countryRegions.countries" caption="اسم (أسماء) البلد">
@@ -165,10 +165,10 @@
 							</section>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>الكلمات المفتاحية لتسهيل البحث عن المعلومات في غرف تبادل المعلومات والسلامة الأحيائية</legend>
+									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
-											<div class="km-control-group" name="aichiTargets" caption="أهداف أيتشي للتنوع البيولوجي">
+											<div class="km-control-group" name="aichiTargets" caption="أهداف أيتشي">
 												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
 												 binding-type="term[]"></div>
 											</div>
@@ -187,7 +187,7 @@
 								</div>
 							</section><!-- Till now all fields are common for all CHs  --> <!-- IF BCH START --><section ng-if="isBCH">
 							<div class="well no-shadow bg-white">
-								<legend>الكلمات المفتاحية المرتبطة بالسلامة الأحيائية</legend>
+								<legend>Keywords related to Biosafety</legend>
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" required name="biosafety.subjects" caption="محاور وموضوعات السلامة الأحيائية">
@@ -241,7 +241,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="هل تركز هذه الوثيقة المرجعية على كائن محدد أو أكثر من الكائنات الحية؟" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Does this resource address one or more specific organisms?" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
@@ -281,10 +281,10 @@
 								</div>
 							</div>
 						</section><!-- IF BCH END --> <!-- IF ABS START --><section ng-if="isABS">
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>الكلمات المفتاحية المرتبطة بالحصول على الموارد وتقاسم المنافع</legend>
+							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Keywords related to Access and Benefit-Sharing</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="nagoya.mccKeywords" required caption="يُرجى تحديد الكلمات المفتاحية الملائمة لوصف محتوى مدونة السلوك والمبادئ التوجيهية وأفضل الممارسات والمعايير الجاري إرسالها">
+										<div class="km-control-group" name="nagoya.mccKeywords" required caption="يُرجى تحديد الكلمات الرئيسية الملائمة لوصف محتوى مدونة السلوك والمبادئ التوجيهية وأفضل الممارسات والمعايير الجاري إرسالها">
 											<div km-term-check name="nagoya.mccKeywords" required ng-model="document.nagoya.mccKeywords" terms="options.mccKeywords()"
 											 binding-type="term[]"></div>
 										</div>
@@ -301,7 +301,7 @@
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="المجالات الرئيسية والتدابير الاستراتيجية لعمليات بناء القدرات وتطويرها التي تناولتها الوثيقة المرجعية">
+										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
 											<div class="help-block">إذا كانت هذه الوثيقة المرجعية مرتبطة ببناء القدرات لبروتوكول ناغويا، يُرجى توفير خيار (خيارات) قابلة للتطبيق من</div>
 											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
 											 binding-type="term[]" tabular-shape="true" tabular-shape="true" ></div>
@@ -324,7 +324,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-											<div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+											<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 											 identifier="document.header.identifier"></div>
 										</div>
@@ -338,7 +338,7 @@
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="km-control-group" name="notes">
-										<div class="help-block">خانة "الملاحظات" للاستخدام الشخصي. وتظهر فقط أثناء تحرير السجل أو تعديله لكنها لا تظهر بعد نشر السجل. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</div>
+										<div class="help-block">The “Notes” field is for personal use. وتظهر فقط أثناء تحرير السجل أو تعديله لكنها لا تظهر بعد نشر السجل. This field is not meant to be used for confidential information.</div>
 										<div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>

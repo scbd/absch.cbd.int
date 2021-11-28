@@ -1,17 +1,13 @@
-﻿<div>
-     <a rel="noopener" translation-url   class="btn btn-primary btn-block margin-bottom" ng-click="menuSelection('mailCompose')">Compose</a>
-     <div class="box box-solid no-padding">
+﻿<div dir="rtl"><a rel="noopener" translation-url   class="btn btn-primary btn-block margin-bottom" ng-click="menuSelection('mailCompose')" dir="rtl">إنشاء بريد جديد</a><div class="box box-solid no-padding">
        <div class="box-header with-border">
          <h3 class="box-title">MAILBOXES</h3>
        </div>
        <div class="box-body no-padding">
          <ul class="nav nav-pills nav-stacked">
-           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','inbox'); "><i class="fa fa-inbox"></i> Inbox
-               <span class="label label-primary pull-right">{{inboxCount}}</span></a></li>
-           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','sent')"><i class="fa fa-envelope-o"></i> Sent</a></li>
-           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','draft')"><i class="fa fa-file-text-o"></i> Drafts</a></li>
-           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','trash')"><i class="fa fa-trash-o"></i> Trash
-               <span class="label label-primary pull-right">{{trashCount}}</span></a></li>
+           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','inbox'); "><i class="fa fa-inbox"></i> صندوق الوارد <span class="label label-primary pull-right" ng-bind="inboxCount"></span></a></li>
+           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','sent')"><i class="fa fa-envelope-o"></i> صندوق المرسل</a></li>
+           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','draft')"><i class="fa fa-file-text-o"></i> مسودات</a></li>
+           <li><a rel="noopener" translation-url  ng-click="menuSelection('mailList','trash')"><i class="fa fa-trash-o"></i> المهملات <span class="label label-primary pull-right" ng-bind="trashCount"></span></a></li>
          </ul>
        </div>
      </div>

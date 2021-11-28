@@ -1,0 +1,31 @@
+﻿<div>
+    <div ng-if="currentCountry.code" style="padding:5px;" ng-class="{'bg-party': currentCountry.isParty, 'bg-darkgrey':!currentCountry.isParty, 'bg-inbetween': currentCountry.isInbetweenParty}">
+        <div><span ng-if="(isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)"
+                >Сторона Нагойского протокола</span> <span ng-if="(isABS && currentCountry.isInbetweenParty)"
+                >Ратифицировавшее, но еще не являющееся Стороной государство</span> <span ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)"
+                >Государство, не являющееся Стороной Нагойского протокола</span></div>
+
+        <div class="row abs-exception-tooltip"
+        ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
+                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
+                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
+            <div class="col-lg-12">
+                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk') ? 'show' : 'hide'}}"
+                    style="margin-top:5px;white-space: normal;padding:3px;">Ратификация Данией Протокола не применяется в отношении Гренландии и Фарерских островов.</div>
+                <div class="{{countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk' ? 'show' : 'hide'}}   small " style="margin-top:5px;white-space: normal;padding:3px;">Между правительствами Аргентины и Соединенного Королевства Великобритании и Северной Ирландии существует спор относительно суверенитета над Фолклендскими (Мальвинскими) островами.</div>
+                <div class="{{countryMapScope.currentCountry.code.toLowerCase()=='eh' ? 'show' : 'hide'}}   small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">Несамоуправляющаяся территория.</div>
+                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;">Ратификация СК Нагойского протокола не распространяется на <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
+                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Ангилья, Бермудские острова, Британская антарктическая территория, Британская территория в Индийском океане, Британские Виргинские Острова, Гибралтар, Монтсеррат, остров Южная Георгия и Южные Сандвичевы острова, Острова Кайман, Острова Питкэрн, острова Святой Елены, Вознесения и Тристан-да-Кунья, острова Тёркс и Кайкос, Суверенная территория баз Акротири и Декелия, Фолклендские острова">14 заморских территорий</a> или <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories"  data-container="body" 
+                        data-bs-toggle="tooltip" data-placement="left" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 зависимых территории короны</a></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
+                <td ><span class="badge bg-black"><span ng-bind="schema.count"></span></span></td>
+                <td><a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a> <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a></td>
+            </tr>
+        </table>
+    </div>
+</div>

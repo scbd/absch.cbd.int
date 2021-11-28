@@ -1,39 +1,21 @@
-﻿<div>
-	<style media="screen">
-		#listGroup {
-			max-width: 95%;
-			min-width: 80%;
-		}
-	</style>
-	<div class="input-group">
-		<span class="input-group-addon" style="display: block; padding: 0px"
-			ng-repeat="(i, display) in displaySpans track by $index">
-			<input type="text" ng-model="displaySpans[i]" tabindex="-1" ng-focus="this.select()"
+﻿<div dir="rtl">
+	<style media="screen"> #listGroup { max-width: 95%; min-width: 80%; } </style>
+	<div class="input-group"><span class="input-group-addon" style="display: block; padding: 0px"
+			ng-repeat="(i, display) in displaySpans track by $index"><input type="text" ng-model="displaySpans[i]" tabindex="-1" ng-focus="this.select()"
 				ng-keydown="keydown($event)" ng-keyup="spansKeyup(i)" ng-blur="updateSpan(i, displaySpans[i]);"
-				autocomplete="off">
-			<a rel="noopener" ng-click="removeSpan(i)" class="glyphicon glyphicon-remove"></a>
-		</span>
+				autocomplete="off"><a rel="noopener" ng-click="removeSpan(i)" class="glyphicon glyphicon-remove"></a> </span></span>
 		<input {{required}} type="{{type||'text'}}" class="form-control" id="{{title}}"
-			placeholder="{{placeholder | localize}}" autocomplete="off" ng-model="bindingDisplay"
+			placeholder="{{placeholder}}" autocomplete="off" ng-model="bindingDisplay"
 			ng-keydown="keydown($event)" ng-keyup="keyup(bindingDisplay, $event)" ng-focus="keydown($event)"
 			select-all-on-click ng-blur="updateHideOptions()" ng-click="toggleAllOptions(true)"
-			ng-class="{disabled:ngDisabledFn()}" ng-disabled="ngDisabledFn()">
-		<span class="input-group-btn">
-			<button type="button" class="btn btn-default" ng-click="toggleAllOptions(true);" ng-disabled="ngDisabledFn()"
-				ng-blur="delayHideOptions()" tabindex="-1" ng-class="{disabled:ngDisabledFn()}">
-				<span class="glyphicon glyphicon-chevron-down"></span>
-			</button>
-		</span>
-	</div>
+			ng-class="{disabled:ngDisabledFn()}" ng-disabled="ngDisabledFn()"><span class="input-group-btn"><button type="button" class="btn btn-default" ng-click="toggleAllOptions(true);" ng-disabled="ngDisabledFn()"
+				ng-blur="delayHideOptions()" tabindex="-1" ng-class="{disabled:ngDisabledFn()}"><span class="glyphicon glyphicon-chevron-down"></span></button></span></div>
 
 	<div style="display: none; position: absolute; z-index: 9999; background-color: white; max-height: 300px; overflow: auto;"
 		class="list-group">
 			<div ng-repeat="item in buttonOverrideFilter(bindingDisplay, items)" ng-click="clickSelected($index)"
 				ng-mouseover="updateSelected($index)" class="list-group-item" style="cursor: pointer;"
-				ng-class="{'list-group-item-info': selected == $index, 'list-group-item-success': displaySpans.indexOf(item.__value)!=-1}">
-				{{item.title | lstring:currentLocale}}&nbsp;
-				<span ng-show="displaySpans.indexOf(item.__value) != -1" class="glyphicon glyphicon-ok"></span>
-			</div>
+				ng-class="{'list-group-item-info': selected == $index, 'list-group-item-success': displaySpans.indexOf(item.__value)!=-1}"><span ng-bind="item.title | lstring:currentLocale"></span>&nbsp; <span ng-show="displaySpans.indexOf(item.__value) != -1" class="glyphicon glyphicon-ok"></span></div>
 	</div>
 	<div ng-show="!hidePreview" compile="preview"></div>	
 </div>

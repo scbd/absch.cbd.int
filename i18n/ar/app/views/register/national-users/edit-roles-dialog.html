@@ -1,40 +1,22 @@
-﻿<div class="modal-content">
+﻿<div class="modal-content" dir="rtl">
 
-    <style>
-    .text-nowrap.btn-group { white-space: nowrap; }
-    .text-nowrap.btn-group > .btn {
-        float: none;
-        display: inline-block;
-    }
-    </style>
+    <style> .text-nowrap.btn-group { white-space: nowrap; } .text-nowrap.btn-group > .btn { float: none; display: inline-block; } </style>
 
     <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <h3 class="modal-title">
-            Grant / Revoke Roles - {{editRolesDialogCtrl.user.firstName}} {{editRolesDialogCtrl.user.lastName}}
-        </h3>
-        {{editRolesDialogCtrl.user.email}}
-    </div>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">منح / رفض الأدوار - <span ng-bind="editRolesDialogCtrl.user.firstName+' '+editRolesDialogCtrl.user.lastName"></span></h3><span ng-bind="editRolesDialogCtrl.user.email"></span></div>
 
-    <div class="modal-body">
-
-        <!-- ROLES -->
-        <p>Please select which functions you want assign to the user</p>
+    <div class="modal-body"><!-- ROLES --><p>يُرجى تحديد الوظائف التي ترغب في إسنادها للمستخدم</p>
 
 
         <table class="table table-striped" style="width:100%">
             <tr ng-repeat="role in editRolesDialogCtrl.roles" ng-class="editRolesDialogCtrl.rowClasses(role)"
             ng-show="editRolesDialogCtrl.roleFilter(role)">
-                <td style="vertical-align:middle;width:2em">
-                    <i class="fa fa-fw", style="font-size:150%"
+                <td style="vertical-align:middle;width:2em"><i class="fa fa-fw", style="font-size:150%"
                        ng-class=" { 'fa-check-square-o' : editRolesDialogCtrl.selectedRoles[role.roleId], 'fa-square-o' : !editRolesDialogCtrl.selectedRoles[role.roleId] }"
-                       ng-click="editRolesDialogCtrl.selectedRoles[role.roleId]=!editRolesDialogCtrl.selectedRoles[role.roleId];editRolesDialogCtrl.updateGovernmentPA(role)"></i>
-                </td>
-                <td style="width:90%">
-                    {{role.name}}
-                    <div><i>{{role.description}}</i></div>
+                       ng-click="editRolesDialogCtrl.selectedRoles[role.roleId]=!editRolesDialogCtrl.selectedRoles[role.roleId];editRolesDialogCtrl.updateGovernmentPA(role)"></i></td>
+                <td style="width:90%" ng-bind="role.name">
+                    <div><i ng-bind="role.description"></i></div>
                 </td>
             </tr>
         </table>
@@ -43,11 +25,11 @@
     <div class="modal-footer">
 
         <div class="pull-left" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
-            <div ng-show="editRolesDialogCtrl.stats().grant" ><em>{{editRolesDialogCtrl.stats().grant}} role(s) will be granted</em></div>
-            <div ng-show="editRolesDialogCtrl.stats().revoke"><em>{{editRolesDialogCtrl.stats().revoke}} role(s) will be revoked</em></div>
+            <div ng-show="editRolesDialogCtrl.stats().grant" ><em><span ng-bind="editRolesDialogCtrl.stats().grant"></span> الأدوار التي سيتم منحها</em></div>
+            <div ng-show="editRolesDialogCtrl.stats().revoke"><em><span ng-bind="editRolesDialogCtrl.stats().revoke"></span> الأدوار التي سيتم رفضها</em></div>
         </div>
 
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">Cancel</button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editRolesDialogCtrl.save()" ng-disabled="!editRolesDialogCtrl.stats().changes">Next »</button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">إلغاء</button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editRolesDialogCtrl.save()" ng-disabled="!editRolesDialogCtrl.stats().changes">التالي »</button>
     </div>
 </div>

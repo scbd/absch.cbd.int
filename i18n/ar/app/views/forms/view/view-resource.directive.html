@@ -25,13 +25,13 @@
 				</div>
 			</div>
 			<div ng-show="document.authors">
-				<label>اسم المؤلف (أسماء المؤلفين)</label>
+				<label>Author name(s)</label>
 				<div compare-val>
-					<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.authors" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.organizations">
-				<label>إشارة مرجعية للمنظمة (المنظمات) المُؤلِّفة</label>
+				<label>إشارة مرجعية للمنظمات المُؤلِّفة</label>
 				<div class="km-value" compare-val="organizations">
 					<div class="col-sm-12" ng-repeat="organization in document.organizations">
 							<div view-record-reference ng-model="organization" locale="locale"></div>
@@ -42,7 +42,7 @@
 			<div ng-show="document.publisher">
 				<label>الناشر</label>
 				<div compare-val>
-					<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.publisher" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 			<div ng-show="document.source">
 				<label>المصدر</label>
 				<div compare-val>
-					<km-value-ml value="document.source" locales="locale"></km-value-ml>
+					<km-value-ml value="document.source" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -68,7 +68,7 @@
 		</section>
 
 		<section>
-			<legend>الوصول للوثائق المرجعية</legend>
+			<legend>الوصول للمصادر المرجعية</legend>
 			<div ng-show="document.resourceLinks">
 				<label>رابط للوثائق المرجعية</label>
 				<div class="km-value" compare-val="Link to the resource(s)">
@@ -76,7 +76,7 @@
 				</div>
 			</div>
 			<div ng-show="document.covers">
-				<label>صورة (صور) الغلاف</label>
+				<label>Cover image(s)</label>
 				<div class="km-value" compare-val="covers">
 					<ul class="list">
 						<li ng-repeat="link in document.covers"><a rel="noopener" translation-url  ng-href="{{link.url|encodeURI}}" target="_blank"><!-- ToDo : add encodeURIComponent  --> <img class="img-polaroid" ng-src="{{link.url.replace('attachments/','attachments/thumbnail/')}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" /> </a></li>
@@ -104,7 +104,7 @@
 		</section>
 
 		<section>
-			<legend>الكلمات المفتاحية لتيسير البحث عن المعلومات في غرف تبادل المعلومات</legend>
+			<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
 			<div ng-show="document.aichiTargets && !isBCH">
 				<label>أهداف أيتشي ذات الصلة</label>
 				<div class="km-value" compare-val="aichiTargets">
@@ -127,6 +127,7 @@
 
 			<div ng-show="document.biosafety.raRecommend != undefined">
 				<label>هل ترغب في اقتراح هذه الوثيقة كمادة مرجعية عن "إرشادات تقييم مخاطر الكائنات الحية المحورة"؟</label>
+				<p><a class="Record" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml">https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml</a></p>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.raRecommend" locales="locale"></km-value-bool>
 				</div>
@@ -139,7 +140,7 @@
 				</div>
 
 				<div ng-show="document.biosafety.raSubjects && document.biosafety.raRecommend">
-					<label>إرشادات تقييم مخاطر الكائنات الحية المحورة</label>
+					<label>أقسام "إرشادات تقييم مخاطر الكائنات الحية المحورة" التي ترتبط بها هذه المادة المرجعية</label>
 					<div class="km-value" compare-val="raSubjects">
 						<view-terms-hierarchy ng-model="document.biosafety.raSubjects" locale="locale" term-domain="bchRaSubjects"></view-terms-hierarchy>
 					</div>
@@ -167,7 +168,7 @@
 			</div>
 
 			<div ng-show="document.biosafety.addressOrganisms != undefined">
-				<label>هل تركز هذه الوثيقة المرجعية على كائن واحد محدد أو أكثر من الكائنات؟</label>
+				<label>Does this resource address one or more specific organisms?</label>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.addressOrganisms" locales="locale"></km-value-bool>
 				</div>
@@ -191,7 +192,7 @@
 				</div>
 
 				<div ng-show="document.biosafety.genes && document.biosafety.addressGenes">
-					<label>تحديد هوية الجين (الجينات)</label>
+					<label>Gene(s) identification</label>
 					<div class="km-value" compare-val="genes">
 						<ul class="list">
 							<li ng-repeat="item in document.biosafety.genes" >
@@ -202,14 +203,14 @@
 				</div>
 			</div>
 		</section><!-- If BCH, End --> <!-- If ABS, Start --><section ng-if="isABS"><!-- <legend>Keywords related to Access and Benefit-Sharing</legend> --><div ng-show="document.nagoya.subjects">				
-				<label>محاور وموضوعات الحصول وتقاسم المنافع</label>
+				<label>ABS Thematic Areas</label>
 				<div class="km-value" compare-val="absSubjects">
 					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
 				</div>
 			</div>
 
 			<div ng-show="document.nagoya.keyAreas">
-				<label>المجالات الرئيسية والتدابير الاستراتيجية لبناء القدرات وتطويرها التي تناولتها الوثيقة المرجعية</label>
+				<label>Key areas and strategic measures for capacity-building and development addressed by the resource</label>
 				<div class="km-value" compare-val="keyAreas">
 					<view-terms-hierarchy ng-model="document.nagoya.keyAreas" locale="locale" term-domain="keyAreas"></view-terms-hierarchy>
 				</div>
@@ -233,7 +234,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
 					<km-link-list  ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 				</div>

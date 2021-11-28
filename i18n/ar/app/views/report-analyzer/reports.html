@@ -1,89 +1,85 @@
-﻿<div  class="container-fluid">
+﻿<div id="innerPage" dir="rtl">
+    <div class="mastHead">
         <div ng-if="infoBlockUrl" ng-include="infoBlockUrl"></div>
-        <div class="panel panel-default">
-                
-                <div class="panel-heading">
-                    <h3 class="panel-title">Overview </h3>
-                </div>
-    
-                <div class="panel-body" style="padding: 0px;">
-                    <table class="table" cellspacing="0" cellpadding="0" style="width:100%;margin-bottom: 0px;">
-                        <thead>
-                            <tr>
-                                <th>Report</th>
-                                <th style="text-align:center;" class="hidden-xs">Deadline </th>
-                                <th style="text-align:center;">Number of Parties <br/>at the deadline</th>
-                                <th style="text-align:center;" class="hidden-xs" ng-repeat="region in reportData[0].regionMapping">{{(region.shortTitle|lstring:locale).replace('CBD - ', '')}} </th>                                
-                                <th style="text-align:center;" class="hidden-xs">By Parties* </th>
-                                <th style="text-align:center;" class="hidden-xs">By Non-Parties* </th>
-                                <th style="text-align:center;">Total</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr ng-repeat="activeReport in reportData ">
-                                <td>
-                                    <span style="margin-right:10px;">{{activeReport.title}}</span>
-                                    <span style="display:inline-block;" ng-if="activeReport.offlineFormats && activeReport.offlineFormats.length>0">    
-                                        <i class="fa fa-file-word-o" aria-hidden="true"></i>  | 
-                                        <span ng-repeat="format in activeReport.offlineFormats">
-                                            <a rel="noopener" ng-href="{{format.url|encodeURI}}" target="_blank">{{format.lang}}</a> 
-                                            <i ng-if="!$last">|</i> 
-                                        </span>
-                                    </span>
-                                </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.deadline|formatDate}}</td>
-                                <td style="text-align:center;">{{activeReport.partyCount}} </td>
-                                <td style="text-align:center;" class="hidden-xs" ng-repeat="region in activeReport.regionMapping">{{region.count}} </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.partyReportCount}} </td>
-                                <td style="text-align:center;" class="hidden-xs">{{activeReport.nonPartyReportCount}} </td>
-                                <td style="text-align:center;">
-                                    <!-- <a rel="noopener" href="/search/nationalRecords?schema=absNationalReport"> -->
-                                        <b>{{activeReport.partyReportCount + activeReport.nonPartyReportCount}}</b>
-                                    <!-- </a> -->
-                                </td>
-                            </tr>
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <td colspan="11">
-                                    <span class="pull-right"> * Party status at the date of the deadline for submission of the report </span>
-                                </td>
-                            </tr>
-                        </tfoot>
-                    </table>
-                </div>
-            </div>
-    <br>
+    </div>
 
-        <div class="register-content-content" style="padding:5px;">
+    <div class="innerPageContent">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title">نبذة عامة</h3>
+            </div>
+
+            <div class="panel-body" style="padding: 0px;">
+                <table class="table" cellspacing="0" cellpadding="0" style="width:100%;margin-bottom: 0px;">
+                    <thead>
+                        <tr>
+                            <th>التقرير</th>
+                            <th style="text-align:center;" class="hidden-xs">الموعد النهائي</th>
+                            <th style="text-align:center;">عدد الأطراف <br />في التاريخ المحدد</th>
+                            <th style="text-align:center;" class="hidden-xs"
+                                ng-repeat="region in reportData[0].regionMapping"><span
+                                    ng-bind="(region.shortTitle|lstring:locale).replace('CBD - ', '')"></span></th>
+                            <th style="text-align:center;" class="hidden-xs">حسب الأطراف*</th>
+                            <th style="text-align:center;" class="hidden-xs">حسب غير الأطراف*</th>
+                            <th style="text-align:center;">الإجمالي</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="activeReport in reportData ">
+                            <td><span style="margin-right:10px;" ng-bind="activeReport.title"></span> <span style="display:inline-block;"
+                                    ng-if="activeReport.offlineFormats && activeReport.offlineFormats.length>0"><i class="fa fa-file-word-o" aria-hidden="true"></i> | <span ng-repeat="format in activeReport.offlineFormats"><a rel="noopener" ng-href="{{format.url|encodeURI}}" target="_blank"
+                                            ng-bind="format.lang"></a> <i ng-if="!$last">|</i></span></span></td>
+                            <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.deadline|formatDate">
+                            </td>
+                            <td style="text-align:center;" ng-bind="activeReport.partyCount"></td>
+                            <td style="text-align:center;" class="hidden-xs"
+                                ng-repeat="region in activeReport.regionMapping"><span ng-bind="region.count"></span></td>
+                            <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.partyReportCount">
+                            </td>
+                            <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.nonPartyReportCount">
+                            </td>
+                            <td style="text-align:center;"><!-- <a rel="noopener" href="/search/nationalRecords?schema=absNationalReport"> --> <b><span
+                                        ng-bind="activeReport.partyReportCount + activeReport.nonPartyReportCount"></span></b> <!-- </a> --></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="11"><span class="pull-right">* حالة الطرف في تاريخ الموعد النهائي لتقديم التقرير</span></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div><br><div class="register-content-content" style="padding:5px;">
             <div class="panel panel-default">
 
                 <div class="panel-heading">
                     <table style="width:100%">
                         <tr>
                             <td style="width:99%">
-                                <h4 class="panel-title">National report analyzer</h4>
-                                This tool allows you to select specific sections or questions of the report and to display the results by country/region.
-                            </td>
+                                <h4 class="panel-title">أداة تحليل التقارير الوطنية</h4>تتيح لك هذه الأداة تحديد أقسام أو أسئلة محددة من التقرير وعرض النتائج حسب البلد/المنطقة.</td>
                             <td>
-                                <button type="button" class="btn btn-primary" ng-click="analyze()">Analyze »</button>
+                                <button type="button" class="btn btn-primary" ng-click="analyze()">تحليل »</button>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="panel-body" ng-if="reportData">
-                    <national-report-questions-selector report-type="$parent.selectedReportType" questions="$parent.selectedQuestions" 
-                    regions="$parent.selectedRegions" regions-preset="$parent.selectedRegionsPreset"
-                    regions-preset-filter="$parent.selectedRegionsPresetFilter"
-                    report-data="reportData"></national-report-questions-selector>
+                    <national-report-questions-selector report-type="$parent.selectedReportType"
+                        questions="$parent.selectedQuestions" regions="$parent.selectedRegions"
+                        regions-preset="$parent.selectedRegionsPreset"
+                        regions-preset-filter="$parent.selectedRegionsPresetFilter" report-data="reportData">
+                    </national-report-questions-selector>
                 </div>
 
                 <div class="panel-footer text-right">
-                    <button type="button" class="btn btn-primary" ng-click="analyze()">Analyze »</button>
+                    <button type="button" class="btn btn-primary" ng-click="analyze()">تحليل »</button>
                 </div>
 
             </div>
         </div>
 
+
+    </div>
 
 </div>

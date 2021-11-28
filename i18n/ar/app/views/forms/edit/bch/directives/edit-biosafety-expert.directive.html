@@ -1,12 +1,12 @@
 <div dir="rtl">
 
-	<div class="edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 
                     <div class="row">
@@ -33,7 +33,7 @@
                                                 <legend>معلومات عامة</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                                        <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                                             <div class="indent">
                                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                             </div>
@@ -44,7 +44,7 @@
 													<div class="col-sm-12">
 														<div class="km-control-group" name="government" required caption="البلد">
 															<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."></div>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 														</div>
 													</div>
 												</div>
@@ -134,7 +134,7 @@
 													<div class="col-md-6">
 														<div class="km-control-group" required name="currentEmployment.startDate" caption="تاريخ البدء"
 														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="السنة - الشهر" name="currentEmployment.startDate" required 
+															<div km-date placeholder="الشهر - السنة" name="currentEmployment.startDate" required 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.currentEmployment.startDate"></div>
 														</div>
@@ -155,7 +155,7 @@
 						
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" required name="currentEmployment.responsibilities" caption="المسؤوليات الأساسية ">
+														<div class="km-control-group" required name="currentEmployment.responsibilities" caption="المسؤوليات الأساسية">
 															<div class="help-block">صِف بإيجاز العلاقة بين عملك والسلامة الأحيائية ومجال (مجالات) الخبرة التي رُشِّحتَ لها.</div>
 															<div km-rich-textbox name="currentEmployment.responsibilities" ng-model="document.currentEmployment.responsibilities" rows="2" locales="document.header.languages"></div>
 														</div>
@@ -181,12 +181,12 @@
 															ng-model="countryRegionsWorkedIn.countries" placeholder="يرجى تحديد خيار واحد أو عدة خيارات" items="options.countries()"></div>
 														</div>
 													</div>
-													<div class="col-md-1 small">و/أو</div>
+													<div class="col-md-1 small">and/or</div>
 
 													 <div class="col-md-6">
 														<div class="km-control-group small regions-list"  name="countryRegionsWorkedIn.regions" caption="المجموعة (المجموعات) الجغرافية أو السياسية/الاقتصادية">
 															<div km-select multiple name="countryRegionsWorkedIn.regions"
-																 ng-model="countryRegionsWorkedIn.regions" placeholder="يرجى تحديد خيار واحد أو عدة خيارات"
+																 ng-model="countryRegionsWorkedIn.regions" placeholder="Please select option(s)"
 																 items="options.regions()"></div>
 														</div>
 													</div>
@@ -215,7 +215,7 @@
 													<div class="col-md-6">
 														<div class="km-control-group" name="previousEmployment.startDate" caption="تاريخ البدء"
 														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="السنة - الشهر" name="previousEmployment.startDate" 
+															<div km-date placeholder="الشهر - السنة" name="previousEmployment.startDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.startDate"></div>
 														</div>
@@ -223,7 +223,7 @@
 													<div class="col-md-6">
 														<div class="km-control-group" name="previousEmployment.endDate" caption="تاريخ الانتهاء"
 														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
-															<div km-date placeholder="السنة - الشهر" name="previousEmployment.endDate" 
+															<div km-date placeholder="الشهر - السنة" name="previousEmployment.endDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.endDate"></div>
 														</div>
@@ -271,7 +271,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="km-control-group" required name="primaryEducation.title" caption="عنوان المؤهل أو أي تخصص ومجال أكاديمي آخر">
-																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="مثال: بكالوريوس في علم الأحياء الدقيقة." locales="document.header.languages"></div>
+																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="مثال: B.Sc. in Microbiology" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
@@ -310,7 +310,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="km-control-group"  name="secondaryEducation.title" caption="عنوان المؤهل أو أي تخصص ومجال أكاديمي آخر">
-																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="مثال: بكالوريوس في علم الأحياء الدقيقة." locales="document.header.languages"></div>
+																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="مثال: B.Sc. in Microbiology" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
@@ -349,7 +349,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="km-control-group"  name="thirdEducation.title" caption="عنوان المؤهل الأكاديمي أو أي تخصص ومجال أكاديمي آخر">
-																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="مثال: بكالوريوس في علم الأحياء الدقيقة" locales="document.header.languages"></div>
+																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="مثال: B.Sc. in Microbiology" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
@@ -373,7 +373,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.endDate" caption="تاريخ الانتهاء "
+																		<div class="km-control-group"  name="thirdEducation.endDate" caption="تاريخ الانتهاء"
 																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
 																			<div km-date placeholder="الشهر - السنة" name="thirdEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
@@ -421,7 +421,7 @@
 										
 										<section>
                                             <div class="well no-shadow bg-white">
-                                                <legend>الأعمال المنشورة</legend>
+                                                <legend>Publications</legend>
 
 												<div class="row">
 													<div class="col-md-12">
@@ -543,7 +543,7 @@
 												<div class="row">
 													<div class="col-xs-12">
 														<div class="km-control-group" name="additionalDocuments" caption="أي وثائق أخرى ذات صلة">
-															<div class="help-info">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+															<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 															<div km-link name="additionalDocuments" ng-model="document.additionalDocuments"
 																identifier="document.header.identifier"></div>
 														</div>
@@ -560,7 +560,7 @@
                                     <legend>ملاحظات</legend>								
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                            <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
                                     </div>

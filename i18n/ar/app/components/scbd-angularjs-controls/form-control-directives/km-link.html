@@ -1,8 +1,8 @@
-﻿<div style="margin-bottom:20px">
+﻿<div style="margin-bottom:20px" dir="rtl">
 	<div>
 		<div ng-transclude="linkControls" style="padding-bottom: 5px;">
-			<button type="button" class="btn btn-default" ng-click="addFile()" ng-show="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o"></i> Add file</button>
-			<button type="button" class="btn btn-default" ng-click="addLink()" ng-show="isAllowLink()"><i class="fa fa-globe"></i> Add link</button>
+			<button type="button" class="btn btn-default" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o" dir="rtl"></i> إضافة ملف</button>
+			<button type="button" class="btn btn-default" ng-click="addLink()" ng-if="isAllowLink()"><i class="fa fa-globe"></i> إضافة رابط</button>
 		</div>
 
 		<div ng-transclude="linkDisplay">
@@ -10,11 +10,7 @@
 				<li class="list-group-item" ng-repeat="link in links">
 					<table style="width:100%">
 						<tr>
-							<td>
-								<span ng-show="link.language">{{locales[link.language]||locales['lang-'+link.language]||(stringToETerm('lang-'+link.language)|term:locale)}} | </span>
-								<a rel="noopener" translation-url target="_blank" ng-href="{{link.url|encodeURI}}">{{link.name||link.url}}</a>
-								<span ng-show="link.tag">({{link.tag}})</span>
-							</td>
+							<td><span ng-if="link.language" ng-bind="locales[link.language]||locales['lang-'+link.language]||(stringToETerm('lang-'+link.language)|term:locale)"></span> <a rel="noopener" translation-url target="_blank" ng-href="{{link.url|encodeURI}}" ng-bind="link.name||link.url"></a> <span ng-if="link.tag" ng-bind="'('+link.tag+')'"></span></td>
 							<td style="white-space:nowrap;text-align:right;vertical-align:top">
 								<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
 								<button type="button" class="btn btn-default" ng-click="remove(link)"><i class="fa fa-trash-o"></i></button>
@@ -25,36 +21,33 @@
 			</ul>
 		</div>
 
-	</div>
-
-    <!--Link Editor-->
-	<div id="editLink" class="modal fade" data-backdrop="static">
+	</div><!--Link Editor--><div id="editLink" class="modal" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>Editing link</h3>
+					<h3>تعديل الرابط</h3>
 				</div>
 				<div class="modal-body"  ng-if="editor.visible && editor.type=='link'">
-					<div class="alert alert-info">Please provide the URL of the website (e.g. <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">http://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
+					<div class="alert alert-info">يرجى ذكر رابط موقع الويب (على سبيل المثال <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">https://www.cbd.int</a>) واسم موقع الويب (على سبيل المثال: "اتفاقية التنوع البيولوجي").</div>
 					<form name="linkForm">
 						<fieldset>
-							<div class="alert alert-warning" ng-show="linkForm.$error.url">
-								<strong>Warning!</strong>
-								Specified value is not a valid URL.
-								<ul><li> make sure the URL starts with http:// or https://</li></ul>
+							<div class="alert alert-warning" ng-if="linkForm.$error.url"><strong>تحذير!</strong> Specified value is not a valid URL.<ul><li>تأكد بأن رابط موقع الويب يبدأ ب //:https  أو //:http</li></ul>
 							</div>
 							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
-								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: https://www.cbd.int">
+								<label class="control-label" ng-required="editor.visible" for="url">الرابط</label>
+								<div class="help-block">عنصر البروتوكول مطلوب (https:// or http://)</div>
+								<div ng-if="editor.urlMissing" style="color: #e32">يرجى إضافة رابط صحيح لموقع على الإنترنت</div>
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="على سبيل المثال: https://www.cbd.int">
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
-								<label>Name</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website">
+								<label>الاسم</label>
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="مثال: موقع "اتفاقية التنوع البيولوجي"">
 							</div>
 
-							<div class="control-group">
-								<label>Language</label>
+							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
+								<label class="control-label" ng-required="editor.visible" for="Language">اللغة</label>
+								<div ng-if="editor.isLanguageSelect" style="color: #e32">يرجى تحديد اللغة</div>
 								<div km-form-languages required name="linkLanguage" ng-model="editor.language" data-multiple="false" 
 								require-un-language="false"></div>
 							</div>
@@ -62,48 +55,42 @@
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">Cancel</button>
-					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >Save</button>
+					<button type="button" class="btn btn-default" ng-click="editor.close()">إلغاء</button>
+					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >حفظ</button>
 				</div>
 			</div>
 		</div>
-	</div>
-
-    <!--File Upload Editor-->
-	<div id="editFile" class="modal fade" data-backdrop="static">
+	</div><!--File Upload Editor--><div id="editFile" class="modal" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>Uploading file</h3>
+					<h3>تحميل الملف...</h3>
 				</div>
 				<div class="modal-body" ng-if="editor.visible && editor.type=='file'">
-					<div class="alert alert-danger" ng-show="editor.error!=null">
-						<h4>An error has occurred</h4>
-						{{editor.error}}
-					</div>
-					<div ng-show="editor.progress">
-						<label>Uploading {{editor.name}} ({{editor.progress.size/1024 | number:1}} kB)</label>
+					<div class="alert alert-danger" ng-if="editor.error!=null">
+						<h4>حدث خطأ...</h4><span ng-bind="editor.error"></span></div>
+					<div ng-if="editor.progress">
+						<label>تحميل <span ng-bind="editor.name"></span> قيد التنفيذ (<span ng-bind="editor.progress.size/1024 | number:1"></span> كيلوبايت)</label>
 						<div class="progress progress-striped {{editor.progress.style}}">
 							<div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"  style="width:{{editor.progress.percent}}%;"></div>
 						</div>
 					</div>
 					<div class="control-group" >
-						<label>File name</label>
+						<label>اسم الملف</label>
 						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
 					</div>
-					<div class="control-group">
-						<label>Language</label>
+					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
+						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">اللغة</label>
+						<div ng-if="editor.isLanguageSelect" style="color: #e32">يرجى تحديد اللغة</div>
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
-					</div>
-					<br/>
-					<div class="control-group" >
-						<label>Tags</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="example: Biodiversity, Aichi target">
+					</div><br/><div class="control-group" >
+						<label>علامات</label>
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="مثال: التنوع البيولوجي ، هدف أيتشي">
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button class="btn btn-default" ng-click="editor.close()">Cancel</button>
-					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress">Save</button>
+					<button type="button" class="btn btn-default" ng-click="editor.close()">إلغاء</button>
+					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress || editor.error!=null">حفظ</button>
 				</div>
 				<div id="uploadPlaceholder" style="display:none"></div>
 			</div>

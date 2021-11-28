@@ -1,20 +1,21 @@
 ﻿<div dir="rtl">
     <link rel="stylesheet" href="/app/css/record.css">
-    <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'" ng-if="printMode"></div>
+    <div id="printContentHeader" ng-include="'view-print-header.html'" ng-if="printMode"></div>
     <style> ins { text-decoration: none; background-color: #d4fcbc; } del { text-decoration: line-through; background-color: #fbb6c2; color: #555; } </style>
     <div id="recordContent">
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
         <div block-region activate="loading||isComparing"></div>
 
-        <div class="alert alert-danger text-center" ng-show="error" ng-if="error"><strong>حدث خطأ...</strong><div>{{error}}</div>
+        <div class="alert alert-danger text-center" ng-show="error" ng-if="error && !loading"><strong>حدث خطأ!</strong> This was an error loading the requested record.<p ng-if="error.status == 404">Record was not found!</p>
+            <p ng-if="error.status != 404" ng-bind="error.message||error"></p>
         </div>
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentSuccess">
-            <h2>نشكرك على تنزيل الوثيقة {{documentUID}}.</h2>
-            <p>إذا لم يبدأ تنزيل الوثيقة، فاضغط <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">هنا...</a></p></br> </br> </br> </br> ستغلق النافذة تلقائيًا في {{timeLaspe}} ثانية.</div>
+            <h2>نشكرك على تنزيل الوثيقة <span ng-bind="documentUID"></span>.</h2>
+            <p>إذا لم يبدأ تنزيل الوثيقة، فاضغط <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">هنا...</a></p></br> </br> </br> </br> سيتم إغلاق النافذة تلقائيًا في <span ng-bind="timeLaspe"></span> ثانية.</div>
 
         <div class="jumbotron" style="background-color:white;" role="alert" ng-if="documentError">
-            <h2>نشكرك على طلب الوثيقة {{documentUID}}.</h2>
-            <p>الوثيقة غير موجودة. إذا كنت واثقًا من أن الملف كان متاحًا من قبل، يرجى إبلاغ أمانة الاتفاقية بالبريد الإلكتروني <a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
+            <h2>أشكرك على طلب الوثيقة <span ng-bind="documentUID"></span>.</h2>
+            <p>الوثيقة غير موجودة. إذا كنت متأكدًا من أن هذا الملف ينبغي أن يكون متاحًا، يُرجى إبلاغ الأمانة على البريد الإلكتروني <a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a></p>
         </div>
 
         <div id="RecordDetails" ng-if="showDetails">
@@ -22,8 +23,8 @@
                 <div class="col-xs-12">
                     <div class="well">
                         <h3 style="margin:0 0 10px 0;padding:0;border-bottom:1px solid #999;">معلومات السجل</h3>
-                        <div><span style="font-size:12px">النوع:</span> {{internalDocumentInfo.metadata.schema | schemaName}}</div>
-                        <div><span style="font-size:12px">الحالة:</span> <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">مسودة</span> <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">منشور</span> <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">[مغلق: طلب {{workflowRequestType}} مُعلّق]</span> <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">محذوف</span> <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'"><span class="bold color-red">مرفوض</span></span></div>
+                        <div><span style="font-size:12px">النوع:</span> <span ng-bind="internalDocumentInfo.metadata.schema | schemaName"></span></div>
+                        <div><span style="font-size:12px">الحالة:</span> <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">DRAFT</span> <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">PUBLISHED</span> <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">[Locked: طلب <span ng-bind="workflowRequestType"></span> معلق]</span> <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">محذوف</span> <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'"><span class="bold color-red">مرفوض</span></span></div>
                         <div><span style="font-size:12px">تاريخ السجل:</span><div view-history document-id="internalDocumentInfo.identifier"></div>
                         </div>
 
@@ -54,21 +55,21 @@
                     type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
             </div>
         </div>
-        <div ng-if="showDifferenceButton||showComparison" class="pull-right compare-buttons" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
-            <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()"><i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> إظهار الفرق</button><!-- for comparing with older versions --> <!-- ng-if="showDifferenceButton"  style="display: none;"--><button ng-if="showComparison" ng-disabled="isComparing" class="btn btn-default btn-success btn-xs dropdown-toggle" type="button" id="comparisonMenu"
+        <div ng-if="showDifferenceButton||showComparison" class="full-text-display pull-right compare-buttons" style="padding-right:10px;position:relative;top:7px;color:#FFF;">
+            <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-xs" ng-click="showDifference()"><i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference</button><!-- for comparing with older versions --> <!-- ng-if="showDifferenceButton"  style="display: none;"--><button ng-if="showComparison" ng-disabled="isComparing" class="btn btn-default btn-success btn-xs dropdown-toggle" type="button" id="comparisonMenu"
             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-click="loadRecordRevisions()"><span ng-if="!comparingRevision">قارن</span> <span ng-if="comparingRevision">مقارنة <span ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span> <span class="caret"></span></button>
             <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
                 <li ng-if="loadingRevisions"  ng-disabled="isComparing"><a ng-href="#"><i class="fa fa-spin fa-spinner" ></i> قيد التحميل ...</a></li>
-                <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions"  ng-disabled="isComparing" ng-class="{'active':revision.revision==comparingRevision}"><a ng-href="#" ng-click="showDifference(revision.revision)"></a></li>
+                <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions"  ng-disabled="isComparing" ng-class="{'active':revision.revision==comparingRevision}"><a ng-href="#" ng-click="showDifference(revision.revision)" ng-bind="revision.uniqueIdentifier"></a></li>
             </ul>
             <div ng-if="isComparing">
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading">            
+        <div class="pull-right" style="padding-right:10px;position:relative;top:7px;color:#FFF;" ng-show="!loading && !error">            
             <div record-options></div>
-        </div><span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> قيد التحميل...</span><div id="schemaView" ng-show="internalDocument"></div>
+        </div><span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> التحميل قيد التنفيذ...</span><div id="schemaView" ng-show="internalDocument"></div>
     </div>
-    <div id="printContentFooter" ng-if="printMode" ng-include="'/app/views/forms/view/print-footer.html'"></div>
+    <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>
 
 </div>

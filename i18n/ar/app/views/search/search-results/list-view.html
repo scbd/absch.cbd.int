@@ -1,19 +1,15 @@
-﻿<div class="row">
+﻿<div class="row" dir="rtl">
     <div class="col-md-12">
         <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
             page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
             num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
 
-        <div ng-if="loading">
-            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
-        </div>
+        <div ng-if="loading"><i class="fa fa-spin fa-spinner"  style="margin-left:50%" dir="rtl"></i> loading..</div>
         <div ng-repeat="doc in searchResult.docs">
             <result-default doc="doc" external-link="true" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>  
         </div>
-        <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">no records found</h4>
-        <div ng-if="loading && searchResult.pageCount>0">
-            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
-        </div>
+        <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">لا توجد سجلات</h4>
+        <div ng-if="loading && searchResult.pageCount>0"><i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> التحميل قيد التنفيذ ...</div>
         <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
             page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
             num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 

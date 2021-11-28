@@ -93,21 +93,21 @@
 
 			<div ng-if="document.responsibleForAll||document.absResponsibleForAll">
 				<div compare-val>
-				<div class="km-value">المسؤول عن كل الموارد الجينية فقط السلطة الوطنية المختصة المُعينة للبلد.</div>
+				<div class="km-value">المسؤول عن كل الموارد الجينية Only designated competent national authority (CNA) for the country.</div>
 				</div>
 			</div>
 
 			<div ng-show="document.absFunctions">
 				<label>الوظائف</label>
 				<div compare-val>
-				<div class="km-value km-pre">{{document.absFunctions | lstring:locale}}</div>
+				<div class="km-value km-pre" ng-bind="document.absFunctions | lstring:locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.absJurisdiction">
 				<label>الاختصاصات التي تشملها السلطة الوطنية المختصة</label>
 				<div class="km-value" compare-val="absJurisdiction">
-				<div ng-if="document.absJurisdiction" ><span ng-repeat="jur in document.absJurisdiction">{{jur|term}}{{$last ? '' : ', '}}</span> <span ng-if="document.absJurisdictionName" ng-bind="(document.absJurisdictionName | lstring:locale)"></span></div>
+				<div ng-if="document.absJurisdiction" ><span ng-repeat="jur in document.absJurisdiction"><span ng-bind="jur|term"></span><span ng-bind="$last ? '' : ', '"></span></span> <span ng-if="document.absJurisdictionName" ng-bind="(document.absJurisdictionName | lstring:locale)"></span></div>
 				</div>
 			</div>
 
@@ -151,7 +151,7 @@
 				</div>
 			</div>
 			<div ng-show="document.responsibilities">
-				<label ng-if="document.header.schema!='supplementaryAuthority'">وصف مُفصّل للوظائف التنظيمية</label>
+				<label ng-if="document.header.schema!='supplementaryAuthority'">Short description of the regulatory functions</label>
 				<label ng-if="document.header.schema=='supplementaryAuthority'">وصف مختصر لمسؤوليات السلطة المختصة</label>
 				<div compare-val>
 				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
@@ -170,7 +170,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 			<div class="km-value" compare-val="relevantDocuments">
 				<div ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a></div>
 			</div>

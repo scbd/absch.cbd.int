@@ -1,6 +1,6 @@
 ﻿<div id="Record" class="record panel panel-default" dir="rtl">
 	<div class="panel-heading bg-blue">
-		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl"></span> <span class="color-black" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-black" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
 	<div class="record-body panel-body">
 
@@ -58,6 +58,10 @@
 				<km-value-ml value="document.currentEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
+			<div ng-if="document.currentEmployment.organizationType">
+				<label>نوع المنظمة</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.organizationType|term:locale"></span></div>
+			</div>
 			<div ng-if="document.currentEmployment.title">
 				<label>المُسَمَّى الوظيفي</label>
 				<div compare-val>
@@ -104,8 +108,12 @@
 			<div ng-if="document.previousEmployment.name">
 				<label>اسم جهة العمل/ المنظمة/ الشركة السابقة</label>
 				<div compare-val>
-				<km-value-ml value="document.previousEmployment.name" locales="locale"></km-value-ml>
+				<km-value-ml  km-pre value="document.previousEmployment.name" locales="locale"></km-value-ml>
 				</div>
+			</div>
+			<div ng-if="document.previousEmployment.organizationType">
+				<label>نوع المنظمة</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.previousEmployment|term:locale"></span></div>
 			</div>
 			<div ng-if="document.previousEmployment.department">
 				<label>القسم / الفرع /الوحدة</label>
@@ -230,7 +238,7 @@
 			</div>
 
 			<div ng-if="document.relevantPublication.length">
-				<legend>الأعمال المنشورة</legend>
+				<legend>Publications</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relevantPublication"><span ng-bind-html="item|lstring:locale"></span></li>
@@ -295,7 +303,7 @@
 			</div>
 
 			<div ng-if="document.additionalDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما</label>
 				<div compare-val>
 				<div class="km-value" ng-if="document.additionalDocuments" km-link-list 
 					ng-model="document.additionalDocuments" style="margin-top: 5px;"></div>

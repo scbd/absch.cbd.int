@@ -1,11 +1,14 @@
 ﻿<div  dir="rtl">
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content" style="padding-bottom:30px;">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content" style="padding-bottom:30px;">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                     
                     <div class="row">
                         <div class="col-xs-12">
@@ -43,7 +46,7 @@
     
                                                     <p>وبالإضافة إلى ذلك، فإن بعض الأسئلة لا تستند بشكل صارم إلى أحكام البروتوكول وقد حُدِّدت كاختيارية. وقد تم إدراج هذه الأسئلة في نموذج استطلاع التقرير للمساهمة في تقييم ومراجعة فعالية البروتوكول في سياق المادة 31 وحصر التحديات والصعوبات في تنفيذ البروتوكول، والقرارات التي اعتمدها مؤتمر الأطراف الذي يمثل اجتماع الأطراف في بروتوكول ناغويا.</p>
     
-                                                    <p>ومن الممكن أن يكون التقرير الوطني المؤقت أداة مفيدة لكل من الأطراف وغير الأطراف في بروتوكول ناغويا لتقييم مستوى تنفيذ بروتوكول ناغويا، فضلاً عن تحديد الثغرات والاحتياجات من حيث القدرات، وسوف يساعد مؤتمر الأطراف العامل كاجتماع للأطراف في البروتوكول على مراجعة تنفيذ بروتوكول ناغويا بصورة منتظمة وإصدار المقررات اللازمة لتعزيز تنفيذه على نحو فعال وفقا للفقرة 4 من المادة 26 في حدود صلاحياته وولايته.</p>
+                                                    <p>The interim national report can be a useful tool for both Parties and Non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
     
                                                     <p>وقد تساهم المعلومات التي يتضمنها التقرير الوطني المؤقت أيضا في تبادل الخبرات والتحديات والحلول بين البلدان فيما يتعلق بتنفيذ بروتوكول ناغويا. وفي هذا الصدد، يكون التقرير الوطني المؤقت أداة قيّمة لبناء وتطوير القدرات اللازمة لتنفيذ البروتوكول وتصميم أنشطة بناء القدرات على نحو أكثر فعالية. ويهدف نموذج الاستطلاع إلى تخفيف أعباء إعداد التقارير عن الدول، ولهذا كانت الأسئلة بسيطة بطبيعتها (إجابتها إما نعم أو لا). وبصفة عامة، يلي هذه الأسئلة مربعات إدخال نصوص تشجع البلاد على استخدامها في إضافة التفاصيل حول التدابير التي تتخذها والإبلاغ عن الصعوبات والتحديات التي تواجهها في تنفيذ أحكام معينة من البروتوكول وإضافة المزيد من المعلومات حول هذه القضية من خلال الربط بسجلات غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع القائمة أو مواقع الإنترنت أو رفع الوثائق. وتمثل فرصة لتحديد الممارسات الجيدة والمعوقات فيما يتعلق بتنفيذ بروتوكول ناغويا.</p>
     
@@ -57,7 +60,7 @@
     
                                                     <p>وينبغي على الدول استخدام النسخة المتاحة على الإنترنت من نموذج استطلاع التقرير، ما لم يتعذر ذلك لأسباب تقنية، ثم إرسال التقرير عبر غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع مع ضمان نشر أحدث المعلومات الوطنية في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع.</p>
     
-                                                    <p>وينبغي ألا يلجأ الأطراف لإرسال المعلومات إلى غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع بوسائل خارج الإنترنت ما لم يتعذر استخدام الوسائل الإلكترونية لأسباب تقنية. وعند إرسال التقارير بوسائل خارج اتصالات الإنترنت، ينبغي  استخدام النموذج غير القابل للتعديل، الذي يُمكن تنزيله من غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع، في صيغة ملف Microsoft Word.  ويُوصى بأن ترسل البلدان تقاريرها عبر البريد الإلكتروني إلى الأمانة على العنوان secretariat@cbd.int، مع إرفاق نسخة ممسوحة ضوئيًا من الصفحة الأخيرة الموقعة من السلطة المعنية بالنشر في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع. وبعدها، سيعمل الأمين التنفيذي على مساعدة الأطراف في نشر تقاريرها على غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع.</p>
+                                                    <p>وينبغي ألا يلجأ الأطراف لإرسال المعلومات إلى غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع بوسائل خارج الإنترنت ما لم يتعذر استخدام الوسائل الإلكترونية لأسباب تقنية. وعند إرسال التقارير بوسائل خارج اتصالات الإنترنت، ينبغي  استخدام النموذج غير القابل للتعديل، الذي يُمكن تنزيله من غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع، في صيغة ملف Microsoft Word. ويُوصى بأن ترسل البلدان تقاريرها عبر البريد الإلكتروني إلى الأمانة على العنوان secretariat@cbd.int، مع إرفاق نسخة ممسوحة ضوئيًا من الصفحة الأخيرة الموقعة من السلطة المعنية بالنشر في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع. وبعدها، سيعمل الأمين التنفيذي على مساعدة الأطراف في نشر تقاريرها على غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع.</p>
                                                 </div>
                                             </div>
     
@@ -68,7 +71,7 @@
                                             <legend>معلومات عامة</legend>
                                             <div class="row">
                                                 <div class="col-xs-12" >
-                                                    <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                                    <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                                         <div class="indent">
                                                             <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                         </div>
@@ -91,7 +94,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="control-group">
                                                         <div class="km-control-group" name="title" required caption="1. عنوان هذا التقرير الوطني">
-                                                            <div class="help-info">تستخدم هذه الخانة في إضافة عنوان السجل، لذلك ينبغي أن يكون متميزًا، ويساعد في التعرف بسهولة على السجل في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع.</div>
+                                                            <div class="help-info">This field serves as the title of the record, therefore it should be distinct and help to easily identify the record in the ABS Clearing-House.</div>
                                                             <div km-textbox-ml ng-model="document.title" rows="1"
                                                                 placeholder="عنوان هذا التقرير الوطني" locales="document.header.languages"></div>
                                                         </div>
@@ -333,9 +336,9 @@
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-hide="document.question11.answer || document.question11.answer===undefined"
-                                                        ng-class="{'confidential-text': !document.question11.answer}">يُرجى تخطي الأسئلة من 12 إلى 17. <br /> <br /></div>
+                                                        ng-class="{'confidential-text': !document.question11.answer}">Please skip Question 12 to 17. <br /> <br /></div>
     
-                                                    <div ng-show="document.question11.answer===undefined" ng-class="{'confidential-text': document.question11.answer===undefined}">يُرجى الإجابة على السؤال رقم 11 لتعرف هل إجابة الأسئلة من 12 إلى 17 مطلوبة أم لا. <br /> <br /></div>
+                                                    <div ng-show="document.question11.answer===undefined" ng-class="{'confidential-text': document.question11.answer===undefined}">Please answer Question 11 to know if it is required to answer Question 12 to 17. <br /> <br /></div>
                                                 </div>
                                             </div>
     
@@ -1098,9 +1101,9 @@
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div ng-hide="document.question37.answer || document.question37.answer===undefined"
-                                                        ng-class="{'confidential-text': !document.question37.answer}">يُرجى تخطي الأسئلة من 38 إلى 44. <br /> <br /></div>
+                                                        ng-class="{'confidential-text': !document.question37.answer}">Please skip Question 38 to 44. <br /> <br /></div>
     
-                                                    <div ng-show="document.question37.answer===undefined" ng-class="{'confidential-text': document.question37.answer===undefined}">يُرجى الإجابة على السؤال رقم 37 لتعرف هل إجابة الأسئلة من 38 إلى 44 مطلوبة أم لا. <br /> <br /></div>
+                                                    <div ng-show="document.question37.answer===undefined" ng-class="{'confidential-text': document.question37.answer===undefined}">Please answer Question 37 to know if it is required to answer Question 38 to 44. <br /> <br /></div>
                                                 </div>
                                             </div>
     
@@ -1913,7 +1916,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="Notes" bold="true" caption="مُلاحظات:">
-                                                        <div class="help-info">خانة "ملاحظات" لتدوين الملاحظات أو التعليقات الشخصية، ولن تظهر عند عرض السجل. فلا ينبغي استخدام هذه الخانة في تسجيل أو حفظ أي معلومات سرية.</div>
+                                                        <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. This field is not meant to be used for confidential information.</div>
                                                         <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                                                     </div>
                                                 </div>
