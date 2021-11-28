@@ -616,7 +616,7 @@ import './directives/homepin-popup-abs';
         }
 
         function loadRegionalRecordFacets(code){
-          if(realm.is('ABS')){
+          if(realm.is('ABS') || !code){
             const defer = $q.defer();
             defer.resolve({});
             return defer.promise;
