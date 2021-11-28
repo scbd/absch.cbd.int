@@ -33,12 +33,12 @@ function ($http, $filter, $q, $routeParams, $controller,$location, realm, thesau
           _.extend($scope.options, {
             
               activityScope   : function() {return thesaurusService.getDomainTerms('cbiCpbTypes');},
-              targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience');},
+              targetGroups    : function() {return thesaurusService.getDomainTerms('cbiAudience', {other:true, otherType:'lstring'});},
               geographicScope : function() {return thesaurusService.getDomainTerms('jurisdictions');},
               aichiTargets    : function() {return thesaurusService.getDomainTerms('aichiTargets');},
               absKeyAreas     : function() {return thesaurusService.getDomainTerms('keyAreas');},
               status          : function() {return thesaurusService.getDomainTerms('cbiStatus');},
-              absCategories   : function() {return thesaurusService.getDomainTerms('cbiCats');},
+              absCategories   : function() {return thesaurusService.getDomainTerms('cbiCats', {other:true, otherType:'lstring'});},
               cpbThematicAreas: function() {return thesaurusService.getDomainTerms('cpbThematicAreas', {other:true, otherType:'lstring'});},
               regions	: function() {return thesaurusService.getDomainTerms('regions').then(Thesaurus.buildTree);},
               countries       : function() {return thesaurusService.getDomainTerms('countries').then(function(o){return _.sortBy(o, 'name' );})},
