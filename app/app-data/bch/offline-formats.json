@@ -167,7 +167,7 @@
         "ru": "https://bch.cbd.int/resources/common-formats/ru/referencerecord_07_independentriskassessment_final_ru.docx",
         "zh": "https://bch.cbd.int/resources/common-formats/zh/referencerecord_07_independentriskassessment_final_zh.docx"
     },
-    "expert": {
+    "biosafetyExpert": {
         "ar": "https://bch.cbd.int/resources/common-formats/ar/nationalrecord_08_biosafetyexpert_final_ar.docx",
         "en": "https://bch.cbd.int/resources/common-formats/en/nationalrecord_08_biosafetyexpert_final_en.docx",
         "es": "https://bch.cbd.int/resources/common-formats/es/nationalrecord_08_biosafetyexpert_final_es.docx",
