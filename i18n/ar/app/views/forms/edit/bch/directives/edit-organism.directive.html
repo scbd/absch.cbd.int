@@ -1,12 +1,12 @@
-﻿<div dir="rtl">
+﻿<div  dir="rtl">
 
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -16,7 +16,7 @@
 									<legend>معلومات عامة</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+											<div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
 												<div class="indent">
 													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
@@ -42,7 +42,7 @@
 											<hr/>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="realm" caption="النطاق	">
+											<div class="km-control-group"  name="realm" caption="النطاق">
 												<input type="text" class="form-control" name="realm" ng-model="document.realm"/>
 											</div>
 										</div>
@@ -82,7 +82,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="subFamily" caption="الفصيلة الفرعية		">
+											<div class="km-control-group" name="subFamily" caption="الفصيلة الفرعية">
 												<input type="text" class="form-control" name="subFamily" ng-model="document.subFamily" />
 											</div>
 										</div>
@@ -102,11 +102,11 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="scientificNameSynonyms" caption="الأسماء العلمية البديلة (المرادفات)">
+											<div class="km-control-group" name="scientificNameSynonyms" caption="Alternate scientific name(s) (synonym(s))">
 												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;" class="input-group">
 													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" /><span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-addon" style="cursor:pointer" 
 													 ng-click="removeItem(scientificNameSynonyms, $index)"><i class="fa fa-trash-o icon"></i></span></div>
-												<button type="button" class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">أضف بندًا</button>
+												<button type="button" class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">Add item</button>
 											</div>
 										</div>
 										<div class="col-sm-12">
@@ -238,7 +238,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-												<div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -250,7 +250,7 @@
 								<legend>ملاحظات</legend>								
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</span><div km-notes name="notes" ng-model="document.notes"></div>
+										<div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>
 								</div>

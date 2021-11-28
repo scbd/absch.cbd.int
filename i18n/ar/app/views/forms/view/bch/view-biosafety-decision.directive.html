@@ -1,0 +1,431 @@
+﻿<div id="Record" class="record panel panel-default" dir="rtl">
+	<div class="panel-heading bg-blue">
+		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-black" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date>
+
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
+			<legend>التعديل</legend>
+			<div ng-if="document.isAmendment!=undefined">
+				<label>هل التعديل على القانون أو التشريع أو الإرشاد أو الاتفاق منشور بالفعل في غرفة تبادل معلومات السلامة الأحيائية؟</label>
+				<div compare-val>
+					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.amendedRecords">
+				<label>تعديل القرارات أو المنشورات</label>
+				<div class="km-value" compare-val="amendedRecords">
+					<ul class="list">
+						<li ng-repeat="item in document.amendedRecords">
+							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+						</li>
+					</ul>						
+				</div>
+			</div>
+			<div ng-if="document.amendmentsDetails">
+				<label>ملخص موجز بالتعديلات</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDetails" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="amendedByRecords">
+				<label>تم تعديل القرار/المنشور في هذا السجل بموجب القرارات أو المنشورات في السجل أو السجلات التالية</label>
+				<div class="km-value" compare-val="amendedByRecords">
+					<div ng-repeat="referenced in amendedByRecords">
+						<view-record-reference ng-model="referenced"></view-record-reference>
+					</div>
+				</div>
+			</div>
+        </div>
+
+		<legend>معلومات عامة</legend>		
+		<div ng-if="document.government">
+			<label name="country">البلد</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+		</div>
+
+		<div ng-if="document.authorities">
+			<label>السلطات الوطنية المختصة المسؤولة عن القرار أو المنشور</label>
+			<div class="km-value" compare-val="authorities">
+				<ul class="list">
+					<li ng-repeat="item in document.authorities" >
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.title">
+			<label>العنوان / الرقم المرجعي للقرار / المنشور</label>
+			<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.date">
+			<label>تاريخ القرار</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
+			</div>
+		</div>
+		<div ng-if="document.takenPriorEntryIntoForce != undefined">
+			<label>هل تم اتخاذ القرار قبل سريان البروتوكول؟</label>
+			<div compare-val>
+				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
+			</div>
+		</div><!-- Not used --> <!-- <div ng-if="document.jurisdictions.length">
+			<label>Jurisdiction</label>
+			<div class="km-value" compare-val="jurisdictions">
+				<ul class="list">
+					<li ng-repeat="item in document.jurisdictions" ng-bind="item|term:locale"></li>
+				</ul>
+			</div>
+		</div> --><div ng-if="document.jurisdictionsDetails">
+			<label>منطقة الاختصاص</label>
+			<div compare-val>
+				<km-value-ml value="document.jurisdictionsDetails" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+	<div ng-if="document.decisionTypes">
+		<legend>Subject of the decision, notification, communication or declaration</legend>
+		<div class="km-value" compare-val="decisionTypes">
+			<ul class="list">
+				<li  ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
+				ng-repeat="item in document.decisionTypes" ><span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span> <span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">قرارات أو إبلاغات أو إقرارات أو منشورات أخرى <span ng-if="item.customValue">(<span ng-bind="item.customValue|lstring:locale"></span>)</span></span></li>
+			</ul>
+		</div>
+	</div><!-- =============SECTION A END ======================== --> <!-- =============SECTION B START======================== --><div ng-if="isLmoDecisionForIntentionalIntroduction">
+		<legend>الكائنات الحية المحورة للإدخال المقصود في البيئة</legend>
+
+		<div ng-if="document.addressesTransboundaryMovement!=undefined">
+			<label>هل كان القرار بناء على طلب نقل الكائنات الحية المحورة عبر الحدود إلى بلدك؟</label>
+			<div compare-val>
+				<km-value-bool value="document.addressesTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
+		<div ng-if="document.intentionDecisions!=undefined">
+			<label>هل تم اتخاذ القرار بما يتفق مع</label>
+			<div compare-val>
+			<view-terms-hierarchy  class="km-value" ng-model="document.intentionDecisions" locale="locale" term-domain="intentionDecisions"></view-terms-hierarchy>
+			</div>
+		</div>
+
+		<div ng-if="document.receiptDate">
+			<label>تاريخ استلام الإخطار</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.receiptDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.receiptAcknowledgementDate">
+			<label>تاريخ إرسال الإقرار باستلام الإخطار إلى المُخطِر.</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.receiptAcknowledgementDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.communicationDate">
+			<label>تاريخ إبلاغ المُخطِر بالقرار</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.communicationDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.exporters">
+			<label>تفاصيل الاتصال بالمُصدِّر</label>
+			<div class="km-value" compare-val="exporters">
+				<ul class="list">
+					<li ng-repeat="item in document.exporters">
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-if="document.importers && document.addressesTransboundaryMovement">
+			<label>تفاصيل الاتصال بالمُستورد</label>
+			<div class="km-value" compare-val="importers">
+				<ul class="list">
+					<li ng-repeat="item in document.importers">
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.appliesToTransboundaryMovement!=undefined">
+			<label>هل يسري القرار على عمليات نقل الكائنات الحية المُحوَّرة عبر الحدود إلى بلدك؟</label>
+			<div compare-val>
+				<km-value-bool value="document.appliesToTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-if="document.importers && !document.addressesTransboundaryMovement">
+			<label>تفاصيل الاتصال بمُقدم الطلب</label>
+			<div class="km-value" compare-val="importers">
+				<ul class="list">
+					<li ng-repeat="item in document.importers">
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.involvesFieldTrial!=undefined">
+			<label>هل يتضمن القرار تجارب ميدانية؟</label>
+			<div compare-val>
+				<km-value-bool value="document.involvesFieldTrial" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-if="document.involvesCommercialRelease!=undefined">
+			<label>هل يتضمن القرار الإطلاق التجاري؟</label>
+			<div compare-val>
+				<km-value-bool value="document.involvesCommercialRelease" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-if="document.appliesToSubsequentIntroductions!=undefined">
+			<label>هل يسري القرار على عمليات الإدخال اللاحق للكائنات الحية المحورة نفسها إلى البيئة؟</label>
+			<div compare-val>
+				<km-value-bool value="document.appliesToSubsequentIntroductions" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
+	</div><!-- =============SECTION B END ======================== --> <!-- =============SECTION C START======================== --><div ng-if="isLmoDecisionForDirectUse">
+			<legend>استخدام الكائنات الحية المُحوَّرة كأغذية أو كعلف أو للتجهيز</legend>
+			<div ng-if="document.uses">
+				<label>استخدامات الكائنات الحية المُحوَّرة</label>
+				<div class="km-value" compare-val="uses">
+					<ul class="list">
+						<li ng-repeat="item in document.uses" ng-bind="item|term:locale"></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.takenInAccordanceWithA116!=undefined">
+				<label>Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?</label>
+				<div comapre-val>
+					<km-value-bool value="document.takenInAccordanceWithA116" locales="locale"></km-value-bool>
+				</div>
+			</div>
+
+
+			<div ng-if="document.directUseDecisions">
+				<legend>نوع القرار</legend>
+				<div compare-val="directUseDecisions">
+					<ul class="list">
+						<li ng-repeat="item in document.directUseDecisions"><span ng-bind="item|term:locale"></span></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.exporters && isDecisionOnLmoImport">
+				<label>تفاصيل الاتصال بجهة التصدير</label>
+				<div class="km-value" compare-val="exporters">
+					<ul class="list">
+						<li ng-repeat="item in document.exporters">
+							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.importers && (isDecisionOnLmoDomesticUse || isDecisionOnLmoImport)">
+				<label ng-if="isDecisionOnLmoImport">تفاصيل الاتصال بجهة الاستيراد/ مُقدم الطلب</label>
+				<label ng-if="isDecisionOnLmoDomesticUse">تفاصيل الاتصال بمُقدم الطلب</label>
+				<div class="km-value" compare-val="importers">
+					<ul class="list">
+						<li ng-repeat="item in document.importers">
+							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+						</li>
+					</ul>
+				</div>
+			</div>
+	</div><!-- =============SECTION C END ======================== --> <!-- =============SECTION D START======================== --><div ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
+		<legend>نتيجة القرار</legend>
+		<div ng-if="document.decisionResult">
+			<label>نتيجة القرار</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.decisionResult | term:locale"></div>
+			</div>
+		</div>
+		<div ng-if="document.conditions">
+			<label>الشروط</label>
+			<div compare-val>
+				<km-value-ml value="document.conditions" html locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.reasons">
+			<label>الأسباب</label>
+			<div compare-val>
+				<km-value-ml html value="document.reasons" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.extensionPeriod">
+			<label>حدد المدة الزمنية الإضافية بالأيام</label>
+			<div compare-val>
+				<km-value-ml value="document.extensionPeriod" locales="locale"></km-value-ml>
+			</div>
+		</div>
+	</div><!-- =============SECTION   D END ======================== --> <!-- =============SECTION E START======================== --><div ng-if="isSimplifiedProcedure">
+		<legend>الإجراء المبسط</legend>
+		<div ng-if="document.movementAllowedUnderA131A || document.exemptedFromAIA">
+			<label>موضوع القرار بموجب الإجراء المُبسط</label>
+			<div class="km-value" compare-val>
+				<div ng-if="document.movementAllowedUnderA131A">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import</div>
+				<div ng-if="document.exemptedFromAIA">قرار يحدد أن استيراد الكائنات الحية المُحوَّرة مُعفى من إجراءات الاتفاق المسبق عن علم</div>
+			</div>
+			<div ng-if="document.appliesToSubsequentImports!=undefined">
+				<label>هل يسري القرار على عمليات الاستيراد اللاحقة للكائنات الحية المحورة؟</label>
+				<div compare-val>
+					<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
+				</div>
+			</div>
+		</div>		
+	</div><!--=============SECTION E END======================== --> <!--=============SECTION F START======================== --><div ng-if="isTransboundaryMovement">
+		<legend>النقل غير المشروع عبر الحدود أو النقل غير المقصود عبر الحدود</legend>
+
+		<div ng-if="document.transboundaryMovementType">
+			<label>Type of transboundary movement</label>
+			<div class="km-value" compare-val><span ng-bind="document.transboundaryMovementType|term:locale"></span></div>
+		</div>
+
+		<div ng-if="document.releaseInformation">
+			<label>معلومات عن مكان حدوث النقل أو مكان الإطلاق أو الاثنين</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.releaseInformation"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.estimatedQuantities">
+			<label>أي معلومات متاحة ذات الصلة عن الكميات التقديرية وخصائص وسمات الكائنات الحية المحورة ذات الصلة</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.estimatedQuantities"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.releaseCircumstance">
+			<label>معلومات عن ظروف الإطلاق</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.releaseCircumstance"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.releaseDate">
+			<label>معلومات عن التاريخ المتوقع للإطلاق</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.releaseDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.lmoUseInformation">
+			<label>معلومات عن استخدام الكائن الحي المُحوَّر في طرف المنشأ</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.lmoUseInformation"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.adverseEffectInformation">
+			<label>Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.adverseEffectInformation"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.otherTransboundryInformation">
+			<label ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">أي معلومات أخرى ذات صلة</label>
+			<label ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">وصف مُوجز في حالة تعذر تحديد هوية الكائن الحي المُحوّر المُقصود</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.otherTransboundryInformation"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.pointOfContact">
+			<label>نقطة اتصال للمزيد من المعلومات</label>
+			<div  class="km-value" compare-val="pointOfContact">
+				<ul class="list">
+					<li ng-repeat="item in document.pointOfContact">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+		<legend>تبادل المعلومات مع قواعد البيانات الأخرى</legend>
+		<div ng-if="document.isForCommercialUse!=undefined">
+			<label>Is this decision related to an LMO for commercial use?</label>
+			<div compare-val>
+				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
+			</div>
+			<div ng-if="document.forwardToOECD!=undefined">
+				<label>هل ينبغي إحالة هذا القرار إلى أمانة منظمة التعاون الاقتصادي والتنمية لإدراجه في <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank">قاعدة بيانات منتجات BioTrack</a>؟</label>
+				<div  compare-val>
+					<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.isForFoodSafety!=undefined">
+				<label>هل هذا القرار متعلق بسلامة الغذاء؟</label>
+				<div  compare-val>
+					<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.codexConducted!=undefined">
+				<label>هل تم إجراء هذا التقييم وفقًا للدستور الغذائي <em>"إرشادات إجراء تقييم سلامة الأغذية المشتقة من نباتات تم توليف حمضها النووي؟</em></label>
+				<div  compare-val>
+					<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.forwardToFAO!=undefined">
+				<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
+				<div compare-val>
+					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
+				</div>
+			</div>
+		</div>
+	</div><!--=============SECTION G END ========================--> <!--=============SECTION H start ========================--><div ng-if="document.modifiedOrganisms || document.riskAssessments">
+		<legend>LMO identification & risk assessment</legend>
+		<div ng-if="document.modifiedOrganisms">
+			<label>تحديد هوية الكائنات الحية المحورة</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.modifiedOrganisms">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.riskAssessments">
+			<label>تقييم المخاطر</label>
+			<div  class="km-value" compare-val="riskAssessments">
+				<ul class="list">
+					<li ng-repeat="item in document.riskAssessments">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!--=============SECTION H END ========================--> <!--=============SECTION I Start ========================--><div ng-if="document.documents">
+		<legend>وثيقة القرار أو المنشور أو الإخطار أو الإعلان</legend>
+		<div class="km-value" compare-val="documents">
+			<km-link-list  ng-model="document.documents"></km-link-list>
+			
+		</div>
+	</div><!--=============SECTION I END ========================--> <!--=============SECTION K START ========================--><div ng-if="document.relevantInformation||document.relevantDocuments">
+			<legend>معلومات إضافية</legend>
+
+			<div ng-if="document.relevantInformation">
+				<div compare-val>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				</div>
+			</div>
+
+			<div ng-if="document.relevantDocuments">
+				<label>Other relevant website addresses and/or attached documents</label>
+				<div class="km-value" compare-val>
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+					
+				</div>
+			</div>
+	</div><!--=============SECTION K END ========================--><div>
+			<view-referenced-records ng-model="document.header.identifier" on-data-fetch="onReferencedRecordsDataFetch(data)"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

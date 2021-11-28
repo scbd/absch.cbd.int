@@ -1,0 +1,31 @@
+﻿<div>
+    <div ng-if="currentCountry.code" style="padding:5px;" ng-class="{'bg-party': currentCountry.isParty, 'bg-darkgrey':!currentCountry.isParty, 'bg-inbetween': currentCountry.isInbetweenParty}">
+        <div><span ng-if="(isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)"
+                >Parte en el Protocolo de Nagoya</span> <span ng-if="(isABS && currentCountry.isInbetweenParty)"
+                >Ratificado, pero todavía no es Parte</span> <span ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)"
+                >Estado que no es Parte del Protocolo de Nagoya</span></div>
+
+        <div class="row abs-exception-tooltip"
+        ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
+                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
+                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
+            <div class="col-lg-12">
+                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk') ? 'show' : 'hide'}}"
+                    style="margin-top:5px;white-space: normal;padding:3px;">La ratificación de Dinamarca del Protocolo no se aplica a Groenlandia y las Islas Feroe.</div>
+                <div class="{{countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk' ? 'show' : 'hide'}}   small " style="margin-top:5px;white-space: normal;padding:3px;">Existe una disputa entre el Gobierno de la Argentina y el del Reino Unido de Gran Bretaña e Irlanda del Norte en relación con la soberanía de las Islas Falklands (Islas Malvinas).</div>
+                <div class="{{countryMapScope.currentCountry.code.toLowerCase()=='eh' ? 'show' : 'hide'}}   small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">Territorio no autónomo.</div>
+                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;">La ratificación del Protocolo de Nagoya por parte del Reino Unido no incluye los <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
+                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguila; Bases bajo soberanía británica de Acrotiri y Dhekelia; Bermuda; Islas Falkland; Islas Caimán; Islas Georgias del Sur y Sandwich del Sur; Islas Pitcairn; Islas Turcas y Caicos; Islas Vírgenes Británicas; Gibraltar; Montserrat; Santa Elena, Ascensión y Tristán de Acuña; Territorio Británico Antártico y Territorio Británico del Océano Índico">14 territorios de ultramar</a> o las <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories"  data-container="body" 
+                        data-bs-toggle="tooltip" data-placement="left" title="Bailía de Jersey; Isla de Guernesey e Isla de Man">tres dependencias de la Corona</a></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
+                <td ><span class="badge bg-black"><span ng-bind="schema.count"></span></span></td>
+                <td><a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a> <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a></td>
+            </tr>
+        </table>
+    </div>
+</div>

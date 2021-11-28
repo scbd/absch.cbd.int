@@ -1,11 +1,14 @@
 ﻿<div  dir="rtl">
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
     <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <div ng-if="isIRCCRevoked">
                                 <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
                                 <label for="invalidForm" style="width:100%">
@@ -50,7 +53,7 @@
                                         <legend>معلومات عامة</legend>
                                         <div class="row">
                                             <div class="col-xs-12" >
-                                                <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                                <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -60,7 +63,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="government" required caption="البلد">
-                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."></div>
+                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -68,7 +71,7 @@
                                             <div class="col-xs-12">
                                                 <div class="km-control-group">
                                                     <div class="km-control-group" name="permit" caption="الروابط لشهادات الامتثال المعترف بها دوليًا التي ترتبط بهذا التصريح">
-                                                        <div class="help-info">من الممكن في بعض الأحيان ربط تصريح بتصاريح أخرى  صدرت من قبل، على سبيل المثال تصريح للوصول إلى عينة تربة. حسب الموافقة المسبقة عن علم، قد تقرر بعض الدول إصدار تصاريح محددة للموارد الجينية المُحدَّدة لاحقًا من عينة التربة المأخوذة. لمثل هذه الحالات، تقدم غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع إمكانية ربط شهادات الامتثال المعترف بها دوليًا المختلفة معًا. سيتم عرض شهادات الامتثال المعترف بها دوليًا المرتبطة من خلال هذه الآلية معًا ومن ثم تُسهل تتبع شهادات الامتثال المعترف بها دوليًا.</div>
+                                                        <div class="help-info">من الممكن في بعض الأحيان ربط تصريح بتصاريح أخرى  صدرت من قبل، على سبيل المثال تصريح للوصول إلى عينة تربة. Depending on the MAT, it is possible that some countries decide to issue specific permits for subsequently identified genetic resources from the taken soil sample. لمثل هذه الحالات، تقدم غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع إمكانية ربط شهادات الامتثال المعترف بها دوليًا المختلفة معًا. سيتم عرض شهادات الامتثال المعترف بها دوليًا المرتبطة من خلال هذه الآلية معًا ومن ثم تُسهل تتبع شهادات الامتثال المعترف بها دوليًا.</div>
                                                             <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
                                                     </div>
                                                 </div>
@@ -93,7 +96,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="title" required caption="الرقم المرجعي للتصريح أو ما يعادله"><span class="help-info">ستظهر هذه الخانة كعنوان لهذا السجل.</span><div km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
+                                                    <div class="km-control-group" name="title" required caption="الرقم المرجعي للتصريح أو ما يعادله"><span class="help-info">This field will also appear as the title of this record.</span><div km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -109,7 +112,7 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfIssuance" required caption="تاريخ إصدار التصريح أو ما يعادله">
-                                                    <div class="help-info">تشير هذه الخانة إلى تاريخ إصدار التصريح الوطني. هذه المعلومات إلزامية وأساسية لضمان اليقين القانوني فيما يتعلق بحق المستخدم في استخدام الموارد الجينية التي يشملها التصريح.</div>
+                                                    <div class="help-info">This field refers to the date of issuance of the national permit. هذه المعلومات إلزامية وأساسية لضمان اليقين القانوني فيما يتعلق بحق المستخدم في استخدام الموارد الجينية التي يشملها التصريح.</div>
                                                     <div km-date placeholder="يوم - شهر - سنة" required name="dateOfIssuance" ng-model="document.dateOfIssuance"></div>
                                                 </div>
                                             </div>
@@ -218,7 +221,7 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading"><span ng-class="{'confidential-text':document.subjectMatterConfidential}"><input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items>هذه المعلومات سرية</input></span></div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.subjectMatterConfidential}">
-                                                        <div class="km-control-group" required name="subjectMatter" caption="الموضوع أو الموارد الجينية التي يشملها التصريح أو ما يعادله"><span class="help-info">يُرجى إضافة معلومات عن الموضوع أو الموارد الجينية التي يشملها التصريح. قد يتضمن ذلك الكائنات الحية في أي مرتبة تصنيفية قد تحمل اسمًا تصنيفيًا. ربما يتضمن ذلك مكان أو منطقة جمع المادة. من الممكن كذلك تحديد المورد الجيني من خلال الإشارة إلى عينة قسيمة أو ملاحظات ميدانية محفوظة في أرشيف أو مجموعة محددة.</span><div ng-show="!document.subjectMatterConfidential">
+                                                        <div class="km-control-group" required name="subjectMatter" caption="الموضوع أو الموارد الجينية التي يشملها التصريح أو ما يعادله"><span class="help-info">يُرجى إضافة معلومات عن الموضوع أو الموارد الجينية التي يشملها التصريح. This could include biota at any taxonomic rank, which may carry a taxonomic name. وقد يتضمن ذلك مكان أو منطقة جمع المادة. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection.</span><div ng-show="!document.subjectMatterConfidential">
                                                                 <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
                                                             </div>
                                                         </div>
@@ -231,14 +234,14 @@
                                         <div class="row" style="margin-top:20px;">
                                             <div class="col-xs-12">
                                                 <div class="legend2">معلومات إضافية حول موضوع أو مورد جيني  <span class="help-info">توفير التفاصيل حول الموضوع أو المورد الجيني الذي يشمله التصريح أو ما يعادله يؤدي إلى تعزيز اليقين القانوني.</span></div>
-                                                <div class="km-control-group" name="specimens" caption="بيانات العينة"><span class="help-info">رابط لعينة قسيمة شراء محفوظة في منشأة ملائمة</span><div km-link name="specimens" ng-model="document.specimens" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                                                <div class="km-control-group" name="specimens" caption="بيانات العينة"><span class="help-info">Link to a voucher specimen held in an appropriate facility</span><div km-link name="specimens" ng-model="document.specimens" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
                                         </div>
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="taxonomies" caption="التصنيف"><span class="help-info">رابط لسجل في قاعدة بيانات التصنيف الخارجية، على سبيل المثال، GBIF أو Catalogue of Life (قائمة الحياة)</span><div km-link name="taxonomies" ng-model="document.taxonomies" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                                                <div class="km-control-group" name="taxonomies" caption="التصنيف"><span class="help-info">Link to record in external taxonomy database, e.g. GBIF, Catalogue of Life</span><div km-link name="taxonomies" ng-model="document.taxonomies" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -246,7 +249,7 @@
                                         <div class="row">
                                             <div class="col-xs-12" ng-class="{'warning':isInvalid('gisFiles')}">
                                                 <div class="km-control-group">
-                                                    <label class="control-label" for="gisFiles">الإحداثيات الجغرافية</label><span class="help-info">تقتصر على ملفات .geojson (<a rel="noopener" target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span><div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
+                                                    <label class="control-label" for="gisFiles">الإحداثيات الجغرافية</label><span class="help-info">Limited to .geojson files (<a rel="noopener" target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span><div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                                 </div>
             
                                                 <div ng-if="document.gisFiles">
@@ -266,7 +269,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="keywords" caption="كلمات مفتاحية لوصف الموضوع أو المورد (الموارد) الجينية التي يشملها التصريح أو ما يعادله"><span class="help-info">جمع هذه المعلومات أمرٌ مهم لتيسير عمليات البحث المنسقة في السجلات. يُرجى تحديد جميع الكلمات المفتاحية الملائمة التي يمكن أن تساعد في وصف الموضوع أو المورد (الموارد) الجينية التي يشملها التصريح أو ما يعادله.</span><div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
+                                                <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent"><span class="help-info">جمع هذه المعلومات أمرٌ مهم لتيسير عمليات البحث المنسقة في السجلات. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span><div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -281,7 +284,7 @@
             
             
                                     <section>
-                                        <legend>معلومات عن استخدام المورد (الموارد) الجينية</legend><span class="help-info">تهدف المعلومات في هذا القسم من شهادة الامتثال المعترف بها دوليًا إلى السماح لأي شخص بالتحقق من أن استخدام الموارد الجينية في أي مرحلة من البحث والتطوير والابتكار وما قبل التسويق التجاري أو التسويق التجاري يتم وفقًا لشروط الاستخدام المحددة في الموافقة المسبقة عن علم والشروط المتفق عليها بصورة متبادلة.</span><div class="row">
+                                        <legend>Information on the utilization of the genetic resource(s)</legend><span class="help-info">تهدف المعلومات في هذا القسم من شهادة الامتثال المعترف بها دوليًا إلى السماح لأي شخص بالتحقق من أن استخدام الموارد الجينية في أي مرحلة من البحث والتطوير والابتكار وما قبل التسويق التجاري أو التسويق التجاري يتم وفقًا لشروط الاستخدام المحددة في الموافقة المسبقة عن علم والشروط المتفق عليها بصورة متبادلة.</span><div class="row">
                                             <div class="col-xs-12">
             
             
@@ -320,13 +323,13 @@
                                         <legend>الوثائق</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="permitFiles" caption="نسخة التصريح أو ما يعادله، أو وثيقة أخرى ملائمة متاحة للاطلاع"><span class="help-info">يرُجى استخدام هذه الخانة لرفع نسخة من التصريح أو ما يعادله أو وثيقة أخرى ذات صلة إذا كانت مطلوبة، أو وضع رابط لما يعادله على موقع إنترنت وطني. أضف وصفًا مُختصرًا لرابط الموقع أو الوثيقة المرفقة. يُرجى ملاحظة أن هذه المعلومات ستكون متاحة للجمهور من خلال غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع، ولهذا يجب ألا تحتوي على أي معلومات سرية أو روابط لمعلومات محظورة.</span><div km-link name="permitFiles" ng-model="document.permitFiles" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                <div class="km-control-group" name="permitFiles" caption="Copy of the permit or its equivalent, or other relevant open-access document"><span class="help-info">يرُجى استخدام هذه الخانة لرفع نسخة من التصريح أو ما يعادله أو وثيقة أخرى ذات صلة إذا كانت مطلوبة، أو وضع رابط لما يعادله على موقع إنترنت وطني. أضف وصفًا مُختصرًا لرابط الموقع أو الوثيقة المرفقة. Note that this information will be made publicly available through the ABS Clearing-House and therefore should not contain confidential information, nor links to information that has restricted access.</span><div km-link name="permitFiles" ng-model="document.permitFiles" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="permitDescription" caption="وصف مختصر للرابط /الروابط و/أو الملف (الملفات) المرفقة">
+                                                <div class="km-control-group" name="permitDescription" caption="Short description of the attached link(s) and/or file(s)">
                                                     <div km-rich-textbox name="permitDescription" rows="6" ng-model="document.permitDescription" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -347,7 +350,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="relevantDocuments" caption="مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما.">
+                                                <div class="km-control-group" name="relevantDocuments" caption="مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كليهما">
                                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
@@ -359,7 +362,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="notes">
-                                                    <div class="help-info">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في إضافة أو حفظ أي معلومات سرية.</div>
+                                                    <div class="help-info">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
                                                     <div km-notes name="notes" ng-model="document.notes"></div>
                                                 </div>
                                             </div>

@@ -1,4 +1,4 @@
-﻿<div id="km-value-ml">	
+﻿<div id="km-value-ml" dir="rtl">	
 		<div ng-repeat="locale in self.localesToDisplay" class="input-group input-lang-{{locale}}" ng-class="{ 'multiple-languages' : self.localesToDisplay.length>1 && !last }"
 				ng-if="self.localesToDisplay.length ==1 || (self.localesToDisplay.length>1 && self.value[locale])">
 	
@@ -8,10 +8,6 @@
 			<div ng-if="html"  >
 				<div ng-bind-html="self.value|lstring:locale|addclear|toTrusted" class="km-value km-value-ml-div km-value-ml-html" 
 				ng-style="{ direction : (self.value|direction:locale)}" 
-				ng-class="{'markdown':self.markdown, 'km-pre':self.kmPre }"></div>
-				<!-- <div style="clear: both;"></div>	 -->
-			</div>
-			<span class="input-group-addon" style="cursor:default">{{self.value|lstringLocale:locale | uppercase }}</span>
-		</div>
+				ng-class="{'markdown':self.markdown, 'km-pre':self.kmPre }"></div><!-- <div style="clear: both;"></div>	 --></div><span class="input-group-addon" style="cursor:default" ng-bind="self.value|lstringLocale:locale | uppercase"></span></div>
 	</div>  
 	

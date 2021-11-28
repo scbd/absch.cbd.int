@@ -4,14 +4,14 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="well no-shadow bg-white">
                         <legend>معلومات عامة</legend>
                         <div class="row">
                             <div class="col-xs-12" >
-                                <div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                     <div class="indent">
                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                     </div>
@@ -29,7 +29,7 @@
 
                             <div class="col-md-5 col-xs-12">
                                 <div class="km-control-group" name="acronym" caption="الاسم المختصر">
-                                    <div class="help-block">يُرجى ذكر الاختصار الشائع الذي يستخدم في الإشارة إلى المنظمة. على سبيل المثال، UNEP للإشارة إلى برنامج الأمم المتحدة للبيئة.</div>
+                                    <div class="help-block">يُرجى ذكر الاختصار الشائع الذي يستخدم في الإشارة إلى المنظمة. For example, UNEP.</div>
                                     <div km-textbox-ml name="acronym" ng-model="document.acronym"
                                         placeholder="على سبيل المثال، UNEP للإشارة إلى برنامج الأمم المتحدة للبيئة." locales="document.header.languages"></div>
                                 </div>
@@ -88,7 +88,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="country" required caption="البلد">
                                     <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
-                                                mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."
+                                                mapping="genericMapping" selectbox="true" placeholder="Please select a country..."
                                                 required filter="startsWithFilter" maxmatches="50"></div>
                                 </div>
                             </div>
@@ -96,16 +96,16 @@
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="phones" required caption="رقم (أرقام) الهواتف">
-                                    <div class="help-info">يُرجى استخدم الترتيب التالي من اليسار إلى اليمين: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
+                                <div class="km-control-group" name="phones" required caption="Phone number(s)">
+                                    <div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
                                     <div km-inputtext-list required name="phones" ng-model="document.phones"
                                         placeholder="مثال: 2220 288 514 1+"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="faxes" caption="رقم (أرقام) الفاكس">
-                                    <div class="help-info">يُرجى استخدم الترتيب التالي من اليسار إلى اليمين: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
+                                <div class="km-control-group" name="faxes" caption="Fax number(s)">
+                                    <div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
                                     <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="مثال: 6588 288 514 1+"></div>
                                 </div>
                             </div>
@@ -113,14 +113,14 @@
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="emails" required caption="عنوان (عناوين) البريد الإلكتروني">
+                                <div class="km-control-group" name="emails" required caption="Email(s)">
                                     <div km-inputtext-list required name="emails" ng-model="document.emails"
                                         placeholder="مثال: secretariat@cbd.int"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="websites" caption="عنوان (عناوين) الموقع الإلكتروني">
+                                <div class="km-control-group" name="websites" caption="Website address(es)">
                                     <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                         allow-file="false"></div>
                                 </div>
@@ -168,7 +168,7 @@
                                 <div class="col-md-12">
                                     <div class="km-control-group"  name="operationalRegions" caption="المناطق الإقليمية للعمليات أو المجموعات السياسية/الاقتصادية">
                                         <div km-select multiple required name="operationalRegions" 
-                                        ng-model="document.operationalRegions" placeholder="يُرجى تحديد..." 
+                                        ng-model="document.operationalRegions" placeholder="Please select" 
                                         items="options.geographicRegions()"></div>
                                     </div>
                                 </div>
@@ -202,7 +202,7 @@
                     
                     <div class="well no-shadow bg-white">
                         <legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
-                        <div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. بعد انقضاء الموعد النهائي، سيُطلب منك تأكيد السجل أو تحديثه في غضون 3 أشهر. وإذا لم يصلك أي تأكيد بعد انقضاء هذه المدة سيتم تمييز السجل بالوصف "غير مؤكد".</div>
+                        <div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. After the deadline you will be asked to confirm or update the record within 3 months. وإذا لم يصلك أي تأكيد بعد انقضاء هذه المدة سيتم تمييز السجل بالوصف "غير مؤكد".</div>
                     </div>
 
                     <div class="well no-shadow bg-white">
@@ -219,17 +219,17 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-                                    <div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+                                    <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="well no-shadow bg-white">
-                        <legend>Notes</legend>								
+                        <legend>ملاحظات</legend>								
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
                                 </div>
                             </div>
                         </div>

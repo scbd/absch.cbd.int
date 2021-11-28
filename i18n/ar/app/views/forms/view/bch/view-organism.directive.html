@@ -30,7 +30,7 @@
 		</div>
 
 		<div ng-show="document.scientificNameSynonyms">
-				<label>الأسماء العلمية البديلة (المرادفات):</label>
+				<label>Alternate scientific name(s) (synonym(s))</label>
 				<div class="km-value" compare-val> 
 					<ul class="list">
 						<li ng-repeat="name in document.scientificNameSynonyms" ng-bind="name"></li>
@@ -40,7 +40,7 @@
 
 		<div ng-show="document.commonNames">
 			<label>الأسماء الشائعة</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<ul class="list">
 					<li ng-repeat="name in document.commonNames" style="margin-bottom: 5px;">
 						<km-value-ml value="name" locales="locale"></km-value-ml>
@@ -145,7 +145,7 @@
 		</div>
 
 		<div ng-show="document.commonUses">
-				<label>الاستخدام (الاستخدامات) الشائعة</label>
+				<label>Common use(s)</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
@@ -163,7 +163,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 				</div>

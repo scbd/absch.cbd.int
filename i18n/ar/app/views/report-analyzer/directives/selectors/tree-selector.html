@@ -1,9 +1,8 @@
-<div>
+<div dir="rtl">
     <script type="text/ng-template" id="child-items">
-        <div class="checkbox">
+        <div class="checkbox" dir="rtl">
           <label>
-            <input type="checkbox" ng-model="item.selected" indeterminate="item.selected===null" ng-change="onSelect(item)"> {{item.title|lstring}}
-          </label>
+            <input type="checkbox" ng-model="item.selected" indeterminate="item.selected===null" ng-change="onSelect(item)"><span ng-bind="item.title|lstring" dir="rtl"></span></label>
 
           <div ng-repeat="item in item.children" ng-include="'child-items'" style="margin-left:22px"></div>
 

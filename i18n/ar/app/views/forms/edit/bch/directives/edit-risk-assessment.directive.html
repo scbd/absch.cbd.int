@@ -1,12 +1,12 @@
 <div dir="rtl">
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
 			tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			data-container="{{container}}" is-dialog="{{isDialog}}">
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 						<form class="editForm" name="editForm" style="margin-top:10px">
 								<div>
@@ -16,7 +16,7 @@
 										<legend>معلومات عامة</legend>
 											<div class="row">
 												<div class="col-xs-12" >
-													<div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+													<div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
 														<div class="indent">
 															<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 														</div>
@@ -27,7 +27,7 @@
 												<div class="col-sm-12">
 													<div class="km-control-group" name="government" required caption="البلد">
 														<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-															filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."></div>
+															filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 													</div>
 												</div>
 											</div>
@@ -41,15 +41,24 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-4">
 													<div class="km-control-group" name="date" required caption="تاريخ تقرير تقييم المخاطر"
 															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
-														<div km-date placeholder="يوم - شهر - سنة" name="date" required ng-model="document.date"></div>
+
+														<div class="col-md-8 padding-left-0">
+															<div km-date placeholder="يوم - شهر - سنة" name="date" required ng-model="document.date" ng-disabled="document.dateOfRaNotAvailable"></div>	
+														</div>
+														<div class="col-md-4 padding-left-0 ">
+															<div class="checkbox">
+																<label for="dateOfRaNotAvailable">
+																	<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" id="dateOfRaNotAvailable" name="dateOfRaNotAvailable">التاريخ غير متاح</label>
+															</div>
+														</div>														
 													</div>
 												</div>
 											</div>
 											
-											<div class="row" ng-if="!isNational">
+											<div class="row padding-top-10" ng-if="!isNational">
 												<div class="col-xs-12">
 													<div class="km-control-group" name="organizations" required caption="المؤسسة المسئولة عن تقييم المخاطر">											
 														<div document-selector ng-model="document.organizations" question="organizations"
@@ -59,7 +68,7 @@
 											</div>	
 											<div class="row" ng-if="isNational">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="authorities" required caption="السلطة (السلطات) الوطنية المختصة المسئولة عن تقييم المخاطر">											
+													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
 														<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities"
 																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true"></div>
 
@@ -100,7 +109,7 @@
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="documents" required caption="تقرير تقييم المخاطر / ملخص">
+													<div class="km-control-group" name="documents" required caption="Risk assessment report / summary">
 														<div class="help-block">يُفضل إرفاق المستند. أو اذكر موقع الوثيقة (على سبيل المثال عنوان الويب الذي يشتمل على عنوان الموقع، مثال: http://bch.biodiv.org) واسم موقع الويب (على سبيل المثال: غرفة تبادل معلومات السلامة الأحيائية).</div>
 														<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 														<div class="km-control-group"  name="documentsSummary" caption="يُرجى استخدام هذه الخانة لإضافة ملخص بتقييم المخاطر.">
@@ -132,7 +141,7 @@
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group"  name="adverseEffectsConsequence" caption="النتائج الممكنة">
+													<div class="km-control-group"  name="adverseEffectsConsequence" caption="Possible consequences">
 														<div km-rich-textbox name="adverseEffectsConsequence"  ng-model="document.adverseEffectsConsequence" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -146,21 +155,21 @@
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group"  name="adverseEffectsRecommendation" caption="التوصية (التوصيات) حول مدى قبول/إدارة المخاطر وأي إستراتيجيات إدارية">
+													<div class="km-control-group"  name="adverseEffectsRecommendation" caption="Recommendation(s) on whether the risks are acceptable/manageable and any management strategies">
 														<div km-rich-textbox name="adverseEffectsRecommendation"  ng-model="document.adverseEffectsRecommendation" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group"  name="riskManagementStrategies" caption="الحاجة لمزيد من المعلومات حول قضايا معينة مثيرة للاهتمام">
+													<div class="km-control-group"  name="riskManagementStrategies" caption="Need(s) for further information on specific issues of concern">
 														<div km-rich-textbox name="riskManagementStrategies"  ng-model="document.riskManagementStrategies" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group"  name="receivingEnvironment" caption="مراعاة بيئة (بيئات) التلقي">
+													<div class="km-control-group"  name="receivingEnvironment" caption="Receiving environment(s) considered">
 														<div class="help-block">المعلومات المتعلقة بخصائص الموقع أو الطبيعة الجغرافية أو المناخ أو البيئة الإيكولوجية مثل المعلومات ذات الصلة حول التنوع البيولوجي ومراكز المنشأ في البيئة المستقبلة المحتملة كما هو مذكور في الملحق 3 الفقرة 9 (ح) من البروتوكول.</div>
 														<div km-rich-textbox name="receivingEnvironment"  ng-model="document.receivingEnvironment" locales="document.header.languages"></div>
 													</div>
@@ -168,37 +177,37 @@
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group"  name="detectionMethod" caption="الوسائل المقترحة لرصد الكائنات الحية المحورة وتحديد هويتها">
+													<div class="km-control-group"  name="detectionMethod" caption="LMO detection and identification methods proposed">
 														<div km-rich-textbox name="detectionMethod"  ng-model="document.detectionMethod" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 										</div>
-									</section><!-- <section ng-if="isNational">
+									</section>
+
+								<section ng-if="isNational">
 										<div class="well no-shadow bg-white">
-											<legend>Information sharing with other databases</legend>
+											<legend>تبادل المعلومات مع قواعد البيانات الأخرى</legend>
 											<div class="row">
 												<div  class="col-xs-12">
-													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?">
+													<div class="km-control-group" name="isForCommercialUse" caption="هل يرتبط هذا التقييم للمخاطر بكائن حي مُحوَّر مُعَدّ للاستخدام التجاري؟:">
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="control-group inner-padding">
-																<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the
-															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
+																<label>هل ينبغي إحالة هذا التقييم للمخاطر إلى أمانة منظمة التعاون الاقتصادي والتنمية لإدراجه في <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank">قاعدة بيانات منتجات BioTrack</a>؟</label>
 															</div>
 															<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 															<div class="control-group inner-padding">
-																<label>Is this risk assessment related to food safety?</label>
+																<label>هل هذا التقييم للمخاطر متعلق بسلامة الغذاء؟</label>
 															</div>
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
 																<div class="control-group inner-padding">
-																	<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i></label>
+																	<label>هل تم إجراء هذا التقييم وفقًا للدستور الغذائي <i>"إرشادات إجراء تقييم سلامة الأغذية المشتقة من نباتات تم توليف حمضها النووي؟</i></label>
 																</div>															
-																<div class="km-yes-no" name="codexConduted" ng-model="document.codexConduted"></div>
+																<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 																<div class="control-group inner-padding">
-																	<label>Should this risk assessment be forwarded to your country's FAO focal point for possible inclusion in the
-																	<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
+																	<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
 																</div>
 																<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 															</div>
@@ -207,9 +216,10 @@
 												</div>
 											</div>
 										</div>
-									</section> --><section>
+									</section>
+									<section>
 										<div class="well no-shadow bg-white">
-											<legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
+											<legend>Timeframe for confirmation or updating of information</legend>
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="km-control-group" required name="expires"  caption="هل ينبغي تأكيد هذه المعلومات أو تحديثها بعد مضي عامين من تاريخ تقديمها؟">			
@@ -236,7 +246,7 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-														<div class="help-block">يُرجى استخدام هذه الخانة في إدخال عناوين أي مواقع إنترنت أخرى ذات صلة أو وثائق أخرى ملائمة لتخزينها في قاعدة البيانات ليتسنى للمستخدمين تنزيلها.</div>
+														<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
 														<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 													</div>
 												</div>
@@ -249,7 +259,7 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="notes">
-													<div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</div>
+													<div class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>
 												</div>
 											</div>

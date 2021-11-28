@@ -4,14 +4,14 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <edit-form>
                         <form name="editForm" class="editForm" style="margin-top:10px">
 								<div ng-show="tab=='edit'" km-tab="edit">
 									<legend name="formInfo" style="display:none"></legend>
                                     <section><br><div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+														<div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
 															<div class="indent">
 																<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 															</div>
@@ -25,7 +25,7 @@
 										<div class="row" ng-if="isNationalUser">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="government" required caption="البلد">
-													<div afc-autocomplete required name="government" ng-disabled="!canEditGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."></div>
+													<div afc-autocomplete required name="government" ng-disabled="!canEditGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 												</div>
 											</div>
 										</div>
@@ -234,15 +234,15 @@
 			
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="phones" caption="رقم (أرقام) الهواتف">
-													<div class="help-info">يُرجى استخدم الترتيب التالي من اليسار إلى اليمين: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
+												<div class="km-control-group" name="phones" caption="Phone number(s)">
+													<div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
 													<div km-inputtext-list name="phones" ng-model="document.phones" placeholder="مثال: 2220 288 514 1+"></div>
 												</div>
 											</div>
 			
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="faxes" caption="رقم (أرقام) الفاكس">
-													<div class="help-info">يُرجى استخدم الترتيب التالي من اليسار إلى اليمين: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
+												<div class="km-control-group" name="faxes" caption="Fax number(s)">
+													<div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
 													<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="مثال: 6588 288 514 1+"></div>
 												</div>
 											</div>
@@ -250,13 +250,13 @@
 			
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="emails" caption="عنوان (عناوين) البريد الإلكتروني" required>
+												<div class="km-control-group" name="emails" caption="Email(s)" required>
 													<div km-inputtext-list name="emails" type="email" ng-model="document.emails" placeholder="مثال: secretariat@cbd.int"></div>
 												</div>
 											</div>
 			
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="websites" caption="عنوان (عناوين) الموقع الإلكتروني">
+												<div class="km-control-group" name="websites" caption="Website address(es)">
 													<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="مثال: http://www.cbd.int"></div>
 												</div>
 											</div>
@@ -269,7 +269,7 @@
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="km-control-group" name="notes">
-													<div class="help-info">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. ولا ينبغي استخدام هذه الخانة في تسجيل أي معلومات سرية.</div>
+													<div class="help-info">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>
 												</div>
 											</div>

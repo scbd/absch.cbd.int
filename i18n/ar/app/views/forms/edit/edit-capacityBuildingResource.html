@@ -1,11 +1,11 @@
 ﻿<div  dir="rtl">
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+    <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
             <div class="alert alert-success alert-dismissable" ng-show="msg">
-                <button aria-hidden="true" class="close" data-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong>{{msg}}</strong></div>
+                <button aria-hidden="true" class="close" data-bs-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong>{{msg}}</strong></div>
 
             <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
                 languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
@@ -18,7 +18,7 @@
 	
 							<div class="row">
 								<div class="col-xs-12" >
-									<div class="km-control-group" name="header.languages" required caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+									<div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
 										<div class="indent">
 											<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 										</div>
@@ -100,14 +100,10 @@
 																			schema="contact" skip-government="true"
 																			government="document.government"
 																			filter="true"
-																			></div><!--<organization-selector multiple ng-model="document.organizations" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>--></div><!-- <div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s)">
-										<div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
-												<div>
-													<div><strong>{{reference.title | lstring}}</strong></div>
-													<div>{{reference.summary | lstring}}</div>
-												</div>
-										</div>
-									</div> --></div>
+																			></div>										
+										
+									</div>
+								</div>
 							</div>
 	
 							<div class="row">
@@ -121,7 +117,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="rights" caption="الحقوق">
-										<div class="help-info">المعلومات عن الحقوق الخاصة بالمرجع/المصدر مثل صاحب حقوق النشر وإمكانية إعادة النشر للأغراض التعليمية أو غير الربحية.</div>
+										<div class="help-info">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
 										<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
 									</div>
 								</div>
@@ -140,8 +136,8 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" required name="resourceLinks" caption="رابط للوثيقة (الوثائق) المرجعية">
-										<div class="help-info">يُرجى دائما إرفاق المستند أو المستندات ذات الصلة التي سيتم تخزينها في قاعدة البيانات حتى يتمكن المستخدمون من تنزيلها. عندما تصبح الوثائق المرجعية متاحة على الإنترنت، يُرجى أيضًا إضافة الروابط الخاصة بها.</div>
+									<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">
+										<div class="help-info">Please always attach the relevant document(s) that will be stored in the database for users to download. عند نشر الوثائق المرجعية عبر الإنترنت، يُرجى أيضًا إضافة الروابط الخاصة بها.</div>
 										<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 									</div>
 								</div>
@@ -149,7 +145,7 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" name="cover" caption="صورة/صور الغلاف">
+									<div class="km-control-group" name="cover" caption="صورة (صور) الغلاف">
 										<div class="help-info">يمكن رفع الصور بصيغتي JPEG وPNG فقط.</div>
 										<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mime-types="image/jpeg;image/png" identifier="document.header.identifier"></div>
 									</div>
@@ -168,8 +164,8 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" required name="regions" caption="البلدان أو المجموعات الإقليمية أو الاقتصادية المرتبطة بالوثيقة المرجعية">
-										<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.countryRegions()" multiple placeholder="حدد البلدان والمناطق أو الاثنين معًا.."></div>
+									<div class="km-control-group" required name="regions" caption="Country(ies), Regional or Economic group(s) related to the resource">
+										<div km-select style="display: inline-block" name="regions" ng-model="document.regions" items="options.countryRegions()" multiple placeholder="Select a country(ies) and/or region(s)..."></div>
 									</div>
 								</div>
 							</div>
@@ -204,7 +200,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="notes">
-										<legend>ملاحظات</legend><span class="help-info">الخانة "ملاحظات" للاستخدام الشخصي وتظهر فقط أثناء تحرير السجل.</span><div km-notes name="notes" ng-model="document.notes"></div>
+										<legend>ملاحظات</legend><span class="help-info">The field “Notes” is for personal reference and can be seen only when the record is being edited.</span><div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>
 							</div>

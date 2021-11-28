@@ -1,19 +1,14 @@
-﻿<div>
+﻿<div dir="rtl">
 	<div class="col-xs-12">
-		<button class="btn btn-default btn-xs pull-right" ng-click="clear()" ng-if="binding.identifier">
-			<i class="fa fa-remove"></i>
-			Clear selection
-		</button>
+		<button type="button" class="btn btn-default btn-xs pull-right" ng-click="clear()" ng-if="binding.identifier" ng-disabled="ngDisabledFn()"><i class="fa fa-remove" dir="rtl"></i> مسح التحديد</button>
 		<ul>
 
 			<script type="text/ng-template"  id="term-radio-tree-renderer.html">
-				<label>
-					<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" ng-value="term.identifier" name="bindingName_{{uniqueId}}"/>
-						{{term.title||term.name | lstring:locale}}
-							<span ng-if="showDescription" class="km-term-radio-description">{{term.description | lstring:locale}}</span>
-				</label>
+				<label dir="rtl">
+					<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" 
+					ng-value="term.identifier" name="bindingName_{{uniqueId}}" ng-disabled="ngDisabledFn()"/><span ng-bind="term.title||term.name | lstring:locale" dir="rtl"></span> <span ng-if="showDescription" class="km-term-radio-description" ng-bind="term.description | lstring:locale" dir="rtl"></span></label>
 
-				<ul style="list-style:none">
+				<ul style="list-style:none" dir="rtl">
 					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-radio-tree-renderer.html'">			
 				</ul>
 			</script>
@@ -23,9 +18,8 @@
 					<tr>
 						<td style="width:5%">
 							<label>
-								<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" value="{{other.identifier}}" name="bindingName_{{uniqueId}}"/>
-								{{other | term:locale}} {{locale}}
-							</label>
+								<input type="radio" ng-model="selection.identifier" ng-change="save()" ng-required="IsRequired()" 
+								value="{{other.identifier}}" name="bindingName_{{uniqueId}}" ng-disabled="ngDisabledFn()"/><span ng-bind="other | term:locale"></span> <span ng-bind="locale"></span></label>
 						</td>
 						<td >
 							<div ng-if="selection.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" km-textbox-ml name="otherTerm" required ng-model="selection.customValue" locales="locales"  ng-change="save()"></div>
@@ -34,14 +28,11 @@
 				</table>
 			</li>
 			<li ng-show="error">
-				<div class="alert">
-					{{error}}
+				<div class="alert" ng-bind="error">
 				</div>
 			</li>
 
-			<li ng-show="__loading">
-				<i class="fa fa-spinner fa-spin"></i> Loading...	
-			</li>
+			<li ng-show="__loading"><i class="fa fa-spinner fa-spin"></i> قيد التحميل ...</li>
 		</ul>
 	</div>
 </div>

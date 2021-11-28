@@ -89,7 +89,7 @@
 		<div ng-show="document.geneConstructs">
 			<label>تكوين العناصر الجينية</label>
 
-			<div class="km-value" compare-val>
+			<div class="km-value" compare-val ng-class="{'lmo-gene-construct-scroll':!printMode}">
 				<div ng-repeat="construct in document.geneConstructs" style="margin-bottom:5px;">
 					<view-lmo-gene ng-model="construct"></view-lmo-gene>
 				</div>
@@ -116,13 +116,13 @@
 
 		<legend>خصائص الكائن الحى المُحوّر</legend>		
 		<div ng-show="document.traits">
-			<label>السمات المحورة</label>
+			<label>Modified traits</label>
 			<div class="km-value" compare-val>
 				<view-terms-hierarchy ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
 		<div ng-show="document.affectedGenes">
-			<label>الجين (الجينات) التي تأثر تعبيرها بالتحول</label>			
+			<label>Other gene(s) whose expression was affected by the transformation</label>			
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
@@ -147,7 +147,7 @@
 		<div ng-show="document.detectionMethod||document.detectionMethodLinks">
 			<legend>وسائل الرصد</legend>
 			<div ng-show="document.detectionMethodLinks">
-				<label>الرابط (الروابط) الخارجية</label>
+				<label>External link(s)</label>
 				<div compare-val>
 				<km-link-list class="km-value" ng-model="document.detectionMethodLinks"></km-link-list></div>
 			</div>
@@ -167,7 +167,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 					

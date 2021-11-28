@@ -1,64 +1,50 @@
-<div>
-	<div class="register-content card card-1-notrans">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Registries</h3>
-			</div>
-			<div class="container-fluid bg-white registry-sections">
-				<div class="row" style="padding-top:10px">
+<div id="innerPage" dir="rtl">
 
-					<div class="col-md-4">
-						<ul class="list-group ">
-							<li class="list-group-item">
-								<h4 class="registry-title"><strong>Living Modified Organism (LMO) Registry<span class="badge pull-right" ng-bind="::count.modifiedOrganism"></span></strong></h4>
-								<p class="card-box">The LMO Registry provides summary information on all living modified organisms registered in
-									the BCH, including transformation events, genetic modifications and the 
-									<a rel="noopener" translation-url href="https://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">unique identification code</a>
-									 (if available) for each record. Links to all decisions and risk assessment reports that refer to these organisms are accessible 
-									 through the records in the registry.
-								</p>
-								<div>
-									<a rel="noopener" translation-url class="btn btn-default" href="/registries/living-modified-organisms" role="button">View registry </a>
-								</div>
-							</li>
-						</ul>
+	<div class="mastHead">
+		<h1>السجلات</h1>
+	</div>
 
-					</div>
-					<div class="col-md-4">
-						<ul class="list-group ">
-							<li class="list-group-item">
-								<h4 class="registry-title"><strong>Organism Registry <span class="badge pull-right" ng-bind="::count.organism"> </span></strong></h4>
-								<p class="card-box">The Organism Registry includes summary information on those organisms that have been registered in the BCH 
-									as parental, recipient or donor organisms. The registry includes links to the records on each organism where further information 
-									about relevant biological characteristics, including information on taxonomic classification, common name, origin, centre of 
-									origin and centre of genetic diversity can be found. Links to records that reference the organism are provided at the bottom
-									 of each individual record.
-								</p>
-								<div>
-									<a rel="noopener" translation-url class="btn btn-default" href="/registries/organisms" role="button">View registry</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul class="list-group ">
-							<li class="list-group-item">
-								<h4 class="registry-title"><strong>Genetic Element Registry <span class="badge pull-right" ng-bind="::count.dnaSequence"> </span></strong></h4>
-								<p class="card-box">The Genetic Element Registry provides a summary of information on the genetic elements associated with 
-									the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. 
-									The registry includes links to the records on each genetic element where more details may be found. LMOs containing
-									 the particular genetic element are referenced at the bottom of the individual record.
-								</p>
-								<div>
-									<a rel="noopener" translation-url class="btn btn-default" href="/registries/genetic-elements" role="button">View registry</a>
-								</div>
-							</li>
-						</ul>
-					</div>
+	<div class="innerPageContent">
+		<div class="registry-sections">
+			<div class="row" style="padding-top:10px">
+
+				<div class="col-md-4">
+					<ul class="list-group ">
+						<li class="list-group-item">
+							<h4 class="registry-title"><strong>سجل الكائنات الحية المُحوّرة<span
+										class="badge pull-right" ng-bind="::count.modifiedOrganism"></span></strong></h4>
+							<p class="card-box">يعرض سجل الكائنات الحية المحورة معلومات موجزة عن جميع الكائنات الحية المُحوّرة المسجلة في غرفة تبادل معلومات السلامة الأحيائية تتضمن أحداث التحويل، والتحويرات الجينية، و<a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">كود التعريف الفريد</a> (إن أمكن) لصفحة كل كائن منها. وتحتوي صفحات الكائنات في السجل على روابط لجميع القرارات وتقارير تقييم المخاطر لهذه الكائنات.</p>
+							<div><a rel="noopener" translation-url class="btn btn-default"
+									href="/registries/living-modified-organisms" role="button">عرض السجل</a></div>
+						</li>
+					</ul>
 
 				</div>
+				<div class="col-md-4">
+					<ul class="list-group ">
+						<li class="list-group-item">
+							<h4 class="registry-title"><strong>سجل الكائنات الحية <span class="badge pull-right"
+										ng-bind="::count.organism"></span></strong></h4>
+							<p class="card-box">يحتوي سجل الكائنات الحية على معلومات موجزة عن الكائنات المُسجلة في غرفة تبادل معلومات السلامة الأحيائية ككائنات أصلية أو متلقية أو مانحة. ويتضمن السجل روابط إلى صفحات هذه الكائنات التي تتضمن المزيد من التفاصيل عن الخصائص البيولوجية المُهمة، مثل معلومات الحالة التصنيفية، والاسم الشائع، والمنشأ، ومركز المنشأ، ومركز التنوع الجيني. وأدنى كل صفحة من صفحات هذه الكائنات توجد روابط لصفحات الكائنات الحية المُحوّرة ذات الصلة.</p>
+							<div><a rel="noopener" translation-url class="btn btn-default" href="/registries/organisms"
+									role="button">عرض السجل</a></div>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-group ">
+						<li class="list-group-item">
+							<h4 class="registry-title"><strong>تسجيل العناصر الجينية <span class="badge pull-right"
+										ng-bind="::count.dnaSequence"></span></strong></h4>
+							<p class="card-box">The Genetic Element Registry provides a summary of information on the genetic elements associated with the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. يتضمن السجل روابط لصفحة كل عنصر وراثي حيث يوجد المزيد من التفاصيل. وأدنى كل صفحة من هذه الصفحات يشار إلى أسماء الكائنات الحية المحورة التي تحتوي على عناصر وراثية معينة.</p>
+							<div><a rel="noopener" translation-url class="btn btn-default"
+									href="/registries/genetic-elements" role="button">عرض السجل</a></div>
+						</li>
+					</ul>
+				</div>
+
 			</div>
 		</div>
-
 	</div>
+
 </div>

@@ -1,16 +1,16 @@
-﻿<div>
+﻿<div dir="rtl">
     <div  ng-show="!user.isAuthenticated" style="margin:0 10% 0 10%" >
-        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">Please sign-in to publish information in the ABS Clearing-House</h1>
+        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">يرجى تسجيل الدخول لنشر المعلومات في <span ng-bind="chShortName" dir="rtl"></span></h1>
         <hr>
        <div class="well">
-       <h3>How do I register for a CBD account?</h3>
-       <p>Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at <a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a></p>
-        <p>Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.</p>
-       <h3>Forgot your password?</h3>
+       <h3>كيف يتسنى لي تسجيل حساب في موقع اتفاقية التنوع البيولوجي؟</h3>
+       <p>بوسع أي شخص إنشاء حساب في موقع اتفاقية التنوع البيولوجي لتسجيل المعلومات في كل غرف تبادل المعلومات التابعة لاتفاقية التنوع البيولوجي، مثل غرفة تبادل معلومات السلامة الأحيائية، وغرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع وآلية غرفة تبادل المعلومات، وذلك بمقتضى الاتفاقية. تستطيع تسجيل حساب في موقع اتفاقية التنوع البيولوجي في الرابط <a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a></p>
+        <p>احرص على إدخال كل المعلومات المطلوبة حسب التعليمات في النموذج. ستتلقى رسالة إلكترونية تلقائية على بريدك الإلكتروني بها رابط ينبغي أن تضغط عليه لتأكيد الحساب.</p>
+       <h3>هل نسيت كلمة المرور؟</h3>
         <p>Click here <a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a> to reset your password. You will be asked for your email address and, if you are a registered user, an email will be sent immediately to your registered email account with instructions on how to reset your password.</p>
-        <h3>Problems with the display of the Clearing-House?</h3>
-        <p> The ABS-CH works best with the most recent versions of internet browsers (Firefox, Chrome or Internet Explorer 9+).</p>
-        <h3 class="color-green">For technical support please contact our help desk at: <span class="color-blue">absch@cbd.int</span></h3>
+        <h3>هل هناك مشكلة في عرض غرفة تبادل المعلومات؟</h3>
+        <p>تعمل الغرفة <span ng-bind="chShortName"></span>  بكفاءة مع أحدث إصدارات  متصفحات الإنترنت (مثل Firefox أو Chrome أو Edge)</p>
+        <h3 class="color-green">لطلب الدعم التقني، يُرجى التواصل مع مكتب المساعدة على: <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
        </div>
       </div>
 </div>

@@ -1,51 +1,7 @@
-﻿<div class="bg-texture-green app-bg-texture" style="position:relative;">
-    
-    <div class="container-fluid tag-line-container protocol-map-header-bg bg-green color-white " style="position:relative;">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h3 ng-if="options.isAbs">The <span ng-bind="options.chLongName"></span> (<span ng-bind="options.chShortName"></span>) 
-                        is a platform for exchanging information on <span ng-bind="options.protocolShortName"></span> and a key tool for 
-                        facilitating the implementation of the <span ng-bind="options.protocol"></span>.
-                        <a rel="noopener" translation-url  href="/about" ng-click="toggleTooltip()"> 
-                            <i class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" 
-                            data-title="Click here to find out more about the Clearing-house" data-container="body"></i></a>
-                    </h3>
-                    <h3 ng-if="options.isBch">
-                        The Biosafety Clearing-House (BCH) is an online platform for exchanging information and a key tool for facilitating the implementation of the Cartagena Protocol on Biosafety.
-                    </h3>
-                </div>
-            </div>
-        </div>
+﻿
+<div dir="rtl">
+    <div style="position:relative;">
+        <div id="homeMap" class="hidden-sm hidden-xs" block-region activate="loadingMap" style="min-height:100vh;" >
     </div>
 
-    <div id="homeMap" class="hidden-sm hidden-xs" style="padding:0; margin-bottom:-15px;margin-top:0;" 
-        block-region activate="loadingMap" ng-style="{'height': options.isBch ? '450px' : '350px'}">
-    </div>
-
-    <div id="Parties" class="container-fluid  party-container text-center hidden-sm hidden-xs" 
-    style="position:relative;background-color: #fff;">
-        <div class="row">
-            <div class="col-md-5">
-                <span class="label label-party">{{numParty}}</span>
-                <a rel="noopener" translation-url href="/countries/status/party" class="link od-label">Parties to the <span ng-bind="options.protocol"></span>
-                </a>
-            </div>
-
-            <div class="col-md-4">
-                <span class="label label-inbetween">{{numRatified}}</span>
-                <a rel="noopener" translation-url href="/countries/status/inbetween" class="link od-label">Ratified, not yet Party</a>
-                <a rel="noopener" translation-url href="#" class="helpinfoInline fa fa-info-circle color-grey" data-toggle="tooltip" 
-                data-title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. "
-                    data-container="body"></a>
-            </div>
-
-            <div class="col-md-3">
-                 <span class="label label-non-party" style="font-size: 16px;">{{numNonParty}}</span>
-                <a rel="noopener" translation-url href="/countries/status/nonparty" class="link od-label">Non-Parties</a>
-            </div>
-        </div>
-    </div>
-
-   
 </div>

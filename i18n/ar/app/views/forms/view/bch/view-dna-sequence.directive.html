@@ -21,7 +21,7 @@
 			</div>
 		</div>
 		<div ng-show="document.synonymNames">
-			<label>الأسماء العلمية البديلة (المرادفات)</label>
+			<label>Alternate genetic element name(s) (synonym(s))</label>
 			<div compare-val>
 			<ul class="list" style="padding-left:0px">
 				<li ng-repeat="synonym in document.synonymNames" style="padding-bottom:5px;">
@@ -53,7 +53,7 @@
 		</div>
 	
 	<div ng-if="document.donorOrganisms || document.donorOrganismCollectionPoint || document.gisFiles ">
-		<legend>الكائن المانح</legend>
+		<legend>Donor organism</legend>
 
 		<div ng-show="document.donorOrganisms">
 			<label>الكائنات المانحة</label>
@@ -67,7 +67,7 @@
 		</div>
 
 		<div ng-show="document.donorOrganismCollectionPoint">
-			<label>نقطة جمع الكائنات المتبرعة أو الحصول عليها</label>
+			<label>Point of collection or acquisition of the donor organism(s)</label>
 			<div compare-val>
 				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
 			</div>
@@ -95,7 +95,7 @@
 		</div>
 
 		<div ng-show="document.traits">
-			<label>الصفة (الصفات) والاستخدام (الاستخدامات) ذات الصلة في التكنولوجيا الحيوية</label>
+			<label>Related trait(s) or use(s) in biotechnology</label>
 			<div compare-val>
 				<view-terms-hierarchy class="km-value" ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
@@ -110,7 +110,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div class="km-value" compare-val>
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 				</div>

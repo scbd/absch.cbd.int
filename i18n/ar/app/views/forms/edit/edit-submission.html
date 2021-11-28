@@ -1,6 +1,6 @@
 ﻿<div  dir="rtl">
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <edit-header></edit-header>
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -18,7 +18,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="header.languages" required
-                                                caption="يُرجى اختيار اللغة (اللغات) التي تريد إرسال هذا السجل بها:">
+                                                caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages"
                                                         ng-model="document.header.languages"></div>
@@ -32,13 +32,13 @@
                                                     ng-disabled="document.organizations" ng-model="document.government"
                                                     source="options.countries" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true"
-                                                    placeholder="يُرجى اختيار البلد..."></div>
+                                                    placeholder="Please select a country..."></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">أو</strong></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
-                                                caption="المنظمة (المنظمات)" required>
+                                                caption="Organization(s)" required>
                                                 <div document-selector ng-model="document.organizations"  type="checkbox" ng-disabled="document.government" question="organizations"
                                                      on-build-query="onContactQuery(searchText)" allow-new-schema="organization">
                                                 </div>
@@ -106,7 +106,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="records"caption="السجلات المرتبطة">
-                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
+                                                <div document-selector ng-model="document.records" question="records" filter="true"
+                                                     on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -115,7 +116,7 @@
                             </section>
                             <section ng-if="isAbs">
                                 <div class="well no-shadow bg-white">
-                                    <legend>مجالات البحث</legend>
+                                    <legend>Thematic areas</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -175,7 +176,7 @@
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" مخصصة للاستخدام الشخصي. وتظهر فقط أثناء تحرير السجل أو تعديله لكنها لا تظهر بعد نشر السجل. ولا ينبغي استخدام هذه الخانة في إضافة أو حفظ أي معلومات سرية.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                            <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" مخصصة للاستخدام الشخصي. وتظهر فقط أثناء تحرير السجل أو تعديله لكنها لا تظهر بعد نشر السجل. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
                                     </div>

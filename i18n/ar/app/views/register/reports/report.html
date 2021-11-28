@@ -1,12 +1,18 @@
-<div ng-controller="ReportController">
-    <style>
-        .embed-responsive.embed-responsive-16by9{
-            padding-top: 70%;
-        }    
-    </style>
-        <div class="embed-responsive embed-responsive-16by9">
-            <div >
-                <iframe class="embed-responsive-item" ng-src="{{frameUrl}}" frameborder="0"></iframe>
+<div  dir="rtl">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu dir="rtl"></span><style> .embed-responsive.embed-responsive-16by9{ padding-top: 70%; } </style>
+    <div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:1px 10px;">
+                <h3>التقارير</h3>
             </div>
         </div>
+        <div class="register-content-content bg-white">
+            <div class="row" style="padding:10px">
+                <div class="col-md-12 cp-header">
+                    <div class="embed-responsive embed-responsive-16by9"><iframe class="embed-responsive-item" ng-src="{{frameUrl}}" frameborder="0"></iframe></div>                    
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

@@ -60,7 +60,7 @@
 		</div>	
 
 		<div ng-if="document.detectableLmos">
-			<label>الكائنات الحية المحورة التي يرصدها المعمل</label>
+			<label>LMO(s) detectable by the laboratory</label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableLmos">
@@ -94,7 +94,7 @@
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة</label>
+				<label>Other relevant website addresses and/or attached documents</label>
 				<div compare-val>
 					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
 				</div>		

@@ -20,9 +20,9 @@
     		 	<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
 		 	</div>
 			<div ng-show="document.absCheckpoints">
-				<legend>نقطة/نقاط التفتيش التي جمعت المعلومات أو حصلت عليها</legend>
+				<legend>Checkpoint/s that collected or received the information</legend>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li ng-repeat="item in document.absCheckpoints">
 								<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -60,7 +60,7 @@
 				<div ng-show="document.absIRCCs">
 					<label>الرقم (الأرقام) المرجعية لشهادة (شهادات) الامتثال المعترف بها دوليًا التي ترتبط بهذا البيان</label>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li  ng-repeat="item in document.absIRCCs">
 								 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -210,7 +210,7 @@
 				</div>
 
 				<div ng-show="document.relevantDocuments">
-					<label>مواد أخرى ذات صلة كعناوين مواقع الإنترنت أو الوثائق المرفقة أو كلاهما</label>
+					<label>Other relevant website addresses and/or attached documents</label>
 					<div class="km-value" compare-val="relevantDocuments">
 						<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 					</div>
