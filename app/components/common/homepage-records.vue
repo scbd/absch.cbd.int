@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="home-page-records">
   <ul class="bs5 mx-lg-3 nav nav-pills">
     <li class="bs5 nav-item">
       <a class="bs5 nav-link active">Recently published</a>
@@ -11,12 +11,12 @@
     <div class="bs5 col" v-for="record in recordList.slice(0,4)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
-        <h4><a :href="record.url_ss" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
+        <h4><a :href="recordUrl(record)" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div style="position:absolute;bottom:5px; width:95%">
-          <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
-          <a v-if="record.government_s"  target="_blank" :href="`/countries/${encodeURIComponent(record.government_s)}`">
+          <a class="meta-links" :href="`/${$locale}/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" v-if="record.government_s" :href="`/${$locale}/countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
@@ -27,12 +27,12 @@
     <div class="bs5 col" v-for="record in recordList.slice(4,8)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
-        <h4 class="fw-bold"><a :href="record.url_ss" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
+        <h4 class="fw-bold"><a :href="recordUrl(record)" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="bs5 fs-5 new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div class="new-css-records-sub-options">
-          <a :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
-          <a v-if="record.government_s"  target="_blank" :href="`/countries/${encodeURIComponent(record.government_s)}`">
+          <a class="meta-links" :href="`/${$locale}/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" v-if="record.government_s" :href="`/${$locale}/countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
@@ -98,6 +98,12 @@
            if(this.type == 'reference') 
               this.$router.push({path: '/search', query: { currentPage: '1', tab: 'referenceRecords' }});
            else this.$router.push({path: '/search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
+      },
+      recordUrl(record){
+        const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
+        const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
+        const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
+        return `/${this.$locale}/database/${shortCode}/${uid}`;
       }
   },
 		i18n: { messages:{ en: i18n }} 
@@ -106,5 +112,9 @@
 <style>
   .loading{text-align: center;
     margin: 100px auto;
+  }
+  .home-page-records .meta-links:hover{
+    text-decoration: dotted;
+    background: #eee;
   }
 </style>
