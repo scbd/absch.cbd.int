@@ -809,6 +809,7 @@ import 'angular-vue'
 
                     function loadABSKeywordFilters() {
                         var promises = []
+                        promises.push(cbdCountriesCustomFn().then(function (keywords) { loopKeywords(keywords); }));
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
@@ -823,6 +824,10 @@ import 'angular-vue'
                                                                         
                         return $q.all(promises);
                     
+                    }
+
+                    async function cbdCountriesCustomFn() {
+                        return thesaurusService.getDomainTerms('countries').then(function (o) { return _.sortBy(o, 'name'); })
                     }
 
                     async function getFocalPointTypes(){
@@ -1467,7 +1472,7 @@ import 'angular-vue'
                     this.sanitizeFacets           = sanitizeFacets          ;
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
                     this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
-
+                    this.cbdCountriesCustomFn     = cbdCountriesCustomFn    ;
                     this.getFocalPointTypes       = getFocalPointTypes
             }]//controller
         };

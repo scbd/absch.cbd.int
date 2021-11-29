@@ -18,8 +18,8 @@ export const absLeftMenuFilters = {
 			"field": "organizationType_s"
 		},
 		{
-			"type": "thesaurus",
-			"term": "countries",
+			"type": "customListFn",
+			"fn": "cbdCountriesCustomFn",
 			"title": absFilters.contactAddressCountry,
 			"field": "country_s"
 		}
@@ -191,8 +191,8 @@ export const absLeftMenuFilters = {
 			"field": "dateOfExpiry_dt"
 		},
 		{
-			"type": "thesaurus",
-			"term": "countries",
+			"type": "customListFn",
+			"fn": "cbdCountriesCustomFn",
 			"title": absFilters.absPermitCountries,
 			"field": "entitiesToWhomPICGrantedCountry_ss"
 		},
@@ -294,8 +294,8 @@ export const absLeftMenuFilters = {
 			"field": "absIRCCs_ss"
 		},  
 		{
-			"type": "thesaurus",
-			"term": "countries",
+			"type": "customListFn",
+			"fn": "cbdCountriesCustomFn",
 			"title": absFilters.sourceGeneticResourceOrATK,
 			"field": "sourceCountries_ss"
 		},
