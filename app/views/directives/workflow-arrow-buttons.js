@@ -7,6 +7,7 @@ import 'ngDialog';
 import 'toastr';
 import '~/views/forms/directives/document-sharing';
 import 'ck-editor-css';
+import toasterMessages from '~/app-data/toaster-messages.json';
 
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
@@ -51,7 +52,7 @@ import 'ck-editor-css';
                 var next_fs;                
                 var saveDraftVersionTimer;
                 var previousDraftVersion;
-                
+                $scope.isBch = realm.is('BCH');
                 //BOOTSTRAP Dialog handling
 				var qCancelDialog         = $element.find("#dialogCancel");
 				var qAdditionalInfoDialog = $element.find("#divAdditionalInfo");
@@ -528,7 +529,7 @@ import 'ck-editor-css';
                         }                            
 
                         function afterDraftSaved(draftInfo){
-                            toastr.info($element.find('#msgDraftSaveMessage').text());
+                            toastr.info(toasterMessages.draftSaveMessage);
 
                             $('form').filter('.dirty').removeClass('dirty');
                             originalDocument = angular.copy($scope.getDocumentFn());
@@ -720,7 +721,7 @@ import 'ck-editor-css';
 
                 function closeDocument(skipToast){
                     if(!skipToast)
-                        toastr.info("Your record has been closed without saving.");
+                        toastr.info(toasterMessages.closeWithoutSaving);
 
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
@@ -772,11 +773,16 @@ import 'ck-editor-css';
                 function documentPublishRequested(documentInfo, workflowId) {
 
                     if(_.includes(appConfigService.referenceSchemas, documentInfo.header.schema)){
-                        toastr.info('Record saved. A publishing request has been sent to your SCBD.');
+                        toastr.info(toasterMessages.publishRequestedSCBD);
                     }
-                    else
-                        toastr.info('Record saved. A publishing request has been sent to your Publishing Authority.');
-                        
+                    else{
+                        if($scope.isBch){
+                        toastr.info(toasterMessages.publishRequestedBCH)
+                       }
+                       else {
+                        toastr.info(toasterMessages.publishRequestedABS)  
+                       }
+                    }
                     localStorageService.set('workflow-activity-status', {
                         identifier : documentInfo.header.identifier, type:'request',
                         workflowId : workflowId
@@ -798,7 +804,7 @@ import 'ck-editor-css';
                 //============================================================
                 function documentPublished(documentInfo, workflowId) {
 
-                    toastr.info('Record published. The record will be now publicly accessible on the Clearing-House.');
+                    toastr.info(toasterMessages.recordPublished); 
                     if(documentInfo.header.schema!= 'contact'){
                         localStorageService.set('workflow-activity-status', {
                             identifier : documentInfo.header.identifier, type:'publish',
