@@ -13,7 +13,7 @@
                             <div class="inner-area"><i class="fa fa-calendar" aria-hidden="true"></i>&nbsp;{{article.meta.createdOn|formatDate}}</div>
                             <div class="inner-area" v-if="article.customTags.length>0"><i class="fa fa-tag" aria-hidden="true"></i>&nbsp; {{article.customTagsInfo[0].title|lstring($locale)}}</div>
                         </div>
-                        <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[$locale]"></div>
+                        <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>
 						<div v-if="article.adminTags" class="detail-custom-tag">
 							<div class="tagcloud">
 								<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
@@ -90,7 +90,7 @@
                 return this.getUrl(tagTitle, undefined, tag);
             },
             articleUrl(article, tag){
-                return this.getUrl(article.title[this.$locale], article._id, tag);
+                return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
             },
             goToArticle(article, tag){
                 this.$router.push({

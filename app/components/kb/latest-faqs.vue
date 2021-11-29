@@ -5,7 +5,7 @@
 						<hr>
 						<div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
 						<ul v-for="title in help">
-								<li><a href="#" @click="goToArticle(title._id,title.title[$locale])">{{title.title[$locale]}}</a></li>
+								<li><a href="#" @click="goToArticle(title._id,title.title|lstring($locale))">{{title.title|lstring($locale)}}</a></li>
 						</ul>
 						<div class="view-more">
             				<a href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>

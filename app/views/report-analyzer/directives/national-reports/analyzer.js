@@ -149,7 +149,8 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                         $scope.allRegionsMap = allRegionsMap;
 
                         return _($scope.selectedRegions).map(function(id) {
-
+                            if(id == 'eur')
+                                return allRegionsMap['eu'];
                             return allRegionsMap[id];
 
                         }).sortBy(function(term) {
