@@ -9,8 +9,8 @@
         <ul class="list-group">
             <li class="list-group-item no-left-right-bottom-border" style=" cursor: pointer;padding:0px;padding-top:0px; margin-bottom:20px;"
                 ng-repeat="(schema, filters) in leftMenuFilters" ng-if="filters" >
-                    
-                    <div  style="background-color:#00405C;padding:5px;">
+                
+                    <div ng-class="{'bg-abs' : isABS, 'bg-bch': isBCH }" style="padding:5px;">
                         <div class="dropdown pull-left bring-to-front1">
                             <button class="btn btn-xs btn-default dropdown-toggle" type="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="background-color:transparent;border: none; vertical-align: unset;">
