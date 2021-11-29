@@ -809,7 +809,6 @@ import 'angular-vue'
 
                     function loadABSKeywordFilters() {
                         var promises = []
-                        promises.push(cbdCountriesCustomFn().then(function (keywords) { loopKeywords(keywords); }));
                         promises.push(cbdSubjectsCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(vlrResourceCustomFn().then(function(keywords){loopKeywords(keywords);}));
                         promises.push(thesaurusService.getDomainTerms('keywords'            ).then(function(keywords){loopKeywords(keywords, 'keywords'             )}));
