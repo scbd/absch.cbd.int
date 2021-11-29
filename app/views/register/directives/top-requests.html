@@ -50,7 +50,8 @@
                     <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"> 
                             <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> PENDING    
                         <span ng-if="roles.isPublishingAuthority"> YOUR </span>
-                        <span ng-if="!roles.isPublishingAuthority"> PA </span>
+                        <span ng-if="!roles.isPublishingAuthority && isBch"> BCH-NFP </span>
+                        <span ng-if="!roles.isPublishingAuthority && !isBch"> PA </span>
                         APPROVAL 
                     </span>
                 </div>

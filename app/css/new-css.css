@@ -439,3 +439,7 @@ max-width: 90%;
         max-width: 220px;
     }
 }
+.new-css-dashboard-roles {
+    font-weight: normal; 
+    font-size: 1.5rem;
+}
