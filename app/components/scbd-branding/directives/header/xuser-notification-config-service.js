@@ -14,7 +14,7 @@ import moment from 'moment';
                 urls: [
                     'https://absch.cbd.int', 
                     'https://bch.cbd.int', 
-                    'https://new-bch.cbd.int', 
+                    'https://bch.cbd.int', 
                     'https://chm.cbd.int', 
                     'https://accounts.cbd.int'
                 ],
