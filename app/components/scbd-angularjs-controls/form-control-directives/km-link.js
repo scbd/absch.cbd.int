@@ -65,6 +65,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 
 				$scope.$watch("editor.visible", function(_new, _old)
 				{
+					$("#editFile,#editLink").modal({ backdrop: "static", keyboard: false });
 					if(_new!=_old &&  _new) $element.find($scope.editor.type=="file" ? "#editFile" : "#editLink").modal("show");
 					if(_new!=_old && !_new) $element.find("#editFile,#editLink").modal("hide");
 				});

@@ -825,6 +825,10 @@ import 'angular-vue'
                     
                     }
 
+                    async function cbdCountriesCustomFn() {
+                        return thesaurusService.getDomainTerms('countries').then(function (o) { return _.sortBy(o, 'name'); })
+                    }
+
                     async function getFocalPointTypes(){
                         const chFolder = realm.is('BCH') ? 'bch' : 'abs';
                         const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
@@ -1467,7 +1471,7 @@ import 'angular-vue'
                     this.sanitizeFacets           = sanitizeFacets          ;
                     this.cbdSubjectsCustomFn      = cbdSubjectsCustomFn     ;
                     this.vlrResourceCustomFn      = vlrResourceCustomFn     ;
-
+                    this.cbdCountriesCustomFn     = cbdCountriesCustomFn    ;
                     this.getFocalPointTypes       = getFocalPointTypes
             }]//controller
         };

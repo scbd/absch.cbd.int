@@ -34,10 +34,11 @@
                     <span class="hidden-xs">Welcome </span>
                     <span id="showProfileInfo" class="color-black bold">
                         <span ng-bind="user.name"></span>
-                        <span ng-if="roles.isPublishingAuthority" style="font-weight: normal;"> (Publishing
-                            Authority)</span>
-                        <span ng-if="roles.isNationalAuthorizedUser" style="font-weight: normal;"> (Authorized
-                            User)</span>
+                        (<span class="new-css-dashboard-roles" ng-if="roles.isPublishingAuthority && isAbs">Publishing Authority</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalFocalPoint && isAbs">National Focal Point</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="roles.isPublishingAuthority && isBch">BCH National Focal Point</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalFocalPoint && isBch">Cartagena National Focal Point</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalAuthorizedUser">National Authorized User</span>)
                     </span>
                 </h4>
 
@@ -79,19 +80,28 @@
                             </td>
                             <td>
                                 <span class="comma" ng-if="roles.isNationalFocalPoint">
-                                    National Focal Point
-                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
-                                        title="The National Focal Points are responsible for liaison with the Secretariat as well as for designating themselves or another user as a BCH focal point. The National Focal Point can create draft national records and submit them to the BCH focal point for publication.">
-                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
-                                        title="The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a Publishing Authority."></span></span>
+                                    <span ng-if="isAbs">
+                                        National Focal Point
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                        title="The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a Publishing Authority."></span>
+                                    </span>
+                                    <span ng-if="isBch">
+                                        Cartagena National Focal Point (CPB-NFP)
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                            title="The National Focal Points are responsible for liaison with the Secretariat as well as for designating themselves or another user as a BCH focal point. The National Focal Point can create draft national records and submit them to the BCH focal point for publication."></span>
+                                    </span>
                                
                                 <span class="comma" ng-if="roles.isPublishingAuthority">
-                                    Publishing Authority (PA)                 
-                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                        title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
-                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                        title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA."></span></span>
-                               
+                                    <span ng-if="isAbs"> Publishing Authority (PA)  
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                        title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA."></span>
+                                    </span>  
+                                    <span ng-if="isBch">  
+                                        BCH National Focal Point (BCH-NFP)           
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
+                                        </span>
+                                    </span>
                                 <span class="comma" ng-if="roles.isNationalAuthorizedUser">
                                     National Authorized User (NAU) 
                                     <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 

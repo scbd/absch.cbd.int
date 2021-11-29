@@ -137,7 +137,8 @@
                             </td>
                         </tr>
                         <tr ng-if="!!users">
-                            <td colspan="3" ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"> |
+                            <td colspan="3">
+                                <span ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span> |
                                 <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
                                 <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
                             </td>

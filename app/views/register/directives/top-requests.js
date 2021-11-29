@@ -26,7 +26,7 @@ import 'services/main';
                 $scope.loading = true;
                 $scope.showAll= true;
                 $scope.user = $rootScope.user;
-
+                $scope.isBch = realm.is('BCH');
                  if ($scope.user.isAuthenticated) {
                     $scope.roles = {
                         is                       : roleService.is.bind(roleService),
