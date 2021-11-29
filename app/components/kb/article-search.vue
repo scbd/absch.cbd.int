@@ -86,7 +86,7 @@ export default {
             return this.getUrl(tagTitle, undefined, tag);
         },
         articleUrl(article, tag){
-        return this.getUrl(article.title[this.$locale], article._id, tag);
+        return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
         },
         goToArticle(article, tag){
             this.$router.push({

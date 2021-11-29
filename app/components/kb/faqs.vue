@@ -13,7 +13,7 @@
             <main>
                 <details v-for="article in faqs">
                     <summary>{{article.title|lstring($locale)}}</summary>
-                    <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="article.content[`${$locale}`]"></div>                    
+                    <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>                    
 					<div v-if="article.adminTags" class="detail-custom-tag">
 						<div class="tagcloud">
 							<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
@@ -72,7 +72,7 @@
                 return this.getUrl(tagTitle, undefined, tag);
 			},
 			articleUrl(article, tag){
-				return this.getUrl(article.title[this.$locale], article._id, tag);
+				return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
 			},
 			goToArticle(article, tag){
 				this.$router.push({
