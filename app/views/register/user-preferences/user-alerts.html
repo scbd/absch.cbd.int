@@ -50,7 +50,7 @@
                     <span class="bold" ng-bind="record.queryTitle"></span>
                     <br>
                     <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;">
-                        <span class="label label-info">
+                        <span ng-if="filter.name" class="label label-info">
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
                             <span ng-bind="getFilterName(filter.name)"></span>
                             <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span>
