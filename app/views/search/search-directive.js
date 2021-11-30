@@ -317,8 +317,6 @@ import 'angular-vue'
                         $scope.tour();
                     }
                     function savedFilters(doc,subFilters){
-                        if(!subFilters && $scope.isAlertSubFilter) return;
-
                         // if(!$scope.searchResult.data.facets[doc.id])
                         //     return;
                         //TODO: if free text check to see if there is a UID and convert to identifier
@@ -372,10 +370,6 @@ import 'angular-vue'
                     }
 
                     $scope.savedAlertFilter = function(doc, subFilters){
-                        $scope.isAlertSubFilter = false;
-                        if(subFilters){
-                            $scope.isAlertSubFilter = true;
-                        }
                         savedFilters(doc, subFilters);
                     }
 
@@ -668,7 +662,9 @@ import 'angular-vue'
 
                                     _.forEach(query.schema, function(s){
                                         var sch = _.find(schemaFilters, {id:s});
-                                        $scope.saveFilter(sch)
+                                        if (!$scope.isAlertSearch) {
+                                            $scope.saveFilter(sch)
+                                        }
                                     })
                                 }
                                 // console.log($scope.searchFilters)
