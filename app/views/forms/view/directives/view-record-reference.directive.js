@@ -112,14 +112,9 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 			function isCNA(doc) {
 				if(!doc)
 					return false;
-				if(!doc.type && doc.header){
-					if(doc.header.schema==='authority') {
-						doc.type = "CNA";
-						return true;
-					}
-				}
 
-				return false;
+				const document = doc.body || doc;
+				return document.header && document.header.schema==='authority';	
 			};
 
 			function isContactTypePerson(doc) {
