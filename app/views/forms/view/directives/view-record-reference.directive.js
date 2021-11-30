@@ -112,8 +112,8 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 			function isCNA(doc) {
 				if(!doc)
 					return false;
-				if(!doc.type && doc.header){
-					if(doc.header.schema==='authority') {
+				if(doc.body.header){
+					if(doc.body.header.schema==='authority') {
 						doc.type = "CNA";
 						return true;
 					}
