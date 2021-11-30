@@ -6,7 +6,8 @@ import analyzerData from '~/app-data/report-analyzer-mapping.json';
     export { default as template } from './reports.html'
     export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
     function($scope, $location, commonjs, $q, $http, realm) {
-
+        $scope.isABS = realm.is('ABS');
+        $scope.isBCH = realm.is('BCH');
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
         $scope.overview = {};
             //========================================
