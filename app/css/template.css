@@ -1957,7 +1957,7 @@ legend+ .help-info {
 }
 .need-help-jr.jr_pos_bottom:after {
     left: auto !important;
-    right: 42px !important;
+    right: 10px !important;
 }
 .need-more-help-jr.jr_pos_top:after{
     left: auto !important;
