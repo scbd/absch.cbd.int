@@ -85,10 +85,10 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/registries/organisms',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.organismsRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_organisms}}).
   whenAsync('/registries/genetic-elements',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.geneRegistry,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.registries_genetic_elements}}).
   whenAsync('/about/countryprofile.shtml',                        {"redirectTo":"/countries/:country"}). 
-  whenAsync("/countries/:country", { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/countryprofile.shtml?country=:country", controller: function () {   return commonRoutes.importQ("views/shared/cms-content"); }}).
-  whenAsync("/about/:subpath*?", { templateUrl: "views/shared/cms-content.html", target: "https://bch.cbd.int/about/:subpath", controller: function () {   return commonRoutes.importQ("views/shared/cms-content"); }}).
-  whenAsync("/protocol/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/protocol/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
-  whenAsync("/onlineconferences/:subpath*?", {  templateUrl: "views/shared/cms-content.html",  target: "https://bch.cbd.int/onlineconferences/:subpath",  controller: function () {    return commonRoutes.importQ("views/shared/cms-content");  }}).
+
+  whenAsync('/onlineconferences/:subpath*?',  { ...mapView(angularViewWrapper),   target: "https://legacy-bch.cbd.int/onlineconferences/:subpath", "label":"Todo", "param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.cms_content }}).
+  whenAsync('/protocol/:subpath*?',           { ...mapView(angularViewWrapper),   target: "https://legacy-bch.cbd.int/protocol/:subpath",          "label":"Todo" ,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.cms_content }}).
+
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
   otherwise({
