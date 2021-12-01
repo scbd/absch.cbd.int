@@ -34,18 +34,10 @@
 			<div class="km-value km-pre"ng-bind-html="document.description | lstring:locale"></div>
 			</div>
 		</div>
-<!--TODO:document.website is no more used-->
-		<div ng-show="document.website">
-			<label>URL of the website</label>
-			<div class="km-value" compare-val>
-				<a rel="noopener" translation-url  target="{{target}}" target="_blank" ng-href="{{document.website.url|encodeURI}}">{{document.website.name||document.website.url}}</a>
-				<i ng-show="document.website.name">({{document.website.url}})</i>
-			</div>
-		</div>
 		<div ng-show="document.websites && document.websites.length >0">
 			<label>URL of the website</label>
 				<div class="km-value" compare-val>
-					<km-link-list  ng-model="document.websites" ></km-link-list>
+					<km-link-list ng-model="document.websites" ></km-link-list>
 				</div>
 		</div>
 
