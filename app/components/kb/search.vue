@@ -3,7 +3,7 @@
         <title>{{ $t("knowledgeBase") }}</title>
         <link href="css/kb-style.css" rel="stylesheet">
         <div  class="map-bg overlay">
-            <div class="masthead text-center"  v-bind:class="{'bg-abs': $realm.chShortName == 'ABSCH' }">
+            <div class="masthead text-center"  v-bind:class="{'bg-abs': $realm.is('ABS')}">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
