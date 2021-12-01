@@ -253,7 +253,11 @@
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"> </i>
                         <span class="notification-title">Request Rejected
-                            <span class="hidden-xs">: Publishing Authority has rejected as request for publishing</span>
+                            <span class="hidden-xs">: 
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
+                                 has rejected as request for publishing</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
@@ -297,7 +301,11 @@
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"> </i>
                         <span class="notification-title">Request Approved
-                            <span class="hidden-xs">: Publishing Authority has approved a request and published the record</span>
+                            <span class="hidden-xs">: 
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
+                                 has approved a request and published the record</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
