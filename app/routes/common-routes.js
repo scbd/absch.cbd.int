@@ -152,8 +152,9 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/kb/tags',                                           { ...mapView(vueViewWrapper),                        "label":"Tags",                        "resolve":{ ...commonRouteUrls.kb,                                           },"param":"true","resolveController":true}).
   whenAsync('/kb/tags/:tag/:title?',                              { ...mapView(vueViewWrapper),                        "label":"Articles by tag",             "resolve":{ ...commonRouteUrls.kbTags,                                       },"param":"true","resolveController":true}).
   whenAsync('/kb/tags/:tag/:title/:id',                           { ...mapView(vueViewWrapper),                        "label":"Tag Article",                 "resolve":{ ...commonRouteUrls.kbArticles,                                   },"param":"true","resolveController":true}).
-  whenAsync('/kb/articles/:id/:title/:tag',                       { ...mapView(vueViewWrapper),                        "label":"Articles",                    "resolve":{ ...commonRouteUrls.kbArticles,                                   },"param":"true","resolveController":true})
-   
+  whenAsync('/kb/articles/:id/:title/:tag',                       { ...mapView(vueViewWrapper),                        "label":"Articles",                    "resolve":{ ...commonRouteUrls.kbArticles,                                   },"param":"true","resolveController":true}).
+
+  whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}})
 }]);
 
 export default {
