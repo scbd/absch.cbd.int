@@ -67,6 +67,8 @@ app.post('/error-logs', require('./middlewares/error-logs')(proxy, {apiUrl:apiUr
 // app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
 
+app.get(['*.jpg', '*.png', '*.gif', '*.css'], (req, res) => proxy.web(req, res, { target: 'https://legacy-bch.cbd.int', changeOrigin: true, secure:false }));
+
 app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*', 
     function(req, res, next){
         global.app.version = appVersion;

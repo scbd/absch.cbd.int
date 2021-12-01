@@ -88,6 +88,7 @@ app.config(["$routeProvider", function ($routeProvider) {
 
   whenAsync('/onlineconferences/:subpath*?',  { ...mapView(angularViewWrapper),   target: "https://legacy-bch.cbd.int/onlineconferences/:subpath", "label":"Todo", "param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.cms_content }}).
   whenAsync('/protocol/:subpath*?',           { ...mapView(angularViewWrapper),   target: "https://legacy-bch.cbd.int/protocol/:subpath",          "label":"Todo" ,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.cms_content }}).
+  whenAsync('/synbio/:subpath*?',             { ...mapView(angularViewWrapper),   target: "https://legacy-bch.cbd.int/synbio/:subpath",            "label":"Todo" ,"param":"true","resolveController":true, "resolve":{ ...bchRouteUrls.cms_content }}).
 
   whenAsync('/help/forbidden',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.forbidden, "resolve":{ ...bchRouteUrls.help_forbidden}}).
   whenAsync('/help/not-found',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.notFound, "resolve":{ ...bchRouteUrls.help_not_found}}).
