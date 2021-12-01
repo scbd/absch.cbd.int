@@ -15,6 +15,10 @@ import 'views/forms/edit/document-selector'
                 template: template,
                 scope: false,
                 link:async function ($scope, $element, $attrs, searchDirectiveCtrl) {
+                    
+                    $scope.isBCH        = realm.is('BCH');
+                    $scope.isABS        = realm.is('ABS');    
+                    
                     var freeTextKeys = 0;
                     // $scope.leftMenuFilters = {}
                     $scope.locale = locale;
