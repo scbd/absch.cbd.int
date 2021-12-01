@@ -43,7 +43,7 @@ export default ["$scope", "$rootScope", "$route", '$http', function($scope, $roo
     
     url = url.replace(/:\w+\b/g, '');
     
-    $http.get(url, {cache:true, params: params }).then(function(res) {
+    $http.get(url, {cache:false, params: params }).then(function(res) {
         
         const base  = $('base').attr('href') || '/';
         const page  = $('<div></div>').html(res.data)
