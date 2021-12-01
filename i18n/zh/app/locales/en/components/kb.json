@@ -1,9 +1,9 @@
 {
   "categories.title": "文章类别",
   "loading": "正在加载",
-  "the": "",
-  "knowledgeBase": "",
-  "kbParagraph": "",
+  "the": "The",
+  "knowledgeBase"   : "Knowledge base",
+  "kbParagraph"     : "is an online tool designed to help users become familiar with the Clearing-House, learn how to submit records, search for information and complete other important tasks.",
   "exploreTopics": "探索话题",
   "exploreParagraph": "我们尽力涵盖与该产品有关的所有话题。每个部分的数字表示每个类别中话题的数量。",
   "viewMore": "查看更多",

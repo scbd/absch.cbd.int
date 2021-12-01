@@ -726,7 +726,7 @@ import toasterMessages from '~/app-data/toaster-messages.json';
                     var absHosts = ['https://absch.cbddev.xyz/', 'https://training-absch.cbd.int/',
                        'http://localhost:2010/', 'https://absch.cbd.int/', 'https://absch.cbddev.xyz/',
                        'https://bch-demo.cbd.int', 'https://bch.cbddev.xyz/', 'https://bch-training.cbd.int' , 
-                       'https://new-bch.cbd.int' , 
+                       'https://bch.cbd.int' , 
                    ]
                    $timeout(function() {
                        if($route.current.params.workflow){

@@ -63,7 +63,7 @@ export default {
     },
     methods: {
       articleUrl(article) {
-            return this.getUrl(article.title[this.$locale], article._id, this.tag);
+            return this.getUrl(this.$options.filters.lstring(article.title), article._id, this.tag);
         },
       goToArticle(article) {
             this.$router.push({

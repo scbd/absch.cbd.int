@@ -124,9 +124,10 @@
                                                 <div class="col-xs-12">
                                                     <div class="control-group">
                                                         <div class="km-control-group" name="sourceCountries" required caption="Source of the genetic resource">
-                                                            <div class="help-info">Select the country/ies which is /are the source
-                                                                of the genetic resource. The country/ies selected will be the ones
-                                                                receiving the CPC issued from the information registered.</div>
+                                                            <div class="help-info">Select the country/ies which is/are the source
+                                                                of the genetic resource. The country/ies selected will be notified once this record is published.
+                                                            The source country should not include the country publishing this Checkpoint Communiqué.
+                                                            </div>
                                                             <div km-select required name="sourceCountries" ng-model="document.sourceCountries"
                                                                 multiple items="options.countries()" placeholder="Please select a country..."></div>
                                                         </div>

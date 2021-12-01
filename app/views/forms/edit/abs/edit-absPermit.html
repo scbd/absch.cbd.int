@@ -157,7 +157,9 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="Date of expiry of the permit or its equivalent">
-                                                    <div class="help-info">Two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC. </div>
+                                                    <div class="help-info">
+                                                        If the national ABS permit, or equivalent, includes an expiry date please add it here.
+                                                        Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC. </div>
                                                     <div km-date placeholder="YYYY-MM-DD" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -232,8 +234,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="Person or entity to whom prior informed consent (PIC) was granted" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">Please provide the name and contact details of the person or entity to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the
-                                                                    courtesy copy of the IRCC or the CPC. </div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the courtesy copy of the IRCC or the CPC. </div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
