@@ -1,7 +1,30 @@
 <style>
-    .cmsNoWrap { white-space: nowrap; } 
+    .cmsNoWrap     { white-space: nowrap; } 
+    #cms-left-menu { padding-top: 20px; } 
+    #cms-content   { } 
+
+    #cms-left-menu .menuL1Top { font-weight:bold; padding-top: 10px; } 
+    #cms-left-menu .menuL1    { font-weight:bold; padding-top: 10px; } 
+
+    
 </style>
 
-<div id="cms-content">
-    loading...
-</div>
+<div class="container">
+    <div ng-if="title" class="row">
+        <div class="col-xs-12">
+            <h1>{{title}}</h1>
+        </div>
+    </div>
+      <div class="row">
+      <div class="col-md-3 col-lg-2">
+        <div id="cms-left-menu">
+    
+        </div>
+      </div>
+      <div class="col-md-9 col-lg-10">
+        <div id="cms-content">
+            loading...
+        </div>
+      </div>
+    </div>
+  </div>
