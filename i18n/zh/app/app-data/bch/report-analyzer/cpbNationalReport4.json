@@ -77,7 +77,7 @@
              "section": "Article2",
              "number": "14",
              "type": "option",
-             "title": "Has your country taken the necessary national measures to implement the "Protocol"?",
+             "title": "Has your country taken the necessary national measures to implement the \"Protocol\"?",
              "multiple": false,
              "options": [
                 {
@@ -1684,7 +1684,7 @@
              "section": "Article15_16",
              "number": "67",
              "type": "option",
-             "title": "If your answer to the 66th question is <i>Yes</i>, has your country used the "Living Modified Organisms Risk Assessment Manual" (by Biodiversity Prepared by the Secretariat of the Sexual Convention)?",
+             "title": "If your answer to the 66th question is <i>Yes</i>, has your country used the \"Living Modified Organisms Risk Assessment Manual\" (by Biodiversity Prepared by the Secretariat of the Sexual Convention)?",
              "multiple": false,
              "options": [
                 {
@@ -1703,7 +1703,7 @@
              "section": "Article15_16",
              "number": "68",
              "type": "option",
-             "title": "If your answer to the 66th question is <i>Yes</i>, has your country used the "Living Modified Organism Risk Assessment Guidelines" (by the risk assessment And risk management ad hoc technical expert group network forum)?",
+             "title": "If your answer to the 66th question is <i>Yes</i>, has your country used the \"Living Modified Organism Risk Assessment Guidelines\" (by the risk assessment And risk management ad hoc technical expert group network forum)?",
              "multiple": false,
              "options": [
                 {
@@ -1893,7 +1893,7 @@
              "section": "Article15_16",
              "number": "72",
              "type": "option",
-             "title": "If your answer to question 71 is <i>yes</i>, then, has your country used the "reform "Guidelines for Risk Assessment of Living Sexual Organisms" (written by the Network Forum of the Ad Hoc Technical Expert Group on Risk Assessment and Risk Management)?",
+             "title": "If your answer to question 71 is <i>yes</i>, then, has your country used the \"reform \"Guidelines for Risk Assessment of Living Sexual Organisms\" (written by the Network Forum of the Ad Hoc Technical Expert Group on Risk Assessment and Risk Management)?",
              "multiple": false,
              "options": [
                 {
@@ -2194,7 +2194,7 @@
     {
        "key": "Article17",
        "title": "Article 17-Unintentional transboundary movement <sup>2</sup> and emergency measures",
-       "footnote": "<sup>2</sup> According to the working definition adopted by decision CP-VIII/16, "'unintentionally caused transboundary movement' refers to the inadvertent crossing of the border of a certain contracting party, Transboundary movement resulting in the release of living modified organisms. The provisions of Article 17 of the Protocol shall be applied to such transboundary movement only when the living modified organism in question may have a significant harmful effect on the conservation and sustainable use of biological diversity, taking into account the affected or possible Human health risks in affected countries".",
+       "footnote": "<sup>2</sup> According to the working definition adopted by decision CP-VIII/16, \"'unintentionally caused transboundary movement' refers to the inadvertent crossing of the border of a certain contracting party, Transboundary movement resulting in the release of living modified organisms. The provisions of Article 17 of the Protocol shall be applied to such transboundary movement only when the living modified organism in question may have a significant harmful effect on the conservation and sustainable use of biological diversity, taking into account the affected or possible Human health risks in affected countries\".",
        "questions": [
           {
              "key": "Q085",
