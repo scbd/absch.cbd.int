@@ -164,7 +164,7 @@ import 'views/report-analyzer/reportAnalyzerService';
                 function getCountries() {
 
                     return $http.get("/api/v2013/thesaurus/domains/countries/terms", { cache : true }).then(function (res) {
-                        res.data = _.map(res.data, fixEUR);
+                        // res.data = _.map(res.data, fixEUR);
                         mapRegions(res.data);
                         return res.data;
                     });
@@ -179,7 +179,7 @@ import 'views/report-analyzer/reportAnalyzerService';
                 function getRegions() {
 
                     return $http.get("/api/v2013/thesaurus/domains/regions/terms", { cache : true }).then(function (res) {
-                        res.data = _.map(res.data, fixEUR);
+                        // res.data = _.map(res.data, fixEUR);
                         mapRegions(res.data);
                         return res.data;
                     });

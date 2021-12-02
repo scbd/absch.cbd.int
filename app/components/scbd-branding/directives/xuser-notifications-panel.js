@@ -25,11 +25,13 @@ import './header/xuser-notification-config-service';
 
             },
             controller: ['$scope', '$rootScope', 'IUserNotifications',
-                        '$timeout', '$filter','authentication','cfgUserNotification','$location', '$window',
+                        '$timeout', '$filter','authentication','cfgUserNotification','$location', '$window', 'realm',
                 function($scope, $rootScope, userNotifications, $timeout, $filter,
-                        authentication, cfgUserNotification, $location, $window) {
+                        authentication, cfgUserNotification, $location, $window, realm) {
 
                     var realmsForQuery = cfgUserNotification.realmsForQuery();
+                    $scope.isABS = realm.is('ABS');
+                    $scope.isBCH = realm.is('BCH');
 
                     $scope.loading = false;
                     var pageNumber = 0;
@@ -270,6 +272,9 @@ import './header/xuser-notification-config-service';
                             });
                     }
 
+                    $scope.schemaType = function(schema){
+                        return realm.schemas[schema].type
+                    }
                     getNotification(1);//notification count;
                     getNotification();
 

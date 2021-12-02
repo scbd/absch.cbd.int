@@ -43,7 +43,7 @@ export default {
         let ag = [];
         ag.push({"$match":{"$and":[{"adminTags": { $all : [this.$realm.is('BCH') ? 'bch' : 'abs' ]}}]}});
         ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(this.tag)}]}});
-        ag.push({"$project" : {[`title.${this.$locale}`]:1}});
+        ag.push({"$project" : {[`title`]:1}});
         ag.push({"$limit" : 10});
         const query = {
           "ag" : JSON.stringify(ag)

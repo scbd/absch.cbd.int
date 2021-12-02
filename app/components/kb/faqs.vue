@@ -100,8 +100,8 @@
 					]
 				};
 				const f = { 
-					[`title.${this.$locale}`]	: 1,
-					[`content.${this.$locale}`]	: 1,
+					[`title`]	: 1,
+					[`content`]	: 1,
 					adminTags 					: 1, _id:1
 				} ;
 				const groupTags = JSON.stringify([this.faqFilterTag ? this.faqFilterTag : 'faq']);

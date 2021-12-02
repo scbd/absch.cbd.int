@@ -477,10 +477,8 @@ import './apiUrl';
         return {
             request: function(config) {
 
-                var rewrite = /^\/api\//.test(config.url.toLowerCase()) &&
-                                (   $location.host().toLowerCase() == 'absch.cbd.int' ||  
-                                    $location.host().toLowerCase() == 'training-absch.cbd.int'
-                                );
+                var rewrite = /^\/api\//i.test(config.url.toLowerCase()) &&
+                              /^[a-z\-]+\.cbd\.int/i.test($location.host());
 
                 if(rewrite)
                     config.url = 'https://api.cbd.int' + config.url;
