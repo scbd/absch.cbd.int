@@ -1,9 +1,0 @@
-﻿<div ng-show="referenceCheckpointCommunique">
-  <legend >Соответствующее(-ие) коммюнике контрольных пунктов</legend>
-  <div class="km-value">
-    <ul>
-      <li ng-repeat="cpc in referenceCheckpointCommunique"><a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{cpc.documentID}}">Коммюнике контрольных пунктов {{cpc | uniqueIDWithoutRevision}} - {{cpc.createdOn | formatDateWithTime }}</a></li>
-    </ul>
-  </div>
-
-</div>
