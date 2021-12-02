@@ -3,14 +3,14 @@
         <div class="col-lg-12" >
             <div class="panel panel-danger">
                 <div class="panel-heading bg-red">
-                    <h3 style="padding:0;margin:0;" class="color-white">Document Reference History</h3>
+                    <h3 style="padding:0;margin:0;" class="color-white">Журнал ссылок на документы</h3>
                 </div>
                 <div class="panel-body">
                     <div class="row" style="margin:0 0 10px 0;padding:0;" ng-show="!isLoading" ng-repeat="doc in rawDocuments.docs | filter:keyword">
                         <result-default doc='doc' type="nationalRecords"></result-default>
                     </div>
-                    <div ng-if="isLoading"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
-                    <div ng-if="rawDocuments.numFound===0"> no records found.</div>
+                    <div ng-if="isLoading"><i class="fa fa-spinner fa-spin"></i> Загрузка ....</div>
+                    <div ng-if="rawDocuments.numFound===0">записей не найдено.</div>
                 </div>
             </div>
         </div>

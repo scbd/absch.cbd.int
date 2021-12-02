@@ -10,8 +10,10 @@
 			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
 		</div>	
 		<div ng-if="document.profile">
-			<label>国家概况的补充信息</label>  
-			 <km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
+			<label>国家概况的补充信息</label> 
+			<div compare-val> 
+			 	<km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
+			 </div>
 		</div>
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>

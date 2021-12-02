@@ -1,108 +1,9 @@
-﻿<div ng-controller="countryMatrixController">
+﻿<div >
 	<div class="container" style="margin-top:20px;">
-		<style>
-			.matrixTable tr .headerColumn {
-				width: 30%;
-				font-weight: bold;
-			}
-
-			.matrixheaderColumn {
-				width: 40%;
-			}
-
-			.tableCell {
-				padding: 0px!important;
-			}
-
-			.tableCell table {
-				border: none;
-				margin: 0px;
-			}
-
-			.noBorder {
-				border: none!important;
-			}
-
-			.noLeftBorder {
-				border-left: none!important;
-			}
-
-			.noRightBorder {
-				border-right: none!important;
-			}
-
-			.noTopBorder {
-				border-top: none!important;
-			}
-
-			.noBottomBorder {
-				border-bottom: none!important;
-			}
-
-			.whiteBackground {
-				background-color: #fff!important;
-			}
-
-			/*.rightBorder {
-				border-right: 1px solid #ddd;
-			}*/
-
-			.subList {
-				padding-left: 5%!important;
-			}
-
-			.cover50 {
-				width: 50%;
-			}
-
-			.cover45 {
-				width: 45%;
-			}
-
-			.cover45_1 {
-				width: 45.1%;
-			}
-
-			.cover55 {
-				width: 55%;
-			}
-
-			.paddingleft3 {
-				padding-left: 3%!important;
-			}
-
-			.paddingleft6 {
-				padding-left: 6%!important;
-			}
-
-			.paddingleft9 {
-				padding-left: 9%!important;
-			}
-
-			.highlight {
-				font-weight: bold;
-				background-color: #fff!important;
-			}
-
-			.paddingleft12 {
-				padding-left: 12%!important;
-			}
-
-			.elementMeasure {
-				padding-bottom: : 0px!important;
-			}
-
-			.whiteTopBorder {
-				border-bottom: 1px solid #fff;
-			}
-
-			.table > tbody > tr > td {
-				border-top: none!important;
-			}
-		</style>
+		<style> .matrixTable tr .headerColumn { width: 30%; font-weight: bold; } .matrixheaderColumn { width: 40%; } .tableCell { padding: 0px!important; } .tableCell table { border: none; margin: 0px; } .noBorder { border: none!important; } .noLeftBorder { border-left: none!important; } .noRightBorder { border-right: none!important; } .noTopBorder { border-top: none!important; } .noBottomBorder { border-bottom: none!important; } .whiteBackground { background-color: #fff!important; } /*.rightBorder { border-right: 1px solid #ddd; }*/ .subList { padding-left: 5%!important; } .cover50 { width: 50%; } .cover45 { width: 45%; } .cover45_1 { width: 45.1%; } .cover55 { width: 55%; } .paddingleft3 { padding-left: 3%!important; } .paddingleft6 { padding-left: 6%!important; } .paddingleft9 { padding-left: 9%!important; } .highlight { font-weight: bold; background-color: #fff!important; } .paddingleft12 { padding-left: 12%!important; } .elementMeasure { padding-bottom: : 0px!important; } .whiteTopBorder { border-bottom: 1px solid #fff; } .table > tbody > tr > td { border-top: none!important; } </style>
 		<div class="row">
 			<div class="col-sm-12 well">
-				<h1> Measure Matrix</h1>
+				<h1>措施矩阵</h1>
 			</div>
 
 			<div class="well col-sm-12">
@@ -110,84 +11,39 @@
 
 					<div class="row" style="padding:1% 2% 0 2%">
 						<div class="col-lg-12">
-							<div class="pull-right control-group">
-								Group Matrix by
-								<div class="btn-group">
-									<button style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="btnGroupBy">
-										<span ng-show="matrixGroupBy==''" style="color:#428BCA" ng-class="">None</span>
-										<span ng-show="matrixGroupBy=='jurisdiction'" style="color:#428BCA" ng-class="">Jurisdiction</span>
-										<span ng-show="matrixGroupBy=='status'" style="color:#428BCA">Status</span>
-										<span ng-show="matrixGroupBy=='type'" style="color:#428BCA">Type</span>
-										<span class="caret"></span>
-									</button>
+							<div class="pull-right control-group">按以下条件分组矩阵：<div class="btn-group">
+									<button type="button" style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="btnGroupBy"><span ng-show="matrixGroupBy==''" style="color:#428BCA" ng-class="">无</span> <span ng-show="matrixGroupBy=='jurisdiction'" style="color:#428BCA" ng-class="">管辖权</span> <span ng-show="matrixGroupBy=='status'" style="color:#428BCA">状态</span> <span ng-show="matrixGroupBy=='type'" style="color:#428BCA">类型</span> <span class="caret"></span></button>
 									<ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
-										<li>
-											<a rel="noopener" translation-url  style="color:#999;" ng-href="#" ng-click="matrixGroupBy=''" value="null" ng-model="matrixGroupBy" name="matrixGroupBy">clear selection</a>
-										</li>
-										<li>
-											<a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='jurisdiction'" ng-model="matrixGroupBy" name="matrixGroupBy">
-												<span ng-show="matrixGroupBy=='jurisdiction'" class="glyphicon glyphicon-ok"></span>Jurisdiction</a>
-										</li>
-										<li>
-											<a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='status'" ng-model="matrixGroupBy" name="matrixGroupBy">
-												<span ng-show="matrixGroupBy=='status'" class="glyphicon glyphicon-ok"></span>Status</a>
-										</li>
-										<li>
-											<a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='type'" ng-model="matrixGroupBy" name="matrixGroupBy">
-												<span ng-show="matrixGroupBy=='type'" class="glyphicon glyphicon-ok"></span>Type</a>
-										</li>
+										<li><a rel="noopener" translation-url  style="color:#999;" ng-href="#" ng-click="matrixGroupBy=''" value="null" ng-model="matrixGroupBy" name="matrixGroupBy">清除选择</a></li>
+										<li><a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='jurisdiction'" ng-model="matrixGroupBy" name="matrixGroupBy"><span ng-show="matrixGroupBy=='jurisdiction'" class="glyphicon glyphicon-ok"></span>管辖权</a></li>
+										<li><a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='status'" ng-model="matrixGroupBy" name="matrixGroupBy"><span ng-show="matrixGroupBy=='status'" class="glyphicon glyphicon-ok"></span>状态</a></li>
+										<li><a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='type'" ng-model="matrixGroupBy" name="matrixGroupBy"><span ng-show="matrixGroupBy=='type'" class="glyphicon glyphicon-ok"></span>类型</a></li>
 
 									</ul>
 								</div>
 							</div>
 
-							<div km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="Jurisdictions" items="options.jurisdiction()"></div>
-							<div km-select multiple ng-model="msrStatus" binding-type="string" placeholder="Status" items="options.status()"></div>
-							<div km-select multiple ng-model="msrType" binding-type="string" placeholder="Types" items="options.typeOfDocuments()"></div>
+							<div km-select multiple ng-model="msrJurisdiction" binding-type="string" placeholder="辖区" items="options.jurisdiction()"></div>
+							<div km-select multiple ng-model="msrStatus" binding-type="string" placeholder="状态" items="options.status()"></div>
+							<div km-select multiple ng-model="msrType" binding-type="string" placeholder="类型" items="options.typeOfDocuments()"></div>
 						</div>
 					</div>
 					<div class="row" style="padding:1% 2% 0 2%">
-						<div class="col-sm-12" >
-							<span ng-show="!groupedMeasures">
-								<i class="fa fa-spinner fa-spin fa-5x" ></i>
-							</span>
-						</div>
+						<div class="col-sm-12" ><span ng-show="!groupedMeasures"><i class="fa fa-spinner fa-spin fa-5x" ></i></span></div>
 					</div>
 
 					<div class="table" ng-repeat="jurisdiction in groupedMeasures">
 						<div class="col-sm-12">
 							<div class="panel panel-primary">
 								<div class="panel-heading">									
-									<h3 class="panel-title hand" ng-click="closeSection=!closeSection;showHideSection('pandelBody_' + $index)">
-										<i class="fa fa-chevron-circle-up"   ng-show="!closeSection"></i>
-	                 					<i class="fa fa-chevron-circle-down" ng-show="closeSection"></i>
-											 
-										<span ng-if="matrixGroupBy=='jurisdiction'">
-											{{jurisdiction.measures[0].jurisdiction_EN_t}} {{jurisdiction.measures[0].document.jurisdictionName|lstring}}
-										</span>
-										<span class="panel-title" ng-if="matrixGroupBy=='type'">
-											{{jurisdiction.measures[0].type_EN_t}}
-										</span>
-										<span class="panel-title" ng-if="matrixGroupBy=='status'">
-											{{jurisdiction.measures[0].status_EN_t}}
-										</span>
-									</h3>
+									<h3 class="panel-title hand" ng-click="closeSection=!closeSection;showHideSection('pandelBody_' + $index)"><i class="fa fa-chevron-circle-up"   ng-show="!closeSection"></i> <i class="fa fa-chevron-circle-down" ng-show="closeSection"></i> <span ng-if="matrixGroupBy=='jurisdiction'"
+										  ng-bind="(jurisdiction.measures[0].jurisdiction_EN_t) +' '+ (jurisdiction.measures[0].document.jurisdictionName|lstring)"></span> <span class="panel-title" ng-if="matrixGroupBy=='type'" ng-bind="jurisdiction.measures[0].type_EN_t"></span> <span class="panel-title" ng-if="matrixGroupBy=='status'" ng-bind="jurisdiction.measures[0].status_EN_t"></span></h3>
 								</div>
 								<div class="panel-body" id="pandelBody_{{$index}}">
 									<div class="row">
 	                                    <div style="padding:10px; margin:0 10px;">
 	                                        <div class="row table-hover table-msr" ng-repeat="measure in jurisdiction.measures">
-	                                            <div class="row border" ng-click="measure.displayDetails = !measure.displayDetails;" style="cursor:pointer">
-														<i class="fa fa-chevron-circle-up" ng-show="measure.displayDetails"></i>
-														<i class="fa fa-chevron-circle-down" ng-show="!measure.displayDetails"></i>
-														<span>&nbsp;{{measure.title_t}}</span>	  	                                                
-														| {{measure.status_EN_t}} | {{measure.type_EN_t}} | {{measure.jurisdiction_EN_t}} |
-														<span ng-show="measure.adoption_dt">Adopted on </span>
-														<span ng-show="measure.entryIntoForce_dt">Entry into force on </span>
-														<span ng-show="measure.retired_dt">Retired on </span>
-														{{(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate}}
-														<span ng-show="measure.limitedApplication_dt"> - {{measure.limitedApplication_dt|formatDate}}</span>													        
-	                                            </div>
+	                                            <div class="row border" ng-click="measure.displayDetails = !measure.displayDetails;" style="cursor:pointer"><i class="fa fa-chevron-circle-up" ng-show="measure.displayDetails"></i> <i class="fa fa-chevron-circle-down" ng-show="!measure.displayDetails"></i> <span>&nbsp;<span ng-bind="measure.title_t"></span></span> | <span ng-bind="measure.status_EN_t"></span> | <span ng-bind="measure.type_EN_t"></span> | <span ng-bind="measure.jurisdiction_EN_t"></span> | <span ng-show="measure.adoption_dt">通过日期：</span> <span ng-show="measure.entryIntoForce_dt">生效日期：</span> <span ng-show="measure.retired_dt">淘汰日期：</span> <span ng-bind="(measure.adoption_dt ||measure.entryIntoForce_dt || measure.retired_dt)|formatDate"></span> <span ng-show="measure.limitedApplication_dt">- <span ng-bind="measure.limitedApplication_dt|formatDate"></span></span></div>
 												<div class="row" ng-if="measure.displayDetails">													
                                                     <div class="col-xs-12 details document-show-hide" record-loader document="measure.document"></div>
                                                 </div>

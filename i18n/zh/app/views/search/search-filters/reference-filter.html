@@ -1,27 +1,10 @@
 ﻿<div id="Search-Filter"  class="row" ng-show="rf_filters.length" style="margin-bottom:30px;">
     <div  class="col-md-12"  >
-    <div class="heading color-orange" ng-if="rf_filters.length">Reference Records </div>
+    <div class="heading color-orange" ng-if="rf_filters.length">参考记录</div>
     <hr class="heading" ng-if="rf_filters.length">
-        <p class="helpinfo" ng-if="rf_filters.length">
-        <i class="fa fa-info-circle helpicon" ></i> 
-        <span ng-if="realm.is('ABS')">
-            Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication.
-        </span>
-        <span ng-if="realm.is('BCH')">
-            Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication.
-        </span>
-    </p>
+        <p class="helpinfo" ng-if="rf_filters.length"><i class="fa fa-info-circle helpicon" ></i> <span ng-if="realm.is('ABS')">参考记录包括一些与获取和惠益分享有关的资源和信息，任何注册用户均可以提交，但在发布前需经秘书处验证。</span><span ng-if="realm.is('BCH')">参考记录包括一些与生物安全有关的资源和信息，任何注册用户均可以提交，但在发布前需经秘书处验证。</span></p>
         
-    <div ng-repeat="doc in rf_filters = (rf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
-            <a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}">
-                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> 
-                {{doc.name}}
-                <strong>({{$parent.searchResult.data.facets.schemas[doc.id]||0}})</strong>
-            </a>
-            <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>-->
-           <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-white" data-toggle="tooltip" data-html="true" data-title="{{doc.description}}" data-container="body"></span>
-
-    </div>
+    <div ng-repeat="doc in rf_filters = (rf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])"><a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}"><i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> <span ng-bind="doc.name"></span> <strong>(<span ng-bind="$parent.searchResult.data.facets.schemas[doc.id]||0"></span>)</strong></a> <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>--> <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-gray" data-bs-toggle="tooltip" data-html="true" title="{{doc.description}}" data-container="body"></span></div>
     <div ng-if="(searchKeyword && !showFilters) && rf_filters.length" style="margin-bottom:10px;"></div>  
     </div>
 </div>

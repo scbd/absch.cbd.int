@@ -20,9 +20,9 @@
     		 	<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
 		 	</div>
 			<div ng-show="document.absCheckpoints">
-				<legend>Контрольный(-ые) пункт(ы), которые собирали или получали информацию</legend>
+				<legend>Checkpoint/s that collected or received the information</legend>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li ng-repeat="item in document.absCheckpoints">
 								<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -58,9 +58,9 @@
 						document.entityToWhomPICGranted || document.personsAtCheckpoint">
 				<legend>Информация, собранная или полученная на контрольном пункте</legend>
 				<div ng-show="document.absIRCCs">
-					<label>Регистрационный(-ые) номер(а) международно признанного(-ых) сертификата(ы) о соответствии требованиям, имеющего(-их) отношение к данному коммюнике</label>
+					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li  ng-repeat="item in document.absIRCCs">
 								 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -137,7 +137,7 @@
 					</div>
 
                     <div ng-show="document.evidenceOfMAT">
-						<label>Ссылка на информацию о взаимосогласованных условиях или доказательства их заключения</label>
+						<label>Reference or evidence of establishment of mutually agreed terms</label>
 						<div compare-val>
 						<div class="km-value km-pre"ng-bind-html="document.evidenceOfMAT | lstring:locale"></div>
 						</div>
@@ -169,19 +169,19 @@
 					</div>
 				</div>
 				<div ng-show="document.dateCollected">
-					<label>Дата сбора или получения информации на контрольном пункте</label>
+					<label>Date on which the information was collected at the checkpoint</label>
 					<div compare-val>
 					<div class="km-value"><span ng-bind="document.dateCollected"></span></div>
 					</div>
 				</div>
 				<div ng-show="document.dateCollectedFrom">
-					<label>Дата начала сбора или получения информации на контрольном пункте</label>
+					<label>Дата начала сбора информации на контрольном пункте</label>
 					<div compare-val>
 					<div class="km-value"><span ng-bind="document.dateCollectedFrom"></span></div>
 					</div>
 				</div>
 				<div ng-show="document.dateCollectedTo">
-					<label>Дата сбора информации на контрольном пункте</label>
+					<label>Дата получения информации на контрольном пункте</label>
 					<div compare-val>
 					<div class="km-value"><span ng-bind="document.dateCollectedTo"></span></div>
 					</div>

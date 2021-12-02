@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
     <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <div ng-if="isIRCCRevoked">
                                 <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
                                 <label for="invalidForm" style="width:100%">
@@ -23,7 +26,7 @@
                                     
                                     <section ng-show="documentExists">
                                         
-                                        <legend>修正意图</legend><!--<div class="row">
+                                        <legend>Amendment intent</legend><!--<div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
                                                     <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
@@ -115,7 +118,7 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="许可证或同等证照的到期日期">
-                                                    <div class="help-info">在许可证到期前的两个月，会给国家主管部门发一封电子邮件，提醒国际公认合规证书的到期日。</div>
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here.Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
                                                     <div km-date placeholder="YYYY-MM-DD" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -151,7 +154,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="picInformation" caption="有关事先知情同意书（PIC）的补充信息"><span class="help-info">如适用，请提供有关事先知情同意书（PIC）的任何补充信息。可在附件中提供详细信息</span><div km-rich-textbox name="picInformation" rows="4" ng-model="document.picInformation" locales="document.header.languages"></div>
+                                                <div class="km-control-group" name="picInformation" caption="有关事先知情同意书（PIC）的补充信息"><span class="help-info">If applicable, please provide any additional information about the prior informed consent (PIC).可在附件中提供详细信息</span><div km-rich-textbox name="picInformation" rows="4" ng-model="document.picInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
             
@@ -169,7 +172,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="获授事先知情同意（PIC）的个人或实体；" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">请提供获授事先知情同意的个人或实体的姓名/名称和联系方式。如信息被标注为机密，则该人将无法无条件获得国际公认合规证书或检查点已发布公报。</div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted.如信息被标注为机密，则该人将无法无条件获得国际公认合规证书或检查点已发布公报。</div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>

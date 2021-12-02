@@ -118,7 +118,7 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="تاريخ انتهاء التصريح أو ما يعادله">
-                                                    <div class="help-info">قبل انتهاء صلاحية التصريح بشهرين، ستُرسل بالبريد الإلكتروني رسالة إلى السلطة الوطنية المختصة للتذكير بتاريخ انتهاء صلاحية شهادة الامتثال المعترف بها دوليًا.</div>
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here. Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
                                                     <div km-date placeholder="يوم - شهر - سنة" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -172,7 +172,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="الشخص أو الكيان الذي مُنِح الموافقة المسبقة عن علم" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">يُرجى إدخال اسم وتفاصيل الاتصال بالشخص أو الكيان الذي مُنِح الموافقة المسبقة عن علم. إذا كانت المعلومات مميزة بأنها سرية، فلن يستطيع هذا الشخص الحصول على نسخة مجانية من شهادة الامتثال المعترف بها دوليًا أو الموافقة المسبقة عن علم.</div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. إذا كانت المعلومات مميزة بأنها سرية، فلن يستطيع هذا الشخص الحصول على نسخة مجانية من شهادة الامتثال المعترف بها دوليًا أو الموافقة المسبقة عن علم.</div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
@@ -269,7 +269,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent"><span class="help-info">جمع هذه المعلومات أمرٌ مهم لتيسير عمليات البحث المنسقة في السجلات. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span><div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
+                                                <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent"><span class="help-info">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span><div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                                                 </div>
                                             </div>
                                         </div>

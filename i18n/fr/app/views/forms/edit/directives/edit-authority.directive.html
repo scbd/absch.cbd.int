@@ -1,6 +1,6 @@
-<div>
+<div >
   
-    <div class="edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -9,14 +9,14 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <edit-form>
                     <form class="editForm" name="editForm">
                         <div ng-show="tab=='edit'" km-tab="edit">
                             <legend name="formInfo" style="display:none"></legend>
         
                             <section>
-                                <legend name="generalInfo">Informations générales</legend>
+                                <legend name="generalInfo">General Information</legend>
 
                                 <div class="row">
                                     <div class="col-xs-12" >
@@ -76,7 +76,7 @@
                                     <div class="col-xs-6">
                                         <div class="km-control-group" name="state" caption="État ou province">
                                             <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
-                                                placeholder="exemple : Québec"></div>
+                                                placeholder="example: Québec"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
                                     <div class="col-xs-6">
                                         <div class="km-control-group" name="postalCode" caption="Code postal">
                                             <div km-textbox-ml name="postalCode" ng-model="document.postalCode"
-                                                locales="document.header.languages" placeholder="exemple : H2Y 1N9"></div>
+                                                locales="document.header.languages" placeholder="example: H2Y 1N9"></div>
                                         </div>
                                     </div>
 
@@ -104,24 +104,24 @@
                                 <div class="row">
                                     <div class="col-xs-6">
                                         <div class="km-control-group" name="phones" required caption="Téléphone (s) :">
-                                            <div class="help-info">Veuillez utiliser le format suivant : + (code du pays) (code de la ville) (numéro de téléphone) (poste, s'il y a lieu).</div>
+                                            <div class="help-info">Veuillez utiliser le format suivant : +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
-                                                required placeholder="exemple : +1 514.288.2220"></div>
+                                                required placeholder="example: +1 514.288.2220"></div>
                                         </div>
                                     </div>
 
                                     <div class="col-xs-6">
                                         <div class="km-control-group" name="faxes" caption="Télécopieur :">
-                                            <div class="help-info">Veuillez utiliser le format suivant : + (code du pays) (code de la ville) (numéro de téléphone) (poste, s'il y a lieu).</div>
+                                            <div class="help-info">Veuillez utiliser le format suivant : +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
-                                                placeholder="exemple : +1 514.288.6588"></div>
+                                                placeholder="example: +1 514.288.6588"></div>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="emails" required caption="*Courriel">
+                                        <div class="km-control-group" name="emails" required caption="Email(s)">
                                             <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
                                                 placeholder="exemple : secretariat@cbd.int"></div>
                                         </div>
@@ -140,8 +140,9 @@
 
                             <div class="row">
                                 <div class="col-xs-12">
-                                    <div class="km-control-group" name="contacts" caption="Personne contact">
+                                    <div class="km-control-group" name="contacts" caption="Personne à contacter">
                                         <div document-selector ng-model="document.contacts" question="contacts"
+                                            ng-disabled="!document.government.identifier" 
                                             on-build-query="onContactQuery(searchText)" allow-new="true"
                                             allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
 
@@ -149,7 +150,7 @@
                                 </div>
                             </div>
                             </section><!-- This section will be remove if this not required for ABS --><section ng-if="isAbs">
-                                <legend name="policyBasis">Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente </legend>
+                                <legend name="policyBasis">Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente</legend>
                                 <div class="help-info">Dans cette section, une référence aux mesures d’APA liés qui accordent la compétence à l’ANC peut être incluse. Afin de lier l’ANC à une mesure APA pertinente, le fichier de la mesure APA doit être enregistré en premier. Ainsi, si vous n’avez pas encore soumis la mesure APA pertinente, vous voudrez peut-être sauvegarder l’ANC en tant que brouillon et publier d’abord la mesure APA.<br/> Dans cette section, une référence aux mesures d’APA liés qui accordent la compétence au Protocole de Cartagena peut être incluse. Afin de lier l’autorité nationale compétente à une mesure APA pertinente, le fichier de la mesure APA doit être enregistré en premier. Par conséquent, si vous n'avez pas encore soumis la mesure concernée, vous pouvez enregistrer l'autorité nationale compétente pour le Protocole de Cartagena en tant que projet et publier d'abord la mesure, ou vous pouvez créer la mesure en ligne.</div>
                                 <div class="row">
                                     <div class="col-xs-12">

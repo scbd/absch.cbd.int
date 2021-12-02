@@ -1,9 +1,5 @@
-<span>   
-    <div ng-class="{'alert alert-danger':ctrl.showLanguageError}" ng-if="ctrl.isVisible()">
-        <div ng-if="ctrl.showLanguageError" >Please select at least one UN language to continue.</div>
-        <span km-select data-multiple="{{ctrl.multiple}}" ng-model="ctrl.binding" binding-type="string"
-            placeholder="Available Languages" items="ctrl.options.locales()" minimum="1"
+<span><div ng-class="{'alert alert-danger':ctrl.showLanguageError}" ng-if="initialized">
+        <div ng-if="ctrl.showLanguageError" >Veuillez sélectionner au moins une des langues des Nations Unies pour continuer.</div><span km-select data-multiple="{{ctrl.multiple}}" ng-model="ctrl.binding" binding-type="string"
+            placeholder="Langues disponibles" items="ctrl.options.locales()" minimum="1"
             show-others="ctrl.options.otherLocales()" ng-change="ctrl.validateUNLanguage()" 
-            api="ctrl.selectApi"></span>
-    </div>
-</span>
+            api="ctrl.selectApi" filter-type="startsWith" instance-id="{{::instanceId}}"></span></div></span>

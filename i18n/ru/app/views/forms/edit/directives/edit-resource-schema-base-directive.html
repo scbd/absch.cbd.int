@@ -5,7 +5,7 @@
 			validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			data-container="{{container}}" is-dialog="{{isDialog}}">
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 			<edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
 
@@ -35,7 +35,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" ng-if="isVlr||isMcc||isCpp">
-											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Тип материала">
+											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
 													<div class="help-block">Выберите необходимое количество вариантов, с тем чтобы как можно полнее описать ресурс(ы).</div>
 													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
 															binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" locales="document.header.languages"></div>												
@@ -44,11 +44,11 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
-											<legend>Автор(ы)</legend>
+											<label name="authors" style="font-size: 21px !important;" required for="authors">Автор(ы)</label>
 											<div class="help-block">Фамилия и имя лица или название организации, которые являются автором публикации или информационного ресурса.</div>
 										</div>
-										<div class="col-xs-12">
-											<div class="km-control-group" name="authors" caption="Фамилия и имя автора">
+										<div class="col-xs-12" style="margin-top: 20px;">
+											<div class="km-control-group" name="authors" caption="Author name(s)">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -68,12 +68,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="publisher" caption="Издатель">
 												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" required name="publicationDate" caption="Дата публикации"
 											help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: VLR">
 												<div km-date placeholder="ГГГГ-ММ" name="publicationDate" required 
@@ -83,15 +83,15 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="source" caption="Источник">
-												<div class="help-block">Ссылка на ресурс, на основе которого создан данный ресурс (например, журнальная статья).</div>
+												<div class="help-block">Ссылка на ресурс, на основе которого создан данный ресурс (например, название журнала, в котором опубликована статья).</div>
 												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="rights" caption="Права">
-												<div class="help-block">Информация о правах на ресурс (например, о правообладателях) и возможности тиражирования материалов в образовательных или некоммерческих целях.</div>
+												<div class="help-block">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
 												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -106,7 +106,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="resourceLinks" caption="Ссылка на ресурс(ы)">		
-												<div class="help-block">Просьба всегда прилагать соответствующий(-ие)  документ(ы), которые будут храниться в базе данных для загрузки пользователями. При наличии ресурсов в интернете просьба также предоставить ссылку на них. Просьба заметить, что предпочтительнее использовать вложения, которые постоянно доступны, а не ссылки, которые могут оказаться нерабочими.</div>										
+												<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. При наличии ресурсов в интернете просьба также предоставить ссылку на них. Просьба заметить, что предпочтительнее использовать вложения, которые постоянно доступны, а не ссылки, которые могут оказаться нерабочими.</div>										
 												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
 												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 											</div>
@@ -314,7 +314,7 @@
 		
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+										<div class="km-control-group" name="address" caption="Any other relevant information">
 											<div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>

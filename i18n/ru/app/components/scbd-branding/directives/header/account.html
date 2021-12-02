@@ -1,55 +1,17 @@
-﻿<div hover-effect=".dropdown-menu" id="CBD-Branding" ng-if="user">
-
-  <a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap pull-right color-cbdlitegrey" id="btnSignIn" data-slug="signin"
-   data-toggle="modal" data-target="#loginDialog" data-keyboard="false" data-backdrop="false">
-   <i  class="fa fa-power-off"></i> <strong>SIGN IN </strong>
-  </a>
-  <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown">
-    <span class="text-nowrap color-cbdlitegrey"><i class="fa fa-chevron-down"></i> {{user.name}}</span>
-  </a>
-  <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-md hidden-lg" href="#" data-toggle="dropdown" id="dropdownMenu1">
-    <span class="hidden-md hidden-lg color-cbdlitegrey user-logged-in">
-
-      <span class="fa-stack fa-1x">
-        <i class="fa fa-circle-o-notch fa-stack-2x" style="font-weight:normal;"></i>
-        <i class="fa fa-user fa-stack-1x fa-fix"></i>
-
-      </span>
-    </span>
-  </a>
-
-  <ul ng-if="user.isAuthenticated" id="dropdown-menu" class="dropdown-menu  drop-menu-position " role="menu" aria-labelledby="dropdownMenu1">
-    <li>
-      <a rel="noopener" translation-url  href="#" ng-click="actionProfile()">
-        <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
-    </li>
-    <!--<li class="dropdown-submenu pull-left">
+﻿<div hover-effect=".dropdown-menu" id="CBD-Branding" ng-if="user"><a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap pull-right color-darkgrey" id="btnSignIn" data-slug="signin"
+   data-toggle="modal" data-target="#loginDialog" data-keyboard="false" data-backdrop="false"><img src="/app/img/new-home/person-fill.svg" alt="Signin"><strong style="position: relative; top:2px;right: 5px;">ВОЙТИ</strong></a> <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown"><span class="text-nowrap color-black"><span ng-bind="user.name" style="margin:2px"></span><i class="fa fa-chevron-down"></i></span></a> <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-md hidden-lg" href="#" data-toggle="dropdown" id="dropdownMenu1"><span class="hidden-md hidden-lg color-darkgrey user-logged-in"><span class="fa-stack fa-1x"><i class="fa fa-circle-o-notch fa-stack-2x" style="font-weight:normal;"></i><img src="/app/img/new-home/person-fill.svg" alt="Signin"></span></span></a><ul ng-if="user.isAuthenticated" id="dropdown-menu" class="dropdown-menu  drop-menu-position " role="menu" aria-labelledby="dropdownMenu1">
+    <li><a rel="noopener" translation-url  href="#" ng-click="actionProfile()"><i class="fa fa-user" style="font-size:15px"></i>&nbsp; Профиль</a></li><!--<li class="dropdown-submenu pull-left">
       <a rel="noopener" tabindex="-1" href="#"><i class="fa fa-users" style="font-size:15px"></i>&nbsp; My Roles</a>
       <ul class="dropdown-menu bg-darkgrey" style="left: -307%;">
         <li ng-repeat="role in userRoles|orderBy:'name'"><a rel="noopener" tabindex="-1" href="#">{{role.name}}</a></li>
       </ul>
-    </li> -->
-    <li>
-      <a rel="noopener" translation-url  href="#" ng-click="actionPassword()">
-        <i class="fa fa-key" style="font-size:15px"></i>&nbsp; Password</a>
-    </li>
-    <hr style="margin: 10px 0 0 0;padding: 0;"/>
-    <!-- <li>
+    </li> --><li><a rel="noopener" translation-url  href="#" ng-click="actionPassword()"><i class="fa fa-key" style="font-size:15px"></i>&nbsp; Пароль</a></li>
+    <hr style="margin: 10px 0 0 0;padding: 0;"/><!-- <li>
         <a rel="noopener" translation-url  href="/register/user-preferences/setting">
           <i class="glyphicon glyphicon-cog" style="font-size:15px"></i>&nbsp; Setting</a>
-    </li> -->
-    <li>
-      <a rel="noopener" translation-url  href="/register/user-preferences/subscriptions">
-        <i class="glyphicon glyphicon-envelope" style="font-size:15px"></i>&nbsp; Email Alerts</a>
-    </li>
-    <li>
-      <a rel="noopener" translation-url  href="/register/user-preferences/saved-searches">
-        <i class="glyphicon glyphicon-lock" style="font-size:15px"></i>&nbsp; Saved Searches</a>
-    </li>    
+    </li> --><li><a rel="noopener" translation-url  href="/register/user-preferences/subscriptions"><i class="glyphicon glyphicon-envelope" style="font-size:15px"></i>&nbsp; Оповещения по электронной почте</a></li>
+    <li><a rel="noopener" translation-url  href="/register/user-preferences/saved-searches"><i class="glyphicon glyphicon-lock" style="font-size:15px"></i>&nbsp; Сохраненные условия поиска</a></li>    
       <hr style="margin: 10px 0 0 0;padding: 0;"/>
-    <li>
-      <a rel="noopener" translation-url  href="#" ng-click="actionSignOut()">
-        <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
-    </li>
+    <li><a rel="noopener" translation-url  href="#" ng-click="actionSignOut()"><i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Выйти</a></li>
   </ul>
 </div>

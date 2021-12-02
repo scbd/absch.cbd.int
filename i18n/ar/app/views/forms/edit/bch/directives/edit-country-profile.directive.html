@@ -1,5 +1,5 @@
 <div dir="rtl">
-	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div ng-class="{'block-position' : blockEditForm }">
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><div ng-class="{'block-position' : blockEditForm }">
 			<div block-region activate="blockEditForm"></div> 
 		</div>   
 		<div class="registerpage-content">
@@ -15,11 +15,11 @@
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>معلومات عامة</legend>
+									<legend></legend>
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="header.languages" required
-												caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
+												caption="">
 												<div class="indent">
 													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
@@ -28,24 +28,24 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="government" required caption="البلد">
+											<div class="km-control-group" name="government" required caption="">
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-													filter="startsWithFilter" ng-change="onGovernmentChange()" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+													filter="startsWithFilter" ng-change="onGovernmentChange()" mapping="genericMapping" selectbox="true" placeholder=""></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="profile" caption="معلومات إضافية للنشر في صفحة معلومات البلد">
-												<div class="help-block">يرجى استخدام هذه الخانة لإضافة أي معلومات أخرى مرتبطة بالبلد ستظهر ضمن صفحة معلومات البلد.</div>
+											<div class="km-control-group" required name="profile" caption="">
+												<div class="help-block"></div>
 												<div km-rich-textbox required ng-model="document.profile" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div> 
-									<legend>ملاحظات</legend>
+									<legend></legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
+											<div class="km-control-group" name="notes"><div km-notes name="notes" ng-model="document.notes"></div>
 											</div>
 										</div>
 									</div> 
@@ -61,14 +61,14 @@
 		</div>
 		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
 			<div style="margin:10px;" dir="rtl">
-				<h1>معلومات البلد لغرفة تبادل معلومات السلامة الأحيائية</h1>
+				<h1></h1>
 				<hr>
 				<div class=" alert alert-danger">
 					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
-					<div style="display:inline-block">يُسمح بسجل واحد فقط لكل حكومة في صفحة معلومات البلد في غرفة تبادل معلومات السلامة الأحيائية. معلومات البلد لحكومتك مسجلة بالفعل في غرفة تبادل معلومات السلامة الأحيائية. سيتم توجيهك الآن إلى هذا السجل في <span ng-bind="alertSeconds"></span> غضون ثوان.</div>
+					<div style="display:inline-block"></div>
 				</div>
 				<div class="ngdialog-buttons" >
-					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">إعادة التوجيه الآن</button>
+					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()"></button>
 				</div>
 			</div>
 		</script>

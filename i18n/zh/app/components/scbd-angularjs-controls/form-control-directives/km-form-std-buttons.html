@@ -1,11 +1,5 @@
-﻿<span style="text-align:left">
-
-	<span ng-hide="errors">
-
-		<input type="button" class="btn btn-warning" ng-click="showCancelDialog(true)" value="Cancel"/>
-		<input type="button" class="btn btn-primary" ng-click="showSaveDialog(true)" value="Save"  ng-show="hideSave"/>
-
-	</span>
+﻿<span style="text-align:left"> <span ng-hide="errors"><input type="button" class="btn btn-warning" ng-click="showCancelDialog(true)" value="Cancel"/>
+		<input type="button" class="btn btn-primary" ng-click="showSaveDialog(true)" value="Save"  ng-show="hideSave"/></span>
 
     <!--Save Dialog-->
 	<div id="dialogSave" class="modal fade" data-backdrop="static">
@@ -13,45 +7,40 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
-					<h4>Save record <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+					<h4>保存记录 <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
 				</div>
 				<div class="modal-body">
 
-					<p>If you have finished entering all the information, you can submit the record for publishing.</p>
+					<p>如果您已经输入所有信息，您可以提交该记录用于发布。</p>
 
-					<p>If you are unable to complete entry of this record, you can save it as a draft, which will then be available in your list of drafts on the Management Centre. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
+					<p>如果您无法填完本记录的条目，您可以将其保存为草稿，您将可以管理中心的草稿列表中访问该草稿。您或您的同事现在或以后可以继续编辑该记录。</p>
 
 				</div>
 				<div class="modal-footer" style="margin-top:0">
-					<button type="button" ng-click="closeDialog()" class="cancelClose btn btn-default" >Cancel</button>
-					<button type="button" ng-click="saveDraft()"      ng-disabled="loading || !security.canSaveDraft" class="btn btn-info"    >Save as draft</button>
-					<button type="button"                             ng-show="security.canSave===undefined" disabled class="btn btn-info"    >Save and publish</button>
-					<button type="button" ng-click="publish()"        ng-show="security.canSave!==undefined &&  security.canSave" ng-disabled="loading || !security.canSave" class="btn btn-primary" >Save and publish</button>
-					<button type="button" ng-click="publishRequest()" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)" ng-disabled="loading ||  security.canSave"  class="btn btn-primary" >Save and request publication</button>
+					<button type="button" ng-click="closeDialog()" class="cancelClose btn btn-default" >取消</button>
+					<button type="button" ng-click="saveDraft()"      ng-disabled="loading || !security.canSaveDraft" class="btn btn-info"    >保存为草稿</button>
+					<button type="button"                             ng-show="security.canSave===undefined" disabled class="btn btn-info"    >保存并发布</button>
+					<button type="button" ng-click="publish()"        ng-show="security.canSave!==undefined &&  security.canSave" ng-disabled="loading || !security.canSave" class="btn btn-primary" >保存并发布</button>
+					<button type="button" ng-click="publishRequest()" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)" ng-disabled="loading ||  security.canSave"  class="btn btn-primary" >保存并请求发布</button>
 				</div>
 			</div>
 		</div>
-	</div>
-
-    <!--Cancel Dialog-->
-	<div id="dialogCancel" class="modal fade" data-backdrop="static">
+	</div><!--Cancel Dialog--><div id="dialogCancel" class="modal fade" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
-					<h4>Canceling changes</h4>
+					<h4>取消更改</h4>
 				</div>
 				<div class="modal-body">
 
-					<p>If you want to cancel the changes you just made to this draft, you can keep the previous version of the draft, which will then be available in the list of drafts on the Management Centre. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
+					<p>如果您要取消刚刚对草稿进行的更改，您可以保留草稿的原来版本，以后可以在管理中心的草稿列表中访问该草稿。您或您的同事现在或以后可以继续编辑该记录。</p>
 
 				</div>
 				<div class="modal-footer" style="margin-top:0">
-					<button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose" >Cancel</button>
-					<button type="button" ng-click="close()"       class="btn btn-primary closeWithoutSaving" >Close without saving</button>
+					<button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose" >取消</button>
+					<button type="button" ng-click="close()"       class="btn btn-primary closeWithoutSaving" >不保存关闭</button>
 				</div>
 			</div>
 		</div>
-	</div>
-
-</span>
+	</div></span>

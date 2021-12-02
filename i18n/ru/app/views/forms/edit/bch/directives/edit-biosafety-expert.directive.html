@@ -1,12 +1,12 @@
 <div>
 
-	<div class="edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 
                     <div class="row">
@@ -14,11 +14,11 @@
                             <ul class="pagination" id="expertTabs" ng-click="setTab($event)">
                                 <li class="active"><a translation-url href="#part1" data-toggle="tab">Часть I</a></li>
                                 <li><a translation-url href="#part2" data-toggle="tab">Часть II</a></li>
-                                <li><a translation-url href="#part3" data-toggle="tab">Часть III</a></li>
-                                <li><a translation-url href="#part4" data-toggle="tab">Часть IV</a></li>
+                                <li><a translation-url href="#part3" data-toggle="tab">Part III</a></li>
+                                <li><a translation-url href="#part4" data-toggle="tab">Part IV</a></li>
                                 <li><a translation-url href="#part5" data-toggle="tab">Часть V</a></li>
-								<li><a translation-url href="#part6" data-toggle="tab">Часть VI</a></li>
-								<li><a translation-url href="#part7" data-toggle="tab">Часть VII</a></li>
+								<li><a translation-url href="#part6" data-toggle="tab">Part VI</a></li>
+								<li><a translation-url href="#part7" data-toggle="tab">Part VII</a></li>
                             </ul>
                         </div>
                     </div>
@@ -171,12 +171,12 @@
 												
                                                 <div class="row">
 													<div class="col-xs-12">
-														<label>Страны или регионы где вы работали</label>
+														<label>Countries or regions where you have worked</label>
 													</div>
 	
 													<div class="col-md-5">
 														
-														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Страны">
+														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Countries">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
 															ng-model="countryRegionsWorkedIn.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
 														</div>
@@ -196,9 +196,9 @@
 														</div>
 													</div>
 													<div class="col-xs-6">
-														<div class="km-control-group" name="previousEmployment.name" caption="Название предыдущего работодателя/ предыдущей организации/компании">
+														<div class="km-control-group" name="previousEmployment.name" caption="Name of Previous Employer / Organization / Company">
 															<div km-textbox-ac name="previousEmployment.name" ng-model="document.previousEmployment.name" locales="document.header.languages"
-															placeholder="пример: Монреальский университет" pause="400" 
+															placeholder="example: Монреальский университет" pause="400" 
 															on-search="onSearchOrganizations(text, locale)" 
 															data-field="suggestions" title-field="title" description-field="summary" 
 															input-class="form-control-small"></div>
@@ -221,7 +221,7 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.endDate" caption="Дата увольнения"
+														<div class="km-control-group" name="previousEmployment.endDate" caption="End date"
 														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
 															<div km-date placeholder="ГГГГ-ММ" name="previousEmployment.endDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
@@ -271,7 +271,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="km-control-group" required name="primaryEducation.title" caption="Название базовой степени или другие академические заслуги и тематическая область">
-																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="пример: Бакалавр наук по микробиологии" locales="document.header.languages"></div>
+																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="пример: B.Sc. in Microbiology" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
@@ -295,7 +295,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.endDate" caption="Дата окончания"
+																		<div class="km-control-group" required name="primaryEducation.endDate" caption="End date"
 																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
 																			<div km-date placeholder="ГГГГ-ММ" name="primaryEducation.endDate" required 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
@@ -310,7 +310,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="km-control-group"  name="secondaryEducation.title" caption="Название базовой степени или другие академические заслуги и тематическая область">
-																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="пример: Бакалавр наук по микробиологии" locales="document.header.languages"></div>
+																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="пример: B.Sc. in Microbiology" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
@@ -334,7 +334,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.endDate" caption="Дата окончания"
+																		<div class="km-control-group"  name="secondaryEducation.endDate" caption="End date"
 																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
 																			<div km-date placeholder="ГГГГ-ММ" name="secondaryEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
@@ -349,7 +349,7 @@
 																<div class="row">
 																	<div class="col-md-6">
 																		<div class="km-control-group"  name="thirdEducation.title" caption="Название базовой степени или другие академические заслуги и тематическая область">
-																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="пример: Бакалавр наук по микробиологии" locales="document.header.languages"></div>
+																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="пример: B.Sc. in Microbiology" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
@@ -373,7 +373,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.endDate" caption="Дата окончания"
+																		<div class="km-control-group"  name="thirdEducation.endDate" caption="End date"
 																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
 																			<div km-date placeholder="ГГГГ-ММ" name="thirdEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
@@ -577,11 +577,11 @@
                             <ul class="pagination" id="expertTabs" ng-click="setTab($event)">
                                 <li class="active"><a translation-url href="#part1" data-toggle="tab">Часть I</a></li>
                                 <li><a translation-url href="#part2" data-toggle="tab">Часть II</a></li>
-                                <li><a translation-url href="#part3" data-toggle="tab">Часть III</a></li>
-                                <li><a translation-url href="#part4" data-toggle="tab">Часть IV</a></li>
+                                <li><a translation-url href="#part3" data-toggle="tab">Part III</a></li>
+                                <li><a translation-url href="#part4" data-toggle="tab">Part IV</a></li>
                                 <li><a translation-url href="#part5" data-toggle="tab">Часть V</a></li>
-								<li><a translation-url href="#part6" data-toggle="tab">Часть VI</a></li>
-								<li><a translation-url href="#part7" data-toggle="tab">Часть VII</a></li>
+								<li><a translation-url href="#part6" data-toggle="tab">Part VI</a></li>
+								<li><a translation-url href="#part7" data-toggle="tab">Part VII</a></li>
                             </ul>
                         </div>
                     </div>

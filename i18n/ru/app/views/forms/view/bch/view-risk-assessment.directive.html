@@ -20,10 +20,11 @@
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<div ng-show="document.date">
-			<label>Дата проведения оценки рисков</label>
+		<div ng-show="document.date || document.dateOfRaNotAvailable">
+			<label>Date of the risk assessment</label>
 			<div compare-val>
-			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
+				<div ng-if="document.date" class="km-value" ng-bind="document.date | formatDate"></div>
+				<div ng-if="document.dateOfRaNotAvailable" class="km-value">Дата отсутствует</div>
 			</div>
 		</div>
 		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">
@@ -77,16 +78,18 @@
 			</div>
 			<div ng-if="document.documents||document.documentsSummary">
 				<label>Отчет/краткая информация об оценке рисков</label>
- 			<div class="km-value" compare-val>
-				<km-link-list  ng-model="document.documents"></km-link-list>
+				<div ng-if="document.documents">
+					<div class="km-value" compare-val>
+						<km-link-list  ng-model="document.documents"></km-link-list>
+					</div>
+				</div>
 				<div ng-if="document.documentsSummary">
-				<div compare-val>
-					<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
+					<div compare-val>
+						<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
+					</div>
 				</div>
 			</div>
 		</div>
-		</div>
-		
 		<div ng-if="document.adverseEffects || document.adverseEffectsLikelihood || document.adverseEffectsConsequence ||
 			document.adverseEffectsOverallRisk || document.adverseEffectsRecommendation || document.riskManagementStrategies ||
 			document.receivingEnvironment || document.detectionMethod">
@@ -116,63 +119,67 @@
 				</div>
 			</div>
 			<div ng-show="document.adverseEffectsRecommendation">
-				<label>Рекомендация(-и) относительно того, являются ли риски приемлемыми или регулируемыми, и стратегии регулирования</label>
+				<label>Recommendation(s) on whether the risks are acceptable/manageable and any management strategies</label>
 				<div compare-val>
 					<km-value-ml  html value="document.adverseEffectsRecommendation" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.riskManagementStrategies">
-				<label>Необходимость в дополнительной информации по конкретным волнующим вопросам</label>
+				<label>Need(s) for further information on specific issues of concern</label>
 				<div compare-val>
 					<km-value-ml  html value="document.riskManagementStrategies" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.receivingEnvironment">
-				<label>Рассматриваемая(-ые) принимающая(-ие) среда(-ы)</label>
+				<label>Receiving environment(s) considered</label>
 				<div compare-val>
 					<km-value-ml html  value="document.receivingEnvironment" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.detectionMethod">
-				<label>Предлагаемые методы обнаружения и идентификации ЖИО</label>
+				<label>LMO detection and identification methods proposed</label>
 				<div compare-val>
 					<km-value-ml html value="document.detectionMethod" locales="locale"></km-value-ml>
 				</div>
 			</div>
-		</div><!-- <div ng-if="document.government && document.isForCommercialUse!=undefined">
-			<legend>Information sharing with other databases</legend>
+		</div>
+
+		 <div ng-if="document.isForCommercialUse!=undefined">
+			<legend>Обмен информацией с другими базами данных</legend>
 			<div ng-if="document.isForCommercialUse!=undefined">
-				<label>Is this risk assessment related to an LMO for commercial use?</label>
+				<label>Имеет ли данная оценка рисков отношение к коммерческому использованию ЖИО?</label>
 				<div compare-val>
 					<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 				</div>
 				<div ng-if="document.forwardToOECD!=undefined">
-					<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the BioTrack Product Database?</label>
+					<label>Следует ли материалы данной оценки риска довести до сведения Секретариата ОЭСР с целью возможного включения в <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank">базу данных BioTrack Product</a>?</label>
 					<div compare-val>
 						<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.isForFoodSafety!=undefined">
-					<label>Is this risk assessment related to food safety?</label>
+					<label>Имеет ли данная оценка рисков отношение к вопросам безопасности пищевых продуктов?</label>
 					<div compare-val>
 						<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
 					</div>
 				</div>
-				<div ng-if="document.codexConduted!=undefined">
-					<label>Was it conducted in accordance with the Codex Alimentarius Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</label>
+				<div ng-if="document.codexConducted!=undefined">
+					<label>Была ли проведена оценка в соответствии с <i>«Руководящими принципами для проведения оценки безопасности продуктов питания в отношении продуктов питания, получаемых из растений с рекомбинантной ДНК»</i>, разработанными Комиссией по «Кодекс Алиментариус»?</label>
 					<div  compare-val>
-						<km-value-bool value="document.codexConduted" locales="locale"></km-value-bool>
+						<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.forwardToFAO!=undefined">
-					<label>Should this risk assessment be forwarded to your country's FAO focal point for possible inclusion in the GM Foods Platform?</label>
+					<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
 					<div  compare-val>
 						<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 					</div>
 				</div>
 			</div>
-		</div> --><div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Дополнительная информация</legend>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>

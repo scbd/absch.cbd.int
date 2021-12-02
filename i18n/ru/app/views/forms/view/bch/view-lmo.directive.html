@@ -27,7 +27,7 @@
 			<div ng-bind="document.uniqueIdentification" class="km-value"></div></div>
 		</div>
 		<div ng-show="document.developers">
-			<label>Разработчик(и)</label>
+			<label>Developer(s)</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.developers" >						
@@ -78,7 +78,7 @@
 			<km-value-ml value="document.vector" locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.techniqueUsed">
-			<label>Методы, использующиеся для модификации</label>
+			<label>Techniques used for the modification</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="use in document.techniqueUsed" ng-bind="use | term:locale"></li>
@@ -89,7 +89,7 @@
 		<div ng-show="document.geneConstructs">
 			<label>Конструкция генетических элементов</label>
 
-			<div class="km-value" compare-val>
+			<div class="km-value" compare-val ng-class="{'lmo-gene-construct-scroll':!printMode}">
 				<div ng-repeat="construct in document.geneConstructs" style="margin-bottom:5px;">
 					<view-lmo-gene ng-model="construct"></view-lmo-gene>
 				</div>
@@ -97,7 +97,7 @@
 		</div>
 		<div ng-show="document.genes">
 			<label>Интродуцированный(-е) или модифицированный(-е) генетический(-е) элемент(ы)</label>
-			<div class="help-info" style="font-size: 10px;">Некоторые их этих генетических элементов могут быть представлены в виде фрагментов или в укороченной форме. См. примечания ниже, где это применимо.</div>
+			<div class="help-info" style="font-size: 10px;">Некоторые их этих генетических элементов могут быть представлены в виде фрагментов или в укороченной форме. Please see notes below, where applicable.</div>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						
@@ -122,7 +122,7 @@
 			</div>
 		</div>
 		<div ng-show="document.affectedGenes">
-			<label>Другой(-ие) ген(-ы), экспрессия которого (которых) была затронута в результате трансформации</label>			
+			<label>Other gene(s) whose expression was affected by the transformation</label>			
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						

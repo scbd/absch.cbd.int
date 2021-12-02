@@ -1,9 +1,5 @@
-﻿<div class="container">
-    <br/>
-    <div ng-show="user.isAuthenticated">
-        <div forum-id="forumId" show-details="true" type="forum" forum-details show-forum-properties="isAdmin()"></div>
-        <br/>
-        <div forum-threads forum-id="forumId" post-url="postUrl" />
+﻿<div class="container"><br/><div ng-show="user.isAuthenticated">
+        <div forum-id="forumId" show-details="true" type="forum" forum-details show-forum-properties="isAdmin()"></div><br/><div forum-threads forum-id="forumId" post-url="postUrl" />
     </div>
     <div ng-show="!user.isAuthenticated" class="bg-green">
         <div login></div>

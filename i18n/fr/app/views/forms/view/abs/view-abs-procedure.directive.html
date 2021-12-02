@@ -116,15 +116,19 @@
 			<div class="km-value" ng-repeat="measure in document.relevantMeasures">
 				<div view-record-reference ng-model="measure.identifier" locale="locale"></div>
 			</div></div>
-		</div><!-- <div ng-show="document.keywords">
-			<label>Keywords</label>
+		</div>
+
+		<div ng-show="document.keywords">
+			<label>Mots-clés</label>
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
 				</ul>
 			</div>
-		</div> --><div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Informations supplémentaires</legend>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Renseignements supplémentaires</legend>
 
 			<div ng-show="document.relevantInformation"><!-- need to test --><div compare-val>
 					<km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>

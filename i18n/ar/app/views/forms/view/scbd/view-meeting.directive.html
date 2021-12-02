@@ -21,15 +21,17 @@
 
 		<div ng-show="document.eventCity_s">
 			<label>مدينة الحدث أو الفعالية</label><span class="km-value">{{document.eventCity_s}}</span></div>
-		<div ng-show="document.symbol_s">
-			<label>وثائق الاجتماعات</label><span class="km-value"><a rel="noopener" translation-url  target="_blank" ng-href="http://www.cbd.int/doc/?meeting={{document.symbol_s|encodeURIComponent}}">http://www.cbd.int/doc/?meeting={{document.symbol_s}}</a></span></div><!--
+		<div ng-show="document.url_ss">
+			<label>وثائق الاجتماعات</label><span class="km-value"><ul class="list">
+					<li ng-repeat="url in document.url_ss"><a rel="noopener" translation-url  ng-href="{{url}}" target="_"><span ng-bind="url"></span></a></li>
+				</ul></span></div><!--
 		<div ng-show="document.themes_CEN_ss">
 			<label>Themes</label>
 			<ul class="km-value">
 				<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON  | lstring:locale}}</li>
 			</ul>
 		</div> --><div ng-show="document.thematicAreas_CEN_ss">
-			<label>مجالات الموضوعات</label>
+			<label>Thematic Areas</label>
 			<div class="km-value">
 				<ul >
 					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>

@@ -1,61 +1,24 @@
-﻿<div class="header bg-white" id="CBD-Branding">
-  <!-- sign in -->
-  <accounts-validation-header></accounts-validation-header>
+﻿<div class="header bg-white" id="CBD-Branding"><accounts-validation-header></accounts-validation-header>
   <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top" id="anchorTop">
-    <style>
-      .arabic-Header {
-          margin-right: 200px;
-      }
-      .arabic-cbd-nav-bar {
-          float : right!important;
-      }
-    </style>
-    <div class="container-fluid container-cbd bg-white">
-      <!-- Brand and toggle get grouped for better mobile display -->
-      <div class="navbar-header" >
-        <span class="hidden-xs hidden-sm color-cbdlitegrey" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
-          <i class="fa fa-bars"></i> Convention on Biological Diversity
-        </span>
-
-        <span href="http://www.cbd.int" class="hidden-md hidden-lg pull-left">
-          <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>
-          <span class="brand">CBD</span>
-        </span>
-
-        <account-header user="user" style="position:absolute;right:90px;top:7px;"></account-header>
-        <li class="pull-right" style="position:absolute;right:55px;top:5px;"><xuser-notifications-icon   ></xuser-notifications-icon></li>
-        <locale-header style="position:absolute;right:10px;top:-1px;" id="CBD-Branding"></locale-header>
+    <style></style>
+    <div class="container-fluid container-cbd bg-white"><div class="navbar-header" ><ul class="navbar-left navlist hidden-xs hidden-sm menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
+          <li ng-if="toggleMenu" ></li>
+          <li ng-if="toggleMenu"></li>
+          <li ng-if="toggleMenu"></li>
+          <li ng-if="toggleMenu"></li>
+          <li ng-if="toggleMenu"></li>
+          <li ng-if="toggleMenu"></li>
+        </ul>
+        <div class="right-part">
+          <account-header user="user" class="rp-signin" ></account-header>
+          <xuser-notifications-icon class="rp-n"></xuser-notifications-icon>
+          <locale-header class="rp-lang" id="CBD-Branding"></locale-header></div>
       </div>
 
-      <ul class="navbar-left navlist hidden-xs hidden-sm"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
-        <li ng-if="toggleMenu" ><a rel="noopener" translation-url  href="http://www.cbd.int/convention/" class="color-cbdgrey">The Convention</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="color-cbdgrey">Cartagena Protocol</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="color-cbdgrey">Nagoya Protocol</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="color-cbdgrey">Programmes</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="color-cbdgrey">Information</a></li>
-        <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="color-cbdgrey">Secretariat</a></li>
-      </ul>
+      
+    </div>
   </nav>
 
   <login-account user="user" ></login-account>
-  <!-- <div class="modal fade" id="error-message" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Error: {{errorMessage.title}}</h4>
-        </div>
-        <div class="modal-body">
-          <p compile="errorMessage.body"></p>
-        </div>
-        <div class="modal-footer">
-        </div>
-      </div>
-    </div>
-  </div> -->
-
+  
 </div>
-
-<!-- <xuser-notifications ng-if="userNotifications.viewAll" ></xuser-notifications> -->
-
-<!-- class="hidden-md hidden-lg" -->

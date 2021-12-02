@@ -1,29 +1,11 @@
-﻿<!--TODO: once i get at least one more control requiring style, I should just have a css file for all of these controls -->
-<style>
-	.tabbed-textareas-inputs > * > .tabbed-textarea {
-		display: none;
-	}
-	.tabbed-textareas-inputs > *:first-child > .tabbed-textarea {
-		display: block;
-	}
-	.tab-button.has-success {
-		background-color: #DDFFDD;
-	}
-</style>
+﻿<!--TODO: once i get at least one more control requiring style, I should just have a css file for all of these controls --><style> .tabbed-textareas-inputs > * > .tabbed-textarea { display: none; } .tabbed-textareas-inputs > *:first-child > .tabbed-textarea { display: block; } .tab-button.has-success { background-color: #DDFFDD; } </style>
 <ul class="nav nav-tabs">
-	<li ng-repeat="tab in tabs" class="{{$index}}th-tab atab {{$index==0?'active':''}}">
-	<a rel="noopener" tabindex="0" class="{{$index}}th-button tab-button {{isValid(tab.key)?'has-success':''}}" ng-click="toggleTab($event, $index, tab[keyKey])" ng-focus="showTab($event, $index, tab[keyKey])">{{tab[titleKey] | localize}}<button type="button" ng-show="deletableTabs" ng-click="tabs.splice($index, 1);">X</button></a>
-	</li>
+	<li ng-repeat="tab in tabs" class="{{$index}}th-tab atab {{$index==0?'active':''}}"><a rel="noopener" tabindex="0" class="{{$index}}th-button tab-button {{isValid(tab.key)?'has-success':''}}" ng-click="toggleTab($event, $index, tab[keyKey])" ng-focus="showTab($event, $index, tab[keyKey])">{{tab[titleKey]}}<button type="button" ng-show="deletableTabs" ng-click="tabs.splice($index, 1);">X</button></a></li>
 </ul>
-<div class="tabbed-textareas-inputs">
-	<span ng-repeat="tab in tabs">
-		<span class="tab{{tab[keyKey]}} tabbed-textarea">
-			<p ng-bind-html="tab[helpKey] | localize | to_trusted"></p>
+<div class="tabbed-textareas-inputs"><span ng-repeat="tab in tabs"> <span class="tab{{tab[keyKey]}} tabbed-textarea"><p ng-bind-html="tab[helpKey] | to_trusted"></p>
 			<textarea class="form-control textarea{{tab[keyKey]}}" ng-focus="toggleFocus()" rows="{{rows || 4}}" ng-model="binding[tab[keyKey]]" ng-keydown="overwriteKeys($event, $index)" ng-blur="maybeHide($event, $index); toggleFocus();" placeholder="{{tab.placeholder || placeholder}}"></textarea>
 			<div ng-show="preview && focused">
-			    <h3 style="margin-left: 40px;">{{tab[titleKey]}} Preview</h3>
+			    <h3 style="margin-left: 40px;">{{tab[titleKey]}} Предпросмотр</h3>
 			    <p style="padding-left: 10px; border: dotted 1px gray;" ng-bind-html="binding[tab[keyKey]] | toTrusted"></p>
-			</div>
-		</span>
-	</span>
+			</div></span> </span>
 </div>

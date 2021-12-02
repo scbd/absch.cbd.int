@@ -7,7 +7,7 @@
 
 			
 		<document-date></document-date>
-<legend>Informations générales</legend>
+		<legend>Informations générales</legend>
 		
 		<div ng-show="document.government">
 			<label name="country">Pays</label>
@@ -26,22 +26,15 @@
 			<div class="km-value km-pre"ng-bind-html="document.description | lstring:locale"></div>
 			</div>
 		</div>
-
-		<div ng-show="document.website">
-			<label>URL du site Web</label>
-			<div class="km-value" compare-val><a rel="noopener" translation-url  target="{{target}}" target="_blank" ng-href="{{document.website.url|encodeURI}}">{{document.website.name||document.website.url}}</a> <i ng-show="document.website.name">({{document.website.url}})</i></div>
-		</div>
 		<div ng-show="document.websites && document.websites.length >0">
 			<label>URL du site Web</label>
-			<div class="km-value" compare-val>
-				<div ng-repeat="site in document.websites"><a rel="noopener" translation-url  target="{{target}}" target="_blank" ng-href="{{site.url|encodeURI}}">{{site.name||site.url}}</a> <i ng-show="site.name">({{site.url}})</i></div>
-			</div>
+				<div class="km-value" compare-val>
+					<km-link-list ng-model="document.websites" ></km-link-list>
+				</div>
 		</div>
-	
-
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Renseignements supplémentaires</legend>
+			<legend>Informations supplémentaires</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>
@@ -51,15 +44,14 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
-				<div compare-val>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a></div>
+				<div class="km-value" compare-val>
+						<km-link-list ng-model="document.relevantDocuments" ></km-link-list>
 				</div>
 			</div>
 		</div>
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
 		</div>
-
 	</div>
-        <div document-metadata class="panel-footer"></div>
+    <div document-metadata class="panel-footer"></div>
 </div>

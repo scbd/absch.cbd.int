@@ -1,6 +1,6 @@
-<div>
+<div >
   
-    <div class="edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -9,7 +9,7 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <edit-form>
                     <form class="editForm" name="editForm">
                         <div ng-show="tab=='edit'" km-tab="edit">
@@ -17,9 +17,10 @@
         
                             <section>
                                 <legend name="generalInfo">Información general</legend>
+
                                 <div class="row">
                                     <div class="col-xs-12" >
-                                        <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                        <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                             </div>
@@ -33,7 +34,7 @@
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
                                                     ng-model="document.government" source="options.countries"
                                                     filter="genericFilter" mapping="genericMapping" selectbox="true"
-                                                    placeholder="Seleccione un país…"></div>
+                                                    placeholder="Please select a country..."></div>
                                             </div>
                                         </div>
                                     </div>
@@ -141,6 +142,7 @@
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Persona responsable">
                                         <div document-selector ng-model="document.contacts" question="contacts"
+                                            ng-disabled="!document.government.identifier" 
                                             on-build-query="onContactQuery(searchText)" allow-new="true"
                                             allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
 
@@ -300,7 +302,7 @@ responsabilidades respectivas de esas autoridades. En los casos en que correspon
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="relevantInformation" caption="Información adicional">
-                                            <div class="help-info">Por favor, utilice este campo para facilitar cualquier otra información pertinente que no se haya incluido en otro lugar del registro.</div>
+                                            <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                             <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
                                                 locales="document.header.languages"></div>
                                         </div>

@@ -1,36 +1,6 @@
-﻿<div class="pull-right" ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated">
-
-    <a rel="noopener" id="dLabel" class="notification-btn hidden-sm hidden-md hidden-lg" ng-href="{{viewAllUrl}}">
-         <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
-                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
-        </span>
-    </a>
-
-    <a rel="noopener" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll">
-        <span>
-           <i class="fa " ng-class="{'fa-bell-o':!notificationUnreadCount, 'fa-bell color-cbdlitegrey fa-stack-1x':notificationUnreadCount}"></i>
-                    <span ng-show="notificationUnreadCount > 0" class="fa-badge fa-stack-2x" style="top:5px;position:relative;" data-badge="{{notificationUnreadCount}}"></span>
-        </span>
-    </a>
-
-    <div class="dropdown-menu hidden-xs" role="menu" aria-labelledby="dLabel" style="position:relative;top:22px;left:20px;">
-
-        <div class="n-drop-down" style="width:600px;padding:0;margin:0;z-index:1100;">
-            <div>
-                <div xuser-notifications hide-close-button="true"></div>
-                 
-                 <div style="padding:15px;background-color:#ddd;" ng-if="!notifications || (notifications|filter:isUnread).length <= 0">
-                    <h4 style="color:#666;">You have no new notifications or requests</h4>
-                 </div>
-            
-                <div>
-                    <a rel="noopener" translation-url ng-href="{{viewAllUrl}}" style="cursor:pointer;">
-                        <h5 class="color-cbdgrey"><i class="glyphicon glyphicon-circle-arrow-right"></i> view all notifications </h5>
-                    </a>
-                </div>
-            </div>
-           
+﻿<div ng-cloak id="dropdownNotification" ng-show="user && user.isAuthenticated"><a ng-if="notificationUnreadCount > 0" rel="noopener" id="dLabel" role="button" data-toggle="dropdown" data-target="#" ng-href="#" class="notification-btn hidden-xs" ng-click="enableInfiniteScroll=!enableInfiniteScroll"><span class="new-css-notification-bell"><i class="bi bi-bell-fill color-black"></i></span> <span class="badge bg-red new-css-notification-count">{{notificationUnreadCount}}</span></a> <a ng-if="notificationUnreadCount > 0"  ng-href="/register/notifications" class="notification-btn hidden-sm hidden-md hidden-lg" ><span class="new-css-notification-bell"><i class="bi bi-bell-fill color-black"></i></span> <span class="badge bg-red new-css-notification-count">{{notificationUnreadCount}}</span></a> <a ng-if="notificationUnreadCount === 0"  ng-href="/register/notifications"  data-toggle="dropdown"><span class="new-css-notification-bell"><i class="bi bi-bell-fill color-black"></i></span></a><div class="dropdown-menu hidden-xs not-dropdown" role="menu" aria-labelledby="dLabel">
+        <div class="n-drop-down" style="width:650px;padding:0;margin:0;z-index:1100;">
+            <div xuser-notifications hide-close-button="true"></div>
         </div>
     </div>
 </div>

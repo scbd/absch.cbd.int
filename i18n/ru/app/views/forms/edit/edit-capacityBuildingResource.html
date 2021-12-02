@@ -1,11 +1,11 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
             <div class="alert alert-success alert-dismissable" ng-show="msg">
-                <button aria-hidden="true" class="close" data-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong>{{msg}}</strong></div>
+                <button aria-hidden="true" class="close" data-bs-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong>{{msg}}</strong></div>
 
             <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
                 languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
@@ -35,7 +35,7 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" required name="resourceTypes" caption="Тип ресурса">
+									<div class="km-control-group" required name="resourceTypes" caption="Type of resource">
 										<div km-select multiple name="resourceTypes" required ng-model="document.resourceTypes" items="options.resourceTypes()"></div>
 									</div>
 								</div>
@@ -60,7 +60,7 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" name="purpose" caption="Укажите основную цель ресурса">
+									<div class="km-control-group" name="purpose" caption="Please identify the main purpose of the resource">
 										<div km-select multiple  name="purpose" ng-model="document.purpose" items="options.purposes()"></div>
 									</div>
 								</div>
@@ -76,7 +76,7 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" name="expertiseLevel" caption="Уровень содержания или уровень знаний/экспертных знаний аудитории, для которой предназначен ресурс">
+									<div class="km-control-group" name="expertiseLevel" caption="Level of the content or level of knowledge/expertise of the audience for which the resource is intended">
 										<div km-select name="expertiseLevel" ng-model="document.expertiseLevel" items="options.expertiseLevels()"></div>
 									</div>
 								</div>
@@ -85,7 +85,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" required name="authors" caption="Автор(ы)">
-										<div class="help-info">Фамилия и имя лица, являющегося автором публикации или информационного ресурса.</div>
+										<div class="help-info">Name of the person who has authored the publication or information resource.</div>
 										<div km-textbox-ml required ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 									</div>
 								</div>
@@ -100,14 +100,10 @@
 																			schema="contact" skip-government="true"
 																			government="document.government"
 																			filter="true"
-																			></div><!--<organization-selector multiple ng-model="document.organizations" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>--></div><!-- <div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s)">
-										<div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
-												<div>
-													<div><strong>{{reference.title | lstring}}</strong></div>
-													<div>{{reference.summary | lstring}}</div>
-												</div>
-										</div>
-									</div> --></div>
+																			></div>										
+										
+									</div>
+								</div>
 							</div>
 	
 							<div class="row">
@@ -121,7 +117,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="rights" caption="Права">
-										<div class="help-info">Информация о правах на ресурс (например, о правообладателях) и возможности тиражирования материалов в образовательных или некоммерческих целях.</div>
+										<div class="help-info">Information about rights held in and over the resource, such as copyright holder, and availability for reproduction for educational or non-profit purposes.</div>
 										<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
 									</div>
 								</div>
@@ -130,18 +126,18 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="source" caption="Источник">
-										<div class="help-info">Ссылка на ресурс, на основе которого создан данный ресурс (например, журнальная статья). Для оригинальных документов допускается указать «оригинальный документ».</div>
+										<div class="help-info">A reference to a resource from which the present resource is derived (e.g. an article from a journal). Для оригинальных документов допускается указать «оригинальный документ».</div>
 										<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 									</div>
 								</div>
 							</div>
 	
-							<legend>Доступ к ресурсу</legend>
+							<legend>Access to the resource</legend>
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" required name="resourceLinks" caption="Ссылка на ресурс(ы)">
-										<div class="help-info">Просьба всегда прилагать соответствующий(-ие)  документ(ы), которые будут храниться в базе данных для загрузки пользователями. При наличии ресурсов в интернете просьба также предоставить ссылку на них.</div>
+									<div class="km-control-group" required name="resourceLinks" caption="Ссылка на материал(ы)">
+										<div class="help-info">Просьба всегда прилагать соответствующий(-ие)  документ(ы), которые будут храниться в базе данных для загрузки пользователями. When resources are available on the Internet, please also provide a link to them.</div>
 										<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 									</div>
 								</div>
@@ -156,7 +152,7 @@
 								</div>
 							</div>
 	
-							<legend>Информация о содержании ресурса</legend>
+							<legend>Information on the content of resource</legend>
 	
 							<div class="row">
 								<div class="col-md-12">
@@ -186,7 +182,7 @@
 	
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+									<div class="km-control-group" name="address" caption="Any other relevant information">
 										<div class="help-info">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 										<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 									</div>
@@ -204,7 +200,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="notes">
-										<legend>Примечания</legend><span class="help-info">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи.</span><div km-notes name="notes" ng-model="document.notes"></div>
+										<legend>Примечания</legend><span class="help-info">The field “Notes” is for personal reference and can be seen only when the record is being edited.</span><div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>
 							</div>

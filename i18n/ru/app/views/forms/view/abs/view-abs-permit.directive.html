@@ -8,9 +8,9 @@
 
 			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || document.info.revision !== document.info.latestRevision)">
 				<div class="text-center">
-					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">ДАННЫЙ СЕРТИФИКАТ <u>ОТОЗВАН</u> И УТРАТИЛ СВОЕ ДЕЙСТВИЕ</h1>
+					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">THIS CERTIFICATE HAS BEEN <u>REVOKED</u> AND IS NO LONGER VALID</h1>
 
-					<h1 ng-if="document.info.revision !== document.info.latestRevision">ДАННЫЙ СЕРТИФИКАТ <u>ОБНОВЛЕН</u>. ДЕЙСТВИТЕЛЬНЫМ ЯВЛЯЕТСЯ НОВЫЙ ВАРИАНТ, <u>ДАННЫЙ ВАРИАНТ УТРАТИЛ СВОЕ ДЕЙСТВИЕ.</u></h1>
+					<h1 ng-if="document.info.revision !== document.info.latestRevision">ДАННЫЙ СЕРТИФИКАТ <u>ОБНОВЛЕН</u>. A NEW VERSION HAS BEEN CONSTITUTED AND <u>THIS VERSION IS NO LONGER VALID.</u></h1>
 
 					<p>Дополнительную информацию см. в журнале изменений.</p>
 				</div>
@@ -214,7 +214,7 @@
 
 		<legend ng-if="document.usages || document.usagesDescription || document.usagesConfidential || document.thirdPartyTransferCondition">Информация об использовании генетического(-их) ресурса(-ов)</legend>
 			<div ng-if="document.usages">
-				<label>Вид использования, предусматриваемый разрешением или эквивалентным документом</label>
+				<label>Type of use allowed by the permit or its equivalent</label>
 			<div compare-val>
 				<div class="km-value" ng-if="document.usages && !document.usagesConfidential">
 					<ul class="list">

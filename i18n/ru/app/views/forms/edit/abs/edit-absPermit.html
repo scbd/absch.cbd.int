@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
     <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <div ng-if="isIRCCRevoked">
                                 <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
                                 <label for="invalidForm" style="width:100%">
@@ -109,13 +112,13 @@
                                         <div class="row">
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfIssuance" required caption="Дата выдачи разрешения или эквивалентного документа">
-                                                    <div class="help-info">Данное поле предназначено для ввода даты выдачи национального разрешения. Данная информация является обязательной и имеет большое значение для обеспечения правовой определенности в отношении права пользователя на использование генетического ресурса, на который выдано разрешение.</div>
+                                                    <div class="help-info">This field refers to the date of issuance of the national permit. Данная информация является обязательной и имеет большое значение для обеспечения правовой определенности в отношении права пользователя на использование генетического ресурса, на который выдано разрешение.</div>
                                                     <div km-date placeholder="ГГГГ-ММ-ДД" required name="dateOfIssuance" ng-model="document.dateOfIssuance"></div>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="Дата истечения срока действия разрешения или эквивалентного документа">
-                                                    <div class="help-info">За два месяца до истечения срока действия разрешения КНО направляется сообщение электронной почты с напоминанием даты истечения срока действия МПССТ.</div>
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here. Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
                                                     <div km-date placeholder="ГГГГ-ММ-ДД" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -169,7 +172,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="Лицо или организация, которым предоставлено предварительное обоснованное согласие (ПОС)" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">Укажите фамилию и имя лица или название организации, которым было предоставлено предварительное обоснованное согласие, и их контактные данные. Если информация помечена как конфиденциальная, данное лицо не сможет получить в порядке любезности копию МПССТ или ККП.</div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. Если информация помечена как конфиденциальная, данное лицо не сможет получить в порядке любезности копию МПССТ или ККП.</div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
@@ -326,7 +329,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="permitDescription" caption="Краткое описание приведенную(-ые) ссылки и/или вложенный(-ые) файл(ы)">
+                                                <div class="km-control-group" name="permitDescription" caption="Short description of the attached link(s) and/or file(s)">
                                                     <div km-rich-textbox name="permitDescription" rows="6" ng-model="document.permitDescription" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -339,7 +342,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="relevantInformation" caption="Дополнительная информация">
-                                                    <div class="help-info">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
+                                                    <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                                     <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>

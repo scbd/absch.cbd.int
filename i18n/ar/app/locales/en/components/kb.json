@@ -1,9 +1,9 @@
 {
   "categories.title": "فئات المقالات",
   "loading": "قيد التحميل",
-  "the": "The",
-  "knowledgeBase"   : "Knowledge base",
-  "kbParagraph"     : "is an online tool designed to help users become familiar with the Clearing-House, learn how to submit records, search for information and complete other important tasks.",
+  "the": "",
+  "knowledgeBase": "",
+  "kbParagraph": "",
   "exploreTopics": "استكشف الموضوعات",
   "exploreParagraph": "لقد بذلنا قصارى جهدنا لتغطية جميع الموضوعات المتعلقة بهذا المنتج. يحتوي كل قسم على رقم يمثل عدد الموضوعات في كل فئة",
   "viewMore": "عرض المزيد",
@@ -18,6 +18,6 @@
   "contactUs": "اتصل بنا",
   "furtherHelp": "لمزيد من المساعدة",
   "for": "الخاصة بـ",
-  "faqs"            : "FAQs",
+  "faqs": "",
   "searchResults": "نتائج البحث"
 }

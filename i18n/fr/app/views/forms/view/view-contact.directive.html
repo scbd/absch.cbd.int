@@ -6,21 +6,21 @@
 		<document-date></document-date>
 		<div>
 			<label>Type</label>
-			<div class="km-value" compare-val><span ng-bind="document.type | lstring:locale"></span></div>
+			<div class="km-value" compare-val><span class="capitalize-first-letter" ng-bind="document.type | lstring:locale"></span></div>
 		</div>
 		<div ng-show="document.type=='organization'">
 			
 			<div ng-show="document.government">
 				<label>Pays</label>
-				<div class="km-value" compare-val>{{document.government | term:locale}} <span ng-party-status government="document.government" id="government"></span></div>
+				<div class="km-value" compare-val><span ng-bind="document.government | term:locale"></span> <span ng-party-status government="document.government" id="government"></span></div>
 			</div>
-			<div>
+			<div ng-show="document.organization || document.organizationAcronym">
                 <label>Nom</label>
-				<div class="km-value" compare-val>{{document.organization | lstring:locale}} <i ng-show="document.organizationAcronym">({{document.organizationAcronym | lstring:locale}})</i></div>
+				<div class="km-value" compare-val><span ng-bind="document.organization | lstring:locale"></span> <i ng-show="document.organizationAcronym">(<span ng-bind="document.organizationAcronym | lstring:locale"></span>)</i></div>
 			</div>
 			<div ng-show="document.organizationType">
 				<label>Type d'organisation</label>
-				<div class="km-value" compare-val>{{document.aichiTarget | term:locale}}</div>
+				<div class="km-value" compare-val><span ng-bind="document.organizationType | term:locale"></span></div>
 			</div>
 
 		</div>
@@ -29,23 +29,23 @@
 		<div ng-show="document.type=='person'">
 			 <div ng-show="document.government">
   			   <label>Pays</label>
-  			   <div class="km-value" compare-val>{{document.government | term:locale}} <span ng-party-status government="document.government" id="government"></span></div>
+  			   <div class="km-value" compare-val><span ng-bind="document.government | term:locale"></span> <span ng-party-status government="document.government" id="government"></span></div>
   		   </div>
 
             <div>
 				<label>Nom</label>
-				<div class="km-value" compare-val>{{document.prefix | lstring:locale}} {{document.firstName}} {{document.middleName}} {{document.lastName}}</div>
+				<div class="km-value" compare-val><span ng-bind="document.prefix | lstring:locale"></span> <span ng-bind="document.firstName"></span> <span ng-bind="document.middleName"></span> <span ng-bind="document.lastName"></span></div>
 			</div>
 
 
 			<div ng-show="document.designation">
 				<label>Titre du poste</label>
-				<div class="km-value" compare-val>{{document.designation| lstring:locale}}</div>
+				<div class="km-value" compare-val><span ng-bind="document.designation| lstring:locale"></span></div>
 			</div>
 
             <div ng-show="document.department">
 				<label>Section / division / unité</label>
-				<div class="km-value" compare-val>{{document.department| lstring:locale}}</div>
+				<div class="km-value" compare-val><span ng-bind="document.department| lstring:locale"></span></div>
 			</div>
 
             <div ng-show="document.contactOrganization">
@@ -67,7 +67,7 @@
             <label>Téléphone (s) :</label>
             	<div class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="item in document.phones">{{item}},</li>
+						<li ng-repeat="item in document.phones"><span ng-bind="item"></span></li>
 					</ul>
 				</div>
         </div>
@@ -76,7 +76,7 @@
             <label>Télécopieur :</label>
             	<div class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="item in document.faxes">{{item}},</li>
+						<li ng-repeat="item in document.faxes"><span ng-bind="item"></span></li>
 					</ul>
 				</div>
         </div>
@@ -85,7 +85,7 @@
             <label>courriel(s)</label>
             <div class="km-value" compare-val>
 				<ul class="list">
-					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}">{{item}},</a></li>
+					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}" ng-bind="item"></a></li>
 				</ul>
 			</div>
         </div>
@@ -93,7 +93,7 @@
         <div ng-show="document.websites">
 			<label>Adresse(s) du/des site(s) Web</label>
 			<div compare-val>
-				<div class="km-value" ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a></div>
+				<div class="km-value" ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a></div>
 			</div>
         </div>
 
@@ -108,7 +108,7 @@
 				<div ng-show="document.relevantDocuments">
 					<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
 					<div compare-val>
-						<div class="km-value" ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a></div>
+						<div class="km-value" ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a></div>
 					</div>
 				</div>
 			</div>

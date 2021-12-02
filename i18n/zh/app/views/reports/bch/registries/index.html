@@ -1,64 +1,50 @@
-<div>
-	<div class="register-content card card-1-notrans">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Registries</h3>
-			</div>
-			<div class="container-fluid bg-white registry-sections">
-				<div class="row" style="padding-top:10px">
+<div id="innerPage">
 
-					<div class="col-md-4">
-						<ul class="list-group ">
-							<li class="list-group-item">
-								<h4 class="registry-title"><strong>Living Modified Organism (LMO) Registry<span class="badge pull-right" ng-bind="::count.modifiedOrganism"></span></strong></h4>
-								<p class="card-box">The LMO Registry provides summary information on all living modified organisms registered in
-									the BCH, including transformation events, genetic modifications and the 
-									<a rel="noopener" translation-url href="https://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">unique identification code</a>
-									 (if available) for each record. Links to all decisions and risk assessment reports that refer to these organisms are accessible 
-									 through the records in the registry.
-								</p>
-								<div>
-									<a rel="noopener" translation-url class="btn btn-default" href="/registries/living-modified-organisms" role="button">View registry </a>
-								</div>
-							</li>
-						</ul>
+	<div class="mastHead">
+		<h1>登记簿</h1>
+	</div>
 
-					</div>
-					<div class="col-md-4">
-						<ul class="list-group ">
-							<li class="list-group-item">
-								<h4 class="registry-title"><strong>Organism Registry <span class="badge pull-right" ng-bind="::count.organism"> </span></strong></h4>
-								<p class="card-box">The Organism Registry includes summary information on those organisms that have been registered in the BCH 
-									as parental, recipient or donor organisms. The registry includes links to the records on each organism where further information 
-									about relevant biological characteristics, including information on taxonomic classification, common name, origin, centre of 
-									origin and centre of genetic diversity can be found. Links to records that reference the organism are provided at the bottom
-									 of each individual record.
-								</p>
-								<div>
-									<a rel="noopener" translation-url class="btn btn-default" href="/registries/organisms" role="button">View registry</a>
-								</div>
-							</li>
-						</ul>
-					</div>
-					<div class="col-md-4">
-						<ul class="list-group ">
-							<li class="list-group-item">
-								<h4 class="registry-title"><strong>Genetic Element Registry <span class="badge pull-right" ng-bind="::count.dnaSequence"> </span></strong></h4>
-								<p class="card-box">The Genetic Element Registry provides a summary of information on the genetic elements associated with 
-									the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. 
-									The registry includes links to the records on each genetic element where more details may be found. LMOs containing
-									 the particular genetic element are referenced at the bottom of the individual record.
-								</p>
-								<div>
-									<a rel="noopener" translation-url class="btn btn-default" href="/registries/genetic-elements" role="button">View registry</a>
-								</div>
-							</li>
-						</ul>
-					</div>
+	<div class="innerPageContent">
+		<div class="registry-sections">
+			<div class="row" style="padding-top:10px">
+
+				<div class="col-md-4">
+					<ul class="list-group ">
+						<li class="list-group-item">
+							<h4 class="registry-title"><strong>改性活生物体（LMO）登记薄<span
+										class="badge pull-right" ng-bind="::count.modifiedOrganism"></span></strong></h4>
+							<p class="card-box">改性活生物体注册信息提供了在生物安全信息交换所注册的所有改性活生物体的概要信息，包括转化事件，基因修改，以及每条记录的<a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">唯一识别码（</a>如适用）。可通过登记薄记录访问所有提及这些生物体之决定和风险评估报告的链接。</p>
+							<div><a rel="noopener" translation-url class="btn btn-default"
+									href="/registries/living-modified-organisms" role="button">查看登记簿</a></div>
+						</li>
+					</ul>
 
 				</div>
+				<div class="col-md-4">
+					<ul class="list-group ">
+						<li class="list-group-item">
+							<h4 class="registry-title"><strong>生物体登记库 <span class="badge pull-right"
+										ng-bind="::count.organism"></span></strong></h4>
+							<p class="card-box">生物体登记簿包括在生物安全信息交换所登记为亲体、受体或供体的生物体的概要信息。登记簿包括指向每个生物体记录的链接，可在其中找到有关生物特征的进一步信息，包括分类学分类、通用名称、起源、起源中心和遗传多样性中心的信息。提及生物体的记录的链接位于每个单个记录的最下方。</p>
+							<div><a rel="noopener" translation-url class="btn btn-default" href="/registries/organisms"
+									role="button">查看登记簿</a></div>
+						</li>
+					</ul>
+				</div>
+				<div class="col-md-4">
+					<ul class="list-group ">
+						<li class="list-group-item">
+							<h4 class="registry-title"><strong>基因片段登记簿 <span class="badge pull-right"
+										ng-bind="::count.dnaSequence"></span></strong></h4>
+							<p class="card-box">基因片段登记簿汇总了与在生物安全信息交换所登记的改性活生物体有关的基因片段的信息，包括供体生物体、赋予性状和生物功能等信息。该登记簿包括每个基因片段的记录链接，可通过此类链接找到更多详细信息。含有特定基因片段的改性活生物体在单个记录的最下方提及。</p>
+							<div><a rel="noopener" translation-url class="btn btn-default"
+									href="/registries/genetic-elements" role="button">查看登记簿</a></div>
+						</li>
+					</ul>
+				</div>
+
 			</div>
 		</div>
-
 	</div>
+
 </div>

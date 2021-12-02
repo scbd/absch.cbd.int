@@ -1,8 +1,8 @@
 ﻿<div ng-show="referenceCheckpointCommunique" dir="rtl">
-  <legend ></legend>
+  <legend >بيانات نقاط التفتيش ذات الصلة</legend>
   <div class="km-value">
     <ul class="list">
-      <li ng-repeat="cpc in referenceCheckpointCommunique"></li>
+      <li ng-repeat="cpc in referenceCheckpointCommunique"><a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{cpc.documentID}}">بيان نقطة التفتيش {{cpc | uniqueIDWithoutRevision}} - {{cpc.createdOn | formatDateWithTime }}</a></li>
     </ul>
   </div>
 

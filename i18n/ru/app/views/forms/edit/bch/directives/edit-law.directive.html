@@ -1,12 +1,12 @@
 <div>
 
-	<div class="edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -25,7 +25,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="Страна, представляющая информацию о законе, нормативном положении, руководящем принципе или соглашении">
-												<div class="help-block" ng-if="isEuMember"><u><i>Важное примечание, касающееся только членов Европейского союза (ЕС)</i></u>: если закон, нормативное положение, руководящий принцип или соглашение применяются в отношении <u>всех</u> государств — членов ЕС, запись должна быть опубликована координационным центром по МПБ. При ответе на этот вопрос координационный центр ЕС по МПБ должен выбрать «Европейский союз», и опубликованная запись появится в страновых профилях всех государств — членов ЕС.</div>
+												<div class="help-block" ng-if="isEuMember"><u><i>Important note for European Union (EU) Members only</i></u>: if the law, regulation, guideline or agreement applies to <u>all</u> EU Member States, the record must be published by the EU’s BCH focal point. При ответе на этот вопрос координационный центр ЕС по МПБ должен выбрать «Европейский союз», и опубликованная запись появится в страновых профилях всех государств — членов ЕС.</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
 												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" 
 												 placeholder="Выберите страну..." ng-change="onCountryChange(document.government)"></div>
@@ -133,7 +133,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="description" caption="Краткое описание документа, включая его цель и сферу применения">
-												<div class="help-block"><i>Цель</i> Пример: «Цель настоящего Закона заключается в содействии обеспечению надлежащего уровня защиты в области безопасной передачи, обработки и использования живых измененных организмов, являющихся результатом применения современной биотехнологии и способных оказать неблагоприятное воздействие на сохранение и устойчивое использование биологического разнообразия, с учетом также рисков для здоровья человека и с уделением особого внимания трансграничному перемещению». <br/> <br/> <i>Сфера применения</i> Пример: «Настоящие нормативные положения применяются к трансграничному перемещению, транзиту, обработке и использованию всех живых измененных растений, способных оказать неблагоприятное воздействие на сохранение и устойчивое использование биологического разнообразия, с учетом также рисков для здоровья человека».</div>
+												<div class="help-block"><i>Цель</i> Пример: «Цель настоящего Закона заключается в содействии обеспечению надлежащего уровня защиты в области безопасной передачи, обработки и использования живых измененных организмов, являющихся результатом применения современной биотехнологии и способных оказать неблагоприятное воздействие на сохранение и устойчивое использование биологического разнообразия, с учетом также рисков для здоровья человека и с уделением особого внимания трансграничному перемещению». <br/> <br/> <i>Scope</i> Example: «Настоящие нормативные положения применяются к трансграничному перемещению, транзиту, обработке и использованию всех живых измененных растений, способных оказать неблагоприятное воздействие на сохранение и устойчивое использование биологического разнообразия, с учетом также рисков для здоровья человека».</div>
 												<div km-rich-textbox ng-model="document.description" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -155,7 +155,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="documents" caption="Текст документа">
-												<div class="help-block">Предпочтительно в виде вложения. В других случаях укажите расположение документа, то есть веб-адрес, включая URL-адрес веб-сайта (например, <a rel="noopener" translation-url   href="https://www.cbd.int" target="_blank">http://www.cbd.int</a>), и название веб-сайта (например, «Конвенция о биологическом разнообразии»).</div>
+												<div class="help-block">An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. <a rel="noopener" translation-url   href="https://www.cbd.int" target="_blank">http://www.cbd.int</a>) and the name of the website (e.g. “Convention on Biological Diversity”).</div>
 												<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -221,7 +221,7 @@
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="expires" caption="Подлежит ли данная информация подтверждению или обновлению через два года после представления?" required>	
-												<div class="help-block">В случае утвердительного ответа на данный вопрос через два года после представления информации будет предложено подтвердить или обновить запись в течение трех месяцев. При отсутствии подтверждения по истечении этого периода запись будет помечена как «Неподтвержденная».</div>     
+												<div class="help-block">Если ответ на данный вопрос «Да», то спустя два года после представления информации вам будет предложено подтвердить или обновить запись в течение 3 месяцев. По истечении этого периода в случае отсутствия подтверждения запись будет отмечена как «Неподтвержденная».</div>     
 												<div class="km-yes-no" name="expires" ng-model="document.expires"></div>			
 											</div>
 										</div>
@@ -234,7 +234,7 @@
 									<legend>Дополнительная информация</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+											<div class="km-control-group" name="address" caption="Any other relevant information">
 												<div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>

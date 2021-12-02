@@ -1,27 +1,12 @@
-﻿<div ng-controller="statsController" id="RegisterPage">
+﻿<div  id="RegisterPage">
 	<link href="/app/css/register.css" rel="stylesheet">
 	<link href="/app/css/record.css" rel="stylesheet">
-	<link href="/app/css/AdminLTE.min.css" rel="stylesheet" />
-	<span register-top-menu></span>
-	<style>
-		.link-color {
-			color: #001af1;
-		}
-		
-		.bg-color {
-			background: rgb(234, 238, 243);
-		}
-		textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus {
-			border-color: #3498db;
-			outline: 0;
-			box-shadow: 0 0 0 1px #3498db;
-		}
-	</style>
-	<div class="register-content card card-1-notrans">
+	<link href="/app/css/AdminLTE.min.css" rel="stylesheet" /><span register-top-menu></span><style> .link-color { color: #001af1; } .bg-color { background: rgb(234, 238, 243); } textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus { border-color: #3498db; outline: 0; box-shadow: 0 0 0 1px #3498db; } </style>
+	<div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
 
 		<div class="register-content-header bg-pink color-white">
 			<div style="padding:10px 10px;">
-				<h3> My Country Statistics</h3>
+				<h3>Статистические данные по моей стране</h3>
 			</div>
 		</div>
 		<div class="register-content-content  bg-color">
@@ -31,13 +16,10 @@
 
 					<div class="box box-default">
 						<div class="box-header with-border">
-							<h3 class="box-title">Admin Filters</h3>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
+							<h3 class="box-title">Фильтры администратора</h3>
+						</div><!-- /.box-header --><div class="box-body">
 							<div class="row">
-								<div class="col-md-6">{{filters}}
-									 <div km-select ng-model="filters.government" binding-type="string" placeholder="Government" items="options.countries()"></div>
+								<div class="col-md-6"><span ng-bind="filters"></span><div km-select ng-model="filters.government" binding-type="string" placeholder="Правительство" items="options.countries()"></div>
 								</div>
 							</div>
 						</div>
@@ -46,116 +28,49 @@
 				<div class="col-md-6">
 					<div class="box box-success">
 						<div class="box-header with-border">
-							<h3 class="box-title">Alerts</h3>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
+							<h3 class="box-title">Оповещение</h3>
+						</div><!-- /.box-header --><div class="box-body">
 							<div class="row">
-								<div class="col-md-12">
-									<!-- Info Boxes Style 2 -->
-									<div class="info-box bg-green">
-										<span class="info-box-icon"><i class="fa fa-check-square-o"></i></span>
-
-										<div class="info-box-content">
-											<span class="info-box-text">Competant National Authority</span>
-											<span class="info-box-number">1</span>
-											<div class="progress">
+								<div class="col-md-12"><!-- Info Boxes Style 2 --><div class="info-box bg-green"><span class="info-box-icon"><i class="fa fa-check-square-o"></i></span><div class="info-box-content"><span class="info-box-text">Компетентный национальный орган</span> <span class="info-box-number">1</span><div class="progress">
 												<div class="progress-bar" style="width: 100%"></div>
 											</div>
 
-										</div>
-										<!-- /.info-box-content -->
-									</div>
-									<!-- /.info-box -->
-									<div class="info-box" ng-class="{'bg-red' : !hasPublishingAuthority, 'bg-green': hasPublishingAuthority}">
-										<span class="info-box-icon"><i class="fa" ng-class="{'fa-check-square-o' : hasPublishingAuthority, 'fa-times': !hasPublishingAuthority}"></i></span>
-										<div class="info-box-content">
-											<span class="info-box-text">Publishing Authority</span>
-											<span class="info-box-number" ng-if="!hasPublishingAuthority">0</span>
-
-											<div class="progress">
+										</div><!-- /.info-box-content --></div><!-- /.info-box --><div class="info-box" ng-class="{'bg-red' : !hasPublishingAuthority, 'bg-green': hasPublishingAuthority}"><span class="info-box-icon"><i class="fa" ng-class="{'fa-check-square-o' : hasPublishingAuthority, 'fa-times': !hasPublishingAuthority}"></i></span><div class="info-box-content"><span class="info-box-text">Публикующий орган</span> <span class="info-box-number" ng-if="!hasPublishingAuthority">0</span><div class="progress">
 												<div class="progress-bar" style="width: 0%" ng-style="{'width:100%' : hasPublishingAuthority}"></div>
-											</div>
-											<span class="progress-description">
-												You have <span ng-if="!hasPublishingAuthority">not </span>
-												designated publishing authority in ABS-CH
-												 <a rel="noopener" href="/register/national-users"  class="link-color"> Click to add</a>
-											</span>
-										</div>
-										<!-- /.info-box-content -->
-									</div>
+											</div><span class="progress-description">You have <span ng-if="!hasPublishingAuthority">not</span> designated publishing authority in ABS-CH <a rel="noopener" href="/register/national-users"  class="link-color">Click to add</a></span></div><!-- /.info-box-content --></div>
 
 
-									<div class="info-box bg-red" ng-repeat="schema in schemas" ng-if="getDocumentsForUpdate(schema.schema).length>0||(schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0)">
-										<span class="info-box-icon"><i class="fa fa-times"></i></span>
-										<div class="info-box-content">
-											<div>
-												<span class="info-box-text">{{schema.label}}</span>
-												<span class="info-box-number">{{schema.value}}</span>
-
-												<div class="progress">
+									<div class="info-box bg-red" ng-repeat="schema in schemas" ng-if="getDocumentsForUpdate(schema.schema).length>0||(schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0)"><span class="info-box-icon"><i class="fa fa-times"></i></span><div class="info-box-content">
+											<div><span class="info-box-text" ng-bind="schema.label"></span> <span class="info-box-number" ng-bind="schema.value"></span><div class="progress">
 													<div class="progress-bar" style="width: 70%"></div>
-												</div>
-												<span class="progress-description">
-
-													<div ng-if="schema.value>0 && schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0">
-														You have {{measureElementMissing.length}} MSR which are missing ABS elements of measures
-														<span class="pull-right text-black">
-															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
-															aria-expanded="false" aria-controls="list{{schema.schema}}_Elm"> 
-																<i class="fa fa-angle-down"></i> view
-															</a>
-														</span>
-													</div>
+												</div><span class="progress-description"><div ng-if="schema.value>0 && schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0">У вас есть запись <span ng-bind="measureElementMissing.length"></span> МЕР, в которой отсутствуют элементы мер регулирования ДГРСВ. <span class="pull-right text-black"><a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
+															aria-expanded="false" aria-controls="list{{schema.schema}}_Elm"><i class="fa fa-angle-down"></i> Просмотреть</a></span></div>
 													<div class="box-footer no-padding collapse" id="list{{schema.schema}}_Elm" 
 														ng-if="schema.value>0 && schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0">
-														<div class="box-body" style="overflow: scroll;max-height: 300px;">
-															<!--Following records are missing elements of measures-->
-															<table class="table table-bordered" style="color:black">
+														<div class="box-body" style="overflow: scroll;max-height: 300px;"><!--Following records are missing elements of measures--><table class="table table-bordered" style="color:black">
 																<tbody>
 																	<tr ng-repeat="document in measureElementMissing">
 																	<th >#</th>
-																	<th>{{document.title|lstring}}</th>
-																	<th>{{document|uniqueID}}</th>
+																	<th ng-bind="document.title|lstring"></th>
+																	<th ng-bind="document|uniqueID"></th>
 																	</tr>
 																</tbody>
 															</table>
 														</div>
 													</div>
-													<div ng-if="schema.value>0 && getDocumentsForUpdate(schema.schema).length > 0">
-														You have {{schema.value}} {{schema.schema|schemaShortName}}, {{getDocumentsForUpdate(schema.schema).length}} of which require updates
-														<span class="pull-right text-black">
-															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
-															aria-expanded="false" aria-controls="list{{schema.schema}}"> 
-																<i class="fa fa-angle-down"></i> view
-															</a>
-														</span>
-													</div>
-													<div ng-if="schema.value==0">
-														You have not published any {{schema.schema|schemaShortName}} in ABS-CH 
-														<a rel="noopener" ng-href="/register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="pull-right link-color"> 
-															click to add
-														</a>
-													</div>
-												</span>
-											</div>
+													<div ng-if="schema.value>0 && getDocumentsForUpdate(schema.schema).length > 0">У вас есть <span ng-bind="schema.value+' '+schema.schema|schemaShortName+', '+getDocumentsForUpdate(schema.schema).length"></span>, из которых требуют обновления. <span class="pull-right text-black"><a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
+															aria-expanded="false" aria-controls="list{{schema.schema}}"><i class="fa fa-angle-down"></i> Просмотреть</a></span></div>
+													<div ng-if="schema.value==0">У вас нет <span ng-bind="schema.schema|schemaShortName"></span>, опубликованных в МП-ДГРСИВ. <a rel="noopener" ng-href="/register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="pull-right link-color">Щелкните, чтобы добавить</a></div></span></div>
 											<div class="box-footer no-padding collapse" id="list{{schema.schema}}" ng-if="schema.value>0">
 												
 												<ul class="nav nav-pills nav-stacked">
-													<li ng-repeat="document in getDocumentsForUpdate(schema.schema)">
-															<a rel="noopener" href="/database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_blank">  
-																<div>
-																	<span class=" text-green">{{document.uniqueIdentifier_s|uppercase}}</span>
-																	{{document.title_t}}
-																</div>
-															</a>
-															<div class="box-body">
+													<li ng-repeat="document in getDocumentsForUpdate(schema.schema)"><a rel="noopener" href="/database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_blank"><div><span class=" text-green" ng-bind="document.uniqueIdentifier_s|uppercase"></span> <span ng-bind="document.title_t"></span></div></a><div class="box-body">
 																<table class="table table-bordered" style="color:black">
 																	<tbody>
 																		<tr ng-repeat="documentUpdate in document.idForUpdate">
 																		<th >#</th>
-																		<th>{{documentUpdate.uid|uppercase}}</th>
-																		<th>{{documentUpdate.newVersion}}</th>
+																		<th ng-bind="documentUpdate.uid|uppercase"></th>
+																		<th ng-bind="documentUpdate.newVersion"></th>
 																		</tr>
 																	</tbody>
 																</table>
@@ -174,37 +89,21 @@
 
 					<div class="box box-success">
 						<div class="box-header with-border">
-							<h3 class="box-title">Records</h3>
-						</div>
-						<!-- /.box-header -->
-						<div class="box-body">
+							<h3 class="box-title">Записи</h3>
+						</div><!-- /.box-header --><div class="box-body">
 							<div class="row">
 								<div class="col-md-10">
 									<div class="chart-responsive">
 										<canvas id="pieChart" height="160" width="332" style="width: 332px; height: 160px;"></canvas>
-									</div>
-									<!-- ./chart-responsive -->
-								</div>
-								<!-- /.col -->
-								<div class="col-md-2 pull-right">
+									</div><!-- ./chart-responsive --></div><!-- /.col --><div class="col-md-2 pull-right">
 									<ul class="chart-legend clearfix">
-										<li ng-repeat="schema in schemas"><i class="fa fa-circle-o {{schema.class}}"></i> {{schema.value}} {{schema.schema|schemaShortName}}</li>
+										<li ng-repeat="schema in schemas"><i class="fa fa-circle-o {{schema.class}}"></i><span ng-bind="schema.value+' '+schema.schema|schemaShortName"></span></li>
 									</ul>
-								</div>
-								<!-- /.col -->
-							</div>
-							<!-- /.row -->
-						</div>
-						<!-- /.box-body -->
-						<div class="box-footer no-padding">
+								</div><!-- /.col --></div><!-- /.row --></div><!-- /.box-body --><div class="box-footer no-padding">
 							<ul class="nav nav-pills nav-stacked">
-								<li ng-repeat="schema in schemas"><a rel="noopener" href="#"> {{schema.label}}
-                  					<span class="pull-right text-red"><i class="fa fa-search"></i> {{schema.value}}</span></a>
-								</li>
+								<li ng-repeat="schema in schemas"><a rel="noopener" href="#"><span ng-bind="schema.label"></span> <span class="pull-right text-red"><i class="fa fa-search"></i> <span ng-bind="schema.value"></span></span></a></li>
 							</ul>
-						</div>
-						<!-- /.footer -->
-					</div>
+						</div><!-- /.footer --></div>
 				</div>
 			</div>
 		</div>

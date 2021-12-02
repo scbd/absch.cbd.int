@@ -58,6 +58,10 @@
 				<km-value-ml value="document.currentEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
+			<div ng-if="document.currentEmployment.organizationType">
+				<label>机构类型</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.organizationType|term:locale"></span></div>
+			</div>
 			<div ng-if="document.currentEmployment.title">
 				<label>头衔</label>
 				<div compare-val>
@@ -104,8 +108,12 @@
 			<div ng-if="document.previousEmployment.name">
 				<label>先前雇主/组织/公司名称</label>
 				<div compare-val>
-				<km-value-ml value="document.previousEmployment.name" locales="locale"></km-value-ml>
+				<km-value-ml  km-pre value="document.previousEmployment.name" locales="locale"></km-value-ml>
 				</div>
+			</div>
+			<div ng-if="document.previousEmployment.organizationType">
+				<label>机构类型</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.previousEmployment|term:locale"></span></div>
 			</div>
 			<div ng-if="document.previousEmployment.department">
 				<label>部门/分支机构/单位</label>

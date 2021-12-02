@@ -1,49 +1,30 @@
 ﻿<div class="main-nav">
 
-    <style>
-        a[href]:after {
-            content: '';
-        }
-        #printContentHeader .row{
-            margin:auto;
-        }
-    </style>
-    <div ng-controller="contactPdfView">
+    <style> a[href]:after { content: ''; } #printContentHeader .row{ margin:auto; } </style>
+    <div >
         <div class="row">
             <div class="col-xs-12">
                 <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>                
                 <div class="col-xs-12 bg-green">
-                    <h1 class="color-litegreen  text-center" style="padding:0;">
-                        {{title(schema)}}
-                    </h1>
+                    <h1 class="color-litegreen  text-center" style="padding:0;">{{title(schema)}}</h1>
                 </div>
 
-                <div class="col-xs-12">
-                    <br/> 
-                    <div class="row">
+                <div class="col-xs-12"><br/><div class="row">
                         <div ng-repeat-start="contact in absch_nfp|orderBy:'government_EN_t'"class="col-xs-4">                        
                             <div class="panel panel-default" ng-class="{'panel-success':contact.schema_s=='focalPoint',
                                                                     'panel-warning':contact.schema_s=='absCheckpoint',
                                                                     'panel-info':contact.schema_s=='authority'||contact.schema_s=='database'}">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title">
-                                        <a rel="noopener" ng-href="/countries/{{contact.government_s|encodeURIComponent}}" ng-bind="contact.government_EN_t"></a>
-                                    </h4>
+                                    <h4 class="panel-title"><a rel="noopener" ng-href="/countries/{{contact.government_s|encodeURIComponent}}" ng-bind="contact.government_EN_t"></a></h4>
                                 </div>
-                                <div class="panel-body">
-                                    <a rel="noopener" ng-href="/database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase|encodeURIComponent}}">{{contact.title_t}}</a>
-                                    <div ng-show="contact.description_t" ng-bind-html="contact.description_t"></div>
+                                <div class="panel-body"><a rel="noopener" ng-href="/database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase|encodeURIComponent}}" ng-bind="contact.title_t"></a><div ng-show="contact.summary_t" ng-bind-html="contact.summary_t"></div>
                                     <ul ng-show="contact.telephones || contact.telephone_ss || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">                                        
-                                        <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss">
-                                            {{item}}</li>
-                                        <li ng-show="contact.telephones" ng-repeat="item in contact.telephones">
-                                            {{item}}</li>
-                                        <li ng-show="contact.fax_ss" ng-repeat="item in contact.fax_ss"> {{item}}</li>
+                                        <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss"><span ng-bind="item"></span></li>
+                                        <li ng-show="contact.telephones" ng-repeat="item in contact.telephones"><span ng-bind="item"></span></li>
+                                        <li ng-show="contact.fax_ss" ng-repeat="item in contact.fax_ss"><span ng-bind="item"></span></li>
                                     </ul>
                                     <ul ng-show="contact.emails || contact.email_ss" style="list-style-type: none;padding:0;margin:0;">
-                                        <li ng-repeat="item in contact.emails || contact.email_ss"><a rel="noopener" ng-href="mailto:{{item|encodeURIComponent}}">
-                                                {{item}}</a>
-                                        </li>
+                                        <li ng-repeat="item in contact.emails || contact.email_ss"><a rel="noopener" ng-href="mailto:{{item|encodeURIComponent}}" ng-bind="item"></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -52,29 +33,11 @@
                     </div>
                 </div>
                 
-                <legend>Further Information</legend>
+                <legend>Pour plus d'informations</legend>
                 <table class="top-border">
                     <tr>
-                        <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">
-                            Questions about the permit or its equivalent constituting an internationally recognized certificate of compliance should
-                            be addressed to the competent national authority issuing the permit or its equivalent. Additional information
-                            about the permit or its equivalent may be available in the Access and Benefit-Sharing Clearing House
-                            (
-                            <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>).
-                            <br>
-                            <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and
-                            Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
-                        </td>
-                        <td class="col-md-6" style="font-size:12px;vertical-align: top">
-                            <strong>Secretariat of the Convention on Biological Diversity</strong>
-                            <br/> 413 rue Saint-Jacques, suite 800
-                            <br/> Montreal, Québec, H2Y 1N9
-                            <br/> Canada
-                            <br/> Fax: +1 514 288-6588
-                            <br/> Email:
-                            <a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
-
-                        </td>
+                        <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">Les questions au sujet des permis ou leurs équivalents qui constituent un certificat de respect des obligations internationalement reconnu doivent être envoyées à l’autorité nationale compétence qui émet le permis ou son équivalent. Des informations supplémentaires sur le permis ou son équivalent pourraient être disponibles au Centre d’échange d’informations sur l’accès et le partage des avantages. (<a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> Les questions sur le Protocole de Nagoya sur l’accès et le partage des avantages ou sur le fonctionnement du Centre d’échange d’informations sur l’accès et le partage des avantages peuvent être envoyées au Secrétariat de la Convention sur la diversité biologique.</td>
+                        <td class="col-md-6" style="font-size:12px;vertical-align: top"><strong>Secrétariat de la Convention sur la diversité biologique</strong> <br/> 413 rue Saint-Jacques, suite 800 <br/> Montréal, Québec, H2Y 1N9 <br/> Canada <br/> Télécopieur : +1 514 288-6588 <br/> Adresse courriel  <a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a></td>
                     </tr>
                 </table>
             </div>

@@ -4,7 +4,7 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <edit-form>
                         <form name="editForm" class="editForm" style="margin-top:10px">
 								<div ng-show="tab=='edit'" km-tab="edit">
@@ -35,7 +35,7 @@
 													<label class="radio-inline">
 														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />Организация</label>
 													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Физическое лицо</label>
+														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Person</label>
 												</div>
 											</div>
 										</div>
@@ -45,7 +45,7 @@
 			
 										<div ng-if="document.type=='person'">
 			
-											<legend>Персональные данные</legend>
+											<legend>Personal Information</legend>
 			
 											<div class="row">
 			
@@ -102,7 +102,7 @@
 											</div>
 										</div>
 										<div ng-if="document.type=='organization'">
-											<legend>Информация об организации</legend>
+											<legend>Organization Information</legend>
 											<div class="row">
 												<div class="col-md-7 col-xs-12">
 													<div class="km-control-group" name="organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Организация">
@@ -129,7 +129,7 @@
 												</div>
 												<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
 													<div class="km-control-group" name="organizationTypeName" caption="Другой тип организации">
-														<div km-textbox-ml name="organizationTypeName" ng-model="document.organizationType.customValue" placeholder="пример: СКБР" locales="document.header.languages"></div>
+														<div km-textbox-ml name="organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: СКБР" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
@@ -165,7 +165,7 @@
 													</div>
 				
 													<div class="col-md-6">
-														<div class="km-control-group" name="state" caption="Штат или провинция">
+														<div class="km-control-group" name="state" caption="State or Province">
 															<div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages" placeholder="пример: Quebec" ng-change="setAddressType()"></div>
 														</div>
 													</div>
@@ -236,14 +236,14 @@
 											<div class="col-md-6 col-xs-12">
 												<div class="km-control-group" name="phones" caption="Номер(а) телефона(-ов)">
 													<div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
-													<div km-inputtext-list name="phones" ng-model="document.phones" placeholder="пример: +1 514.288.2220"></div>
+													<div km-inputtext-list name="phones" ng-model="document.phones" placeholder="example: +1 514.288.2220"></div>
 												</div>
 											</div>
 			
 											<div class="col-md-6 col-xs-12">
 												<div class="km-control-group" name="faxes" caption="Номер(а) факса(-ов)">
 													<div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
-													<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="пример: +1 514.288.6588"></div>
+													<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
 												</div>
 											</div>
 										</div>

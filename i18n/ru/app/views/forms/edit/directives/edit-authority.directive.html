@@ -1,6 +1,6 @@
-<div>
+<div >
   
-    <div class="edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -9,7 +9,7 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <edit-form>
                     <form class="editForm" name="editForm">
                         <div ng-show="tab=='edit'" km-tab="edit">
@@ -74,7 +74,7 @@
                                     </div>
 
                                     <div class="col-xs-6">
-                                        <div class="km-control-group" name="state" caption="Штат или провинция">
+                                        <div class="km-control-group" name="state" caption="State or Province">
                                             <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
                                                 placeholder="пример: Quebec"></div>
                                         </div>
@@ -106,7 +106,7 @@
                                         <div class="km-control-group" name="phones" required caption="Номер(а) телефона(-ов)">
                                             <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
-                                                required placeholder="пример: +1 514.288.2220"></div>
+                                                required placeholder="example: +1 514.288.2220"></div>
                                         </div>
                                     </div>
 
@@ -114,7 +114,7 @@
                                         <div class="km-control-group" name="faxes" caption="Номер(а) факса(-ов)">
                                             <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
-                                                placeholder="пример: +1 514.288.6588"></div>
+                                                placeholder="example: +1 514.288.6588"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -142,6 +142,7 @@
                                 <div class="col-xs-12">
                                     <div class="km-control-group" name="contacts" caption="Контактное лицо">
                                         <div document-selector ng-model="document.contacts" question="contacts"
+                                            ng-disabled="!document.government.identifier" 
                                             on-build-query="onContactQuery(searchText)" allow-new="true"
                                             allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
 
@@ -180,7 +181,7 @@
                                         <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="responsibleForAllNot"
                                             caption="Для вашей страны уже назначен КНО; просьба уточнить круг обязанностей каждого КНО."></div>
 
-                                        <div class="km-control-group" name="responsibleForAll" required caption="Является ли данный назначенный компетентный национальный орган (КНО) единственным в вашей стране? В случае отрицательного ответа опишите обязанности данного компетентного национального органа (КНО).">
+                                        <div class="km-control-group" name="responsibleForAll" required caption="Является ли данный назначенный компетентный национальный орган (КНО) единственным в вашей стране? If “no”, please describe the responsibilities of this competent national authority (CNA).">
 
                                             <div km-yes-no required ng-model="document.responsibleForAll"
                                                 locales="document.header.languages"></div>
@@ -236,7 +237,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="absGeneticResourceTypes"
                                                         caption="Ключевые слова, описывающие круг обязанностей КНО">
-                                                        <div class="help-info">Сбор данной информации имеет большое значение для облегчения унифицированного поиска по записям. Выберите все соответствующие ключевые слова, которые могут помочь описать обязанности компетентного национального органа.</div>
+                                                        <div class="help-info">The collection of this information is important for facilitating harmonized searches throughout the records. Выберите все соответствующие ключевые слова, которые могут помочь описать обязанности компетентного национального органа.</div>
                                                         <div km-select multiple name="absGeneticResourceTypes"
                                                             ng-model="document.absGeneticResourceTypes" items="options.keywords()"
                                                             show-description="true"></div>
@@ -292,10 +293,10 @@
                             </section>
                             <section ng-if="isBch">
                                 <legend>Срок подтверждения или обновления информации</legend>
-                                <div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. По истечении установленного предельного срока вам будет предложено подтвердить или обновить запись в течение трех месяцев. При отсутствии подтверждения по истечении этого периода запись будет помечена как «Неподтвержденная».</div>
+                                <div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. После этого срока Вам будет предложено подтвердить или обновить запись в течение 3-х месяцев. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.</div>
                             </section>
                             <section>
-                                <legend>Дополнительные сведения</legend>
+                                <legend>Additional Information</legend>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="relevantInformation" caption="Дополнительные сведения">

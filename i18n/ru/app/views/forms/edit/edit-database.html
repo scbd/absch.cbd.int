@@ -1,8 +1,8 @@
 ﻿<div >
 
-	<div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+	<edit-header></edit-header>
 
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
@@ -31,7 +31,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="title" required caption="Название веб-сайта или базы данных">
-											<div class="help-info">Введите название веб-сайта или базы данных в том виде, в котором вы хотели бы, чтобы оно было представлено в заголовке записи.</div>
+											<div class="help-info">Please enter the name of the website or database as you would like it to appear in the title of the record.</div>
 											<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages"
 											 placeholder="пример: Название"></div>
 										</div>
@@ -40,7 +40,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="description" required caption="Описание">
-											<div class="help-info">Кратко опишите национальный веб-сайт или национальную базу данных (например, их функции или информацию, доступ к которой они обеспечивают).</div>
+											<div class="help-info">Please enter a short description of the national website or database, such as its function or information it makes available.</div>
 											<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages"
 											 placeholder="пример: Описание"></div>
 										</div>
@@ -58,7 +58,7 @@
 
 							<section ng-if="realm.is('BCH')">
 								<legend>Срок подтверждения или обновления информации</legend>
-								<div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. По истечении установленного предельного срока вам будет предложено подтвердить или обновить запись в течение трех месяцев. При отсутствии подтверждения по истечении этого периода запись будет помечена как «Неподтвержденная».</div>
+								<div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. После этого срока Вам будет предложено подтвердить или обновить запись в течение 3-х месяцев. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.</div>
 							</section>
 
 							<section>
@@ -67,7 +67,7 @@
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+										<div class="km-control-group" name="address" caption="Any other relevant information">
 											<div class="help-info">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>

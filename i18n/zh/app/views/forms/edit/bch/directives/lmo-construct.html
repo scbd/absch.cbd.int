@@ -77,10 +77,9 @@
                 <td class="left" >&nbsp;</td>
                 <td class="middle">
                     <div ng-show="!item.gene"><span ng-if="item.type=='senseStart'"    >转录开始</span> <span ng-if="item.type=='sense'"         >转录片段</span> <span ng-if="item.type=='senseStop'"     >转录停止</span> <span ng-if="item.type=='antisenseStart'">转录开始</span> <span ng-if="item.type=='antisense'"     >转录片段</span> <span ng-if="item.type=='antisenseStop'" >转录停止</span></div>
-                    <div>                            
-                            <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="contacts" caption="（意义）" type="radio"
-                                schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)" skip-government="true" 
-                                allow-new="true" allow-new-schema="dnaSequence">
+
+                         <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="dnaSequence" caption="（意义）" type="radio"
+                                on-build-query="onDnaSequenceQuery(searchText)" filter="true" ng-change="geneSelected(item)" allow-new="true" allow-new-schema="dnaSequence">
                                 <select-records><a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">选择基因</a> <a rel="noopener" ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a></select-records>
                                 <selected-records>
                                     <div ng-show="$parent.$parent.item.gene">#<span ng-bind="$parent.$parent.item.gene.documentID"></span> &nbsp;<input type="number" ng-model="item.size" style="width:50px" min="0"/>KB</div>

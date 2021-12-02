@@ -35,7 +35,7 @@
 			</div>
 			<div class="panel-body">
 				<div>
-					<label>3. Распространила ли ваша страна информацию через Механизм посредничества для регулирования ДГРСИВ, как предусмотрено в статье 14.2?</label>
+					<label>3. Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question3.answer)}}</div>
 						<div  ng-show="document.question3.challengesInfo" >
@@ -50,7 +50,7 @@
 				</div>
 
 				<div>
-					<label>4. Принимала ли ваша страна правовые, административные и политические меры касательно ДГРСИВ?</label>
+					<label>4. Has your country taken legislative, administrative and policy measures on ABS?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question4.answer)}}</div>
 
@@ -154,7 +154,7 @@
 				</div>
 
 				<div>
-					<label>8. Представляла ли ваша страна в Механизм посредничества для регулирования ДГРСИВ разрешения или их эквиваленты, являющиеся международно признанным сертификатом о соответствии требованиям, как предусмотрено в статье 17.2?</label>
+					<label>«8. Представляла ли ваша страна в Механизм посредничества для регулирования ДГРСИВ разрешения или их эквиваленты, являющиеся международно признанным сертификатом о соответствии требованиям, как предусмотрено в статье 17.2?</label>
 					<ul>
 						<div class="km-value" compare-val ng-show="document.question8.notApplicable">Не применимо, поскольку отсутствуют требования, регулирующие доступ.</div>
 						<div class="km-value km-pre" compare-val ng-show="!document.question8.notApplicable">{{booleanToText(document.question8.answer)}}</div>
@@ -241,7 +241,7 @@
 					</div>
 					<div class="panel-body">
 						<div>
-							<label>11. Регулируется ли доступ к генетическим ресурсам на основе ПОС, предусмотренного статьей 6.1?</label>
+							<label>11. Is access to genetic resources subject to PIC as provided in Article 6.1?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question11.answer)}}</div>
 								<div ng-show="document.question11.challengesInfo">
@@ -267,7 +267,7 @@
 						</div>
 
 						<div>
-							<label>12. Установлены ли в вашей стране справедливые и недискриминационные правила и процедуры доступа к генетическим ресурсам, предусмотренные в пункте b) статьи 6.3?</label>
+							<label>12. Does your country have fair and non-arbitrary rules and procedures on accessing genetic resources as provided in Article 6.3 (b)?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question11.answer,document.question12.answer)}}</div>
 								<div ng-show="document.question12.furtherInfo">
@@ -289,7 +289,7 @@
 						</div>
 
 						<div>
-							<label>13. Предоставляет ли ваша страна информацию о процедуре подачи заявки на получение предварительного обоснованного согласия, как это предусмотрено в пункте с) статьи 6.3?</label>
+							<label>13. Does your country provide information on how to apply for PIC as provided in Article 6.3(c)?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question11.answer,document.question13.answer)}}</div>
 								<div ng-show="document.question13.furtherInfo">
@@ -311,7 +311,7 @@
 						</div>
 
 						<div>
-							<label>14. Обеспечивает ли ваша страна представление компетентным национальным органом четкого и прозрачного письменного решения, как это предусмотрено в пункте d) статьи 6.3?</label>
+							<label>14. Does your country provide for a clear and transparent written decision by a competent national authority as provided in Article 6.3 (d)?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question11.answer,document.question14.answer)}}</div>
 								<div ng-show="document.question14.furtherInfo">
@@ -333,7 +333,7 @@
 						</div>
 
 						<div>
-							<label>15. Обеспечивает ли ваша страна выдачу в момент доступа разрешения или эквивалентного документа, как предусмотрено в пункте е) статьи 6.3?</label>
+							<label>15. Does your country provide for the issuance at the time of access of a permit or its equivalent as provided in Article 6.3 (e)?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question11.answer,document.question15.answer)}}</div>
 								<div ng-show="document.question15.furtherInfo">
@@ -355,9 +355,9 @@
 						</div>
 
 						<div>
-							<label>16. Представьте число разрешений или их эквивалентов, распространенных через Механизм посредничества для регулирования ДГРСИВ со времени вступления в силу Протокола для вашей страны.</label>
+							<label>16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.</label>
 							<ul>
-								<div class="km-value" compare-val>{{document.question11.answer? ((document.question16.hasOwnProperty('permitsOnAbsCh')&&document.question16.permitsOnAbsCh!=null)? document.question16.permitsOnAbsCh: "Ответ не представлен") : "Не применимо"}}</div>
+								<div class="km-value" compare-val>{{document.question11.answer? ((document.question16.hasOwnProperty('permitsOnAbsCh')&&document.question16.permitsOnAbsCh!=null)? document.question16.permitsOnAbsCh: "No answer provided") : "Not applicable"}}</div>
 
 								<div ng-show="document.question16.furtherInfo">
 									<label>Используйте поле для ввода текста для представления дополнительной информации</label>
@@ -378,7 +378,7 @@
 						</div>
 
 						<div>
-							<label>17. Введены ли в вашей стране четкие правила и процедуры требования и установления ВСУ, предусмотренные в пункте g) статьи 6.3?</label>
+							<label>17. Does your country have rules and procedures for requiring and establishing MAT as provided in Article 6.3 (g)?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question11.answer,document.question17.answer)}}</div>
 								<div ng-show="document.question17.furtherInfo">
@@ -400,24 +400,24 @@
 						</div>
 
 						<div>
-							<label>18. Выгоды, полученные со времени вступления в силу Протокола для вашей страны от использования:</label>
+							<label>18. Benefits received since entry into force of the Protocol for your country from the utilization of:</label>
 							<ul>
 								<div ng-if="!document.question18.geneticResources.answer && !document.question18.tk.answer" >
 									<div class="km-value km-pre">Ничего не выбрано</div>
 								</div>
 								<div ng-if="document.question18.geneticResources.answer">
-									<label>Генетические ресурсы</label>
+									<label>Genetic resources</label>
 									<ul>
 										<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.geneticResources.answer)}}</div>
 										<ul ng-if="document.question18.geneticResources.monetary">
-											<label>Денежные выгоды</label>
+											<label>Monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.geneticResources.monetary)}}</div>
 											<div ng-show="document.question18.geneticResources.monetaryInfo">
 												<div class="km-value pre-wrap" compare-val><span ng-bind="document.question18.geneticResources.monetaryInfo | lstring:locale"></span></div>
 											</div>
 										</ul>
 										<ul ng-if="document.question18.geneticResources.nonMonetary">
-											<label>Неденежные выгоды</label>
+											<label>Non-monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.geneticResources.nonMonetary)}}</div>
 											<div ng-show="document.question18.geneticResources.nonMonetaryInfo">
 												<div class="km-value pre-wrap" compare-val>{{document.question18.geneticResources.nonMonetaryInfo | lstring:locale}}</div>
@@ -426,11 +426,11 @@
 									</ul>
 								</div>
 								<div ng-if="document.question18.tk.answer">
-									<label>Традиционные знания, связанные с генетическими ресурсами</label>
+									<label>Traditional knowledge associated with genetic resources</label>
 									<ul>
 										<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.tk.answer)}}</div>
 										<ul ng-if="document.question18.tk.monetary">
-											<label>Денежные выгоды</label>
+											<label>Monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.tk.monetary)}}</div>
 											<div ng-show="document.question18.tk.monetaryInfo">
 												<div class="km-value pre-wrap" compare-val><span ng-bind="document.question18.tk.monetaryInfo | lstring:locale"></span></div>
@@ -438,7 +438,7 @@
 										</ul>
 
 										<ul ng-if="document.question18.tk.nonMonetary">
-											<label>Неденежные выгоды</label>
+											<label>Non-monetary benefits</label>
 											<div class="km-value km-pre" compare-val>{{q18BooleanToText(document.question18.tk.nonMonetary)}}</div>
 											<div ng-show="document.question18.tk.nonMonetaryInfo">
 												<div class="km-value pre-wrap" compare-val><span ng-bind="document.question18.tk.nonMonetaryInfo | lstring:locale"></span></div>
@@ -499,7 +499,7 @@
 					</div>
 					<div class="panel-body">
 						<div>
-							<label>20. Приняты ли в вашей стране правовые, административные или политические меры по осуществлению статьи 5.1, которые предусматривают, что выгоды от использования генетических ресурсов, а также дальнейшего применения и коммерциализации совместно используются со Стороной, предоставляющей такие ресурсы, которая является страной происхождения таких ресурсов или Стороной, которая приобрела такие ресурсы в соответствии с положениями Конвенции, как предусмотрено в статье 5.3?</label>
+							<label>20. Has your country taken legislative, administrative or policy measures to implement Article 5.1 that provides that benefits arising from the utilization of genetic resources as well as subsequent applications and commercialization are shared with the Party providing such resources that is the country of origin of such resources or a Party that has acquired the genetic resources in accordance with the Convention as provided in Article 5.3?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question20.answer)}}</div>
 								<div ng-show="document.question20.furtherInfo">
@@ -521,7 +521,7 @@
 						</div>
 
 						<div>
-							<label>21. Приняты ли в вашей стране правовые, административные или политические меры в целях обеспечения того, чтобы выгоды от использования генетических ресурсов, которые находятся в ведении коренных и местных общин в соответствии с положениями внутреннего законодательства, регулирующего установленные права данных коренных и местных общин на такие генетические ресурсы, совместно использовались справедливым и равным образом с соответствующими общинами на основе взаимосогласованных условий в соответствии со статьей 5.2?</label>
+							<label>21. Has your country taken legislative, administrative or policy measures with the aim of ensuring that the benefits from the utilization of genetic resources held by indigenous and local communities, in accordance with domestic legislation regarding the established rights of these indigenous and local communities over these genetic resources, are shared with the indigenous and local communities concerned as provided in Article 5.2?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question21.answer)}}</div>
 								<div ng-show="document.question21.furtherInfo">
@@ -543,7 +543,7 @@
 						</div>
 
 						<div>
-							<label>22. Приняты ли в вашей стране правовые, административные или политические меры по регулированию ДГРСИВ для обеспечения совместного использования на справедливой и равной основе выгод от применения традиционных знаний, связанных с генетическими ресурсами, с коренными и местными общинами, являющимися носителями таких знаний, как это предусмотрено статьей 5.5?</label>
+							<label>22. Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question22.answer)}}</div>
 								<div ng-show="document.question22.furtherInfo">
@@ -597,7 +597,7 @@
 					<div class="panel-body">
 
 						<div>
-							<label>24. Приняты ли в вашей стране надлежащие эффективные и пропорциональные правовые, административные или политические меры для обеспечения того, чтобы доступ к генетическим ресурсам, используемым в пределах ее юрисдикции, осуществлялся в соответствии с обоснованным предварительным согласием и чтобы были заключены взаимосогласованные условия в соответствии с требованиями внутреннего законодательства по регулированию ДГРСИВ или регулятивными требованиями другой Стороны, как это предусмотрено статьей 15.1?</label>
+							<label>24. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that genetic resources utilized within your jurisdiction have been accessed in accordance with PIC and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party as provided in Article 15.1?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question24.answer)}}</div>
 								<div ng-show="document.question24.answer">
@@ -614,7 +614,7 @@
 										</div>
 									</ul>
 
-									<label>Имеются ли конкретные примеры сотрудничества вашей страны с другими Сторонами в случаях предполагаемого нарушения мер по регулированию ДГРСИВ, как это предусмотрено статьей 15.3?</label>
+									<label>Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?</label>
 									<ul>
 										<div class="km-value km-pre" compare-val>{{booleanToText(document.question24.violation.answer)}}</div>
 										<div ng-show="document.question24.violation.furtherInfo">
@@ -642,11 +642,11 @@
 						</div>
 
 						<div>
-							<label>25. Приняты ли в вашей стране надлежащие эффективные и пропорциональные правовые, административные или политические меры для обеспечения того, чтобы доступ к традиционным знаниям, связанным с генетическими ресурсами и используемым в пределах юрисдикции вашей страны, осуществлялся в соответствии с предварительным обоснованным согласием или с согласия и при участии коренных и местных общин и чтобы были заключены взаимосогласованные условия в соответствии с требованиями внутреннего законодательства по регулированию ДГРСИВ или регулятивными требованиями другой Стороны, в которой эти коренные и местные общины находятся, как это предусмотрено статьей 16.1?</label>
+							<label>25. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that traditional knowledge associated with genetic resources utilized within your jurisdiction has been accessed in accordance with PIC or approval and involvement of indigenous and local communities and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party where such indigenous and local communities are located as provided in Article 16.1?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question25.answer)}}</div>
 								<div ng-show="document.question25.answer">
-									<label>Укажите, приняты ли в вашей стране меры по урегулированию ситуаций несоблюдения тех мер, как предусмотрено статьей 16.2?</label>
+									<label>Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?</label>
 									<ul>
 										<div class="km-value km-pre" compare-val>{{booleanToText(document.question25.hasMeasures)}}</div>
 									</ul>
@@ -679,7 +679,7 @@
 						</div>
 
 						<div>
-							<label>26. Требует ли ваша страна от пользователей генетических ресурсов представления в надлежащем порядке информации, связанной с предварительным обоснованным согласием, источником генетического ресурса, с заключением взаимосогласованных условий и/или с использованием генетических ресурсов, в назначенном контрольном пункте, как это предусмотрено в пунктах a) i) и ii) статьи 17.1?</label>
+							<label>26. Does your country require users of genetic resources to provide information related to PIC, to the source of the genetic resource, to the establishment of MAT and/or utilization of genetic resources at a designated checkpoint, as appropriate, as provided in Article 17.1 (a)(i) and (ii))?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question26.answer)}}</div>
 								<div ng-show="document.question26.answer">
@@ -719,14 +719,14 @@
 						</div>
 
 						<div>
-							<label>27. Представила ли ваша страна информацию, указанную в пункте a) i) статьи 17.1, в соответствующие национальные органы власти, Стороне, дающей предварительное обоснованное согласие, и в Механизм посредничества для регулирования ДГРСИВ, как это предусмотрено в пункте a) iii) статьи 17.1?</label>
+							<label>27. Has your country provided the information referred to in Article 17.1 (a)(i) to relevant national authorities, to the Party providing PIC and to the ABS Clearing-House as provided in Article 17.1 (a)(iii)?</label>
 							<ul>
 								<div class="km-value km-pre" compare-val>{{booleanToText(document.question27.answer)}}</div>
 								<div ng-show="document.question27.answer">
 									<ul>
 										<div>
-											<label>Применяется ли в вашей стране практика выпуска коммюнике контрольных пунктов?</label>
-											<div class="km-value" compare-val>{{document.question27.cpc.hasOwnProperty('option')? document.question27.cpc.option : "Не выбрано"}}</div>
+											<label>Has your country made use of the checkpoint communique?</label>
+											<div class="km-value" compare-val>{{document.question27.cpc.hasOwnProperty('option')? document.question27.cpc.option : "Not selected"}}</div>
 										</div>
 										<div ng-show="document.question27.cpc.furtherInfo">
 											<label>Представьте дополнительную информацию</label>
@@ -833,7 +833,7 @@
 					</div>
 					<div class="panel-body">
 						<div>
-							<label>31. Поощряет ли ваша страна включение во взаимосогласованные условия положений об урегулировании споров, как это предусмотрено в пунктах а), b) и c) статьи 18.1?</label>
+							<label>31. Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?</label>
 							<ul>
 								<div class="km-value" ng-show="document.question31.notApplicable">Не применимо ввиду отсутствия требований, регулирующих доступ</div>
 								<div class="km-value km-pre" compare-val ng-show="!document.question31.notApplicable">{{booleanToText(document.question31.answer)}}</div>
@@ -941,7 +941,7 @@
 			<div class="panel-body">
 
 				<div>
-					<label>35. В процессе разработки и реализации законодательных или регулятивных требований касательно ДГРСИВ в вашей стране:</label>
+					<label>35. In the development and implementation of ABS legislation or regulatory requirements has your country:</label>
 					<ul>
 						<label>созданы ли условия для стимулирования и поощрения исследований, содействующих сохранению и устойчивому использованию биоразнообразия, в том числе путем применения упрощенных мер предоставления доступа к генетическим ресурсам для некоммерческих исследовательских целей, принимая во внимание необходимость решения вопроса об изменении целей таких исследований, как предусмотрено в пункте а) статьи 8?</label>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question35.research.answer)}}</div>
@@ -957,7 +957,7 @@
 								</ul>
 							</div>
 						</div>
-						<label>обращается ли надлежащее внимание на возникшие или надвигающиеся чрезвычайные ситуации, угрожающие или наносящие ущерб здоровью людей, животных или растений, как это предусмотрено в пункте b) статьи 8?</label>
+						<label>Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?</label>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question35.emergencies.answer)}}</div>
 						<div ng-show="document.question35.emergencies.furtherInfo">
 							<label>Представьте дополнительную информацию</label>
@@ -972,7 +972,7 @@
 
 							</div>
 						</div>
-						<label>принимается ли во внимание необходимость ускоренных процедур доступа к генетическим ресурсам и ускоренных процедур совместного использования выгод от применения таких генетических ресурсов на справедливой и равной основе, включая возможности получения доступного обслуживания для нуждающихся, особенно в развивающихся странах, как предусмотрено в пункте b) статьи 8?</label>
+						<label>Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?</label>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question35.access.answer)}}</div>
 						<div ng-show="document.question35.access.furtherInfo">
 							<label>Представьте дополнительную информацию</label>
@@ -987,7 +987,7 @@
 
 							</div>
 						</div>
-						<label>учитывается ли важность генетических ресурсов для производства продовольствия и ведения сельского хозяйства и их особая роль в создании продовольственной обеспеченности, как это предусмотрено в пункте с) статьи 8?</label>
+						<label>Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)?</label>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question35.importance.answer)}}</div>
 						<div ng-show="document.question35.importance.furtherInfo">
 							<label>Представьте дополнительную информацию</label>
@@ -1039,7 +1039,7 @@
 			</div>
 			<div class="panel-body">
 				<div>
-					<label>37. Существуют ли в вашей стране коренные и местные общины?</label>
+					<label>37. Does your country have indigenous and local communities?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question37.answer)}}</div>
 						<div ng-show="document.question37.furtherInfo">
@@ -1061,7 +1061,7 @@
 				</div>
 
 				<div>
-					<label>38. Обладают ли коренные и местные общины установленным правом предоставлять доступ к генетическим ресурсам в соответствии с положениями внутригосударственного права (статья 6.2)?</label>
+					<label>38. Обладают ли коренные и местные общины установленным правом предоставлять доступ к генетическим ресурсам в соответствии с положениями внутригосударственного права? (Статья 6.2)</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question37.answer,document.question38.answer)}}</div>
 						<div style="margin: 0 0 0 20px;" ng-show="document.question38.answer">
@@ -1092,7 +1092,7 @@
 								</div>
 
 								<div>
-									<label>Установлены ли в вашей стране критерии и/или процессы получения предварительного обоснованного согласия или санкции коренных и местных общин на доступ к генетическим ресурсам, как предусмотрено в пункте f) статьи 6.3?</label>
+									<label>Has your country set out criteria and/or process for obtaining prior informed consent or approval and involvement of indigenous and local communities for access to genetic resources in Article 6.3(f)?</label>
 									<div class="km-value km-pre" compare-val>{{booleanToText(document.question38.pic.answer)}}</div>
 									<div ng-show="document.question38.pic.furtherInfo">
 										<label>Представьте дополнительную информацию</label>
@@ -1120,7 +1120,7 @@
 				</div>
 
 				<div>
-					<label>39. Приняла ли ваша страна меры в соответствии с положениями внутригосударственного права с целью обеспечения того, чтобы доступ к традиционным знаниям, связанным с генетическими ресурсами, носителями которых являются коренные и местные общины, осуществлялся с предварительного и обоснованного согласия или одобрения и при участии данных коренных и местных общин и чтобы были установлены взаимосогласованные условия, как предусмотрено в статье 7?</label>
+					<label>39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question37.answer,document.question39.answer)}}</div>
 						<div ng-show="document.question39.furtherInfo">
@@ -1142,7 +1142,7 @@
 				</div>
 
 				<div>
-					<label>40. Учитываются ли в вашей стране при осуществлении Протокола и в соответствии с положениями внутреннего законодательства нормы обычного права, общинные протоколы и процедуры коренных и местных общин в отношении традиционных знаний, связанных с генетическими ресурсами, как это предусмотрено статьей 12.1?</label>
+					<label>40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question37.answer,document.question40.answer)}}</div>
 						<div ng-show="document.question40.furtherInfo">
@@ -1253,7 +1253,7 @@
 				</div>
 
 				<div>
-					<label>43. Старается ли ваша страна не ограничивать традиционного использования генетических ресурсов и связанных с ними традиционных знаний и традиционный обмен ими внутри и среди коренных и местных общин, как это предусмотрено статьей 12.4?</label>
+					<label>43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{conditionalBooleanToText(!document.question37.answer,document.question43.answer)}}</div>
 						<div ng-show="document.question43.furtherInfo">
@@ -1332,7 +1332,7 @@
 				</div>
 
 				<div>
-					<label>46. Укажите, как осуществление Нагойского протокола содействует сохранению и устойчивому использованию биоразнообразия в вашей стране:</label>
+					<label>46. Please indicate how the implementation of the Nagoya Protocol has contributed to conservation and sustainable use of biodiversity in your country:</label>
 					<ul>
 						<div class="km-value" ng-show="!document.question46.furtherInfo && (!document.question46.documentReferenceIDs || documentReferenceIDsEmpty(document.question46.documentReferenceIDs))">Ответ не предоставлен</div>
 						<div ng-show="document.question46.furtherInfo">
@@ -1384,7 +1384,7 @@
 			</div>
 			<div class="panel-body">
 				<div>
-					<label>48. Осуществляет ли ваша страна сотрудничество, привлекая соответствующие коренные и местные общины, в целях осуществления Протокола в случаях, когда аналогичные генетические ресурсы встречаются in-situ на территории более чем одной Стороны, как это предусмотрено статьей 11.1?</label>
+					<label>48. Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1?</label>
 					<ul>
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question48.answer)}}</div>
 						<div ng-show="document.question48.ilcInfo">
@@ -1410,7 +1410,7 @@
 				</div>
 
 				<div>
-					<label>49. Сотрудничает ли ваша страна в целях осуществления Протокола в тех случаях, когда аналогичные традиционные знания, связанные с генетическими ресурсами, являются достоянием одной или нескольких коренных и местных общин на территории нескольких Сторон, как это предусмотрено статьей 11.2?</label>
+					<label>49. Is your country endeavouring to cooperate with a view to implementing the Protocol in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous and local communities in several Parties as provided in Article 11.2?</label>
 					<ul>
 						<div class="km-value" compare-val ng-show="document.question49.notApplicable">Не применимо, поскольку в стране нет коренных и местных общин</div>
 						<div class="km-value km-pre" compare-val ng-show="!document.question49.notApplicable">{{booleanToText(document.question49.answer)}}</div>
@@ -1545,7 +1545,7 @@
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question54.answer)}}</div>
 						<div style="margin: 0 0 0 20px;" ng-show="document.question54.answer">
 							<div style="margin: 0 0 0 20px;" >
-								<label>Принимала ли ваша страна меры по осуществлению стратегии повышения осведомленности о Нагойском протоколе регулирования доступа к генетическим ресурсам и совместного использования выгод.</label>
+								<label>Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS?</label>
 								<div class="km-value km-pre" compare-val>{{document.question54.measures.answer | yesno}}</div>
 								<div ng-show="document.question54.measures.furtherInfo">
 									<label>Кратко опишите принятые меры</label>
@@ -1586,7 +1586,7 @@
 						<div class="km-value km-pre" compare-val>{{booleanToText(document.question55.answer)}}</div>
 						<div style="margin: 0 0 10px 20px;" ng-show="document.question55.answer">
 							<div style="margin: 0 0 0 20px;" >
-								<label>Принимала ли ваша страна меры по внедрению стратегической структуры для создания потенциала и по оказанию поддержки эффективному осуществлению Нагойского протокола регулирования доступа к генетическим ресурсам и совместного использования выгод.</label>
+								<label>Has your country taken measures to implement the strategic framework for capacity-building and development to support effective implementation of the Nagoya Protocol on ABS?</label>
 								<div class="km-value km-pre" compare-val>{{document.question55.measures.answer | yesno}}</div>
 								<div ng-show="document.question55.measures.furtherInfo">
 									<label>Кратко опишите принятые меры</label>
@@ -1733,7 +1733,7 @@
 			</div>
 			<div class="panel-body">
 				<div>
-					<label>60. Кратко опишите основные трудности и проблемы, с которыми вы столкнулись при становлении Стороной Нагойского протокола.</label>
+					<label>60. Please provide a summary of the main difficulties and challenges encountered for becoming a Party to the Nagoya Protocol.</label>
 					<ul>
 						<div class="km-value" ng-show="!document.question60.challengesInfo && (!document.question60.documentReferenceIDs || documentReferenceIDsEmpty(document.question60.documentReferenceIDs))">Дополнительная информация не предоставлена</div>
 						<div ng-show="document.question60.challengesInfo">
@@ -1782,7 +1782,7 @@
 				</div>
 
 				<div>
-					<label>62. a) Выделяла ли ваша страна финансовые ресурсы другим Сторонам или получала финансовые ресурсы от других Сторон или финансовых учреждений для целей осуществления Протокола, как это предусмотрено статьей 25?</label>
+					<label>62. a) Has your country made financial resources available to other Parties or received financial resources from other Parties or financial institutions for the purposes of implementation of the Protocol as provided in Article 25?</label>
 					<ul>
 						<ul ng-if="!document.question62.donor.answer && !document.question62.recipient.answer && !document.question62.no">
 							<div class="km-value km-pre">Ничего не выбрано</div>

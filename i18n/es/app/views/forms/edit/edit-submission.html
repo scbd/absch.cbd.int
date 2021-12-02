@@ -1,6 +1,6 @@
 ﻿<div >
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <edit-header></edit-header>
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -18,7 +18,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="header.languages" required
-                                                caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                                caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages"
                                                         ng-model="document.header.languages"></div>
@@ -32,10 +32,10 @@
                                                     ng-disabled="document.organizations" ng-model="document.government"
                                                     source="options.countries" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true"
-                                                    placeholder="Seleccione un país..."></div>
+                                                    placeholder="Please select a country..."></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">O</strong></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
                                                 caption="Organización(es)" required>
@@ -106,7 +106,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="records"caption="Registro(s) relacionado(s)">
-                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
+                                                <div document-selector ng-model="document.records" question="records" filter="true"
+                                                     on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +161,7 @@
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="relevantInformation"
                                                 caption="Cualquier otra información pertinente">
-                                                <div class="help-block">Por favor, utilice este campo para proporcionar cualquier otra información pertinente que no se haya podido incluir en otro lugar del registro.</div>
+                                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4"
                                                     placeholder="" locales="document.header.languages"></div>
                                             </div>

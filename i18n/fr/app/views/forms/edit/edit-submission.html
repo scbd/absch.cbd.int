@@ -1,6 +1,6 @@
 ﻿<div >
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <edit-header></edit-header>
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -13,7 +13,7 @@
                         <div ng-show="tab=='edit'" km-tab="edit">
                             <section>
                                 <div class="well no-shadow bg-white">
-                                    <legend>Informations générales</legend>
+                                    <legend>General Information</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -35,7 +35,7 @@
                                                     placeholder="Veuillez choisir un pays..."></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">OU</strong></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
                                                 caption="Organisation(s)" required>
@@ -106,7 +106,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="records"caption="Fichier(s) connexe(s) :">
-                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
+                                                <div document-selector ng-model="document.records" question="records" filter="true"
+                                                     on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -160,7 +161,7 @@
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="relevantInformation"
                                                 caption="Tout autre information utile">
-                                                <div class="help-block">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordés ailleurs dans le dossier.</div>
+                                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4"
                                                     placeholder="" locales="document.header.languages"></div>
                                             </div>

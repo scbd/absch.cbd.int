@@ -27,7 +27,7 @@
 			<div ng-show="document.authors">
 				<label>Nom(s) de l’auteur</label>
 				<div compare-val>
-					<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.authors" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.organizations">
@@ -42,7 +42,7 @@
 			<div ng-show="document.publisher">
 				<label>Éditeur</label>
 				<div compare-val>
-					<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.publisher" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 			<div ng-show="document.source">
 				<label>Source</label>
 				<div compare-val>
-					<km-value-ml value="document.source" locales="locale"></km-value-ml>
+					<km-value-ml value="document.source" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -94,7 +94,7 @@
 				</div>
 			</div>
 			<div ng-show="document.countryRegions">
-				<label>Pays ou groupe(s) régional(aux) ou économique(s) liés à la ressource </label>
+				<label>Pays ou groupe(s) régional(aux) ou économique(s) liés à la ressource</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.countryRegions"><span ng-bind="item|term:locale"></span></li>
@@ -127,6 +127,7 @@
 
 			<div ng-show="document.biosafety.raRecommend != undefined">
 				<label>Aimeriez-vous recommander ce document comme document de référence pour les « Directives pour l'évaluation des risques liés aux organismes vivants modifiés » ?</label>
+				<p><a class="Record" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml">https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml</a></p>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.raRecommend" locales="locale"></km-value-bool>
 				</div>
@@ -139,7 +140,7 @@
 				</div>
 
 				<div ng-show="document.biosafety.raSubjects && document.biosafety.raRecommend">
-					<label>Directives pour l'évaluation des risques liés aux organismes vivants modifiés</label>
+					<label>Section(s) des « Directives sur l’évaluation de risques des organismes vivants modifiés » à laquelle/auxquelles ce document de référence est lié.</label>
 					<div class="km-value" compare-val="raSubjects">
 						<view-terms-hierarchy ng-model="document.biosafety.raSubjects" locale="locale" term-domain="bchRaSubjects"></view-terms-hierarchy>
 					</div>

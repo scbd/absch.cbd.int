@@ -1,12 +1,12 @@
 <div>
 
-	<div class="edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 
                     <div class="row">
@@ -14,11 +14,11 @@
                             <ul class="pagination" id="expertTabs" ng-click="setTab($event)">
                                 <li class="active"><a translation-url href="#part1" data-toggle="tab">Parte I</a></li>
                                 <li><a translation-url href="#part2" data-toggle="tab">Parte II</a></li>
-                                <li><a translation-url href="#part3" data-toggle="tab">Parte III</a></li>
-                                <li><a translation-url href="#part4" data-toggle="tab">Parte IV</a></li>
+                                <li><a translation-url href="#part3" data-toggle="tab">Part III</a></li>
+                                <li><a translation-url href="#part4" data-toggle="tab">Part IV</a></li>
                                 <li><a translation-url href="#part5" data-toggle="tab">Parte V</a></li>
-								<li><a translation-url href="#part6" data-toggle="tab">Parte VI</a></li>
-								<li><a translation-url href="#part7" data-toggle="tab">Parte VII</a></li>
+								<li><a translation-url href="#part6" data-toggle="tab">Part VI</a></li>
+								<li><a translation-url href="#part7" data-toggle="tab">Part VII</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,7 +33,7 @@
                                                 <legend>Información general</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                                        <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                                             <div class="indent">
                                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                             </div>
@@ -44,7 +44,7 @@
 													<div class="col-sm-12">
 														<div class="km-control-group" name="government" required caption="País">
 															<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione un país..."></div>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
 														</div>
 													</div>
 												</div>
@@ -532,7 +532,7 @@
 												<legend>Cualquier otra información pertinente</legend>
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="additionalInformation" caption="Información adicional">
+														<div class="km-control-group" name="additionalInformation" caption="Additional Information">
 															<div class="help-info">Por favor, proporcione cualquier otra información relevante para su rol de experto (máx. 300 palabras).</div>
 															<div km-rich-textbox name="additionalInformation" rows="6" ng-model="document.additionalInformation"
 																locales="document.header.languages"></div>
@@ -577,11 +577,11 @@
                             <ul class="pagination" id="expertTabs" ng-click="setTab($event)">
                                 <li class="active"><a translation-url href="#part1" data-toggle="tab">Parte I</a></li>
                                 <li><a translation-url href="#part2" data-toggle="tab">Parte II</a></li>
-                                <li><a translation-url href="#part3" data-toggle="tab">Parte III</a></li>
-                                <li><a translation-url href="#part4" data-toggle="tab">Parte IV</a></li>
+                                <li><a translation-url href="#part3" data-toggle="tab">Part III</a></li>
+                                <li><a translation-url href="#part4" data-toggle="tab">Part IV</a></li>
                                 <li><a translation-url href="#part5" data-toggle="tab">Parte V</a></li>
-								<li><a translation-url href="#part6" data-toggle="tab">Parte VI</a></li>
-								<li><a translation-url href="#part7" data-toggle="tab">Parte VII</a></li>
+								<li><a translation-url href="#part6" data-toggle="tab">Part VI</a></li>
+								<li><a translation-url href="#part7" data-toggle="tab">Part VII</a></li>
                             </ul>
                         </div>
                     </div>

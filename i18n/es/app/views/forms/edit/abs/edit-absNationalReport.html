@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                     
                     <div class="row">
                         <div class="col-xs-12">
@@ -43,7 +46,7 @@
     
                                                     <p>Además, hay algunas preguntas que no se basan estrictamente en las disposiciones del Protocolo y que son de carácter voluntario. Se incluyen en el formato de presentación de informes con el fin de contribuir a la evaluación y revisión de la eficacia del Protocolo en el contexto del artículo 31 y de identificar desafíos y dificultades en la aplicación del Protocolo, así como de decisiones adoptadas por la Conferencia de las Partes que actúa como reunión de las Partes en el Protocolo de Nagoya (COP-MOP).</p>
     
-                                                    <p>El informe nacional provisional puede ser una herramienta útil para que tanto las Partes como los Estados que no son Partes evalúen el nivel de aplicación del Protocolo de Nagoya, así como las carencias y necesidades en cuanto a capacidad, y será un apoyo para la realización por parte de la COP-MOP del examen periódico de la aplicación del Protocolo de Nagoya y para la adopción, según su mandato, de las decisiones necesarias para fomentar su aplicación efectiva de conformidad con el párrafo 4 del Artículo 26.</p>
+                                                    <p>The interim national report can be a useful tool for both Parties and Non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
     
                                                     <p>La información presentada a través del informe nacional provisional también podría servir para que los países intercambiaran experiencias, desafíos y soluciones en relación con la aplicación del Protocolo de Nagoya. En este sentido, puede constituir un instrumento valioso para la creación y el desarrollo de capacidades para la aplicación del Protocolo y para el diseño de actividades más eficaces de creación de capacidad. La finalidad del formato es minimizar la carga que puede suponer para los países la labor de presentación de informes, y por lo tanto las preguntas son simples (normalmente del tipo que se contestan con sí o no). Generalmente, a continuación de estas preguntas figuran campos de texto donde se alienta a los países a proporcionar detalles sobre las medidas adoptadas, así como a informar sobre dificultades y desafíos en la aplicación de disposiciones específicas del Protocolo, y a brindar mayor información sobre el tema mediante enlaces a registros existentes del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios (Centro de Intercambio de Información sobre APB) o sitios web o adjuntando documentos. Se trata de una oportunidad para identificar buenas prácticas y limitaciones en la aplicación del Protocolo de Nagoya.</p>
     
@@ -57,7 +60,7 @@
     
                                                     <p>Los países deberían usar la versión en línea del formato, a menos que fuera técnicamente inviable, y presentar el informe a través del Centro de Intercambio de Información sobre APB asegurándose de que la información nacional existente en el Centro de Intercambio de Información sobre APB esté actualizada.</p>
     
-                                                    <p>Solo si esto fuera técnicamente inviable, las Partes deberían recurrir a las presentaciones fuera de línea en el Centro de Intercambio de Información sobre APB. Las presentaciones fuera de línea deberían utilizar el formulario protegido que se puede descargar de dicho centro en formato MS Word.  Se recomienda que los países envíen el informe por correo electrónico a la Secretaría (secretariat@cbd.int), y que incluyan una copia escaneada de la última página firmada por la autoridad de publicación del Centro de Intercambio de Información sobre APB. Posteriormente, el Secretario Ejecutivo ayudará a las Partes a dar a conocer su informe a través de dicho centro.</p>
+                                                    <p>Solo si esto fuera técnicamente inviable, las Partes deberían recurrir a las presentaciones fuera de línea en el Centro de Intercambio de Información sobre APB. Las presentaciones fuera de línea deberían utilizar el formulario protegido que se puede descargar de dicho centro en formato MS Word. Se recomienda que los países envíen el informe por correo electrónico a la Secretaría (secretariat@cbd.int), y que incluyan una copia escaneada de la última página firmada por la autoridad de publicación del Centro de Intercambio de Información sobre APB. Posteriormente, el Secretario Ejecutivo ayudará a las Partes a dar a conocer su informe a través de dicho centro.</p>
                                                 </div>
                                             </div>
     
@@ -68,7 +71,7 @@
                                             <legend>Información general</legend>
                                             <div class="row">
                                                 <div class="col-xs-12" >
-                                                    <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                                    <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                                         <div class="indent">
                                                             <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                         </div>
@@ -148,7 +151,7 @@
 
 
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question4.documentReferenceIDs"
                                                             ng-disabled="!document.government" question="question4"
                                                              on-build-query="onRecordQuery(searchText)" filter="true">
@@ -174,7 +177,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question5.documentReferenceIDs"
                                                              ng-disabled="!document.government" question="question5"
                                                              on-build-query="onRecordQuery(searchText)" filter="true">
@@ -198,7 +201,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question6.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question6"
                                                                on-build-query="onRecordQuery(searchText)" filter="true">
@@ -229,7 +232,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question7.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question7"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -247,12 +250,12 @@
                                                         <div ng-disabled="document.question8.notApplicable" class="km-yes-no"
                                                             name="question8" ng-model="document.question8.answer"></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question8FurtherInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo"
+                                                    <div class="km-control-group" name="question8FurtherInfo" caption="">Please provide further information<div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question8.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question8"
                                                                on-build-query="onRecordQuery(searchText)" filter="true">
@@ -270,12 +273,12 @@
                                                     <div class="km-control-group" name="question9Challenges" caption="">Sírvase proporcionar un resumen de los principales dificultades y desafíos encontrados al designar uno o más puntos de verificación.<div km-textbox-ml rows=4 name="question9Challenges" ng-model="document.question9.challengesInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question9FurtherInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo"
+                                                    <div class="km-control-group" name="question9FurtherInfo" caption="">Please provide further information<div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question9.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question9"
                                                                on-build-query="onRecordQuery(searchText)" filter="true">
@@ -322,12 +325,12 @@
                                                         </div>
                                                     </div>
     
-                                                    <div class="km-control-group" name="question11FurtherInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo"
+                                                    <div class="km-control-group" name="question11FurtherInfo" caption="">Please provide further information<div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                       <div document-selector ng-model="document.question11.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question11"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -352,7 +355,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question12.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question12"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -373,7 +376,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question13.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question13"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -394,7 +397,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question14.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question14"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -415,7 +418,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question15.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question15"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -443,7 +446,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question16.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question16"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -464,7 +467,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question17.documentReferenceIDs"
                                                                ng-disabled="!document.government || !document.question11.answer" question="question17"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -525,7 +528,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question18.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question18"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -567,7 +570,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question20.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question20"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -586,7 +589,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question21.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question21"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -605,7 +608,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question22.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question22"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -683,7 +686,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question24.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question24"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -720,7 +723,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question25.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question25"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -758,7 +761,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question26.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question26"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -781,9 +784,9 @@
                                                                 <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
                                                                         name="q27Options" id="q27Option2" value="No">No</label>
                                                                 <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
-                                                                        name="q27Options" id="q27Option3" value="Other">Otro</label>
+                                                                        name="q27Options" id="q27Option3" value="Other">Other</label>
                                                             </div>
-                                                            <div class="km-control-group" name="question27_ccFurtherInfo">Sírvase proporcionar información adicional.<div km-textbox-ml rows=2 name="question27_ccFurtherInfo"
+                                                            <div class="km-control-group" name="question27_ccFurtherInfo">Please provide further information<div km-textbox-ml rows=2 name="question27_ccFurtherInfo"
                                                                     ng-model="document.question27.cpc.furtherInfo" locales="document.header.languages"
                                                                     placeholder=""></div>
                                                             </div>
@@ -818,7 +821,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question28.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question28"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -843,7 +846,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question29.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question29"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -887,12 +890,12 @@
                                                             ng-required="!document.question31.notApplicable" name="question31"
                                                             ng-model="document.question31.answer"></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question31FurtherInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo"
+                                                    <div class="km-control-group" name="question31FurtherInfo" caption="">Please provide further information<div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question31.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question31"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -911,7 +914,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question32.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question32"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -944,7 +947,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question33.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question33"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -992,7 +995,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35ResearchDocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.research.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Research"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1009,7 +1012,7 @@
                                                             placeholder=""></div>
                                                     </div>
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.emergencies.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Emergencies"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1025,7 +1028,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                             placeholder=""></div>
                                                     </div>
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question35.access.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Access"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1044,7 +1047,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q35ImportanceDocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question35.importance.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question35Importance"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1093,7 +1096,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question37.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question37"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1159,7 +1162,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question38.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question38"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1180,7 +1183,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                       <div document-selector ng-model="document.question39.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question39"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1201,7 +1204,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                        <div document-selector ng-model="document.question40.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question40"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1222,7 +1225,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question41.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question41"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1317,7 +1320,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question43.documentReferenceIDs"
                                                                ng-disabled="!document.government || !Q37IsYes()" question="question43"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1362,7 +1365,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question45.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question45"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1415,18 +1418,18 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required bold="true" name="question48"
-                                                        caption="48. ¿Su país procura cooperar, con la participación de las comunidades indígenas y locales concernidas, con miras a aplicar el Protocolo en las instancias en las que el mismo recurso genético se encuentra in situ dentro del territorio de más de una Parte, según lo dispuesto en el artículo 11.1?">
+                                                        caption="48. Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1?">
                                                         <div class="km-yes-no" required name="question48" ng-model="document.question48.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question48ILCInfo" caption="">Si en su país hay comunidades indígenas y locales, sírvase proporcionar más detalles sobre su participación.<div km-textbox-ml rows=3 name="question48ILCInfo" ng-model="document.question48.ilcInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question48FurtherInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo"
+                                                    <div class="km-control-group" name="question48FurtherInfo" caption="">Please provide further information<div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question48.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question48"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1449,7 +1452,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question49.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question49"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1493,7 +1496,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question51.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question51"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1512,7 +1515,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question52.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question52"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1578,7 +1581,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question54.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question54"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1621,7 +1624,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question55.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question55"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1639,7 +1642,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question56.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question56"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1657,7 +1660,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question57.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question57"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1700,12 +1703,12 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
-                                                    <div class="km-control-group" name="question59FurtherInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=4 name="question59FurtherInfo" ng-model="document.question59.furtherInfo"
+                                                    <div class="km-control-group" name="question59FurtherInfo" caption="">Please provide further information<div km-textbox-ml rows=4 name="question59FurtherInfo" ng-model="document.question59.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
                                                     <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs"
-                                                        caption="Sírvase seleccionar los registros del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pertinentes.">
+                                                        caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question59.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question59"
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
@@ -1763,7 +1766,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                         <label><input type="checkbox" ng-model="document.question62.donor.answer"
                                                                 ng-change="Q62ClearDonor()">Sí, se han puesto a disposición recursos financieros</label>
                                                         <div ng-show="document.question62.donor.answer" class="km-control-group"
-                                                            name="question62DonorAdditionalInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=2 ng-model="document.question62.donor.additionalInfo"
+                                                            name="question62DonorAdditionalInfo" caption="">Please provide further information<div km-textbox-ml rows=2 ng-model="document.question62.donor.additionalInfo"
                                                                 locales="document.header.languages" placeholder=""></div>
                                                         </div>
                                                     </div>
@@ -1775,7 +1778,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                             <label><input type="checkbox" ng-model="document.question62.recipient.parties"
                                                                     ng-change="Q62ClearRecipientFromParty()">De otras Partes</label>
                                                             <div ng-show="document.question62.recipient.parties" class="km-control-group"
-                                                                name="question62DonorAdditionalInfo" caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=2 ng-model="document.question62.recipient.partiesInfo"
+                                                                name="question62DonorAdditionalInfo" caption="">Please provide further information<div km-textbox-ml rows=2 ng-model="document.question62.recipient.partiesInfo"
                                                                     locales="document.header.languages" placeholder="">
                                                                 </div>
                                                             </div>
@@ -1794,7 +1797,7 @@ asequibles para los necesitados, especialmente en los países en desarrollo, seg
                                                                         ng-change="Q62ClearRecipientFromOtherSources()">De otras fuentes</label>
                                                                 <div ng-show="document.question62.recipient.otherSources"
                                                                     class="km-control-group" name="question62DonorAdditionalInfo"
-                                                                    caption="">Sírvase proporcionar información adicional.<div km-textbox-ml rows=2 name="question62ReceiverotherSourcesInfo"
+                                                                    caption="">Please provide further information<div km-textbox-ml rows=2 name="question62ReceiverotherSourcesInfo"
                                                                         ng-model="document.question62.recipient.otherSourcesInfo"
                                                                         locales="document.header.languages" placeholder=""></div>
                                                                 </div>

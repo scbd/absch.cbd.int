@@ -1,12 +1,12 @@
 <div>
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
 			tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			data-container="{{container}}" is-dialog="{{isDialog}}">
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 						<form class="editForm" name="editForm" style="margin-top:10px">
 								<div>
@@ -41,15 +41,24 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-4">
 													<div class="km-control-group" name="date" required caption="Date de l'évaluation des risques"
 															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
-														<div km-date placeholder="AAAA-MM-JJ" name="date" required ng-model="document.date"></div>
+
+														<div class="col-md-8 padding-left-0">
+															<div km-date placeholder="AAAA-MM-JJ" name="date" required ng-model="document.date" ng-disabled="document.dateOfRaNotAvailable"></div>	
+														</div>
+														<div class="col-md-4 padding-left-0 ">
+															<div class="checkbox">
+																<label for="dateOfRaNotAvailable">
+																	<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" id="dateOfRaNotAvailable" name="dateOfRaNotAvailable">Date non disponible</label>
+															</div>
+														</div>														
 													</div>
 												</div>
 											</div>
 											
-											<div class="row" ng-if="!isNational">
+											<div class="row padding-top-10" ng-if="!isNational">
 												<div class="col-xs-12">
 													<div class="km-control-group" name="organizations" required caption="Institution responsable de l'évaluation des risques">											
 														<div document-selector ng-model="document.organizations" question="organizations"
@@ -59,7 +68,7 @@
 											</div>	
 											<div class="row" ng-if="isNational">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
+													<div class="km-control-group" name="authorities" required caption="Autorité(s) nationale(s) compétente(s) responsable(s) de l'évaluation des risques">											
 														<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities"
 																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true"></div>
 
@@ -69,7 +78,7 @@
 		
 											<div class="row">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="contacts" caption="Contact details of the main responsible risk assessor">											
+													<div class="km-control-group" name="contacts" caption="Coordonnées du principal évaluateur des risques responsable">											
 														<div document-selector ng-model="document.contacts" question="contacts"
 																on-build-query="onBuildContactQuery(searchText)" allow-new-schema="contact" allow-new="true"></div>
 
@@ -84,7 +93,7 @@
 											<legend>Détails de l'évaluation des risques</legend>
 											<div class="row">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="modifiedOrganisms" required caption="Living modified organism(s)">											
+													<div class="km-control-group" name="modifiedOrganisms" required caption="Organisme(s) vivant(s) modifié(s)">											
 														<div document-selector  ng-model="document.modifiedOrganisms" question="modifiedOrganisms" 
 																on-build-query="onBuildModifiedOrganismQuery(searchText)" allow-new-schema="modifiedOrganism" allow-new="true"></div>
 													</div>
@@ -92,7 +101,7 @@
 											</div>
 											<div class="row">
 												<div class="col-xs-12">
-													<div class="km-control-group" name="scopes" required caption="Scope of the risk assessment">
+													<div class="km-control-group" name="scopes" required caption="Étendue de l'évaluation des risques">
 															<div km-term-check required ng-model="document.scopes" locales="document.header.languages"
 															terms="options.riskAssessmentScope()"  binding-type="term[]"></div>
 													</div>
@@ -100,10 +109,10 @@
 											</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="documents" required caption="Risk assessment report / summary">
-														<div class="help-block">Il est préférable d'annexer le document. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. https://bch.cbd.int) and the name of the website (e.g. "Biosafety Clearing-House").</div>
+													<div class="km-control-group" name="documents" required caption="Rapport sur l'évaluation des risques/ Résumé">
+														<div class="help-block">Il est préférable d'annexer le document. Sinon, préciser l'emplacement du document (p. ex., l'adresse Web, y compris l'adresse URL du site Web (p. ex. https://bch.cbd.int) et le nom du site Web (p. ex., « Centre d'échange pour la prévention des risques biotechnologiques »).</div>
 														<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-														<div class="km-control-group"  name="documentsSummary" caption="Please use this field to provide a summary of the risk assessment.">
+														<div class="km-control-group"  name="documentsSummary" caption="Veuillez utiliser ce champs pour fournir un résumé de l’évaluation de risques.">
 															<div km-rich-textbox name="documentsSummary"  ng-model="document.documentsSummary" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -115,10 +124,10 @@
 									<section>
 										<div class="well no-shadow bg-white">
 											<legend>Méthode et points à examiner</legend>
-											<div class="help-block">Refer to Annex III, paragraphs 8 and 9 of the Cartagena Protocol on Biosafety.</div>
+											<div class="help-block">Veuillez vous référer à l'annexe III, paragraphes 8 et 9, du Protocole de Cartagena sur la prévention des risques biotechnologiques.</div>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group"  name="adverseEffects" caption="Potential adverse effects identified in the risk assessment">
+													<div class="km-control-group"  name="adverseEffects" caption="Effets défavorables possibles identifiés dans l'évaluation de risques">
 														<div km-rich-textbox name="adverseEffects"  ng-model="document.adverseEffects" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -174,31 +183,31 @@
 												</div>
 											</div>
 										</div>
-									</section><!-- <section ng-if="isNational">
+									</section>
+
+								<section ng-if="isNational">
 										<div class="well no-shadow bg-white">
-											<legend>Information sharing with other databases</legend>
+											<legend>Partage d’informations avec d’autres bases de données</legend>
 											<div class="row">
 												<div  class="col-xs-12">
-													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?">
+													<div class="km-control-group" name="isForCommercialUse" caption="Est-ce que cette évaluation des risques est liée à un OVM pour une utilisation commerciale?">
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="control-group inner-padding">
-																<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the
-															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
+																<label>Est-ce que cette décision devrait être transférée au Secrétariat de l’OCDE pour une inclusion possible dans la <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank">base de données de produits Biotrack</a>?</label>
 															</div>
 															<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 															<div class="control-group inner-padding">
-																<label>Is this risk assessment related to food safety?</label>
+																<label>Est-ce que cette évaluatino de risques est liée à la sécurité alimentaire?</label>
 															</div>
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
 																<div class="control-group inner-padding">
-																	<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i></label>
+																	<label>A-t-elle été menée conformément aux directives du <i>Codex Alimentarius pour la conduite de l'évaluation de la sécurité sanitaire des aliments dérivés de plantes à ADN recombiné?</i></label>
 																</div>															
-																<div class="km-yes-no" name="codexConduted" ng-model="document.codexConduted"></div>
+																<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 																<div class="control-group inner-padding">
-																	<label>Should this risk assessment be forwarded to your country's FAO focal point for possible inclusion in the
-																	<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
+																	<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
 																</div>
 																<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 															</div>
@@ -207,13 +216,14 @@
 												</div>
 											</div>
 										</div>
-									</section> --><section>
+									</section>
+									<section>
 										<div class="well no-shadow bg-white">
 											<legend>Timeframe for confirmation or updating of information</legend>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" required name="expires"  caption="Should this information be confirmed or updated after two years from the date of submission?">			
-														<div class="help-block">If the answer to this question is “Yes”, after two years from the date of submission you will be asked to confirm or update the record within 3 months. Passé ce délai, si aucune confirmation n'a été reçue, le dossier portera la mention "non confirmé".</div>									
+													<div class="km-control-group" required name="expires"  caption="Cette information doit-elle être confirmée ou mise à jour deux ans après la date de soumission?">			
+														<div class="help-block">Si la réponse est « oui », vous serez invité à confirmer ou à mettre à jour le fichier dans les trois mois, deux ans après sa soumission. Passé ce délai, si aucune confirmation n'a été reçue, le dossier portera la mention "non confirmé".</div>									
 														<div km-yes-no required  ng-model="document.expires" locales="document.header.languages"></div>
 													</div>	
 												</div>
@@ -236,7 +246,7 @@
 											<div class="row">
 												<div class="col-sm-12">
 													<div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
-														<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+														<div class="help-block">Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.</div>
 														<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 													</div>
 												</div>
@@ -249,7 +259,7 @@
 										<div class="row">
 											<div class="col-sm-12">
 												<div class="km-control-group" name="notes">
-													<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+													<div class="help-block">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>
 												</div>
 											</div>

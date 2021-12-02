@@ -51,7 +51,7 @@
                             </div>
                         </div>
                         <hr />
-                        <div class="col-sm-12"><strong>Ubicación para soltar </legend>                
+                        <div class="col-sm-12"><strong>Ubicación para soltar</legend>                
                             <div class="container-element" style="border:1px solid #eee">
                                 <ul dnd-list="newConstruct" class="itemlist">
                                     <li ng-repeat="item in newConstruct" dnd-draggable="item" dnd-type="'item'" dnd-effect-allowed="move"
@@ -77,10 +77,9 @@
                 <td class="left" >&nbsp;</td>
                 <td class="middle">
                     <div ng-show="!item.gene"><span ng-if="item.type=='senseStart'"    >iniciar transcripción</span> <span ng-if="item.type=='sense'"         >elemento de transcripción</span> <span ng-if="item.type=='senseStop'"     >detener transcripción</span> <span ng-if="item.type=='antisenseStart'">iniciar transcripción</span> <span ng-if="item.type=='antisense'"     >elemento de transcripción</span> <span ng-if="item.type=='antisenseStop'" >detener transcripción</span></div>
-                    <div>                            
-                            <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="contacts" caption="(sense)" type="radio"
-                                schema="(dnaSequence)" filter="true" ng-change="geneSelected(item)" skip-government="true" 
-                                allow-new="true" allow-new-schema="dnaSequence">
+
+                         <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="dnaSequence" caption="(sense)" type="radio"
+                                on-build-query="onDnaSequenceQuery(searchText)" filter="true" ng-change="geneSelected(item)" allow-new="true" allow-new-schema="dnaSequence">
                                 <select-records><a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">seleccionar gen</a> <a rel="noopener" ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a></select-records>
                                 <selected-records>
                                     <div ng-show="$parent.$parent.item.gene">#<span ng-bind="$parent.$parent.item.gene.documentID"></span> &nbsp;<input type="number" ng-model="item.size" style="width:50px" min="0"/>KB</div>

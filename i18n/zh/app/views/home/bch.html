@@ -1,29 +1,103 @@
-<div class="col-md-12" style="padding-left: 0px;padding-right:0px;background-color: #fff;">    
-    <link href="/app/css/index.css" rel="stylesheet">
-    <div id="Jumbotron" style="border-top:1px solid #555;border-bottom:2px solid #ddd;" >
-       <home-map></home-map>
-    </div>
-    <div class="padding-5">
-        <h1 class="color-green bold" style="margin-bottom:30px;"  ng-bind-html="betaArticle.title | lstring:locale"></h1>
-        <div ng-bind-html="betaArticle.content | lstring:locale | toTrusted"></div>
+<div class="bs5">
+    <div class="bs5 new-css-home-section-top-bch min-vh-100" >
+        <div class="bs5 container">
+
+            <h1 class="bs5 display-6 fs-1 fs-sm-4 lh-sm color-white mx-3 my-3 pt-md-5 pb-md-2 my-lg-5 pt-lg-5 pb-lg-2">生物安全信息交换所既是用于交换改性活生物体相关信息的在线平台，也是促进卡塔赫纳生物安全议定书实施的关键工具。</h1>
+
+            <div class="bs5 row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
+                <div class="bs5 col-md-12 col-lg-4 new-display-flex">
+                    <div class="bs5 rounded card new-card shadow-lg border-0 m-3 m-lg-4">
+                        <div class="bs5 card-body">
+                            <div class="bs5 d-flex position-relative "><i class="bi bi-lightbulb display-4 color-orange new-css-boxes-icons" alt="learn about bch"></i><div class="ps-3">
+                                    <h2 class="bs5 fw-bold text-left mt-2 mb-4">了解生物安全信息交换所</h2>
+                                    <ul>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="/kb">About the BCH</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://bch.cbd.int/protocol">关于议定书</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/faqs">常见问题</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bs5 card-footer new-css-card-footer text-muted"><a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/kb">开始使用 <i class="fa fa-arrow-right"></i></a></div>
+                    </div>
+                </div>
+                <div class="bs5 rounded col-md-12 col-lg-4 new-display-flex">
+                    <div class="bs5 card new-card shadow-lg border-0 m-3 m-lg-4">
+                        <div class="bs5 card-body">
+                            <div class="bs5 d-flex position-relative "><i class="bi bi-search display-4 color-orange new-css-boxes-icons" alt="search bch"></i><div  class="ps-3">
+                                    <h2 class="bs5 fw-bold text-left mt-2 mb-4">搜索记录</h2>
+
+                                    <ul>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/search?openTour">Take the Tour</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/tags/finding-information/Searching-for-information-in-the-BCH/619c553a4f1f30000140eeb2">Help using the Search</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/registries">Registries:LMO-Organism-Gene</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/search?currentPage=1&tab=nationalRecords&group=government&group=schema&schema=cpbNationalReport4">Fourth National Reports</a></li>
+                                    </ul>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bs5 card-footer new-css-card-footer text-muted"><a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/search">搜索 <i class="fa fa-arrow-right"></i></a></div>
+                    </div>
+
+                </div>
+                <div class="bs5 rounded col-md-12 col-lg-4 new-display-flex">
+                    <div class="bs5 card new-card shadow-lg border-0 m-3 m-lg-4">
+                        <div class="bs5 card-body">
+                            <div class="bs5 d-flex position-relative "><i class="bi bi-upload display-4 color-orange new-css-boxes-icons" alt="search bch"></i><div class="ps-3">
+                                    <h2 class="bs5 fw-bold text-left mt-2  mb-4">提交记录</h2>
+                                    
+                                    <ul>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">登录</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/register?openTour">Take the Tour</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/619c554858029700017ff45f">Help submitting records</a></li>
+                                    </ul>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bs5 card-footer new-css-card-footer text-muted"><a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/register">提交 <i class="fa fa-arrow-right"></i></a></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="cursor-pointer bs5 my-2 my-lg-5 mt-lg-5 p-2 pt-lg-5 text-center   hidden-sm hidden-xs"><a class= "text-decoration-none" ng-click="exploreMore();"><span class="bs5 display-6 fs-1 rounded  py-3 px-5 color-white new-explore-btn">探索地图 <i class="fa  fa-arrow-down"></i></span></a></div >
+            
+        </div>
     </div>
 
-    <div class="padding-5">
-        <style>
-            #Announcements > h4{
-                margin-bottom:10px!important;
-            }
-            .padding-5{
-                padding:5px
-            }
-        </style>
-        <home-articles tags="BCH-Announcement"></home-articles>
+    <div id="homePageMapSection" class="bs5  min-vh-100 new-css-home-section-map hidden-sm hidden-xs" >
+            <home-map></home-map>
     </div>
 
-    <div class="padding-5">
-        <home-country-dashboard></home-country-dashboard>
+    <div class="bs5 min-vh-100 ">
+        <div class="bs5 container ">
+            <p class="bs5 display-6 pt-5 mt-5 fw-bold">公告<hr>
+            </p>
+            <div ng-if="announcementCounts">
+                <home-articles tags="BCH-Announcement" counts="{{announcementCounts}}"></home-articles>
+            </div>
+            <div class="bs5 text-end mt-4 new-css-down-margin"><a class="bs5 nav-link fs-4 text-muted fw-bold text-uppercase" href="/kb/tags/bch-announcement/">See more <i class="fa fa-arrow-right"></i></a></div>
+        </div>
     </div>
-
-    <div class="clearfix"></div>
+    <div class="bs5 min-vh-100 home-page-record">
+        <div class="bs5 container ">
+            <p class="bs5 display-6 fw-bold">国家记录<hr>
+            </p>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="national" :rows="recordCount"></homepage-records>
+            </div>
+        </div>
+    </div>
+    <div class="bs5 min-vh-100 home-page-record">
+        <div class="bs5 container ">
+            <p class="bs5 display-6 fw-bold">参考记录<hr>
+            </p>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="reference" :rows="recordCount"></homepage-records>
+            </div>
+        </div>
+    </div>
 
 </div>

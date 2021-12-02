@@ -1,164 +1,115 @@
 ﻿<div>
-	<style>
-		.tableHeaderTop { font-weight:bold; padding:3px; text-align:center; } .tableHeaderBottom { border-bottom:solid 2px #444; padding:3px; text-align:center; } .tableRow { border-bottom:solid 1px #888; padding:3px; text-align:center; } .back99 { background-color:#ffffff; } .back95 { background-color:#f4f4f4; } .back80 { background-color:#f0f0f4; } .backConflict { background-color:#ffffc0; }
-	</style>
+	<style> .tableHeaderTop { font-weight:bold; padding:3px; text-align:center; } .tableHeaderBottom { border-bottom:solid 2px #444; padding:3px; text-align:center; } .tableRow { border-bottom:solid 1px #888; padding:3px; text-align:center; } .back99 { background-color:#ffffff; } .back95 { background-color:#f4f4f4; } .back80 { background-color:#f0f0f4; } .backConflict { background-color:#ffffc0; } th.tableHeaderTop { height: 30px; } td.countryName, th.countryName { width: 180px; white-space:nowrap; } td.linkID { width:60px; max-width:60px; min-width:60px; overflow:hidden; text-overflow:ellipsis; } td.bch-icon { width: 10%; } td.biotrade-icon { width: 17%; } th.left-border, td.left-border { padding-left:5px; border-left:dotted 1px #d0d0d0 } div.icon { width:22px; max-width:22px; min-width:22px; position: relative; } div.icon > img.icon-overlay { width:22px; } div.icon > img.off.svg { opacity: 0.25; } div.icon > .overlay { font-size: 24px; position: absolute; display: block; top: -6px; left: -3px; text-align:center; vertical-align:middle; overflow:visible; } div.approvedWithCondition { color: green; } div.requestInformation { color: blue; } div.requestExtension { color: green; } </style>
 
 	
 			
-            <div  block-region activate="loading">
-                <br/>
-				<div style="text-align:right;margin-bottom:5px">
-
-					Display cross-references with external database(s): <select ng-model="showDatabase">
-						<option value="">None</option>
+            <div  block-region activate="loading"><br/><div style="text-align:right;margin-bottom:5px">Mostrar referencias cruzadas con base(s) de datos externa(s)<select ng-model="showDatabase">
+						<option value="">Ninguna</option>
 						<option value="showBiostradestatus">Biotradestatus</option>
 					</select>
 				</div>
 
-				<div style="margin-bottom:5px" ng-show="showDatabase">
-					<em>
-						For further information about the external database click on the database name below;
-						to visit the original database page containing information on this LMO click on the
-						<i class="fa fa-external-link"></i>
-						icon beside the database name
-					</em>
-				</div>
+				<div style="margin-bottom:5px" ng-show="showDatabase"><em>Para mayor información sobre la base de datos externa, hacer clic en el nombre de la base de datos que se presenta a continuación; para visitar la página original de la base de datos que contiene información sobre este OVM, hacer clic en el símbolo <i class="fa fa-external-link"></i> que se encuentra al lado del nombre de la base de datos</em></div>
 
 				<table  class="table table-bordered" cellpadding="0" cellspacing="0" id="E8509" style="border-top: solid 1px #888; width: 100%;">
 					<tr>
-						<th class="tableHeaderTop tableHeaderBottom back80 countryName">Country</th>
-						<th class="tableHeaderTop tableHeaderBottom">BCH Decisions</th>
+						<th class="tableHeaderTop tableHeaderBottom back80 countryName">País</th>
+						<th class="tableHeaderTop tableHeaderBottom">Decisiones del CIISB</th>
 						<th class="tableHeaderTop tableHeaderBottom left-border"
-							ng-if="showDatabase=='showBiostradestatus'">
-							<a rel="noopener" target="showBiostradestatus" href="/database/info_biotradestatus.shtml">Biostradestatus</a>
-							<a rel="noopener" target="showBiostradestatus" target="biotradestatus"
-								href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">
-								<i class="fa fa-external-link"></i>
-							</a>
-						</th>
+							ng-if="showDatabase=='showBiostradestatus'"><a rel="noopener" translation-url target="_blank" href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">Biostradestatus <i class="fa fa-external-link"></i></a></th>
 					</tr>
 
 					<tr ng-repeat="country in lmo.countries | filter:isCountryVisible | orderBy:getCountryName">
-						<td class="tableRow back80 countryName"><a
-								href="/about/countryprofile.shtml?country={{country.country}}"
+						<td class="tableRow back80 countryName"><a rel="noopener" translation-url href="/countries/{{country.country|encodeURIComponent}}"
 								target="_self">{{getCountryName(country)}}</a></td>
 						<td class="tableRow" style="text-align:left">
 							<table cellpadding="0" cellspacing="0">
 								<tr ng-repeat="decision in country.bch">
 
-									<td class="linkID" style="text-align:right;padding-right:3px;width:80px">
-										<a rel="noopener" target="_self"
-											href="/database/record.shtml?documentid={{decision.decisionID}}">{{decision.decisionID}}</a>
-									</td>
+									<td class="linkID" style="text-align:right;padding-right:3px;width:80px"><!-- ToDo: get uniqueIdentifier from API and replace decision.decisionID with decision.uniqueIdentifier --> <a rel="noopener" translation-url target="_self"
+											href="/database/DEC/{{decision.decisionID|encodeURIComponent}}" ng-bind="decision.decisionID"></a></td>
 									<td style="width:15px; min-width:15px;font-size:14px;text-align:center">
 										<div ng-show="decision.decision=='approvedWithCondition'"
-											class="approvedWithCondition" title="Approved with Condition"><i
+											class="approvedWithCondition" title="Aprobado con condiciones"><i
 												class="fa fa-exclamation-circle"></i></div>
 										<div ng-show="decision.decision=='requestInformation'" class="requestInformation"
-											title="Request Information"><i class="fa fa-info-circle"></i></div>
+											title="Solicitar información"><i class="fa fa-info-circle"></i></div>
 										<div ng-show="decision.decision=='requestInformation'" class="requestInformation"
-											title="Request Information"><i class="fa fa-info-circle"></i></div>
+											title="Solicitar información"><i class="fa fa-info-circle"></i></div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.food" class="icon"
+										<div class="icon"><img ng-show="decision.food" class="icon"
 												ng-src="/app/img/bch/indicators/ind-food-on.png"
-												title="Direct use as food" />
-											<img ng-hide="decision.food" class="icon"
+												title="Uso directo como alimento humano" /> <img ng-hide="decision.food" class="icon"
 												ng-src="/app/img/bch/indicators/ind-food-off.png"
-												title="Direct use as food" />
-											<div ng-show="decision.food && decision.decision=='prohibited'"
+												title="Uso directo como alimento humano" /><div ng-show="decision.food && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
-													ng-src="/app/img/bch/ban.png" title="Direct use as food" />
-											</div>
+													ng-src="/app/img/bch/ban.png" title="Uso directo como alimento humano" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.feed" class="icon"
+										<div class="icon"><img ng-show="decision.feed" class="icon"
 												ng-src="/app/img/bch/indicators/ind-feed-on.png"
-												title="Direct use as feed" />
-											<img ng-hide="decision.feed" class="icon"
+												title="Uso directo como alimento animal" /> <img ng-hide="decision.feed" class="icon"
 												ng-src="/app/img/bch/indicators/ind-feed-off.png"
-												title="Direct use as feed" />
-											<div ng-show="decision.feed && decision.decision=='prohibited'"
+												title="Uso directo como alimento animal" /><div ng-show="decision.feed && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
-													ng-src="/app/img/bch/ban.png" title="Direct use as feed" />
-											</div>
+													ng-src="/app/img/bch/ban.png" title="Uso directo como alimento animal" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.processing" class="icon"
-												ng-src="/app/img/bch/indicators/ind-transform-on.png" title="Processing" />
-											<img ng-hide="decision.processing" class="icon"
-												ng-src="/app/img/bch/indicators/ind-transform-off.png" title="Processing" />
-											<div ng-show="decision.processing && decision.decision=='prohibited'"
+										<div class="icon"><img ng-show="decision.processing" class="icon"
+												ng-src="/app/img/bch/indicators/ind-transform-on.png" title="Para procesamiento" /> <img ng-hide="decision.processing" class="icon"
+												ng-src="/app/img/bch/indicators/ind-transform-off.png" title="Para procesamiento" /><div ng-show="decision.processing && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
-													ng-src="/app/img/bch/ban.png" title="Processing" /></div>
+													ng-src="/app/img/bch/ban.png" title="Para procesamiento" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.release" class="icon"
+										<div class="icon"><img ng-show="decision.release" class="icon"
 												ng-src="/app/img/bch/indicators/ind-release-on.png"
-												title="Intentional introduction into the environment" />
-											<img ng-hide="decision.release" class="icon"
+												title="Introducción intencional en el medio ambiente" /> <img ng-hide="decision.release" class="icon"
 												ng-src="/app/img/bch/indicators/ind-release-off.png"
-												title="Intentional introduction into the environment" />
-											<div ng-show="decision.release && decision.decision=='prohibited'"
+												title="Introducción intencional en el medio ambiente" /><div ng-show="decision.release && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon"
 													ng-src="/app/img/bch/ban.png"
-													title="Intentional introduction into the environment" /></div>
+													title="Introducción intencional en el medio ambiente" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.containedUse" class="icon"
+										<div class="icon"><img ng-show="decision.containedUse" class="icon"
 												ng-src="/app/img/bch/indicators/ind-confined-on.png"
-												title="Contained Use" />
-											<img ng-hide="decision.containedUse" class="icon"
+												title="Uso confinado" /> <img ng-hide="decision.containedUse" class="icon"
 												ng-src="/app/img/bch/indicators/ind-confined-off.png"
-												title="Contained Use" />
-											<div ng-show="decision.containedUse && decision.decision=='prohibited'"
+												title="Uso confinado" /><div ng-show="decision.containedUse && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
 													ng-src="/app/img/bch/ban.png"
-													title="Prohibite direct use as food" />
-											</div>
+													title="Prohibición de uso directo como alimento humano" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.pharmaceutical" class="icon"
-												ng-src="/app/img/bch/indicators/ind-pharma-on.png" title="Pharmaceutical" />
-											<img ng-hide="decision.pharmaceutical" class="icon"
+										<div class="icon"><img ng-show="decision.pharmaceutical" class="icon"
+												ng-src="/app/img/bch/indicators/ind-pharma-on.png" title="Farmacéutico" /> <img ng-hide="decision.pharmaceutical" class="icon"
 												ng-src="/app/img/bch/indicators/ind-pharma-off.png"
-												title="Pharmaceutical" />
-											<div ng-show="decision.pharmaceutical && decision.decision=='prohibited'"
+												title="Farmacéutico" /><div ng-show="decision.pharmaceutical && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
-													ng-src="/app/img/bch/ban.png" title="Pharmaceutical" /></div>
+													ng-src="/app/img/bch/ban.png" title="Farmacéutico" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.transit" class="icon"
-												ng-src="/app/img/bch/indicators/ind-transit-on.png" title="Transit" />
-											<img ng-hide="decision.transit" class="icon"
-												ng-src="/app/img/bch/indicators/ind-transit-off.png" title="Transit" />
-											<div ng-show="decision.transit && decision.decision=='prohibited'"
+										<div class="icon"><img ng-show="decision.transit" class="icon"
+												ng-src="/app/img/bch/indicators/ind-transit-on.png" title="Tránsito" /> <img ng-hide="decision.transit" class="icon"
+												ng-src="/app/img/bch/indicators/ind-transit-off.png" title="Tránsito" /><div ng-show="decision.transit && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
-													ng-src="/app/img/bch/ban.png" title="Transit" /></div>
+													ng-src="/app/img/bch/ban.png" title="Tránsito" /></div>
 										</div>
 									</td>
 									<td class="bch-icon">
-										<div class="icon">
-											<img ng-show="decision.other" class="icon"
-												ng-src="/app/img/bch/indicators/ind-other-on.png" title="Other" />
-											<img ng-hide="decision.other" class="icon"
-												ng-src="/app/img/bch/indicators/ind-other-off.png" title="Other" />
-											<div ng-show="decision.other && decision.decision=='prohibited'"
+										<div class="icon"><img ng-show="decision.other" class="icon"
+												ng-src="/app/img/bch/indicators/ind-other-on.png" title="Otro" /> <img ng-hide="decision.other" class="icon"
+												ng-src="/app/img/bch/indicators/ind-other-off.png" title="Otros" /><div ng-show="decision.other && decision.decision=='prohibited'"
 												class="overlay prohibited"><img class="icon-overlay"
-													ng-src="/app/img/bch/ban.png" title="Other" /></div>
+													ng-src="/app/img/bch/ban.png" title="Otros" /></div>
 										</div>
 									</td>
 							</table>
@@ -168,66 +119,46 @@
 							<table>
 								<tr ng-repeat="decision in country.biotrade">
 									<td class="biotrade-icon">
-										<div class="icon">
-											<img ng-show=" decision.food" class="icon on  svg"
-												src="/app/img/bch/biotradestatus/food.png" title="Food" />
-											<img ng-show="!decision.food" class="icon off svg"
-												src="/app/img/bch/biotradestatus/food.png" title="Food" />
-										</div>
+										<div class="icon"><img ng-show=" decision.food" class="icon on  svg"
+												src="/app/img/bch/biotradestatus/food.png" title="Alimentación" /> <img ng-show="!decision.food" class="icon off svg"
+												src="/app/img/bch/biotradestatus/food.png" title="Alimentación" /></div>
 									</td>
 									<td class="biotrade-icon">
-										<div class="icon">
-											<img ng-show=" decision.feed" class="icon on  svg"
-												src="/app/img/bch/biotradestatus/feed.png" title="Feed" />
-											<img ng-show="!decision.feed" class="icon off svg"
-												src="/app/img/bch/biotradestatus/feed.png" title="Feed" />
-										</div>
+										<div class="icon"><img ng-show=" decision.feed" class="icon on  svg"
+												src="/app/img/bch/biotradestatus/feed.png" title="Alimento animal" /> <img ng-show="!decision.feed" class="icon off svg"
+												src="/app/img/bch/biotradestatus/feed.png" title="Alimento animal" /></div>
 									</td>
 									<td class="biotrade-icon">
-										<div class="icon">
-											<img ng-show=" decision.environmentalImport" class="icon on  svg"
+										<div class="icon"><img ng-show=" decision.environmentalImport" class="icon on  svg"
 												src="/app/img/bch/biotradestatus/import.png"
-												title="Environmental / Import" />
-											<img ng-show="!decision.environmentalImport" class="icon off svg"
+												title="Ambiental/importación" /> <img ng-show="!decision.environmentalImport" class="icon off svg"
 												src="/app/img/bch/biotradestatus/import.png"
-												title="Environmental / Import" />
-										</div>
+												title="Ambiental/importación" /></div>
 									</td>
 									<td class="biotrade-icon">
-										<div class="icon">
-											<img ng-show=" decision.environmentalCultivation" class="icon on  svg"
+										<div class="icon"><img ng-show=" decision.environmentalCultivation" class="icon on  svg"
 												src="/app/img/bch/biotradestatus/cultivation.png"
-												title="Environmental / Cultivation" />
-											<img ng-show="!decision.environmentalCultivation" class="icon off svg"
+												title="Ambiental/cultivo" /> <img ng-show="!decision.environmentalCultivation" class="icon off svg"
 												src="/app/img/bch/biotradestatus/cultivation.png"
-												title="Environmental / Cultivation" />
-										</div>
+												title="Ambiental/cultivo" /></div>
 									</td>
 									<td class="biotrade-icon">
-										<div class="icon">
-											<img ng-show=" decision.safetyCertificate" class="icon on  svg"
+										<div class="icon"><img ng-show=" decision.safetyCertificate" class="icon on  svg"
 												src="/app/img/bch/biotradestatus/certificate.png"
-												title="Safety Certificate" />
-											<img ng-show="!decision.safetyCertificate" class="icon off svg"
+												title="Certificado de inocuidad" /> <img ng-show="!decision.safetyCertificate" class="icon off svg"
 												src="/app/img/bch/biotradestatus/certificate.png"
-												title="Safety Certificate" />
-										</div>
+												title="Certificado de inocuidad" /></div>
 									</td>
 									<td class="biotrade-icon">
-										<div class="icon">
-											<img ng-show=" decision.referIndividualEventStatus" class="icon on  svg"
+										<div class="icon"><img ng-show=" decision.referIndividualEventStatus" class="icon on  svg"
 												src="/app/img/bch/biotradestatus/link.png"
-												title="Refer to Individual Event Status" />
-											<img ng-show="!decision.referIndividualEventStatus" class="icon off svg"
+												title="Referencia a la situación individual del evento" /> <img ng-show="!decision.referIndividualEventStatus" class="icon off svg"
 												src="/app/img/bch/biotradestatus/link.png"
-												title="Refer to Individual Event Status" />
-										</div>
+												title="Referencia a la situación individual del evento" /></div>
 									</td>
 								</tr>
 							</table>
 						</td>
 					</tr>
-				</table>
-				<br/><br/>
-			</div>
+				</table><br/><br/></div>
 </div>

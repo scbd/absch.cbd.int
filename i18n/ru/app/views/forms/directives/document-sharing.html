@@ -1,9 +1,7 @@
 ﻿<span class="document-sharing"><button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
     title="Поделиться"><i class="fa fa-firefox"></i> <span class="hidden-xs">Поделиться</span></button>
     <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
-    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>
-
-    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>  </span><script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header">Поделиться черновиком: <span ng-bind="title"></span></div>
             <div class="modal-body">
@@ -63,9 +61,7 @@
                 </div>
             </div>
         </div>
-    </script>
-
-    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+    </script><script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal">
             <div class="modal-header">Сохранить данный черновик в формате PDF: <span  ng-bind="title"></span></div>
             <div class="modal-body">
@@ -84,4 +80,4 @@
                 <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Закрыть</button>
             </div>
         </div>
-    </script></span>
+    </script>

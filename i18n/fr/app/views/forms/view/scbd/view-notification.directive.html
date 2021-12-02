@@ -32,7 +32,9 @@
 			<label>Récipiendaire</label><span class="km-value">{{document.recipient_ss| lstring:locale}}</span></div>
 
 		<div ng-show="document.url_ss">
-			<label>Lien vers le document</label><span class="km-value"><a rel="noopener" translation-url  ng-href="http://www.cbd.int{{document.url_ss | lstring:locale|encodeURIComponent}}" target="_">http://www.cbd.int{{document.url_ss | lstring:locale}}</a></span></div>
+			<label>Lien vers le document</label><span class="km-value"><ul class="list">
+					<li ng-repeat="url in document.url_ss"><a rel="noopener" translation-url  ng-href="{{url}}" target="_"><span ng-bind="url"></span></a></li>
+				</ul></span></div>
 
 	</div>
 	<div document-metadata  class="panel-footer"></div>

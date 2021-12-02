@@ -1,17 +1,20 @@
 ﻿<div >
     <style> .indent { padding: 0 15px 0 15px; } </style>
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" hide-timer="false" tab="tab"><!-- <intro-form></intro-form> --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --><edit-form>
                     <form name="editForm" class="editForm">
                         <div class="editForm">
                             <section><br><div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
+                                        <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier.">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                             </div>
@@ -71,7 +74,7 @@
                                 </div>
                                 <div class="row indent" ng-if="isCommunity()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Nom de la communauté">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>

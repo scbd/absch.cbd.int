@@ -7,14 +7,7 @@
 				placeholder="{{placeholder}}" locales="locales" class="form-control" ng-change="save()"
 				style="    border: none;
 				height: unset;
-				padding: 0;"></div>
-			<span class="input-group-btn" ng-show="list.length>1">
-				<button type="button" class="btn btn-default" ng-click="remove($index)"><i class="glyphicon glyphicon-trash"></i></button>
-			</span>
-			<div ng-if="type=='url'" class="alert alert-warning" ng-show="textControl.$error.url">
-				<strong>Warning!</strong>
-				Specified value is not a valid URL.
-				<ul><li> Make sure the URL starts with http:// or https://</li></ul>
+				padding: 0;"></div><span class="input-group-btn" ng-show="list.length>1"><button type="button" class="btn btn-default" ng-click="remove($index)"><i class="glyphicon glyphicon-trash"></i></button></span><div ng-if="type=='url'" class="alert alert-warning" ng-show="textControl.$error.url"><strong>警告！</strong>指定的值并非有效的网址<ul><li>确保网址要以 http:// 或者https:// 开头</li></ul>
 			</div>
 		</form>
 	</div>

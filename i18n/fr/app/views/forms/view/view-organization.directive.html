@@ -85,7 +85,7 @@
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="areaOfWork in document.areasOfWork" style="margin-bottom: 5px;">
-							<km-value-ml value="areaOfWork" locales="locale"></km-value-ml>
+							<km-value-ml value="areaOfWork" html pre locales="locale"></km-value-ml>
 						</li>
 					</ul>
 				</div>
@@ -127,7 +127,7 @@
 			</div>
 		</div>
 
-		<div ng-show="linkedOrganizations">
+		<div ng-show="document.linkedOrganizations">
 			<legend>Organisations connexes</legend>
 			<div class="km-value" compare-val>
 				<ul class="list">

@@ -89,7 +89,7 @@
 		<div ng-show="document.geneConstructs">
 			<label>Constructo elementos genéticos</label>
 
-			<div class="km-value" compare-val>
+			<div class="km-value" compare-val ng-class="{'lmo-gene-construct-scroll':!printMode}">
 				<div ng-repeat="construct in document.geneConstructs" style="margin-bottom:5px;">
 					<view-lmo-gene ng-model="construct"></view-lmo-gene>
 				</div>

@@ -1,84 +1,29 @@
 ﻿<div class="row top-records" style="margin:0 0 5px 0" ng-show="loading || self.records.Items.length > 0">
-    <h4 ng-if="self.title" style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;">{{self.title}}</h4>
-    <div ng-if="loading" style="margin:0 48%">
-        <i class="fa fa-spin fa-spinner" ></i>
-    </div>
-    <style>
-        .top-records .table>thead>tr>th, .top-records .table>tbody>tr>td{
-            padding:0px!important;
-        }
-        .top-records .table>tbody+tbody{
-            border-top: none
-        }
-    </style>
+    <h4 ng-if="self.title" style="padding:3px;margin-top:0;border-bottom:1px solid #ddd;" ng-bind="self.title"></h4>
+    <div ng-if="loading" style="margin:0 48%"><i class="fa fa-spin fa-spinner" ></i></div>
+    <style> .top-records .table>thead>tr>th, .top-records .table>tbody>tr>td{ padding:0px!important; } .top-records .table>tbody+tbody{ border-top: none } </style>
     <table class="table table-hover table-striped" style="width:100%;" ng-if="self.records.Items.length > 0">
         <thead style="padding-bottom:10px;">
             <tr>
-                <th> 
-                    <span class="bold" style="padding-left:3px;font-weight: normal;font-size:12px;">Latest records</span> 
-                </th>
-                <th style="font-weight: normal;font-size:12px;"> Title</th>
-                <th style="font-weight: normal;font-size:12px;"> Updated</th>
-                <th style="font-weight: normal;font-size:12px;"> <span class="hidden-xs">Status</span>
-                    <span ng-if="self.records.Count > 0"  class="pull-right" >
-                        <a rel="noopener"  class="bold"  style="white-space:nowrap;padding-left:10px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">View all</a>
-                        <a rel="noopener"  class="bold"  style="white-space:nowrap;padding-left:5px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">View all</a>
-                    </span>
-                </th>
+                <th><span class="bold" style="padding-left:3px;font-weight: normal;font-size:12px;">Derniers fichiers</span></th>
+                <th style="font-weight: normal;font-size:12px;">Titre</th>
+                <th style="font-weight: normal;font-size:12px;">Mise à jour</th>
+                <th style="font-weight: normal;font-size:12px;"><span class="hidden-xs">Statut</span> <span ng-if="self.records.Count > 0"  class="pull-right" ><a rel="noopener"  class="bold"  style="white-space:nowrap;padding-left:10px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">Tout voir</a><a rel="noopener"  class="bold"  style="white-space:nowrap;padding-left:5px;padding-right:10px;font-weight: normal;font-size:12px;" translation-url ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">Tout voir</a></span></th>
             </tr>
         </thead> 
         <tbody ng-repeat="record in self.records.Items | orderBy:'workingDocumentLock.lockedOn'">
             <tr id="record{{record.identifier}}">
-                <td style="width:100px; text-align: right;">
-                    <span style="padding-left:3px;padding-right:15px;">
-                        <span ng-if="!showSchemaName">{{record.type|schemaName}}</span>
-                        <div class="btn-group document_buttons btn-group-xs" ng-show="record.workflowActivityStatus!='pending'">
-                            <a rel="noopener" translation-url  title="View" ng-show="record.documentID" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="glyphicon glyphicon-search"></i></a>  
-                            <a rel="noopener" translation-url  title="Lock" ng-show="record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="glyphicon glyphicon-lock"></i></a>                          
-                            <a rel="noopener" translation-url  title="Edit" ng-show="!record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit"><i class="fa fa-edit"></i></a>                        
-                        </div>
-                        </span>
-                    </td>       
-                <td style="width:40%;">                   
-                    <span>
-                        <a rel="noopener" translation-url ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
-                            {{(record.workingDocumentTitle||record.title)|lstring}}
-                        </a>
-                    </span>
-                </td>
+                <td style="width:100px; text-align: right;"><span style="padding-left:3px;padding-right:15px;"> <span ng-if="!showSchemaName" ng-bind="record.type|schemaName"></span><div class="btn-group document_buttons btn-group-xs" ng-show="record.workflowActivityStatus!='pending'"><a rel="noopener" translation-url  title="Vue" ng-show="record.documentID" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="glyphicon glyphicon-search"></i></a> <a rel="noopener" translation-url  title="Verrouiller" ng-show="record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="glyphicon glyphicon-lock"></i></a> <a rel="noopener" translation-url  title="Modifier" ng-show="!record.workingDocumentLock" type="button" class="btn btn-default btn-xs" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit"><i class="fa fa-edit"></i></a></div></span></td>       
+                <td style="width:40%;"><span><a rel="noopener" translation-url ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span></a></span></td>
                 <td>                    
-                    <div ng-if="record.workingDocumentUpdatedBy">
-                        <a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
-                            <strong>{{record.workingDocumentUpdatedBy.firstName}} {{record.workingDocumentUpdatedBy.lastName}}</strong>
-                        </a>
-                        <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentUpdatedOn | formatDateWithTime }}</span>
-                    </div>
-                    <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                        <a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
-                            <strong>{{record.workingDocumentCreatedBy.firstName}} {{record.workingDocumentCreatedBy.lastName}}</strong>
-                        </a>
-                        <span style="font-size:10px;white-space:nowrap;">{{record.workingDocumentCreatedBy | formatDateWithTime }}</span>
-                    </div>
+                    <div ng-if="record.workingDocumentUpdatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}"><strong><span ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></span></strong></a> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span></div>
+                    <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}"><strong><span ng-bid="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></span></strong></a> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span></div>
                     <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                            <div ng-show="record.updatedBy">
-                                <a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
-                                    <strong>{{record.updatedBy.firstName}} {{record.updatedBy.lastName}}</strong>
-                                </a>
-                                <span style="font-size:10px;white-space:nowrap;">{{record.updatedOn | formatDateWithTime }}</span>
-                            </div>
-                            <div ng-show="record.createdBy && !record.updatedBy">
-                                <a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}">
-                                    <strong>{{record.createdBy.firstName}} {{record.createdBy.lastName}}</strong>
-                                </a>
-                                <span style="font-size:10px;white-space:nowrap;">{{record.createdOn | formatDateWithTime }}</span>
-                            </div>
+                            <div ng-show="record.updatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}"><strong><span ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></span></strong></a> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.updatedOn | formatDateWithTime"></span></div>
+                            <div ng-show="record.createdBy && !record.updatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}"><strong><span ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></span></strong></a> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.createdOn | formatDateWithTime"></span></div>
                         </div>
                 </td>
-                <td class="">
-                    <span class="label label-primary bg-published"ng-if="record.documentID">Published</span>
-                    <span class="label label-warning bg-draft" ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Draft</span>
-                    <span class="label label-warning bg-request" ng-if="record.workingDocumentLock">Request</span>                    
-                </td> 
+                <td class=""><span class="label label-primary bg-published"ng-if="record.documentID">Public</span> <span class="label label-warning bg-draft" ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Brouillon</span> <span class="label label-warning bg-request" ng-if="record.workingDocumentLock">Demande</span></td> 
             </tr>
         </tbody>
     </table>

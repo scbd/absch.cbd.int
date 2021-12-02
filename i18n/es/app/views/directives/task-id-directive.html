@@ -1,80 +1,39 @@
 ﻿<div class="row" style="margin-bottom:15px;"  ng-hide="hideEverything">
     <div class="col-xs-12">
-        <style>
-            .active {
-                position: absolute!important;
-                top: 0!important;
-                left: 0!important;
-                padding: 0;
-                margin: 0;
-            }
-        </style>
+        <style> .active { position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style><span block-region activate="isUpdating"></span><div class="alert alert-danger" style="border-color:#DDD; background-color: #f5f5f5;" role="alert">
+            <h3 class="color-black;" style="margin-top:0;border-bottom:1px solid #999;"><span ng-if="workflow.type.name != 'delete-record'">Publicación</span> <span ng-if="workflow.type.name == 'delete-record'">Eliminación</span> Solicitud</h3>
+            <div><span style="font-size:12px">Solicitado por:</span> <span class="color-black"><span class="bold">{{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}}</span><a rel="noopener" translation-url  ng-href="mailTo:{{workflow.createdBy_info.email|encodeURIComponent}}" class="color-blue">({{workflow.createdBy_info.email}})</a><span>el</span><span  style="text-transform: uppercase; font-size:12px" class="bold" ng-bind="workflow.createdOn | formatDateWithTime"></span><span ng-if="document.amendmentIntent == 1" class="bold color-red"> ha solicitado revocar este registro.</span></span></div>
+            <div><span style="font-size:12px">Mensaje:</span> <span class="color-black"><span ng-bind="workflow.data.additionalInfo"></span></span></div>
 
-        <span block-region activate="isUpdating"></span>
-
-        <div class="alert alert-danger" style="border-color:#DDD; background-color: #f5f5f5;" role="alert">
-            <h3 class="color-black;" style="margin-top:0;border-bottom:1px solid #999;">
-                    <span ng-if="workflow.type.name != 'delete-record'">Publishing </span>
-                    <span ng-if="workflow.type.name == 'delete-record'">Deletion </span>
-                    Request
-            </h3>
-            <div>
-                <span style="font-size:12px">Requested by: </span>
-                <span class="color-black">
-                    <span class="bold">{{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}} </span>
-                    <a rel="noopener" translation-url  ng-href="mailTo:{{workflow.createdBy_info.email|encodeURIComponent}}" class="color-blue">
-                       ({{workflow.createdBy_info.email}})</a>
-                    <span> on </span> <span  style="text-transform: uppercase; font-size:12px" class="bold"> {{workflow.createdOn | formatDateWithTime}} </span>
-                    <span ng-if="document.amendmentIntent == 1" class="bold color-red"> has requested to revoke this record.</span>
-                </span>
-            </div>
-            <div>
-                <span style="font-size:12px">Message: </span>
-                <span class="color-black">
-                        {{workflow.data.additionalInfo}}
-                </span>
-            </div>
-
-            <div>
-                <span style="font-size:12px"> This request expires in: </span>
-                <span>{{workflow.daysToApproval}} days</span>
-            </div> 
+            <div><span style="font-size:12px">Esta solicitud vence en:</span> <span><span ng-bind="workflow.daysToApproval"></span> días</span></div> 
 
             <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" style="padding-top:20px;">
 
                     <div  id="buttonsDiv" ng-show="isAssignedToMe(activity) || isAdmin()">
                         <div  style="display:inline;padding:5px;" ng-show="activity.name != 'deleteRecord' ">
-                            <button type="button" class="btn btn-success bold" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating">
-                            <i class="fa fa-check-circle"></i>
-                            <span >Approve</span>
-                        </button>
+                            <button type="button" class="btn btn-success bold" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating"><i class="fa fa-check-circle"></i> <span >Aprobar</span></button>
                         </div>
                         <div  style="display:inline;padding:5px;"  ng-show="activity.name != 'deleteRecord' && document.amendmentIntent != 1">
-                            <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity, workflow._id)" ng-disabled="isUpdating">
-                            <i class="fa fa-pencil-square-o"></i>
-                            <span >Edit</span>
-                        </button>
+                            <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity, workflow._id)" ng-disabled="isUpdating"><i class="fa fa-pencil-square-o"></i> <span >Editar</span></button>
                         </div>
                         <div style="display:inline;padding:5px;" >
-                            <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating">
-                            <i class="fa fa-times-circle"></i>
-                           <span ng-if="activity.name == 'deleteRecord'" >Reject (do not delete)</span>
-                           <span ng-if="activity.name != 'deleteRecord'" >Reject</span>
-                        </button>
+                            <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating"><i class="fa fa-times-circle"></i> <span ng-if="activity.name == 'deleteRecord'" >Rechazar (no eliminar)</span> <span ng-if="activity.name != 'deleteRecord'" >Rechazar</span></button>
                         </div>
                         <div style="display:inline;padding:5px;"  ng-show="activity.name == 'deleteRecord'">
-                                <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating">
-                                <i class="fa fa-check-circle"></i>
-                                <span >Delete</span>
-                            </button>
+                                <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating"><i class="fa fa-check-circle"></i> <span >Eliminar</span></button>
                         </div>
                     </div>
 
                     <div ng-show="workFlowIsCreatedByMe()">
-                        <button type="button" class="btn btn-warning bold" ng-click="askCancelWorkflowRequest()" ng-disabled="isUpdating">
-                            <i class="fa fa-rotate-left"></i>
-                            <span> Cancel request</span>                           
-                        </button>
+                        <button type="button" class="btn btn-warning bold" ng-click="askCancelWorkflowRequest()" ng-disabled="isUpdating"><i class="fa fa-rotate-left"></i> <span>Cancelar solicitud</span></button>
+                    </div>
+                    <div ng-if="isAdmin()"><br/> <strong>El flujo de trabajo se asigna a los siguientes usuarios</strong> (visible solo para los usuarios administradores)<table class="table table-bordered">
+                            <tr ng-repeat="user in activity.assignedTo_info">
+                                <td ng-bind="user.userID"></td>
+                                <td ng-bind="user.firstName + ' ' + user.lastName"></td>
+                                <td ng-bind="user.email"></td>
+                            </tr>
+                        </table>
                     </div>
             </div>
 
@@ -90,17 +49,15 @@
     <script type="text/ng-template" trados-translation="true" id="rejectWorkflowRequestModalTemplate">
         <form name="rejectForm" role="form">
             <div class="modal-header bg-red">
-                <h4 class="modal-title color-white">Request changes or reject this request</h4>
+                <h4 class="modal-title color-white">Solicitar cambios o rechazar esta solicitud</h4>
             </div>
             <div class="modal-body bg-white">
-                <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }">
-                    <span ng-show="rejectForm.reason.$error.required">Please provide the reason this record is being rejected.</span>
-                    <textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+                <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }"><span ng-show="rejectForm.reason.$error.required">Sírvase indicar el motivo del rechazo de este registro</span><textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning bold pull-left" data-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
-                <button type="button" class="btn btn-default" ng-click="closeDialog();">Cancel</button>
+                <button type="button" class="btn btn-warning bold pull-left" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Rechazar</button>
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">Cancelar</button>
             </div>
         </form>
     </script>
@@ -108,37 +65,27 @@
     <script type="text/ng-template" trados-translation="true" id="cancelWorkflowRequestModalTemplate">
         <div id="cancelWorkflowRequestModal">
             <div class="modal-header">
-                <h4>Cancel publishing request<i ng-show="loading==true" class="fa fa-spinner fa-spin" style="display:none"></i></h4>
+                <h4>Cancelar solicitud de publicación<i ng-show="loading==true" class="fa fa-spinner fa-spin" style="display:none"></i></h4>
             </div>
             <div class="modal-body bg-white">
-                <h2>Are you sure you want to cancel this publishing request?</h2>
+                <h2>¿Está seguro de que quiere cancelar esta solicitud de publicación?</h2>
             </div>
             <div class="modal-footer" style="margin-top:0">
-                 <button ng-disabled="loading==true" type="button" ng-click="cancelWorkflowRequest(workflow)" class="btn bold btn-primary">Yes</button>
-                <button type="button" class="btn btn-default" ng-click="closeDialog();">Close</button>
+                 <button ng-disabled="loading==true" type="button" ng-click="cancelWorkflowRequest(workflow)" class="btn bold btn-primary">Sí</button>
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">Cerrar</button>
             </div>
         </div>
     </script>
 
     <script type="text/ng-template" trados-translation="true" id="deleteConfirmation">
-        <!--<div class="modal-content">-->
-        <div class="modal-header">
-            <h3 class="modal-title">Delete Confirmation
-                </h3>
+        <!--<div class="modal-content">--><div class="modal-header">
+            <h3 class="modal-title">Borrar conformación</h3>
         </div>
         <div class="modal-body bg-white">
-           <h2 class="color-red"> Are you sure you want to delete this record?</h2>
-           {{document}}
-        </div>
+           <h2 class="color-red">¿Está seguro de que quiere borrar este registro?</h2><span ng-bind="document"></span></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger bold pull-left" ng-click="updateActivity()" ng-disabled="isUpdating">
-                            <span class="hidden-xs">Delete record</span>
-                        </button>
-            <button type="button" class="btn btn-default" ng-click="closeConfirmation()" ng-disabled="isUpdating">
-                            <span class="hidden-xs">Close</span>
-                        </button>
-        </div>
-        <!--</div> -->
-    </script>
+            <button type="button" class="btn btn-danger bold pull-left" ng-click="updateActivity()" ng-disabled="isUpdating"><span class="hidden-xs">Borrar registro</span></button>
+            <button type="button" class="btn btn-default" ng-click="closeConfirmation()" ng-disabled="isUpdating"><span class="hidden-xs">Cerrar</span></button>
+        </div><!--</div> --></script>
 
 </div>

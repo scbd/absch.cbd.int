@@ -1,14 +1,10 @@
 <div>
     <div style="margin:0 10% 0 10%" >
-        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">
-            Email verification pending</h1>
+        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">电子邮件地址等待验证</h1>
         <hr>
        <div class="well">
-           <p>
-              Email verification pending. Please verify you email before submitting any data.   
-           </p>
-           <h3 class="color-green">Please click on the verification link in the email sent on {{user.email}}. 
-              click <a rel="noopener" href="https://accounts.cbd.int/activate/resend">here</a> to resend the activation email.</h3>
+           <p>电子邮件地址等待验证。提交任何数据之前，请验证您的电子邮件。</p>
+           <h3 class="color-green">请单击于<span ng-bind="user.email"></span>收到的电子邮件中的验证链接。单击<a rel="noopener" href="https://accounts.cbd.int/activate/resend">此处</a>重新发送激活电子邮件。</h3>
        </div>
       </div>
     </div>

@@ -1,12 +1,12 @@
 <div>
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -43,8 +43,8 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="hasUniqueIdentification" required caption="Does this LMO have a unique identifier?">
-												<div class="help-block">Le BCH utilise actuellement le système d'identifiant unique figurant dans les Directives de l'OCDE pour la désignation des identifiants uniques pour les plantes transgéniques (par ex. MON-ØØ81Ø-6). Pour de plus amples informations visiter <a rel="noopener" href="http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml</a>.</div>
+											<div class="km-control-group" name="hasUniqueIdentification" required caption="Cet OVM possède-t-il un identifiant unique?">
+												<div class="help-block">Le BCH utilise actuellement le système d'identifiant unique figurant dans les Directives de l'OCDE pour la désignation des identifiants uniques pour les plantes transgéniques (par ex. MON-ØØ81Ø-6). Pour de plus amples informations visiter <a rel="noopener" href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">https://bch.cbddev.xyz/en/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef</a>.</div>
 												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -65,9 +65,9 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="recipientOrganisms" caption="“Recipient Organism” or “Parental Organisms”">	
-												<div class="help-block">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.</div>
-												<div document-selector required ng-model="document.recipientOrganisms" caption="Add Organism / Living Modified Organism" question="recipientOrganisms"
+											<div class="km-control-group" required name="recipientOrganisms" caption="Organisme récepteur ou organismes parentaux">	
+												<div class="help-block">Le terme « organisme récepteur » désigne un organisme (non modifié ou déjà modifié) ayant fait l'objet d'une modification génétique, tandis que les « organismes parentaux » désignent les organismes impliqués dans un croisement ou une fusion cellulaire pour générer un organisme modifié.</div>
+												<div document-selector required ng-model="document.recipientOrganisms" caption="Ajouter un organisme vivant modifié" question="recipientOrganisms"
 														on-build-query="onRrecipientOrganismsQuery(searchText)" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>
 											</div>
 										</div>
@@ -78,7 +78,7 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="linkedModifiedOrganisms" caption="Related LMO(s)">	
+											<div class="km-control-group" name="linkedModifiedOrganisms" caption="OVM connexe(s)">	
 												<div class="help-block">Ce champs fait référence aux autres OVM avec des caractéristiques similaires.</div>
 												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganism"
 															on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true" allow-new-schema="modifiedOrganism"></div>
@@ -106,7 +106,7 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="genes" caption="Introduced or modified genetic element(s)">	
+											<div class="km-control-group" required name="genes" caption="Élément(s) génétique(s) introduit(s) ou modifié(S)">	
 												<div class="help-block">De préférence, tous les éléments génétiques ayant été introduits dans cet OVM, tels que les promoteurs, les séquences codant des protéines et les terminateurs, doivent être indiqués dans cette section, l'inclusion de TOUTES les séquences codant des protéines étant le minimum requis.</div>
 												<div document-selector ng-model="document.genes" question="genes" ng-change="onModifiedGeneChange(document.genes)"
 															caption="Élément génétique" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
@@ -122,8 +122,8 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="geneNotes" caption="Notes regarding the genetic elements present in this LMO">	
-												<div class="help-block">Please specify if any of these elements have been modified from the sequence registered in the BCH Genetic Element Registry and how they relate to each other in this LMO, for instance “<i>epsps</i> protein coding sequence under control of the <i>35S</i> promoter and <i>nos</i> terminator”.</div>
+											<div class="km-control-group" name="geneNotes" caption="Notes concernant les éléments génétiques présents dans cet OVM">	
+												<div class="help-block">Veuillez indiquer tout élément modifié par rapport à la séquence enregistrée dans le registre des éléments génétiques du CEPRB ainsi que les relations existant entre les différents éléments présents dans l'OVM, par exemple « séquence codant pour la protéine <i>epsps</i> sous le contrôle du promoteur <i>35S</i> et du terminateur <i>nos</i>.</div>
 												<div km-rich-textbox name="geneNotes" rows="4"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
 											</div>
 										</div>
@@ -168,7 +168,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="commonUses" caption="Common use(s) of the LMO">
+											<div class="km-control-group" name="commonUses" caption="Usage (s) commun(s) de l’OVM">
 												<div class="help-block">Choisissez les options qui s'appliquent.</div>
 												<div km-term-check name="commonUses" required ng-model="document.commonUses"
 													terms="options.commonUses" binding-type="term[]" locales="document.header.languages"></div>
@@ -188,7 +188,7 @@
 													<link-controls>												
 														<button type="button" class="btn btn-default" ng-click="$parent.addLink()"><i class="fa fa-globe"></i> Ajouter un lien</button>
 														<button type="button" class="btn btn-default" ng-click="$parent.addFile()"><i class="fa fa-file-o"></i> Ajouter un fichier</button><!-- TODO: find better way to get parent func incase of transclude --><button class="btn btn-default" ng-click="$parent.$parent.$parent.$parent.$parent.$parent.lookupDetections()" 
-															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections"><i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> <i class="fa fa-database" aria-hidden="true"></i> Look up Detection methods</button>
+															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections"><i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> <i class="fa fa-database" aria-hidden="true"></i> Rechercher des méthodes de détection</button>
 													</link-controls>
 												</div>
 											</div>
@@ -218,7 +218,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
-												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+												<div class="help-block">Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -232,7 +232,7 @@
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+											<div class="help-block">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>

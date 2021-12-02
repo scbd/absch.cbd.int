@@ -9,16 +9,16 @@
 		<document-date></document-date>
 
 
-		<div ng-if="document.isAmendment || amendedByRecords">
-			<legend>修正</legend>
-			<div ng-if="document.isAmendment">
-				<label>是对已在生物安全信息交换所中发布的法律、法规、指南或协议的修正吗？</label>
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
+			<legend>Amendment</legend>
+			<div ng-if="document.isAmendment!=undefined">
+				<label>是对已在生物安全信息交换所中发布的法律、法规、指南或协议的修改吗？</label>
 				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.amendedRecords">
-				<label>经修正的法律/法规</label>
+				<label>经修改的法律/法规</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
@@ -28,13 +28,13 @@
 				</div>
 			</div>
 			<div ng-if="document.amendmentsDetails">
-				<label>修正摘要</label>
+				<label>修改摘要</label>
 				<div compare-val>
 					<km-value-ml value="document.amendmentsDetails" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="amendedByRecords">
-				<label>本记录中的法律/法规已由以下记录中的法律/法规所修正</label>
+				<label>本记录中的法律/法规已由以下记录中的法律/法规所修改</label>
 				<div class="km-value" compare-val>
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>

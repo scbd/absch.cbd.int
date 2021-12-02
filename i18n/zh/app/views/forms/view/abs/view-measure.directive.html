@@ -22,7 +22,7 @@
 		<div ng-show="document.description">
 			<label>简要描述</label>
 			<div compare-val>
-				<km-value-ml value="document.description" locales="locale"></km-value-ml>
+				<div class="km-value" ng-bind-html="document.description | lstring:locale"></div>
 			</div>
 		</div>
 
@@ -103,7 +103,7 @@
 		</div>
 
 		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
-			<legend>修正</legend>
+			<legend>Amendments</legend>
 			<div ng-show="document.amendedMeasures">
 				<label>此措施将修订以下内容：</label>
 
@@ -132,8 +132,8 @@
 		</div>
 
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
-			<legend>修正</legend>
-			<label>此措施修订人：</label>
+			<legend>Amendments</legend>
+			<label>此措施修改人员：</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.measureAmendedBy">

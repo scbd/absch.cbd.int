@@ -1,7 +1,7 @@
 ﻿<div>
     <div class="section-pane panel panel-default" style="margin-bottom:3px!important">
 
-        <div class="panel-heading">Informations générales</div>
+        <div class="panel-heading">General Information</div>
         <div class="panel-body" style="padding:0px">
             <div style="margin:5px" class="row">
                 <div ng-show="document.government">
@@ -12,7 +12,7 @@
 
                 <div ng-show="document.contact"></br><label>Personne contat qui soumet le rapport</label>
                     <div class="km-value" comapre-val>
-                        <view-record-reference ng-model='document.contact' locale="locale">
+                        <view-record-reference ng-model='document.contact' locale="locale" skip-realm="true">
                         </view-record-reference>
                     </div>
                 </div>

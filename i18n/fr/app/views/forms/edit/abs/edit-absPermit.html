@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
     <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <div ng-if="isIRCCRevoked">
                                 <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
                                 <label for="invalidForm" style="width:100%">
@@ -68,7 +71,7 @@
                                             <div class="col-xs-12">
                                                 <div class="km-control-group">
                                                     <div class="km-control-group" name="permit" caption="Liens entre les autres certificats de conformité reconnus à l’échelle internationale et ce permis (CCRI).">
-                                                        <div class="help-info">Parfois, un permis peut être en lien avec d’autres permis émis dans le passé, par exemple un permis d'accès à un échantillon de sol. Selon des conditions convenues d’un commun accord (CCCA), il est possible que certains pays décident d’émettre des permis spécifiques pour des ressources génétiques identifiées ultérieurement à partir d'échantillon de sol collectés. Pour ce genre de cas, le Centre d'échange APA offre la possibilité de lier différents CCRI. Les CCRI liés par le biais de ce mécanisme s’afficheront ensemble pour ainsi faciliter leur suivi.</div>
+                                                        <div class="help-info">Parfois, un permis peut être en lien avec d’autres permis émis dans le passé, par exemple un permis d'accès à un échantillon de sol. Selon des conditions convenues d’un commun accord (CCCA), il est possible que certains pays décident d’émettre des permis spécifiques pour des ressources génétiques identifiées ultérieurement à partir d'échantillon de sol collectés. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. Les CCRI liés par le biais de ce mécanisme s’afficheront ensemble pour ainsi faciliter leur suivi.</div>
                                                             <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
                                                     </div>
                                                 </div>
@@ -115,7 +118,7 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="La date de délivrance du permis ou son équivalent">
-                                                    <div class="help-info">Deux mois avant la date d'expiration du permis, un courriel est envoyé à l’autorité national compétente pour l'avertir de l’échéance du CCRI.</div>
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here. Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
                                                     <div km-date placeholder="AAAA-MM-JJ" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -169,7 +172,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="La personne ou entité à laquelle le consentement préalable en connaissance de cause a été donné" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">Veuillez fournir le nom et les coordonnées de la personne ou de l’entité à laquelle le consentement préalable en connaissance de cause a été donné; Si l’information est inscrite comme étant confidentielle, cette personne ne pourra pas recevoir de copie de courtoisie du CCRI ou du CPCC.</div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. Si l’information est inscrite comme étant confidentielle, cette personne ne pourra pas recevoir de copie de courtoisie du CCRI ou du CPCC.</div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
@@ -347,7 +350,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="relevantDocuments" caption="Autres sites web pertinents ou documents en pièce jointe">
+                                                <div class="km-control-group" name="relevantDocuments" caption="Autres sites web pertinents et/ou documents en pièce jointe">
                                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>

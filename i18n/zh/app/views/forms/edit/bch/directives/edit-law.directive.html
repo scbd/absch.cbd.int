@@ -1,12 +1,12 @@
 <div>
 
-	<div class="edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -34,8 +34,8 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="isAmendment" required caption="是对已在生物安全信息交换所中发布的法律、法规、指南或协议的修正吗？">
-												<div class="help-block">当所提交的法律/法规会修正某个现有法律/法规时与本部分相关。如果将在生物安全信息交换所发布的措施是对现有法律/法规或其一部分的修正，请确保被修正的法律/法规已在生物安全信息交换所中注册，以便能够提供指向现有记录的链接。这将让两个记录能够一起显示。</div>
+											<div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?">
+												<div class="help-block">当所提交的法律/法规会修改某个现有法律/法规时与本部分相关。如果将在生物安全信息交换所发布的措施是对现有法律/法规或其一部分的修改，请确保被修改的法律/法规已在生物安全信息交换所中注册，以便能够提供指向现有记录的链接。这将让两个记录能够一起显示。</div>
 												<div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -43,7 +43,7 @@
 	
 									<div class="row" ng-if="document.isAmendment">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="amendedRecords" caption="请选择包含待修正法律/法规的记录">	
+											<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
 
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.amendedRecords" question="amendedRecords" caption="法律、法规或准则"
 													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true"
@@ -51,7 +51,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="amendmentsDetails" caption="请提供修正案的简短摘要">
+											<div class="km-control-group" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
 												<div km-rich-textbox ng-model="document.amendmentsDetails" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -133,7 +133,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="description" caption="文件（包含目标和范围）的简要描述">
-												<div class="help-block"><i>目标</i>示例：“本法案的宗旨在于在安全转让、处理和使用因现代生物科技而产生的，可能对生物多样性的保护和持续利用有不利影响的改性活生物体方面确保充分的保护，还考虑到对人体健康的风险，并具体关注越境转移。”<br/><br/><i>范围</i>示例：“这些法规适用于所有可能对生物多样性的保护和持续利用有不利影响的改性活生物体的越境转移、运输、处理和使用，还考虑到对人体健康的风险。”</div>
+												<div class="help-block"><i>目标</i>示例："The objective of this Act is to contribute to ensuring an adequate level of protection in the field of the safe transfer, handling and use of living modified organisms resulting from modern biotechnology that may have adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, and specifically focusing on transboundary movements." <br/> <br/> <i>范围</i>示例：“这些法规适用于所有可能对生物多样性的保护和持续利用有不利影响的改性活生物体的越境转移、运输、处理和使用，还考虑到对人体健康的风险。”</div>
 												<div km-rich-textbox ng-model="document.description" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>

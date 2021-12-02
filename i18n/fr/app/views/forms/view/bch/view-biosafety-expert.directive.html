@@ -58,6 +58,10 @@
 				<km-value-ml value="document.currentEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
+			<div ng-if="document.currentEmployment.organizationType">
+				<label>Type d'organisation</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.organizationType|term:locale"></span></div>
+			</div>
 			<div ng-if="document.currentEmployment.title">
 				<label>Titre du poste</label>
 				<div compare-val>
@@ -104,8 +108,12 @@
 			<div ng-if="document.previousEmployment.name">
 				<label>Nom de l’employeur/organisation/entreprise</label>
 				<div compare-val>
-				<km-value-ml value="document.previousEmployment.name" locales="locale"></km-value-ml>
+				<km-value-ml  km-pre value="document.previousEmployment.name" locales="locale"></km-value-ml>
 				</div>
+			</div>
+			<div ng-if="document.previousEmployment.organizationType">
+				<label>Type d'organisation</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.previousEmployment|term:locale"></span></div>
 			</div>
 			<div ng-if="document.previousEmployment.department">
 				<label>Section / division / unité</label>

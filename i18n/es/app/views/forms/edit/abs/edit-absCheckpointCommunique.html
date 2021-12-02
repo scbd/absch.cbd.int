@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <form class="editForm" name="editForm" style="margin-top:10px">
                                 <div ng-show="tab=='edit'" km-tab="edit">
                                         
@@ -13,7 +16,7 @@
                                         <legend name="generalInfo">Información general</legend>
                                         <div class="row">
                                             <div class="col-xs-12" >
-                                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -26,7 +29,7 @@
                                                     <div class="km-control-group" name="government" required caption="País de emisión del comunicado del punto de verificación">
                                                         <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
                                                             ng-model="document.government" source="options.countries" filter="genericFilter"
-                                                            mapping="genericMapping" selectbox="true" placeholder="Seleccione un país..."></div>
+                                                            mapping="genericMapping" selectbox="true" placeholder="Seleccione un país…"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -72,7 +75,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absIRCCsNotAvailable}">
                                                         <div class="km-control-group" style="margin-bottom:20px;" name="absIRCCs"
                                                             required caption="Enlaces a certificados de cumplimiento reconocidos internacionalmente (CCRI) que ser relacionen con este comunicado">
-                                                            <div class="help-info">En este lugar hay que incluir la referencia al CCRI si un usuario de un recurso genético presentó un CCRI ante el punto de verificación. Use los diferentes filtros o el identificador único en el campo de texto para buscar el pertinente CCRI existente. Si el CCRI no está disponible, debe seleccionar la opción "Esta información no está disponible" y quedará habilitado el recuadro gris a continuación.</div>
+                                                            <div class="help-info">En este lugar hay que incluir la referencia al CCRI si un usuario de un recurso genético presentó un CCRI ante el punto de verificación. Use the different filters or the unique identifier in the text field to search for the existing relevant IRCC. Si el CCRI no está disponible, debe seleccionar la opción "Esta información no está disponible" y quedará habilitado el recuadro gris a continuación.</div>
                                                            <div document-selector on-build-query="onBuildIRCCsQuery(searchText)"
                                                                       ng-model="document.absIRCCs" question="absIRCCs"
                                                                       disabled="isAbsIRCCsNotAvailable()" filter="true"></div>
@@ -96,9 +99,9 @@
                                                 <div class="col-xs-12">
                                                     <div class="control-group">
                                                         <div class="km-control-group" name="sourceCountries" required caption="Fuente del recurso genético">
-                                                            <div class="help-info">Seleccione el/los país(es) que es/son la fuente del recurso genético. El/los país(es) seleccionado(s) serán los que reciban el comunicado del punto de verificación emitido a partir de la información registrada.</div>
+                                                            <div class="help-info">Select the country/ies which is/are the source of the genetic resource. The country/ies selected will be notified once this record is published. The source country should not include the country publishing this Checkpoint Communiqué.</div>
                                                             <div km-select required name="sourceCountries" ng-model="document.sourceCountries"
-                                                                multiple items="options.countries()" placeholder="Seleccione un país"></div>
+                                                                multiple items="options.countries()" placeholder="Please select a country..."></div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -109,7 +112,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="subjectMatter" required caption="Asunto o recursos genéticos pertinentes para la información recopilada o recibida">
-                                                        <div class="help-info">Sírvase proporcionar detalles sobre el asunto o los recursos genéticos pertinentes para la información recopilada o recibida por el punto de verificación. Esto podría incluir la biota y algún rango taxonómico, que podría tener un nombre taxonómico. También podría incluir una localidad de recopilación del material. Asimismo, tal vez sea posible identificar el recurso genético haciendo referencia a un espécimen de muestra o a notas de campo en poder de un archivo o colección identificados.</div>
+                                                        <div class="help-info">Sírvase proporcionar detalles sobre el asunto o los recursos genéticos pertinentes para la información recopilada o recibida por el punto de verificación. Esto podría incluir la biota y algún rango taxonómico, que podría tener un nombre taxonómico. También podría incluir una localidad de recopilación del material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection.</div>
                                                         <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter"
                                                             locales="document.header.languages"></div>
                                                     </div>
@@ -250,7 +253,7 @@
                                             </div>
                                             <div class="col-xs-1 bg-grey">
                                                 <div style="font-size:16px;font-weight:bold;padding: 6px;text-align: center;" name="dateOR"
-                                                    caption="O">O</div>
+                                                    caption="OR">OR</div>
                                             </div>
                                             <div class="col-xs-3 text-right">
                                                 <div km-date placeholder="DE" required name="dateCollectedFrom" ng-model="document.dateCollectedFrom"></div>
@@ -268,7 +271,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="relevantInformation" caption="Información adicional">
-                                                    <div class="help-info">Por favor, utilice este campo para facilitar cualquier otra información pertinente que no se haya incluido en otro lugar del registro.</div>
+                                                    <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                                     <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
                                                         locales="document.header.languages"></div>
                                                 </div>

@@ -1,9 +1,7 @@
 ﻿<span class="document-sharing"><button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
     title="Compartir"><i class="fa fa-firefox"></i> <span class="hidden-xs">Compartir</span></button>
     <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
-    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>
-
-    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>  </span><script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header">Compartir el registro borrador: <span ng-bind="title"></span></div>
             <div class="modal-body">
@@ -51,7 +49,7 @@
                                 <div class="content">
                                     <div>Los destinatarios recibirán un correo electrónico con un enlace para ver este documento borrador.</div>
                                     <hr/>Correos electrónicos <br/><input type="text" placeholder="ingrese correo electrónico" class="form-control" ng-model="document.sharedWith.emails" />
-                                    <div><span style="font-size: smaller;color: #777575;">Utilice comas para separar direcciones de correo electrónico múltiples. Los destinatarios deben registrarse en el Centro de Intercambio de Información con esa dirección de correo electrónico para poder ver el registro borrador. </span></div>
+                                    <div><span style="font-size: smaller;color: #777575;">Utilice comas para separar direcciones de correo electrónico múltiples. Los destinatarios deben registrarse en el Centro de Intercambio de Información con esa dirección de correo electrónico para poder ver el registro borrador.</span></div>
                                     <div><span ng-if="status=='creatingLink'"> <i class="fa fa-spin fa-spinner" /> actualizando...</span><button type="button" class="btn btn-primary pull-right" ng-click="shareEmail()" ng-disabled="status=='creatingLink'">Enviar</button>
                                     </div><br/></div>
                             </div>
@@ -63,9 +61,7 @@
                 </div>
             </div>
         </div>
-    </script>
-
-    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+    </script><script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal">
             <div class="modal-header">Generar un PDF de este registro borrador: <span  ng-bind="title"></span></div>
             <div class="modal-body">
@@ -84,4 +80,4 @@
                 <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Cerrar</button>
             </div>
         </div>
-    </script></span>
+    </script>

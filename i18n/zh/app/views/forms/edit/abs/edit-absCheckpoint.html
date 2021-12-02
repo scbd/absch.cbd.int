@@ -1,12 +1,15 @@
 ﻿<div   >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" >
+    <div class="innerPageEditForm edit-abs-checkpoints"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" >
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <form name="editForm" style="margin-top:10px" class="editForm" >
                                 <div class="editForm" ng-show="tab=='edit'" km-tab="edit">
                                     <legend name="formInfo" style="display:none"></legend>
@@ -44,12 +47,27 @@
               
                                     <section>
               
-                                    <legend name="responsibilities–title">职责</legend>
-                                    <div class="help-info">第 17 条第 1 (a) (一) 项规定，指定的检查点将收集或酌情接收关于事先知情同意、遗传资源的来源、共同商定条件的订立和/或酌情包括遗传资源的利用情况信息；第（四）项规定，检查点必须有效，并应具有与执行本项 (a)目相关的职能。检查点应同遗传资源的利用或同在研究、开发、创新、商业化前和商业化等的任何阶段收集有关信息相关联。</div>
-                                    <div class="row">
+                                    <legend name="responsibilities–title">职责</legend><!-- <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="responsibilities" caption="职责简述">
-                                                   <div class="help-info">对检查站职责的简短描述将有助于遗传资源用户和其他人查明和澄清检查站在以下方面的角色和职能：即在研究、开发、创新、商业化前和商业化等的任何阶段收集与资源利用相关的信息。（最多 300 个字符）</div>
+                                            <div class="km-control-group" name="responsibleFunctions" required caption="Responsible functions">
+                                                <div km-term-check required ng-model="document.responsibleFunctions" locales="document.header.languages"
+                                                     terms="options.responsibleFunctions()"  binding-type="term[]" ng-change="onResponsibleFunctionsChange(document.responsibleFunctions)"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="hasPointToCollect">
+                                        <div class="col-xs-12">
+                                            <label>Stage at which information is collected or received</label>
+                                            <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization. </div>
+                                            <div class="km-control-group chain-stage-value" name="valueChainStage" caption="">
+                                                <div km-term-radio ng-model="document.valueChainStage" locales="document.header.languages"
+                                                     terms="options.valueChainStage()"  binding-type="term" show-other="true"></div>
+                                            </div>
+                                        </div>
+                                    </div> --><div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="responsibilities" caption="任何其他责任的简述（最多 300 个字符）">
+                                                   <div class="help-info">对检查站职责的简短描述将有助于遗传资源用户和其他人查明和澄清检查站在以下方面的角色和职能：即在研究、开发、创新、商业化前和商业化等的任何阶段收集与资源利用相关的信息。</div>
                                                 <div km-rich-textbox name="responsibilities" rows="6" ng-model="document.responsibilities" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -82,9 +100,16 @@
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
-                                    </div>
-              
-                                    </section>
+                                    </div><!-- <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="inquiryContact" caption="Contact information for inquires related to the information gathered or the functioning of this checkpoint:">
+                                                <div document-selector on-build-query="onContactQuery(searchText)"
+                                                     ng-model="document.inquiryContact"
+                                                     question="inquiryContact" allow-new="true" allow-new-schema="contact">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --></section>
               
                                     <section>
               
@@ -117,8 +142,10 @@
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="contactsToInform" caption="请选择您希望发送给其一份公报的任意国家主管机构">
                                                 <div document-selector on-build-query="onContactQuery(searchText)"
+                                                     ng-disabled="!document.government.identifier"
                                                      ng-model="document.contactsToInform"
-                                                     question="contactsToInform" allow-new="true" allow-new-schema="contact"></div><!--<organization-selector multiple ng-model="document.contactsToInform" locales="document.header.languages" caption="Add an organisation or a contact »" ></organization-selector>--></div>
+                                                     question="contactsToInform" allow-new="true" allow-new-schema="contact"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     </section>

@@ -16,7 +16,7 @@
 				</div>
 			</div>
 			<div ng-show="document.resourceTypes">
-				<label>Тип ресурса</label>
+				<label>Type of resource</label>
 				<div class="km-value" compare-val>
 					<view-terms-hierarchy ng-if="document.header.schema=='resource'" ng-model="document.resourceTypes" locale="locale" term-domain="resourceTypesVlr"></view-terms-hierarchy>
 					<ul class="list" ng-if="document.header.schema=='communityProtocol' || document.header.schema=='modelContractualClause'">
@@ -25,9 +25,9 @@
 				</div>
 			</div>
 			<div ng-show="document.authors">
-				<label>Фамилия и имя автора</label>
+				<label>Author name(s)</label>
 				<div compare-val>
-					<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.authors" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.organizations">
@@ -42,7 +42,7 @@
 			<div ng-show="document.publisher">
 				<label>Издатель</label>
 				<div compare-val>
-					<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.publisher" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 			<div ng-show="document.source">
 				<label>Источник</label>
 				<div compare-val>
-					<km-value-ml value="document.source" locales="locale"></km-value-ml>
+					<km-value-ml value="document.source" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -127,6 +127,7 @@
 
 			<div ng-show="document.biosafety.raRecommend != undefined">
 				<label>Рекомендуете ли вы данный документ в качестве справочного материала для «Руководства по оценке рисков в отношении живых измененных организмов»?</label>
+				<p><a class="Record" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml">https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml</a></p>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.raRecommend" locales="locale"></km-value-bool>
 				</div>
@@ -139,7 +140,7 @@
 				</div>
 
 				<div ng-show="document.biosafety.raSubjects && document.biosafety.raRecommend">
-					<label>Руководство по оценке рисков в отношении живых измененных организмов</label>
+					<label>Раздел(-ы) «Руководства по оценке живых измененных организмов», к которому(-ым) относится данный справочный материал</label>
 					<div class="km-value" compare-val="raSubjects">
 						<view-terms-hierarchy ng-model="document.biosafety.raSubjects" locale="locale" term-domain="bchRaSubjects"></view-terms-hierarchy>
 					</div>

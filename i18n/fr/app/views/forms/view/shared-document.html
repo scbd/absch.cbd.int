@@ -17,12 +17,12 @@
 					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
 					ng-if="status=='error'">
 					<div class="col-md-12" ng-if="!printMode">
-						<div class="alert alert-danger" style="margin:20px;"><strong>{{error}}</strong></div></div>
+						<div class="alert alert-danger" style="margin:20px;"><strong ng-bind="error"></strong></div></div>
 					</div>
 					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
 					ng-if="status=='ready'" ng-class="{'no-border':printMode}">
 						<div class="col-md-2" ng-if="!printMode">
-							<div class="" style="width:100%;"><br> Ce projet de document a été partagé avec vous par: {{sharedData.sharedBy_Info.firstName}} {{sharedData.sharedBy_Info.lastName}} <br> <br> <br> <br><div class="btn-group" ng-if="!printMode && document.header.languages.length>1">
+							<div class="" style="width:100%;"><br> Ce projet de document a été partagé avec vous par: <span ng-bind="sharedData.sharedBy_Info.firstName"></span> <span ng-bind="sharedData.sharedBy_Info.lastName"></span> <br> <br> <br> <br><div class="btn-group" ng-if="!printMode && document.header.languages.length>1">
 									<input type="button" class="btn" ng-class="{'btn-default' : options.locale!='*', 'btn-info' :options.locale=='*'}"
 									ng-click="options.locale='*'" value="*" title="dans toutes les langues" />
 									<input type="button" class="btn" ng-class="{'btn-default' : options.locale!=locale, 'btn-info' :options.locale==locale}"

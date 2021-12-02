@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
     <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         <div ng-if="isIRCCRevoked">
                                 <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
                                 <label for="invalidForm" style="width:100%">
@@ -50,7 +53,7 @@
                                         <legend>Información general</legend>
                                         <div class="row">
                                             <div class="col-xs-12" >
-                                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -60,7 +63,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="government" required caption="País">
-                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione un país…"></div>
+                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +118,7 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="Fecha de caducidad del permiso o su equivalente">
-                                                    <div class="help-info">Dos meses antes de que el permiso expire se envía un correo electrónico a la ANC para alertar sobre la fecha de caducidad del CCRI.</div>
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here. Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
                                                     <div km-date placeholder="AAAA-MM-DD" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -169,7 +172,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="Persona o entidad a la que se otorgó el consentimiento fundamentado previo" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">Sírvase proporcionar el nombre y la información de contacto de la persona o entidad a la que se otorgó el consentimiento fundamentado previo. Si la información está marcada como confidencial, la persona no podrá recibir la copia de cortesía del CCRI o el comunicado de los puntos de verificación.</div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. Si la información está marcada como confidencial, la persona no podrá recibir la copia de cortesía del CCRI o el comunicado de los puntos de verificación.</div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
@@ -218,7 +221,7 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading"><span ng-class="{'confidential-text':document.subjectMatterConfidential}"><input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items>Esta información es confidencial</input></span></div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.subjectMatterConfidential}">
-                                                        <div class="km-control-group" required name="subjectMatter" caption="Asunto o recursos genéticos cubiertos por el permiso o su equivalente"><span class="help-info">Sírvase proporcionar información sobre el asunto o los recursos genéticos cubiertos por el permiso. Esto podría incluir la biota y algún rango taxonómico, que podría tener un nombre taxonómico. También podría incluir una localidad de recopilación del material. Asimismo, tal vez sea posible identificar el recurso genético haciendo referencia a un espécimen de muestra o a notas de campo en poder de un archivo o colección identificados.</span><div ng-show="!document.subjectMatterConfidential">
+                                                        <div class="km-control-group" required name="subjectMatter" caption="Asunto o recursos genéticos cubiertos por el permiso o su equivalente"><span class="help-info">Sírvase proporcionar información sobre el asunto o los recursos genéticos cubiertos por el permiso. Esto podría incluir la biota y algún rango taxonómico, que podría tener un nombre taxonómico. También podría incluir una localidad de recopilación del material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection.</span><div ng-show="!document.subjectMatterConfidential">
                                                                 <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
                                                             </div>
                                                         </div>
@@ -339,7 +342,7 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="relevantInformation" caption="Información adicional">
-                                                    <div class="help-info">Por favor, utilice este campo para facilitar cualquier otra información pertinente que no se haya incluido en otro lugar del registro.</div>
+                                                    <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                                     <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>

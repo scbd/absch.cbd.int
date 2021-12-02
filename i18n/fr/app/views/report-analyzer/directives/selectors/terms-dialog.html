@@ -1,15 +1,15 @@
-<div class="modal fade">
+<div class="modal">
     <div class="modal-dialog" style="overflow-y: initial !important">
         <div class="modal-content">
 
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">{{title}}</i></h4>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title"><span ng-bind="title"></span></i></h4>
             </div>
 
             <div class="modal-body" style="max-height:75vh;overflow-y: auto;">
 
-                <h4 ng-show="loading"><i class="fa fa-cog fa-spin"></i> Loading...</h4>
+                <h4 ng-show="loading"><i class="fa fa-cog fa-spin"></i> Chargement en cours...</h4>
 
                 <table>
                     <tr>
@@ -22,10 +22,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" ng-click="clearSelection()">Clear</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" ng-click="clearSelection()">Effacer</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Fermer</button>
             </div>
             
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div><!-- /.modal-content --></div><!-- /.modal-dialog --></div><!-- /.modal -->

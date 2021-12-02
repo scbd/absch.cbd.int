@@ -22,7 +22,7 @@
 			<div ng-show="document.absCheckpoints">
 				<legend>Point(s) de contrôle qui ont collecté ou reçu l’information</legend>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li ng-repeat="item in document.absCheckpoints">
 								<div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>
@@ -60,7 +60,7 @@
 				<div ng-show="document.absIRCCs">
 					<label>Numéro(s) de référence des autres certificats de conformité reconnus à l’échelle internationale en lien avec ce communiqué.</label>
 					<div class="km-value" compare-val>
-						<ul>
+						<ul class="list">
 							<li  ng-repeat="item in document.absIRCCs">
 								 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
 							</li>

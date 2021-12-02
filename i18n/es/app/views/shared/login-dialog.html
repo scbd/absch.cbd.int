@@ -1,16 +1,16 @@
 ﻿<div>
     <div  ng-show="!user.isAuthenticated" style="margin:0 10% 0 10%" >
-        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">Please sign-in to publish information in the ABS Clearing-House</h1>
+        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">Por favor, iniciar sesión para publicar información en el <span ng-bind="chShortName"></span></h1>
         <hr>
        <div class="well">
-       <h3>How do I register for a CBD account?</h3>
-       <p>Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at <a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a></p>
-        <p>Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.</p>
-       <h3>Forgot your password?</h3>
-        <p>Click here <a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a> to reset your password. You will be asked for your email address and, if you are a registered user, an email will be sent immediately to your registered email account with instructions on how to reset your password.</p>
-        <h3>Problems with the display of the Clearing-House?</h3>
-        <p> The ABS-CH works best with the most recent versions of internet browsers (Firefox, Chrome or Internet Explorer 9+).</p>
-        <h3 class="color-green">For technical support please contact our help desk at: <span class="color-blue">absch@cbd.int</span></h3>
+       <h3>¿Cómo registro una cuenta en el CDB?</h3>
+       <p>Cualquier persona puede tener una cuenta en el CDB, que le permitirá acceder a registrar información en todos los centros de intercambio de información del CDB –el Centro de Intercambio de Información sobre Seguridad de la Biotecnología (CIISB), el Centro de Intercambio de la Información sobre APB y el Mecanismo de facilitación del Convenio. Puede registrar una cuenta en el CDB en <a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a></p>
+        <p>No olvide ingresar toda la información solicitada, según las instrucciones del formulario. Automáticamente recibirá un correo electrónico con un enlace en el que hay que hacer clic para confirmar la cuenta.</p>
+       <h3>¿Olvidó su contraseña?</h3>
+        <p>Haga clic aquí <a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a> para recuperar su contraseña. Se le pedirá su dirección de correo electrónico y, si es usted un usuario registrado, se le enviará inmediatamente un correo electrónico a su dirección de correo electrónico registrada con las instrucciones para recuperar su contraseña.</p>
+        <h3>¿Problemas con la visualización en pantalla del Centro de Intercambio de Información?</h3>
+        <p>El <span ng-bind="chShortName"></span> funciona mejor con las versiones más recientes de los buscadores de Internet (Firefox, Chrome o Internet Explorer 9+).</p>
+        <h3 class="color-green">Para apoyo técnico, sírvase ponerse en contacto con nuestra mesa de ayuda en: <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
        </div>
       </div>
 </div>

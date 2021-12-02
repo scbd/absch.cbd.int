@@ -9,9 +9,9 @@
 		<document-date></document-date>
 
 
-		<div ng-if="document.isAmendment || amendedByRecords">
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
 			<legend>Enmienda</legend>
-			<div ng-if="document.isAmendment">
+			<div ng-if="document.isAmendment!=undefined">
 				<label>¿Se trata de una enmienda a una ley, reglamentación, directriz o acuerdo ya publicado en el CIISB?</label>
 				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>

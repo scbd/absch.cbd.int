@@ -27,7 +27,7 @@
 			<div ng-show="document.authors">
 				<label>Nombre(s) del autor</label>
 				<div compare-val>
-					<km-value-ml value="document.authors" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.authors" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.organizations">
@@ -42,7 +42,7 @@
 			<div ng-show="document.publisher">
 				<label>Editor</label>
 				<div compare-val>
-					<km-value-ml value="document.publisher" locales="locale"></km-value-ml>
+					<km-value-ml km-pre value="document.publisher" locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -55,7 +55,7 @@
 			<div ng-show="document.source">
 				<label>Fuente</label>
 				<div compare-val>
-					<km-value-ml value="document.source" locales="locale"></km-value-ml>
+					<km-value-ml value="document.source" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 
@@ -127,6 +127,7 @@
 
 			<div ng-show="document.biosafety.raRecommend != undefined">
 				<label>¿Desea recomendar este documento como material de antecedentes para las "Orientaciones para la evaluación del riesgo de organismos vivos modificados”?</label>
+				<p><a class="Record" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml">https://bch.cbd.int/onlineconferences/ra_guidance_references.shtml</a></p>
 				<div compare-val>
 					<km-value-bool value="document.biosafety.raRecommend" locales="locale"></km-value-bool>
 				</div>
@@ -139,7 +140,7 @@
 				</div>
 
 				<div ng-show="document.biosafety.raSubjects && document.biosafety.raRecommend">
-					<label>Orientaciones para la evaluación del riesgo de los organismos vivos modificados</label>
+					<label>Sección(es) de las "Orientaciones para la evaluación del riesgo de los organismos vivos modificados" pertinentes para este material</label>
 					<div class="km-value" compare-val="raSubjects">
 						<view-terms-hierarchy ng-model="document.biosafety.raSubjects" locale="locale" term-domain="bchRaSubjects"></view-terms-hierarchy>
 					</div>
@@ -202,7 +203,7 @@
 				</div>
 			</div>
 		</section><!-- If BCH, End --> <!-- If ABS, Start --><section ng-if="isABS"><!-- <legend>Keywords related to Access and Benefit-Sharing</legend> --><div ng-show="document.nagoya.subjects">				
-				<label>Áreas temáticas en materia de APB.</label>
+				<label>ABS Thematic Areas</label>
 				<div class="km-value" compare-val="absSubjects">
 					<view-terms-hierarchy ng-model="document.nagoya.subjects" locale="locale" term-domain="absSubjects"></view-terms-hierarchy>
 				</div>

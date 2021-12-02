@@ -1,34 +1,18 @@
 ﻿<div>
-	<div ng-show="report.isAnalyzing" class="alert alert-info">
-		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
-	</div>
-	<div ng-show="report.isSaving" class="alert alert-info">
-		<i class="fa fa-cog fa-spin"></i> Saving your document...
-	</div>
+	<div ng-show="report.isAnalyzing" class="alert alert-info"><i class="fa fa-cog fa-spin"></i> Analyzing your document...</div>
+	<div ng-show="report.isSaving" class="alert alert-info"><i class="fa fa-cog fa-spin"></i> Сохранение вашего документа...</div>
 	<div ng-show="report && !report.isAnalyzing">
 
-		<div ng-show="isValid()" class="alert alert-success">
-			Your document is valid.
-		</div>
+		<div ng-show="isValid()" class="alert alert-success">Ваш документ является допустимым.</div>
 
 		<div ng-show="hasErrors() && show" class="alert alert-warning">
 			<button type="button" class="close" ng-click="show=!show" aria-label="Close"><span
-					aria-hidden="true">&times;</span>
-			</button>
-			<strong>Your document contains {{report.errors.length}} errors.</strong>
-			<ul>
-				<li ng-repeat="error in report.errors" title="{{::error.parameters}}">
-					{{::error.typeLabel}} / 
-					<ul ng-if="error.properties">
-						<li ng-repeat="property in error.properties" title="{{::error.parameters}}">					
-							<a rel="noopener" translation-url href="#" ng-click="jumpTo(property.property)">{{::property.propertyLabel}}</a>
-						</li>
-					</ul>
-					<span ng-if="!error.properties">
-						<a rel="noopener" translation-url href="#" ng-click="jumpTo(error.property)">{{::error.propertyLabel.trim()}}</a>
-					</span>
-				</li>
+					aria-hidden="true">&times;</span></button><strong>В вашем документе имеются <span ng-bind="report.errors.length"></span> ошибки.</strong><ul>
+				<li ng-repeat="error in report.errors" title="{{::error.parameters}}"><span ng-bind="::error.typeLabel"></span> /<ul ng-if="error.properties">
+						<li ng-repeat="property in error.properties" title="{{::error.parameters}}"><a rel="noopener" translation-url href="#" ng-click="jumpTo(property.property)" ng-bind="::property.propertyLabel"></a></li>
+					</ul><span ng-if="!error.properties"><a rel="noopener" translation-url href="#" ng-click="jumpTo(error.property)" ng-bind="::error.propertyLabel.trim()"></a></span></li>
 			</ul>
 		</div>
 
 	</div>
+</div>

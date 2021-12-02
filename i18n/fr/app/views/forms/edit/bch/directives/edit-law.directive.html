@@ -1,12 +1,12 @@
 <div>
 
-	<div class="edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -24,8 +24,8 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="government" required caption="Country submitting a law, regulation, guideline or agreement">
-												<div class="help-block" ng-if="isEuMember"><u><i>Important note for European Union (EU) Members only</i></u>: if the law, regulation, guideline or agreement applies to <u>all</u> EU Member States, the record must be published by the EU’s BCH focal point. The EU BCH focal point should select "European Union" in response to this question and the published record will appear in the country profiles of all EU Member States.</div>
+											<div class="km-control-group" name="government" required caption="Pays soumettant une loi, un règlement, une directive ou un accord">
+												<div class="help-block" ng-if="isEuMember"><u><i>Note importante pour les membres de l’Union européenne seulement</i></u> Si la loi, la règlementation, la ligne directrice ou l'accord s'applique à <u>tous</u> les États membres de l'UE, le dossier doit être publié par le correspondant national du CEPRB de l'UE. Le correspondant national du CEPRB de l'UE doit sélectionner « Union européenne » en réponse à cette question et l'enregistrement publié apparaîtra dans les profils de pays de tous les États membres de l'UE.</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
 												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" 
 												 placeholder="Veuillez choisir un pays..." ng-change="onCountryChange(document.government)"></div>
@@ -34,8 +34,8 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="isAmendment" required caption="Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?">
-												<div class="help-block">This section is relevant when the law/regulation being submitted is amending an existing law/regulation. If the law/regulation being published in the BCH is an amendment to an existing law/regulation or a part of it, make sure that the law/regulation being amended is already registered in the BCH in order to be able to provide a link to the existing record. Cela permettra aux deux fichiers d’être publiés ensemble.</div>
+											<div class="km-control-group" name="isAmendment" required caption="Est-ce qu’il s’agit d’un amendement sur une loi, un règlement, des directives ou un accord déjà publié au CEPRB?">
+												<div class="help-block">Cette section est pertinente uniquement la loi/règlementation en cours de soumission modifie une loi ou une règlementation existante. Si la loi/règlementation enregistrée au Centre d'échange APA est une modification d'une loi/règlementation existante ou d'une partie de celle-ci, assurez-vous que la loi/règlementation modifiée soit déjà enregistrée dans le Centre d'échange afin de pouvoir fournir un lien vers le fichier existant. Cela permettra aux deux fichiers d’être publiés ensemble.</div>
 												<div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -43,7 +43,7 @@
 	
 									<div class="row" ng-if="document.isAmendment">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="amendedRecords" caption="Please select the record(s) containing the law/regulation being amended">	
+											<div class="km-control-group" name="amendedRecords" caption="Veuillez entrer le numéro de fichier(s) qui contient la loi/règlementation étant modifiée">	
 
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.amendedRecords" question="amendedRecords" caption="Loi, réglementation ou directive"
 													on-build-query="onBuildAmendedLawQuery(searchText)" allow-new="true"
@@ -51,7 +51,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="amendmentsDetails" caption="Please provide a brief summary of the amendment(s)">
+											<div class="km-control-group" name="amendmentsDetails" caption="Veuillez insérer le résumé de l’amendement (s)">
 												<div km-rich-textbox ng-model="document.amendmentsDetails" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -71,7 +71,7 @@
 									<legend>Détails législatifs</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="type" required caption="Type of Law / Regulation">
+											<div class="km-control-group" name="type" required caption="Type de loi / règlementation">
 												<div class="help-block">A <i>law</i> is usually legislation (a statute) enacted by state government; a <i>regulation</i> is usually an act or process of controlling by rule or restriction, having legal force, issued by an administrative agency or a local government; a <i>guideline</i> is usually a document that announces the policy an agency intends to implement in future decision-making, or which will otherwise guide the agency in the exercise of its administrative discretion; a <i>regulatory summary</i> is a text summary of the national biosafety regulatory framework in place, or being developed in a country.</div>
 												<div km-term-radio required ng-model="document.type" locales="document.header.languages"
 													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
@@ -80,31 +80,31 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="jurisdiction" required caption="Area of jurisdiction">
-												<div class="help-block">Provide the jurisdiction where the law, regulation, guideline or agreement applies. This field can also be used to indicate territorial exclusions to measures.</div>
+											<div class="km-control-group" name="jurisdiction" required caption="Domaine de juridiction">
+												<div class="help-block">Indiquez dans quelle juridiction cette loi, règlementation,  lignes directrices ou accord s'applique(nt). Ce champs peut également être utilisé pour indiquer des exclusions territoriales aux mesures.</div>
 												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdiction" items="options.lawJurisdictions"
 													ng-change="onJurisdictionChange(document.jurisdiction)"></div>
 											</div>
 											<div  style="padding-top: 5px;;">
-												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Other jurisdiction">
+												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="Autre juridiction">
 													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdiction.customValue" placeholder="" locales="document.header.languages"></div>
 												</div>
 												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='DEBB019D-8647-40EC-8AE5-10CA88572F6E'" name="jurisdiction.subNational" caption="Nom de la juridiction sous-nationale">
-													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdiction.customValue" placeholder="Eg. Lower Austria" locales="document.header.languages"></div>
+													<div km-textbox-ml name="customValueSubNational" ng-model="document.jurisdiction.customValue" placeholder="Eg. Basse-Autriche" locales="document.header.languages"></div>
 												</div>
 
 												<div ng-if="document.jurisdiction.identifier=='528B1187-F1BD-4479-9FB3-ADBD9076D361'">
 													<div ng-if="!regionalMeasuresMapping[document.government.identifier]">
 														<div class="alert alert-warning">
 															<h4>
-																<label for="invalidJurisdiction">Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure. For assistance, contact the Secretariat at <a class="color-blue" href="mailto:bch@cbd.int">bch@cbd.int</a>.</label>
+																<label for="invalidJurisdiction">Veuillez notez que les mesures régionales ou multilatérales doivent être enregistrées seulement une fois au CEPRB et que chacun des pays sélectionné concerné par la mesure verront la mesure s’afficher en tant que partie de leur cadre de travail légal au sein de leur profil de pays. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure. Pour obtenir de l’aide, contactez le Secrétariat au <a class="color-blue" href="mailto:bch@cbd.int">bch@cbd.int.</a></label>
 															</h4>
 														</div>
 													</div>
 			
 													<div ng-if="regionalMeasuresMapping[document.government.identifier]">
-														<div class="help-info">Please note that regional or multilateral measures only need to be registered once in the Biosafety Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure. For assistance, contact the Secretariat at <a href="mailto:bch@cbd.int">bch@cbd.int</a>.</div>
-														<div class="km-control-group" required name="jurisdictionScope" caption="Country name(s) or Geographical or political/economic group(s)">
+														<div class="help-info">Veuillez notez que les mesures régionales ou multilatérales doivent être enregistrées seulement une fois au CEPRB et que chacun des pays sélectionné concerné par la mesure verront la mesure s’afficher en tant que partie de leur cadre de travail légal au sein de leur profil de pays. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure. Pour obtenir de l’aide, contactez le Secrétariat au <a href="mailto:bch@cbd.int">bch@cbd.int.</a></div>
+														<div class="km-control-group" required name="jurisdictionScope" caption="Nom du/des pays et du/des groupe(s) politique(s) ou économique(s)">
 															<button type="button" class="btn btn-info" ng-bind="document.jurisdictionScope[0]|term"></button>
 														</div>
 													</div>
@@ -114,8 +114,8 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group subject-areas" name="cpbSubjectAreas" required caption="Subject areas">
-												<div class="help-block">This section provides keywords relevant to the subject matter addressed to assist in searching for and translation of the record. More details may be provided below.</div>
+											<div class="km-control-group subject-areas" name="cpbSubjectAreas" required caption="Domaines thématiques">
+												<div class="help-block">La présente section fournit des mots clés liés aux matières traitées pour aider à chercher un fichier ou à le traduire. More details may be provided below.</div>
 												<div km-term-check required ng-model="document.cpbSubjectAreas" locales="document.header.languages"
 													terms="options.subjectAreas()" show-other="true" binding-type="term[]"></div>
 											</div>
@@ -123,8 +123,8 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group type-of-organism" name="type" required caption="Types of organisms addressed">
-												<div class="help-block">This section provides keywords relevant to the categories of LMOs addressed to assist in searching for and translation of the record. More details may be provided below.</div>
+											<div class="km-control-group type-of-organism" name="type" required caption="Types d'OVM abordés">
+												<div class="help-block">La présente section fournit des mots clés liés aux catégories  d’OVM traités pour aider à chercher un fichier ou à le traduire. Plus de détails peuvent être fournis ci-dessous.</div>
 												<div km-term-check required ng-model="document.cpbOrganismTypes" locales="document.header.languages"
 													terms="options.typeOfOrganisms()" show-other="true" binding-type="term[]"></div>
 											</div>
@@ -155,7 +155,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="documents" caption="Texte du document">
-												<div class="help-block">Il est préférable d'annexer le document. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. <a rel="noopener" translation-url   href="https://www.cbd.int" target="_blank">http://www.cbd.int</a>) and the name of the website (e.g. “Convention on Biological Diversity”).</div>
+												<div class="help-block">Il est préférable d'annexer le document. Sinon, précisez l'emplacement du document (p. ex., l'adresse Web, y compris l'adresse URL du site Web (p. Ex. <a rel="noopener" translation-url   href="https://www.cbd.int" target="_blank">http://www.cbd.int</a> et le nom du site Web (p. ex., « Centre d'échange pour la prévention des risques biotechnologiques »).</div>
 												<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -164,7 +164,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="unofficialDocuments" caption="Documents non officiels">
-												<div class="help-block">Unofficial document and / or courtesy translation</div>
+												<div class="help-block">Document non officiel et/ou traduction de courtoisie</div>
 												<div km-link name="unofficialDocuments" ng-model="document.unofficialDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -173,15 +173,15 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="documentsInfo" caption="">
-												<div class="help-block">Only use this field to provide details of how to obtain a copy of the document if it is not available as an attachment or online.</div>
+												<div class="help-block">Utiliser uniquement lce champs pour expliquer en détail comment obtenir un exemplaire du document s'il ne peut être envoyé en pièce jointe ou n'est pas disponible en ligne.</div>
 												<div km-rich-textbox ng-model="document.documentsInfo" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="relatedRecords" caption="Relationship with other laws/regulations">	
-												<div class="help-block">Please indicate if there is any relationship between this document/measure and other laws, regulations, guidelines or agreements published in the BCH, e.g. a regulation to implement an existing law.</div>										
+											<div class="km-control-group" name="relatedRecords" caption="Liens avec les autres lois / règlementations">	
+												<div class="help-block">Veuillez indiquer s'il existe une relation entre ce document/cette mesure et d'autres lois, réglementations, lignes directrices ou accords publiés dans le CEPRB, par ex. un règlement d'application d'une loi existante.</div>										
 													
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.relatedRecords" question="relatedRecords" caption="Loi, réglementation ou directive"
 													on-build-query="onBuildLawQuery(searchText)"  allow-new="true"
@@ -190,7 +190,7 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relationDetails" caption="Please describe the relationship between the measures">
+											<div class="km-control-group" name="relationDetails" caption="Veuillez décrire la relation entre les mesures :">
 												<div km-rich-textbox ng-model="document.relationDetails" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -200,11 +200,11 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Regulatory contact information</legend>
+									<legend>Coordonnées du correspondant pour la réglementation</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="authorities" caption="Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)" required>	
-												<div class="help-block">Competent National Authority (CNA) responsible for performing the administrative functions required by the Cartagena Protocol and/or competent authority (SPCA) under the Nagoya – Kuala Lumpur Supplementary Protocol on Liability and Redress.</div>
+											<div class="km-control-group" name="authorities" caption="Autorité(s) nationale(s) compétente(s) et/ou l’/les autorité(s) nationale(s) compétente(s) pour le Protocole additionnel" required>	
+												<div class="help-block">Autorité nationale compétente (ANC) chargée d'exercer les fonctions administratives requises par le Protocole de Cartagena et/ou autorité compétente (SPCA) en vertu du Protocole additionnel de Nagoya – Kuala Lumpur sur la responsabilité et la réparation.</div>
 												 	
 													<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities" 
 																on-build-query="onBuildAuthoritiesQuery(searchText)" allow-new="true"
@@ -217,11 +217,11 @@
 
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Timeframe for confirmation or updating of information</legend>
+									<legend>Échéance pour la confirmation ou la mise à jour des informations</legend>
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="expires" caption="Should this information be confirmed or updated after two years from the date of submission?" required>	
-												<div class="help-block">If the answer to this question is “Yes”, after two years from the date of submission you will be asked to confirm or update the record within 3 months. Passé ce délai, si aucune confirmation n'a été reçue, le fichier portera la mention "non confirmé".</div>     
+											<div class="km-control-group" name="expires" caption="Cette information doit-elle être confirmée ou mise à jour deux ans après la date de soumission?" required>	
+												<div class="help-block">Si la réponse est « oui », vous serez invité à confirmer ou à mettre à jour le fichier dans les trois mois, deux ans après sa soumission. Passé ce délai, si aucune confirmation n'a été reçue, le fichier portera la mention "non confirmé".</div>     
 												<div class="km-yes-no" name="expires" ng-model="document.expires"></div>			
 											</div>
 										</div>
@@ -244,7 +244,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
-												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+												<div class="help-block">Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
 											</div>

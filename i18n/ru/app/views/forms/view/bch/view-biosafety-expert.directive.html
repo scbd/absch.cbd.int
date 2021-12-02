@@ -58,6 +58,10 @@
 				<km-value-ml value="document.currentEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
+			<div ng-if="document.currentEmployment.organizationType">
+				<label>Тип организации</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.organizationType|term:locale"></span></div>
+			</div>
 			<div ng-if="document.currentEmployment.title">
 				<label>Должность</label>
 				<div compare-val>
@@ -94,7 +98,7 @@
 		<section ng-if="document.previousEmployment || document.countryRegionsWorkedIn">
 			<legend>Трудовой стаж</legend>
 			<div ng-if="document.countryRegionsWorkedIn">
-				<label>Страны или регионы, в которых работал эксперт </label>
+				<label>Страны или регионы, в которых работал эксперт</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.countryRegionsWorkedIn"><span ng-bind="item|term:locale"></span></li>
@@ -102,10 +106,14 @@
 				</div>
 			</div>
 			<div ng-if="document.previousEmployment.name">
-				<label>Название предыдущего работодателя/ предыдущей организации/компании</label>
+				<label>Name of Previous Employer / Organization / Company</label>
 				<div compare-val>
-				<km-value-ml value="document.previousEmployment.name" locales="locale"></km-value-ml>
+				<km-value-ml  km-pre value="document.previousEmployment.name" locales="locale"></km-value-ml>
 				</div>
+			</div>
+			<div ng-if="document.previousEmployment.organizationType">
+				<label>Тип организации</label>
+				<div compare-val class="km-value"><span  ng-bind="document.currentEmployment.previousEmployment|term:locale"></span></div>
 			</div>
 			<div ng-if="document.previousEmployment.department">
 				<label>Управление/отдел/подразделение</label>

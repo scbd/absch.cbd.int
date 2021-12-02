@@ -1,7 +1,7 @@
 ﻿<div id="Record" class="record panel panel-default" >
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
+		<h4></h4>	
 	</div>
 
 	<div class="record-body panel-body" help schema="ViewCP" >
@@ -11,67 +11,62 @@
 
 		 <div name="article17-1-a"></div>
 
-		<legend ng-if="document.government || document.name">Información general</legend>
+		<legend ng-if="document.government || document.name"></legend>
 
 		<div ng-show="document.government">
-			<label name="country">País</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			<label name="country"></label>
+			<div class="km-value" compare-val></div>
 		</div>
 
 		 <div ng-show="display('title') && document.name">
-		 <label>Nombre del punto de verificación</label>
-		 	<div class="km-value" compare-val><strong><span ng-bind="document.name | lstring:locale"></span></strong></div>
+		 <label></label>
+		 	<div class="km-value" compare-val></div>
 		 </div>
 
 
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
-			document.jurisdictionName">
-			<legend name="Responsibilities">Responsabilidades del punto de verificación</legend>
-			<div ng-show="document.responsibilities"><!--<label>Short description of responsibilities</label>--><div compare-val="responsibilities">
+			document.jurisdictionName || document.responsibleFunctions || document.valueChainStage">
+			<legend name="Responsibilities"></legend><div ng-if="document.valueChainStage">
+				<label></label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.valueChainStage | term:locale"></div>
+				</div>
+			</div>
+
+			<div ng-show="document.responsibilities"><div compare-val="responsibilities">
 				<div class="km-value km-pre" ng-bind-html="document.responsibilities|lstring:locale"></div>
 				</div>
 			</div>
 			<div ng-show="document.jurisdiction">
-				<label>Zona de jurisdicción</label>
+				<label></label>
 				<div class="km-value" compare-val>
 					<ul class="list">
-						<li><span ng-bind="document.jurisdiction|term"></span> <span ng-if="isSubNational() ||isCommunity() || isOthers()">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span></li>
+						<li></li>
 					</ul>
 				</div>
-			</div><!--<div ng-show="document.jurisdictionName">
-				<label ng-show="isSubNational()">Name of the sub-national jurisdiction</label>
-				<label ng-show="isCommunity()">Name of the community jurisdiction</label>
-				<label ng-show="isOthers()">Other jurisdiction</label>
-				<div class="km-value">{{document.jurisdictionName | lstring:locale}}</div>
-			</div>--></div>
+			</div></div>
 
 		<div ng-if="document.informAllAuthorities || document.contactsToInform" >
-			<legend>Autoridad(es) para recibir las copias de cortesía de los comunicados del punto de verificación</legend>
+			<legend></legend>
 
-			<div class="help-info" style="padding-top:10px;">Los contactos indicados a continuación recibirán copias por correo electrónico de los comunicados del punto de verificación que contengan información recopilada o recibida y publicada originada en ese punto de verificación.</div>
-			<div class="km-value" ng-show="document.informAllAuthorities">Todas las autoridades nacionales competentes <strong><span ng-bind="document.government|term:locale"></span></strong> han sido seleccionadas para recibir automáticamente por correo electrónico los comunicados del punto de verificación publicados que se hayan originado en dicho punto de verificación.</li>
+			<div class="help-info" style="padding-top:10px;"></div>
+			<div class="km-value" ng-show="document.informAllAuthorities"></li>
 
 			</div>
 			       
 			
 			<div  ng-show="document.contactsToInform">
 				<div compare-val="contactsToInform">
-					<div class="km-value"  ng-repeat="authority in document.contactsToInform" ><span view-record-reference ng-model="authority" locale="locale"></span></div>
+					<div class="km-value"  ng-repeat="authority in document.contactsToInform" ></div>
 				</div>
-				</div><!--<div ng-show="document.contactsToInform" class="row">
-				<div ng-repeat="contact in document.contactsToInform">
-					<div class="col-xs-12">
-						<div view-record-reference ng-model="contact" locale="locale" class="well"></div>
-					</div>
-				</div>
-			</div>--><div compare-val>
-			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform"><span >No se han seleccionado autoridades adicionales para recibir las copias automáticas por correo electrónico de los comunicados del punto de verificación publicados por dicho punto de verificación.</span></div>
+				</div><div compare-val>
+			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Información adicional</legend>
+			<legend></legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val="relevantInformation">
@@ -80,7 +75,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Otros enlaces o documentos adjuntos pertinentes</label>
+				<label></label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>

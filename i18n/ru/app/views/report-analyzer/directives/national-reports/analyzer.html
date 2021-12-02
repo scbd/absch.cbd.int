@@ -1,177 +1,25 @@
 <div class="nr-analyzer" >
-    <style>
-        .nr-analyzer td[ng-click], .nr-analyzer th[ng-click] { cursor:pointer; }
-        .nr-analyzer .question[disabled] { opacity:0.60 }
-        .nr-analyzer .question table.table th { vertical-align: middle}
-        .nr-analyzer .question table.table tr > td.region,
-        .nr-analyzer .question table.table tr > td.country    { border:1px solid #ddd }
-        .nr-analyzer .question table.table tr:last-child > td { border-bottom:1px solid #ddd }
-        .nr-analyzer .question table.table tr > td:last-child { border-bottom:none;border-top:none;border-right:none; }
-        .nr-analyzer #filterBox           { top:50px; position: -webkit-sticky; position: sticky; z-index: 100; }
-        .nr-analyzer #sumTypeButton       { top:10px; position: -webkit-sticky; position: sticky; z-index: 100; }
-        .nr-analyzer #textsDialog.modal .locale.selected { font-weight: bold; }
-        .nr-analyzer tr.filter > td.filter > i { color:#777; }
-        .nr-analyzer tr.filter.filter-on > td.filter > i { color:#337ab7; }
-        .nr-analyzer tr > td.filter:hover > i { color:#337ab7; }
-        .nr-analyzer tr > td.filter > i[disabled] { color:#ccc; }
-        .nr-analyzer .panel.panel-collapse > .panel-heading { border-bottom: none; }
-        .nr-analyzer .panel.panel-collapse > .panel-body    { display: none; }
-        .nr-analyzer .panel.sum:hover.panel-default { border-color: #bce8f1; }
-        .nr-analyzer .panel.sum:hover.panel-default > .panel-body { background-color: #eee}
-        .nr-analyzer .panel.sum:hover.panel-default > .panel-heading {
-          color: #31708f;
-          background-color: #d9edf7;
-          border-color: #bce8f1;
-        }
+    <style> .nr-analyzer td[ng-click], .nr-analyzer th[ng-click] { cursor:pointer; } .nr-analyzer .question[disabled] { opacity:0.60 } .nr-analyzer .question table.table th { vertical-align: middle} .nr-analyzer .question table.table tr > td.region, .nr-analyzer .question table.table tr > td.country { border:1px solid #ddd } .nr-analyzer .question table.table tr:last-child > td { border-bottom:1px solid #ddd } .nr-analyzer .question table.table tr > td:last-child { border-bottom:none;border-top:none;border-right:none; } .nr-analyzer #filterBox { top:50px; position: -webkit-sticky; position: sticky; z-index: 100; } .nr-analyzer #sumTypeButton { top:10px; position: -webkit-sticky; position: sticky; z-index: 100; } .nr-analyzer #textsDialog.modal .locale.selected { font-weight: bold; } .nr-analyzer tr.filter > td.filter > i { color:#777; } .nr-analyzer tr.filter.filter-on > td.filter > i { color:#337ab7; } .nr-analyzer tr > td.filter:hover > i { color:#337ab7; } .nr-analyzer tr > td.filter > i[disabled] { color:#ccc; } .nr-analyzer .panel.panel-collapse > .panel-heading { border-bottom: none; } .nr-analyzer .panel.panel-collapse > .panel-body { display: none; } .nr-analyzer .panel.sum:hover.panel-default { border-color: #bce8f1; } .nr-analyzer .panel.sum:hover.panel-default > .panel-body { background-color: #eee} .nr-analyzer .panel.sum:hover.panel-default > .panel-heading { color: #31708f; background-color: #d9edf7; border-color: #bce8f1; } .nr-analyzer tr.option.sum.first > td.region, .nr-analyzer tr.option.sum.first > td.country { border-top: solid 2px #777 !important; } .nr-analyzer tr.option.sum.last > td.region, .nr-analyzer tr.option.sum.last > td.country { border-bottom: solid 2px #777 !important; } .nr-analyzer tr.option.sum > td.region.first { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.sum > td:last-child { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.percentGlobal.first > td.region, .nr-analyzer tr.option.percentGlobal.first > td.country { border-top: solid 2px #777 !important; } .nr-analyzer tr.option.percentGlobal.last > td.region, .nr-analyzer tr.option.percentGlobal.last > td.country { border-bottom: solid 2px #777 !important; } .nr-analyzer tr.option.percentGlobal > td.region.first { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.percentGlobal > td:last-child { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.percentColumn.first > td.region, .nr-analyzer tr.option.percentColumn.first > td.country { border-top: solid 2px #777 !important; } .nr-analyzer tr.option.percentColumn.last > td.region, .nr-analyzer tr.option.percentColumn.last > td.country { border-bottom: solid 2px #777 !important; } .nr-analyzer tr.option.percentColumn > td.region.expanded { border-right: solid 1px #777 !important; } .nr-analyzer tr.option.percentColumn > td.region { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.percentColumn > td:last-child { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.percentRow > td.region, .nr-analyzer tr.option.percentRow > td.country { border-top: solid 2px #777 !important; border-bottom: solid 2px #777 !important; } .nr-analyzer tr.option.percentRow > td.region.first { border-left: solid 2px #777 !important; } .nr-analyzer tr.option.percentRow > td:last-child { border-left: solid 2px #777 !important; } .nr-analyzer .question .cell-percent::after, .nr-analyzer .question .option.percentGlobal .cell-value:not(.value)::after, .nr-analyzer .question .option.percentColumn .cell-value:not(.value)::after, .nr-analyzer .question .option.percentRow .cell-value:not(.value)::after, .nr-analyzer .question .option.percentGlobal .cell-delta:not(.value)::after, .nr-analyzer .question .option.percentColumn .cell-delta:not(.value)::after, .nr-analyzer .question .option.percentRow .cell-delta:not(.value)::after, .nr-analyzer .question .cell-delta.percent::after { content: '%' } .nr-analyzer .cell-delta.inc { color:#008000;white-space: nowrap;cursor:help} .nr-analyzer .cell-delta.dec { color:#800000;white-space: nowrap;cursor:help} .nr-analyzer .cell-delta.stable { color:#808080;white-space: nowrap;cursor:help} .nr-analyzer .cell-delta.inc::before { content: '\25B2\0A+' } .nr-analyzer .cell-delta.dec::before { content: '\25BC\0A' } .nr-analyzer .cell-delta.stable::before { content: '\f0da\f0d9\0A'; font-family: 'FontAwesome' } .nr-analyzer .compare { width: 25px; height: 25px; display: inline-block; background-image: url('/app/views/report-analyzer/resources/compare-off.png'); } .nr-analyzer .compare:hover, .nr-analyzer .compare.on { background-image: url('/app/views/report-analyzer/resources/compare-on.png'); } .nr-analyzer .question.highlight { padding: 5px; border: 2px solid #dadada; border-radius: 7px; outline: none; border-color: #9ecaed; box-shadow: 0 0 10px #9ecaed; margin-top: -7px; margin-right: -7px; margin-left: -7px; } div.km-value{ background-color: #f5f5f5; border: 1px solid #c0c0c0; border-radius: 3px; padding: 5px 8px 5px 8px; margin-top: 1px; margin-bottom: 1px; display: block; -webkit-border-radius: 5px; -moz-border-radius: 5px; -ms-border-radius: 5px; -o-border-radius: 5px; } .table-hover:hover { background-color: #fff!important; } #textsDialog-model-content .modal-body{ max-height:75vh; overflow-y: auto; } @media print{ #returnQuestions, #btnPrint, #btnClose, .analyzer-buttons{ display:none!important; } #textsDialog-model-content .modal-body{ max-height:100%; } } .prev-question-compare{ width:20px; height: 18px; } </style>
 
-        .nr-analyzer tr.option.sum.first > td.region,
-        .nr-analyzer tr.option.sum.first > td.country      { border-top:    solid 2px #777  !important; }
-        .nr-analyzer tr.option.sum.last  > td.region,
-        .nr-analyzer tr.option.sum.last  > td.country      { border-bottom: solid 2px #777  !important; }
-        .nr-analyzer tr.option.sum       > td.region.first { border-left:   solid 2px #777  !important; }
-        .nr-analyzer tr.option.sum       > td:last-child   { border-left:   solid 2px #777  !important; }
-
-        .nr-analyzer tr.option.percentGlobal.first > td.region,
-        .nr-analyzer tr.option.percentGlobal.first > td.country      { border-top:    solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentGlobal.last  > td.region,
-        .nr-analyzer tr.option.percentGlobal.last  > td.country      { border-bottom: solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentGlobal       > td.region.first { border-left:   solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentGlobal       > td:last-child   { border-left:   solid 2px #777  !important; }
-
-        .nr-analyzer tr.option.percentColumn.first > td.region,
-        .nr-analyzer tr.option.percentColumn.first > td.country         { border-top:    solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentColumn.last  > td.region,
-        .nr-analyzer tr.option.percentColumn.last  > td.country         { border-bottom: solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentColumn       > td.region.expanded { border-right:  solid 1px #777  !important; }
-        .nr-analyzer tr.option.percentColumn       > td.region          { border-left:   solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentColumn       > td:last-child      { border-left:   solid 2px #777  !important; }
-
-        .nr-analyzer tr.option.percentRow > td.region,
-        .nr-analyzer tr.option.percentRow > td.country      { border-top:    solid 2px #777 !important; border-bottom: solid 2px #777  !important; }
-        .nr-analyzer tr.option.percentRow > td.region.first { border-left:   solid 2px #777 !important; }
-        .nr-analyzer tr.option.percentRow > td:last-child   { border-left:   solid 2px #777 !important; }
-
-        .nr-analyzer .question .cell-percent::after,
-        .nr-analyzer .question .option.percentGlobal .cell-value:not(.value)::after,
-        .nr-analyzer .question .option.percentColumn .cell-value:not(.value)::after,
-        .nr-analyzer .question .option.percentRow    .cell-value:not(.value)::after,
-        .nr-analyzer .question .option.percentGlobal .cell-delta:not(.value)::after,
-        .nr-analyzer .question .option.percentColumn .cell-delta:not(.value)::after,
-        .nr-analyzer .question .option.percentRow    .cell-delta:not(.value)::after,
-        .nr-analyzer .question                       .cell-delta.percent::after  { content: '%' } 
-
-
-        .nr-analyzer .cell-delta.inc    { color:#008000;white-space: nowrap;cursor:help}
-        .nr-analyzer .cell-delta.dec    { color:#800000;white-space: nowrap;cursor:help}
-        .nr-analyzer .cell-delta.stable { color:#808080;white-space: nowrap;cursor:help}
-        .nr-analyzer .cell-delta.inc::before { content: '\25B2\0A+' }
-        .nr-analyzer .cell-delta.dec::before { content: '\25BC\0A' }
-        .nr-analyzer .cell-delta.stable::before { content: '\f0da\f0d9\0A'; font-family: 'FontAwesome' }
-        .nr-analyzer .compare {
-            width: 25px;
-            height: 25px;
-            display: inline-block;
-            background-image: url('/app/views/report-analyzer/resources/compare-off.png');
-        }
-        .nr-analyzer .compare:hover,
-        .nr-analyzer .compare.on  { background-image: url('/app/views/report-analyzer/resources/compare-on.png');  }
-
-        .nr-analyzer .question.highlight {
-            padding: 5px;
-            border: 2px solid #dadada;
-            border-radius: 7px;
-            outline: none;
-            border-color: #9ecaed;
-            box-shadow: 0 0 10px #9ecaed;
-            margin-top: -7px;
-            margin-right: -7px;
-            margin-left: -7px;
-        }
-        div.km-value{
-            background-color: #f5f5f5;
-            border: 1px solid #c0c0c0;
-            border-radius: 3px;
-            padding: 5px 8px 5px 8px;
-            margin-top: 1px;
-            margin-bottom: 1px;
-            display: block;
-            -webkit-border-radius: 5px;
-            -moz-border-radius: 5px;
-            -ms-border-radius: 5px;
-            -o-border-radius: 5px;
-        }
-        .table-hover:hover {
-            background-color: #fff!important;
-        }
-        #textsDialog-model-content .modal-body{
-            max-height:75vh;
-            overflow-y: auto;
-        }
-        @media print{
-            #returnQuestions, #btnPrint, #btnClose, .analyzer-buttons{
-                display:none!important;
-            }
-            #textsDialog-model-content .modal-body{
-                max-height:100%;
-            }
-        }
-
-        .prev-question-compare{
-            width:20px;
-            height: 18px;
-        }
-    </style>
-
-    <div class="pull-right" style="position:relative;top:-30px;">   
-        <a rel="noopener" href="" ng-click="print('#secNrAnalyzer')" class="links" id="btnPrint">
-            <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
-            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>  Print
-        </a>             
-    </div>
+    <div class="pull-right" style="position:relative;top:-20px;"><a rel="noopener" href="" ng-click="print('#secNrAnalyzer')" class="links" id="btnPrint"><i class="fa fa-spin fa-spinner" ng-if="printing" ></i> <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i> Print</a></div>
  
-    <div class="clearfix"></div>
-
-
-        <!-- <h3 style="padding:0;margin:0; display:inline" ng-switch="selectedRegionsPreset" >
+    <div class="clearfix"></div><!-- <h3 style="padding:0;margin:0; display:inline" ng-switch="selectedRegionsPreset" >
                 <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
                 <span ng-switch-when="countries">Select countries</span>
                 <span ng-switch-when="regions">Select regions</span>
                 <span ng-switch-when="npParties">Breakdown by Nagoya Protocol Parties</span>
                 <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non-Parties</span>
-        </h3> -->
+        </h3> --><div ng-show="sections" id="sumTypeButton" class="btn-group pull-right" title="Изменить способ исчисления показателей">
+            <button type="button" class="btn btn-primary" ng-click="showSumTypeSelector()">∑ <span ng-switch="sumType"><span ng-switch-when="sum">Число ответов</span> <span ng-switch-when="percentRow">Процент по строке</span> <span ng-switch-when="percentColumn">Процент по столбцу</span> <span ng-switch-when="percentGlobal">Общее процентное отношение</span></span></button>
 
-        <div ng-show="sections" id="sumTypeButton" class="btn-group pull-right" title="Change how numbers are calculated">
-            <button type="button" class="btn btn-primary" ng-click="showSumTypeSelector()">∑
-                <span ng-switch="sumType">
-                    <span ng-switch-when="sum">Count of responses</span>
-                    <span ng-switch-when="percentRow">Percentage by row</span>
-                    <span ng-switch-when="percentColumn">Percentage by column</span>
-                    <span ng-switch-when="percentGlobal">Percentage overall</span>
-                </span>
-            </button>
-
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="caret"></span> <span class="sr-only">Переключить раскрывающийся список</span></button>
 
             <ul class="dropdown-menu">
-                <li ng-repeat="type in ::sumTypes">
-                    <a rel="noopener" href="#" ng-click="setSumType(type)">
-                        <span ng-switch="type">
-                            <span ng-switch-when="sum">Count of responses</span>
-                            <span ng-switch-when="percentRow">Percentage by row</span>
-                            <span ng-switch-when="percentColumn">Percentage by column</span>
-                            <span ng-switch-when="percentGlobal">Percentage overall</span>
-                        </span>
-                    </a>
-                </li>
+                <li ng-repeat="type in ::sumTypes"><a rel="noopener" href="#" ng-click="setSumType(type)"><span ng-switch="type"><span ng-switch-when="sum">Число ответов</span> <span ng-switch-when="percentRow">Процент по строке</span> <span ng-switch-when="percentColumn">Процент по столбцу</span> <span ng-switch-when="percentGlobal">Общее процентное отношение</span></span></a></li>
             </ul>
         </div>
 
-        <button ng-show="sections" type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
-            « Back to settings
-        </button>
+        <button ng-show="sections" type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">« Назад к настройкам</button>
 
         <div class="clearfix"></div>
 
@@ -180,162 +28,92 @@
             <table style="width:100%;color:inherit">
                 <tr>
                     <td>
-                        <h3 style="color:inherit; margin-top:10px">
-                            <i class="fa fa-exclamation-triangle"></i>
-                            <b>The current analysis is filtered to show only reports where &nbsp;</b>
-                        </h3>
+                        <h3 style="color:inherit; margin-top:10px"><i class="fa fa-exclamation-triangle"></i> <b>Текущий анализ выполнен с применением фильтров, позволяющих отобразить только те доклады, в которых &nbsp;</b></h3>
                     </td>
                     <td class="text-right">
-                        <button type="button" class="btn btn-xs btn-default" ng-click="clearFilter()">&times; Remove filter</button>
+                        <button type="button" class="btn btn-xs btn-default" ng-click="clearFilter()">&times; Удалить фильтр</button>
                     </td>
                 </tr>
             </table>
         </div>
         <div class="panel-body">
             <div class="alert alert-info" style="margin-bottom:0px" ng-show="filter">
-                <p style="margin-bottom:10px">
-                    <b>Question {{filter.question.number}}</b><br/>
-                    {{filter.question.title|lstring}}
-                </p>
-                <p>
-                    <i>Has been answered as follows:</i>
-                    <b>{{filter.option.title|lstring}}</b>
-                </p>
+                <p style="margin-bottom:10px"><b>Вопрос <span ng-bind="filter.question.number"></span></b><br/> <span ng-bind="filter.question.title|lstring"></span></p>
+                <p><i>Дан следующий ответ:</i> <b><span ng-bind="filter.option.title|lstring"></span></b></p>
             </div>
         </div>
-    </div>
-
-    <br>
-
-    <national-report-analyzer-section sum-type="sumType" regions="::regions" section="::section" previous-questions-mapping="previousQuestionsMapping" previous-questions-value-mapping="previousQuestionsValueMapping" ng-repeat="section in sections"></national-report-analyzer-section>
-
-    <!-- SUM SELECTOR -->
-    <div class="modal fade" id="sumTypeDialog">
+    </div><br><national-report-analyzer-section sum-type="sumType" regions="::regions" section="::section" previous-questions-mapping="previousQuestionsMapping" previous-questions-value-mapping="previousQuestionsValueMapping" ng-repeat="section in sections"></national-report-analyzer-section><!-- SUM SELECTOR --><div class="modal " id="sumTypeDialog">
         <div class="modal-dialog">
             <div class="modal-content">
 
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Change how numbers are calculated</i></h4>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Изменить способ исчисления показателей</i></h4>
                 </div>
 
                 <div class="modal-body" style="max-height:75vh;overflow-y: auto;">
 
                     <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-xs-12" ng-repeat="type in ::sumTypes">
-
-                            <a rel="noopener" style="color:inherit;text-decoration:none" href="#" ng-click="setSumType(type)">
-                            <div class="panel sum" ng-class="{ 'panel-primary' : sumType==type, 'panel-default' : sumType!=type }">
+                        <div class="col-lg-6 col-sm-6 col-xs-12" ng-repeat="type in ::sumTypes"><a rel="noopener" style="color:inherit;text-decoration:none" href="#" ng-click="setSumType(type)"><div class="panel sum" ng-class="{ 'panel-primary' : sumType==type, 'panel-default' : sumType!=type }">
                                 <div class="panel-heading  text-center">
-                                    <h2 style="color:inherit;margin:5px">
-                                            <span ng-switch="type">
-                                                <span ng-switch-when="sum">Count of responses</span>
-                                                <span ng-switch-when="percentRow">Percentage by row</span>
-                                                <span ng-switch-when="percentColumn">Percentage by column</span>
-                                                <span ng-switch-when="percentGlobal">Percentage overall</span>
-                                            </span>
-                                    </h2>
+                                    <h2 style="color:inherit;margin:5px"><span ng-switch="type"><span ng-switch-when="sum">Число ответов</span> <span ng-switch-when="percentRow">Процент по строке</span> <span ng-switch-when="percentColumn">Процент по столбцу</span> <span ng-switch-when="percentGlobal">Общее процентное отношение</span></span></h2>
                                 </div>
-                                <div class="panel-body hidden-xs highlight" style="height:195px;overflow-y:auto">
-                                        <img ng-src="/app/views/report-analyzer/resources/{{type | kebabcase}}.png"><br/>
-                                        <div ng-switch="type" class="text-justify" style="margin-top:5px">
-                                            <span ng-switch-when="sum">Displays the absolute number of responses received for a given combination of row (answers) and column (groups).</span>
-                                            <span ng-switch-when="percentRow">Displays the percentages within the different groups selected (columns). In this case the sum of all values in a row is 100%.</span>
-                                            <span ng-switch-when="percentColumn">Displays the percentages within different given answers (rows). In this case the sum of all values in a column is 100%.</span>
-                                            <span ng-switch-when="percentGlobal">Displays the percentages within all given responses. In this case the sum of all values (rows and columns) is 100%.</span>
-                                        </div>
+                                <div class="panel-body hidden-xs highlight" style="height:195px;overflow-y:auto"><img ng-src="/app/views/report-analyzer/resources/{{type | kebabcase}}.png"><br/><div ng-switch="type" class="text-justify" style="margin-top:5px"><span ng-switch-when="sum">Отображает абсолютное число ответов, полученных для данного сочетания строк (ответы) и столбцов (группы).</span> <span ng-switch-when="percentRow">Отображает процентное отношение внутри различных выбранных групп (столбцы). В данном случае сумма всех значений в строке составляет 100%.</span> <span ng-switch-when="percentColumn">Отображает процентное отношение внутри различных предоставленных ответов (строки). В данном случае сумма всех значений в столбце составляет 100%.</span> <span ng-switch-when="percentGlobal">Displays the percentages within all given responses. В данном случае сумма всех значений (строки и столбцы) составляет 100%.</span></div>
                                 </div>
-                            </div>
-                            </a>
-                        </div>
+                            </div></a></div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <!-- TEXTS DISPLAY -->
-    <div class="modal fade" id="textsDialog">
+    </div><!-- TEXTS DISPLAY --><div class="modal " id="textsDialog">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="textsDialog-model-content">
 
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Question {{currentQuestion.number}}.</h4>
-                    {{currentQuestion.title|lstring}} 
-                    <span ng-if="subTitle"><br/>
-                        <b>Sub section :-</b> {{subTitle|lstring}}
-                    </span>    
-                </div>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Вопрос <span ng-bind="currentQuestion.number"></span>.</h4><span ng-bind="currentQuestion.title|lstring"></span> <span ng-if="subTitle"><br/> <b>Подраздел :-</b> <span ng-bind="subTitle|lstring"></span></span></div>
 
                 <div class="modal-body ">
                    
                     <div ng-repeat="item in countriesTexts">
-                        <div class="pull-right" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'">
-                            <span  ng-repeat="(locale, text) in ::item.text" class="locale" ng-class="{ selected : (item.text|locale:item.locale)==locale }">
-                                <a rel="noopener" href="#" ng-click="item.locale=locale">{{::locale|uppercase}}</a>
-                            </span>
-                        </div>
-                        <h5>{{::allRegionsMap[item.government].title|lstring}}</h5>
+                        <div class="pull-right" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'"><span  ng-repeat="(locale, text) in ::item.text" class="locale" ng-class="{ selected : (item.text|locale:item.locale)==locale }"><a rel="noopener" href="#" ng-click="item.locale=locale" ng-bind="::locale|uppercase"></a></span></div>
+                        <h5 ng-bind="::allRegionsMap[item.government].title|lstring"></h5>
                         
                         <pre ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.type!='number'"
-                            style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
-                            {{item.text|lstring:item.locale}}
-                        </pre>
+                            style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }"><span ng-bind="item.text|lstring:item.locale"></span></pre>
                         <div class="km-value" ng-style="{ direction : (item.text|direction:item.locale) }" ng-if="item.field=='relevantDocuments'"> 
-                            <div ng-repeat="file in item.text">
-                                <a rel="noopener" target="_blank" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
-                                <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
-                            </div>
+                            <div ng-repeat="file in item.text"><a rel="noopener" target="_blank" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a> <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i></div>
                         </div> 
-                        <div ng-if="::item.field=='documentReferenceIDs' && item.type!='number'" ng-style="{ direction : (item.text|direction:item.locale) }">
-                            <!-- {{item.text|lstring:item.locale}} -->
-                            <div class="col-xs-12">
+                        <div ng-if="::item.field=='documentReferenceIDs' && item.type!='number'" ng-style="{ direction : (item.text|direction:item.locale) }"><!-- {{item.text|lstring:item.locale}} --><div class="col-xs-12">
                                 <view-reference-document identifier='item.text[0].identifier'></view-reference-document>
                             </div>
                         </div>
-                        <pre ng-if="::item.type=='number'" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }">
-                            {{item.text}}
-                        </pre>
+                        <pre ng-if="::item.type=='number'" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:item.locale) }"><span ng-bind="item.text"></span></pre>
                     </div>
                     <div style="height:0px;width:0px;overflow:hidden" ng-if="exporting">
                             <table id="forExport" style="height:0px;width:0px">
                                     <tr>
                                         <td></td>
-                                        <td colspan="5">
-                                            Question {{currentQuestion.number}}.
-                                            {{currentQuestion.title|lstring}}                                                     
-                                            Sub section :-{{subTitle|lstring}}
-                                       </td>
+                                        <td colspan="5">Вопрос <span ng-bind="currentQuestion.number"></span>. <span ng-bind="currentQuestion.title|lstring"></span> Подраздел :-<span ng-bind="subTitle|lstring"></span></td>
                                     </tr>
                                     <tr>
-                                        <th>Country</th>
-                                        <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">
-                                            {{lang|languageLongName}}
-                                        </td>
+                                        <th>Страна</th>
+                                        <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string"><span ng-bind="lang|languageLongName"></span></td>
                                     </tr>
                                     <tr ng-repeat="item in countriesTexts">
-                                        <td>{{::allRegionsMap[item.government].title|lstring}}</td>
+                                        <td ng-bind="::allRegionsMap[item.government].title|lstring"></td>
                                         <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">  
                                             
                                             <pre ng-if="::item.text[lang] && item.field!='documentReferenceIDs' && item.field!='relevantDocuments' && item.type!='number'"
-                                                style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
-                                                {{item.text|lstring:lang}}
-                                            </pre>
-                                            <div class="km-value" ng-style="{ direction : (item.text|direction:lang) }" ng-if="item.field=='relevantDocuments'"> 
-                                                <div ng-repeat="file in item.text">
-                                                    <a rel="noopener" target="_blank" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a>
-                                                    <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i>
-                                                </div>
+                                                style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }"><span ng-bind="item.text|lstring:lang"></span></pre>
+                                            <div class="km-value" ng-style="{ direction : (item.text|direction:lang) }" ng-if="item.field=='relevantDocuments'">
+                                                <div ng-repeat="file in item.text"><a rel="noopener" target="_blank" ng-href="{{file.url|encodeURI}}"><i class="fa fa-file"></i> {{file.name||file.url}}</a> <i ng-show="file.name && file.url.indexOf('/api/v2013/documents/')<0">({{file.url}})</i></div>
                                             </div> 
-                                            <pre ng-if="::item.type=='number' && item.text[lang]" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }">
-                                                {{item.text|lstring:lang}}
-                                            </pre>
+                                            <pre ng-if="::item.type=='number' && item.text[lang]" style="white-space:pre-line" ng-style="{ direction : (item.text|direction:lang) }"><span ng-bind="item.text|lstring:lang"></span></pre>
                                         </td>                                        	
                                     <tr>
                 
@@ -344,17 +122,9 @@
                 </div>
 
                 <div class="modal-footer">
-                        <button  ng-click="export()" class="btn btn-primary record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'">
-                                <i class="fa fa-spin fa-spinner" ng-if="exporting" ></i> 
-                                <i class="fa fa-table" aria-hidden="true" ng-if="!exporting"></i>
-                                Export 
-                            </button>   
-                        <button  ng-click="print('#textsDialog-model-content')" class="btn btn-primary record-link-style" id="btnPrint">
-                            <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
-                            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
-                            Print 
-                        </button>   
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="btnClose">Close</button>
+                        <button type="button"  ng-click="export()" class="btn btn-primary record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'"><i class="fa fa-spin fa-spinner" ng-if="exporting" ></i> <i class="fa fa-table" aria-hidden="true" ng-if="!exporting"></i> Экспортировать</button>   
+                        <button type="button"  ng-click="print('#textsDialog-model-content')" class="btn btn-primary record-link-style" id="btnPrint"><i class="fa fa-spin fa-spinner" ng-if="printing" ></i> <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i> Print</button>   
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" id="btnClose">Закрыть</button>
                 </div>
             </div>
         </div>

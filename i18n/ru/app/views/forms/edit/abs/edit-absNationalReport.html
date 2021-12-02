@@ -1,16 +1,19 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                     
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination" id="nrTabs" ng-click="setTab()">
-                                <li class="active"><a rel="noopener" translation-url href="#part0" data-toggle="tab">Руководящие принципы</a></li>
+                                <li class="active"><a rel="noopener" translation-url href="#part0" data-toggle="tab">Guidelines</a></li>
                                 <li><a rel="noopener" translation-url href="#part1" data-toggle="tab">Часть 1</a></li>
                                 <li><a rel="noopener" translation-url href="#part2" data-toggle="tab">Часть 2</a></li>
                                 <li><a rel="noopener" translation-url href="#part3" data-toggle="tab">Часть 3</a></li>
@@ -39,13 +42,13 @@
                                             <div style="margin-bottom:20px;">
                                                 <h4>РУКОВОДЯЩИЕ УКАЗАНИЯ ДЛЯ ПОДГОТОВКИ ПРОМЕЖУТОЧНОГО НАЦИОНАЛЬНОГО ДОКЛАДА ОБ ОСУЩЕСТВЛЕНИИ НАГОЙСКОГО ПРОТОКОЛА</h4>
                                                 <div>
-                                                    <p>Приводимая ниже форма представления национального промежуточного доклада об осуществлении Нагойского протокола регулирования доступа к генетическим ресурсам и совместного использования выгод в соответствии со статьей 29 представляет собой серию вопросов, основанных на тех положениях Протокола, которые определяют обязательства Сторон Протокола. Данные вопросы определены как обязательные и помечены звездочкой.</p>
+                                                    <p>The following format for the preparation of the interim national report on implementation of the Nagoya Protocol on Access and Benefit-sharing called for under Article 29 of the Protocol is a series of questions based on those provisions of the Protocol that establish obligations for the Parties to the Protocol. Данные вопросы определены как обязательные и помечены звездочкой.</p>
     
-                                                    <p>Кроме того, некоторые вопросы не связаны непосредственно с положениями Протокола и определены как необязательные. Они включены в форму представления отчетности для содействия оценке и обзору эффективности Протокола в контексте статьи 31 и для выявления проблем и трудностей в осуществлении Протокола и решений, принятых Конференцией Сторон, выступающей в качестве Совещания Сторон Нагойского протокола (КС-ССП).</p>
+                                                    <p>Кроме того, некоторые вопросы не связаны непосредственно с положениями Протокола и определены как необязательные. They are included in the reporting format to contribute to the assessment and review of the effectiveness of the Protocol in the context of Article 31 and to identify challenges and difficulties in implementing the Protocol, and of decisions adopted by the Conference of the Parties serving as the meeting of the Parties to the Nagoya Protocol (COP-MOP).</p>
     
-                                                    <p>Промежуточный национальный доклад может быть инструментом, полезным как для Сторон, так и стран, не являющихся Сторонами, в оценке уровня осуществления Нагойского протокола, а также пробелов и потребностей в плане потенциала и поможет КС-ССП в проведении регулярных обзоров осуществления Нагойского протокола и в принятии в соответствии со своими полномочиями решений, необходимых для оказания содействия его эффективному выполнению в соответствии с пунктом 4 статьи 26.</p>
+                                                    <p>The interim national report can be a useful tool for both Parties and Non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
     
-                                                    <p>Информация, представленная в промежуточном национальном докладе, может также использоваться странами для обмена опытом, проблемными ситуациями и найденными решениями в связи с осуществлением Нагойского протокола. В этом отношении национальный промежуточный доклад может стать ценным инструментом для создания и наращивания потенциала для осуществления Протокола и для более эффективной разработки мероприятий по созданию потенциала. Данная форм разработана с целью снижения бремени отчетности, лежащем на Сторонах, и поэтому в ней используются простые по форме вопросы (обычно требующие ответа «да» или «нет»). Как правило, за этими вопросами следуют поля для ввода текста, в которых странам предлагается подробно сообщать о принятых мерах и о проблемах и трудностях в осуществлении определенных положений Протокола и представлять дополнительную информацию по вопросу путем указания ссылок на существующие записи в Механизме посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод (Механизм посредничества для регулирования ДГРСИВ), веб-сайты или загрузку документов. Это дает возможность выявлять передовые методы работы и трудности в осуществлении Нагойского протокола.</p>
+                                                    <p>Информация, представленная в промежуточном национальном докладе, может также использоваться странами для обмена опытом, проблемными ситуациями и найденными решениями в связи с осуществлением Нагойского протокола. In this regard, the interim national report can be a valuable tool for building and developing capacity to implement the Protocol and for designing capacity-building activities more effectively. The format is intended to minimize the reporting burden on countries and therefore questions are simple in nature (usually yes or no questions). Как правило, за этими вопросами следуют поля для ввода текста, в которых странам предлагается подробно сообщать о принятых мерах и о проблемах и трудностях в осуществлении определенных положений Протокола и представлять дополнительную информацию по вопросу путем указания ссылок на существующие записи в Механизме посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод (Механизм посредничества для регулирования ДГРСИВ), веб-сайты или загрузку документов. Это дает возможность выявлять передовые методы работы и трудности в осуществлении Нагойского протокола.</p>
     
                                                     <p>В целях избегания дублирования представляемой информации и наиболее оптимального использования информации, уже распространяемой через Механизм посредничества для регулирования ДГРСИВ, странам будет дана возможность связывать по желанию ссылками существующие национальные и справочные записи в Механизме посредничества для регулирования ДГРСИВ, размещенные публикующим органом, с различными разделами промежуточного национального доклада, или же секретариат будет в процессе обобщения информации для изучения КС-ССП включать в дополнение к информации, приведенной в промежуточном национальном докладе, также соответствующую информацию, уже опубликованную в Механизме посредничества для регулирования ДГРСИВ.</p>
     
@@ -57,7 +60,7 @@
     
                                                     <p>Странам следует использовать онлайновую версию формы, если технически осуществимо, и представлять доклад через Механизм посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод, обеспечивая при этом обновление национальной информации, размещенной в Механизме посредничества для регулирования  доступа к генетическим ресурсам и совместного использования выгод.</p>
     
-                                                    <p>Стороны должны представлять информацию в Механизм посредничества для регулирования ДГРСИВ в режиме оффлайн только в случаях отсутствия у них технической возможности представлять ее в режиме онлайн. При представлении материалов в режиме оффлайн следует использовать защищенную форму, которую можно загрузить в Механизме посредничества для регулирования ДГРСИВ в формате MS Word.  Странам рекомендуется отправлять доклад в секретариат по электронной почте по адресу: secretariat@cbd.int, приложив отсканированную копию последней страницы, подписанной лицом, представляющим публикующий орган для Механизма посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод. Затем Исполнительный секретарь окажет Сторонам содействие в распространении доклада через Механизм посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод.</p>
+                                                    <p>Стороны должны представлять информацию в Механизм посредничества для регулирования ДГРСИВ в режиме оффлайн только в случаях отсутствия у них технической возможности представлять ее в режиме онлайн. При представлении материалов в режиме оффлайн следует использовать защищенную форму, которую можно загрузить в Механизме посредничества для регулирования ДГРСИВ в формате MS Word. It is recommended that countries send the report via email to the Secretariat (secretariat@cbd.int), and include a scanned copy of the last page signed by the ABS Clearing-House publishing authority. Затем Исполнительный секретарь окажет Сторонам содействие в распространении доклада через Механизм посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод.</p>
                                                 </div>
                                             </div>
     
@@ -91,7 +94,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="control-group">
                                                         <div class="km-control-group" name="title" required caption="1. Название данного национального доклада">
-                                                            <div class="help-info">Данное поле служит названием записи, поэтому оно должно быть уникальным и обеспечивать легкость идентификации записи в Механизме посредничества ДГРСИВ.</div>
+                                                            <div class="help-info">This field serves as the title of the record, therefore it should be distinct and help to easily identify the record in the ABS Clearing-House.</div>
                                                             <div km-textbox-ml ng-model="document.title" rows="1"
                                                                 placeholder="Название данного национального доклада" locales="document.header.languages"></div>
                                                         </div>
@@ -112,7 +115,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question3"
-                                                        caption="3. Распространила ли ваша страна информацию через Механизм посредничества для регулирования ДГРСИВ, как предусмотрено в статье 14.2?">
+                                                        caption="3. Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?">
                                                         <div class="km-yes-no" required name="question3" ng-model="document.question3.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question3Challenges" caption=""
@@ -135,7 +138,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question4"
-                                                        caption="4. Принимала ли ваша страна правовые, административные и политические меры касательно ДГРСИВ?">
+                                                        caption="4. Has your country taken legislative, administrative and policy measures on ABS?">
                                                         <div required class="km-yes-no" name="question4" ng-model="document.question4.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question4.ChallengesInfo" caption="Кратко опишите основные трудности и проблемы, с которыми вы столкнулись при разработке данных мер.">
@@ -220,7 +223,7 @@
                                                         <div ng-disabled="document.question7.notApplicable" required="!document.question7.notApplicable"
                                                             class="km-yes-no" name="question7" ng-model="document.question7.answer"></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question7.ChallengesInfo" caption="Кратко опишите основные трудности и проблемы, с которыми вы столкнулись при размещении данной информации.">
+                                                    <div class="km-control-group" name="question7.ChallengesInfo" caption="Please provide a summary of the main difficulties and challenges encountered for making this information available.">
                                                         <div km-textbox-ml rows=4 name="question7.ChallengesInfo" ng-model="document.question7.challengesInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
@@ -311,7 +314,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="question11" bold="true"
-                                                        caption="11. Регулируется ли доступ к генетическим ресурсам на основе ПОС, предусмотренного статьей 6.1?">
+                                                        caption="11. Is access to genetic resources subject to PIC as provided in Article 6.1?">
                                                         <div class="km-yes-no" required name="question11" ng-model="document.question11.answer"
                                                             ng-click="Q11Clear()"></div>
                                                     </div>
@@ -342,7 +345,7 @@
                                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="question12" bold="true"
-                                                        caption="12. Установлены ли в вашей стране справедливые и недискриминационные правила и процедуры доступа к генетическим ресурсам, предусмотренные в пункте b) статьи 6.3?">
+                                                        caption="12. Does your country have fair and non-arbitrary rules and procedures on accessing genetic resources as provided in Article 6.3 (b)?">
                                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
                                                             name="question12" ng-model="document.question12.answer"></div>
                                                     </div>
@@ -363,7 +366,7 @@
                                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="question13" bold="true"
-                                                        caption="13. Предоставляет ли ваша страна информацию о процедуре подачи заявки на получение предварительного обоснованного согласия, как это предусмотрено в пункте с) статьи 6.3?">
+                                                        caption="13. Does your country provide information on how to apply for PIC as provided in Article 6.3(c)?">
                                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
                                                             required name="question13" ng-model="document.question13.answer"></div>
                                                     </div>
@@ -384,7 +387,7 @@
                                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="question14" bold="true"
-                                                        caption="14. Обеспечивает ли ваша страна представление компетентным национальным органом четкого и прозрачного письменного решения, как это предусмотрено в пункте d) статьи 6.3?">
+                                                        caption="14. Does your country provide for a clear and transparent written decision by a competent national authority as provided in Article 6.3 (d)?">
                                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
                                                             required name="question14" ng-model="document.question14.answer"></div>
                                                     </div>
@@ -405,7 +408,7 @@
                                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="question15" bold="true"
-                                                        caption="15. Обеспечивает ли ваша страна выдачу в момент доступа разрешения или эквивалентного документа, как предусмотрено в пункте е) статьи 6.3?">
+                                                        caption="15. Does your country provide for the issuance at the time of access of a permit or its equivalent as provided in Article 6.3 (e)?">
                                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
                                                             required name="question15" ng-model="document.question15.answer"></div>
                                                     </div>
@@ -425,7 +428,7 @@
     
                                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="question16" bold="true" caption="16. Представьте число разрешений или их эквивалентов, распространенных через Механизм посредничества для регулирования ДГРСИВ со времени вступления в силу Протокола для вашей страны.">
+                                                    <div class="km-control-group" name="question16" bold="true" caption="16. Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.">
     
                                                         <div class="input-group col-xs-4" name="question16.permitsOnAbsCh">
                                                             <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number"
@@ -454,7 +457,7 @@
                                             <div class="row" ng-class="{'disable': !document.question11.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required bold="true" name="question17"
-                                                        caption="17. Введены ли в вашей стране четкие правила и процедуры требования и установления ВСУ, предусмотренные в пункте g) статьи 6.3?">
+                                                        caption="17. Does your country have rules and procedures for requiring and establishing MAT as provided in Article 6.3 (g)?">
                                                         <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
                                                             required name="question17" ng-model="document.question17.answer"></div>
                                                     </div>
@@ -474,22 +477,22 @@
     
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="question18" bold="true" caption="18. Выгоды, полученные со времени вступления в силу Протокола для вашей страны от использования:">
+                                                    <div class="km-control-group" name="question18" bold="true" caption="18. Benefits received since entry into force of the Protocol for your country from the utilization of:">
     
                                                         <div class="checkbox">
                                                             <label><input type="checkbox" ng-model="document.question18.geneticResources.answer"
-                                                                    ng-change="Q18Clear()">Генетические ресурсы</label>
+                                                                    ng-change="Q18Clear()">Genetic resources</label>
     
                                                             <div class="checkbox" ng-show="document.question18.geneticResources.answer">
                                                                 <label><input type="checkbox" ng-model="document.question18.geneticResources.monetary"
-                                                                        ng-change="Q18GeneticResources(document.question18.geneticResources.monetary); Q18ClearInfo()">Денежные выгоды</label>
+                                                                        ng-change="Q18GeneticResources(document.question18.geneticResources.monetary); Q18ClearInfo()">денежные выгоды</label>
                                                                 <div ng-show="document.question18.geneticResources.monetary"
                                                                     km-textbox-ml rows=2 ng-model="document.question18.geneticResources.monetaryInfo"
                                                                     locales="document.header.languages" placeholder=""></div>
                                                             </div>
                                                             <div class="checkbox" ng-show="document.question18.geneticResources.answer">
                                                                 <label><input type="checkbox" ng-model="document.question18.geneticResources.nonMonetary"
-                                                                        ng-change="Q18GeneticResources(document.question18.geneticResources.nonMonetary); Q18ClearInfo()">Неденежные выгоды</label>
+                                                                        ng-change="Q18GeneticResources(document.question18.geneticResources.nonMonetary); Q18ClearInfo()">Non-monetary benefits</label>
                                                                 <div ng-show="document.question18.geneticResources.nonMonetary"
                                                                     km-textbox-ml rows=2 ng-model="document.question18.geneticResources.nonMonetaryInfo"
                                                                     locales="document.header.languages" placeholder=""></div>
@@ -500,10 +503,10 @@
     
                                                         <div class="checkbox">
                                                             <label><input type="checkbox" ng-model="document.question18.tk.answer"
-                                                                    ng-change="Q18Clear()">Традиционные знания, связанные с генетическими ресурсами</label>
+                                                                    ng-change="Q18Clear()">Traditional knowledge associated with genetic resources</label>
                                                             <div class="checkbox" ng-show="document.question18.tk.answer">
                                                                 <label><input type="checkbox" ng-model="document.question18.tk.monetary"
-                                                                        ng-change="Q18TraditionalKnowledge(document.question18.tk.monetary); Q18ClearInfo()">Денежные выгоды</label>
+                                                                        ng-change="Q18TraditionalKnowledge(document.question18.tk.monetary); Q18ClearInfo()">Monetary benefits</label>
                                                                 <div ng-show="document.question18.tk.monetary"
                                                                     km-textbox-ml rows=2 name="question18FurtherInfo"
                                                                     ng-model="document.question18.tk.monetaryInfo" locales="document.header.languages"
@@ -511,7 +514,7 @@
                                                             </div>
                                                             <div class="checkbox" ng-show="document.question18.tk.answer">
                                                                 <label><input type="checkbox" ng-model="document.question18.tk.nonMonetary"
-                                                                        ng-change="Q18TraditionalKnowledge(document.question18.tk.nonMonetary); Q18ClearInfo()">Неденежные выгоды</label>
+                                                                        ng-change="Q18TraditionalKnowledge(document.question18.tk.nonMonetary); Q18ClearInfo()">Non-monetary benefits</label>
                                                                 <div ng-show="document.question18.tk.nonMonetary"
                                                                     km-textbox-ml rows=2 name="question18FurtherInfo"
                                                                     ng-model="document.question18.tk.nonMonetaryInfo"
@@ -559,7 +562,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question20"
-                                                        caption="20. Приняты ли в вашей стране правовые, административные или политические меры по осуществлению статьи 5.1, которые предусматривают, что выгоды от использования генетических ресурсов, а также дальнейшего применения и коммерциализации совместно используются со Стороной, предоставляющей такие ресурсы, которая является страной происхождения таких ресурсов или Стороной, которая приобрела такие ресурсы в соответствии с положениями Конвенции, как предусмотрено в статье 5.3?">
+                                                        caption="20. Has your country taken legislative, administrative or policy measures to implement Article 5.1 that provides that benefits arising from the utilization of genetic resources as well as subsequent applications and commercialization are shared with the Party providing such resources that is the country of origin of such resources or a Party that has acquired the genetic resources in accordance with the Convention as provided in Article 5.3?">
                                                         <div class="km-yes-no" required name="question20" ng-model="document.question20.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question20FurtherInfo" caption="">Представьте дополнительную информацию<div km-textbox-ml rows=4 name="question20FurtherInfo" ng-model="document.question20.furtherInfo"
@@ -578,7 +581,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question21"
-                                                        caption="21. Приняты ли в вашей стране правовые, административные или политические меры в целях обеспечения того, чтобы выгоды от использования генетических ресурсов, которые находятся в ведении коренных и местных общин в соответствии с положениями внутреннего законодательства, регулирующего установленные права данных коренных и местных общин на такие генетические ресурсы, совместно использовались справедливым и равным образом с соответствующими общинами на основе взаимосогласованных условий в соответствии со статьей 5.2?">
+                                                        caption="21. Has your country taken legislative, administrative or policy measures with the aim of ensuring that the benefits from the utilization of genetic resources held by indigenous and local communities, in accordance with domestic legislation regarding the established rights of these indigenous and local communities over these genetic resources, are shared with the indigenous and local communities concerned as provided in Article 5.2?">
                                                         <div class="km-yes-no" required name="question21" ng-model="document.question21.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question21FurtherInfo" caption="">Представьте дополнительную информацию<div km-textbox-ml rows=4 name="question21FurtherInfo" ng-model="document.question21.furtherInfo"
@@ -597,7 +600,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question22"
-                                                        caption="22. Приняты ли в вашей стране правовые, административные или политические меры по регулированию ДГРСИВ для обеспечения совместного использования на справедливой и равной основе выгод от применения традиционных знаний, связанных с генетическими ресурсами, с коренными и местными общинами, являющимися носителями таких знаний, как это предусмотрено статьей 5.5?">
+                                                        caption="22. Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?">
                                                         <div class="km-yes-no" required name="question22" ng-model="document.question22.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question22FurtherInfo" caption="">Представьте дополнительную информацию<div km-textbox-ml rows=4 name="question22FurtherInfo" ng-model="document.question22.furtherInfo"
@@ -639,7 +642,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question24"
-                                                        caption="24. Приняты ли в вашей стране надлежащие эффективные и пропорциональные правовые, административные или политические меры для обеспечения того, чтобы доступ к генетическим ресурсам, используемым в пределах ее юрисдикции, осуществлялся в соответствии с обоснованным предварительным согласием и чтобы были заключены взаимосогласованные условия в соответствии с требованиями внутреннего законодательства по регулированию ДГРСИВ или регулятивными требованиями другой Стороны, как это предусмотрено статьей 15.1?">
+                                                        caption="24. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that genetic resources utilized within your jurisdiction have been accessed in accordance with PIC and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party as provided in Article 15.1?">
                                                         <div class="km-yes-no" required name="question24" ng-model="document.question24.answer"
                                                             ng-click="Q24Clear()"></div>
                                                     </div>
@@ -664,7 +667,7 @@
                                                         </div>
                                                         <div class="col-xs-10 col-xs-offset-1">
                                                             <div class="km-control-group" required="document.question24.answer"
-                                                                name="question24_violation" caption="Имеются ли конкретные примеры сотрудничества вашей страны с другими Сторонами в случаях предполагаемого нарушения мер по регулированию ДГРСИВ, как это предусмотрено статьей 15.3?">
+                                                                name="question24_violation" caption="Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?">
                                                                 <div class="km-yes-no" required="document.question24.answer"
                                                                     name="question24_violation" ng-model="document.question24.violation.answer"
                                                                     ng-click="Q24ViolationClear(document.question24.violation.answer)"></div>
@@ -695,14 +698,14 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question25"
-                                                        caption="25. Приняты ли в вашей стране надлежащие эффективные и пропорциональные правовые, административные или политические меры для обеспечения того, чтобы доступ к традиционным знаниям, связанным с генетическими ресурсами и используемым в пределах юрисдикции вашей страны, осуществлялся в соответствии с предварительным обоснованным согласием или с согласия и при участии коренных и местных общин и чтобы были заключены взаимосогласованные условия в соответствии с требованиями внутреннего законодательства по регулированию ДГРСИВ или регулятивными требованиями другой Стороны, в которой эти коренные и местные общины находятся, как это предусмотрено статьей 16.1?">
+                                                        caption="25. Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that traditional knowledge associated with genetic resources utilized within your jurisdiction has been accessed in accordance with PIC or approval and involvement of indigenous and local communities and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party where such indigenous and local communities are located as provided in Article 16.1?">
                                                         <div class="km-yes-no" required name="question25" ng-model="document.question25.answer"
                                                             ng-click="Q25Clear(document.question25.answer)"></div>
                                                     </div>
                                                     <div ng-show="document.question25.answer" class="row">
                                                         <div class="col-xs-10 col-xs-offset-1">
                                                             <div class="km-control-group" required="document.question25.answer"
-                                                                name="question25_measures" caption="Укажите, приняты ли в вашей стране меры по урегулированию ситуаций несоблюдения тех мер, как предусмотрено статьей 16.2?">
+                                                                name="question25_measures" caption="Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?">
                                                                 <div class="km-yes-no" required="document.question25.answer"
                                                                     name="question25_measures" ng-model="document.question25.hasMeasures"></div>
                                                             </div>
@@ -731,7 +734,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question26"
-                                                        caption="26. Требует ли ваша страна от пользователей генетических ресурсов представления в надлежащем порядке информации, связанной с предварительным обоснованным согласием, источником генетического ресурса, с заключением взаимосогласованных условий и/или с использованием генетических ресурсов, в назначенном контрольном пункте, как это предусмотрено в пунктах a) i) и ii) статьи 17.1?">
+                                                        caption="26. Does your country require users of genetic resources to provide information related to PIC, to the source of the genetic resource, to the establishment of MAT and/or utilization of genetic resources at a designated checkpoint, as appropriate, as provided in Article 17.1 (a)(i) and (ii))?">
                                                         <div class="km-yes-no" required name="question26" ng-model="document.question26.answer"
                                                             ng-click="Q26Clear(document.question26.answer)"></div>
                                                     </div>
@@ -769,13 +772,13 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question27"
-                                                        caption="27. Представила ли ваша страна информацию, указанную в пункте a) i) статьи 17.1, в соответствующие национальные органы власти, Стороне, дающей предварительное обоснованное согласие, и в Механизм посредничества для регулирования ДГРСИВ, как это предусмотрено в пункте a) iii) статьи 17.1?">
+                                                        caption="27. Has your country provided the information referred to in Article 17.1 (a)(i) to relevant national authorities, to the Party providing PIC and to the ABS Clearing-House as provided in Article 17.1 (a)(iii)?">
                                                         <div class="km-yes-no" name="question27" ng-model="document.question27.answer"
                                                             ng-click="Q27Clear(document.question27.answer)"></div>
                                                     </div>
                                                     <div ng-show="document.question27.answer" class="row">
                                                         <div class="col-xs-10 col-xs-offset-1">
-                                                            <div class="km-control-group" name="question27_cc" caption="Применяется ли в вашей стране практика выпуска коммюнике контрольных пунктов?">
+                                                            <div class="km-control-group" name="question27_cc" caption="Has your country made use of the checkpoint communique?">
                                                                 <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
                                                                         name="q27Options" id="q27Option1" value="Yes">Да</label>
                                                                 <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
@@ -793,7 +796,7 @@
                                                     <div class="km-control-group" name="question27Challenges" caption="">Кратко опишите основные трудности и проблемы<div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challengesInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
-                                                    <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Укажите число опубликованных в Механизме посредничества для регулирования ДГРСИВ коммюнике контрольных пунктов (если применимо)">
+                                                    <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="Please provide the number of checkpoint communiques available in the ABS Clearing-House, if applicable">
                                                         <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right"
                                                             ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
     
@@ -877,7 +880,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question31"
-                                                        caption="31. Поощряет ли ваша страна включение во взаимосогласованные условия положений об урегулировании споров, как это предусмотрено в пунктах а), b) и c) статьи 18.1?">
+                                                        caption="31. Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?">
                                                         <div class="checkbox">
                                                             <label><input type="checkbox" ng-required="!hasValue(document.question31.answer)"
                                                                     ng-model="document.question31.notApplicable" name="question31"
@@ -933,7 +936,7 @@
                                                             placeholder=""></div>
                                                     </div>
                                                     <div class="km-control-group" required name="question33_mechanisms"
-                                                        caption="Использование механизмов для обеспечения взаимного признания и выполнения решений, вынесенных иностранным судом, и арбитражных решений.">
+                                                        caption="Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards?">
                                                         <div class="km-yes-no" required name="question33_mechanisms"
                                                             ng-model="document.question33.mechanisms.answer"></div>
                                                     </div>
@@ -980,7 +983,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question35"
-                                                        caption="35. В процессе разработки и реализации законодательных или регулятивных требований касательно ДГРСИВ в вашей стране:"></div>
+                                                        caption="35. In the development and implementation of ABS legislation or regulatory requirements has your country:"></div>
                                                     <div class="km-control-group" required name="question35_research"
                                                         caption="созданы ли условия для стимулирования и поощрения исследований, содействующих сохранению и устойчивому использованию биоразнообразия, в том числе путем применения упрощенных мер предоставления доступа к генетическим ресурсам для некоммерческих исследовательских целей, принимая во внимание необходимость решения вопроса об изменении целей таких исследований, как предусмотрено в пункте а) статьи 8?">
                                                         <div class="km-yes-no" name="question35_research" ng-model="document.question35.research.answer"></div>
@@ -999,7 +1002,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_emergencies"
-                                                        caption="обращается ли надлежащее внимание на возникшие или надвигающиеся чрезвычайные ситуации, угрожающие или наносящие ущерб здоровью людей, животных или растений, как это предусмотрено в пункте b) статьи 8?">
+                                                        caption="Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?">
                                                         <div class="km-yes-no" required name="question35_emergencies"
                                                             ng-model="document.question35.emergencies.answer"></div>
                                                     </div>
@@ -1015,7 +1018,7 @@
                                                                on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
     
-                                                    <div class="km-control-group" required name="question35_access" caption="принимается ли во внимание необходимость ускоренных процедур доступа к генетическим ресурсам и ускоренных процедур совместного использования выгод от применения таких генетических ресурсов на справедливой и равной основе, включая возможности получения доступного обслуживания для нуждающихся, особенно в развивающихся странах, как предусмотрено в пункте b) статьи 8?">
+                                                    <div class="km-control-group" required name="question35_access" caption="Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)?">
                                                         <div class="km-yes-no" required name="question35_access" ng-model="document.question35.access.answer"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question35AccessFurtherInfo"
@@ -1031,7 +1034,7 @@
                                                     </div>
     
                                                     <div class="km-control-group" required name="question35_importance"
-                                                        caption="учитывается ли важность генетических ресурсов для производства продовольствия и ведения сельского хозяйства и их особая роль в создании продовольственной обеспеченности, как это предусмотрено в пункте с) статьи 8?">
+                                                        caption="Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)?">
                                                         <div class="km-yes-no" required name="question35_importance"
                                                             ng-model="document.question35.importance.answer"></div>
                                                     </div>
@@ -1083,7 +1086,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" bold="true" required name="question37"
-                                                        caption="37. Существуют ли в вашей стране коренные и местные общины?">
+                                                        caption="37. Does your country have indigenous and local communities?">
                                                         <div class="km-yes-no" required name="question37" ng-model="document.question37.answer"
                                                             ng-click="Q37Clear()"></div>
                                                     </div>
@@ -1107,7 +1110,7 @@
                                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required="{{Q37IsYes()}}" name="question38"
-                                                        bold="true" caption="38. Обладают ли коренные и местные общины установленным правом предоставлять доступ к генетическим ресурсам в соответствии с положениями внутригосударственного права (статья 6.2)?">
+                                                        bold="true" caption="38. Обладают ли коренные и местные общины установленным правом предоставлять доступ к генетическим ресурсам в соответствии с положениями внутригосударственного права? (Статья 6.2)">
                                                         <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
                                                             class="km-yes-no" name="question38" ng-model="document.question38.answer"
                                                             ng-click="Q38Clear()"></div>
@@ -1139,7 +1142,7 @@
                                                             </div>
     
                                                             <div class="km-control-group" name="question38_pic" ng-required="document.question38.answer"
-                                                                caption="Установлены ли в вашей стране критерии и/или процессы получения предварительного обоснованного согласия или санкции коренных и местных общин на доступ к генетическим ресурсам, как предусмотрено в пункте f) статьи 6.3?">
+                                                                caption="Has your country set out criteria and/or process for obtaining prior informed consent or approval and involvement of indigenous and local communities for access to genetic resources in Article 6.3(f)?">
                                                                 <div class="km-yes-no" name="question38_pic" ng-required="document.question38.answer"
                                                                     ng-model="document.question38.pic.answer"></div>
                                                             </div>
@@ -1169,7 +1172,7 @@
                                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
-                                                        name="question39" caption="39. Приняла ли ваша страна меры в соответствии с положениями внутригосударственного права с целью обеспечения того, чтобы доступ к традиционным знаниям, связанным с генетическими ресурсами, носителями которых являются коренные и местные общины, осуществлялся с предварительного и обоснованного согласия или одобрения и при участии данных коренных и местных общин и чтобы были установлены взаимосогласованные условия, как предусмотрено в статье 7?">
+                                                        name="question39" caption="39. In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?">
                                                         <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
                                                             class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
                                                     </div>
@@ -1190,7 +1193,7 @@
                                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
-                                                        name="question40" caption="40. Учитываются ли в вашей стране при осуществлении Протокола и в соответствии с положениями внутреннего законодательства нормы обычного права, общинные протоколы и процедуры коренных и местных общин в отношении традиционных знаний, связанных с генетическими ресурсами, как это предусмотрено статьей 12.1?">
+                                                        name="question40" caption="40. In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?">
                                                         <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
                                                             class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
                                                     </div>
@@ -1306,7 +1309,7 @@
                                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
-                                                        name="question43" caption="43. Старается ли ваша страна не ограничивать традиционного использования генетических ресурсов и связанных с ними традиционных знаний и традиционный обмен ими внутри и среди коренных и местных общин, как это предусмотрено статьей 12.4?">
+                                                        name="question43" caption="43. Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?">
                                                         <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
                                                             class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
                                                     </div>
@@ -1326,7 +1329,7 @@
     
                                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="question44" bold="true" caption="44. Дополнительная информация">Кратко опишите основные трудности и проблемы внедрения мер, касающихся традиционных знаний, связанных с генетическими ресурсами:<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                    <div class="km-control-group" name="question44" bold="true" caption="44. Дополнительная информация">Please provide a summary of the main difficulties and challenges for putting measures in place in relation to traditional knowledge associated with genetic resources:<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
                                                             name="question44" ng-model="document.question44.challengesInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
@@ -1348,7 +1351,7 @@
                                         </div>
     
                                         <div class="tab-pane" id="part8">
-                                            <legend>Вклад в сохранение и устойчивое использование (статья 9)</legend>
+                                            <legend>Contribution to conservation and sustainable use (Article 9)</legend>
     
                                             <div class="row">
                                                 <div class="col-xs-12">
@@ -1371,7 +1374,7 @@
     
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="question46" bold="true" caption="46. Укажите, как осуществление Нагойского протокола содействует сохранению и устойчивому использованию биоразнообразия в вашей стране:">
+                                                    <div class="km-control-group" name="question46" bold="true" caption="46. Please indicate how the implementation of the Nagoya Protocol has contributed to conservation and sustainable use of biodiversity in your country:">
                                                         <div km-textbox-ml rows=4 name="question46" ng-model="document.question46.furtherInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
@@ -1414,10 +1417,10 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required bold="true" name="question48"
-                                                        caption="48. Осуществляет ли ваша страна сотрудничество, привлекая соответствующие коренные и местные общины, в целях осуществления Протокола в случаях, когда аналогичные генетические ресурсы встречаются in-situ на территории более чем одной Стороны, как это предусмотрено статьей 11.1?">
+                                                        caption="48. Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1?">
                                                         <div class="km-yes-no" required name="question48" ng-model="document.question48.answer"></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question48ILCInfo" caption="">Если в вашей стране есть коренные и местные общины, представьте дополнительную информацию об их участии.<div km-textbox-ml rows=3 name="question48ILCInfo" ng-model="document.question48.ilcInfo"
+                                                    <div class="km-control-group" name="question48ILCInfo" caption="">If your country has indigenous and local communities, please provide further detail of their involvement.<div km-textbox-ml rows=3 name="question48ILCInfo" ng-model="document.question48.ilcInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
                                                     <div class="km-control-group" name="question48FurtherInfo" caption="">Представьте дополнительную информацию<div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo"
@@ -1436,7 +1439,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required name="question49" bold="true"
-                                                        caption="49. Сотрудничает ли ваша страна в целях осуществления Протокола в тех случаях, когда аналогичные традиционные знания, связанные с генетическими ресурсами, являются достоянием одной или нескольких коренных и местных общин на территории нескольких Сторон, как это предусмотрено статьей 11.2?">
+                                                        caption="49. Is your country endeavouring to cooperate with a view to implementing the Protocol in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous and local communities in several Parties as provided in Article 11.2?">
                                                         <div class="checkbox">
                                                             <label><input type="checkbox" ng-model="document.question49.notApplicable"
                                                                     ng-change="Q49Clear()">Не применимо, поскольку в стране нет коренных и местных общин</label>
@@ -1552,7 +1555,7 @@
                                                     <div class="row" ng-show="document.question54.answer">
                                                         <div class="col-xs-10 col-xs-offset-1">
                                                             <div class="km-control-group" ng-required="document.question54.answer"
-                                                                name="question54_measures" caption="Принимала ли ваша страна меры по осуществлению стратегии повышения осведомленности о Нагойском протоколе регулирования доступа к генетическим ресурсам и совместного использования выгод.">
+                                                                name="question54_measures" caption="Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS?">
                                                                 <div class="help-info">Принято в качестве решения NP-1/9</div>
                                                                 <div class="km-yes-no" ng-required="document.question54.answer"
                                                                     name="question54_measures" ng-click="Q54Clear()"
@@ -1595,7 +1598,7 @@
                                                     <div class="row" ng-show="document.question55.answer">
                                                         <div class="col-xs-10 col-xs-offset-1">
                                                             <div class="km-control-group" name="question55_measures"
-                                                                caption="Принимала ли ваша страна меры по внедрению стратегической структуры для создания потенциала и по оказанию поддержки эффективному осуществлению Нагойского протокола регулирования доступа к генетическим ресурсам и совместного использования выгод.">
+                                                                caption="Has your country taken measures to implement the strategic framework for capacity-building and development to support effective implementation of the Nagoya Protocol on ABS?">
                                                                 <div class="help-info">Принято в качестве решения NP-1/8</div>
                                                                 <div class="km-yes-no" name="question55_measures" ng-click="Q55Clear()"
                                                                     ng-model="document.question55.measures.answer"></div>
@@ -1715,7 +1718,7 @@
                             <div class="tab-pane" id="part14"> --><legend>Факультативная дополнительная информация</legend>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="question60" bold="true" caption="60. Кратко опишите основные трудности и проблемы, с которыми вы столкнулись при становлении Стороной Нагойского протокола.">
+                                                    <div class="km-control-group" name="question60" bold="true" caption="60. Please provide a summary of the main difficulties and challenges encountered for becoming a Party to the Nagoya Protocol.">
                                                         <div km-textbox-ml rows=4 name="question60FurtherInfo" ng-model="document.question60.challengesInfo"
                                                             locales="document.header.languages" placeholder="">
                                                         </div>
@@ -1740,7 +1743,7 @@
                                                         caption="">Представьте дополнительную информацию<div km-textbox-ml rows=2 name="question61AdditionalInfo" ng-model="document.question61.additionalInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
-                                                    <div class="km-control-group" name="question61Challenges" caption="">Кратко опишите основные трудности и проблемы, с которыми вам пришлось столкнуться.<div km-textbox-ml rows=4 name="question61Challenges" ng-model="document.question61.challengesInfo"
+                                                    <div class="km-control-group" name="question61Challenges" caption="">Please provide a summary of the main difficulties and challenges encountered.<div km-textbox-ml rows=4 name="question61Challenges" ng-model="document.question61.challengesInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div><!--<div class="km-control-group" name="question61FurtherInfo" caption="">
                                             Use the text entry to provide further information, including on  experiences gained in relation to mobilization of resources to support the implementation of the Nagoya Protocol and the status of funds mobilized (level of domestic expenditures, or the amount of and trends in  funding allocated, for the  implementation of the Protocol and the funding gap)<Text entry>
@@ -1756,7 +1759,7 @@
     
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="question62" bold="true" caption="62. a) Выделяла ли ваша страна финансовые ресурсы другим Сторонам или получала финансовые ресурсы от других Сторон или финансовых учреждений для целей осуществления Протокола, как это предусмотрено статьей 25?"></div>
+                                                    <div class="km-control-group" name="question62" bold="true" caption="62. a) Has your country made financial resources available to other Parties or received financial resources from other Parties or financial institutions for the purposes of implementation of the Protocol as provided in Article 25?"></div>
     
                                                     <div class="checkbox">
                                                         <label><input type="checkbox" ng-model="document.question62.donor.answer"
@@ -1858,7 +1861,7 @@
                                                                 value="10 or more">10 или более</label>
                                                     </div>
     
-                                                    <div class="km-control-group" name="question63Challenges" caption="">Кратко опишите основные трудности и проблемы, с которыми вам пришлось столкнуться.<div km-textbox-ml rows=4 name="question63Challenges" ng-model="document.question63.challengesInfo"
+                                                    <div class="km-control-group" name="question63Challenges" caption="">Please provide a summary of the main difficulties and challenges encountered.<div km-textbox-ml rows=4 name="question63Challenges" ng-model="document.question63.challengesInfo"
                                                             locales="document.header.languages" placeholder=""></div>
                                                     </div>
     
@@ -1913,7 +1916,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="Notes" bold="true" caption="Примечания:">
-                                                        <div class="help-info">поле «Примечания» предназначено для личных замечаний или комментариев и будет скрыто при просмотре записи. Данное поле не предназначено для конфиденциальной информации.</div>
+                                                        <div class="help-info">The “Notes” field is for your personal notes or comments and will be hidden when viewing the record. Данное поле не предназначено для конфиденциальной информации.</div>
                                                         <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                                                     </div>
                                                 </div>

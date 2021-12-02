@@ -1,32 +1,13 @@
 ﻿<div>
 
 
-    <div ng-if="currentCountry.code" class="bs5 mt-3 p-2 color-white text-start" ng-class="{' new-css-bg-party': currentCountry.isParty, ' new-css-bg-nonparty':!currentCountry.isParty, ' new-css-bg-inbetween': currentCountry.isInbetweenParty}"><span class="fw-bold new-css-party-counts" ng-if="currentCountry.isParty">Party to the Cartagena Protocol</span> <span class="fw-bold new-css-party-counts" ng-if="currentCountry.isInbetweenParty">Ratified, not yet Party</span> <span class="fw-bold new-css-party-counts" ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty">Not a Party to the Cartagena Protocol</span> <span class="mt-2" ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
-                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
-                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'"><div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')">La ratificación de Dinamarca del Protocolo de Cartagena no se aplica a Groenlandia y las Islas Feroe.</div>
-                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"  >Existe una disputa entre el Gobierno de la Argentina y el del Reino Unido de Gran Bretaña e Irlanda del Norte en relación con la soberanía de las Islas Falklands (Islas Malvinas).</div>
-                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" >Territorio no autónomo.</div>
-                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" >La ratificación del Protocolo de Cartagena por parte del Reino Unido no incluye los <a rel="noopener" ng-href="#"  class="text-muted gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguila; Bases bajo soberanía británica de Acrotiri y Dhekelia; Bermuda; Islas Falkland; Islas Caimán; Islas Georgias del Sur y Sandwich del Sur; Islas Pitcairn; Islas Turcas y Caicos; Islas Vírgenes Británicas; Montserrat; Santa Elena, Ascensión y Tristán de Acuña; Territorio Británico Antártico y Territorio Británico del Océano Índico">13 territorios de ultramar</a> o las <a rel="noopener" ng-href="#" class="text-muted gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="Bailía de Jersey; Isla de Guernesey e Isla de Man">tres dependencias de la Corona</a></div></span></div>
+    <div ng-if="currentCountry.code" class="bs5 mt-3 p-2 color-white text-start" ng-class="{' new-css-bg-party': currentCountry.isParty, ' new-css-bg-nonparty':!currentCountry.isParty, ' new-css-bg-inbetween': currentCountry.isInbetweenParty}"><div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')"></div>
+                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"  ></div>
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" ></div>
+                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" ></div></div>
 
 
       <ul class="bs5 list-group mt-4"  >
-        <li class="bs5 align-items-center list-group-item list-group-item-action  border-0  fs-5 d-flex justify-content-between align-items-start"  ng-repeat="schema in countryMapScope.currentCountry.schemas" ng-if="hideCartagena(schema.shortCode)"><!-- counts of the schema  --> <span class="bs5 rounded badge bg-bch ms-2"  ng-class="{'bg-gray-300' : schema.count==0}" ng-bind="schema.count"></span> <!-- schema titles  --> <a rel="noopener" class="bs5 fs-5 link-dark text-decoration-none" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  ><span ng-bind="schema.title | lstring:locale"></span> <span ng-if="schema.isRegional">- <span ng-bind="schema.regionalGovernment|term:locale"></span></span></a> <a rel="noopener" class="bs5 fs-5 link-dark text-decoration-none "  ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords" ><span ng-bind="schema.title | lstring:locale"></span></a></li>
+        <li class="bs5 align-items-center list-group-item list-group-item-action  border-0  fs-5 d-flex justify-content-between align-items-start"  ng-repeat="schema in countryMapScope.currentCountry.schemas" ng-if="hideCartagena(schema.shortCode)"></li>
         
-      </ul><!-- <div>
-        <p ng-repeat="schema in countryMapScope.currentCountry.schemas">
-            <span class="bs5  badge " ng-bind="schema.count"></span> 
-            <span> 
-                <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  >
-                    <span ng-bind="schema.title | lstring:locale"></span>
-                    <span ng-if="schema.isRegional">
-                        - <span ng-bind="schema.regionalGovernment|term:locale"></span>
-                    </span>
-                </a>
-                <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords" >
-                    <span ng-bind="schema.title | lstring:locale"></span>
-                </a>
-            </span>
-        </p>
-    </div> --></div>
+      </ul></div>

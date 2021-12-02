@@ -1,57 +1,46 @@
-﻿<span style="text-align:left">
-
-	<span ng-hide="errors">
-
-		<input type="button" class="btn btn-warning" ng-click="showCancelDialog(true)" value="Cancel"/>
-		<input type="button" class="btn btn-primary" ng-click="showSaveDialog(true)" value="Save"  ng-show="hideSave"/>
-
-	</span>
+﻿<span style="text-align:left"> <span ng-hide="errors"><input type="button" class="btn btn-warning" ng-click="showCancelDialog(true)" value="Cancel"/>
+		<input type="button" class="btn btn-primary" ng-click="showSaveDialog(true)" value="Save"  ng-show="hideSave"/></span>
 
     <!--Save Dialog-->
 	<div id="dialogSave" class="modal fade" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
-					<h4>Save record <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">x</button>
+					<h4>Сохранить запись <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
 				</div>
 				<div class="modal-body">
 
-					<p>If you have finished entering all the information, you can submit the record for publishing.</p>
+					<p>Если вы закончили ввод всей информации, вы можете представить запись для публикации.</p>
 
-					<p>If you are unable to complete entry of this record, you can save it as a draft, which will then be available in your list of drafts on the Management Centre. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
+					<p>Если вы не можете завершить ввод этой записи, ее можно сохранить как черновик, который будет доступен в списке ваших черновиков в Центре управления. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
 
 				</div>
 				<div class="modal-footer" style="margin-top:0">
 					<button type="button" ng-click="closeDialog()" class="cancelClose btn btn-default" >Cancel</button>
-					<button type="button" ng-click="saveDraft()"      ng-disabled="loading || !security.canSaveDraft" class="btn btn-info"    >Save as draft</button>
-					<button type="button"                             ng-show="security.canSave===undefined" disabled class="btn btn-info"    >Save and publish</button>
-					<button type="button" ng-click="publish()"        ng-show="security.canSave!==undefined &&  security.canSave" ng-disabled="loading || !security.canSave" class="btn btn-primary" >Save and publish</button>
-					<button type="button" ng-click="publishRequest()" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)" ng-disabled="loading ||  security.canSave"  class="btn btn-primary" >Save and request publication</button>
+					<button type="button" ng-click="saveDraft()"      ng-disabled="loading || !security.canSaveDraft" class="btn btn-info"    >Сохранить как черновик</button>
+					<button type="button"                             ng-show="security.canSave===undefined" disabled class="btn btn-info"    >Сохранить и опубликовать</button>
+					<button type="button" ng-click="publish()"        ng-show="security.canSave!==undefined &&  security.canSave" ng-disabled="loading || !security.canSave" class="btn btn-primary" >Сохранить и опубликовать</button>
+					<button type="button" ng-click="publishRequest()" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)" ng-disabled="loading ||  security.canSave"  class="btn btn-primary" >Сохранить и запросить публикацию</button>
 				</div>
 			</div>
 		</div>
-	</div>
-
-    <!--Cancel Dialog-->
-	<div id="dialogCancel" class="modal fade" data-backdrop="static">
+	</div><!--Cancel Dialog--><div id="dialogCancel" class="modal fade" data-backdrop="static">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
-					<h4>Canceling changes</h4>
+					<button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">x</button>
+					<h4>Отмена изменений</h4>
 				</div>
 				<div class="modal-body">
 
-					<p>If you want to cancel the changes you just made to this draft, you can keep the previous version of the draft, which will then be available in the list of drafts on the Management Centre. You or your colleagues can then continue editing the record in the current, or a later, session.</p>
+					<p>Если вы хотите отменить внесенные в этот черновик изменения, вы можете вернуться к предыдущей версии черновика, которая затем будет доступна в списке черновиков Центра управления. Затем вы или ваши коллеги могут продолжить редактирование записи в текущем или последующем сеансе.</p>
 
 				</div>
 				<div class="modal-footer" style="margin-top:0">
 					<button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose" >Cancel</button>
-					<button type="button" ng-click="close()"       class="btn btn-primary closeWithoutSaving" >Close without saving</button>
+					<button type="button" ng-click="close()"       class="btn btn-primary closeWithoutSaving" >Закрыть без сохранения</button>
 				</div>
 			</div>
 		</div>
-	</div>
-
-</span>
+	</div></span>

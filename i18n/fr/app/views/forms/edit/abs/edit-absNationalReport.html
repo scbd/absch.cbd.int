@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
 
-            <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-            languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                     
                     <div class="row">
                         <div class="col-xs-12">
@@ -43,7 +46,7 @@
     
                                                     <p>Par ailleurs, certaines questions ne sont pas strictement basées sur les dispositions du Protocole et sont identifiées comme étant facultatives. Elles sont incluses dans le format de rapport afin de contribuer à l’évaluation et examen de l'efficacité du Protocole, dans le cadre de l’article 31, ainsi que pour recenser les difficultés et les défis qui se sont présentés lors de la mise en œuvre du Protocole de Nagoya et des décisions adoptées par la Conférence des Parties siégeant en tant que Réunion des Parties au Protocole de Nagoya (COP MOP).</p>
     
-                                                    <p>Le rapport national intérimaire peut s’avérer un outil précieux autant pour les Parties que pour les non Parties, pour évaluer le niveau de mise en œuvre du Protocole, ainsi que les lacunes et les besoins en matière de capacités, et aidera la COP MOP à examiner périodiquement la mise en œuvre du Protocole et à prendre, dans le cadre de son mandat, les décisions nécessaires pour promouvoir sa mise en œuvre effective, conformément au paragraphe 4 de l’article 26.</p>
+                                                    <p>The interim national report can be a useful tool for both Parties and Non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
     
                                                     <p>Les informations présentées au moyen du rapport intérimaire national pourraient également permettre aux pays de partager leurs expériences, difficultés et solutions relativement à la mise en œuvre du Protocole de Nagoya. À cet égard, le rapport national intermédiaire peut s'avérer un outil précieux pour développer et renforcer les capacités de mie en œuvre du Protocole et pur concevoir des activités et renforcement des capacités de façon plus efficace. Le format cherche à réduire au minimum la charge que l’établissement de rapports fait peser sur les pays, et par conséquent, les questions sont simples (en général de type oui ou non). Dans l’ensemble, ces questions sont suivies par des champs de saisie de texte, où les pays sont encouragés à fournir des détails sur les mesures mises en œuvre et à consigner les difficultés et les défis qui se sont présentés dans la mise en œuvre de dispositions particulières du Protocole et à fournir d’autres informations sur la question en fournissant des liens à des dossiers existants du Centre d’échange sur l’accès et le partage des avantages (Centre d’échange sur l’APA), à des sites Web, ou en téléchargeant des documents. Il s'agit d'une opportunité pour identifier les bonnes pratiques et les contraintes dans la mise en œuvre du Protocole de Nagoya</p>
     
@@ -57,7 +60,7 @@
     
                                                     <p>Les pays sont encouragés à utiliser la version en ligne du format, à moins que cela soit impossible du point de vue technique, à soumettre le rapport par le biais du Centre d’échange sur l’APA, à s’assurer de l’exactitude des informations nationales existantes sur ce dernier et à les mettre à jour si requis.</p>
     
-                                                    <p>Les Parties doivent réaliser des soumissions hors ligne au Centre d’échange sur l’APA uniquement s’il n’est pas possible, du point de vue technique, de le faire en ligne. Les soumissions hors ligne doivent se faire au moyen du formulaire protégé, tel que disponible pour téléchargement sur le Centre d’échange sur l’APA en format MS Word.  Pour les communications hors ligne au Centre d’échange sur l’APA, veuillez utiliser le formulaire protégé en format MS Word. Il est recommandé que les pays envoient le rapport par courriel au Secrétariat (secretariat@cbd.int), avec une copie scannée de la dernière page, signée par l’autorité responsable de la publication du Centre d’échange sur l’APA. Par la suite, le Secrétaire exécutif aidera les Parties à rendre leur rapport disponible dans le Centre d’échange sur l’APA.</p>
+                                                    <p>Les Parties doivent réaliser des soumissions hors ligne au Centre d’échange sur l’APA uniquement s’il n’est pas possible, du point de vue technique, de le faire en ligne. Les soumissions hors ligne doivent se faire au moyen du formulaire protégé, tel que disponible pour téléchargement sur le Centre d’échange sur l’APA en format MS Word. Pour les communications hors ligne au Centre d’échange sur l’APA, veuillez utiliser le formulaire protégé en format MS Word. Il est recommandé que les pays envoient le rapport par courriel au Secrétariat (secretariat@cbd.int), avec une copie scannée de la dernière page, signée par l’autorité responsable de la publication du Centre d’échange sur l’APA. Par la suite, le Secrétaire exécutif aidera les Parties à rendre leur rapport disponible dans le Centre d’échange sur l’APA.</p>
                                                 </div>
                                             </div>
     
@@ -1232,7 +1235,7 @@
                                             <div class="row" ng-class="{'disable': !document.question37.answer}">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
-                                                        name="question42" caption="42. Votre pays appui-t-il l'élaboration par les communautés autochtones et locales des outils suivants, comme prévu par l’article 12.3?"></div>
+                                                        name="question42" caption="42. Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?"></div>
                                                     <div style="margin-left:25px;">
                                                         <div class="checkbox">
                                                             <div style="float: left" ng-disabled="!document.question37.answer"
@@ -1913,7 +1916,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="Notes" bold="true" caption="Notes :">
-                                                        <div class="help-info">Le champ «Notes» est destiné à vos notes ou commentaires personnels et sera masqué lors de la visualisation du fichier. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
+                                                        <div class="help-info">Le champ «Notes» est destiné à vos notes ou commentaires personnels et sera masqué lors de la visualisation du fichier. This field is not meant to be used for confidential information.</div>
                                                         <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                                                     </div>
                                                 </div>

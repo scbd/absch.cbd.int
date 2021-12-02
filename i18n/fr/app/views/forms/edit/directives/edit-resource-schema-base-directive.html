@@ -5,7 +5,7 @@
 			validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			data-container="{{container}}" is-dialog="{{isDialog}}">
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 			<edit-form>
 					<form name="editForm" class="editForm" style="margin-top:10px">
 
@@ -44,10 +44,10 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
-											<legend>Auteur(s)* :</legend>
+											<label name="authors" style="font-size: 21px !important;" required for="authors">Auteur(s)* :</label>
 											<div class="help-block">Nom de  la personne ou l’organisation qui est l'auteur de la publication ou la ressource informative.</div>
 										</div>
-										<div class="col-xs-12">
+										<div class="col-xs-12" style="margin-top: 20px;">
 											<div class="km-control-group" name="authors" caption="Nom(s) de l’auteur">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
@@ -60,7 +60,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="organizations" caption="Référence à l’organisation qui est l’auteure ">
+											<div class="km-control-group" name="organizations" caption="Référence à l’organisation qui est l’auteure">
 												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
 													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true"
 													 schema="(organization contact)"  allow-new-schema="organization,contact"></div>
@@ -68,12 +68,12 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="publisher" caption="Éditeur">
 												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-md-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" required name="publicationDate" caption="Date de publication"
 											help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: VLR">
 												<div km-date placeholder="AAAA-MM-JJ" name="publicationDate" required 
@@ -83,13 +83,13 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="source" caption="Source">
 												<div class="help-block">Toute référence à la ressource de laquelle découle la présente ressources (p. ex., l'article d'un journal ou le nom d’un journal).</div>
 												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 											</div>
 										</div>
-										<div class="col-xs-6">
+										<div class="col-md-6 col-xs-12">
 											<div class="km-control-group" name="rights" caption="Droits">
 												<div class="help-block">Renseignements sur les droits associés à la ressource tels que le détenteur du droit d'auteur et la disponibilité aux fins de reproduction à des fins éducatives et à but non lucratif.</div>
 												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
@@ -138,7 +138,7 @@
 									<div class="row">
     
 										<div class="col-xs-12">
-											<label>Pays ou groupe(s) régional(aux) ou économique(s) liés à la ressource </label>
+											<label>Pays ou groupe(s) régional(aux) ou économique(s) liés à la ressource</label>
 										</div>
 										<div class="col-md-3">
 											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Regroupement(s) géographique(s) ou politique(s) / économique(s)">
@@ -302,7 +302,7 @@
 								<div class="row">
 									<div class="col-xs-12">
 										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="* Domaines clés et mesures stratégiques pour le renforcement et le développement des capacités abordés par la ressource">
-											<div class="help-block">Si cette ressource est liée au renforcement des capacités pour le Protocole de Nagoya, veuillez fournir les options applicables à partir de </div>
+											<div class="help-block">Si cette ressource est liée au renforcement des capacités pour le Protocole de Nagoya, veuillez fournir les options applicables à partir de</div>
 											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
 											 binding-type="term[]" tabular-shape="true" tabular-shape="true" ></div>
 										</div>
@@ -314,8 +314,8 @@
 		
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="address" caption="Tout autre information utile">
-											<div class="help-block">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordés ailleurs dans le fichier.</div>
+										<div class="km-control-group" name="address" caption="Any other relevant information">
+											<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>
 									</div>

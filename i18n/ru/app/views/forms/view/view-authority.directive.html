@@ -100,14 +100,14 @@
 			<div ng-show="document.absFunctions">
 				<label>Функции</label>
 				<div compare-val>
-				<div class="km-value km-pre">{{document.absFunctions | lstring:locale}}</div>
+				<div class="km-value km-pre" ng-bind="document.absFunctions | lstring:locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.absJurisdiction">
 				<label>Юрисдикция(-и) данного КНО</label>
 				<div class="km-value" compare-val="absJurisdiction">
-				<div ng-if="document.absJurisdiction" ><span ng-repeat="jur in document.absJurisdiction">{{jur|term}}{{$last ? '' : ', '}}</span> <span ng-if="document.absJurisdictionName" ng-bind="(document.absJurisdictionName | lstring:locale)"></span></div>
+				<div ng-if="document.absJurisdiction" ><span ng-repeat="jur in document.absJurisdiction"><span ng-bind="jur|term"></span><span ng-bind="$last ? '' : ', '"></span></span> <span ng-if="document.absJurisdictionName" ng-bind="(document.absJurisdictionName | lstring:locale)"></span></div>
 				</div>
 			</div>
 

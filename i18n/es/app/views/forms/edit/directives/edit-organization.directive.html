@@ -4,14 +4,14 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="well no-shadow bg-white">
                         <legend>Información general</legend>
                         <div class="row">
                             <div class="col-xs-12" >
-                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
                                     <div class="indent">
                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                     </div>
@@ -88,7 +88,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="country" required caption="País">
                                     <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
-                                                mapping="genericMapping" selectbox="true" placeholder="Seleccione un país"
+                                                mapping="genericMapping" selectbox="true" placeholder="Please select a country..."
                                                 required filter="startsWithFilter" maxmatches="50"></div>
                                 </div>
                             </div>
@@ -210,7 +210,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <div class="km-control-group" name="address" caption="Cualquier otra información pertinente">
-                                    <div class="help-block">Por favor, utilice este campo para proporcionar cualquier otra información pertinente que no se haya podido incluir en otro lugar del registro.</div>
+                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>

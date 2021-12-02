@@ -1,12 +1,12 @@
 <div>
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
 			tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			data-container="{{container}}" is-dialog="{{isDialog}}">
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 						<form class="editForm" name="editForm" style="margin-top:10px">
 								<div>
@@ -41,15 +41,24 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-md-4">
 													<div class="km-control-group" name="date" required caption="风险评估的日期"
 															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
-														<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date"></div>
+
+														<div class="col-md-8 padding-left-0">
+															<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date" ng-disabled="document.dateOfRaNotAvailable"></div>	
+														</div>
+														<div class="col-md-4 padding-left-0 ">
+															<div class="checkbox">
+																<label for="dateOfRaNotAvailable">
+																	<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" id="dateOfRaNotAvailable" name="dateOfRaNotAvailable">日期不可用</label>
+															</div>
+														</div>														
 													</div>
 												</div>
 											</div>
 											
-											<div class="row" ng-if="!isNational">
+											<div class="row padding-top-10" ng-if="!isNational">
 												<div class="col-xs-12">
 													<div class="km-control-group" name="organizations" required caption="负责风险评估的机构">											
 														<div document-selector ng-model="document.organizations" question="organizations"
@@ -174,31 +183,31 @@
 												</div>
 											</div>
 										</div>
-									</section><!-- <section ng-if="isNational">
+									</section>
+
+								<section ng-if="isNational">
 										<div class="well no-shadow bg-white">
-											<legend>Information sharing with other databases</legend>
+											<legend>与其他数据库共享信息</legend>
 											<div class="row">
 												<div  class="col-xs-12">
-													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?">
+													<div class="km-control-group" name="isForCommercialUse" caption="此风险评估是否涉及与商业用途相关的改性活生物体？">
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="control-group inner-padding">
-																<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the
-															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
+																<label>此风险评估是否应提交给经合组织秘书处，以便纳入<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack 产品数据库</a>？</label>
 															</div>
 															<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 															<div class="control-group inner-padding">
-																<label>Is this risk assessment related to food safety?</label>
+																<label>此风险评估和食品安全有关吗？</label>
 															</div>
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
 																<div class="control-group inner-padding">
-																	<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i></label>
+																	<label>是否按照<i>《食品标准法典委员会重组 DNA 植物食品安全评估指南》开展？</i></label>
 																</div>															
-																<div class="km-yes-no" name="codexConduted" ng-model="document.codexConduted"></div>
+																<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 																<div class="control-group inner-padding">
-																	<label>Should this risk assessment be forwarded to your country's FAO focal point for possible inclusion in the
-																	<a rel="noopener" translation-url href="http://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank">GM Foods Platform</a>?</label>
+																	<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
 																</div>
 																<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 															</div>
@@ -207,7 +216,8 @@
 												</div>
 											</div>
 										</div>
-									</section> --><section>
+									</section>
+									<section>
 										<div class="well no-shadow bg-white">
 											<legend>确认或更新信息的时间表</legend>
 											<div class="row">

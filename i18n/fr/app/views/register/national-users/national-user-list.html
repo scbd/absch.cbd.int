@@ -1,57 +1,20 @@
 ﻿<div id="RegisterPage">
 
     <link href="/app/css/register.css" rel="stylesheet">
-    <link href="/app/css/record.css" rel="stylesheet">
-
-    <span register-top-menu></span>
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><style> .ngdialog-content { background: transparent !important; } .ngdialog.ngdialog-theme-default.wide .ngdialog-content { width: 750px !important; } </style>
 
 
-    <style>
-        .ngdialog-content {
-            background: transparent !important;
-        }
-        
-        .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
-            width: 750px !important;
-        }
-    </style>
-
-
-    <div ng-controller="nationalUserListController" class="register-content card card-1-notrans">
+    <div  class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
 
         <div class="register-content-header bg-darkgrey color-white">
             <div style="padding:10px 10px;">
-                <h3> User Management
-          <span class="helpinfoInline">
-                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
-            </span>
-        </h3>
-
-                <!--help info---------------------------->
-                <div ng-if="showInfo" class="well well-help">
-                    <strong>User Management for ABS-CH authorized users</strong>
-                    <p>
-                        This page allows focal points (NFP) to designate or make changes to the designation of the publishing authority (PA) and the publishing authority (PA) to designate or update national authorized users (NAU). Listed below you will find all ABS-CH authorized
-                        users that have been granted permission to work on national records for your country. You can select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change the PA or delete a NAU). If a person
-                        already holding a CBD account does not appear as an ABS-CH authorized user for your country, you can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all CBD accounts using their email addresses,
-                        and assign them a PA or NAU role. This feature also allows you to assign roles to someone who does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person
-                        you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email request to activate their account. Once they have activated their CBD account, they can start working on national records.
-                    </p>
-                    <strong>Functions of the publishing authorities (PA)</strong>
-                    <p>
-                        The PA is responsible for:
-                        <ul>
-                            <li>Authorizing the publication of all national records registered in the ABS Clearing-House;</li>
-                            <li>Deleting records already published in the ABS Clearing-House, if necessary;</li>
-                            <li>Ensuring that the information made available in the ABS Clearing-House is complete, relevant and up-to-date; and</li>
-                            <li>Ensuring that no confidential data is published in the ABS Clearing-House. The ABS Clearing-House does not host any confidential information and all information published in the ABS Clearing-House is publicly available and
-                                can be accessed by the general public.</li>
+                <h3>Gestion de l’usager <span class="helpinfoInline"><i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i></span></h3><!--help info----------------------------><div ng-if="showInfo" class="well well-help"><strong>Gestion de l’usager pour les usagers autorisés au CE-APA</strong><p>Cette page permet aux correspondants nationaux (CN) de désigner ou de modifier la désignation de l'autorité de publication ainsi qu’elle permet à l'autorité de publication (AP) de désigner ou mettre à jour les utilisateurs nationaux autorisés (UNA). Vous trouverez ci-dessous tous les utilisateurs autorisés au CE-APA autorisés à travailler sur les fichiers nationaux de votre pays. Vous pouvez sélectionner un compte CBD particulier et cliquer sur « éditer » pour assigner / révoquer des rôles (par exemple, changer l'autorité de publication ou supprimer un NAU). Si une personne possédant déjà un compte CBD n'apparaît pas en tant qu'usager autorisé au CE-APA pour votre pays, vous pouvez les trouver en cliquant sur «Ajouter un usager autorisé». Grâce à cette fonctionnalité, vous pouvez rechercher parmi tous les comptes CBD en utilisant leurs adresses courriel, et leur attribuer un rôle de AP ou UNA. Cette fonctionnalité vous permet également d'attribuer des rôles à quelqu'un qui n'a pas encore de compte CBD. Pour ce faire, cliquez sur «Ajouter un usager autorisé» et entrez une adresse couriel l et d'autres renseignements sur la personne que vous souhaitez inclure comme AP ou UNA. Le Centre d'échange sur l'accès et le partage des avantages leur enverra une demande de courriel automatisée pour activer leur compte. Une fois qu'ils ont activé leur compte CBD, ils peuvent commencer à travailler sur les fichiers nationaux.</p><strong>Fonctions des autorités de publication (AE)</strong><p>L’AP est responsable de :<ul>
+                            <li>Autoriser la publication de tous les documents nationaux enregistrés dans le Centre d'échange sur l'accès et le partage des avantages;</li>
+                            <li>Supprimer des enregistrements déjà publiés dans le Centre d'échange sur l'accès et le partage des avantages, le cas échéant;</li>
+                            <li>Veiller à ce que les informations mises à disposition dans le Centre d'échange sur l'accès et le partage des avantages soient complètes, pertinentes et à jour; et</li>
+                            <li>Veiller à ce qu'aucune donnée confidentielle ne soit publiée dans le Centre d'échange sur l'accès et le partage des avantages. Le Centre d'échange sur l'accès et le partage des avantages n'héberge aucune information confidentielle et toute l'information publiée dans le Centre d'échange sur l'accès et le partage des avantages est accessible au grand public.</li>
                         </ul>
-                    </p>
-                    <strong>Functions of national authorized users (NAUs)</strong>
-                    <p>
-                        The function of NAUs is to assist the PA in the preparation of draft national records. NAUs are only allowed to create and manage draft records which are then forwarded to the PA for publication.
-                    </p>
+                    </p><strong>Fonctions des usagers nationaux autorisés (UNA)</strong><p>La fonction des UNA est d'assister l'AP dans la préparation des projets de fichiers nationaux. Les UNA sont uniquement autorisés à créer et à gérer des documents d'ébauche qui sont ensuite transmis à l'AP pour publication.</p>
 
                 </div>
             </div>
@@ -65,15 +28,9 @@
                 <div class="col-xs-12" ng-show="error">
 
                     <div ng-switch="error.code + '-' + error.field">
-                        <div class="alert alert-warning" ng-switch-when="mandatory-government">
-                            <b>Oops...</b> You are not authorized access this page. This page is only available to national users. Please contact the absch@cbd.int if you require assistance.
-                        </div>
-                        <div class="alert alert-warning" ng-switch-when="forbidden-">
-                            <b>Oups...</b> We're sorry, but you are not authorized access this page.
-                        </div>
-                        <div class="alert alert-danger" ng-switch-default>
-                            <b>Oops...</b> We're sorry, but something went wrong. {{error|json}}
-                        </div>
+                        <div class="alert alert-warning" ng-switch-when="mandatory-government"><b>Oups...</b> Vous n'êtes pas autorisé à accéder à cette page. Cette page est seulement accessible aux usagers nationaux. Veuillez contacter le absch@cbd.int si vous avez besoin d’aide.</div>
+                        <div class="alert alert-warning" ng-switch-when="forbidden-"><b>Oups...</b> Nous sommes désolés, vous n’êtes pas autorisé à accéder à cette page.</div>
+                        <div class="alert alert-danger" ng-switch-default><b>Oups...</b> Nous sommes désolés, une erreur est survenue.<span ng-bind="error|json"></span></div>
                     </div>
 
                 </div>
@@ -81,70 +38,41 @@
                 <div class="col-sm-offset-8 col-sm-4 col-xs-12" ng-hide="error">
 
                     <div class="input-group" style="margin-bottom:2px; padding-left: 0px">
-                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading" placeholder="Search within the national users list..." />
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
-                    </div>
+                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading" placeholder="Chercher parmi la liste des usagers nationaux..." /><span class="input-group-addon"><i class="fa fa-search"></i></span></div>
                 </div>
 
                 <div class="col-xs-12" ng-hide="error">
 
                     <table class="table table-striped" style="width:100%">
                         <tr>
-                            <th>User</th>
-                            <th>Organization/Division</th>
-                            <th style="max-width:200px">Roles</th>
+                            <th>Usager</th>
+                            <th>Organisation/division</th>
+                            <th style="max-width:200px">Rôles</th>
                             <th class="text-right">
-                                <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
+                                <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Ajouter un utilisateur autorisé <i class="fa fa-plus-circle"></i></button>
                             </th>
                         </tr>
                         <tr ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
-                            <td>
-                                <b>{{u.firstName}} {{u.lastName}}</b>
-                                <br>
-                                <a rel="noopener" translation-url  href="mailto:{{u.email}}">{{u.email}}</a>
+                            <td><b><span ng-bind="u.firstName+' '+u.lastName"></span></b> <br> <a rel="noopener" translation-url  href="mailto:{{u.email}}" ng-bind="u.email"></a></td>
+                            <td ng-bind="u.organization">
                             </td>
-                            <td>
-                                {{u.organization}}
-                            </td>
-                            <td>
-                                <span ng-repeat="rid in u.roles|filter:isContextRole">
-                                <span class="label label-default" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
-                                <br>
-                                </span>
-
-                                <a rel="noopener" translation-url  href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isNotContextRole).length">
-                                    <span ng-show="!u.showExtraRoles">Show additional roles <i class="fa fa-caret-down"></i></span>
-                                    <span ng-show=" u.showExtraRoles">Hide additional roles <i class="fa fa-caret-up"></i></span>
-                                </a>
-
-                                <div ng-if="u.showExtraRoles">
-                                    <span ng-repeat="rid in u.roles|filter:isNotContextRole">
-                                    <span class="label label-info" style="font-size:10px;margin-right:4px">{{roles[rid].name}}</span>
-                                    <br>
-                                    </span>
-                                </div>
+                            <td><span ng-repeat="rid in u.roles|filter:isContextRole"><span class="label label-default" style="font-size:10px;margin-right:4px" ng-bind="roles[rid].name"></span> <br> </span> <a rel="noopener" translation-url  href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isNotContextRole).length"><span ng-show="!u.showExtraRoles">Montrer les rôles supplémentaires <i class="fa fa-caret-down"></i></span> <span ng-show=" u.showExtraRoles">Cacher les rôles supplémentaires <i class="fa fa-caret-up"></i></span></a><div ng-if="u.showExtraRoles"><span ng-repeat="rid in u.roles|filter:isNotContextRole"><span class="label label-info" style="font-size:10px;margin-right:4px" ng-bind="roles[rid].name"></span> <br> </span></div>
                             </td>
                             <td class="text-right">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button class="btn btn-default" ng-click="edit(u)" ng-disabled="!canEdit(u)"><i class="fa fa-list  fa-fw"></i></button>
-                                    <button class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!canDrop(u)"><i class="fa fa-trash fa-fw"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="edit(u)" ng-disabled="!canEdit(u)"><i class="fa fa-list  fa-fw"></i></button>
+                                    <button type="button" class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!canDrop(u)"><i class="fa fa-trash fa-fw"></i></button>
                                 </div>
                             </td>
 
                         </tr>
                         <tr ng-if="!users">
-                            <td colspan="4">
-                                <i class="fa fa-cog fa-spin fa-fw"></i> Loading...
-                            </td>
+                            <td colspan="4"><i class="fa fa-cog fa-spin fa-fw"></i> Chargement en cours...</td>
                         </tr>
                         <tr ng-if="!!users">
-                            <td colspan="3">
-                                {{(users | filter:defaultFilter | filter:searchText).length}} of {{users.length}} |
-                                <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
-                                <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
-                            </td>
+                            <td colspan="3"><span ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span> | <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Voir plus <i class="fa fa-caret-down"></i></a> <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Voir moins <i class="fa fa-caret-up"></i></a></td>
                             <td class="text-right">
-                                <button class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
+                                <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Ajouter un utilisateur autorisé <i class="fa fa-plus-circle"></i></button>
                             </td>
                         </tr>
                     </table>

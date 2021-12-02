@@ -4,7 +4,7 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="well no-shadow bg-white">
@@ -21,7 +21,7 @@
                         <div class="row">
                             <div class="col-md-7 col-xs-12">
                                 <div class="km-control-group" name="name" required caption="Название организации">
-                                    <div class="help-block">Просьба указать название организации в том виде, в котором вы хотели бы, чтобы оно было представлено в заголовке записи. Например, Программа Объединенных Наций по окружающей среде.</div>
+                                    <div class="help-block">Please provide the name of the organization as you would like it to appear in the title of the record. Например, Программа Объединенных Наций по окружающей среде.</div>
                                     <div km-textbox-ml name="name" required ng-model="document.name" placeholder="Например, Программа Объединенных Наций по окружающей среде"
                                         locales="document.header.languages"></div>
                                 </div>
@@ -69,7 +69,7 @@
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="state" caption="Штат или область">
+                                <div class="km-control-group" name="state" caption="State or Province">
                                     <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
                                         placeholder="пример: Quebec"></div>
                                 </div>
@@ -99,14 +99,14 @@
                                 <div class="km-control-group" name="phones" required caption="Номер(а) телефона(-ов)">
                                     <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
                                     <div km-inputtext-list required name="phones" ng-model="document.phones"
-                                        placeholder="пример: +1 514.288.2220"></div>
+                                        placeholder="example: +1 514.288.2220"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="faxes" caption="Номер(а) факса(-ов)">
                                     <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
-                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="пример: +1 514.288.6588"></div>
+                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
                                 </div>
                             </div>
                         </div>
@@ -177,7 +177,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="km-control-group" name="profile" required caption="Профиль организации">
-                                        <div class="help-block">Просьба предоставить или прикрепить краткое описание профиля организации с указанием того, какое отношение она имеет к вопросам биобезопасности.</div>
+                                        <div class="help-block">Please provide or attach a short profile of the organization and its relevance to biosafety.</div>
                                         <div km-rich-textbox ng-model="document.profile" rows="2" placeholder="Профиль организации"
                                         locales="document.header.languages"></div><br/><div km-link name="profileLink" ng-model="document.profileLink" identifier="document.header.identifier"></div>
                                     </div>
@@ -186,7 +186,7 @@
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="km-control-group" name="linkedOrganizations" caption="Смежные организации">
+                                    <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
                                         <div class="help-block">Просьба использовать данное поле для указания ссылок на другие смежные организации, которые могут быть в базе данных (например, ГЭФ и ЮНЕП-ГЭФ).</div>
                                         <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
                                              question="linkedOrganizations"
@@ -202,14 +202,14 @@
                     
                     <div class="well no-shadow bg-white">
                         <legend>Срок подтверждения или обновления информации</legend>
-                        <div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. По истечении установленного предельного срока вам будет предложено подтвердить или обновить запись в течение трех месяцев. Если по окончании этого периода подтверждение не будет получено, то запись будет помечена как «Неподтвержденная».</div>
+                        <div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. После этого срока Вам будет предложено подтвердить или обновить запись в течение 3-х месяцев. Если по окончании этого периода подтверждение не будет получено, то запись будет помечена как «Неподтвержденная».</div>
                     </div>
 
                     <div class="well no-shadow bg-white">
                         <legend>Дополнительная информация</legend>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+                                <div class="km-control-group" name="address" caption="Any other relevant information">
                                     <div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>

@@ -1,59 +1,39 @@
 ﻿<div id="RecordDetails">
     
-    <style>
-        #RecordDetails td {padding-right:5px;}
-         #RecordDetails label {color:#666;}
-    </style>
+    <style> #RecordDetails td {padding-right:5px;} #RecordDetails label {color:#666;} </style>
 
    <div class="row" >
             <div class="col-xs-12">
                 <div class="well">
-                    <h3 style="margin:0 0 20px 0;padding:0;border-bottom:1px solid #999;">Record Information</h3>
+                    <h3 style="margin:0 0 20px 0;padding:0;border-bottom:1px solid #999;">Información del registro</h3>
                     <table style="width:100%!important;">
                             <tr>
-                                <td><label> Unique Identifier: </label></td>
-                                <td class="bold"> 
-                                        {{doc | uniqueID}}
-                                </td>
+                                <td><label>Identificador único:</label></td>
+                                <td class="bold" ng-bind="doc | uniqueID"></td>
                             </tr>
                             <tr>
-                                <td><label> Record Status: </label></td>
-                                <td class="bold">
-                                    
-                                    <span class="color-grey" ng-if="docInfo.revision == '0'">
-                                        DRAFT 
-                                    </span>
-                                    
-                                    <span class="color-green"  ng-if="docInfo.revision > 0">
-                                        PUBLISHED 
-                                    </span>
-                                    
-                                    <span class="color-red"  ng-if="docInfo.workingDocumentLock">
-                                        [ Locked: Pending publishing request ]
-                                    </span>
-
-                                </td>
+                                <td><label>Estado del registro:</label></td>
+                                <td class="bold"><span class="color-grey" ng-if="docInfo.revision == '0'">BORRADOR</span> <span class="color-green"  ng-if="docInfo.revision > 0">PUBLICADO</span> <span class="color-red"  ng-if="docInfo.workingDocumentLock">[ Locked: Solicitud de publicación pendiente ]</span></td>
                             </tr>
                             <tr>
-                                <td><label> Record Type: </label></td>
-                                <td class="bold">{{docInfo.metadata.schema | schemaName}}</td>
+                                <td><label>Tipo de registro:</label></td>
+                                <td class="bold" ng-bind="docInfo.metadata.schema | schemaName"></td>
                             </tr>
                             
                              <tr  ng-if="docInfo.revision > 0">
-                                <td><label> Record Versions: </label></td>
-                                <td class="bold">{{docInfo.revision}}</td>
+                                <td><label>Versiones del registro:</label></td>
+                                <td class="bold" ng-bind="docInfo.revision"></td>
                             </tr>
                             <tr ng-if="docInfo.metadata.government">
-                                <td><label> Record Owner: </label></td>
-                                 <td class="bold"> {{getUserCountry(docInfo.metadata.government)}}</td>
+                                <td><label>Propietario del registro:</label></td>
+                                 <td class="bold">{{getUserCountry(docInfo.metadata.government)}}</td>
                             </tr>
                             <tr>
-                                <td><label> History:</label></td>
+                                <td><label>Historia:</label></td>
                                 <td>
                                   <div view-history document-id="docInfo.identifier"></div>
                                 </td>
-                            </tr>
-                            <!--<tr ng-if="docInfo.revision > 0">
+                            </tr><!--<tr ng-if="docInfo.revision > 0">
                                 <td><label>Last Published by: </label></td>
                                 <td class="bold">
                                     {{docInfo.updatedBy.firstName}}  {{docInfo.updatedBy.lastName}} 
@@ -61,13 +41,10 @@
                                     <span class="unbold"> on </span>
                                     {{docInfo.updatedOn | formatDateWithTime}}
                                 </td>
-                            </tr>-->
-                    </table>
+                            </tr>--></table>
                 </div>
             </div>
-        </div>
-
-        <!--<div class="row" style="margin-bottom:20px;">
+        </div><!--<div class="row" style="margin-bottom:20px;">
             <div class="col-xs-12">
                 <div class="pull-right" >
                     <button title="Cancel request" ng-show="canRecall && showAddButton()"
@@ -79,5 +56,4 @@
                     type="button" class="btn btn-danger" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i> Delete</button>
                 </div>
             </div>
-        </div>-->
-</div>
+        </div>--></div>

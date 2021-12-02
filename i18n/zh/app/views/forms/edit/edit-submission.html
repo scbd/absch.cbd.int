@@ -1,6 +1,6 @@
 ﻿<div >
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
-    <div style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <edit-header></edit-header>
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -35,7 +35,7 @@
                                                     placeholder="请选择一个国家..."></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">或者</strong></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
                                                 caption="机构" required>
@@ -106,7 +106,8 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="records"caption="相关记录">
-                                                <div document-selector ng-model="document.records" question="records" filter="true"></div>
+                                                <div document-selector ng-model="document.records" question="records" filter="true"
+                                                     on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
                                         </div>
                                     </div>

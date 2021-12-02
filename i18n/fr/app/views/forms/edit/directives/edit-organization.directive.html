@@ -4,7 +4,7 @@
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
             on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-            data-container="{{container}}" is-dialog="{{isDialog}}">
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="well no-shadow bg-white">
@@ -71,7 +71,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="state" caption="État ou province">
                                     <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
-                                        placeholder="exemple : Québec"></div>
+                                        placeholder="example: Québec"></div>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="postalCode" caption="Code postal">
                                     <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
-                                        placeholder="exemple : H2Y 1N9"></div>
+                                        placeholder="example: H2Y 1N9"></div>
                                 </div>
                             </div>
 
@@ -97,23 +97,23 @@
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="phones" required caption="Téléphone (s) :">
-                                    <div class="help-info">Veuillez utiliser le format suivant : + (code du pays) (code de la ville) (numéro de téléphone) (poste, s'il y a lieu).</div>
+                                    <div class="help-info">Veuillez utiliser le format suivant : +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                     <div km-inputtext-list required name="phones" ng-model="document.phones"
-                                        placeholder="exemple : +1 514.288.2220"></div>
+                                        placeholder="example: +1 514.288.2220"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
                                 <div class="km-control-group" name="faxes" caption="Télécopieur :">
-                                    <div class="help-info">Veuillez utiliser le format suivant : + (code du pays) (code de la ville) (numéro de téléphone) (poste, s'il y a lieu).</div>
-                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="exemple : +1 514.288.6588"></div>
+                                    <div class="help-info">Veuillez utiliser le format suivant : +[country code] [city code] [telephone number] [extension, if necessary].</div>
+                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="emails" required caption="courriel(s)">
+                                <div class="km-control-group" name="emails" required caption="Email(s)">
                                     <div km-inputtext-list required name="emails" ng-model="document.emails"
                                         placeholder="exemple : secretariat@cbd.int"></div>
                                 </div>
@@ -209,8 +209,8 @@
                         <legend>Information supplémentaire</legend>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="address" caption="Tout autre information utile">
-                                    <div class="help-block">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordés ailleurs dans le dossier.</div>
+                                <div class="km-control-group" name="address" caption="Any other relevant information">
+                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>

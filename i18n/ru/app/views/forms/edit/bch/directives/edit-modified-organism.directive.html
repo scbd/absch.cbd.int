@@ -1,12 +1,12 @@
 <div>
 
-<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-			 data-container="{{container}}" is-dialog="{{isDialog}}">
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div>
@@ -44,7 +44,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="hasUniqueIdentification" required caption="Имеется ли у данного ЖИО уникальный идентификатор?">
-												<div class="help-block">В настоящее время в МПБ используется система уникальных идентификаторов, изложенная в Руководящих указаниях ОЭСР по определению уникальных идентификаторов для трансгенных растений (например, MON-ØØ81Ø-6). С дополнительной информацией можно ознакомиться по адресу: <a rel="noopener" href="http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml">http://bch.cbd.int/database/organisms/uniqueidentifiers/about.shtml</a>.</div>
+												<div class="help-block">В настоящее время в МПБ используется система уникальных идентификаторов, изложенная в Руководящих указаниях ОЭСР по определению уникальных идентификаторов для трансгенных растений (например, MON-ØØ81Ø-6). С дополнительной информацией можно ознакомиться по адресу: <a rel="noopener" href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">https://bch.cbddev.xyz/en/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef</a>.</div>
 												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -54,7 +54,7 @@
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="developers" caption="Разработчик(и)">	
+											<div class="km-control-group" required name="developers" caption="Developer(s)">	
 												<div document-selector ng-model="document.developers" caption="Контактное лицо" question="developers"
 														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
@@ -95,7 +95,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="vector" caption="Вектор">
-												<div class="help-block">Векторы используются для встраивания в их структуру последовательности ДНК (обычно конструкции промотор-ген-терминатор) с целью облегчения ее переноса в организм-реципиент. Примеры: Ti-плазмида и pBIN19 от Agrobacterium.</div>
+												<div class="help-block">Векторы используются для встраивания в их структуру последовательности ДНК (обычно конструкции промотор-ген-терминатор) с целью облегчения ее переноса в организм-реципиент. Примеры: Agrobacterium Ti plasmid and pBIN19.</div>
 												<div km-textbox-ml name="vector"  ng-model="document.vector" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -150,7 +150,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGenes"
-												caption="Другой(-ие) ген(-ы), экспрессия которых подверглась трансформации">
+												caption="Other gene(s) whose expression was affected by the transformation">
 												<div class="help-block">Данный раздел следует использовать для указания изменений в экспрессии генов, отличных от тех, которые были вставлены в ЖИО (например, сайленсинг и индукция генов).</div>
 												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
 														caption="Генетический элемент" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
@@ -179,10 +179,10 @@
 							</section>
 							<section>
 								<div class="well no-shadow bg-white">
-									<legend>Метод(ы) обнаружения</legend>
+									<legend>Detection method(s)</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethodLinks" caption="Внешняя(-ие) ссылка(-и)">
+											<div class="km-control-group" name="detectionMethodLinks" caption="External link(s)">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
 													identifier="document.header.identifier">
 													<link-controls>												
@@ -208,7 +208,7 @@
 									<legend>Дополнительная информация</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="address" caption="Любая другая актуальная информация">
+											<div class="km-control-group" name="address" caption="Any other relevant information">
 												<div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>

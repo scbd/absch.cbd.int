@@ -9,16 +9,16 @@
 		<document-date></document-date>
 
 
-		<div ng-if="document.isAmendment || amendedByRecords">
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
 			<legend>Поправка</legend>
-			<div ng-if="document.isAmendment">
+			<div ng-if="document.isAmendment!=undefined">
 				<label>Является ли это поправкой к закону, нормативному положению, руководящему принципу или соглашению, информация о которых уже опубликована в МПБ?</label>
 				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.amendedRecords">
-				<label>Закон(ы)/нормативное(-ые) положение(-я)</label>
+				<label>Law(s)/regulation(s) amended</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">

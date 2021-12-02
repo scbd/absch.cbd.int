@@ -1,22 +1,25 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
             <div>
-                <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-                languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+                <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         
                     <form class="editForm" name="editForm" style="margin-top:10px">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <legend name="formInfo" style="display:none"></legend>
                                 <section>
-                                    <legend>这是对先前立法、行政或政策措施的修正？</legend>
-                                    <div class="help-info">仅当所提交的措施会修正某个现有措施时才与本部分相关。如果将在获取和惠益分享信息交换所注册的措施是对现有措施或其一部分的修正，请确保被修正的措施已在获取和惠益分享信息交换所中注册，以便能够提供指向现有记录的链接。这将让两个记录能够一起显示。</div>
+                                    <legend>Is this an amendment to previous legislative, administrative or policy measure?</legend>
+                                    <div class="help-info">This section is only relevant when the measure being submitted is amending an existing measure.如果将在获取和惠益分享信息交换所注册的措施是对现有措施或其一部分的修改，请确保被修改的措施已在获取和惠益分享信息交换所中注册，以便能够提供指向现有记录的链接。这将让两个记录能够一起显示。</div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="isAmendment" required caption="这是对先前立法、行政或政策措施的修正？">
+                                            <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to previous legislative, administrative or policy measure?">
                                                 <div class="help-block"></div>
                                                 <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
                                             </div>
@@ -25,15 +28,15 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <h3 ng-show="!document.isAmendment" style="color:black!important;">如为否，则不需要以下信息。</h3>
-                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">请选择先前注册且将要修正的记录。</h3>
+                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">Please select the previously registered record that is being amended.</h3>
     
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="amendedMeasures" caption="获修正措施清单">
-                                                        <div class="help-info">请通过提供指向获修正措施的交叉引用链接，说明此措施是否修正了一项先前注册的措施。</div>
+                                                    <div class="km-control-group" name="amendedMeasures" caption="经修改措施清单">
+                                                        <div class="help-info">请通过提供指向获修改措施的交叉引用链接，说明此措施是否修改了一项先前注册的措施。</div>
                                                       <div document-selector on-build-query="onAmendedMeasuresQuery(searchText)" ng-model="document.amendedMeasures" question="amendedMeasures"></div><!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>--></div>
                                                 </div>
     
-                                                <div class="km-control-group" name="amendmentsDescription" caption="修正摘要">
+                                                <div class="km-control-group" name="amendmentsDescription" caption="修改摘要">
                                                     <div class="help-info">这将有助于用户了解这两个措施之间的关系。摘要应尽可能简洁明了。</div>
                                                     <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                                                 </div>

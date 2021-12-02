@@ -1,5 +1,5 @@
 <div>
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
 			<div block-region activate="blockEditForm"></div> 
 		</div>   
 		<div class="registerpage-content">
@@ -9,7 +9,7 @@
 				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
 				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
 				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-				data-container="{{container}}" is-dialog="{{isDialog}}">
+				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div ng-show="tab=='edit'" km-tab="edit">
@@ -68,7 +68,7 @@
 					<div style="display:inline-block">В Механизме посредничества по биобезопасности допускается размещать только один страновой профиль от имени правительства каждой страны. В Механизме посредничества по биобезопасности уже существует страновой профиль, который был размещен от имени правительства вашей страны. Вы будете перенаправлены к этой записи через <span ng-bind="alertSeconds"></span> секунд.</div>
 				</div>
 				<div class="ngdialog-buttons" >
-					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Перенаправить</button>
+					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirect now</button>
 				</div>
 			</div>
 		</script>

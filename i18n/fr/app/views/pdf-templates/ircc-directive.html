@@ -3,8 +3,7 @@
     <div class="row" style="padding-left:0px;">
         <div class="alert alert-danger" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'">
             <h4>Warning!</h4>
-            <p>this pdf was generated from ABS-CH test website.
-                <p>
+            <p>Ce PDF a été généré à partir du site test du Centre d’échange APA<p>
         </div>
 
         <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>
@@ -12,67 +11,47 @@
         <div class="row1">
             <div class="col-xs-12 bg-green">
                 <h1 class="color-litegreen  text-center" style="padding:0;font-size:20;">
-                    <div class="color-white">{{documentInfo |uniqueID:true}}</div>
-                    Internationally recognized certificate of compliance constituted from information on the permit or its equivalent made available
-                    to the Access and Benefit-sharing Clearing-House
-                </h1>
+                    <div class="color-white" ng-bind="documentInfo |uniqueID:true"></div>Certificat de conformité internationalement reconnu constitué à partir d’informations sur le permis ou son équivalent mis à la disposition du centre d’échange sur l’accès et le partage des avantages</h1>
             </div>
 
         </div>
 
         <div class="row1">
-            <div class="col-xs-12" style="padding:10px;">
-                
-                In accordance with Article 17, paragraph 2, of the Nagoya Protocol on Access and Benefit-sharing, a permit or its equivalent
-                issued in accordance with Article 6, paragraph 3 (e) and made available to the Access and Benefit-sharing Clearing-House,
-                shall constitute an internationally recognized certificate of compliance.
-            </div>
+            <div class="col-xs-12" style="padding:10px;">Conformément au paragraphe 2 de l’article 17 du Protocole de Nagoya sur l’accès et le partage des avantages, un permis ou un document équivalent délivré conformément au paragraphe 3 (e) de l’article 6 et mis à la disposition du Centre d’échange sur l’accès et le partage des avantages constitue un certificat de conformité reconnu à l’échelle internationale.</div>
         </div>
 
         <div class="col-xs-12 " style="padding:0px;margin:0px">
             <div class="alert alert-danger" ng-show="versions && versions[0].body.amendmentIntent==1">
                 <div class="text-center">
-                    <h1 class="color-white">THIS CERTIFICATE HAS BEEN REVOKED AND IS NO LONGER VALID</h1>
-                    <p>
-                        See amendment history for more information.
-                    </p>
+                    <h1 class="color-white">CE CERTIFICAT A ÉTÉ RAPPELÉ ET N'EST PLUS VALIDE</h1>
+                    <p>Voir l'historique des modifications pour plus d'informations.</p>
                 </div>
             </div>
 
-            <legend>General Information</legend>
+            <legend>Informations générales</legend>
             <div class="row top-border bg-litegreen">
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Issuing country</label>
-                    <div class="text">{{document.government|term |uppercase}}</div>
+                    <label>Pays émetteur</label>
+                    <div class="text" ng-bind="document.government|term |uppercase"></div>
                 </div>
 
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Verification link (view latest version)</label>
-                    <div class="text">
-                        <a rel="noopener" href="https://absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS'">
-                            https://absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}
-                        </a>
-                        <a rel="noopener" href="https://training-absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()=='ABS-TRG'">
-                            https://training-absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}
-                        </a>
-                        <a rel="noopener" href="https://absch.cbddev.xyz/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-DEV'">
-                            https://absch.cbddev.xyz/database/{{documentInfo|uniqueIDWithoutRevision}}
-                        </a>
-                    </div>
+                    <label>Lien de vérification (voir la dernière version)</label>
+                    <div class="text"><a rel="noopener" href="https://absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS'">https://absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}</a> <a rel="noopener" href="https://training-absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()=='ABS-TRG'">https://training-absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}</a> <a rel="noopener" href="https://absch.cbddev.xyz/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-DEV'">https://absch.cbddev.xyz/database/{{documentInfo|uniqueIDWithoutRevision}}</a></div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>ABS-CH Unique Identifier (UID)</label>
-                    <div class="text"> {{documentInfo|uniqueID:true}} </div>
+                    <label>Identifiant unique CE-APA</label>
+                    <div class="text" ng-bind="documentInfo|uniqueID:true"></div>
                 </div>
             </div>
 
-            <legend>Issuing Authority</legend>
+            <legend>L’autorité de délivrance</legend>
             <div class="row top-border bg-litegreen">
                 <div class="col-xs-12">
                     <div class="text">
@@ -81,81 +60,76 @@
                 </div>
             </div>
 
-            <legend>Details of the permit or its equivalent</legend>
+            <legend>Détails du permis ou son équivalent</legend>
             <div class="row top-border bg-litegreen">
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Reference number of the permit or its equivalent</label>
-                    <div class="text">{{document.title| lstring:locale}}</div>
+                    <label>Numéro de référence du permis ou son équivalent</label>
+                    <div class="text" ng-bind="document.title| lstring:locale"></div>
                 </div>
 
                 <div class="col-xs-12" ng-if="document.referenceToNationalPermit">
-                    <label>Additional national references or identifiers</label>
+                    <label>Références ou identificateurs nationaux supplémentaires</label>
                     <div class="text" ng-bind-html="renderHtml(document.referenceToNationalPermit)"></div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-6">
                     <div ng-show="document.dateOfIssuance">
-                        <label>Date of issuance of the permit or its equivalent</label>
-                        <div class="text">{{document.dateOfIssuance | formatDate}}</div>
+                        <label>La date de délivrance du permis ou son équivalent</label>
+                        <div class="text" ng-bind="document.dateOfIssuance | formatDate"></div>
                     </div>
                 </div>
                 <div class="col-xs-6">
                     <div ng-show="document.dateOfExpiry">
-                        <label>Date of expiry of the permit or its equivalent</label>
-                        <div class="text">{{document.dateOfExpiry | formatDate}}</div>
+                        <label>La date de délivrance du permis ou son équivalent</label>
+                        <div class="text" ng-bind="document.dateOfExpiry | formatDate"></div>
                     </div>
                 </div>
 
                 <div ng-show="document.relatedIRCCs">
-                    <label>Unique identifier(s) of related internationally recognized certificate(s) of compliance</label>
-                    <div class="text" ng-repeat="item in document.relatedIRCCs">
-                        <span view-record-reference ng-model="item.identifier" locale="locale" collapse="false"></span>
-                    </div>
+                    <label>Identifiant unique du/des certificat(s) de conformité internationalement reconnu(s) reliés (CCIR)</label>
+                    <div class="text" ng-repeat="item in document.relatedIRCCs"><span view-record-reference ng-model="item.identifier" locale="locale" collapse="false"></span></div>
                 </div>
 
             </div>
 
-            <legend>Prior Informed Consent (PIC) Information</legend>
+            <legend>Information sur le consentement préalable en connaissance de cause (CPCC)</legend>
             <div class="row top-border bg-litegreen">
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Confirmation that prior informed consent (PIC) obtained or granted </label>
-                    <div class="text"> YES</div>
+                    <label>Confirmation que le consentement préalable en connaissance de cause (CPCC) a été obtenu ou accordé</label>
+                    <div class="text">OUI</div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Provider
-                        <span class="help-block">The person or entity that holds the right to grant access to the genetic resources in accordance
-                            with domestic legislation.</span>
-                    </label>
+                    <label>Le fournisseur <span class="help-block">la personne ou l'entité qui détient le droit d'accorder l'accès aux ressources génétiques conformément à la législation nationale</span></label>
                     <div class="text" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
                         <div view-record-reference ng-model="provider" locale="locale" collapse="false"></div>
                     </div>
                     <div ng-show="document.providersConfidential">
-                        <div class="text confidential">Confidential information</div>
+                        <div class="text confidential">Informations confidentielles</div>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Entity to whom PIC was granted </label>
+                    <label>Entité à qui a été accordé le CCPC</label>
                     <div class="text" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
                         <div view-record-reference ng-model="consent" locale="locale" collapse="false"></div>
                     </div>
                     <div ng-show="document.entitiesToWhomPICGrantedConfidential">
-                        <div class="text confidential">Confidential information</div>
+                        <div class="text confidential">Informations confidentielles</div>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <div ng-show="document.picInformation">
-                        <label>Additional information about the prior informed consent</label>
+                        <label>Information supplémentaire sur le consentement préalable en connaissance de cause</label>
                         <div class="text" ng-bind-html="document.picInformation | lstring:locale"></div>
                     </div>
                 </div>
@@ -163,32 +137,28 @@
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <div ng-show="document.picDocuments">
-                        <label>Additional documents or links about the prior informed consent</label>
+                        <label>Documents ou liens supplémentaires sur le consentement préalable en connaissance de cause</label>
                         <div class="text">
                             <ul style="list-style-type: none;padding-left:3px;">
-                                <li ng-repeat="item in document.picDocuments">
-                                    <a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">
-                                        <i class="fa fa-file"></i> {{item.name||item.url}}</a>
-                                    <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                                </li>
+                                <li ng-repeat="item in document.picDocuments"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <legend>Mutually Agreed Terms (MAT) Information</legend>
+            <legend>Information sur les conditions convenues d’un commun accord</legend>
             <div class="row top-border bg-litegreen">
 
                 <div class="col-xs-12">
-                    <label>Confirmation that mutually agreed terms (MAT) have been established </label>
-                    <div class="text"> YES </div>
+                    <label>Confirmation que les conditions convenues d’un commun accord ont été établies</label>
+                    <div class="text">OUI</div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <div ng-show="document.matEstablished">
-                        <label>Additional information about the mutually agreed terms</label>
+                        <label>Informations supplémentaires sur les conditions convenues d’un commun accord</label>
                         <div class="text" ng-bind-html="document.matInformation | lstring:locale"></div>
                     </div>
                 </div>
@@ -196,101 +166,78 @@
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
                     <div ng-show="document.matDocuments">
-                        <label>Additional documents or links about the mutually agreed terms</label>
+                        <label>Documents supplémentaires sur les conditions convenues d’un commun accord</label>
                         <div class="text">
                             <ul style="list-style-type: none;padding-left:3px;">
-                                <li ng-repeat="item in document.matDocuments">
-                                    <a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">
-                                        <i class="fa fa-file"></i> {{item.name||item.url}}</a>
-                                    <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                                </li>
+                                <li ng-repeat="item in document.matDocuments"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <legend>Subject-matter</legend>
+            <legend>matière</legend>
             <div class="row top-border bg-litegreen">
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12">
-                    <label>Subject-matter or genetic resources covered:</label>
-                    <div class="text" ng-show="!document.subjectMatterConfidential">
-                        <span ng-bind-html="renderHtml(document.subjectMatter)"></span>
-                    </div>
+                    <label>Matière ou ressources génétiques couvertes :</label>
+                    <div class="text" ng-show="!document.subjectMatterConfidential"><span ng-bind-html="renderHtml(document.subjectMatter)"></span></div>
                     <div ng-show="document.subjectMatterConfidential">
-                        <div class="text confidential">Confidential information</div>
+                        <div class="text confidential">Informations confidentielles</div>
                     </div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12" ng-show="document.specimens || document.taxonomies || document.gisFiles ">
-                    <label>Additional Genetic Resources Information Links:</label>
+                    <label>Liens d’information supplémentaires sur les ressources génétiques :</label>
                     <div class="text">
-                        <div class="inner-label" ng-show="document.specimens">Specmin data:</div>
+                        <div class="inner-label" ng-show="document.specimens">Données sur le spécimen :</div>
                         <ul>
-                            <li ng-repeat="item in document.specimens">
-                                <a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-                                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                            </li>
+                            <li ng-repeat="item in document.specimens"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                         </ul>
 
-                        <div class="inner-label" ng-show="document.taxonomies">Taxomony data</div>
+                        <div class="inner-label" ng-show="document.taxonomies">Données taxonomiques</div>
                         <ul>
-                            <li ng-repeat="item in document.taxonomies">
-                                <a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-                                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                            </li>
+                            <li ng-repeat="item in document.taxonomies"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                         </ul>
-                        <div class="inner-label" ng-show="document.gisFiles">geographic coordinate data</div>
+                        <div class="inner-label" ng-show="document.gisFiles">données de coordonnées géographiques</div>
                         <ul>
-                            <li ng-repeat="item in document.gisFiles">
-                                <a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
-                                <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
-                            </li>
+                            <li ng-repeat="item in document.gisFiles"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                         </ul>
                     </div>
                 </div>
             </div>
 
-            <legend>Information on the utilization of the genetic resource(s)</legend>
+            <legend>Information sur l’utilisation de la ou des ressource (s) génétique(s).</legend>
             <div class="row top-border bg-litegreen">
 
                 <div class="col-xs-12">
-                    <label>Type of use allowed by the permit or its equivalent</label>
-                    <div class="text" ng-class="{'confidential':document.usagesConfidential}">
-                        <span ng-show="!document.usagesConfidential" ng-repeat="term in document.usages">{{term|term}}{{$last ? '' : ' and '}}</span>
-                        <span ng-show="document.usagesConfidential">Confidential information</span>
-                    </div>
+                    <label>Type d’utilisation permis par le permis ou son équivalent</label>
+                    <div class="text" ng-class="{'confidential':document.usagesConfidential}"><span ng-show="!document.usagesConfidential" ng-repeat="term in document.usages"><span ng-bind="term|term"></span><span ng-bind="$last ? '' : ' and '"></span></span> <span ng-show="document.usagesConfidential">Informations confidentielles</span></div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12" ng-if="document.usagesDescription">
-                    <label>Specific uses covered by the permit or its equivalent or use restrictions:</label>
-                    <div class="text">
-                        <span ng-bind-html="renderHtml(document.usagesDescription)"></span>
-                    </div>
+                    <label>Utilisations spécifiques couvertes par le permis ou son équivalent ainsi que les restrictions d’usage :</label>
+                    <div class="text"><span ng-bind-html="renderHtml(document.usagesDescription)"></span></div>
                 </div>
 
                 <div class="clearfix"></div>
                 <div class="col-xs-12" ng-if="document.thirdPartyTransferCondition">
-                    <label>Conditions for third party transfer:</label>
+                    <label>Conditions de transfert vers une tiers partie :</label>
                     <div class="text" ng-bind-html="renderHtml(document.thirdPartyTransferCondition)"></div>
                 </div>
             </div>
 
             <div ng-if="document.permitDescription || document.permitFiles">
-                <legend>Documents and Additional information</legend>
+                <legend>Documents et autres informations</legend>
                 <div class="row top-border bg-litegreen">
                     <div class="col-xs-12">
-                        <label>Copy of permit or its equivalent, or other relevant open-access document:</label>
-                        <div class="text">
-                            <span ng-bind-html="renderHtml(document.permitDescription)"></span>
-                        </div>
+                        <label>Copie du permis ou de son équivalent, ou de tout autre document pertinent non confidentiel :</label>
+                        <div class="text"><span ng-bind-html="renderHtml(document.permitDescription)"></span></div>
                         <ul style="list-style-type: none;" class="text" class="text" ng-show="document.permitFiles">
-                            <li ng-repeat="item in document.permitFiles">
-                                <strong>{{item.name}}</strong> (https://absch.cbd.int/{{item.url}}) </span>
+                            <li ng-repeat="item in document.permitFiles"><strong ng-bind="item.name"></strong> (https://absch.cbd.int/{{item.url}})</span>
                             </li>
                         </ul>
                     </div>
@@ -299,21 +246,17 @@
             <div ng-if="document.relevantInformation || document.relevantDocuments">
                 <div class="clearfix"></div>
                 <div class="col-xs-12" ng-show="document.relevantInformation || document.relevantDocuments">
-                    <label>Additional information and links:</label>
+                    <label>Informations supplémentaires ou liens :</label>
                     <div class="text">
                         <div ng-bind-html="renderHtml(document.relevantInformation)"></div>
                     </div>
                     <ul style="list-style-type: none;" class="text" class="text" ng-show="document.relevantDocuments">
-                        <li ng-repeat="item in document.relevantDocuments">
-                            <strong>{{item.name}}</strong> (https://absch.cbd.int/{{item.url}}) </span>
+                        <li ng-repeat="item in document.relevantDocuments"><strong ng-bind="item.name"></strong> (https://absch.cbd.int/{{item.url}})</span>
                         </li>
                     </ul>
 
                 </div>
-            </div>
-
-            <!-- <div ng-show="versions && false"> -->
-            <legend>Amendment History</legend>
+            </div><!-- <div ng-show="versions && false"> --><legend>Historique des amendements</legend>
             <div class="row top-border bg-litegreen">
                 
                 <table class="table">
@@ -322,69 +265,30 @@
                             <label>Date</label>
                         </td>
                         <td class="col-xs-2">
-                            <label>Action</label>
+                            <label>Actions</label>
                         </td>
         
                         <td class="col-xs-4">
-                            <label>Comment</label>
+                            <label>Commentaires</label>
                         </td>
                         <td class="col-xs-4">
-                            <label>Unique identifier</label>
+                            <label>Identifiant unique</label>
                         </td>
                     </tr>
                     
-                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
-                        <!-- <hr style="border-color:#FFF;margin:3;padding:3;"> -->
-                        <td class="col-xs-2 history-text-date" >
-                            <strong>{{document.createdOn |formatDateWithTime}}</strong>
-                        </td>
-                        <td class="col-xs-2">
-                            <span ng-show="document.body.amendmentIntent==1">
-                                <span class="bold color-red"> REVOKED</span>
-                            </span>
-                            <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))">
-                                <span class="bold color-green"> OLD VERSION</span>
-                            </span>
-                            <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)">
-                                <span class="bold color-green"> CURRENT VERSION</span>
-                            </span>
-                        </td>
-                        <td class="col-xs-4">
-                            <span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span>
-                            <span ng-show="document.body.amendmentIntent==undefined">Permit information published to the ABS clearing-house and certificate constituted.</span>
-                        </td>
-                        <td class="col-xs-4">
-                            {{document | uniqueID}}
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;"><!-- <hr style="border-color:#FFF;margin:3;padding:3;"> --><td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
+                        <td class="col-xs-2"><span ng-show="document.body.amendmentIntent==1"><span class="bold color-red">RAPPELÉ</span></span> <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))"><span class="bold color-green">VERSION ANTÉRIEURE</span></span> <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)"><span class="bold color-green">VERSION ACTUELLE</span></span></td>
+                        <td class="col-xs-4"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <span ng-show="document.body.amendmentIntent==undefined">Informations de permis publiées au Centre d’échange APA et certificat constitué.</span></td>
+                        <td class="col-xs-4" ng-bind="document | uniqueID">
                         </td>
                     </tr>
 
                 </table>
-            </div>
-            <!-- </div> -->
-
-            <legend>Further Information</legend>
+            </div><!-- </div> --><legend>Pour plus d'informations</legend>
             <table class="top-border">
                 <tr>
-                    <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">
-                        Questions about the permit or its equivalent constituting an internationally recognized certificate of compliance should
-                        be addressed to the competent national authority issuing the permit or its equivalent. Additional information
-                        about the permit or its equivalent may be available in the Access and Benefit-Sharing Clearing House
-                        (
-                        <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>).
-                        <br>
-                        <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and
-                        Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.
-                    </td>
-                    <td class="col-md-6" style="font-size:12px;vertical-align: top">
-                        <strong>Secretariat of the Convention on Biological Diversity</strong>
-                        <br/> 413 rue Saint-Jacques, suite 800
-                        <br/> Montreal, Québec, H2Y 1N9
-                        <br/> Canada
-                        <br/> Fax: +1 514 288-6588
-                        <br/> Email:
-                        <a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a>
-
-                    </td>
+                    <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">Les questions au sujet des permis ou leurs équivalents qui constituent un certificat de respect des obligations internationalement reconnu doivent être envoyées à l’autorité nationale compétence qui émet le permis ou son équivalent. Des informations supplémentaires sur le permis ou son équivalent pourraient être disponibles au Centre d’échange d’informations sur l’accès et le partage des avantages. (<a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> Les questions sur le Protocole de Nagoya sur l’accès et le partage des avantages ou sur le fonctionnement du Centre d’échange d’informations sur l’accès et le partage des avantages peuvent être envoyées au Secrétariat de la Convention sur la diversité biologique.</td>
+                    <td class="col-md-6" style="font-size:12px;vertical-align: top"><strong>Secrétariat de la Convention sur la diversité biologique</strong> <br/> 413 rue Saint-Jacques, suite 800 <br/> Montréal, Québec, H2Y 1N9 <br/> Canada <br/> Télécopieur : +1 514 288-6588 <br/> Adresse courriel  <a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a></td>
                 </tr>
             </table>
         </div>

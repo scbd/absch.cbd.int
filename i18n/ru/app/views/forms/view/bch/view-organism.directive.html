@@ -40,7 +40,7 @@
 
 		<div ng-show="document.commonNames">
 			<label>Общепринятое(-ые) название(-я)</label>
-			<div class="km-value" compare-val>
+			<div compare-val>
 				<ul class="list">
 					<li ng-repeat="name in document.commonNames" style="margin-bottom: 5px;">
 						<km-value-ml value="name" locales="locale"></km-value-ml>
@@ -52,14 +52,14 @@
 	<legend ng-if="document.plantCultivar || document.microorganismStrain || document.bacteriaPathovar || document.virusGroup">Дополнительная классификация</legend>
 		
 		<div ng-show="document.plantCultivar">
-				<label>Культивар/сорт (растения)</label>
+				<label>Cultivar / variety (plants)</label>
 				<div compare-val>
 					<div class="km-value" ng-bind="document.plantCultivar"></div>
 				</div>
 		</div>
 
 		<div ng-show="document.microorganismStrain">
-				<label>Штамм/изолят/серотип (микроорганизмы)</label>
+				<label>Strain / isolate / serotype (microorganisms)</label>
 				<div compare-val>
 					<div class="km-value" ng-bind="document.microorganismStrain"></div>
 				</div>
@@ -113,14 +113,14 @@
 		</div>
 
 		<div ng-show="document.habitat">
-				<label>Диапазон мест обитания</label>
+				<label>Habitat range</label>
 				<div compare-val>
 					<km-value-ml value="document.habitat" locales="locale" html></km-value-ml>
 				</div>
 		</div>
 
 		<div ng-show="document.geographicalDistribution">
-				<label>Географическое распределение</label>
+				<label>Geographical distribution</label>
 				<div compare-val>
 					<km-value-ml value="document.geographicalDistribution" locales="locale" html></km-value-ml>
 				</div>
@@ -145,7 +145,7 @@
 		</div>
 
 		<div ng-show="document.commonUses">
-				<label>Вид(ы) обычного применения</label>
+				<label>Common use(s)</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
@@ -154,7 +154,7 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Дополнительная информация</legend>
+			<legend>Additional Information</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>

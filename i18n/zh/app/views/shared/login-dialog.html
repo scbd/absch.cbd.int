@@ -1,16 +1,16 @@
 ﻿<div>
     <div  ng-show="!user.isAuthenticated" style="margin:0 10% 0 10%" >
-        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">Please sign-in to publish information in the ABS Clearing-House</h1>
+        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">请登录，以发布信息至： <span ng-bind="chShortName"></span></h1>
         <hr>
        <div class="well">
-       <h3>How do I register for a CBD account?</h3>
-       <p>Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at <a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a></p>
-        <p>Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.</p>
-       <h3>Forgot your password?</h3>
-        <p>Click here <a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a> to reset your password. You will be asked for your email address and, if you are a registered user, an email will be sent immediately to your registered email account with instructions on how to reset your password.</p>
-        <h3>Problems with the display of the Clearing-House?</h3>
-        <p> The ABS-CH works best with the most recent versions of internet browsers (Firefox, Chrome or Internet Explorer 9+).</p>
-        <h3 class="color-green">For technical support please contact our help desk at: <span class="color-blue">absch@cbd.int</span></h3>
+       <h3>我如何注册生物多样性公约账户？</h3>
+       <p>任何人都可以拥有生物多样性公约账户，以在公约下各个信息交换所（包括生物安全信息交换所、获取和惠益分享信息交换所以及信息交换所机制）上注册信息。您可以在<a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a>注册生物多样性公约帐户。</p>
+        <p>确保按照表格上的说明输入所需的全部信息。您将自动收到一封包含链接的电子邮件，单击该链接即可确认您的帐户。</p>
+       <h3>忘记密码？</h3>
+        <p>单击这里<a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a>，以重置您的密码。您将被要求提供您的电子邮件地址，如果您是注册用户，密码重置说明将立即发至您注册的电子邮件地址。</p>
+        <h3>信息交换所显示有问题？</h3>
+        <p><span ng-bind="chShortName"></span>搭配最新的互联网浏览器版本（Firefox、Chrome 或 Internet Explorer 9+）效果最佳。</p>
+        <h3 class="color-green">如需技术支持，请联系我们的帮助中心： <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
        </div>
       </div>
 </div>

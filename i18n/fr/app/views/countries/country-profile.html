@@ -1,75 +1,38 @@
-﻿﻿<div ng-controller="countryProfileController">
-    <style>
-            .cp-header label{margin-right:10px; width:180px;margin-bottom:0;}
-    </style>
+﻿﻿<div >
+    <style> .cp-header label{margin-right:10px; width:180px;margin-bottom:0;} .breadcrumbs {background-color:#FFF!important; } .breadcrumbs { font-size: 12px; color:#111; text-decoration: none;} .breadcrumbs a { font-size: 12px; color:#999; text-decoration: none;} </style>
     <div smooth-scroll duration="100" offset="200"></div>
-      
-        <div id="Jumbotron" class="bg-texture-green app-bg-texture color-black hidden-sm hidden-xs" selected-color="#FFFFFF" 
-        style="border-top:1px solid #555;border-bottom:2px solid #ddd;height: 353px;" block-region activate="loadingMap"
-        ng-style="{'height': isBCH ? '450px' : '350px'}"> 
-                   
+        <div id="Jumbotron" style="position: relative;" class="hidden-sm hidden-xs bg-white" selected-color="#FFFFFF" block-region activate="loadingMap"> 
         </div>
-    
         <div class="row" style="margin:0;">
             <div class="col-xs-12">
-                <h1 style="font-size:280%;"><i class="flag-icon" ng-class="country.cssClass"></i> <strong> {{country.name}} </strong>
-                </h1>
+                <h1 style="font-size:280%;"><i class="flag-icon" ng-class="country.cssClass"></i> <strong><span ng-bind="country.name"></span></strong></h1>
                 <div class="well bg-white cp-header">
                         <div style="margin-bottom:5px;" ng-if="isABS">
-                            <label >Party Status:</label>
-                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Nagoya Protocol</span>
-                            <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
-                            <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
-                            <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
-                             <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold">
-                                 <i class="fa fa-info-circle"></i> 
-                                 The UK’s ratification of the Nagoya Protocol does not extend to the 
-                                 <a rel="noopener" ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands" >14 Overseas Territories </a>
-                                or <a rel="noopener" ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" 
-                                title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
-                            </div>
+                            <label >Statut de la Partie :</label><span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">N’est pas encore Partie au Protocole de Nagoya</span> <span ng-if="country.isParty" class="color-party bold">Partie au Protocole de Nagoya</span> <span ng-if="country.isInbetweenParty" class="color-inbetween bold">ayant ratifié, mais n’étant pas encore Partie au Protocole de Nagoya</span><div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> La ratification par le Danemark du Protocole de Nagoya ne s’applique pas au Groenland et aux îles Féroé.</div>
+                             <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> La ratification du Protocole de Nagoya par le Royaume-Uni ne s’étend pas aux <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" title="Anguilla; Les Bermudes; Territoire antarctique britannique; Territoire britannique de l'Océan Indien; Îles Vierges britanniques; Îles Caïmans; Les îles Falkland; Gibraltar; Montserrat; Îles Pitcairn; Sainte-Hélène, Ascension et Tristan da Cunha; Géorgie du Sud et îles Sandwich du Sud; Zones de souveraineté d'Akrotiri et de Dhekelia; îles Turques-et-Caïques" >14 territoires d’outre-mer</a> ni aux <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" 
+                                title="Bailliage de Jersey, le bailliage de Guernesey et l'île de Man">3 dépendances de la Couronne.</a></div>
                         </div>
                         <div style="margin-bottom:5px;" ng-if="isBCH">
-                            <label >Party Status:</label>
-                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Cartagena Protocol on Biosafety</span>
-                            <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
-                            <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
-                             <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold">
-                                 <i class="fa fa-info-circle"></i> 
-                                 The UK’s ratification of the Cartagena Protocol does not extend to the 
-                                 <a rel="noopener" ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands" >13 Overseas Territories </a>
-                                or <a rel="noopener" ng-href="#" class="gb-territories" data-toggle="tooltip" data-placement="bottom" 
-                                title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
-                            </div>
+                            <label >Statut de la Partie :</label><span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">N’est pas une Partie au Protocole de Cartagena sur la prévention des risques biotechnologiques</span> <span ng-if="country.isParty" class="color-party bold">Partie au Protocole de Cartagena sur la prévention des risques biotechnologiques</span><div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> La ratification par le Danemark du Protocole de Nagoya ne s’applique pas au Groenland et aux îles Féroé.</div>
+                             <div ng-if="country.code==='gb'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> La ratification du Protocole de Nagoya par le Royaume-Uni ne s’étend pas aux <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" title="Anguilla; Les Bermudes; Territoire antarctique britannique; Territoire britannique de l'Océan Indien; Îles Vierges britanniques; Îles Caïmans; Les îles Falkland; Gibraltar; Montserrat; Îles Pitcairn; Sainte-Hélène, Ascension et Tristan da Cunha; Géorgie du Sud et îles Sandwich du Sud; Zones de souveraineté d'Akrotiri et de Dhekelia; îles Turques-et-Caïques" >13 territoires d’outre-mer</a> ni aux <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" 
+                                title="Bailliage de Jersey, le bailliage de Guernesey et l'île de Man">3 dépendances de la Couronne.</a></div>
                         </div>
                          <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:5px;">
-                            <label>Enter<span ng-if="country.isInbetweenParty">s</span><span ng-if="country.isParty">ed</span> into force on:</label>
-                            <span class="color-grey color-non-party bold">{{country.entryIntoForce|formatDate}}</span>
-                        </div>
+                            <label>Entre<span ng-if="country.isInbetweenParty">est</span><span ng-if="country.isParty">entré</span> en vigueur :</label><span class="color-grey color-non-party bold" ng-bind="country.entryIntoForce|formatDate"></span></div>
                         <div ng-if="(country.isRatified) && country.dateDeposit"  style="margin-bottom:5px;">
-                            <label ng-if="country.instrument" ><span style="text-transform:capitalize;">{{country.instrument}}</span> on:</label>
-                            <label ng-if="!country.instrument">Ratification on:</label>
-                            <span class="color-grey color-non-party bold">{{country.dateDeposit|formatDate}}</span>
-                        </div>
+                            <label ng-if="country.instrument" ><span style="text-transform:capitalize;" ng-bind="country.instrument"></span> le :</label>
+                            <label ng-if="!country.instrument">Ratification le :</label><span class="color-grey color-non-party bold" ng-bind="country.dateDeposit|formatDate"></span></div>
                         <div style="margin-bottom:5px;" ng-if="isABS">
-                            <label>Signatory:</label>
-                            <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
-                            <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signed on {{country.dateSigned|formatDate}} </span>
-                            <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">No</span>
-                        </div>
+                            <label>Signataire :</label><span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signataire</span> <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signé le <span ng-bind="country.dateSigned|formatDate"></span></span> <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">Non</span></div>
                        
                         <div style="white-space:nowrap;overflow-x:hidden;margin-bottom:5px;">
-                            <label>CBD Country Profile:</label>
-                            <a rel="noopener" translation-url   href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
-                        </div>
+                            <label>Profil CDB du pays :</label><a rel="noopener" translation-url   href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank">www.cbd.int/countries/?country={{country.code}}</a></div>
                             
                 </div>
             </div>
             <div class="col-xs-12" ng-if="countryProfile && countryProfile.profile">
                 <div class="well bg-white cp-header"> 
-                    <legend>Additional information for the country profile</legend>
-                    <span ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
-                </div>
+                    <legend>Informations supplémentaires pour le profil du pays</legend><span ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span></div>
             </div>
         </div>
     

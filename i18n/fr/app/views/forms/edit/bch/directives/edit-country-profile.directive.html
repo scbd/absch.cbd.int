@@ -1,5 +1,5 @@
 <div>
-	<div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
 			<div block-region activate="blockEditForm"></div> 
 		</div>   
 		<div class="registerpage-content">
@@ -9,7 +9,7 @@
 				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
 				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
 				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
-				data-container="{{container}}" is-dialog="{{isDialog}}">
+				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
 					<form class="editForm" name="editForm" style="margin-top:10px">
 						<div ng-show="tab=='edit'" km-tab="edit">
@@ -36,8 +36,8 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="profile" caption="Additional information for the country profile">
-												<div class="help-block">Please use this field to provide any relevant additional information that will appear as part of your country profile.</div>
+											<div class="km-control-group" required name="profile" caption="Informations supplémentaires pour le profil du pays">
+												<div class="help-block">Veuillez utiliser ce champs pour fournir toute information supplémentaire pertinente qui devrait apparaître dans le profil de votre pays.</div>
 												<div km-rich-textbox required ng-model="document.profile" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -45,7 +45,7 @@
 									<legend>Notes</legend>
 									<div class="row">
 										<div class="col-md-12">
-											<div class="km-control-group" name="notes"><span class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
+											<div class="km-control-group" name="notes"><span class="help-block">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</span><div km-notes name="notes" ng-model="document.notes"></div>
 											</div>
 										</div>
 									</div> 
@@ -61,11 +61,11 @@
 		</div>
 		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
 			<div style="margin:10px;">
-				<h1>Country Profile for Biosafety Clearing-House</h1>
+				<h1>Profil des pays pour le Centre d'échange sur la prévention des risques biotechnologiques.</h1>
 				<hr>
 				<div class=" alert alert-danger">
 					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
-					<div style="display:inline-block">Only one country profile record is allowed in the Biosafety Clearing-House for each government. The country profile for your government already exists in the Biosafety Clearing-House. You will be redirected to that record in <span ng-bind="alertSeconds"></span> seconds.</div>
+					<div style="display:inline-block">Un seul enregistrement de profil de pays est autorisé dans le Centre d'échange pour la prévention des risques biotechnologiques pour chaque gouvernement. Le profil de pays de votre gouvernement existe déjà dans le Centre d'échange pour la prévention des risques biotechnologiques. Vous serez redirigiés pour ce fichier dans  <span ng-bind="alertSeconds"></span> secondes.</div>
 				</div>
 				<div class="ngdialog-buttons" >
 					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Rediriger maintenant</button>

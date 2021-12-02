@@ -1,18 +1,18 @@
 ﻿<div id="Search-Filter" class="row"  dir="rtl">
 
       <div  class="col-md-6" ng-show="nf_filters.length" style="margin-bottom:30px;" >
-        <div class="heading color-blue" ng-if="nf_filters.length"></div>
+        <div class="heading color-blue" ng-if="nf_filters.length">السجلات الوطنية</div>
         <hr  class="heading" ng-if="nf_filters.length">
-        <p class="helpinfo" ng-if="nf_filters.length" ></p>
-        <style></style>
-        <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])" ng-class="{'contact-spacing': doc.id=='contact'}"></div>
+        <p class="helpinfo" ng-if="nf_filters.length" ><i class="fa fa-info-circle helpicon" ></i> <span ng-if="realm.is('ABS')">يتم نشر السجلات الوطنية من قِبل الحكومات، وتتضمن المعلومات التي يلتزم الأطراف بتقديمها وفقًا للبروتوكول بالإضافة إلى المعلومات الوطنية الأخرى ذات الصلة بتنفيذ البروتوكول.</span> <span ng-if="realm.is('BCH')">يتم نشر السجلات الوطنية من قبل الحكومات، وتشمل المعلومات التي يلتزم الأطراف بتقديمها وفقًا للبروتوكول بالإضافة إلى المعلومات الوطنية الأخرى ذات الصلة بتنفيذ البروتوكول.</span></p>
+        <style> .contact-spacing{ margin-top: 25px; } strong{ color:#555; } </style>
+        <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])" ng-class="{'contact-spacing': doc.id=='contact'}"><a rel="noopener" translation-url  class="filter" style="color:#555;"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}"><i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> <span ng-bind="doc.name"></span> <strong>(<span ng-bind="$parent.searchResult.data.facets.schemas[doc.id]||0"></span>)</strong></a> <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>--> <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-gray" data-bs-toggle="tooltip" data-html="true" title="{{doc.description}}" data-container="body"></span></div>
       </div>
       
       <div  class="col-md-6" ng-show="nf_filters.length" style="margin-bottom:30px;">
-        <div class="heading" ng-if="nf_status.length"></div>
+        <div class="heading" ng-if="nf_status.length">حالة العضوية</div>
         <hr  class="heading" ng-if="nf_status.length">
         
-        <div ng-repeat="doc in nf_status = (nf_partyStatus | filter:searchKeyword | orderBy:['filterSort', 'sort'])"></div>
+        <div ng-repeat="doc in nf_status = (nf_partyStatus | filter:searchKeyword | orderBy:['filterSort', 'sort'])"><a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)"><i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id), 'color-party':doc.id==='partyToProtocol', 'color-litegrey':doc.id==='nonParty', 'color-inbetween':doc.id==='inbetween'}"></i> <span ng-bind="doc.name"></span><!--<span class="badge">100</span>--></a> <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-white" data-bs-toggle="tooltip" data-html="true" data-title="{{doc.description}}" data-container="body"></span> <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>--></div>
       </div>
 
 </div>

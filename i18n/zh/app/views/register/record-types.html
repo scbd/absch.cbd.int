@@ -2,34 +2,24 @@
     
     <div class="container">
         
-        <h1>BCH Information Submission</h1>
+        <h1>通过生物安全信息交换所提交的信息</h1>
     
-        <h2>Registering National Records</h2>
-        <p>
-            The submission of records in this category is restricted to Biosafety Clearing-House National Focal Points (BCH-NFPs) and National Authorized Users (NAUs). 
-            All records submitted by NAUs will be forwarded to the BCH-NFP for review and validation prior to publication (see FAQs).
-        </p>
+        <h2>登记国家记录</h2>
+        <p>此类记录仅限由生物安全信息交换所的国家联络点(BCH-NFP)和国家授权用户(NAU)提交。在发布之前，国家授权用户(NAU)提交的所有记录将由生物安全信息交换所的国家联络点(BCH-NFP)进行检查和验证(参见常见问题FAQs)。</p>
         
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.national" >
-                <h3 style="font-size:auto">{{::s.title}}</h3>
-                <p style="min-height:100px">{{::s.description}}</p>
-                <a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
-            </div>
+                <h3 style="font-size:auto" ng-bind="::s.title"></h3>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">提交</a></div>
         </div>
         
-        <h2>Registering Reference Records</h2>
-        <p>
-            Records in this category may be submitted by all registered users. 
-            These records will be subject to review and validation by the Secretariat prior to publication (see FAQs).
-        </p>
+        <h2>登记参考记录</h2>
+        <p>此类记录可由所有注册用户提交。在发布之前，这些记录将由秘书处进行检查和验证（参见常见问题）。</p>
         
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.reference" >
-                <h3 style="font-size:auto">{{::s.title}}</h3>
-                <p style="min-height:100px">{{::s.description}}</p>
-                <a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Submit</a>
-            </div>
+                <h3 style="font-size:auto" ng-bind="::s.title"></h3>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">提交</a></div>
         </div>
     </div>
 </div>

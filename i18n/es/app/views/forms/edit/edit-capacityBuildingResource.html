@@ -1,11 +1,11 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
             <div class="alert alert-success alert-dismissable" ng-show="msg">
-                <button aria-hidden="true" class="close" data-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong>{{msg}}</strong></div>
+                <button aria-hidden="true" class="close" data-bs-dismiss="alert" ng-click="msg=''" type="button">&times;</button><strong>{{msg}}</strong></div>
 
             <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
                 languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
@@ -18,7 +18,7 @@
 	
 							<div class="row">
 								<div class="col-xs-12" >
-									<div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea enviar este registro:">
+									<div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
 										<div class="indent">
 											<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 										</div>
@@ -100,14 +100,10 @@
 																			schema="contact" skip-government="true"
 																			government="document.government"
 																			filter="true"
-																			></div><!--<organization-selector multiple ng-model="document.organizations" locales="document.header.languages" caption="{{'Add an organization »'}}"></organization-selector>--></div><!-- <div class="km-control-group" name="organizations" caption="Reference to the authoring organisation(s)">
-										<div km-reference multiple name="organizations" ng-model="document.organizations" loader="loadRecords(identifier, 'organization')" order-by="sortContacts(reference)">
-												<div>
-													<div><strong>{{reference.title | lstring}}</strong></div>
-													<div>{{reference.summary | lstring}}</div>
-												</div>
-										</div>
-									</div> --></div>
+																			></div>										
+										
+									</div>
+								</div>
 							</div>
 	
 							<div class="row">
@@ -130,7 +126,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="source" caption="Fuente">
-										<div class="help-info">Referencia a un recurso del cual se deriva el presente recurso (por ejemplo, un artículo en una revista especializada). Para los documentos originales tal vez se desee especificar "documento original".</div>
+										<div class="help-info">A reference to a resource from which the present resource is derived (e.g. an article from a journal). Para los documentos originales tal vez se desee especificar "documento original".</div>
 										<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 									</div>
 								</div>
@@ -141,7 +137,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" required name="resourceLinks" caption="Enlace al/a los recurso(s)">
-										<div class="help-info">Por favor, siempre adjunte el/los documento(s) pertinente(s) que serán almacenados en la base de datos para que los usuarios puedan descargarlos. Cuando los recursos están disponibles en Internet, por favor, solo proporcione su enlace.</div>
+										<div class="help-info">Por favor, siempre adjunte el/los documento(s) pertinente(s) que serán almacenados en la base de datos para que los usuarios puedan descargarlos. When resources are available on the Internet, please also provide a link to them.</div>
 										<div km-link name="resourceLinks" required ng-model="document.resourceLinks" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 									</div>
 								</div>
@@ -187,7 +183,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="address" caption="Cualquier otra información pertinente">
-										<div class="help-info">Por favor, utilice este campo para proporcionar cualquier otra información pertinente que no se haya podido incluir en otro lugar del registro.</div>
+										<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 										<div km-textbox-ml ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 									</div>
 								</div>
@@ -204,7 +200,7 @@
 							<div class="row">
 								<div class="col-md-12">
 									<div class="km-control-group" name="notes">
-										<legend>Notas</legend><span class="help-info">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro.</span><div km-notes name="notes" ng-model="document.notes"></div>
+										<legend>Notas</legend><span class="help-info">The field “Notes” is for personal reference and can be seen only when the record is being edited.</span><div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>
 							</div>

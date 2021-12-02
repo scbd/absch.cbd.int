@@ -1,11 +1,14 @@
 ﻿<div >
 
-    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+    <edit-header></edit-header>
 
-    <div style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
             <div>
-                <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" 
-                languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+                <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         
                     <form class="editForm" name="editForm" style="margin-top:10px">
                             <div ng-show="tab=='edit'" km-tab="edit">
@@ -267,7 +270,7 @@
                                                     <div class="km-control-group"  name="absMeasures" required caption="">
                                                         <div class="help-info"></div>
                                                         <div layout="row" style="margin-bottom:20px;">
-                                                             <div class="help-info" >Veuillez sélectionner quels éléments sont inclus dans la mesure en cours d’enregistrement et identifier les articles ou sections pertinentes de la mesure pour chacun des éléments sélectionnés. Cette information aidera à rendre les informations disponibles pour le cadre juridique national afin  d’aider les usagers potentiels à comprendre l'accès et le partage des avantages et le respect des exigences de votre pays. Parfois, le contenu et les éléments de la mesure sont liés aux objectifs et aux plans pour la mise en œuvre nationale de l’APA. Cela pourrait être le cas, pour des stratégies et plans d'action APA par exemple. Dans de tels cas, vous pourrez indiquer les éléments de la mesure qui ne sont pas applicables en cliquant sur la case à cocher ci-dessous.</div>
+                                                             <div class="help-info" >Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. Cette information aidera à rendre les informations disponibles pour le cadre juridique national afin  d’aider les usagers potentiels à comprendre l'accès et le partage des avantages et le respect des exigences de votre pays. Parfois, le contenu et les éléments de la mesure sont liés aux objectifs et aux plans pour la mise en œuvre nationale de l’APA. Cela pourrait être le cas, pour des stratégies et plans d'action APA par exemple. Dans de tels cas, vous pourrez indiquer les éléments de la mesure qui ne sont pas applicables en cliquant sur la case à cocher ci-dessous.</div>
                                                         </div>
                                                         <div edit-measure-matrix name="absMeasuresMatrix" required ng-model="document.absMeasures" locales="document.header.languages" document="document" ng-disabled="document.absMesasureNotApplicable"
                                                             validation-report="validationReport"></div>
@@ -286,8 +289,8 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="address" caption="Tout autre information utile">
-                                                <div class="help-block">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordés ailleurs dans le dossier.</div>
+                                            <div class="km-control-group" name="address" caption="Any other relevant information">
+                                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>

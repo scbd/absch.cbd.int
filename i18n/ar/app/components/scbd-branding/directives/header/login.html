@@ -3,28 +3,28 @@
   <div class="modal-dialog modal-md">
     <div class="modal-content">
       <div class="modal-header text-center">
-        <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal" aria-hidden="true"></button></div>
+        <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal" aria-hidden="true">&times;</button><img src="/app/components/scbd-branding/images/cbd-logo-green-en.svg" style="max-height:70px;"></img></div>
       <div class="modal-body  dropshadow" style="">
         <div class="row" ng-show="!user.isAuthenticated">
           <div class="col-xs-12">
             <div>
                 
-              <div class="alert alert-info" ng-show="sessionExpiredAlert"></div>
-              <div class="alert alert-danger" ng-show="errorInvalid"></div>
+              <div class="alert alert-info" ng-show="sessionExpiredAlert"><strong>انتهت الجلسة.</strong> لقد انتهت جلسة الاستخدام، يُرجى تسجيل الدخول للاستمرار.</div>
+              <div class="alert alert-danger" ng-show="errorInvalid"><strong>تعذر تسجيل الدخول.</strong> عنوان البريد الإلكتروني وكلمة المرور اللذان أدخلتهما غير صحيحين.</div>
 
-              <div class="alert alert-danger" ng-show="errorTimeout"></div>
+              <div class="alert alert-danger" ng-show="errorTimeout"><strong>تعذر التشغيل.</strong> الخدمة غير متاحة. يُرجى تكرار المحاولة لاحقًا.</div>
               <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required">
                 <div class="form-group">
-                  <div class="input-group"><input type="text" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="" required>
+                  <div class="input-group"><span class="input-group-addon"><i class="fa fa-envelope"></i></span><input type="text" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="عنوان البريد الإلكتروني المُسجَّل" required>
                   </div>
                 </div>
                 <div class="form-group">
-                  <div class="input-group"><input type="password" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputPassword" name="password" ng-model="password" placeholder="" required>
+                  <div class="input-group"><span class="input-group-addon"><i class="fa fa-lock" style="width:14px;height:10px;"></i></span><input type="password" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputPassword" name="password" ng-model="password" placeholder="كلمة المرور" required>
                   </div>
                 </div>
                 <div class="form-group ">
                   <div class="text-center">
-                    <button type="submit" class="btn btn-primary " ng-disabled="waiting"></button>
+                    <button type="submit" class="btn btn-primary " ng-disabled="waiting"><i class="fa fa-spin fa-spinner" ng-if="waiting"></i> سجِّل الدخول في حسابك</button>
                     <div class="spinner ng-hide" ng-show="waiting">
                       <div class="bounce1"></div>
                       <div class="bounce2"></div>
@@ -37,7 +37,12 @@
             </div>
 
           </div>
-          <div class="col-xs-12"></div></div>
+          <div class="col-xs-12"><span class="pull-left"><a rel="noopener" href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_blank">هل نسيت كلمة المرور؟</a></span> <span class="pull-right"><a rel="noopener" href="https://accounts.cbd.int/signup" style="text-decoration:none;" class="color-white" target="_blank">إنشاء حساب</a></span></div><!-- <div class="col-xs-5" style="border-left:5px solid #ccc;height:250px;margin-top:5px;">
+                      <div style="padding:1px 10px 15px 10px; margin:0;">
+                      <h1>No account? <h2>Get started. Create your CBD account by signing up with <span class="color-white">accounts.cbd.int</span>.</h2>
+                      <a rel="noopener" href="#" style="width:100px;" ng-click="actionSignup()" class="btn btn-primary" ng-disabled="waiting" >Sign up</a></h1>
+
+                  </div> --></div>
       </div>
     </div>
   </div>

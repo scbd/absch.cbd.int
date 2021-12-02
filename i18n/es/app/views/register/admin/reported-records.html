@@ -1,14 +1,10 @@
-﻿<div ng-controller="adminReportedRecordsCtrl" id="RegisterPage">
+﻿<div  id="RegisterPage">
     <link href="/app/css/register.css" rel="stylesheet">
-    <link href="/app/css/record.css" rel="stylesheet">
-
-    <span register-top-menu></span>
-
-    <div class="register-content card card-1-notrans">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
 
         <div class="register-content-header bg-pink color-white">
             <div style="padding:10px 10px;">
-                <h3>Reported Records</h3>
+                <h3>Registros informados</h3>
             </div>
         </div>
         <div  class="register-content-content">
@@ -16,60 +12,46 @@
 
             <div class="" style="width:100%">
                 <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;">                
-                    <div class="col-xs-2">Schema</div>
-                    <div class="col-xs-2">Reported By</div>
-                    <div class="col-xs-2">Reported On</div>
-                    <div class="col-xs-4">Information</div>
+                    <div class="col-xs-2">Esquema</div>
+                    <div class="col-xs-2">Informado por</div>
+                    <div class="col-xs-2">Informado el</div>
+                    <div class="col-xs-4">Información</div>
                     <div class="col-xs-2"></div>
                 </div>
                 <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;" 
                 ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
                     <div ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
-                        <div class="col-xs-2">
-                            {{record.schema|schemaName}}
-                        </div>
-                        <div class="col-xs-2">
-                            {{record.reportedBy}}
-                        </div>
-                        <div class="col-xs-2">
-                            <span ng-if="record.meta">{{record.meta.createdOn|formatDateWithTime}}</span>
-                        </div>
-                        <div class="col-xs-3">
-                            <span ng-if="record.incorrect">incorrect or inappropriate |</span>
-                            <span ng-if="record.broken">broken link or outdated information |</span>
-                            <span ng-if="record.copyright">copyright infringement</span><br> {{record.additionalInformation}}
-                        </div>
+                        <div class="col-xs-2"><span ng-bind="record.schema|schemaName"></span></div>
+                        <div class="col-xs-2"><span ng-bind="record.reportedBy"></span></div>
+                        <div class="col-xs-2"><span ng-if="record.meta" ng-bind="record.meta.createdOn|formatDateWithTime"></span></div>
+                        <div class="col-xs-3"><span ng-if="record.incorrect">incorrecta o inadecuada |</span> <span ng-if="record.broken">enlace roto o información desactualizada |</span> <span ng-if="record.copyright">infracción a los derechos de autor</span><br> <span ng-bind="record.additionalInformation"></span></div>
                         <div class="col-xs-3">
                             <input type="button" class="btn btn-primary" value="View Record" ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)" />
                             <input type="button" class="btn btn-primary" value="Add Comments" ng-click="addComments($event, record)" />
                             <input type="button" class="btn btn-warning" value="Delete" ng-click="delete($event, record)" />
                         </div>
                     </div>
-                    <div ng-if="record.history">
-                        <!--<div class="col-xs-1"></div>-->
-                        <table class="table table-striped" style="margin:auto;width:80%">
+                    <div ng-if="record.history"><!--<div class="col-xs-1"></div>--><table class="table table-striped" style="margin:auto;width:80%">
                             <thead class="row " style="padding:10px;border-bottom:1px solid white;">                
-                                <td>No.</td>
-                                <td>Date</td>
-                                <td>Status</td>
-                                <td>comments</td>
+                                <td>N°</td>
+                                <td>Fecha</td>
+                                <td>Estado</td>
+                                <td>observaciones</td>
                             </thead>
                             <tbody class="row table-striped table-hover" >                
-                                <td>{{record.history.length+1}}</td>
-                                <td>{{record.meta.modifiedOn|formatDateWithTime}} by {{record.meta.modifiedBy}}</td>
-                                <td>{{record.status}}</td>
-                                <td>{{record.comments}}</td>
+                                <td ng-bind="record.history.length+1"></td>
+                                <td ng-bind="record.meta.modifiedOn|formatDateWithTime + ' by ' + record.meta.modifiedBy"></td>
+                                <td ng-bind="record.status"></td>
+                                <td ng-bind="record.comments"></td>
                             </tbody>
                              <tbody class="row table-striped table-hover" 
                              ng-repeat="history in record.history | orderBy:'version':'asc'">                
-                                <td>{{history.meta.version}}</td>
-                                <td>{{history.meta.modifiedOn|formatDateWithTime}} by {{history.meta.modifiedBy}}</td>
-                                <td>{{history.status}}</td>
-                                <td>{{history.comments||history.additionalInformation}}</td>
+                                <td ng-bind="history.meta.version"></td>
+                                <td ng-bind="history.meta.modifiedOn|formatDateWithTime + ' by ' + history.meta.modifiedBy"></td>
+                                <td ng-bind="history.status"></td>
+                                <td ng-bind="history.comments||history.additionalInformation"></td>
                             </tbody>
-                        </table>
-                        <!--<div class="col-xs-1"></div>-->
-                    </div>
+                        </table><!--<div class="col-xs-1"></div>--></div>
                     <div ng-if="record.showDoc">
                         <div style="padding:35px 0px 15px 0px!important;">
                             <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="tdue" link-target="_blank"></record-loader>
@@ -83,24 +65,22 @@
 
     <script type="text/ng-template" trados-translation="true" id="addCommentsDialog">
         <div class="modal-header">           
-            <h3 class="modal-title">
-               {{record.schema|schemaName}} : - {{record.reportedBy}}
-            </h3> 
+            <h3 class="modal-title"><span ng-bind="record.schema|schemaName + ' : -' + record.reportedBy"></span></h3> 
         </div>
 
         <div class="modal-body">
             <div class="form-group row">
-                <label for="example-text-input" class="col-xs-2 col-form-label">Status</label>
+                <label for="example-text-input" class="col-xs-2 col-form-label">Estado</label>
                 <div class="col-xs-10">
                     <select class="form-control" style="width:10%" required name="status" ng-model="record.status">
-                        <option value="Read">Read</option>
-                        <option value="Not a issue">Not a issue</option>
-                        <option value="Record owner contacted">Record owner contacted</option>
+                        <option value="Read">Leer</option>
+                        <option value="Not a issue">Sin problemas</option>
+                        <option value="Record owner contacted">Propietario del registro contactado</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-xs-2 col-form-label">Comments</label>
+                <label class="col-xs-2 col-form-label">Observaciones</label>
                 <div class="col-xs-10">
                     <textarea rows="3" class="form-control"  id="comments" ng-model="record.comments"/>
                 </div>
@@ -108,39 +88,27 @@
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save()" ng-disabled="loading">Submit</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancelar</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save()" ng-disabled="loading">Presentar</button>
         </div>
     </script>
 
 
     <script type="text/ng-template" trados-translation="true" id="confirmDeleteDialog">
         <div class="modal-header">           
-            <h3 class="modal-title">
-              Confirm Delete?
-            </h3> 
+            <h3 class="modal-title">¿Confirma borrar?</h3> 
         </div>
 
         <div class="modal-body">             
-                <div class="col-xs-12 col-form-label">
-                   Schema : {{record.schema|schemaName}}
-                </div>
-                <div class="col-xs-12 col-form-label">
-                   Reported By : {{record.reportedBy}}
-                </div>
-                <div class="col-xs-12 col-form-label">
-                    Reported On : <span ng-if="record.meta">{{record.meta.createdOn|formatDate}}</span>
-                </div>
-                <div class="col-xs-12 col-form-label">
-                   Information : <span ng-if="record.incorrect">incorrect or inappropriate |</span>
-                    <span ng-if="record.broken">broken link or outdated information |</span>
-                    <span ng-if="record.copyright">copyright infringement</span><br> {{record.additionalInformation}}
-                </div>
+                <div class="col-xs-12 col-form-label">Esquema: <span ng-bind="record.schema|schemaName"></span></div>
+                <div class="col-xs-12 col-form-label">Informado por: <span ng-bind="record.reportedBy"></span></div>
+                <div class="col-xs-12 col-form-label">Informado el: <span ng-if="record.meta"><span ng-bind="record.meta.createdOn|formatDate"></span></div>
+                <div class="col-xs-12 col-form-label">Información: <span ng-if="record.incorrect">incorrecta o inadecuada |</span> <span ng-if="record.broken">enlace roto o información desactualizada |</span> <span ng-if="record.copyright">infracción a los derechos de autor</span><br> <span ng-bind="record.additionalInformation"></span></div>
         </div>
 
         <div class="modal-footer">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">No</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Yes</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">Si</button>
         </div>
     </script>
 

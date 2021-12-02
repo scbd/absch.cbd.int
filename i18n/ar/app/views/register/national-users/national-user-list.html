@@ -70,7 +70,7 @@
                             <td colspan="4"><i class="fa fa-cog fa-spin fa-fw"></i> قيد التحميل ...</td>
                         </tr>
                         <tr ng-if="!!users">
-                            <td colspan="3" ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length">| <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">عرض أكثر <i class="fa fa-caret-down"></i></a> <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">عرض أقل <i class="fa fa-caret-up"></i></a></td>
+                            <td colspan="3"><span ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span> | <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">عرض أكثر <i class="fa fa-caret-down"></i></a> <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">عرض أقل <i class="fa fa-caret-up"></i></a></td>
                             <td class="text-right">
                                 <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">إضافة مستخدم مفوض <i class="fa fa-plus-circle"></i></button>
                             </td>
