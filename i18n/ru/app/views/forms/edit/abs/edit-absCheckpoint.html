@@ -1,0 +1,195 @@
+﻿<div   >
+
+    <edit-header></edit-header>
+
+
+    <div class="innerPageEditForm edit-abs-checkpoints"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" >
+
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+                        <form name="editForm" style="margin-top:10px" class="editForm" >
+                                <div class="editForm" ng-show="tab=='edit'" km-tab="edit">
+                                    <legend name="formInfo" style="display:none"></legend>
+                                    <section>
+                                    <legend name="generalInfo">Общая информация</legend>
+              
+                                    <div class="row">
+                                        <div class="col-xs-12" >
+                                            <div class="km-control-group" name="header.languages" required caption="Выберите язык(и) для представления этой записи:">
+                                                <div class="indent">
+                                                    <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+              
+                                     <div class="col-xs-12">
+                                            <div class="km-control-group" name="government" required caption="Страна">
+                                              <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Выберите страну..."></div>
+                                            </div>
+                                        </div>
+              
+              
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                                <div class="km-control-group" name="name" required caption="Название контрольного пункта">
+                                                    <div class="help-info">Имейте в виду, что название контрольного пункта поможет идентифицировать запись в Механизме посредничества для регулирования ДГРСИВ.</div>
+                                                    <div km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    </section>
+              
+                                    <section>
+              
+                                    <legend name="responsibilities–title">Обязанности</legend><!-- <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="responsibleFunctions" required caption="Responsible functions">
+                                                <div km-term-check required ng-model="document.responsibleFunctions" locales="document.header.languages"
+                                                     terms="options.responsibleFunctions()"  binding-type="term[]" ng-change="onResponsibleFunctionsChange(document.responsibleFunctions)"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="hasPointToCollect">
+                                        <div class="col-xs-12">
+                                            <label>Stage at which information is collected or received</label>
+                                            <div class="help-info">Article 17, paragraph 1 (a) (i) provides that designated checkpoints would collect or receive relevant information related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, as appropriate; subparagraph (iv) provides that checkpoints should have functions relevant to the utilization of genetic resources, or to the collection of relevant information at, inter alia, any stage of research, development, innovation, pre commercialization or commercialization. </div>
+                                            <div class="km-control-group chain-stage-value" name="valueChainStage" caption="">
+                                                <div km-term-radio ng-model="document.valueChainStage" locales="document.header.languages"
+                                                     terms="options.valueChainStage()"  binding-type="term" show-other="true"></div>
+                                            </div>
+                                        </div>
+                                    </div> --><div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="responsibilities" caption="Краткое описание любых дополнительных обязанностей (не более 300 символов)">
+                                                   <div class="help-info">Краткое описание обязанностей контрольного пункта поможет пользователям генетических ресурсов и другим лицам установить и уточнить роль и функции контрольного пункта, касающиеся сбора соответствующей информации об использовании ресурсов, в частности на любом этапе исследований, разработок, введения новшеств, подготовки к коммерциализации или коммерциализации</div>
+                                                <div km-rich-textbox name="responsibilities" rows="6" ng-model="document.responsibilities" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                                <div class="km-control-group" name="jurisdiction" caption="Район юрисдикции">
+                                                    <div class="help-info">При наличии одного или нескольких контрольных пунктов информация о районе юрисдикции (национального/федерального, субнационального или общинного уровня) может помочь уточнить их различные обязанности с учетом географической зоны ответственности.</div>
+                                                     <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="isSubNational()">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="Название субнациональной юрисдикции">
+                                                <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="isCommunity()">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="Название общины">
+                                                <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-show="isOthers()">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="Название другой юрисдикции">
+                                                <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div><!-- <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="inquiryContact" caption="Contact information for inquires related to the information gathered or the functioning of this checkpoint:">
+                                                <div document-selector on-build-query="onContactQuery(searchText)"
+                                                     ng-model="document.inquiryContact"
+                                                     question="inquiryContact" allow-new="true" allow-new-schema="contact">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --></section>
+              
+                                    <section>
+              
+                                    <legend name="nationalAuthorities">Национальный(-ые) орган(ы) власти, получающие информацию, собранную или полученную назначенным контрольным пунктом</legend>
+                                    <div class="help-info">В соответствии с подпунктами i) и iii) пункта 1 а) статьи 17 Нагойского протокола  информация, полученная или собранная контрольным пунктом, связанная с предварительным обоснованным согласием, источником генетического ресурса, с заключением взаимосогласованных условий и/или с использованием  генетических ресурсов, в том числе содержащаяся в международно признанном сертификате о соответствии требованиям, должна представляться соответствующим национальным органам власти, Стороне, дающей предварительное обоснованное согласие, и в Механизм посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод (в зависимости от обстоятельств). На основе представленной информации Механизм посредничества для регулирования ДГРСИВ выпускает коммюнике и автоматически направляет в порядке любезности его копию национальному(-ым) органу(-ам) власти вашей страны. <br><br> Поэтому контакты, указанные в разделе о национальном(-ых) органе(-ах) власти ниже, будут получать информацию, собранную или полученную назначенным контрольным пунктом (и получать уведомления от Механизма посредничества для регулирования ДГРСИВ посредством коммюнике контрольных пунктов (ККП)). При наличии нескольких органов власти укажите несколько номеров записей или прикрепите несколько форм представления контактной информации. Просьба заметить, что Сторона, предоставляющая предварительное обоснованное согласие, будет автоматически получать информацию, собранную или полученную контрольным пунктом. Укажите национальный орган власти или контактное лицо в вашей стране, которым следует направлять информацию, собранную или полученную назначенным контрольным пунктом. При наличии нескольких органов власти укажите несколько номеров записей или прикрепите несколько форм представления контактной информации. Просьба заметить, что Сторона, предоставляющая предварительное обоснованное согласие, будет автоматически получать информацию, собранную или полученную контрольным пунктом.</div>
+                                    
+                                    
+                                    
+              
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" required name="informAllAuthorities" caption="Направить копию коммюнике всем компетентным национальным органам власти в моей стране">
+                                                <div class="km-yes-no" name="informAllAuthorities" ng-model="document.informAllAuthorities"></div>
+                                            </div>
+                                        </div>
+                                    </div><!--  <div class="row" ng-show="document.informAllAuthorities==false">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" required name="authoritiesToInform" caption="Please select which competent national authority/ies from the list to whom you wish to send a copy of the communiqué">
+                                                <div km-reference required name="authoritiesToInform" ng-model="document.authoritiesToInform" loader="loadRecords(identifier, 'authority')">
+                                                    <div>
+                                                        <div>
+                                                            <strong>{{reference.title | lstring}}</strong>
+                                                        </div>
+                                                        <div>{{reference.summary | lstring}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> --><div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="contactsToInform" caption="Выберите национальные органы власти, которым следует направлять копию коммюнике">
+                                                <div document-selector on-build-query="onContactQuery(searchText)"
+                                                     ng-disabled="!document.government.identifier"
+                                                     ng-model="document.contactsToInform"
+                                                     question="contactsToInform" allow-new="true" allow-new-schema="contact"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </section>
+              
+                                    <section>
+              
+                                    <legend>Дополнительная информация</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="relevantInformation" caption="Дополнительная информация">
+                                                <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                                <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+              
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="relevantDocuments" caption="Адреса других соответствующих веб-сайтов/или прилагаемые документы">
+                                                <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </section>
+              
+                                    <section>
+                                    <legend>Примечания</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="notes">
+                                                <div class="help-info">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи. Оно будет скрыто после опубликования записи. Данное поле не предназначено для конфиденциальной информации.</div>                                                
+											    <div km-notes name="notes" ng-model="document.notes"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </section>
+                                </div>
+              
+                            </form>
+                </edit-form>
+                <review-form>
+                    <view-abs-checkpoint ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-checkpoint>
+                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
+
+        </div>
+      </div>
+</div>

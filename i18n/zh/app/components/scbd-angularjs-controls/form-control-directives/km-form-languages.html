@@ -1,0 +1,5 @@
+<span><div ng-class="{'alert alert-danger':ctrl.showLanguageError}" ng-if="initialized">
+        <div ng-if="ctrl.showLanguageError" >请至少选择一种联合国语言方可继续。</div><span km-select data-multiple="{{ctrl.multiple}}" ng-model="ctrl.binding" binding-type="string"
+            placeholder="可用语言" items="ctrl.options.locales()" minimum="1"
+            show-others="ctrl.options.otherLocales()" ng-change="ctrl.validateUNLanguage()" 
+            api="ctrl.selectApi" filter-type="startsWith" instance-id="{{::instanceId}}"></span></div></span>

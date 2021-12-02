@@ -1,0 +1,184 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange" ng-show="display('header')">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+    </div>
+	<div class="record-body panel-body">
+
+			
+		<document-date></document-date><br><div ng-show="document.title">
+			<label>Название</label>
+			<div class="km-value km-pre" ng-bind="document.title | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.resourceTypes">
+			<label>Type of resource</label>
+            <div class="km-value">
+			<ul class="list">
+				<li ng-repeat="resourceType in document.resourceTypes"><span ng-bind="resourceType | term:locale"></span></li>
+			</ul>
+            </div>
+		</div>
+
+		<div ng-show="document.fileFormat">
+			<label>Формат/тип файла</label>
+			<div class="km-value" ng-bind="document.fileFormat | term:locale"></div>
+		</div>
+
+		<div ng-show="document.formatDetails">
+			<label>Сведения о формате</label>
+			<div class="km-value km-pre" ng-bind="document.formatDetails | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.purpose">
+			<label>Please identify the main purpose of the resource</label>
+			<div class="km-value">
+            <ul class="list">
+				<li ng-repeat="term in document.purpose"><span ng-bind="term | term:locale"></span></li>
+			</ul>
+            </div>
+		</div>
+
+		<div ng-show="document.targetGroups">
+			<label>Основная(-ые) целевая(-ые) группа(-ы)/бенефициары</label>
+            <div class="km-value">
+                <ul class="list">
+                    <li ng-repeat="term in document.targetGroups"><span ng-bind="term | term:locale"></span></li>
+                </ul>
+            </div>
+		</div>
+
+		<div ng-show="document.expertiseLevel">
+			<label>Уровень содержания или уровень знаний/экспертных знаний аудитории, для которой предназначен ресурс</label>
+			<div class="km-value" ng-bind="document.expertiseLevel | term:locale"></div>
+		</div>
+
+		<div ng-show="document.authors">
+			<label>Автор(ы)</label>
+			<div class="km-value km-pre" ng-bind="document.authors | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.organizations">
+			<label>Организация(-ии), участвующая(-ие) в публикации данного ресурса</label>
+			<div class="km-value" ng-repeat="contact in document.organizations">
+				<div view-record-reference ng-model="contact" locale="locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.publicationYear">
+			<label>Год публикации</label>
+			<div class="km-value" ng-bind="document.publicationYear"></div>
+		</div>
+
+		<div ng-show="document.rights">
+			<label>Права</label>
+			<div class="km-value km-pre" ng-bind="document.rights | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.source">
+			<label>Источник</label>
+			<div class="km-value km-pre" ng-bind="document.source | lstring:locale"></div>
+		</div>
+
+		<legend ng-show="document.resourceLinks || document.covers">Доступ к ресурсу</legend>
+
+		<div ng-show="document.resourceLinks">
+			<label>Ссылка на ресурс(ы)</label>
+			<div class="km-value" compare-val="Link to the resource(s)">
+				<km-link-list  ng-model="document.resourceLinks"></km-link-list>
+			</div>
+		</div>
+
+		<div ng-show="document.covers">
+			<label >Изображение(-я) обложки</label>
+			<div class="km-value"><a rel="noopener" translation-url  ng-repeat="link in document.covers" ng-href="{{link.url|encodeURI}}" target="{{target}}"> <img class="img-polaroid" ng-src="{{link.url}}" alt="{{link.name}}" style="max-height: 150px; max-width: 150px" /> </a></div>
+		</div>
+
+		<legend ng-show="document.summary || document.regions">Information on the content of resource</legend>
+
+		<div ng-show="document.summary">
+			<label>Резюме</label>
+			<div class="km-value km-pre" ng-bind="document.summary | lstring:locale"></div>
+		</div>
+
+		<div ng-show="document.regions">
+			<label>Страна(ы), региональная(-ые) или экономическая(-ие) группа(ы), имеющие отношение к ресурсу</label>
+			<div class="km-value">
+            <ul class="list">
+				<li ng-repeat="term in document.regions | orderBy:name"><span ng-bind="term | term:locale"></span></li>
+			</ul>
+            </div>
+		</div>
+
+
+		<div ng-show="document.cbdSubjects || document.aichiTargets">
+
+			<legend>Предметные области и Айтинские целевые задачи в области биоразнообразия, рассматриваемые на данном ресурсе</legend>
+
+			<div ng-show="document.cbdSubjects">
+				<label>Предмет/тема/вопрос</label>
+					<div class="km-value">
+						<ul class="list">
+							<li ng-repeat="term in document.cbdSubjects"><span ng-bind="term | term:locale"></span></li>
+						</ul>
+					</div>
+			</div>
+
+			<div ng-show="document.aichiTargets">
+				<div ng-show="document.aichiTargets">
+					<label>Соответствующая(-ие) Айтинская(-ие) целевая(-ые) задача(-и) в области биоразнообразия</label>
+					<div class="km-value">
+                     <ul class="list">
+						<li ng-repeat="term in document.aichiTargets"><span ng-bind="term | term:locale"></span></li>
+					</ul>
+                    </div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="document.absKeyAreas">
+			<legend>Механизм посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод (МП-ДГРСИВ)</legend>
+
+			<label>Ключевые области и стратегические меры по созданию и развитию потенциала</label>
+			<div class="km-value">
+              <ul class="list">
+				<li ng-repeat="term in document.absKeyAreas"><span ng-bind="term | term:locale"></span></li>
+			</ul>
+            </div>
+		</div>
+
+		<div ng-show="document.bchSubjects">
+
+			<legend>Картахенский протокол по биобезопасности</legend>
+
+			<div ng-show="document.bchSubjects">
+				<label>Тематическая(-ие) область(-и)</label>
+				<div class="km-value">
+                <ul class="list">
+					<li ng-repeat="term in document.bchSubjects"><span ng-bind="term | term:locale"></span></li>
+				</ul>
+			</div>
+            </div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Дополнительная информация</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div class="km-value km-pre" ng-bind-html="document.relevantInformation | lstring:locale | markdown"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
+				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+</div>
+
+	<div document-metadata  class="panel-footer"></div>
+
+</div>

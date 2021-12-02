@@ -1,0 +1,183 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+		<div class="pull-right"><a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/decisions"><i class="fa fa-external-link"></i> 有关改性活生物体</a><a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/risk-assessments" ><i class="fa fa-external-link"></i>风险评估的决定</a> &nbsp;<document-date></document-date>
+		</div>
+		
+		<legend>改性活生物体身份</legend>
+		<div ng-show="document.info.documentID" style="text-align: center">
+			<div class="help-info">下图通过改性活生物体的唯一标识符、商品名和生物安全信息交换所页面的链接来加以识别。点击以在你的电脑上下载大图片。有关如何使用的帮助，请访问改性活生物体快速链接页面。</div><a rel="noopener" ng-href="/api/v2020/bch/lmo-qrcode/{{document.header.identifier|encodeURIComponent}}?download=true"><img style="max-width:100%;" class="responsive" border="none" ng-src="/api/v2020/bch/lmo-qrcode/{{document.header.identifier}}"></a></div>
+		<div ng-show="document.identity">
+			<label>名称</label>
+			<div compare-val>
+				<km-value-ml value="document.identity" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.transformationEvent">
+			<label>转化事件</label>
+			<div compare-val>
+				<div ng-bind="document.transformationEvent" class="km-value"></div>
+			</div>
+		</div>
+		<div ng-show="document.uniqueIdentification">
+			<label>唯一识别码</label>
+			<div compare-val>
+			<div ng-bind="document.uniqueIdentification" class="km-value"></div></div>
+		</div>
+		<div ng-show="document.developers">
+			<label>开发者</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.developers" >						
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<div ng-show="document.description">
+			<label>说明</label>
+			<div compare-val>
+			<km-value-ml html value="document.description" locales="locale"></km-value-ml></div>
+		</div>
+
+		<div ng-show="document.recipientOrganisms">
+			<label>受体生物体或亲本生物体</label>
+			<div class="help-info" style="font-size: 10px;">“受体生物体”一词是指经受基因改性的生物体（已改性或未改性），而“亲本生物体”是指那些参与交叉育种或细胞融合的生物体。</div>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.recipientOrganisms" >						
+						<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.recipientOrganismCollectionPoint">
+			<label>收集或获得受体生物体或亲本生物体的地点</label>
+			<div compare-val>			
+			<km-value-ml html value="document.recipientOrganismCollectionPoint" locales="locale"></km-value-ml></div>
+		</div>
+		<div ng-show="document.linkedModifiedOrganisms">
+			<label>相关改性活生物体</label>	
+			<div class="km-value" compare-val>	
+				<ul class="list">
+					<li ng-repeat="item in document.linkedModifiedOrganisms" >						
+						<view-lmo-reference ng-model='item.identifier' locale="locale"></view-lmo-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<legend>改性过程的特点</legend>
+		
+		<div ng-show="document.vector">
+			<label>载体</label><div compare-val>
+			<km-value-ml value="document.vector" locales="locale"></km-value-ml></div>
+		</div>
+		<div ng-show="document.techniqueUsed">
+			<label>基因修饰所用技术</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="use in document.techniqueUsed" ng-bind="use | term:locale"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.geneConstructs">
+			<label>基因片段构造</label>
+
+			<div class="km-value" compare-val ng-class="{'lmo-gene-construct-scroll':!printMode}">
+				<div ng-repeat="construct in document.geneConstructs" style="margin-bottom:5px;">
+					<view-lmo-gene ng-model="construct"></view-lmo-gene>
+				</div>
+			</div>
+		</div>
+		<div ng-show="document.genes">
+			<label>引入或改性基因片段</label>
+			<div class="help-info" style="font-size: 10px;">其中部分基因片段，可能以片段或片段或截短形态存在。请参见下面的说明（如适用）。</div>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.genes" >						
+						<view-record-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.geneNotes">
+			<label>有关该改性活生物体中存在之基因片段的注释</label>
+			<div compare-val>
+			<km-value-ml html value="document.geneNotes" locales="locale"></km-value-ml></div>
+		</div>
+
+
+		<legend>改性活生物体的特征</legend>		
+		<div ng-show="document.traits">
+			<label>改性性状</label>
+			<div class="km-value" compare-val>
+				<view-terms-hierarchy ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
+			</div>
+		</div>
+		<div ng-show="document.affectedGenes">
+			<label>表达受到转化影响的其他基因</label>			
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.affectedGenes" >						
+						<view-record-reference ng-model='item.identifier' locale="locale" hide-schema='true'></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="document.affectedGeneNotes">
+			<label>基因表达如何受到影响</label>
+			<div compare-val>
+			<km-value-ml value="document.affectedGeneNotes" html locales="locale"></km-value-ml></div>
+		</div>
+		<div ng-show="document.commonUses">
+			<label>改性活生物体常见用途</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="document.detectionMethod||document.detectionMethodLinks">
+			<legend>探测方法</legend>
+			<div ng-show="document.detectionMethodLinks">
+				<label>外部链接</label>
+				<div compare-val>
+				<km-link-list class="km-value" ng-model="document.detectionMethodLinks"></km-link-list></div>
+			</div>
+			<div ng-show="document.detectionMethod">
+				<label>更多信息</label>
+				<div compare-val="detectionMethodAddInformation">
+				<km-value-ml value="document.detectionMethod" html locales="locale"></km-value-ml></div>
+			</div>
+		</div>
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>更多信息</legend>
+
+			<div ng-show="document.relevantInformation">
+				<label>更多信息</label>
+				<div compare-val>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>其他相关网站地址和/或附加文件</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+					
+				</div>
+			</div>
+		</div>
+		
+		<div> 
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>		
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

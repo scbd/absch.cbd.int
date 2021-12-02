@@ -1,0 +1,80 @@
+﻿<div  id="RegisterPage">
+
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span> <!-- <div class="register-content card card-1-notrans">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:10px 10px;">
+                <h3>Record Details
+                    <span class="helpinfoInline">
+                        <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+                    </span>
+                </h3>
+
+                <div ng-if="showInfo" class="well well-help">
+                    View all information about a record.
+                </div>
+            </div>
+        </div> --><div class="register-content-content">
+
+            <div block-region activate="loading"></div>
+
+            <div ng-if="showRequestHistory">
+                <div task-id show-details="true" class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflowId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
+            </div>
+
+            <div ng-if="!showRequestHistory">
+                <record-loader show-details="true" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
+            </div><!--<div class="row" style="margin:0;padding:0;">
+                <div class="col-xs-12">
+                    <div style="margin-top:40px;">
+                        <h4 style=""> Notifications related to this record</h4>
+                        <xuser-notifications-panel doc-id="document.identifier"></xuser-notifications-panel>
+                    </div>
+                </div>
+            </div>--><div id="deleteRecordModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">您要删除哪个项目吗？ <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        </div>
+                        <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
+
+                            <div ng-show="isDraft(recordToDelete)" class="well">
+                                <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">删除草案</button><em>草案 <span ng-bind="recordToDelete.documentID||'[new]'"></span></em><p><b ng-bind="recordToDelete.workingDocumentTitle|lstring"></b></p>
+                                <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
+                            </div>
+
+                            <div ng-show="isPublished(recordToDelete)" class="well">
+                                <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="注意：所有待定草案都会被删除">取消发布并删除记录</button><em>发布记录 <span ng-bind="recordToDelete.documentID"></span></em><p><b ng-bind="recordToDelete.title|lstring"></b></p>
+                                <p ng-bind-html="recordToDelete.summary|lstring"></p>
+                            </div>
+
+                        </div>
+                        <div class="modal-body" ng-show="cantDelete || pilotDelete">不允许删除已发布的 ABSCH-IRCC 记录。IRCC 记录可修改，并设置为<i>已撤销</i>。<i>撤销</i>的 IRCC 记录不再有效。 <!-- <span class="label label-danger">The delete button is only enabled for pilot phase.</span> --></div>
+                        <div class="modal-body" ng-show="iacCantDelete">您的权限地无法让你删除文档。</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">关闭</button>
+                        </div>
+                    </div><!-- /.modal-content --></div><!-- /.modal-dialog --></div>
+
+            <div id="recallWorkflowRequestModal" class="modal fade" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4>取消发布请求<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>您确定要召回并取消本次发布请求吗？</p>
+                        </div>
+                        <div class="modal-footer" style="margin-top:0">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">关闭</button>
+                            <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">是</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- </div> --></div><!-- controller -->

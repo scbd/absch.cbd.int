@@ -1,0 +1,11 @@
+﻿<div ng-show="showWarning">
+    <div class="well" ng-if="responsibleCNA && responsibleCNA.numFound > 0">
+        <h3 class="color-red">Une autorité nationale compétente (ANC) a déjà été enregistrée comme étant la seule ANC désignée pour votre pays.</h3>
+            <h5 class="color-red">Vous pouvez toutefois enregistré un brouillon mais vous ne pourrez le publier en tant que nouvelle ANC avant d’avoir mis ce fichier à jour :</h5>
+            <div>
+            <div ng-repeat="rec in responsibleCNA.docs">
+                <result-default doc='rec' type="nationalRecords"></result-default>
+            </div>
+            </div>
+    </div>
+</div>

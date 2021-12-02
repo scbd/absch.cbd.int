@@ -1,0 +1,76 @@
+<div>
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
+			<div block-region activate="blockEditForm"></div> 
+		</div>   
+		<div class="registerpage-content">
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
+				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
+				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
+				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div ng-show="tab=='edit'" km-tab="edit">
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Información general</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="header.languages" required
+												caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
+												<div class="indent">
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="government" required caption="País">
+												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
+													filter="startsWithFilter" ng-change="onGovernmentChange()" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="profile" caption="Información adicional para el perfil del país">
+												<div class="help-block">Utilice este campo para aportar información adicional pertinente que aparecerá como parte del perfil del país.</div>
+												<div km-rich-textbox required ng-model="document.profile" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div> 
+									<legend>Notas</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="notes"><span class="help-block">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.</span><div km-notes name="notes" ng-model="document.notes"></div>
+											</div>
+										</div>
+									</div> 
+							</section> 
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<view-country-profile ng-model="review.document" locale="review.locale" >
+					</view-country-profile>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
+			<div style="margin:10px;">
+				<h1>Perfil del país para el Centro de Intercambio de la Información sobre Seguridad de la Biotecnología</h1>
+				<hr>
+				<div class=" alert alert-danger">
+					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
+					<div style="display:inline-block">Se permite que cada gobierno presente un solo registro de perfil del país en el Centro de Intercambio de Información sobre Seguridad de la Biotecnología. El perfil del país de su gobierno ya existe en el Centro de Intercambio de Información sobre Seguridad de la Biotecnología. Se lo redirigirá a ese registro en <span ng-bind="alertSeconds"></span> algunos segundos.</div>
+				</div>
+				<div class="ngdialog-buttons" >
+					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirigir ahora</button>
+				</div>
+			</div>
+		</script>
+	</div> 
+</div>

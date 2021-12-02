@@ -1,0 +1,189 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4 ng-show="display('header')"><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+			
+		<document-date></document-date>
+
+		<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">Общая информация</legend>
+
+		<div ng-show="document.government">
+			<label name="country">Страна</label>
+			<div class="km-value"><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a><km-value-ml value="document.name" locales="locale"></km-value-ml><span ng-party-status government="document.government" id="government"></span></div>
+		</div>
+
+		<div ng-show="document.title">
+			<label>Название</label>
+			<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
+		</div>
+
+		<div ng-show="document.description">
+			<label>Краткое описание</label>
+			<div compare-val>
+				<div class="km-value" ng-bind-html="document.description | lstring:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.jurisdiction">
+			<label>Юрисдикция(-и)</label>
+			<div class="km-value" compare-val><span ng-bind="document.jurisdiction|term:locale"></span> <span ng-if="document.jurisdictionName ">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span></div>
+		</div>
+
+
+		<div ng-show="document.jurisdictionRegions">
+			<label>Название страны и/или географической(-их) или политической(-их)/экономической(-их) группы (групп)</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="term in document.jurisdictionRegions"><span ng-bind="term|term:locale"></span></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div ng-show="document.status">
+			<label>Текущий статус меры</label>
+			<div compare-val>
+				<km-value-ml value="document.status" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.adoption">
+			<label>Дата принятия</label>
+			<div class="km-value" compare-val><span ng-bind="document.adoption | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.entryIntoForce">
+			<label>Дата вступления в силу</label>
+			<div class="km-value" compare-val><span ng-bind="document.entryIntoForce | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.retired">
+			<label>Дата прекращения применения</label>
+			<div class="km-value" compare-val><span ng-bind="document.retired | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.limitedApplication">
+			<label>Дата истечения срока действия меры</label>
+			<div class="km-value" compare-val><span ng-bind="document.limitedApplication | formatDate"></span></div>
+		</div>
+
+
+		<div ng-show="document.type">
+			<label>Тип документа/меры</label>
+			<div  compare-val>
+				<km-value-ml value="document.type" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.isModelContractualClause">
+			<label>Мера содержит типовые договорные положения</label>
+			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription"><span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span></div>
+		</div>
+		<div ng-show="document.registeredMeasuresDescription">
+			<div class="km-value km-pre" compare-val>
+				<km-value-ml value="document.registeredMeasuresDescription | lstring:locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.documents">
+			<legend>Сведения о документе</legend>
+			<label>Текст документа</label>
+			<div class="km-value" compare-val="documents">
+				<km-link-list ng-model="document.documents"></km-link-list>
+			</div>
+		</div>
+
+		<div ng-show="document.documentTranslations">
+			<label>Перевод</label>
+			<div class="km-value" compare-val="documentTranslations">
+				<km-link-list ng-model="document.documentTranslations"></km-link-list>
+			</div>
+		</div>
+
+		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
+			<legend>Поправки</legend>
+			<div ng-show="document.amendedMeasures">
+				<label>Данная мера принята с целью внесения поправок в следующие документы:</label>
+
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.amendedMeasures">
+							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.amendmentsDescription">
+				<label>Резюме поправок</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDescription" locales="locale"></km-value-ml>
+				</div>
+			</div>
+
+		</div>
+
+		<div ng-show="document.authorities ">
+			<legend>Контактная информация регуляторного органа</legend>
+			<div ng-repeat="item in document.authorities">
+				<div view-record-reference ng-model="item" locale="locale" class="km-value"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
+			<legend>Поправки</legend>
+			<label>В данную меру внесены поправки посредством:</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.measureAmendedBy">
+						<div view-record-reference ng-model="item.identifier_s" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="(document.linkedMeasures && document.linkedMeasures.length>0) || document.linkedMeasuresDescription">
+			<legend>Связи</legend>			
+			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
+				<label>Данная мера связана с:</label>
+				<ul class="list">
+					<li ng-repeat="item in document.linkedMeasures">
+						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
+			<div ng-show="document.linkedMeasuresDescription">
+				<label>Описание связей</label>
+				<div class="km-value km-pre" compare-val ng-bind-html="document.linkedMeasuresDescription | lstring:review.locale"></div>
+			</div>
+		</div>
+		<div ng-if="document.absMesasureNotApplicable">
+			<legend>Элементы меры</legend><span class="km-value confidential-text">Элементы меры, которые не применимы для данной меры.</span></div>
+		<div ng-if="document.absMeasures">
+			<div measure-matrix-elements name="absMeasures" type="single" ng-model="document.absMeasures" 
+			locale="locale" document="document" api="measureMatrixApi">
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Дополнительная информация</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val="relevantInformation" class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+
+	<div document-metadata class="panel-footer"></div>
+</div>

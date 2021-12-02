@@ -1,0 +1,215 @@
+﻿<div id="SubmitPage" >
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div id="innerPage" class="card card-1-notrans bg-white innerPageContent" style="margin:20px"  >
+        
+        <div class="register-content-header"  ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
+            <div style="padding:5px 5px;"><span class="btn-group pull-right dashboard-tour"><a rel="noopener" ng-href="#" class="help-tour link2" ng-click="tour()"><i class="fa fa-question-circle" aria-hidden="true"></i> <span class="hidden-xs hidden-sm">Просмотреть обзор</span></a></span><h3 style="padding: 0 5px 0 5px; margin: 0; font-weight: normal;"><a rel="noopener" href="/register" class="color-white"><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)</a></h3>
+            </div>
+        </div>
+        
+        <div class="register-content-content">
+            <div ng-show="msg" class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-bs-dismiss="alert" aria-hidden="true" ng-click="msg=''">&times;</button><strong ng-bind="msg"></strong></div>
+            <div class="row">
+                <div class="col-md-7 col-xs-12">
+                    <div class="btn-group-sm cf-xs-btn">
+                        <button type="button" ng-click="changeFilter('')" class="filterbtn btn btn-primary"><i  class="fa fa-2 fa-square" ng-class="{'fa-check-square':!recordFilter}"></i> <strong>Все</strong> <span class="badge badge-default" ng-bind="::listCount.all"></span></button>
+                        <button type="button" ng-click="changeFilter('isRequest')"  class="filterbtn btn btn-danger"><i class="fa fa-2 fa-square" ng-class="{'fa-check-square':recordFilter=='isRequest'}"></i> Запросы <span class="badge badge-default" ng-bind="listCount.request"></span></button>
+                        <button id="publishedRecords" type="button" ng-click="changeFilter('isPublished')" class="filterbtn btn btn-success"><i  class="fa fa-2 fa-square"  ng-class="{'fa-check-square':recordFilter=='isPublished'}"></i> Опубликовано <span class="badge badge-default" ng-bind="listCount.publish"></span></button>
+                        <button type="button" ng-click="changeFilter('isDraft')" class="filterbtn btn btn-draft"><i class="fa fa-2 fa-square" ng-class="{'fa-check-square':recordFilter=='isDraft'}"></i> Черновики <span class="badge badge-default" ng-bind="listCount.draft"></span></button>
+                        <input id="searchKeyword" type="text" ng-model="keywords" ng-keyup="searchRecord()" placeholder="Ключевое слово" class="form-control keyword input-group">
+                    </div>
+                </div>
+                <div class="col-md-5 col-xs-12">
+                    <div class="btn-group-sm pull-right cf-xs-filters">
+                        <div class="btn margin-left-2" style="border: 1px solid #ccc;" ng-if="offlineFormats">Оффлайновый формат: <span ng-repeat="(code, lang) in ::languages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
+                                ng-show="::offlineFormats[schema][code]" class="padding-left-right-2"><a rel="noopener" target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a> <span ng-if="::!$last">|</span></span></div><!--<a rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="showReference(schema);">
+                        <span class="glyphicon glyphicon-random"></span> Show Reference</a>--><button type="button" class="btn btn-sm btn-default margin-left-2" ng-click="refreshList(schema);" ng-if="showAddButton()"><i class="fa fa-refresh"></i> <span class="hidden-xs">Обновить</span></button><a rel="noopener" translation-url  ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new" class="btn btn-sm btn-primary bold" 
+                            style="color:#fff;" id="new_button" ng-if="showAddButton()"><i class="fa fa-plus-square"></i> <span class="hidden-xs">Добавить</span></a> <a rel="noopener" translation-url  ng-href="/register" class="btn btn-sm btn-primary bold" 
+                            style="color:#fff;" id="close_button"><i class="fa fa-times-circle"></i> <span class="hidden-xs">Закрыть</span></a></div>
+                </div>
+            </div>
+
+            <table class="table table-hover table-striped" style="width:100%;margin-top:20px;">
+                <thead>
+                    <tr>
+                        <th ng-click="toggleOrderBy('title|lstring')" id="titleHeader">Название</th><!-- ToDo: need to pass correct field --> <!-- <th ng-click="onSort('title.en', 'asc')" id="titleHeader">Title</th> --><th ng-if="schema=='contact'" ng-click="toggleOrderBy('body.type')" id="body.typeHeader">Тип</th>
+                        <th style="width:200px;" ng-click="toggleOrderBy('createdOn')" id="createdOnHeader">Дата последней публикации</th>
+                        <th class="hidden-xs" style="width:200px;" ng-click="toggleOrderBy('updatedOn')" id="updatedOnHeader">Дата последнего обновления</th>
+                        <th style="width:150px;" ng-click="toggleOrderBy('status')" id="statusHeader">Статус</th>
+                        <th style="width:100px;" ng-bind="filteredRecords.length+' Record(s)'"></th>
+                    </tr>
+                </thead>
+                <tr ng-cloak ng-show="loading">
+                    <td colspan="6" style="text-align:center;padding:30px;"><i class="fa fa-spin fa-cog" ></i> loading...</td>
+                </tr>
+                <tr ng-cloak ng-show="!loading && filteredRecords.length <= 0">
+                    <td colspan="6" style="text-align:center;padding:30px;"><strong>Записей не найдено.</strong></td>
+                </tr><!--                <tbody ng-repeat="record in  records">--><tbody ng-repeat="record in (filteredRecords = (records | filter:statusFilter | orderBy:orderBy))">
+                    <tr id="record{{record.identifier}}" ng-class="{'bg-grey': displayDetails||displayRequest}">
+
+                        <td style="width:40%; padding-left:10px;"><span ng-show="isPublished(record) && !isDraft(record) && !isRequest(record)"><a rel="noopener" translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view" ng-show="record.documentID"><span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span></a></span> <span ng-show="isRequest(record)"><a rel="noopener" translation-url  ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span></a></span> <span ng-show="isDraft(record)  && !isRequest(record)"><a rel="noopener" translation-url  href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit"><span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span></a></span><div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#666;" ng-if="isPublished(record)"><span ng-bind="record | uniqueID"></span> <span ng-show="isDraft(record) || (isPublished(record) && isDraft(record))" class="label label-default small">черновик</span></div>
+                        </td>
+                        <td ng-if="schema=='contact'"><span style="font-size:11px;font-weight:500;text-transform:uppercase;padding:4px 10px 4px 4px;color:#666" ng-bind="record.body.type"></span></td>
+                        <td>
+                            <div ng-if="record.updatedBy && isPublished(record)"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}"><strong ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></strong></a> </br> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.updatedOn | formatDateWithTime"></span></div>
+                            <div ng-if="record.createdBy && !record.updatedBy && isPublished(record)"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}"><strong ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></strong></a> </br> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.createdOn | formatDateWithTime"></span></div>
+                        </td>
+                        <td class="hidden-xs">
+                            <div ng-if="record.workingDocumentUpdatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}"><strong ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></strong></a> </br> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span></div>
+                            <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}"><strong ng-bind="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></strong></a> </br> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span></div>
+                            <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
+                                <div ng-show="record.updatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.updatedBy.email|encodeURIComponent}}"><strong ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></strong></a> </br> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.updatedOn | formatDateWithTime"></span></div>
+                                <div ng-show="record.createdBy && !record.updatedBy"><a rel="noopener" translation-url  style="color:#666" href="mailto:{{record.createdBy.email|encodeURIComponent}}"><strong ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></strong></a> </br> <span style="font-size:10px;white-space:nowrap;" ng-bind="record.createdOn | formatDateWithTime"></span></div>
+                            </div>
+                        </td>
+                        <td><span ng-if="record.workflowActivityStatus == 'pending'" ><div class="btn btn-primary color-white" ><i class="fa fa-spin fa-spinner"></i> Обработка...</div></span><div ng-show="record.workflowActivityStatus!='pending'">
+
+                                <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold">Опубликовано</div>
+                                <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold">Черновик</div><span class="color-red bold" ng-show="record.revoked">Отозвано</span> <a rel="noopener" translation-url  class="btn btn-danger color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">На утверждении</a><div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">На утверждении</div>
+                                <div ng-show="!record.revoked && isRequest(record) && record.isUpdating">
+                                    <div ng-show="isRequest(record) && record.isUpdating"><a rel="noopener" translation-url  class="btn btn-info" type="button" ng-click="return" style="padding:4px;"><strong><i class="fa fa-spin fa-cog"></i> Обработка...</strong></a></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="btn-group document_buttons btn-group-sm" style="width:100px;" ng-show="record.workflowActivityStatus!='pending'">
+                                <button id="duplicateRecord" ng-show="showAddButton()" title="Дублировать" type="button" class="btn btn-default" ng-click="askDuplicate(record)"><i class="fa fa-files-o"></i></button>
+                                <button title="Заблокировано для редактирования" ng-show="!record.revoked && isRequest(record) && showAddButton()" type="button" class="btn btn-default"><i class="glyphicon glyphicon-lock"></i></button>
+                                <button title="Отменить запрос" ng-show="!record.revoked && isRequest(record) && showAddButton() && isMyRecord(record)" type="button" class="btn btn-default" ng-click="askRecallWorkflowRequest(record)"><i class="fa fa-undo"></i></button><a id="editRecord" rel="noopener" translation-url  title="Edit" ng-show="!record.revoked && !isRequest(record) && showAddButton()" type="button" class="btn btn-default" href="/register/{{record.type|urlSchemaShortName}}/{{record.identifier}}/edit"><i class="fa fa-edit"></i></a><button id="deleteRecord" title="Удалить" ng-show="!record.revoked && !isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button" class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr ng-if="displayReference && record.body && record.body.badRevisions && record.body.badRevisions.length > 0" style="border:0!important;background-color:inherit!important;" ng-class="{'bg-grey': displayReference}">
+                        <td colspan="6" style="border:0!important;">
+
+                            <div ng-show="displayReference" block-region activate=" loading">
+
+                                <div class="btn-group-sm pull-right"><a rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="loading = !loading"><span class="glyphicon glyphicon-random"></span> Обновить</a></div>
+                                <table class="table table-striped" style="width:100%">
+                                    <thead>
+                                        <tr>
+                                            <td>Поле</td>
+                                            <td>Текущая версия поля</td>
+                                            <td>Версия справочной записи</td>
+                                            <td></td>
+                                        </tr>
+                                    </thead>
+                                    <tr ng-repeat="badRevision in record.body.badRevisions">
+                                        <td ng-bind="badRevision.field"></td>
+                                        <td ng-bind="badRevision.fieldRevision"></td>
+                                        <td ng-bind="badRevision.currentRevision"></td>
+                                        <td><a rel="noopener" translation-url  ng-href="#" class="btn btn-sm btn-primary" ng-click="updateReference(record,badRevision.field);"><span class="glyphicon glyphicon-random"></span> Обновить <span ng-bind="badRevision.field"></span></a></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <pagination class="text-center" ng-if="listResult.recordsFound>25 && !isDraftRecord" current-page="listResult.currentPage"
+                page-count="listResult.pageCount" on-page-change="onPageChange(page)" page-size="listResult.rowsPerPage"
+                num-found="listResult.recordsFound" on-page-size-changed="onPageSizeChanged(size)"></pagination>
+
+            <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
+                
+                    <div class="modal-header">
+                        <h4 class="modal-title" >Подтвердить изменение следующей(-их) записи(-ей) <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body  bg-white" >
+                        
+                        <div ng-show="isDraft(recordToDelete)" class="well" style="font-size:14px;">
+                            <div style="font-size:11px;font-weight:bold;text-transform:uppercase;color:#999;border-bottom:1px solid #ddd;margin-bottom:10px;">ЧЕРНОВИК</div>
+                            <div class="row">     
+                                <div class="col-xs-2" class="color-litegrey">Название:</div><div class="col-xs-10" style="font-weight:bold" ng-bind="recordToDelete.workingDocumentTitle|lstring"></div>
+                              </div>
+                             <div class="row">    
+                                <div class="col-xs-2" class="small color-litegrey">Уникальный идентификатор:</div><div class="col-xs-10" style="font-weight:bold"><i>ЧЕРНОВИК</i></div>
+                             </div>
+                            <div class="row"> 
+                                <div class="col-xs-2" class="color-litegrey">Резюме:</div><div class="col-xs-10" style="font-weight:bold" ><span ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></span></div>
+                             </div>
+                            <div class="row" style="margin-top:10px;"> 
+                                <div class="col-xs-12"><button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Удалить черновик</button></div>
+                            </div>
+                        </div>
+
+                        <div ng-show="isPublished(recordToDelete)" class="well" style="font-size:14px;">
+                            <div style="font-size:11px;font-weight:bold;text-transform:uppercase;border-bottom:1px solid #ddd;margin-bottom:10px;" class="color-green">ОПУБЛИКОВАННАЯ ЗАПИСЬ</div>
+                             <div class="row"  ng-show="isIRCC" style="margin-bottom:10px;">     
+                                 <div class="col-xs-12 bold">Опубликованные записи о международно признанных сертификатах о соответствии требованиям (МПССТ) могут быть только отозваны. Отозванный МПССТ будет считаться недействительным, а опубликованная в МП-ДГРСИВ запись о нем будет сохраняться в целях обеспечения отслеживания и прозрачности. Отозванные МПССТ будут четко помечены как отозванные в результатах поиска и при отображении записи.</div>
+                              </div>
+                            <div class="row">     
+                                <div class="col-xs-2" class="color-litegrey">Название:</div><div class="col-xs-10" style="font-weight:bold" ng-bind="recordToDelete.title|lstring"></div>
+                              </div>
+                             <div class="row">    
+                                <div class="col-xs-2" class="small color-litegrey">Уникальный идентификатор:</div><div class="col-xs-10" style="font-weight:bold"><a rel="noopener" translation-url  href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_blank" ng-bind="recordToDelete | uniqueIDWithoutRevision"></a></div>
+                             </div>
+                            <div class="row"> 
+                                <div class="col-xs-2" class="color-litegrey">Резюме:</div><div class="col-xs-10" style="font-weight:bold" ><span ng-bind-html="recordToDelete.summary|lstring"></span></div>
+                             </div>
+
+                              <div class="row" ng-show="isIRCC"> 
+                                   <div class="col-xs-12">
+                                        <div km-form-languages multiple ng-model="recordToDelete.document.header.languages" class="pull-right"></div><br><div class="km-control-group">
+                                            <div class="km-control-group" name="amendmentDescription" required caption="Кратко укажите причину отзыва данного МПССТ">
+                                            <div km-textbox-ml ng-model="recordToDelete.document.amendmentDescription" rows="3" placeholder="" locales="recordToDelete.document.header.languages" />
+                                            </div>
+                                        </div>
+                                        <div class="alert alert-danger" ng-if="recordToDelete.showRevokeError">Кратко укажите причину отзыва данного МПССТ</div>
+                                        <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="revokeRecord(recordToDelete)">Отозвать данный МПССТ</button>
+                                    </div>
+                             </div>
+
+                            <div class="row" style="margin-top:10px;" ng-show="!isIRCC"> 
+                                <div class="col-xs-12"><button ng-show="security" type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Примечание: также будут удалены любые находящиеся на утверждении черновики"><span ng-if="!security.canDelete">Запрос на удаление данной записи</span> <span ng-if="security.canDelete">Удалить запись</span></button> 
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer" >
+                        <button type="button" class="btn btn-default" ng-click="closeDialog()">Отменить</button>
+                    </div>
+            </script>
+
+            <script type="text/ng-template" trados-translation="true" id="duplicateRecordModal">
+                    <div class="modal-header">
+                        <h4>Дублировать запись<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Будет создан новый черновик записи с такими же сведениями. Вы действительно хотите дублировать данную запись?</p>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button ng-disabled="loading" type="button" class="btn btn-default" ng-click="closeDialog('duplicateRecordModal')">Отменить</button>
+                        <button ng-disabled="loading" type="button" ng-click="duplicate(recordToDuplicate)" class="btn btn-primary pull-left">Дублировать</button>
+                    </div>
+            </script>
+
+            <script type="text/ng-template" trados-translation="true" id="recallWorkflowRequestModal">
+                    <div class="modal-header">
+                        <h4>Отменить запрос на публикацию<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <h2>Вы действительно хотите отменить данный запрос на публикацию?</h2>
+                    </div>
+                    <div class="modal-footer" style="margin-top:0">
+                        <button type="button" class="btn btn-default" ng-click="closeDialog()">Не отменять запрос</button>
+                        <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary pull-left">Отменить запрос</button>
+
+                    </div>
+            </script>
+            <script type="text/ng-template" trados-translation="true" id="errorModal">
+                <div class="modal-header">
+                   <h4>Ошибка</h4>
+                </div>
+                <p ng-bind="errorMessage"></p>
+                <div class="modal-footer" >
+                    <button type="button" class="btn btn-default" ng-click="closeDialog()">OK</button>
+                </div>
+            </script>
+            </div>
+        </div>
+    </div>
+    <joyride ng-if="tourOn"></joyride>
+</div>

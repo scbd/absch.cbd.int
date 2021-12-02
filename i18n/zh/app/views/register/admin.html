@@ -1,0 +1,75 @@
+﻿<div  id="RegisterPage">
+
+  <link href="/app/css/register.css" rel="stylesheet">
+  <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+    <div class="register-content-header bg-pink color-white">
+      <div style="padding:1px 10px;">
+        <h3>ABSCH 管理</h3>
+      </div>
+    </div>
+    <div class="register-content-content" ng-if="roles.isAdministrator">
+      <div class="row" style="padding:0;margin:0 0 30px 0;">
+        <div class="col-md-12 cp-header">
+          <table style="width:100%;">            
+            <tr>
+              <td></td>
+              <td>
+                <table class="table table-striped" style="width:100%">
+                  <tbody>
+
+                    <tr>
+                      <td>查看用户报告的记录列表</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">管理已报告记录</a></td>
+                    </tr>
+                    <tr>
+                        <td>常见获取和惠益分享信息交换所问题</td>
+                        <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">常见问题</a></td>
+                      </tr>
+                    <tr>
+                      <td>查看获取和惠益分享信息交换所记录工作流程状态</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">管理工作流程记录</a></td>
+                    </tr>
+                    <tr>
+                      <td>用图表选项和多个筛选条件查看获取和惠益分享信息交换所计数</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">报告计数</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>查看国际公认合规证书计数</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">国际公认合规证书计数</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>查看有/无获取和惠益分享信息交换所角色的国家</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">用户角色报告</a></td>
+                    </tr>
+                    <tr>
+                      <td>查看电子邮件订阅用户的列表。</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">订阅</a></td>
+                    </tr>
+                    <tr>
+                      <td>查看客户端错误</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">错误日志</a></td>
+                    </tr>
+                    <tr>
+                      <td>验证翻译</td>
+                      <td>
+                        <button type="button" class="btn btn-primary" ng-click="validateTranslation(!isValidatingTranslation)"><span ng-if="!isValidatingTranslation">启用</span><span ng-if="isValidatingTranslation">禁用</span></button>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div><!-- controller -->

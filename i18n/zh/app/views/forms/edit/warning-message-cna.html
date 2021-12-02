@@ -1,0 +1,11 @@
+﻿<div ng-show="showWarning">
+    <div class="well" ng-if="responsibleCNA && responsibleCNA.numFound > 0">
+        <h3 class="color-red">已发布标注为贵国唯一指定国家主管部门的国家主管部门。</h3>
+            <h5 class="color-red">您可以保存草稿，但是在更新以下记录之前，您将无法发布新的国家主管部门：</h5>
+            <div>
+            <div ng-repeat="rec in responsibleCNA.docs">
+                <result-default doc='rec' type="nationalRecords"></result-default>
+            </div>
+            </div>
+    </div>
+</div>

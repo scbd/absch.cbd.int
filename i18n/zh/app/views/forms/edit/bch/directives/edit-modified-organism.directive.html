@@ -1,0 +1,266 @@
+<div>
+
+<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>一般信息</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="header.languages" required caption="请选择您希望提交之记录的语言：">
+												<div class="indent">
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>改性活生物体（LMO）的身份。</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group"  name="identity" caption="改性活生物体的名称">
+												<div class="help-block">名称常用来识别改性活生物体，例如商品名（如Roundup soy, NewLeaf® potato,等）</div>
+												<div km-textbox-ml name="identity"  ng-model="document.identity" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="transformationEvent" caption="转化事件">
+												<div class="help-block">转化事件名称，如MON810</div>
+												<input type="text" class="form-control" name="transformationEvent" required ng-model="document.transformationEvent"/>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="hasUniqueIdentification" required caption="此改性活生物体是否有唯一识别码？">
+												<div class="help-block">生物安全信息交换所目前使用的是根据经济合作与发展组织（OECD）设计的独特识别码系统，用于为转基因植物指定独特识别码（如MON-ØØ81Ø-6）。如需更多信息，请查看<a rel="noopener" href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">https://bch.cbddev.xyz/en/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef</a></div>
+												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-sm-12" ng-if="document.hasUniqueIdentification">
+											<div class="km-control-group" required name="uniqueIdentification" caption="唯一识别码">
+												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"/>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="developers" caption="开发者">	
+												<div document-selector ng-model="document.developers" caption="联系方式" question="developers"
+														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="description" caption="说明">
+												<div km-rich-textbox rows="4" name="description" required ng-model="document.description" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="recipientOrganisms" caption="“受体生物体或亲本生物体”">	
+												<div class="help-block">“受体生物体”一词是指经受基因改性的生物体（已改性或未改性），而“亲本生物体”是指那些参与交叉育种或细胞融合的生物体。</div>
+												<div document-selector required ng-model="document.recipientOrganisms" caption="添加生物体/改性活生物体" question="recipientOrganisms"
+														on-build-query="onRrecipientOrganismsQuery(searchText)" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>
+											</div>
+										</div>
+
+										<div class="col-sm-12">
+											<div class="km-control-group"  name="recipientOrganismCollectionPoint" caption="收集或获得受体生物体或亲本生物体的地点">
+												<div km-textbox-ml name="recipientOrganismCollectionPoint"  ng-model="document.recipientOrganismCollectionPoint" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="linkedModifiedOrganisms" caption="相关改性活生物体">	
+												<div class="help-block">此字段涉及具有类似特征的其他改性活生物体。</div>
+												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganism"
+															on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true" allow-new-schema="modifiedOrganism"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>改性过程的特点</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="vector" caption="载体">
+												<div class="help-block">载体用于与DNA序列结合（一般为启动子-基因-终止子结构）以协助将其转移到受体生物体中。例子：土壤农杆菌Ti质粒和pBIN19质粒</div>
+												<div km-textbox-ml name="vector"  ng-model="document.vector" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="techniqueUsed" caption="基因修饰所用技术">
+												<div km-term-check name="techniqueUsed" required ng-model="document.techniqueUsed"
+													 terms="options.techniqueUsed" binding-type="term[]" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="genes" caption="引入或改性基因片段">	
+												<div class="help-block">本部分中最好提及当前改性活生物体引入的所有基因片段，如启动子、蛋白质编码序列和终结子。至少填写全部蛋白质编码序列。</div>
+												<div document-selector ng-model="document.genes" question="genes" ng-change="onModifiedGeneChange(document.genes)"
+															caption="基因片段" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
+													<selected-records>
+														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
+													</selected-records>
+												</div>			
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="geneConstructs" caption="基因片段构造">
+												<lmo-construct ng-model="document.geneConstructs" ng-change="onConstructChange()"></lmo-construct>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="geneNotes" caption="有关该改性活生物体中存在之基因片段的注释">	
+												<div class="help-block">请说明是否有任何基因片段是自生物安全信息交换所基因片段登记薄所登记的序列改性而得，以及它们在当前改性活生物体中的相互关系，例如“在<i>35S</i>启动子和<i>nos</i>终结子控制下的<i>epsps</i>蛋白质编码序列。</div>
+												<div km-rich-textbox name="geneNotes" rows="4"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+	
+							
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>改性活生物体的特征</legend>
+									<div class="row"><!-- <div class="col-xs-12">
+											<div class="km-control-group" name="isGeneEdited" required
+												caption="Was this LMO produced through a gene editing technique?">
+												<div km-yes-no required ng-model="document.isGeneEdited" locales="document.header.languages">
+												</div>
+											</div>
+										</div> --><div class="col-sm-12">
+											<div  block-region activate="loadingGeneTraits" block-text="Updating trait...">
+												<div class="km-control-group" required name="traits" caption="改性性状">												
+													<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="affectedGenes"
+												caption="表达受到转化影响的其他基因">
+												<div class="help-block">此部分应用于指出基因表达的变化，而不是插入改性活生物体的基因； 如基因沉默或诱导。</div>
+												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
+														caption="基因片段" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
+													<selected-records>
+														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
+													</selected-records>
+												</div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="affectedGeneNotes"
+												caption="请描述基因表达如何受到影响">
+												<div km-rich-textbox name="affectedGeneNotes" ng-model="document.affectedGeneNotes"
+													locales="document.header.languages" rows="4"></div>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="commonUses" caption="改性活生物体常见用途">
+												<div class="help-block">选择所有适用选项</div>
+												<div km-term-check name="commonUses" required ng-model="document.commonUses"
+													terms="options.commonUses" binding-type="term[]" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>探测方法</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="detectionMethodLinks" caption="外部链接">
+												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
+													identifier="document.header.identifier">
+													<link-controls>												
+														<button type="button" class="btn btn-default" ng-click="$parent.addLink()"><i class="fa fa-globe"></i> 添加链接</button>
+														<button type="button" class="btn btn-default" ng-click="$parent.addFile()"><i class="fa fa-file-o"></i> 添加文件</button><!-- TODO: find better way to get parent func incase of transclude --><button class="btn btn-default" ng-click="$parent.$parent.$parent.$parent.$parent.$parent.lookupDetections()" 
+															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections"><i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> <i class="fa fa-database" aria-hidden="true"></i> 查阅探测方法</button>
+													</link-controls>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="detectionMethod" caption="补充信息">
+												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>更多信息</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="address" caption="其它相关信息">
+												<div class="help-block">请在此处提供记录中其它位置未能提到的任何其它相关信息。</div>
+												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantDocuments" caption="任何其他相关文件">
+												<div class="help-block">请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档。</div>
+												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<legend>备注</legend>
+
+								<div class="row">
+									<div class="col-sm-12">
+										<div class="km-control-group" name="notes">
+											<div class="help-block">“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。</div>
+											<div km-notes name="notes" ng-model="document.notes"></div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<div view-modified-organism ng-model="review.document" locale="review.locale" allow-drafts="true"></div>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+	</div>
+	<div id="constructSection">
+		<script type="text/ng-template" trados-translation="true" id="geneConstructModal">
+			<lmo-construct ng-model="geneConstruct" close-dialog="closeDialog(updatedConstruct)"></lmo-construct>
+		</script>
+		<script type="text/ng-template" trados-translation="true" id="lmo-reference-display">			
+			<table class="table" style="padding-bottom:3px;width:100%;margin-top:5px;">
+				<tr ng-repeat="doc in docSelector.model"  >
+					<td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.$parent.removeDocument(doc);" class="link color-red"><i class="fa fa-times"></i></a></td>
+					<td style="margin-bottom:20px;">
+						<div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
+					</td>
+				</tr>
+			</table>
+		</script>
+	</div>
+</div>

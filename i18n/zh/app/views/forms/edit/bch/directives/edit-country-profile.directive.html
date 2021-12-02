@@ -1,0 +1,76 @@
+<div>
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
+			<div block-region activate="blockEditForm"></div> 
+		</div>   
+		<div class="registerpage-content">
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
+				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
+				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
+				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div ng-show="tab=='edit'" km-tab="edit">
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>一般信息</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="header.languages" required
+												caption="请选择您希望提交之记录的语言：">
+												<div class="indent">
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="government" required caption="国家">
+												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
+													filter="startsWithFilter" ng-change="onGovernmentChange()" mapping="genericMapping" selectbox="true" placeholder="请选择一个国家..."></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="profile" caption="国家概况的补充信息">
+												<div class="help-block">请使用此字段提供任何相关的补充信息，这些信息将作为贵国国家概况的一部分出现。</div>
+												<div km-rich-textbox required ng-model="document.profile" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div> 
+									<legend>备注</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="notes"><span class="help-block">“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。</span><div km-notes name="notes" ng-model="document.notes"></div>
+											</div>
+										</div>
+									</div> 
+							</section> 
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<view-country-profile ng-model="review.document" locale="review.locale" >
+					</view-country-profile>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
+			<div style="margin:10px;">
+				<h1>生物安全信息交换所国家概况</h1>
+				<hr>
+				<div class=" alert alert-danger">
+					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
+					<div style="display:inline-block">每个政府在生物安全信息交换所只能有一条国家概况记录。生物安全信息交换所已有贵国政府的国家概况。您将于<span ng-bind="alertSeconds"></span>秒后被重定向到该记录。</div>
+				</div>
+				<div class="ngdialog-buttons" >
+					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">现在引导</button>
+				</div>
+			</div>
+		</script>
+	</div> 
+</div>

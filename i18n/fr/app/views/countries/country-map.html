@@ -1,0 +1,65 @@
+<div>
+
+    <style> .popover { max-width: 500px; } .map-disclaimer { /* position: absolute; */ float: right; font-size: 12px; display: block; bottom: 22px; left: 15px; cursor: pointer; } /* .amcharts-main-div, .amcharts-chart-div{ position: static!important; } */ .map-filters-bg { height: 270px; color: #fff; } #map-filters { /* right: 20px; */ padding: 10px; margin: 20px; position: absolute; top: 0; } .zoom { position: absolute; top: 15px; right: 25px; border: 1px solid #ccc; border-radius: 3px; padding: 5px 12px; background: rgba(255, 255, 255, 0.5); cursor: pointer; z-index: 100; max-width: 200px; } /* ng-if="options.mapType=='lmoDecisions'" */ /* .amcharts-main-div, .amcharts-chart-div{ position: relative!important; } */ .map-marker { /* adjusting for the marker dimensions so that it is centered on coordinates */ margin-left: -8px; margin-top: -8px; } .map-marker.map-clickable { cursor: pointer; } .pulse { width: 10px; height: 10px; border: 5px solid #f7f14c; -webkit-border-radius: 30px; -moz-border-radius: 30px; border-radius: 30px; background-color: #716f42; z-index: 0; position: absolute; } .map-marker .dot { border: 10px solid #fff601; background: transparent; -webkit-border-radius: 60px; -moz-border-radius: 60px; border-radius: 60px; height: 50px; width: 50px; -webkit-animation: pulse 3s ease-out; -moz-animation: pulse 3s ease-out; animation: pulse 3s ease-out; -webkit-animation-iteration-count: infinite; -moz-animation-iteration-count: infinite; animation-iteration-count: infinite; position: absolute; top: -20px; left: -20px; z-index: 0; opacity: 0; } @-moz-keyframes pulse { 0% { -moz-transform: scale(0); opacity: 0.0; } 25% { -moz-transform: scale(0); opacity: 0.1; } 50% { -moz-transform: scale(0.1); opacity: 0.3; } 75% { -moz-transform: scale(0.5); opacity: 0.5; } 100% { -moz-transform: scale(1); opacity: 0.0; } } @-webkit-keyframes "pulse" { 0% { -webkit-transform: scale(0); opacity: 0.0; } 25% { -webkit-transform: scale(0); opacity: 0.1; } 50% { -webkit-transform: scale(0.1); opacity: 0.3; } 75% { -webkit-transform: scale(0.5); opacity: 0.5; } 100% { -webkit-transform: scale(1); opacity: 0.0; } } .popup-header { width: 100%; font-weight: bold; font-size: 16px; z-index: 1000; } .party-status { text-decoration: none; color: #fff; text-align: center; letter-spacing: .5px; border: none; border-radius: 2px; display: inline-block; height: 20px; line-height: 20px; outline: 0; padding: 0 2rem; text-transform: uppercase; vertical-align: middle; } .amcharts-chart-div svg { width: 100% !important; } .reduced-height { height: 230px; } .table-map * { border: none !important; } .custom-title { font-size: 20px !important; font-weight: bold; } .modal-dialog{ z-index: 1000000; } </style>
+
+    <div class="bs5" >
+
+        <div class="bs5 row border-bottom">
+
+                <p ng-if="showTitle" class="display-6 text-center pt-3">Parties au <span ng-bind="options.protocol"></span></p>
+
+                  
+
+            <div class="bs5 bg-white col-10 col-md-9">
+
+                <div id="chartdiv" style="min-height:550px" class="bs5 px-3"></div>
+
+                <div class="map-disclaimer" data-toggle="modal" href="#dialogDisclaimer">Clause de non-responsabilité</div>
+                <div id="dialogDisclaimer" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
+                                <h2 class="modal-title">Clause de non-responsabilité</h2>
+                            </div>
+                            <div class="modal-body">Les désignations utilisées et la présentation des informations figurant sur cette carte n'impliquent aucune expression d'un quelconque avis de la part du Secrétariat concernant le statut juridique d'un pays, d’un territoire,d’une ville ou d’une région ou de ses autorités, ni quant à la délimitation de ses droits. frontières ou limites.</div>
+                            <div class="modal-footer" style="text-align:left;">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
+                <div class="bs5 p-4 map-country-list border-top">
+                    <div class="bs5 pb-3"><a rel="noopener" class="bs5 fs-1 fw-bold link-dark text-decoration-none " ng-if="!currentCountry.code"
+                        translation-url href="{{translationUrl}}/search?tab=nationalRecords"><span class="bs5 mb-2" ng-if="!currentCountry.code">Fichiers nationaux</span></a> <a rel="noopener" class="bs5  mb-5 fs-1 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
+                        translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}"><i class="flag-icon flag-icon-{{currentCountry.code.toLowerCase()}}"></i> <span ng-bind="currentCountry.name|lstring"></span></a></div>
+                    <div ng-if="isBCH && currentCountry">
+                        <homepin-popup-bch>
+                    </div>
+                    <div ng-if="isABS && currentCountry" class="country-item-name">
+                        <homepin-popup-abs>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Parties" class="text-center bs5 mt-3">
+                <div class="row">
+                    <div class="col-md-4  fs-2 text-center "><span class="label" ng-class="{'new-css-bg-party-abs': isABS,'new-css-bg-party-bch': isBCH }" ng-bind="numParty"></span> <a rel="noopener" translation-url href="/countries/status/party"
+                            class="link-dark text-decoration-none new-css-party-counts">Parties au <span ng-bind="options.protocol"></span></a></div>
+
+                    <div class="col-md-4  fs-2 text-center" data-bs-toggle="tooltip" delay="0"
+                    title="Les pays qui ont déposé leur instrument de ratification mais n'ont pas encore terminé la période d'attente de 90 jours avant l'entrée en vigueur du Protocole pour leur pays."><span class="label new-css-bg-inbetween" ng-bind="numRatified"></span> <a rel="noopener" translation-url href="/countries/status/inbetween"
+                            class="link-dark text-decoration-none new-css-party-counts">Ayant ratifié, mais n’étant pas encore Partie au Protocole <i class="fa fa-info-circle"></i></a></div>
+
+                    <div class="col-md-4 fs-2 text-center"><span class="label new-css-bg-nonparty" ng-bind="numNonParty" ></span> <a rel="noopener" translation-url href="/countries/status/nonparty"
+                            class="link-dark text-decoration-none new-css-party-counts">Non Parties</a></div>
+                </div>
+            </div>
+
+        </div>
+    </div>

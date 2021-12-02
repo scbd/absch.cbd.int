@@ -1,0 +1,85 @@
+﻿<div id="Record" class="record panel panel-default" >
+
+        <div class="panel-heading bg-blue" ng-show="display('header')">
+            <h4></h4>	
+        </div>
+    
+        <div class="record-body panel-body" help schema="ViewCP" >
+            
+            <document-date></document-date>
+    
+            <legend ng-if="document.government || document.name"></legend>
+    
+            <div ng-show="document.government">
+                <label name="country"></label>
+                <div class="km-value" compare-val></div>
+            </div>
+    
+            <legend></legend>
+             <div ng-show="document.title">
+                 <label></label>
+                 <div class="km-value" compare-val></div>
+             </div>
+             <div ng-show="document.description">
+                <label></label>
+                 <div compare-val>
+                <km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>
+                 </div>
+            </div>
+            <div ng-show="document.jurisdiction">
+                <label></label>
+                <div class="km-value" compare-val></div>
+            </div>
+    
+            <div ng-show="document.relevantMeasures">
+                <label></label>
+                <div compare-val>
+                <div class="km-value" ng-repeat="measure in document.relevantMeasures">
+                    <div view-record-reference ng-model="measure.identifier" locale="locale"></div>
+                </div>
+                </div>
+            </div>
+    
+            <div ng-show="document.keywords">
+                <label></label>
+                <div class="km-value" compare-val>
+                    <ul class="list">
+                        <li ng-repeat="term in document.keywords"></li>
+                    </ul>
+                </div>
+            </div>
+    
+            <div ng-show="document.keywords">
+                <label></label>
+                <div class="km-value" compare-val>
+                    <ul class="list">
+                      <li ng-repeat="term in document.thematicAreas"></li>
+                    </ul>
+                </div>
+            </div>
+            <div ng-show="document.relevantInformation||document.relevantDocuments">
+                <legend></legend>
+    
+                <div ng-show="document.relevantInformation">
+                        <label></label>
+                    <div compare-val>
+                    <km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>
+                    </div>
+                </div>
+    
+                <div ng-show="document.relevantDocuments">
+                        <label></label>
+                    <div class="km-value" compare-val="relevantDocuments">
+                        <km-link-list ng-model="document.relevantDocuments"></km-link-list>
+                    </div>
+                </div>
+            </div>
+			<div>
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			</div>
+    
+        </div>
+        
+         <div document-metadata class="panel-footer"></div>
+    
+    </div>

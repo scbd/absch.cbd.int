@@ -1,0 +1,32 @@
+﻿<div dir="rtl">
+   <div class="box box-primary  no-padding">
+       <div class="box-header with-border">
+         <h3 class="box-title"></h3></div>
+       <div class="box-body no-padding">
+         <div class="mailbox-read-info">
+           <h3 ng-bind="mail.data.subject"></h3>
+             <h5></h5>
+         </div>
+         <div class="mailbox-controls with-border text-center">
+           <div class="btn-group">
+             <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title=""></button>
+             <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title=""></button>
+             <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title=""></button>
+           </div>
+           <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title=""></button>
+         </div>
+         <div class="mailbox-read-message" ng-bind="mail.data.message">
+         </div>
+       </div>
+       <div class="box-footer">
+       </div>
+       <div class="box-footer">
+         <div class="pull-right">
+           <button type="button" class="btn btn-default" ng-click="reply()"></button>
+           <button type="button" class="btn btn-default" ng-click="forward()"></button>
+         </div>
+         <button type="button" class="btn btn-default" ng-click="delete()"></button>
+         <button type="button" class="btn btn-default"></button>
+       </div>
+   </div>
+</div>

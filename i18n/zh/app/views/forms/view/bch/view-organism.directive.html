@@ -1,0 +1,177 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date>
+		<legend>生物体信息</legend>
+		
+		<div ng-show="document.scientificName">
+			<label>学名</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.scientificName"></div>
+			</div>
+		</div>
+		
+		<div ng-if="classification">
+			<label>分类法分类</label>
+			<div class="km-value" compare-val>
+				<table cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr ng-repeat="(key, taxonomy) in classification">
+							<td style="width:10%"><span ng-if="key == 'realm'"		ng-style="{'padding-left' : (5*$index)+'px' }">域</span> <span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (5*$index)+'px' }">亚域</span> <span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (5*$index)+'px' }">界</span> <span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (5*$index)+'px' }">门</span> <span ng-if="key == '_class'"		ng-style="{'padding-left' : (5*$index)+'px' }">纲</span> <span ng-if="key == 'order'"		ng-style="{'padding-left' : (5*$index)+'px' }">目</span> <span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (5*$index)+'px' }">亚目</span> <span ng-if="key == 'family'"		ng-style="{'padding-left' : (5*$index)+'px' }">科</span> <span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (5*$index)+'px' }">亚科</span> <span ng-if="key == 'genus'"		ng-style="{'padding-left' : (5*$index)+'px' }">属</span> <span ng-if="key == 'species'"		ng-style="{'padding-left' : (5*$index)+'px' }">种</span> <span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (5*$index)+'px' }">种</span></td>
+							<td ng-bind="taxonomy" style="text-align:left;padding-left:5px">
+							</td>
+						</tr>						
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div ng-show="document.scientificNameSynonyms">
+				<label>备用学名（同义词）</label>
+				<div class="km-value" compare-val> 
+					<ul class="list">
+						<li ng-repeat="name in document.scientificNameSynonyms" ng-bind="name"></li>
+					</ul>
+				</div>
+		</div>
+
+		<div ng-show="document.commonNames">
+			<label>常用名</label>
+			<div compare-val>
+				<ul class="list">
+					<li ng-repeat="name in document.commonNames" style="margin-bottom: 5px;">
+						<km-value-ml value="name" locales="locale"></km-value-ml>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	<legend ng-if="document.plantCultivar || document.microorganismStrain || document.bacteriaPathovar || document.virusGroup">更多分类</legend>
+		
+		<div ng-show="document.plantCultivar">
+				<label>栽培品种/品种(植物)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.plantCultivar"></div>
+				</div>
+		</div>
+
+		<div ng-show="document.microorganismStrain">
+				<label>菌株/分离株/ 血清型(微生物)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.microorganismStrain"></div>
+				</div>
+		</div>
+
+		<div ng-show="document.bacteriaPathovar">
+				<label>致病变型(细菌)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.bacteriaPathovar"></div>
+				</div>
+		</div>
+		<div ng-show="document.virusGroup">
+				<label>组（病毒）</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.virusGroup"></div>
+				</div>
+		</div>
+
+		<div ng-show="document.taxonomicClassification">
+			<label>其他分类法分类信息</label>
+			<km-link-list class="km-value" ng-model="document.taxonomicClassification"></km-link-list>
+		</div>
+		<div ng-show="document.organismType">
+			<label>生物体的类型</label>
+			<div compare-val> 
+				<div class="km-value" ng-bind="document.organismType|term:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.domestication">
+			<label>驯化</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.domestication | term:locale"></div>
+			</div>
+		</div>
+
+		<legend>与生物安全性有关的特征</legend>
+		
+		<div ng-show="document.plantCultivar">
+				<label>种源中心</label>
+				<div compare-val>
+					<km-value-ml value="document.plantCultivar" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.originCentre">
+				<label>遗传多样性中心</label>
+				<div compare-val>
+					<km-value-ml value="document.originCentre" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.habitat">
+				<label>生境范围</label>
+				<div compare-val>
+					<km-value-ml value="document.habitat" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.geographicalDistribution">
+				<label>地理分布</label>
+				<div compare-val>
+					<km-value-ml value="document.geographicalDistribution" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.compatibleSpecies">
+			<label>杂交亲和种</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.compatibleSpecies">
+						<view-record-reference ng-model="item.identifier" locale="locale" target="target"></view-record-reference>
+					</li>
+				</ul>
+			</div>				
+		</div>
+
+		<div ng-show="document.pathogenicity">
+				<label>已知致病性和/或致敏性</label>
+				<div compare-val>
+					<km-value-ml value="document.pathogenicity" locales="locale" html ></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.commonUses">
+				<label>常见用途</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
+					</ul>
+				</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>更多信息</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" locales="locale" html ></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>其他相关网站地址和/或附加文件</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

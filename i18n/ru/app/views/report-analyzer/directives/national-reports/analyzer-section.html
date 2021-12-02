@@ -1,0 +1,9 @@
+
+<div class="panel panel-default" style="margin-bottom:5px" ng-class="{ 'panel-collapse' : !section.expanded }">    
+  <div class="panel-heading" ng-click="toggle()" style="cursor:pointer" id="qt_{{section.key}}"><span class="pull-right"><i class="fa fa-caret-down"  ng-if="!loading && !section.expanded"></i> <i class="fa fa-caret-up"    ng-if="!loading &&  section.expanded"></i> <i class="fa fa-cog fa-spin" ng-if="loading"></i></span><h4 style="display:inline" ng-bind-html="::section.title"></h4><i style="white-space:nowrap" ng-if="::section.questions.length==1">(Вопрос <span ng-bind="::section.questions[0].number"></span>)</i> <i style="white-space:nowrap" ng-if="::section.questions.length>1" >(Вопросы <span ng-bind="::section.questions[0].number"></span> - <span ng-bind="::(section.questions|limitTo:-1)[0].number"><span>)</i></div>
+  <div class="panel-body">
+
+      <national-report-analyzer-question ng-if="::section.reports" sum-type="sumType" regions="::regions" reports="::section.reports" question="::question" previous-questions-mapping="previousQuestionsMapping" previous-questions-value-mapping="previousQuestionsValueMapping" ng-repeat="question in section.questions"></national-report-analyzer-question>
+
+  </div>
+</div>

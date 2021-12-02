@@ -1,0 +1,111 @@
+<div>
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
+				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()"
+				on-pre-save-draft="onPreSaveDraft()" on-post-save-draft="onPostSaveDraft(data)"
+				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div ng-show="tab=='edit'" km-tab="edit">
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Общая информация</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="header.languages" required
+												caption="Выберите язык(и) для представления этой записи:">
+												<div class="indent">
+													<div km-form-languages multiple required name="header.languages"
+														ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="country" required
+												caption="Страна">
+												<div afc-autocomplete required name="country"
+													ng-model="document.country" source="options.countries"
+													filter="startsWithFilter" mapping="genericMapping" selectbox="true"
+													placeholder="Выберите страну..."></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="title"
+												caption="Название записи">
+												<div km-textbox-ml name="title" required ng-model="document.title"
+													locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="nodeAddress"
+												caption="Актуальная(-ые) ссылка(-и)">
+												<div class="help-info">Укажите URL-адрес (например, http://www.cbd.int) и название веб-сайта (например, «Конвенция о биологическом разнообразии»).</div>
+                                        			
+												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
+													allow-link="true" allow-file="false"></div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="newsAbstract" caption="Abstract">
+												<div class="help-block">(не более 80 слов)</div>
+												<div km-rich-textbox ng-model="document.newsAbstract" rows="4"
+													placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="newsText" caption="Текст новостей">
+												<div class="help-block">(не более 300 слов)</div>
+												<div km-rich-textbox required ng-model="document.newsText" rows="4"
+													placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>  
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantInformation" caption="Любая другая актуальная информация.">
+												<div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
+												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div> 
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantDocuments" caption="Любые другие соответствующие документы">
+												<div class="help-block">Укажите в этом поле адреса любых других соответствующих веб-сайтов и/или один или более соответствующих документов, которые будут храниться в базе данных и будут доступны для загрузки пользователями.</div>
+												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>  
+									<legend>Примечания</legend>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="km-control-group" name="notes"><span class="help-block">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи. Оно будет скрыто после опубликования записи. Данное поле не предназначено для конфиденциальной информации.</span><div km-notes name="notes" ng-model="document.notes"></div>
+											</div>
+										</div>
+									</div> 
+							</section> 
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<view-biosafety-news ng-model="review.document" locale="review.locale" >
+					</view-biosafety-news>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+	</div> 
+</div>

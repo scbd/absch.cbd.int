@@ -1,0 +1,93 @@
+{
+  "news": {
+    "type": "",
+    "title": {
+      "en": "Nouvelles"
+    },
+    "description": {
+      "en": "Nouvelles"
+    },
+    "shortCode": "NOUVELLES",
+    "titlePlural": {
+      "en": "Nouvelles"
+    }
+  },
+  "notification": {
+    "type": "",
+    "title": {
+      "en": "Notification"
+    },
+    "description": {
+      "en": "Notification"
+    },
+    "shortCode": "",
+    "titlePlural": {
+      "en": "Notifications"
+    }
+  },
+  "new": {
+    "type": "",
+    "title": {
+      "en": "Nouveautés"
+    },
+    "description": {
+      "en": "Nouveautés"
+    },
+    "shortCode": "",
+    "titlePlural": {
+      "en": "Nouveautés"
+    }
+  },
+  "meeting": {
+    "type": "",
+    "title": {
+      "en": "Réunion"
+    },
+    "description": {
+      "en": "Réunion"
+    },
+    "shortCode": "",
+    "titlePlural": {
+      "en": "Réunions"
+    }
+  },
+  "statement": {
+    "type": "",
+    "title": {
+      "en": "Déclaration"
+    },
+    "description": {
+      "en": "Déclarations"
+    },
+    "shortCode": "",
+    "titlePlural": {
+      "en": "Déclarations"
+    }
+  },
+  "pressRelease": {
+    "type": "",
+    "title": {
+      "en": "Communiqué de presse"
+    },
+    "description": {
+      "en": "Communiqué de presse"
+    },
+    "shortCode": "",
+    "titlePlural": {
+      "en": "Communiqués de presse"
+    }
+  },
+  "meetingDocument": {
+    "type": "",
+    "title": {
+      "en": ""
+    },
+    "description": {
+      "en": ""
+    },
+    "shortCode": "",
+    "titlePlural": {
+      "en": "Documents de réunion"
+    }
+  }
+}

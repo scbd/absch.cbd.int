@@ -1,0 +1,219 @@
+﻿<div dir="rtl"><!-- <script src="absCommon.js"></script> --><style type="text/css"> .alert-danger { color: #FFF !important; text-transform: uppercase; font-weight: bold; background-color: #C7532C !important; } </style>
+    <div class="main-nav">
+        <div  class="row">
+            <div class="col-xs-12">
+                <div class="alert alert-danger" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'">
+                    <h4>تحذير!</h4>
+                    <p>this pdf was generated from ABS-CH test website.<p>
+                </div>
+
+                <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>
+
+                <div class="bg-blue text-center" style="padding:5px;">
+                    <h1>
+                        <div class="color-lightblue">بيان نقطة التفتيش من غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع</div>
+                        <div class="color-white" ng-bind="documentInfo|uniqueID"></div>
+                    </h1>
+                </div>
+
+                <p style="margin-bottom:30px;">على أساس المعلومات التي جمعتها أو حصلت عليها نقطة التفتيش وتم تقديمها لغرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع بموجب المادة 17 من بروتوكول ناغويا، سيتم إرسال نسخة مجانية من تقرير السجلات بشأن البيان تلقائيًا بوسيلة إلكترونية إلى السلطات الوطنية المحددة، ونقطة الاتصال الوطنية والسلطة الوطنية المختصة في البلد الذي قدّم الموافقة المسبقة عن علم حسب الاقتضاء.</p><!--
+            <p>{{document}}</p> --><legend>معلومات عامة</legend>
+                <div class="row top-border bg-lightblue">
+                    <div class="col-xs-6">
+                        <label>العنوان:</label>
+                        <div class="text" ng-bind="document.title| lstring:locale"></div>
+                    </div>
+                    <div class="col-xs-3">
+                        <label>المُعرِّف الفريد:</label>
+                        <div class="text" ng-bind="documentInfo|uniqueID">
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <label>تاريخ الإرسال:</label>
+                        <div class="text" ng-bind="documentVersion.createdOn |formatDate">
+                        </div>
+                    </div>
+                </div>
+
+
+                <legend>الجهات التي ستتسلَّم بيان نقطة التفتيش</legend>
+                <div class="row top-border bg-lightblue">
+                    <div class="col-xs-12">
+                        <label>بلد الإصدار:</label>
+                        <div class="text" ng-bind="document.government|term:locale"></div>
+                    </div>
+                    <div class="col-xs-12">
+                        <label>نقطة/نقاط التفتيش التي جمعت المعلومات أو حصلت عليها</label>
+                        <div class="text" ng-repeat="item in document.absCheckpoints"><span view-record-reference ng-model="item.identifier" locale="locale" collapse="false"></span></div>
+                    </div>
+                </div>
+
+
+
+
+                <legend>الجهات التي تلقت بيان نقطة التفتيش</legend>
+                <div class="row top-border bg-lightblue">
+                    <div ng-repeat="contact in emailList">
+                        <div class="col-xs-12">
+                            <div class="text">
+                                <div view-record-reference ng-model="contact" locale="locale" collapse="false"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <legend>البيانات التي جمعتها أو تلقتها نقطة التفتيش</legend>
+                <div class="row top-border bg-lightblue"><!-- repeat for each IRCC, if IRCC was included--><div class="clearfix"></div>
+                    <div class="col-xs-12" ng-if="!document.absIRCCsNotAvailable || document.absIRCCs">
+                        <label>شهادة امتثال معترف بها دوليًا</label>
+                        <div class="text" ng-repeat="item in document.absIRCCs"><span view-record-reference ng-model="item.identifier" locale="locale" collapse="false"></span></div>
+                    </div><!-- if IRCC was NOT included--><div ng-if="document.absIRCCsNotAvailable==true">
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <label>شهادة الامتثال المعترف بها دوليًا</label>
+                            <div class="text alert-text">غير متاح</div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-xs-6">
+                            <label>بلد مصدر المورد الجيني (الموارد الجينية)</label>
+                            <div class="text">
+                                <ul>
+                                    <li ng-repeat="country in document.sourceCountries"><span ng-bind="country|term"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12" ng-if="document.keywords">
+                            <label>الموضوع أو المورد الجيني</label>
+                            <div class="text">
+                                <div ng-bind-html="renderHtml(document.subjectMatter)"></div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-6">
+                            <label>بيانات العينة</label>
+                            <div class="text">
+                                <ul class="list">
+                                    <li ng-repeat="item in document.specimens"><a rel="noopener" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6" ng-if="document.keywords">
+                            <label>التصنيف</label>
+                            <div class="text">
+                                <ul class="list">
+                                    <li ng-repeat="item in document.taxonomies"><a rel="noopener" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-xs-6" ng-if="document.keywords">
+                            <label>الكلمات الرئيسية</label>
+                            <div class="text">
+                                <ul>
+                                    <li ng-repeat="keyword in document.keywords"><span ng-bind="keyword|term"></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-6">
+                            <label>الإحداثيات الجغرافية</label>
+                            <div class="text">
+                                <ul class="list">
+                                    <li ng-repeat="item in document.gisFiles"><a rel="noopener" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-12">
+                            <label>دليل الموافقة المسبقة عن علم</label>
+                            <div class="text" ng-bind-html="renderHtml(document.evidenceOfPIC)"></div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-xs-6">
+                            <label>الشخص أو الكيان الذي مَنحَ الموافقة المسبقة عن علم</label>
+                            <div class="text">
+                                <div view-record-reference ng-model="document.entityWhoGrantedPIC" locale="locale" collapse="false"></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-6">
+                            <label>الشخص أو الكيان الذي يتيح المعلومات لنقطة التفتيش حول استخدام المورد الجيني</label>
+                            <div class="text">
+                                <div view-record-reference ng-model="document.entityToWhomPICGranted" locale="locale" collapse="false"></div>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-xs-8">
+                            <label>أدلة حول الشروط المتفق عليها بصورة متبادلة</label>
+                            <div class="text" ng-bind-html="renderHtml(document.evidenceOfMAT)"></div>
+                        </div>
+
+                        <div class="col-xs-4">
+                            <label>تاريخ الحصول على الموارد الجينية:</label>
+                            <div class="text"><span ng-show="document.dateCollected" ng-bind="document.dateOfAccess"></span></div>
+                        </div>
+                    </div><!-- end if no IRCC --><div class="clearfix"></div>
+                    <div class="col-xs-8">
+                        <label>المعلومات التي تم جمعها أو استلامها ذات الصلة باستخدام الموارد الجينية</label>
+                        <div class="text" ng-bind-html="renderHtml(document.description)"></div>
+                    </div>
+                    <div class="col-xs-4">
+                        <label>-البيانات التي جمعتها أو تلقتها نقطة التفتيش</label>
+                        <div class="text"><span ng-show="document.dateCollected" ng-bind="document.dateCollected"></span> <span ng-show="document.dateCollectedFrom && !document.dateCollected" ng-bind="document.dateCollectedFrom"></span> <span ng-show="document.dateCollectedTo && document.dateCollectedFrom">إلى <span ng-bind="document.dateCollectedTo"></span></span></div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12">
+                        <label>الأشخاص أو الكيانات التي تستخدم الموارد الجينية في نقطة التفتيش</label>
+                    </div>
+                    <div class="col-xs-12">
+                        <div ng-repeat="user in document.personsAtCheckpoint" style="padding-left:0px;">
+                            <div class="text">
+                                <div view-record-reference ng-model="user" locale="locale" collapse="false"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                </div>
+                <legend>معلومات إضافية</legend>
+                <div class="row top-border bg-lightblue">
+                    <div class="col-xs-12">
+                        <label>معلومات إضافية</label>
+                        <div class="text">
+                            <div ng-bind-html="renderHtml(document.relevantInformation)"></div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-xs-12" ng-show="document.informationDocument || document.relevantDocuments">
+                        <label>المستندات المرفقة</label>
+                        <ul style="list-style-type: none;" class="text">
+                            <li ng-repeat="item in document.informationDocuments"><strong><a rel="noopener" ng-href="https://absch.cbd.int/{{item.url|encodeURI}}" ng-bind="item.name"></a></strong></li>
+                            <li ng-repeat="item in document.relevantDocuments"><strong><a rel="noopener" ng-href="https://absch.cbd.int/{{item.url|encodeURI}}" ng-bind="item.name"></a></strong></li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                
+                <legend>معلومات إضافية</legend>
+                <table class="top-border">
+                    <tr>
+                        <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">Questions about the permit or its equivalent constituting an internationally recognized certificate of compliance should be addressed to the competent national authority issuing the permit or its equivalent. يمكن الاطلاع على معلومات إضافية عن التصريح أو ما يعادله في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع ( <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> يمكنكم توجيه أي استفسارات أو أسئلة حول بروتوكول ناغويا بشأن الحصول على الموارد وتقاسم المنافع أو آلية عمل غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع إلى الأمانة العامة لاتفاقية التنوع البيولوجي.</td>
+                        <td class="col-md-6" style="font-size:12px;vertical-align: top"><strong>Secretariat of the Convention on Biological Diversity</strong> <br/> 413 rue Saint-Jacques, suite 800 <br/> Montreal, Québec, H2Y 1N9 <br/> Canada <br/> فاكس: 6588 288 514 1+ <br/> البريد الإلكتروني: <a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a></td>
+                    </tr>
+                </table>
+
+                <div ng-repeat="permit  in document.absIRCCs" style="page-break-before:always">
+                    <div pdf-ircc-partial-view document-id="permit.identifier"></div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,45 @@
+<div id="innerPage">
+    <div class="mastHead">
+
+        <h1 ng-show="!self.showAnalyzer"><span ng-bind="self.activeReport.title"></span> <!-- <span class="hidden-xs">National Report<span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span> --></h1>
+
+        <h1 ng-show="self.showAnalyzer"><span class="bold">Rapport :</span> <span style="font-weight:normal;" ng-bind="self.activeReport.title"><!-- <span > Interim <span class="hidden-sm hidden-md hidden-lg">NR</span>
+            <span class="hidden-xs">National Report<span> 
+            <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span></span> --></span></h1>
+
+        <h2 ng-show="self.showAnalyzer">Analyse : <span ng-show="self.showAnalyzer" style="padding:0;margin:0; display:inline;font-weight:normal;"
+                ng-switch="self.selectedRegionsPreset"><span ng-switch-when="cbdRegions">Répartition par régions de la CDB</span><span ng-switch-when="countries">Sélectionnez un/des pays</span><span ng-switch-when="regions">Sélectionnez une/des régions</span><span ng-switch-when="npParties">Répartition par Parties au Protocole</span><span ng-switch-when="npNonParties">Répartition par Non -Parties au Protocole</span></span></h2>
+
+    </div>
+
+    <div class="innerPageContent" id="secNrAnalyzer">
+
+
+        <div class="register-content-content" style="padding:5px;">
+            <div ng-if="!self.showAnalyzer && self.reportData" class="panel panel-default">
+                <div class="panel-heading">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:99%">
+                                <h4 class="panel-title">Analyseur des rapports nationaux</h4>Cet outil en ligne permet de sélectionner des sections ou questions spécifiques du rapport et de montrer les résultats relatifs par pays ou par région.</td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="analyze(true);">Analyser »</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <national-report-questions-selector report-type="self.selectedReportType"
+                    questions="self.selectedQuestions" regions="self.selectedRegions"
+                    regions-preset="self.selectedRegionsPreset" report-data="self.reportData"
+                    regions-preset-filter="self.selectedRegionsPresetFilter"></national-report-questions-selector>
+                <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" ng-click="analyze(true)">Analyser »</button>
+                </div>
+            </div>
+            <national-report-analyzer ng-if="self.showAnalyzer" max-date="self.maxDate"
+                report-type="self.selectedReportType" questions="self.selectedQuestions" regions="self.selectedRegions"
+                regions-preset="self.selectedRegionsPreset" regions-preset-filter="self.selectedRegionsPresetFilter"
+                report-data="reportData"></national-report-analyzer>
+        </div>
+    </div>
+</div>

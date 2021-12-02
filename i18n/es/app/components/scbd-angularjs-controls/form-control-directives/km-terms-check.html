@@ -1,0 +1,77 @@
+﻿<div>
+
+	<div class="col-xs-12" ng-show="enableSearch" style="margin-bottom: 5px;">
+		<div class="input-group pull-left" style="max-width:400px;">
+			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Buscar en la lista (mínimo tres caracteres para iniciar la búsqueda)" style="font-weight:bold;"><span class="input-group-addon" id="basic-addon2"><i class="fa fa-search" ></i></span></div><span style="position: relative; top:10px; margin-left:20px"><i class="color-blue"><span ng-bind="binding.length || '0'"></span> palabras clave seleccionadas.</i></span></div>
+	<div class="col-xs-12" >
+		<div ng-if="searchKeyword && searchKeyword.length > 2"  class="optionsbox">
+			<table class="table table-condensed" >
+				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
+					<td  ng-class="{'no-border':$first}">
+						<label>
+							<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
+								ng-required="IsRequired()" value="{{term.identifier}}"/><span class="color-litegrey" ng-bind-html="term.displayTitle | lstring:locale"></span></label>
+					</td>
+				</tr>
+				<tfoot>
+					<tr>
+						<td>
+							<button type="button" class="btn btn-xs btn-primary" ng-click="$parent.searchKeyword=undefined">Cerrar</button>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			<p ng-hide="filteredList.length">Palabra clave no encontrada.</p>
+		</div>
+
+		<div ng-class="{'searchbox': enableSearch}" >
+
+			<button type="button" class="btn btn-default btn-xs pull-right easing" ng-click="clear()" ng-if="binding.length>0"><i class="fa fa-remove"  ></i> Eliminar selección</button>
+			<ul ng-if="!tabularShape" style="list-style: none;">	
+
+				<li ng:repeat="term in rootTerms" ng-class="{'other-term': otherTermIdentifier==term.identifier}" ng-include="'term-check-tree-renderer.html'"></li>
+
+				<li ng-show="error">
+					<div class="alert" ng-bind="error">
+					</div>
+				</li>
+
+				<li ng-show="__loading"><i class="fa fa-spinner fa-spin"></i> Cargando...</li>
+
+				
+			</ul>
+			<div ng-if="tabularShape" class="tabular-terms col-xs-12">
+				<div class="col-md-4 col-xs-6 terms" ng:repeat="term in rootTerms" ng-include="'term-check-tree-renderer.html'"></div>				
+			</div>
+
+			<script type="text/ng-template" id="term-check-tree-renderer.html">
+				<label>
+					<input type="checkbox" ng-model="selectedItems[term.identifier].selected" ng-change="save(term.identifier)" 
+						ng-required="IsRequired()" value="{{term.identifier}}" id="chk_{{term.identifier}}"/><span ng-bind="term.title||term.name | lstring:locale"></span></label>
+				<div ng-if="(otherTermIdentifier==term.identifier ||term.type) && !term.multiple && selectedItems[term.identifier].selected">
+					<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
+					ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
+					<div ng-if="term.type=='lstring'" style="padding-left:50px;"><strong>Por favor, especifique</strong><div km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
+							required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
+					</div>
+				</div><span ng-if="(otherTermIdentifier==term.identifier || term.type) && term.multiple && selectedItems[term.identifier].selected"><table class="table table-hover others" style="padding:0;margin:0;width:100%;">
+						<tr ng-repeat="element in otherElements[term.identifier]">
+							<td ng-show="otherElements[term.identifier].length > 1" class="text-center" style="vertical-align:middle;width:30px;"><i class="fa fa-remove color-red" style="cursor:pointer" ng-if="otherElements[term.identifier].length > 1 && !$last" ng-click="deleteOtherElement(element, otherElements[term.identifier]);"></i></td>
+							<td>
+								<div km-textbox-ml ng-model="element.customValue" locales="locales" required="true" placeholder="otro elemento" ng-change="appendEmptyOther(otherElements[term.identifier])"></div>
+							</td>
+						</tr>
+					</table></span><div class="km-select-description" ng-if="showDescription && term.description" ng-bind="term.description" style="padding: 3px 25px;">
+				</div>
+				<ul style="list-style:none">
+					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">
+				</ul>
+			</script>
+			<style> li>label { font-weight: normal; } .optionsbox{z-index:100;position:absolute; height:300px; overflow: scroll; width:100%;padding:15px; border:1px solid #999; border-radius:5px; box-shadow: 5px 10px #bbb ;margin-bottom:15px; background-color: #fff;} .searchbox {overflow: scroll;padding:10px; background-color: #eee; border-top:1px solid #ddd;border-bottom:1px solid #ddd;} .no-border{border-top:none!important;} ul{ padding: 0px 0px 0px 20px; } </style>
+		</div>
+	</div>
+
+
+</div>
+
+

@@ -1,0 +1,80 @@
+﻿<div  id="RegisterPage">
+
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span> <!-- <div class="register-content card card-1-notrans">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div style="padding:10px 10px;">
+                <h3>Record Details
+                    <span class="helpinfoInline">
+                        <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
+                    </span>
+                </h3>
+
+                <div ng-if="showInfo" class="well well-help">
+                    View all information about a record.
+                </div>
+            </div>
+        </div> --><div class="register-content-content">
+
+            <div block-region activate="loading"></div>
+
+            <div ng-if="showRequestHistory">
+                <div task-id show-details="true" class="record-body" load-task-data='showRequestHistory' workflow-task-id="{{document.workflowId}}" on-activity-update="refreshworkflowRecord(document, workflowInfo)"></div>
+            </div>
+
+            <div ng-if="!showRequestHistory">
+                <record-loader show-details="true" class="shadow-z-2" hide-buttons="true" link-target="_self"></record-loader>
+            </div><!--<div class="row" style="margin:0;padding:0;">
+                <div class="col-xs-12">
+                    <div style="margin-top:40px;">
+                        <h4 style=""> Notifications related to this record</h4>
+                        <xuser-notifications-panel doc-id="document.identifier"></xuser-notifications-panel>
+                    </div>
+                </div>
+            </div>--><div id="deleteRecordModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title">Что вы хотите удалить? <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        </div>
+                        <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
+
+                            <div ng-show="isDraft(recordToDelete)" class="well">
+                                <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Удалить черновик</button><em>Черновик <span ng-bind="recordToDelete.documentID||'[new]'"></span></em><p><b ng-bind="recordToDelete.workingDocumentTitle|lstring"></b></p>
+                                <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
+                            </div>
+
+                            <div ng-show="isPublished(recordToDelete)" class="well">
+                                <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Примечание: также будут удалены любые находящиеся на утверждении черновики">Отменить публикацию и удалить запись</button><em>Опубликованная запись <span ng-bind="recordToDelete.documentID"></span></em><p><b ng-bind="recordToDelete.title|lstring"></b></p>
+                                <p ng-bind-html="recordToDelete.summary|lstring"></p>
+                            </div>
+
+                        </div>
+                        <div class="modal-body" ng-show="cantDelete || pilotDelete">Удаление опубликованных в МП-ДГРСИВ записей о МПССТ не разрешается. Допускается вносить изменения в записи о МПССТ, а также относить их к категории <i>«отозванные»</i>. <i>Отозванные</i> записи о МПССТ будут считаться недействительными. <!-- <span class="label label-danger">The delete button is only enabled for pilot phase.</span> --></div>
+                        <div class="modal-body" ng-show="iacCantDelete">Недостаточно прав для удаления документа.</div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">Закрыть</button>
+                        </div>
+                    </div><!-- /.modal-content --></div><!-- /.modal-dialog --></div>
+
+            <div id="recallWorkflowRequestModal" class="modal fade" data-backdrop="static">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4>Отменить запрос на публикацию<i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        </div>
+                        <div class="modal-body">
+                            <p>Вы действительно хотите отозвать и отменить данный запрос на публикацию?</p>
+                        </div>
+                        <div class="modal-footer" style="margin-top:0">
+                            <button type="button" class="btn btn-default" data-bs-dismiss="modal">закрыть</button>
+                            <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary">Да</button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- </div> --></div><!-- controller -->

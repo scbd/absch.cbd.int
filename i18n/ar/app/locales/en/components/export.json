@@ -1,0 +1,22 @@
+{
+  "exportButton": "تصدير",
+  "dialogTitle": "تصدير النتائج",
+  "downloadFormat": "صيغة التنزيل",
+  "xls": "XLS (Excel)",
+  "xlsx": "XLSX (Excel)",
+  "csv": "CSV (comma separated values)",
+  "processing": "قيد المعالجة...",
+  "recordsFound": "سجلات موجودة",
+  "type": "النوع",
+  "uid": "المُعرِّف الفريد",
+  "government": "جهات حكومية",
+  "title": "العنوان",
+  "info1": "",
+  "info2": "",
+  "info3": "",
+  "info4": "",
+  "publishedDate": "تاريخ النشر",
+  "sampleMessage": "هذه عينة فقط من المعلومات التي سيتم تصديرها. ",
+  "cancel": "إلغاء",
+  "download": "تنزيل"
+}

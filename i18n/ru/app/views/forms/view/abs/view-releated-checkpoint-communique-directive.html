@@ -1,0 +1,9 @@
+﻿<div ng-show="referenceCheckpointCommunique">
+  <legend >Related checkpoint communique(s)</legend>
+  <div class="km-value">
+    <ul class="list">
+      <li ng-repeat="cpc in referenceCheckpointCommunique"><a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{cpc.documentID}}">Checkpoint Communiqué {{cpc | uniqueIDWithoutRevision}} - {{cpc.createdOn | formatDateWithTime }}</a></li>
+    </ul>
+  </div>
+
+</div>

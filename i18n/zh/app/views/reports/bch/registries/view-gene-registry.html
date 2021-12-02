@@ -1,0 +1,58 @@
+<div>
+	<div class="container-fluid">
+		<div class="panel panel-default registry-details">
+			<div class="panel-heading">
+				<h2>基因片段登记簿</h2>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 col-xs-12"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
+							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> 登记簿 <span class="caret"></span></button>
+							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>登记簿</b></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">改性活生物体登记薄</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">生物体登记薄</a></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/genetic-elements">基因片段登记簿</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-10  col-xs-12">
+						<p class="p-borders padding-top-10">基因片段登记簿汇总了与在生物安全信息交换所登记的改性活生物体有关的基因片段的信息，包括供体生物体、赋予性状和生物功能等信息。该登记簿包括每个基因片段的记录链接，可通过此类链接找到更多详细信息。含有特定基因片段的改性活生物体在单个记录的最下方提及。</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> 正在加载...</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>载入登记簿记录时出错，请重试。</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12"><strong>总记录数量： <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> 导出</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="geneExport">
+								<thead>
+									<tr>
+										<th class="display-17">记录 ID</th>
+										<th class="display-18">名称</th>
+										<th class="display-25 hidden-xs">性状</th>
+										<th class="display-15 hidden-xs">供体生物体</th>
+										<th class="display-25 hidden-xs">职能</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::geneRecords">
+										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
+										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.organismScientificNames.join(', ')"></span> - <span ng-bind="::row.organismCommonNames.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

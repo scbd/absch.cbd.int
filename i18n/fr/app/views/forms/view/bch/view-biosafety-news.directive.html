@@ -1,0 +1,57 @@
+<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+		<document-date></document-date>
+		<legend>Informations générales</legend>
+		<div ng-if="document.country">
+			<label name="country">Pays</label> 
+			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.country.identifier|uppercase|encodeURIComponent}}"
+					target="{{target}}" ng-bind="document.country|term:locale"></a> <span ng-party-status government="document.country" id="government"></span></div>
+		</div>
+		<div ng-if="document.title">
+			<label>Titre</label>
+			<div compare-val> 
+				<km-value-ml value="document.title" locales="locale"></km-value-ml> 
+			</div>
+		</div>
+		<div ng-if="document.nodeAddress">
+			<label>Lien(s) utile(s)</label>
+			<div compare-val>
+				<km-link-list class="km-value"  ng-if="document.nodeAddress" ng-model="document.nodeAddress" style="margin-top: 5px;"></km-link-list>
+			</div>
+		</div>
+		<div ng-if="document.newsAbstract">
+			<label>Résumé analytique</label>  
+			<div compare-val>
+				<km-value-ml value="document.newsAbstract" locales="locale" html></km-value-ml> 
+			</div>  
+		</div>
+		<div ng-if="document.newsText">
+			<label>Texte de la nouvelle</label> 
+			<div compare-val>
+				<km-value-ml value="document.newsText" locales="locale" html></km-value-ml>  
+			</div>
+		</div>
+		<div ng-if="document.relevantInformation||document.relevantDocuments">
+			<div ng-if="document.relevantInformation">
+				<label>Information supplémentaire</label>
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-if="document.relevantDocuments">
+				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
+				<div compare-val>
+					<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

@@ -1,0 +1,159 @@
+﻿<div id="NotificationsPanel">
+
+    <div class="row" style="margin:0 0 20px 0;padding:0;" ng-hide="docId">
+        <div class="col-xs-12">
+            <div class="btn-group" role="group">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="!stateFilter || stateFilter=='All'">Все</span> <span ng-if="stateFilter=='unread'">Не прочитано</span> <span ng-if="stateFilter=='read'">Прочитано</span> <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'All'">Все</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'unread'">Не прочитано</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'read'">Прочитано</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="!typeFilter || typeFilter=='All'">Все типы</span> <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"></i> Оповещения</span> <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"></i> Сообщения</span> <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"></i> Запросы на публикацию</span> <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"></i> Напоминания</span> <span ng-if="typeFilter=='approved'"><i class="fa fa-check-circle"></i> Утвержденные запросы</span> <span ng-if="typeFilter=='recalled'"><i class="fa fa-rotate-left"></i> Отозванные запросы</span> <span ng-if="typeFilter=='rejected'"><i class="fa fa-times-circle"></i> Отклоненные запросы</span> <span ng-if="typeFilter=='timedout'"><i class="fa fa-clock-o"></i> Просроченные запросы</span> <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'All'">Все типы</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'alert'"><i class="fa fa-bolt"></i> Alerts</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'message'"><i class="fa fa-envelope-o"></i> Сообщения</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'request'"><i class="fa fa-rotate-right"></i> Запросы на публикацию</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'reminder'"><i class="fa fa-calendar"></i> Напоминания</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'approved'"><i class="fa fa-check-circle"></i> Утвержденные запросы</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'recalled'"><i class="fa fa-rotate-left"></i> Отозванные запросы</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'rejected'"><i class="fa fa-times-circle"></i> Отклоненные запросы</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'timedout'"><i class="fa fa-clock-o"></i> Просроченные запросы</a></li>
+                    </ul>
+                </div>
+
+                <div class="btn-group" role="group">
+                    <input type="text" class="form-control" ng-model="keyword" placeholder="поиск по ключевому слову" style="width:200px"></input>
+                </div>
+            </div>
+
+            <div class="pull-right"><a rel="noopener" type="button" class="color-litegrey" href="/register/user-preferences">Упорядочить уведомления по электронной почте</a> | <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">Пометить все как прочитанное</a></div>
+        </div>
+    </div>
+
+    <div class="row notification-panel-header">
+        <div class="col-xs-2 text-center"><strong>Сообщение</strong></div>
+        <div class="col-xs-8">
+
+        </div>
+        <div class="col-xs-2 text-center"><strong>Прочитано</strong></div>
+    </div>
+    <div infinite-scroll="loadNotifications()" infinite-scroll-disabled="loading" infinite-scroll-distance="12" infinite-scroll-parent="true">
+        <div class="row notification-row" ng-repeat="notification in (notifications | filter:keyword | filter:hasState | filter:hasType)"
+        ng-class="{'notification-read':notification.state==='read','notification-unread':notification.state==='unread'}"><!--TIMEOUT=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='timedout'">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-clock-o"></i> <span class="notification-icon-text"> <br/> Истек срок действия запроса</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><span class="notification-title"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-clock-o"></i> Срок действия запроса на публикацию истек<span class="hidden-xs">: The requested record has been placed back into the owners draft folder</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Сведения:</span> <span class="notification-label">Срок действия запросов на публикацию в системе автоматически истекает через 90 дней</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--REQUEST=======================================--><div class="notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && (!notification.data.iteration || notification.data.iteration===1)">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-rotate-right"></i> <br/> <span class="notification-icon-text">Запрос на публикацию</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-right"></i> <span class="notification-title" ng-if="notification.data.action==='request'">Запрос на публикацию</span> <span class="notification-title" ng-if="notification.data.action==='delete-request'">Удалить запрос</span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Автор запроса:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label"></span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--REMINDER=======================================--><div class="notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && notification.data.iteration>1">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-calendar"></i> <br/> <span class="notification-icon-text">Напоминание</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-calendar"></i> <span class="notification-title" ng-if="notification.data.action==='request'">Напоминание: Запрос на публикацию находится на утверждении.</span> <span class="notification-title" ng-if="notification.data.action==='delete-request'">Напоминание: Delete request pending approval.</span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Автор запроса:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label"></span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--RECALLED=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='recalled'">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-rotate-left"></i> <br/> <span class="notification-icon-text">Запрос отозван</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"></i> <span class="notification-title">Запрос отозван <span class="hidden-xs">: Запрос на публикацию записи отменен его инициатором</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Отозвано:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label"></span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--REJECTED=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='rejected'">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-times-circle"></i> <br/> <span class="notification-icon-text">Запрос отклонен</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"></i> <span class="notification-title">Запрос отклонен <span class="hidden-xs">: <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has rejected as request for publishing</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Отклонено:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label"></span> <span>{{notification.createdOn | formatDateWithTime}}</span><div ng-if="notification.data.info"><span class="notification-label" ng-if="notification.data.info">Причина:</span> <span  ng-bind="notification.data.info"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--APPROVED=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='approved'">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-check-circle"></i> <br/> <span class="notification-icon-text">Запрос утвержден</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"></i> <span class="notification-title">Запрос утвержден <span class="hidden-xs">: <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has approved a request and published the record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Утверждено:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label"></span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--MESSAGE=======================================--><div class="notification-spacing10" ng-if="notification.type==='message'">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-envelope-o"></i> <br/> <span class="notification-icon-text">Сообщение</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"></i><div class="notification-title notification-spacing5">{{notification.data.message}}</div>
+
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Отправлено:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label"></span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div><!--Subscription Publish=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
+                <div class="col-xs-2 text-center hidden-xs">
+                    <div class="notification-spacing5"><i class="fa fa-lg fa-bolt"></i> <br/> <span class="notification-icon-text">Предупреждение</span></div>
+                </div>
+                <div class="col-xs-10 col-sm-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"></i><div class="notification-title notification-spacing5">{{notification.data.message || 'Опубликована новая запись'}}</div>
+                        <div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></DIV>
+                        <div class="hidden-xs notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.publisherText }}:</span> <span>{{notification.data.documentInfo.publisher }}</span> <span class="notification-label">on</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">назад</span></span></div>
+                </div>
+            </div>
+            
+            <div style="margin-top:10px;" ng-if="!notifications">
+                <div class="col-xs-12 text-center"><span class="color-grey">уведомлений нет</span></div>
+            </div>
+
+        </div>
+    </div>
+
+    <div ng-if="!notifications || (notifications | filter:keyword | filter:hasState | filter:hasType).length <= 0">
+       <h4><strong>У вас нет новых уведомлений или запросов</strong></h5>
+    </div>
+</div>

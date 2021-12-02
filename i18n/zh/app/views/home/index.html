@@ -1,0 +1,107 @@
+﻿<div class="bs5">
+    <div class="bs5 new-css-home-section-top-absch min-vh-100" >
+        <div class="bs5 container">
+
+            <h1 class="bs5 display-6 fs-1 color-white mx-3 my-3 pt-md-5 pb-md-2 my-lg-5 pt-lg-5 pb-lg-2">The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing and is a key tool to facilitate the implementation of the Nagoya Protocol.<a href="/kb/tags/about/About" class="color-white">Learn more</a></h1>
+
+                <div class="bs5 row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
+                    <div class="bs5 col-md-12 col-lg-4 new-display-flex">
+                        <div class="bs5 rounded card new-card shadow-lg border-0 m-3 m-lg-4">
+                            <div class="bs5 card-body">
+                                <div class="bs5 d-flex position-relative "><i class="bi bi-lightbulb display-4 new-css-abs-icon-color new-css-boxes-icons" alt="Learn about the ABSCH"></i><div class="ps-3">
+                                        <h2 class="bs5 fw-bold text-left mt-2 mb-4">Learn about the ABSCH</h2>
+                                        <ul>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="/kb">关于 ABSCH</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="http://www.cbd.int/abs">关于名古屋议定书</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/faqs">常见问题</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bs5 card-footer new-css-abs-card-footer text-muted"><a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/kb/tags/about/About">开始使用 <i class="fa fa-arrow-right"></i></a></div>
+                        </div>
+                    </div>
+                    <div class="bs5 rounded col-md-12 col-lg-4 new-display-flex">
+                        <div class="bs5 card new-card shadow-lg border-0 m-3 m-lg-4">
+                            <div class="bs5 card-body">
+                                <div class="bs5 d-flex position-relative "><i class="bi bi-search display-4 new-css-abs-icon-color new-css-boxes-icons" alt="Search records"></i><div  class="ps-3">
+                                        <h2 class="bs5 fw-bold text-left mt-2 mb-4">搜索记录</h2>
+
+                                        <ul>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/search?openTour">Take the tour</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/tags/finding-information">Help finding information</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/countries">国家概况</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/reports">国家报告</a></li>
+                                        </ul>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bs5 card-footer new-css-abs-card-footer text-muted"><a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/search">搜索 <i class="fa fa-arrow-right"></i></a></div>
+                        </div>
+
+                    </div>
+                    <div class="bs5 rounded col-md-12 col-lg-4 new-display-flex">
+                        <div class="bs5 card new-card shadow-lg border-0 m-3 m-lg-4">
+                            <div class="bs5 card-body">
+                                <div class="bs5 d-flex position-relative "><i class="bi bi-upload display-4 new-css-abs-icon-color new-css-boxes-icons" alt="search bch"></i><div class="ps-3">
+                                        <h2 class="bs5 fw-bold text-left mt-2  mb-4">提交记录</h2>
+
+                                        <ul>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">Sign-in</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/profile">Get your account</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/register?openTour">Take the tour</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Submitting-information">Help publishing records</a></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="bs5 card-footer new-css-abs-card-footer text-muted"><a class="bs5 text-end nav-link fs-4 fw-bold text-uppercase color-white" href="/register">提交 <i class="fa fa-arrow-right"></i></a></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="cursor-pointer bs5 my-2 my-lg-5 mt-lg-5 p-2 pt-lg-5 text-center hidden-sm hidden-xs"><a class= "text-decoration-none" ng-click="exploreMore();"><span class="bs5 display-6 fs-1 rounded  py-3 px-5 color-white new-explore-btn bg-green">探索地图 <i class="fa  fa-arrow-down"></i></span></a></div >
+
+        </div>
+    </div>
+
+
+
+    <div id="homePageMapSection" class="bs5 min-vh-100 new-css-home-section-map hidden-sm hidden-xs" >
+        <home-map></home-map>
+    </div>
+
+    <div class="bs5 min-vh-100 ">
+        <div class="bs5 container ">
+            <p class="bs5 display-6 pt-5 mt-5 fw-bold">公告<hr>
+            </p>
+            <div ng-if="announcementCounts">
+                <home-articles tags="absch-announcement" counts="{{announcementCounts}}"></home-articles>
+            </div>
+            <div class="bs5 text-end mt-4 new-css-down-margin"><a class="bs5 nav-link fs-4 text-muted fw-bold text-uppercase" href="/kb/tags/absch-announcement/">See more <i class="fa fa-arrow-right"></i></a></div>
+        </div>
+    </div>
+    <div class="bs5 min-vh-100 home-page-record">
+        <div class="bs5 container ">
+            <p class="bs5 display-6 fw-bold">国家记录<hr>
+            </p>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="national" :rows="recordCount"></homepage-records>
+            </div>
+        </div>
+    </div>
+    <div class="bs5 min-vh-100 home-page-record">
+        <div class="bs5 container ">
+            <p class="bs5 display-6 fw-bold">参考记录<hr>
+            </p>
+            <div ng-if="exportVueComponent">
+                <homepage-records ng-vue="exportVueComponent" type="reference" :rows="recordCount"></homepage-records>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,15 @@
+﻿<div>
+    <div ng-repeat="option in question.options">
+        <label class="radio-inline">
+            <input type="radio" ng-model="answer.value" ng-value="{{$index}}" name="{{question.key}}"  
+                ng-disabled="ngDisabledFn()" ng-change="updateAnswer()"/><span ng-bind="option.title"></span></label>
+    </div>
+    
+    <div ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value" style="padding-top:10px">
+        <div class="km-control-group" name="question{{question.number}}_additionalInformation" caption="Укажите">
+            <div km-textbox-ml rows="2" name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
+                ng-change="updateAnswer()"></div>
+        </div>
+    </div>
+
+</div>

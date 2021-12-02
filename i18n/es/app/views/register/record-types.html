@@ -1,0 +1,25 @@
+﻿<div id="SubmitPage">
+    
+    <div class="container">
+        
+        <h1>Presentación de información en el CIISB</h1>
+    
+        <h2>Registros nacionales</h2>
+        <p>La presentación de registros en esta categoría está restringida a los puntos focales nacionales del Centro de Intercambio de Información sobre Seguridad de la Biotecnología (CIISB-PFN) y los usuarios nacionales autorizados. Todos los registros presentados por los usuarios nacionales autorizados se remitirán al CIISB-PFN para su revisión y validación con anterioridad a su publicación (véanse las Preguntas frecuentes).</p>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.national" >
+                <h3 style="font-size:auto" ng-bind="::s.title"></h3>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Presentar</a></div>
+        </div>
+        
+        <h2>Registros de referencia</h2>
+        <p>Los registros en esta categoría pueden ser presentados por todos los usuarios registrados. Estos registros estarán sujetos a la revisión y validación de la Secretaría con anterioridad a su publicación (véanse las Preguntas frecuentes).</p>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.reference" >
+                <h3 style="font-size:auto" ng-bind="::s.title"></h3>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Presentar</a></div>
+        </div>
+    </div>
+</div>

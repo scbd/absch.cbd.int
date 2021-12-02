@@ -1,0 +1,7 @@
+﻿<div  id="RegisterPage" class="container">
+   
+ <h1>Cuestiones comunes del Centro de Intercambio de Información sobre APB</h1><br><div style="padding:20px;background-color: #fff;">
+    <div ng-repeat="article in articles track by article._id"><a rel="noopener" href="https://www.cbd.int/management/articles/{{article._id}}/edit" class="pull-right btn bg-grey" target="edit">editar</a><h3 ng-bind-html="article.title | lstring:locale"></h3><span ng-repeat="tag in article.adminTags track by tag._id" style='margin-top:10px;'><a rel="noopener" href="https://jira.cbd.int/issues/?jql=labels%3D{{tag.title.en}}%20ORDER%20BY%20priority%20DESC%2C%20status%20DESC%2C%20updated%20DESC" target="issues" style="padding:3px; margin-right:3px;" class="btn-xs bg-blue" ng-if="tag.title.en != 'ABSCH-template'" ng-bind="tag.title.en"></a></span><div style="margin-top:10px;" ng-bind-html="article.content | lstring:locale"></div><a rel="noopener" href="https://jira.cbd.int/issues/?jql={{getJiraLink(article.adminTags)}}" class="btn bg-grey" target="issues">ver las cuestiones comunes del país</a><hr style="border-top:1px #000 dotted">
+    </div>
+
+</div>

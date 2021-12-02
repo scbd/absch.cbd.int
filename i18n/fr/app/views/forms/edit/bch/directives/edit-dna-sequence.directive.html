@@ -1,0 +1,170 @@
+<div>
+        <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+
+                <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+                validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+                on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+                on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+                data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+                    <edit-form>
+                        <form class="editForm" name="editForm" style="margin-top:10px">
+                            <div>
+
+                                <section>
+                                    <div class="well no-shadow bg-white">
+                                        <legend>Informations générales sur l'élément génétique</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans laquelle/lesquelles vous souhaitez soumettre ce fichier.">
+                                                    <div class="indent">
+                                                        <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" required name="name" caption="Nom de l'élément génétique">
+                                                    <div km-textbox-ml name="name" ng-model="document.name" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" name="synonymNames" caption="Nom(s) de l’élément génétique alternatif (synonymes)">
+                                                    <div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;"  class="input-group">
+                                                        <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input" ng-model="synonym.value" locales="document.header.languages"></div><span ng-class="{'disable':synonymNames.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                                        ng-click="removeItem(synonymNames, $index)"><i class="fa fa-trash-o icon"></i></span></div>
+                                                    <button type="button" class="btn btn-primary" ng-click="synonymNames.push({})">Ajouter un élément</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" required name="abbreviation" caption="Abréviation">
+                                                    <div km-textbox-ml name="abbreviation" ng-model="document.abbreviation" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="family" required caption="Catégorie">
+                                                    <div km-term-radio required ng-model="document.family" locales="document.header.languages"
+                                                        terms="options.family" binding-type="term" show-other="true"></div>
+                                                </div>	
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="isSynthetic" required caption="Cet élément génétique est-il une molécule synthétique?">
+                                                    <div km-yes-no required ng-model="document.isSynthetic" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <div class="well no-shadow bg-white">
+                                        <legend>Organisme donneur</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganisms" caption="Organisme(s) donneur">											
+                                                    <div document-selector ng-model="document.donorOrganisms" question="donorOrganisms" type="checkbox"
+                                                            on-build-query="onBuildOrganismQuery(searchText)" allow-new="true" allow-new-schema="organism"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" name="donorOrganismCollectionPoint" caption="Point de collecte ou d'acquisition de l'organisme donneur">												
+                                                    <div km-rich-textbox ng-model="document.donorOrganismCollectionPoint" rows="4" placeholder="" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-bottom:10px;">
+                                            <div class="col-xs-12"><span>et/ou</span></div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" caption="Coordonnées géographiques">
+                                                    <div class="help-block">Limitées à geojson files (<a rel="noopener" translation-url href="http://www.geojson.org/" target="_blank">http://www.geojson.org/</a>)</div>
+                                                    <div km-link name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                </section>
+
+                                <section ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">
+                                    <div class="well no-shadow bg-white">
+                                        <legend>Caractéristiques de la séquence codante de la protéine</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="proteinName" caption="Nom de la protéine exprimé par la séquence codante">
+                                                    <div km-textbox-ml name="proteinName" ng-model="document.proteinName" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" name="biologicalFunction" caption="Fonction biologique de la protéine">
+                                                    <div km-textbox-ml name="biologicalFunction" rows="3" ng-model="document.biologicalFunction" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" required name="traits" caption="Caractéristiques ou utilisations connexes en biotechnologie">												
+                                                    <traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <div class="well no-shadow bg-white">
+                                        <legend>Information supplémentaire</legend>
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" name="address" caption="Any other relevant information">
+                                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                                    <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
+                                                    <div class="help-block">Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.</div>
+                                                    <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+                                                    identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section>
+                                    <legend>Notes</legend>
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="km-control-group" name="notes">
+                                                <div class="help-block">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
+                                                <div km-notes name="notes" ng-model="document.notes"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </form>
+                    </edit-form>
+                    <review-form>
+                        <div view-dna-sequence ng-model="review.document" locale="review.locale" allow-drafts="true"></div>
+                    </review-form>
+                </workflow-arrow-buttons>
+            </div>
+        </div>
+
+</div>

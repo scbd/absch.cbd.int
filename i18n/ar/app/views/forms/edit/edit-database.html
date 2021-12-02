@@ -1,0 +1,111 @@
+﻿<div  dir="rtl">
+
+	<edit-header></edit-header>
+
+	<div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+
+			<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+					<form name="editForm" class="editForm" style="margin-top:10px">
+						<div ng-show="tab=='edit'" km-tab="edit">
+							<legend name="formInfo" style="display:none"></legend>
+							<div class="row">
+								<div class="col-xs-12" >
+									<div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
+										<div class="indent">
+											<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<section>
+
+								<legend>تفاصيل موقع الإلكتروني أو قاعدة البيانات</legend>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="government" required caption="البلد">
+											<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
+											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="title" required caption="اسم موقع الويب أو قاعدة البيانات">
+											<div class="help-info">Please enter the name of the website or database as you would like it to appear in the title of the record.</div>
+											<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages"
+											 placeholder="مثال: العنوان"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="description" required caption="الوصف">
+											<div class="help-info">يُرجى إدخال وصف قصير للموقع الإلكتروني أو قاعدة الويب الوطنية يتضمن الغرض أو معلومات متاحة في الموقع أو قاعدة البيانات.</div>
+											<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages"
+											 placeholder="مثال: الوصف"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="websites" required caption="عنوان موقع على الإنترنت">
+											<div class="help-info">يُرجى ذكر الرابط الكامل لموقع الويب (مثال: http://www.cbd.int).</div>
+											<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="مثال: http://www.cbd.int"></div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section ng-if="realm.is('BCH')">
+								<legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
+								<div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. After the deadline you will be asked to confirm or update the record within 3 months. وإذا لم يصلك تأكيد بعد انقضاء هذه المدة، سيتم تمييز السجل بالوصف "غير مؤكد".</div>
+							</section>
+
+							<section>
+
+								<legend>معلومات إضافية</legend>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="address" caption="أي معلومات أخرى ذات صلة">
+											<div class="help-info">يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.</div>
+											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
+											<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+											 identifier="document.header.identifier"></div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section>
+
+								<legend>ملاحظات</legend>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="notes">
+											<div class="help-info">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
+											<div km-notes name="notes" ng-model="document.notes"></div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<view-database ng-model="review.document" locale="review.locale" allow-drafts="true"></view-database>
+				</review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
+
+		</div>
+	</div>
+
+</div>

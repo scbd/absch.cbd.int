@@ -1,0 +1,245 @@
+﻿<div id="editOrganizationDiv"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true"></span><div class="registerpage-content">
+
+        <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+            <edit-form>
+                <form name="editForm" class="editForm" style="margin-top:10px">
+                    <div class="well no-shadow bg-white">
+                        <legend>Общая информация</legend>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <div class="km-control-group" name="header.languages" required caption="Выберите язык(и) для представления этой записи:">
+                                    <div class="indent">
+                                        <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-xs-12">
+                                <div class="km-control-group" name="name" required caption="Название организации">
+                                    <div class="help-block">Please provide the name of the organization as you would like it to appear in the title of the record. Например, Программа Объединенных Наций по окружающей среде.</div>
+                                    <div km-textbox-ml name="name" required ng-model="document.name" placeholder="Например, Программа Объединенных Наций по окружающей среде"
+                                        locales="document.header.languages"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-xs-12">
+                                <div class="km-control-group" name="acronym" caption="Сокращенное название">
+                                    <div class="help-block">Если это применимо, просьба указать общепринятое сокращенное название организации. Например, ЮНЕП.</div>
+                                    <div km-textbox-ml name="acronym" ng-model="document.acronym"
+                                        placeholder="Например, ЮНЕП" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="contacts" caption="Контактное(-ые) лицо(-а)">
+                                    <div document-selector ng-model="document.contacts" allow-new="true" allow-new-schema="contact"
+                                         question="contacts"
+                                         on-build-query="onContactQuery(searchText)"
+                                         filter="true">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>Сведения об организации</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="address" caption="Адрес">
+                                    <div km-textbox-ml ng-model="document.address" rows="2" placeholder="пример: 413 St-Jacques Ouest, Suite 800"
+                                        locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="city" required caption="Город">
+                                    <div km-textbox-ml required name="city" ng-model="document.city" locales="document.header.languages"
+                                        placeholder="пример: Montreal"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="state" caption="State or Province">
+                                    <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
+                                        placeholder="пример: Quebec"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="postalCode" caption="Почтовый индекс или Zip-код">
+                                    <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
+                                        placeholder="пример: H2Y 1N9"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="country" required caption="Страна">
+                                    <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
+                                                mapping="genericMapping" selectbox="true" placeholder="Выберите страну..."
+                                                required filter="startsWithFilter" maxmatches="50"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="phones" required caption="Номер(а) телефона(-ов)">
+                                    <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
+                                    <div km-inputtext-list required name="phones" ng-model="document.phones"
+                                        placeholder="example: +1 514.288.2220"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="faxes" caption="Номер(а) факса(-ов)">
+                                    <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
+                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="emails" required caption="Адрес(а) электронной почты:">
+                                    <div km-inputtext-list required name="emails" ng-model="document.emails"
+                                        placeholder="пример: secretariat@cbd.int"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="websites" caption="Адрес(а) веб-сайта(-ов)">
+                                    <div km-link name="websites" ng-model="document.websites" allow-link="true"
+                                        allow-file="false"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>Подробная информация</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="organizationType" required caption="Тип организации">
+                                    <div km-select name="organizationType" required ng-model="document.organizationType"
+                                        items="options.organizationTypes()"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+                                <div class="km-control-group" name="organizationTypeName" required caption="Другой тип организации">
+                                    <div km-textbox-ml name="organizationTypeName" required ng-model="document.organizationType.customValue"
+                                        placeholder="пример: СКБР" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="isBch">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="km-control-group" name="areasOfWork" caption="Направления работы">                                
+                                        <div class="help-block">Просьба указать только ключевые слова</div>
+                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                            ng-click="removeItem(areasOfWork, $index)"><i class="fa fa-trash-o icon"></i></span></div>
+                                        <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">Добавить</button>
+                                    </div>
+                                </div>
+                            </div><!-- <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="cpbThematicAreas" caption="Thematic areas(s)">
+                                        <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()"
+                                        binding-type="term[]"></div>
+                                    </div>
+                                </div>
+                            </div> --><div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group"  name="operationalRegions" caption="Регион(-ы) деятельности или региональная(-ые) политическая(-ие)/экономическая(-ие) группа(-ы)">
+                                        <div km-select multiple required name="operationalRegions" 
+                                        ng-model="document.operationalRegions" placeholder="Выбрать" 
+                                        items="options.geographicRegions()"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="profile" required caption="Профиль организации">
+                                        <div class="help-block">Please provide or attach a short profile of the organization and its relevance to biosafety.</div>
+                                        <div km-rich-textbox ng-model="document.profile" rows="2" placeholder="Профиль организации"
+                                        locales="document.header.languages"></div><br/><div km-link name="profileLink" ng-model="document.profileLink" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
+                                        <div class="help-block">Просьба использовать данное поле для указания ссылок на другие смежные организации, которые могут быть в базе данных (например, ГЭФ и ЮНЕП-ГЭФ).</div>
+                                        <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
+                                             question="linkedOrganizations"
+                                             on-build-query="onBuildQuery(searchText)"
+                                             filter="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <div class="well no-shadow bg-white">
+                        <legend>Срок подтверждения или обновления информации</legend>
+                        <div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. После этого срока Вам будет предложено подтвердить или обновить запись в течение 3-х месяцев. Если по окончании этого периода подтверждение не будет получено, то запись будет помечена как «Неподтвержденная».</div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>Дополнительная информация</legend>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="address" caption="Any other relevant information">
+                                    <div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
+                                    <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="relevantDocuments" caption="Любые другие соответствующие документы">
+                                    <div class="help-block">Укажите в этом поле адреса любых других соответствующих веб-сайтов и/или один или более соответствующих документов, которые будут храниться в базе данных и будут доступны для загрузки пользователями.</div>
+                                    <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well no-shadow bg-white">
+                        <legend>Примечания</legend>								
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="notes"><span class="help-block">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи. Оно будет скрыто после опубликования записи. Данное поле не предназначено для конфиденциальной информации.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </edit-form>
+            <review-form>
+                <view-organization ng-model="review.document" locale="review.locale"></view-organization>
+            </review-form>
+        </div>
+    </div>
+
+</div>

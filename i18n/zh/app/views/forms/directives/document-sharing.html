@@ -1,0 +1,83 @@
+﻿<span class="document-sharing"><button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
+    title="分享"><i class="fa fa-firefox"></i> <span class="hidden-xs">分享</span></button>
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>  </span><script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
+            <div class="modal-header">共享记录草稿： <span ng-bind="title"></span></div>
+            <div class="modal-body">
+                <div role="tabpanel"><!-- Nav tabs --><ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a translation-url href="#url" aria-controls="url" role="tab" data-toggle="tab"><span class="sub-header">通过URL发送</span></a></li>
+                        <li role="presentation"><a translation-url href="#email" aria-controls="email" role="tab" data-toggle="tab"><span class="sub-header">通过电子邮件发送</span></a></li>
+                    </ul><!-- Tab panes --><div class="tab-content padding-left-10 padding-right-10" style="background:#fff">
+                        <div role="tabpanel" class="tab-pane active" id="url">
+                            <div class="row">
+                                <div ng-if="isLoading"><i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> 正在加载...</div>
+                                <div class="content" ng-hide="isLoading">
+                                    <label>任何拥有该链接的人都可以查看该文件草稿，并将继续看到更新，直到该草稿公布或删除。</label>
+                                    <div style="margin:auto" class="pull-right"><a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">创建链接</a> <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i></div>
+                                    <div>
+                                        <table class="table table-stripped" style="width:100%">
+                                            <tr>
+                                                <td>#</td>
+                                                <td>过期/状态</td>
+                                                <td>链接</td>
+                                                <td class="hidden-xs">创建日期：</td>
+                                            </tr>
+                                            <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
+                                                <td ng-bind="$index+1"></td>
+                                                <td><span ng-bind="link.expiry|formatDateWithTime"></span> <span ng-if="hasStatus('active', link)"class="label label-success">活跃</span> <span ng-if="hasStatus('expired', link)"class="label label-danger">已到期</span> <span ng-if="hasStatus('revoked', link)"class="label label-danger">已撤销</span></td>
+                                                <td width="70%">
+                                                    <div class="btn-group" style="width:100%">
+                                                        <div class="input-group" >
+                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/><span style="cursor:pointer" class="input-group-addon" id="basic-addon1"><a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"></i> <span class="hidden-xs">打开</span></a></span> <span style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)"><i class="fa fa-copy"></i> <span class="hidden-xs">复制</span></span> <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)"><i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i> <i class="fa fa-thumbs-down"></i> <span class="hidden-xs">撤销</span></span></div>
+                                                    </div>
+                                                </td>
+                                                <td class="hidden-xs" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
+                                            </tr>
+                                            <tr ng-if="!sharedLinks.length">
+                                                <td colspan="4"><strong>没有发现此文件的共享链接。</strong></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="email">
+                            <div class="row">
+                                <div class="content">
+                                    <div>收件人将收到一封带有链接的电子邮件，以查看该文件草稿。</div>
+                                    <hr/>电子邮箱 <br/><input type="text" placeholder="输入邮件" class="form-control" ng-model="document.sharedWith.emails" />
+                                    <div><span style="font-size: smaller;color: #777575;">使用逗号来分隔多个电子邮件地址。收件人必须用此电子邮件地址登录信息交换所，以查看该记录草稿。</span></div>
+                                    <div><span ng-if="status=='creatingLink'"> <i class="fa fa-spin fa-spinner" /> 更新</span><button type="button" class="btn btn-primary pull-right" ng-click="shareEmail()" ng-disabled="status=='creatingLink'">发送</button>
+                                    </div><br/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary pull-right" ng-click="close()" >关闭</button>
+                </div>
+            </div>
+        </div>
+    </script><script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal">
+            <div class="modal-header">生成该记录草稿的 PDF 文件： <span  ng-bind="title"></span></div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="alert alert-warning" role="alert"><strong>请注意！</strong>加载这个进程需要较长时间。共享记录草稿的推荐方法是使用“<strong>共享</strong>”（Share）功能。</div><!-- <div class="alert alert-success" role="alert">
+                            <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
+                        </div> --><div class="alert alert-info" role="alert">
+                            <div class="btn-group"><a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
+                                ng-bind="lang|uppercase"></a></div>选择一种语言来启动PDF生成进程。</div> 
+                    </div>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-right" ng-click="close()" >关闭</button>
+            </div>
+        </div>
+    </script>

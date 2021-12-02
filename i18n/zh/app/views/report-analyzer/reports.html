@@ -1,0 +1,81 @@
+﻿<div id="innerPage">
+    <div class="mastHead" ng-class="{'bg-abs':isABS}">
+        <div ng-if="infoBlockUrl" ng-include="infoBlockUrl"></div>
+    </div>
+
+    <div class="innerPageContent">
+        <div class="panel panel-default">
+
+            <div class="panel-heading">
+                <h3 class="panel-title"></h3>
+            </div>
+
+            <div class="panel-body" style="padding: 0px;">
+                <table class="table" cellspacing="0" cellpadding="0" style="width:100%;margin-bottom: 0px;">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th style="text-align:center;" class="hidden-xs"></th>
+                            <th style="text-align:center;"></th>
+                            <th style="text-align:center;" class="hidden-xs"
+                                ng-repeat="region in reportData[0].regionMapping"></th>
+                            <th style="text-align:center;" class="hidden-xs"></th>
+                            <th style="text-align:center;" class="hidden-xs"></th>
+                            <th style="text-align:center;"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="activeReport in reportData ">
+                            <td></td>
+                            <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.deadline|formatDate">
+                            </td>
+                            <td style="text-align:center;" ng-bind="activeReport.partyCount"></td>
+                            <td style="text-align:center;" class="hidden-xs"
+                                ng-repeat="region in activeReport.regionMapping"></td>
+                            <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.partyReportCount">
+                            </td>
+                            <td style="text-align:center;" class="hidden-xs" ng-bind="activeReport.nonPartyReportCount">
+                            </td>
+                            <td style="text-align:center;"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="11"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div><div class="register-content-content" style="padding:5px;">
+            <div class="panel panel-default">
+
+                <div class="panel-heading">
+                    <table style="width:100%">
+                        <tr>
+                            <td style="width:99%">
+                                <h4 class="panel-title"></h4></td>
+                            <td>
+                                <button type="button" class="btn btn-primary" ng-click="analyze()"></button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="panel-body" ng-if="reportData">
+                    <national-report-questions-selector report-type="$parent.selectedReportType"
+                        questions="$parent.selectedQuestions" regions="$parent.selectedRegions"
+                        regions-preset="$parent.selectedRegionsPreset"
+                        regions-preset-filter="$parent.selectedRegionsPresetFilter" report-data="reportData">
+                    </national-report-questions-selector>
+                </div>
+
+                <div class="panel-footer text-right">
+                    <button type="button" class="btn btn-primary" ng-click="analyze()"></button>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

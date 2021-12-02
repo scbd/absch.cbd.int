@@ -1,0 +1,124 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+
+		<document-date></document-date>
+		<legend>Información general</legend>
+
+		<div ng-show="document.title">
+			<label>Título</label>
+			<div class="km-value" compare-val><strong ng-bind="document.title | lstring:locale"></strong></div>
+		</div>
+
+		<div ng-show="document.name">
+			<label>Nombre del elemento genético</label>
+			<div compare-val>
+			<km-value-ml value="document.name" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.synonymNames">
+			<label>Nombre(s) alternativo(s) del elemento genético (sinónimo(s))</label>
+			<div compare-val>
+			<ul class="list" style="padding-left:0px">
+				<li ng-repeat="synonym in document.synonymNames" style="padding-bottom:5px;">
+					<km-value-ml value="synonym" locales="locale"></km-value-ml>
+				</li>
+			</ul>
+			</div>
+			
+		</div>
+		<div ng-show="document.abbreviation">
+			<label>Abreviatura</label>
+			<div compare-val>
+				<km-value-ml value="document.abbreviation" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.family">
+			<label>Categoría</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.family | term:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.isSynthetic!=undefined">
+			<label>¿Este elemento genético es una molécula sintética?</label>
+			<div compare-val>
+				<div class="km-value" ng-if="document.isSynthetic">Sí</div>
+				<div class="km-value" ng-if="!document.isSynthetic">No</div>
+			</div>
+		</div>
+	
+	<div ng-if="document.donorOrganisms || document.donorOrganismCollectionPoint || document.gisFiles ">
+		<legend>Organismo donante</legend>
+
+		<div ng-show="document.donorOrganisms">
+			<label>Organismo(s) donante(s)</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.donorOrganisms">
+						<view-record-reference ng-model="item.identifier" locale="locale" target="target"></view-record-reference>
+					</li>
+				</ul>						
+			</div>
+		</div>
+
+		<div ng-show="document.donorOrganismCollectionPoint">
+			<label>Punto de recolección o adquisición del/de los organismo(s) donante(s)</label>
+			<div compare-val>
+				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.gisFiles">
+			<label>Coordenadas geográficas</label>
+			<km-link-list class="km-value" ng-model="document.gisFiles"></km-link-list>
+		</div>
+	</div>
+		<legend>Características de la secuencia de codificación de la proteína</legend>
+
+		<div ng-show="document.proteinName">
+			<label>Nombre de la proteína expresada por la secuencia de codificación</label>
+			<div compare-val>
+				<km-value-ml value="document.proteinName" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.biologicalFunction">
+			<label>Función biológica de la proteína</label>
+			<div compare-val>
+				<km-value-ml value="document.biologicalFunction" html locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.traits">
+			<label>Rasgo(s) o uso(s) relacionado(s) en la biotecnología</label>
+			<div compare-val>
+				<view-terms-hierarchy class="km-value" ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
+			</div>
+		</div>
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Información adicional</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" html locales="locale"></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Otras direcciones de sitios web y/o documentos adjuntos pertinentes</label>
+				<div class="km-value" compare-val>
+					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

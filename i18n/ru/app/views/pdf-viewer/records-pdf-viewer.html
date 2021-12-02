@@ -1,0 +1,27 @@
+﻿<div  style="margin-left:10%;margin-right:10%">
+
+    <style></style>
+    <div class="row">
+        <div class="row">
+            <div class="title-bar" style="overflow: scroll;" ng-bind="pdf.fileName|uppercase">
+            </div>
+        </div>
+        <div class="row" style="background:#fff" ng-if="!error">
+            <div class="col-md-2">
+                <div class="" style="width:100%;"></div>
+            </div>
+            <div class="col-md-10" style="padding:0px;border-right: 1px solid #ddd">
+                <div class="file-viewer-preview file-preview">
+                    <div style="margin-left:50%;margin-top:5%;" ng-if="loading"></div><link rel="stylesheet" href="./viewer.css">
+                    <div id="viewPdf" style="min-height: 1000px;">
+                    </div>                        
+                </div>
+            </div>
+        </div>
+        <div ng-if="error">
+            <div class="alert alert-danger"><div ng-bind="error"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,33 @@
+﻿<div class="modal-content">
+
+    <style></style>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
+        <h3 class="modal-title"></h3></div>
+
+    <div class="modal-body"><p></p>
+
+
+        <table class="table table-striped" style="width:100%">
+            <tr ng-repeat="role in editRolesDialogCtrl.roles" ng-class="editRolesDialogCtrl.rowClasses(role)"
+            ng-show="editRolesDialogCtrl.roleFilter(role)">
+                <td style="vertical-align:middle;width:2em"></td>
+                <td style="width:90%" ng-bind="role.name">
+                    <div></div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="modal-footer">
+
+        <div class="pull-left" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
+            <div ng-show="editRolesDialogCtrl.stats().grant" ></div>
+            <div ng-show="editRolesDialogCtrl.stats().revoke"></div>
+        </div>
+
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()"></button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editRolesDialogCtrl.save()" ng-disabled="!editRolesDialogCtrl.stats().changes"></button>
+    </div>
+</div>

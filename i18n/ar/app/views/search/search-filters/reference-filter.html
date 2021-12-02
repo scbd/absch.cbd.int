@@ -1,0 +1,10 @@
+﻿<div id="Search-Filter"  class="row" ng-show="rf_filters.length" style="margin-bottom:30px;" dir="rtl">
+    <div  class="col-md-12"  >
+    <div class="heading color-orange" ng-if="rf_filters.length">السجلات المرجعية</div>
+    <hr class="heading" ng-if="rf_filters.length">
+        <p class="helpinfo" ng-if="rf_filters.length"><i class="fa fa-info-circle helpicon" ></i> <span ng-if="realm.is('ABS')">تتضمن السجلات المرجعية عددًا من الموارد والمعلومات المُتعلقة بالحصول على الموارد وتقاسم المنافع والتي يمكن أن يقدمها أي مستخدم مُسجل ويتم التحقق من صحتها من قِبل الأمانة قبل نشرها.</span> <span ng-if="realm.is('BCH')">تتضمن السجلات المرجعية عددًا من الموارد والمعلومات المُتعلقة بالسلامة الأحيائية التي يمكن أن يقدمها أي مستخدم مسجل ويتم التحقق من صحتها من قِبل الأمانة قبل نشرها.</span></p>
+        
+    <div ng-repeat="doc in rf_filters = (rf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])"><a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.schemas[doc.id]}"><i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> <span ng-bind="doc.name"></span> <strong>(<span ng-bind="$parent.searchResult.data.facets.schemas[doc.id]||0"></span>)</strong></a> <!--<p class="helpinfo" ><i class="fa fa-info-circle helpicon" ng-if="doc.description"></i> {{doc.description}} </p>--> <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-gray" data-bs-toggle="tooltip" data-html="true" title="{{doc.description}}" data-container="body"></span></div>
+    <div ng-if="(searchKeyword && !showFilters) && rf_filters.length" style="margin-bottom:10px;"></div>  
+    </div>
+</div>

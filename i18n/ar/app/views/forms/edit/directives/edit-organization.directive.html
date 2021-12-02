@@ -1,0 +1,245 @@
+﻿<div id="editOrganizationDiv" dir="rtl"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true" dir="rtl"></span><div class="registerpage-content">
+
+        <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+            <edit-form>
+                <form name="editForm" class="editForm" style="margin-top:10px">
+                    <div class="well no-shadow bg-white">
+                        <legend>معلومات عامة</legend>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
+                                    <div class="indent">
+                                        <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-7 col-xs-12">
+                                <div class="km-control-group" name="name" required caption="اسم المنظمة">
+                                    <div class="help-block">يرجى ذكر اسم المنظمة كما تريد أن يظهر في عنوان السجل. على سبيل المثال، برنامج الأمم المتحدة للبيئة.</div>
+                                    <div km-textbox-ml name="name" required ng-model="document.name" placeholder="على سبيل المثال، برنامج الأمم المتحدة للبيئة."
+                                        locales="document.header.languages"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 col-xs-12">
+                                <div class="km-control-group" name="acronym" caption="الاسم المختصر">
+                                    <div class="help-block">يُرجى ذكر الاختصار الشائع الذي يستخدم في الإشارة إلى المنظمة. For example, UNEP.</div>
+                                    <div km-textbox-ml name="acronym" ng-model="document.acronym"
+                                        placeholder="على سبيل المثال، UNEP للإشارة إلى برنامج الأمم المتحدة للبيئة." locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="contacts" caption="جهات الاتصال">
+                                    <div document-selector ng-model="document.contacts" allow-new="true" allow-new-schema="contact"
+                                         question="contacts"
+                                         on-build-query="onContactQuery(searchText)"
+                                         filter="true">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>بيانات عنوان المنظمة</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="address" caption="العنوان">
+                                    <div km-textbox-ml ng-model="document.address" rows="2" placeholder="مثال: 413 St-Jacques Ouest, Suite 800"
+                                        locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="city" required caption="المدينة">
+                                    <div km-textbox-ml required name="city" ng-model="document.city" locales="document.header.languages"
+                                        placeholder="مثال: Montreal"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="state" caption="الولاية أو المقاطعة">
+                                    <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
+                                        placeholder="مثال: Quebec"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="postalCode" caption="الرقم أو الرمز البريدي">
+                                    <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
+                                        placeholder="مثال: H2Y 1N9"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="country" required caption="البلد">
+                                    <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
+                                                mapping="genericMapping" selectbox="true" placeholder="Please select a country..."
+                                                required filter="startsWithFilter" maxmatches="50"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="phones" required caption="Phone number(s)">
+                                    <div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
+                                    <div km-inputtext-list required name="phones" ng-model="document.phones"
+                                        placeholder="مثال: 2220 288 514 1+"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="faxes" caption="Fax number(s)">
+                                    <div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
+                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="مثال: 6588 288 514 1+"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="emails" required caption="Email(s)">
+                                    <div km-inputtext-list required name="emails" ng-model="document.emails"
+                                        placeholder="مثال: secretariat@cbd.int"></div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 col-xs-12">
+                                <div class="km-control-group" name="websites" caption="Website address(es)">
+                                    <div km-link name="websites" ng-model="document.websites" allow-link="true"
+                                        allow-file="false"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>معلومات تفصيلية</legend>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="organizationType" required caption="نوع المنظمة">
+                                    <div km-select name="organizationType" required ng-model="document.organizationType"
+                                        items="options.organizationTypes()"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-12" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
+                                <div class="km-control-group" name="organizationTypeName" required caption="نوع آخر للمنظمة">
+                                    <div km-textbox-ml name="organizationTypeName" required ng-model="document.organizationType.customValue"
+                                        placeholder="مثال: SCBD (أمانة اتفاقية التنوع البيولوجي)" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div ng-if="isBch">
+
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="km-control-group" name="areasOfWork" caption="مجالات العمل">                                
+                                        <div class="help-block">يرجى ذكر الكلمات الرئيسية فقط.</div>
+                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                            ng-click="removeItem(areasOfWork, $index)"><i class="fa fa-trash-o icon"></i></span></div>
+                                        <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">أضف بندًا</button>
+                                    </div>
+                                </div>
+                            </div><!-- <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" required name="cpbThematicAreas" caption="Thematic areas(s)">
+                                        <div km-term-check name="cpbThematicAreas" required ng-model="document.cpbThematicAreas" terms="options.cpbThematicAreas()"
+                                        binding-type="term[]"></div>
+                                    </div>
+                                </div>
+                            </div> --><div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group"  name="operationalRegions" caption="المناطق الإقليمية للعمليات أو المجموعات السياسية/الاقتصادية">
+                                        <div km-select multiple required name="operationalRegions" 
+                                        ng-model="document.operationalRegions" placeholder="Please select" 
+                                        items="options.geographicRegions()"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="profile" required caption="ملف تعريف المنظمة">
+                                        <div class="help-block">يرجى ذكر نبذة قصيرة عن المنظمة وصلتها بالسلامة الأحيائية أو إرفاق مستند بها.</div>
+                                        <div km-rich-textbox ng-model="document.profile" rows="2" placeholder="معلومات المنظمة"
+                                        locales="document.header.languages"></div><br/><div km-link name="profileLink" ng-model="document.profileLink" identifier="document.header.identifier"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="km-control-group" name="linkedOrganizations" caption="المنظمات المرتبطة">
+                                        <div class="help-block">يرجى استخدام هذه الخانة في الربط بأي منظمات أخرى ذات صلة ربما تكون مسجلة في قاعدة البيانات (على سبيل المثال: المرفق العالمي للبيئة التابع لبرنامج الأمم المتحدة الإنمائي UNEP-GEF).</div>
+                                        <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
+                                             question="linkedOrganizations"
+                                             on-build-query="onBuildQuery(searchText)"
+                                             filter="true"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    
+                    <div class="well no-shadow bg-white">
+                        <legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
+                        <div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. After the deadline you will be asked to confirm or update the record within 3 months. وإذا لم يصلك أي تأكيد بعد انقضاء هذه المدة سيتم تمييز السجل بالوصف "غير مؤكد".</div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend>معلومات إضافية</legend>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="address" caption="أي معلومات أخرى ذات صلة">
+                                    <div class="help-block">يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.</div>
+                                    <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
+                                    <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+                                    <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well no-shadow bg-white">
+                        <legend>ملاحظات</legend>								
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </edit-form>
+            <review-form>
+                <view-organization ng-model="review.document" locale="review.locale"></view-organization>
+            </review-form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,107 @@
+﻿<div>
+
+    <div id="Record" class="record panel panel-default">
+        <div class="panel-heading bg-orange">
+            <h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+        </div>
+        <div class="record-body panel-body">
+
+
+            <document-date></document-date><br><div class="col-md-12">
+                <legend>Información general</legend>
+                <div ng-if="document.government">
+                    <label>País</label>
+                    <div compare-val>
+                        <div class="km-value km-pre" ng-bind="document.government | term:lstring:locale"></div>
+                    </div>
+                </div>
+                <div ng-if="document.organizations">
+                    <label>Organización(es)</label>
+                    <div class="km-value" compare-val>
+                        <ul class="list">
+                            <li ng-repeat="item in document.organizations" >
+                                <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+                            </li>
+                        </ul>                        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <legend>Información de la presentación</legend>
+                <div ng-if="document.title">
+                    <label>Título de la presentación</label>
+                    <div compare-val>
+                        <km-value-ml value="document.title" locales="locale"></km-value-ml>
+                    </div>
+                </div>
+                <div ng-if="document.date">
+                    <label>Fecha de presentación</label>
+                    <div compare-val>
+                        <div class="km-value km-pre" ng-bind="document.date | formatDate"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" ng-if="document.notifications">
+                <label>Notificaciones</label>
+                <div compare-val>
+                    <div class="km-value" ng-repeat="notification in notifications" style="margin-bottom:5px;"><strong><span ng-bind="notification.reference_s"></span> <i ng-show="notification.symbol_s" ng-bind="'('+ notification.symbol_s +')'"></i></strong><div ng-bind="notification.title_s"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12" ng-if="document.records">
+                <label>Registro(s) relacionado(s)</label>
+                <div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.records" >
+							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+						</li>
+					</ul>
+				</div>
+            </div>
+
+            <div class="col-md-12"
+                ng-if="document.cbdThematicAreas || document.absThematicAreas || document.cpbThematicAreas">
+                <legend>Áreas temáticas</legend>
+                <div ng-if="document.cbdThematicAreas">
+                    <div class="km-value" compare-val>
+                        <ul  class="list">
+                            <li ng-repeat="term in document.cbdThematicAreas" ng-bind="term | term:locale"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="document.absThematicAreas">           
+                    <div class="km-value" compare-val>
+                        <ul  class="list">
+                            <li ng-repeat="term in document.absThematicAreas" ng-bind="term | term:locale"></li>
+                        </ul>
+                    </div>
+                </div>
+                <div ng-if="document.cpbThematicAreas">
+                    <div class="km-value" compare-val>
+                        <view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale" term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div ng-show="document.relevantDocuments">
+                    <legend>Documentos</legend>
+                    <div compare-val>
+                        <div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>	
+                    </div>                    
+                </div>
+                <div ng-show="document.relevantInformation">
+                    <label>Cualquier otra información pertinente</label>
+                    <div compare-val>
+                        <km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+                    </div>
+                </div>
+            </div>
+			<div>
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			</div>
+
+        </div>
+        <div document-metadata class="panel-footer"></div>
+    </div>
+</div>

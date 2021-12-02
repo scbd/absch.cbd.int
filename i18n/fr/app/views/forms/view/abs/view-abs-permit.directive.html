@@ -1,0 +1,295 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4> 
+	</div>
+	<div class="record-body panel-body">
+
+		
+
+			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || document.info.revision !== document.info.latestRevision)">
+				<div class="text-center">
+					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">CE CERTIFICAT A ÉTÉ <u>RÉVOQUÉ</u> ET N'EST PLUS VALIDE</h1>
+
+					<h1 ng-if="document.info.revision !== document.info.latestRevision">CE CERTIFICAT A ÉTÉ <u>MIS À JOUR</u>. UNE NOUVELLE VERSION A ÉTÉ ÉLABORÉE ET <u>CETTE VERSION N’EST PLUS DISPONIBLE.</u></h1>
+
+					<p>Voir l'historique des modifications pour plus d'informations.</p>
+				</div>
+			</div>
+			
+		<document-date></document-date>		
+
+			<legend ng-if="document.government">Informations générales</legend>
+
+			<div ng-show="document.government">
+				<label>Pays</label>
+				<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			</div>
+
+
+			<div ng-show="document.government || document.updateReasons">
+				<div ng-show="showPdf && document">
+					<label>Identifiant unique CE-APA</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document | uniqueID"></span></div>
+					</div>
+				</div>
+
+        	     <div ng-show="document.relatedIRCCs">
+					<label>Numéro(s) de référence d’autres certificats de conformité reconnus à l’échelle internationale en lien avec ce permis.</label>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li ng-repeat="item in document.relatedIRCCs">
+                            <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div ng-show="document.updateReasons">
+					<label>Fournissez un résumé de la raison qui motive la mise à jour du fichier</label>
+					<div compare-val>
+					<div class="km-value km-pre"><span ng-bind="document.updateReasons | lstring:locale"></span></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.absCNA">
+				<label>Autorité de délivrance (autorité responsable de l’émission de ce permis)</label>
+				<div class="km-value" compare-val>
+					<div view-record-reference ng-model="document.absCNA" locale="locale"></div>
+				</div>
+			</div>
+			<div ng-show="document.referenceToNationalPermit || document.title ||
+				document.dateOfIssuance || document.providers || document.entitiesToWhomPICGranted ||
+				document.subjectMatter || document.subjectMatterConfidential || document.picGranted ||
+				document.picInformation || document.picDocuments ||
+				document.specimens || document.taxonomies || document.gisFiles">
+				<legend>Détails du permis ou son équivalent</legend>
+
+
+			<div ng-show="document.title">
+			 	<label>Numéro de référence du permis ou son équivalent</label>
+				<div compare-val>
+			 	<div class="km-value"><span ng-bind="document.title | lstring:locale"></span></div>
+				</div>
+		 	</div>
+
+				<div ng-show="document.referenceToNationalPermit">
+					<label>Références ou identificateurs nationaux supplémentaires</label>
+					<div compare-val>
+					<div class="km-value km-pre"ng-bind-html="document.referenceToNationalPermit | lstring:locale"></div>
+					</div>
+				</div>
+
+				<div ng-show="document.dateOfIssuance">
+					<label>La date de délivrance du permis ou son équivalent</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateOfIssuance | formatDate"></span></div>
+					</div>
+				</div>
+
+    			<div ng-show="document.dateOfExpiry">
+    				<label>La date de délivrance du permis ou son équivalent</label>
+					<div compare-val>
+    				<div class="km-value"><span ng-bind="document.dateOfExpiry | formatDate"></span></div>
+					</div>
+    			</div>
+
+
+<legend>Information sur le consentement préalable en connaissance de cause (CPCC)</legend>
+
+				<div ng-show="document.picGranted!=undefined">
+					<label>Confirmation que le consentement préalable en connaissance de cause a
+été obtenu ou accordé;</label>
+						<div class="km-value" compare-val>
+							<km-value-bool value="document.picGranted" locales="locale"></km-value-bool>
+					</div>
+				</div>
+
+				<div ng-show="document.providers || document.providersConfidential">
+					<label>Le fournisseur (la personne ou l'entité qui détient le droit d'accorder l'accès aux ressources génétiques conformément à la législation nationale)</span>
+					</label>
+				<div compare-val>
+					<div class="km-value" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
+						<div view-record-reference ng-model="provider" locale="locale"></div>
+					</div>
+				</div>
+					<div ng-show="document.providersConfidential">
+						<div compare-val>
+							<div class="km-value km-pre confidential">Informations confidentielles</div>
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="document.entitiesToWhomPICGranted || document.entitiesToWhomPICGrantedConfidential">
+					<label>La personne ou entité à laquelle le consentement préalable en connaissance de cause a été accordé</label>
+					<div compare-val="entitiesToWhomPICGranted">
+						<div class="km-value" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
+			                 <div view-record-reference ng-model="consent" locale="locale"></div>
+						</div>
+					</div>
+						<div ng-show="document.entitiesToWhomPICGrantedConfidential">
+							<div compare-val>
+							<div class="km-value km-pre confidential">Informations confidentielles</div>
+							</div>
+						</div>
+				</div>
+
+
+				<div ng-show="document.picInformation">
+					<label>Information supplémentaire sur le consentement préalable en connaissance de cause</label>
+					<div compare-val>
+					<div class="km-value km-pre" ng-bind-html="document.picInformation | lstring:locale"></div>
+					</div>
+				</div>
+				<div ng-show="document.picDocuments">
+					<label>Documents ou liens supplémentaires sur le consentement préalable en connaissance de cause</label>
+					<div class="km-value" compare-val="picDocuments">
+						<km-link-list ng-model="document.picDocuments"></km-link-list>
+					</div>
+				</div>
+
+
+<legend>Information sur les conditions convenues d’un commun accord</legend>
+                <div ng-show="document.matEstablished!=undefined">
+    				<label>La confirmation que des conditions convenues d’un commun accord ont été
+établies</label>
+									<div class="km-value" compare-val>
+										<km-value-bool value="document.matEstablished" locales="locale"></km-value-bool>
+									</div>
+    				<div ng-show="document.matInformation">
+    					<label>Informations supplémentaires sur les conditions convenues d’un commun accord</label>
+						<div compare-val><div class="km-value km-pre"ng-bind-html="document.matInformation | lstring:locale"></div></div>
+    				</div>
+    				 <div ng-show="document.matDocuments">
+    					<label>Documents supplémentaires sur les conditions convenues d’un commun accord</label>
+							<div class="km-value" compare-val="matDocuments">
+								<km-link-list ng-model="document.matDocuments"></km-link-list>
+							</div>
+
+    				</div>
+    			</div>
+
+				<legend>Objet ou ressource génétique(s)</legend>
+				<div ng-show="document.subjectMatter">
+					<label>Le sujet ou les ressources génétiques auxquels ce rapporte le certificat</label>
+					<div compare-val="subjectMatter">
+						<div class="km-value km-pre"ng-bind-html="document.subjectMatter | lstring:locale"></div>
+					</div>
+				</div>
+
+				<div ng-show="document.subjectMatterConfidential">
+					<label>Le sujet ou les ressources génétiques auxquels ce rapporte le certificat</label>
+					<div compare-val="subjectMatterConfidential">
+					<div class="km-value km-pre confidential">Informations confidentielles</div>
+					</div>
+				</div>
+
+				<div ng-show="document.specimens || document.taxonomies || document.gisFiles"><!--<legend>Optional additional subject matter details</legend>--><div ng-show="document.specimens">
+						<label>Données sur l’échantillon</label><!-- <div class="km-value" ng-repeat="item in document.specimens">
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div> --><div class="km-value" compare-val="specimens">
+							<km-link-list ng-model="document.specimens"></km-link-list>
+						</div>
+
+					</div>
+					<div ng-show="document.taxonomies">
+						<label>Données taxonomiques</label>
+						<div class="km-value" compare-val="taxonomies">
+							<km-link-list ng-model="document.taxonomies"></km-link-list>
+						</div>
+
+
+					</div>
+					<div ng-show="document.gisFiles">
+						<label>Coordonnées géographiques</label><!-- <div class="km-value" ng-repeat="item in document.gisFiles">
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div> --><div class="km-value" compare-val="gisFiles">
+							<km-link-list ng-model="document.gisFiles"></km-link-list>
+						</div>
+
+						<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div><br /> <br /></div>
+				</div>
+			</div>
+
+		<legend ng-if="document.usages || document.usagesDescription || document.usagesConfidential || document.thirdPartyTransferCondition">Information sur l’utilisation de la ou des ressource(s) génétique(s)</legend>
+			<div ng-if="document.usages">
+				<label>Type d’utilisation permis par le permis ou son équivalent</label>
+			<div compare-val>
+				<div class="km-value" ng-if="document.usages && !document.usagesConfidential">
+					<ul class="list">
+						<li ng-repeat="term in document.usages"><span ng-bind="term|term"></span></li>
+					</ul>
+				</div>
+			</div>
+            </div>
+            <div ng-if="document.usagesConfidential">
+                <label>Type d’utilisation permis par le permis ou son équivalent</label>
+				<div compare-val>
+					<div class="km-value km-pre confidential">Informations confidentielles</div>
+				</div>
+            </div>
+
+
+			<div ng-show="document.usagesDescription">
+				<label>De l’information supplémentaire sur les utilisations spécifiques couvertes par le permis ou son équivalent ainsi que les restrictions d’usage.</label>
+				<div compare-val><div class="km-value km-pre"ng-bind-html="document.usagesDescription | lstring:locale"></div></div>
+			</div>
+			<div ng-show="document.thirdPartyTransferCondition">
+				<label>Conditions de transfert vers une tiers partie</label>
+				<div compare-val><div class="km-value km-pre"ng-bind-html="document.thirdPartyTransferCondition | lstring:locale"></div></div>
+			</div>
+
+	<div ng-if="document.permitFiles || document.permitDescription"  >
+		<legend >Documentation</legend>
+
+			<div ng-show="document.permitFiles">
+				<label>Copie du permis ou de son équivalent, ou de tout autre document pertinent non confidentiel</label>
+				<div class="km-value" compare-val="permitFiles">
+					<km-link-list ng-model="document.permitFiles"></km-link-list>
+				</div>
+			</div>
+			<div ng-show="document.permitDescription">
+				<label>Brève description de la documentation en pièce jointe</label>
+				<div compare-val><div class="km-value km-pre"ng-bind-html="document.permitDescription | lstring:review.local"></div></div>
+			</div>
+		</div>
+
+
+			<div ng-show="document.relevantInformation||document.relevantDocuments">
+				<legend>Informations supplémentaires</legend>
+
+				<div ng-show="document.relevantInformation">
+					<div compare-val><div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div></div>
+				</div>
+
+				<div ng-show="document.relevantDocuments">
+					<label>Autres sites web pertinents et/ou documents en pièce jointe</label><!-- <div class="km-value" ng-repeat="item in document.relevantDocuments">
+						<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div> --><div class="km-value" compare-val="relevantDocuments">
+						<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+					</div>
+
+
+				</div>
+			</div>
+
+            <div>
+                <legend>Historique des amendements</legend>
+                <div view-history document-id="document.header.identifier" public-view="true"></div>
+			 </div>
+			 
+			 <div>
+
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			 </div>
+
+
+	</div>
+
+        <div document-metadata class="panel-footer"></div>
+
+</div>

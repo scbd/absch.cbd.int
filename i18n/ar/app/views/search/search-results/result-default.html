@@ -1,0 +1,41 @@
+﻿<div class="default-result-page" style="padding:0!important;margin:0 0 20px 0!important;" dir="rtl">
+    
+    <div class="pull-right" style="padding-right:15px;position:relative;top:5px;"  ng-show="showDoc" ><span style="color:#ddd"  dir="rtl">|</span> &nbsp; <a rel="noopener" translation-url class="bold"  style="position:relative;top:2px;color:#FFF;font-size:20px;cursor:pointer;z-index:99999999;width:100%;" ng-click="showDoc=false" dir="rtl">&times;</a></div>
+    <div ng-if="showDoc" class="animate-if" style="padding:5px 0px 10px 0px!important;margin:0 0 0 0!important;">
+        <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="true" link-target="_blank"></record-loader>
+    </div>
+    <div id="record1" class="recordDefault card card-1" style="padding:0!important;margin:0!important;">
+
+        <div ng-show="!showDoc" ng-click="showDoc=!showDoc" style="padding:0!important;margin:0!important;">
+            <div class="{{::type}}">
+
+       
+                <div class="title bold truncate-mobile-title" style="font-size:108%;"><span ng-bind="doc.rec_title"></span> <a rel="noopener" ng-if="showExternalLink && !showDoc" translation-url target="_blank" ng-href="/database/{{::doc.schema_s|schemaShortName|encodeURIComponent}}/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" 
+                        class="pull-right link" ng-show="!doc.showDoc" title="فتح في علامة تبويب جديدة"><i class="fa fa-external-link"></i></a></div>
+                <div ng-if="!doc.highlight"><!-- TODO: need to remove description field from index and use summary --><div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.summary_t"><span  ng-bind="doc.summary_t|limitTo:500"></span> <span ng-if="doc.summary_t.length > 500">...</span></div><!-- TODO: record summary copied description into rec_summary which needs to be replaced by summary_t in frontend and backend --><div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary"><span ng-bind="doc.rec_summary|limitTo:500"></span> <span ng-if="doc.rec_summary.length > 500">...</span></div>
+
+                    <div ng-if="doc.schema_s=='capacityBuildingInitiative'"><span ng-if="doc.implementingAgencies_EN_txt"><strong>نُفذت من قبل</strong> <span ng-repeat="item in doc.implementingAgencies_EN_txt" ng-bind="item"><span ng-if="!$last">|</span></span></span> <span ng-if="doc.executingAgencies_EN_txt"><strong>أُنجزت من قبل</strong> <span ng-repeat="item in doc.executingAgencies_EN_txt" ng-bind="item"><span ng-if="!$last">|</span></span></span> <span ng-if="doc.collaboratingPartners_EN_txt"><strong>بالتعاون مع</strong> <span ng-repeat="item in doc.collaboratingPartners_EN_txt" ng-bind="item"><span ng-if="!$last">|</span></span></span></div>
+                    <div ng-if="doc.schema_s=='resource'"><span ng-if="doc.authors_t">المؤلفون: <span ng-bind="doc.authors_t"></span></span> <span ng-if="doc.organizations_EN_txt"><strong>المنظمات</strong> <span ng-repeat="item in doc.organizations_EN_txt" ng-bind="item"><span ng-if="!$last">|</span></span></span></div> 
+                </div>
+                <div ng-if="doc.highlight" class="search-result-highlight"><span ng-repeat="highlight in doc.highlight track by $index" class="help-block" style="display: inline;padding-left:0px;"><span ng-repeat="match in highlight track by $index"><span ng-bind-html="match"></span> <span ng-if="!$last" class="space-left-right">|</span></span></span></div>
+
+                <ul class="metadata bold">
+                    <li><span class="schema bold" ng-bind="::doc.schema_s | schemaName"></span></li>
+
+                    <li ng-if="::doc.rec_countryName && type != reference" class="hidden-xs"><span ng-bind="::doc.rec_countryName"></span></li>
+                    <li ng-if="::doc.uniqueIdentifier_s"><span ng-bind="::doc.uniqueIdentifier_s"></span></li>
+                    <li class="hidden-xs meta-border" ng-if="::doc.rec_meta1 && doc.schema_s !=='database' && type != reference" id="meta1"><span ng-if="::doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">نقطة الاتصال:</span> <span ng-bind="doc.rec_meta1.join(', ')"></span></li>
+                    <li class="hidden-xs" ng-if="::doc.rec_meta2 && doc.schema_s !=='absPermit' && type != reference" id="meta2"><span ng-if="::doc.schema_s ==='absCheckpointCommunique'" style="color:#666!important;">المصدر</span> <span ng-bind="doc.rec_meta2.join(', ')"></span></li>
+                    <li class="hidden-xs" ng-if="::doc.rec_meta3 && type != reference" id="meta3"><span ng-bind="doc.rec_meta3.join(', ')"  ng-class="{'color-red':isRevoked(doc.rec_meta3)}"></span></li>
+                    <li ng-if="::doc.schema_s !=='meeting'"><span class="last-span" ng-if="::type!='scbd'" ng-bind="::doc.rec_date | formatDate"></span> <span class="last-span" ng-if="::type=='scbd'" ng-bind="::doc.rec_creationDate | formatDate"></span></li>
+                     <li ng-if="::doc.schema_s =='meeting'"><span class="last-span"><span ng-bind="doc.startDate_dt | moment:'utc' | formatDate"></span> - <span ng-bind="doc.endDate_dt | moment:'utc' | formatDate"></span> | <span ng-bind="doc.eventCity_s"></span> | <span ng-bind="doc.eventCountry_EN_t"></span></span></li>
+                    <li class="pull-right search-icons" ng-if="::canShowIcons(doc.schema_s)">
+                        <bch-icons></bch-icons>
+                    </li>                  
+                </ul>
+            </div>
+        </div>
+
+    </div>
+
+</div>

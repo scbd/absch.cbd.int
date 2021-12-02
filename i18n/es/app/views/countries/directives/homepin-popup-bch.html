@@ -1,0 +1,13 @@
+﻿<div>
+
+
+    <div ng-if="currentCountry.code" class="bs5 mt-3 p-2 color-white text-start" ng-class="{' new-css-bg-party': currentCountry.isParty, ' new-css-bg-nonparty':!currentCountry.isParty, ' new-css-bg-inbetween': currentCountry.isInbetweenParty}"><div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')"></div>
+                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"  ></div>
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" ></div>
+                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" ></div></div>
+
+
+      <ul class="bs5 list-group mt-4"  >
+        <li class="bs5 align-items-center list-group-item list-group-item-action  border-0  fs-5 d-flex justify-content-between align-items-start"  ng-repeat="schema in countryMapScope.currentCountry.schemas" ng-if="hideCartagena(schema.shortCode)"></li>
+        
+      </ul></div>

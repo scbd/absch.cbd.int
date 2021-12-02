@@ -1,0 +1,56 @@
+<div dir="rtl">
+	<div class="container-fluid">
+		<div class="panel panel-default registry-details">
+			<div class="panel-heading">
+				<h2>سجل الكائنات الحية</h2>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 col-xs-12"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
+							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> السجلات <span class="caret"></span></button>
+							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>السجلات</b></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">تسجيل كائن حي مُحوَّر</a></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/organisms">تسجيل الكائنات الحية</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">تسجيل العناصر الجينية</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-10  col-xs-12">
+						<p class="p-borders padding-top-10">يحتوي سجل الكائنات الحية على معلومات مُوجزة عن تلك الكائنات التي تم تسجيلها في غرفة تبادل معلومات السلامة الأحيائية ككائنات أصلية أو متلقية أو مانحة. يتضمن السجل كذلك روابط إلى السجلات الخاصة بكل كائن حي حيث يمكن الوصول إلى مزيد من المعلومات حول السمات البيولوجية ذات الصلة به، بما في ذلك معلومات عن الحالة التصنيفية والاسم الشائع والأصل ومركز المنشأ ومركز التنوع الجيني. وأسفل كل سجل من السجلات تظهر روابط لسجلات الكائنات الحية المُحوّرة ذات الصلة.</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> قيد التحميل ...</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>خطأ في تحميل مدونات التسجيل، يُرجى المحاولة مرة أخرى.</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12"><strong>إجمالي عدد السجلات: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> تصدير</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="orgaExport">
+								<thead>
+									<tr>
+										<th class="display-18">معرف السجل</th>
+										<th class="display-20">الاسم العلمي</th>
+										<th class="display-17 hidden-xs">الاسم الشائع</th>
+										<th class="display-45 hidden-xs">الوصف</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::orgaRecords">
+										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
+										<td class="tableexport-string"><span ng-bind="::row.taxonomicStatus"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.commonName.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.description"></span></td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

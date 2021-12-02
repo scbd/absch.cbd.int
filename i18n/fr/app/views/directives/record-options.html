@@ -1,0 +1,12 @@
+﻿<div>
+    <div class="record-Options-div" style="display:inline-block;margin-right:5px;margin-bottom:5px;">
+        <div class="visible-xs" style="margin-left: 50px; margin-bottom: 5px"><span class="hidden-print" ng-if="!hidePdf"><a rel="noopener" href="{{pdfUrl}}" target="_blank" class="record-link-style color-white"><i class="fa fa-file-pdf-o" aria-hidden="true"></i></a></span> &nbsp; | &nbsp; <a rel="noopener" href="#" ng-click="print()" class="record-link-style color-white hidden-print"><i class="fa fa-spin fa-spinner" ng-if="printing"></i> <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i></a></div>
+        <div class="pull-right hidden-xs"><span><a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocumentInfo|uniqueID|encodeURIComponent}}" 
+				    target="_blank" class="record-link-style color-white"><i class="fa fa-external-link-square"></i> <span ng-bind="internalDocumentInfo|uniqueID"></span></a></span> <span class="hidden-print" ng-if="!hidePdf">&nbsp; | &nbsp; <a rel="noopener" href="{{pdfUrl}}" target="_blank" class="record-link-style color-white"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> PDF</a>&nbsp; <span style="color:#ddd" class="hidden-print">|</span>&nbsp; </span> <a rel="noopener" href="#" ng-click="print()" class="record-link-style color-white hidden-print"><i class="fa fa-spin fa-spinner" ng-if="printing"></i> <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i> Imprimer</a> <span ng-show="internalDocument.header.languages.length>1" style="color:#ddd" class="hidden-print">&nbsp; | &nbsp; </span> <span class="xlabel hidden-xs hidden-sm color-white" ng-if="internalDocument.header.languages.length>1" style="color:#fff">langues disponibles :</span><div class="btn-group  btn-group-xs" role="group" ng-if="internalDocument.header.languages.length>1">
+                <button type="button" class="btn btn-lang btn-default btn-xs lang-tooltip" ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"
+                    ng-click="setCurrentLocale(loc)" data-bs-toggle="tooltip" data-title="{{termLocales[loc]|term}}"><span ng-bind="loc | uppercase"></span></button>
+            </div>            
+        </div>
+
+    </div>
+</div>

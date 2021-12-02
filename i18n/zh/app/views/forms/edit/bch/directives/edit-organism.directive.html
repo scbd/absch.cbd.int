@@ -1,0 +1,268 @@
+﻿<div >
+
+	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+
+			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
+			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+			 on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+				<edit-form>
+					<form class="editForm" name="editForm" style="margin-top:10px">
+						<div>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>一般信息</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="header.languages" required caption="请选择您希望提交之记录的语言：">
+												<div class="indent">
+													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>生物体信息</legend>
+									<div class="row">
+										
+										<div class="col-sm-12">
+											<div class="km-control-group" required name="scientificName" caption="学名">
+												<div class="help-block">生物体的学名一般由属名加上具体种类名构成。例如：<i>Oryza sativa</i>是水稻的学名</div>
+												<input type="text" class="form-control" name="scientificName" ng-model="document.scientificName"/>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<label>分类法分类</label>
+											<div class="help-block">分类法分类是生物体的正式名称。例如：属：<i>水稻</i>；种：<i>sativa</i>。</div>
+											<hr/>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group"  name="realm" caption="域">
+												<input type="text" class="form-control" name="realm" ng-model="document.realm"/>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subRealm" caption="亚域">
+												<input type="text" class="form-control" name="subRealm" ng-model="document.subRealm" />
+											</div>
+										</div>										
+										<div class="col-sm-12">
+											<div class="km-control-group" name="kingdom" caption="国">
+												<input type="text" class="form-control" name="kingdom" ng-model="document.kingdom" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="phylum" caption="门">
+												<input type="text" class="form-control" name="phylum" ng-model="document.phylum" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="_class" caption="纲">
+												<input type="text" class="form-control" name="_class" ng-model="document._class" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="order" caption="目">
+												<input type="text" class="form-control" name="order" ng-model="document.order" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subOrder" caption="亚目">
+												<input type="text" class="form-control" name="subOrder" ng-model="document.subOrder" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="family" caption="科">
+												<input type="text" class="form-control" name="family" ng-model="document.family" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subFamily" caption="亚科">
+												<input type="text" class="form-control" name="subFamily" ng-model="document.subFamily" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="genus" caption="属">
+												<input type="text" class="form-control" name="genus" ng-model="document.genus" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="species" caption="种">
+												<input type="text" class="form-control" name="species" ng-model="document.species" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="subSpecies" caption="亚种">
+												<input type="text" class="form-control" name="subSpecies" ng-model="document.subSpecies" />
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group" name="scientificNameSynonyms" caption="备用学名（同义词）">
+												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;" class="input-group">
+													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" /><span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-addon" style="cursor:pointer" 
+													 ng-click="removeItem(scientificNameSynonyms, $index)"><i class="fa fa-trash-o icon"></i></span></div>
+												<button type="button" class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">添加项目</button>
+											</div>
+										</div>
+										<div class="col-sm-12">
+											<div class="km-control-group common-names" name="commonNames" caption="常用名">
+												
+												<div class="help-block">常用名用于通过日常用语指代生物体并可能包括同义词。例子：玉米/谷物。</div>
+												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;" class="input-group">
+													<div km-textbox-ml name="commonNames{{$index}}" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div><span ng-class="{'disable':commonNames.length==1}" class="input-group-addon" style="cursor:pointer" 
+													 ng-click="removeItem(commonNames, $index)"><i class="fa fa-trash-o icon"></i></span></div>
+												<button type="button" class="btn btn-primary" ng-click="addItem(commonNames)">添加项目</button>
+											</div>
+										</div>
+									</div>
+
+									<section>
+										<div class="well no-shadow bg-white">
+											<label>更多分类</label>
+											<hr/>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="km-control-group" name="plantCultivar" caption="栽培品种/品种(植物)">
+														<input type="text" class="form-control" name="plantCultivar"  ng-model="document.plantCultivar"/>
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="microorganismStrain" caption="菌株/分离株/ 血清型(微生物)">
+														<input type="text" class="form-control" name="microorganismStrain" ng-model="document.microorganismStrain" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="bacteriaPathovar" caption="致病变型(细菌)">
+														<input type="text" class="form-control" name="bacteriaPathovar" ng-model="document.bacteriaPathovar" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="virusGroup" caption="组（病毒）">
+														<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
+													</div>
+												</div>
+												<div class="col-sm-12">
+													<div class="km-control-group" name="taxonomicClassification" caption="其他分类法分类信息">
+														<div class="help-block">请提供指向分类数据库（例如 GBIF、生命目录）中记录的链接。</div>
+														<div km-link name="taxonomicClassification" ng-model="document.taxonomicClassification" allow-link="true" allow-file="false"
+															identifier="document.header.identifier">
+														</div>
+													</div>
+												</div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="organismType"  caption="生物体的类型">
+														<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
+															terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
+													</div>	
+												</div>
+												<div class="col-xs-12">
+													<div class="km-control-group" name="domestication"  caption="驯化">
+														<div km-term-radio  ng-model="document.domestication" locales="document.header.languages"
+															terms="options.domestication" binding-type="term"></div>
+													</div>	
+												</div>
+											</div>
+										</div>
+									</section>
+								</div>
+							</section>
+							
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>与生物安全性有关的特征</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="originCentre" caption="种源中心">
+												<div class="help-block">最多200字符</div>
+												<div km-rich-textbox ng-model="document.originCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="diversityCentre" caption="遗传多样性中心">
+												<div class="help-block">最多200字符</div>
+												<div km-rich-textbox ng-model="document.diversityCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="habitat" caption="生境范围">
+												<div class="help-block">描述生物体可能生存或繁衍的环境类型（最多 200 个字符）。</div>
+												<div km-rich-textbox ng-model="document.habitat" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+
+										<div class="col-xs-12">
+											<div class="km-control-group" name="geographicalDistribution" caption="地理分布">
+												<div class="help-block">例子：东部杨木（<i>Populus deltoides</i>）分布于北美，西至阿尔伯塔省，东至魁北克省东部，南至佛罗里达州，德克萨斯州，亚利桑那州以及墨西哥北部（最多 200 个字符）。</div>
+												<div km-rich-textbox ng-model="document.geographicalDistribution" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="compatibleSpecies" caption="杂交亲和种">
+												<div class="hel-block">根据分类学类别（属和种的名称）提供已知与记录中生物体杂交的物种列表</div>
+												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies"
+													 on-build-query="onOrganismQuery(searchText)" allow-new-schema="organism"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group" name="pathogenicity" caption="已知致病性和/或致敏性">
+												<div class="help-block">最多200字符</div>
+												<div km-rich-textbox ng-model="document.pathogenicity" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-xs-12">
+											<div class="km-control-group"  name="commonUses" caption="常见用途">
+												<div km-term-check name="commonUses"  ng-model="document.commonUses" terms="options.commonUses" binding-type="term[]"
+												locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>	
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>补充信息</legend>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="address" caption="其它相关信息">
+												<div class="help-block">请在此处提供记录中其它位置未能提到的任何其它相关信息。</div>
+												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="km-control-group" name="relevantDocuments" caption="任何其他相关文件">
+												<div class="help-block">请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档。</div>
+												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+							<section>
+								<legend>备注</legend>								
+								<div class="row">
+									<div class="col-md-12">
+										<div class="km-control-group" name="notes"><span class="help-block">“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。</span><div km-notes name="notes" ng-model="document.notes"></div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+						</div>
+					</form>
+				</edit-form>
+				<review-form>
+					<div view-organism ng-model="review.document" locale="review.locale" allow-drafts="true"></div>
+				</review-form>
+			</workflow-arrow-buttons>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,90 @@
+﻿<div >
+	<style> table { border-collapse: collapse; } .tableContainer { margin: auto; } .fixed { top: 0; position: fixed; } .scrollMore { margin-top: 600px; } .up { cursor: pointer; } .table-hover > tbody > tr:hover > td { background-color: #FFF; } .letter { color: #999; } .letter-active { font-weight: bold; color: #111!important; } .evenly-spaced { display: flex; justify-content: space-between; } .zero { background-color: #DDD!important; } .breadcrumbs {background-color:#FFF!important; } .breadcrumbs { font-size: 12px; color:#111; text-decoration: none;} .breadcrumbs a { font-size: 12px; color:#999; text-decoration: none;} </style>
+
+
+	<div id="Jumbotron" class="bg-white hidden-sm hidden-xs" 
+	style="position:relative;" 
+	block-region activate="loadingMap"
+	>	
+	</div>
+
+
+
+	<div class="countries-country-list" block-region activate="loading" block-text=" Loading country details">
+		<div style="height:0px;width:0px;opacity: 0;" ng-if="readyForExport">
+			<table id="forExport" style="height:0px;width:0px">
+					<tr>
+						<th>País</th>
+						<th>Situación</th>
+						<th ng-if="regions.length>0">Regiones</th>
+						<th ng-repeat="header in headerCount"><span ng-bind="header.title|lstring"></span> (<span ng-bind="header.shortCode"></span>)</th>
+					</tr>
+					<tr ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
+						<td ng-bind="country.name|lstring:locale"></td>
+						<td><span ng-if="!country.isParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">No Parte</span> <span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Parte</span></td>
+						<td ng-if="regions.length>0" ng-bind="::getRegions(country.code)"></td>
+						<td ng-repeat="schema in country.schemas" ng-bind="schema.count"></td>		
+					<tr>
+
+			</table>	
+		</div>		
+		<div class="row" style="margin-top:10px">
+			<div class="col-xs-12" ><span class="btn-group pull-right dashboard-tour"><a rel="noopener" ng-href="#" class="help-tour link2" ng-click="tour()"><i class="fa fa-question-circle color-black" aria-hidden="true"></i> <span class="hidden-xs hidden-sm color-black">HACER UN RECORRIDO POR LOS PERFILES DE LOS PAÍSES</span></a></span></div>
+		</div>
+		<div id="listOfRecords" class="row bg-grey1" style="margin:10px 0 5px 0;padding:10px 0 5px 0;border:1px solid #d5d5d5;">
+			<div class="col-sm-12 col-md-6">
+
+				<div class="dropdown" style="display:inline;" id="sortingRecords">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="true"><i ng-if="sortTerm==='name.en'" class="fa" ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}" style="width:20px;"></i> <span ng-if="sortTerm!=='name.en'">Ordenado por: <strong><span ng-bind="sortTerm|schemaShortName"></span></strong></span> <span class="caret"></span></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a rel="noopener" translation-url  href="#" ng-click="sortTable('name.en', 'ASC')"><i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> Ordenado alfabéticamente de la A a la Z</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="sortTable('name.en', 'DESC')"><i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> Ordenado alfabéticamente de la Z a la A</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-repeat="header in headerCount" ng-click="sortTable(header.schema)" ng-bind="header.schema |schemaNamePlural"></a></li>
+                    </ul>
+                    </div>
+
+					<div id="sortingRecordsCountries"  km-select required name="countryFilter" ng-model="countryFilter" items="options.countries()"
+						 multiple placeholder="Países" display-count="0" show-selection-pop-over="true" icon="fa-globe"></div>
+
+				   <div id="sortingRecordsPartyStatus" class="dropdown" style="display:inline;">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span><strong ng-if="partyFilter==='All' || !partyFilter" ><span class="hidden-sm hidden-xs">Estado de las </span> <span class="visible-sm visible-xs">Partes</span></strong> <strong ng-if="partyFilter == 'party'" ><i class="color-party fa fa-square"></i> <span class="hidden-sm hidden-xs">Parte</span></strong> <strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> <span class="hidden-sm hidden-xs">Ratificado, pero todavía no es Parte</span></strong> <strong ng-if="partyFilter == 'nonparty'" ><i class="color-non-party fa fa-square"></i> <span class="hidden-sm hidden-xs">No es Parte</span></strong></span> <span class="caret"></span></button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('All');" >Mostrar todo</a></li>
+						<li role="separator" class="divider"></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" ><i class="color-party fa fa-square"></i> Partes</a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('inbetween');" ><i class="color-inbetween fa fa-square"></i> Ratificado, pero todavía no es Parte</a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('nonparty');" ><i class="color-non-party fa fa-square"></i> No Partes</a></li>
+                    </ul>
+                    </div>
+
+					<div id="sortingRecordsRegions"  km-select required name="regions" ng-model="regions" items="options.regions()"
+						 multiple placeholder="Regiones" display-count="0" show-selection-pop-over="true" icon="fa-object-group">
+					</div>
+					
+					<button id="exportingRecords" type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading"><i class="fa fa-download" ></i> <span class="hidden-sm hidden-xs">Exportar</span></button>
+            </div>
+              <div class="col-xs-6 evenly-spaced center-text hidden-xs hidden-sm" >                            
+				<div ng-repeat="header in headerCount"><span style="cursor:pointer;" ng-click="sortTable(header.schema)" data-bs-toggle="tooltip" title="{{header.title|lstring:locale}}"
+						data-container="body"><span id="nrCount-{{header.shortCode}}" class="bold color-black" ng-bind="header.shortCode">&nbsp;<i class="fa fa-info-circle color-litegrey" ></i></span><br> <span class="badge bg-black" ng-bind="header.count"></span></span></div>
+			</div>
+		</div><!--end row--><div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"
+			ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
+			<div class="col-md-6">
+
+				<div style="text-align:left;width:30px;display:inline-block;"><span ng-bind="$index+1"></span></div>
+
+				<div style="display:inline;"><span style="font-size:18px;font-weight:500;" ng-class="{'color-party': (country.isParty && isBCH), 'color-green': (country.isParty && isABS), 'color-grey color-non-party':!country.isParty, 'color-inbetween': country.isInbetweenParty}"><span ng-bind="country.name|lstring:locale"></span></span></div>
+				<div style="margin-left:35px;text-transform:uppercase;font-weight:500;">
+					<div ng-if="isABS"><span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">No Parte</span> <span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Parte en el Protocolo de Nagoya</span><span ng-if="country.isInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratificado, pero todavía no es Parte</span><span ng-if="country.isSignatory" style="font-size:10px;margin-right:10px;">Signatario</span><span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">Entrada en vigor: <span ng-bind="country.entryIntoForce|formatDate"></span></span></div>
+					<div ng-if="isBCH"><span ng-if="!country.isParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">No Parte</span> <span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Parte en el Protocolo de Cartagena</span></div>
+				</div>
+			</div>
+
+			<div class="col-md-6 evenly-spaced center-text hidden-xs" style="white-space:nowrap;margin-top:5px;"><span class="color-litegrey" style="margin-right:5px;" ng-repeat="schema in country.schemas" ng-click="gotoCountryProfile(country.code, schema, $event)"><span ng-bind="schema.shortCode"></span> <br class="hidden-sm"> <span class="label label-default"  ng-class="{'zero':schema.count==0, 'bg-green':schema.count>0}" ><span ng-bind="schema.count"></span></span></span></div>
+		</div>
+
+
+	</div><!--end loading--><joyride ng-if="tourOn"></joyride>
+</div><!--end controller-->

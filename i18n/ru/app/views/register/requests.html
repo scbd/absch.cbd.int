@@ -1,0 +1,113 @@
+﻿<div  id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div class=" innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+
+        <div class="register-content-header bg-darkgrey  color-white">
+            <div style="padding:10px 10px;">
+                <h3>Запросы</h3>
+            </div>
+        </div>
+        <div class="register-content-content">
+
+            <legend name="formInfo" style="display:none"></legend><!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>--><div class="registerpage-content">
+
+                <div class="alert alert-danger" ng-show="__error"><strong>Ошибка:</strong><span ng-bind="__error"></span></div>
+
+                <table>
+                    <tr>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button type="button" ng-model="filterStatus" class="btn btn-default dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="filterStatus=='Pending'">На утверждении</span> <span ng-if="filterStatus=='Approved'">Утверждено</span> <span ng-if="filterStatus=='Rejected'">Отклонено</span> <span ng-if="filterStatus=='Canceled'">Отменено</span> <span ng-if="filterStatus=='Expired'">Просрочено</span> <span ng-if="filterStatus=='All'">Все</span> <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li><a rel="noopener" translation-url href="#" ng-click="filterByStatus('Pending')">На утверждении</a></li>
+                                    <li><a rel="noopener" translation-url href="#" ng-click="filterByStatus('Approved')">Утверждено</a></li>
+                                    <li><a rel="noopener" translation-url href="#" ng-click="filterByStatus('Rejected')">Отклонено</a></li>
+                                    <li><a rel="noopener" translation-url href="#" ng-click="filterByStatus('Canceled')">Отменено</a></li>
+                                    <li><a rel="noopener" translation-url href="#" ng-click="filterByStatus('Expired')">Просрочено</a></li>
+                                    <li><a rel="noopener" translation-url href="#" ng-click="filterByStatus('All')">Все</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                                <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="pull-left">
+                                                <km-select  ng-model="filterType" multiple binding-type="string" placeholder="Record Type" items="options.filterTypes()"></km-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </td>
+                        <td style="width:100%">
+                                <div style="margin: 5px 0 0 20px; text-transform: lowercase;" ><span class="badge" ng-bind="itemCount"></span> {{filterStatus == "All" ? "" : filterStatus}} requests found</div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="table" style="padding:5px;">
+
+                    <div class="row header1 bold" style="padding:5px;margin:5px;border-bottom:1px solid #999;background-color:#EEE;">
+                        <div class="col-xs-12 col-sm-6"><span style="cursor:pointer;" ng-click="sortTable('workflow.data.title.en')">Title</i> <i ng-show="sortTerm=='workflow.data.title.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+                        <div class="col-md-2 hidden-xs hidden-sm"><span style="cursor:pointer;" ng-click="sortTable('workflow.data.metadata.schema')">Тип</i> <i ng-show="sortTerm=='workflow.data.metadata.schema'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+                        <div class="col-sm-3 col-md-2 hidden-xs text-left"><span style="cursor:pointer;" ng-click="sortTable('workflow.createdOn')">Запрошено <i ng-show="sortTerm=='workflow.createdOn'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+                        <div class="col-sm-3 col-md-2 hidden-xs text-left"><span style="cursor:pointer;" ng-click="sortTable('activity.name')">Статус <i ng-show="sortTerm=='activity.name'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i></div>
+                    </div>
+
+                    <div id="taskList"><span ng-show="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> loading...</span><div ng-repeat="task  in tasks| orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
+                            <div class="row" style="border-bottom:1px solid #ddd;padding:5px;">
+                                <div class="col-xs-12 col-sm-6 col-md-6""><!-- TITLE --> <a rel="noopener" translation-url href="#" class="color-grey bold" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;"><i ng-class="{'glyphicon glyphicon-plus-sign': !tasksDisplay, 'glyphicon glyphicon-minus-sign': tasksDisplay}"></i> <span style="text-transform: uppercase;font-size:12px;font-weight: 450; padding-left:10px;"><span ng-if="task.workflow.type.name =='publishReferenceRecord'" style="color:#888;">ОПУБЛИКОВАТЬ</span> <span ng-if="task.workflow.type.name =='publishNationalRecord' " style="color:#888;">ОПУБЛИКОВАТЬ</span> <span ng-if="task.workflow.type.name=='deleteRecord'" class=" color-red">УДАЛИТЬ</span> <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}"><span ng-bind="' - '+task.workflow.data.metadata.schema|schemaName"></span></span></span> <br> <span class="bold" style="font-size: 14px;padding-left:28px;" ng-bind="task.workflow.data.title | lstring"></span></a></div>
+
+                                <div class="col-md-2 hidden-xs hidden-sm" style="text-transform: uppercase;font-size:12px;font-weight: 450"><!-- schema --> <span style="color:#888;" ng-bind="task.workflow.data.metadata.schema|schemaName"></span></div>
+
+                                <div class="col-sm-3 col-md-2 hidden-xs "><!-- Requested on --><div style="text-transform: uppercase;font-weight: bold; font-size:12px; " ng-bind="task.workflow.createdOn | moment:'fromNow'"></div><a rel="noopener"  style="font-size: 12px;color:#888;" href="mailto:{{task.workflow.createdBy_info.email}}"><span ng-bind="task.workflow.createdBy_info.firstName"></span> <span ng-bind="task.workflow.createdBy_info.lastName"></span> (<span ng-bind="task.workflow.createdBy_info.email"></span>)</a></div>
+                                <div class="col-sm-3 col-md-2 hidden-xs" ><!-- Status --><div ng-switch="task.workflow.state">
+                                        <div ng-switch-when="completed">
+                                            <div ng-show="task.activity.completedOn && task.activity" ng-switch="task.activity.result.action"><span ng-switch-when="approve"> <span class="bold color-green">APPROVED</span> <span ng-if="task.activity.result.reason">(<span ng-bind="task.activity.result.reason"></span>)</span><div style="text-transform: uppercase;font-weight: bold; font-size: 12px; padding-top:5px;" ng-bind="task.activity.completedOn | moment:'fromNow'"></div><a rel="noopener" style="font-size: 12px;color:#888;" href="mailto:{{task.activity.completedBy_info.email}}"><span ng-bind="task.activity.completedBy_info.firstName"></span> <span ng-bind="task.activity.completedBy_info.lastName"></span> (<span ng-bind="task.activity.completedBy_info.email"></span>)</a> </span> <span ng-switch-when="reject"> <span class="bold color-red">ОТКЛОНЕНО</span> <span ng-if="task.activity.result.reason">(<span ng-bind="task.activity.result.reason"></span>)</span><div style="text-transform: uppercase;font-weight: bold; font-size: 12px;" ng-bind="task.activity.completedOn | moment:'fromNow'"></div><a rel="noopener" style="font-size: 12px;color:#888;" href="mailto:{{task.activity.completedBy_info.email}}"><span ng-bind="task.activity.completedBy_info.firstName"></span> <span ng-bind="task.activity.completedBy_info.lastName"></span> (<span ng-bind="task.activity.completedBy_info.email"></span>)</a> </span></div>
+                                        </div>
+                                        <div ng-switch-when="canceled" class='bold'>ОТМЕНЕНО</div>
+                                        <div ng-switch-when="timedOut" class='bold'>ПРОСРОЧЕНО</div>
+                                        <div ng-switch-when="running">
+                                            <div ng-if="task.workflow.workflowExpiryDate < today" class='bold'>ПРОСРОЧЕНО</div>
+                                            <div ng-if="task.workflow.workflowExpiryDate >= today" class='bold'><span ng-if="task.workflow.type.name == 'publishReferenceRecord'"
+                                                    class="color-orange">НА РАССМОТРЕНИИ СКБР</span> <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"><i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> НА УТВЕРЖДЕНИИ <span ng-if="roles.isPublishingAuthority">ПО</span> <span ng-if="!roles.isPublishingAuthority">ВАШЕЙ</span> СТРАНЫ</span></div>
+                                            <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating"><span style="font-size: 12px;color:#888;">Дата окончания срока действия <span ng-bind="task.workflow.workflowExpiryDate|formatDate"></span></span></div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="task.activity.isUpdating"><a rel="noopener" translation-url class="btn btn-info" type="button" ng-click="return" style="padding:4px;"><strong><i class="fa fa-spin fa-cog"></i> Обработка...</strong></a></div>
+                                </div>
+                                <div ng-if="tasksDisplay" class="col-xs-12">
+                                    <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}"
+                                        on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
+                                </div>
+                            </div>
+                            <div class="row" ng-repeat="history in task.workflowHistory|orderBy:createdOn:true" ng-show="showHistory"><!-- <div ng-if="$first==false" class="col-lg-4"></div> --><div ng-if="$first==false"><!-- <div class="row"> --><div class="col-xs-3 col-lg-3 col-md-3"></div>
+                                    <div class="col-xs-5 col-lg-5 col-md-5"><!-- Description --> <strong ng-show="history.workflow.result.documentID||history.workflow.data.documentID"><a
+                                                translation-url ng-href="/database/record/{{(history.workflow.result.documentID||history.workflow.data.documentID)|encodeURIComponent}}" ng-bind="history.workflow.data.title | lstring"></a></strong> <strong ng-hide="history.workflow.result.documentID||history.workflow.data.documentID"><a
+                                                translation-url href="#" ng-click="tasksDisplay=!tasksDisplay; formLoading=false;" ng-bind="history.workflow.data.title | lstring"></a></strong> <br> <span ng-show="history.workflow.data.additionalInfo" ng-bind="history.workflow.data.additionalInfo"></span></div>
+                                    <div class="col-xs-2 col-lg-2 col-md-2"><!-- Requested on --><div ng-bind="history.workflow.createdOn|date:'short'"></div>
+                                        <div><em><span ng-bind="history.workflow.createdBy_info.firstName"></span> <span ng-bind="history.workflow.createdBy_info.lastName"></span> (<span ng-bind="task.workflow.createdBy_info.email"></span>)</em></div>
+                                    </div>
+                                    <div class="col-xs-2 col-lg-2 col-md-2" style="padding-left:0px"><!-- Status --><div ng-switch="history.workflow.state">
+                                            <div ng-switch-when="completed">
+                                                <div ng-show="history.activity.completedOn"><span ng-show="history.activity" ng-switch="history.activity.result.action"><span ng-switch-when="approve"><i class="glyphicon glyphicon-ok"></i> Утверждено</span> <span ng-switch-when="reject"><i class="glyphicon glyphicon-remove"></i> Отклонено</span> <span ng-show="history.activity.result.reason"><STRONG ng-bind="'for'+history.activity.result.reason | limitTo:50"></STRONG></span></span> <span ng-bind="history.workflow.activities.name"></span></div>
+                                            </div>
+                                        </div>
+                                        <div ng-show="history.workflow.state!='completed'">
+                                            <div ng-hide="history.activity.name='publishRecord'" ng-bind="history.activity.name+'*'"></div>
+                                        </div>
+                                    </div><!-- </div> --></div>
+                            </div>
+
+                        </div>
+                        <h4 style="margin:20px;color:#999; " ng-show="!tasks || tasks.length==0">Запросов <span style="text-transform: lowercase" ng-bind="filterStatus"></span> не найдено.</h4>
+                    </div>
+                </div>
+
+                <div pagination  ng-if="itemCount > itemsPerPage" class="text-center"  current-page="currentPage"  page-count="pageCount" on-page-change="onPageChange(page)"></div> 
+
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,16 @@
+﻿<div>
+    <div  ng-show="!user.isAuthenticated" style="margin:0 10% 0 10%" >
+        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">请登录，以发布信息至： <span ng-bind="chShortName"></span></h1>
+        <hr>
+       <div class="well">
+       <h3>我如何注册生物多样性公约账户？</h3>
+       <p>任何人都可以拥有生物多样性公约账户，以在公约下各个信息交换所（包括生物安全信息交换所、获取和惠益分享信息交换所以及信息交换所机制）上注册信息。您可以在<a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a>注册生物多样性公约帐户。</p>
+        <p>确保按照表格上的说明输入所需的全部信息。您将自动收到一封包含链接的电子邮件，单击该链接即可确认您的帐户。</p>
+       <h3>忘记密码？</h3>
+        <p>单击这里<a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a>，以重置您的密码。您将被要求提供您的电子邮件地址，如果您是注册用户，密码重置说明将立即发至您注册的电子邮件地址。</p>
+        <h3>信息交换所显示有问题？</h3>
+        <p><span ng-bind="chShortName"></span>搭配最新的互联网浏览器版本（Firefox、Chrome 或 Internet Explorer 9+）效果最佳。</p>
+        <h3 class="color-green">如需技术支持，请联系我们的帮助中心： <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
+       </div>
+      </div>
+</div>

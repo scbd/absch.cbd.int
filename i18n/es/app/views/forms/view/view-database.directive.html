@@ -1,0 +1,57 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+			
+		<document-date></document-date>
+		<legend>Información general</legend>
+		
+		<div ng-show="document.government">
+			<label name="country">País</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a> <span ng-party-status government="document.government" id="government"></span></div>
+		</div>
+
+			<div ng-show="document.title">
+			 	<label>Nombre del sitio web o de la base de datos</label>
+			 	<div class="km-value" compare-val><strong ng-bind="document.title | lstring:locale"></strong></div>
+		 	</div>
+
+
+		<div ng-show="document.description">
+			<label>Descripción</label>
+			<div compare-val>
+			<div class="km-value km-pre"ng-bind-html="document.description | lstring:locale"></div>
+			</div>
+		</div>
+		<div ng-show="document.websites && document.websites.length >0">
+			<label>URL del sitio web</label>
+				<div class="km-value" compare-val>
+					<km-link-list ng-model="document.websites" ></km-link-list>
+				</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Información adicional</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Otras direcciones de sitios web y/o documentos adjuntos pertinentes</label>
+				<div class="km-value" compare-val>
+						<km-link-list ng-model="document.relevantDocuments" ></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+    <div document-metadata class="panel-footer"></div>
+</div>

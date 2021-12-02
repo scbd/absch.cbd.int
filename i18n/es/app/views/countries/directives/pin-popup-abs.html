@@ -1,0 +1,26 @@
+﻿<div>
+    <div ng-if="currentCountry.code" style="padding:5px;" ng-class="{'bg-party': currentCountry.isParty, 'bg-darkgrey':!currentCountry.isParty, 'bg-inbetween': currentCountry.isInbetweenParty}">
+        <div></div>
+
+        <div class="row abs-exception-tooltip"
+        ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
+                countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
+                countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
+            <div class="col-lg-12">
+                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk') ? 'show' : 'hide'}}"
+                    style="margin-top:5px;white-space: normal;padding:3px;"></div>
+                <div class="{{countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk' ? 'show' : 'hide'}}   small " style="margin-top:5px;white-space: normal;padding:3px;"></div>
+                <div class="{{countryMapScope.currentCountry.code.toLowerCase()=='eh' ? 'show' : 'hide'}}   small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;"></div>
+                <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;"></div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
+            <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
+                <td ></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+</div>

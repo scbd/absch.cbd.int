@@ -1,0 +1,35 @@
+﻿<div>
+   <div class="box box-primary  no-padding">
+       <div class="box-header with-border">
+         <h3 class="box-title">Leer correo</h3><!--         <div class="box-tools pull-right">
+           <a rel="noopener" translation-url  href="#" class="btn btn-box-tool" data-bs-toggle="tooltip" title="Previous"><i class="fa fa-chevron-left"></i></a>
+           <a rel="noopener" translation-url  href="#" class="btn btn-box-tool" data-bs-toggle="tooltip" title="Next"><i class="fa fa-chevron-right"></i></a>
+         </div>--></div>
+       <div class="box-body no-padding">
+         <div class="mailbox-read-info">
+           <h3 ng-bind="mail.data.subject"></h3>
+             <h5>De: <span ng-bind="(mail.createdBy_info.firstName) + ' ' + (mail.createdBy_info.lastName)"></span> &lt;<span ng-bind="mail.createdBy_info.email"></span>&gt; <span class="mailbox-read-time pull-right" ng-bind="mail.createdOn|formatDate"></span></h5>
+         </div>
+         <div class="mailbox-controls with-border text-center">
+           <div class="btn-group">
+             <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title="Eliminar"><i class="fa fa-trash-o"></i></button>
+             <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title="Responder"><i class="fa fa-reply"></i></button>
+             <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title="Reenviar"><i class="fa fa-share"></i></button>
+           </div>
+           <button type="button" class="btn btn-default btn-sm" data-bs-toggle="tooltip" title="Imprimir"><i class="fa fa-print"></i></button>
+         </div>
+         <div class="mailbox-read-message" ng-bind="mail.data.message">
+         </div>
+       </div>
+       <div class="box-footer">
+       </div>
+       <div class="box-footer">
+         <div class="pull-right">
+           <button type="button" class="btn btn-default" ng-click="reply()"><i class="fa fa-reply"></i> Responder</button>
+           <button type="button" class="btn btn-default" ng-click="forward()"><i class="fa fa-share"></i> Reenviar</button>
+         </div>
+         <button type="button" class="btn btn-default" ng-click="delete()"><i class="fa fa-trash-o"></i> Eliminar</button>
+         <button type="button" class="btn btn-default"><i class="fa fa-print"></i> Imprimir</button>
+       </div>
+   </div>
+</div>

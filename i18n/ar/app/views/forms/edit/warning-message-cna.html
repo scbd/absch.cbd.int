@@ -1,0 +1,11 @@
+﻿<div ng-show="showWarning" dir="rtl">
+    <div class="well" ng-if="responsibleCNA && responsibleCNA.numFound > 0">
+        <h3 class="color-red">تم بالفعل نشر سلطة وطنية مختصة، تم تعيينها باعتبارها السلطة الوطنية المختصة الوحيدة لبلدك.</h3>
+            <h5 class="color-red">يمكنك حفظ المسودات، ومع ذلك لن يمكنك نشر سلطة وطنية مختصة جديدة قبل تحديث السجل التالي:</h5>
+            <div>
+            <div ng-repeat="rec in responsibleCNA.docs">
+                <result-default doc='rec' type="nationalRecords"></result-default>
+            </div>
+            </div>
+    </div>
+</div>

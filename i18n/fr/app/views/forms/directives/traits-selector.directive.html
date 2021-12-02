@@ -1,0 +1,94 @@
+﻿<div>
+
+    <table class="table table-bordered">       
+        <tr>
+            <td>
+                <div km-term-check name="root-traits" locales="locales" required ng-change="onRootTraitsChange()"
+                    ng-model="rootTraits" terms="options.rootTraits()" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['81799D15-669E-4346-9AEC-6834893D2BE4'].selected">
+                <td>
+                    <legend>Résistance aux maladies et aux parasites</legend>
+                    <div km-term-check name="traits" locales="locales" required
+                        ng-model="traits['81799D15-669E-4346-9AEC-6834893D2BE4'].items"  ng-change="onTraitsChange()"
+                        terms="options.traits('81799D15-669E-4346-9AEC-6834893D2BE4')" binding-type="term[]"></div>
+                </td>
+            </tr>
+        <tr ng-if="traits['0C74FEB2-78E8-4163-81EF-2D410FB2FBBC'].selected">
+            <td>
+                <legend>Résistance aux herbicides</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['0C74FEB2-78E8-4163-81EF-2D410FB2FBBC'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('0C74FEB2-78E8-4163-81EF-2D410FB2FBBC')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['87D98E42-4757-42DE-9C3F-815BFAA35218'].selected">
+            <td>
+                <legend>Résistance aux antibiotiques</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['87D98E42-4757-42DE-9C3F-815BFAA35218'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('87D98E42-4757-42DE-9C3F-815BFAA35218')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['31396BD1-9E3E-4EB3-A29E-9A22B7230221'].selected">
+            <td>
+                <legend>Tolérance au stress abiotique</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['31396BD1-9E3E-4EB3-A29E-9A22B7230221'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('31396BD1-9E3E-4EB3-A29E-9A22B7230221')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['337747E5-522D-42DF-8C57-FE626C1572EC'].selected">
+            <td>
+                <legend>Changements dans la physiologie et/ou la production</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['337747E5-522D-42DF-8C57-FE626C1572EC'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('337747E5-522D-42DF-8C57-FE626C1572EC')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['3B427EA6-5260-47F1-B424-FAAA5960FB52'].selected">
+            <td>
+                <legend>Changements dans la qualité et/ou la teneur en métabolites</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['3B427EA6-5260-47F1-B424-FAAA5960FB52'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('3B427EA6-5260-47F1-B424-FAAA5960FB52')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['5B9DB3B4-90A1-451A-A10C-E3A47995344F'].selected">
+            <td>
+                <legend>Production de composés médicaux ou pharmaceutiques (humains ou animaux)</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['5B9DB3B4-90A1-451A-A10C-E3A47995344F'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('5B9DB3B4-90A1-451A-A10C-E3A47995344F')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['C8C662E2-D633-4C69-96EA-C9853997A3A5'].selected">
+            <td>
+                <legend>Utilisation dans les applications industrielles</legend>
+                <div km-term-check name="traits" locales="locales" required
+                    ng-model="traits['C8C662E2-D633-4C69-96EA-C9853997A3A5'].items"  ng-change="onTraitsChange()"
+                    terms="options.traits('C8C662E2-D633-4C69-96EA-C9853997A3A5')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['75DE5726-4C52-442C-8BF8-B77A6EBE48E2'].selected">
+            <td>
+                <legend>Application conçue de forçage génétique</legend>
+                <div km-term-check name="traits" locales="locales" required  ng-change="onTraitsChange()"
+                    ng-model="traits['75DE5726-4C52-442C-8BF8-B77A6EBE48E2'].items" terms="options.traits('75DE5726-4C52-442C-8BF8-B77A6EBE48E2')" binding-type="term[]"></div>
+            </td>
+        </tr>
+        <tr ng-if="traits['traitsOtherSection'].selected">
+            <td>
+                <div km-term-check name="traits" locales="locales" required  ng-change="onTraitsChange()"
+                    ng-model="traits['traitsOtherSection'].items" terms="options.traitsOtherSection()" binding-type="term[]">
+                </div>
+            </td>
+        </tr>
+        <tr ng-if="traits['0C74FEB2-78E8-4163-81EF-2D410FB2FBBC'].selected">
+            <td>
+            </td>
+        </tr>
+    </table>
+
+</div>

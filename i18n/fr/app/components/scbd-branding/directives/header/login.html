@@ -1,0 +1,45 @@
+﻿<div id="CBD-Branding">
+<div class="modal login" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <button type="button" class="close" data-bs-dismiss="modal" data-dismiss="modal" aria-hidden="true"></button></div>
+      <div class="modal-body  dropshadow" style="">
+        <div class="row" ng-show="!user.isAuthenticated">
+          <div class="col-xs-12">
+            <div>
+                
+              <div class="alert alert-info" ng-show="sessionExpiredAlert"></div>
+              <div class="alert alert-danger" ng-show="errorInvalid"></div>
+
+              <div class="alert alert-danger" ng-show="errorTimeout"></div>
+              <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required">
+                <div class="form-group">
+                  <div class="input-group"><input type="text" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email" ng-model="email" placeholder="" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="input-group"><input type="password" ng-disabled="waiting" class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputPassword" name="password" ng-model="password" placeholder="" required>
+                  </div>
+                </div>
+                <div class="form-group ">
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary " ng-disabled="waiting"></button>
+                    <div class="spinner ng-hide" ng-show="waiting">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+            </div>
+
+          </div>
+          <div class="col-xs-12"></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

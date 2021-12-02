@@ -1,0 +1,47 @@
+﻿<div id="reference-records-table" ng-show="referenceRecords">
+    <legend></legend>
+    <table class="table table-bordered table-condensed" style="width: 100%;">
+        <tr>
+            <th width="10%"></th>            
+            <th width="43%"></th>
+            <th width="40%"></th>
+            <th width="7%"></th>
+        </tr>
+
+        <tr ng-repeat="(key, record) in referenceRecords">
+            <td colspan="4" style="padding: 0px;">
+                <table class="table table-bordered" style="margin-bottom: 0px;width: 100%;">
+                    <tr ng-repeat-start="(fieldKey, field) in record.fields" ng-class="{'active':field.showRecords}">
+                        <td width="10%">
+                            <button type="button" class="btn btn-primary btn-xs" ng-click="field.showRecords=!field.showRecords"></button>
+                        </td>
+                        <td width="43%"></td>
+                        <td max-width="40%" class="truncate-record" ng-bind="field.fieldTitle" ng-click="toggleTitle($event)"></td>
+                        <td width="7%" ng-bind="field.count"></td>
+                    </tr>
+                    <tr ng-if="field.showRecords">
+                        <td width="15%" colspan="4" style="padding:0px">
+                            <table class="table table-bordered table-condensed" style="width: 100%;margin-bottom: 0px;">
+                                <tr style="border-bottom: 1px solid #eee;">
+                                   <td  ng-show="record.schemaType=='national'" ng-class="{'bold':sortField=='government'}"></td> 
+                                   <td ng-class="{'bold':sortField=='title'}"></td> 
+                                   <td ng-class="{'bold':sortField=='uniqueId'}"></td> 
+                                   <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs"></td> 
+                                </tr>
+                                <tr ng-repeat="doc in field.docs | orderBy:sortField:reverse" style="border-bottom: 1px solid #eee;">
+                                    <td ng-show="record.schemaType=='national'"></td>
+                                    <td width="50%"></td>
+                                    <td  width="20%"><bch-icons></bch-icons>
+                                    </td>
+                                    <td  width="15%" class="hidden-xs"></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr ng-repeat-end="(fieldKey, field) in record.fields"></tr>
+                </table>
+            </td>   
+        </tr>       
+
+    </table>
+</div>

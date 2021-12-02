@@ -1,0 +1,42 @@
+﻿<div>
+   <div class="box box-primary  no-padding">
+       <div class="box-header with-border">
+         <h3 class="box-title" ng-bind="mailFolder|uppercase"></h3><!--         <div class="box-tools pull-right">
+           <div class="has-feedback">
+             <input type="text" class="form-control input-sm" placeholder="Search Mail"/>
+             <span class="glyphicon glyphicon-search form-control-feedback"></span>
+           </div>
+         </div>--></div>
+       <div class="box-body no-padding">
+         <div class="mailbox-controls">
+           <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="fa fa-square-o"></i></button>
+           <div class="btn-group">
+             <button type="button" class="btn btn-default btn-sm" ng-click="deleteMail()"><i class="fa fa-trash-o"></i></button>
+             <button type="button" class="btn btn-default btn-sm"><i class="fa fa-reply"></i></button>
+             <button type="button" class="btn btn-default btn-sm"><i class="fa fa-share"></i></button>
+           </div>
+           <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+           <div class="pull-right">{{pageNumber+1}}-{{pageLength * (pageNumber+1)}}/{{mailCount}}<div class="btn-group">
+               <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-left"></i></button>
+               <button type="button" class="btn btn-default btn-sm"><i class="fa fa-chevron-right"></i></button>
+             </div>
+           </div>
+         </div>
+         <div class="table-responsive mailbox-messages">
+            <div class="alert alert-danger" role="alert" ng-show="errorMessage" ng-bind="errorMessage">
+          </div>
+           <p ng-if="!(mails).length && !erroMessage" class="lead text-center">No hay correos aquí</p>
+           <table class="table table-hover table-striped" ng-if="(mails).length">
+             <tbody>
+               <tr ng-repeat="mail in mails" class="notification-item" ng-class="{'notification-read':mail.state=='read','notification-unread':mail.state=='unread' }"><!--                           ng-class="{'active': mail.state == 'unread'}"--><td><input type="checkbox" ng-model="mail.mailSelected"/></td>
+                 <td class="mailbox-star"><a rel="noopener" translation-url  href="#"><i class="fa fa-star text-yellow"></i></a></td>
+                 <td class="mailbox-name"><a rel="noopener" translation-url  ng-click="messageSelection('mailMessage', mail)" ng-bind="(mail.createdBy_info.firstName)+ ' ' + (mail.createdBy_info.lastName)"></a></td>
+                   <td class="mailbox-subject"><b><span ng-bind="mail.data.subject"></span></b> - <span ng-bind="mail.data.message | limitTo:100"></span>...</td>
+                 <td class="mailbox-date" ng-bind="mail.createdOn|formatDate"></td>
+               </tr>
+             </tbody>
+           </table>
+         </div>
+       </div>
+   </div>
+</div>

@@ -1,0 +1,109 @@
+<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date>
+		<legend>一般信息</legend>
+		<div ng-if="document.organization">
+			<legend>实验室名称和联系方式</legend>
+			<div class="km-value" compare-val>
+				<div view-record-reference ng-model="document.organization" locale="locale"></div>
+			</div>
+		</div>
+		<div ng-if="document.relatedOrganization">
+			<legend>相关机构</legend>
+			<div class="km-value" compare-val>
+				<div view-record-reference ng-model="document.relatedOrganization" locale="locale"></div>
+			</div>
+		</div>
+		<div ng-if="document.services">
+			<label>所开展的服务和活动</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="term in document.services" ng-bind="term|term"></li>
+				</ul>
+			</div>
+		</div>
+		<div ng-if="document.agreements || document.agreementLinks">
+			<label>协作协议</label>
+			<div compare-val>
+				<km-value-ml value="document.agreements" locales="locale" html></km-value-ml>
+			</div>
+			<div class="km-value" ng-if="document.agreementLinks"><br ng-if="document.agreement"/><div compare-val>
+					<km-link-list  ng-model="document.agreementLinks"></km-link-list>
+					
+				</div>
+			</div>
+		</div>
+		<div ng-if="document.certifications">
+			<label>实验室的认可与认证</label>
+			<div compare-val>
+				<km-value-ml value="document.certifications" locales="locale" html></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.detectionMethods">
+			<label>可供实验室使用之探测/查明方法的类型</label>
+			<div compare-val>
+				<view-terms-hierarchy class="km-value" ng-model="document.detectionMethods" locale="locale" term-domain="detectionMethods" on-terms-loaded="onDetectionTerms(terms)"></view-terms-hierarchy>
+			</div>		
+		</div>			
+
+		<div ng-if="document.lmoTypes">
+			<label>改性活生物体类型</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="term in document.lmoTypes" ng-bind="term|term"></li>
+				</ul>
+			</div>
+		</div>	
+
+		<div ng-if="document.detectableLmos">
+			<label>可由实验室探测的改性活生物体</label>
+			<div class="km-value" compare-val>
+				<table class="table table-stripped">
+					<tr ng-repeat="item in document.detectableLmos">
+						<td>
+							<view-lmo-reference ng-model="item.identifier" locale="locale" target="target" ></view-lmo-reference>
+						</td>
+					</tr>
+				</table>
+				
+			</div>
+		</div>
+
+		<div ng-if="document.detectableGenes">
+			<label>可由实验室探测的基因片段</label>
+			<div class="km-value" compare-val>
+				<table class="table table-stripped">
+					<tr ng-repeat="item in document.detectableGenes">
+						<td>
+							<view-record-reference ng-model="item.identifier" locale="locale" target="target" ></view-record-reference>
+						</td>
+					</tr>
+				</table>				
+			</div>
+		</div>
+
+		<div ng-if="document.relevantInformation||document.relevantDocuments">
+			<legend>更多信息</legend>
+
+			<div compare-val ng-if="document.relevantInformation">
+				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+			</div>
+
+			<div ng-if="document.relevantDocuments">
+				<label>其他相关网站地址和/或附加文件</label>
+				<div compare-val>
+					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
+				</div>		
+			</div>
+		</div>
+		
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

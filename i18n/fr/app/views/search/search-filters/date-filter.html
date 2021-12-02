@@ -1,0 +1,20 @@
+﻿<div id="Search-Filter"  style="margin-bottom:30px;" >
+     <div><span class="country-heading">Date</span><hr class="heading" />
+         <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> Recherche pour un fichier publié dans une période déterminée</p>
+        
+    </div>
+    <div style="max-height:400px;">
+            <div class="filter col-lg-4">
+                
+                <div class="row" style="margin-top:6px">
+                    <div class="col-md-5 published-on-label">
+                        <label>Publié sur</label>
+                    </div>
+                    <div class="col-md-7">
+                        <div km-date-range ng-model="dateFilter.value" ng-change="onChange()"></div>
+                    </div>
+                </div>
+               
+            </div>
+    </div>
+</div>

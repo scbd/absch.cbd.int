@@ -1,0 +1,91 @@
+﻿<div class="row" style="margin-bottom:15px;"  ng-hide="hideEverything" dir="rtl">
+    <div class="col-xs-12">
+        <style> .active { position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style><span block-region activate="isUpdating"></span><div class="alert alert-danger" style="border-color:#DDD; background-color: #f5f5f5;" role="alert">
+            <h3 class="color-black;" style="margin-top:0;border-bottom:1px solid #999;"><span ng-if="workflow.type.name != 'delete-record'">النشر</span> <span ng-if="workflow.type.name == 'delete-record'">الحذف</span> طلب</h3>
+            <div><span style="font-size:12px">Requested by:</span> <span class="color-black"><span class="bold">{{workflow.createdBy_info.firstName + ' ' + workflow.createdBy_info.lastName}}</span> <a rel="noopener" translation-url  ng-href="mailTo:{{workflow.createdBy_info.email|encodeURIComponent}}" class="color-blue">({{workflow.createdBy_info.email}})</a> <span>بتاريخ</span> <span  style="text-transform: uppercase; font-size:12px" class="bold" ng-bind="workflow.createdOn | formatDateWithTime"></span> <span ng-if="document.amendmentIntent == 1" class="bold color-red">طلب إلغاء صلاحية هذا السجل.</span></span></div>
+            <div><span style="font-size:12px">الرسالة:</span> <span class="color-black"><span ng-bind="workflow.data.additionalInfo"></span></span></div>
+
+            <div><span style="font-size:12px">تنتهي صلاحية هذا الطلب في:</span> <span><span ng-bind="workflow.daysToApproval"></span> أيام</span></div> 
+
+            <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" style="padding-top:20px;">
+
+                    <div  id="buttonsDiv" ng-show="isAssignedToMe(activity) || isAdmin()">
+                        <div  style="display:inline;padding:5px;" ng-show="activity.name != 'deleteRecord' ">
+                            <button type="button" class="btn btn-success bold" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating"><i class="fa fa-check-circle"></i> <span >الموافقة</span></button>
+                        </div>
+                        <div  style="display:inline;padding:5px;"  ng-show="activity.name != 'deleteRecord' && document.amendmentIntent != 1">
+                            <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity, workflow._id)" ng-disabled="isUpdating"><i class="fa fa-pencil-square-o"></i> <span >تعديل</span></button>
+                        </div>
+                        <div style="display:inline;padding:5px;" >
+                            <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating"><i class="fa fa-times-circle"></i> <span ng-if="activity.name == 'deleteRecord'" >رفض (عدم الحذف)</span> <span ng-if="activity.name != 'deleteRecord'" >رفض</span></button>
+                        </div>
+                        <div style="display:inline;padding:5px;"  ng-show="activity.name == 'deleteRecord'">
+                                <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating"><i class="fa fa-check-circle"></i> <span >حذف</span></button>
+                        </div>
+                    </div>
+
+                    <div ng-show="workFlowIsCreatedByMe()">
+                        <button type="button" class="btn btn-warning bold" ng-click="askCancelWorkflowRequest()" ng-disabled="isUpdating"><i class="fa fa-rotate-left"></i> <span>إلغاء الطلب</span></button>
+                    </div>
+                    <div ng-if="isAdmin()"><br/> <strong>هذه المهام خصصت للمستخدمين التاليين</strong>(تظهر فقط للمستخدمين الذين يتمتعون بصلاحيات الإدارة)<table class="table table-bordered">
+                            <tr ng-repeat="user in activity.assignedTo_info">
+                                <td ng-bind="user.userID"></td>
+                                <td ng-bind="user.firstName + ' ' + user.lastName"></td>
+                                <td ng-bind="user.email"></td>
+                            </tr>
+                        </table>
+                    </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-xs-12">
+        <div ng-show="document" class="t-document">
+            <record-loader show-details="showDetails" class="shadow-z-2" hide-buttons="true" link-target="_self" document="document" document-info="documentInfo"></record-loader>
+        </div>
+    </div>
+    <script type="text/ng-template" trados-translation="true" id="rejectWorkflowRequestModalTemplate">
+        <form name="rejectForm" role="form" dir="rtl">
+            <div class="modal-header bg-red">
+                <h4 class="modal-title color-white">اطلب التغييرات أو ارفض هذا الطلب</h4>
+            </div>
+            <div class="modal-body bg-white">
+                <p ng-class="{ 'has-warning':rejectForm.reason.$error.required, 'has-success':!rejectForm.reason.$invalid }"><span ng-show="rejectForm.reason.$error.required">يُرجى ذكر سبب رفض هذا السجل.</span><textarea class="form-control" rows="5" name="reason" ng-model="rejectReason" required></textarea>
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-warning bold pull-left" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> رفض</button>
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">إلغاء</button>
+            </div>
+        </form>
+    </script>
+
+    <script type="text/ng-template" trados-translation="true" id="cancelWorkflowRequestModalTemplate">
+        <div id="cancelWorkflowRequestModal" dir="rtl">
+            <div class="modal-header">
+                <h4>إلغاء طلب النشر<i ng-show="loading==true" class="fa fa-spinner fa-spin" style="display:none" dir="rtl"></i></h4>
+            </div>
+            <div class="modal-body bg-white">
+                <h2>هل تريد حقًا إلغاء طلب النشر؟</h2>
+            </div>
+            <div class="modal-footer" style="margin-top:0">
+                 <button ng-disabled="loading==true" type="button" ng-click="cancelWorkflowRequest(workflow)" class="btn bold btn-primary">نعم</button>
+                <button type="button" class="btn btn-default" ng-click="closeDialog();">إغلاق</button>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/ng-template" trados-translation="true" id="deleteConfirmation">
+        <!--<div class="modal-content">--><div class="modal-header" dir="rtl">
+            <h3 class="modal-title">حذف</h3>
+        </div>
+        <div class="modal-body bg-white" dir="rtl">
+           <h2 class="color-red">هل تريد حقًا حذف هذا السجل؟</h2><span ng-bind="document"></span></div>
+        <div class="modal-footer" dir="rtl">
+            <button type="button" class="btn btn-danger bold pull-left" ng-click="updateActivity()" ng-disabled="isUpdating"><span class="hidden-xs" dir="rtl">حذف السجل</span></button>
+            <button type="button" class="btn btn-default" ng-click="closeConfirmation()" ng-disabled="isUpdating"><span class="hidden-xs">إغلاق</span></button>
+        </div><!--</div> --></script>
+
+</div>

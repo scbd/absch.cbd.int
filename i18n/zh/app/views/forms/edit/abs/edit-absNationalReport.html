@@ -1,0 +1,1945 @@
+﻿<div >
+
+    <edit-header></edit-header>
+
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content" style="padding-bottom:30px;">
+
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+                    
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="pagination" id="nrTabs" ng-click="setTab()">
+                                <li class="active"><a rel="noopener" translation-url href="#part0" data-toggle="tab">指导方针</a></li>
+                                <li><a rel="noopener" translation-url href="#part1" data-toggle="tab">第 1 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part2" data-toggle="tab">第 2 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part3" data-toggle="tab">第 3 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part4" data-toggle="tab">第 4 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part5" data-toggle="tab">第 5 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part6" data-toggle="tab">第 6 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part7" data-toggle="tab">第 7 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part8" data-toggle="tab">第 8 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part9" data-toggle="tab">第 9 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part10" data-toggle="tab">第 10 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part11" data-toggle="tab">第 11 部分</a></li>
+                                <li><a rel="noopener" translation-url href="#part12" data-toggle="tab">第 12 部分</a></li>
+                            </ul>
+                        </div>
+                    </div>
+    
+                    <form name="editForm" class="editForm" style="margin-top:10px" novalidate>
+                        <div>
+                            <legend name="formInfo" style="display:none"></legend>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="tab-content">
+    
+                                        <div class="tab-pane active" id="part0">
+    
+                                            <div style="margin-bottom:20px;">
+                                                <h4>名古屋议定书实施情况临时国家报告指导方针</h4>
+                                                <div>
+                                                    <p>以下是关于按议定书第29条要求制定名古屋获取和惠益分享议定书实施情况临时国家报告的格式，由一系列基于议定书关于缔约方义务之规定的问题组成。这些问题被设定为必填字段，并标有星号。</p>
+    
+                                                    <p>此外，有些问题并非严格基于议定书规定，因而被设定为自愿填写字段。将这些问题纳入该报告格式是为了帮助按照第31条评估和审查议定书成效，从而查明实施议定书所面临的挑战和困难，并帮助评估和审查作为名古屋议定书缔约方会议之缔约方大会通过的决定。</p>
+    
+                                                    <p>The interim national report can be a useful tool for both Parties and Non-Parties to assess the level of implementation of the Nagoya Protocol, as well as gaps and needs in terms of capacity, and will assist the COP-MOP in reviewing, on a regular basis, the implementation of the Nagoya Protocol and to make, within its mandate, the decisions necessary to promote its effective implementation in accordance with Article 26, paragraph 4.</p>
+    
+                                                    <p>通过临时国家报告提交的信息还可用于分享与名古屋议定书实施相关的经验、挑战和解决方案。在此方面，临时国家报告可作为建设和培养议定书实施能力以及更有效地设计能力建设活动的重要工具。该格式旨在最大程度减轻各国的报告负担，因而其中的问题实质上很简单（一般是用是或否回答的问题）。通常，在这些问题之后是文本输入，鼓励各国提供有关所采取措施的详细信息，以及报告实施议定书特定条款所面临的困难和挑战，并通过链接至现有的获取和惠益分享信息交换所记录、网站或上传文档来提供有关该问题的其他信息。这为查明名古屋议定书实施方面的良好做法和制约因素提供了机会。</p>
+    
+                                                    <p>为了避免重复提交信息并最大程度利用已通过获取和惠益分享信息交换所提供的信息，将允许各国自愿将发布机构已在获取和惠益分享信息交换所发布的国家记录及参考记录与临时国家报告各部分链接，否则秘书处在整合信息供作为议定书缔约方会议的缔约方大会审议时，也将在临时国家报告所含信息基础上加入获取和惠益分享信息交换所已发布的相关信息。</p>
+    
+                                                    <p>虽然没有篇幅上的限制，但为了协助报告的审议和信息归纳，希望答复者回答时尽量做到简明扼要。</p>
+    
+                                                    <p>各国获邀在该报告格式的末尾部分提交任何其他信息。执行秘书欢迎就问题是否充分以及回答问题是否有难度作出评价，并就如何改进这些报告指导方针提供进一步的建议。</p>
+    
+                                                    <p>建议缔约方让所有相关利益攸关方参与报告的编写工作，以确保报告编写过程的参与性及透明度。</p>
+    
+                                                    <p>除非技术上不可行，否则各国应使用该格式的在线版本，并通过获取和惠益分享信息交换所提交该报告，同时确保获取和惠益分享信息交换所发布的国家信息为最新版本。</p>
+    
+                                                    <p>仅在技术上不可行的情况下，缔约方应向获取和惠益分享信息交换所提交离线版本。提交的离线版本应使用从获取和惠益分享信息交换所下载的MS Word格式的受保护的表格。建议各国通过电子邮件将报告发送至秘书处（secretariat@cbd.int），并附上获取和惠益分享信息交换所发布机构已签字的报告末页的扫描副本。之后，执行秘书将协助缔约方在获取和惠益分享信息交换所发布其报告。</p>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="tab-pane" id="part1">
+                                                
+                                            <legend>一般信息</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12" >
+                                                    <div class="km-control-group" name="header.languages" required caption="请选择您希望提交之记录的语言：">
+                                                        <div class="indent">
+                                                            <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="government" required bold="true"
+                                                        caption="国家"><span class="help-inline color-blue bold" ng-if="userGovernment()">国家不可更改。</span><div afc-autocomplete required name="government" ng-disabled="userGovernment()"
+                                                            ng-model="document.government" source="options.countries"
+                                                            filter="genericFilter" mapping="genericMapping" selectbox="true"
+                                                            placeholder="请选择一个国家..."></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="control-group">
+                                                        <div class="km-control-group" name="title" required caption="1.此国家报告的标题">
+                                                            <div class="help-info">此字段用作该记录的标题，所以应独特而醒目，并有助于在获取和惠益分享信息交换所轻松找到该记录。</div>
+                                                            <div km-textbox-ml ng-model="document.title" rows="1"
+                                                                placeholder="此国家报告的标题" locales="document.header.languages"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="contact" bold="true"
+                                                        caption="2.联系人">
+                                                       <div document-selector ng-model="document.contact"
+                                                               ng-disabled="!document.government" question="contact"
+                                                               on-build-query="oncontactQuery(searchText)" filter="true" type="radio" allow-new="true" allow-new-schema="contact"></div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- </div> --> <!-- <div class="tab-pane" id="part2"> --><legend>议定书实施机构</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question3"
+                                                        caption="3.贵国是否已按照第14.2条规定向获取和惠益分享信息交换所提供此等信息？">
+                                                        <div class="km-yes-no" required name="question3" ng-model="document.question3.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question3Challenges" caption=""
+                                                        required>
+                                                        <div name="lblquestion3Challenges" class="km-control-group">
+                                                            <label class="control-label">请提供所面临主要困难和挑战的摘要，并回答以下所有问题。</label>
+                                                            <div km-textbox-ml rows=4 name="question3Challenges" ng-model="document.question3.challengesInfo"
+                                                                locales="document.header.languages" placeholder=""></div>
+                                                        </div>
+    
+                                                        <div class="km-control-group" name="question3AdditionalInfo"
+                                                            caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question3AdditionalInfo"
+                                                                ng-model="document.question3.additionalInfo" locales="document.header.languages"
+                                                                placeholder=""></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question4"
+                                                        caption="4.贵国是否已采取关于获取和惠益分享的立法、行政和政策措施？">
+                                                        <div required class="km-yes-no" name="question4" ng-model="document.question4.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question4.ChallengesInfo" caption="请提供制定这些措施所面临主要困难和挑战的摘要。">
+                                                        <div km-textbox-ml rows=4 name="question4.ChallengesInfo" ng-model="document.question4.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question4.AdditionalInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question4.AdditionalInfo" ng-model="document.question4.additionalInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+
+
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q4DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question4.documentReferenceIDs"
+                                                            ng-disabled="!document.government" question="question4"
+                                                             on-build-query="onRecordQuery(searchText)" filter="true">
+                                                        </div>
+                                                    </div>
+    
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question5"
+                                                        caption="5.贵国是否已按照第13条规定指定一个国家联络点？">
+                                                        <div class="km-yes-no" required name="question5" ng-model="document.question5.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question5.ChallengesInfo" caption="请提供指定一个国家联络点所面临主要困难和挑战的摘要。">
+                                                        <div km-textbox-ml rows=4 name="question5.ChallengesInfo" ng-model="document.question5.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question5FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question5FurtherInfo" ng-model="document.question5.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q5DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question5.documentReferenceIDs"
+                                                             ng-disabled="!document.government" question="question5"
+                                                             on-build-query="onRecordQuery(searchText)" filter="true">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question6"
+                                                        caption="6.贵国是否已按照第13条规定指定一个或多个国家主管部门？">
+                                                        <div class="km-yes-no" required name="question6" ng-model="document.question6.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question6.ChallengesInfo" caption="请提供指定一个或多个国家主管部门所面临主要困难和挑战的摘要。">
+                                                        <div km-textbox-ml rows=4 name="question6.ChallengesInfo" ng-model="document.question6.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question6FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question6FurtherInfo" ng-model="document.question6.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q6DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question6.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question6"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question7"
+                                                        caption="7.贵国是否已向获取和惠益分享信息交换所提供获取时签发的许可证或同等证照，作为事先知情同意决定和设立共同商定的条件的证据？">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input required="!hasValue(document.question7.answer)" type="checkbox"
+                                                                    ng-model="document.question7.notApplicable" ng-change="Q7YesNoClear()">不适用，因为目前没有获取要求</label>
+                                                        </div>
+                                                        <div ng-disabled="document.question7.notApplicable" required="!document.question7.notApplicable"
+                                                            class="km-yes-no" name="question7" ng-model="document.question7.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question7.ChallengesInfo" caption="请提供提供此等信息时所面临主要困难和挑战的摘要。">
+                                                        <div km-textbox-ml rows=4 name="question7.ChallengesInfo" ng-model="document.question7.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question7FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question7FurtherInfo" ng-model="document.question7.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q7DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question7.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question7"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question8" caption="8.贵国是否已按照第17.2条规定向获取和惠益分享信息交换所提供许可证或同等证照，作为国际公认的合规证书？">
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" ng-model="document.question8.notApplicable"
+                                                                    ng-change="Q8YesNoClear()">不适用，因为目前没有获取要求</label>
+                                                        </div>
+                                                        <div ng-disabled="document.question8.notApplicable" class="km-yes-no"
+                                                            name="question8" ng-model="document.question8.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question8FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question8FurtherInfo" ng-model="document.question8.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q8DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question8.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question8"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question9"
+                                                        caption="9.贵国是否已按照第17条规定指定一个或多个检查点？">
+                                                        <div class="km-yes-no" required name="question9" ng-model="document.question9.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question9Challenges" caption="">请提供指定一个或多个检查点所面临主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question9Challenges" ng-model="document.question9.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question9FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question9FurtherInfo" ng-model="document.question9.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q9DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question9.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question9"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question10" caption="10.补充信息">请提供主要困难和挑战的摘要<div km-textbox-ml rows=4 name="question10" ng-model="document.question10.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q10DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question10.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question10"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                    </div>
+                                                    <div class="km-control-group" name="question10RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question10RelevantDocuments" ng-model="document.question10.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="tab-pane" id="part2">
+                                            <legend>关于获取和惠益分享的立法、行政和政策措施（获取和惠益分享措施）</legend>
+                                            <legend>遗传资源的获取（第6条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question11" bold="true"
+                                                        caption="11.遗传资源获取是否按照第6.1条规定获得事先知情同意？">
+                                                        <div class="km-yes-no" required name="question11" ng-model="document.question11.answer"
+                                                            ng-click="Q11Clear()"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question11Challenges" caption="">
+                                                        <div ng-show="!isQ11Yes(document.question11.answer)">请提供进一步信息，包括指出目前是否有任何其他有关遗传资源获取的系统。<div km-textbox-ml rows=4 name="question11Challenges" ng-model="document.question11.challengesInfo"
+                                                                locales="document.header.languages" placeholder=""></div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question11FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question11FurtherInfo" ng-model="document.question11.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q11DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                      <div document-selector ng-model="document.question11.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question11"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div ng-hide="document.question11.answer || document.question11.answer===undefined"
+                                                        ng-class="{'confidential-text': !document.question11.answer}">请跳过第12-17个问题。 <br /> <br /></div>
+    
+                                                    <div ng-show="document.question11.answer===undefined" ng-class="{'confidential-text': document.question11.answer===undefined}">请回答第11个问题，以确定是否需要回答第12-17个问题。 <br /> <br /></div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question11.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question12" bold="true"
+                                                        caption="12.贵国是否按照第6.3(b)条规定设有关于遗传资源获取的公平、非任意性规则和程序？">
+                                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
+                                                            name="question12" ng-model="document.question12.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question12FurtherInfo" caption="">请提供进一步信息<div ng-disabled="!isQ11Yes(document.question11.answer)"
+                                                            km-textbox-ml rows=4 name="question12FurtherInfo" ng-model="document.question12.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q12DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question12.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question12"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question11.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question13" bold="true"
+                                                        caption="13.贵国是否按照第6.3(c)条规定提供关于如何申请事先知情同意的信息？">
+                                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
+                                                            required name="question13" ng-model="document.question13.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question13FurtherInfo" caption="">请提供进一步信息<div ng-disabled="!isQ11Yes(document.question11.answer)"
+                                                            km-textbox-ml rows=4 name="question13FurtherInfo" ng-model="document.question13.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q13DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question13.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question13"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question11.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question14" bold="true"
+                                                        caption="14.贵国是否按照第6.3(d)条规定由国家主管部门签发明确且透明的书面决定？">
+                                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
+                                                            required name="question14" ng-model="document.question14.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question14FurtherInfo" caption="">请提供其他信息<div ng-disabled="!isQ11Yes(document.question11.answer)"
+                                                            km-textbox-ml rows=4 name="question14FurtherInfo" ng-model="document.question14.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q14DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question14.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question14"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question11.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question15" bold="true"
+                                                        caption="15.贵国是否按照第6.3(e)条规定在获取时签发许可证或同等证照？">
+                                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
+                                                            required name="question15" ng-model="document.question15.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question15FurtherInfo" caption="">请提供其他信息<div ng-disabled="!isQ11Yes(document.question11.answer)"
+                                                            km-textbox-ml rows=4 name="question15FurtherInfo" ng-model="document.question15.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q15DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question15.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question15"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question11.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question16" bold="true" caption="16.请提供自本议定书对贵国生效以来贵国通过获取和惠益分享信息交换所提供的许可证或同等证照的数量。">
+    
+                                                        <div class="input-group col-xs-4" name="question16.permitsOnAbsCh">
+                                                            <input ng-disabled="!isQ11Yes(document.question11.answer)" type="number"
+                                                                name="permitsOnAbsCh" class="form-control text-right"
+                                                                ng-model="document.question16.permitsOnAbsCh" min="0"
+                                                                ng-init="document.question16.permitsOnAbsCh=0">
+    
+                                                            <div class="help-info color-blue bold" ng-if="recordsCount.ircc">目前您已在获取和惠益分享信息交换所发布<strong>{{recordsCount.ircc}} </strong>张许可证或同等证照（国际公认的合规证书）。</div>
+                                                        </div>
+    
+                                                    </div>
+                                                    <div class="km-control-group" name="question16FurtherInfo" caption="">请提供进一步信息<div ng-disabled="!isQ11Yes(document.question11.answer)"
+                                                            km-textbox-ml rows=4 name="question16FurtherInfo" ng-model="document.question16.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q16DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question16.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question16"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question11.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required bold="true" name="question17"
+                                                        caption="17.贵国是否按照第6.3(g)条规定设有关于要求设立及如何设立共同商定的条件的规则和程序？">
+                                                        <div ng-disabled="!isQ11Yes(document.question11.answer)" class="km-yes-no"
+                                                            required name="question17" ng-model="document.question17.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question17FurtherInfo" caption="">请提供进一步信息<div ng-disabled="!isQ11Yes(document.question11.answer)"
+                                                            km-textbox-ml rows=4 name="question17FurtherInfo" ng-model="document.question17.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q17DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question17.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !document.question11.answer" question="question17"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question18" bold="true" caption="18.自本议定书对贵国生效以来贵国从利用遗传资源及相关传统知识中获得的惠益：">
+    
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" ng-model="document.question18.geneticResources.answer"
+                                                                    ng-change="Q18Clear()">遗传资源</label>
+    
+                                                            <div class="checkbox" ng-show="document.question18.geneticResources.answer">
+                                                                <label><input type="checkbox" ng-model="document.question18.geneticResources.monetary"
+                                                                        ng-change="Q18GeneticResources(document.question18.geneticResources.monetary); Q18ClearInfo()">经济惠益</label>
+                                                                <div ng-show="document.question18.geneticResources.monetary"
+                                                                    km-textbox-ml rows=2 ng-model="document.question18.geneticResources.monetaryInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                            <div class="checkbox" ng-show="document.question18.geneticResources.answer">
+                                                                <label><input type="checkbox" ng-model="document.question18.geneticResources.nonMonetary"
+                                                                        ng-change="Q18GeneticResources(document.question18.geneticResources.nonMonetary); Q18ClearInfo()">非货币性惠益</label>
+                                                                <div ng-show="document.question18.geneticResources.nonMonetary"
+                                                                    km-textbox-ml rows=2 ng-model="document.question18.geneticResources.nonMonetaryInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                        </div>
+    
+    
+    
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" ng-model="document.question18.tk.answer"
+                                                                    ng-change="Q18Clear()">遗传资源相关传统知识</label>
+                                                            <div class="checkbox" ng-show="document.question18.tk.answer">
+                                                                <label><input type="checkbox" ng-model="document.question18.tk.monetary"
+                                                                        ng-change="Q18TraditionalKnowledge(document.question18.tk.monetary); Q18ClearInfo()">货币惠益</label>
+                                                                <div ng-show="document.question18.tk.monetary"
+                                                                    km-textbox-ml rows=2 name="question18FurtherInfo"
+                                                                    ng-model="document.question18.tk.monetaryInfo" locales="document.header.languages"
+                                                                    placeholder=""></div>
+                                                            </div>
+                                                            <div class="checkbox" ng-show="document.question18.tk.answer">
+                                                                <label><input type="checkbox" ng-model="document.question18.tk.nonMonetary"
+                                                                        ng-change="Q18TraditionalKnowledge(document.question18.tk.nonMonetary); Q18ClearInfo()">非货币惠益</label>
+                                                                <div ng-show="document.question18.tk.nonMonetary"
+                                                                    km-textbox-ml rows=2 name="question18FurtherInfo"
+                                                                    ng-model="document.question18.tk.nonMonetaryInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+                                                    <div class="km-control-group" name="question18FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question18FurtherInfo" ng-model="document.question18.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q18DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question18.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question18"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question19" caption="19.补充信息">请提供主要困难和挑战的摘要<div km-textbox-ml rows=4 name="question19" ng-model="document.question19.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q19DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question19.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question19"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question19RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question19RelevantDocuments" ng-model="document.question19.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="tab-pane" id="part3">
+                                            <legend>公正和公平地分享惠益（第5条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question20"
+                                                        caption="20.第5.1条规定，对遗传资源的利用及随后的应用和商业化所产生的惠益应与提供该等资源的缔约方（即该等资源的原产国或已按照公约及第5.3条规定获取该等遗传资源的缔约方）分享。贵国是否已采取立法、行政或政策措施来落实此项规定？">
+                                                        <div class="km-yes-no" required name="question20" ng-model="document.question20.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question20FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question20FurtherInfo" ng-model="document.question20.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q20DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question20.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question20"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question21"
+                                                        caption="21.为确保按照第5.2条规定以及贵国认可土著和地方社区对其所持有遗传资源之权利的法律法规，与持有遗传资源的土著和地方社区分享利用其持有的遗传资源所产生的惠益，贵国是否已采取立法、行政或政策措施？">
+                                                        <div class="km-yes-no" required name="question21" ng-model="document.question21.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question21FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question21FurtherInfo" ng-model="document.question21.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q21DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question21.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question21"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question22"
+                                                        caption="22.为确保按照第5.5条规定与持有遗传资源相关传统知识的土著和地方社区分享利用其持有的遗传资源相关传统知识所产生的惠益，贵国是否已采取立法、行政或政策措施？">
+                                                        <div class="km-yes-no" required name="question22" ng-model="document.question22.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question22FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question22FurtherInfo" ng-model="document.question22.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q22DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question22.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question22"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question23" caption="23.补充信息">请提供落实措施所面临主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question23" ng-model="document.question23.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q23DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question23.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question23"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question23RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question23RelevantDocuments" ng-model="document.question23.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="tab-pane" id="part4">
+                                            <legend>遵循有关获取和惠益分享的国家立法或法规要求（第15条和第16条）和监控对遗传资源的利用（第17条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question24"
+                                                        caption="24.为确保按照第15.1条规定在获取贵国管辖范围内利用的遗传资源时获得事先知情同意，并按照另一缔约方的获取和惠益分享国家立法或法规要求设立共同商定的条件，贵国是否已采取适当、有效、相称的立法、行政或政策措施？">
+                                                        <div class="km-yes-no" required name="question24" ng-model="document.question24.answer"
+                                                            ng-click="Q24Clear()"></div>
+                                                    </div>
+                                                    <div ng-show="document.question24.answer" class="row">
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" required="document.question24.answer"
+                                                                name="question24_measures" caption="请说明贵国是否已按照第15.2条规定采取措施解决不遵循上述措施的情况？">
+                                                                <div class="km-yes-no" required="document.question24.answer"
+                                                                    name="question24_measures" ng-model="document.question24.measures.answer"
+                                                                    ng-click="Q24MeasuresClear(document.question24.measures.answer)"></div>
+                                                            </div>
+                                                            <div ng-show="document.question24.measures.answer" class="km-control-group"
+                                                                name="question24_measures_FurtherInfo" caption="">请提供有关所采取措施的其他信息，包括其生效日期<div km-textbox-ml rows=4 name="question24_measures_FurtherInfo"
+                                                                    ng-model="document.question24.measures.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                            <div ng-show="document.question24.measures.answer" class="km-control-group"
+                                                                name="question24_measures_complianceInfo" caption="">请提供有关不合规案例的其他信息<div km-textbox-ml rows=4 name="question24_measures_complianceInfo"
+                                                                    ng-model="document.question24.measures.complianceInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" required="document.question24.answer"
+                                                                name="question24_violation" caption="贵国是否有在被指违反第15.3条规定的获取和惠益分享措施的情况下配合其他缔约方的具体案例？">
+                                                                <div class="km-yes-no" required="document.question24.answer"
+                                                                    name="question24_violation" ng-model="document.question24.violation.answer"
+                                                                    ng-click="Q24ViolationClear(document.question24.violation.answer)"></div>
+                                                            </div>
+                                                            <div ng-show="document.question24.violation.answer" class="km-control-group"
+                                                                name="question24FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question24FurtherInfo"
+                                                                    ng-model="document.question24.violation.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question24FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question24FurtherInfo" ng-model="document.question24.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q24DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question24.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question24"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question25"
+                                                        caption="25.为确保按照第16.1条规定在获取贵国管辖范围内利用的遗传资源相关传统知识时获得土著和地方社区的事先知情同意或批准及参与，并按照该等土著和地方社区所属另一缔约方的获取和惠益分享国家立法或法规要求设立共同商定的条件，贵国是否已采取适当、有效、相称的立法、行政或政策措施？">
+                                                        <div class="km-yes-no" required name="question25" ng-model="document.question25.answer"
+                                                            ng-click="Q25Clear(document.question25.answer)"></div>
+                                                    </div>
+                                                    <div ng-show="document.question25.answer" class="row">
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" required="document.question25.answer"
+                                                                name="question25_measures" caption="请说明贵国是否已按照第16.2条规定采取措施解决不遵循上述措施的情况？">
+                                                                <div class="km-yes-no" required="document.question25.answer"
+                                                                    name="question25_measures" ng-model="document.question25.hasMeasures"></div>
+                                                            </div>
+                                                            <div class="km-control-group" required="document.question25.answer"
+                                                                name="question25_violation" caption="贵国是否有在被指违反第16.3条规定的获取和惠益分享措施的情况下给予配合的具体案例？">
+                                                                <div class="km-yes-no" required="document.question25.answer"
+                                                                    name="question25_violation" ng-model="document.question25.violation.answer"></div>请提供进一步信息<div km-textbox-ml rows=2 name="question25violationFurtherInfo"
+                                                                    ng-model="document.question25.violation.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question25FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question25FurtherInfo" ng-model="document.question25.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q25DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question25.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question25"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question26"
+                                                        caption="26.贵国是否已按照第17.1(a)(i)及(ii))条规定，要求遗传资源使用者酌情在指定检查点提供关于事先知情同意、遗传资源来源、设立共同商定的条件和/或利用遗传资源的信息？">
+                                                        <div class="km-yes-no" required name="question26" ng-model="document.question26.answer"
+                                                            ng-click="Q26Clear(document.question26.answer)"></div>
+                                                    </div>
+                                                    <div ng-show="document.question26.answer" class="row">
+                                                        <div class="col-xs-10 col-xs-offset-1">请提供进一步信息<div km-textbox-ml rows=2 name="question26additionalInfo"
+                                                                ng-model="document.question26.additionalInfo" locales="document.header.languages"
+                                                                placeholder=""></div>
+    
+                                                            <div class="km-control-group" required="document.question26.answer"
+                                                                name="question26_violation" caption="贵国是否已采取措施解决违规情况？">
+                                                                <div class="km-yes-no" required="document.question26.answer"
+                                                                    name="question26_violation" ng-model="document.question26.violation.answer"
+                                                                    ng-click="Q26ViolationClear(document.question26.violation.answer)"></div>
+    
+                                                                <div ng-show="document.question26.violation.answer">请提供进一步信息<div km-textbox-ml rows=2 name="question26additionalInfo"
+                                                                        ng-model="document.question26.violation.additionalInfo"
+                                                                        locales="document.header.languages" placeholder=""></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question26FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question26FurtherInfo" ng-model="document.question26.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q26DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question26.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question26"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question27"
+                                                        caption="27.贵国是否已按照第17.1(a)(iii)条规定向相关国家机构、提供事先知情同意的缔约方以及获取和惠益分享信息交换所提供第17.1(a)(i)条所规定的信息？">
+                                                        <div class="km-yes-no" name="question27" ng-model="document.question27.answer"
+                                                            ng-click="Q27Clear(document.question27.answer)"></div>
+                                                    </div>
+                                                    <div ng-show="document.question27.answer" class="row">
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" name="question27_cc" caption="贵国是否已利用检查点公报？">
+                                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
+                                                                        name="q27Options" id="q27Option1" value="Yes">是</label>
+                                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
+                                                                        name="q27Options" id="q27Option2" value="No">否</label>
+                                                                <label class="radio-inline"><input type="radio" ng-model="document.question27.cpc.option"
+                                                                        name="q27Options" id="q27Option3" value="Other">其他</label>
+                                                            </div>
+                                                            <div class="km-control-group" name="question27_ccFurtherInfo">请提供其他信息<div km-textbox-ml rows=2 name="question27_ccFurtherInfo"
+                                                                    ng-model="document.question27.cpc.furtherInfo" locales="document.header.languages"
+                                                                    placeholder=""></div>
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question27Challenges" caption="">请提供主要困难和挑战的摘要<div km-textbox-ml rows=4 name="question27Challenges" ng-model="document.question27.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group row" name="question27_ccsOnAbsCh" caption="请提供贵国在获取和惠益分享信息交换所提供的检查点公报的数量（如适用）。">
+                                                        <input class="col-xs-2" type="number" name="ccsOnAbsCh" class="form-control text-right"
+                                                            ng-model="document.question27.cpcsOnAbsChCount" min="0" ng-init="document.question27.cpcsOnAbsChCount=0">
+    
+                                                        <div class="help-info color-blue bold" ng-if="recordsCount.cpc">目前您已在获取和惠益分享信息交换所发布<strong>{{recordsCount.ircc}} </strong>份检查点已发布公报。</div>
+    
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="q27relevantDocuments" caption="任何其他相关文件">
+                                                        <div km-link name="q27relevantDocuments" ng-model="document.question27.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question28"
+                                                        caption="28.贵国是否已按照第17.1(b)条规定采取措施鼓励使用者和提供者在共同商定的条件中列明分享实施该等条件之相关信息的规定？">
+                                                        <div class="km-yes-no" required name="question28" ng-model="document.question28.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question28FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question28FurtherInfo" ng-model="document.question28.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q28DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question28.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question28"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question29"
+                                                        caption="29.贵国是否正按照第17.1(c)条规定鼓励使用经济高效的交流工具和系统？">
+                                                        <div class="km-yes-no" required name="question29" ng-model="document.question29.answer"
+                                                            ng-click="Q29Clear(ocument.question29.answer)"></div>
+                                                    </div>
+                                                    <div ng-show="document.question29.answer" class="km-control-group" name="question29AdditionalInfo"
+                                                        caption="">请提供有关贵国如何鼓励使用经济高效的交流工具和系统的其他信息。<div km-textbox-ml rows=2 name="question29AdditionalInfo" ng-model="document.question29.additionalInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question29FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question29FurtherInfo" ng-model="document.question29.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q29DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question29.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question29"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question30" caption="30.补充信息">请提供落实措施所面临主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question30" ng-model="document.question30.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q30DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question30.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question30"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question30RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question30RelevantDocuments" ng-model="document.question30.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="tab-pane" id="part5">
+                                            <legend>遵循共同商定的条件（第18条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question31"
+                                                        caption="31.贵国是否正按照第18.1(a)、(b)及(c)条规定鼓励在共同商定的条件中列明涉及争端解决的规定？">
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" ng-required="!hasValue(document.question31.answer)"
+                                                                    ng-model="document.question31.notApplicable" name="question31"
+                                                                    ng-change="Q31YesNoClear()">不适用，因为目前没有获取要求</label>
+                                                        </div>
+                                                        <div ng-disabled="document.question31.notApplicable" class="km-yes-no"
+                                                            ng-required="!document.question31.notApplicable" name="question31"
+                                                            ng-model="document.question31.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question31FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question31FurtherInfo" ng-model="document.question31.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q31DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question31.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question31"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question32"
+                                                        caption="32.贵国是否正按照第18.2条规定确保在就共同商定的条件发生争端时有机会依照贵国法律制度进行追索？">
+                                                        <div class="km-yes-no" required name="question32" ng-model="document.question32.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question32FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question32FurtherInfo" ng-model="document.question32.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q32DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question32.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question32"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question33"
+                                                        caption="33.贵国是否已按照第18.3条规定在以下方面采取措施？"></div>
+                                                    <div class="km-control-group" required name="question33_justice"
+                                                        caption="司法援助？">
+                                                        <div class="km-yes-no" required name="question33_justice" ng-model="document.question33.justice.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question33JusticeFurtherInfo"
+                                                        caption="">请提供其他信息<div km-textbox-ml rows=4 name="question33JusticeFurtherInfo"
+                                                            ng-model="document.question33.justice.furtherInfo" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" required name="question33_mechanisms"
+                                                        caption="利用关于相互承认和执行外国判决和仲裁裁决的机制？">
+                                                        <div class="km-yes-no" required name="question33_mechanisms"
+                                                            ng-model="document.question33.mechanisms.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question33MechanismsFurtherInfo"
+                                                        caption="">请提供其他信息<div km-textbox-ml rows=4 name="question33MechanismsFurtherInfo"
+                                                            ng-model="document.question33.mechanisms.furtherInfo" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q33DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question33.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question33"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question34" caption="34.补充信息">请提供所面临主要困难和挑战的摘要。<div km-textbox-ml rows=4 name="question34" ng-model="document.question34.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q34DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question34.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question34"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question34RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question34RelevantDocuments" ng-model="document.question34.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="part6">
+                                            <legend>特别考虑事项（第8条）</legend>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question35"
+                                                        caption="35.在制定和实施获取和惠益分享立法或法规要求方面，贵国："></div>
+                                                    <div class="km-control-group" required name="question35_research"
+                                                        caption="是否已按照第8(a)条规定创造条件以促进和鼓励有助于保护和可持续利用生物多样性的研究，包括对出于非商业研究目的之获取实行精简措施，同时考虑有必要解决该等研究改变目的之问题？">
+                                                        <div class="km-yes-no" name="question35_research" ng-model="document.question35.research.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question35ResearchFurtherInfo"
+                                                        caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question35ResearchFurtherInfo"
+                                                            ng-model="document.question35.research.furtherInfo" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ResearchDocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question35.research.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question35Research"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" required name="question35_emergencies"
+                                                        caption="是否已按照第8(b)条规定充分重视目前面临或即将发生的威胁或损害人类、动物或植物健康的紧急情况？">
+                                                        <div class="km-yes-no" required name="question35_emergencies"
+                                                            ng-model="document.question35.emergencies.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question35EmergenciesFurtherInfo"
+                                                        caption="">请提供其他信息<div km-textbox-ml rows=4 name="question35EmergenciesFurtherInfo"
+                                                            ng-model="document.question35.emergencies.furtherInfo" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35EmergenciesDocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question35.emergencies.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question35Emergencies"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" required name="question35_access" caption="是否已按照第8(b)条规定考虑有必要迅速有效地获取遗传资源并迅速有效地公平合理分享利用该等遗传资源所产生的惠益，包括有需要者获得可负担的治疗（尤其是在发展中国家）？">
+                                                        <div class="km-yes-no" required name="question35_access" ng-model="document.question35.access.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question35AccessFurtherInfo"
+                                                        caption="">请提供其他信息<div km-textbox-ml rows=4 name="question35AccessFurtherInfo"
+                                                            ng-model="document.question35.access.furtherInfo" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35AccessDocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question35.access.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question35Access"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" required name="question35_importance"
+                                                        caption="是否已按照第8(c)条规定考虑遗传资源对于粮食和农业的重要性及其对于粮食安全的特殊作用？">
+                                                        <div class="km-yes-no" required name="question35_importance"
+                                                            ng-model="document.question35.importance.answer"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question35ImportanceFurtherInfo"
+                                                        caption="">请提供其他信息<div km-textbox-ml rows=4 name="question35ImportanceFurtherInfo"
+                                                            ng-model="document.question35.importance.furtherInfo" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q35ImportanceDocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question35.importance.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question35Importance"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div><!-- <div class="km-control-group" style="margin-bottom:20px;" name="q35DocRefs" caption="Links to related documents">
+                                            <div document-selector ng-model="document.question35.documentReferenceIDs"
+                                                                    ng-disabled="!document.government"
+                                                                    question="question35"
+                                                                    government="document.government"
+                                                                    schema="(absPermit absCheckpoint absCheckpointCommunique authority measure database focalPoint)"   filter="true">
+                                            </div>
+                                        </div> --></div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" name="question36" caption="36.补充信息">请提供落实措施所面临主要困难和挑战的摘要。<div km-textbox-ml rows=4 name="question36" ng-model="document.question36.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q36DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question36.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question36"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question36RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question36RelevantDocuments" ng-model="document.question36.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+                                        <div class="tab-pane" id="part7">
+                                            <legend>与土著和地方社区相关的规定（第6条、第7条和第12条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" bold="true" required name="question37"
+                                                        caption="37.贵国是否有土著和地方社区？">
+                                                        <div class="km-yes-no" required name="question37" ng-model="document.question37.answer"
+                                                            ng-click="Q37Clear()"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question37FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question37FurtherInfo" ng-model="document.question37.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q37DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question37.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question37"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div ng-hide="document.question37.answer || document.question37.answer===undefined"
+                                                        ng-class="{'confidential-text': !document.question37.answer}">请跳过第38-44个问题。 <br /> <br /></div>
+    
+                                                    <div ng-show="document.question37.answer===undefined" ng-class="{'confidential-text': document.question37.answer===undefined}">请回答第37个问题，以确定是否需要回答第38-44个问题。 <br /> <br /></div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required="{{Q37IsYes()}}" name="question38"
+                                                        bold="true" caption="38.贵国法律是否认可土著和地方社区拥有批准获取遗传资源的权利？（第6.2条）">
+                                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
+                                                            class="km-yes-no" name="question38" ng-model="document.question38.answer"
+                                                            ng-click="Q38Clear()"></div>
+                                                    </div>
+                                                    <div class="row" ng-show="document.question38.answer">
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" name="question38Law" caption="">请提供确立土著和地方社区同意获取遗传资源之权利的其他信息和国家法律引文<div km-textbox-ml rows=2 name="question38LawFurtherInfo"
+                                                                    ng-model="document.question38.law.furtherInfo" locales="document.header.languages"
+                                                                    placeholder=""></div>
+    
+                                                                <div class="km-control-group" style="margin-bottom:20px;"
+                                                                    name="q38LawDocRefs" caption="请选择相关获取和惠益分享信息交换所记录">
+                                                                  <div document-selector ng-model="document.question38.law.documentReferenceIDs"
+                                                                           ng-disabled="!document.government" question="question38Law"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                                </div>
+    
+                                                                <div class="km-control-group" ng-required="document.question38.answer"
+                                                                    name="question38_measures" caption="为确保按照第6.2条规定获得土著和地方社区的事先知情同意或批准和参与，贵国这方面的措施是否已到位？">
+                                                                    <div class="km-yes-no" ng-required="document.question38.answer"
+                                                                        name="question38_measures" ng-model="document.question38.measures.answer"></div>
+                                                                </div>
+                                                            </div>
+    
+                                                            <div class="km-control-group" name="question38AdditionalInfo"
+                                                                caption="">请提供其他信息<div km-textbox-ml rows=2 name="question38MeasuresFurtherInfo"
+                                                                    ng-model="document.question38.measures.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+    
+                                                            <div class="km-control-group" name="question38_pic" ng-required="document.question38.answer"
+                                                                caption="贵国是否已按照第6.3(f)条规定为获得土著和地方社区的事先知情同意或批准及参与以获取遗传资源设立标准和/或流程？">
+                                                                <div class="km-yes-no" name="question38_pic" ng-required="document.question38.answer"
+                                                                    ng-model="document.question38.pic.answer"></div>
+                                                            </div>
+    
+                                                            <div class="km-control-group" name="question38AdditionalInfo"
+                                                                caption="">请提供其他信息<div km-textbox-ml rows=2 name="question38PICFurtherInfo"
+                                                                    ng-model="document.question38.pic.furtherInfo" locales="document.header.languages"
+                                                                    placeholder=""></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question38FurtherInfo" caption="">请提供其他信息<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                            name="question38FurtherInfo" ng-model="document.question38.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q38DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question38.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question38"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
+                                                        name="question39" caption="39.为确保按照第7条规定在获取贵国境内土著和地方社区所持有的遗传资源相关传统知识时，获得此等土著和地方社区的事先知情同意或批准及参与并设立共同商定的条件，贵国是否已按照国家法律采取措施？">
+                                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
+                                                            class="km-yes-no" name="question39" ng-model="document.question39.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question39FurtherInfo" caption="">请提供进一步信息<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                            name="question39FurtherInfo" ng-model="document.question39.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q39DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                      <div document-selector ng-model="document.question39.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question39"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
+                                                        name="question40" caption="40.在实施本议定书时，贵国是否正按照国家法律及第12.1条规定考虑关于遗传资源相关传统知识的土著和地方社区习惯法、社区议定书和程序？">
+                                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
+                                                            class="km-yes-no" name="question40" ng-model="document.question40.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question40FurtherInfo" caption="">请提供其他信息<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                            name="question40FurtherInfo" ng-model="document.question40.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q40DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question40.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question40"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
+                                                        name="question41" caption="41.贵国是否已按照第12.2条规定建立让遗传资源相关传统知识的潜在使用者了解其义务的机制？">
+                                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
+                                                            class="km-yes-no" name="question41" ng-model="document.question41.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question41FurtherInfo" caption="">请提供其他信息<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                            name="question41FurtherInfo" ng-model="document.question41.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q41DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question41.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question41"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
+                                                        name="question42" caption="42.贵国是否正按照第12.3条规定支持土著和地方社区制定以下工具？"></div>
+                                                    <div style="margin-left:25px;">
+                                                        <div class="checkbox">
+                                                            <div style="float: left" ng-disabled="!document.question37.answer"
+                                                                required="{{Q37IsYes()}}" class="km-yes-no" ng-change="Q42Clear()"
+                                                                name="question42_1" ng-model="document.question42.community.answer"></div>
+                                                            <div class="km-control-group" required="{{Q37IsYes()}}" name="question42_community"
+                                                                caption="社区议定书">
+                                                            </div>
+                                                            <div ng-show="document.question42.community.answer" class="km-control-group"
+                                                                name="question42CommunityFurtherInfo" caption=""><br />请提供有关贵国如何支持制定社区议定书的其他信息。<div km-textbox-ml rows=3 name="question42CommunityFurtherInfo"
+                                                                    ng-model="document.question42.community.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+    
+                                                                <div class="km-control-group" style="margin-bottom:20px;"
+                                                                    name="q42DocRefsCommunity" caption="请选择相关获取和惠益分享信息交换所记录">
+                                                                    <div document-selector ng-model="document.question42.community.documentReferenceIDs"
+                                                                           ng-disabled="!document.government || !Q37IsYes()" question="question42community"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                                </div>
+                                                            </div>
+    
+                                                        </div>
+    
+                                                        <div class="checkbox">
+                                                            <div style="float: left" ng-disabled="!document.question37.answer"
+                                                                required="{{Q37IsYes()}}" class="km-yes-no" ng-change="Q42Clear()"
+                                                                name="question42_2" ng-model="document.question42.mat.answer">
+                                                            </div>
+                                                            <div class="km-control-group" required="{{Q37IsYes()}}" name="question42_mat"
+                                                                caption="共同商定的条件之最低要求">
+                                                            </div>
+                                                            <div ng-show="document.question42.mat.answer" class="km-control-group"
+                                                                name="question42MATFurtherInfo" caption=""><br />请提供有关贵国如何支持设定共同商定的条件之最低要求的其他信息。<div km-textbox-ml rows=3 name="question42MATFurtherInfo"
+                                                                    ng-model="document.question42.mat.furtherInfo" locales="document.header.languages"
+                                                                    placeholder=""></div>
+    
+                                                                <div class="km-control-group" style="margin-bottom:20px;"
+                                                                    name="q42DocRefsMat" caption="请选择相关获取和惠益分享信息交换所记录">
+                                                                    <div document-selector ng-model="document.question42.mat.documentReferenceIDs"
+                                                                           ng-disabled="!document.government || !Q37IsYes()" question="question42mat"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
+                                                        <div class="checkbox">
+                                                            <div style="float: left" ng-disabled="!document.question37.answer"
+                                                                required="{{Q37IsYes()}}" class="km-yes-no" ng-change="Q42Clear()"
+                                                                name="question42_3" ng-model="document.question42.mcc.answer"></div>
+                                                            <div class="km-control-group" required="{{Q37IsYes()}}" name="question42_mcc"
+                                                                caption="合同条款范文">
+                                                            </div>
+                                                            <div ng-show="document.question42.mcc.answer" class="km-control-group"
+                                                                name="question42MCCFurtherInfo" caption="">请提供有关贵国如何支持编制合同条款范文的其他信息。<div km-textbox-ml rows="3" name="question42MCCFurtherInfo"
+                                                                    ng-model="document.question42.mcc.furtherInfo" locales="document.header.languages"
+                                                                    placeholder=""></div>
+    
+                                                                <div class="km-control-group" style="margin-bottom:20px;"
+                                                                    name="q42DocRefsmcc" caption="请选择相关获取和惠益分享信息交换所记录">
+                                                                   <div document-selector ng-model="document.question42.mcc.documentReferenceIDs"
+                                                                           ng-disabled="!document.government || !Q37IsYes()" question="question42mcc"
+                                                                           on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required="{{Q37IsYes()}}" bold="true"
+                                                        name="question43" caption="43.贵国是否已按照第12.4条规定尽力不限制土著和地方社区内部以及土著和地方社区之间对遗传资源及相关传统知识的习惯性利用和交换？">
+                                                        <div ng-disabled="!document.question37.answer" required="{{Q37IsYes()}}"
+                                                            class="km-yes-no" name="question43" ng-model="document.question43.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question43FurtherInfo" caption="">请提供其他信息<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                            name="question43FurtherInfo" ng-model="document.question43.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q43DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question43.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question43"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row" ng-class="{'disable': !document.question37.answer}">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question44" bold="true" caption="44.补充信息">请提供落实与遗传资源相关传统知识相关的措施所面临主要困难和挑战的摘要：<div ng-disabled="!document.question37.answer" km-textbox-ml rows=4
+                                                            name="question44" ng-model="document.question44.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q44DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question44.documentReferenceIDs"
+                                                               ng-disabled="!document.government || !Q37IsYes()" question="question44"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div ng-show="document.question37.answer" class="km-control-group" name="question44RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question44RelevantDocuments" ng-model="document.question44.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="tab-pane" id="part8">
+                                            <legend>为保护和可持续利用做贡献（第9条）</legend>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question45" bold="true"
+                                                        caption="45.贵国是否正按照第9条规定鼓励使用者和提供者将利用遗传资源所产生的惠益用于生物多样性的保护和生物多样性组成部分的可持续利用?">
+                                                        <div class="km-yes-no" required name="question45" ng-model="document.question45.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question45FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question45FurtherInfo" ng-model="document.question45.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q45DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question45.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question45"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question46" bold="true" caption="46.请说明贵国实施名古屋议定书为保护和可持续利用生物多样性做出了哪些贡献：">
+                                                        <div km-textbox-ml rows=4 name="question46" ng-model="document.question46.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q46DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question46.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question46"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question47" bold="true" caption="47.补充信息">请提供主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question47" ng-model="document.question47.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q47DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                      <div document-selector ng-model="document.question47.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question47"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question47RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question47RelevantDocuments" ng-model="document.question47.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="tab-pane" id="part9">
+    
+                                            <legend>跨境合作（第11条）</legend>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required bold="true" name="question48"
+                                                        caption="48.为了在多个缔约方的领土范围内就地发现相同遗传资源的情况下实施本议定书，贵国是否正按照第11.1条规定在相关土著和地方社区的参与下全力合作？">
+                                                        <div class="km-yes-no" required name="question48" ng-model="document.question48.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question48ILCInfo" caption="">如果贵国有土著和地方社区，请提供有关其参与情况的其他信息。<div km-textbox-ml rows=3 name="question48ILCInfo" ng-model="document.question48.ilcInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question48FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question48FurtherInfo" ng-model="document.question48.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q48DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question48.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question48"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question49" bold="true"
+                                                        caption="49.为了在多个缔约方的一个或多个土著和地方社区持有相同遗传资源相关传统知识的情况下实施本议定书，贵国是否正按照第11.2条规定全力合作？">
+                                                        <div class="checkbox">
+                                                            <label><input type="checkbox" ng-model="document.question49.notApplicable"
+                                                                    ng-change="Q49Clear()">不适用，因为我的国家没有土著和地方社区</label>
+                                                        </div>
+                                                        <div ng-disabled="document.question49.notApplicable" class="km-yes-no"
+                                                            name="question49" ng-model="document.question49.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question49FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question49FurtherInfo" ng-model="document.question49.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q49DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question49.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question49"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question50" bold="true" caption="50.补充信息">请提供主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question50" ng-model="document.question50.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q50DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question50.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question50"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question50RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question50RelevantDocuments" ng-model="document.question50.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="tab-pane" id="part10">
+                                            <legend>合同条款范文、行为准则、指导方针和最佳做法和/或标准（第19条和第20条）</legend>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question51" bold="true"
+                                                        caption="51.贵国是否正按照第19条规定鼓励制定、更新和使用共同商定的条件的合同条款范文？">
+                                                        <div class="km-yes-no" required name="question51" ng-model="document.question51.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question51FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question51FurtherInfo" ng-model="document.question51.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q51DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question51.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question51"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question52" bold="true"
+                                                        caption="52.贵国是否正按照第20条规定鼓励制定、更新和使用行为准则、指导方针和最佳做法或标准？">
+                                                        <div class="km-yes-no" required name="question52" ng-model="document.question52.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question52FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question52FurtherInfo" ng-model="document.question52.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q52DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question52.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question52"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question53" bold="true" caption="53.补充信息">请提供主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question53" ng-model="document.question53.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q53DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question53.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question53"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question53RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question53RelevantDocuments" ng-model="document.question53.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                        </div>
+    
+                                        <div class="tab-pane" id="part11">
+                                            <legend>意识培养和能力（第21条和第22条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question54" ng-click="Q54Clear()"
+                                                        bold="true" caption="54.贵国是否已按照第21条规定采取措施提高对遗传资源和相关传统知识及相关获取和惠益分享问题重要性的意识？">
+                                                        <div class="km-yes-no" required name="question54" ng-model="document.question54.answer"></div>
+                                                    </div>
+                                                    <div class="row" ng-show="document.question54.answer">
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" ng-required="document.question54.answer"
+                                                                name="question54_measures" caption="贵国是否已采取措施实施名古屋获取和惠益分享议定书意识培养战略？">
+                                                                <div class="help-info">作为决定NP-1/9通过</div>
+                                                                <div class="km-yes-no" ng-required="document.question54.answer"
+                                                                    name="question54_measures" ng-click="Q54Clear()"
+                                                                    ng-model="document.question54.measures.answer"></div>
+                                                            </div>
+                                                            <div ng-show="document.question54.measures.answer" class="km-control-group"
+                                                                name="question54MeasuresFurtherInfo" caption="">请提供所采取措施的摘要。<div km-textbox-ml rows=2 name="question54MeasuresFurtherInfo"
+                                                                    ng-model="document.question54.measures.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+    
+                                                            <div ng-show="document.question54.measures.answer" class="km-control-group"
+                                                                style="margin-bottom:20px;" name="q54DocRefs" caption="请选择相关获取和惠益分享信息交换所记录">
+                                                               <div document-selector ng-model="document.question54.measures.documentReferenceIDs"
+                                                                       ng-disabled="!document.government" question="question54measures"
+                                                                       on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question54FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question54FurtherInfo" ng-model="document.question54.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q54DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question54.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question54"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question55" bold="true"
+                                                        caption="55.贵国是否已按照第22条规定采取措施建设、培养和加强人力资源与机构的能力以有效实施本议定书？">
+                                                        <div class="km-yes-no" required name="question55" ng-click="Q55Clear()"
+                                                            ng-model="document.question55.answer"></div>
+                                                    </div>
+                                                    <div class="row" ng-show="document.question55.answer">
+                                                        <div class="col-xs-10 col-xs-offset-1">
+                                                            <div class="km-control-group" name="question55_measures"
+                                                                caption="贵国是否已采取措施实施能力建设和培养战略框架为有效实施名古屋获取和惠益分享议定书提供支持？">
+                                                                <div class="help-info">作为决定NP-1/8通过</div>
+                                                                <div class="km-yes-no" name="question55_measures" ng-click="Q55Clear()"
+                                                                    ng-model="document.question55.measures.answer"></div>
+                                                            </div>
+                                                            <div ng-show="document.question55.measures.answer" class="km-control-group"
+                                                                name="question55MeasuresFurtherInfo" caption="">请提供所采取措施的摘要。<div km-textbox-ml rows=2 name="question55MeasuresFurtherInfo"
+                                                                    ng-model="document.question55.measures.furtherInfo"
+                                                                    locales="document.header.languages" placeholder=""></div>
+                                                            </div>
+    
+                                                            <div ng-show="document.question55.measures.answer" class="km-control-group"
+                                                                style="margin-bottom:20px;" name="q55DocRefs" caption="请选择相关获取和惠益分享信息交换所记录">
+                                                               <div document-selector ng-model="document.question55.measures.documentReferenceIDs"
+                                                                       ng-disabled="!document.government" question="question55measures"
+                                                                       on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                            </div>
+    
+                                                        </div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question55FurtherInfo" caption="">请提供进一步信息<div km-textbox-ml rows=4 name="question55FurtherInfo" ng-model="document.question55.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q55DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question55.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question55"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question56" bold="true" caption="56.在名古屋议定书实施能力建设和培养方面，贵国是否已获得外部支持？">
+                                                        <div class="km-yes-no" name="question56" ng-model="document.question56.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question56FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question56FurtherInfo" ng-model="document.question56.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q56DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question56.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question56"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question57" bold="true" caption="57.在名古屋议定书实施能力建设和培养方面，贵国是否已对外提供支持？">
+                                                        <div class="km-yes-no" name="question57" ng-model="document.question57.answer"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question57FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question57FurtherInfo" ng-model="document.question57.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q57DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question57.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question57"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question58" bold="true" caption="58.补充信息">请提供主要困难和挑战的摘要：<div km-textbox-ml rows=4 name="question58" ng-model="document.question58.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q58DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                       <div document-selector ng-model="document.question58.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question58"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question58RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question58RelevantDocuments" ng-model="document.question58.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+    
+                                        <div class="tab-pane" id="part12">
+                                            <legend>技术转让、协作与合作（第23条）</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" required name="question59" bold="true"
+                                                        caption="59.贵国是否正按照第23条规定就技术与科学研究和开发计划进行协作与合作，以此作为实现本议定书目标的方式之一？">
+                                                        <div class="km-yes-no" required name="question59" ng-model="document.question59.answer"
+                                                            ng-click="Q59Clear()"></div>
+                                                    </div>
+                                                    <div ng-show="document.question59.answer" class="km-control-group" name="question59AdditionalInfo"
+                                                        caption="">请提供所采取措施的摘要。<div km-textbox-ml rows=2 name="question59AdditionalInfo" ng-model="document.question59.additionalInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question59FurtherInfo" caption="">请提供其他信息<div km-textbox-ml rows=4 name="question59FurtherInfo" ng-model="document.question59.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q59DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question59.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question59"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- </div>
+    
+                            <div class="tab-pane" id="part14"> --><legend>可选其他信息</legend>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question60" bold="true" caption="60.请提供成为名古屋议定书缔约方所面临主要困难和挑战的摘要。">
+                                                        <div km-textbox-ml rows=4 name="question60FurtherInfo" ng-model="document.question60.challengesInfo"
+                                                            locales="document.header.languages" placeholder="">
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q60DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question60.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question60"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question61" bold="true" caption="61.贵国是否已建立名古屋议定书实施资金的预算分配机制？">
+                                                        <div class="km-yes-no" name="question61" ng-model="document.question61.answer"
+                                                            ng-click="Q61Clear()"></div>
+                                                    </div>
+                                                    <div ng-show="document.question61.answer" class="km-control-group" name="question61AdditionalInfo"
+                                                        caption="">请提供其他信息<div km-textbox-ml rows=2 name="question61AdditionalInfo" ng-model="document.question61.additionalInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+                                                    <div class="km-control-group" name="question61Challenges" caption="">请提供所面临主要困难和挑战的摘要。<div km-textbox-ml rows=4 name="question61Challenges" ng-model="document.question61.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div><!--<div class="km-control-group" name="question61FurtherInfo" caption="">
+                                            Use the text entry to provide further information, including on  experiences gained in relation to mobilization of resources to support the implementation of the Nagoya Protocol and the status of funds mobilized (level of domestic expenditures, or the amount of and trends in  funding allocated, for the  implementation of the Protocol and the funding gap)<Text entry>
+                                            <div km-textbox-ml rows=4 name="question61FurtherInfo" ng-model="document.question61.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                        </div>--><div class="km-control-group" style="margin-bottom:20px;" name="q61DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question61.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question61"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question62" bold="true" caption="62. a) 贵国是否已按照第25条规定出于本议定书实施之目的为其他缔约方提供资金或从其他缔约方或金融机构获得资金？"></div>
+    
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" ng-model="document.question62.donor.answer"
+                                                                ng-change="Q62ClearDonor()">是，已提供资金</label>
+                                                        <div ng-show="document.question62.donor.answer" class="km-control-group"
+                                                            name="question62DonorAdditionalInfo" caption="">请提供其他信息<div km-textbox-ml rows=2 ng-model="document.question62.donor.additionalInfo"
+                                                                locales="document.header.languages" placeholder=""></div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" ng-model="document.question62.recipient.answer"
+                                                                ng-change="Q62ClearRecipient()">是，已获得资金</label>
+                                                        <div class="checkbox" ng-show="document.question62.recipient.answer">
+                                                            <label><input type="checkbox" ng-model="document.question62.recipient.parties"
+                                                                    ng-change="Q62ClearRecipientFromParty()">来自其他缔约方</label>
+                                                            <div ng-show="document.question62.recipient.parties" class="km-control-group"
+                                                                name="question62DonorAdditionalInfo" caption="">请提供其他信息<div km-textbox-ml rows=2 ng-model="document.question62.recipient.partiesInfo"
+                                                                    locales="document.header.languages" placeholder="">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="checkbox" ng-show="document.question62.recipient.answer">
+                                                            <label><input type="checkbox" ng-model="document.question62.recipient.financialInstitutions"
+                                                                    ng-change="Q62ClearRecipientFromInstitution()">来自金融机构</label>
+                                                            <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
+                                                                <label><input type="checkbox" ng-model="document.question62.recipient.gef">来自全球环境基金</label>
+                                                            </div>
+                                                            <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
+                                                                <label><input type="checkbox" ng-model="document.question62.recipient.npImplementationFund">来自名古屋议定书实施基金</label>
+                                                            </div>
+                                                            <div class="checkbox" ng-show="document.question62.recipient.financialInstitutions">
+                                                                <label><input type="checkbox" ng-model="document.question62.recipient.otherSources"
+                                                                        ng-change="Q62ClearRecipientFromOtherSources()">来自其他来源</label>
+                                                                <div ng-show="document.question62.recipient.otherSources"
+                                                                    class="km-control-group" name="question62DonorAdditionalInfo"
+                                                                    caption="">请提供其他信息<div km-textbox-ml rows=2 name="question62ReceiverotherSourcesInfo"
+                                                                        ng-model="document.question62.recipient.otherSourcesInfo"
+                                                                        locales="document.header.languages" placeholder=""></div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="checkbox">
+                                                        <label><input type="checkbox" ng-model="document.question62.no"
+                                                                ng-change="Q62Clear()">否</label>
+                                                    </div><!--<div class="km-control-group" name="question62FurtherInfo" caption="">
+                                            Use the text entry to provide further information, including on the status of financial resources (total amount) mobilized donated or received for the purposes of implementation of the Protocol
+                                            <div km-textbox-ml rows=4 name="question62FurtherInfo" ng-model="document.question62.furtherInfo" locales="document.header.languages" placeholder=""></div>
+                                        </div>--><div class="km-control-group" style="margin-bottom:20px;" name="q62DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question62.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question62"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question63new" bold="true" caption="62 b).请提供为支持本议定书实施进行资源动员的经验。">
+                                                        <div km-textbox-ml rows=4 name="question63newRelevantInformation"
+                                                            ng-model="document.question63new.relevantInformation" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                        <div km-link name="question63newRelevantDocuments" ng-model="document.question63new.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question64new" bold="true" caption="62 c).请提供为支持本议定书实施进行资金动员的情况。">
+                                                        <div km-textbox-ml rows=4 name="question64newRelevantInformation"
+                                                            ng-model="document.question64new.relevantInformation" locales="document.header.languages"
+                                                            placeholder=""></div>
+                                                        <div km-link name="question64newRelevantDocuments" ng-model="document.question64new.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+    
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question63" bold="true" caption="63.贵国是否由特定工作人员管理与名古屋议定书直接相关的各项职能？">
+                                                        <div class="help-info">收集此信息可用于评估第31条下评估和审查方面的议定书成效，以及衡量议定书实施进展并查明所面临的困难和挑战。</div>
+                                                        <div class="km-yes-no" name="question63" ng-model="document.question63.answer"
+                                                            ng-click="Q63Clear()"></div>
+                                                    </div>
+    
+                                                    <div ng-show="document.question63.answer" class="km-control-group" name="question63NumberOfStaff"
+                                                        caption="请说明此等工作人员的数量">
+                                                        <label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff"
+                                                                value="One">1人</label><br /><label><input type="radio" name="amendmentIntent" ng-model="document.question63.numberOfStaff"
+                                                                value="Less than 5">不到5人</label><br /><label><input type="radio" name="question63NumberOfStaff" ng-model="document.question63.numberOfStaff"
+                                                                value="Less than 10">Less than 10</label><br /><label><input type="radio" name="amendmentIntent" ng-model="document.question63.numberOfStaff"
+                                                                value="10 or more">至少10人</label>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question63Challenges" caption="">请提供所面临主要困难和挑战的摘要。<div km-textbox-ml rows=4 name="question63Challenges" ng-model="document.question63.challengesInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question63FurtherInfo" caption="">请使用文本输入框，以提供进一步信息<div km-textbox-ml rows=4 name="question63FurtherInfo" ng-model="document.question63.furtherInfo"
+                                                            locales="document.header.languages" placeholder=""></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q63DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                        <div document-selector ng-model="document.question63.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question63"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question64" bold="true" caption="64.任何其他相关信息：">
+                                                        <div km-textbox-ml rows=4 name="question64FurtherInfo" ng-model="document.question64.furtherInfo"
+                                                            locales="document.header.languages" placeholder="">
+                                                        </div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" style="margin-bottom:20px;" name="q64DocRefs"
+                                                        caption="请选择相关获取和惠益分享信息交换所记录">
+                                                    <div document-selector ng-model="document.question64.documentReferenceIDs"
+                                                               ng-disabled="!document.government" question="question64"
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                                    </div>
+    
+                                                    <div class="km-control-group" name="question64RelevantDocuments"
+                                                        caption="任何其他相关文件">
+                                                        <div km-link name="question64RelevantDocuments" ng-model="document.question64.relevantDocuments"
+                                                            allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                    </div>
+                                                </div>
+                                            </div><!-- </div>
+    
+                            <div class="tab-pane" id="part15"> --><legend>对报告格式的评论</legend>
+    
+    
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="question65" bold="true" caption="65.请提供您对本报告格式的任何意见和建议：">
+                                                        <div km-textbox-ml rows=4 name="question65FurtherInfo" ng-model="document.question65"
+                                                            locales="document.header.languages" placeholder="">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="Notes" bold="true" caption="注意：">
+                                                        <div class="help-info">“备注”字段用于填写您的个人注释或评论，在查看记录时将被隐藏。此字段不适用于保密信息。</div>
+                                                        <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+    
+    
+    
+    
+                        </div><!-- tab='edit' --></form>
+                </edit-form>
+                <review-form>
+                    <view-abs-national-report ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-national-report>
+                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
+
+        </div>
+    </div>
+
+
+
+</div>
+</div>

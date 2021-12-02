@@ -1,0 +1,19 @@
+<div><br /><table class="table table-bordered" cellpadding="0" cellspacing="0" id="E8509"
+        style="border-top: solid 1px #888; width: 100%;">
+        <tr>
+            <th class="tableHeaderTop tableHeaderBottom back80 countryName">Id</th>
+            <th class="tableHeaderTop tableHeaderBottom">Descripción</th>
+            <th></th>
+            <th></th>
+        </tr>
+
+        <tr ng-repeat="doc in riskAssessments.docs">
+            <td style="width:15%" class="tableRow back80 countryName"><a rel="noopener" ng-href="/database/RA/{{doc.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_self" ng-bind="doc.uniqueIdentifier_s|uppercase"></a></td>
+            <td style="width:50%">
+                <div><strong ng-bind="doc.government_EN_t"></strong></div><span ng-bind="doc.rec_title"></span></td>
+            <td style="width:20%" ng-bind="doc.lmoTransformationEvents_ss.join(' ')"></td>
+            <td>
+                <bch-icons></bch-icons>
+            </td>
+        </tr>
+    </table><br /><br /></div>

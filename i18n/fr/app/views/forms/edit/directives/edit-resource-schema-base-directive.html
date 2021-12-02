@@ -1,0 +1,357 @@
+﻿<div>
+	<div class="registerpage-content edit-resource-base-directive">
+		<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" 
+			hide-timer="false" tab="tab"
+			validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+			on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+			<edit-form>
+					<form name="editForm" class="editForm" style="margin-top:10px">
+
+						<div ng-show="tab=='edit'" km-tab="edit">
+			
+							<legend name="formInfo" style="display:none"></legend>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Informations générales</legend>
+			
+                                    <div class="row">
+                                        <div class="col-xs-12" >
+                                            <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
+                                                <div class="indent">
+                                                    <div km-form-languages multiple required name="documentLanguages" ng-model="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="title" caption="Titre">
+												<div class="help-block">Ceci apparaîtra en tant que titre du fichier CEPRB.</div>
+												<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12" ng-if="isVlr||isMcc||isCpp">
+											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type de ressource">
+													<div class="help-block">Sélectionnez autant d’options que nécessaire afin de bien décrire la (les ressource(s).</div>
+													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
+															binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" locales="document.header.languages"></div>												
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
+											<label name="authors" style="font-size: 21px !important;" required for="authors">Auteur(s)* :</label>
+											<div class="help-block">Nom de  la personne ou l’organisation qui est l'auteur de la publication ou la ressource informative.</div>
+										</div>
+										<div class="col-xs-12" style="margin-top: 20px;">
+											<div class="km-control-group" name="authors" caption="Nom(s) de l’auteur">
+												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" caption="et/ou" style="margin-bottom: 10px;"></div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="organizations" caption="Référence à l’organisation qui est l’auteure">
+												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
+													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true"
+													 schema="(organization contact)"  allow-new-schema="organization,contact"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-xs-12">
+											<div class="km-control-group" name="publisher" caption="Éditeur">
+												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-md-6 col-xs-12">
+											<div class="km-control-group" required name="publicationDate" caption="Date de publication"
+											help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: VLR">
+												<div km-date placeholder="AAAA-MM-JJ" name="publicationDate" required 
+												format="yyyy-mm" start-view="months" min-view-mode="months"
+												ng-model="document.publicationDate"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6 col-xs-12">
+											<div class="km-control-group" name="source" caption="Source">
+												<div class="help-block">Toute référence à la ressource de laquelle découle la présente ressources (p. ex., l'article d'un journal ou le nom d’un journal).</div>
+												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
+											</div>
+										</div>
+										<div class="col-md-6 col-xs-12">
+											<div class="km-control-group" name="rights" caption="Droits">
+												<div class="help-block">Renseignements sur les droits associés à la ressource tels que le détenteur du droit d'auteur et la disponibilité aux fins de reproduction à des fins éducatives et à but non lucratif.</div>
+												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									
+								</div>
+							</section>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Accès à la/les ressource(s)</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="resourceLinks" caption="Lien à la ressource">		
+												<div class="help-block">Prière de toujours joindre le ou les documents pertinents à intégrer à la base de données afin que les utilisateurs puissent les télécharger. Veuillez également ajouter le lien vers les ressources qui sont disponibles sur Internet. Veuillez noter que les pièces jointes sont préférables aux liens car elles sont accessibles de façon permanente alors que les liens peuvent être brisés.</div>										
+												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
+												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" name="cover" caption="Image de couverture">
+												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
+												 identifier="document.header.identifier"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</section>
+
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Information sur le contenu de la ressource</legend>
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group" required name="summary" caption="Résumé, extrait ou table des matières* (max. 300 mots)">
+												<div km-textbox-ml required ng-model="document.summary" rows="4" locales="document.header.languages"></div>
+											</div>
+										</div>
+									</div>
+									
+
+									<div class="row">
+    
+										<div class="col-xs-12">
+											<label>Pays ou groupe(s) régional(aux) ou économique(s) liés à la ressource</label>
+										</div>
+										<div class="col-md-3">
+											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Regroupement(s) géographique(s) ou politique(s) / économique(s)">
+												<div km-select multiple name="countryRegions.regions"
+													 ng-model="countryRegions.regions" placeholder="Veuillez choisir une ou des option (s)"
+													 items="options.regions()"></div>
+											</div>
+										</div>
+
+										<div class="col-md-1">
+											<div class="km-control-group small country-list" name="countryRegions.countries" caption="et/ou"></div></div>
+									
+										<div class="col-md-3">
+											<div class="km-control-group small country-list" name="countryRegions.countries" caption="Nom du/des pays">
+												<div km-select multiple name="countryRegions.countries" filter-type="startsWith" 
+												ng-model="countryRegions.countries" placeholder="Veuillez choisir une ou des option (s)" items="options.countries()"></div>
+											</div>
+										</div>
+										
+									</div>
+
+								</div>
+								
+							</section>
+							<section>
+								<div class="well no-shadow bg-white">
+									<legend>Mots clés pour faciliter la recherche d’informations aux centres d’échange</legend>
+									<div class="row" ng-if="isABS">
+										<div class="col-md-12">
+											<div class="km-control-group" name="aichiTargets" caption="Objectifs d'Aichi pour la biodiversité">
+												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
+												 binding-type="term[]"></div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div class="col-xs-12">
+											<div class="km-control-group"  name="cbdSubjects" caption="Domaines thématiques liés de la CDB">
+												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
+												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
+											</div>
+                                   		</div>
+									</div>
+
+								</div>
+							</section><!-- Till now all fields are common for all CHs  --> <!-- IF BCH START --><section ng-if="isBCH">
+							<div class="well no-shadow bg-white">
+								<legend>Mots clés liés à la prévention des risques biotechnologiques</legend>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" required name="biosafety.subjects" caption="Domaines thématiques de la prévention des risques biotechnologiques">
+											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
+											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div><!-- TODO: need to apply a condition --><div >
+									<div class="row" ng-if="hasRiskAssessmentSubject">
+										<legend>Directives sur l’évaluation de risques des organismes vivants modifiés</legend>
+										<div class="alert alert-danger"><strong>Note:</strong> la fonction pour recommander ce document comme document de référence pour les « Directives pour l'évaluation des risques liés aux organismes vivants modifiés » est en cours d’élaboration</div><!-- TODO: section hidden for now --> <!--
+										<div  class="col-xs-12">
+											<div class="km-control-group" required name="biosafety.raRecommend" caption="Would you like to recommend this document as background material for the “Guidance on Risk Assessment of Living Modified Organisms”?">
+												<div km-yes-no required name="biosafety.raRecommend" ng-model="document.biosafety.raRecommend" ng-click="onRaRecommendChange(document.biosafety.raRecommend)"  locales="document.header.languages"></div>												
+											</div>
+										</div>
+										<div class="col-xs-12" ng-if="document.biosafety.raRecommend">
+											<div class="km-control-group" required name="biosafety.raAuthorAffiliation"  caption="Author affiliation">
+												<div class="help-block">Please provide information on the author affiliation</div>
+												<div km-term-check required name="biosafety.raAuthorAffiliation" ng-model="document.biosafety.raAuthorAffiliation" terms="options.bchRaAuthorAffiliation()"
+													binding-type="term[]" locales="document.header.languages">
+												</div>
+											</div>
+										</div>
+
+										<div class="col-xs-12" ng-if="document.biosafety.raRecommend">
+											<div class="km-control-group" name="biosafety.raSubjects" required  caption="Please indicate to which section(s) of the “Guidance” this background material is relevant">
+												<div km-term-check name="biosafety.raSubjects" required ng-model="document.biosafety.raSubjects" terms="options.bchRaSubjects()"
+													binding-type="term[]" locales="document.header.languages">
+												</div>
+											</div>
+										</div>
+									 --></div>
+									<div class="row padding-top-10">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="biosafety.addressModifiedOrganisms" caption="Ces ressources traitent-elles d'une ou de plusieurs catégories d'organismes, de gènes ou d'OVM spécifiques* ?" required>
+												<div km-yes-no required name="biosafety.addressModifiedOrganisms" ng-model="document.biosafety.addressModifiedOrganisms"  
+													ng-click="onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms)"  locales="document.header.languages" locales="document.header.languages"></div>
+												<div ng-if="document.biosafety.addressModifiedOrganisms" style="margin-top: 15px;">
+													<div class="col-xs-12">
+														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="Identification du ou des OVM">
+															<div document-selector name="biosafety.modifiedOrganisms" required type="checkbox"  ng-model="document.biosafety.modifiedOrganisms"
+															   on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true"  filter="true"
+															   allow-new-schema="modifiedOrganism"></div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+
+									<div class="row">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Ces ressources traitent-elles d'une ou de plusieurs catégories d'organismes, de gènes ou d'OVM spécifiques?" required>
+												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
+													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
+												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
+													<div class="col-xs-12">
+														<div class="km-control-group" required name="biosafety.organisms"  caption="Identification du ou des organismes">
+															<div document-selector name="biosafety.organisms" required ng-model="document.biosafety.organisms"
+																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
+																 allow-new-schema="organism"></div>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+
+
+									<div class="row">
+										<div  class="col-xs-12">
+											<div class="km-control-group" name="biosafety.addressGenes" caption="Ces ressources traitent-elles d'une ou de plusieurs éléments génétiques spécifiques?" required>
+												<div class="help-block">Les informations sur les éléments génétiques portent sur les séquences d'ADN, notamment les gènes, les régions régulatrices d'ADN et d’autres acides nucléiques utilisés pour créer un organisme vivant modifié. Ils peuvent coder une protéine ou avoir une fonction régulatrice spécifique.</div>
+												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
+												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
+												<div ng-if="document.biosafety.addressGenes" style="margin-top: 15px;">
+													<div class="col-xs-12">
+														<div class="km-control-group" required name="biosafety.genes"  caption="Identification du/des gènes">
+															<div document-selector name="biosafety.genes" required type="checkbox"  ng-model="document.biosafety.genes"
+																   on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true"  filter="true"
+																   allow-new-schema="dnaSequence"></div>
+														</div>
+													</div>
+													
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section><!-- IF BCH END --> <!-- IF ABS START --><section ng-if="isABS">
+							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Mots clés liés à l'accès et au partage des avantages</legend>
+								<div class="row" ng-if="isMcc">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="nagoya.mccKeywords" required caption="Veuillez sélectionner les mots clés pertinent pour décrire le contenu du code de conduite, des directives et des pratiques exemplaires et/ou normes que vous soumettez.">
+											<div km-term-check name="nagoya.mccKeywords" required ng-model="document.nagoya.mccKeywords" terms="options.mccKeywords()"
+											 binding-type="term[]"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" required name="nagoya.subjects" caption="Domaines thématiques APA">
+											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
+											 binding-type="term[]" tabular-shape="false"></div>
+										</div>
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="* Domaines clés et mesures stratégiques pour le renforcement et le développement des capacités abordés par la ressource">
+											<div class="help-block">Si cette ressource est liée au renforcement des capacités pour le Protocole de Nagoya, veuillez fournir les options applicables à partir de</div>
+											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
+											 binding-type="term[]" tabular-shape="true" tabular-shape="true" ></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section><!-- IF ABS END --><section>
+							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Information supplémentaire</legend>
+		
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="address" caption="Any other relevant information">
+											<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+										</div>
+									</div>
+								</div>
+		
+								<div class="row">
+									<div class="col-xs-12">
+										<div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
+											<div class="help-block">Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.</div>
+											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
+											 identifier="document.header.identifier"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+						<section>
+							<div class="well no-shadow bg-white">
+								<legend>Notes</legend>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="km-control-group" name="notes">
+										<div class="help-block">Le champ ‘Notes’ est réservé à votre usage personnel. Il peut seulement être vu lorsqu’un dossier est en mode édition mais n’est pas visible lorsque celui-ci est publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
+										<div km-notes name="notes" ng-model="document.notes"></div>
+									</div>
+								</div>
+							</div>
+							</div>
+						</section><!-- BCH and ABS COMPLETED HERE 	 --></div>
+			
+				</form>
+			</edit-form>
+			<review-form>
+					<div view-resource ng-model="review.document" locale="review.locale" allow-drafts="true" heading="{{heading}}"
+					short-heading="{{shortHeading}}"></div>
+			</review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></workflow-arrow-buttons>
+
+	</div>
+</div>

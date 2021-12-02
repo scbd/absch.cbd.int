@@ -1,0 +1,56 @@
+<div>
+	<div class="container-fluid">
+		<div class="panel panel-default registry-details">
+			<div class="panel-heading">
+				<h2>生物体登记薄</h2>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 col-xs-12"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
+							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> 登记簿 <span class="caret"></span></button>
+							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>登记簿</b></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">改性活生物体登记薄</a></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/organisms">生物体登记薄</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">基因片段登记簿</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-10  col-xs-12">
+						<p class="p-borders padding-top-10">生物体登记簿包括在生物安全信息交换所登记为亲体、受体或供体的生物体的概要信息。登记簿包括指向每个生物体记录的链接，可在其中找到有关生物特征的进一步信息，包括分类学分类、通用名称、起源、起源中心和遗传多样性中心的信息。提及生物体的记录的链接位于每个单个记录的最下方。</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> 正在加载...</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>载入登记簿记录时出错，请重试。</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12"><strong>总记录数量： <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> 导出</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="orgaExport">
+								<thead>
+									<tr>
+										<th class="display-18">记录 ID</th>
+										<th class="display-20">学名</th>
+										<th class="display-17 hidden-xs">常用名</th>
+										<th class="display-45 hidden-xs">描述</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::orgaRecords">
+										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
+										<td class="tableexport-string"><span ng-bind="::row.taxonomicStatus"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.commonName.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.description"></span></td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

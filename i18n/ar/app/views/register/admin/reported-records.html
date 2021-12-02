@@ -1,0 +1,115 @@
+﻿<div  id="RegisterPage" dir="rtl">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu dir="rtl"></span><div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+
+        <div class="register-content-header bg-pink color-white">
+            <div style="padding:10px 10px;">
+                <h3>السجلات المُبلّغ عنها</h3>
+            </div>
+        </div>
+        <div  class="register-content-content">
+
+
+            <div class="" style="width:100%">
+                <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;">                
+                    <div class="col-xs-2">Schema</div>
+                    <div class="col-xs-2">قام بالإبلاغ</div>
+                    <div class="col-xs-2">الإبلاغ في</div>
+                    <div class="col-xs-4">Information</div>
+                    <div class="col-xs-2"></div>
+                </div>
+                <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;" 
+                ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
+                    <div ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
+                        <div class="col-xs-2"><span ng-bind="record.schema|schemaName"></span></div>
+                        <div class="col-xs-2"><span ng-bind="record.reportedBy"></span></div>
+                        <div class="col-xs-2"><span ng-if="record.meta" ng-bind="record.meta.createdOn|formatDateWithTime"></span></div>
+                        <div class="col-xs-3"><span ng-if="record.incorrect">غير صحيح أو غير ملائم |</span> <span ng-if="record.broken">رابط لا يعمل أو معلومات قديمة |</span> <span ng-if="record.copyright">انتهاك حقوق النسخ والنشر</span><br> <span ng-bind="record.additionalInformation"></span></div>
+                        <div class="col-xs-3">
+                            <input type="button" class="btn btn-primary" value="View Record" ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)" />
+                            <input type="button" class="btn btn-primary" value="Add Comments" ng-click="addComments($event, record)" />
+                            <input type="button" class="btn btn-warning" value="Delete" ng-click="delete($event, record)" />
+                        </div>
+                    </div>
+                    <div ng-if="record.history"><!--<div class="col-xs-1"></div>--><table class="table table-striped" style="margin:auto;width:80%">
+                            <thead class="row " style="padding:10px;border-bottom:1px solid white;">                
+                                <td>لا.</td>
+                                <td>تاريخ</td>
+                                <td>Status</td>
+                                <td>تعليقات</td>
+                            </thead>
+                            <tbody class="row table-striped table-hover" >                
+                                <td ng-bind="record.history.length+1"></td>
+                                <td ng-bind="record.meta.modifiedOn|formatDateWithTime + ' by ' + record.meta.modifiedBy"></td>
+                                <td ng-bind="record.status"></td>
+                                <td ng-bind="record.comments"></td>
+                            </tbody>
+                             <tbody class="row table-striped table-hover" 
+                             ng-repeat="history in record.history | orderBy:'version':'asc'">                
+                                <td ng-bind="history.meta.version"></td>
+                                <td ng-bind="history.meta.modifiedOn|formatDateWithTime + ' by ' + history.meta.modifiedBy"></td>
+                                <td ng-bind="history.status"></td>
+                                <td ng-bind="history.comments||history.additionalInformation"></td>
+                            </tbody>
+                        </table><!--<div class="col-xs-1"></div>--></div>
+                    <div ng-if="record.showDoc">
+                        <div style="padding:35px 0px 15px 0px!important;">
+                            <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="tdue" link-target="_blank"></record-loader>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/ng-template" trados-translation="true" id="addCommentsDialog">
+        <div class="modal-header" dir="rtl">           
+            <h3 class="modal-title"><span ng-bind="record.schema|schemaName + ' : -' + record.reportedBy" dir="rtl"></span></h3> 
+        </div>
+
+        <div class="modal-body" dir="rtl">
+            <div class="form-group row">
+                <label for="example-text-input" class="col-xs-2 col-form-label">Status</label>
+                <div class="col-xs-10">
+                    <select class="form-control" style="width:10%" required name="status" ng-model="record.status">
+                        <option value="Read">مقروءة</option>
+                        <option value="Not a issue">ليس مشكلة</option>
+                        <option value="Record owner contacted">تم الاتصال بمالك السجل</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-xs-2 col-form-label">التعليقات</label>
+                <div class="col-xs-10">
+                    <textarea rows="3" class="form-control"  id="comments" ng-model="record.comments"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer" dir="rtl">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">إلغاء</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save()" ng-disabled="loading">إرسال</button>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" trados-translation="true" id="confirmDeleteDialog">
+        <div class="modal-header" dir="rtl">           
+            <h3 class="modal-title">هل تريد الحذف حقاً؟</h3> 
+        </div>
+
+        <div class="modal-body" dir="rtl">             
+                <div class="col-xs-12 col-form-label">Schema : <span ng-bind="record.schema|schemaName" dir="rtl"></span></div>
+                <div class="col-xs-12 col-form-label">قام بالإبلاغ: <span ng-bind="record.reportedBy"></span></div>
+                <div class="col-xs-12 col-form-label">تاريخ الإبلاغ: <span ng-if="record.meta"><span ng-bind="record.meta.createdOn|formatDate"></span></div>
+                <div class="col-xs-12 col-form-label">التفاصيل: <span ng-if="record.incorrect"> غير صحيح أو غير ملائم |</span> <span ng-if="record.broken">رابط لا يعمل أو معلومات قديمة |</span> <span ng-if="record.copyright">انتهاك حقوق النسخ والنشر</span><br> <span ng-bind="record.additionalInformation"></span></div>
+        </div>
+
+        <div class="modal-footer" dir="rtl">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">لا</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">نعم</button>
+        </div>
+    </script>
+
+</div>

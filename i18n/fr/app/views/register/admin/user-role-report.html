@@ -1,0 +1,107 @@
+﻿<div  id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+    <link href="/app/css/AdminLTE.min.css" rel="stylesheet" /><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+
+        <div class="register-content-header bg-pink color-white">
+            <div style="padding:10px 10px;">
+                <h3>Rapport sur les rôles de l’usager</h3>
+            </div>
+        </div>
+        <div class="register-content-content" style="background:#d2d6de;">
+
+            <legend name="formInfo" style="display:none"></legend><!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>--><div class="registerpage-content">
+
+                <div class="alert alert-danger" ng-show="__error"><strong>Erreur :</strong> <span ng-bind="__error"></span></div>
+
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Filtres</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="pull-left">
+                                    <div km-select ng-model="filters.partyStatus" binding-type="string" placeholder="Statut de la Partie" items="options.filterPartyStatus()"></div>
+                                    <div km-select ng-model="filters.filterType" binding-type="string" placeholder="Filtre" items="options.filterTypes()"></div>
+                                    <div km-select ng-model="filters.role" binding-type="string" placeholder="Rôles" items="options.filterRoles()"></div>
+                                </div>
+                                <div class="pull-right">
+                                    <input type="button" class="btn btn-primary" ng-click="loadRecords()" value="Filter" ng-disabled="!filters.partyStatus || !filters.filterType || !filters.role">
+                                    <button type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="(totalCount||0) <= 0 || readyForExport||loading"><i class="fa fa-table" ></i> Exporter</button>
+                                </div>
+                            </div>
+                            <div class="col-xs-12" ng-if="filters.role=='nfp'"><br/><div class="callout callout-warning">
+                                    <h4>Attention!</h4>
+                                    <p>Seulement les comptes des usagers sont considérés et non les fichiers des correspondants nationaux</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table " style="margin-top:15px;">
+                    <div ng-show="!__error">
+
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Rôle des usagers</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row-fluid center" id="National">
+                                    <div>
+                                        <style> .table-hover .fa-caret-up, .table-hover .fa-caret-down{ cursor: pointer; } .table-hover .fa-caret-up.active, .table-hover .fa-caret-down.active{ color:#367fa9; } </style><span ng-bind="reverse"></span><table class="table table-hover" style="text-align: left">
+                                            <tbody>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Pays <i ng-show="reverse" ng-click="sortByField='name.en';reverse=false" class="fa fa-caret-up" ng-class="{'active':sortByField=='name.en'}"></i> <i ng-show="!reverse" ng-click="sortByField='name.en';reverse=true" class="fa fa-caret-down" ng-class="{'active':sortByField=='name.en'}"></i></th>
+                                                    <th>Décompte <i ng-show="reverse" ng-click="sortByField='count';reverse=false" class="fa fa-caret-up" ng-class="{'active':sortByField=='count'}"></i> <i ng-show="!reverse" ng-click="sortByField='count';reverse=true" class="fa fa-caret-down" ng-class="{'active':sortByField=='count'}"></i></th>
+                                                    <th>Région de la CDB <i ng-show="reverse" ng-click="sortByField='region';reverse=false" class="fa fa-caret-up" ng-class="{'active':sortByField=='region'}"></i> <i ng-show="!reverse" ng-click="sortByField='region';reverse=true" class="fa fa-caret-down" ng-class="{'active':sortByField=='region'}"></i></th>
+                                                    <th>Usager(s)</th>
+                                                </tr>
+
+                                                <tr ng-repeat="country in countriesToShow | orderBy:sortByField:reverse">
+                                                    <td ng-bind="$index+1"></td>
+                                                    <td><a rel="noopener" target="_blank" href="https://accounts.cbd.int/admin/users?government={{country.code}}&role={{role}}" 
+                                                        ng-bind="country.name|lstring:locale"></a></td>
+                                                    <td ng-bind="country.count"></td>
+                                                    <td ng-bind="country.region"></td>
+                                                    <td><span ng-repeat="user in country.users"><a rel="noopener" target="_blank" ng-href="https://accounts.cbd.int/admin/users/{{user.userID|encodeURIComponent}}" ng-bind="user.firstName + ' ' +user.lastName + '('+user.email +')'"></a>,</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td></td>
+                                                    <td>TOTAL</td>
+                                                    <td ng-bind="totalCount"></td>
+                                                </tr>
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div ng-class="{'overlay':loadingRecords}" ng-if="loadingRecords"><i class="fa fa-refresh fa-spin"></i></div>
+                            <div style="height:0px;width:0px;" ng-if="readyForExport">
+                                <table class="table table-hover" style="text-align: left" id="forExport">
+                                    <tbody>
+                                        <tr>
+                                            <th>Pays</th>
+                                            <th>Usager</th>
+                                            <th>Courriel</th>
+                                        </tr>
+                                        <tr ng-repeat="user in usersToExport">
+                                            <td ng-bind="user.country|lstring:locale"></td>
+                                            <td ng-bind="user.userName"></td>
+                                            <td ng-bind="user.userEmail"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div><!-- /.box-body --></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

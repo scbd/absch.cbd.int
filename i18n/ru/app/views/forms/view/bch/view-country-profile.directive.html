@@ -1,0 +1,23 @@
+<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4></h4>
+	</div>
+	<div class="record-body panel-body">
+		<document-date></document-date>
+		<legend></legend>
+		<div ng-if="document.government">
+			<label name="government"></label> 
+			<div class="km-value" compare-val></div>
+		</div>	
+		<div ng-if="document.profile">
+			<label></label> 
+			<div compare-val> 
+			 	<km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
+			 </div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>
