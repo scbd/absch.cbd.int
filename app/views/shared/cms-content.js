@@ -28,7 +28,7 @@ function rebaseUrl(pathOrUrl, base) {
 export { default as template } from './cms-content.html';
 
 export default ["$scope", "$rootScope", "$route", '$http', function($scope, $rootScope, $route, $http) {
-    debugger
+
     var url =  $route.current.$$route.target;
     var params = {};
     
@@ -43,7 +43,7 @@ export default ["$scope", "$rootScope", "$route", '$http', function($scope, $roo
     
     url = url.replace(/:\w+\b/g, '');
     
-    $http.get(url, {cache:false, params: params }).then(function(res) {
+    $http.get(url, {cache:true, params: params }).then(function(res) {
         
         const base  = $('base').attr('href') || '/';
         const page  = $('<div></div>').html(res.data)
@@ -60,16 +60,14 @@ export default ["$scope", "$rootScope", "$route", '$http', function($scope, $roo
         CTitle      .remove();
         CBreadcrumbs.remove();
 
-        $scope.title = title || CTitle.text();
-        
-        $('#cms-left-menu').html(CMenu  .html());
-        $('#cms-content'  ).html(CContent.html());
+        $scope.title       = title || CTitle.text();
+        $scope.menuHtml    = CMenu   .html();
+        $scope.contentHtml = CContent.html()
 
-        
     }).catch(function(e) {
         
-        if(e.status==404) $('#cms-content').html(html404);
-        if(e.status==403) $('#cms-content').html(html403);
+        if(e.status==404) scope.contentHtml = html404;
+        if(e.status==403) scope.contentHtml = html403;
     });
 
 }];

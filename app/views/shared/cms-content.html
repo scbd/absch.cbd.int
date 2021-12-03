@@ -17,13 +17,15 @@
     </div>
       <div class="row">
       <div class="col-md-3 col-lg-2">
-        <div id="cms-left-menu">
+        <div id="cms-left-menu" ng-bind-html="menuHtml">
     
         </div>
       </div>
       <div class="col-md-9 col-lg-10">
-        <div id="cms-content">
-            loading...
+        <div id="cms-content" ng-bind-html="contentHtml">
+        </div>
+        <div id="cms-content" ng-if="!contentHtml">
+            <i class="fa fa-cog fa-spin"
         </div>
       </div>
     </div>
