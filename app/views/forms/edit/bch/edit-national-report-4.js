@@ -1,6 +1,6 @@
 ﻿import app from 'app';
 import _ from 'lodash';
-import nr4Data from 'app-data/bch/report-analyzer/cpbNationalReport4.json';
+import {cpbNationalReport4} from 'app-data/bch/report-analyzer/cpbNationalReport4';
 import nr3Data from 'app-data/bch/report-analyzer/cpbNationalReport3.json';
 import 'views/forms/edit/edit';
 import 'services/main';
@@ -266,7 +266,7 @@ import 'ngDialog';
                     
                 _.forEach(mappings, function(mapping){
 
-                    var dataSection = _.find(nr4Data, {key:mapping.key||question.section});
+                    var dataSection = _.find(cpbNationalReport4, {key:mapping.key||question.section});
                     if(dataSection){
                         var mapQuestion; 
                         var validationPositive = false;
@@ -421,7 +421,7 @@ import 'ngDialog';
                 
                 _.forEach(tab.sections, function(section){
 
-                    var dataSection = _.find(nr4Data, {key:section.key});
+                    var dataSection = _.find(cpbNationalReport4, {key:section.key});
                     
                     _.extend(section, dataSection||{})
 
