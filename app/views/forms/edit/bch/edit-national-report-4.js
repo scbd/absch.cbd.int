@@ -1,7 +1,7 @@
 ﻿import app from 'app';
 import _ from 'lodash';
 import {cpbNationalReport4} from 'app-data/bch/report-analyzer/cpbNationalReport4';
-import nr3Data from 'app-data/bch/report-analyzer/cpbNationalReport3.json';
+import {cpbNationalReport3} from 'app-data/bch/report-analyzer/cpbNationalReport3';
 import 'views/forms/edit/edit';
 import 'services/main';
 import '~/views/forms/directives/nr-yes-no';
@@ -462,7 +462,7 @@ import 'ngDialog';
             $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params : params} )
                  .then(function(result){
                      var prevReportAnswers = result.data[0];
-                     var prevReportQuestions = _(nr3Data).map('questions').compact().flatten().value();
+                     var prevReportQuestions = _(cpbNationalReport3).map('questions').compact().flatten().value();
 
                      _.forEach(previousAnswerMapping, function(mapping, key){
                         
