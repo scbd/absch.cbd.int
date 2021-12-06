@@ -242,12 +242,10 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             async function init(){                      
                 loadFacets();
                 if($scope.isBch){
-                    loadArticle();
                     const data = await import('~/app-data/bch/offline-formats.json');
                     $scope.offlineFormats = data.default;
                 }
                 if($scope.isAbs){
-                    loadArticle();
                     const data = await import('~/app-data/abs/offline-formats.json');
                     $scope.offlineFormats = data.default;
                 }
@@ -332,15 +330,6 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                     return taskQuery;
             }
             
-            function loadArticle(){
-                if(realm.is('BCH', true)){
-                    articlesService.getArticle('5ce467f7452a5c00015e3406')
-                    .then(function(article){
-                        $scope.betaArticle = article;
-                    });
-                }
-            }
-
             function checkNationalSchemaRoles(role){
                 for (let i = 0; i < realm.nationalSchemas.filter(e=>e!='contact').length; i++) {
                     const schema = realm.nationalSchemas[i];
