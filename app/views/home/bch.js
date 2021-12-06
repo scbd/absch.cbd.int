@@ -14,10 +14,6 @@ export default ['$scope', 'articlesService', '$rootScope', function ($scope, art
         $scope.exportVueComponent = {
           components: { homepageRecords }
         }
-        articlesService.getArticle('5ce467f7452a5c00015e3406')
-        .then(function(article){
-            $scope.betaArticle = article;
-        })
 
       $scope.exploreMore = function (  ){
         $('html, body').animate({
