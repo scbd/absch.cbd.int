@@ -553,14 +553,14 @@ export const npInterimNationalReport1 = [
     },
     {
        "key":"Benefit-Sharing",
-       "title" : nr1Data.Benefit-Sharing_title,
+       "title" : nr1Data.Benefit_Sharing_title,
        "questions":[
           {
              "key":"Q020",
              "section":"Benefit-Sharing",
              "number":"20",
              "type":"option",
-             "title" : nr1Data.Benefit-Sharing_questions0_title,
+             "title" : nr1Data.Benefit_Sharing_questions0_title,
              "multiple":false,
              "options":[
                 {
@@ -575,12 +575,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Benefit-Sharing_questions0_additionalInfo0_title,
+                   "title" : nr1Data.Benefit_Sharing_questions0_additionalInfo0_title,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit-Sharing_questions0_additionalInfo1_title,
+                   "title" : nr1Data.Benefit_Sharing_questions0_additionalInfo1_title,
                    "type":"list"
                 }
              ]
@@ -590,7 +590,7 @@ export const npInterimNationalReport1 = [
              "section":"Benefit-Sharing",
              "number":"21",
              "type":"option",
-             "title" : nr1Data.Benefit-Sharing_questions1_title,
+             "title" : nr1Data.Benefit_Sharing_questions1_title,
              "multiple":false,
              "options":[
                 {
@@ -605,12 +605,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Benefit-Sharing_questions1_additionalInfo0_title,
+                   "title" : nr1Data.Benefit_Sharing_questions1_additionalInfo0_title,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit-Sharing_questions1_additionalInfo1_title,
+                   "title" : nr1Data.Benefit_Sharing_questions1_additionalInfo1_title,
                    "type":"list"
                 }
              ]
@@ -620,7 +620,7 @@ export const npInterimNationalReport1 = [
              "section":"Benefit-Sharing",
              "number":"22",
              "type":"option",
-             "title" : nr1Data.Benefit-Sharing_questions2_title,
+             "title" : nr1Data.Benefit_Sharing_questions2_title,
              "multiple":false,
              "options":[
                 {
@@ -635,12 +635,12 @@ export const npInterimNationalReport1 = [
              "additionalInfo":[
                 {
                    "field":"furtherInfo",
-                   "title" : nr1Data.Benefit-Sharing_questions2_additionalInfo0_title,
+                   "title" : nr1Data.Benefit_Sharing_questions2_additionalInfo0_title,
                    "type":"string"
                 },
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit-Sharing_questions2_additionalInfo1_title,
+                   "title" : nr1Data.Benefit_Sharing_questions2_additionalInfo1_title,
                    "type":"list"
                 }
              ]
@@ -651,18 +651,18 @@ export const npInterimNationalReport1 = [
              "number":"23",
              "type":"text",
              "field":"challengesInfo",
-             "title" : nr1Data.Benefit-Sharing_questions3_title,
-             "subTitle" : nr1Data.Benefit-Sharing_questions3_subTitle,
+             "title" : nr1Data.Benefit_Sharing_questions3_title,
+             "subTitle" : nr1Data.Benefit_Sharing_questions3_subTitle,
              "multiple":false,
              "additionalInfo":[
                 {
                    "field":"documentReferenceIDs",
-                   "title" : nr1Data.Benefit-Sharing_questions3_additionalInfo0_title,
+                   "title" : nr1Data.Benefit_Sharing_questions3_additionalInfo0_title,
                    "type":"list"
                 },
                 {
                    "field":"relevantDocuments",
-                   "title" : nr1Data.Benefit-Sharing_questions3_additionalInfo1_title,
+                   "title" : nr1Data.Benefit_Sharing_questions3_additionalInfo1_title,
                    "type":"fileLinks"
                 }
              ]

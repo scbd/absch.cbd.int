@@ -735,7 +735,7 @@ export const cpbNationalReport4 = [
                   "trigger":"enable"
                }
             ],
-            "customValuePlaceholder":"Articles7-10_questions9_customValuePlaceholder"
+            "customValuePlaceholder":"Articles7_10_questions9_customValuePlaceholder"
          },
          {
             "key":"Q037",
