@@ -84,7 +84,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                     return;
                 }
 
-                url = '/api/v2013/thesaurus/terms/' + termID + '?relations'
+                const url = '/api/v2013/thesaurus/terms/' + termID + '?relations'
                 var relationsQuery;
                 if(regionRelations[termID]){
                     var deferred = $q.defer();
