@@ -85,7 +85,6 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                     $scope.activeReport = _.find($scope.reportData, {type:$scope.selectedReportType});
 
                     $q.all([loadRegions(), loadSections(), nrAnalyzer.loadReports(), loadPreviousReportQuestionsMapping()]).then(function(results) {
-
                         var regions  = results[0];
                         var sections = results[1];
                         var reports  = results[2];
@@ -206,9 +205,9 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
                     
-                    require([$scope.activeReport.questionsUrl], function(res){
+                    require([$scope.activeReport["questionsUrl"]], function(res){
+                        res = reportAnalyzerService.flattenQuestions(res[reportType]);
 
-                        res = reportAnalyzerService.flattenQuestions(res);
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
                         var data =  _.filter(angular.copy(res), function(section) {
 
