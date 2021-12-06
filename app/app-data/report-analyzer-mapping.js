@@ -6,7 +6,7 @@ export const analyzerMapping =
         {
             "type"         : "npInterimNationalReport1",
             "title"        : reportAnalyzerMappingJson.absNR1Title,
-            "questionsUrl" : "app-data/abs/report-analyzer/npInterimNationalReport1.js",
+            "questionsUrl" : "app-data/abs/report-analyzer/npInterimNationalReport1",
             "mappingsUrl"  : "app-data/abs/report-analyzer/mapping/npInterimNationalReport1.json",
             "dataUrl"      : "/api/v2017/national-reports-np-1",
             "infoBlockUrl"  : "views/report-analyzer/includes/npInterimNationalReport1.html",
@@ -62,7 +62,7 @@ export const analyzerMapping =
         {
             "type"          : "cpbNationalReport2",
             "title"         :  reportAnalyzerMappingJson.bchNR2Title,
-            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport2.js",
+            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport2",
             "dataUrl"       : "/api/v2015/national-reports-cpb-2",
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport2.html",
             "year"          : "2011",
@@ -72,7 +72,7 @@ export const analyzerMapping =
         {   
             "type"          : "cpbNationalReport3",
             "title"         :  reportAnalyzerMappingJson.bchNR3Title,
-            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3.js",
+            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport3",
             "dataUrl"       : "/api/v2015/national-reports-cpb-3",
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport3.html",
             "year"          : "2015",
@@ -82,7 +82,7 @@ export const analyzerMapping =
         {   
             "type"          : "cpbNationalReport4",
             "title"         :  reportAnalyzerMappingJson.bchNR4Title,
-            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport4.js",
+            "questionsUrl"  : "app-data/bch/report-analyzer/cpbNationalReport4",
             "dataUrl"       : "/api/v2019/report-analyzer/national-report-cpb-4",
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport4.html",
             "year"          : "2019",

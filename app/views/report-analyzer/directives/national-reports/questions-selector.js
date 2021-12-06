@@ -73,10 +73,10 @@ import 'views/report-analyzer/reportAnalyzerService';
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    require([reportTypeDetails.questionsUrl], function(res){
+                    require([reportTypeDetails["questionsUrl"]], function(res){
                         
                         $timeout(function(){
-                            $scope.sections = reportAnalyzerService.flattenQuestions(res);
+                            $scope.sections = reportAnalyzerService.flattenQuestions(res[reportType]);
 
                             if($scope.selectedQuestions) {
 
@@ -101,7 +101,6 @@ import 'views/report-analyzer/reportAnalyzerService';
                 //
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
-                    // console.log( $scope.selectedRegionsPreset)
                     if(_.includes(['protocolParties', 'protocolNonParties'], $scope.selectedRegionsPreset))
                         return;
 
@@ -152,7 +151,6 @@ import 'views/report-analyzer/reportAnalyzerService';
                                 $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
-                    // console.log($scope.selectedRegions)
                 };
 
                 //====================================
