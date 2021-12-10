@@ -67,10 +67,10 @@ import 'services/main';
 
             $scope.onContactQuery = function(searchText){
                 var queryOptions = {
-                schemas : ['contact', 'authority'],
+                schemas : ['focalPoint', 'authority', 'contact'],
                 realm : realm.value,
                 searchText: searchText,
-                query : `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact)`
+                query : `(((schema_s:authority OR schema_s:focalPoint) AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
                 }
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
