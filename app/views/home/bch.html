@@ -65,7 +65,7 @@
                                     <h2 class="bs5 fw-bold text-left mt-2  mb-4">Submit records</h2>
                                     
                                     <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">Sign in</a></li>
+                                        <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">Sign in</a></li>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/register?openTour">Take the Tour</a></li>
                                         <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/619c554858029700017ff45f">Help submitting records</a></li>
                                     </ul>

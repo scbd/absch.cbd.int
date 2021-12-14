@@ -64,7 +64,7 @@
                                         <h2 class="bs5 fw-bold text-left mt-2  mb-4">Submit records</h2>
 
                                         <ul>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">Sign-in</a></li>
+                                            <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/signin">Sign-in</a></li>
                                             <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/profile">Get your account</a></li>
                                             <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="/register?openTour">Take the tour</a></li>
                                             <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Submitting-information">Help publishing records</a></li>
