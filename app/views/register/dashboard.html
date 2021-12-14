@@ -27,8 +27,8 @@
                         ng-click="showProfileInfo=false"></i>
                     <span class="hidden-xs">Welcome </span>
                     <span id="showProfileInfo" class="color-black bold">
-                        <span ng-bind="user.name"></span>
-                        (<span class="new-css-dashboard-roles" ng-if="!roles.isPublishingAuthority && !roles.isNationalFocalPoint">Registered User</span>
+                        <span ng-bind="::user.name"></span>
+                        (<span class="new-css-dashboard-roles" ng-if="!roles.isPublishingAuthority && !roles.isNationalFocalPoint && !roles.isNationalAuthorizedUser">Registered User</span>
                         <span class="new-css-dashboard-roles" ng-if="roles.isPublishingAuthority && isAbs">Publishing Authority</span>
                         <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalFocalPoint && isAbs">National Focal Point</span>
                         <span class="comma new-css-dashboard-roles" ng-if="roles.isPublishingAuthority && isBch">BCH National Focal Point</span>
@@ -46,7 +46,7 @@
                                 <td>
                                     <label>Name:</label>
                                 </td>
-                                <td ng-bind="user.name"></td>
+                                <td ng-bind="::user.name"></td>
                             </tr>
                             <tr>
                                 <td>
