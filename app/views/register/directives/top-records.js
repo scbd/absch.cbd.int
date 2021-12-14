@@ -29,7 +29,7 @@ import 'components/scbd-angularjs-services/main';
                 if($scope.filter)
                     qAnd.push("(" + $scope.filter + ")");
 
-                var qRecords = storage.drafts.query(qAnd.join(" and ") || undefined, {$top:$scope.top||10});
+                var qRecords = storage.drafts.query(qAnd.join(" and ") || undefined, {$top:$scope.top||10, $orderby:'updatedOn desc'});
                 $scope.loading = true;
                 var records;
                 $q.when(qRecords)
@@ -38,7 +38,7 @@ import 'components/scbd-angularjs-services/main';
 
                     var remainingCount = ($scope.top||10)-result.data.Count;
                     if(remainingCount > 0 ){
-                        var qRecords = storage.documents.query(["(type eq '" + $scope.schema + "')"], 'my', {$top:remainingCount});                        
+                        var qRecords = storage.documents.query(["(type eq '" + $scope.schema + "')"], 'my', {$top:remainingCount, $orderby:'updatedOn desc'});                        
                         return $q.when(qRecords)
                                     .then(function(result){
                                         _.forEach(result.data.Items, function(item){
