@@ -44,7 +44,9 @@
                         <i class="fa fa-2 fa-square" ng-class="{'fa-check-square':recordFilter=='isDraft'}"></i> Drafts
                         <span class="badge badge-default" ng-bind="listCount.draft"></span>
                     </button>
-                        <input id="searchKeyword" type="text" ng-model="keywords" ng-keyup="searchRecord()" placeholder=" Keyword " class="form-control keyword input-group">
+                        <input id="searchKeyword" type="text" ng-model="keywords" ng-change="searchRecord()"
+                        ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0, '*': 1000 } }"
+                        placeholder=" Keyword " class="form-control keyword input-group">
                     </div>
                 </div>
                 <div class="col-md-5 col-xs-12">

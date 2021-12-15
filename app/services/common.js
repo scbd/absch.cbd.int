@@ -18,7 +18,10 @@ import 'components/scbd-angularjs-services/main';
         app.factory('linqjs', [function() {
              return Enumerable;
         }])
-
+        //Temp for cbd-forums
+        app.factory('underscore', [function() {
+            return _;
+       }])
     app.factory('commonjs', ['$http', 'thesaurusService', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
     'localStorageService', 'Thesaurus',
         function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
