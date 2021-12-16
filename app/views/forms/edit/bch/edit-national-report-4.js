@@ -315,7 +315,6 @@ import 'ngDialog';
                         // }
 
                         if(!mapQuestion)
-                            console.log(mapping)
                         mapQuestion.hasValidation = true;
                         if(validationPositive){
                             mapQuestion[mapping.trigger] = true;                            

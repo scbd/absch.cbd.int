@@ -179,7 +179,8 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
 
                     var deferred = $q.defer();
                     
-                    require([baseUrl+$scope.activeReport.compare[0].url], function(res){
+                    import(baseUrl+$scope.activeReport.compare[0].url)
+                    .then((res) => {
                         deferred.resolve(res);
                     });
 
@@ -188,8 +189,8 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                 
                 function loadJsonFile(path){
                     var deferred = $q.defer();
-                    
-                    require([path], function(res){
+                    import(path)
+                    .then((res) => {
                         deferred.resolve(res);
                     });
 
@@ -204,8 +205,8 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
 
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
-                    
-                    require([$scope.activeReport["questionsUrl"]], function(res){
+                    import($scope.activeReport["questionsUrl"])
+                    .then((res) => {
                         res = reportAnalyzerService.flattenQuestions(res[reportType]);
 
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
