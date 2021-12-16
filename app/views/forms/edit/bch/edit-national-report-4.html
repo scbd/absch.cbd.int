@@ -164,7 +164,7 @@
                     <div class="col-xs-12">
                         <div class="km-control-group" name="contact" caption="Contact person submitting the report" required>											
                             <div document-selector ng-model="document.contact" question="contact"  type="radio"
-                                government="document.government" schema="(contact focalPoint)" allow-new="true" allow-new-schema="contact"></div>			
+                            ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>			
                         </div>
                     </div>
                 </div>

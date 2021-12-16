@@ -14,8 +14,8 @@ import 'ngDialog';
     export { default as template } from './edit-national-report-4.html';
 
   export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
-    'commonjs', 'IStorage', '$routeParams', 'ngDialog',
-	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog) {
+    'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm',
+	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm) {
         
         // since it was decided to use string type for terms fields in schema
         // map string to ETerm ({identifier:'xxxx-xxx'}) type which is the type expected by term-checkbox.
@@ -216,6 +216,16 @@ import 'ngDialog';
 		$controller('editController', {
 			$scope: $scope
 		});
+
+        $scope.onContactQuery = function(searchText){
+            var queryOptions = {
+            schemas : ['contact', 'focalPoint'],
+            realm : realm.value,
+            searchText: searchText,
+            query : `((schema_s:focalPoint AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact))`
+            }
+            return $scope.onBuildDocumentSelectorQuery(queryOptions);
+        }
 
 		//==================================
 		//
