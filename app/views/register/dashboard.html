@@ -27,12 +27,13 @@
                         ng-click="showProfileInfo=false"></i>
                     <span class="hidden-xs">Welcome </span>
                     <span id="showProfileInfo" class="color-black bold">
-                        <span ng-bind="user.name"></span>
-                        (<span class="new-css-dashboard-roles" ng-if="roles.isPublishingAuthority && isAbs">Publishing Authority</span>
-                        <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalFocalPoint && isAbs">National Focal Point</span>
-                        <span class="comma new-css-dashboard-roles" ng-if="roles.isPublishingAuthority && isBch">BCH National Focal Point</span>
-                        <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalFocalPoint && isBch">Cartagena National Focal Point</span>
-                        <span class="comma new-css-dashboard-roles" ng-if="roles.isNationalAuthorizedUser">National Authorized User</span>)
+                        <span ng-bind="::user.name"></span>
+                        (<span class="new-css-dashboard-roles" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">Registered User</span>
+                        <span class="new-css-dashboard-roles" ng-if="::(roles.isPublishingAuthority && isAbs)">Publishing Authority</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="::(roles.isNationalFocalPoint && isAbs)">National Focal Point</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="::(roles.isPublishingAuthority && isBch)">BCH National Focal Point</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="::(roles.isNationalFocalPoint && isBch)">Cartagena National Focal Point</span>
+                        <span class="comma new-css-dashboard-roles" ng-if="::roles.isNationalAuthorizedUser">National Authorized User</span>)
                     </span>
                 </h4>
 
@@ -45,7 +46,7 @@
                                 <td>
                                     <label>Name:</label>
                                 </td>
-                                <td ng-bind="user.name"></td>
+                                <td ng-bind="::user.name"></td>
                             </tr>
                             <tr>
                                 <td>
@@ -73,7 +74,7 @@
                                     <a rel="noopener" href="#" ng-click="showUserRoles()">Role(s):</a></label>
                             </td>
                             <td>
-                                <span class="comma" ng-if="roles.isNationalFocalPoint">
+                                <span class="comma" ng-if="::roles.isNationalFocalPoint">
                                     <span ng-if="isAbs">
                                         National Focal Point
                                         <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
@@ -86,7 +87,7 @@
                                     </span>
                                 </span>
 
-                                <span class="comma" ng-if="roles.isPublishingAuthority">
+                                <span class="comma" ng-if="::roles.isPublishingAuthority">
                                     <span ng-if="isAbs"> Publishing Authority (PA)  
                                         <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA."></span>
@@ -99,7 +100,7 @@
                                     </span>
                                 </span>
 
-                                <span class="comma" ng-if="roles.isNationalAuthorizedUser">
+                                <span class="comma" ng-if="::roles.isNationalAuthorizedUser">
                                     National Authorized User (NAU) 
                                     <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         title="National Authorized User (NAU) can create draft national records and submit them to the BCH focal point to verify and publish.">
@@ -107,12 +108,12 @@
                                         title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority for approval."></span></span>
                                 </span>
 
-                                <span class="comma" ng-if="roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser)">
+                                <span class="comma" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
                                     Registered User 
                                     <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
                                         title="Regular users can create draft reference records and request their publication from the CBD Secretariat."></span></span>
                                 
-                                    <span class="comma" ng-if="roles.isAdministrator">
+                                    <span class="comma" ng-if="::roles.isAdministrator">
                                         <strong class="color-pink">Admin</strong>
                                     </span>
                                 </span>
@@ -149,7 +150,7 @@
 
             <div id="SubmitPage" style="background-color:#f9f9f9;">
 
-                <div id="menuPlaceholder" ng-if="roles.isUser" class="bg-white">
+                <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
                     <div class="row" style="padding:0;margin:0 0 5px 0;">
                         <table class="overview table" style="width:100%;">
                             <thead></thead>
@@ -174,7 +175,7 @@
                 </div>
 
                 <div>
-                    <div id="menuPlaceholder" ng-if="roles.isNationalUser||roles.is('Administrator')" style="margin:10px 0 20px 0;">
+                    <div id="menuPlaceholder" ng-if="::roles.isNationalUser||roles.is('Administrator')" style="margin:10px 0 20px 0;">
 
                         <div class="row" style="padding:0;margin:0 1px 0 1px; border-bottom:1px solid #ddd; ">
                             <span class="color-blue">National records</span>

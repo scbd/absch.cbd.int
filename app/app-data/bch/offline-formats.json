@@ -80,12 +80,12 @@
         "zh": "https://bch.cbd.int/resources/common-formats/zh/nationalrecord_1st_nationalreportcartagenaprotocol_zh.doc"
     },
     "cpbNationalReport2": {
-        "ar": "https://bch.cbd.int/resources/common-formats/ar/nationalrecord_1st_nationalreportcartagenaprotocol_ar.doc",
-        "en": "https://bch.cbd.int/resources/common-formats/en/nationalrecord_1st_nationalreportcartagenaprotocol_en.doc",
-        "es": "https://bch.cbd.int/resources/common-formats/es/nationalrecord_1st_nationalreportcartagenaprotocol_es.doc",
-        "fr": "https://bch.cbd.int/resources/common-formats/fr/nationalrecord_1st_nationalreportcartagenaprotocol_fr.doc",
-        "ru": "https://bch.cbd.int/resources/common-formats/ru/nationalrecord_1st_nationalreportcartagenaprotocol_ru.doc",
-        "zh": "https://bch.cbd.int/resources/common-formats/zh/nationalrecord_1st_nationalreportcartagenaprotocol_zh.doc"
+        "ar": "https://bch.cbd.int/resources/common-formats/ar/nationalrecord_2nd_nationalreportcartagenaprotocol_ar.doc",
+        "en": "https://bch.cbd.int/resources/common-formats/en/nationalrecord_2nd_nationalreportcartagenaprotocol_en.doc",
+        "es": "https://bch.cbd.int/resources/common-formats/es/nationalrecord_2nd_nationalreportcartagenaprotocol_es.doc",
+        "fr": "https://bch.cbd.int/resources/common-formats/fr/nationalrecord_2nd_nationalreportcartagenaprotocol_fr.doc",
+        "ru": "https://bch.cbd.int/resources/common-formats/ru/nationalrecord_2nd_nationalreportcartagenaprotocol_ru.doc",
+        "zh": "https://bch.cbd.int/resources/common-formats/zh/nationalrecord_2nd_nationalreportcartagenaprotocol_zh.doc"
     },
     "cpbNationalReport3": {
         "ar": "https://bch.cbd.int/resources/common-formats/ar/nationalrecord_3rd_nationalreportcartagenaprotocol_ar.doc",
@@ -184,7 +184,7 @@
         "zh": "https://bch.cbd.int/resources/common-formats/zh/referencerecord_09_capacitydevelopmentinitiative_final_zh.docx"
     },
     "biosafetyNews": {
-        "ar" :" https://bch.cbd.int/resources/common-formats/ar/referencerecord_10_bchnews_final_ar.docx",
+        "ar" : "https://bch.cbd.int/resources/common-formats/ar/referencerecord_10_bchnews_final_ar.docx",
         "en" : "https://bch.cbd.int/resources/common-formats/en/referencerecord_10_bchnews_final_en.docx",
         "es" : "https://bch.cbd.int/resources/common-formats/es/referencerecord_10_bchnews_final_es.docx",
         "fr" : "https://bch.cbd.int/resources/common-formats/fr/referencerecord_10_bchnews_final_fr.docx",
