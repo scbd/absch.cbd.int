@@ -30,6 +30,13 @@
     display: block;
 }
 
+.new-css-lg-header.text-white .nav .nav-item > span, .new-css-lg-header.text-white .nav .nav-item > a {
+    color: #fff !important;
+}
+
+.new-css-lg-header.text-white .nav .nav-item > span:hover, .new-css-lg-header.text-white .nav .nav-item > a:hover {
+    color: #666 !important;
+}
 @media (max-width: 575.98px) {
     .new-css-sm-header {
         display: block;

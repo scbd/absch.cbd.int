@@ -1,4 +1,4 @@
-<div class="bs5 bg-white ">
+<div class="bs5" ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
     <header class="bs5 new-css-sm-header px-3">
         <nav class="bs5 navbar new-css-navbar-sm navbar-light bg-light rounded" >
             <div ng-click="showNav = !showNav"  style="cursor: pointer;" >
@@ -41,7 +41,7 @@
         </div>
     </header>
 
-    <nav class="bs5 border-bottom mt-2 new-css-lg-header">
+    <nav class="bs5 border-bottom mt-2 new-css-lg-header" ng-class="{'text-white':isTRG}">
         <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
             <ul class="bs5 nav me-auto mx-2">
                 <li class="bs5 nav-item"><a rel="noopener" translation-url href="." class="bs5 fw-bold new-css-main-nav-link nav-link link-dark  px-2 px-md-4 active"
@@ -117,6 +117,8 @@
                 </li>
                 <li class="bs5 nav-item"><a href="https://bch.cbd.int/onlineconferences/"
                         class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">forums</a></li>
+                <li ng-if="isTRG" class="bs5 nav-item"><a href="https://bch.cbd.int/"
+                        class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">Leave Training Site</a></li>
             </ul>
             <ul class="bs5 nav">
                 <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown ">

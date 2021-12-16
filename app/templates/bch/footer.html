@@ -14,7 +14,7 @@
                                     <a class="bs5 nav-link fw-light link-light py-1" href="https://bch.cbd.int/protocol">About the Cartagena Protocol</a>
                                     <a class="bs5 nav-link fw-light link-light py-1" href="https://bch.cbd.int/protocol/supplementary">Supplementary Protocol</a>
                                     <br><br>
-                                    <a class="bs5 nav-link fw-light link-light py-1" href="/signin">Sign in</a>
+                                    <a class="bs5 nav-link fw-light link-light py-1" ng-if="!user.isAuthenticated" href="/signin">Sign in</a>
                                     <a class="bs5 nav-link fw-light link-light py-1" href="/search">Search records</a>
                                     <a class="bs5 nav-link fw-light link-light py-1" href="/register">Submit records</a>
                                 </div>
