@@ -73,8 +73,9 @@ import 'views/report-analyzer/reportAnalyzerService';
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    require([reportTypeDetails["questionsUrl"]], function(res){
-                        
+                    import(reportTypeDetails.questionsUrl)
+                    .then((res) => {
+                                           
                         $timeout(function(){
                             $scope.sections = reportAnalyzerService.flattenQuestions(res[reportType]);
 

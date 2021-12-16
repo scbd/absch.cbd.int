@@ -205,7 +205,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
 
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
-                    import($scope.activeReport["questionsUrl"])
+                    import($scope.activeReport.questionsUrl)
                     .then((res) => {
                         res = reportAnalyzerService.flattenQuestions(res[reportType]);
 
