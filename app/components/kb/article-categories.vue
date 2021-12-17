@@ -4,18 +4,15 @@
             <div class="col-md-12 col-sm-12 " v-for="category in KbCategories">
                 <div class="categories-list widget_categories tag-count">
                     <h3>
-                        <a href="#" @click="goToTag(category)">{{category.title}}</a>
-                        <a style="display:none" :href="`${tagUrl(category)}`">{{category.title}}</a>
+                        <a v-translation-url:$[dynamicArg]="$locale" :href="`${tagUrl(category)}`">{{category.title}}</a>
                     </h3>
                    <hr>
                     <ul class="cate-list-ul" style="list-style: none;">
                         <li class="cate-list-li" v-for="article in category.articles">
-                            <a v-show="article.url" style="display:none" :href="`${articleUrl(article, category.adminTags[0])}`">{{article.title}}</a>
-                            <a v-if="article.identifier" href="#" @click="goToArticle(article, category.adminTags[0])">{{article.title}}</a>
+                            <a v-translation-url:$[dynamicArg]="$locale" :href="`${articleUrl(article, category.adminTags[0])}`">{{article.title}}</a>
                         </li>
                     </ul>
-                    <a style="display:none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
-                    <a class="view-more" href="#" @click="goToTag(category)">+  {{ $t("viewMore") }}</a>
+                    <a class="view-more" v-translation-url:$[dynamicArg]="$locale" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
                 </div>
             </div>
         </div>
@@ -25,6 +22,7 @@
 <script>
 import i18n from '../../locales/en/components/kb.json';
 import articlesMaxin from '../maxin/article';
+import "/app/components/common/directives";
 export default {
     name: 'KbArticleCategories',
     props: {},
@@ -55,9 +53,6 @@ export default {
             path:this.articleUrl(article, tag)
           });
         },
-        goToTag(category){
-          this.$router.push({path: this.tagUrl(category)});
-        }
     },
     i18n: {
         messages: {

@@ -16,8 +16,7 @@
                         <div v-if="article.content" class="full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>
 						<div v-if="article.adminTags" class="detail-custom-tag">
 							<div class="tagcloud">
-								<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                    			<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+								<a v-translation-url:$[dynamicArg]="$locale" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
 							</div>
 						</div>
                     </div>
@@ -43,6 +42,7 @@
 	import './filters';
 	import popularTags from './popular-tags.vue';
     import articlesMaxin from '../maxin/article';
+    import "/app/components/common/directives";
 	export default {
     name:'KbArticleDetails',
 		components: {
@@ -97,9 +97,6 @@
                 path:this.articleUrl(article, tag)
                 });
             },
-            goToTag(category){
-                this.$router.push({path: this.tagUrl(category)});
-            }
 		},
 		i18n: { messages:{ en: i18n }}
 	}

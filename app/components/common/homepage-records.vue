@@ -11,28 +11,28 @@
     <div class="bs5 col" v-for="record in recordList.slice(0,4)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
-        <h4><a :href="recordUrl(record)" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
+        <h4><a v-translation-url:$[dynamicArg]="$locale" :href="recordUrl(record)" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div style="position:absolute;bottom:5px; width:95%">
-          <a class="meta-links" :href="`/${$locale}/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
-          <a class="meta-links" v-if="record.government_s" :href="`/${$locale}/countries/${encodeURIComponent(record.government_s)}`">
+          <a class="meta-links" v-translation-url:$[dynamicArg]="$locale" :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" v-if="record.government_s" v-translation-url:$[dynamicArg]="$locale" :href="`/countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
     </div>
   </div>  
-   <div class="bs5 d-none d-lg-block row-cols-1 row-cols-md-1">
+  <div class="bs5 d-none d-lg-block row-cols-1 row-cols-md-1">
     <div class="bs5 col" v-for="record in recordList.slice(4,8)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
         <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
-        <h4 class="fw-bold"><a :href="recordUrl(record)" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
+        <h4 class="fw-bold"><a v-translation-url:$[dynamicArg]="$locale" :href="recordUrl(record)" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
         <p class="bs5 fs-5 new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div class="new-css-records-sub-options">
-          <a class="meta-links" :href="`/${$locale}/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
-          <a class="meta-links" v-if="record.government_s" :href="`/${$locale}/countries/${encodeURIComponent(record.government_s)}`">
+          <a class="meta-links" v-translation-url:$[dynamicArg]="$locale" :href="`/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" v-if="record.government_s" v-translation-url:$[dynamicArg]="$locale" :href="`/countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
@@ -52,6 +52,7 @@
     import ArticlesApi  from '../kb/article-api';
 	  import i18n from '../../locales/en/components/export.json';
     import "../kb/filters";
+    import "./directives"
 
 	export default {
     props:{
@@ -105,7 +106,7 @@
         const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
         const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
         const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
-        return `/${this.$locale}/database/${shortCode}/${uid}`;
+        return `/database/${shortCode}/${uid}`;
       }
   },
 		i18n: { messages:{ en: i18n }} 

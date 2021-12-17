@@ -47,7 +47,7 @@
                                     
                                     <td class="tableexport-string">{{row.rec_schema}}</td>
                                     <td class="tableexport-string">
-                                        <a rel="noopener" target="_blank" :href="`/database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
+                                        <a rel="noopener" target="_blank" v-translation-url:$[dynamicArg]="$locale" :href="`/database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
                                             {{(row.rec_uniqueIdentifier||'')|capitalize}}
                                         </a>
                                     </td>
@@ -78,6 +78,7 @@
     import { Modal } from 'vue-2-bootstrap-3'
 	import i18n from '../../locales/en/components/export.json';
 	import '../kb/filters';
+    import "./directives"
     
     const fields = [
         'rec_schema:schema_EN_s',

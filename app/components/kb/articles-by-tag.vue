@@ -22,8 +22,7 @@
 								</a>
                               <div class="inner-area">
                                 <i class="fa fa-tag" aria-hidden="true"></i>
-                                <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                                <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+                                <a v-translation-url:$[dynamicArg]="$locale" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
                               </div>
 
                             </li>
@@ -59,6 +58,7 @@ import ArticlesApi from './article-api';
 import './filters';
 import popularTags from './popular-tags.vue';
 import articlesMaxin from '../maxin/article';
+import "/app/components/common/directives";
 
 export default {
     name: 'KbArticlesByTag',
@@ -107,9 +107,6 @@ export default {
             this.$router.push({
             path:this.articleUrl(article, tag)
             });
-        },
-        goToTag(category){
-            this.$router.push({path: this.tagUrl(category)});
         },
         onChangePage(pageNumber) {
             this.pageNumber = pageNumber;
