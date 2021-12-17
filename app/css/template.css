@@ -3072,3 +3072,11 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .capitalize-first-letter {
     text-transform:capitalize;
 }
+
+#Search-Filter .contact-spacing{
+    margin-top: 25px;
+}
+
+#Search-Filter strong{
+      color:#555;
+}
