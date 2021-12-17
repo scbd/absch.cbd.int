@@ -48,7 +48,7 @@
             <th style="width:60px" class="text-center text-nowrap"><span ng-if="::question.type!='text'" style="cursor:pointer" ng-click="incrementDigits()">%</span></th>
             <th style="width:50px" class="text-center" ng-click="toggleRegion(region)" ng-repeat-start="region in ::regions track by region.identifier">
                 <div data-bs-toggle="tooltip" data-original-title="{{::(region.title|lstring)}}" class="text-nowrap">
-                    <span ng-bind="::region.htmlTitle.replace('CBD <br>', '')"></span>
+                    <span ng-bind-html="::region.htmlTitle.replace('CBD <br>', '')"></span>
                     <i class="fa" ng-class="{ 'fa-caret-left': expanded[region.identifier] , 'fa-caret-right': !expanded[region.identifier] }"></i>
                 </div>
             </th>
