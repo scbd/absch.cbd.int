@@ -388,6 +388,9 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
       return $q.when(qDocument).then(function(doc) {
         if(!$scope.tab)
           $scope.tab    = "intro";
+        if (doc.libraries)
+          doc.libraries = undefined;
+
         $scope.document = doc;
 
         $scope.origanalDocument = angular.copy(doc);

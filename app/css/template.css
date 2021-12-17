@@ -2897,6 +2897,9 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 .padding-bottom-30 {
 	padding-top: 30px;
 }
+.document-sharing{
+    display: inline;
+}
 .document-sharing button.btn-share span.hidden-xs,
 .document-sharing button.btn-pdf   span.hidden-xs{
     font-size: 14px;
@@ -3068,4 +3071,12 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 }
 .capitalize-first-letter {
     text-transform:capitalize;
+}
+
+#Search-Filter .contact-spacing{
+    margin-top: 25px;
+}
+
+#Search-Filter strong{
+      color:#555;
 }

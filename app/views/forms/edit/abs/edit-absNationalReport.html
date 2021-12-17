@@ -17,7 +17,7 @@
                     
                     <div class="row">
                         <div class="col-xs-12">
-                            <ul class="pagination" id="nrTabs" ng-click="setTab()">
+                            <ul class="pagination" id="nrTabs">
                                 <li class="active"><a rel="noopener" translation-url href="#part0" data-toggle="tab">Guidelines</a></li>
                                 <li><a rel="noopener" translation-url href="#part1" data-toggle="tab">Part 1</a></li>
                                 <li><a rel="noopener" translation-url href="#part2" data-toggle="tab">Part 2</a></li>
@@ -405,7 +405,7 @@
                                                         caption="Please select the relevant ABSCH records">
                                                         <div document-selector ng-model="document.question10.documentReferenceIDs"
                                                                ng-disabled="!document.government" question="question10"
-                                                               on-build-query="onRecordQuery(searchText)" filter="true">
+                                                               on-build-query="onRecordQuery(searchText)" filter="true"></div>
                                                     </div>
                                                     <div class="km-control-group" name="question10RelevantDocuments"
                                                         caption="Any other relevant documents">
@@ -2283,12 +2283,7 @@
                     <view-abs-national-report ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-national-report>
                 </review-form>
                 <!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons -->
-            </div>
-
+            </workflow-arrow-buttons>
         </div>
     </div>
-
-
-
-</div>
 </div>
