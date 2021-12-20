@@ -245,9 +245,11 @@ import 'ngDialog';
         
         $scope.setTab = function(index){
             $(".tab-pane").removeClass("active");
-            $('#tab'+index).tab('show');
+            $timeout(function(){
+                $('#tab'+index).tab('show');
+            }, 200);
             $scope.activeTab = index + 1;
-            $scope.nr4Tabs[index].render=true
+            $scope.nr4Tabs[index].render=true;
         }
 
         $scope.updateAnswer = function(question, baseQuestionNumber){

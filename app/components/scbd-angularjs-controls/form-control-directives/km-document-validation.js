@@ -51,7 +51,9 @@ import messages from 'app-data/validation-errors.json'; ;
 
                             // inner tabs
                             if(sTabName && sPagerName)
-                                $('#'+sPagerName + ' a[href="#' + sTabName + '"]').tab('show');
+                            if (!$('#' + sPagerName).find('a[href$="' + sTabName + '"]').parents("li").hasClass('active')){
+                                $('#' + sPagerName).find('a[href$="' + sTabName + '"]').trigger("click");
+                            }
                             var scrollNum = qLabel.offset().top
                             
                             if(container!= 'body,html'){
