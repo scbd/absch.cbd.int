@@ -24,6 +24,7 @@ import 'views/forms/view/record-loader.directive';
                 $scope.loading = true;
                 $scope.filterStatus = "Pending";
                 $scope.user = $rootScope.user;
+                $scope.isBch = realm.is('BCH');
                 
                 $scope.currentPage=0;
                 $scope.itemCount=0;
