@@ -435,7 +435,7 @@ max-width: 90%;
 .new-css-abs-icon-color{
     color: #564c4d!important;
 }
-@media (max-width: 1000px) {
+@media (max-width: 1200px) {
     .new-css-summary-text, .new-css-callout h4 a {
         -webkit-line-clamp: 1;
     }

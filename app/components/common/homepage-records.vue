@@ -6,7 +6,7 @@
     </li>
   </ul>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-  <div class="bs5 row row-cols-1 row-cols-md-2 ">
+  <div class="bs5 row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
   <div class="bs5 d-block row-cols-1 row-cols-md-1 ">
     <div class="bs5 col" v-for="record in recordList.slice(0,4)">
       <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
