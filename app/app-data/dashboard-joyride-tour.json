@@ -21,7 +21,7 @@
     },
     "quickView" :  {
       "title": "Quick view",
-      "content": "<p>Click on the “down arrow” to view the latest 10 published records.</p>"
+      "content": "<p>Click on the “down arrow” to view the latest 10 records.</p>"
     },
     "addNewRecord" :  {
       "title": "Add new record",
