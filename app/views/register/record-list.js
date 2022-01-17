@@ -616,7 +616,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         _.map(documents, function (o) {
                             map[o.identifier] = o;
                         });
-
+                        let recordList = [];
                         _.values(map).forEach(function (row) {
                            //waiting for workflow status from socketIO
                             if(wokflowActive && wokflowActive.identifier == row.identifier){
@@ -631,14 +631,14 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                                 row.revoked = true;
                             }
 
-                            $scope.records.push(row);
+                            recordList.push(row);
                         })
                         $("a[role*='button']").toggleClass('ui-disabled');
 
                         myTasks.forEach(function(workflow) { //tweaks
 
-                            if(workflow.data && !_.find($scope.records, {identifier: workflow.data.identifier})){
-                                $scope.records.push({
+                            if (workflow.data && !_.find(recordList, {identifier: workflow.data.identifier})){
+                                recordList.push({
                                     identifier  : workflow.data.identifier,
                                     title       : workflow.data.title,
                                     metadata    : workflow.data.metadata,
@@ -648,7 +648,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                             updateDocumentStatus(workflow.data.identifier, 'status', true)
 
                         });
-
+                          if (recordList)
+                            $scope.records = recordList;
                         return $scope.records;
                     })
                     .finally(function () {
