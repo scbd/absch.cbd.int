@@ -96,33 +96,36 @@
                      <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;"
                          ng-click="showFilters=null">
                          <span id="globalSearch" style="cursor: pointer">GLOBAL FILTERS:</span></li>
-                     <li id="recordTypesFilterTab"> <a id="recordTypesFilterTabJR" rel="noopener" href="" ng-class="{'active':showFilters=='recordTypesFilter'}"
+                     <li id="recordTypesFilterTab"> <a id="recordTypesFilterTabJR" rel="noopener" href="" 
+                             ng-class="{'active':showFilters=='recordTypesFilter', 'text-bch':(isBCH && showFilters=='recordTypesFilter'), 'text-abs':(isABS && showFilters=='recordTypesFilter')}"
                              ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
                              class="btn color-white ">
                              <i ng-if="showFilters=='recordTypesFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='recordTypesFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Record types</a> </li>
                      <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"> <a id="keywordsFilterTabJR" rel="noopener" href=""
-                             ng-class="{'active':showFilters=='keywordsFilter'}"
+                             ng-class="{'active':showFilters=='keywordsFilter', 'text-bch':(isBCH && showFilters=='keywordsFilter'), 'text-abs':(isABS && showFilters=='keywordsFilter')}"
                              ng-click="showFilters=(showFilters=='keywordsFilter' ? false : 'keywordsFilter')"
                              class="btn color-white">
                              <i ng-if="showFilters=='keywordsFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='keywordsFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Keywords</a> </li>
-                     <li id="countryFilterTab"> <a id="countryFilterTabJR" rel="noopener" href="" ng-class="{'active':showFilters=='countryFilter'}"
+                     <li id="countryFilterTab"> <a id="countryFilterTabJR" rel="noopener" href=""
+                             ng-class="{'active':showFilters=='countryFilter', 'text-bch':(isBCH && showFilters=='countryFilter'), 'text-abs':(isABS && showFilters=='countryFilter')}"
                              ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
                              class="btn color-white">
                              <i ng-if="showFilters=='countryFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='countryFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Country</a> </li>
-                     <li id="regionFilterTab"> <a id="regionFilterTabJR" rel="noopener" href="" ng-class="{'active':showFilters=='regionFilter'}"
+                     <li id="regionFilterTab"> <a id="regionFilterTabJR" rel="noopener" href=""
+                             ng-class="{'active':showFilters=='regionFilter', 'text-bch':(isBCH && showFilters=='regionFilter'), 'text-abs':(isABS && showFilters=='regionFilter')}"
                              ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
                              class="btn color-white">
                              <i ng-if="showFilters =='regionFilter'" class="fa fa-times-circle"></i>
                              <i ng-if="!showFilters || showFilters!='regionFilter'" class="fa fa-caret-down"></i>
                              &nbsp;Regions</a></li>
                      <li id="dateFilterTab" ng-show="!skipDateFilter"> <a id="dateFilterTabJR" rel="noopener" href=""
-                             ng-class="{'active':showFilters=='dateFilter'}"
+                             ng-class="{'active':showFilters=='dateFilter', 'text-bch':(isBCH && showFilters=='dateFilter'), 'text-abs':(isABS && showFilters=='dateFilter')}"
                              ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
                              class="btn color-white">
                              <i ng-if="showFilters=='dateFilter'" class="fa fa-times-circle"></i>
