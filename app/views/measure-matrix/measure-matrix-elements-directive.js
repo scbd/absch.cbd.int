@@ -295,6 +295,7 @@ import 'views/directives/block-region-directive';
                 }
 
                 function addMeasureToElements(measure) {
+                    let grElement = undefined ;
                     if(!measure)
                         return;
                     if($scope.type!='single' && measure.absMeasures){
