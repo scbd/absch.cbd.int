@@ -11,7 +11,7 @@ import './solr';
 
                 var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                 var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t, rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
-                    en_fields += ',symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s';
+                    en_fields += ',symbol_s,startDate_dt,endDate_dt,eventCountry_CEN_s,title_s,eventCity_s,nfp_categories:ctgList_ss,nfp_organization:organization_EN_t';
 
                 var searchDefaults = {
                     currentPage : 0,

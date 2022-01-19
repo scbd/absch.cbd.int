@@ -5,7 +5,7 @@ import 'services/main';
 import '~/views/forms/view/record-loader.directive';
 import '~/views/forms/view/bch/icons';
 
-    app.directive('resultDefault', ["$timeout", function($timeout) {
+    app.directive('resultDefault', ["$timeout", "realm", function($timeout, realm) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -33,7 +33,18 @@ import '~/views/forms/view/bch/icons';
                 $scope.isRevoked = function(values){
                     return values.includes('Revoked')
                 }
-                
+                async function focalPointsCategories(){
+                    const chFolder = realm.is('BCH') ? 'bch' : 'abs';
+                    const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
+                    $scope.nfpCategory = function (category) {
+                        if (categories) {
+                            const cat = categories.find(e => ~e.key.indexOf(category))
+                            if (cat)
+                                return cat.title;
+                        }
+                    }
+                }
+                focalPointsCategories();                
             },
         };
     }]);
