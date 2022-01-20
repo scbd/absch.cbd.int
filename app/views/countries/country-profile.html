@@ -15,7 +15,6 @@
                 </h1>
                 <div class="well bg-white cp-header">
                         <div style="margin-bottom:5px;" ng-if="isABS">
-                            <label >Party Status:</label>
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Nagoya Protocol</span>
                             <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
                             <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
@@ -29,7 +28,6 @@
                             </div>
                         </div>
                         <div style="margin-bottom:5px;" ng-if="isBCH">
-                            <label >Party Status:</label>
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Cartagena Protocol on Biosafety</span>
                             <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
                             <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
@@ -41,9 +39,17 @@
                                 title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                             </div>
                         </div>
-                         <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:5px;">
-                            <label>Enter<span ng-if="country.isInbetweenParty">s</span><span ng-if="country.isParty">ed</span> into force on:</label>
-                            <span class="color-grey color-non-party bold" ng-bind="country.entryIntoForce|formatDate"></span>
+                        <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:5px;">
+                            <span class="color-party bold">
+                                (<span ng-if="country.isInbetweenParty">Enters into force on:</span><span ng-if="country.isParty">since</span> <span ng-bind="country.entryIntoForce|formatDate"></span>)
+                            </span>
+                        </div>
+                        <!-- ToDo: need isSupplementaryParty and date entryIntoForceSupp from backend -->
+                        <div ng-if="!isSupplementaryParty" style="margin-bottom:5px;">
+                            <span class="color-non-party bold">Party to the Nogoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
+                            <div ng-if="!entryIntoForceSupp" style="margin-top:5px;">
+                                <span class="color-non-party bold">(since <span  ng-bind="country.entryIntoForce|formatDate"></span>)</span>
+                            </div>
                         </div>
                         <div ng-if="(country.isRatified) && country.dateDeposit"  style="margin-bottom:5px;">
                             <label ng-if="country.instrument" ><span style="text-transform:capitalize;" ng-bind="country.instrument"></span> on:</label>
