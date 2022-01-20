@@ -28,7 +28,7 @@
                         <span ng-if="doc.summary_t.length > 500">...</span>
                     </div>
                     <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="doc.schema_s == 'focalPoint' && doc.nfp_categories">
-                        <span class="comma" ng-repeat="category in doc.nfp_categories" ng-bind="nfpCategory(category)"></span>
+                        <span class="comma" ng-repeat="category in doc.nfp_categories" ng-bind="nfpCategory(category)||category"></span>
                     </div>
                     <!-- TODO: record summary copied description into rec_summary which needs to be replaced by summary_t in frontend and backend -->
                     <div class="description hidden-xs descriptionSpan" style="margin: 5px 0;"  ng-if="!doc.summary_t && doc.rec_summary">
