@@ -355,6 +355,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 								})
 								var newHtml = $element.find('#schemaView .compare-diff.' + compareClass);
 								// console.log(newHtml.html())
+								if (!newHtml.html()) return;
 								let output = htmlDiff(e.innerHTML, newHtml.html());
 								newHtml.html(output);
 							});

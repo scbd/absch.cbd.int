@@ -334,6 +334,12 @@ max-width: 90%;
 .bg-bch{
     background: #00405C!important;
 }
+.text-abs{
+    color: #564c4d!important;
+}
+.text-bch{
+    color: #00405C!important;
+}
 .map-country-list li.list-group-item-action .badge {
     min-width: 50px;
     margin-left: 0.5rem !important;
