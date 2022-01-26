@@ -154,11 +154,13 @@ import 'components/scbd-angularjs-services/main'; ;
                         return;
 
                     var oNewBinding = [];
+                    const excludeChild = ["D9EE9C6C-571A-4955-A642-4711A20F228D", "9535EB21-FA5A-4000-BF03-11A52773706D"] //Insects and Viruses
 
                     if(hasNarrowerTerms && termIdentifier){
                         var selectedTerm = _.find($scope.terms, {identifier:termIdentifier});
                         var selected     = ($scope.selectedItems[selectedTerm.identifier]||{}).selected;
-                        if(selectedTerm.narrowerTerms){
+                        var isChildExclude = _.find(excludeChild, function (o) { return o == selectedTerm.identifier });
+                        if(selectedTerm.narrowerTerms && !isChildExclude){
                             selectChildTerms(selectedTerm.narrowerTerms, selected, 'narrowerTerms')
                         }
                         if(selectedTerm.broaderTerms){
