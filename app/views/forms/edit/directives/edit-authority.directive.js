@@ -151,7 +151,7 @@ import '~/views/forms/view/view-authority.directive';
                     if($scope.isAbs){
                         
                         queryOptions.schemas = ['contact', 'authority'];
-                        queryOptions.query = `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact AND type_s: person)`;
+                        queryOptions.query = `((schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact AND type_s: person))`;
                     }
                     else{
                         queryOptions.schemas = ['contact'];
