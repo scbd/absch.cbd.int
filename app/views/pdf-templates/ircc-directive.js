@@ -3,6 +3,14 @@ import template from 'text!./ircc-directive.html';
 import 'css!/app/css/pdf-ircc.css';
 import 'views/forms/view/directives/view-record-reference.directive';
 
+import printHeaderTemplate from 'text!../forms/view/print-header.html';
+import printFooterTemplate from 'text!../forms/view/print-footer.html';
+
+	app.run(function($templateCache){
+		$templateCache.put('view-print-header.html', printHeaderTemplate)
+		$templateCache.put('view-print-footer.html', printFooterTemplate)
+	});
+
     app.directive("pdfIrccPartialView", [function() {
         return {
             restrict: "EAC",
