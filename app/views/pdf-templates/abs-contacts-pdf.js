@@ -4,7 +4,15 @@ import 'services/main';
 import 'css!/app/css/print-friendly.css';
 import 'css!/app/css/pdf-permit.css';
 
-    export { default as template } from './abs-contacts-pdf.html';
+import printHeaderTemplate from 'text!../forms/view/print-header.html';
+import printFooterTemplate from 'text!../forms/view/print-footer.html';
+
+app.run(function($templateCache){
+    $templateCache.put('view-print-header.html', printHeaderTemplate)
+    $templateCache.put('view-print-footer.html', printFooterTemplate)
+});
+
+export { default as template } from './abs-contacts-pdf.html';
 export default ['$scope', '$http', '$location', '$routeParams', '$filter', '$q', 'realm',
     function($scope, $http, $location, $routeParams, $filter, $q, realm) {
 
