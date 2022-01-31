@@ -70,7 +70,7 @@ import 'services/main';
                 schemas : ['contact', 'authority'],
                 realm : realm.value,
                 searchText: searchText,
-                query : `(schema_s:authority AND government_s:${$scope.document.government.identifier}) OR (schema_s:contact)`
+                query : `((schema_s:authority AND government_s:${$scope.document.government.identifier}) OR schema_s:contact)`
                 }
                 return $scope.onBuildDocumentSelectorQuery(queryOptions);
             }
