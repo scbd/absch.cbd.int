@@ -71,8 +71,10 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 
 			function loadReferenceDocument(identifier){
 				let headers = {};
-				if($attr.skipRealm == 'true')// special case for NFP, as NFP belong to CHM realm
+				var focalPointRegex = /^52000000cbd022/;
+				if($attr.skipRealm == 'true' || focalPointRegex.test(identifier))// special case for NFP, as NFP belong to CHM realm
 					headers = { realm:undefined }
+					
 				return storage.documents.get(identifier, { info : true}, {headers})
 						.then(function(result){
 							//TODO: throw error if the documentType != 'focalPoint'
