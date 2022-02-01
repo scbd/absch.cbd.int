@@ -270,7 +270,7 @@ import 'ngDialog';
 
                     var dataSection = _.find(cpbNationalReport4, {key:mapping.key||question.section});
                     if(dataSection){
-                        var mapQuestion; 
+                        let mapQuestion; 
                         var validationPositive = false;
                         var baseQuestion;
                         if(baseQuestionNumber || mapping.baseQuestion){
