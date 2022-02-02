@@ -7,8 +7,7 @@
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
          <ul>
             <li v-for="article in articles">
-                <a style="display:none" :href="`${articleUrl(article)}`">{{article.title}}</a>
-                                <a href="#" @click="goToArticle(article)">{{article.title}}</a>
+                <a :href="`${articleUrl(article)}`">{{article.title}}</a>
             </li>
         </ul>
     </div>
@@ -35,11 +34,6 @@ export default {
         articleUrl(article, tag){       
             return this.getUrl(article.title, article.identifier, 'faq');
         },
-        goToArticle(article, tag){
-          this.$router.push({
-            path:this.articleUrl(article, tag)
-          });
-        }
     },
     i18n: {
         messages: {

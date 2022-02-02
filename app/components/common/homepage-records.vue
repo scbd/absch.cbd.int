@@ -15,8 +15,8 @@
         <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div style="position:absolute;bottom:5px; width:95%">
-          <a class="meta-links" :href="`/${$locale}/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
-          <a class="meta-links" v-if="record.government_s" :href="`/${$locale}/countries/${encodeURIComponent(record.government_s)}`">
+          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
@@ -31,8 +31,8 @@
         <p class="bs5 fs-5 new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
         
         <div class="new-css-records-sub-options">
-          <a class="meta-links" :href="`/${$locale}/search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
-          <a class="meta-links" v-if="record.government_s" :href="`/${$locale}/countries/${encodeURIComponent(record.government_s)}`">
+          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+          <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
           <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
           <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
         </div>
@@ -98,14 +98,14 @@
       seeMore(){
            
            if(this.type == 'reference') 
-              this.$router.push({path: '/search', query: { currentPage: '1', tab: 'referenceRecords' }});
-           else this.$router.push({path: '/search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
+              this.$router.push({path: 'search', query: { currentPage: '1', tab: 'referenceRecords' }});
+           else this.$router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
       },
       recordUrl(record){
         const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
         const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
         const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
-        return `/${this.$locale}/database/${shortCode}/${uid}`;
+        return `database/${shortCode}/${uid}`;
       }
   },
 		i18n: { messages:{ en: i18n }} 

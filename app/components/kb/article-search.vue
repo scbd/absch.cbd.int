@@ -11,21 +11,20 @@
           <div class="kb-listing">
             <ul class="article-with-tags-ul">
               <li class="article-with-tags-li" v-for="article in articles">
-                <a href="#" @click="goToArticle(article, realmTag)">
-									<span class="article-title">
-										{{article.title|lstring($locale)}}
-									</span>
-                  <div v-if="article.content" class="article-summary" @click="goToArticle(article, realmTag)">
+                <a :href="`${articleUrl(article, realmTag)}`">
+                  <span class="article-title">
+                    {{article.title|lstring($locale)}}
+                  </span>
+                  <div v-if="article.content" class="article-summary">
                     {{article.content|lstring($locale)}}
                   </div>
-                  <div v-if="article.summary" class="article-summary" @click="goToArticle(article, realmTag)">
+                  <div v-if="article.summary" class="article-summary">
                     {{article.summary|lstring($locale)}}
                   </div>
                 </a>
                 <div class="inner-area">
                   <i class="fa fa-tag" aria-hidden="true"></i>
-                  <a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-                  <a class="btn btn-mini " href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+                  <a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
                 </div>
 
               </li>
@@ -87,14 +86,6 @@ export default {
         },
         articleUrl(article, tag){
         return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
-        },
-        goToArticle(article, tag){
-            this.$router.push({
-            path:this.articleUrl(article, tag)
-            });
-        },
-        goToTag(category){
-            this.$router.push({path: this.tagUrl(category)});
         },
         onChangePage(pageNumber) {
             this.article = [];

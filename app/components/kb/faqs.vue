@@ -16,8 +16,7 @@
                     <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>                    
 					<div v-if="article.adminTags" class="detail-custom-tag">
 						<div class="tagcloud">
-							<a style="display:none" class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
-							<a class="btn btn-mini" href="#" @click="goToTag(tag)" v-for="tag in article.adminTags">{{tag}}</a>
+							<a class="btn btn-mini" :href="`${tagUrl(tag)}`" v-for="tag in article.adminTags">{{tag}}</a>
 						</div>
 					</div>
                 </details>
@@ -70,17 +69,6 @@
 				const tagDetails = this.categories.find(e=>e.adminTags.includes(tag))
 				const tagTitle 	 = (tagDetails?.title||'');
                 return this.getUrl(tagTitle, undefined, tag);
-			},
-			articleUrl(article, tag){
-				return this.getUrl(this.$options.filters.lstring(article.title), article._id, tag);
-			},
-			goToArticle(article, tag){
-				this.$router.push({
-				path:this.articleUrl(article, tag)
-				});
-			},
-			goToTag(category){
-				this.$router.push({path: this.tagUrl(category)});
 			},
 			onChangePage(pageNumber) {
 				this.pageNumber = pageNumber;

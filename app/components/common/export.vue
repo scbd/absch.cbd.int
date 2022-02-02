@@ -47,7 +47,7 @@
                                     
                                     <td class="tableexport-string">{{row.rec_schema}}</td>
                                     <td class="tableexport-string">
-                                        <a rel="noopener" target="_blank" :href="`/database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
+                                        <a rel="noopener" target="_blank" :href="`database/${$options.filters.encodeURIComponent($options.filters.capitalize((row.rec_uniqueIdentifier||'')))}`">
                                             {{(row.rec_uniqueIdentifier||'')|capitalize}}
                                         </a>
                                     </td>
