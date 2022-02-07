@@ -398,7 +398,7 @@
 
 <!--=============SECTION G START========================-->
 
-	<div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+	<div ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
 		<legend>Information sharing with other databases</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>Is this decision related to an LMO for commercial use?</label>
