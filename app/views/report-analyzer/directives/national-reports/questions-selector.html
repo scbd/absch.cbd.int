@@ -20,14 +20,16 @@
             </td>
         </tr>
         <tr>
-            <th>Geographical areas</th>
+            <th>Filter by country(ies) or region(s)</th>
             <td>
                 <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-control">
                     <option value="cbdRegions">Breakdown by CBD regions</option>
                     <option value="countries">Select countries</option>
                     <option value="regions">Select regions</option>
-                    <option value="protocolParties">Breakdown by Parties</option>
-                    <option value="protocolNonParties">Breakdown by Protocol Non-Parties</option>
+                    <option value="protocolParties">Breakdown by Parties to the Cartagena Protocol</option>
+                    <option value="protocolNonParties">Breakdown by Non-Parties to the Cartagena Protocol</option>
+                    <option value="supProtocolParties">Breakdown by Parties to the Supplementary Protocol</option>
+                    <option value="supProtocolNonParties">Breakdown by Non-Parties to the Supplementary Protocol</option>
                 </select>
             </td>
         </tr>
