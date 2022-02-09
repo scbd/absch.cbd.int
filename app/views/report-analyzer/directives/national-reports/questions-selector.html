@@ -10,7 +10,7 @@
 
     <table class="table table-hover" style="margin-bottom:0px">
         <tr>
-            <th style="width:200px">National Report</th>
+            <th style="width:20%">National Report</th>
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
