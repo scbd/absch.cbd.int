@@ -28,8 +28,8 @@
                     <option value="regions">Select regions</option>
                     <option value="protocolParties">Breakdown by Parties to the Cartagena Protocol</option>
                     <option value="protocolNonParties">Breakdown by Non-Parties to the Cartagena Protocol</option>
-                    <option value="supProtocolParties">Breakdown by Parties to the Supplementary Protocol</option>
-                    <!-- <option value="supProtocolNonParties">Breakdown by Non-Parties to the Supplementary Protocol</option> -->
+                    <option ng-if="isBch" value="supProtocolParties">Breakdown by Parties to the Supplementary Protocol</option>
+                    <!-- <option ng-if="isBch" value="supProtocolNonParties">Breakdown by Non-Parties to the Supplementary Protocol</option> -->
                 </select>
             </td>
         </tr>

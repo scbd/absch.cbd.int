@@ -38,6 +38,8 @@ import 'views/report-analyzer/reportAnalyzerService';
             },
             link: function ($scope) {
                 
+                $scope.isBch        = realm.is('BCH');
+                $scope.isAbs        = realm.is('ABS');
                 $scope.selectedReportType = $scope.selectedReportType || _.last($scope.reportData, function(r){return r.dataUrl}).type;
                 
                 $scope.selectedRegions    = $scope.selectedRegions    || DefaultRegions.concat();
