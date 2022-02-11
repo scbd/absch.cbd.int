@@ -234,8 +234,10 @@ import 'views/report-analyzer/reportAnalyzerService';
                             $scope.protocolCountries[country.code.toLowerCase()] = {
                                 title : country.name, isProtocolParty : country.isParty, code : country.code.toLowerCase()
                             }
-                            $scope.supProtocolCountries[country.code.toLowerCase()] = {
-                                title : country.name, isSupProtocolParty : country.isNKLSParty, code : country.code.toLowerCase()
+                            if($scope.isBch){
+                                $scope.supProtocolCountries[country.code.toLowerCase()] = {
+                                    title : country.name, isSupProtocolParty : country.isNKLSParty, code : country.code.toLowerCase()
+                                }
                             }
                        });
                    })
