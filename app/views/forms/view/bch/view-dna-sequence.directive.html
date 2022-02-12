@@ -83,6 +83,7 @@
 			<km-link-list class="km-value" ng-model="document.gisFiles"></km-link-list>
 		</div>
 	</div>
+	<div ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">
 		<legend>Characteristics of the protein coding sequence</legend>
 
 		<div ng-show="document.proteinName">
@@ -105,6 +106,7 @@
 				<view-terms-hierarchy class="km-value" ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
+	</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
 			<legend>Additional Information</legend>
 
