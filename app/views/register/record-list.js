@@ -6,6 +6,7 @@ import 'components/scbd-angularjs-controls/main';
 import 'views/register/directives/register-top-menu';
 import 'views/directives/block-region-directive';
 import 'views/forms/edit/editFormUtility';
+import 'views/forms/view/directives/view-reference-records.directive';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
@@ -18,7 +19,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
             "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr','joyrideService',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
                 $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService) {
-
+                $scope.isRefrenceExist = false;
+                $scope.showDeleteButton = true;
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
 
@@ -175,6 +177,8 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 //
                 //============================================================
                 $scope.askDelete = function (record) {
+                    $scope.isRefrenceExist = false ;
+                    $scope.showDeleteButton = true;
 
                     if (record.type == 'absPermit' && $scope.isPublished(record)) {
                         $scope.loading = true;                        
@@ -222,6 +226,18 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 //
                 //
                 //============================================================
+                $scope.referenceRecords = function (isRecordExist) {
+                    if(isRecordExist){
+                        $timeout(function () {
+                            $scope.isRefrenceExist = true;
+                            $scope.showDeleteButton = false;
+                        }, 100)                      
+                    }             
+                }
+
+                $scope.deleteRecordOfTheReference = function(){
+                    $scope.showDeleteButton = true;
+                }
                 $scope.deleteRecord = function (record) {
 
                     $scope.loading = true;

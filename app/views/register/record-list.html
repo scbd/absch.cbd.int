@@ -297,8 +297,15 @@
                                         </button>
                                     </div>
                              </div>
-
-                            <div class="row" style="margin-top:10px;" ng-show="!isIRCC"> 
+                            <div ng-if="isRefrenceExist && !showDeleteButton" class="row" style="margin-top:10px;"> 
+                                  <div class="col-xs-12"> 
+                                       <button type="button" class="btn btn-danger" ng-click="deleteRecordOfTheReference()">
+                                     Delete the record with references
+                                </button> 
+                            </div>
+                            </div>
+                           <view-referenced-records ng-model="recordToDelete.identifier" is-reference-exist="referenceRecords(isRecordExist)"></view-referenced-records>		
+                            <div class="row" style="margin-top:10px;" ng-if="!isIRCC && showDeleteButton"> 
                                 <div class="col-xs-12">  <button ng-show="security" type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
                                 <span ng-if="!security.canDelete">Request deletion of this record </span> 
                                  <span ng-if="security.canDelete"> Delete the record </span>
