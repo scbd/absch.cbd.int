@@ -352,7 +352,7 @@ import 'components/scbd-angularjs-services/main';
                     return entity &&                         
                         (   
                             moment.utc().diff(moment.utc(entity.treaties[appTreaties[appName]].deposit), 'days') >= 90 || 
-                            moment.utc(entity.treaties[appTreaties[appName]].party <= moment.utc())
+                            moment.utc(entity.treaties[appTreaties[appName]].party) <= moment.utc()
                         ) && 
                         (
                             entity.treaties[appTreaties[appName]].instrument == "ratification"  ||
