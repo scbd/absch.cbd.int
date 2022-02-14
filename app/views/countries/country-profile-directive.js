@@ -48,7 +48,7 @@ app.directive('countryProfile', function() {
                 })
                 $scope.showHideRecords = function(schema){
                     schema.display = !schema.display;
-                    if(schema.key == 'measure'){ //for measure load all remaining records to build the measure matrix
+                    if(schema.key == 'measure' && schema.display){ //for measure load all remaining records to build the measure matrix
                         loadRecords(schema)
                     }
 

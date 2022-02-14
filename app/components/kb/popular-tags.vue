@@ -28,9 +28,9 @@
     methods: {
         goToAdminTag(tag){
             if(tag =='faq')
-                this.$router.push({path:'/kb/faqs'});
+                this.$router.push({path:'kb/faqs'});
             else
-                this.$router.push({path:`/kb/tags/${encodeURIComponent(tag)}`});
+                this.$router.push({path:`kb/tags/${encodeURIComponent(tag)}`});
         }
     },
     mixins: [articlesMaxin],
