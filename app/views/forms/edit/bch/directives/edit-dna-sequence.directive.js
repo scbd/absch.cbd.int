@@ -54,7 +54,12 @@ import '~/views/forms/directives/traits-selector.directive';
 						document.synonymNames = _($scope.synonymNames).map('value').compact().value();
 					if(_.isEmpty(document.synonymNames))
 						document.synonymNames = undefined;		
-					
+
+					if(document.family.identifier!='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'){
+						document.proteinName = undefined ;
+						document.biologicalFunction = undefined ;
+						document.traits = undefined ;
+					}	
 						
 					return $scope.sanitizeDocument(document);
 				};
