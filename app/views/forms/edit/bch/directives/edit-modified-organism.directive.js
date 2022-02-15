@@ -9,8 +9,8 @@ import "~/views/forms/view/bch/view-lmo.directive";
 import '~/views/forms/directives/traits-selector.directive';
 import '~/views/forms/directives/view-terms-hierarchy';
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr',
-		 function($http, $controller, thesaurusService, storage, $q, realm, solr) {
+	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr', 'commonjs',
+		 function($http, $controller, thesaurusService, storage, $q, realm, solr, commonjs) {
 		
 		return {
 			restrict   : "EA",
@@ -130,10 +130,27 @@ import '~/views/forms/directives/view-terms-hierarchy';
 						$scope.document.genes = [];
 					
 					_.forEach(constructIds, function(cons){
-						if(cons.identifier && !_.find($scope.document.genes, {identifier: cons.identifier}))
+						let existingIdentifier = _.find($scope.document.genes, function(el){
+							if(el.identifier.replace(/@.*$/,"") == cons.identifier.replace(/@.*$/,""))
+							{
+								const consVersion = cons.identifier.substring(cons.identifier.indexOf('@') + 1);
+								const existingVersion = el.identifier.substring(el.identifier.indexOf('@') + 1);
+
+								if(consVersion > existingVersion){
+								 _.remove($scope.document.genes, function(n) { return n.identifier == el.identifier;});
+								 $scope.document.genes.push({ identifier : cons.identifier })
+								}
+								return el.identifier
+							}
+						})
+
+						if(cons.identifier && !existingIdentifier){
 							$scope.document.genes.push({ identifier:cons.identifier })
+						}
 					});
-					
+					$scope.document.genes = _.uniqBy($scope.document.genes, function (e) {	
+						return e.identifier;
+					  });
 				}
 
 				$scope.lookupDetections = function(){
