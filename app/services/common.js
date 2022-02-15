@@ -27,8 +27,7 @@ import 'components/scbd-angularjs-services/main';
         function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
 
-                let isBch        = realm.is('BCH');
-                let isAbs        = realm.is('ABS');
+                const isBch        = realm.is('BCH');
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
                 var appTreaties = {
                     abs: 'XXVII8b',

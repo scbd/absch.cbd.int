@@ -158,12 +158,6 @@ import 'views/report-analyzer/reportAnalyzerService';
                                 $scope.selectedRegionsPresetFilter.push(country.code);
                         }); 
                     }
-                    if(preset=="supProtocolNonParties")  { 
-                        _.pickBy($scope.supProtocolCountries, function(country){
-                            if(!country.isSupProtocolParty)
-                                $scope.selectedRegionsPresetFilter.push(country.code);
-                        }); 
-                    }
                     // console.log($scope.selectedRegions)
                 };
 
@@ -229,7 +223,8 @@ import 'views/report-analyzer/reportAnalyzerService';
                    $q.when(commonjs.getCountries())
                    .then(function(data){
                        $scope.protocolCountries = [];
-                       $scope.supProtocolCountries = [];
+                       if($scope.isBch)
+                            $scope.supProtocolCountries = [];
                        _.forEach(data, function(country){
                             $scope.protocolCountries[country.code.toLowerCase()] = {
                                 title : country.name, isProtocolParty : country.isParty, code : country.code.toLowerCase()
