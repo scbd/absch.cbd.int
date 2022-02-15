@@ -6,7 +6,7 @@ import 'views/forms/view/bch/view-lmo-gene.directive';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 
-app.directive("viewModifiedOrganism", ['$location', function ($location) {
+app.directive("viewModifiedOrganism", ['$location', "commonjs", function ($location, commonjs) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -33,7 +33,10 @@ app.directive("viewModifiedOrganism", ['$location', function ($location) {
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
-
+			//ToDo: same records were saved with different versions(identifier@..)
+			if($scope.document?.genes){
+				$scope.document.genes = commonjs.removeDuplicateIdentifier($scope.document.genes);
+			}
 		}
 	};
 }]);
