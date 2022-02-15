@@ -296,6 +296,37 @@ import 'components/scbd-angularjs-services/main';
                     return deferred.promise;
                 }
 
+                //==================================================================================             
+                this.removeDuplicateIdentifier = function(originalIdentifiers){
+
+                    if (!originalIdentifiers) 
+                        return;
+                    let splitIdentifier = [];
+                    let uniqueIdentifiers = [];
+                    originalIdentifiers.forEach((element) => {
+                        const identifierVersion = element.identifier.substring(element.identifier.indexOf('@') + 1);
+                        splitIdentifier.push({identifier: element.identifier.replace(/@.*$/,""), version : identifierVersion });	
+                    })
+                    splitIdentifier.sort(function (a, b) {
+                        return b.version - a.version;
+                    });
+                    let uniqueSplitIdentifier  =  _.uniqBy(splitIdentifier, function (e) {		
+						return e.identifier;
+					});
+                    uniqueSplitIdentifier.forEach((el)=> {
+                    uniqueIdentifiers.push({identifier : el.identifier+"@"+el.version})
+                    })
+                    return uniqueSplitIdentifier ;
+
+                    //   const uniqueIdentifiers = _.uniqWith(
+                    //     splitIdentifier,
+                    //     (first, second) =>
+                    //     first.identifier === second.identifier &&
+                    //     first.version < second.version
+                    //   );
+                    
+                }
+
                 this.languages = {
                     ar : "Arabic",
                     en : "English",
