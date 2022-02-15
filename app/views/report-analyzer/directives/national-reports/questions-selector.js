@@ -142,24 +142,15 @@ import 'views/report-analyzer/reportAnalyzerService';
                     if(preset=="regions")    { $scope.selectedRegions = []; $scope.showRegions = true; }
                     const sortedCountriesList  =  _.sortBy(_.values($scope.protocolCountries), "title."+locale)
                     if(preset=="protocolParties")  { 
-                        _.pickBy(sortedCountriesList, function(country){
-                            if(country.isProtocolParty)
-                                $scope.selectedRegionsPresetFilter.push(country.code);
-                        }); 
+                        $scope.selectedRegionsPresetFilter =  sortedCountriesList.filter(country => country.isProtocolParty).map(c => c.code);
                     }
                     if(preset=="protocolNonParties")  { 
-                        _.pickBy(sortedCountriesList, function(country){
-                            if(!country.isProtocolParty)
-                                $scope.selectedRegionsPresetFilter.push(country.code);
-                        }); 
+                        $scope.selectedRegionsPresetFilter = sortedCountriesList.filter(country => !country.isProtocolParty).map(c => c.code);
                     }
                     if(preset=="supProtocolParties")  { 
-                        _.pickBy(sortedCountriesList, function(country){
-                            if(country.isSupProtocolParty)
-                                $scope.selectedRegionsPresetFilter.push(country.code);
-                        }); 
+                        $scope.selectedRegionsPresetFilter = sortedCountriesList.filter(country => country.isSupProtocolParty).map(c => c.code);
                     }
-                    // console.log($scope.selectedRegions)
+                    // console.log($scope.selectedRegionsPresetFilter)
                 };
 
                 //====================================
