@@ -316,7 +316,7 @@ import 'components/scbd-angularjs-services/main';
                     uniqueSplitIdentifier.forEach((el)=> {
                     uniqueIdentifiers.push({identifier : el.identifier+"@"+el.version})
                     })
-                    return uniqueSplitIdentifier ;
+                    return uniqueIdentifiers ;
 
                     //   const uniqueIdentifiers = _.uniqWith(
                     //     splitIdentifier,
