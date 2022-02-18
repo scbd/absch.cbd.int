@@ -85,6 +85,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                     $scope.activeReport = _.find($scope.reportData, {type:$scope.selectedReportType});
 
                     $q.all([loadRegions(), loadSections(), nrAnalyzer.loadReports(), loadPreviousReportQuestionsMapping()]).then(function(results) {
+
                         var regions  = results[0];
                         var sections = results[1];
                         var reports  = results[2];
@@ -176,37 +177,33 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                         });
                         return mappings;
                     })
-
+                    //ToDo: unused code
                     var deferred = $q.defer();
                     
-                    import(baseUrl+$scope.activeReport.compare[0].url)
-                    .then((res) => {
+                    require([baseUrl+$scope.activeReport.compare[0].url], function(res){
                         deferred.resolve(res);
                     });
 
                     return deferred.promise;
                 }
                 
-                function loadJsonFile(path){
-                    var deferred = $q.defer();
-                    import(path)
-                    .then((res) => {
-                        deferred.resolve(res);
-                    });
+              async  function loadJsonFile(path){
 
-                    return deferred.promise;
+                    const res = await import(path)
+                    if(res) 
+                       return res;
                 }
 
                 //====================================
                 //
                 //
                 //====================================
-                function loadSections() {
+                async function loadSections() {
 
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
-                    import($scope.activeReport.questionsUrl)
-                    .then((res) => {
+                    let res = await import($scope.activeReport.questionsUrl)
+                    if (res) {
                         res = reportAnalyzerService.flattenQuestions(res[reportType]);
 
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
@@ -219,7 +216,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                                         return section.questions.length;
                                     });
                         deferred.resolve(data);
-                    });
+                    }
 
                     return deferred.promise;
                 }
