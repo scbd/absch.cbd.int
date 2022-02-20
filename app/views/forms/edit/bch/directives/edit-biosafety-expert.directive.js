@@ -83,20 +83,12 @@ import 'services/main';
 					$scope.tab = 'edit';
 					var href = $($event.target).attr("href");
 					$timeout(function (  ) {
-						$element.find('.pagination li a[href!="'+href+'"]').closest('li').removeClass('active');
-						$element.find('.pagination li a[href="'+href+'"]').closest('li').addClass('active');
+						$element.find('.page-tabs li a[href!="'+href+'"]').closest('li').removeClass('active');
+						$element.find('.page-tabs li a[href="'+href+'"]').closest('li').addClass('active');
 					},100);
 				   };
 
-                $scope.$watch('tab', function(newValue){
 
-                    if(newValue != 'edit'){
-                        $("#expertTabs > li").removeClass("active");
-                    }
-                    // if(newValue =='edit')
-                    //     $('#expertTabs a:first').tab('show');
-
-                });
 				//==================================
 				//
 				//==================================
