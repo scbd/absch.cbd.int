@@ -50,8 +50,10 @@ import messages from 'app-data/validation-errors.json'; ;
                         $timeout(function jumpTo() {
 
                             // inner tabs
-                            if(sTabName && sPagerName && !$('#' + sPagerName).find('a[href$="' + sTabName + '"]').parents("li").hasClass('active')){
-                                $('#' + sPagerName).find('a[href$="' + sTabName + '"]').trigger("click");
+                            if(sTabName && sPagerName){
+                                $('#' + sPagerName).find('a[href$="' + sTabName + '"]').tab("show");
+                                $("ul.page-tabs").find("li").removeClass("active");
+                                $("ul.page-tabs").find('a[href$="' + sTabName + '"]').parents('li').addClass("active");
                             }
                             var scrollNum = qLabel.offset().top
                             
