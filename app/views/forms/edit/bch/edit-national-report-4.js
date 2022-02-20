@@ -244,9 +244,10 @@ import 'ngDialog';
 		};
         
         $scope.setTab = function(index){
-            $(".tab-pane").removeClass("active");
+            $("ul.page-tabs").find("li").removeClass("active");
             $timeout(function(){
-                $('#tab'+index).tab('show');
+                $('#tab'+index).tab('show');                
+                $("ul.page-tabs").find('#tab' + index).parents('li').addClass("active");
             }, 200);
             $scope.activeTab = index + 1;
             $scope.nr4Tabs[index].render=true;
@@ -270,7 +271,7 @@ import 'ngDialog';
 
                     var dataSection = _.find(cpbNationalReport4, {key:mapping.key||question.section});
                     if(dataSection){
-                        let mapQuestion; 
+                        var mapQuestion; 
                         var validationPositive = false;
                         var baseQuestion;
                         if(baseQuestionNumber || mapping.baseQuestion){
