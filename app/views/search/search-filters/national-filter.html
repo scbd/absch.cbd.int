@@ -32,7 +32,7 @@
         <div ng-repeat="doc in nf_status = (nf_partyStatus | filter:searchKeyword | orderBy:['filterSort', 'sort'])">
             
             <a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)">
-                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id), 'color-party':doc.id==='partyToProtocol', 'color-litegrey':doc.id==='nonParty', 'color-inbetween':doc.id==='inbetween'}"></i>
+                <i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id), 'color-party':doc.id==='partyToProtocol', 'color-litegrey':doc.id==='nonParty', 'color-inbetween':doc.id==='inbetween', 'color-NKLSP':doc.id==='NKLSParty'}"></i>
                 <span ng-bind="doc.name"></span>
             </a>
              <span ng-if="doc.description" href="#" class="helpinfoInline fa fa-info-circle color-white" data-bs-toggle="tooltip" data-html="true" 
