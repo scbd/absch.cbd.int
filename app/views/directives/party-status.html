@@ -25,7 +25,7 @@
         class="color-inbetween bold partystatus">Ratified, not yet Party</a>
         <span ng-if="partyStatus.isSignatory" class="bold partystatus">Signatory</span>
         <span ng-if="partyStatus.entryIntoForce" class="bold color-grey color-non-party partystatus">
-            <span class="full-text-display">Entry into force: </span>
+            <span class="full-text-display">since </span>
             <span ng-bind="partyStatus.entryIntoForce|formatDate"></span>
         </span>
     </span>

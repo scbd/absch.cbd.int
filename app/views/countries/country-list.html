@@ -181,7 +181,7 @@
 						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
 						<span ng-if="country.isInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
 						<span ng-if="country.isSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
-						<span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">Entry into force: <span ng-bind="country.entryIntoForce|formatDate"></span></span>
+						<span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">since <span ng-bind="country.entryIntoForce|formatDate"></span></span>
 					</div>
 					<div ng-if="isBCH">
 						<span ng-if="!country.isParty" class="color-grey color-non-party" style="font-size:10px;margin-right:10px;">Non-Party to the Cartagena Protocol</span>
