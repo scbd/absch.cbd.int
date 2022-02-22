@@ -42,9 +42,6 @@ import 'services/main';
                     if($scope.cf_partyFilter ==='nonparty'){
                         return !item.isParty;
                     } 
-                    if($scope.cf_partyFilter ==='NKLSParty'){
-                        return item.isNKLSParty;
-                    }
                     if($scope.cf_partyFilter ==='inbetween'){
                         return item.isInbetweenParty;
                     }     
