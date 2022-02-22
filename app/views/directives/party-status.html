@@ -12,9 +12,9 @@
            </span>
            <span ng-bind="(partyStatus.treaties.XXVII8a.party || partyStatus.treaties.XXVII8a.deposit)|formatDate"></span>
         </span>
-        <span ng-if="partyStatus.isNKLSParty" style="display: flex; flex-wrap: wrap;">
+        <span ng-if="partyStatus.isNKLSParty">
             <a rel="noopener" ng-href="/countries/status/party"  class="color-NKLSP bold partystatus">Party to the <span class="short-text-display" aria-label="Cartagena">NKLS</span> <span class="full-text-display">Supplementary Protocol</span></a>
-            <span class="bold color-NKLSP partystatus"> since <span ng-bind="(partyStatus.partyToNKLSPDate)|formatDate"></span></span>
+            <span class="bold color-grey partystatus" style="margin-left: 55px;"> since <span ng-bind="(partyStatus.partyToNKLSPDate)|formatDate"></span></span>
         </span>
     </span>
     <span ng-if="isAbs">

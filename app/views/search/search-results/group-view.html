@@ -52,7 +52,7 @@
                 </span>
                 <a rel="noopener" translation-url ng-if="::group.href" ng-href="{{group.href}}" class="color-black link" ng-bind="::group.title"></a>
                  (<span ng-bind="::group.numFound" ng-class="::{'color-darkgrey':group.level>1}"></span>)
-                <ng-party-status ng-if="::group.partyStatus" code="group.levelKey" style="margin-left:10px;"></ng-party-status>
+                <ng-party-status ng-if="::group.partyStatus" code="group.levelKey" style="margin-left:10px; display:inline-block;margin-top: -22px; vertical-align: bottom;"></ng-party-status>
                 <!-- <div class="btn-group pull-right">
                     <button type="button" class="btn btn-default btn-xs" ng-click="group.isClosed=!group.isClosed">            
                         <span class="badge " ng-bind="::group.numFound" ng-class="::{'color-darkgrey':group.level>1}"></span>
