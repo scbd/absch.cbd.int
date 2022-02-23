@@ -67,16 +67,15 @@ import 'views/report-analyzer/reportAnalyzerService';
                 //
                 //
                 //====================================
-                $scope.$watch('selectedReportType', function (reportType) {
+                $scope.$watch('selectedReportType', async function (reportType) {
 
                     if(!reportType || !$scope.reportData)
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    import(reportTypeDetails.questionsUrl)
-                    .then((res) => {
+                    let res = await  import(reportTypeDetails.questionsUrl)
+                    if(res) {
                                            
-                        $timeout(function(){
                             $scope.sections = reportAnalyzerService.flattenQuestions(res[reportType]);
 
                             if($scope.selectedQuestions) {
@@ -89,8 +88,7 @@ import 'views/report-analyzer/reportAnalyzerService';
                                 $scope.allSectionsClicked();
 
                             }
-                        }, 100);
-                    });
+                        }
                 });
 
                 ///////////////////////////////////////

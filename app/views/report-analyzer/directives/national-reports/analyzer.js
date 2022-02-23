@@ -177,14 +177,6 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                         });
                         return mappings;
                     })
-                    //ToDo: unused code
-                    var deferred = $q.defer();
-                    
-                    require([baseUrl+$scope.activeReport.compare[0].url], function(res){
-                        deferred.resolve(res);
-                    });
-
-                    return deferred.promise;
                 }
                 
               async  function loadJsonFile(path){

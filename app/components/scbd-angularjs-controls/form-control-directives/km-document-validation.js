@@ -50,6 +50,7 @@ import messages from 'app-data/validation-errors.json'; ;
                         $timeout(function jumpTo() {
 
                             // inner tabs
+                            //ToDo: need to change once fully migrated to BS5
                             if(sTabName && sPagerName){
                                 $('#' + sPagerName).find('a[href$="' + sTabName + '"]').tab("show");
                                 $("ul.page-tabs").find("li").removeClass("active");
