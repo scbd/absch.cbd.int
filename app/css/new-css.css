@@ -188,7 +188,7 @@
 .new-css-bg-party{background-color:#00405C;}
 .new-css-bg-party-abs{background-color:#069554;}
 .new-css-bg-party-bch{background-color:#00405C;}
-
+.new-css-bg-NKLSParty{background-color:#cb5b39 ;}
 .new-css-bg-nonparty{background-color:#636363; }
 .new-css-bg-inbetween{background-color:#EC971F;}
 .new-css-bg-national{background-color:#428bca!important;color:white!important;}
@@ -376,6 +376,12 @@ max-width: 90%;
 .new-css-abs-card-footer>a {
     color: #FFF !important;
 }
+.party-status-align {
+    margin-left:10px; 
+    display:inline-block; 
+    margin-top: -22px; 
+    vertical-align: bottom
+}
 @media (max-width: 768px) {
     .new-css-callout-national {
         min-height: 130px;
@@ -394,6 +400,12 @@ max-width: 90%;
     }
     .new-css-down-margin{
         margin-bottom: 30px
+    }
+    .party-status-align {
+        margin-left:0; 
+        display:inline-block; 
+        margin-top: 0; 
+        vertical-align: bottom
     }
 }
 .country-item-name .table-map tr td:nth-child(1) span{

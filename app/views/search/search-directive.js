@@ -721,10 +721,17 @@ import 'angular-vue'
                                 addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
                                         'description': $filter('lstring')((schema.description || {})), otherType:schema.type });
                         })
-
-                        addFilter('partyToProtocol'     , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol'     , 'description': '' });
-                        addFilter('inbetween'           , { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol' , 'id': 'inbetween'           , 'description': '' });
-                        addFilter('nonParty'            , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'            , 'description': '' });
+                        if(isBCH){
+                            addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Cartagena Protocol on Biosafety'             , 'id': 'partyToProtocol' , 'description': '' });
+                            addFilter('NKLSParty'       , { 'sort': 2, 'type': 'partyStatus', 'name': 'Party to the Supplementary Protocol'                      , 'id': 'NKLSParty'       , 'description': '' });
+                            addFilter('inbetween'       , { 'sort': 3, 'type': 'partyStatus', 'name': 'Ratified, not yet Party Cartagena Protocol on Biosafety'  , 'id': 'inbetween'       , 'description': '' });
+                            addFilter('nonParty'        , { 'sort': 4, 'type': 'partyStatus', 'name': 'Not a Party to the Cartagena Protocol on Biosafety '      , 'id': 'nonParty'        , 'description': '' });
+                        }
+                        if(isABS){
+                            addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Protocol'                   , 'id': 'partyToProtocol' , 'description': '' });
+                            addFilter('inbetween'       , { 'sort': 2, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Protocol' , 'id': 'inbetween'       , 'description': '' });
+                            addFilter('nonParty'        , { 'sort': 3, 'type': 'partyStatus', 'name': 'Not a Party to the Protocol '            , 'id': 'nonParty'        , 'description': '' });
+                        }
 
                         //SCBD
                         _.forEach(scbdSchemas.defaults, function (schema, key) {
@@ -740,9 +747,14 @@ import 'angular-vue'
 
                             _.forEach(countries, function (country, index) {
                                 addFilter(country.code.toLowerCase(), { 'sort': index, 'type': 'country', 'name': country.name, 
-                                'id': country.code.toLowerCase(), 'description': '', "isCBDParty": country.isCBDParty, "isParty": country.isParty, 
-                                "isParty": country.isParty,  "isRatified": country.isRatified, 
-                                "isInbetweenParty": country.isInbetweenParty, "entryIntoForce": country.entryIntoForce});
+                                'id': country.code.toLowerCase(), 
+                                'description': '', 
+                                "isCBDParty": country.isCBDParty, 
+                                "isParty": country.isParty, 
+                                "isNKLSParty": country.isNKLSParty,  
+                                "isRatified": country.isRatified, 
+                                "isInbetweenParty": country.isInbetweenParty, 
+                                "entryIntoForce": country.entryIntoForce});
                             });
                         });
                     };
@@ -1346,6 +1358,8 @@ import 'angular-vue'
                             if (id === 'partyToProtocol' && item.isParty === true)
                                 return item;
                             else if (id === 'nonParty' && item.isParty === false)
+                                return item;
+                            if (id === 'NKLSParty' && item.isNKLSParty === true)
                                 return item;
                             else if (id === 'inbetween' && item.isInbetweenParty === true)
                                 return item;

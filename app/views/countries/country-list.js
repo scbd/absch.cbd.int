@@ -155,7 +155,7 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
 
             if ($routeParams.status) {
                 var status = $routeParams.status;
-                if (status === 'party' || status === 'inbetween' || status === 'nonparty')
+                if (status === 'party' || status === 'inbetween' || status === 'nonparty' || status === 'NKLSParty')
                     $scope.setPartyFilter(status);
             }
             else
@@ -193,6 +193,9 @@ import joyRideText from '~/app-data/country-profile-joyride-tour.json';
                 }
                 if ($scope.partyFilter === 'nonparty') {
                     return !item.isParty;
+                }
+                if ($scope.partyFilter === 'NKLSParty') {
+                    return item.isNKLSParty;
                 }
                 if ($scope.partyFilter === 'inbetween') {
                     return item.isInbetweenParty;

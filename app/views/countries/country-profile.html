@@ -14,8 +14,7 @@
                 <h1 style="font-size:280%;"><i class="flag-icon" ng-class="country.cssClass"></i> <strong> <span ng-bind="country.name"></span> </strong>
                 </h1>
                 <div class="well bg-white cp-header">
-                        <div style="margin-bottom:5px;" ng-if="isABS">
-                            <label >Party Status:</label>
+                        <div style="margin-bottom:5px; font-size: 1.3em !important;" ng-if="isABS">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Nagoya Protocol</span>
                             <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
                             <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
@@ -28,8 +27,7 @@
                                 title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                             </div>
                         </div>
-                        <div style="margin-bottom:5px;" ng-if="isBCH">
-                            <label >Party Status:</label>
+                        <div style="margin-bottom:5px; font-size: 1.3em !important;" ng-if="isBCH">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Cartagena Protocol on Biosafety</span>
                             <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
                             <div ng-if="country.code==='dk'" style="margin-left:194px;"class="bold"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
@@ -41,9 +39,19 @@
                                 title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                             </div>
                         </div>
-                         <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:5px;">
-                            <label>Enter<span ng-if="country.isInbetweenParty">s</span><span ng-if="country.isParty">ed</span> into force on:</label>
-                            <span class="color-grey color-non-party bold" ng-bind="country.entryIntoForce|formatDate"></span>
+                        <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:10px; margin-top:-5px;">
+                            <span class="color-party bold">
+                                (<span ng-if="country.isInbetweenParty">Enters into force on:</span><span ng-if="country.isParty && !country.isInbetweenParty">since</span> <span ng-bind="country.entryIntoForce|formatDate"></span>)
+                            </span>
+                        </div>
+                        <div ng-if="isBCH && country.isNKLSParty" style="margin-top:10px; margin-bottom: 15px;">
+                            <span class="color-NKLSP bold" style=" font-size: 1.3em !important;">Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
+                            <div ng-if="country.partyToNKLSPDate">
+                                <span class="color-NKLSP bold">(since <span  ng-bind="country.partyToNKLSPDate|formatDate"></span>)</span>
+                            </div>
+                        </div>
+                        <div ng-if="isBCH && !country.isNKLSParty" style="margin-top:10px; margin-bottom: 15px;">
+                            <span class="color-non-party bold" style=" font-size: 1.3em !important;">Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
                         </div>
                         <div ng-if="(country.isRatified) && country.dateDeposit"  style="margin-bottom:5px;">
                             <label ng-if="country.instrument" ><span style="text-transform:capitalize;" ng-bind="country.instrument"></span> on:</label>

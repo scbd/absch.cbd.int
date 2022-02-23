@@ -19,7 +19,6 @@
 				<label>Country</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.government | term:locale"></span>
-					<span ng-party-status government="document.government" id="government"></span>
 				</div>
 			</div>
 			<div ng-show="document.organization || document.organizationAcronym">
@@ -43,7 +42,6 @@
   			   <label>Country</label>
   			   <div class="km-value" compare-val>
   				   <span ng-bind="document.government | term:locale"></span>
-				   <span ng-party-status government="document.government" id="government"></span>
   			   </div>
   		   </div>
 
