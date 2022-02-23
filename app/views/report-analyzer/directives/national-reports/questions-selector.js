@@ -67,16 +67,16 @@ import 'views/report-analyzer/reportAnalyzerService';
                 //
                 //
                 //====================================
-                $scope.$watch('selectedReportType', function (reportType) {
+                $scope.$watch('selectedReportType', async function (reportType) {
 
                     if(!reportType || !$scope.reportData)
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    require([reportTypeDetails.questionsUrl], function(res){
-                        
-                        $timeout(function(){
-                            $scope.sections = reportAnalyzerService.flattenQuestions(res);
+                    let res = await  import(reportTypeDetails.questionsUrl)
+                    if(res) {
+                                           
+                            $scope.sections = reportAnalyzerService.flattenQuestions(res[reportType]);
 
                             if($scope.selectedQuestions) {
 
@@ -88,8 +88,7 @@ import 'views/report-analyzer/reportAnalyzerService';
                                 $scope.allSectionsClicked();
 
                             }
-                        }, 100);
-                    });
+                        }
                 });
 
                 ///////////////////////////////////////
@@ -101,7 +100,6 @@ import 'views/report-analyzer/reportAnalyzerService';
                 //
                 //====================================
                 $scope.$watchCollection('selectedRegions', function() {
-                    // console.log( $scope.selectedRegionsPreset)
                     if(_.includes(['protocolParties', 'protocolNonParties'], $scope.selectedRegionsPreset))
                         return;
 
@@ -152,7 +150,6 @@ import 'views/report-analyzer/reportAnalyzerService';
                                 $scope.selectedRegionsPresetFilter.push(country.code)
                         }); 
                     }
-                    // console.log($scope.selectedRegions)
                 };
 
                 //====================================

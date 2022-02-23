@@ -1,7 +1,7 @@
 ﻿import app from 'app';
 import _ from 'lodash';
-import nr4Data from 'app-data/bch/report-analyzer/cpbNationalReport4.json';
-import nr3Data from 'app-data/bch/report-analyzer/cpbNationalReport3.json';
+import {cpbNationalReport4} from 'app-data/bch/report-analyzer/cpbNationalReport4';
+import {cpbNationalReport3} from 'app-data/bch/report-analyzer/cpbNationalReport3';
 import 'views/forms/edit/edit';
 import 'services/main';
 import '~/views/forms/directives/nr-yes-no';
@@ -244,10 +244,13 @@ import 'ngDialog';
 		};
         
         $scope.setTab = function(index){
-            $(".tab-pane").removeClass("active");
-            $('#tab'+index).tab('show');
+            $("ul.page-tabs").find("li").removeClass("active");
+            $timeout(function(){
+                $('#tab'+index).tab('show');                
+                $("ul.page-tabs").find('#tab' + index).parents('li').addClass("active");
+            }, 200);
             $scope.activeTab = index + 1;
-            $scope.nr4Tabs[index].render=true
+            $scope.nr4Tabs[index].render=true;
         }
 
         $scope.updateAnswer = function(question, baseQuestionNumber){
@@ -266,7 +269,7 @@ import 'ngDialog';
                     
                 _.forEach(mappings, function(mapping){
 
-                    var dataSection = _.find(nr4Data, {key:mapping.key||question.section});
+                    var dataSection = _.find(cpbNationalReport4, {key:mapping.key||question.section});
                     if(dataSection){
                         var mapQuestion; 
                         var validationPositive = false;
@@ -315,7 +318,6 @@ import 'ngDialog';
                         // }
 
                         if(!mapQuestion)
-                            console.log(mapping)
                         mapQuestion.hasValidation = true;
                         if(validationPositive){
                             mapQuestion[mapping.trigger] = true;                            
@@ -421,7 +423,7 @@ import 'ngDialog';
                 
                 _.forEach(tab.sections, function(section){
 
-                    var dataSection = _.find(nr4Data, {key:section.key});
+                    var dataSection = _.find(cpbNationalReport4, {key:section.key});
                     
                     _.extend(section, dataSection||{})
 
@@ -462,7 +464,7 @@ import 'ngDialog';
             $http.get('https://api.cbd.int/api/v2015/national-reports-cpb-3', { params : params} )
                  .then(function(result){
                      var prevReportAnswers = result.data[0];
-                     var prevReportQuestions = _(nr3Data).map('questions').compact().flatten().value();
+                     var prevReportQuestions = _(cpbNationalReport3).map('questions').compact().flatten().value();
 
                      _.forEach(previousAnswerMapping, function(mapping, key){
                         

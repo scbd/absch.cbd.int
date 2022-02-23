@@ -177,38 +177,27 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                         });
                         return mappings;
                     })
-
-                    var deferred = $q.defer();
-                    
-                    require([baseUrl+$scope.activeReport.compare[0].url], function(res){
-                        deferred.resolve(res);
-                    });
-
-                    return deferred.promise;
                 }
                 
-                function loadJsonFile(path){
-                    var deferred = $q.defer();
-                    
-                    require([path], function(res){
-                        deferred.resolve(res);
-                    });
+              async  function loadJsonFile(path){
 
-                    return deferred.promise;
+                    const res = await import(path)
+                    if(res) 
+                       return res;
                 }
 
                 //====================================
                 //
                 //
                 //====================================
-                function loadSections() {
+                async function loadSections() {
 
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
-                    
-                    require([$scope.activeReport.questionsUrl], function(res){
+                    let res = await import($scope.activeReport.questionsUrl)
+                    if (res) {
+                        res = reportAnalyzerService.flattenQuestions(res[reportType]);
 
-                        res = reportAnalyzerService.flattenQuestions(res);
                         var selection = _($scope.selectedQuestions).reduce(mapReduce(), {});
                         var data =  _.filter(angular.copy(res), function(section) {
 
@@ -219,7 +208,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                                         return section.questions.length;
                                     });
                         deferred.resolve(data);
-                    });
+                    }
 
                     return deferred.promise;
                 }

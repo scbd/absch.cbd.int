@@ -1,6 +1,6 @@
 import './directives/national-reports/questions-selector';
 import './directives/national-reports/analyzer'; 
-import analyzerMapping from '~/app-data/report-analyzer-mapping.json';
+import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 
     export { default as template } from './analyzer.html';
 export default ['$scope', '$location', 'realm', '$timeout',

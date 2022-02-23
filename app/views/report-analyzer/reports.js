@@ -1,7 +1,7 @@
 ﻿import _ from 'lodash';
 import moment from 'moment';
 import 'views/report-analyzer/directives/national-reports/questions-selector';
-import analyzerData from '~/app-data/report-analyzer-mapping.json';
+import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 
     export { default as template } from './reports.html'
     export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
@@ -40,7 +40,7 @@ import analyzerData from '~/app-data/report-analyzer-mapping.json';
             
 
             var appName = realm.value.replace(/-.*/,'').toLowerCase();            
-            $scope.reportData = analyzerData[appName];        
+            $scope.reportData = analyzerMapping[appName];        
             var regionsQuery = _.map(DefaultRegions, function(region){return $http.get('/api/v2013/thesaurus/terms/'+region+'?relations')})
             var regionMapping = {}
             

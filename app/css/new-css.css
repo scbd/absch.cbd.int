@@ -468,3 +468,9 @@ max-width: 90%;
     font-weight: normal; 
     font-size: 1.5rem;
 }
+.page-tabs.pagination>.active>a, .page-tabs.pagination>.active>a:hover, .page-tabs.pagination>.active>a:focus{
+    color: #fff !important;
+    background-color: #428bca !important;
+    border-color: #428bca !important;
+    padding: 6px 19px !important;
+}
