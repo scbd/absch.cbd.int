@@ -28,8 +28,7 @@
                     <option value="regions">Select regions</option>
                     <option value="protocolParties">Breakdown by Parties to the Cartagena Protocol</option>
                     <option value="protocolNonParties">Breakdown by Non-Parties to the Cartagena Protocol</option>
-                    <option ng-if="isBch" value="supProtocolParties">Breakdown by Parties to the Supplementary Protocol</option>
-                    <!-- <option ng-if="isBch" value="supProtocolNonParties">Breakdown by Non-Parties to the Supplementary Protocol</option> -->
+                    <option ng-if="isBch" value="NKLSParty">Breakdown by Parties to the Supplementary Protocol</option>
                 </select>
             </td>
         </tr>
@@ -46,11 +45,11 @@
 
                 <ul ng-if="selectedRegions.length" class="list-unstyled">
                     <li ng-repeat="c in selectedRegions">
-                        <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='supProtocolParties'">
+                        <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='NKLSParty'">
                             <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i>
                             <span ng-bind="regionsMap[c].title|lstring"></span>
                         </span>
-                        <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='supProtocolParties'">                            
+                        <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='NKLSParty'">                            
                             <span ng-bind="npCountries[c].title|lstring"></span>
                         </span>
                     </li>
