@@ -144,7 +144,7 @@
 						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true" icon="fa-object-group">
 					</div>
 					
-					<button id="exportingRecords" type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
+					<button ng-if="list.length" id="exportingRecords" type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
 						<i class="fa fa-download" ></i> 
 						<span class="hidden-sm hidden-xs">Export</span>
 					</button>
@@ -160,6 +160,7 @@
 			</div>
 		</div>
 		<!--end row-->
+		<div ng-if="!list.length"  class="row" style="margin:0;border-bottom:2px solid #DDD;padding:5px 20px 10px 20px;"> <span>No countries found for selected filter</span> </div>
 		<div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"
 			ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
 			<div class="col-md-5">
