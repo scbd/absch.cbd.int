@@ -10,7 +10,7 @@
 
     <table class="table table-hover" style="margin-bottom:0px">
         <tr>
-            <th style="width:200px">National Report</th>
+            <th style="width:20%">National Report</th>
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
@@ -20,14 +20,15 @@
             </td>
         </tr>
         <tr>
-            <th>Geographical areas</th>
+            <th>Filter by country(ies) or region(s)</th>
             <td>
                 <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-control">
                     <option value="cbdRegions">Breakdown by CBD regions</option>
                     <option value="countries">Select countries</option>
                     <option value="regions">Select regions</option>
-                    <option value="protocolParties">Breakdown by Parties</option>
-                    <option value="protocolNonParties">Breakdown by Protocol Non-Parties</option>
+                    <option value="protocolParties">Breakdown by Parties to the Cartagena Protocol</option>
+                    <option value="protocolNonParties">Breakdown by Non-Parties to the Cartagena Protocol</option>
+                    <option ng-if="isBch" value="NKLSParty">Breakdown by Parties to the Supplementary Protocol</option>
                 </select>
             </td>
         </tr>
@@ -44,11 +45,11 @@
 
                 <ul ng-if="selectedRegions.length" class="list-unstyled">
                     <li ng-repeat="c in selectedRegions">
-                        <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties'">
+                        <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='NKLSParty'">
                             <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i>
                             <span ng-bind="regionsMap[c].title|lstring"></span>
                         </span>
-                        <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties'">                            
+                        <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='NKLSParty'">                            
                             <span ng-bind="npCountries[c].title|lstring"></span>
                         </span>
                     </li>

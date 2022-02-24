@@ -27,6 +27,7 @@ import 'components/scbd-angularjs-services/main';
         function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
             return new function() {
 
+                const isBch        = realm.is('BCH');
                 var appName = realm.value.replace(/-.*/,'').toLowerCase();
                 var appTreaties = {
                     abs: 'XXVII8b',
@@ -324,7 +325,6 @@ import 'components/scbd-angularjs-services/main';
                     var treaties = countryDetails.treaties;
                     country.name = countryDetails.name;
                     country.code = countryDetails.code;
-                    country.isNKLSParty = isPartyToNKLSP(countryDetails) || country.code == 'EU';
                     country.isCBDParty = isPartyToCBD(countryDetails) || country.code == 'EU';
                     country.isParty = isParty(countryDetails) || country.code == 'EU';
                     country.isSignatory = isSignatory(countryDetails) || country.code == 'EU';
@@ -335,7 +335,10 @@ import 'components/scbd-angularjs-services/main';
                     country.instrument  = countryDetails.treaties[appTreaties[appName]].instrument;
                     country.dateSigned  = countryDetails.treaties[appTreaties[appName]].signature;
                     country.treaties    = countryDetails.treaties;
-                    country.partyToNKLSPDate = countryDetails.treaties.XXVII8c.party || null;
+                    if(isBch){
+                        country.isNKLSParty = isPartyToNKLSP(countryDetails);
+                        country.partyToNKLSPDate = countryDetails.treaties.XXVII8c.party || null;
+                    }
                     if (country.isInbetweenParty)
                         country.entryIntoForce = moment.utc(treaties[appTreaties[appName]].deposit).add(90, 'day');
                     else
