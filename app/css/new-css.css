@@ -474,3 +474,13 @@ max-width: 90%;
     border-color: #428bca !important;
     padding: 6px 19px !important;
 }
+#Search-Filter .filter .label-selected-facet {
+    position: relative;
+    display: block;
+    background-color: #12496B;
+    margin: 4px 0;
+    padding-right: 20px;
+    text-align: left;
+    padding-top: 6px;
+    border-radius: 3px;
+}
