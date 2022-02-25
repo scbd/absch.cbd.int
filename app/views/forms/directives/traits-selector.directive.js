@@ -63,7 +63,22 @@ import template from 'text!./traits-selector.directive.html';
                             other.multiple=true;
                             other.broaderTerms.push(parent);
         
-                            return _.union(terms, [other]);
+                            terms = _.union(terms, [other]);
+                            return thesaurusService.getTerms('other')
+                                .then(function (otherTerm) {
+                                    _.forEach(terms, function (method) {
+
+                                        if (method.narrowerTerms.length) {
+                                            var otherTermCopy = angular.copy(otherTerm);
+                                            otherTermCopy.identifier = method.identifier + '#' + otherTermCopy.identifier
+                                            otherTermCopy.type = 'lstring';
+                                            otherTermCopy.multiple = true;
+                                            method.narrowerTerms.push(otherTermCopy.identifier)
+                                            terms.push(otherTermCopy);
+                                        }
+                                    })
+                                    return terms;
+                                })
                         })
                     },
                     traitsOtherSection: function(){
