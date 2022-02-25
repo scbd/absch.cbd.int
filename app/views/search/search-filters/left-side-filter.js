@@ -22,38 +22,25 @@ import 'views/forms/edit/document-selector'
                     var freeTextKeys = 0;
                     // $scope.leftMenuFilters = {}
                     $scope.locale = locale;
-                    $scope.onSchemaFilterChanged = function (schema, selected, selectedSubFilters) {
-                        // console.log("not seelcted",se)
+                    $scope.onSchemaFilterChanged = function (schema, selected) {
                         if (!selected) {
                             if ($scope.leftMenuFilters)
                                 delete $scope.leftMenuFilters[schema];
                             $scope.leftMenuFilters = _.omit($scope.leftMenuFilters, _.isUndefined);
                             if (_.isEmpty($scope.leftMenuFilters))
                                 $scope.leftMenuFilters = undefined;
-                            return $scope.leftMenuFilters;
                         }
                         else {
+
                             var fieldMappings = angular.copy(searchDirectiveCtrl.getSchemaFieldMapping(schema));
+
                             if (!_.isEmpty(fieldMappings)) {
                                 if (!$scope.leftMenuFilters)
                                     $scope.leftMenuFilters = {};
-                                $scope.leftMenuFilters[schema] = fieldMappings;
-                                return $scope.leftMenuFilters;
-                            } else {
-                               let loadMapData = searchDirectiveCtrl.loadFilterMapping();
-                                loadMapData.then(function (res) {
-                                  let loadMapDataCopy = res[schema];
-                                    if (!$scope.leftMenuFilters)
-                                        $scope.leftMenuFilters = {};
-                                    $scope.leftMenuFilters[schema] = loadMapDataCopy;
-                                    if (selectedSubFilters) {
-                                        $scope.getSelectedSubFilters(selectedSubFilters, $scope.leftMenuFilters);
-                                    }
-                                    return $scope.leftMenuFilters;
-                                });
-                               
+                                $scope.leftMenuFilters[schema] = fieldMappings
                             }
                         }
+                        return $scope.leftMenuFilters;
                     }
 
                     $scope.showFilterDialog = function (schema, filter, facets) {
