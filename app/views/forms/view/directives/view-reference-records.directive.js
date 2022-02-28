@@ -16,8 +16,7 @@ app.directive("viewReferencedRecords", [function () {
 			model: "=ngModel",
 			locale: "=",
 			target: "@linkTarget",
-			onDataFetch: "&?",
-			isReferenceExist: "&?"
+			onDataFetch: "&?"
 		},
 		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', function ($scope, solr, $q, searchService, realm, commonjs) {
 
@@ -71,9 +70,6 @@ app.directive("viewReferencedRecords", [function () {
 								if(typeof $scope.onDataFetch == 'function'){
 									$scope.onDataFetch({data:$scope.referenceRecords})
 								}
-								if (typeof $scope.isReferenceExist == 'function') {
-									$scope.isReferenceExist({ isRecordExist: true })
-								} 
 							})
 						}
 					});
