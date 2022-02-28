@@ -378,12 +378,14 @@ max-width: 90%;
 }
 .search-result-heading .party-status-align {
     margin-left:10px; 
-    display:inline-block; 
-    margin-top: -22px; 
-    vertical-align: bottom
+    vertical-align: bottom;
+    display: block;
+}
+.bs5.search-result-heading a{
+    text-decoration: none;
 }
 .search-result-heading .party-date-align{
-    margin-left: 55px;
+    margin-left: 50px;
 }
 @media (max-width: 768px) {
     .new-css-callout-national {
@@ -404,20 +406,8 @@ max-width: 90%;
     .new-css-down-margin{
         margin-bottom: 30px
     }
-    .search-result-heading .party-status-align {
-        margin-left:0; 
-        display:inline-block; 
-        margin-top: -22px;
-        vertical-align: -webkit-baseline-middle
-    }
     .search-result-heading .party-date-align{
         margin-left: 0px;
-    }
-}
-@media (max-width: 518px) {
-    .search-result-heading .party-status-align {
-        margin-top: 0px !important;
-        vertical-align: text-bottom !important;
     }
 }
 .country-item-name .table-map tr td:nth-child(1) span{
