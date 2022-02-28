@@ -137,26 +137,26 @@
             
             <span ng-if="document" onload="contactAddress=document.body"
                 ng-include="'reference-contact-address'"></span>
-
-            <div ng-if="options.isContactTypePerson && document.body.contactOrganization">
+                <!-- ToDo: document.body.contactOrganization has identifier only, to show Related Organization details we need to get details of this record  -->
+            <div ng-if="options.isContactTypePerson && document.body.contactOrganization && document.body.contactOrganizationDetail">
                 <div
                     style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-top:10px;margin-bottom:5px;color:#999;">
                     Related Organization
                 </div>
-
+                <!-- ToDo: contactOrganizationInfo is not using -->
                 <span ng-if="document.body.contactOrganizationInfo.deletedOn">
                     <span class="label label-danger">This linked record has been deleted.</span>
                 </span>
-                <div ng-if="document.body.contactOrganization">
-                    <b><span ng-bind="document.body.contactOrganization.organization | lstring:locale"></span></b>
-                    <span ng-show="document.body.contactOrganization.organizationAcronym">
-                        (<span ng-bind="document.body.contactOrganization.organizationAcronym | lstring:locale"></span>)
+                <div ng-if="document.body.contactOrganizationDetail">            
+                    <b><span ng-bind="document.body.contactOrganizationDetail.organization | lstring:locale"></span></b>
+                    <span ng-show="document.body.contactOrganizationDetail.organizationAcronym">
+                        (<span ng-bind="document.body.contactOrganizationDetail.organizationAcronym | lstring:locale"></span>)
                     </span>
                 </div>
-                <div ng-if="document.body.contactOrganization.organizationType">
-                    <span ng-bind="document.body.contactOrganization.organizationType|term"></span>
+                <div ng-if="document.body.contactOrganizationDetail.organizationType">
+                    <span ng-bind="document.body.contactOrganizationDetail.organizationType|term"></span>
                 </div>
-                <span ng-if="document.body.contactOrganization" onload="contactAddress=document.body.contactOrganization"
+                <span ng-if="document.body.contactOrganizationDetail" onload="contactAddress=document.body.contactOrganizationDetail"
                     ng-include="'reference-contact-address'"></span>
             </div>
         </blockquote>
