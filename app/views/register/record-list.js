@@ -225,7 +225,6 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 //
                 //============================================================
                 $scope.onReferencedRecordsDataFetch = function (data) {
-                    console.log("data is : ", data)
                     if(data){
                         $timeout(function () {
                             $scope.isRefrenceExist = true;

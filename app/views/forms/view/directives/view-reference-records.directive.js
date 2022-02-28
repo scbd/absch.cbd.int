@@ -70,6 +70,7 @@ app.directive("viewReferencedRecords", [function () {
 								if(typeof $scope.onDataFetch == 'function'){
 									$scope.onDataFetch({data:$scope.referenceRecords})
 								}
+								
 							})
 						}
 					});
