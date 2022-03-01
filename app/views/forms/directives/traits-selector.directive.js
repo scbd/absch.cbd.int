@@ -70,7 +70,7 @@ import template from 'text!./traits-selector.directive.html';
 
                                         if (method.narrowerTerms.length) {
                                             var otherTermCopy = angular.copy(otherTerm);
-                                            otherTermCopy.identifier = method.identifier + '#' + otherTermCopy.identifier
+                                            otherTermCopy.identifier = otherTermCopy.identifier;
                                             otherTermCopy.type = 'lstring';
                                             otherTermCopy.multiple = true;
                                             method.narrowerTerms.push(otherTermCopy.identifier)
