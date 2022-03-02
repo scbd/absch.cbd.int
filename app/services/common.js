@@ -296,37 +296,6 @@ import 'components/scbd-angularjs-services/main';
                     return deferred.promise;
                 }
 
-                //==================================================================================             
-                this.removeDuplicateIdentifier = function(originalIdentifiers){
-
-                    if (!originalIdentifiers) 
-                        return;
-                    let splitIdentifier = [];
-                    let uniqueIdentifiers = [];
-                    originalIdentifiers.forEach((element) => {
-                        const identifierVersion = element.identifier.substring(element.identifier.indexOf('@') + 1);
-                        splitIdentifier.push({identifier: element.identifier.replace(/@.*$/,""), version : identifierVersion });	
-                    })
-                    splitIdentifier.sort(function (a, b) {
-                        return b.version - a.version;
-                    });
-                    let uniqueSplitIdentifier  =  _.uniqBy(splitIdentifier, function (e) {		
-						return e.identifier;
-					});
-                    uniqueSplitIdentifier.forEach((el)=> {
-                    uniqueIdentifiers.push({identifier : el.identifier+"@"+el.version})
-                    })
-                    return uniqueIdentifiers ;
-
-                    //   const uniqueIdentifiers = _.uniqWith(
-                    //     splitIdentifier,
-                    //     (first, second) =>
-                    //     first.identifier === second.identifier &&
-                    //     first.version < second.version
-                    //   );
-                    
-                }
-
                 this.languages = {
                     ar : "Arabic",
                     en : "English",
@@ -449,21 +418,64 @@ import 'components/scbd-angularjs-services/main';
         }
     ]);
 
-    export function getLimitedTerms(terms, excludedTerms) {
-        if(excludedTerms && excludedTerms.length>0){
-            let items = [];
-            let includedTerms  = [];
-            excludedTerms.forEach(exTerm=> {
-                includedTerms = _.filter(terms, function(item){
-                    return !_.includes(item.broaderTerms, exTerm)
-                });
-                items = _.filter(includedTerms, function(t){
-                    return !_.includes(exTerm, t.identifier)
-                })
+export function getLimitedTerms(terms, excludedTerms) {
+    if(excludedTerms && excludedTerms.length>0){
+        let items = [];
+        let includedTerms  = [];
+        excludedTerms.forEach(exTerm=> {
+            includedTerms = _.filter(terms, function(item){
+                return !_.includes(item.broaderTerms, exTerm)
             });
-            return items;
+            items = _.filter(includedTerms, function(t){
+                return !_.includes(exTerm, t.identifier)
+            })
+        });
+        return items;
+    }
+    else{
+        return terms;
+    }
+}
+
+//==================================================================================             
+export function uniqIdentifiers(originalIdentifiers){
+
+    if (!originalIdentifiers) 
+        return;
+
+    let splitIdentifier = [];
+    let uniqueIdentifiers = [];
+
+    splitIdentifier = originalIdentifiers.map((element) => {
+        let version;
+        if(~element.identifier.indexOf('@'))
+            version = element.identifier.substring(element.identifier.indexOf('@') + 1);
+        return { 
+            identifier: element.identifier.replace(/@.*$/,""), 
+            version : version 
+        };	
+    });
+
+    originalIdentifiers.forEach(e=>{
+
+        if(!~e.identifier.indexOf('@'))
+            uniqueIdentifiers.push(e);
+
+        const identifier = e.identifier.replace(/@.*$/,"");
+
+        if(uniqueIdentifiers.find(i=>e.identifier.replace(/@.*$/,"") == identifier))
+            return;
+
+        const identifiers = splitIdentifier.filter(i=>i.identifier ==  identifier)
+                                .sort((a, b) => a.version - b.version).reverse();
+        if(identifiers.length > 1){
+            uniqueIdentifiers.push({identifier : identifier+"@"+identifiers[0].version})
         }
         else{
-            return terms;
+            uniqueIdentifiers.push(e);
         }
-} 
+    });
+
+    return uniqueIdentifiers;
+
+}

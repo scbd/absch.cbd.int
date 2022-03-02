@@ -8,6 +8,7 @@ import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-lmo.directive";
 import '~/views/forms/directives/traits-selector.directive';
 import '~/views/forms/directives/view-terms-hierarchy';
+import { uniqIdentifiers } from '~/services/common'
 
 	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr', 'commonjs',
 		 function($http, $controller, thesaurusService, storage, $q, realm, solr, commonjs) {
@@ -48,7 +49,7 @@ import '~/views/forms/directives/view-terms-hierarchy';
 					return $scope.onBuildDocumentSelectorQuery(queryOptions);
 				}
 
-				$scope.onRrecipientOrganismsQuery = function(searchText){
+				$scope.onRecipientOrganismsQuery = function(searchText){
 
 					var queryOptions = {
 						realm     : realm.value,
@@ -91,6 +92,8 @@ import '~/views/forms/directives/view-terms-hierarchy';
 					if (/^\s*$/g.test(document.notes))
 						document.notes = undefined;
 
+					document.genes = uniqIdentifiers(document.genes);
+
 					return $scope.sanitizeDocument(document);
 				};
 				
@@ -101,7 +104,7 @@ import '~/views/forms/directives/view-terms-hierarchy';
 					if(newGenes.length){
 						updateOldGenes($scope.document);
 						$scope.loadingGeneTraits = true;
-						var queries = _.map(newGenes, function(identifier){return loadReferenceDocment(identifier).then(function(result){return result.data;})});
+						var queries = _.map(newGenes, function(identifier){return loadReferenceDocument(identifier).then(function(result){return result.data;})});
 						$q.all(queries)
 						.then(function(documents){
 							var newTraits = _(documents).map('body').map('traits').flatten().compact().flatten().uniq().value();
@@ -128,29 +131,22 @@ import '~/views/forms/directives/view-terms-hierarchy';
 
 					if(constructIds.length>0 && !$scope.document.genes)
 						$scope.document.genes = [];
-					
+				
 					_.forEach(constructIds, function(cons){
-						let existingIdentifier = _.find($scope.document.genes, function(el){
-							if(el.identifier.replace(/@.*$/,"") == cons.identifier.replace(/@.*$/,""))
-							{
-								const consVersion = cons.identifier.substring(cons.identifier.indexOf('@') + 1);
-								const existingVersion = el.identifier.substring(el.identifier.indexOf('@') + 1);
-
-								if(consVersion > existingVersion){
-								 _.remove($scope.document.genes, function(n) { return n.identifier == el.identifier;});
-								 $scope.document.genes.push({ identifier : cons.identifier })
-								}
-								return el.identifier
-							}
-						})
-
-						if(cons.identifier && !existingIdentifier){
+						let existing = $scope.document.genes.filter((e)=> e.identifier.replace(/@.*$/,"") == cons.identifier.replace(/@.*$/,""))
+						if(cons.identifier && !existing?.length){
 							$scope.document.genes.push({ identifier:cons.identifier })
 						}
+						else{
+							//replace all matching identifiers with the new one, the uniqIdentifiers fn wll remove duplicate one
+							existing.forEach(e=>{
+								e.identifier = cons.identifier
+							})
+						}
 					});
-					$scope.document.genes = _.uniqBy($scope.document.genes, function (e) {	
-						return e.identifier;
-					  });
+
+					$scope.document.genes = uniqIdentifiers($scope.document.genes);
+
 				}
 
 				$scope.lookupDetections = function(){
@@ -187,7 +183,7 @@ import '~/views/forms/directives/view-terms-hierarchy';
 				function updateOldGenes(document){
 					oldGenes = _.map(document.genes||[], 'identifier');
 				}
-				function loadReferenceDocment(identifier){
+				function loadReferenceDocument(identifier){
 					return storage.drafts.get(identifier, { info: true })					
 					.catch(function(e){
 						if (e.status == 404)

@@ -5,8 +5,9 @@ import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'views/forms/view/bch/view-lmo-gene.directive';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
+import { uniqIdentifiers } from '~/services/common'
 
-app.directive("viewModifiedOrganism", ['$location', "commonjs", function ($location, commonjs) {
+app.directive("viewModifiedOrganism", ['$location', function ($location) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -33,9 +34,8 @@ app.directive("viewModifiedOrganism", ['$location', "commonjs", function ($locat
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
-			//ToDo: same records were saved with different versions(identifier@..)
 			if($scope.document?.genes){
-				$scope.document.genes = commonjs.removeDuplicateIdentifier($scope.document.genes);
+				$scope.document.genes = uniqIdentifiers($scope.document.genes);
 			}
 		}
 	};
