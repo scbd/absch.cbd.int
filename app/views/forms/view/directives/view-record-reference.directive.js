@@ -78,6 +78,13 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 				return storage.documents.get(identifier, { info : true}, {headers})
 						.then(function(result){
 							//TODO: throw error if the documentType != 'focalPoint'
+							if(result?.data?.body?.contactOrganization){
+								return storage.documents.get(result.data.body.contactOrganization.identifier, { info : true})
+								.then(function(organizationDetails){
+									result.data.body.contactOrganizationDetail = { ...organizationDetails.data.body,  deletedOn:organizationDetails.data.deletedOn};
+									return result.data;
+								})
+							}
 							return result.data;
 						})
 						.catch(function(error, code){
