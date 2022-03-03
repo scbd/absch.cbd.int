@@ -3080,6 +3080,10 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 #Search-Filter strong{
       color:#555;
 }
+.evenly-spaced {
+	display: grid;
+	grid-template-columns: repeat(10, 1fr);
+}
 .display-content {
     display: contents;
 }

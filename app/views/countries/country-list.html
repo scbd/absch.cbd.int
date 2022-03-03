@@ -33,14 +33,7 @@
 			font-weight: bold;
 			color: #111!important;
 		}
-		
-		.evenly-spaced {
-			display: grid;
-			grid-template-columns: repeat(14, 1fr)
-		}
-		.abs-evenly-spaced{
-			grid-template-columns: repeat(10, 1fr)
-		}
+
 		.zero {
 			background-color: #DDD!important;
 		}
@@ -156,8 +149,7 @@
 						<span class="hidden-sm hidden-xs">Export</span>
 					</button>
             </div>
-			  <div class="col-xs-7 evenly-spaced center-text hidden-xs hidden-sm" 
-			    ng-class="{'abs-evenly-spaced': isABS}">                            
+			  <div class="col-xs-7 evenly-spaced center-text hidden-xs hidden-sm">                            
 				<div ng-repeat="header in headerCount" class="text-center">
 					<span style="cursor:pointer;" ng-click="sortTable(header.schema)" data-bs-toggle="tooltip" title="{{header.title|lstring:locale}}"
 						data-container="body">
@@ -194,8 +186,7 @@
 				</div>
 			</div>
 
-			<div class="col-md-7 evenly-spaced center-text hidden-xs" style="white-space:nowrap;margin-top:5px;"
-				ng-class="{'abs-evenly-spaced': isABS}">
+			<div class="col-md-7 evenly-spaced center-text hidden-xs" style="white-space:nowrap;margin-top:5px;">
 				<span class="color-litegrey text-center" ng-repeat="schema in country.schemas" ng-click="gotoCountryProfile(country.code, schema, $event)"> 
 					<span ng-bind="schema.shortCode"></span> <br class="hidden-sm">
 					<span class="label label-default"  ng-class="{'zero':schema.count==0, 'bg-green':schema.count>0}" >

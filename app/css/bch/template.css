@@ -99,4 +99,7 @@ body > div:first-child, .page-content {
 .app-bg-texture{
     background-color: #7FC2DA!important;
 }
-
+.evenly-spaced {
+	display: grid;
+	grid-template-columns: repeat(14, 1fr);
+}
