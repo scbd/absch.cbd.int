@@ -724,7 +724,7 @@ import 'angular-vue'
                         if(isBCH){
                             addFilter('partyToProtocol' , { 'sort': 1, 'type': 'partyStatus', 'name': 'Party to the Cartagena Protocol on Biosafety'             , 'id': 'partyToProtocol' , 'description': '' });
                             addFilter('NKLSParty'       , { 'sort': 2, 'type': 'partyStatus', 'name': 'Party to the Supplementary Protocol'                      , 'id': 'NKLSParty'       , 'description': '' });
-                            addFilter('inbetween'       , { 'sort': 3, 'type': 'partyStatus', 'name': 'Ratified, not yet Party Cartagena Protocol on Biosafety'  , 'id': 'inbetween'       , 'description': '' });
+                            addFilter('inbetween'       , { 'sort': 3, 'type': 'partyStatus', 'name': 'Ratified, not yet Party to the Cartagena Protocol on Biosafety'  , 'id': 'inbetween'       , 'description': '' });
                             addFilter('nonParty'        , { 'sort': 4, 'type': 'partyStatus', 'name': 'Not a Party to the Cartagena Protocol on Biosafety '      , 'id': 'nonParty'        , 'description': '' });
                         }
                         if(isABS){
