@@ -116,7 +116,7 @@
 								<span class="visible-sm visible-xs">PS</span>
 							</strong>
 							<strong ng-if="partyFilter == 'party'" ><i class="color-party fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">Parties</span>
+								<span class="hidden-sm hidden-xs">Parties</span> <span ng-if="isBCH"> to the Cartagena Protocol</span>
 							</strong>
 							<strong ng-if="partyFilter == 'NKLSParty'" ><i class="color-NKLSP fa fa-square"></i> 
 								<span class="hidden-sm hidden-xs">NKLS Parties</span>
@@ -133,7 +133,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('All');" > Show all </a></li>
 						<li role="separator" class="divider"></li>
-						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties <span ng-if="isBCH"> the Cartagena Protocol</span></a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties <span ng-if="isBCH"> to the Cartagena Protocol</span></a></li>
 						<li  ng-if="isBCH"><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('NKLSParty');" > <i class="color-NKLSP fa fa-square"></i> Parties to the Supplementary Protocol</a></li>
 						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('inbetween');" >  <i class="color-inbetween fa fa-square"></i>  Ratified, not yet Party <span ng-if="isBCH">to the Cartagena Protocol</span></a></li>
 						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-non-party fa fa-square"></i>  Non-Parties <span ng-if="isBCH">to the Cartagena Protocol</span></a></li>
@@ -177,7 +177,6 @@
 						<span ng-if="country.isParty" class="color-party" style="font-size:10px;margin-right:10px;">Party to the Nagoya Protocol</span>
 						<span ng-if="country.isInbetweenParty" class="color-inbetween" style="font-size:10px;margin-right:10px;">Ratified, not yet Party</span>
 						<span ng-if="country.isSignatory" style="font-size:10px;margin-right:10px;">Signatory</span>
-						<!--ToDo: entryIntoForce not shown for BCH, do we need for ABS ? -->
 						<span ng-if="country.entryIntoForce" class="color-grey color-non-party" style="font-size:10px;margin-right:20px;">since <span ng-bind="country.entryIntoForce|formatDate"></span></span>
 					</div>
 					<div ng-if="isBCH">
