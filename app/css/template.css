@@ -2966,7 +2966,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     cursor:pointer;
     color: #fff;
 }
-.countries-country-list .help-tour{
+.countries-list .help-tour{
     font-size:13px;
     margin:5px 10px 0 5px;
     text-transform: uppercase;
@@ -3080,7 +3080,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 #Search-Filter strong{
       color:#555;
 }
-.evenly-spaced {
+.countries-list .evenly-spaced {
 	display: grid;
 	grid-template-columns: repeat(10, 1fr);
 }
