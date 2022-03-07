@@ -53,11 +53,6 @@
                         <div ng-if="isBCH && !country.isNKLSParty" style="margin-top:10px; margin-bottom: 15px;">
                             <span class="color-non-party bold" style=" font-size: 1.3em !important;">Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
                         </div>
-                        <div ng-if="(country.isRatified) && country.dateDeposit"  style="margin-bottom:5px;">
-                            <label ng-if="country.instrument" ><span style="text-transform:capitalize;" ng-bind="country.instrument"></span> on:</label>
-                            <label ng-if="!country.instrument">Ratification on:</label>
-                            <span class="color-grey color-non-party bold" ng-bind="country.dateDeposit|formatDate"></span>
-                        </div>
                         <div style="margin-bottom:5px;" ng-if="isABS">
                             <label>Signatory:</label>
                             <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
