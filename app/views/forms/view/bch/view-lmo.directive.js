@@ -5,6 +5,7 @@ import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'views/forms/view/bch/view-lmo-gene.directive';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
+import { uniqIdentifiers } from '~/services/common'
 
 app.directive("viewModifiedOrganism", ['$location', function ($location) {
 	return {
@@ -33,7 +34,9 @@ app.directive("viewModifiedOrganism", ['$location', function ($location) {
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
-
+			if($scope.document?.genes){
+				$scope.document.genes = uniqIdentifiers($scope.document.genes);
+			}
 		}
 	};
 }]);
