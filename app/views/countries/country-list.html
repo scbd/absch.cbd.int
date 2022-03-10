@@ -122,10 +122,10 @@
 								<span class="hidden-sm hidden-xs">Parties to the Supplementary Protocol</span>
 							</strong>
 							<strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">Ratified, not yet Party to the Cartagena Protocol</span>
+								<span class="hidden-sm hidden-xs">Ratified, not yet Party<span ng-if="isBCH"> to the Cartagena Protocol</span></span>
 							</strong>
 							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-non-party fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">Non-Parties to the Cartagena Protocol</span>
+								<span class="hidden-sm hidden-xs">Non-Parties<span ng-if="isBCH"> to the Cartagena Protocol</span></span>
 							</strong>
 						</span>
                         <span class="caret"></span>
