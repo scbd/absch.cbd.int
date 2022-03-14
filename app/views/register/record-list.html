@@ -297,9 +297,9 @@
                                         </button>
                                     </div>
                              </div>
-                            <div ng-if="isRefrenceExist" class="alert alert-danger" role="alert" style="margin-top:10px;">
+                            <div ng-if="hasLinkedRecords" class="alert alert-danger" role="alert" style="margin-top:10px;">
                                 Please note that this record is referenced in other records, deleting this record will cause brocken links in those records.     
-                                <div class="row" style="margin-top:10px;" ng-show="!isIRCC && isRefrenceExist"> 
+                                <div class="row" style="margin-top:10px;" ng-show="!isIRCC && hasLinkedRecords"> 
                                     <div class="col-xs-12">  
                                         <button ng-show="security" type="button" class="btn btn-danger" ng-disabled="loading" 
                                             ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
@@ -312,7 +312,7 @@
                            <view-referenced-records ng-model="recordToDelete.identifier" on-data-fetch="onReferencedRecordsDataFetch(data)"></view-referenced-records>		
                            <div class="row" style="margin-top:10px;" ng-show="!isIRCC"> 
                                 <div class="col-xs-12">  
-                                <button ng-if="security && !isRefrenceExist" type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                                <button ng-if="security && !hasLinkedRecords" type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
                                     <span ng-if="!security.canDelete">Request deletion of this record </span>
                                     <span ng-if="security.canDelete"> Delete the record</span>
                                 </button> 

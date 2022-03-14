@@ -19,7 +19,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
             "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr','joyrideService',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
                 $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService) {
-                $scope.isRefrenceExist = false;
+                $scope.hasLinkedRecords = false;
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
 
@@ -176,7 +176,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 //
                 //============================================================
                 $scope.askDelete = function (record) {
-                    $scope.isRefrenceExist = false ;
+                    $scope.hasLinkedRecords = false ;
 
                     if (record.type == 'absPermit' && $scope.isPublished(record)) {
                         $scope.loading = true;                        
@@ -225,10 +225,10 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 //
                 //============================================================
                 $scope.onReferencedRecordsDataFetch = function (data) {
-                    if(data){
-                        $timeout(function () {
-                            $scope.isRefrenceExist = true;
-                        }, 100)                      
+                    if (data && Object.keys(data).length>0){ 
+                        $scope.$applyAsync(function () {
+                            $scope.hasLinkedRecords = true;
+                        }, 100)                    
                     }             
                 }
                 $scope.deleteRecord = function (record) {
