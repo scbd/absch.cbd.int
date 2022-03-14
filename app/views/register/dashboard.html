@@ -160,8 +160,8 @@
                                         <h4 style="padding:0;margin:0;" id="recordOverview">
                                             Record overview</h4>
                                     </td>
-                                    <td style="max-width:10%;" class="hidden-xs bold">
-                                        <span id="offlineFormat" class="pull-right">Offline formats</span></td>
+                                    <td class="hidden-xs bold offline-format-text">
+                                        <span id="offlineFormat" class="pull-right display-content">Offline formats</span></td>
                                     <td id="publishFormat" style="width:7%;" class="hidden-xs text-center bold"> <span
                                             class="label label-success"></span> Published</td>
                                     <td style="width:7%;" class="hidden-xs text-center bold"> <span
@@ -205,8 +205,8 @@
                                             <span ng-if="schemas['focalPoint'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                             data-bs-toggle="tooltip" data-html="true" title="{{schemas['focalPoint'].description|lstring:locale}}" data-container="body"></span>
                                         </td>
-                                        <td style="max-width:10%">
-                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='focalPoint'"></span>
+                                        <td class="offline-format-language">
+                                            <span class="hidden-xs pull-right display-content" ng-include="'offline-formats'" onload="schema='focalPoint'"></span>
                                         </td>
                                         <td style="width:21%;" colspan="3" class="text-center hidden-xs">
                                             <a rel="noopener" href="/kb/tags/getting-started/Procedure-for-nominating-National-Focal-Points/619c555d4f1f30000140eef4" ng-if="isBch">
@@ -236,8 +236,8 @@
                                             <span rel="noopener" class="color-darkgrey" style="font-weight:500;">
                                                ABS Publishing Authority (PA) </span>
                                         </td>
-                                        <td style="max-width:10%">
-                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='publishingAuthority'"></span>
+                                        <td class="offline-format-language">
+                                            <span class="hidden-xs pull-right display-content" ng-include="'offline-formats'" onload="schema='publishingAuthority'"></span>
                                         </td>
                                         <td style="width:21%;" colspan="3" class="text-center hidden-xs">
                                             <a rel="noopener" href="/kb/tags/abs/Designating-or-updating-the-Publishing-Authority-PA-or-National-Authorized-Users-NAUs-/619ea0429b7a7500012450c3" >
@@ -275,8 +275,8 @@
                                             <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                                 data-bs-toggle="tooltip" data-html="true" title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
-                                        <td style="max-width:10%">
-                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
+                                        <td class="offline-format-language">
+                                            <span class="hidden-xs pull-right display-content" ng-include="'offline-formats'"></span>
                                         </td>
                                         <td style="width:7%;" class="text-center  hidden-xs"><a rel="noopener" translation-url
                                                 ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/published"
@@ -337,8 +337,8 @@
                                             data-bs-toggle="tooltip" data-html="true" title="{{schemas['contact'].description|lstring:locale}}" data-container="body"></span>
 
                                     </td>
-                                    <td style="max-width:10%">
-                                        <span class="hidden-xs pull-right" ng-include="'offline-formats'" onload="schema='contact'"></span>
+                                    <td class="offline-format-language">
+                                        <span class="hidden-xs pull-right display-content" ng-include="'offline-formats'" onload="schema='contact'"></span>
                                     </td>
                                     <td style="width:7%;" class="text-center hidden-xs"><a rel="noopener" translation-url
                                             ng-href="/register/CON/status/published" class="label label-success"
@@ -403,8 +403,8 @@
                                             <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
                                             data-bs-toggle="tooltip" data-html="true" title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span>
                                         </td>
-                                        <td style="max-width:10%">
-                                            <span class="hidden-xs pull-right" ng-include="'offline-formats'"></span>
+                                        <td class="offline-format-language">
+                                            <span class="hidden-xs pull-right display-content" ng-include="'offline-formats'"></span>
                                         </td>
                                         <td style="width:7%;" class="text-center  hidden-xs"><a rel="noopener" translation-url
                                                 ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/published"
@@ -454,7 +454,7 @@
             </script>
 
             <script type="text/ng-template" trados-translation="true" id="offline-formats">                
-                <span ng-repeat="(code, lang) in ::languages" title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
+                <span class="display-content" ng-repeat="(code, lang) in ::languages" title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
                     ng-if="::offlineFormats[schema][code]">
                     <a rel="noopener" target="_blank" ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a>
                     <span ng-if="::!$last"> | </span>
