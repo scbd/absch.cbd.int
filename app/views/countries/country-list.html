@@ -116,16 +116,16 @@
 								<span class="visible-sm visible-xs">PS</span>
 							</strong>
 							<strong ng-if="partyFilter == 'party'" ><i class="color-party fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">Parties</span>
+								<span class="hidden-sm hidden-xs">Parties</span> <span ng-if="isBCH"> to the Cartagena Protocol</span>
 							</strong>
 							<strong ng-if="partyFilter == 'NKLSParty'" ><i class="color-NKLSP fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">NKLS Parties</span>
+								<span class="hidden-sm hidden-xs">Parties to the Supplementary Protocol</span>
 							</strong>
 							<strong ng-if="partyFilter == 'inbetween'" ><i class="color-inbetween fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">Ratified, not yet Party to the Cartagena Protocol</span>
+								<span class="hidden-sm hidden-xs">Ratified, not yet Party<span ng-if="isBCH"> to the Cartagena Protocol</span></span>
 							</strong>
 							<strong ng-if="partyFilter == 'nonparty'" ><i class="color-non-party fa fa-square"></i> 
-								<span class="hidden-sm hidden-xs">Non-Parties to the Cartagena Protocol</span>
+								<span class="hidden-sm hidden-xs">Non-Parties<span ng-if="isBCH"> to the Cartagena Protocol</span></span>
 							</strong>
 						</span>
                         <span class="caret"></span>
@@ -133,7 +133,7 @@
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
                         <li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('All');" > Show all </a></li>
 						<li role="separator" class="divider"></li>
-						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties <span ng-if="isBCH"> the Cartagena Protocol</span></a></li>
+						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('party');" > <i class="color-party fa fa-square"></i> Parties <span ng-if="isBCH"> to the Cartagena Protocol</span></a></li>
 						<li  ng-if="isBCH"><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('NKLSParty');" > <i class="color-NKLSP fa fa-square"></i> Parties to the Supplementary Protocol</a></li>
 						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('inbetween');" >  <i class="color-inbetween fa fa-square"></i>  Ratified, not yet Party <span ng-if="isBCH">to the Cartagena Protocol</span></a></li>
 						<li><a rel="noopener" translation-url  href="#" ng-click="setPartyFilter('nonparty');" > <i class="color-non-party fa fa-square"></i>  Non-Parties <span ng-if="isBCH">to the Cartagena Protocol</span></a></li>
@@ -144,7 +144,7 @@
 						 multiple placeholder="Regions" display-count="0" show-selection-pop-over="true" icon="fa-object-group">
 					</div>
 					
-					<button id="exportingRecords" type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
+					<button ng-if="list.length" id="exportingRecords" type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="readyForExport||loading">					
 						<i class="fa fa-download" ></i> 
 						<span class="hidden-sm hidden-xs">Export</span>
 					</button>
@@ -160,6 +160,7 @@
 			</div>
 		</div>
 		<!--end row-->
+		<div ng-if="!list.length"  class="row" style="margin:0;border-bottom:2px solid #DDD;padding:5px 20px 10px 20px;"> <span>No countries found for selected filter</span> </div>
 		<div class="row linkWhite" style="margin:0;border-bottom:2px solid #DDD;padding:5px 0 10px 0;" ng-click="gotoCountryProfile(country.code)"
 			ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
 			<div class="col-md-5">

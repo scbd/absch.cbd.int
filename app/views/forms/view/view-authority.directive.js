@@ -2,7 +2,6 @@ import app from 'app';
 import _ from 'lodash';
 import template from "text!./view-authority.directive.html";
 import 'views/directives/record-options';
-import 'views/directives/party-status';
 import 'services/main';
 import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/view-terms-hierarchy';

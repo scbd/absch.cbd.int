@@ -376,11 +376,16 @@ max-width: 90%;
 .new-css-abs-card-footer>a {
     color: #FFF !important;
 }
-.party-status-align {
+.search-result-heading .party-status-align {
     margin-left:10px; 
-    display:inline-block; 
-    margin-top: -22px; 
-    vertical-align: bottom
+    vertical-align: bottom;
+    display: block;
+}
+.bs5.search-result-heading a{
+    text-decoration: none;
+}
+.search-result-heading .party-date-align{
+    margin-left: 51px;
 }
 @media (max-width: 768px) {
     .new-css-callout-national {
@@ -401,11 +406,8 @@ max-width: 90%;
     .new-css-down-margin{
         margin-bottom: 30px
     }
-    .party-status-align {
-        margin-left:0; 
-        display:inline-block; 
-        margin-top: 0; 
-        vertical-align: bottom
+    .search-result-heading .party-date-align{
+        margin-left: 0px;
     }
 }
 .country-item-name .table-map tr td:nth-child(1) span{
