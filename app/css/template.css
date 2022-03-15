@@ -3080,3 +3080,16 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
 #Search-Filter strong{
       color:#555;
 }
+.display-content {
+    display: contents;
+}
+.register-content #SubmitPage .offline-format-text {
+    max-width:10%;
+    text-align:right;
+    padding-right: 20px;
+}
+.register-content #SubmitPage .offline-format-language {
+    max-width:10%;
+    text-align:right;
+    padding-right: 10px;
+}
