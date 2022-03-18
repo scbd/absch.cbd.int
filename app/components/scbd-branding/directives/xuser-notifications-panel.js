@@ -273,7 +273,7 @@ import './header/xuser-notification-config-service';
                     }
 
                     $scope.schemaType = function(schema){
-                        return realm.schemas[schema].type
+                        return realm.schemas[schema]?.type
                     }
                     getNotification(1);//notification count;
                     getNotification();

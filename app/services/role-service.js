@@ -80,7 +80,7 @@ import './app-config-service'; ;
 			function isSchemaUser(schema, schemaType){
 				return 	isPublishingAuthority(schema, schemaType) || 
 						isNationalAuthorizedUser(schema, schemaType) || 
-						(isNationalFocalPoint() && realm.schemas[schema].type=='national');
+						(isNationalFocalPoint() && realm.schemas[schema]?.type=='national');
 			}
 		}
 
