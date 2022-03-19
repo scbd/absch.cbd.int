@@ -6,13 +6,9 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
     function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout) {
 
         var uniqueId = $route.current.params.documentId;
-        var language;
-        if(!$route.current.params.lang)
-            language = ($route.current.params.lang||'')
- 
+        var language = ($route.current.params.lang||$location.search()?.lang||''); 
 
         function getPdfLink(){
-
             //15 minute expiry
             var document = {
                 storageType : "km-document",
@@ -27,8 +23,11 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             .then(function(response){
                 var id= response.data.id;
                 return $q.when($http.get('/api/v2018/document-sharing/'+id))
-                        .then(function(result){                            
-                            $location.url('/pdf/draft-documents/'+uniqueId + '/'+ result.data.urlHash + (language ? '': '?mixLocale=true&shareId='+id))
+                        .then(function(result){                          
+                            $location.url('/pdf/draft-documents/'+uniqueId + '/'+ 
+                                            result.data.urlHash +
+                                            `?lang=${language}`+
+                                            (language ? '': 'mixLocale=true&shareId='+id))
                         })
             });
         }
