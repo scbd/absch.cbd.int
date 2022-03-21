@@ -157,13 +157,8 @@ import 'views/forms/edit/abs/edit-measure-matrix-directive';
                 if (document.expires !== undefined)
                     delete document.expires;
 
-                if (!$scope.isInLibrary("absch", document))
+                if (!realm.is('ABS'))
                     document.absMeasures = undefined;
-
-                if (!$scope.isInLibrary("bch", document)) {
-                    document.cpbSubjectAreas = undefined;
-                    document.cpbSubjectLmos = undefined;
-                }
 
                 if (!$scope.isJurisdictionRegional(document))
                     document.jurisdictionRegions = undefined;

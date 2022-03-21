@@ -144,26 +144,6 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
             });
     };
 
-
-    //==================================
-    //
-    //==================================
-    $scope.isInLibrary = function(name, document) {
-      document = document || $scope.document;
-
-      if (!document || !document.libraries)
-        return false;
-
-      var qLibraries = Enumerable.from(document.libraries);
-
-      if(name=="chm"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:chm";    });
-      if(name=="absch") return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:abs-ch"; });
-      if(name=="bch"  ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:bch";    });
-      if(name=="ebsa" ) return qLibraries.any(function(o){ return o.identifier == "cbdLibrary:ebsa";   });
-
-      return false;
-    };
-
     //==================================
     //
     //==================================
