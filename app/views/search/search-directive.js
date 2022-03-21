@@ -1014,7 +1014,6 @@ import 'angular-vue'
                                 resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
                             else if(viewType == 'group'){
-                                console.log('h')
                                 if(sortFields == 'updatedDate_dt desc')
                                     $scope.searchResult.sortFields = sortFields = ['government_EN_s asc', sortFields];
                         
