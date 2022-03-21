@@ -81,8 +81,24 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                 return saveLink(newDocument);
             }
 
-            $scope.shareEmail = function(){                     
-                saveLink($scope.document);
+            $scope.shareEmail = function(shareEmails){  
+                if(!shareEmails)
+                    return;
+
+                let document = {
+                    storageType: "km-document",
+                    sharedData : {
+                        identifier       : $scope.identifier,
+                        restrictionField : $scope.restrictionField
+                    },
+                    sharedWith: {
+                        emails           : shareEmails
+                    }
+                }
+                if($scope.restrictionFieldValue)
+                    document.sharedData.restrictionFieldValue = $scope.restrictionFieldValue.toString();                   
+
+                saveLink(document);
             }
 
             function saveLink(document){
@@ -100,7 +116,7 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                     var id= response.id || document._id;
                     return $q.when(get(id))
                             .then(function(data){                            
-                                $scope.document = data;
+                                $scope.document = undefined;
                                 if(!$scope.sharedLinks)
                                     $scope.sharedLinks = [];
                                 $scope.sharedLinks.push(data);
@@ -191,20 +207,7 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                 .then(function(response){
                     if(response && response.length > 0){
                         $scope.sharedLinks = response;
-                        $scope.document = _.head(response);
                     }
-                    else{
-                        $scope.document = {}
-                        $scope.document = $scope.document || {};
-                        $scope.document.storageType = "km-document";
-                        $scope.document.sharedData = {
-                            "identifier"            : $scope.identifier,
-                            "restrictionField"      : $scope.restrictionField
-                        };
-                        if($scope.restrictionFieldValue)
-                            $scope.document.sharedData.restrictionFieldValue = $scope.restrictionFieldValue.toString();
-                    }
-                    return $scope.document;
                 })
                 .finally(function(){
                     $scope.isLoading = false;

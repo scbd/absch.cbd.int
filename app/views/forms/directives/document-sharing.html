@@ -38,7 +38,11 @@
                                         <i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> loading...
                                 </div>
                                 <div class="content" ng-hide="isLoading">
-                                    <label>Anyone with the link can view this draft document and will continue to see the updates until the draft has been published or deleted.</label>
+                                    <br/>
+                                    <div class="alert alert-info">
+                                        <i class="fa fa-info-circle"></i>
+                                        Anyone with the link can view this draft document and will continue to see the updates until the draft has been published or deleted.
+                                    </div>
                                     <div style="margin:auto" class="pull-right">
                                         <a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">Create link</a>
                                         <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i>
@@ -48,7 +52,7 @@
                                             <tr>
                                                 <td>#</td>
                                                 <td>Expiry/Status</td>
-                                                <td>Link</td>
+                                                <td>Link/Email(s)</td>
                                                 <td class="hidden-xs">Created on</td>
                                             </tr>
                                             <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
@@ -62,12 +66,13 @@
                                                 <td width="70%">
                                                     <div class="btn-group" style="width:100%">
                                                         <div class="input-group" >
-                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
-                                                            <span style="cursor:pointer" class="input-group-addon" id="basic-addon1">
+                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::link.sharedWith.emails}}" disabled readonly/>
+                                                            <input ng-if="!link.sharedWith.emails" type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/>
+                                                            <span  ng-if="!link.sharedWith.emails" style="cursor:pointer" class="input-group-addon" id="basic-addon1">
                                                                 <a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"> </i> 
                                                                     <span class="hidden-xs">Open</span></a>
                                                             </span>
-                                                            <span style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)">
+                                                            <span  ng-if="!link.sharedWith.emails" style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)">
                                                                 <i class="fa fa-copy"> </i> <span class="hidden-xs">Copy</span></span>
                                                             <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)">
                                                                 <i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i>
@@ -92,19 +97,25 @@
                         <div role="tabpanel" class="tab-pane" id="email">
                             <div class="row">
                                 <div class="content">
-                                    <div>
+                                    <br/>
+                                    <div class="alert alert-info">
+                                        <i class="fa fa-info-circle"></i>
                                         Recipients will receive an email with a link to view this draft document.
                                     </div>
                                     <hr/>Emails
                                     <br/>
-                                    <input type="text" placeholder="enter email" class="form-control" ng-model="document.sharedWith.emails" />
+                                    <div class="input-group" >
+                                        <input type="text" placeholder="enter email"  class="form-control" ng-model="shareEmails" />
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-primary pull-right" ng-click="shareEmail(shareEmails)" ng-disabled="status=='creatingLink'">Send</button>
+                                        </span>
+                                    </div>
                                     <div>
                                         <span style="font-size: smaller;color: #777575;">Use commas to separate multiple email addresses. Recipients must log in to the Clearing-House with this email address in order to view the draft record.</span>
                                     </div>
                                     <div>
                                         <span ng-if="status=='creatingLink'">
-                                            <i class="fa fa-spin fa-spinner" /> updating... </span>
-                                        <button type="button" class="btn btn-primary pull-right" ng-click="shareEmail()" ng-disabled="status=='creatingLink'">Send</button>
+                                            <i class="fa fa-spin fa-spinner"></i> updating... </span>                                       
                                     </div>
                                     <br/>
                                 </div>
@@ -113,7 +124,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Close</button>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Close</button>
+                    </div>
                 </div>
             </div>
         </div>
