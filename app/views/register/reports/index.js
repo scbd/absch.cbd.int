@@ -13,10 +13,16 @@ import 'views/register/directives/register-top-menu';
             //     };
                
             // }
-            if(realm.is('ABS'))
-                $scope.reports = await import('~/app-data/abs/kibana-reports.js');
-            else
-                $scope.reports = await import('~/app-data/bch/kibana-reports.js');
+            try{
+                $scope.loading = true;
+                if(realm.is('ABS'))
+                    $scope.reports = (await import('~/app-data/abs/kibana-reports.js')).reports;
+                else
+                    $scope.reports = (await import('~/app-data/bch/kibana-reports.js')).reports;
+            }
+            finally{
+                $scope.loading = false;
+            }
         }
     ];
 
