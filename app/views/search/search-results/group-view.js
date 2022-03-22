@@ -50,7 +50,6 @@ import { iconFields } from '~/views/forms/view/bch/icons';
 
                     var groupField = groupFieldMapping.groupField;
                     var fieldMapping = groupFieldMappings(groupField);
-console.log('hello')
                     var sortBy = 'government_EN_s asc';
                     var sortFields = sort||$scope.searchResult.sortFields||['government_EN_s asc'];
                     if(typeof sortFields == 'string')
