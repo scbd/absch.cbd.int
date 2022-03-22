@@ -3,7 +3,8 @@
     <link href="/app/css/record.css" rel="stylesheet">
     <span register-top-menu></span>
 
-    <div class="register-content-header" style="margin:20px 20px 0 20px;" ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
+    <div class="register-content-header" style="margin:20px 20px 0 20px;" 
+    ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
 
          <div style="padding:5px 5px;">
             <span class="btn-group pull-right dashboard-tour">
@@ -13,13 +14,10 @@
                 </a>
             </span>
             <h3 style="padding: 0 5px 0 5px; margin: 0; font-weight: normal;"> 
-                <a rel="noopener" href="/register/{{type}}" class="color-white">{{type|mapSchema|schemaName}} ({{type}})  </a>
-
-                <!-- <span class="helpinfoInline"  >
-                        <a rel="noopener" href="/register/{{type}}"><i class="glyphicon glyphicon-remove pull-right color-white"></i></a>
-                </span> -->
+                <a rel="noopener" href="/register/{{type}}" class="color-white">
+                    <span ng-bind="type|mapSchema|schemaName"></span> (<span ng-bind="type"></span>)  
+                </a>
              </h3>
-
         </div>
     </div>
     <joyride ng-if="tourOn"></joyride>

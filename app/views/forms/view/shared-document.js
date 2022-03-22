@@ -17,7 +17,7 @@ function($scope, $http, $q, $route, locale){
                     $scope.sharedData = {...result.data};
                     $scope.document = {...result.data.sharedData.document.body};
                     delete result.data.sharedData.document.body;
-                    // $scope.documentInfo = {...result.data.sharedData.document};
+                    $scope.documentInfo = {...result.data.sharedData.document};
                     $scope.status = 'ready'
                 }
             })

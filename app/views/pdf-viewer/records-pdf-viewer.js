@@ -22,10 +22,10 @@ import 'components/scbd-angularjs-services/main';
 export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route', 'realm', '$timeout',
     function ($scope, $http, $q, $location, $sce, locale, $route, realm, $timeout) {
 
-        $scope.pdfLocale = locale;
+        $scope.pdfLocale = $location.search()?.lang || locale;
         $scope.pdf = {};
         $scope.loading = true;
-        
+                
         var uniqueId = ($route.current.params.documentId + '-' + ($route.current.params.revision||'')).replace(/-$/, '')
        
         $scope.pageLoaded = function(){
@@ -64,7 +64,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             return $sce.trustAsResourceUrl(src);
         }
         
-        function getPdfSrc(pdfLocale){
+        function getPdfSrc(pdfLocale, force){
             $scope.pdf.fileName = uniqueId + '-' + pdfLocale + '.pdf';
             
             var devRealm = /-DEV$/
@@ -73,37 +73,47 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
                 baseApiUrl = '';
 
             var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
+            
+            if($route.current.params.code){
+                src = '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?code={{code}}';
+            }
+            
+            if(force){
+                src += '&force=true&t=' + new Date().getTime();
+            }
+
             src = src   .replace("{{realm}}", realm.value)
                         .replace("{{locale}}", pdfLocale)
                         .replace("{{type}}", $route.current.params.type)
                         .replace("{{documentId}}", $route.current.params.documentId)
-                        .replace("documentID", $route.current.params.type == 'draft-documents' ? 'code':'documentID')
                         .replace("{{revision}}", $route.current.params.revision)
-                        .replace("{{schema}}", $route.current.params.schema);
+                        .replace("{{schema}}", $route.current.params.schema)
+                        .replace("{{code}}", $route.current.params.code);
             return src;
         }
 
         function loadPdfDocumentDetails(code){
+            const language = $scope.pdfLocale||locale||'en';
             if($route.current.params.type == 'draft-documents'){
                 $http.get('/api/v2018/document-sharing/'+ code)
                 .then(function(result){
                     if(result.data.sharedData){
                         $scope.sharedData = result.data.sharedData;
                         $scope.pdf.uniqueId = uniqueId = $scope.sharedData.document.workingDocumentID + '-draft';
-                        $scope.pdf.fileName = uniqueId + '-' + locale + '.pdf';
+                        $scope.pdf.fileName = uniqueId + '-' + language + '.pdf';
                         $scope.pdf.uniqueId = uniqueId;
                     }
                 })
-                .then(()=>$scope.loadLangPdf(locale||'en'))
+                .then(()=>$scope.loadLangPdf(language))
                 .catch(e=>{
                     $scope.error = e.data
                 })
             }
             else{
                 $scope.pdf.uniqueId = uniqueId;
-                $scope.pdf.fileName = uniqueId + '-' + locale + '.pdf';
-                $scope.pdf.src = getPdfSrc($scope.pdfLocale);
-                $timeout(()=>$scope.loadLangPdf(locale||'en'), 100);    
+                $scope.pdf.fileName = uniqueId + '-' + language + '.pdf';
+                $scope.pdf.src = getPdfSrc(language);
+                $timeout(()=>$scope.loadLangPdf(language), 100);    
             }
         }
 

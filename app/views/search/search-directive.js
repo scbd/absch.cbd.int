@@ -475,7 +475,6 @@ import 'angular-vue'
                     $scope.switchTab = function(tab){
                         if($scope.searchResult.currentTab == tab)
                             return;
-
                         $scope.searchResult.currentTab = tab;
                         updateQueryString('tab',tab);
                         updateQueryResult();
@@ -1015,6 +1014,9 @@ import 'angular-vue'
                                 resultQuery = $scope.searchResult.listViewApi.updateResult(queryOptions, sortFields, pageNumber||1);
                             }
                             else if(viewType == 'group'){
+                                if(sortFields == 'updatedDate_dt desc')
+                                    $scope.searchResult.sortFields = sortFields = ['government_EN_s asc', sortFields];
+                        
                                 queryOptions.groupByFields = $scope.searchResult.groupByFields;                                
                                 updateQueryString('group', queryOptions.groupByFields);
                                 resultQuery = $scope.searchResult.groupViewApi.updateResult(queryOptions, sortFields, pageNumber||1);

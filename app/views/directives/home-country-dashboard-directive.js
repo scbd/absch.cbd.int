@@ -82,7 +82,7 @@ import 'views/directives/block-region-directive';
                                 referenceSchemas = ['resource', 'modifiedOrganism', 'dnaSequence', 'organism']
                             var referenceRecords = _(_.union(referenceSchemas, scbdSchemas))
                                                     .map(function(schema){ 
-                                                        return {type:realm.schemas[schema].type, schema:schema, countryCount :0, recordCount : 0, title : realm.schemas[schema].title, shortCode : realm.schemas[schema].shortCode };
+                                                        return {type:realm.schemas[schema]?.type, schema:schema, countryCount :0, recordCount : 0, title : realm.schemas[schema]?.title, shortCode : realm.schemas[schema]?.shortCode };
                                                     }).compact().value();
 
                             var referenceRecordsQuery = {

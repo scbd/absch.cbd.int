@@ -3097,3 +3097,7 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     text-align:right;
     padding-right: 10px;
 }
+
+#CBD-Branding .signin-text{
+    padding-left: 2px;
+}

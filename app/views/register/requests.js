@@ -157,8 +157,7 @@ import 'views/forms/view/record-loader.directive';
                         queries.$and.push({ "data.metadata.schema": { $in: $scope.filterType }})
 
                     var expired = moment.utc(new Date()).subtract("12", "weeks");
-                    console.log(expired);
-
+                    
                     var status = $scope.filterStatus || 'Pending';
 
                     if((roleService.isPublishingAuthority() || roleService.isNationalAuthorizedUser() || roleService.isNationalFocalPoint()) && $rootScope.user.government ){

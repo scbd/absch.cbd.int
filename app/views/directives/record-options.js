@@ -75,24 +75,27 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 }
 
                 function getPdfUrl(){
-                    var documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);
-                    
-                    var pdfType = 'documents'
 
-                    if('absPermit' == $scope.internalDocument.header.schema)
+                    const documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);                    
+                    const pdfType = 'documents'
+                    let pdfDownloadUrl  =  '/pdf/:type/:schema/:documentId/:revision';
+                    const schema = $scope.internalDocument.header.schema;
+
+                    if('absPermit' == schema)
                         pdfType = 'ircc-certificate';
-                    else if('absCheckpointCommunique' == $scope.internalDocument.header.schema)
+                    else if('absCheckpointCommunique' == schema)
                         pdfType = 'cpc-certificate';
-                    else if(_.includes(appConfigService.scbdSchemas, $scope.internalDocument.header.schema))
+                    else if($scope.internalDocumentInfo.workingDocumentID){//its a draft record
+                        pdfDownloadUrl = `/pdf/draft-documents/:schema/${$route.current.params.code}`;
+                    }
+                    else if(_.includes(appConfigService.scbdSchemas, schema))
                         pdfType = 'scbd-records'
 
-                    var pdfDownloadUrl  =  '/pdf/:type/:schema/:documentId/:revision';
                     pdfDownloadUrl      = pdfDownloadUrl.replace(':type'        , pdfType)
                                                         .replace(':documentId'  , documentId)
                                                         .replace(':revision'    , ($scope.internalDocumentInfo||{}).revision||'')
-                                                        .replace(':schema'      , $scope.internalDocument.header.schema);
+                                                        .replace(':schema'      , schema);
                     return pdfDownloadUrl;
-                    // $window.open(pdfDownloadUrl);
                 }
             }
         };
