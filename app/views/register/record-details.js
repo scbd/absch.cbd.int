@@ -104,7 +104,7 @@ import 'views/directives/task-id-directive';
 
                 return $q.when(IStorage.drafts.delete(record.identifier)).then(function () {
 
-                    recordDeleted(record);
+                    // recordDeleted(record);
                     $scope.recordToDelete = null;
 
                 }).finally(function () {

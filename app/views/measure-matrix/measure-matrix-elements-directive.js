@@ -144,7 +144,7 @@ import 'views/directives/block-region-directive';
                             if ($scope.binding) {
                                 if(!$scope.binding.geneticResources || !$scope.binding.geneticResources.elements || !$scope.binding.geneticResources.answer){
                                     //delete  from list
-                                   geneticResource = _.find($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
+                                   const geneticResource = _.find($scope.terms, {identifier : 'CD2EF4DD-1B94-4283-9E97-8DDC7F23CB6F'});
                                    if(!geneticResourceTermCopy && geneticResource)//for single MM when amending msr has GR
                                         geneticResourceTermCopy = geneticResource;
 

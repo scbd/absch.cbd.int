@@ -105,7 +105,7 @@ import realmConfigurations from 'realmConf';
                         var roles = [];
                         
                         if(roleName){
-                            roles = schemaDetails[role]; //get specific role PA OR NAU oR NFP                    
+                            roles = schemaDetails[roleName]; //get specific role PA OR NAU oR NFP                    
                             roles = roles || this.fallbackRoles(schemaDetails.type, roleName);
                         }
                         else {
