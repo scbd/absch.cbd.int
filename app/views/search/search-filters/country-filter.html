@@ -5,7 +5,7 @@
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setCountryFilter('All')" style="padding-right:10px;white-space:nowrap;" class="letter color-black" ng-class="{'letter-active':!cf_countryFilter && !cf_partyFilter}" >
              <!--<i ng-class="{'fa-check-square':!cf_countryFilter && !cf_partyFilter}" class="fa fa-square color-black"></i> -->
              All</a>
-        <span ng-repeat="letter in alphabet">
+        <span ng-repeat="letter in alphabet" class="alphabet">
             <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setCountryFilter(letter)" class="letter" ng-class="{'letter-active':cf_countryFilter == letter}" ng-bind="letter"></a>
         </span>
         <a rel="noopener" translation-url  ng-href="#" ng-click="cf_setPartyFilter('party')" style="padding-left:10px;white-space:nowrap;" class="letter color-party" ng-class="{'letter-active':cf_partyFilter == 'party'}"> 

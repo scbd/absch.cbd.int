@@ -2,6 +2,7 @@ import app from 'app';
 import template from 'text!./country-filter.html';
 import _ from 'lodash';
 import 'services/main';
+import alphabets from '~/app-data/common/search/alphabets.json'
 
     app.directive('countryFilter', ['locale', function(locale) {
         return {
@@ -16,7 +17,7 @@ import 'services/main';
                $scope.cf_countries = searchDirectiveCtrl.getSearchFilters("country");
                $scope.cf_countryFilter = null;
                $scope.cf_partyFilter = null;
-               $scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];
+               $scope.alphabet = alphabets;
                
               //*************************************************************************************************************************************
                $scope.cf_setCountryFilter = function(letter) {

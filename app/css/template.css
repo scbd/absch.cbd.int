@@ -1300,6 +1300,9 @@ div.recordDefault:hover {
 #Search-Filter .letter-active {
     font-weight: bold;
 }
+#Search-Filter .alphabet .letter{
+    padding-right: 1px;
+}
 #Search-Filter .date {
     text-transform: uppercase;
 }
