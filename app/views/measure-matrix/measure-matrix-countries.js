@@ -103,7 +103,7 @@ export default ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$e
                 if(measure){
                     return measure;
                 }
-                return promise;$http.get('/api/v2013/documents/' + linked.identifier);
+                return promise;$http.get('/api/v2013/documents/' + identifier);
 
             }
 

@@ -598,17 +598,11 @@ import 'angular-vue'
                                 .catch(function (err) {
                                     console.error(err)//ToDo: will update for correct error text
 
-                                    if (err && err.status == 404) {
-                                        delay = (delay || 0) + 1000
-                                        $timeout(updateRecord(document, delay), delay);
+                                    if(err.status == 403){
+                                        $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
                                     }
                                     else{
-                                        if(err.status == 403){
-                                            $scope.searchAlertError = "The search query is currently private and cannot be accessed by you. Please contact the owner to make the query public for further use.";
-                                        }
-                                        else{
-                                            $scope.searchAlertError = err?.statusText;
-                                        }
+                                        $scope.searchAlertError = err?.statusText;
                                     }
                                 });
                             }
@@ -1259,7 +1253,7 @@ import 'angular-vue'
                         };
 
                         if(!boostFields[field])
-                            boostField[field] = 1;
+                            boostFields[field] = 1;
 
                         var freeTextVals = _(filters).map(function(filter){
                                                 if(!filter.disabled && !filter.excludeResult){ 

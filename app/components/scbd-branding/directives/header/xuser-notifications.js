@@ -90,13 +90,6 @@ import './xuser-notification-config-service';
                                             processNotifications(data);
                                         }
                                     })
-                                    .catch(function (error) {
-                                        if (error.data && error.data.statusCode == 401) {
-                                            // console.log('calling get fetch from notifications' );
-                                            //authentication.getUser(true);
-                                            continueNotification = false;
-                                        }
-                                    })
                                     .finally(function () {
                                         $scope.loading = false;
                                     });

@@ -166,7 +166,7 @@ import 'components/scbd-angularjs-services/main';
                             
                             record.sendEmail = flag;
 
-                            operation = IGenericService.update('v2016', 'me/subscriptions', record._id, record);
+                            const operation = IGenericService.update('v2016', 'me/subscriptions', record._id, record);
 
                             operation.then(function (data) {
                                 
