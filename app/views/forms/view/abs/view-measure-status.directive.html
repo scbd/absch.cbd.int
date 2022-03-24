@@ -23,8 +23,8 @@
 
 		<div ng-show="document.jurisdiction">
 			<label>Jurisdiction(s)</label>
-			<div compare-val>
-			<km-value-ml value="document.jurisdiction | term:locale" locales="locale"></km-value-ml>
+			<div class="km-value" compare-val>
+				<span ng-bind="document.jurisdiction|term:locale"></span>
 			</div>
 		</div>
 
@@ -52,8 +52,8 @@
 
 		<div ng-show="document.status">
 			<label>Status of your country’s (or jurisdiction indicated) ABS Measures?</label>
-			<div compare-val>
-				<km-value-ml value="document.status|term" locales="locale"></km-value-ml>
+			<div class="km-value" compare-val>
+				<span ng-bind="document.status|term:locale"></span>
 			</div>
 		</div>
 
