@@ -44,7 +44,7 @@
 		<div ng-show="document.geographicScope">
 			<label>Geographic scope</label>
 			<div compare-val>
-				<km-value-ml value="document.geographicScope | term:locale" locales="locale"></km-value-ml>
+				<span ng-bind="document.geographicScope|term:locale"></span>
 			</div>
 		</div>
 
@@ -69,7 +69,7 @@
 		<div ng-show="document.status">
 			<label>Status</label>
 			<div compare-val>
-				<km-value-ml value="document.status | term:locale" locales="locale"></km-value-ml>
+				<span ng-bind="document.status|term:locale"></span>
 			</div>
 		</div>
 
@@ -104,7 +104,7 @@
 		<div ng-show="document.activityScope">
 			<label>Type of capacity development initiative</label>
 			<div compare-val>
-				<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
+				<span ng-bind="document.activityScope|term:locale"></span>
 			</div>
 		</div>
 		<div ng-show="document.isProjectProgramme!=undefined">
