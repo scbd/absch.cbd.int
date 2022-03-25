@@ -32,7 +32,7 @@ import './directives/homepin-popup-abs';
         'localeService', 'locale', 'realm', '$http', '$routeParams', 'solr',
       function($scope, commonjs, searchService, $q, $interpolate, $filter, $location, $element, localeService, locale, realm, $http, $routeParams, solr) {
         var euLabel = {
-          "label": "EU",
+          "label_fake": "EU",
           "latitude": -5.02,
           "longitude": -167.66
         };
@@ -198,7 +198,12 @@ import './directives/homepin-popup-abs';
         function loadCountries(){
 
             return $q.when(commonjs.getCountries()).then(function(lcountries) {                  
+              //update EU label from countries with translation
+              const euDetails = lcountries.find(e=>e.code=='EU')
+              if(euDetails){
+                euLabel.label = euDetails.name[locale];
 
+              }
                 _.map(lcountries, function(country){
                   
                   countries[country.code] = country;                            
