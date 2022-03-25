@@ -55,8 +55,8 @@
 
 		<div ng-show="document.status">
 			<label>Current status of the measure</label>
-			<div compare-val>
-				<km-value-ml value="document.status" locales="locale"></km-value-ml>
+			<div class="km-value" compare-val>
+				<span ng-bind="document.status|term:locale"></span>
 			</div>
 		</div>
 
@@ -83,8 +83,8 @@
 
 		<div ng-show="document.type">
 			<label>Type of document / measure</label>
-			<div  compare-val>
-				<km-value-ml value="document.type" locales="locale"></km-value-ml>
+			<div class="km-value"  compare-val>
+				<span ng-bind="document.type|term:locale"></span>
 			</div>
 		</div>
 
@@ -94,9 +94,10 @@
 				<span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span>
 			</div>
 		</div>
+		<!-- ToDo: will we use this ?, we don't have this in edit  -->
 		<div ng-show="document.registeredMeasuresDescription">
 			<div class="km-value km-pre" compare-val>
-				<km-value-ml value="document.registeredMeasuresDescription | lstring:locale"></km-value-ml>
+				<km-value-ml value="document.registeredMeasuresDescription" locale="locale"></km-value-ml>
 			</div>
 		</div>
 
