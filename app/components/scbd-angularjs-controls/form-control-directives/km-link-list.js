@@ -58,6 +58,10 @@ app.directive('kmLinkList', ['MimeService', function (MimeService){
 						identifier:'lang-'+lang
 					}
 				}
+
+				$scope.isObject = (val)=>{
+					return _.isPlainObject(val);
+				}
 			}
 		};
 	}]);
