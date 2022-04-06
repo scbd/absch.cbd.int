@@ -463,7 +463,7 @@ export function uniqIdentifiers(originalIdentifiers){
 
         const identifier = e.identifier.replace(/@.*$/,"");
 
-        if(uniqueIdentifiers.find(i=>e.identifier.replace(/@.*$/,"") == identifier))
+        if(uniqueIdentifiers.find(i=>i.identifier.replace(/@.*$/,"") == identifier))
             return;
 
         const identifiers = splitIdentifier.filter(i=>i.identifier ==  identifier)
