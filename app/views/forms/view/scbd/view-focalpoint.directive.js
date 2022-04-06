@@ -26,10 +26,13 @@ app.directive('viewFocalPoint', ['realm', function(realm) {
 			}
 
 			$scope.$watch('::document', function(newVal){
+				$scope.focalPointDetails = {
+					categoryIdentifiers : (newVal.categories||[]).map(e=>{return {identifier:e}})
+				}
 				$q.when(commonjs.getReferenceRecordIndex('focalPoint', newVal.header.identifier))
 					.then(function(result){
-							$scope.focalPointDetails = result.data
-							$scope.focalPointDetails.description_EN_t = ($scope.focalPointDetails.description_EN_t||'').replace(/\n/g, '<br/>')
+							$scope.focalPointDetails = { ...$scope.focalPointDetails, ...result.data };
+							$scope.focalPointDetails.address_EN_t = ($scope.focalPointDetails.address_EN_t||'').replace(/\n/g, '<br/>')
 					})
 			})
 			
