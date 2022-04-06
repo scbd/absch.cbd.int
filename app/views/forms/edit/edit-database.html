@@ -58,7 +58,9 @@
 									<div class="col-xs-12">
 										<div class="km-control-group" name="websites" required caption="Website address">
 											<div class="help-info">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
-											<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div>
+											<!-- <div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div> -->
+											<div km-link name="websites" ng-model="document.websites" allow-link="true" allow-file="false"
+											 identifier="document.header.identifier"></div>
 										</div>
 									</div>
 								</div>

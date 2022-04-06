@@ -19,25 +19,30 @@
 			</div>
 		</div>
 
-			<div ng-show="document.title">
-			 	<label>Website or database name</label>
-			 	<div class="km-value" compare-val>
-			 	<strong ng-bind="document.title | lstring:locale"></strong>
-			 	</div>
-		 	</div>
-
+		<div ng-show="document.title">
+			<label>Website or database name</label>
+				<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+			</div>
+		</div>
 
 		<div ng-show="document.description">
 			<label>Description</label>
 			<div compare-val>
-			<div class="km-value km-pre"ng-bind-html="document.description | lstring:locale"></div>
+				<km-value-ml html value="document.description" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.websites && document.websites.length >0">
 			<label>URL of the website</label>
-				<div class="km-value" compare-val>
-					<km-link-list ng-model="document.websites" ></km-link-list>
-				</div>
+			<div class="km-value" compare-val>
+				<km-link-list ng-model="document.websites" ></km-link-list>
+			</div>
+		</div>
+		<div ng-show="!document.websites && document.website">
+			<label>URL of the website</label>
+			<div class="km-value" compare-val>
+				<km-link-list ng-model="document.website" ></km-link-list>
+			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
@@ -45,7 +50,7 @@
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+					<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
 				</div>
 			</div>
 

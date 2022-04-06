@@ -20,11 +20,6 @@ import '~/views/forms/view/view-database.directive';
       if (!document)
         return undefined;
       
-      if(($scope.formFields.websites||[]).length)
-        document.websites = _.map($scope.formFields.websites, function(url){ return { url:url } });      
-      document.websites = document.websites || (document.website ? [document.website] : undefined);
-      document.website = undefined //obsolete field
-
       document = angular.fromJson(angular.toJson(document));
 
       if (/^\s*$/g.test(document.notes))
@@ -34,10 +29,8 @@ import '~/views/forms/view/view-database.directive';
     };
 
     $scope.setDocument({}).then(function(document){
-      $scope.formFields.websites = []
-      if((document.websites||[]).length){
-        $scope.formFields.websites = _.map(document.websites, 'url');
-      }
+      document.websites = document.websites || (document.website ? [document.website] : undefined);
+      document.website = undefined //obsolete field
     });
   }];
 
