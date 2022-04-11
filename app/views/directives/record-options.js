@@ -77,7 +77,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 function getPdfUrl(){
 
                     const documentId = $filter('uniqueIDWithoutRevision')($scope.internalDocument);                    
-                    const pdfType = 'documents'
+                    let pdfType = 'documents'
                     let pdfDownloadUrl  =  '/pdf/:type/:schema/:documentId/:revision';
                     const schema = $scope.internalDocument.header.schema;
 
