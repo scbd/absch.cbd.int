@@ -4,7 +4,7 @@
 }
 
 #CBD-Branding .header {
-  font-size: 14px;
+  font-size: 0.875rem;
 
 }
 #CBD-Branding .header span:focus {
@@ -16,15 +16,17 @@
   text-decoration: none;
 
 }
-
+.navbar-header .left-part {
+  font-size: 0.875rem;
+}
 #CBD-Branding .navlist {
     margin: 0;
-    padding: 5px 0 0 0;
     display: inline;
+    font-size: 0.875rem;
 }
 
 #CBD-Branding .header-nav-img {
-  max-height: 24px;
+  max-height: 1.2rem;
   position: relative;
   top: -2px;
   padding: 0 0 0 0;
@@ -32,7 +34,7 @@
 }
 #CBD-Branding .brand {
   color:#333;
-  font-size: 15px;
+  font-size: .9rem;
   padding: 0 10px 0 0;
 }
 #CBD-Branding .navbar-cbd {
@@ -57,7 +59,6 @@
 }
 #CBD-Branding .cbd-toggle{
   color: #bdbdbd;
-
   cursor: pointer;
   font-size: 80%;
 
@@ -66,32 +67,22 @@
 
  #CBD-Branding .navlist {
   margin: 0;
-  padding: 5px 0 0 0;
+  padding: 0 0 0 20px;
   display: inline;
-  padding-left: 40px;
+  line-height: 2rem;
 }
  #CBD-Branding .navlist li {
   display: inline;
   list-style-type: none;
-  padding: 0 15px 0 0;
+  padding: 0 0 0 .7rem;
   margin: 0;
-  line-height: 20px;
+}
+#CBD-Branding .navlist li a {
+  text-decoration: none;
 }
  #CBD-Branding .header #CBD-Branding .navbar-default #CBD-Branding .navbar-nav li {
   padding: 0 10px;
 }
-/*#CBD-Branding .navbar-default #CBD-Branding .navbar-nav li a {
-    color: #bdbdbd;
-    cursor:pointer;
-  padding: 0 0 0 5px;
-  line-height: 32px;
-  text-shadow: 0 0 0;
-  letter-spacing: 1.5px;
-  font-weight: 200;
-}*/
-/*#CBD-Branding .navbar-default #CBD-Branding .navbar-nav li a:hover {
-  color: white;     color: #428bca!important;
-}*/
  #CBD-Branding .mobi-menu-btn {
   right: 30px;
   float: none;
@@ -169,29 +160,33 @@
 .navbar-header .right-part{
   float: right;
 }
+.navbar-header .right-part a {
+  text-decoration: none;
+  font-size: .9rem;
+  line-height: 2rem;
+}
 .rp-signin{
   float: left;
-padding: 5px 10px 0 10px;
+text-decoration: none;
 }
 .rp-lang{
   font-size: 12px !important;
   float: left;
-padding: 0 10px;
+  padding: 0 1rem;
 }
-
 .rp-ques{
   float: left;
 padding: 0 10px;
+text-decoration: none;
 }
 .rp-notification{
   float: left;
 padding: 0 10px;
 }
 .rp-n{
-  padding: 4px 10px 0 10px;
+  padding: 2px 10px 0 10px;
   float: left !important;
 }
-
 #CBD-Branding .locale-menu {
   position: absolute;
     right: 0;
@@ -212,4 +207,14 @@ padding: 0 10px;
   width: auto !important;
   text-align: center;
 }
-
+#CBD-Branding .hidden {
+  display: none;
+}
+@media(max-width:992px) {
+  .navbar-header .left-part {
+    display: none;
+  }
+  #CBD-Branding .hidden {
+    display: inline-block;
+  }
+}

@@ -1,48 +1,49 @@
 <template>
 <div class="home-page-records">
-  <ul class="bs5 mx-lg-3 nav nav-pills">
-    <li class="bs5 nav-item">
-      <a class="bs5 nav-link active">Recently published</a>
+  <ul class="ms-1 nav nav-pills">
+    <li class="nav-item">
+      <a class="nav-link active">Recently published</a>
     </li>
   </ul>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-  <div class="bs5 row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
-  <div class="bs5 d-block row-cols-1 row-cols-md-1 ">
-    <div class="bs5 col" v-for="record in recordList.slice(0,4)">
-      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
-        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
-        <h4><a :href="recordUrl(record)" class="bs5 fw-bold text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
-        <p class="new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
-        
-        <div style="position:absolute;bottom:5px; width:95%">
-          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+  <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
+  <div class="d-block row-cols-1 row-cols-md-1 p-0">
+    <div class="col" v-for="record in recordList.slice(0,4)">
+      <div class="position-relative record-callout record-callout-national shadow m-3 p-3" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+        <span class="badge position-absolute top-0 end-0 date-badge">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
+        <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
+        <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
+        <div style="bottom:5px;" class="w-100 position-absolute">
+          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-          <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
-          <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
+          <span class="badge text-uppercase record-text-national-country">{{record.rec_countryName}}</span></a>
+          <span class="bg-light text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
     </div>
   </div>  
-   <div class="bs5 d-none d-lg-block row-cols-1 row-cols-md-1">
-    <div class="bs5 col" v-for="record in recordList.slice(4,8)">
-      <div class="bs5 position-relative new-css-callout new-css-callout-national shadow" v-bind:class="{ 'new-css-callout-reference': type == 'reference' }">
-        <span class="bs5 badge position-absolute top-0 end-0">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
-        <h4 class="fw-bold"><a :href="recordUrl(record)" class="bs5 text-dark text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></h4>
-        <p class="bs5 fs-5 new-css-summary-text" v-if="record.rec_summary">{{record.rec_summary}}</p>
+
+
+   <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
+    <div class="col" v-for="record in recordList.slice(4,8)">
+      <div class="position-relative record-callout record-callout-national shadow m-3 p-3" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+        <span class="badge position-absolute top-0 end-0 date-badge">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
+        <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
+        <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
         
-        <div class="new-css-records-sub-options">
-          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="bs5 badge bg-light text-uppercase new-css-text-national new-css-rectype-national">{{record.schema_EN_t}}</span></a>
+        <div class="country-records-sub-options">
+          <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
-          <span class="bs5 badge bg-light text-uppercase new-css-text-national-country new-css-rectype-national">{{record.rec_countryName}}</span></a>
-          <span class="bs5 bg-light text-uppercase badge text-dark new-css-rectype-national">{{record.uniqueIdentifier_s}}</span>
+          <span class="badge text-uppercase record-text-national-country">{{record.rec_countryName}}</span></a>
+          <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
     </div>
   </div>  
   </div>
 
-  <div class="bs5 text-end mt-4 new-css-down-margin">
-    <a class="bs5 nav-link fs-4 text-muted text-uppercase cursor-pointer"  @click="seeMore()">See more 
+  <div class="text-end mt-2 card-down-margin">
+    <a class="nav-link fs-6 text-muted text-uppercase cursor-pointer"  @click="seeMore()">See more 
       <i class="fa fa-arrow-right"></i> </a>
   </div>
 </div>
@@ -102,6 +103,7 @@
            else this.$router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
       },
       recordUrl(record){
+        if(!record.uniqueIdentifier_s) return;
         const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
         const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
         const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()

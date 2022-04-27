@@ -1,140 +1,132 @@
-<div class="bs5" ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
-
-    <header class="bs5 new-css-sm-header px-3">
-        <nav class="bs5 navbar new-css-navbar-sm navbar-light bg-light rounded" >
-            <div ng-click="showNav = !showNav"  style="cursor: pointer;" >
-                <button class="bs5 navbar-toggler new-css-navbar-toggler collapsed" type="button" >
-                    <span class="bs5 navbar-toggler-icon"></span>
-                </button>   
-                <span class="bs5 new-css-acronym fw-bold color-green "> ABSCH </span> 
-                <span ng-if="!isDEV && !isTRG" class="bs5 fs-5 fw-bold text-uppercase link-dark">
-                    <span class="bs5 hidden-xs hidden-sm"> Access and Benefit-sharing </span> 
-                    <span class="bs5 hidden-md hidden-lg"> ABS </span> 
-                    Clearing-House</span>
-
-                    <span ng-if="isDEV" class="bs5 fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
-                        DEVELOPEMENT</span>
-
-                        <span ng-if="isTRG" class="bs5 fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
-                            TRAINING</span>
-
-                </div>
-                <div ng-if="showNav" class="bs5 navbar-collapse">
-                    <ul class="bs5 navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href=".">Home</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="/kb/tags/about/About-the-ABS-Clearing-House/5bbcfe17f05916000167781d">About the ABSCH</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="/search">Search</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="/reports">National Report Analyzer</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="/register">Submit</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="/countries">Country Profiles</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="/kb">Help</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/">Forums</a></li>
-                        <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href="https://www.cbd.int/">About the Nagoya Protocol</a></li>
-                    </ul>
-                </div>
-          </nav>
+<div ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
+    <header class="px-3 d-sm-none d-md-none">
+        <nav class="navbar navbar-sm navbar-light bg-light rounded">
+            <div ng-click="showNav = !showNav" style="cursor: pointer;">
+                <button class="navbar-toggler collapsed" type="button"> <span
+                        class="navbar-toggler-icon"></span> </button> <span
+                    class="realm-base-acronym fw-bold color-green "> ABSCH </span> <span ng-if="!isDEV && !isTRG"
+                    class="fs-6 text-uppercase link-dark fw-bold">ABS </span> <span class="fs-6 text-uppercase link-dark fw-bold">Clearing-House</span> </span> <span ng-if="isDEV"
+                    class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                    DEVELOPEMENT</span> <span ng-if="isTRG"
+                    class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                    TRAINING</span> </div>
+            <div ng-if="showNav" class="navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href=".">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="/kb/tags/about/About-the-ABS-Clearing-House/5bbcfe17f05916000167781d">About the
+                            ABSCH</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="/search">Search</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="/reports">National Report Analyzer</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="/register">Submit</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="/countries">Country Profiles</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="/kb">Help</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="https://bch.cbd.int/onlineconferences/">Forums</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
+                            href="https://www.cbd.int/">About the Nagoya Protocol</a></li>
+                </ul>
+            </div>
+        </nav>
     </header>
-
-    <header class="bs5 new-css-header pt-4 new-css-lg-header">
-        <div class="bs5">
-            <a href="." class="bs5 new-css-acronym color-green mx-3 mx-md-3 px-md-3 px-lg-5">
-                ABSCH
-                <span if="!isDEV && !isTRG" class="bs5 new-css-ch-name fw-bold text-uppercase link-dark">
-                    <span class="bs5 hidden-xs hidden-sm"> Access and Benefit-sharing </span> 
-                    <span class="bs5 hidden-md hidden-lg"> ABS </span> 
-                    Clearing-House</span>
-
-                    <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">
-                        DEVELOPEMENT</span>
-
-                        <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
-                            TRAINING</span>
-
-            </a>
+    <header class="pt-2 d-none d-sm-inline-block d-md-inline-block">
+        <div class="">
+            <a href="." class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span class="fw-normal">ABSCH</span>
+                <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
+                    <span> Access and Benefit-sharing </span> Clearing-House</span> <span
+                    ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                    DEVELOPEMENT</span> <span ng-if="isTRG"
+                    class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                    TRAINING</span> </a>
         </div>
     </header>
-<nav class="bs5 border-bottom mt-2 new-css-lg-header" ng-class="{'text-white':isTRG}">
-    <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
-        <ul class="bs5 nav me-auto mx-2">
-            <li class="bs5 nav-item"><a rel="noopener" translation-url href="."
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark  px-2 px-md-4 active"
-                    aria-current="page">
-                    <span class="hidden-sm hidden-xs">Home</span>
-                    <span class="hidden-md hidden-lg"> <i class="fa fa-home"></i> </span>
-                </a>
-            </li>
-            <li class="bs5 nav-item"><a rel="noopener" translation-url href="/kb/tags/about/About-the-ABS-Clearing-House/5bbcfe17f05916000167781"
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a>
-            </li>
-            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
-                <a rel="noopener" translation-url href="/search" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
-                    id="dropdownMenuButton1" aria-expanded="false">Search</a>
-                <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="search">Records</a></li>
-                   
-                    <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold link-dark " href="/reports">National Report Analyzer</a></li>
-                </ul>
-            </li>
-            
-            <li class="bs5 nav-item"><a rel="noopener" translation-url href="/register"
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">submit</a>
-            </li>
-
-
-
-
-            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
-                <a id="countryProfile" role="button" rel="noopener" rel="noopener" translation-url href="/countries" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                    type="button" id="dropdownMenuButton2" aria-expanded="false">
-                    <span class="hidden-sm hidden-xs">country profiles</span> 
-                    <span class="hidden-md hidden-lg"> countries </span></a>
-                <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                    <li class="new-css-nav-country-profiles-search">
-                        <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
-                            ng-model="countrySearchQuery" />
-                    </li>
-                    <li>
-                        <ul class="new-css-nav-country-profiles">
-                            <li ng-repeat="c in countries | filter:startsWith track by c.code">
-                                <a rel="noopener" translation-url  class="bs5 dropdown-item" ng-href="/countries/{{::c.code|encodeURIComponent}}">
-                                    <span class="bold"
-                                        ng-class="{'color-green': c.isParty, 'color-non-party':!c.isParty}">
-                                        {{::c.name | lstring:locale}}
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="new-css-nav-country-profiles-footer-abs">
-                        <a rel="noopener" translation-url href="/countries"> Overview - List all countries <i class="fa fa-arrow-right"></i> </a>
-                    </li>
-                </ul>
-            </li>
-            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown">
-                <a href="/kb" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                    type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
-                <ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb">Knowledge Base</a></li>
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/faqs">FAQs</a></li>
-                    
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="https://training-absch.cbd.int">Training Site</a></li>
-                
-                    <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">Contact us</a></li>
-                </ul>
-            </li>
-            <li class="bs5 nav-item"><a href="/forums"
-                    class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">forums</a></li>
-            <li ng-if="isTRG" class="bs5 nav-item"><a href="https://absch.cbd.int/en/"
-                class="bs5 bg-yellow fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">Leave Training Site</a></li>
-        </ul>
-        <ul class="bs5 nav">
-            <li class="bs5 nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"
-                class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 "><span class="hiddex-xs hidden-sm">Nagoya</span> Protocol </a></li>
-            </li>
-        </ul>
-    </div>
-</nav>
-
-<breadcrumbs></breadcrumbs>
-
+    <nav class="border-bottom nav-lg-header" ng-class="{'text-white':isTRG}">
+        <div class="mx-0 mx-md-4 d-flex flex-wrap">
+            <ul class="nav me-auto mx-2">
+                <li class="nav-item">
+                    <a rel="noopener" translation-url href="."
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 active"
+                        aria-current="page"> <span>Home</span> </a>
+                </li>
+                <li class="nav-item"><a rel="noopener" translation-url href="/kb"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">about</a></li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a rel="noopener" translation-url
+                        href="/search"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
+                        id="dropdownMenuButton1" aria-expanded="false">Search</a>
+                    <ul class="dropdown-menu" style="font-size: .9rem;"
+                        aria-labelledby="dropdownMenuButton1">
+                        <li><a rel="noopener" translation-url class="fw-bold dropdown-item header-menu-dropdown-menu-item"
+                                href="search">Records</a></li>
+                        <li><a rel="noopener" translation-url
+                                class="dropdown-item header-menu-dropdown-menu-item fw-bold link-dark "
+                                href="/reports">National
+                                Report Analyzer</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a rel="noopener" translation-url href="/register"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">submit</a> </li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown">
+                    <a id="countryProfile" rel="noopener" translation-url href="/countries"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 p-0 dropdown-toggle"
+                        id="dropdownMenuButton2" aria-expanded="false"> <span
+                            class="d-sm-none d-md-inline-block">country profiles</span> <span
+                            class="d-none d-sm-inline-block d-md-none"> countries </span>
+                    </a>
+                    <ul class="dropdown-menu" style="font-size: .9rem;"
+                        aria-labelledby="dropdownMenuButton2">
+                        <li class="nav-link-country-profiles">
+                            <input type="text" class="form-control" placeholder="Search countries"
+                                ng-click="countrySearch($event)" ng-model="countrySearchQuery" /> </li>
+                        <li>
+                            <ul class="nav-link-country-profiles">
+                                <li ng-repeat="c in countries | filter:startsWith track by c.code">
+                                    <a rel="noopener" translation-url class="dropdown-item"
+                                        ng-href="/countries/{{::c.code|encodeURIComponent}}"> <span class="bold"
+                                            ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
+                                            {{::c.name | lstring:locale}}
+                                        </span> </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-country-profiles-footer-link bg-party"> <a rel="noopener" translation-url
+                                href="/countries"> Overview - List all countries <i class="fa fa-arrow-right"></i> </a>
+                        </li>
+                    </ul>
+                </li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a href="/kb"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 p-0 dropdown-toggle" type="button"
+                        id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item fw-bold header-menu-dropdown-menu-item" rel="noopener" translation-url
+                                href="/kb">Knowledge Base</a></li>
+                        <li><a class="dropdown-item fw-bold header-menu-dropdown-menu-item" rel="noopener" translation-url
+                                href="/kb/faqs">FAQs</a></li>
+                        <li><a class="dropdown-item fw-bold header-menu-dropdown-menu-item" rel="noopener" translation-url
+                                href="https://training-absch.cbd.int">Training Site</a></li>
+                        <li><a class="dropdown-item fw-bold header-menu-dropdown-menu-item" rel="noopener" translation-url
+                                href="/kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">Contact us</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a href="/forums"
+                        class="fw-bold menu-navigation-link p-0 nav-link link-dark px-2 ">forums</a></li>
+                <li ng-if="isTRG" class="nav-item"><a href="https://absch.cbd.int/en/"
+                        class="bg-yellow fw-bold menu-navigation-link nav-link p-0 link-dark px-2 ">Leave Training
+                        Site</a></li>
+            </ul>
+            <ul class="nav">
+                <li class="nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"
+                        class="fw-bold menu-navigation-link nav-link p-0 link-dark px-2 "><span
+                            class="hiddex-xs hidden-sm">Nagoya</span> Protocol </a></li>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <breadcrumbs></breadcrumbs>
 </div>

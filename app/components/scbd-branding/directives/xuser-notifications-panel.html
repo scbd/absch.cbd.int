@@ -1,10 +1,10 @@
 ﻿<div id="NotificationsPanel">
 
-    <div class="row" style="margin:0 0 20px 0;padding:0;" ng-hide="docId">
-        <div class="col-xs-12">
+    <div class="row p-0 mb-3" ng-hide="docId">
+        <div class="col-12">
             <div class="btn-group" role="group">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span ng-if="!stateFilter || stateFilter=='All'">All</span>
                         <span ng-if="stateFilter=='unread'">Unread</span>
                         <span ng-if="stateFilter=='read'">Read</span>
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span ng-if="!typeFilter || typeFilter=='All'">All Types</span>
                         <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"> </i> Alerts</span>
                         <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"> </i> Messages</span>
@@ -60,11 +60,11 @@
                 </div>
 
                 <div class="btn-group" role="group">
-                    <input type="text" class="form-control" ng-model="keyword" placeholder="search by keyword" style="width:200px"></input>
+                    <input type="text" class="form-control" ng-model="keyword" placeholder="search by keyword" style="width:12rem"></input>
                 </div>
             </div>
 
-            <div class="pull-right">
+            <div class="float-end">
                 <a rel="noopener" type="button" class="color-litegrey" href="/register/user-preferences"> Manage your email notifications</a> 
                 | 
                 <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">Mark all read</a>
@@ -73,13 +73,13 @@
     </div>
 
     <div class="row notification-panel-header">
-        <div class="col-xs-2 text-center">
+        <div class="col-3 text-center">
             <strong>Message</strong>
         </div>
-        <div class="col-xs-8">
+        <div class="col-6">
 
         </div>
-        <div class="col-xs-2 text-center">
+        <div class="col-3 text-center">
             <strong>Read</strong>
         </div>
     </div>
@@ -88,37 +88,37 @@
         ng-class="{'notification-read':notification.state==='read','notification-unread':notification.state==='unread'}">
 
             <!--TIMEOUT=======================================-->
-            <div class="notification-spacing10" ng-if="notification.data.action==='timedout'">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="notification.data.action==='timedout'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-clock-o"> </i>
                         <span class="notification-icon-text">
                             <br/> Request Expired</span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <span class="notification-title">
                             <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-clock-o"> </i> Publishing request expired
-                            <span class="hidden-xs">: The requested record has been placed back into the owners draft folder</span>
+                            <span class="d-none d-sm-inline-block">: The requested record has been placed back into the owners draft folder</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Details: </span>
                             <span class="notification-label">Publishing Requests are automatically expired by the system after 90 days </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
@@ -126,15 +126,15 @@
 
 
             <!--REQUEST=======================================-->
-            <div class="notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && (!notification.data.iteration || notification.data.iteration===1)">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && (!notification.data.iteration || notification.data.iteration===1)">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-rotate-right"> </i>
                         <br/>
                         <span class="notification-icon-text"> Publishing Request </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-right"> </i>
                         <span class="notification-title" ng-if="notification.data.action==='request'">Publishing request</span>
@@ -143,7 +143,7 @@
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Requested by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
@@ -151,28 +151,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
             </div>
 
             <!--REMINDER=======================================-->
-            <div class="notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && notification.data.iteration>1">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && notification.data.iteration>1">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-calendar"> </i>
                         <br/>
                         <span class="notification-icon-text"> Reminder </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-calendar"> </i>
                         <span class="notification-title" ng-if="notification.data.action==='request'">Reminder: Publishing request pending approval. </span>
@@ -181,7 +181,7 @@
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Requested by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
@@ -189,38 +189,38 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
             </div>
 
             <!--RECALLED=======================================-->
-            <div class="notification-spacing10" ng-if="notification.data.action==='recalled'">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="notification.data.action==='recalled'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-rotate-left"> </i>
                         <br/>
                         <span class="notification-icon-text"> Request recalled </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"> </i>
                         <span class="notification-title">Request Recalled
-                            <span class="hidden-xs">: The requester has cancelled their request for publishing a record</span>
+                            <span class="d-none d-sm-inline-block">: The requester has cancelled their request for publishing a record</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Recalled by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
@@ -228,32 +228,32 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
             </div>
 
             <!--REJECTED=======================================-->
-            <div class="notification-spacing10" ng-if="notification.data.action==='rejected'">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="notification.data.action==='rejected'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-times-circle"> </i>
                         <br/>
                         <span class="notification-icon-text"> Request rejected </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"> </i>
                         <span class="notification-title">Request Rejected
-                            <span class="hidden-xs">: 
+                            <span class="d-none d-sm-inline-block">: 
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
@@ -263,7 +263,7 @@
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Rejected by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
@@ -275,13 +275,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
@@ -289,19 +289,19 @@
 
 
             <!--APPROVED=======================================-->
-            <div class="notification-spacing10" ng-if="notification.data.action==='approved'">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="notification.data.action==='approved'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-check-circle"> </i>
                         <br/>
                         <span class="notification-icon-text"> Request approved </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"> </i>
                         <span class="notification-title">Request Approved
-                            <span class="hidden-xs">: 
+                            <span class="d-none d-sm-inline-block">: 
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
@@ -311,7 +311,7 @@
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Approved by: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
@@ -319,33 +319,33 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
             </div>
 
             <!--MESSAGE=======================================-->
-            <div class="notification-spacing10" ng-if="notification.type==='message'">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="notification.type==='message'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-envelope-o"> </i>
                         <br/>
                         <span class="notification-icon-text"> Message </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"> </i>
                         <div class="notification-title notification-spacing5">{{notification.data.message}}</div>
 
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">Sent from: </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
                             <span class="notification-label"> on </span>
@@ -353,28 +353,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
             </div>
 
             <!--Subscription Publish=======================================-->
-            <div class="notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
-                <div class="col-xs-2 text-center hidden-xs">
+            <div class="row notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-bolt"> </i>
                         <br/>
                         <span class="notification-icon-text"> Alert </span>
                     </div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"> </i>
                         <div class="notification-title notification-spacing5">
@@ -384,7 +384,7 @@
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </DIV>
-                        <div class="hidden-xs notification-spacing5">
+                        <div class="d-none d-sm-inline-block notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.publisherText }}: </span>
                             <span> {{notification.data.documentInfo.publisher }} </span>
                             <span class="notification-label"> on </span>
@@ -392,20 +392,20 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
+                <div class="col-2 text-center">
                     <div class="notification-spacing5">
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a>
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="hidden-xs">ago</span>
+                            <span class="d-none d-sm-inline-block">ago</span>
                         </span>
                     </div>
                 </div>
             </div>
             
-            <div style="margin-top:10px;" ng-if="!notifications">
-                <div class="col-xs-12 text-center">
+            <div class="mt-2" ng-if="!notifications">
+                <div class="col-12 text-center">
                     <span class="color-grey"> no notifications </span>
                 </div>
             </div>

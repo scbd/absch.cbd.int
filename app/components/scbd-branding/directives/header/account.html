@@ -1,56 +1,44 @@
 ﻿<div hover-effect=".dropdown-menu" id="CBD-Branding" ng-if="user">
 
-  <a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap pull-right color-darkgrey" id="btnSignIn" data-slug="signin"
-   data-toggle="modal" data-target="#loginDialog" data-keyboard="false" data-backdrop="false">
+  <a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap float-end color-darkgrey" id="btnSignIn" data-slug="signin"
+   data-bs-toggle="modal" data-bs-target="#loginDialog" data-keyboard="false" data-backdrop="false">
    <img src="/app/img/new-home/person-fill.svg" alt="Signin">
    <strong class="signin-text" style="position: relative; top:2px;right: 5px;">SIGN IN </strong>
   </a>
-  <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-xs hidden-sm" href="#" data-toggle="dropdown">
-    <span class="text-nowrap color-black"><span ng-bind="user.name" style="margin:2px"></span><i class="fa fa-chevron-down"></i> </span>
+  <a rel="noopener" ng-if="user.isAuthenticated" class="d-none d-md-block" href="#" data-bs-toggle="dropdown">
+    <span class="text-nowrap color-black"><span ng-bind="user.name" style="margin:2px"></span> <i class="fw-bold bi bi-chevron-down"></i> </span>
+    <!-- <i class="fa fa-chevron-down"></i> </span> -->
   </a>
-  <a rel="noopener" ng-if="user.isAuthenticated" class="hidden-md hidden-lg" href="#" data-toggle="dropdown" id="dropdownMenu1">
-    <span class="hidden-md hidden-lg color-darkgrey user-logged-in">
-
-      <span class="fa-stack fa-1x">
-        <i class="fa fa-circle-o-notch fa-stack-2x" style="font-weight:normal;"></i>
-        <img src="/app/img/new-home/person-fill.svg" alt="Signin">
-
-      </span>
+  <a rel="noopener" ng-if="user.isAuthenticated" class="d-inline-block d-md-none" href="#" data-bs-toggle="dropdown" id="dropdownMenu1">
+    <span class="color-darkgrey user-logged-in">
+      <i class="fs-4 me-2 mt-3 bi bi-person-circle"></i>
     </span>
   </a>
 
-  <ul ng-if="user.isAuthenticated" id="dropdown-menu" class="dropdown-menu  drop-menu-position " role="menu" aria-labelledby="dropdownMenu1">
+  <ul ng-if="user.isAuthenticated" id="dropdown-menu" class="dropdown-menu drop-menu-position p-1" role="menu" aria-labelledby="dropdownMenu1">
     <li>
       <a rel="noopener" translation-url  href="#" ng-click="actionProfile()">
-        <i class="fa fa-user" style="font-size:15px"></i>&nbsp; Profile</a>
+        <i class="bi bi-person-fill fs-6"></i>&nbsp; Profile</a>
     </li>
-    <!--<li class="dropdown-submenu pull-left">
-      <a rel="noopener" tabindex="-1" href="#"><i class="fa fa-users" style="font-size:15px"></i>&nbsp; My Roles</a>
-      <ul class="dropdown-menu bg-darkgrey" style="left: -307%;">
-        <li ng-repeat="role in userRoles|orderBy:'name'"><a rel="noopener" tabindex="-1" href="#">{{role.name}}</a></li>
-      </ul>
-    </li> -->
+   
     <li>
       <a rel="noopener" translation-url  href="#" ng-click="actionPassword()">
-        <i class="fa fa-key" style="font-size:15px"></i>&nbsp; Password</a>
+        <i class="fa fa-key fs-6"></i>&nbsp; Password</a>
     </li>
     <hr style="margin: 10px 0 0 0;padding: 0;"/>
-    <!-- <li>
-        <a rel="noopener" translation-url  href="/register/user-preferences/setting">
-          <i class="glyphicon glyphicon-cog" style="font-size:15px"></i>&nbsp; Setting</a>
-    </li> -->
+ 
     <li>
       <a rel="noopener" translation-url  href="/register/user-preferences/subscriptions">
-        <i class="glyphicon glyphicon-envelope" style="font-size:15px"></i>&nbsp; Email Alerts</a>
+        <i class="bi bi-envelope-fill"></i>&nbsp; Email Alerts</a>
     </li>
     <li>
       <a rel="noopener" translation-url  href="/register/user-preferences/saved-searches">
-        <i class="glyphicon glyphicon-lock" style="font-size:15px"></i>&nbsp; Saved Searches</a>
+        <i class="bi bi-save2-fill"></i>&nbsp; Saved Searches</a>
     </li>    
       <hr style="margin: 10px 0 0 0;padding: 0;"/>
     <li>
       <a rel="noopener" translation-url  href="#" ng-click="actionSignOut()">
-        <i class="fa fa-sign-out" style="font-size:15px"></i>&nbsp; Sign-out</a>
+        <i class="fa fa-sign-out fs-6"></i>&nbsp; Sign-out</a>
     </li>
   </ul>
 </div>
