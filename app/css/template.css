@@ -3318,3 +3318,18 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
     margin: 0 0 20px;
     border-left: 5px solid #eee;
 }
+
+
+#recordContent .share-single-document{
+    padding-right:10px;
+    position:relative;
+    top:7px;
+    /* color:#FFF; */
+}
+#recordContent .share-single-document .table-export-button{
+    color: #fff;
+}
+#search-new  .input-option label.heading {
+    font-weight: normal !important;
+    margin-top: 15px;
+}
