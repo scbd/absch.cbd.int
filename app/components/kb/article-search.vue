@@ -73,8 +73,9 @@ export default {
     async mounted() {
         this.categories = await this.loadKbCategories(this.$realm.is('BCH'));
         if (this.$route.params.search) {
-            this.search = (this.$route.params.search).replace(/"/g, "");
+            this.search = decodeURIComponent(this.$route.params.search).replace(/"/g, "");
         }
+        console.log(this.search)
         this.realmTag = this.$realm.is('BCH') ? 'bch' : 'abs';
         this.loadArticles(1);
     },
