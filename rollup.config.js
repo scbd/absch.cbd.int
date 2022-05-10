@@ -41,7 +41,6 @@ const ignoreFileGlobPattern = _(ignoreForRollupFiles).values().map(e=>`**/${e}`)
 
 export default async function() {
 
-  const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
   const appDir = 'i18n';
   const i18nDir = 'i18n-build';
   const globOptions = {
