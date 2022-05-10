@@ -99,7 +99,7 @@
                             <li><a href="https://www.cbd.int/privacy" title="Privacy Policy">Privacy Policy</a></li>
                             <li><a href="https://www.cbd.int/credits" title="Credits">Credits</a></li>
                             <li><a href="https://www.cbd.int/copyright" title="© CBD Secretariat">© CBD Secretariat</a></li>
-                            <li>
+                            <li ng-if="isBCH">
                                 <a rel="noopener" href="https://bch.cbd.int/member/subscriptions.shtml">
                                     <i class="fa fa-fw fa-envelope"></i></a>
                                 <a rel="noopener" href="https://bch.cbd.int/resources/rss.shtml">
@@ -109,6 +109,18 @@
                                 <a rel="noopener" target="_blank" href="http://www.facebook.com/UNBiodiversity/">
                                     <i class="fa fa-fw fa-facebook"></i></a>
                                 <a rel="noopener" target="_blank" href="https://www.youtube.com/playlist?list=PL4yoXk7tzMgBioR9tbLPfGhmKLaHdS38g">
+                                    <i class="fa fa-fw fa-youtube"></i></a>
+                            </li>
+                            <li ng-if="isABS">
+                                <a rel="noopener" href="mailto:absch@cbd.int">
+                                    <i class="fa fa-fw fa-envelope"></i></a>
+                                <a rel="noopener" target="_blank" href="https://www.cbd.int/rss/">
+                                    <i class="fa fa-fw fa-rss"></i></a>
+                                <a rel="noopener" target="_blank" href="https://twitter.com/unbiodiversity">
+                                    <i class="fa fa-fw fa-twitter"></i></a>
+                                <a rel="noopener" target="_blank" href="https://www.facebook.com/UNBiodiversity">
+                                    <i class="fa fa-fw fa-facebook"></i></a>
+                                <a rel="noopener" target="_blank" href="https://www.youtube.com/user/chmcbd">
                                     <i class="fa fa-fw fa-youtube"></i></a>
                             </li>
                         </ul>
