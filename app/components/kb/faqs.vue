@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-8">
+    <div>
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
         <div class="mt-0 kb-faq" v-if="!loading">

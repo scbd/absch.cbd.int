@@ -68,6 +68,7 @@
             try {
                 let id = (this.$route.params.id).replace(/"/g, "");
                 const article = await this.articlesApi.getArticleById(encodeURIComponent(id));
+                article = article || {meta:{}}
                 if (article?.content != undefined) {
                     this.article = article;
                 }

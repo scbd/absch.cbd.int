@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-8">
+    <div>
         <div class="row match-height">
             <div class="col-md-12 col-sm-12 " v-for="category in KbCategories">
                 <div class="categories-list widget_categories tag-count">
