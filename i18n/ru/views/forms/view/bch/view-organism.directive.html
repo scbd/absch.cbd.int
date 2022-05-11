@@ -1,0 +1,177 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date>
+		<legend>Информация об организме</legend>
+		
+		<div ng-show="document.scientificName">
+			<label>Научное название</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.scientificName"></div>
+			</div>
+		</div>
+		
+		<div ng-if="classification">
+			<label>Таксономическая классификация</label>
+			<div class="km-value" compare-val>
+				<table cellpadding="0" cellspacing="0">
+					<tbody>
+						<tr ng-repeat="(key, taxonomy) in classification">
+							<td style="width:10%"><span ng-if="key == 'realm'"		ng-style="{'padding-left' : (5*$index)+'px' }">Реалм</span> <span ng-if="key == 'subRealm'"		ng-style="{'padding-left' : (5*$index)+'px' }">Субреалм</span> <span ng-if="key == 'kingdom'"		ng-style="{'padding-left' : (5*$index)+'px' }">Царство</span> <span ng-if="key == 'phylum'"		ng-style="{'padding-left' : (5*$index)+'px' }">Тип/отдел</span> <span ng-if="key == '_class'"		ng-style="{'padding-left' : (5*$index)+'px' }">Класс</span> <span ng-if="key == 'order'"		ng-style="{'padding-left' : (5*$index)+'px' }">Отряд/порядок</span> <span ng-if="key == 'subOrder'"		ng-style="{'padding-left' : (5*$index)+'px' }">Подотряд/подпорядок</span> <span ng-if="key == 'family'"		ng-style="{'padding-left' : (5*$index)+'px' }">Семейство</span> <span ng-if="key == 'subFamily'"	ng-style="{'padding-left' : (5*$index)+'px' }">Подсемейство</span> <span ng-if="key == 'genus'"		ng-style="{'padding-left' : (5*$index)+'px' }">Род</span> <span ng-if="key == 'species'"		ng-style="{'padding-left' : (5*$index)+'px' }">Вид</span> <span ng-if="key == 'subSpecies'"	ng-style="{'padding-left' : (5*$index)+'px' }">Подвид</span></td>
+							<td ng-bind="taxonomy" style="text-align:left;padding-left:5px">
+							</td>
+						</tr>						
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div ng-show="document.scientificNameSynonyms">
+				<label>Альтернативное(-ые) научное(-ые) название(-я) (синоним(ы))</label>
+				<div class="km-value" compare-val> 
+					<ul class="list">
+						<li ng-repeat="name in document.scientificNameSynonyms" ng-bind="name"></li>
+					</ul>
+				</div>
+		</div>
+
+		<div ng-show="document.commonNames">
+			<label>Общепринятое(-ые) название(-я)</label>
+			<div compare-val>
+				<ul class="list">
+					<li ng-repeat="name in document.commonNames" style="margin-bottom: 5px;">
+						<km-value-ml value="name" locales="locale"></km-value-ml>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	<legend ng-if="document.plantCultivar || document.microorganismStrain || document.bacteriaPathovar || document.virusGroup">Дополнительная классификация</legend>
+		
+		<div ng-show="document.plantCultivar">
+				<label>Cultivar / variety (plants)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.plantCultivar"></div>
+				</div>
+		</div>
+
+		<div ng-show="document.microorganismStrain">
+				<label>Strain / isolate / serotype (microorganisms)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.microorganismStrain"></div>
+				</div>
+		</div>
+
+		<div ng-show="document.bacteriaPathovar">
+				<label>Патовар (бактерии)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.bacteriaPathovar"></div>
+				</div>
+		</div>
+		<div ng-show="document.virusGroup">
+				<label>Группа (вирусы)</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.virusGroup"></div>
+				</div>
+		</div>
+
+		<div ng-show="document.taxonomicClassification">
+			<label>Дополнительная информация о таксономической классификации</label>
+			<km-link-list class="km-value" ng-model="document.taxonomicClassification"></km-link-list>
+		</div>
+		<div ng-show="document.organismType">
+			<label>Тип организма</label>
+			<div compare-val> 
+				<div class="km-value" ng-bind="document.organismType|term:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.domestication">
+			<label>Одомашнивание</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.domestication | term:locale"></div>
+			</div>
+		</div>
+
+		<legend>Характеристики, имеющие отношение к биобезопасности</legend>
+		
+		<div ng-show="document.originCentre">
+				<label>Центр(ы) происхождения</label>
+				<div compare-val>
+					<km-value-ml value="document.originCentre" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.diversityCentre">
+				<label>Центр(ы) генетического разнообразия</label>
+				<div compare-val>
+					<km-value-ml value="document.diversityCentre" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.habitat">
+				<label>Habitat range</label>
+				<div compare-val>
+					<km-value-ml value="document.habitat" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.geographicalDistribution">
+				<label>Geographical distribution</label>
+				<div compare-val>
+					<km-value-ml value="document.geographicalDistribution" locales="locale" html></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.compatibleSpecies">
+			<label>Перекрестно-совместимые виды</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.compatibleSpecies">
+						<view-record-reference ng-model="item.identifier" locale="locale" target="target"></view-record-reference>
+					</li>
+				</ul>
+			</div>				
+		</div>
+
+		<div ng-show="document.pathogenicity">
+				<label>Известная патогенность и/или аллергенность</label>
+				<div compare-val>
+					<km-value-ml value="document.pathogenicity" locales="locale" html ></km-value-ml>
+				</div>
+		</div>
+
+		<div ng-show="document.commonUses">
+				<label>Common use(s)</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
+					</ul>
+				</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Additional Information</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" locales="locale" html ></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

@@ -1,0 +1,189 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4 ng-show="display('header')"><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+			
+		<document-date></document-date>
+
+		<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">Informations générales</legend>
+
+		<div ng-show="document.government">
+			<label name="country">Pays</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+		</div>
+
+		<div ng-show="document.title">
+			<label>Titre</label>
+			<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
+		</div>
+
+		<div ng-show="document.description">
+			<label>Brève description</label>
+			<div compare-val>
+				<div class="km-value" ng-bind-html="document.description | lstring:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.jurisdiction">
+			<label>Juridiction(s)</label>
+			<div class="km-value" compare-val><span ng-bind="document.jurisdiction|term:locale"></span> <span ng-if="document.jurisdictionName ">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span></div>
+		</div>
+
+
+		<div ng-show="document.jurisdictionRegions">
+			<label>Nom du/des pays et du/des groupe(s) politique(s) ou économique(s)</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="term in document.jurisdictionRegions"><span ng-bind="term|term:locale"></span></li>
+				</ul>
+			</div>
+		</div>
+
+
+		<div ng-show="document.status">
+			<label>Statut actuel de la mesure</label>
+			<div compare-val>
+				<km-value-ml value="document.status" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.adoption">
+			<label>Date d'adoption</label>
+			<div class="km-value" compare-val><span ng-bind="document.adoption | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.entryIntoForce">
+			<label>Date d'entrée en vigueur</label>
+			<div class="km-value" compare-val><span ng-bind="document.entryIntoForce | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.retired">
+			<label>Date de retrait</label>
+			<div class="km-value" compare-val><span ng-bind="document.retired | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.limitedApplication">
+			<label>Date à partir de laquelle la mesure n'est plus en vigueur</label>
+			<div class="km-value" compare-val><span ng-bind="document.limitedApplication | formatDate"></span></div>
+		</div>
+
+
+		<div ng-show="document.type">
+			<label>Type de document/mesure</label>
+			<div  compare-val>
+				<km-value-ml value="document.type" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.isModelContractualClause">
+			<label>La mesure comporte des clauses contractuelles types</label>
+			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription"><span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span></div>
+		</div>
+		<div ng-show="document.registeredMeasuresDescription">
+			<div class="km-value km-pre" compare-val>
+				<km-value-ml value="document.registeredMeasuresDescription | lstring:locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.documents">
+			<legend>Détails du document</legend>
+			<label>Texte du document</label>
+			<div class="km-value" compare-val="documents">
+				<km-link-list ng-model="document.documents"></km-link-list>
+			</div>
+		</div>
+
+		<div ng-show="document.documentTranslations">
+			<label>Traduction</label>
+			<div class="km-value" compare-val="documentTranslations">
+				<km-link-list ng-model="document.documentTranslations"></km-link-list>
+			</div>
+		</div>
+
+		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
+			<legend>Amendements</legend>
+			<div ng-show="document.amendedMeasures">
+				<label>Cette mesure modifie les points suivants :</label>
+
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.amendedMeasures">
+							<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.amendmentsDescription">
+				<label>Résumé de la/des modification(s)</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDescription" locales="locale"></km-value-ml>
+				</div>
+			</div>
+
+		</div>
+
+		<div ng-show="document.authorities ">
+			<legend>Coordonnées du correspondant pour la réglementation</legend>
+			<div ng-repeat="item in document.authorities">
+				<div view-record-reference ng-model="item" locale="locale" class="km-value"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
+			<legend>Amendements</legend>
+			<label>Cette mesure a été amendée par :</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.measureAmendedBy">
+						<div view-record-reference ng-model="item.identifier_s" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="(document.linkedMeasures && document.linkedMeasures.length>0) || document.linkedMeasuresDescription">
+			<legend>Liens</legend>			
+			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
+				<label>Cette mesure est liée à :</label>
+				<ul class="list">
+					<li ng-repeat="item in document.linkedMeasures">
+						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
+			<div ng-show="document.linkedMeasuresDescription">
+				<label>Description des liens</label>
+				<div class="km-value km-pre" compare-val ng-bind-html="document.linkedMeasuresDescription | lstring:review.locale"></div>
+			</div>
+		</div>
+		<div ng-if="document.absMesasureNotApplicable">
+			<legend>Éléments de la mesure</legend><span class="km-value confidential-text">Les éléments ne s’appliquent pas à la mesure.</span></div>
+		<div ng-if="document.absMeasures">
+			<div measure-matrix-elements name="absMeasures" type="single" ng-model="document.absMeasures" 
+			locale="locale" document="document" api="measureMatrixApi">
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Informations supplémentaires</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val="relevantInformation" class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+
+	<div document-metadata class="panel-footer"></div>
+</div>

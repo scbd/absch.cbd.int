@@ -1,0 +1,90 @@
+﻿<div class="document-sharing" dir="rtl">
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
+    title="Share"><i class="fa fa-firefox"></i> <span class="hidden-xs">مشاركة</span></button>
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>
+
+    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}" dir="rtl">
+            <div class="modal-header">إرسال مسودة السجل: <span ng-bind="title" dir="rtl"></span></div>
+            <div class="modal-body">
+                <div role="tabpanel"><!-- Nav tabs --><ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a translation-url href="#url" aria-controls="url" role="tab" data-toggle="tab"><span class="sub-header">إرسال عنوان URL</span></a></li>
+                        <li role="presentation"><a translation-url href="#email" aria-controls="email" role="tab" data-toggle="tab"><span class="sub-header">إرسال بالبريد الإلكترونى</span></a></li>
+                    </ul><!-- Tab panes --><div class="tab-content padding-left-10 padding-right-10" style="background:#fff">
+                        <div role="tabpanel" class="tab-pane active" id="url">
+                            <div class="row">
+                                <div ng-if="isLoading"><i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> التحميل قيد التنفيذ...</div>
+                                <div class="content" ng-hide="isLoading"><br/><div class="alert alert-info"><i class="fa fa-info-circle"></i> كل من لديه الرابط يستطيع عرض مسودة الوثيقة، وسيظل يرى التحديثات حتى نشر المسودة أو حذفها.</div>
+                                    <div style="margin:auto" class="pull-right"><a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">إنشاء رابط</a> <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i></div>
+                                    <div>
+                                        <table class="table table-stripped" style="width:100%">
+                                            <tr>
+                                                <td>#</td>
+                                                <td>انتهاء الصلاحية/الحالة</td>
+                                                <td>Link/Email(s)</td>
+                                                <td class="hidden-xs">تاريخ الإنشاء</td>
+                                            </tr>
+                                            <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
+                                                <td ng-bind="$index+1"></td>
+                                                <td><span ng-bind="link.expiry|formatDateWithTime"></span> <span ng-if="hasStatus('active', link)"class="label label-success">نشط</span> <span ng-if="hasStatus('expired', link)"class="label label-danger">منتهي الصلاحية</span> <span ng-if="hasStatus('revoked', link)"class="label label-danger">مرفوض</span></td>
+                                                <td width="70%">
+                                                    <div class="btn-group" style="width:100%">
+                                                        <div class="input-group" >
+                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::link.sharedWith.emails}}" disabled readonly/>
+                                                            <input ng-if="!link.sharedWith.emails" type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/><span  ng-if="!link.sharedWith.emails" style="cursor:pointer" class="input-group-addon" id="basic-addon1"><a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"></i> <span class="hidden-xs">فتح</span></a></span> <span  ng-if="!link.sharedWith.emails" style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)"><i class="fa fa-copy"></i> <span class="hidden-xs">نسخ</span></span> <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)"><i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i> <i class="fa fa-thumbs-down"></i> <span class="hidden-xs">رفض</span></span></div>
+                                                    </div>
+                                                </td>
+                                                <td class="hidden-xs" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
+                                            </tr>
+                                            <tr ng-if="!sharedLinks.length">
+                                                <td colspan="4"><strong>لم يعثر على أي روابط مشاركة لهذه الوثيقة</strong></td>
+                                            </tr>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="email">
+                            <div class="row">
+                                <div class="content"><br/><div class="alert alert-info"><i class="fa fa-info-circle"></i> سيتلقى المستلمون رسالة إلكترونية تحتوي على رابط لعرض مسودة الوثيقة</div>
+                                    <hr/>رسائل البريد الإلكتروني <br/><div class="input-group" >
+                                        <input type="text" placeholder="أدخل البريد الإلكتروني"  class="form-control" ng-model="shareEmails" /><span class="input-group-btn"><button type="button" class="btn btn-primary pull-right" ng-click="shareEmail(shareEmails)" ng-disabled="status=='creatingLink'">إرسال</button></span></div>
+                                    <div><span style="font-size: smaller;color: #777575;">استخدم الفواصل لفصل عناوين البريد الإلكتروني. يجب أن يستخدم المستلمون عنوان البريد الإلكتروني لتسجيل الدخول في غرفة تبادل المعلومات بعنوان البريد الإلكتروني لعرض مسودة السجل.</span></div>
+                                    <div><span ng-if="status=='creatingLink'"><i class="fa fa-spin fa-spinner"></i> قيد التحديث...</span></div><br/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="button" class="btn btn-primary pull-right" ng-click="close()" >إغلاق</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+        <div class="rounded bg-dropshadow document-selection-modal" dir="rtl">
+            <div class="modal-header">إنشاء نسخة بصيغة PDF من مسودة السجل: <span  ng-bind="title" dir="rtl"></span></div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-xs-12">
+
+                        <div class="alert alert-warning" role="alert"><strong>يرجى الملاحظة!</strong> قد تستغرق هذه العملية وقتًا طويلًا في التحميل. وظيفة "<strong>Share (مشاركة)</strong>" هي الوسيلة المثالية لنشر وتبادل مسودات السجلات.</div><!-- <div class="alert alert-success" role="alert">
+                            <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
+                        </div> --><div class="alert alert-info" role="alert">
+                            <div class="btn-group"><a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
+                                ng-bind="lang|uppercase"></a></div>حدد اللغة المطلوبة لبدء عملية إنشاء نسخة بصيغة PDF.</div> 
+                    </div>
+                </div>
+            </div> 
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary pull-right" ng-click="close()" >إغلاق</button>
+            </div>
+        </div>
+    </script>
+
+</div>

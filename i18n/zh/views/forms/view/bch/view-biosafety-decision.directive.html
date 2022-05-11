@@ -1,0 +1,431 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date>
+
+		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
+			<legend>Amendment</legend>
+			<div ng-if="document.isAmendment!=undefined">
+				<label>是对已在生物安全信息交换所中发布的决定或通讯往来的修改吗？</label>
+				<div compare-val>
+					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.amendedRecords">
+				<label>经修改的决定或沟通</label>
+				<div class="km-value" compare-val="amendedRecords">
+					<ul class="list">
+						<li ng-repeat="item in document.amendedRecords">
+							<view-record-reference ng-model='item.identifier' locale="locale"></view-record-reference>
+						</li>
+					</ul>						
+				</div>
+			</div>
+			<div ng-if="document.amendmentsDetails">
+				<label>修改摘要</label>
+				<div compare-val>
+					<km-value-ml value="document.amendmentsDetails" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+			<div ng-if="amendedByRecords">
+				<label>本记录中的决定/沟通已由以下记录中的决定/沟通所修改</label>
+				<div class="km-value" compare-val="amendedByRecords">
+					<div ng-repeat="referenced in amendedByRecords">
+						<view-record-reference ng-model="referenced"></view-record-reference>
+					</div>
+				</div>
+			</div>
+        </div>
+
+		<legend>一般信息</legend>		
+		<div ng-if="document.government">
+			<label name="country">国家</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+		</div>
+
+		<div ng-if="document.authorities">
+			<label>负责作出决定或进行通讯的的国家主管机构</label>
+			<div class="km-value" compare-val="authorities">
+				<ul class="list">
+					<li ng-repeat="item in document.authorities" >
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.title">
+			<label>决定或通讯往来的标题/参考号</label>
+			<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.date">
+			<label>作出决定的日期</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
+			</div>
+		</div>
+		<div ng-if="document.takenPriorEntryIntoForce != undefined">
+			<label>此决定是否是在议定书生效之前所作出的？</label>
+			<div compare-val>
+				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
+			</div>
+		</div><!-- Not used --> <!-- <div ng-if="document.jurisdictions.length">
+			<label>Jurisdiction</label>
+			<div class="km-value" compare-val="jurisdictions">
+				<ul class="list">
+					<li ng-repeat="item in document.jurisdictions" ng-bind="item|term:locale"></li>
+				</ul>
+			</div>
+		</div> --><div ng-if="document.jurisdictionsDetails">
+			<label>管辖权</label>
+			<div compare-val>
+				<km-value-ml value="document.jurisdictionsDetails" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+	<div ng-if="document.decisionTypes">
+		<legend>决定、通知、通信或宣告的主题：</legend>
+		<div class="km-value" compare-val="decisionTypes">
+			<ul class="list">
+				<li  ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
+				ng-repeat="item in document.decisionTypes" ><span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span> <span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">任何其他决定、通知、宣告或函件<span ng-if="item.customValue">(<span ng-bind="item.customValue|lstring:locale"></span>)</span></span></li>
+			</ul>
+		</div>
+	</div><!-- =============SECTION A END ======================== --> <!-- =============SECTION B START======================== --><div ng-if="isLmoDecisionForIntentionalIntroduction">
+		<legend>有意引入到环境中的改性活生物体</legend>
+
+		<div ng-if="document.addressesTransboundaryMovement!=undefined">
+			<label>该决定是否是由改性活生物体向贵国的越境转移请求所引发？</label>
+			<div compare-val>
+				<km-value-bool value="document.addressesTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
+		<div ng-if="document.intentionDecisions!=undefined">
+			<label>做出决定的依据：</label>
+			<div compare-val>
+			<view-terms-hierarchy  class="km-value" ng-model="document.intentionDecisions" locale="locale" term-domain="intentionDecisions"></view-terms-hierarchy>
+			</div>
+		</div>
+
+		<div ng-if="document.receiptDate">
+			<label>收到通知的日期</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.receiptDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.receiptAcknowledgementDate">
+			<label>将承认收到此通知的收条发送给通知人的日期</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.receiptAcknowledgementDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.communicationDate">
+			<label>与通知人就该决定进行沟通的日期</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.communicationDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.exporters">
+			<label>出口商的联系方式</label>
+			<div class="km-value" compare-val="exporters">
+				<ul class="list">
+					<li ng-repeat="item in document.exporters">
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-if="document.importers && document.addressesTransboundaryMovement">
+			<label>进口商的联系方式</label>
+			<div class="km-value" compare-val="importers">
+				<ul class="list">
+					<li ng-repeat="item in document.importers">
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.appliesToTransboundaryMovement!=undefined">
+			<label>该决定是否适用于改性活生物体越境转移进入该国家？</label>
+			<div compare-val>
+				<km-value-bool value="document.appliesToTransboundaryMovement" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-if="document.importers && !document.addressesTransboundaryMovement">
+			<label>申请人的详细方式</label>
+			<div class="km-value" compare-val="importers">
+				<ul class="list">
+					<li ng-repeat="item in document.importers">
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.involvesFieldTrial!=undefined">
+			<label>该决定是否涉及现场试验？</label>
+			<div compare-val>
+				<km-value-bool value="document.involvesFieldTrial" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-if="document.involvesCommercialRelease!=undefined">
+			<label>该决定是否涉及商业零售？</label>
+			<div compare-val>
+				<km-value-bool value="document.involvesCommercialRelease" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-if="document.appliesToSubsequentIntroductions!=undefined">
+			<label>该决定是否适用于其后将同样的改性活生物体引入环境中？</label>
+			<div compare-val>
+				<km-value-bool value="document.appliesToSubsequentIntroductions" locales="locale"></km-value-bool>
+			</div>
+		</div>
+
+	</div><!-- =============SECTION B END ======================== --> <!-- =============SECTION C START======================== --><div ng-if="isLmoDecisionForDirectUse">
+			<legend>直接用作食品或饲料，或用于加工目的之改性活生物体（LMO-FFP）</legend>
+			<div ng-if="document.uses">
+				<label>改性活生物体用途</label>
+				<div class="km-value" compare-val="uses">
+					<ul class="list">
+						<li ng-repeat="item in document.uses" ng-bind="item|term:locale"></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.takenInAccordanceWithA116!=undefined">
+				<label>决定是否是在缺乏国内监管框架和符合条款11.6的条件下作出的？</label>
+				<div comapre-val>
+					<km-value-bool value="document.takenInAccordanceWithA116" locales="locale"></km-value-bool>
+				</div>
+			</div>
+
+
+			<div ng-if="document.directUseDecisions">
+				<legend>决定类别</legend>
+				<div compare-val="directUseDecisions">
+					<ul class="list">
+						<li ng-repeat="item in document.directUseDecisions"><span ng-bind="item|term:locale"></span></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.exporters && isDecisionOnLmoImport">
+				<label>出口商的联系方式</label>
+				<div class="km-value" compare-val="exporters">
+					<ul class="list">
+						<li ng-repeat="item in document.exporters">
+							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.importers && (isDecisionOnLmoDomesticUse || isDecisionOnLmoImport)">
+				<label ng-if="isDecisionOnLmoImport">进口商或申请人的联系方式</label>
+				<label ng-if="isDecisionOnLmoDomesticUse">申请人的详细方式</label>
+				<div class="km-value" compare-val="importers">
+					<ul class="list">
+						<li ng-repeat="item in document.importers">
+							<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+						</li>
+					</ul>
+				</div>
+			</div>
+	</div><!-- =============SECTION C END ======================== --> <!-- =============SECTION D START======================== --><div ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
+		<legend>决定所导致的结果</legend>
+		<div ng-if="document.decisionResult">
+			<label>决定所导致的结果</label>
+			<div compare-val>
+				<div class="km-value" ng-bind="document.decisionResult | term:locale"></div>
+			</div>
+		</div>
+		<div ng-if="document.conditions">
+			<label>条件</label>
+			<div compare-val>
+				<km-value-ml value="document.conditions" html locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.reasons">
+			<label>原因</label>
+			<div compare-val>
+				<km-value-ml html value="document.reasons" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.extensionPeriod">
+			<label>指定延长期限的天数</label>
+			<div compare-val>
+				<km-value-ml value="document.extensionPeriod" locales="locale"></km-value-ml>
+			</div>
+		</div>
+	</div><!-- =============SECTION   D END ======================== --> <!-- =============SECTION E START======================== --><div ng-if="isSimplifiedProcedure">
+		<legend>简化程序</legend>
+		<div ng-if="document.movementAllowedUnderA131A || document.exemptedFromAIA">
+			<label>按简化程序做出的决定的主题</label>
+			<div class="km-value" compare-val>
+				<div ng-if="document.movementAllowedUnderA131A">改性活生物体的有意越境转移与通知进口方同时发生的情况</div>
+				<div ng-if="document.exemptedFromAIA">规定改性活生物体进口免除事先知情同意程序的决定</div>
+			</div>
+			<div ng-if="document.appliesToSubsequentImports!=undefined">
+				<label>决定是否适合于今后的类似改性活生物体进口？</label>
+				<div compare-val>
+					<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
+				</div>
+			</div>
+		</div>		
+	</div><!--=============SECTION E END======================== --> <!--=============SECTION F START======================== --><div ng-if="isTransboundaryMovement">
+		<legend>非法越境转移或非有意越境转移</legend>
+
+		<div ng-if="document.transboundaryMovementType">
+			<label>非法越境转移类型</label>
+			<div class="km-value" compare-val><span ng-bind="document.transboundaryMovementType|term:locale"></span></div>
+		</div>
+
+		<div ng-if="document.releaseInformation">
+			<label>发生地点和/或释放地点的信息</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.releaseInformation"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.estimatedQuantities">
+			<label>所涉改性活生物体的估计数量及其相关特性和/或特征的现有相关资料</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.estimatedQuantities"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.releaseCircumstance">
+			<label>关于释放情景的信息</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.releaseCircumstance"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.releaseDate">
+			<label>关于预计释放日期的信息</label>
+			<div compare-val>
+			<div class="km-value" ng-bind-html="document.releaseDate | formatDate"></div>
+			</div>
+		</div>
+
+		<div ng-if="document.lmoUseInformation">
+			<label>有关改性活生物体在起源缔约方内的使用情况</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.lmoUseInformation"></km-value-ml>
+			</div>
+		</div>
+		<div ng-if="document.adverseEffectInformation">
+			<label>关于可能会对生物多样性的保护和可持续使用产生不利影响和对人类健康构成风险的任何现有资料，以及关于可能采取的风险管理措施的现有资料</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.adverseEffectInformation"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.otherTransboundryInformation">
+			<label ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">其它相关信息</label>
+			<label ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">无法识别相关改性活生物体情况的简要描述</label>
+			<div compare-val>
+			<km-value-ml locales="locale" value="document.otherTransboundryInformation"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.pointOfContact">
+			<label>可供索取进一步资料的联络点</label>
+			<div  class="km-value" compare-val="pointOfContact">
+				<ul class="list">
+					<li ng-repeat="item in document.pointOfContact">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
+		<legend>与其他数据库共享信息</legend>
+		<div ng-if="document.isForCommercialUse!=undefined">
+			<label>此决定是否涉及与商业用途相关的改性活生物体？</label>
+			<div compare-val>
+				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
+			</div>
+			<div ng-if="document.forwardToOECD!=undefined">
+				<label>此决定是否应提交给经合组织秘书处，以便纳入<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack 产品数据库</a>？</label>
+				<div  compare-val>
+					<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.isForFoodSafety!=undefined">
+				<label>此决定和食品安全有关吗？</label>
+				<div  compare-val>
+					<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.codexConducted!=undefined">
+				<label>是否按照<em>《食品标准法典委员会重组 DNA 植物食品安全评估指南》开展？</em></label>
+				<div  compare-val>
+					<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
+				</div>
+			</div>
+			<div ng-if="document.forwardToFAO!=undefined">
+				<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
+				<div compare-val>
+					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
+				</div>
+			</div>
+		</div>
+	</div><!--=============SECTION G END ========================--> <!--=============SECTION H start ========================--><div ng-if="document.modifiedOrganisms || document.riskAssessments">
+		<legend>改性活生物体和风险评估</legend>
+		<div ng-if="document.modifiedOrganisms">
+			<label>改性活生物体识别</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.modifiedOrganisms">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.riskAssessments">
+			<label>风险评估</label>
+			<div  class="km-value" compare-val="riskAssessments">
+				<ul class="list">
+					<li ng-repeat="item in document.riskAssessments">
+						<view-record-reference ng-model="item.identifier"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div><!--=============SECTION H END ========================--> <!--=============SECTION I Start ========================--><div ng-if="document.documents">
+		<legend>关于决定、通讯往来、通知或宣告的文件</legend>
+		<div class="km-value" compare-val="documents">
+			<km-link-list  ng-model="document.documents"></km-link-list>
+			
+		</div>
+	</div><!--=============SECTION I END ========================--> <!--=============SECTION K START ========================--><div ng-if="document.relevantInformation||document.relevantDocuments">
+			<legend>更多信息</legend>
+
+			<div ng-if="document.relevantInformation">
+				<div compare-val>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				</div>
+			</div>
+
+			<div ng-if="document.relevantDocuments">
+				<label>其他相关网站地址和/或附加文件</label>
+				<div class="km-value" compare-val>
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+					
+				</div>
+			</div>
+	</div><!--=============SECTION K END ========================--><div>
+			<view-referenced-records ng-model="document.header.identifier" on-data-fetch="onReferencedRecordsDataFetch(data)"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

@@ -1,0 +1,9 @@
+
+<div class="panel panel-default" style="margin-bottom:5px" ng-class="{ 'panel-collapse' : !section.expanded }">    
+  <div class="panel-heading" ng-click="toggle()" style="cursor:pointer" id="qt_{{section.key}}"><h4 style="display:inline" ng-bind-html="::section.title"></h4></div>
+  <div class="panel-body">
+
+      <national-report-analyzer-question ng-if="::section.reports" sum-type="sumType" regions="::regions" reports="::section.reports" question="::question" previous-questions-mapping="previousQuestionsMapping" previous-questions-value-mapping="previousQuestionsValueMapping" ng-repeat="question in section.questions"></national-report-analyzer-question>
+
+  </div>
+</div>

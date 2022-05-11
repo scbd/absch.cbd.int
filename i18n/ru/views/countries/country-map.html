@@ -1,0 +1,60 @@
+<div>
+
+    <style></style>
+
+    <div class="bs5" >
+
+        <div class="bs5 row border-bottom">
+
+                <p ng-if="showTitle" class="display-6 text-center pt-3"></p>
+
+                  
+
+            <div class="bs5 bg-white col-10 col-md-9">
+
+                <div id="chartdiv" style="min-height:550px" class="bs5 px-3"></div>
+
+                <div class="map-disclaimer" data-bs-toggle="modal" href="#dialogDisclaimer"></div>
+                <div id="dialogDisclaimer" class="modal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-bs-dismiss="modal"></button>
+                                <h2 class="modal-title"></h2>
+                            </div>
+                            <div class="modal-body"></div>
+                            <div class="modal-footer" style="text-align:left;">
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="bs5 col-2 col-md-3 g-0  border-end overflow-scroll border-start border-bottom bg-white">
+                <div class="bs5 p-4 map-country-list border-top">
+                    <div class="bs5 pb-3"></div>
+                    <div ng-if="isBCH && currentCountry">
+                        <homepin-popup-bch>
+                    </div>
+                    <div ng-if="isABS && currentCountry" class="country-item-name">
+                        <homepin-popup-abs>
+                    </div>
+                </div>
+            </div>
+
+            <div id="Parties" class="text-center bs5 mt-3">
+                <div class="row">
+                    <div class="col-md-4  fs-2 text-center "></div>
+
+                    <div class="col-md-4  fs-2 text-center" data-bs-toggle="tooltip" delay="0"
+                    title=""></div>
+
+                    <div class="col-md-4 fs-2 text-center"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>

@@ -1,0 +1,7 @@
+﻿<div dir="rtl">
+	<style type="text/css"></style>
+	<div ng-repeat="locale in locales" class="input-group input-lang-{{locale}}" ng-class="{ 'multiple-languages' : isShowLocale() && !last }" style="white-space:nowrap" ng-switch="rows">
+		<input    ng-switch-when="1"         class="form-control" ng-required="isRequired()" ng-model="text[locale]" ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="" type="text"/>
+		<input    ng-switch-when="undefined" class="form-control" ng-required="isRequired()" ng-model="text[locale]" ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="" type="text"/>
+		<textarea ng-switch-default          class="form-control" ng-required="isRequired()" ng-model="text[locale]" ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block"></textarea></div>
+</div>

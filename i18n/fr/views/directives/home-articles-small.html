@@ -1,0 +1,13 @@
+﻿<div id="Announcements">
+
+    <div class=" bs5 row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="bs5 col" ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:8" >
+            <div class="bs5 card m-3 m-lg-4 position-relative shadow" style="cursor: pointer;"  ><div class="bs5" style="width:100%;height:200px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, '400x400')}}');" ></div>
+
+                <div class="bs5 card-body border-top" style="min-height:120px;"><p class="bs5 card-text"></p>
+                </div>
+            </div>
+        </div>
+     </div>
+
+</div>

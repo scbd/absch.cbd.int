@@ -1,0 +1,9 @@
+﻿<div ><div >
+   
+        <div ng-repeat="option in question.options">
+            <label class="radio-inline">
+                <input type="radio" ng-model="selection.answer" ng-value="{{$index}}" name="{{question.key}}"  ng-disabled="ngDisabledFn()" ng-change="updateAnswer()"/></label>
+        </div>
+    </div>
+
+</div>

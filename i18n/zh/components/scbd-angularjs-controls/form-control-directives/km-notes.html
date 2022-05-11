@@ -1,0 +1,12 @@
+﻿<div>
+
+    <textarea class="form-control" ng-required="isRequired()" ng-model="newtext" ng-change="save()" placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block"></textarea>
+
+    <table class="table table-striped">
+        <tr ng-repeat="text in texts">
+            <td><input type="hidden" ng-model="text.value"></td>
+            <td style="width:10px;"></td>
+        </tr>
+    </table>
+
+</div>

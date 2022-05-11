@@ -1,0 +1,75 @@
+﻿<div>
+
+    <div class="row">
+            <div class="col-lg-12" >
+                <table class="table table-hover"  style="padding-bottom:3px;background-color:#fff">
+    				<tr ng-repeat="doc in rawPermitSelected"><td><div class="latest-title"></div>
+    					</td>
+                        <td></td>
+    				</tr>
+    			</table>
+            </div>
+    </div>
+
+
+<style media="screen"></style>
+
+
+
+    <button type="button" class="btn btn-default" ng-click="openDialog();" ng-disabled="disabled" ></button><div class="modal fade rounded" id="existingPermits" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-grey">
+                    <button type="button" class="close" data-bs-dismiss="modal"></button>
+                    <h1></h1>
+
+                    <div>
+                            <div km-select multiple required name="queryGovernment" ng-model="queryGovernment" items="options.government()" placeholder=""></div>
+                            <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder=""></div>
+                            <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder=""></div><div class="btn-group" >
+                                <button type="button" style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown"></button>
+                                <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+                                <li ></li>
+                                <li></li>
+                                <li></li>
+                                <li ></li>
+
+                            </ul>
+                            </div>
+                            <div class="btn-group uniqueId">
+                                <input type="textbox" ng-model="uniqueId" placeholder=""  class="form-control" >
+                            </div>
+                        </div>
+                </div>
+                <div class="modal-body">
+
+                        <div   style="max-height:400px;overflow-y:auto">
+                            	<table class="table table-hover" style="padding:0;margin:0">
+            						<tr ng-show="!isLoading" ng-repeat="doc in rawPermitDocs | filter:isSelected">
+            							<td>
+            								<input type="checkbox" ng-model="doc.__checked"/>
+            							</td>
+            							<td><div class="latest-title"></div>
+            							</td>
+                                        <td></td>
+            						</tr>
+
+            						<tr ng-show="rawPermitDocs.length==0">
+            							<td colspan="3"></td>
+            						</tr>
+
+            						<tr ng-show="isLoading">
+            							<td colspan="3"></td>
+            						</tr>
+            					</table>
+                        </div>
+
+                </div>
+                <div class="modal-footer bg-grey">
+                    <div class="row"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+﻿<div id="Search-Filter">
+    <div style="margin-bottom:30px;">
+        <div ng-if="kfilters.length"><hr class="heading" />
+        </div>
+        <div style="max-height:300px;overflow-y:scroll">
+        <style></style>
+
+            <div ng-repeat="doc in kfilters = (keywordSearchFilters |filter:hasCounts  | filter:searchKeyword | orderBy:'name')" class="keyword-item"><div ng-if="$last" ng-init="ngRepeatFinished()" style="display:none"></div> 
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+</div>

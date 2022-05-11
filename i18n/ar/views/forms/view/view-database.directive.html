@@ -1,0 +1,57 @@
+﻿<div id="Record" class="record panel panel-default" dir="rtl">
+	<div class="panel-heading bg-blue">
+		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-black" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+			
+		<document-date></document-date>
+		<legend>معلومات عامة</legend>
+		
+		<div ng-show="document.government">
+			<label name="country">البلد</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
+		</div>
+
+			<div ng-show="document.title">
+			 	<label>اسم موقع الويب أو قاعدة البيانات</label>
+			 	<div class="km-value" compare-val><strong ng-bind="document.title | lstring:locale"></strong></div>
+		 	</div>
+
+
+		<div ng-show="document.description">
+			<label>الوصف</label>
+			<div compare-val>
+			<div class="km-value km-pre"ng-bind-html="document.description | lstring:locale"></div>
+			</div>
+		</div>
+		<div ng-show="document.websites && document.websites.length >0">
+			<label>رابط موقع الويب</label>
+				<div class="km-value" compare-val>
+					<km-link-list ng-model="document.websites" ></km-link-list>
+				</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>معلومات إضافية</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val>
+				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Other relevant website addresses and/or attached documents</label>
+				<div class="km-value" compare-val>
+						<km-link-list ng-model="document.relevantDocuments" ></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+    <div document-metadata class="panel-footer"></div>
+</div>

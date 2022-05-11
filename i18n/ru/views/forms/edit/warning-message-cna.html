@@ -1,0 +1,11 @@
+﻿<div ng-show="showWarning">
+    <div class="well" ng-if="responsibleCNA && responsibleCNA.numFound > 0">
+        <h3 class="color-red"></h3>
+            <h5 class="color-red"></h5>
+            <div>
+            <div ng-repeat="rec in responsibleCNA.docs">
+                <result-default doc='rec' type="nationalRecords"></result-default>
+            </div>
+            </div>
+    </div>
+</div>

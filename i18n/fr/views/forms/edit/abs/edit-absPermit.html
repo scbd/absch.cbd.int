@@ -1,0 +1,380 @@
+﻿<div >
+
+    <edit-header></edit-header>
+    <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
+    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+                        <div ng-if="isIRCCRevoked">
+                                <div class="blockRegion inverted dimmer active" ng-if="isIRCCRevoked"><div class="medium loader"></div></div>
+                                <label for="invalidForm" style="width:100%">
+                                    <div class="alert alert-danger" ng-show="isIRCCRevoked">
+                                        <div class="text-center">
+                                            <h1>CE CERTIFICAT A ÉTÉ RAPPELÉ</h1>
+                                            <p>Les certificats rappelés ou annulés ne peuvent être modifiés.</p>
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        <form class="editForm" name="editForm" id="editForm" style="margin-top:10px">
+                                <div ng-show="tab=='edit'" km-tab="edit">
+                                    <legend name="formInfo" style="display:none"></legend>    
+                                    
+                                    <section ng-show="documentExists">
+                                        
+                                        <legend>Tentative de modification</legend><!--<div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
+                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
+                                                    of compliance (a new certificate will be constituted and the old one will no longer be valid)
+                                                    </br>
+                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized
+                                                    certificate of compliance will no longer be valid.
+                                                </div>
+                                            </div>
+                                        </div>--><div class="row">
+                                            <div class="col-xs-12">
+                                                    <div class="alert alert-info"><h3>Veuillez noter qu’en modifiant un certificat de conformité reconnu à l’échelle internationale (CCRI) un nouveau CCRI sera constitué et l’ancien CCRI ne sera plus valide.</h3></div>
+                                                <div class="km-control-group">
+                                                    <div class="km-control-group" name="amendmentDescription" required caption="Fournissez un résumé de la raison qui motive la mise à jour du fichier">
+                                                        <div km-rich-textbox ng-model="document.amendmentDescription" rows="3" placeholder="" locales="document.header.languages"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    
+                                    </section>
+            
+                                    <section>
+                                        <legend>Informations générales</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12" >
+                                                <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
+                                                    <div class="indent">
+                                                        <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="government" required caption="Pays">
+                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Veuillez choisir un pays..."></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group">
+                                                    <div class="km-control-group" name="permit" caption="Liens entre les autres certificats de conformité reconnus à l’échelle internationale et ce permis (CCRI).">
+                                                        <div class="help-info">Parfois, un permis peut être en lien avec d’autres permis émis dans le passé, par exemple un permis d'accès à un échantillon de sol. Selon des conditions convenues d’un commun accord (CCCA), il est possible que certains pays décident d’émettre des permis spécifiques pour des ressources génétiques identifiées ultérieurement à partir d'échantillon de sol collectés. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. Les CCRI liés par le biais de ce mécanisme s’afficheront ensemble pour ainsi faciliter leur suivi.</div>
+                                                            <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <legend>L’autorité de délivrance</legend>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="absCNA" required caption="L'autorité nationale compétente (ANC) est responsable de délivrer ce permis ou son équivalent">
+                                                    <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildQuery(searchText, 'authority')" ng-model="document.absCNA" question="absCNA" type="radio"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+            
+                                    <section>
+                                        <legend>Détails du permis ou son équivalent</legend>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group">
+                                                    <div class="km-control-group" name="title" required caption="Numéro de référence du permis ou son équivalent"><span class="help-info">Ce champ apparaîtra également dans le titre du fichier</span><div km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="referenceToNationalPermit" caption="Références ou identificateurs nationaux supplémentaires"><span class="help-info">Veuillez fournir des informations sur tout identificateur national pouvant aider les usagers à chercher et extraire des informations liées au permis ou à son équivalent</span><div km-rich-textbox ng-model="document.referenceToNationalPermit" rows="6" placeholder="" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="km-control-group" name="dateOfIssuance" required caption="Date de délivrance du permis ou son équivalent">
+                                                    <div class="help-info">Ce champs concerne la date d’émission du permis national. Cette information est obligatoire et est un élément clé pour assurer la sécurité juridique concernant le droit de l’usager d’utiliser la ressource  génétique couverte par le permis.</div>
+                                                    <div km-date placeholder="AAAA-MM-JJ" required name="dateOfIssuance" ng-model="document.dateOfIssuance"></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <div class="km-control-group" name="dateOfExpiry" caption="La date de délivrance du permis ou son équivalent">
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here. Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
+                                                    <div km-date placeholder="AAAA-MM-JJ" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+            
+                                    <section>
+                                        <legend>Information sur le consentement préalable en connaissance de cause (CPCC)</legend>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+            
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.providersConfidential}"><input type="checkbox" name="providersConfidential" ng-model="document.providersConfidential" watch-items>Cette information est confidentielle</input></span></div>
+                                                    <div class="panel-body panel-body-confidential" ng-class="{'disable':document.providersConfidential}">
+                                                        <div class="km-control-group " name="providers" required caption="Le fournisseur" style="margin-top:0;"><span class="help-info">Veuillez fournir le nom et les coordonnées de la personne ou de l'entité qui détient le droit d'accorder l'accès aux ressources génétiques conformément à la législation nationale.</span><div ng-show="!document.providersConfidential">
+                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.providers" question="providers"
+                                                                           allow-new="true" allow-new-schema="contact"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                            </div>
+                                        </div>
+            
+                                        <div class="row" style="margin-top:20px;">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" required name="picGranted" caption="Confirmation que le consentement préalable en connaissance de cause a été obtenu"><span class="help-info">Si le CPCC n'a pas été obtenu ou accordé, ce dossier ne peut être publié dans le Centre d'échange APA et, par conséquent, le certificat de conformité internationalement reconnu ne sera pas émis.</span><button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">Oui</button>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="picInformation" caption="Informations supplémentaires sur le consentement préalable en connaissance de cause (CPCC)"><span class="help-info">S’il y a lieu, veuillez fournir des informations supplémentaires sur le consentement préalable en connaissance de cause (CPCC). Des informations détaillées peuvent être fournies dans un document en pièce jointe</span><div km-rich-textbox name="picInformation" rows="4" ng-model="document.picInformation" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+            
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="picDocuments" caption="Informations supplémentaires sur le consentement préalable en connaissance de cause (CPCC) - Documents"><span class="help-info">S’il y a lieu, veuillez soit fournir un lien hypertexte vers ces documents, ou soit les télécharger.</span><div km-link name="picDocuments" ng-model="document.picDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+            
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.entitiesToWhomPICGrantedConfidential}"><input type="checkbox" name="entitiesToWhomPICGrantedConfidential" ng-model="document.entitiesToWhomPICGrantedConfidential" watch-items>Cette information est confidentielle</input></span></div>
+                                                    <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
+                                                        <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="La personne ou entité à laquelle le consentement préalable en connaissance de cause a été donné" style="margin-top:0;">
+                                                            <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. Si l’information est inscrite comme étant confidentielle, cette personne ne pourra pas recevoir de copie de courtoisie du CCRI ou du CPCC.</div>
+                                                               <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
+                                                                     allow-new="true" allow-new-schema="contact"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+            
+                                            </div>
+                                        </div>
+            
+                                    </section>
+            
+                                    <section>
+                                        <legend>Information sur les conditions convenues d’un commun accord</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" required name="matEstablished" caption="Confirmation que les conditions convenues d’un commun accord ont été établies"><span class="help-info">Si le CPCC n'a pas été obtenu ou accordé, ce dossier ne peut être publié dans le Centre d'échange APA et, par conséquent, le certificat de conformité internationalement reconnu ne sera pas émis.</span><button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">Oui</button>
+            
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+            
+                                                <div class="km-control-group" name="matInformation" caption="Informations sur les conditions convenues d’un commun accord (CCCA)"><span class="help-info">S’il y a lieu, veuillez fournir toutes les informations concertant les CCCA. Il peut s’agir par exemple de renseignements sur les conditions d’accès et de partage des avantages ou toute autre information pertinente incluse dans les CCCA. Des informations détaillées peuvent être fournies dans un document en pièce jointe.</span><div km-rich-textbox name="matInformation" rows="4" ng-model="document.matInformation" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+            
+            
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="matDocuments" caption="Information sur les conditions convenues d’un commun accord (CCCA)- Documents"><span class="help-info">Si cela est approprié, veuillez fournir un hyperlien ces documents vers ou téléchargez-les.</span><div km-link name="matDocuments" ng-model="document.matDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+            
+            
+            
+                                    <section>
+                                        <legend>Objet ou ressource génétique</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+            
+            
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.subjectMatterConfidential}"><input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items>Cette information est confidentielle</input></span></div>
+                                                    <div class="panel-body panel-body-confidential" ng-class="{'disable':document.subjectMatterConfidential}">
+                                                        <div class="km-control-group" required name="subjectMatter" caption="Le sujet ou les ressources génétiques auxquels ce rapporte le certificat"><span class="help-info">Veuillez fournir des informations sur l’objet ou les ressources génétiques que couvre le permis. Cela comprend le biote à n'importe quel rang taxonomique, qui peut porter un nom taxonomique. Cela peut également inclure la position d’une collection de la matière. Il est également possible d’identifier une ressource génétique avec une référence à un échantillon de référence ou à des notes de terrain détenues dans des archives ou une collection identifiées.</span><div ng-show="!document.subjectMatterConfidential">
+                                                                <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+                                            </div>
+                                        </div>
+            
+                                        <div class="row" style="margin-top:20px;">
+                                            <div class="col-xs-12">
+                                                <div class="legend2">Sujet supplémentaire ou information sur les ressources génétiques <span class="help-info">Fournir des détails sur la matière ou la ressource génétique couverte par le permis ou son équivalent permet d’offrir une sécurité juridique supplémentaire.</span></div>
+                                                <div class="km-control-group" name="specimens" caption="Données sur l’échantillon"><span class="help-info">Lien vers un spécimen de référence hébergé dans un établissement approprié</span><div km-link name="specimens" ng-model="document.specimens" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="taxonomies" caption="Taxonomie"><span class="help-info">Lien vers un fichier dans une base de données taxonomique, par exemple, GBIF, Catalogue of Life</span><div km-link name="taxonomies" ng-model="document.taxonomies" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12" ng-class="{'warning':isInvalid('gisFiles')}">
+                                                <div class="km-control-group">
+                                                    <label class="control-label" for="gisFiles">Coordonnées géographiques</label><span class="help-info">Limitées à geojson files (<a rel="noopener" target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span><div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
+                                                </div>
+            
+                                                <div ng-if="document.gisFiles">
+                                                    <div class="input-prepend input-append">
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}"><span class="add-on">lat</span></div>
+                                                    <div class="input-prepend input-append">
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}"><span class="add-on">long</span></div>
+                                                    <div class="input-prepend input-append">
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}"><span class="add-on">zoom</span></div>
+            
+                                                    <div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
+                                                </div>
+            
+                                            </div>
+                                        </div>
+            
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="keywords" caption="Mots clés pour décrire le sujet ou les ressources génétiques auxquels se rapporte le permis ou son équivalent."><span class="help-info">La collecte de ces informations est importante afin de faciliter l’harmonisation des recherches parmi les fichiers. Veuillez sélectionner les mots clés pour décrire le sujet ou les ressources génétiques auxquels se rapporte le permis ou son équivalent.</span><div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12" ng-show="isOthers()">
+                                                <div class="km-control-group" required name="keywordOther" caption="Autres mots clés">
+                                                    <div km-textbox-ml required name="keywordOther" rows="1" ng-model="document.keywordOther" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+            
+            
+                                    <section>
+                                        <legend>Information sur l’utilisation de la ou des ressource(s) génétique(s)</legend><span class="help-info">L'information incluse dans cette section de l'CCRI vise à permettre à quiconque de vérifier que l'utilisation de la ressource génétique à n'importe quel stade de la recherche, du développement, de l'innovation, de la pré-commercialisation ou de la commercialisation s’effectue conformément aux conditions du CPCC et des CCA .</span><div class="row">
+                                            <div class="col-xs-12">
+            
+            
+                                                <div class="panel panel-default">
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.usagesConfidential}"><input type="checkbox" name="usagesConfidential" ng-model="document.usagesConfidential" watch-items>Cette information est confidentielle</input></span></div>
+                                                    <div class="panel-body panel-body-confidential" ng-class="{'disable':document.usagesConfidential}">
+                                                        <div class="km-control-group" required name="usages" caption="Indiquez si le permis ou son équivalent couvre l’usage commercial et/ou non-commercial">
+                                                            <div ng-show="!document.usagesConfidential">
+                                                                <div km-select multiple required name="usages" ng-model="document.usages" items="options.usages()"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+            
+            
+            
+                                            </div>
+                                        </div>
+            
+                                        <div class="row" style="margin-top:20px;">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="usagesDescription" caption="Informations supplémentaires sur les utilisations spécifiques couvertes par le permis ou son équivalent ainsi que les restrictions d’usage"><span class="help-info">L'accès ne peut être accordé que pour des utilisations spécifiées (par exemple pour un usage médical) ou, au contraire, l'accès pourrait être accordé pour de multiples utilisations, mais avec des restrictions spécifiques applicables (par exemple, restriction pour obtenir des droits de propriété intellectuelle). S’il y a lieu, veuillez fournir toute information supplémentaire sur les utilisations spécifiques ou toute restriction d’usage que couvre le permis ou son équivalent.</span><div km-rich-textbox name="usagesDescription" rows="6" ng-model="document.usagesDescription" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="thirdPartyTransferCondition" caption="Conditions de transfert vers une tiers partie"><span class="help-info">Lorsqu'un permis ou son équivalent établit des conditions ou des restrictions concernant le transfert à une tiers partie, il aidera à mettre ces informations à la disposition du Centre d'échange APA afin de surveiller l'utilisation des ressources génétiques et améliorer la sécurité juridique.</span><div km-rich-textbox name="thirdPartyTransferCondition" rows="4" ng-model="document.thirdPartyTransferCondition" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <legend>Documentation</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="permitFiles" caption="Copie du permis ou de son équivalent, ou de tout autre document pertinent non confidentiel"><span class="help-info">Si désiré, veuillez utiliser ce champs pour télécharger une copie du permis ou de son équivalent ou tout autre document pertinent ou fournissez un lien vers son équivalent sur un site web national. Inclure une courte description du lien ou de la pièce jointe. Notez que ces informations seront publiées par le biais du Centre d'échange APA et ne devraient donc pas contenir d'informations confidentielles, ni des liens vers des informations ayant un accès restreint.</span><div km-link name="permitFiles" ng-model="document.permitFiles" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="permitDescription" caption="Courte description du/des lien(s) ou fichier(s) joint(s)">
+                                                    <div km-rich-textbox name="permitDescription" rows="6" ng-model="document.permitDescription" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                    </section>
+            
+                                    <section>
+                                        <legend>Informations supplémentaires</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="relevantInformation" caption="Informations supplémentaires">
+                                                    <div class="help-info">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordé ailleurs dans le fichier.</div>
+                                                    <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+            
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="relevantDocuments" caption="Autres sites web pertinents et/ou documents en pièce jointe">
+                                                    <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+            
+                                    <section>
+                                        <legend>Notes</legend>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                <div class="km-control-group" name="notes">
+                                                    <div class="help-info">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
+                                                    <div km-notes name="notes" ng-model="document.notes"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </form>
+                </edit-form>
+                <review-form>
+                    <view-abs-permit ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-permit>
+                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></workflow-arrow-buttons>
+            
+        </div>
+    </div>
+</div>

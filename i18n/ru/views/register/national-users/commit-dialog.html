@@ -1,0 +1,77 @@
+﻿<div class="modal-content">
+
+    <style></style>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-disabled="commitDialogCtrl.loading" ng-click="closeThisDialog()"></button>
+        <h3 class="modal-title"></h3></div>
+
+    <div class="modal-body">
+
+        <div ng-if="commitDialogCtrl.error">
+
+            <div ng-switch="commitDialogCtrl.error.code">
+                <div class="alert alert-warning" ng-switch-when="forbidden"></div>
+                <div class="alert alert-danger" ng-switch-default></div>
+            </div>
+
+        </div>
+
+        <table ng-if="!commitDialogCtrl.error" class="table"><tr ng-if="(commitDialogCtrl.transactions | filter:{type:'createUser'}).length">
+                <td colspan="3"></td>
+            </tr>
+
+            <tr ng-repeat="tran in commitDialogCtrl.transactions | filter:{type:'createUser'}" ng-class="{ success : tran.success, danger : tran.error }">
+                <td style="vertical-align:middle;width:2em"></td>
+                <td style="width:90%" ></td>
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
+                </td>
+            </tr><tr ng-if="(commitDialogCtrl.transactions | filter:{type:'addGovernment'}).length">
+                <td colspan="3"></td>
+            </tr>
+
+            <tr ng-repeat="tran in commitDialogCtrl.transactions | filter:{type:'addGovernment'}" ng-class="{ success : tran.success, danger : tran.error }">
+                <td style="vertical-align:middle;width:2em"></td>
+                <td style="width:90%" ng-bind="tran.governmentName|lstring">
+                </td>
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
+                </td>
+            </tr><tr ng-if="(commitDialogCtrl.transactions | filter:{type:'grantRole'}).length">
+                <td colspan="3"></td>
+            </tr>
+
+            <tr ng-repeat="tran in commitDialogCtrl.transactions | filter:{type:'grantRole'}" ng-class="{ success : tran.success, danger : tran.error }">
+                <td style="vertical-align:middle;width:2em"></td>
+                <td style="width:90%" ng-bind="tran.role.name"></td>
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
+                </td>
+            </tr><tr ng-if="(commitDialogCtrl.transactions | filter:{type:'revokeRoles'}).length">
+                <td colspan="3"></td>
+            </tr>
+
+            <tr ng-repeat="tran in commitDialogCtrl.transactions | filter:{type:'revokeRoles'}" ng-class="{ success : tran.success, danger : tran.error }">
+                <td style="vertical-align:middle;width:2em"></td>
+                <td style="width:90%" ng-bind="tran.role.name"></td>
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
+                </td>
+            </tr><tr ng-if="(commitDialogCtrl.transactions | filter:{type:'deleteGovernment'}).length">
+                <td colspan="3"></td>
+            </tr>
+
+            <tr ng-repeat="tran in commitDialogCtrl.transactions | filter:{type:'deleteGovernment'}" ng-class="{ success : tran.success, danger : tran.error }">
+                <td style="vertical-align:middle;width:2em"></td>
+                <td style="width:90%" ng-bind="tran.governmentName|lstring">
+                </td>
+                <td style="width:5%" ng-bind="tran.error.code || tran.error">
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()" ng-disabled="commitDialogCtrl.loading"></button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="commitDialogCtrl.save()" ng-disabled="commitDialogCtrl.loading"></button>
+    </div>
+</div>

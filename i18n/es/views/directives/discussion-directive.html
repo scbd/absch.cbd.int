@@ -1,0 +1,37 @@
+﻿<div style="padding:10px;">
+
+    <div class="panel panel-default">
+        <div class="panel-heading">Debate</div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div ng-show="discussionMessage" class="alert alert-info"><span ng-bind="discussionMessage"></span></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div class="row" style="border: 1px solid #eee;margin: 1px;">
+                        <div class="col-xs-12">
+                            <div class="control-group">
+                                <div style="border-bottom: 1px solid #eee;padding: 5px 0px 5px 0px;"><strong><span ng-bind="commentsCount"></span></strong> Observaciones &nbsp;&nbsp;&nbsp;<div class="btn-group">
+                                        <button type="button" style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span ng-show="newest==false" style="color:#428BCA">De la más antigua a la más nueva</span> <span ng-show="newest || newest==null" style="color:#428BCA">De la más nueva a la más antigua</span> <span class="caret"></span></button>
+                                        <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+                                            <li><a rel="noopener" translation-url  ng-href="#" ng-click="newest=false"><span ng-show="newest==false" class="glyphicon glyphicon-ok"></span>De la más antigua a la más nueva</a></li>
+                                            <li><a rel="noopener" translation-url  ng-href="#" ng-click="newest=true"><span ng-show="newest==true || newest==null" class="glyphicon glyphicon-ok"></span>De la más nueva a la más antigua</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="km-control-group" required caption="Unirse al debate"><br/><textarea ng-model="post.message" rows="3" placeholder="" class="form-control" />
+                                </div>
+                                <div class="km-control-group pull-right">
+                                    <input type="button" ng-click="post()" class="btn btn-primary" value="Post" />
+                                </div>
+                            </div>
+                        </div>
+                    </div><br/><div posts forum-id="forumId" thread-id="threadId" hide-thread="true" hide-subject="true" on-posts-load="postLoaded(posts)"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

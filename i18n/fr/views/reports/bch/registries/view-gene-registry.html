@@ -1,0 +1,58 @@
+<div>
+	<div class="container-fluid">
+		<div class="panel panel-default registry-details">
+			<div class="panel-heading">
+				<h2>Registre d'éléments génétiques</h2>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="col-md-2 col-xs-12"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
+							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Registres <span class="caret"></span></button>
+							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registres</b></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">Registre d’OVM</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Registre des organismes</a></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/genetic-elements">Registre d'éléments génétiques</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="col-md-10  col-xs-12">
+						<p class="p-borders padding-top-10">Le registre des éléments génétiques fournit un résumé des informations sur les éléments génétiques associés aux OVM enregistrés dans le CEPRB, y compris des informations sur l'organisme donneur, les traits conférés et la fonction biologique. Le registre comprend des liens vers les enregistrements sur chaque élément génétique où plus de détails peuvent être trouvés. Les OVM contenant l'élément génétique particulier sont référencés au bas du fichier individuelle.</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Chargement en cours...</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>Erreur dans le chargement des fichiers, veuillez essayer de nouveau.</h3></div>
+						<div ng-if="!isLoading && !isError">						
+						<div class="row">
+							<div class="col-md-12"><strong>Nombre total de fichiers : <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Exporter</button>
+							</div>
+						</div>
+						<div>
+							<table class="table" id="geneExport">
+								<thead>
+									<tr>
+										<th class="display-17">Numéro d'identification du dossier</th>
+										<th class="display-18">Nom</th>
+										<th class="display-25 hidden-xs">Trait(s)</th>
+										<th class="display-15 hidden-xs">Organisme donneur</th>
+										<th class="display-25 hidden-xs">Fonction</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::geneRecords">
+										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
+										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.organismScientificNames.join(', ')"></span> - <span ng-bind="::row.organismCommonNames.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
+										
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,155 @@
+<div id="innerPageEditForm editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><div class="registerpage-content">
+
+        <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+            <edit-form>
+                <form name="editForm" class="editForm" style="margin-top:10px">
+                    <div class="well no-shadow bg-white">
+                        <legend></legend>
+                        <div class="row">
+                            <div class="col-xs-12" >
+                                <div class="km-control-group" name="header.languages" required caption="">
+                                    <div class="indent">
+                                        <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-12">
+                                <div class="km-control-group" required name="organization" caption=""><div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
+                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
+                            </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8 col-xs-12">
+                                <div class="km-control-group" name="relatedOrganization" caption="">
+                                    <div class="help-block"></div>
+                                   <div document-selector required ng-model="document.relatedOrganization" allow-new="true" allow-new-schema="organization"
+                                        type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well no-shadow bg-white">
+                        <legend></legend>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" required name="services" caption="">
+                                    <div km-term-check name="services" required ng-model="document.services" terms="options.services()"
+                                    binding-type="term[]" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="agreements" caption="">
+                                    <div class="help-block"></div>
+                                    <div km-rich-textbox ng-model="document.agreements" rows="4" placeholder="" locales="document.header.languages"></div><div km-link name="agreementLinks" ng-model="document.agreementLinks" identifier="document.header.identifier"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="certifications" caption="">
+                                    <div km-textbox-ml name="certifications" ng-model="document.certifications"
+                                        placeholder="" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" required name="detectionMethods" caption="">
+                                    <div km-term-check name="detectionMethods" required ng-model="self.detectionMethods" terms="options.detectionMethods()"
+                                    binding-type="term[]" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="km-control-group" name="lmoTypes" caption="">
+                                    <div km-term-check name="lmoTypes" ng-model="document.lmoTypes" terms="options.lmoTypes()"
+                                    binding-type="term[]" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                               <div class="km-control-group" name="detectableLmos" caption="">
+                                    <div document-selector ng-model="document.detectableLmos" allow-new="true" allow-new-schema="modifiedOrganism"
+                                        question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true">
+                                        
+                                        <selected-records>
+                                            <table class="table" style="padding-bottom:3px;width:100%;">
+                                                <tr ng-repeat="doc in $parent.model"  >
+                                                    <td style="margin-bottom:15px;width:15px;"></td>
+                                                    <td style="margin-bottom:20px;">
+                                                        <div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </selected-records>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="detectableGenes" required caption="">
+                                    <div document-selector ng-model="document.detectableGenes" required allow-new="true" allow-new-schema="dnaSequence"
+                                        question="detectableGenes" on-build-query="onBuildQuery(searchText,'dnaSequence')" filter="true"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well no-shadow bg-white">
+                        <legend></legend>
+                        <div class="help-info"></div>
+                    </div>
+
+                    <div class="well no-shadow bg-white">
+                        <legend></legend>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="address" caption="">
+                                    <div class="help-block"></div>
+                                    <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="km-control-group" name="relevantDocuments" caption="">
+                                    <div class="help-block"></div>
+                                    <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="well no-shadow bg-white">
+                        <legend></legend>								
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="km-control-group" name="notes"><div km-notes name="notes" ng-model="document.notes"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </edit-form>
+            <review-form>
+                <view-laboratory-detection ng-model="review.document" locale="review.locale"></view-laboratory-detection>
+            </review-form>
+        </div>
+    </div>
+
+</div>

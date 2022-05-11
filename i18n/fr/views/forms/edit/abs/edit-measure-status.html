@@ -1,0 +1,296 @@
+﻿<div >
+
+    <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
+
+    <div class="edit-measure-status innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+            <div>
+                <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+                                        tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+                                        on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+                                        on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+                                        data-container="{{container}}" is-dialog="{{isDialog}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
+
+                        <form class="editForm" name="editForm" style="margin-top:10px">
+                            <div ng-show="tab=='edit'" km-tab="edit">
+
+                                <section>
+                                    <legend>Informations générales</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12" >
+                                            <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
+                                                <div class="indent">
+                                                    <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="government" required caption="Pays">
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" ng-change="onCountryChange(document.government.identifier)"
+                                                     source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Veuillez choisir un pays..."></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section>
+                                    <legend>Statut de l’adoption des mesures APA</legend>
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="km-control-group" required name="jurisdiction" caption="À quel niveau de juridiction le fichier portant sur le statut actuel des mesures d’APA réfère-t-il?">
+                                                <div km-select name="jurisdiction" ng-model="document.jurisdiction" ng-disabled="!document.government.identifier" 
+                                                    locales="document.header.languages" items="options.jurisdictions()" ng-change="updateTitle()"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12" ng-if="document.jurisdiction && isSubnational()">
+                                            <div class="km-control-group"  name="jurisdiction.customValue" caption="">
+                                                <label name="jurisdiction.customValue" required="isSubnational()" class="control-label" for="jurisdiction.customValue">Nom de la juridiction sous-nationale</label>
+                                                <div km-textbox-ml required="isSubnational()"  ng-model="document.jurisdiction.customValue" ng-change="updateTitle()"
+                                                    locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12" ng-if="document.jurisdiction && isCommunity()">
+                                            <div class="km-control-group" name="jurisdiction.customValue" caption="">
+                                                <label name="jurisdiction.customValue" required="isCommunity()" class="control-label" for="jurisdiction.customValue">Nom de la communauté</label>
+                                                <div km-textbox-ml required="isCommunity()" ng-model="document.jurisdiction.customValue" placeholder=""
+                                                ng-change="updateTitle()" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div ng-if="isJurisdictionRegional() && !isEu()">
+                                        <div class="alert alert-warning">
+                                            <h4>Veuillez notez que les mesures régionales ou multilatérales doivent être enregistrées seulement une fois au Centre d’échange APA et que chacun des pays sélectionné concerné par la mesure verront la mesure s’afficher en tant que partie de leur cadre de travail légal au sein de leur profil de pays. Il est recommandé que le pays accepte d’enregistrer la mesure au nom de l'organisation régionale ou du groupe de pays qui partagent cette même mesure.</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row" ng-if="isJurisdictionRegional() && isEu()"><!--  for EU only--><div class="col-xs-3">
+                                            <div class="km-control-group form-group" required name="jurisdictionRegions" caption="">
+                                                <label name="jurisdictionRegions" for="jurisdictionRegions">Région de la ou des juridiction(s)</label>
+                                                <div km-select multiple required name="regions"
+                                                    ng-model="jurisdictionRegions.regions" placeholder="Veuillez choisir une ou des option(s)"
+                                                    items="options.regions()"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-1">et/ou</div>
+                                        <div class="col-xs-3">
+                                        <div class="km-control-group form-group" name="jurisdictionCountries" caption="">
+                                                <label name="jurisdictionCountries" required class="control-label" for="jurisdictionCountries">Pays bénéficiaire(s)</label>
+                                                <div km-select multiple required  ng-model="jurisdictionRegions.countries" placeholder="Veuillez choisir une ou des option(s)" items="options.countries()"></div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <div class="km-control-group" required name="adoption" caption="date de publication du fichier">
+                                                <div km-date placeholder="AAAA-MM-JJ" name="adoption" required ng-model="document.adoption" ng-change="updateTitle()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-sm-12 jurisdiction-title">
+                                            <div class="km-control-group" required name="title" caption="Titre">
+                                                <div km-textbox-ml disabled ng-disable="true" name="title" required ng-model="document.title" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div><!-- ToDo: labels need to verify --><div class="row">
+                                       <div class="col-xs-12">
+                                            <div class="km-control-group" name="measureEstablished" required caption="Quel est le statut des mesures d’APA (ou de la juridiction indiquée) de votre pays?">
+
+                                                <label class="control-label planing-plc">
+                                                    <input type="radio" ng-model="document.measureEstablished" ng-value="true" name="measureEstablished" ng-click="onMeasureEstablished()" />Oui, les mesures d’APA ont été établies</label>
+                                                <label class="control-label planing-plc">
+                                                    <input type="radio" ng-model="document.measureEstablished" ng-value="false" name="measureEstablished" ng-click="onMeasureEstablished()" />Oui, les mesures d’APA ont été établies</label>
+                                            </div>
+                                       </div>
+                                        <div class="col-xs-12" ng-if="document.measureEstablished">
+                                            <label name="status" for="status">Veuillez choisir un statut</label>
+                                            <div class="km-control-group" name="status" required caption="">
+                                                <div km-term-radio name="noStatus" required ng-model="document.status" locales="document.header.languages"
+                                                    terms="options.yesStatus()" show-description="true" binding-type="term">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.measureEstablished != undefined && !document.measureEstablished">
+                                            <label name="status" for="status">Veuillez choisir un statut</label>
+                                            <div class="km-control-group" name="status" required caption="">
+                                                <div km-term-radio required name="yesStatus" ng-model="document.status" locales="document.header.languages"
+                                                    terms="options.noStatus()" show-description="true" binding-type="term">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12" ng-if="document.measureEstablished != undefined">
+                                        <div class="km-control-group" name="statusDescription"  caption="Veuillez fournir plus d'informations sur les progrès actuels dans l'établissement de mesures d'APA et/ou un résumé des principales difficultés et défis rencontrés .">
+                                            <div km-textbox-ml name="statusDescription" required ng-model="document.statusDescription" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="isSubjectToPic" required caption="Est-ce que l’accès aux ressources génétiques est sujet au consentement préalable obtenu en connaissance de cause (CPCC) tel qu’exigé par l'article 6.1?">
+                                                <div km-yes-no required name="isSubjectToPic" ng-model="document.isSubjectToPic" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined && !document.isSubjectToPic">
+                                            <div class="km-control-group" name="noPicStatus" required caption="">
+                                                <label name="noPicStatus" for="noPicStatus">Veuillez choisir le statut du CPCC</label>
+                                                <div km-term-radio required name="noPicStatus" ng-model="document.noPicStatus" locales="document.header.languages"
+                                                     terms="options.noPicStatus()" show-description="true" binding-type="term">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.isSubjectToPic">
+                                            <div class="km-control-group" required name="picMeasures" caption="Veuillez sélectionner les mesures d’APA pertinentes de la liste suivante qui régissent les ressources génétiques.">
+                                                <div document-selector ng-disabled="!document.government.identifier" name="picMeasures" ng-model="document.picMeasures" question="measure"
+                                                     on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.isSubjectToPic != undefined">
+                                            <div class="km-control-group" name="picMeasuresDescription"  caption="Veuillez expliquer davantage votre réponse .">
+                                                <div km-textbox-ml name="picMeasuresDescription" required ng-model="document.picMeasuresDescription" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="hasIplc" required caption="Est-ce que votre pays (ou la juridiction indiquée) abrite des communautés autochtones et/ou locales?">
+                                                <div km-yes-no required name="hasIplc" ng-model="document.hasIplc" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.hasIplc">
+                                            <div class="km-control-group" name="iplcType" required caption="">
+                                                <div km-term-radio required name="iplcType" ng-model="document.iplcType" locales="document.header.languages"
+                                                     terms="options.iplcType()" show-description="true" binding-type="term">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.hasIplc != undefined">
+                                            <div class="km-control-group" name="iplcDescription" caption="Veuillez expliquer davantage votre réponse .">
+                                                <div km-textbox-ml name="iplcDescription" required ng-model="document.iplcDescription" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="hasIplcRightEstablished" required caption="Est-ce que les peuples autochtones et les communautés locales ont octroyé le droit d’accès au ressources génétiques conformément à vos lois nationales?">
+                                                <div km-yes-no ng-model="document.hasIplcRightEstablished" ng-click="onHasIplcRightChange()" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.hasIplcRightEstablished">
+                                            <label name="isIplcRightFullyImplemented" for="isIplcRightFullyImplemented">Est-ce que le CPCC est pleinenement mise en place?</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isIplcRightFullyImplemented" ng-value="true" name="isIplcRightFullyImplemented" />Oui (pleinement mis en oeuvre)</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isIplcRightFullyImplemented" ng-value="false" name="isIplcRightFullyImplemented" />Dans une certaine mesure</label>
+
+                                            <div class="km-control-group" name="iplcMeasures" required caption="Veuillez sélectionner la ou les mesures APA pertinentes dans la liste suivante concernant l'accès aux ressources génétiques détenues par les peuples autochtones et les communautés locales.">
+                                                <div document-selector ng-disabled="!document.government.identifier" name="iplcMeasures" ng-model="document.iplcMeasures" question="measure"
+                                                on-build-query="onMeaureQuery(searchText)" allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                            </div>
+
+                                            <div class="km-control-group" required name="otherIplcRelatedRecords" caption="Veuillez sélectionner d'autres informations applicables pertinentes liées aux procédures d'APA, aux sites Web ou aux bases de données nationaux, aux protocoles et procédures communautaires et au droit coutumier et/ou aux autorités nationales compétentes dans la liste suivante.">
+                                                <div document-selector ng-disabled="!document.government.identifier" name="otherIplcRelatedRecords"  ng-model="document.otherIplcRelatedRecords" question="measure"
+                                                     on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.hasIplcRightEstablished != undefined && !document.hasIplcRightEstablished">
+                                            <label name="isIplcRightInPlan" for="isIplcRightInPlan">Est-ce que le CPCC est conforme au plan?</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isIplcRightInPlan" ng-value="true" name="isIplcRightInPlan" />En cours d’élaboration ou prévu</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isIplcRightInPlan" ng-value="false" name="isIplcRightInPlan" />N'est pas prévu</label>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.hasIplcRightEstablished != undefined">
+                                                <div class="km-control-group" name="iplcMeasuresDescription" caption="Veuillez expliquer davantage votre réponse .">
+                                                    <div km-textbox-ml name="iplcMeasuresDescription" required ng-model="document.iplcMeasuresDescription" locales="document.header.languages"></div>
+                                                </div>
+                                          </div>
+                                       </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="hasStepsForIplcApproval" required caption="Votre pays (ou la juridiction indiquée) a-t-il pris des mesures dans le but de garantir que les connaissances traditionnelles associées aux ressources génétiques détenues par les peuples autochtones et les communautés locales de votre pays soient accessibles avec le CPCC ou l'approbation et la participation de ces peuples autochtones et communautés locales et que les CCCA ont été mises en place ?">
+                                                <div km-yes-no required ng-model="document.hasStepsForIplcApproval" ng-click="onHasStepsChange()" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-12" ng-if="document.hasStepsForIplcApproval">
+                                          <label  name="isStepsForIplcApprovalImplemented" for="isStepsForIplcApprovalImplemented">Est-ce que les étapes pour l’approbation du CPCC ont été mises en oeuvre?</label>
+                                                 <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isStepsForIplcApprovalImplemented" ng-value="true" name="isStepsForIplcApprovalImplemented" />Oui (pleinement mises en oeuvre)</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isStepsForIplcApprovalImplemented" ng-value="false" name="isStepsForIplcApprovalImplemented" />Dans une certaine mesure</label>
+
+                                            <div class="km-control-group" required name="iplcApprovalMeasures" caption="Veuillez sélectionner la ou les mesures APA pertinentes dans la liste suivante concernant l'accès aux ressources génétiques détenues par les peuples autochtones et les communautés locales.">
+                                                <div document-selector ng-disabled="!document.government.identifier" name="iplcApprovalMeasures"  ng-model="document.iplcApprovalMeasures" question="measure"
+                                                    on-build-query="onMeaureQuery(searchText)"allow-new-schema="measure" allow-new="true" filter="true"></div>
+                                            </div>
+
+                                            <div class="km-control-group" required name="otherIplcApprovalRecords" caption="Veuillez sélectionner d'autres informations applicables pertinentes liées aux procédures d'APA, aux sites Web ou aux bases de données nationaux, aux protocoles et procédures communautaires et au droit coutumier et/ou aux autorités nationales compétentes dans la liste suivante.">
+                                                <div document-selector ng-disabled="!document.government.identifier" name="otherIplcApprovalRecords" ng-model="document.otherIplcApprovalRecords" question="measure"
+                                                     on-build-query="onRecordQuery(searchText)" filter="true"></div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-xs-12" ng-if="!document.hasStepsForIplcApproval && document.hasStepsForIplcApproval != undefined">
+                                            <label  name="isStepsForIplcApprovalInPlan" for="isStepsForIplcApprovalInPlan">Est-ce que les étapes pour le plan du CPCC ont été mises en oeuvre?</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isStepsForIplcApprovalInPlan" ng-value="true" name="isStepsForIplcApprovalInPlan" />En cours d’élaboration ou prévu</label>
+                                            <label class="control-label planing-plc">
+                                                <input type="radio" ng-model="document.isStepsForIplcApprovalInPlan" ng-value="false" name="isStepsForIplcApprovalInPlan" />N'est pas prévu</label>
+
+                                        </div>
+                                       <div class="col-xs-12" ng-if="document.hasStepsForIplcApproval != undefined">
+                                            <div class="km-control-group" name="iplcApprovalDescription" caption="Veuillez expliquer davantage votre réponse .">
+                                                <div km-textbox-ml name="iplcApprovalDescription" required ng-model="document.iplcApprovalDescription" locales="document.header.languages"></div>
+                                            </div>
+                                       </div>
+                                    </div>
+                                </section>
+
+                                <section>
+                                    <legend>Information supplémentaire</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="address" caption="Any other relevant information">
+                                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                                <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
+                                                <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section>
+                                    <legend>Notes</legend>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="km-control-group" name="notes">
+                                                <div class="help-block">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
+                                                <div km-notes name="notes" ng-model="document.notes"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+
+                            </div>
+                        </form>
+                    </edit-form>
+                    <review-form>
+                        <view-measure-status ng-model="review.document" locale="review.locale" allow-drafts="true"></view-measure-status>
+                    </review-form>
+                </workflow-arrow-buttons>
+            </div>
+
+        </div>
+    </div>
+</div>

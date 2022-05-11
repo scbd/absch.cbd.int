@@ -1,0 +1,39 @@
+﻿<div class="row" dir="rtl">
+    <style></style>
+    <div class="col-md-12">
+        <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+            page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+            num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
+
+        <div ng-if="loading"></div>
+
+        <div ng-repeat="group in searchResult.docs" style="margin:10px 5px">
+            <div ng-include="'group-result'"></div>          
+        </div>
+        <h4 class="bg-white" ng-if="!loading && (searchResult.numFound||0) === 0"></h4>
+
+        <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+            page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+            num-found="searchResult.numFound"></pagination> 
+    </div>
+
+    <script type="text/ng-template" trados-translation="true" id="group-result">
+            <div class="bs5 search-result-heading level_{{::group.level||1}}" ng-if="::group.levelKey" dir="rtl"><ng-party-status ng-if="::group.partyStatus" code="group.levelKey" class="party-status-align d-md-inline-block d-sm-block"></ng-party-status></div>
+            <div class="search-result-body" ng-if="!group.isClosed && group.docs" dir="rtl">
+                <div ng-repeat="doc in group.docs">
+                    <result-default doc="doc" external-link="true" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>                             
+                </div>
+                <div class="btn-group" ng-if="group.numFound >  group.docs.length">
+                    <button type="button" class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;" 
+                    ng-if="group.numFound-group.docs.length > 10" ng-click="loadRecords(group,10)" ng-disabled="group.isLoading"></button>
+                    <button type="button" ng-if="group.isLoading" class="btn btn-default" ng-disabled="true" style="font-size: 10px;text-transform: uppercase;"   ></button>
+                    <button type="button" class="btn btn-default bold" ng-click="loadRecords(group)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="group.isLoading"  ></button>
+                </div>
+            </div>
+            <div ng-if="!group.isClosed && group.subLevels" dir="rtl">
+                <div ng-repeat="level in group.subLevels"  ng-include="'group-result'" onload="group = level" style="margin-left:10px;padding:5px;">
+                </div>
+            </div>
+    </script>
+
+</div>

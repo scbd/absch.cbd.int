@@ -1,0 +1,56 @@
+<div id="Record" class="record panel panel-default" dir="rtl">
+	<div class="panel-heading bg-orange">
+		<h4></h4>
+	</div>
+	<div class="record-body panel-body">
+		<document-date></document-date>
+		<legend></legend>
+		<div ng-if="document.country">
+			<label name="country"></label> 
+			<div class="km-value" compare-val></div>
+		</div>
+		<div ng-if="document.title">
+			<label></label>
+			<div compare-val> 
+				<km-value-ml value="document.title" locales="locale"></km-value-ml> 
+			</div>
+		</div>
+		<div ng-if="document.nodeAddress">
+			<label></label>
+			<div compare-val>
+				<km-link-list class="km-value"  ng-if="document.nodeAddress" ng-model="document.nodeAddress" style="margin-top: 5px;"></km-link-list>
+			</div>
+		</div>
+		<div ng-if="document.newsAbstract">
+			<label></label>  
+			<div compare-val>
+				<km-value-ml value="document.newsAbstract" locales="locale" html></km-value-ml> 
+			</div>  
+		</div>
+		<div ng-if="document.newsText">
+			<label></label> 
+			<div compare-val>
+				<km-value-ml value="document.newsText" locales="locale" html></km-value-ml>  
+			</div>
+		</div>
+		<div ng-if="document.relevantInformation||document.relevantDocuments">
+			<div ng-if="document.relevantInformation">
+				<label></label>
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-if="document.relevantDocuments">
+				<label></label>
+				<div compare-val>
+					<km-link-list class="km-value"  ng-if="document.relevantDocuments" ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

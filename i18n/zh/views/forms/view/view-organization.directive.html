@@ -1,0 +1,161 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange">
+		<h4><span ng-bind="document.header.schema| schemaName"></span> <span class="color-black" ng-bind="'(' + (document.header.schema|schemaShortName) + ')'"></span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date><br><legend><span ng-bind="document.name | lstring:locale"></span> <span ng-show="document.acronym">(<span ng-bind="document.acronym | lstring:locale"></span>)</span></legend></br><div ng-show="document.name">
+			<label>组织名称</label>
+			<div compare-val>
+				<km-value-ml value="document.name" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.acronym">
+			<label>缩写</label>
+			<div compare-val>
+				<km-value-ml value="document.acronym" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.contacts">
+			<label>该组织的联系人</label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.contacts" >
+						<div view-record-reference ng-model="item" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
+			<label>组织地址</label>
+			<div compare-val>
+				<address class="km-value">
+					<div class="km-pre" ng-bind-html="document.address | lstring:locale"></div><span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">、</span> <span ng-bind="document.state | lstring:locale"></span><br ng-show="document.city || document.state" /> <span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">、</span> <b ng-bind="document.country|term"></b></address>
+			</div>
+		</div>
+
+
+		<div ng-show="document.phones">
+			<label>电话号码</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.phones" ng-bind="item"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.faxes">
+			<label>传真号码</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.faxes" ng-bind="item"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.emails">
+			<label>电子邮件</label>
+			<div  class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.websites">
+			<label>网站地址</label>
+			<div compare-val>
+				<div class="km-value" ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a></div>
+			</div>
+		</div>
+
+		<div>
+			<legend>详细信息</legend>
+
+			<div ng-show="document.organizationType">
+				<label>组织类型</label>
+				<div compare-val>
+					<div class="km-value" ng-bind="document.organizationType | term"></div>
+				</div>
+			</div>
+			<div ng-show="document.areasOfWork">
+				<label>工作领域</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="areaOfWork in document.areasOfWork" style="margin-bottom: 5px;">
+							<km-value-ml value="areaOfWork" html pre locales="locale"></km-value-ml>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.thematicAreas">
+				<label>生物多样性公约主题领域</label>
+				<div  class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="term in document.thematicAreas"><span ng-bind="term|term|lstring:locale"></span></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.cpbThematicAreas">
+				<label>生物安全主题领域</label>
+				<div  class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="term in document.cpbThematicAreas" ng-bind="term|lstring:locale"></li>
+					</ul>
+				</div>
+			</div>			
+
+			<div ng-show="document.operationalRegions">
+				<label>运营区域或政治/经济集团</label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="term in document.operationalRegions" ng-bind="term|term|lstring:locale"></li>
+					</ul>
+				</div>
+			</div>
+
+			<div ng-if="document.profile || document.profileLink">
+				<label>组织简介</label>
+				<div compare-val ng-if="document.profile">
+					<km-value-ml value="document.profile" html locales="locale"></km-value-ml>
+				</div>
+				<div compare-val>
+					<div class="km-value" ng-if="document.profileLink" km-link-list ng-model="document.profileLink" style="margin-top: 5px;"></div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="document.linkedOrganizations">
+			<legend>关联组织</legend>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.linkedOrganizations" >
+						<div view-record-reference ng-model="item" locale="locale"></div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>更多信息</legend>
+
+			<div compare-val ng-show="document.relevantInformation">
+				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+			</div>
+
+		<div ng-show="document.relevantDocuments">
+			<label>其他相关网站地址和/或附加文件</label>
+			<div class="km-value" compare-val="relevantDocuments">
+				<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+			</div>
+		</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+
+	</div>
+	<div document-metadata class="panel-footer" ></div>
+</div>

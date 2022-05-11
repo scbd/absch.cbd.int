@@ -1,0 +1,303 @@
+﻿<div ng-class="{'watermark' : documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'}">
+
+    <div class="row" style="padding-left:0px;">
+        <div class="alert alert-danger" ng-show="documentInfo.Realm && documentInfo.Realm.toUpperCase()!= 'ABS'">
+            <h4>警告！</h4>
+            <p>本 pdf 由获取和惠益分享信息交换所测试网站生成。<p>
+        </div>
+
+        <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
+
+        <div class="row1">
+            <div class="col-xs-12 bg-green">
+                <h1 class="color-litegreen  text-center" style="padding:0;font-size:20;">
+                    <div class="color-white" ng-bind="documentInfo |uniqueID:true"></div>国际公认合规证书由向获取和惠益分享信息交换所提供的许可证或其同等证照的相关信息构成</h1>
+            </div>
+
+        </div>
+
+        <div class="row1">
+            <div class="col-xs-12" style="padding:10px;">据名古屋获取和惠益分享议定书第17条第2款规定，按照第6条第3(e)款签发的并向获取和惠益分享信息交换所提供的许可证或同等证照，应构成国际公认合规证书。</div>
+        </div>
+
+        <div class="col-xs-12 " style="padding:0px;margin:0px">
+            <div class="alert alert-danger" ng-show="versions && versions[0].body.amendmentIntent==1">
+                <div class="text-center">
+                    <h1 class="color-white">本证书已撤销、不再有效</h1>
+                    <p>请参阅修改历史，以获取更多信息。</p>
+                </div>
+            </div>
+
+            <legend>一般信息</legend>
+            <div class="row top-border bg-litegreen">
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>签发国家/地区</label>
+                    <div class="text" ng-bind="document.government|term |uppercase"></div>
+                </div>
+
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>验证链接（查看最新版本）</label>
+                    <div class="text"><a rel="noopener" href="https://absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS'">https://absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}</a> <a rel="noopener" href="https://training-absch.cbd.int/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()=='ABS-TRG'">https://training-absch.cbd.int/database/{{documentInfo|uniqueIDWithoutRevision}}</a> <a rel="noopener" href="https://absch.cbddev.xyz/database/{{documentInfo | uniqueIDWithoutRevision}}" ng-if="documentInfo.Realm && documentInfo.Realm.toUpperCase()== 'ABS-DEV'">https://absch.cbddev.xyz/database/{{documentInfo|uniqueIDWithoutRevision}}</a></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>获取和惠益分享信息交换所唯一识别码 (UID)</label>
+                    <div class="text" ng-bind="documentInfo|uniqueID:true"></div>
+                </div>
+            </div>
+
+            <legend>签发机构</legend>
+            <div class="row top-border bg-litegreen">
+                <div class="col-xs-12">
+                    <div class="text">
+                        <div view-record-reference ng-model="document.absCNA" locale="locale" collapse="false"></div>
+                    </div>
+                </div>
+            </div>
+
+            <legend>许可证或同等证照的详细信息</legend>
+            <div class="row top-border bg-litegreen">
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>许可证或同等证照的参考编号</label>
+                    <div class="text" ng-bind="document.title| lstring:locale"></div>
+                </div>
+
+                <div class="col-xs-12" ng-if="document.referenceToNationalPermit">
+                    <label>其他国家参照或标识符</label>
+                    <div class="text" ng-bind-html="renderHtml(document.referenceToNationalPermit)"></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-6">
+                    <div ng-show="document.dateOfIssuance">
+                        <label>许可证或同等证照的颁发日期</label>
+                        <div class="text" ng-bind="document.dateOfIssuance | formatDate"></div>
+                    </div>
+                </div>
+                <div class="col-xs-6">
+                    <div ng-show="document.dateOfExpiry">
+                        <label>许可证或同等证照的到期日期</label>
+                        <div class="text" ng-bind="document.dateOfExpiry | formatDate"></div>
+                    </div>
+                </div>
+
+                <div ng-show="document.relatedIRCCs">
+                    <label>相关国际公认合规证书的唯一标识码</label>
+                    <div class="text" ng-repeat="item in document.relatedIRCCs"><span view-record-reference ng-model="item.identifier" locale="locale" collapse="false"></span></div>
+                </div>
+
+            </div>
+
+            <legend>事先知情同意书（PIC）资料</legend>
+            <div class="row top-border bg-litegreen">
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>已获得或已获授事先知情同意书（PIC）的确认</label>
+                    <div class="text">是</div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>提供者<span class="help-block">有权根据国内法律批准获取遗传资源的个人或实体。</span></label>
+                    <div class="text" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
+                        <div view-record-reference ng-model="provider" locale="locale" collapse="false"></div>
+                    </div>
+                    <div ng-show="document.providersConfidential">
+                        <div class="text confidential">机密信息</div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>获授事先知情同情书的实体</label>
+                    <div class="text" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
+                        <div view-record-reference ng-model="consent" locale="locale" collapse="false"></div>
+                    </div>
+                    <div ng-show="document.entitiesToWhomPICGrantedConfidential">
+                        <div class="text confidential">机密信息</div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <div ng-show="document.picInformation">
+                        <label>有关事先知情同意书的补充信息</label>
+                        <div class="text" ng-bind-html="document.picInformation | lstring:locale"></div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <div ng-show="document.picDocuments">
+                        <label>有关事先知情同意书的额外文档或链接</label>
+                        <div class="text">
+                            <ul style="list-style-type: none;padding-left:3px;">
+                                <li ng-repeat="item in document.picDocuments"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <legend>共同商定条件（MAT）信息</legend>
+            <div class="row top-border bg-litegreen">
+
+                <div class="col-xs-12">
+                    <label>共同商定条件（MAT）已确立的确认</label>
+                    <div class="text">是</div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <div ng-show="document.matEstablished">
+                        <label>关于共同商定条件信息的补充信息</label>
+                        <div class="text" ng-bind-html="document.matInformation | lstring:locale"></div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <div ng-show="document.matDocuments">
+                        <label>关于共同商定条件信息的补充文档或链接</label>
+                        <div class="text">
+                            <ul style="list-style-type: none;padding-left:3px;">
+                                <li ng-repeat="item in document.matDocuments"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <legend>主题</legend>
+            <div class="row top-border bg-litegreen">
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12">
+                    <label>所涵盖的主题或遗传资源：</label>
+                    <div class="text" ng-show="!document.subjectMatterConfidential"><span ng-bind-html="renderHtml(document.subjectMatter)"></span></div>
+                    <div ng-show="document.subjectMatterConfidential">
+                        <div class="text confidential">机密信息</div>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12" ng-show="document.specimens || document.taxonomies || document.gisFiles ">
+                    <label>补充遗传资源信息链接：</label>
+                    <div class="text">
+                        <div class="inner-label" ng-show="document.specimens">样本数据：</div>
+                        <ul>
+                            <li ng-repeat="item in document.specimens"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                        </ul>
+
+                        <div class="inner-label" ng-show="document.taxonomies">分类数据</div>
+                        <ul>
+                            <li ng-repeat="item in document.taxonomies"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                        </ul>
+                        <div class="inner-label" ng-show="document.gisFiles">地理坐标数据</div>
+                        <ul>
+                            <li ng-repeat="item in document.gisFiles"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <legend>关于遗传资源利用的信息</legend>
+            <div class="row top-border bg-litegreen">
+
+                <div class="col-xs-12">
+                    <label>许可证或同等证照所允许的使用类型</label>
+                    <div class="text" ng-class="{'confidential':document.usagesConfidential}"><span ng-show="!document.usagesConfidential" ng-repeat="term in document.usages"><span ng-bind="term|term"></span><span ng-bind="$last ? '' : ' and '"></span></span> <span ng-show="document.usagesConfidential">机密信息</span></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12" ng-if="document.usagesDescription">
+                    <label>许可证或同等证照所涵盖的物定用途或使用限制：</label>
+                    <div class="text"><span ng-bind-html="renderHtml(document.usagesDescription)"></span></div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="col-xs-12" ng-if="document.thirdPartyTransferCondition">
+                    <label>第三方转让条件：</label>
+                    <div class="text" ng-bind-html="renderHtml(document.thirdPartyTransferCondition)"></div>
+                </div>
+            </div>
+
+            <div ng-if="document.permitDescription || document.permitFiles">
+                <legend>文档及补充信息</legend>
+                <div class="row top-border bg-litegreen">
+                    <div class="col-xs-12">
+                        <label>许可证或同等证照或其他相关公开获取文件的副本：</label>
+                        <div class="text"><span ng-bind-html="renderHtml(document.permitDescription)"></span></div>
+                        <ul style="list-style-type: none;" class="text" class="text" ng-show="document.permitFiles">
+                            <li ng-repeat="item in document.permitFiles"><strong ng-bind="item.name"></strong> (https://absch.cbd.int/{{item.url}})</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div ng-if="document.relevantInformation || document.relevantDocuments">
+                <div class="clearfix"></div>
+                <div class="col-xs-12" ng-show="document.relevantInformation || document.relevantDocuments">
+                    <label>补充信息和链接：</label>
+                    <div class="text">
+                        <div ng-bind-html="renderHtml(document.relevantInformation)"></div>
+                    </div>
+                    <ul style="list-style-type: none;" class="text" class="text" ng-show="document.relevantDocuments">
+                        <li ng-repeat="item in document.relevantDocuments"><strong ng-bind="item.name"></strong> (https://absch.cbd.int/{{item.url}})</span>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+
+            <legend>增补历史</legend>
+            <div class="row top-border bg-litegreen">
+                
+                <table class="table">
+                    <tr>
+                        <td class="col-xs-2">
+                            <label>日期</label>
+                        </td>
+                        <td class="col-xs-2">
+                            <label>行动</label>
+                        </td>
+        
+                        <td class="col-xs-4">
+                            <label>评论</label>
+                        </td>
+                        <td class="col-xs-4">
+                            <label>唯一识别码</label>
+                        </td>
+                    </tr>
+                    
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
+                        <td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
+                        <td class="col-xs-2"><span ng-show="document.body.amendmentIntent==1"><span class="bold color-red">已撤销</span></span> <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))"><span class="bold color-green">旧版本</span></span> <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)"><span class="bold color-green">当前版本</span></span></td>
+                        <td class="col-xs-4"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <span ng-show="document.body.amendmentIntent==undefined">发布到获取和惠益分享信息交换所的许可证信息及所构成的证书。</span></td>
+                        <td class="col-xs-4" ng-bind="document | uniqueID">
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+           
+
+            <legend>其他信息</legend>
+            <table class="top-border">
+                <tr>
+                    <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">有关构成国际公认合规证书的许可证或同等证照的问题，应寄给发出许可证或同等证照的国家主管部门。 Additional information about the permit or its equivalent may be available in the Access and Benefit-Sharing Clearing House ( <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> 有关名古屋获取和惠益分享议定书或获取和惠益分享信息交换所运作的问题，可发给生物多样性公约秘书处。</td>
+                    <td class="col-md-6" style="font-size:12px;vertical-align: top"><strong>生物多样性公约秘书处</strong><br/> 413 rue Saint-Jacques, suite 800 <br/> Montreal, Québec, H2Y 1N9 <br/> Canada（加拿大）<br/> 传真：+1 514 288-6588 <br/> 电子邮件：<a rel="noopener" href="mailto:secretariat@cbd.int" style="color:white;">secretariat@cbd.int</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</div>

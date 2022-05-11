@@ -1,0 +1,11 @@
+﻿<div id="Search-Filter"  class="row"  ng-show="sf_filters.length" style="margin-bottom:30px;" dir="rtl">
+    <div  class="col-md-12">
+        <div class="heading" ng-if="sf_filters.length"></div>
+            <hr class="heading"  ng-if="sf_filters.length">
+
+        <p class="helpinfo" ng-if="sf_filters.length"></p>
+        
+        <div ng-repeat="doc in sf_filters = (sf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])"></div>
+        <div ng-if="(searchKeyword && !showFilters) && sf_filters.length" style="margin-bottom:10px;"></div>  
+    </div>
+</div>

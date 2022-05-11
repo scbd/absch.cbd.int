@@ -1,0 +1,343 @@
+<div >
+  
+    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+        <div class="registerpage-content">
+
+            <warning-message-cna doc="document"></warning-message-cna>
+
+            <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
+            tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
+            on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
+            on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
+            data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
+                <edit-form>
+                    <form class="editForm" name="editForm">
+                        <div ng-show="tab=='edit'" km-tab="edit">
+                            <legend name="formInfo" style="display:none"></legend>
+        
+                            <section>
+                                <legend name="generalInfo">一般信息</legend>
+
+                                <div class="row">
+                                    <div class="col-xs-12" >
+                                        <div class="km-control-group" name="header.languages" required caption="请选择您希望提交之记录的语言：">
+                                            <div class="indent">
+                                                <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="government" required caption="国家">
+                                            <div>
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
+                                                    ng-model="document.government" source="options.countries"
+                                                    filter="genericFilter" mapping="genericMapping" selectbox="true"
+                                                    placeholder="请选择一个国家..."></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">                                        
+                                        <div class="km-control-group" name="name" required caption="">
+                                            <label name="name" class="control-label" required for="name"><span ng-if="type!='SPCA'">国家主管部门名称</span> <span ng-if="type=='SPCA'">主管部门名称</span></label>
+                                            <div class="help-info">提供负责实体的具体名称，如环境部。<span ng-if="isAbs">请记住国家主管部门名称将有助于查明获取和惠益分享信息交换所的记录。</span></div>
+                                            <div km-textbox-ml name="name" required ng-model="document.name" rows="1"
+                                                placeholder="" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <legend name="coordinates">联系方式</legend>
+                                <div class="help-info" ng-if="isAbs">这些联系方式将帮助遗传资源用户与国家主管部门保持联系。务必及时更新此信息，以为用户提供最新准确的信息。</div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="address" caption="地址">
+                                            <div km-textbox-ml ng-model="document.address" rows="2" placeholder="例如：413 St-Jacques Ouest, Suite 800"
+                                                locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="city" required caption="城市">
+                                            <div km-textbox-ml name="city" ng-model="document.city" required
+                                                locales="document.header.languages" placeholder="例如：Montreal（蒙特利尔）"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="state" caption="州/省">
+                                            <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
+                                                placeholder="例如：Quebec（魁北克）"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="postalCode" caption="邮编">
+                                            <div km-textbox-ml name="postalCode" ng-model="document.postalCode"
+                                                locales="document.header.languages" placeholder="例如：H2Y 1N9"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6" ng-if="options.countries">
+                                        <div class="km-control-group" name="country" required caption="联系人国家">
+                                            <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
+                                                mapping="genericMapping" selectbox="true" placeholder="请选择一个国家..."
+                                                required filter="startsWithFilter" maxmatches="50"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="phones" required caption="电话号码">
+                                            <div class="help-info">请使用下列格式：+ [国家码] [城市码] [电话号码] [分机号码（如需）]。</div>
+                                            <div km-inputtext-list name="phones" ng-model="document.phones"
+                                                required placeholder="例如：+1 514.288.2220"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="faxes" caption="传真号码">
+                                            <div class="help-info">请使用下列格式：+ [国家码] [城市码] [电话号码] [分机号码（如需）]。</div>
+                                            <div km-inputtext-list name="faxes" ng-model="document.faxes"
+                                                placeholder="例如：+1 514.288.6588"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="emails" required caption="电子邮件">
+                                            <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
+                                                placeholder="示例：secretariat@cbd.int"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-6">
+                                        <div class="km-control-group" name="websites" caption="网站地址">
+                                            <div km-link name="websites" ng-model="document.websites" allow-link="true"
+                                                allow-file="false"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <legend name="contactInfo">其它联系方式</legend>
+
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="km-control-group" name="contacts" caption="联系人">
+                                        <div document-selector ng-model="document.contacts" question="contacts"
+                                            ng-disabled="!document.government.identifier" 
+                                            on-build-query="onContactQuery(searchText)" allow-new="true"
+                                            allow-new-schema="contact{{isAbs ? ',authority':''}}"></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            </section><!-- This section will be remove if this not required for ABS --><section ng-if="isAbs">
+                                <legend name="policyBasis">国家主管部门能力的法律、行政或政策依据</legend>
+                                <div class="help-info">在本部分中，可提及赋予国家主管部门权职的相关获取和惠益分享措施。为能将国家主管部门与相关获取和惠益分享措施联系起来，需先记录该获取和惠益分享措施。因此，如果您尚未提交相关获取和惠益分享措施，您可能希望将国家主管部门作为草案保存，然后先发布获取和惠益分享措施。<br/>在这一节中，可以提及赋予《卡塔赫纳议定书》国家主管部门能力的相关措施。为能将主管部门与相关措施联系起来，需先录入该措施的记录。因此如果您尚未提交相关措施，您不妨将《卡塔赫纳议定书》的国家主管部门保存为草案，并先发布该措施，或者您可以在线创建该措施。</div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="policyBasisForCompetencyRef" caption="提供指向所有相关法律、行政或政策措施的链接。">
+                                            <div document-selector ng-disabled="!document.government.identifier" ng-model="document.policyBasisForCompetencyRef"
+                                                question="policyBasisForCompetencyRef"
+                                                on-build-query="onMeasureQuery(searchText)" filter="true"
+                                                allow-new="true" allow-new-schema="measure"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="policyBasisForCompetency" caption="如需要，请就国家主管部门职权的法律、行政或政策依据提供补充信息。"></div>
+                                        <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
+                                            placeholder="" locales="document.header.languages"></div>
+                                    </div>
+                                </div>
+                            </section>
+
+
+                            <section ng-if="isAbs">
+                                <legend name="responsibilities">职责</legend>
+                                <div class="help-info">第 13 条第 4 款规定：“缔约方如果指定了一个以上的国家主管部门，则应将有关这些主管部门各自职责的资料随通知一并送交秘书处。如果属于此种情况，则此种资料至少应明确说明由哪一主管部门负责所搜寻的遗传资源。”</div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="responsibleForAllNot"
+                                            caption="贵国已有一个国家主管部门，请具体说明每个国家主管部门的职责范围。"></div>
+
+                                        <div class="km-control-group" name="responsibleForAll" required caption="这是贵国唯一指定的国家主管部门（CNA）吗？如为“否”，则请描述这个国家主管部门（CNA）的职责。">
+
+                                            <div km-yes-no required ng-model="document.responsibleForAll"
+                                                locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div><!-- IF NO SECTION --><div ng-class="{'disable':(document.responsibleForAll==true || document.responsibleForAll==null), 'bg-white':!(document.responsibleForAll==true || document.responsibleForAll==null) }"
+                                    class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <h4 ng-show="document.responsibleForAll==null">如为“否”，则需要提供以下信息。</h4>
+                                                    <h4 ng-show="document.responsibleForAll==true">此部分非必填项。</h3>
+                                                        <div ng-show="document.responsibleForAll==false">
+                                                            <h4 class="color-red">当不止一个国家​​主管部门（CNA）时，本部分为必填项。请确保在所有已发布记录中妥当描述各个国家主管部门（CNA）的责任。</h4>
+                                                        </div>
+
+                                                        <div class="km-control-group" name="responsibilities"
+                                                            caption="国家主管部门责任简述（最多 300 个字符）。"
+                                                            required>
+                                                            <div class="help-info">第13条第2款规定，“国家主管部门应依照适用的国家立法、行政或政策措施，负责批准获取或酌情签发符合获取要求的书面证明，并负责就获得事先知情同意和设立共同商定条件的适用程序与要求提供建议。”请记住，本部分旨在帮助用户理解与获取遗传资源相关的责任，并回答以下问题：由谁批准获取？可获取哪些资源？对责任的描述应该简短易懂。</div>
+                                                            <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
+                                                                rows="6" placeholder="" locales="document.header.languages"
+                                                                required></div>
+                                                        </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="absJurisdiction" caption="可批准获取遗传资源的辖区"
+                                                        required>
+                                                        <div class="help-info">有关辖区（国家/联邦、次国家或社区层面）的信息有助于描绘不同国家主管部门的不同责任。</div>
+                                                        <div km-select multiple name="absJurisdiction" ng-model="document.absJurisdiction"
+                                                            items="options.jurisdictions()" required></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-6">
+                                                    <div ng-show="showJurisdictionName()">
+                                                        <div class="km-control-group" name="absJurisdictionName"
+                                                            required caption="辖区名称">
+                                                            <div km-textbox-ml ng-model="document.absJurisdictionName"
+                                                                rows="1" locales="document.header.languages"
+                                                                placeholder="辖区名称"></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-xs-12">
+                                                    <div class="km-control-group" name="absGeneticResourceTypes"
+                                                        caption="描述国家主管部门责任范围的关键词">
+                                                        <div class="help-info">收集这些信息对于促进在各记录间进行统一搜索很重要。请选择有助于描述国家主管部门职责的所有相关关键词。</div>
+                                                        <div km-select multiple name="absGeneticResourceTypes"
+                                                            ng-model="document.absGeneticResourceTypes" items="options.keywords()"
+                                                            show-description="true"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- END IF NO SECTION --></section>
+
+                            <section ng-if="isBch">
+                                <legend>职责</legend>
+                                <div class="help-info"><span ng-if="type!='SPCA'">Article 19, paragraph 2 provides that “Where a Party designates more than one competent national authority, it shall convey to the Secretariat, with its notification thereof, relevant information on the respective responsibilities of those authorities. 如果属于此种情况,则此种资料至少应明确说明由哪一主管部门负责何种类别的改性活生物体。</span><span ng-if="type=='SPCA'">如果有一个以上的主管部门负责《名古屋-吉隆坡责任和补救补充议定书》第5条规定的职能，请具体说明每个主管部门分别负责哪些职能。<br/>如果主管部门行使《补充议定书》第5条规定以外但与赔偿责任和补救有关的其他职能，您也可以在下面说明这些职能。</span></div>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div  ng-if="type!='SPCA'" class="km-control-group functions" name="functions" caption="行政职能" required>
+                                            <div class="help-info"><span ng-if="type=='CNA'">如有一个以上的国家主管部门，请为每个部门各填一份常用格式。如果仅由一家主管部门负责议定书要求的所有职能，请选择“卡塔赫纳生物安全议定书设定的全部职能”。</span></div>
+                                            <div km-term-check name="functions" required ng-model="document.functions" locales="document.header.languages"
+                                            terms="options.functions()" binding-type="term[]" show-description="true"></div>
+                                        </div>
+                                        <div ng-if="type=='CNA'" class="km-control-group type-of-organism" name="cpbOrganismTypes" caption="由其负责的生物体类型" required>
+                                            <div class="help-info">如果仅由一家主管部门负责议定书规定的所有职能，请选择“全部类型生物体”。</div>
+                                            <div km-term-check name="cpbOrganismTypes" required ng-model="document.cpbOrganismTypes" locales="document.header.languages"
+                                            terms="options.bchOrganismTypes()" binding-type="term[]"></div>
+                                        </div>
+
+                                        <div  ng-if="type!='SPCA'" class="km-control-group" name="responsibilities" caption="监管职能的详细描述">
+                                            <div class="help-info" ng-if="type!=='SPCA'">如有必要，提供关于国家主管部门监管职能和责任的补充信息。</div>
+                                            <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
+                                                rows="6" placeholder="" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>                                        
+                                </div>
+                            </section>
+                            <section  ng-if="isBch && type=='SPCA'">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="responsibleForAll" required caption="这是贵国为补充议定书指定的唯一主管部门吗？">
+                                            <div class="help-info">如为“否”，则请在下面的方框中描述主管部门的职责。请为每个主管部门填写对应的不同常用格式。</div>
+                                            <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
+                                        caption="主管部门职责简短描述（最多 300 个字符）。" >
+                                        <div class="help-info">当存在多个主管部门时，需要填写此信息。</div>
+                                        <div km-rich-textbox name="responsibilities" ng-model="document.responsibilities"
+                                            rows="6" placeholder="" locales="document.header.languages"
+                                            required="{{!document.responsibleForAll}}"></div>
+                                    </div>
+                                    </div>
+                                </div>
+                            </section>
+                            <section ng-if="isBch">
+                                <legend>确认或更新信息的时间表</legend>
+                                <div class="help-info">请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。在此阶段之后，如果没有收到确认，该记录将被标记为“未确认”。</div>
+                            </section>
+                            <section>
+                                <legend>更多信息</legend>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="relevantInformation" caption="更多信息">
+                                            <div class="help-info">请在此处提供记录中其它位置未能提到的任何其它相关信息。</div>
+                                            <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
+                                                locales="document.header.languages"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="relevantDocuments" caption="任何其他相关文件">
+                                            <div class="help-block">请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档。</div>
+                                            <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                            <section>
+                                <legend>备注</legend>
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="km-control-group" name="notes">
+                                            <div class="help-info">“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。</div>
+                                            <div km-notes name="notes" ng-model="document.notes"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
+                    </form>
+                </edit-form>
+                <review-form>
+                    <view-authority ng-model="review.document" locale="review.locale" allow-drafts="true"></view-authority>
+                </review-form>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,123 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4></h4>
+	</div>
+	<div class="record-body panel-body">
+		<document-date></document-date>
+		<div>
+			<label></label>
+			<div class="km-value" compare-val></div>
+		</div>
+		<div ng-show="document.type=='organization'">
+			
+			<div ng-show="document.government">
+				<label></label>
+				<div class="km-value" compare-val></div>
+			</div>
+			<div ng-show="document.organization || document.organizationAcronym">
+                <label></label>
+				<div class="km-value" compare-val></div>
+			</div>
+			<div ng-show="document.organizationType">
+				<label></label>
+				<div class="km-value" compare-val></div>
+			</div>
+
+		</div>
+
+
+		<div ng-show="document.type=='person'">
+			 <div ng-show="document.government">
+  			   <label></label>
+  			   <div class="km-value" compare-val></div>
+  		   </div>
+
+            <div>
+				<label></label>
+				<div class="km-value" compare-val></div>
+			</div>
+
+
+			<div ng-show="document.designation">
+				<label></label>
+				<div class="km-value" compare-val></div>
+			</div>
+
+            <div ng-show="document.department">
+				<label></label>
+				<div class="km-value" compare-val></div>
+			</div>
+
+            <div ng-show="document.contactOrganization">
+				<legend></legend>
+				<div class="km-value" compare-val>
+					<view-record-reference ng-model='document.contactOrganization' locale="locale"></view-record-reference>
+				</div>
+			</div>
+
+		</div>
+		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
+			<label></label>
+			<div compare-val>
+				<address class="km-value">
+					<div class="km-pre" ng-bind="document.address | lstring:locale"></div></address>
+			</div>
+		</div>
+        <div ng-show="document.phones" >
+            <label></label>
+            	<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.phones"></li>
+					</ul>
+				</div>
+        </div>
+
+        <div ng-show="document.faxes">
+            <label></label>
+            	<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.faxes"></li>
+					</ul>
+				</div>
+        </div>
+
+        <div ng-show="document.emails">
+            <label></label>
+            <div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.emails"></li>
+				</ul>
+			</div>
+        </div>
+
+        <div ng-show="document.websites">
+			<label></label>
+			<div compare-val>
+				<div class="km-value" ng-repeat="item in document.websites"></div>
+			</div>
+        </div>
+
+		<div>
+			<div ng-show="document.relevantInformation||document.relevantDocuments">
+				<legend></legend>
+
+				<div ng-show="document.relevantInformation" compare-val>
+					<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
+				</div>
+
+				<div ng-show="document.relevantDocuments">
+					<label></label>
+					<div class="km-value" compare-val="relevantDocuments">
+						<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+
+	</div>
+	<div document-metadata class="panel-footer" ></div>
+</div>

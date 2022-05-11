@@ -1,0 +1,203 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading" ng-if='document.header' ng-class="::{'bg-blue':document.header.schema=='nationalRiskAssessment', 'bg-orange':document.header.schema=='independentRiskAssessment'}">
+		<h4></h4>
+	</div>
+	<div class="record-body panel-body">
+
+
+
+		<document-date></document-date>
+		<legend></legend>
+
+		<div ng-show="document.government">
+			<label name="country"></label>
+			<div class="km-value" compare-val></div>
+		</div>
+
+		<div ng-show="document.title">
+			<label></label>
+			<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.date || document.dateOfRaNotAvailable">
+			<label></label>
+			<div compare-val>
+				<div ng-if="document.date" class="km-value" ng-bind="document.date | formatDate"></div>
+				<div ng-if="document.dateOfRaNotAvailable" class="km-value"></div>
+			</div>
+		</div>
+		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">
+			<label></label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.authorities" >
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="document.organizations" ng-if="document.header.schema=='independentRiskAssessment'">
+			<label></label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.organizations" >
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div ng-show="document.contacts">
+			<label></label>
+			<div class="km-value" compare-val>
+				<ul class="list">
+					<li ng-repeat="item in document.contacts" >						
+						<view-record-reference ng-model='item' locale="locale"></view-record-reference>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-if="document.modifiedOrganisms || document.scopes || document.documents || document.documentsSummary">
+			<legend></legend>
+			<div ng-if="document.modifiedOrganisms">
+				<label></label>
+				<div class="km-value" compare-val>
+					<ul class="list">
+						<li ng-repeat="item in document.modifiedOrganisms" >						
+							<view-lmo-reference ng-model='item.identifier' locale="locale"></view-lmo-reference>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div ng-if="document.scopes">
+				<label></label>
+				<div class="km-value" compare-val>
+					<view-terms-hierarchy ng-model="document.scopes" locale="locale" term-domain="riskAssessmentScope" on-terms-loaded="onRiskAssessmentScopeTerms(terms)"></view-terms-hierarchy>
+				</div>
+			</div>
+			<div ng-if="document.documents||document.documentsSummary">
+				<label></label>
+				<div ng-if="document.documents">
+					<div class="km-value" compare-val>
+						<km-link-list  ng-model="document.documents"></km-link-list>
+					</div>
+				</div>
+				<div ng-if="document.documentsSummary">
+					<div compare-val>
+						<km-value-ml  html value="document.documentsSummary" locales="locale"></km-value-ml>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="document.adverseEffects || document.adverseEffectsLikelihood || document.adverseEffectsConsequence ||
+			document.adverseEffectsOverallRisk || document.adverseEffectsRecommendation || document.riskManagementStrategies ||
+			document.receivingEnvironment || document.detectionMethod">
+			<legend></legend>
+			<div ng-show="document.adverseEffects">
+				<label></label>
+				<div compare-val>
+					<km-value-ml  html value="document.adverseEffects" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.adverseEffectsLikelihood">
+				<label></label>
+				<div compare-val>
+					<km-value-ml  html value="document.adverseEffectsLikelihood" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.adverseEffectsConsequence">
+				<label></label>
+				<div compare-val>
+					<km-value-ml  html value="document.adverseEffectsConsequence" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.adverseEffectsOverallRisk">
+				<label></label>
+				<div compare-val>
+					<km-value-ml  html value="document.adverseEffectsOverallRisk" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.adverseEffectsRecommendation">
+				<label></label>
+				<div compare-val>
+					<km-value-ml  html value="document.adverseEffectsRecommendation" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.riskManagementStrategies">
+				<label></label>
+				<div compare-val>
+					<km-value-ml  html value="document.riskManagementStrategies" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.receivingEnvironment">
+				<label></label>
+				<div compare-val>
+					<km-value-ml html  value="document.receivingEnvironment" locales="locale"></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.detectionMethod">
+				<label></label>
+				<div compare-val>
+					<km-value-ml html value="document.detectionMethod" locales="locale"></km-value-ml>
+				</div>
+			</div>
+		</div>
+
+		 <div ng-if="document.isForCommercialUse!=undefined">
+			<legend></legend>
+			<div ng-if="document.isForCommercialUse!=undefined">
+				<label></label>
+				<div compare-val>
+					<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
+				</div>
+				<div ng-if="document.forwardToOECD!=undefined">
+					<label></label>
+					<div compare-val>
+						<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
+					</div>
+				</div>
+				<div ng-if="document.isForFoodSafety!=undefined">
+					<label></label>
+					<div compare-val>
+						<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
+					</div>
+				</div>
+				<div ng-if="document.codexConducted!=undefined">
+					<label></label>
+					<div  compare-val>
+						<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
+					</div>
+				</div>
+				<div ng-if="document.forwardToFAO!=undefined">
+					<label></label>
+					<div  compare-val>
+						<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend></legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val>
+				<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label></label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+		
+	</div>
+	<div document-metadata class="panel-footer"></div>
+</div>

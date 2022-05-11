@@ -1,0 +1,308 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-orange" ng-show="display('header')">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+		<document-date></document-date><br><legend>Informations générales</legend>
+		<div ng-show="document.title">
+			<label>Non de l'initiative</label>
+			<div compare-val>
+				<km-value-ml value="document.title" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.projectNumber">
+			<label>Numéro de projet ou identifiant</label>
+			<div compare-val>
+				<km-value-ml value="document.projectNumber" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-if="document.projectDocument">
+			<label>Adresse(s) du/des site(s) Web</label>
+			<div compare-val>
+				<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
+			</div>
+		</div>
+
+		<div ng-if="document.contacts">
+			<label>Personne contact</label>
+			<div class="km-value" compare-val="Contact person">
+				<div ng-repeat="contact in document.contacts">
+					<div view-record-reference ng-model="contact" locale="locale"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div ng-show="document.geographicScope">
+			<label>Couverture géographique</label>
+			<div class="km-value" compare-val><span ng-bind="document.geographicScope|term:locale"></span></div>
+		</div>
+
+		<div ng-show="document.countryRegions">
+			<label>Pays ou groupe(s) géographique(s) ou politique(s)</label>
+			<div class="km-value" compare-val="Geographical or political/economic">
+				<ul class="list">
+					<li ng-repeat="val in document.countryRegions" ng-bind="val | term:locale"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.geographicScope.countries">
+			<label>Pays</label>
+			<div class="km-value" compare-val="Countries">
+				<ul class="list">
+					<li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.status">
+			<label>Statut</label>
+			<div class="km-value" compare-val><span ng-bind="document.status|term:locale"></span></div>
+		</div>
+
+		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
+			<div class="row" ng-show="document.startDate && document.endDate">
+				<div class="col-md-6" ng-if="document.startDate">
+					<label>Date de début</label>
+					<div compare-val>
+						<div class="km-value" ng-bind="document.startDate | formatDate"></div>
+					</div>
+				</div>
+				<div class="col-md-6" ng-if="document.endDate">
+					<label>Date de fin</label>
+					<div compare-val>
+						<div class="km-value" ng-bind="document.endDate | formatDate"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" ng-show="document.durationPeriod || document.durationText">
+				<div class="col-md-12">
+					<label>Durée</label>
+					<div class="km-value" compare-val><span ng-bind="document.durationPeriod | lstring:locale"></span> <span ng-bind="document.durationText | lstring:locale"></span></div>
+				</div>
+			</div>
+		</div>
+
+
+		<div ng-show="document.activityScope">
+			<label>Type d’initiative de renforcement des capacités</label>
+			<div class="km-value" compare-val><span ng-bind="document.activityScope|term:locale"></span></div>
+		</div>
+		<div ng-show="document.isProjectProgramme!=undefined">
+			<label>Cela fait-il partie d’un projet ou programme plus vaste?</label>
+			<div compare-val>
+				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-show="document.projectProgrammeName">
+			<label>Nom du projet ou du programme</label>
+			<div compare-val>
+				<km-value-ml value="document.projectProgrammeName" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.broaderProjects">
+			<label>Veuillez créer un lien vers un enregistrement du Centre d'échange sur ce projet ou programme.</label>
+			<div class="km-value" compare-val="Clearing-house record">
+				<div ng-repeat="broaderProject in document.broaderProjects">
+					<div view-record-reference ng-model="broaderProject" locale="locale"></div>
+				</div>
+			</div>
+		</div>
+		<div
+			ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
+
+			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
+				<label>Organisme(s) ou organisation(s) de mise en œuvre</label>
+				<div class="km-value" compare-val="Implementing agency(ies)">
+					<div ng-repeat="contact in document.implementingAgencies">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.isExecutededByAgencies && document.executingAgencies">
+				<label>Organisme(s) ou organisation(s) d’exécution</label>
+				<div class="km-value" compare-val="Executing agency(ies)">
+					<div ng-repeat="contact in document.executingAgencies">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
+				<label>Partenaire(s) collaborateur(s)</label>
+				<div class="km-value" compare-val="Collaborating partner(s)">
+					<div ng-repeat="contact in document.collaboratingPartners">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div ng-if="document.description || document.categories || document.targetGroups">
+			<legend>Renseignements détaillés</legend>
+
+			<div ng-show="document.description">
+				<label>Brève description de l’initiative, y compris ses buts et objectifs</label>
+				<div compare-val>
+					<km-value-ml value="document.description" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+			<div ng-show="document.categories">
+				<label>Catégorie(s) d’activités de renforcement des capacités</label>
+				<div class="km-value" compare-val="categories">
+					<ul class="list">
+						<li ng-repeat="val in document.categories" ng-bind="val | term:locale"></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.targetGroups">
+				<label>Groupe(s) cible(s) / bénéficiaire(s)</label>
+				<div class="km-value" compare-val="Main target group(s)">
+					<view-terms-hierarchy ng-model="document.targetGroups" locale="locale" term-domain="cbiAudience"
+						on-terms-loaded="onTargetGroupsTerms(terms)"></view-terms-hierarchy>
+				</div>
+			</div>
+		</div>
+		<div ng-show="document.cbdSubjects || document.aichiTargets">
+
+			<legend>Information sur la couverture thématique de l’initiative</legend>
+
+			<div ng-show="document.cbdSubjects">
+				<label>Domaines thématiques liés de la CDB</label>
+				<div class="km-value" compare-val="Related CBD subject areas">
+					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"
+						on-terms-loaded="onCbdSubjectsTerms(terms)"></view-terms-hierarchy>
+				</div>
+			</div>
+
+			<div ng-show="document.aichiTargets && isABS">
+				<label>Objectifs d'Aichi</label>
+				<div class="km-value" compare-val="Aichi target(s)">
+					<ul class="list">
+						<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div ng-show="document.absKeyAreas">
+			<label>Domaines thématiques APA</label>
+
+			<label>Domaines clés et mesures stratégiques pour le renforcement et le développement des capacités</label>
+			<div class="km-value" compare-val="Key areas and strategic measures">
+				<ul class="list">
+					<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>
+				</ul>
+			</div>
+		</div>
+
+		<div ng-show="document.cpbThematicAreas">
+			<label>Domaines thématiques de la CDB</label>
+			<div class="km-value" compare-val="Biosafety thematic areas">
+				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale"
+					term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
+			</div>
+		</div>
+
+
+		<div
+			ng-show="document.fundingSourceTypes || document.coreFundingSources || document.coFinancingSources || document.totalBudget">
+			<legend>Information sur les fonds</legend>
+
+			<div ng-show="document.fundingSourceTypes">
+				<label>Type de source de financement()</label>
+				<div class="km-value" compare-val="Type(s) of funding source(s)">
+					<ul class="list">
+						<li ng-repeat="val in document.fundingSourceTypes" ng-bind="val | term:locale"></li>
+					</ul>
+				</div>
+			</div>
+			<div ng-show="document.coreFundingSources">
+				<label>Source(s) principale(s) de financement</label>
+				<div class="km-value" compare-val="Primary funding source(s)">
+					<div ng-repeat="contact in document.coreFundingSources">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.coFinancingSources">
+				<label>Sources de co-financement</label>
+				<div class="km-value" compare-val="Co-financing source(s)">
+					<div ng-repeat="contact in document.coFinancingSources">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.totalBudget">
+				<label>Budget total (montant en dollars des É.-U.)</label>
+				<div compare-val>
+					<km-value-ml value="document.totalBudget | currency:'USD$'" locales="locale"></km-value-ml>
+				</div>
+			</div>
+
+		</div>
+		<div ng-show="document.resultsAchievements || document.resultsOutputs || document.bestPractices || document.resultsReference">
+			<legend>Résultats en matière de renforcement de capacités</legend>
+
+			<div ng-show="document.resultsAchievements">
+				<div><strong>Résultats</strong></div>
+				<label>Principaux accomplissements</label>
+				<div compare-val>
+					<km-value-ml value="document.resultsAchievements" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-show="document.resultsOutputs">
+				<label>Principaux résultats</label>
+				<div compare-val="Main outputs">
+					<km-link-list class="km-value" ng-model="document.resultsOutputs"></km-link-list>
+				</div>
+			</div>
+			<div ng-show="document.resultsReference">
+				<label>Numéro de fichier dans la librairie virtuelle</label>
+				<div class="km-value" compare-val="Virtual library record number">
+					<div ng-repeat="contact in document.resultsReference">
+						<div view-record-reference ng-model="contact" locale="locale"></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.bestPractices">
+				<label>Pratiques exemplaires et leçons apprises</label>
+				<div compare-val>
+					<km-value-ml value="document.bestPractices" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+		</div>
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Informations supplémentaires</legend>
+
+			<div ng-show="document.relevantInformation">
+				<label>Tout autre information utile</label>
+				<div compare-val>
+					<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
+				</div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
+				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+
+	</div>
+	<div document-metadata class="panel-footer"></div>
+
+</div>

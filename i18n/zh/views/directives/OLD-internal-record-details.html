@@ -1,0 +1,59 @@
+﻿<div id="RecordDetails">
+    
+    <style> #RecordDetails td {padding-right:5px;} #RecordDetails label {color:#666;} </style>
+
+   <div class="row" >
+            <div class="col-xs-12">
+                <div class="well">
+                    <h3 style="margin:0 0 20px 0;padding:0;border-bottom:1px solid #999;">记录信息</h3>
+                    <table style="width:100%!important;">
+                            <tr>
+                                <td><label>唯一识别码：</label></td>
+                                <td class="bold" ng-bind="doc | uniqueID"></td>
+                            </tr>
+                            <tr>
+                                <td><label>记录状态：</label></td>
+                                <td class="bold"><span class="color-grey" ng-if="docInfo.revision == '0'">草稿</span><span class="color-green"  ng-if="docInfo.revision > 0">已发布</span><span class="color-red"  ng-if="docInfo.workingDocumentLock">[已锁定： Pending publishing request ]</span></td>
+                            </tr>
+                            <tr>
+                                <td><label>记录类型：</label></td>
+                                <td class="bold" ng-bind="docInfo.metadata.schema | schemaName"></td>
+                            </tr>
+                            
+                             <tr  ng-if="docInfo.revision > 0">
+                                <td><label>记录版本：</label></td>
+                                <td class="bold" ng-bind="docInfo.revision"></td>
+                            </tr>
+                            <tr ng-if="docInfo.metadata.government">
+                                <td><label>记录管理人：</label></td>
+                                 <td class="bold">{{getUserCountry(docInfo.metadata.government)}}</td>
+                            </tr>
+                            <tr>
+                                <td><label>历史：</label></td>
+                                <td>
+                                  <div view-history document-id="docInfo.identifier"></div>
+                                </td>
+                            </tr><!--<tr ng-if="docInfo.revision > 0">
+                                <td><label>Last Published by: </label></td>
+                                <td class="bold">
+                                    {{docInfo.updatedBy.firstName}}  {{docInfo.updatedBy.lastName}} 
+                                    (<a rel="noopener" translation-url  ng-href="mailto:{{docInfo.updatedBy.email}}">{{docInfo.updatedBy.email}} </a>)
+                                    <span class="unbold"> on </span>
+                                    {{docInfo.updatedOn | formatDateWithTime}}
+                                </td>
+                            </tr>--></table>
+                </div>
+            </div>
+        </div><!--<div class="row" style="margin-bottom:20px;">
+            <div class="col-xs-12">
+                <div class="pull-right" >
+                    <button title="Cancel request" ng-show="canRecall && showAddButton()"
+                    type="button" class="btn btn-warning color-white" ng-click="askRecallWorkflowRequest()"><i class="fa fa-undo"></i> Recall</button>
+                    <a rel="noopener" translation-url  title="Edit" ng-show="!canRecall && !showRequestHistory && showButton()" type="button" class="btn btn-default"
+                    href="/register/{{document.schema|mapSchema}}/{{document.identifier}}/edit"><i class="fa fa-edit"></i> Edit</a>
+                    <button title="Delete" ng-show="!canRecall && !showRequestHistory && showButton()"
+                    ng-class="{'red':(documemt.schema == 'MSR' &&  !showRequestHistory)}"
+                    type="button" class="btn btn-danger" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i> Delete</button>
+                </div>
+            </div>
+        </div>--></div>

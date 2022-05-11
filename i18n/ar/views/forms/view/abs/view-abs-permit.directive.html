@@ -1,0 +1,293 @@
+﻿<div id="Record" class="record panel panel-default" dir="rtl">
+	<div class="panel-heading bg-blue">
+		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-black" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4> 
+	</div>
+	<div class="record-body panel-body">
+
+		
+
+			<div class="alert alert-danger" ng-show="!loading && document && (document.amendmentIntent==1 || showRevokedMessage || document.info.revision !== document.info.latestRevision)">
+				<div class="text-center">
+					<h1 ng-if="document.amendmentIntent==1 || showRevokedMessage">تم  <u>رفض</u> هذه الشهادة ولم تعد صالحة</h1>
+
+					<h1 ng-if="document.info.revision !== document.info.latestRevision">تم <u>تحديث</u> هذه الشهادة. تم إنشاء إصدار جديد <u>ولم يعد هذا الإصدار صالحًا.</u></h1>
+
+					<p>انظر تاريخ التعديلات لمعرفة المزيد من المعلومات.</p>
+				</div>
+			</div>
+			
+		<document-date></document-date>		
+
+			<legend ng-if="document.government">معلومات عامة</legend>
+
+			<div ng-show="document.government">
+				<label>البلد</label>
+				<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+			</div>
+
+
+			<div ng-show="document.government || document.updateReasons">
+				<div ng-show="showPdf && document">
+					<label>المعرف الفريد في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document | uniqueID"></span></div>
+					</div>
+				</div>
+
+        	     <div ng-show="document.relatedIRCCs">
+					<label>الرقم (الأرقام) المرجعية لشهادة (شهادات) الامتثال المعترف بها دوليًا التي ترتبط بهذا التصريح</label>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li ng-repeat="item in document.relatedIRCCs">
+                            <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<div ng-show="document.updateReasons">
+					<label>يُرجى إضافة موجز لسبب تحديث السجل</label>
+					<div compare-val>
+					<div class="km-value km-pre"><span ng-bind="document.updateReasons | lstring:locale"></span></div>
+					</div>
+				</div>
+			</div>
+
+			<div ng-show="document.absCNA">
+				<label>سلطة الإصدار (السلطة المسؤولة عن إصدار هذا التصريح)</label>
+				<div class="km-value" compare-val>
+					<div view-record-reference ng-model="document.absCNA" locale="locale"></div>
+				</div>
+			</div>
+			<div ng-show="document.referenceToNationalPermit || document.title ||
+				document.dateOfIssuance || document.providers || document.entitiesToWhomPICGranted ||
+				document.subjectMatter || document.subjectMatterConfidential || document.picGranted ||
+				document.picInformation || document.picDocuments ||
+				document.specimens || document.taxonomies || document.gisFiles">
+				<legend>تفاصيل التصريح أو ما يعادله</legend>
+
+
+			<div ng-show="document.title">
+			 	<label>الرقم المرجعي للتصريح أو ما يعادله</label>
+				<div compare-val>
+			 	<div class="km-value"><span ng-bind="document.title | lstring:locale"></span></div>
+				</div>
+		 	</div>
+
+				<div ng-show="document.referenceToNationalPermit">
+					<label>المراجع أو المعرفات الوطنية الإضافية</label>
+					<div compare-val>
+					<div class="km-value km-pre"ng-bind-html="document.referenceToNationalPermit | lstring:locale"></div>
+					</div>
+				</div>
+
+				<div ng-show="document.dateOfIssuance">
+					<label>تاريخ إصدار التصريح أو ما يعادله</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateOfIssuance | formatDate"></span></div>
+					</div>
+				</div>
+
+    			<div ng-show="document.dateOfExpiry">
+    				<label>تاريخ انتهاء التصريح أو ما يعادله</label>
+					<div compare-val>
+    				<div class="km-value"><span ng-bind="document.dateOfExpiry | formatDate"></span></div>
+					</div>
+    			</div>
+
+
+<legend>معلومات عن الموافقة المسبقة عن علم</legend>
+
+				<div ng-show="document.picGranted!=undefined">
+					<label>تأكيد الحصول على الموافقة المسبقة عن علم أو منحها</label>
+						<div class="km-value" compare-val>
+							<km-value-bool value="document.picGranted" locales="locale"></km-value-bool>
+					</div>
+				</div>
+
+				<div ng-show="document.providers || document.providersConfidential">
+					<label>المزود (الشخص أو الكيان الذي له الحق في منح الوصول للموارد الجينية وفقا للتشريعات المحلية)</span>
+					</label>
+				<div compare-val>
+					<div class="km-value" ng-show="!document.providersConfidential" ng-repeat="provider in document.providers">
+						<div view-record-reference ng-model="provider" locale="locale"></div>
+					</div>
+				</div>
+					<div ng-show="document.providersConfidential">
+						<div compare-val>
+							<div class="km-value km-pre confidential">معلومات سرية</div>
+						</div>
+					</div>
+				</div>
+
+				<div ng-show="document.entitiesToWhomPICGranted || document.entitiesToWhomPICGrantedConfidential">
+					<label>الشخص أو الكيان الذي مُنح الموافقة المسبقة عن علم</label>
+					<div compare-val="entitiesToWhomPICGranted">
+						<div class="km-value" ng-repeat="consent in document.entitiesToWhomPICGranted" ng-show="!document.entitiesToWhomPICGrantedConfidential">
+			                 <div view-record-reference ng-model="consent" locale="locale"></div>
+						</div>
+					</div>
+						<div ng-show="document.entitiesToWhomPICGrantedConfidential">
+							<div compare-val>
+							<div class="km-value km-pre confidential">معلومات سرية</div>
+							</div>
+						</div>
+				</div>
+
+
+				<div ng-show="document.picInformation">
+					<label>معلومات إضافية عن الموافقة المسبقة عن علم</label>
+					<div compare-val>
+					<div class="km-value km-pre" ng-bind-html="document.picInformation | lstring:locale"></div>
+					</div>
+				</div>
+				<div ng-show="document.picDocuments">
+					<label>وثائق أو روابط إضافية عن الموافقة المسبقة عن علم</label>
+					<div class="km-value" compare-val="picDocuments">
+						<km-link-list ng-model="document.picDocuments"></km-link-list>
+					</div>
+				</div>
+
+
+<legend>معلومات عن الشروط المتفق عليها بصورة متبادلة</legend>
+                <div ng-show="document.matEstablished!=undefined">
+    				<label>تأكيد بإبرام الشروط المتفق عليها بصورة متبادلة</label>
+									<div class="km-value" compare-val>
+										<km-value-bool value="document.matEstablished" locales="locale"></km-value-bool>
+									</div>
+    				<div ng-show="document.matInformation">
+    					<label>معلومات إضافية حول الشروط المتفق عليها بصورة متبادلة</label>
+						<div compare-val><div class="km-value km-pre"ng-bind-html="document.matInformation | lstring:locale"></div></div>
+    				</div>
+    				 <div ng-show="document.matDocuments">
+    					<label>وثائق أو روابط إضافية حول الشروط المتفق عليها بصورة متبادلة</label>
+							<div class="km-value" compare-val="matDocuments">
+								<km-link-list ng-model="document.matDocuments"></km-link-list>
+							</div>
+
+    				</div>
+    			</div>
+
+				<legend>الموضوع أو الموارد الجينية</legend>
+				<div ng-show="document.subjectMatter">
+					<label>الموضوع أو الموارد الجينية التي يشملها التصريح أو ما يعادله</label>
+					<div compare-val="subjectMatter">
+						<div class="km-value km-pre"ng-bind-html="document.subjectMatter | lstring:locale"></div>
+					</div>
+				</div>
+
+				<div ng-show="document.subjectMatterConfidential">
+					<label>الموضوع أو الموارد الجينية التي يشملها التصريح أو ما يعادله</label>
+					<div compare-val="subjectMatterConfidential">
+					<div class="km-value km-pre confidential">معلومات سرية</div>
+					</div>
+				</div>
+
+				<div ng-show="document.specimens || document.taxonomies || document.gisFiles"><!--<legend>Optional additional subject matter details</legend>--><div ng-show="document.specimens">
+						<label>بيانات العينة</label><!-- <div class="km-value" ng-repeat="item in document.specimens">
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div> --><div class="km-value" compare-val="specimens">
+							<km-link-list ng-model="document.specimens"></km-link-list>
+						</div>
+
+					</div>
+					<div ng-show="document.taxonomies">
+						<label>بيانات التصنيف</label>
+						<div class="km-value" compare-val="taxonomies">
+							<km-link-list ng-model="document.taxonomies"></km-link-list>
+						</div>
+
+
+					</div>
+					<div ng-show="document.gisFiles">
+						<label>الإحداثيات الجغرافية</label><!-- <div class="km-value" ng-repeat="item in document.gisFiles">
+							<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+							<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+						</div> --><div class="km-value" compare-val="gisFiles">
+							<km-link-list ng-model="document.gisFiles"></km-link-list>
+						</div>
+
+						<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div><br /> <br /></div>
+				</div>
+			</div>
+
+		<legend ng-if="document.usages || document.usagesDescription || document.usagesConfidential || document.thirdPartyTransferCondition">معلومات عن استخدام المورد (الموارد) الجينية</legend>
+			<div ng-if="document.usages">
+				<label>نوع الاستخدام المسموح به في التصريح أو ما يعادله</label>
+			<div compare-val>
+				<div class="km-value" ng-if="document.usages && !document.usagesConfidential">
+					<ul class="list">
+						<li ng-repeat="term in document.usages"><span ng-bind="term|term"></span></li>
+					</ul>
+				</div>
+			</div>
+            </div>
+            <div ng-if="document.usagesConfidential">
+                <label>نوع الاستخدام المسموح به في التصريح أو ما يعادله</label>
+				<div compare-val>
+					<div class="km-value km-pre confidential">معلومات سرية</div>
+				</div>
+            </div>
+
+
+			<div ng-show="document.usagesDescription">
+				<label>معلومات إضافية عن الاستخدامات المحددة التي يشملها التصريح أو ما يعادله أو قيود الاستخدام</label>
+				<div compare-val><div class="km-value km-pre"ng-bind-html="document.usagesDescription | lstring:locale"></div></div>
+			</div>
+			<div ng-show="document.thirdPartyTransferCondition">
+				<label>شروط نقل الطرف الخارجي</label>
+				<div compare-val><div class="km-value km-pre"ng-bind-html="document.thirdPartyTransferCondition | lstring:locale"></div></div>
+			</div>
+
+	<div ng-if="document.permitFiles || document.permitDescription"  >
+		<legend >الوثائق</legend>
+
+			<div ng-show="document.permitFiles">
+				<label>نسخة التصريح أو ما يعادله، أو وثيقة أخرى ذات صلة متاحة لاطلاع الجمهور</label>
+				<div class="km-value" compare-val="permitFiles">
+					<km-link-list ng-model="document.permitFiles"></km-link-list>
+				</div>
+			</div>
+			<div ng-show="document.permitDescription">
+				<label>وصف مختصر للوثائق المرفقة</label>
+				<div compare-val><div class="km-value km-pre"ng-bind-html="document.permitDescription | lstring:review.local"></div></div>
+			</div>
+		</div>
+
+
+			<div ng-show="document.relevantInformation||document.relevantDocuments">
+				<legend>معلومات إضافية</legend>
+
+				<div ng-show="document.relevantInformation">
+					<div compare-val><div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div></div>
+				</div>
+
+				<div ng-show="document.relevantDocuments">
+					<label>Other relevant website addresses and/or attached documents</label><!-- <div class="km-value" ng-repeat="item in document.relevantDocuments">
+						<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a>
+						<i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i>
+					</div> --><div class="km-value" compare-val="relevantDocuments">
+						<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+					</div>
+
+
+				</div>
+			</div>
+
+            <div>
+                <legend>تاريخ التعديلات السابقة</legend>
+                <div view-history document-id="document.header.identifier" public-view="true"></div>
+			 </div>
+			 
+			 <div>
+
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			 </div>
+
+
+	</div>
+
+        <div document-metadata class="panel-footer"></div>
+
+</div>

@@ -1,0 +1,102 @@
+﻿<div class="modal-content">
+    <style></style>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
+        <h3 class="modal-title"></h3>
+    </div>
+
+    <div class="modal-body">
+        <form name="form" novalidate ng-submit="searchUserDialogCtrl.search()">
+
+            <p></p>
+
+            <div class="form-group" ng-class="{ 'has-warning': form.email.$invalid }">
+                <label></label>
+                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><input type="email" name="email" class="form-control" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="" required><button class="btn btn-default" aria-label="Search" type="submit"></button></div>
+                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email"></p>
+                <p class="help-info error" ng-show="form.email.$error.email"></p>
+            </div>
+
+        </form>
+
+        <div ng-if="searchUserDialogCtrl.error">
+
+            <div ng-switch="searchUserDialogCtrl.error.code">
+                <div class="alert alert-warning" ng-switch-when="forbidden"></div>
+                <div class="alert alert-danger" ng-switch-default></div>
+            </div>
+
+        </div>
+
+        <div ng-if="!searchUserDialogCtrl.error && searchUserDialogCtrl.user">
+
+
+            <div class="panel panel-default panel-identity panel-identity-new" ng-show="searchUserDialogCtrl.user.new" style=";position:relative">
+
+                <div class="panel-body">
+
+                    <div class="alert alert-warning" role="alert">
+                        <p></p>
+                        <p></p>
+                    </div>
+
+                    <button type="button" class="btn btn-lg btn-block btn-success" ng-click="searchUserDialogCtrl.save()"></button>
+
+                </div>
+
+            </div>
+
+            <div class="panel panel-default panel-identity" ng-show="searchUserDialogCtrl.user.userID" style="position:relative;">
+
+                <div class="panel-body">
+
+                    <div class="row" ng-show="searchUserDialogCtrl.user.userID">
+
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="firstName"></label>
+                                <input type="text" class="form-control" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="">
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 col-xs-12">
+                            <div class="form-group">
+                                <label for="lastName"></label>
+                                <input type="text" class="form-control" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row" ng-show="searchUserDialogCtrl.user.userID">
+
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="organization"></label>
+                                <input type="text" class="form-control" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label></label>
+                                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><input type="email" name="email" class="form-control" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="searchUserDialogCtrl.save()"></button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()"></button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="searchUserDialogCtrl.save()" ng-disabled="form.$invalid || !searchUserDialogCtrl.user"></button>
+    </div>
+</div>

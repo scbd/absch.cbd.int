@@ -1,0 +1,227 @@
+﻿<div id="Record" class="record panel panel-default" dir="rtl">
+
+	<div class="panel-heading bg-blue" ng-show="display('header')">
+		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-black" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
+	</div>
+	<div class="record-body panel-body">
+			
+		<document-date></document-date>
+		
+
+    	   	<div ng-show="document.government || document.absCheckpoints">
+				<legend>معلومات عامة</legend>
+				<div ng-show="document.government">
+					<label>البلد الذي أصدر بيان نقطة التفتيش</label>
+					<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+				</div>
+			</div>
+			<div ng-show="document.title">
+    		 	<label>عنوان بيان نقطة التفتيش</label>
+    		 	<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
+		 	</div>
+			<div ng-show="document.absCheckpoints">
+				<legend>Checkpoint/s that collected or received the information</legend>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li ng-repeat="item in document.absCheckpoints">
+								<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							</li>
+						</ul>
+					</div>
+			</div>
+			<div ng-if="emailList && emailList.length>0">
+				<legend>الجهات التي تلقت بيان نقطة التفتيش</legend>
+				<div class="row">
+					<div class="col-xs-12 col-lg-12" >
+						<div class="help-info color-red"  >ملاحظة: لا تضمن غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع استلام رسائل البريد الإلكتروني التلقائية. </br></div>
+					</div>
+				</div>
+				<div ng-if="emailList">
+		            <div class="row top-border bg-lightblue">
+						<div compare-val>
+		                <div ng-repeat="contact in emailList track by $index" class="">
+		                    <div class="col-xs-12">
+		                        <div class="km-value">
+		                            <div view-record-reference ng-model="contact" locale="locale"></div>
+		                        </div>
+		                    </div>
+						</div>
+						</div>
+		            </div>
+				</div>
+			</div>
+
+			<div ng-show="document.absIRCCs || document.absIRCCsNotAvailable ||
+						document.sourceCountries || entityWhoGrantedPIC ||
+						document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
+						document.evidenceOfPIC || document.evidenceOfMAT ||
+						document.entityToWhomPICGranted || document.personsAtCheckpoint">
+				<legend>البيانات التي جمعتها أو تلقتها نقطة التفتيش</legend>
+				<div ng-show="document.absIRCCs">
+					<label>الرقم (الأرقام) المرجعية لشهادة (شهادات) الامتثال المعترف بها دوليًا التي ترتبط بهذا البيان</label>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li  ng-repeat="item in document.absIRCCs">
+								 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div ng-show="document.absIRCCsNotAvailable" class="km-value">شهادة الامتثال المعترف بها دوليًا غير متاحة</div>
+				<div ng-show="document.sourceCountries || document.entityWhoGrantedPIC ||
+					document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
+					document.evidenceOfPIC || document.evidenceOfMAT ||
+					document.entityToWhomGrantedPIC || document.keywords || document.dateOfAccess">
+					<div ng-show="document.sourceCountries">
+						<label>مصدر المورد الجيني</label>
+						<div class="km-value" compare-val>
+							<ul class="list">
+								<li ng-repeat="term in document.sourceCountries" ng-bind="term|term:locale"></li>
+							</ul>
+						</div>
+					</div>
+					<div ng-show="document.entityWhoGrantedPIC">
+						<label>الشخص أو الكيان الذي مَنَح الموافقة المسبقة عن علم</label>
+						<div class="km-value" compare-val>
+							<div view-record-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
+						</div>
+					</div>
+					<div ng-show="document.subjectMatter">
+						<label>الموضوع أو الموارد الجينية المتصلة بالمعلومات التي تم جمعها أو الحصول عليها</label>
+						<div compare-val>
+						<div class="km-value km-pre" ng-bind-html="document.subjectMatter | lstring:locale"></div>
+						</div>
+					</div>
+					<div ng-show="document.specimens || document.taxonomies || document.gisFiles || document.keywords">
+						<label>تفاصيل إضافية اختيارية عن الموضوع</label>
+						<div ng-show="document.specimens">
+							<label>بيانات العينة</label>
+							<div class="km-value" compare-val="specimens">
+								<km-link-list ng-model="document.specimens"></km-link-list>
+							</div>
+						</div>
+						<div ng-show="document.taxonomies">
+							<label>بيانات التصنيف</label>
+							<div class="km-value" compare-val="taxonomies">
+								<km-link-list ng-model="document.taxonomies"></km-link-list>
+							</div>
+						</div>
+						<div ng-show="document.gisFiles">
+							<label>الإحداثيات الجغرافية</label>
+							<div class="km-value" compare-val="gisFiles">
+								<km-link-list ng-model="document.gisFiles"></km-link-list>
+							</div>
+							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+						</div>
+						<div ng-show="document.keywords">
+							<label>كلمات مفتاحية لوصف الموضوع أو المورد (الموارد) الجينية التي يشملها هذا البيان</label>
+							<div class="km-value" compare-val>
+								<ul class="list">
+									<li ng-repeat="term in document.keywords"><span ng-bind="term|term"></span> <span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">(<span ng-bind="document.keywordOther|lstring:locale"></span>)</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div ng-show="document.evidenceOfPIC">
+						<label>مرجع أو دليل على الموافقة المسبقة عن علم</label>
+						<div compare-val>
+						<div class="km-value km-pre"ng-bind-html="document.evidenceOfPIC | lstring:locale"></div>
+						</div>
+					</div>
+
+					<div ng-show="document.entityToWhomGrantedPIC">
+						<label>الشخص أو الكيان الذي مُنح الموافقة المسبقة عن علم</label>
+						<div class="km-value" compare-val>
+							<div view-record-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
+						</div>
+					</div>
+
+                    <div ng-show="document.evidenceOfMAT">
+						<label>مرجع أو دليل على وضع الشروط المتفق عليها عن علم</label>
+						<div compare-val>
+						<div class="km-value km-pre"ng-bind-html="document.evidenceOfMAT | lstring:locale"></div>
+						</div>
+					</div>
+
+                    <div ng-show="document.dateOfAccess">
+					    <label>تاريخ الحصول على الموارد الجينية</label>
+						<div compare-val>
+					    <div class="km-value"><span ng-bind="document.dateOfAccess"></span></div>
+						</div>
+				    </div>
+
+				</div>
+			</div>
+			<div ng-show="document.description || document.dateCollectedFrom || document.dateCollectedTo || information || informationDocuments ||document.personsAtCheckpoint">
+				<legend>معلومات عن استخدام المورد (الموارد) الجينية</legend>
+				<div ng-show="document.description">
+					<label>وصف مختصر للمعلومات التي جمعتها أو حصلت عليها نقطة التفتيش فيما يتعلق باستخدام الموارد الجينية</label>
+					<div compare-val>
+					<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
+					</div>
+				</div>
+				<div ng-show="document.personsAtCheckpoint">
+					<label>الشخص أو الكيان الذي يتيح المعلومات لنقطة التفتيش حول استخدام المورد الجيني</label>
+					<div compare-val>
+					<div class="km-value" ng-repeat="user in document.personsAtCheckpoint">
+						<div view-record-reference ng-model="user" locale="locale"></div>
+					</div>
+					</div>
+				</div>
+				<div ng-show="document.dateCollected">
+					<label>تاريخ جمع المعلومات في نقطة التفتيش</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateCollected"></span></div>
+					</div>
+				</div>
+				<div ng-show="document.dateCollectedFrom">
+					<label>تاريخ بدء جمع المعلومات في نقطة التفتيش</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateCollectedFrom"></span></div>
+					</div>
+				</div>
+				<div ng-show="document.dateCollectedTo">
+					<label>تاريخ استلام المعلومات في نقطة التفتيش</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateCollectedTo"></span></div>
+					</div>
+				</div>
+				<div ng-show="document.informationDocuments">
+					<label>وثيقة ذات صلة</label>
+					<div class="km-value" compare-val="informationDocuments">
+						<km-link-list ng-model="document.informationDocuments"></km-link-list>
+					</div>
+				</div>
+				<div ng-show="document.information">
+					<label>نسخة من المعلومات ذات الصلة</label>
+					<div compare-val>
+					<div class="km-value km-pre" ng-bind="document.information | lstring:locale"></div>
+					</div>
+				</div>
+			</div>
+
+            <div ng-show="document.relevantInformation||document.relevantDocuments">
+				<legend>معلومات إضافية</legend>
+
+				<div ng-show="document.relevantInformation">
+					<div compare-val>
+					<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+					</div>
+				</div>
+
+				<div ng-show="document.relevantDocuments">
+					<label>Other relevant website addresses and/or attached documents</label>
+					<div class="km-value" compare-val="relevantDocuments">
+						<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			</div>
+
+
+	</div>
+	   <div document-metadata class="panel-footer" ></div>
+</div>

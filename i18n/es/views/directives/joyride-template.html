@@ -1,0 +1,14 @@
+
+<div class="jr_container" id="jr_step_{{joyride.current}}" 
+ng-class="{'{{joyride.config.steps[joyride.current].customClass}}':joyride.config.steps[joyride.current].customClass}">
+    <div class="jr_step">
+      <h4 ng-if="joyride.config.steps[joyride.current].title" class="jr_title" ng-bind="joyride.config.steps[joyride.current].title"></h4>
+      <div ng-if="joyride.config.steps[joyride.current].content" class="jr_content" 
+        ng-bind-html="joyride.config.steps[joyride.current].content | jr_trust"></div>
+    </div>
+    <div class="jr_buttons">
+      <div class="jr_left_buttons"></div>
+  
+      <div class="jr_right_buttons"></div>
+    </div>
+</div>

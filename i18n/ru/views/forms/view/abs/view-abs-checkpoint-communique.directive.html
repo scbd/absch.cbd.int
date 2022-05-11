@@ -1,0 +1,227 @@
+﻿<div id="Record" class="record panel panel-default">
+
+	<div class="panel-heading bg-blue" ng-show="display('header')">
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
+	</div>
+	<div class="record-body panel-body">
+			
+		<document-date></document-date>
+		
+
+    	   	<div ng-show="document.government || document.absCheckpoints">
+				<legend>Общая информация</legend>
+				<div ng-show="document.government">
+					<label>Страна, выпускающая данное коммюнике контрольных пунктов</label>
+					<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+				</div>
+			</div>
+			<div ng-show="document.title">
+    		 	<label>Название данного коммюнике контрольных пунктов</label>
+    		 	<div class="km-value" compare-val><strong><span ng-bind="document.title | lstring:locale"></span></strong></div>
+		 	</div>
+			<div ng-show="document.absCheckpoints">
+				<legend>Checkpoint/s that collected or received the information</legend>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li ng-repeat="item in document.absCheckpoints">
+								<div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							</li>
+						</ul>
+					</div>
+			</div>
+			<div ng-if="emailList && emailList.length>0">
+				<legend>Получатели коммюнике контрольных пунктов</legend>
+				<div class="row">
+					<div class="col-xs-12 col-lg-12" >
+						<div class="help-info color-red"  >Примечание: Механизм посредничества для регулирования ДГРСИВ не гарантирует получение по электронной почте автоматически формируемых сообщений. </br></div>
+					</div>
+				</div>
+				<div ng-if="emailList">
+		            <div class="row top-border bg-lightblue">
+						<div compare-val>
+		                <div ng-repeat="contact in emailList track by $index" class="">
+		                    <div class="col-xs-12">
+		                        <div class="km-value">
+		                            <div view-record-reference ng-model="contact" locale="locale"></div>
+		                        </div>
+		                    </div>
+						</div>
+						</div>
+		            </div>
+				</div>
+			</div>
+
+			<div ng-show="document.absIRCCs || document.absIRCCsNotAvailable ||
+						document.sourceCountries || entityWhoGrantedPIC ||
+						document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
+						document.evidenceOfPIC || document.evidenceOfMAT ||
+						document.entityToWhomPICGranted || document.personsAtCheckpoint">
+				<legend>Информация, собранная или полученная на контрольном пункте</legend>
+				<div ng-show="document.absIRCCs">
+					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
+					<div class="km-value" compare-val>
+						<ul class="list">
+							<li  ng-repeat="item in document.absIRCCs">
+								 <div view-record-reference ng-model="item.identifier" locale="locale"></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div ng-show="document.absIRCCsNotAvailable" class="km-value">Международно признанный сертификат о соответствии требованиям (МПССТ) отсутствует</div>
+				<div ng-show="document.sourceCountries || document.entityWhoGrantedPIC ||
+					document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
+					document.evidenceOfPIC || document.evidenceOfMAT ||
+					document.entityToWhomGrantedPIC || document.keywords || document.dateOfAccess">
+					<div ng-show="document.sourceCountries">
+						<label>Источник генетического ресурса</label>
+						<div class="km-value" compare-val>
+							<ul class="list">
+								<li ng-repeat="term in document.sourceCountries" ng-bind="term|term:locale"></li>
+							</ul>
+						</div>
+					</div>
+					<div ng-show="document.entityWhoGrantedPIC">
+						<label>Лицо или организация, которые предоставили предварительное обоснованное согласие</label>
+						<div class="km-value" compare-val>
+							<div view-record-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
+						</div>
+					</div>
+					<div ng-show="document.subjectMatter">
+						<label>Предмет или генетические ресурсы, имеющие отношение к собранной или полученной информации</label>
+						<div compare-val>
+						<div class="km-value km-pre" ng-bind-html="document.subjectMatter | lstring:locale"></div>
+						</div>
+					</div>
+					<div ng-show="document.specimens || document.taxonomies || document.gisFiles || document.keywords">
+						<label>Факультативные дополнительные сведения о предмете</label>
+						<div ng-show="document.specimens">
+							<label>Дата отбора образца</label>
+							<div class="km-value" compare-val="specimens">
+								<km-link-list ng-model="document.specimens"></km-link-list>
+							</div>
+						</div>
+						<div ng-show="document.taxonomies">
+							<label>Таксономические данные</label>
+							<div class="km-value" compare-val="taxonomies">
+								<km-link-list ng-model="document.taxonomies"></km-link-list>
+							</div>
+						</div>
+						<div ng-show="document.gisFiles">
+							<label>Географические координаты</label>
+							<div class="km-value" compare-val="gisFiles">
+								<km-link-list ng-model="document.gisFiles"></km-link-list>
+							</div>
+							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
+						</div>
+						<div ng-show="document.keywords">
+							<label>Ключевые слова, описывающие предмет или генетический(-ие) ресурс(ы), о которых сообщается в данном коммюнике</label>
+							<div class="km-value" compare-val>
+								<ul class="list">
+									<li ng-repeat="term in document.keywords"><span ng-bind="term|term"></span> <span ng-show="term.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">(<span ng-bind="document.keywordOther|lstring:locale"></span>)</span></li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div ng-show="document.evidenceOfPIC">
+						<label>Ссылка на информацию о предварительном обоснованном согласии или доказательства его получения</label>
+						<div compare-val>
+						<div class="km-value km-pre"ng-bind-html="document.evidenceOfPIC | lstring:locale"></div>
+						</div>
+					</div>
+
+					<div ng-show="document.entityToWhomGrantedPIC">
+						<label>Лицо или организация, которым предоставлено предварительное обоснованное согласие</label>
+						<div class="km-value" compare-val>
+							<div view-record-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
+						</div>
+					</div>
+
+                    <div ng-show="document.evidenceOfMAT">
+						<label>Reference or evidence of establishment of mutually agreed terms</label>
+						<div compare-val>
+						<div class="km-value km-pre"ng-bind-html="document.evidenceOfMAT | lstring:locale"></div>
+						</div>
+					</div>
+
+                    <div ng-show="document.dateOfAccess">
+					    <label>Дата предоставления доступа к генетическому ресурсу</label>
+						<div compare-val>
+					    <div class="km-value"><span ng-bind="document.dateOfAccess"></span></div>
+						</div>
+				    </div>
+
+				</div>
+			</div>
+			<div ng-show="document.description || document.dateCollectedFrom || document.dateCollectedTo || information || informationDocuments ||document.personsAtCheckpoint">
+				<legend>Информация об использовании генетического(-их) ресурса(-ов)</legend>
+				<div ng-show="document.description">
+					<label>Краткое описание информации, собранной или полученной контрольным пунктом, касающейся использования генетических ресурсов</label>
+					<div compare-val>
+					<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
+					</div>
+				</div>
+				<div ng-show="document.personsAtCheckpoint">
+					<label>Лицо или организация, предоставляющие контрольному пункту информацию об использовании генетического ресурса</label>
+					<div compare-val>
+					<div class="km-value" ng-repeat="user in document.personsAtCheckpoint">
+						<div view-record-reference ng-model="user" locale="locale"></div>
+					</div>
+					</div>
+				</div>
+				<div ng-show="document.dateCollected">
+					<label>Date on which the information was collected at the checkpoint</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateCollected"></span></div>
+					</div>
+				</div>
+				<div ng-show="document.dateCollectedFrom">
+					<label>Дата начала сбора информации на контрольном пункте</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateCollectedFrom"></span></div>
+					</div>
+				</div>
+				<div ng-show="document.dateCollectedTo">
+					<label>Дата получения информации на контрольном пункте</label>
+					<div compare-val>
+					<div class="km-value"><span ng-bind="document.dateCollectedTo"></span></div>
+					</div>
+				</div>
+				<div ng-show="document.informationDocuments">
+					<label>Соответствующий документ</label>
+					<div class="km-value" compare-val="informationDocuments">
+						<km-link-list ng-model="document.informationDocuments"></km-link-list>
+					</div>
+				</div>
+				<div ng-show="document.information">
+					<label>Копия соответствующей информации</label>
+					<div compare-val>
+					<div class="km-value km-pre" ng-bind="document.information | lstring:locale"></div>
+					</div>
+				</div>
+			</div>
+
+            <div ng-show="document.relevantInformation||document.relevantDocuments">
+				<legend>Дополнительная информация</legend>
+
+				<div ng-show="document.relevantInformation">
+					<div compare-val>
+					<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+					</div>
+				</div>
+
+				<div ng-show="document.relevantDocuments">
+					<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
+					<div class="km-value" compare-val="relevantDocuments">
+						<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+					</div>
+				</div>
+			</div>
+
+			<div>
+				<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+			</div>
+
+
+	</div>
+	   <div document-metadata class="panel-footer" ></div>
+</div>

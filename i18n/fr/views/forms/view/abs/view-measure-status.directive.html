@@ -1,0 +1,158 @@
+﻿<div id="Record" class="record panel panel-default">
+	<div class="panel-heading bg-blue">
+		<h4 ng-show="display('header')"><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+	</div>
+	<div class="record-body panel-body">
+
+			
+		<document-date></document-date>
+
+		<legend>Informations générales</legend>
+
+		<div ng-show="document.government">
+			<label name="country">Pays</label>
+			<div class="km-value"><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+		</div>
+
+		
+
+		<div ng-show="document.jurisdiction">
+			<label>Juridiction(s)</label>
+			<div class="km-value" compare-val><span ng-bind="document.jurisdiction|term:locale"></span></div>
+		</div>
+
+
+		<div ng-show="document.jurisdictionRegions">
+			<label>région(s) de la ou des juridiction(s)</label>
+			<div class="km-value" compare-val>
+				<ul  class="list">
+                    <li ng-repeat="val in document.jurisdictionRegions" ng-bind="val | term:locale"></li>
+                </ul>
+			</div>
+		</div>
+
+		<div ng-show="document.title">
+			<label>Titre</label>
+			<div class="km-value" compare-val><strong ng-bind="document.title | lstring:locale"></strong></div>
+		</div>
+
+		<div ng-show="document.adoption">
+			<label>date de publication du fichier</label>
+			<div class="km-value" compare-val><span ng-bind="document.adoption | formatDate"></span></div>
+		</div>
+
+		<div ng-show="document.status">
+			<label>Quel est le statut des mesures d’APA (ou de la juridiction indiquée) de votre pays?</label>
+			<div class="km-value" compare-val><span ng-bind="document.status|term:locale"></span></div>
+		</div>
+
+		<div ng-show="document.statusDescription">
+			<label>Veuillez fournir plus d'informations sur les progrès actuels dans l'établissement de mesures d'APA et/ou un résumé des principales difficultés et défis rencontrés .</label>
+			<div class="km-value" compare-val>
+				<div ng-bind="document.statusDescription | lstring:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.isSubjectToPic != undefined">
+			<label>Est-ce que l’accès aux ressources génétiques est sujet au consentement préalable obtenu en connaissance de cause (CPCC) tel qu’exigé par l'article 6.1?</label>
+			<div class="km-value" compare-val><span ng-if="document.isSubjectToPic">Oui</span> <span ng-if="!document.isSubjectToPic">Non <span  ng-bind="document.noPicStatus | term:locale"></span></span></div>
+		</div>
+
+		<div ng-show="document.picMeasures && document.picMeasures.length>0">
+			<label>Veuillez sélectionner les mesures d’APA pertinentes de la liste suivante qui régissent les ressources génétiques.</label>
+			<div compare-val="picMeasures">
+				<div class="km-value"  ng-repeat="picMsr in document.picMeasures" ><span view-record-reference ng-model="picMsr" locale="locale"></span></div>
+			</div>
+		</div>
+
+		<div ng-show="document.picMeasuresDescription">
+			<label>Veuillez expliquer davantage votre réponse .</label>
+			<div compare-val>
+				<km-value-ml value="document.picMeasuresDescription" locales="locale"></km-value-ml>
+			</div>
+		</div>
+
+		<div ng-show="document.hasIplc != undefined">
+			<label>Est-ce que votre pays (ou la juridiction indiquée) abrite des communautés autochtones et/ou locales?</label>
+			<div class="km-value" compare-val><span ng-if="document.hasIplc">Yes, <span  ng-bind="document.iplcType | term:locale"></span></span> <span ng-if="!document.hasIplc">No</span></div>
+		</div>
+
+		<div ng-show="document.iplcDescription"><!-- Please further explain your response --><label>Description du CPCC</label>
+			<div compare-val>
+				<km-value-ml value="document.iplcDescription" locales="locale"></km-value-ml>
+			</div>
+		</div>
+		<div ng-show="document.hasIplcRightEstablished != undefined">
+			<label>Est-ce que les peuples autochtones et les communautés locales ont octroyé le droit d’accès au ressources génétiques conformément à vos lois nationales?</label>
+			<div class="km-value" compare-val><span ng-if="document.hasIplcRightEstablished">Oui, <span  ng-if="document.isIplcRightFullyImplemented">pleinement mis en oeuvre</span> <span  ng-if="!document.isIplcRightFullyImplemented">dans une certaine mesure</span></span> <span ng-if="!document.hasIplcRightEstablished">non <span  ng-if="document.isIplcRightInPlan">mais en cours d’élaboration ou prévu</span> <span  ng-if="!document.isIplcRightInPlan">n'est pas prévu</span></span></div>
+		</div>
+
+		<div ng-show="document.iplcMeasures && document.iplcMeasures.length>0">
+			<label>Veuillez sélectionner la ou les mesures APA pertinentes dans la liste suivante concernant l'accès aux ressources génétiques détenues par les peuples autochtones et les communautés locales.</label>
+			<div compare-val="iplcMeasures">
+				<div class="km-value"  ng-repeat="ipicMsr in document.iplcMeasures" ><span view-record-reference ng-model="ipicMsr" locale="locale"></span></div>
+			</div>
+		</div>
+
+		<div ng-show="document.otherIplcRelatedRecords && document.otherIplcRelatedRecords.length>0">
+			<label>Veuillez sélectionner d'autres informations applicables pertinentes liées aux procédures d'APA, aux sites Web ou aux bases de données nationaux, aux protocoles et procédures communautaires et au droit coutumier et/ou aux autorités nationales compétentes dans la liste suivante.</label>
+			<div compare-val="otherIplcRelatedRecords">
+				<div class="km-value"  ng-repeat="oplRecord in document.otherIplcRelatedRecords" ><span view-record-reference ng-model="oplRecord" locale="locale"></span></div>
+			</div>
+		</div>
+
+		<div ng-show="document.iplcMeasuresDescription">
+			<label>Veuillez expliquer davantage votre réponse .</label>
+			<div class="km-value" compare-val>
+				<div ng-bind="document.iplcMeasuresDescription | lstring:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.hasStepsForIplcApproval != undefined">
+			<label>Votre pays (ou la juridiction indiquée) a-t-il pris des mesures dans le but de garantir que les connaissances traditionnelles associées aux ressources génétiques détenues par les peuples autochtones et les communautés locales de votre pays soient accessibles avec le CPCC ou l'approbation et la participation de ces peuples autochtones et communautés locales et que les CCCA ont été mises en place ?</label>
+			
+			<div class="km-value" compare-val><span ng-if="document.hasStepsForIplcApproval">Oui, <span  ng-if="document.isStepsForIplcApprovalImplemented">pleinement mis en oeuvre</span> <span  ng-if="!document.isStepsForIplcApprovalImplemented">dans une certaine mesure</span></span> <span ng-if="!document.hasStepsForIplcApproval">non <span  ng-if="document.isStepsForIplcApprovalInPlan">mais en cours d’élaboration ou prévu</span> <span  ng-if="!document.isStepsForIplcApprovalInPlan">n'est pas prévu</span></span></div>
+		</div>
+
+		<div ng-show="document.iplcApprovalMeasures  && document.iplcApprovalMeasures.length>0">
+			<label>Mesures d’approbation CPCC</label>
+			<div compare-val="iplcApprovalMeasures">
+				<div class="km-value"  ng-repeat="iplcAm in document.iplcApprovalMeasures" ><span view-record-reference ng-model="iplcAm" locale="locale"></span></div>
+			</div>
+		</div>
+
+		<div ng-show="document.otherIplcApprovalRecords  && document.otherIplcApprovalRecords.length>0">
+			<label>Autres fichiers d’approbation du CPCC</label>
+			<div compare-val="otherIplcApprovalRecords">
+				<div class="km-value"  ng-repeat="oplAr in document.otherIplcApprovalRecords" ><span view-record-reference ng-model="oplAr" locale="locale"></span></div>
+			</div>
+		</div>
+
+		<div ng-show="document.iplcApprovalDescription">
+			<label>Description de l’approbation CPCC</label>
+			<div class="km-value" compare-val>
+				<div ng-bind="document.iplcApprovalDescription | lstring:locale"></div>
+			</div>
+		</div>
+
+		<div ng-show="document.relevantInformation||document.relevantDocuments">
+			<legend>Informations supplémentaires</legend>
+
+			<div ng-show="document.relevantInformation">
+				<div compare-val="relevantInformation" class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+			</div>
+
+			<div ng-show="document.relevantDocuments">
+				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
+				<div class="km-value" compare-val="relevantDocuments">
+					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
+				</div>
+			</div>
+		</div>
+		<div>
+			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>
+		</div>
+	</div>
+
+	<div document-metadata class="panel-footer"></div>
+</div>

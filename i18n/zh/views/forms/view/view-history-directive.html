@@ -1,0 +1,28 @@
+﻿<div id="view-history" style="max-height:200px;overflow:scroll;display:inline!important;"><table style="width:100%!important;" class="table table-condensed" ng-if="documents.length > 0">
+        <tr>
+                <th class="color-litegrey" style="font-size:12px;bold;"></th>
+                <th class="color-litegrey " style="font-size:12px;bold;"></th>
+                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;"></th>
+                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;" ng-if="!publicView"></th>
+            </tr>
+           
+        <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
+            <tr>
+                <td style="white-space:nowrap;"></td>
+                <td>
+                    <div></div>
+                </td>
+                <td  class="hidden-xs" >
+                    <div ng-show="!publicView"></div>
+
+                        <div ng-show="publicView"></div>
+
+                    <div ng-show="document.body.amendmentDescription"><div ng-show="!more"></div>
+                                <div ng-show="more"></div></div>
+                </td>
+                <td ng-if="!publicView"  class="hidden-xs">
+                    <div></div>
+                </td>
+            </tr>
+        </tbody>
+    </table></div>

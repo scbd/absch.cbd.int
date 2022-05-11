@@ -1,0 +1,37 @@
+﻿<div style="padding:10px;" dir="rtl">
+
+    <div class="panel panel-default">
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div ng-show="discussionMessage" class="alert alert-info"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-12 col-lg-12">
+                    <div class="row" style="border: 1px solid #eee;margin: 1px;">
+                        <div class="col-xs-12">
+                            <div class="control-group">
+                                <div style="border-bottom: 1px solid #eee;padding: 5px 0px 5px 0px;"><div class="btn-group">
+                                        <button type="button" style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"></button>
+                                        <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
+                                            <li></li>
+                                            <li></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="km-control-group" required caption=""><textarea ng-model="post.message" rows="3" placeholder="" class="form-control" />
+                                </div>
+                                <div class="km-control-group pull-right">
+                                    <input type="button" ng-click="post()" class="btn btn-primary" value="Post" />
+                                </div>
+                            </div>
+                        </div>
+                    </div><div posts forum-id="forumId" thread-id="threadId" hide-thread="true" hide-subject="true" on-posts-load="postLoaded(posts)"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

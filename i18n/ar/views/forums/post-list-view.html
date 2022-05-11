@@ -1,0 +1,19 @@
+﻿<div class="container" dir="rtl"><div ng-show="user.isAuthenticated">
+       
+                <div forum-id="forumId" thread-id="threadId" show-details="true" type="thread" forum-details forum-list-url="forumListUrl" show-forum-properties="isAdmin()"></div>
+         
+       
+                <div id="successMsg" style="display:none" class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-bs-dismiss="alert"></button></div>
+       
+
+        
+                <div posts forum-id="forumId" thread-id="threadId" hide-thread="false"/>
+          
+    </div>
+
+    <div ng-show="!user.isAuthenticated" class="bg-green">
+        <div login></div>
+    </div>
+
+</div>
