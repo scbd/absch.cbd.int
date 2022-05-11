@@ -74,7 +74,6 @@ import 'components/scbd-angularjs-services/main';
                                 }
                                 return url;
                             });
-                            console.log(item.data.url_ss    )
 
                             return item;
                         });
