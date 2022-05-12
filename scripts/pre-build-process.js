@@ -22,13 +22,12 @@ process.on('uncaughtException', (error) => {
     if (error.code !== 'EPIPE')
         log(error);
 });
-
+export const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];// ['en', 'ru', 'es',];//
 export const processFiles = async (ignoreForRollupFiles) =>{
     console.time('preBuildProcess');
 
     const git       = require('./scripts/git-file-info');
     const baseDir   = path.resolve('./');
-    const languages = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];// ['en', 'fr', 'es',];//
     const enDir     = 'app';
     const i18nDir   = 'i18n';
     const buildDir  = 'i18n-build';

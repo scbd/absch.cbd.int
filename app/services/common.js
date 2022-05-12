@@ -67,6 +67,13 @@ import 'components/scbd-angularjs-services/main';
                             }
                             item.data.info.updatedOn = item.data.updatedDate_dt;
                             item.data.header.identifier = item.data.identifier_s;
+                            
+                            item.data.url_ss = (item.data.url_ss || []).map(url=>{
+                                if(typeof url == 'string' && url.startsWith('/doc/')){
+                                    return `https://www.cbd.int${url}`
+                                }
+                                return url;
+                            });
 
                             return item;
                         });

@@ -4,8 +4,12 @@
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <faqs></faqs>
-                    <side-bar></side-bar>
+                    <div class="col-lg-8">
+                        <faqs></faqs>
+                    </div>
+                    <div class="col-lg-4">
+                        <side-bar></side-bar>
+                    </div>
                 </div>
             </div>
         </section>

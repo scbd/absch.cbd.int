@@ -11,7 +11,7 @@
 		<div ng-if="document.government">
 			<label name="government">Country</label> 
 			<div class="km-value" compare-val>
-				<a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
+				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>	
 		<div ng-if="document.profile">

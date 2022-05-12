@@ -85,7 +85,7 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                         pdfType = 'ircc-certificate';
                     else if('absCheckpointCommunique' == schema)
                         pdfType = 'cpc-certificate';
-                    else if($scope.internalDocumentInfo.workingDocumentID){//its a draft record
+                    else if(($scope.internalDocumentInfo||{}).workingDocumentID){//its a draft record
                         pdfDownloadUrl = `/pdf/draft-documents/:schema/${$route.current.params.code}`;
                     }
                     else if(_.includes(appConfigService.scbdSchemas, schema))

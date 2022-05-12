@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-8">
+    <div>
         <div class="row match-height">
             <div class="col-md-12 col-sm-12 " v-for="category in KbCategories">
                 <div class="categories-list widget_categories tag-count">
@@ -8,9 +8,12 @@
                     <ul class="cate-list-ul" style="list-style: none;">
                         <li class="cate-list-li" v-for="article in category.articles">
                             <a v-if="article.identifier" :href="`${articleUrl(article, category.adminTags[0])}`">{{article.title}}</a>
+                            <a v-if="article.url" :href="article.url" target="_blank">{{article.title}}</a>
                         </li>
                     </ul>
-                    <a  :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
+                    <div>
+                        <a class="pull-right" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
+                    </div>
                 </div>
             </div>
         </div>

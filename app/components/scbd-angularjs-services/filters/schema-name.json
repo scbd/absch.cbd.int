@@ -1,93 +1,175 @@
-﻿{
+{
     "news": {
-        "type": "scbd",
         "title": {
+            "ar": "الأخبار",
+            "zh": "新闻",
+            "ru": "Новости",
+            "fr": "Nouvelles",
+            "es": "Noticias",
             "en": "News"
         },
         "description": {
+            "ar": "الأخبار",
+            "zh": "新闻",
+            "ru": "Новости",
+            "fr": "Nouvelles",
+            "es": "Noticias",
+            "en": "News"
+        },
+        "titlePlural": {
+            "ar": "الأخبار",
+            "zh": "新闻",
+            "ru": "Новости",
+            "fr": "Nouvelles",
+            "es": "Noticias",
             "en": "News"
         },
         "shortCode": "NEWS",
-        "titlePlural": {
-            "en": "News"
-        }
+        "type": "scbd"
     },
     "notification": {
-        "type": "scbd",
         "title": {
+            "ar": "الإخطار",            
+            "fr": "Notification",
+            "es": "Notificación",
             "en": "Notification"
         },
         "description": {
+            "ar": "الإخطار",            
+            "fr": "Notification",
+            "es": "Notificación",
             "en": "Notification"
         },
-        "shortCode": "NT",
         "titlePlural": {
+            "zh": "通知",
+            "ru": "Уведомления",
+            "fr": "Notifications",
+            "es": "Notificaciones",
             "en": "Notifications"
-        }
+        },
+        "type": "scbd",
+        "shortCode": "NT"
     },
     "new": {
-        "type": "scbd",
         "title": {
+            "ar": "الجديد",
+            "zh": "最新消息",
+            "fr": "Nouveautés",
+            "es": "Novedades",
             "en": "What's New"
         },
         "description": {
+            "ar": "الجديد",
+            "zh": "最新消息",
+            "fr": "Nouveautés",
+            "es": "Novedades",
             "en": "What's New"
         },
-        "shortCode": "NEW",
         "titlePlural": {
+            "ar": "الجديد",
+            "zh": "最新消息",
+            "fr": "Nouveautés",
+            "es": "Novedades",
             "en": "What's New"
-        }
+        },
+        "type": "scbd",
+        "shortCode": "NEW"
     },
     "meeting": {
-        "type": "scbd",
         "title": {
+            "ar": "الاجتماع",
+            "zh": "会议",
+            "ru": "Совещание",
+            "fr": "Réunion",
+            "es": "Reunión",
             "en": "Meeting"
         },
         "description": {
+            "ar": "الاجتماع",
+            "zh": "会议",
+            "ru": "Совещание",
+            "fr": "Réunion",
+            "es": "Reunión",
             "en": "Meeting"
         },
-        "shortCode": "MT",
         "titlePlural": {
+            "ar": "الاجتماعات",
+            "zh": "会议",
+            "ru": "Совещания",
+            "fr": "Réunions",
+            "es": "Reuniones",
             "en": "Meetings"
-        }
+        },
+        "type": "scbd",
+        "shortCode": "MT"
     },
     "statement": {
-        "type": "scbd",
         "title": {
+            "zh": "声明",
+            "ru": "Заявление",
+            "fr": "Déclaration",
+            "es": "Declaración",
             "en": "Statement"
         },
         "description": {
+            "ar": "التصريحات",
+            "zh": "声明",
+            "ru": "Заявления",
+            "fr": "Déclarations",
+            "es": "Declaraciones",
             "en": "Statements"
         },
-        "shortCode": "ST",
         "titlePlural": {
+            "ar": "التصريحات",
+            "zh": "声明",
+            "ru": "Заявления",
+            "fr": "Déclarations",
+            "es": "Declaraciones",
             "en": "Statements"
-        }
+        },
+        "type": "scbd",
+        "shortCode": "ST"
     },
     "pressRelease": {
-        "type": "scbd",
         "title": {
+            "ar": "بيان صحفي",
+            "zh": "新闻简报",
+            "fr": "Communiqué de presse",
+            "es": "Comunicado de prensa",
             "en": "Press Release"
         },
         "description": {
+            "ar": "بيان صحفي",
+            "zh": "新闻简报",
+            "fr": "Communiqué de presse",
+            "es": "Comunicado de prensa",
             "en": "Press Release"
         },
-        "shortCode": "PR",
         "titlePlural": {
+            "zh": "新闻稿",
+            "ru": "Пресс-релизы",
+            "fr": "Communiqués de presse",
+            "es": "Comunicados de prensa",
             "en": "Press Releases"
-        }
+        },
+        "type": "scbd",
+        "shortCode": "PR"
     },
     "meetingDocument": {
-        "type": "scbd",
-        "title": {
+        "title": {            
             "en": "Meeting Document"
         },
-        "description": {
+        "description": {            
             "en": "Meeting Document"
         },
-        "shortCode": "MTD",
         "titlePlural": {
+            "ar": "وثائق الاجتماعات",
+            "zh": "会议文件",
+            "fr": "Documents de réunion",
+            "es": "Documentos de la reunión",
             "en": "Meeting Documents"
-        }
+        },
+        "type": "scbd",
+        "shortCode": "MTD"
     }
 }
