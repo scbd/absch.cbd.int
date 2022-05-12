@@ -3,7 +3,7 @@ import _ from 'lodash';
 import 'services/main';
 import './ircc-directive';
 import 'css!/app/css/print-friendly.css';
-import 'css!/app/css/pdf-communique.css';
+import 'css!/app/css/abs/pdf-communique.css';
 
 import printHeaderTemplate from 'text!../forms/view/print-header.html';
 import printFooterTemplate from 'text!../forms/view/print-footer.html';
