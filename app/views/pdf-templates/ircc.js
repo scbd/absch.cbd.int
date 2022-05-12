@@ -2,7 +2,7 @@ import app from 'app';
 import 'services/main';
 import './ircc-directive';
 import 'css!/app/css/print-friendly.css';
-import 'css!/app/css/pdf-ircc.css';
+import 'css!/app/css/abs/pdf-ircc.css';
 
 	export { default as template } from './ircc.html';
 export default ['$scope','$routeParams','$location','$filter',
