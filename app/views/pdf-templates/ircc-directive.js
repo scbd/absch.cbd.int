@@ -1,6 +1,6 @@
 ﻿import app from 'app';
 import template from 'text!./ircc-directive.html';
-import 'css!/app/css/pdf-ircc.css';
+import 'css!/app/css/abs/pdf-ircc.css';
 import 'views/forms/view/directives/view-record-reference.directive';
 
 import printHeaderTemplate from 'text!../forms/view/print-header.html';
