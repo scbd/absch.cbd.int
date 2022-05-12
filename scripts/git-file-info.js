@@ -26,6 +26,11 @@ const git = simpleGit();
 const getModifiedDate = async (filePath, options) => {
 
     const log = await git.log({ file: filePath });
+    if(!log || !log.latest){
+        console.log(filePath, log);
+        return new Date(1000).getTime();
+    }
+
     const modifiedDate = new Date(log.latest.date);
     return modifiedDate.getTime();
 
