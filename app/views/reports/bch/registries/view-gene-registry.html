@@ -19,13 +19,14 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
-						<p class="p-borders padding-top-10">
+					<div class="bs5 col-md-10  col-xs-12">
+						<p class="padding-top-10">
 							The Genetic Element Registry provides a summary of information on the genetic elements associated with the 
 							LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. 
 							The registry includes links to the records on each genetic element where more details may be found. 
 							LMOs containing the particular genetic element are referenced at the bottom of the individual record.
 						</p>
+						<p class="bs5 fst-italic py-2 color-black fw-bold">Click <a class="bs5 text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=dnaSequence" >here</a> to perform an in-depth search of all Genetic Element records available in this Registry.</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
 						<div ng-if="!isLoading && !isError">						

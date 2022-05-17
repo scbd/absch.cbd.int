@@ -19,14 +19,15 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
-						<p class="p-borders padding-top-10">
+					<div class="bs5 col-md-10  col-xs-12">
+						<p class="padding-top-10">
 							The Organism Registry includes summary information on those organisms that have been registered in the BCH as parental,
 							 recipient or donor organisms. The registry includes links to the records on each organism where further information 
 							 about relevant biological characteristics, including information on taxonomic classification, common name, origin,
 							  centre of origin and centre of genetic diversity can be found. Links to records that reference
 							   the organism are provided at the bottom of each individual record.
 						</p>
+						<p class="bs5 fst-italic py-2 color-black fw-bold">Click <a class="bs5 text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=organism" >here</a> to perform an in-depth search of all Organism records available in this Registry.</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
 						<div ng-if="!isLoading && !isError">						
