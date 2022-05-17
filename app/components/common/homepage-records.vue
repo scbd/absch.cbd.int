@@ -102,6 +102,8 @@
            else this.$router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
       },
       recordUrl(record){
+        if(!record.uniqueIdentifier_s)
+          return;
         const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
         const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
         const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()

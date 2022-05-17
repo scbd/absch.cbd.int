@@ -37,3 +37,13 @@ body.validate-translation [lang~="en"]:before {
     background-color: red;
     border: 1px solid red;
 }
+
+.terms-check label > input[type=checkbox],
+.terms-radio label > input[type=radio]{
+    margin-right: 5px;
+}
+
+div[edit-measure-matrix] label > input[type=radio],
+div[edit-measure-matrix] label > input[type=checkbox]{
+    margin-right: 3px;
+}

@@ -1,5 +1,5 @@
 <template>
-    <div class="col-lg-4">
+    <div>
 								
         <div class="side-bar">
             <div class="widget fix widget_categories mt-2 right-side-articles">

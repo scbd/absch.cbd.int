@@ -7,16 +7,21 @@
         <section class="categories">
             <div class="container">
                 <div class="row">
-                    <header>
-					<div class="categerios-parahraph">
-                        <div class="col">
-                            <p>{{ $t("the") }} <b>{{$realm.chShortName+ " "}}<span class="text-capitalize">{{ $t("knowledgeBase") }}</span></b> {{ $t("kbParagraph")}}</p>
-                        </div>
-                        </div>
-                                    
-                    </header>
-                  <categories-group></categories-group>
-                  <side-bar></side-bar>
+                    <div class="col-lg-12">
+                        <header>
+                            <div class="categerios-parahraph">
+                                <div class="col">
+                                    <p>{{ $t("the") }} <b>{{$realm.chShortName+ " "}}<span class="text-capitalize">{{ $t("knowledgeBase") }}</span></b> {{ $t("kbParagraph")}}</p>
+                                </div>
+                            </div>                                    
+                        </header>
+                    </div>
+                    <div class="col-lg-8">
+                        <categories-group></categories-group>
+                    </div>
+                    <div class="col-lg-4">
+                        <side-bar></side-bar>
+                    </div>
                 </div>
             </div>
       </section>
