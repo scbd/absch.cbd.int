@@ -13,7 +13,7 @@ export default ['$scope','$rootScope',
 
         $scope.recordCount = 4;
         $scope.announcementCounts = 3;
-        if($rootScope.deviceSize == 'lg'){
+        if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
           $scope.recordCount = 8;
           $scope.announcementCounts = 6;
         }

@@ -1,15 +1,11 @@
 <template>
 <div class="home-page-records">
-  <ul class="ms-1 nav nav-pills">
-    <li class="nav-item">
-      <a class="nav-link active">Recently published</a>
-    </li>
-  </ul>
+  <h6 class="card-title ps-1">Recently published</h6>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
   <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(0,4)">
-      <div class="position-relative record-callout record-callout-national shadow m-3 p-3" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+      <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
         <span class="badge position-absolute top-0 end-0 date-badge">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
         <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
@@ -17,7 +13,7 @@
           <a class="meta-links" :href="`search?currentPage=1&schema=${encodeURIComponent(record.schema_s)}`"><span class="badge text-uppercase record-text-national">{{record.schema_EN_t}}</span></a>
           <a class="meta-links" v-if="record.government_s" :href="`countries/${encodeURIComponent(record.government_s)}`">
           <span class="badge text-uppercase record-text-national-country">{{record.rec_countryName}}</span></a>
-          <span class="bg-light text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
+          <span class="text-uppercase badge text-secondary">{{record.uniqueIdentifier_s}}</span>
         </div>
       </div>
     </div>
@@ -26,7 +22,7 @@
 
    <div class="d-none d-lg-block row-cols-1 row-cols-md-1 p-0">
     <div class="col" v-for="record in recordList.slice(4,8)">
-      <div class="position-relative record-callout record-callout-national shadow m-3 p-3" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
+      <div class="position-relative record-callout record-callout-national shadow m-3 p-3 visited-background" v-bind:class="{ 'record-callout-reference': type == 'reference' }">
         <span class="badge position-absolute top-0 end-0 date-badge">{{record.rec_date|formatDate('DD MMM YYYY')}}</span>
         <span><a :href="recordUrl(record)" class="fw-bold text-secondary text-decoration-none stretched-link cursor-pointer">{{record.rec_title}}</a></span>
         <p class="record-summary-text"><span v-if="record.rec_summary">{{record.rec_summary}}</span></p>
@@ -43,8 +39,8 @@
   </div>
 
   <div class="text-end mt-2 card-down-margin">
-    <a class="nav-link fs-6 text-muted text-uppercase cursor-pointer"  @click="seeMore()">See more 
-      <i class="fa fa-arrow-right"></i> </a>
+    <a class="nav-link fs-6 text-muted text-uppercase fw-bold cursor-pointer"  @click="seeMore()">See more 
+      <i class="bi bi-arrow-right-short fw-bolder fs-3 lh-1 align-bottom"></i> </a>
   </div>
 </div>
 </template>
@@ -103,7 +99,8 @@
            else this.$router.push({path: 'search', query: { currentPage: '1', tab: 'nationalRecords', group: 'government', group: 'schema' }});
       },
       recordUrl(record){
-        if(!record.uniqueIdentifier_s) return;
+        if(!record.uniqueIdentifier_s)
+          return;
         const newUid = record.uniqueIdentifier_s.replace(/-(trg|dev)/i, '')
         const shortCode = encodeURIComponent(newUid.split('-')[1]).toUpperCase()
         const uid       = encodeURIComponent(record.uniqueIdentifier_s).toUpperCase()
