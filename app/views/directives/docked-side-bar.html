@@ -5,7 +5,7 @@
         </div>
         <div class="search-field">
            <div class="form-group has-feedback has-search">
-              <span class="glyphicon glyphicon-search form-control-feedback"></span>
+              <span class="bi bi-search form-control-feedback"></span>
               <input type="search" class="form-control"  placeholder="Search..." class="form-control" ng-model="freeText" 
                 ng-change="search(freeText);"
                 ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0, '*': 1000 } }"/>
@@ -20,7 +20,7 @@
             <div class="row" ng-if="!articleData" >
                 <div ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
                     <div ng-class="{'article-open':showArticle}" >
-                        <div class="card" ng-click="details(article);">
+                        <div class="card border-0" ng-click="details(article);">
                             <span class="article-heading">
                                 <span ng-bind="article.title | lstring:locale"></span>
                             </span>
@@ -30,7 +30,7 @@
                             </p>
                         </div>
                         <div class="footer">
-                            <a rel="noopener" ng-href="articles/{{article._id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
+                            <a rel="noopener" ng-href="articles/{{article._id}}" target="_blank" class="float-end"><i class="fa fa-external-link"></i></a>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span>
                 </div>
                 <div class="footer">
-                    <a rel="noopener" ng-href="articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a>
+                    <a rel="noopener" ng-href="articleData/{{articleData.id}}" target="_blank" class="float-end"><i class="fa fa-external-link"></i></a>
                 </div>
             </div>
         </div>

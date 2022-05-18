@@ -28,7 +28,8 @@ import './xuser-notification-config-service';
                     '$timeout', '$filter', 'authentication', 'cfgUserNotification', '$location',
                     function ($scope, $rootScope, userNotifications, $timeout, $filter,
                         authentication, cfgUserNotification, $location) {
-
+                            
+                        $scope.deviceSize = $rootScope.deviceSize;
                         $scope.loading = false;
                         var pageNumber = 0;
                         var pageLength = 30;

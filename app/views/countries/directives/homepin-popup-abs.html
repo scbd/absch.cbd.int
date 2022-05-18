@@ -5,13 +5,13 @@
     'bg-darkgrey':!currentCountry.isParty && !currentCountry.isInbetweenParty, 
     'bg-inbetween': currentCountry.isInbetweenParty}">
         <div>
-            <span class="color-white bs5 fw-bold" ng-if="((isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)) && !currentCountry.isInbetweenParty">
+            <span class="color-white fw-bold" ng-if="((isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)) && !currentCountry.isInbetweenParty">
                 Party to the Nagoya Protocol</span>
             
-                <span  class="color-white bs5 fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)">
+                <span  class="color-white fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)">
                     Ratified, not yet Party</span>
 
-                <span  class="color-white  bs5 fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)">
+                <span  class="color-white fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)">
                     Not a Party to the Nagoya Protocol</span>
 
         </div>
@@ -47,7 +47,7 @@
         <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
             <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
                 <td>
-                    <span class="bs5 rounded badge ms-2"  ng-class="{'bg-gray-300' : schema.count==0, 'bg-abs':schema.count>0 }" ng-bind="schema.count"></span>
+                    <span class="rounded badge ms-2"  ng-class="{'bg-gray-300' : schema.count==0, 'bg-abs':schema.count>0 }" ng-bind="schema.count"></span>
                 </td>
                 <td>
                     <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
