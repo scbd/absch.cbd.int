@@ -48,8 +48,9 @@ export default class ArticlesApi
     return this.http.get(`api/v2017/articles/grouping/${groupKey}`, { params }).then(res => res.data).catch(tryCastToApiError);
   }
 
-  async queryArticles(params)  {
-    return this.http.get(`api/v2017/articles`, { params }).then(res => res.data).catch(tryCastToApiError);
+  async queryArticles(params, options)  {
+    options = options || {};
+    return this.http.get(`api/v2017/articles`, { params, ...options }).then(res => res.data).catch(tryCastToApiError);
   }
 
   async getArticleById(id)  {
