@@ -5,8 +5,8 @@ _defaults: &defaults
   #   - image: docker:17.05.0-ce
   machine:
     enabled: true
-    # Use Ubuntu 14.04 with bleeding edge Docker daemon 17.06.0-ce.
-    image: circleci/classic:edge
+    # Use Ubuntu 20.04
+    image: ubuntu-2004:202201-02
   working_directory: ~/scbd/absch.cbd.int
   parallelism: 1
 
@@ -15,8 +15,8 @@ _run:
     name: Build docker image
     command: |
       # Restart Docker with experimental features to enable `docker build --squash` option
-      sudo sh -c 'echo '\''DOCKER_OPTS="--experimental=true"'\'' >> /etc/default/docker'
-      sudo service docker restart
+      sudo bash -c 'echo "{\"experimental\": true}" > /etc/docker/daemon.json'
+      sudo systemctl restart docker
       docker info
       docker login -u $DOCKER_USER -p $DOCKER_PASS
       docker build --squash -t output --build-arg VERSION=$CIRCLE_SHA1 --build-arg BRANCH=${CIRCLE_BRANCH:-master} --build-arg TAG=$CIRCLE_TAG .
