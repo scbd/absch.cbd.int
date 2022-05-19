@@ -14,7 +14,7 @@ import _ from 'services/main';
                     
                         $scope.status   = "loading";
                         $scope.error    = null;
-
+                        $scope.imageSize = {_400 : '400x400'}
                         $scope.articles = [];
 
                         loadArticles();
