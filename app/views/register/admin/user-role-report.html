@@ -29,12 +29,12 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="pull-left">
+                                <div class="float-start">
                                     <div km-select ng-model="filters.partyStatus" binding-type="string" placeholder="Party Status" items="options.filterPartyStatus()"></div>
                                     <div km-select ng-model="filters.filterType" binding-type="string" placeholder="Filter" items="options.filterTypes()"></div>
                                     <div km-select ng-model="filters.role" binding-type="string" placeholder="Roles" items="options.filterRoles()"></div>
                                 </div>
-                                <div class="pull-right">
+                                <div class="float-end">
                                     <input type="button" class="btn btn-primary" ng-click="loadRecords()" value="Filter" ng-disabled="!filters.partyStatus || !filters.filterType || !filters.role">
                                     <button type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="(totalCount||0) <= 0 || readyForExport||loading">
                                         <i class="fa fa-table" ></i> Export

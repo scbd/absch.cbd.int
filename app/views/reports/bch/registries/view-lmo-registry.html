@@ -19,14 +19,17 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
+					<div class="bs5 col-md-10  col-xs-12">
 						<p class="padding-top-10">
 							The LMO Registry provides summary information on all living modified organisms registered in the BCH,
 							 including transformation events, genetic modifications and the 
-							 <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">unique identification code</a> (if available) 
+							 <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">unique identification code</a> (if available) 
 							 for each record. Links to all decisions and risk assessment reports that refer to these organisms are accessible
 							  through the records in the registry.
 						</p>
+						<p class="bs5 fst-italic py-2 color-black fw-bold">Click <a class="bs5 text-decoration-underline" rel="noopener" translation-url
+							href="/search?currentPage=1&schema=modifiedOrganism">here</a> to perform an in-depth
+						search of all LMO records available in this Registry.</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
 						<div ng-if="!isLoading && !isError">						
