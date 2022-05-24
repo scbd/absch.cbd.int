@@ -4,20 +4,7 @@
     <link href="/app/css/record.css" rel="stylesheet">
 
     <span register-top-menu></span>
-    <!-- <div class="register-content card card-1-notrans">
-        <div class="register-content-header bg-darkgrey color-white">
-            <div style="padding:10px 10px;">
-                <h3>Record Details
-                    <span class="helpinfoInline">
-                        <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
-                    </span>
-                </h3>
 
-                <div ng-if="showInfo" class="well well-help">
-                    View all information about a record.
-                </div>
-            </div>
-        </div> -->
         <div class="register-content-content">
 
             <div block-region activate="loading"></div>
@@ -48,15 +35,15 @@
                         </div>
                         <div class="modal-body" ng-hide="cantDelete || iacCantDelete">
 
-                            <div ng-show="isDraft(recordToDelete)" class="well">
-                                <button type="button" class="btn btn-warning pull-right" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
+                            <div ng-show="isDraft(recordToDelete)" class="card">
+                                <button type="button" class="btn btn-warning float-end" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">Delete the draft</button>
                                 <em>Draft <span ng-bind="recordToDelete.documentID||'[new]'"></span></em>
                                 <p><b ng-bind="recordToDelete.workingDocumentTitle|lstring"></b></p>
                                 <p ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></p>
                             </div>
 
-                            <div ng-show="isPublished(recordToDelete)" class="well">
-                                <button type="button" class="btn btn-danger pull-right" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
+                            <div ng-show="isPublished(recordToDelete)" class="card">
+                                <button type="button" class="btn btn-danger float-end" ng-disabled="loading" ng-click="deleteRecord(recordToDelete)" data-bs-toggle="tooltip" data-placement="top" title="Note: Any pending draft will also be deleted">
                                     Unpublish and delete the record</button>
                                 <em>Published record <span ng-bind="recordToDelete.documentID"></span></em>
                                 <p><b ng-bind="recordToDelete.title|lstring"></b></p>

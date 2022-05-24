@@ -22,7 +22,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
 
-                $element.find("[data-toggle='tooltip']").tooltip({
+                $element.find("[data-bs-toggle='tooltip']").tooltip({
                     trigger: 'hover'
                 });
                 $scope.listResult = {
@@ -153,7 +153,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
 
                     $('.ordericon').remove();
                     var direction = (($scope.orderBy[0].substr(0, 1) == '-') ? 'down' : 'up');
-                    $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon glyphicon glyphicon-chevron-' + direction + ' text-primary"></span>');
+                    $('#' + key.split('|')[0] + 'Header').append(' <span class="ordericon bi bi-chevron-' + direction + ' text-primary"></span>');
                 };
 
                 if(_.includes(realm.nationalSchemas, $filter('mapSchema')($scope.schema)))
@@ -786,7 +786,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                         const data = await import('~/app-data/bch/offline-formats.json');                        
                         $scope.offlineFormats = data.default;
                         $timeout(function(){
-                            $element.find("[data-toggle='tooltip']").tooltip({
+                            $element.find("[data-bs-toggle='tooltip']").tooltip({
                                 trigger: 'hover'
                             });
                         }, 100)
