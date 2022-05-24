@@ -15,18 +15,18 @@
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
         }
         </style>
-    <div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+    <div class="innerPageContent register-content card card-1-notrans m-0 p-3">
         <div class="register-content-header bg-darkgrey color-white">
-            <div style="padding:1px 10px;">
+            <div class="px-2">
                 <h3>Reports </h3>
             </div>
         </div>
         <div class="register-content-content bg-white">
-            <div class="row" style="padding:10px">
+            <div class="row p-2">
                 <div class="col-md-12 cp-header">
 
                     <div class="card sub-card" ng-repeat="report in reports">
-                        <img ng-src="{{report.image}}" alt="Image not available" style="width:100%;">
+                        <img ng-src="{{report.image}}" alt="Image not available" class="w-100">
                         <div class="container">
                             <h4><b ng-bind="report.title"></b></h4>
                             <p><a rel="noopener" ng-href="{{report.url}}">View</a></p>
