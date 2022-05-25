@@ -1,4 +1,4 @@
-<div  id="RegisterPage">
+﻿<div  id="RegisterPage">
 	<link href="/app/css/register.css" rel="stylesheet">
 	<link href="/app/css/record.css" rel="stylesheet">
 	<link href="/app/css/AdminLTE.min.css" rel="stylesheet" />
@@ -79,7 +79,7 @@
 											<span class="progress-description">
 												You have <span ng-if="!hasPublishingAuthority">not </span>
 												designated publishing authority in ABS-CH
-												 <a rel="noopener" href="/register/national-users"  class="link-color"> Click to add</a>
+												 <a rel="noopener" href="register/national-users"  class="link-color"> Click to add</a>
 											</span>
 										</div>
 										<!-- /.info-box-content -->
@@ -100,8 +100,8 @@
 
 													<div ng-if="schema.value>0 && schema.schema=='measure' && measureElementMissing && measureElementMissing.length > 0">
 														You have <span ng-bind="measureElementMissing.length"></span> MSR which are missing ABS elements of measures
-														<span class="pull-right text-black">
-															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
+														<span class="float-end text-black">
+															<a rel="noopener" class="link-color" role="button" data-bs-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}_Elm" 
 															aria-expanded="false" aria-controls="list{{schema.schema}}_Elm"> 
 																<i class="fa fa-angle-down"></i> view
 															</a>
@@ -124,8 +124,8 @@
 													</div>
 													<div ng-if="schema.value>0 && getDocumentsForUpdate(schema.schema).length > 0">
 														You have <span ng-bind="schema.value+' '+schema.schema|schemaShortName+', '+getDocumentsForUpdate(schema.schema).length"></span> of which require updates
-														<span class="pull-right text-black">
-															<a rel="noopener" class="link-color" role="button" data-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
+														<span class="float-end text-black">
+															<a rel="noopener" class="link-color" role="button" data-bs-toggle="collapse" ng-href="#list{{schema.schema|encodeURIComponent}}" 
 															aria-expanded="false" aria-controls="list{{schema.schema}}"> 
 																<i class="fa fa-angle-down"></i> view
 															</a>
@@ -133,7 +133,7 @@
 													</div>
 													<div ng-if="schema.value==0">
 														You have not published any <span ng-bind="schema.schema|schemaShortName"></span> in ABS-CH 
-														<a rel="noopener" ng-href="register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="pull-right link-color"> 
+														<a rel="noopener" ng-href="register/{{schema.schema|schemaShortName|encodeURIComponent}}/new" class="float-end link-color"> 
 															click to add
 														</a>
 													</div>
@@ -143,7 +143,7 @@
 												
 												<ul class="nav nav-pills nav-stacked">
 													<li ng-repeat="document in getDocumentsForUpdate(schema.schema)">
-															<a rel="noopener" href="/database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_blank">  
+															<a rel="noopener" href="database/{{document.uniqueIdentifier_s|uppercase|encodeURIComponent}}" target="_blank">  
 																<div>
 																	<span class=" text-green" ng-bind="document.uniqueIdentifier_s|uppercase"></span>
 																	<span ng-bind="document.title_t"></span>
@@ -186,7 +186,7 @@
 									<!-- ./chart-responsive -->
 								</div>
 								<!-- /.col -->
-								<div class="col-md-2 pull-right">
+								<div class="col-md-2 float-end">
 									<ul class="chart-legend clearfix">
 										<li ng-repeat="schema in schemas"><i class="fa fa-circle-o {{schema.class}}"></i><span ng-bind="schema.value+' '+schema.schema|schemaShortName"></span></li>
 									</ul>
@@ -201,7 +201,7 @@
 								<li ng-repeat="schema in schemas">
 									<a rel="noopener" href="#"> 
 										<span ng-bind="schema.label"></span>
-                  						<span class="pull-right text-red">
+                  						<span class="float-end text-red">
 											  <i class="fa fa-search"></i>
 											  <span ng-bind="schema.value"></span>
 										</span>

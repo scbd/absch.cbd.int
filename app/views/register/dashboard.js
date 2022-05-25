@@ -189,17 +189,25 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             if($routeParams.openTour){
                 $scope.tour();
             }
+
+            function hideToolTip() {
+                $('[data-bs-toggle="tooltip"]').tooltip('hide');
+            }
+
             $scope.showTopRecords = function($event, schema) {
+                hideToolTip();
                 $event.stopPropagation();
                 $scope.topRecords[schema] = !$scope.topRecords[schema];
             }
 
             $scope.gotoNew = function($event, cftype) {
+                hideToolTip();
                 $event.stopPropagation();
                 $location.path("/register/" + $filter("urlSchemaShortName")(cftype) + "/new");
             }
 
-            $scope.gotoList = function($event, cftype) {
+            $scope.gotoList = function ($event, cftype) {
+                hideToolTip();
                 $location.path("/register/" + $filter("urlSchemaShortName")(cftype));
             }
 

@@ -14,6 +14,7 @@ import 'moment';
             scope: {},
             link: function($scope, element, attrs) {
 
+                $scope.deviceSize = $rootScope.deviceSize;
                 $scope.roles = {
                     isAdministrator: roleService.isAdministrator()
                 };

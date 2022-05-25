@@ -1,43 +1,44 @@
 ﻿<div>
+<nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="hidden-sm disabled pagination-page-count">
-            <a rel="noopener" disabled>
+        <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
+            <a rel="noopener" class="page-link" disabled>
                 <strong>Page <span ng-bind="currentPage"></span> of <span ng-bind="pageCount"></span></strong>
             </a>
         </li>
-        <li ng-class="{'disabled': currentPage-1 == 0}" class="hidden-xs pagination-btn-first">
-            <a rel="noopener" ng-disabled="currentPage-1 == 0" 
+        <li ng-class="{'disabled': currentPage-1 == 0}" class="page-item d-none d-sm-inline-block pagination-btn-first">
+            <a rel="noopener" class="page-link" ng-disabled="currentPage-1 == 0" 
                 translation-url href ng-click="currentPage-1 > 0 && actionSetPage(1)">« First</a>
         </li>
-        <li ng-class="{'disabled': currentPage-1 == 0}" class=" pagination-btn-prev">
-            <a rel="noopener" ng-disabled="currentPage-1 == 0" 
+        <li ng-class="{'disabled': currentPage-1 == 0}" class="page-item pagination-btn-prev">
+            <a rel="noopener" class="page-link" ng-disabled="currentPage-1 == 0" 
                 translation-url href ng-click="currentPage-1 > 0 && actionSetPage(currentPage-1)">‹ 
-                <span class="hidden-xs">Prev</span></a>
+                <span class="d-none d-sm-inline-block">Prev</span></a>
         </li>
-        <li ng-repeat="n in range(pageCount)" ng-class="{active: n+1 == currentPage}" ng-click="actionSetPage(n+1)" class="pagination-btn-page-number">
-           <a rel="noopener" translation-url href ng-bind="n+1"></a>
+        <li ng-repeat="n in range(pageCount)" ng-class="{active: n+1 == currentPage}" ng-click="actionSetPage(n+1)" class="page-item pagination-btn-page-number">
+        <a rel="noopener"class="page-link" translation-url href ng-bind="n+1"></a>
         </li>
-        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}" class=" pagination-btn-next">
-            <a rel="noopener" ng-disabled="currentPage-1 >= pageCount - 1" 
+        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}" class="page-item pagination-btn-next">
+            <a rel="noopener" class="page-link" ng-disabled="currentPage-1 >= pageCount - 1" 
                 translation-url href ng-click="currentPage-1 < pageCount - 1 && actionSetPage(currentPage+1)">
-                <span  class="hidden-xs">Next</span> ›</a>
+                <span  class="d-none d-sm-inline-block">Next</span> ›</a>
         </li>
-        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}"  class="hidden-xs pagination-btn-last">
-            <a rel="noopener"  ng-disabled="currentPage-1 >= pageCount - 1"
+        <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}"  class="page-item d-none d-sm-inline-block pagination-btn-last">
+            <a rel="noopener" class="page-link" ng-disabled="currentPage-1 >= pageCount - 1"
                 translation-url href ng-click="currentPage-1 < pageCount - 1 && actionSetPage(pageCount)">Last »</a>
         </li>
-        <li class="hidden-sm disabled pagination-record-count">
-            <a rel="noopener" disabled>
+        <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
+            <a rel="noopener" class="page-link" disabled>
                 <strong> 
                     <span ng-bind="((currentPage-1)*pageSize)+1 + ' - ' + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)"></span> of 
                     <span ng-bind="(pageCount*pageSize)>numFound ? numFound:pageCount*pageSize"></span>
                 </strong>
             </a>
         </li>
-        <li class="hidden-xs pagination-items-per-page">
-                <a rel="noopener" disabled data-title="Items per page" data-bs-toggle="tooltip">
-                <span class="hidden-sm">Items per page</span>
-                <select ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
+        <li class="page-item d-none d-md-inline-block pagination-items-per-page">
+                <a rel="noopener" class="page-link" disabled data-title="Items per page" data-bs-toggle="tooltip">
+                <span class="d-none d-lg-inline-block">Items per page</span>
+                <select style="color: #0d6efd;" ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
                     <option ng-value="25">25</option>
                     <option ng-value="50">50</option>
                     <option ng-value="100">100</option>
@@ -47,7 +48,7 @@
             </a>
         </li>
     </ul>
-
+</nav>
     <!-- For Search crawlers create hidden href -->
     <div style="display: none">
         <a rel="noopener" ng-repeat="n in range(pageCount)" ng-href="/search?currentPage={{n+1|encodeURIComponent}}" translation-url ng-bind="n+1"></a>
