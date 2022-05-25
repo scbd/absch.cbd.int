@@ -122,7 +122,7 @@
         }
     </style>
 
-    <div class="pull-right" style="position:relative;top:-20px;">   
+    <div class="float-end" style="position:relative;top:-20px;">   
         <a rel="noopener" href="" ng-click="print('#secNrAnalyzer')" class="links" id="btnPrint">
             <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
             <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>  Print
@@ -140,7 +140,7 @@
                 <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non-Parties</span>
         </h3> -->
 
-        <div ng-show="sections" id="sumTypeButton" class="btn-group pull-right" title="Change how numbers are calculated">
+        <div ng-show="sections" id="sumTypeButton" class="btn-group float-end" title="Change how numbers are calculated">
             <button type="button" class="btn btn-primary" ng-click="showSumTypeSelector()">∑
                 <span ng-switch="sumType">
                     <span ng-switch-when="sum">Count of responses</span>
@@ -150,7 +150,7 @@
                 </span>
             </button>
 
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
                 <span class="sr-only">Toggle Dropdown</span>
             </button>
@@ -214,8 +214,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <div class="d-block modal-header">
+                    <button type="button" class="close btn float-end" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title">Change how numbers are calculated</i></h4>
                 </div>
 
@@ -276,7 +276,7 @@
                 <div class="modal-body ">
                    
                     <div ng-repeat="item in countriesTexts">
-                        <div class="pull-right" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'">
+                        <div class="float-end" ng-if="::item.field!='documentReferenceIDs' && item.field!='relevantDocuments'">
                             <span  ng-repeat="(locale, text) in ::item.text" class="locale" ng-class="{ selected : (item.text|locale:item.locale)==locale }">
                                 <a rel="noopener" href="#" ng-click="item.locale=locale" ng-bind="::locale|uppercase"></a>
                             </span>

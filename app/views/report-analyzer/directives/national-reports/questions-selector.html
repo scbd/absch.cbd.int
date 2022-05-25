@@ -8,11 +8,11 @@
         }
     </style>
 
-    <table class="table table-hover" style="margin-bottom:0px">
+    <table class="table table-hover bg-white mb-0">
         <tr>
             <th style="width:20%">National Report</th>
             <td>
-                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
+                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-select form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
                     </option>
                     
@@ -22,7 +22,7 @@
         <tr>
             <th>Filter by country(ies) or region(s)</th>
             <td>
-                <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-control">
+                <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-select form-control">
                     <option value="cbdRegions">Breakdown by CBD regions</option>
                     <option value="countries">Select countries</option>
                     <option value="regions">Select regions</option>
@@ -56,7 +56,7 @@
                 </ul>
             </td>
     </table>
-    <table class="table table-hover">
+    <table class="table table-hover bg-white">
         <tr>
             <td>
                 <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" >

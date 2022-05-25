@@ -23,7 +23,7 @@ import 'angular-joyride';
 
                                         var buttonTemplate = '';
 
-                                        var sectionTemplate = '<div ng-if="showHelp.show" class="help-section">  <div style="" class="help-section-title"><i class="fa fa-info-circle"></i> {{title}} <a rel="noopener" translation-url  class="help-section-close" ng-click="showHelp.show=false;Feedback_helpOff();" href="#" style="" ><i class="fa fa-times"></i> Turn off help <i class="fa fa-info-circle"></i> </a></div> <div class="help-section-content">{{content}}</div></div>';
+                                        var sectionTemplate = '<div ng-if="showHelp.show" class="help-section">  <div style="" class="help-section-title"><i class="fa fa-info-circle"></i> {{title}} <a rel="noopener" translation-url  class="help-section-close" ng-click="showHelp.show=false;Feedback_helpOff();" href="#" style="" ><i class="fa fa-times"></i> Turn off help <i class="fa fa-info-circle"></i> </a></div> <div>{{content}}</div></div>';
 
                                         var formTemplate = sectionTemplate;
 
