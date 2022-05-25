@@ -1,10 +1,11 @@
 ﻿<div class="km-rtl">
 	<div ng-repeat="locale in locales" class="trix-content input-group input-rich-text  input-lang-{{locale}}" ng-class="{ 'multiple-languages' : isShowLocale() && !last }"
 	    ng-switch="rows">
-		<trix-editor angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]" ng-change="onchange()" ng-disabled="ngDisabledFn()"
-		    placeholder="{{placeholder}}" rows="{{rows}}" style="display:inline-block;width:100%" trix-initialize="trixInitialize(e, ed)">
+		<trix-editor angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]"
+			ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="{{placeholder}}" rows="{{rows}}"
+			style="width:96.3%" trix-initialize="trixInitialize(e, ed)">
 		</trix-editor>
-		<span class="input-group-addon lang-tooltip" disabled-ng-show="isShowLocale()" style="cursor:default" data-bs-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
+		<span class="input-group-text lang-tooltip" disabled-ng-show="isShowLocale()" style="cursor:default" data-bs-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
 			<span ng-bind="locale | uppercase"></span>
 		</span>
 	</div>
