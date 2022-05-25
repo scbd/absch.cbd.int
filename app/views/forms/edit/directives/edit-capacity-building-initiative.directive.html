@@ -20,7 +20,7 @@
 
 					<div ng-show="tab=='edit'" km-tab="edit">
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 
 								<legend>General information</legend>
 
@@ -201,7 +201,7 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group" name="activityScope" caption="Type of capacity development initiative">
-											<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
+											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -279,7 +279,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Detailed information</legend>
 
 								<div class="row">
@@ -308,7 +308,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Information on thematic coverage of the initiative</legend>
 								<div class="row">
 									<div class="col-md-12">
@@ -356,7 +356,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Information on funding</legend>
 
 								<div class="row">
@@ -399,7 +399,7 @@
 										<div class="km-control-group" name="totalBudget" caption="Total budget (amount, in US dollars)">
 											<div class="help-info">This may include in-kind contributions expressed in monetary terms. Please do not use spaces, periods or commas when you enter the amount.</div>
 											<div class="input-group">
-												<span class="input-group-addon">USD$</span>
+												<span class="input-group-text">USD$</span>
 												<input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
 											</div>
 										</div>
@@ -409,7 +409,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Capacity development outcomes</legend>
 								<strong>Results</strong>
 								<div class="help-info">This information can be provided once there are some results (outputs, outcomes or impacts) or best practices and lessons learned from the ongoing or completed initiative.</div>
@@ -455,7 +455,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Additional information</legend>
 								<div class="row">
 									<div class="col-md-12">

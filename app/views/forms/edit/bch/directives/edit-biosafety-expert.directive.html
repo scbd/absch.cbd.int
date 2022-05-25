@@ -1,6 +1,6 @@
 <div>
 
-	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 		<div class="registerpage-content">
@@ -25,14 +25,14 @@
                             </ul>
                         </div>
                     </div>
-                    <form class="editForm" name="editForm" style="margin-top:0px">
+                    <form class="editForm mt-0" name="editForm">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="part1">
 
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>General information</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
@@ -57,7 +57,7 @@
                                     </div>
                                     <div class="tab-pane" id="part2">
 
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Profile of the expert</legend>
 											<div class="row">
 												<div class="col-sm-12">
@@ -90,13 +90,13 @@
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthCountry" caption="Country of birth">
+													<div class="km-control-group birth-country" name="birthCountry" caption="Country of birth">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group" name="nationalities"  caption="Nationality(ies)">
+													<div class="km-control-group nationalities-country" name="nationalities"  caption="Nationality(ies)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -108,30 +108,31 @@
                                     <div class="tab-pane" id="part3">
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Details of current employment</legend>
                                                 <div class="row">
 		
-													<div class="col-xs-12">
-														<div class="km-control-group" required name="currentEmployment.name" caption="Name of Employer / Organization / Company">
-															<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
-																placeholder="example: University of Montreal" pause="400" 
-																on-search="onSearchOrganizations(text, locale)" 
-																data-field="suggestions" title-field="title" description-field="summary" 
-																input-class="form-control-small"></div>
+														<div class="col-xs-12">
+															<div class="km-control-group" required name="currentEmployment.name" caption="Name of Employer / Organization / Company">
+																<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
+																	placeholder="example: University of Montreal" pause="400" 
+																	on-search="onSearchOrganizations(text, locale)" 
+																	data-field="suggestions" title-field="title" description-field="summary" ></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.title" caption="Job title">
-															<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.title" caption="Job title">
+																<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.department" caption="Department / Division / Unit">
+																<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.department" caption="Department / Division / Unit">
-															<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
-														</div>
-													</div>
-												</div>
 		
 												<div class="row">
 													<div class="col-md-6">
@@ -143,10 +144,10 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.organizationType" caption="Type of organization">
+														<div class="km-control-group organization-dropdown" required name="currentEmployment.organizationType" caption="Type of organization">
 															<div km-select name="currentEmployment.organizationType" required ng-model="document.currentEmployment.organizationType"
 																items="options.organizationTypes()"></div>
-															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="padding-top: 5px;;">
+															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" class="pt-1">
 																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="Other type of organization">
 																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
 																</div>
@@ -170,7 +171,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>Employment history</legend>
 												<div class="help-block">
 													Please give details of relevant previous employment.
@@ -183,7 +184,7 @@
 	
 													<div class="col-md-5">
 														
-														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Countries">
+														<div class="km-control-group small countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="Countries">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
 															ng-model="countryRegionsWorkedIn.countries" placeholder="Please select option(s)" items="options.countries()"></div>
 														</div>
@@ -240,12 +241,12 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.organizationType" caption="Type of organization">
+														<div class="km-control-group organization-dropdown" name="previousEmployment.organizationType" caption="Type of organization">
 															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="Other type of organization">
+															<div class="km-control-group organization-dropdown" name="previousEmployment.organizationTypeOther" caption="Other type of organization">
 																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
 															</div>
 														</div>
@@ -267,14 +268,14 @@
                                     <div class="tab-pane" id="part4">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Post-secondary education</legend>
 
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend><h3>A.	Formal education</h3></legend>
 														<div class="panel panel-default" name="primaryEducation">
-															<div class="panel-heading">First Degree (e.g. B.Sc. in Microbiology)</div>
+															<div class="panel-heading pb-1">First Degree (e.g. B.Sc. in Microbiology)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -315,7 +316,7 @@
 														</div>
 														<br/>
 														<div class="panel panel-default">
-															<div class="panel-heading">Second Degree (e.g. M.Sc. in Microbiology)</div>
+															<div class="panel-heading pb-1">Second Degree (e.g. M.Sc. in Microbiology)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -356,7 +357,7 @@
 														</div>
 														<br/>
 														<div class="panel panel-default">
-															<div class="panel-heading">Third Degree (e.g. Ph.D. in Microbiology)</div>
+															<div class="panel-heading pb-1">Third Degree (e.g. Ph.D. in Microbiology)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -398,7 +399,7 @@
 													</div>
 												</section>
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend>B. Other professional qualifications</legend>
 														<div class="row">
 															<div class="col-md-12">
@@ -416,7 +417,7 @@
                                     <div class="tab-pane" id="part5">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Areas of expertise</legend>
 
 												<div class="row">
@@ -434,7 +435,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Publications</legend>
 
 												<div class="row">
@@ -449,7 +450,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Professional memberships </legend>
 												<div class="row">
 													<div class="col-md-12">
@@ -473,7 +474,7 @@
                                     <div class="tab-pane" id="part6">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Language proficiency</legend>
 
 												<div class="row">
@@ -542,7 +543,7 @@
                                     <div class="tab-pane" id="part7">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>Timeframe for confirmation or updating of information</legend>
 												<div class="help-info">
 													Please note that according to decision BS-IV/4, experts’ records are maintained on the roster for a period of <u>four</u> years from the last update of their information, after which they will be deleted from the roster unless re-nominated.
@@ -552,7 +553,7 @@
 										</section>
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>Any other relevant information</legend>
 												<div class="row">
 													<div class="col-xs-12">

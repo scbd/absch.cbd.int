@@ -2,7 +2,7 @@
 
 	<edit-header></edit-header>
 
-	<div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+	<div class="innerPageEditForm">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 		<div class="registerpage-content">
@@ -11,9 +11,9 @@
 				<!-- <intro-form></intro-form> -->
 				<!--only use it if default article intro is not required -->
 				<edit-form>
-					<form name="editForm" class="editForm" style="margin-top:10px">
+					<form name="editForm" class="editForm mt-2">
 						<div ng-show="tab=='edit'" km-tab="edit">
-							<legend name="formInfo" style="display:none"></legend>
+							<legend name="formInfo" class="d-none"></legend>
 							<div class="row">
 								<div class="col-xs-12" >
 									<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
@@ -27,7 +27,7 @@
 
 								<legend>Website or Database details </legend>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="government" required caption="Country">
 											<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
 											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
@@ -35,7 +35,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="title" required caption="Website or database name">
 											<div class="help-info">Please enter the name of the website or database as you would like it to appear in
 												the title of the record.</div>
@@ -45,7 +45,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="description" required caption="Description">
 											<div class="help-info">Please enter a short description of the national website or database, such as its
 												function or information it makes available.</div>
@@ -55,7 +55,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="websites" required caption="Website address">
 											<div class="help-info">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
 											<!-- <div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div> -->
@@ -78,7 +78,7 @@
 								<legend>Additional information</legend>
 
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="address" caption="Any other relevant information">
 											<div class="help-info">Please use this field to provide any other relevant information that may not have
 												been addressed elsewhere in the record.</div>
@@ -88,7 +88,7 @@
 								</div>
 
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
 											<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more 
 												relevant documents that will be stored in the database for users to download.</div>
@@ -103,7 +103,7 @@
 
 								<legend>Notes</legend>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="notes">
 											<div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
