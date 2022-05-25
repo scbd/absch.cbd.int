@@ -23,7 +23,7 @@
         }
 
     </style>
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
 
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content">
@@ -193,11 +193,11 @@
                                             </div>
                                         </div>
             
-                                        <div class="row" style="margin-top:20px;">
+                                        <div class="row mt-4">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" required name="picGranted" caption="Confirmation that prior informed consent (PIC) was obtained or granted">
                                                     <span class="help-info">If PIC has not been obtained or granted,  this record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance will not be issued.</span>
-                                                    <button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">Yes</button>
+                                                    <button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">Yes</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -255,7 +255,7 @@
                                                 <div class="km-control-group" required name="matEstablished" caption="Confirmation that mutually agreed terms (MAT) were established">
                                                     <span class="help-info">If no mutually agreed terms (MAT) have been established, this record cannot be published in the ABS Clearing-House and, therefore, an internationally recognized certificate of compliance can not be issued.</span>
             
-                                                    <button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">Yes</button>
+                                                    <button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">Yes</button>
             
                                                 </div>
                                             </div>

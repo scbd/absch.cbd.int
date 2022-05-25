@@ -10,7 +10,7 @@
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>General information</legend>
                         <div class="row">
                             <div class="col-xs-12" >
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Organization coordinates</legend>
                         <div class="row">
                             <div class="col-md-12">
@@ -133,11 +133,11 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Detailed information</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="organizationType" required caption="Type of organization">
+                                <div class="km-control-group organization-dropdown" name="organizationType" required caption="Type of organization">
                                     <div km-select name="organizationType" required ng-model="document.organizationType"
                                         items="options.organizationTypes()"></div>
                                 </div>
@@ -156,9 +156,9 @@
                                 <div class="col-sm-12">
                                     <div class="km-control-group" name="areasOfWork" caption="Areas of work">                                
                                         <div class="help-block">Please provide keywords only.</div>
-                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
+                                        <div ng-repeat="areaOfWork in areasOfWork" class="pb-1 d-block input-group">
                                             <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div>
-                                            <span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                            <span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer" style="cursor:pointer" 
                                             ng-click="removeItem(areasOfWork, $index)">
                                                 <i class="fa fa-trash-o icon"></i>
                                             </span>
@@ -213,14 +213,14 @@
                         </div>
                     </div>
                     
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Timeframe for confirmation or updating of information</legend>
                         <div class="help-info">
                             Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Non-confirmed”. 
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Additional information</legend>
                         <div class="row">
                             <div class="col-sm-12">
@@ -242,7 +242,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Notes</legend>								
                         <div class="row">
                             <div class="col-md-12">

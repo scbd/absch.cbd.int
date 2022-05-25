@@ -14,7 +14,7 @@
             position: relative;
         }
     </style>
-    <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
 
         
         <div class="registerpage-content" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
@@ -67,7 +67,7 @@
                                                                         <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold" 
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
-                                                                        <div class="pull-right" style="margin-bottom:5px;">
+                                                                        <div class="float-end" style="margin-bottom:5px;">
                                                                             <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
                                                                             <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
                                                                         </div>
@@ -85,7 +85,7 @@
                                                                                     <label name="{{::subQuestion.key}}" for="{{::subQuestion.key}}" class="control-label bold" 
                                                                                         ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
-                                                                                    <div class="pull-right" style="margin-bottom:5px;">
+                                                                                    <div class="float-end" style="margin-bottom:5px;">
                                                                                         <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
                                                                                         <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
                                                                                     </div>
@@ -230,9 +230,9 @@
                         <div>
                             <strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
                         </div>
-                        <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
+                        <div class="card card-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
                             ng-bind="::(previousAnswerMapping[question.key].previousQuestion.answer|lstring)"></div>
-                        <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
+                        <div class="card card-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
                             <ul class="list">
                                 <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="::(val|lstring)"></li>
                             </ul>
@@ -246,7 +246,7 @@
                 <h1>Fourth national report</h1>
                 <hr>
                 <div class=" alert alert-danger">
-                    <div class="glyphicon glyphicon-exclamation-sign"></div>
+                    <div class="bi bi-exclamation-sign"></div>
                     <div>Only one record of the fourth national report is allowed for each government, the fourth national report already exists
                         for your government, you will be redirected to the record in <span ng-bind="alertSeconds"></span> seconds.</div>
                 </div>

@@ -2,7 +2,7 @@
 
     <edit-header></edit-header>
 
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
 
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content">
@@ -14,7 +14,7 @@
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
                 <!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required -->
                 <edit-form>
-                        <form class="editForm" name="editForm" style="margin-top:10px">
+                        <form class="editForm mt-2" name="editForm">
                                 <div ng-show="tab=='edit'" km-tab="edit">
                                         
                                     <section>
@@ -111,7 +111,7 @@
                                         <div class="clearfix"></div>
             
                                         <div ng-class="{'disable':!isAbsIRCCsNotAvailable(), 'bg-white':isAbsIRCCsNotAvailable() }"
-                                            class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                            class="no-shadow py-0" style="padding-top:0;padding-bottom:0;">
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <h3>This section is required when the internationally recognized certificate of
