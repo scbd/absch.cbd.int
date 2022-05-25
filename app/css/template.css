@@ -1569,6 +1569,7 @@ div.recordDefault:hover {
 }
 #Record .panel-body {
     padding: 10px;
+    background-color: #ffffff;
 }
 #Record .km-value {
     margin-bottom: 5px;
@@ -3214,4 +3215,21 @@ div legend {
 #divTable .pagination>li:nth-child(even)>span {
     padding-right: 0.25rem!important;
     vertical-align: sub;
+}
+.d-flow-root{
+    display:flow-root;
+}
+#select-dropdown .dropdown-menu {
+    min-width: 11rem;
+}
+
+.birth-country .dropdown-menu, .nationalities-country .dropdown-menu, 
+.organization-dropdown .dropdown-menu, .countries-dropdown .dropdown-menu{
+    min-width: 25rem !important;
+}
+.col-md-6 .km-inputtext-ac angucomplete-alt {
+    width: 92.3% !important;
+}
+.col-xs-12 .km-inputtext-ac angucomplete-alt {
+    width: 96.2%;
 }

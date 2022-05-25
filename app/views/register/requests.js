@@ -26,7 +26,7 @@ import 'views/forms/view/record-loader.directive';
                 $scope.user = $rootScope.user;
                 $scope.isBch = realm.is('BCH');
                 
-                $scope.currentPage=0;
+                $scope.currentPage=1;
                 $scope.itemCount=0;
                 $scope.itemsPerPage=15;
 
@@ -72,14 +72,14 @@ import 'views/forms/view/record-loader.directive';
                 $scope.filterByStatus = function (stat) {
                    $scope.filterStatus = stat;
                    $scope.tasks = null;
-                   load(null, 0);
+                   load(null, 1);
 
                 };
                  //==================================
                  $scope.search = function () {
                     
-                    var query = buildQuery(0);
-                    load (query, 0)
+                    var query = buildQuery(1);
+                    load (query, 1)
 
                  };
                  //==================================
@@ -96,12 +96,12 @@ import 'views/forms/view/record-loader.directive';
                         query = buildQuery(page);
 
                     $scope.loading = true;
-                    var skip = (page || 0 ) * $scope.itemsPerPage;
+                    var skip = (page-1 || 0 ) * $scope.itemsPerPage;
                     var sort = {'createdOn':-1};
                     var countQuery;
                     var itemsQuery;
 
-                    if(page == 0 ){
+                    if(page == 1 ){
                         countQuery = IWorkflows.query(query, true).then(function (data) {
                             $scope.itemCount = data.count;
                             $scope.pageCount = Math.ceil($scope.itemCount / $scope.itemsPerPage);
@@ -143,6 +143,12 @@ import 'views/forms/view/record-loader.directive';
                     });
                 }
 
+                $scope.onPageSizeChanged = function (size) {
+                    $scope.itemsPerPage = size;
+                    $scope.currentPage = 1; //reset to page 1
+                    load(null, 1);
+                }
+                
                 //==================================
                 function buildQuery(page){
                     
@@ -157,7 +163,8 @@ import 'views/forms/view/record-loader.directive';
                         queries.$and.push({ "data.metadata.schema": { $in: $scope.filterType }})
 
                     var expired = moment.utc(new Date()).subtract("12", "weeks");
-                    
+                    console.log(expired);
+
                     var status = $scope.filterStatus || 'Pending';
 
                     if((roleService.isPublishingAuthority() || roleService.isNationalAuthorizedUser() || roleService.isNationalFocalPoint()) && $rootScope.user.government ){
@@ -211,7 +218,7 @@ import 'views/forms/view/record-loader.directive';
                     load(null, page)
                 }
         
-                load(null, 0)
+                load(null, 1)
 
             }];
     
