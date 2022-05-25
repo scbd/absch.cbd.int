@@ -131,8 +131,8 @@
 <legend>
     <span ng-bind="title"></span>
 
-    <a rel="noopener" translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
-    <a rel="noopener" translation-url  class="pull-right expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
+    <a rel="noopener" translation-url  class="float-end expander" ng-click="collapseAll=!collapseAll;showHideAll(true)"  ng-show="!collapseAll">Collapse All <i class="fa fa-chevron-circle-up hand"></i></a>
+    <a rel="noopener" translation-url  class="float-end expander" ng-click="collapseAll=!collapseAll;showHideAll(false)" ng-show="collapseAll">Expand All <i class="fa fa-chevron-circle-down hand"></i></a>
 
 </legend>
 
@@ -201,8 +201,8 @@
                          <span ng-if="sections[term.identifier] && !isEmpty(sections[term.identifier]) && term.identifier.indexOf('5B6177DD-5E5E-434E-8CB7-D63D67D5EBED')<0" 
                          class="color-blue bold"> ( <span ng-bind="sections[term.identifier] | lstring:locale"></span> )</span>
                          <span ng-if="term.isMeasure && term.measure.amendedFor"> amending <span ng-bind="term.measure.amendedFor"></span></span>
-                        <i class="fa fa-chevron-circle-up pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
-                        <i class="fa fa-chevron-circle-down pull-right hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
+                        <i class="fa fa-chevron-circle-up float-end hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="!term.showUp" ng:if="term.level<2"></i>
+                        <i class="fa fa-chevron-circle-down float-end hand" ng-click="term.showUp=!term.showUp;showHideNode(term.identifier)" ng-show="term.showUp" ng:if="term.level<2"></i>
 
                 </td>
             </tr>

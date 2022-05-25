@@ -28,7 +28,7 @@
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="jpeg" ng-model="$parent.downloadFormat">JPEG</label>
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="webp" ng-model="$parent.downloadFormat">WEBP</label>
                     </span>
-                    <span style="display:inline" class="pull-right">
+                    <span style="display:inline" class="float-end">
                         <label>File name :</label>
                         <input type="text" ng-model="fileName" />
                     </span>
@@ -45,7 +45,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">Close</button>
-            <button type="button" class="btn btn-primary pull-left" aria-label="Download" ng-click="downloadData()"  ng-disabled="loading||forTour" id="downloadDataFile">
+            <button type="button" class="btn btn-primary float-start" aria-label="Download" ng-click="downloadData()"  ng-disabled="loading||forTour" id="downloadDataFile">
                 <i class="fa fa-spin fa-spinner" ng-if="loading" ></i> Download
             </button>  
         </div>
