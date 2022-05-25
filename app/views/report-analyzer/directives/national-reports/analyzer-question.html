@@ -1,13 +1,13 @@
 <div class="question" style="margin-bottom:10px;overflow-y:scroll" ng-class="{ highlight : previousReports }" 
     ng-disabled="realm!= 'ABS' && !fullSum && question.type!='header'">
 
-    <span class="pull-right"  ng-if="::previousQuestionsMapping[selectedMapping][question.key]">
+    <span class="float-end"  ng-if="::previousQuestionsMapping[selectedMapping][question.key]">
         <div class="btn-group">
             
             <button type="button" class="btn btn-default" ng-if="previousReports" ng-click="removeCompare()">
                 <i class="fa fa-close"></i>
             </button>
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <img src="/app/views/report-analyzer/resources/compare-off.png" class="prev-question-compare"></img> 
                 <span ng-if="!previousReports">Compare with previous report(s)</span>
                 <span ng-if="previousReports" ng-switch="previousQuestionsMapping[selectedMapping][question.key][0]">
@@ -63,7 +63,7 @@
         <!-- OPTIONS + TERMS -->
         <tr ng-if="::question.type!='text' && question.type!='lstring' && question.type!='number'" class="option {{sumType}}" ng-repeat="row in rows" ng-class="{ 'first': $first, 'last' : $last, 'info': row.filterOn, 'filter-on': row.filterOn, 'filter': filter }">
             <td class="filter">
-                <i ng-if="::row.fullSum"  class="fa fa-filter fa-lg" style="cursor:pointer" ng-click="toggleFilter(row)" data-toggle="popover" data-placement="top" data-content="Filter: Include only reports which have this answer selected."></i>
+                <i ng-if="::row.fullSum"  class="fa fa-filter fa-lg" style="cursor:pointer" ng-click="toggleFilter(row)" data-bs-toggle="popover" data-placement="top" data-content="Filter: Include only reports which have this answer selected."></i>
                 <i ng-if="::!row.fullSum" class="fa fa-filter fa-lg" disabled title="This filter is disabled"></i>
             </td>
             <td ng-bind="::row.title"></td>
@@ -151,7 +151,7 @@
 
     <div ng-if="previousReports" style="margin-top:-15px">
 
-        <div ng-show="expanded" class="pull-right" style="margin-right:18px;margin-left:18px;">
+        <div ng-show="expanded" class="float-end" style="margin-right:18px;margin-left:18px;">
             <span style="font-size:18px;line-height:inherit">&#x25CF;</span> <span ng-switch="::getReportType()">
                 <span ng-switch-when="cpbNationalReport1"> 1st NR</span>
                 <span ng-switch-when="cpbNationalReport2"> 2nd NR</span>

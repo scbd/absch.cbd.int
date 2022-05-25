@@ -1,6 +1,6 @@
 ﻿<div id="search-new">
-    <div ng-show="!countryRecords" style="padding-left:50%">
-        <i class="fa fa-spin fa-spinner fa-5x" style="margin:auto" ></i>
+    <div ng-show="!countryRecords">
+        <i class="fa fa-spin fa-spinner fa-5x m-auto" ></i>
     </div>
     <!-- <div class="pull-right">
         <span export export-query="getExportQuery()" query-type="getRecordType()" help-title="Export countries data to excel/csv"></span>
@@ -9,62 +9,63 @@
     <br/> -->
     <div class="country-profile-list" ng-repeat="schema in countryRecords | orderBy:'index'" ng-if="schema">
 
-        <h4 id="div{{schema.shortCode}}" class="link1" style="border-bottom:#ddd solid 1px;margin:0;padding: 10px 5px 10px 3px;" 
+        <h4 id="div{{schema.shortCode}}" class="link1 border-bottom pb-1 my-2 mx-1" 
         ng-click="showHideRecords(schema)"
         ng-class="{'color-litegrey': schema.numFound == 0}">
-            <i class="fa" ng-class="{'fa-plus':!schema.display, 'fa-minus':schema.display}" style="font-size:14px;font-weight:normal;"></i> 
-            <span ng-bind="schema.title|lstring:locale"></span> (<span ng-bind="schema.shortCode"></span>)  
+            <i class="fs-6 fw-normal fa" ng-class="{'fa-plus':!schema.display, 'fa-minus':schema.display}"></i> 
+            <span ng-bind="schema.title|lstring:locale" class="f-5"></span> (<span ng-bind="schema.shortCode"></span>)  
             <span ng-if="schema.isRegional"> - <span ng-bind="schema.government"></span></span>
-            <span class="badge pull-right" ng-class="{'bg-grey3': schema.numFound==0, 'bg-black': schema.numFound > 0}" ng-bind="schema.numFound"></span>
-            <div ng-if="schema.docs[0].rec_date" class="pull-right label">
+            <span class="badge bg-secondary rounded-pill float-end" ng-class="{'bg-grey3': schema.numFound==0, 'bg-black': schema.numFound > 0}" ng-bind="schema.numFound"></span>
+            <div ng-if="schema.docs[0].rec_date" class="float-end label fs-small-8">
                 Last updated on: <span ng-bind="schema.docs[0].rec_date|formatDate"></span>
             </div>
         </h4>
         <div ng-if="schema.isLoading" class="text-center"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
-        <div ng-if="!schema.isLoading && schema.display && schema.numFound > 0" class="well bg-white">
+        <div ng-if="!schema.isLoading && schema.display && schema.numFound > 0" class="card bg-white">
             <div  ng-if="schema.shortCode!='MSR'">
                 <div ng-repeat="doc in schema.docs|orderBy:title_t">
                     <result-default doc="doc" external-link="true" type="national"></result-default>  
                 </div>
                 <div class="btn-group" ng-if="schema.numFound >  schema.docs.length">
-                    <button type="button" class="btn btn-default bold" style="font-size: 10px;text-transform: uppercase;"  ng-click="loadRecords(schema,10)" ng-disabled="schema.isLoading">
+                    <button type="button" class="btn btn-default text-bold fs-small-6 text-uppercase"  ng-click="loadRecords(schema,10)" ng-disabled="schema.isLoading">
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show next 10 records 
                     </button>
-                    <button type="button" ng-if="schema.isLoading" class="btn btn-default" ng-disabled="true" style="font-size: 10px;text-transform: uppercase;"   >
+                    <button type="button" ng-if="schema.isLoading" class="btn btn-default fs-small-6 text-uppercase" ng-disabled="true">
                         <i class="fa fa-spin fa-spinner pull-left" ></i> loading...
                     </button>
-                    <button type="button" class="btn btn-default bold" ng-click="loadRecords(schema)" style="font-size: 10px;text-transform: uppercase;"  ng-disabled="schema.isLoading"  >
+                    <button type="button" class="btn btn-default text-bold fs-small-6 text-uppercase" ng-click="loadRecords(schema)" ng-disabled="schema.isLoading"  >
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show remaining <span ng-bind="schema.numFound-schema.docs.length"></span> records
                     </button>
                 </div>
             </div>
 
             <div ng-if="schema.shortCode=='MSR'">
-                <div style="width:100%;margin-bottom:30px;">
-                    <legend>   Select the ABS Measures to be displayed in the overview</legend>
-                    <div ng-repeat="measure in schema.docs|orderBy:sortMeasure"  style="padding:5px 0px;border-bottom:1px solid #fff;" 
+                <div class="w-100 mb-4">
+                    <legend>Select the ABS Measures to be displayed in the overview</legend>
+                    <div ng-repeat="measure in schema.docs|orderBy:sortMeasure" class="py-1 border-bottom" 
                        ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community','bg-regionalmsr':measure.rec_meta1[0] === 'Regional / Multilateral'
                        ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
                         <div> 
-                            <input type="checkbox"  ng-model="measure.measureMatrix" style="margin-left:5px;" />
+                            <input type="checkbox" ng-model="measure.measureMatrix" class="ms-1" />
                             <a rel="noopener" translation-url  target="_blank" ng-href="database/record/{{measure|uniqueID|encodeURIComponent}}"> 
-                               <span class="color-black" style="margin-left:10px;" ng-bind="$index+1 + '.'"></span>
+                               <span class="color-black ms-2" ng-bind="$index+1 + '.'"></span>
                                <span class="bold" ng-bind="measure.rec_title"> </span>
                             </a>
                         </div>
                         <div class="recordDefault">
-                           <ul class="metadata bold" style="margin-left:20px;font-size:10px!important;">
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta1" ng-bind="measure.rec_meta1[0]"></span></li>
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_type" ng-bind="measure.rec_type"></span></li>
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta3" ng-bind="measure.rec_meta3[0]"></span></li>
-                                <li><span style="font-size:11px!important;padding-left:10px;padding-right:10px;color:#666;" ng-if="measure.rec_meta5" ng-bind="measure.rec_meta5[0]"></span></li>
-                                <li style="border:0;">
-                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.entryIntoForce_dt">
-                                        Entry into force: <span ng-bind="measure.entryIntoForce_dt|formatDate"></span> <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;"  ng-if="measure.limitedApplication_dt"> until <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span></span>
-                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.adoption_dt">
-                                        Adoption: <span ng-bind="measure.adoption_dt|formatDate"></span>  <span style="font-size:11px!important;padding-left:0px;padding-right:0;border:0;color:#666;" ng-if="measure.limitedApplication_dt">until  <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span> </span>
+                           <ul class="metadata bold ms-3 fs-small-8">
+                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_meta1" ng-bind="measure.rec_meta1[0]"></span></li>
+                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_type" ng-bind="measure.rec_type"></span></li>
+                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_meta3" ng-bind="measure.rec_meta3[0]"></span></li>
+                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_meta5" ng-bind="measure.rec_meta5[0]"></span></li>
+                                <li class="border-0">
+                                    <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.entryIntoForce_dt">
+                                        Entry into force: <span ng-bind="measure.entryIntoForce_dt|formatDate"></span> <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.limitedApplication_dt"> until <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span></span>
+                                    <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.adoption_dt">
+                                        Adoption: <span ng-bind="measure.adoption_dt|formatDate"></span> 
+                                         <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.limitedApplication_dt">until  <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span> </span>
                                    
-                                    <span style="font-size:11px!important;padding-left:10px;padding-right:10px;border:0;color:#666;" ng-if="measure.retired_dt">Retired: <span ng-bind="measure.retired_dt|formatDate"></span></span>
+                                    <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.retired_dt">Retired: <span ng-bind="measure.retired_dt|formatDate"></span></span>
                                 </li>
                            </ul>
                         </div>
@@ -72,7 +73,7 @@
                        <!--<a rel="noopener" translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
                    </div>    
                        
-                   <div style="margin-bottom:20px;">
+                   <div class="mb-3">
                        <div ng-hide="(schema.docs|filter:{measureMatrix:true}).length==0" measure-matrix-countries-directive documents="schema.docs"></div>
                    </div>
             </div>

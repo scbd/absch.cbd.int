@@ -4,14 +4,14 @@
 			<div class="panel-heading">
 				<h2>Genetic Element Registry</h2>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body bg-white">
 				<div class="row">
-					<div class="col-md-2 col-xs-12"> 
-						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
-							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<div class="col-md-2"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100">
+							<button ng-if="deviceSize=='xs'" type="button" class="btn btn-default dropdown-toggle w-100" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<i class="fa fa-bars"></i> Registries <span class="caret"></span>
 							</button>
-							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
 								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registries</b></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
@@ -19,21 +19,21 @@
 							</ul>
 						</div>
 					</div>
-					<div class="bs5 col-md-10  col-xs-12">
-						<p class="padding-top-10">
+					<div class="col-12 col-md-10 ps-3">
+						<p class="p-borders pt-2">
 							The Genetic Element Registry provides a summary of information on the genetic elements associated with the 
 							LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. 
 							The registry includes links to the records on each genetic element where more details may be found. 
 							LMOs containing the particular genetic element are referenced at the bottom of the individual record.
 						</p>
-						<p class="bs5 fst-italic py-2 color-black fw-bold">Click <a class="bs5 text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=dnaSequence" >here</a> to perform an in-depth search of all Genetic Element records available in this Registry.</p>
+						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=dnaSequence" >here</a> to perform an in-depth search of all Genetic Element records available in this Registry.</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
 						<div ng-if="!isLoading && !isError">						
 						<div class="row">
 							<div class="col-md-12">
 								<strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong>							
-								<button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport">
+								<button type="button" class="btn btn-default float-end me-1 mb-1" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport">
 									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Export
 								</button>
 							</div>
@@ -44,9 +44,9 @@
 									<tr>
 										<th class="display-17">Record ID</th>
 										<th class="display-18">Name</th>
-										<th class="display-25 hidden-xs">Trait(s)</th>
-										<th class="display-15 hidden-xs">Donor organism</th>
-										<th class="display-25 hidden-xs">Function</th>
+										<th class="display-25 d-none d-sm-table-cell">Trait(s)</th>
+										<th class="display-15 d-none d-sm-table-cell">Donor organism</th>
+										<th class="display-25 d-none d-sm-table-cell">Function</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -57,12 +57,12 @@
 											</a>
 										</td>
 										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
-										<td class="tableexport-string hidden-xs">
+										<td class="tableexport-string d-none d-sm-table-cell"><span ng-bind="::row.trait"></span></td>
+										<td class="tableexport-string d-none d-sm-table-cell">
 											<span ng-bind="::row.organismScientificNames.join(', ')"></span> -
 											<span ng-bind="::row.organismCommonNames.join(', ')"></span>	
 										</td>
-										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
+										<td class="tableexport-string truncate-description d-none d-sm-table-cell"><span ng-bind="::row.geneFunction"></span></td>
 										
 									</tr>
 								</tbody>

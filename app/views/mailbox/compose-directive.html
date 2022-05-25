@@ -7,11 +7,11 @@
           <div class="alert alert-danger" role="alert" ng-show="errorMessage" ng-bind="errorMessage">
           </div>
          <div class="input-group form-group">
-            <span class="input-group-addon text-sm">To:</span>
+            <span class="input-group-text text-sm">To:</span>
             <input type="text" class="form-control" ng-model="mail.assignedTo" />
          </div>
           <div class="input-group form-group">
-            <span class="input-group-addon text-sm">Subject:</span>
+            <span class="input-group-text text-sm">Subject:</span>
             <input type="text" class="form-control" ng-model="mail.data.subject"/>
          </div>
          <div class="editor">
@@ -24,7 +24,7 @@
       </div>
       <br>
       <div class="box-footer">
-         <div class="pull-right">
+         <div class="float-end">
            <!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button> -->
            <button type="submit" class="btn btn-primary" ng-click="sendMail()"><i class="fa fa-envelope-o"></i> Send</button>
          </div>

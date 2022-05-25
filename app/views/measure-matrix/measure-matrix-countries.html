@@ -101,19 +101,19 @@
 			}
 		</style>
 		<div class="row">
-			<div class="col-sm-12 well">
+			<div class="col-sm-12 card">
 				<h1> Measure Matrix</h1>
 			</div>
 
-			<div class="well col-sm-12">
+			<div class="card col-sm-12">
 				<div class="table">
 
 					<div class="row" style="padding:1% 2% 0 2%">
 						<div class="col-lg-12">
-							<div class="pull-right control-group">
+							<div class="float-end control-group">
 								Group Matrix by
 								<div class="btn-group">
-									<button type="button" style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="btnGroupBy">
+									<button type="button" style="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" id="btnGroupBy">
 										<span ng-show="matrixGroupBy==''" style="color:#428BCA" ng-class="">None</span>
 										<span ng-show="matrixGroupBy=='jurisdiction'" style="color:#428BCA" ng-class="">Jurisdiction</span>
 										<span ng-show="matrixGroupBy=='status'" style="color:#428BCA">Status</span>
@@ -126,15 +126,15 @@
 										</li>
 										<li>
 											<a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='jurisdiction'" ng-model="matrixGroupBy" name="matrixGroupBy">
-												<span ng-show="matrixGroupBy=='jurisdiction'" class="glyphicon glyphicon-ok"></span>Jurisdiction</a>
+												<span ng-show="matrixGroupBy=='jurisdiction'" class="bi bi-ok"></span>Jurisdiction</a>
 										</li>
 										<li>
 											<a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='status'" ng-model="matrixGroupBy" name="matrixGroupBy">
-												<span ng-show="matrixGroupBy=='status'" class="glyphicon glyphicon-ok"></span>Status</a>
+												<span ng-show="matrixGroupBy=='status'" class="bi bi-ok"></span>Status</a>
 										</li>
 										<li>
 											<a rel="noopener" translation-url  ng-href="#" ng-click="matrixGroupBy='type'" ng-model="matrixGroupBy" name="matrixGroupBy">
-												<span ng-show="matrixGroupBy=='type'" class="glyphicon glyphicon-ok"></span>Type</a>
+												<span ng-show="matrixGroupBy=='type'" class="bi bi-ok"></span>Type</a>
 										</li>
 
 									</ul>
