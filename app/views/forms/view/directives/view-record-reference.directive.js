@@ -57,7 +57,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 							$scope.document.summary = undefined;
 
 						if(data.workingDocumentLock){
-							$timeout(function(){$element.find("[data-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
+							$timeout(function(){$element.find("[data-bs-toggle='tooltip']").tooltip({trigger: 'hover'})}, 100);
 						}
 						if($scope.onDocumentLoadFn)
 							$scope.onDocumentLoadFn({document:data});
