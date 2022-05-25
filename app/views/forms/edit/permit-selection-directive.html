@@ -13,7 +13,7 @@
                         <td>
                             <span style="font-size: 16px; color: white;margin:0;padding:0;float:right;">
                                 <a rel="noopener" translation-url  ng-click="removePermit(doc)" class="btn btn-warning">
-                                    <span class="glyphicon glyphicon-remove"></span>&nbsp;remove</a>
+                                    <span class="bi bi-remove"></span>&nbsp;remove</a>
                             </span>
                         </td>
     				</tr>
@@ -55,7 +55,7 @@
                             <span  class="dateBox" search-filter-dates title='Date of issuance of the permit' query='permitIssuanceDate' field="expiration_s"></span>
 
                             <div class="btn-group" >
-                                <button type="button" style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown">
+                                <button type="button" style="button" class="btn btn-default dropdown-toggle"  data-bs-toggle="dropdown">
                                     <span>Amendments</span>
                                     <span ng-show="amendmentIntent==0"  style="color:#428BCA">: Amended </span>
                                     <span ng-show="amendmentIntent==1"  style="color:#428BCA">: Revoked </span>
@@ -68,15 +68,15 @@
                                 </li>
                                 <li>
                                     <a rel="noopener" translation-url  href ng-click="amendmentIntent=-1;" value="-1"  ng-model="amendmentIntent" name="amendmentIntent">
-                                    <span ng-show="amendmentIntent==-1" class="glyphicon glyphicon-ok"></span> none</a>
+                                    <span ng-show="amendmentIntent==-1" class="bi bi-ok"></span> none</a>
                                 </li>
                                 <li>
                                     <a rel="noopener" translation-url  href ng-click="amendmentIntent=0;" value="0"  ng-model="amendmentIntent" name="amendmentIntent">
-                                    <span ng-show="amendmentIntent==0" class="glyphicon glyphicon-ok"></span> amended</a>
+                                    <span ng-show="amendmentIntent==0" class="bi bi-ok"></span> amended</a>
                                 </li>
                                 <li >
                                     <a rel="noopener" translation-url  href ng-click="amendmentIntent=1;" value="1"  ng-model="amendmentIntent" name="amendmentIntent">
-                                    <span ng-show="amendmentIntent==1" class="glyphicon glyphicon-ok"></span> revoked</a>
+                                    <span ng-show="amendmentIntent==1" class="bi bi-ok"></span> revoked</a>
                                 </li>
 
                             </ul>
@@ -104,7 +104,7 @@
             							</td>
                                         <td>
                                             <a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}">
-                                                <i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i>
+                                                <i class="bi bi-new-window" id="help-record-newwindow"></i>
                                             </a>
                                         </td>
             						</tr>

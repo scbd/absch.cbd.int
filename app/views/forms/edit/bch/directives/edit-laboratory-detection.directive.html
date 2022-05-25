@@ -1,4 +1,4 @@
-<div id="innerPageEditForm editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+<div id="innerPageEditForm editLaboratoryDetectionSection">
 
     <span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true"></span>
     <div class="registerpage-content">
@@ -9,8 +9,8 @@
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
-                <form name="editForm" class="editForm" style="margin-top:10px">
-                    <div class="well no-shadow bg-white">
+                <form name="editForm mt-2" class="editForm">
+                    <div class="no-shadow bg-white">
                         <legend>General information</legend>
                         <div class="row">
                             <div class="col-xs-12" >
@@ -40,7 +40,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Laboratory details</legend>
                         <div class="row">
                             <div class="col-xs-12">
@@ -100,7 +100,7 @@
                                                         <a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.removeDocument(doc);" class="link color-red">
                                                             <i class="fa fa-times"></i></a>
                                                     </td>
-                                                    <td style="margin-bottom:20px;">
+                                                    <td class="mb-4">
                                                         <div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
                                                     </td>
                                                 </tr>
@@ -120,14 +120,14 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Timeframe for confirmation or updating of information</legend>
                         <div class="help-info">
                             Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Non-confirmed”. 
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Additional information</legend>
                         <div class="row">
                             <div class="col-sm-12">
@@ -149,7 +149,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Notes</legend>								
                         <div class="row">
                             <div class="col-md-12">

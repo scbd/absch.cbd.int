@@ -1,6 +1,6 @@
 <div>
 
-<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+<div class="m-0 mx-3 mb-5 p-3 bg-white border-bottom edit-risk-assessment">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 		<div class="registerpage-content">
@@ -11,14 +11,14 @@
 			on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 			data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-						<form class="editForm" name="editForm" style="margin-top:10px">
+						<form class="editForm mt-2" name="editForm">
 								<div>
 									
 									<section>
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 										<legend>General information</legend>
 											<div class="row">
-												<div class="col-xs-12" >
+												<div class="col-12" >
 													<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
 														<div class="indent">
 															<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
@@ -27,7 +27,7 @@
 												</div>
 											</div>
 											<div class="row" ng-if="isNational">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group" name="government" required caption="Country">
 														<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
 															filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
@@ -36,7 +36,7 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group" required name="title" caption="Title of the risk assessment">
 														<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
 													</div>
@@ -48,10 +48,10 @@
 													<div class="km-control-group" name="date" required caption="Date of the risk assessment"
 															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
 
-														<div class="col-md-8 padding-left-0">
+														<div class="col-md-8 padding-left-0 float-start">
 															<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date" ng-disabled="document.dateOfRaNotAvailable"></div>	
 														</div>
-														<div class="col-md-4 padding-left-0 ">
+														<div class="col-md-4 padding-left-0 float-end ps-2 pt-2">
 															<div class="checkbox">
 																<label for="dateOfRaNotAvailable">
 																	<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" id="dateOfRaNotAvailable" name="dateOfRaNotAvailable"> 
@@ -64,7 +64,7 @@
 											</div>
 											
 											<div class="row padding-top-10" ng-if="!isNational">
-												<div class="col-xs-12">
+												<div class="col-12">
 													<div class="km-control-group" name="organizations" required caption="Institution responsible for the risk assessment">											
 														<div document-selector ng-model="document.organizations" question="organizations"
 																on-build-query="onBuildOrganizationQuery(searchText)" allow-new-schema="organization" allow-new="true"></div>
@@ -72,7 +72,7 @@
 												</div>
 											</div>	
 											<div class="row" ng-if="isNational">
-												<div class="col-xs-12">
+												<div class="col-12">
 													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
 														<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities"
 																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true"></div>
@@ -82,7 +82,7 @@
 											</div>									
 		
 											<div class="row">
-												<div class="col-xs-12">
+												<div class="col-12">
 													<div class="km-control-group" name="contacts" caption="Contact details of the main responsible risk assessor">											
 														<div document-selector ng-model="document.contacts" question="contacts"
 																on-build-query="onBuildContactQuery(searchText)" allow-new-schema="contact" allow-new="true"></div>
@@ -94,10 +94,10 @@
 									</section>
 		
 									<section >
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Risk assessment details</legend>
 											<div class="row">
-												<div class="col-xs-12">
+												<div class="col-12">
 													<div class="km-control-group" name="modifiedOrganisms" required caption="Living modified organism(s)">											
 														<div document-selector  ng-model="document.modifiedOrganisms" question="modifiedOrganisms" 
 																on-build-query="onBuildModifiedOrganismQuery(searchText)" allow-new-schema="modifiedOrganism" allow-new="true"></div>
@@ -105,7 +105,7 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-xs-12">
+												<div class="col-12">
 													<div class="km-control-group" name="scopes" required caption="Scope of the risk assessment">
 															<div km-term-check required ng-model="document.scopes" locales="document.header.languages"
 															terms="options.riskAssessmentScope()"  binding-type="term[]"></div>
@@ -113,7 +113,7 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group" name="documents" required caption="Risk assessment report / summary">
 														<div class="help-block">
 															An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. https://bch.cbd.int) and the name of the website (e.g. "Biosafety Clearing-House"). 
@@ -129,55 +129,55 @@
 									</section>
 		
 									<section>
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Methodology and points to consider</legend>
 											<div class="help-block">
 												Refer to Annex III, paragraphs 8 and 9 of the Cartagena Protocol on Biosafety.
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="adverseEffects" caption="Potential adverse effects identified in the risk assessment">
 														<div km-rich-textbox name="adverseEffects"  ng-model="document.adverseEffects" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="adverseEffectsLikelihood" caption="Likelihood that the potential adverse effects will be realized">
 														<div km-rich-textbox  name="adverseEffectsLikelihood"  ng-model="document.adverseEffectsLikelihood" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="adverseEffectsConsequence" caption="Possible consequences">
 														<div km-rich-textbox name="adverseEffectsConsequence"  ng-model="document.adverseEffectsConsequence" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="adverseEffectsOverallRisk" caption="Estimation of the overall risk">
 														<div km-rich-textbox name="adverseEffectsOverallRisk"  ng-model="document.adverseEffectsOverallRisk" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="adverseEffectsRecommendation" caption="Recommendation(s) on whether the risks are acceptable/manageable and any management strategies">
 														<div km-rich-textbox name="adverseEffectsRecommendation"  ng-model="document.adverseEffectsRecommendation" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="riskManagementStrategies" caption="Need(s) for further information on specific issues of concern">
 														<div km-rich-textbox name="riskManagementStrategies"  ng-model="document.riskManagementStrategies" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="receivingEnvironment" caption="Receiving environment(s) considered">
 														<div class="help-block">Information on the location, geographical, climatic and ecological characteristics including relevant 
 															information on biological diversity and centres of origin of the likely potential receiving environment as listed in 
@@ -187,7 +187,7 @@
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group"  name="detectionMethod" caption="LMO detection and identification methods proposed">
 														<div km-rich-textbox name="detectionMethod"  ng-model="document.detectionMethod" locales="document.header.languages"></div>
 													</div>
@@ -197,10 +197,10 @@
 									</section>
 
 								<section ng-if="isNational">
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Information sharing with other databases</legend>
 											<div class="row">
-												<div  class="col-xs-12">
+												<div  class="col-12">
 													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?">
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
@@ -231,10 +231,10 @@
 										</div>
 									</section>
 									<section>
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Timeframe for confirmation or updating of information</legend>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group" required name="expires"  caption="Should this information be confirmed or updated after two years from the date of submission?">			
 														<div class="help-block">If the answer to this question is “Yes”, after two years from the date of submission 
 															you will be asked to confirm or update the record within 3 months. After this period, if no confirmation 
@@ -247,10 +247,10 @@
 									</section>
 			
 									<section>
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Additional information</legend>
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group" name="address" caption="Any other relevant information">
 														<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in
 															the record.</div>
@@ -260,7 +260,7 @@
 											</div>
 		
 											<div class="row">
-												<div class="col-sm-12">
+												<div class="col-12">
 													<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
 														<div class="help-block">
 																Please use this field to provide any other relevant website addresses and/or one or more 
@@ -276,7 +276,7 @@
 										<legend>Notes</legend>
 		
 										<div class="row">
-											<div class="col-sm-12">
+											<div class="col-12">
 												<div class="km-control-group" name="notes">
 													<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>

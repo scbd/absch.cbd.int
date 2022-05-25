@@ -1,6 +1,6 @@
 <div >
   
-    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -19,7 +19,7 @@
                                 <legend name="generalInfo">General Information</legend>
 
                                 <div class="row">
-                                    <div class="col-xs-12" >
+                                    <div class="col-lg-12" >
                                         <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="government" required caption="Country">
                                             <div>
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">                                        
+                                    <div class="col-lg-12">                                        
                                         <div class="km-control-group" name="name" required caption="">
                                             <label name="name" class="control-label" required for="name">
                                                 <span ng-if="type!='SPCA'">Name of the Competent National Authority</span>
@@ -63,7 +63,7 @@
                                     order to provide users with recent and accurate information.</div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="address" caption="Address">
                                             <div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800"
                                                 locales="document.header.languages"></div>
@@ -72,14 +72,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="city" required caption="City">
                                             <div km-textbox-ml name="city" ng-model="document.city" required
                                                 locales="document.header.languages" placeholder="example: Montreal"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="state" caption="State or Province">
                                             <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
                                                 placeholder="example: Quebec"></div>
@@ -89,14 +89,14 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
                                             <div km-textbox-ml name="postalCode" ng-model="document.postalCode"
                                                 locales="document.header.languages" placeholder="example: H2Y 1N9"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6" ng-if="options.countries">
+                                    <div class="col-lg-6" ng-if="options.countries">
                                         <div class="km-control-group" name="country" required caption="Country of Contact">
                                             <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
                                                 mapping="genericMapping" selectbox="true" placeholder="Please select a country..."
@@ -108,7 +108,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="phones" required caption="Phone number(s)">
                                             <div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="faxes" caption="Fax number(s)">
                                             <div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
@@ -126,14 +126,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="emails" required caption="Email(s)">
                                             <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
                                                 placeholder="example: secretariat@cbd.int"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="websites" caption="Website address(es)">
                                             <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                                 allow-file="false"></div>
@@ -145,7 +145,7 @@
                             <legend name="contactInfo">Additional Contact Information</legend>
 
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-lg-12">
                                     <div class="km-control-group" name="contacts" caption="Contact person">
                                         <div document-selector ng-model="document.contacts" question="contacts"
                                             ng-disabled="!document.government.identifier" 
@@ -167,7 +167,7 @@
                                     In this section, a reference to the related measure granting the competence of the competent national authority for the Cartagena Protocol can be included. In order to link the competent authority to a relevant measure, the record of the measure needs to be entered first. Therefore, if you have not yet submitted the relevant measure, you may wish to save the competent national authority for the Cartagena Protocol as a draft and publish the measure first, or you can create the measure inline.
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Provide a link to any relevant legal, administrative or policy measures.">
                                             <div document-selector ng-disabled="!document.government.identifier" ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef"
@@ -178,7 +178,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetency" caption="If needed, provide additional information on the legal, administrative or policy basis for the competence of the CNA."></div>
                                         <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                             placeholder="" locales="document.header.languages"></div>
@@ -198,7 +198,7 @@
                                     genetic resource sought".
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="responsibleForAllNot"
                                             caption="There is already a CNA for your country, please specify the scope of responsibilities of each CNA."></div>
 
@@ -212,11 +212,11 @@
 
                                 <!-- IF NO SECTION -->
                                 <div ng-class="{'disable':(document.responsibleForAll==true || document.responsibleForAll==null), 'bg-white':!(document.responsibleForAll==true || document.responsibleForAll==null) }"
-                                    class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    class="card no-shadow pt-0 pb-0">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-lg-12">
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <h4 ng-show="document.responsibleForAll==null">
                                                         If "no", the following information is required.</h4>
                                                     <h4 ng-show="document.responsibleForAll==true">
@@ -226,7 +226,7 @@
                                                                 This section is required when there is more than
                                                                 one competent national authority (CNA).
                                                                 Please ensure that the responsibilities for each
-                                                                competent national authority (CNA) are well
+                                                                competent national authority (CNA) are card
                                                                 described in all published records.
                                                             </h4>
                                                         </div>
@@ -257,7 +257,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absJurisdiction" caption="Area of jurisdiction for granting access to genetic resources"
                                                         required>
                                                         <div class="help-info">The information on the area of
@@ -270,7 +270,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-lg-6">
                                                     <div ng-show="showJurisdictionName()">
                                                         <div class="km-control-group" name="absJurisdictionName"
                                                             required caption="Name of the jurisdiction(s)">
@@ -283,7 +283,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absGeneticResourceTypes"
                                                         caption="Keywords to describe  scope of CNA responsibilities">
                                                         <div class="help-info">The collection of this information
@@ -344,7 +344,7 @@
                             </section>
                             <section  ng-if="isBch && type=='SPCA'">
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibleForAll" required caption="Is this the only designated competent authority for the Supplementary Protocol in your country?">
                                             <div class="help-info">
                                                 If “no”, please describe the responsibilities of the competent authority in the box below. Please complete a different common format for each competent authority.
@@ -352,7 +352,7 @@
                                             <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
                                         caption="Short description of the responsibilities of the Competent Authority (maximum 300 characters)." >
                                         <div class="help-info">This information is required when there is more than one competent authority.</div>
@@ -372,7 +372,7 @@
                             <section>
                                 <legend>Additional Information</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantInformation" caption="Additional Information">
                                             <div class="help-info">Please use this field to provide any other
                                                 relevant information that may not have been addressed elsewhere in
@@ -384,7 +384,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
                                             <div class="help-block">
                                                     Please use this field to provide any other relevant website addresses and/or one or more 
@@ -399,7 +399,7 @@
                             <section>
                                 <legend>Notes</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="notes">
                                             <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
                                             <div km-notes name="notes" ng-model="document.notes"></div>

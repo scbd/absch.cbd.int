@@ -4,7 +4,7 @@
 <br>
 <div style="padding:20px;background-color: #fff;">
     <div ng-repeat="article in articles track by article._id">
-            <a rel="noopener" href="https://www.cbd.int/management/articles/{{article._id}}/edit" class="pull-right btn bg-grey" target="edit">edit</a> 
+            <a rel="noopener" href="https://www.cbd.int/management/articles/{{article._id}}/edit" class="float-end btn bg-grey" target="edit">edit</a> 
         <h3 ng-bind-html="article.title | lstring:locale"></h3> 
         <span ng-repeat="tag in article.adminTags track by tag._id" style='margin-top:10px;'>
                

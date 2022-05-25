@@ -7,7 +7,7 @@
 
     <edit-header></edit-header>
 
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
 
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content">
@@ -173,7 +173,7 @@
                                             <div class="indent">
                                                 <input type="number" name="duration" ng-model="document.duration" minlength="1" placeholder="eg. 24" ng-change="clearDates()"
                                                     class="form-control" style="display:inline-block;width:100px" />
-                                                <select name="durationPeriod" ng-model="document.durationPeriod" class="form-control" style="display:inline-block;width:100px"
+                                                <select name="durationPeriod" ng-model="document.durationPeriod" class="form-select form-control" style="display:inline-block;width:100px"
                                                     placeholder="eg. Months">
                                                     <option value=""></option>
                                                     <option value="days">Days</option>

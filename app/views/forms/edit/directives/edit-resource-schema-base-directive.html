@@ -13,7 +13,7 @@
 			
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>General information</legend>
 			
                                     <div class="row">
@@ -102,7 +102,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Access to the resource(s)</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -125,7 +125,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Information on the content of the resource</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -165,7 +165,7 @@
 								
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
@@ -178,7 +178,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="cbdSubjects" caption="CBD Subject Areas">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="CBD Subject Areas">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -190,13 +190,13 @@
 						<!-- Till now all fields are common for all CHs  -->
 						<!-- IF BCH START -->
 						<section ng-if="isBCH">
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Keywords related to Biosafety</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
+										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
@@ -297,7 +297,7 @@
 						<!-- IF BCH END -->
 						<!-- IF ABS START -->
 						<section ng-if="isABS">
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<a rel="noopener" translation-url name="#AdditionalInformation"></a>
 								<legend>Keywords related to Access and Benefit-Sharing</legend>
 								<div class="row" ng-if="isMcc">
@@ -330,7 +330,7 @@
 						</section>
 						<!-- IF ABS END -->
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<a rel="noopener" translation-url name="#AdditionalInformation"></a>
 								<legend>Additional information</legend>
 		
@@ -357,7 +357,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Notes</legend>
 							<div class="row">
 								<div class="col-sm-12">
