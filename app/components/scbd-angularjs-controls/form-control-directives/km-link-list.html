@@ -8,7 +8,7 @@
          </li>
     </ul>
     <script type="text/ng-template" id="link-template">
-        <i class="fa {{::getIcon(item)}}" style="font-size: 1.5em!important;"></i>
+        <i class="fa {{::getIcon(item)}}"></i>
         <a rel="noopener" translation-url target="{{::target}}" ng-href="{{::item.url}}">
             <span ng-bind="::(item.name||getNameFromUrl(item.url))"></span>
         </a>
