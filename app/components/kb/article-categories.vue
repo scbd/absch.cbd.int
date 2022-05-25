@@ -11,9 +11,7 @@
                             <a v-if="article.url" :href="article.url" target="_blank">{{article.title}}</a>
                         </li>
                     </ul>
-                    <div>
-                        <a class="pull-right" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
-                    </div>
+                    <a class="float-end text-decoration-none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
                 </div>
             </div>
         </div>

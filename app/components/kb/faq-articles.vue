@@ -1,5 +1,5 @@
 <template>
-    <div class="widget fix widget_categories mt-2 right-side-articles relevant-articles">
+    <div class="widget fix widget_categories right-side-articles">
         <h4>
            <span>{{ $t("faqs") }}</span>
         </h4>
