@@ -2,7 +2,7 @@
     <div class="knowledge-base">
         <search></search>
         <section class="categories">
-            <div class="container">
+            <div class="container p-0">
                 <article-by-tag></article-by-tag>
             </div>
         </section>

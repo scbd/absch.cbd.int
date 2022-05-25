@@ -5,7 +5,7 @@
     <div class="knowledge-base">
         <search></search>
         <section class="categories">
-            <div class="container">
+            <div class="container p-0">
                 <div class="row">
                     <div class="col-lg-12">
                         <header>

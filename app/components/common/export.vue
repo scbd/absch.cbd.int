@@ -1,10 +1,10 @@
 <template>
     <span>
-        <a rel="noopener" href="#" class="table-export-button" @click="open=true">
+        <a rel="noopener" href="#" class="table-export-button text-decoration-none" @click="open=true">
             {{$t('exportButton')}}
             <i class="fa fa-download" aria-hidden="true"></i> 
         </a>
-        <modal v-model="open" size="lg" @show="onShowDialog" ref="modal" id="export-modal">
+        <modal v-model="open" v-bind:class="{ 'show': open}" size="lg" @show="onShowDialog" ref="modal" id="export-modal">
            <div slot="header">
                 <h3 class="modal-title">
                     {{$t('dialogTitle')}}
@@ -65,8 +65,8 @@
                 </div>
             </div>
             <div slot="footer">
-                <button type="button" class="btn btn-default" aria-label="Close" @click="closeDialog()" :disabled="loading">{{$t('cancel')}}</button>
-                <button type="button" class="btn btn-primary pull-left" aria-label="Download" @click="exportRecords(downloadFormat)" :disabled="loading" id="downloadDataFile">
+                <button type="button" class="btn btn-default float-end" aria-label="Close" @click="closeDialog()" :disabled="loading">{{$t('cancel')}}</button>
+                <button type="button" class="btn btn-primary float-start" aria-label="Download" @click="exportRecords(downloadFormat)" :disabled="loading" id="downloadDataFile">
                     {{$t('download')}}
                 </button>    
             </div>
@@ -158,5 +158,8 @@
     #datatable .tableexport-caption{
         display: none!important;
     } 
+    .modal-content .modal-footer {
+        display: block;
+    }
         
 </style>
