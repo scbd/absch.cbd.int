@@ -8,7 +8,7 @@
 								<li><a href="#" @click="goToArticle(title._id,title.title|lstring($locale))">{{title.title|lstring($locale)}}</a></li>
 						</ul>
 						<div class="view-more">
-            				<a href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
+            				<a class="text-decoration-none" href="#" @click="goToFaq()">+  {{ $t("viewMore") }}</a>
 						</div>
     </div>
 </template>

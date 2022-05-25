@@ -8,10 +8,10 @@
           </h2>
           <hr>
 
-          <div class="kb-listing">
+          <div class="kb-listing w-100">
             <ul class="article-with-tags-ul">
               <li class="article-with-tags-li" v-for="article in articles">
-                <a :href="`${articleUrl(article, realmTag)}`">
+                <a class="text-decoration-none" :href="`${articleUrl(article, realmTag)}`">
                   <span class="article-title">
                     {{article.title|lstring($locale)}}
                   </span>
@@ -35,8 +35,7 @@
           </div>
         </div>
       </div>
-
-      <div v-if="articlesCount>10">
+      <div class="d-inline-block" v-if="articlesCount>10">
         <paginate :records-per-page="recordsPerPage" :record-count="articlesCount" @changePage="onChangePage" :current-page="pageNumber"></paginate>
       </div>
       </div>

@@ -22,7 +22,7 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary pull-right" @click="back()">Back</button>
+            <button class="btn btn-primary float-end" @click="back()">Back</button>
         </div>
         <div class="col-lg-4">
             <div v-if="tag">

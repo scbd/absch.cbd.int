@@ -9,10 +9,10 @@
 					</h2>
 					<hr>
 
-                    <div class="kb-listing">
+                    <div class="kb-listing w-100">
                         <ul class="article-with-tags-ul">
                             <li class="article-with-tags-li" v-for="article in articles">
-								<a class="cursor-pointer" :href="`${articleUrl(article, tag)}`">
+								<a class="cursor-pointer text-decoration-none" :href="`${articleUrl(article, tag)}`">
 									<span class="article-title">
 										{{article.title|lstring($locale)}}
 									</span>
