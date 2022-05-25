@@ -1,40 +1,47 @@
-﻿<div id="view-history" style="max-height:200px;overflow:scroll;display:inline!important;">
+﻿<div id="view-history" class="d-inline overflow-scroll" style="max-height:19rem;">
 
-        <span ng-if="documents.length == 0">
-           no history available 
-        </span>
+    <span ng-if="documents.length == 0">
+        no history available
+    </span>
 
-    <table style="width:100%!important;" class="table table-condensed" ng-if="documents.length > 0">
+    <table class="table w-100" ng-if="documents.length > 0">
         <tr>
-                <th class="color-litegrey" style="font-size:12px;bold;"> Unique identifier</th>
-                <th class="color-litegrey " style="font-size:12px;bold;"> Status</th>
-                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;"> Date <span ng-if="!publicView">Published</span> </th>
-                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;" ng-if="!publicView"> Date Requested </th>
-            </tr>
-           
-        <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
+            <th class="color-litegrey fs-small-8"> Unique identifier</th>
+            <th class="color-litegrey fs-small-8"> Status</th>
+            <th class="color-litegrey d-none d-md-table-cell fs-small-8"> Date <span
+                    ng-if="!publicView">Published</span> </th>
+            <th class="color-litegrey d-none d-md-table-cell fs-small-8" ng-if="!publicView"> Date Requested
+            </th>
+        </tr>
+
+        <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" class="fs-small-8">
             <tr>
-                <td style="white-space:nowrap;">
-                    <a rel="noopener" translation-url  ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
-                        <strong  ng-bind="document | uniqueID"></strong>
+                <td class="text-nowrap">
+                    <a rel="noopener" translation-url
+                        ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}"
+                        target="_blank">
+                        <strong ng-bind="document | uniqueID"></strong>
                     </a>
                 </td>
                 <td>
                     <div>
-                        <span ng-show="!document.deletedOn && document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
+                        <span
+                            ng-show="!document.deletedOn && document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'">
                             <span class="bold color-red"> REVOKED</span>
                         </span>
-                        <span ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))">
-                            <span class="bold color-grey" >
+                        <span
+                            ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))">
+                            <span class="bold color-grey">
                                 <span ng-if="document.type === 'permit'">
                                     NOT VALID
                                 </span>
                                 <span ng-if="document.type !== 'permit'">
                                     OLD VERSION
-                                </span>                                
+                                </span>
                             </span>
                         </span>
-                        <span ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))">
+                        <span
+                            ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))">
                             <span class="bold color-green"> PUBLISHED</span>
                         </span>
                         <span ng-show="document.deletedOn">
@@ -42,34 +49,45 @@
                         </span>
                     </div>
                 </td>
-                <td  class="hidden-xs" >
+                <td class="d-none d-md-table-cell">
                     <div ng-show="!publicView">
-                        <span><span ng-bind="document.updatedBy.firstName"></span> <span ng-bind="document.updatedBy.lastName"></span> (<span ng-bind="document.updatedBy.email"></span>)</span>
-                        <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold" ng-bind="document.updatedOn | formatDateWithTime"></span>
-                        </div>
+                        <span><span ng-bind="document.updatedBy.firstName"></span> <span
+                                ng-bind="document.updatedBy.lastName"></span> (<span
+                                ng-bind="document.updatedBy.email"></span>)</span>
+                        <br> <span class="fw-bold text-uppercase fs-small-6"
+                            ng-bind="document.updatedOn | formatDateWithTime"></span>
+                    </div>
 
-                        <div ng-show="publicView"> on <span style="font-weight:500;" ng-bind="document.updatedOn | formatDateWithTime"></span></div>
+                    <div ng-show="publicView"> on <span class="fw-bold"
+                            ng-bind="document.updatedOn | formatDateWithTime"></span></div>
 
                     <div ng-show="document.body.amendmentDescription">
                         <span ng-show="document.body.amendmentDescription">
-						  		<div ng-show="!more">
-                                    <span ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:200"></span>
-                                    <a rel="noopener" translation-url  ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
-                                        <strong>...more</strong> 
-                                    </a>
-                                </div>
-                                <div ng-show="more"> 
-                                    <span ng-bind-html="document.body.amendmentDescription| lstring:locale">
-                                    </span>
-                                    <a rel="noopener" translation-url  ng-href="#" ng-click="more=!more"> <strong>...less</strong></a>
-                                </div>
+                            <div ng-show="!more">
+                                <span
+                                    ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:200"></span>
+                                <a rel="noopener" translation-url ng-href="#" ng-click="more=!more"
+                                    ng-show="(document.body.amendmentDescription| lstring:locale).length > 200">
+                                    <strong>...more</strong>
+                                </a>
+                            </div>
+                            <div ng-show="more">
+                                <span ng-bind-html="document.body.amendmentDescription| lstring:locale">
+                                </span>
+                                <a rel="noopener" translation-url ng-href="#" ng-click="more=!more">
+                                    <strong>...less</strong></a>
+                            </div>
                         </span>
                     </div>
                 </td>
-                <td ng-if="!publicView"  class="hidden-xs">
-                    <div> 
-                        <span><span ng-bind="document.submittedBy.firstName"></span> <span ng-bind="document.submittedBy.lastName"></span> (<span ng-bind="document.submittedBy.email"></span>)
-                            </span> <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold" ng-bind="document.submittedOn | formatDateWithTime"></span></div>
+                <td ng-if="!publicView" class="d-none d-md-table-cell">
+                    <div>
+                        <span><span ng-bind="document.submittedBy.firstName"></span> <span
+                                ng-bind="document.submittedBy.lastName"></span> (<span
+                                ng-bind="document.submittedBy.email"></span>)
+                        </span> <br> <span class="fw-bold text-uppercase fs-small-6"
+                            ng-bind="document.submittedOn | formatDateWithTime"></span>
+                    </div>
                 </td>
             </tr>
         </tbody>
