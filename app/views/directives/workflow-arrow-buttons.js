@@ -897,7 +897,7 @@ import toasterMessages from '~/app-data/toaster-messages.json';
                         const data = await import('~/app-data/bch/offline-formats.json');                        
                         $scope.offlineFormats = data.default
                         $timeout(function(){
-                            $element.find("[data-toggle='tooltip']").tooltip({
+                            $element.find("[data-bs-toggle='tooltip']").tooltip({
                                 trigger: 'hover'
                             });
                         }, 100)

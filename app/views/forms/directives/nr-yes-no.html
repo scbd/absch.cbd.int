@@ -7,7 +7,7 @@
         </label>
     </div>
     
-    <div ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value" style="padding-top:10px">
+    <div class="pt-2" ng-if="hasAdditionalInformation && binding.value == hasAdditionalInformation.value">
         <div class="km-control-group" name="question{{question.number}}_additionalInformation" caption="Please specify">
             <div km-textbox-ml rows="2" name="{{question.key}}_additionalInformation" ng-model="answer.additionalInformation" locales="locales" 
                 ng-change="updateAnswer()"></div>

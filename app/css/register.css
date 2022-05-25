@@ -2,12 +2,6 @@
 	background-color:#eee;
 	padding-bottom:30px;
 }
-.dash-header{
-
-	height:62px;
-
-}
-
 
 .table {
 	margin-bottom:0;
@@ -129,15 +123,6 @@ section {
     background-color:#F5F5F5;
 }
 
-
-
-
-legend{
-	padding:3px;
-	margin:20px 0 20px 0;
-	/*background-color: #efefef;*/
-	font-weight:500;
-}
 
 
 legend + .help-inline-content{position:relative; top:-19px;}
@@ -287,14 +272,6 @@ legend + .help-block{position:relative; top:-15px;}
 	color:white;
 }
 
-.dash-header{
-	padding:1px 10px 10px 20px;
-	margin:-19px;
-	position:static;
-	border-top-left-radius: 2px;
-	border-top-right-radius: 2px;
-	margin-bottom:20px;
-}
 .nat-header{
 	padding:1px 10px 10px 20px;
 	margin:-19px;

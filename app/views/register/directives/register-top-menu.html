@@ -1,5 +1,5 @@
 ﻿<div id="innerPage">
-    <div class="mastHead" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
+    <div class="mastHead m-0 p-3 pb-5" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
 
         <div id="registerTopMenu">
             <style>
@@ -29,6 +29,7 @@
                     line-height: 35px;
                     padding: 8px 10px 8px 10px;
                     border-radius: 3px;
+                    text-decoration: none;
                 }
 
                 #registerTopMenu .menu-tabs>ul li>a:hover {
@@ -41,16 +42,14 @@
                 }
             </style>
 
-            <!-- <h1 style="padding:0 0 5px 0;margin:0;border-bottom:1px solid #ddd;">ABSCH Record Management Centre </h1> -->
 
-            <div class="menu-tabs hidden-xs" style="margin-top:10px;">
+            <div class="menu-tabs d-none d-md-block">
                 <ul>
                     <li><a rel="noopener" translation-url href="/register/dashboard"
                             ng-class="{'tabactivated':path.indexOf('dashboard') > 0}"> Dashboard </a></li>
                     <li><a rel="noopener" translation-url href="/register/requests"
-                            ng-class="{'tabactivated':path.indexOf('requests') > 0}"> Requests <span class="badge"
-                                ng-if="isPA && pendingCount>0 " style="position:relative;top:-1px;font-size:14px;"
-                                ng-bind="pendingCount"></span></a></li>
+                            ng-class="{'tabactivated':path.indexOf('requests') > 0}"> Requests <span
+                                ng-if="isPA && pendingCount>0 " ng-bind="pendingCount"></span></a></li>
                     <li><a rel="noopener" translation-url href="/register/notifications"
                             ng-class="{'tabactivated':path.indexOf('notifications') > 0}">
                             <span ng-if="isABS"> Notifications </span>
@@ -64,39 +63,49 @@
                     <li><a rel="noopener" translation-url href="/register/reports"
                             ng-class="{'tabactivated':path.indexOf('reports') > 0}"> Reports</a></li>
                     <li ng-if="roles.isAdministrator"><a rel="noopener" translation-url href="/register/admin"
-                            class="bg-pink linkDark"><span class="color-white "> ADMIN </span></a></li>
-                    <!--<li ng-if="user.government || roles.isAdministrator"><a rel="noopener" translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->
+                            class="bg-pink linkDark"><span ng-class="{'color-white':deviceSize!='xs'}"> ADMIN </span></a></li>
                 </ul>
             </div>
 
-            <div class="visible-xs" style="padding:0 10px 0 10px;">
-                <div class="btn-group" style="width:100%;">
-                    <button type="button" style="width:100%; font-size:16px;" class="btn btn-default dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-bars"></i> Menu <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" style="font-size:18px;">
-                        <li><a rel="noopener" translation-url href="/register/dashboard"
-                                ng-class="{'tabactivated':path.indexOf('dashboard') > 0}"> Dashboard </a></li>
-                        <li><a rel="noopener" translation-url href="/register/requests"
-                                ng-class="{'tabactivated':path.indexOf('requests') > 0}"> Requests </a></li>
-                        <li><a rel="noopener" translation-url href="/register/notifications"
-                                ng-class="{'tabactivated':path.indexOf('notifications') > 0}">
-                                <span ng-if="isABS"> Notifications </span>
-                                <span ng-if="isBCH"> Alerts </span>
-                            </a></li>
-                        <li ng-if="user.government || roles.isAdministrator"><a rel="noopener" translation-url
-                                ng-class="{'tabactivated':path.indexOf('national-users')>0}"
-                                href="/register/national-users"> User Management </a></li>
-                        <li><a rel="noopener" translation-url href="/register/user-preferences"
-                                ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> Preferences </a></li>
-                        <li><a rel="noopener" translation-url href="/register/reports" class="linkDark"><span
-                                    class="color-white "> Reports </span></a></li>
-                        <li ng-if="roles.isAdministrator"><a rel="noopener" translation-url href="/register/admin"
-                                class="bg-pink linkDark"><span class="color-white "> ADMIN </span></a></li>
-                        <!--<li ng-if="user.government || roles.isAdministrator"><a rel="noopener" translation-url  ng-class="{'tabactivated':path.indexOf('stats')>0}" href="/register/stats"> Country Statistics <span class="label label-danger">New</span></a> </li>-->
-                    </ul>
-                </div>
+            <div class="btn-group d-block d-md-none px-2 w-100" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-light dropdown-toggle w-100"
+                    data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa fa-bars"></i> Menu <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+                    <li><a rel="noopener" translation-url href="/register/dashboard"
+                            ng-class="{'tabactivated':path.indexOf('dashboard') > 0}" class="dropdown-item"> Dashboard
+                        </a></li>
+                    <li><a rel="noopener" translation-url href="/register/requests"
+                            ng-class="{'tabactivated':path.indexOf('requests') > 0}" class="dropdown-item"> Requests
+                        </a></li>
+                    <li><a rel="noopener" translation-url href="/register/notifications"
+                            ng-class="{'tabactivated':path.indexOf('notifications') > 0}" class="dropdown-item">
+                            <span ng-if="isABS"> Notifications </span>
+                            <span ng-if="isBCH"> Alerts </span>
+                        </a></li>
+                    <li ng-if="user.government || roles.isAdministrator">
+                        <a rel="noopener" translation-url ng-class="{'tabactivated':path.indexOf('national-users')>0}"
+                            href="/register/national-users" class="dropdown-item"> User Management </a>
+                    </li>
+                    <li>
+                        <a rel="noopener" translation-url href="/register/user-preferences"
+                            ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}" class="dropdown-item">
+                            Preferences </a>
+                    </li>
+                    <li>
+                        <a rel="noopener" translation-url href="/register/reports" class="dropdown-item"
+                            id="hover_color">
+                            <span ng-class="{'color-white':deviceSize!='xs'}"> Reports </span>
+                        </a>
+                    </li>
+                    <li ng-if="roles.isAdministrator">
+                        <a rel="noopener" translation-url href="/register/admin" class="dropdown-item">
+                            <span ng-class="{'color-white':deviceSize!='xs'}"> ADMIN </span>
+                        </a>
+                    </li>
+
+                </ul>
             </div>
 
         </div>

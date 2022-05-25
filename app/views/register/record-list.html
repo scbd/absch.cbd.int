@@ -119,7 +119,7 @@
                                 <span ng-bind="record | uniqueID"></span> <span ng-show="isDraft(record) || (isPublished(record) && isDraft(record))" class="badge bg-secondary text-uppercase">draft</span>
                             </div>
                         </td>
-                        <td class="ps-1 fs-small-8 align-middle" ng-if="schema=='contact'">
+                        <td class="ps-1 fs-small-8 align-middle text-capitalize" ng-if="schema=='contact'">
                             <span ng-bind="record.body.type"></span>
                         </td>
                         <td class="ps-1 fs-small-8 align-middle">

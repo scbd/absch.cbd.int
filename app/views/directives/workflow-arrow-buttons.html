@@ -1,4 +1,4 @@
-﻿<div class="row margin-bottom-20">
+﻿<div class="row mb-3">
     <style>
         .margin-bottom-20 {
             margin-bottom: 20px;
@@ -39,12 +39,11 @@
             float: left;
         }
 
-       
+
 
         .steps li a:after {
             content: " ";
             display: block;
-            width: ;
             height: 0;
             border-top: 50px solid transparent;
             /* Go big on the size, and let overflow hide */
@@ -94,7 +93,8 @@
             border-left-color: #aaa !important;
         }
 
-        .steps li.arrowSelected a, .active-button {
+        .steps li.arrowSelected a,
+        .active-button {
             background: #aaa !important;
             color: #000 !important;
         }
@@ -121,38 +121,40 @@
         .steps li.publish.arrowSelected a:after {
             border-left-color: #5cb85c !important;
         }
-        .btnSelected{
+
+        .btnSelected {
             background: #666;
             color: #FFF !important;
         }
+
         .btnSelected:hover {
             background: #666;
             color: #FFF !important;
         }
-       
-        .viewForm{
-            margin: 20px 0px;
-        }
+
+      
         .ngdialog.ngdialog-theme-default.unauthorized-access-dialog .ngdialog-content {
-            width: 50%!important;
+            width: 50% !important;
         }
     </style>
-    <span block-region activate="loading" ng-if="loading" update-parent-position="true" dynamic-text="blockText" block-text="Processing..."></span>
-    
-    <div class="workflow-arrows margin-bottom-20"  >
-        <ng-include onload="workflowScope=workflowScope;schema=documentType;languages=languages" src="'template/workflow-arrows'"></ng-include>
+    <span block-region activate="loading" ng-if="loading" update-parent-position="true" dynamic-text="blockText"
+        block-text="Processing..."></span>
+
+    <div class="workflow-arrows mb-3">
+        <ng-include onload="workflowScope=workflowScope;schema=documentType;languages=languages"
+            src="'template/workflow-arrows'"></ng-include>
     </div>
 
-    <div class="workflow-validation-error" >
-        <div km-document-validation ng-model="validationReport" container="{{container}}" ></div>
+    <div class="workflow-validation-error">
+        <div km-document-validation ng-model="validationReport" container="{{container}}"></div>
     </div>
 
-    <div style="display:none" id="msgDraftSaveMessage">
+    <div class="d-none" id="msgDraftSaveMessage">
         Your record has been saved as a draft.
     </div>
 
     <div class="row" id="divShowError" ng-show="errorMessage">
-        <div class="col-xs-12">
+        <div class="col-12">
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" ng-click="errorMessage=undefined">
                     <span aria-hidden="true">&times;</span>
@@ -163,13 +165,15 @@
     </div>
 
     <div ng-if="tab=='intro'" km-tab="intro">
-        <div ng-transclude="introForm" class="well bg-white">
+        <div ng-transclude="introForm" class="bg-white">
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
-            <div>
-                <a rel="noopener" class="btn btn-primary pull-right" ng-if="isAdmin" ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
+            <div class="border p-3 mb-5">
+                <a rel="noopener" class="btn btn-primary" ng-if="isAdmin"
+                    ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
                 <h2 ng-bind="article.title|lstring:locale"></h2>
                 <br>
-                <p class="ck ck-content ck-rounded-corners ck-blurred" ng-bind-html="article.content| lstring:locale | toTrusted"></p>
+                <p class="ck ck-content ck-rounded-corners ck-blurred"
+                    ng-bind-html="article.content| lstring:locale | toTrusted"></p>
             </div>
         </div>
     </div>
@@ -178,29 +182,32 @@
         <div class="alert alert-danger" role="alert" ng-if="rejectedWorkflow">
             <h4 class="alert-heading"><i class="fa fa-warning"></i> Information!</h4>
             <p>
-                This draft version request for publishing was rejected by 
-                <span ng-bind="rejectedWorkflow.completedBy_info.firstName + ' ' + rejectedWorkflow.completedBy_info.lastName"></span>
+                This draft version request for publishing was rejected by
+                <span
+                    ng-bind="rejectedWorkflow.completedBy_info.firstName + ' ' + rejectedWorkflow.completedBy_info.lastName"></span>
                 on <span ng-bind="rejectedWorkflow.completedOn | formatDateWithTime"></span>
             </p>
             <p ng-if="rejectedWorkflow.result.reason">
                 <strong>Reason :</strong>
-                <span  ng-bind="rejectedWorkflow.result.reason"></span>
+                <span ng-bind="rejectedWorkflow.result.reason"></span>
             </p>
         </div>
         <div ng-transclude="editForm"></div>
     </div>
 
-    <div ng-show="tab=='review'" km-tab="review" id="schemaView" class="viewForm">
-        <div class="record-Options-div pull-right" style="margin-right:5px;margin-top:5px;">            
-            <div class="btn-group pull-right btn-group-xs" role="group" ng-if="languages.length>1">
-                <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'btn-info' : selectedLanguage==lang}"
-                    ng-repeat="lang in languages" ng-click="onReviewLanguageChange(lang)">
+    <div ng-show="tab=='review'" km-tab="review" id="schemaView" class="mb-5 mt-2">
+        <div class="record-Options-div">
+            <div class="btn-group btn-group-xs" role="group" ng-if="languages.length>1">
+                <button type="button" class="btn btn-lang btn-default btn-xs"
+                    ng-class="{'btn-info' : selectedLanguage==lang}" ng-repeat="lang in languages"
+                    ng-click="onReviewLanguageChange(lang)">
                     <span ng-bind="lang | uppercase"></span>
-                </button>                
+                </button>
             </div>
-            <span class="xlabel hidden-xs hidden-sm color-white" ng-if="languages.length>1" style="color:#fff">languages available:</span>
+            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">languages
+                available:</span>
         </div>
-        
+
         <div ng-transclude="reviewForm"></div>
     </div>
     <div ng-show="tab=='publish'" km-tab="publish">
@@ -208,20 +215,23 @@
         <div class="row margin-bottom-20" ng-if="!validationReport.isAnalyzing">
             <div class="clearfix"></div>
 
-            <div class="col-xs-12">
+            <div class="col-12">
 
-                <div class="well">
-                    <p style="font-size:16px;"> <strong>Please ensure that the information in this record is correct, complete, relevant and not confidential. </strong> This clearing-house does not host any confidential information and all information published will become publicly available. </p>
-                    <ul style="list-style-type:none;margin:0;padding:0;padding-top:10px;">
-                        <li style="display: inline;" ng-show="security.canSave">
-                            <button type="button" class="btn btn-danger bg-published btn-lg " width="50px" ng-click="tab='publish';publish()"
-                                ng-disabled="loading">Publish
+                <div class="card p-3">
+                    <p class="fs-6"> <strong>Please ensure that the information in this record is correct,
+                            complete, relevant and not confidential. </strong> This clearing-house does not host any
+                        confidential information and all information published will become publicly available. </p>
+                    <ul class="list-unstyled m-0 p-0 pt-2">
+                        <li class="d-inline" ng-show="security.canSave">
+                            <button type="button" class="btn btn-danger bg-published btn-lg " width="50px"
+                                ng-click="tab='publish';publish()" ng-disabled="loading">Publish
                                 <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
                             </button>
                         </li>
-                        <li style="display: inline;" ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
-                            <button id="publish_button" type="button" class="btn btn-danger bg-request btn-lg" ng-href="#"
-                                ng-click="publishRequest()" ng-disabled="loading">Request Publication
+                        <li class="d-inline"
+                            ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
+                            <button id="publish_button" type="button" class="btn btn-danger bg-request btn-lg"
+                                ng-href="#" ng-click="publishRequest()" ng-disabled="loading">Request Publication
                                 <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
                             </button>
                         </li>
@@ -233,55 +243,40 @@
 
         </div>
 
-        <div class="record-Options-div pull-right" style="margin-right:5px;margin-top:5px;">            
-            <div class="btn-group pull-right btn-group-xs" role="group" ng-if="languages.length>1">
-                <button type="button" class="btn btn-lang btn-default btn-xs" ng-class="{'btn-info' : selectedLanguage==lang}"
-                    ng-repeat="lang in languages" ng-click="onReviewLanguageChange(lang)">                    
+        <div class="record-Options-div me-1 mt-1">
+            <div class="btn-group btn-group-xs" role="group" ng-if="languages.length>1">
+                <button type="button" class="btn btn-lang btn-default btn-xs"
+                    ng-class="{'btn-info' : selectedLanguage==lang}" ng-repeat="lang in languages"
+                    ng-click="onReviewLanguageChange(lang)">
                     <span ng-bind="lang | uppercase"></span>
-                </button>                
+                </button>
             </div>
-            <span class="xlabel hidden-xs hidden-sm color-white" ng-if="languages.length>1" style="color:#fff">languages available:</span>
+            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">languages
+                available:</span>
         </div>
         <div ng-transclude="reviewForm"></div>
     </div>
-    <br/>
+    <br />
     <div class="workflow-tabs">
         <ng-include onload="workflowScope=workflowScope;" src="'template/workflow-arrows'"></ng-include>
     </div>
 
     <script type="text/ng-template" trados-translation="true" id="template/workflow-arrows">
-        <div class="hidden-xs">
+        <!-- <div class="hidden-xs"> -->
 
-            <div class="pull-right">
-                <div class="btn" style="border: 1px solid #ccc;" ng-if="offlineFormats">
-                    <span ng-if="!container">Offline format:</span>
-                    <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
-                        ng-show="::offlineFormats[documentType][code]">
-                        <a rel="noopener" target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>
-                        <span ng-if="::!$last"> | </span>
-                    </span>
-                </div>
-                <button id="workflowSaveDraft" type="button" class="btn  btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
-                ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
-                    <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
-                    Save Draft</button>
-                <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
-                identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
-                <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" class="btn btn-primary" 
-                style="color:#fff;" id="close_button" ng-if="!isDialog">
-                <i class="fa fa-times-circle"></i></a>
-            </div>
+          
 
             <!-- one page form -->
-            
-             <div class="row pull-left">
-                <div class="col-xs-1">
-                        <button type="button" class="btn btn-default bg-grey color-white " ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
-                                <span class="glyphicon glyphicon-backward"></span>
-                        </button>
-                 </div>
-                <div class="col-xs-10">
-                    <ul class="steps">
+
+                    <div class="row d-none d-lg-flex float-start">
+                           <div class="col-1 p-0">
+                            <button type="button" class="btn btn-light" ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
+                                <i class="bi bi-skip-backward-fill"></i>
+                            </button>
+                        </div>
+                 
+                 <div class="col-10 p-0">
+                    <ul class="steps"style="width: 32rem;" >
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
                             <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
                         </li>
@@ -296,67 +291,106 @@
                         </li>
                     </ul>
                 </div>
-               <div class="col-xs-1">
-                    <button type="button" class="btn btn-default bg-grey color-white " ng-click="goNextTab(workflowScope.tab)"    ng-disabled="disableNextBtn" >
-                        <span class="glyphicon glyphicon-forward"> </span>
+
+                <div class="col-1 ps-1">
+                    <button type="button" class="btn btn-light" ng-click="goNextTab(workflowScope.tab)" ng-disabled="disableNextBtn">
+                        <i class="bi bi-skip-forward-fill"></i>
                     </button>
                 </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <!-- small screen view -->
-        <div style="margin:0px 20px 20px 0;" class="visible-xs hidden-sm hidden-md hidden-lg">
-            <div  class="btn-group" role="group" aria-label="...">
-                <button type="button" class="btn btn-sm btn-default " ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
-                    <span class="glyphicon glyphicon-backward"></span>
+             </div>
+
+             <div class="btn-group btn-group-sm d-lg-none" role="group" aria-label="...">
+
+                <button type="button" class="btn btn-outline-secondary" ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
+                    <i class="bi bi-skip-backward-fill"></i>
                 </button>
-                <button type="button"  class="btn btn-sm btn-default " ng-class="{'btnSelected': workflowScope.tab=='intro'}">
+        
+                <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='intro'}">
                     <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Intro</span>
                 </button>
-                <button type="button"   class="btn btn-sm btn-default "ng-class="{'btnSelected': workflowScope.tab=='edit'}">
+
+                <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='edit'}">
                     <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Form</span>
                 </button>
-                <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='review'}">
+
+                <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='review'}">
                     <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</span>
                 </button>
-                <button type="button"  class="btn btn-sm btn-default" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
+
+                <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
                     <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
                 </button>
-                <button type="button" class="btn btn-sm btn-default  " ng-click="goNextTab(workflowScope.tab)"  ng-disabled="disableNextBtn">
-                    <span class="glyphicon glyphicon-forward"> </span>
-                </button>
-            </div>
 
-            <button type="button" class="btn btn-sm btn-default bg-draft pull-right" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
-            ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
-                <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
-                <i class="fa fa-save"></i>
-            </button>
-            <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" 
-            class="btn btn-sm btn-primary pull-right" style="color:#fff;" id="close_button" ng-if="!isDialog">
-                    <i class="fa fa-times-circle"></i> <span class="hidden-xs">Close</span> 
-            </a>
-            <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" style="padding-top:0px;margin-top:-1px"
-            class="btn btn-sm pull-right" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
-            identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
-         
+                <button type="button" class="btn btn-outline-secondary" ng-click="goNextTab(workflowScope.tab)"  ng-disabled="disableNextBtn">
+                    <i class="bi bi-skip-forward-fill"></i>
+                </button>
         </div>
+
+
+
+
+
+
+                    <div class="float-end d-none d-lg-block">
+                        <div class="btn border" ng-if="offlineFormats">
+                            <span ng-if="!container">Offline format:</span>
+                            <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
+                                ng-show="::offlineFormats[documentType][code]">
+                                <a class="text-decoration-none" rel="noopener" target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>
+                                <span ng-if="::!$last"> | </span>
+                            </span>
+                        </div>
+
+
+
+                        <button id="workflowSaveDraft" type="button" class="btn btn-default bg-draft p-1" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
+                        ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
+                            <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
+                            Save Draft</button>
+                            <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" class="pt-0" 
+                            class="btn btn-sm" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
+                            identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
+                            <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" 
+                            class="btn btn-sm btn-primary text-white" id="close_button" ng-if="!isDialog">
+                                    <i class="bi bi-x-circle-fill"></i> <span class="hidden-xs"></span> 
+                            </a>                     
+
+                    
+                </div>
+
+                <div class="d-lg-none float-end">
+                    <button type="button" class="btn btn-sm btn-default bg-draft" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()" 
+                    ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
+                        <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
+                        <i class="fa fa-save"></i>
+                    </button>
+                   
+                    <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
+                    identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
+                    <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" class="btn btn-primary text-white py-0 px-1" 
+                    id="close_button" ng-if="!isDialog">
+                    <i class="bi bi-x-circle-fill"></i></a>
+                </div>
+
+            </div>
     </script>
 
 
     <div id="dialogCancel" class="modal" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header bg-red">
-                    <button type="button" class="close" ng-click="closeDialog()" aria-hidden="true">×</button>
+                <div class="modal-header d-block bg-red">
+                    <button type="button" class="btn fs-4 close float-end" ng-click="closeDialog()" aria-hidden="true">×</button>
                     <h4>CLOSE AND CANCEL CHANGES</h4>
                 </div>
-                <div class="modal-body" style="text-align: center;">
-                    <h1>Are you sure you want to close this record without saving? <span class="color-red">Any changes will be lost.</span> </h1> 
+                <div class="modal-body text-center">
+                    <h1>Are you sure you want to close this record without saving? <span class="color-red">Any changes
+                            will be lost.</span> </h1>
                 </div>
-                <div class="modal-footer" style="margin-top:0">
-                    <button type="button" ng-click="closeDialog()" class="btn btn-default cancelClose">Cancel</button>
-                    <button type="button" ng-click="close(true)" class="btn btn-warning closeWithoutSaving pull-left">Close
+                <div class="modal-footer mt-0 d-block">
+                    <button type="button" ng-click="closeDialog()" class="btn btn-default float-end cancelClose">Cancel</button>
+                    <button type="button" ng-click="close(true)"
+                        class="btn btn-warning closeWithoutSaving float-start color-white">Close
                         without saving</button>
                 </div>
             </div>
@@ -367,16 +401,18 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-red color-white">
-                    <button type="button" class="close" ng-click="closeAddInfoDialog(false)" aria-hidden="true">×</button>
+                    <button type="button" class="close" ng-click="closeAddInfoDialog(false)"
+                        aria-hidden="true">×</button>
                     <h2>Publishing Request</h2>
                 </div>
                 <div class="modal-body">
                     <p>Would you like to add additional information for the publishing request?</p>
                     <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
                 </div>
-                <div class="modal-footer" style="margin-top:0">
+                <div class="modal-footer mt-0">
                     <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
-                    <button type="button" id="continueRequest" class="btn btn-primary pull-left" ng-disabled="loading">Send
+                    <button type="button" id="continueRequest" class="btn btn-primary float-start"
+                        ng-disabled="loading">Send
                         Request</button>
                 </div>
             </div>
@@ -392,11 +428,12 @@
                 <div class="modal-body">
                     <p>Editing and saving as draft a publishing request will cancel the publishing request and
                         send it back to draft mode.
-                        <br />Are you sure you want to continue?</p>
+                        <br />Are you sure you want to continue?
+                    </p>
                 </div>
-                <div class="modal-footer" style="margin-top:0">
+                <div class="modal-footer mt-0">
                     <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">No</button>
-                    <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary pull-left"
+                    <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary float-start"
                         ng-disabled="loading">Yes</button>
                 </div>
             </div>
@@ -404,7 +441,7 @@
     </div>
 
     <script id="dialogUnauthorise" type="text/ng-template" trados-translation="true">
-        
+
         <div class="modal-header bg-red">
             <h4>Unauthorized Access</h4>
         </div>
@@ -419,7 +456,7 @@
                 </p>
             </div>
         </div>
-        <div class="modal-footer" style="margin-top:0">
+        <div class="modal-footer mt-0">
             <button type="button" ng-click="closeAccessDialog()" class="btn btn-default">Close</button>
         </div>
     </script>

@@ -110,7 +110,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning bold pull-left" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
+                <button type="button" class="btn btn-warning bold float-start" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
                 <button type="button" class="btn btn-default" ng-click="closeDialog();">Cancel</button>
             </div>
         </form>
@@ -142,7 +142,7 @@
             <span ng-bind="document"></span>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger bold pull-left" ng-click="updateActivity()" ng-disabled="isUpdating">
+            <button type="button" class="btn btn-danger bold float-start" ng-click="updateActivity()" ng-disabled="isUpdating">
                             <span class="hidden-xs">Delete record</span>
                         </button>
             <button type="button" class="btn btn-default" ng-click="closeConfirmation()" ng-disabled="isUpdating">
