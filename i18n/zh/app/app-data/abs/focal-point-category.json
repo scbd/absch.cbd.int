@@ -1,8 +1,7 @@
-﻿{
-    "absNfp"  : "ABS National Focal Point",
-    "cbdNfp"  : "CBD Primary Focal Point",
-    "cbdSfp"  : "CBD Secondary Focal Point",
-    "pNfp"    : "Protected Areas NFP", 
-    "gNfp"    : "GTI NFP"
+{
+  "absNfp": "获取和惠益分享国家联络点",
+  "cbdNfp": "生物多样性公约主要联络点",
+  "cbdSfp": "生物多样性公约辅助联络点",
+  "pNfp": "保护区国家联络点",
+  "gNfp": "全球生物分类倡议国家联络点"
 }
-

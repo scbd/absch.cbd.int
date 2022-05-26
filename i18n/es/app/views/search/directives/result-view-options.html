@@ -1,16 +1,16 @@
 ﻿<div id="searchSortOptions" style="min-width: 450px;overflow: hidden;display: inline-block;">
     
     <ul class="sort-options pull-right" >        
-        <li id="viewType"><a rel="noopener" href="#" style="color:#555!important;max-height:38px;"><select style="border:0;color:#555!important;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
-                    <option ng-value="'default'">VISTA PREDETERMINADA</option>
-                    <option ng-value="'list'">LISTA</option>
-                    <option ng-value="'group'">GRUPO</option>
-                    <option ng-value="'matrix'">MATRIZ</option>
-                </select><i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i> </a></li>        
-        <li id="sortBy"><a rel="noopener" href ng-click="showSortDialog()">Ordenar <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a></li>     
-        <li id="sendRecords"><a rel="noopener" >Enviar <i class="fa fa-paper-plane" aria-hidden="true"></i></a></li>     
+        <li id="viewType"><select style="border:0;color:#555!important;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
+                    <option ng-value="'default'"></option>
+                    <option ng-value="'list'"></option>
+                    <option ng-value="'group'"></option>
+                    <option ng-value="'matrix'"></option>
+                </select></li>        
+        <li id="sortBy"></li>     
+        <li id="sendRecords"></li>     
       
-        <li id="exportRecords" ng-if="viewType=='matrix'"><a rel="noopener" href ng-click="onMatrixExportClick()">Exportar <i class="fa fa-download" aria-hidden="true"></i></a></li>
+        <li id="exportRecords" ng-if="viewType=='matrix'"></li>
         <li id="exportRecords" ng-if="viewType!='matrix' && exportVueComponent">
             <table-export ng-vue="exportVueComponent" :get-download-records="getDownloadRecords"></table-export>           
         </li>
@@ -18,67 +18,67 @@
 
     <div>
         <script type="text/ng-template" trados-translation="true" id="sortByDialog">
-            <div class="bs5 new-css-modal-header modal-header"><strong class="modal-title">Ordenar por campos (seleccionar uno o más campos)</strong></div>
+            <div class="bs5 new-css-modal-header modal-header"></div>
             <div class="modal-body">		
                 <div id="divTable">
                     <div>                         
                         <li ng-repeat="field in sortByFields" class="btn-group" style="margin:5px">
-                            <button type="button" ng-click="selectField(field)" class="btn btn-sm" ng-class="{'btn-primary':field.selected}"><i class="fa" ng-class="{'fa-check-square-o':field.selected, 'fa-square-o':!field.selected }"></i> <span ng-bind="field.title"></span></button>
+                            <button type="button" ng-click="selectField(field)" class="btn btn-sm" ng-class="{'btn-primary':field.selected}"></button>
                             <div class="btn-group" ng-if="field.field!='relevance'">
                                 <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" 
-                                ng-class="{'btn-primary':field.selected}" ><span ng-bind="(field.direction == 'asc' ? ' Asc':' Desc')"></span> <span class="caret"></span></button>
+                                ng-class="{'btn-primary':field.selected}" ></button>
                                 <ul class="dropdown-menu" style="min-width: 100%;">
-                                    <li><a rel="noopener" href="#" ng-click="selectField(field, 'asc')">Asc</a></li>
-                                    <li><a rel="noopener" href="#" ng-click="selectField(field, 'desc')">Desc</a></li>
+                                    <li></li>
+                                    <li></li>
                                 </ul>
                             </div>
                         </li>
                     </div>  
                     <div ng-if="selectedFields.length">  
-                        <div>Ordenar por</div>
+                        <div></div>
                         <ul class="pagination">                         
-                            <li ng-repeat-start="field in selectedFields track by $index"><span ng-bind="field.title + ' (' + field.direction + ')'"></span></li>
-                            <li ng-repeat-end><span ng-if="!$last">Luego por</span></li>
+                            <li ng-repeat-start="field in selectedFields track by $index"></li>
+                            <li ng-repeat-end></li>
                         </ul> 
                     </div>
                     <div  ng-if="selectedFields.length && selectedFields[0].field=='relevance'">
-                        <div class="alert alert-info"><strong>Importancia:</strong> El orden de importancia es el proceso por el cual se clasifican los resultados del documento, de manera que se muestran en primer lugar los documentos pertinentes para su solicitud. <br/> <strong>El filtro "importancia" no puede utilizarse junto con otros filtros.<strong></div>
+                        <div class="alert alert-info"></div>
                     </div>
                     
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancelar</button>
-                <button type="button" class="btn btn-primary pull-left" ng-click="apply()"  ng-disabled="!selectedFields.length">Aplicar</button>
+                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading"></button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="apply()"  ng-disabled="!selectedFields.length"></button>
             </div>
         </script>
 
         <script type="text/ng-template" trados-translation="true" id="groupByDialog">
             <div class="modal-header"style="padding:0px">
-                <h3 class="modal-title">Agrupar por campos (seleccionar uno o más campos)</h3>
+                <h3 class="modal-title"></h3>
             </div>
             <div class="modal-body">		
                 <div id="divTable"  style="max-height:300px;overflow:scroll;  ">
                     <div>                         
                         <li ng-repeat="group in groupByFields" class="btn-group" style="margin:5px">
-                            <button type="button" ng-click="selectField(group)" class="btn btn-sm" ng-class="{'btn-primary':group.selected}"><i class="fa" ng-class="{'fa-check-square-o':group.selected, 'fa-square-o':!group.selected }"></i> <span ng-include="'groupByFields'" onload="field=group.field"></span></button>                            
+                            <button type="button" ng-click="selectField(group)" class="btn btn-sm" ng-class="{'btn-primary':group.selected}"></button>                            
                         </li>
                     </div>
                     <div ng-if="selectedFields.length">  
-                        <div>Agrupar por</div>
+                        <div></div>
                         <ul class="pagination">                         
-                            <li ng-repeat-start="selected in selectedFields track by $index"><span ng-include="'groupByFields'" onload="field=selected.field"></span></li>
-                            <li ng-repeat-end><span ng-if="!$last">Luego por</span></li>
+                            <li ng-repeat-start="selected in selectedFields track by $index"></li>
+                            <li ng-repeat-end></li>
                         </ul> 
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()">Cancelar</button>
-                <button type="button" class="btn btn-primary pull-left" ng-click="apply()" ng-disabled="!selectedFields.length">Aplicar</button>
+                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()"></button>
+                <button type="button" class="btn btn-primary pull-left" ng-click="apply()" ng-disabled="!selectedFields.length"></button>
             </div>
         </script>
         <script type="text/ng-template"  trados-translation="true" id="groupByFields">
-            <span ng-switch="field"><span ng-switch-when="government">Gobierno</span> <span ng-switch-when="schema">Tipo de registro</span><!-- <span ng-switch-when="submissionYear">Submission year</span> --></span></script>
+            </script>
     </div>
 </div>

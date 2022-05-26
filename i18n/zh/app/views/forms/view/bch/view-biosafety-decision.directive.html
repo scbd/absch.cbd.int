@@ -43,7 +43,7 @@
 		<legend>一般信息</legend>		
 		<div ng-if="document.government">
 			<label name="country">国家</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 		</div>
 
 		<div ng-if="document.authorities">
@@ -346,7 +346,7 @@
 				</ul>
 			</div>
 		</div>
-	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
 		<legend>与其他数据库共享信息</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>此决定是否涉及与商业用途相关的改性活生物体？</label>

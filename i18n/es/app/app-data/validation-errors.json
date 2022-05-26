@@ -1,10 +1,10 @@
-﻿{
-"unknown"           : "Unknown error",
-"mandatory"         : "Field is mandatory" ,
-"mandatoryAnyOf"    : "One of the field is mandatory",
-"invalidValue"      : "The value specified is invalid" ,
-"invalidProperty"   : "This value cannot be specified" ,
-"unspecifiedLocale" : "A language is used but not specified in your document" ,
-"unexpectedTerm"    : "A specified term cannot be used" ,
-"invalidType"       : "The fields type is invalid"    
+{
+  "unknown": "Error desconocido",
+  "mandatory": "El campo es obligatorio",
+  "mandatoryAnyOf": "Uno de estos campos es obligatorio",
+  "invalidValue": "El valor especificado no es válido.",
+  "invalidProperty": "Este valor no se puede especificar",
+  "unspecifiedLocale": "Se utiliza un idioma pero no se especifica en el documento",
+  "unexpectedTerm": "No se puede utilizar un término especificado",
+  "invalidType": "El tipo de campo no es válido."
 }

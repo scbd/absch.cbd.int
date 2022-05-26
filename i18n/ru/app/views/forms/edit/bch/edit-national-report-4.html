@@ -13,8 +13,8 @@
                 <edit-form>
                     <div class="row">
                         <div class="col-xs-12">
-                            <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand"><a rel="noopener" translation-url href="#tab{{$index}}" data-toggle="tab" ng-class="{'disabled': !tab.render}" >Вопрос <span ng-bind="::tab.title"></span></a></li>
+                            <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
+                                <li class="nav-item" ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand"><a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab" ng-class="{'disabled': !tab.render}" >Вопрос <span ng-bind="::tab.title"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -97,8 +97,8 @@
                     </form>
                     <div class="row">
                         <div class="col-xs-12">
-                            <ul class="pagination" id="nrTabs">
-                                <li ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand"><a rel="noopener" translation-url href="#tab{{$index}}" data-toggle="tab" ng-class="{'disabled': !tab.render}">Вопрос <span ng-bind="::tab.title"></span></a></li>
+                            <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
+                                <li class="nav-item" ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand"><a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab" ng-class="{'disabled': !tab.render}">Вопрос <span ng-bind="::tab.title"></span></a></li>
                             </ul>
                         </div>
                     </div>
@@ -135,7 +135,7 @@
                     <div class="col-xs-12">
                         <div class="km-control-group" name="contact" caption="Contact person submitting the report" required>											
                             <div document-selector ng-model="document.contact" question="contact"  type="radio"
-                                government="document.government" schema="(contact focalPoint)" allow-new="true" allow-new-schema="contact"></div>			
+                            ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>			
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,7 @@
             <p>this pdf was generated from ABS-CH test website.<p>
         </div>
 
-        <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>
+        <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
 
         <div class="row1">
             <div class="col-xs-12 bg-green">
@@ -256,7 +256,9 @@
                     </ul>
 
                 </div>
-            </div><!-- <div ng-show="versions && false"> --><legend>تاريخ التعديلات</legend>
+            </div>
+
+            <legend>تاريخ التعديلات</legend>
             <div class="row top-border bg-litegreen">
                 
                 <table class="table">
@@ -276,7 +278,8 @@
                         </td>
                     </tr>
                     
-                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;"><!-- <hr style="border-color:#FFF;margin:3;padding:3;"> --><td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
+                        <td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
                         <td class="col-xs-2"><span ng-show="document.body.amendmentIntent==1"><span class="bold color-red">مرفوضة</span></span> <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))"><span class="bold color-green">نسخة قديمة</span></span> <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)"><span class="bold color-green">نسخة حالية</span></span></td>
                         <td class="col-xs-4"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <span ng-show="document.body.amendmentIntent==undefined">معلومات التصريح المنشورة في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع والشهادة التي تم إنشاؤها.</span></td>
                         <td class="col-xs-4" ng-bind="document | uniqueID">
@@ -284,7 +287,10 @@
                     </tr>
 
                 </table>
-            </div><!-- </div> --><legend>معلومات إضافية</legend>
+            </div>
+           
+
+            <legend>معلومات إضافية</legend>
             <table class="top-border">
                 <tr>
                     <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">Questions about the permit or its equivalent constituting an internationally recognized certificate of compliance should be addressed to the competent national authority issuing the permit or its equivalent. يمكن الاطلاع على معلومات إضافية عن التصريح أو ما يعادله في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع ( <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> يمكنكم توجيه أي استفسارات أو أسئلة حول بروتوكول ناغويا بشأن الحصول على الموارد وتقاسم المنافع أو آلية عمل غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع إلى الأمانة العامة لاتفاقية التنوع البيولوجي.</td>

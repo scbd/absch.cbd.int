@@ -1,76 +1,71 @@
-export const categories  =
-    [
-  {
+export const categories = [{
     "title": "About",
     "adminTags": [
       "about"
     ],
-  "articles": [
-    {
-      "title": "What is the Biosafety Clearing-House (BCH)?",
-      "identifier": "619c553658029700017ff43b"
-    },
-    {
-      "title": "BCH benefits for Parties and non-Parties",
-      "identifier": "619c55594f1f30000140eeec"
-    },
-    {
-      "title": "Modalities of operation of the BCH (Annex to BS-I/3)",
-      "identifier": "619c553c0c1ff000011c1c22"
-    },
-    {
-      "title": "Relationship between BCH and the other clearing-houses of the Convention",
-      "identifier": "619c553e0c1ff000011c1c24"
-    },
-    {
-      "title": "Categories of information in the BCH",
-      "identifier": "619c553f4f1f30000140eeba"
-    },
-    {
-      "title": "BCH on BCH Forum",
-      "identifier": "619c554e58029700017ff467"
-    }
-  ]
-},
-{
-  "title": "Getting started",
-  "adminTags": [
-    "getting-started"
-  ],
-  "articles": [
-    {
-      "title": "Signing up for an account",
-      "identifier": "619c554258029700017ff447"
-    },
-    {
-      "title": "Types of users who can submit information in the BCH",
-      "identifier": "619c555c58029700017ff475"
-    },
-    {
-      "title": "BCH National Focal Points",
-      "identifier": "619c553d58029700017ff445"
-    },
-    {
-      "title": "Procedure for nominating National Focal Points",
-      "identifier": "619c555d4f1f30000140eef4"
-    },
-    {
-      "title": "National Authorized Users (NAUs)",
-      "identifier": "619c55374f1f30000140eeae"
-    },
-    {
-      "title": "Designating or updating National Authorized Users (NAUs)",
-      "identifier": "619c554558029700017ff44d"
-    }
-  ]
-},
+    "articles": [{
+        "title": "What is the Biosafety Clearing-House (BCH)?",
+        "identifier": "619c553658029700017ff43b"
+      },
+      {
+        "title": "BCH benefits for Parties and non-Parties",
+        "identifier": "619c55594f1f30000140eeec"
+      },
+      {
+        "title": "Modalities of operation of the BCH (Annex to BS-I/3)",
+        "identifier": "619c553c0c1ff000011c1c22"
+      },
+      {
+        "title": "Relationship between BCH and the other clearing-houses of the Convention",
+        "identifier": "619c553e0c1ff000011c1c24"
+      },
+      {
+        "title": "Categories of information in the BCH",
+        "identifier": "619c553f4f1f30000140eeba"
+      },
+      {
+        "title": "BCH on BCH Forum",
+        "identifier": "619c554e58029700017ff467"
+      }
+    ]
+  },
+  {
+    "title": "Getting started",
+    "adminTags": [
+      "getting-started"
+    ],
+    "articles": [{
+        "title": "Signing up for an account",
+        "identifier": "619c554258029700017ff447"
+      },
+      {
+        "title": "Types of users who can submit information in the BCH",
+        "identifier": "619c555c58029700017ff475"
+      },
+      {
+        "title": "BCH National Focal Points",
+        "identifier": "619c553d58029700017ff445"
+      },
+      {
+        "title": "Procedure for nominating National Focal Points",
+        "identifier": "619c555d4f1f30000140eef4"
+      },
+      {
+        "title": "National Authorized Users (NAUs)",
+        "identifier": "619c55374f1f30000140eeae"
+      },
+      {
+        "title": "Designating or updating National Authorized Users (NAUs)",
+        "identifier": "619c554558029700017ff44d"
+      }
+    ]
+  },
   {
     "title": "Submitting information",
     "adminTags": [
       "submitting-information"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "Common formats",
         "identifier": "619c55464f1f30000140eec8"
       },
@@ -101,8 +96,7 @@ export const categories  =
     "adminTags": [
       "finding-information"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "Searching for the information in the BCH",
         "identifier": "619c553a4f1f30000140eeb2"
       },
@@ -133,8 +127,7 @@ export const categories  =
     "adminTags": [
       "lmo-gene-orga"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "Submitting a new LMO in the BCH",
         "identifier": "619c55390c1ff000011c1c20"
       },
@@ -165,8 +158,7 @@ export const categories  =
     "adminTags": [
       "interoperability"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "Interoperability with the BCH",
         "identifier": "619c553958029700017ff43d"
       },
@@ -182,8 +174,7 @@ export const categories  =
       "meetings",
       "iac"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "BCH Informal Advisory Committee (BCH-IAC) and its role",
         "identifier": "619c553a58029700017ff441"
       },
@@ -198,8 +189,7 @@ export const categories  =
     "adminTags": [
       "getting-help"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "Help material available in the BCH",
         "identifier": "619c55574f1f30000140eeea"
       },
@@ -218,8 +208,7 @@ export const categories  =
     "adminTags": [
       "faq"
     ],
-    "articles": [
-      {
+    "articles": [{
         "title": "What are “National Records”, “Reference Records” and “SCBD records”?",
         "identifier": "619c55594f1f30000140eeee"
       },

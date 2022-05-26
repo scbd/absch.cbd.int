@@ -32,7 +32,7 @@
             </div>
 
         </div>
-    </div><!-- Modal -->  <script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
+    </div><!-- Modal --><script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header bg-grey ">
                 <div ng-if="!allowNew.editingOn">
@@ -133,7 +133,9 @@
                 </div>
             </div>
         </div>
-    </script><script type="text/ng-template" trados-translation="true" id="documentSelectionRecordDisplay">
+    </script>
+
+    <script type="text/ng-template" trados-translation="true" id="documentSelectionRecordDisplay">
         <div class="col-md-12">
             <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
                 <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
@@ -204,4 +206,5 @@
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
         </div>
-    </script></div>
+    </script>
+</div>

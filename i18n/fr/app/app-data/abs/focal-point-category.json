@@ -1,8 +1,7 @@
-﻿{
-    "absNfp"  : "ABS National Focal Point",
-    "cbdNfp"  : "CBD Primary Focal Point",
-    "cbdSfp"  : "CBD Secondary Focal Point",
-    "pNfp"    : "Protected Areas NFP", 
-    "gNfp"    : "GTI NFP"
+{
+  "absNfp": "Correspondants nationaux de l’APA",
+  "cbdNfp": "Correspondant national primaire de la Convention sur la diversité biologique",
+  "cbdSfp": "Correspondant national secondaire de la Convention sur la diversité biologique",
+  "pNfp": "Correspondant national pour les aires protégées",
+  "gNfp": ""
 }
-

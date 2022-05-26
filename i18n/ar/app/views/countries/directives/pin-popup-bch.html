@@ -3,10 +3,7 @@
     <div ng-if="currentCountry.code" style="padding:5px;"
      ng-class="{'bg-party': currentCountry.isParty, 'bg-non-party':!currentCountry.isParty, 
                 'bg-inbetween': currentCountry.isInbetweenParty}">
-        <div><span ng-if="currentCountry.isParty"
-                >طرف في بروتوكول التنوع البيولوجي</span> <span ng-if="currentCountry.isInbetweenParty"
-                >مُعتمد، لكنه ليس طرفًا بعد</span> <span ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty"
-                >ليس طرفًا في بروتوكول التنوع البيولوجي</span></div>
+        <div></div>
 
         <div class="row abs-exception-tooltip"
         ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
@@ -14,19 +11,17 @@
                 countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
             <div class="col-lg-12">
                 <div class="small" ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')"
-                    style="margin-top:5px;white-space: normal;padding:3px;">تصديق الدنمارك على البروتوكول لا يسري على كل من جرينلاند وجزر فاروي.</div>
-                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;">هناك نزاع بين حكومتي الأرجنتين والمملكة المتحدة لبريطانيا العظمى وأيرلندا الشمالية بشأن السيادة على جزر فوكلاند (مالفيناس).</div>
-                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">إقليم لا يتمتع بالحكم الذاتي.</div>
-                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;">تصديق المملكة المتحدة على بروتوكول قرطاجنة لا يسري على <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="أنغيلا، وبرمودا، والمنطقة البريطانية في القارة القطبية، ومنطقة المحيط الهندية البريطانية، وجزر فيرجين البريطانية، وجزر الكايمان، وجزر فوكلاند، وجزيرة مونتسيرات، وجزيرة بيتكيرن، وجزر سانت هيلينا وأسينشين وتريستان دا كونا، جورجيا الجنوبية وجزر ساندويتش الجنوبية، ومناطق القاعدة السيادية لأكروتيري وديكيليا، وجزر توركس وكايكوس">13 إقليمًا أخرى لها تقع فيما وراء البحار</a> أو <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="بيلويك جيرسي، وﺑﻳﻠﻭيك ﺟﻳﺭﻧﺯﻱ، وجزيرة مان">على 3 ملحقات أخرى مُلحقة بالتاج البريطاني وهي</a></div>
+                    style="margin-top:5px;white-space: normal;padding:3px;"></div>
+                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;"></div>
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;"></div>
+                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;"></div>
             </div>
         </div>
     </div>
     <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
             <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
-                <td ><span class="badge bg-black"  ng-bind="schema.count"></span></td>
-                <td><a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span> <span ng-if="schema.isRegional">- <span ng-bind="schema.regionalGovernment|term:locale"></span></span></a> <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a></td>
+                <td ></td>
+                <td></td>
             </tr>
         </table>
 </div>

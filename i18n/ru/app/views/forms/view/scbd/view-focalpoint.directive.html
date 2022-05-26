@@ -5,7 +5,7 @@
 	<div class="record-body panel-body">	
 			
 		<document-date></document-date><br><div ng-if="document.government">
-			<label>Страна</label><span class="km-value"><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a> <span ng-party-status code="document.government.identifier" id="government"></span></span></div>
+			<label>Страна</label><span class="km-value"><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></span></div>
 
 		<div ng-if="document.firstName||document.lastName">
 			<label>Название</label><span class="km-value">{{document.title | lstring:locale}} {{document.firstName | lstring:locale}} {{document.lastName | lstring:locale}}</span></div>
@@ -53,7 +53,7 @@
 				</div>
 			</div>
 		<div ng-if="focalPointDetails.url_ss">
-			<label>Ссылка на информацию на веб-сайте КБР</label><span class="km-value"><a rel="noopener" translation-url  ng-href="{{focalPointDetails.url_ss[0]|encodeURIComponent}}" target="_blank">{{focalPointDetails.url_ss[0]}}</a></span></div>
+			<label>Ссылка на информацию на веб-сайте КБР</label><span class="km-value"><a rel="noopener" translation-url  ng-href="{{focalPointDetails.url_ss[0]}}" target="_blank">{{focalPointDetails.url_ss[0]}}</a></span></div>
 	</div>
 	
         <div document-metadata  class="panel-footer"></div>

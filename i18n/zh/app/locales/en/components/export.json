@@ -3,7 +3,7 @@
   "dialogTitle": "导出结果",
   "downloadFormat": "下载格式",
   "xls": "XLS (Excel)",
-  "xlsx": "",
+  "xlsx": "XLSX (Excel)",
   "csv": "CSV（逗号分隔）",
   "processing": "正在处理...",
   "recordsFound": "已找到记录",

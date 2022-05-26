@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="<%=preferredLanguage||'en'%>" app-version="<%=appVersion%>">
+
+<head>
+    <base href="<%=baseUrl%>">
+    <meta charset="utf-8">
+    <title ng-bind="ngMeta.title"></title>
+    <meta name="description" content="{{ngMeta.description}}">
+    <link name="canonical" rel="canonical" href="{{ngMeta.canonical}}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" charset="utf-8">
+    <link rel="shortcut icon" href="/app/img/favicon.png"><!-- Bootstrap core CSS --><link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>npm/bootstrap@3.3.0/dist/css/bootstrap.min.css">   
+    <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>combine/<%=initialCss%>" />
+    <link rel="stylesheet" type="text/css" href="/app/css/km.css?v=<%=appVersion%>">
+    <link rel="stylesheet" type="text/css" href="/app/css/template.css?v=<%=appVersion%>">
+    <link rel="stylesheet" type="text/css" href="/app/css/colors.css?v=<%=appVersion%>">
+    
+    <link rel="stylesheet" type="text/css" href="/app/css/abs/template.css">
+    <link rel="stylesheet" type="text/css" href="/app/css/custom-bs5.css">
+    <link rel="stylesheet" type="text/css" href="/app/css/new-css.css"><!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]--> <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries --> <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]--></head>
+<body ng-controller="AbschTemplateController" id="top" lang="<%=preferredLanguage||'en'%>"><span style='display:none' id="appTitle">Centre d&apos;&eacute;change sur l&rsquo;Acc&egrave;s et partage des avantages</span> <span style='display:none' id="appDescription">Centre d&apos;&eacute;change sur l&rsquo;Acc&egrave;s et partage des avantages</span> <span id="appBaseUrl" style="display:none"><%=baseUrl%></span><app-loading>
+        <div class="m-app-loading" ng-animate-children>
+    
+            <style type="text/css">div.m-app-loading div.animated-container { background-color: #FFFFFF ; bottom: 0px ; left: 0px ; opacity: 1.0 ; right: 0px ; top: 0px ; z-index: 999999 ; } /* Used to initialize the ng-leave animation state. */ div.m-app-loading div.animated-container.ng-leave { opacity: 1.0 ; transition: all linear 200ms ; -webkit-transition: all linear 200ms ; } /* Used to set the end properties of the ng-leave animation state. */ div.m-app-loading div.animated-container.ng-leave { opacity: 0 ; } div.m-app-loading div.messaging { color: #1FA65D ; font-family: monospace ; left: 0px ; margin-top: -37px ; position: absolute ; right: 0px ; text-align: center ; top: 30% ; } div.m-app-loading h1 { font-size: 26px ; line-height: 35px ; margin: 0px 0px 20px 0px ; } div.m-app-loading p { font-size: 18px ; line-height: 14px ; margin: 0px 0px 0px 0px ; }</style>
+        
+            <div class="animated-container">
+                <div class="messaging"><span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"><img src="https://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:80px;"></span><h1><br/><div class="color-black" id="appLoadingMessage">Chargement du  <br/>Centre d&rsquo;&eacute;change d&apos;informations APA</div>version <%=appVersion%><div class="color-red" id="appLoadingError" style="display: none;"><span>Erreur de chargement du  <br/>Centre d&rsquo;&eacute;change d&apos;informations APA</span> <br/> <span>Veuillez contacter le Secr&eacute;tariat</span><div>
+                                <button type="button" class="btn btn-danger" id="showError">Montrer le d&eacute;tail de l&apos;erreur</button><code style="display: none;word-break: break-all;color: #fff;background-color: #d9534f;border-color: #d43f3a;" id="detailErrorMessage"></code></div>
+                        </div><br/><br/> <i class="fa fa-spin fa-3x fa-circle-o-notch app-loading-icon"></i></h1>
+                </div>
+            </div>
+        </div>
+    </app-loading>
+    <div class="alert alert-info alert-dismissible lang-alert" ng-if="'<%=preferredLanguage%>'!='en'" style="margin-bottom:1px"><a rel="noopener" href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a> <strong>Veuillez noter que la traduction du Centre d&rsquo;&eacute;change d&apos;informations APA est en cours...</strong></div>
+
+    <div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
+    <div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
+    <div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
+    <div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div><!-- PAGE --><div class="ng-cloak">
+    <scbd-header></scbd-header>
+   
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper" ng-class="{'activate':openSideBarType}">
+            <div  ng-if="openSideBarType" class="easing" >
+                <docked-side-bar type="openSideBarType"></docked-side-bar>
+            </div>
+        </div>
+    
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="easing">
+                    <absch-header></absch-header>
+                    <div class="page-content">
+                        <route-loading></route-loading>
+                        <ng-view autoscroll="true"></ng-view>                
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </div>
+
+    <absch-footer></absch-footer>
+    <cbd-footer></cbd-footer>
+
+</div>
+    
+<div class="device-size visible-xs" size="xs" style="height:0px;width:0px"></div>
+<div class="device-size visible-sm" size="sm" style="height:0px;width:0px"></div>
+<div class="device-size visible-md" size="md" style="height:0px;width:0px"></div>
+<div class="device-size visible-lg" size="lg" style="height:0px;width:0px"></div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-kQtW33rZJAHjgefvhyyzcGF3C5TFyBQBA13V1RKPf4uH+bwyzQxZ6CmMZHmNBEfJ" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"><!-- Bootstrap core JavaScript
+    ================================================== --><script>
+        // In IE boot.js is executing before this script was executed so move it before boot.js       
+        
+        window.scbdApp = {
+            template         : 'templates/absch/absch',
+            host             : '<%=clearingHouseHost%>',
+            version          : '<%=appVersion%>',
+            lang             : '<%=preferredLanguage%>',
+            title            : document.getElementById('appTitle').innerText,
+            description      : document.getElementById('appDescription').innerText,
+            analytics        : '<%=googleAnalyticsCode%>'
+        }        
+    </script>
+    <script src="<%=cdnUrl%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
+    <script src="<%=cdnUrl%>combine/<%=angularBundle%>"></script>
+    <script>
+        require(["app/<%=bootFile%>"], function(boot){
+            var bootFn = boot.default || boot;
+            bootFn(window, require, define);
+        });
+    </script>
+    
+    <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script>
+        /**************************
+          For outdate browser check
+        **************************/
+        function addLoadEvent(func) {
+            var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } 
+        }
+        addLoadEvent(function() {
+            var langARRegex = /^\/ar\//;
+            var location = window.location;
+            if(langARRegex.test(location.pathname)){
+             document.getElementsByTagName("body")[0].setAttribute("dir", "rtl");   
+            }
+
+        });
+        if('<%=googleAnalyticsCode%>'!=''){
+            window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+            ga('create', '<%=googleAnalyticsCode%>', 'auto');
+            ga('set',    'hostname', window.location.hostname);
+            ga('set',    'location', undefined);
+        }
+
+    </script>
+
+</body>
+
+</html>

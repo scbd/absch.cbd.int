@@ -14,7 +14,7 @@
 
 		<div ng-show="document.government" >
 			<label name="country">Страна</label>
-			<div class="km-value"><span><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></span> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value"><span><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></span></div>
 		</div>
 
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
@@ -38,7 +38,7 @@
 				</ul>
 
 				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
-					<li ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"><i class="fa fa-external-link"></i> <span ng-bind="item.name||item.url"></span></a></li>
+					<km-link-list ng-model="document.websites" ></km-link-list>
 				</ul>
 			</div>
 		</div>
@@ -171,9 +171,9 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
-			<div class="km-value" compare-val="relevantDocuments">
-				<div ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a></div>
-			</div>
+				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+					<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				</div>
 			</div>
 		</div>
 		<div>

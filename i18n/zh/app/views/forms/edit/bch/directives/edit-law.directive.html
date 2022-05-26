@@ -117,7 +117,7 @@
 											<div class="km-control-group subject-areas" name="cpbSubjectAreas" required caption="主题领域">
 												<div class="help-block">本节提供了与所涉主题相关的关键词，以协助记录搜索和翻译。可在下面提供更多细节。</div>
 												<div km-term-check required ng-model="document.cpbSubjectAreas" locales="document.header.languages"
-													terms="options.subjectAreas()" show-other="true" binding-type="term[]"></div>
+													terms="options.subjectAreas()" show-description="true" show-other="true" binding-type="term[]"></div>
 											</div>
 										</div>
 									</div>
@@ -133,7 +133,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="description" caption="文件（包含目标和范围）的简要描述">
-												<div class="help-block"><i>目标</i>示例："The objective of this Act is to contribute to ensuring an adequate level of protection in the field of the safe transfer, handling and use of living modified organisms resulting from modern biotechnology that may have adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, and specifically focusing on transboundary movements." <br/> <br/> <i>范围</i>示例：“这些法规适用于所有可能对生物多样性的保护和持续利用有不利影响的改性活生物体的越境转移、运输、处理和使用，还考虑到对人体健康的风险。”</div>
+												<div class="help-block"><i>目标</i>示例： "The objective of this Act is to contribute to ensuring an adequate level of protection in the field of the safe transfer, handling and use of living modified organisms resulting from modern biotechnology that may have adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, and specifically focusing on transboundary movements." <br/> <br/> <i>范围</i>示例：“这些法规适用于所有可能对生物多样性的保护和持续利用有不利影响的改性活生物体的越境转移、运输、处理和使用，还考虑到对人体健康的风险。”</div>
 												<div km-rich-textbox ng-model="document.description" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>

@@ -1,7 +1,7 @@
 ﻿<div id="Record" class="record panel panel-default" >
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
+		<h4></h4>	
 	</div>
 
 	<div class="record-body panel-body" help schema="ViewCP" >
@@ -11,86 +11,62 @@
 
 		 <div name="article17-1-a"></div>
 
-		<legend ng-if="document.government || document.name">Общая информация</legend>
+		<legend ng-if="document.government || document.name"></legend>
 
 		<div ng-show="document.government">
-			<label name="country">Страна</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			<label name="country"></label>
+			<div class="km-value" compare-val></div>
 		</div>
 
 		 <div ng-show="display('title') && document.name">
-		 <label>Название контрольного пункта</label>
-		 	<div class="km-value" compare-val><strong><span ng-bind="document.name | lstring:locale"></span></strong></div>
+		 <label></label>
+		 	<div class="km-value" compare-val></div>
 		 </div>
 
 
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
 			document.jurisdictionName || document.responsibleFunctions || document.valueChainStage">
-			<legend name="Responsibilities">Обязанности контрольного пункта</legend><!-- <div ng-show="document.responsibleFunctions">
-				<label>Responsible functions</label>
-				<div  class="km-value" compare-val>
-					<view-terms-hierarchy  ng-model="document.responsibleFunctions" locale="locale"
-						term-domain="responsibleFunctions" on-terms-loaded="onResponsibleFunctionsTerms(terms)"></view-terms-hierarchy>
-				</div>
-			</div> --><div ng-if="document.valueChainStage">
-				<label>Этап, на котором происходит сбор или получение информации</label>
+			<legend name="Responsibilities"></legend><div ng-if="document.valueChainStage">
+				<label></label>
 				<div compare-val>
 					<div class="km-value" ng-bind="document.valueChainStage | term:locale"></div>
 				</div>
 			</div>
 
-			<div ng-show="document.responsibilities"><!--<label>Short description of responsibilities</label>--><div compare-val="responsibilities">
+			<div ng-show="document.responsibilities"><div compare-val="responsibilities">
 				<div class="km-value km-pre" ng-bind-html="document.responsibilities|lstring:locale"></div>
 				</div>
 			</div>
 			<div ng-show="document.jurisdiction">
-				<label>Район юрисдикции</label>
+				<label></label>
 				<div class="km-value" compare-val>
 					<ul class="list">
-						<li><span ng-bind="document.jurisdiction|term"></span> <span ng-if="isSubNational() ||isCommunity() || isOthers()">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span></li>
+						<li></li>
 					</ul>
 				</div>
-			</div><!-- <div  ng-show="document.inquiryContact">
-				<label>Contact information for inquires related to the information gathered or the functioning of this checkpoint</label>
-				<div compare-val="inquiryContact">
-					<div class="km-value"  ng-repeat="contact in document.inquiryContact" >
-						<span view-record-reference ng-model="contact" locale="locale"></span>
-					</div>
-				</div>
-			</div> --> <!--<div ng-show="document.jurisdictionName">
-				<label ng-show="isSubNational()">Name of the sub-national jurisdiction</label>
-				<label ng-show="isCommunity()">Name of the community jurisdiction</label>
-				<label ng-show="isOthers()">Other jurisdiction</label>
-				<div class="km-value">{{document.jurisdictionName | lstring:locale}}</div>
-			</div>--></div>
+			</div></div>
 
 		<div ng-if="document.informAllAuthorities || document.contactsToInform" >
-			<legend>Орган(ы) власти, который(-е) будет(-ут) получать в порядке любезности копии коммюнике контрольного пункта</legend>
+			<legend></legend>
 
-			<div class="help-info" style="padding-top:10px;">Указанные ниже контактные лица будут получать по электронной почте копии коммюнике контрольного пункта о собранной или полученной и опубликованной информации от данного контрольного пункта.</div>
-			<div class="km-value" ng-show="document.informAllAuthorities">Все назначенные компетентные национальные органы <strong><span ng-bind="document.government|term:locale"></span></strong>, которые были отобраны для автоматического получения по электронной почте коммюнике, опубликованных данным контрольным пунктом.</li>
+			<div class="help-info" style="padding-top:10px;"></div>
+			<div class="km-value" ng-show="document.informAllAuthorities"></li>
 
 			</div>
 			       
 			
 			<div  ng-show="document.contactsToInform">
 				<div compare-val="contactsToInform">
-					<div class="km-value"  ng-repeat="authority in document.contactsToInform" ><span view-record-reference ng-model="authority" locale="locale"></span></div>
+					<div class="km-value"  ng-repeat="authority in document.contactsToInform" ></div>
 				</div>
-				</div><!--<div ng-show="document.contactsToInform" class="row">
-				<div ng-repeat="contact in document.contactsToInform">
-					<div class="col-xs-12">
-						<div view-record-reference ng-model="contact" locale="locale" class="well"></div>
-					</div>
-				</div>
-			</div>--><div compare-val>
-			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform"><span >Дополнительные органы власти не были отобраны для автоматического получения по электронной почте копий коммюнике, опубликованных данным контрольным пунктом.</span></div>
+				</div><div compare-val>
+			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Дополнительная информация</legend>
+			<legend></legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val="relevantInformation">
@@ -99,7 +75,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Другие соответствующие ссылки или прилагаемые документы</label>
+				<label></label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>

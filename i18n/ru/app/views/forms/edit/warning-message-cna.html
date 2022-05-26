@@ -1,7 +1,7 @@
 ﻿<div ng-show="showWarning">
     <div class="well" ng-if="responsibleCNA && responsibleCNA.numFound > 0">
-        <h3 class="color-red">Информация о КНО, который указан как единственный КНО, назначенный для вашей страны, уже опубликована.</h3>
-            <h5 class="color-red">Вы можете сохранить черновики, но не сможете опубликовать сведения о новом КНО до тех пор, пока не обновите следующую запись:</h5>
+        <h3 class="color-red"></h3>
+            <h5 class="color-red"></h5>
             <div>
             <div ng-repeat="rec in responsibleCNA.docs">
                 <result-default doc='rec' type="nationalRecords"></result-default>

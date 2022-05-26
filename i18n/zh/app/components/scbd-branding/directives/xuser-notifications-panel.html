@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <div class="pull-right"><a rel="noopener" type="button" class="color-litegrey" href="/register/user-preferences">管理您的电子邮件通知</a> | <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">全部标记为已读</a></div>
+            <div class="pull-right"><a rel="noopener" type="button" class="color-litegrey" href="register/user-preferences">管理您的电子邮件通知</a> | <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">全部标记为已读</a></div>
         </div>
     </div>
 
@@ -74,7 +74,7 @@
                     <div class="notification-spacing5"><i class="fa fa-lg fa-calendar"></i> <br/> <span class="notification-icon-text">提醒</span></div>
                 </div>
                 <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-calendar"></i> <span class="notification-title" ng-if="notification.data.action==='request'">提示：Publishing request pending approval.</span> <span class="notification-title" ng-if="notification.data.action==='delete-request'">提示：Delete request pending approval.</span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-calendar"></i> <span class="notification-title" ng-if="notification.data.action==='request'">提示： Publishing request pending approval.</span> <span class="notification-title" ng-if="notification.data.action==='delete-request'">提示： Delete request pending approval.</span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
                         <div class="hidden-xs notification-spacing5"><span class="notification-label">Requested by:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">，日期：</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                     <div class="notification-spacing5"><i class="fa fa-lg fa-rotate-left"></i> <br/> <span class="notification-icon-text">请求已召回</span></div>
                 </div>
                 <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"></i> <span class="notification-title">请求已召回<span class="hidden-xs">：The requester has cancelled their request for publishing a record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"></i> <span class="notification-title">请求已召回<span class="hidden-xs">： The requester has cancelled their request for publishing a record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
                         <div class="hidden-xs notification-spacing5"><span class="notification-label">Recalled by:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">，日期</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
@@ -98,7 +98,7 @@
                     <div class="notification-spacing5"><i class="fa fa-lg fa-times-circle"></i> <br/> <span class="notification-icon-text">请求已被拒绝</span></div>
                 </div>
                 <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"></i> <span class="notification-title">请求已被拒绝<span class="hidden-xs">：<span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has rejected as request for publishing</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"></i> <span class="notification-title">请求已被拒绝<span class="hidden-xs">： <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has rejected as request for publishing</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
                         <div class="hidden-xs notification-spacing5"><span class="notification-label">Rejected by:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span><span class="notification-label">，日期</span><span>{{notification.createdOn | formatDateWithTime}}</span><div ng-if="notification.data.info"><span class="notification-label" ng-if="notification.data.info">原因：</span> <span  ng-bind="notification.data.info"></span></div>
                         </div>
                     </div>
@@ -111,7 +111,7 @@
                     <div class="notification-spacing5"><i class="fa fa-lg fa-check-circle"></i> <br/> <span class="notification-icon-text">请求已获批准</span></div>
                 </div>
                 <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"></i> <span class="notification-title">请求已获批准<span class="hidden-xs">：<span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has approved a request and published the record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"></i> <span class="notification-title">请求已获批准<span class="hidden-xs">： <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has approved a request and published the record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
                         <div class="hidden-xs notification-spacing5"><span class="notification-label">Approved by:</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span><span class="notification-label">，日期</span><span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>

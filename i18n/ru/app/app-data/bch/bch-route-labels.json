@@ -1,14 +1,14 @@
 {
-    "theBch":"BCH",
-    "submit":"Submit",
-    "new":"New",
-    "edit":"Edit",
-    "lmoDecisions":"LMO decisions",
-    "registries":"Registries",
-    "lmoRegistry":"LMO registry",
-    "organismsRegistry":"Organisms registry",
-    "geneRegistry":"Gene registry",
-    "forbidden":"Forbidden",
-    "notFound":"Not found",
-    "pageNotFound":"Page not found"
+  "theBch": "МПБ",
+  "submit": "Представить",
+  "new": "Создать",
+  "edit": "Правка",
+  "lmoDecisions": "Решения о ЖИО",
+  "registries": "Реестры",
+  "lmoRegistry": "Реестр ЖИО",
+  "organismsRegistry": "Реестр организмов",
+  "geneRegistry": "Реестр генов",
+  "forbidden": "Запрещено",
+  "notFound": "Не найдено",
+  "pageNotFound": "Страница не найдена"
 }

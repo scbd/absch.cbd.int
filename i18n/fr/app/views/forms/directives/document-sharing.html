@@ -1,7 +1,10 @@
-﻿<span class="document-sharing"><button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
+﻿<div class="document-sharing">
+    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
     title="Partager"><i class="fa fa-firefox"></i> <span class="hidden-xs">Partager</span></button>
     <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
-    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>  </span><script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
+    title="PDF"><i class="fa fa-file-pdf-o"></i> <span class="hidden-xs">PDF</span></button>
+
+    <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header">Partager le projet de fichier : <span ng-bind="title"></span></div>
             <div class="modal-body">
@@ -12,15 +15,14 @@
                         <div role="tabpanel" class="tab-pane active" id="url">
                             <div class="row">
                                 <div ng-if="isLoading"><i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> chargement en cours...</div>
-                                <div class="content" ng-hide="isLoading">
-                                    <label>Quiconque détient l’hyperlien peut consulter le projet de document et pourra également visualiser les mises à jour jusqu’à ce que le projet ait été publié ou supprimé.</label>
+                                <div class="content" ng-hide="isLoading"><br/><div class="alert alert-info"><i class="fa fa-info-circle"></i> Quiconque détient l’hyperlien peut consulter le projet de document et pourra également visualiser les mises à jour jusqu’à ce que le projet ait été publié ou supprimé.</div>
                                     <div style="margin:auto" class="pull-right"><a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">Créer un lien</a> <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i></div>
                                     <div>
                                         <table class="table table-stripped" style="width:100%">
                                             <tr>
                                                 <td>#</td>
                                                 <td>Expiration/Statut</td>
-                                                <td>Lien</td>
+                                                <td>Link/Email(s)</td>
                                                 <td class="hidden-xs">Créé le</td>
                                             </tr>
                                             <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
@@ -29,7 +31,8 @@
                                                 <td width="70%">
                                                     <div class="btn-group" style="width:100%">
                                                         <div class="input-group" >
-                                                            <input type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/><span style="cursor:pointer" class="input-group-addon" id="basic-addon1"><a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"></i> <span class="hidden-xs">ouvrir</span></a></span> <span style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)"><i class="fa fa-copy"></i> <span class="hidden-xs">copier</span></span> <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)"><i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i> <i class="fa fa-thumbs-down"></i> <span class="hidden-xs">révoquer</span></span></div>
+                                                            <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::link.sharedWith.emails}}" disabled readonly/>
+                                                            <input ng-if="!link.sharedWith.emails" type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control hidden-xs" value="{{::getUrl(link.urlHash)}}" disabled readonly/><span  ng-if="!link.sharedWith.emails" style="cursor:pointer" class="input-group-addon" id="basic-addon1"><a ng-href="{{::getUrl(link.urlHash)}}" target="_blank"><i class="fa fa-link"></i> <span class="hidden-xs">ouvrir</span></a></span> <span  ng-if="!link.sharedWith.emails" style="cursor:pointer" class="input-group-addon" id="basic-addon2" ng-click="copyUrl($index+1)"><i class="fa fa-copy"></i> <span class="hidden-xs">copier</span></span> <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" style="cursor:pointer" class="input-group-addon" id="basic-addon3" ng-click="revokeLink(link)"><i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i> <i class="fa fa-thumbs-down"></i> <span class="hidden-xs">révoquer</span></span></div>
                                                     </div>
                                                 </td>
                                                 <td class="hidden-xs" ng-bind="link.meta.createdOn|formatDateWithTime"></td>
@@ -46,22 +49,24 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="email">
                             <div class="row">
-                                <div class="content">
-                                    <div>Nous enverrons aux destinataires un courriel avec le lien pour voir ce document provisoire.</div>
-                                    <hr/>Courriels <br/><input type="text" placeholder="entrer un courriel" class="form-control" ng-model="document.sharedWith.emails" />
+                                <div class="content"><br/><div class="alert alert-info"><i class="fa fa-info-circle"></i> Nous enverrons aux destinataires un courriel avec le lien pour voir ce document provisoire.</div>
+                                    <hr/>Courriels <br/><div class="input-group" >
+                                        <input type="text" placeholder="entrer un courriel"  class="form-control" ng-model="shareEmails" /><span class="input-group-btn"><button type="button" class="btn btn-primary pull-right" ng-click="shareEmail(shareEmails)" ng-disabled="status=='creatingLink'">Émetteur</button></span></div>
                                     <div><span style="font-size: smaller;color: #777575;">Utiliser les virgules pour séparer plusieurs adresses courriel. Les destinataires doivent se connecter au Centre d’échange avec cette adresse courriel afin de visualiser le projet de document.</span></div>
-                                    <div><span ng-if="status=='creatingLink'"> <i class="fa fa-spin fa-spinner" /> Mise à jour...</span><button type="button" class="btn btn-primary pull-right" ng-click="shareEmail()" ng-disabled="status=='creatingLink'">Émetteur</button>
-                                    </div><br/></div>
+                                    <div><span ng-if="status=='creatingLink'"><i class="fa fa-spin fa-spinner"></i> Mise à jour...</span></div><br/></div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Fermer</button>
+                    <div class="row">
+                        <button type="button" class="btn btn-primary pull-right" ng-click="close()" >Fermer</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </script><script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
+    </script>
+    <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal">
             <div class="modal-header">Générer un PDF à parti de ce projet de fichier : <span  ng-bind="title"></span></div>
             <div class="modal-body">
@@ -81,3 +86,5 @@
             </div>
         </div>
     </script>
+
+</div>

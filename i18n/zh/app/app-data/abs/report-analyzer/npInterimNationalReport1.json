@@ -1,1373 +1,459 @@
-﻿[
-    {
-      "key": "General",
-      "title": "Institutional structures for the implementation of the Protocol",
-      "questions": [
-          {
-              "key": "Q003",
-              "section": "General",
-              "number": "3",
-              "type": "option",
-              "title": "Has your country made the information available to the ABS Clearing-House as provided in Article 14.2?",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"}
-              ],
-              "additionalInfo" : [
-                  {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered  and answer all the following questions.", "type" : "string"},
-                  {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"}            
-              ]
-          },
-          {
-              "key": "Q004",
-              "section": "General",
-              "number": "4",
-              "type": "option",
-              "title": "Has your country taken legislative, administrative and policy measures on ABS?",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"}
-              ],
-              "additionalInfo" : [
-                  {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered in setting up these measures.", "type" : "string"},
-                  {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"},
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}                            
-              ]
-          },
-          {
-              "key": "Q005",
-              "section": "General",
-              "number": "5",
-              "type": "option",
-              "title": "Has your country designated a national focal point as provided in Article 13? ",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"}
-              ],
-              "additionalInfo" : [
-                  {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered for designating a national focal point.", "type" : "string"},
-                  {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-              ]
-          },
-          {
-              "key": "Q006",
-              "section": "General",
-              "number": "6",
-              "type": "option",
-              "title": "Has your country designated one or more competent national authorities as provided in Article 13?",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"}
-              ],
-              "additionalInfo" : [
-                  {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered for designating one or more competent national authority.", "type" : "string"},
-                  {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-              ]
-          },
-          {
-              "key": "Q007",
-              "section": "General",
-              "number": "7",
-              "type": "option",
-              "title": "Has your country made available to the ABS Clearing-House permits or their equivalent issued at the time of access as evidence of the decision to grant prior informed consent (PIC) and of the establishment of mutually agreed terms (MAT)?",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"},
-                  { "value": "false.notApplicable", "title": "Not applicable, since no access requirements are in place" }
-              ],
-              "additionalInfo" : [
-                  {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered for making this information available.", "type" : "string"},
-                  {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-              ]
-          },
-          {
-              "key": "Q008",
-              "section": "General",
-              "number": "8",
-              "type": "option",
-              "title": "Has your country made available to the ABS Clearing-House permits or their equivalent for the constitution of an internationally recognized certificate of compliance in accordance with Article 17.2?",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"},
-                  { "value": "false.notApplicable", "title": "Not applicable, since no access requirements are in place" }
-              ],
-              "additionalInfo" : [
-                  {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-              ]
-          },
-          {
-              "key": "Q009",
-              "section": "General",
-              "number": "9",
-              "type": "option",
-              "title": "Has your country designated one or more checkpoints as provided in Article 17?",
-              "multiple": false,
-              "options": [
-                  { "value": "true", "title": "Yes" },
-                  { "value": "false","title": "No"}
-              ],
-              "additionalInfo" : [
-                  {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered for designating one or more checkpoints:", "type" : "string"},
-                  {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-              ]
-          },
-          {
-              "key": "Q010",
-              "section": "General",
-              "number": "10",
-              "type": "text", "field" :"challengesInfo",
-              "title": "Additional Information",
-              "subTitle" : "Please provide a summary of the main difficulties and challenges",
-              "multiple": false,
-              "additionalInfo" : [
-                  {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                  {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-              ]
-          }
-      ]
-    },
-    {
-      "key": "Access",
-      "title": "ABS measures : Access to genetic resources (Article 6)",
-      "questions": [
-              {
-                  "key": "Q011",
-                  "section": "Access",
-                  "number": "11",
-                  "type": "option",
-                  "title": "Is access to genetic resources subject to PIC as provided in Article 6.1?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "challengesInfo", "title" : "Please provide further information including indicating if there is any other system in place in relation to access to genetic resources.", "type" : "string"},
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q012",
-                  "section": "Access",
-                  "number": "12",
-                  "type": "option",
-                  "title": "Does your country have fair and non-arbitrary rules and procedures on accessing genetic resources as provided in Article 6.3 (b)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q013",
-                  "section": "Access",
-                  "number": "13",
-                  "type": "option",
-                  "title": "Does your country provide information on how to apply for PIC as provided in Article 6.3(c)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q014",
-                  "section": "Access",
-                  "number": "14",
-                  "type": "option",
-                  "title": "Does your country provide for a clear and transparent written decision by a competent national authority as provided in Article 6.3 (d)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q015",
-                  "section": "Access",
-                  "number": "15",
-                  "type": "option",
-                  "title": "Does your country provide for the issuance at the time of access of a permit or its equivalent as provided in Article 6.3 (e)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q016",
-                  "section": "Access",
-                  "number": "16",
-                  "type": "number",
-                  "title": "Please provide the number of permits or their equivalents made available through the ABS-Clearing-House since the entry into force of the Protocol for your country.",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q017",
-                  "section": "Access",
-                  "number": "17",
-                  "type": "option",
-                  "title": "Does your country have rules and procedures for requiring and establishing MAT as provided in Article 6.3 (g)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q018",
-                  "section": "Access",
-                  "number": "18",
-                  "type": "option",
-                  "title": "Benefits received since entry into force of the Protocol for your country from the utilization of:",
-                  "multiple": true,
-                  "options": [{
-                          "value": "geneticResources",
-                          "title": "Genetic resources"
-                      },
-                      {
-                          "value": "geneticResources.monetary",
-                          "title": "Monetary benefits"
-                      },
-                      {
-                          "value": "geneticResources.nonMonetary",
-                          "title": "Non-monetary benefits"
-                      },
-                      {
-                          "value": "tk",
-                          "title": "Traditional knowledge associated with genetic resources"
-                      },
-                      {
-                          "value": "tk.monetary",
-                          "title": "Monetary benefits"
-                      },
-                      {
-                          "value": "tk.nonMonetary",
-                          "title": "Non-monetary benefits"
-                      }
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q019",
-                  "section": "Access",
-                  "number": "19",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "Benefit-Sharing",
-      "title": "ABS measures : Fair and equitable benefit-sharing (Article 5)",
-      "questions": [
-              {
-                  "key": "Q020",
-                  "section": "Benefit-Sharing",
-                  "number": "20",
-                  "type": "option",
-                  "title": "Has your country taken legislative, administrative or policy measures to implement Article 5.1 that provides that benefits arising from the utilization of genetic resources as well as subsequent applications and commercialization are shared with the Party providing such resources that is the country of origin of such resources or a Party that has acquired the genetic resources in accordance with the Convention as provided in Article 5.3? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q021",
-                  "section": "Benefit-Sharing",
-                  "number": "21",
-                  "type": "option",
-                  "title": "Has your country taken legislative, administrative or policy measures with the aim of ensuring that the benefits from the utilization of genetic resources held by indigenous and local communities, in accordance with domestic legislation regarding the established rights of these indigenous and local communities over these genetic resources, are shared with the indigenous and local communities concerned as provided in Article 5.2? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q022",
-                  "section": "Benefit-Sharing",
-                  "number": "22",
-                  "type": "option",
-                  "title": "Has your country taken legislative, administrative or policy measures in order that benefits arising from the utilization of traditional knowledge associated with genetic resources are shared with indigenous and local communities holding such knowledge as provided in Article 5.5?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q023",
-                  "section": "Benefit-Sharing",
-                  "number": "23",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges for putting measures in place:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "Compliance",
-      "title": "ABS measures : Compliance with domestic legislation or regulatory requirements on ABS (Article 15 and Article 16) and monitoring the utilization of genetic resources (Article 17)",
-      "questions": [
-              {
-                  "key": "Q024_a",
-                  "section": "Compliance",
-                  "number": "24.1",
-                  "type": "option",
-                  "title": "Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that genetic resources utilized within your jurisdiction have been accessed in accordance with PIC and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party as provided in Article 15.1?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q024_b",
-                  "section": "Compliance",
-                  "number": "24.2",
-                  "type": "option",
-                  "title": "Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 15.2?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information on the measures taken, including when they entered into force", "type" : "string"},
-                      {"field" : "complianceInfo", "title" : "Please provide further information on cases of non-compliance", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q024_c",
-                  "section": "Compliance",
-                  "number": "24.3",
-                  "type": "option",
-                  "title": "Have there been specific cases in which your country cooperated with other Parties in cases of alleged violation of ABS measures as provided in Article 15.3?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q025_a",
-                  "section": "Compliance",
-                  "number": "25.1",
-                  "type": "option",
-                  "title": "Has your country taken appropriate, effective and proportionate legislative, administrative or policy measures to provide that traditional knowledge associated with genetic resources utilized within your jurisdiction has been accessed in accordance with PIC or approval and involvement of indigenous and local communities and that MAT have been established as required by the domestic ABS legislation or regulatory requirements of the other Party where such indigenous and local communities are located as provided in Article 16.1?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q025_b",
-                  "section": "Compliance",
-                  "number": "25.2",
-                  "type": "option",
-                  "title": "Please indicate whether your country has taken measures to address situations of non-compliance with those measures as provided in Article 16.2?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ]
-              },
-              {
-                  "key": "Q025_c",
-                  "section": "Compliance",
-                  "number": "25.3",
-                  "type": "option",
-                  "title": "Has your country cooperated in specific cases of alleged violation of ABS measures as provided in Article 16.3?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q026_a",
-                  "section": "Compliance",
-                  "number": "26.1",
-                  "type": "option",
-                  "title": "Does your country require users of genetic resources to provide information related to PIC, to the source of the genetic resource, to the establishment of MAT and/or utilization of genetic resources at a designated checkpoint, as appropriate, as provided in Article 17.1 (a)(i) and (ii))? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q026_b",
-                  "section": "Compliance",
-                  "number": "26.2",
-                  "type": "option",
-                  "title": "Has your country taken measures to address situations of non-compliance? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q027_a",
-                  "section": "Compliance",
-                  "number": "27.1",
-                  "type": "option",
-                  "title": "Has your country provided the information referred to in Article 17.1 (a)(i) to relevant national authorities, to the Party providing PIC and to the ABS Clearing-House as provided in Article 17.1 (a)(iii)",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges", "type" : "string"},
-                      {"field" : "recordCounts", "title" : "Please provide the number of checkpoint communiques available in the ABS Clearing-House, if applicable", "type" : "number"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "fileLinks"}
-                  ]
-              },
-              {
-                  "key": "Q027_b",
-                  "section": "Compliance",
-                  "number": "27.2",
-                  "type": "option",
-                  "title": "Has your country made use of the checkpoint communique?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "yes", "title": "Yes" },
-                      { "value": "no","title": "No"},
-                      { "value": "other","title": "Other"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q028",
-                  "section": "Compliance",
-                  "number": "28",
-                  "type": "option",
-                  "title": "Has your country taken measures to encourage users and providers to include provisions in MAT to share information on the implementation of such terms as provided in Article 17.1(b)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q029",
-                  "section": "Compliance",
-                  "number": "29",
-                  "type": "option",
-                  "title": "Is your country encouraging the use of cost-effective communication tools and systems as provided in Article 17.1 (c)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "additionalInfo", "title" : "Please provide further information on how your country is encouraging the use of cost-effective communication tools and systems.", "type" : "string"},                    
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              }, 
-              {
-                  "key": "Q030",
-                  "section": "Compliance",
-                  "number": "30",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide further information",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "ComplianceMat",
-      "title": "ABS measures :- Compliance with mutually agreed terms (MAT) (Article 18)",
-      "questions": [
-              {
-                  "key": "Q031",
-                  "section": "ComplianceMat",
-                  "number": "31",
-                  "type": "option",
-                  "title": "Is your country encouraging the inclusion of provisions in MAT to cover dispute resolution as provided in Article 18.1 (a) (b) and (c)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"},
-                      { "value": "false.notApplicable","title": "Not applicable"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q032",
-                  "section": "ComplianceMat",
-                  "number": "32",
-                  "type": "option",
-                  "title": "Does your country ensure that opportunity to seek recourse is available under your legal systems in cases of disputes arising from MAT as provided in Article 18.2? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q033",
-                  "section": "ComplianceMat",
-                  "number": "33",
-                  "type": "header",
-                  "title": "Has your country taken measures regarding the following points as provided in Article 18.3? ",
-                  "multiple": false
-              },
-              {
-                  "key": "Q033_a",
-                  "section": "ComplianceMat",
-                  "number": "33.1",
-                  "type": "option",
-                  "title": "Access to justice?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q033_b",
-                  "section": "ComplianceMat",
-                  "number": "33.2",
-                  "type": "option",
-                  "title": "Utilization of mechanisms regarding mutual recognition and enforcement of foreign judgements and arbitral awards? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q034",
-                  "section": "ComplianceMat",
-                  "number": "34",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide further information",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "specialConsiderations",
-      "title": "Special considerations (Article 8)",
-      "questions": [
-              {
-                  "key": "Q035",
-                  "section": "specialConsiderations",
-                  "number": "35",
-                  "type": "header",
-                  "title": "In the development and implementation of ABS legislation or regulatory requirements has your country:",
-                  "multiple": false
-              },
-              {
-                  "key": "Q035_a",
-                  "section": "specialConsiderations",
-                  "number": "35.1",
-                  "type": "option",
-                  "title": "Created conditions to promote and encourage research which contributes to the conservation and sustainable use of biodiversity including through simplified measures on access for non-commercial research purposes, taking into account the need to address a change of intent for such research as provided in Article 8(a)? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q035_b",
-                  "section": "specialConsiderations",
-                  "number": "35.2",
-                  "type": "option",
-                  "title": "Paid due regard to cases of present or imminent emergencies that threaten or damage human, animal or plant health as provided in Article 8(b)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q035_c",
-                  "section": "specialConsiderations",
-                  "number": "35.3",
-                  "type": "option",
-                  "title": "Taken into consideration the need for expeditious access to genetic resources and expeditious fair and equitable sharing of benefits arising out of the use of such genetic resources, including access to affordable treatments by those in need, especially, in developing countries as provided in Article 8(b)? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q035_d",
-                  "section": "specialConsiderations",
-                  "number": "35.4",
-                  "type": "option",
-                  "title": "Considered the importance of genetic resources for food and agriculture and their special role for food security as provided in Article 8 (c)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q036",
-                  "section": "specialConsiderations",
-                  "number": "36",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges for putting measures in place.",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "indigenousProvisions",
-      "title": "Provisions related to indigenous and local communities (Articles 6, 7 and 12)",
-      "questions": [
-              {
-                  "key": "Q037",
-                  "section": "indigenousProvisions",
-                  "number": "37",
-                  "type": "option",
-                  "title": "Does your country have indigenous and local communities?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q038_a",
-                  "section": "indigenousProvisions",
-                  "number": "38.1",
-                  "type": "option",
-                  "title": "Do indigenous and local communities have the established right to grant access to genetic resources according to your domestic law? (Article 6.2)",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q038_b",
-                  "section": "indigenousProvisions",
-                  "number": "38.2",
-                  "type": "text", "field":"furtherInfo","subTitle" : "Free text",
-                  "title": "Please provide further information and reference to the domestic law establishing rights of indigenous and local communities to grant access to genetic resources",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q038_c",
-                  "section": "indigenousProvisions",
-                  "number": "38.3",
-                  "type": "option",
-                  "title": "Does your country have measures in place with the aim of ensuring that the prior informed consent or approval and involvement of indigenous and local communities is obtained as provided in Article 6.2?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q038_d",
-                  "section": "indigenousProvisions",
-                  "number": "38.4",
-                  "type": "option",
-                  "title": "Has your country set out criteria and/or process for obtaining prior informed consent or approval and involvement of indigenous and local communities for access to genetic resources in Article 6.3(f)?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"}
-                  ]
-              },
-              {
-                  "key": "Q039",
-                  "section": "indigenousProvisions",
-                  "number": "39",
-                  "type": "option",
-                  "title": " In accordance with domestic law has your country taken measures with the aim of ensuring that traditional knowledge associated with genetic resources that is held by indigenous and local communities within your country is accessed with the PIC or approval and involvement of these indigenous and local communities and that MAT have been established as provided in Article 7?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q040",
-                  "section": "indigenousProvisions",
-                  "number": "40",
-                  "type": "option",
-                  "title": "In implementing the Protocol and in accordance with your domestic law, is your country taking into consideration indigenous and local communities’ customary laws, community protocols and procedures with respect to traditional knowledge associated with genetic resources as provided in Article 12.1?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q041",
-                  "section": "indigenousProvisions",
-                  "number": "41",
-                  "type": "option",
-                  "title": "Has your country established mechanisms to inform potential users of traditional knowledge associated with genetic resources about their obligations as provided in Article 12.2?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q042",
-                  "section": "indigenousProvisions",
-                  "number": "42",
-                  "type": "option",
-                  "title": " Is your country supporting the development by indigenous and local communities of the following tools as provided in Article 12.3?",
-                  "multiple": true,
-                  "options": [{
-                          "value": "community",
-                          "title": "Community protocols"
-                      },
-                      {
-                          "value": "mat",
-                          "title": "Minimum requirements for mutually agreed terms"
-                      },
-                      {
-                          "value": "mcc",
-                          "title": "Model contractual clauses"
-                      }
-                  ]
-              },
-              {
-                  "key": "Q043",
-                  "section": "indigenousProvisions",
-                  "number": "43",
-                  "type": "option",
-                  "title": "Has your country endeavoured not to restrict the customary use and exchange of genetic resources and associated traditional knowledge within and among indigenous and local communities as provided in Article 12.4?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q044",
-                  "section": "indigenousProvisions",
-                  "number": "44",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges for putting measures in place in relation to traditional knowledge associated with genetic resources:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "conservationSustainable",
-      "title": "Contribution to conservation and sustainable use (Article 9)",
-      "questions": [
-              {
-                  "key": "Q045",
-                  "section": "conservationSustainable",
-                  "number": "45",
-                  "type": "option",
-                  "title": "Is your country encouraging users and providers to direct benefits arising from the utilization of genetic resources towards the conservation of biological diversity and sustainable use of its components as provided in Article 9?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q046",
-                  "section": "conservationSustainable",
-                  "number": "46",
-                  "type": "text", "field" :"furtherInfo",
-                  "subTitle" : "Please provide further information",
-                  "title": "Please indicate how the implementation of the Nagoya Protocol has contributed to conservation and sustainable use of biodiversity in your country:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q047",
-                  "section": "conservationSustainable",
-                  "number": "47",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "transboundary",
-      "title": "Transboundary cooperation (Article 11)",
-      "questions": [
-              {
-                  "key": "Q048",
-                  "section": "transboundary",
-                  "number": "48",
-                  "type": "option",
-                  "title": "Is your country endeavouring to cooperate, with the involvement of indigenous and local communities concerned, with a view to implementing the Protocol in instances where the same genetic resources are found in situ within the territory of more than one Party as provided in Article 11.1? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "ilcInfo", "title" : "If your country has indigenous and local communities, please provide further detail of their involvement.", "type" : "string"},
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q049",
-                  "section": "transboundary",
-                  "number": "49",
-                  "type": "option",
-                  "title": "Is your country endeavouring to cooperate with a view to implementing the Protocol in instances where the same traditional knowledge associated with genetic resources is shared by one or more indigenous and local communities in several Parties as provided in Article 11.2?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"},
-                      { "value": "false.notApplicable", "title": "Not applicable, since there are no indigenous and local communities in my country" }
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q050",
-                  "section": "transboundary",
-                  "number": "50",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "modelContractualClause",
-      "title": "Model contractual clauses, codes of conduct, guidelines and best practices and/or standards (Article 19 and 20)",
-      "questions": [
-              {
-                  "key": "Q051",
-                  "section": "modelContractualClause",
-                  "number": "51",
-                  "type": "option",
-                  "title": "Is your country encouraging the development, update and use of model contractual clauses for MAT as provided in Article 19? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q052",
-                  "section": "modelContractualClause",
-                  "number": "52",
-                  "type": "option",
-                  "title": "Is your country encouraging the development, update and use of codes of conduct, guidelines and best practices or standards as provided in Article 20? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q053",
-                  "section": "modelContractualClause",
-                  "number": "53",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "awarenessRaising",
-      "title": "Awareness-raising and capacity (Article 21 and 22)",
-      "questions": [
-              {
-                  "key": "Q054_a",
-                  "section": "awarenessRaising",
-                  "number": "54.1",
-                  "type": "option",
-                  "title": "Has your country taken measures to raise awareness of the importance of genetic resources and traditional knowledge associated with genetic resources and related access and benefit-sharing issues as provided in Article 21?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q054_b",
-                  "section": "awarenessRaising",
-                  "number": "54.2",
-                  "type": "option",
-                  "title": "Has your country taken measures to implement the awareness-raising strategy for the Nagoya Protocol on ABS? Adopted as descision NP-1/9",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q055_a",
-                  "section": "awarenessRaising",
-                  "number": "55.1",
-                  "type": "option",
-                  "title": "Has your country taken measures to build and develop capacity and strengthening of human resources and institutional capacities to effectively implement the Protocol as provided in Article 22? ",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q055_b",
-                  "section": "awarenessRaising",
-                  "number": "55.2",
-                  "type": "option",
-                  "title": "Has your country taken measures to implement the strategic framework for capacity-building and development to support effective implementation of the Nagoya Protocol on ABS?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q056",
-                  "section": "awarenessRaising",
-                  "number": "56",
-                  "type": "option",
-                  "title": "Has your country received external support for building and developing capacity for the implementation of the Nagoya Protocol?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q057",
-                  "section": "awarenessRaising",
-                  "number": "57",
-                  "type": "option",
-                  "title": "Has your country provided external support for building and developing capacity for the implementation of the Nagoya Protocol?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q058",
-                  "section": "awarenessRaising",
-                  "number": "58",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Additional Information",
-                  "subTitle" : "Please provide a summary of the main difficulties and challenges:",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "technology",
-      "title": "Technology transfer, collaboration and cooperation (Article 23)",
-      "questions": [
-              {
-                  "key": "Q059",
-                  "section": "technology",
-                  "number": "59",
-                  "type": "option",
-                  "title": "Is your country collaborating and cooperating in technical and scientific research and development programmes as a means to achieve the objective of the Protocol as provided in Article 23?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "additionalInfo", "title" : "Please provide a summary of the measures taken.", "type" : "string"},
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "optional",
-      "title": "Optional additional information",
-      "questions": [
-              {
-                  "key": "Q060",
-                  "section": "optional",
-                  "number": "60",
-                  "type": "text", "field" :"challengesInfo",
-                  "title": "Please provide a summary of the main difficulties and challenges encountered for becoming a Party to the Nagoya Protocol.",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q061",
-                  "section": "optional",
-                  "number": "61",
-                  "type": "option",
-                  "title": "Has your country established a mechanism for budgetary allocations of funds for the implementation of the Nagoya Protocol?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "additionalInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered.", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q062_a",
-                  "section": "optional",
-                  "number": "62.1",
-                  "type": "option",
-                  "title": "Has your country made financial resources available to other Parties or received financial resources from other Parties or financial institutions for the purposes of implementation of the Protocol as provided in Article 25?",
-                  "multiple": false,
-                  "options": [
-                      { "value": "donor", "title": "Yes, financial resources have been made available" },
-                      { "value": "recipient","title": "Yes, financial resources have been received"},
-                      { "value": "recipient.parties","title": "From other Parties"},
-                      { "value": "recipient.financialInstitutions","title": "From financial institutions"},
-                      { "value": "recipient.gef", "title": "From the Global Environmental Facility" },
-                      { "value": "recipient.npImplementationFund","title": "From the Nagoya Protocol Implementation Fund"},
-                      { "value": "recipient.otherSources","title": "From other sources"},
-                      { "value": "no","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q062_b",
-                  "section": "optional",
-                  "number": "62.2",
-                  "type": "text", "shortTitle":"Free text", "field":"relevantInformation",
-                  "title": "Please provide information on experiences related to the mobilization of resources in support of the implementation of the Protocol.",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q062_c",
-                  "section": "optional",
-                  "number": "62.3",
-                  "type": "text", "shortTitle":"Free text", "field":"relevantInformation",
-                  "title": "Please provide information on the status of funds mobilized in support of the implementation of the Protocol.",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q063_a",
-                  "section": "optional",
-                  "number": "63.1",
-                  "type": "option",
-                  "title": "Does your country have specific staff to administer functions directly related to the implementation of the Nagoya Protocol?",
-                  "subTitle" : "The collection of this information could be useful for the evaluation of the effectiveness of the Protocol under Article 31 on assessment and review as well as for measuring progress and identifying difficulties and challenges implementing the Protocol.",
-                  "multiple": false,
-                  "options": [
-                      { "value": "true", "title": "Yes" },
-                      { "value": "false","title": "No"}
-                  ],
-                  "additionalInfo" : [
-                      {"field" : "challengesInfo", "title" : "Please provide a summary of the main difficulties and challenges encountered.", "type" : "string"},
-                      {"field" : "furtherInfo", "title" : "Please provide further information", "type" : "string"},
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"}
-                  ]
-              },
-              {
-                  "key": "Q063_b",
-                  "section": "optional",
-                  "number": "63.2",
-                  "type": "option",
-                  "title": "Please indicate how many",
-                  "multiple": false,
-                  "options": [
-                      { "value": "one", "title": "One" },
-                      { "value": "Less than 5","title": "Less than 5"},
-                      { "value": "Less than 10","title": "Less than 10"},
-                      { "value": "10 or more","title": "10 or more"}
-                  ]
-              },
-              {
-                  "key": "Q064",
-                  "section": "awarenessRaising",
-                  "number": "64",
-                  "type": "text", "shortTitle":"Free text", "field" :"furtherInfo",
-                  "title": "Any other relevant information",
-                  "multiple": false,
-                  "additionalInfo" : [
-                      {"field" : "documentReferenceIDs", "title" : "Please select the relevant ABSCH records", "type" : "list"},
-                      {"field" : "relevantDocuments", "title" : "Any other relevant documents", "type" : "fileLinks"}
-                  ]
-              }
-          
-      ]
-    },
-    {
-      "key": "comments",
-      "title": "Comments on the reporting format",
-      "questions": [
-          {
-              "key": "Q065",
-              "section": "comments",
-              "number": "65",
-              "type": "text",
-              "title": "Please provide any comment that you may have regarding the format of this report",
-              "multiple": false
-          }
-      ]
-    }
-  
-  ]
+{
+  "Yes": "是",
+  "No": "否",
+  "Other": "其他",
+  "None": "无",
+  "General": "一般信息",
+  "General_title": "议定书实施机构",
+  "General_questions0_title": "贵国是否已按照第14.2条规定向获取和惠益分享信息交换所提供此等信息？",
+  "General_questions0additionalInfo0_title": "请提供所面临主要困难和挑战的摘要，并回答以下所有问题。",
+  "General_questions0additionalInfo1_title": "请提供进一步信息",
+  "General_questions0_questions0_title": "请提供所面临主要困难和挑战的摘要，并回答以下所有问题。",
+  "General_questions0_questions1_title": "请提供进一步信息",
+  "General_questions1_title": "贵国是否已采取关于获取和惠益分享的立法、行政和政策措施？",
+  "General_questions1additionalInfo0_title": "请提供制定这些措施所面临主要困难和挑战的摘要。",
+  "General_questions1additionalInfo1_title": "请提供进一步信息",
+  "General_questions1additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions1_questions0_title": "请提供制定这些措施所面临主要困难和挑战的摘要。",
+  "General_questions1_questions1_title": "请提供进一步信息",
+  "General_questions1_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions2_title": "贵国是否已按照第13条规定指定一个国家联络点？ ",
+  "General_questions2additionalInfo0_title": "请提供指定一个国家联络点所面临主要困难和挑战的摘要。",
+  "General_questions2additionalInfo1_title": "请提供其他信息",
+  "General_questions2additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions2_questions0_title": "请提供指定一个国家联络点所面临主要困难和挑战的摘要。",
+  "General_questions2_questions1_title": "请提供其他信息",
+  "General_questions2_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions3_title": "贵国是否已按照第13条规定指定一个或多个国家主管部门？",
+  "General_questions3additionalInfo0_title": "请提供指定一个或多个国家主管部门所面临主要困难和挑战的摘要。",
+  "General_questions3additionalInfo1_title": "请提供其他信息",
+  "General_questions3additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions3_questions0_title": "请提供指定一个或多个国家主管部门所面临主要困难和挑战的摘要。",
+  "General_questions3_questions1_title": "请提供其他信息",
+  "General_questions3_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions4_title": "贵国是否已向获取和惠益分享信息交换所提供获取时签发的许可证或同等证照，作为事先知情同意决定和设立共同商定的条件的证据？",
+  "General_questions4_options2_title": "不适用，因为目前没有获取要求",
+  "General_questions4additionalInfo0_title": "请提供提供此等信息时所面临主要困难和挑战的摘要。",
+  "General_questions4additionalInfo1_title": "请提供其他信息",
+  "General_questions4additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions4_questions0_title": "请提供提供此等信息时所面临主要困难和挑战的摘要。",
+  "General_questions4_questions1_title": "请提供其他信息",
+  "General_questions4_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions5_title": "贵国是否已按照第17.2条规定向获取和惠益分享信息交换所提供许可证或同等证照，作为国际公认的合规证书？",
+  "General_questions5_options2_title": "不适用，因为目前没有获取要求",
+  "General_questions5additionalInfo0_title": "请提供其他信息",
+  "General_questions5additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions5_questions0_title": "请提供进一步信息",
+  "General_questions5_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions6_title": "贵国是否已按照第17条规定指定一个或多个检查点？",
+  "General_questions6additionalInfo0_title": "请提供指定一个或多个检查点所面临主要困难和挑战的摘要：",
+  "General_questions6additionalInfo1_title": "请提供其他信息",
+  "General_questions6additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions6_questions0_title": "请提供指定一个或多个检查点所面临主要困难和挑战的摘要：",
+  "General_questions6_questions1_title": "请提供其他信息",
+  "General_questions6_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions7_title": "更多信息",
+  "General_questions7_subTitle": "请提供主要困难和挑战的摘要",
+  "General_questions7additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions7additionalInfo1_title": "任何其他相关文件",
+  "General_questions7_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "General_questions7_questions1_title": "任何其他相关文件",
+  "Access": "获取",
+  "Access_title": "ABS 措施：遗传资源的获取（第6条）",
+  "Access_questions0_title": "遗传资源获取是否按照第6.1条规定获得事先知情同意？",
+  "Access_questions0additionalInfo0_title": "请提供进一步信息，包括指出目前是否有任何其他有关遗传资源获取的系统。",
+  "Access_questions0additionalInfo1_title": "请提供其他信息",
+  "Access_questions0additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions0_questions0_title": "",
+  "Access_questions0_questions1_title": "",
+  "Access_questions0_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions1_title": "贵国是否按照第6.3(b)条规定设有关于遗传资源获取的公平、非任意性规则和程序？",
+  "Access_questions1additionalInfo0_title": "请提供进一步信息",
+  "Access_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions1_questions0_title": "请提供进一步信息",
+  "Access_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions2_title": "贵国是否按照第6.3(c)条规定提供关于如何申请事先知情同意的信息？",
+  "Access_questions2additionalInfo0_title": "请提供进一步信息",
+  "Access_questions2additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions2_questions0_title": "请提供进一步信息",
+  "Access_questions2_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions3_title": "贵国是否按照第6.3(d)条规定由国家主管部门签发明确且透明的书面决定？",
+  "Access_questions3additionalInfo0_title": "请提供其他信息",
+  "Access_questions3additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions3_questions0_title": "请提供进一步信息",
+  "Access_questions3_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions4_title": "贵国是否按照第6.3(e)条规定在获取时签发许可证或同等证照？",
+  "Access_questions4additionalInfo0_title": "请提供其他信息",
+  "Access_questions4additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions4_questions0_title": "请提供进一步信息",
+  "Access_questions4_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions5_title": "请提供自本议定书对贵国生效以来贵国通过获取和惠益分享信息交换所提供的许可证或同等证照的数量。",
+  "Access_questions5additionalInfo0_title": "",
+  "Access_questions5additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions5_questions0_title": "请提供进一步信息",
+  "Access_questions5_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions6_title": "贵国是否按照第6.3(g)条规定设有关于要求设立及如何设立共同商定的条件的规则和程序？",
+  "Access_questions6additionalInfo0_title": "请提供进一步信息",
+  "Access_questions6additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions6_questions0_title": "请提供进一步信息",
+  "Access_questions6_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions7_title": "自本议定书对贵国生效以来贵国从利用遗传资源及相关传统知识中获得的惠益：",
+  "Access_questions7_options0_title": "遗传资源",
+  "Access_questions7_options1_title": "经济惠益",
+  "Access_questions7_options2_title": "非货币性惠益",
+  "Access_questions7_options3_title": "遗传资源相关传统知识",
+  "Access_questions7_options4_title": "货币惠益",
+  "Access_questions7_options5_title": "非货币惠益",
+  "Access_questions7additionalInfo0_title": "请提供进一步信息",
+  "Access_questions7additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions7_questions0_title": "请提供进一步信息",
+  "Access_questions7_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions8_title": "更多信息",
+  "Access_questions8_subTitle": "请提供主要困难和挑战的摘要",
+  "Access_questions8additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions8additionalInfo1_title": "任何其他相关文件",
+  "Access_questions8_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Access_questions8_questions1_title": "任何其他相关文件",
+  "Benefit-Sharing": "惠益分享",
+  "Benefit_Sharing_title": "ABS 措施：公正和公平地分享惠益（第5条）",
+  "Benefit_Sharing_questions0_title": "第5.1条规定，对遗传资源的利用及随后的应用和商业化所产生的惠益应与提供该等资源的缔约方（即该等资源的原产国或已按照公约及第5.3条规定获取该等遗传资源的缔约方）分享。贵国是否已采取立法、行政或政策措施来落实此项规定？ ",
+  "Benefit_Sharing_questions0additionalInfo0_title": "请提供其他信息",
+  "Benefit_Sharing_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions0_questions0_title": "请提供进一步信息",
+  "Benefit_Sharing_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions1_title": "为确保按照第5.2条规定以及贵国认可土著和地方社区对其所持有遗传资源之权利的法律法规，与持有遗传资源的土著和地方社区分享利用其持有的遗传资源所产生的惠益，贵国是否已采取立法、行政或政策措施？ ",
+  "Benefit_Sharing_questions1additionalInfo0_title": "请提供其他信息",
+  "Benefit_Sharing_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions1_questions0_title": "请提供进一步信息",
+  "Benefit_Sharing_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions2_title": "为确保按照第5.5条规定与持有遗传资源相关传统知识的土著和地方社区分享利用其持有的遗传资源相关传统知识所产生的惠益，贵国是否已采取立法、行政或政策措施？",
+  "Benefit_Sharing_questions2additionalInfo0_title": "请提供其他信息",
+  "Benefit_Sharing_questions2additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions2_questions0_title": "请提供进一步信息",
+  "Benefit_Sharing_questions2_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions3_title": "更多信息",
+  "Benefit_Sharing_questions3_subTitle": "请提供落实措施所面临主要困难和挑战的摘要：",
+  "Benefit_Sharing_questions3additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions3additionalInfo1_title": "任何其他相关文件",
+  "Benefit_Sharing_questions3_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Benefit_Sharing_questions3_questions1_title": "任何其他相关文件",
+  "Compliance": "",
+  "Compliance_title": "ABS 措施：遵循有关获取和惠益分享的国家立法或法规要求（第15条和第16条）和监控对遗传资源的利用（第17条）",
+  "Compliance_questions0_title": "为确保按照第15.1条规定在获取贵国管辖范围内利用的遗传资源时获得事先知情同意，并按照另一缔约方的获取和惠益分享国家立法或法规要求设立共同商定的条件，贵国是否已采取适当、有效、相称的立法、行政或政策措施？",
+  "Compliance_questions0additionalInfo0_title": "",
+  "Compliance_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions0_questions0_title": "请提供进一步信息",
+  "Compliance_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions1_title": "请说明贵国是否已按照第15.2条规定采取措施解决不遵循上述措施的情况？",
+  "Compliance_questions1additionalInfo0_title": "请提供有关所采取措施的其他信息，包括其生效日期",
+  "Compliance_questions1additionalInfo1_title": "请提供有关不合规案例的其他信息",
+  "Compliance_questions1_questions0_title": "请提供有关所采取措施的其他信息，包括其生效日期",
+  "Compliance_questions1_questions1_title": "请提供有关不合规案例的其他信息",
+  "Compliance_questions2_title": "贵国是否有在被指违反第15.3条规定的获取和惠益分享措施的情况下配合其他缔约方的具体案例？",
+  "Compliance_questions2additionalInfo0_title": "请提供进一步信息",
+  "Compliance_questions2_questions0_title": "请提供其他信息",
+  "Compliance_questions3_title": "为确保按照第16.1条规定在获取贵国管辖范围内利用的遗传资源相关传统知识时获得土著和地方社区的事先知情同意或批准及参与，并按照该等土著和地方社区所属另一缔约方的获取和惠益分享国家立法或法规要求设立共同商定的条件，贵国是否已采取适当、有效、相称的立法、行政或政策措施？",
+  "Compliance_questions3additionalInfo0_title": "",
+  "Compliance_questions3additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions3_questions0_title": "请提供进一步信息",
+  "Compliance_questions3_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions4_title": "请说明贵国是否已按照第16.2条规定采取措施解决不遵循上述措施的情况？",
+  "Compliance_questions5_title": "贵国是否有在被指违反第16.3条规定的获取和惠益分享措施的情况下给予配合的具体案例？",
+  "Compliance_questions5additionalInfo0_title": "请提供进一步信息",
+  "Compliance_questions5_questions0_title": "请提供其他信息",
+  "Compliance_questions6_title": "贵国是否已按照第17.1(a)(i)及(ii))条规定，要求遗传资源使用者酌情在指定检查点提供关于事先知情同意、遗传资源来源、设立共同商定的条件和/或利用遗传资源的信息？ ",
+  "Compliance_questions6additionalInfo0_title": "请提供进一步信息",
+  "Compliance_questions6additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions6_questions0_title": "请提供进一步信息",
+  "Compliance_questions6_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions7_title": "贵国是否已采取措施解决违规情况？ ",
+  "Compliance_questions7additionalInfo0_title": "请提供进一步信息",
+  "Compliance_questions7_questions0_title": "请提供其他信息",
+  "Compliance_questions8_title": "贵国是否已按照第17.1(a)(iii)条规定向相关国家机构、提供事先知情同意的缔约方以及获取和惠益分享信息交换所提供第17.1(a)(i)条所规定的信息",
+  "Compliance_questions8additionalInfo0_title": "请提供主要困难和挑战的摘要",
+  "Compliance_questions8additionalInfo1_title": "请提供贵国在获取和惠益分享信息交换所提供的检查点公报的数量（如适用）。",
+  "Compliance_questions8additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions8_questions0_title": "请提供主要困难和挑战的摘要",
+  "Compliance_questions8_questions1_title": "请提供贵国在获取和惠益分享信息交换所提供的检查点公报的数量（如适用）。",
+  "Compliance_questions8_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions9_title": "贵国是否已利用检查点公报？",
+  "Compliance_questions9additionalInfo0_title": "",
+  "Compliance_questions9_questions0_title": "请提供其他信息",
+  "Compliance_questions10_title": "贵国是否已按照第17.1(b)条规定采取措施鼓励使用者和提供者在共同商定的条件中列明分享实施该等条件之相关信息的规定？",
+  "Compliance_questions10additionalInfo0_title": "请提供进一步信息",
+  "Compliance_questions10additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions10_questions0_title": "请提供进一步信息",
+  "Compliance_questions10_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions11_title": "贵国是否正按照第17.1(c)条规定鼓励使用经济高效的交流工具和系统？",
+  "Compliance_questions11additionalInfo0_title": "请提供有关贵国如何鼓励使用经济高效的交流工具和系统的其他信息。",
+  "Compliance_questions11additionalInfo1_title": "请提供进一步信息",
+  "Compliance_questions11additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions11_questions0_title": "请提供有关贵国如何鼓励使用经济高效的交流工具和系统的其他信息。",
+  "Compliance_questions11_questions1_title": "请提供进一步信息",
+  "Compliance_questions11_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions12_title": "更多信息",
+  "Compliance_questions12_subTitle": "请提供进一步信息",
+  "Compliance_questions12additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions12additionalInfo1_title": "任何其他相关文件",
+  "Compliance_questions12_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "Compliance_questions12_questions1_title": "任何其他相关文件",
+  "ComplianceMat": "ComplianceMat",
+  "ComplianceMat_title": "获取和惠益分享措施：- 遵循共同商定的条件（第18条）",
+  "ComplianceMat_questions0_title": "贵国是否正按照第18.1(a)、(b)及(c)条规定鼓励在共同商定的条件中列明涉及争端解决的规定？",
+  "ComplianceMat_questions0_options2_title": "",
+  "ComplianceMat_questions0additionalInfo0_title": "",
+  "ComplianceMat_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "ComplianceMat_questions0_questions0_title": "请提供进一步信息",
+  "ComplianceMat_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "ComplianceMat_questions1_title": "贵国是否正按照第18.2条规定确保在就共同商定的条件发生争端时有机会依照贵国法律制度进行追索？ ",
+  "ComplianceMat_questions1additionalInfo0_title": "请提供进一步信息",
+  "ComplianceMat_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "ComplianceMat_questions1_questions0_title": "请提供进一步信息",
+  "ComplianceMat_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "ComplianceMat_questions2_title": "贵国是否已按照第18.3条规定在以下方面采取措施？ ",
+  "ComplianceMat_questions3_title": "司法援助？",
+  "ComplianceMat_questions3additionalInfo0_title": "请提供其他信息",
+  "ComplianceMat_questions3_questions0_title": "请提供其他信息",
+  "ComplianceMat_questions4_title": "利用关于相互承认和执行外国判决和仲裁裁决的机制？ ",
+  "ComplianceMat_questions4additionalInfo0_title": "请提供其他信息",
+  "ComplianceMat_questions4_questions0_title": "请提供其他信息",
+  "ComplianceMat_questions5_title": "更多信息",
+  "ComplianceMat_questions5_subTitle": "请提供进一步信息",
+  "ComplianceMat_questions5additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "ComplianceMat_questions5additionalInfo1_title": "任何其他相关文件",
+  "ComplianceMat_questions5_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "ComplianceMat_questions5_questions1_title": "任何其他相关文件",
+  "specialConsiderations": "specialConsiderations",
+  "specialConsiderations_title": "特别考虑事项（第8条）",
+  "specialConsiderations_questions0_title": "在制定和实施获取和惠益分享立法或法规要求方面，贵国：",
+  "specialConsiderations_questions1_title": "是否已按照第8(a)条规定创造条件以促进和鼓励有助于保护和可持续利用生物多样性的研究，包括对出于非商业研究目的之获取实行精简措施，同时考虑有必要解决该等研究改变目的之问题？ ",
+  "specialConsiderations_questions1additionalInfo0_title": "请提供进一步信息",
+  "specialConsiderations_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions1_questions0_title": "请提供进一步信息",
+  "specialConsiderations_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions2_title": "是否已按照第8(b)条规定充分重视目前面临或即将发生的威胁或损害人类、动物或植物健康的紧急情况？",
+  "specialConsiderations_questions2additionalInfo0_title": "请提供其他信息",
+  "specialConsiderations_questions2additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions2_questions0_title": "请提供进一步信息",
+  "specialConsiderations_questions2_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions3_title": "是否已按照第8(b)条规定考虑有必要迅速有效地获取遗传资源并迅速有效地公平合理分享利用该等遗传资源所产生的惠益，包括有需要者获得可负担的治疗（尤其是在发展中国家）？ ",
+  "specialConsiderations_questions3additionalInfo0_title": "请提供其他信息",
+  "specialConsiderations_questions3additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions3_questions0_title": "请提供进一步信息",
+  "specialConsiderations_questions3_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions4_title": "是否已按照第8(c)条规定考虑遗传资源对于粮食和农业的重要性及其对于粮食安全的特殊作用？",
+  "specialConsiderations_questions4additionalInfo0_title": "请提供其他信息",
+  "specialConsiderations_questions4additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions4_questions0_title": "请提供进一步信息",
+  "specialConsiderations_questions4_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions5_title": "更多信息",
+  "specialConsiderations_questions5_subTitle": "请提供落实措施所面临主要困难和挑战的摘要。",
+  "specialConsiderations_questions5additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions5additionalInfo1_title": "任何其他相关文件",
+  "specialConsiderations_questions5_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "specialConsiderations_questions5_questions1_title": "任何其他相关文件",
+  "indigenousProvisions": "indigenousProvisions",
+  "indigenousProvisions_title": "与土著和地方社区相关的规定（第6条、第7条和第12条）",
+  "indigenousProvisions_questions0_title": "贵国是否有土著和地方社区？",
+  "indigenousProvisions_questions0additionalInfo0_title": "请提供其他信息",
+  "indigenousProvisions_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions0_questions0_title": "请提供进一步信息",
+  "indigenousProvisions_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions1_title": "贵国法律是否认可土著和地方社区拥有批准获取遗传资源的权利？（第6.2条）",
+  "indigenousProvisions_questions1additionalInfo0_title": "",
+  "indigenousProvisions_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions1_questions0_title": "请提供进一步信息",
+  "indigenousProvisions_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions2_title": "请提供确立土著和地方社区同意获取遗传资源之权利的其他信息和国家法律引文",
+  "indigenousProvisions_questions2_subTitle": "自由文本",
+  "indigenousProvisions_questions2additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions2_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions3_title": "为确保按照第6.2条规定获得土著和地方社区的事先知情同意或批准和参与，贵国这方面的措施是否已到位？",
+  "indigenousProvisions_questions3additionalInfo0_title": "请提供其他信息",
+  "indigenousProvisions_questions3_questions0_title": "请提供其他信息",
+  "indigenousProvisions_questions4_title": "贵国是否已按照第6.3(f)条规定为获得土著和地方社区的事先知情同意或批准及参与以获取遗传资源设立标准和/或流程？",
+  "indigenousProvisions_questions4additionalInfo0_title": "请提供其他信息",
+  "indigenousProvisions_questions4_questions0_title": "请提供其他信息",
+  "indigenousProvisions_questions5_title": " 为确保按照第7条规定在获取贵国境内土著和地方社区所持有的遗传资源相关传统知识时，获得此等土著和地方社区的事先知情同意或批准及参与并设立共同商定的条件，贵国是否已按照国家法律采取措施？",
+  "indigenousProvisions_questions5additionalInfo0_title": "请提供进一步信息",
+  "indigenousProvisions_questions5additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions5_questions0_title": "请提供进一步信息",
+  "indigenousProvisions_questions5_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions6_title": "在实施本议定书时，贵国是否正按照国家法律及第12.1条规定考虑关于遗传资源相关传统知识的土著和地方社区习惯法、社区议定书和程序？",
+  "indigenousProvisions_questions6additionalInfo0_title": "请提供其他信息",
+  "indigenousProvisions_questions6additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions6_questions0_title": "请提供进一步信息",
+  "indigenousProvisions_questions6_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions7_title": "贵国是否已按照第12.2条规定建立让遗传资源相关传统知识的潜在使用者了解其义务的机制？",
+  "indigenousProvisions_questions7additionalInfo0_title": "请提供其他信息",
+  "indigenousProvisions_questions7additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions7_questions0_title": "请提供进一步信息",
+  "indigenousProvisions_questions7_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions8_title": " 贵国是否正按照第12.3条规定支持土著和地方社区制定以下工具？",
+  "indigenousProvisions_questions8_options0_title": "社区议定书",
+  "indigenousProvisions_questions8_options1_title": "共同商定的条件之最低要求",
+  "indigenousProvisions_questions8_options2_title": "合同条款范文",
+  "indigenousProvisions_questions9_title": "贵国是否已按照第12.4条规定尽力不限制土著和地方社区内部以及土著和地方社区之间对遗传资源及相关传统知识的习惯性利用和交换？",
+  "indigenousProvisions_questions9additionalInfo0_title": "请提供其他信息",
+  "indigenousProvisions_questions9additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions9_questions0_title": "请提供进一步信息",
+  "indigenousProvisions_questions9_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions10_title": "更多信息",
+  "indigenousProvisions_questions10_subTitle": "请提供落实与遗传资源相关传统知识相关的措施所面临主要困难和挑战的摘要：",
+  "indigenousProvisions_questions10additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions10additionalInfo1_title": "任何其他相关文件",
+  "indigenousProvisions_questions10_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "indigenousProvisions_questions10_questions1_title": "任何其他相关文件",
+  "conservationSustainable": "conservationSustainable",
+  "conservationSustainable_title": "为保护和可持续利用做贡献（第9条）",
+  "conservationSustainable_questions0_title": "贵国是否正按照第9条规定鼓励使用者和提供者将利用遗传资源所产生的惠益用于生物多样性的保护和生物多样性组成部分的可持续利用?",
+  "conservationSustainable_questions0additionalInfo0_title": "请提供进一步信息",
+  "conservationSustainable_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "conservationSustainable_questions0_questions0_title": "请提供进一步信息",
+  "conservationSustainable_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "conservationSustainable_questions1_title": "请说明贵国实施名古屋议定书为保护和可持续利用生物多样性做出了哪些贡献：",
+  "conservationSustainable_questions1_subTitle": "",
+  "conservationSustainable_questions1additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "conservationSustainable_questions1_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "conservationSustainable_questions2_title": "更多信息",
+  "conservationSustainable_questions2_subTitle": "请提供主要困难和挑战的摘要：",
+  "conservationSustainable_questions2additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "conservationSustainable_questions2additionalInfo1_title": "任何其他相关文件",
+  "conservationSustainable_questions2_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "conservationSustainable_questions2_questions1_title": "任何其他相关文件",
+  "transboundary": "transboundary",
+  "transboundary_title": "跨境合作（第11条）",
+  "transboundary_questions0_title": "为了在多个缔约方的领土范围内就地发现相同遗传资源的情况下实施本议定书，贵国是否正按照第11.1条规定在相关土著和地方社区的参与下全力合作？ ",
+  "transboundary_questions0additionalInfo0_title": "如果贵国有土著和地方社区，请提供有关其参与情况的其他信息。",
+  "transboundary_questions0additionalInfo1_title": "请提供其他信息",
+  "transboundary_questions0additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "transboundary_questions0_questions0_title": "如果贵国有土著和地方社区，请提供有关其参与情况的其他信息。",
+  "transboundary_questions0_questions1_title": "请提供其他信息",
+  "transboundary_questions0_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "transboundary_questions1_title": "为了在多个缔约方的一个或多个土著和地方社区持有相同遗传资源相关传统知识的情况下实施本议定书，贵国是否正按照第11.2条规定全力合作？",
+  "transboundary_questions1_options2_title": "不适用，因为我的国家没有土著和地方社区",
+  "transboundary_questions1additionalInfo0_title": "请提供其他信息",
+  "transboundary_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "transboundary_questions1_questions0_title": "请提供进一步信息",
+  "transboundary_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "transboundary_questions2_title": "更多信息",
+  "transboundary_questions2_subTitle": "请提供主要困难和挑战的摘要：",
+  "transboundary_questions2additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "transboundary_questions2additionalInfo1_title": "任何其他相关文件",
+  "transboundary_questions2_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "transboundary_questions2_questions1_title": "任何其他相关文件",
+  "modelContractualClause": "modelContractualClause",
+  "modelContractualClause_title": "合同条款范文、行为准则、指导方针和最佳做法和/或标准（第19条和第20条）",
+  "modelContractualClause_questions0_title": "贵国是否正按照第19条规定鼓励制定、更新和使用共同商定的条件的合同条款范文？ ",
+  "modelContractualClause_questions0additionalInfo0_title": "请提供进一步信息",
+  "modelContractualClause_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "modelContractualClause_questions0_questions0_title": "请提供进一步信息",
+  "modelContractualClause_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "modelContractualClause_questions1_title": "贵国是否正按照第20条规定鼓励制定、更新和使用行为准则、指导方针和最佳做法或标准？ ",
+  "modelContractualClause_questions1additionalInfo0_title": "请提供其他信息",
+  "modelContractualClause_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "modelContractualClause_questions1_questions0_title": "请提供进一步信息",
+  "modelContractualClause_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "modelContractualClause_questions2_title": "更多信息",
+  "modelContractualClause_questions2_subTitle": "请提供主要困难和挑战的摘要：",
+  "modelContractualClause_questions2additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "modelContractualClause_questions2additionalInfo1_title": "任何其他相关文件",
+  "modelContractualClause_questions2_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "modelContractualClause_questions2_questions1_title": "任何其他相关文件",
+  "awarenessRaising": "提高认识",
+  "awarenessRaising_title": "意识培养和能力（第21条和第22条）",
+  "awarenessRaising_questions0_title": "贵国是否已按照第21条规定采取措施提高对遗传资源和相关传统知识及相关获取和惠益分享问题重要性的意识？",
+  "awarenessRaising_questions0additionalInfo0_title": "",
+  "awarenessRaising_questions0additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions0_questions0_title": "请提供进一步信息",
+  "awarenessRaising_questions0_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions1_title": "贵国是否已采取措施实施名古屋获取和惠益分享议定书意识培养战略？作为决定NP-1/9通过",
+  "awarenessRaising_questions1additionalInfo0_title": "",
+  "awarenessRaising_questions1additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions1_questions0_title": "请提供进一步信息",
+  "awarenessRaising_questions1_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions2_title": "贵国是否已按照第22条规定采取措施建设、培养和加强人力资源与机构的能力以有效实施本议定书？ ",
+  "awarenessRaising_questions2additionalInfo0_title": "",
+  "awarenessRaising_questions2additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions2_questions0_title": "请提供进一步信息",
+  "awarenessRaising_questions2_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions3_title": "贵国是否已采取措施实施能力建设和培养战略框架为有效实施名古屋获取和惠益分享议定书提供支持？",
+  "awarenessRaising_questions3additionalInfo0_title": "",
+  "awarenessRaising_questions3additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions3_questions0_title": "请提供进一步信息",
+  "awarenessRaising_questions3_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions4_title": "在名古屋议定书实施能力建设和培养方面，贵国是否已获得外部支持？",
+  "awarenessRaising_questions4additionalInfo0_title": "请提供其他信息",
+  "awarenessRaising_questions4additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions4_questions0_title": "请提供进一步信息",
+  "awarenessRaising_questions4_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions5_title": "在名古屋议定书实施能力建设和培养方面，贵国是否已对外提供支持？",
+  "awarenessRaising_questions5additionalInfo0_title": "请提供其他信息",
+  "awarenessRaising_questions5additionalInfo1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions5_questions0_title": "请提供进一步信息",
+  "awarenessRaising_questions5_questions1_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions6_title": "更多信息",
+  "awarenessRaising_questions6_subTitle": "请提供主要困难和挑战的摘要：",
+  "awarenessRaising_questions6additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions6additionalInfo1_title": "任何其他相关文件",
+  "awarenessRaising_questions6_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "awarenessRaising_questions6_questions1_title": "任何其他相关文件",
+  "technology": "technology",
+  "technology_title": "技术转让、协作与合作（第23条）",
+  "technology_questions0_title": "贵国是否正按照第23条规定就技术与科学研究和开发计划进行协作与合作，以此作为实现本议定书目标的方式之一？",
+  "technology_questions0additionalInfo0_title": "请提供所采取措施的摘要。",
+  "technology_questions0additionalInfo1_title": "请提供其他信息",
+  "technology_questions0additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "technology_questions0_questions0_title": "请提供所采取措施的摘要。",
+  "technology_questions0_questions1_title": "请提供其他信息",
+  "technology_questions0_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional": "可选",
+  "optional_title": "可选其他信息",
+  "optional_questions0_title": "请提供成为名古屋议定书缔约方所面临主要困难和挑战的摘要。",
+  "optional_questions0additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions0_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions1_title": "贵国是否已建立名古屋议定书实施资金的预算分配机制？",
+  "optional_questions1additionalInfo0_title": "请提供其他信息",
+  "optional_questions1additionalInfo1_title": "请提供所面临主要困难和挑战的摘要。",
+  "optional_questions1additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions1_questions0_title": "请提供进一步信息",
+  "optional_questions1_questions1_title": "请提供所面临主要困难和挑战的摘要。",
+  "optional_questions1_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions2_title": "贵国是否已按照第25条规定出于本议定书实施之目的为其他缔约方提供资金或从其他缔约方或金融机构获得资金？",
+  "optional_questions2_options0_title": "是，已提供资金",
+  "optional_questions2_options1_title": "是，已获得资金",
+  "optional_questions2_options2_title": "来自其他缔约方",
+  "optional_questions2_options3_title": "来自金融机构",
+  "optional_questions2_options4_title": "来自全球环境基金",
+  "optional_questions2_options5_title": "来自名古屋议定书实施基金",
+  "optional_questions2_options6_title": "来自其他来源",
+  "optional_questions2additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions2_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions3_title": "请提供为支持本议定书实施进行资源动员的经验。",
+  "optional_questions3additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions3_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions4_title": "请提供为支持本议定书实施进行资金动员的情况。",
+  "optional_questions4additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions4_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions5_title": "贵国是否由特定工作人员管理与名古屋议定书直接相关的各项职能？",
+  "optional_questions5_subTitle": "收集此信息可用于评估第31条下评估和审查方面的议定书成效，以及衡量议定书实施进展并查明所面临的困难和挑战。",
+  "optional_questions5additionalInfo0_title": "请提供所面临主要困难和挑战的摘要。",
+  "optional_questions5additionalInfo1_title": "",
+  "optional_questions5additionalInfo2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions5_questions0_title": "请提供所面临主要困难和挑战的摘要。",
+  "optional_questions5_questions1_title": "",
+  "optional_questions5_questions2_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions6_title": "请说明此等工作人员的数量",
+  "optional_questions6_options0_title": "1人",
+  "optional_questions6_options1_title": "不到5人",
+  "optional_questions6_options2_title": "",
+  "optional_questions6_options3_title": "至少10人",
+  "optional_questions7_title": "其它相关信息",
+  "optional_questions7additionalInfo0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions7additionalInfo1_title": "任何其他相关文件",
+  "optional_questions7_questions0_title": "请选择相关获取和惠益分享信息交换所记录",
+  "optional_questions7_questions1_title": "任何其他相关文件",
+  "comments": "评论",
+  "comments_title": "对报告格式的评论",
+  "comments_questions0_title": "请提供您对本报告格式的任何意见和建议"
+}

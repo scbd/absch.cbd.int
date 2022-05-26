@@ -1,5 +1,5 @@
 <div>
-        <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+        <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><div class="registerpage-content">
 
                 <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
                 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -12,10 +12,10 @@
 
                                 <section>
                                     <div class="well no-shadow bg-white">
-                                        <legend>Información general sobre el elemento genético</legend>
+                                        <legend></legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
+                                                <div class="km-control-group" name="header.languages" required caption="">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -24,31 +24,30 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="name" caption="Nombre del elemento genético">
+                                                <div class="km-control-group" required name="name" caption="">
                                                     <div km-textbox-ml name="name" ng-model="document.name" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="synonymNames" caption="Nombre(s) alternativo(s) del elemento genético (sinónimo(s))">
+                                                <div class="km-control-group" name="synonymNames" caption="">
                                                     <div ng-repeat="synonym in synonymNames" style="padding-bottom:5px;"  class="input-group">
-                                                        <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input" ng-model="synonym.value" locales="document.header.languages"></div><span ng-class="{'disable':synonymNames.length==1}" class="input-group-addon" style="cursor:pointer" 
-                                                        ng-click="removeItem(synonymNames, $index)"><i class="fa fa-trash-o icon"></i></span></div>
-                                                    <button type="button" class="btn btn-primary" ng-click="synonymNames.push({})">Agregar un ítem</button>
+                                                        <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input" ng-model="synonym.value" locales="document.header.languages"></div></div>
+                                                    <button type="button" class="btn btn-primary" ng-click="synonymNames.push({})"></button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="abbreviation" caption="Abreviatura">
+                                                <div class="km-control-group" required name="abbreviation" caption="">
                                                     <div km-textbox-ml name="abbreviation" ng-model="document.abbreviation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="family" required caption="Categoría">
+                                                <div class="km-control-group" name="family" required caption="">
                                                     <div km-term-radio required ng-model="document.family" locales="document.header.languages"
                                                         terms="options.family" binding-type="term" show-other="true"></div>
                                                 </div>	
@@ -56,7 +55,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="isSynthetic" required caption="¿Este elemento genético es una molécula sintética?">
+                                                <div class="km-control-group" name="isSynthetic" required caption="">
                                                     <div km-yes-no required ng-model="document.isSynthetic" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -66,28 +65,28 @@
 
                                 <section>
                                     <div class="well no-shadow bg-white">
-                                        <legend>Organismo donante</legend>
+                                        <legend></legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganisms" caption="Organismo(s) donante(s)">											
+                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganisms" caption="">											
                                                     <div document-selector ng-model="document.donorOrganisms" question="donorOrganisms" type="checkbox"
                                                             on-build-query="onBuildOrganismQuery(searchText)" allow-new="true" allow-new-schema="organism"></div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="donorOrganismCollectionPoint" caption="Punto de recolección o adquisición del/de los organismo(s) donante(s)">												
+                                                <div class="km-control-group" name="donorOrganismCollectionPoint" caption="">												
                                                     <div km-rich-textbox ng-model="document.donorOrganismCollectionPoint" rows="4" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row" style="margin-bottom:10px;">
-                                            <div class="col-xs-12"><span>y/o</span></div>
+                                            <div class="col-xs-12"></div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" caption="Coordenadas geográficas">
-                                                    <div class="help-block">Limitadas a archivos .geojson (<a rel="noopener" translation-url href="http://www.geojson.org/" target="_blank">http://www.geojson.org/</a>)</div>
+                                                <div class="km-control-group" caption="">
+                                                    <div class="help-block"></div>
                                                     <div km-link name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                                 </div>
                                             </div>
@@ -96,24 +95,24 @@
 
                                 <section ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">
                                     <div class="well no-shadow bg-white">
-                                        <legend>Características de la secuencia de codificación de la proteína</legend>
+                                        <legend></legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="proteinName" caption="Nombre de la proteína expresada por la secuencia de codificación">
+                                                <div class="km-control-group" name="proteinName" caption="">
                                                     <div km-textbox-ml name="proteinName" ng-model="document.proteinName" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="biologicalFunction" caption="Función biológica de la proteína">
+                                                <div class="km-control-group" name="biologicalFunction" caption="">
                                                     <div km-textbox-ml name="biologicalFunction" rows="3" ng-model="document.biologicalFunction" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="traits" caption="Rasgo(s) o uso(s) relacionado(s) en la biotecnología">												
+                                                <div class="km-control-group" required name="traits" caption="">												
                                                     <traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
                                                 </div>
                                             </div>
@@ -123,11 +122,11 @@
 
                                 <section>
                                     <div class="well no-shadow bg-white">
-                                        <legend>Información adicional</legend>
+                                        <legend></legend>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="address" caption="Cualquier otra información pertinente">
-                                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                                <div class="km-control-group" name="address" caption="">
+                                                    <div class="help-block"></div>
                                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -135,8 +134,8 @@
 
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="relevantDocuments" caption="Otros documentos pertinentes">
-                                                    <div class="help-block">Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen.</div>
+                                                <div class="km-control-group" name="relevantDocuments" caption="">
+                                                    <div class="help-block"></div>
                                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
                                                     identifier="document.header.identifier"></div>
                                                 </div>
@@ -145,12 +144,12 @@
                                     </div>
                                 </section>
                                 <section>
-                                    <legend>Notas</legend>
+                                    <legend></legend>
 
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-block">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.</div>
+                                                <div class="help-block"></div>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>

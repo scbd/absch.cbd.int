@@ -1,25 +1,77 @@
-﻿{
-    "country-profile"    : { "url" :"https://www.youtube.com/watch?v=6eDBShJMWfI", "heading" : "Country profiles", "desc" : "One of the most convenient ways to access national information in the ABSCH is through the country profiles. Each country profile contains all the national information that has been made available by that country and it can provide information on the institutional structures and legislative, administrative or policy measures in place for implementing the Nagoya Protocol." },
-
-    "matrix"             : { "url" :"https://www.youtube.com/watch?v=IwyrMQKDZ3o", "heading" : "ABS Measures Matrix", "desc": "The ABS measures matrix is located on a country's profile page inside the section on legislative, administrative or policy measures on ABS (ABS measures). Expanding this section will reveal all the country's published ABS measures, as well as, a table of information that lists key ABS elements and where the related references to those elements can be found in all published measures. This can help provide an overview of a country’s legal framework on ABS and can be a useful tool to help users of genetic resources understand and comply with a country's ABS requirements" },
-    "search-matrix"      : { "url" :"https://www.youtube.com/watch?v=IwyrMQKDZ3o", "heading" : "ABS Measures Matrix", "desc": "The ABS measures matrix is located on a country's profile page inside the section on legislative, administrative or policy measures on ABS (ABS measures). Expanding this section will reveal all the country's published ABS measures, as well as, a table of information that lists key ABS elements and where the related references to those elements can be found in all published measures. This can help provide an overview of a country’s legal framework on ABS and can be a useful tool to help users of genetic resources understand and comply with a country's ABS requirements" },
-
-    "search-search"      : { "url" :"https://www.youtube.com/watch?v=YaX_llUfBts", "heading" : "Search using the ABSCH", "desc" : "The search page is where you will find all available information on the ABSCH. On the search page, records are organized into three categories (national records, reference records and SCBD records) and displayed in separate tabs. All record categories can be searched simultaneously by using a combination of free-text filters and predefined filters. By default, no filters are set and all records are displayed under each record category tab. The search results can be narrowed down using combinations of filters giving users the flexibility to retrieve a very wide or a very narrow set of results. The filters available are: free text (user entered text), record type, Party status, keywords, countries, regions and groups and the date the record was published." },
-
-    "search-uid"         : { "url" :"https://www.youtube.com/watch?v=78pRh1LbDj4", "heading" : "Search by Unique Identifer", "desc": "A unique identifier (UID) can be typed into the search and used as a filter either to find a particular record or to get a list of records that reference a particular record. For example, this can be useful if you were looking for all IRCCs issued by a specific CNA. To carry out this particular search you could select the national record type: “Internationally Recognized Certificate of Compliance” from the set of predefined national record filters and enter the UID of the competent national authority as a free text filter. The UID can be entered with or without the revision number (the last set of digits that make up the UID). If revision number is included then only the records that reference that specific version of the CNA will be returned. When the revision number is omitted from the search filter then all records that make reference to any published version of that CNA will be returned." },
-    
-    "search-report"      : { "url" :"https://www.youtube.com/watch?v=wOe4hUt66K4", "heading" : "Report record", "desc" : "In an effort to keep records reliable the report record feature may be used to inform the Secretariat when records may contain out-dated, inaccurate information, or broken links. To report a record click on the \"report record\" link found at the bottom of each expanded record and complete the short submission form providing your reason for reporting the record. The Secretariat receives all reported records and addresses them in consultation with the country’s PA or NFP only as appropriate. Please note that the Secretariat will never modify any national information without the explicit permission of the country's PA." },
-
-    "new-account"        : { "url" :"https://www.youtube.com/watch?v=hv7Kgx0bjdc", "heading" : "Create an CBD account", "desc": "Go to accounts.cbd.int/signup and fill out the simple form to obtain your CBD account. You will need access to a valid email account in order to validate your CBD account before you will be able to submit information to the ABSCH." },
-    "sign-in"            : { "url" :"https://www.youtube.com/watch?v=nAHFkAJZt1w", "heading" : "Signing in to the ABSCH", "desc": "Please take a moment to sign in to absch.cbd.int and verify that your profile information is up-to-date and complete." },
-    "old-account"        : { "url" :"https://www.youtube.com/watch?v=IqoVH8IVsvI", "heading" : "Recover a forgotten password",  "desc" : "If you don’t know if you have a CBD account or if you have forgotten your password, you can go to accounts.cbd.int/password/reset to reset your password."},
-    "forgot-password"        : { "url" :"https://www.youtube.com/watch?v=IqoVH8IVsvI", "heading" : "Recover a forgotten password",  "desc" : "If you don’t know if you have a CBD account or if you have forgotten your password, you can go to accounts.cbd.int/password/reset to reset your password."},
-    
-    "user-management"    : { "url" :"https://www.youtube.com/watch?v=sBYKAuS6TBA", "heading" : "User management", "desc": "The ABSCH's user management page provides functionality for national focal points (NFP) and publishing authorities (PA) to manage which users are nationally authorized to view, create and publish national records on behalf of a country." },
-    "dashboard"          : { "url" :"https://www.youtube.com/watch?v=s6xLer37R5M", "heading" : "Record submission dashboard" , "desc": "Once signed in, clicking on \"Submit\" located in the main navigation bar will take you to your Record Management Centre. The first page you will see when you arrive at the Record Management Centre is your dashboard. Your dashboard displays information on your CBD Account and provides an overview of the status (draft, request, or published) of all your ABSCH records. Through the dashboard you can access the submission forms and all the ABSCH records you are working on. All national records are shared and visible to all national users (NFP, PA, NAUs). However, the draft reference records you create are private and only visible to you." },
-    "notification"       : { "url" :"https://www.youtube.com/watch?v=nYHA8yuTx5c", "heading" : "Requests and notifications", "desc" : "The ABSCH's request and notification system helps users of the ABSCH stay informed about pending publishing requests or changes to the status of their records. This system has been developed to assist publishing authorities address requests promptly and help ensure information in the ABSCH is kept up-to-date and are reliable." },
-    "email-alerts"       : { "url" :"https://www.youtube.com/watch?v=DjRtgYxyeJg", "heading" : "Email alerts", "desc": "The ABSCH allows registered users to set up personalized email alerts when records are published. Email alerts can be set up under the \"preferences\" tab on the submit page." },
-    
-    "helpdesk"           : { "url" :"https://www.youtube.com/watch?v=yiASMdKJY8A", "heading" : "How to get help", "desc": "Need help or have questions? We are happy to provide technical support, answer questions, and receive feedback on the use of the ABSCH. " }
-
+{
+  "country-profile": {
+    "url": "https://www.youtube.com/watch?v=6eDBShJMWfI",
+    "heading": "Profil du pays",
+    "desc": "La façon la plus commode de trouver des informations nationales au Centre d’échange APA est par le biais des profils de pays. Chaque profil de pays contient toutes les informations nationales qui ont été mises à disposition par ce pays et il peut fournir des informations sur les structures institutionnelles et les mesures législatives, administratives ou politiques en place pour la mise en œuvre du Protocole de Nagoya."
+  },
+  "matrix": {
+    "url": "https://www.youtube.com/watch?v=IwyrMQKDZ3o",
+    "heading": "Matrice des mesures en matière d'APA",
+    "desc": "La matrice des mesures de l'APA est située sur une page de profil de pays, à l'intérieur de la section sur les mesures législatives, administratives ou politiques d'APA (mesures APA). L'élargissement de cette section révélera toutes les mesures de l'APA publiées par le pays, ainsi qu'un tableau d'informations qui énumère les principaux éléments de l'APA et où les références connexes à ces éléments peuvent être trouvées dans toutes les mesures publiées. "
+  },
+  "search-matrix": {
+    "url": "https://www.youtube.com/watch?v=IwyrMQKDZ3o",
+    "heading": "Matrice des mesures en matière d'APA",
+    "desc": "La matrice des mesures de l'APA est située sur une page de profil de pays, à l'intérieur de la section sur les mesures législatives, administratives ou politiques d'APA (mesures APA). L'élargissement de cette section révélera toutes les mesures de l'APA publiées par le pays, ainsi qu'un tableau d'informations qui énumère les principaux éléments de l'APA et où les références connexes à ces éléments peuvent être trouvées dans toutes les mesures publiées. "
+  },
+  "search-search": {
+    "url": "https://www.youtube.com/watch?v=YaX_llUfBts",
+    "heading": "Faire une recherche dans le CE-APA",
+    "desc": "La page de recherche vous permet de trouver toute les informations disponibles au Centre d’échange APA. Sur la page de recherche, les fichiers sont organisés en trois catégories (fichiers nationaux, fichiers de référence et fichiers SCBD) et affichés dans des onglets distincts. Toutes les catégories de fichiers peuvent être recherchées simultanément à l’aide d’une combinaison de filtres de texte libre et de filtres prédéfinis. Par défaut, aucun filtre n’est défini et tous les fichiers sont affichés sous chaque onglet de catégorie de fichier. Les résultats de recherche peuvent être précisés en utilisant des combinaisons de filtres donnant aux utilisateurs la souplesse nécessaire pour récupérer un ensemble très large ou très étroit de résultats. Les filtres disponibles sont : le texte libre (texte entré par l’utilisateur), la catégorie de fichier, le statut du pays comme Partie, les mots clés, les pays, les régions et les groupes et la date de publication du fichier."
+  },
+  "search-uid": {
+    "url": "https://www.youtube.com/watch?v=78pRh1LbDj4",
+    "heading": "Recherche par identifiant unique",
+    "desc": "Un identifiant unique (UID) peut être entré dans la barre de recherche et utilisé en tant que filtre soit pour trouver un fichier en particulier ou pour obtenir une liste des fichiers qui font référence à ce fichier particulier. Par exemple, cela peut être utile sur vous étiez en train de chercher pour tous les CCRI émis par une autorité nationale compétente (ANC) donnée. Afin de mener cette recherche, vous pouvez sélectionner le type de fichier national : « certificat de conformité internationalement reconnu » de l'ensemble de filtres de fichiers nationaux prédéfinis et entrez l'identifiant unique de l'autorité nationale compétente comme filtre de texte libre. L'UID peut être entré avec ou sans le numéro de révision (le dernier jeu de chiffres qui composent l'UID). Si le chiffre de révision est inclus, vous obtiendrez seulement les documents référant à cette version spécifiques de l’ANC. Lorsque le chiffre de révision est omis des filtres de recherche, tous les fichiers qui font référence à toute version publiée par cette ANC seront affichés."
+  },
+  "search-report": {
+    "url": "https://www.youtube.com/watch?v=wOe4hUt66K4",
+    "heading": "Rapporter un fichier",
+    "desc": "Dans un effort pour garder les fichiers fiables, un rapport sur un fichier contenant des informations imprécises ou qui ne sont pas à jour ou contenant des hyperliens brisés, devrait  être rapporté au Secrétariat. Afin de rapporter un fichier, cliquez sur le lien « rapporter un fichier » qui se trouve au bas de chaque fichier en question et complétez le bref formulaire de soumission qui incluera la raison qui vous mène à rapporter ce fichier. Le Secrétariat reçoit tous les fichiers rapportés et les aborde en consultant, le cas échéant, l’autorité de publication ou le correspondant national du pays concerné. Veuillez noter que le Secrétariat ne modifiera jamais des informations nationales sans la permission explicite de l’autorité de publication du pays ou de son correspondant national."
+  },
+  "new-account": {
+    "url": "https://www.youtube.com/watch?v=hv7Kgx0bjdc",
+    "heading": "Créer un compte CDB",
+    "desc": "Allez sur account.cbd.int/signup et remplissez le formulaire simple pour obtenir votre compte CBD. Vous aurez besoin d'accéder à un compte de messagerie valide afin de valider votre compte CBD avant de pouvoir soumettre des informations au CE-APA."
+  },
+  "sign-in": {
+    "url": "https://www.youtube.com/watch?v=nAHFkAJZt1w",
+    "heading": "Connexion au CE-APA",
+    "desc": "Veuillez prendre un moment pour vous connecter au CE-APA.cbd.int et vérifier que les informations de votre profil sont à jour et complètes."
+  },
+  "old-account": {
+    "url": "https://www.youtube.com/watch?v=IqoVH8IVsvI",
+    "heading": "Retrouver un mot de passe oublié.",
+    "desc": "Si vous ne savez pas si vous avez un compte CBD ou si vous avez oublié votre mot de passe, vous pouvez vous rendre sur account.cbd.int/password/reset pour réinitialiser votre mot de passe."
+  },
+  "forgot-password": {
+    "url": "https://www.youtube.com/watch?v=IqoVH8IVsvI",
+    "heading": "Retrouver un mot de passe oublié.",
+    "desc": "Si vous ne savez pas si vous avez un compte CBD ou si vous avez oublié votre mot de passe, vous pouvez vous rendre sur account.cbd.int/password/reset pour réinitialiser votre mot de passe."
+  },
+  "user-management": {
+    "url": "https://www.youtube.com/watch?v=sBYKAuS6TBA",
+    "heading": "Gestion de l’usager",
+    "desc": "La page de gestion des utilisateurs de CE-APA fournit des fonctionnalités aux correspondants nationaux (CN) et aux autorités de publication (AP) pour gérer quels utilisateurs sont autorisés au niveau national à voir, créer et publier des fichiers nationaux au nom d'un pays."
+  },
+  "dashboard": {
+    "url": "https://www.youtube.com/watch?v=s6xLer37R5M",
+    "heading": "Tableau de bord pour la soumission de fichier",
+    "desc": "Une fois connecté(e), cliquer sur « Soumettre » situé dans la barre de navigation principale, ce qui vous mènera à votre Centre de gestion des fichiers. La première page que vous verrez lorsque vous arriverez au Centre de gestion des fichiers est votre tableau de bord. Votre tableau de bord affiche des informations sur votre compte CBD et fournit un aperçu du statut (projet, demande ou publié) de tous vos fichiers CE-APA. Grâce au tableau de bord, vous pouvez accéder aux formulaires de soumission et à tous les fichiers CE-APA sur lesquels vous travaillez. Tous les fichiers nationaux sont partagés et visibles par tous les utilisateurs nationaux (CN,AP, UNA). Cependant, les brouillons des 'fichiers de référence que vous créez sont privés et visibles pour vous-même."
+  },
+  "notification": {
+    "url": "https://www.youtube.com/watch?v=nYHA8yuTx5c",
+    "heading": "Demandes et notifications",
+    "desc": "Le système de demande et de notification du CE-APA aide les utilisateurs du CE-APA à rester informés des demandes de publication en attente ou des modifications apportées à l'état de leurs dossiers. Ce système a été développé pour aider les autorités de publication à répondre rapidement aux demandes et à garantir que les informations contenues dans le CE-APA sont tenues à jour et fiables."
+  },
+  "email-alerts": {
+    "url": "https://www.youtube.com/watch?v=DjRtgYxyeJg",
+    "heading": "Alertes courriel",
+    "desc": "Le Centre d'échange APA permet aux utilisateurs inscrits de configurer des alertes courriel lorsque de nouveaux fichiers sont publiés. Les alertes par courriel peuvent être définies sous l’onglet « Préférences » sur la page de soumission."
+  },
+  "helpdesk": {
+    "url": "https://www.youtube.com/watch?v=yiASMdKJY8A",
+    "heading": "Comment obtenir de l’aide",
+    "desc": "Vous avez une question ou avez besoin d’aide? Il nous fait plaisir de vous fournir du soutien technique, de répondre à vos questions, et de recevoir de la rétroaction sur l’utilisation du CE-APA. "
+  }
 }

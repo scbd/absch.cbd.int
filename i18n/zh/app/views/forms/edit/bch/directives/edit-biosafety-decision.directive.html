@@ -238,7 +238,7 @@
 									</div>
 									<div class="row" >
 										<div class="col-xs-12">
-											<div class="alert alert-danger" ng-if="isLmoDecisionForIntentionalIntroduction"><strong>Note:</strong> 上方<i>决定、通知、沟通或声明主题</i>字段中的前两个类别已选中，表明该记录是同时针对有意引入到环境中的及直接用作食品或饲料，或用于加工目的改性活生物体的决定。因此，下面的<i>决定类型</i>字段不可编辑，因为相关信息（包括进口商/出口商或申请人的联系方式）已提供。如果情况并非如此，则请创建两个不同的记录，一个用于关于有意引入到环境中的改性活生物体的决定，另一个用于关于直接用作食品或饲料，或用于加工目的的改性活生物体的决定。</div>
+											<div class="alert alert-danger" ng-if="isLmoDecisionForIntentionalIntroduction"><strong>注意：</strong>上方<i>决定、通知、沟通或声明主题</i>字段中的前两个类别已选中，表明该记录是同时针对有意引入到环境中的及直接用作食品或饲料，或用于加工目的改性活生物体的决定。因此，下面的<i>决定类型</i>字段不可编辑，因为相关信息（包括进口商/出口商或申请人的联系方式）已提供。如果情况并非如此，则请创建两个不同的记录，一个用于关于有意引入到环境中的改性活生物体的决定，另一个用于关于直接用作食品或饲料，或用于加工目的的改性活生物体的决定。</div>
 										</div>
 									</div>
 									<div class="row">
@@ -413,7 +413,7 @@
 										</div>
 									</div>
 								</div>
-							</section><!-- ====================Section F End=================== --> <!-- ====================Section G Start=================== --><section ng-if="isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+							</section><!-- ====================Section F End=================== --> <!-- ====================Section G Start=================== --><section ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
 								<div class="well no-shadow bg-white">
 									<legend>与其他数据库共享信息</legend>
 									<div class="row">

@@ -1,28 +1,28 @@
-﻿<div id="view-history" style="max-height:200px;overflow:scroll;display:inline!important;"><span ng-if="documents.length == 0">没有可用历史版本</span><table style="width:100%!important;" class="table table-condensed" ng-if="documents.length > 0">
+﻿<div id="view-history" style="max-height:200px;overflow:scroll;display:inline!important;"><table style="width:100%!important;" class="table table-condensed" ng-if="documents.length > 0">
         <tr>
-                <th class="color-litegrey" style="font-size:12px;bold;">唯一识别码</th>
-                <th class="color-litegrey " style="font-size:12px;bold;">状态</th>
-                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;"><span ng-if="!publicView">发布</span>日期</th>
-                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;" ng-if="!publicView">请求日期</th>
+                <th class="color-litegrey" style="font-size:12px;bold;"></th>
+                <th class="color-litegrey " style="font-size:12px;bold;"></th>
+                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;"></th>
+                <th class="color-litegrey hidden-xs" style="font-size:12px;bold;" ng-if="!publicView"></th>
             </tr>
            
         <tbody ng-repeat="document in documents | orderBy:'updatedOn':true" style="font-size:12px;" >
             <tr>
-                <td style="white-space:nowrap;"><a rel="noopener" translation-url  ng-href="/database/{{document.type | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank"><strong  ng-bind="document | uniqueID"></strong></a></td>
+                <td style="white-space:nowrap;"></td>
                 <td>
-                    <div><span ng-show="!document.deletedOn && document.body.amendmentIntent==1  && document.type!='absCheckpointCommunique'"><span class="bold color-red">已撤销</span></span> <span ng-show="((documents.length>1 && !document.deletedOn && document.body.amendmentIntent!=1 && document.revision < documents.length))"><span class="bold color-grey" ><span ng-if="document.type === 'permit'">非有效</span><span ng-if="document.type !== 'permit'">旧版本</span></span></span><span ng-show="!document.deletedOn && (documents.length==1 || (documents.length>1 && documents.length == document.revision && (!isPermit || document.body.amendmentIntent!=1)))"><span class="bold color-green">已发布</span></span><span ng-show="document.deletedOn"><span class="bold color-grey">已删除</span></span></div>
+                    <div></div>
                 </td>
                 <td  class="hidden-xs" >
-                    <div ng-show="!publicView"><span><span ng-bind="document.updatedBy.firstName"></span> <span ng-bind="document.updatedBy.lastName"></span> (<span ng-bind="document.updatedBy.email"></span>)</span> <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold" ng-bind="document.updatedOn | formatDateWithTime"></span></div>
+                    <div ng-show="!publicView"></div>
 
-                        <div ng-show="publicView">日期： <span style="font-weight:500;" ng-bind="document.updatedOn | formatDateWithTime"></span></div>
+                        <div ng-show="publicView"></div>
 
-                    <div ng-show="document.body.amendmentDescription"><span ng-show="document.body.amendmentDescription"><div ng-show="!more"><span ng-bind-html="document.body.amendmentDescription| lstring:locale | limitTo:200"></span> <a rel="noopener" translation-url  ng-href="#" ng-click="more=!more" ng-show="(document.body.amendmentDescription| lstring:locale).length > 200"><strong>...更多</strong></a></div>
-                                <div ng-show="more"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <a rel="noopener" translation-url  ng-href="#" ng-click="more=!more"><strong>...更少</strong></a></div></span></div>
+                    <div ng-show="document.body.amendmentDescription"><div ng-show="!more"></div>
+                                <div ng-show="more"></div></div>
                 </td>
                 <td ng-if="!publicView"  class="hidden-xs">
-                    <div><span><span ng-bind="document.submittedBy.firstName"></span> <span ng-bind="document.submittedBy.lastName"></span> (<span ng-bind="document.submittedBy.email"></span>)</span> <br> <span style="font-size:11px;text-transform:uppercase;font-weight:bold" ng-bind="document.submittedOn | formatDateWithTime"></span></div>
+                    <div></div>
                 </td>
             </tr>
         </tbody>
-    </table><span ng-if="error" ng-bind="error"></span></div>
+    </table></div>

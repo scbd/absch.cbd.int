@@ -43,7 +43,7 @@
 		<legend>Informations générales</legend>		
 		<div ng-if="document.government">
 			<label name="country">Pays</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 		</div>
 
 		<div ng-if="document.authorities">
@@ -346,7 +346,7 @@
 				</ul>
 			</div>
 		</div>
-	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
 		<legend>Partage d’informations avec d’autres bases de données</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>Est-ce que cette évaluation des risques est liée à un OVM pour une utilisation commerciale?</label>

@@ -3,7 +3,10 @@
     <div ng-if="currentCountry.code" style="padding:5px;"
      ng-class="{'bg-party': currentCountry.isParty, 'bg-non-party':!currentCountry.isParty, 
                 'bg-inbetween': currentCountry.isInbetweenParty}">
-        <div></div>
+        <div><span ng-if="currentCountry.isParty"
+                >Parte en el Protocolo de Seguridad de la Biotecnología</span> <span ng-if="currentCountry.isInbetweenParty"
+                >Ratificado, pero todavía no es Parte</span> <span ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty"
+                >Estado que no es Parte del Protocolo de Seguridad de la Biotecnología</span></div>
 
         <div class="row abs-exception-tooltip"
         ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
@@ -11,17 +14,19 @@
                 countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
             <div class="col-lg-12">
                 <div class="small" ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')"
-                    style="margin-top:5px;white-space: normal;padding:3px;"></div>
-                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;"></div>
-                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;"></div>
-                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;"></div>
+                    style="margin-top:5px;white-space: normal;padding:3px;">La ratificación de Dinamarca del Protocolo de Cartagena no se aplica a Groenlandia y las Islas Feroe.</div>
+                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;">Existe una disputa entre el Gobierno de la Argentina y el del Reino Unido de Gran Bretaña e Irlanda del Norte en relación con la soberanía de las Islas Falklands (Islas Malvinas).</div>
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">Territorio no autónomo.</div>
+                <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;">La ratificación del Protocolo de Cartagena por parte del Reino Unido no incluye los <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
+                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguila; Bases bajo soberanía británica de Acrotiri y Dhekelia; Bermuda; Islas Falkland; Islas Caimán; Islas Georgias del Sur y Sandwich del Sur; Islas Pitcairn; Islas Turcas y Caicos; Islas Vírgenes Británicas; Montserrat; Santa Elena, Ascensión y Tristán de Acuña; Territorio Británico Antártico y Territorio Británico del Océano Índico">13 territorios de ultramar</a> o las <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories"  data-container="body" 
+                        data-bs-toggle="tooltip" data-placement="left" title="Bailía de Jersey; Isla de Guernesey e Isla de Man">tres dependencias de la Corona</a></div>
             </div>
         </div>
     </div>
     <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
             <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
-                <td ></td>
-                <td></td>
+                <td ><span class="badge bg-black"  ng-bind="schema.count"></span></td>
+                <td><a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span> <span ng-if="schema.isRegional">- <span ng-bind="schema.regionalGovernment|term:locale"></span></span></a> <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a></td>
             </tr>
         </table>
 </div>

@@ -6,8 +6,8 @@
             <div style="margin:5px" class="row">
                 <div ng-show="document.government">
                     <label name="country">País</label>
-                    <div class="km-value" comapre-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
-                            target={{target}}>{{document.government|term:locale}}</a> <span ng-party-status government="document.government" id="government"></span></div>
+                    <div class="km-value" comapre-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}"
+                            target={{target}}>{{document.government|term:locale}}</a></div>
                 </div>
 
                 <div ng-show="document.contact"></br><label>Persona responsable que envía el informe</label>
