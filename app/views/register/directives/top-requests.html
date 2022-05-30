@@ -21,7 +21,7 @@
             ng-click="gotoRequest(task.workflow.data.metadata.schema, task.identifier)" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"
             id="{{task.workflow._id}}">
 
-            <div class="col-xs-10 col-sm-5">
+            <div class="col-sm-5">
                 <span style="text-transform: uppercase;font-size:10px;font-weight: 450">
                     <span ng-if="task.workflow.type.name =='publishReferenceRecord'" style="color:#888;"> PUBLISH
                     </span>
@@ -35,7 +35,7 @@
                 <br>
                 <span class="bold" style="font-size: 14px;" ng-bind="task.workflow.data.title | lstring"></span>
             </div>
-            <div class="col-xs-4  hidden-xs">
+            <div class="col-sm-4  hidden-xs">
                 <div style="text-transform: uppercase;font-weight: bold; font-size:12px; ">
                     <span ng-bind="task.workflow.createdOn | moment:'fromNow'"></span>
                 </div>
@@ -43,7 +43,7 @@
                     by <span ng-bind="task.workflow.createdBy_info.firstName+' '+task.workflow.createdBy_info.lastName+'('+task.workflow.createdBy_info.email+')'"></span>
                 </a>
             </div>
-            <div class="col-xs-3  hidden-xs">
+            <div class="col-sm-3  hidden-xs">
                 <div style="font-size: 12px;" ng-if="task.workflow.workflowExpiryDate >= today" class='bold'>
                     <span ng-if="task.workflow.type.name == 'publishReferenceRecord'" class="color-orange"> PENDING
                         SCBD REVIEW </span>

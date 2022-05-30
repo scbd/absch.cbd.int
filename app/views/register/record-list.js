@@ -86,7 +86,7 @@ import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
                             {
                                 appendToBody: true,
                                 type        : 'element',
-                                selector    : "#new_button",
+                                selector    : "#add-new-btn",
                                 title       : joyRideText.adding.title,
                                 content     : joyRideText.adding.content,
                                 placement   : 'left'
