@@ -28,7 +28,7 @@
         .steps li a {
             color: white;
             text-decoration: none;
-            padding: 8px 0 8px 55px;
+            padding: 8px 3px 8px 55px;
             background: #ccc;
             position: relative;
             display: block;
@@ -145,7 +145,7 @@
             src="'template/workflow-arrows'"></ng-include>
     </div>
 
-    <div class="workflow-validation-error">
+    <div ng-hide="workflowScope.tab=='intro'" class="workflow-validation-error">
         <div km-document-validation ng-model="validationReport" container="{{container}}"></div>
     </div>
 
@@ -196,7 +196,7 @@
     </div>
 
     <div ng-show="tab=='review'" km-tab="review" id="schemaView" class="mb-5 mt-2">
-        <div class="record-Options-div">
+        <div class="record-Options-div language-btn-options">
             <div class="btn-group btn-group-xs" role="group" ng-if="languages.length>1">
                 <button type="button" class="btn btn-lang btn-default btn-xs"
                     ng-class="{'btn-info' : selectedLanguage==lang}" ng-repeat="lang in languages"
@@ -204,8 +204,6 @@
                     <span ng-bind="lang | uppercase"></span>
                 </button>
             </div>
-            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">languages
-                available:</span>
         </div>
 
         <div ng-transclude="reviewForm"></div>

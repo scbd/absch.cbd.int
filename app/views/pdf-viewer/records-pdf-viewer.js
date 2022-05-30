@@ -57,6 +57,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             
             $timeout(function(){
                 $scope.unloadPdf = false;
+                $scope.loading = false;
             }, 500)
         }
 

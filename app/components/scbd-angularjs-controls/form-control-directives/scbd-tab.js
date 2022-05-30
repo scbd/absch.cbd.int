@@ -23,8 +23,7 @@ import app from 'app'; ;
 
                           var qBody = $element.parents("body:last");
                           var qTarget = $element.parents("div:first").find("form[name='editForm']:first");
-
-                          if (qBody.scrollTop() > qTarget.offset().top) {
+                          if (qTarget.offset() && qBody.scrollTop() > qTarget.offset().top) {
                               $timeout(function() {
                                   if (!qBody.is(":animated"))
                                       qBody.stop().animate({

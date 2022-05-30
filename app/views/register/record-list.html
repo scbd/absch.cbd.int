@@ -62,7 +62,7 @@
                         <a type="button" class="btn btn-outline-secondary btn-sm p-0 px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">Refresh</span>
                         </a>
-                        <a type="button" class="btn btn-primary btn-sm p-0 px-1" rel="noopener" translation-url 
+                        <a type="button" class="btn btn-primary btn-sm p-0 px-1" id="add-new-btn" rel="noopener" translation-url 
                         ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
                         <i class="fa fa-plus float-start pt-1"></i><span class="d-none d-md-block ps-1 float-end">Add New</span>
                         </a>
@@ -181,7 +181,7 @@
                                 <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
                                 <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                                 <span class="color-red bold" ng-show="record.revoked">Revoked</span>
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url  class="btn btn-danger btn-sm color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
+                                <a class="text-decoration-none color-orange" rel="noopener" translation-url  class="btn btn-danger btn-sm color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
                                     Pending approval
                                 </a>
                                 <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">

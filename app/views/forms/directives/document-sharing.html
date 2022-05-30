@@ -63,7 +63,7 @@
                                                     <span ng-if="hasStatus('expired', link)"class="label label-danger">Expired</span>
                                                     <span ng-if="hasStatus('revoked', link)"class="label label-danger">Revoked</span>
                                                 </td>
-                                                <td width="70%">
+                                                <td >
                                                     <div class="btn-group width-100">
                                                         <div class="input-group" >
                                                             <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control d-none d-sm-inline-block" value="{{::link.sharedWith.emails}}" disabled readonly/>

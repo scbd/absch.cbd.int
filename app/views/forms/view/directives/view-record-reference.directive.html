@@ -72,7 +72,7 @@
                 <span class="selected-reference-uid">
                     
                     <span ng-if="options.isCNA"> <span class="color-blue"> Competent National Authority:</span>
-                        <span ng-bind="(document || document) | uniqueID"></span> </span>
+                        <!-- <span ng-bind="(document || document) | uniqueID"></span> </span> -->
                     <span ng-if="options.isNFP"><span class="color-blue uppercase">National Focal Point:</span>
                         <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
                         <span ng-bind="document.body.lastName"></span></span>
@@ -161,7 +161,7 @@
     </script>
 
     <script id="reference-contact-address" type="text/ng-template" trados-translation="true">
-        <a class="text-decoration-none mb-1 color-blue" ng-if="contactAddress.address || contactAddress.country || contactAddress.city || contactAddress.state || contactAddress.postalCode">
+        <a class="text-decoration-none mb-1 color-black" ng-if="contactAddress.address || contactAddress.country || contactAddress.city || contactAddress.state || contactAddress.postalCode">
             <span ng-show="contactAddress.addressHTML" ng-bind-html="contactAddress.addressHTML | lstring:locale"></span>
             <div ng-bind-html="contactAddress.address | lstring:locale"></div>
             <span ng-bind="contactAddress.city | lstring:locale"></span><span ng-show="contactAddress.city && contactAddress.state">, </span>

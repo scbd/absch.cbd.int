@@ -3,7 +3,7 @@
     <link href="/app/css/record.css" rel="stylesheet">
     <register-top-menu></register-top-menu>
 
-    <div class="innerPageContent register-content card card-1-notrans m-0 p-3">
+    <div class="innerPageContent shadow-s border-0 register-content card card-1-notrans m-0 p-3">
         
         <div class="register-content-header bg-darkgrey color-white" >
 
@@ -70,56 +70,58 @@
                     </div>
                     <div class="col-md-6 cp-header">
                         <table>
-                            <td>
-                                <label>
-                                    <a class="text-decoration-none" rel="noopener" href="#" ng-click="showUserRoles()">Role(s):</a></label>
-                            </td>
-                            <td>
-                                <span class="comma" ng-if="::roles.isNationalFocalPoint">
-                                    <span ng-if="isAbs">
-                                        National Focal Point
-                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
-                                        title="The National Focal Point is responsible for liaison with the Secretariat as card as for designating themselves or another user as a Publishing Authority."></span>
-                                    </span>
-                                    <span ng-if="isBch">
-                                        Cartagena National Focal Point (CPB-NFP)
-                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
-                                            title="The National Focal Points are responsible for liaison with the Secretariat as card as for designating themselves or another user as a BCH focal point. The National Focal Point can create draft national records and submit them to the BCH focal point for publication."></span>
-                                    </span>
-                                </span>
-
-                                <span class="comma" ng-if="::roles.isPublishingAuthority">
-                                    <span ng-if="isAbs"> Publishing Authority (PA)  
-                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                        title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA."></span>
-                                    </span>  
-                                    <span ng-if="isBch">  
-                                        BCH National Focal Point (BCH-NFP)           
-                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                            title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
+                            <tr>
+                                <td>
+                                    <label>Role(s):</label>
+                                </td>
+                                <td>
+                                    <span class="comma" ng-if="::roles.isNationalFocalPoint">
+                                        <span ng-if="isAbs">
+                                            National Focal Point
+                                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                            title="The National Focal Point is responsible for liaison with the Secretariat as card as for designating themselves or another user as a Publishing Authority."></span>
+                                        </span>
+                                        <span ng-if="isBch">
+                                            Cartagena National Focal Point (CPB-NFP)
+                                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                                title="The National Focal Points are responsible for liaison with the Secretariat as card as for designating themselves or another user as a BCH focal point. The National Focal Point can create draft national records and submit them to the BCH focal point for publication."></span>
                                         </span>
                                     </span>
-                                </span>
 
-                                <span class="comma" ng-if="::roles.isNationalAuthorizedUser">
-                                    National Authorized User (NAU) 
-                                    <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                        title="National Authorized User (NAU) can create draft national records and submit them to the BCH focal point to verify and publish.">
-                                    </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                        title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority for approval."></span></span>
-                                </span>
-
-                                <span class="comma" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
-                                    Registered User 
-                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                        title="Regular users can create draft reference records and request their publication from the CBD Secretariat."></span></span>
-                                
-                                    <span class="comma" ng-if="::roles.isAdministrator">
-                                        <strong class="color-pink">Admin</strong>
+                                    <span class="comma" ng-if="::roles.isPublishingAuthority">
+                                        <span ng-if="isAbs"> Publishing Authority (PA)  
+                                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA."></span>
+                                        </span>  
+                                        <span ng-if="isBch">  
+                                            BCH National Focal Point (BCH-NFP)           
+                                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                                title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
+                                            </span>
+                                        </span>
                                     </span>
-                                </span>
 
-                            </td>
+                                    <span class="comma" ng-if="::roles.isNationalAuthorizedUser">
+                                        National Authorized User (NAU) 
+                                        <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="National Authorized User (NAU) can create draft national records and submit them to the BCH focal point to verify and publish.">
+                                        </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority for approval."></span></span>
+                                    </span>
+
+                                    <span class="comma" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
+                                        Registered User 
+                                        <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="Regular users can create draft reference records and request their publication from the CBD Secretariat."></span></span>
+                                    
+                                        <span class="comma" ng-if="::roles.isAdministrator">
+                                            <strong class="color-pink">Admin</strong>
+                                        </span>
+
+                                    </span>
+                                    
+                                </td>
+                                <td class="ps-2"><span><a rel="noopener" class="text-decoration-underline fw-bold" href="#" ng-click="showUserRoles()">show all my roles</a></span></td>
                             </tr>
                             <tr>
                                 <td>
@@ -140,7 +142,7 @@
                                         accounts.cbd.int/password
                                     </a>
                                 </td>
-
+                                <td></td>
                             </tr>
                         </table>
                     </div>
@@ -148,31 +150,6 @@
             </div>
 
             <top-requests view-all-url="/register/requests"></top-requests>
-
-            <div id="SubmitPage border-top">
-                <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
-                    <div class="p-0 m-0 mb-1">
-                        <table class="overview table w-100">
-                            <thead></thead>
-                            <tbody>
-                                <tr class="fw-bold">
-                                    <td>
-                                        <h4 class="p-0 m-0 fs-5" id="recordOverview">
-                                            Record overview</h4>
-                                    </td>
-                                    <td class="table_display_none">
-                                        <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
-                                    </td>
-                                    <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
-                                    <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
-                                    <td style="width: 7%;" class="text-center table_display_none">Requests</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div>
                     <div id="menuPlaceholder" ng-if="::roles.isNationalUser||roles.is('Administrator')" class="m-0 mt-2 mb-3">
 
                         <div class="p-0 m-0 border-bottom position-relative">
@@ -186,13 +163,34 @@
                         </div>
 
                         <div ng-if="::roles.isNationalSchemaUser('focalPoint') || roles.is('Administrator')">
+                            <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
+                                <div class="p-0 m-0 mb-1">
+                                    <table class="overview table w-100">
+                                        <thead></thead>
+                                        <tbody>
+                                            <tr class="fw-bold">
+                                                <td>
+                                                    <h4 class="p-0 m-0" id="recordOverview">
+                                                        Record overview</h4>
+                                                </td>
+                                                <td class="table_display_none">
+                                                    <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
+                                                </td>
+                                                <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
+                                                <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
+                                                <td style="width: 7%;" class="text-center table_display_none">Requests</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <table class="overview table w-100">
                                 <thead></thead>
                                 <tbody>
                                     <tr>
                                         <td class="table_width">
                                             <div class="btn-group btn-group-sm p-0 table_width" role="group">
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle-fill cursor"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-caret-down cursor-pointer p-1"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
                                             </div>
@@ -219,14 +217,35 @@
                             </table>
                         </div>
                         <div ng-if="isAbs">
+                            <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
+                                <div class="p-0 m-0 mb-1">
+                                    <table class="overview table w-100">
+                                        <thead></thead>
+                                        <tbody>
+                                            <tr class="fw-bold">
+                                                <td>
+                                                    <h4 class="p-0 m-0" id="recordOverview">
+                                                        Record overview</h4>
+                                                </td>
+                                                <td class="table_display_none">
+                                                    <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
+                                                </td>
+                                                <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
+                                                <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
+                                                <td style="width: 7%;" class="text-center table_display_none">Requests</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                             <table class="overview table w-100" >
                                 <thead></thead>
                                 <tbody>
                                     <tr>
                                         <td class="table_width">
                                             <div class="btn-group btn-group-sm table_width" role="group">
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle-fill cursor"></i></button>
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="fa fa-plus"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-caret-down cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
                                             </div>
                                         </td>
@@ -255,8 +274,8 @@
                                             <div class="btn-group btn-group-sm table_width" role="group">
                                                 <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
-                                                    <i class="bi bi-arrow-down-circle-fill cursor"
-                                                        ng-class="{'bi-arrow-down-circle-fill':!topRecords[schema], 'bi-arrow-up-circle-fill':topRecords[schema]}"
+                                                    <i class="fa fa-caret-down cursor-pointer p-1"
+                                                        ng-class="{'fa fa-caret-down':!topRecords[schema], 'fa fa-caret-up':topRecords[schema]}"
                                                         aria-hidden="true"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
@@ -289,7 +308,7 @@
 
                                         <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
                                                 ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/requests"
-                                                class="badge bg-danger text-decoration-none"
+                                                class="badge bg-request text-decoration-none"
                                                 ng-class="{'bg-litegrey': facets(schema,'request')===0}" ng-bind="facets(schema,'request')"></a>
 
                                         </td>
@@ -313,7 +332,27 @@
                                     title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
                             </span>
                         </div>
-
+                        <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
+                            <div class="p-0 m-0 mb-1">
+                                <table class="overview table w-100">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr class="fw-bold">
+                                            <td>
+                                                <h4 class="p-0 m-0" id="recordOverview">
+                                                    Record overview</h4>
+                                            </td>
+                                            <td class="table_display_none">
+                                                <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
+                                            </td>
+                                            <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
+                                            <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
+                                            <td style="width: 7%;" class="text-center table_display_none">Requests</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                         <div ng-repeat="schema in referenceSchemas" ng-if="::roles.isSchemaUser(schema) || roles.is('Administrator')">
                             <table class="overview table w-100">
                                 <thead></thead>
@@ -323,8 +362,8 @@
                                             <div class="btn-group btn-group-sm table_width" role="group">
                                                 <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
-                                                    <i class="bi bi-arrow-down-circle-fill cursor"
-                                                        ng-class="{'bi-arrow-down-circle-fill':!topRecords[schema], 'bi-arrow-up-circle-fill':topRecords[schema]}"
+                                                    <i class="fa fa-caret-down cursor-pointer p-1"
+                                                        ng-class="{'fa fa-caret-down':!topRecords[schema], 'fa fa-caret-up':topRecords[schema]}"
                                                         aria-hidden="true"></i>
                                                     <button type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
@@ -359,7 +398,7 @@
 
                                         <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
                                                 ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/requests"
-                                                class="badge bg-danger text-decoration-none"
+                                                class="badge bg-request text-decoration-none"
                                                 ng-class="{'bg-litegrey': facets(schema,'request')===0}" ng-bind="facets(schema,'request')"></a>
                                         </td>
                                     </tr>
@@ -384,8 +423,8 @@
                                                 <button id="quickViewContact" type="button" class="btn btn-outline-secondary p-0"
                                                     title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,'contact')">
-                                                    <i class="bi bi-arrow-down-circle-fill cursor"
-                                                        ng-class="{'bi-arrow-down-circle-fill':!topRecords['contact'], 'bi-arrow-up-circle-fill':topRecords['contact']}"
+                                                    <i class="fa fa-caret-down p-1 cursor-pointer"
+                                                        ng-class="{'fa fa-caret-down':!topRecords['contact'], 'fa fa-caret-up':topRecords['contact']}"
                                                         aria-hidden="true"></i></button>
                                                 <button id="addNewRecordContact" type="button" class="btn btn-outline-secondary p-0"
                                                     title="Add new record" data-bs-toggle="tooltip" ng-click="gotoNew($event,'contact')"><i
