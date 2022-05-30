@@ -35,7 +35,7 @@
                                     <div km-select ng-model="filters.role" binding-type="string" placeholder="Roles" items="options.filterRoles()"></div>
                                 </div>
                                 <div class="float-end">
-                                    <input type="button" class="btn btn-primary" ng-click="loadRecords()" value="Filter" ng-disabled="!filters.partyStatus || !filters.filterType || !filters.role">
+                                    <input type="button" class="btn btn-primary" ng-click="loadRecords()" value="Filter" ng-disabled="!filters.partyStatus || !filters.filterType || !filters.role" />
                                     <button type="button" class="btn btn-default" style="text-transform: uppercase;" ng-click="export()" ng-disabled="(totalCount||0) <= 0 || readyForExport||loading">
                                         <i class="fa fa-table" ></i> Export
                                     </button>

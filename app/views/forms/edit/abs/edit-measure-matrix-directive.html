@@ -287,10 +287,10 @@
                                 <td style="text-align:left;vertical-align:middle;width:125px">
                                     <div class="btn-group matrix-btn">
                                         <label class="btn">
-                                            <input type="radio" ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-change="initializeOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})" name="rd_scopeOthers"   ng-value="true" value="true"> Yes
+                                            <input type="radio" ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-change="initializeOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})" name="rd_scopeOthers"   ng-value="true" value="true" /> Yes
                                         </label>
                                         <label class="btn">
-                                            <input type="radio" ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-change="deleteOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})" name="rd_scopeOthers" ng-value="false" value="false"> No
+                                            <input type="radio" ng-model="identifiers['5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A']" ng-change="deleteOther({identifier:'5B6177DD-5E5E-434E-8CB7-D63D67D5EBED#24E809DA-20F4-4457-9A8A-87C08DF81E8A'})" name="rd_scopeOthers" ng-value="false" value="false" /> No
                                         </label>
                                     </div>
                                 </td>
@@ -346,11 +346,11 @@
                     <td style="text-align:left;vertical-align:middle;width:125px" ng:if="isYesNo(term.identifier)" ng:class="{'bg-main' : isMainElement(term.identifier)}">
                         <div class="btn-group matrix-btn">
                             <label class="btn">
-                            <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}" ng-value="true"> Yes
+                            <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier],'yes')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}" ng-value="true" /> Yes
                             <!--{{((term.narrowerTerms.length||0) ==0) ? true : false}}-->
                         </label>
                             <label class="btn">
-                            <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}" ng-value="false"> No
+                            <input type="radio" ng-change="updateSelected(term, identifiers[term.identifier], 'no')" ng-model="identifiers[term.identifier]" name="rd_{{term.identifier}}" ng-value="false" /> No
                             <!--{{((term.narrowerTerms.length||0) == 0) ? false : true}}-->
                         </label>
                         </div>

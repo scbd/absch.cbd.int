@@ -47,12 +47,12 @@
 								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
 								<div class="help-block">Protocol is required (https:// or http://)</div>
 								<div ng-if="editor.urlMissing" style="color: #e32">Please provide valid URL</div>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: https://www.cbd.int">
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: https://www.cbd.int" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
 								<label>Name</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website">
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
@@ -92,7 +92,7 @@
 					</div>
 					<div class="control-group" >
 						<label>File name</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.name" />
 					</div>
 					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
 						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">Language</label>
@@ -102,7 +102,7 @@
 					<br/>
 					<div class="control-group" >
 						<label>Tags</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="example: Biodiversity, Aichi target">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="example: Biodiversity, Aichi target" />
 					</div>
 				</div>
 				<div class="modal-footer">

@@ -67,7 +67,7 @@
                 <label>Email address of the nominee</label>
                 <div class="input-group ps-0 mb-1">
                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                    <input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="email@domain.xyz" required>
+                    <input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="email@domain.xyz" required />
                     <span class="input-group-btn">
                         <button class="btn btn-default" aria-label="Search" type="submit">
                             <i class="fa fa-fw" ng-class="{ 'fa-search' : !searchUserDialogCtrl.loading, 'fa-cog fa-spin' : searchUserDialogCtrl.loading  }"></i>
@@ -130,14 +130,14 @@
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control fs-small-8" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="<new>">
+                                <input type="text" class="form-control fs-small-8" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="first name" />
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="lastName">Last name</label>
-                                <input type="text" class="form-control fs-small-8" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true">
+                                <input type="text" class="form-control fs-small-8" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true" />
                             </div>
                         </div>
 
@@ -148,7 +148,7 @@
                         <div class="col-12">
                             <div class="form-group">
                                 <label for="organization">Organization</label>
-                                <input type="text" class="form-control fs-small-8" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true">
+                                <input type="text" class="form-control fs-small-8" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true" />
                             </div>
                         </div>
                     </div>
@@ -159,7 +159,7 @@
                                 <label>Email</label>
                                 <div class="input-group mb-1 ps-0">
                                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    <input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz">
+                                    <input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" />
                                 </div>
                             </div>
                         </div>

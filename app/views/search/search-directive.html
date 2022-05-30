@@ -400,7 +400,7 @@
                 <fieldset>
                     <div class="form-group">
                         <label for="filterTitle">Filter title</label>
-                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="Filter title">
+                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="Filter title" />
                     </div>
                     <div class="form-group">
                         <label for="filters">Filters</label><br/>
@@ -413,7 +413,7 @@
                     </div>
                     <div class="form-group">
                         <label for="sendEmail">
-                            <input type="checkbox" name="sendEmail" ng-model="record.sendEmail">
+                            <input type="checkbox" name="sendEmail" ng-model="record.sendEmail" />
                              Send me an email when records relevant to this search are added or updated.
                         </label>
                     </div>
@@ -439,14 +439,14 @@
         <div class="modal-body">
             <div class="form-group">
                 <label class="color-black fw-bold pb-2" for="filterTitle">Title for this saved search:</label>
-                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title" />
             </div>
             <div>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                     <p ng-repeat="error in errors" ng-bind="error"></p>
                 </div>
             </div>
-            <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
+            <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail" />
             <label class="color-black fw-bold m-2" for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
             <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                 <p ng-repeat="error in errors" ng-bind="error"></p>

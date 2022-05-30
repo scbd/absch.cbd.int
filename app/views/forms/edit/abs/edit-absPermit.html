@@ -58,10 +58,10 @@
                                         <!--<div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
-                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
+                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0" /> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
                                                     of compliance (a new certificate will be constituted and the old one will no longer be valid)
                                                     </br>
-                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized
+                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1" /> <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized
                                                     certificate of compliance will no longer be valid.
                                                 </div>
                                             </div>
@@ -175,8 +175,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.providersConfidential}">
-                                                        <input type="checkbox" name="providersConfidential" ng-model="document.providersConfidential" watch-items>
-                                                        This information is confidential</input>
+                                                        <input type="checkbox" name="providersConfidential" ng-model="document.providersConfidential" watch-items />
+                                                        This information is confidential
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.providersConfidential}">
@@ -227,8 +227,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.entitiesToWhomPICGrantedConfidential}">
-                                                        <input type="checkbox" name="entitiesToWhomPICGrantedConfidential" ng-model="document.entitiesToWhomPICGrantedConfidential" watch-items>
-                                                        This information is confidential</input>
+                                                        <input type="checkbox" name="entitiesToWhomPICGrantedConfidential" ng-model="document.entitiesToWhomPICGrantedConfidential" watch-items />
+                                                        This information is confidential
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
@@ -292,8 +292,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.subjectMatterConfidential}">
-                                                        <input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items>
-                                                        This information is confidential</input>
+                                                        <input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items />
+                                                        This information is confidential
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.subjectMatterConfidential}">
@@ -341,15 +341,15 @@
             
                                                 <div ng-if="document.gisFiles">
                                                     <div class="input-prepend input-append">
-                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}">
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" />
                                                         <span class="add-on">lat</span>
                                                     </div>
                                                     <div class="input-prepend input-append">
-                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}">
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}" />
                                                         <span class="add-on">long</span>
                                                     </div>
                                                     <div class="input-prepend input-append">
-                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}">
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}" />
                                                         <span class="add-on">zoom</span>
                                                     </div>
             
@@ -388,8 +388,8 @@
                                                 <div class="panel panel-default">
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.usagesConfidential}">
-                                                        <input type="checkbox" name="usagesConfidential" ng-model="document.usagesConfidential" watch-items>
-                                                        This information is confidential</input>
+                                                        <input type="checkbox" name="usagesConfidential" ng-model="document.usagesConfidential" watch-items />
+                                                        This information is confidential
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.usagesConfidential}">
