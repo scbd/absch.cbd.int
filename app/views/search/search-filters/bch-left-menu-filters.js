@@ -114,7 +114,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:scientificName_s",
+                "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_t"],
                 "s":"scientificName_s asc"
@@ -263,7 +263,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_txt",
+                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"],
                 "s":"commonNames_RU_ss"
@@ -274,7 +274,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:scientificName_s",
+                "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_t"],
                 "s":"scientificName_s"
@@ -372,7 +372,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_txt",
+                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"]
             },
@@ -382,7 +382,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:scientificName_s",
+                "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_t"]
             },
@@ -445,7 +445,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_txt",
+                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"]
             },
@@ -455,7 +455,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:scientificName_s",
+                "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_t"]
             },
@@ -465,7 +465,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_txt",
+                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"]
             },
@@ -475,7 +475,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:scientificName_s",
+                "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_t"]
             },
@@ -532,7 +532,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:commonNames_EN_txt",
+                "fl": "identifier_s,rec_title:commonNames_EN_txt,url_ss",
                 "fq": [ "schema_s:organism AND commonNames_EN_txt:*"],
                 "searchFields":["commonNames_EN_txt"]
             },
@@ -542,7 +542,7 @@ export const bchLeftMenuFilters = {
         {
             "type": "solrRecords",
             "query": {
-                "fl": "identifier_s,rec_title:scientificName_s",
+                "fl": "identifier_s,rec_title:scientificName_s,url_ss",
                 "fq": [ "schema_s:organism AND scientificName_s:*"],
                 "searchFields":["scientificName_s"]
             },
