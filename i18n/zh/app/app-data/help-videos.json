@@ -1,25 +1,77 @@
-﻿{
-    "country-profile"    : { "url" :"https://www.youtube.com/watch?v=6eDBShJMWfI", "heading" : "Country profiles", "desc" : "One of the most convenient ways to access national information in the ABSCH is through the country profiles. Each country profile contains all the national information that has been made available by that country and it can provide information on the institutional structures and legislative, administrative or policy measures in place for implementing the Nagoya Protocol." },
-
-    "matrix"             : { "url" :"https://www.youtube.com/watch?v=IwyrMQKDZ3o", "heading" : "ABS Measures Matrix", "desc": "The ABS measures matrix is located on a country's profile page inside the section on legislative, administrative or policy measures on ABS (ABS measures). Expanding this section will reveal all the country's published ABS measures, as well as, a table of information that lists key ABS elements and where the related references to those elements can be found in all published measures. This can help provide an overview of a country’s legal framework on ABS and can be a useful tool to help users of genetic resources understand and comply with a country's ABS requirements" },
-    "search-matrix"      : { "url" :"https://www.youtube.com/watch?v=IwyrMQKDZ3o", "heading" : "ABS Measures Matrix", "desc": "The ABS measures matrix is located on a country's profile page inside the section on legislative, administrative or policy measures on ABS (ABS measures). Expanding this section will reveal all the country's published ABS measures, as well as, a table of information that lists key ABS elements and where the related references to those elements can be found in all published measures. This can help provide an overview of a country’s legal framework on ABS and can be a useful tool to help users of genetic resources understand and comply with a country's ABS requirements" },
-
-    "search-search"      : { "url" :"https://www.youtube.com/watch?v=YaX_llUfBts", "heading" : "Search using the ABSCH", "desc" : "The search page is where you will find all available information on the ABSCH. On the search page, records are organized into three categories (national records, reference records and SCBD records) and displayed in separate tabs. All record categories can be searched simultaneously by using a combination of free-text filters and predefined filters. By default, no filters are set and all records are displayed under each record category tab. The search results can be narrowed down using combinations of filters giving users the flexibility to retrieve a very wide or a very narrow set of results. The filters available are: free text (user entered text), record type, Party status, keywords, countries, regions and groups and the date the record was published." },
-
-    "search-uid"         : { "url" :"https://www.youtube.com/watch?v=78pRh1LbDj4", "heading" : "Search by Unique Identifer", "desc": "A unique identifier (UID) can be typed into the search and used as a filter either to find a particular record or to get a list of records that reference a particular record. For example, this can be useful if you were looking for all IRCCs issued by a specific CNA. To carry out this particular search you could select the national record type: “Internationally Recognized Certificate of Compliance” from the set of predefined national record filters and enter the UID of the competent national authority as a free text filter. The UID can be entered with or without the revision number (the last set of digits that make up the UID). If revision number is included then only the records that reference that specific version of the CNA will be returned. When the revision number is omitted from the search filter then all records that make reference to any published version of that CNA will be returned." },
-    
-    "search-report"      : { "url" :"https://www.youtube.com/watch?v=wOe4hUt66K4", "heading" : "Report record", "desc" : "In an effort to keep records reliable the report record feature may be used to inform the Secretariat when records may contain out-dated, inaccurate information, or broken links. To report a record click on the \"report record\" link found at the bottom of each expanded record and complete the short submission form providing your reason for reporting the record. The Secretariat receives all reported records and addresses them in consultation with the country’s PA or NFP only as appropriate. Please note that the Secretariat will never modify any national information without the explicit permission of the country's PA." },
-
-    "new-account"        : { "url" :"https://www.youtube.com/watch?v=hv7Kgx0bjdc", "heading" : "Create an CBD account", "desc": "Go to accounts.cbd.int/signup and fill out the simple form to obtain your CBD account. You will need access to a valid email account in order to validate your CBD account before you will be able to submit information to the ABSCH." },
-    "sign-in"            : { "url" :"https://www.youtube.com/watch?v=nAHFkAJZt1w", "heading" : "Signing in to the ABSCH", "desc": "Please take a moment to sign in to absch.cbd.int and verify that your profile information is up-to-date and complete." },
-    "old-account"        : { "url" :"https://www.youtube.com/watch?v=IqoVH8IVsvI", "heading" : "Recover a forgotten password",  "desc" : "If you don’t know if you have a CBD account or if you have forgotten your password, you can go to accounts.cbd.int/password/reset to reset your password."},
-    "forgot-password"        : { "url" :"https://www.youtube.com/watch?v=IqoVH8IVsvI", "heading" : "Recover a forgotten password",  "desc" : "If you don’t know if you have a CBD account or if you have forgotten your password, you can go to accounts.cbd.int/password/reset to reset your password."},
-    
-    "user-management"    : { "url" :"https://www.youtube.com/watch?v=sBYKAuS6TBA", "heading" : "User management", "desc": "The ABSCH's user management page provides functionality for national focal points (NFP) and publishing authorities (PA) to manage which users are nationally authorized to view, create and publish national records on behalf of a country." },
-    "dashboard"          : { "url" :"https://www.youtube.com/watch?v=s6xLer37R5M", "heading" : "Record submission dashboard" , "desc": "Once signed in, clicking on \"Submit\" located in the main navigation bar will take you to your Record Management Centre. The first page you will see when you arrive at the Record Management Centre is your dashboard. Your dashboard displays information on your CBD Account and provides an overview of the status (draft, request, or published) of all your ABSCH records. Through the dashboard you can access the submission forms and all the ABSCH records you are working on. All national records are shared and visible to all national users (NFP, PA, NAUs). However, the draft reference records you create are private and only visible to you." },
-    "notification"       : { "url" :"https://www.youtube.com/watch?v=nYHA8yuTx5c", "heading" : "Requests and notifications", "desc" : "The ABSCH's request and notification system helps users of the ABSCH stay informed about pending publishing requests or changes to the status of their records. This system has been developed to assist publishing authorities address requests promptly and help ensure information in the ABSCH is kept up-to-date and are reliable." },
-    "email-alerts"       : { "url" :"https://www.youtube.com/watch?v=DjRtgYxyeJg", "heading" : "Email alerts", "desc": "The ABSCH allows registered users to set up personalized email alerts when records are published. Email alerts can be set up under the \"preferences\" tab on the submit page." },
-    
-    "helpdesk"           : { "url" :"https://www.youtube.com/watch?v=yiASMdKJY8A", "heading" : "How to get help", "desc": "Need help or have questions? We are happy to provide technical support, answer questions, and receive feedback on the use of the ABSCH. " }
-
+{
+  "country-profile": {
+    "url": "https://www.youtube.com/watch?v=6eDBShJMWfI",
+    "heading": "国家概况",
+    "desc": "在获取和惠益分享信息交换所中获取国家信息的最快捷方式之一是通过国家概况。每个国家概况都包含该国已提供的所有国家信息，并且可以提供用于实施名古屋议定书的现有制度结构以及立法、行政或政策措施的相关信息。"
+  },
+  "matrix": {
+    "url": "https://www.youtube.com/watch?v=IwyrMQKDZ3o",
+    "heading": "获取和惠益分享措施矩阵",
+    "desc": "获取和惠益分享措施矩阵位于获取和惠益分享立法、行政或政策措施（获取和惠益分享措施）部分内的国家概况页面上。展开该部分即可显示所有已经发布了获取和惠益分享措施的国家，还有列出了获取和惠益分享关键要素及其相关引述在所有已发布措施中出现位置的信息表。这有助于揭示一个国家的获取和惠益分享法律框架的概况，并且可用作帮助遗传资源使用者了解和遵守一个国家的获取和惠益分享规定的实用工具。"
+  },
+  "search-matrix": {
+    "url": "https://www.youtube.com/watch?v=IwyrMQKDZ3o",
+    "heading": "获取和惠益分享措施矩阵",
+    "desc": "获取和惠益分享措施矩阵位于获取和惠益分享立法、行政或政策措施（获取和惠益分享措施）部分内的国家概况页面上。展开该部分即可显示所有已经发布了获取和惠益分享措施的国家，还有列出了获取和惠益分享关键要素及其相关引述在所有已发布措施中出现位置的信息表。这有助于揭示一个国家的获取和惠益分享法律框架的概况，并且可用作帮助遗传资源使用者了解和遵守一个国家的获取和惠益分享规定的实用工具。"
+  },
+  "search-search": {
+    "url": "https://www.youtube.com/watch?v=YaX_llUfBts",
+    "heading": "使用获取和惠益分享信息交换所搜索",
+    "desc": "搜索页面是您在获取和惠益分享信息交换所上找到所有可用信息的地方。在搜索页面上，记录被组织为三类（国家记录、参考记录和生物多样性公约秘书处记录），并显示在单独的选项卡中。通过组合使用自由文本过滤器和预定义过滤器，可以同时搜索所有记录类别。默认情况下，不设置过滤器，所有记录都显示在各自的记录类别选项卡下。组合使用过滤器可以缩小搜索结果的范围，使用户能够灵活地检索较大范围或较小范围的一组结果。可用的过滤器有：自由文本（用户输入的文本）、记录类型、缔约方状态、关键词、国家、地区和群体以及记录发布日期。"
+  },
+  "search-uid": {
+    "url": "https://www.youtube.com/watch?v=78pRh1LbDj4",
+    "heading": "按唯一识别码搜索",
+    "desc": "可以在搜索栏中输入唯一识别码，将其作用过滤条件来查找特定记录，或者获取引述了特定记录的所有记录的列表。例如，如果您想查找由某特定国家主管部门颁发的所有国际公认合规证书，那么这种方法非常有用。要使用这种搜索方式，您可以从预定义的国家记录过滤条件中选择“国际公认合规证书”这一国家记录类型，然后输入国家主管部门的 UID 作为自由文本过滤条件。所输入的 UID 可以带有修订号（组成 UID 的末位数），也可以不带修订号。如果带有修订号，那么系统仅返回引用了该特定国家主管部门版本号的记录。如果搜索过滤条件中省略了修订号，那么系统会返回引用了相应国家主管部门的已发布版本号的所有记录。"
+  },
+  "search-report": {
+    "url": "https://www.youtube.com/watch?v=wOe4hUt66K4",
+    "heading": "报告记录",
+    "desc": "为保持记录的可靠性，当记录可能包含过时、不准确信息或断裂链接时，可使用报告记录功能来通知秘书处。要上报记录，请将该记录展开，单击底部的“上报记录”链接，然后填写简短的提交材料表单，阐述您要上报该记录的理由。秘书处会收取所有上报的记录，并与相应国家的发布机构或国家联络点（仅在合适情况下）协商解决问题。请注意，未经相关国家发布机构明确许可，秘书处绝不会修改任何国家信息。"
+  },
+  "new-account": {
+    "url": "https://www.youtube.com/watch?v=hv7Kgx0bjdc",
+    "heading": "创建生物多样性公约帐户",
+    "desc": "前往accounts.cbd.int/signup，填写简单的表格，以获得您的生物多样性公约账户。您将需要有一个有效的电子邮件账户，以便在您能够向获取和惠益分享信息交换所提交信息之前验证您的生物多样性公约账户。"
+  },
+  "sign-in": {
+    "url": "https://www.youtube.com/watch?v=nAHFkAJZt1w",
+    "heading": "登录获取和惠益分享信息交换所",
+    "desc": "请抽出时间登录absch.cbd.int，并确认是您最新且完整的个人资料。"
+  },
+  "old-account": {
+    "url": "https://www.youtube.com/watch?v=IqoVH8IVsvI",
+    "heading": "找回忘记的密码",
+    "desc": "如果您不知道自己是否有一个生物多样性公约账户，或者您忘记了自己的密码，您可以去accounts.cbd.int/password/reset重设您的密码。"
+  },
+  "forgot-password": {
+    "url": "https://www.youtube.com/watch?v=IqoVH8IVsvI",
+    "heading": "找回忘记的密码",
+    "desc": "如果您不知道自己是否有一个生物多样性公约账户，或者您忘记了自己的密码，您可以去accounts.cbd.int/password/reset重设您的密码。"
+  },
+  "user-management": {
+    "url": "https://www.youtube.com/watch?v=sBYKAuS6TBA",
+    "heading": "用户管理",
+    "desc": "获取和惠益分享信息交换所的用户管理页面为国家联络点（NFP）和发布机构（PA）提供了管理国家授权用户（可代表国家查看、创建和发布国家记录）的功能。"
+  },
+  "dashboard": {
+    "url": "https://www.youtube.com/watch?v=s6xLer37R5M",
+    "heading": "记录提交仪表板",
+    "desc": "登录后，单击位于主导航栏的“提交”将进入您的记录管理中心。您进入记录管理中心时首先看到的页面是您的仪表板。您的仪表板显示您的生物多样性公约账户信息，并让您概览获取和惠益分享信息交换所全部记录的状态（草稿、请求或已发布）。通过仪表板，您可以访问提交表格和您正在处理的所有获取和惠益分享信息交换所记录。所有国家记录均在所有国家用户（国家联络点、发布机构、国家授权用户）之间共享，向他们显示。然而，您创建的参考记录草稿属私密记录，仅自己能看到。"
+  },
+  "notification": {
+    "url": "https://www.youtube.com/watch?v=nYHA8yuTx5c",
+    "heading": "请求和通知",
+    "desc": "获取和惠益分享信息交换所的请求和通知系统帮助获取和惠益分享信息交换所用户随时了解待定的发布请求或其记录状态的变化。该系统旨在帮助发布机构及时处理请求，并帮助确保获取和惠益分享信息交换所中的信息为最新且可靠。"
+  },
+  "email-alerts": {
+    "url": "https://www.youtube.com/watch?v=DjRtgYxyeJg",
+    "heading": "电子邮件提醒",
+    "desc": "获取和惠益分享信息交换所让注册用户能够设置在记录发布时收到通知的个性化电子邮件提醒。可在提交页面的“首选项”选项卡下设置电子邮件提醒。"
+  },
+  "helpdesk": {
+    "url": "https://www.youtube.com/watch?v=yiASMdKJY8A",
+    "heading": "如何获得帮助",
+    "desc": "需要帮助或有疑问？我们很乐意提供技术支持，回答问题，并接受关于使用获取和惠益分享信息交换所的反馈。 "
+  }
 }

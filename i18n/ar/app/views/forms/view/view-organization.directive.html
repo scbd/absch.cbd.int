@@ -1,24 +1,24 @@
 ﻿<div id="Record" class="record panel panel-default" dir="rtl">
 	<div class="panel-heading bg-orange">
-		<h4></h4>
+		<h4><span ng-bind="document.header.schema| schemaName" dir="rtl"></span> <span class="color-black" ng-bind="'(' + (document.header.schema|schemaShortName) + ')'" dir="rtl"></span></h4>
 	</div>
 	<div class="record-body panel-body">
 
-		<document-date></document-date><legend></legend><div ng-show="document.name">
-			<label></label>
+		<document-date></document-date><br><legend><span ng-bind="document.name | lstring:locale"></span> <span ng-show="document.acronym">(<span ng-bind="document.acronym | lstring:locale"></span>)</span></legend></br><div ng-show="document.name">
+			<label>اسم المنظمة</label>
 			<div compare-val>
 				<km-value-ml value="document.name" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.acronym">
-			<label></label>
+			<label>الاسم المختصر</label>
 			<div compare-val>
 				<km-value-ml value="document.acronym" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.contacts">
-			<label></label>
+			<label>مسؤول الاتصال في المنظمة</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.contacts" >
@@ -29,16 +29,16 @@
 		</div>
 
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-			<label></label>
+			<label>عنوان المنظمة</label>
 			<div compare-val>
 				<address class="km-value">
-					<div class="km-pre" ng-bind-html="document.address | lstring:locale"></div></address>
+					<div class="km-pre" ng-bind-html="document.address | lstring:locale"></div><span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">,</span> <span ng-bind="document.state | lstring:locale"></span><br ng-show="document.city || document.state" /> <span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">,</span> <b ng-bind="document.country|term"></b></address>
 			</div>
 		</div>
 
 
 		<div ng-show="document.phones">
-			<label></label>
+			<label>Phone number(s)</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.phones" ng-bind="item"></li>
@@ -47,7 +47,7 @@
 		</div>
 
 		<div ng-show="document.faxes">
-			<label></label>
+			<label>Fax Number(s)</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.faxes" ng-bind="item"></li>
@@ -56,32 +56,32 @@
 		</div>
 
 		<div ng-show="document.emails">
-			<label></label>
+			<label>Email(s)</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
-					<li ng-repeat="item in document.emails"></li>
+					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a></li>
 				</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.websites">
-			<label></label>
+			<label>عناوين المواقع الإلكتروني</label>
 			<div compare-val>
-				<div class="km-value" ng-repeat="item in document.websites"></div>
+				<div class="km-value" ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}"><span ng-bind="item.name||item.url"></span></a></div>
 			</div>
 		</div>
 
 		<div>
-			<legend></legend>
+			<legend>معلومات تفصيلية</legend>
 
 			<div ng-show="document.organizationType">
-				<label></label>
+				<label>نوع المنظمة</label>
 				<div compare-val>
 					<div class="km-value" ng-bind="document.organizationType | term"></div>
 				</div>
 			</div>
 			<div ng-show="document.areasOfWork">
-				<label></label>
+				<label>مجالات العمل</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="areaOfWork in document.areasOfWork" style="margin-bottom: 5px;">
@@ -91,15 +91,15 @@
 				</div>
 			</div>
 			<div ng-show="document.thematicAreas">
-				<label></label>
+				<label>محاور الأفكار والموضوعات لاتفاقية التنوع البيولوجي</label>
 				<div  class="km-value" compare-val>
 					<ul class="list">
-						<li ng-repeat="term in document.thematicAreas"></li>
+						<li ng-repeat="term in document.thematicAreas"><span ng-bind="term|term|lstring:locale"></span></li>
 					</ul>
 				</div>
 			</div>
 			<div ng-if="document.cpbThematicAreas">
-				<label></label>
+				<label>محاور الأفكار والموضوعات للسلامة الأحيائية</label>
 				<div  class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="term in document.cpbThematicAreas" ng-bind="term|lstring:locale"></li>
@@ -108,7 +108,7 @@
 			</div>			
 
 			<div ng-show="document.operationalRegions">
-				<label></label>
+				<label>المناطق الإقليمية للعمليات أو المجموعات السياسية/الاقتصادية</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="term in document.operationalRegions" ng-bind="term|term|lstring:locale"></li>
@@ -117,7 +117,7 @@
 			</div>
 
 			<div ng-if="document.profile || document.profileLink">
-				<label></label>
+				<label>ملف تعريف المنظمة</label>
 				<div compare-val ng-if="document.profile">
 					<km-value-ml value="document.profile" html locales="locale"></km-value-ml>
 				</div>
@@ -128,7 +128,7 @@
 		</div>
 
 		<div ng-show="document.linkedOrganizations">
-			<legend></legend>
+			<legend>المنظمات المرتبطة</legend>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.linkedOrganizations" >
@@ -139,18 +139,18 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend></legend>
+			<legend>معلومات إضافية</legend>
 
 			<div compare-val ng-show="document.relevantInformation">
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
-			<div ng-show="document.relevantDocuments">
-				<label></label>
-				<div compare-val>
-					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
-				</div>		
+		<div ng-show="document.relevantDocuments">
+			<label>Other relevant website addresses and/or attached documents</label>
+			<div class="km-value" compare-val="relevantDocuments">
+				<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 			</div>
+		</div>
 		</div>
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>

@@ -1,27 +1,27 @@
 ﻿<div id="docketSideBar" class="container-full page-content">
-    <div class="sidebar-header"><div class="sidenav-heading"><p ng-bind="type"></p>
+    <div class="sidebar-header"><a class="closebtn" ng-click="closeLeftSideBar()">&times;</a><div class="sidenav-heading"><span ng-click="back();" ng-if="showArticle"><i class="fa fa-arrow-left"></i>&nbsp; &nbsp; Atrás</span><p ng-bind="type"></p>
         </div>
         <div class="search-field">
-           <div class="form-group has-feedback has-search"><input type="search" class="form-control"  placeholder="" class="form-control" ng-model="freeText" 
+           <div class="form-group has-feedback has-search"><span class="glyphicon glyphicon-search form-control-feedback"></span><input type="search" class="form-control"  placeholder="Buscar ..." class="form-control" ng-model="freeText" 
                 ng-change="search(freeText);"
                 ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0, '*': 1000 } }"/>
            </div>
         </div>
     </div>
     <div class="side-bar-widget">
-        <div ng-if="loading" style="margin: 50%"></div>        
+        <div ng-if="loading" style="margin: 50%"><i class="fa fa-spin fa-spinner fa-3x"></i> Cargando...</div>        
         <div  ng-if="!loading && (type=='announcements' || type=='help')">
             <div class="row" ng-if="!articleData" >
                 <div ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:20" class="help-articles col-xs-12">
                     <div ng-class="{'article-open':showArticle}" >
-                        <div class="card" ng-click="details(article);"><p class="article-info"></p>
+                        <div class="card" ng-click="details(article);"><span class="article-heading"><span ng-bind="article.title | lstring:locale"></span></span><p class="article-info"><span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span> <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span></p>
                         </div>
-                        <div class="footer"></div>
+                        <div class="footer"><a rel="noopener" ng-href="articles/{{article._id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a></div>
                     </div>
                 </div>
                 <div ng-if="!articles.length" class="easing">
                     <div class="card details-articles" >
-                        <h2 class="article-heading" ></h2>
+                        <h2 class="article-heading" >Sin ayuda disponible.</h2>
                     </div>
                 </div>
             </div>
@@ -30,11 +30,12 @@
         <div class="row" ng-if="articleData" >
             <div class="card details-articles"  ng-class="{'article-open':showArticle}">
                 <h2 class="article-heading" ng-bind="articleData.title | lstring:locale" ng-click="showArticle=true" ></h2>
-                <p class="article-info"></p>
+                <p class="article-info"><span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="articleData.summary && !showArticle" ng-bind-html="articleData.summary | lstring:locale|limitTo:200|unsafe"></span> <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!articleData.summary || showArticle" ng-bind-html="articleData.content | lstring:locale|limitTo:(showArticle ? articleData.content.length : 200)|unsafe"></span></p>
                 <hr/>
-                <p></p>
-                <div class="box-bottom" style="width: auto;"></div>
-                <div class="footer"></div>
+                <p><span ng-if="articleData.adminTags" ng-repeat="tag in articleData.adminTags" class="badge badge-light" style="cursor: pointer;margin:5px;"
+                        ng-bind="tag" ng-click="showTagArticles(tag)"></span></p>
+                <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span></div>
+                <div class="footer"><a rel="noopener" ng-href="articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a></div>
             </div>
         </div>
         
@@ -42,8 +43,8 @@
 
     <div class="side-nav-bottom">
         <ul>
-            <li></li><li></li>
-            <li></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/contact-us/">Contáctenos</a></li><!-- <li><a rel="noopener" href="https://bch.cbd.int/resources/site-map/">Site Map</a></li> --><li><a rel="noopener" href="https://bch.cbd.int/about/link-policy/">Política de enlaces</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/disclaimer/">Declinación de responsabilidad</a></li>
         </ul>
     </div>
 </div>

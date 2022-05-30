@@ -12,7 +12,7 @@
 
 				<div>
 					<label>Страна</label>
-					<div class="km-value" compare-val ng-show="document.government"><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
+					<div class="km-value" compare-val ng-show="document.government"><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
 					<div class="km-value" ng-hide="document.government">Страна не выбрана</div>
 				</div>
 
@@ -22,7 +22,8 @@
 				</div>
 				<div>
 					<label>2. Контактное лицо</label>
-					<div class="km-value" compare-val view-record-reference ng-model="document.contact" locale="locale"  ng-if="document.contact">
+					<div class="km-value" compare-val>
+						<div view-record-reference ng-model="document.contact" locale="locale"  ng-if="document.contact"></div>
 					</div>
 					<div  class="km-value" ng-if="!document.contact">Контактные сведения не предоставлены</div>
 				</div>

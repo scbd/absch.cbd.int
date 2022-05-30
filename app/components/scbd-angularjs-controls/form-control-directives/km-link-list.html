@@ -12,11 +12,16 @@
         <a rel="noopener" translation-url target="{{::target}}" ng-href="{{::item.url}}">
             <span ng-bind="::(item.name||getNameFromUrl(item.url))"></span>
         </a>
-        <i ng-if="::item.language">
+        <i ng-if="::item.tag">
             (
+                <span ng-bind="::item.tag"></span>
+            )
+        </i>
+        <i ng-if="::item.language">
+            [
                 <span ng-if="::(locales[item.language]||locales['lang-'+item.language])"  ng-bind="::locales[item.language]||locales['lang-'+item.language]"></span>
                 <span ng-if="::!(locales[item.language]||locales['lang-'+item.language])" ng-bind="::getNonUNLanguage(item.language)|term:locale"></span>
-            )
+            ]
         </i>
     </script>
 </div>

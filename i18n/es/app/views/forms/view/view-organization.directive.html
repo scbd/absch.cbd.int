@@ -145,12 +145,12 @@
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
-			<div ng-show="document.relevantDocuments">
-				<label>Otras direcciones de sitios web y/o documentos adjuntos pertinentes</label>
-				<div compare-val>
-					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
-				</div>		
+		<div ng-show="document.relevantDocuments">
+			<label>Otras direcciones de sitios web y/o documentos adjuntos pertinentes</label>
+			<div class="km-value" compare-val="relevantDocuments">
+				<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 			</div>
+		</div>
 		</div>
 		<div>
 			<view-referenced-records ng-model="document.header.identifier"></view-referenced-records>

@@ -1,10 +1,10 @@
-﻿{
-"unknown"           : "Unknown error",
-"mandatory"         : "Field is mandatory" ,
-"mandatoryAnyOf"    : "One of the field is mandatory",
-"invalidValue"      : "The value specified is invalid" ,
-"invalidProperty"   : "This value cannot be specified" ,
-"unspecifiedLocale" : "A language is used but not specified in your document" ,
-"unexpectedTerm"    : "A specified term cannot be used" ,
-"invalidType"       : "The fields type is invalid"    
+{
+  "unknown": "Erreur inconnue",
+  "mandatory": "Ce champ est obligatoire",
+  "mandatoryAnyOf": "Un de ces champs est obligatoire :",
+  "invalidValue": "Le mot de passe saisi n'est pas valide.",
+  "invalidProperty": "Cette valeur ne peut pas être spécifiée",
+  "unspecifiedLocale": "Une langue est utilisée mais non spécifiée dans votre document",
+  "unexpectedTerm": "Un terme spécifié ne peut être utilisé",
+  "invalidType": "Le mot de passe saisi n'est pas valide."
 }

@@ -1,5194 +1,675 @@
-[
-  {
-    "key": "General",
-    "title": "Party to the Cartagena Protocol on Biosafety",
-    "questions": [
-      {
-        "key": "Q012",
-        "section": "General",
-        "number": "12",
-        "type": "option",
-        "title": "Is your country a Party to the Cartagena Protocol on Biosafety (CPB)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q013",
-        "section": "General",
-        "number": "13",
-        "type": "option",
-        "title": "If you answered No to question 12, is there any national process in place towards becoming a Party?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q014",
-        "section": "General",
-        "number": "14",
-        "type": "text",
-        "title": "Here you may provide further details",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article2",
-    "title": "Article 2 – General provisions",
-    "questions": [
-      {
-        "key": "Q015",
-        "section": "Article2",
-        "number": "15",
-        "type": "option",
-        "title": "Has your country introduced the necessary legal, administrative and other measures for the implementation of the Protocol?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "implementation.fullFramwork",
-            "title": "A domestic regulatory framework is fully in place"
-          },
-          {
-            "value": "implementation.partialFramwork",
-            "title": "A domestic regulatory framework is partially in place"
-          },
-          {
-            "value": "implementation.temporaryMeasures",
-            "title": "Only temporary measures have been introduced"
-          },
-          {
-            "value": "implementation.draftFramwork",
-            "title": "Only a draft framework exists"
-          },
-          {
-            "value": "implementation.none",
-            "title": "No measures have yet been taken"
-          }
-        ]
-      },
-      {
-        "key": "Q016",
-        "section": "Article2",
-        "number": "16",
-        "type": "option",
-        "title": "Which specific instruments are in place for the implementation of your national biosafety framework?",
-        "multiple": true,
-        "options": [
-          {
-            "value": "instrument.nationalBiosafetyLaws",
-            "title": "One or more national biosafety laws"
-          },
-          {
-            "value": "instrument.nationalBiosafetyRegulations",
-            "title": "One or more national biosafety regulations"
-          },
-          {
-            "value": "instrument.biosafetyGuidelines",
-            "title": "One or more sets of biosafety guidelines"
-          },
-          {
-            "value": "instrument.indirectLaws",
-            "title": "Other laws, regulations or guidelines that indirectly apply to biosafety"
-          },
-          {
-            "value": "instrument.none",
-            "title": "No instruments are in place"
-          }
-        ]
-      },
-      {
-        "key": "Q017",
-        "section": "Article2",
-        "number": "17",
-        "type": "option",
-        "title": "Has your country established a mechanism for the budgetary allocations of funds for the operation of its national biosafety framework?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q018",
-        "section": "Article2",
-        "number": "18",
-        "type": "option",
-        "title": "Does your country have permanent staff to administer functions directly related to the national biosafety framework?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q019",
-        "section": "Article2",
-        "number": "19",
-        "type": "option",
-        "title": "If you answered Yes to question 18, how many permanent staff members are in place whose functions are directly related to the national biosafety framework?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "1",
-            "title": "One"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q020",
-        "section": "Article2",
-        "number": "20",
-        "type": "option",
-        "title": "Has your country’s biosafety framework / laws / regulations / guidelines been submitted to the Biosafety Clearing-House (BCH)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Partially"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q021",
-        "section": "Article2",
-        "number": "21",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 2 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article5",
-    "title": "Article 5 – Pharmaceuticals",
-    "questions": [
-      {
-        "key": "Q022",
-        "section": "Article5",
-        "number": "22",
-        "type": "option",
-        "title": "Does your country regulate the transboundary movement, handling and use of living modified organisms (LMOs) which are pharmaceuticals?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q023",
-        "section": "Article5",
-        "number": "23",
-        "type": "option",
-        "title": "If you answered Yes to question 22, has this information been submitted to the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Partially"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q024",
-        "section": "Article5",
-        "number": "24",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 5 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article6",
-    "title": "Article 6 – Transit and Contained use",
-    "questions": [
-      {
-        "key": "Q025",
-        "section": "Article6",
-        "number": "25",
-        "type": "option",
-        "title": "Does your country regulate the transit of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q026",
-        "section": "Article6",
-        "number": "26",
-        "type": "option",
-        "title": "Does your country regulate the contained use of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q027",
-        "section": "Article6",
-        "number": "27",
-        "type": "option",
-        "title": "If you answered Yes to questions 25 or 26, has this information been submitted to the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Partially"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q028",
-        "section": "Article6",
-        "number": "28",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 6 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Articles7-10",
-    "title": "Articles 7 to 10 – Advance Informed Agreement (AIA) and  intentional introduction of LMOs into the environment",
-    "questions": [
-      {
-        "key": "Q029",
-        "section": "Articles7-10",
-        "number": "29",
-        "type": "option",
-        "title": "Has your country adopted law(s) / regulations / administrative measures for the operation of the AIA procedure of the Protocol?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q030",
-        "section": "Articles7-10",
-        "number": "30",
-        "type": "option",
-        "title": "Has your country adopted a domestic regulatory framework consistent with the Protocol regarding the transboundary movement of LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q031",
-        "section": "Articles7-10",
-        "number": "31",
-        "type": "option",
-        "title": "Has your country established a mechanism for taking decisions regarding first intentional transboundary movements of LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q032",
-        "section": "Articles7-10",
-        "number": "32",
-        "type": "option",
-        "title": "If you answered Yes to question 31, does the mechanism also apply to cases of intentional introduction of LMOs into the environment that were not subject to transboundary movement?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q033",
-        "section": "Articles7-10",
-        "number": "33",
-        "type": "option",
-        "title": "Has your country established a mechanism for monitoring potential effects of LMOs that are released into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q034",
-        "section": "Articles7-10",
-        "number": "34",
-        "type": "option",
-        "title": "Does your country have the capacity to detect and identify LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q035",
-        "section": "Articles7-10",
-        "number": "35",
-        "type": "option",
-        "title": "Has your country established legal requirements for exporters under its jurisdiction to notify in writing the competent national authority of the Party of import prior to the intentional transboundary movement of an LMO that falls within the scope of the AIA procedure?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q036",
-        "section": "Articles7-10",
-        "number": "36",
-        "type": "option",
-        "title": "Has your country established legal requirements for the accuracy of information contained in the notification?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q037",
-        "section": "Articles7-10",
-        "number": "37",
-        "type": "option",
-        "title": "Has your country ever received an application / notification regarding intentional transboundary movements of LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q038",
-        "section": "Articles7-10",
-        "number": "38",
-        "type": "option",
-        "title": "Has your country ever taken a decision on an application / notification regarding intentional transboundary movements of LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q039",
-        "section": "Articles7-10",
-        "number": "39",
-        "type": "option",
-        "title": "If you answered Yes to question 38, how many LMOs has your country approved to date for import for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q040",
-        "section": "Articles7-10",
-        "number": "40",
-        "type": "option",
-        "title": "If you answered Yes to question 38, how many LMOs, not imported, has your country approved to date for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q041",
-        "section": "Articles7-10",
-        "number": "41",
-        "type": "option",
-        "title": "In the current reporting period, how many applications/notifications has your country received regarding intentional transboundary movements of LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q042",
-        "section": "Articles7-10",
-        "number": "42",
-        "type": "option",
-        "title": "In the current reporting period, how many decisions has your country taken regarding intentional transboundary movements of LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q043",
-        "section": "Articles7-10",
-        "number": "43",
-        "type": "option",
-        "title": "With reference to the decisions taken on intentional transboundary movements of LMOs for intentional introduction into the environment, has your country received a notification from the Party(ies) of export or from the exporter(s) prior to the transboundary movement?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q044",
-        "section": "Articles7-10",
-        "number": "44",
-        "type": "option",
-        "title": "Did the notifications contain complete information (at a minimum the information specified in Annex I of the Cartagena Protocol on Biosafety)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q045",
-        "section": "Articles7-10",
-        "number": "45",
-        "type": "option",
-        "title": "Has your country acknowledged receipt of the notifications to the notifier within ninety days of receipt?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q046",
-        "section": "Articles7-10",
-        "number": "46",
-        "type": "option",
-        "title": "Has your country informed the notifier(s) and the BCH of its decision(s)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "true.some.notifier",
-            "title": "In some cases only the notifier"
-          },
-          {
-            "value": "true.some.bch",
-            "title": "In some cases only the BCH"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q047",
-        "section": "Articles7-10",
-        "number": "47",
-        "type": "option",
-        "title": "Has your country informed the notifier(s) and the BCH of its decision(s) in due time (within 270 days or the period specified in your communication to the notifier)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q048",
-        "section": "Articles7-10",
-        "number": "48",
-        "type": "term",
-        "title": "What percentage of your country’s decisions fall into the following categories?",
-        "multiple": true,
-        "options": [
-          {
-            "value": "3B9ECE67-B35C-40FF-8C06-4EA5FF762899",
-            "title": "Approval of the import/use of the LMO(s) without conditions"
-          },
-          {
-            "value": "3EFF4792-A896-4DC7-9945-04FE9C8B5B4F",
-            "title": "Approval of the import/use of the LMO(s) with conditions"
-          },
-          {
-            "value": "6DD1B161-4CDB-4900-BD31-DBB97E86B2AE",
-            "title": "Prohibition of the import/use of the LMO(s)"
-          },
-          {
-            "value": "8D91ACEE-C6B3-4204-8FE6-00AE424013FF",
-            "title": "Request for additional relevant information"
-          },
-          {
-            "value": "19F9F13E-195E-45B5-88DD-058A07E0D6F6",
-            "title": "Inform the notifier that the period for communicating the decision has been extended"
-          }
-        ]
-      },
-      {
-        "key": "Q049",
-        "section": "Articles7-10",
-        "number": "49",
-        "type": "option",
-        "title": "In cases where your country approved an import with conditions or prohibited an import, did it provide reasons on which its decisions were based to the notifier and the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "true.some.notifier",
-            "title": "In some cases only the notifier"
-          },
-          {
-            "value": "true.some.bch",
-            "title": "In some cases only the BCH"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q050",
-        "section": "Articles7-10",
-        "number": "50",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Articles 7-10 in your country, including measures in case of lack of scientific certainty on potential adverse effects of LMOs for intentional introduction to the environment:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article11",
-    "title": "Article 11 – Procedure for living modified organisms  intended for direct use as food or feed, or for processing (LMOs-FFP)",
-    "questions": [
-      {
-        "key": "Q051",
-        "section": "Article11",
-        "number": "51",
-        "type": "option",
-        "title": "Has your country adopted specific law(s) or regulation(s) for decision-making regarding domestic use, including placing on the market, of LMOs-FFP?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q052",
-        "section": "Article11",
-        "number": "52",
-        "type": "option",
-        "title": "Has your country established legal requirements for the accuracy of information to be provided by the applicant?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q053",
-        "section": "Article11",
-        "number": "53",
-        "type": "option",
-        "title": "Has your country established a mechanism to ensure that decisions regarding LMOs-FFP that may be subject to transboundary movement will be communicated to the Parties through the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q054",
-        "section": "Article11",
-        "number": "54",
-        "type": "option",
-        "title": "Has your country established a mechanism for taking decisions on the import of LMOs-FFP?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q055",
-        "section": "Article11",
-        "number": "55",
-        "type": "option",
-        "title": "Has your country declared through the BCH that in the absence of a regulatory framework its decisions prior to the first import of an LMO-FFP will be taken according to Article 11.6 of the Cartagena Protocol on Biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q056",
-        "section": "Article11",
-        "number": "56",
-        "type": "option",
-        "title": "Has your country indicated its needs for financial and technical assistance and capacity building in respect of LMOs-FFP?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q057",
-        "section": "Article11",
-        "number": "57",
-        "type": "option",
-        "title": "Has your country ever taken a decision on LMOs-FFP (either on import or domestic use)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q058",
-        "section": "Article11",
-        "number": "58",
-        "type": "option",
-        "title": "How many LMOs-FFP has your country approved to date?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q059",
-        "section": "Article11",
-        "number": "59",
-        "type": "option",
-        "title": "In the current reporting period, how many decisions has your country taken regarding the import of LMOs-FFP?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q060",
-        "section": "Article11",
-        "number": "60",
-        "type": "option",
-        "title": "In the current reporting period, how many decisions has your country taken regarding domestic use, including placing on the market, of LMOs-FFP?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q061",
-        "section": "Article11",
-        "number": "61",
-        "type": "option",
-        "title": "Has your country informed the Parties through the BCH of its decision(s) regarding import, of LMOs-FFP?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q062",
-        "section": "Article11",
-        "number": "62",
-        "type": "option",
-        "title": "Has your country informed the Parties through the BCH of its decision(s) regarding domestic use, including placing on the market, of LMOs-FFP within 15 days?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "true.delay",
-            "title": "Yes, but with delays (i.e. longer than 15 days)"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q063",
-        "section": "Article11",
-        "number": "63",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 11 in your country, including measures in case of lack of scientific certainty on potential adverse effects of LMOs-FFP:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article12",
-    "title": "Article 12 – Review of decision",
-    "questions": [
-      {
-        "key": "Q064",
-        "section": "Article12",
-        "number": "64",
-        "type": "option",
-        "title": "Has your country established a mechanism for the review and change of a decision regarding an intentional transboundary movement of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q065",
-        "section": "Article12",
-        "number": "65",
-        "type": "option",
-        "title": "Has your country ever received a request for a review of a decision?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q066",
-        "section": "Article12",
-        "number": "66",
-        "type": "option",
-        "title": "Has your country ever reviewed / changed a decision regarding an intentional transboundary movement of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.reviewed",
-            "title": "Yes, decision reviewed"
-          },
-          {
-            "value": "true.changed",
-            "title": "Yes, decision reviewed and changed"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q067",
-        "section": "Article12",
-        "number": "67",
-        "type": "option",
-        "title": "In the current reporting period, how many decisions were reviewed and/or changed regarding an intentional transboundary movement of an LMO?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "5+",
-            "title": "More than 5"
-          }
-        ]
-      },
-      {
-        "key": "Q068",
-        "section": "Article12",
-        "number": "68",
-        "type": "option",
-        "title": "Has your country informed the notifier and the BCH of the review and/or changes in the decision?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "true.some.notifier",
-            "title": "In some cases only the notifier"
-          },
-          {
-            "value": "true.some.bch",
-            "title": "In some cases only the BCH"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q069",
-        "section": "Article12",
-        "number": "69",
-        "type": "option",
-        "title": "Has your country informed the notifier and the BCH of the review and changes in the decision within thirty days?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "true.delay",
-            "title": "Yes, but with delays (i.e. longer than 30 days)"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q070",
-        "section": "Article12",
-        "number": "70",
-        "type": "option",
-        "title": "Has your country provided reasons to the notifier and the BCH for the review and/or changes in the decision?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "true.some.notifier",
-            "title": "In some cases only the notifier"
-          },
-          {
-            "value": "true.some.bch",
-            "title": "In some cases only the BCH"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q071",
-        "section": "Article12",
-        "number": "71",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 12 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article13",
-    "title": "Article 13 – Simplified procedure",
-    "questions": [
-      {
-        "key": "Q072",
-        "section": "Article13",
-        "number": "72",
-        "type": "option",
-        "title": "Has your country established a system for the application of the simplified procedure regarding an intentional transboundary movement of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q073",
-        "section": "Article13",
-        "number": "73",
-        "type": "option",
-        "title": "Has your country ever applied the simplified procedure?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q074",
-        "section": "Article13",
-        "number": "74",
-        "type": "option",
-        "title": "If you answered Yes to question 73, has your country informed the Parties through the BCH of the cases where the simplified procedure applies?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q075",
-        "section": "Article13",
-        "number": "75",
-        "type": "option",
-        "title": "In the current reporting period, how many LMOs has your country applied the simplified procedure to?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "5+",
-            "title": "More than 5"
-          }
-        ]
-      },
-      {
-        "key": "Q076",
-        "section": "Article13",
-        "number": "76",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 13 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article14",
-    "title": "Article 14 – Bilateral, regional and multilateral agreements and arrangements",
-    "questions": [
-      {
-        "key": "Q077",
-        "section": "Article14",
-        "number": "77",
-        "type": "option",
-        "title": "Has your country entered into any bilateral, regional or multilateral agreements or arrangements?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q078",
-        "section": "Article14",
-        "number": "78",
-        "type": "option",
-        "title": "If you answered Yes to question 77, has your country informed the Parties through the BCH of the agreements or arrangements?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q079",
-        "section": "Article14",
-        "number": "79",
-        "type": "text",
-        "title": "If you answered Yes to question 77, please provide a brief description of the scope and objective of the agreements or arrangements entered into:",
-        "multiple": false
-      },
-      {
-        "key": "Q080",
-        "section": "Article14",
-        "number": "80",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 14 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article15",
-    "title": "Article 15 – Risk assessment",
-    "questions": [
-      {
-        "key": "Q081",
-        "section": "Article15",
-        "number": "81",
-        "type": "option",
-        "title": "Has your country established a mechanism for conducting risk assessments prior to taking decisions regarding LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q082",
-        "section": "Article15",
-        "number": "82",
-        "type": "option",
-        "title": "If you answered Yes to question 81, does this mechanism include procedures for identifying experts to conduct the risk assessments?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q083",
-        "section": "Article15",
-        "number": "83",
-        "type": "option",
-        "title": "Has your country established guidelines for how to conduct risk assessments prior to taking decisions regarding LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q084",
-        "section": "Article15",
-        "number": "84",
-        "type": "option",
-        "title": "Has your country acquired the necessary domestic capacity to conduct risk assessment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q085",
-        "section": "Article15",
-        "number": "85",
-        "type": "option",
-        "title": "Has your country established a mechanism for training national experts to conduct risk assessments?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q086",
-        "section": "Article15",
-        "number": "86",
-        "type": "option",
-        "title": "Has your country ever conducted a risk assessment of an LMO for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q087",
-        "section": "Article15",
-        "number": "87",
-        "type": "option",
-        "title": "Has your country ever conducted a risk assessment of an LMO intended for direct use as food or feed, or for processing?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q088",
-        "section": "Article15",
-        "number": "88",
-        "type": "option",
-        "title": "If your country has taken decision(s) on LMOs for intentional introduction into the environment or on domestic use of LMOs-FFP, were risk assessments conducted for all decisions taken?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q089",
-        "section": "Article15",
-        "number": "89",
-        "type": "option",
-        "title": "Has your country submitted summary reports of the risk assessments to the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q090",
-        "section": "Article15",
-        "number": "90",
-        "type": "option",
-        "title": "In the current reporting period, if your country has taken decisions regarding LMOs, how many risk assessments were conducted in the context of these decisions?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q091",
-        "section": "Article15",
-        "number": "91",
-        "type": "option",
-        "title": "Has your country ever required the exporter to conduct the risk assessment(s)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q092",
-        "section": "Article15",
-        "number": "92",
-        "type": "option",
-        "title": "Has your country ever required the notifier to bear the cost of the risk assessment(s) of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q093",
-        "section": "Article15",
-        "number": "93",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 15 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article16",
-    "title": "Article 16 – Risk management",
-    "questions": [
-      {
-        "key": "Q094_a",
-        "section": "Article16",
-        "number": "94.1",
-        "type": "option",
-        "title": "LMOs for intentional introduction into the environment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q094_b",
-        "section": "Article16",
-        "number": "94.2",
-        "type": "option",
-        "title": "LMOs intended for direct use as food or feed, or for processing?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q095",
-        "section": "Article16",
-        "number": "95",
-        "type": "option",
-        "title": "Has your country established and maintained appropriate measures to prevent unintentional transboundary movements of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q096",
-        "section": "Article16",
-        "number": "96",
-        "type": "option",
-        "title": "Has your country taken measures to ensure that any LMO, whether imported or locally developed, undergoes an appropriate period of observation that is commensurate with its life-cycle or generation time before it is put to its intended use?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q097",
-        "section": "Article16",
-        "number": "97",
-        "type": "option",
-        "title": "Has your country cooperated with other Parties with a view to identifying LMOs or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q098",
-        "section": "Article16",
-        "number": "98",
-        "type": "option",
-        "title": "Has your country cooperated with other Parties with a view to taking measures regarding the treatment of LMOs or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q099",
-        "section": "Article16",
-        "number": "99",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 16 in your country, including any details regarding risk management strategies, also in case of lack of scientific certainty on potential adverse effects of LMOs:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article17",
-    "title": "Article 17 – Unintentional transboundary movements and emergency measures",
-    "questions": [
-      {
-        "key": "Q100",
-        "section": "Article17",
-        "number": "100",
-        "type": "option",
-        "title": "Has your country made available to the BCH the relevant details setting out its point of contact for the purposes of receiving notifications under Article 17?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q101",
-        "section": "Article17",
-        "number": "101",
-        "type": "option",
-        "title": "Has your country established a mechanism for addressing emergency measures in case of unintentional transboundary movements of LMOs that are likely to have significant adverse effect on biological diversity?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q102",
-        "section": "Article17",
-        "number": "102",
-        "type": "option",
-        "title": "Has your country implemented emergency measures in response to information about releases that led, or may have led, to unintentional transboundary movements of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q103",
-        "section": "Article17",
-        "number": "103",
-        "type": "option",
-        "title": "In the current reporting period, how many times has your country received information concerning occurrences that led, or may have led, to unintentional transboundary movement(s) of one or more LMOs to or from territories under its jurisdiction?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "Never"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q104",
-        "section": "Article17",
-        "number": "104",
-        "type": "option",
-        "title": "Has your country notified affected or potentially affected States, the BCH and, where appropriate, relevant international organizations, of the above release?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, for every occurence"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, for some occurences"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q105",
-        "section": "Article17",
-        "number": "105",
-        "type": "option",
-        "title": "If you answered Yes to question 104, who did your country notify?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "affectedStates",
-            "title": "The affected or potentially affected State"
-          },
-          {
-            "value": "bch",
-            "title": "The BCH"
-          },
-          {
-            "value": "organizations",
-            "title": "Relevant international organizations"
-          }
-        ]
-      },
-      {
-        "key": "Q106",
-        "section": "Article17",
-        "number": "106",
-        "type": "option",
-        "title": "Has your country immediately consulted the affected or potentially affected States to enable them to determine appropriate responses and initiate necessary action, including emergency measures?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, in some cases"
-          },
-          {
-            "value": "false.later",
-            "title": "No, consultation was made but not immediately"
-          },
-          {
-            "value": "false",
-            "title": "No, consultation was never made"
-          }
-        ]
-      },
-      {
-        "key": "Q107",
-        "section": "Article17",
-        "number": "107",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 17 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article18",
-    "title": "Article 18 – Handling, transport, packaging and identification",
-    "questions": [
-      {
-        "key": "Q108",
-        "section": "Article18",
-        "number": "108",
-        "type": "option",
-        "title": "Has your country taken measures to require that LMOs that are subject to transboundary movement are handled, packaged and transported under conditions of safety, taking into account relevant international rules and standards?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q109",
-        "section": "Article18",
-        "number": "109",
-        "type": "option",
-        "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP clearly identifies that, in cases where the identity of the LMOs is not known through means such as identity preservation systems, they may contain living modified organisms and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q110",
-        "section": "Article18",
-        "number": "110",
-        "type": "option",
-        "title": "Has your country taken measures to require that documentation accompanying LMOs-FFP clearly identifies that, in cases where the identity of the LMOs is known through means such as identity preservation systems, they contain living modified organisms and are not intended for intentional introduction into the environment, as well as a contact point for further information?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q111",
-        "section": "Article18",
-        "number": "111",
-        "type": "option",
-        "title": "Has your country taken measures to require that documentation accompanying LMOs that are destined for contained use clearly identifies them as living modified organisms and specifies any requirements for the safe handling, storage, transport and use, the contact point for further information, including the name and address of the individual and institution to whom the LMO are consigned?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q112",
-        "section": "Article18",
-        "number": "112",
-        "type": "option",
-        "title": "Has your country taken measures to require that documentation accompanying LMOs that are intended for intentional introduction into the environment of the Party of import, clearly identifies them as living modified organisms; specifies the identity and relevant traits and/or characteristics, any requirements for the safe handling, storage, transport and use, the contact point for further information and, as appropriate, the name and address of the importer and exporter; and contains a declaration that the movement is in conformity with the requirements of this Protocol applicable to the exporter?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q113",
-        "section": "Article18",
-        "number": "113",
-        "type": "option",
-        "title": "Does your country have the capacity to enforce the requirements of identification and documentation of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q114",
-        "section": "Article18",
-        "number": "114",
-        "type": "option",
-        "title": "Has your country established procedures for the sampling and detection of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q115",
-        "section": "Article18",
-        "number": "115",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 18 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article19",
-    "title": "Article 19 – Competent National Authorities and National Focal Points",
-    "questions": [
-      {
-        "key": "Q116",
-        "section": "Article19",
-        "number": "116",
-        "type": "option",
-        "title": "Has your country designated one national focal point for the Cartagena Protocol to be responsible for liaison with the Secretariat?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q117",
-        "section": "Article19",
-        "number": "117",
-        "type": "option",
-        "title": "Has your country designated one national focal point for the Biosafety Clearing-House to liaise with the Secretariat regarding issues of relevance to the development and implementation of the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q118",
-        "section": "Article19",
-        "number": "118",
-        "type": "option",
-        "title": "Has your country designated one or more competent national authorities, which are responsible for performing the administrative functions required by the Cartagena Protocol on Biosafety and are authorized to act on your country’s behalf with respect to those functions?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "1",
-            "title": "Yes, one"
-          },
-          {
-            "value": "1+",
-            "title": "Yes, more than one"
-          },
-          {
-            "value": "0",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q119",
-        "section": "Article19",
-        "number": "119",
-        "type": "option",
-        "title": "In case your country designated more than one competent national authority, has your country conveyed to the Secretariat the respective responsibilities of those authorities?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q120",
-        "section": "Article19",
-        "number": "120",
-        "type": "option",
-        "title": "Has your country made available the required information referred in questions 116-119 to the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, all information"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, some information"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q121",
-        "section": "Article19",
-        "number": "121",
-        "type": "option",
-        "title": "In case your country has designated more than one competent national authority, has your country established a mechanism for the coordination of their actions prior to taking decisions regarding LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q122",
-        "section": "Article19",
-        "number": "122",
-        "type": "option",
-        "title": "Has your country established adequate institutional capacity to enable the competent national authority(ies) to perform the administrative functions required by the Cartagena Protocol on Biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q123",
-        "section": "Article19",
-        "number": "123",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 19 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article20",
-    "title": "Article 20 – Information Sharing and the Biosafety Clearing-House (BCH)",
-    "questions": [
-      {
-        "key": "Q124_a",
-        "section": "Article20",
-        "number": "124.a",
-        "type": "option",
-        "title": "Existing national legislation, regulations and guidelines for implementing the Protocol, as well as information required by Parties for the advance informed agreement procedure (Article 20, paragraph 3 (a))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_b",
-        "section": "Article20",
-        "number": "124.b",
-        "type": "option",
-        "title": "National laws, regulations and guidelines applicable to the import of LMOs intended for direct use as food or feed, or for processing (Article 11, paragraph 5)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_c",
-        "section": "Article20",
-        "number": "124.c",
-        "type": "option",
-        "title": "Bilateral, multilateral and regional agreements and arrangements (Articles 14, paragraph 2 and 20, paragraph 3 (b))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_d",
-        "section": "Article20",
-        "number": "124.d",
-        "type": "option",
-        "title": "Contact details for competent national authorities (Article 19, paragraphs 2 and 3), national focal points (Article 19, paragraphs 1 and 3), and emergency contacts (Article 17, paragraph 3 (e))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_e",
-        "section": "Article20",
-        "number": "124.e",
-        "type": "option",
-        "title": "Reports submitted by the Parties on the operation of the Protocol (Article 20, paragraph 3 (e))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_f",
-        "section": "Article20",
-        "number": "124.f",
-        "type": "option",
-        "title": "Decisions by a Party on regulating the transit of specific living modified organisms (LMOs) (Article 6, paragraph 1)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_g",
-        "section": "Article20",
-        "number": "124.g",
-        "type": "option",
-        "title": "Occurrence of unintentional transboundary movements that are likely to have significant adverse effects on biological diversity (Article 17, paragraph 1)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_h",
-        "section": "Article20",
-        "number": "124.h",
-        "type": "option",
-        "title": "Illegal transboundary movements of LMOs (Article 25, paragraph 3)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_i",
-        "section": "Article20",
-        "number": "124.i",
-        "type": "option",
-        "title": "Final decisions regarding the importation or release of LMOs (i.e. approval or prohibition, any conditions, requests for further information, extensions granted, reasons for decision) (Articles 10, paragraph 3 and 20, paragraph 3(d))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_j",
-        "section": "Article20",
-        "number": "124.j",
-        "type": "option",
-        "title": "Information on the application of domestic regulations to specific imports of LMOs (Article 14, paragraph 4)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_k",
-        "section": "Article20",
-        "number": "124.k",
-        "type": "option",
-        "title": "Final decisions regarding the domestic use of LMOs that may be subject to transboundary movement for direct use as food or feed, or for processing (Article 11, paragraph 1)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_l",
-        "section": "Article20",
-        "number": "124.l",
-        "type": "option",
-        "title": "Final decisions regarding the import of LMOs intended for direct use as food or feed, or for processing that are taken under domestic regulatory frameworks (Article 11, paragraph 4) or in accordance with annex III (Article 11, paragraph 6) (requirement of Article 20, paragraph 3(d))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_m",
-        "section": "Article20",
-        "number": "124.m",
-        "type": "option",
-        "title": "Declarations regarding the framework to be used for LMOs intended for direct use as food or feed, or for processing (Article 11, paragraph 6)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_n",
-        "section": "Article20",
-        "number": "124.n",
-        "type": "option",
-        "title": "Review and change of decisions regarding intentional transboundary movements of LMOs (Article 12, paragraph 1)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_o",
-        "section": "Article20",
-        "number": "124.o",
-        "type": "option",
-        "title": "LMOs granted exemption status by each Party (Article 13, paragraph 1)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_p",
-        "section": "Article20",
-        "number": "124.p",
-        "type": "option",
-        "title": "Cases where intentional transboundary movement may take place at the same time as the movement is notified to the Party of import (Article 13, paragraph 1)",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q124_q",
-        "section": "Article20",
-        "number": "124.q",
-        "type": "option",
-        "title": "Summaries of risk assessments or environmental reviews of LMOs generated by regulatory processes and relevant information regarding products thereof (Article 20, paragraph 3 (c))",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true.availableOnBch",
-            "title": "Information available and in the BCH"
-          },
-          {
-            "value": "true.availableNotOnBch",
-            "title": "Information available but not in the BCH"
-          },
-          {
-            "value": "true.availablePartialyOnBch",
-            "title": "Information available but only partially available in the BCH"
-          },
-          {
-            "value": "false.notAvailable",
-            "title": "Information not available"
-          }
-        ]
-      },
-      {
-        "key": "Q125",
-        "section": "Article20",
-        "number": "125",
-        "type": "option",
-        "title": "Has your country established a mechanism for strengthening the capacity of the BCH National Focal Point to perform its administrative functions?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q126",
-        "section": "Article20",
-        "number": "126",
-        "type": "option",
-        "title": "Has your country established a mechanism for the coordination among the BCH National Focal Point, the Cartagena Protocol focal point, and the competent national authority(ies) for making information available to the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q127",
-        "section": "Article20",
-        "number": "127",
-        "type": "option",
-        "title": "Does your country use the information available in the BCH in its decision making processes on LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, in some cases"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q128",
-        "section": "Article20",
-        "number": "128",
-        "type": "option",
-        "title": "Has your country experienced difficulties accessing or using the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q129",
-        "section": "Article20",
-        "number": "129",
-        "type": "option",
-        "title": "If you answered Yes to question 128, has your country reported these problems to the BCH or the Secretariat?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q130",
-        "section": "Article20",
-        "number": "130",
-        "type": "option",
-        "title": "Is the information submitted by your country to the BCH complete and up-to date?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q131",
-        "section": "Article20",
-        "number": "131",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 20 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article21",
-    "title": "Article 21 – Confidential information",
-    "questions": [
-      {
-        "key": "Q132",
-        "section": "Article21",
-        "number": "132",
-        "type": "option",
-        "title": "Has your country established procedures to protect confidential information received under the Protocol?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q133",
-        "section": "Article21",
-        "number": "133",
-        "type": "option",
-        "title": "Does your country allow the notifier to identify information that is to be treated as confidential?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q134",
-        "section": "Article21",
-        "number": "134",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 21 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article22",
-    "title": "Article 22 – Capacity-building",
-    "questions": [
-      {
-        "key": "Q135",
-        "section": "Article22",
-        "number": "135",
-        "type": "option",
-        "title": "Has your country received external support or benefited from collaborative activities with other Parties in the development and/or strengthening of human resources and institutional capacities in biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q136",
-        "section": "Article22",
-        "number": "136",
-        "type": "option",
-        "title": "If you answered Yes to question 135, how were these resources made available?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "channels.bilateral",
-            "title": "Bilateral channels"
-          },
-          {
-            "value": "channels.regional",
-            "title": "Regional channels"
-          },
-          {
-            "value": "channels.multilateral",
-            "title": "Multilateral channels"
-          }
-        ]
-      },
-      {
-        "key": "Q137",
-        "section": "Article22",
-        "number": "137",
-        "type": "option",
-        "title": "Has your country provided support to other Parties in the development and/or strengthening of human resources and institutional capacities in biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q138",
-        "section": "Article22",
-        "number": "138",
-        "type": "option",
-        "title": "If you answered Yes to question 137, how were these resources made available?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "channels.bilateral",
-            "title": "Bilateral channels"
-          },
-          {
-            "value": "channels.regional",
-            "title": "Regional channels"
-          },
-          {
-            "value": "channels.multilateral",
-            "title": "Multilateral channels"
-          }
-        ]
-      },
-      {
-        "key": "Q139",
-        "section": "Article22",
-        "number": "139",
-        "type": "option",
-        "title": "Is your country eligible to receive funding from the Global Environment Facility (GEF)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q140",
-        "section": "Article22",
-        "number": "140",
-        "type": "option",
-        "title": "Has your country ever initiated a process to access GEF funds for building capacity in biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q141",
-        "section": "Article22",
-        "number": "141",
-        "type": "option",
-        "title": "If you answered Yes to question 140, how would you characterize the process?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "veryEasy",
-            "title": "Very easy"
-          },
-          {
-            "value": "easy",
-            "title": "Easy"
-          },
-          {
-            "value": "average",
-            "title": "Average"
-          },
-          {
-            "value": "difficult",
-            "title": "Difficult"
-          },
-          {
-            "value": "veryDifficult",
-            "title": "Very difficult"
-          }
-        ]
-      },
-      {
-        "key": "Q142",
-        "section": "Article22",
-        "number": "142",
-        "type": "term",
-        "title": "Has your country ever received funding from the GEF for building capacity in biosafety?",
-        "multiple": true,
-        "options": [
-          {
-            "value": "C6F5F985-183C-45F7-8A61-5B6DB2F13D10",
-            "title": "Pilot Biosafety Enabling Activity"
-          },
-          {
-            "value": "303E8C81-AE0E-4CDE-A791-3DA21CB2",
-            "title": "Development of national biosafety frameworks"
-          },
-          {
-            "value": "2781FB83-5221-4D8F-ACF6-D71423AF",
-            "title": "Implementation of national biosafety frameworks"
-          },
-          {
-            "value": "BAA4A44E-39CF-41ED-96B1-216ED265A2C3",
-            "title": "Building Capacity for Effective Participation in the BCH (Phase I)"
-          },
-          {
-            "value": "08A3193F-9F13-4587-8106-E6F4F3A7A7F9",
-            "title": "Building Capacity for Effective Participation in the BCH (Phase II)"
-          },
-          {
-            "value": "7FAF8785-54AA-446B-A61E-89F952FE607B",
-            "title": "Building Capacity for Effective Participation in the BCH (Phase III)"
-          }
-        ]
-      },
-      {
-        "key": "Q143",
-        "section": "Article22",
-        "number": "143",
-        "type": "option",
-        "title": "During the current reporting period, has your country undertaken activities for the development and/or strengthening of human resources and institutional capacities in biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q144",
-        "section": "Article22",
-        "number": "144",
-        "type": "term",
-        "title": "If you answered Yes to question 143, in which of the following areas were these activities undertaken?",
-        "multiple": true,
-        "options": [
-          {
-            "value": "BB3CA716-E122-4445-9FAD-9F6B440363BD",
-            "title": "Institutional capacity"
-          },
-          {
-            "value": "68250AA6-75F1-470D-A8E7-85ECDF703D00",
-            "title": "Human resources capacity development and training"
-          },
-          {
-            "value": "7C980FF4-3C5B-4711-81F9-BA6F28C12598",
-            "title": "Risk assessment and other scientific and technical expertise"
-          },
-          {
-            "value": "B6B916B4-1700-430C-BCFB-FCE81D6F1349",
-            "title": "Risk management"
-          },
-          {
-            "value": "8419162A-8A34-46AC-8AF2-3D2905F9BA08",
-            "title": "Public awareness, participation and education in biosafety"
-          },
-          {
-            "value": "AF59E45F-3AC2-4F71-889C-B42E83F75A8A",
-            "title": "Information exchange and data management including participation in the Biosafety Clearing-House"
-          },
-          {
-            "value": "85C0A7F0-D527-40C1-B50D-2363EA600F2D",
-            "title": "Scientific, technical and institutional collaboration at subregional, regional and international levels"
-          },
-          {
-            "value": "6F6C058C-6741-4878-A448-AE56299821A8",
-            "title": "Technology transfer"
-          },
-          {
-            "value": "0FF8F112-C0E9-4A18-83E1-40D4EF61503E",
-            "title": "Identification of LMOs, including their detection"
-          },
-          {
-            "value": "76DB23A3-F880-4AC8-8602-DF9DC45EECAF",
-            "title": "Socio-economic considerations"
-          },
-          {
-            "value": "A16727EE-FE61-43FF-8530-35A9C7261247",
-            "title": "Implementation of the documentation requirements under Article 18.2 of the Protocol"
-          },
-          {
-            "value": "3E7615C5-7DFC-4E04-9D26-6C80B4B1DED8",
-            "title": "Handling of confidential information "
-          },
-          {
-            "value": "D9AC6B7F-316B-483B-8E74-A5EC87343C81",
-            "title": "Measures to address unintentional and/or illegal transboundary movements of LMOs"
-          },
-          {
-            "value": "09063980-88D9-4826-9F54-CB3EAC36641A",
-            "title": "Scientific biosafety research relating to LMOs"
-          },
-          {
-            "value": "799CD9B1-4571-4C2A-A459-F78E004D7F32",
-            "title": "Taking into account risks to human health"
-          }
-        ]
-      },
-      {
-        "key": "Q145",
-        "section": "Article22",
-        "number": "145",
-        "type": "option",
-        "title": "During the current reporting period, has your country carried out a capacity-building needs assessment?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q146",
-        "section": "Article22",
-        "number": "146",
-        "type": "option",
-        "title": "Does your country still have capacity-building needs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, a few"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q147",
-        "section": "Article22",
-        "number": "147",
-        "type": "term",
-        "title": "If you answered Yes to question 146, indicate which of the following areas still need capacity-building.",
-        "multiple": true,
-        "options": [
-          {
-            "value": "BB3CA716-E122-4445-9FAD-9F6B440363BD",
-            "title": "Institutional capacity"
-          },
-          {
-            "value": "68250AA6-75F1-470D-A8E7-85ECDF703D00",
-            "title": "Human resources capacity development and training"
-          },
-          {
-            "value": "7C980FF4-3C5B-4711-81F9-BA6F28C12598",
-            "title": "Risk assessment and other scientific and technical expertise"
-          },
-          {
-            "value": "B6B916B4-1700-430C-BCFB-FCE81D6F1349",
-            "title": "Risk management"
-          },
-          {
-            "value": "8419162A-8A34-46AC-8AF2-3D2905F9BA08",
-            "title": "Public awareness, participation and education in biosafety"
-          },
-          {
-            "value": "AF59E45F-3AC2-4F71-889C-B42E83F75A8A",
-            "title": "Information exchange and data management including participation in the Biosafety Clearing-House"
-          },
-          {
-            "value": "85C0A7F0-D527-40C1-B50D-2363EA600F2D",
-            "title": "Scientific, technical and institutional collaboration at subregional, regional and international levels"
-          },
-          {
-            "value": "6F6C058C-6741-4878-A448-AE56299821A8",
-            "title": "Technology transfer"
-          },
-          {
-            "value": "0FF8F112-C0E9-4A18-83E1-40D4EF61503E",
-            "title": "Identification of LMOs, including their detection"
-          },
-          {
-            "value": "76DB23A3-F880-4AC8-8602-DF9DC45EECAF",
-            "title": "Socio-economic considerations"
-          },
-          {
-            "value": "A16727EE-FE61-43FF-8530-35A9C7261247",
-            "title": "Implementation of the documentation requirements under Article 18.2 of the Protocol"
-          },
-          {
-            "value": "3E7615C5-7DFC-4E04-9D26-6C80B4B1DED8",
-            "title": "Handling of confidential information "
-          },
-          {
-            "value": "D9AC6B7F-316B-483B-8E74-A5EC87343C81",
-            "title": "Measures to address unintentional and/or illegal transboundary movements of LMOs"
-          },
-          {
-            "value": "09063980-88D9-4826-9F54-CB3EAC36641A",
-            "title": "Scientific biosafety research relating to LMOs"
-          },
-          {
-            "value": "799CD9B1-4571-4C2A-A459-F78E004D7F32",
-            "title": "Taking into account risks to human health"
-          }
-        ]
-      },
-      {
-        "key": "Q148",
-        "section": "Article22",
-        "number": "148",
-        "type": "option",
-        "title": "Has your country developed a capacity-building strategy or action plan?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q149",
-        "section": "Article22",
-        "number": "149",
-        "type": "option",
-        "title": "Has your country submitted the details of national biosafety experts to the Roster of Experts in the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q150",
-        "section": "Article22",
-        "number": "150",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 22 in your country, including further details about your experience in accessing GEF funds:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article23",
-    "title": "Article 23 – Public awareness and participation",
-    "questions": [
-      {
-        "key": "Q151",
-        "section": "Article23",
-        "number": "151",
-        "type": "option",
-        "title": "Has your country established a strategy or put in place legislation for promoting and facilitating public awareness, education and participation concerning the safe transfer, handling and use of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to some extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q152",
-        "section": "Article23",
-        "number": "152",
-        "type": "option",
-        "title": "Has your country established a biosafety website?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q153",
-        "section": "Article23",
-        "number": "153",
-        "type": "option",
-        "title": "Has your country established a mechanism to ensure public access to information on living modified organisms that may be imported?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.limited",
-            "title": "Yes, to a limited extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q154",
-        "section": "Article23",
-        "number": "154",
-        "type": "option",
-        "title": "Has your country established a mechanism to consult the public in the decision-making process regarding LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.limited",
-            "title": "Yes, to a limited extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q155",
-        "section": "Article23",
-        "number": "155",
-        "type": "option",
-        "title": "Has your country established a mechanism to make available to the public the results of decisions taken on LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.limited",
-            "title": "Yes, to a limited extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q156",
-        "section": "Article23",
-        "number": "156",
-        "type": "option",
-        "title": "Has your country taken any initiative to inform its public about the means of public access to the Biosafety Clearing-House?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q157",
-        "section": "Article23",
-        "number": "157",
-        "type": "option",
-        "title": "In the current reporting period, has your country promoted and facilitated public awareness, education and participation concerning the safe transfer, handling and use of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.limited",
-            "title": "Yes, to a limited extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q158",
-        "section": "Article23",
-        "number": "158",
-        "type": "option",
-        "title": "If you answered Yes to question 157, has your country cooperated with other States and international bodies?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q159",
-        "section": "Article23",
-        "number": "159",
-        "type": "option",
-        "title": "In the current reporting period, how many times has your country consulted the public in the decision-making process regarding LMOs and made the results of such decisions available to the public?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "5+",
-            "title": "More than 5"
-          }
-        ]
-      },
-      {
-        "key": "Q160",
-        "section": "Article23",
-        "number": "160",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 23 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article24",
-    "title": "Article 24 – Non-Parties",
-    "questions": [
-      {
-        "key": "Q161",
-        "section": "Article24",
-        "number": "161",
-        "type": "option",
-        "title": "Has your country entered into any bilateral, regional, or multilateral agreement with non-Parties regarding transboundary movements of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q162",
-        "section": "Article24",
-        "number": "162",
-        "type": "option",
-        "title": "Has your country ever imported LMOs from a non-Party?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q163",
-        "section": "Article24",
-        "number": "163",
-        "type": "option",
-        "title": "Has your country ever exported LMOs to a non-Party?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q164",
-        "section": "Article24",
-        "number": "164",
-        "type": "option",
-        "title": "If you answered Yes to questions 162 or 163, were the transboundary movements of LMOs consistent with the objective of the Cartagena Protocol on Biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q165",
-        "section": "Article24",
-        "number": "165",
-        "type": "option",
-        "title": "If you answered Yes to questions 162 or 163, was information about these transboundary movements submitted to the BCH?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q166",
-        "section": "Article24",
-        "number": "166",
-        "type": "option",
-        "title": "If your country is not a Party to the Cartagena Protocol, has it contributed information to the BCH on LMOs released in, or moved into, or out of, areas within its national jurisdiction?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes, always"
-          },
-          {
-            "value": "true.some",
-            "title": "In some cases only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q167",
-        "section": "Article24",
-        "number": "167",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 24 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article25",
-    "title": "Article 25 – Illegal transboundary movements",
-    "questions": [
-      {
-        "key": "Q168",
-        "section": "Article25",
-        "number": "168",
-        "type": "option",
-        "title": "Has your country adopted domestic measures aimed at preventing and/or penalizing transboundary movements of LMOs carried out in contravention of its domestic measures to implement this Protocol?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q169",
-        "section": "Article25",
-        "number": "169",
-        "type": "option",
-        "title": "Has your country established a strategy for detecting illegal transboundary movements of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q170",
-        "section": "Article25",
-        "number": "170",
-        "type": "option",
-        "title": "In the current reporting period, how many times has your country received information concerning cases of illegal transboundary movements of an LMO to or from territories under its jurisdiction?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "Never"
-          },
-          {
-            "value": "5-",
-            "title": "Less than 5"
-          },
-          {
-            "value": "10-",
-            "title": "Less than 10"
-          },
-          {
-            "value": "10+",
-            "title": "More than 10"
-          }
-        ]
-      },
-      {
-        "key": "Q171",
-        "section": "Article25",
-        "number": "171",
-        "type": "option",
-        "title": "Has your country informed the BCH and the other Party(ies) involved?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Only in some cases"
-          },
-          {
-            "value": "true.parties",
-            "title": "Only the other Party(ies) involved"
-          },
-          {
-            "value": "true.bch",
-            "title": "Only the BCH"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q172",
-        "section": "Article25",
-        "number": "172",
-        "type": "option",
-        "title": "Has your country established the origin of the LMO(s)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, some cases"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q173",
-        "section": "Article25",
-        "number": "173",
-        "type": "option",
-        "title": "Has your country established the nature of the LMO(s)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, some cases"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q174",
-        "section": "Article25",
-        "number": "174",
-        "type": "option",
-        "title": "Has your country established the circumstances of the illegal transboundary movement(s)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, some cases"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q175",
-        "section": "Article25",
-        "number": "175",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 25 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article26",
-    "title": "Article 26 – Socio-economic considerations",
-    "questions": [
-      {
-        "key": "Q176",
-        "section": "Article26",
-        "number": "176",
-        "type": "option",
-        "title": "If your country has taken a decision on import, has it ever taken into account socio-economic considerations arising from the impact of the LMO on the conservation and sustainable use of biological diversity?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Only in some cases"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          },
-          {
-            "value": "n/a",
-            "title": "Not applicable"
-          }
-        ]
-      },
-      {
-        "key": "Q177",
-        "section": "Article26",
-        "number": "177",
-        "type": "option",
-        "title": "Has your country cooperated with other Parties on research and information exchange on any socio-economic impacts of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.some",
-            "title": "Yes, to a limited extent"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q178",
-        "section": "Article26",
-        "number": "178",
-        "type": "text",
-        "title": "Here you may provide further details on the implementation of Article 26 in your country:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article27",
-    "title": "Article 27 – Liability and Redress",
-    "questions": [
-      {
-        "key": "Q179",
-        "section": "Article27",
-        "number": "179",
-        "type": "option",
-        "title": "Has your country signed the Nagoya-Kuala Lumpur Supplementary Protocol on Liability and Redress?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q180",
-        "section": "Article27",
-        "number": "180",
-        "type": "option",
-        "title": "Has your country initiated steps towards ratification, acceptance or approval of the Nagoya-Kuala Lumpur Supplementary Protocol?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q181",
-        "section": "Article27",
-        "number": "181",
-        "type": "text",
-        "title": "Here you may provide further details on any activities undertaken in your country towards the implementation of the Nagoya-Kuala Lumpur Supplementary Protocol on Liability and Redress:",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Article33",
-    "title": "Article 33 – Monitoring and reporting",
-    "questions": [
-      {
-        "key": "Q182",
-        "section": "Article33",
-        "number": "182",
-        "type": "option",
-        "title": "Has your country submitted the previous national reports (Interim and First National Reports)?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "true.interimReportOnly",
-            "title": "Yes, Interim report only"
-          },
-          {
-            "value": "true.firstReportOnly",
-            "title": "Yes, First report only"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "Q183",
-        "section": "Article33",
-        "number": "183",
-        "type": "term",
-        "title": "If your country did not submit previous reports, indicate the main challenges that hindered the submission",
-        "multiple": true,
-        "options": [
-          {
-            "value": "9D149B05-B490-43BC-BE81-473F4A15D5AC",
-            "title": "Lack of financial resources to gather the necessary information"
-          },
-          {
-            "value": "CCACEEF3-01E5-4E19-BE04-01E673A0DDE5",
-            "title": "Lack of relevant information at the national level"
-          },
-          {
-            "value": "6EEDA8B0-1096-45C9-BB43-6DA7E6C2FB0F",
-            "title": "Difficulty in compiling the information from various sectors"
-          },
-          {
-            "value": "6C994EFC-EF9C-457E-95B4-FA55BFFEAC38",
-            "title": "No obligation to submit (e.g. country was not a Party at the time)"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "key": "AdditionalInformation",
-    "title": "Other information",
-    "questions": [
-      {
-        "key": "Q184",
-        "section": "AdditionalInformation",
-        "number": "184",
-        "type": "text",
-        "title": "Please use this field to provide any other information on issues related to national implementation of the Protocol, including any obstacles or impediments encountered.",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Comments",
-    "title": "Comments on reporting format",
-    "questions": [
-      {
-        "key": "Q185",
-        "section": "Comments",
-        "number": "185",
-        "type": "text",
-        "title": "Please use this field to provide any other information on difficulties that you have encountered in filling in this report.",
-        "multiple": false
-      }
-    ]
-  },
-  {
-    "key": "Survey",
-    "title": "Survey on indicators of the Strategic Plan (2014)",
-    "questions": [
-      {
-        "key": "S003",
-        "section": "Survey",
-        "number": "3",
-        "type": "option",
-        "title": "When did your national biosafety framework become operational?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "2001",
-            "title": "2001 or earlier"
-          },
-          {
-            "value": "2002",
-            "title": "2002"
-          },
-          {
-            "value": "2003",
-            "title": "2003"
-          },
-          {
-            "value": "2004",
-            "title": "2004"
-          },
-          {
-            "value": "2005",
-            "title": "2005"
-          },
-          {
-            "value": "2006",
-            "title": "2006"
-          },
-          {
-            "value": "2007",
-            "title": "2007"
-          },
-          {
-            "value": "2008",
-            "title": "2008"
-          },
-          {
-            "value": "2009",
-            "title": "2009"
-          },
-          {
-            "value": "2010",
-            "title": "2010"
-          },
-          {
-            "value": "2011",
-            "title": "2011"
-          },
-          {
-            "value": "2012",
-            "title": "2012"
-          },
-          {
-            "value": "2013",
-            "title": "2013"
-          },
-          {
-            "value": "2014",
-            "title": "2014"
-          }
-        ]
-      },
-      {
-        "key": "S004",
-        "section": "Survey",
-        "number": "4",
-        "type": "option",
-        "title": "How many biosafety short-term training programmes and/or academic courses are offered annually in your country?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1-",
-            "title": "Less than 1 per year"
-          },
-          {
-            "value": "1+",
-            "title": "1 per year or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 per year or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 per year or more"
-          }
-        ]
-      },
-      {
-        "key": "S005",
-        "section": "Survey",
-        "number": "5",
-        "type": "option",
-        "title": "Does your country have in place a functional national mechanism for coordinating biosafety capacity-building initiatives?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S006",
-        "section": "Survey",
-        "number": "6",
-        "type": "option",
-        "title": "How much additional funding (in the equivalent of US dollars) has your country mobilized in the last four years to support implementation of the Biosafety Protocol, beyond the regular national budgetary allocation?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "USD5000-",
-            "title": "Less than 5,000 USD"
-          },
-          {
-            "value": "USD5000+",
-            "title": "5,000 USD or more"
-          },
-          {
-            "value": "USD50000+",
-            "title": "50,000 USD or more"
-          },
-          {
-            "value": "USD100000+",
-            "title": "100,000 USD or more"
-          },
-          {
-            "value": "USD500000+",
-            "title": "500,000 USD or more"
-          },
-          {
-            "value": "USD1000000+",
-            "title": "1,000,000 USD or more"
-          },
-          {
-            "value": "USD5000000+",
-            "title": "5,000,000 USD or more"
-          }
-        ]
-      },
-      {
-        "key": "S007",
-        "section": "Survey",
-        "number": "7",
-        "type": "option",
-        "title": "Does your country have predictable and reliable funding for building capacity for the effective implementation of the Protocol?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S008",
-        "section": "Survey",
-        "number": "8",
-        "type": "option",
-        "title": "How many LMO-related collaborative bilateral/multilateral arrangements has your country established with other Parties/non-Parties?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "3+",
-            "title": "3 or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          }
-        ]
-      },
-      {
-        "key": "S009_a",
-        "section": "Survey",
-        "number": "9.a",
-        "type": "option",
-        "title": "Has your country adopted or used any guidance documents for the purpose of conducting risk assessment and/or risk management?\r\nRisk assessment",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S009_b",
-        "section": "Survey",
-        "number": "9.b",
-        "type": "option",
-        "title": "Has your country adopted or used any guidance documents for the purpose of conducting risk assessment and/or risk management?\r\nRisk management",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S010",
-        "section": "Survey",
-        "number": "10",
-        "type": "option",
-        "title": "Has your country adopted or used any guidance documents for the purpose of evaluating risk assessment reports submitted by notifiers?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S011",
-        "section": "Survey",
-        "number": "11",
-        "type": "option",
-        "title": "Has your country adopted any common approaches to risk assessment with other countries?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S012",
-        "section": "Survey",
-        "number": "12",
-        "type": "option",
-        "title": "Has your country ever conducted a risk assessment of an LMO?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S013_a",
-        "section": "Survey",
-        "number": "13.a",
-        "type": "option",
-        "title": "Does your country have the capacity to identify, assess and/or monitor living modified organisms or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity, taking into account risks to human health?\r\nIdentify",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S013_b",
-        "section": "Survey",
-        "number": "13.b",
-        "type": "option",
-        "title": "Does your country have the capacity to identify, assess and/or monitor living modified organisms or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity, taking into account risks to human health?\r\nAssess",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S013_c",
-        "section": "Survey",
-        "number": "13.c",
-        "type": "option",
-        "title": "Does your country have the capacity to identify, assess and/or monitor living modified organisms or specific traits that may have adverse effects on the conservation and sustainable use of biological diversity, taking into account risks to human health?\r\nMonitor",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S014",
-        "section": "Survey",
-        "number": "14",
-        "type": "option",
-        "title": "Does your country have available any guidance for the purpose of ensuring the safe handling, transport, and packaging of living modified organisms?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S015",
-        "section": "Survey",
-        "number": "15",
-        "type": "option",
-        "title": "Does your country have any specific approaches or requirements that facilitate how socio-economic considerations should be taken into account in LMO decision making?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S016",
-        "section": "Survey",
-        "number": "16",
-        "type": "option",
-        "title": "How many peer-reviewed published materials has your country used for the purpose of elaborating or determining national actions with regard to socio-economic considerations?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          }
-        ]
-      },
-      {
-        "key": "S017",
-        "section": "Survey",
-        "number": "17",
-        "type": "text",
-        "title": "What is your country's experience, if any, in taking socio-economic considerations into account in LMO decision making?",
-        "multiple": false
-      },
-      {
-        "key": "S018",
-        "section": "Survey",
-        "number": "18",
-        "type": "option",
-        "title": "Does your country have the capacity to take appropriate measures in the event that an LMO is unintentionally released?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S019_a",
-        "section": "Survey",
-        "number": "19.a",
-        "type": "option",
-        "title": "How many people in your country have been trained in risk assessment, monitoring, management and control of LMOs?\r\nRisk assessment",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S019_b",
-        "section": "Survey",
-        "number": "19.b",
-        "type": "option",
-        "title": "How many people in your country have been trained in risk assessment, monitoring, management and control of LMOs?\r\nMonitoring",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S019_c",
-        "section": "Survey",
-        "number": "19.c",
-        "type": "option",
-        "title": "How many people in your country have been trained in risk assessment, monitoring, management and control of LMOs?\r\nManagement / Control",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S020",
-        "section": "Survey",
-        "number": "20",
-        "type": "option",
-        "title": "Does your country have the infrastructure (e.g. laboratory facilities) for monitoring or managing LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S021",
-        "section": "Survey",
-        "number": "21",
-        "type": "option",
-        "title": "Is your country using training material and/or technical guidance for training in risk assessment and risk management of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S022_a",
-        "section": "Survey",
-        "number": "22.a",
-        "type": "option",
-        "title": "Are the available training materials and technical guidance on risk assessment and risk management of LMOs sufficient and effective?\r\nSufficient",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S022_b",
-        "section": "Survey",
-        "number": "22.b",
-        "type": "option",
-        "title": "Are the available training materials and technical guidance on risk assessment and risk management of LMOs sufficient and effective?\r\nEffective",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S023",
-        "section": "Survey",
-        "number": "23",
-        "type": "option",
-        "title": "How many customs officers in your country have received training in the identification of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S024",
-        "section": "Survey",
-        "number": "24",
-        "type": "option",
-        "title": "How many laboratory personnel in your country have received training in detection of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S025",
-        "section": "Survey",
-        "number": "25",
-        "type": "option",
-        "title": "Does your country have reliable access to laboratory facilities for the detection of LMOs?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S026",
-        "section": "Survey",
-        "number": "26",
-        "type": "option",
-        "title": "How many laboratories in your country are certified for LMO detection?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          }
-        ]
-      },
-      {
-        "key": "S027",
-        "section": "Survey",
-        "number": "27",
-        "type": "option",
-        "title": "How many of the certified laboratories in the previous question are operational?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          }
-        ]
-      },
-      {
-        "key": "S028",
-        "section": "Survey",
-        "number": "28",
-        "type": "option",
-        "title": "Has your country received any financial and/or technical assistance for capacity-building in the area of liability and redress relating to living modified organisms?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S029",
-        "section": "Survey",
-        "number": "29",
-        "type": "option",
-        "title": "Does your country have administrative or legal instrument that provide for response measures for damage to biodiversity resulting from living modified organisms?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S030",
-        "section": "Survey",
-        "number": "30",
-        "type": "option",
-        "title": "Has your country informed the public about existing modalities for public participation in the decision-making process regarding living modified organisms?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S031",
-        "section": "Survey",
-        "number": "31",
-        "type": "term",
-        "title": "If you answered yes to the previous question, please indicate the modalities used to inform the public?",
-        "multiple": true,
-        "options": [
-          {
-            "value": "4E205CD9-9958-497F-A760-F8321771AB3A",
-            "title": "National website"
-          },
-          {
-            "value": "6400c117-0d9a-4e5d-a0df-ac696f7c0611",
-            "title": "Newspaper"
-          },
-          {
-            "value": "38A7618F-D953-4e5c-8AD1-8AC794971EB0",
-            "title": "Forums"
-          },
-          {
-            "value": "E8FAF86C-4202-4ABB-9B89-D3D2F2B2BABF",
-            "title": "Mailing lists"
-          },
-          {
-            "value": "51792A07-B3C0-4F7B-830E-0741635F57BB",
-            "title": "Public hearings"
-          }
-        ]
-      },
-      {
-        "key": "S032",
-        "section": "Survey",
-        "number": "32",
-        "type": "term",
-        "title": "If you indicated multiple modalities for public participation in the question above, which one was most used?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "4E205CD9-9958-497F-A760-F8321771AB3A",
-            "title": "National website"
-          },
-          {
-            "value": "6400c117-0d9a-4e5d-a0df-ac696f7c0611",
-            "title": "Newspaper"
-          },
-          {
-            "value": "38A7618F-D953-4e5c-8AD1-8AC794971EB0",
-            "title": "Forums"
-          },
-          {
-            "value": "E8FAF86C-4202-4ABB-9B89-D3D2F2B2BABF",
-            "title": "Mailing lists"
-          },
-          {
-            "value": "51792A07-B3C0-4F7B-830E-0741635F57BB",
-            "title": "Public hearings"
-          }
-        ]
-      },
-      {
-        "key": "S033",
-        "section": "Survey",
-        "number": "33",
-        "type": "option",
-        "title": "How many academic institutions in your country are offering biosafety education and training courses and programmes?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "3+",
-            "title": "3 or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          }
-        ]
-      },
-      {
-        "key": "S034",
-        "section": "Survey",
-        "number": "34",
-        "type": "option",
-        "title": "How many biosafety training materials and/or online modules are available in your country?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "25+",
-            "title": "25 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S035_a",
-        "section": "Survey",
-        "number": "35.a",
-        "type": "option",
-        "title": "Does your country have in place a monitoring and/or an enforcement system?\r\nMonitoring system",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S035_b",
-        "section": "Survey",
-        "number": "35.b",
-        "type": "option",
-        "title": "Does your country have in place a monitoring and/or an enforcement system?\r\nEnforcement system",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S036",
-        "section": "Survey",
-        "number": "36",
-        "type": "option",
-        "title": "Please indicate the number of regional, national and international events organized in relation to biosafety (e.g. seminars, workshops, press conferences, educational events, etc.,) in the last 2 years.",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "25+",
-            "title": "25 or more"
-          }
-        ]
-      },
-      {
-        "key": "S037",
-        "section": "Survey",
-        "number": "37",
-        "type": "option",
-        "title": "Please indicate the number of biosafety related publications that has been made available in your country in the last year.",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "50+",
-            "title": "50 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      },
-      {
-        "key": "S038",
-        "section": "Survey",
-        "number": "38",
-        "type": "term",
-        "title": "If biosafety related publications were made available (see question above), please indicate which modalities were preferred.",
-        "multiple": true,
-        "options": [
-          {
-            "value": "4E205CD9-9958-497F-A760-F8321771AB3A",
-            "title": "National website"
-          },
-          {
-            "value": "296200C2-3443-4C0C-B892-56CC1F80EF54",
-            "title": "National Libraries"
-          },
-          {
-            "value": "6449D16B-F360-4ED5-9EB5-F97F060AA3A7",
-            "title": "BCH Central Portal"
-          }
-        ]
-      },
-      {
-        "key": "S039",
-        "section": "Survey",
-        "number": "39",
-        "type": "option",
-        "title": "How many collaborative initiatives (including joint activities) on the Cartagena Protocol and other Conventions and processes has your government established in the last 4 years?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "25+",
-            "title": "25 or more"
-          }
-        ]
-      },
-      {
-        "key": "S040",
-        "section": "Survey",
-        "number": "40",
-        "type": "option",
-        "title": "Does your country have any awareness and outreach programmes on biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S041",
-        "section": "Survey",
-        "number": "41",
-        "type": "text",
-        "title": "If you answered yes to the question above, please indicate what entity is responsible for carrying out the programmes and/or services and at which level the programmes take place.",
-        "multiple": false
-      },
-      {
-        "key": "S042",
-        "section": "Survey",
-        "number": "42",
-        "type": "option",
-        "title": "Has your country designed and/or implemented an outreach/communication strategy on biosafety?",
-        "multiple": false,
-        "options": [
-          {
-            "value": "true",
-            "title": "Yes"
-          },
-          {
-            "value": "false",
-            "title": "No"
-          }
-        ]
-      },
-      {
-        "key": "S043",
-        "section": "Survey",
-        "number": "43",
-        "type": "option",
-        "title": "Please indicate the number of educational materials on biosafety that are available and accessible to the public.",
-        "multiple": false,
-        "options": [
-          {
-            "value": "0",
-            "title": "None"
-          },
-          {
-            "value": "1+",
-            "title": "One or more"
-          },
-          {
-            "value": "5+",
-            "title": "5 or more"
-          },
-          {
-            "value": "10+",
-            "title": "10 or more"
-          },
-          {
-            "value": "25+",
-            "title": "25 or more"
-          },
-          {
-            "value": "100+",
-            "title": "100 or more"
-          }
-        ]
-      }
-    ]
-  }
-]
+{
+  "Yes": "是",
+  "No": "否",
+  "Other": "其他",
+  "None": "无",
+  "General": "一般信息",
+  "General_title": "",
+  "General_questions0_title": "",
+  "General_questions1_title": "",
+  "General_questions2_title": "",
+  "Article2": "",
+  "Article2_title": "",
+  "Article2_questions0_title": "贵国是否已采取必要的法律、行政和其他措施以执行《议定书》？",
+  "Article2_questions0_options0_title": "国内监管框架已完全启动",
+  "Article2_questions0_options1_title": "国内监管框架已部分启动",
+  "Article2_questions0_options2_title": "仅采取了临时措施",
+  "Article2_questions0_options3_title": "仅有一个草案框架",
+  "Article2_questions0_options4_title": "尚未采取措施",
+  "Article2_questions1_title": "贵国已制定哪些国家生物安全框架执行文书？",
+  "Article2_questions1_options0_title": "一部或多部国家生物安全法律",
+  "Article2_questions1_options1_title": "一部或多部国家生物安全条例",
+  "Article2_questions1_options2_title": "一套或多套生物安全准则",
+  "Article2_questions1_options3_title": "",
+  "Article2_questions1_options4_title": "未制定任何文书",
+  "Article2_questions2_title": "贵国是否已经建立了国家生物安全框架运营资金的预算分配机制？",
+  "Article2_questions3_title": "",
+  "Article2_questions4_title": "若贵国对第 18 个问题回答“是”，贵国共有多少常设工作人员管理与国家生物安全框架直接相关的各项职能？",
+  "Article2_questions4_options0_title": "1人",
+  "Article2_questions4_options1_title": "不到5人",
+  "Article2_questions4_options2_title": "",
+  "Article2_questions4_options3_title": "超过 10次",
+  "Article2_questions5_title": "贵国的生物安全框架/法律/条例/准则是否已提交至生物安全信息交换所 (BCH)？",
+  "Article2_questions5_options1_title": "部分",
+  "Article2_questions6_title": "",
+  "Article5": "",
+  "Article5_title": "第5条 – 药物",
+  "Article5_questions0_title": "贵国是否规范了作为药物的改性活生物体的越境转移、处理和使用？",
+  "Article5_questions0_options1_title": "",
+  "Article5_questions1_title": "",
+  "Article5_questions1_options1_title": "部分",
+  "Article5_questions2_title": "",
+  "Article6": "",
+  "Article6_title": "第 6 条 – 过境和封闭使用",
+  "Article6_questions0_title": "贵国是否规范了改性活生物体的过境？",
+  "Article6_questions1_title": "贵国是否规范了改性活生物体的封闭使用？",
+  "Article6_questions2_title": "",
+  "Article6_questions2_options1_title": "部分",
+  "Article6_questions3_title": "",
+  "Articles7-10": "",
+  "Articles7_10_title": "第7至10条 – 事先知情同意及有意向环境中引入改性活生物体",
+  "Articles7_10_questions0_title": "贵国是否已采取法律/条例/行政措施以实施《议定书》的事先知情同意程序？",
+  "Articles7_10_questions1_title": "贵国是否已采取符合《议定书》关于越境转移有意引进环境的改性活生物体的国内管制框架？",
+  "Articles7_10_questions2_title": "贵国是否已就拟有意向环境中引入改性活生物体的首次有意越境转移建立了决策机制？",
+  "Articles7_10_questions3_title": "若贵国对第31个问题回答“是”，那么这一机制是否也适用于并不局限于越境转移而有意向环境中引入改性活生物体的情形？",
+  "Articles7_10_questions4_title": "贵国是否已建立了机制以监测释放到环境中的改性活生物体的潜在影响？",
+  "Articles7_10_questions5_title": "贵国是否有能力发现和识别改性活生物体？",
+  "Articles7_10_questions5_options1_title": "",
+  "Articles7_10_questions6_title": "贵国是否已为所管辖下的出口者规定了法律要求，在有意越境转移属于事先知情同意程序范围内的改性活生物体之前以书面形式通知进口方国家主管部门？",
+  "Articles7_10_questions7_title": "贵国是否已就通知所载信息的准确性规定了法律要求？",
+  "Articles7_10_questions8_title": "贵国是否曾收到过拟有意向环境中引入改性活生物体的有意越境转移的相关申请/通知？",
+  "Articles7_10_questions9_title": "贵国是否曾就拟有意向环境中引入改性活生物体的有意越境转移的相关申请/通知做出决定？",
+  "Articles7_10_questions10_title": "若贵国对第38个问题回答“是”，那么贵国迄今已核准进口多少种拟有意向环境中引入的改性活生物体？",
+  "Articles7_10_questions10_options1_title": "",
+  "Articles7_10_questions10_options2_title": "",
+  "Articles7_10_questions10_options3_title": "超过 10次",
+  "Articles7_10_questions11_title": "",
+  "Articles7_10_questions11_options1_title": "",
+  "Articles7_10_questions11_options2_title": "",
+  "Articles7_10_questions11_options3_title": "超过 10次",
+  "Articles7_10_questions12_title": "在本报告所述期间内，贵国已收到多少次拟有意向环境中引入改性活生物体的有意越境转移的相关申请/通知？",
+  "Articles7_10_questions12_options1_title": "",
+  "Articles7_10_questions12_options2_title": "",
+  "Articles7_10_questions12_options3_title": "超过 10次",
+  "Articles7_10_questions13_title": "在本报告所述期间内，贵国已就拟有意向环境中引入改性活生物体的有意越境转移做出过几次决定？",
+  "Articles7_10_questions13_options1_title": "",
+  "Articles7_10_questions13_options2_title": "",
+  "Articles7_10_questions13_options3_title": "超过 10次",
+  "Articles7_10_questions14_title": "在就拟有意向环境中引入改性活生物体的有意越境转移所做决定方面，贵国是否曾在越境转移之前收到过出口方或出口者的通知？",
+  "Articles7_10_questions14_options0_title": "",
+  "Articles7_10_questions14_options1_title": "仅在某些情况下",
+  "Articles7_10_questions15_title": "通知是否载有完整信息（至少载有《卡塔赫纳生物安全议定书》附件1的规定信息）？",
+  "Articles7_10_questions15_options0_title": "是，始终是",
+  "Articles7_10_questions15_options1_title": "仅在某些情况下",
+  "Articles7_10_questions16_title": "",
+  "Articles7_10_questions16_options0_title": "",
+  "Articles7_10_questions16_options1_title": "仅在某些情况下",
+  "Articles7_10_questions17_title": "贵国是否会将其决定告知通知人和生物安全信息交换所？",
+  "Articles7_10_questions17_options0_title": "是，始终是",
+  "Articles7_10_questions17_options1_title": "仅在某些情况下",
+  "Articles7_10_questions17_options2_title": "在某些情况下仅告知通知人",
+  "Articles7_10_questions17_options3_title": "在某些情况下仅告知生物安全信息交换所",
+  "Articles7_10_questions18_title": "贵国是否会适时（在270天之内或贵国与通知人所沟通确定的期限内）将其决定告知通知人和生物安全信息交换所？",
+  "Articles7_10_questions18_options0_title": "",
+  "Articles7_10_questions18_options1_title": "仅在某些情况下",
+  "Articles7_10_questions19_title": "贵国以下类别决定所占的百分比是多少？",
+  "Articles7_10_questions19_options0_title": "批准改性活生物体无条件的进口/使用",
+  "Articles7_10_questions19_options1_title": "批准改性活生物体有条件的进口/使用",
+  "Articles7_10_questions19_options2_title": "禁止改性活生物体的进口/使用",
+  "Articles7_10_questions19_options3_title": "要求提供其他相关资料",
+  "Articles7_10_questions19_options4_title": "告知通知方，决定的沟通期已获延长。",
+  "Articles7_10_questions20_title": "在贵国准予有条件进口或禁止进口的情形下，是否会就其决定依据向通知人和生物安全信息交换所说明理由？",
+  "Articles7_10_questions20_options0_title": "",
+  "Articles7_10_questions20_options1_title": "仅在某些情况下",
+  "Articles7_10_questions20_options2_title": "在某些情况下仅告知通知人",
+  "Articles7_10_questions20_options3_title": "在某些情况下仅告知生物安全信息交换所",
+  "Articles7_10_questions21_title": "贵国可以在此提供有关贵国执行第7-10条的更多细节，在对有意引进环境的改性活生物体的潜在不利影响没有科学上的把握性时，包括措施：",
+  "Article11": "",
+  "Article11_title": "第11条 –  关于拟直接用作食品或饲料、或用于加工目的的改性活生物体的程序",
+  "Article11_questions0_title": "贵国是否采用了具体的法律或条例，用于就拟直接用作食品或饲料、或用于加工目的的改性活生物体的国内用途包括市场投放做出决定？",
+  "Article11_questions1_title": "贵国是否就申请者所提供资料的准确性规定了法律要求？",
+  "Article11_questions2_title": "贵国是否建立了机制以确保通过生物安全信息交换所与缔约方就可能被越境转移的拟直接用作食品或饲料、或用于加工目的的改性活生物体相关决定进行沟通？",
+  "Article11_questions3_title": "贵国是否已就拟直接用作食品或饲料、或用于加工目的的改性活生物体的进口事宜建立了一个决策机制？",
+  "Article11_questions4_title": "贵国是否已在未订有监管框架的情况下通过生物安全信息交换所宣布，它将根据《卡塔赫纳生物安全议定书》第11.6条在拟直接用作食品或饲料、或用于加工目的的改性活生物体的首次进口之前做出决定？",
+  "Article11_questions5_title": "贵国是否已表明它需要拟直接用作食品或饲料、或用于加工目的的改性活生物体方面的财务和技术援助和能力建设？",
+  "Article11_questions6_title": "贵国是否已就拟直接用作食品或饲料、或用于加工目的的改性活生物体（进口或国内用途）做出决定？",
+  "Article11_questions7_title": "贵国迄今已核准了多少种拟直接用作食品或饲料、或用于加工目的的改性活生物体？",
+  "Article11_questions7_options1_title": "",
+  "Article11_questions7_options2_title": "",
+  "Article11_questions7_options3_title": "超过 10次",
+  "Article11_questions8_title": "在本报告所述期间内，贵国已就拟直接用作食品或饲料、或用于加工目的的改性活生物体的进口事宜做出过几次决定？",
+  "Article11_questions8_options1_title": "",
+  "Article11_questions8_options2_title": "",
+  "Article11_questions8_options3_title": "超过 10次",
+  "Article11_questions9_title": "在本报告所述期间内，贵国已就拟直接用作食品或饲料、或用于加工目的的改性活生物体的国内用途包括市场投放做出过几次决定？",
+  "Article11_questions9_options1_title": "",
+  "Article11_questions9_options2_title": "",
+  "Article11_questions9_options3_title": "超过 10次",
+  "Article11_questions10_title": "",
+  "Article11_questions10_options0_title": "是，始终是",
+  "Article11_questions10_options1_title": "仅在某些情况下",
+  "Article11_questions11_title": "",
+  "Article11_questions11_options0_title": "",
+  "Article11_questions11_options1_title": "仅在某些情况下",
+  "Article11_questions11_options2_title": "",
+  "Article11_questions12_title": "贵国可以在此提供有关贵国执行第11条的更多细节，在对拟直接用作食品或饲料、或用于加工目的的改性活生物体的潜在不利影响没有科学上的把握性时，包括措施：",
+  "Article12": "",
+  "Article12_title": "第 12 条 – 对决定的审查",
+  "Article12_questions0_title": "",
+  "Article12_questions1_title": "贵国是否收到过对决定进行审查的要求？",
+  "Article12_questions2_title": "",
+  "Article12_questions2_options0_title": "是，审查过决定",
+  "Article12_questions2_options1_title": "是，审查并更改过决定",
+  "Article12_questions3_title": "",
+  "Article12_questions3_options1_title": "",
+  "Article12_questions3_options2_title": "超过 5次",
+  "Article12_questions4_title": "贵国是否曾将决定的审查和/或更改告知通知人和生物安全信息交换所？",
+  "Article12_questions4_options0_title": "是，始终是",
+  "Article12_questions4_options1_title": "仅在某些情况下",
+  "Article12_questions4_options2_title": "在某些情况下仅告知通知人",
+  "Article12_questions4_options3_title": "在某些情况下仅告知生物安全信息交换所",
+  "Article12_questions5_title": "贵国是否曾将决定的审查和/或更改在30天之内告知通知人和生物安全信息交换所？",
+  "Article12_questions5_options0_title": "",
+  "Article12_questions5_options1_title": "仅在某些情况下",
+  "Article12_questions5_options2_title": "",
+  "Article12_questions6_title": "贵国是否曾向通知人和生物安全信息交换所说明决定的审查和/或更改理由？",
+  "Article12_questions6_options0_title": "",
+  "Article12_questions6_options1_title": "仅在某些情况下",
+  "Article12_questions6_options2_title": "在某些情况下仅告知通知人",
+  "Article12_questions6_options3_title": "在某些情况下仅告知生物安全信息交换所",
+  "Article12_questions7_title": "",
+  "Article13": "",
+  "Article13_title": "",
+  "Article13_questions0_title": "贵国是否已就改性活生物体的有意越境转移简化程序建立了应用系统？",
+  "Article13_questions1_title": "",
+  "Article13_questions2_title": "",
+  "Article13_questions2_options0_title": "",
+  "Article13_questions2_options1_title": "仅在某些情况下",
+  "Article13_questions3_title": "",
+  "Article13_questions3_options1_title": "",
+  "Article13_questions3_options2_title": "超过 5次",
+  "Article13_questions4_title": "",
+  "Article14": "",
+  "Article14_title": "",
+  "Article14_questions0_title": "贵国是否曾订立任何双边、区域及多边协定和安排？",
+  "Article14_questions1_title": "",
+  "Article14_questions1_options0_title": "",
+  "Article14_questions1_options1_title": "仅在某些情况下",
+  "Article14_questions2_title": "若贵国对第77个问题回答“是”，请简要描述所订立协定或安排的范围和目标：",
+  "Article14_questions3_title": "",
+  "Article15": "",
+  "Article15_title": "",
+  "Article15_questions0_title": "贵国是否已建立机制，用于在就改性活生物体做出决定之前开展风险评估？",
+  "Article15_questions1_title": "若贵国对第81个问题回答“是”，那么这一机制是否包括开展风险评估的专家认定程序？",
+  "Article15_questions2_title": "贵国是否已在就改性活生物体做出决定之前开展风险评估方面制定了准则？",
+  "Article15_questions3_title": "贵国是否已经获得了开展风险评估的必要国内能力？",
+  "Article15_questions4_title": "贵国是否已建立了开展风险评估的国内专家培训机制？",
+  "Article15_questions5_title": "贵国是否曾就拟有意向环境中引入的某种改性活生物体开展过风险评估？",
+  "Article15_questions6_title": "贵国是否曾就拟直接用作食品或饲料、或用于加工目的的某种改性活生物体开展过风险评估？",
+  "Article15_questions7_title": "若贵国曾就拟有意向环境中引入的改性活生物体或拟直接用作食品或饲料、或用于加工目的的改性活生物体的国内用途做出过决定，那么是否对所有决定都开展了风险评估？",
+  "Article15_questions7_options0_title": "",
+  "Article15_questions7_options1_title": "仅在某些情况下",
+  "Article15_questions8_title": "贵国是否曾向生物安全信息交换所提交风险评估总结报告？",
+  "Article15_questions8_options0_title": "",
+  "Article15_questions8_options1_title": "仅在某些情况下",
+  "Article15_questions9_title": "在本报告所述期间内，若贵国曾就改性活生物体做出过决定，那么在这些决定背景下开展过多少次风险评估？",
+  "Article15_questions9_options1_title": "",
+  "Article15_questions9_options2_title": "",
+  "Article15_questions9_options3_title": "超过 10次",
+  "Article15_questions10_title": "贵国是否曾要求出口者开展风险评估？",
+  "Article15_questions10_options0_title": "是，始终是",
+  "Article15_questions10_options1_title": "仅在某些情况下",
+  "Article15_questions11_title": "贵国是否曾要求通知人承担改性活生物体的风险评估费用？",
+  "Article15_questions11_options0_title": "",
+  "Article15_questions11_options1_title": "仅在某些情况下",
+  "Article15_questions12_title": "",
+  "Article16": "",
+  "Article16_title": "第16条  –  风险管理",
+  "Article16_questions0_title": "有意引入到环境中的改性活生物体？",
+  "Article16_questions0_options1_title": "",
+  "Article16_questions1_title": "拟直接用作食品或饲料、或用于加工目的的改性活生物体",
+  "Article16_questions1_options1_title": "",
+  "Article16_questions2_title": "贵国是否制定并保持了适当的措施，以防止改性活生物体的意外越境转移？",
+  "Article16_questions2_options1_title": "是，在某种程度上",
+  "Article16_questions3_title": "",
+  "Article16_questions4_title": "",
+  "Article16_questions5_title": "贵国是否与其他缔约方进行了合作，以期采取措施，处理可能对生物多样性保护和可持续利用产生不利影响的改性活生物体或其具体特性？",
+  "Article16_questions6_title": "贵国可以在此提供有关贵国执行第16条的更多细节，在对改性活生物体的潜在不利影响没有科学上的把握性时，包括关于风险管理占领的详细情况：",
+  "Article17": "",
+  "Article17_title": "",
+  "Article17_questions0_title": "贵国是否已根据第17条向生物安全信息交换所提供了相关详情，列明其联络点以便接收通知？",
+  "Article17_questions1_title": "贵国是否已就可能对生物多样性产生重大不利影响的改性活生物体意外越境转移的紧急措施制定了一个应对机制？",
+  "Article17_questions2_title": "贵国是否执行了紧急措施应对有关释放导致或可能导致改性活生物体的意外越境转移的信息？",
+  "Article17_questions3_title": "在本报告所述期间内，贵国曾获得过几次有关在贵国管辖范围内出现导致或可能导致一种或多种改性活生物体意外越境转移的事件信息？",
+  "Article17_questions3_options0_title": "从来没有",
+  "Article17_questions3_options1_title": "",
+  "Article17_questions3_options2_title": "",
+  "Article17_questions3_options3_title": "超过 10次",
+  "Article17_questions4_title": "贵国是否曾就上述释放情况通知受到影响或可能会受到影响的国家、生物安全信息交换所并酌情通知有关国际组织？",
+  "Article17_questions4_options0_title": "是，每次",
+  "Article17_questions4_options1_title": "是，有时",
+  "Article17_questions5_title": "",
+  "Article17_questions5_options0_title": "受影响或可能会受影响的国家",
+  "Article17_questions5_options1_title": "生物安全信息交换所",
+  "Article17_questions5_options2_title": "有关国际组织",
+  "Article17_questions6_title": "贵国是否曾立即与受到影响或可能会受到影响的国家进行协商，使之得以确定适当的应对办法并主动采取必要行动，包括采取各种应急措施？",
+  "Article17_questions6_options0_title": "",
+  "Article17_questions6_options1_title": "是，有时",
+  "Article17_questions6_options2_title": "否，进行了协商，但不及时",
+  "Article17_questions6_options3_title": "否，从未进行协商",
+  "Article17_questions7_title": "",
+  "Article18": "",
+  "Article18_title": "",
+  "Article18_questions0_title": "贵国是否已采取措施，参照有关国际规则和标准，要求在安全的条件下处理、包装和运输属于拟越境转移的改性活生物体？",
+  "Article18_questions0_options1_title": "是，在某种程度上",
+  "Article18_questions1_title": "贵国是否已采取措施，在通过身份保护系统等手段无法获知改性活生物体名称的情况下，要求拟直接用作食品或饲料、或用于加工目的的改性活生物体所附单据明确说明其中“可能含有”改性活生物体且不打算有意将其引入环境，并附上供进一步索取信息资料的联络点。",
+  "Article18_questions1_options1_title": "是，在某种程度上",
+  "Article18_questions2_title": "贵国是否已采取措施，在通过身份保护系统等手段获知改性活生物体名称的情况下，要求拟直接用作食品或饲料、或用于加工目的的改性活生物体所附单据明确说明其中含有改性活生物体且不打算有意将其引入环境之中，并附上供进一步索取信息资料的联络点？",
+  "Article18_questions2_options1_title": "是，在某种程度上",
+  "Article18_questions3_title": "贵国是否已采取措施，要求预定用于封闭性使用的改性活生物体所附单据明确将其标明为改性活生物体，并具体说明安全处理、储存、运输和使用的任何要求，以及供进一步索取信息资料的联络点，包括接收改性活生物体的个人和机构的名称和地址？",
+  "Article18_questions3_options1_title": "是，在某种程度上",
+  "Article18_questions4_title": "贵国是否已采取措施，要求拟有意引入进口缔约方环境中的改性活生物体所附单据明确将其标明为改性活生物体；具体说明其名称和相关特性和/或特点、关于安全处理、储存、运输和使用的任何要求以及供进一步索取信息资料的联络点，并酌情提供进口者和出口者名称和地址；以及列出关于所涉转移符合本议定书中适用于出口者的规定的声明？",
+  "Article18_questions4_options1_title": "是，在某种程度上",
+  "Article18_questions5_title": "贵国是否有能力实施改性活生物体的标志和单据方面的要求？",
+  "Article18_questions5_options1_title": "是，在某种程度上",
+  "Article18_questions6_title": "贵国是否建立了改性活生物体的采样和检测程序？",
+  "Article18_questions6_options1_title": "",
+  "Article18_questions7_title": "",
+  "Article19": "",
+  "Article19_title": "",
+  "Article19_questions0_title": "贵国是否指定了《卡塔赫纳议定书》国家联络点负责与秘书处进行联系？",
+  "Article19_questions1_title": "贵国是否指定了生物安全信息交换所国家联络点，就生物安全信息交换所的发展和执行方面的问题与秘书处联系？",
+  "Article19_questions2_title": "贵国是否已指定了一个或数个国家主管部门，负责行使《卡塔赫纳生物安全议定书》规定的行政职能并按照授权代表贵国行使此类职能？",
+  "Article19_questions2_options0_title": "是，一个",
+  "Article19_questions2_options1_title": "是，数个",
+  "Article19_questions3_title": "若贵国指定了一个以上的国家主管部门，贵国是否已将这些主管部门的各自职责转告了秘书处？",
+  "Article19_questions4_title": "贵国是否已向生物安全信息交换所提供了第116－119个问题所提及的必要信息？",
+  "Article19_questions4_options0_title": "是，所有信息",
+  "Article19_questions4_options1_title": "是，某些信息",
+  "Article19_questions5_title": "若贵国指定了一个以上的国家主管部门，贵国是否在就改性活生物体做出决定之前建立了协调行动机制？",
+  "Article19_questions6_title": "贵国是否已建立了充分的体制能力，使国家主管部门能够执行《卡塔赫纳生物安全议定书》所要求的行政职能？",
+  "Article19_questions6_options1_title": "",
+  "Article19_questions7_title": "",
+  "Article20": "",
+  "Article20_title": "",
+  "Article20_questions0_title": "用于执行《议定书》的现有的国家立法、条例和准则，以及缔约方用于事先知情同意程序所需要的信息（第 20 条第 3(a) 款）",
+  "Article20_questions0_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions0_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions0_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions0_options3_title": "",
+  "Article20_questions1_title": "适用于拟直接用作食品或饲料、或用于加工目的的进口改性活生物体的国家法律、条例和准则（第 11 条第 5 款）",
+  "Article20_questions1_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions1_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions1_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions1_options3_title": "",
+  "Article20_questions2_title": "",
+  "Article20_questions2_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions2_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions2_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions2_options3_title": "",
+  "Article20_questions3_title": "",
+  "Article20_questions3_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions3_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions3_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions3_options3_title": "",
+  "Article20_questions4_title": "",
+  "Article20_questions4_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions4_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions4_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions4_options3_title": "",
+  "Article20_questions5_title": "某一缔约方对特定改性活生物体的特性予以管制的决定（第 6 条第 1 款）",
+  "Article20_questions5_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions5_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions5_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions5_options3_title": "",
+  "Article20_questions6_title": "可能对生物多样性造成重大不利影响的无意的越境转移事件（第 17 条第 1 款）",
+  "Article20_questions6_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions6_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions6_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions6_options3_title": "",
+  "Article20_questions7_title": "改性活生物体的非法越境转移（第 25 条第 3 款）",
+  "Article20_questions7_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions7_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions7_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions7_options3_title": "",
+  "Article20_questions8_title": "",
+  "Article20_questions8_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions8_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions8_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions8_options3_title": "",
+  "Article20_questions9_title": "关于特定改性活生物体进口时国内条例适用性的信息（第 14 条第 4 款）",
+  "Article20_questions9_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions9_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions9_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions9_options3_title": "",
+  "Article20_questions10_title": "关于在国内使用可能越境转移的拟直接用作食品或饲料、或用于加工目的的改性活生物体的最终决定（第 11 条第 1 款）",
+  "Article20_questions10_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions10_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions10_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions10_options3_title": "",
+  "Article20_questions11_title": "",
+  "Article20_questions11_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions11_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions11_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions11_options3_title": "",
+  "Article20_questions12_title": "申报采用的关于拟直接用作食品或饲料、或用于加工目的的改性活生物体的体制（第 11 条第 6 款）",
+  "Article20_questions12_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions12_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions12_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions12_options3_title": "",
+  "Article20_questions13_title": "审议并改动关于改性活生物体有意越境转移的决定（第 12 条第 1 款）",
+  "Article20_questions13_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions13_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions13_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions13_options3_title": "",
+  "Article20_questions14_title": "由各缔约方赋予豁免权的改性活生物体（第 13 条第 1 款）",
+  "Article20_questions14_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions14_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions14_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions14_options3_title": "",
+  "Article20_questions15_title": "可能在通知进口缔约方的同时发生的有意越境转移案例（第 13 条第 1 款）",
+  "Article20_questions15_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions15_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions15_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions15_options3_title": "",
+  "Article20_questions16_title": "",
+  "Article20_questions16_options0_title": "已向生物安全信息交换所提供的可用信息",
+  "Article20_questions16_options1_title": "尚未向生物安全信息交换所提供的可用信息",
+  "Article20_questions16_options2_title": "仅向生物安全信息交换所部分提供的可用信息",
+  "Article20_questions16_options3_title": "",
+  "Article20_questions17_title": "",
+  "Article20_questions18_title": "贵国是否已建立机制协调生物安全信息交换所国家联络点、《卡塔赫纳生物安全议定书》联络点以及国家主管部门向生物安全信息交换所提供信息的行动？",
+  "Article20_questions19_title": "贵国是否在处理改性活生物体的决定中使用了向生物安全信息交换所提供的信息？",
+  "Article20_questions19_options0_title": "",
+  "Article20_questions19_options1_title": "是，有时",
+  "Article20_questions20_title": "贵国是否在访问和使用生物安全信息交换所方面遇到过困难？",
+  "Article20_questions21_title": "若贵国对第128个问题回答“是”，那么贵国是否已向生物安全信息交换所或秘书处报告此类问题？",
+  "Article20_questions22_title": "贵国向生物安全信息交换所提供的信息是否完整和最新？",
+  "Article20_questions23_title": "",
+  "Article21": "",
+  "Article21_title": "第 21 条 – 机密资料",
+  "Article21_questions0_title": "贵国是否制定了程序，对《议定书》下获得的保密信息予以保密？",
+  "Article21_questions1_title": "贵国是否允许通知人确认哪些信息将被视为保密信息？",
+  "Article21_questions1_options0_title": "",
+  "Article21_questions1_options1_title": "仅在某些情况下",
+  "Article21_questions2_title": "",
+  "Article22": "",
+  "Article22_title": "",
+  "Article22_questions0_title": "贵国是否在开发和/或加强生物安全人力资源和机构能力方面得到了外部支持，或受益于与其他缔约方的共同行动？",
+  "Article22_questions1_title": "",
+  "Article22_questions1_options0_title": "双边渠道",
+  "Article22_questions1_options1_title": "区域渠道",
+  "Article22_questions1_options2_title": "多边渠道",
+  "Article22_questions2_title": "贵国是否在开发和/或加强生物安全人力资源和机构能力方面向其他缔约方提供了支持？",
+  "Article22_questions3_title": "若贵国对第137个问题回答“是”，贵国是如何提供这些资源的？",
+  "Article22_questions3_options0_title": "双边渠道",
+  "Article22_questions3_options1_title": "区域渠道",
+  "Article22_questions3_options2_title": "多边渠道",
+  "Article22_questions4_title": "贵国是否符合自全球环境基金（全环基金）接受资助的资格？",
+  "Article22_questions5_title": "贵国是否启动过获得全环基金的生物技术能力建设资金的进程？",
+  "Article22_questions6_title": "",
+  "Article22_questions6_options0_title": "很容易",
+  "Article22_questions6_options1_title": "容易",
+  "Article22_questions6_options2_title": "平均",
+  "Article22_questions6_options3_title": "困难",
+  "Article22_questions6_options4_title": "很困难",
+  "Article22_questions7_title": "贵国是否曾从全环基金获得过用于建设生物安全能力的资金？",
+  "Article22_questions7_options0_title": "试点性生物技术赋能活动",
+  "Article22_questions7_options1_title": "制定国家生物安全框架",
+  "Article22_questions7_options2_title": "执行国家生物安全框架",
+  "Article22_questions7_options3_title": "有效参与生物安全信息交换所（第一期）的能力建设",
+  "Article22_questions7_options4_title": "有效参与生物安全信息交换所（第二期）的能力建设",
+  "Article22_questions7_options5_title": "",
+  "Article22_questions8_title": "在本报告所述期间内，贵国是否采取行动发展和/或加强生物安全人力资源和机构能力？",
+  "Article22_questions9_title": "",
+  "Article22_questions9_options0_title": "",
+  "Article22_questions9_options1_title": "人力资源能力开发和培训",
+  "Article22_questions9_options2_title": "风险评估和其他科技专门知识",
+  "Article22_questions9_options3_title": "",
+  "Article22_questions9_options4_title": "生物安全性的公众意识、参与和教育",
+  "Article22_questions9_options5_title": "信息交换和数据管理，包括参与生物安全信息交换所",
+  "Article22_questions9_options6_title": "在次区域、区域和国际层面进行的科学、技术和体制合作",
+  "Article22_questions9_options7_title": "技术转让",
+  "Article22_questions9_options8_title": "对改性活生物体的识别，包括检查",
+  "Article22_questions9_options9_title": "社会经济因素",
+  "Article22_questions9_options10_title": "",
+  "Article22_questions9_options11_title": "处理机密信息 ",
+  "Article22_questions9_options12_title": "处理改性活生物体非有意和/或非法越境移动的措施",
+  "Article22_questions9_options13_title": "有关改性活生物体生物技术安全的科学研究",
+  "Article22_questions9_options14_title": "考虑对人类健康的风险",
+  "Article22_questions10_title": "在本报告所述期间，贵国是否开展过一次能力建设需求评估？",
+  "Article22_questions11_title": "贵国是否仍有能力建设需求？",
+  "Article22_questions11_options1_title": "是，很少",
+  "Article22_questions12_title": "",
+  "Article22_questions12_options0_title": "",
+  "Article22_questions12_options1_title": "人力资源能力开发和培训",
+  "Article22_questions12_options2_title": "风险评估和其他科技专门知识",
+  "Article22_questions12_options3_title": "",
+  "Article22_questions12_options4_title": "生物安全性的公众意识、参与和教育",
+  "Article22_questions12_options5_title": "信息交换和数据管理，包括参与生物安全信息交换所",
+  "Article22_questions12_options6_title": "在次区域、区域和国际层面进行的科学、技术和体制合作",
+  "Article22_questions12_options7_title": "技术转让",
+  "Article22_questions12_options8_title": "对改性活生物体的识别，包括检查",
+  "Article22_questions12_options9_title": "社会经济因素",
+  "Article22_questions12_options10_title": "",
+  "Article22_questions12_options11_title": "处理机密信息 ",
+  "Article22_questions12_options12_title": "处理改性活生物体非有意和/或非法越境移动的措施",
+  "Article22_questions12_options13_title": "有关改性活生物体生物技术安全的科学研究",
+  "Article22_questions12_options14_title": "考虑对人类健康的风险",
+  "Article22_questions13_title": "贵国是否已制定有能力建设战略或行动计划？",
+  "Article22_questions14_title": "贵国是否向生物安全信息交换所专家名册提交了国家生物安全专家的详细资料？",
+  "Article22_questions15_title": "贵国可以在此提供有关贵国执行第22条的更多细节：",
+  "Article23": "",
+  "Article23_title": "",
+  "Article23_questions0_title": "",
+  "Article23_questions0_options1_title": "",
+  "Article23_questions1_title": "贵国是否建立了生物安全网站？",
+  "Article23_questions2_title": "",
+  "Article23_questions2_options1_title": "是，在有限程度上",
+  "Article23_questions3_title": "",
+  "Article23_questions3_options1_title": "是，在有限程度上",
+  "Article23_questions4_title": "",
+  "Article23_questions4_options1_title": "是，在有限程度上",
+  "Article23_questions5_title": "贵国是否采取过任何行动，以向公众公布获得生物安全信息交换所信息的方式？",
+  "Article23_questions6_title": "",
+  "Article23_questions6_options1_title": "是，在有限程度上",
+  "Article23_questions7_title": "",
+  "Article23_questions8_title": "",
+  "Article23_questions8_options1_title": "",
+  "Article23_questions8_options2_title": "超过 5次",
+  "Article23_questions9_title": "",
+  "Article24": "",
+  "Article24_title": "",
+  "Article24_questions0_title": "",
+  "Article24_questions1_title": "贵国是否曾从某非缔约方进口改性活生物体？",
+  "Article24_questions2_title": "贵国是否曾向某非缔约方出口改性活生物体？",
+  "Article24_questions3_title": "若贵国对第162或第163个问题回答“是”，那么改性活生物体的越境转移是否符合《卡塔赫纳生物安全议定书》的目标？",
+  "Article24_questions3_options0_title": "",
+  "Article24_questions3_options1_title": "仅在某些情况下",
+  "Article24_questions4_title": "",
+  "Article24_questions4_options0_title": "是，始终是",
+  "Article24_questions4_options1_title": "仅在某些情况下",
+  "Article24_questions5_title": "若贵国并非《卡塔赫纳议定书》的缔约方，那么贵国是否曾向生物安全信息交换所贡献有关改性活生物体在其国家辖区内释放或转移进出的信息？",
+  "Article24_questions5_options0_title": "",
+  "Article24_questions5_options1_title": "仅在某些情况下",
+  "Article24_questions6_title": "",
+  "Article25": "",
+  "Article25_title": "",
+  "Article25_questions0_title": "",
+  "Article25_questions1_title": "贵国是否制定了战略监测改性活生物体的非法越境转移？",
+  "Article25_questions2_title": "",
+  "Article25_questions2_options0_title": "从来没有",
+  "Article25_questions2_options1_title": "",
+  "Article25_questions2_options2_title": "",
+  "Article25_questions2_options3_title": "超过 10次",
+  "Article25_questions3_title": "贵国是否曾告知生物安全信息交换所及其他有关缔约方？",
+  "Article25_questions3_options1_title": "仅在某些情况下",
+  "Article25_questions3_options2_title": "仅告知过其他有关缔约方",
+  "Article25_questions3_options3_title": "仅告知过生物安全信息交换所",
+  "Article25_questions4_title": "贵国是否已确定了改性活生物体的来源？",
+  "Article25_questions4_options1_title": "",
+  "Article25_questions5_title": "贵国是否已确定了改性活生物体的性质？",
+  "Article25_questions5_options1_title": "",
+  "Article25_questions6_title": "贵国是否已确定了非法越境转移的情形？",
+  "Article25_questions6_options1_title": "是，某些情况下",
+  "Article25_questions7_title": "",
+  "Article26": "",
+  "Article26_title": "",
+  "Article26_questions0_title": "若贵国已就进口事宜做出决定，该决定是否虑及改性活生物体对生物多样性的保护和可持续利用造成的社会经济影响？",
+  "Article26_questions0_options1_title": "仅在某些情况下",
+  "Article26_questions0_options3_title": "",
+  "Article26_questions1_title": "贵国是否曾就改性活生物体的任何社会经济影响与其他缔约方开展过合作研究和信息交流？",
+  "Article26_questions1_options1_title": "是，在有限程度上",
+  "Article26_questions2_title": "",
+  "Article27": "",
+  "Article27_title": "第 27 条 – 赔偿责任和补救",
+  "Article27_questions0_title": "贵国是否已签署《赔偿责任和补救问题名古屋－吉隆坡补充议定书》？",
+  "Article27_questions1_title": "贵国是否开始了批准、接受或核准《名古屋－吉隆坡补充议定书》的步骤？",
+  "Article27_questions2_title": "贵国可以在此提供有关贵国为执行《名古屋－吉隆坡补充议定书》而开展的任何活动的更多细节：",
+  "Article33": "",
+  "Article33_title": "第 33 条 – 监测与报告",
+  "Article33_questions0_title": "贵国此前是否已提交过国家报告（临时和第一次国家报告）？",
+  "Article33_questions0_options1_title": "是，仅提交过临时报告",
+  "Article33_questions0_options2_title": "是，仅提交过第一次报告",
+  "Article33_questions1_title": "若贵国此前并未提交过报告，请说明阻碍提交的主要困难",
+  "Article33_questions1_options0_title": "缺乏收集必要信息的财政资源",
+  "Article33_questions1_options1_title": "缺乏国家一级的相关信息",
+  "Article33_questions1_options2_title": "难以汇编各部门信息",
+  "Article33_questions1_options3_title": "没有义务提交（如，当时本国并非缔约方）",
+  "AdditionalInformation": "",
+  "AdditionalInformation_title": "其他信息",
+  "AdditionalInformation_questions0_title": "请使用此空间提供与本国《议定书》执行情况有关的任何其他信息，包括所遇到的任何障碍或阻碍。",
+  "Comments": "评论",
+  "Comments_title": "对报告格式的评论",
+  "Comments_questions0_title": "请使用此空间提供有关贵国在填写本报告过程中遇到困难的任何其他信息。",
+  "Survey": "",
+  "Survey_title": "",
+  "Survey_questions0_title": "",
+  "Survey_questions0_options0_title": "2001 年或更早",
+  "Survey_questions0_options1_title": "2002",
+  "Survey_questions0_options2_title": "2003",
+  "Survey_questions0_options3_title": "2004",
+  "Survey_questions0_options4_title": "2005",
+  "Survey_questions0_options5_title": "2006",
+  "Survey_questions0_options6_title": "2007",
+  "Survey_questions0_options7_title": "2008",
+  "Survey_questions0_options8_title": "2009",
+  "Survey_questions0_options9_title": "2010",
+  "Survey_questions0_options10_title": "2011",
+  "Survey_questions0_options11_title": "2012",
+  "Survey_questions0_options12_title": "2013",
+  "Survey_questions0_options13_title": "2014",
+  "Survey_questions1_title": "贵国每年提供了多少个生物安全短期培训项目和/或学术课程？",
+  "Survey_questions1_options1_title": "每年少于 1 个",
+  "Survey_questions1_options2_title": "每年 1 个或 1 个以上",
+  "Survey_questions1_options3_title": "",
+  "Survey_questions1_options4_title": "",
+  "Survey_questions2_title": "贵国是否已有配合生物安全能力建设方案的可操作的国家机制？",
+  "Survey_questions3_title": "除经常国家预算分配以外，贵国在过去四年内调动了多少额外资金（换算成美元）以支持实施《生物安全议定书》？",
+  "Survey_questions3_options0_title": "不到 5,000美元",
+  "Survey_questions3_options1_title": "5,000 美元或以上",
+  "Survey_questions3_options2_title": "50,000 美元或以上",
+  "Survey_questions3_options3_title": "100,000 美元或以上",
+  "Survey_questions3_options4_title": "500,000 美元或以上",
+  "Survey_questions3_options5_title": "1,000,000 美元或以上",
+  "Survey_questions3_options6_title": "5,000,000 美元或以上",
+  "Survey_questions4_title": "贵国是否有可预测并且可靠的经费，对有效实施《议定书》进行能力建设？",
+  "Survey_questions5_title": "",
+  "Survey_questions5_options1_title": "1 个或 1 个以上",
+  "Survey_questions5_options2_title": "",
+  "Survey_questions5_options3_title": "",
+  "Survey_questions5_options4_title": "",
+  "Survey_questions6_title": "\r\n风险评估",
+  "Survey_questions7_title": "\r\n",
+  "Survey_questions8_title": "",
+  "Survey_questions9_title": "贵国是否已采用任何与其他国家相同的风险评估方法？",
+  "Survey_questions10_title": "",
+  "Survey_questions11_title": "\r\n",
+  "Survey_questions12_title": "\r\n",
+  "Survey_questions13_title": "\r\n",
+  "Survey_questions14_title": "贵国是否使用任何指南以确保安全处理、运输和包装改性活生物体？",
+  "Survey_questions15_title": "贵国是否有任何具体措施或要求，以帮助在改性活生物体决策中考虑社会经济因素？",
+  "Survey_questions16_title": "贵国使用了多少种经过同行评审的出版材料，以供详细说明或确定与社会经济因素相关的国家行动？",
+  "Survey_questions16_options1_title": "1 个或 1 个以上",
+  "Survey_questions16_options2_title": "",
+  "Survey_questions16_options3_title": "",
+  "Survey_questions16_options4_title": "",
+  "Survey_questions17_title": "对于在改性活生物体决策中考虑社会经济因素，贵国有什么经验（如有的话）？",
+  "Survey_questions18_title": "贵国是否有能力采取适当措施，以防改性活生物体意外释放？",
+  "Survey_questions19_title": "贵国有多少人曾受过改性活生物体风险评估、监测、管理和控制的培训？\r\n风险评估",
+  "Survey_questions19_options1_title": "1 个或 1 个以上",
+  "Survey_questions19_options2_title": "10 个或 10 个以上",
+  "Survey_questions19_options3_title": "",
+  "Survey_questions19_options4_title": "",
+  "Survey_questions20_title": "贵国有多少人曾受过改性活生物体风险评估、监测、管理和控制的培训？\r\n监测",
+  "Survey_questions20_options1_title": "1 个或 1 个以上",
+  "Survey_questions20_options2_title": "10 个或 10 个以上",
+  "Survey_questions20_options3_title": "",
+  "Survey_questions20_options4_title": "",
+  "Survey_questions21_title": "贵国有多少人曾受过改性活生物体风险评估、监测、管理和控制的培训？\r\n",
+  "Survey_questions21_options1_title": "1 个或 1 个以上",
+  "Survey_questions21_options2_title": "10 个或 10 个以上",
+  "Survey_questions21_options3_title": "",
+  "Survey_questions21_options4_title": "",
+  "Survey_questions22_title": "贵国是否有对改性活生物体进行监测或管理的基础设施（例如，实验室设施）？",
+  "Survey_questions23_title": "贵国是否使用改性活生物体风险评估和风险管理的培训材料和/或培训技术指南",
+  "Survey_questions24_title": "\r\n",
+  "Survey_questions25_title": "\r\n",
+  "Survey_questions26_title": "贵国有多少名海关人员接受过实施改性活生物体标志的培训？",
+  "Survey_questions26_options1_title": "1 个或 1 个以上",
+  "Survey_questions26_options2_title": "10 个或 10 个以上",
+  "Survey_questions26_options3_title": "",
+  "Survey_questions26_options4_title": "",
+  "Survey_questions27_title": "贵国有多少名实验室人员接受过改性活生物体检测的培训？",
+  "Survey_questions27_options1_title": "1 个或 1 个以上",
+  "Survey_questions27_options2_title": "10 个或 10 个以上",
+  "Survey_questions27_options3_title": "",
+  "Survey_questions27_options4_title": "",
+  "Survey_questions28_title": "贵国是否有可靠的实验室设施进行改性活生物体检测？",
+  "Survey_questions29_title": "贵国有多少个实验室持有进行改性活生物体检测的证书？",
+  "Survey_questions29_options1_title": "1 个或 1 个以上",
+  "Survey_questions29_options2_title": "",
+  "Survey_questions29_options3_title": "",
+  "Survey_questions29_options4_title": "",
+  "Survey_questions30_title": "",
+  "Survey_questions30_options1_title": "1 个或 1 个以上",
+  "Survey_questions30_options2_title": "",
+  "Survey_questions30_options3_title": "",
+  "Survey_questions30_options4_title": "",
+  "Survey_questions31_title": "贵国是否曾收到任何财务和/或技术援助，以开展有关改性活生物体的赔偿责任和补救方面的能力建设？",
+  "Survey_questions32_title": "贵国是否有规定了因改性活生物体而损害生物多样性的应对措施的行政或法律文书？",
+  "Survey_questions33_title": "贵国是否已告知公众现有的公众参与关于改性活生物体的决策过程的形式？",
+  "Survey_questions34_title": "",
+  "Survey_questions34_options0_title": "国家网站",
+  "Survey_questions34_options1_title": "报纸",
+  "Survey_questions34_options2_title": "论坛",
+  "Survey_questions34_options3_title": "",
+  "Survey_questions34_options4_title": "",
+  "Survey_questions35_title": "",
+  "Survey_questions35_options0_title": "国家网站",
+  "Survey_questions35_options1_title": "报纸",
+  "Survey_questions35_options2_title": "论坛",
+  "Survey_questions35_options3_title": "",
+  "Survey_questions35_options4_title": "",
+  "Survey_questions36_title": "贵国目前有多少个研究所提供生物安全教育以及培训课程和项目？",
+  "Survey_questions36_options1_title": "1 个或 1 个以上",
+  "Survey_questions36_options2_title": "",
+  "Survey_questions36_options3_title": "",
+  "Survey_questions36_options4_title": "",
+  "Survey_questions37_title": "",
+  "Survey_questions37_options1_title": "1 个或 1 个以上",
+  "Survey_questions37_options2_title": "",
+  "Survey_questions37_options3_title": "",
+  "Survey_questions37_options4_title": "",
+  "Survey_questions37_options5_title": "",
+  "Survey_questions38_title": "\r\n",
+  "Survey_questions39_title": "\r\n",
+  "Survey_questions40_title": "",
+  "Survey_questions40_options1_title": "1 个或 1 个以上",
+  "Survey_questions40_options2_title": "",
+  "Survey_questions40_options3_title": "",
+  "Survey_questions40_options4_title": "",
+  "Survey_questions41_title": "",
+  "Survey_questions41_options1_title": "1 个或 1 个以上",
+  "Survey_questions41_options2_title": "10 个或 10 个以上",
+  "Survey_questions41_options3_title": "",
+  "Survey_questions41_options4_title": "",
+  "Survey_questions42_title": "",
+  "Survey_questions42_options0_title": "国家网站",
+  "Survey_questions42_options1_title": "",
+  "Survey_questions42_options2_title": "生物安全信息交换所中央门户",
+  "Survey_questions43_title": "贵国政府在过去 4 年中建立了多少次关于《卡塔赫纳议定书》及其他公约和进程的合作方案（包括联合活动）？",
+  "Survey_questions43_options1_title": "1 个或 1 个以上",
+  "Survey_questions43_options2_title": "",
+  "Survey_questions43_options3_title": "",
+  "Survey_questions43_options4_title": "",
+  "Survey_questions44_title": "贵国是否拥有生物安全认识和推广项目？",
+  "Survey_questions45_title": "",
+  "Survey_questions46_title": "贵国是否设计和/或实施了生物安全推广/沟通策略？",
+  "Survey_questions47_title": "",
+  "Survey_questions47_options1_title": "1 个或 1 个以上",
+  "Survey_questions47_options2_title": "",
+  "Survey_questions47_options3_title": "",
+  "Survey_questions47_options4_title": "",
+  "Survey_questions47_options5_title": ""
+}

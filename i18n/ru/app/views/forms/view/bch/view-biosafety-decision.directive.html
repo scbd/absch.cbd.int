@@ -43,7 +43,7 @@
 		<legend>Общая информация</legend>		
 		<div ng-if="document.government">
 			<label name="country">Страна</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 		</div>
 
 		<div ng-if="document.authorities">
@@ -346,7 +346,7 @@
 				</ul>
 			</div>
 		</div>
-	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+	</div><!--=============SECTION F END========================--> <!--=============SECTION G START========================--><div ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
 		<legend>Обмен информацией с другими базами данных</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
 			<label>Имеет ли данное решение отношение к ЖИО, предназначенному для коммерческого использования?</label>

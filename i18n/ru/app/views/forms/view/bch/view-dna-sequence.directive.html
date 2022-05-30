@@ -1,27 +1,27 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4></h4>
 	</div>
 	<div class="record-body panel-body">
 
 
 
 		<document-date></document-date>
-		<legend>Общая информация</legend>
+		<legend></legend>
 
 		<div ng-show="document.title">
-			<label>Название</label>
-			<div class="km-value" compare-val><strong ng-bind="document.title | lstring:locale"></strong></div>
+			<label></label>
+			<div class="km-value" compare-val></div>
 		</div>
 
 		<div ng-show="document.name">
-			<label>Название генетического элемента</label>
+			<label></label>
 			<div compare-val>
 			<km-value-ml value="document.name" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.synonymNames">
-			<label>Альтернативное(-ые) название(-я) генетического(-их) элемента(-ов) (синоним(ы))</label>
+			<label></label>
 			<div compare-val>
 			<ul class="list" style="padding-left:0px">
 				<li ng-repeat="synonym in document.synonymNames" style="padding-bottom:5px;">
@@ -32,31 +32,31 @@
 			
 		</div>
 		<div ng-show="document.abbreviation">
-			<label>Сокращенное название</label>
+			<label></label>
 			<div compare-val>
 				<km-value-ml value="document.abbreviation" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.family">
-			<label>Категория</label>
+			<label></label>
 			<div compare-val>
 				<div class="km-value" ng-bind="document.family | term:locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.isSynthetic!=undefined">
-			<label>Является ли генетический элемент синтетической молекулой?</label>
+			<label></label>
 			<div compare-val>
-				<div class="km-value" ng-if="document.isSynthetic">Да</div>
-				<div class="km-value" ng-if="!document.isSynthetic">Нет</div>
+				<div class="km-value" ng-if="document.isSynthetic"></div>
+				<div class="km-value" ng-if="!document.isSynthetic"></div>
 			</div>
 		</div>
 	
 	<div ng-if="document.donorOrganisms || document.donorOrganismCollectionPoint || document.gisFiles ">
-		<legend>Организм-донор</legend>
+		<legend></legend>
 
 		<div ng-show="document.donorOrganisms">
-			<label>Организм(ы)-донор(ы)</label>
+			<label></label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.donorOrganisms">
@@ -67,41 +67,43 @@
 		</div>
 
 		<div ng-show="document.donorOrganismCollectionPoint">
-			<label>Пункт сбора или приобретения организма(-ов)-донора(-ов)</label>
+			<label></label>
 			<div compare-val>
 				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.gisFiles">
-			<label>Географические координаты</label>
+			<label></label>
 			<km-link-list class="km-value" ng-model="document.gisFiles"></km-link-list>
 		</div>
 	</div>
-		<legend>Характеристики кодирующей белок последовательности</legend>
+	<div ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">
+		<legend></legend>
 
 		<div ng-show="document.proteinName">
-			<label>Name of the protein expressed by the coding sequence</label>
+			<label></label>
 			<div compare-val>
 				<km-value-ml value="document.proteinName" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.biologicalFunction">
-			<label>Биологическая функция белка</label>
+			<label></label>
 			<div compare-val>
 				<km-value-ml value="document.biologicalFunction" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.traits">
-			<label>Связанный(-ые) признак(и) или использование в биотехнологии</label>
+			<label></label>
 			<div compare-val>
 				<view-terms-hierarchy class="km-value" ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
+	</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Дополнительная информация</legend>
+			<legend></legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>
@@ -110,7 +112,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
+				<label></label>
 				<div class="km-value" compare-val>
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 				</div>

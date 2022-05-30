@@ -1,77 +1,74 @@
-﻿{
-    "welcome" :  {
-      "title": "Welcome to the Search Page",
-      "content": "<p>The Search page allows you to query all information published in the Clearing-House. Records can be found by typing a word in the free text search field and/or by using  a combination of filters to narrow your search.</p>"
-    },
-    "globalSearch" :  {
-      "title": "Global Filters",
-      "content": "<p>Global filters allow you to search the entire database through all record categories by selecting one or multiple options within the <b> Record types, Keywords, Country, Regions</b> and <b>Date</b> filters.</p>"
-    },
-    "freeText" :  {
-      "title": "Free text search",
-      "content": "<p>This search box allows you to query the entire database by typing word(s) of your choice.<br><br><u>Tip:</u> Change the language of the website (top right corner) before typing in that language.</p>"
-    },
-    "recordTypesFilterTab" :  {
-      "title": "Filter by Record Type",
-      "content": "<p>Select one or more record types to search by specific category(ies) of records: National, Reference or SCBD.</p>"
-    },
-    "keywordsFilterTab" :  {
-      "title": "Search by Keyword",
-      "content": "<p>Select one or more keywords from the list.<br>If you have already filtered by record type, the keyword filters displayed will be applicable specifically to that record type.</p>"
-    },
-    "countryFilterTab" :  {
-      "title": "Search by Country",
-      "content": "<p>Select one or more countries from the list.<br><br><u>Tip:</u> Click on a letter to view all countries that start with that letter. You can also filter by countries that are 'Parties', 'Non-Parties' and 'Ratified, not yet Party'.</p>"
-    },
-    "regionFilterTab" :  {
-      "title": "Search by Region",
-      "content": "<p>Select from the pre-defined list of regions and/or regional groups.</p>"
-    },
-    "dateFilterTab" :  {
-      "title": "Search by Date",
-      "content": "<p>The <b>Date</b> filter allows you to search for records published within (i) a pre-determined date range (e.g. “Last 7 Days”); or (ii) a date range that you can specify (“Custom Range”); or (iii) on a specific day of any year. </p>"
-    },
-    "closeFilterTab" :  {
-      "title": "Search Results",
-      "content": "<p>To view search results, scroll down or click on the <b>(x)</b> button at the top right corner.</p>"
-    },
-    "searchResult" :  {
-      "title": "Search Results: Tabs",
-      "content": "<p>Search results are displayed in separate tabs organized by record category. Click on a tab to view records associated with that category.<br><br><u>Note:</u> The black circle indicates the total number of records in each category and will automatically change based on your search selections.</p>"
-    },
-    "subFilters" :  {
-      "title": "Sub-filters",
-      "content": "<p>Sub-filters appear when you select one or more record types within the <b>Record types</b> global filter.<br>They appear on the left-hand side and are associated with each selected record type.<br>You can use sub-filters in combination with global filters to further narrow your search.</p>"
-    },
-    "recordView" :  {
-      "title": "Search Results: Viewing Records",
-      "content": "<p>Once you locate the record of interest, click on it to view full details.</p>"
-
-    },
-    "viewType" :  {
-      "title": "Search Results: View Type",
-      "content": "<p>You can change the display of records by selecting the preferred option from the drop-down list.</p>"
-
-    },
-    "sortBy" :  {
-      "title": "Search Results: Sorting",
-      "content": "<p>Sort your search results by selecting one or more fields.</p>"
-
-    },
-    "sendRecords" :  {
-      "title": "Search Results: Share",
-      "content": "<p>Click here to share your search results.</p>"
-    },
-    "exportRecords" :  {
-      "title": "Search Results: Export",
-      "content": "<p>Click here to export the information to a spreadsheet format.</p>"
-    },
-    "needHelp" :  {
-      "title": "Need Help?",
-      "content": "Click here to access contextual help where you can find more information related to the Search page."
-    },
-    "needMoreHelp" :  {
-      "title": "Need more help?",
-      "content": "Use the Chat feature to message us for additional support."
-    }
+{
+  "welcome": {
+    "title": "欢迎使用搜索页面",
+    "content": "<p> </p>"
+  },
+  "globalSearch": {
+    "title": "全局筛选条件",
+    "content": "<p></p>"
+  },
+  "freeText": {
+    "title": "自由文本搜索",
+    "content": "<p></u> </p>"
+  },
+  "recordTypesFilterTab": {
+    "title": "根据记录类型进行过滤",
+    "content": "<p> </p>"
+  },
+  "keywordsFilterTab": {
+    "title": "按关键词搜索",
+    "content": "<p></p>"
+  },
+  "countryFilterTab": {
+    "title": "按国家搜索",
+    "content": "<p></u>  </p>"
+  },
+  "regionFilterTab": {
+    "title": "按地区搜索",
+    "content": "<p></p>"
+  },
+  "dateFilterTab": {
+    "title": "按日期搜索",
+    "content": "<p> </p>"
+  },
+  "closeFilterTab": {
+    "title": "搜索结果",
+    "content": "<p></p>"
+  },
+  "searchResult": {
+    "title": "搜索结果：选项卡",
+    "content": "<p> </u> </p>"
+  },
+  "subFilters": {
+    "title": "子筛选条件",
+    "content": "<p></p>"
+  },
+  "recordView": {
+    "title": "搜索结果：查看记录",
+    "content": "<p></p>"
+  },
+  "viewType": {
+    "title": "搜索结果：查看类型",
+    "content": "<p></p>"
+  },
+  "sortBy": {
+    "title": "搜索结果：排序",
+    "content": "<p></p>"
+  },
+  "sendRecords": {
+    "title": "搜索结果：分享",
+    "content": "<p></p>"
+  },
+  "exportRecords": {
+    "title": "搜索结果：导出",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "需要帮助吗？",
+    "content": "单击此处，以访问上下文帮助，在这里您可以找到更多与搜索页面有关的信息。"
+  },
+  "needMoreHelp": {
+    "title": "需要更多帮助吗？",
+    "content": "使用聊天功能给我们发消息以获得更多支持。"
+  }
 }

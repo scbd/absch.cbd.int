@@ -1,4 +1,4 @@
-<div id="innerPageEditForm editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true"></span><div class="registerpage-content">
+<div id="innerPageEditForm editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><div class="registerpage-content">
 
         <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -8,10 +8,10 @@
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="well no-shadow bg-white">
-                        <legend>Información general</legend>
+                        <legend></legend>
                         <div class="row">
                             <div class="col-xs-12" >
-                                <div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
+                                <div class="km-control-group" name="header.languages" required caption="">
                                     <div class="indent">
                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                     </div>
@@ -20,15 +20,15 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-xs-12">
-                                <div class="km-control-group" required name="organization" caption="Nombre y datos del laboratorio"><!-- <div class="help-block">Lab information...</div> --><div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
+                                <div class="km-control-group" required name="organization" caption=""><div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
                                         type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
                             </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-xs-12">
-                                <div class="km-control-group" name="relatedOrganization" caption="Organización relacionada">
-                                    <div class="help-block">Por favor, utilice este campo para establecer un enlace a cualquier otra organización relacionada que pueda estar en la base de datos (por ejemplo, organización matriz).</div>
+                                <div class="km-control-group" name="relatedOrganization" caption="">
+                                    <div class="help-block"></div>
                                    <div document-selector required ng-model="document.relatedOrganization" allow-new="true" allow-new-schema="organization"
                                         type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
                             </div>
@@ -36,10 +36,10 @@
                         </div>
                     </div>
                     <div class="well no-shadow bg-white">
-                        <legend>Información del laboratorio</legend>
+                        <legend></legend>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="km-control-group" required name="services" caption="Servicios y actividades">
+                                <div class="km-control-group" required name="services" caption="">
                                     <div km-term-check name="services" required ng-model="document.services" terms="options.services()"
                                     binding-type="term[]" locales="document.header.languages"></div>
                                 </div>
@@ -48,23 +48,23 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="agreements" caption="Acuerdos de colaboración">
-                                    <div class="help-block">Especificar cualquier autoridad competente, organización o laboratorio nacionales, ubicados dentro o fuera del país, que tenga un acuerdo con este laboratorio.</div>
-                                    <div km-rich-textbox ng-model="document.agreements" rows="4" placeholder="Acuerdos" locales="document.header.languages"></div><br/><div km-link name="agreementLinks" ng-model="document.agreementLinks" identifier="document.header.identifier"></div>
+                                <div class="km-control-group" name="agreements" caption="">
+                                    <div class="help-block"></div>
+                                    <div km-rich-textbox ng-model="document.agreements" rows="4" placeholder="" locales="document.header.languages"></div><div km-link name="agreementLinks" ng-model="document.agreementLinks" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="certifications" caption="Acreditaciones y certificaciones del laboratorio">
+                                <div class="km-control-group" name="certifications" caption="">
                                     <div km-textbox-ml name="certifications" ng-model="document.certifications"
-                                        placeholder="por ej., ISO/IEC 17025" locales="document.header.languages"></div>
+                                        placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="km-control-group" required name="detectionMethods" caption="Tipos de método(s) de detección/identificación disponibles para su empleo en el laboratorio">
+                                <div class="km-control-group" required name="detectionMethods" caption="">
                                     <div km-term-check name="detectionMethods" required ng-model="self.detectionMethods" terms="options.detectionMethods()"
                                     binding-type="term[]" locales="document.header.languages"></div>
                                 </div>
@@ -73,7 +73,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="km-control-group" name="lmoTypes" caption="Tipos de OVM">
+                                <div class="km-control-group" name="lmoTypes" caption="">
                                     <div km-term-check name="lmoTypes" ng-model="document.lmoTypes" terms="options.lmoTypes()"
                                     binding-type="term[]" locales="document.header.languages"></div>
                                 </div>
@@ -82,14 +82,14 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                               <div class="km-control-group" name="detectableLmos" caption="OVM detectable(s) por el laboratorio">
+                               <div class="km-control-group" name="detectableLmos" caption="">
                                     <div document-selector ng-model="document.detectableLmos" allow-new="true" allow-new-schema="modifiedOrganism"
                                         question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true">
                                         
                                         <selected-records>
                                             <table class="table" style="padding-bottom:3px;width:100%;">
                                                 <tr ng-repeat="doc in $parent.model"  >
-                                                    <td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.removeDocument(doc);" class="link color-red"><i class="fa fa-times"></i></a></td>
+                                                    <td style="margin-bottom:15px;width:15px;"></td>
                                                     <td style="margin-bottom:20px;">
                                                         <div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
                                                     </td>
@@ -103,7 +103,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="detectableGenes" required caption="Elemento(s) genético(s) detectables por el laboratorio">
+                                <div class="km-control-group" name="detectableGenes" required caption="">
                                     <div document-selector ng-model="document.detectableGenes" required allow-new="true" allow-new-schema="dnaSequence"
                                         question="detectableGenes" on-build-query="onBuildQuery(searchText,'dnaSequence')" filter="true"></div>
                                 </div>
@@ -111,16 +111,16 @@
                         </div>
                     </div>
                     <div class="well no-shadow bg-white">
-                        <legend>Plazo para la confirmación o actualización de la información</legend>
-                        <div class="help-info">Por favor, tenga en cuenta que esta categoría de información requiere la confirmación o actualización al cabo de un año a partir de la fecha de presentación. Transcurrido el plazo, se le pedirá que confirme o actualice el registro dentro de los tres meses siguientes. Después de este lapso, si no se ha recibido la confirmación, la inscripción será marcada como "No confirmada".</div>
+                        <legend></legend>
+                        <div class="help-info"></div>
                     </div>
 
                     <div class="well no-shadow bg-white">
-                        <legend>Información adicional</legend>
+                        <legend></legend>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="address" caption="Cualquier otra información pertinente">
-                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                <div class="km-control-group" name="address" caption="">
+                                    <div class="help-block"></div>
                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>
@@ -128,18 +128,18 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="relevantDocuments" caption="Otros documentos pertinentes">
-                                    <div class="help-block">Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen.</div>
+                                <div class="km-control-group" name="relevantDocuments" caption="">
+                                    <div class="help-block"></div>
                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="well no-shadow bg-white">
-                        <legend>Notas</legend>								
+                        <legend></legend>								
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="notes"><span class="help-block">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.</span><div km-notes name="notes" ng-model="document.notes"></div>
+                                <div class="km-control-group" name="notes"><div km-notes name="notes" ng-model="document.notes"></div>
                                 </div>
                             </div>
                         </div>

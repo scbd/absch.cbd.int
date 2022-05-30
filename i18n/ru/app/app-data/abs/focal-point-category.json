@@ -1,8 +1,7 @@
-﻿{
-    "absNfp"  : "ABS National Focal Point",
-    "cbdNfp"  : "CBD Primary Focal Point",
-    "cbdSfp"  : "CBD Secondary Focal Point",
-    "pNfp"    : "Protected Areas NFP", 
-    "gNfp"    : "GTI NFP"
+{
+  "absNfp": "Национальный координационный центр по ДГРСИВ",
+  "cbdNfp": "Основной национальный координационный центр по КБР",
+  "cbdSfp": "Вспомогательный национальный координационный центр по КБР",
+  "pNfp": "НКЦ по охраняемым районам",
+  "gNfp": "НКЦ по ГТИ"
 }
-

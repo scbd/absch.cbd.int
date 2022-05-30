@@ -1,10 +1,10 @@
-﻿{
-"unknown"           : "Unknown error",
-"mandatory"         : "Field is mandatory" ,
-"mandatoryAnyOf"    : "One of the field is mandatory",
-"invalidValue"      : "The value specified is invalid" ,
-"invalidProperty"   : "This value cannot be specified" ,
-"unspecifiedLocale" : "A language is used but not specified in your document" ,
-"unexpectedTerm"    : "A specified term cannot be used" ,
-"invalidType"       : "The fields type is invalid"    
+{
+  "unknown": "未知錯誤",
+  "mandatory": "必须填写的字段",
+  "mandatoryAnyOf": "其中一个字段为必填字段",
+  "invalidValue": "指定的密码无效。",
+  "invalidProperty": "無法指定此值",
+  "unspecifiedLocale": "您的文檔中使用了一種語言但未指定",
+  "unexpectedTerm": "指定的術語不能使用",
+  "invalidType": "指定的密码无效。"
 }

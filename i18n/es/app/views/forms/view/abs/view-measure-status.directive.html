@@ -11,16 +11,14 @@
 
 		<div ng-show="document.government">
 			<label name="country">País</label>
-			<div class="km-value"><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value"><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 		</div>
 
 		
 
 		<div ng-show="document.jurisdiction">
 			<label>Jurisdicción(es)</label>
-			<div compare-val>
-			<km-value-ml value="document.jurisdiction | term:locale" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value" compare-val><span ng-bind="document.jurisdiction|term:locale"></span></div>
 		</div>
 
 
@@ -45,9 +43,7 @@
 
 		<div ng-show="document.status">
 			<label>¿Cuál es la situación de su país (o de la jurisdicción indicada) relativa a las medidas en materia de APB?</label>
-			<div compare-val>
-				<km-value-ml value="document.status|term" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value" compare-val><span ng-bind="document.status|term:locale"></span></div>
 		</div>
 
 		<div ng-show="document.statusDescription">

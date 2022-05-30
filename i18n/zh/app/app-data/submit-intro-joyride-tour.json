@@ -1,34 +1,34 @@
 {
-    "welcome" :  {
-      "title": "Welcome to adding a new record",
-      "content": "<p>On this page you can add (create) a new record.<br>Adding a new record is divided into 4 main steps:<br>Step 1: Introduction<br>Step 2: Submission form<br>Step 3: Review<br>Step 4: Publish</p>"
-    },
-    "introduction" :  {
-      "title": "Adding a new record: Introduction",
-      "content": "<p>“Introduction” contains a short summary about the selected record type and brief instructions on how to submit the information.</p>"
-    },
-    "submissionForm" :  {
-      "title": "Adding a new record: Submission form",
-      "content": "Complete the fields in the “Submission form”.<br><u>Note:</u> Fields marked with a <span style='color: red;'>red</span> asterisk (<span style='color: red;'>*</span>) are mandatory. Some fields have descriptive text to assist you with the completion of the form."
-    },
-    "saveDraft" :  {
-      "title": "Save a  Draft",
-      "content": "It is recommended to save your record periodically during the submission process.<br>You can also save the record as a draft and continue your submission at a later date.<br><u>Note</u>: Once your draft is saved, you will then be able to share it by email or export to PDF."
-    },
-    "review" :  {
-      "title": "Adding a new record: Review",
-      "content": "Once you have filled out the “Submission form”, click here to review it.<br>If the mandatory fields were not completed, the “Review” will highlight them. Make sure to complete them in order to proceed to publishing your record."
-    },
-    "publish" :  {
-      "title": "Publish",
-      "content": "Click on “Publish” to complete the process."
-    },
-    "needHelp" :  {
-      "title": "Need help?",
-      "content": "<p>Click here to access contextual help where you can find more information related to the submission process.</p>"
-    },
-    "needMoreHelp" :  {
-      "title": "Need more help?",
-      "content": "<p>Us the Chat feature to message us for additional support.</p>"
-    }
+  "welcome": {
+    "title": "欢迎新添记录",
+    "content": "<p>    发布</p>"
+  },
+  "introduction": {
+    "title": "添加新记录：序言",
+    "content": "<p></p>"
+  },
+  "submissionForm": {
+    "title": "添加新记录：提交信息表",
+    "content": "</u>  部分字段具有描述性文字，可协助您填写表格。"
+  },
+  "saveDraft": {
+    "title": "保存草稿",
+    "content": " 一旦您的草稿已保存，您就可以通过电子邮件分享或导出为PDF。"
+  },
+  "review": {
+    "title": "添加新记录：审核",
+    "content": " 请确保填妥这些字段，以便继续发布您的记录。"
+  },
+  "publish": {
+    "title": "发布",
+    "content": "单击“发布”以完成这一过程。"
+  },
+  "needHelp": {
+    "title": "需要帮助吗？",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "需要更多帮助吗？",
+    "content": "<p></p>"
+  }
 }

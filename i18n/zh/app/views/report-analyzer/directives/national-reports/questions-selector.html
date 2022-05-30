@@ -4,7 +4,7 @@
 
     <table class="table table-hover" style="margin-bottom:0px">
         <tr>
-            <th style="width:200px">国家报告</th>
+            <th style="width:20%">国家报告</th>
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
@@ -14,14 +14,15 @@
             </td>
         </tr>
         <tr>
-            <th>地理区域</th>
+            <th>Filter by country(ies) or region(s)</th>
             <td>
                 <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-control">
                     <option value="cbdRegions">按生物多样性公约地区细分</option>
                     <option value="countries">选择国家或地区</option>
                     <option value="regions">选择地区</option>
-                    <option value="protocolParties">按缔约方细分</option>
-                    <option value="protocolNonParties">按议定书非缔约方细分</option>
+                    <option value="protocolParties">Breakdown by Parties to the Cartagena Protocol</option>
+                    <option value="protocolNonParties">Breakdown by Non-Parties to the Cartagena Protocol</option>
+                    <option ng-if="isBch" value="NKLSParty">Breakdown by Parties to the Supplementary Protocol</option>
                 </select>
             </td>
         </tr>
@@ -35,7 +36,7 @@
                 <div ng-hide="selectedRegions.length || showCountries || showRegions" class="alert alert-warning" role="alert" style="margin-bottom:0px">未选定任何国家或地区</div>
 
                 <ul ng-if="selectedRegions.length" class="list-unstyled">
-                    <li ng-repeat="c in selectedRegions"><span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties'"><i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i> <span ng-bind="regionsMap[c].title|lstring"></span></span> <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties'"><span ng-bind="npCountries[c].title|lstring"></span></span></li>
+                    <li ng-repeat="c in selectedRegions"><span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='NKLSParty'"><i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i> <span ng-bind="regionsMap[c].title|lstring"></span></span> <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='NKLSParty'"><span ng-bind="npCountries[c].title|lstring"></span></span></li>
                 </ul>
             </td>
     </table>

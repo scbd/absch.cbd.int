@@ -6,7 +6,7 @@
             <p>Данный файл в формате PDF создан на тестовом веб-сайте МП-ДГРСИВ.<p>
         </div>
 
-        <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>
+        <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
 
         <div class="row1">
             <div class="col-xs-12 bg-green">
@@ -256,7 +256,9 @@
                     </ul>
 
                 </div>
-            </div><!-- <div ng-show="versions && false"> --><legend>Журнал изменений</legend>
+            </div>
+
+            <legend>Журнал изменений</legend>
             <div class="row top-border bg-litegreen">
                 
                 <table class="table">
@@ -276,7 +278,8 @@
                         </td>
                     </tr>
                     
-                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;"><!-- <hr style="border-color:#FFF;margin:3;padding:3;"> --><td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
+                        <td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
                         <td class="col-xs-2"><span ng-show="document.body.amendmentIntent==1"><span class="bold color-red">ОТОЗВАНО</span></span> <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))"><span class="bold color-green">УСТАРЕВШАЯ ВЕРСИЯ</span></span> <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)"><span class="bold color-green">ТЕКУЩАЯ ВЕРСИЯ</span></span></td>
                         <td class="col-xs-4"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <span ng-show="document.body.amendmentIntent==undefined">Информация о разрешении, опубликованная в Механизме посредничества для регулирования ДГРСИВ, и составленный сертификат.</span></td>
                         <td class="col-xs-4" ng-bind="document | uniqueID">
@@ -284,7 +287,10 @@
                     </tr>
 
                 </table>
-            </div><!-- </div> --><legend>Дополнительная информация</legend>
+            </div>
+           
+
+            <legend>Дополнительная информация</legend>
             <table class="top-border">
                 <tr>
                     <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">По вопросам, касающимся разрешения или эквивалентного ему документа, являющегося международно признанным сертификатом о соответствии требованиям, следует обращаться к компетентному национальному органу, выдавшему разрешение или эквивалентный ему документ. Дополнительная информация о разрешении или эквивалентном ему документе может быть размещена в Механизме посредничества для регулирования доступа к генетическим ресурсам и совместного использования выгод (<a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> Questions about the Nagoya Protocol on Access and Benefit-sharing or the operation of the Access and Benefit-sharing Clearing-House may be directed to the Secretariat of the Convention on Biological Diversity.</td>

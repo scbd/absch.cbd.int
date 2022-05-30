@@ -12,7 +12,7 @@
 			
 			<div ng-show="document.government">
 				<label>البلد</label>
-				<div class="km-value" compare-val><span ng-bind="document.government | term:locale"></span> <span ng-party-status government="document.government" id="government"></span></div>
+				<div class="km-value" compare-val><span ng-bind="document.government | term:locale"></span></div>
 			</div>
 			<div ng-show="document.organization || document.organizationAcronym">
                 <label>الاسم</label>
@@ -29,7 +29,7 @@
 		<div ng-show="document.type=='person'">
 			 <div ng-show="document.government">
   			   <label>البلد</label>
-  			   <div class="km-value" compare-val><span ng-bind="document.government | term:locale"></span> <span ng-party-status government="document.government" id="government"></span></div>
+  			   <div class="km-value" compare-val><span ng-bind="document.government | term:locale"></span></div>
   		   </div>
 
             <div>
@@ -107,8 +107,8 @@
 
 				<div ng-show="document.relevantDocuments">
 					<label>Other relevant website addresses and/or attached documents</label>
-					<div compare-val>
-						<div class="km-value" ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a></div>
+					<div class="km-value" compare-val="relevantDocuments">
+						<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 					</div>
 				</div>
 			</div>

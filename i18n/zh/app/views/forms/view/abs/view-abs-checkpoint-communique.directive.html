@@ -12,7 +12,7 @@
 				<legend>一般信息</legend>
 				<div ng-show="document.government">
 					<label>发布此检查站公报的国家</label>
-					<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a> <span ng-party-status government="document.government" id="government"></span></div>
+					<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 				</div>
 			</div>
 			<div ng-show="document.title">

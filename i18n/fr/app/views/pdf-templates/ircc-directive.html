@@ -6,7 +6,7 @@
             <p>Ce PDF a été généré à partir du site test du Centre d’échange APA<p>
         </div>
 
-        <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>
+        <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
 
         <div class="row1">
             <div class="col-xs-12 bg-green">
@@ -256,7 +256,9 @@
                     </ul>
 
                 </div>
-            </div><!-- <div ng-show="versions && false"> --><legend>Historique des amendements</legend>
+            </div>
+
+            <legend>Historique des amendements</legend>
             <div class="row top-border bg-litegreen">
                 
                 <table class="table">
@@ -276,7 +278,8 @@
                         </td>
                     </tr>
                     
-                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;"><!-- <hr style="border-color:#FFF;margin:3;padding:3;"> --><td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
+                        <td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
                         <td class="col-xs-2"><span ng-show="document.body.amendmentIntent==1"><span class="bold color-red">RAPPELÉ</span></span> <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))"><span class="bold color-green">VERSION ANTÉRIEURE</span></span> <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)"><span class="bold color-green">VERSION ACTUELLE</span></span></td>
                         <td class="col-xs-4"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <span ng-show="document.body.amendmentIntent==undefined">Informations de permis publiées au Centre d’échange APA et certificat constitué.</span></td>
                         <td class="col-xs-4" ng-bind="document | uniqueID">
@@ -284,7 +287,10 @@
                     </tr>
 
                 </table>
-            </div><!-- </div> --><legend>Pour plus d'informations</legend>
+            </div>
+           
+
+            <legend>Pour plus d'informations</legend>
             <table class="top-border">
                 <tr>
                     <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">Les questions au sujet des permis ou leurs équivalents qui constituent un certificat de respect des obligations internationalement reconnu doivent être envoyées à l’autorité nationale compétence qui émet le permis ou son équivalent. Des informations supplémentaires sur le permis ou son équivalent pourraient être disponibles au Centre d’échange d’informations sur l’accès et le partage des avantages. (<a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>). <br> <br> Les questions sur le Protocole de Nagoya sur l’accès et le partage des avantages ou sur le fonctionnement du Centre d’échange d’informations sur l’accès et le partage des avantages peuvent être envoyées au Secrétariat de la Convention sur la diversité biologique.</td>

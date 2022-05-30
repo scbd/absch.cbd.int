@@ -99,7 +99,7 @@
                                                 <div class="col-xs-12">
                                                     <div class="control-group">
                                                         <div class="km-control-group" name="sourceCountries" required caption="遗传资源的来源">
-                                                            <div class="help-info">Select the country/ies which is/are the source of the genetic resource.The country/ies selected will be notified once this record is published.The source country should not include the country publishing this Checkpoint Communiqué.</div>
+                                                            <div class="help-info">Select the country/ies which is/are the source of the genetic resource. The country/ies selected will be notified once this record is published. The source country should not include the country publishing this Checkpoint Communiqué.</div>
                                                             <div km-select required name="sourceCountries" ng-model="document.sourceCountries"
                                                                 multiple items="options.countries()" placeholder="请选择一个国家..."></div>
                                                         </div>
@@ -253,7 +253,7 @@
                                             </div>
                                             <div class="col-xs-1 bg-grey">
                                                 <div style="font-size:16px;font-weight:bold;padding: 6px;text-align: center;" name="dateOR"
-                                                    caption="OR">OR</div>
+                                                    caption="或者">或者</div>
                                             </div>
                                             <div class="col-xs-3 text-right">
                                                 <div km-date placeholder="发件人" required name="dateCollectedFrom" ng-model="document.dateCollectedFrom"></div>
@@ -304,7 +304,7 @@
                 </edit-form>
                 <review-form>
                     <view-abs-checkpoint-communique show-pdf="false" ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-checkpoint-communique>
-                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
+                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></workflow-arrow-buttons>
 
         </div>
     </div>

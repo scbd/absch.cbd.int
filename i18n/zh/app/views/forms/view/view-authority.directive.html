@@ -14,7 +14,7 @@
 
 		<div ng-show="document.government" >
 			<label name="country">国家</label>
-			<div class="km-value"><span><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></span> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value"><span><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></span></div>
 		</div>
 
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
@@ -23,9 +23,9 @@
 			<div class="km-value" compare-val="Competent Authority Name">
 				<div><strong><span ng-bind="document.name | lstring:locale"></span></strong></div>
 				<div ng-show="document.address"><span ng-bind="document.address | lstring:locale"></span></div>
-				<div ng-show="document.city"><span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">,</span></div>
+				<div ng-show="document.city"><span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">，</span></div>
 				<div ng-show="document.state"><span ng-bind="document.state | lstring:locale"></span><br ng-show="document.city || document.state" /></div>
-				<div ng-show="document.postalCode"><span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">,</span></div>
+				<div ng-show="document.postalCode"><span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">，</span></div>
 				<div ng-show="document.country"><span ng-bind="document.country|term"></span></div>
 				<ul ng-show="document.phones" class="list"  style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
 					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> <span ng-bind="item"></span></li>
@@ -38,7 +38,7 @@
 				</ul>
 
 				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
-					<li ng-repeat="item in document.websites"><a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}"><i class="fa fa-external-link"></i> <span ng-bind="item.name||item.url"></span></a></li>
+					<km-link-list ng-model="document.websites" ></km-link-list>
 				</ul>
 			</div>
 		</div>
@@ -171,9 +171,9 @@
 
 			<div ng-show="document.relevantDocuments">
 				<label>其他相关网站地址和/或附加文件</label>
-			<div class="km-value" compare-val="relevantDocuments">
-				<div ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a></div>
-			</div>
+				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
+					<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+				</div>
 			</div>
 		</div>
 		<div>

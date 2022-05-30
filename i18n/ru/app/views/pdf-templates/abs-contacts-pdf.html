@@ -4,7 +4,7 @@
     <div >
         <div class="row">
             <div class="col-xs-12">
-                <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>                
+                <div id="printContentHeader" ng-include="'view-print-header.html'"></div>                
                 <div class="col-xs-12 bg-green">
                     <h1 class="color-litegreen  text-center" style="padding:0;">{{title(schema)}}</h1>
                 </div>
@@ -15,9 +15,9 @@
                                                                     'panel-warning':contact.schema_s=='absCheckpoint',
                                                                     'panel-info':contact.schema_s=='authority'||contact.schema_s=='database'}">
                                 <div class="panel-heading">
-                                    <h4 class="panel-title"><a rel="noopener" ng-href="/countries/{{contact.government_s|encodeURIComponent}}" ng-bind="contact.government_EN_t"></a></h4>
+                                    <h4 class="panel-title"><a rel="noopener" ng-href="countries/{{contact.government_s|encodeURIComponent}}" ng-bind="contact.government_EN_t"></a></h4>
                                 </div>
-                                <div class="panel-body"><a rel="noopener" ng-href="/database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase|encodeURIComponent}}" ng-bind="contact.title_t"></a><div ng-show="contact.summary_t" ng-bind-html="contact.summary_t"></div>
+                                <div class="panel-body"><a rel="noopener" ng-href="database/{{schema}}/{{contact.uniqueIdentifier_s|uppercase|encodeURIComponent}}" ng-bind="contact.title_t"></a><div ng-show="contact.summary_t" ng-bind-html="contact.summary_t"></div>
                                     <ul ng-show="contact.telephones || contact.telephone_ss || contact.fax_ss" style="list-style-type: none;padding:0;margin:0;">                                        
                                         <li ng-show="contact.telephone_ss" ng-repeat="item in contact.telephone_ss"><span ng-bind="item"></span></li>
                                         <li ng-show="contact.telephones" ng-repeat="item in contact.telephones"><span ng-bind="item"></span></li>

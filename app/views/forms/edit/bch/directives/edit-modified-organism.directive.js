@@ -10,8 +10,8 @@ import '~/views/forms/directives/traits-selector.directive';
 import '~/views/forms/directives/view-terms-hierarchy';
 import { uniqIdentifiers } from '~/services/common'
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr', 'commonjs',
-		 function($http, $controller, thesaurusService, storage, $q, realm, solr, commonjs) {
+	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr', '$timeout',
+		 function($http, $controller, thesaurusService, storage, $q, realm, solr, $timeout) {
 		
 		return {
 			restrict   : "EA",
@@ -32,7 +32,7 @@ import { uniqIdentifiers } from '~/services/common'
 					$scope: $scope
 				});
 
-
+				$scope.externalLinks = []
 				_.extend($scope.options, {
 					techniqueUsed	: thesaurusService.getDomainTerms('techniqueUsed', 		{other:true, otherType:'lstring', multiple:true}),
 					commonUses 		: thesaurusService.getDomainTerms('OrganismCommonUses', {other:true, otherType:'lstring', multiple:true})			
@@ -150,38 +150,45 @@ import { uniqIdentifiers } from '~/services/common'
 				}
 
 				$scope.lookupDetections = function(){
-					var uniqueIdentifier = $scope.document.uniqueIdentification;
-					if(!uniqueIdentifier)
+					
+					if(!$scope.document)
 						return;
 
-					$scope.lookingupDetections =true
-
-					$http.get('/api/v2020/bch/lmo-detection-methods/'+uniqueIdentifier)
+					$scope.externalLinks = undefined;
+					var uniqueIdentifier = $scope.document.uniqueIdentification;
+					if(!uniqueIdentifier){						
+						return;
+					}
+					$scope.lookingUpDetections =true;
+					$http.get('/api/v2020/bch/lmo-detection-methods/'+uniqueIdentifier, {cache:true})
 					.then(function(result){
 						if(result.data){
-							var exists = _.find($scope.document.detectionMethodLinks, {url: decodeURIComponent(result.data.url)})
-							if(!exists){
-								var newMethods = angular.copy($scope.document.detectionMethodLinks||[]);
-								$scope.document.detectionMethodLinks = undefined;
-								newMethods.push({
-									url:result.data.url, 
-									name: uniqueIdentifier + ' - EU Reference Laboratory for GM Food and Feed (EURL-GMFF)',
-									language: 'lang-en'
-								});
-								$scope.document.detectionMethodLinks = newMethods;
-							}
-							//
+							
+							const externalLinks = [];
+							result.data.forEach(e=>{
+								var exists = _.find($scope.externalLinks, {url: decodeURIComponent(e.url)})
+								if(!exists){
+									externalLinks.push(e);
+								}							
+							});
+							
+							$timeout(()=>{
+								$scope.externalLinks = externalLinks
+							}, 200);
 						}
 					})
 					.finally(function(){
-						$scope.lookingupDetections = false;
+						$scope.lookingUpDetections = false;
 					})
 				}
-
-				$scope.setDocument({}, true).then(updateOldGenes);
+				$scope.setDocument({}, true).then((document)=>{
+					updateOldGenes(document);
+					$scope.lookupDetections();
+				});
 
 				function updateOldGenes(document){
-					oldGenes = _.map(document.genes||[], 'identifier');
+					if(document)
+						oldGenes = _.map(document.genes||[], 'identifier');
 				}
 				function loadReferenceDocument(identifier){
 					return storage.drafts.get(identifier, { info: true })					

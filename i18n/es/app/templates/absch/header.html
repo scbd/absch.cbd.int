@@ -1,4 +1,4 @@
-<div class="bs5 bg-white">
+<div class="bs5" ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
 
     <header class="bs5 new-css-sm-header px-3">
         <nav class="bs5 navbar new-css-navbar-sm navbar-light bg-light rounded" >
@@ -23,7 +23,7 @@
     <header class="bs5 new-css-header pt-4 new-css-lg-header">
         <div class="bs5"><a href="." class="bs5 new-css-acronym color-green mx-3 mx-md-3 px-md-3 px-lg-5">ABSCH <span if="!isDEV && !isTRG" class="bs5 new-css-ch-name fw-bold text-uppercase link-dark"><span class="bs5 hidden-xs hidden-sm">Access and Benefit-sharing</span> <span class="bs5 hidden-md hidden-lg">ABS</span> Clearing-House</span> <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">DEVELOPEMENT</span> <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">TRAINING</span></a></div>
     </header>
-<nav class="bs5 border-bottom mt-2 new-css-lg-header">
+<nav class="bs5 border-bottom mt-2 new-css-lg-header" ng-class="{'text-white':isTRG}">
     <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
         <ul class="bs5 nav me-auto mx-2">
             <li class="bs5 nav-item"><a rel="noopener" translation-url href="."
@@ -31,9 +31,8 @@
                     aria-current="page"><span class="hidden-sm hidden-xs">Inicio</span> <span class="hidden-md hidden-lg"><i class="fa fa-home"></i></span></a></li>
             <li class="bs5 nav-item"><a rel="noopener" translation-url href="/kb/tags/about/About-the-ABS-Clearing-House/5bbcfe17f05916000167781"
                     class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">about</a></li>
-            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown"><a rel="noopener" translation-url href="#" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
-                    type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
-                    aria-expanded="false">Buscar</a><ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown"><a rel="noopener" translation-url href="/search" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
+                    id="dropdownMenuButton1" aria-expanded="false">Buscar</a><ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="search">Registros</a></li>
                    
                     <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold link-dark " href="/reports">Analizador de informes nacionales</a></li>
@@ -73,6 +72,8 @@
             </li>
             <li class="bs5 nav-item"><a href="/forums"
                     class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">forums</a></li>
+            <li ng-if="isTRG" class="bs5 nav-item"><a href="https://absch.cbd.int/en/"
+                class="bs5 bg-yellow fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">Leave Training Site</a></li>
         </ul>
         <ul class="bs5 nav">
             <li class="bs5 nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"

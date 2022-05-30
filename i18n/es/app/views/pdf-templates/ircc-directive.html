@@ -6,7 +6,7 @@
             <p>Este pdf se ha generado a partir del sitio web de prueba del Centro de Intercambio de la Información sobre APB.<p>
         </div>
 
-        <div id="printContentHeader" ng-include="'/app/views/forms/view/print-header.html'"></div>
+        <div id="printContentHeader" ng-include="'view-print-header.html'"></div>
 
         <div class="row1">
             <div class="col-xs-12 bg-green">
@@ -256,7 +256,9 @@
                     </ul>
 
                 </div>
-            </div><!-- <div ng-show="versions && false"> --><legend>Historia de las enmiendas</legend>
+            </div>
+
+            <legend>Historia de las enmiendas</legend>
             <div class="row top-border bg-litegreen">
                 
                 <table class="table">
@@ -276,7 +278,8 @@
                         </td>
                     </tr>
                     
-                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;"><!-- <hr style="border-color:#FFF;margin:3;padding:3;"> --><td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
+                    <tr ng-repeat="document in versions | orderBy:'updatedOn':true" class="history-text" style="border-color:#FFF;margin:3;padding:3;">                       
+                        <td class="col-xs-2 history-text-date" ><strong ng-bind="document.createdOn |formatDateWithTime"></strong></td>
                         <td class="col-xs-2"><span ng-show="document.body.amendmentIntent==1"><span class="bold color-red">REVOCADO</span></span> <span ng-show="((versions.length>1 && document.body.amendmentIntent!=1 && document.revision < versions.length))"><span class="bold color-green">VERSIÓN ANTIGUA</span></span> <span ng-show="versions.length==1 || (versions.length>1 && versions.length == document.revision && document.body.amendmentIntent!=1)"><span class="bold color-green">VERSIÓN ACTUAL</span></span></td>
                         <td class="col-xs-4"><span ng-bind-html="document.body.amendmentDescription| lstring:locale"></span> <span ng-show="document.body.amendmentIntent==undefined">Información sobre el permiso publicada en el Centro de Intercambio de Información sobre APB y certificado constituido.</span></td>
                         <td class="col-xs-4" ng-bind="document | uniqueID">
@@ -284,7 +287,10 @@
                     </tr>
 
                 </table>
-            </div><!-- </div> --><legend>Información adicional</legend>
+            </div>
+           
+
+            <legend>Información adicional</legend>
             <table class="top-border">
                 <tr>
                     <td class="col-md-6" width="50%" style="font-size:12px;text-align: justify">Las preguntas sobre el permiso o su equivalente que constituye un certificado de cumplimiento reconocido internacionalmente deben formularse a la autoridad nacional competente que emitió el permiso o su equivalente. En el Centro de Intercambio de Información sobre APB ( <a rel="noopener" href="https://absch.cbd.int/">https://absch.cbd.int/</a>) tal vez se encuentre disponible información adicional sobre el permiso o su equivalente. <br> <br> Las preguntas sobre el Protocolo de Nagoya sobre acceso a los recursos genéticos y participación justa y equitativa en los beneficios que se deriven de su utilización o sobre el funcionamiento del Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios pueden dirigirse a la Secretaría del Convenio sobre la Diversidad Biológica.</td>

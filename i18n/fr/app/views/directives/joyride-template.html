@@ -7,8 +7,8 @@ ng-class="{'{{joyride.config.steps[joyride.current].customClass}}':joyride.confi
         ng-bind-html="joyride.config.steps[joyride.current].content | jr_trust"></div>
     </div>
     <div class="jr_buttons">
-      <div class="jr_left_buttons"><a class="jr_button jr_skip" ng-click="joyride.start = false">Passer</a></div>
+      <div class="jr_left_buttons"></div>
   
-      <div class="jr_right_buttons"><a class="jr_button jr_prev" ng-click="joyride.prev()" ng-class="{'disabled' : joyride.current === 0}">« Antérieur</a> <a class="jr_button jr_next" ng-click="joyride.next()" ng-bind="(joyride.current == joyride.config.steps.length-1) ? 'Finish' : 'Next'"></a></div>
+      <div class="jr_right_buttons"></div>
     </div>
 </div>

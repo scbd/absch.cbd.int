@@ -7,7 +7,7 @@ import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 import { uniqIdentifiers } from '~/services/common'
 
-app.directive("viewModifiedOrganism", ['$location', function ($location) {
+app.directive("viewModifiedOrganism", ['$location', '$http', function ($location, $http) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -25,6 +25,42 @@ app.directive("viewModifiedOrganism", ['$location', function ($location) {
 			if(queryString )
 				$scope.printMode = queryString.print
 			
+			function lookupDetections(){
+				if(!$scope.document || $scope.lookingUpDetections)
+					return;
+
+				$scope.detectionMethodLinks = [...($scope.document.detectionMethodLinks||[])];
+
+				var uniqueIdentifier = $scope.document.uniqueIdentification;
+				if(!uniqueIdentifier){
+					$scope.document.detectionMethodLinks = ($scope.document.detectionMethodLinks||[]).filter(e=>!['JRC', 'CropLife'].includes(e.tag));
+					return;
+				}
+
+				$scope.lookingUpDetections =true
+
+				$http.get('/api/v2020/bch/lmo-detection-methods/'+uniqueIdentifier, {cache:true})
+				.then(function(result){
+					if(result.data){
+						
+						result.data.forEach(e=>{
+							var exists = $scope.detectionMethodLinks.find(l=>l.url == decodeURIComponent(e.url))
+							if(!exists){
+								$scope.detectionMethodLinks.push(e);
+							}							
+						});
+					}
+				})
+				.finally(function(){
+					$scope.lookingUpDetections = false;
+				})
+			}
+			
+			$scope.$watch('document', function(oldVal, newVal){
+				if(oldVal?.uniqueIdentification != newVal?.uniqueIdentification){
+					lookupDetections();
+				}
+			})
 			//====================
 			//
 			//====================
@@ -34,11 +70,12 @@ app.directive("viewModifiedOrganism", ['$location', function ($location) {
 
 				return( $scope.hide.indexOf(field) >= 0 ? false : true);
 			}
+
 			if($scope.document?.genes){
 				$scope.document.genes = uniqIdentifiers($scope.document.genes);
 			}
+			lookupDetections();
+
 		}
 	};
 }]);
-
-

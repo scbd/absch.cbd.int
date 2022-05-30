@@ -11,7 +11,7 @@
 		
 		<div ng-show="document.government">
 			<label name="country">البلد</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="/countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a> <span ng-party-status government="document.government" id="government"></span></div>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
 		</div>
 
 			<div ng-show="document.title">

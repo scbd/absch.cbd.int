@@ -16,7 +16,7 @@
                     <div ng-class="{'article-open':showArticle}" >
                         <div class="card" ng-click="details(article);"><span class="article-heading"><span ng-bind="article.title | lstring:locale"></span></span><p class="article-info"><span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="article.summary && !showArticle" ng-bind-html="article.summary | lstring:locale|limitTo:200"></span> <span class="ck ck-content ck-rounded-corners ck-blurred summary" ng-if="!article.summary || showArticle" ng-bind-html="article.content | lstring:locale|limitTo:(showArticle ? article.content.length : 200)"></span></p>
                         </div>
-                        <div class="footer"><a rel="noopener" ng-href="/articles/{{article._id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a></div>
+                        <div class="footer"><a rel="noopener" ng-href="articles/{{article._id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a></div>
                     </div>
                 </div>
                 <div ng-if="!articles.length" class="easing">
@@ -35,7 +35,7 @@
                 <p><span ng-if="articleData.adminTags" ng-repeat="tag in articleData.adminTags" class="badge badge-light" style="cursor: pointer;margin:5px;"
                         ng-bind="tag" ng-click="showTagArticles(tag)"></span></p>
                 <div class="box-bottom" style="width: auto;"><i class="fa fa-calendar" ></i> <span class="news-date" ng-bind="articleData.meta.createdOn | formatDateWithUtc"></span></div>
-                <div class="footer"><a rel="noopener" ng-href="/articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a></div>
+                <div class="footer"><a rel="noopener" ng-href="articleData/{{articleData.id}}" target="_blank" class="pull-right"><i class="fa fa-external-link"></i></a></div>
             </div>
         </div>
         

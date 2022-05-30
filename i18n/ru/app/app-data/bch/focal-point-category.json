@@ -1,6 +1,5 @@
-﻿{
-    "cpNfp" : "Cartagena Protocol on Biosafety National Focal Point",
-    "bchNfp": "Biosafety Clearing-House Focal Point",
-    "emCp"  : "Emergency Measures Contact Person (Art. 17)"
+{
+  "cpNfp": "Национальный координационный центр по Картахенскому протоколу по биобезопасности",
+  "bchNfp": "",
+  "emCp": ""
 }
-

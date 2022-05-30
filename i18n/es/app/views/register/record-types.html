@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.national" >
                 <h3 style="font-size:auto" ng-bind="::s.title"></h3>
-                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Presentar</a></div>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Presentar</a></div>
         </div>
         
         <h2>Registros de referencia</h2>
@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12" ng-repeat="s in ::recordTypesCtrl.schemas.reference" >
                 <h3 style="font-size:auto" ng-bind="::s.title"></h3>
-                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="/register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Presentar</a></div>
+                <p style="min-height:100px" ng-bind="::s.description"></p><a rel="noopener" ng-href="register/{{s.schema|urlSchemaShortName|encodeURIComponent}}" class="btn btn-default" style="width:100%">Presentar</a></div>
         </div>
     </div>
 </div>

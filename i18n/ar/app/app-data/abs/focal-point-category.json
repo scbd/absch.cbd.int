@@ -1,8 +1,7 @@
-﻿{
-    "absNfp"  : "ABS National Focal Point",
-    "cbdNfp"  : "CBD Primary Focal Point",
-    "cbdSfp"  : "CBD Secondary Focal Point",
-    "pNfp"    : "Protected Areas NFP", 
-    "gNfp"    : "GTI NFP"
+{
+  "absNfp": "نقطة الاتصال الوطنية للحصول على الموارد وتقاسم المنافع",
+  "cbdNfp": "نقطة الاتصال الأساسية لاتفاقية التنوع البيولوجي",
+  "cbdSfp": "نقطة الاتصال الثانوية لاتفاقية التنوع البيولوجي",
+  "pNfp": "نقطة الاتصال الوطنية للمناطق المحمية",
+  "gNfp": "نقطة الاتصال الوطنية للمبادرة العالمية للتصنيف"
 }
-

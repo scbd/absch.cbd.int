@@ -118,7 +118,7 @@
                                             </div>
                                             <div class="col-xs-6">
                                                 <div class="km-control-group" name="dateOfExpiry" caption="许可证或同等证照的到期日期">
-                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here.Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
+                                                    <div class="help-info">If the national ABS permit, or equivalent, includes an expiry date please add it here. Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC.</div>
                                                     <div km-date placeholder="YYYY-MM-DD" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -154,7 +154,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="picInformation" caption="有关事先知情同意书（PIC）的补充信息"><span class="help-info">If applicable, please provide any additional information about the prior informed consent (PIC).可在附件中提供详细信息</span><div km-rich-textbox name="picInformation" rows="4" ng-model="document.picInformation" locales="document.header.languages"></div>
+                                                <div class="km-control-group" name="picInformation" caption="有关事先知情同意书（PIC）的补充信息"><span class="help-info">If applicable, please provide any additional information about the prior informed consent (PIC). 可在附件中提供详细信息</span><div km-rich-textbox name="picInformation" rows="4" ng-model="document.picInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
             
@@ -172,7 +172,7 @@
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="获授事先知情同意（PIC）的个人或实体；" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted.如信息被标注为机密，则该人将无法无条件获得国际公认合规证书或检查点已发布公报。</div>
+                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. 如信息被标注为机密，则该人将无法无条件获得国际公认合规证书或检查点已发布公报。</div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
@@ -373,7 +373,7 @@
                 </edit-form>
                 <review-form>
                     <view-abs-permit ng-model="review.document" locale="review.locale" allow-drafts="true"></view-abs-permit>
-                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></div>
+                </review-form><!-- <publish-form></publish-form> --> <!-- use when you wan to display more than publish buttons --></workflow-arrow-buttons>
             
         </div>
     </div>

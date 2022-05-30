@@ -38,9 +38,7 @@
 
 		<div ng-show="document.geographicScope">
 			<label>Couverture géographique</label>
-			<div compare-val>
-				<km-value-ml value="document.geographicScope | term:locale" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value" compare-val><span ng-bind="document.geographicScope|term:locale"></span></div>
 		</div>
 
 		<div ng-show="document.countryRegions">
@@ -63,9 +61,7 @@
 
 		<div ng-show="document.status">
 			<label>Statut</label>
-			<div compare-val>
-				<km-value-ml value="document.status | term:locale" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value" compare-val><span ng-bind="document.status|term:locale"></span></div>
 		</div>
 
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
@@ -95,9 +91,7 @@
 
 		<div ng-show="document.activityScope">
 			<label>Type d’initiative de renforcement des capacités</label>
-			<div compare-val>
-				<km-value-ml value="document.activityScope | term:locale" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value" compare-val><span ng-bind="document.activityScope|term:locale"></span></div>
 		</div>
 		<div ng-show="document.isProjectProgramme!=undefined">
 			<label>Cela fait-il partie d’un projet ou programme plus vaste?</label>
