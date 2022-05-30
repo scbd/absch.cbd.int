@@ -12,13 +12,13 @@
         </style>
 
             <div ng-repeat="doc in kfilters = (keywordSearchFilters |filter:hasCounts  | filter:searchKeyword | orderBy:'name')" class="keyword-item">
-                <a rel="noopener" translation-url class="filter" ng-click="saveFilter(doc)"
+                <a rel="noopener" translation-url class="filter text-decoration-none" ng-click="saveFilter(doc)"
                     ng-class="::{'disabled':!$parent.searchResult.data.facets.keywords[doc.id]}">
                     <i class="fa check"
                         ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i>
                     <span ng-bind="::doc.name|lstring:locale"></span>
                     <strong>(<span ng-bind="::$parent.searchResult.data.facets.keywords[doc.id]||0"></span>)</strong>
-                    <span class="pull-right">
+                    <span class="float-end">
                         <span ng-repeat="rel in ::doc.schemaFields" data-bs-toggle="tooltip" data-title="{{::rel.schema|schemaName}}" data-container="body" >
                             <span  ng-bind="::rel.schema|schemaShortName"></span><span ng-if="!$last"> |</span>
                         </span>

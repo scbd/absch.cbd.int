@@ -1,6 +1,6 @@
 <div>
 
-<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+<div class="innerPageEditForm">
 
 		<span block-region activate="isLoading()" ng-if="isLoading()"></span>
 		<div class="registerpage-content">
@@ -11,11 +11,11 @@
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>General information</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -30,7 +30,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Identity of the living modified organism (LMO)</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -95,7 +95,7 @@
 							
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Characteristics of the modification process</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -138,7 +138,7 @@
 	
 							
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>LMO characteristics</legend>
 									<div class="row">
 										<!-- <div class="col-xs-12">
@@ -187,7 +187,7 @@
 								</div>
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Detection method(s)</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -211,7 +211,7 @@
 								</div>
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Additional information</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -271,7 +271,7 @@
 						<a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.$parent.removeDocument(doc);" class="link color-red">
 							<i class="fa fa-times"></i></a>
 					</td>
-					<td style="margin-bottom:20px;">
+					<td class="mb-4">
 						<div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
 					</td>
 				</tr>

@@ -10,47 +10,63 @@
         .ngdialog-content {
             background: transparent !important;
         }
-        
+
         .ngdialog.ngdialog-theme-default.wide .ngdialog-content {
             width: 750px !important;
         }
     </style>
 
 
-    <div  class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+    <div class="innerPageContent register-content card card-1-notrans mb-5">
 
-        <div class="register-content-header bg-darkgrey color-white">
-            <div style="padding:10px 10px;">
+        <div class="register-content-header bg-darkgrey text-white">
+            <div class="p-2">
                 <h3> User Management
-          <span class="helpinfoInline">
-                <i class="fa fa-info-circle helpicon pull-right" ng-click="showInfo = !showInfo"></i> 
-            </span>
-        </h3>
+                    <span class="helpinfoInline">
+                        <i class="bi bi-info-circle-fill helpicon float-end" ng-click="showInfo = !showInfo"></i>
+                    </span>
+                </h3>
 
                 <!--help info---------------------------->
-                <div ng-if="showInfo" class="well well-help">
+                <div ng-if="showInfo" class="p-3 card well-help">
                     <strong>User Management for ABS-CH authorized users</strong>
                     <p>
-                        This page allows focal points (NFP) to designate or make changes to the designation of the publishing authority (PA) and the publishing authority (PA) to designate or update national authorized users (NAU). Listed below you will find all ABS-CH authorized
-                        users that have been granted permission to work on national records for your country. You can select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change the PA or delete a NAU). If a person
-                        already holding a CBD account does not appear as an ABS-CH authorized user for your country, you can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all CBD accounts using their email addresses,
-                        and assign them a PA or NAU role. This feature also allows you to assign roles to someone who does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person
-                        you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email request to activate their account. Once they have activated their CBD account, they can start working on national records.
+                        This page allows focal points (NFP) to designate or make changes to the designation of the
+                        publishing authority (PA) and the publishing authority (PA) to designate or update national
+                        authorized users (NAU). Listed below you will find all ABS-CH authorized
+                        users that have been granted permission to work on national records for your country. You can
+                        select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change
+                        the PA or delete a NAU). If a person
+                        already holding a CBD account does not appear as an ABS-CH authorized user for your country, you
+                        can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all
+                        CBD accounts using their email addresses,
+                        and assign them a PA or NAU role. This feature also allows you to assign roles to someone who
+                        does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email
+                        address and other details of the person
+                        you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email
+                        request to activate their account. Once they have activated their CBD account, they can start
+                        working on national records.
                     </p>
                     <strong>Functions of the publishing authorities (PA)</strong>
                     <p>
                         The PA is responsible for:
-                        <ul>
-                            <li>Authorizing the publication of all national records registered in the ABS Clearing-House;</li>
-                            <li>Deleting records already published in the ABS Clearing-House, if necessary;</li>
-                            <li>Ensuring that the information made available in the ABS Clearing-House is complete, relevant and up-to-date; and</li>
-                            <li>Ensuring that no confidential data is published in the ABS Clearing-House. The ABS Clearing-House does not host any confidential information and all information published in the ABS Clearing-House is publicly available and
-                                can be accessed by the general public.</li>
-                        </ul>
+                    <ul>
+                        <li>Authorizing the publication of all national records registered in the ABS Clearing-House;
+                        </li>
+                        <li>Deleting records already published in the ABS Clearing-House, if necessary;</li>
+                        <li>Ensuring that the information made available in the ABS Clearing-House is complete, relevant
+                            and up-to-date; and</li>
+                        <li>Ensuring that no confidential data is published in the ABS Clearing-House. The ABS
+                            Clearing-House does not host any confidential information and all information published in
+                            the ABS Clearing-House is publicly available and
+                            can be accessed by the general public.</li>
+                    </ul>
                     </p>
                     <strong>Functions of national authorized users (NAUs)</strong>
                     <p>
-                        The function of NAUs is to assist the PA in the preparation of draft national records. NAUs are only allowed to create and manage draft records which are then forwarded to the PA for publication.
+                        The function of NAUs is to assist the PA in the preparation of draft national records. NAUs are
+                        only allowed to create and manage draft records which are then forwarded to the PA for
+                        publication.
                     </p>
 
                 </div>
@@ -62,11 +78,12 @@
             <div class="row">
 
 
-                <div class="col-xs-12" ng-show="error">
+                <div class="col-12" ng-show="error">
 
                     <div ng-switch="error.code + '-' + error.field">
                         <div class="alert alert-warning" ng-switch-when="mandatory-government">
-                            <b>Oops...</b> You are not authorized access this page. This page is only available to national users. Please contact the absch@cbd.int if you require assistance.
+                            <b>Oops...</b> You are not authorized access this page. This page is only available to
+                            national users. Please contact the absch@cbd.int if you require assistance.
                         </div>
                         <div class="alert alert-warning" ng-switch-when="forbidden-">
                             <b>Oups...</b> We're sorry, but you are not authorized access this page.
@@ -78,75 +95,110 @@
 
                 </div>
 
-                <div class="col-sm-offset-8 col-sm-4 col-xs-12" ng-hide="error">
-
-                    <div class="input-group" style="margin-bottom:2px; padding-left: 0px">
-                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading" placeholder="Search within the national users list..." />
-                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <div class="offset-md-8 col-md-4" ng-hide="error">
+                    <div class="input-group mb-1">
+                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading"
+                            placeholder="Search within the national users list...">
+                        <span class="input-group-text" id="basic-addon1"> <i class="bi bi-search"></i> </span>
                     </div>
                 </div>
 
-                <div class="col-xs-12" ng-hide="error">
+                <div class="col-12" ng-hide="error">
 
-                    <table class="table table-striped" style="width:100%">
-                        <tr>
-                            <th>User</th>
-                            <th>Organization/Division</th>
-                            <th style="max-width:200px">Roles</th>
-                            <th class="text-right">
-                                <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
-                            </th>
-                        </tr>
-                        <tr ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
-                            <td>
-                                <b> <span ng-bind="u.firstName+' '+u.lastName"></span></b>
-                                <br>
-                                <a rel="noopener" translation-url  href="mailto:{{u.email}}" ng-bind="u.email"></a>
-                            </td>
-                            <td ng-bind="u.organization">
-                            </td>
-                            <td>
-                                <span ng-repeat="rid in u.roles|filter:isContextRole">
-                                <span class="label label-default" style="font-size:10px;margin-right:4px" ng-bind="roles[rid].name"></span>
-                                <br>
-                                </span>
 
-                                <a rel="noopener" translation-url  href="#" style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles" ng-show="(u.roles|filter:isNotContextRole).length">
-                                    <span ng-show="!u.showExtraRoles">Show additional roles <i class="fa fa-caret-down"></i></span>
-                                    <span ng-show=" u.showExtraRoles">Hide additional roles <i class="fa fa-caret-up"></i></span>
-                                </a>
-
-                                <div ng-if="u.showExtraRoles">
-                                    <span ng-repeat="rid in u.roles|filter:isNotContextRole">
-                                    <span class="label label-info" style="font-size:10px;margin-right:4px" ng-bind="roles[rid].name"></span>
+                    <div class="table-responsive">
+                        <table class="table table-hover table-light w-100">
+                            <thead>
+                                <tr class="text-secondary">
+                                    <th>User</th>
+                                    <th>Organization/Division</th>
+                                    <th style="max-width:20rem">Roles</th>
+                                    <th class="text-end">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                            ng-click="search()" ng-disabled="loading || !canAdd()">
+                                            Add <span class="d-none d-sm-inline">Authorized User</span> <i
+                                                class="bi bi-plus-circle"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="text-secondary"
+                                ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
+                                <td>
+                                    <b> <span ng-bind="u.firstName+' '+u.lastName"></span></b>
                                     <br>
+                                    <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{u.email}}"
+                                        ng-bind="u.email"></a>
+                                </td>
+    
+                                <td ng-bind="u.organization" class="fs-small-8"> </td>
+    
+                                <td>
+                                    <span ng-repeat="rid in u.roles|filter:isContextRole">
+                                        <span class="badge bg-secondary fw-bold fs-small-6"
+                                            ng-bind="roles[rid].name"></span>
+                                        <br>
                                     </span>
-                                </div>
-                            </td>
-                            <td class="text-right">
-                                <div class="btn-group" role="group" aria-label="...">
-                                    <button type="button" class="btn btn-default" ng-click="edit(u)" ng-disabled="!canEdit(u)"><i class="fa fa-list  fa-fw"></i></button>
-                                    <button type="button" class="btn btn-default" ng-click="dropUser(u)" ng-disabled="!canDrop(u)"><i class="fa fa-trash fa-fw"></i></button>
-                                </div>
-                            </td>
+    
+                                    <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles"
+                                        ng-show="(u.roles|filter:isNotContextRole).length">
+                                        <span ng-show="!u.showExtraRoles">Show additional roles <i
+                                                class="fa fa-caret-down"></i></span>
+                                        <span ng-show=" u.showExtraRoles">Hide additional roles <i
+                                                class="fa fa-caret-up"></i></span>
+                                    </a>
+    
+                                    <div ng-if="u.showExtraRoles">
+                                        <span ng-repeat="rid in u.roles|filter:isNotContextRole">
+                                            <span class="badge bg-info fw-bold fs-small-6"
+                                                ng-bind="roles[rid].name"></span>
+                                            <br>
+                                        </span>
+                                    </div>
+                                </td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm mt-1" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="edit(u)"
+                                            ng-disabled="!canEdit(u)"><i class="bi bi-list-ul"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="dropUser(u)"
+                                            ng-disabled="!canDrop(u)"><i class="bi bi-trash-fill"></i></button>
+                                    </div>
+                                </td>
+    
+                            </tr>
 
-                        </tr>
-                        <tr ng-if="!users">
-                            <td colspan="4">
-                                <i class="fa fa-cog fa-spin fa-fw"></i> Loading...
-                            </td>
-                        </tr>
-                        <tr ng-if="!!users">
-                            <td colspan="3">
-                                <span ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span> |
-                                <a rel="noopener" translation-url  href="#" ng-show="!$parent.showAll" ng-click="$parent.showAll=true;$parent.searchText={}">Show more <i class="fa fa-caret-down"></i></a>
-                                <a rel="noopener" translation-url  href="#" ng-show=" $parent.showAll" ng-click="$parent.showAll=false;$parent.searchText={}">Show less <i class="fa fa-caret-up"></i></a>
-                            </td>
-                            <td class="text-right">
-                                <button type="button" class="btn btn-default" ng-click="search()" ng-disabled="loading || !canAdd()">Add Authorized User <i class="fa fa-plus-circle"></i></button>
-                            </td>
-                        </tr>
-                    </table>
+                            <tr class="text-secondary" ng-if="!users">
+                                <td colspan="4">
+                                    <i class="fa fa-cog fa-spin fa-fw"></i> Loading...
+                                </td>
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!!users">
+                                <td colspan="3">
+                                    <span
+                                        ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span>
+                                    |
+                                    <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        ng-show="!$parent.showAll"
+                                        ng-click="$parent.showAll=true;$parent.searchText={}">Show more
+                                        <i class="bi bi-caret-down-fill"></i></a>
+                                    <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        ng-show=" $parent.showAll"
+                                        ng-click="$parent.showAll=false;$parent.searchText={}">Show less 
+                                        <i class="bi bi-caret-up-fill"></i></a>
+                                </td>
+                                <td class="text-end">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                     ng-click="search()" ng-disabled="loading || !canAdd()">
+                                     Add Authorized User <i class="bi bi-plus-circle"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                              </tbody>
+                        </table>
+                      </div>
                 </div>
             </div>
         </div>

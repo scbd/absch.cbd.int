@@ -5,7 +5,7 @@
     <div class="knowledge-base">
       <search @changeSearch="onChangeSearch"></search>
       <section class="categories">
-        <div class="container">
+        <div class="container p-0">
           <article-search ref="articlesearch"></article-search>
         </div>
       </section>

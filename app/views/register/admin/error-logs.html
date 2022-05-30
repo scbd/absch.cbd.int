@@ -25,16 +25,16 @@
     		margin-left: 15px!important;
 		}
 	</style>
-	<div class=" innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+	<div class=" innerPageContent register-content card card-1-notrans m-0 p-3">
 
 		<div class="register-content-header bg-pink color-white">
-			<div style="padding:10px 10px;">
+			<div class="p-2">
 				<h3> Admin Pending Requests</h3>
 			</div>
 		</div>
 		<div class="register-content-content">
 
-			<legend name="formInfo" style="display:none"></legend>
+			<legend name="formInfo" class="d-none"></legend>
 			<!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>-->
 			<div class="registerpage-content">
 
@@ -43,12 +43,12 @@
 				</div>
 				<legend>Filters </legend>
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-6">
 						<div class="km-control-group" name="startDate" required caption="Start Date">
 							<div km-date placeholder="YYYY-MM-DD" required name="startDate" ng-model="filters.startDate"></div>
 						</div>
 					</div>
-					<div class="col-xs-6">
+					<div class="col-6">
 						<div class="km-control-group" name="endDate" caption="End Date">
 							<div km-date placeholder="YYYY-MM-DD" name="endDate" ng-model="filters.endDate"></div>
 						</div>
@@ -56,7 +56,7 @@
 				</div>
 				<!--<div class="row">
                     <div class="col-xs-12">
-                        <div class="pull-left">                            
+                        <div class="float-start">                            
                             <input type="text" ng-model="keywords" placeholder=" keyword " class="form-control keyword" style="width:250px;display:inline;">
                         </div>
                     </div>
@@ -64,8 +64,8 @@
 				<br>
 				<br>
 				<div class="row">
-					<div class="col-xs-12">
-						<div class="table-responsive " style="margin-top:15px;">
+					<div class="col-12">
+						<div class="table-responsive mt-2">
 
 							<table class="table table-bordered " infinite-scroll="loadErrors()" infinite-scroll-busy="loadingErrors" infinite-scroll-distance="0">
 								<thead>
@@ -112,7 +112,7 @@
 														<b>Message:</b> <span ng-bind="error.message.trim()"></span>
 													</p><br>
 													<pre class="special_formatting ">													
-														<p class="language-html pull-left hyphenate" data-lang="html" style="margin:0px" ng-bind-html="error.stack">
+														<p class="language-html float-start hyphenate m-0" data-lang="html" ng-bind-html="error.stack">
 														</p>
 													</pre>
 											</div>

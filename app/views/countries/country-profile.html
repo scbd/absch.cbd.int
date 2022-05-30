@@ -7,45 +7,45 @@
         
     </style>
     <div smooth-scroll duration="100" offset="200"></div>
-        <div id="Jumbotron" style="position: relative;" class="hidden-sm hidden-xs bg-white" selected-color="#FFFFFF" block-region activate="loadingMap"> 
+        <div id="Jumbotron" class="d-none d-lg-block bg-white position-relative overflow-hidden" selected-color="#FFFFFF" block-region activate="loadingMap"> 
         </div>
-        <div class="row" style="margin:0;">
-            <div class="col-xs-12">
-                <h1 style="font-size:280%;"><i class="flag-icon" ng-class="country.cssClass"></i> <strong> <span ng-bind="country.name"></span> </strong>
+        <div class="row m-0">
+            <div class="col-12">
+                <h1 class="fs-1 my-2"><i class="flag-icon" ng-class="country.cssClass"></i> <strong> <span ng-bind="country.name"></span> </strong>
                 </h1>
-                <div class="well bg-white cp-header">
-                        <div style="margin-bottom:5px; font-size: 1.3em !important;" ng-if="isABS">
+                <div class="p-3 bg-white">
+                        <div class="mb-1 fs-6" ng-if="isABS">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Nagoya Protocol</span>
                             <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
                             <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
                         </div>
-                        <div style="margin-bottom:5px; font-size: 1.3em !important;" ng-if="isBCH">
+                        <div class="mb-1 fs-6" ng-if="isBCH">
                             <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Cartagena Protocol on Biosafety</span>
                             <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
                         </div>
-                        <div ng-if="country.isParty || country.isInbetweenParty" style="margin-bottom:10px; margin-top:-5px;">
+                        <div ng-if="country.isParty || country.isInbetweenParty" class="mt-1 mb-2" >
                             <span class="bold" ng-class="{' color-party': country.isParty, ' color-non-party':!country.isParty && !country.isInbetweenParty, ' color-inbetween': country.isInbetweenParty}">
                                 (<span ng-if="country.isInbetweenParty">Entry into force on:</span><span ng-if="country.isParty && !country.isInbetweenParty">since</span> 
                                 <span ng-bind="country.entryIntoForce|formatDate"></span>)
                             </span>
                         </div>
-                        <div ng-if="isBCH && country.isNKLSParty" style="margin-top:10px; margin-bottom: 15px;">
-                            <span class="color-NKLSP bold" style=" font-size: 1.3em !important;">Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
+                        <div ng-if="isBCH && country.isNKLSParty" class="mt-1 mb-2">
+                            <span class="color-NKLSP bold fs-6">Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
                             <div ng-if="country.partyToNKLSPDate">
                                 <span class="color-NKLSP bold">(since <span  ng-bind="country.partyToNKLSPDate|formatDate"></span>)</span>
                             </div>
                         </div>
-                        <div ng-if="isBCH && !country.isNKLSParty" style="margin-top:10px; margin-bottom: 15px;">
-                            <span class="color-non-party bold" style=" font-size: 1.3em !important;">Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
+                        <div ng-if="isBCH && !country.isNKLSParty" class="mt-1 mb-2">
+                            <span class="color-non-party bold fs-6">Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
                         </div>
-                        <div style="margin-bottom:5px;" ng-if="isABS">
+                        <div class="mb-1" ng-if="isABS">
                             <label>Signatory:</label>
                             <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
                             <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signed on <span ng-bind="country.dateSigned|formatDate"></span> </span>
                             <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">No</span>
                         </div>
 
-                        <div ng-if="isABS" style="margin: 10px 0px;">
+                        <div ng-if="isABS" class="m-0 my-2">
                             <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
                             <div ng-if="country.code==='gb'">
                                  <i class="fa fa-info-circle"></i> 
@@ -55,7 +55,7 @@
                                 title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                             </div>
                         </div>
-                        <div ng-if="isBCH" style="margin: 10px 0px;">
+                        <div ng-if="isBCH" class="m-0 my-2">
                             <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
                             <div ng-if="country.code==='gb'">
                                  <i class="fa fa-info-circle"></i> 
@@ -65,23 +65,23 @@
                                 title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                             </div>
                         </div>
-                        <div style="white-space:nowrap;overflow-x:hidden;margin-bottom:5px;">
+                        <div class="mb-1 text-nowrap overflow-hidden">
                             <label>CBD Country Profile:</label>
-                            <a rel="noopener" translation-url   href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
+                            <a class="text-decoration-none" rel="noopener" translation-url   href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
                         </div>
                             
                 </div>
             </div>
-            <div class="col-xs-12" ng-if="countryProfile && countryProfile.profile">
-                <div class="well bg-white cp-header"> 
-                    <legend>Additional information for the country profile</legend>
-                    <span ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
+            <div class="col-12" ng-if="countryProfile && countryProfile.profile">
+                <div class="card bg-white cp-header"> 
+                    <legend class="ps-3">Additional information for the country profile</legend>
+                    <span class="p-3" ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
                 </div>
             </div>
         </div>
     
-        <div class="row" style="margin:0;">
-            <div class="col-xs-12" >
+        <div class="row m-0 mb-5">
+            <div class="col-12">
                 <div country-profile code="code"></div>
             </div>
         </div>

@@ -246,7 +246,7 @@ import 'ngDialog';
         $scope.setTab = function(index){
             $("ul.page-tabs").find("li").removeClass("active");
             $timeout(function(){
-                $('#tab'+index).tab('show');                
+                $('ul.page-tabs a[href="#tab' + index + '"]').tab('show');              
                 $("ul.page-tabs").find('#tab' + index).parents('li').addClass("active");
             }, 200);
             $scope.activeTab = index + 1;

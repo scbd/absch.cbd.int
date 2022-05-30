@@ -2,7 +2,7 @@
 
     <edit-header></edit-header>
 
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
 
         <span block-region activate="isLoading()" ng-if="isLoading()"></span>
         <div class="registerpage-content">
@@ -15,7 +15,7 @@
                     <!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required -->
                     <edit-form>
                         
-                    <form class="editForm" name="editForm" style="margin-top:10px">
+                    <form class="editForm mt-2" name="editForm">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <legend name="formInfo" style="display:none"></legend>
@@ -33,13 +33,13 @@
                                     </div>
     
                                     <!-- IF NO SECTION -->
-                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    <div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="no-shadow py-0">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">
+                                                <h3 ng-show="!document.isAmendment" class="color-black">
                                                     If no, the following information is not required.
                                                 </h3>
-                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">
+                                                <h3 ng-show="document.isAmendment==true" class="color-black">
                                                     Please select the previously registered record that is being amended.
                                                 </h3>
     
@@ -208,7 +208,7 @@
                                             <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain model contractual clauses?">
                                                 <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                                                 <div ng-show="document.isModelContractualClause">
-                                                    <div class="km-control-group" style="margin:10px;" name="modelContractualClauseDescription" caption="Please provide further information">
+                                                    <div class="km-control-group m-2" name="modelContractualClauseDescription" caption="Please provide further information">
                                                         <div km-textbox-ml ng-model="document.modelContractualClauseDescription" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -328,7 +328,7 @@
                                                 <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absMesasureNotApplicable}">
                                                     <div class="km-control-group"  name="absMeasures" required caption="">
                                                         <div class="help-info"></div>
-                                                        <div layout="row" style="margin-bottom:20px;">
+                                                        <div layout="row mb-4">
                                                              <div class="help-info" >Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. This information will assist in displaying information
                                                                 on the national legal framework and help potential users to understand the access, benefit-sharing and /or compliance requirements of your country. Sometimes the content and elements of the measure relate to goals and
                                                                 plans to implement ABS domestically. This could be the case, for instance, for some ABS strategies or action plans. In such cases, you may indicate that the elements of the measure are not applicable by clicking the checkbox above.

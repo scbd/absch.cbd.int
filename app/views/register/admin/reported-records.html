@@ -4,42 +4,42 @@
 
     <span register-top-menu></span>
 
-    <div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+    <div class="innerPageContent register-content card card-1-notrans m-0 p-4">
 
         <div class="register-content-header bg-pink color-white">
-            <div style="padding:10px 10px;">
+            <div class="p-2">
                 <h3>Reported Records</h3>
             </div>
         </div>
         <div  class="register-content-content">
 
 
-            <div class="" style="width:100%">
-                <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;">                
-                    <div class="col-xs-2">Schema</div>
-                    <div class="col-xs-2">Reported By</div>
-                    <div class="col-xs-2">Reported On</div>
-                    <div class="col-xs-4">Information</div>
-                    <div class="col-xs-2"></div>
+            <div class="w-100" >
+                <div class="row table-striped p-2 border-bottom">                
+                    <div class="col-2">Schema</div>
+                    <div class="col-2">Reported By</div>
+                    <div class="col-2">Reported On</div>
+                    <div class="col-4">Information</div>
+                    <div class="col-2"></div>
                 </div>
-                <div class="row table-striped" style="padding:10px;border-bottom:1px solid white;" 
+                <div class="row table-striped p-2 border-bottom"
                 ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
                     <div ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
-                        <div class="col-xs-2">
+                        <div class="col-2">
                            <span ng-bind="record.schema|schemaName"></span>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-2">
                            <span ng-bind="record.reportedBy"></span>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-2">
                             <span ng-if="record.meta" ng-bind="record.meta.createdOn|formatDateWithTime"></span>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <span ng-if="record.incorrect">incorrect or inappropriate |</span>
                             <span ng-if="record.broken">broken link or outdated information |</span>
                             <span ng-if="record.copyright">copyright infringement</span><br> <span ng-bind="record.additionalInformation"></span>
                         </div>
-                        <div class="col-xs-3">
+                        <div class="col-3">
                             <input type="button" class="btn btn-primary" value="View Record" ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)" />
                             <input type="button" class="btn btn-primary" value="Add Comments" ng-click="addComments($event, record)" />
                             <input type="button" class="btn btn-warning" value="Delete" ng-click="delete($event, record)" />
@@ -47,8 +47,8 @@
                     </div>
                     <div ng-if="record.history">
                         <!--<div class="col-xs-1"></div>-->
-                        <table class="table table-striped" style="margin:auto;width:80%">
-                            <thead class="row " style="padding:10px;border-bottom:1px solid white;">                
+                        <table class="table table-striped m-auto" style="width:80%">
+                            <thead class="row p-2 border-bottom">                
                                 <td>No.</td>
                                 <td>Date</td>
                                 <td>Status</td>
@@ -90,8 +90,8 @@
 
         <div class="modal-body">
             <div class="form-group row">
-                <label for="example-text-input" class="col-xs-2 col-form-label">Status</label>
-                <div class="col-xs-10">
+                <label for="example-text-input" class="col-2 col-form-label">Status</label>
+                <div class="col-10">
                     <select class="form-control" style="width:10%" required name="status" ng-model="record.status">
                         <option value="Read">Read</option>
                         <option value="Not a issue">Not a issue</option>
@@ -100,8 +100,8 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label class="col-xs-2 col-form-label">Comments</label>
-                <div class="col-xs-10">
+                <label class="col-2 col-form-label">Comments</label>
+                <div class="col-10">
                     <textarea rows="3" class="form-control"  id="comments" ng-model="record.comments"/>
                 </div>
             </div>
@@ -122,16 +122,16 @@
         </div>
 
         <div class="modal-body">             
-                <div class="col-xs-12 col-form-label">
+                <div class="col-12 col-form-label">
                    Schema : <span ng-bind="record.schema|schemaName"></span>
                 </div>
-                <div class="col-xs-12 col-form-label">
+                <div class="col-12 col-form-label">
                    Reported By : <span ng-bind="record.reportedBy"></span>
                 </div>
-                <div class="col-xs-12 col-form-label">
+                <div class="col-12 col-form-label">
                     Reported On : <span ng-if="record.meta"><span ng-bind="record.meta.createdOn|formatDate"></span>
                 </div>
-                <div class="col-xs-12 col-form-label">
+                <div class="col-12 col-form-label">
                    Information : <span ng-if="record.incorrect">incorrect or inappropriate |</span>
                     <span ng-if="record.broken">broken link or outdated information |</span>
                     <span ng-if="record.copyright">copyright infringement</span><br> <span ng-bind="record.additionalInformation"></span>

@@ -363,7 +363,7 @@ import 'angular-sanitize';
                 function initTooltips() {
 
                     el.find('[data-bs-toggle="tooltip"]:not([tooltip-init])').tooltip({trigger:'hover focus'}).attr('tooltip-init', '');
-                    el.find('[data-toggle="popover"]:not([popover-init])').popover({trigger:'hover focus'}).attr('popover-init', '');
+                    el.find('[data-bs-toggle="popover"]:not([popover-init])').popover({trigger:'hover focus'}).attr('popover-init', '');
 
                 }
 

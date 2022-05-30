@@ -33,8 +33,8 @@
                     <span ng-bind="document.body.name | lstring:locale"></span>
                     <span ng-show="document.body.acronym" ng-bind="'(' + (document.body.acronym | lstring:locale) + ')'"></span>
                 </b>&nbsp;	
-                <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
-                    <i class="fa fa-external-link-square" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
+                <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
+                    <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
                 </a>
                 <span ng-include="'workflow-status-section'"></span>
             </div>	
@@ -48,8 +48,8 @@
 
     <script type="text/ng-template" id="referenced-default-view" trados-translation="true">
         <span class="selected-reference-uid">
-            <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
-                <i class="fa fa-external-link-square" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
+            <a class="text-decoration-none" rel="noopener" translation-url ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.revision|encodeURIComponent}}" target="_blank">
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> <span ng-bind="document | uniqueID"></span>
             </a>
             <span ng-include="'workflow-status-section'">
         </span>
@@ -85,8 +85,8 @@
                     </span>      
                 </span>
             </span>   | 
-            <a rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.body.revision|encodeURIComponent}}" target="_blank">
-              <span ng-bind="document | uniqueID"></span> <i class="fa fa-external-link-square" aria-hidden="true"></i>
+            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/database/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document | uniqueIDWithoutRevision|encodeURIComponent}}/{{document.body.revision|encodeURIComponent}}" target="_blank">
+              <span ng-bind="document | uniqueID"></span> <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
             </a>   
             <span ng-include="'workflow-status-section'"></span>
         </div>
@@ -161,14 +161,14 @@
     </script>
 
     <script id="reference-contact-address" type="text/ng-template" trados-translation="true">
-        <address ng-if="contactAddress.address || contactAddress.country || contactAddress.city || contactAddress.state || contactAddress.postalCode" style="margin-bottom:2px!important">
+        <a class="text-decoration-none mb-1 color-blue" ng-if="contactAddress.address || contactAddress.country || contactAddress.city || contactAddress.state || contactAddress.postalCode">
             <span ng-show="contactAddress.addressHTML" ng-bind-html="contactAddress.addressHTML | lstring:locale"></span>
             <div ng-bind-html="contactAddress.address | lstring:locale"></div>
             <span ng-bind="contactAddress.city | lstring:locale"></span><span ng-show="contactAddress.city && contactAddress.state">, </span>
             <span ng-bind="contactAddress.state | lstring:locale"></span><br ng-show="contactAddress.city || contactAddress.state" />
             <span ng-bind="contactAddress.postalCode | lstring:locale"></span><span ng-show="contactAddress.postalCode && contactAddress.country">, </span>
             <span ng-bind="contactAddress.country|term"></span>
-        </address>
+        </a>
 
         <div ng-show="contactAddress.phones">
             Phone: <span ng-repeat="item in contactAddress.phones"><span ng-bind="item"></span><span ng-show="!$last">, </span></span>
@@ -176,16 +176,16 @@
         <div ng-show="contactAddress.faxes">
             Fax: <span ng-repeat="item in contactAddress.faxes"><span ng-bind="item"></span><span ng-show="!$last">, </span></span>
         </div>
-        <div ng-show="contactAddress.emails">
-            Email: <span ng-repeat="item in contactAddress.emails track by $index"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a><span ng-show="!$last">, </span></span>
+        <div ng-show="contactAddress.emails" class="float-start pe-2">
+            Email: <span ng-repeat="item in contactAddress.emails track by $index"><a class="text-decoration-none" rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><span ng-bind="item"></span></a><span ng-show="!$last">, </span></span>
         </div>
-        <div ng-show="contactAddress.websites">
-            Website: <span ng-repeat="item in contactAddress.websites"><a rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}" ng-bind="item.url"></a><span ng-show="!$last">, </span></span>
+        <div ng-show="contactAddress.websites" class="float-start pe-2">
+            Website: <span ng-repeat="item in contactAddress.websites"><a class="text-decoration-none" rel="noopener" translation-url  target="_blank" ng-href="{{item.url|encodeURI}}" ng-bind="item.url"></a><span ng-show="!$last">, </span></span>
         </div>
         <div ng-if="options.isCNA">
             <!--website url is used when generating certificates-->
-            <a rel="noopener" translation-url  ng-href="{{websiteUrl}}/database/{{contactAddress.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(contactAddress) | uniqueIDWithoutRevision|encodeURIComponent}}/{{contactAddress.info.revision|encodeURIComponent}}" target="_blank">
-                <i class="fa fa-external-link-square" aria-hidden="true"></i> 
+            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="{{websiteUrl}}/database/{{contactAddress.header.schema | urlSchemaShortName|encodeURIComponent}}/{{(contactAddress) | uniqueIDWithoutRevision|encodeURIComponent}}/{{contactAddress.info.revision|encodeURIComponent}}" target="_blank">
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> 
                 <span ng-bind="(contactAddress) | uniqueID"></span>
             </a>
             <!--{{options.isCNA}}
@@ -199,10 +199,10 @@
         </span>
         <span ng-if="document.workingDocumentLock">
             | <span class="label label-danger">The record is pending approval</span> | 
-            <a rel="noopener" translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document.identifier|encodeURIComponent}}/view" target="_blank">
-                <i class="fa fa-external-link-square" aria-hidden="true"></i> View Request
+            <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document.identifier|encodeURIComponent}}/view" target="_blank">
+                <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> View Request
             </a>
-            &nbsp <a rel="noopener" ng-href="#" ng-click="refreshRecord(document.identifier)" data-bs-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>
+            &nbsp <a class="text-decoration-none" rel="noopener" ng-href="#" ng-click="refreshRecord(document.identifier)" data-bs-toggle="tooltip" data-title="Click to refresh status of the record."><i class="fa fa-refresh"></i></a>
         </span>	
     </script>
 </div>

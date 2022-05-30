@@ -143,13 +143,13 @@
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="pull-left">
+                                <div class="float-start">
                                     <!-- <strong>Type:</strong> -->
                                     <div km-select ng-model="filters.countries" multiple binding-type="string" placeholder="Countries" items="options.filterCountries()"></div>
                                     <!-- <strong>Status:</strong> -->
                                     <div km-select ng-model="filters.partyStatus" binding-type="string" placeholder="Party Status" items="options.filterPartyStatus()"></div>
                                 </div>
-                                <div class="pull-right">
+                                <div class="float-end">
                                     <input type="button" class="btn btn-primary" ng-click="loadFacets()" value="Filter">
                                 </div>
                             </div>

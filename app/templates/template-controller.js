@@ -37,12 +37,6 @@ export const templateController = ['$rootScope', '$location', '$window', '$scope
             return (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
         }
         
-        function updateSize() {
-            $rootScope.$applyAsync(function () {
-                $rootScope.deviceSize = $('.device-size:visible').attr('size');
-            });
-        }
-
         function setupLocale(){
             //set default moment lang
             var lang = locale;
@@ -66,9 +60,27 @@ export const templateController = ['$rootScope', '$location', '$window', '$scope
                 $('body#top').removeClass('validate-translation')
         }
 
+
+        function updateSize() {
+            let breakpoints = {
+                '(min-width: 1200px)': 'xl',
+                '(min-width: 992px) and (max-width: 1199.98px)': 'lg',
+                '(min-width: 768px) and (max-width: 991.98px)': 'md',
+                '(min-width: 576px) and (max-width: 767.98px)': 'sm',
+                '(max-width: 575.98px)': 'xs',
+            }
+
+            for (let media in breakpoints) {
+                if (window.matchMedia(media).matches) {
+                    return breakpoints[media];
+                }
+            }
+
+            return null;
+        }
         function init(){
 
-            updateSize();
+            $rootScope.deviceSize = updateSize();
             setupTranslationValidation();
             setupLocale();            
             if (~$location.absUrl().toLowerCase().indexOf("://training")) {

@@ -2,8 +2,8 @@
     <div>
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
         <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
-        <div class="mt-0 kb-faq" v-if="!loading">
-            <h2>
+        <div class="mt-3 kb-faq" v-if="!loading">
+            <h2 class="fs-4 fw-bold">
 				{{ $t("frequentlyAskedQuestions") }} 
 				<span v-if="faqFilterTag && faqFilterTag!='faq'">
 					{{ $t("for") }} <strong>{{faqFilterTag}}</strong></span> 
@@ -11,7 +11,7 @@
 				<hr/>
 			</h2>
             <main>
-                <details v-for="article in faqs">
+                <details v-for="article in faqs" class="mb-2">
                     <summary>{{article.title|lstring($locale)}}</summary>
                     <div  class="faq-content full-details ck ck-content ck-rounded-corners ck-blurred" v-html="$options.filters.lstring(article.content,$locale)"></div>                    
 					<div v-if="article.adminTags" class="detail-custom-tag">
