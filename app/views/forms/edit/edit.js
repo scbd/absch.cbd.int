@@ -387,7 +387,8 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
         return $scope.document;
 
       }).catch(function(err) {
-
+        $scope.$emit("loadDocumentError", err);
+        
         if(err.status == 403)
           $location.path('/help/403')
         $scope.onError(err.data, err.status)

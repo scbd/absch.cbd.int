@@ -47,7 +47,8 @@ import toasterMessages from '~/app-data/toaster-messages.json';
 				onPreSaveDraftVersionFn	  : "&onPreSaveDraftVersion"
     		},
             link : function($scope, $element, $attr){
-
+                
+                let documentLoadError = false;
                 var originalDocument;
                 var next_fs;                
                 var saveDraftVersionTimer;
@@ -233,6 +234,9 @@ import toasterMessages from '~/app-data/toaster-messages.json';
 				//====================
 				$scope.updateSecurity = function()
 				{
+
+                    if(documentLoadError)
+                        return;
 
                     $scope.loading = true;
                     $scope.blockText = 'verifying user roles...'
@@ -985,6 +989,15 @@ import toasterMessages from '~/app-data/toaster-messages.json';
                             if(!saveDraftVersionTimer)
                                 saveDraftVersion();
                         }, 5000);
+                    });
+
+                    $rootScope.$on("loadDocumentError", function(event, data) {
+                        if(data?.status == 'notAuthorized'){
+                            documentLoadError = true;
+                            $scope.loading = false;
+                            $scope.blockText = undefined;
+                            openUnAuthorizedDialog();
+                        }
                     });
 
                     $rootScope.$on('$includeContentLoaded', function(event) {
