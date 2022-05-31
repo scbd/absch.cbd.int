@@ -5,16 +5,16 @@
     <div smooth-scroll duration="100" offset="200"></div>
     <span register-top-menu></span>
 
-    <div class=" innerPageContent register-content card card-1-notrans bg-white m-0 mb-5 p-3">
+    <div class=" innerPageContent register-content card-1-notrans m-0 mb-5 p-3">
 
         <div class="register-content-header bg-darkgrey color-white">
             <div class="p-2">
-                <h3>Notifications
+                <h3 class="float-start display-content">Notifications
                     <span class="helpinfoInline">
                         <i class="fa fa-info-circle helpicon float-end" ng-click="showInfo = !showInfo"></i>
                     </span>
                 </h3>
-
+                <a rel="noopener" type="button" class="fw-bold color-white float-end pe-2" href="register/user-preferences"> Manage your email notifications</a>
                 <!--help info---------------------------->
                 <div ng-if="showInfo" class="p-3 card well-help">
                     In this page you will find all notifications coming from all clearing-house platforms (CBD CH, BCH
