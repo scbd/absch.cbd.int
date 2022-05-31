@@ -121,7 +121,7 @@
 												
 												<div class="help-block">A common name is used to refer to an organism in everyday language and may include synonyms. Example: maize / corn.</div>
 												<div ng-repeat="commonName in commonNames" class="input-group pb-1">
-													<div km-textbox-ml name="commonNames{{$index}}" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div>
+													<div km-textbox-ml name="commonNames{{$index}}" style="width: 97%;" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div>
 													<span ng-class="{'disable':commonNames.length==1}" class="input-group-text cursor-pointer" 
 													 ng-click="removeItem(commonNames, $index)">
 														<i class="fa fa-trash-o icon"></i>

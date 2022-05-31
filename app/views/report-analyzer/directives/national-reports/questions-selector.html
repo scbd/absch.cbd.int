@@ -43,10 +43,10 @@
                     No countries or regions selected
                 </div>
 
-                <ul ng-if="selectedRegions.length" class="list-unstyled">
+                <ul ng-if="selectedRegions.length && selectedRegions[0] != undefined" class="list-unstyled">
                     <li ng-repeat="c in selectedRegions">
                         <span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='NKLSParty'">
-                            <i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i>
+                            <i class="fa fa-times cursor-pointer" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i>
                             <span ng-bind="regionsMap[c].title|lstring"></span>
                         </span>
                         <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='NKLSParty'">                            

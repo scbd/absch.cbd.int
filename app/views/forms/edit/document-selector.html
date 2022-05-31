@@ -42,7 +42,7 @@
                 <table class="table width-100 pb-1" id="search-new">
                     <tr ng-repeat="doc in model" ng-if="type!='radio'">
                         <td class="mb-3 width-1">
-                            <a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red">
+                            <a rel="noopener" translation-url  class="btn btn-default border-secondary" ng-click="removeDocument(doc)" class="link color-red">
                                 <i class="fa fa-times"></i></a>
                         </td>
                         <td class="mb-4">
@@ -83,7 +83,7 @@
                                 <a rel="noopener" data-bs-toggle="tab" class="nav-link active" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
                             </li>
                             <li class="dropdown nav-item" ng-if="userGov && showMyGovFilter">
-                                <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#">
+                                <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
                                     <span ng-if="activeTab!='myGovernmentRecords'">My records</span>
                                     <span ng-if="activeTab=='myGovernmentRecords'">My government records</span>
                                 <span class="caret"></span></a>

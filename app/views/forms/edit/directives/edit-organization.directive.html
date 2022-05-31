@@ -157,8 +157,8 @@
                                     <div class="km-control-group" name="areasOfWork" caption="Areas of work">                                
                                         <div class="help-block">Please provide keywords only.</div>
                                         <div ng-repeat="areaOfWork in areasOfWork" class="pb-1 d-block input-group">
-                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div>
-                                            <span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer" style="cursor:pointer" 
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input float-start pb-1" style="width:97%;" ng-model="areaOfWork.value" locales="document.header.languages"></div>
+                                            <span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer input-group-text float-end trash-value"
                                             ng-click="removeItem(areasOfWork, $index)">
                                                 <i class="fa fa-trash-o icon"></i>
                                             </span>

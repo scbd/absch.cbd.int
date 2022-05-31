@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-sm-12">
                                             <div required class="km-control-group" name="status" caption="Legal status of the measure">
                                                 <div class="help-info">
                                                     Examples of non-legally binding ABS measures are national strategies, policy documents, guidelines, etc. For non-legally binding ABS measure, the date of adoption is to be provided. A measure is legally binding when it creates obligations and rights which
@@ -99,9 +99,11 @@
                                                     about genetic resources and associated traditional knowledge accessed under a previous legal framework. If a measure already registered in the ABS Clearing-House is retired or is no longer applicable, you
                                                     only need to edit the measure and change its status to retired, indicating the date from which the measure was no longer applicable.
                                                 </div>
-                                                <div style="width:250px;" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select legal status..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select legal status..."></div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12">
                                             <div ng-show="isNotLegallyBinded()">
@@ -128,7 +130,7 @@
     
     
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-12 label-weight">
                                             <div class="km-control-group" required name="type" caption="Type of document/measure">
                                                 <div km-term-radio name="type" ng-model="document.type" terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
     
@@ -146,7 +148,7 @@
     
                                     <div class="row">
     
-                                        <div class="col-xs-12">
+                                        <div class="col-sm-12">
                                             <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
                                                 <div class="help-info">
                                                     Please specify the geographical area of application of the ABS measure. The measure could apply at regional or multilateral, national or federal, subnational or community levels. For multilateral or regional measures, please indicate which countries are
@@ -154,7 +156,7 @@
                                                     measure applies is already listed. However, if the measure applies to a group of countries that is not covered by any of the existing groups, select each of the countries concerned by the measure separately
                                                     from the drop down menu.</div>
     
-                                                <div style="width:250px;" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select area of jurisdiction..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select area of jurisdiction..."></div>
                                                 <div ng-if="isJurisdictionRegional()">
                                                     <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
                                                 </div>
@@ -284,7 +286,7 @@
                                     <legend>Regulatory contact information</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="authorities" caption="Contact Institution">
+                                            <div class="km-control-group color-darkgrey" required name="authorities" caption="Contact Institution">
     
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
                                                            allow-new="true" allow-new-schema="contact"></div>

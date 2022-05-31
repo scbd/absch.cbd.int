@@ -53,7 +53,7 @@
                                                 <td>#</td>
                                                 <td>Expiry/Status</td>
                                                 <td>Link/Email(s)</td>
-                                                <td class="d-none d-sm-inline-block">Created on</td>
+                                                <td class="d-none d-sm-table-cell text-center">Created on</td>
                                             </tr>
                                             <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
                                                 <td ng-bind="$index+1"></td>
@@ -63,7 +63,7 @@
                                                     <span ng-if="hasStatus('expired', link)"class="label label-danger">Expired</span>
                                                     <span ng-if="hasStatus('revoked', link)"class="label label-danger">Revoked</span>
                                                 </td>
-                                                <td width="70%">
+                                                <td >
                                                     <div class="btn-group width-100">
                                                         <div class="input-group" >
                                                             <input ng-if="link.sharedWith.emails"  type="text" width="100%" id="shareUrl_{{$index+1}}" class="highlight form-control d-none d-sm-inline-block" value="{{::link.sharedWith.emails}}" disabled readonly/>
