@@ -10,11 +10,11 @@
                 <span class="btn-group float-end dashboard-tour">
                     <a class="text-decoration-none text-secondary d-inline-flex text-white help-tour link2" rel="noopener" ng-href="#" ng-click="tour()"> 
                         <i class="bi bi-question-circle"></i> 
-                        <span class="d-none d-sm-block ps-1"> Take tour</span>
+                        <span class="d-none d-sm-block ps-1"> TAKE TOUR</span>
                     </a>
                 </span>
                 <h3 class="p-0 px-1 m-0 fw-normal">
-                <a class="text-decoration-none text-secondary text-white" rel="noopener" href="/register" ><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)  </a>                                
+                <a class="text-decoration-none text-white" rel="noopener" href="/register" ><span ng-bind="schema|mapSchema|schemaNamePlural"></span> ( <span ng-bind="schema | schemaShortName"></span>)  </a>                                
                 </h3>
             </div>
         </div>
@@ -62,7 +62,7 @@
                         <a type="button" class="btn btn-outline-secondary btn-sm p-0 px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">Refresh</span>
                         </a>
-                        <a type="button" class="btn btn-primary btn-sm p-0 px-1" rel="noopener" translation-url 
+                        <a type="button" class="btn btn-primary btn-sm p-0 px-1" id="add-new-btn" rel="noopener" translation-url 
                         ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
                         <i class="fa fa-plus float-start pt-1"></i><span class="d-none d-md-block ps-1 float-end">Add New</span>
                         </a>
@@ -124,14 +124,14 @@
                         </td>
                         <td class="ps-1 fs-small-8 align-middle">
                             <div ng-if="record.updatedBy && isPublished(record)">
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
+                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
                                     <strong ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></strong>
                                 </a>
                                 </br>
                                 <span class="fs-small-6" ng-bind="record.updatedOn | formatDateWithTime"></span>
                             </div>
                             <div ng-if="record.createdBy && !record.updatedBy && isPublished(record)">
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
+                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                     <strong ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></strong>
                                 </a>
                                 </br>
@@ -140,14 +140,14 @@
                         </td>
                         <td class=" d-none d-md-table-cell fs-small-8 align-middle">
                             <div ng-if="record.workingDocumentUpdatedBy">
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
+                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
                                     <strong ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></strong>
                                 </a>
                                 </br>
                                 <span ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span>
                             </div>
                             <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
+                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
                                     <strong ng-bind="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></strong>
                                 </a>
                                 </br>
@@ -155,14 +155,14 @@
                             </div>
                             <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
                                 <div ng-show="record.updatedBy">
-                                    <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
+                                    <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
                                         <strong ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></strong>
                                     </a>
                                     </br>
                                     <span class="fs-small-6" ng-bind="record.updatedOn | formatDateWithTime"></span>
                                 </div>
                                 <div class="pt-3" ng-show="record.createdBy && !record.updatedBy">
-                                    <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
+                                    <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                         <strong ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></strong>
                                     </a>
                                     </br>
@@ -181,7 +181,7 @@
                                 <div ng-show="!record.revoked && isPublished(record) && !isRequest(record)" class="color-published-green bold"> Published </div>
                                 <div ng-show="!record.revoked && isDraft(record) && !isRequest(record)" class="color-litegrey bold"> Draft </div>
                                 <span class="color-red bold" ng-show="record.revoked">Revoked</span>
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url  class="btn btn-danger btn-sm color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
+                                <a class="text-decoration-none color-orange" rel="noopener" translation-url  class="btn btn-danger btn-sm color-white" ng-show="!record.revoked  && isRequest(record) && !record.isUpdating " ng-href="/register/{{record.metadata.schema | urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
                                     Pending approval
                                 </a>
                                 <div class="color-red bold" ng-show="!record.revoked && isRequest(record) && record.isUpdating">
@@ -294,7 +294,7 @@
                                 <div class="col-2 color-litegrey">Title:</div> <div class="col-10 fw-bold" ng-bind="recordToDelete.title|lstring"></div>
                               </div>
                              <div class="row">    
-                                <div class="col-2 small color-litegrey">Unique ID:</div> <div class="col-10 fw-bold"> <a class="text-decoration-none text-secondary" rel="noopener" translation-url  href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_blank" ng-bind="recordToDelete | uniqueIDWithoutRevision"></a></div>
+                                <div class="col-2 small color-litegrey">Unique ID:</div> <div class="col-10 fw-bold"> <a class="text-decoration-none" rel="noopener" translation-url  href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_blank" ng-bind="recordToDelete | uniqueIDWithoutRevision"></a></div>
                              </div>
                             <div class="row"> 
                                 <div class="col-2 color-litegrey" >Summary:</div> <div class="col-10 fw-bold"> <span ng-bind-html="recordToDelete.summary|lstring"></span></div>

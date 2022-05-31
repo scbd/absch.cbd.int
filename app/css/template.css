@@ -3150,6 +3150,7 @@ div legend {
     padding: 1.5rem;
     background-color:#FFF;
     border-bottom:0.125rem solid #ccc;
+    box-shadow: 0 .125rem .25remrgba(0,0,0,.075)!important;
 }
 #dialogCancel .modal-content .btn.close {
     margin: -1rem;
@@ -3158,8 +3159,7 @@ div legend {
     padding: 7px;
 }
 .registerpage-content .regeister-request {
-    border-bottom: 1px solid #999;
-    background-color: #EEE;
+    border-bottom: 1px solid #dee2e6;
 }
 .auto-complete .list-group{
     display: none;
@@ -3232,4 +3232,11 @@ div legend {
 }
 .col-xs-12 .km-inputtext-ac angucomplete-alt {
     width: 96.2%;
+}
+.top-records table {
+    background-color: #f9f9f9;
+}
+.overview.table #recordOverview {
+    font-size: 16px;
+    font-weight: 700;
 }

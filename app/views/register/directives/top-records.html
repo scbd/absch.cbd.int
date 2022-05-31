@@ -44,26 +44,26 @@
                 </td>
                 <td class="p-0" style="width:21%;" >                    
                     <div ng-if="record.workingDocumentUpdatedBy">
-                        <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
+                        <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
                             <strong><span ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></span></strong>
                         </a>
                         <span class="text-nowrap fs-small-6" ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span>
                     </div>
                     <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                        <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
+                        <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
                             <strong><span ng-bid="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></span></strong>
                         </a>
                         <span class="text-nowrap fs-small-6" ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span>
                     </div>
                     <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
                             <div ng-show="record.updatedBy">
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
+                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
                                     <strong><span ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></span></strong>
                                 </a>
                                 <span class="text-nowrap fs-small-6" ng-bind="record.updatedOn | formatDateWithTime"></span>
                             </div>
                             <div ng-show="record.createdBy && !record.updatedBy">
-                                <a class="text-decoration-none text-secondary" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
+                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                     <strong><span ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></span></strong>
                                 </a>
                                 <span class="text-nowrap fs-small-6" ng-bind="record.createdOn | formatDateWithTime"></span>

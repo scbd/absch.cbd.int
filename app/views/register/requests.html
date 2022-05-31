@@ -13,9 +13,7 @@
         </div>
         <div class="register-content-content">
 
-            <legend name="formInfo d-none"></legend>
-            <!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>-->
-            <div class="registerpage-content">
+            <div class="registerpage-content mt-3">
 
                 <div class="alert alert-danger" ng-show="__error">
                     <strong>Error: </strong><span ng-bind="__error"></span>
@@ -62,7 +60,7 @@
 
                 <div class="table p-1">
 
-                    <div class="row header1 bold p-1 m-1 regeister-request">
+                    <div class="row header1 bold p-1 pb-3 regeister-request">
                         <div class="col-12 col-sm-6">
                             <span class="cursor-pointer" ng-click="sortTable('workflow.data.title.en')">Title</i>
                                 <i ng-show="sortTerm=='workflow.data.title.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i>
