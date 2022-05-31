@@ -78,12 +78,12 @@
                     </div>
                     <div ng-if="isAdmin()">
                         <br/>
-                        <strong>The workflow is assigned to following users</strong>(visible only to admin users)
-                        <table class="table table-bordered">
+                        <strong>The workflow is assigned to following users </strong> (visible only to admin users)
+                        <table class="table table-bordered mt-2">
                             <tr ng-repeat="user in activity.assignedTo_info">
                                 <td ng-bind="user.userID"></td>
-                                <td ng-bind="user.firstName + ' ' + user.lastName"></td>
-                                <td ng-bind="user.email"></td>
+                                <td class="ps-2" ng-bind="user.firstName + ' ' + user.lastName"></td>
+                                <td class="ps-2" ng-bind="user.email"></td>
                             </tr>
                         </table>
                     </div>
