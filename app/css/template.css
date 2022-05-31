@@ -1888,8 +1888,7 @@ legend+ .help-info {
             top:230px;
         }
     }
-    #schemaView .language-btn-options {
-        float: right;
+    #schemaView .language-btn-options{
         padding: 3px;
     }
     .record-Options-div .date{
@@ -3281,7 +3280,7 @@ section .no-shadow{
 .edit-national-report .show-previous-answer {
     margin-top: -5px;
 }
-.cf-doc-validation .document-conatin-error {
+.show-document-validation .document-contain-error {
     max-height: 30vh;
     overflow-y: auto;
 }

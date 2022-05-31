@@ -5,13 +5,13 @@
 	<div ng-show="report.isSaving" class="alert alert-info">
 		<i class="fa fa-cog fa-spin"></i> Saving your document...
 	</div>
-	<div ng-show="report && !report.isAnalyzing" class="cf-doc-validation">
+	<div ng-show="report && !report.isAnalyzing" class="show-document-validation">
 
 		<div ng-show="isValid()" class="alert alert-success">
 			Your document is valid.
 		</div>
 
-		<div ng-show="hasErrors() && show" class="alert alert-warning document-conatin-error">
+		<div ng-show="hasErrors() && show" class="alert alert-warning document-contain-error">
 			<button type="button" class="position-absolute top-0 end-0 m-2 bg-transparent border-0 fs-5 text-secondary" ng-click="show=!show" aria-label="Close"><span
 					aria-hidden="true">&times;</span>
 			</button>
