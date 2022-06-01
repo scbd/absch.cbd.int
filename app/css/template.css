@@ -3251,12 +3251,12 @@ div legend {
 .editHeader .register-content-header {
     margin: 20px 20px 0px 20px;
 }
-.col-md-6 .km-inputtext-ac angucomplete-alt {
+/* .col-md-6 .km-inputtext-ac angucomplete-alt {
     width: 92.3% !important;
 }
 .col-xs-12 .km-inputtext-ac angucomplete-alt {
     width: 96.2%;
-}
+} */
 section .no-shadow{
     min-height: 20px;
     padding: 19px;
@@ -3299,4 +3299,18 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 }
 .border-identical input{
     border: 1px solid #ced4da;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+    color: #a94442;
+}
+.has-error .form-control {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+}
+.has-error .input-group-text {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #a94442;
 }
