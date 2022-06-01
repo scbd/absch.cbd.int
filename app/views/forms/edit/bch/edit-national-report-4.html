@@ -17,7 +17,7 @@
     <div class="innerPageEditForm">
 
         
-        <div class="registerpage-content" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
+        <div class="registerpage-content edit-national-report" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
 
             <div block-region activate="blockEditForm || isLoading()"></div>      
             <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
@@ -67,9 +67,9 @@
                                                                         <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold" 
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
-                                                                        <div class="float-end" style="margin-bottom:5px;">
-                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                        <div class="float-end show-previous-answer">
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">Show previous answer</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">Hide previous answer</button>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
@@ -177,15 +177,15 @@
                 </div>
 
                 <div class="row">
-                        <div class="col-sm-6">
-                            <div class="km-control-group" required name="stakeholders" caption="10.	Time period covered by this report">
-                                <div class="col-sm-5">
+                        <div class="col-12">
+                            <div class="km-control-group time-period" required name="stakeholders" caption="10.	Time period covered by this report">
+                                <div class="col-md-5 col-sm-12">
                                     <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
                                 </div> 
-                                <div class="col-sm-1">
+                                <div class="col-sm-2 text-center">
                                     <strong>TO</strong>
                                 </div>
-                                <div class="col-sm-5">
+                                <div class="col-md-5 col-sm-12">
                                     <div km-date placeholder="YYYY-MM-DD" name="reportPeriodEndDate" required ng-model="document.reportPeriodEndDate"></div>
                                 </div>                                
                             </div>

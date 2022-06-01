@@ -3,7 +3,7 @@
     <link href="/app/css/record.css" rel="stylesheet">
     <register-top-menu></register-top-menu>
 
-    <div class="innerPageContent shadow-s border-0 register-content card card-1-notrans m-0 p-3">
+    <div class="innerPageContent shadow-sm border-0 register-content card card-1-notrans m-0 p-3">
         
         <div class="register-content-header bg-darkgrey color-white" >
 
@@ -21,7 +21,7 @@
             <div class="mt-2 mb-3">
 
                 <h4 class="my-0 p-0 pb-1 border-bottom fs-6" >
-                    <i class="bi bi-arrow-down-circle-fill cursor" ng-show="!showProfileInfo" aria-hidden="true"
+                    <i class="bi bi-arrow-down-circle-fill cursor-pointer" ng-show="!showProfileInfo" aria-hidden="true"
                         ng-click="showProfileInfo=true;toggleTooTip()"></i>
                     <i class="bi bi-arrow-up-circle-fill cursor" ng-show="showProfileInfo" aria-hidden="true"
                         ng-click="showProfileInfo=false"></i>
@@ -153,13 +153,8 @@
                     <div id="menuPlaceholder" ng-if="::roles.isNationalUser||roles.is('Administrator')" class="m-0 mt-2 mb-3">
 
                         <div class="p-0 m-0 border-bottom position-relative">
-                            <span class="color-blue">National records</span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
-                                title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant for the implementation of the Protocol.">
-                            </span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isBch"
-                                title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant to the implementation of the Protocol.">
-                            </span>                            
+                            <h4 class="p-0 m-0 fs-6 fw-bold color-black" id="recordOverview">
+                                Record overview</h4>      
                         </div>
 
                         <div ng-if="::roles.isNationalSchemaUser('focalPoint') || roles.is('Administrator')">
@@ -170,8 +165,15 @@
                                         <tbody>
                                             <tr class="fw-bold">
                                                 <td>
-                                                    <h4 class="p-0 m-0" id="recordOverview">
-                                                        Record overview</h4>
+                                                    <span class="color-blue">National records</span>
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isAbs"
+                                                        title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant for the implementation of the Protocol.">
+                                                    </span>
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isBch"
+                                                        title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant to the implementation of the Protocol.">
+                                                    </span>
                                                 </td>
                                                 <td class="table_display_none">
                                                     <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
@@ -190,7 +192,7 @@
                                     <tr>
                                         <td class="table_width">
                                             <div class="btn-group btn-group-sm p-0 table_width" role="group">
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-caret-down cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle cursor-pointer p-1"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
                                             </div>
@@ -217,34 +219,14 @@
                             </table>
                         </div>
                         <div ng-if="isAbs">
-                            <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
-                                <div class="p-0 m-0 mb-1">
-                                    <table class="overview table w-100">
-                                        <thead></thead>
-                                        <tbody>
-                                            <tr class="fw-bold">
-                                                <td>
-                                                    <h4 class="p-0 m-0" id="recordOverview">
-                                                        Record overview</h4>
-                                                </td>
-                                                <td class="table_display_none">
-                                                    <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
-                                                </td>
-                                                <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
-                                                <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
-                                                <td style="width: 7%;" class="text-center table_display_none">Requests</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+                            
                             <table class="overview table w-100" >
                                 <thead></thead>
                                 <tbody>
                                     <tr>
                                         <td class="table_width">
                                             <div class="btn-group btn-group-sm table_width" role="group">
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-caret-down cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle cursor-pointer p-1"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
                                             </div>
@@ -274,8 +256,8 @@
                                             <div class="btn-group btn-group-sm table_width" role="group">
                                                 <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
-                                                    <i class="fa fa-caret-down cursor-pointer p-1"
-                                                        ng-class="{'fa fa-caret-down':!topRecords[schema], 'fa fa-caret-up':topRecords[schema]}"
+                                                    <i class="bi bi-arrow-down-circle cursor-pointer p-1"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords[schema], 'bi bi-arrow-up-circle':topRecords[schema]}"
                                                         aria-hidden="true"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
@@ -324,14 +306,6 @@
                     </div>
 
                     <div>
-                        <div class="row p-0 my-0">
-                            <span class="color-orange"> Reference records
-                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
-                                    title="Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
-                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"  ng-if="isBch"
-                                    title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
-                            </span>
-                        </div>
                         <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
                             <div class="p-0 m-0 mb-1">
                                 <table class="overview table w-100">
@@ -339,11 +313,17 @@
                                     <tbody>
                                         <tr class="fw-bold">
                                             <td>
-                                                <h4 class="p-0 m-0" id="recordOverview">
-                                                    Record overview</h4>
+                                                <span class="color-orange"> Reference records
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isAbs"
+                                                        title="Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication."></span>
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isBch"
+                                                        title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication."></span>
+                                                </span>
                                             </td>
-                                            <td class="table_display_none">
-                                                <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
+                                            <td class="table_display_none text-end">
+                                                <span id="offlineFormat" class="pe-4">Offline formats</span>
                                             </td>
                                             <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
                                             <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
@@ -362,8 +342,8 @@
                                             <div class="btn-group btn-group-sm table_width" role="group">
                                                 <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
-                                                    <i class="fa fa-caret-down cursor-pointer p-1"
-                                                        ng-class="{'fa fa-caret-down':!topRecords[schema], 'fa fa-caret-up':topRecords[schema]}"
+                                                    <i class="bi bi-arrow-down-circle cursor-pointer p-1"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords[schema], 'bi bi-arrow-up-circle':topRecords[schema]}"
                                                         aria-hidden="true"></i>
                                                     <button type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
@@ -423,8 +403,8 @@
                                                 <button id="quickViewContact" type="button" class="btn btn-outline-secondary p-0"
                                                     title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,'contact')">
-                                                    <i class="fa fa-caret-down p-1 cursor-pointer"
-                                                        ng-class="{'fa fa-caret-down':!topRecords['contact'], 'fa fa-caret-up':topRecords['contact']}"
+                                                    <i class="bi bi-arrow-down-circle p-1 cursor-pointer"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords['contact'], 'bi bi-arrow-up-circle':topRecords['contact']}"
                                                         aria-hidden="true"></i></button>
                                                 <button id="addNewRecordContact" type="button" class="btn btn-outline-secondary p-0"
                                                     title="Add new record" data-bs-toggle="tooltip" ng-click="gotoNew($event,'contact')"><i
@@ -507,6 +487,6 @@
                 </span>
             </script>
         </div>
+        <joyride ng-if="tourOn"></joyride>
     </div>
-    <joyride ng-if="tourOn"></joyride>
 </div>

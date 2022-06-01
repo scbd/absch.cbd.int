@@ -2,8 +2,8 @@
 
     <h4 style="margin-top:0; margin-bottom:0;  cursor: pointer; background-color: #f9f9f9; padding:5px;" ng-class="{'bg-white' : showAll }">
         <span ng-click="showAll=!showAll">
-            <i class="fa fa-chevron-circle-down cursor" ng-show="!showAll" aria-hidden="true"></i>
-            <i class="fa fa-chevron-circle-up cursor" ng-show="showAll" aria-hidden="true"></i>
+            <i class="bi bi-arrow-down-circle-fill cursor-pointer" ng-show="!showAll" aria-hidden="true"></i>
+            <i class="bi bi-arrow-up-circle-fill cursor-pointer" ng-show="showAll" aria-hidden="true"></i>
             Pending requests
             <span class="badge" ng-class="{'color-white bg-red': isPA() }" style="position:relative;top:-2px;font-size:14px;" ng-bind="tasks.length"></span>
         </span>

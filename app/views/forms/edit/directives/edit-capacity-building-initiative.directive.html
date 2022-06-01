@@ -95,7 +95,7 @@
 													and/or
 												</div>
 												<div class="col-md-3">
-													<div class="km-control-group" style="text-align: left;"  caption="">
+													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">
 															Country(ies)
 														</label>
@@ -108,7 +108,7 @@
 
 								<div class="row" ng-if="document.geographicScope && isSubnational()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countryRegions" caption="">
+										<div class="km-control-group countries-dropdown" name="countryRegions" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">
 												Country(ies)
 											</label>
@@ -126,7 +126,7 @@
 								</div>
 								<div class="row" ng-if="document.geographicScope && isCommunity()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countries" caption="">
+										<div class="km-control-group countries-dropdown"  name="countries" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">
 												Country(ies)
 											</label>
@@ -180,14 +180,15 @@
 																		style="display:inline-block;width:100px"/>
 																</div>
 																<div class="col-md-2">
-																	<div class="km-control-group" name="durationText" caption="">
-																		<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																	<div name="durationText" caption="">
+																		<div style="display: none;" name="durationText">
 																			<label name="durationText" for="durationText">Duration period in day(s)/month(s)/year(s)</label>
 																		</div>
-																		<select name="durationText" ng-model="document.durationText"  class="form-control"
+																		<select name="durationText" ng-model="document.durationText"  class="form-control form-select"
 																			style="display:inline-block;width:100px" placeholder="eg. Months"
 																			ng-options="obj.value as obj.text for obj in timing">
 																		</select>
+																		
 																	</div>
 																</div>
 															</div>
@@ -200,13 +201,13 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="activityScope" caption="Type of capacity development initiative">
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="Type of capacity development initiative">
 											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row mt-2">
 									<div class="col-md-12">
 										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Is this part of a larger project or programme?">
 											<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
@@ -233,12 +234,12 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required  caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
 											<div class="help-info">In some instances, an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
-											<div class="checkbox"><label for="isImplementedByAgencies"><input type="checkbox" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Implementing agency(ies) or organization(s)</label></div>
+											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Implementing agency(ies) or organization(s)</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
-														<div class="help-info">Implementing agency refers to the organisation or legal entity responsible for developing the initiative and overseeing its
+														<div class="help-info pt-1">Implementing agency refers to the organisation or legal entity responsible for developing the initiative and overseeing its
 															implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
 															assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
 															responsible for the completion of the initiative and is accountable to the donor.</div>
@@ -249,11 +250,11 @@
 												</div>
 											</div>
 
-											<div class="checkbox"><label for="isExecutededByAgencies"><input id="isExecutededByAgencies" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />Executing agency(ies) or organization(s)</label></div>
+											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />Executing agency(ies) or organization(s)</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
-														<div class="help-info">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to-day planning,
+														<div class="help-info pt-1">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to-day planning,
 															coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
 															(staff, funds, equipment, etc.), and carrying out other project management functions.</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
@@ -261,11 +262,11 @@
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners"><input type="checkbox" id="isCollaboratededByPartners" ng-model="document.isCollaboratededByPartners" />Collaborating partner(s)</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />Collaborating partner(s)</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
-														<div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
+														<div class="help-info pt-1">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
 															actively supporting or collaborating in the implementation of the initiative.
 														</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"

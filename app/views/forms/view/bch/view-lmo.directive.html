@@ -183,7 +183,7 @@
 			<div ng-show="document.relevantInformation">
 				<label>Additional Information</label>
 				<div compare-val>
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div></div>
+				<km-value-ml value="document.relevantInformation" html locales="locale"></km-value-ml></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">

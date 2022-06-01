@@ -479,7 +479,8 @@
 
 			<div ng-if="document.relevantInformation">
 				<div compare-val>
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
+				<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
+				<!-- <div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div> -->
 				</div>
 			</div>
 

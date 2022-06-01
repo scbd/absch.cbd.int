@@ -79,9 +79,24 @@ h3 {
     text-rendering: optimizeLegibility;
     font-size: 20px;
 }
+.label-space .km-control-group > label{
+    padding-bottom: 5px;
+}
+.label-weight .km-control-group > label{
+    font-weight: 700;
+}
+#documentStatus #select-dropdown .dropdown-menu{
+    width: max-content;
+}
+#select-dropdown .dropdown-menu{
+    width: 26rem;
+}
 @media (max-width:767px) {
     .hidden-xs{
         display:none;
+    }
+    #select-dropdown .dropdown-menu{
+        width: 15rem !important;
     }
 }
 @media (min-width:768px) and (max-width:991px){
@@ -1090,6 +1105,7 @@ footer .logo {
 }
 div.recordDefault:hover {
     background-color: #e1e1e1!important;
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
 }
 #result-grouped-national-record .type {
     text-transform: uppercase;
@@ -1871,6 +1887,9 @@ legend+ .help-info {
         .record-Options-div{
             top:230px;
         }
+    }
+    #schemaView .language-btn-options{
+        padding: 3px;
     }
     .record-Options-div .date{
         text-transform: uppercase;
@@ -2803,7 +2822,6 @@ body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
     font-size:13px;
     text-transform: uppercase;
     font-weight: 500;
-    text-shadow: 0px 1px 0px rgba(255,255,255,.5);
     cursor:pointer;
     color: #fff;
 }
@@ -3181,6 +3199,10 @@ div legend {
     margin-top: -1.7rem; 
     left: -0.3rem;
 }
+.editForm .country-list .km-select-item .bi-check, span[km-form-languages] .km-select-item .bi-check{
+    margin-top: -0.2rem; 
+    left: -0.3rem;
+}
 .jr_container .jr_button.disabled {
     color: #868686 !important;
 }
@@ -3219,19 +3241,54 @@ div legend {
 .d-flow-root{
     display:flow-root;
 }
-#select-dropdown .dropdown-menu {
-    min-width: 11rem;
+.trash-value{
+    width: 3%;
+    padding: 10px;
 }
-
-.birth-country .dropdown-menu, .nationalities-country .dropdown-menu, 
-.organization-dropdown .dropdown-menu, .countries-dropdown .dropdown-menu{
-    min-width: 25rem !important;
+.type-cap-initiative .control-label{
+    padding-bottom: 5px;
 }
-.col-md-6 .km-inputtext-ac angucomplete-alt {
+.editHeader .register-content-header {
+    margin: 20px 20px 0px 20px;
+}
+/* .col-md-6 .km-inputtext-ac angucomplete-alt {
     width: 92.3% !important;
 }
 .col-xs-12 .km-inputtext-ac angucomplete-alt {
     width: 96.2%;
+} */
+section .no-shadow{
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+}
+
+.editForm .no-shadow{
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    background-color: #f5f5f5;
+    border: 1px solid #e3e3e3;
+    border-radius: 4px;
+}
+.edit-national-report .time-period div[ng-transclude]{
+    display: flex
+}
+.edit-national-report .show-previous-answer {
+    margin-top: -5px;
+}
+.document-validation .alert.alert-warning {
+    max-height: 30vh;
+    overflow-y: auto;
+}
+.tab-content .tab-pane.active{
+    opacity: 1;
+}
+span[km-form-languages] #select-dropdown .dropdown-menu{
+    min-width: 15rem !important;
 }
 .top-records table {
     background-color: #f9f9f9;
@@ -3239,4 +3296,21 @@ div legend {
 .overview.table #recordOverview {
     font-size: 16px;
     font-weight: 700;
+}
+.border-identical input{
+    border: 1px solid #ced4da;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline, .has-error.radio label, .has-error.checkbox label, .has-error.radio-inline label, .has-error.checkbox-inline label {
+    color: #a94442;
+}
+.has-error .form-control {
+    border-color: #a94442;
+    -webkit-box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+    box-shadow: inset 0 1px 1px rgb(0 0 0 / 8%);
+}
+.has-error .input-group-text {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #a94442;
 }

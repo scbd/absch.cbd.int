@@ -90,13 +90,13 @@
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group birth-country" name="birthCountry" caption="Country of birth">
+													<div class="km-control-group country-list" name="birthCountry" caption="Country of birth">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group nationalities-country" name="nationalities"  caption="Nationality(ies)">
+													<div class="km-control-group country-list" name="nationalities"  caption="Nationality(ies)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -182,9 +182,9 @@
 														<label>Countries or regions where you have worked</label>
 													</div>
 	
-													<div class="col-md-5">
+													<div class="col-md-5 mt-1">
 														
-														<div class="km-control-group small countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="Countries">
+														<div class="km-control-group small country-list countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="Countries">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
 															ng-model="countryRegionsWorkedIn.countries" placeholder="Please select option(s)" items="options.countries()"></div>
 														</div>
