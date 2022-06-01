@@ -153,13 +153,8 @@
                     <div id="menuPlaceholder" ng-if="::roles.isNationalUser||roles.is('Administrator')" class="m-0 mt-2 mb-3">
 
                         <div class="p-0 m-0 border-bottom position-relative">
-                            <span class="color-blue">National records</span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
-                                title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant for the implementation of the Protocol.">
-                            </span>
-                            <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isBch"
-                                title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant to the implementation of the Protocol.">
-                            </span>                            
+                            <h4 class="p-0 m-0 fs-6 fw-bold color-black" id="recordOverview">
+                                Record overview</h4>      
                         </div>
 
                         <div ng-if="::roles.isNationalSchemaUser('focalPoint') || roles.is('Administrator')">
@@ -170,8 +165,15 @@
                                         <tbody>
                                             <tr class="fw-bold">
                                                 <td>
-                                                    <h4 class="p-0 m-0" id="recordOverview">
-                                                        Record overview</h4>
+                                                    <span class="color-blue">National records</span>
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isAbs"
+                                                        title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant for the implementation of the Protocol.">
+                                                    </span>
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isBch"
+                                                        title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant to the implementation of the Protocol.">
+                                                    </span>
                                                 </td>
                                                 <td class="table_display_none">
                                                     <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
@@ -224,8 +226,6 @@
                                         <tbody>
                                             <tr class="fw-bold">
                                                 <td>
-                                                    <h4 class="p-0 m-0" id="recordOverview">
-                                                        Record overview</h4>
                                                 </td>
                                                 <td class="table_display_none">
                                                     <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
@@ -324,14 +324,6 @@
                     </div>
 
                     <div>
-                        <div class="row p-0 my-0">
-                            <span class="color-orange"> Reference records
-                                <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" ng-if="isAbs"
-                                    title="Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
-                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"  ng-if="isBch"
-                                    title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication." ></span>
-                            </span>
-                        </div>
                         <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
                             <div class="p-0 m-0 mb-1">
                                 <table class="overview table w-100">
@@ -339,8 +331,14 @@
                                     <tbody>
                                         <tr class="fw-bold">
                                             <td>
-                                                <h4 class="p-0 m-0" id="recordOverview">
-                                                    Record overview</h4>
+                                                <span class="color-orange"> Reference records
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isAbs"
+                                                        title="Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication."></span>
+                                                    <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isBch"
+                                                        title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication."></span>
+                                                </span>
                                             </td>
                                             <td class="table_display_none text-end">
                                                 <span id="offlineFormat" class="pe-4">Offline formats</span>
