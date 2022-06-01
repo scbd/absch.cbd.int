@@ -84,7 +84,7 @@
                                                         <span ng-class="{'confidential-text':document.absIRCCsNotAvailable}">
                                                             <input type="checkbox" name="absIRCCsNotAvailable" ng-model="document.absIRCCsNotAvailable"
                                                                 watch-items> The internationally recognized certificate of
-                                                            compliance (IRCC) is not available</input>
+                                                            compliance (IRCC) is not available
                                                         </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absIRCCsNotAvailable}">
@@ -212,15 +212,15 @@
                                             </div>
                                             <div ng-show="document.gisFiles">
                                                 <div class="input-prepend input-append">
-                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}">
+                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" />
                                                     <span class="add-on">lat</span>
                                                 </div>
                                                 <div class="input-prepend input-append">
-                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}">
+                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}" />
                                                     <span class="add-on">long</span>
                                                 </div>
                                                 <div class="input-prepend input-append">
-                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}">
+                                                    <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}" />
                                                     <span class="add-on">zoom</span>
                                                 </div>
                                             </div>

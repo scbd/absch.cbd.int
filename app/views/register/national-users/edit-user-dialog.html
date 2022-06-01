@@ -1,4 +1,4 @@
-﻿<div class="modal-content">
+<div class="modal-content">
     <style>
         .has-error .fa-validate:before {
             content: "\f069";
@@ -68,7 +68,7 @@
                         <div class="col-sm-6 col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.firstName.$invalid }">
                                 <label for="firstName">First name</label>
-                                <input type="text" class="form-control" name="firstName" ng-model="editUserDialogCtrl.user.firstName" required>
+                                <input type="text" class="form-control" name="firstName" ng-model="editUserDialogCtrl.user.firstName" required />
                                 <p class="help-info error" ng-show="form.firstName.$invalid">This field is mandatory</p>
                             </div>
                         </div>
@@ -76,7 +76,7 @@
                         <div class="col-sm-6 col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.lastName.$invalid }">
                                 <label for="lastName">Last name</label>
-                                <input type="text" class="form-control" name="lastName" ng-model="editUserDialogCtrl.user.lastName" required>
+                                <input type="text" class="form-control" name="lastName" ng-model="editUserDialogCtrl.user.lastName" required />
                                 <p class="help-info error" ng-show="form.lastName.$invalid">This field is mandatory</p>
                             </div>
                         </div>
@@ -87,7 +87,7 @@
                         <div class="col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.organization.$invalid }">
                                 <label for="organization">Organization</label>
-                                <input type="text" class="form-control" name="organization" ng-model="editUserDialogCtrl.user.organization" required>
+                                <input type="text" class="form-control" name="organization" ng-model="editUserDialogCtrl.user.organization" required />
                                 <p class="help-info error" ng-show="form.organization.$invalid">This field is mandatory</p>
                             </div>
                         </div>
@@ -99,7 +99,7 @@
                                 <label>Email</label>
                                 <div class="input-group" style="margin-bottom:2px; padding-left: 0px">
                                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
-                                    <input type="email" name="email" class="form-control" ng-model="editUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" required>
+                                    <input type="email" name="email" class="form-control" ng-model="editUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" required />
                                 </div>
                                 <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">This field is mandatory</p>
                                 <p class="help-info error" ng-show="form.email.$error.email">Email is invalid or incomplete</p>

@@ -59,7 +59,7 @@
     <table class="table table-hover bg-white">
         <tr>
             <td>
-                <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" >
+                <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" />
             </td>
             <th class="Title" colspan="4" ng-click="allSelected=!allSelected; allSectionsClicked();">
                 All questions and/or sections of the report
@@ -67,7 +67,7 @@
         </tr>
 
         <tr ng-repeat-start="section in sections">
-            <td><input type="checkbox" ng-model="section.selected" ng-change="sectionClicked(section)" indeterminate="section.selected===null"></td>
+            <td><input type="checkbox" ng-model="section.selected" ng-change="sectionClicked(section)" indeterminate="section.selected===null" /></td>
             <th ng-click="section.expanded=!section.expanded" colspan="3" ng-bind-html="::section.title"></th>
             <th ng-click="section.expanded=!section.expanded">
                 <i class="fa" ng-class="{ 'fa-caret-up' : section.expanded, 'fa-caret-down' : !section.expanded }"></i>
@@ -76,7 +76,7 @@
 
         <tr ng-if="section.expanded" ng-repeat="question in ::section.questions">
             <td></td>
-            <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)"></td>
+            <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)" /></td>
             <td ng-click="question.selected=!question.selected; questionClicked(question)" class="text-nowrap">
                 <span ng-switch="question.key[0]">
                     <span ng-switch-when="S">Survey Question <span ng-bind="::question.number"></span>.</span>

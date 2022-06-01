@@ -14,9 +14,9 @@
                 <div class="form-group">
                         {{$t('downloadFormat')}} :
                         <span class="radio" style="display: initial;">
-                            <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat">{{$t('xls')}}</label>                   
-                            <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat">{{$t('xlsx')}}</label>                   
-                            <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat">{{$t('csv')}}</label>
+                            <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                   
+                            <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" />{{$t('xlsx')}}</label>                   
+                            <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv"  v-model="downloadFormat" />{{$t('csv')}}</label>
                         </span>
                 </div>
                 <div v-if="loading" class="alert alert-info">

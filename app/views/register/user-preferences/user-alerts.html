@@ -101,7 +101,7 @@
         <div class="modal-body">
                 <div class="form-group">
                 <label class="fw-bold pb-2" for="filterTitle">Title for this saved search</label>
-                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title">
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title" />
             </div>
             <div>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
@@ -116,7 +116,7 @@
                 </search-directive>
              </div>
              <br>
-                <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
+                <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail" />
                 <label for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                     <p ng-repeat="error in errors" ng-bind="error"></p>
