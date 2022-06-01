@@ -3280,7 +3280,7 @@ section .no-shadow{
 .edit-national-report .show-previous-answer {
     margin-top: -5px;
 }
-.show-document-validation .document-contain-error {
+.document-validation .alert.alert-warning {
     max-height: 30vh;
     overflow-y: auto;
 }
