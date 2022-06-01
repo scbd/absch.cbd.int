@@ -21,7 +21,7 @@
             <div class="mt-2 mb-3">
 
                 <h4 class="my-0 p-0 pb-1 border-bottom fs-6" >
-                    <i class="bi bi-arrow-down-circle-fill cursor" ng-show="!showProfileInfo" aria-hidden="true"
+                    <i class="bi bi-arrow-down-circle-fill cursor-pointer" ng-show="!showProfileInfo" aria-hidden="true"
                         ng-click="showProfileInfo=true;toggleTooTip()"></i>
                     <i class="bi bi-arrow-up-circle-fill cursor" ng-show="showProfileInfo" aria-hidden="true"
                         ng-click="showProfileInfo=false"></i>
@@ -192,7 +192,7 @@
                                     <tr>
                                         <td class="table_width">
                                             <div class="btn-group btn-group-sm p-0 table_width" role="group">
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-caret-down cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle cursor-pointer p-1"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
                                             </div>
@@ -226,7 +226,7 @@
                                     <tr>
                                         <td class="table_width">
                                             <div class="btn-group btn-group-sm table_width" role="group">
-                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="fa fa-caret-down cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle cursor-pointer p-1"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                                 <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
                                             </div>
@@ -256,8 +256,8 @@
                                             <div class="btn-group btn-group-sm table_width" role="group">
                                                 <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
-                                                    <i class="fa fa-caret-down cursor-pointer p-1"
-                                                        ng-class="{'fa fa-caret-down':!topRecords[schema], 'fa fa-caret-up':topRecords[schema]}"
+                                                    <i class="bi bi-arrow-down-circle cursor-pointer p-1"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords[schema], 'bi bi-arrow-up-circle':topRecords[schema]}"
                                                         aria-hidden="true"></i></button>
                                                     <button type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
@@ -342,8 +342,8 @@
                                             <div class="btn-group btn-group-sm table_width" role="group">
                                                 <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,schema)">
-                                                    <i class="fa fa-caret-down cursor-pointer p-1"
-                                                        ng-class="{'fa fa-caret-down':!topRecords[schema], 'fa fa-caret-up':topRecords[schema]}"
+                                                    <i class="bi bi-arrow-down-circle cursor-pointer p-1"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords[schema], 'bi bi-arrow-up-circle':topRecords[schema]}"
                                                         aria-hidden="true"></i>
                                                     <button type="button" class="btn btn-outline-secondary p-0" title="Add new record" data-bs-toggle="tooltip"
                                                         ng-click="gotoNew($event,schema)"><i
@@ -403,8 +403,8 @@
                                                 <button id="quickViewContact" type="button" class="btn btn-outline-secondary p-0"
                                                     title="Quick view latest 10 records" data-bs-toggle="tooltip"
                                                     ng-click="showTopRecords($event,'contact')">
-                                                    <i class="fa fa-caret-down p-1 cursor-pointer"
-                                                        ng-class="{'fa fa-caret-down':!topRecords['contact'], 'fa fa-caret-up':topRecords['contact']}"
+                                                    <i class="bi bi-arrow-down-circle p-1 cursor-pointer"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords['contact'], 'bi bi-arrow-up-circle':topRecords['contact']}"
                                                         aria-hidden="true"></i></button>
                                                 <button id="addNewRecordContact" type="button" class="btn btn-outline-secondary p-0"
                                                     title="Add new record" data-bs-toggle="tooltip" ng-click="gotoNew($event,'contact')"><i
