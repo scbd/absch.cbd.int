@@ -1201,8 +1201,8 @@ import 'angular-vue'
                     function buildDateFieldQuery({ field, filterValue:date }) {
                         
                         if(date.start || date.end) {
-                            const start   = date.start ? solr.escape(date.start.format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
-                            const end     = date.end   ? solr.escape(date.end.format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(date.start.locale('en').format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
+                            const end     = date.end   ? solr.escape(date.end.locale('en').format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
     
                             return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
