@@ -14,20 +14,20 @@
             text-align: center;
             padding-top: 10px;
         }
-        #viewPdf{
+        /* #viewPdf{
             position: inherit!important;
             min-height: 1000px;
-        }
+        } */
 
     </style>
     <div class="row">
-        <div class="row">
-            <div class="title-bar" style="overflow: scroll;" ng-bind="pdf.fileName|uppercase">
+        <div class="row px-0 w-100">
+            <div class="title-bar"  ng-bind="pdf.fileName|uppercase">
             </div>
         </div>
-        <div class="row" style="background:#fff" ng-if="!error">
+        <div class="row w-100" style="background:#fff" ng-if="!error">
             <div class="col-md-2">
-                <div class="" style="width:100%;">
+                <div>
                     <br> File Name : <span ng-bind="pdf.fileName|uppercase"></span>
                     <br>
                     <br>
