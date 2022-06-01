@@ -73,7 +73,3 @@ body[lang=ar] #search-new .dropdown-menu::after {
     left: unset;
     right: 5%;
 }
-body[lang=ar] .daterangepicker.opensright:after {
-    left: unset;
-    right: 10px;
-}
