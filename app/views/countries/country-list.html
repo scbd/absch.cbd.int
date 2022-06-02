@@ -144,25 +144,25 @@
 					<button class="btn btn-default btn-sm dropdown-toggle bg-white" type="button" id="dropdownMenu2"
 						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						<span>
-							<strong ng-if="partyFilter==='All' || !partyFilter">
+							<span ng-if="partyFilter==='All' || !partyFilter">
 								<span class="d-none d-md-inline">Party Status</span>
 								<span class="d-md-none">PS</span>
-							</strong>
-							<strong ng-if="partyFilter == 'party'"><i class="color-party fa fa-square"></i>
+							</span>
+							<span ng-if="partyFilter == 'party'"><i class="color-party fa fa-square"></i>
 								<span class="hidden-sm hidden-xs">Parties</span> <span ng-if="isBCH"> to the Cartagena
 									Protocol</span>
-							</strong>
-							<strong ng-if="partyFilter == 'NKLSParty'"><i class="color-NKLSP fa fa-square"></i>
+							</span>
+							<span ng-if="partyFilter == 'NKLSParty'"><i class="color-NKLSP fa fa-square"></i>
 								<span class="hidden-sm hidden-xs">Parties to the Supplementary Protocol</span>
-							</strong>
-							<strong ng-if="partyFilter == 'inbetween'"><i class="color-inbetween fa fa-square"></i>
+							</span>
+							<span ng-if="partyFilter == 'inbetween'"><i class="color-inbetween fa fa-square"></i>
 								<span class="hidden-sm hidden-xs">Ratified, not yet Party<span ng-if="isBCH"> to the
 										Cartagena Protocol</span></span>
-							</strong>
-							<strong ng-if="partyFilter == 'nonparty'"><i class="color-non-party fa fa-square"></i>
+							</span>
+							<span ng-if="partyFilter == 'nonparty'"><i class="color-non-party fa fa-square"></i>
 								<span class="hidden-sm hidden-xs">Non-Parties<span ng-if="isBCH"> to the Cartagena
 										Protocol</span></span>
-							</strong>
+							</span>
 						</span>
 						<span class="caret"></span>
 					</button>
@@ -194,7 +194,7 @@
 				</div>
 
 				<button ng-if="list.length" id="exportingRecords" type="button"
-					class="btn btn-default btn-sm bg-white text-uppercase" ng-click="export()"
+					class="btn btn-default btn-sm bg-white" ng-click="export()"
 					ng-disabled="readyForExport||loading">
 					<i class="fa fa-download"></i>
 					<span class="d-none d-md-inline">Export</span>
@@ -235,7 +235,7 @@
 							Protocol</span>
 						<span ng-if="country.isInbetweenParty" class="color-inbetween fs-small-6 me-2">Ratified,
 							not yet Party</span>
-						<span ng-if="country.isSignatory" class="fs-small-6 me-2">Signatory</span>
+						<!-- <span ng-if="country.isSignatory" class="fs-small-6 me-2">Signatory</span> -->
 						<span ng-if="country.entryIntoForce"
 							class="color-grey color-non-party fs-small-6 me-3">since <span
 								ng-bind="country.entryIntoForce|formatDate"></span></span>
