@@ -1,17 +1,17 @@
 ﻿<div>
-
-	<div class="col-xs-12" ng-show="enableSearch" style="margin-bottom: 5px;">
+	<div class="row">
+	<div class="col-12" ng-show="enableSearch" style="margin-bottom: 5px;">
 		<div class="input-group float-start" style="max-width:400px;">
-			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the list (min 3 chars to begin search)" style="font-weight:bold;" />
+			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the list (min 3 chars to begin search)"/>
 			<span class="input-group-text" id="basic-addon2">
 				<i class="fa fa-search" ></i>
 			</span>
 		</div>
 		<span style="position: relative; top:10px; margin-left:20px"> <i class="color-blue"><span ng-bind="binding.length || '0'"></span> keywords selected.</i></span>
-		
-
 	</div>
-	<div class="row col-12 pt-2" >
+	</div>
+	<div class="row">
+	<div class="col-12 pt-2" >
 		<div ng-if="searchKeyword && searchKeyword.length > 2"  class="optionsbox">
 			<table class="table table-condensed" >
 				<tr ng-repeat="term in filteredList = (searchList|filter:hasMatch)">
@@ -103,7 +103,7 @@
 			</style>
 		</div>
 	</div>
-
+	</div>
 
 </div>
 
