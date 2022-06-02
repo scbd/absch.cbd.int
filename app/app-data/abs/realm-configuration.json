@@ -296,7 +296,7 @@
             "en": "Contact"
           },
           "description": {
-            "en": "Contact"
+            "en": "Contacts (CON) are used to provide information on individuals and/or organizations that are linked to other National or Reference records. Contact records can be published by all registered users and are made available in the Search only when they are referenced in other clearing-house records"
           },
           "shortCode": "CON",
           "titlePlural": {

@@ -10,6 +10,7 @@
 }
 
 #NotificationsPanel .notification-panel-header {
+    background-color: #EEE !important;
     margin:0;padding:0;border-bottom:1px solid #ccc;
 }
 #NotificationsPanel .notification-row {

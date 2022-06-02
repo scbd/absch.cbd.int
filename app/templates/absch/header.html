@@ -74,17 +74,17 @@
                         class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">submit</a> </li>
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a id="countryProfile" rel="noopener" translation-url href="countries"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 p-0 dropdown-toggle"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
                         id="dropdownMenuButton2" aria-expanded="false"> <span
                             class="d-sm-none d-md-inline-block">country profiles</span> <span
                             class="d-none d-sm-inline-block d-md-none"> countries </span>
                     </a>
                     <ul class="dropdown-menu" style="font-size: .9rem;"
                         aria-labelledby="dropdownMenuButton2">
-                        <li class="nav-link-country-profiles">
-                            <input type="text" class="form-control" placeholder="Search countries"
-                                ng-click="countrySearch($event)" ng-model="countrySearchQuery" /> </li>
-                        <li>
+                        <li class="nav-country-profiles-search">
+                            <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
+                                ng-model="countrySearchQuery" />
+                        </li>
                             <ul class="nav-link-country-profiles">
                                 <li ng-repeat="c in countries | filter:startsWith track by c.code">
                                     <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
@@ -95,13 +95,13 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-country-profiles-footer-link bg-party"> <a rel="noopener" translation-url
-                                href="countries"> Overview - List all countries <i class="fa fa-arrow-right"></i> </a>
+                        <li class="nav-country-profiles-footer-link bg-party">
+                            <a rel="noopener" translation-url href="countries"> Overview - List all countries <i class="fa fa-arrow-right"></i> </a>
                         </li>
                     </ul>
                 </li>
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a href="kb"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 p-0 dropdown-toggle" type="button"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle" type="button"
                         id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                         <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
@@ -115,9 +115,9 @@
                     </ul>
                 </li>
                 <li class="nav-item"><a href="forums"
-                        class="fw-bold menu-navigation-link p-0 nav-link link-dark px-2 ">forums</a></li>
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">forums</a></li>
                 <li ng-if="isTRG" class="nav-item"><a href="https://absch.cbd.int/en/"
-                        class="bg-yellow fw-bold menu-navigation-link nav-link p-0 link-dark px-2 ">Leave Training
+                        class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">Leave Training
                         Site</a></li>
             </ul>
             <ul class="nav">

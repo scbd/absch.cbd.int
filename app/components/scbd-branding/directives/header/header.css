@@ -165,28 +165,28 @@
   font-size: .9rem;
   line-height: 2rem;
 }
-.rp-signin{
+/* .rp-signin{
   float: left;
 text-decoration: none;
-}
-.rp-lang{
+} */
+/* .rp-lang{
   font-size: 12px !important;
   float: left;
-  padding: 0 1rem;
-}
-.rp-ques{
+  padding: 0 .85rem;
+} */
+/* .rp-ques{
   float: left;
-padding: 0 10px;
+  padding: 0 .85rem;
 text-decoration: none;
-}
-.rp-notification{
+} */
+/* .rp-notification{
   float: left;
-padding: 0 10px;
-}
-.rp-n{
-  padding: 2px 5px 0 10px;
+  padding: 0 .85rem;
+} */
+/* .rp-n{
+  padding: 2px 5px 0 .85rem;
   float: left !important;
-}
+} */
 #CBD-Branding .locale-menu {
   position: absolute;
     right: 0;
@@ -194,7 +194,7 @@ padding: 0 10px;
     float: right;
     left: inherit;
 }
-.navbar .right-side-help-menus {
+/* .navbar .right-side-help-menus {
   font-size: 16px;
   margin-bottom: 0;
   border: 0;
@@ -206,7 +206,7 @@ padding: 0 10px;
   font-weight: 200;
   width: auto !important;
   text-align: center;
-}
+} */
 #CBD-Branding .hidden {
   display: none;
 }
