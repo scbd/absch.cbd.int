@@ -198,7 +198,7 @@
             <span class="label label-danger">This linked record has been deleted.</span>
         </span>
         <span ng-if="document.workingDocumentLock">
-            | <span class="label label-danger">The record is pending approval</span> | 
+            | <span class="label text-danger">The record is pending approval</span> | 
             <a class="text-decoration-none" rel="noopener" translation-url  ng-href="/register/{{document.body.header.schema | urlSchemaShortName|encodeURIComponent}}/{{document.identifier|encodeURIComponent}}/view" target="_blank">
                 <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> View Request
             </a>

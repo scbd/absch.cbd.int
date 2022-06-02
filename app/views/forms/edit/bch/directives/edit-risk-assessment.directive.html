@@ -72,7 +72,7 @@
 												</div>
 											</div>	
 											<div class="row mt-3" ng-if="isNational">
-												<div class="col-12">
+												<div class="col-12 label-space">
 													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
 														<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities"
 																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true"></div>
@@ -82,7 +82,7 @@
 											</div>									
 		
 											<div class="row">
-												<div class="col-12">
+												<div class="col-12 label-space">
 													<div class="km-control-group" name="contacts" caption="Contact details of the main responsible risk assessor">											
 														<div document-selector ng-model="document.contacts" question="contacts"
 																on-build-query="onBuildContactQuery(searchText)" allow-new-schema="contact" allow-new="true"></div>
