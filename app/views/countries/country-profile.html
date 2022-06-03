@@ -38,12 +38,6 @@
                         <div ng-if="isBCH && !country.isNKLSParty" class="mt-1 mb-2">
                             <span class="color-non-party bold fs-6">Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
                         </div>
-                        <div class="mb-1" ng-if="isABS">
-                            <label>Signatory:</label>
-                            <span ng-if="country.isSignatory && !country.dateSigned" class="bold">Signatory</span>
-                            <span ng-if="country.isSignatory && country.dateSigned" class="bold">Signed on <span ng-bind="country.dateSigned|formatDate"></span> </span>
-                            <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">No</span>
-                        </div>
 
                         <div ng-if="isABS" class="m-0 my-2">
                             <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
@@ -65,9 +59,18 @@
                                 title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
                             </div>
                         </div>
+
+                        <div class="mb-1" ng-if="isABS">
+                            <label class="fw-bold">Signatory:</label>
+                            <span ng-if="country.isSignatory && !country.dateSigned" >Signatory</span>
+                            <span ng-if="country.isSignatory && country.dateSigned" >Signed on <span ng-bind="country.dateSigned|formatDate"></span> </span>
+                            <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">No</span>
+                        </div>
+
+                       
                         <div class="mb-1 text-nowrap overflow-hidden">
-                            <label>CBD Country Profile:</label>
-                            <a class="text-decoration-none" rel="noopener" translation-url   href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
+                            <label  class="fw-bold">CBD Country Profile:</label>
+                            <a class="text-decoration-none" rel="noopener" translation-url href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
                         </div>
                             
                 </div>
