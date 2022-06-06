@@ -1,16 +1,29 @@
-﻿<div>
-    <div  ng-show="!user.isAuthenticated" style="margin:0 10% 0 10%" >
-        <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">Please sign-in to publish information in the <span ng-bind="chShortName"></span></h1>
-        <hr>
-       <div class="card">
+﻿<div class="container-sm">
+    <div  ng-show="!user.isAuthenticated" class="mt-4 pt-4 pb-4">
+    
+        <h1 class="color-green">Please sign-in to publish information in the <span ng-bind="chShortName"></span></h1>
+
+     <hr>
+       <div class="card p-3 bg-white">
        <h3>How do I register for a CBD account?</h3>
-       <p>Any person can have a CBD account which will give you access to register information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABS-CH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at <a rel="noopener" translation-url  href="http://accounts.cbd.int/signin" class="bold">accounts.cbd.int/signin</a></p>
+       <p>Any person can sign-up for a CBD account which will give you access to publish information in all CBD clearing-houses including the Biosafety Clearing-House (BCH), the ABS Clearing-House (ABSCH) and the clearing-house mechanism (CHM) under the Convention. You can register for a CBD account at <a rel="noopener" translation-url  href="http://accounts.cbd.int/signup" class="bold">accounts.cbd.int/signup</a></p>
         <p>Make sure you enter all the information required as instructed on the form. You’ll automatically receive an e-mail with a link you have to click to confirm your account.</p>
+
+        </div>
+        <div class="card mt-3 p-3 bg-white">
        <h3>Forgot your password?</h3>
         <p>Click here <a rel="noopener" translation-url  href="http://accounts.cbd.int/password/reset" class="bold">accounts.cbd.int/password/reset</a> to reset your password. You will be asked for your email address and, if you are a registered user, an email will be sent immediately to your registered email account with instructions on how to reset your password.</p>
+        </div>
+
+        <div class="card mt-3 p-3 bg-white">
         <h3>Problems with the display of the Clearing-House?</h3>
         <p> The <span ng-bind="chShortName"></span> works best with the most recent versions of internet browsers (Firefox, Chrome or Internet Explorer 9+).</p>
-        <h3 class="color-green">For technical support please contact our help desk at:  <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
+        <p class="bold color-green">For technical support please contact our help desk at:  <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></p>
+</div>
+       
+
+        <a class="float-end nav-link fs-6 text-muted fw-bold text-uppercase" href="/kb/faqs">
+            See more frequently asked questions (FAQs) <i class="fa fa-arrow-right"></i> </a>
        </div>
       </div>
 </div>
