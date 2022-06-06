@@ -21,18 +21,23 @@
                 countryMapScope.currentCountry.code.toLowerCase()=='fk'||countryMapScope.currentCountry.code.toLowerCase()=='eh'||
                 countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
             <div class="col-lg-12">
-                <div class="small  color-white {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk') ? 'show' : 'hide'}}"
+                <div 
+                ng-if="(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk')" 
+                class="small  color-white"
                     style="margin-top:5px;white-space: normal;padding:3px;">
                     Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
                 </div>
-                <div class="color-white {{countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk' ? 'show' : 'hide'}}   small " style="margin-top:5px;white-space: normal;padding:3px;">
+                <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'" 
+                class="small " style="margin-top:5px;white-space: normal;padding:3px;">
                     A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern
                     Ireland concerning sovereignty over the Falkland Islands (Malvinas).
                 </div>
-                <div class="color-white {{countryMapScope.currentCountry.code.toLowerCase()=='eh' ? 'show' : 'hide'}}   small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'"  class="color-white small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
                     Non-Self Governing Territory.
                 </div>
-                <div class="color-white small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;">
+                <div 
+                ng-if="(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb')" 
+                class="color-white small" style="margin-top:5px;white-space: normal;padding:3px;">
                     The UK’s ratification of the Nagoya Protocol does not extend to the
                     <a rel="noopener" ng-href="#"  class=" color-white gb-territories" 
                     data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">14 Overseas Territories </a>

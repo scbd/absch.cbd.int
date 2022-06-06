@@ -220,7 +220,7 @@
 			ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
 			<div class="col-lg-5">
 
-				<div class="d-inline-block"> <span ng-bind="$index+1"></span> </div>
+				<div class="d-inline-block" style="width:15px;"> <span ng-bind="$index+1"></span> </div>
 
 				<div class="d-inline ms-1 ps-3">
 					<span class="fs-5"

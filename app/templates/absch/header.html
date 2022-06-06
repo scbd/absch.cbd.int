@@ -2,14 +2,16 @@
     <header class="px-3 d-sm-none d-md-none">
         <nav class="navbar navbar-sm navbar-light bg-light rounded">
             <div ng-click="showNav = !showNav" style="cursor: pointer;">
-                <button class="navbar-toggler collapsed" type="button"> <span
-                        class="navbar-toggler-icon"></span> </button> <span
-                    class="realm-base-acronym fw-bold color-green "> ABSCH </span> <span ng-if="!isDEV && !isTRG"
-                    class="fs-6 text-uppercase link-dark fw-bold">ABS </span> <span class="fs-6 text-uppercase link-dark fw-bold">Clearing-House</span> </span> <span ng-if="isDEV"
-                    class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                <button class="navbar-toggler collapsed" type="button"> <span class="navbar-toggler-icon"></span></button>
+                <span class="realm-base-acronym fw-bold color-green"> ABS </span>
+                <span class="realm-base-acronym text-uppercase color-green fw-bold">Clearing-House</span>
+                </span>
+
+                <span ng-if="isDEV" class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
                     DEVELOPEMENT</span> <span ng-if="isTRG"
                     class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
-                    TRAINING</span> </div>
+                    TRAINING</span>
+            </div>
             <div ng-if="showNav" class="navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
@@ -37,10 +39,11 @@
     </header>
     <header class="pt-2 d-none d-sm-inline-block d-md-inline-block">
         <div class="">
-            <a href="." class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span class="fw-normal">ABSCH</span>
+            <a href="." class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span
+                    class="fw-normal">ABSCH</span>
                 <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
-                    <span> Access and Benefit-sharing </span> Clearing-House</span> <span
-                    ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                    <span> Access and Benefit-sharing </span> Clearing-House</span> <span ng-if="isDEV"
+                    class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
                     DEVELOPEMENT</span> <span ng-if="isTRG"
                     class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
                     TRAINING</span> </a>
@@ -51,8 +54,8 @@
             <ul class="nav me-auto mx-2">
                 <li class="nav-item">
                     <a rel="noopener" translation-url href="."
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0"
-                        aria-current="page"> <span>Home</span> </a>
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0" aria-current="page">
+                        <span>Home</span> </a>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="kb"
                         class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">about</a></li>
@@ -60,13 +63,11 @@
                         href="search"
                         class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
                         id="dropdownMenuButton1" aria-expanded="false">Search</a>
-                    <ul class="dropdown-menu" style="font-size: .9rem;"
-                        aria-labelledby="dropdownMenuButton1">
+                    <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1">
                         <li><a rel="noopener" translation-url class="fw-bold dropdown-item fs-small-8 color-grey"
                                 href="search">Records</a></li>
                         <li><a rel="noopener" translation-url
-                                class="dropdown-item fs-small-8 color-grey fw-bold link-dark "
-                                href="reports">National
+                                class="dropdown-item fs-small-8 color-grey fw-bold link-dark " href="reports">National
                                 Report Analyzer</a></li>
                     </ul>
                 </li>
@@ -79,46 +80,46 @@
                             class="d-sm-none d-md-inline-block">country profiles</span> <span
                             class="d-none d-sm-inline-block d-md-none"> countries </span>
                     </a>
-                    <ul class="dropdown-menu" style="font-size: .9rem;"
-                        aria-labelledby="dropdownMenuButton2">
+                    <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton2">
                         <li class="nav-country-profiles-search">
-                            <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
-                                ng-model="countrySearchQuery" />
+                            <input type="text" class="form-control" placeholder="Search countries"
+                                ng-click="countrySearch($event)" ng-model="countrySearchQuery" />
                         </li>
-                            <ul class="nav-link-country-profiles">
-                                <li ng-repeat="c in countries | filter:startsWith track by c.code">
-                                    <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
-                                        ng-href="countries/{{::c.code|encodeURIComponent}}"> 
-                                        <span ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
-                                            {{::c.name | lstring:locale}}
-                                        </span> </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-country-profiles-footer-link bg-party">
-                            <a rel="noopener" translation-url href="countries"> Overview - List all countries <i class="fa fa-arrow-right"></i> </a>
-                        </li>
-                    </ul>
+                        <ul class="nav-link-country-profiles">
+                            <li ng-repeat="c in countries | filter:startsWith track by c.code">
+                                <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
+                                    ng-href="countries/{{::c.code|encodeURIComponent}}">
+                                    <span ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">
+                                        {{::c.name | lstring:locale}}
+                                    </span> </a>
+                            </li>
+                        </ul>
                 </li>
-                <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a href="kb"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle" type="button"
-                        id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                                href="kb">Knowledge Base</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                                href="kb/faqs">FAQs</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                                href="https://training-absch.cbd.int">Training Site</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                                href="kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">Contact us</a></li>
-                    </ul>
+                <li class="nav-country-profiles-footer-link bg-party">
+                    <a rel="noopener" translation-url href="countries"> Overview - List all countries <i
+                            class="fa fa-arrow-right"></i> </a>
                 </li>
-                <li class="nav-item"><a href="forums"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">forums</a></li>
-                <li ng-if="isTRG" class="nav-item"><a href="https://absch.cbd.int/en/"
-                        class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">Leave Training
-                        Site</a></li>
+            </ul>
+            </li>
+            <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a href="kb"
+                    class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
+                    type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
+                    <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
+                            href="kb">Knowledge Base</a></li>
+                    <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
+                            href="kb/faqs">FAQs</a></li>
+                    <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
+                            href="https://training-absch.cbd.int">Training Site</a></li>
+                    <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
+                            href="kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">Contact us</a></li>
+                </ul>
+            </li>
+            <li class="nav-item"><a href="forums"
+                    class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">forums</a></li>
+            <li ng-if="isTRG" class="nav-item"><a href="https://absch.cbd.int/en/"
+                    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">Leave Training
+                    Site</a></li>
             </ul>
             <ul class="nav">
                 <li class="nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"

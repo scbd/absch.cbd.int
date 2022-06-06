@@ -22,7 +22,7 @@
                     A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern
                     Ireland concerning sovereignty over the Falkland Islands (Malvinas).
                 </div>
-                <div class="{{countryMapScope.currentCountry.code.toLowerCase()=='eh' ? 'show' : 'hide'}}   small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
+                <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'"  class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
                     Non-Self Governing Territory.
                 </div>
                 <div class="small  {{(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb') ? 'show' : 'hide'}}" style="margin-top:5px;white-space: normal;padding:3px;">
