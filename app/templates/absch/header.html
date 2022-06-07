@@ -2,7 +2,8 @@
     <header class="px-3 d-sm-none d-md-none">
         <nav class="navbar navbar-sm navbar-light bg-light rounded">
             <div ng-click="showNav = !showNav" style="cursor: pointer;">
-                <button class="navbar-toggler collapsed" type="button"> <span class="navbar-toggler-icon"></span></button>
+                <button class="navbar-toggler collapsed" type="button"> <span
+                        class="navbar-toggler-icon"></span></button>
                 <span class="realm-base-acronym fw-bold color-green"> ABS </span>
                 <span class="realm-base-acronym text-uppercase color-green fw-bold">Clearing-House</span>
                 </span>
@@ -80,12 +81,14 @@
                             class="d-sm-none d-md-inline-block">country profiles</span> <span
                             class="d-none d-sm-inline-block d-md-none"> countries </span>
                     </a>
-                    <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton2">
-                        <li class="nav-country-profiles-search">
-                            <input type="text" class="form-control" placeholder="Search countries"
-                                ng-click="countrySearch($event)" ng-model="countrySearchQuery" />
+                    <ul class="dropdown-menu bg-green">
+                    
+                        <li class="ps-2 pe-2 pb-2">
+                            <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
+                                ng-model="countrySearchQuery" />
                         </li>
-                        <ul class="nav-link-country-profiles">
+                    <li>
+                        <ul class="nav-link-country-profiles bg-white">
                             <li ng-repeat="c in countries | filter:startsWith track by c.code">
                                 <a rel="noopener" translation-url class="dropdown-item  fw-bold fs-small-8"
                                     ng-href="countries/{{::c.code|encodeURIComponent}}">
@@ -94,12 +97,12 @@
                                     </span> </a>
                             </li>
                         </ul>
-                </li>
-                <li class="nav-country-profiles-footer-link bg-party">
-                    <a rel="noopener" translation-url href="countries"> Overview - List all countries <i
-                            class="fa fa-arrow-right"></i> </a>
-                </li>
-            </ul>
+                    </li>
+                        <li class="text-center m-2 mb-1">
+                            <a class="link-light" rel="noopener" translation-url href="countries"> Overview - List all countries
+                                <i class="fa fa-arrow-right"></i> </a>
+                        </li>
+                    </ul>
             </li>
             <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a href="kb"
                     class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
