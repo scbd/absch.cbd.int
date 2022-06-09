@@ -31,10 +31,14 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.isAbs            = realm.is('ABS');
 
             var schemaFacets = {};
-
+            $scope.showRecordsSection=true;
             //====================================================================================
             $scope.isFilter = function(filter) {
                 return $scope.dashboardFilter == filter || $scope.dashboardFilter == "All";
+            }
+
+            $scope.goto = function(url) {
+                $location.url(url);
             }
 
             if ($scope.user.isAuthenticated) {
