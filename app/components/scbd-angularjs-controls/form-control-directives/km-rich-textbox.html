@@ -3,9 +3,9 @@
 	    ng-switch="rows">
 		<trix-editor angular-trix ng-switch-default ng-required="isRequired()" ng-model="text[locale]"
 			ng-change="onchange()" ng-disabled="ngDisabledFn()" placeholder="{{placeholder}}" rows="{{rows}}"
-			style="width:96.3%" trix-initialize="trixInitialize(e, ed)">
+			style="width:96.4%" trix-initialize="trixInitialize(e, ed)">
 		</trix-editor>
-		<span class="input-group-text lang-tooltip" disabled-ng-show="isShowLocale()" style="cursor:default" data-bs-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
+		<span class="input-group-text lang-tooltip fs-small-8" disabled-ng-show="isShowLocale()" style="cursor:default" data-bs-toggle="tooltip" data-title="{{termLocales[locale]|term}}" >
 			<span ng-bind="locale | uppercase"></span>
 		</span>
 	</div>
