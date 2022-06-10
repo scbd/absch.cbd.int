@@ -8,7 +8,7 @@
         </span>
         <span ng-if="error" class="alert alert-warning" role="alert">Error loading details for (<span ng-bind="model"></span>)</span>
     </div>
-	<div ng-if="!loading && !errorCode && !error">
+	<div class="view-reference-list" ng-if="!loading && !errorCode && !error">
         
         <span ng-transclude="default">		
             <span ng-switch="document.body.header.schema">
