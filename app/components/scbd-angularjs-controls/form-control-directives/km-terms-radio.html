@@ -4,7 +4,7 @@
 			<i class="fa fa-remove"></i>
 			Clear selection
 		</button>
-		<ul>
+		<ul class="list-unstyled">
 
 			<script type="text/ng-template"  id="term-radio-tree-renderer.html">
 				<label>
@@ -14,7 +14,7 @@
 							<span ng-if="showDescription" class="km-term-radio-description" ng-bind="term.description | lstring:locale"></span>
 				</label>
 
-				<ul style="list-style:none">
+				<ul class="list-unstyled">
 					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-radio-tree-renderer.html'">			
 				</ul>
 			</script>

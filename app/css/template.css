@@ -3315,16 +3315,7 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
     background-color: #f2dede;
     border-color: #a94442;
 }
-.capacity-building-initiative .type-cap-initiative .terms-radio ul {
-    list-style:none;
-    margin-left: -20px;
-}
-.tab-content .tab-pane table.table-condensed {
-    width: 100%;
-}
-.record-body li:not(:first-of-type) .default-reference-viewer .view-reference-list{ 
-    margin: 25px 0;
-}
+
 .default-reference-viewer .blockquote {
     padding: 10px 20px;
     margin: 0 0 20px;
