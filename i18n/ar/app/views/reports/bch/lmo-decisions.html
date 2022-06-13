@@ -16,7 +16,7 @@
 						<th class="tableHeaderTop tableHeaderBottom back80 countryName">البلد</th>
 						<th class="tableHeaderTop tableHeaderBottom">القرارات المتعلقة بغرفة تبادل معلومات السلامة الأحيائية</th>
 						<th class="tableHeaderTop tableHeaderBottom left-border"
-							ng-if="showDatabase=='showBiostradestatus'"><a rel="noopener" translation-url target="_blank" href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">Biostradestatus <i class="fa fa-external-link"></i></a></th>
+							ng-if="showDatabase=='showBiostradestatus'"><a rel="noopener" translation-url target="_blank" href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">قاعدة بيانات BIOTradeStatus <i class="fa fa-external-link"></i></a></th>
 					</tr>
 
 					<tr ng-repeat="country in lmo.countries | filter:isCountryVisible | orderBy:getCountryName">

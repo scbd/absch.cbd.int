@@ -1,0 +1,17 @@
+﻿<div id="RegisterPage" dir="rtl">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+
+    <div smooth-scroll duration="100" offset="200"></div><span register-top-menu dir="rtl"></span><div class=" innerPageContent register-content card-1-notrans m-0 mb-5 p-3">
+
+        <div class="register-content-header bg-darkgrey color-white">
+            <div class="p-2">
+                <h3 class="float-start display-content">الإخطارات <span class="helpinfoInline"><i class="fa fa-info-circle helpicon float-end" ng-click="showInfo = !showInfo"></i></span></h3><a rel="noopener" type="button" class="fw-bold color-white float-end pe-2" href="register/user-preferences">Manage your email notifications</a> <!--help info----------------------------><div ng-if="showInfo" class="p-3 card well-help">تحتوي هذه الصفحة على جميع الإخطارات الصادرة من جميع غرف تبادل المعلومات التابعة لاتفاقية التنوع البيولوجي (وهي غرفة تبادل المعلومات بشأن اتفاقية التنوع البيولوجي، وغرفة تبادل معلومات السلامة الأحيائية، وغرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع). The clearing-house has a system of internal notifications to deal with requests for publications, reminders to update records, or notifying that certain records might be expiring. تتيح لك هذه الصفحة متابعة حالة السجلات ومعرفة الطلبات المعلقة للمطبوعات والمنشورات، أو معرفة الطلبات التي تم اعتمادها، أو سحبها أو رفضها في أي منصة من غرف تبادل المعلومات التابعة لاتفاقية التنوع البيولوجي.</div>
+
+            </div>
+        </div>
+        <div class="register-content-content">
+            <xuser-notifications-panel></xuser-notifications-panel>
+        </div>
+    </div>
+</div><!-- controller -->

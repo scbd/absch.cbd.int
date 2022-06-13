@@ -14,17 +14,17 @@
                         <div class="col-xs-12">
                             <div class="control-group">
                                 <div style="border-bottom: 1px solid #eee;padding: 5px 0px 5px 0px;"><strong><span ng-bind="commentsCount"></span></strong> 评论&nbsp;&nbsp;&nbsp;<div class="btn-group">
-                                        <button type="button" style="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span ng-show="newest==false" style="color:#428BCA">旧到新</span> <span ng-show="newest || newest==null" style="color:#428BCA">新到旧</span> <span class="caret"></span></button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown"><span ng-show="newest==false" style="color:#428BCA">旧到新</span> <span ng-show="newest || newest==null" style="color:#428BCA">新到旧</span> <span class="caret"></span></button>
                                         <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
-                                            <li><a rel="noopener" translation-url  ng-href="#" ng-click="newest=false"><span ng-show="newest==false" class="glyphicon glyphicon-ok"></span>旧到新</a></li>
-                                            <li><a rel="noopener" translation-url  ng-href="#" ng-click="newest=true"><span ng-show="newest==true || newest==null" class="glyphicon glyphicon-ok"></span>新到旧</a></li>
+                                            <li><a rel="noopener" translation-url  ng-href="#" ng-click="newest=false"><span ng-show="newest==false" class="bi bi-ok"></span>旧到新</a></li>
+                                            <li><a rel="noopener" translation-url  ng-href="#" ng-click="newest=true"><span ng-show="newest==true || newest==null" class="bi bi-ok"></span>新到旧</a></li>
                                         </ul>
                                     </div>
                                 </div>
 
                                 <div class="km-control-group" required caption="加入讨论"><br/><textarea ng-model="post.message" rows="3" placeholder="" class="form-control" />
                                 </div>
-                                <div class="km-control-group pull-right">
+                                <div class="km-control-group float-end">
                                     <input type="button" ng-click="post()" class="btn btn-primary" value="Post" />
                                 </div>
                             </div>

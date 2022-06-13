@@ -27,11 +27,11 @@
                     <div ng-show="workFlowIsCreatedByMe()">
                         <button type="button" class="btn btn-warning bold" ng-click="askCancelWorkflowRequest()" ng-disabled="isUpdating"><i class="fa fa-rotate-left"></i> <span>Annuler la demande</span></button>
                     </div>
-                    <div ng-if="isAdmin()"><br/> <strong>Le flux de travail est attribué aux utilisateurs suivants</strong> (visible uniquement pour les utilisateurs administrateurs)<table class="table table-bordered">
+                    <div ng-if="isAdmin()"><br/> <strong>The workflow is assigned to following users</strong> (visible only to admin users)<table class="table table-bordered mt-2">
                             <tr ng-repeat="user in activity.assignedTo_info">
                                 <td ng-bind="user.userID"></td>
-                                <td ng-bind="user.firstName + ' ' + user.lastName"></td>
-                                <td ng-bind="user.email"></td>
+                                <td class="ps-2" ng-bind="user.firstName + ' ' + user.lastName"></td>
+                                <td class="ps-2" ng-bind="user.email"></td>
                             </tr>
                         </table>
                     </div>
@@ -56,7 +56,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning bold pull-left" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Rejeter</button>
+                <button type="button" class="btn btn-warning bold float-start" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Rejeter</button>
                 <button type="button" class="btn btn-default" ng-click="closeDialog();">Annuler</button>
             </div>
         </form>
@@ -84,7 +84,7 @@
         <div class="modal-body bg-white">
            <h2 class="color-red">Êtes-vous sûr de vouloir supprimer cette demande de publication?</h2><span ng-bind="document"></span></div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger bold pull-left" ng-click="updateActivity()" ng-disabled="isUpdating"><span class="hidden-xs">Supprimer un dossier</span></button>
+            <button type="button" class="btn btn-danger bold float-start" ng-click="updateActivity()" ng-disabled="isUpdating"><span class="hidden-xs">Supprimer un dossier</span></button>
             <button type="button" class="btn btn-default" ng-click="closeConfirmation()" ng-disabled="isUpdating"><span class="hidden-xs">Fermer</span></button>
         </div><!--</div> --></script>
 

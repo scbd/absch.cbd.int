@@ -1,10 +1,10 @@
 ﻿<div>
-        <div class="pull-right" style="text-transform: uppercase;font-size: 10px;"><a rel="noopener" href="" class="color-grey" ng-click="expand=!expand; expandAll(expand);"><span ng-if="!expand">+ развернуть</span> <span ng-if="expand">- свернуть</span></a> <!-- &nbsp; | &nbsp; print &nbsp; | &nbsp; email  --></div><br><h2 class="color-green bold" style="padding:0;margin:0;" >{{title}}</h2> 
+        <div class="float-end" style="text-transform: uppercase;font-size: 10px;"><a rel="noopener" href="" class="color-grey" ng-click="expand=!expand; expandAll(expand);"><span ng-if="!expand">+ развернуть</span> <span ng-if="expand">- свернуть</span></a> <!-- &nbsp; | &nbsp; print &nbsp; | &nbsp; email  --></div><br><h2 class="color-green bold" style="padding:0;margin:0;" >{{title}}</h2> 
 
         <table ng-show="search" style="width:100%;">
             <tr><!-- <td ng-show="categories">
                   <div class="dropdown" >
-                      <button style="border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                      <button style="border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                           All categories <span class="caret"></span>
                       </button>
                       <ul class="dropdown-menu" ng-repeat="category in articleCategories">
@@ -12,7 +12,7 @@
                       </ul>
                   </div>
               </td> --><td style="width:100%;">
-                  <input style="width:100%;border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" ng-model="searchText" placeholder="Что вы ищете?"> 
+                  <input style="width:100%;border-radius: 2px; padding: 12px 20px;border:solid 1px #ddd;" ng-model="searchText" placeholder="Что вы ищете?" /> 
               </td>
           </tr>
        </table><br><div ng-repeat="article in articles | filter:searchText | orderBy:'title.en' " style="cursor:pointer" >

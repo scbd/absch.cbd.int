@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
-		<h4 ng-show="display('header')"><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4 ng-show="display('header')"><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
-	<div class="record-body panel-body">
+	<div class="record-body panel-body bg-white">
 
 			
 		<document-date></document-date>
@@ -44,9 +44,7 @@
 
 		<div ng-show="document.status">
 			<label>Statut actuel de la mesure</label>
-			<div compare-val>
-				<km-value-ml value="document.status" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value" compare-val><span ng-bind="document.status|term:locale"></span></div>
 		</div>
 
 		<div ng-show="document.adoption">
@@ -72,18 +70,15 @@
 
 		<div ng-show="document.type">
 			<label>Type de document/mesure</label>
-			<div  compare-val>
-				<km-value-ml value="document.type" locales="locale"></km-value-ml>
-			</div>
+			<div class="km-value"  compare-val><span ng-bind="document.type|term:locale"></span></div>
 		</div>
 
 		<div ng-show="document.isModelContractualClause">
 			<label>La mesure comporte des clauses contractuelles types</label>
 			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription"><span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span></div>
-		</div>
-		<div ng-show="document.registeredMeasuresDescription">
+		</div><!-- ToDo: will we use this ?, we don't have this in edit  --><div ng-show="document.registeredMeasuresDescription">
 			<div class="km-value km-pre" compare-val>
-				<km-value-ml value="document.registeredMeasuresDescription | lstring:locale"></km-value-ml>
+				<km-value-ml value="document.registeredMeasuresDescription" locale="locale"></km-value-ml>
 			</div>
 		</div>
 

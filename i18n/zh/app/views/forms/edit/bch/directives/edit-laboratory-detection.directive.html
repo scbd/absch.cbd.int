@@ -1,4 +1,4 @@
-<div id="innerPageEditForm editLaboratoryDetectionSection" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true"></span><div class="registerpage-content">
+<div class="innerPageEditForm editLaboratoryDetectionSection"><span block-region activate="status=='loading'" ng-if="status=='loading'" update-parent-position="true"></span><div class="registerpage-content">
 
         <div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -6,8 +6,8 @@
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
-                <form name="editForm" class="editForm" style="margin-top:10px">
-                    <div class="well no-shadow bg-white">
+                <form name="editForm mt-2" class="editForm">
+                    <div class="no-shadow bg-white">
                         <legend>一般信息</legend>
                         <div class="row">
                             <div class="col-xs-12" >
@@ -35,7 +35,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>实验室详细信息</legend>
                         <div class="row">
                             <div class="col-xs-12">
@@ -90,7 +90,7 @@
                                             <table class="table" style="padding-bottom:3px;width:100%;">
                                                 <tr ng-repeat="doc in $parent.model"  >
                                                     <td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.removeDocument(doc);" class="link color-red"><i class="fa fa-times"></i></a></td>
-                                                    <td style="margin-bottom:20px;">
+                                                    <td class="mb-4">
                                                         <div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
                                                     </td>
                                                 </tr>
@@ -110,12 +110,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>确认或更新信息的时间表</legend>
                         <div class="help-info">请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。在此阶段之后，如果没有收到确认，该记录将被标记为“未确认”。</div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>补充信息</legend>
                         <div class="row">
                             <div class="col-sm-12">
@@ -135,7 +135,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>备注</legend>								
                         <div class="row">
                             <div class="col-md-12">

@@ -1,6 +1,6 @@
 {
   "exportButton": "",
-  "dialogTitle": "Экспорт результатов",
+  "dialogTitle": "",
   "downloadFormat": "Формат загрузки",
   "xls": "XLS (Excel)",
   "xlsx": "XLSX (Excel)",

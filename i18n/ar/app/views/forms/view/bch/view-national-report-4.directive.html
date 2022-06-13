@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default" dir="rtl">
 	<div class="panel-heading bg-blue">
-		<h4></h4>
+		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-white" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
-	<div class="record-body panel-body">
+	<div class="record-body panel-body bg-white">
 		<document-date></document-date>
    
 		<div view-national-report document="document" report-questions="nr4Data" locale="locale"></div>

@@ -33,9 +33,9 @@
 											<div class="col-xs-12">
 												<div class="km-control-group" name="type" caption="Тип контакта">												
 													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />Организация</label>
-													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Person</label>
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />Организация</label>
+													<label class="radio-inline ps-1">
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Person</label>
 												</div>
 											</div>
 										</div>
@@ -123,7 +123,7 @@
 			
 											<div class="row">
 												<div class="col-md-8">
-													<div class="km-control-group" name="organizationType" caption="Тип организации">
+													<div class="km-control-group organization-dropdown" name="organizationType" caption="Тип организации">
 														<div km-select name="organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
 													</div>
 												</div>
@@ -141,9 +141,9 @@
 													<div class="col-xs-12">
 														<div class="km-control-group" name="addressType" caption="Тип адреса">												
 															<label class="radio-inline">
-																<input type="radio" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />Использовать адрес организации</label>
-															<label class="radio-inline">
-																<input type="radio" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>Добавить персональные адресные данные, если они отличаются от адреса организации</label>
+																<input type="radio" class="me-1" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />Использовать адрес организации</label>
+															<label class="radio-inline ms-2">
+																<input type="radio" class="me-1" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>Добавить персональные адресные данные, если они отличаются от адреса организации</label>
 														</div>
 													</div>
 												</div>

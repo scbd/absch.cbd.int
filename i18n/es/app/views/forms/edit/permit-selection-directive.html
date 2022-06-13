@@ -5,7 +5,7 @@
                 <table class="table table-hover"  style="padding-bottom:3px;background-color:#fff">
     				<tr ng-repeat="doc in rawPermitSelected">{{doc}}<td><span class="latest-date">{{doc.createdDate_dt | formatDate}}</span> | <span class="latest-country">{{doc.government | term:locale}}</span> | <span>{{doc | uniqueID}}</span><div class="latest-title">{{doc.title_t}}</div>
     					</td>
-                        <td><span style="font-size: 16px; color: white;margin:0;padding:0;float:right;"><a rel="noopener" translation-url  ng-click="removePermit(doc)" class="btn btn-warning"><span class="glyphicon glyphicon-remove"></span>&nbsp;eliminar</a></span></td>
+                        <td><span style="font-size: 16px; color: white;margin:0;padding:0;float:right;"><a rel="noopener" translation-url  ng-click="removePermit(doc)" class="btn btn-warning"><span class="bi bi-remove"></span>&nbsp;eliminar</a></span></td>
     				</tr>
     			</table>
             </div>
@@ -27,17 +27,17 @@
                             <div km-select multiple required name="queryGovernment" ng-model="queryGovernment" items="options.government()" placeholder="Gobierno"></div>
                             <div km-select multiple required name="permitusage" ng-model="permitusage" items="options.usage()" placeholder="Propósito"></div>
                             <div km-select multiple required name="permitkeywords" ng-model="permitkeywords" items="options.keywords()" placeholder="Palabras clave"></div><span  class="dateBox" search-filter-dates title='Fecha de otorgamiento del permiso' query='permitIssuanceDate' field="expiration_s"></span><div class="btn-group" >
-                                <button type="button" style="button" class="btn btn-default dropdown-toggle"  data-toggle="dropdown"><span>Enmiendas</span><span ng-show="amendmentIntent==0"  style="color:#428BCA">: Enmendado</span> <span ng-show="amendmentIntent==1"  style="color:#428BCA">: Revocado</span> <span ng-show="amendmentIntent==-1" style="color:#428BCA">: Ninguna</span> <span class="caret"></span></button>
+                                <button type="button" style="button" class="btn btn-default dropdown-toggle"  data-bs-toggle="dropdown"><span>Enmiendas</span><span ng-show="amendmentIntent==0"  style="color:#428BCA">: Enmendado</span> <span ng-show="amendmentIntent==1"  style="color:#428BCA">: Revocado</span> <span ng-show="amendmentIntent==-1" style="color:#428BCA">: Ninguna</span> <span class="caret"></span></button>
                                 <ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
                                 <li ><a rel="noopener" translation-url  style="color:#999;" href ng-click="amendmentIntent=-2;" value="undefined"  ng-model="amendmentIntent" name="amendmentIntent">eliminar selección</a></li>
-                                <li><a rel="noopener" translation-url  href ng-click="amendmentIntent=-1;" value="-1"  ng-model="amendmentIntent" name="amendmentIntent"><span ng-show="amendmentIntent==-1" class="glyphicon glyphicon-ok"></span> none</a></li>
-                                <li><a rel="noopener" translation-url  href ng-click="amendmentIntent=0;" value="0"  ng-model="amendmentIntent" name="amendmentIntent"><span ng-show="amendmentIntent==0" class="glyphicon glyphicon-ok"></span> enmendado</a></li>
-                                <li ><a rel="noopener" translation-url  href ng-click="amendmentIntent=1;" value="1"  ng-model="amendmentIntent" name="amendmentIntent"><span ng-show="amendmentIntent==1" class="glyphicon glyphicon-ok"></span> revocado</a></li>
+                                <li><a rel="noopener" translation-url  href ng-click="amendmentIntent=-1;" value="-1"  ng-model="amendmentIntent" name="amendmentIntent"><span ng-show="amendmentIntent==-1" class="bi bi-ok"></span> none</a></li>
+                                <li><a rel="noopener" translation-url  href ng-click="amendmentIntent=0;" value="0"  ng-model="amendmentIntent" name="amendmentIntent"><span ng-show="amendmentIntent==0" class="bi bi-ok"></span> enmendado</a></li>
+                                <li ><a rel="noopener" translation-url  href ng-click="amendmentIntent=1;" value="1"  ng-model="amendmentIntent" name="amendmentIntent"><span ng-show="amendmentIntent==1" class="bi bi-ok"></span> revocado</a></li>
 
                             </ul>
                             </div>
                             <div class="btn-group uniqueId">
-                                <input type="textbox" ng-model="uniqueId" placeholder="Identificador único"  class="form-control" >
+                                <input type="textbox" ng-model="uniqueId" placeholder="Identificador único"  class="form-control" />
                             </div>
                         </div>
                 </div>
@@ -51,7 +51,7 @@
             							</td>
             							<td><span class="latest-date">{{doc.createdDate_dt | formatDate}}</span> | <span class="latest-country">{{doc.government | term:locale}}</span> | <span>{{doc | uniqueID}}</span> <!-- <span class="latest-schema"> {{doc.schema_EN_t | schemaName}} </span> --><div class="latest-title">{{doc.title_t}}</div>
             							</td>
-                                        <td><a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}"><i class="glyphicon glyphicon-new-window" id="help-record-newwindow"></i></a></td>
+                                        <td><a rel="noopener" translation-url  target="_blank" href="/database/record?documentID={{doc.identifier_s}}&documentSchema={{doc.schema_EN_t}}"><i class="bi bi-new-window" id="help-record-newwindow"></i></a></td>
             						</tr>
 
             						<tr ng-show="rawPermitDocs.length==0">

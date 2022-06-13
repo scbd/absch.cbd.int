@@ -1,0 +1,111 @@
+﻿<div  id="RegisterPage" dir="rtl">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><div class="innerPageContent register-content card card-1-notrans m-0 mb-5 p-3">
+
+        <div class="register-content-header bg-darkgrey color-white">
+            <div class="p-2">
+                <h3></h3>
+            </div>
+        </div>
+        <div class="register-content-content">
+
+            <div class="registerpage-content mt-3">
+
+                <div class="alert alert-danger" ng-show="__error"></div>
+
+                <table>
+                    <tr>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <button type="button" ng-model="filterStatus" class="btn btn-default btn-sm dropdown-toggle"
+                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                                <ul class="dropdown-menu">
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                    <li></li>
+                                </ul>
+                            </div>
+                        </td>
+                        <td>
+                                <div class="row">
+                                        <div class="col-12">
+                                            <div class="float-start">
+                                                <km-select  ng-model="filterType" multiple binding-type="string" placeholder="Record Type" items="options.filterTypes()"></km-select>
+                                            </div>
+                                        </div>
+                                    </div>
+                        </td>
+                        <td class="w-100">
+                                <div class="mt-1 ms-3 text-lowercase"></div>
+                        </td>
+                    </tr>
+                </table>
+
+                <div class="table p-1">
+
+                    <div class="row header1 bold p-1 pb-3 regeister-request">
+                        <div class="col-12 col-sm-6"></div>
+                        <div class="col-lg-2 d-none d-lg-flex"></div>
+                        <div class="col-md-3 col-lg-2 d-none d-md-flex text-left"></div>
+                        <div class="col-md-3 col-lg-2 d-none d-md-flex text-left"></div>
+                    </div>
+
+                    <div id="taskList"><div ng-repeat="task in tasks| orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
+                            <div class="row border-bottom p-1">
+                                <div class="col-12 col-sm-6"></div>
+
+                                <div class="col-md-2 hidden-xs hidden-sm text-uppercase fw-bold fs-small-8" ></div>
+
+                                <div class="col-sm-3 col-md-2 hidden-xs "><div class="text-lowercase fw-bold fs-small-8" ng-bind="task.workflow.createdOn | moment:'fromNow'"></div></div>
+                                <div class="col-sm-3 col-md-2 hidden-xs" ><div ng-switch="task.workflow.state">
+                                        <div ng-switch-when="completed">
+                                            <div ng-show="task.activity.completedOn && task.activity" ng-switch="task.activity.result.action"><div class="text-lowercase fw-bold pt-1 fs-small-8" ng-bind="task.activity.completedOn | moment:'fromNow'"></div><div class="text-lowercase fw-bold fs-small-8" ng-bind="task.activity.completedOn | moment:'fromNow'"></div></div>
+                                        </div>
+                                        <div ng-switch-when="canceled" class='bold'></div>
+                                        <div ng-switch-when="timedOut" class='bold'></div>
+                                        <div ng-switch-when="running">
+                                            <div ng-if="task.workflow.workflowExpiryDate < today" class='bold'></div>
+                                            <div ng-if="task.workflow.workflowExpiryDate >= today" class='bold'></div>
+                                            <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating"></div>
+                                        </div>
+                                    </div>
+                                    <div ng-show="task.activity.isUpdating"></div>
+                                </div>
+                                <div ng-if="tasksDisplay" class="col-xs-12">
+                                    <div task-id class="record-body" load-task-data='formLoading' workflow-task-id="{{task.workflow._id}}"
+                                        on-activity-update="updateWorkflowList(document, workflowInfo)"></div>
+                                </div>
+                            </div>
+                            <div class="row" ng-repeat="history in task.workflowHistory|orderBy:createdOn:true" ng-show="showHistory"><div ng-if="$first==false"><div class="col-3"></div>
+                                    <div class="col-5"></div>
+                                    <div class="col-2 "><div ng-bind="history.workflow.createdOn|date:'short'"></div>
+                                        <div></div>
+                                    </div>
+                                    <div class="col-2 ps-0"><div ng-switch="history.workflow.state">
+                                            <div ng-switch-when="completed">
+                                                <div ng-show="history.activity.completedOn"></div>
+                                            </div>
+                                        </div>
+                                        <div ng-show="history.workflow.state!='completed'">
+                                            <div ng-hide="history.activity.name='publishRecord'" ng-bind="history.activity.name+'*'"></div>
+                                        </div>
+                                    </div></div>
+                            </div>
+
+                        </div>
+                        <h4 class="m-3 text-secondary" ng-show="!tasks || tasks.length==0"></h4>
+                    </div>
+                </div>
+
+            <div pagination ng-if="itemCount > itemsPerPage" class="text-center" current-page="currentPage" page-count="pageCount"
+                page-size="itemsPerPage" num-found="itemCount" on-page-size-changed="onPageSizeChanged(size)"
+                on-page-change="onPageChange(page)"></div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -15,7 +15,7 @@
 
 					<div ng-show="tab=='edit'" km-tab="edit">
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 
 								<legend>Общая информация</legend>
 
@@ -88,7 +88,7 @@
 												</div>
 												<div class="col-md-1" ng-hide="!isGlobalOrRegional()">и/или</div>
 												<div class="col-md-3">
-													<div class="km-control-group" style="text-align: left;"  caption="">
+													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">Страна(-ы)</label>
 														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
 													</div>
@@ -99,7 +99,7 @@
 
 								<div class="row" ng-if="document.geographicScope && isSubnational()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countryRegions" caption="">
+										<div class="km-control-group countries-dropdown" name="countryRegions" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">Страна(-ы)</label>
 											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
 										</div>
@@ -113,7 +113,7 @@
 								</div>
 								<div class="row" ng-if="document.geographicScope && isCommunity()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countries" caption="">
+										<div class="km-control-group countries-dropdown"  name="countries" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">Страна(-ы)</label>
 											<div km-select multiple required ng-model="countryRegions.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
 										</div>
@@ -163,14 +163,15 @@
 																		style="display:inline-block;width:100px"/>
 																</div>
 																<div class="col-md-2">
-																	<div class="km-control-group" name="durationText" caption="">
-																		<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																	<div name="durationText" caption="">
+																		<div style="display: none;" name="durationText">
 																			<label name="durationText" for="durationText">Продолжительность периода в днях/месяцах/годах</label>
 																		</div>
-																		<select name="durationText" ng-model="document.durationText"  class="form-control"
+																		<select name="durationText" ng-model="document.durationText"  class="form-control form-select"
 																			style="display:inline-block;width:100px" placeholder="eg. Months"
 																			ng-options="obj.value as obj.text for obj in timing">
 																		</select>
+																		
 																	</div>
 																</div>
 															</div>
@@ -183,13 +184,13 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="activityScope" caption="Тип инициативы по развитию потенциала">
-											<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="Тип инициативы по развитию потенциала">
+											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row mt-2">
 									<div class="col-md-12">
 										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Является ли она частью более крупного проекта или более крупной программы?">
 											<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
@@ -214,12 +215,12 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required  caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
 											<div class="help-info">В некоторых случаях учреждение может выполнять функции как осуществляющего, так и исполняющего учреждения. В таких случаях отметьте обе ячейки.</div>
-											<div class="checkbox"><label for="isImplementedByAgencies"><input type="checkbox" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)">Implementing agency(ies) or organization(s)</label></div>
+											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Implementing agency(ies) or organization(s)</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Выберите осуществляющее(-ие) учреждение(-я) или осуществляющую(-ие) организацию(-и)">
-														<div class="help-info">Осуществляющее учреждение — это организация или юридическое лицо, которая/которое отвечает за разработку инициативы и надзор за ее осуществлением, контроль и оценку, включая привлечение средств, обеспечение соблюдения фидуциарных стандартов и контроля качества, а также подготовку докладов о завершении проектов. В конечном счете именно осуществляющее учреждение отвечает за реализацию инициативы и подотчетно донору.</div>
+														<div class="help-info pt-1">Осуществляющее учреждение — это организация или юридическое лицо, которая/которое отвечает за разработку инициативы и надзор за ее осуществлением, контроль и оценку, включая привлечение средств, обеспечение соблюдения фидуциарных стандартов и контроля качества, а также подготовку докладов о завершении проектов. В конечном счете именно осуществляющее учреждение отвечает за реализацию инициативы и подотчетно донору.</div>
 
 														<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
@@ -227,21 +228,21 @@
 												</div>
 											</div>
 
-											<div class="checkbox"><label for="isExecutededByAgencies"><input id="isExecutededByAgencies" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)">Учреждение(-ия)-исполнитель (исполнители) или организация(-ии)-исполнитель (исполнители)</label></div>
+											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />Учреждение(-ия)-исполнитель (исполнители) или организация(-ии)-исполнитель (исполнители)</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Выберите учреждение(-ия)-исполнитель (исполнители) или организацию(-ии)-исполнитель (исполнители)">
-														<div class="help-info">Учреждение-исполнитель — это организация/учреждение, которая/которое непосредственно занимается управлением инициативой, в том числе повседневной деятельностью по планированию, координацией и организацией ее мероприятий, отслеживанием хода осуществления и представлением соответствующей отчетности, закупочной деятельностью и управлением ресурсами (персоналом, средствами, оборудованием и т. д.), а также выполнением других функций по управлению проектами.</div>
+														<div class="help-info pt-1">Учреждение-исполнитель — это организация/учреждение, которая/которое непосредственно занимается управлением инициативой, в том числе повседневной деятельностью по планированию, координацией и организацией ее мероприятий, отслеживанием хода осуществления и представлением соответствующей отчетности, закупочной деятельностью и управлением ресурсами (персоналом, средствами, оборудованием и т. д.), а также выполнением других функций по управлению проектами.</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners"><input type="checkbox" id="isCollaboratededByPartners" ng-model="document.isCollaboratededByPartners">Сотрудничающий(-ие) партнер(ы)</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />Сотрудничающий(-ие) партнер(ы)</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Выберите сотрудничающего(-их) партнера(-ов)">
-														<div class="help-info">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or actively supporting or collaborating in the implementation of the initiative.</div>
+														<div class="help-info pt-1">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or actively supporting or collaborating in the implementation of the initiative.</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
@@ -253,7 +254,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Подробная информация</legend>
 
 								<div class="row">
@@ -282,7 +283,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Информация о тематическом охвате инициативы</legend>
 								<div class="row">
 									<div class="col-md-12">
@@ -328,7 +329,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Информация о финансировании</legend>
 
 								<div class="row">
@@ -368,7 +369,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="totalBudget" caption="Общий бюджет (сумма в долл. США)">
 											<div class="help-info">Может включать взносы натурой в денежном выражении. При вводе суммы не используйте пробелы, точки или запятые.</div>
-											<div class="input-group"><span class="input-group-addon">долл. США</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
+											<div class="input-group"><span class="input-group-text">долл. США</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
 											</div>
 										</div>
 									</div>
@@ -377,7 +378,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Итоги мероприятий по развитию потенциала</legend><strong>Результаты</strong><div class="help-info">Данная информация может предоставляться после того, как будут получены некоторые результаты (промежуточные, конечные результаты или отдача) или подытожены передовые методы и уроки, извлеченные из реализуемой или завершенной инициативы.</div>
 									<div class="km-control-group" name="resultsAchievements" caption="">
 										<div class="row">
@@ -415,7 +416,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Дополнительная информация</legend>
 								<div class="row">
 									<div class="col-md-12">

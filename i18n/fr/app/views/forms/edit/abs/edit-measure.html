@@ -2,7 +2,7 @@
 
     <edit-header></edit-header>
 
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
             <div>
                 <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -10,7 +10,7 @@
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         
-                    <form class="editForm" name="editForm" style="margin-top:10px">
+                    <form class="editForm mt-2" name="editForm">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <legend name="formInfo" style="display:none"></legend>
@@ -24,11 +24,11 @@
                                                 <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
                                             </div>
                                         </div>
-                                    </div><!-- IF NO SECTION --><div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    </div><!-- IF NO SECTION --><div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="no-shadow py-0">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">Si non, l’information suivante n’est pas requise.</h3>
-                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">Veuillez sélectionner le fichier enregistré préalablement à modifier.</h3>
+                                                <h3 ng-show="!document.isAmendment" class="color-black">Si non, l’information suivante n’est pas requise.</h3>
+                                                <h3 ng-show="document.isAmendment==true" class="color-black">Veuillez sélectionner le fichier enregistré préalablement à modifier.</h3>
     
                                                 <div class="km-control-group">
                                                     <div class="km-control-group" name="amendedMeasures" caption="Liste des mesures modifiées">
@@ -74,12 +74,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-sm-12">
                                             <div required class="km-control-group" name="status" caption="Statut légal de la mesure">
                                                 <div class="help-info">Parmi les exemples de mesures APA non juridiquement contraignantes se trouvent les stratégies nationales, les documents stratégiques, les lignes directrices, etc. Lorsqu’il s'agit d’une mesure non juridiquement contraignante APA, la date d'adoption doit être fournie. Une mesure est juridiquement contraignante lorsqu’elle engendre des obligations et des droits qui sont exécutoire selon la loi. Dans ce cas, la date d’entrée en vigueur de la mesure APA doit être fournie. Les mesures contenues dans le format brouillon peuvent également être incluses dans le Centre d’échange dans le but de partager l’information sur les progrès accomplis lors de la mise en œuvre. Une fois le projet de mesure adopté ou entré en vigueur, le statut de la mesure peut être mise à jour sans avoir besoin d’enregistrer à nouveau les informations existantes. Parfois les mesures ont une application limitée dans le temps. Si vous introduisez ce type de mesure, vous êtes tenu d’inclure la date d'expiration. Le fait d’inclure les mesures ayant été retirées peut être utile pour assurer la sécurité juridique sur les ressources génétiques et les connaissances traditionnelles associées ayant été accédées dans un cadre juridique antérieur. Si une mesure déjà enregistrée au Centre d’échange APA est retirée ou ne s’applique plus, il vous suffit d’éditer la mesure et de changer son statut pour « retiré »,  en indiquant la date à partir de laquelle la mesure n'est plus applicable</div>
-                                                <div style="width:250px;" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Sélectionnez le statut légal..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Sélectionnez le statut légal..."></div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12">
                                             <div ng-show="isNotLegallyBinded()">
@@ -106,7 +108,7 @@
     
     
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-12 label-weight">
                                             <div class="km-control-group" required name="type" caption="Type de document/mesure">
                                                 <div km-term-radio name="type" ng-model="document.type" terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
     
@@ -124,11 +126,11 @@
     
                                     <div class="row">
     
-                                        <div class="col-xs-12">
+                                        <div class="col-sm-12">
                                             <div class="km-control-group" required name="jurisdiction" caption="Domaine de juridiction">
                                                 <div class="help-info">Veuillez spécifier l’aire géographique d'application de cette mesure APA. La mesure peut s’appliquer aux échelons régional, multilatéral, national, fédéral, sous-national ou à l’échelle communautaire. Pour les mesures multilatérales ou régionales, veuillez indiquer quels pays sont couverts par la mesure en sélectionnant à partir du menu déroulant l’aire géographique pertinente ou le groupe politique ou économique. La liste est exhaustive ; il est donc probable que le groupe spécifique auquel s'applique la mesure soit déjà répertorié. Cependant, si la mesure s’applique à un groupe de pays qui n'est pas couvert par les groupes existants, sélectionnez chaque pays concerné par la mesure séparément dans le menu déroulant.</div>
     
-                                                <div style="width:250px;" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Sélectionnez une aire de juridiction..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Sélectionnez une aire de juridiction..."></div>
                                                 <div ng-if="isJurisdictionRegional()">
                                                     <div class="color-red" ng-if="!document.government.identifier">Veuillez d’abord choisir un pays.</div>
                                                 </div>
@@ -174,7 +176,7 @@
                                             <div class="km-control-group" name="isModelContractualClause" caption="Est-ce que la mesure comporte des clauses contractuelles types?">
                                                 <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                                                 <div ng-show="document.isModelContractualClause">
-                                                    <div class="km-control-group" style="margin:10px;" name="modelContractualClauseDescription" caption="Veuillez fournir des informations complémentaires.">
+                                                    <div class="km-control-group m-2" name="modelContractualClauseDescription" caption="Veuillez fournir des informations complémentaires.">
                                                         <div km-textbox-ml ng-model="document.modelContractualClauseDescription" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -241,7 +243,7 @@
                                     <legend>Coordonnées du correspondant pour la réglementation</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="authorities" caption="Coordonnées de l’institution">
+                                            <div class="km-control-group color-darkgrey" required name="authorities" caption="Coordonnées de l’institution">
     
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
                                                            allow-new="true" allow-new-schema="contact"></div>
@@ -265,11 +267,12 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading"><span ng-class="{'confidential-text':document.absMesasureNotApplicable}"><input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items>Les éléments ne s’appliquent pas à la mesure.</input></span></div>
+                                                <div class="panel-heading"><span ng-class="{'confidential-text':document.absMesasureNotApplicable}"><input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items />Les éléments ne s’appliquent pas à la mesure.</span>
+                                                </div>
                                                 <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absMesasureNotApplicable}">
                                                     <div class="km-control-group"  name="absMeasures" required caption="">
                                                         <div class="help-info"></div>
-                                                        <div layout="row" style="margin-bottom:20px;">
+                                                        <div layout="row mb-4">
                                                              <div class="help-info" >Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. Cette information aidera à rendre les informations disponibles pour le cadre juridique national afin  d’aider les usagers potentiels à comprendre l'accès et le partage des avantages et le respect des exigences de votre pays. Parfois, le contenu et les éléments de la mesure sont liés aux objectifs et aux plans pour la mise en œuvre nationale de l’APA. Cela pourrait être le cas, pour des stratégies et plans d'action APA par exemple. Dans de tels cas, vous pourrez indiquer les éléments de la mesure qui ne sont pas applicables en cliquant sur la case à cocher ci-dessous.</div>
                                                         </div>
                                                         <div edit-measure-matrix name="absMeasuresMatrix" required ng-model="document.absMeasures" locales="document.header.languages" document="document" ng-disabled="document.absMesasureNotApplicable"

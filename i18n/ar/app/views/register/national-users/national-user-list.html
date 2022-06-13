@@ -1,0 +1,112 @@
+﻿<div id="RegisterPage" dir="rtl">
+
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu dir="rtl"></span><style> .ngdialog-content { background: transparent !important; } .ngdialog.ngdialog-theme-default.wide .ngdialog-content { width: 750px !important; } </style>
+
+
+    <div class="innerPageContent register-content card card-1-notrans mb-5">
+
+        <div class="register-content-header bg-darkgrey text-white">
+            <div class="p-2">
+                <h3>إدارة المستخدمين <span class="helpinfoInline"><i class="bi bi-info-circle-fill helpicon float-end" ng-click="showInfo = !showInfo"></i></span></h3><!--help info----------------------------><div ng-if="showInfo" class="p-3 card well-help"><strong>إدارة المستخدمين للمستخدمين المفوضين في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع</strong><p>تتيح هذه الصفحة لنقاط الاتصال الوطنية تعيين أو إجراء تغييرات في تعيين سلطة النشر، وتتيح لسلطة النشر تعيين أو تحديث المستخدمين الوطنيين المفوضين. فيما يلي جميع المستخدمين المفوضين في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع الذين حصلوا على صلاحية تعديل السجلات الوطنية لبلدك. يمكنك تحديد حساب معين في موقع اتفاقية التنوع البيولوجي والضغط على تعديل لتعيين/رفض الأدوار (على سبيل المثال تغيير سلطة النشر أو حذف المستخدم الوطني المفوض). If a person already holding a CBD account does not appear as an ABS-CH authorized user for your country, you can find them by clicking ‘Add Authorized User’. من خلال هذه الميزة، يمكنك البحث في كل حسابات اتفاقية التنوع البيولوجي باستخدام عناوين البريد الإلكتروني وإسناد دور لهم كسلطة نشر أو كمستخدم وطني مفوض. تتيح لك هذه الميزة أيضًا إسناد أدوار لشخص ليس لديه بعد حساب في موقع اتفاقية التنوع البيولوجي. To do this, click on ‘Add Authorized User’, and enter an email address and other details of the person you wish to include as PA or NAU. سترسل إليه غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع رسالة آلية بالبريد الإلكتروني تطلب منه تفعيل حسابه. بعد تفعيل الحساب في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع يمكنه بدء العمل على السجلات الوطنية.</p><strong>وظائف سلطات النشر</strong><p>سلطة النشر مسؤولة عن:<ul>
+                        <li>تفويض نشر كل السجلات الوطنية المسجلة في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع؛</li>
+                        <li>حذف السجلات المنشورة بالفعل في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع، إن كان ذلك ضروريًا؛</li>
+                        <li>Ensuring that the information made available in the ABS Clearing-House is complete, relevant and up-to-date; and</li>
+                        <li>الحرص على عدم نشر أي بيانات سرية في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع. لا تقبل غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع أي معلومات سرية، وجميع المعلومات المنشورة في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع متاحة لاطلاع الجميع ويستطيع الجمهور العام الاطلاع عليها.</li>
+                    </ul>
+                    </p><strong>وظائف المستخدمين الوطنيين المفوضين</strong><p>وظيفة المستخدمين الوطنيين المفوضين هي مساعدة سلطة النشر في إعداد مسودات السجلات الوطنية. يجوز للمستخدمين الوطنيين المفوضين فقط إنشاء وإدارة مسودات السجلات التي تم توجيهها لسلطة النشر من أجل نشرها.</p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="register-content-content">
+            <div class="row">
+
+
+                <div class="col-12" ng-show="error">
+
+                    <div ng-switch="error.code + '-' + error.field">
+                        <div class="alert alert-warning" ng-switch-when="mandatory-government"><b>لم ينجح الأمر...</b> غير مصرح لك بالوصول لهذه الصفحة. هذه الصفحة متاحة فقط للمستخدمين الوطنيين. يُرجى الاتصال برقم absch@cbd.int إذا احتجت للمساعدة.</div>
+                        <div class="alert alert-warning" ng-switch-when="forbidden-"><b>لم ينجح الأمر...</b> معذرة، ولكنك غير مفوض للوصول إلى هذه الصفحة.</div>
+                        <div class="alert alert-danger" ng-switch-default><b>لم ينجح الأمر...</b> معذرة. ثمة خطأ قد حدث.<span ng-bind="error|json"></span></div>
+                    </div>
+
+                </div>
+
+                <div class="offset-md-8 col-md-4" ng-hide="error">
+                    <div class="input-group mb-1">
+                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading"
+                            placeholder="البحث في قائمة المستخدمين الوطنيين..."><span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span></div>
+                </div>
+
+                <div class="col-12" ng-hide="error">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-light w-100">
+                            <thead>
+                                <tr class="text-secondary">
+                                    <th>المستخدم</th>
+                                    <th>المنظمة/الإدارة</th>
+                                    <th style="max-width:20rem">المهام</th>
+                                    <th class="text-end">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                            ng-click="search()" ng-disabled="loading || !canAdd()">Add <span class="d-none d-sm-inline">Authorized User</span> <i
+                                                class="bi bi-plus-circle"></i></button>
+                                    </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="text-secondary"
+                                ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
+                                <td><b><span ng-bind="u.firstName+' '+u.lastName"></span></b> <br> <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{u.email}}"
+                                        ng-bind="u.email"></a></td>
+    
+                                <td ng-bind="u.organization" class="fs-small-8"></td>
+    
+                                <td><span ng-repeat="rid in u.roles|filter:isContextRole"><span class="badge bg-secondary fw-bold fs-small-6"
+                                            ng-bind="roles[rid].name"></span> <br> </span> <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles"
+                                        ng-show="(u.roles|filter:isNotContextRole).length"><span ng-show="!u.showExtraRoles">عرض أدوار إضافية<i
+                                                class="fa fa-caret-down"></i></span> <span ng-show=" u.showExtraRoles">إخفاء الأدوار الإضافية <i
+                                                class="fa fa-caret-up"></i></span></a><div ng-if="u.showExtraRoles"><span ng-repeat="rid in u.roles|filter:isNotContextRole"><span class="badge bg-info fw-bold fs-small-6"
+                                                ng-bind="roles[rid].name"></span> <br> </span></div>
+                                </td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm mt-1" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="edit(u)"
+                                            ng-disabled="!canEdit(u)"><i class="bi bi-list-ul"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="dropUser(u)"
+                                            ng-disabled="!canDrop(u)"><i class="bi bi-trash-fill"></i></button>
+                                    </div>
+                                </td>
+    
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!users">
+                                <td colspan="4"><i class="fa fa-cog fa-spin fa-fw"></i> قيد التحميل ...</td>
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!!users">
+                                <td colspan="3"><span
+                                        ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span> | <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        ng-show="!$parent.showAll"
+                                        ng-click="$parent.showAll=true;$parent.searchText={}">عرض أكثر <i class="bi bi-caret-down-fill"></i></a> <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        ng-show=" $parent.showAll"
+                                        ng-click="$parent.showAll=false;$parent.searchText={}">عرض أقل <i class="bi bi-caret-up-fill"></i></a></td>
+                                <td class="text-end">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                     ng-click="search()" ng-disabled="loading || !canAdd()">إضافة مستخدم مفوض <i class="bi bi-plus-circle"></i></button>
+                                </td>
+                            </tr>
+                              </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

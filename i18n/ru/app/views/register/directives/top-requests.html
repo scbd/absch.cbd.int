@@ -1,17 +1,17 @@
 ﻿<div class="top-records" style="max-height:400px; padding-top:3px; overflow-y: scroll; margin-bottom:20px;" ng-show="tasks.length > 0">
 
-    <h4 style="margin-top:0; margin-bottom:0;  cursor: pointer; background-color: #f9f9f9; padding:5px;" ng-class="{'bg-white' : showAll }"></h4>
+    <h4 style="margin-top:0; margin-bottom:0;  cursor: pointer; background-color: #f9f9f9; padding:5px;" ng-class="{'bg-white' : showAll }"><span ng-click="showAll=!showAll"><i class="bi bi-arrow-down-circle-fill cursor-pointer" ng-show="!showAll" aria-hidden="true"></i> <i class="bi bi-arrow-up-circle-fill cursor-pointer" ng-show="showAll" aria-hidden="true"></i> Необработанные запросы <span class="badge" ng-class="{'color-white bg-red': isPA() }" style="position:relative;top:-2px;font-size:14px;" ng-bind="tasks.length"></span></span> <span class="float-end hidden-xs" style="padding-right:5px"><a rel="noopener" translation-url style="color:#999;" href="{{viewAllUrl}}">смотреть все запросы</a></span></h4>
 
-    <div style="font-size:12px; padding-bottom:10px;" ng-show="showAll"><div class="row" style="background-color:#f9f9f9;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
+    <div style="font-size:12px; padding-bottom:10px;" ng-show="showAll"><span ng-show="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> загрузка...</span><div class="row" style="background-color:#f9f9f9;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
             ng-click="gotoRequest(task.workflow.data.metadata.schema, task.identifier)" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"
             id="{{task.workflow._id}}">
 
-            <div class="col-xs-10 col-sm-5"></div>
-            <div class="col-xs-4  hidden-xs">
-                <div style="text-transform: uppercase;font-weight: bold; font-size:12px; "></div></div>
-            <div class="col-xs-3  hidden-xs">
-                <div style="font-size: 12px;" ng-if="task.workflow.workflowExpiryDate >= today" class='bold'></div>
-                <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating"></div>
+            <div class="col-sm-5"><span style="text-transform: uppercase;font-size:10px;font-weight: 450"><span ng-if="task.workflow.type.name =='publishReferenceRecord'" style="color:#888;">ОПУБЛИКОВАТЬ</span> <span ng-if="task.workflow.type.name =='publishNationalRecord' " style="color:#888;">ОПУБЛИКОВАТЬ</span> <span ng-if="task.workflow.type.name=='deleteRecord'" class=" color-red">УДАЛИТЬ</span> <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}"><span ng-bind="'- '+task.workflow.data.metadata.schema|schemaName"></span></span></span> <br> <span class="bold" style="font-size: 14px;" ng-bind="task.workflow.data.title | lstring"></span></div>
+            <div class="col-sm-4  hidden-xs">
+                <div style="text-transform: uppercase;font-weight: bold; font-size:12px; "><span ng-bind="task.workflow.createdOn | moment:'fromNow'"></span></div><a rel="noopener" style="color:#888; font-size: 12px;" href="mailto:{{task.workflow.createdBy_info.email}}">by <span ng-bind="task.workflow.createdBy_info.firstName+' '+task.workflow.createdBy_info.lastName+'('+task.workflow.createdBy_info.email+')'"></span></a></div>
+            <div class="col-sm-3  hidden-xs">
+                <div style="font-size: 12px;" ng-if="task.workflow.workflowExpiryDate >= today" class='bold'><span ng-if="task.workflow.type.name == 'publishReferenceRecord'" class="color-orange">PENDING SCBD REVIEW</span> <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"><i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> PENDING <span ng-if="roles.isPublishingAuthority">YOUR</span> <span ng-if="!roles.isPublishingAuthority && isBch">BCH-NFP</span> <span ng-if="!roles.isPublishingAuthority && !isBch">PA</span> APPROVAL</span></div>
+                <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating"><span style="color:#888; font-size: 12px;">Дата окончания срока действия <span ng-bind="task.workflow.workflowExpiryDate|formatDate"></span></span></div>
             </div>
         </div>
     </div>

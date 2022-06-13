@@ -1,6 +1,6 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading  bg-blue"> 
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
 	<div class="record-body panel-body">	
 			
@@ -11,10 +11,10 @@
 			<label>Nombre</label><span class="km-value">{{document.title | lstring:locale}} {{document.firstName | lstring:locale}} {{document.lastName | lstring:locale}}</span></div>
 		<div ng-if="document.categories">
 			<label>Tipo de punto focal</label><span class="km-value"><ul class="list">
-					<li ng-repeat="category in document.categories" ng-bind="nfpCategory(category)||category"></li>
+					<li ng-repeat="category in focalPointDetails.categoryIdentifiers" ng-bind="category|term"></li>
 				</ul></span></div>
-		<div ng-if="focalPointDetails.description_EN_t">
-			<label>Información personal</label><span class="km-value" ng-bind-html="focalPointDetails.description_EN_t"></span></div>
+		<div ng-if="focalPointDetails.address_EN_t">
+			<label>Dirección</label><span class="km-value" ng-bind-html="focalPointDetails.address_EN_t"></span></div>
 
 		<div ng-if="document.designation">
 			<label>Función</label><span class="km-value">{{document.designation|lstring:locale}}</span></div>

@@ -1,16 +1,16 @@
-﻿<div class="modal-content">
-    <style></style>
+<div class="modal-content">
+    <style> .has-error .fa-validate:before { content: "\f069"; color: #a94442; } .has-warning .fa-validate:before { content: "\f0a5"; color: #c09853; } .has-success .fa-validate:before { content: "\f00c"; color: #468847; } .help-block.error { text-transform: uppercase; font-size: 10px; font-weight: bold; margin-bottom: -10px; } .panel-identity { position: relative; padding-top: 19px; } .panel-identity:after { content: "Identity"; position: absolute; top: -1px; left: -1px; padding: 3px 7px; font-size: 12px; font-weight: bold; background-color: #f5f5f5; border: 1px solid #ddd; color: #9da0a4; height: 1.6em; line-height: 1em; -webkit-border-radius: 4px 0 4px 0; -moz-border-radius: 4px 0 4px 0; border-radius: 4px 0 4px 0; } </style>
 
     <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
-        <h3 class="modal-title"></h3>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">新用户 - <span ng-bind="editUserDialogCtrl.user.firstName+' '+editUserDialogCtrl.user.lastName"> <span ng-if="!editUserDialogCtrl.user.firstName && !editUserDialogCtrl.user.lastName">联系方式</span></h3>
         <h4 class="modal-title" ng-bind="editUserDialogCtrl.user.email"></h4>
     </div>
 
     <div class="modal-body">
         <form name="form" novalidate>
 
-            <p></p>
+            <p>请填写被提名人的以下基本联系方式信息</p>
 
             <div class="panel panel-default panel-identity" style="min-height:300px;position:relative">
                 <div class="panel-body">
@@ -18,17 +18,17 @@
 
                         <div class="col-sm-6 col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.firstName.$invalid }">
-                                <label for="firstName"></label>
-                                <input type="text" class="form-control" name="firstName" ng-model="editUserDialogCtrl.user.firstName" required>
-                                <p class="help-info error" ng-show="form.firstName.$invalid"></p>
+                                <label for="firstName">名字</label>
+                                <input type="text" class="form-control" name="firstName" ng-model="editUserDialogCtrl.user.firstName" required />
+                                <p class="help-info error" ng-show="form.firstName.$invalid">此字段为必填字段</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.lastName.$invalid }">
-                                <label for="lastName"></label>
-                                <input type="text" class="form-control" name="lastName" ng-model="editUserDialogCtrl.user.lastName" required>
-                                <p class="help-info error" ng-show="form.lastName.$invalid"></p>
+                                <label for="lastName">姓氏</label>
+                                <input type="text" class="form-control" name="lastName" ng-model="editUserDialogCtrl.user.lastName" required />
+                                <p class="help-info error" ng-show="form.lastName.$invalid">此字段为必填字段</p>
                             </div>
                         </div>
 
@@ -37,9 +37,9 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.organization.$invalid }">
-                                <label for="organization"></label>
-                                <input type="text" class="form-control" name="organization" ng-model="editUserDialogCtrl.user.organization" required>
-                                <p class="help-info error" ng-show="form.organization.$invalid"></p>
+                                <label for="organization">机构</label>
+                                <input type="text" class="form-control" name="organization" ng-model="editUserDialogCtrl.user.organization" required />
+                                <p class="help-info error" ng-show="form.organization.$invalid">此字段为必填字段</p>
                             </div>
                         </div>
                     </div>
@@ -47,11 +47,11 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.email.$invalid }">
-                                <label></label>
-                                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><input type="email" name="email" class="form-control" ng-model="editUserDialogCtrl.user.email" ng-disabled="true" placeholder="" required>
+                                <label>电子邮件</label>
+                                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><span class="input-group-text"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control" ng-model="editUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" required />
                                 </div>
-                                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email"></p>
-                                <p class="help-info error" ng-show="form.email.$error.email"></p>
+                                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">此字段为必填字段</p>
+                                <p class="help-info error" ng-show="form.email.$error.email">电子邮件无效或不完整</p>
                             </div>
                         </div>
                     </div>
@@ -61,7 +61,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()"></button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editUserDialogCtrl.save()" ng-disabled="form.$invalid"></button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">取消</button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editUserDialogCtrl.save()" ng-disabled="form.$invalid">下一条 »</button>
     </div>
 </div>

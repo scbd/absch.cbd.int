@@ -1,6 +1,6 @@
 ﻿<div >
     <edit-header></edit-header>
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -12,13 +12,13 @@
 
                         <div ng-show="tab=='edit'" km-tab="edit">
                             <section>
-                                <div class="well no-shadow bg-white">
-                                    <legend></legend>
+                                <div class="no-shadow bg-white">
+                                    <legend>Общая информация</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="header.languages" required
-                                                caption="">
+                                                caption="Выберите язык(и) для представления этой записи:">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages"
                                                         ng-model="document.header.languages"></div>
@@ -26,19 +26,19 @@
                                             </div>
                                         </div>
                                         <div class="col-md-5">
-                                            <div class="km-control-group" required name="government" caption=""
+                                            <div class="km-control-group" required name="government" caption="Страна"
                                                 required>
                                                 <div afc-autocomplete required name="government"
                                                     ng-disabled="document.organizations" ng-model="document.government"
                                                     source="options.countries" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true"
-                                                    placeholder=""></div>
+                                                    placeholder="Выберите страну..."></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">ИЛИ</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
-                                                caption="" required>
+                                                caption="Организация(-и)" required>
                                                 <div document-selector ng-model="document.organizations"  type="checkbox" ng-disabled="document.government" question="organizations"
                                                      on-build-query="onContactQuery(searchText)" allow-new-schema="organization">
                                                 </div>
@@ -49,32 +49,32 @@
                             </section>
 
                             <section>
-                                <div class="well no-shadow bg-white">
-                                    <legend></legend>
+                                <div class="no-shadow bg-white">
+                                    <legend>Представление информации</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="title"
-                                                caption="">
+                                                caption="Название представления">
                                                 <div km-textbox-ml ng-model="document.title" placeholder=""
                                                     locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="date"
-                                                caption=""
+                                                caption="Дата представления"
                                                  help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Submission">
-                                                <div km-date placeholder="" name="date" ng-model="document.date"></div>
+                                                <div km-date placeholder="ГГГГ-ММ-ДД" name="date" ng-model="document.date"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </section>
                             <section>
-                                <div class="well no-shadow bg-white">
+                                <div class="no-shadow bg-white">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notifications" caption="">
+                                            <div class="km-control-group" name="notifications" caption="Связанное(-ые) уведомление(-я)">
                                                 <div document-selector ng-disabled="!document.organizations && !document.government.identifier"
                                                     identifier-without-revision="true"
                                                     question="notifications" type="checkbox"
@@ -89,8 +89,11 @@
                                                         <table class="table" id="search-new"
                                                             style="padding-bottom:3px;width:100%;padding-top: 5ps;">
                                                             <tr ng-repeat="doc in notifications">
-                                                                <td style="margin-bottom:15px;width:15px;"></td>
-                                                                <td style="margin-bottom:20px;"><div ng-bind="doc.rec_summary"></div>
+                                                                <td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url
+                                                                        class="btn btn-default"
+                                                                        ng-click="$parent.$parent.removeDocument(doc)"
+                                                                        class="link color-red"><i class="fa fa-times"></i></a></td>
+                                                                <td style="margin-bottom:20px;"><span ng-bind="doc.rec_title"></span><div ng-bind="doc.rec_summary"></div>
                                                                 </td>
                                                             </tr>
                                                         </table>
@@ -102,7 +105,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="records"caption="">
+                                            <div class="km-control-group" name="records"caption="Связанная(-ые) запись(-и)">
                                                 <div document-selector ng-model="document.records" question="records" filter="true"
                                                      on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
@@ -112,8 +115,8 @@
                                 </div>
                             </section>
                             <section ng-if="isAbs">
-                                <div class="well no-shadow bg-white">
-                                    <legend></legend>
+                                <div class="no-shadow bg-white">
+                                    <legend>Тематические области</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -128,8 +131,8 @@
                             </section>
 
                             <section ng-if="isBch">
-                                <div class="well no-shadow bg-white">
-                                    <legend></legend>
+                                <div class="no-shadow bg-white">
+                                    <legend>Тематические области</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -143,11 +146,11 @@
                                 </div>
                             </section>
                             <section>
-                                <div class="well no-shadow bg-white">
-                                    <legend></legend>
+                                <div class="no-shadow bg-white">
+                                    <legend>Документы</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="relevantDocuments" required caption="">
+                                            <div class="km-control-group" name="relevantDocuments" required caption="Документы">
                                                 <div km-link name="relevantDocuments"
                                                     ng-model="document.relevantDocuments" allow-link="true"
                                                     allow-file="true" identifier="document.header.identifier"></div>
@@ -157,8 +160,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="relevantInformation"
-                                                caption="">
-                                                <div class="help-block"></div>
+                                                caption="Любая другая актуальная информация">
+                                                <div class="help-block">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4"
                                                     placeholder="" locales="document.header.languages"></div>
                                             </div>
@@ -168,12 +171,12 @@
                                 </div>
                             </section>
                             <section>
-                                <div class="well no-shadow bg-white">
-                                    <legend></legend>
+                                <div class="no-shadow bg-white">
+                                    <legend>Примечания</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notes"><div km-notes name="notes" ng-model="document.notes"></div>
+                                            <div class="km-control-group" name="notes"><span class="help-block">Поле «Примечания» предназначено для использования в ваших личных целях. Оно появляется только при редактировании записи и скрыто после ее публикации. Данное поле не предназначено для конфиденциальной информации.</span><div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
                                     </div>

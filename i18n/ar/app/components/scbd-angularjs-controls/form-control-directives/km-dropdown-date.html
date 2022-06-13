@@ -1,5 +1,5 @@
 ﻿<span dir="rtl"><script type="text/ng-template"  id="select-tree-renderer.html">
-		<a rel="noopener" ng-click="clicked(item)" href="" dir="rtl">{{item.title||item.name | lstring:locale | truncate:120:'...'}}</a> <i class="glyphicon glyphicon-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;" dir="rtl"></i><ul class="dropdown-inline-submenu" dir="rtl">
+		<a rel="noopener" ng-click="clicked(item)" href="" dir="rtl">{{item.title||item.name | lstring:locale | truncate:120:'...'}}</a> <i class="bi bi-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;" dir="rtl"></i><ul class="dropdown-inline-submenu" dir="rtl">
 			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" style="position:relative">
 		</ul>
 	</script>
@@ -13,7 +13,7 @@
 
 <ul class="nav nav-pills" dir="rtl">
   <li class="dropdown"><a rel="noopener" class="dropdown-toggle"
-       data-toggle="dropdown"
+       data-bs-toggle="dropdown"
        href="#" dir="rtl">القائمة المُنسدلة <b class="caret"></b></a><ul class="dropdown-menu"><span search-filter-dates title='تاريخ التنفيذ' query='adoptionDate'></span></ul>
   </li>
 </ul>

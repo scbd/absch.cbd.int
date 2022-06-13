@@ -1,92 +1,88 @@
-<div class="bs5" ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
-    <header class="bs5 new-css-sm-header px-3">
-        <nav class="bs5 navbar new-css-navbar-sm navbar-light bg-light rounded" >
+<div ng-class="{'bg-black': isTRG, 'bg-white':!isTRG}">
+    <header class="px-2 d-sm-none d-md-none">
+        <nav class="navbar navbar-sm navbar-light bg-light rounded" >
             <div ng-click="showNav = !showNav"  style="cursor: pointer;" >
-                <button class="bs5 navbar-toggler new-css-navbar-toggler collapsed" type="button" ><span class="bs5 navbar-toggler-icon"></span></button><span class="bs5 new-css-acronym fw-bold color-orange">BCH</span> <span class="bs5 fw-bold  fs-4 text-uppercase color-orange ">Biosafety Clearing-House</span> <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">DEVELOPEMENT</span> <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">TRAINING</span></div>
-              <div ng-if="showNav" class="bs5 navbar-collapse">
-                <ul class="bs5 navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url href=".">主页</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >About</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/search" >搜索</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/register" >提交</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >国家概况</a></li>
-                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >帮助</a></li><!--                    <li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>--><li class="bs5 nav-item"><a class="bs5 nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/onlineconferences" >论坛</a></li>
+                <button class="navbar-toggler collapsed px-2" type="button" ><span class="navbar-toggler-icon"></span></button><span class="realm-base-acronym fw-bold color-orange">BCH</span> <span class="fw-bold fs-md-4 text-uppercase color-orange ">Biosafety Clearing-House</span> <span ng-if="isDEV" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">DEVELOPEMENT</span> <span ng-if="isTRG" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">TRAINING</span></div>
+              <div ng-if="showNav" class="navbar-collapse">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url href=".">主页</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >About</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/search" >搜索</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/register" >提交</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >国家概况</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >帮助</a></li><!--                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>--><li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/onlineconferences" >论坛</a></li>
                 </ul>
               </div>
           </nav>
     </header>
 
-    <header class="bs5 new-css-header pt-4 new-css-lg-header">
-        <div class="bs5"><a href="." class="bs5 fw-bold new-css-acronym color-orange mx-3 mx-md-3 px-md-3 px-lg-5">BCH <span class="bs5 fw-bold new-css-ch-name">Biosafety Clearing-House</span> <span ng-if="isDEV" class="bs5 fs-3 fw-bold  bg-yellow badgetext-uppercase link-dark">DEVELOPEMENT</span> <span ng-if="isTRG" class="bs5 fs-3 fw-bold bg-yellow badge text-uppercase link-dark">TRAINING</span></a></div>
+    <header class="pt-2 nav-lg-header">
+        <div class=""><a href="." class="realm-base-acronym color-orange mx-3 px-lg-4">BCH <span class="fw-bold ch-name">Biosafety Clearing-House</span> <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">DEVELOPEMENT</span> <span ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">TRAINING</span></a></div>
     </header>
 
-    <nav class="bs5 border-bottom mt-2 new-css-lg-header" ng-class="{'text-white':isTRG}">
-        <div class="bs5 mx-0 mx-md-3 mx-lg-5 d-flex flex-wrap">
-            <ul class="bs5 nav me-auto mx-2">
-                <li class="bs5 nav-item"><a rel="noopener" translation-url href="." class="bs5 fw-bold new-css-main-nav-link nav-link link-dark  px-2 px-md-4 active"
-                        aria-current="page"><span class="hidden-sm hidden-xs">主页</span> <span class="hidden-md hidden-lg"><i class="fa fa-home"></i></span></a></li>
-                <li class="bs5 nav-item"><a rel="noopener" translation-url href="/kb"
-                        class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">关于</a></li>
-                <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown"><a rel="noopener" translation-url href="/search" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 dropdown-toggle"
-                        id="dropdownMenuButton1" aria-expanded="false">搜索</a><ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="search">记录</a></li>
-                        <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="/registries">登记簿</a><ul class="new-css-nav-menu-list">
-                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/living-modified-organisms">改性活生物体</a></li>
-                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/organisms">生物体</a></li>
-                                <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold " href="/registries/genetic-elements">Gene</a></li>
+    <nav class="border-bottom nav-lg-header" ng-class="{'text-white':isTRG}">
+        <div class="mx-0 mx-md-4 d-flex flex-wrap">
+            <ul class="nav me-auto mx-2">
+                <li class="nav-item"><a rel="noopener" translation-url href="." class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0"
+                        aria-current="page"><span>主页</span></a></li>
+                <li class="nav-item"><a rel="noopener" translation-url href="/kb"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">关于</a></li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown"><a rel="noopener" translation-url href="/search" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
+                        id="dropdownMenuButton1" aria-expanded="false">搜索</a><ul class="dropdown-menu p-0" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1" >
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="search">记录</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/registries">登记簿</a><ul class="search-nav-menu-list ps-4">
+                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/living-modified-organisms">改性活生物体</a></li>
+                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/organisms">生物体</a></li>
+                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/genetic-elements">Gene</a></li>
                                 
                             </ul>
                         </li>
-                        <li><a rel="noopener" translation-url class="bs5 dropdown-item new-css-dropdown-menu-item fw-bold link-dark " href="/reports">国家报告分析器</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/reports">国家报告分析器</a></li>
                     </ul>
                 </li>
-                <li class="bs5 nav-item"><a rel="noopener" translation-url href="/register"
-                        class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">submit</a></li>
+                <li class="nav-item"><a rel="noopener" translation-url href="/register"
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">submit</a></li>
 
-
-
-
-                <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown"><a id="countryProfile" rel="noopener" translation-url href="/countries" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                          id="dropdownMenuButton2" aria-expanded="false"><span class="hidden-sm hidden-xs">country profiles</span> <span class="hidden-md hidden-lg">countries</span></a><ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton2">
-                        <li class="new-css-nav-country-profiles-search">
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown"><a id="countryProfile" rel="noopener" translation-url href="/countries" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                          id="dropdownMenuButton2" aria-expanded="false"><span class="d-sm-none d-md-inline-block">country profiles</span> <span class="d-none d-sm-inline-block d-md-none">countries</span></a><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
+                        <li class="nav-country-profiles-search">
                             <input type="text" class="form-control" placeholder="Search countries" ng-click="countrySearch($event)"
                                 ng-model="countrySearchQuery" />
                         </li>
                         <li>
-                            <ul class="new-css-nav-country-profiles">
-                                <li ng-repeat="c in countries | filter:startsWith track by c.code"><a rel="noopener" translation-url  class="bs5 dropdown-item" ng-href="/countries/{{::c.code|encodeURIComponent}}"><span class="bold"
-                                            ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">{{::c.name | lstring:locale}}</span></a></li>
+                            <ul class="nav-link-country-profiles">
+                                <li ng-repeat="c in countries | filter:startsWith track by c.code"><a rel="noopener" translation-url  class="dropdown-item  fw-bold fs-small-8" ng-href="/countries/{{::c.code|encodeURIComponent}}"><span ng-class="{'color-party': c.isParty, 'color-non-party':!c.isParty}">{{::c.name | lstring:locale}}</span></a></li>
                             </ul>
                         </li>
-                        <li class="new-css-nav-country-profiles-footer"><a rel="noopener" translation-url href="/countries">概述 — 列出全部国家/地区 <i class="fa fa-arrow-right"></i></a></li>
+                        <li class="nav-country-profiles-footer-link bg-party"><a rel="noopener" translation-url href="/countries">概述 — 列出全部国家/地区 <i class="fa fa-arrow-right"></i></a></li>
                     </ul>
                 </li>
-                <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown"><a href="/kb" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a><ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb">知识库</a></li>
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/faqs">常见问题</a></li>
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="https://bch3-vle.unep.org/" target="_blank">培训教材</a></li>
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="https://bch-training.cbd.int">Training Site</a></li>
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="/kb/articles/619c55580c1ff000011c1c46/Contact-us/bch">联系我们</a></li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown"><a href="/kb" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a><ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb">知识库</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/faqs">常见问题</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch3-vle.unep.org/" target="_blank">培训教材</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch-training.cbd.int">Training Site</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/articles/619c55580c1ff000011c1c46/Contact-us/bch">联系我们</a></li>
                     </ul>
                 </li>
              
-                <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown"><a href="#" class="bs5 fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">forums</a><ul class="bs5 dropdown-menu new-css-dropdown-menu" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/">Forums and Portals</a></li>
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/portal_art20/nfps/newBCHforum.shtml">BCH 中的 BCH 论坛</a></li>
-                        <li><a class="bs5 dropdown-item fw-bold new-css-dropdown-menu-item" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/portal_art20/unep-gef/0004.shtml">UNEP Regional Advisors Forum</a></li>
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown"><a href="#" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
+                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">forums</a><ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/">Forums and Portals</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/portal_art20/nfps/newBCHforum.shtml">BCH 中的 BCH 论坛</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/portal_art20/unep-gef/0004.shtml">UNEP Regional Advisors Forum</a></li>
                     </ul>
                 </li>
     
-                <li ng-if="isTRG" class="bs5 nav-item"><a href="https://bch.cbd.int/"
-                    style="color: black !important;"    class="bs5 bg-yellow fw-bold new-css-main-nav-link nav-link link-dark px-2 px-md-4 ">Leave Training Site</a></li>
+                <li ng-if="isTRG" class="nav-item"><a href="https://bch.cbd.int/"
+                    style="color: black !important;"    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">Leave Training Site</a></li>
             </ul>
-            <ul class="bs5 nav">
-                <li hover-effect=".dropdown-menu" class="bs5 nav-item dropdown "><a href="#"  class="bs5 fw-bold new-css-main-nav-link nav-link link-dark  dropdown-toggle" type="button"
-                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false"><span>议定书</span></a><ul class="bs5 dropdown-menu  dropdown-menu-right new-css-dropdown-menu" aria-labelledby="dropdownMenuButton4">
-                        <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="https://bch.cbd.int/protocol">卡塔赫纳议定书</a></li>
-                        <li><a rel="noopener" translation-url class="bs5 fw-bold dropdown-item new-css-dropdown-menu-item" href="https://bch.cbd.int/protocol/supplementary/">Supplementary Protocol</a></li>
+            <ul class="nav">
+                <li hover-effect=".dropdown-menu" class="nav-item dropdown "><a href="#"  class="fw-bold menu-navigation-link nav-link link-dark p-0 dropdown-toggle" type="button"
+                        id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false"><span>议定书</span></a><ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4" style="left: -70px;">
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://bch.cbd.int/protocol">卡塔赫纳议定书</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://bch.cbd.int/protocol/supplementary/">Supplementary Protocol</a></li>
                     </ul>
                 </li>
             </ul>

@@ -1,13 +1,13 @@
-﻿<div  id="PreferencesPage"><div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+﻿<div id="PreferencesPage"><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans m-0 p-3 mb-5">
 
-		<div class="register-content-header bg-darkgrey color-white">
-			<div style="padding:10px 10px;">
-				<h3></h3>
+		<div class="register-content-header bg-secondary text-white">
+			<div class="p-2">
+				<h3>Пользовательские настройки</h3>
 			</div>
 		</div>
 
-		<div class="register-content-content">
-			<h1 style="border-bottom:1px solid #ddd;"></h1>
+		<div class="p-2 bg-white">
+			<h1 class="border-bottom my-4">Уведомления по электронной почте и заданные условия поиска <small class="fs-6">Получать уведомления о публикации записей.</small></h1>
 
 			<user-alerts  collection="subscriptions" collection-filter='{{alertFilter}}'
 			 run-query="runFilter(filter)"></user-alerts>

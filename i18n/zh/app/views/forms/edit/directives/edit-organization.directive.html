@@ -7,7 +7,7 @@
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>一般信息</legend>
                         <div class="row">
                             <div class="col-xs-12" >
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>组织联系方式</legend>
                         <div class="row">
                             <div class="col-md-12">
@@ -128,11 +128,11 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>详细信息</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="organizationType" required caption="组织类型">
+                                <div class="km-control-group organization-dropdown" name="organizationType" required caption="组织类型">
                                     <div km-select name="organizationType" required ng-model="document.organizationType"
                                         items="options.organizationTypes()"></div>
                                 </div>
@@ -151,8 +151,8 @@
                                 <div class="col-sm-12">
                                     <div class="km-control-group" name="areasOfWork" caption="工作领域">                                
                                         <div class="help-block">请仅提供关键字</div>
-                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
-                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                        <div ng-repeat="areaOfWork in areasOfWork" class="pb-1 d-block input-group">
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input float-start pb-1" style="width:97%;" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer input-group-text float-end trash-value"
                                             ng-click="removeItem(areasOfWork, $index)"><i class="fa fa-trash-o icon"></i></span></div>
                                         <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">添加项目</button>
                                     </div>
@@ -200,12 +200,12 @@
                         </div>
                     </div>
                     
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>确认或更新信息的时间表</legend>
                         <div class="help-info">请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。在此阶段之后，如果没有收到确认，该记录将被标记为“未确认”。</div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>补充信息</legend>
                         <div class="row">
                             <div class="col-sm-12">
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>备注</legend>								
                         <div class="row">
                             <div class="col-md-12">

@@ -33,9 +33,9 @@
 											<div class="col-xs-12">
 												<div class="km-control-group" name="type" caption="联系人类型">												
 													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />机构</label>
-													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />个人</label>
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />机构</label>
+													<label class="radio-inline ps-1">
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />个人</label>
 												</div>
 											</div>
 										</div>
@@ -123,7 +123,7 @@
 			
 											<div class="row">
 												<div class="col-md-8">
-													<div class="km-control-group" name="organizationType" caption="组织类型">
+													<div class="km-control-group organization-dropdown" name="organizationType" caption="组织类型">
 														<div km-select name="organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
 													</div>
 												</div>
@@ -141,9 +141,9 @@
 													<div class="col-xs-12">
 														<div class="km-control-group" name="addressType" caption="地址类型">												
 															<label class="radio-inline">
-																<input type="radio" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />使用组织地址</label>
-															<label class="radio-inline">
-																<input type="radio" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>添加个人联系方式，如不同于组织的联系方式。</label>
+																<input type="radio" class="me-1" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />使用组织地址</label>
+															<label class="radio-inline ms-2">
+																<input type="radio" class="me-1" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>添加个人联系方式，如不同于组织的联系方式。</label>
 														</div>
 													</div>
 												</div>

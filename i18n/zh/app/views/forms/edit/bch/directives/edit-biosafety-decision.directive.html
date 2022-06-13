@@ -1,17 +1,17 @@
 <div>
 
-	<div  class="innerPageEditForm edit-biosafety-decision-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div  class="innerPageEditForm edit-biosafety-decision-directive"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 				on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div ng-show="tab=='edit'" km-tab="edit">
 							
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>一般信息</legend>
 									<div class="row">
 										<div class="col-xs-12" >
@@ -102,11 +102,11 @@
 									</div>
 								</div>
 							
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>决定、通知、通信或宣告的主题：</legend>
 									<label style="height:0px;width:0px;display: inline;" for="decisionTypes"><span style="display:none;">决定、通知、通信或宣告的主题：</span></label>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-12 position-relative">
 											<div block-region activate="decisions.otherDecisions.identifier || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">
 												<div class="km-control-group" name="commonDecisions" required caption="共同决定">
 														<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
@@ -114,7 +114,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-12 indent-subject-decision">
+										<div class="col-xs-12 indent-subject-decision position-relative">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group " name="otherDecisions" required caption="其它决定">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
@@ -123,7 +123,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-12 indent-subject-decision">
+										<div class="col-xs-12 indent-subject-decision position-relative">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="通讯往来、决定和宣告">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
@@ -135,7 +135,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section A End=================== --> <!-- ====================Section B Strat=================== --><section ng-if="isLmoDecisionForIntentionalIntroduction">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>有意引入到环境中的改性活生物体</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -144,7 +144,7 @@
 											</div>
 										</div>
 									</div>		
-									<div class="row well no-shadow bg-white" ng-if="document.addressesTransboundaryMovement" style="margin-left:1%">
+									<div class="row no-shadow bg-white" ng-if="document.addressesTransboundaryMovement" style="margin-left:1%">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="intentionDecisions" required caption="做出决定的依据：">
 												<div km-term-radio required ng-model="decisions.intentionDecisions" locales="document.header.languages"
@@ -182,7 +182,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row well no-shadow bg-white" ng-if="document.addressesTransboundaryMovement==false"  style="margin-left:1%">
+									<div class="row no-shadow bg-white" ng-if="document.addressesTransboundaryMovement==false"  style="margin-left:1%">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="appliesToTransboundaryMovement" required caption="该决定是否适用于改性活生物体越境转移进入贵国">
 												<div km-yes-no required ng-model="document.appliesToTransboundaryMovement" locales="document.header.languages"></div>
@@ -218,7 +218,7 @@
 									</div>							
 								</div>
 							</section><!-- ====================Section B End=================== --> <!-- ====================Section C Start=================== --><section ng-if="isLmoDecisionForDirectUse">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>直接用作食品或饲料，或用于加工目的之改性活生物体（LMO-FFP）</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -242,7 +242,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-12 position-relative">
 											<div block-region activate="isLmoDecisionForIntentionalIntroduction" skip-loading-icon="true" block-text=" ">
 												<div class="row">
 													<div class="col-xs-12">
@@ -275,7 +275,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section C End=================== --> <!-- ====================Section D Strat=================== --><section ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
-								<div class="well no-shadow bg-white decision-result">
+								<div class="no-shadow bg-white decision-result">
 									<legend>决定所导致的结果</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -310,17 +310,17 @@
 									</div>
 								</div>
 							</section><!-- ====================Section D End=================== --> <!-- ====================Section E Strat=================== --><section ng-if="isSimplifiedProcedure">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>简化程序</legend>
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="simplifiedProcedure" caption="按简化程序做出的决定的主题" required>
 												<div>		
-													<input type="checkbox" id="movementAllowedUnderA131A" ng-model="document.movementAllowedUnderA131A" name="movementAllowedUnderA131A">
+													<input type="checkbox" id="movementAllowedUnderA131A" ng-model="document.movementAllowedUnderA131A" name="movementAllowedUnderA131A" />
 													<label for="movementAllowedUnderA131A" class="light-label">改性活生物体的有意越境转移与通知进口方同时发生的情况</label>	
 												</div>
 												<div>													
-													<input name="exemptedFromAIA" id="exemptedFromAIA" ng-model="document.exemptedFromAIA" type="checkbox"> 
+													<input name="exemptedFromAIA" id="exemptedFromAIA" ng-model="document.exemptedFromAIA" type="checkbox" /> 
 													<label for="exemptedFromAIA" class="light-label"><span>规定改性活生物体进口免除事先知情同意程序的决定</span></label>
 												</div>
 											</div>
@@ -333,7 +333,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section E End=================== --> <!-- ====================Section F Start=================== --><section ng-if="isUnintentionalTransboundaryMovement">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>非法越境转移或非有意越境转移</legend>
 									<div class="row" ng-hide="true">
 										<div class="col-xs-12">
@@ -374,7 +374,7 @@
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="adverseEffectInformation" caption="关于可能会对生物多样性的保护和可持续使用产生不利影响和对人类健康构成风险的任何现有资料，以及关于可能采取的风险管理措施的现有资料">
+													<div class="km-control-group" name="adverseEffectInformation" caption="Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as card as available information about possible risk management measures">
 														<div km-textbox-ml ng-model="document.adverseEffectInformation" rows="1" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -395,7 +395,7 @@
 										<div class="col-xs-12" ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">											
 											<div class="row">
 												<div class="col-xs-12">		
-													<div class="km-control-group" required name="illegalTransbondyMovementDetails" caption="对于非法越境转移，请提供以下任何一项">
+													<div class="km-control-group label-space" required name="illegalTransbondyMovementDetails" caption="对于非法越境转移，请提供以下任何一项">
 														<div class="col-xs-12 padding-left-2">														
 															<div class="km-control-group" name="modifiedOrganisms" caption="改性活生物体识别">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
@@ -413,8 +413,8 @@
 										</div>
 									</div>
 								</div>
-							</section><!-- ====================Section F End=================== --> <!-- ====================Section G Start=================== --><section ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
-								<div class="well no-shadow bg-white">
+							</section><!-- ====================Section F End=================== --> <!-- ====================Section G Start=================== --><section ng-if="isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+								<div class="no-shadow bg-white">
 									<legend>与其他数据库共享信息</legend>
 									<div class="row">
 										<div  class="col-xs-12">
@@ -425,7 +425,7 @@
 														<label>此决定是否应提交给经合组织秘书处，以便纳入<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack 产品数据库</a>？</label>
 													</div>
 													<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
-													<div class="control-group" style="margin-top: 15px;">
+													<div class="control-group mt-2">
 														<label>此决定和食品安全有关吗？</label>
 													</div>
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
@@ -434,7 +434,7 @@
 															<label>是否按照<i>《食品标准法典委员会重组 DNA 植物食品安全评估指南》开展？</i></label>
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
-														<div class="control-group" style="margin-top: 15px;">
+														<div class="control-group mt-2">
 															<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
 														</div>
 														<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
@@ -448,7 +448,7 @@
 											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs ||
 											domesticRegulationsNotification">
 
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>改性活生物体和风险评估</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -471,7 +471,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section H End=================== --> <!-- ====================Section I Strat=================== --><section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions || decisions.communicationDecision)">								
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>关于决定、通讯往来、通知或宣告的文件</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -483,7 +483,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section I End=================== --> <!-- ====================Section J Strat=================== --><section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>确认或更新信息的时间表</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -495,7 +495,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section J End=================== --> <!-- ====================Section K Strat=================== --><section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>更多信息</legend>
 									<div class="row">
 										<div class="col-sm-12">

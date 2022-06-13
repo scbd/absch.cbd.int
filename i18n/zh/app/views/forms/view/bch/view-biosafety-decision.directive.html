@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
-	<div class="record-body panel-body">
+	<div class="record-body panel-body bg-white">
 
 		<document-date></document-date>
 
@@ -43,7 +43,7 @@
 		<legend>一般信息</legend>		
 		<div ng-if="document.government">
 			<label name="country">国家</label>
-			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
+			<div class="km-value" compare-val><a class="text-decoration-none" rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 		</div>
 
 		<div ng-if="document.authorities">
@@ -412,8 +412,7 @@
 
 			<div ng-if="document.relevantInformation">
 				<div compare-val>
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
-				</div>
+				<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml><!-- <div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div> --></div>
 			</div>
 
 			<div ng-if="document.relevantDocuments">

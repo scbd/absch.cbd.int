@@ -1,15 +1,15 @@
 <div>
 	<div class="container-fluid">
-		<div class="panel panel-default registry-details">
+		<div class="panel panel-default registry-details overflow-hidden">
 			<div class="panel-heading">
 				<h2>Directorio de organismos vivos modificados (OVM)</h2>
 			</div>
 			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-2 col-xs-12"> 
-						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
-							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Directorios <span class="caret"></span></button>
-							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+				<div class="row bg-white">
+					<div class="col-md-2"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100 mx-2">
+							<button ng-if="deviceSize=='xs'" type="button" class="w-100 btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Directorios <span class="caret"></span></button>
+							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
 								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Directorios</b></li>
 								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/living-modified-organisms">Directorio de OVM</a></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
@@ -17,33 +17,35 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
-						<p class="padding-top-10">El Directorio de OVM proporciona información resumida acerca de todos los organismos vivos modificados registrados en el CIISB, incluidos los eventos de transformación, las modificaciones genéticas y el <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef">código único de identificación</a> (si está disponible) de cada registro. Links to all decisions and risk assessment reports that refer to these organisms are accessible through the records in the registry.</p>
+					<div class="col-12 col-md-10 ps-3">
+						<p class="pt-2 mx-2">El Directorio de OVM proporciona información resumida acerca de todos los organismos vivos modificados registrados en el CIISB, incluidos los eventos de transformación, las modificaciones genéticas y el <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">código único de identificación</a> (si está disponible) de cada registro. Links to all decisions and risk assessment reports that refer to these organisms are accessible through the records in the registry.</p>
+						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url
+							href="/search?currentPage=1&schema=modifiedOrganism">here</a> to perform an in-depth search of all LMO records available in this Registry.</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>Error loading registry records, please try again.</h3></div>
-						<div ng-if="!isLoading && !isError">						
+						<div ng-if="!isLoading && !isError" class="mx-2">						
 						<div class="row">
-							<div class="col-md-12"><strong>Registros totales: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Exportar</button>
+							<div class="col-md-12"><strong>Registros totales: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-sm btn-default float-end me-1 mb-1" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Exportar</button>
 							</div>
 						</div>
 						<div>
 							<table class="table" id="lmoExport">
 								<thead>
 									<tr>
-										<th class="display-18">Identificación del registro</th>
-										<th class="display-17">Idenficación única</th>
-										<th class="display-18 hidden-xs">Identidad y evento de transformación</th>
-										<th class="display-17 hidden-xs">Organismo</th>
-										<th class="display-30 hidden-xs">Descripción</th>
+										<th style="width: 10rem;">Identificación del registro</th>
+										<th>Idenficación única</th>
+										<th class="d-none d-md-table-cell">Identidad y evento de transformación</th>
+										<th class="d-none d-md-table-cell">Organismo</th>
+										<th class="d-none d-md-table-cell">Descripción</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="row in ::lmoRecords">
 										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
 										<td class="tableexport-string"><span ng-bind="::row.uniqueIdentification_s"></span></td>
-										<td class="tableexport-string hidden-xs"><span style="font-weight: 700;" ng-bind="::row.identity"></span><br> <span ng-bind="::row.transformationEvent"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.lmoScientificName.join(', ')"></span><br/> <span ng-bind="::row.lmoCommonNames.join(', ')"></span></td>
-										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneTraits.join(', ')"></span></td>										
+										<td class="tableexport-string d-none d-md-table-cell"><span class="fw-bolder" ng-bind="::row.identity"></span><br> <span ng-bind="::row.transformationEvent"></span></td>
+										<td class="tableexport-string d-none d-md-table-cell"><span ng-bind="::row.lmoScientificName.join(', ')"></span><br/> <span ng-bind="::row.lmoCommonNames.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description d-none d-md-table-cell"><span ng-bind="::row.geneTraits.join(', ')"></span></td>										
 									</tr>
 								</tbody>
 							</table>

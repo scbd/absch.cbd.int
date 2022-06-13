@@ -1,2 +1,8 @@
-﻿<div class="input-group date">
-  <input type="text" ng-model="binding" placeholder="" ng-disabled="ngDisabledFn()" class="form-control" ng-change="onDateChange()"></div>
+﻿<div class="input-group date" data-provide="datepicker">
+  <input type="text" ng-model="binding" placeholder="{{placeholder}}" ng-disabled="ngDisabledFn()" class="form-control" ng-change="onDateChange()" /><span class="input-group-addon"><span class="fa fa-calendar"></i></span></div><!-- <div class="input-group date" data-provide="datepicker">
+  <input type="text" name="date" ng-model="binding" placeholder="{{placeholder}}" ng-disabled="ngDisabledFn()"
+    class="form-control" ng-change="onDateChange()">
+  <div class="input-group-addon">
+    <span class="bi bi-calender"></span>
+  </div>
+</div> -->

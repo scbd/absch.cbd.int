@@ -16,10 +16,10 @@
                         <view-lmo-reference ng-model="identifier" taret="_blank"></view-lmo-reference>
                 </div>
 
-                <ul class="nav nav-tabs">
-                    <li role="presentation" ng-class="{'active' : tab=='lmo'}"><a rel="noopener" data-toggle="tab" href="#lmo" ng-click="changeTab('lmo')">معلومات الكائن الحي المحور</a></li>
-                    <li role="presentation" ng-class="{'active' : tab=='decisions'}"><a rel="noopener" data-toggle="tab" href="#decisions" ng-click="changeTab('decisions')">قرارات بشأن الكائن الحي المحور</a></li>
-                    <li role="presentation" ng-class="{'active' : tab=='risk-assessments'}"><a rel="noopener" data-toggle="tab" href="#risk-assessments" ng-click="changeTab('risk-assessments')">تقارير تقييم المخاطر</a></li>
+                <ul class="nav nav-tabs pt-3 pb-1">
+                    <li role="presentation" ><a class="nav-link" ng-class="{'active' : tab=='lmo'}" rel="noopener" data-bs-toggle="tab" href="#lmo" ng-click="changeTab('lmo')">معلومات الكائن الحي المحور</a></li>
+                    <li role="presentation" ><a class="nav-link" ng-class="{'active' : tab=='decisions'}" rel="noopener" data-bs-toggle="tab" href="#decisions" ng-click="changeTab('decisions')">قرارات بشأن الكائن الحي المحور</a></li>
+                    <li role="presentation" ><a class="nav-link" ng-class="{'active' : tab=='risk-assessments'}" rel="noopener" data-bs-toggle="tab" href="#risk-assessments" ng-click="changeTab('risk-assessments')">تقارير تقييم المخاطر</a></li>
                 </ul>
                 <div class="tab-content">
                     <div id="lmo" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='lmo'}" ng-if="tab=='lmo'">

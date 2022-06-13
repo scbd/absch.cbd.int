@@ -1,0 +1,75 @@
+﻿<div  id="RegisterPage">
+
+  <link href="/app/css/register.css" rel="stylesheet">
+  <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans m-0 p-3">
+    <div class="register-content-header bg-pink color-white">
+      <div class="px-2">
+        <h3>Admin CE-APA</h3>
+      </div>
+    </div>
+    <div class="register-content-content" ng-if="roles.isAdministrator">
+      <div class="row p-0 m-0 mb-4">
+        <div class="col-md-12 cp-header">
+          <table class="w-100">            
+            <tr>
+              <td></td>
+              <td>
+                <table class="table table-striped w-100">
+                  <tbody>
+
+                    <tr>
+                      <td>Voir la liste de fichiers présentés par les usagers</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">Gérer les fichiers présentés</a></td>
+                    </tr>
+                    <tr>
+                        <td>Questions communes CE-APA</td>
+                        <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">Questions communes</a></td>
+                      </tr>
+                    <tr>
+                      <td>Voir le statut du flux des travaux des fichiers du CE-APA</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">Gérer le flux des travaux des fichiers</a></td>
+                    </tr>
+                    <tr>
+                      <td>Afficher le décompte du CE-APA avec l'option graphique et plusieurs filtres</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">Report counts</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>Voir le compte des CCRI</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">Comptages des CCRI</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>Voir les pays avec/sans responsabilités APA</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">Rapport sur le rôle de l’usager</a></td>
+                    </tr>
+                    <tr>
+                      <td>Voir la liste d’usagers qui utilisent l’inscription par courriel</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">Inscriptions</a></td>
+                    </tr>
+                    <tr>
+                      <td>Voir les erreurs des clients</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">Registre des erreurs</a></td>
+                    </tr>
+                    <tr>
+                      <td>Valider la traduction</td>
+                      <td>
+                        <button type="button" class="btn btn-primary" ng-click="validateTranslation(!isValidatingTranslation)"><span ng-if="!isValidatingTranslation">valider</span><span ng-if="isValidatingTranslation">rejeter</span></button>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div><!-- controller -->

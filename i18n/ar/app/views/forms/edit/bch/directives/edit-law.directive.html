@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-	<div class="innerPageEditForm edit-law-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+	<div class="innerPageEditForm edit-law-directive"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -8,10 +8,10 @@
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>معلومات عامة</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -67,7 +67,7 @@
 								</div>
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>التفاصيل التشريعية</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -85,7 +85,7 @@
 												<div km-select name="jurisdiction" locales="document.header.languages" required ng-model="document.jurisdiction" items="options.lawJurisdictions"
 													ng-change="onJurisdictionChange(document.jurisdiction)"></div>
 											</div>
-											<div  style="padding-top: 5px;;">
+											<div class="pt-1">
 												<div class="km-control-group" required ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" name="jurisdiction.other" caption="منطقة اختصاص أخرى">
 													<div km-textbox-ml name="customValueOther" ng-model="document.jurisdiction.customValue" placeholder="" locales="document.header.languages"></div>
 												</div>
@@ -150,7 +150,7 @@
 							</section>
 							
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>تفاصيل الوثيقة</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -199,7 +199,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>معلومات جهات الاتصال التنظيمية</legend>
 									<div class="row">
 										<div  class="col-xs-12">
@@ -216,7 +216,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
 									<div class="row">
 										<div  class="col-xs-12">
@@ -230,7 +230,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>معلومات إضافية</legend>
 									<div class="row">
 										<div class="col-sm-12">

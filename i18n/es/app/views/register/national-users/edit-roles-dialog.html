@@ -1,22 +1,20 @@
 ﻿<div class="modal-content">
 
-    <style> .text-nowrap.btn-group { white-space: nowrap; } .text-nowrap.btn-group > .btn { float: none; display: inline-block; } </style>
+    <style></style>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">Conceder /Revocar funciones <span ng-bind="editRolesDialogCtrl.user.firstName+' '+editRolesDialogCtrl.user.lastName"></span></h3><span ng-bind="editRolesDialogCtrl.user.email"></span></div>
+    <div class="modal-header d-block">
+        <button type="button" class="close float-end bg-transparent border-0 fs-4" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
+        <h3 class="modal-title"></h3></div>
 
-    <div class="modal-body"><!-- ROLES --><p>Sírvase seleccionar qué funciones desea asignar al usuario</p>
+    <div class="modal-body"><p></p>
 
 
         <table class="table table-striped" style="width:100%">
             <tr ng-repeat="role in editRolesDialogCtrl.roles" ng-class="editRolesDialogCtrl.rowClasses(role)"
             ng-show="editRolesDialogCtrl.roleFilter(role)">
-                <td style="vertical-align:middle;width:2em"><i class="fa fa-fw", style="font-size:150%"
-                       ng-class=" { 'fa-check-square-o' : editRolesDialogCtrl.selectedRoles[role.roleId], 'fa-square-o' : !editRolesDialogCtrl.selectedRoles[role.roleId] }"
-                       ng-click="editRolesDialogCtrl.selectedRoles[role.roleId]=!editRolesDialogCtrl.selectedRoles[role.roleId];editRolesDialogCtrl.updateGovernmentPA(role)"></i></td>
+                <td style="vertical-align:middle;width:2em"></td>
                 <td style="width:90%" ng-bind="role.name">
-                    <div><i ng-bind="role.description"></i></div>
+                    <div></div>
                 </td>
             </tr>
         </table>
@@ -24,12 +22,12 @@
 
     <div class="modal-footer">
 
-        <div class="pull-left" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
-            <div ng-show="editRolesDialogCtrl.stats().grant" ><em><span ng-bind="editRolesDialogCtrl.stats().grant"></span> se concederán función(es)</em></div>
-            <div ng-show="editRolesDialogCtrl.stats().revoke"><em><span ng-bind="editRolesDialogCtrl.stats().revoke"></span> se revocarán función(es)</em></div>
+        <div class="float-start" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
+            <div ng-show="editRolesDialogCtrl.stats().grant" ></div>
+            <div ng-show="editRolesDialogCtrl.stats().revoke"></div>
         </div>
 
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">Cancelar</button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editRolesDialogCtrl.save()" ng-disabled="!editRolesDialogCtrl.stats().changes">Siguiente »</button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()"></button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editRolesDialogCtrl.save()" ng-disabled="!editRolesDialogCtrl.stats().changes"></button>
     </div>
 </div>

@@ -1,0 +1,27 @@
+﻿<div  style="margin-left:10%;margin-right:10%">
+
+    <style> pdfviewer canvas { margin: auto; max-width: 100%!important; border-bottom: 1px solid #ddd } .title-bar { min-height: 50px; background: #fff; border-bottom: 1px solid #ddd; text-align: center; padding-top: 10px; } /* #viewPdf{ position: inherit!important; min-height: 1000px; } */ </style>
+    <div class="row">
+        <div class="row px-0 w-100">
+            <div class="title-bar"  ng-bind="pdf.fileName|uppercase">
+            </div>
+        </div>
+        <div class="row w-100" style="background:#fff" ng-if="!error">
+            <div class="col-md-2">
+                <div><br> Имя файла: <span ng-bind="pdf.fileName|uppercase"></span> <br> <br> <a rel="noopener" ng-href="{{pdf.src}}" download="{{pdf.fileName|encodeURIComponent}}" class="btn btn-success" target="_blank"><i class="fa fa-download"></i> Загрузить</a> <br> <br> Просмотреть в <span ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']"><a rel="noopener" ng-href="#" ng-click="loadLangPdf(lang)" ng-bind="lang"></a> |</span></div>
+            </div>
+            <div class="col-md-10" style="padding:0px;border-right: 1px solid #ddd">
+                <div class="file-viewer-preview file-preview">
+                    <div style="margin-left:50%;margin-top:5%;" ng-if="loading"><i class="fa fa-spin fa-3x fa-circle-o-notch" ></i> <br/> загрузка pdf</div><!-- <pdfjs-viewer src="{{ pdf.src }}"></pdfjs-viewer> --><link rel="stylesheet" href="./viewer.css">
+                    <div id="viewPdf" style="min-height: 1000px;">
+                    </div>                        
+                </div>
+            </div>
+        </div>
+        <div ng-if="error">
+            <div class="alert alert-danger">Ошибка!<div ng-bind="error"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -1,40 +1,40 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-blue">
-		<h4></h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
-	<div class="record-body panel-body">
+	<div class="record-body panel-body bg-white">
 
 
 
 		<document-date></document-date>
-		<legend></legend>
+		<legend>Общая информация</legend>
 
 		<div ng-show="document.government">
-			<label name="country"></label>
-			<div class="km-value"></div>
+			<label name="country">Страна</label>
+			<div class="km-value"><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a></div>
 		</div>
 
 		<div ng-show="document.title">
-			<label></label>
-			<div class="km-value"></div>
+			<label>Название</label>
+			<div class="km-value"><strong>{{document.title | lstring:locale}}</strong></div>
 		</div>
 
 
 		<div ng-show="document.description">
-			<label></label>
+			<label>Описание</label>
 			<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend></legend>
+			<legend>Дополнительная информация</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label></label>
-				<div class="km-value" ng-repeat="item in document.relevantDocuments"></div>
+				<label>Адреса других соответствующих веб-сайтов/или прилагаемые документы</label>
+				<div class="km-value" ng-repeat="item in document.relevantDocuments"><a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a></div>
 			</div>
 		</div>
 		

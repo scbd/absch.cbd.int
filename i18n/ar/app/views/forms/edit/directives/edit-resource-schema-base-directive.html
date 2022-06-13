@@ -13,7 +13,7 @@
 			
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>معلومات عامة</legend>
 			
                                     <div class="row">
@@ -101,7 +101,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>الوصول للوثائق المرجعية</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -124,7 +124,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>المعلومات عن محتوى الوثيقة المرجعية</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -164,7 +164,7 @@
 								
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
@@ -177,7 +177,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="cbdSubjects" caption="محاور الأفكار والموضوعات لاتفاقية التنوع البيولوجي">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="محاور الأفكار والموضوعات لاتفاقية التنوع البيولوجي">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -186,13 +186,13 @@
 
 								</div>
 							</section><!-- Till now all fields are common for all CHs  --> <!-- IF BCH START --><section ng-if="isBCH">
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Keywords related to Biosafety</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="biosafety.subjects" caption="محاور وموضوعات السلامة الأحيائية">
+										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="محاور وموضوعات السلامة الأحيائية">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div><!-- TODO: need to apply a condition --><div >
@@ -241,7 +241,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Does this resource address one or more specific organisms?" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="تحديد هوية الكائنات الحية" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
@@ -261,7 +261,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressGenes" caption="هل تركز هذه الوثيقة المرجعية على عنصر واحد محدد أو أكثر من العناصر الوراثية؟" required>
+											<div class="km-control-group" name="biosafety.addressGenes" caption="Gene(s) identification" required>
 												<div class="help-block">تشير المعلومات حول العناصر الجينية إلى تسلسلات الحمض النووي التي تتضمن الجينات وتسلسلات الحمض النووي التنظيمية وغيرها من الأحماض النووية الأخرى المستخدمة في تخليق كائن حي محور. وقد تحتوي هذه التسلسلات على ترميز للبروتين أو ربما تكون ذات وظيفة تنظيمية معينة.</div>
 												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
 												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
@@ -281,7 +281,7 @@
 								</div>
 							</div>
 						</section><!-- IF BCH END --> <!-- IF ABS START --><section ng-if="isABS">
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Keywords related to Access and Benefit-Sharing</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Keywords related to Access and Benefit-Sharing</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="nagoya.mccKeywords" required caption="يُرجى تحديد الكلمات الرئيسية الملائمة لوصف محتوى مدونة السلوك والمبادئ التوجيهية وأفضل الممارسات والمعايير الجاري إرسالها">
@@ -310,7 +310,7 @@
 								</div>
 							</div>
 						</section><!-- IF ABS END --><section>
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>معلومات إضافية</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>معلومات إضافية</legend>
 		
 								<div class="row">
 									<div class="col-xs-12">
@@ -333,7 +333,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>ملاحظات</legend>
 							<div class="row">
 								<div class="col-sm-12">

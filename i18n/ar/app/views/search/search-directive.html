@@ -1,38 +1,49 @@
 ﻿<div id="innerPage" dir="rtl">
-    <div class="mastHead" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
-            <h1 style="color:white;">البحث</h1>
-     <div  id="search-new" >
-         <div class="row">
-             <div class="col-md-12 " style="padding-bottom:10px;"><span ng-repeat="filter in setFilters"> <span ng-if="filter.type" class="btn-group filter-chip" ng-class="{'exclude-filter':filter.excludeResult}" style="background-color:transparent;border:1px solid;color:#fff;"> <span class="filter-chip-text dropdown bring-to-front"  > <span ng-if="filter.edit" class="input-group edit"><input type="textbox" ng-model="filter.editValue" ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small"><span class="btn btn-xs bold filter-chips-edit-addon input-group-addon" title="حفظ فلتر التصفية"     ng-click="onEditFreeTextFilterDone(filter)"><i class="fa fa-check"></i></span> <span class="btn btn-xs bold filter-chips-edit-addon input-group-addon"  title="إغلاق التعديل"   ng-click="onEditFreeTextFilterCanceled(filter)"><i class="fa fa-times"></i></span> </span></span><span class="btn btn-xs color-white bold filter-chip-text dropdown bring-to-front" style="cursor: pointer;" type="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"  
-                                ng-class="{'strikeout':filter.disabled}"><i class="fa fa-cog color-white" aria-hidden="true"></i> <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">لا</span> <span ng-bind="filter.name|lstring:locale" style="color:white;"></span></span><ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit" >
-                                <li ng-if="filter.type=='freeText'" ><a rel="noopener" href="#" ng-click="onEditFreeTextFilter(filter)"><i class="fa fa-edit" aria-hidden="true"></i> تعديل فلتر التصفية</a></li>
-                                <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();"><i class="fa fa-eye" aria-hidden="true"></i> إيقاف مؤقت</a></li>
-                                <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();"><i class="fa fa-eye-slash" aria-hidden="true"></i> إعادة تشغيل</a></li>
-                                <li><a rel="noopener" href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();"><i class="fa fa-minus-square-o" aria-hidden="true"></i> استبعاد نتائج</a></li>
-                                <li><a rel="noopener" href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();"><i class="fa fa-plus-square-o" aria-hidden="true"></i> تضمين نتائج</a></li>
-                                <li><a rel="noopener" href="#" ng-click="removeFilter(filter)"><i class="fa fa-times-circle" aria-hidden="true"></i> حذف فلتر التصفية</a></li>
-                            </ul></span> <!-- <button type="button" class="btn btn-xs bold filter-chips-remove" style="background-color: transparent;" ng-click="removeFilter(filter)">
-                            <i class="fa fa-times-circle" aria-hidden="true"></i>
-                        </button> --> </span>
-                     
-                    
-                 </span>
-                 <button ng-href="#" id="clearSearchFilter" ng-if="canShowSaveFilter()" class="btn btn-sm btn-default bold"
-                    style="cursor:pointer;" ng-click="clearFilter()"><i class="fa fa-times-circle"
-                    aria-hidden="true"></i> إزالة فلاتر التصفية</button><span class="btn-group pull-right dashboard-tour"><a rel="noopener" ng-href="#" class="help-tour link2" ng-click="tour()"><i class="fa fa-question-circle color-white" aria-hidden="true"></i> <span class="hidden-xs hidden-sm color-white">TAKE SEARCH TOUR</span></a></span></div>
-             </div>
+    <div class="mastHead pt-4" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
+        <h1 class="text-white">البحث</h1>
+        <div id="search-new" >
+            <div class="row">
+                <div class="col-md-12 pb-2"><span ng-repeat="filter in setFilters"> <span ng-if="filter.type" class="btn-group filter-chip"
+                            ng-class="{'exclude-filter':filter.excludeResult}"
+                            class="text-white border bg-transparent"> <span class="filter-chip-text dropdown bring-to-front p-2 border rounded"> <span ng-if="filter.edit" class="input-group edit"><input type="textbox" ng-model="filter.editValue"
+                                        ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small"><span class="btn btn-xs bold filter-chips-edit-addon input-group-text"
+                                        title="حفظ فلتر التصفية" ng-click="onEditFreeTextFilterDone(filter)"><i class="fa fa-check"></i></span> <span class="btn btn-xs bold filter-chips-edit-addon input-group-text"
+                                        title="إغلاق التعديل" ng-click="onEditFreeTextFilterCanceled(filter)"><i class="fa fa-times"></i></span> </span></span><span class="color-white bold filter-chip-text dropdown bring-to-front cursor-pointer"
+                                    style="cursor: pointer;" type="button" data-bs-toggle="dropdown"
+                                    aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"
+                                    ng-class="{'strikeout':filter.disabled}"><i class="fa fa-cog color-white" aria-hidden="true"></i> <span ng-if="filter.excludeResult" class="label label-danger border-bottom">لا</span> <span ng-bind="filter.name|lstring:locale" class="text-white"></span></span><ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit">
+                                    <li ng-if="filter.type=='freeText'"><a rel="noopener" href="#" ng-click="onEditFreeTextFilter(filter)"><i
+                                                class="fa fa-edit" aria-hidden="true"></i> تعديل فلتر التصفية</a></li>
+                                    <li><a rel="noopener" href="#" ng-if="!filter.disabled"
+                                            ng-click="filter.disabled=true;recordSelected();"><i class="fa fa-eye" aria-hidden="true"></i> إيقاف مؤقت</a></li>
+                                    <li><a rel="noopener" href="#" ng-if="filter.disabled"
+                                            ng-click="filter.disabled=false;recordSelected();"><i class="fa fa-eye-slash" aria-hidden="true"></i> إعادة تشغيل</a></li>
+                                    <li><a rel="noopener" href="#" ng-if="!filter.excludeResult"
+                                            ng-click="filter.excludeResult=true;recordSelected();"><i class="fa fa-minus-square-o" aria-hidden="true"></i> استبعاد نتائج</a></li>
+                                    <li><a rel="noopener" href="#" ng-if="filter.excludeResult"
+                                            ng-click="filter.excludeResult=false;recordSelected();"><i class="fa fa-plus-square-o" aria-hidden="true"></i> تضمين نتائج</a></li>
+                                    <li><a rel="noopener" href="#" ng-click="removeFilter(filter)"><i class="bi bi-x-circle-fill" aria-hidden="true"></i> حذف فلتر التصفية</a></li>
+                                </ul></span> </span>
+
+
+                    </span>
+                    <button ng-href="#" id="clearSearchFilter" ng-if="canShowSaveFilter()"
+                        class="bg-white cusor-pointer btn btn-sm btn-default bold" ng-click="clearFilter()"><i
+                            class="bi bi-x-circle-fill" aria-hidden="true"></i> إزالة فلاتر التصفية</button><span class="btn-group float-end dashboard-tour"><a rel="noopener" ng-href="#" class="text-decoration-none help-tour link2" ng-click="tour()"><i class="fa fa-question-circle color-white" aria-hidden="true"></i> <span class="d-none d-lg-inline-block  color-white">TAKE SEARCH TOUR</span></a></span></div>
+            </div>
 
             <div class="row">
-                <div id="freeText" class="col-md-7" ng-show="!skipTextFilter">
+                <div id="freeText" class="col-lg-7" ng-show="!skipTextFilter">
                     <form ng-submit="saveFreeTextFilter(searchKeyword, $event)" class="input-group">
-                        <input type="text" ng-model="searchKeyword" class="form-control" placeholder="البحث في غرفة تبادل المعلومات"
-                            style="font-weight:bold;"><span type="submit" style="cursor:pointer" ng-click="saveFreeTextFilter(searchKeyword)"
-                            class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i></span></form>
+                        <input type="text" ng-model="searchKeyword" class="form-control fw-bold"
+                            placeholder="البحث في غرفة تبادل المعلومات"><span type="submit" ng-click="saveFreeTextFilter(searchKeyword)"
+                            class="input-group-text cursor-pointer" id="basic-addon2"><i
+                                class="fa fa-search"></i></span></form>
                 </div>
-                <div class="col-md-1" ></div>
-                <div class="col-md-4" ng-if="pageInitialized && !isAlertSearch">
-                    <result-view-options class="pull-right" style="display: inline-block;" current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
+               
+                <div class="col-lg-4 offset-lg-1 search-content-sort" ng-if="pageInitialized && !isAlertSearch">
+                    <result-view-options class="float-end d-inline-block"
+                        current-tab="searchResult.currentTab" sort-fields="searchResult.sortFields"
                         view-type="searchResult.viewType" group-by-fields="searchResult.groupByFields"
                         on-sort-by-change="onSortByChange(fields)" on-view-type-change="onViewTypeChange(options)"
                         on-export="onExportClick(options)"></result-view-options>
@@ -41,196 +52,221 @@
 
 
             <div class="row">
-             <div class="col-md-12 search hidden-xs" style="padding-top:5px;">
-                 <ul>
-                     <li style="text-transform:uppercase;padding-left:3px;padding-right:5px;color:#bbb;"
-                         ng-click="showFilters=null"><span id="globalSearch" style="cursor: pointer">فلاتر تصفية عامة:</span></li>
-                     <li id="recordTypesFilterTab"><a id="recordTypesFilterTabJR" rel="noopener" href="" 
-                             ng-class="{'active':showFilters=='recordTypesFilter', 'text-bch':(isBCH && showFilters=='recordTypesFilter'), 'text-abs':(isABS && showFilters=='recordTypesFilter')}"
-                             ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
-                             class="btn color-white "><i ng-if="showFilters=='recordTypesFilter'" class="fa fa-times-circle"></i> <i ng-if="!showFilters || showFilters!='recordTypesFilter'" class="fa fa-caret-down"></i>&nbsp; أنواع السجلات</a></li>
-                     <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"><a id="keywordsFilterTabJR" rel="noopener" href=""
-                             ng-class="{'active':showFilters=='keywordsFilter', 'text-bch':(isBCH && showFilters=='keywordsFilter'), 'text-abs':(isABS && showFilters=='keywordsFilter')}"
-                             ng-click="showFilters=(showFilters=='keywordsFilter' ? false : 'keywordsFilter')"
-                             class="btn color-white"><i ng-if="showFilters=='keywordsFilter'" class="fa fa-times-circle"></i> <i ng-if="!showFilters || showFilters!='keywordsFilter'" class="fa fa-caret-down"></i>&nbsp; الكلمات الرئيسية</a></li>
-                     <li id="countryFilterTab"><a id="countryFilterTabJR" rel="noopener" href=""
-                             ng-class="{'active':showFilters=='countryFilter', 'text-bch':(isBCH && showFilters=='countryFilter'), 'text-abs':(isABS && showFilters=='countryFilter')}"
-                             ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
-                             class="btn color-white"><i ng-if="showFilters=='countryFilter'" class="fa fa-times-circle"></i> <i ng-if="!showFilters || showFilters!='countryFilter'" class="fa fa-caret-down"></i>&nbsp; البلد</a></li>
-                     <li id="regionFilterTab"><a id="regionFilterTabJR" rel="noopener" href=""
-                             ng-class="{'active':showFilters=='regionFilter', 'text-bch':(isBCH && showFilters=='regionFilter'), 'text-abs':(isABS && showFilters=='regionFilter')}"
-                             ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
-                             class="btn color-white"><i ng-if="showFilters =='regionFilter'" class="fa fa-times-circle"></i> <i ng-if="!showFilters || showFilters!='regionFilter'" class="fa fa-caret-down"></i>&nbsp; المناطق أو الأقاليم</a></li>
-                     <li id="dateFilterTab" ng-show="!skipDateFilter"><a id="dateFilterTabJR" rel="noopener" href=""
-                             ng-class="{'active':showFilters=='dateFilter', 'text-bch':(isBCH && showFilters=='dateFilter'), 'text-abs':(isABS && showFilters=='dateFilter')}"
-                             ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
-                             class="btn color-white"><i ng-if="showFilters=='dateFilter'" class="fa fa-times-circle"></i> <i ng-if="!showFilters || showFilters!='dateFilter'" class="fa fa-caret-down"></i>&nbsp; التاريخ</a></li>
+                <div class="col-md-12 search d-none d-sm-block pt-1">
+                    <ul>
+                        <li class="text-uppercase px-1"
+                            ng-click="showFilters=null"><span id="globalSearch">فلاتر تصفية عامة:</span></li>
+                        <li id="recordTypesFilterTab"><a id="recordTypesFilterTabJR" rel="noopener" href=""
+                                ng-class="{'active':showFilters=='recordTypesFilter', 'text-bch':(isBCH && showFilters=='recordTypesFilter'), 'text-abs':(isABS && showFilters=='recordTypesFilter')}"
+                                ng-click="showFilters=(showFilters=='recordTypesFilter' ? false : 'recordTypesFilter')"
+                                class="btn color-white "><i ng-if="showFilters=='recordTypesFilter'" class="bi bi-x-circle-fill"></i> <i ng-if="!showFilters || showFilters!='recordTypesFilter'"
+                                    class="fa fa-caret-down"></i>&nbsp; أنواع السجلات</a></li>
+                        <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"><a id="keywordsFilterTabJR"
+                                rel="noopener" href=""
+                                ng-class="{'active':showFilters=='keywordsFilter', 'text-bch':(isBCH && showFilters=='keywordsFilter'), 'text-abs':(isABS && showFilters=='keywordsFilter')}"
+                                ng-click="showFilters=(showFilters=='keywordsFilter' ? false : 'keywordsFilter')"
+                                class="btn color-white"><i ng-if="showFilters=='keywordsFilter'" class="bi bi-x-circle-fill"></i> <i ng-if="!showFilters || showFilters!='keywordsFilter'" class="fa fa-caret-down"></i>&nbsp; الكلمات الرئيسية</a></li>
+                        <li id="countryFilterTab"><a id="countryFilterTabJR" rel="noopener" href=""
+                                ng-class="{'active':showFilters=='countryFilter', 'text-bch':(isBCH && showFilters=='countryFilter'), 'text-abs':(isABS && showFilters=='countryFilter')}"
+                                ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
+                                class="btn color-white"><i ng-if="showFilters=='countryFilter'" class="bi bi-x-circle-fill"></i> <i ng-if="!showFilters || showFilters!='countryFilter'" class="fa fa-caret-down"></i>&nbsp; البلد</a></li>
+                        <li id="regionFilterTab"><a id="regionFilterTabJR" rel="noopener" href=""
+                                ng-class="{'active':showFilters=='regionFilter', 'text-bch':(isBCH && showFilters=='regionFilter'), 'text-abs':(isABS && showFilters=='regionFilter')}"
+                                ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
+                                class="btn color-white"><i ng-if="showFilters =='regionFilter'" class="bi bi-x-circle-fill"></i> <i ng-if="!showFilters || showFilters!='regionFilter'" class="fa fa-caret-down"></i>&nbsp; المناطق أو الأقاليم</a></li>
+                        <li id="dateFilterTab" ng-show="!skipDateFilter"><a id="dateFilterTabJR" rel="noopener" href=""
+                                ng-class="{'active':showFilters=='dateFilter', 'text-bch':(isBCH && showFilters=='dateFilter'), 'text-abs':(isABS && showFilters=='dateFilter')}"
+                                ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
+                                class="btn color-white"><i ng-if="showFilters=='dateFilter'" class="bi bi-x-circle-fill"></i> <i ng-if="!showFilters || showFilters!='dateFilter'" class="fa fa-caret-down"></i>&nbsp; التاريخ</a></li>
 
-                     <li id="searchFilterTab" ng-show="user && user.isAuthenticated"><a rel="noopener" href=""
-                             ng-class="{'active':showFilters=='userSearchFilter'}"
-                             ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
-                             class="btn color-orange"><i ng-if="showFilters=='userSearchFilter'" class="fa fa-times-circle"></i> <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>&nbsp; استعلامات البحث المحفوظة</a></li>
-                       <li ng-if="canShowSaveFilter() && !isAlertSearch" class="pull-right"><a rel="noopener" ng-href="#" class="link2 cursor-pointer color-orange"
-                           ng-click="showSaveFilter(setFilters)"><i class="bi bi-bookmark color-orange" style="margin-right:5px;"></i>Save this search</a></li>
-                 
-                 </ul>
-             </div>
+                        <li id="searchFilterTab" ng-show="user && user.isAuthenticated"><a rel="noopener" href=""
+                                ng-class="{'active':showFilters=='userSearchFilter'}"
+                                ng-click="showFilters=(showFilters=='userSearchFilter' ? false : 'userSearchFilter')"
+                                class="btn color-orange"><i ng-if="showFilters=='userSearchFilter'" class="bi bi-x-circle-fill"></i> <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>&nbsp; استعلامات البحث المحفوظة</a></li>
+                        <li ng-if="canShowSaveFilter() && !isAlertSearch" class="float-end"><a rel="noopener"
+                                ng-href="#" class="link2 cursor-pointer color-orange"
+                                ng-click="showSaveFilter(setFilters)"><i class="bi bi-bookmark color-orange me-1"
+                                   ></i>Save this search</a></li>
 
-         </div>
-     </div>
-
-    
-
-
-     <div class="container-fluid" ng-show="showFilters || searchKeyword"
-         style="z-index:10!important;top:-2px;position:relative;">
-         <style> .sticky-bar { position: fixed; left: 0; bottom: 0; height:35px; width: 100%; background-color: #333; color: white; text-align: center; opacity:0.9 } </style>
-         <div class="row" style="margin:0;">
-             <div class="col-xs-12 well  bg-grey1 " style="min-height:100px;margin:0;"><a rel="noopener" translation-url href="#" ng-click="showFilters=false;searchKeyword='';"
-                     class="pull-right color-black"><i id="closeFilterTab" class="fa fa-2x fa-times-circle" aria-hidden="true"></i> <br> </a><div ng-if="searchKeyword" id="Search-Filter" style="margin-bottom:20px;"><a rel="noopener" translation-url class="filter country-heading" ng-click="saveFreeTextFilter(searchKeyword);"><i class="fa check"
-                             ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i> بحث بالنص الحر: <span class="color-blue">"<span ng-bind="searchKeyword"></span>"</span></a></div>
-                 <div id="recordTypesFilterTab">
-                     <div class="row" ng-if="showFilters==='recordTypesFilter' || (searchKeyword && !showFilters)">
-                         <div class="col-md-12">
-                             <national-filter></national-filter>
-                         </div>
-                         <div class="col-md-12">
-                             <reference-filter></reference-filter>
-                         </div>
-                         <div class="col-md-12">
-                             <scbd-filter></scbd-filter>
-                         </div>
-                     </div>
-                 </div>
-
-
-                 <keyword-filter
-                     ng-if="!skipKeywordsFilter && (showFilters==='keywordsFilter' || (searchKeyword && !showFilters))">
-                 </keyword-filter>
-                 <country-filter ng-if="showFilters==='countryFilter' || (searchKeyword && !showFilters)">
-                 </country-filter>
-                 <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)"></region-filter>
-                 <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
-                 <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
-                     <h4>Your saved searches <small>- Select or edit items from the list below</small></h4>
-                     <user-alerts run-query-in-page="true"></user-alerts>
-                 </div>
-                <div class="sticky-bar" ng-if="searchResult.loading"><span style="vertical-align:middle"><i class="fa fa-spin fa-spinner"></i>تحديث النتائج قيد التنفيذ...</span></div>
-
-                <div class="text-center">
-                    <button ng-href="#top"  class="btn btn-sm btn-default bold"  
-                    style="cursor:pointer;" ng-click="showFilters=false;searchKeyword='';scrollToTop();"><i class="fa fa-times-circle" aria-hidden="true"></i> إغلاق</button> 
+                    </ul>
                 </div>
-             </div>
-         </div>
-     </div>
-    </div>
 
-  <div id="search-new" class=" innerPageContent register-content ">
-    <div class="alert alert-danger" role="alert" ng-if="searchAlertError && searchAlertError.length>0">
-      <p ng-bind="searchAlertError"></p>
-    </div>
-    <div class="register-content-content" >
-        <div class="main" id="main" >
+            </div>
+        </div>
 
-     <div class="container-fluid" style="margin-top:10px;"><!-- ng-if="!skipResults" --><div class="row" style="padding:10px 0 0 0;margin:0px;"><!-- Search Result --><div class="hidden-xs" ng-class="{'col-xs-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch}"
-             style="border:1px solid #eee;padding:0 20px 0 0; margin:0;" ng-show="(leftMenuFilters && leftMenuFilters.length != 0)">
-                 <div left-side-filter></div>
-             </div><!-- Different view for list/group --><div class="col-xs-12"  style="margin:0;border: 1px solid #eee;"
-                 id="searchResult" ng-class="{'col-xs-9':(leftMenuFilters && leftMenuFilters.length != 0), 'hidden' : isAlertSearch}">
-                 <div class="col-xs-12" style="padding:0;margin:0;">
-                     <ul class="nav nav-tabs search-tab-title">
-                        <li id="allRecordsTab" ng-class="{'active':searchResult.currentTab==='allRecords'}"><a rel="noopener" translation-url href="#" ng-click="switchTab('allRecords')">كل <span class="hidden-xs">السجلات</span> <span class="badge"  ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span></a></li>
-                         <li id="nationalRecordsTab" ng-class="{'active':searchResult.currentTab==='nationalRecords'}"><a rel="noopener" translation-url href="#" class="color-blue"
-                                 ng-click="switchTab('nationalRecords')">السجلات <span class="hidden-xs">الوطنية</span> <span class="badge bg-blue"
-                                      ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a></li>
-                         <li id="referenceRecordsTab" ng-class="{'active':searchResult.currentTab==='referenceRecords'}"><a
-                                 translation-url href="#" class="color-orange"
-                                 ng-click="switchTab('referenceRecords')">السجلات <span
-                                     class="hidden-xs">المرجعية</span> <span class=" badge bg-orange"
-                                      ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a></li>
-                         <li id="scbdRecordsTab" ng-class="{'active':searchResult.currentTab==='scbdRecords'}"><a rel="noopener" translation-url href="#" class="color-darkgrey" ng-click="switchTab('scbdRecords')">سجلات <span class="hidden-xs">أمانة اتفاقية التنوع البيولوجي</span> <span class="badge"  ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span></a></li>
-                     </ul>
-                 </div><!-- Tab panes --><div class="col-xs-12 tab-content bg-white" style="padding:20px;margin:0;border-right:1px solid #ddd;border-left:1px solid #ddd;border-bottom:1px solid #ddd;">
-                    <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='allRecords'}" 
-                    ng-if="searchResult.currentTab==='allRecords'">                             
-                        <div ng-switch="searchResult.viewType">
-                            <div ng-switch-when="default">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
+
+
+
+        <div class="container-fluid position-relative" ng-show="showFilters || searchKeyword"
+           
+            >
+            <style> .sticky-bar { position: fixed; left: 0; bottom: 0; height: 35px; width: 100%; background-color: #333; color: white; text-align: center; opacity: 0.9 } </style>
+            <div class="row m-0">
+                <div class="col-xs-12 bg-grey1 pt-4 rounded"><a rel="noopener" translation-url href="#" ng-click="showFilters=false;searchKeyword='';"
+                        class="float-end color-black"><i id="closeFilterTab" class="fa fa-2x fa-times-circle" aria-hidden="true"></i> <br> </a><div ng-if="searchKeyword" id="Search-Filter" class="m-2"><a rel="noopener" translation-url class="filter country-heading text-decoration-none"
+                            ng-click="saveFreeTextFilter(searchKeyword);"><i class="fa check"
+                                ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i> بحث بالنص الحر: <span class="text-primary">"<span ng-bind="searchKeyword"></span>"</span></a></div>
+                    <div id="recordTypesFilterTab">
+                        <div class="row" ng-if="showFilters==='recordTypesFilter' || (searchKeyword && !showFilters)">
+                            <div class="col-md-12">
+                                <national-filter></national-filter>
                             </div>
-                            <div ng-switch-when="list">
-                                <div search-result-list-view api="searchResult.listViewApi"></div>
+                            <div class="col-md-12">
+                                <reference-filter></reference-filter>
                             </div>
-                            <div ng-switch-when="group">
-                                <div search-result-group-view api="searchResult.groupViewApi"></div>
-                            </div>
-                            <div class="searchMatrixContent" ng-switch-when="matrix">
-                                <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                            <div class="col-md-12">
+                                <scbd-filter></scbd-filter>
                             </div>
                         </div>
                     </div>
-                   
-                    <div>
-                        <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='nationalRecords'}" ng-if="searchResult.currentTab==='nationalRecords'">                     
-                            <div ng-switch="searchResult.viewType">
-                                <div ng-switch-when="default">
-                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
-                                </div>
-                                <div ng-switch-when="list">
-                                    <div search-result-list-view api="searchResult.listViewApi"></div>
-                                </div>
-                                <div ng-switch-when="group">
-                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
-                                </div>
-                                <div class="searchMatrixContent" ng-switch-when="matrix">
-                                    <matrix-view api="searchResult.matrixViewApi"></matrix-view>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='referenceRecords'}" ng-if="searchResult.currentTab=='referenceRecords'">
-                            <div ng-switch="searchResult.viewType">
-                                <div ng-switch-when="default">
-                                    <div search-result-list-view api="searchResult.listViewApi"></div>
-                                </div>
-                                <div ng-switch-when="list">
-                                    <div search-result-list-view api="searchResult.listViewApi"></div>
-                                </div>
-                                <div ng-switch-when="group">
-                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
-                                </div>
-                                <div class="searchMatrixContent" ng-switch-when="matrix">
-                                    <matrix-view api="searchResult.matrixViewApi"></matrix-view>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane bg-white" ng-class="{'active':searchResult.currentTab==='scbdRecords'}" ng-if="searchResult.currentTab=='scbdRecords'">
-                            <div ng-switch="searchResult.viewType">
-                                <div ng-switch-when="default">
-                                    <div search-result-list-view api="searchResult.listViewApi"></div>
-                                </div>
-                                <div ng-switch-when="list">
-                                    <div search-result-list-view api="searchResult.listViewApi"></div>
-                                </div>
-                                <div ng-switch-when="group">
-                                    <div search-result-group-view api="searchResult.groupViewApi"></div>
-                                </div>
-                                <div class="searchMatrixContent" ng-switch-when="matrix">
-                                    <matrix-view api="searchResult.matrixViewApi"></matrix-view>
-                                </div>
-                            </div>
-                        </div>                    
-                   </div>
+
+
+                    <keyword-filter
+                        ng-if="!skipKeywordsFilter && (showFilters==='keywordsFilter' || (searchKeyword && !showFilters))">
+                    </keyword-filter>
+                    <country-filter ng-if="showFilters==='countryFilter' || (searchKeyword && !showFilters)">
+                    </country-filter>
+                    <region-filter ng-if="showFilters==='regionFilter' || (searchKeyword && !showFilters)">
+                    </region-filter>
+                    <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
+                    <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
+                        <h4 class="mt-5 ms-2">Your saved searches <small class="fs-6">- Select or edit items from the list below</small></h4>
+                        <user-alerts run-query-in-page="true"></user-alerts>
+                    </div>
+                    <div class="sticky-bar" ng-if="searchResult.loading"><span  class="align-middle"><i class="fa fa-spin fa-spinner"></i>تحديث النتائج قيد التنفيذ...</span></div>
+
+                    <div class="text-center">
+                        <button ng-href="#top" class="btn btn-sm btn-default bold" style="cursor:pointer;"
+                            ng-click="showFilters=false;searchKeyword='';scrollToTop();"><i class="bi bi-x-circle-fill" aria-hidden="true"></i> إغلاق</button>
+                    </div>
                 </div>
-             </div>
-         </div>
-     </div>
-
+            </div>
+        </div>
     </div>
-</div>
-</div>
 
-     <style> .ngdialog.ngdialog-theme-default.wide .ngdialog-content { width: 70% !important; } </style>
-     <script type="text/ng-template" trados-translation="true" id="saveFilterDialog">
+    <div id="search-new" class=" innerPageContent register-content ">
+        <div class="alert alert-danger" role="alert" ng-if="searchAlertError && searchAlertError.length>0">
+            <p ng-bind="searchAlertError"></p>
+        </div>
+        <div class="register-content-content">
+            <div class="main" id="main">
+
+                <div class="container-fluid m-2"><!-- ng-if="!skipResults" --><div class="row m-0 mt-2"><!-- Search Result --><div class="d-none d-md-block p-0 pe-2 m-0"
+                            ng-class="{'col-md-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch}"
+                            ng-show="(leftMenuFilters && leftMenuFilters.length != 0)">
+                            <div left-side-filter></div>
+                        </div><!-- Different view for list/group --><div class="col-sm-12 m-0" id="searchResult"
+                            ng-class="{'col-md-9 col-xs-12':(leftMenuFilters && leftMenuFilters.length != 0), 'd-none' : isAlertSearch}">
+                            <div class="col-sm-12 p-0 m-0">
+                                <ul class="nav nav-tabs search-tab-title">
+                                    <li id="allRecordsTab" class="nav-item"
+                                        ng-class="{'active':searchResult.currentTab==='allRecords'}"><a rel="noopener" class="nav-link color-darkgrey" translation-url href="#"
+                                            ng-click="switchTab('allRecords')">كل <span class="d-none d-sm-inline-block">السجلات</span> <span class="badge rounded-pill"
+                                                ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span></a></li>
+                                    <li id="nationalRecordsTab" class="nav-item"
+                                        ng-class="{'active':searchResult.currentTab==='nationalRecords'}"><a rel="noopener" translation-url href="#" class="nav-link text-primary"
+                                            ng-click="switchTab('nationalRecords')">السجلات <span class="d-none d-sm-inline-block">الوطنية</span> <span
+                                                class="badge rounded-pill bg-primary"
+                                                ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a></li>
+                                    <li id="referenceRecordsTab" class="nav-item"
+                                        ng-class="{'active':searchResult.currentTab==='referenceRecords'}"><a
+                                            translation-url href="#" class="nav-link color-orange"
+                                            ng-click="switchTab('referenceRecords')">السجلات <span
+                                                class="d-none d-sm-inline-block">المرجعية</span> <span
+                                                class=" badge rounded-pill"
+                                                ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a></li>
+                                    <li id="scbdRecordsTab" class="nav-item"
+                                        ng-class="{'active':searchResult.currentTab==='scbdRecords'}"><a rel="noopener" translation-url href="#" class="nav-link color-darkgrey"
+                                            ng-click="switchTab('scbdRecords')">سجلات <span class="d-none d-sm-inline-block">أمانة اتفاقية التنوع البيولوجي</span> <span class="badge rounded-pill"
+                                                ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span></a></li>
+                                </ul>
+                            </div><!-- Tab panes --><div class="col-12 tab-content bg-white p-3 m-0 border-right border-left border-bottom">
+                                <div class="tab-pane bg-white"
+                                    ng-class="{'active':searchResult.currentTab==='allRecords'}"
+                                    ng-if="searchResult.currentTab==='allRecords'">
+                                    <div ng-switch="searchResult.viewType">
+                                        <div ng-switch-when="default">
+                                            <div search-result-list-view api="searchResult.listViewApi"></div>
+                                        </div>
+                                        <div ng-switch-when="list">
+                                            <div search-result-list-view api="searchResult.listViewApi"></div>
+                                        </div>
+                                        <div ng-switch-when="group">
+                                            <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                        </div>
+                                        <div class="searchMatrixContent" ng-switch-when="matrix">
+                                            <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <div class="tab-pane bg-white"
+                                        ng-class="{'active':searchResult.currentTab==='nationalRecords'}"
+                                        ng-if="searchResult.currentTab==='nationalRecords'">
+                                        <div ng-switch="searchResult.viewType">
+                                            <div ng-switch-when="default">
+                                                <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                            </div>
+                                            <div ng-switch-when="list">
+                                                <div search-result-list-view api="searchResult.listViewApi"></div>
+                                            </div>
+                                            <div ng-switch-when="group">
+                                                <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                            </div>
+                                            <div class="searchMatrixContent" ng-switch-when="matrix">
+                                                <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane bg-white"
+                                        ng-class="{'active':searchResult.currentTab==='referenceRecords'}"
+                                        ng-if="searchResult.currentTab=='referenceRecords'">
+                                        <div ng-switch="searchResult.viewType">
+                                            <div ng-switch-when="default">
+                                                <div search-result-list-view api="searchResult.listViewApi"></div>
+                                            </div>
+                                            <div ng-switch-when="list">
+                                                <div search-result-list-view api="searchResult.listViewApi"></div>
+                                            </div>
+                                            <div ng-switch-when="group">
+                                                <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                            </div>
+                                            <div class="searchMatrixContent" ng-switch-when="matrix">
+                                                <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane bg-white"
+                                        ng-class="{'active':searchResult.currentTab==='scbdRecords'}"
+                                        ng-if="searchResult.currentTab=='scbdRecords'">
+                                        <div ng-switch="searchResult.viewType">
+                                            <div ng-switch-when="default">
+                                                <div search-result-list-view api="searchResult.listViewApi"></div>
+                                            </div>
+                                            <div ng-switch-when="list">
+                                                <div search-result-list-view api="searchResult.listViewApi"></div>
+                                            </div>
+                                            <div ng-switch-when="group">
+                                                <div search-result-group-view api="searchResult.groupViewApi"></div>
+                                            </div>
+                                            <div class="searchMatrixContent" ng-switch-when="matrix">
+                                                <matrix-view api="searchResult.matrixViewApi"></matrix-view>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <style> .ngdialog.ngdialog-theme-default.wide .ngdialog-content { width: 70% !important; } </style>
+    <script type="text/ng-template" trados-translation="true" id="saveFilterDialog">
 
          <div class="modal-header" dir="rtl">
             <h3 class="modal-title">Save Filter</h3>
@@ -240,13 +276,13 @@
                 <fieldset>
                     <div class="form-group">
                         <label for="filterTitle">عنوان فلتر التصفية</label>
-                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="عنوان فلتر التصفية">
+                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="عنوان فلتر التصفية" />
                     </div>
                     <div class="form-group">
-                        <label for="filters">فلاتر التصفية</label><br/> <span id="filters" ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;"><span class="label label-info"><span ng-if="filter.type === 'freeText' || filter.type === 'UID'">"</span><span ng-bind="filter.name"></span> <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">"</span></span></span></div>
+                        <label for="filters">فلاتر التصفية</label><br/> <span id="filters" ng-repeat="filter in record.filters mb-2 me-2"><span class="label label-info"><span ng-if="filter.type === 'freeText' || filter.type === 'UID'">"</span><span ng-bind="filter.name"></span> <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">"</span></span></span></div>
                     <div class="form-group">
                         <label for="sendEmail">
-                            <input type="checkbox" name="sendEmail" ng-model="record.sendEmail">أرسل لي رسالة بالبريد الإلكتروني عند إضافة السجلات وثيقة الصلة بهذا البحث أو تحديثها.</label>
+                            <input type="checkbox" name="sendEmail" ng-model="record.sendEmail" />أرسل لي رسالة بالبريد الإلكتروني عند إضافة السجلات وثيقة الصلة بهذا البحث أو تحديثها.</label>
                     </div>
                 </fieldset>
             </form>
@@ -257,33 +293,30 @@
         </div>
     </script>
 
-    <div style="display: none;"><span id="exportDisabledMessage">يُرجى الانتظار حتى إنهاء استعلام البحث قبل التصدير.</span></div>
-     <joyride ng-if="tourOn"></joyride>
+    <div class="d-none"><span id="exportDisabledMessage">يُرجى الانتظار حتى إنهاء استعلام البحث قبل التصدير.</span></div>
+    <joyride ng-if="tourOn"></joyride>
     <script type="text/ng-template" trados-translation="true" id="saveMySearchDialog">
         <div class="modal-header" dir="rtl">
             <h3 class="modal-title">Create or edit a saved search filter</h3>
         </div>
         <div class="modal-body" dir="rtl">
             <div class="form-group">
-                <label for="filterTitle">Title for this saved search:</label>
-                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="عنوان البحث">
+                <label class="color-black fw-bold pb-2" for="filterTitle">Title for this saved search:</label>
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="عنوان البحث" />
             </div>
             <div>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                     <p ng-repeat="error in errors" ng-bind="error"></p>
                 </div>
             </div>
-            <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
-            <label for="sendEmail">أرسل لي رسالة بالبريد الإلكتروني عند إضافة السجلات وثيقة الصلة بهذا البحث أو تحديثها.</label>
+            <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail" />
+            <label class="color-black fw-bold m-2" for="sendEmail">أرسل لي رسالة بالبريد الإلكتروني عند إضافة السجلات وثيقة الصلة بهذا البحث أو تحديثها.</label>
             <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                 <p ng-repeat="error in errors" ng-bind="error"></p>
             </div>
         </div><span class="saved-filters-list" ng-repeat="filter in saveThisFilter"><span ng-if="filter.type" class="label label-info"><span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span> <span ng-bind="getFilterName(filter.name)"></span> <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span></span></span><div class="modal-footer" dir="rtl">
-            <button type="button" class="btn btn-default pull-left" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">إلغاء</button>
+            <button type="button" class="btn btn-default float-start" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">إلغاء</button>
             <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">حفظ</button>
         </div>
     </script>
- </div>
-
-
-
+</div>

@@ -1,6 +1,6 @@
 <div>
 
-	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -22,14 +22,14 @@
                             </ul>
                         </div>
                     </div>
-                    <form class="editForm" name="editForm" style="margin-top:0px">
+                    <form class="editForm mt-0" name="editForm">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="part1">
 
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>一般信息</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="tab-pane" id="part2">
 
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>专家档案</legend>
 											<div class="row">
 												<div class="col-sm-12">
@@ -87,13 +87,13 @@
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthCountry" caption="出生地">
+													<div class="km-control-group country-list" name="birthCountry" caption="出生地">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group" name="nationalities"  caption="国籍">
+													<div class="km-control-group country-list" name="nationalities"  caption="国籍">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -105,30 +105,31 @@
                                     <div class="tab-pane" id="part3">
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>当前工作的详细信息</legend>
                                                 <div class="row">
 		
-													<div class="col-xs-12">
-														<div class="km-control-group" required name="currentEmployment.name" caption="雇主 / 组织 / 公司名称">
-															<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
-																placeholder="例如：蒙特利尔大学" pause="400" 
-																on-search="onSearchOrganizations(text, locale)" 
-																data-field="suggestions" title-field="title" description-field="summary" 
-																input-class="form-control-small"></div>
+														<div class="col-xs-12">
+															<div class="km-control-group" required name="currentEmployment.name" caption="雇主 / 组织 / 公司名称">
+																<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
+																	placeholder="例如：蒙特利尔大学" pause="400" 
+																	on-search="onSearchOrganizations(text, locale)" 
+																	data-field="suggestions" title-field="title" description-field="summary" ></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.title" caption="头衔">
-															<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.title" caption="头衔">
+																<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.department" caption="部门/分支机构/单位">
+																<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.department" caption="部门/分支机构/单位">
-															<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
-														</div>
-													</div>
-												</div>
 		
 												<div class="row">
 													<div class="col-md-6">
@@ -140,10 +141,10 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.organizationType" caption="组织类型">
+														<div class="km-control-group organization-dropdown" required name="currentEmployment.organizationType" caption="组织类型">
 															<div km-select name="currentEmployment.organizationType" required ng-model="document.currentEmployment.organizationType"
 																items="options.organizationTypes()"></div>
-															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="padding-top: 5px;;">
+															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" class="pt-1">
 																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="其他组织类型">
 																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="例如：生物多样性公约秘书处" locales="document.header.languages"></div>
 																</div>
@@ -165,7 +166,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>工作经验</legend>
 												<div class="help-block">请提供以前相关工作的详细信息。</div>
 												
@@ -174,9 +175,9 @@
 														<label>曾经工作过的国家</label>
 													</div>
 	
-													<div class="col-md-5">
+													<div class="col-md-5 mt-1">
 														
-														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="国家/地区">
+														<div class="km-control-group small country-list countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="国家/地区">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
 															ng-model="countryRegionsWorkedIn.countries" placeholder="请选择选项" items="options.countries()"></div>
 														</div>
@@ -232,12 +233,12 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.organizationType" caption="组织类型">
+														<div class="km-control-group organization-dropdown" name="previousEmployment.organizationType" caption="组织类型">
 															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="其他组织类型">
+															<div class="km-control-group organization-dropdown" name="previousEmployment.organizationTypeOther" caption="其他组织类型">
 																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="例如：生物多样性公约秘书处" locales="document.header.languages"></div>
 															</div>
 														</div>
@@ -259,14 +260,14 @@
                                     <div class="tab-pane" id="part4">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>中学后教育</legend>
 
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend><h3>正规教育</h3></legend>
 														<div class="panel panel-default" name="primaryEducation">
-															<div class="panel-heading">第一学位 （如微生物学学士）</div>
+															<div class="panel-heading pb-1">第一学位 （如微生物学学士）</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -305,7 +306,7 @@
 																</div>															
 															</div>
 														</div><br/><div class="panel panel-default">
-															<div class="panel-heading">第二学位（如微生物学硕士）*</div>
+															<div class="panel-heading pb-1">第二学位（如微生物学硕士）*</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -344,7 +345,7 @@
 																</div>																
 															</div>
 														</div><br/><div class="panel panel-default">
-															<div class="panel-heading">第三学位（如微生物学博士）</div>
+															<div class="panel-heading pb-1">第三学位（如微生物学博士）</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -386,7 +387,7 @@
 													</div>
 												</section>
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend>B. 其它专业资格</legend>
 														<div class="row">
 															<div class="col-md-12">
@@ -404,7 +405,7 @@
                                     <div class="tab-pane" id="part5">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>专业知识领域</legend>
 
 												<div class="row">
@@ -420,7 +421,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>出版物</legend>
 
 												<div class="row">
@@ -435,7 +436,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>专业会员资格</legend>
 												<div class="row">
 													<div class="col-md-12">
@@ -459,7 +460,7 @@
                                     <div class="tab-pane" id="part6">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>语言能力</legend>
 
 												<div class="row">
@@ -520,7 +521,7 @@
                                     <div class="tab-pane" id="part7">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>确认或更新信息的时间表</legend>
 												<div class="help-info">请注意根据决定 BS-IV/4，专家记录将从最后一次信息更新起，在名册中保留<u>四</u>年。此后，若未获重新提名，则将被从名册中删除。</div>
 
@@ -528,7 +529,7 @@
 										</section>
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>其它相关信息</legend>
 												<div class="row">
 													<div class="col-xs-12">

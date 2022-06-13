@@ -2,8 +2,8 @@
 
     <style></style>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
+    <div class="modal-header d-block">
+        <button type="button" class="close float-end bg-transparent border-0 fs-4" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
         <h3 class="modal-title"></h3></div>
 
     <div class="modal-body"><p></p>
@@ -22,7 +22,7 @@
 
     <div class="modal-footer">
 
-        <div class="pull-left" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
+        <div class="float-start" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
             <div ng-show="editRolesDialogCtrl.stats().grant" ></div>
             <div ng-show="editRolesDialogCtrl.stats().revoke"></div>
         </div>

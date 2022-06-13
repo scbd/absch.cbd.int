@@ -1,15 +1,15 @@
 ﻿<div id="Search-Filter"  >
      <div style="margin-bottom:30px;" >
-        <div ng-if="cf_filters.length"><span class="country-heading">生物多样性公约区域</span><hr class="heading" />
+        <div ng-if="cf_filters.length"><hr class="heading" />
         </div>
-        <div ng-repeat="doc in  cf_filters = (cf_regions | filter:IsCBDRegion | filter:searchKeyword)"><a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.regions[doc.id]}"><i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> <span ng-bind="(doc.name|lstring:locale).substring(22)"></span> <strong>(<span ng-bind="$parent.searchResult.data.facets.regions[doc.id]||0"></span>)</strong></a></div>
+        <div ng-repeat="doc in  cf_filters = (cf_regions | filter:IsCBDRegion | filter:searchKeyword)"></div>
     </div>
         
     <div style="margin-bottom:30px;">   
-        <div ng-if="cf_filters_all.length"><span class="country-heading">全部国家分组</span><hr class="heading" />
+        <div ng-if="cf_filters_all.length"><hr class="heading" />
         </div>
         <div style="max-height:300px;overflow-y:scroll">
-         <div ng-repeat="doc in cf_filters_all = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')"><a rel="noopener" translation-url  class="filter"  ng-click="saveFilter(doc)" ng-class="{'disabled':!$parent.searchResult.data.facets.regions[doc.id]}"><i class="fa check" ng-class="{'fa-check-square':isFilterOn(doc.id),'fa-square':!isFilterOn(doc.id)}"></i> <span ng-bind="doc.name|lstring:locale"></span> <strong>(<span ng-bind="$parent.searchResult.data.facets.regions[doc.id]||0"></span>)</strong></a></div>
+         <div ng-repeat="doc in cf_filters_all = (cf_regions | filter:searchKeyword | filter:alphabetFilter | orderBy:'name')"></div>
         </div>
    </div>
 </div>

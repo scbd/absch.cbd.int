@@ -1,5 +1,5 @@
 <div dir="rtl">
-	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+	<div class="innerPageEditForm p-3 bg-white border-top"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)"
 				document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -8,24 +8,26 @@
 				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2 border p-3" name="editForm">
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
-								<div class="well no-shadow bg-white">
-									<legend>معلومات عامة</legend>
+								<div class="no-shadow bg-white  pt-2">
+									<legend class="mb-0">معلومات عامة</legend>
+									<hr class="mb-3">
+
+
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-12 mt-2">
 											<div class="km-control-group" name="header.languages" required
 												caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
-												<div class="indent">
+												<div class="indent mt-2">
 													<div km-form-languages multiple required name="header.languages"
 														ng-model="document.header.languages"></div>
 												</div>
 											</div>
+
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
+										<div class="col-12">
 											<div class="km-control-group" required name="country" required
 												caption="البلد">
 												<div afc-autocomplete required name="country"
@@ -34,78 +36,76 @@
 													placeholder="Please select a country..."></div>
 											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
+
+										<div class="col-12">
 											<div class="km-control-group" required name="title"
 												caption="عنوان السجل">
 												<div km-textbox-ml name="title" required ng-model="document.title"
 													locales="document.header.languages"></div>
 											</div>
 										</div>
-									</div>
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="nodeAddress"
-												caption="الرابط/الروابط ذات الصلة">
+										<div class="col-12">
+											<div class="km-control-group" name="nodeAddress" caption="الرابط/الروابط ذات الصلة">
 												<div class="help-info">يُرجى إدخال عنوان URL لموقع الويب (على سبيل المثال http://www.cbd.int) واسم موقع الويب (مثل "اتفاقية التنوع البيولوجي").</div>
-                                        			
+
 												<div km-link name="nodeAddress" ng-model="document.nodeAddress"
 													allow-link="true" allow-file="false"></div>
 											</div>
 										</div>
-									</div> 
-									<div class="row">
-										<div class="col-sm-12">
+
+										<div class="col-12">
 											<div class="km-control-group" name="newsAbstract" caption="ملخص">
 												<div class="help-block">(الحد الأقصى 80 كلمة)</div>
 												<div km-rich-textbox ng-model="document.newsAbstract" rows="4"
 													placeholder="" locales="document.header.languages"></div>
 											</div>
+									</div>
+
+									<div class="col-12">
+										<div class="km-control-group" required name="newsText" caption="نص الأخبار">
+											<div class="help-block">(الحد الأقصى 300 كلمة)</div>
+											<div km-rich-textbox required ng-model="document.newsText" rows="4"
+												placeholder="" locales="document.header.languages"></div>
 										</div>
-									</div> 
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" required name="newsText" caption="نص الأخبار">
-												<div class="help-block">(الحد الأقصى 300 كلمة)</div>
-												<div km-rich-textbox required ng-model="document.newsText" rows="4"
-													placeholder="" locales="document.header.languages"></div>
-											</div>
+									</div>
+								
+									<div class="col-12">
+										<div class="km-control-group" name="relevantInformation"
+											caption="أي معلومات أخرى ذات صلة">
+											<div class="help-block">يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.</div>
+											<div km-rich-textbox ng-model="document.relevantInformation" rows="4"
+												placeholder="" locales="document.header.languages"></div>
 										</div>
-									</div>  
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantInformation" caption="أي معلومات أخرى ذات صلة">
-												<div class="help-block">يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.</div>
-												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
-											</div>
+									</div>
+
+									<div class="col-12-sm-12">
+										<div class="km-control-group" name="relevantDocuments"
+											caption="أي وثائق أخرى ذات صلة">
+											<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+											<div km-link name="relevantDocuments"
+												ng-model="document.relevantDocuments" allow-link="true"
+												allow-file="true" identifier="document.header.identifier"></div>
 										</div>
-									</div> 
-									<div class="row">
-										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
-												<div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
-												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
-												 identifier="document.header.identifier"></div>
-											</div>
-										</div>
-									</div>  
+									</div>
+
 									<legend>ملاحظات</legend>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
-											</div>
+
+									<div class="col-12">
+										<div class="km-control-group" name="notes"><span class="help-block">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</span><div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
-									</div> 
-							</section> 
+									</div>
+								
+									</div>
+								
+							</section>
 						</div>
 					</form>
 				</edit-form>
 				<review-form>
-					<view-biosafety-news ng-model="review.document" locale="review.locale" >
+					<view-biosafety-news ng-model="review.document" locale="review.locale">
 					</view-biosafety-news>
 				</review-form>
 			</workflow-arrow-buttons>
 		</div>
-	</div> 
+	</div>
 </div>

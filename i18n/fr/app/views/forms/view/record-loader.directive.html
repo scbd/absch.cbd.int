@@ -1,0 +1,85 @@
+﻿<div>
+    <link rel="stylesheet" href="/app/css/record.css">
+    <div id="printContentHeader" ng-include="'view-print-header.html'" ng-if="printMode"></div>
+    <style> ins { text-decoration: none; background-color: #d4fcbc; } del { text-decoration: line-through; background-color: #fbb6c2; color: #555; } </style>
+    <div id="recordContent" class="mb-5">
+        <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
+        <div block-region activate="loading||isComparing"></div>
+
+        <div class="alert alert-danger text-center" ng-show="error" ng-if="error && !loading"><strong>Erreur!</strong> This was an error loading the requested record.<p ng-if="error.status == 404">Record was not found!</p>
+            <p ng-if="error.status != 404" ng-bind="error.message||error"></p>
+        </div>
+        <div class="jumbotron bg-white" role="alert" ng-if="documentSuccess">
+            <h2>Merci de télécharger ce document <span ng-bind="documentUID"></span></h2>
+            <p>Si le document n’a pas été téléchargé, essayez de cliquer <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">ici...</a></p></br> </br> </br> </br> Cette fenêtre se fermera automatiquement dans <span ng-bind="timeLaspe"></span> secondes.</div>
+
+        <div class="jumbotron bg-white" role="alert" ng-if="documentError">
+            <h2>Merci de télécharger ce document <span ng-bind="documentUID"></span>.</h2>
+            <p>Le document n’existe pas. Si vous croyez que ce fichier devrait être rendu disponibles, veuillez nous le signaler à <a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a>.</p>
+        </div>
+
+        <div id="RecordDetails" class="pb-3" ng-if="showDetails">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card card p-3">
+                        <h3 class="border-bottom p-0 m-0 mb-2">Information sur le fichier</h3>
+                        <div><span class="fs-small-8">Type :</span> <span ng-bind="internalDocumentInfo.metadata.schema | schemaName"></span></div>
+                        <div><span class="fs-small-8">Statut :</span> <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">BROUILLON</span><span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">PUBLIÉ</span> <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">[ Verrouilé: Pending <span ng-bind="workflowRequestType"></span> request]</span> <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">DELETED</span> <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'"><span class="bold color-red">REVOKED</span></span></div>
+                        <div><span class="fs-small-8">Historique :</span><div view-history document-id="internalDocumentInfo.identifier"></div>
+                        </div>
+
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
+            <h3>Vous êtes en train de visualiser un fichier supprimé.</h3>
+            <p>Cette information sur le fichier est montrée à des fins de référence seulement et ne doit pas être utilisée.</p>
+        </div>
+
+        <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > internalDocumentInfo.revision && revisionNo != 'draft'">
+            <h3>Ce document a été mis à jour. Il ne s’agit pas de la dernière version publiée. <a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName|encodeURIComponent}}/{{internalDocument | uniqueIDWithoutRevision|encodeURIComponent}}"
+                    target="new">Cliquez ici pour voir la dernière version du fichier.</a></h3>
+        </div>
+
+        <div class="alert alert-success comapre-message" role="alert" ng-show="comparingRevision">
+            <h3><span class="fa fa-window-restore"></span> Comparer cette version <strong ng-bind="comparingRevision"></strong> avec la version la plus récente <strong ng-bind="internalDocumentInfo.latestRevision"></strong><button ng-disabled="isComparing" class="btn btn-default btn-success btn-xs float-end" type="button"
+                    ng-click="closeComparison()"><span class="bi bi-x-circle-fill"></span> Fermer la comparaison</button>
+            </h3>
+        </div>
+
+        <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
+            <div><span class="color-white">|&nbsp;</span> <a rel="noopener" translation-url title="Modifier" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
+                    class="btn btn-sm text-black action-button p-0 px-1 color-white" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit"><i class="bi bi-pencil-square color-white"></i> <span class="d-none d-sm-inline-block">Edit</span></a><button title="Supprimer" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button"
+                    class="btn btn-default" ng-click="askDelete(record)"><i class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+        <div ng-if="showDifferenceButton||showComparison" class="full-text-display float-end compare-buttons pe-2 position-relative text-white"
+            style="top:7px;">
+            <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-sm"
+                ng-click="showDifference()"><i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Montrer la différence</button><!-- for comparing with older versions --> <!-- ng-if="showDifferenceButton"  style="display: none;"--><div class="btn-group dropdown" role="group">
+                <button ng-if="showComparison" ng-disabled="isComparing"
+                    class="btn btn-sm dropdown-toggle fs-small-8 p-0 px-1 color-white" type="button"
+                    id="comparisonMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                    ng-click="loadRecordRevisions()"><span class="color-white">|&nbsp;&nbsp;</span> <i class="fa fa-history color-white"></i> <span class="color-white d-none d-sm-inline-block" ng-if="!comparingRevision">Compare</span> <span class="color-white d-none d-sm-inline-block" ng-if="comparingRevision">Comparing <span
+                            ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span> <span class="caret"></span></button>
+                <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
+                    <li ng-if="loadingRevisions" ng-disabled="isComparing"><a class="dropdown-item" ng-href="#"><i class="fa fa-spin fa-spinner"></i> Loading...</a></li>
+                    <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions" ng-disabled="isComparing"
+                        ng-class="{'active':revision.revision==comparingRevision}"><a class="dropdown-item" ng-href="#" ng-click="showDifference(revision.revision)"
+                            ng-bind="revision.uniqueIdentifier"></a></li>
+                </ul>
+            </div>
+            <div ng-if="isComparing">
+                <div id="compareSchemaView"></div>
+            </div>
+        </div>
+        <div class="float-end pe-2 position-relative text-white" style="top:7px;" ng-show="!loading && !error">
+            <div record-options></div>
+        </div><span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> chargement en cours...</span><div id="schemaView" ng-show="internalDocument"></div>
+    </div>
+    <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>
+
+</div>

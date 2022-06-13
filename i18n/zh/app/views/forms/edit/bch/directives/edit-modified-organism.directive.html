@@ -1,6 +1,6 @@
 <div>
 
-<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+<div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -8,11 +8,11 @@
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>一般信息</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -27,7 +27,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>改性活生物体（LMO）的身份。</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -50,7 +50,8 @@
 										</div>
 										<div class="col-sm-12" ng-if="document.hasUniqueIdentification">
 											<div class="km-control-group" required name="uniqueIdentification" caption="唯一识别码">
-												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"/>
+												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"
+													ng-change="lookupDetections()"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
@@ -90,7 +91,7 @@
 							
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>改性过程的特点</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -133,7 +134,7 @@
 	
 							
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>改性活生物体的特征</legend>
 									<div class="row"><!-- <div class="col-xs-12">
 											<div class="km-control-group" name="isGeneEdited" required
@@ -178,25 +179,21 @@
 								</div>
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>探测方法</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethodLinks" caption="外部链接">
+											<div class="help-block">Detection methods information from the CropLife International Detection Methods Database and the EU Reference Laboratory for GM Food and Feed (EURL-GMFF) is dynamically imported from each respective database. As such, these links cannot be manually edited or removed.</div>
+											<div class="km-control-group" name="externalLinks" caption="外部链接">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
-													identifier="document.header.identifier">
-													<link-controls>												
-														<button type="button" class="btn btn-default" ng-click="$parent.addLink()"><i class="fa fa-globe"></i> 添加链接</button>
-														<button type="button" class="btn btn-default" ng-click="$parent.addFile()"><i class="fa fa-file-o"></i> 添加文件</button><!-- TODO: find better way to get parent func incase of transclude --><button class="btn btn-default" ng-click="$parent.$parent.$parent.$parent.$parent.$parent.lookupDetections()" 
-															ng-disabled="$parent.$parent.$parent.$parent.$parent.$parent.lookingupDetections"><i ng-if="lookingupDetections" class="fa fa-spinner fa-spin"></i> <i class="fa fa-database" aria-hidden="true"></i> 查阅探测方法</button>
-													</link-controls>
-												</div>
+													identifier="document.header.identifier" ></div>
+												<div km-link name="externalLinks" ng-model="externalLinks" ng-if="externalLinks" allow-link="false" allow-file="false" identifier="document.header.identifier"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethod" caption="补充信息">
+											<div class="km-control-group" name="detectionMethod" caption="Additional information">
 												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -204,7 +201,7 @@
 								</div>
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>更多信息</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -256,7 +253,7 @@
 			<table class="table" style="padding-bottom:3px;width:100%;margin-top:5px;">
 				<tr ng-repeat="doc in docSelector.model"  >
 					<td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="$parent.$parent.$parent.removeDocument(doc);" class="link color-red"><i class="fa fa-times"></i></a></td>
-					<td style="margin-bottom:20px;">
+					<td class="mb-4">
 						<div view-record-reference ng-model="doc.identifier" locale="locale" hide-schema="true"></div>
 					</td>
 				</tr>

@@ -1,0 +1,115 @@
+﻿<div  id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans m-0 p-4">
+
+        <div class="register-content-header bg-pink color-white">
+            <div class="p-2">
+                <h3>已报告记录</h3>
+            </div>
+        </div>
+        <div  class="register-content-content">
+
+
+            <div class="w-100" >
+                <div class="row table-striped p-2 border-bottom">                
+                    <div class="col-2">架构</div>
+                    <div class="col-2">报告人：</div>
+                    <div class="col-2">报告日期：</div>
+                    <div class="col-4">信息</div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row table-striped p-2 border-bottom"
+                ng-repeat="record in reportRecords | orderBy:'reportedOn':'desc'">
+                    <div ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)">
+                        <div class="col-2"><span ng-bind="record.schema|schemaName"></span></div>
+                        <div class="col-2"><span ng-bind="record.reportedBy"></span></div>
+                        <div class="col-2"><span ng-if="record.meta" ng-bind="record.meta.createdOn|formatDateWithTime"></span></div>
+                        <div class="col-3"><span ng-if="record.incorrect">不正确或不恰当 |</span> <span ng-if="record.broken">链接断裂或信息过时 |</span> <span ng-if="record.copyright">版权侵权</span><br> <span ng-bind="record.additionalInformation"></span></div>
+                        <div class="col-3">
+                            <input type="button" class="btn btn-primary" value="View Record" ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)" />
+                            <input type="button" class="btn btn-primary" value="Add Comments" ng-click="addComments($event, record)" />
+                            <input type="button" class="btn btn-warning" value="Delete" ng-click="delete($event, record)" />
+                        </div>
+                    </div>
+                    <div ng-if="record.history"><!--<div class="col-xs-1"></div>--><table class="table table-striped m-auto" style="width:80%">
+                            <thead class="row p-2 border-bottom">                
+                                <td>编号：</td>
+                                <td>日期</td>
+                                <td>状态</td>
+                                <td>评论</td>
+                            </thead>
+                            <tbody class="row table-striped table-hover" >                
+                                <td ng-bind="record.history.length+1"></td>
+                                <td ng-bind="record.meta.modifiedOn|formatDateWithTime + ' by ' + record.meta.modifiedBy"></td>
+                                <td ng-bind="record.status"></td>
+                                <td ng-bind="record.comments"></td>
+                            </tbody>
+                             <tbody class="row table-striped table-hover" 
+                             ng-repeat="history in record.history | orderBy:'version':'asc'">                
+                                <td ng-bind="history.meta.version"></td>
+                                <td ng-bind="history.meta.modifiedOn|formatDateWithTime + ' by ' + history.meta.modifiedBy"></td>
+                                <td ng-bind="history.status"></td>
+                                <td ng-bind="history.comments||history.additionalInformation"></td>
+                            </tbody>
+                        </table><!--<div class="col-xs-1"></div>--></div>
+                    <div ng-if="record.showDoc">
+                        <div style="padding:35px 0px 15px 0px!important;">
+                            <record-loader class="card card-3" api="api.recordLoaderApi" show-details="false" hide-buttons="tdue" link-target="_blank"></record-loader>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="text/ng-template" trados-translation="true" id="addCommentsDialog">
+        <div class="modal-header">           
+            <h3 class="modal-title"><span ng-bind="record.schema|schemaName + ' : -' + record.reportedBy"></span></h3> 
+        </div>
+
+        <div class="modal-body">
+            <div class="form-group row">
+                <label for="example-text-input" class="col-2 col-form-label">状态</label>
+                <div class="col-10">
+                    <select class="form-control" style="width:10%" required name="status" ng-model="record.status">
+                        <option value="Read">已读</option>
+                        <option value="Not a issue">并非问题</option>
+                        <option value="Record owner contacted">已联系记录管理人</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">评论</label>
+                <div class="col-10">
+                    <textarea rows="3" class="form-control"  id="comments" ng-model="record.comments"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">取消</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save()" ng-disabled="loading">提交</button>
+        </div>
+    </script>
+
+
+    <script type="text/ng-template" trados-translation="true" id="confirmDeleteDialog">
+        <div class="modal-header">           
+            <h3 class="modal-title">确认删除？</h3> 
+        </div>
+
+        <div class="modal-body">             
+                <div class="col-12 col-form-label">架构： <span ng-bind="record.schema|schemaName"></span></div>
+                <div class="col-12 col-form-label">报告人： <span ng-bind="record.reportedBy"></span></div>
+                <div class="col-12 col-form-label">报道日期： <span ng-if="record.meta"><span ng-bind="record.meta.createdOn|formatDate"></span></div>
+                <div class="col-12 col-form-label">信息：<span ng-if="record.incorrect">不正确或不恰当 |</span> <span ng-if="record.broken">链接断裂或信息过时 |</span> <span ng-if="record.copyright">版权侵权</span><br> <span ng-bind="record.additionalInformation"></span></div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">否</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="confirmDelete()" ng-disabled="loading">是</button>
+        </div>
+    </script>
+
+</div>

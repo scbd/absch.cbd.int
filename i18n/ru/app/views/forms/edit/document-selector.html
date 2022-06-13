@@ -2,17 +2,17 @@
 
         <style> #rec {font-size:12px;} #rec .type {text-transform:uppercase; white-space:nowrap; font-size:10px; font-weight:bold;} #rec .id {text-transform:uppercase; white-space:nowrap; } #rec .title {color:#111;font-size:12px; font-weight:bold;} #rec .meta {max-width:20%;} .col-title {color:#333; text-transform: uppercase; font-size: 12px; font-weight: bold;} ul.pagination{margin: 0px;} </style><!-- existing documents display --><div ng-transclude="selectRecords">   
         <div class="row">
-            <div class="col-xs-12">             
-                <button type="button" style="margin-right:20px;" class="btn btn-default" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus" ng-if="!openingDialog"></i> <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> <span ng-if="caption" ng-bind="caption"></span> <span ng-if="!caption && type=='radio'">Добавить запись</span> <span ng-if="!caption && type!=='radio'">Добавить запись(-и)</span></button><span ng-show="model.length==0 || !model"><i class="color-blue">Связанных записей нет.</i></span> <a rel="noopener" translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords"><i class="fa fa-chevron-circle-right"></i><span ng-bind="model.length"></span> связанные записи.</a> <a rel="noopener" translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 "><i class="fa fa-chevron-circle-down"></i><span ng-bind="model.length"></span> связанные записи.</a></div>
+            <div class="col-12">             
+                <button type="button" class="btn btn-default me-4" ng-click="openAddDialog();" ng-disabled="disabled"><i class="fa fa-plus" ng-if="!openingDialog"></i> <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> <span ng-if="caption" ng-bind="caption"></span> <span ng-if="!caption && type=='radio'">Добавить запись</span> <span ng-if="!caption && type!=='radio'">Добавить запись(-и)</span></button><span ng-show="model.length==0 || !model"><i class="color-blue">Связанных записей нет.</i></span> <a rel="noopener" translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords"><i class="fa fa-chevron-circle-right"></i><span ng-bind="model.length"></span> связанные записи.</a> <a rel="noopener" translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 "><i class="fa fa-chevron-circle-down"></i><span ng-bind="model.length"></span> связанные записи.</a></div>
         </div>
     </div>
 
     <div ng-transclude="selectedRecords">   
         <div class="row" ng-show="areVisible && !disabled">
-            <div class="col-xs-12"><br /><table class="table" id="search-new" style="padding-bottom:3px;width:100%;">
+            <div class="col-12"><br /><table class="table width-100 pb-1" id="search-new">
                     <tr ng-repeat="doc in model" ng-if="type!='radio'">
-                        <td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(doc)" class="link color-red"><i class="fa fa-times"></i></a></td>
-                        <td style="margin-bottom:20px;">
+                        <td class="mb-3 width-1"><a rel="noopener" translation-url  class="btn btn-default border-secondary" ng-click="removeDocument(doc)" class="link color-red"><i class="fa fa-times"></i></a></td>
+                        <td class="mb-4">
                             <div ng-if="isContact(doc) || isAuthority(doc) || isFocalPoint(doc)" view-record-reference ng-model="doc" 
                                 locale="locale" class="km-value" wait-for-workflow="{{runningWorklfows[doc.identifier] ? 'true':'false'}}"></div>
                             <div ng-if="!isContact(doc) && !isAuthority(doc) && !isFocalPoint(doc)" view-record-reference ng-model="doc.identifier" 
@@ -20,8 +20,8 @@
                         </td>
                     </tr>
                     <tr ng-if="type=='radio' && model">
-                        <td style="margin-bottom:15px;width:15px;"><a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red"><i class="fa fa-times"></i></a></td>
-                        <td style="margin-bottom:20px;">
+                        <td class="mb-3 width-1"><a rel="noopener" translation-url  class="btn btn-default" ng-click="removeDocument(model)" class="link color-red"><i class="fa fa-times"></i></a></td>
+                        <td class="mb-4">
                             <div ng-if="isContact(model) || isAuthority(model) || isFocalPoint(model)" view-record-reference ng-model="model" 
                                 locale="locale" class="km-value"  wait-for-workflow="{{runningWorklfows[model.identifier] ? 'true':'false'}}"></div>
                             <div ng-if="!isContact(model) && !isAuthority(model) && !isFocalPoint(model)" view-record-reference ng-model="model.identifier" 
@@ -34,26 +34,26 @@
         </div>
     </div><!-- Modal --><script type="text/ng-template" trados-translation="true" id="documentSelectionModal">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
-            <div class="modal-header bg-grey ">
+            <div class="modal-header bg-grey d-block">
                 <div ng-if="!allowNew.editingOn">
-                    <h3>Выберите опубликованную(-ые) запись(-и) из списка ниже:</h3>
+                    <h3>Please select from the list of published records below:</h3>
                     <div class="help-info">Если запись отсутствует в списке, создайте новую запись.</div>
-                    <div>
-                        <ul class="nav nav-tabs pull-left" style="width:100%">                            
-                            <li class="nav-item active"><a rel="noopener" data-toggle="tab" class="nav-link" href="#allRecords" ng-click="changeTab('allRecords')">Все</a></li>
-                            <li class="dropdown nav-item" ng-if="userGov && showMyGovFilter"><a class="dropdown-toggle" data-toggle="dropdown" href="#"><span ng-if="activeTab!='myGovernmentRecords'">Мои записи</span> <span ng-if="activeTab=='myGovernmentRecords'">Записи от имени правительства моей страны</span> <span class="caret"></span></a><ul class="dropdown-menu">
-                                  <li><a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">Мои записи</a></li>
-                                  <li><a rel="noopener" data-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">Записи от имени правительства моей страны</a></li>
+                    <div class="d-block">
+                        <ul class="nav nav-tabs float-start mb-0">
+                            <li class="nav-item"><a rel="noopener" data-bs-toggle="tab" class="nav-link active" href="#allRecords" ng-click="changeTab('allRecords')">Все</a></li>
+                            <li class="dropdown nav-item" ng-if="userGov && showMyGovFilter"><a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#"><span ng-if="activeTab!='myGovernmentRecords'">Мои записи</span> <span ng-if="activeTab=='myGovernmentRecords'">Записи от имени правительства моей страны</span> <span class="caret"></span></a><ul class="dropdown-menu">
+                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">Мои записи</a></li>
+                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">Записи от имени правительства моей страны</a></li>
                                 </ul>
                             </li>
-                            <li class="nav-item" ng-if="!userGov || !showMyGovFilter"><a rel="noopener" data-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">Мои записи</a></li>
-                            <li class="nav-item"style="padding-right: 25px;"><a rel="noopener" data-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Выбрано <span ng-if="recordCount"></span></a></li>
-                            <li  class="pull-right" style="max-width:40%">                                
-                                 <form ng-submit="searchFreeText(search.keyword)" class="input-group">
-                                    <input type="textbox" ng-model="search.keyword" placeholder="фильтровать записи по ключевым словам или уникальным идентификаторам или любому другому тексту"
-                                        class="pull-right form-control"><span type="submit" style="cursor:pointer" ng-click="searchFreeText(search.keyword)" class="input-group-addon" id="basic-addon2"><i class="fa fa-search"></i> Поиск</span></form>
-                            </li>
+                            <li class="nav-item" ng-if="!userGov || !showMyGovFilter"><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">Мои записи</a></li>
+                            <li class="nav-item pe-4"><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Выбрано <span ng-if="recordCount"></span></a></li>
                         </ul>
+                        <div class="float-end d-none d-md-block w-50">                                
+                            <form ng-submit="searchFreeText(search.keyword)" class="input-group">
+                                <input type="textbox" ng-model="search.keyword" placeholder="фильтровать записи по ключевым словам или уникальным идентификаторам или любому другому тексту"
+                                   class="float-end form-control"><span type="submit" ng-click="searchFreeText(search.keyword)" class="input-group-text d-block cursor-pointer" id="basic-addon2"><i class="fa fa-search"></i> Поиск</span></form>
+                        </div>
                     </div><br/></div>
                 <div ng-if="allowNew.editingOn">
                     <h3>Создать <span ng-bind="allowNew.activeSchema|schemaName"></span></h3>
@@ -62,50 +62,50 @@
             
             <div class="modal-body" ng-if="isDialogOpen">
                 
-                <div class="tab-content" style="max-height:400px;overflow-y:auto;margin:0;padding:0;" id="search-new" ng-if="!allowNew.editingOn">
+                <div class="tab-content m-0 p-0" style="max-height:400px;overflow-y:auto;" id="search-new" ng-if="!allowNew.editingOn">
                   
-                    <div id="allRecords" class="tab-pane fade in active" style="background-color:#fff">
+                    <div id="allRecords" class="tab-pane bg-white active">
                         <div ng-if="activeTab=='allRecords'">
                             <div ng-include="'documentSelectionRecordDisplay'"></div>
                         </div>
                     </div>
-                    <div id="myRecords" class="tab-pane fade in" style="background-color:#fff">
+                    <div id="myRecords" class="tab-pane bg-white">
                         <div ng-if="activeTab=='myRecords'">
                             <div ng-include="'documentSelectionRecordDisplay'"></div>
                         </div>                        
                     </div>
-                    <div id="myGovernmentRecords" class="tab-pane fade in" style="background-color:#fff">
+                    <div id="myGovernmentRecords" class="tab-pane bg-white">
                         <div ng-if="activeTab=='myGovernmentRecords'">
                             <div ng-include="'documentSelectionRecordDisplay'"></div>
                         </div>                        
                     </div>
-                    <div id="selectedRecords" class="tab-pane fade in" style="background-color:#fff">  
+                    <div id="selectedRecords" class="tab-pane bg-white">
                         <div ng-if="activeTab=='selectedRecords'">        
                                   
-                            <table ng-if="tempSelectedDocuments.length" class="table table-condensed table-striped" style="width:100%;" >
+                            <table ng-if="tempSelectedDocuments.length" class="table table-condensed table-striped" class="width-100">
                                 <thead>
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">Тип</a> <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                                        <th class="text-nowrap"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">Тип</a> <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">Название</a> <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th><!-- <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_countryName', search.sortSequence)">Owner</a>
-                                            <span ng-show="search.sort == 'rec_countryName'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> --><th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">Уникальный идентификатор</a> <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">Название</a> <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th><!-- <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_countryName', search.sortSequence)">Owner</a>
+                                            <span ng-show="search.sort == 'rec_countryName'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> --><th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">Уникальный идентификатор</a> <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">Резюме</a> <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
-                                        <th style="white-space:nowrap;"><!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> --> Метаинформация <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span> --></th>
+                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">Резюме</a> <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                                        <th class="text-nowrap"><!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> --> Метаинформация <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span> --></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr ng-repeat="doc in tempSelectedDocuments" id="rec">
-                                        <td style="width:0;"><span class="bold" ng-bind="$index+1"></span>.</td>
-                                        <td  style="width:0;">
-                                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" style="width: 16px; height: 16px;" />
+                                        <td class="width-0"><span class="bold" ng-bind="$index+1"></span>.</td>
+                                        <td  class="width-0">
+                                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)"class="input_width_height"/>
                                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" 
-                                                style="width: 16px; height: 16px;" />
+                                            class="input-wh"/>
                                         </td>
                                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
-                                        <td style="min-width:30%" class="title"><a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td><!-- <td ng-bind="doc.rec_countryName"></td> --><td class="id color-blue"><a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
+                                        <td class="title width-min-30"><a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.rec_title"></a></td><!-- <td ng-bind="doc.rec_countryName"></td> --><td class="id color-blue"><a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
                                         <td class="summary" ng-bind="doc.rec_summary | limitTo:20"  data-title="doc.rec_summary"></td>
                                         <td class="meta"><span ng-bind="doc.meta"></span></td>
                                     </tr>
@@ -116,20 +116,20 @@
                     </div>
                 
                 </div>
-                <div  ng-show="allowNew.editingOn" class="row" style="max-width:100%"><span ng-if="loadingEditDirective" style="margin:40%"><i class="fa fa-spin fa-spinner"></i> загрузка...</span><div id="divNewRecord" class="col-lg-12" style="margin:20px">
+                <div  ng-show="allowNew.editingOn" class="row mw-100"><span ng-if="loadingEditDirective" style="margin:40%"><i class="fa fa-spin fa-spinner"></i> загрузка...</span><div id="divNewRecord" class="col-lg-12 m-4">
                     </div>
                 </div>
             </div> 
 
-            <div class="modal-footer bg-grey">
+            <div class="modal-footer bg-grey d-block">
                 <div class="row">
-                    <div class="col-xs-12"><a rel="noopener" translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Выбрать</a> <a rel="noopener" translation-url  type="button" class="btn btn-primary bold pull-left" style="color:white;" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Очистить выбранные записи</a><div class="dropdown  pull-left"  ng-if="allowNew.schemas && allowNew.schemas.length>1 && !allowNew.editingOn" style="margin-left:5px;">
-                            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown"><span ng-if="!allowNew.title">Создать</span> <span ng-if="allowNew.title" ng-bind="allowNew.title"></span> <span class="caret"></span></button>
+                    <div class="col-12"><a rel="noopener" translation-url  type="button" class="btn btn-primary float-start  me-1 color-white" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Выбрать</a> <a rel="noopener" translation-url  type="button" class="btn btn-primary float-start me-1 color-white" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Очистить выбранные записи</a><div class="dropdown  float-start me-1"  ng-if="allowNew.schemas && allowNew.schemas.length>1 && !allowNew.editingOn" class="ms-1">
+                            <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown"><span ng-if="!allowNew.title">Создать</span> <span ng-if="allowNew.title" ng-bind="allowNew.title"></span> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                              <li ng-repeat="schema in allowNew.schemas"><a rel="noopener" href="#" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(schema)"><span ng-bind="schema|schemaName"></span></a></li>
+                            <li ng-repeat="schema in allowNew.schemas"><a rel="noopener" href="#" ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(schema)"><span ng-bind="schema|schemaName"></span></a></li>
                             </ul>
-                        </div><a rel="noopener" href="#" type="button" class="btn btn-primary bold pull-left" ng-if="allowNew.schemas && allowNew.schemas.length==1 && !allowNew.editingOn"
-                            ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(allowNew.schemas[0])">Создать <span ng-bind="allowNew.schemas[0]|schemaName"></span></a> <a rel="noopener" translation-url  type="button" class="btn btn-info bold pull-left" style="color:white;" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Показать существующие</a> <a rel="noopener" translation-url  type="button" class="btn btn-warning bold" data-bs-dismiss="modal" ng-click="closeDialog()">Отменить</a></div>
+                        </div><a rel="noopener" href="#" type="button" class="btn btn-primary float-start  me-1" ng-if="allowNew.schemas && allowNew.schemas.length==1 && !allowNew.editingOn"
+                            ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(allowNew.schemas[0])">Создать <span ng-bind="allowNew.schemas[0]|schemaName"></span></a> <a rel="noopener" translation-url  type="button" class="btn btn-info float-start e-1 text-white" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Показать существующие</a> <a rel="noopener" translation-url  type="button" class="btn btn-warning float-end" data-bs-dismiss="modal" ng-click="closeDialog()">Отменить</a></div>
                 </div>
             </div>
         </div>
@@ -137,55 +137,55 @@
 
     <script type="text/ng-template" trados-translation="true" id="documentSelectionRecordDisplay">
         <div class="col-md-12">
-            <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
+            <div class="float-end btn-group" ng-if="rawDocuments.docs.length">
                 <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
                 <button type="button" class="btn btn-default" data-placement="bottom" data-bs-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
-           <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
+        <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
         </div>
-        <div class="row" style="margin:0;padding:0;margin-bottom:10px" ng-show="!isLoading" >
+        <div ng-show="!isLoading" class="p-1 mt-3 mb-0 ms-4 pe-0">
             <div ng-if="isDialogOpen && !allowNew.editingOn && !listView">
                 <div ng-repeat="doc in rawDocuments.docs">
-                        <div class="col-xs-1 text-right">
-                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" style="width: 16px; height: 16px;" />
+                        <div class="float-start p-3 pe-4">
+                            <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)"class="input-wh"/>
                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" 
-                                style="width: 16px; height: 16px;" />
+                            class="input-wh"/>
                         </div>
-                        <div class="col-xs-11">
+                        <div class="col-12">
                             <result-default doc='doc' type="nationalRecords"></result-default>
                         </div>
                     </div>
                 
                 
             </div> 
-            <table ng-if="isDialogOpen && !allowNew.editingOn && listView" class="table table-condensed table-striped" style="width:100%;" >
+            <table ng-if="isDialogOpen && !allowNew.editingOn && listView" class="table table-condensed table-striped" class="width-100">
                 <thead>
                     <tr>
                         <th></th>
                         <th></th>
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">тип</a> <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                        <th class="text-nowrap"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">тип</a> <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">название</a> <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">название</a> <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">УИ записи</a> <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">УИ записи</a> <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">резюме</a> <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
+                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">резюме</a> <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th style="white-space:nowrap;"><!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> --> Метаинформация <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> --></tr>
+                        <th class="text-nowrap"><!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> --> Метаинформация <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> --></tr>
                 </thead>
                 <tbody>
                     <tr ng-repeat="doc in rawDocuments.docs" id="rec">
-                        <td style="width:0;"><span class="bold" ng-bind="(($index+1) + ((searchResult.currentPage-1)*searchResult.rowsPerPage))"></span></td>
-                        <td  style="width:0;">                                                
+                        <td class="width-0"><span class="bold" ng-bind="(($index+1) + ((searchResult.currentPage-1)*searchResult.rowsPerPage))"></span></td>
+                        <td  class="width-0">                                                
                             <input ng-if="type==='checkbox'" type="checkbox" ng-model="doc.__checked" ng-change="onSelectAction(doc)" />
                             <input ng-if="type==='radio'" type="radio" name="{{question}}_selected"   ng-change="onSelectAction(doc)" ng-model="doc.__checked" ng-value="true" />
                         </td>
                         <td class="type" ng-bind="doc.schema_s | schemaShortName"></td>
-                        <td style="min-width:30%" class="title"><a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
+                        <td class="title width-min-30"><a rel="noopener" href="{{doc.url_ss}}" target="_blank"><span ng-bind="doc.rec_title"></span></a></td>
                         <td class="id color-blue"><a rel="noopener" href="{{doc.url_ss}}" target="_blank" ng-bind="doc.uniqueIdentifier_s"></a></td>
                         <td class="summary" data-title="doc.rec_summary" ng-bind="doc.rec_summary | limitTo:20"></td>
                         <td class="meta"><span ng-bind="doc.meta"></span></td>
@@ -197,14 +197,14 @@
         <div ng-if="!isLoading && rawDocuments.numFound===0" class="text-center">записей не найдено.</div>
 
         <div class="col-md-12">
-            <div class="pull-right btn-group" ng-if="rawDocuments.docs.length">
+            <div class="float-end btn-group" ng-if="rawDocuments.docs.length">
                 <button type="button" class="btn btn-default" data-bs-toggle="tooltip" data-title="Rich list view" ng-class="{'btn-primary':!listView}" ng-click="changeDisplay('grid')"><i class="fa fa-th-large"></i></button>
                 <button type="button" class="btn btn-default" data-bs-toggle="tooltip" data-title="Table view" ng-class="{'btn-primary':listView}" ng-click="changeDisplay('list')"><i class="fa fa-table"></i></button>
             </div>
-            <div pagination class="text-center" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage" 
+            <div pagination class="text-center ms-5" ng-if="rawDocuments.pageCount>0" current-page="searchResult.currentPage"
                 page-count="rawDocuments.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="rawDocuments.numFound" on-page-size-changed="onPageSizeChanged(size)"
                 max-page-count="4"></div> 
         </div>
     </script>
-</div>
+    </div>

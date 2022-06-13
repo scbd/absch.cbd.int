@@ -96,7 +96,7 @@
                             <label>样本数据</label>
                             <div class="text">
                                 <ul class="list">
-                                    <li ng-repeat="item in document.specimens"><a rel="noopener" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
+                                    <li ng-repeat="item in document.specimens"><a rel="noopener" translation-url ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
                                 </ul>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                             <label>分类学</label>
                             <div class="text">
                                 <ul class="list">
-                                    <li ng-repeat="item in document.taxonomies"><a rel="noopener" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
+                                    <li ng-repeat="item in document.taxonomies"><a rel="noopener" translation-url ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">(<span ng-bind="item.url"></span>)</i></li>
                                 </ul>
                             </div>
                         </div>

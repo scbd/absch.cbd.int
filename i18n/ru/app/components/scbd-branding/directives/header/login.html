@@ -1,0 +1,44 @@
+﻿<div id="CBD-Branding">
+<div class="modal login" tabindex="-1" role="dialog" aria-hidden="true" id="loginDialog">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content shadow-lg rounded">
+      <div class="modal-header text-center justify-content-center">
+        <button type="button" class="close position-absolute top-0 end-0 m-2 fs-4 text-muted bg-transparent border-0" data-bs-dismiss="modal" data-dismiss="modal" aria-hidden="true">&times;</button><img src="/app/components/scbd-branding/images/cbd-logo-green-en.svg" style="max-height:70px;"></img></div>
+      <div class="modal-body  dropshadow">
+        <div class="row" ng-show="!user.isAuthenticated">
+          <div class="col-xs-12">
+            <div>
+              <div class="alert alert-info" ng-show="sessionExpiredAlert"><strong>Срок действия сеанса истек.</strong> Срок действия сеанса истек. Выполните вход для продолжения.</div>
+              <div class="alert alert-danger" ng-show="errorInvalid"><strong>Ошибка входа.</strong> Введен неверный адрес электронной почты или пароль.</div>
+              <div class="alert alert-danger" ng-show="errorTimeout"><strong>Сбой операции.</strong> Служба недоступна. Повторите попытку позже.</div>
+              <form name="form" ng-submit="doSignIn()" class="ng-pristine ng-invalid ng-invalid-required">
+                <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1"><i class="bi bi-envelope-fill"></i></span><input type="text" ng-disabled="waiting"
+                    class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputEmail" name="email"
+                    ng-model="email" placeholder="зарегистрированный адрес электронной почты" required>
+                </div>
+                <div class="input-group mb-3"><span class="input-group-text" id="basic-addon1"><i class="bi bi-lock-fill"></i></span><input type="password" ng-disabled="waiting"
+                    class="form-control ng-pristine ng-invalid ng-invalid-required" id="inputPassword" name="password"
+                    ng-model="password" placeholder="пароль" required>
+                </div>
+                <div class="input-group mb-2 justify-content-center">
+                <div class="form-group ">
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary " ng-disabled="waiting"><i class="fa fa-spin fa-spinner" ng-if="waiting"></i> Войдите в свою учетную запись</button>
+                    <div class="spinner ng-hide" ng-show="waiting">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-xs-12"><span class="float-start"><a rel="noopener" href="https://accounts.cbd.int/password/reset" style="text-decoration:none;" class="color-white" target="_blank">Забыли пароль?</a></span> <span class="float-end"><a rel="noopener" href="https://accounts.cbd.int/signup" style="text-decoration:none;" class="color-white" target="_blank">Создать учетную запись</a></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

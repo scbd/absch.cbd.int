@@ -13,7 +13,7 @@
 			
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>一般信息</legend>
 			
                                     <div class="row">
@@ -101,7 +101,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>获取资源</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -124,7 +124,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>有关资源内容的信息</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -164,7 +164,7 @@
 								
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>便于在信息交换所中搜索信息的关键词</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
@@ -177,7 +177,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="cbdSubjects" caption="生物多样性公约主题领域">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="生物多样性公约主题领域">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -186,13 +186,13 @@
 
 								</div>
 							</section><!-- Till now all fields are common for all CHs  --> <!-- IF BCH START --><section ng-if="isBCH">
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>与生物安全相关的关键词</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="biosafety.subjects" caption="生物安全专题领域">
+										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="生物安全专题领域">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div><!-- TODO: need to apply a condition --><div >
@@ -241,7 +241,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="此资源是否涉及一个或多个具体的生物体？" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="生物体识别" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
@@ -261,7 +261,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressGenes" caption="此资源是否涉及一个或多个具体的遗传片段？" required>
+											<div class="km-control-group" name="biosafety.addressGenes" caption="基因识别" required>
 												<div class="help-block">基因片段信息是指DNA序列，包括基因、调控DNA序列和其它用于创造改性活生物体的核酸。它们可以进行蛋白质编码或具有特定的调控功能。</div>
 												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
 												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
@@ -281,7 +281,7 @@
 								</div>
 							</div>
 						</section><!-- IF BCH END --> <!-- IF ABS START --><section ng-if="isABS">
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>与获取和惠益分享有关的关键词</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>与获取和惠益分享有关的关键词</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="nagoya.mccKeywords" required caption="请选择相关关键词，以描述将提交之行为准则、指导方针和最佳做法和/或标准的内容">
@@ -310,7 +310,7 @@
 								</div>
 							</div>
 						</section><!-- IF ABS END --><section>
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>补充信息</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>补充信息</legend>
 		
 								<div class="row">
 									<div class="col-xs-12">
@@ -333,7 +333,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>备注</legend>
 							<div class="row">
 								<div class="col-sm-12">

@@ -4,8 +4,8 @@
 
     <table class="table table-striped">
         <tr ng-repeat="text in texts">
-            <td><input type="hidden" ng-model="text.value"></td>
-            <td style="width:10px;"></td>
+            <td><span ng-bind="text.value"></span><input type="hidden" ng-model="text.value" /></td>
+            <td style="width:10px;"><span class="btn" ng-click="remove($index)"><i class="fa fa-trash-o icon"></i></span></td>
         </tr>
     </table>
 

@@ -2,11 +2,11 @@
 
     <div>
         <div ng-show="binding">
-            <style></style>
+            <style> table.lmo-transcript{ display: inline!important; } </style>
 			<div class="km-value">
                 <table class="table">
                     <tr ng-repeat="construct in binding" style="margin-bottom:5px;">
-                        <td style="vertical-align: middle;width:3%"></td>
+                        <td style="vertical-align: middle;width:3%"><a rel="noopener" title="تعديل تكوين الجين" ng-href="#" ng-click="openContructDialog(construct, $index)"><i class="fa fa-edit"></i></a> <a rel="noopener" title="حذف تكوين الجين" ng-href="#" ng-click="deleteConstruct($index)"><i class="fa fa-trash-o"></i></a> <a rel="noopener" title="تحريك لأعلى" ng-if="!$first" ng-href="#" ng-click="moveUp($index)"><i class="fa fa-arrow-up"></i></a> <a rel="noopener" title="تحريك لأسفل" ng-if="!$last" ng-href="#" ng-click="moveDown($index)"><i class="fa fa-arrow-down"></i></a></td>
                         <td>
                             <view-lmo-gene ng-model="construct"></view-lmo-gene>
                         </td>
@@ -15,18 +15,18 @@
 			</div>
 		</div>
 
-        <button type="button" class="btn btn-primary" ng-click="openContructDialog()"></button>
+        <button type="button" class="btn btn-primary" ng-click="openContructDialog()">إضافة تكوين الجين</button>
     
     </div>
 
     <script type="text/ng-template" id="gene-construct-dialog" trados-translation="true">
 
-        <style dir="rtl"></style>
+        <style dir="rtl"> /** * The dnd-list should always have a min-height, * otherwise you can't drop to it once it's empty */ .gene-construct ul { min-height: 42px; padding-left: 0px; } /** * The dndDraggingSource class will be applied to * the source element of a drag operation. It makes * sense to hide it to give the user the feeling * that he's actually moving it. */ .gene-construct ul .dndDraggingSource { display: none; } /** * An element with .dndPlaceholder class will be * added to the dnd-list while the user is dragging * over it. */ .gene-construct ul .dndPlaceholder { background-color: #ddd; display: block; min-height: 42px; } .gene-construct ul li { background-color: #fff; border: 1px solid #ddd; border-top-right-radius: 4px; border-top-left-radius: 4px; display: block; padding: 10px 15px; margin-bottom: -1px; } /** * Show selected elements in green */ .gene-construct ul li.selected { background-color: #dff0d8; color: #3c763d; } /***************************** Dropzone Styling *****************************/ /** * The dnd-list should always have a min-height, * otherwise you can't drop to it once it's empty */ .gene-construct .dropzone ul { min-height: 42px; margin: 0px; padding-left: 0px; } .gene-construct .dropzone li { display: block; } /** * Reduce opacity of elements during the drag operation. This allows the user * to see where he is dropping his element, even if the element is huge. The * .dndDragging class is automatically set during the drag operation. */ .gene-construct .dropzone .dndDragging { opacity: 0.7; } /** * The dndDraggingSource class will be applied to the source element of a drag * operation. */ .gene-construct .dropzone .dndDraggingSource { opacity: 0.5; } /** * An element with .dndPlaceholder class will be added as child of the dnd-list * while the user is dragging over it. */ .gene-construct .dropzone .dndPlaceholder { background-color: #ddd !important; display: block; min-height: 42px; } .gene-construct .dropzone .itemlist { min-height: 120px !important; } .gene-construct .dropzone .itemlist > li { border: none; float: left; height: 50px; margin: 5px; padding: 3px; } .gene-construct .dropzone .itemlist > li.dndPlaceholder { width: 150px; } .gene-construct .dropzone .container-element { margin: 10px; } .gene-construct .trashcan ul { list-style: none; padding-left: 0px; } .gene-construct .trashcan img { -webkit-filter: grayscale(100%); -moz-filter: grayscale(100%); filter: grayscale(100%); } .gene-construct .trashcan .dndDragover img { -webkit-filter: none; -moz-filter: none; filter: none; } .gene-construct .trashcan .dndPlaceholder { display: none; } </style>
         <div class="modal-header" dir="rtl">
-            <h3 class="modal-title"></h3>
+            <h3 class="modal-title">تكوين الجين</h3>
         </div>
         <div class="modal-body"  dir="rtl">   
-            <div class="help-info"></div>
+            <div class="help-info">يرجى استخدام الماوس لسحب الشكل لإضافته إلى التكوين على موقع الإسقاط</div>
             <div class="gene-construct">
                 <div class="dropzone">
                     <div class="row">
@@ -42,16 +42,16 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-sm-4 pull-right">       
+                        <div class="col-sm-4 float-end">       
                             <div class="trashcan">   
-                                <div class="help-info"></div>                             
+                                <div class="help-info">اسحب الشكل هنا لإزالة التكوين</div>                             
                                 <ul dnd-list="[]">
-                                    <li></li>
+                                    <li><img src="https://bch.cbd.int/bch/images/lmoconstruct/trash-over.png"></li>
                                 </ul>
                             </div>
                         </div>
                         <hr />
-                        <div class="col-sm-12"></legend>                
+                        <div class="col-sm-12"><strong>موقع الإسقاط</legend>                
                             <div class="container-element" style="border:1px solid #eee">
                                 <ul dnd-list="newConstruct" class="itemlist">
                                     <li ng-repeat="item in newConstruct" dnd-draggable="item" dnd-type="'item'" dnd-effect-allowed="move"
@@ -66,27 +66,27 @@
             </div>
         </div>
         <div class="modal-footer" dir="rtl">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour"></button>
-            <button type="button" class="btn btn-primary pull-left" aria-label="Save" ng-click="saveConstruct()" ></button>   
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">إلغاء</button>
+            <button type="button" class="btn btn-primary float-start" aria-label="Save" ng-click="saveConstruct()" >حفظ</button>   
         </div>
 
     </script>
     <script type="text/ng-template" id="gene-construct"  trados-translation="true">
         <table cellspacing="0px" class="lmo-transcript {{item.type}}" dir="rtl">                
             <tr>
-                <td class="left" ></td>
+                <td class="left" >&nbsp;</td>
                 <td class="middle">
-                    <div ng-show="!item.gene"></div>
+                    <div ng-show="!item.gene"><span ng-if="item.type=='senseStart'"    >بداية النسخ</span> <span ng-if="item.type=='sense'"         >عنصر النسخ</span> <span ng-if="item.type=='senseStop'"     >نهاية النسخ</span> <span ng-if="item.type=='antisenseStart'">بداية النسخ</span> <span ng-if="item.type=='antisense'"     >عنصر النسخ</span> <span ng-if="item.type=='antisenseStop'" >نهاية النسخ</span></div>
 
-                         <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="dnaSequence" caption="" type="radio"
+                         <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="dnaSequence" caption="؟؟؟؟ (sense)" type="radio"
                                 on-build-query="onDnaSequenceQuery(searchText)" filter="true" ng-change="geneSelected(item)" allow-new="true" allow-new-schema="dnaSequence">
-                                <select-records></select-records>
+                                <select-records><a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">تحديد الجين</a> <a rel="noopener" ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a></select-records>
                                 <selected-records>
-                                    <div ng-show="$parent.$parent.item.gene"><input type="number" ng-model="item.size" style="width:50px" min="0"/></div>
+                                    <div ng-show="$parent.$parent.item.gene">#<span ng-bind="$parent.$parent.item.gene.documentID"></span> &nbsp;<input type="number" ng-model="item.size" style="width:50px" min="0"/>كيلوبايت</div>
                                 </selected-records>
-                            </div></div>
+                            </div><span ng-if="!showAdd" ng-bind="(item.subType)"></span></div>
                 </td>
-                <td class="right"></td>
+                <td class="right">&nbsp;</td>
             </tr>
         </table>
     </script>

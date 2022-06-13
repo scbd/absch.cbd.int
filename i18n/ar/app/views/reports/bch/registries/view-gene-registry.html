@@ -4,12 +4,12 @@
 			<div class="panel-heading">
 				<h2>تسجيل العناصر الجينية</h2>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body bg-white">
 				<div class="row">
-					<div class="col-md-2 col-xs-12"> 
-						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
-							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> السجلات <span class="caret"></span></button>
-							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+					<div class="col-md-2"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100">
+							<button ng-if="deviceSize=='xs'" type="button" class="btn btn-default dropdown-toggle w-100" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> السجلات <span class="caret"></span></button>
+							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
 								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>السجلات</b></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">تسجيل كائن حي مُحوَّر</a></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">تسجيل الكائنات الحية</a></li>
@@ -17,13 +17,14 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
-						<p class="p-borders padding-top-10">The Genetic Element Registry provides a summary of information on the genetic elements associated with the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. يتضمن السجل روابط لصفحة كل عنصر وراثي حيث يوجد المزيد من التفاصيل. وأدنى كل صفحة من هذه الصفحات يشار إلى أسماء الكائنات الحية المحورة التي تحتوي على عناصر وراثية معينة.</p>
-						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> قيد التحميل ...</h1>
+					<div class="col-12 col-md-10 ps-3">
+						<p class="p-borders pt-2">The Genetic Element Registry provides a summary of information on the genetic elements associated with the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. يتضمن السجل روابط لصفحة كل عنصر وراثي حيث يوجد المزيد من التفاصيل. وأدنى كل صفحة من هذه الصفحات يشار إلى أسماء الكائنات الحية المحورة التي تحتوي على عناصر وراثية معينة.</p>
+						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=dnaSequence" >here</a> to perform an in-depth search of all Genetic Element records available in this Registry.</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>خطأ في تحميل مدونات التسجيل، يُرجى المحاولة مرة أخرى.</h3></div>
 						<div ng-if="!isLoading && !isError">						
 						<div class="row">
-							<div class="col-md-12"><strong>إجمالي عدد السجلات: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> تصدير</button>
+							<div class="col-md-12"><strong>إجمالي عدد السجلات: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default float-end me-1 mb-1" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> تصدير</button>
 							</div>
 						</div>
 						<div>
@@ -32,18 +33,18 @@
 									<tr>
 										<th class="display-17">معرف السجل</th>
 										<th class="display-18">الاسم</th>
-										<th class="display-25 hidden-xs">السمات الجينية</th>
-										<th class="display-15 hidden-xs">الكائن المانح</th>
-										<th class="display-25 hidden-xs">الوظيفة</th>
+										<th class="display-25 d-none d-sm-table-cell">السمات الجينية</th>
+										<th class="display-15 d-none d-sm-table-cell">الكائن المانح</th>
+										<th class="display-25 d-none d-sm-table-cell">الوظيفة</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="row in ::geneRecords">
 										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
 										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.organismScientificNames.join(', ')"></span> - <span ng-bind="::row.organismCommonNames.join(', ')"></span></td>
-										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
+										<td class="tableexport-string d-none d-sm-table-cell"><span ng-bind="::row.trait"></span></td>
+										<td class="tableexport-string d-none d-sm-table-cell"><span ng-bind="::row.organismScientificNames.join(', ')"></span> - <span ng-bind="::row.organismCommonNames.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description d-none d-sm-table-cell"><span ng-bind="::row.geneFunction"></span></td>
 										
 									</tr>
 								</tbody>

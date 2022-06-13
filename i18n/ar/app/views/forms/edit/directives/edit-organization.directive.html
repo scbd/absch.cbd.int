@@ -7,7 +7,7 @@
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>معلومات عامة</legend>
                         <div class="row">
                             <div class="col-xs-12" >
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>بيانات عنوان المنظمة</legend>
                         <div class="row">
                             <div class="col-md-12">
@@ -128,11 +128,11 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>معلومات تفصيلية</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="organizationType" required caption="نوع المنظمة">
+                                <div class="km-control-group organization-dropdown" name="organizationType" required caption="نوع المنظمة">
                                     <div km-select name="organizationType" required ng-model="document.organizationType"
                                         items="options.organizationTypes()"></div>
                                 </div>
@@ -151,8 +151,8 @@
                                 <div class="col-sm-12">
                                     <div class="km-control-group" name="areasOfWork" caption="مجالات العمل">                                
                                         <div class="help-block">يرجى ذكر الكلمات الرئيسية فقط.</div>
-                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
-                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                        <div ng-repeat="areaOfWork in areasOfWork" class="pb-1 d-block input-group">
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input float-start pb-1" style="width:97%;" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer input-group-text float-end trash-value"
                                             ng-click="removeItem(areasOfWork, $index)"><i class="fa fa-trash-o icon"></i></span></div>
                                         <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">أضف بندًا</button>
                                     </div>
@@ -200,12 +200,12 @@
                         </div>
                     </div>
                     
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>الجدول الزمني لتأكيد المعلومات أو تحديثها</legend>
                         <div class="help-info">يُرجى العلم أن هذه الفئة من المعلومات تتطلب التأكيد أو التحديث بعد عام من تاريخ إرسالها. After the deadline you will be asked to confirm or update the record within 3 months. وإذا لم يصلك أي تأكيد بعد انقضاء هذه المدة سيتم تمييز السجل بالوصف "غير مؤكد".</div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>معلومات إضافية</legend>
                         <div class="row">
                             <div class="col-sm-12">
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>ملاحظات</legend>								
                         <div class="row">
                             <div class="col-md-12">

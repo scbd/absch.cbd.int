@@ -1,8 +1,8 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading  bg-blue">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::document.header.schema|schemaShortName"></span>)</span></h4>
+		<h4></h4>
 	</div>
-	<style> #Record p:empty, #Record div:empty{ display:none } </style>
+	<style></style>
 
 	<div class="record-body panel-body" help schema="viewCNA" >
 		
@@ -10,31 +10,31 @@
 
 		
 	<div name="article-13-2"></div>
-		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0">Informations générales</legend>
+		<legend ng-if="document.government || document.name || document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0"></legend>
 
 		<div ng-show="document.government" >
-			<label name="country">Pays</label>
-			<div class="km-value"><span><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></span></div>
+			<label name="country"></label>
+			<div class="km-value"></div>
 		</div>
 
 		<div ng-if="document.name || document.address || document.city || document.state|| document.postalCode || document.country || document.phones.length > 0 ||document.websites.length > 0 || document.faxes.length > 0|| document.emails.length > 0 " >
-			<label ng-if="document.header.schema!='supplementaryAuthority'" name="name">Nom de l'autorité nationale compétente</label>
-			<label ng-if="document.header.schema=='supplementaryAuthority'">Nom de l'autorité nationale compétente</label>
+			<label ng-if="document.header.schema!='supplementaryAuthority'" name="name"></label>
+			<label ng-if="document.header.schema=='supplementaryAuthority'"></label>
 			<div class="km-value" compare-val="Competent Authority Name">
-				<div><strong><span ng-bind="document.name | lstring:locale"></span></strong></div>
-				<div ng-show="document.address"><span ng-bind="document.address | lstring:locale"></span></div>
-				<div ng-show="document.city"><span ng-bind="document.city | lstring:locale"></span><span ng-show="document.city">,</span></div>
-				<div ng-show="document.state"><span ng-bind="document.state | lstring:locale"></span><br ng-show="document.city || document.state" /></div>
-				<div ng-show="document.postalCode"><span ng-bind="document.postalCode | lstring:locale"></span><span ng-show="document.postalCode">,</span></div>
-				<div ng-show="document.country"><span ng-bind="document.country|term"></span></div>
+				<div></div>
+				<div ng-show="document.address"></div>
+				<div ng-show="document.city"></div>
+				<div ng-show="document.state"></div>
+				<div ng-show="document.postalCode"></div>
+				<div ng-show="document.country"></div>
 				<ul ng-show="document.phones" class="list"  style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
-					<li ng-repeat="item in document.phones track by $index"><i class="fa fa-phone"></i> <span ng-bind="item"></span></li>
+					<li ng-repeat="item in document.phones track by $index"></li>
 				</ul>
 				<ul ng-show="document.faxes" class="list"  style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;" >
-					<li ng-repeat="item in document.faxes"><i class="fa fa-fax"></i> <span ng-bind="item"></span></li>
+					<li ng-repeat="item in document.faxes"></li>
 				</ul>
 				<ul  ng-show="document.emails" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
-					<li ng-repeat="item in document.emails"><a rel="noopener" translation-url  ng-href="mailto:{{item|encodeURIComponent}}"><i class="fa fa-envelope-o"></i> <span ng-bind="item"></span></a></li>
+					<li ng-repeat="item in document.emails"></li>
 				</ul>
 
 				<ul  ng-show="document.websites" class="list" style="list-style-type: none;padding: 0px;margin: 3px 0 0 0;">
@@ -45,16 +45,16 @@
 
 
 		<div ng-show="document.contacts">
-			<legend ng-if="document.contacts">Coordonnées supplémentaires</legend>
+			<legend ng-if="document.contacts"></legend>
 			<div compare-val="Additional Contact Information">
 			<view-record-reference ng-repeat="contact in document.contacts" ng-model="contact" locale="locale" class="km-value"></view-record-reference>
 			</div>
 		</div>
 
 		<div ng-if="isBCH && policyBasisForCompetencyRef">
-			<legend ng-if="document.header.schema!='supplementaryAuthority'" >Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente</legend>
-			<legend ng-if="document.header.schema=='supplementaryAuthority'" >Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente</legend>
-			<label>Liens vers les mesures juridiques, administratives ou politiques pertinentes</label>
+			<legend ng-if="document.header.schema!='supplementaryAuthority'" ></legend>
+			<legend ng-if="document.header.schema=='supplementaryAuthority'" ></legend>
+			<label></label>
 			<div class="km-value" compare-val="policyBasisForCompetencyRef">
 				<div ng-repeat="referenced in policyBasisForCompetencyRef">
 					<view-record-reference ng-model="referenced"></view-record-reference>
@@ -62,9 +62,9 @@
 			</div>
 		</div>
 		<div ng-if="isABS && (document.policyBasisForCompetency || document.policyBasisForCompetencyRef || document.absPolicyBasisForCompetency || document.absPolicyBasisForCompetencyRef)">
-			<legend>Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente</legend>
+			<legend></legend>
 			<div ng-if="document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef">
-				<label>Liens vers les mesures juridiques, administratives ou politiques pertinentes</label>
+				<label></label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in (document.policyBasisForCompetencyRef||document.absPolicyBasisForCompetencyRef)" >
@@ -74,7 +74,7 @@
 				</div>
 			</div>
 			<div ng-show="document.policyBasisForCompetency || document.absPolicyBasisForCompetency">
-				<label>Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente</label>
+				<label></label>
 				<div compare-val>
 				<div class="km-value" ng-bind-html="(document.policyBasisForCompetency || document.absPolicyBasisForCompetency) | lstring:locale">
 				</div>
@@ -83,7 +83,7 @@
 		</div>
 
 		<div ng-if="isABS && (document.responsibilities ||document.responsibleForAll ||document.absResponsibleForAll || document.absFunctions|| document.absJurisdiction||document.absGeneticResourceTypes)">
-			<legend name="ABSResponsibilities">Résumé des responsabilités APA</legend>
+			<legend name="ABSResponsibilities"></legend>
 
 			<div ng-show="document.responsibilities">
 				<div compare-val>
@@ -93,38 +93,38 @@
 
 			<div ng-if="document.responsibleForAll||document.absResponsibleForAll">
 				<div compare-val>
-				<div class="km-value">Responsable de toutes les ressources génétiques Seule autorité nationale compétence (ANC) désignée pour le pays.</div>
+				<div class="km-value"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.absFunctions">
-				<label>Fonctions</label>
+				<label></label>
 				<div compare-val>
 				<div class="km-value km-pre" ng-bind="document.absFunctions | lstring:locale"></div>
 				</div>
 			</div>
 
 			<div ng-show="document.absJurisdiction">
-				<label>Juridiction(s) couverte par l’ANC</label>
+				<label></label>
 				<div class="km-value" compare-val="absJurisdiction">
-				<div ng-if="document.absJurisdiction" ><span ng-repeat="jur in document.absJurisdiction"><span ng-bind="jur|term"></span><span ng-bind="$last ? '' : ', '"></span></span> <span ng-if="document.absJurisdictionName" ng-bind="(document.absJurisdictionName | lstring:locale)"></span></div>
+				<div ng-if="document.absJurisdiction" ></div>
 				</div>
 			</div>
 
 			<div ng-show="document.absGeneticResourceTypes ">
-				<label>Mots-clés pour aider à décrire les responsabilités de cette autorité nationale compétente</label>
+				<label></label>
 				<div class="km-value" compare-val="absGeneticResourceTypes">
 					<ul class="list">
-						<li ng-repeat="term in document.absGeneticResourceTypes"><span ng-bind="term|term"></span></li>
+						<li ng-repeat="term in document.absGeneticResourceTypes"></li>
 					</ul>
 				</div>
 			</div>
 
 		</div>
 		<div ng-if="isBCH && (document.functions || document.responsibilities || document.responsibleForAll!=undefined || document.cpbOrganismTypes)">
-			<legend>Responsabilités</legend>
+			<legend></legend>
 			<div ng-show="document.header.schema!='supplementaryAuthority' && (document.functions)">
-				<label>Fonctions administratives</label><!--TODO: ng-if="document.header.schema!='supplementaryAuthority'" was conflecting --><div  class="km-value" compare-val>
+				<label></label><div  class="km-value" compare-val>
 				<view-terms-hierarchy  ng-model="document.functions" locale="locale" ng-if="document.header.schema!='supplementaryAuthority'"
 					term-domain="subjectAreas" on-terms-loaded="onFunctionsTerms(terms)"></view-terms-hierarchy>
 
@@ -134,7 +134,7 @@
 			</div>
 
 			<div ng-show="document.header.schema!='supplementaryAuthority' && document.cpbOrganismTypes">
-				<label>Type(s) d’organisme(s) sous vôtre responsabilité</label>
+				<label></label>
 				<div class="km-value" compare-val>
 					<view-terms-hierarchy  ng-model="document.cpbOrganismTypes" locale="locale"
 					term-domain="typeOfOrganisms" on-terms-loaded="onOrganismTypesTerms(terms)"></view-terms-hierarchy>
@@ -143,16 +143,16 @@
 
 			<div ng-show="document.header.schema=='supplementaryAuthority'">
 				<div ng-if="document.responsibleForAll!==undefined">
-					<label>S’agit-il de l’unique autorité nationale compétente (ANC) pour le Protocole additionnel dans votre pays?</label>
+					<label></label>
 				<div compare-val>
-					<div class="km-value" ng-if="document.responsibleForAll">Oui</div>
-					<div class="km-value" ng-if="!document.responsibleForAll">Non</div>
+					<div class="km-value" ng-if="document.responsibleForAll"></div>
+					<div class="km-value" ng-if="!document.responsibleForAll"></div>
 				</div>
 				</div>
 			</div>
 			<div ng-show="document.responsibilities">
-				<label ng-if="document.header.schema!='supplementaryAuthority'">Description détaillée des fonctions de réglementation</label>
-				<label ng-if="document.header.schema=='supplementaryAuthority'">Brève description des responsabilités de l'autorité compétente</label>
+				<label ng-if="document.header.schema!='supplementaryAuthority'"></label>
+				<label ng-if="document.header.schema=='supplementaryAuthority'"></label>
 				<div compare-val>
 				<div class="km-value" ng-bind-html="document.responsibilities | lstring:locale"></div>
 				</div>
@@ -161,7 +161,7 @@
 
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Informations supplémentaires</legend>
+			<legend></legend>
 
 			<div ng-show="document.relevantInformation">
 			<div compare-val>
@@ -170,9 +170,9 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Autres sites web pertinents et/ou documents en pièce jointe</label>
+				<label></label>
 				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
-					<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
+					<km-link-list ng-model="document.relevantDocuments" class="mt-1"></km-link-list>
 				</div>
 			</div>
 		</div>

@@ -2,6 +2,6 @@
 	<label name="{{name}}" class="control-label " ng-class="{'bold': bold=='true', '{{captionClass}}': captionClass}" 
 		ng-required="isRequired()" ng-if="caption" for="{{name}}" ng-bind-html="caption">		
 	</label>
-	<km-info-tip style="padding-left: 10px;" ng-if="infoTip.content" data-content="{{infoTip.content}}" data-title="{{infoTip.title||'Help'}}"></km-info-tip>
+	<km-info-tip class="ps-2" ng-if="infoTip.content" data-content="{{infoTip.content}}" data-title="{{infoTip.title||'Help'}}"></km-info-tip>
 	<div ng-transclude></div>
 </div>

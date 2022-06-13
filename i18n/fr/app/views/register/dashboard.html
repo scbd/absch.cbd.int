@@ -1,0 +1,344 @@
+﻿<div id="RegisterPage" class="overflow-hidden">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+    <register-top-menu></register-top-menu>
+
+    <div class="innerPageContent shadow-sm border-0 register-content card card-1-notrans m-0 p-3">
+        
+        <div class="register-content-header bg-darkgrey color-white" >
+
+            <div class="p-2"><span class="btn-group float-end dashboard-tour"><a rel="noopener" ng-href="#" class="help-tour link2 text-decoration-none" ng-click="tour()"><i class="fa fa-question-circle" aria-hidden="true"></i> <span class="table_display_none hidden-sm">TAKE DASHBOARD TOUR</span></a></span><h3 class="m-0">Tableau de bord</h3>
+            </div>            
+        </div>
+        <div class="register-content-content bg-white" >
+            <div class="mt-2 mb-3">
+
+                <h4 class="my-0 p-0 pb-1 border-bottom fs-6" ><i class="bi bi-arrow-down-circle-fill cursor-pointer" ng-show="!showProfileInfo" aria-hidden="true"
+                        ng-click="showProfileInfo=true;toggleTooTip()"></i> <i class="bi bi-arrow-up-circle-fill cursor" ng-show="showProfileInfo" aria-hidden="true"
+                        ng-click="showProfileInfo=false"></i> <span class="table_display_none">Welcome</span> <span id="showProfileInfo" class="color-black"><span class="fw-bold" ng-bind="::user.name"></span> (<span class="fs-0"><span class="dashboard-roles" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">Registered User</span> <span class="dashboard-roles" ng-if="::(roles.isPublishingAuthority && isAbs)">Publishing Authority</span> <span class="comma-space dashboard-roles" ng-if="::(roles.isNationalFocalPoint && isAbs)">National Focal Point</span> <span class="comma-space dashboard-roles" ng-if="::(roles.isPublishingAuthority && isBch)">BCH National Focal Point</span> <span class="comma-space dashboard-roles" ng-if="::(roles.isNationalFocalPoint && isBch)">Cartagena National Focal Point</span> <span class="comma-space dashboard-roles" ng-if="::roles.isNationalAuthorizedUser">National Authorized User</span></span>)</span></h4>
+
+
+                <div class="row border rounded-bottom bg-light m-0 p-o py-1" id="welcomeSection"
+                  
+                    ng-if="showProfileInfo">
+                    <div class="col-md-6 cp-header">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Nom :</label>
+                                </td>
+                                <td ng-bind="::user.name"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Courriel prioritaire :</label>
+                                </td>
+                                <td ng-bind="user.email"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Pays d'affiliation :</label>
+                                </td>
+                                <td ng-if="user.government"><a class="text-decoration-none" rel="noopener" translation-url href="/countries/{{user.government | uppercase}}" ng-bind="userCountry|term"></a></td>
+                                <td ng-if="!user.government">aucun</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-6 cp-header">
+                        <table>
+                            <tr>
+                                <td>
+                                    <label>Rôle(s) :</label>
+                                </td>
+                                <td><span class="comma" ng-if="::roles.isNationalFocalPoint"><span ng-if="isAbs">National Focal Point <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                            title="The National Focal Point is responsible for liaison with the Secretariat as card as for designating themselves or another user as a Publishing Authority."></span></span> <span ng-if="isBch">Cartagena National Focal Point (CPB-NFP) <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body"
+                                                title="The National Focal Points are responsible for liaison with the Secretariat as card as for designating themselves or another user as a BCH focal point. Le correspondant national peut créer des projets de  fichiers nationaux et les soumettre au correspondant du BCH pour publication."></span></span></span> <span class="comma" ng-if="::roles.isPublishingAuthority"><span ng-if="isAbs">Publishing Authority (PA) <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="Chaque pays peut désigner une seule autorité en charge de la publication (AP). Le travail de cette Autorité de publication est de rendre l'information publiquement disponible en vérifiant et en publiant les fichiers. Une AP peut également désigner des utilisateurs nationaux autorisés qui peuvent préparer des projets de  fichiers pour leur pays et les soumettre à l'AP."></span></span> <span ng-if="isBch">BCH National Focal Point (BCH-NFP) <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                                title="Chaque pays peut désigner un correspondant du CEPRB dont le rôle est de publier les registres nationaux dans le CEPRB. Le correspondant focal du BCH peut créer, éditer et publier des  fichiers nationaux. Le correspondant du BCH peut également désigner des utilisateurs nationaux autorisés qui peuvent préparer des projets de  fichiers pour leur pays et les soumettre au correspondant du BCH pour vérification et publication."></span></span></span> <span class="comma" ng-if="::roles.isNationalAuthorizedUser">National Authorized User (NAU) <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="L'utilisateur national autorisé (UNA) peut créer des projets de  fichiers nationaux et les soumettre au correspondant du BCH pour vérification et publication."></span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="L'utilisateur national autorisé (NAU) peut créer des projets de notices nationales et les soumettre à l'autorité de publication pour approbation."></span></span> </span>
+
+                                    <span class="comma" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">Registered User <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
+                                            title="Les utilisateurs réguliers peuvent créer des documents de référence provisoires et demander leur publication auprès du Secrétariat de la CBD."></span></span>
+                                    
+                                        <span class="comma" ng-if="::roles.isAdministrator"><strong class="color-pink">Admin</strong></span>
+
+                                    </span>
+                                    
+                                </td>
+                                <td class="ps-2"><span><a rel="noopener" class="text-decoration-underline fw-bold" href="#" ng-click="showUserRoles()">show all my roles</a></span></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Mettre à jour le profil :</label>
+                                </td>
+                                <td><a class="text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/profile" target="_blank">accounts.cbd.int/profile</a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label>Actualiser le mot de passe :</label>
+                                </td>
+                                <td><a class="text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/password" target="_blank">accounts.cbd.int/password</a></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <top-requests view-all-url="/register/requests"></top-requests>
+                    <div id="menuPlaceholder" ng-if="::roles.isNationalUser||roles.is('Administrator')" class="m-0 mt-2 mb-3">
+
+                        <div class="p-0 m-0 border-bottom position-relative">
+                            <h4 class="p-0 m-0 fs-6 fw-bold color-black" id="recordOverview">Aperçu du fichier</h4>      
+                        </div>
+
+                        <div ng-if="::roles.isNationalSchemaUser('focalPoint') || roles.is('Administrator')">
+                            <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
+                                <div class="p-0 m-0 mb-1">
+                                    <table class="overview table w-100">
+                                        <thead></thead>
+                                        <tbody>
+                                            <tr class="fw-bold">
+                                                <td><span class="color-blue">Enregistrements nationaux</span> <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isAbs"
+                                                        title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant for the implementation of the Protocol."></span> <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isBch"
+                                                        title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as card as other national information relevant to the implementation of the Protocol."></span></td>
+                                                <td class="table_display_none"><span id="offlineFormat" class="float-end pe-4">Format hors ligne</span></td>
+                                                <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Publié</td>
+                                                <td style="width: 7%;" class="text-center table_display_none">Brouillon</td>
+                                                <td style="width: 7%;" class="text-center table_display_none">Demandes</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <table class="overview table w-100">
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="table_width">
+                                            <div class="btn-group btn-group-sm p-0 table_width" role="group">
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Ajouter un nouveau fichier<p>" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="table-min-width"><a rel="noopener" translation-url href="/search" class="text-secondary ps-1 text-decoration-none">Correspondants nationaux (CN)</a> <span ng-if="schemas['focalPoint'].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
+                                            data-bs-toggle="tooltip" data-html="true" title="{{schemas['focalPoint'].description|lstring:locale}}" data-container="body"></span></td>
+                                        <td class="table_max_width text-end"><span class="table_display_none" ng-include="'offline-formats'" onload="schema='focalPoint'"></span></td>
+                                        <td style="width:21%;" colspan="3" class="text-center table_display_none"><a class="text-decoration-none" rel="noopener" href="/kb/tags/getting-started/Procedure-for-nominating-National-Focal-Points/619c555d4f1f30000140eef4" ng-if="isBch">Explanatory Note on the appointment of NFPs <i class="fa fa-external-link"></i></a> <span rel="noopener" ng-if="isAbs">ABS-NFP designation must be submitted offline</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-if="isAbs">
+                            
+                            <table class="overview table w-100" >
+                                <thead></thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="table_width">
+                                            <div class="btn-group btn-group-sm table_width" role="group">
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip" ><i class="bi bi-arrow-down-circle cursor-pointer p-1"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="Ajouter un nouveau fichier<p>" data-bs-toggle="tooltip" ><i class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
+                                                <button disabled type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip" ><i class="bi bi-list-ul"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="table-min-width"><span rel="noopener" class="color-darkgrey ps-1 text-decoration-none">ABS Publishing Authority (PA)</span></td>
+                                        <td class="table_max_width text-end"><span class="table_display_none" ng-include="'offline-formats'" onload="schema='publishingAuthority'"></span></td>
+                                        <td style="width:21%;" colspan="3" class="text-center table_display_none"><a rel="noopener" translation-url href="/kb/tags/abs/Designating-or-updating-the-Publishing-Authority-PA-or-National-Authorized-Users-NAUs-/619ea0429b7a7500012450c3" >Update or designate the PA/NAUs <i class="fa fa-external-link"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-repeat="schema in nationalSchemas" ng-if="::roles.isNationalSchemaUser(schema) || roles.is('Administrator')">
+                            <table class="overview table w-100">
+                                <tbody>
+                                    <tr class="visited-background">
+                                        <td class="table_width">
+                                            <div class="btn-group btn-group-sm table_width" role="group">
+                                                <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
+                                                    ng-click="showTopRecords($event,schema)"><i class="bi bi-arrow-down-circle cursor-pointer p-1"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords[schema], 'bi bi-arrow-up-circle':topRecords[schema]}"
+                                                        aria-hidden="true"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary p-0" title="Ajouter un nouveau fichier<p>" data-bs-toggle="tooltip"
+                                                        ng-click="gotoNew($event,schema)"><i
+                                                            class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip"
+                                                        ng-click="gotoList($event,schema)"><i
+                                                            class="bi bi-list-ul"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="table-min-width"><a rel="noopener" translation-url href="#" ng-click="gotoList($event,schema)"
+                                                class="color-darkgrey ps-1 text-decoration-none"><span ng-bind="schema|schemaNamePlural"></span> (<span ng-bind="schema|urlSchemaShortName"></span>)</a> <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
+                                                data-bs-toggle="tooltip" data-html="true" title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span></td>
+                                        <td class="table_max_width text-end"><span class="table_display_none" ng-include="'offline-formats'"></span></td>
+                                        <td class="text-center table_display_none td_width"><a rel="noopener" translation-url ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/published"
+                                                class="badge bg-success text-decoration-none" ng-class="{'bg-litegrey': facets(schema,'publish')===0}" ng-bind="facets(schema,'publish')"></a></td>
+
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/drafts"
+                                                class="badge bg-secondary text-decoration-none"
+                                                ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}"><span ng-bind="Math.max(0,facets(schema,'draft') - facets(schema,'request'))"></span></a></td>
+
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/requests"
+                                                class="badge bg-request text-decoration-none"
+                                                ng-class="{'bg-litegrey': facets(schema,'request')===0}" ng-bind="facets(schema,'request')"></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="topRecords[schema]" class="w-100">
+                                <top-records schema="{{schema}}" top="10"
+                                    show-schema-name="false">
+                                </top-records>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <div id="menuPlaceholder" ng-if="::roles.isUser" class="bg-white">
+                            <div class="p-0 m-0 mb-1">
+                                <table class="overview table w-100">
+                                    <thead></thead>
+                                    <tbody>
+                                        <tr class="fw-bold">
+                                            <td><span class="color-orange">Fichiers de référence <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isAbs"
+                                                        title="Les fichiers de référence inclut un nombre de ressources et d’informations pertinentes pour l’APA et peuvent être soumises par tout utilisateur inscrit et seront validées par le Secrétariat avant leur publication."></span> <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true"
+                                                        data-container="body" ng-if="isBch"
+                                                        title="Les fichiers de référence inclut un nombre de ressources et d’informations pertinentes pour l’APA et peuvent être soumises par tout utilisateur inscrit et seront validées par le Secrétariat avant leur publication."></span></span></td>
+                                            <td class="table_display_none text-end"><span id="offlineFormat" class="pe-4">Format hors ligne</span></td>
+                                            <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Publié</td>
+                                            <td style="width: 7%;" class="text-center table_display_none">Brouillon</td>
+                                            <td style="width: 7%;" class="text-center table_display_none">Demandes</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div ng-repeat="schema in referenceSchemas" ng-if="::roles.isSchemaUser(schema) || roles.is('Administrator')">
+                            <table class="overview table w-100">
+                                <thead></thead>
+                                <tbody>
+                                    <tr class="visited-background">
+                                        <td class="table_width">
+                                            <div class="btn-group btn-group-sm table_width" role="group">
+                                                <button type="button" class="btn btn-outline-secondary p-0" title="Quick view latest 10 records" data-bs-toggle="tooltip"
+                                                    ng-click="showTopRecords($event,schema)"><i class="bi bi-arrow-down-circle cursor-pointer p-1"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords[schema], 'bi bi-arrow-up-circle':topRecords[schema]}"
+                                                        aria-hidden="true"></i><button type="button" class="btn btn-outline-secondary p-0" title="Ajouter un nouveau fichier<p>" data-bs-toggle="tooltip"
+                                                        ng-click="gotoNew($event,schema)"><i
+                                                            class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
+                                                    <button type="button" class="btn btn-outline-secondary p-0" title="View list of all records" data-bs-toggle="tooltip"
+                                                        ng-click="gotoList($event,schema)"><i
+                                                            class="bi bi-list-ul"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="table-min-width"><a rel="noopener" translation-url href="#" ng-click="gotoList($event,schema)"
+                                                class="color-darkgrey ps-1 text-decoration-none"><span ng-bind="schema|schemaNamePlural"></span> (<span ng-bind="schema|urlSchemaShortName"></span>)</a> <span ng-if="schemas[schema].description" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" 
+                                            data-bs-toggle="tooltip" data-html="true" title="{{schemas[schema].description|lstring:locale}}" data-container="body"></span></td>
+                                        <td class="table_max_width text-end"><span class="table_display_none" ng-include="'offline-formats'"></span></td>
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/published"
+                                                class="badge bg-success text-decoration-none"
+                                                ng-class="{'bg-litegrey': facets(schema,'publish')===0}" ng-bind="facets(schema,'publish')"></a></td>
+
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/drafts"
+                                                class="badge bg-secondary text-decoration-none"
+                                                ng-class="{'bg-litegrey': Math.max(0, facets(schema,'draft') - facets(schema,'request'))===0}" ng-bind="Math.max(0,
+                                            facets(schema,'draft') - facets(schema,'request'))"></a></td>
+
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/status/requests"
+                                                class="badge bg-request text-decoration-none"
+                                                ng-class="{'bg-litegrey': facets(schema,'request')===0}" ng-bind="facets(schema,'request')"></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="topRecords[schema]" class="w-100">
+                                <top-records schema="{{schema}}" top="10" class="pt-1" show-schema-name="false">
+                                </top-records>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-0 mt-2 border-bottom position-relative"><span class="color-black">Contact records</span></div>
+                        <div style="padding-bottom: 20px;" ng-if="::roles.isSchemaUser('contact') || roles.is('Administrator')">
+                            <table class="overview table w-100">
+                                <thead></thead>
+                                <tbody>
+                                    <tr class="visited-background">
+                                        <td class="table_width">
+                                            <div class="btn-group btn-group-sm table_width" role="group">
+                                                <button id="quickViewContact" type="button" class="btn btn-outline-secondary p-0"
+                                                    title="Quick view latest 10 records" data-bs-toggle="tooltip"
+                                                    ng-click="showTopRecords($event,'contact')"><i class="bi bi-arrow-down-circle p-1 cursor-pointer"
+                                                        ng-class="{'bi bi-arrow-down-circle':!topRecords['contact'], 'bi bi-arrow-up-circle':topRecords['contact']}"
+                                                        aria-hidden="true"></i></button>
+                                                <button id="addNewRecordContact" type="button" class="btn btn-outline-secondary p-0"
+                                                    title="Ajouter un nouveau fichier<p>" data-bs-toggle="tooltip" ng-click="gotoNew($event,'contact')"><i
+                                                        class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
+                                                <button id="viewListContact" type="button" class="btn btn-outline-secondary p-0"
+                                                    title="View list of all records" data-bs-toggle="tooltip"
+                                                    ng-click="gotoList($event,'contact')"><i class="bi bi-list-ul"></i></button>
+                                            </div>
+                                        </td>
+                                        <td class="table-min-width"><a rel="noopener" translation-url href="#" ng-click="gotoList($event,'contact')"
+                                                class="color-darkgrey ps-1 text-decoration-none"><span ng-bind="schemas['contact'].titlePlural|lstring:locale"></span> (<span ng-bind="schemas['contact'].shortCode|lstring:locale"></span>)</a> <span ng-if="schemas['contact'].description" href="#"
+                                                class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip"
+                                                data-html="true" title="{{schemas['contact'].description|lstring:locale}}"
+                                                data-container="body"></span></td>
+                                        <td class="table_max_width text-end"><span class="table_display_none" ng-include="'offline-formats'"
+                                                onload="schema='contact'"></span></td>
+                                        <td class="text-center table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/CON/status/published" class="badge bg-success text-decoration-none"
+                                                ng-class="{'bg-litegrey': facets('contact','publish')===0}"
+                                                ng-bind="facets('contact','publish')"></a></td>
+                        
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/CON/status/drafts" class="badge bg-secondary text-decoration-none"
+                                                ng-class="{'bg-litegrey': Math.max(0, facets('contact','draft') - facets('contact','request'))===0}"
+                                                ng-bind="Math.max(0, facets('contact','draft') - facets('contact','request'))"></a></td>
+                        
+                                        <td class="text-center  table_display_none td_width"><a rel="noopener" translation-url
+                                                ng-href="/register/CON/status/requests" class="badge bg-danger text-decoration-none"
+                                                ng-class="{'bg-litegrey': facets('contact','request')===0}"
+                                                ng-bind="facets('contact','request')"></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div ng-if="topRecords['contact']" style="top:-5px;" class="position-relative ">
+                                <top-records schema="contact" top="10" class="pt-1" show-schema-name="false">
+                                </top-records>
+                            </div>
+                        
+                        </div>
+                </div>
+            </div>
+
+            <script type="text/ng-template" trados-translation="true" id="rolesDialog">
+                <div class="modal-header">
+                    <h3 class="modal-title">Mes rôles</h3>
+                </div>
+                <div class="modal-body"> 
+                    <table class="table table-striped table-bordered table-condensed w-100">                                
+                        <tr ng-repeat="role in userRoles|orderBy:'name'">                                    
+                            <td ng-bind="role.name"></td>             
+                        </tr>
+                    </table>  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Fermer</button>
+                </div>
+            </script>
+
+            <script type="text/ng-template" trados-translation="true" id="offline-formats">                
+                <span ng-repeat="(code, lang) in ::languages"><span  title="{{::lang}}" data-bs-toggle="tooltip" data-container="body"><a ng-if="::offlineFormats[schema][code]"  rel="noopener" target="_blank" 
+                        ng-href="{{::offlineFormats[schema][code]|encodeURI}}" ng-bind="::code"></a> <span ng-if="::!$last && offlineFormats[schema][code]">|</span></span></span></script>
+        </div>
+        <joyride ng-if="tourOn"></joyride>
+    </div>
+</div>

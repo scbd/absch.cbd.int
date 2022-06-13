@@ -37,12 +37,12 @@
 								<label class="control-label" ng-required="editor.visible" for="url">الرابط</label>
 								<div class="help-block">عنصر البروتوكول مطلوب (https:// or http://)</div>
 								<div ng-if="editor.urlMissing" style="color: #e32">يرجى إضافة رابط صحيح لموقع على الإنترنت</div>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="على سبيل المثال: https://www.cbd.int">
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="على سبيل المثال: https://www.cbd.int" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
 								<label>الاسم</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="مثال: موقع "اتفاقية التنوع البيولوجي"">
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="مثال: موقع "اتفاقية التنوع البيولوجي"" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
@@ -54,8 +54,8 @@
 						</fieldset>
 					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">إلغاء</button>
+				<div class="modal-footer d-block">
+					<button type="button" class="btn btn-default float-end" ng-click="editor.close()">إلغاء</button>
 					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >حفظ</button>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 					</div>
 					<div class="control-group" >
 						<label>اسم الملف</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.name" />
 					</div>
 					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
 						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">اللغة</label>
@@ -85,7 +85,7 @@
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
 					</div><br/><div class="control-group" >
 						<label>علامات</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="مثال: التنوع البيولوجي ، هدف أيتشي">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="مثال: التنوع البيولوجي ، هدف أيتشي" />
 					</div>
 				</div>
 				<div class="modal-footer">

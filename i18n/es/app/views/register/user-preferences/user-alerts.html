@@ -2,41 +2,39 @@
     <style> .ngdialog-content #searchFilterTab, .ngdialog-content .help-tour { display: none!important; } .ngdialog.ngdialog-theme-default.wide .ngdialog-content { width: 70% !important; } </style>
     <div class="container-fluid">
         <div ng-if="showSystemAlerts && isABS">
-            <div class="row" style="padding:10px 0;background-color:#eee;">
-                <div class="col-xs-7 col-sm-8"><small class="color-red">alerta del sistema</small><br> <span class="bold">Certificados (CCRI) publicados que indican que se ha otorgado un consentimiento fundamentado previo (CFP) a un usuario dentro de mi jurisdicción</span></div>
-                <div class="col-xs-1 text-center color-darkgray"><small class="hidden-xs">Enviarme&nbsp; un correo electrónico</small><div ng-click="subscribe('absPermit')" class="color-white" ng-if="!hasUserSubscribed('absPermit')"
-                        style="cursor:pointer"><i class="fa fa-square fa-2x"></i></div>
-                    <div ng-click="unsubscribe('absPermit')" class="color-darkgray" ng-if="hasUserSubscribed('absPermit')"
-                        style="cursor:pointer"><i class="fa fa-check-square fa-2x"></i></div>
+            <div class="row p-0 py-1 bg-light">
+                <div class="col-7 col-md-8"><small class="color-red">alerta del sistema</small><br> <span class="bold">Certificados (CCRI) publicados que indican que se ha otorgado un consentimiento fundamentado previo (CFP) a un usuario dentro de mi jurisdicción</span></div>
+                <div class="col-1 text-center color-darkgray"><small>Enviarme&nbsp; un correo electrónico</small><div ng-click="subscribe('absPermit')" class="color-white cursor-pointer" ng-if="!hasUserSubscribed('absPermit')"><i class="fa fa-square fa-2x"></i></div>
+                    <div ng-click="unsubscribe('absPermit')" class="color-darkgray cursor-pointer" ng-if="hasUserSubscribed('absPermit')"><i class="fa fa-check-square fa-2x"></i></div>
                 </div>
-                <div class="col-xs-1 text-center color-darkgray" ng-click="runSystemFilter()"><small class="hidden-xs">Buscar</small><div style="cursor:pointer"><i class="fa fa-search fa-2x"></i></div>
+                <div class="col-1 text-center color-darkgray" ng-click="runSystemFilter()"><small class="hidden-xs">Buscar</small><div class="cursor-pointer"><i class="fa fa-search fa-2x"></i></div>
                 </div>
-                <div class="col-xs-1 text-center color-white"><small class="hidden-xs">Editar</small><div style="cursor:pointer"><i class="fa fa-edit fa-2x"></i></div>
+                <div class="col-1 text-center color-white"><small class="hidden-xs">Editar</small><div class="cursor-pointer"><i class="fa fa-edit fa-2x"></i></div>
                 </div>
-                <div class="col-xs-1 text-center color-white"><small class="hidden-xs">Eliminar</small><div style="cursor:pointer"><i class="fa fa-trash-o fa-2x"></i></div>
+                <div class="col-1 text-center color-white"><small class="hidden-xs">Eliminar</small><div class="cursor-pointer"><i class="fa fa-trash-o fa-2x"></i></div>
                 </div>
             </div>
         </div>
 
         <div ng-repeat="record in userFilters | orderBy:'-meta.modifiedOn'">
-            <div class="row" ng-hide="record.pendingStatus || del" style="padding:0; margin:0; padding:10px 0;background-color:#eee;margin-top:10px;">
-                <div class="col-xs-7 col-sm-8"><span class="bold" ng-bind="record.queryTitle"></span> <br> <span ng-repeat="filter in record.filters" style="margin-bottom:10px;margin-right:10px;"><span ng-if="filter.name" class="label label-info"><span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span> <span ng-bind="getFilterName(filter.name)"></span> <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span></span></span></div>
-                <div class="col-xs-1 text-center color-darkgray"><small class="hidden-xs">Enviarme&nbsp; un correo electrónico</small><div ng-click="emailSubscribe(record, true)" class="color-white" ng-show="!hasUserEmailSubscribed(record)" style="cursor:pointer"><i class="fa fa-square fa-2x" ></i></div>
-                    <div ng-click="emailSubscribe(record, false)" class="color-darkgray" ng-show="hasUserEmailSubscribed(record)" style="cursor:pointer"><i class="fa fa-check-square fa-2x" ></i></div>
+            <div class="row m-0 p-2 bg-light mt-2" ng-hide="record.pendingStatus || del">
+                <div class="col-7 col-md-8 p-0"><span class="bold text-dark" ng-bind="record.queryTitle"></span> <br> <span ng-repeat="filter in record.filters" class="mb-1 me-1"><span ng-if="filter.name" class="badge bg-info fw-bolder fs-small-6"><span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span> <span ng-bind="getFilterName(filter.name)"></span> <span ng-if="filter.type === 'freeText' || filter.type === 'UID'">&quot;</span></span></span></div>
+                <div class="col-1 offset-1 offset-md-0 text-center text-secondary"><small class="d-none d-md-block">Enviarme&nbsp; un correo electrónico</small><div ng-click="emailSubscribe(record, true)" ng-show="!hasUserEmailSubscribed(record)" class="cursor-pointer"><i class="bi bi-square fs-4"></i></div>
+                    <div class="text-secondary" ng-click="emailSubscribe(record, false)" ng-show="hasUserEmailSubscribed(record)" class="cursor-pointer"><i class="bi bi-check-square fs-4"></i></div>
                 </div>
-                <div class="col-xs-1 text-center color-darkgray"><small class="hidden-xs">Buscar</small><div style="cursor:pointer" ng-hide="del" ng-click="runFilter(record._id)" ><i class="fa fa-search fa-2x"></i></div>
+                <div class="col-1 text-center text-secondary"><small class="d-none d-md-block">Buscar</small><div class="cursor-pointer" ng-hide="del" ng-click="runFilter(record._id)" ><i class="bi bi-search fs-4"></i></div>
                 </div>
-                <div class="col-xs-1 text-center color-darkgray"><small class="hidden-xs">Editar</small><div style="cursor:pointer" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id"><i class="fa fa-edit fa-2x"></i></div>
+                <div class="col-1 text-center text-secondary"><small class="d-none d-md-block">Editar</small><div class="cursor-pointer" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id"><i class="bi bi-pencil-square fs-4"></i></div>
                 </div>
-                <div class="col-xs-1 text-center color-darkgray"><small class="hidden-xs">Eliminar</small><div style="cursor:pointer" ng-hide="del" ng-click="del=!!record._id;confirmDelete(record)" ng-disabled="!record._id"><i class="fa fa-trash-o fa-2x"></i></div>
+                <div class="col-1 text-center text-secondary"><small class="d-none d-md-block">Eliminar</small><div class="cursor-pointer" ng-hide="del" ng-click="del=!!record._id;confirmDelete(record)" ng-disabled="!record._id"><i class="bi bi-trash-fill fs-4"></i></div>
                 </div>
             </div>
         </div>
-    </div><br><button type="button" class="btn btn-primary pull-right" ng-click="addEdit()"><i class="fa fa-plus-circle"></i> Agregar nuevo</button>
+    </div><br><button type="button" class="btn btn-primary btn-sm float-end" ng-click="addEdit()"><i class="bi bi-plus-circle-fill"></i> Agregar nuevo</button>
     <div class="clearfix"></div>
-    <div ng-if="loading" class="text-center" style="margin-bottom: 30px;"><i class="fa fa-spinner fa-spin"></i> Cargando...</div>
+    <div ng-if="loading" class="text-center mb-5"><i class="fa fa-spinner fa-spin"></i> Cargando...</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
-        <div class="alert  bg-grey" role="alert" style="margin-top:20px;"><span ng-if="user.isAuthenticated">You do not have any saved searches/alerts.</span> <span ng-if="!user.isAuthenticated">Please log in to view your saved searches/alerts.</span></div>
+        <div class="alert  bg-grey mt-3" role="alert"><span ng-if="user.isAuthenticated">You do not have any saved searches/alerts.</span> <span ng-if="!user.isAuthenticated">Please log in to view your saved searches/alerts.</span></div>
     </div>
     <script type="text/ng-template" trados-translation="true" id="newFilterDialog">
         <div class="modal-header">
@@ -44,26 +42,26 @@
         </div>
         <div class="modal-body">
                 <div class="form-group">
-                <label for="filterTitle">Title for this saved search</label>
-                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Buscar título">
+                <label class="fw-bold pb-2" for="filterTitle">Title for this saved search</label>
+                <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Buscar título" />
             </div>
             <div>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                     <p ng-repeat="error in errors" ng-bind="error"></p>
                 </div>
             </div><br><label for="filterTitle">Seleccionar filtros de búsqueda:</label>
-            <div class="bg-white" style="border:1px solid #ccc; border-radius: 5px;">
+            <div class="bg-white border rounded">
                 <search-directive is-alert-search="true" skip-results="true" skip-save-filter="true" skip-date-filter="true" skip-keywords-filter="{{skipKeywordsFilter}}"
                     skip-text-filter="{{skipTextFilter}}">
                 </search-directive>
-             </div><br><input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail">
+             </div><br><input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail" />
                 <label for="sendEmail">Enviarme un correo electrónico cuando se agreguen o actualicen registros pertinentes.</label>
                 <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                     <p ng-repeat="error in errors" ng-bind="error"></p>
                 </div>
         </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancelar</button>
+        <div class="modal-footer d-flex justify-content-between">
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancelar</button>
             <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Guardar</button>
         </div>
     </script>

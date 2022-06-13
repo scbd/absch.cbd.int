@@ -1,10 +1,10 @@
 ﻿<div id="NotificationsPanel">
 
-    <div class="row" style="margin:0 0 20px 0;padding:0;" ng-hide="docId">
-        <div class="col-xs-12">
+    <div class="row p-0 mb-3" ng-hide="docId">
+        <div class="col-12">
             <div class="btn-group" role="group">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="!stateFilter || stateFilter=='All'">Tous</span> <span ng-if="stateFilter=='unread'">Non lus</span> <span ng-if="stateFilter=='read'">Lus</span> <span class="caret"></span></button>
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="!stateFilter || stateFilter=='All'">Tous</span> <span ng-if="stateFilter=='unread'">Non lus</span> <span ng-if="stateFilter=='read'">Lus</span> <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'All'">Ensemble</a></li>
                         <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'unread'">Non lus</a></li>
@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="!typeFilter || typeFilter=='All'">Tout types</span> <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"></i> Alertes</span> <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"></i> Messages</span> <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"></i>Demandes de publication</span> <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"></i> Rappels</span> <span ng-if="typeFilter=='approved'"><i class="fa fa-check-circle"></i> Demandes approuvées</span> <span ng-if="typeFilter=='recalled'"><i class="fa fa-rotate-left"></i> Demandes rappelées</span> <span ng-if="typeFilter=='rejected'"><i class="fa fa-times-circle"></i> Demandes rejetées</span> <span ng-if="typeFilter=='timedout'"><i class="fa fa-clock-o"></i>Demandes expirées</span> <span class="caret"></span></button>
+                    <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span ng-if="!typeFilter || typeFilter=='All'">Tout types</span> <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"></i> Alertes</span> <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"></i> Messages</span> <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"></i>Demandes de publication</span> <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"></i> Rappels</span> <span ng-if="typeFilter=='approved'"><i class="fa fa-check-circle"></i> Demandes approuvées</span> <span ng-if="typeFilter=='recalled'"><i class="fa fa-rotate-left"></i> Demandes rappelées</span> <span ng-if="typeFilter=='rejected'"><i class="fa fa-times-circle"></i> Demandes rejetées</span> <span ng-if="typeFilter=='timedout'"><i class="fa fa-clock-o"></i>Demandes expirées</span> <span class="caret"></span></button>
                     <ul class="dropdown-menu">
                         <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'All'">Tout types</a></li>
                         <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'alert'"><i class="fa fa-bolt"></i> Alertes</a></li>
@@ -28,126 +28,126 @@
                 </div>
 
                 <div class="btn-group" role="group">
-                    <input type="text" class="form-control" ng-model="keyword" placeholder="Chercher par mot clé" style="width:200px"></input>
+                    <input type="text" class="form-control" ng-model="keyword" placeholder="Chercher par mot clé" style="width:12rem" />
                 </div>
             </div>
 
-            <div class="pull-right"><a rel="noopener" type="button" class="color-litegrey" href="register/user-preferences">Gérer vos notifications par courriel</a> | <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">Marquer comme lu</a></div>
+            <div class="float-end"><a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">Marquer comme lu</a></div>
         </div>
     </div>
 
     <div class="row notification-panel-header">
-        <div class="col-xs-2 text-center"><strong>Message</strong></div>
-        <div class="col-xs-8">
+        <div class="col-3 text-center"><strong>Message</strong></div>
+        <div class="col-6">
 
         </div>
-        <div class="col-xs-2 text-center"><strong>Lecture</strong></div>
+        <div class="col-3 text-center"><strong>Lecture</strong></div>
     </div>
     <div infinite-scroll="loadNotifications()" infinite-scroll-disabled="loading" infinite-scroll-distance="12" infinite-scroll-parent="true">
         <div class="row notification-row" ng-repeat="notification in (notifications | filter:keyword | filter:hasState | filter:hasType)"
-        ng-class="{'notification-read':notification.state==='read','notification-unread':notification.state==='unread'}"><!--TIMEOUT=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='timedout'">
-                <div class="col-xs-2 text-center hidden-xs">
+        ng-class="{'notification-read':notification.state==='read','notification-unread':notification.state==='unread'}"><!--TIMEOUT=======================================--><div class="row notification-spacing10" ng-if="notification.data.action==='timedout'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-clock-o"></i> <span class="notification-icon-text"> <br/> Demande expirée</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><span class="notification-title"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-clock-o"></i> Demande de publication expirée <span class="hidden-xs">: Le fichier demandé été replacé dans le dossier provisoire de son propriétaire</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Détails :</span> <span class="notification-label">Les demandes de publications deviennent automatiquement expirées  dans le système après 90 jours</span></div>
+                <div class="col-8">
+                    <div class="notification-message" ng-click="goto(notification);"><span class="notification-title"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-clock-o"></i> Demande de publication expirée <span class="d-none d-sm-inline-block">: Le fichier demandé été replacé dans le dossier provisoire de son propriétaire</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Détails :</span> <span class="notification-label">Les demandes de publications deviennent automatiquement expirées  dans le système après 90 jours</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">ago</span></span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="d-none d-sm-inline-block">ago</span></span></div>
                 </div>
-            </div><!--REQUEST=======================================--><div class="notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && (!notification.data.iteration || notification.data.iteration===1)">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--REQUEST=======================================--><div class="row notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && (!notification.data.iteration || notification.data.iteration===1)">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-rotate-right"></i> <br/> <span class="notification-icon-text">Requête de publication</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-right"></i> <span class="notification-title" ng-if="notification.data.action==='request'">Demande de publication</span> <span class="notification-title" ng-if="notification.data.action==='delete-request'">Demande effacée</span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Demandé par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Demandé par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">ago</span></span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="d-none d-sm-inline-block">ago</span></span></div>
                 </div>
-            </div><!--REMINDER=======================================--><div class="notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && notification.data.iteration>1">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--REMINDER=======================================--><div class="row notification-spacing10" ng-if="(notification.data.action==='request' || notification.data.action==='delete-request') && notification.data.iteration>1">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-calendar"></i> <br/> <span class="notification-icon-text">Rappel</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-calendar"></i> <span class="notification-title" ng-if="notification.data.action==='request'">Rappels : Demande de publications en attente d’approbation</span> <span class="notification-title" ng-if="notification.data.action==='delete-request'">Rappels : Demande de suppression en attente d’approbation</span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Demandé par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Demandé par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">ago</span></span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="d-none d-sm-inline-block">ago</span></span></div>
                 </div>
-            </div><!--RECALLED=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='recalled'">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--RECALLED=======================================--><div class="row notification-spacing10" ng-if="notification.data.action==='recalled'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-rotate-left"></i> <br/> <span class="notification-icon-text">Demande rappelée</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"></i> <span class="notification-title">Demande rappelée <span class="hidden-xs">: Le demandeur a annulé sa demande de publication d’un fichier</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Rappelée par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                <div class="col-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"></i> <span class="notification-title">Demande rappelée <span class="d-none d-sm-inline-block">: Le demandeur a annulé sa demande de publication d’un fichier</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Rappelée par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">ago</span></span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="d-none d-sm-inline-block">ago</span></span></div>
                 </div>
-            </div><!--REJECTED=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='rejected'">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--REJECTED=======================================--><div class="row notification-spacing10" ng-if="notification.data.action==='rejected'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-times-circle"></i> <br/> <span class="notification-icon-text">Demande rejetée</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"></i> <span class="notification-title">Demande rejetée <span class="hidden-xs">: <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has rejected as request for publishing</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Rejetée par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span><div ng-if="notification.data.info"><span class="notification-label" ng-if="notification.data.info">Justification :</span> <span  ng-bind="notification.data.info"></span></div>
+                <div class="col-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"></i> <span class="notification-title">Demande rejetée <span class="d-none d-sm-inline-block">: <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has rejected as request for publishing</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Rejetée par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span><div ng-if="notification.data.info"><span class="notification-label" ng-if="notification.data.info">Justification :</span> <span  ng-bind="notification.data.info"></span></div>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer"><span class="hidden-xs">Il y a</span>{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}</span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer"><span class="d-none d-sm-inline-block">Il y a</span>{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}</span></div>
                 </div>
-            </div><!--APPROVED=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='approved'">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--APPROVED=======================================--><div class="row notification-spacing10" ng-if="notification.data.action==='approved'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-check-circle"></i> <br/> <span class="notification-icon-text">Demande approuvée</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
-                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"></i> <span class="notification-title">Demande approuvée <span class="hidden-xs">: <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has approved a request and published the record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Approuvée par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                <div class="col-8">
+                    <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"></i> <span class="notification-title">Demande approuvée <span class="d-none d-sm-inline-block">: <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span> <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span> has approved a request and published the record</span></span><div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Approuvée par :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">ago</span></span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="d-none d-sm-inline-block">ago</span></span></div>
                 </div>
-            </div><!--MESSAGE=======================================--><div class="notification-spacing10" ng-if="notification.type==='message'">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--MESSAGE=======================================--><div class="row notification-spacing10" ng-if="notification.type==='message'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-envelope-o"></i> <br/> <span class="notification-icon-text">Message</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"></i><div class="notification-title notification-spacing5">{{notification.data.message}}</div>
 
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">Envoyé de :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">Envoyé de :</span> <span>{{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}}</span> <span class="notification-label">sur</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="hidden-xs">ago</span></span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}} <span class="d-none d-sm-inline-block">ago</span></span></div>
                 </div>
-            </div><!--Subscription Publish=======================================--><div class="notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
-                <div class="col-xs-2 text-center hidden-xs">
+            </div><!--Subscription Publish=======================================--><div class="row notification-spacing10" ng-if="notification.data.action==='published' && notification.type==='subscriptionNotification'">
+                <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5"><i class="fa fa-lg fa-bolt"></i> <br/> <span class="notification-icon-text">Alerte</span></div>
                 </div>
-                <div class="col-xs-10 col-sm-8">
+                <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);"><i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"></i><div class="notification-title notification-spacing5">{{notification.data.message || 'A new record has been published'}}</div>
                         <div class="notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}:</span> <span>{{notification.data.documentInfo.title | lstring:locale }}</span></DIV>
-                        <div class="hidden-xs notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.publisherText }}:</span> <span>{{notification.data.documentInfo.publisher }}</span> <span class="notification-label">on</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
+                        <div class="d-none d-sm-inline-block notification-spacing5"><span class="notification-label">{{notification.data.documentInfo.publisherText }}:</span> <span>{{notification.data.documentInfo.publisher }}</span> <span class="notification-label">on</span> <span>{{notification.createdOn | formatDateWithTime}}</span></div>
                     </div>
                 </div>
-                <div class="col-xs-2 text-center">
-                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer"><span class="hidden-xs">Il y a</span>{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}</span></div>
+                <div class="col-2 text-center">
+                    <div class="notification-spacing5"><a rel="noopener" translation-url  href="#" ng-show="notification.state==='unread'" ng-click="updateStatus(notification);"><i class="fa fa-square-o fa-lg"></i></a> <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a> <br> <span class="notification-timer"><span class="d-none d-sm-inline-block">Il y a</span>{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}</span></div>
                 </div>
             </div>
             
-            <div style="margin-top:10px;" ng-if="!notifications">
-                <div class="col-xs-12 text-center"><span class="color-grey">Pas de notifications</span></div>
+            <div class="mt-2" ng-if="!notifications">
+                <div class="col-12 text-center"><span class="color-grey">Pas de notifications</span></div>
             </div>
 
         </div>

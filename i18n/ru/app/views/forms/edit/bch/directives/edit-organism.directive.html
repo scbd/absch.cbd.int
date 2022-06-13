@@ -1,6 +1,6 @@
 ﻿<div >
 
-	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -8,11 +8,11 @@
 			 on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 			 data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Общая информация</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -26,7 +26,7 @@
 								</div>
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Информация об организме</legend>
 									<div class="row">
 										
@@ -103,8 +103,8 @@
 										</div>
 										<div class="col-sm-12">
 											<div class="km-control-group" name="scientificNameSynonyms" caption="Альтернативное(-ые) научное(-ые) название(-я) (синоним(ы))">
-												<div ng-repeat="synonym in scientificNameSynonyms" style="padding-bottom:5px;" class="input-group">
-													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" /><span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-addon" style="cursor:pointer" 
+												<div ng-repeat="synonym in scientificNameSynonyms" class="input-group pb-1">
+													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" /><span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-text cursor-pointer" 
 													 ng-click="removeItem(scientificNameSynonyms, $index)"><i class="fa fa-trash-o icon"></i></span></div>
 												<button type="button" class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">Добавить</button>
 											</div>
@@ -113,8 +113,8 @@
 											<div class="km-control-group common-names" name="commonNames" caption="Общепринятое название (названия)">
 												
 												<div class="help-block">A common name is used to refer to an organism in everyday language and may include synonyms. Например: маис/кукуруза.</div>
-												<div ng-repeat="commonName in commonNames" style="padding-bottom:5px;" class="input-group">
-													<div km-textbox-ml name="commonNames{{$index}}" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div><span ng-class="{'disable':commonNames.length==1}" class="input-group-addon" style="cursor:pointer" 
+												<div ng-repeat="commonName in commonNames" class="input-group pb-1">
+													<div km-textbox-ml name="commonNames{{$index}}" style="width: 97%;" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div><span ng-class="{'disable':commonNames.length==1}" class="input-group-text cursor-pointer" 
 													 ng-click="removeItem(commonNames, $index)"><i class="fa fa-trash-o icon"></i></span></div>
 												<button type="button" class="btn btn-primary" ng-click="addItem(commonNames)">Добавить</button>
 											</div>
@@ -122,7 +122,7 @@
 									</div>
 
 									<section>
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<label>Дополнительная классификация</label>
 											<hr/>
 											<div class="row">
@@ -173,7 +173,7 @@
 							</section>
 							
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Характеристики, имеющие отношение к биобезопасности</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -224,7 +224,7 @@
 								</div>
 							</section>	
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Дополнительная информация</legend>
 									<div class="row">
 										<div class="col-sm-12">

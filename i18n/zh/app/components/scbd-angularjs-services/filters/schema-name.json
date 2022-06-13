@@ -1,0 +1,175 @@
+{
+  "news": {
+    "title": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "新闻"
+    },
+    "description": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "新闻"
+    },
+    "titlePlural": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "新闻"
+    },
+    "shortCode": "新闻",
+    "type": ""
+  },
+  "notification": {
+    "title": {
+      "ar": "",
+      "fr": "",
+      "es": "",
+      "en": ""
+    },
+    "description": {
+      "ar": "",
+      "fr": "",
+      "es": "",
+      "en": ""
+    },
+    "titlePlural": {
+      "zh": "",
+      "ru": "",
+      "fr": "通知",
+      "es": "",
+      "en": "通知"
+    },
+    "type": "",
+    "shortCode": ""
+  },
+  "new": {
+    "title": {
+      "ar": "",
+      "zh": "",
+      "fr": "",
+      "es": "",
+      "en": "最新消息"
+    },
+    "description": {
+      "ar": "",
+      "zh": "",
+      "fr": "",
+      "es": "",
+      "en": "最新消息"
+    },
+    "titlePlural": {
+      "ar": "",
+      "zh": "",
+      "fr": "",
+      "es": "",
+      "en": "最新消息"
+    },
+    "type": "",
+    "shortCode": ""
+  },
+  "meeting": {
+    "title": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "会议"
+    },
+    "description": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "会议"
+    },
+    "titlePlural": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "会议"
+    },
+    "type": "",
+    "shortCode": ""
+  },
+  "statement": {
+    "title": {
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "声明"
+    },
+    "description": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "声明"
+    },
+    "titlePlural": {
+      "ar": "",
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "声明"
+    },
+    "type": "",
+    "shortCode": ""
+  },
+  "pressRelease": {
+    "title": {
+      "ar": "",
+      "zh": "",
+      "fr": "",
+      "es": "",
+      "en": "新闻简报"
+    },
+    "description": {
+      "ar": "",
+      "zh": "",
+      "fr": "",
+      "es": "",
+      "en": "新闻简报"
+    },
+    "titlePlural": {
+      "zh": "",
+      "ru": "",
+      "fr": "",
+      "es": "",
+      "en": "新闻稿"
+    },
+    "type": "",
+    "shortCode": ""
+  },
+  "meetingDocument": {
+    "title": {
+      "en": ""
+    },
+    "description": {
+      "en": ""
+    },
+    "titlePlural": {
+      "ar": "",
+      "zh": "",
+      "fr": "",
+      "es": "",
+      "en": "会议文件"
+    },
+    "type": "",
+    "shortCode": ""
+  }
+}

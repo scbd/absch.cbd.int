@@ -1,4 +1,6 @@
 <div class="breadcrumbs" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}" ng-hide="breadcrumbs.get().length == 1">
-    <div class=" bs5 ms-3 p-3"></div>
+    <div class="p-3 py-2"><a rel="noopener" translation-url href="https://www.cbd.int" class="margin-right-xs">CDB</a> <span ng-repeat="breadcrumb in getBreadcrumbs()">/ <span ng-if="!breadcrumb.param"><a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
+                    ng-bind="breadcrumb.label" class="margin-right-xs"></a> <span ng-if="$last" ng-bind="breadcrumb.label"></span></span> <span ng-if="breadcrumb.param"><a rel="noopener" translation-url ng-if="!$last" ng-href="{{ breadcrumb.path }}"
+                    ng-bind="breadcrumb.label" class="margin-right-xs"></a> <span ng-if="$last" ng-bind="breadcrumb.label"></span></span></span></div>
 </div>
 

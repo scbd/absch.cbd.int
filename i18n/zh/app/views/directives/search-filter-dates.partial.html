@@ -1,6 +1,6 @@
 ﻿<ul class="blaise btn" style="clear:none;">
   <li class="dropdown"><a rel="noopener" translation-url  class="btn dropdown-toggle"
-       data-toggle="dropdown" style="color:#111;" 
+       data-bs-toggle="dropdown" style="color:#111;" 
        href="#"><span ng-hide="since || until"><span ng-bind="title"></span></span> <span ng-show="since"><span style="color:#428BCA">since:</span> <span ng-bind="since"></span></span> <span ng-show="until"><span style="color:#428BCA">until:</span> <span ng-bind="until"></span></span> <b class="caret"></b></a><ul class="dropdown-menu" style="width:300px"><!-- <span search-filter-dates title='Date of Adoption' query='adoptionDate'></span>  --><div class="list-group" >
             <button type="button" class="btn btn-xs btn-default"  type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">清除选择</button>
             <div class="list-group-item active"><span ng-bind="title"></span></div>

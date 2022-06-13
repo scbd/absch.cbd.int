@@ -1,6 +1,6 @@
 <div >
   
-    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -19,7 +19,7 @@
                                 <legend name="generalInfo">General Information</legend>
 
                                 <div class="row">
-                                    <div class="col-xs-12" >
+                                    <div class="col-lg-12" >
                                         <div class="km-control-group" name="header.languages" required caption="Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="government" required caption="Pays">
                                             <div>
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">                                        
+                                    <div class="col-lg-12">                                        
                                         <div class="km-control-group" name="name" required caption="">
                                             <label name="name" class="control-label" required for="name"><span ng-if="type!='SPCA'">Nom de l’autorité nationale compétente</span> <span ng-if="type=='SPCA'">Nom de l’autorité nationale compétente</span></label>
                                             <div class="help-info">Fournissez le nom de l’entité responsable par ex. : Ministère de l’Environnement <span ng-if="isAbs">Gardez en tête que le nom de l’autorité nationale compétente vous aidera à identifier le fichier au Centre d’échange d’information pour l’APA.</span></div>
@@ -57,7 +57,7 @@
                                 <div class="help-info" ng-if="isAbs">Les coordonnées aideront les usagers des ressources génétiques à entrer en contact avec l’ANC. Il est important que garder cette information à jour afin de donner aux usagers l'information la plus récente et la plus précise.</div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="address" caption="Adresse">
                                             <div km-textbox-ml ng-model="document.address" rows="2" placeholder="exemple: 413 rue St-Jacques Suite 800"
                                                 locales="document.header.languages"></div>
@@ -66,14 +66,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="city" required caption="Ville">
                                             <div km-textbox-ml name="city" ng-model="document.city" required
                                                 locales="document.header.languages" placeholder="exemple: Montréal :"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="state" caption="État ou province">
                                             <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
                                                 placeholder="example: Québec"></div>
@@ -83,14 +83,14 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="postalCode" caption="Code postal">
                                             <div km-textbox-ml name="postalCode" ng-model="document.postalCode"
                                                 locales="document.header.languages" placeholder="example: H2Y 1N9"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6" ng-if="options.countries">
+                                    <div class="col-lg-6" ng-if="options.countries">
                                         <div class="km-control-group" name="country" required caption="Pays de la personne à contacter*">
                                             <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
                                                 mapping="genericMapping" selectbox="true" placeholder="Veuillez choisir un pays..."
@@ -102,7 +102,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="phones" required caption="Téléphone (s) :">
                                             <div class="help-info">Veuillez utiliser le format suivant : +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="faxes" caption="Télécopieur :">
                                             <div class="help-info">Veuillez utiliser le format suivant : +[country code] [city code] [telephone number] [extension, if necessary].</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
@@ -120,14 +120,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="emails" required caption="Email(s)">
                                             <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
                                                 placeholder="exemple : secretariat@cbd.int"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="websites" caption="Adresse(s) du/des site(s) Web">
                                             <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                                 allow-file="false"></div>
@@ -139,7 +139,7 @@
                             <legend name="contactInfo">Coordonnées supplémentaires</legend>
 
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-lg-12">
                                     <div class="km-control-group" name="contacts" caption="Personne à contacter">
                                         <div document-selector ng-model="document.contacts" question="contacts"
                                             ng-disabled="!document.government.identifier" 
@@ -153,7 +153,7 @@
                                 <legend name="policyBasis">Bases juridiques, administratives et politiques pour la compétence de l’autorité nationale compétente</legend>
                                 <div class="help-info">Dans cette section, une référence aux mesures d’APA liés qui accordent la compétence à l’ANC peut être incluse. Afin de lier l’ANC à une mesure APA pertinente, le fichier de la mesure APA doit être enregistré en premier. Ainsi, si vous n’avez pas encore soumis la mesure APA pertinente, vous voudrez peut-être sauvegarder l’ANC en tant que brouillon et publier d’abord la mesure APA.<br/> Dans cette section, une référence aux mesures d’APA liés qui accordent la compétence au Protocole de Cartagena peut être incluse. Afin de lier l’autorité nationale compétente à une mesure APA pertinente, le fichier de la mesure APA doit être enregistré en premier. Par conséquent, si vous n'avez pas encore soumis la mesure concernée, vous pouvez enregistrer l'autorité nationale compétente pour le Protocole de Cartagena en tant que projet et publier d'abord la mesure, ou vous pouvez créer la mesure en ligne.</div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Veuillez fournir un lien vers toutes les mesures juridiques, administratives ou politiques pertinentes.">
                                             <div document-selector ng-disabled="!document.government.identifier" ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef"
@@ -164,7 +164,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetency" caption="Si nécessaire, fournissez des informations supplémentaires sur la base juridique, administrative ou politique de la compétence de l'autorité nationale compétente."></div>
                                         <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                             placeholder="" locales="document.header.languages"></div>
@@ -177,7 +177,7 @@
                                 <legend name="responsibilities">Responsabilités</legend>
                                 <div class="help-info">Le paragraphe 4 de l’article 13 prévoit que lorsqu'une Partie désigne plus d'une autorité nationale compétente, elle indique au Secrétariat, avec sa notification à cet effet, quels sont les domaines de responsabilité respectifs de ces autorités. Le cas échéant, il sera au moins précisé quelle est l’autorité compétente responsable des ressources génétiques sollicitées.</div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="responsibleForAllNot"
                                             caption="Il existe déjà une ANC pour votre pays, veuille spécifier l’étendue des responsabilités de chacune des ANC."></div>
 
@@ -188,15 +188,15 @@
                                         </div>
                                     </div>
                                 </div><!-- IF NO SECTION --><div ng-class="{'disable':(document.responsibleForAll==true || document.responsibleForAll==null), 'bg-white':!(document.responsibleForAll==true || document.responsibleForAll==null) }"
-                                    class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    class="card no-shadow pt-0 pb-0">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-lg-12">
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <h4 ng-show="document.responsibleForAll==null">Si non, l’information suivante est requise.</h4>
                                                     <h4 ng-show="document.responsibleForAll==true">Cette section n'est pas requise.</h3>
                                                         <div ng-show="document.responsibleForAll==false">
-                                                            <h4 class="color-red">Cette section est requise lorsqu’il existe plus d’une autorité nationale compétente (ANC). Veuillez vous assurer que les responsabilités pour chacune des autorités nationales compétentes (ANC) soit bien décrite dans tous les fichiers publiés.</h4>
+                                                            <h4 class="color-red">Cette section est requise lorsqu’il existe plus d’une autorité nationale compétente (ANC). Please ensure that the responsibilities for each competent national authority (CNA) are card described in all published records.</h4>
                                                         </div>
 
                                                         <div class="km-control-group" name="responsibilities"
@@ -211,7 +211,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absJurisdiction" caption="La zone de juridiction pour octroyer l’accès aux ressources génétiques"
                                                         required>
                                                         <div class="help-info">L’information sur La zone de juridiction (échelon national/fédéral, infra national ou communautaire) aide à inventorier sur une carte les différentes responsabilités parmi les ANC.</div>
@@ -221,7 +221,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-lg-6">
                                                     <div ng-show="showJurisdictionName()">
                                                         <div class="km-control-group" name="absJurisdictionName"
                                                             required caption="Nom de la/des  juridiction(s)">
@@ -234,7 +234,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absGeneticResourceTypes"
                                                         caption="Mots clés pour décrire l’étendue des responsabilités de l’ANC">
                                                         <div class="help-info">La collecte de ces informations est importante pour faciliter des recherches harmonisées parmi les fichiers. Veuillez sélectionner tous les mots clés pertinents qui peuvent aider à décrire les responsabilités de l’autorité nationale compétente.</div>
@@ -274,13 +274,13 @@
                             </section>
                             <section  ng-if="isBch && type=='SPCA'">
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibleForAll" required caption="S’agit-il de l’unique autorité nationale compétente (ANC) pour le Protocole additionnel dans votre pays?">
                                             <div class="help-info">Si « non », veuillez décrire les responsabilités de l'autorité compétente dans la case ci-dessous. Veuillez remplir un format commun différent pour chaque autorité compétente.</div>
                                             <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
                                         caption="Brève description des responsabilités de l'autorité compétente (maximum 300 caractères)." >
                                         <div class="help-info">Cette information est requise lorsqu’il existe plus d’une autorité nationale compétente (ANC).</div>
@@ -298,7 +298,7 @@
                             <section>
                                 <legend>Informations supplémentaires</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantInformation" caption="Informations supplémentaires">
                                             <div class="help-info">Veuillez utiliser ce champ pour tout autre renseignement pertinent n'ayant pas été abordé ailleurs dans le fichier.</div>
                                             <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
@@ -308,7 +308,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantDocuments" caption="Autres documents pertinents">
                                             <div class="help-block">Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.</div>
                                             <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
@@ -320,7 +320,7 @@
                             <section>
                                 <legend>Notes</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="notes">
                                             <div class="help-info">Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.</div>
                                             <div km-notes name="notes" ng-model="document.notes"></div>

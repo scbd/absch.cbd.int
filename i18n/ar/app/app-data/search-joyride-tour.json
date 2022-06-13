@@ -1,0 +1,74 @@
+{
+  "welcome": {
+    "title": "مرحبًا بكم في صفحة البحث",
+    "content": "<p> </p>"
+  },
+  "globalSearch": {
+    "title": "المرشحات العامة",
+    "content": "<p></p>"
+  },
+  "freeText": {
+    "title": "البحث بنص حُر",
+    "content": "<p></u> </p>"
+  },
+  "recordTypesFilterTab": {
+    "title": "الترشيح حسب نوع السجل",
+    "content": "<p> </p>"
+  },
+  "keywordsFilterTab": {
+    "title": "البحث بالكلمات الرئيسية",
+    "content": "<p></p>"
+  },
+  "countryFilterTab": {
+    "title": "البحث حسب البلد",
+    "content": "<p></u>  </p>"
+  },
+  "regionFilterTab": {
+    "title": "البحث حسب المنطقة",
+    "content": "<p></p>"
+  },
+  "dateFilterTab": {
+    "title": "البحث حسب التاريخ",
+    "content": "<p> </p>"
+  },
+  "closeFilterTab": {
+    "title": "نتائج البحث",
+    "content": "<p></p>"
+  },
+  "searchResult": {
+    "title": "نتائج البحث: علامات التبويب",
+    "content": "<p> </u> </p>"
+  },
+  "subFilters": {
+    "title": "المرشحات الفرعية",
+    "content": "<p></p>"
+  },
+  "recordView": {
+    "title": "نتائج البحث: عرض السجلات",
+    "content": "<p></p>"
+  },
+  "viewType": {
+    "title": "نتائج البحث: عرض نوع السجل",
+    "content": "<p></p>"
+  },
+  "sortBy": {
+    "title": "نتائج البحث: الترتيب",
+    "content": "<p></p>"
+  },
+  "sendRecords": {
+    "title": "نتائج البحث: المشاركة",
+    "content": "<p></p>"
+  },
+  "exportRecords": {
+    "title": "نتائج البحث: تصدير",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "هل تحتاج للمساعدة؟",
+    "content": "انقر هنا للوصول إلى المساعدة السياقية حيث يمكنك العثور على مزيد من المعلومات المتعلقة بصفحة البحث."
+  },
+  "needMoreHelp": {
+    "title": "هل تحتاج لمساعدة أخرى؟",
+    "content": ""
+  }
+}

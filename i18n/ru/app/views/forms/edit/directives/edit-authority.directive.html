@@ -1,6 +1,6 @@
 <div >
   
-    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -19,7 +19,7 @@
                                 <legend name="generalInfo">Общая информация</legend>
 
                                 <div class="row">
-                                    <div class="col-xs-12" >
+                                    <div class="col-lg-12" >
                                         <div class="km-control-group" name="header.languages" required caption="Выберите язык(и) для представления этой записи:">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="government" required caption="Страна">
                                             <div>
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">                                        
+                                    <div class="col-lg-12">                                        
                                         <div class="km-control-group" name="name" required caption="">
                                             <label name="name" class="control-label" required for="name"><span ng-if="type!='SPCA'">Название компетентного национального органа</span> <span ng-if="type=='SPCA'">Название компетентного органа</span></label>
                                             <div class="help-info">Укажите конкретное название ответственного учреждения (например, министерство окружающей среды). <span ng-if="isAbs">Имейте в виду, что название КНО поможет идентифицировать запись в Механизме посредничества для регулирования ДГРСИВ.</span></div>
@@ -57,7 +57,7 @@
                                 <div class="help-info" ng-if="isAbs">Контактные данные помогут пользователям генетических ресурсов связаться с КНО. Важно постоянно обновлять данные сведения, с тем чтобы пользователи имели новейшую и точную информацию.</div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="address" caption="Адрес">
                                             <div km-textbox-ml ng-model="document.address" rows="2" placeholder="пример: 413 St-Jacques Ouest, Suite 800"
                                                 locales="document.header.languages"></div>
@@ -66,14 +66,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="city" required caption="Город">
                                             <div km-textbox-ml name="city" ng-model="document.city" required
                                                 locales="document.header.languages" placeholder="пример: Montreal"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="state" caption="State or Province">
                                             <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
                                                 placeholder="пример: Quebec"></div>
@@ -83,14 +83,14 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="postalCode" caption="Почтовый индекс или Zip-код">
                                             <div km-textbox-ml name="postalCode" ng-model="document.postalCode"
                                                 locales="document.header.languages" placeholder="пример: H2Y 1N9"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6" ng-if="options.countries">
+                                    <div class="col-lg-6" ng-if="options.countries">
                                         <div class="km-control-group" name="country" required caption="Страна контакта">
                                             <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
                                                 mapping="genericMapping" selectbox="true" placeholder="Выберите страну..."
@@ -102,7 +102,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="phones" required caption="Номер(а) телефона(-ов)">
                                             <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="faxes" caption="Номер(а) факса(-ов)">
                                             <div class="help-info">Используйте следующий формат: + [код страны] [код города] [номер телефона] [добавочный номер, если необходимо].</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
@@ -120,14 +120,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="emails" required caption="Адрес(а) электронной почты:">
                                             <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
                                                 placeholder="пример: secretariat@cbd.int"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="websites" caption="Адрес(а) веб-сайта(-ов)">
                                             <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                                 allow-file="false"></div>
@@ -139,7 +139,7 @@
                             <legend name="contactInfo">Дополнительная контактная информация</legend>
 
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-lg-12">
                                     <div class="km-control-group" name="contacts" caption="Контактное лицо">
                                         <div document-selector ng-model="document.contacts" question="contacts"
                                             ng-disabled="!document.government.identifier" 
@@ -153,7 +153,7 @@
                                 <legend name="policyBasis">Правовые, административные или политические основания для установления компетенции компетентного национального органа</legend>
                                 <div class="help-info">В данный раздел можно включить справочную информацию, касающуюся соответствующей меры в области ДГРСИВ, на основании которой устанавливается компетенция КНО. С целью увязки КНО с соответствующей мерой в области ДГРСИВ сначала необходимо представить запись о мере в области ДГРСИВ. Поэтому, если вы еще не представили запись о соответствующей мере в области ДГРСИВ, вы можете сохранить черновик записи о КНО и сначала опубликовать запись о мере в области ДГРСИВ.<br/> В данный раздел можно включить справочную информацию, касающуюся соответствующей меры, на основании которой устанавливается компетенция компетентного национального органа по Картахенскому протоколу. С целью увязки компетентного органа с соответствующей мерой в области сначала необходимо представить запись о мере. Поэтому, если вы еще не представили запись о соответствующей мере, вы можете сохранить черновик записи о компетентном национальном органе по Картахенскому протоколу и сначала опубликовать или создать запись о соответствующей мере.</div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetencyRef" caption="Укажите ссылку на любые соответствующие правовые, административные или политические меры.">
                                             <div document-selector ng-disabled="!document.government.identifier" ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef"
@@ -164,7 +164,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetency" caption="В случае необходимости представьте дополнительную информацию о правовых, административных или политических основаниях для установления компетенции КНО."></div>
                                         <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                             placeholder="" locales="document.header.languages"></div>
@@ -177,7 +177,7 @@
                                 <legend name="responsibilities">Обязанности</legend>
                                 <div class="help-info">Пункт 4 статьи 13 гласит: «Если Сторона назначает более одного компетентного национального органа, она направляет в секретариат вместе со своим уведомлением о них надлежащую информацию, касающуюся соответствующих обязанностей таких органов. В случаях применимости в такой информации как минимум указывается, какой именно компетентный орган отвечает за генетические ресурсы, к которым запрашивается доступ».</div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="responsibleForAllNot"
                                             caption="Для вашей страны уже назначен КНО; просьба уточнить круг обязанностей каждого КНО."></div>
 
@@ -188,15 +188,15 @@
                                         </div>
                                     </div>
                                 </div><!-- IF NO SECTION --><div ng-class="{'disable':(document.responsibleForAll==true || document.responsibleForAll==null), 'bg-white':!(document.responsibleForAll==true || document.responsibleForAll==null) }"
-                                    class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    class="card no-shadow pt-0 pb-0">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-lg-12">
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <h4 ng-show="document.responsibleForAll==null">В случае отрицательного ответа информация требуется представить следующую информацию.</h4>
                                                     <h4 ng-show="document.responsibleForAll==true">Данный раздел не является обязательным.</h3>
                                                         <div ng-show="document.responsibleForAll==false">
-                                                            <h4 class="color-red">Заполнение данного раздела является обязательным при наличии нескольких национальных компетентных органов (КНО). Удостоверьтесь в том, что обязанности каждого компетентного национального органа (КНО) обстоятельно описаны во всех опубликованных записях.</h4>
+                                                            <h4 class="color-red">Заполнение данного раздела является обязательным при наличии нескольких национальных компетентных органов (КНО). Please ensure that the responsibilities for each competent national authority (CNA) are card described in all published records.</h4>
                                                         </div>
 
                                                         <div class="km-control-group" name="responsibilities"
@@ -211,7 +211,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absJurisdiction" caption="Район юрисдикции для предоставления доступа к генетическим ресурсам"
                                                         required>
                                                         <div class="help-info">Информация о районе юрисдикции (национального/федерального, субнационального или общинного уровня) помогает уточнить обязанности различных КНО.</div>
@@ -221,7 +221,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-lg-6">
                                                     <div ng-show="showJurisdictionName()">
                                                         <div class="km-control-group" name="absJurisdictionName"
                                                             required caption="Название юрисдикции(й)">
@@ -234,7 +234,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absGeneticResourceTypes"
                                                         caption="Ключевые слова, описывающие круг обязанностей КНО">
                                                         <div class="help-info">The collection of this information is important for facilitating harmonized searches throughout the records. Выберите все соответствующие ключевые слова, которые могут помочь описать обязанности компетентного национального органа.</div>
@@ -274,13 +274,13 @@
                             </section>
                             <section  ng-if="isBch && type=='SPCA'">
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibleForAll" required caption="Является ли данный назначенный компетентный орган по Дополнительному протоколу единственным в вашей стране?">
                                             <div class="help-info">В случае отрицательного ответа опишите обязанности компетентного органа в поле ниже. Заполните отдельный общий формат для каждого компетентного органа.</div>
                                             <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
                                         caption="Краткое описание обязанностей компетентного органа (не более 300 символов)." >
                                         <div class="help-info">Эта информация требуется при наличии нескольких компетентных органов.</div>
@@ -298,7 +298,7 @@
                             <section>
                                 <legend>Additional Information</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantInformation" caption="Дополнительные сведения">
                                             <div class="help-info">Просьба использовать это поле для представления любой другой актуальной информации, которая, возможно, не была учтена в других разделах записи.</div>
                                             <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
@@ -308,7 +308,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantDocuments" caption="Любые другие соответствующие документы">
                                             <div class="help-block">Укажите в этом поле адреса любых других соответствующих веб-сайтов и/или один или более соответствующих документов, которые будут храниться в базе данных и будут доступны для загрузки пользователями.</div>
                                             <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
@@ -320,7 +320,7 @@
                             <section>
                                 <legend>Примечания</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="notes">
                                             <div class="help-info">Поле «Примечания» включено для индивидуального пользования и становится видимым только при редактировании записи. Оно будет скрыто после опубликования записи. Данное поле не предназначено для конфиденциальной информации.</div>
                                             <div km-notes name="notes" ng-model="document.notes"></div>

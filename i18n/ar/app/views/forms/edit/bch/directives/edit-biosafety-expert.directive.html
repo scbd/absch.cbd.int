@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive"><span block-region activate="isLoading()" ng-if="isLoading()" dir="rtl"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -22,14 +22,14 @@
                             </ul>
                         </div>
                     </div>
-                    <form class="editForm" name="editForm" style="margin-top:0px">
+                    <form class="editForm mt-0" name="editForm">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="part1">
 
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>معلومات عامة</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="tab-pane" id="part2">
 
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>نبذة عن الخبير</legend>
 											<div class="row">
 												<div class="col-sm-12">
@@ -87,13 +87,13 @@
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthCountry" caption="محل الميلاد">
+													<div class="km-control-group country-list" name="birthCountry" caption="محل الميلاد">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group" name="nationalities"  caption="الجنسية (الجنسيات)">
+													<div class="km-control-group country-list" name="nationalities"  caption="الجنسية (الجنسيات)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -105,30 +105,31 @@
                                     <div class="tab-pane" id="part3">
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>تفاصيل الوظيفة الحالية</legend>
                                                 <div class="row">
 		
-													<div class="col-xs-12">
-														<div class="km-control-group" required name="currentEmployment.name" caption="اسم جهة العمل/المنظمة/الشركة">
-															<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
-																placeholder="مثال: جامعة مونتريال" pause="400" 
-																on-search="onSearchOrganizations(text, locale)" 
-																data-field="suggestions" title-field="title" description-field="summary" 
-																input-class="form-control-small"></div>
+														<div class="col-xs-12">
+															<div class="km-control-group" required name="currentEmployment.name" caption="اسم جهة العمل/المنظمة/الشركة">
+																<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
+																	placeholder="مثال: جامعة مونتريال" pause="400" 
+																	on-search="onSearchOrganizations(text, locale)" 
+																	data-field="suggestions" title-field="title" description-field="summary" ></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.title" caption="المُسَمَّى الوظيفي">
-															<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.title" caption="المُسَمَّى الوظيفي">
+																<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.department" caption="القسم / الفرع /الوحدة">
+																<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.department" caption="القسم / الفرع /الوحدة">
-															<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
-														</div>
-													</div>
-												</div>
 		
 												<div class="row">
 													<div class="col-md-6">
@@ -140,10 +141,10 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.organizationType" caption="نوع المنظمة">
+														<div class="km-control-group organization-dropdown" required name="currentEmployment.organizationType" caption="نوع المنظمة">
 															<div km-select name="currentEmployment.organizationType" required ng-model="document.currentEmployment.organizationType"
 																items="options.organizationTypes()"></div>
-															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="padding-top: 5px;;">
+															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" class="pt-1">
 																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="نوع آخر للمنظمة">
 																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="مثال: SCBD (أمانة اتفاقية التنوع البيولوجي)" locales="document.header.languages"></div>
 																</div>
@@ -165,7 +166,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>التاريخ الوظيفي</legend>
 												<div class="help-block">يُرجى إدخال معلومات وبيانات الوظيفة السابقة ذات الصلة.</div>
 												
@@ -174,9 +175,9 @@
 														<label>البلدان أو المناطق التي عملت بها</label>
 													</div>
 	
-													<div class="col-md-5">
+													<div class="col-md-5 mt-1">
 														
-														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="البلدان">
+														<div class="km-control-group small country-list countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="البلدان">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
 															ng-model="countryRegionsWorkedIn.countries" placeholder="يرجى تحديد خيار واحد أو عدة خيارات" items="options.countries()"></div>
 														</div>
@@ -232,12 +233,12 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.organizationType" caption="نوع المنظمة">
+														<div class="km-control-group organization-dropdown" name="previousEmployment.organizationType" caption="نوع المنظمة">
 															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="نوع آخر للمنظمة">
+															<div class="km-control-group organization-dropdown" name="previousEmployment.organizationTypeOther" caption="نوع آخر للمنظمة">
 																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="مثال: SCBD (أمانة اتفاقية التنوع البيولوجي)" locales="document.header.languages"></div>
 															</div>
 														</div>
@@ -259,14 +260,14 @@
                                     <div class="tab-pane" id="part4">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>مرحلة التعليم بعد الثانوي</legend>
 
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend><h3>(أ) التعليم الرسمي/النظامي</h3></legend>
 														<div class="panel panel-default" name="primaryEducation">
-															<div class="panel-heading">المؤهل الأكاديمي الأول (على سبيل المثال، البكالوريوس في علم الأحياء الدقيقة)</div>
+															<div class="panel-heading pb-1">المؤهل الأكاديمي الأول (على سبيل المثال، البكالوريوس في علم الأحياء الدقيقة)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -305,7 +306,7 @@
 																</div>															
 															</div>
 														</div><br/><div class="panel panel-default">
-															<div class="panel-heading">المؤهل الأكاديمي الثاني (على سبيل المثال، الماجستير في علم الأحياء الدقيقة)</div>
+															<div class="panel-heading pb-1">المؤهل الأكاديمي الثاني (على سبيل المثال، الماجستير في علم الأحياء الدقيقة)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -344,7 +345,7 @@
 																</div>																
 															</div>
 														</div><br/><div class="panel panel-default">
-															<div class="panel-heading">المؤهل الأكاديمي الثالث (على سبيل المثال، الدكتوراه في علم الأحياء الدقيقة)</div>
+															<div class="panel-heading pb-1">المؤهل الأكاديمي الثالث (على سبيل المثال، الدكتوراه في علم الأحياء الدقيقة)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -386,7 +387,7 @@
 													</div>
 												</section>
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend>(ب) المؤهلات المهنية الأخرى</legend>
 														<div class="row">
 															<div class="col-md-12">
@@ -404,7 +405,7 @@
                                     <div class="tab-pane" id="part5">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>مجالات الخبرة</legend>
 
 												<div class="row">
@@ -420,7 +421,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Publications</legend>
 
 												<div class="row">
@@ -435,7 +436,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>العضوية في مؤسسات مهنية</legend>
 												<div class="row">
 													<div class="col-md-12">
@@ -459,7 +460,7 @@
                                     <div class="tab-pane" id="part6">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>اللغات</legend>
 
 												<div class="row">
@@ -520,7 +521,7 @@
                                     <div class="tab-pane" id="part7">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>الإطار الزمني لتأكيد المعلومات أو تحديثها</legend>
 												<div class="help-info">يرجى ملاحظة أنه وفقا للقرار BS-IV/4، فإن سجلات الخبراء تُحفَظ في القائمة لمدة <u>أربع</u> سنوات منذ آخر تحديث لبياناتهم، يجري بعدها حذفهم من القائمة ما لم يُعاد ترشيحهم.</div>
 
@@ -528,7 +529,7 @@
 										</section>
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>أي معلومات أخرى ذات صلة</legend>
 												<div class="row">
 													<div class="col-xs-12">

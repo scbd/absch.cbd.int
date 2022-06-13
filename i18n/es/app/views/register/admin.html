@@ -1,0 +1,75 @@
+﻿<div  id="RegisterPage">
+
+  <link href="/app/css/register.css" rel="stylesheet">
+  <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans m-0 p-3">
+    <div class="register-content-header bg-pink color-white">
+      <div class="px-2">
+        <h3>Administración del Centro de Intercambio de Información sobre APB</h3>
+      </div>
+    </div>
+    <div class="register-content-content" ng-if="roles.isAdministrator">
+      <div class="row p-0 m-0 mb-4">
+        <div class="col-md-12 cp-header">
+          <table class="w-100">            
+            <tr>
+              <td></td>
+              <td>
+                <table class="table table-striped w-100">
+                  <tbody>
+
+                    <tr>
+                      <td>Ver la lista de registros informados por usuarios</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">Gestionar los registros informados</a></td>
+                    </tr>
+                    <tr>
+                        <td>Cuestiones comunes relativas al Centro de Intercambio de Información sobre APB</td>
+                        <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">Cuestiones comunes</a></td>
+                      </tr>
+                    <tr>
+                      <td>Ver la situación de los registros del flujo del trabajo del Centro de Intercambio de Información sobre APB</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">Gestionar los registros del flujo del trabajo</a></td>
+                    </tr>
+                    <tr>
+                      <td>Ver los recuentos del Centro de Intercambio de Información sobre APB con opciones de gráficos y filtros múltiples</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">Informar recuentos</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>Ver recuentos del CCRI</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">Recuentos de CCRI</a></td>
+
+                    </tr>
+                    <tr>
+                      <td>Ver países con/sin funciones en el Centro de Intercambio de Información sobre APB</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">Informe de funciones de usuarios</a></td>
+                    </tr>
+                    <tr>
+                      <td>Ver la lista de usuarios que utilizan la suscripción al correo electrónico.</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">Suscripciones</a></td>
+                    </tr>
+                    <tr>
+                      <td>Ver errores por parte del cliente</td>
+                      <td><a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">Registros de errores</a></td>
+                    </tr>
+                    <tr>
+                      <td>Validar traducción</td>
+                      <td>
+                        <button type="button" class="btn btn-primary" ng-click="validateTranslation(!isValidatingTranslation)"><span ng-if="!isValidatingTranslation">Activar</span><span ng-if="isValidatingTranslation">Desactivar</span></button>
+                      </td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </td>
+            </tr>
+          </table>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</div><!-- controller -->

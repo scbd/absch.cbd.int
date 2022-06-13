@@ -2,7 +2,7 @@
 
     <edit-header></edit-header>
     <style> .dimmer-parent{ position: relative; } .blockRegion { position: initial; /*box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);*/ margin: 1rem 0; padding: 1em; border-radius: .28571429rem; /*border: 1px solid rgba(34,36,38,.15);*/ } .dimmer { border-radius: inherit!important; position: absolute!important; top: 0!important; left: 0!important; padding: 0; margin: 0; } </style>
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
             <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -29,10 +29,10 @@
                                         <legend>Amendment intent</legend><!--<div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
-                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0"> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
+                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="0" /> <strong> Update: </strong> Information is being submitted to replace a previously issued internationally recognized certificate
                                                     of compliance (a new certificate will be constituted and the old one will no longer be valid)
                                                     </br>
-                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1"> <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized
+                                                    <input type="radio" name="amendmentIntent" ng-model="document.amendmentIntent" ng-value="1" /> <strong> Revoke: </strong> An existing permit or its equivalent is being revoked and the constituted internationally recognized
                                                     certificate of compliance will no longer be valid.
                                                 </div>
                                             </div>
@@ -132,7 +132,8 @@
                                             <div class="col-xs-12">
             
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.providersConfidential}"><input type="checkbox" name="providersConfidential" ng-model="document.providersConfidential" watch-items>这些资料属于机密信息</input></span></div>
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.providersConfidential}"><input type="checkbox" name="providersConfidential" ng-model="document.providersConfidential" watch-items />这些资料属于机密信息</span>
+                                                    </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.providersConfidential}">
                                                         <div class="km-control-group " name="providers" required caption="提供者" style="margin-top:0;"><span class="help-info">请提供有权根据国内法律批准获取遗传资源的个人或实体的姓名/名称和联系方式。</span><div ng-show="!document.providersConfidential">
                                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.providers" question="providers"
@@ -145,9 +146,9 @@
                                             </div>
                                         </div>
             
-                                        <div class="row" style="margin-top:20px;">
+                                        <div class="row mt-4">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required name="picGranted" caption="确认已获得或获授事先知情同意书（PIC）"><span class="help-info">如果未获得或未获授事先知情同意书，则此记录不能在获取和惠益分享信息交换所内公布，因此不能发布国际公认合规证书。</span><button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">是</button>
+                                                <div class="km-control-group" required name="picGranted" caption="确认已获得或获授事先知情同意书（PIC）"><span class="help-info">如果未获得或未获授事先知情同意书，则此记录不能在获取和惠益分享信息交换所内公布，因此不能发布国际公认合规证书。</span><button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">是</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -168,7 +169,8 @@
                                             <div class="col-xs-12">
             
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.entitiesToWhomPICGrantedConfidential}"><input type="checkbox" name="entitiesToWhomPICGrantedConfidential" ng-model="document.entitiesToWhomPICGrantedConfidential" watch-items>这些资料属于机密信息</input></span></div>
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.entitiesToWhomPICGrantedConfidential}"><input type="checkbox" name="entitiesToWhomPICGrantedConfidential" ng-model="document.entitiesToWhomPICGrantedConfidential" watch-items />这些资料属于机密信息</span>
+                                                    </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
                                                         <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="获授事先知情同意（PIC）的个人或实体；" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
@@ -190,7 +192,7 @@
                                         <legend>共同商定条件（MAT）信息</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required name="matEstablished" caption="确认共同商定条件（MAT）已确立"><span class="help-info">如果未确立共同商定条件（MAT），则不能在获取和惠益分享信息交换所中公布此记录，因而不能发布国际公认合规证书。</span><button data-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">是</button>
+                                                <div class="km-control-group" required name="matEstablished" caption="确认共同商定条件（MAT）已确立"><span class="help-info">如果未确立共同商定条件（MAT），则不能在获取和惠益分享信息交换所中公布此记录，因而不能发布国际公认合规证书。</span><button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">是</button>
             
                                                 </div>
                                             </div>
@@ -219,7 +221,8 @@
             
             
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.subjectMatterConfidential}"><input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items>这些资料属于机密信息</input></span></div>
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.subjectMatterConfidential}"><input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items />这些资料属于机密信息</span>
+                                                    </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.subjectMatterConfidential}">
                                                         <div class="km-control-group" required name="subjectMatter" caption="许可证或同等证照所涵盖的主题或遗传资源"><span class="help-info">请说明许可证所涵盖的主题或遗传资源。这可包括任何分类级别（可带分类学名）的生物群。还可包括收集材料的地点。也可以通过提及已确定档案或收藏所载的证据标本或者实地现场说明来查明遗传资源。</span><div ng-show="!document.subjectMatterConfidential">
                                                                 <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
@@ -254,11 +257,11 @@
             
                                                 <div ng-if="document.gisFiles">
                                                     <div class="input-prepend input-append">
-                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}"><span class="add-on">横</span></div>
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" /><span class="add-on">横</span></div>
                                                     <div class="input-prepend input-append">
-                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}"><span class="add-on">纵</span></div>
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}" /><span class="add-on">纵</span></div>
                                                     <div class="input-prepend input-append">
-                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}"><span class="add-on">缩放</span></div>
+                                                        <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}" /><span class="add-on">缩放</span></div>
             
                                                     <div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
                                                 </div>
@@ -289,7 +292,8 @@
             
             
                                                 <div class="panel panel-default">
-                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.usagesConfidential}"><input type="checkbox" name="usagesConfidential" ng-model="document.usagesConfidential" watch-items>这些资料属于机密信息</input></span></div>
+                                                    <div class="panel-heading"><span ng-class="{'confidential-text':document.usagesConfidential}"><input type="checkbox" name="usagesConfidential" ng-model="document.usagesConfidential" watch-items />这些资料属于机密信息</span>
+                                                    </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.usagesConfidential}">
                                                         <div class="km-control-group" required name="usages" caption="说明许可证或同等证照是否涵盖商业和/或非商业用途">
                                                             <div ng-show="!document.usagesConfidential">

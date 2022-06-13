@@ -1,0 +1,99 @@
+﻿<div id="RegisterPage">
+
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><style></style>
+
+
+    <div class="innerPageContent register-content card card-1-notrans mb-5">
+
+        <div class="register-content-header bg-darkgrey text-white">
+            <div class="p-2">
+                <h3></h3><div ng-if="showInfo" class="p-3 card well-help"><p></p><p><ul>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                    </p><p></p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="register-content-content">
+            <div class="row">
+
+
+                <div class="col-12" ng-show="error">
+
+                    <div ng-switch="error.code + '-' + error.field">
+                        <div class="alert alert-warning" ng-switch-when="mandatory-government"></div>
+                        <div class="alert alert-warning" ng-switch-when="forbidden-"></div>
+                        <div class="alert alert-danger" ng-switch-default></div>
+                    </div>
+
+                </div>
+
+                <div class="offset-md-8 col-md-4" ng-hide="error">
+                    <div class="input-group mb-1">
+                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading"
+                            placeholder=""></div>
+                </div>
+
+                <div class="col-12" ng-hide="error">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-light w-100">
+                            <thead>
+                                <tr class="text-secondary">
+                                    <th></th>
+                                    <th></th>
+                                    <th style="max-width:20rem"></th>
+                                    <th class="text-end">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                            ng-click="search()" ng-disabled="loading || !canAdd()"></button>
+                                    </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="text-secondary"
+                                ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
+                                <td></td>
+    
+                                <td ng-bind="u.organization" class="fs-small-8"></td>
+    
+                                <td><div ng-if="u.showExtraRoles"></div>
+                                </td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm mt-1" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="edit(u)"
+                                            ng-disabled="!canEdit(u)"></button>
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="dropUser(u)"
+                                            ng-disabled="!canDrop(u)"></button>
+                                    </div>
+                                </td>
+    
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!users">
+                                <td colspan="4"></td>
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!!users">
+                                <td colspan="3"></td>
+                                <td class="text-end">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                     ng-click="search()" ng-disabled="loading || !canAdd()"></button>
+                                </td>
+                            </tr>
+                              </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

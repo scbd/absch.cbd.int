@@ -1,0 +1,31 @@
+<div >
+
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><style> .card.sub-card { box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); transition: 0.3s; width: 20%; } .card:hover { box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); } </style>
+    <div class="innerPageContent shadow-sm register-content card card-1-notrans m-0 p-3">
+        <div class="register-content-header bg-darkgrey color-white">
+            <div class="px-2">
+                <h3>Informes</h3>
+            </div>
+        </div>
+        <div class="register-content-content bg-white">
+            <div class="row p-2">
+                <div class="col-md-12 cp-header">
+
+                    <div class="card sub-card" ng-repeat="report in reports"><img ng-src="{{report.image}}" alt="Image not available" class="w-100"><div class="container">
+                            <h4><b ng-bind="report.title"></b></h4>
+                            <p><a rel="noopener" ng-href="{{report.url}}">Ver</a></p>
+                        </div>
+                    </div>
+                    <div ng-if="!reports.length && !loading">
+                        <div class="alert alert-info">No reports available at this moment.</div>
+                    </div>
+                    <div ng-if="loading">
+                        <div class="alert alert-info"><i class="fa fa-spin fa-spinner"></i> Cargando...</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

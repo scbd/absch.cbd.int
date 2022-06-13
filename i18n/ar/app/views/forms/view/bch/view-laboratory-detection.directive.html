@@ -1,25 +1,25 @@
 <div id="Record" class="record panel panel-default" dir="rtl">
 	<div class="panel-heading bg-orange">
-		<h4><span ng-bind="::document.header.schema|schemaName" dir="rtl"></span> <span class="color-black" dir="rtl">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4></h4>
 	</div>
 	<div class="record-body panel-body">
 
 		<document-date></document-date>
-		<legend>معلومات عامة</legend>
+		<legend></legend>
 		<div ng-if="document.organization">
-			<legend>اسم المعمل وإحداثياته</legend>
+			<legend></legend>
 			<div class="km-value" compare-val>
 				<div view-record-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.relatedOrganization">
-			<legend>منظمة ذات صلة</legend>
+			<legend></legend>
 			<div class="km-value" compare-val>
 				<div view-record-reference ng-model="document.relatedOrganization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.services">
-			<label>الخدمات والأنشطة المُقدَّمة</label>
+			<label></label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.services" ng-bind="term|term"></li>
@@ -27,31 +27,31 @@
 			</div>
 		</div>
 		<div ng-if="document.agreements || document.agreementLinks">
-			<label>الاتفاقيات التعاونية</label>
+			<label></label>
 			<div compare-val>
 				<km-value-ml value="document.agreements" locales="locale" html></km-value-ml>
 			</div>
-			<div class="km-value" ng-if="document.agreementLinks"><br ng-if="document.agreement"/><div compare-val>
+			<div class="km-value" ng-if="document.agreementLinks"><div compare-val>
 					<km-link-list  ng-model="document.agreementLinks"></km-link-list>
 					
 				</div>
 			</div>
 		</div>
 		<div ng-if="document.certifications">
-			<label>شهادات اعتماد المعمل</label>
+			<label></label>
 			<div compare-val>
 				<km-value-ml value="document.certifications" locales="locale" html></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.detectionMethods">
-			<label>أنواع وسائل الرصد/تحديد الهوية المستخدمة في المعمل</label>
+			<label></label>
 			<div compare-val>
 				<view-terms-hierarchy class="km-value" ng-model="document.detectionMethods" locale="locale" term-domain="detectionMethods" on-terms-loaded="onDetectionTerms(terms)"></view-terms-hierarchy>
 			</div>		
 		</div>			
 
 		<div ng-if="document.lmoTypes">
-			<label>أنواع الكائنات الحية المُحوَّرة</label>
+			<label></label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.lmoTypes" ng-bind="term|term"></li>
@@ -60,7 +60,7 @@
 		</div>	
 
 		<div ng-if="document.detectableLmos">
-			<label>LMO(s) detectable by the laboratory</label>
+			<label></label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableLmos">
@@ -74,7 +74,7 @@
 		</div>
 
 		<div ng-if="document.detectableGenes">
-			<label>العناصر الجينية التي يرصدها المعمل</label>
+			<label></label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableGenes">
@@ -87,14 +87,14 @@
 		</div>
 
 		<div ng-if="document.relevantInformation||document.relevantDocuments">
-			<legend>معلومات إضافية</legend>
+			<legend></legend>
 
 			<div compare-val ng-if="document.relevantInformation">
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label></label>
 				<div compare-val>
 					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
 				</div>		

@@ -3,13 +3,13 @@
     <table cellspacing="0px" ng-repeat="gene in model" class="lmo-transcript {{gene.type}}"
     ng-style="{'margin-left:5px':!$first}">                
             <tr>
-                <td class="left" >&nbsp;</td>
+                <td class="left" ></td>
                 <td class="middle">
-                    <div >{{dnaDetails[removeRevision(gene.identifier)].identity}}</div>
-                    <div ><!-- dnaDetails[removeRevision(gene.identifier)].uniqueIdentifier|| --> <a rel="noopener" target="_blank" ng-href="{{dnaDetails[removeRevision(gene.identifier)].urls[0]|encodeURI}}">{{dnaDetails[removeRevision(gene.identifier)].title}}</a></div>
-                    <div ><span >{{parseSize(gene.size)}} kb</span></div>
+                    <div ></div>
+                    <div ></div>
+                    <div ></div>
                 </td>
-                <td class="right" >&nbsp;</td>
+                <td class="right" ></td>
             </tr>
     </table>
 </div>

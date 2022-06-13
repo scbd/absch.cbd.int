@@ -1,10 +1,10 @@
 ﻿<div>
     <edit-header></edit-header>
     <style> .disabled { -moz-opacity:.50;filter:alpha(opacity=50);opacity:.50; } .inverted.dimmer { background-color: rgba(255, 255, 255, .85); } .km-terms-check-add-input-int{ width:50px; } .block-position{ position: relative; } </style>
-    <div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm">
 
         
-        <div class="registerpage-content" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
+        <div class="registerpage-content edit-national-report" style="padding-bottom:30px;" ng-class="{'block-position' : blockEditForm || isLoading()}">
 
             <div block-region activate="blockEditForm || isLoading()"></div>      
             <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
@@ -46,9 +46,9 @@
                                                                         <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold" 
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
-                                                                        <div class="pull-right" style="margin-bottom:5px;">
-                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Mostrar la respuesta anterior</button>
-                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-xs">Ocultar la respuesta anterior</button>
+                                                                        <div class="float-end show-previous-answer">
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">Show previous answer</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">Hide previous answer</button>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
@@ -62,7 +62,7 @@
                                                                                     <label name="{{::subQuestion.key}}" for="{{::subQuestion.key}}" class="control-label bold" 
                                                                                         ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
-                                                                                    <div class="pull-right" style="margin-bottom:5px;">
+                                                                                    <div class="float-end" style="margin-bottom:5px;">
                                                                                         <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Mostrar la respuesta anterior</button>
                                                                                         <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Ocultar la respuesta anterior</button>
                                                                                     </div>
@@ -148,13 +148,13 @@
                 </div>
 
                 <div class="row">
-                        <div class="col-sm-6">
-                            <div class="km-control-group" required name="stakeholders" caption="10. Período que abarca este informe">
-                                <div class="col-sm-5">
+                        <div class="col-12">
+                            <div class="km-control-group time-period" required name="stakeholders" caption="10. Período que abarca este informe">
+                                <div class="col-md-5 col-sm-12">
                                     <div km-date placeholder="AAAA-MM-DD" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
                                 </div> 
-                                <div class="col-sm-1"><strong>A</strong></div>
-                                <div class="col-sm-5">
+                                <div class="col-sm-2 text-center"><strong>A</strong></div>
+                                <div class="col-md-5 col-sm-12">
                                     <div km-date placeholder="AAAA-MM-DD" name="reportPeriodEndDate" required ng-model="document.reportPeriodEndDate"></div>
                                 </div>                                
                             </div>
@@ -193,9 +193,9 @@
                     <div style="border: 2px solid #fff;padding:5px">
                         <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">* Tomar en cuenta que el período abarcado por esta pregunta es diferente en cada formato de presentación de informes.</div>
                         <div><strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong></div>
-                        <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
+                        <div class="card card-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type!='array' && previousAnswerMapping[question.key].previousQuestion.answer"
                             ng-bind="::(previousAnswerMapping[question.key].previousQuestion.answer|lstring)"></div>
-                        <div class="well well-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
+                        <div class="card card-sm" ng-if="previousAnswerMapping[question.key].previousQuestion.type=='array' && previousAnswerMapping[question.key].previousQuestion.answer">
                             <ul class="list">
                                 <li ng-repeat="val in previousAnswerMapping[question.key].previousQuestion.answer" ng-bind="::(val|lstring)"></li>
                             </ul>
@@ -209,7 +209,7 @@
                 <h1>Cuarto informe nacional</h1>
                 <hr>
                 <div class=" alert alert-danger">
-                    <div class="glyphicon glyphicon-exclamation-sign"></div>
+                    <div class="bi bi-exclamation-sign"></div>
                     <div>Solo se permite un registro del cuarto informe nacional para cada gobierno; el cuarto informe nacional ya existe para su gobierno, usted será redirigido al registro en <span ng-bind="alertSeconds"></span> unos segundos.</div>
                 </div>
                 <div class="ngdialog-buttons">

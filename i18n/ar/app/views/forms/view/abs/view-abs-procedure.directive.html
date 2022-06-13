@@ -1,35 +1,35 @@
 ﻿<div id="Record" class="record panel panel-default"  dir="rtl">
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4></h4>	
+		<h4><span dir="rtl"><span ng-bind="schema.title|lstring:locale"></span> <span class="color-black">(<span ng-bind="schema.shortCode"></span>)</span></span></h4>	
 	</div>
 
-	<div class="record-body panel-body" help schema="ViewCP" >
+	<div class="record-body panel-body bg-white" help schema="ViewCP" >
 		
 		<document-date></document-date>
 
-		<legend ng-if="document.government || document.name"></legend>
+		<legend ng-if="document.government || document.name">معلومات عامة</legend>
 
 		<div ng-show="document.government">
-			<label name="country"></label>
-			<div class="km-value" compare-val></div>
+			<label name="country">البلد</label>
+			<div class="km-value" compare-val><a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a></div>
 		</div>
 
-		<legend></legend>
+		<legend>وصف إجراءات الحصول على الموارد وتقاسم المنافع</legend>
 		 <div ng-show="document.name">
-		 	<label></label>
+		 	<label>العنوان</label>
 			 <div compare-val>
 			<km-value-ml value="document.name" locales="locale"></km-value-ml>
 			 </div>
 		 </div>
 		 
 		<div ng-show="document.jurisdiction">
-			<label></label>
-			<div class="km-value" compare-val></div>
+			<label>منطقة الاختصاص</label>
+			<div class="km-value" compare-val><span ng-bind="document.jurisdiction|term"></span></div>
 		</div>
 
 		<div ng-show="document.contacts || document.links">
-			<label></label>
+			<label>أين ينبغي تقديم طلبات الحصول</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="contact in document.contacts"  ng-show="document.contacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -44,14 +44,14 @@
 
 
 		<div ng-show="document.requirements">
-			<label></label>
+			<label>الشروط أو المتطلبات التي ينبغي لمستخدم محتمل الوفاء بها للتقدم بطلب للحصول على الموارد</label>
 			<div compare-val>
 				<km-value-ml value="document.requirements" locales="locale" km-pre html></km-value-ml>
 			</div>
 		</div>
 		
 		<div ng-show="document.description || document.descriptionLinks">
-			<label></label>
+			<label>وصف تفصيلي أو شرح بصري لإجراءات الحصول على الموارد وتقاسم المنافع</label>
 			<div compare-val>
 				<km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>
 			</div>
@@ -63,19 +63,19 @@
 		</div>
 
 		<div ng-show="document.hasApplicationDocuments!=undefined">
-			<legend></legend>
+			<legend>هل ينبغي على مقدم الطلب تقديم أي وثائق؟</legend>
 			<div class="km-value" compare-val>
 				<km-value-bool value="document.hasApplicationDocuments" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-show="document.applicationInformation">
-			<label></label>
+			<label>معلومات حول نماذج تقديم الطلبات أو  الوثائق المطلوبة</label>
 			<div compare-val>
 				<km-value-ml value="document.applicationInformation" locales="locale" km-pre html></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.applicationLinks">
-			<label></label>
+			<label>نماذج/وثائق التقديم المطلوبة أو رابط موقع الويب الإلكتروني</label>
 				<div class="km-value" compare-val="applicationLinks">
 					<km-link-list ng-model="document.applicationLinks"></km-link-list>
 				</div>
@@ -83,7 +83,7 @@
 		</div>
 
 		<div ng-show="document.applicationContacts">
-			<label></label>
+			<label>معلومات حول الجهة التي ينبغي إرسال الطلب إليها</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="contact in document.applicationContacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -92,26 +92,26 @@
 		</div>
 
 		<div ng-show="document.hasApplicationFees!=undefined">
-			<legend></legend>
+			<legend>هل هناك رسوم لتقديم الطلبات</legend>
 				<div class="km-value" compare-val>
 					<km-value-bool value="document.hasApplicationFees" locales="locale"></km-value-bool>
 				</div>
 			
 		</div>
 		<div ng-show="document.applicationFeesInformation">
-			<label></label>
+			<label>معلومات إضافية حول رسوم الطلبات</label>
 			<div compare-val>
 				<km-value-ml value="document.applicationFeesInformation" locales="locale" km-pre html></km-value-ml>
 			</div>
 		</div>
 		
 		<div ng-show="document.applicationFeesInformation">
-			<label></label>
-			<div class="km-value" compare-val></div>
+			<label>كم تستغرق عملية تقييم الطلبات والبت فيها</label>
+			<div class="km-value" compare-val><strong><span ng-bind="document.duration"></span> <span ng-bind="document.durationPeriod"></span></strong></div>
 		</div>
 
 		<div ng-show="document.relevantMeasures">
-			<label></label>
+			<label>التدابير الملائمة للحصول على الموارد وتقاسم المنافع</label>
 			<div compare-val>
 			<div class="km-value" ng-repeat="measure in document.relevantMeasures">
 				<div view-record-reference ng-model="measure.identifier" locale="locale"></div>
@@ -119,24 +119,24 @@
 		</div>
 
 		<div ng-show="document.keywords">
-			<label></label>
+			<label>Keywords</label>
 			<div class="km-value">
 				<ul class="list">
-					<li ng-repeat="term in document.keywords"></li>
+					<li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
 				</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend></legend>
+			<legend>معلومات إضافية</legend>
 
-			<div ng-show="document.relevantInformation"><div compare-val>
+			<div ng-show="document.relevantInformation"><!-- need to test --><div compare-val>
 					<km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>
 				</div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label></label>
+				<label>عناوين مواقع إنترنت أو وثائق مرفقة أخرى ذات صلة</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>

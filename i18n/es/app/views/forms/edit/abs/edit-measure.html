@@ -2,7 +2,7 @@
 
     <edit-header></edit-header>
 
-    <div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
             <div>
                 <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
             tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -10,7 +10,7 @@
             on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
                         
-                    <form class="editForm" name="editForm" style="margin-top:10px">
+                    <form class="editForm mt-2" name="editForm">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <legend name="formInfo" style="display:none"></legend>
@@ -24,11 +24,11 @@
                                                 <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
                                             </div>
                                         </div>
-                                    </div><!-- IF NO SECTION --><div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    </div><!-- IF NO SECTION --><div ng-class="{'disable':!document.isAmendment, 'bg-white':document.isAmendment}" class="no-shadow py-0">
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <h3 ng-show="!document.isAmendment" style="color:black!important;">Si no fuera así, no es preciso completar la información a continuación.</h3>
-                                                <h3 ng-show="document.isAmendment==true" style="color:black!important;">Sírvase seleccionar el registro previo que se enmienda.</h3>
+                                                <h3 ng-show="!document.isAmendment" class="color-black">Si no fuera así, no es preciso completar la información a continuación.</h3>
+                                                <h3 ng-show="document.isAmendment==true" class="color-black">Sírvase seleccionar el registro previo que se enmienda.</h3>
     
                                                 <div class="km-control-group">
                                                     <div class="km-control-group" name="amendedMeasures" caption="Lista de medidas enmendadas">
@@ -74,12 +74,14 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-sm-12">
                                             <div required class="km-control-group" name="status" caption="Situación jurídica de la medida">
                                                 <div class="help-info">Ejemplos de medidas sobre APB no jurídicamente vinculantes son las estrategias nacionales, los documentos de política, las directrices, etc. En los casos de medidas sobre APB no jurídicamente vinculantes, es preciso suministrar la fecha de adopción. Una medida es jurídicamente vinculante cuando crea obligaciones y derechos que son compulsivos jurídicamente. En este caso, es preciso suministrar la fecha de entrada en vigor de la medida sobre APB. También es posible incluir en el Centro de Intercambio de Información sobre APB medidas en formularios borrador a fin de intercambiar información sobre los progresos en la aplicación. Una vez que el proyecto de medida sea adoptado o entre en vigor, es posible actualizar el estado de la medida sin necesidad de volver a registrar la información existente. A veces, las medidas tienen una aplicabilidad limitada en el tiempo. Si se están introduciendo este tipo de medidas, es preciso indicar la fecha de caducidad. La inclusión de medidas retiradas puede ser útil para brindar certidumbre jurídica sobre recursos genéticos y conocimientos tradicionales asociados a los que se haya accedido en un marco jurídico previo. Si una medida ya registrada en el Centro de Intercambio de Información sobre APB es retirada o ya no es de aplicación, lo único que es preciso hacer es editar la medida y cambiar su condición a medida retirada, indicando la fecha desde la cual la medida ya no es de aplicación.</div>
-                                                <div style="width:250px;" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccionar la situación jurídica..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccionar la situación jurídica..."></div>
                                             </div>
                                         </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12">
                                             <div ng-show="isNotLegallyBinded()">
@@ -106,7 +108,7 @@
     
     
                                     <div class="row">
-                                        <div class="col-sm-12">
+                                        <div class="col-sm-12 label-weight">
                                             <div class="km-control-group" required name="type" caption="Tipo de documento/medida">
                                                 <div km-term-radio name="type" ng-model="document.type" terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
     
@@ -124,11 +126,11 @@
     
                                     <div class="row">
     
-                                        <div class="col-xs-12">
+                                        <div class="col-sm-12">
                                             <div class="km-control-group" required name="jurisdiction" caption="Zona de jurisdicción">
                                                 <div class="help-info">Sírvase especificar la zona geográfica de aplicación de la medida APB. La medida podría aplicarse en los ámbitos regional o multilateral, nacional o federal, subnacional o comunitario. For multilateral or regional measures, please indicate which countries are covered by the measure by selecting from the drop down menu the relevant geographical or political/economic group. Esta lista es amplia, por consiguiente, es probable que el grupo concreto al que se aplica la medida ya figure en ella. No obstante, si la medida se aplica a un grupo de países que no esté incluido en ninguno de los grupos existentes, seleccione en el menú desplegable cada uno de los países concernidos por la medida por separado.</div>
     
-                                                <div style="width:250px;" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione una zona de jurisdicción..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Seleccione una zona de jurisdicción..."></div>
                                                 <div ng-if="isJurisdictionRegional()">
                                                     <div class="color-red" ng-if="!document.government.identifier">Por favor, primero seleccione un país.</div>
                                                 </div>
@@ -174,7 +176,7 @@
                                             <div class="km-control-group" name="isModelContractualClause" caption="¿La medida contiene cláusulas contractuales modelo?">
                                                 <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                                                 <div ng-show="document.isModelContractualClause">
-                                                    <div class="km-control-group" style="margin:10px;" name="modelContractualClauseDescription" caption="Sírvase proporcionar información adicional.">
+                                                    <div class="km-control-group m-2" name="modelContractualClauseDescription" caption="Sírvase proporcionar información adicional.">
                                                         <div km-textbox-ml ng-model="document.modelContractualClauseDescription" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -241,7 +243,7 @@
                                     <legend>Información del contacto regulatorio</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="authorities" caption="Institución de contacto">
+                                            <div class="km-control-group color-darkgrey" required name="authorities" caption="Institución de contacto">
     
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
                                                            allow-new="true" allow-new-schema="contact"></div>
@@ -265,11 +267,12 @@
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="panel panel-default">
-                                                <div class="panel-heading"><span ng-class="{'confidential-text':document.absMesasureNotApplicable}"><input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items>Elementos que no corresponden a esta medida.</input></span></div>
+                                                <div class="panel-heading"><span ng-class="{'confidential-text':document.absMesasureNotApplicable}"><input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items />Elementos que no corresponden a esta medida.</span>
+                                                </div>
                                                 <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absMesasureNotApplicable}">
                                                     <div class="km-control-group"  name="absMeasures" required caption="">
                                                         <div class="help-info"></div>
-                                                        <div layout="row" style="margin-bottom:20px;">
+                                                        <div layout="row mb-4">
                                                              <div class="help-info" >Sírvase seleccionar qué elementos están incluidos en la medida que se está registrando y determine los artículos o secciones pertinentes de la medida para cada elemento seleccionado. Esta información brindará asistencia para mostrar información sobre el marco jurídico nacional y ayudará a los eventuales usuarios a comprender el acceso, la participación en los beneficios y o los requisitos de cumplimiento del país. A veces, el contenido y los elementos de la medida están relacionados con los objetivos y planes de aplicación del acceso y la participación en los beneficios en el plano nacional. Este podría ser el caso, por ejemplo, de algunas estrategias o planes de acción en materia de APB. En esos casos, se podría indicar qué elementos de la medida no corresponden, haciendo clic en la casilla de verificación que se presenta a continuación.</div>
                                                         </div>
                                                         <div edit-measure-matrix name="absMeasuresMatrix" required ng-model="document.absMeasures" locales="document.header.languages" document="document" ng-disabled="document.absMesasureNotApplicable"

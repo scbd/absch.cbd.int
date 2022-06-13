@@ -2,12 +2,12 @@
 
 	<edit-header></edit-header>
 
-	<div class="innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<div workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" tab="tab"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
-					<form name="editForm" class="editForm" style="margin-top:10px">
+					<form name="editForm" class="editForm mt-2">
 						<div ng-show="tab=='edit'" km-tab="edit">
-							<legend name="formInfo" style="display:none"></legend>
+							<legend name="formInfo" class="d-none"></legend>
 							<div class="row">
 								<div class="col-xs-12" >
 									<div class="km-control-group" name="header.languages" required caption="Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:">
@@ -21,7 +21,7 @@
 
 								<legend>Información sobre el sitio web o la base de datos</legend>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="government" required caption="País">
 											<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
 											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
@@ -29,7 +29,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="title" required caption="Nombre del sitio web o de la base de datos">
 											<div class="help-info">Por favor, ingrese el nombre del sitio web o de la base de datos tal como desea que aparezca en el título del registro.</div>
 											<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages"
@@ -38,7 +38,7 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="description" required caption="Descripción">
 											<div class="help-info">Por favor, ingrese una breve descripción del sitio web o de la base de datos nacionales, así como como su función o la información que ofrece.</div>
 											<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages"
@@ -47,10 +47,10 @@
 									</div>
 								</div>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="websites" required caption="Dirección del sitio web">
-											<div class="help-info">Proporcione el URL completo del sitio web (por ej., http://www.cbd.int).</div>
-											<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="ejemplo: http://www.cbd.int"></div>
+											<div class="help-info">Proporcione el URL completo del sitio web (por ej., http://www.cbd.int).</div><!-- <div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div> --><div km-link name="websites" ng-model="document.websites" allow-link="true" allow-file="false"
+											 identifier="document.header.identifier"></div>
 										</div>
 									</div>
 								</div>
@@ -66,7 +66,7 @@
 								<legend>Información adicional</legend>
 
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="address" caption="Cualquier otra información pertinente">
 											<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
@@ -75,7 +75,7 @@
 								</div>
 
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="relevantDocuments" caption="Otros documentos pertinentes">
 											<div class="help-info">Por favor, utilice este campo para proporcionar otras direcciones web pertinentes y/o uno o más documentos pertinentes que se almacenarán en la base de datos para que los usuarios los descarguen.</div>
 											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
@@ -89,7 +89,7 @@
 
 								<legend>Notas</legend>
 								<div class="row">
-									<div class="col-xs-12">
+									<div class="col-12">
 										<div class="km-control-group" name="notes">
 											<div class="help-info">El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial.</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>

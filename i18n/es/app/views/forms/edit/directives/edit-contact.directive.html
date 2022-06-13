@@ -33,9 +33,9 @@
 											<div class="col-xs-12">
 												<div class="km-control-group" name="type" caption="Tipo de contacto">												
 													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />Organización</label>
-													<label class="radio-inline">
-														<input type="radio" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Persona</label>
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />Organización</label>
+													<label class="radio-inline ps-1">
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Persona</label>
 												</div>
 											</div>
 										</div>
@@ -123,7 +123,7 @@
 			
 											<div class="row">
 												<div class="col-md-8">
-													<div class="km-control-group" name="organizationType" caption="Tipo de organización">
+													<div class="km-control-group organization-dropdown" name="organizationType" caption="Tipo de organización">
 														<div km-select name="organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
 													</div>
 												</div>
@@ -141,9 +141,9 @@
 													<div class="col-xs-12">
 														<div class="km-control-group" name="addressType" caption="Tipo de dirección:">												
 															<label class="radio-inline">
-																<input type="radio" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />Utilice la dirección de la organización</label>
-															<label class="radio-inline">
-																<input type="radio" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>Agregue información personal si esta difiere de la información de la organización.</label>
+																<input type="radio" class="me-1" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />Utilice la dirección de la organización</label>
+															<label class="radio-inline ms-2">
+																<input type="radio" class="me-1" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>Agregue información personal si esta difiere de la información de la organización.</label>
 														</div>
 													</div>
 												</div>

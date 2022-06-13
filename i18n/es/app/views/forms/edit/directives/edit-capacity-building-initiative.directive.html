@@ -15,7 +15,7 @@
 
 					<div ng-show="tab=='edit'" km-tab="edit">
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 
 								<legend>Información general</legend>
 
@@ -88,7 +88,7 @@
 												</div>
 												<div class="col-md-1" ng-hide="!isGlobalOrRegional()">y/o</div>
 												<div class="col-md-3">
-													<div class="km-control-group" style="text-align: left;"  caption="">
+													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">País(es)</label>
 														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="Por favor, seleccione opción(es)" items="options.countries()"></div>
 													</div>
@@ -99,7 +99,7 @@
 
 								<div class="row" ng-if="document.geographicScope && isSubnational()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countryRegions" caption="">
+										<div class="km-control-group countries-dropdown" name="countryRegions" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">País(es)</label>
 											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="Por favor, seleccione opción(es)" items="options.countries()"></div>
 										</div>
@@ -113,7 +113,7 @@
 								</div>
 								<div class="row" ng-if="document.geographicScope && isCommunity()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countries" caption="">
+										<div class="km-control-group countries-dropdown"  name="countries" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">País(es)</label>
 											<div km-select multiple required ng-model="countryRegions.countries" placeholder="Por favor, seleccione opción(es)" items="options.countries()"></div>
 										</div>
@@ -163,14 +163,15 @@
 																		style="display:inline-block;width:100px"/>
 																</div>
 																<div class="col-md-2">
-																	<div class="km-control-group" name="durationText" caption="">
-																		<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																	<div name="durationText" caption="">
+																		<div style="display: none;" name="durationText">
 																			<label name="durationText" for="durationText">Duración en día(s)/mese(s)/año(s)</label>
 																		</div>
-																		<select name="durationText" ng-model="document.durationText"  class="form-control"
+																		<select name="durationText" ng-model="document.durationText"  class="form-control form-select"
 																			style="display:inline-block;width:100px" placeholder="eg. Months"
 																			ng-options="obj.value as obj.text for obj in timing">
 																		</select>
+																		
 																	</div>
 																</div>
 															</div>
@@ -183,13 +184,13 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="activityScope" caption="Tipo de iniciativa de creación de capacidad">
-											<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="Tipo de iniciativa de creación de capacidad">
+											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row mt-2">
 									<div class="col-md-12">
 										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="¿Forma parte de un proyecto o programa más amplio?">
 											<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
@@ -214,12 +215,12 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required  caption="Organismo(s) u organización(es) que aplican y/o ejecutan la iniciativa">
 											<div class="help-info">En algunas instancias, un organismo podría desempeñar ambas funciones, la de aplicación y la de ejecución. En dichos casos, por favor seleccione ambas casillas.</div>
-											<div class="checkbox"><label for="isImplementedByAgencies"><input type="checkbox" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)">Organismo(s) u organización(es) de aplicación</label></div>
+											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Organismo(s) u organización(es) de aplicación</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Por favor, seleccione el/los organismo(s) o la/las organización(es) de aplicación">
-														<div class="help-info">Organismo de aplicación refiere a la organización o entidad jurídica responsable de elaborar la iniciativa y supervisar su aplicación, seguimiento y evaluación, incluido poner a disposición financiación, garantizar que se apliquen las normas fiduciarias y la garantía de calidad, así como de la preparación de los informes de finalización del proyecto. En última instancia, el organismo de aplicación es la entidad responsable del completamiento de la iniciativa y de la rendición de cuentas ante el donante.</div>
+														<div class="help-info pt-1">Organismo de aplicación refiere a la organización o entidad jurídica responsable de elaborar la iniciativa y supervisar su aplicación, seguimiento y evaluación, incluido poner a disposición financiación, garantizar que se apliquen las normas fiduciarias y la garantía de calidad, así como de la preparación de los informes de finalización del proyecto. En última instancia, el organismo de aplicación es la entidad responsable del completamiento de la iniciativa y de la rendición de cuentas ante el donante.</div>
 
 														<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
@@ -227,21 +228,21 @@
 												</div>
 											</div>
 
-											<div class="checkbox"><label for="isExecutededByAgencies"><input id="isExecutededByAgencies" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)">Organismo(s) u organización(es) de ejecución</label></div>
+											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />Organismo(s) u organización(es) de ejecución</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Por favor, seleccione el/los organismo(s) o la/las organización(es) de ejecución">
-														<div class="help-info">El organismo de ejecución es la organización o institución que gestiona directamente la iniciativa, incluida la planificación, coordinación y ejecución cotidiana de las actividades, el seguimiento y la presentación de informes sobre los progresos realizados, la obtención y gestión de recursos (personal, fondos, equipos, etc.) y el cumplimiento de otras funciones de gestión del proyecto.</div>
+														<div class="help-info pt-1">El organismo de ejecución es la organización o institución que gestiona directamente la iniciativa, incluida la planificación, coordinación y ejecución cotidiana de las actividades, el seguimiento y la presentación de informes sobre los progresos realizados, la obtención y gestión de recursos (personal, fondos, equipos, etc.) y el cumplimiento de otras funciones de gestión del proyecto.</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners"><input type="checkbox" id="isCollaboratededByPartners" ng-model="document.isCollaboratededByPartners">Asociado(s) en colaboración</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />Asociado(s) en colaboración</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Por favor, seleccione el/los asociado(s) en colaboración">
-														<div class="help-info">Los asociados en colaboración son las entidades u organizaciones que realizan contribuciones económicas o de otro tipo importantes para la iniciativa o que apoyan o colaboran activamente con la ejecución de la iniciativa.</div>
+														<div class="help-info pt-1">Los asociados en colaboración son las entidades u organizaciones que realizan contribuciones económicas o de otro tipo importantes para la iniciativa o que apoyan o colaboran activamente con la ejecución de la iniciativa.</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
@@ -253,7 +254,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Información detallada</legend>
 
 								<div class="row">
@@ -282,7 +283,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Información sobre cobertura temática de la iniciativa</legend>
 								<div class="row">
 									<div class="col-md-12">
@@ -328,7 +329,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Información sobre financiación</legend>
 
 								<div class="row">
@@ -368,7 +369,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="totalBudget" caption="Presupuesto total (monto, en USD)">
 											<div class="help-info">Puede incluir contribuciones en especie expresadas en términos monetarios. Por favor, no use espacios, puntos ni comas cuando introduzca el importe.</div>
-											<div class="input-group"><span class="input-group-addon">USD</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
+											<div class="input-group"><span class="input-group-text">USD</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
 											</div>
 										</div>
 									</div>
@@ -377,7 +378,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Resultados de la creación de capacidad</legend><strong>Resultados</strong><div class="help-info">Esta información puede proporcionarse una vez que existan algunos resultados (productos, efectos directos o efectos) o mejores prácticas y lecciones aprendidas de la iniciativa en curso o completada.</div>
 									<div class="km-control-group" name="resultsAchievements" caption="">
 										<div class="row">
@@ -415,7 +416,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Información adicional</legend>
 								<div class="row">
 									<div class="col-md-12">

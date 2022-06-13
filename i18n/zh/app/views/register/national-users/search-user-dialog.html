@@ -1,21 +1,22 @@
 ﻿<div class="modal-content">
-    <style></style>
+    <style> .has-error .fa-validate:before { content: "\f069"; color: #a94442; } .has-warning .fa-validate:before { content: "\f0a5"; color: #c09853; } .has-success .fa-validate:before { content: "\f00c"; color: #468847; } .help-block.error { text-transform: uppercase; font-size: 10px; font-weight: bold; margin-bottom: -10px; } .panel-identity { position: relative; padding-top: 19px; } .panel-identity:after { content: "Identity"; position: absolute; top: 16px; left: 17px; padding: 3px 7px; font-size: 12px; font-weight: bold; background-color: #f5f5f5; border: 1px solid #ddd; color: #9da0a4; height: 1.6em; line-height: 1em; -webkit-border-radius: 4px 0 4px 0; -moz-border-radius: 4px 0 4px 0; border-radius: 4px 0 4px 0; } .panel-identity-new:after { content: "New Identity"; } </style>
 
     <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"></button>
-        <h3 class="modal-title"></h3>
+        <h3 class="modal-title">搜索被提名人</h3>
+        <button type="button" class="close bg-transparent border-0 fs-5 text-secondary" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
+      
     </div>
 
     <div class="modal-body">
         <form name="form" novalidate ng-submit="searchUserDialogCtrl.search()">
 
-            <p></p>
+            <p>请输入您想提名者的电子邮件地址，然后点击搜索按钮<i class="fa fa-search"></i>。</p>
 
             <div class="form-group" ng-class="{ 'has-warning': form.email.$invalid }">
-                <label></label>
-                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><input type="email" name="email" class="form-control" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="" required><button class="btn btn-default" aria-label="Search" type="submit"></button></div>
-                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email"></p>
-                <p class="help-info error" ng-show="form.email.$error.email"></p>
+                <label>被提名人电子邮件地址</label>
+                <div class="input-group ps-0 mb-1"><span class="input-group-text"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="email@domain.xyz" required /><span class="input-group-btn"><button class="btn btn-default" aria-label="Search" type="submit"><i class="fa fa-fw" ng-class="{ 'fa-search' : !searchUserDialogCtrl.loading, 'fa-cog fa-spin' : searchUserDialogCtrl.loading  }"></i></button></span></div>
+                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">此字段为必填字段</p>
+                <p class="help-info error" ng-show="form.email.$error.email">电子邮件无效或不完整</p>
             </div>
 
         </form>
@@ -23,8 +24,8 @@
         <div ng-if="searchUserDialogCtrl.error">
 
             <div ng-switch="searchUserDialogCtrl.error.code">
-                <div class="alert alert-warning" ng-switch-when="forbidden"></div>
-                <div class="alert alert-danger" ng-switch-default></div>
+                <div class="alert alert-warning" ng-switch-when="forbidden"><b>Oups...</b> 抱歉，但您没有提名新用户的授权。</div>
+                <div class="alert alert-danger" ng-switch-default><b>Oops...</b> 抱歉，但出错了。 <br> <span ng-bind="searchUserDialogCtrl.error|json"></span></div>
             </div>
 
         </div>
@@ -32,38 +33,38 @@
         <div ng-if="!searchUserDialogCtrl.error && searchUserDialogCtrl.user">
 
 
-            <div class="panel panel-default panel-identity panel-identity-new" ng-show="searchUserDialogCtrl.user.new" style=";position:relative">
+            <div class="panel panel-default panel-identity panel-identity-new position-relative" ng-show="searchUserDialogCtrl.user.new" >
 
                 <div class="panel-body">
 
                     <div class="alert alert-warning" role="alert">
-                        <p></p>
-                        <p></p>
+                        <p><b>用户未找到：</b> <i ng-bind="searchUserDialogCtrl.email"></i></p>
+                        <p>请注意，指定的电子邮件地址不对应任何现有的用户帐户。但是，您可以通过开始创建新用户帐户继续提名。新用户将收到一封电子邮件，其中包含用于激活其账户并创建密码的链接。</p>
                     </div>
 
-                    <button type="button" class="btn btn-lg btn-block btn-success" ng-click="searchUserDialogCtrl.save()"></button>
+                    <button type="button" class="btn btn-lg btn-block btn-success" ng-click="searchUserDialogCtrl.save()">使用以下电子邮件地址提名新用户：<br> <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b></button>
 
                 </div>
 
             </div>
 
-            <div class="panel panel-default panel-identity" ng-show="searchUserDialogCtrl.user.userID" style="position:relative;">
+            <div class="panel panel-default panel-identity position-relative" ng-show="searchUserDialogCtrl.user.userID">
 
-                <div class="panel-body">
+                <div class="panel-body p-2 pt-3 border">
 
                     <div class="row" ng-show="searchUserDialogCtrl.user.userID">
 
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="firstName"></label>
-                                <input type="text" class="form-control" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="">
+                                <label for="firstName">名字</label>
+                                <input type="text" class="form-control fs-small-8" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="first name" />
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="lastName"></label>
-                                <input type="text" class="form-control" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true">
+                                <label for="lastName">姓氏</label>
+                                <input type="text" class="form-control fs-small-8" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true" />
                             </div>
                         </div>
 
@@ -71,32 +72,32 @@
 
                     <div class="row" ng-show="searchUserDialogCtrl.user.userID">
 
-                        <div class="col-xs-12">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label for="organization"></label>
-                                <input type="text" class="form-control" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true">
+                                <label for="organization">机构</label>
+                                <input type="text" class="form-control fs-small-8" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true" />
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-12">
                             <div class="form-group">
-                                <label></label>
-                                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><input type="email" name="email" class="form-control" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="">
+                                <label>电子邮件</label>
+                                <div class="input-group mb-1 ps-0"><span class="input-group-text"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="searchUserDialogCtrl.save()"></button>
+                    <button type="button" class="btn btn-lg btn-block btn-primary w-100 fs-6" ng-click="searchUserDialogCtrl.save()">继续使用： <b><span ng-bind="searchUserDialogCtrl.user.firstName+' '+searchUserDialogCtrl.user.lastName"></span></b><br> <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b></button>
                 </div>
 
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()"></button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="searchUserDialogCtrl.save()" ng-disabled="form.$invalid || !searchUserDialogCtrl.user"></button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">取消</button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="searchUserDialogCtrl.save()" ng-disabled="form.$invalid || !searchUserDialogCtrl.user">下一条 »</button>
     </div>
 </div>

@@ -7,7 +7,7 @@
             data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Общая информация</legend>
                         <div class="row">
                             <div class="col-xs-12" >
@@ -49,7 +49,7 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Сведения об организации</legend>
                         <div class="row">
                             <div class="col-md-12">
@@ -128,11 +128,11 @@
                         </div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Подробная информация</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="organizationType" required caption="Тип организации">
+                                <div class="km-control-group organization-dropdown" name="organizationType" required caption="Тип организации">
                                     <div km-select name="organizationType" required ng-model="document.organizationType"
                                         items="options.organizationTypes()"></div>
                                 </div>
@@ -151,8 +151,8 @@
                                 <div class="col-sm-12">
                                     <div class="km-control-group" name="areasOfWork" caption="Направления работы">                                
                                         <div class="help-block">Просьба указать только ключевые слова</div>
-                                        <div ng-repeat="areaOfWork in areasOfWork" style="padding-bottom:5px;" class="input-group">
-                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="input-group-addon" style="cursor:pointer" 
+                                        <div ng-repeat="areaOfWork in areasOfWork" class="pb-1 d-block input-group">
+                                            <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input float-start pb-1" style="width:97%;" ng-model="areaOfWork.value" locales="document.header.languages"></div><span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer input-group-text float-end trash-value"
                                             ng-click="removeItem(areasOfWork, $index)"><i class="fa fa-trash-o icon"></i></span></div>
                                         <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">Добавить</button>
                                     </div>
@@ -200,12 +200,12 @@
                         </div>
                     </div>
                     
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Срок подтверждения или обновления информации</legend>
                         <div class="help-info">Просьба заметить, что информация этой категории подлежит подтверждению или обновлению через один год после представления. После этого срока Вам будет предложено подтвердить или обновить запись в течение 3-х месяцев. Если по окончании этого периода подтверждение не будет получено, то запись будет помечена как «Неподтвержденная».</div>
                     </div>
 
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Дополнительная информация</legend>
                         <div class="row">
                             <div class="col-sm-12">
@@ -225,7 +225,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="well no-shadow bg-white">
+                    <div class="no-shadow bg-white">
                         <legend>Примечания</legend>								
                         <div class="row">
                             <div class="col-md-12">

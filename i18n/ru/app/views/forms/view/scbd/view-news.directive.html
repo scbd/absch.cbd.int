@@ -1,38 +1,38 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading  bg-darkgrey"><h4></h4></div>
+	<div class="panel-heading  bg-darkgrey"><h4>Новости</h4></div>
 	<div class="record-body panel-body">
 
 			
 		<document-date></document-date>
 
 		<div ng-show="document.title_EN_t">
-			<label></label></div>
+			<label>Название</label><span class="km-value">{{document.title_EN_t | lstring:locale}}</span></div>
 
 		<div ng-show="document.description_EN_t">
-			<label></label></div>
+			<label>Описание</label><span class="km-value">{{document.description_EN_t}}</span></div>
 
 		<div ng-show="document.themes_CEN_ss">
-			<label></label>
+			<label>Темы</label>
 			<div class="km-value" >
 				<ul class="list">
-					<li ng-repeat="item in document.themes_CEN_ss"></li>
+					<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
 				</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.thematicAreas_CEN_ss">
-			<label></label>
+			<label>Тематические области</label>
 			<div class="km-value" >
 				<ul class="list">
-					<li ng-repeat="item in document.thematicAreas_CEN_ss"></li>
+					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
 				</ul>
 			</div>
 		</div>
 
 		<div ng-show="document.url_ss">
-			<label></label><ul class="list">
-					<li ng-repeat="url in document.url_ss"></li>
-				</ul></div>
+			<label>Ссылка на документ</label><span class="km-value"><ul class="list">
+					<li ng-repeat="url in document.url_ss"><a rel="noopener" translation-url  ng-href="{{url}}" target="_"><span ng-bind="url"></span></a></li>
+				</ul></span></div>
 
 	</div>
     <div document-metadata  class="panel-footer"></div>

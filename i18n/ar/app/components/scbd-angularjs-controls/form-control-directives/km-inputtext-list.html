@@ -2,12 +2,12 @@
 	<div  style="margin-bottom:2px" ng-repeat="text in (list = getTexts())">
 		<form name="textControl" ng-class="{'input-group' : list.length>1}">
 			<input ng-if="(type||'text')=='text' || type=='url' || type=='email'" type="{{type||'text'}}" class="form-control" ng-model="text.value" 
-				ng-change="save()" placeholder="" ng-required="isRequired()">
+				ng-change="save()" placeholder="{{placeholder}}" ng-required="isRequired()">
 			<div  ng-if="type=='lstring'"  km-textbox-ml name="title_{{$index}}" ng-model="text.value"  
-				placeholder="" locales="locales" class="form-control" ng-change="save()"
+				placeholder="{{placeholder}}" locales="locales" class="form-control" ng-change="save()"
 				style="    border: none;
 				height: unset;
-				padding: 0;"></div><button type="button" class="btn btn-default" ng-click="remove($index)"></button><div ng-if="type=='url'" class="alert alert-warning" ng-show="textControl.$error.url"><ul><li></li></ul>
+				padding: 0;"></div><span class="input-group-btn" ng-show="list.length>1"><button type="button" class="btn btn-default" ng-click="remove($index)"><i class="bi bi-trash"></i></button></span><div ng-if="type=='url'" class="alert alert-warning" ng-show="textControl.$error.url"><strong>تحذير!</strong> Specified value is not a valid URL.<ul><li>تأكد أن رابط موقع الويب يبدأ بـ //:https  او //:http</li></ul>
 			</div>
 		</form>
 	</div>

@@ -4,12 +4,12 @@
 			<div class="panel-heading">
 				<h2>Directorio de elementos genéticos</h2>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body bg-white">
 				<div class="row">
-					<div class="col-md-2 col-xs-12"> 
-						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
-							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Directorios <span class="caret"></span></button>
-							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+					<div class="col-md-2"> 
+						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100">
+							<button ng-if="deviceSize=='xs'" type="button" class="btn btn-default dropdown-toggle w-100" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Directorios <span class="caret"></span></button>
+							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
 								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Directorios</b></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">Directorio de OVM</a></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
@@ -17,13 +17,14 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
-						<p class="p-borders padding-top-10">El Directorio de elementos genéticos proporciona información resumida sobre los elementos genéticos asociados a los OVM registrados en el CIISB, incluida información sobre el organismo donante, rasgos transferidos y función biológica. El Directorio incluye enlaces a los registros de cada elemento genético, en el que puede encontrarse más información. Se hace referencia a los OVM que contienen el elemento genético en particular al pie del registro individual.</p>
+					<div class="col-12 col-md-10 ps-3">
+						<p class="p-borders pt-2">El Directorio de elementos genéticos proporciona información resumida sobre los elementos genéticos asociados a los OVM registrados en el CIISB, incluida información sobre el organismo donante, rasgos transferidos y función biológica. El Directorio incluye enlaces a los registros de cada elemento genético, en el que puede encontrarse más información. Se hace referencia a los OVM que contienen el elemento genético en particular al pie del registro individual.</p>
+						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=dnaSequence" >here</a> to perform an in-depth search of all Genetic Element records available in this Registry.</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Cargando...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>Error loading registry records, please try again.</h3></div>
 						<div ng-if="!isLoading && !isError">						
 						<div class="row">
-							<div class="col-md-12"><strong>Registros totales: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Exportar</button>
+							<div class="col-md-12"><strong>Registros totales: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default float-end me-1 mb-1" ng-click="export()" ng-disabled="!geneRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Exportar</button>
 							</div>
 						</div>
 						<div>
@@ -32,18 +33,18 @@
 									<tr>
 										<th class="display-17">Identificación del registro</th>
 										<th class="display-18">Nombre</th>
-										<th class="display-25 hidden-xs">Rasgo(s)</th>
-										<th class="display-15 hidden-xs">Organismo donante</th>
-										<th class="display-25 hidden-xs">Función</th>
+										<th class="display-25 d-none d-sm-table-cell">Rasgo(s)</th>
+										<th class="display-15 d-none d-sm-table-cell">Organismo donante</th>
+										<th class="display-25 d-none d-sm-table-cell">Función</th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr ng-repeat="row in ::geneRecords">
 										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
 										<td class="tableexport-string"><span ng-bind="::row.name"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.trait"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.organismScientificNames.join(', ')"></span> - <span ng-bind="::row.organismCommonNames.join(', ')"></span></td>
-										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.geneFunction"></span></td>
+										<td class="tableexport-string d-none d-sm-table-cell"><span ng-bind="::row.trait"></span></td>
+										<td class="tableexport-string d-none d-sm-table-cell"><span ng-bind="::row.organismScientificNames.join(', ')"></span> - <span ng-bind="::row.organismCommonNames.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description d-none d-sm-table-cell"><span ng-bind="::row.geneFunction"></span></td>
 										
 									</tr>
 								</tbody>

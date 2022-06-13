@@ -2,7 +2,7 @@
 
     <div ng-include="'/app/views/forms/edit/edit_header.html'"></div>
 
-    <div class="edit-measure-status innerPageEditForm"  style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+    <div class="edit-measure-status innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
             <div>
                 <workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false"
                                         tab="tab" validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -10,7 +10,7 @@
                                         on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
                                         data-container="{{container}}" is-dialog="{{isDialog}}"><!-- <intro-form></intro-form> --> <!--only use it if default article intro is not required --><edit-form>
 
-                        <form class="editForm" name="editForm" style="margin-top:10px">
+                        <form class="editForm mt-2" name="editForm">
                             <div ng-show="tab=='edit'" km-tab="edit">
 
                                 <section>

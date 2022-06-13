@@ -13,7 +13,7 @@
 			
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Información general</legend>
 			
                                     <div class="row">
@@ -101,7 +101,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Acceso a el/los recurso(s)</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -124,7 +124,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Información sobre el contenido del recurso</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -164,7 +164,7 @@
 								
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Palabras clave que facilitan la búsqueda de información en los centros de intercambio de Información</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
@@ -177,7 +177,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="cbdSubjects" caption="Áreas temáticas del CDB">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="Áreas temáticas del CDB">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -186,13 +186,13 @@
 
 								</div>
 							</section><!-- Till now all fields are common for all CHs  --> <!-- IF BCH START --><section ng-if="isBCH">
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Palabras clave relacionadas con la seguridad de la biotecnología</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="biosafety.subjects" caption="Áreas temáticas de la seguridad de la biotecnología">
+										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="Áreas temáticas de la seguridad de la biotecnología">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div><!-- TODO: need to apply a condition --><div >
@@ -241,7 +241,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="¿Este recurso aborda uno o más de un organismo específico?" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Identificación del/de los organismo(s)" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
@@ -261,7 +261,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressGenes" caption="¿Este recurso aborda uno o más de un elemento genético específico?" required>
+											<div class="km-control-group" name="biosafety.addressGenes" caption="Gene(s) identification" required>
 												<div class="help-block">La información sobre elementos genéticos hace referencia a secuencias de ADN, comprendidos los genes, las secuencias de ADN reguladoras y otros ácidos nucleicos utilizados para crear un organismo vivo modificado. Estas pueden codificar una proteína o tener una función reguladora específica.</div>
 												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
 												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
@@ -281,7 +281,7 @@
 								</div>
 							</div>
 						</section><!-- IF BCH END --> <!-- IF ABS START --><section ng-if="isABS">
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Palabras relacionadas con el acceso y la participación en los beneficios</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Palabras relacionadas con el acceso y la participación en los beneficios</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="nagoya.mccKeywords" required caption="Sírvase seleccionar las palabras clave pertinentes para describir el contenido del código de conducta, las directrices y las mejores prácticas y/o estándares que habrán de presentarse">
@@ -310,7 +310,7 @@
 								</div>
 							</div>
 						</section><!-- IF ABS END --><section>
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Información adicional</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Información adicional</legend>
 		
 								<div class="row">
 									<div class="col-xs-12">
@@ -333,7 +333,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Notas</legend>
 							<div class="row">
 								<div class="col-sm-12">

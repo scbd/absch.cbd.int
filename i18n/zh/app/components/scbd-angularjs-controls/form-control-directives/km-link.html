@@ -37,12 +37,12 @@
 								<label class="control-label" ng-required="editor.visible" for="url">网址</label>
 								<div class="help-block">需要协议（https:// 或 http://）</div>
 								<div ng-if="editor.urlMissing" style="color: #e32">请提供有效的网址（URL）</div>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="例如：https://www.cbd.int">
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="例如：https://www.cbd.int" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
 								<label>名称</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="例如：公约秘书处网址">
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="例如：公约秘书处网址" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
@@ -54,8 +54,8 @@
 						</fieldset>
 					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">取消</button>
+				<div class="modal-footer d-block">
+					<button type="button" class="btn btn-default float-end" ng-click="editor.close()">取消</button>
 					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >保存</button>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 					</div>
 					<div class="control-group" >
 						<label>文件名</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.name" />
 					</div>
 					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
 						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">语言</label>
@@ -85,7 +85,7 @@
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
 					</div><br/><div class="control-group" >
 						<label>标记</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="例如：生物多样性，爱知目标">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="例如：生物多样性，爱知目标" />
 					</div>
 				</div>
 				<div class="modal-footer">

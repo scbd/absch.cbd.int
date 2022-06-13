@@ -6,9 +6,9 @@
        <div class="box-body">
           <div class="alert alert-danger" role="alert" ng-show="errorMessage" ng-bind="errorMessage">
           </div>
-         <div class="input-group form-group"><span class="input-group-addon text-sm">收件人：</span><input type="text" class="form-control" ng-model="mail.assignedTo" />
+         <div class="input-group form-group"><span class="input-group-text text-sm">收件人：</span><input type="text" class="form-control" ng-model="mail.assignedTo" />
          </div>
-          <div class="input-group form-group"><span class="input-group-addon text-sm">主题：</span><input type="text" class="form-control" ng-model="mail.data.subject"/>
+          <div class="input-group form-group"><span class="input-group-text text-sm">主题：</span><input type="text" class="form-control" ng-model="mail.data.subject"/>
          </div>
          <div class="editor">
             <div class="media-box">
@@ -18,7 +18,7 @@
             </div>
          </div>
       </div><br><div class="box-footer">
-         <div class="pull-right"><!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button> --><button type="submit" class="btn btn-primary" ng-click="sendMail()"><i class="fa fa-envelope-o"></i> 发送</button>
+         <div class="float-end"><!-- <button type="button" class="btn btn-default"><i class="fa fa-pencil"></i> Draft</button> --><button type="submit" class="btn btn-primary" ng-click="sendMail()"><i class="fa fa-envelope-o"></i> 发送</button>
          </div><!-- <button type="button" class="btn btn-default"><i class="fa fa-times"></i> Discard</button> --></div>
   </div>
 </div>

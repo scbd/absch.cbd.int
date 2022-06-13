@@ -1,12 +1,12 @@
 ﻿<div id="Announcements"  >
 <style> .responsive { width: 100%; height: auto; } #Announcements img{ width: 100%; height: auto; } .news-image { width: 100%; height: 120px; background-image: url('img_flowers.jpg'); background-size: cover; } .sized{height: 120px;} .small-sized{height: 10px;} .news-date{float:right; vertical-align: text-bottom;padding:3px; font-size: 10px; text-transform: uppercase; } .noimage{display: table-cell; vertical-align: middle; font-size:24px;padding:10px; top:-20px;position: relative; } .noimagetable{display: table; height: 200px; overflow: hidden; width: 100%;} </style>
 
-    <h3 style="border-bottom:1px solid #ddd;"><!-- <a rel="noopener" href="/articles/" class="color-grey"> Announcements </a> --> <a rel="noopener"  ng-if="article" class="pull-right" href="/articles/"><i class="fa fa-arrow-circle-left"></i> просмотреть все</a></h3>
+    <h3 style="border-bottom:1px solid #ddd;"><!-- <a rel="noopener" href="/articles/" class="color-grey"> Announcements </a> --> <a rel="noopener"  ng-if="article" class="float-end" href="/articles/"><i class="fa fa-arrow-circle-left"></i> просмотреть все</a></h3>
         
     <div class="container" ng-if="article">
-        <div class="row well bg-white">
+        <div class="row card bg-white">
             <div  class="col-xs-12 col-sm-6 col-md-3 hidden-xs" ng-if="article.coverImage.url" ><img class="thumbnail" style="max-width:300px;width:100%; width: 100%; margin-right:20px;" ng-if="article.coverImage.url" ng-src="{{getSizedImage(article.coverImage.url, '400x400')}}"></div>
-            <div class="col-xs-12" ng-class="{'col-sm-6 col-md-9' : article.coverImage.url}"><span class="news-date bg-white pull-right bold"  ng-bind="article.meta.createdOn | formatDateWithUtc"></span><div>             
+            <div class="col-xs-12" ng-class="{'col-sm-6 col-md-9' : article.coverImage.url}"><span class="news-date bg-white float-end bold"  ng-bind="article.meta.createdOn | formatDateWithUtc"></span><div>             
                         <h3 style="font-size:160%;margin-bottom:30px;" ng-bind="article.title  | lstring:locale"></h3>
                     </div>
             </div>
@@ -23,7 +23,7 @@
                 <div  class='row' style="margin:0px 0px;">
                         <table  style="width:100%;height:140px;background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;margin:5px 0px;" ng-click="loadArticle(article._id)">
                             <tr>
-                                <td style="width:160px;vertical-align: top; height:100px;overflow: hidden; background-image: url({{getSizedImage(article.coverImage.url, '160x100')}});background-position: center;  background-repeat: no-repeat"><img src=""  style="width:100%;height:auto;" height="42" width="42"></img></td>
+                                <td style="width:160px;vertical-align: top; height:100px;overflow: hidden; background-image: url('{{getSizedImage(article.coverImage.url, \'160x100\')}}');background-position: center;  background-repeat: no-repeat"><img src=""  style="width:100%;height:auto;" height="42" width="42"></img></td>
                                 <td style="vertical-align: top;"><span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span><h4 style="font-size:18px;padding:15px 3px 3px 10px;margin:0;" ng-class="{'noimage':!article.coverImage.url}"><span style="display:block;font-size: 10px; text-transform: uppercase;" class="color-blue " ng-bind="article.summary | lstring:locale"></span> <span ng-bind="article.title | lstring:locale"></span></h4>
                                 </td>
                             </tr>

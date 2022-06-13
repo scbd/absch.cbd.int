@@ -1,30 +1,18 @@
-﻿<div id="Announcements">
+<div id="Announcements">
 
-    <div class=" bs5 row row-cols-1 row-cols-md-2 row-cols-lg-3">
-        <div class="bs5 col" ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:8" >
-            <div class="bs5 card m-3 m-lg-4 position-relative shadow" style="cursor: pointer;"  >
-                <span class="bs5 badge position-absolute top-0 end-0"><span ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
-                
-                <div class="bs5" style="width:100%;height:200px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url,imageSize._400)}}');" >
-                    &nbsp;
-                </div>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+        <div class="col" ng-repeat="article in articles | orderBy:'meta.createdOn':true | limitTo:8" >
+            <div class="card m-3 m-lg-4 position-relative shadow" style="cursor: pointer;"  ><span class="badge position-absolute top-0 end-0 date-badge"><span ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span><div style="width:100%;height:200px;background-repeat: no-repeat; background-size: cover; background-image: url('{{::getSizedImage(article.coverImage.url, imageSize._400)}}');" >&nbsp;</div>
 
-                <div class="bs5 card-body border-top" style="min-height:120px;">
-                    <a 
-                    class="stretched-link bs5 fs-3 text-dark fw-bold text-decoration-none card-title"
-                        ng-click="loadArticle(article._id)">
-                        <span ng-bind="article.title | lstring:locale"></span>
-                    </a>
-                    <p class="bs5 card-text"> <span ng-bind="article.summary | lstring:locale"></span></p>
+                <div class="card-body border-top" style="min-height:120px;"><a 
+                    class="stretched-link fs-3 text-dark fw-bold text-decoration-none card-title"
+                        ng-click="loadArticle(article._id)"><span ng-bind="article.title | lstring:locale"></span></a><p class="card-text"><span ng-bind="article.summary | lstring:locale"></span></p>
                 </div>
             </div>
         </div>
      </div>
 
-</div>
-
-
-<!-- <div id="Announcements">
+</div><!-- <div id="Announcements">
 <style>
 
 #Announcements img{

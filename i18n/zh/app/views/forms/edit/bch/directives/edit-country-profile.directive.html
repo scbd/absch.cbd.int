@@ -1,5 +1,5 @@
 <div>
-	<div class="innerPageEditForm" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
+	<div class="innerPageEditForm"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div ng-class="{'block-position' : blockEditForm }">
 			<div block-region activate="blockEditForm"></div> 
 		</div>   
 		<div class="registerpage-content">
@@ -11,13 +11,13 @@
 				on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div ng-show="tab=='edit'" km-tab="edit">
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>一般信息</legend>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-12">
 											<div class="km-control-group" name="header.languages" required
 												caption="请选择您希望提交之记录的语言：">
 												<div class="indent">
@@ -60,15 +60,15 @@
 			</workflow-arrow-buttons>
 		</div>
 		<script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
-			<div style="margin:10px;">
+			<div class="m-2">
 				<h1>生物安全信息交换所国家概况</h1>
 				<hr>
 				<div class=" alert alert-danger">
-					<div class="glyphicon glyphicon-exclamation-sign" style="display:inline-block"></div>
-					<div style="display:inline-block">每个政府在生物安全信息交换所只能有一条国家概况记录。生物安全信息交换所已有贵国政府的国家概况。您将于<span ng-bind="alertSeconds"></span>秒后被重定向到该记录。</div>
+					<div class="bi bi-exclamation-sign d-inline-block"></div>
+					<div class="d-inline-block">每个政府在生物安全信息交换所只能有一条国家概况记录。生物安全信息交换所已有贵国政府的国家概况。您将于<span ng-bind="alertSeconds"></span>秒后被重定向到该记录。</div>
 				</div>
 				<div class="ngdialog-buttons" >
-					<button type="button" style="margin:5px;" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">现在引导</button>
+					<button type="button" class="ngdialog-button ngdialog-button-primary m-1" ng-click="openExisting()">现在引导</button>
 				</div>
 			</div>
 		</script>

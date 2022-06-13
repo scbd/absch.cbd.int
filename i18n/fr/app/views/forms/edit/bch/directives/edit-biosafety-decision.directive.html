@@ -1,17 +1,17 @@
 <div>
 
-	<div  class="innerPageEditForm edit-biosafety-decision-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div  class="innerPageEditForm edit-biosafety-decision-directive"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 				validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
 				on-post-publish="onPostPublishOrRequest(data)" on-pre-publish="onPrePublish()" on-pre-save-draft="onPreSaveDraft()"
 				on-post-save-draft="onPostSaveDraft(data)" on-post-request="onPostPublishOrRequest(data)" on-pre-request="onPreRequest()"
 				data-container="{{container}}" is-dialog="{{isDialog}}" document-type="{{type}}">
 				<edit-form>
-					<form class="editForm" name="editForm" style="margin-top:10px">
+					<form class="editForm mt-2" name="editForm">
 						<div ng-show="tab=='edit'" km-tab="edit">
 							
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Informations générales</legend>
 									<div class="row">
 										<div class="col-xs-12" >
@@ -102,11 +102,11 @@
 									</div>
 								</div>
 							
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Sujet de la décision, notification, communication ou déclaration :</legend>
 									<label style="height:0px;width:0px;display: inline;" for="decisionTypes"><span style="display:none;">Sujet de la décision, notification, communication ou déclaration :</span></label>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-12 position-relative">
 											<div block-region activate="decisions.otherDecisions.identifier || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">
 												<div class="km-control-group" name="commonDecisions" required caption="Décisions communes">
 														<div km-term-check required ng-model="decisions.commonDecisions" locales="document.header.languages"
@@ -114,7 +114,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-12 indent-subject-decision">
+										<div class="col-xs-12 indent-subject-decision position-relative">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.communicationDecision.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group " name="otherDecisions" required caption="Autres décisions pertinentes">
 													<div km-term-radio required ng-model="decisions.otherDecisions" locales="document.header.languages"
@@ -123,7 +123,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-xs-12 indent-subject-decision">
+										<div class="col-xs-12 indent-subject-decision position-relative">
 											<div block-region activate="decisions.commonDecisions.length > 0 || decisions.otherDecisions.identifier" skip-loading-icon="true" block-text=" ">	
 												<div class="km-control-group communication-decisions" name="otherDecisions" required caption="Communications, notifications et déclarations">
 													<div km-term-radio required ng-model="decisions.communicationDecision" locales="document.header.languages"
@@ -135,7 +135,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section A End=================== --> <!-- ====================Section B Strat=================== --><section ng-if="isLmoDecisionForIntentionalIntroduction">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>OVM destinés à une introduction intentionnelle dans l'environnement</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -144,7 +144,7 @@
 											</div>
 										</div>
 									</div>		
-									<div class="row well no-shadow bg-white" ng-if="document.addressesTransboundaryMovement" style="margin-left:1%">
+									<div class="row no-shadow bg-white" ng-if="document.addressesTransboundaryMovement" style="margin-left:1%">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="intentionDecisions" required caption="La décision a été prise conformément à">
 												<div km-term-radio required ng-model="decisions.intentionDecisions" locales="document.header.languages"
@@ -182,7 +182,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="row well no-shadow bg-white" ng-if="document.addressesTransboundaryMovement==false"  style="margin-left:1%">
+									<div class="row no-shadow bg-white" ng-if="document.addressesTransboundaryMovement==false"  style="margin-left:1%">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="appliesToTransboundaryMovement" required caption="La décision s'applique-t-elle aux mouvements  transfrontaliers des OVM entrant au pays?*">
 												<div km-yes-no required ng-model="document.appliesToTransboundaryMovement" locales="document.header.languages"></div>
@@ -218,7 +218,7 @@
 									</div>							
 								</div>
 							</section><!-- ====================Section B End=================== --> <!-- ====================Section C Start=================== --><section ng-if="isLmoDecisionForDirectUse">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Les OMV destinés à être utilisés directement pour l'alimentation humaine ou animale ou à être transformés (OMV-FFP).</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -242,7 +242,7 @@
 										</div>
 									</div>
 									<div class="row">
-										<div class="col-xs-12">
+										<div class="col-xs-12 position-relative">
 											<div block-region activate="isLmoDecisionForIntentionalIntroduction" skip-loading-icon="true" block-text=" ">
 												<div class="row">
 													<div class="col-xs-12">
@@ -275,7 +275,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section C End=================== --> <!-- ====================Section D Strat=================== --><section ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
-								<div class="well no-shadow bg-white decision-result">
+								<div class="no-shadow bg-white decision-result">
 									<legend>Résultat de la décision</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -310,17 +310,17 @@
 									</div>
 								</div>
 							</section><!-- ====================Section D End=================== --> <!-- ====================Section E Strat=================== --><section ng-if="isSimplifiedProcedure">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Procédure simplifiée</legend>
 									<div class="row">
 										<div  class="col-xs-12">
 											<div class="km-control-group" name="simplifiedProcedure" caption="Objet de la décision dans le cadre de la procédure simplifiée:" required>
 												<div>		
-													<input type="checkbox" id="movementAllowedUnderA131A" ng-model="document.movementAllowedUnderA131A" name="movementAllowedUnderA131A">
+													<input type="checkbox" id="movementAllowedUnderA131A" ng-model="document.movementAllowedUnderA131A" name="movementAllowedUnderA131A" />
 													<label for="movementAllowedUnderA131A" class="light-label">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import</label>	
 												</div>
 												<div>													
-													<input name="exemptedFromAIA" id="exemptedFromAIA" ng-model="document.exemptedFromAIA" type="checkbox"> 
+													<input name="exemptedFromAIA" id="exemptedFromAIA" ng-model="document.exemptedFromAIA" type="checkbox" /> 
 													<label for="exemptedFromAIA" class="light-label"><span>Décision précisant que l'importation de l'OVM est exemptée de la procédure d'accord préalable en connaissance de cause (APCC)</span></label>
 												</div>
 											</div>
@@ -333,7 +333,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section E End=================== --> <!-- ====================Section F Start=================== --><section ng-if="isUnintentionalTransboundaryMovement">
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
 									<div class="row" ng-hide="true">
 										<div class="col-xs-12">
@@ -374,12 +374,12 @@
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="adverseEffectInformation" caption="Toute information disponible sur les effets défavorables potentiels sur la conservation et l'utilisation durable de la diversité biologique, tenant aussi en compte les risques pour la santé humaine, ainsi que toute information disponible sur les mesures possibles de gestion des risques">
+													<div class="km-control-group" name="adverseEffectInformation" caption="Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as card as available information about possible risk management measures">
 														<div km-textbox-ml ng-model="document.adverseEffectInformation" rows="1" locales="document.header.languages"></div>
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="otherTransboundryInformation" caption="Tout autre information utile">
+													<div class="km-control-group" name="otherTransboundryInformation" caption="Any other relevant information">
 														<div km-textbox-ml ng-model="document.otherTransboundryInformation" rows="1" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -395,7 +395,7 @@
 										<div class="col-xs-12" ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">											
 											<div class="row">
 												<div class="col-xs-12">		
-													<div class="km-control-group" required name="illegalTransbondyMovementDetails" caption="Pour un mouvement transfrontalier non intentionnel, veuillez fournir les éléments suivants">
+													<div class="km-control-group label-space" required name="illegalTransbondyMovementDetails" caption="Pour un mouvement transfrontalier non intentionnel, veuillez fournir les éléments suivants">
 														<div class="col-xs-12 padding-left-2">														
 															<div class="km-control-group" name="modifiedOrganisms" caption="Identification de l'OVM">
 																<div document-selector ng-model="document.modifiedOrganisms"  allow-new="true" allow-new-schema="modifiedOrganism"
@@ -413,8 +413,8 @@
 										</div>
 									</div>
 								</div>
-							</section><!-- ====================Section F End=================== --> <!-- ====================Section G Start=================== --><section ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
-								<div class="well no-shadow bg-white">
+							</section><!-- ====================Section F End=================== --> <!-- ====================Section G Start=================== --><section ng-if="isDecisionOnContainedUseOfLMOs  || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse">
+								<div class="no-shadow bg-white">
 									<legend>Partage d’informations avec d’autres bases de données</legend>
 									<div class="row">
 										<div  class="col-xs-12">
@@ -425,7 +425,7 @@
 														<label>Est-ce que cette décision devrait être transférée au Secrétariat de l’OCDE pour une inclusion possible dans la <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank">base de données de produits Biotrack</a>?</label>
 													</div>
 													<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
-													<div class="control-group" style="margin-top: 15px;">
+													<div class="control-group mt-2">
 														<label>Est-ce que cette décision est liée à la sécurité alimentaire?</label>
 													</div>
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
@@ -434,7 +434,7 @@
 															<label>A-t-elle été menée conformément aux directives du <i>Codex Alimentarius pour la conduite de l'évaluation de la sécurité sanitaire des aliments dérivés de plantes à ADN recombiné?</i></label>
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
-														<div class="control-group" style="margin-top: 15px;">
+														<div class="control-group mt-2">
 															<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
 														</div>
 														<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
@@ -448,7 +448,7 @@
 											isSimplifiedProcedure ||  isDecisionOnTransitOfLMOs || isDecisionOnContainedUseOfLMOs ||
 											domesticRegulationsNotification">
 
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Évaluation des OVM et des risques</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -471,7 +471,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section H End=================== --> <!-- ====================Section I Strat=================== --><section ng-if="decisions && ((decisions.commonDecisions||[]).length || decisions.otherDecisions || decisions.communicationDecision)">								
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Document sur la décision, la communication, la notification ou la déclaration</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -483,7 +483,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section I End=================== --> <!-- ====================Section J Strat=================== --><section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Échéance pour la confirmation ou la mise à jour des informations</legend>
 									<div class="row">
 										<div class="col-sm-12">
@@ -495,7 +495,7 @@
 									</div>
 								</div>
 							</section><!-- ====================Section J End=================== --> <!-- ====================Section K Strat=================== --><section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Information supplémentaire</legend>
 									<div class="row">
 										<div class="col-sm-12">

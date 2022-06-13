@@ -2,11 +2,11 @@
 
     <style> .nr-selector td[ng-click], .nr-selector th[ng-click] { cursor:pointer; } .modal-open { overflow: scroll; } </style>
 
-    <table class="table table-hover" style="margin-bottom:0px">
+    <table class="table table-hover bg-white mb-0">
         <tr>
             <th style="width:20%">Национальный доклад</th>
             <td>
-                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-control">
+                <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-select form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
                     </option>
                     
@@ -16,7 +16,7 @@
         <tr>
             <th>Filter by country(ies) or region(s)</th>
             <td>
-                <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-control">
+                <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-select form-control">
                     <option value="cbdRegions">Разбивка по регионам КБР</option>
                     <option value="countries">Выбрать страны</option>
                     <option value="regions">Выбрать регионы</option>
@@ -35,28 +35,28 @@
 
                 <div ng-hide="selectedRegions.length || showCountries || showRegions" class="alert alert-warning" role="alert" style="margin-bottom:0px">Страны или регионы не выбраны</div>
 
-                <ul ng-if="selectedRegions.length" class="list-unstyled">
-                    <li ng-repeat="c in selectedRegions"><span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='NKLSParty'"><i class="fa fa-times" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i> <span ng-bind="regionsMap[c].title|lstring"></span></span> <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='NKLSParty'"><span ng-bind="npCountries[c].title|lstring"></span></span></li>
+                <ul ng-if="selectedRegions.length && selectedRegions[0] != undefined" class="list-unstyled">
+                    <li ng-repeat="c in selectedRegions"><span ng-if="selectedRegionsPreset!='protocolParties' && selectedRegionsPreset!='protocolNonParties' && selectedRegionsPreset!='NKLSParty'"><i class="fa fa-times cursor-pointer" ng-click="removeRegions(c)" ng-show="selectedRegionsPreset!='cbdRegions'"></i> <span ng-bind="regionsMap[c].title|lstring"></span></span> <span ng-if="selectedRegionsPreset!='protocolParties' || selectedRegionsPreset!='protocolNonParties' || selectedRegionsPreset!='NKLSParty'"><span ng-bind="npCountries[c].title|lstring"></span></span></li>
                 </ul>
             </td>
     </table>
-    <table class="table table-hover">
+    <table class="table table-hover bg-white">
         <tr>
             <td>
-                <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" >
+                <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" />
             </td>
             <th class="Title" colspan="4" ng-click="allSelected=!allSelected; allSectionsClicked();">Все вопросы и/или разделы доклада</th>
         </tr>
 
         <tr ng-repeat-start="section in sections">
-            <td><input type="checkbox" ng-model="section.selected" ng-change="sectionClicked(section)" indeterminate="section.selected===null"></td>
+            <td><input type="checkbox" ng-model="section.selected" ng-change="sectionClicked(section)" indeterminate="section.selected===null" /></td>
             <th ng-click="section.expanded=!section.expanded" colspan="3" ng-bind-html="::section.title"></th>
             <th ng-click="section.expanded=!section.expanded"><i class="fa" ng-class="{ 'fa-caret-up' : section.expanded, 'fa-caret-down' : !section.expanded }"></i></th>
         </tr>
 
         <tr ng-if="section.expanded" ng-repeat="question in ::section.questions">
             <td></td>
-            <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)"></td>
+            <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)" /></td>
             <td ng-click="question.selected=!question.selected; questionClicked(question)" class="text-nowrap"><span ng-switch="question.key[0]"><span ng-switch-when="S">Вопрос обследования <span ng-bind="::question.number"></span>.</span> <span ng-switch-default>Вопрос <span ng-bind="::question.number"></span>.</span></span></td>
             <td ng-click="question.selected=!question.selected; questionClicked(question)" ng-bind-html="::question.title"></td>
             <td></td>

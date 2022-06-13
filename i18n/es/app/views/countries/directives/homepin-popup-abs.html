@@ -4,7 +4,7 @@
     'bg-bch': isBCH && currentCountry.isParty && !currentCountry.isInbetweenParty, 
     'bg-darkgrey':!currentCountry.isParty && !currentCountry.isInbetweenParty, 
     'bg-inbetween': currentCountry.isInbetweenParty}">
-        <div><span class="color-white bs5 fw-bold" ng-if="((isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)) && !currentCountry.isInbetweenParty">Parte en el Protocolo de Nagoya</span> <span  class="color-white bs5 fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)">Ratificado, pero todavía no es Parte</span> <span  class="color-white  bs5 fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)">Estado que no es Parte del Protocolo de Nagoya</span></div>
+        <div><span class="color-white fw-bold" ng-if="((isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)) && !currentCountry.isInbetweenParty">Parte en el Protocolo de Nagoya</span> <span  class="color-white fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)">Ratificado, pero todavía no es Parte</span> <span  class="color-white fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)">Estado que no es Parte del Protocolo de Nagoya</span></div>
 
         <div class="row abs-exception-tooltip"
         ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
@@ -24,7 +24,7 @@
     <div>
         <table class="table table-map table-condensed" style="display: block;overflow-x: auto;white-space: nowrap;" >
             <tr ng-repeat="schema in countryMapScope.currentCountry.schemas" style="border:none;">
-                <td><span class="bs5 rounded badge ms-2"  ng-class="{'bg-gray-300' : schema.count==0, 'bg-abs':schema.count>0 }" ng-bind="schema.count"></span></td>
+                <td><span class="rounded badge ms-2"  ng-class="{'bg-gray-300' : schema.count==0, 'bg-abs':schema.count>0 }" ng-bind="schema.count"></span></td>
                 <td><a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a> <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}"  style="color:#fff"><span ng-bind="schema.title | lstring:locale"></span></a></td>
             </tr>
         </table>

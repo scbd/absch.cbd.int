@@ -4,50 +4,33 @@
 			<div class="panel-heading">
 				<h2>Реестр организмов</h2>
 			</div>
-			<div class="panel-body">
+			<div class="panel-body bg-white">
 				<div class="row">
-					<div class="col-md-2 col-xs-12"> 
-						<div ng-class="{'btn-group':deviceSize=='xs'}" style="width:100%;">
-							<button ng-if="deviceSize=='xs'" type="button"  style="width:100%;" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Реестры <span class="caret"></span></button>
-							<ul class="list-group" ng-class="{'dropdown-menu':deviceSize=='xs'}">
+					<div class="col-md-2">
+						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100">
+							<button ng-if="deviceSize=='xs'" type="button" class="w-100 btn btn-default dropdown-toggle"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bars"></i> Реестры <span class="caret"></span></button>
+							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
 								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Реестры</b></li>
-								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/living-modified-organisms">Реестр ЖИО</a></li>
-								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/organisms">Реестр организмов</a></li>
-								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Реестр генетических элементов</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
+										href="/registries/living-modified-organisms">Реестр ЖИО</a></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url
+										href="/registries/organisms">Реестр организмов</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
+										href="/registries/genetic-elements">Реестр генетических элементов</a></li>
 							</ul>
 						</div>
 					</div>
-					<div class="col-md-10  col-xs-12">
-						<p class="p-borders padding-top-10">В реестр организмов включена краткая информация об организмах, зарегистрированных в МПБ в качестве родительских организмов, организмов-реципиентов или организмов-доноров. В реестр включены ссылки на записи по каждому организму, в которых можно найти дополнительную информацию о соответствующих биологических характеристиках, включая информацию о таксономической классификации, общепринятом названии, происхождении, центре происхождения и центре генетического разнообразия. Ссылки на записи, относящиеся к организму, приводятся в нижней части каждой отдельной записи.</p>
-						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Загрузка ....</h1>
+					<div class="col-12 col-md-10 ps-3">
+						<p class="p-borders p-bo pt-2">В реестр организмов включена краткая информация об организмах, зарегистрированных в МПБ в качестве родительских организмов, организмов-реципиентов или организмов-доноров. В реестр включены ссылки на записи по каждому организму, в которых можно найти дополнительную информацию о соответствующих биологических характеристиках, включая информацию о таксономической классификации, общепринятом названии, происхождении, центре происхождения и центре генетического разнообразия. Ссылки на записи, относящиеся к организму, приводятся в нижней части каждой отдельной записи.</p>
+						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=organism" >here</a> to perform an in-depth search of all Organism records available in this Registry.</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3>При загрузке записей реестра произошла ошибка, попробуйте еще раз.</h3></div>
 						<div ng-if="!isLoading && !isError">						
 						<div class="row">
-							<div class="col-md-12"><strong>Всего записей: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default pull-right" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Экспортировать</button>
+							<div class="col-md-12"><strong>Всего записей: <span ng-bind="::numFound" class="text-bold"></span></strong><button type="button" class="btn btn-default float-end" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport"><i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Экспортировать</button>
 							</div>
 						</div>
-						<div>
-							<table class="table" id="orgaExport">
-								<thead>
-									<tr>
-										<th class="display-18">ИД записи</th>
-										<th class="display-20">Научное название</th>
-										<th class="display-17 hidden-xs">Общепринятое название</th>
-										<th class="display-45 hidden-xs">Описание</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr ng-repeat="row in ::orgaRecords">
-										<td class="tableexport-string"><a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}"><span class="text-uppercase" ng-bind="::row.recordId"></span></a></td>
-										<td class="tableexport-string"><span ng-bind="::row.taxonomicStatus"></span></td>
-										<td class="tableexport-string hidden-xs"><span ng-bind="::row.commonName.join(', ')"></span></td>
-										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.description"></span></td>
-										
-									</tr>
-								</tbody>
-							</table>
-						</div>
-					</div>	
 					</div>
 				</div>
 			</div>

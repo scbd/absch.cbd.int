@@ -1,8 +1,8 @@
 ﻿<div>
 
-    <div class="well bg-white" style="background-color: white!important" id="guide" >
+    <div class="card bg-white" style="background-color: white!important" id="guide" >
 
-    <style> figure > img{ max-width: 100%; height: auto; } </style><a rel="noopener" href="/kb/tags/getting-help/Step-by-step-guides/5bc4d04bd70fbc00017d1fd6" class="pull-left bold color-blue" style="text-transform: uppercase;font-size: 10px;">Пошаговые инструкции</a><div class="pull-right" style="text-transform: uppercase;font-size: 10px;"><a rel="noopener" href="" class="color-grey" ng-click="expand=!expand; expandAll(expand);"><span ng-if="!expand">+ развернуть</span> <span ng-if="expand">- свернуть</span></a> <!-- &nbsp; | &nbsp; print &nbsp; | &nbsp; email  --></div><br><h2 class="color-green bold" ><span ng-bind="format.summary| lstring:locale"></span></h2>
+    <style> figure > img{ max-width: 100%; height: auto; } </style><a rel="noopener" translation-url href="/kb/tags/getting-help/Step-by-step-guides/5bc4d04bd70fbc00017d1fd6" class="float-start bold color-blue" style="text-transform: uppercase;font-size: 10px;">Пошаговые инструкции</a><div class="float-end" style="text-transform: uppercase;font-size: 10px;"><a rel="noopener" href="" class="color-grey" ng-click="expand=!expand; expandAll(expand);"><span ng-if="!expand">+ развернуть</span> <span ng-if="expand">- свернуть</span></a> <!-- &nbsp; | &nbsp; print &nbsp; | &nbsp; email  --></div><br><h2 class="color-green bold" ><span ng-bind="format.summary| lstring:locale"></span></h2>
     <hr>
         <div><span ng-click="show_introABSCH=!show_introABSCH" ng-class="{'color-grey':!showFAQ, 'color-black':showFAQ}" style="font-weight:normal;font-size:1.4em; cursor:pointer;"><i class="fa" ng-class="{'fa-plus':!show_introABSCH, 'fa-minus color-grey':show_introABSCH}"></i> <span  ng-bind-html="introABSCH.title | lstring:locale"></span></span><div ng-show="show_introABSCH" style="background-color:#e9e9e9;margin-bottom:10px;padding:20px;border-top:#ddd 1px solid;">
                 <p ng-bind-html="introABSCH.content | lstring:locale"></p>

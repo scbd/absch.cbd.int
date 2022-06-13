@@ -1,0 +1,206 @@
+﻿<div  id="RegisterPage">
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet">
+    <link href="/app/css/AdminLTE.min.css" rel="stylesheet" />
+    <style> #National .statsBox { background-color: #428BCA; padding: 5px; border-radius: 3px; text-align: center; margin: auto; width: 100%; margin-top: 10px!important; } #Reference .statsBox { background-color: #fa6938; padding: 5px; min-height: 100px; border-radius: 3px; text-align: center; margin: auto; width: 100%; } #SCBDRecs .statsBox { background-color: #999; padding: 5px; height: 100px; border-radius: 3px; text-align: center; margin: auto; width: 100%; } #National .statsBox:hover { background-color: #333; cursor: pointer; } .countryCount { font-size: 14px; } .countryText { font-size: 14px; color: #CCC!important; position: relative; top: 1px; font-weight: 500; } .havePublished { /*color: #bbb!important;*/ width: 100%; white-space: nowrap; } .recordText { color: #CCC!important; line-height: 1; padding-top: 3px; font-weight: 500; } .recordText> .helpinfoInline { color: #CCC!important; } .center { margin: auto; width: 100%; text-align: center; } .flex { display: flex; justify-content: space-between; } .tooltip-inner { font-size: 14px; text-align: left; } .dateType .btn-group, .dateType button { width: 100% !important; } .chart { position: relative; overflow: hidden; width: 100%; } .legend{ list-style: none; } .legend li{ display: inline; padding:10px; } </style><span register-top-menu></span><div class="innerPageContent register-content card card-1-notrans" style="margin:0;padding:20px;">
+
+        <div class="register-content-header bg-pink color-white">
+            <div style="padding:10px 10px;">
+                <h3>Rapport de l'admin</h3>
+            </div>
+        </div>
+        <div class="register-content-content" style="background:#d2d6de;">
+
+            <legend name="formInfo" style="display:none"></legend><!--<div style="font-weight:bold;">Records which have been not approved since 12 weeks.</div>--><div class="registerpage-content">
+
+                <div class="alert alert-danger" ng-show="__error"><strong>Erreur :</strong> <span ng-bind="__error"></span></div>
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <h3 class="box-title">Filtres</h3>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-xs-2">
+                                <div class="km-control-group dateType" name="dateType" caption="Date à utiliser">
+                                    <div km-select ng-model="filters.dateType" binding-type="string" placeholder="Date type" items="options.filterDateTypes()"></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div class="km-control-group" name="startDate" required caption="Date de début">
+                                    <div km-date placeholder="AAAA-MM-JJ" required name="startDate" ng-model="filters.startDate"></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5">
+                                <div class="km-control-group" name="endDate" caption="Date de fin">
+                                    <div km-date placeholder="AAAA-MM-JJ" name="endDate" ng-model="filters.endDate"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="float-start"><!-- <strong>Type:</strong> --><div km-select ng-model="filters.countries" multiple binding-type="string" placeholder="Pays" items="options.filterCountries()"></div><!-- <strong>Status:</strong> --><div km-select ng-model="filters.partyStatus" binding-type="string" placeholder="Statut de la Partie" items="options.filterPartyStatus()"></div>
+                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.regionalMeasures" />Inclure les mesures régionales virtuelles</label>
+                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.excludeNFP" />Exclure le correspondant national</label>
+                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.cumulative" />Graphique cumulatif</label>
+                                    <label class="checkbox-inline"><input type="checkbox" ng-model="filters.excludeTotalCount" />Exclure la ligne de décompte total</label>
+                                </div>
+                                <div class="float-end">
+                                    <input type="button" class="btn btn-primary" ng-click="loadFacets()" value="Filter" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="table " style="margin-top:15px;">
+                    <div ng-show="!__error">
+
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Enregistrements nationaux</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row-fluid center" id="National">                                
+                                    <div class="row">
+                                        <div class="col-xs-12"><i class="fa fa-table" aria-hidden="true" ng-click="nationalChart=false" style="cursor: pointer"></i> <i class="fa fa-line-chart" aria-hidden="true"  ng-click="nationalChart=true"style="cursor: pointer"></i></div>
+                                        <div class="col-xs-6">
+                                            <div ng-hide="!nationalChart">
+                                                <ul class="legend" >
+                                                    <li><span style="background-color:rgba(60,141,188,0.9)">&nbsp;&nbsp;&nbsp;</span> Enregistrements nationaux</li>
+                                                    <li ng-repeat="(key, legend) in nationalRecords" ng-if="legend.includeInGraph"><span style="background-color:{{legend.color}}">&nbsp;&nbsp;&nbsp;</span> <span ng-bind="key|schemaShortName"></span></li>
+                                                </ul>
+                                                <div class="chart">
+                                                    <canvas id="nationalRecordsChart" style="width: 332px; height: 80%;"></canvas>
+                                                </div>
+                                            </div>
+                                            <div ng-show="!nationalChart" style="max-height:400px;overflow:scroll">
+                                                <table class="table table-hover" style="text-align: left">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th ng-repeat="(key, col) in nationalRecordsTableData[0]"><span ng-bind="key | schemaShortName"></span></th>
+                                                        </tr>
+                                                        <tr ng-repeat="record in nationalRecordsTableData" >                                                            
+                                                            <td ng-repeat="col in record" ng-bind="col"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="col-sm-6 col-md-4 flex" style="vertical-align:middle!important" ng-repeat="(key, schema) in nationalRecords"
+                                            ng-hide="filters.excludeNFP && key=='focalPoint'"><a rel="noopener" translation-url class="statsBox color-white" ng-href="/search/nationalRecords/?schema={{key|encodeURIComponent}}"><div style="vertical-align:middle!important;"><span class="countryCount badge bg-white" ng-bind="schema.countryCount"></span> &nbsp; <span class="countryText">Pays</span></div>
+                                                    <div class="havePublished label">- ont publié <span class="color-white" ng-bind="schema.recordCount"></span> -</div>
+                                                    <div class="recordText"><span ng-bind="key | schemaName"></span></div></a></div>
+                                           
+                                            <div class="col-xs-12 " style="padding-top: 20px; text-align: left" >
+                                                <div class="box box-danger bg-aqua-active">  
+                                                     <div class="box-header with-border">
+                                                        <h3 class="box-title">Inclure un schéma graphique</h3>
+                                                    </div>                                                 
+                                                    <div class="box-body">                                                        
+                                                        <label class="checkbox-inline" style="margin-left: 10px;"><input ng-disabled="!nationalChart"  class="flat-red" type="checkbox" ng-model="filters.includeAllSchemas"  ng-change="checkAll(nationalRecords, filters.includeAllSchemas)"/>Tous les schémas</label>
+                                                        <label class="checkbox-inline" ng-repeat="(key, schema) in nationalRecords"
+                                                            ng-hide="filters.excludeNFP && key=='focalPoint'">
+                                                            <input ng-disabled="!nationalChart" class="flat-red" type="checkbox" ng-model="schema.includeInGraph" ng-change="loadSchemaGraphData(schema, key)" /><span ng-bind="key | schemaName"></span></label><span ng-if="!nationalChart"></br></br> *sélection du schéma uniquement disponible en mode graphique, basculez sur le mode graphique pour l’activer</span></div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div ng-class="{'overlay':loadingFacets}" ng-if="loadingFacets"><i class="fa fa-refresh fa-spin"></i></div><!-- /.box-body --></div>
+
+
+                        <div class="clearfix"></div>
+
+                         <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Fichiers de référence</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row-fluid center" id="Reference">                                    
+                                    <div class="row">
+                                        <div class="col-xs-12"><i class="fa fa-table" aria-hidden="true" ng-click="referenceChart=false" style="cursor: pointer"></i> <i class="fa fa-line-chart" aria-hidden="true"  ng-click="referenceChart=true"style="cursor: pointer"></i></div>
+                                        <div class="col-xs-6">
+                                           <div ng-hide="!referenceChart">
+                                                <ul class="legend" >
+                                                    <li><span style="background-color:#fa6938">&nbsp;&nbsp;&nbsp;</span> Fichiers de référence</li>
+                                                    <li ng-repeat="(key, legend) in referenceRecords" ng-if="legend.includeInGraph"><span style="background-color:{{legend.color}}">&nbsp;&nbsp;&nbsp;</span> <span ng-bind="key|schemaShortName"></span></li>
+                                                </ul>
+                                                <div class="chart">
+                                                    <canvas id="referenceRecordsChart" style="width: 332px; height: 80%;"></canvas>
+                                                </div>
+                                            </div>
+                                            <div ng-show="!referenceChart" style="max-height:400px;overflow:scroll">
+                                                <table class="table table-hover" style="text-align: left">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th ng-repeat="(key, col) in referenceRecordsTableData[0]"><span ng-bind="key | schemaShortName"></span></th>
+                                                        </tr>
+                                                        <tr ng-repeat="record in referenceRecordsTableData" >                                                            
+                                                            <td ng-repeat="col in record" ng-bind="col"></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-6">
+                                            <div class="col-sm-6 col-md-4 flex" style="vertical-align:middle!important;margin-bottom:5px" ng-repeat="(key, schema) in referenceRecords"><a rel="noopener" translation-url class="statsBox color-white" ng-href="/search/referenceRecords/?schema={{key|encodeURIComponent}}"><div style="vertical-align:middle!important;"><span class="countryCount badge bg-white" ng-bind="schema.recordCount"></span></div>                                                   
+                                                    <div class="recordText"><span ng-bind="key | schemaName"></span></div></a></div>
+                                           
+                                            <div class="col-xs-12 " style="padding-top: 20px; text-align: left" >
+                                                <div class="box box-danger bg-orange">  
+                                                     <div class="box-header with-border">
+                                                        <h3 class="box-title">Inclure un schéma graphique</h3>
+                                                    </div>                                                 
+                                                    <div class="box-body">                                                        
+                                                        <label class="checkbox-inline" style="margin-left: 10px;"><input  ng-disabled="!referenceChart" class="flat-red" type="checkbox" ng-model="filters.includeAllReferenceSchemas"  ng-change="checkAll(referenceRecords, filters.includeAllReferenceSchemas)"/>Tous les schémas</label>
+                                                        <label class="checkbox-inline" ng-repeat="(key, schema) in referenceRecords">
+                                                            <input  ng-disabled="!referenceChart" class="flat-red" type="checkbox" ng-model="schema.includeInGraph" ng-change="loadSchemaGraphData(schema, key)" /><span ng-bind="key | schemaName"></span></label><span ng-if="!nationalChart"></br></br> *sélection du schéma uniquement disponible en mode graphique, basculez sur le mode graphique pour l’activer</span></div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div ng-class="{'overlay':loadingFacets}" ng-if="loadingFacets"><i class="fa fa-refresh fa-spin"></i></div><!-- /.box-body --></div>
+
+
+
+                        <div class="clearfix"></div>
+
+                         <div class="box box-info">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Combiner les graphiques</h3>
+                            </div>
+                            <div class="box-body">
+                                <div class="row-fluid center" id="Reference">                                    
+                                    <div class="row">                                        
+                                        <div class="col-xs-12">
+                                           <div>
+                                                <ul class="legend" >
+                                                    <li><span style="background-color:rgba(60,141,188,0.9)">&nbsp;&nbsp;&nbsp;</span> Enregistrements nationaux</li>
+                                                    <li><span style="background-color:#fa6938">&nbsp;&nbsp;&nbsp;</span> Fichiers de référence</li>
+                                                </ul>
+                                                <div class="chart" style="">
+                                                    <canvas id="combineRecordsChart" style="width: 332px; height: 80%;max-height:500px;"></canvas>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div ng-class="{'overlay':loadingFacets}" ng-if="loadingFacets"><i class="fa fa-refresh fa-spin"></i></div><!-- /.box-body --></div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

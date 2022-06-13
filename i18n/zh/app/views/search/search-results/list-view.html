@@ -1,17 +1,20 @@
 ﻿<div class="row">
     <div class="col-md-12">
-        <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
-            page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-            num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
-
+        <div class="d-flex justify-content-center">
+            <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+                page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+                num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
+        </div>    
         <div ng-if="loading"><i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> 正在加载...</div>
-        <div ng-repeat="doc in searchResult.docs">
+        <div ng-repeat="doc in searchResult.docs" class="mt-1">
             <result-default doc="doc" external-link="true" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>  
         </div>
         <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">未找到记录</h4>
         <div ng-if="loading && searchResult.pageCount>0"><i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> 正在加载...</div>
-        <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
-            page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
-            num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
+        <div class="d-flex justify-content-center">
+            <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+                page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
+                num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
+        </div>        
     </div>
 </div>

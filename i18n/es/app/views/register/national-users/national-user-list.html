@@ -1,0 +1,112 @@
+﻿<div id="RegisterPage">
+
+    <link href="/app/css/register.css" rel="stylesheet">
+    <link href="/app/css/record.css" rel="stylesheet"><span register-top-menu></span><style> .ngdialog-content { background: transparent !important; } .ngdialog.ngdialog-theme-default.wide .ngdialog-content { width: 750px !important; } </style>
+
+
+    <div class="innerPageContent register-content card card-1-notrans mb-5">
+
+        <div class="register-content-header bg-darkgrey text-white">
+            <div class="p-2">
+                <h3>User Management <span class="helpinfoInline"><i class="bi bi-info-circle-fill helpicon float-end" ng-click="showInfo = !showInfo"></i></span></h3><!--help info----------------------------><div ng-if="showInfo" class="p-3 card well-help"><strong>Gestión de los usuarios autorizados del Centro de Intercambio de la Información sobre APB</strong><p>Esta página permite que los puntos focales nacionales designen o realicen cambios en la designación de una autoridad publicadora y que la autoridad publicadora designe o actualice a los usuarios nacionales autorizados. A continuación usted encontrará a los usuarios autorizados en el Centro de Intercambio de la Información sobre APB a los que se ha otorgado permiso para trabajar con los registros nacionales de su país. Puede seleccionar una cuenta particular del CDB y hacer clic en "editar" para designar o revocar funciones (por ejemplo, cambiar la autoridad publicadora o borrar un usuario nacional autorizado). Si una persona que ya posee una cuenta en el CDB no aparece como un usuario autorizado en el Centro de Intercambio de la Información sobre APB, puede encontrarlo haciendo clic en "Agregar un usuario autorizado". Usando esta propiedad, puede buscar entre todas las cuentas del CDB que utilizan sus direcciones de correo electrónico y asignarles una función de autoridad publicadora o de usuario nacional autorizado. Esta propiedad también permite asignar funciones a alguien que todavía carece de una cuenta en el CDB. Para hacer esto, haga clic en "Agregar un usuario autorizado" e ingrese el correo electrónico y otra información sobre la persona que desearía incluir como autoridad publicadora o usuario nacional autorizado. El Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios le enviará una solicitud automática por correo electrónico para activar su cuenta. Una vez que se hayan activado las cuentas en el CDB, pueden empezar a trabajar con los registros nacionales.</p><strong>Funciones de las autoridades publicadoras</strong><p>La autoridad publicadora es responsable de:<ul>
+                        <li>Autorizar la publicación de todos los registros nacionales registrados en el Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios.</li>
+                        <li>Eliminar registros ya publicados en el Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios, si fuese necesario.</li>
+                        <li>Garantizar que toda la información que se publica en el Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios esté completa y actualizada y sea pertinente.</li>
+                        <li>Garantizar que no se publiquen datos confidenciales en el Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios. En el Centro de Intercambio de Información sobre Acceso y Participación en los Beneficios no se incluye información confidencial; toda la información publicada es de conocimiento público y el público general puede acceder a ella.</li>
+                    </ul>
+                    </p><strong>Funciones de los usuarios nacionales autorizados</strong><p>La función de los usuarios nacionales autorizados es prestar ayuda a la autoridad publicadora en la preparación del borrador de los registros nacionales. Los usuarios nacionales autorizados solo pueden crear y gestionar registros en borrador que luego son enviados a la autoridad publicadora a fin de que sean publicados.</p>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="register-content-content">
+            <div class="row">
+
+
+                <div class="col-12" ng-show="error">
+
+                    <div ng-switch="error.code + '-' + error.field">
+                        <div class="alert alert-warning" ng-switch-when="mandatory-government"><b>¡Uy!</b> No está autorizado a acceder a esta página. Esta página solo está disponible para los usuarios nacionales. Por favor, contáctese con absch@cbd.int si necesita ayuda.</div>
+                        <div class="alert alert-warning" ng-switch-when="forbidden-"><b>¡Uy!</b> Lo lamentamos, pero no está autorizado a acceder a esta página.</div>
+                        <div class="alert alert-danger" ng-switch-default><b>¡Uy!</b> Lo lamentamos, pero hubo un problema.<span ng-bind="error|json"></span></div>
+                    </div>
+
+                </div>
+
+                <div class="offset-md-8 col-md-4" ng-hide="error">
+                    <div class="input-group mb-1">
+                        <input type="text" class="form-control" ng-model="searchText.$" ng-disabled="loading"
+                            placeholder="Buscar dentro de la lista de usuarios nacionales..."><span class="input-group-text" id="basic-addon1"><i class="bi bi-search"></i></span></div>
+                </div>
+
+                <div class="col-12" ng-hide="error">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-hover table-light w-100">
+                            <thead>
+                                <tr class="text-secondary">
+                                    <th>Usuario</th>
+                                    <th>Organización/División</th>
+                                    <th style="max-width:20rem">Funciones</th>
+                                    <th class="text-end">
+                                        <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                            ng-click="search()" ng-disabled="loading || !canAdd()">Add <span class="d-none d-sm-inline">Authorized User</span> <i
+                                                class="bi bi-plus-circle"></i></button>
+                                    </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr class="text-secondary"
+                                ng-repeat="u in users | filter:defaultFilter | filter:searchText | orderBy:sortKey ">
+                                <td><b><span ng-bind="u.firstName+' '+u.lastName"></span></b> <br> <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{u.email}}"
+                                        ng-bind="u.email"></a></td>
+    
+                                <td ng-bind="u.organization" class="fs-small-8"></td>
+    
+                                <td><span ng-repeat="rid in u.roles|filter:isContextRole"><span class="badge bg-secondary fw-bold fs-small-6"
+                                            ng-bind="roles[rid].name"></span> <br> </span> <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles"
+                                        ng-show="(u.roles|filter:isNotContextRole).length"><span ng-show="!u.showExtraRoles">Mostrar funciones adicionales<i
+                                                class="fa fa-caret-down"></i></span> <span ng-show=" u.showExtraRoles">Ocultar funciones adicionales <i
+                                                class="fa fa-caret-up"></i></span></a><div ng-if="u.showExtraRoles"><span ng-repeat="rid in u.roles|filter:isNotContextRole"><span class="badge bg-info fw-bold fs-small-6"
+                                                ng-bind="roles[rid].name"></span> <br> </span></div>
+                                </td>
+                                <td class="text-end">
+                                    <div class="btn-group btn-group-sm mt-1" role="group" aria-label="...">
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="edit(u)"
+                                            ng-disabled="!canEdit(u)"><i class="bi bi-list-ul"></i></button>
+                                        <button type="button" class="btn btn-outline-secondary" ng-click="dropUser(u)"
+                                            ng-disabled="!canDrop(u)"><i class="bi bi-trash-fill"></i></button>
+                                    </div>
+                                </td>
+    
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!users">
+                                <td colspan="4"><i class="fa fa-cog fa-spin fa-fw"></i> Cargando...</td>
+                            </tr>
+
+                            <tr class="text-secondary" ng-if="!!users">
+                                <td colspan="3"><span
+                                        ng-bind="(users | filter:defaultFilter | filter:searchText).length+' of '+users.length"></span> | <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        ng-show="!$parent.showAll"
+                                        ng-click="$parent.showAll=true;$parent.searchText={}">Mostrar más <i class="bi bi-caret-down-fill"></i></a> <a class="text-decoration-none" rel="noopener" translation-url href="#"
+                                        ng-show=" $parent.showAll"
+                                        ng-click="$parent.showAll=false;$parent.searchText={}">Mostrar menos <i class="bi bi-caret-up-fill"></i></a></td>
+                                <td class="text-end">
+                                    <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
+                                     ng-click="search()" ng-disabled="loading || !canAdd()">Agregar un usuario autorizado <i class="bi bi-plus-circle"></i></button>
+                                </td>
+                            </tr>
+                              </tbody>
+                        </table>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

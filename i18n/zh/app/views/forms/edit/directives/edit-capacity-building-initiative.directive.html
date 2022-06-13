@@ -15,7 +15,7 @@
 
 					<div ng-show="tab=='edit'" km-tab="edit">
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 
 								<legend>一般信息</legend>
 
@@ -88,7 +88,7 @@
 												</div>
 												<div class="col-md-1" ng-hide="!isGlobalOrRegional()">和/或</div>
 												<div class="col-md-3">
-													<div class="km-control-group" style="text-align: left;"  caption="">
+													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">国家</label>
 														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="请选择选项" items="options.countries()"></div>
 													</div>
@@ -99,7 +99,7 @@
 
 								<div class="row" ng-if="document.geographicScope && isSubnational()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countryRegions" caption="">
+										<div class="km-control-group countries-dropdown" name="countryRegions" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">国家</label>
 											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="请选择选项" items="options.countries()"></div>
 										</div>
@@ -113,7 +113,7 @@
 								</div>
 								<div class="row" ng-if="document.geographicScope && isCommunity()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countries" caption="">
+										<div class="km-control-group countries-dropdown"  name="countries" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">国家</label>
 											<div km-select multiple required ng-model="countryRegions.countries" placeholder="请选择选项" items="options.countries()"></div>
 										</div>
@@ -163,14 +163,15 @@
 																		style="display:inline-block;width:100px"/>
 																</div>
 																<div class="col-md-2">
-																	<div class="km-control-group" name="durationText" caption="">
-																		<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																	<div name="durationText" caption="">
+																		<div style="display: none;" name="durationText">
 																			<label name="durationText" for="durationText">持续时间(天/月/年)</label>
 																		</div>
-																		<select name="durationText" ng-model="document.durationText"  class="form-control"
+																		<select name="durationText" ng-model="document.durationText"  class="form-control form-select"
 																			style="display:inline-block;width:100px" placeholder="eg. Months"
 																			ng-options="obj.value as obj.text for obj in timing">
 																		</select>
+																		
 																	</div>
 																</div>
 															</div>
@@ -183,13 +184,13 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="activityScope" caption="能力发展倡议类型">
-											<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="能力发展倡议类型">
+											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row mt-2">
 									<div class="col-md-12">
 										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="是否是更大项目或方案的组成部分？">
 											<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
@@ -214,12 +215,12 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required  caption="实施和/或执行该倡议的机构或组织">
 											<div class="help-info">在某些情况下，一个机构可同时扮演实施角色和执行角色。在这些情况下，请同时勾选两个选项框。</div>
-											<div class="checkbox"><label for="isImplementedByAgencies"><input type="checkbox" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)">实施机构或组织</label></div>
+											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />实施机构或组织</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="请选择实施机构或组织">
-														<div class="help-info">实施机构是指负责制定倡议，监控实施，以及监督和评估的组织或法律实体，其任务还包括提供资金、确保信托标准和质量保证得到应用，以及编制项目完成报告。执行机构是指对倡议的完成最终负责的实体，并向捐助者负责。</div>
+														<div class="help-info pt-1">实施机构是指负责制定倡议，监控实施，以及监督和评估的组织或法律实体，其任务还包括提供资金、确保信托标准和质量保证得到应用，以及编制项目完成报告。执行机构是指对倡议的完成最终负责的实体，并向捐助者负责。</div>
 
 														<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
@@ -227,21 +228,21 @@
 												</div>
 											</div>
 
-											<div class="checkbox"><label for="isExecutededByAgencies"><input id="isExecutededByAgencies" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)">执行机构或组织</label></div>
+											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />执行机构或组织</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="请选择执行机构或组织">
-														<div class="help-info">执行机构是指直接管理倡议的组织/机构，包括其活动的日常规划、协调和执行，监测和报告进度，采购和管理资源（员工、资金、设备等），以及执行其他项目管理职能。</div>
+														<div class="help-info pt-1">执行机构是指直接管理倡议的组织/机构，包括其活动的日常规划、协调和执行，监测和报告进度，采购和管理资源（员工、资金、设备等），以及执行其他项目管理职能。</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners"><input type="checkbox" id="isCollaboratededByPartners" ng-model="document.isCollaboratededByPartners">合作伙伴</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />合作伙伴</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="请选择合作伙伴">
-														<div class="help-info">合作伙伴是指对该倡议有重大财务或其他贡献，和/或积极支持或配合该倡议实施的实体或组织。</div>
+														<div class="help-info pt-1">合作伙伴是指对该倡议有重大财务或其他贡献，和/或积极支持或配合该倡议实施的实体或组织。</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
@@ -253,7 +254,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>详细信息</legend>
 
 								<div class="row">
@@ -282,7 +283,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>与对该倡议的主题报道相关信息</legend>
 								<div class="row">
 									<div class="col-md-12">
@@ -328,7 +329,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>资金信息</legend>
 
 								<div class="row">
@@ -368,7 +369,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="totalBudget" caption="总预算（金额，美元）">
 											<div class="help-info">这可包括以货币形式表达的实物捐助。输入金额时，请不要使用空格、句号或逗号。</div>
-											<div class="input-group"><span class="input-group-addon">美元</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
+											<div class="input-group"><span class="input-group-text">美元</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
 											</div>
 										</div>
 									</div>
@@ -377,7 +378,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>能力发展成果</legend><strong>结果</strong><div class="help-info">一旦从正在进行的或已完成的倡议中得到一些结果（产出、成果或影响）或最佳做法以及涉及的经验教训，则可以提供这些信息。</div>
 									<div class="km-control-group" name="resultsAchievements" caption="">
 										<div class="row">
@@ -415,7 +416,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>补充信息</legend>
 								<div class="row">
 									<div class="col-md-12">

@@ -1,40 +1,29 @@
 ﻿<div id="Record" class="record panel panel-default" dir="rtl">
-	<div class="panel-heading bg-darkgrey"><h4>الاجتماعات</h4></div>
+	<div class="panel-heading bg-darkgrey"><h4></h4></div>
 	<div class="record-body panel-body">
 
 			
-		<document-date></document-date><!-- <div ng-show="document.symbol_s">
-			<label>Symbol</label>
-			<span class="km-value">
-				{{document.symbol_s}}
-			</span>
-		</div> --><div ng-show="document.title_s">
-			<label>العنوان</label><span class="km-value">{{document.title_s}}</span></div>
+		<document-date></document-date><div ng-show="document.title_s">
+			<label></label></div>
 
 		<div ng-show="document.startDate_dt">
-			<label>تاريخ البدء</label><span class="km-value">{{document.startDate_dt | moment:'utc' | formatDate}}</span></div>
+			<label></label></div>
 		<div ng-show="document.endDate_dt">
-			<label>تاريخ الانتهاء</label><span class="km-value">{{document.endDate_dt | moment:'utc' | formatDate}}</span></div>
+			<label></label></div>
 
 		<div ng-show="document.eventCountry_CEN_s">
-			<label>بلد الحدث أو الفعالية</label><span class="km-value">{{document.eventCountry_CEN_s |stringToJSON | lstring:locale}}</span></div>
+			<label></label></div>
 
 		<div ng-show="document.eventCity_s">
-			<label>مدينة الحدث أو الفعالية</label><span class="km-value">{{document.eventCity_s}}</span></div>
+			<label></label></div>
 		<div ng-show="document.url_ss">
-			<label>وثائق الاجتماعات</label><span class="km-value"><ul class="list">
-					<li ng-repeat="url in document.url_ss"><a rel="noopener" translation-url  ng-href="{{url}}" target="_"><span ng-bind="url"></span></a></li>
-				</ul></span></div><!--
-		<div ng-show="document.themes_CEN_ss">
-			<label>Themes</label>
-			<ul class="km-value">
-				<li ng-repeat="item in document.themes_CEN_ss">{{item |stringToJSON  | lstring:locale}}</li>
-			</ul>
-		</div> --><div ng-show="document.thematicAreas_CEN_ss">
-			<label>Thematic Areas</label>
+			<label></label><ul class="list">
+					<li ng-repeat="url in document.url_ss"></li>
+				</ul></div><div ng-show="document.thematicAreas_CEN_ss">
+			<label></label>
 			<div class="km-value">
 				<ul >
-					<li ng-repeat="item in document.thematicAreas_CEN_ss">{{item |stringToJSON | lstring:locale}}</li>
+					<li ng-repeat="item in document.thematicAreas_CEN_ss"></li>
 				</ul>
 			</div>
 		</div>

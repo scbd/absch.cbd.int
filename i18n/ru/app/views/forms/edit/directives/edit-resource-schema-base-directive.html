@@ -13,7 +13,7 @@
 			
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Общая информация</legend>
 			
                                     <div class="row">
@@ -101,7 +101,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Доступ к ресурсу(-ам)</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -124,7 +124,7 @@
 							</section>
 
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Информация о содержании ресурса</legend>
 									<div class="row">
 										<div class="col-xs-12">
@@ -164,7 +164,7 @@
 								
 							</section>
 							<section>
-								<div class="well no-shadow bg-white">
+								<div class="no-shadow bg-white">
 									<legend>Ключевые слова для облегчения поиска информации в механизмах посредничества</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
@@ -177,7 +177,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="cbdSubjects" caption="Тематические области КБР">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="Тематические области КБР">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -186,13 +186,13 @@
 
 								</div>
 							</section><!-- Till now all fields are common for all CHs  --> <!-- IF BCH START --><section ng-if="isBCH">
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Ключевые слова, имеющие отношение к биобезопасности</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="biosafety.subjects" caption="Тематические области биобезопасности">
+										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="Тематические области биобезопасности">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
-											 binding-type="term[]" tabular-shape="true" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
+											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div><!-- TODO: need to apply a condition --><div >
@@ -241,7 +241,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Имеет ли данный ресурс отношение к одной или нескольким конкретным категориям организмов?" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Идентификация организма(-ов)" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
@@ -261,7 +261,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressGenes" caption="Имеет ли данный ресурс отношение к одному или нескольким конкретным генетическим элементам?" required>
+											<div class="km-control-group" name="biosafety.addressGenes" caption="Идентификация гена(-ов)" required>
 												<div class="help-block">Информация о генетических элементах относится к последовательностям ДНК, включая гены, регуляторные последовательности ДНК и другие нуклеиновые кислоты, использующимся для создания живого измененного организма. Они могут кодировать белок или выполнять конкретную регуляторную функцию.</div>
 												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
 												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
@@ -281,7 +281,7 @@
 								</div>
 							</div>
 						</section><!-- IF BCH END --> <!-- IF ABS START --><section ng-if="isABS">
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Ключевые слова, касающиеся доступа к генетическим ресурсам и совместного использования выгод</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Ключевые слова, касающиеся доступа к генетическим ресурсам и совместного использования выгод</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
 										<div class="km-control-group" name="nagoya.mccKeywords" required caption="Выберите соответствующие ключевые слова, описывающие содержание представляемых кодекса поведения, руководящих принципов и передовых методов и/или стандартов">
@@ -310,7 +310,7 @@
 								</div>
 							</div>
 						</section><!-- IF ABS END --><section>
-							<div class="well no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Дополнительная информация</legend>
+							<div class="no-shadow bg-white"><a rel="noopener" translation-url name="#AdditionalInformation"></a><legend>Дополнительная информация</legend>
 		
 								<div class="row">
 									<div class="col-xs-12">
@@ -333,7 +333,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>Примечания</legend>
 							<div class="row">
 								<div class="col-sm-12">

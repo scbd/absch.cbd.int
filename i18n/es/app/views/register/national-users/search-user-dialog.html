@@ -1,9 +1,10 @@
 ﻿<div class="modal-content">
-    <style> .has-error .fa-validate:before { content: "\f069"; color: #a94442; } .has-warning .fa-validate:before { content: "\f0a5"; color: #c09853; } .has-success .fa-validate:before { content: "\f00c"; color: #468847; } .help-block.error { text-transform: uppercase; font-size: 10px; font-weight: bold; margin-bottom: -10px; } .panel-identity { position: relative; padding-top: 19px; } .panel-identity:after { content: "Identity"; position: absolute; top: -1px; left: -1px; padding: 3px 7px; font-size: 12px; font-weight: bold; background-color: #f5f5f5; border: 1px solid #ddd; color: #9da0a4; height: 1.6em; line-height: 1em; -webkit-border-radius: 4px 0 4px 0; -moz-border-radius: 4px 0 4px 0; border-radius: 4px 0 4px 0; } .panel-identity-new:after { content: "New Identity"; } </style>
+    <style> .has-error .fa-validate:before { content: "\f069"; color: #a94442; } .has-warning .fa-validate:before { content: "\f0a5"; color: #c09853; } .has-success .fa-validate:before { content: "\f00c"; color: #468847; } .help-block.error { text-transform: uppercase; font-size: 10px; font-weight: bold; margin-bottom: -10px; } .panel-identity { position: relative; padding-top: 19px; } .panel-identity:after { content: "Identity"; position: absolute; top: 16px; left: 17px; padding: 3px 7px; font-size: 12px; font-weight: bold; background-color: #f5f5f5; border: 1px solid #ddd; color: #9da0a4; height: 1.6em; line-height: 1em; -webkit-border-radius: 4px 0 4px 0; -moz-border-radius: 4px 0 4px 0; border-radius: 4px 0 4px 0; } .panel-identity-new:after { content: "New Identity"; } </style>
 
     <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
         <h3 class="modal-title">Buscar una persona designada</h3>
+        <button type="button" class="close bg-transparent border-0 fs-5 text-secondary" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
+      
     </div>
 
     <div class="modal-body">
@@ -13,7 +14,7 @@
 
             <div class="form-group" ng-class="{ 'has-warning': form.email.$invalid }">
                 <label>Dirección de correo electrónico de la persona designada</label>
-                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><span class="input-group-addon"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="email@domain.xyz" required><span class="input-group-btn"><button class="btn btn-default" aria-label="Search" type="submit"><i class="fa fa-fw" ng-class="{ 'fa-search' : !searchUserDialogCtrl.loading, 'fa-cog fa-spin' : searchUserDialogCtrl.loading  }"></i></button></span></div>
+                <div class="input-group ps-0 mb-1"><span class="input-group-text"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="email@domain.xyz" required /><span class="input-group-btn"><button class="btn btn-default" aria-label="Search" type="submit"><i class="fa fa-fw" ng-class="{ 'fa-search' : !searchUserDialogCtrl.loading, 'fa-cog fa-spin' : searchUserDialogCtrl.loading  }"></i></button></span></div>
                 <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">Este campo es obligatorio</p>
                 <p class="help-info error" ng-show="form.email.$error.email">Correo electrónico inválido o incompleto</p>
             </div>
@@ -32,7 +33,7 @@
         <div ng-if="!searchUserDialogCtrl.error && searchUserDialogCtrl.user">
 
 
-            <div class="panel panel-default panel-identity panel-identity-new" ng-show="searchUserDialogCtrl.user.new" style=";position:relative">
+            <div class="panel panel-default panel-identity panel-identity-new position-relative" ng-show="searchUserDialogCtrl.user.new" >
 
                 <div class="panel-body">
 
@@ -47,23 +48,23 @@
 
             </div>
 
-            <div class="panel panel-default panel-identity" ng-show="searchUserDialogCtrl.user.userID" style="position:relative;">
+            <div class="panel panel-default panel-identity position-relative" ng-show="searchUserDialogCtrl.user.userID">
 
-                <div class="panel-body">
+                <div class="panel-body p-2 pt-3 border">
 
                     <div class="row" ng-show="searchUserDialogCtrl.user.userID">
 
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="firstName">Nombre</label>
-                                <input type="text" class="form-control" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="<nuevo>">
+                                <input type="text" class="form-control fs-small-8" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="first name" />
                             </div>
                         </div>
 
-                        <div class="col-sm-6 col-xs-12">
+                        <div class="col-sm-6 col-12">
                             <div class="form-group">
                                 <label for="lastName">Apellido</label>
-                                <input type="text" class="form-control" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true">
+                                <input type="text" class="form-control fs-small-8" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true" />
                             </div>
                         </div>
 
@@ -71,25 +72,25 @@
 
                     <div class="row" ng-show="searchUserDialogCtrl.user.userID">
 
-                        <div class="col-xs-12">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="organization">Organización</label>
-                                <input type="text" class="form-control" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true">
+                                <input type="text" class="form-control fs-small-8" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true" />
                             </div>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label>Correo electrónico</label>
-                                <div class="input-group" style="margin-bottom:2px; padding-left: 0px"><span class="input-group-addon"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz">
+                                <div class="input-group mb-1 ps-0"><span class="input-group-text"><i class="fa fa-envelope"></i></span><input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" />
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-lg btn-block btn-primary" ng-click="searchUserDialogCtrl.save()">Seguir con <b><span ng-bind="searchUserDialogCtrl.user.firstName+' '+searchUserDialogCtrl.user.lastName"></span></b><br> <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b></button>
+                    <button type="button" class="btn btn-lg btn-block btn-primary w-100 fs-6" ng-click="searchUserDialogCtrl.save()">Seguir con <b><span ng-bind="searchUserDialogCtrl.user.firstName+' '+searchUserDialogCtrl.user.lastName"></span></b><br> <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b></button>
                 </div>
 
             </div>

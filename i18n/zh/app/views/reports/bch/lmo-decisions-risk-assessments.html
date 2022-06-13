@@ -4,22 +4,22 @@
 
 		<div class="register-content-header bg-darkgrey color-white">
 			<div style="padding:10px 10px;">
-				<h3>改性活生物体</h3>
+				<h3></h3>
 			</div>
 		</div>
 		<div class="register-content-content " style="margin: 10px;">
-			<div style="border: 1px solid #eee;padding: 15px;"><strong>搜索改性活生物体</strong><angucomplete-alt id="lmos" placeholder="Search LMOs" pause="400" selected-object="newLmo" remote-api-handler="loadLMos" 
+			<div style="border: 1px solid #eee;padding: 15px;"><angucomplete-alt id="lmos" placeholder="Search LMOs" pause="400" selected-object="newLmo" remote-api-handler="loadLMos" 
                     data-field="suggestions" title-field="title" description-field="summary" 
                     input-class="form-control form-control-small"></angucomplete-alt>
-            </div><br/><div  block-region activate="loading">
+            </div><div  block-region activate="loading">
                 <div style="border: 1px solid #eee;padding: 15px;">
                         <view-lmo-reference ng-model="identifier" taret="_blank"></view-lmo-reference>
                 </div>
 
-                <ul class="nav nav-tabs">
-                    <li role="presentation" ng-class="{'active' : tab=='lmo'}"><a rel="noopener" data-toggle="tab" href="#lmo" ng-click="changeTab('lmo')">改性活生物体信息</a></li>
-                    <li role="presentation" ng-class="{'active' : tab=='decisions'}"><a rel="noopener" data-toggle="tab" href="#decisions" ng-click="changeTab('decisions')">有关改性活生物体的决定</a></li>
-                    <li role="presentation" ng-class="{'active' : tab=='risk-assessments'}"><a rel="noopener" data-toggle="tab" href="#risk-assessments" ng-click="changeTab('risk-assessments')">风险评估</a></li>
+                <ul class="nav nav-tabs pt-3 pb-1">
+                    <li role="presentation" ></li>
+                    <li role="presentation" ></li>
+                    <li role="presentation" ></li>
                 </ul>
                 <div class="tab-content">
                     <div id="lmo" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='lmo'}" ng-if="tab=='lmo'">
@@ -31,7 +31,7 @@
                     <div id="risk-assessments" class="tab-pane fade bg-white"  ng-class="{'in active' : tab=='risk-assessments'}" ng-if="tab=='risk-assessments'">
                         <lmo-risk-assessments identifier="{{identifier}}"></lmo-risk-assessments>
                     </div>
-                </div><br/><br/></div>
+                </div></div>
 		</div>
 	</div>
 </div>

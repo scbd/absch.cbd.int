@@ -1,6 +1,6 @@
 <div  dir="rtl">
   
-    <div class="innerPageEditForm edit-authority-directive" style="padding: 24px;background-color:#FFF;;border-bottom:2px solid #ccc;">
+    <div class="innerPageEditForm edit-authority-directive">
         <div class="registerpage-content">
 
             <warning-message-cna doc="document"></warning-message-cna>
@@ -19,7 +19,7 @@
                                 <legend name="generalInfo">معلومات عامة</legend>
 
                                 <div class="row">
-                                    <div class="col-xs-12" >
+                                    <div class="col-lg-12" >
                                         <div class="km-control-group" name="header.languages" required caption="يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
@@ -28,7 +28,7 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="government" required caption="البلد">
                                             <div>
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
@@ -41,7 +41,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">                                        
+                                    <div class="col-lg-12">                                        
                                         <div class="km-control-group" name="name" required caption="">
                                             <label name="name" class="control-label" required for="name"><span ng-if="type!='SPCA'">اسم السلطة الوطنية المختصة</span> <span ng-if="type=='SPCA'">اسم السلطة المختصة</span></label>
                                             <div class="help-info">اذكر اسم الجهة المسؤولة، مثل وزارة البيئة. <span ng-if="isAbs">يُرجى العلم أن اسم السلطة الوطنية المختصة سيساعد في تحديد السجل في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع.</span></div>
@@ -57,7 +57,7 @@
                                 <div class="help-info" ng-if="isAbs">تساعد الإحداثيات مستخدمي الموارد الجينية في الاتصال بالسلطة الوطنية المختصة. ينبغي تحديث هذه المعلومات لتزويد المستخدمين بمعلومات حديثة ودقيقة.</div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="address" caption="العنوان">
                                             <div km-textbox-ml ng-model="document.address" rows="2" placeholder="مثال: 413 St-Jacques Ouest, Suite 800"
                                                 locales="document.header.languages"></div>
@@ -66,14 +66,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="city" required caption="المدينة">
                                             <div km-textbox-ml name="city" ng-model="document.city" required
                                                 locales="document.header.languages" placeholder="مثال: Montreal"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="state" caption="الولاية أو المقاطعة">
                                             <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
                                                 placeholder="مثال: Quebec"></div>
@@ -83,14 +83,14 @@
 
                                 <div class="row">
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="postalCode" caption="الرقم أو الرمز البريدي">
                                             <div km-textbox-ml name="postalCode" ng-model="document.postalCode"
                                                 locales="document.header.languages" placeholder="مثال: H2Y 1N9"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6" ng-if="options.countries">
+                                    <div class="col-lg-6" ng-if="options.countries">
                                         <div class="km-control-group" name="country" required caption="بلد جهة الاتصال">
                                             <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
                                                 mapping="genericMapping" selectbox="true" placeholder="يُرجى اختيار البلد..."
@@ -102,7 +102,7 @@
 
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="phones" required caption="Phone number(s)">
                                             <div class="help-info">Please use the following format: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
                                             <div km-inputtext-list name="phones" ng-model="document.phones"
@@ -110,7 +110,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="faxes" caption="Fax number(s)">
                                             <div class="help-info">يُرجى استخدم الترتيب التالي من اليسار إلى اليمين: [الرقم الداخلي، إذا كان متوفرًا] [رقم الهاتف] [كود المدينة] [كود البلد]+</div>
                                             <div km-inputtext-list name="faxes" ng-model="document.faxes"
@@ -120,14 +120,14 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="emails" required caption="Email(s)">
                                             <div km-inputtext-list name="emails" required type="email" ng-model="document.emails"
                                                 placeholder="مثال: secretariat@cbd.int"></div>
                                         </div>
                                     </div>
 
-                                    <div class="col-xs-6">
+                                    <div class="col-lg-6">
                                         <div class="km-control-group" name="websites" caption="Website address(es)">
                                             <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                                 allow-file="false"></div>
@@ -139,7 +139,7 @@
                             <legend name="contactInfo">معلومات الاتصال الإضافية</legend>
 
                             <div class="row">
-                                <div class="col-xs-12">
+                                <div class="col-lg-12">
                                     <div class="km-control-group" name="contacts" caption="مسؤول الاتصال">
                                         <div document-selector ng-model="document.contacts" question="contacts"
                                             ng-disabled="!document.government.identifier" 
@@ -153,7 +153,7 @@
                                 <legend name="policyBasis">أساس أهلية السلطة الوطنية المختصة من الناحية القانونية أو الإدارية أو السياساتية</legend>
                                 <div class="help-info">من الممكن أن يشتمل هذا القسم على إشارة مرجعية لتدابير الحصول على الموارد وتقاسم المنافع ذات الصلة التي تمنح الأهلية والصلاحية للسلطة الوطنية المختصة. ينبغي إدخال سجل تدابير الحصول على الموارد وتقاسم المنافع أولًا من أجل ربط السلطة الوطنية المختصة بالتدابير الملائمة للحصول على الموارد وتقاسم المنافع. لهذا، إذا لم تكن قد أرسلت التدابير الملائمة للحصول على الموارد وتقاسم المنافع، يمكنك حفظ السلطة الوطنية المختصة كمسودة ونشر تدابير الحصول على الموارد وتقاسم المنافع قبل ذلك.<br/> من الممكن أن يشتمل هذا القسم على إشارة مرجعية للتدابير الملائمة لمنح الأهلية والصلاحية اللازمة للسلطة الوطنية المختصة لبروتوكول قرطاجنة. ينبغي إدخال سجل التدابير الملائمة أولًا من أجل ربط السلطة المختصة بالتدابير الملائمة. لذلك، إذا لم تكن قد قدمت التدابير الملائمة بعد، فقد ترغب في حفظ سجل السلطة الوطنية المختصة لبروتوكول قرطاجنة كمسودة ونشر التدابير أولاً، أو ربما يمكنك إدراج التدابير ضمن سجل السلطة الوطنية المختصة.</div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetencyRef" caption="ضع رابط لأي تدابير ملائمة من الناحية القانونية أو الإدارية أو السياساتية.">
                                             <div document-selector ng-disabled="!document.government.identifier" ng-model="document.policyBasisForCompetencyRef"
                                                 question="policyBasisForCompetencyRef"
@@ -164,7 +164,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="policyBasisForCompetency" caption="إذا لزم الأمر، أدخل معلومات إضافية عن الأسس القانونية أو الإدارية أو السياساتية لأهلية السلطة الوطنية المختصة."></div>
                                         <div km-rich-textbox ng-model="document.policyBasisForCompetency" rows="6"
                                             placeholder="" locales="document.header.languages"></div>
@@ -177,7 +177,7 @@
                                 <legend name="responsibilities">المسئوليات</legend>
                                 <div class="help-info">تنص الفقرة 4 من المادة 13 على أنه "في الحالات التي يُعين فيها طرف ما أكثر من سلطة وطنية مختصة، عليه أن يُرسل مع الإخطار إلى الأمانة المعلومات ذات الصلة عن مسؤوليات كل سلطة من هذه السلطات. وحيثما ينطبق الأمر، تبين هذه المعلومات، كحد أدنى، أي سلطة مختصة مسؤولة عن الموارد الجينية المطلوبة".</div>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" ng-show="showResponsibleforAllMsg()" name="responsibleForAllNot"
                                             caption="هناك بالفعل سلطة وطنية مختصة لبلدك، يُرجى تحديد نطاق المسؤوليات لكل سلطة وطنية مختصة."></div>
 
@@ -188,15 +188,15 @@
                                         </div>
                                     </div>
                                 </div><!-- IF NO SECTION --><div ng-class="{'disable':(document.responsibleForAll==true || document.responsibleForAll==null), 'bg-white':!(document.responsibleForAll==true || document.responsibleForAll==null) }"
-                                    class="well no-shadow" style="padding-top:0;padding-bottom:0;">
+                                    class="card no-shadow pt-0 pb-0">
                                     <div class="row">
-                                        <div class="col-xs-12">
+                                        <div class="col-lg-12">
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <h4 ng-show="document.responsibleForAll==null">إذا كانت الإجابة لا، فإن المعلومات التالية مطلوبة.</h4>
                                                     <h4 ng-show="document.responsibleForAll==true">هذا القسم غير إلزامي.</h3>
                                                         <div ng-show="document.responsibleForAll==false">
-                                                            <h4 class="color-red">هذا القسم إلزامي إذا كان هناك أكثر من سلطة وطنية مختصة معينة. يُرجى الحرص على أن يكون لكل سلطة وطنية مختصة وصفٌ وافٍ في كل السجلات المنشورة.</h4>
+                                                            <h4 class="color-red">هذا القسم إلزامي إذا كان هناك أكثر من سلطة وطنية مختصة معينة. Please ensure that the responsibilities for each competent national authority (CNA) are card described in all published records.</h4>
                                                         </div>
 
                                                         <div class="km-control-group" name="responsibilities"
@@ -211,7 +211,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absJurisdiction" caption="منطقة الاختصاص لمنح الوصول للموارد الجينية"
                                                         required>
                                                         <div class="help-info">تساعد المعلومات عن منطقة الاختصاص (الوطني/الفيدرالي أو دون الوطني أو المجتمعي) في تحديد المسؤوليات المختلفة بين السلطات الوطنية المختصة.</div>
@@ -221,7 +221,7 @@
                                                 </div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-xs-6">
+                                                <div class="col-lg-6">
                                                     <div ng-show="showJurisdictionName()">
                                                         <div class="km-control-group" name="absJurisdictionName"
                                                             required caption="Name of the jurisdiction(s)">
@@ -234,7 +234,7 @@
                                             </div>
 
                                             <div class="row">
-                                                <div class="col-xs-12">
+                                                <div class="col-lg-12">
                                                     <div class="km-control-group" name="absGeneticResourceTypes"
                                                         caption="كلمات مفتاحية لوصف نطاق مسؤوليات السلطات الوطنية المختصة">
                                                         <div class="help-info">جمع هذه المعلومات أمر مهم لتيسير عمليات البحث المنسقة خلال السجلات. Please select all relevant keywords that could assist in describing the responsibilities of the competent national authority.</div>
@@ -274,13 +274,13 @@
                             </section>
                             <section  ng-if="isBch && type=='SPCA'">
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibleForAll" required caption="هل هذه هي السلطة المختصة الوحيدة المُعيَّنة بموجب البروتوكول التكميلي في بلدك؟">
                                             <div class="help-info">إذا كانت الإجابة هي "لا"، يرجى تحديد مسؤوليات السلطة المختصة في الإطار أدناه. يُرجى تعبئة نموذج مختلف لكل سلطة مختصة.</div>
                                             <div km-yes-no required ng-model="document.responsibleForAll" locales="document.header.languages"></div>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibilities" required="{{!document.responsibleForAll}}"
                                         caption="وصف مختصر لمسؤوليات السلطة المختصة (300 حرف بحد أقصى)." >
                                         <div class="help-info">هذه المعلومات مطلوبة إذا كانت هناك أكثر من سلطة مختصة.</div>
@@ -298,7 +298,7 @@
                             <section>
                                 <legend>معلومات إضافية</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantInformation" caption="معلومات إضافية">
                                             <div class="help-info">يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.</div>
                                             <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
@@ -308,7 +308,7 @@
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="relevantDocuments" caption="أي وثائق أخرى ذات صلة">
                                             <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
                                             <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
@@ -320,7 +320,7 @@
                             <section>
                                 <legend>ملاحظات</legend>
                                 <div class="row">
-                                    <div class="col-xs-12">
+                                    <div class="col-lg-12">
                                         <div class="km-control-group" name="notes">
                                             <div class="help-info">خانة "الملاحظات" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. This field is not meant to be used for confidential information.</div>
                                             <div km-notes name="notes" ng-model="document.notes"></div>

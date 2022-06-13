@@ -1,6 +1,6 @@
 <div>
 
-	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive" style="padding: 24px;background-color:#FFF;border-bottom:2px solid #ccc;"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
+	<div class="innerPageEditForm" class="innerPageEditForm edit-biosafety-expert-directive"><span block-region activate="isLoading()" ng-if="isLoading()"></span><div class="registerpage-content">
 
 			<workflow-arrow-buttons on-review-language-change="onReviewLanguageChange(lang)" document="getCleanDocument()" languages="document.header.languages" hide-timer="false" tab="tab"
 			 validation-report="validationReport" on-post-close="onPostClose()" on-error="onError(error, errorCode)"
@@ -22,14 +22,14 @@
                             </ul>
                         </div>
                     </div>
-                    <form class="editForm" name="editForm" style="margin-top:0px">
+                    <form class="editForm mt-0" name="editForm">
                         <div class="row">
                             <div class="col-xs-12">
                                 <div class="tab-content">
                                     <div class="tab-pane active" id="part1">
 
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Общая информация</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
@@ -54,7 +54,7 @@
                                     </div>
                                     <div class="tab-pane" id="part2">
 
-										<div class="well no-shadow bg-white">
+										<div class="no-shadow bg-white">
 											<legend>Характеристика эксперта</legend>
 											<div class="row">
 												<div class="col-sm-12">
@@ -87,13 +87,13 @@
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthCountry" caption="Страна рождения">
+													<div class="km-control-group country-list" name="birthCountry" caption="Страна рождения">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group" name="nationalities"  caption="Гражданство(-а)">
+													<div class="km-control-group country-list" name="nationalities"  caption="Гражданство(-а)">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -105,30 +105,31 @@
                                     <div class="tab-pane" id="part3">
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Подробные сведения о текущем месте работы</legend>
                                                 <div class="row">
 		
-													<div class="col-xs-12">
-														<div class="km-control-group" required name="currentEmployment.name" caption="Название работодателя/организации/компании">
-															<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
-																placeholder="пример: Монреальский университет" pause="400" 
-																on-search="onSearchOrganizations(text, locale)" 
-																data-field="suggestions" title-field="title" description-field="summary" 
-																input-class="form-control-small"></div>
+														<div class="col-xs-12">
+															<div class="km-control-group" required name="currentEmployment.name" caption="Название работодателя/организации/компании">
+																<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
+																	placeholder="пример: Монреальский университет" pause="400" 
+																	on-search="onSearchOrganizations(text, locale)" 
+																	data-field="suggestions" title-field="title" description-field="summary" ></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.title" caption="Должность">
-															<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+													<div class="row">
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.title" caption="Должность">
+																<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
+															</div>
+														</div>
+														<div class="col-md-6">
+															<div class="km-control-group" required name="currentEmployment.department" caption="Управление/отдел/подразделение">
+																<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
+															</div>
 														</div>
 													</div>
-													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.department" caption="Управление/отдел/подразделение">
-															<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
-														</div>
-													</div>
-												</div>
 		
 												<div class="row">
 													<div class="col-md-6">
@@ -140,10 +141,10 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.organizationType" caption="Тип организации">
+														<div class="km-control-group organization-dropdown" required name="currentEmployment.organizationType" caption="Тип организации">
 															<div km-select name="currentEmployment.organizationType" required ng-model="document.currentEmployment.organizationType"
 																items="options.organizationTypes()"></div>
-															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" style="padding-top: 5px;;">
+															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" class="pt-1">
 																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="Другой тип организации">
 																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="пример: СКБР" locales="document.header.languages"></div>
 																</div>
@@ -165,7 +166,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>Трудовой стаж</legend>
 												<div class="help-block">Просьба сообщить сведения о соответствующей трудовой деятельности в прошлом.</div>
 												
@@ -174,9 +175,9 @@
 														<label>Countries or regions where you have worked</label>
 													</div>
 	
-													<div class="col-md-5">
+													<div class="col-md-5 mt-1">
 														
-														<div class="km-control-group small"  name="countryRegionsWorkedIn.countries" caption="Countries">
+														<div class="km-control-group small country-list countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="Countries">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
 															ng-model="countryRegionsWorkedIn.countries" placeholder="Выберите вариант(ы)" items="options.countries()"></div>
 														</div>
@@ -232,12 +233,12 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.organizationType" caption="Тип организации">
+														<div class="km-control-group organization-dropdown" name="previousEmployment.organizationType" caption="Тип организации">
 															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group" name="previousEmployment.organizationTypeOther" caption="Другой тип организации">
+															<div class="km-control-group organization-dropdown" name="previousEmployment.organizationTypeOther" caption="Другой тип организации">
 																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="пример: СКБР" locales="document.header.languages"></div>
 															</div>
 														</div>
@@ -259,14 +260,14 @@
                                     <div class="tab-pane" id="part4">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Высшее образование</legend>
 
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend><h3>A. Формальное образование</h3></legend>
 														<div class="panel panel-default" name="primaryEducation">
-															<div class="panel-heading">Базовая степень (например, бакалавр наук по микробиологии)</div>
+															<div class="panel-heading pb-1">Базовая степень (например, бакалавр наук по микробиологии)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -305,7 +306,7 @@
 																</div>															
 															</div>
 														</div><br/><div class="panel panel-default">
-															<div class="panel-heading">Вторая степень (например, магистр наук по микробиологии)</div>
+															<div class="panel-heading pb-1">Вторая степень (например, магистр наук по микробиологии)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -344,7 +345,7 @@
 																</div>																
 															</div>
 														</div><br/><div class="panel panel-default">
-															<div class="panel-heading">Третья степень (например, доктор наук по микробиологии)</div>
+															<div class="panel-heading pb-1">Третья степень (например, доктор наук по микробиологии)</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
@@ -386,7 +387,7 @@
 													</div>
 												</section>
 												<section>
-													<div class="well no-shadow bg-white">
+													<div class="no-shadow bg-white">
 														<legend>B. Другие виды профессиональной подготовки</legend>
 														<div class="row">
 															<div class="col-md-12">
@@ -404,7 +405,7 @@
                                     <div class="tab-pane" id="part5">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Области экспертных знаний</legend>
 
 												<div class="row">
@@ -420,7 +421,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Публикации</legend>
 
 												<div class="row">
@@ -435,7 +436,7 @@
 										</section>
 										
 										<section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Членство в профессиональных организациях</legend>
 												<div class="row">
 													<div class="col-md-12">
@@ -459,7 +460,7 @@
                                     <div class="tab-pane" id="part6">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
                                                 <legend>Знание языков</legend>
 
 												<div class="row">
@@ -520,7 +521,7 @@
                                     <div class="tab-pane" id="part7">
     
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>Срок подтверждения или обновления информации</legend>
 												<div class="help-info">Просьба заметить, что в соответствии с решением BS-IV/4 записи об экспертах остаются в реестре на срок до <u>четырех</u> лет с даты последнего обновления их данных, после чего они удаляются из реестра, за исключением случаев повторного выдвижения этих кандидатур.</div>
 
@@ -528,7 +529,7 @@
 										</section>
 										
                                         <section>
-                                            <div class="well no-shadow bg-white">
+                                            <div class="no-shadow bg-white">
 												<legend>Любая другая актуальная информация</legend>
 												<div class="row">
 													<div class="col-xs-12">

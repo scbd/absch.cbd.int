@@ -1,16 +1,16 @@
 ﻿<div id="searchSortOptions" style="min-width: 450px;overflow: hidden;display: inline-block;">
     
-    <ul class="sort-options pull-right" >        
-        <li id="viewType"><a rel="noopener" href="#" style="color:#555!important;max-height:38px;"><select style="border:0;color:#555!important;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
+    <ul class="sort-options float-end" >        
+        <li id="viewType"><a rel="noopener" href="#" class="cursor-pointer text-decoration-none"><select class="fw-bold" style="border:0;color:#555!important;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
                     <option ng-value="'default'">默认视图</option>
                     <option ng-value="'list'">列表</option>
                     <option ng-value="'group'">群组</option>
                     <option ng-value="'matrix'">矩阵</option>
                 </select><i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i> </a></li>        
-        <li id="sortBy"><a rel="noopener" href ng-click="showSortDialog()">排序 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a></li>     
-        <li id="sendRecords"><a rel="noopener" >发送 <i class="fa fa-paper-plane" aria-hidden="true"></i></a></li>     
+        <li id="sortBy"><a rel="noopener" class="cursor-pointer text-decoration-none" ng-click="showSortDialog()">排序 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i></a></li>     
+        <li id="sendRecords"><a rel="noopener" class="cursor-pointer text-decoration-none" >发送 <i class="fa fa-paper-plane" aria-hidden="true"></i></a></li>     
       
-        <li id="exportRecords" ng-if="viewType=='matrix'"><a rel="noopener" href ng-click="onMatrixExportClick()">导出 <i class="fa fa-download" aria-hidden="true"></i></a></li>
+        <li id="exportRecords" ng-if="viewType=='matrix'"><a rel="noopener" class="cursor-pointer text-decoration-none" ng-click="onMatrixExportClick()">导出 <i class="fa fa-download" aria-hidden="true"></i></a></li>
         <li id="exportRecords" ng-if="viewType!='matrix' && exportVueComponent">
             <table-export ng-vue="exportVueComponent" :get-download-records="getDownloadRecords"></table-export>           
         </li>
@@ -18,14 +18,14 @@
 
     <div>
         <script type="text/ng-template" trados-translation="true" id="sortByDialog">
-            <div class="bs5 new-css-modal-header modal-header"><strong class="modal-title">按字段排序（选择一项或多项）</strong></div>
+            <div class="modal-header"><strong class="modal-title">按字段排序（选择一项或多项）</strong></div>
             <div class="modal-body">		
                 <div id="divTable">
                     <div>                         
                         <li ng-repeat="field in sortByFields" class="btn-group" style="margin:5px">
                             <button type="button" ng-click="selectField(field)" class="btn btn-sm" ng-class="{'btn-primary':field.selected}"><i class="fa" ng-class="{'fa-check-square-o':field.selected, 'fa-square-o':!field.selected }"></i> <span ng-bind="field.title"></span></button>
                             <div class="btn-group" ng-if="field.field!='relevance'">
-                                <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" 
+                                <button type="button" class="btn btn-sm dropdown-toggle" data-bs-toggle="dropdown" 
                                 ng-class="{'btn-primary':field.selected}" ><span ng-bind="(field.direction == 'asc' ? ' Asc':' Desc')"></span> <span class="caret"></span></button>
                                 <ul class="dropdown-menu" style="min-width: 100%;">
                                     <li><a rel="noopener" href="#" ng-click="selectField(field, 'asc')">升序</a></li>
@@ -38,7 +38,7 @@
                         <div>排序方式</div>
                         <ul class="pagination">                         
                             <li ng-repeat-start="field in selectedFields track by $index"><span ng-bind="field.title + ' (' + field.direction + ')'"></span></li>
-                            <li ng-repeat-end><span ng-if="!$last">第二方式</span></li>
+                            <li ng-repeat-end><span ng-if="!$last">&nbsp; then by&nbsp;</span></li>
                         </ul> 
                     </div>
                     <div  ng-if="selectedFields.length && selectedFields[0].field=='relevance'">
@@ -49,7 +49,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">取消</button>
-                <button type="button" class="btn btn-primary pull-left" ng-click="apply()"  ng-disabled="!selectedFields.length">应用</button>
+                <button type="button" class="btn btn-primary float-start" ng-click="apply()"  ng-disabled="!selectedFields.length">应用</button>
             </div>
         </script>
 
@@ -68,14 +68,14 @@
                         <div>分组方式</div>
                         <ul class="pagination">                         
                             <li ng-repeat-start="selected in selectedFields track by $index"><span ng-include="'groupByFields'" onload="field=selected.field"></span></li>
-                            <li ng-repeat-end><span ng-if="!$last">第二方式</span></li>
+                            <li ng-repeat-end><span ng-if="!$last">&nbsp; then by &nbsp;</span></li>
                         </ul> 
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()">取消</button>
-                <button type="button" class="btn btn-primary pull-left" ng-click="apply()" ng-disabled="!selectedFields.length">应用</button>
+                <button type="button" class="btn btn-primary float-start" ng-click="apply()" ng-disabled="!selectedFields.length">应用</button>
             </div>
         </script>
         <script type="text/ng-template"  trados-translation="true" id="groupByFields">

@@ -16,7 +16,7 @@
 						<th class="tableHeaderTop tableHeaderBottom back80 countryName">Страна</th>
 						<th class="tableHeaderTop tableHeaderBottom">Решения в МПБ</th>
 						<th class="tableHeaderTop tableHeaderBottom left-border"
-							ng-if="showDatabase=='showBiostradestatus'"><a rel="noopener" translation-url target="_blank" href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">Biostradestatus <i class="fa fa-external-link"></i></a></th>
+							ng-if="showDatabase=='showBiostradestatus'"><a rel="noopener" translation-url target="_blank" href="http://www.biotradestatus.com/?event={{lmo.biotradeEventID}}&querypagebypass=1">Biotradestatus <i class="fa fa-external-link"></i></a></th>
 					</tr>
 
 					<tr ng-repeat="country in lmo.countries | filter:isCountryVisible | orderBy:getCountryName">

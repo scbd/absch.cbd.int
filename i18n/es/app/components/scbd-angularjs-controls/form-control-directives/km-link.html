@@ -37,12 +37,12 @@
 								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
 								<div class="help-block">Se requiere un protocolo (http:// o https://)</div>
 								<div ng-if="editor.urlMissing" style="color: #e32">Proporcione una URL válida</div>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="Ejemplo: https://www.cbd.int">
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="Ejemplo: https://www.cbd.int" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
 								<label>Nombre</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="ejemplo: Sitio web de la Secretaría del CDB">
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="ejemplo: Sitio web de la Secretaría del CDB" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
@@ -54,8 +54,8 @@
 						</fieldset>
 					</form>
 				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">Cancelar</button>
+				<div class="modal-footer d-block">
+					<button type="button" class="btn btn-default float-end" ng-click="editor.close()">Cancelar</button>
 					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >Guardar</button>
 				</div>
 			</div>
@@ -77,7 +77,7 @@
 					</div>
 					<div class="control-group" >
 						<label>Nombre del archivo</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.name">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.name" />
 					</div>
 					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
 						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">Idioma</label>
@@ -85,7 +85,7 @@
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
 					</div><br/><div class="control-group" >
 						<label>Etiquetas</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="ejemplo: Diversidad Biológica, Metas de Aichi">
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="ejemplo: Diversidad Biológica, Metas de Aichi" />
 					</div>
 				</div>
 				<div class="modal-footer">

@@ -1,0 +1,13 @@
+﻿<div hover-effect=".dropdown-menu" id="CBD-Branding" ng-if="user"><a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap float-end color-darkgrey" id="btnSignIn" data-slug="signin"
+   data-bs-toggle="modal" data-bs-target="#loginDialog" data-keyboard="false" data-backdrop="false"><img src="/app/img/new-home/person-fill.svg" alt="Signin"><strong class="signin-text" style="position: relative; top:2px;right: 5px;">ВОЙТИ</strong></a> <a rel="noopener" ng-if="user.isAuthenticated" class="d-none d-md-block" href="#" data-bs-toggle="dropdown"><span class="text-nowrap color-black"><span ng-bind="user.name" style="margin:2px"></span> <i class="fw-bold bi bi-chevron-down"></i></span><!-- <i class="fa fa-chevron-down"></i> </span> --></a> <a rel="noopener" ng-if="user.isAuthenticated" class="d-inline-block d-md-none" href="#" data-bs-toggle="dropdown" id="dropdownMenu1"><span class="color-darkgrey user-logged-in"><i class="fs-4 me-2 mt-3 bi bi-person-circle"></i></span></a><ul ng-if="user.isAuthenticated" id="dropdown-menu" class="dropdown-menu drop-menu-position p-1" role="menu" aria-labelledby="dropdownMenu1">
+    <li><a rel="noopener" translation-url  href="#" ng-click="actionProfile()"><i class="bi bi-person-fill fs-6"></i>&nbsp; Профиль</a></li>
+   
+    <li><a rel="noopener" translation-url  href="#" ng-click="actionPassword()"><i class="fa fa-key fs-6"></i>&nbsp; Пароль</a></li>
+    <hr style="margin: 10px 0 0 0;padding: 0;"/>
+ 
+    <li><a rel="noopener" translation-url  href="/register/user-preferences/subscriptions"><i class="bi bi-envelope-fill"></i>&nbsp; Оповещения по электронной почте</a></li>
+    <li><a rel="noopener" translation-url  href="/register/user-preferences/saved-searches"><i class="bi bi-save2-fill"></i>&nbsp; Сохраненные условия поиска</a></li>    
+      <hr style="margin: 10px 0 0 0;padding: 0;"/>
+    <li><a rel="noopener" translation-url  href="#" ng-click="actionSignOut()"><i class="fa fa-sign-out fs-6"></i>&nbsp; Выйти</a></li>
+  </ul>
+</div>

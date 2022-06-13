@@ -1,9 +1,8 @@
-﻿<span><script type="text/ng-template"  id="select-tree-renderer.html">
+﻿<span class="km-select-item"><script type="text/ng-template"  id="select-tree-renderer.html">
 		<a rel="noopener" ng-click="clicked(item)" href=""
-		  ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'"></a><div class="km-select-description" ng-if="showDescription=='true' && item.description" ng-bind="item.description"
-			style="padding: 3px 25px;">
-		</div><i class="glyphicon glyphicon-ok" ng-show="item.selected" style="position:absolute;top:5px;left:3px;"></i><ul class="dropdown-inline-submenu" ng-if="item.children">
-			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" style="position:relative">
+		  ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'" class="text-decoration-none text-secondary ps-3"></a><div class="km-select-description py-1 px-5" ng-if="showDescription=='true' && item.description" ng-bind="item.description">
+		</div><i class="bi bi-check position-absolute fw-bolder color-black fs-5" ng-show="item.selected"></i><ul class="dropdown-inline-submenu" ng-if="item.children">
+			<li ng:repeat="item in item.children" ng-include="'select-tree-renderer.html'" class="position-relative">
 		</ul>
 	</script>
 
@@ -11,23 +10,24 @@
 	<div ng-show="error">
 		<div class="alert alert-warning" ng-bind="error">
 		</div>
-	</div><span><div class="btn-group" id="select-dropdown">
-			<button type="button" class="btn btn-default dropdown-toggle" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-toggle="dropdown">{{getTitle(displayCount, true)}} <span class="caret"></span></button>
-			<ul class="dropdown-menu" style="max-height:400px;overflow-y:auto;text-align:left">
-				<li ng-hide="!!rootItems"><a rel="noopener" href><i class="fa fa-spinner fa-spin"></i> <em>Загрузка ....</em></a></li>
-				<li ng-show="rootItems.length==0"><a rel="noopener" href><em>Ничего не выбрано ...</em></a></li>
-				<li ng-show="!!rootItems && (searchEnabled || getMinimum()==0 || allowOther == 'true')" style="padding:2px 20px;" id="filterText">
-					<div class="input-group" style="margin-bottom: 5px;">
-						<input type="textbox"  ng-show="searchEnabled || getMinimum()==0 && rootItems.length!=0" ng-model="filterText" class="form-control" /><span class="input-group-addon" title="Очистить текст поиска" ng-click="clearFilter($event)" style="cursor:pointer"><i  class="fa" ng-class="{'fa-remove color-red' : filterText, 'fa-search': !filterText}"></i></span></div>
+	</div><span><div class="btn-group" role="group" id="select-dropdown">
+			<button id="btnGroupDrop1" type="button" style="padding: 7px;" class="btn btn-default dropdown-toggle fs-small-8" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-bs-toggle="dropdown" aria-expanded="false">{{getTitle(displayCount, true)}} <span class="caret"></span></button>
+
+			<ul class="dropdown-menu ps-2 overflow-auto fs-small-8" style="max-height: 23rem;" aria-labelledby="btnGroupDrop1">
+			  <li ng-hide="!!rootItems"><a class="dropdown-item" rel="noopener" href><i class="fa fa-spinner fa-spin"></i> <em>Загрузка ....</em></a></li>
+				<li ng-show="rootItems.length==0"><a class="dropdown-item" rel="noopener" href><em>Ничего не выбрано ...</em></a></li>
+				<li ng-show="!!rootItems && (searchEnabled || getMinimum()==0 || allowOther == 'true')" class="p-0 px-1" id="filterText">
+					<div class="input-group mb-1">
+						<input type="textbox"  ng-show="searchEnabled || getMinimum()==0 && rootItems.length!=0" ng-model="filterText" class="form-control p-0 px-1"/><span class="input-group-text cursor-pointer" id="basic-addon1" title="Очистить текст поиска" ng-click="clearFilter($event)"><i  class="fa" ng-class="{'fa-remove color-red' : filterText, 'fa-search': !filterText}"></i></span></div>
 					<div>
-						<button type="button" class="btn btn-xs btn-default" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Снять выделение</button>
-						<button class="btn btn-xs btn-default" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Укажите другое значение</button>
+						<button type="button" style="padding: 7px;" class="btn btn-outline-secondary fs-small-8" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Снять выделение</button>
+						<button style="padding: 7px;" class="btn btn-outline-secondary fs-small-8" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Укажите другое значение</button>
 					</div>
 				</li>
-				<li ng:repeat="item in rootItems | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
+				<li ng:repeat="item in rootItems | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
 				</li>
-				<li style="margin-top:5px;border-top: 1px solid #eee;" ng-if="hasOtherSource"><a rel="noopener" ng-click="showOtherSource($event)" style="cursor: pointer;"><i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i> <span ng-if="!secondarySource">Показать другие</span></a></li>
-				<li ng-if="hasOtherSource && secondarySource" ng:repeat="item in secondarySource | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" style="position:relative">
+				<li class="border-top mt-1" ng-if="hasOtherSource"><a class="dropdown-item cursor-pointer" rel="noopener" ng-click="showOtherSource($event)"><i class="fa fa-spin fa-spinner" ng-if="loadingOtherSource"></i> <span ng-if="!secondarySource">Показать другие</span></a></li>
+				<li ng-if="hasOtherSource && secondarySource" ng:repeat="item in secondarySource | filter:filterList" ng-class="{disabled:!itemEnabled(item)}" ng-include="'select-tree-renderer.html'" class="text-decoration-none position-relative text-secondary">
 				</li>
 			</ul>
-		</div></span> </span>
+		  </div></span> </span>

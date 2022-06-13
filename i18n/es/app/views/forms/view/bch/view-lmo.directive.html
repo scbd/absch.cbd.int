@@ -1,9 +1,9 @@
 ﻿<div id="Record" class="record panel panel-default">
 	<div class="panel-heading bg-orange">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>
 	</div>
 	<div class="record-body panel-body">
-		<div class="pull-right"><a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/decisions"><i class="fa fa-external-link"></i> Decisiones sobre el OVM</a><a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/risk-assessments" >Evaluación del riesgo</a> &nbsp;<document-date></document-date>
+		<div class="float-end"><a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/decisions"><i class="fa fa-external-link"></i> Decisiones sobre el OVM</a><a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/risk-assessments" >Evaluación del riesgo</a> &nbsp;<document-date></document-date>
 		</div>
 		
 		<legend>Identidad del organismo vivo modificado</legend>
@@ -144,12 +144,12 @@
 				</ul>
 			</div>
 		</div>
-		<div ng-show="document.detectionMethod||document.detectionMethodLinks">
+		<div ng-show="document.detectionMethod||detectionMethodLinks.length">
 			<legend>Método(s) de detección</legend>
-			<div ng-show="document.detectionMethodLinks">
+			<div ng-show="detectionMethodLinks.length">
 				<label>Enlace(s) externo(s)</label>
 				<div compare-val>
-				<km-link-list class="km-value" ng-model="document.detectionMethodLinks"></km-link-list></div>
+				<km-link-list class="km-value" ng-model="detectionMethodLinks"></km-link-list></div>
 			</div>
 			<div ng-show="document.detectionMethod">
 				<label>Información adicional</label>
@@ -163,7 +163,7 @@
 			<div ng-show="document.relevantInformation">
 				<label>Información adicional</label>
 				<div compare-val>
-				<div class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div></div>
+				<km-value-ml value="document.relevantInformation" html locales="locale"></km-value-ml></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">

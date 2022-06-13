@@ -10,12 +10,12 @@
             <h3 class="modal-title">تصدير النتائج</h3>
         </div>
         <div class="modal-body matrix-export-dialog" ng-disabled="forTour" dir="rtl">
-            <div class="form-group">تنزيل النموذج: <span class="radio" style="display: initial;" ng-if="exportType=='excel'" dir="rtl"><label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls" ng-model="$parent.downloadFormat">XLS (Excel)</label>                   
-                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" ng-model="$parent.downloadFormat">XLSX (Excel)</label>                   
-                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv" ng-model="$parent.downloadFormat">CSV (comma separated values)</label></span> <span class="radio" style="display: initial;" ng-if="exportType=='chart'"><label class="radio-inline"><input type="radio" name="downloadFormatOption" value="svg" ng-model="$parent.downloadFormat">SVG</label>                   
-                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="png" ng-model="$parent.downloadFormat">PNG</label>                   
-                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="jpeg" ng-model="$parent.downloadFormat">JPEG</label>
-                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="webp" ng-model="$parent.downloadFormat">WEBP</label></span> <span style="display:inline" class="pull-right"><label>اسم الملف:</label>
+            <div class="form-group">تنزيل النموذج: <span class="radio" style="display: initial;" ng-if="exportType=='excel'" dir="rtl"><label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls" ng-model="$parent.downloadFormat" />XLS (Excel)</label>                   
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" ng-model="$parent.downloadFormat" />XLSX (Excel)</label>                   
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv" ng-model="$parent.downloadFormat" />CSV (comma separated values)</label></span> <span class="radio" style="display: initial;" ng-if="exportType=='chart'"><label class="radio-inline"><input type="radio" name="downloadFormatOption" value="svg" ng-model="$parent.downloadFormat" />SVG</label>                   
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="png" ng-model="$parent.downloadFormat" />PNG</label>                   
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="jpeg" ng-model="$parent.downloadFormat" />JPEG</label>
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="webp" ng-model="$parent.downloadFormat" />WEBP</label></span> <span style="display:inline" class="float-end"><label>اسم الملف:</label>
                         <input type="text" ng-model="fileName" /></span>
             </div>
             <div id="divTable"  style="max-height:300px;overflow:scroll; ">
@@ -30,7 +30,7 @@
         </div>
         <div class="modal-footer" dir="rtl">
             <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">إغلاق</button>
-            <button type="button" class="btn btn-primary pull-left" aria-label="Download" ng-click="downloadData()"  ng-disabled="loading||forTour" id="downloadDataFile"><i class="fa fa-spin fa-spinner" ng-if="loading" ></i> تنزيل</button>  
+            <button type="button" class="btn btn-primary float-start" aria-label="Download" ng-click="downloadData()"  ng-disabled="loading||forTour" id="downloadDataFile"><i class="fa fa-spin fa-spinner" ng-if="loading" ></i> تنزيل</button>  
         </div>
     </script>
 </div>

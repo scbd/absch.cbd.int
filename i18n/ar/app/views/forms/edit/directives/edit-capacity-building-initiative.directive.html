@@ -15,7 +15,7 @@
 
 					<div ng-show="tab=='edit'" km-tab="edit">
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 
 								<legend>معلومات عامة</legend>
 
@@ -88,7 +88,7 @@
 												</div>
 												<div class="col-md-1" ng-hide="!isGlobalOrRegional()">and/or</div>
 												<div class="col-md-3">
-													<div class="km-control-group" style="text-align: left;"  caption="">
+													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">البلد (البلدان)</label>
 														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="يُرجى تحديد خيار واحد أو عدة خيارات" items="options.countries()"></div>
 													</div>
@@ -99,7 +99,7 @@
 
 								<div class="row" ng-if="document.geographicScope && isSubnational()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countryRegions" caption="">
+										<div class="km-control-group countries-dropdown" name="countryRegions" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">البلد (البلدان)</label>
 											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="يُرجى تحديد خيار واحد أو عدة خيارات" items="options.countries()"></div>
 										</div>
@@ -113,7 +113,7 @@
 								</div>
 								<div class="row" ng-if="document.geographicScope && isCommunity()">
 									<div class="col-md-12">
-										<div class="km-control-group"  name="countries" caption="">
+										<div class="km-control-group countries-dropdown"  name="countries" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">البلد (البلدان)</label>
 											<div km-select multiple required ng-model="countryRegions.countries" placeholder="يُرجى تحديد خيار واحد أو عدة خيارات" items="options.countries()"></div>
 										</div>
@@ -163,14 +163,15 @@
 																		style="display:inline-block;width:100px"/>
 																</div>
 																<div class="col-md-2">
-																	<div class="km-control-group" name="durationText" caption="">
-																		<div style="height: 0px;width:0px;opacity: 0;" name="durationText">
+																	<div name="durationText" caption="">
+																		<div style="display: none;" name="durationText">
 																			<label name="durationText" for="durationText">المدة بالأيام/الشهور/السنوات</label>
 																		</div>
-																		<select name="durationText" ng-model="document.durationText"  class="form-control"
+																		<select name="durationText" ng-model="document.durationText"  class="form-control form-select"
 																			style="display:inline-block;width:100px" placeholder="eg. Months"
 																			ng-options="obj.value as obj.text for obj in timing">
 																		</select>
+																		
 																	</div>
 																</div>
 															</div>
@@ -183,13 +184,13 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="activityScope" caption="نوع مبادرة تطوير القدرات">
-											<div km-term-radio name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="نوع مبادرة تطوير القدرات">
+											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div class="row mt-2">
 									<div class="col-md-12">
 										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="هل هذا جزء من مشروع أو برنامج كبير؟">
 											<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
@@ -214,12 +215,12 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required  caption="الجهة (الجهات) أو المنظمة (المنظمات) المشرفة أو القائمة بتنفيذ المبادرة أو كلتاهما">
 											<div class="help-info">في بعض الحالات، قد تضطلع جهة أو هيئة بالدورين الإشرافي والتنفيذي معًا. في هذه الحالة، يُرجى تحديد كلا المربعين:</div>
-											<div class="checkbox"><label for="isImplementedByAgencies"><input type="checkbox" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)">الجهة (الجهات) أو المنظمة (المنظمات) المشرفة على التنفيذ</label></div>
+											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />الجهة (الجهات) أو المنظمة (المنظمات) المشرفة على التنفيذ</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="يُرجى تحديد الجهة (الجهات) أو المنظمة (المنظمات) المشرفة على التنفيذ">
-														<div class="help-info">يُشير مصطلح الجهة المشرفة على التنفيذ إلى المنظمة أو  الكيان القانوني المسؤول عن صياغة المبادرة والإشراف على تنفيذها، والمراقبة والتقييم، وإتاحة التمويل، وضمان تطبيق المعايير الاستئمانية والتحقق من الجودة، وإعداد تقارير إنجاز المشروع. The implementing agency is ultimately the entity responsible for the completion of the initiative and is accountable to the donor.</div>
+														<div class="help-info pt-1">يُشير مصطلح الجهة المشرفة على التنفيذ إلى المنظمة أو  الكيان القانوني المسؤول عن صياغة المبادرة والإشراف على تنفيذها، والمراقبة والتقييم، وإتاحة التمويل، وضمان تطبيق المعايير الاستئمانية والتحقق من الجودة، وإعداد تقارير إنجاز المشروع. The implementing agency is ultimately the entity responsible for the completion of the initiative and is accountable to the donor.</div>
 
 														<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
@@ -227,21 +228,21 @@
 												</div>
 											</div>
 
-											<div class="checkbox"><label for="isExecutededByAgencies"><input id="isExecutededByAgencies" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)">الجهات أو المنظمات القائمة بالتنفيذ</label></div>
+											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />الجهات أو المنظمات القائمة بالتنفيذ</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="يُرجى تحديد الجهات أو المنظمات القائمة بالتنفيذ">
-														<div class="help-info">يُشير مصطلح الجهة القائمة بالتنفيذ إلى المنظمة أو المؤسسة التي تدير المبادرة مباشرة، بما في ذلك التخطيط اليومي، وتخطيط الأنشطة وتنفيذها، والمراقبة وإعداد التقارير حول الإنجاز الحاصل، وتدبير وإدارة الموارد (الموظفين، التمويل، المعدات، غير ذلك) وتنفيذ وظائف إدارة المشاريع الأخرى.</div>
+														<div class="help-info pt-1">يُشير مصطلح الجهة القائمة بالتنفيذ إلى المنظمة أو المؤسسة التي تدير المبادرة مباشرة، بما في ذلك التخطيط اليومي، وتخطيط الأنشطة وتنفيذها، والمراقبة وإعداد التقارير حول الإنجاز الحاصل، وتدبير وإدارة الموارد (الموظفين، التمويل، المعدات، غير ذلك) وتنفيذ وظائف إدارة المشاريع الأخرى.</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners"><input type="checkbox" id="isCollaboratededByPartners" ng-model="document.isCollaboratededByPartners">الشريك (الشركاء) المتعاونون</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />الشريك (الشركاء) المتعاونون</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="يُرجى تحديد الشريك (الشركاء) المتعاونين">
-														<div class="help-info">يُشير مصطلح الشركاء المتعاونين إلى الكيانات أو المؤسسات التي تقدم مساهمات كبيرة، سواءً كانت مالية أو غيرها، للمبادرة أو تدعم المبادرة أو تتعاون في الإشراف على تنفيذها.</div>
+														<div class="help-info pt-1">يُشير مصطلح الشركاء المتعاونين إلى الكيانات أو المؤسسات التي تقدم مساهمات كبيرة، سواءً كانت مالية أو غيرها، للمبادرة أو تدعم المبادرة أو تتعاون في الإشراف على تنفيذها.</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
@@ -253,7 +254,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>معلومات تفصيلية</legend>
 
 								<div class="row">
@@ -282,7 +283,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>معلومات عن محاور وموضوعات المبادرة</legend>
 								<div class="row">
 									<div class="col-md-12">
@@ -328,7 +329,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>معلومات عن التمويل</legend>
 
 								<div class="row">
@@ -368,7 +369,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" name="totalBudget" caption="إجمالي الميزانية (المبلغ بالدولار الأمريكي)">
 											<div class="help-info">وقد يشمل ذلك المساهمات العينية المُعبَّر عنها نقدًا. يُرجى عدم استخدام المسافات أو النقاط أو الفواصل عن إدخال المبلغ.</div>
-											<div class="input-group"><span class="input-group-addon">دولار أمريكي</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
+											<div class="input-group"><span class="input-group-text">دولار أمريكي</span><input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
 											</div>
 										</div>
 									</div>
@@ -377,7 +378,7 @@
 							</div>
 						</section>
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>نتائج تطوير القدرات</legend><strong>النتائج</strong><div class="help-info">يمكن إضافة هذه المعلومات عند وجود نتائج (مخرجات أو إنجازات أو آثار) أو أفضل الممارسات والدروس المستفادة من المبادرة المستمرة أو المكتملة.</div>
 									<div class="km-control-group" name="resultsAchievements" caption="">
 										<div class="row">
@@ -415,7 +416,7 @@
 						</section>
 
 						<section>
-							<div class="well no-shadow bg-white">
+							<div class="no-shadow bg-white">
 								<legend>معلومات إضافية</legend>
 								<div class="row">
 									<div class="col-md-12">

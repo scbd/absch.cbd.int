@@ -1,5 +1,5 @@
 ﻿<div id="Record" class="record panel panel-default">
-	<div class="panel-heading bg-darkgrey"><h4>Notificación</h4></div>
+	<div class="panel-heading bg-darkgrey"><h4></h4></div>
 	<div class="record-body panel-body">
 
 
@@ -8,33 +8,27 @@
 
 
         <div ng-show="document.title_EN_t">
-			<label>Título</label><span class="km-value">{{document.title_EN_t}}</span></div>
+			<label></label></div>
         
 		<div ng-show="document.deadline_s">
-			<label>Plazo</label><span class="km-value">{{document.deadline_s| formatDate}}</span></div>
+			<label></label></div>
 
 		
 
 		<div ng-show="document.description_EN_t">
-			<label>Descripción</label><span class="km-value">{{document.description_EN_t}}</span></div><!--
-		<div ng-show="document.text_EN_txt">
-			<label>Text</label>
-			<span class="km-value">
-				{{document.text_EN_txt | lstring:locale}}
-			</span>
-		</div> --><div ng-show="document.reference_s">
-			<label>Referencia</label><span class="km-value">{{document.reference_s| lstring:locale}}</span></div>
+			<label></label></div><div ng-show="document.reference_s">
+			<label></label></div>
 
 		<div ng-show="document.sender_s">
-			<label>Emisor</label><span class="km-value">{{document.sender_s| lstring:locale}}</span></div>
+			<label></label></div>
 
 		<div ng-show="document.recipient_ss">
-			<label>Receptor</label><span class="km-value">{{document.recipient_ss| lstring:locale}}</span></div>
+			<label></label></div>
 
 		<div ng-show="document.url_ss">
-			<label>Enlace a documentos</label><span class="km-value"><ul class="list">
-					<li ng-repeat="url in document.url_ss"><a rel="noopener" translation-url  ng-href="{{url}}" target="_"><span ng-bind="url"></span></a></li>
-				</ul></span></div>
+			<label></label><ul class="list">
+					<li ng-repeat="url in document.url_ss"></li>
+				</ul></div>
 
 	</div>
 	<div document-metadata  class="panel-footer"></div>

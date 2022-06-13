@@ -1,10 +1,10 @@
 ﻿<div id="Record" class="record panel panel-default" >
 
 	<div class="panel-heading bg-blue" ng-show="display('header')">
-		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-black">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
+		<h4><span ng-bind="::document.header.schema|schemaName"></span> <span class="color-white">(<span ng-bind="::(document.header.schema|schemaShortName)"></span>)</span></h4>	
 	</div>
 
-	<div class="record-body panel-body" help schema="ViewCP" >
+	<div class="record-body panel-body bg-white" help schema="ViewCP" >
 
 		
 			<document-date></document-date>
@@ -81,7 +81,7 @@
 				</div><!--<div ng-show="document.contactsToInform" class="row">
 				<div ng-repeat="contact in document.contactsToInform">
 					<div class="col-xs-12">
-						<div view-record-reference ng-model="contact" locale="locale" class="well"></div>
+						<div view-record-reference ng-model="contact" locale="locale" class="card"></div>
 					</div>
 				</div>
 			</div>--><div compare-val>

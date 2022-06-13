@@ -2,8 +2,8 @@
 
     <style> .text-nowrap.btn-group { white-space: nowrap; } .text-nowrap.btn-group > .btn { float: none; display: inline-block; } </style>
 
-    <div class="modal-header">
-        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
+    <div class="modal-header d-block">
+        <button type="button" class="close float-end bg-transparent border-0 fs-4" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()"><span aria-hidden="true">&times;</span></button>
         <h3 class="modal-title">Rôles d’attribution / révocation- <span ng-bind="editRolesDialogCtrl.user.firstName+' '+editRolesDialogCtrl.user.lastName"></span></h3><span ng-bind="editRolesDialogCtrl.user.email"></span></div>
 
     <div class="modal-body"><!-- ROLES --><p>Veuillez choisir quelels fonctions vous voulez assigner à l’usager</p>
@@ -24,7 +24,7 @@
 
     <div class="modal-footer">
 
-        <div class="pull-left" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
+        <div class="float-start" ng-if="editRolesDialogCtrl.stats().grant || editRolesDialogCtrl.stats().revoke">
             <div ng-show="editRolesDialogCtrl.stats().grant" ><em><span ng-bind="editRolesDialogCtrl.stats().grant"></span> Rôle (s) à assigner :</em></div>
             <div ng-show="editRolesDialogCtrl.stats().revoke"><em><span ng-bind="editRolesDialogCtrl.stats().revoke"></span> Rôle (s) à révoquer :</em></div>
         </div>

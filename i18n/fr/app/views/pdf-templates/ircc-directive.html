@@ -140,7 +140,7 @@
                         <label>Documents ou liens supplémentaires sur le consentement préalable en connaissance de cause</label>
                         <div class="text">
                             <ul style="list-style-type: none;padding-left:3px;">
-                                <li ng-repeat="item in document.picDocuments"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                                <li ng-repeat="item in document.picDocuments"><a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                             </ul>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                         <label>Documents supplémentaires sur les conditions convenues d’un commun accord</label>
                         <div class="text">
                             <ul style="list-style-type: none;padding-left:3px;">
-                                <li ng-repeat="item in document.matDocuments"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                                <li ng-repeat="item in document.matDocuments"><a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}"><i class="fa fa-file"></i> {{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                             </ul>
                         </div>
                     </div>
@@ -194,16 +194,16 @@
                     <div class="text">
                         <div class="inner-label" ng-show="document.specimens">Données sur le spécimen :</div>
                         <ul>
-                            <li ng-repeat="item in document.specimens"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                            <li ng-repeat="item in document.specimens"><a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                         </ul>
 
                         <div class="inner-label" ng-show="document.taxonomies">Données taxonomiques</div>
                         <ul>
-                            <li ng-repeat="item in document.taxonomies"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                            <li ng-repeat="item in document.taxonomies"><a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                         </ul>
                         <div class="inner-label" ng-show="document.gisFiles">données de coordonnées géographiques</div>
                         <ul>
-                            <li ng-repeat="item in document.gisFiles"><a rel="noopener" target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
+                            <li ng-repeat="item in document.gisFiles"><a rel="noopener" translation-url target="{{target}}" ng-href="{{item.url|encodeURI}}">{{item.name||item.url}}</a> <i ng-show="item.name && item.url.indexOf('/api/v2013/documents/')<0">({{item.url}})</i></li>
                         </ul>
                     </div>
                 </div>
