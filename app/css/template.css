@@ -332,33 +332,7 @@ tr.visited-background:hover {
     list-style-type: none;
 }
 
-.nav-country-profiles-search {
-    padding:5px;
-    border-bottom: 1px solid #eee;
-}
-.nav-country-profiles-footer-link {
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    margin: auto;
-    width: 100%;
-    position: absolute;
-    padding: 1.5%;
-    border-style: solid;
-    border-color: black;
-    border-width: 0.5px;
-    border-top: none;
-    text-align: center;
-    font-size:16px;
-}
-.nav-country-profiles-footer-link a{
-    color:#fff !important;
-    text-decoration: none;
-}
-.dropdown-menu> li.nav-country-profiles-footer-link> a:hover {
-    color:#fff !important;
-    text-decoration: underline;
-    background-color: transparent;
-}
+
 .cursor-pointer, .pointer {
     cursor: pointer;
 }
@@ -418,9 +392,7 @@ body.modal-open .modal-backdrop.fade.show{
     margin-left: 6px;
 }
 
-.nav-country-profiles-search .form-control::placeholder {
-    font-size: 13px;
-}
+
 .card-footer:last-child,.map-country-list .list-group{
     border-radius: 0.25rem;
 }
