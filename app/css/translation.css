@@ -47,3 +47,29 @@ div[edit-measure-matrix] label > input[type=radio],
 div[edit-measure-matrix] label > input[type=checkbox]{
     margin-right: 3px;
 }
+
+body[lang=ar] .km-terms-check ul{
+    padding: 0px 20px 0px 0px;
+}
+
+body[lang=ar] .ngdialog-content .ngdialog-close {
+    left: 0;
+    right: unset;
+}
+body[lang=ar] .terms-check label > input[type=checkbox],
+body[lang=ar] .terms-radio label > input[type=radio]{
+    margin-left: 5px!important;
+    margin-right: unset;
+}
+
+#export-modal .radio label > input[type=radio],
+body[lang=ar] div[edit-measure-matrix] label > input[type=radio],
+body[lang=ar] div[edit-measure-matrix] label > input[type=checkbox]{
+    margin-left: 3px!important;
+    margin-right: unset;
+}
+
+body[lang=ar] #search-new .dropdown-menu::after {
+    left: unset;
+    right: 5%;
+}

@@ -43,13 +43,7 @@ export const templateController = ['$rootScope', '$location', '$window', '$scope
             if (lang == 'zh')
                 lang = 'zh-cn'; //moment has two ZH, use ZH-CN
             moment.locale(lang);
-            if (lang != 'en')
-                require(['css!/app/css/translation.css'], function(){});
-            if (lang == 'ar') {
-                require(['css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-flipped.min.css',
-                'css!https://cdn.cbd.int/bootstrap-rtl@3.3.4/dist/css/bootstrap-rtl.min.css',
-                ], function(){});
-            }
+            
         }
 
         function setupTranslationValidation(){

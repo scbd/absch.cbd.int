@@ -1,6 +1,7 @@
-﻿<div>
+﻿<div class="km-terms-check">
 	<div class="row">
 	<div class="col-12" ng-show="enableSearch" style="margin-bottom: 5px;">
+
 		<div class="input-group float-start" style="max-width:400px;">
 			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the list (min 3 chars to begin search)"/>
 			<span class="input-group-text" id="basic-addon2">
@@ -90,17 +91,6 @@
 					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">
 				</ul>
 			</script>
-			<style>
-				li>label {
-					font-weight: normal;
-				}
-				.optionsbox{z-index:100;position:absolute; height:300px; overflow: scroll; width:100%;padding:15px; border:1px solid #999; border-radius:5px; box-shadow: 5px 10px #bbb ;margin-bottom:15px; background-color: #fff;}
-				.searchbox {overflow: scroll;padding:10px; background-color: #eee; border-top:1px solid #ddd;border-bottom:1px solid #ddd;}
-				.no-border{border-top:none!important;}
-				ul{
-					padding: 0px 0px 0px 20px;
-				}
-			</style>
 		</div>
 	</div>
 	</div>

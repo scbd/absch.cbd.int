@@ -181,3 +181,32 @@ trix-editor a:hover{cursor: pointer;color: #428bca !important;}
 .control-group{
     padding-bottom: 10px;;
 }
+
+.km-terms-check li>label {
+    font-weight: normal;
+}
+.km-terms-check .optionsbox{
+    z-index:100;position:absolute;
+    height:300px; 
+    overflow: scroll; 
+    width:100%;
+    padding:15px; 
+    border:1px solid #999; 
+    border-radius:5px; 
+    box-shadow: 5px 10px #bbb ;
+    margin-bottom:15px; 
+    background-color: #fff;
+}
+.km-terms-check .searchbox {
+    overflow: scroll;
+    padding:10px; 
+    background-color: #eee; 
+    border-top:1px solid #ddd;
+    border-bottom:1px solid #ddd;
+}
+.km-terms-check .no-border{
+    border-top:none!important;
+}
+.km-terms-check ul{
+    padding: 0px 0px 0px 20px;
+}

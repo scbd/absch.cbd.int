@@ -7,7 +7,7 @@ import 'datepicker-range';
   //
   //
   //============================================================
-  app.directive('kmDateRange', [function() {
+  app.directive('kmDateRange', ['locale', function(locale) {
     return {
       restrict: 'EAC',
       template: template,
@@ -22,7 +22,7 @@ import 'datepicker-range';
       link: function($scope, $element, $attr, ngModelController) {
         const dateFormat = $attr.dateFormat||'DD-MM-YYYY';
         
-        $element.daterangepicker({
+        const options = {
             showDropdowns: true,
             alwaysShowCalendars:true,
             ranges: {
@@ -32,12 +32,24 @@ import 'datepicker-range';
               'Last six months' : [moment().subtract(6,   'month' ).startOf('month'), moment()],
               'Last 12 months'  : [moment().subtract(12,  'month' ).startOf('month'), moment()],
               'Last 2 years'    : [moment().subtract(2,   'year'  ).startOf('month'), moment()],
-              'Last 5 years'    : [moment().subtract(5,   'year'  ).startOf('month'), moment()]
+              'Last 5 years 1'    : [moment().subtract(5,   'year'  ).startOf('month'), moment()]
             },
             locale: {
-              format: dateFormat
-            }
-        });
+              format: dateFormat,              
+              applyLabel: "Apply",
+              cancelLabel: "Cancel",              
+              fromLabel: "From",
+              toLabel: "To",
+              customRangeLabel: "Custom Range",
+              weekLabel: "W",
+              direction : locale == 'ar' ? 'rtl' : 'ltr',
+            },
+            minYear :  moment().subtract(75, 'year').year(),
+            maxYear :  moment().add(20, 'year').year(),
+            opens: locale == 'ar' ? 'right' : 'left',
+        };
+
+        $element.daterangepicker(options);
         $element.on('apply.daterangepicker', function(ev, picker) {
             $scope.binding = {
                   start : picker.startDate,

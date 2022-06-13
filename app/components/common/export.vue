@@ -1,8 +1,8 @@
 <template>
     <span>
         <a rel="noopener" href="#" class="table-export-button text-decoration-none" @click="open=true">
-            {{$t('exportButton')}}
             <i class="fa fa-download" aria-hidden="true"></i> 
+            {{$t('exportButton')}}
         </a>
         <modal v-model="open" v-bind:class="{ 'show': open}" size="lg" @show="onShowDialog" ref="modal" id="export-modal">
            <div slot="header">
