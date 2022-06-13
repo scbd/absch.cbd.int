@@ -91,7 +91,7 @@
             <span ng-include="'workflow-status-section'"></span>
         </div>
 
-        <blockquote ng-show="options.showContact">
+        <blockquote ng-show="options.showContact" class="blockquote fs-small-8">
             <div ng-if="options.isContactTypeOrganization">
                 <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
                     ng-if="!options.isCNA">Organization</div>
@@ -137,9 +137,8 @@
             
             <span ng-if="document" onload="contactAddress=document.body"
                 ng-include="'reference-contact-address'"></span>
-            <div ng-if="options.isContactTypePerson && document.body.contactOrganization && document.body.contactOrganizationDetail">
-                <div
-                    style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-top:10px;margin-bottom:5px;color:#999;">
+            <div class="mt-5 text-start" ng-if="options.isContactTypePerson && document.body.contactOrganization && document.body.contactOrganizationDetail">
+                <div class="fw-bold text-uppercase text-secondary mb-2" style="font-size:12px;border-bottom:1px solid #ccc;">
                     Related Organization
                 </div>
                 <span ng-if="document.body.contactOrganizationDetail.deletedOn">

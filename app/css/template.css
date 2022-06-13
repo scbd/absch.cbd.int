@@ -3325,3 +3325,8 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 .record-body li:not(:first-of-type) .default-reference-viewer .view-reference-list{ 
     margin: 25px 0;
 }
+.default-reference-viewer .blockquote {
+    padding: 10px 20px;
+    margin: 0 0 20px;
+    border-left: 5px solid #eee;
+}
