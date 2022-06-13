@@ -1,6 +1,7 @@
 import app from 'app';
 import template from 'text!./date-filter.html';
 import _ from 'lodash';
+import moment from 'moment';
 import 'services/main';
 import 'components/scbd-angularjs-controls/main';
 import 'bootstrap-datepicker';
@@ -25,8 +26,10 @@ import 'bootstrap-datepicker';
                     var query;
 
                     if($scope.dateFilter.value.start || $scope.dateFilter.value.end) {
-                        var start = $scope.dateFilter.value.start ? solr.escape($scope.dateFilter.value.start.format('YYYY-MM-DD') + 'T00:00:00.000Z') : '*';
-                        var end = $scope.dateFilter.value.end ? solr.escape($scope.dateFilter.value.end.format('YYYY-MM-DD') + 'T23:59:59.999Z') : '*';
+                        const startDate = moment($scope.dateFilter.value.start);
+                        const endDate = moment($scope.dateFilter.value.end);
+                        var start = startDate ? solr.escape(startDate.locale('en').format('YYYY-MM-DD') + 'T00:00:00.000Z') : '*';
+                        var end = endDate ? solr.escape(endDate.locale('en').format('YYYY-MM-DD') + 'T23:59:59.999Z') : '*';
 
                         query = '[ ' + start + ' TO ' + end + ' ]';
                     } 
