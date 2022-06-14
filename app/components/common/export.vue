@@ -76,7 +76,7 @@
 
 <script>
     import { Modal } from 'vue-2-bootstrap-3'
-	import i18n from '../../locales/en/components/export.json';
+	import i18n from '../../app-text/components/export.json';
 	import '../kb/filters';
     
     const fields = [

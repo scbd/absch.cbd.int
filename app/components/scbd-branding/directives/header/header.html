@@ -23,7 +23,7 @@
           <span class="brand">CBD</span>
         </span>
         <ul class="navbar-left navlist menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
-          <li ng-if="toggleMenu" ><a rel="noopener" translation-url href="http://www.cbd.int/convention/" class="text-dark">{{$translation.get('commonText.theConvention')}}</a></li>
+          <li ng-if="toggleMenu" ><a rel="noopener" translation-url href="http://www.cbd.int/convention/" class="text-dark">{{'commonText.theConvention' | $translate }}</a></li>
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="text-dark">{{t.cartagenaProtocol}}</a></li>
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="text-dark">Nagoya Protocol</a></li>
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/programmes/" class="text-dark">Programmes</a></li>
