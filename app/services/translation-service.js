@@ -22,8 +22,8 @@ app.factory('translationService',  ['locale', function(locale) {
             key = key || '';
 
             const keys = key.split('.');
-            // if(keys.length != 2)
-            //     throw new Error('Invalid translation key, expected format `key.fieldName`');
+            if(keys.length != 2)
+                throw new Error('Invalid translation key, expected format `key.fieldName`');
 
             const baseKeyInfo = localeCache[appLocale][keys[0]];
 
