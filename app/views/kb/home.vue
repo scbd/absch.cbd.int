@@ -38,7 +38,7 @@
     import CategoriesGroup from '../../components/kb/article-categories.vue';
     import sideBar from '../../components/kb/right-side-bar.vue';
     import search from '../../components/kb/search.vue';
-    import i18n from '../../locales/en/components/kb.json';
+    import i18n from '../../app-text/components/kb.json';
     
 export default {
     name:'kbHome',
