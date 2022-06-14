@@ -10,6 +10,7 @@ import './login';
 import './xuser-notifications-icon';
 import 'components/scbd-angularjs-services/main';
 import commonText from '~/app-data/commonText.json';
+
     app.directive('scbdHeader', function() {
         return {
             restrict: 'E',
@@ -31,8 +32,6 @@ import commonText from '~/app-data/commonText.json';
                     });
 
                     translationService.set('commonText', commonText);
-                    $scope.t =  translationService.get('commonText');
-                    $scope.translation =  translationService;
 
                     $rootScope.$on('signOut', function(){
                         socketioService.disconnect(true);
