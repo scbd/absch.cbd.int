@@ -6,7 +6,8 @@
     .document-languages,
     .expander,
     .fa-chevron-circle-up,
-    .fa-external-link-square {
+    .fa-external-link-square,
+    .fa-external-link {
         display: none;
     }
     body,
