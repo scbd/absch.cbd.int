@@ -32,6 +32,7 @@ import commonText from '~/app-data/commonText.json';
 
                     translationService.set('commonText', commonText);
                     $scope.t =  translationService.get('commonText');
+                    $scope.translation =  translationService;
 
                     $rootScope.$on('signOut', function(){
                         socketioService.disconnect(true);
