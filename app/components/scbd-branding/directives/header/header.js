@@ -10,6 +10,7 @@ import './login';
 import './xuser-notifications-icon';
 import 'components/scbd-angularjs-services/main';
 import commonText from '~/app-data/commonText.json';
+
     app.directive('scbdHeader', function() {
         return {
             restrict: 'E',
