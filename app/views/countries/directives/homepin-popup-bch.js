@@ -1,7 +1,8 @@
 import app from '~/app';
 import template from './homepin-popup-bch.html';
+import homepinPopupBchTranslation from '~/app-text/views/countries/directives/homepin-popup-bch.json';
 
-app.directive('homepinPopupBch', function(){
+app.directive('homepinPopupBch', ['translationService', function(translationService){
     return {
         restrict:'E',
         replace: true,
@@ -12,8 +13,10 @@ app.directive('homepinPopupBch', function(){
                 if (code == 'NRI' || code == 'NR1' || code == 'NR2') return false;
                 else return true;
             }
+
+            translationService.set('homepinPopupBchTranslation', homepinPopupBchTranslation);
         }
 
     }
 
-})
+}])
