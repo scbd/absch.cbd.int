@@ -6,20 +6,21 @@ import 'views/directives/block-region-directive';
 import 'components/scbd-angularjs-controls/main';
 import 'angular-joyride';
 import joyRideText from '~/app-data/country-profile-joyride-tour.json';
+import countryListTranslation from '~/app-text/views/countries/country-list.json';
 
     export { default as template } from './country-list.html';
 
   export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
-    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService',
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
-            $timeout, locale, realm, ngMeta, joyrideService) {
+            $timeout, locale, realm, ngMeta, joyrideService, translationService) {
             var regionRelations = {};            
             $scope.isBCH        = realm.is('BCH');
             $scope.isABS        = realm.is('ABS');    
             $scope.sortTerm     = "name.en";
             $scope.loading      = true;
 
-
+            translationService.set('countryListTranslation', countryListTranslation);
             $scope.options = {
                 regions  : commonjs.getRegions,
                 countries: function(){
