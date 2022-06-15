@@ -155,7 +155,7 @@
 								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.partiesToSuppProtocol'|$translate)}}</span>
 							</span>
 							<span ng-if="partyFilter == 'inbetween'"><i class="color-inbetween fa fa-square"></i>
-								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.Ratified'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}} </span></span>
+								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.ratified'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}} </span></span>
 							</span>
 							<span ng-if="partyFilter == 'nonparty'"><i class="color-non-party fa fa-square"></i>
 								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.nonParties'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></span>
@@ -177,7 +177,7 @@
 								{{::('countryListTranslation.partiesToSuppProtocol'|$translate)}}</a></li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
 								ng-click="setPartyFilter('inbetween');"> <i class="color-inbetween fa fa-square"></i>
-								{{::('countryListTranslation.Ratified'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></a></li>
+								{{::('countryListTranslation.ratified'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></a></li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
 								ng-click="setPartyFilter('nonparty');"> <i class="color-non-party fa fa-square"></i>
 								{{::('countryListTranslation.nonParties'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></a></li>
@@ -228,7 +228,7 @@
 						<span ng-if="!country.isParty && !country.isInbetweenParty"
 							class="color-grey color-non-party fs-small-6 me-2">{{::('countryListTranslation.nonParty'|$translate)}}</span>
 						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">{{::('countryListTranslation.partyToNagoyaProtocol'|$translate)}}</span>
-						<span ng-if="country.isInbetweenParty" class="color-inbetween fs-small-6 me-2">{{::('countryListTranslation.Ratified'|$translate)}}</span>
+						<span ng-if="country.isInbetweenParty" class="color-inbetween fs-small-6 me-2">{{::('countryListTranslation.ratified'|$translate)}}</span>
 						<!-- <span ng-if="country.isSignatory" class="fs-small-6 me-2">Signatory</span> -->
 						<span ng-if="country.entryIntoForce"
 							class="color-grey color-non-party fs-small-6 me-3">{{::('countryListTranslation.since'|$translate)}} <span
