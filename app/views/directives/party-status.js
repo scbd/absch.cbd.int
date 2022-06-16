@@ -1,6 +1,8 @@
 import app from 'app';
 import template from 'text!./party-status.html';
 import 'services/main';
+import partyStatusT from '~/app-text/views/directives/party-status.json';
+
 app.directive('ngPartyStatus', function () {
         return {
             restrict: 'EAC',
@@ -12,10 +14,10 @@ app.directive('ngPartyStatus', function () {
             link: function ($scope, element, attrs) {
                 
             },
-            controller: [ "$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'realm',
-            function ($scope, $rootScope, $filter, $timeout, commonjs, $q, realm) {
+            controller: ["$scope", '$rootScope', '$filter', '$timeout', 'commonjs', '$q', 'realm', 'translationService',
+                function ($scope, $rootScope, $filter, $timeout, commonjs, $q, realm, translationService) {
                 var iso_code;
-                
+                translationService.set('partyStatusT', partyStatusT);
                 $scope.isAbs = realm.is('ABS');
                 $scope.isBch = realm.is('BCH');
                 // if($scope.code)
