@@ -4,12 +4,9 @@
      ng-class="{'bg-party': currentCountry.isParty, 'bg-non-party':!currentCountry.isParty, 
                 'bg-inbetween': currentCountry.isInbetweenParty}">
         <div>
-            <span ng-if="currentCountry.isParty"
-                >Party to the Biosafety Protocol</span>
-            <span ng-if="currentCountry.isInbetweenParty"
-                >Ratified, not yet Party</span>
-            <span ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty"
-                >Not a Party to the Biosafety Protocol</span>
+            <span ng-if="currentCountry.isParty">{{::('pinPopupBchT.partyToBiosafety'|$translate)}}</span>
+            <span ng-if="currentCountry.isInbetweenParty">{{::('pinPopupBchT.ratified'|$translate)}}</span>
+            <span ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty">{{::('pinPopupBchT.notPartyToBiosafety'|$translate)}}</span>
         </div>
 
         <div class="row abs-exception-tooltip"
@@ -19,22 +16,22 @@
             <div class="col-lg-12">
                 <div class="small" ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')"
                     style="margin-top:5px;white-space: normal;padding:3px;">
-                    Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.
+                    {{::('pinPopupBchT.dkText'|$translate)}}
                 </div>
                 <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"class="small " style="margin-top:5px;white-space: normal;padding:3px;">
-                    A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern
-                    Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+                    {{::('pinPopupBchT.fkText'|$translate)}}
                 </div>
                 <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" class="small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
+                    {{::('pinPopupBchT.ehText'|$translate)}}
                     Non-Self Governing Territory.
                 </div>
                 <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" class="small" style="margin-top:5px;white-space: normal;padding:3px;">
-                    The UK’s ratification of the Cartagena Protocol does not extend to the
+                    {{::('pinPopupBchT.gbText'|$translate)}}
                     <a rel="noopener" ng-href="#"  class=" color-litegrey gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">13 Overseas Territories </a>
-                    or
+                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="{{::('pinPopupBchT.gbTitle13'|$translate)}}">{{::('pinPopupBchT.overseasTerritories'|$translate)}}</a>
+                    {{::('pinPopupBchT.or'|$translate)}}
                     <a rel="noopener" ng-href="#" class=" color-litegrey gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                        data-bs-toggle="tooltip" data-placement="left" title="{{::('pinPopupBchT.gbTitle3'|$translate)}}">{{::('pinPopupBchT.crownDependencies'|$translate)}}</a>
                 </div>
             </div>
         </div>
