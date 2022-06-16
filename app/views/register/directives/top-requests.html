@@ -1,23 +1,22 @@
 ﻿<div class="top-records" style="max-height:400px; padding-top:3px; overflow-y: scroll; margin-bottom:20px;" ng-show="tasks.length > 0">
-
-    <h4 style="margin-top:0; margin-bottom:0;  cursor: pointer; background-color: #f9f9f9; padding:5px;" ng-class="{'bg-white' : showAll }">
+    
+    <h4 class="my-0 p-0 pb-1 border-bottom fs-6">
         <span ng-click="showAll=!showAll">
-            <i class="bi bi-arrow-down-circle-fill cursor-pointer" ng-show="!showAll" aria-hidden="true"></i>
-            <i class="bi bi-arrow-up-circle-fill cursor-pointer" ng-show="showAll" aria-hidden="true"></i>
+            <i class="bi bi-chevron-down cursor-pointer" ng-show="!showAll" aria-hidden="true"></i>
+            <i class="bi bi-chevron-up cursor-pointer" ng-show="showAll" aria-hidden="true"></i>
             Pending requests
-            <span class="badge" ng-class="{'color-white bg-red': isPA() }" style="position:relative;top:-2px;font-size:14px;" ng-bind="tasks.length"></span>
+            <!-- <span class="badge" style="position:relative;top:-2px;font-size:14px;" ng-bind="tasks.length"></span> -->
+            <span ng-bind="tasks.length" class="badge align-bottom rounded-pill bg-danger">
+               
         </span>
-        <span class="float-end hidden-xs" style="padding-right:5px">
-            <a rel="noopener" translation-url style="color:#999;" href="{{viewAllUrl}}">
-                view all requests
-            </a>
-        </span>
+       
     </h4>
 
-    <div style="font-size:12px; padding-bottom:10px;" ng-show="showAll">
+    <div class="bg-light shadow p-2" ng-show="showAll">
+
         <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" ></i> loading...</span>
 
-        <div class="row" style="background-color:#f9f9f9;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
+        <div class="row" style="background-color:#fff;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
             ng-click="gotoRequest(task.workflow.data.metadata.schema, task.identifier)" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"
             id="{{task.workflow._id}}">
 
@@ -62,6 +61,12 @@
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="text-end">
+            <a class="link-secondary bold text-uppercase" style="font-size: 12px;" href="{{viewAllUrl}}">
+                See more <i class="fa fa-arrow-right"></i> </a>
+        </div>
+       
+
+    </div>
 </div>
