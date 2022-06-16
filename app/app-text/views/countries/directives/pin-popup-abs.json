@@ -1,0 +1,14 @@
+{
+    "partyToNagoya": "Party to the Nagoya Protocol",
+    "notPartyToNagoya": "Not a Party to the Nagoya Protocol",
+    "ratified":  "Ratified, not yet Party",
+    "dkText": "Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.",
+    "fkText":   "A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern Ireland concerning sovereignty over the Falkland Islands (Malvinas).",
+    "ehText":   "Non-Self Governing Territory.",
+    "gbText":   "The UK’s ratification of the Nagoya Protocol does not extend to the",
+    "gbTitle14": "Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands",
+    "overseasTerritories": "14 Overseas Territories",
+    "or":   "or",
+    "gbTitle3": "Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man",
+    "crownDependencies": "3 Crown Dependencies"
+}
