@@ -118,7 +118,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type        : 'element',
-                            selector    : "#quickViewVLR",
+                            selector    : "#quickViewContact",
                             title       : joyRideText.quickView.title,
                             content     : joyRideText.quickView.content,
                             placement   : 'right',
@@ -128,7 +128,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type        : 'element',
-                            selector    : "#addNewRecordVLR",
+                            selector    : "#addNewRecordContact",
                             title       : joyRideText.addNewRecord.title,
                             content     : joyRideText.addNewRecord.content,
                             placement   : 'right',
@@ -137,7 +137,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
                         {
                             appendToBody: true,
                             type        : 'element',
-                            selector    : "#viewListVLR",
+                            selector    : "#viewListContact",
                             title       : joyRideText.viewAllRecords.title,
                             content     : joyRideText.viewAllRecords.content,
                             placement   : 'right'
