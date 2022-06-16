@@ -5,11 +5,13 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
+import countryProfileT from '~/app-text/views/countries/country-profile.json';
 
   export { default as template } from './country-profile.html';
 
-  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService',
-    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService) {
+  export default ["$scope","$route", "$sce", "$timeout", "IStorage","locale", 'commonjs', '$q', 'breadcrumbs', '$element', '$compile', 'realm', 'ngMeta','searchService', 'translationService',
+    function($scope,$route, $sce, $timeout, IStorage, locale, commonjs, $q, breadcrumbs, $element, $compile, realm, ngMeta,searchService, translationService) {
+      translationService.set('countryProfileT', countryProfileT);
       $scope.code      = $route.current.params.code;
       $scope.isBCH     = realm.is('BCH');
       $scope.isABS     = realm.is('ABS');

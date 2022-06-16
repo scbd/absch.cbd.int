@@ -19,7 +19,7 @@ app.directive('countryProfile', function() {
         },
         controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService', 'translationService',
             function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService, translationService) {
-
+                translationService.set('countryProfileT', countryProfileT);
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
                 }
@@ -31,7 +31,7 @@ app.directive('countryProfile', function() {
                 var index=0;
 
                 async function init(){
-                    translationService.set('countryProfileT', countryProfileT);
+                    
                     _(realm.schemas).map(function(schema, key){
                         if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
                             countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
