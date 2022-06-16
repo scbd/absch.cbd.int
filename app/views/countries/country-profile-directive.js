@@ -6,6 +6,7 @@ import '~/views/search/search-results/result-default';
 import 'services/main';
 import 'views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
+import countryProfileT from '~/app-text/views/countries/country-profile-directive.json';
 
 app.directive('countryProfile', function() {
     return {
@@ -16,8 +17,8 @@ app.directive('countryProfile', function() {
             api : '=?',
             code : '='
         },
-        controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService',
-            function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService) {
+        controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService', 'translationService',
+            function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService, translationService) {
 
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
@@ -30,6 +31,7 @@ app.directive('countryProfile', function() {
                 var index=0;
 
                 async function init(){
+                    translationService.set('countryProfileT', countryProfileT);
                     _(realm.schemas).map(function(schema, key){
                         if(schema.type=='national' && key!= 'contact' && key!= 'countryProfile'){
                             countryRecords[key] = { title : schema.title, shortCode : schema.shortCode, index: index++, docs:[], numFound:0};
