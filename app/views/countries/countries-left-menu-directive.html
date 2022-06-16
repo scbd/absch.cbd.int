@@ -1,49 +1,49 @@
 ﻿<div>
-    <h1 class="special-font">Country Information</h1>
+    <h1 class="special-font">{{::('countriesLeftMenuT.countryInformation'|$translate)}}</h1>
                  
     <div role="tabpanel">
 
       <!-- Nav tabs -->
       <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a rel="noopener" translation-url  href="#map" aria-controls="map" role="tab" data-bs-toggle="tab"><h4 style="padding:0;margin:0;">Map</h4></a></li>
-        <li role="presentation"><a rel="noopener" translation-url  href="#countries" aria-controls="countries" role="tab" data-bs-toggle="tab"><h4 style="padding:0;margin:0;">Select a country</h4></a></li>
+        <li role="presentation" class="active"><a rel="noopener" translation-url  href="#map" aria-controls="map" role="tab" data-bs-toggle="tab"><h4 style="padding:0;margin:0;">{{::('countriesLeftMenuT.map'|$translate)}}</h4></a></li>
+        <li role="presentation"><a rel="noopener" translation-url  href="#countries" aria-controls="countries" role="tab" data-bs-toggle="tab"><h4 style="padding:0;margin:0;">{{::('countriesLeftMenuT.selectCountry'|$translate)}}</h4></a></li>
       </ul>
       <!-- Tab panes -->
       <div class="tab-content card bg-white">
         <div role="tabpanel" class="tab-pane active" id="map">
               
              <div style="padding-bottom:30px;" >
-                <div><strong>Filter by Nagoya Protocol Party Status</strong></div>
+                <div><strong>{{::('countriesLeftMenuT.filterByStatus'|$translate)}}</strong></div>
                 <hr  style="padding-bottom:5px;margin:0;">
          
                     <div ng-click="updateMap('all')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='all'}">
                         <span class="badge float-end"  ng-bind="countries.length"></span>
-                        <span>All</span>
+                        <span>{{::('countriesLeftMenuT.all'|$translate)}}</span>
                     </div>
                     
                      <div ng-click="updateMap('party')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='party'}">
                         <span class="badge   float-end" ng-bind="npParty"></span>
-                        <span style="font-weight:bold;color:#428bca">Party</span>
+                        <span style="font-weight:bold;color:#428bca">{{::('countriesLeftMenuT.party'|$translate)}}</span>
                     </div>
                     
                     <div ng-click="updateMap('nonParties')" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  ng-class="{'bg-grey1':type=='nonParties'}">
                         <span class="badge float-end" ng-bind="nonParty"></span>
-                        <span style="font-weight:bold;color:#888">Non-Party</span>
+                        <span style="font-weight:bold;color:#888">{{::('countriesLeftMenuT.nonParty'|$translate)}}</span>
                     </div>
              </div>
      
              <div style="padding-bottom:10px;" >
-                <div><strong>Filter Country by Record Types</strong></div>
+                <div><strong>{{::('countriesLeftMenuT.filterByRecordTypes'|$translate)}}</strong></div>
                 <hr style="padding-bottom:5px;margin:0;">
          
                     <div class="row">
-                        <div class="col-xs-2 stats-country color-black text-center">Countries</div>
-                        <div class="col-xs-10 stats-country color-black text-right">Records</div>
+                        <div class="col-xs-2 stats-country color-black text-center">{{::('countriesLeftMenuT.countries'|$translate)}}</div>
+                        <div class="col-xs-10 stats-country color-black text-right">{{::('countriesLeftMenuT.records'|$translate)}}</div>
                         
                         <div class="clearfix"></div>  
                         <div class="col-xs-2  text-center" ng-class="{'bg-grey1':selected_facet=='all'}">  
                             <div ng-click="searchFilter=isPartyToCBD;" style="width:100%;padding:2px;cursor:pointer;border-radius:3px;"  >
-                                <strong>All</strong>
+                                <strong>{{::('countriesLeftMenuT.all'|$translate)}}</strong>
                             </div>
                         </div>
                         <div class="col-xs-10" ng-class="{'bg-grey1':selected_facet=='all'}">
@@ -118,17 +118,17 @@
 
              <div style="padding-bottom:10px;">
          
-                <strong>Filter by Nagoya Protocol Party Status</strong>
+                <strong>{{::('countriesLeftMenuT.filterByStatus'|$translate)}}</strong>
                
                 <ul>
                   <li><a rel="noopener" translation-url  ng-click="updateMap('all')">All <span class="badge float-end"><span ng-bind="countries.length"></span></span></a></li>
-                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#428bca" ng-click="updateMap('party');selected=': Parties'"  >Party <span class="badge float-end" ng-bind="npParty"></span></a></li>
-                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#888" ng-click="updateMap('nonParties');selected=': Non-Parties'" >Non-Party <span class="badge float-end" ng-bind="nonParty"></span></a></li>
+                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#428bca" ng-click="updateMap('party');selected=': Parties'"  >{{::('countriesLeftMenuT.party'|$translate)}}<span class="badge float-end" ng-bind="npParty"></span></a></li>
+                  <li><a rel="noopener" translation-url  style="font-weight:bold;color:#888" ng-click="updateMap('nonParties');selected=': Non-Parties'" >{{::('countriesLeftMenuT.nonParty'|$translate)}}<span class="badge float-end" ng-bind="nonParty"></span></a></li>
                 </ul>
              </div>
     
     
-                <strong>Select a country</strong>
+                <strong>{{::('countriesLeftMenuT.selectCountry'|$translate)}}</strong>
                 <input type="textbox" ng-model="countryFilter" placeholder="filter by country name" class="form-control form-control-small" />
     
                 <div class="clearfix"></div>

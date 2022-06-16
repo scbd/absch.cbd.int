@@ -2,6 +2,7 @@ import app from 'app';
 import template from 'text!./countries-left-menu-directive.html';
 import _ from 'lodash';
 import 'services/main';
+import countriesLeftMenuT from '~/app-text/views/countries/countries-left-menu-directive.json';
 
     app.directive('countriesLeftMenu', function() {
         return {
@@ -13,9 +14,10 @@ import 'services/main';
                 onStatusClick: '&',
                 onCountryClick: '&',
             },
-            controller: ['$scope', '$http', '$q', '$filter', 'commonjs','$location',
-                function($scope, $http, $q, $filter, commonjs, $location) {
+            controller: ['$scope', '$http', '$q', '$filter', 'commonjs','$location', 'translationService',
+                function($scope, $http, $q, $filter, commonjs, $location, translationService) {
 
+                    translationService.set('countriesLeftMenuT', countriesLeftMenuT);
                     $scope.type = 'all';
                     $scope.lastAction = 'party';
                     $scope.commonFormatFacets = $scope.$parent.commonFormatFacets;
