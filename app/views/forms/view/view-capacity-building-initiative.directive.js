@@ -4,8 +4,9 @@ import 'views/directives/record-options';
 import 'views/forms/view/directives/view-record-reference.directive';
 import _ from "lodash";
 import 'views/forms/directives/view-terms-hierarchy';
+import viewCdiT from '~/app-text/views/forms/view/view-capacity-building-initiative.json';
 
-app.directive("viewCapacityBuildingInitiative", [function () {
+app.directive("viewCapacityBuildingInitiative", ["translationService", function (translationService) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -21,7 +22,7 @@ app.directive("viewCapacityBuildingInitiative", [function () {
 		},
 		controller : ["$scope", "IStorage", "$http","realm", function ($scope, storage, $http, realm)
 		{
-
+			translationService.set('viewCdiT', viewCdiT);
 			$scope.isABS = realm.is('ABS');
 			$scope.isBCH = realm.is('BCH');
 			$scope.onThematicAreasTerms = function(terms){
