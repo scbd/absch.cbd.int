@@ -1,0 +1,16 @@
+{
+    "type": "Type",
+    "country": "Country",
+    "name": "Name",
+    "typeOfOrganization": "Type of organization",
+    "jobTitle": "Job title",
+    "department": "Department / Division / Unit",
+    "organization": "Organization",
+    "addressContact": "Address of Contact",
+    "phoneNumber": "Phone number(s)",
+    "faxNumber": "Fax number(s)",
+    "emails": "Email(s)",
+    "webAddress": "Website address(es)",
+    "additionalInfo": "Additional Information",
+    "otherRelevant": "Other relevant website addresses and/or attached documents"
+}
