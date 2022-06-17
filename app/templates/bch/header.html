@@ -5,23 +5,23 @@
                 <button class="navbar-toggler collapsed px-2" type="button" >
                     <span class="navbar-toggler-icon"></span>
                 </button>   
-                <span class="realm-base-acronym fw-bold color-orange"> BCH  </span> 
-                <span class="fw-bold fs-md-4 text-uppercase color-orange ">Biosafety Clearing-House</span>
+                <span class="realm-base-acronym fw-bold color-orange"> {{::('bchHeaderT.bch'|$translate)}}  </span> 
+                <span class="fw-bold fs-md-4 text-uppercase color-orange ">{{::('bchHeaderT.biosafetyClearingHouse'|$translate)}}</span>
                 <span ng-if="isDEV" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
-                    DEVELOPEMENT</span>
+                    {{::('bchHeaderT.development'|$translate)}}</span>
                 <span ng-if="isTRG" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
-                        TRAINING</span>
+                        {{::('bchHeaderT.training'|$translate)}}</span>
             </div>
               <div ng-if="showNav" class="navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url href=".">Home</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >About</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/search" >Search</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/register" >Submit</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >Country Profiles</a></li>
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >Help</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url href=".">{{::('bchHeaderT.home'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >{{::('bchHeaderT.about'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/search" >{{::('bchHeaderT.search'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/register" >{{::('bchHeaderT.submit'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/countries" >{{::('bchHeaderT.countryProfiles'|$translate)}}</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/kb" >{{::('bchHeaderT.help'|$translate)}}</a></li>
 <!--                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/reports" >National reports</a></li>-->
-                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/onlineconferences" >Forums</a></li>
+                    <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url ng-href="/onlineconferences" >{{::('bchHeaderT.forums'|$translate)}}</a></li>
                 </ul>
               </div>
           </nav>
@@ -30,12 +30,12 @@
     <header class="pt-2 nav-lg-header">
         <div class="">
             <a href="." class="realm-base-acronym color-orange mx-3 px-lg-4">
-                BCH
-                <span class="fw-bold ch-name">Biosafety Clearing-House</span>
+                {{::('bchHeaderT.bch'|$translate)}}
+                <span class="fw-bold ch-name">{{::('bchHeaderT.biosafetyClearingHouse'|$translate)}}</span>
                 <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
-                    DEVELOPEMENT</span>
+                    {{::('bchHeaderT.development'|$translate)}}</span>
                 <span ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
-                        TRAINING</span>
+                        {{::('bchHeaderT.training'|$translate)}}</span>
 
             </a>
         </div>
@@ -46,37 +46,37 @@
             <ul class="nav me-auto mx-2">
                 <li class="nav-item"><a rel="noopener" translation-url href="." class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0"
                         aria-current="page">
-                        <span>Home</span> 
+                        <span>{{::('bchHeaderT.home'|$translate)}}</span> 
                     </a>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="/kb"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">about</a></li>
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('bchHeaderT.about'|$translate)}}</a></li>
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a rel="noopener" translation-url href="/search" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
-                        id="dropdownMenuButton1" aria-expanded="false">Search</a>
+                        id="dropdownMenuButton1" aria-expanded="false">{{::('bchHeaderT.search'|$translate)}}</a>
                     <ul class="dropdown-menu p-0" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1" >
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="search">Records</a></li>
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/registries">Registries</a>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="search">{{::('bchHeaderT.records'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/registries">{{::('bchHeaderT.registries'|$translate)}}</a>
                             <ul class="search-nav-menu-list ps-4">
-                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/living-modified-organisms"> LMO</a></li>
-                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/organisms"> Organism</a></li>
-                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/genetic-elements"> Gene</a></li>
+                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/living-modified-organisms"> {{::('bchHeaderT.lmo'|$translate)}}</a></li>
+                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/organisms"> {{::('bchHeaderT.organism'|$translate)}}</a></li>
+                                <li class="ms-4"><a rel="noopener" translation-url class="ms-2 dropdown-item fw-bold fs-small-8 color-grey px-0 w-auto" href="/registries/genetic-elements"> {{::('bchHeaderT.gene'|$translate)}}</a></li>
                                 
                             </ul>
                         </li>
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/reports">National Report Analyzer</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="/reports">{{::('bchHeaderT.nra'|$translate)}}</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="/register"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">submit</a>
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('bchHeaderT.submit'|$translate)}}</a>
                 </li>
 
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a id="countryProfile" rel="noopener" translation-url href="/countries" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
                           id="dropdownMenuButton2" aria-expanded="false">
-                             <span class="d-sm-none d-md-inline-block">country profiles</span> 
+                             <span class="d-sm-none d-md-inline-block">{{::('bchHeaderT.countryProfiles'|$translate)}}</span> 
                              <span class="d-none d-sm-inline-block d-md-none">
-                        countries </span>
+                        {{::('bchHeaderT.countries'|$translate)}} </span>
                     </a>
 
                     <ul class="dropdown-menu bg-darkgrey">
@@ -97,46 +97,46 @@
                         </ul>
                     </li>
                         <li class="text-center m-2 mb-1">
-                            <a class="link-light" rel="noopener" translation-url href="countries"> Overview - List all countries
+                            <a class="link-light" rel="noopener" translation-url href="countries"> {{::('bchHeaderT.overviewAllCountries'|$translate)}}
                                 <i class="fa fa-arrow-right"></i> </a>
                         </li>
                     </ul>
                 </li>
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a href="/kb" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
+                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">{{::('bchHeaderT.help'|$translate)}}</a>
                     <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb">Knowledge Base</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/faqs">FAQs</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch3-vle.unep.org/" target="_blank">Training Materials</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch-training.cbd.int">Training Site</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/articles/619c55580c1ff000011c1c46/Contact-us/bch">Contact us</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb">{{::('bchHeaderT.kb'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/faqs">{{::('bchHeaderT.faq'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch3-vle.unep.org/" target="_blank">{{::('bchHeaderT.trainingMaterials'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch-training.cbd.int">{{::('bchHeaderT.trainingSite'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="/kb/articles/619c55580c1ff000011c1c46/Contact-us/bch">{{::('bchHeaderT.contactUs'|$translate)}}</a></li>
                     </ul>
                 </li>
              
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a href="#" class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0  dropdown-toggle"
-                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">forums</a>
+                        type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">{{::('bchHeaderT.forums'|$translate)}}</a>
                     <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton3">
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/">Forums and Portals</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/portal_art20/nfps/newBCHforum.shtml">BCH on BCH Forum</a></li>
-                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/portal_art20/unep-gef/0004.shtml">UNEP Regional Advisors Forum</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/">{{::('bchHeaderT.forumsPortals'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url href="https://bch.cbd.int/onlineconferences/portal_art20/nfps/newBCHforum.shtml">{{::('bchHeaderT.bchForum'|$translate)}}</a></li>
+                        <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url target="_blank" href="https://bch.cbd.int/onlineconferences/portal_art20/unep-gef/0004.shtml">{{::('bchHeaderT.unepForum'|$translate)}}</a></li>
                     </ul>
                 </li>
     
                 <li ng-if="isTRG" class="nav-item"><a href="https://bch.cbd.int/"
-                    style="color: black !important;"    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">Leave Training Site</a></li>
+                    style="color: black !important;"    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('bchHeaderT.leaveTrainingSite'|$translate)}}</a></li>
             </ul>
             <ul class="nav">
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown ">
                     <a href="#"  class="fw-bold menu-navigation-link nav-link link-dark p-0 dropdown-toggle" type="button"
                         id="dropdownMenuButton4" data-bs-toggle="dropdown" aria-expanded="false">
-                        <span> Protocol </span> 
+                        <span> {{::('bchHeaderT.protocol'|$translate)}} </span> 
                     </a>
 
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton4" style="left: -70px;">
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://bch.cbd.int/protocol">Cartagena Protocol</a></li>
-                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://bch.cbd.int/protocol/supplementary/">Supplementary Protocol</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://bch.cbd.int/protocol">{{::('bchHeaderT.cartagenaProtocol'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url class="dropdown-item fw-bold fs-small-8 color-grey" href="https://bch.cbd.int/protocol/supplementary/">{{::('bchHeaderT.suppProtocol'|$translate)}}</a></li>
                     </ul>
                 </li>
             </ul>
