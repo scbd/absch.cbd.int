@@ -14,11 +14,11 @@
 							<legend name="formInfo" style="display:none"></legend>
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>{{::('editVLRT.generalInfo'|$translate)}}</legend>
 			
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="header.languages" required caption="Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required caption="{{::('editVLRT.langugaeToPublish'|$translate)}}">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="documentLanguages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -27,16 +27,16 @@
                                     </div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="title" caption="Title">
-												<div class="help-block">This will appear as the title of the BCH record.</div>
+											<div class="km-control-group" required name="title" caption="{{::('editVLRT.title'|$translate)}}">
+												<div class="help-block">{{::('editVLRT.titleInfo'|$translate)}}</div>
 												<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12" ng-if="isVlr||isMcc||isCpp">
-											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="Type of resource">
-													<div class="help-block">Select as many options as needed in order to best describe the resource(s).</div>
+											<div class="km-control-group tabular-term-check" required name="resourceTypes" caption="{{::('editVLRT.typeOfResource'|$translate)}}">
+													<div class="help-block">{{::('editVLRT.typeOfResourceInfo'|$translate)}}</div>
 													<div km-term-check name="resourceTypes" required ng-model="document.resourceTypes"  terms="options.resourceTypes()"
 															binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" locales="document.header.languages"></div>												
 											</div>
@@ -44,23 +44,23 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12" style="margin-top: 30px; margin-bottom: -10px;">
-											<label name="authors" style="font-size: 21px !important;" required for="authors">Author(s)</label>
-											<div class="help-block">Name of the person or organization who has authored the publication or information resource.</div>
+											<label name="authors" style="font-size: 21px !important;" required for="authors">{{::('editVLRT.author'|$translate)}}</label>
+											<div class="help-block">{{::('editVLRT.authorInfo'|$translate)}}</div>
 										</div>
 										<div class="col-xs-12" style="margin-top: 20px;">
-											<div class="km-control-group" name="authors" caption="Author name(s)">
+											<div class="km-control-group" name="authors" caption="{{::('editVLRT.authorName'|$translate)}}">
 												<div km-textbox-ml ng-model="document.authors" rows="2" locales="document.header.languages"></div>
 											</div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" caption="and/or" style="margin-bottom: 10px;"></div>
+											<div class="km-control-group" caption="{{::('editVLRT.andOr'|$translate)}}" style="margin-bottom: 10px;"></div>
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="organizations" caption="Reference to the authoring organization(s)">
+											<div class="km-control-group" name="organizations" caption="{{::('editVLRT.organizations'|$translate)}}">
 												<div document-selector type="checkbox" ng-model="document.organizations" question="organizations"
 													 on-build-query="onAuthorContactQuery(searchText)" allow-new="true" filter="true"
 													 schema="(organization contact)"  allow-new-schema="organization,contact"></div>
@@ -69,13 +69,13 @@
 									</div>
 									<div class="row">
 										<div class="col-md-6 col-xs-12">
-											<div class="km-control-group" name="publisher" caption="Publisher">
+											<div class="km-control-group" name="publisher" caption="{{::('editVLRT.publisher'|$translate)}}">
 												<div km-textbox-ml name="publisher" ng-model="document.publisher" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-md-6 col-xs-12">
-											<div class="km-control-group" required name="publicationDate" caption="Publication Date"
-											help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: VLR">
+											<div class="km-control-group" required name="publicationDate" caption="{{::('editVLRT.publicationDate'|$translate)}}"
+											help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editVLRT.helpVLR'|$translate)}}">
 												<div km-date placeholder="YYYY-MM" name="publicationDate" required 
 												format="yyyy-mm" start-view="months" min-view-mode="months"
 												ng-model="document.publicationDate"></div>
@@ -84,15 +84,14 @@
 									</div>
 									<div class="row">
 										<div class="col-md-6 col-xs-12">
-											<div class="km-control-group" name="source" caption="Source">
-												<div class="help-block">A reference to a resource from which the present resource is derived, e.g. the name of a journal for an article published in a journal.</div>
+											<div class="km-control-group" name="source" caption="{{::('editVLRT.source'|$translate)}}">
+												<div class="help-block">{{::('editVLRT.sourceInfo'|$translate)}}</div>
 												<div km-textbox-ml name="source" ng-model="document.source" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-md-6 col-xs-12">
-											<div class="km-control-group" name="rights" caption="Rights">
-												<div class="help-block">Information about rights held in and over the resource, such as copyright holder, 
-													and availability for reproduction for educational or non-profit purposes.</div>
+											<div class="km-control-group" name="rights" caption="{{::('editVLRT.rights'|$translate)}}">
+												<div class="help-block">{{::('editVLRT.rightsInfo'|$translate)}}</div>
 												<div km-textbox-ml name="rights" ng-model="document.rights" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -103,11 +102,11 @@
 
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Access to the resource(s)</legend>
+									<legend>{{::('editVLRT.accessResource'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="resourceLinks" caption="Link to the resource(s)">		
-												<div class="help-block">Please always attach the relevant document(s) that will be stored in the database for users to download. When resources are available on the Internet, please also provide a link to them. Please note that attachments are preferable to links because attachments are permanently accessible whereas links can become broken.</div>										
+											<div class="km-control-group" required name="resourceLinks" caption="{{::('editVLRT.resourceLinks'|$translate)}}">		
+												<div class="help-block">{{::('editVLRT.resourceLinksInfo'|$translate)}}</div>										
 												<div km-link name="resourceLinks"  ng-model="document.resourceLinks" allow-link="true" allow-file="true"
 												 extensions="options.documentLinksExt" identifier="document.header.identifier"></div>
 											</div>
@@ -115,7 +114,7 @@
 									</div>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="cover" caption="Cover image(s)">
+											<div class="km-control-group" name="cover" caption="{{::('editVLRT.cover'|$translate)}}">
 												<div km-link name="cover" ng-model="document.covers" allow-link="false" allow-file="true" mimeTypes="image/jpeg;image/png"
 												 identifier="document.header.identifier"></div>
 											</div>
@@ -126,10 +125,10 @@
 
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Information on the content of the resource</legend>
+									<legend>{{::('editVLRT.informationResource'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="summary" caption="Summary, abstract or table of contents (max 300 words)">
+											<div class="km-control-group" required name="summary" caption="{{::('editVLRT.summary'|$translate)}}">
 												<div km-textbox-ml required ng-model="document.summary" rows="4" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -139,23 +138,23 @@
 									<div class="row">
     
 										<div class="col-xs-12">
-											<label>Country(ies), regional or economic group(s) covered by the resource</label>
+											<label>{{::('editVLRT.countryRegionalResource'|$translate)}}</label>
 										</div>
 										<div class="col-md-3">
-											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="Geographical or political/economic group(s)">
+											<div class="km-control-group small regions-list"  name="countryRegions.regions" caption="{{::('editVLRT.countryRegions'|$translate)}}">
 												<div km-select multiple name="countryRegions.regions"
-													 ng-model="countryRegions.regions" placeholder="Please select option(s)"
+													 ng-model="countryRegions.regions" placeholder="{{::('editVLRT.selectOption'|$translate)}}"
 													 items="options.regions()"></div>
 											</div>
 										</div>
 
 										<div class="col-md-1">
-											<div class="km-control-group small country-list" name="countryRegions.countries" caption="and/or"></div></div>
+											<div class="km-control-group small country-list" name="countryRegions.countries" caption="{{::('editVLRT.andOr'|$translate)}}"></div></div>
 									
 										<div class="col-md-3">
-											<div class="km-control-group small country-list" name="countryRegions.countries" caption="Country name(s)">
+											<div class="km-control-group small country-list" name="countryRegions.countries" caption="{{::('editVLRT.countryName'|$translate)}}">
 												<div km-select multiple name="countryRegions.countries" filter-type="startsWith" 
-												ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+												ng-model="countryRegions.countries" placeholder="{{::('editVLRT.selectOption'|$translate)}}" items="options.countries()"></div>
 											</div>
 										</div>
 										
@@ -166,10 +165,10 @@
 							</section>
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Keywords for facilitating searching for information in the clearing-houses</legend>
+									<legend>{{::('editVLRT.feywordsFacilitating'|$translate)}}</legend>
 									<div class="row" ng-if="isABS">
 										<div class="col-md-12">
-											<div class="km-control-group" name="aichiTargets" caption="Aichi Targets">
+											<div class="km-control-group" name="aichiTargets" caption="{{::('editVLRT.aichiTargets'|$translate)}}">
 												<div km-term-check name="aichiTargets" ng-model="document.aichiTargets" terms="options.aichiTargets()"
 												 binding-type="term[]"></div>
 											</div>
@@ -178,7 +177,7 @@
 
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="CBD Subject Areas">
+											<div class="km-control-group tabular-term-check"  name="cbdSubjects" caption="{{::('editVLRT.cbdSubjects'|$translate)}}">
 												<div km-term-check name="cbdSubjects"  ng-model="document.cbdSubjects" 
 												terms="options.cbdSubjects()" tabular-shape="true" binding-type="term[]" locales="document.header.languages"></div>													
 											</div>
@@ -191,10 +190,10 @@
 						<!-- IF BCH START -->
 						<section ng-if="isBCH">
 							<div class="no-shadow bg-white">
-								<legend>Keywords related to Biosafety</legend>
+								<legend>{{::('editVLRT.keywordsRelatedBiosafety'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="Biosafety Thematic Areas">
+										<div class="km-control-group tabular-term-check" required name="biosafety.subjects" caption="{{::('editVLRT.biosafetyThematicAreas'|$translate)}}">
 											<div km-term-check name="biosafety.subjects" required ng-model="document.biosafety.subjects"  terms="options.bchSubjects()"
 											 binding-type="term[]" tabular-shape="{{isVlr ? true : false}}" ng-change="onThematicAreaChange(document.biosafety.subjects)" locales="document.header.languages"></div>
 										</div>
@@ -203,9 +202,9 @@
 								<!-- TODO: need to apply a condition -->
 						        <div >
 									<div class="row" ng-if="hasRiskAssessmentSubject">
-										<legend>Guidance on risk assessment of living modified organisms</legend>
+										<legend>{{::('editVLRT.riskAssessmentSubject'|$translate)}}</legend>
 										<div class="alert alert-danger">
-											<strong>Note:</strong> the function for recommending a resource as background material for the “Guidance on Risk Assessment of Living Modified Organisms” is under development.
+											<strong>{{::('editVLRT.note'|$translate)}}:</strong> {{::('editVLRT.riskAssessmentSubjectNotes'|$translate)}}
 										</div>
 										<!-- TODO: section hidden for now -->
 										<!--
@@ -234,12 +233,12 @@
 									</div>
 									<div class="row padding-top-10">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressModifiedOrganisms" caption="Does this resource address one or more specific LMOs?" required>
+											<div class="km-control-group" name="biosafety.addressModifiedOrganisms" caption="{{::('editVLRT.addressModifiedOrganisms'|$translate)}}" required>
 												<div km-yes-no required name="biosafety.addressModifiedOrganisms" ng-model="document.biosafety.addressModifiedOrganisms"  
 													ng-click="onAddressModifiedOrganismsChange(document.biosafety.addressModifiedOrganisms)"  locales="document.header.languages" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressModifiedOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="LMO(s) identification">
+														<div class="km-control-group" required name="biosafety.modifiedOrganisms"  caption="{{::('editVLRT.modifiedOrganisms'|$translate)}}">
 															<div document-selector name="biosafety.modifiedOrganisms" required type="checkbox"  ng-model="document.biosafety.modifiedOrganisms"
 															   on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true"  filter="true"
 															   allow-new-schema="modifiedOrganism"></div>
@@ -252,12 +251,12 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="Organism(s) identification" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="{{::('editVLRT.organismIdentification'|$translate)}}" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="biosafety.organisms"  caption="Organism(s) identification">
+														<div class="km-control-group" required name="biosafety.organisms"  caption="{{::('editVLRT.organismIdentification'|$translate)}}">
 															<div document-selector name="biosafety.organisms" required ng-model="document.biosafety.organisms"
 																 on-build-query="onBuildQuery(searchText, 'organism')" allow-new="true"
 																 allow-new-schema="organism"></div>
@@ -272,15 +271,15 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressGenes" caption="Gene(s) identification" required>
+											<div class="km-control-group" name="biosafety.addressGenes" caption="{{::('editVLRT.geneIdentification'|$translate)}}" required>
 												<div class="help-block">
-													Information on genetic elements refers to DNA sequences, including genes, regulatory DNA sequences and other nucleic acids used to create a living modified organism. They may encode a protein or may have a specific regulatory function.
+													{{::('editVLRT.geneIdentificationInfo'|$translate)}}
 												</div>
 												<div km-yes-no required name="biosafety.addressGenes" ng-model="document.biosafety.addressGenes"  
 												ng-click="onAddressGenesChange(document.biosafety.addressGenes)"locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressGenes" style="margin-top: 15px;">
 													<div class="col-xs-12">
-														<div class="km-control-group" required name="biosafety.genes"  caption="Gene(s)  identification">
+														<div class="km-control-group" required name="biosafety.genes"  caption="{{::('editVLRT.geneIdentification'|$translate)}}">
 															<div document-selector name="biosafety.genes" required type="checkbox"  ng-model="document.biosafety.genes"
 																   on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true"  filter="true"
 																   allow-new-schema="dnaSequence"></div>
@@ -299,10 +298,10 @@
 						<section ng-if="isABS">
 							<div class="no-shadow bg-white">
 								<a rel="noopener" translation-url name="#AdditionalInformation"></a>
-								<legend>Keywords related to Access and Benefit-Sharing</legend>
+								<legend>{{::('editVLRT.keywordsRelatedAccess'|$translate)}}</legend>
 								<div class="row" ng-if="isMcc">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="nagoya.mccKeywords" required caption="Please select the relevant keywords for describing the content of  the code of conduct, guidelines and best practices and/or standards being submitted">
+										<div class="km-control-group" name="nagoya.mccKeywords" required caption="{{::('editVLRT.mccKeywords'|$translate)}}">
 											<div km-term-check name="nagoya.mccKeywords" required ng-model="document.nagoya.mccKeywords" terms="options.mccKeywords()"
 											 binding-type="term[]"></div>
 										</div>
@@ -310,7 +309,7 @@
 								</div>
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" required name="nagoya.subjects" caption="ABS Thematic Areas">
+										<div class="km-control-group" required name="nagoya.subjects" caption="{{::('editVLRT.absThematicAreas'|$translate)}}">
 											<div km-term-check name="nagoya.subjects" required  ng-model="document.nagoya.subjects"  terms="options.absSubjects()"
 											 binding-type="term[]" tabular-shape="false"></div>
 										</div>
@@ -319,8 +318,8 @@
 
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="Key areas and strategic measures for capacity-building and development addressed by the resource">
-											<div class="help-block">If this is resource is related to capacity-building for the Nagoya Protocol, please provide appliable option(s) from</div>
+										<div class="km-control-group tabular-term-check abs-resource-keywords" name="nagoya.keyAreas" caption="{{::('editVLRT.keyAreas'|$translate)}}">
+											<div class="help-block">{{::('editVLRT.keyAreasInfo'|$translate)}}</div>
 											<div km-term-check name="nagoya.keyAreas" ng-model="document.nagoya.keyAreas"  terms="options.absKeyAreas()"
 											 binding-type="term[]" tabular-shape="true" tabular-shape="true" ></div>
 										</div>
@@ -332,12 +331,12 @@
 						<section>
 							<div class="no-shadow bg-white">
 								<a rel="noopener" translation-url name="#AdditionalInformation"></a>
-								<legend>Additional information</legend>
+								<legend>{{::('editVLRT.additionalInformation'|$translate)}}</legend>
 		
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="address" caption="Any other relevant information">
-											<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+										<div class="km-control-group" name="address" caption="{{::('editVLRT.otherRelevantInformation'|$translate)}}">
+											<div class="help-block">{{::('editVLRT.relevantInformationInfo'|$translate)}}</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -345,9 +344,9 @@
 		
 								<div class="row">
 									<div class="col-xs-12">
-										<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+										<div class="km-control-group" name="relevantDocuments" caption="{{::('editVLRT.relevantDocuments'|$translate)}}">
 											<div class="help-block">
-												Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.
+												{{::('editVLRT.relevantDocumentsInfo'|$translate)}}
 											</div>
 											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 											 identifier="document.header.identifier"></div>
@@ -358,12 +357,11 @@
 						</section>
 						<section>
 							<div class="no-shadow bg-white">
-								<legend>Notes</legend>
+								<legend>{{::('editVLRT.notes'|$translate)}}</legend>
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="km-control-group" name="notes">
-										<div class="help-block">The “Notes” field is for personal use. It can be seen only when the record is being edited but is not visible when the record is published. 
-											This field is not meant to be used for confidential information.</div>
+										<div class="help-block">{{::('editVLRT.notesInfos'|$translate)}}</div>
 										<div km-notes name="notes" ng-model="document.notes"></div>
 									</div>
 								</div>

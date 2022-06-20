@@ -5,6 +5,7 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import "~/views/forms/view/view-resource.directive";
 import {getLimitedTerms} from 'services/common';
+import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schema-base.json';
 
 	app.directive('convertToNumber', function() {
 		return {
@@ -25,10 +26,10 @@ import {getLimitedTerms} from 'services/common';
 			restrict: 'EAC',
 			template: template ,
 			replace: true,
-			controller: ["$rootScope", "$scope", "$http", "$filter","IStorage", "roleService", "realm","thesaurusService", "$element",
-			 function ($rootScope, $scope, $http, $filter, storage, roleService, realm,thesaurusService, $element)
+			controller: ["$rootScope", "$scope", "$http", "$filter", "IStorage", "roleService", "realm", "thesaurusService", "$element", "translationService",
+				function ($rootScope, $scope, $http, $filter, storage, roleService, realm, thesaurusService, $element, translationService)
 			{
-
+				 translationService.set('editVLRT', editVLRT);
 				$scope.isABS = realm.is('ABS');
 				$scope.isBCH = realm.is('BCH');
 				$scope.user = $rootScope.user;
