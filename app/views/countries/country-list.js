@@ -5,7 +5,7 @@ import 'components/scbd-angularjs-services/main';
 import 'views/directives/block-region-directive';
 import 'components/scbd-angularjs-controls/main';
 import 'angular-joyride';
-import joyRideText from '~/app-data/country-profile-joyride-tour.json';
+import joyRideText from '~/app-text/country-profile-joyride-tour.json';
 import countryListTranslation from '~/app-text/views/countries/country-list.json';
 
     export { default as template } from './country-list.html';
