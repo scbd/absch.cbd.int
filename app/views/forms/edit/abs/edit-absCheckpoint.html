@@ -19,11 +19,11 @@
                                 <div class="editForm" ng-show="tab=='edit'" km-tab="edit">
                                     <legend name="formInfo" style="display:none"></legend>
                                     <section>
-                                    <legend name="generalInfo">General information</legend>
+                                    <legend name="generalInfo">{{::('editAbsCheckpointT.generalInfo'|$translate)}}</legend>
               
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required caption=" {{::('editAbsCheckpointT.langugaeToPublish'|$translate)}}">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -33,8 +33,8 @@
                                     <div class="row">
               
                                      <div class="col-xs-12">
-                                            <div class="km-control-group" name="government" required caption="Country">
-                                              <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                            <div class="km-control-group" name="government" required caption="{{::('editAbsCheckpointT.country'|$translate)}}">
+                                              <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsCheckpointT.selectOption'|$translate)}}"></div>
                                             </div>
                                         </div>
               
@@ -42,8 +42,8 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                                <div class="km-control-group" name="name" required caption="Name of the checkpoint">
-                                                    <div class="help-info">Bear in mind that the name of the checkpoint will help to identify the record in the ABS Clearing-House.</div>
+                                                <div class="km-control-group" name="name" required caption="{{::('editAbsCheckpointT.checkpointName'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsCheckpointT.checkpointNameInfo'|$translate)}}</div>
                                                     <div km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                         </div>
@@ -52,7 +52,7 @@
               
                                     <section>
               
-                                    <legend name="responsibilities–title">Responsibilities</legend>                                  
+                                    <legend name="responsibilities–title">{{::('editAbsCheckpointT.responsibilities'|$translate)}}</legend>                                  
                                     <!-- <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="responsibleFunctions" required caption="Responsible functions">
@@ -73,37 +73,37 @@
                                     </div> -->
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="responsibilities" caption="Short description of any additional responsibilities (maximum 300 characters)">
-                                                   <div class="help-info">A short description of the responsibilities of the checkpoint will help users of genetic resources and others to identify and clarify the role and functioning of the checkpoint in the collection of relevant information about the utilization of resources at, inter alia, any stage of research, development, innovation, pre-commercialization or commercialization.</div>
+                                            <div class="km-control-group" name="responsibilities" caption="{{::('editAbsCheckpointT.responsibilitiesDescription'|$translate)}}">
+                                                   <div class="help-info">{{::('editAbsCheckpointT.responsibilitiesDescriptionInfo'|$translate)}}</div>
                                                 <div km-rich-textbox name="responsibilities" rows="6" ng-model="document.responsibilities" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                                <div class="km-control-group" name="jurisdiction" caption="Area of jurisdiction">
-                                                    <div class="help-info">The information on the area of jurisdiction (national/federal, subnational, or community level) can help mapping different geographical responsibilities if there is more than one checkpoint.</div>
+                                                <div class="km-control-group" name="jurisdiction" caption="{{::('editAbsCheckpointT.jurisdiction'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsCheckpointT.jurisdictionInfo'|$translate)}}</div>
                                                      <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" required></div>
                                                 </div>
                                         </div>
                                     </div>
                                     <div class="row" ng-show="isSubNational()">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsCheckpointT.nameSubJurisdiction'|$translate)}}">
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row" ng-show="isCommunity()">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsCheckpointT.communityName'|$translate)}}">
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row" ng-show="isOthers()">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                                            <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsCheckpointT.jurisdictionName'|$translate)}}">
                                                 <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -123,21 +123,16 @@
               
                                     <section>
               
-                                    <legend name="nationalAuthorities">National authority/ies to receive the information collected or received by the designated checkpoint</legend>
+                                    <legend name="nationalAuthorities">{{::('editAbsCheckpointT.nationalAuthorities'|$translate)}}</legend>
                                     <div class="help-info">
-                                        In accordance with Article 17, paragraph 1 (a) (i) and (iii), of the Nagoya Protocol, the information collected or received by the checkpoint related to prior informed consent, to the source of the genetic resource, to the establishment of mutually agreed terms, and/or to the utilization of genetic resources, including from the internationally recognized certificate of compliance, needs to be provided to relevant national authorities, to the Party providing prior informed consent and to the ABS Clearing-House, as appropriate. On the basis of the information provided, the ABS Clearing-House will issue a communiqué and automatically send a courtesy copy to the designated national authority/ies of your country.
+                                        {{::('editAbsCheckpointT.nationalAuthoritiesInfoOne'|$translate)}}
                                        <br><br>
-                                      Therefore, the contacts included in the following section on national authority/ies will be the ones to receive the information collected or received by the designated checkpoint (and communicated to the ABS Clearing-House through the checkpoint communique (CPC)). For multiple authorities, please include multiple record numbers or contact detail forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.
-                                      Please indicate to which national authority or contact person in your country you wish to send the information collected or received by the designated checkpoint. For multiple authorities, please include multiple record numbers or contact details forms. Please note that the Party providing prior informed consent will automatically receive the information collected or received by the checkpoint.
-                                     
+                                        {{::('editAbsCheckpointT.nationalAuthoritiesInfoTwo'|$translate)}}
                                       </div>
                                     
-                                    
-                                    
-              
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" required name="informAllAuthorities" caption="Send a copy of the communiqué to all competent national authorities within my country">
+                                            <div class="km-control-group" required name="informAllAuthorities" caption="{{::('editAbsCheckpointT.informAllAuthorities'|$translate)}}">
                                                 <div class="km-yes-no" name="informAllAuthorities" ng-model="document.informAllAuthorities"></div>
                                             </div>
                                         </div>
@@ -160,7 +155,7 @@
               
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="contactsToInform" caption="Please select any national authorities whom you wish to send a copy of the communiqué">
+                                            <div class="km-control-group" name="contactsToInform" caption="{{::('editAbsCheckpointT.contactsToInform'|$translate)}}">
                                                 <div document-selector on-build-query="onContactQuery(searchText)"
                                                      ng-disabled="!document.government.identifier"
                                                      ng-model="document.contactsToInform"
@@ -172,11 +167,11 @@
               
                                     <section>
               
-                                    <legend>Additional Information</legend>
+                                    <legend>{{::('editAbsCheckpointT.additionalInformation'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="relevantInformation" caption="Additional Information">
-                                                <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                            <div class="km-control-group" name="relevantInformation" caption="{{::('editAbsCheckpointT.additionalInformation'|$translate)}}">
+                                                <div class="help-info">{{::('editAbsCheckpointT.relevantInformationInfo'|$translate)}}</div>
                                                 <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -184,7 +179,7 @@
               
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="relevantDocuments" caption="Other relevant website addresses and/or attached documents">
+                                            <div class="km-control-group" name="relevantDocuments" caption="{{::('editAbsCheckpointT.relevantDocumentsInfo'|$translate)}}">
                                                 <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -192,11 +187,11 @@
                                     </section>
               
                                     <section>
-                                    <legend>Notes</legend>
+                                    <legend>{{::('editAbsCheckpointT.notes'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-xs-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>                                                
+                                                <div class="help-info">{{::('editAbsCheckpointT.notesInfos'|$translate)}}</div>                                                
 											    <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>
