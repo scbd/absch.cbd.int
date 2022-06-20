@@ -4,16 +4,18 @@ import 'views/forms/edit/edit';
 import 'views/forms/view/abs/view-abs-checkpoint-communique.directive';
 import 'views/forms/edit/permit-selection-directive';
 import 'services/main';
+import editAbsCheckpointCT from '~/app-text/views/forms/edit/abs/edit-absCheckpointCommunique.json';
 
     export { default as template } from './edit-absCheckpointCommunique.html';
 
   export default ["$scope", "realm", "$http", "$filter", "$q", "$controller", "IStorage",
-         "Thesaurus", "Enumerable", "$location", 'commonjs',
-        function($scope, realm, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs) {
+    "Thesaurus", "Enumerable", "$location", "commonjs", "translationService",
+    function ($scope, realm, $http, $filter, $q, $controller, storage, Thesaurus, Enumerable, $location, commonjs, translationService) {
             $controller('editController', {
                 $scope: $scope
             });
 
+            translationService.set('editAbsCheckpointCT', editAbsCheckpointCT);
             $scope.path = $location.path();
 
             $scope.checkpointList = [];
