@@ -1,4 +1,4 @@
-import nr2Data from '~/app-data/bch/report-analyzer/cpbNationalReport2.json'
+import nr2Data from '~/app-text/bch/report-analyzer/cpbNationalReport2.json'
 
 export const cpbNationalReport2 = [
    {
