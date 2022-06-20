@@ -67,7 +67,7 @@ export const analyzerMapping =
             "infoBlockUrl"  : "views/report-analyzer/includes/cpbNationalReport2.html",
             "year"          : "2011",
             "deadline"      : "2011-09-30",
-            "compare"       : [{"title": "", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport2.json"}]
+            "compare"       : [{"title": "", "url":"app-text/bch/report-analyzer/mapping/cpbNationalReport2.json"}]
         },
         {   
             "type"          : "cpbNationalReport3",
