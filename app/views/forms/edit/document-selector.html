@@ -139,7 +139,7 @@
                     <div id="selectedRecords" class="tab-pane bg-white">
                         <div ng-if="activeTab=='selectedRecords'">        
                                   
-                            <table ng-if="tempSelectedDocuments.length" class="table table-condensed table-striped" class="width-100">
+                            <table ng-if="tempSelectedDocuments.length" class="table table-condensed table-striped w-100">
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -158,7 +158,7 @@
 
                                         <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">Smmary</a>
                                             <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
-                                        <th class="text-nowrap">
+                                        <th class="text-nowrap col-title">
                                             <!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> -->
                                             Meta Information
                                             <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span> -->
@@ -257,7 +257,7 @@
                 
                 
             </div> 
-            <table ng-if="isDialogOpen && !allowNew.editingOn && listView" class="table table-condensed table-striped" class="width-100">
+            <table ng-if="isDialogOpen && !allowNew.editingOn && listView" class="table table-condensed table-striped w-100">
                 <thead>
                     <tr>
                         <th></th>
@@ -278,7 +278,7 @@
                         <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">summary</a>
                             <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th class="text-nowrap">
+                        <th class="text-nowrap col-title">
                             <!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> -->
                             Meta Information
                             <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> -->

@@ -8,7 +8,7 @@
         </span>
         <span ng-if="error" class="alert alert-warning" role="alert">Error loading details for (<span ng-bind="model"></span>)</span>
     </div>
-	<div ng-if="!loading && !errorCode && !error">
+	<div class="view-reference-list" ng-if="!loading && !errorCode && !error">
         
         <span ng-transclude="default">		
             <span ng-switch="document.body.header.schema">
@@ -72,7 +72,7 @@
                 <span class="selected-reference-uid">
                     
                     <span ng-if="options.isCNA"> <span class="color-blue"> Competent National Authority:</span>
-                        <!-- <span ng-bind="(document || document) | uniqueID"></span> </span> -->
+                        <!-- <span ng-bind="(document || document) | uniqueID"></span> --> </span> 
                     <span ng-if="options.isNFP"><span class="color-blue uppercase">National Focal Point:</span>
                         <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
                         <span ng-bind="document.body.lastName"></span></span>
@@ -91,7 +91,7 @@
             <span ng-include="'workflow-status-section'"></span>
         </div>
 
-        <blockquote ng-show="options.showContact">
+        <blockquote ng-show="options.showContact" class="blockquote fs-small-8">
             <div ng-if="options.isContactTypeOrganization">
                 <div style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-bottom:5px;color:#999;"
                     ng-if="!options.isCNA">Organization</div>
@@ -137,9 +137,8 @@
             
             <span ng-if="document" onload="contactAddress=document.body"
                 ng-include="'reference-contact-address'"></span>
-            <div ng-if="options.isContactTypePerson && document.body.contactOrganization && document.body.contactOrganizationDetail">
-                <div
-                    style="font-size:12px;border-bottom:1px solid #ccc;text-transform:uppercase;font-weight:bold;margin-top:10px;margin-bottom:5px;color:#999;">
+            <div class="mt-5 text-start" ng-if="options.isContactTypePerson && document.body.contactOrganization && document.body.contactOrganizationDetail">
+                <div class="fw-bold text-uppercase text-secondary mb-2" style="font-size:12px;border-bottom:1px solid #ccc;">
                     Related Organization
                 </div>
                 <span ng-if="document.body.contactOrganizationDetail.deletedOn">
