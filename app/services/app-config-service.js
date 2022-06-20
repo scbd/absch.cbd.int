@@ -34,6 +34,8 @@ import realmConfigurations from 'realmConf';
                     throw new Error("Unknown realm for host: "+window.location.host);
 
                 return { 
+                            ...realmConfig,
+
                     value               :   realmConfig.realm,
                     uIdPrefix           :   realmConfig.uIdPrefix,
                     schemas             :   realmConfig.schemas,
@@ -46,8 +48,6 @@ import realmConfigurations from 'realmConf';
                     nationalSchemas     :   nationalSchemas,
                     referenceSchemas    :   referenceSchemas,
                     scbdSchemas			:   scbdSchemas,
-
-                    originalObject      : realmConfig,
 
                     is : function(realm, strict) {
                         

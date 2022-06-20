@@ -64,7 +64,7 @@ app.all('/app/*', function(req, res) { res.status(404).send(); } );
 
 app.post('/error-logs', require('./middlewares/error-logs')(proxy, {apiUrl:apiUrl, appVersion:appVersion}));
 
-// app.all('/api/v2013/documents/*', function(req, res) { proxy.web(req, res, { target: 'http://192.168.78.193', secure: false } ); } );
+app.all('/api/v2018/*', function(req, res) { proxy.web(req, res, { target: 'http://localhost:8000', secure: false } ); } );
 app.all('/api/*', (req, res) => proxy.web(req, res, { target: apiUrl, changeOrigin: true, secure:false }));
 
 app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*', 
@@ -72,7 +72,7 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
         global.app.version = appVersion;
         res.setHeader('Cache-Control', 'public');    
         res.cookie('VERSION', appVersion);
-        res.setHeader('X-Frame-Options', 'DENY')
+        // res.setHeader('X-Frame-Options', 'DENY')
         next();
     },  
     translation.renderApplicationTemplate
