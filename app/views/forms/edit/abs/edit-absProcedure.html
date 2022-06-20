@@ -25,7 +25,7 @@
                                 <br>
                                 <div class="row">
                                     <div class="col-xs-12" >
-                                        <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                        <div class="km-control-group" name="header.languages" required caption="{{::('editAbsProcedureT.langugaeToPublish'|$translate)}}">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                             </div>
@@ -33,14 +33,14 @@
                                     </div>
                                 </div>
                            
-                                <legend>General Information</legend>
+                                <legend>{{::('editAbsProcedureT.generalInfo'|$translate)}}</legend>
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="government" required caption="1. Country">
+                                        <div class="km-control-group" name="government" required caption="{{::('editAbsProcedureT.country'|$translate)}}">
                                             <div class="indent">
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-                                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsProcedureT.selectCountry'|$translate)}}"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -50,8 +50,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="name" required caption="2. This is an ABS procedure for:">
-                                            <div class="indent help-info"> Please provide a title for this specific ABS procedure (E.g.: Non-commercial use)
+                                        <div class="km-control-group" name="name" required caption="{{::('editAbsProcedureT.procedurName'|$translate)}}">
+                                            <div class="indent help-info">{{::('editAbsProcedureT.procedurNameInfo'|$translate)}}
                                                 </div>
                                             <div class="indent" km-textbox-ml ng-model="document.name" rows="1" placeholder="" locales="document.header.languages"></div>
                                         </div>
@@ -60,8 +60,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="jurisdiction" required caption="3. Area of jurisdiction:" >
-                                            <div class="help-info indent">Jurisdiction where this ABS procedure is relevant</div>
+                                        <div class="km-control-group" name="jurisdiction" required caption="{{::('editAbsProcedureT.areaJurisdiction'|$translate)}}" >
+                                            <div class="help-info indent">{{::('editAbsProcedureT.areaJurisdictionInfo'|$translate)}}</div>
                                             <div class="indent" style="max-width:300px;">
                                                 <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true" required></div>
@@ -72,21 +72,21 @@
 
                                 <div class="row indent" ng-if="isSubNational()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsProcedureT.jurisdictionName'|$translate)}}">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row indent" ng-if="isCommunity()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsProcedureT.nameCommunity'|$translate)}}">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row indent" ng-if="isOthers()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsProcedureT.nameOtherJurisdiction'|$translate)}}">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>
@@ -94,8 +94,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="contactsOrLinks" caption="4. Where should applications for access be made?">
-                                            <div class="indent help-info"> Please provide relevant contacts or links. </div>
+                                        <div class="km-control-group" required name="contactsOrLinks" caption="{{::('editAbsProcedureT.nameJurisdiction'|$translate)}}">
+                                            <div class="indent help-info">{{::('editAbsProcedureT.nameJurisdictionInfo'|$translate)}} </div>
                                             <div class="indent">
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.contacts" question="contacts"
                                                   allow-new="true" allow-new-schema="contact" locales="document.header.languages"></div>
@@ -109,7 +109,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="requirements" caption="5. What are the conditions or requirements a potential user needs to fulfil to apply for access?">
+                                        <div class="km-control-group" required name="requirements" caption="{{::('editAbsProcedureT.requirements'|$translate)}}">
                                             <div class="indent">
                                                 <div class="help-info"></div>
                                                 <div km-rich-textbox name="requirements" rows="3" ng-model="document.requirements" locales="document.header.languages"></div>
@@ -120,11 +120,11 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="description" caption="6. Please provide a step-by step description or a visual representation of the ABS procedure">
+                                        <div class="km-control-group" required name="description" caption="{{::('editAbsProcedureT.description'|$translate)}}">
                                             <div class="indent">
                                                 <div km-rich-textbox name="description" rows="3" ng-model="document.description" locales="document.header.languages"></div>
                                                 <br>
-                                                <div class="help-info">For example, you may wish to attach a flow chart or timeline.</div>
+                                                <div class="help-info">{{::('editAbsProcedureT.descriptionInfo'|$translate)}}</div>
                                                 <div km-link name="descriptionLinks" ng-model="document.descriptionLinks" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -133,18 +133,17 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="hasApplicationDocuments" caption="7. Does the applicant need to provide any documents?">
+                                        <div class="km-control-group" required name="hasApplicationDocuments" caption="{{::('editAbsProcedureT.hasApplicationDocuments'|$translate)}}">
                                             <div class="indent">
                                                 <div class="km-yes-no"  ng-model="document.hasApplicationDocuments"></div>
                                                 <br>
-                                                <div class="help-info">Please provide information on application forms or required documents (e.g.:
-                                                    copy of applicant’s national passport)</div>
+                                                <div class="help-info">{{::('editAbsProcedureT.hasApplicationDocumentsInfo'|$translate)}}</div>
                                                 <div km-rich-textbox name="applicationInformation" rows="3" ng-model="document.applicationInformation" locales="document.header.languages"></div>
                                                 <br>
-                                                <div class="help-info">Please attach relevant application form/documents or provide a link to website</div>
+                                                <div class="help-info">{{::('editAbsProcedureT.applicationLinks'|$translate)}}</div>
                                                 <div km-link name="applicationLinks" ng-model="document.applicationLinks" identifier="document.header.identifier"></div>
                                                 <br>
-                                                <div class=" help-info"> Please provide information on whom the application should be sent to:</div>
+                                                <div class=" help-info"> {{::('editAbsProcedureT.applicationLinksInfo'|$translate)}}</div>
                                                 <div document-selector on-build-query="onContactQuery(searchText)" ng-disabled="!document.government.identifier"
                                                     ng-model="document.applicationContacts" question="applicationContacts"
                                                          allow-new="true" allow-new-schema="contact"></div>
@@ -155,11 +154,11 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="hasApplicationFees" caption="8. Are there application fees?">
+                                        <div class="km-control-group" required name="hasApplicationFees" caption="{{::('editAbsProcedureT.hasApplicationFees'|$translate)}}">
                                             <div class="indent">
                                                 <div class="km-yes-no" name="hasApplicationFees" ng-model="document.hasApplicationFees"></div>
                                                 <br>
-                                                <div class="help-info">Please provide any additional information on application fees</div>
+                                                <div class="help-info">{{::('editAbsProcedureT.hasApplicationFeesInfo'|$translate)}}</div>
                                                 <div km-rich-textbox name="applicationFeesInformation" rows="3" ng-model="document.applicationFeesInformation" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -169,15 +168,15 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="duration" caption="9. How long does the application process take:">
+                                        <div class="km-control-group" name="duration" caption="{{::('editAbsProcedureT.duration'|$translate)}}">
                                             <div class="indent">
                                                 <input type="number" name="duration" ng-model="document.duration" minlength="1" placeholder="eg. 24" ng-change="clearDates()"
                                                     class="form-control" style="display:inline-block;width:100px" />
                                                 <select name="durationPeriod" ng-model="document.durationPeriod" class="form-select form-control" style="display:inline-block;width:100px"
                                                     placeholder="eg. Months">
-                                                    <option value="days">Days</option>
-                                                    <option value="months">Months</option>
-                                                    <option value="years">Years</option>
+                                                    <option value="days">{{::('editAbsProcedureT.days'|$translate)}}</option>
+                                                    <option value="months">{{::('editAbsProcedureT.months'|$translate)}}</option>
+                                                    <option value="years">{{::('editAbsProcedureT.years'|$translate)}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -187,7 +186,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="relevantMeasures" caption="10. Relevant ABS measure(s):">
+                                        <div class="km-control-group" name="relevantMeasures" caption="{{::('editAbsProcedureT.relevantMeasures'|$translate)}}">
                                             <div class="indent">
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onMeaureQuery(searchText)" ng-model="document.relevantMeasures" question="relevantMeasures"></div>
                                             </div>
@@ -197,7 +196,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="keywords" caption="11. Keywords">
+                                        <div class="km-control-group" required name="keywords" caption="{{::('editAbsProcedureT.keywords'|$translate)}}">
                                             <div km-term-check enable-search="true" name="keywords" required ng-model="document.keywords" terms="options.keywords()" binding-type="term[]"></div>
                                         </div>
                                     </div>
@@ -209,16 +208,15 @@
 
                             <section>
 
-                                <legend>Additional Information</legend>
+                                <legend>{{::('editAbsProcedureT.additionalInformation'|$translate)}}</legend>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="relevantInformation" caption="12. Additional Information">
+                                        <div class="km-control-group" name="relevantInformation" caption="{{::('editAbsProcedureT.additionalInformation12'|$translate)}}">
                                             <div class="indent">
-                                                <div class="help-info">Please use this field to provide any other relevant information that may not
-                                                    have been addressed elsewhere in the record.</div>
+                                                <div class="help-info">{{::('editAbsProcedureT.relevantInformationInfo'|$translate)}}</div>
                                                 <div km-rich-textbox name="relevantInformation" rows="3" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                                 <br>
-                                                <div class="help-info">Other relevant website addresses and/or attached documents:</div>
+                                                <div class="help-info">{{::('editAbsProcedureT.relevantDocumentsInfo'|$translate)}}</div>
                                                 <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -230,11 +228,11 @@
                             </section>
 
                             <section>
-                                <legend>Notes</legend>
+                                <legend>{{::('editAbsProcedureT.notes'|$translate)}}</legend>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="notes">
-                                            <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+                                            <div class="help-info">{{::('editAbsProcedureT.notesInfo'|$translate)}}</div>
                                             
 											<div km-notes name="notes" ng-model="document.notes"></div>
                                         </div>
