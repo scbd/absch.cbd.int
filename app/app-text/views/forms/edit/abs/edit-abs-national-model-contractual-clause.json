@@ -1,0 +1,23 @@
+{
+    "generalInfo": "General Information",
+    "langugaeToPublish": "Please select in which language(s) you wish to submit this record:",
+    "country": "1. Country",
+    "title": "2. Title",
+    "selectOption": "Please select a country...",
+    "summary": "3. Summary or abstract",
+    "jurisdiction": "4. Area of jurisdiction:",
+    "jurisdictionInfo": "Jurisdiction where this national model contractual clause is relevant",
+    "nameSubJurisdiction": "Name of the sub-national jurisdiction",
+    "communityName": "Name of the community",
+    "jurisdictionName": "Name of other jurisdiction",
+    "relevantMeasures": "5. Relevant ABS Measure(s):",
+    "relevantMeasuresInfo": "Please provide relevant ABS Measure(s).",
+    "keywords": "6. Please select the relevant keywords:",
+    "thematicArea": "7. Thematic area(s):",
+    "attachments": "Attachments",
+    "resourceLinks": "Link to the resource(s)",
+    "relevantInformation": "8. a) Relevant information about the attachment(s):",
+    "relevantDocuments": "8. b) Please attach the relevant files, documents, or resources",
+    "notes": "Notes",
+    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information."
+}

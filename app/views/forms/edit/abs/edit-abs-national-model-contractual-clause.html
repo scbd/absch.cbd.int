@@ -25,7 +25,7 @@
                                     <br>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                        <div class="km-control-group" name="header.languages" required caption="{{::('editABSNationalMCCT.langugaeToPublish'|$translate)}}">
                                             <div class="indent">
                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                             </div>
@@ -33,14 +33,14 @@
                                     </div>
                                 </div>
 
-                                <legend>General Information</legend>
+                                <legend>{{::('editABSNationalMCCT.generalInfo'|$translate)}}</legend>
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="government" required caption="1. Country">
+                                        <div class="km-control-group" name="government" required caption="{{::('editABSNationalMCCT.country'|$translate)}}">
                                             <div class="indent">
                                                 <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-                                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                                    filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editABSNationalMCCT.selectOption'|$translate)}}"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -48,7 +48,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="title" required caption="2. Title:">
+                                        <div class="km-control-group" name="title" required caption="{{::('editABSNationalMCCT.title'|$translate)}}:">
                                             <div class="indent" km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="description" caption="3. Summary or abstract ">
+                                        <div class="km-control-group" name="description" caption="{{::('editABSNationalMCCT.summary'|$translate)}} ">
                                             <div class="indent">
                                                 <div km-rich-textbox name="description" rows="3" ng-model="document.description" locales="document.header.languages"></div>
                                             </div>
@@ -66,8 +66,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="jurisdiction" caption="4. Area of jurisdiction:" >
-                                            <div class="help-info indent">Jurisdiction where this national model contractual clause is relevant</div>
+                                        <div class="km-control-group" name="jurisdiction" caption="{{::('editABSNationalMCCT.jurisdiction'|$translate)}}" >
+                                            <div class="help-info indent">{{::('editABSNationalMCCT.jurisdictionInfo'|$translate)}}</div>
                                             <div class="indent" style="max-width:300px;">
                                                 <div afc-autocomplete name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true" ></div>
@@ -78,21 +78,21 @@
 
                                 <div class="row indent" ng-if="isSubNational()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national jurisdiction">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="{{::('editABSNationalMCCT.nameSubJurisdiction'|$translate)}}">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row indent" ng-if="isCommunity()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of the community">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="{{::('editABSNationalMCCT.communityName'|$translate)}}">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row indent" ng-if="isOthers()">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="jurisdictionName" caption="Name of other jurisdiction">
+                                        <div class="km-control-group" required name="jurisdictionName" caption="{{::('editABSNationalMCCT.jurisdictionName'|$translate)}}">
                                             <div km-textbox-ml required name="jurisdictionName" rows="1" ng-model="document.jurisdiction.customValue" locales="document.header.languages"></div>
                                         </div>
                                     </div>
@@ -100,8 +100,8 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="relevantMeasures" caption="5. Relevant ABS Measure(s):">
-                                            <div class="indent help-info"> Please provide relevant ABS Measure(s). </div>
+                                        <div class="km-control-group" name="relevantMeasures" caption="{{::('editABSNationalMCCT.relevantMeasures'|$translate)}}">
+                                            <div class="indent help-info"> {{::('editABSNationalMCCT.relevantMeasuresInfo'|$translate)}} </div>
                                             <div class="indent">
                                                <div document-selector on-build-query="onBuildQuery(searchText)" ng-model="document.relevantMeasures" question="measure" locales="document.header.languages"></div>
                                             </div>
@@ -111,7 +111,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" required name="keywords" caption="6. Please select the relevant keywords:">
+                                        <div class="km-control-group" required name="keywords" caption="{{::('editABSNationalMCCT.keywords'|$translate)}}">
                                             <div km-term-check name="keywords" required ng-model="document.keywords" terms="options.keywords()" binding-type="term[]"></div>
                                         </div>
                                     </div>
@@ -120,7 +120,7 @@
 
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group"  name="thematicAreas" caption="7. Thematic area(s):">
+                                        <div class="km-control-group"  name="thematicAreas" caption="{{::('editABSNationalMCCT.thematicArea'|$translate)}}">
                                             <div km-term-check enable-search="true" name="thematicAreas"  ng-model="document.thematicAreas" terms="options.thematicAreas()" binding-type="term[]"></div>
                                         </div>
                                     </div>
@@ -128,15 +128,15 @@
                             </section>
 
                             <section>
-                                <legend>Attachments</legend>
+                                <legend>{{::('editABSNationalMCCT.attachments'|$translate)}}</legend>
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="km-control-group" name="resourceLinks" require caption="8. Link to the resource(s)">
+                                        <div class="km-control-group" name="resourceLinks" require caption="8. {{::('editABSNationalMCCT.resourceLinks'|$translate)}}">
                                             <div class="indent">
-                                                <div class="help-info">8. a) Relevant information about the attachment(s):</div>
+                                                <div class="help-info">{{::('editABSNationalMCCT.relevantInformation'|$translate)}}</div>
                                                 <div km-rich-textbox name="relevantInformation" rows="3" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                                 <br>
-                                                <div class="help-info">8. b)Please attach the relevant files, documents, or resources</div>
+                                                <div class="help-info">{{::('editABSNationalMCCT.relevantDocuments'|$translate)}}</div>
                                                 <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -145,11 +145,11 @@
                             </section>
 
                             <section>
-                                <legend>Notes</legend>
+                                <legend>{{::('editABSNationalMCCT.notes'|$translate)}}</legend>
                                 <div class="row">
                                     <div class="col-xs-12">
                                         <div class="km-control-group" name="notes">
-                                            <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>                                            
+                                            <div class="help-info">{{::('editABSNationalMCCT.notesInfos'|$translate)}}</div>                                            
 											<div km-notes name="notes" ng-model="document.notes"></div>
                                         </div>
                                     </div>
