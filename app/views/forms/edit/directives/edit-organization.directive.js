@@ -7,9 +7,10 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'views/forms/edit/editFormUtility';
 import 'services/main';
+import editOrganizationT from '~/app-text/views/forms/edit/directives/edit-organization.json';
 
-app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm', 'solr',
-                function($controller, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, realm, solr) {
+app.directive("editOrganization", ["$controller", "Thesaurus", "$q", 'guid', 'editFormUtility', 'locale', 'thesaurusService', 'realm', 'solr', 'translationService',
+    function ($controller, thesaurus, $q, guid, editFormUtility, locale, thesaurusService, realm, solr, translationService) {
 
 	return {
 		restrict   : "E",
@@ -21,6 +22,7 @@ app.directive("editOrganization", [ "$controller",  "Thesaurus", "$q", 'guid', '
             onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
+            translationService.set('editOrganizationT', editOrganizationT);
             $scope.areasOfWork  = [{}];
             $scope.container    = $attr.container;
             $scope.isDialog     = $attr.isDialog;  
