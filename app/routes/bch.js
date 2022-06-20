@@ -3,7 +3,7 @@ import commonRoutes from "./common-routes";
 import "angular-route";
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
-import routesLabels from '~/app-data/bch/bch-route-labels.json';
+import routesLabels from '~/app-text/bch/bch-route-labels.json';
 
 const bchRouteUrls = {
   thBch                                : { component: ()=>import('~/views/home/bch') },
