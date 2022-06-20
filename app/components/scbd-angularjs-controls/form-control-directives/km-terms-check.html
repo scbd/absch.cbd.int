@@ -39,7 +39,7 @@
 			<button type="button" class="btn btn-default btn-xs float-end easing" ng-click="clear()" ng-if="binding.length>0">
 				<i class="fa fa-remove"  ></i> Clear selection
 			</button>
-			<ul ng-if="!tabularShape" style="list-style: none;">	
+			<ul ng-if="!tabularShape" class="list-unstyled">	
 
 				<li ng:repeat="term in rootTerms" ng-class="{'other-term': otherTermIdentifier==term.identifier}" ng-include="'term-check-tree-renderer.html'"></li>
 
@@ -87,7 +87,7 @@
 				</span>
 				<div class="km-select-description" ng-if="showDescription && term.description" ng-bind="term.description" style="padding: 3px 25px;">
 				</div>
-				<ul style="list-style:none">
+				<ul class="list-unstyled">
 					<li ng:repeat="term in term.narrowerTerms" ng-include="'term-check-tree-renderer.html'">
 				</ul>
 			</script>

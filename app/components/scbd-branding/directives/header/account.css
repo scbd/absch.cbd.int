@@ -23,7 +23,8 @@
   #CBD-Branding .drop-menu-position {
     position: absolute;
     left: -80px;
-    top: 23px;
+    top: 40px;
+    margin-left: -20px;
   }
   #CBD-Branding .navbar-header .user-logged-in span img{
     margin: 0px 3px 5px;
