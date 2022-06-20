@@ -10,7 +10,7 @@ export const bundleUrls = {
         'npm/angular-animate@1.7.4/angular-animate.min.js',
         'npm/angular-cache@4.6.0/dist/angular-cache.min.js',
         'npm/jqueryui@1.11.1/jquery-ui.min.js',
-        'npm/bootstrap@3.3.0/dist/js/bootstrap.min.js',
+        'npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js',
         'npm/linq@3.0.5/linq.min.js',
         'npm/lodash@4.17.15/lodash.min.js',
         'npm/moment@2.9.0/min/moment-with-locales.min.js',
@@ -131,7 +131,7 @@ export default function bootApp(window, require, defineX) {
             'vue-i18n'                  : cdnHost +'vue-i18n@8.21.1/dist/vue-i18n.min',
             'axios'                     : `${cdnHost}axios@0.21.1/dist/axios.min`,
             'vue-pagination-2'          : `${cdnHost}vue-pagination-2@3.0.91/dist/vue-pagination-2.min`,
-            'vue-2-bootstrap-3'         : `${cdnHost}uiv@1.4.0/dist/uiv.min`
+            // 'vue-2-bootstrap-3'         : `${cdnHost}uiv@1.4.0/dist/uiv.min`
             
         },
         'shim': {
@@ -160,7 +160,7 @@ export default function bootApp(window, require, defineX) {
 
             'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             'vue-pagination-2'              : { 'deps': ['angular-vue'] },
-            'vue-2-bootstrap-3'             : { 'deps': ['angular-vue'] },
+            // 'vue-2-bootstrap-3'             : { 'deps': ['angular-vue'] },
             
         },
         urlArgs: function(id, url){
@@ -242,7 +242,7 @@ export default function bootApp(window, require, defineX) {
                 
     
     defineX('lodash',   [], ()=>window._);
-    defineX('bootstrap',[],noop);
+    defineX('bootstrap',[cdnHost + 'bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js'], (boostrap)=>{ return boostrap;});
     defineX('moment',   [],()=>window.moment);
     defineX('jquery',   [],()=>window.$);
     defineX('linqjs' ,  [],()=>window.Enumerable);

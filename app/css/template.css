@@ -363,7 +363,7 @@ body.modal-open .modal-backdrop.show{
     z-index: 2;
 }
 body.modal-open .modal-backdrop.fade.show{
-    opacity: 0;
+    /* opacity: 0; */
 } 
 
 .main-page-boxes-icons{
@@ -2692,13 +2692,6 @@ padding-right: 23%;
 .document-selection-modal .nav .dropdown> a:hover {
     background-color: #fff!important;
 }
-
-
-body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
-body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer{
-    display: none!important
-}
-
 
 .padding-40 {
 	padding: 40px;

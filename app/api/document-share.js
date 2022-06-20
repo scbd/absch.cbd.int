@@ -6,8 +6,12 @@ export default class DocumentShareApi extends ApiBase
         super(options);
     }
 
-    async queryDocumentShare(params)  {
-        return this.http.get(`api/v2017/document-sharing`, { params }).then(res => res.data).catch(tryCastToApiError);
+    async querySharedDocuments(params)  {
+        return this.http.get(`api/v2018/document-sharing`, { params }).then(res => res.data).catch(tryCastToApiError);
+    }
+
+    async getSharedDocument(id, params)  {
+        return this.http.get(`api/v2018/document-sharing/${id}`, {params}).then(res => res.data).catch(tryCastToApiError);
     }
 
     async shareDocument(params)  {
