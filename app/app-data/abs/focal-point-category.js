@@ -1,4 +1,4 @@
-import fpCategoryTitle from './focal-point-category.json'
+import fpCategoryTitle from '~/app-text/abs/focal-point-category.json'
 
 
 export const categories = [

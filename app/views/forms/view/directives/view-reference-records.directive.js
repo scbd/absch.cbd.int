@@ -84,7 +84,7 @@ app.directive("viewReferencedRecords", [function () {
 
 			async function getFieldTitles(){
 				if(realm.is('ABS'))
-					return (await import('~/app-data/abs/linked-records-field-titles.json')).default;
+					return (await import('~/app-text/abs/linked-records-field-titles.json')).default;
 
 				return (await import('~/app-data/bch/linked-records-field-titles.json')).default;
 			}
