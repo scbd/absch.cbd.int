@@ -6,13 +6,13 @@ import 'views/directives/map/home-map';
 import 'views/directives/home-articles';
 import homepageRecords from '~/components/common/homepage-records.vue';
 import 'angular-cookies';
-import homeTranslation from '~/app-text/views/home/home.json';
+import absHomeT from '~/app-text/views/home/index.json';
 
 export { default as template } from './index.html';
 
 export default ['$scope','$rootScope', 'translationService', function ($scope, $rootScope, translationService) {
 
-        translationService.set('home', homeTranslation);
+        translationService.set('absHomeT', absHomeT);
 
         $scope.recordCount = 4;
         $scope.announcementCounts = 3;
