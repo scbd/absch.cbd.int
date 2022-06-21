@@ -2,8 +2,9 @@ import app from "app";
 import template from "text!./view-abs-national-model-contractual-clause.directive.html";
 import 'views/directives/record-options';
 import 'views/forms/view/directives/view-record-reference.directive';
+import viewNMCCT from '~/app-text/views/forms/view/abs/view-abs-national-model-contractual-clause.json';
 
-       app.directive("viewAbsNationalModelContractualClause", [function () {
+       app.directive("viewAbsNationalModelContractualClause", ['translationService', function (translationService) {
                
            return {
                restrict   : "EAC",
@@ -19,6 +20,7 @@ import 'views/forms/view/directives/view-record-reference.directive';
                },
                link : function ($scope)
                {
+				   translationService.set('viewNMCCT', viewNMCCT);
                    $scope.contacts = undefined;
                },
                controller : ["$scope", 'realm', "IStorage", function ($scope, realm, storage)
