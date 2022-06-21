@@ -11,6 +11,8 @@
     "langugaeToPublish": "Please select in which language(s) you wish to submit this record:",
     "country": "Country",
     "selectOption": "Please select a country...",
+    "selectStatus": "Select legal status...",
+    "selectJurisdiction": "Select area of jurisdiction...",
     "title": "Title of the legislative administrative or policy measures on access and benefit-sharing",
     "legalStatus": "Legal status of the measure",
     "legalStatusInfo": "Examples of non-legally binding ABS measures are national strategies, policy documents, guidelines, etc. For non-legally binding ABS measure, the date of adoption is to be provided. A measure is legally binding when it creates obligations and rights which are legally enforceable. In this case, the date of entry into force of the ABS measure is to be provided. Measures in draft form can also be included in the ABS Clearing-House with a view to sharing information on progress towards implementation. Once the draft measure is adopted or entered into force, the status of the measure can be updated without needing to register the existing information again. Sometimes measures have a limited applicability in time. If you are introducing this type of measure, you are required to include the expiry date. Including retired measures can be useful for providing legal certainty about genetic resources and associated traditional knowledge accessed under a previous legal framework. If a measure already registered in the ABS Clearing-House is retired or is no longer applicable, you only need to edit the measure and change its status to retired, indicating the date from which the measure was no longer applicable.",

@@ -3,14 +3,15 @@ import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/view/abs/view-abs-permit.directive';
+import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json';
 
   export { default as template } from './edit-absPermit.html';
 
   export default ["$scope", "realm", "$http", "Thesaurus", "guid", "$filter", "$q", "Enumerable",
-                                    "editFormUtility", "$controller","IStorage","$location", "commonjs","solr",
-   function ($scope, realm, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs, solr) {
+  "editFormUtility", "$controller", "IStorage", "$location", "commonjs", "solr", "translationService",
+  function ($scope, realm, $http, Thesaurus, guid, $filter, $q, Enumerable, editFormUtility, $controller, storage, $location, commonjs, solr, translationService) {
     $controller('editController', {$scope: $scope});
-
+    translationService.set('editAbsPermitT', editAbsPermitT);
     $scope.path= $location.path();
 
     _.extend($scope.options, {
