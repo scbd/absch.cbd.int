@@ -14,22 +14,22 @@
     	   	<div ng-show="document.government || document.absCheckpoints">
 				<legend>
                    
-                    General information</legend>
+                    {{::('viewCPCT.generalInfo'|$translate)}}</legend>
 				<div ng-show="document.government">
-					<label>Country issuing this checkpoint communique</label>
+					<label>{{::('viewCPCT.government'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 					</div>
 				</div>
 			</div>
 			<div ng-show="document.title">
-    		 	<label>Title of this checkpoint communique</label>
+    		 	<label>{{::('viewCPCT.title'|$translate)}}</label>
     		 	<div class="km-value" compare-val>
     		 	    <strong><span ng-bind="document.title | lstring:locale"></span></strong>
     		 	</div>
 		 	</div>
 			<div ng-show="document.absCheckpoints">
-				<legend>Checkpoint/s that collected or received the information</legend>
+				<legend>{{::('viewCPCT.checkpoints'|$translate)}}</legend>
 					<div class="km-value" compare-val>
 						<ul class="list">
 							<li ng-repeat="item in document.absCheckpoints">
@@ -39,11 +39,11 @@
 					</div>
 			</div>
 			<div ng-if="emailList && emailList.length>0">
-				<legend>Recipients of the Checkpoint Communiqué</legend>
+				<legend>{{::('viewCPCT.recipients'|$translate)}}</legend>
 				<div class="row">
 					<div class="col-xs-12 col-lg-12" >
 						<div class="help-info color-red"  >
-							Note: The ABS Clearing-House does not guarantee the receipt of automatically generated emails. </br>
+							{{::('viewCPCT.recipientsNote'|$translate)}} </br>
 						</div>
 					</div>
 				</div>
@@ -67,9 +67,9 @@
 						document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
 						document.evidenceOfPIC || document.evidenceOfMAT ||
 						document.entityToWhomPICGranted || document.personsAtCheckpoint">
-				<legend>Information Collected or Received at the Checkpoint</legend>
+				<legend>{{::('viewCPCT.informationCollected'|$translate)}}</legend>
 				<div ng-show="document.absIRCCs">
-					<label>Reference number(s) of the internationally recognized certificate(s) of compliance that relate(s) to this communiqué</label>
+					<label>{{::('viewCPCT.referenceNumbers'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<ul class="list">
 							<li  ng-repeat="item in document.absIRCCs">
@@ -79,14 +79,14 @@
 					</div>
 				</div>
 				<div ng-show="document.absIRCCsNotAvailable" class="km-value">
-					The internationally recognized certificate of compliance (IRCC) is not available
+					{{::('viewCPCT.IRCCsNotAvailable'|$translate)}}
 				</div>
 				<div ng-show="document.sourceCountries || document.entityWhoGrantedPIC ||
 					document.specimens || document.taxonomies || document.gisFiles || document.subjectMatter ||
 					document.evidenceOfPIC || document.evidenceOfMAT ||
 					document.entityToWhomGrantedPIC || document.keywords || document.dateOfAccess">
 					<div ng-show="document.sourceCountries">
-						<label>Source of the genetic resource</label>
+						<label>{{::('viewCPCT.geneticResource'|$translate)}}</label>
 						<div class="km-value" compare-val>
 							<ul class="list">
 								<li ng-repeat="term in document.sourceCountries" ng-bind="term|term:locale"></li>
@@ -94,40 +94,40 @@
 						</div>
 					</div>
 					<div ng-show="document.entityWhoGrantedPIC">
-						<label>Person or entity who granted prior informed consent</label>
+						<label>{{::('viewCPCT.entityWhoGrantedPIC'|$translate)}}</label>
 						<div class="km-value" compare-val>
 							<div view-record-reference ng-model="document.entityWhoGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
 					<div ng-show="document.subjectMatter">
-						<label>Subject-matter or genetic resources relevant to the information collected or received</label>
+						<label>{{::('viewCPCT.subjectMatter'|$translate)}}</label>
 						<div compare-val>
 						<div class="km-value km-pre" ng-bind-html="document.subjectMatter | lstring:locale"></div>
 						</div>
 					</div>
 					<div ng-show="document.specimens || document.taxonomies || document.gisFiles || document.keywords">
-						<label>Optional additional subject-matter details</label>
+						<label>{{::('viewCPCT.addSubjectMatter'|$translate)}}</label>
 						<div ng-show="document.specimens">
-							<label>Specimen data</label>
+							<label>{{::('viewCPCT.specimens'|$translate)}}</label>
 							<div class="km-value" compare-val="specimens">
 								<km-link-list ng-model="document.specimens"></km-link-list>
 							</div>
 						</div>
 						<div ng-show="document.taxonomies">
-							<label>Taxonomy data</label>
+							<label>{{::('viewCPCT.taxonomyData'|$translate)}}</label>
 							<div class="km-value" compare-val="taxonomies">
 								<km-link-list ng-model="document.taxonomies"></km-link-list>
 							</div>
 						</div>
 						<div ng-show="document.gisFiles">
-							<label>Geographic coordinates</label>
+							<label>{{::('viewCPCT.geographicCoordinates'|$translate)}}</label>
 							<div class="km-value" compare-val="gisFiles">
 								<km-link-list ng-model="document.gisFiles"></km-link-list>
 							</div>
 							<div class="leaflet" center="gisMapCenter" layers="gisMapLayers"></div>
 						</div>
 						<div ng-show="document.keywords">
-							<label>Keywords to describe the subject-matter or genetic resource(s) covered by this communique</label>
+							<label>{{::('viewCPCT.subjectMatterKeywords'|$translate)}}</label>
 							<div class="km-value" compare-val>
 								<ul class="list">
 									<li ng-repeat="term in document.keywords"><span ng-bind="term|term"></span>
@@ -138,28 +138,28 @@
 						</div>
 					</div>
 					<div ng-show="document.evidenceOfPIC">
-						<label>Reference or evidence of prior informed consent</label>
+						<label>{{::('viewCPCT.evidenceOfPIC'|$translate)}}</label>
 						<div compare-val>
 						<div class="km-value km-pre"ng-bind-html="document.evidenceOfPIC | lstring:locale"></div>
 						</div>
 					</div>
 
 					<div ng-show="document.entityToWhomGrantedPIC">
-						<label>Person or entity to whom prior informed consent was granted</label>
+						<label>{{::('viewCPCT.entityToWhomGrantedPIC'|$translate)}}</label>
 						<div class="km-value" compare-val>
 							<div view-record-reference ng-model="document.entityToWhomGrantedPIC" locale="locale"></div>
 						</div>
 					</div>
 
                     <div ng-show="document.evidenceOfMAT">
-						<label>Reference or evidence of establishment of mutually agreed terms</label>
+						<label>{{::('viewCPCT.evidenceOfMAT'|$translate)}}</label>
 						<div compare-val>
 						<div class="km-value km-pre"ng-bind-html="document.evidenceOfMAT | lstring:locale"></div>
 						</div>
 					</div>
 
                     <div ng-show="document.dateOfAccess">
-					    <label>Date of access to the genetic resource</label>
+					    <label>{{::('viewCPCT.dateOfAccess'|$translate)}}</label>
 						<div compare-val>
 					    <div class="km-value"><span ng-bind="document.dateOfAccess"></span></div>
 						</div>
@@ -168,15 +168,15 @@
 				</div>
 			</div>
 			<div ng-show="document.description || document.dateCollectedFrom || document.dateCollectedTo || information || informationDocuments ||document.personsAtCheckpoint">
-				<legend>Information on the utilization of the genetic resource(s)</legend>
+				<legend>{{::('viewCPCT.informationUtilization'|$translate)}}</legend>
 				<div ng-show="document.description">
-					<label>Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources</label>
+					<label>{{::('viewCPCT.description'|$translate)}}</label>
 					<div compare-val>
 					<div class="km-value km-pre" ng-bind-html="document.description | lstring:locale"></div>
 					</div>
 				</div>
 				<div ng-show="document.personsAtCheckpoint">
-					<label>Person or entity making information available to the checkpoint on the utilization of the genetic resource</label>
+					<label>{{::('viewCPCT.personsAtCheckpoint'|$translate)}}</label>
 					<div compare-val>
 					<div class="km-value" ng-repeat="user in document.personsAtCheckpoint">
 						<div view-record-reference ng-model="user" locale="locale"></div>
@@ -184,31 +184,31 @@
 					</div>
 				</div>
 				<div ng-show="document.dateCollected">
-					<label>Date on which the information was collected at the checkpoint</label>
+					<label>{{::('viewCPCT.dateCollected'|$translate)}}</label>
 					<div compare-val>
 					<div class="km-value"><span ng-bind="document.dateCollected"></span></div>
 					</div>
 				</div>
 				<div ng-show="document.dateCollectedFrom">
-					<label>Date on which the information started being collected at the checkpoint</label>
+					<label>{{::('viewCPCT.dateCollectedFrom'|$translate)}}</label>
 					<div compare-val>
 					<div class="km-value"><span ng-bind="document.dateCollectedFrom"></span></div>
 					</div>
 				</div>
 				<div ng-show="document.dateCollectedTo">
-					<label>Date on which the information was received at the checkpoint</label>
+					<label>{{::('viewCPCT.dateCollectedTo'|$translate)}}</label>
 					<div compare-val>
 					<div class="km-value"><span ng-bind="document.dateCollectedTo"></span></div>
 					</div>
 				</div>
 				<div ng-show="document.informationDocuments">
-					<label>Relevant document</label>
+					<label>{{::('viewCPCT.relevantDocument'|$translate)}}</label>
 					<div class="km-value" compare-val="informationDocuments">
 						<km-link-list ng-model="document.informationDocuments"></km-link-list>
 					</div>
 				</div>
 				<div ng-show="document.information">
-					<label>Copy of relevant information</label>
+					<label>{{::('viewCPCT.information'|$translate)}}</label>
 					<div compare-val>
 					<div class="km-value km-pre" ng-bind="document.information | lstring:locale"></div>
 					</div>
@@ -216,7 +216,7 @@
 			</div>
 
             <div ng-show="document.relevantInformation||document.relevantDocuments">
-				<legend>Additional Information</legend>
+				<legend>{{::('viewCPCT.additionalInformation'|$translate)}}</legend>
 
 				<div ng-show="document.relevantInformation">
 					<div compare-val>
@@ -225,7 +225,7 @@
 				</div>
 
 				<div ng-show="document.relevantDocuments">
-					<label>Other relevant website addresses and/or attached documents</label>
+					<label>{{::('viewCPCT.relevantDocumentsInfo'|$translate)}}</label>
 					<div class="km-value" compare-val="relevantDocuments">
 						<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 					</div>

@@ -2,8 +2,9 @@ import app from 'app';
 import _ from 'lodash';
 import template from "text!./view-abs-checkpoint-communique.directive.html";
 import 'views/directives/record-options';
+import viewCPCT from '~/app-text/views/forms/view/abs/view-abs-checkpoint-communique.json';
 
-app.directive("viewAbsCheckpointCommunique", [function () {
+app.directive("viewAbsCheckpointCommunique", ['translationService', function (translationService) {
 
 	return {
 		restrict   : "EAC",
@@ -19,6 +20,7 @@ app.directive("viewAbsCheckpointCommunique", [function () {
 		},
 		link : function ($scope, $element, $attr)
 		{
+			translationService.set('viewCPCT', viewCPCT);
 			$scope.showPdf = $attr.showPdf === undefined || $attr.showPdf != "false";
 		},
 		controller: ["$scope", "IStorage", "$http", "$q","realm", function ($scope, storage, $http, $q, realm)
