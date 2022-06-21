@@ -1,0 +1,22 @@
+{
+    "bchDescription" : "The Biosafety Clearing-House (BCH) is an online platform for exchanging information on Living Modified Organisms (LMOs) and a key tool for facilitating the implementation of the Cartagena Protocol on Biosafety.",
+    "aboutBch": "Learn about the BCH",
+    "aboutProtocol": "About the Protocol",
+    "faq": "FAQs",
+    "getStarted": "Get Started",
+    "searchRecords": "Search records",
+    "takeTour": "Take the Tour",
+    "helpSearch": "Help using the Search",
+    "registries": "Registries: LMO-Organism-Gene",
+    "fourthNR": "Fourth National Reports",
+    "search": "Search",
+    "submitRecords": "Submit records",
+    "signIn": "Sign in",
+    "helpRecords": "Help submitting records",
+    "submit": "Submit",
+    "exploreMap": "Explore the map",
+    "announcements": "Announcements",
+    "seeMore": "See more",
+    "nationalRecords": "National records",
+    "referenceRecords": "Reference records"
+}
