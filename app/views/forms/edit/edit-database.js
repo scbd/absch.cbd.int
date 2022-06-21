@@ -2,11 +2,14 @@ import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import '~/views/forms/view/view-database.directive';
+import editDatabaseT from '~/app-text/views/forms/edit/edit-database.json';
 
   export { default as template } from './edit-database.html';
 
-  export default ["$scope", "$http", "$filter", "$controller", "$location", function ($scope, $http, $filter, $controller,$location) {
+export default ["$scope", "$http", "$filter", "$controller", "$location", "translationService",
+  function ($scope, $http, $filter, $controller, $location, translationService) {
     $controller('editController', {$scope: $scope});
+    translationService.set('editDatabaseT', editDatabaseT);
     $scope.formFields = {};
     //==================================
     //

@@ -1,0 +1,23 @@
+{
+    "websiteDatabaseDetails": "Website or Database details",
+    "langugaeToPublish": "Please select in which language(s) you wish to submit this record:",
+    "country": "Country",
+    "website": "Website or database name",
+    "selectOption": "Please select a country...",
+    "exampleTitle": "example: The title",
+    "exampleDescription": "example: The description",
+    "websiteInfo": "Please enter the name of the website or database as you would like it to appear in the title of the record.",
+    "description": "Description",
+    "descriptionInfo": "Please enter a short description of the national website or database, such as its function or information it makes available.",
+    "websiteAddress": "Website address",
+    "websiteAddressInfo": "Please provide the full URL of the website (e.g. http://www.cbd.int).",
+    "timeframeInformation": "Timeframe for confirmation or updating of information",
+    "categoryInformation": "Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”",
+    "additionalInformation": "Additional Information",
+    "relevantinformation": "Any other relevant information",
+    "relevantInformationInfo": "Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.",
+    "relevantDocuments": "Any other relevant documents",
+    "relevantDocumentsInfo": "Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.",
+    "notes": "Notes",
+    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information."
+}
