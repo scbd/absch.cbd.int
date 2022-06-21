@@ -14,17 +14,17 @@
 
 		 <div name="article17-1-a"></div>
 
-		<legend ng-if="document.government || document.name">General information</legend>
+		<legend ng-if="document.government || document.name">{{::('viewCheckpointT.generalInfo'|$translate)}}</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewCheckpointT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
 		 <div ng-show="display('title') && document.name">
-		 <label>Name of the checkpoint</label>
+		 <label>{{::('viewCheckpointT.checkpointName'|$translate)}}</label>
 		 	<div class="km-value" compare-val>
 		 	<strong><span ng-bind="document.name | lstring:locale"></span></strong>
 		 	</div>
@@ -34,7 +34,7 @@
 
 		<div ng-show="document.responsibilities || document.jurisdiction ||
 			document.jurisdictionName || document.responsibleFunctions || document.valueChainStage">
-			<legend name="Responsibilities">Checkpoint Responsibilities</legend>
+			<legend name="Responsibilities">{{::('viewCheckpointT.cpResponsibilities'|$translate)}}</legend>
 			<!-- <div ng-show="document.responsibleFunctions">
 				<label>Responsible functions</label>
 				<div  class="km-value" compare-val>
@@ -44,7 +44,7 @@
 			</div> -->
 	
 			<div ng-if="document.valueChainStage">
-				<label>Stage at which information is collected or received</label>
+				<label>{{::('viewCheckpointT.stage'|$translate)}}</label>
 				<div compare-val>
 					<div class="km-value" ng-bind="document.valueChainStage | term:locale"></div>
 				</div>
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div ng-show="document.jurisdiction">
-				<label>Area of Jurisdiction</label>
+				<label>{{::('viewCheckpointT.jurisdiction'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li><span ng-bind="document.jurisdiction|term"></span>
@@ -83,11 +83,11 @@
 		</div>
 
 		<div ng-if="document.informAllAuthorities || document.contactsToInform" >
-			<legend>Authority/ies to receive courtesy copies of checkpoint communiqués</legend>
+			<legend>{{::('viewCheckpointT.authority'|$translate)}}</legend>
 
-			<div class="help-info" style="padding-top:10px;">The contacts indicated below will receive email copies of checkpoint communiqués containing the information collected or received and published from this checkpoint.</div>
+			<div class="help-info" style="padding-top:10px;">{{::('viewCheckpointT.authorityInfo'|$translate)}}</div>
 			<div class="km-value" ng-show="document.informAllAuthorities">
-					 All Competent National Authorities designated for <strong><span ng-bind="document.government|term:locale"></span></strong> have been selected to automatically receive checkpoint communiqués by email published from this checkpoint.</li>
+					 {{::('viewCheckpointT.allCnaOne'|$translate)}} <strong><span ng-bind="document.government|term:locale"></span></strong> {{::('viewCheckpointT.allCnaTow'|$translate)}}</li>
 
 			</div>
 			       
@@ -108,13 +108,13 @@
 			</div>-->
 			<div compare-val>
 			<div class="km-value" ng-show="!document.informAllAuthorities && !document.authoritiesToInform && !document.contactsToInform">
-				<span >No additional authorities have been selected to receive the automatic email copies of checkpoint communiqués published from this checkpoint. </span>
+				<span >{{::('viewCheckpointT.noAddAuthorities'|$translate)}} </span>
 			</div>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewCheckpointT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val="relevantInformation">
@@ -123,7 +123,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant links or attached documents</label>
+				<label>{{::('viewCheckpointT.relevantLinks'|$translate)}}</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
