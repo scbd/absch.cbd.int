@@ -40,7 +40,9 @@
 				<div class="row">
 					<div class="row" style="border: 1px solid #ddd; border-bottom:0px;" ng-if="!printMode">
 						<div class="title-bar" >
-							Draft Document
+							<span ng-if="status=='loading'">Shared Document</span>
+							<span ng-if="status!='loading'">Draft Document</span>
+							
 						</div>
 					</div>
 					<div class="row loading-info" ng-if="!printMode && status=='loading'">
@@ -53,12 +55,12 @@
 							<br>
 						</div>
 					</div>
-					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
-					ng-if="status=='error'">
-					<div class="col-md-12" ng-if="!printMode">
-						<div class="alert alert-danger" style="margin:20px;">
-							<strong ng-bind="error"></strong>
-						</div> </div>
+					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" ng-if="status=='error'">
+						<div class="col-md-12" ng-if="!printMode">
+							<div class="alert alert-danger" style="margin:20px;">
+								<strong ng-bind="error"></strong>
+							</div> 
+						</div>
 					</div>
 					<div class="row" style="padding:0px;border: 1px solid #ddd;background:#fff" 
 					ng-if="status=='ready'" ng-class="{'no-border':printMode}">

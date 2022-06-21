@@ -84,7 +84,7 @@ import shareRecord from '~/components/common/share-record.vue';
 					}
 
 					$scope.userStatus = function () {
-						if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+						if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
 						var signIn = $scope.$on('signIn', function (evt, data) {
 							signIn();
 						});

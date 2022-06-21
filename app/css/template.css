@@ -2861,7 +2861,8 @@ padding-right: 23%;
     border: 1px solid #ccc;
 }
 #searchSortOptions .sort-options > li > a,
-.table-export-button{
+.table-export-button,
+.share-buton{
     font-size: 12px;
     text-transform: uppercase;
     color:#555;

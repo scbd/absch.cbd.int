@@ -2,8 +2,8 @@ import app from 'app';
 
 export { default as template } from './index.html';
 
-export default ['$scope', '$routeParams', '$http', '$location', 'locale',
- function ($scope, $routeParams, $http, $location, locale){
+export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'localStorageService', 'realm',
+ function ($scope, $routeParams, $http, $location, locale, localStorageService, realm){
 
     const elementMapping = {
         'chm-document' : '#recordContent'
@@ -17,14 +17,25 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale',
             if($routeParams.accessKey){
                 const data = (await $http.get(`/api/v2018/document-sharing/${$routeParams.accessKey}`)).data;
                 console.log(data);
-                // if(data.sharType == 'embed')
-              
+              debugger
+                if(data.sharedData.realm != realm.value){
+                    console.error('wrong realm for share id loaded')
+                    return;
+                }
                 window.scbdEmbedData = {
                     selector : elementMapping[data.storageType]
                 }
+
                 if(data.storageType == 'chm-document'){
                     $scope.$apply(()=>{
                         $location.path(`/database/record/${data.sharedData.recordKey}`);
+                    })
+                }
+                else if(data.storageType == 'chm-search-result'){
+                    localStorageService.set(data.sharedData.searchQuery._id, data.sharedData.searchQuery);
+                    $scope.$apply(()=>{
+                        $location.path(`/search`);
+                        $location.search('searchShareQueryId', data.sharedData.searchQuery._id);
                     })
                 }
                 

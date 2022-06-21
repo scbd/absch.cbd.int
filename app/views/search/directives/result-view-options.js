@@ -3,8 +3,9 @@ import app from 'app';
 import _ from 'lodash';
 import 'ngDialog';
 import tableExport from '~/components/common/export.vue';
+import shareRecord from '~/components/common/share-record.vue';
 
-    app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', function ($location, ngDialog, locale) {
+    app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale','apiToken','$rootScope', function ($location, ngDialog, locale, apiToken, $rootScope ) {
         return {
             restrict: 'EA',
             template: template,
@@ -20,6 +21,14 @@ import tableExport from '~/components/common/export.vue';
             },
             link: function ($scope, $element, $attr, searchDirectiveCtrl) {
                
+                $scope.exportVueComponent = {
+                    components:{tableExport}
+                }
+
+                $scope.shareVueComponent = {
+                    components:{shareRecord}
+                }
+
             //    if(!$scope.viewType)
             //         $scope.viewType = 'list';
 
@@ -124,9 +133,31 @@ import tableExport from '~/components/common/export.vue';
                     $scope.onExport()
                 }
 
-                $scope.exportVueComponent = {
-                    components:{tableExport}
+                $scope.userStatus  = function(){
+                    if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
+                        console.log('hello')
+                        var signInEvent = $scope.$on('signIn', function (evt, data) {
+                            signInEvent();
+                            $('#shareSearchDomId')[0].click();
+                        });
+                        $('#loginDialog').on('hidden.bs.modal', function () {
+                            signInEvent();
+                        });
+                        $( '#loginDialog' ).modal( "show" );
+                        return false;
+                    } 
+                    else {
+                        return true;
+                    }
                 }
+                $scope.tokenReader = function(){ return apiToken.get()};
+
+                $scope.getQuery = function(){
+                    const query = searchDirectiveCtrl.getAllSearchFilters();
+                    const type = "chm-search-result"
+                    return {type, query}
+                }
+
                 $scope.getDownloadRecords = function(options){                        
                     // const  { docs, numFound } = $scope.searchResult.data;
                     // return { docs, numFound };

@@ -45,7 +45,7 @@ import 'ngDialog';
 
                                 $scope.showReportRecordDialog = function(){
 
-                                    if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+                                    if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
                                         var signInEvent = $scope.$on('signIn', function () {
                                             $scope.showReportRecordDialog();
                                             signInEvent();

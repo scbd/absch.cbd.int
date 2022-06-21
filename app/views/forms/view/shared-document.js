@@ -3,8 +3,8 @@ import 'views/forms/view/record-loader.directive';
 import 'components/scbd-angularjs-services/main';
     
 export {default as template } from './shared-document.html';
-export default ['$scope', '$http', '$q', '$route', 'locale', 
-function($scope, $http, $q, $route, locale){
+export default ['$scope', '$http', '$q', '$route', 'locale', '$location',
+function($scope, $http, $q, $route, locale, $location){
 
     $scope.options = { locale : locale, currentDate : new Date()};
     var qs = $route.current.params;
@@ -15,15 +15,29 @@ function($scope, $http, $q, $route, locale){
                 
                 if(result.status == 200){
                     $scope.sharedData = {...result.data};
-                    $scope.document = {...result.data.sharedData.document.body};
-                    delete result.data.sharedData.document.body;
-                    $scope.documentInfo = {...result.data.sharedData.document};
-                    $scope.status = 'ready'
+
+                    if(['chm-search-result', 'chm-document', 'chm-country-profile'].includes($scope.sharedData.storageType)){
+                        console.log('hi')
+                        $location.url(`/share/${$scope.sharedData.shareType}/${$scope.sharedData.storageType}/${$scope.sharedData.shortUrlHash}`);
+                        
+                    }
+                    else{
+                        $scope.document = {...result.data.sharedData.document.body};
+                        delete result.data.sharedData.document.body;
+                        $scope.documentInfo = {...result.data.sharedData.document};
+                        $scope.status = 'ready'
+                    }
                 }
             })
             .catch(function(error){
                 $scope.status = 'error'
                 $scope.error  = error.data;
+
+                if(error.data.startsWith('The document was not shared with you')){
+                    $location.search({ returnUrl: $location.url() });
+                    console.log($location.url())
+                    $location.path('/signin')
+                }
             })
             .finally(function(){
             })

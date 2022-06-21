@@ -17,13 +17,11 @@
                 Sort
                 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> 
             </a>
-        </li>     
-        <li id="sendRecords">
-            <a rel="noopener" class="cursor-pointer text-decoration-none" > 
-                Send 
-                <i class="fa fa-paper-plane" aria-hidden="true"></i> 
-            </a>
-        </li>     
+        </li>    
+        
+        <li ng-if="shareVueComponent">
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
+        </li>    
       
         <li id="exportRecords" ng-if="viewType=='matrix'">
             <a rel="noopener" class="cursor-pointer text-decoration-none" ng-click="onMatrixExportClick()">

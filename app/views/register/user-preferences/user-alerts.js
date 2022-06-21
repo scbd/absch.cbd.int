@@ -220,7 +220,7 @@ import 'components/scbd-angularjs-services/main';
                     $scope.addEdit = function (existingFilter) {
                         if (existingFilter && !existingFilter._id)
                             return;
-                        if ($rootScope.user && !$rootScope.user.isAuthenticated) {
+                        if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
                             var signIn = $scope.$on('signIn', function (evt, data) {
                                 $scope.addEdit();
                                 signIn();
