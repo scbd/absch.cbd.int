@@ -16,10 +16,10 @@
 									
 									<section>
 										<div class="no-shadow bg-white">
-										<legend>General information</legend>
+										<legend>{{::('editRiskAssessmentT.generalInfo'|$translate)}}</legend>
 											<div class="row">
 												<div class="col-12" >
-													<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+													<div class="km-control-group" name="header.languages" required caption="{{::('editRiskAssessmentT.languageToPublish'|$translate)}}">
 														<div class="indent">
 															<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 														</div>
@@ -28,16 +28,16 @@
 											</div>
 											<div class="row" ng-if="isNational">
 												<div class="col-12">
-													<div class="km-control-group" name="government" required caption="Country">
+													<div class="km-control-group" name="government" required caption="{{::('editRiskAssessmentT.country'|$translate)}}">
 														<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-															filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+															filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editRiskAssessmentT.selectOption'|$translate)}}"></div>
 													</div>
 												</div>
 											</div>
 		
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" required name="title" caption="Title of the risk assessment">
+													<div class="km-control-group" required name="title" caption="{{::('editRiskAssessmentT.title'|$translate)}}">
 														<div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -45,8 +45,8 @@
 		
 											<div class="row">
 												<div class="col-md-6">
-													<div class="km-control-group" name="date" required caption="Date of the risk assessment"
-															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Risk Assessment">
+													<div class="km-control-group" name="date" required caption="{{::('editRiskAssessmentT.date'|$translate)}}"
+															help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editRiskAssessmentT.help'|$translate)}}">
 
 														<div class="col-md-8 padding-left-0 float-start">
 															<div km-date placeholder="YYYY-MM-DD" name="date" required ng-model="document.date" ng-disabled="document.dateOfRaNotAvailable"></div>	
@@ -55,7 +55,7 @@
 															<div class="checkbox">
 																<label for="dateOfRaNotAvailable">
 																	<input type="checkbox" ng-disabled="document.date" ng-model="document.dateOfRaNotAvailable" id="dateOfRaNotAvailable" name="dateOfRaNotAvailable" /> 
-																	Date not available
+																	{{::('editRiskAssessmentT.dateNotAvailable'|$translate)}}
 																</label>
 															</div>
 														</div>														
@@ -65,7 +65,7 @@
 											
 											<div class="row padding-top-10" ng-if="!isNational">
 												<div class="col-12">
-													<div class="km-control-group" name="organizations" required caption="Institution responsible for the risk assessment">											
+													<div class="km-control-group" name="organizations" required caption="{{::('editRiskAssessmentT.institution'|$translate)}}">											
 														<div document-selector ng-model="document.organizations" question="organizations"
 																on-build-query="onBuildOrganizationQuery(searchText)" allow-new-schema="organization" allow-new="true"></div>
 													</div>
@@ -73,7 +73,7 @@
 											</div>	
 											<div class="row mt-3" ng-if="isNational">
 												<div class="col-12 label-space">
-													<div class="km-control-group" name="authorities" required caption="Competent National Authority(ies) responsible for the risk assessment">											
+													<div class="km-control-group" name="authorities" required caption="{{::('editRiskAssessmentT.competentNationalAuthorities'|$translate)}}">											
 														<div document-selector ng-disabled="!document.government.identifier" ng-model="document.authorities" question="authorities"
 																on-build-query="onBuildAuthorityQuery(searchText)" allow-new-schema="authority" allow-new="true"></div>
 
@@ -83,7 +83,7 @@
 		
 											<div class="row">
 												<div class="col-12 label-space">
-													<div class="km-control-group" name="contacts" caption="Contact details of the main responsible risk assessor">											
+													<div class="km-control-group" name="contacts" caption="{{::('editRiskAssessmentT.contactDetails'|$translate)}}">											
 														<div document-selector ng-model="document.contacts" question="contacts"
 																on-build-query="onBuildContactQuery(searchText)" allow-new-schema="contact" allow-new="true"></div>
 
@@ -95,10 +95,10 @@
 		
 									<section >
 										<div class="no-shadow bg-white">
-											<legend>Risk assessment details</legend>
+											<legend>{{::('editRiskAssessmentT.riskAssessmentDetails'|$translate)}}</legend>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" name="modifiedOrganisms" required caption="Living modified organism(s)">											
+													<div class="km-control-group" name="modifiedOrganisms" required caption="{{::('editRiskAssessmentT.modifiedOrganisms'|$translate)}}">											
 														<div document-selector  ng-model="document.modifiedOrganisms" question="modifiedOrganisms" 
 																on-build-query="onBuildModifiedOrganismQuery(searchText)" allow-new-schema="modifiedOrganism" allow-new="true"></div>
 													</div>
@@ -106,7 +106,7 @@
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" name="scopes" required caption="Scope of the risk assessment">
+													<div class="km-control-group" name="scopes" required caption="{{::('editRiskAssessmentT.scope'|$translate)}}">
 															<div km-term-check required ng-model="document.scopes" locales="document.header.languages"
 															terms="options.riskAssessmentScope()"  binding-type="term[]"></div>
 													</div>
@@ -114,12 +114,12 @@
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" name="documents" required caption="Risk assessment report / summary">
+													<div class="km-control-group" name="documents" required caption="{{::('editRiskAssessmentT.riskSummary'|$translate)}}">
 														<div class="help-block">
-															An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. https://bch.cbd.int) and the name of the website (e.g. "Biosafety Clearing-House"). 
+															{{::('editRiskAssessmentT.riskSummaryInfo'|$translate)}}
 														</div>
 														<div km-link name="documents" ng-model="document.documents" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
-														<div class="km-control-group"  name="documentsSummary" caption="Please use this field to provide a summary of the risk assessment.">
+														<div class="km-control-group"  name="documentsSummary" caption="{{::('editRiskAssessmentT.documentsSummary'|$translate)}}">
 															<div km-rich-textbox name="documentsSummary"  ng-model="document.documentsSummary" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -130,65 +130,63 @@
 		
 									<section>
 										<div class="no-shadow bg-white">
-											<legend>Methodology and points to consider</legend>
+											<legend>{{::('editRiskAssessmentT.methodologyConsider'|$translate)}}</legend>
 											<div class="help-block">
-												Refer to Annex III, paragraphs 8 and 9 of the Cartagena Protocol on Biosafety.
+												{{::('editRiskAssessmentT.methodologyConsiderInfo'|$translate)}}
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="adverseEffects" caption="Potential adverse effects identified in the risk assessment">
+													<div class="km-control-group"  name="adverseEffects" caption="{{::('editRiskAssessmentT.adverseEffects'|$translate)}}">
 														<div km-rich-textbox name="adverseEffects"  ng-model="document.adverseEffects" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="adverseEffectsLikelihood" caption="Likelihood that the potential adverse effects will be realized">
+													<div class="km-control-group"  name="adverseEffectsLikelihood" caption="{{::('editRiskAssessmentT.adverseEffectsLikelihood'|$translate)}}">
 														<div km-rich-textbox  name="adverseEffectsLikelihood"  ng-model="document.adverseEffectsLikelihood" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="adverseEffectsConsequence" caption="Possible consequences">
+													<div class="km-control-group"  name="adverseEffectsConsequence" caption="{{::('editRiskAssessmentT.possibleConsequences'|$translate)}}">
 														<div km-rich-textbox name="adverseEffectsConsequence"  ng-model="document.adverseEffectsConsequence" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="adverseEffectsOverallRisk" caption="Estimation of the overall risk">
+													<div class="km-control-group"  name="adverseEffectsOverallRisk" caption="{{::('editRiskAssessmentT.estimationRisk'|$translate)}}">
 														<div km-rich-textbox name="adverseEffectsOverallRisk"  ng-model="document.adverseEffectsOverallRisk" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="adverseEffectsRecommendation" caption="Recommendation(s) on whether the risks are acceptable/manageable and any management strategies">
+													<div class="km-control-group"  name="adverseEffectsRecommendation" caption="{{::('editRiskAssessmentT.adverseEffectsRecommendation'|$translate)}}">
 														<div km-rich-textbox name="adverseEffectsRecommendation"  ng-model="document.adverseEffectsRecommendation" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="riskManagementStrategies" caption="Need(s) for further information on specific issues of concern">
+													<div class="km-control-group"  name="riskManagementStrategies" caption="{{::('editRiskAssessmentT.riskManagementStrategies'|$translate)}}">
 														<div km-rich-textbox name="riskManagementStrategies"  ng-model="document.riskManagementStrategies" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="receivingEnvironment" caption="Receiving environment(s) considered">
-														<div class="help-block">Information on the location, geographical, climatic and ecological characteristics including relevant 
-															information on biological diversity and centres of origin of the likely potential receiving environment as listed in 
-															Annex III paragraph 9 (h) of the Protocol.</div>
+													<div class="km-control-group"  name="receivingEnvironment" caption="{{::('editRiskAssessmentT.receivingEnvironment'|$translate)}}">
+														<div class="help-block">{{::('editRiskAssessmentT.receivingEnvironmentInfo'|$translate)}}</div>
 														<div km-rich-textbox name="receivingEnvironment"  ng-model="document.receivingEnvironment" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group"  name="detectionMethod" caption="LMO detection and identification methods proposed">
+													<div class="km-control-group"  name="detectionMethod" caption="{{::('editRiskAssessmentT.detectionMethod'|$translate)}}">
 														<div km-rich-textbox name="detectionMethod"  ng-model="document.detectionMethod" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -198,29 +196,29 @@
 
 								<section ng-if="isNational">
 										<div class="no-shadow bg-white">
-											<legend>Information sharing with other databases</legend>
+											<legend>{{::('editRiskAssessmentT.informationSharing'|$translate)}}</legend>
 											<div class="row">
 												<div  class="col-12">
-													<div class="km-control-group" name="isForCommercialUse" caption="Is this risk assessment related to an LMO for commercial use?">
+													<div class="km-control-group" name="isForCommercialUse" caption="{{::('editRiskAssessmentT.isForCommercialUse'|$translate)}}">
 														<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 														<div ng-if="document.isForCommercialUse" style="padding-left:50px;">
 															<div class="control-group inner-padding">
-																<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the
-															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
+																<label>{{::('editRiskAssessmentT.isForCommercialUseInfo'|$translate)}}
+															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> {{::('editRiskAssessmentT.isForCommercialUseLink'|$translate)}}</a>?</label>
 															</div>
 															<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 															<div class="control-group inner-padding">
-																<label>Is this risk assessment related to food safety?</label>
+																<label>{{::('editRiskAssessmentT.isForFoodSafety'|$translate)}}</label>
 															</div>
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
 																<div class="control-group inner-padding">
-																	<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</i></label>
+																	<label>{{::('editRiskAssessmentT.isForFoodSafetyInfo'|$translate)}} <i>{{::('editRiskAssessmentT.isForFoodSafetyInfoItalic'|$translate)}}</i></label>
 																</div>															
 																<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 																<div class="control-group inner-padding">
-																	<label>Should this information be forwarded to the Secretariat of the
-																	<a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
+																	<label>{{::('editRiskAssessmentT.codexConducted'|$translate)}}
+																	<a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>{{::('editRiskAssessmentT.codexConductedLink'|$translate)}}</u></a>?</label>
 																</div>
 																<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 															</div>
@@ -232,13 +230,11 @@
 									</section>
 									<section>
 										<div class="no-shadow bg-white">
-											<legend>Timeframe for confirmation or updating of information</legend>
+											<legend>{{::('editRiskAssessmentT.timeFrameInformation'|$translate)}}</legend>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" required name="expires"  caption="Should this information be confirmed or updated after two years from the date of submission?">			
-														<div class="help-block">If the answer to this question is “Yes”, after two years from the date of submission 
-															you will be asked to confirm or update the record within 3 months. After this period, if no confirmation 
-															has been received, the record will be marked as “Not confirmed”.</div>									
+													<div class="km-control-group" required name="expires"  caption="{{::('editRiskAssessmentT.expires'|$translate)}}">			
+														<div class="help-block">{{::('editRiskAssessmentT.expiresInfo'|$translate)}}</div>									
 														<div km-yes-no required  ng-model="document.expires" locales="document.header.languages"></div>
 													</div>	
 												</div>
@@ -248,12 +244,11 @@
 			
 									<section>
 										<div class="no-shadow bg-white">
-											<legend>Additional information</legend>
+											<legend>{{::('editRiskAssessmentT.additionalInformation'|$translate)}}</legend>
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" name="address" caption="Any other relevant information">
-														<div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in
-															the record.</div>
+													<div class="km-control-group" name="address" caption="{{::('editRiskAssessmentT.otherRelevantInformation'|$translate)}}">
+														<div class="help-block">{{::('editRiskAssessmentT.relevantInformationInfo'|$translate)}}</div>
 														<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -261,10 +256,9 @@
 		
 											<div class="row">
 												<div class="col-12">
-													<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+													<div class="km-control-group" name="relevantDocuments" caption="{{::('editRiskAssessmentT.anyrelevantDocuments'|$translate)}}">
 														<div class="help-block">
-																Please use this field to provide any other relevant website addresses and/or one or more 
-																relevant documents that will be stored in the database for users to download.
+																{{::('editRiskAssessmentT.anyrelevantDocumentsInfo'|$translate)}}
 														</div>
 														<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
 													</div>
@@ -273,12 +267,12 @@
 										</div>
 									</section>
 									<section>
-										<legend>Notes</legend>
+									<legend>{{::('editRiskAssessmentT.notes'|$translate)}}</legend>
 		
 										<div class="row">
 											<div class="col-12">
 												<div class="km-control-group" name="notes">
-													<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+													<div class="help-block">{{::('editRiskAssessmentT.notesInfos'|$translate)}}</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>
 												</div>
 											</div>
