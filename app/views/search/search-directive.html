@@ -252,13 +252,13 @@
                     <div class="row m-0 mt-2">
                         <!-- Search Result -->
                         <div class="d-none d-md-block p-0 pe-2 m-0"
-                            ng-class="{'col-md-3':(leftMenuFilters && leftMenuFilters.length != 0),'isAlertUserSearch':isAlertSearch}"
-                            ng-show="(leftMenuFilters && leftMenuFilters.length != 0)">
+                            ng-class="{'col-md-3':(leftMenuFilters && leftMenuFilters.length != 0 && !hideSubFilters),'isAlertUserSearch':isAlertSearch}"
+                            ng-show="(leftMenuFilters && leftMenuFilters.length != 0 && !hideSubFilters)">
                             <div left-side-filter></div>
                         </div>
                         <!-- Different view for list/group -->
                         <div class="col-sm-12 m-0" id="searchResult"
-                            ng-class="{'col-md-9 col-xs-12':(leftMenuFilters && leftMenuFilters.length != 0), 'd-none' : isAlertSearch}">
+                            ng-class="{'col-md-9 col-xs-12':(leftMenuFilters && leftMenuFilters.length != 0 && !hideSubFilters), 'd-none' : isAlertSearch}">
                             <div class="col-sm-12 p-0 m-0">
                                 <ul class="nav nav-tabs search-tab-title">
                                     <li id="allRecordsTab" class="nav-item"

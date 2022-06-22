@@ -96,7 +96,7 @@ import 'angular-vue'
                             regionsFilter   : {},
                             searchKeyword   : ''
                         }   
-
+                        $scope.hideSubFilters = false;
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
@@ -571,6 +571,7 @@ import 'angular-vue'
                                 $scope.searchResult.viewType = query.viewType;
 
                             if(query.searchShareQueryId){
+                                $scope.hideSubFilters = true;
                                 $scope.clearFilter();
                                 $scope.searchAlertError = '';
                                 const filters = localStorageService.get($routeParams.searchShareQueryId);
