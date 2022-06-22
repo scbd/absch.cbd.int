@@ -13,12 +13,12 @@
                         <div ng-show="tab=='edit'" km-tab="edit">
                             <section>
                                 <div class="no-shadow bg-white">
-                                    <legend>General Information</legend>
+                                    <legend>{{::('editsubmissionT.generalInfo'|$translate)}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="header.languages" required
-                                                caption=" Please select in which language(s) you wish to submit this record:">
+                                                caption="{{::('editsubmissionT.languageToPublish'|$translate)}}">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages"
                                                         ng-model="document.header.languages"></div>
@@ -26,19 +26,19 @@
                                             </div>
                                         </div>
                                         <div class="col-md-5">
-                                            <div class="km-control-group" required name="government" caption="Country"
+                                            <div class="km-control-group" required name="government" caption="{{::('editsubmissionT.country'|$translate)}}"
                                                 required>
                                                 <div afc-autocomplete required name="government"
                                                     ng-disabled="document.organizations" ng-model="document.government"
                                                     source="options.countries" filter="genericFilter"
                                                     mapping="genericMapping" selectbox="true"
-                                                    placeholder="Please select a country..."></div>
+                                                    placeholder="{{::('editsubmissionT.selectOption'|$translate)}}"></div>
                                             </div>
                                         </div>
-                                        <div class="col-md-1"><strong style="padding-left:50px;">OR</strong></div>
+                                        <div class="col-md-1"><strong style="padding-left:50px;">{{::('editsubmissionT.or'|$translate)}}</strong></div>
                                         <div class="col-md-6">
                                             <div class="km-control-group" name="organization"
-                                                caption="Organization(s)" required>
+                                                caption="{{::('editsubmissionT.organization'|$translate)}}" required>
                                                 <div document-selector ng-model="document.organizations"  type="checkbox" ng-disabled="document.government" question="organizations"
                                                      on-build-query="onContactQuery(searchText)" allow-new-schema="organization">
                                                 </div>
@@ -50,20 +50,20 @@
 
                             <section>
                                 <div class="no-shadow bg-white">
-                                    <legend>Submission Information</legend>
+                                    <legend>{{::('editsubmissionT.submissionInformation'|$translate)}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="title"
-                                                caption="Title of the submission">
+                                                caption="{{::('editsubmissionT.titleSubmission'|$translate)}}">
                                                 <div km-textbox-ml ng-model="document.title" placeholder=""
                                                     locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="km-control-group" required name="date"
-                                                caption="Date of submission"
-                                                 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Submission">
+                                                caption="{{::('editsubmissionT.dateSubmission'|$translate)}}"
+                                                 help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editsubmissionT.helpTitle'|$translate)}}">
                                                 <div km-date placeholder="YYYY-MM-DD" name="date" ng-model="document.date"></div>
                                             </div>
                                         </div>
@@ -74,7 +74,7 @@
                                 <div class="no-shadow bg-white">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="notifications" caption="Related notification(s)">
+                                            <div class="km-control-group" name="notifications" caption="{{::('editsubmissionT.notifications'|$translate)}}">
                                                 <div document-selector ng-disabled="!document.organizations && !document.government.identifier"
                                                     identifier-without-revision="true"
                                                     question="notifications" type="checkbox"
@@ -110,7 +110,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="km-control-group" name="records"caption="Related record(s)">
+                                            <div class="km-control-group" name="records"caption="{{::('editsubmissionT.records'|$translate)}}">
                                                 <div document-selector ng-model="document.records" question="records" filter="true"
                                                      on-build-query="onRecordsQuery(searchText)"></div>
                                             </div>
@@ -121,7 +121,7 @@
                             </section>
                             <section ng-if="isAbs">
                                 <div class="no-shadow bg-white">
-                                    <legend>Thematic areas</legend>
+                                    <legend>{{::('editsubmissionT.thematicAreas'|$translate)}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -137,7 +137,7 @@
 
                             <section ng-if="isBch">
                                 <div class="no-shadow bg-white">
-                                    <legend>Thematic areas</legend>
+                                    <legend>{{::('editsubmissionT.thematicAreas'|$translate)}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
@@ -152,10 +152,10 @@
                             </section>
                             <section>
                                 <div class="no-shadow bg-white">
-                                    <legend>Documents</legend>
+                                    <legend>{{::('editsubmissionT.documents'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="relevantDocuments" required caption="Documents">
+                                            <div class="km-control-group" name="relevantDocuments" required caption="{{::('editsubmissionT.documents'|$translate)}}">
                                                 <div km-link name="relevantDocuments"
                                                     ng-model="document.relevantDocuments" allow-link="true"
                                                     allow-file="true" identifier="document.header.identifier"></div>
@@ -165,10 +165,8 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="relevantInformation"
-                                                caption="Any other relevant information">
-                                                <div class="help-block">Please use this field to provide any other
-                                                    relevant information that may not have been addressed elsewhere in
-                                                    the record.</div>
+                                                caption="{{::('editsubmissionT.otherRelevantInformation'|$translate)}}">
+                                                <div class="help-block">{{::('editsubmissionT.relevantInformationInfo'|$translate)}}</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4"
                                                     placeholder="" locales="document.header.languages"></div>
                                             </div>
@@ -179,17 +177,13 @@
                             </section>
                             <section>
                                 <div class="no-shadow bg-white">
-                                    <legend>Notes</legend>
+                                    <legend>{{::('editsubmissionT.notes'|$translate)}}</legend>
 
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="notes">
                                                 <span class="help-block">
-                                                    The “Notes” field is for your personal use.
-                                                    It can only be seen when the record is being edited but is not
-                                                    visible
-                                                    when the record is published.
-                                                    This field is not meant to be used for confidential information.
+                                                    {{::('editsubmissionT.notesInfos'|$translate)}}
                                                 </span>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
