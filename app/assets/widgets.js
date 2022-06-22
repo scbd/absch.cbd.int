@@ -137,10 +137,12 @@ function findOrigin(){
 
     for (let i = 0; i < scripts.length; i++) {
         const element = scripts[i];
-        const url = new URL(element.src)       
-        if(/\/widgets\.js/.test(url.pathname) && (/\.cbd\.int/.test(url.host) || 
-                        /\.cbddev\.xyz/.test(url.host) ||  /localhost:2010/.test(url.host))){
-            return url.origin;
+        if(element.src){
+            const url = new URL(element.src)       
+            if(/\/widgets\.js/.test(url.pathname) && (/\.cbd\.int/.test(url.host) || 
+                            /\.cbddev\.xyz/.test(url.host) ||  /localhost:2010/.test(url.host))){
+                return url.origin;
+            }
         }
     }
 }

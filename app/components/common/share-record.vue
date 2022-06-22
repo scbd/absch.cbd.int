@@ -281,7 +281,7 @@ export default {
         }
 
         if (this.sharedData.embed._id) {
-            this.sharedData.embed.code = `<script src='${this.$realm.value}/assets/widgets.js'><\/script>`;
+            this.sharedData.embed.code = `<script src='${this.$realm.baseURL}/assets/widgets.js'><\/script>`;
             
             if (this.sharedData.storageType == "chm-document") {
               this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-document" data-access-key="${this.sharedData.embed.shortUrlHash}" width="100%"></div>`;
