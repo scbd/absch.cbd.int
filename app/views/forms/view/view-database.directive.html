@@ -10,43 +10,43 @@
 
 			
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>{{::('viewDatabaseT.generalInfo'|$translate)}}</legend>
 		
 		<div ng-show="document.government">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewDatabaseT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target={{target}}>{{document.government|term:locale}}</a>
 			</div>
 		</div>
 
 		<div ng-show="document.title">
-			<label>Website or database name</label>
+			<label>{{::('viewDatabaseT.title'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.description">
-			<label>Description</label>
+			<label>{{::('viewDatabaseT.description'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml html value="document.description" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.websites && document.websites.length >0">
-			<label>URL of the website</label>
+			<label>{{::('viewDatabaseT.url'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<km-link-list ng-model="document.websites" ></km-link-list>
 			</div>
 		</div>
 		<div ng-show="!document.websites && document.website">
-			<label>URL of the website</label>
+			<label>{{::('viewDatabaseT.url'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<km-link-list ng-model="document.website" ></km-link-list>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewDatabaseT.addInfo'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>
@@ -55,7 +55,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewDatabaseT.relevantDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val>
 						<km-link-list ng-model="document.relevantDocuments" ></km-link-list>
 				</div>
