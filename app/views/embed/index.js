@@ -6,7 +6,8 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
  function ($scope, $routeParams, $http, $location, locale, localStorageService, realm){
 
     const elementMapping = {
-        'chm-document' : '#recordContent'
+        'chm-document' : '#recordContent',
+        'chm-search-result' : '#searchPage'
     }
 
     async function init(){

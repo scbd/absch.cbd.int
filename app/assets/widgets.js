@@ -93,10 +93,11 @@ function initWidget(){
         if (Object.hasOwnProperty.call(widgets, key)) {
             const widget = widgets[key];           
             if(widget.dataset.accessKey){            
-                var iframeSrc = `${origin}/embed/${widget.dataset.accessKey}?embed=true`
-                var width = getAttributeValue(widget, 'width') || '300';
+                var width = getAttributeValue(widget, 'width')   || '300';
                 var height = getAttributeValue(widget, 'height') || '500';
+                var type = getAttributeValue(widget, 'type')   || 'chm-document';
                 
+                var iframeSrc = `${origin}/share/embed/${type}/${widget.dataset.accessKey}?embed=true`
                 var options = {
                     src : iframeSrc,
                     width : width,
