@@ -552,7 +552,7 @@ a:active {
 }
 
 .page-content a:hover {
-    color: #000;
+    color: #000!important;
 }
 
 .page-content a:active {
@@ -2862,12 +2862,18 @@ padding-right: 23%;
 }
 #searchSortOptions .sort-options > li > a,
 .table-export-button,
-.share-buton{
+.share-button{
     font-size: 12px;
     text-transform: uppercase;
     color:#555;
     font-weight: bold;
     
+}
+#recordContent .share-button{
+    text-transform: none;
+    font-weight: normal;
+    font-size: 14px;
+    color: #fff;
 }
 
 #innerPage .mastHead{

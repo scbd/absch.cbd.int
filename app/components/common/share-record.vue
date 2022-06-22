@@ -8,8 +8,8 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">{{ $t("modalTitle") }}:
-              By {{$t(sharedData.type)}}</h5>
-            <button type="button" class="btn-close" @click="modal.hide()" aria-label="Close" ></button>
+              {{$t('by')}} {{$t(sharedData.type)}}</h5>
+            <button type="button" class="btn-close" @click="closeDialog()" aria-label="Close" ></button>
           </div>
           <div class="modal-body">
             <div class="wrapper">
@@ -34,14 +34,14 @@
               <div class="row" v-if="!sharedData.type">
                 <div class="col-12">
                   <div class="alert alert-info">
-                    Please select one option
+                    {{$t('selectOneOption')}}
                   </div>
                 </div>
               </div>
               <div class="row" v-if="loading || sharedData[sharedData.type].success || error">
                 <div class="col-md-12">
                   <div v-if="!loading && sharedData[sharedData.type].success" class="alert alert-success">
-                    Email send successfully. //if type
+                    {{$t('emailSent')}}
                   </div>
                   <div v-if="loading" class="alert alert-info">
                     <div class="text-center">
@@ -59,25 +59,27 @@
                   <div v-if="sharedData[sharedData.type].link" class="field d-flex align-items-center justify-content-between">
                     <span class="bi bi-link text-center"></span>
                     <p class="copy-link">
-                      <a :href="sharedData[sharedData.type].link" target="_blank" id="shareLink">{{sharedData[sharedData.type].link}}</a>
+                      <a :href="sharedData[sharedData.type].link" target="_blank">{{sharedData[sharedData.type].link}}</a>
+                      <input  type="textbox" style="height:0px;width:0px" class="" id="shareLink" aria-label="embed code" 
+                        v-model="sharedData[sharedData.type].link" readonly disabled />                            
                     </p>
                     <button class="btn btn-primary" @click="copy('shareLink')"
-                      data-bs-toggle="tooltip" data-bs-placement="top" :title="$t('copyToClipboard')">
+                      data-bs-toggle="tooltip" data-bs-placement="top" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')">
                       {{$t('Copy')}}
                     </button>
                   </div>
                   <button class="btn btn-primary" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
                     :disabled="loading" v-bind:class="{ disabled: loading }">
                       <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-                      <span v-if="loading" class="visually-hidden">Loading...</span>
-                      Generate link
+                      <span v-if="loading" class="visually-hidden">{{$t('loading')}}...</span>
+                      {{$t('generateLink')}}
                   </button>
                 </div>
               </div>
               <div class="row" v-if="sharedData.type == 'email'">
                 <div class="col-md-12 " v-if="!sharedData[sharedData.type].emails || !isValidEmail">
                   <div class="alert alert-info">
-                    Please enter email(s) separated by , or ;
+                    {{$t('emailInfo')}}
                   </div>
                 </div>
                 <div class="col-md-12 ">
@@ -100,14 +102,14 @@
               <div class="row" v-if="sharedData.type == 'embed'">
                 <div class="col-12 " v-if="!sharedData[sharedData.type].domain || !isValidDomain" >
                   <div class="alert alert-info">
-                    Please enter domain where you intent to embed
+                    {{$t('domainInfo')}}
                   </div>
                 </div>
                 <form class="row g-3">
                   <div class="col-12">
-                    <label for="inputPassword2">Domain</label>
+                    <label for="inputPassword2">{{$t('domain')}}</label>
                     <input v-model="sharedData[sharedData.type].domain"
-                      type="url" placeholder="for eg. https://www.cbd.int" class="form-control float-right" @change="onDomainChange" />
+                      type="url" :placeholder="$t('urlEg')" class="form-control float-right" @change="onDomainChange" />
                   </div>
                   <div class="col-12">
                     <!-- || !isValidDomain -->
@@ -120,16 +122,17 @@
                           loading || !sharedData[sharedData.type].domain || !isValidDomain,
                       }"
                     >
-                      Generate Code
+                      {{$t('generateCode')}}
                     </button>
                   </div>
                 </form>
                 <div class="row g-3" v-if="sharedData[sharedData.type].code">
                     <div class="col-12">
                         <div class="input-group mb-3">                            
-                            <textarea class="form-control highlight embed-code" aria-label="embed code" v-model="sharedData[sharedData.type].code" readonly disabled>                              
+                            <textarea class="form-control highlight embed-code" id="embedCode" aria-label="embed code" v-model="sharedData[sharedData.type].code" readonly disabled>                              
                             </textarea>
-                            <button class="input-group-text" title="" data-original-title="Copy to clipboard" @click="copyCode()">{{$t('Copy')}}</button>                            
+                            <button class="input-group-text" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')" 
+                            data-bs-toggle="tooltip" data-bs-placement="top"  @click="copy('embedCode')">{{$t('Copy')}}</button>                            
                         </div>
                     </div>
                 </div>
@@ -142,9 +145,17 @@
               class="btn btn-secondary"
               @click="modal.hide()"
             >
-              Cancel
+              {{$t('cancel')}}
             </button>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
+      <div ref="clipboardToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <strong class="me-auto">{{$t('clipboardSuccess')}}</strong>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
       </div>
     </div>
@@ -154,8 +165,8 @@
 <script>
 import DocumentShareApi from "~/api/document-share";
 import SubscriptionsApi from "~/api/subscriptions";
-import { Modal } from "bootstrap";
-import i18n from "../../locales/components/common/share-record.json";
+import { Modal, Toast } from "bootstrap";
+import i18n from "../../app-text/components/common/share-record.json";
 
 export default {
   components: {},
@@ -163,6 +174,7 @@ export default {
   data: () => {
     return {
       modal: null,
+      toast:null,
       loading: false,
       isValidEmail: true,
       isValidDomain: true,
@@ -183,6 +195,7 @@ export default {
   },
   async mounted() {
     this.modal = new Modal(this.$refs.shareModal);
+    this.toast = new Toast(this.$refs.clipboardToast)
   },
   methods: {
     async openModel() {
@@ -225,13 +238,14 @@ export default {
         storageType: '',
         type       : 'link'
       };
+      this.modal.close();
     },
-    copy(id) {
-       var copyText = document.getElementById(id);
-      copyText.select();
-      copyText.setSelectionRange(0, 99999);
-      navigator.clipboard.writeText(copyText.value);
-
+    async copy(id) {
+      const copyText = document.getElementById(id);
+      copyText.focus();     
+      copyText.setSelectionRange(0, copyText.value.length);
+      await navigator.clipboard.writeText(copyText.value);
+      this.toast.show();
     },
     async shareLinkMail() {
       if (
@@ -304,6 +318,7 @@ export default {
     },
     async saveShareDocument() {
       const data = {
+        expiry      : new Date(new Date().getTime()+12*12*30*24*60*60*1000), // 12 years long expiry
         storageType: this.sharedData.storageType,
         shareType: this.sharedData.type,        
         sharedData: {

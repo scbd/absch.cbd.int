@@ -156,6 +156,7 @@
             </div>
         </div>
         <div ng-if="shareVueComponent" class="share-single-document full-text-display pull-right compare-buttons">
+            <span class="color-white">|&nbsp;</span>
             <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
         </div>
         <div class="float-end pe-2 position-relative text-white" style="top:7px;" ng-show="!loading && !error">
