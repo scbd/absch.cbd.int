@@ -2,8 +2,9 @@
 import template from "text!./view-abs-procedure.directive.html";
 import 'views/directives/record-options';
 import 'views/forms/view/directives/view-record-reference.directive';
+import viewAbsProcedureT from '~/app-text/views/forms/view/abs/view-abs-procedure.json';
 
-			app.directive("viewAbsProcedure", [function () {
+			app.directive("viewAbsProcedure", ['translationService', function (translationService) {
 					
 				return {
 					restrict   : "EAC",
@@ -19,6 +20,7 @@ import 'views/forms/view/directives/view-record-reference.directive';
 					},
 					link : function ($scope)
 					{
+						translationService.set('viewAbsProcedureT', viewAbsProcedureT);
 						$scope.contacts = undefined;
 					},
 					controller : ["$scope", 'realm', "IStorage", function ($scope, realm, storage)

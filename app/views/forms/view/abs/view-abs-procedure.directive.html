@@ -10,32 +10,32 @@
 		
 		<document-date></document-date>
 
-		<legend ng-if="document.government || document.name">General information</legend>
+		<legend ng-if="document.government || document.name">{{::('viewAbsProcedureT.generalInfo'|$translate)}}</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewAbsProcedureT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
-		<legend>Description of the ABS Procedure</legend>
+		<legend>{{::('viewAbsProcedureT.description'|$translate)}}</legend>
 		 <div ng-show="document.name">
-		 	<label>Title</label>
+		 	<label>{{::('viewAbsProcedureT.title'|$translate)}}</label>
 			 <div compare-val>
 			<km-value-ml value="document.name" locales="locale"></km-value-ml>
 			 </div>
 		 </div>
 		 
 		<div ng-show="document.jurisdiction">
-			<label>Area of Jurisdiction</label>
+			<label>{{::('viewAbsProcedureT.jurisdiction'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.jurisdiction|term"></span>
 			</div>
 		</div>
 
 		<div ng-show="document.contacts || document.links">
-			<label>Where should applications for access be made</label>
+			<label>{{::('viewAbsProcedureT.contactsLinks'|$translate)}}</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="contact in document.contacts"  ng-show="document.contacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -50,14 +50,14 @@
 
 
 		<div ng-show="document.requirements">
-			<label>Conditions or requirements a potential user needs to fulfil to apply for access</label>
+			<label>{{::('viewAbsProcedureT.requirements'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.requirements" locales="locale" km-pre html></km-value-ml>
 			</div>
 		</div>
 		
 		<div ng-show="document.description || document.descriptionLinks">
-			<label>Step-by step description or a visual representation of the ABS procedure</label>
+			<label>{{::('viewAbsProcedureT.descriptionLinks'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>
 			</div>
@@ -69,19 +69,19 @@
 		</div>
 
 		<div ng-show="document.hasApplicationDocuments!=undefined">
-			<legend>Does the applicant need to provide any documents</legend>
+			<legend>{{::('viewAbsProcedureT.hasApplicationDocuments'|$translate)}}</legend>
 			<div class="km-value" compare-val>
 				<km-value-bool value="document.hasApplicationDocuments" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-show="document.applicationInformation">
-			<label>Information on application forms or required documents</label>
+			<label>{{::('viewAbsProcedureT.applicationInformation'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.applicationInformation" locales="locale" km-pre html></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.applicationLinks">
-			<label>Relevant application form/documents or a link to website</label>
+			<label>{{::('viewAbsProcedureT.applicationLinks'|$translate)}}</label>
 				<div class="km-value" compare-val="applicationLinks">
 					<km-link-list ng-model="document.applicationLinks"></km-link-list>
 				</div>
@@ -89,7 +89,7 @@
 		</div>
 
 		<div ng-show="document.applicationContacts">
-			<label>Information on whom the application should be sent to</label>
+			<label>{{::('viewAbsProcedureT.applicationContacts'|$translate)}}</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="contact in document.applicationContacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -98,28 +98,28 @@
 		</div>
 
 		<div ng-show="document.hasApplicationFees!=undefined">
-			<legend>Are there application fees</legend>
+			<legend>{{::('viewAbsProcedureT.hasApplicationFees'|$translate)}}</legend>
 				<div class="km-value" compare-val>
 					<km-value-bool value="document.hasApplicationFees" locales="locale"></km-value-bool>
 				</div>
 			
 		</div>
 		<div ng-show="document.applicationFeesInformation">
-			<label>Additional information on application fees</label>
+			<label>{{::('viewAbsProcedureT.applicationFeesInformation'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.applicationFeesInformation" locales="locale" km-pre html></km-value-ml>
 			</div>
 		</div>
 		
 		<div ng-show="document.applicationFeesInformation">
-			<label>How long does the application process take</label>
+			<label>{{::('viewAbsProcedureT.duration'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<strong><span ng-bind="document.duration"></span> <span ng-bind="document.durationPeriod"></span></strong>
 			</div>
 		</div>
 
 		<div ng-show="document.relevantMeasures">
-			<label>Relevant ABS measure(s)</label>
+			<label>{{::('viewAbsProcedureT.relevantMeasures'|$translate)}}</label>
 			<div compare-val>
 			<div class="km-value" ng-repeat="measure in document.relevantMeasures">
 				<div view-record-reference ng-model="measure.identifier" locale="locale"></div>
@@ -127,7 +127,7 @@
 		</div>
 
 		<div ng-show="document.keywords">
-			<label>Keywords</label>
+			<label>{{::('viewAbsProcedureT.keywords'|$translate)}}</label>
 			<div class="km-value">
 				<ul class="list">
 					<li ng-repeat="term in document.keywords">{{term | term:locale}}</li>
@@ -136,7 +136,7 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewAbsProcedureT.addInfo'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
 				<!-- need to test -->
@@ -146,7 +146,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant links or attached documents</label>
+				<label>{{::('viewAbsProcedureT.relevantDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>
