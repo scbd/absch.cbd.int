@@ -17,8 +17,7 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
         try{
             if($routeParams.accessKey){
                 const data = (await $http.get(`/api/v2018/document-sharing/${$routeParams.accessKey}`)).data;
-                console.log(data);
-              debugger
+                
                 if(data.sharedData.realm != realm.value){
                     console.error('wrong realm for share id loaded')
                     return;

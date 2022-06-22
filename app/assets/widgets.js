@@ -1,6 +1,7 @@
 
-const origin = 'http://localhost:2010';//'https://absch.cbddev.xyz';
+const origin = findOrigin() || 'https://absch.cbddev.xyz';
 
+// new URL(x.src).origin
 let iframeCommunicationReceived = false;
 function embedIFrame(widget, options){
 
@@ -34,6 +35,7 @@ function embedIFrame(widget, options){
 function embedRecord(){
     // if(!id)id, options
     //     return; widget.dataset
+
     var widgetInfo;
     widgetInfo = [...document.getElementsByClassName('scbd-ch-embed')];
     for (var key in widgetInfo) {
@@ -127,6 +129,19 @@ function registerIframeCommunication(iframe, data){
             iframe.contentWindow.postMessage(JSON.stringify(data), '*');//'http://absch-widget.cbddev.xyz:2010');  
             registerIframeCommunication(iframe, data)          
         }, 2000);
+    }
+}
+
+function findOrigin(){
+    var scripts = document.getElementsByTagName('script');
+
+    for (let i = 0; i < scripts.length; i++) {
+        const element = scripts[i];
+        const url = new URL(element.src)       
+        if(/\/widgets\.js/.test(url.pathname) && (/\.cbd\.int/.test(url.host) || 
+                        /\.cbddev\.xyz/.test(url.host) ||  /localhost:2010/.test(url.host))){
+            return url.origin;
+        }
     }
 }
 
