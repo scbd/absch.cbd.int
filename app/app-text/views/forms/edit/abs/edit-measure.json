@@ -8,7 +8,7 @@
     "amendedMeasuresInfo": "Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.",
     "amendmentsDescription": "Summary of the amendment(s)",
     "amendmentsDescriptionInfo": "This will help users to understand the relationship between the two measures. The summary should be as simple and as a concise as possible.",
-    "langugaeToPublish": "Please select in which language(s) you wish to submit this record:",
+    "languageToPublish": "Please select in which language(s) you wish to submit this record:",
     "country": "Country",
     "selectOption": "Please select a country...",
     "selectStatus": "Select legal status...",
