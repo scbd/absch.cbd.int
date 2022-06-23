@@ -41,7 +41,7 @@
               <div class="row" v-if="loading || sharedData[sharedData.type].success || error">
                 <div class="col-md-12">
                   <div v-if="!loading && sharedData[sharedData.type].success" class="alert alert-success">
-                    {{$t('emailSent')}}
+                    <span v-if="sharedData.type=='email'">{{$t('emailSent')}}</span>
                   </div>
                   <div v-if="loading" class="alert alert-info">
                     <div class="text-center">
@@ -49,8 +49,11 @@
                         <strong> {{ $t("processing") }}...</strong>
                     </div>                   
                   </div>
-                  <div v-if="error" class="alert alert-error">
-                    {{ error }}
+                  <div v-if="error" class="alert alert-danger d-flex align-items-center" role="alert">
+                      <i class="bi bi-exclamation-triangle m-1"></i>
+                      <div class="m-1">
+                        {{ error }}
+                      </div>
                   </div>
                 </div>
               </div>
@@ -185,7 +188,6 @@ export default {
         storageType: '',
         type       : 'link'
       },
-      existingSharedDocument : null,
       error : null,
     };
   },
@@ -213,6 +215,7 @@ export default {
     },
     async loadTabData(type) {
 
+      this.error = undefined;
       const { recordKey, type:storageType, query } = this.getQuery(); //TODO: change, GetQuery is getting details about what type of share it is (id and type search-relesult/document)
 
       this.sharedData.type            = type;
@@ -238,7 +241,7 @@ export default {
         storageType: '',
         type       : 'link'
       };
-      this.modal.close();
+      this.modal.hide();
     },
     async copy(id) {
       const copyText = document.getElementById(id);
@@ -248,6 +251,7 @@ export default {
       this.toast.show();
     },
     async shareLinkMail() {
+      this.error = undefined;
       if (
         !this.sharedData[this.sharedData.type].emails ||
         !/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i.test(
@@ -274,12 +278,13 @@ export default {
 
       } catch (err) {
         console.log(err);
-        this.error = "Error sending email, please try again.";
+        this.error = i18n.emailError;
       } finally {
         this.loading = false;
       }
     },
     async generateEmbedCode() {
+      this.error = undefined;
       this.onDomainChange();
       if (!this.isValidDomain) return;
 
@@ -310,7 +315,8 @@ export default {
         this.sharedData = Object.assign({}, this.sharedData);
         
       } catch (err) {
-        this.sendResponse = err;
+        console.log(err)
+        this.error = i18n.embedCodeError;
       } finally {
         this.loading = false;
       }
@@ -365,6 +371,7 @@ export default {
     },
     async generateSearchResultLink(){
 
+      this.error = undefined;
       this.loading = true;
       try{
         if (!this.sharedData[this.sharedData.type]._id) {          
@@ -378,7 +385,7 @@ export default {
       }
       catch(err){
         console.error(err);
-        this.error = "Error generating link, please try again.";
+        this.error = i18n.searchResultLinkError;
       } 
       finally{
         this.loading = false;

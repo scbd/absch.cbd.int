@@ -21,5 +21,9 @@
     "domain":"Domain",
     "urlEg":"for eg. https://www.cbd.int",
     "generateCode":"Generate Code",
-    "cancel":"Cancel"
+    "cancel":"Cancel",
+
+    "searchResultLinkError":"Error generating link, please try again.",
+    "emailError":"Error sending email, please try again.",
+    "embedCodeError":"Error generating embed code, please try again"
 }
