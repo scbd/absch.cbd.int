@@ -313,7 +313,7 @@ import shareRecord from '~/components/common/share-record.vue';
 						if ($scope.internalDocumentInfo?.workingDocumentLock) {
 							IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
 								.then(function (workflow) {
-									if (workflow && workflow.type.name == 'delete-record')
+									if (workflow && workflow.type.name == 'deleteRecord')
 										$scope.workflowRequestType = "deletion";
 									else
 										$scope.workflowRequestType = "publishing";

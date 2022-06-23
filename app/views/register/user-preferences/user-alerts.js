@@ -76,6 +76,8 @@ import 'components/scbd-angularjs-services/main';
                                 query = JSON.parse($scope.collectionFilter);
                             $scope.loading = true;
                             query.realm = realm.value;
+                            query['$or'] = [{ isShareQuery : false},{ isShareQuery :{$exists: false}}];
+                            
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
                                     // if ($scope.collection == "search-queries" && $scope.user.government) {
