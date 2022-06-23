@@ -84,9 +84,9 @@ app.directive("viewReferencedRecords", [function () {
 
 			async function getFieldTitles(){
 				if(realm.is('ABS'))
-					return (await import('~/app-text/abs/linked-records-field-titles.json')).default;
+					return (await import('~/app-text/views/forms/view/directives/abs-linked-records-field-titles.json')).default;
 
-				return (await import('~/app-text/bch/linked-records-field-titles.json')).default;
+					return (await import('~/app-text/views/forms/view/directives/bch-linked-records-field-titles.json')).default;
 			}
 
 			function removeRevisionNumber(identifier){
