@@ -4,7 +4,10 @@ import template from 'text!./edit-country-profile.directive.html';
 import 'views/forms/edit/edit';
 import "~/views/forms/view/bch/view-country-profile.directive";
 import 'services/main'; 
-	app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog',"searchService", 'solr', function($controller, $routeParams, ngDialog,searchService,solr) {
+import editCountryProfileT from '~/app-text/views/forms/edit/bch/directives/edit-country-profile.json';
+
+app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog', "searchService", 'solr', 'translationService',
+	function ($controller, $routeParams, ngDialog, searchService, solr, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -14,6 +17,7 @@ import 'services/main';
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){  
+				translationService.set('editCountryProfileT', editCountryProfileT);
 				$scope.container        = $attr.container;
     			$scope.isDialog         = $attr.isDialog;  
 				$scope.type 			= $attr.documentType;  
