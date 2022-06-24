@@ -6,8 +6,9 @@ import 'views/forms/view/bch/view-lmo-gene.directive';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 import { uniqIdentifiers } from '~/services/common'
+import viewLmoT from '~/app-text/views/forms/view/bch/view-lmo.json';
 
-app.directive("viewModifiedOrganism", ['$location', '$http', function ($location, $http) {
+app.directive("viewModifiedOrganism", ['$location', '$http', 'translationService', function ($location, $http, translationService) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -21,6 +22,7 @@ app.directive("viewModifiedOrganism", ['$location', '$http', function ($location
 		},
 		link : function ($scope)
 		{	
+			translationService.set('viewLmoT', viewLmoT);
 			var queryString = $location.search();
 			if(queryString )
 				$scope.printMode = queryString.print
