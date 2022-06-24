@@ -7,15 +7,15 @@
 	</div>
 	<div class="record-body panel-body bg-white">
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>{{::('viewCountryProfileT.generalInfo'|$translate)}}</legend>
 		<div ng-if="document.government">
-			<label name="government">Country</label> 
+			<label name="government">{{::('viewCountryProfileT.country'|$translate)}}</label> 
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>	
 		<div ng-if="document.profile">
-			<label>Additional information for the country profile</label> 
+			<label>{{::('viewCountryProfileT.additionalInformation'|$translate)}}</label> 
 			<div compare-val> 
 			 	<km-value-ml value="document.profile" locales="locale" html></km-value-ml>   
 			 </div>
