@@ -11,10 +11,10 @@
             <edit-form>
                 <form name="editForm mt-2" class="editForm">
                     <div class="no-shadow bg-white">
-                        <legend>General information</legend>
+                        <legend>{{::('editLabDetectionT.generalInfo'|$translate)}}</legend>
                         <div class="row">
                             <div class="col-xs-12" >
-                                <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                <div class="km-control-group" name="header.languages" required caption="{{::('editLabDetectionT.languageToPublish'|$translate)}}">
                                     <div class="indent">
                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                     </div>
@@ -23,7 +23,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-xs-12">
-                                <div class="km-control-group" required name="organization" caption="Laboratory name and coordinates">
+                                <div class="km-control-group" required name="organization" caption="{{::('editLabDetectionT.organization'|$translate)}}">
                                     <!-- <div class="help-block">Lab information...</div> -->
                                     <div document-selector required ng-model="document.organization" allow-new="true" allow-new-schema="organization"
                                         type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
@@ -32,8 +32,8 @@
                         </div>
                         <div class="row">
                             <div class="col-md-8 col-xs-12">
-                                <div class="km-control-group" name="relatedOrganization" caption="Related Organization">
-                                    <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. parent organization).</div>
+                                <div class="km-control-group" name="relatedOrganization" caption="{{::('editLabDetectionT.relatedOrganization'|$translate)}}">
+                                    <div class="help-block">{{::('editLabDetectionT.relatedOrganizationInfo'|$translate)}}</div>
                                    <div document-selector required ng-model="document.relatedOrganization" allow-new="true" allow-new-schema="organization"
                                         type="radio" question="organization" on-build-query="onBuildQuery(searchText, 'organization')"  filter="true"></div>
                             </div>
@@ -41,10 +41,10 @@
                         </div>
                     </div>
                     <div class="no-shadow bg-white">
-                        <legend>Laboratory details</legend>
+                        <legend>{{::('editLabDetectionT.laboratoryDetails'|$translate)}}</legend>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="km-control-group" required name="services" caption="Services and activities performed">
+                                <div class="km-control-group" required name="services" caption="{{::('editLabDetectionT.services'|$translate)}}">
                                     <div km-term-check name="services" required ng-model="document.services" terms="options.services()"
                                     binding-type="term[]" locales="document.header.languages"></div>
                                 </div>
@@ -53,9 +53,9 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="agreements" caption="Collaborative agreements">
-                                    <div class="help-block">Specify any national competent authority, organization or laboratory within or outside the country, which has an agreement with this laboratory.</div>
-                                    <div km-rich-textbox ng-model="document.agreements" rows="4" placeholder="Agreements" locales="document.header.languages"></div>
+                                <div class="km-control-group" name="agreements" caption="{{::('editLabDetectionT.collaborativeAgreements'|$translate)}}">
+                                    <div class="help-block">{{::('editLabDetectionT.agreementsInfo'|$translate)}}</div>
+                                    <div km-rich-textbox ng-model="document.agreements" rows="4" placeholder="{{::('editLabDetectionT.agreements'|$translate)}}" locales="document.header.languages"></div>
                                     <br/>
                                     <div km-link name="agreementLinks" ng-model="document.agreementLinks" identifier="document.header.identifier"></div>
                                 </div>
@@ -63,15 +63,15 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="certifications" caption="Accreditations and certifications of the laboratory">
+                                <div class="km-control-group" name="certifications" caption="{{::('editLabDetectionT.certifications'|$translate)}}">
                                     <div km-textbox-ml name="certifications" ng-model="document.certifications"
-                                        placeholder="e.g. ISO/IEC 17025" locales="document.header.languages"></div>
+                                        placeholder="{{::('editLabDetectionT.certificationsInfo'|$translate)}}" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="km-control-group" required name="detectionMethods" caption="Types of detection/identification method(s) available for use in the laboratory">
+                                <div class="km-control-group" required name="detectionMethods" caption="{{::('editLabDetectionT.detectionMethods'|$translate)}}">
                                     <div km-term-check name="detectionMethods" required ng-model="self.detectionMethods" terms="options.detectionMethods()"
                                     binding-type="term[]" locales="document.header.languages"></div>
                                 </div>
@@ -80,7 +80,7 @@
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <div class="km-control-group" name="lmoTypes" caption="Types of LMOs">
+                                <div class="km-control-group" name="lmoTypes" caption="{{::('editLabDetectionT.lmoTypes'|$translate)}}">
                                     <div km-term-check name="lmoTypes" ng-model="document.lmoTypes" terms="options.lmoTypes()"
                                     binding-type="term[]" locales="document.header.languages"></div>
                                 </div>
@@ -89,7 +89,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                               <div class="km-control-group" name="detectableLmos" caption="LMO(s) detectable by the laboratory">
+                               <div class="km-control-group" name="detectableLmos" caption="{{::('editLabDetectionT.detectableLmos'|$translate)}}">
                                     <div document-selector ng-model="document.detectableLmos" allow-new="true" allow-new-schema="modifiedOrganism"
                                         question="detectableLmos" on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" filter="true">
                                         
@@ -113,7 +113,7 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="detectableGenes" required caption="Genetic element(s) detectable by the laboratory">
+                                <div class="km-control-group" name="detectableGenes" required caption="{{::('editLabDetectionT.detectableGenes'|$translate)}}">
                                     <div document-selector ng-model="document.detectableGenes" required allow-new="true" allow-new-schema="dnaSequence"
                                         question="detectableGenes" on-build-query="onBuildQuery(searchText,'dnaSequence')" filter="true"></div>
                                 </div>
@@ -121,19 +121,18 @@
                         </div>
                     </div>
                     <div class="no-shadow bg-white">
-                        <legend>Timeframe for confirmation or updating of information</legend>
+                        <legend>{{::('editLabDetectionT.timeFrame'|$translate)}}</legend>
                         <div class="help-info">
-                            Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Non-confirmed”. 
+                            {{::('editLabDetectionT.timeFrameInfo'|$translate)}}
                         </div>
                     </div>
 
                     <div class="no-shadow bg-white">
-                        <legend>Additional information</legend>
+                        <legend>{{::('editLabDetectionT.additionalInformation'|$translate)}}</legend>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="address" caption="Any other relevant information">
-                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in
-                                        the record.</div>
+                                <div class="km-control-group" name="address" caption="{{::('editLabDetectionT.relevantInformation'|$translate)}}">
+                                    <div class="help-block">{{::('editLabDetectionT.relevantInformationInfo'|$translate)}}</div>
                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>
@@ -141,21 +140,20 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-                                    <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more 
-                                        relevant documents that will be stored in the database for users to download.</div>
+                                <div class="km-control-group" name="relevantDocuments" caption="{{::('editLabDetectionT.relevantDocuments'|$translate)}}">
+                                    <div class="help-block">{{::('editLabDetectionT.relevantDocumentsInfo'|$translate)}}</div>
                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="no-shadow bg-white">
-                        <legend>Notes</legend>								
+                        <legend>{{::('editLabDetectionT.notes'|$translate)}}</legend>								
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="notes">
                                     <span class="help-block">
-                                        The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+                                        {{::('editLabDetectionT.notesInfo'|$translate)}}
                                     </span>
                                     <div km-notes name="notes" ng-model="document.notes"></div>
                                 </div>
