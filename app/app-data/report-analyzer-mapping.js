@@ -1,4 +1,4 @@
-import reportAnalyzerMappingJson from '~/app-text/report-analyzer-mapping.json'
+import reportAnalyzerMappingJson from '~/app-text/app-data/report-analyzer-mapping.json';
 
 export const analyzerMapping =
 {

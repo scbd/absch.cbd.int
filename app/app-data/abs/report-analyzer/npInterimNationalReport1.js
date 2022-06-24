@@ -1,4 +1,4 @@
-﻿import nr1Data from '~/app-text/abs/report-analyzer/npInterimNationalReport1.json'
+﻿import nr1Data from '~/app-text/app-data/abs/report-analyzer/npInterimNationalReport1.json'
 
 export const npInterimNationalReport1 = [
     {
