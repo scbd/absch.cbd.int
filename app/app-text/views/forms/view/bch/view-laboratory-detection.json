@@ -1,0 +1,14 @@
+{
+    "generalInfo": "General Information",
+    "organization": "Laboratory name and coordinates",
+    "relatedOrganization": "Related Organization",
+    "services": "Services and activities performed",
+    "collaborativeAgreements": "Collaborative agreements",
+    "certifications": "Accreditations and certifications of the laboratory",
+    "detectionMethods": "Types of detection/identification method(s) available for use in the laboratory",
+    "lmoTypes": "Types of LMOs",
+    "detectableLmos": "LMO(s) detectable by the laboratory",
+    "detectableGenes": "Genetic element(s) detectable by the laboratory",
+    "additionalInformation": "Additional Information",
+    "relevantDocuments": "Other relevant website addresses and/or attached documents"
+}

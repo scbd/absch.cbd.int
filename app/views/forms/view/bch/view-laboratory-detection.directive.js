@@ -4,8 +4,8 @@ import 'views/directives/record-options';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/view/bch/view-lmo.directive';
 import _ from "lodash";
-    
-    app.directive("viewLaboratoryDetection", [function () {
+import viewLabDetectionT from '~/app-text/views/forms/view/bch/view-laboratory-detection.json';
+    app.directive("viewLaboratoryDetection", ['translationService', function (translationService) {
         return {
             restrict   : "EAC",
             template: template ,
@@ -19,6 +19,7 @@ import _ from "lodash";
             },
             controller : ["$scope", function ($scope)
             {
+			translationService.set('viewLabDetectionT', viewLabDetectionT);
                 //====================
                 //
                 //====================
