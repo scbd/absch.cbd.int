@@ -29,7 +29,7 @@
                             <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
                                 <li class="nav-item" ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
                                     <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab" ng-class="{'disabled': !tab.render}" >
-                                        Question <span ng-bind="::tab.title"></span>
+                                        {{::('editNR4T.question'|$translate)}} <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -68,8 +68,8 @@
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
                                                                         <div class="float-end show-previous-answer">
-                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">Show previous answer</button>
-                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">Hide previous answer</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">{{::('editNR4T.showPrevious'|$translate)}}</button>
+                                                                            <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">{{::('editNR4T.hidePrevious'|$translate)}}</button>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
@@ -86,8 +86,8 @@
                                                                                         ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
                                                                                     <div class="float-end" style="margin-bottom:5px;">
-                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Show previous Answer</button>
-                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">Hide previous Answer</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">{{::('editNR4T.showPrevious'|$translate)}}</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">{{::('editNR4T.hidePrevious'|$translate)}}</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -106,7 +106,7 @@
                                                     style="margin-bottom:3px!important">
                                                     
                                                     <div class="panel-heading">
-                                                        <strong>General information</strong>
+                                                        <strong>{{::('editNR4T.generalInfo'|$translate)}}</strong>
                                                     </div>
                                                     <div class="panel-body" style="padding:0px">
                                                         <div ng-include="'contact'"></div>
@@ -125,7 +125,7 @@
                             <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
                                 <li class="nav-item" ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
                                     <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab" ng-class="{'disabled': !tab.render}">
-                                        Question <span ng-bind="::tab.title"></span>
+                                        {{::('editNR4T.question'|$translate)}} <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>
                             </ul>
@@ -144,7 +144,7 @@
             <div style="margin:20px">
                 <div class="row">
                     <div class="col-xs-12" >
-                        <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                        <div class="km-control-group" name="header.languages" required caption="{{::('editNR4T.languageToPublish'|$translate)}}">
                             <div class="indent">
                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                             </div>
@@ -153,9 +153,9 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="km-control-group" name="government" required caption="Country">
+                        <div class="km-control-group" name="government" required caption="{{::('editNR4T.country'|$translate)}}">
                             <div afc-autocomplete required name="government" ng-disabled="userHasGovernment()" ng-model="document.government" source="options.countries"
-                                filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..." ng-change="onGovernmentChange(document.government)"></div>
+                                filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editNR4T.selectOption'|$translate)}}" ng-change="onGovernmentChange(document.government)"></div>
                         </div>
                     </div>
                 </div>
@@ -170,7 +170,7 @@
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="km-control-group" required name="stakeholders" caption="9.	Organizations/stakeholders who were consulted or participated in the preparation of this report">
+                        <div class="km-control-group" required name="stakeholders" caption="{{::('editNR4T.organizationsStakeholders'|$translate)}}">
                             <div km-textbox-ml name="stakeholders" required ng-model="document.stakeholders" locales="document.header.languages"></div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
 
                 <div class="row">
                         <div class="col-12">
-                            <div class="km-control-group time-period" required name="stakeholders" caption="10.	Time period covered by this report">
+                            <div class="km-control-group time-period" required name="stakeholders" caption="{{::('editNR4T.timePeriod'|$translate)}}">
                                 <div class="col-md-5 col-sm-12">
                                     <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
                                 </div> 
@@ -225,7 +225,7 @@
                 <div class="col-md-4" ng-if="question.showPrevious">
                     <div style="border: 2px solid #fff;padding:5px">
                         <div class="alert alert-info" ng-if="previousAnswerMapping[question.key].showMessage">
-                            * Please note that the period covered by this question is different in each reporting format.  
+                            * {{::('editNR4T.previousAnswerMapping'|$translate)}}
                         </div>
                         <div>
                             <strong ng-bind="::(previousAnswerMapping[question.key].prevQuestion + '. ' + previousAnswerMapping[question.key].previousQuestion.title)"></strong>
@@ -243,15 +243,14 @@
         </script>
         <script type="text/ng-template" id="recordExistsTemplate.html" trados-translation="true">
             <div style="margin:10px;">
-                <h1>Fourth national report</h1>
+                <h1>{{::('editNR4T.fourthNationalReport'|$translate)}}</h1>
                 <hr>
                 <div class=" alert alert-danger">
                     <div class="bi bi-exclamation-sign"></div>
-                    <div>Only one record of the fourth national report is allowed for each government, the fourth national report already exists
-                        for your government, you will be redirected to the record in <span ng-bind="alertSeconds"></span> seconds.</div>
+                    <div>{{::('editNR4T.NR4Info'|$translate)}} <span ng-bind="alertSeconds"></span> {{::('editNR4T.seconds'|$translate)}}</div>
                 </div>
                 <div class="ngdialog-buttons">
-                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">Redirect now</button>
+                    <button type="button" class="ngdialog-button ngdialog-button-primary" ng-click="openExisting()">{{::('editNR4T.redirectNow'|$translate)}}</button>
                 </div>
             </div>
         </script>
