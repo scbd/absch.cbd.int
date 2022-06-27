@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-        <button type="button" class="btn btn-primary" ng-click="openContructDialog()">Add Construct</button>
+        <button type="button" class="btn btn-primary" ng-click="openContructDialog()">{{::('lmoConstructT.addConstruct'|$translate)}}</button>
     
     </div>
 
@@ -166,12 +166,12 @@
         </style>
         <div class="modal-header">
             <h3 class="modal-title">
-                Gene Construct
+                {{::('lmoConstructT.geneConstruct'|$translate)}}
             </h3>
         </div>
         <div class="modal-body" >   
             <div class="help-info">
-                Please use the mouse to drag the a shape to add to the construct on a drop location 
+                {{::('lmoConstructT.geneConstructInfo'|$translate)}} 
             </div>
             <div class="gene-construct">
                 <div class="dropzone">
@@ -191,7 +191,7 @@
                         <div class="col-sm-4 float-end">       
                             <div class="trashcan">   
                                 <div class="help-info">
-                                    Drag the shape here to remove the construct 
+                                    {{::('lmoConstructT.dragConstruct'|$translate)}} 
                                 </div>                             
                                 <ul dnd-list="[]">
                                     <li><img src="https://bch.cbd.int/bch/images/lmoconstruct/trash-over.png"></li>
@@ -200,7 +200,7 @@
                         </div>
                         <hr />
                         <div class="col-sm-12">
-                            <strong>Drop location</legend>                
+                            <strong>{{::('lmoConstructT.dropLocation'|$translate)}}</legend>                
                             <div class="container-element" style="border:1px solid #eee">
                                 <ul dnd-list="newConstruct" class="itemlist">
                                     <li ng-repeat="item in newConstruct" dnd-draggable="item" dnd-type="'item'" dnd-effect-allowed="move"
@@ -215,8 +215,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">Cancel</button>
-            <button type="button" class="btn btn-primary float-start" aria-label="Save" ng-click="saveConstruct()" >Save</button>   
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">{{::('lmoConstructT.cancel'|$translate)}}</button>
+            <button type="button" class="btn btn-primary float-start" aria-label="Save" ng-click="saveConstruct()" >{{::('lmoConstructT.save'|$translate)}}</button>   
         </div>
 
     </script>
@@ -226,25 +226,25 @@
                 <td class="left" >&nbsp;</td>
                 <td class="middle">
                     <div ng-show="!item.gene">
-                        <span ng-if="item.type=='senseStart'"    >transcription start</span>
-                        <span ng-if="item.type=='sense'"         >transcription element</span>
-                        <span ng-if="item.type=='senseStop'"     >transcription stop</span>
-                        <span ng-if="item.type=='antisenseStart'">transcription start</span>
-                        <span ng-if="item.type=='antisense'"     >transcription element</span>
-                        <span ng-if="item.type=='antisenseStop'" >transcription stop</span>
+                        <span ng-if="item.type=='senseStart'"    >{{::('lmoConstructT.transcriptionStart'|$translate)}}</span>
+                        <span ng-if="item.type=='sense'"         >{{::('lmoConstructT.transcriptionElement'|$translate)}}</span>
+                        <span ng-if="item.type=='senseStop'"     >{{::('lmoConstructT.transcriptionStop'|$translate)}}</span>
+                        <span ng-if="item.type=='antisenseStart'">{{::('lmoConstructT.transcriptionStart'|$translate)}}</span>
+                        <span ng-if="item.type=='antisense'"     >{{::('lmoConstructT.transcriptionElement'|$translate)}}</span>
+                        <span ng-if="item.type=='antisenseStop'" >{{::('lmoConstructT.transcriptionStop'|$translate)}}</span>
                     </div>
 
                          <div ng-if="showAdd" document-selector ng-model="item.selectedGene" question="dnaSequence" caption="(sense)" type="radio"
                                 on-build-query="onDnaSequenceQuery(searchText)" filter="true" ng-change="geneSelected(item)" allow-new="true" allow-new-schema="dnaSequence">
                                 <select-records>
-                                    <a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">select gene</a>
+                                    <a rel="noopener" ng-show="!$parent.$parent.item.gene" ng-href="#" ng-click="$parent.openAddDialog();">{{::('lmoConstructT.selectGene'|$translate)}}</a>
                                     <a rel="noopener" ng-show="$parent.$parent.item.gene"  ng-href="#" ng-click="$parent.openAddDialog();" ng-bind="$parent.$parent.item.gene.body.name|lstring:locale"></a>
                                 </select-records>
                                 <selected-records>
                                     <div ng-show="$parent.$parent.item.gene">
                                         #<span ng-bind="$parent.$parent.item.gene.documentID"></span>
                                         &nbsp; 
-                                        <input type="number" ng-model="item.size" style="width:50px" min="0"/> KB
+                                        <input type="number" ng-model="item.size" style="width:50px" min="0"/> {{::('lmoConstructT.kb'|$translate)}}
                                     </div>
                                 </selected-records>
                             </div>

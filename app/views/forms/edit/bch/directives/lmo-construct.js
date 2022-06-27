@@ -7,8 +7,10 @@ import 'ngDialog';
 import 'views/forms/edit/document-selector';
 import 'components/scbd-angularjs-services/main';
 import '~/views/forms/view/bch/view-lmo-gene.directive';
+import lmoConstructT from '~/app-text/views/forms/edit/bch/directives/lmo-construct.json';
 
-    app.directive('lmoConstruct', ['IStorage', 'ngDialog','solr','realm', function (storage, ngDialog, solr, realm) {
+app.directive('lmoConstruct', ['IStorage', 'ngDialog', 'solr', 'realm', 'translationService', 
+    function (storage, ngDialog, solr, realm, translationService) {
         return {
             restrict: 'EA',
             template: lmoConstructTemplate,
@@ -19,7 +21,7 @@ import '~/views/forms/view/bch/view-lmo-gene.directive';
             },
             link: function ($scope, $element, $attr, ngModelController) {
                 var genes = {};   
-
+                translationService.set('lmoConstructT', lmoConstructT);
                 $scope.openContructDialog = function(existingConstruct, $index){
                             
                     ngDialog.open({
