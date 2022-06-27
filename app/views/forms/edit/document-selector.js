@@ -6,9 +6,10 @@ import '~/views/search/search-results/result-default';
 import 'components/scbd-angularjs-controls/main';
 import 'ngDialog';
 import 'services/main'; // jshint ignore:line
+import documentSelectorT from '~/app-text/views/forms/edit/document-selector.json';
 
-app.directive("documentSelector", ["$timeout",'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr',
-function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr) {
+app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searchService", "solr", "IStorage", 'ngDialog', '$compile', 'toastr', 'translationService',
+    function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog, $compile, toastr, translationService) {
 
 	return {
 		restrict   : "EA",
@@ -37,6 +38,7 @@ function ($timeout, locale, $filter, $q, searchService, solr, IStorage, ngDialog
 		link : function($scope, $element, $attr, ngModelController) {
             var dialogId;
             var focalPointRegex = /^52000000cbd022/;
+            translationService.set('documentSelectorT', documentSelectorT);
             $scope.rawDocuments = [];
             $scope.selectedDocuments=[];
             $scope.tempSelectedDocuments=[];
