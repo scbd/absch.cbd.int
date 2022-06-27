@@ -1,8 +1,10 @@
 ﻿import app from 'app';
 import _ from 'lodash';
 import template from 'text!./traits-selector.directive.html';
+import traitSelectorsT from '~/app-text/views/forms/directives/trait-selectors.json';
 
-    app.directive('traitsSelector', ["thesaurusService", "$q", function (thesaurusService, $q) {
+app.directive('traitsSelector', ["thesaurusService", "$q", "translationService", 
+    function (thesaurusService, $q, translationService) {
         return {
             restrict: 'EA',
             template: template,
@@ -13,7 +15,7 @@ import template from 'text!./traits-selector.directive.html';
                 locales: '='
             },
             link: function ($scope, $element, $attr, ngModelController) {
-                
+                translationService.set('traitSelectorsT', traitSelectorsT);
                 $scope.rootTraits = [];
                 $scope.traits = {
                     '81799D15-669E-4346-9AEC-6834893D2BE4':{ items: [] },
