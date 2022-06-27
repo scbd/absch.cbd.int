@@ -6,9 +6,10 @@ import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-biosafety-expert.directive";
 import 'components/scbd-angularjs-controls/main';
 import 'services/main';
+import editBiosafetyExpertT from '~/app-text/views/forms/edit/bch/directives/edit-biosafety-expert.json';
 
-	app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus', 'realm', '$timeout',
-	function(appLocale, $filter, searchService, $q, $controller, thesaurusService, solr, thesaurus, realm, $timeout) {
+app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus', 'realm', '$timeout', 'translationService',
+	function (appLocale, $filter, searchService, $q, $controller, thesaurusService, solr, thesaurus, realm, $timeout, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -18,7 +19,7 @@ import 'services/main';
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+				translationService.set('editBiosafetyExpertT', editBiosafetyExpertT); 
 				$scope.gender = {
 					options : {
 						male 	: '0999095A-13E0-46F0-A928-613B9AF32AAE',
