@@ -38,20 +38,20 @@ export const processFiles = async (ignoreForRollupFiles) =>{
     ///////////////////////////////////////////////////
     log('Copying i18n files to build dir')
     const langCopyPromise = languages.map(lang=>{
-        return copyFiles(baseDir, `${i18nDir}/${lang}/app`, [lang], buildDir, '**/*.{html,json,vue}');
+        return copyFiles(baseDir, `${i18nDir}/${lang}/app`, [lang], buildDir, '**/*.{json}');
     });
     await Promise.all(langCopyPromise);
     
     ///////////////////////////////////////////////////
     ///     copy js files to all language folder i18n
     ///////////////////////////////////////////////////
-    log('copy js files to all language folder i18n');
-    await copyFiles(baseDir, enDir, languages, buildDir, '**/*.js');
+    log('copy js/html/vue files to all language folder i18n');
+    await copyFiles(baseDir, enDir, languages, buildDir, '**/*.{html,js,vue}');
 
     ///////////////////////////////////////////////////
     ///     copy files to en folder i18n
     ///////////////////////////////////////////////////
-    log('copy files to en folder i18n');
+    log('copy files to en folder in i18n');
     await copyFiles(baseDir, enDir, ['en'], buildDir, '**/*.{html,json,ejs,vue}');
 
     //replace .json file extension  with .json.js
@@ -63,7 +63,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
     log('Begin touch files');
     var fileModifiedDates = {};
     languages.forEach(e=>{fileModifiedDates[e]={};})
-    const allApplicationFiles = (await asyncGlob('**/*.{html,json,ejs,vue}', { cwd: path.join(baseDir, buildDir) }))
+    const allApplicationFiles = (await asyncGlob('**/*.{json,ejs}', { cwd: path.join(baseDir, buildDir) }))
     .map(f=>{
         return f.replace(/^(ar|fr|es|ru|zh)\//, `${i18nDir}/$1/`)
         .replace(/^en\//, '')
