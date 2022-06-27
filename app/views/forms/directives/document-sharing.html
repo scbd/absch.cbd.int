@@ -2,7 +2,7 @@
     <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
     title="Share">
         <i class="fa fa-firefox"></i>
-        <span class="d-none d-sm-inline-block">Share</span>
+        <span class="d-none d-sm-inline-block">{{::('documentSharingT.share'|$translate)}}</span>
     </button>
     <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
     title="PDF">
@@ -13,7 +13,7 @@
     <script type="text/ng-template" id="shareDocumentTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header d-flow-root">
-                Share draft record: <span ng-bind="title"></span>
+                {{::('documentSharingT.shareDraftRecord'|$translate)}} <span ng-bind="title"></span>
             </div>
             <div class="modal-body">
                 <div role="tabpanel">
@@ -21,12 +21,12 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" >
                             <a translation-url href="#url" class="nav-link active" aria-controls="url" role="tab" data-bs-toggle="tab">
-                                <span class="sub-header">Send by URL</span>
+                                <span class="sub-header">{{::('documentSharingT.sendByURL'|$translate)}}</span>
                             </a>
                         </li>
                         <li role="presentation" >
                             <a translation-url class="nav-link" href="#email" aria-controls="email" role="tab" data-bs-toggle="tab">
-                                <span class="sub-header">Send by email</span>
+                                <span class="sub-header">{{::('documentSharingT.sendByEmail'|$translate)}}</span>
                             </a>
                         </li>
                     </ul>
@@ -35,33 +35,33 @@
                         <div role="tabpanel" class="tab-pane active" id="url">
                             <div class="row">
                                 <div ng-if="isLoading">
-                                        <i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> loading...
+                                        <i style="margin-left:40%" class="fa fa-spin fa-spinner"></i> {{::('documentSharingT.loading'|$translate)}}
                                 </div>
                                 <div class="content" ng-hide="isLoading">
                                     <br/>
                                     <div class="alert alert-info">
                                         <i class="fa fa-info-circle"></i>
-                                        Anyone with the link can view this draft document and will continue to see the updates until the draft has been published or deleted.
+                                        {{::('documentSharingT.alertInfo'|$translate)}}
                                     </div>
                                     <div class="float-end m-auto">
-                                        <a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">Create link</a>
+                                        <a ng-href="#" ng-click="self.createLink()" class="btn btn-primary" ng-if="status!='creatingLink'">{{::('documentSharingT.createLink'|$translate)}}</a>
                                         <i class="fa fa-spin fa-spinner" ng-if="status=='creatingLink'"></i>
                                     </div>
                                     <div>
                                         <table class="table table-stripped w-100">
                                             <tr>
                                                 <td>#</td>
-                                                <td>Expiry/Status</td>
-                                                <td>Link/Email(s)</td>
+                                                <td>{{::('documentSharingT.expiry'|$translate)}}</td>
+                                                <td>{{::('documentSharingT.linkEmail'|$translate)}}</td>
                                                 <td class="d-none d-sm-table-cell text-center">Created on</td>
                                             </tr>
                                             <tr ng-repeat="link in sharedLinks | orderBy:'meta.createdOn':'desc'">
                                                 <td ng-bind="$index+1"></td>
                                                 <td>
                                                     <span ng-bind="link.expiry|formatDateWithTime"></span>
-                                                    <span ng-if="hasStatus('active', link)"class="label label-success">Active</span>
-                                                    <span ng-if="hasStatus('expired', link)"class="label label-danger">Expired</span>
-                                                    <span ng-if="hasStatus('revoked', link)"class="label label-danger">Revoked</span>
+                                                    <span ng-if="hasStatus('active', link)"class="label label-success">{{::('documentSharingT.active'|$translate)}}</span>
+                                                    <span ng-if="hasStatus('expired', link)"class="label label-danger">{{::('documentSharingT.expired'|$translate)}}</span>
+                                                    <span ng-if="hasStatus('revoked', link)"class="label label-danger">{{::('documentSharingT.revoked'|$translate)}}</span>
                                                 </td>
                                                 <td >
                                                     <div class="btn-group width-100">
@@ -73,10 +73,10 @@
                                                                     <span class="d-none d-sm-inline-block">Open</span></a>
                                                             </span>
                                                             <span  ng-if="!link.sharedWith.emails" class="input-group-text cursor-pointer" id="basic-addon2" ng-click="copyUrl($index+1)">
-                                                                <i class="fa fa-copy"> </i> <span class="d-none d-sm-inline-block">Copy</span></span>
+                                                                <i class="fa fa-copy"> </i> <span class="d-none d-sm-inline-block">{{::('documentSharingT.copy'|$translate)}}</span></span>
                                                             <span ng-if="hasStatus('active', link)" ng-disabled="link.status=='revokingLink'" class="input-group-text cursor-pointer" id="basic-addon3" ng-click="revokeLink(link)">
                                                                 <i class="fa fa-spin fa-spinner" ng-if="link.status=='revokingLink'"></i>
-                                                                <i class="fa fa-thumbs-down"> </i> <span class="d-none d-sm-inline-block">Revoke</span></span>
+                                                                <i class="fa fa-thumbs-down"> </i> <span class="d-none d-sm-inline-block">{{::('documentSharingT.revoke'|$translate)}}</span></span>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -84,7 +84,7 @@
                                             </tr>
                                             <tr ng-if="!sharedLinks.length">
                                                 <td colspan="4">
-                                                    <strong>No shared links found this document.</strong>
+                                                    <strong>{{::('documentSharingT.noSharedLinks'|$translate)}}</strong>
                                                 </td>
                                             </tr>
                                         </table>
@@ -100,22 +100,22 @@
                                     <br/>
                                     <div class="alert alert-info">
                                         <i class="fa fa-info-circle"></i>
-                                        Recipients will receive an email with a link to view this draft document.
+                                        {{::('documentSharingT.emailInfo'|$translate)}}
                                     </div>
-                                    <hr/>Emails
+                                    <hr/>{{::('documentSharingT.emails'|$translate)}}
                                     <br/>
                                     <div class="input-group" >
                                         <input type="text" placeholder="enter email"  class="form-control" ng-model="shareEmails" />
                                         <span class="input-group-btn">
-                                            <button type="button" class="btn btn-primary float-end" ng-click="shareEmail(shareEmails)" ng-disabled="status=='creatingLink'">Send</button>
+                                            <button type="button" class="btn btn-primary float-end" ng-click="shareEmail(shareEmails)" ng-disabled="status=='creatingLink'">{{::('documentSharingT.send'|$translate)}}</button>
                                         </span>
                                     </div>
                                     <div>
-                                        <span style="font-size: smaller;color: #777575;">Use commas to separate multiple email addresses. Recipients must log in to the Clearing-House with this email address in order to view the draft record.</span>
+                                        <span style="font-size: smaller;color: #777575;">{{::('documentSharingT.instruction'|$translate)}}</span>
                                     </div>
                                     <div>
                                         <span ng-if="status=='creatingLink'">
-                                            <i class="fa fa-spin fa-spinner"></i> updating... </span>                                       
+                                            <i class="fa fa-spin fa-spinner"></i> {{::('documentSharingT.updating'|$translate)}} </span>                                       
                                     </div>
                                     <br/>
                                 </div>
@@ -125,7 +125,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="row">
-                        <button type="button" class="btn btn-primary float-end" ng-click="close()" >Close</button>
+                        <button type="button" class="btn btn-primary float-end" ng-click="close()" >{{::('documentSharingT.close'|$translate)}}</button>
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
     </script>
     <script type="text/ng-template" id="documentPdfTemplate.html" trados-translation="true">
         <div class="rounded bg-dropshadow document-selection-modal">
-            <div class="modal-header d-flow-root">Generate a PDF of this draft record:
+            <div class="modal-header d-flow-root">{{::('documentSharingT.generatePDFRecord'|$translate)}}
                 <span  ng-bind="title"></span>
             </div>
             <div class="modal-body">
@@ -141,7 +141,7 @@
                     <div class="col-12">
 
                         <div class="alert alert-warning" role="alert">
-                        <strong>Please Note!</strong> This process takes a long time to load. The recommended method to share draft records is to use the "<strong>Share</strong>" function.
+                        <strong>{{::('documentSharingT.pleaseNote'|$translate)}}</strong> {{::('documentSharingT.processTakesTime'|$translate)}}<strong>{{::('documentSharingT.share'|$translate)}}</strong>" {{::('documentSharingT.function'|$translate)}}
                         </div>
                         <!-- <div class="alert alert-success" role="alert">
                             <strong><a target="_blank" ng-href="/pdf-links/draft-documents/{{identifier}}" class="btn btn-primary" >Open PDF</a></strong> Generate all available language PDF
@@ -151,13 +151,13 @@
                                 <a target="_blank" ng-repeat="lang in ['ar', 'fr', 'en', 'es', 'ru', 'zh']" ng-href="/pdf-links/draft-documents/{{identifier}}/{{lang}}" class="btn btn-primary" 
                                 ng-bind="lang|uppercase"></a>
                             </div> 
-                            Select a language to initiate the PDF generation process.
+                            {{::('documentSharingT.selectLanguage'|$translate)}}
                         </div> 
                     </div>
                 </div>
             </div> 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary float-end" ng-click="close()" >Close</button>
+                <button type="button" class="btn btn-primary float-end" ng-click="close()" >{{::('documentSharingT.close'|$translate)}}</button>
             </div>
         </div>
     </script>
