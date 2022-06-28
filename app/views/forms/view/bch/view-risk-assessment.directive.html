@@ -12,30 +12,30 @@
 
 
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>{{::('viewRiskAssesmentT.generalInfo'|$translate)}}</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewRiskAssesmentT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
 		<div ng-show="document.title">
-			<label>Title of the risk assessment</label>
+			<label>{{::('viewRiskAssesmentT.title'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.date || document.dateOfRaNotAvailable">
-			<label>Date of the risk assessment </label>
+			<label> {{::('viewRiskAssesmentT.date'|$translate)}}</label>
 			<div compare-val>
 				<div ng-if="document.date" class="km-value" ng-bind="document.date | formatDate"></div>
-				<div ng-if="document.dateOfRaNotAvailable" class="km-value">Date not available</div>
+				<div ng-if="document.dateOfRaNotAvailable" class="km-value">{{::('viewRiskAssesmentT.dateNotAvailable'|$translate)}}</div>
 			</div>
 		</div>
 		<div ng-show="document.authorities" ng-if="document.header.schema=='nationalRiskAssessment'">
-			<label>Competent National Authority(ies) responsible for the risk assessment</label>
+			<label>{{::('viewRiskAssesmentT.competentNationalAuthorities'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >
@@ -45,7 +45,7 @@
 			</div>
 		</div>
 		<div ng-show="document.organizations" ng-if="document.header.schema=='independentRiskAssessment'">
-			<label>Institution responsible for the risk assessment</label>
+			<label>{{::('viewRiskAssesmentT.institution'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.organizations" >
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div ng-show="document.contacts">
-			<label>Contact details of the main responsible risk assessor</label>
+			<label>{{::('viewRiskAssesmentT.contactDetails'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.contacts" >						
@@ -66,9 +66,9 @@
 		</div>
 
 		<div ng-if="document.modifiedOrganisms || document.scopes || document.documents || document.documentsSummary">
-			<legend>Risk assessment details</legend>
+			<legend>{{::('viewRiskAssesmentT.riskAssessmentDetails'|$translate)}}</legend>
 			<div ng-if="document.modifiedOrganisms">
-				<label>Living modified organism(s)</label>
+				<label>(s){{::('viewRiskAssesmentT.modifiedOrganisms'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.modifiedOrganisms" >						
@@ -78,13 +78,13 @@
 				</div>
 			</div>
 			<div ng-if="document.scopes">
-				<label>Scope of the risk assessment</label>
+				<label>{{::('viewRiskAssesmentT.scope'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<view-terms-hierarchy ng-model="document.scopes" locale="locale" term-domain="riskAssessmentScope" on-terms-loaded="onRiskAssessmentScopeTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 			<div ng-if="document.documents||document.documentsSummary">
-				<label>Risk assessment report / summary</label>
+				<label>{{::('viewRiskAssesmentT.riskSummary'|$translate)}}</label>
 				<div ng-if="document.documents">
 					<div class="km-value" compare-val>
 						<km-link-list  ng-model="document.documents"></km-link-list>
@@ -100,51 +100,51 @@
 		<div ng-if="document.adverseEffects || document.adverseEffectsLikelihood || document.adverseEffectsConsequence ||
 			document.adverseEffectsOverallRisk || document.adverseEffectsRecommendation || document.riskManagementStrategies ||
 			document.receivingEnvironment || document.detectionMethod">
-			<legend>Methodology and points to consider</legend>
+			<legend>{{::('viewRiskAssesmentT.methodologyConsider'|$translate)}}</legend>
 			<div ng-show="document.adverseEffects">
-				<label>Potential adverse effects identified in the risk assessment</label>
+				<label>{{::('viewRiskAssesmentT.adverseEffects'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml  html value="document.adverseEffects" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.adverseEffectsLikelihood">
-				<label>Likelihood that the potential adverse effects will be realized</label>
+				<label>{{::('viewRiskAssesmentT.adverseEffectsLikelihood'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml  html value="document.adverseEffectsLikelihood" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.adverseEffectsConsequence">
-				<label>Possible consequences</label>
+				<label>{{::('viewRiskAssesmentT.possibleConsequences'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml  html value="document.adverseEffectsConsequence" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.adverseEffectsOverallRisk">
-				<label>Estimation of the overall risk</label>
+				<label>{{::('viewRiskAssesmentT.estimationRisk'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml  html value="document.adverseEffectsOverallRisk" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.adverseEffectsRecommendation">
-				<label>Recommendation(s) on whether the risks are acceptable/manageable and any management strategies</label>
+				<label>{{::('viewRiskAssesmentT.adverseEffectsRecommendation'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml  html value="document.adverseEffectsRecommendation" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.riskManagementStrategies">
-				<label>Need(s) for further information on specific issues of concern</label>
+				<label>{{::('viewRiskAssesmentT.riskManagementStrategies'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml  html value="document.riskManagementStrategies" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.receivingEnvironment">
-				<label>Receiving environment(s) considered</label>
+				<label>{{::('viewRiskAssesmentT.receivingEnvironment'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml html  value="document.receivingEnvironment" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.detectionMethod">
-				<label>LMO detection and identification methods proposed</label>
+				<label>{{::('viewRiskAssesmentT.detectionMethod'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml html value="document.detectionMethod" locales="locale"></km-value-ml>
 				</div>
@@ -152,32 +152,32 @@
 		</div>
 
 		 <div ng-if="document.isForCommercialUse!=undefined">
-			<legend>Information sharing with other databases</legend>
+			<legend>{{::('viewRiskAssesmentT.informationSharing'|$translate)}}</legend>
 			<div ng-if="document.isForCommercialUse!=undefined">
-				<label>Is this risk assessment related to an LMO for commercial use?</label>
+				<label>{{::('viewRiskAssesmentT.isForCommercialUse'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 				</div>
 				<div ng-if="document.forwardToOECD!=undefined">
-					<label>Should this risk assessment be forwarded to the OECD Secretariat for possible inclusion in the <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
+					<label>{{::('viewRiskAssesmentT.isForCommercialUseInfo'|$translate)}} <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> {{::('viewRiskAssesmentT.bioTrackProductDatabase'|$translate)}}</a>?</label>
 					<div compare-val>
 						<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.isForFoodSafety!=undefined">
-					<label>Is this risk assessment related to food safety?</label>
+					<label>{{::('viewRiskAssesmentT.isForFoodSafety'|$translate)}}</label>
 					<div compare-val>
 						<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.codexConducted!=undefined">
-					<label>Was it conducted in accordance with the Codex Alimentarius <i>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants</i>?</label>
+					<label>{{::('viewRiskAssesmentT.isForFoodSafetyInfo'|$translate)}} <i>{{::('viewRiskAssesmentT.isForFoodSafetyInfoItalic'|$translate)}}</i>?</label>
 					<div  compare-val>
 						<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
 					</div>
 				</div>
 				<div ng-if="document.forwardToFAO!=undefined">
-					<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
+					<label>{{::('viewRiskAssesmentT.codexConducted'|$translate)}} <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>{{::('viewRiskAssesmentT.codexConductedLink'|$translate)}}</u></a>?</label>
 					<div  compare-val>
 						<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 					</div>
@@ -186,7 +186,7 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewRiskAssesmentT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>
@@ -195,7 +195,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewRiskAssesmentT.otherRelevantInformation'|$translate)}}</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 				</div>
