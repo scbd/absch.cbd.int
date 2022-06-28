@@ -1,81 +1,99 @@
-﻿<div class="row top-records m-0 mb-1 border-top-0" ng-show="loading || self.records.Items.length > 0">
+﻿<div class="row p-3 mb-2" ng-show="loading || self.records.Items.length > 0">
     <h4 ng-if="self.title" class="p-1 border-bottom mt-0" ng-bind="self.title"></h4>
-    <div ng-if="loading" class="my-0 mx-auto">
-        <i class="fa fa-spin fa-spinner" ></i>
-    </div>
-   
-    <table class="table table-hover w-100" ng-if="self.records.Items.length > 0">
+
+    <span class="fw-bold text-secondary px-2 pb-2 text-nowrap "> Latest 10 records
+        <i class="fa fa-spin fa-spinner" ng-if="loading"></i>
+    </span>
+
+    <table class="table table-sm table-secondary table-hover align-middle w-100" ng-if="self.records.Items.length > 0">
         <thead>
             <tr>
-                <th class="p-0"> 
-                    <span class="fw-bold px-2 text-nowrap fs-small-8">Latest records</span> 
-                </th>
-                <th class="p-0 fw-normal fs-small-8"> Title</th>
-                <th class="p-0 fw-normal fs-small-8"> Updated</th>
-                <th class="p-0 pe-3 fw-normal fs-small-8"> <span>Status</span>
-                    <span ng-if="self.records.Count > 0" class="float-end">
-                        <a rel="noopener" class=" fw-normal ps-md-4 fs-small-8 text-decoration-none" translation-url ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">View all</a>
-                        <a rel="noopener" class=" fw-normal ps-md-4 fs-small-8 text-decoration-none" translation-url ng-href="{{self.viewAllUrl}}" ng-if="self.viewAllUrl">View all</a>
-                    </span>
-                </th>
+                <th></th>
+                <th>Status</th>
+                <th> Title</th>
+                <th> Updated</th>
             </tr>
-        </thead> 
-        <tbody ng-repeat="record in self.records.Items | orderBy:'workingDocumentLock.lockedOn'" class="border-top-0">
-            <tr id="record{{record.identifier}}">
-                <td class="p-0 ps-1 text-end" style="width:9%;">
-                    <span class="pe-2 ps-1">
-                        <span ng-if="!showSchemaName" ng-bind="record.type|schemaName"></span>
-                        <div class="btn-group btn-group-sm document_buttons p-1" role="group" aria-label="...">
-                            <a rel="noopener" translation-url title="View" ng-show="record.documentID" type="button" class="text-decoration-none btn btn-outline-secondary py-0" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="bi bi-search fs-small-8"></i></a>  
-                            <a rel="noopener" translation-url title="Lock" ng-show="record.workingDocumentLock" type="button" class="text-decoration-none btn btn-outline-secondary py-0" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i class="bi bi-file-lock-fill fs-small-8"></i></a>                          
-                            <a rel="noopener" translation-url title="Edit" ng-show="!record.workingDocumentLock" type="button" class="text-decoration-none btn btn-outline-secondary py-0" href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit"><i class="bi bi-pencil-square fs-small-8"></i></a>                        
-                       
-                        </div>
-                      
-                        </span>
-                    </td>    
-
-                <td style="width:50%;" class="p-0">                   
+        </thead>
+        <tbody>
+            <tr ng-repeat="record in self.records.Items | orderBy:'workingDocumentLock.lockedOn'" id="record{{record.identifier}}">
+                <td class="ps-2">
+                    <span ng-if="!showSchemaName" ng-bind="record.type|schemaName"></span>
+                    <div class="btn-group btn-group-sm document_buttons p-1" role="group" aria-label="...">
+                        <a rel="noopener" translation-url title="View" ng-show="record.documentID" type="button"
+                            class="text-decoration-none btn bg-white btn-outline-secondary py-0"
+                            href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i
+                                class="bi bi-search fs-small-8"></i></a>
+                        <a rel="noopener" translation-url title="Lock" ng-show="record.workingDocumentLock"
+                            type="button" class="text-decoration-none btn bg-white btn-outline-secondary py-0"
+                            href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view"><i
+                                class="bi bi-lock-fill fs-small-8"></i></a>
+                        <a rel="noopener" translation-url title="Edit" ng-show="!record.workingDocumentLock"
+                            type="button" class="text-decoration-none btn bg-white btn-outline-secondary py-0"
+                            href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/edit"><i
+                                class="bi bi-pencil-square fs-small-8"></i></a>
+                    </div>
+                </td>
+                <td >
+                    <span class="badge bg-success" ng-if="record.documentID">Published</span>
+                    <span class="badge bg-secondary"
+                        ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Draft</span>
+                    <span class="badge bg-warnin bg-request" ng-if="record.workingDocumentLock">Request</span>
+                </td>
+                <td class="w-50" >
                     <span>
-                        <a class="text-decoration-none" rel="noopener" translation-url ng-href="/register/{{record.type|urlSchemaShortName|encodeURIComponent}}/{{record.identifier|encodeURIComponent}}/view">
                             <span ng-bind="(record.workingDocumentTitle||record.title)|lstring"></span>
                         </a>
                     </span>
                 </td>
-                <td class="p-0" style="width:21%;" >                    
+                <td >
                     <div ng-if="record.workingDocumentUpdatedBy">
-                        <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
-                            <strong><span ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></span></strong>
+                        <a class="text-decoration-none" rel="noopener" translation-url
+                            href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
+                            <span ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></span>
                         </a>
-                        <span class="text-nowrap fs-small-6" ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span>
+                        <i class="text-secondary ps-2 pe-2">on</i>
+                        <span class="text-nowrap text-uppercase"
+                            ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span>
                     </div>
                     <div ng-if="record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                        <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
-                            <strong><span ng-bid="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></span></strong>
+                        <a class="text-decoration-none" rel="noopener" translation-url
+                            href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
+                            <span ng-bid="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></span>
                         </a>
-                        <span class="text-nowrap fs-small-6" ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span>
+                        <i class="text-secondary ps-2 pe-2">on</i>
+                        <span class="text-nowrap   text-uppercase"
+                            ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span>
                     </div>
                     <div ng-if="!record.workingDocumentCreatedBy && !record.workingDocumentUpdatedBy">
-                            <div ng-show="record.updatedBy">
-                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
-                                    <strong><span ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></span></strong>
-                                </a>
-                                <span class="text-nowrap fs-small-6" ng-bind="record.updatedOn | formatDateWithTime"></span>
-                            </div>
-                            <div ng-show="record.createdBy && !record.updatedBy">
-                                <a class="text-decoration-none" rel="noopener" translation-url href="mailto:{{record.createdBy.email|encodeURIComponent}}">
-                                    <strong><span ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></span></strong>
-                                </a>
-                                <span class="text-nowrap fs-small-6" ng-bind="record.createdOn | formatDateWithTime"></span>
-                            </div>
+                        <div ng-show="record.updatedBy">
+                            <a class="text-decoration-none" rel="noopener" translation-url
+                                href="mailto:{{record.updatedBy.email|encodeURIComponent}}">
+                                <span ng-bind="record.updatedBy.firstName+' '+record.updatedBy.lastName"></span>
+                            </a>
+                            <i class="text-secondary ps-2 pe-2">on</i>
+                            <span class="text-nowrap   text-uppercase" ng-bind="record.updatedOn | formatDateWithTime"></span>
                         </div>
+                        <div ng-show="record.createdBy && !record.updatedBy">
+                            <a class="text-decoration-none" rel="noopener" translation-url
+                                href="mailto:{{record.createdBy.email|encodeURIComponent}}">
+                                <span ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></span>
+                            </a>
+                            <i class="text-secondary ps-2 pe-2">on</i>
+                            <span class="text-nowrap   text-uppercase" ng-bind="record.createdOn | formatDateWithTime"></span>
+                        </div>
+                    </div>
                 </td>
-                <td class="p-0" style="width:20%;">
-                    <span class="badge bg-success"ng-if="record.documentID">Published</span>
-                    <span class="badge bg-secondary" ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Draft</span>
-                    <span class="badge bg-warnin bg-request" ng-if="record.workingDocumentLock">Request</span>                    
-                </td> 
+
             </tr>
         </tbody>
     </table>
+    <div class="text-end">
+        <span ng-if="self.records.Count > 0" class="float-end">
+            <a rel="noopener" class="link-secondary bold text-uppercase" translation-url
+                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">See more <i class="fa fa-arrow-right"></i></a>
+            <a rel="noopener" class="link-secondary bold text-uppercase " translation-url ng-href="{{self.viewAllUrl}}"
+                ng-if="self.viewAllUrl">See more <i class="fa fa-arrow-right"></i></a>
+            
+        </span>
+    </div>
 </div>
