@@ -3,8 +3,8 @@ import 'views/forms/view/record-loader.directive';
 import 'components/scbd-angularjs-services/main';
     
 export {default as template } from './shared-document.html';
-export default ['$scope', '$http', '$q', '$route', 'locale', '$location',
-function($scope, $http, $q, $route, locale, $location){
+export default ['$scope', '$http', '$q', '$route', 'locale', '$location', '$rootScope',
+function($scope, $http, $q, $route, locale, $location, $rootScope){
 
     $scope.options = { locale : locale, currentDate : new Date()};
     var qs = $route.current.params;
@@ -34,9 +34,11 @@ function($scope, $http, $q, $route, locale, $location){
                 $scope.error  = error.data;
 
                 if(error.data.startsWith('The document was not shared with you')){
-                    $location.search({ returnUrl: $location.url() });
-                    console.log($location.url())
-                    $location.path('/signin')
+                    if(!$rootScope.user?.isAuthenticated){
+                        $location.search({ returnUrl: $location.url() });
+                        console.log($location.url())
+                        $location.path('/signin');
+                    }
                 }
             })
             .finally(function(){

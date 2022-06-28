@@ -15,7 +15,6 @@
 
 					.title-bar {
 						min-height: 50px;
-						background: #fff;
 						border-bottom: 1px solid #ddd;
 						text-align: center;
 						padding-top: 10px;
@@ -40,9 +39,10 @@
 				<div class="row">
 					<div class="row" style="border: 1px solid #ddd; border-bottom:0px;" ng-if="!printMode">
 						<div class="title-bar" >
-							<span ng-if="status=='loading'">Shared Document</span>
-							<span ng-if="status!='loading'">Draft Document</span>
-							
+							<strong>
+								<span ng-if="status=='loading' || status=='error'">Shared Document</span>
+								<span ng-if="status!='loading' && status!='error'">Draft Document</span>
+							</strong>							
 						</div>
 					</div>
 					<div class="row loading-info" ng-if="!printMode && status=='loading'">
