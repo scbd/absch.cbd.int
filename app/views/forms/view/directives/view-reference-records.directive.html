@@ -1,15 +1,15 @@
 ﻿<div id="reference-records-table" ng-show="referenceRecords">
     <legend>
-        Records referencing this document
+        {{::('viewReferenceRecordsT.recordsReferencing'|$translate)}}
         <a rel="noopener" target="_blank" ng-href="/search?raw-query={{('referenceRecord_ss:' + model)| encodeURIComponent }}"
-         class="float-end btn btn-primary btn-sm p-0 px-1">Show in search</a>
+         class="float-end btn btn-primary btn-sm p-0 px-1">{{::('viewReferenceRecordsT.showInSearch'|$translate)}}</a>
     </legend>
     <table class="table table-bordered table-condensed w-100">
         <tr>
             <th width="10%"></th>            
-            <th width="43%">Record type</th>
-            <th width="40%">Field</th>
-            <th width="7%">Record(s)</th>
+            <th width="43%">{{::('viewReferenceRecordsT.recordType'|$translate)}}</th>
+            <th width="40%">{{::('viewReferenceRecordsT.field'|$translate)}}</th>
+            <th width="7%">{{::('viewReferenceRecordsT.records'|$translate)}}</th>
         </tr>
 
         <tr ng-repeat="(key, record) in referenceRecords">
@@ -19,8 +19,8 @@
                         <td width="10%">
                             <button type="button" class="btn btn-primary btn-sm p-0 px-1" ng-click="field.showRecords=!field.showRecords">
                                 <i class="bi bi-folder2-open"></i>
-                                <span ng-if="field.showRecords" class="hidden-xs">Hide</span>
-                                <span ng-if="!field.showRecords" class="hidden-xs">Show</span>
+                                <span ng-if="field.showRecords" class="hidden-xs">{{::('viewReferenceRecordsT.hide'|$translate)}}</span>
+                                <span ng-if="!field.showRecords" class="hidden-xs">{{::('viewReferenceRecordsT.show'|$translate)}}</span>
                             </button>
                         </td>
                         <td width="43%"> {{record.schema}}</td>
@@ -32,16 +32,16 @@
                             <table class="table table-bordered table-condensed w-100 mb-0">
                                 <tr class="border-bottom">
                                    <td  ng-show="record.schemaType=='national'" ng-class="{'bold':sortField=='government'}">
-                                       Country 
+                                    {{::('viewReferenceRecordsT.country'|$translate)}}
                                        <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='government'; reverse=!reverse"></i>
                                     </td> 
-                                   <td ng-class="{'bold':sortField=='title'}">Title
+                                   <td ng-class="{'bold':sortField=='title'}">{{::('viewReferenceRecordsT.title'|$translate)}}
                                         <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='title'; reverse=!reverse"></i>
                                     </td> 
                                    <td ng-class="{'bold':sortField=='uniqueId'}">UId
                                         <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='uniqueId'; reverse=!reverse"></i>
                                     </td> 
-                                   <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs">Updated on
+                                   <td  ng-class="{'bold':sortField=='updatedOn'}" class="hidden-xs">{{::('viewReferenceRecordsT.updatedOn'|$translate)}}
                                         <i class="fa cursor-pointer" ng-class="{'fa-sort-alpha-asc':!reverse, 'fa-sort-alpha-desc':reverse}"  ng-click="sortField='updatedOn'; reverse=!reverse"></i>
                                     </td> 
                                 </tr>

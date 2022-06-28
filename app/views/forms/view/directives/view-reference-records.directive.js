@@ -5,6 +5,7 @@ import 'components/scbd-angularjs-services/main';
 import 'services/main';
 import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
+import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';
 
 app.directive("viewReferencedRecords", [function () {
 	return {
@@ -18,8 +19,8 @@ app.directive("viewReferencedRecords", [function () {
 			target: "@linkTarget",
 			onDataFetch: "&?"
 		},
-		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', function ($scope, solr, $q, searchService, realm, commonjs) {
-
+		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', 'translationService', function ($scope, solr, $q, searchService, realm, commonjs, translationService) {
+			translationService.set('viewReferenceRecordsT', viewReferenceRecordsT);
 			$scope.sortField='updatedDate_dt';
 			$scope.sortSequence='desc'
 			// //==================================
