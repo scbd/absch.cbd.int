@@ -1,4 +1,4 @@
-import fpCategoryTitle from '~/app-text/app-data/bch/focal-point-category.json'
+import fpCategoryTitle from '~/app-text/report-analyzer/bch-focal-point-category.json';
 
 export const categories = [
     { 

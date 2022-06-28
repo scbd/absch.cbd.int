@@ -1,4 +1,4 @@
-import nr3Data from '~/app-text/app-data/bch/report-analyzer/cpbNationalReport3.json'
+import nr3Data from '~/app-text/report-analyzer/bch-cpbNationalReport3.json';
 
 export const cpbNationalReport3 = [
   {
