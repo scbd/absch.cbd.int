@@ -1,21 +1,21 @@
 ﻿<div class="document-validation">
 	<div ng-show="report.isAnalyzing" class="alert alert-info">
-		<i class="fa fa-cog fa-spin"></i> Analyzing your document...
+		<i class="fa fa-cog fa-spin"></i> {{::('kmDocumentValidationT.analyzingDocument'|$translate)}}
 	</div>
 	<div ng-show="report.isSaving" class="alert alert-info">
-		<i class="fa fa-cog fa-spin"></i> Saving your document...
+		<i class="fa fa-cog fa-spin"></i> {{::('kmDocumentValidationT.savingDocument'|$translate)}}
 	</div>
 	<div ng-show="report && !report.isAnalyzing">
 
 		<div ng-show="isValid()" class="alert alert-success">
-			Your document is valid.
+			{{::('kmDocumentValidationT.valid'|$translate)}}
 		</div>
 
 		<div ng-show="hasErrors() && show" class="alert alert-warning">
 			<button type="button" class="position-absolute top-0 end-0 m-2 bg-transparent border-0 fs-5 text-secondary" ng-click="show=!show" aria-label="Close"><span
 					aria-hidden="true">&times;</span>
 			</button>
-			<strong>Your document contains <span ng-bind="report.errors.length"></span> errors.</strong>
+			<strong>{{::('kmDocumentValidationT.contains'|$translate)}} <span ng-bind="report.errors.length"></span> {{::('kmDocumentValidationT.errors'|$translate)}}</strong>
 			<ul>
 				<li ng-repeat="error in report.errors" title="{{::error.parameters}}">
 					<span ng-bind="::error.typeLabel"></span> /
