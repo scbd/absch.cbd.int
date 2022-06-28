@@ -201,7 +201,7 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group type-cap-initiative" name="activityScope" caption="{{::('editCBIT.typeOfCapacityDvelopment'|$translate)}}">
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="{{::('editCBIT.typeOfCapacityDevelopment'|$translate)}}">
 											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
@@ -232,7 +232,7 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required  caption="{{::('editCBIT.agencyOrganisation'|$translate)}}">
+										<div class="km-control-group" required  caption="{{::('editCBIT.agencyOrganization'|$translate)}}">
 											<div class="help-info">{{::('editCBIT.inExecutingRoles'|$translate)}}</div>
 											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Implementing agency(ies) or organization(s)</label></div>
 
@@ -257,7 +257,7 @@
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />{{::('editCBIT.isCollaboratededByPartners'|$translate)}}</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />{{::('editCBIT.isCollaboratedByPartners'|$translate)}}</label></div>
 											<div class="row">
 												<div class="col-md-12">
 													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="{{::('editCBIT.collaboratingPartners'|$translate)}}">

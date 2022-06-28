@@ -47,7 +47,7 @@
 
 <script>
     import ArticlesApi  from '../kb/article-api';
-	  import i18n from '../../app-text/components/homepage-records.json';
+	  import i18n from '../../app-text/components/common/homepage-records.json';
     import "../kb/filters";
 
 	export default {

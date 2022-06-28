@@ -102,7 +102,7 @@
 
 
 		<div ng-show="document.activityScope">
-			<label>{{::('viewCdiT.typeOfCapacityDvelopment'|$translate)}}</label>
+			<label>{{::('viewCdiT.typeOfCapacityDevelopment'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.activityScope|term:locale"></span>
 			</div>
@@ -149,7 +149,7 @@
 			</div>
 
 			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
-				<label>{{::('viewCdiT.isCollaboratededByPartners'|$translate)}}</label>
+				<label>{{::('viewCdiT.isCollaboratedByPartners'|$translate)}}</label>
 				<div class="km-value" compare-val="Collaborating partner(s)">
 					<div ng-repeat="contact in document.collaboratingPartners">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
