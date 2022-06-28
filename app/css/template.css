@@ -230,6 +230,9 @@ ul.km-value {
 .search-nav-menu-list {  list-style-type:disc;}
 .search-nav-menu-list .dropdown-item{   margin-left:20px;}
 
+.navbar-header{
+    height: 30px;
+}
 .navbar.navbar-sm{
     position: relative;
     display: block!important;
