@@ -38,7 +38,7 @@ export const processFiles = async (ignoreForRollupFiles) =>{
     ///////////////////////////////////////////////////
     log('Copying i18n files to build dir')
     const langCopyPromise = languages.map(lang=>{
-        return copyFiles(baseDir, `${i18nDir}/${lang}/app`, [lang], buildDir, '**/*.{json}');
+        return copyFiles(baseDir, `${i18nDir}/${lang}/app`, [lang], buildDir, '**/*.json');
     });
     await Promise.all(langCopyPromise);
     
