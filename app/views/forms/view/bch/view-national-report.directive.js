@@ -1,8 +1,9 @@
 import app from 'app';
 import template from "text!./view-national-report.directive.html";
 import 'views/forms/view/directives/view-record-reference.directive';
-
-app.directive("viewNationalReport", [function () {
+import viewNationalReportT from '~/app-text/views/forms/view/bch/view-national-report.json';
+ 
+app.directive("viewNationalReport",  ['translationService', function (translationService) {
 	return {
 		restrict   : "EA",
 		template: template ,
@@ -18,6 +19,7 @@ app.directive("viewNationalReport", [function () {
             //====================
 			//
 			//====================
+			translationService.set('viewNationalReportT', viewNationalReportT);
 			$scope.display = function(field) {
 				
 				if(!$scope.hide) return true; //show all fields
