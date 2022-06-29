@@ -16,10 +16,10 @@
 
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>{{::('editOrganismT.generalInfo'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required caption="{{::('editOrganismT.languageToPublish'|$translate)}}">
 												<div class="indent">
 													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
@@ -30,82 +30,84 @@
 							</section>
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Organism information</legend>
+									<legend>{{::('editOrganismT.organismInformation'|$translate)}}</legend>
 									<div class="row">
 										
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="scientificName" caption="Scientific name">
-												<div class="help-block">The scientific name of an organism is typically composed of the name of the genus followed by its specific denomination. For example: <i>Oryza sativa</i> is the scientific name for rice.</div>
+											<div class="km-control-group" required name="scientificName" caption="{{::('editOrganismT.scientificName'|$translate)}}">
+												<div class="help-block">
+													{{::('editOrganismT.scientificNameInfo'|$translate)}}: <l>{{::('editOrganismT.OryzaSativa'|$translate)}}</l> {{::('editOrganismT.isScientificName'|$translate)}}
+												</div>
 												<input type="text" class="form-control" name="scientificName" ng-model="document.scientificName"/>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<label>Taxonomic classification</label>
-											<div class="help-block">The taxonomic classification is a formal designation of an organism. Example: genus: <i>Oryza</i>; species: <i>sativa</i>.</div>
+											<label>{{::('editOrganismT.taxonomicClassification'|$translate)}}</label>
+											<div class="help-block">{{::('editOrganismT.taxonomicClassificationInfo'|$translate)}} <i>{{::('editOrganismT.oryza'|$translate)}}</i>; {{::('editOrganismT.species'|$translate)}}: <i>{{::('editOrganismT.sativa'|$translate)}}</i>.</div>
 											<hr/>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="realm" caption="Realm">
+											<div class="km-control-group"  name="realm" caption="{{::('editOrganismT.realm'|$translate)}}">
 												<input type="text" class="form-control" name="realm" ng-model="document.realm"/>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="subRealm" caption="Subrealm">
+											<div class="km-control-group" name="subRealm" caption="{{::('editOrganismT.subRealm'|$translate)}}">
 												<input type="text" class="form-control" name="subRealm" ng-model="document.subRealm" />
 											</div>
 										</div>										
 										<div class="col-sm-12">
-											<div class="km-control-group" name="kingdom" caption="Kingdom">
+											<div class="km-control-group" name="kingdom" caption="{{::('editOrganismT.kingdom'|$translate)}}">
 												<input type="text" class="form-control" name="kingdom" ng-model="document.kingdom" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="phylum" caption="Phylum">
+											<div class="km-control-group" name="phylum" caption="{{::('editOrganismT.phylum'|$translate)}}">
 												<input type="text" class="form-control" name="phylum" ng-model="document.phylum" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="_class" caption="Class">
+											<div class="km-control-group" name="_class" caption="{{::('editOrganismT.class'|$translate)}}">
 												<input type="text" class="form-control" name="_class" ng-model="document._class" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="order" caption="Order">
+											<div class="km-control-group" name="order" caption="{{::('editOrganismT.order'|$translate)}}">
 												<input type="text" class="form-control" name="order" ng-model="document.order" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="subOrder" caption="Suborder">
+											<div class="km-control-group" name="subOrder" caption="{{::('editOrganismT.subOrder'|$translate)}}">
 												<input type="text" class="form-control" name="subOrder" ng-model="document.subOrder" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="family" caption="Family">
+											<div class="km-control-group" name="family" caption="{{::('editOrganismT.family'|$translate)}}">
 												<input type="text" class="form-control" name="family" ng-model="document.family" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="subFamily" caption="Subfamily">
+											<div class="km-control-group" name="subFamily" caption="{{::('editOrganismT.subFamily'|$translate)}}">
 												<input type="text" class="form-control" name="subFamily" ng-model="document.subFamily" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="genus" caption="Genus">
+											<div class="km-control-group" name="genus" caption="{{::('editOrganismT.genus'|$translate)}}">
 												<input type="text" class="form-control" name="genus" ng-model="document.genus" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="species" caption="Species">
+											<div class="km-control-group" name="species" caption="{{::('editOrganismT.speciesType'|$translate)}}">
 												<input type="text" class="form-control" name="species" ng-model="document.species" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="subSpecies" caption="Sub-species">
+											<div class="km-control-group" name="subSpecies" caption="{{::('editOrganismT.subSpecies'|$translate)}}">
 												<input type="text" class="form-control" name="subSpecies" ng-model="document.subSpecies" />
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="scientificNameSynonyms" caption="Alternate scientific name(s) (synonym(s))">
+											<div class="km-control-group" name="scientificNameSynonyms" caption="{{::('editOrganismT.scientificNameSynonyms'|$translate)}}">
 												<div ng-repeat="synonym in scientificNameSynonyms" class="input-group pb-1">
 													<input type="text" class="form-control" name="scientificNameSynonyms{{$index}}" ng-model="synonym.value" />													
 													<span ng-class="{'disable':scientificNameSynonyms.length==1}" class="input-group-text cursor-pointer" 
@@ -113,13 +115,13 @@
 														<i class="fa fa-trash-o icon"></i>
 													</span>
 												</div>
-												<button type="button" class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">Add item</button>
+												<button type="button" class="btn btn-primary" ng-click="addItem(scientificNameSynonyms)">{{::('editOrganismT.addItem'|$translate)}}</button>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group common-names" name="commonNames" caption="Common name(s)">
+											<div class="km-control-group common-names" name="commonNames" caption="{{::('editOrganismT.commonNames'|$translate)}}">
 												
-												<div class="help-block">A common name is used to refer to an organism in everyday language and may include synonyms. Example: maize / corn.</div>
+												<div class="help-block">{{::('editOrganismT.commonNamesInfo'|$translate)}}</div>
 												<div ng-repeat="commonName in commonNames" class="input-group pb-1">
 													<div km-textbox-ml name="commonNames{{$index}}" style="width: 97%;" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div>
 													<span ng-class="{'disable':commonNames.length==1}" class="input-group-text cursor-pointer" 
@@ -127,52 +129,52 @@
 														<i class="fa fa-trash-o icon"></i>
 													</span>
 												</div>
-												<button type="button" class="btn btn-primary" ng-click="addItem(commonNames)">Add item</button>
+												<button type="button" class="btn btn-primary" ng-click="addItem(commonNames)">{{::('editOrganismT.addItem'|$translate)}}</button>
 											</div>
 										</div>
 									</div>
 
 									<section>
 										<div class="no-shadow bg-white">
-											<label>Additional classification</label>
+											<label>{{::('editOrganismT.additionalClassification'|$translate)}}</label>
 											<hr/>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" name="plantCultivar" caption="Cultivar / variety (plants)">
+													<div class="km-control-group" name="plantCultivar" caption="{{::('editOrganismT.plantCultivar'|$translate)}}">
 														<input type="text" class="form-control" name="plantCultivar"  ng-model="document.plantCultivar"/>
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="microorganismStrain" caption="Strain / isolate / serotype (microorganisms)">
+													<div class="km-control-group" name="microorganismStrain" caption="{{::('editOrganismT.microOrganismStrain'|$translate)}}">
 														<input type="text" class="form-control" name="microorganismStrain" ng-model="document.microorganismStrain" />
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="bacteriaPathovar" caption="Pathovar (bacteria)">
+													<div class="km-control-group" name="bacteriaPathovar" caption="{{::('editOrganismT.bacteriaPathovar'|$translate)}}">
 														<input type="text" class="form-control" name="bacteriaPathovar" ng-model="document.bacteriaPathovar" />
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="virusGroup" caption="Group (virus)">
+													<div class="km-control-group" name="virusGroup" caption="{{::('editOrganismT.virusGroup'|$translate)}}">
 														<input type="text" class="form-control" name="virusGroup" ng-model="document.virusGroup" />
 													</div>
 												</div>
 												<div class="col-sm-12">
-													<div class="km-control-group" name="taxonomicClassification" caption="Additional taxonomic classification information">
-														<div class="help-block">Please provide a link to a record in a taxonomy database, e.g. GBIF, Catalogue of Life.</div>
+													<div class="km-control-group" name="taxonomicClassification" caption="{{::('editOrganismT.taxonomicClassifications'|$translate)}}">
+														<div class="help-block">{{::('editOrganismT.taxonomicClassificationsInfo'|$translate)}}</div>
 														<div km-link name="taxonomicClassification" ng-model="document.taxonomicClassification" allow-link="true" allow-file="false"
 															identifier="document.header.identifier">
 														</div>
 													</div>
 												</div>
 												<div class="col-xs-12">
-													<div class="km-control-group" name="organismType"  caption="Type of organism">
+													<div class="km-control-group" name="organismType"  caption="{{::('editOrganismT.organismType'|$translate)}}">
 														<div km-term-radio  ng-model="document.organismType" locales="document.header.languages"
 															terms="options.organismType()" binding-type="term" show-other="true" show-description="false"></div>
 													</div>	
 												</div>
 												<div class="col-xs-12">
-													<div class="km-control-group" name="domestication"  caption="Domestication">
+													<div class="km-control-group" name="domestication"  caption="{{::('editOrganismT.domestication'|$translate)}}">
 														<div km-term-radio  ng-model="document.domestication" locales="document.header.languages"
 															terms="options.domestication" binding-type="term"></div>
 													</div>	
@@ -185,50 +187,48 @@
 							
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Characteristics related to biosafety</legend>
+									<legend>{{::('editOrganismT.characteristicsBiosafety'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="originCentre" caption="Centre(s) of origin">
-												<div class="help-block">max 200 characters</div>
+											<div class="km-control-group" name="originCentre" caption="{{::('editOrganismT.originCentre'|$translate)}}">
+												<div class="help-block">{{::('editOrganismT.originCentreInfo'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.originCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="diversityCentre" caption="Centre(s) of genetic diversity">
-												<div class="help-block">max 200 characters</div>
+											<div class="km-control-group" name="diversityCentre" caption="{{::('editOrganismT.diversityCentre'|$translate)}}">
+												<div class="help-block">{{::('editOrganismT.originCentreInfo'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.diversityCentre" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="habitat" caption="Habitat range">
-												<div class="help-block">Describe the type of environments where the organism may persist or proliferate (max 200 characters).</div>
+											<div class="km-control-group" name="habitat" caption="{{::('editOrganismT.habitat'|$translate)}}">
+												<div class="help-block">{{::('editOrganismT.habitatInfo'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.habitat" rows="4" max-length="200" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 
 										<div class="col-xs-12">
-											<div class="km-control-group" name="geographicalDistribution" caption="Geographical distribution">
-												<div class="help-block">Example: eastern cottonwood (<i>Populus deltoides</i>) occurs in North America from Alberta in the
-													west to Quebec in the east and Florida, Texas, Arizona and northern Mexico in the south (max 200 characters).</div>
+											<div class="km-control-group" name="geographicalDistribution" caption="{{::('editOrganismT.geographicalDistribution'|$translate)}}">
+												<div class="help-block">{{::('editOrganismT.geographicalDistributionInfo'|$translate)}} (<i>{{::('editOrganismT.populusDeltoides'|$translate)}}</i>) {{::('editOrganismT.occursInNorthAmerica'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.geographicalDistribution" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="compatibleSpecies" caption="Cross-compatible species">
-												<div class="hel-block">Provide a list of species using the taxonomic classification (genus and species names) that
-													are known to cross-fertilize with the organism in the record.</div>
+											<div class="km-control-group" name="compatibleSpecies" caption="{{::('editOrganismT.compatibleSpecies'|$translate)}}">
+												<div class="hel-block">{{::('editOrganismT.compatibleSpeciesInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.compatibleSpecies" question="compatibleSpecies"
 													 on-build-query="onOrganismQuery(searchText)" allow-new-schema="organism"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="pathogenicity" caption="Known pathogenicity and/or allergenicity">
-												<div class="help-block">max 200 characters</div>
+											<div class="km-control-group" name="pathogenicity" caption="{{::('editOrganismT.pathogenicity'|$translate)}}">
+												<div class="help-block">{{::('editOrganismT.originCentreInfo'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.pathogenicity" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group"  name="commonUses" caption="Common use(s)">
+											<div class="km-control-group"  name="commonUses" caption="{{::('editOrganismT.commonUses'|$translate)}}">
 												<div km-term-check name="commonUses"  ng-model="document.commonUses" terms="options.commonUses" binding-type="term[]"
 												locales="document.header.languages"></div>
 											</div>
@@ -238,13 +238,11 @@
 							</section>	
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Additional information</legend>
+									<legend>{{::('editOrganismT.additionalInformation'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="address" caption="Any other relevant information">
-												<div class="help-block">Please use this field to provide any other relevant information that may not have
-													been addressed elsewhere in
-													the record.</div>
+											<div class="km-control-group" name="address" caption="{{::('editOrganismT.relevantInformation'|$translate)}}">
+												<div class="help-block">"{{::('editOrganismT.relevantInformationInfo'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -252,10 +250,9 @@
 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+											<div class="km-control-group" name="relevantDocuments" caption="{{::('editOrganismT.relevantDocuments'|$translate)}}">
 												<div class="help-block">
-													Please use this field to provide any other relevant website addresses and/or one or more
-													relevant documents that will be stored in the database for users to download.
+													{{::('editOrganismT.relevantDocumentsInfo'|$translate)}}
 												</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
@@ -265,12 +262,12 @@
 								</div>
 							</section>
 							<section>
-								<legend>Notes</legend>								
+								<legend>{{::('editOrganismT.notes'|$translate)}}</legend>								
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group" name="notes">
 											<span class="help-block">
-												The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+												{{::('editOrganismT.notesInfo'|$translate)}}
 											</span>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>

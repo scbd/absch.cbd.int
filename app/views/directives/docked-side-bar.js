@@ -3,9 +3,10 @@ import _ from 'lodash';
 import 'services/main';
 import template from './docked-side-bar.html';
 import 'ck-editor-css';
+import dockedSideBarT from '~/app-text/views/directives/docked-side-bar.json';
 
-app.directive('dockedSideBar', ['realm','$rootScope', '$route', '$location', 'articlesService', '$q',
-function(realm, $rootScope, $route, $location, articlesService, $q) {
+app.directive('dockedSideBar', ['realm', '$rootScope', '$route', '$location', 'articlesService', '$q', 'translationService',
+    function (realm, $rootScope, $route, $location, articlesService, $q, translationService) {
     return {
         restrict: 'AE',
         replace: true,
@@ -16,7 +17,7 @@ function(realm, $rootScope, $route, $location, articlesService, $q) {
         },
         link: function($scope, $element){
                 let canceler = null;
-
+                translationService.set('dockedSideBarT', dockedSideBarT);
                 $scope.search = (text)=>{                    
                     loadArticles({queryTags:$scope.type == 'announcements' ? 'announcement' : 'context-help', searchText:text, skipRefetch:true});
                 }

@@ -1,8 +1,9 @@
 import app from 'app';
 import template from "text!./view-database.directive.html";
 import 'views/directives/record-options';
+import viewDatabaseT from '~/app-text/views/forms/view/view-database.json';
 
-app.directive("viewDatabase", [function () {
+app.directive("viewDatabase", ["translationService", function (translationService) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -17,7 +18,7 @@ app.directive("viewDatabase", [function () {
 		controller : ["$scope", function ($scope)
 		{
 			
-			
+			translationService.set('viewDatabaseT', viewDatabaseT);
 			
 			//====================
 			//

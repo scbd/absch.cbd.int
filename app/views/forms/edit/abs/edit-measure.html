@@ -20,12 +20,11 @@
 
                                 <legend name="formInfo" style="display:none"></legend>
                                 <section>
-                                    <legend>Is this an amendment to previous legislative, administrative or policy measure? </legend>
-                                    <div class="help-info">This section is only relevant when the measure being submitted is amending an existing measure. If the measure being registered in the ABS Clearing-House is an amendment to an existing measure or a part of it, make sure
-                                        that the measure being amended is already registered in the ABS Clearing-House in order to be able to provide a link to the existing record. This will allow the two records to be displayed together.</div>
+                                    <legend>{{::('editAbsMeasureT.policyMeasure'|$translate)}} </legend>
+                                    <div class="help-info">{{::('editAbsMeasureT.policyMeasureInfo'|$translate)}}</div>
                                     <div class="row">
                                         <div class="col-xs-12">
-                                            <div class="km-control-group" name="isAmendment" required caption="Is this an amendment to previous legislative, administrative or policy measure? ">
+                                            <div class="km-control-group" name="isAmendment" required caption="{{::('editAbsMeasureT.policyMeasure'|$translate)}} ">
                                                 <div class="help-block"></div>
                                                 <div km-yes-no required ng-model="document.isAmendment" locales="document.header.languages"></div>
                                             </div>
@@ -37,22 +36,22 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <h3 ng-show="!document.isAmendment" class="color-black">
-                                                    If no, the following information is not required.
+                                                    {{::('editAbsMeasureT.isNotAmendment'|$translate)}}
                                                 </h3>
                                                 <h3 ng-show="document.isAmendment==true" class="color-black">
-                                                    Please select the previously registered record that is being amended.
+                                                    {{::('editAbsMeasureT.isAmendment'|$translate)}}
                                                 </h3>
     
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="amendedMeasures" caption="List of amended measures">
-                                                        <div class="help-info">Please indicate if this measure amends a previously registered one by providing a cross-reference link to the amended measure.</div>
+                                                    <div class="km-control-group" name="amendedMeasures" caption="{{::('editAbsMeasureT.amendedMeasures'|$translate)}}">
+                                                        <div class="help-info">{{::('editAbsMeasureT.amendedMeasuresInfo'|$translate)}}</div>
                                                       <div document-selector on-build-query="onAmendedMeasuresQuery(searchText)" ng-model="document.amendedMeasures" question="amendedMeasures"></div>
                                                         <!--<div km-select multiple name="amendedMeasures" ng-model="document.amendedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
                                                     </div>
                                                 </div>
     
-                                                <div class="km-control-group" name="amendmentsDescription" caption="Summary of the amendment(s)">
-                                                    <div class="help-info">This will help users to understand the relationship between the two measures. The summary should be as simple and as a concise as possible.</div>
+                                                <div class="km-control-group" name="amendmentsDescription" caption="{{::('editAbsMeasureT.amendmentsDescription'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsMeasureT.amendmentsDescriptionInfo'|$translate)}}</div>
                                                     <div km-rich-textbox ng-model="document.amendmentsDescription" rows="4" locales="document.header.languages"></div>
                                                 </div>
     
@@ -63,10 +62,10 @@
     
     
                                 <section>
-                                    <legend>General information</legend>
+                                    <legend>{{::('editAbsMeasureT.generalInfo'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-xs-12" >
-                                            <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                            <div class="km-control-group" name="header.languages" required caption="{{::('editAbsMeasureT.languageToPublish'|$translate)}}">
                                                 <div class="indent">
                                                     <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                 </div>
@@ -75,31 +74,26 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="government" required caption="Country">
-                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                            <div class="km-control-group" name="government" required caption="{{::('editAbsMeasureT.country'|$translate)}}">
+                                                <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectOption'|$translate)}}"></div>
                                             </div>
                                         </div>
                                     </div>
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="title" caption="Title of the legislative administrative or policy measures on access and benefit-sharing">
+                                            <div class="km-control-group" required name="title" caption="{{::('editAbsMeasureT.title'|$translate)}}">
                                                 <div km-textbox-ml name="title" required ng-model="document.title" locales="document.header.languages"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div required class="km-control-group" name="status" caption="Legal status of the measure">
+                                            <div required class="km-control-group" name="status" caption="{{::('editAbsMeasureT.legalStatus'|$translate)}}">
                                                 <div class="help-info">
-                                                    Examples of non-legally binding ABS measures are national strategies, policy documents, guidelines, etc. For non-legally binding ABS measure, the date of adoption is to be provided. A measure is legally binding when it creates obligations and rights which
-                                                    are legally enforceable. In this case, the date of entry into force of the ABS measure is to be provided. Measures in draft form can also be included in the ABS Clearing-House with a view to sharing information
-                                                    on progress towards implementation. Once the draft measure is adopted or entered into force, the status of the measure can be updated without needing to register the existing information again. Sometimes
-                                                    measures have a limited applicability in time. If you are introducing this type of measure, you are required to include the expiry date. Including retired measures can be useful for providing legal certainty
-                                                    about genetic resources and associated traditional knowledge accessed under a previous legal framework. If a measure already registered in the ABS Clearing-House is retired or is no longer applicable, you
-                                                    only need to edit the measure and change its status to retired, indicating the date from which the measure was no longer applicable.
+                                                    {{::('editAbsMeasureT.legalStatusInfo'|$translate)}}
                                                 </div>
-                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select legal status..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectStatus'|$translate)}}"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -107,22 +101,22 @@
                                         <div class="clearfix"></div>
                                         <div class="col-xs-12">
                                             <div ng-show="isNotLegallyBinded()">
-                                                <div class="km-control-group" name="adoption" required caption="Please provide the date of adoption">
+                                                <div class="km-control-group" name="adoption" required caption="{{::('editAbsMeasureT.adoptionDate'|$translate)}}">
                                                     <div km-date placeholder="YYYY-MM-DD" name="adoption" required ng-model="document.adoption"></div>
                                                 </div>
                                             </div>
                                             <div ng-show="isLegallyBinded()">
-                                                <div class="km-control-group" name="entryIntoForce" required caption="Please provide the date of entry into force">
+                                                <div class="km-control-group" name="entryIntoForce" required caption="{{::('editAbsMeasureT.entryIntoForce'|$translate)}}">
                                                     <div km-date placeholder="YYYY-MM-DD" name="entryIntoForce" required ng-model="document.entryIntoForce"></div>
                                                 </div>
                                             </div>
                                             <div ng-show="isRetired()">
-                                                <div class="km-control-group" name="retired" required caption="Please provide the date from which the measure was no longer applicable">
+                                                <div class="km-control-group" name="retired" required caption="{{::('editAbsMeasureT.retiredDate'|$translate)}}">
                                                     <div km-date placeholder="YYYY-MM-DD" name="retired" required ng-model="document.retired">
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div ng-show="isLegallyBinded() || isNotLegallyBinded()" class="km-control-group" name="limitedApplication" caption="Indicate the date the measure is no longer in force if the measure has a limited application in time">
+                                            <div ng-show="isLegallyBinded() || isNotLegallyBinded()" class="km-control-group" name="limitedApplication" caption="{{::('editAbsMeasureT.limitedApplication'|$translate)}}">
                                                 <div km-date placeholder="YYYY-MM-DD" name="limitedApplication" ng-model="document.limitedApplication"></div>
                                             </div>
                                         </div>
@@ -131,7 +125,7 @@
     
                                     <div class="row">
                                         <div class="col-sm-12 label-weight">
-                                            <div class="km-control-group" required name="type" caption="Type of document/measure">
+                                            <div class="km-control-group" required name="type" caption="{{::('editAbsMeasureT.type'|$translate)}}">
                                                 <div km-term-radio name="type" ng-model="document.type" terms="options.typeOfDocuments()" description="true" binding-type="term" ng-click="save()" required></div>
     
                                             </div>
@@ -139,7 +133,7 @@
                                     </div>
                                     <div class="row" ng-show="isTypeOther()">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="otherTypeName" caption="Name of the other type of document/measure">
+                                            <div class="km-control-group" required name="otherTypeName" caption="{{::('editAbsMeasureT.otherTypeName'|$translate)}}">
                                                 <div km-textbox-ml required ng-model="document.otherTypeName" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -149,16 +143,13 @@
                                     <div class="row">
     
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="jurisdiction" caption="Area of jurisdiction">
+                                            <div class="km-control-group" required name="jurisdiction" caption="{{::('editAbsMeasureT.jurisdiction'|$translate)}}">
                                                 <div class="help-info">
-                                                    Please specify the geographical area of application of the ABS measure. The measure could apply at regional or multilateral, national or federal, subnational or community levels. For multilateral or regional measures, please indicate which countries are
-                                                    covered by the measure by selecting from the drop down menu the relevant geographical or political/economic group. The list is extensive; therefore it is likely that that the specific group to which the
-                                                    measure applies is already listed. However, if the measure applies to a group of countries that is not covered by any of the existing groups, select each of the countries concerned by the measure separately
-                                                    from the drop down menu.</div>
+                                                    {{::('editAbsMeasureT.jurisdictionInfo'|$translate)}}</div>
     
-                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Select area of jurisdiction..."></div>
+                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectJurisdiction'|$translate)}}"></div>
                                                 <div ng-if="isJurisdictionRegional()">
-                                                    <div class="color-red" ng-if="!document.government.identifier">Please first select a country.</div>
+                                                    <div class="color-red" ng-if="!document.government.identifier">{{::('editAbsMeasureT.firstSelectCountry'|$translate)}}</div>
                                                 </div>
     
                                             </div>
@@ -169,25 +160,20 @@
                                             <div ng-if="isJurisdictionRegional() && !canAddRegionalMeasure()">
                                                 <div class="alert alert-warning">
                                                     <h4>
-                                                        Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the
-                                                        countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in
-                                                        their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or
-                                                        the group of countries that share the same measure.
+                                                        {{::('editAbsMeasureT.jurisdictionRegional'|$translate)}}
                                                     </h4>
                                                 </div>
                                             </div>
     
                                             <div ng-if="isJurisdictionRegional() && canAddRegionalMeasure()">
-                                                <div class="help-info">Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure
-                                                    displayed as part of their legal framework in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that
-                                                    share the same measure.</div>
-                                                <div class="km-control-group" required name="jurisdictionRegions" caption="Country name(s) and/or Geographical or political/economic group(s)">
+                                                <div class="help-info">{{::('editAbsMeasureT.jurisdictionRegional'|$translate)}}</div>
+                                                <div class="km-control-group" required name="jurisdictionRegions" caption="{{::('editAbsMeasureT.jurisdictionRegions'|$translate)}}">
                                                     <button type="button" class="btn btn-info" ng-if="document.jurisdictionRegions && document.jurisdictionRegions.length >0"><span ng-bind="document.jurisdictionRegions[0]|term"></span></button>
                                                 </div>
                                             </div>
     
                                             <div ng-show="isJurisdictionSubNationalOrCommunity()">
-                                                <div class="km-control-group" required name="jurisdictionName" caption="Name of the sub-national / community / other jurisdiction">
+                                                <div class="km-control-group" required name="jurisdictionName" caption="{{::('editAbsMeasureT.jurisdictionName'|$translate)}}">
                                                     <div km-textbox-ml required ng-model="document.jurisdictionName" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -197,9 +183,8 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="description" caption="Brief description of the document including  objective and scope (max. 300 words)">
-                                                <div class="help-info">The brief description of the document including objective and scope is meant to serve as a short summary of the measure. This information will be displayed in the summary of the record, so it is important that
-                                                    the description is clear and concise.</div>
+                                            <div class="km-control-group" name="description" caption="{{::('editAbsMeasureT.description'|$translate)}}">
+                                                <div class="help-info">{{::('editAbsMeasureT.descriptionInfo'|$translate)}}</div>
                                                 <div km-rich-textbox ng-model="document.description" rows="4" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -207,10 +192,10 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="isModelContractualClause" caption="Does the measure contain model contractual clauses?">
+                                            <div class="km-control-group" name="isModelContractualClause" caption="{{::('editAbsMeasureT.isModelContractualClause'|$translate)}}">
                                                 <div km-yes-no required ng-model="document.isModelContractualClause" locales="document.header.languages"></div>
                                                 <div ng-show="document.isModelContractualClause">
-                                                    <div class="km-control-group m-2" name="modelContractualClauseDescription" caption="Please provide further information">
+                                                    <div class="km-control-group m-2" name="modelContractualClauseDescription" caption="{{::('editAbsMeasureT.modelContractualClauseDescription'|$translate)}}">
                                                         <div km-textbox-ml ng-model="document.modelContractualClauseDescription" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -222,12 +207,11 @@
     
     
                                 <section>
-                                    <legend name="documentsDetails">Document details</legend>
+                                    <legend name="documentsDetails">{{::('editAbsMeasureT.documentsDetails'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" required name="documents" caption="Document text (in its original language)">
-                                                <div class="help-info">An attachment is preferred. Otherwise, provide the location of the document, i.e. web address including the URL of the website (e.g. http://absch.cbd.int/) and the name of the website (e.g. “Access and Benefit-sharing
-                                                    Clearing-House”).
+                                            <div class="km-control-group" required name="documents" caption="{{::('editAbsMeasureT.documents'|$translate)}}">
+                                                <div class="help-info">{{::('editAbsMeasureT.documentsInfo'|$translate)}}
                                                 </div>
                                                 <div km-link required name="documents" ng-model="document.documents" extensions="options.documentLinksExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
@@ -236,7 +220,7 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="documentTranslations" caption="Translation in one of the official UN languages">
+                                            <div class="km-control-group" name="documentTranslations" caption="{{::('editAbsMeasureT.documentTranslations'|$translate)}}">
                                                 <div km-link name="documentTranslations" ng-model="document.documentTranslations" extensions="options.documentTranslationsExt" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
@@ -244,11 +228,8 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="linkedMeasures" caption="Relationship with other measures">
-                                                <div class="help-info">Please indicate if there is any relationship between this document/measure and other law, regulation, guidelines, administrative or policy measures. For example, if the measure being submitted is implementing
-                                                    an existing law. This information will assist in displaying information on the national legal framework. This section of the form will allow you to link two measures in case they are related, for example
-                                                    if the measure being submitted is implementing an existing law. The two measures will then be displayed together.
-                                                </div>
+                                            <div class="km-control-group" name="linkedMeasures" caption="{{::('editAbsMeasureT.linkedMeasures'|$translate)}}">
+                                                <div class="help-info">{{::('editAbsMeasureT.linkedMeasuresInfo'|$translate)}}</div>
                                                 <!--<div km-select multiple name="linkedMeasures" ng-model="document.linkedMeasures"items="options.measures()" placeholder="Please select ..."></div>-->
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onMeaureQuery(searchText)" ng-model="document.linkedMeasures" question="linkedMeasures"></div>
     
@@ -258,7 +239,7 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="linkedMeasuresDescription" caption="Please describe the relationship ">
+                                            <div class="km-control-group" name="linkedMeasuresDescription" caption="{{::('editAbsMeasureT.linkedMeasuresDescription'|$translate)}}">
                                                 <div km-rich-textbox ng-model="document.linkedMeasuresDescription" rows="4" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -283,10 +264,10 @@
                                 -->
                                 </section>
                                 <section>
-                                    <legend>Regulatory contact information</legend>
+                                    <legend>{{::('editAbsMeasureT.regulatoryInformation'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group color-darkgrey" required name="authorities" caption="Contact Institution">
+                                            <div class="km-control-group color-darkgrey" required name="authorities" caption="{{::('editAbsMeasureT.authorities'|$translate)}}">
     
                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.authorities" question="authorities"
                                                            allow-new="true" allow-new-schema="contact"></div>
@@ -298,7 +279,7 @@
     
                                 <section>
                                     <legend>
-                                        <label for="absMeasures"> Elements of the measure</label>
+                                        <label for="absMeasures">{{::('editAbsMeasureT.elementsMeasure'|$translate)}}</label>
                                     </legend>
                                    
     
@@ -308,8 +289,8 @@
                                             <h4 class="color-blue">
                                                     <i class='fa fa-info-circle'></i>
                                                     <strong>
-                                                    The format for saving the <i>Elements of Measures</i> has changed. This record must be manually updated.
-                                                    The below list of <i>Elments of measures</i> is from the previous version and is meant for reference purposes in order to help you update this record.
+                                                    {{::('editAbsMeasureT.format'|$translate)}} <i>{{::('editAbsMeasureT.elements'|$translate)}}</i> {{::('editAbsMeasureT.manuallyUpdated'|$translate)}}
+                                                     <i>{{::('editAbsMeasureT.elements'|$translate)}}</i> {{::('editAbsMeasureT.previousVersion'|$translate)}}
                                                     </strong>
                                             </h4>
                                             <span ng-repeat="elm in document.absMeasuresForDelete">
@@ -324,16 +305,14 @@
                                             <div class="panel panel-default">
                                                 <div class="panel-heading">
                                                     <span ng-class="{'confidential-text':document.absMesasureNotApplicable}">
-                                                        <input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items /> Elements are not applicable for this measure.
+                                                        <input type="checkbox" name="absMesasureNotApplicable" ng-model="document.absMesasureNotApplicable" watch-items /> {{::('editAbsMeasureT.mesasureNotApplicable'|$translate)}}
                                                     </span>
                                                 </div>
                                                 <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absMesasureNotApplicable}">
                                                     <div class="km-control-group"  name="absMeasures" required caption="">
                                                         <div class="help-info"></div>
                                                         <div layout="row mb-4">
-                                                             <div class="help-info" >Please select which elements are included in the measure being registered and identify the relevant articles or sections of the measure for each of the selected elements. This information will assist in displaying information
-                                                                on the national legal framework and help potential users to understand the access, benefit-sharing and /or compliance requirements of your country. Sometimes the content and elements of the measure relate to goals and
-                                                                plans to implement ABS domestically. This could be the case, for instance, for some ABS strategies or action plans. In such cases, you may indicate that the elements of the measure are not applicable by clicking the checkbox above.
+                                                             <div class="help-info" >{{::('editAbsMeasureT.mesasureNotApplicableInfo'|$translate)}}
                                                             </div>
                                                         </div>
                                                         <div edit-measure-matrix name="absMeasuresMatrix" required ng-model="document.absMeasures" locales="document.header.languages" document="document" ng-disabled="document.absMesasureNotApplicable"
@@ -349,12 +328,12 @@
     
     
                                 <section>
-                                    <legend>Additional information</legend>
+                                    <legend>{{::('editAbsMeasureT.additionalInformation'|$translate)}}</legend>
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="address" caption="Any other relevant information">
-                                                <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                            <div class="km-control-group" name="address" caption="{{::('editAbsMeasureT.relevantDocuments'|$translate)}}">
+                                                <div class="help-block">{{::('editAbsMeasureT.relevantInformationInfo'|$translate)}}</div>
                                                 <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                             </div>
                                         </div>
@@ -362,18 +341,18 @@
     
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                            <div class="km-control-group" name="relevantDocuments" caption="{{::('editAbsMeasureT.relevantDocuments'|$translate)}}">
                                                 <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </section>
                                 <section>
-                                    <legend>Notes</legend>
+                                    <legend>{{::('editAbsMeasureT.notes'|$translate)}}</legend>
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+                                                <div class="help-block">{{::('editAbsMeasureT.notesInfo'|$translate)}}</div>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>

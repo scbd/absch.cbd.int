@@ -2,7 +2,7 @@ import app from "app";
 import commonRoutes from "./common-routes";
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
-import routesLabels from '~/app-data/abs/abs-route-labels.json';
+import routesLabels from '~/app-text/routes/abs-route-labels.json';
 
 app.value("showHelp", {
   value: false

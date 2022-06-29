@@ -3,7 +3,7 @@ import _ from 'lodash';
 import ng from 'angular';
 import 'angular-animate';
 import 'angular-joyride';
-import joyRideText from '~/app-data/dashboard-joyride-tour.json';
+import joyRideText from '~/app-text/views/register/dashboard-joyride-tour.json';
 import 'services/main';
 import 'views/register/directives/register-top-menu';
 import 'toastr';

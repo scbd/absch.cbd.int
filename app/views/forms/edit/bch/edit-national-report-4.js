@@ -10,17 +10,19 @@ import 'views/directives/block-region-directive';
 import '~/views/forms/view/bch/view-national-report-4.directive';
 import 'components/scbd-angularjs-services/main';
 import 'ngDialog';
-    
+import editNR4T from '~/app-text/views/forms/edit/bch/edit-national-report-4.json';
+import numbers from '~/app-text/numbers.json';
     export { default as template } from './edit-national-report-4.html';
 
   export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
-    'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm',
-	function($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm) {
+    'commonjs', 'IStorage', '$routeParams', 'ngDialog', 'realm', 'translationService',
+    function ($scope, $http, $rootScope, locale, $q, $controller, $timeout, commonjs, storage, $routeParams, ngDialog, realm, translationService) {
         
         // since it was decided to use string type for terms fields in schema
         // map string to ETerm ({identifier:'xxxx-xxx'}) type which is the type expected by term-checkbox.
         $scope.multiTermModel = {};
-        
+        translationService.set('editNR4T', editNR4T);
+        translationService.set('numbers', numbers);
         $scope.tab = 'intro';
         var user = $rootScope.user;
         $scope.activeTab = 1

@@ -1,0 +1,12 @@
+{
+    "generalInfo": "General Information",
+    "contactPerson": "Contact person submitting the report",
+    "country": "Country",
+    "organizationsStakeholders": "Organizations/stakeholders who were consulted or participated in the preparation of this report",
+    "timePeriod": "Time period covered by this report",
+    "from": "From",
+    "to": "To",
+    "additionalInformation": "Additional Information",
+    "seconds": "seconds.",
+    "redirectNow": "Redirect now"
+}

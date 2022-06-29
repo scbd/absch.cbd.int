@@ -1,0 +1,14 @@
+{
+    "addConstruct": "Add Construct",
+    "geneConstruct": "Gene Construct",
+    "geneConstructInfo": "Please use the mouse to drag the a shape to add to the construct on a drop location",
+    "dragConstruct": "Drag the shape here to remove the construct",
+    "dropLocation": "Drop location",
+    "Cancel": "Cancel",
+    "save": "Save",
+    "transcriptionStart": "transcription start",
+    "transcriptionStop": "transcription stop",
+    "transcriptionElement": "transcription element",
+    "selectGene": "select gene",
+    "kb": "KB"
+}

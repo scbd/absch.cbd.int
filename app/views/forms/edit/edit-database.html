@@ -16,7 +16,7 @@
 							<legend name="formInfo" class="d-none"></legend>
 							<div class="row">
 								<div class="col-xs-12" >
-									<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+									<div class="km-control-group" name="header.languages" required caption="{{::('editDatabaseT.languageToPublish'|$translate)}}">
 										<div class="indent">
 											<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 										</div>
@@ -25,39 +25,37 @@
 							</div>
 							<section>
 
-								<legend>Website or Database details </legend>
+							<legend>{{::('editDatabaseT.websiteDatabaseDetails'|$translate)}} </legend>
 								<div class="row">
 									<div class="col-12">
-										<div class="km-control-group" name="government" required caption="Country">
+										<div class="km-control-group" name="government" required caption="{{::('editDatabaseT.country'|$translate)}}">
 											<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
-											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+											 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editDatabaseT.selectOption'|$translate)}}"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<div class="km-control-group" name="title" required caption="Website or database name">
-											<div class="help-info">Please enter the name of the website or database as you would like it to appear in
-												the title of the record.</div>
+										<div class="km-control-group" name="title" required caption="{{::('editDatabaseT.website'|$translate)}}">
+											<div class="help-info">{{::('editDatabaseT.websiteInfo'|$translate)}}</div>
 											<div km-textbox-ml required name="title" ng-model="document.title" locales="document.header.languages"
-											 placeholder="example: The title"></div>
+											 placeholder="{{::('editDatabaseT.exampleTitle'|$translate)}}"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<div class="km-control-group" name="description" required caption="Description">
-											<div class="help-info">Please enter a short description of the national website or database, such as its
-												function or information it makes available.</div>
+										<div class="km-control-group" name="description" required caption="{{::('editDatabaseT.description'|$translate)}}">
+											<div class="help-info">{{::('editDatabaseT.descriptionInfo'|$translate)}}</div>
 											<div km-rich-textbox required name="description" ng-model="document.description" rows="4" locales="document.header.languages"
-											 placeholder="example: The description"></div>
+											 placeholder="{{::('editDatabaseT.exampleDescription'|$translate)}}"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<div class="km-control-group" name="websites" required caption="Website address">
-											<div class="help-info">Please provide the full URL of the website (e.g. http://www.cbd.int).</div>
+										<div class="km-control-group" name="websites" required caption="{{::('editDatabaseT.websiteAddress'|$translate)}}">
+											<div class="help-info">{{::('editDatabaseT.websiteAddressInfo'|$translate)}}</div>
 											<!-- <div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div> -->
 											<div km-link name="websites" ng-model="document.websites" allow-link="true" allow-file="false"
 											 identifier="document.header.identifier"></div>
@@ -67,21 +65,20 @@
 							</section>
 
 							<section ng-if="realm.is('BCH')">
-								<legend>Timeframe for confirmation or updating of information</legend>
+								<legend>{{::('editDatabaseT.timeframeInformation'|$translate)}}</legend>
 								<div class="help-info">
-									Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Not Confirmed”.
+									{{::('editDatabaseT.categoryInformation'|$translate)}}
 								</div>
 							</section>
 
 							<section>
 
-								<legend>Additional information</legend>
+								<legend>{{::('editDatabaseT.additionalInformation'|$translate)}}</legend>
 
 								<div class="row">
 									<div class="col-12">
-										<div class="km-control-group" name="address" caption="Any other relevant information">
-											<div class="help-info">Please use this field to provide any other relevant information that may not have
-												been addressed elsewhere in the record.</div>
+										<div class="km-control-group" name="address" caption="{{::('editDatabaseT.relevantinformation'|$translate)}}">
+											<div class="help-info">{{::('editDatabaseT.relevantInformationInfo'|$translate)}}</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -89,9 +86,8 @@
 
 								<div class="row">
 									<div class="col-12">
-										<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-											<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more 
-												relevant documents that will be stored in the database for users to download.</div>
+										<div class="km-control-group" name="relevantDocuments" caption="{{::('editDatabaseT.relevantDocuments'|$translate)}}">
+											<div class="help-info">{{::('editDatabaseT.relevantDocumentsInfo'|$translate)}}</div>
 											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 											 identifier="document.header.identifier"></div>
 										</div>
@@ -101,12 +97,12 @@
 
 							<section>
 
-								<legend>Notes</legend>
+								<legend>{{::('editDatabaseT.notes'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
-											<div km-notes name="notes" ng-model="document.notes"></div>
+											<div class="help-info">{{::('editDatabaseT.notesInfos'|$translate)}}</div>
+											<div km-notes name="notes" ng-model="document.notesInfos"></div>
 										</div>
 									</div>
 								</div>

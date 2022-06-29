@@ -6,16 +6,17 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import 'views/forms/view/abs/view-measure.directive';
 import 'views/forms/edit/abs/edit-measure-matrix-directive';
+import editAbsMeasureT from '~/app-text/views/forms/edit/abs/edit-measure.json';
 
     export { default as template } from './edit-measure.html';
 
-  export default ["$scope", "realm", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs','solr',
-        function($scope, realm, $http, $filter, $q, Enumerable, $controller, $location, commonjs, solr) {
+export default ["$scope", "realm", "$http", "$filter", "$q", "Enumerable", "$controller", "$location", 'commonjs', 'solr', 'translationService',
+    function ($scope, realm, $http, $filter, $q, Enumerable, $controller, $location, commonjs, solr, translationService) {
             $controller('editController', {
                 $scope: $scope
             });
 
-
+            translationService.set('editAbsMeasureT', editAbsMeasureT);
             $scope.path = $location.path();
 
             _.extend($scope.options, {

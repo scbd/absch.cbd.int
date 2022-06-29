@@ -5,9 +5,10 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-organism.directive";
+import editOrganismT from '~/app-text/views/forms/edit/bch/directives/edit-organism.json';
 
-	app.directive("editOrganism", ["$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService", "realm",
-	function($routeParams, $route, Thesaurus, $q, $controller, thesaurusService, realm) {
+app.directive("editOrganism", ["$routeParams", "$route", "Thesaurus", "$q", "$controller", "thesaurusService", "realm", "translationService",
+		function ($routeParams, $route, Thesaurus, $q, $controller, thesaurusService, realm, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -17,7 +18,7 @@ import "~/views/forms/view/bch/view-organism.directive";
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+				translationService.set('editOrganismT', editOrganismT);
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;

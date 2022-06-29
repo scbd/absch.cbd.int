@@ -4,8 +4,9 @@ import 'views/measure-matrix/measure-matrix-elements-directive';
 import 'services/main';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/directives/record-options';
+import viewMeasureT from '~/app-text/views/forms/view/abs/view-measure.json';
 
-app.directive("viewMeasure", [function () {
+app.directive("viewMeasure", ['translationService', function (translationService) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -21,6 +22,7 @@ app.directive("viewMeasure", [function () {
 		controller : ["$scope", "solr","$filter", "searchService", "$q", "appConfigService",
          function ($scope, solr, $filter, searchService, $q, appConfigService)
 		{
+			translationService.set('viewMeasureT', viewMeasureT);
 			//====================
 			//
 			//====================

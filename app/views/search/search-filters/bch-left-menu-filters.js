@@ -1,5 +1,4 @@
-import bchFilters from '~/app-data/bch/bch-left-menu-filters.json'
-
+import bchFilters from '~/app-text/views/search/search-filters/bch-left-menu-filters.json';
 export const bchLeftMenuFilters = {
     "authority": [
         {

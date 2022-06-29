@@ -14,7 +14,7 @@
 </template>
 <script>
 
-	import i18n from '../../locales/en/components/kb.json';
+	import i18n from '../../app-text/components/kb.json';
 	import ArticlesApi from './article-api';
 
 	export default {

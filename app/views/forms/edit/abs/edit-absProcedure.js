@@ -2,15 +2,17 @@ import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/view/abs/view-abs-procedure.directive';
+import editAbsProcedureT from '~/app-text/views/forms/edit/abs/edit-absProcedure.json';
 
     export { default as template } from './edit-absProcedure.html';
 
-  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, realm, $http, $filter, $q, $routeParams, $controller, $location) {
+  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", "translationService", 
+    function ($scope, realm, $http, $filter, $q, $routeParams, $controller, $location, translationService) {
         $controller('editController', {
             $scope: $scope
         });
 
-
+        translationService.set('editAbsProcedureT', editAbsProcedureT);
         $scope.path = $location.path();
 
         _.extend($scope.options, {

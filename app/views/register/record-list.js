@@ -9,7 +9,7 @@ import 'views/forms/edit/editFormUtility';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
-import joyRideText from '~/app-data/submit-summary-joyride-tour.json';
+import joyRideText from '~/app-text/views/register/submit-summary-joyride-tour.json';
 
         export { default as template } from './record-list.html';
 

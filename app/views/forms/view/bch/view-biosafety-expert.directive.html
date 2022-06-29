@@ -10,25 +10,25 @@
 
 
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>{{::('viewExpT.generalInfo'|$translate)}}</legend>
 
 		<div ng-show="document.government" class="padding-top-10">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewExpT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
 		<section>
-			<legend>Profile of the expert</legend>
+			<legend>{{::('viewExpT.ProfileExpert'|$translate)}}</legend>
 			<div ng-if="document.profile">
-				<label>Brief profile</label>
+				<label>{{::('viewExpT.briefProfile'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.profile" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="document.contact">
-				<label>Contact details</label>
+				<label>{{::('viewExpT.contactDetails'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<view-record-reference ng-model="document.contact" locale="locale"></view-record-reference>
 				</div>
@@ -36,21 +36,21 @@
 
 			<div ng-if="document.birthYear">
 				<div ng-if="document.birthYear">
-					<label>Year of birth</label>
+					<label>{{::('viewExpT.birthYear'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<span ng-bind="document.birthYear"></span>
 					</div>
 				</div>
 			</div>
 			<div ng-show="document.birthCountry">
-				<label>Country of birth</label>
+				<label>{{::('viewExpT.birthCountry'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.birthCountry|term:locale"></span>
 				</div>
 			</div>
 
 			<div ng-if="document.nationalities">
-				<label>Nationality(ies)</label>
+				<label>{{::('viewExpT.nationalities'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.nationalities">
@@ -61,42 +61,42 @@
 			</div>
 		</section>
 		<section ng-if="document.currentEmployment">
-			<legend>Details of current employment</legend>
+			<legend>{{::('viewExpT.detailsEmployment'|$translate)}}</legend>
 			
 			<div ng-if="document.currentEmployment.name">
-				<label>Name of Employer / Organization / Company</label>
+				<label>{{::('viewExpT.currentEmployment'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.currentEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="document.currentEmployment.organizationType">
-				<label>Type of organization</label>
+				<label>{{::('viewExpT.organizationType'|$translate)}}</label>
 				<div compare-val class="km-value">
 					<span  ng-bind="document.currentEmployment.organizationType|term:locale"></span>
 				</div>
 			</div>
 			<div ng-if="document.currentEmployment.title">
-				<label>Job title</label>
+				<label>{{::('viewExpT.jobTitle'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.currentEmployment.title" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="document.currentEmployment.department">
-				<label>Department / Division / Unit</label>
+				<label>{{::('viewExpT.department'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.currentEmployment.department" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div  class="row"  ng-if="document.currentEmployment.startDate || document.currentEmployment.endDate">
 				<div class="col-md-6" ng-if="document.currentEmployment.startDate">
-					<label>Start Date</label>
+					<label>{{::('viewExpT.startDate'|$translate)}}</label>
 					<div comprae-val>
 					<span class="km-value" ng-bind="document.currentEmployment.startDate"></span>
 					</div>
 				</div>
 
 				<div class="col-md-6" ng-if="document.currentEmployment.organizationType" >
-					<label>Type of organization</label>
+					<label>{{::('viewExpT.organizationType'|$translate)}}</label>
 					<div compare-val>
 					<span class="km-value" ng-if="document.currentEmployment.organizationType.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" 
 						ng-bind="document.currentEmployment.organizationType|term:locale"></span>
@@ -107,16 +107,16 @@
 			</div>
 			
 			<div ng-if="document.currentEmployment.responsibilities">
-				<label>Main Areas of Responsibility</label>
+				<label>{{::('viewExpT.responsibilities'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.currentEmployment.responsibilities" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 		</section>
 		<section ng-if="document.previousEmployment || document.countryRegionsWorkedIn">
-			<legend>Employment history</legend>
+			<legend>{{::('viewExpT.employmentHistory'|$translate)}}</legend>
 			<div ng-if="document.countryRegionsWorkedIn">
-				<label>Countries or regions worked in</label>
+				<label>{{::('viewExpT.countriesWorked'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.countryRegionsWorkedIn">
@@ -126,33 +126,33 @@
 				</div>
 			</div>
 			<div ng-if="document.previousEmployment.name">
-				<label>Name of Previous Employer / Organization / Company</label>
+				<label>{{::('viewExpT.nameOfPreviousEmployer'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml  km-pre value="document.previousEmployment.name" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="document.previousEmployment.organizationType">
-				<label>Type of organization</label>
+				<label>{{::('viewExpT.organizationType'|$translate)}}</label>
 				<div compare-val class="km-value">
 					<span  ng-bind="document.currentEmployment.previousEmployment|term:locale"></span>
 				</div>
 			</div>
 			<div ng-if="document.previousEmployment.department">
-				<label>Department / Division / Unit</label>
+				<label>{{::('viewExpT.department'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.previousEmployment.department" locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div class="row"  ng-if="document.previousEmployment.startDate || document.previousEmployment.endDate">
 				<div class="col-md-6" ng-if="document.previousEmployment.startDate">
-					<label>Start Date</label>
+					<label>{{::('viewExpT.startDate'|$translate)}}</label>
 					<div compare-val>
 					<span class="km-value" ng-bind="document.previousEmployment.startDate"></span>
 					</div>
 				</div>
 
 				<div class="col-md-6" ng-if="document.previousEmployment.endDate">
-					<label>End Date</label>
+					<label>{{::('viewExpT.endDate'|$translate)}}</label>
 					<div compare-val>
 					<span class="km-value" ng-bind="document.previousEmployment.endDate"></span>
 					</div>
@@ -160,7 +160,7 @@
 			</div>
 
 			<div ng-if="document.previousEmployment.organizationType">
-				<label>Type of organization</label>
+				<label>{{::('viewExpT.organizationType'|$translate)}}</label>
 				<div compare-val>
 				<span class="km-value" ng-if="document.previousEmployment.organizationType.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" 
 					ng-bind="document.previousEmployment.organizationType|term:locale"></span>
@@ -169,39 +169,39 @@
 				</div>
 			</div>
 			<div ng-if="document.previousEmployment.responsibilities">
-				<label>Main Areas of Responsibility</label>
+				<label>{{::('viewExpT.responsibilities'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.previousEmployment.responsibilities" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 		</section>
 		<section>
-			<legend>Post-secondary education</legend>
-			<strong>A. Formal education</strong>
+			<legend>{{::('viewExpT.postEducation'|$translate)}}</legend>
+			<strong>{{::('viewExpT.formalEducation'|$translate)}}</strong>
 			<section ng-if="document.primaryEducation" style="padding-top: 20px;">
-				<u>First Degree</u>
+				<u>{{::('viewExpT.firstDegree'|$translate)}}</u>
 				<div ng-if="document.primaryEducation.title">
-					<label>Title of the Degree or other academic distinction and subject</label>
+					<label>{{::('viewExpT.titleDegree'|$translate)}}</label>
 					<div compare-val>
 					<km-value-ml value="document.primaryEducation.title" locales="locale"></km-value-ml>
 					</div>
 				</div>
 				<div ng-if="document.primaryEducation.institution">
-					<label>Name of academic institution</label>
+					<label>{{::('viewExpT.institution'|$translate)}}</label>
 					<div compare-val>
 					<km-value-ml value="document.primaryEducation.institution" locales="locale"></km-value-ml>
 					</div>
 				</div>
 				<div class="row"  ng-if="document.primaryEducation.startDate || document.primaryEducation.endDate">
 					<div class="col-md-6" ng-if="document.primaryEducation.startDate">
-						<label>Start Date</label>
+						<label>{{::('viewExpT.startDate'|$translate)}}</label>
 						<div compare-val>
 						<span class="km-value" ng-bind="document.primaryEducation.startDate"></span>
 						</div>
 					</div>
 
 					<div class="col-md-6" ng-if="document.primaryEducation.endDate">
-						<label>End Date</label>
+						<label>{{::('viewExpT.endDate'|$translate)}}</label>
 						<div compare-val>
 						<span class="km-value" ng-bind="document.primaryEducation.endDate"></span>
 						</div>
@@ -209,29 +209,29 @@
 				</div>
 			</section>
 			<section ng-if="document.secondaryEducation" style="padding-top: 10px;">
-				<u>Second Degree</u>
+				<u>{{::('viewExpT.secondDegree'|$translate)}}</u>
 				<div ng-if="document.secondaryEducation.title">
-					<label>Title of the Degree or other academic distinction and subject</label>
+					<label>{{::('viewExpT.titleDegree'|$translate)}}</label>
 					<div compare-val>
 					<km-value-ml value="document.secondaryEducation.title" locales="locale"></km-value-ml>
 					</div>
 				</div>
 				<div ng-if="document.secondaryEducation.institution">
-					<label>Name of academic institution</label>
+					<label>{{::('viewExpT.institution'|$translate)}}</label>
 					<div compare-val>
 					<km-value-ml value="document.secondaryEducation.institution" locales="locale"></km-value-ml>
 					</div>
 				</div>
 				<div class="row"  ng-if="document.secondaryEducation.startDate || document.secondaryEducation.endDate">
 					<div class="col-md-6" ng-if="document.secondaryEducation.startDate">
-						<label>Start Date</label>
+						<label>{{::('viewExpT.startDate'|$translate)}}</label>
 						<div compare-val>
 						<span class="km-value" ng-bind="document.secondaryEducation.startDate"></span>
 						</div>
 					</div>
 
 					<div class="col-md-6" ng-if="document.secondaryEducation.endDate">
-						<label>End Date</label>
+						<label>{{::('viewExpT.endDate'|$translate)}}</label>
 						<div compare-val>
 						<span class="km-value" ng-bind="document.secondaryEducation.endDate"></span>
 						</div>
@@ -239,29 +239,29 @@
 				</div>
 			</section>
 			<section ng-if="document.thirdEducation" style="padding-top: 10px;">
-				<U>Third Degree</U>
+				<U>{{::('viewExpT.thirdEducation'|$translate)}}</U>
 				<div ng-if="document.thirdEducation.title">
-					<label>Title of the Degree or other academic distinction and subject</label>
+					<label>{{::('viewExpT.titleDegree'|$translate)}}</label>
 					<div compare-val>
 					<km-value-ml value="document.thirdEducation.title" locales="locale"></km-value-ml>
 					</div>
 				</div>
 				<div ng-if="document.thirdEducation.institution">
-					<label>Name of academic institution</label>
+					<label>{{::('viewExpT.institution'|$translate)}}</label>
 					<div compare-val>
 					<km-value-ml value="document.thirdEducation.institution" locales="locale"></km-value-ml>
 					</div>
 				</div>
 				<div class="row"  ng-if="document.thirdEducation.startDate || document.thirdEducation.endDate">
 					<div class="col-md-6" ng-if="document.thirdEducation.startDate">
-						<label>Start Date</label>
+						<label>{{::('viewExpT.startDate'|$translate)}}</label>
 						<div compare-val>
 						<span class="km-value" ng-bind="document.thirdEducation.startDate"></span>
 						</div>
 					</div>
 
 					<div class="col-md-6" ng-if="document.thirdEducation.endDate">
-						<label>End Date</label>
+						<label>{{::('viewExpT.endDate'|$translate)}}</label>
 						<div compare-val>
 						<span class="km-value" ng-bind="document.thirdEducation.endDate"></span>
 						</div>
@@ -270,7 +270,7 @@
 			</section>
 
 			<div ng-if="document.professionalQualification.length" class="padding-top-10">
-				<strong>B. Other professional qualifications</strong>
+				<strong>{{::('viewExpT.otherQualifications'|$translate)}}</strong>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.professionalQualification">
@@ -282,7 +282,7 @@
 		</section>
 		<section>
 			<div ng-if="document.expertise.length">
-				<legend>Areas of expertise</legend>
+				<legend>{{::('viewExpT.areasOfExpertise'|$translate)}}</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.expertise">
@@ -294,7 +294,7 @@
 			</div>
 
 			<div ng-if="document.relevantPublication.length">
-				<legend>Publications</legend>
+				<legend>{{::('viewExpT.publications'|$translate)}}</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relevantPublication">
@@ -305,7 +305,7 @@
 			</div>
 
 			<div ng-if="document.professionalMemberships.length">
-				<legend>Professional memberships</legend>
+				<legend>{{::('viewExpT.professionalMemberships'|$translate)}}</legend>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.professionalMemberships">
@@ -316,7 +316,7 @@
 			</div>
 
 			<div ng-if="document.panelServed.length">
-				<label>Technical committees, expert panels or advisory bodies served</label>
+				<label>{{::('viewExpT.panelServed'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.panelServed">
@@ -328,9 +328,9 @@
 		</section>
 
 		<section>
-			<legend>Language proficiency</legend>
+			<legend>{{::('viewExpT.languageProficiency'|$translate)}}</legend>
 			<div ng-if="document.motherTongue.length">
-				<label>Mother tongue</label>
+				<label>{{::('viewExpT.motherTongue'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.motherTongue">
@@ -340,12 +340,12 @@
 				</div>
 			</div>
 			<div ng-if="document.languageRating.length">
-				<label>Other languages</label>
+				<label>{{::('viewExpT.otherLanguages'|$translate)}}</label>
 				<div compare-val>
 					<table class="table table-bordered">
 						<tr>
-							<th style="width: 10%; font-size: 12px;">Language</th>
-							<th style="width: 90%; font-size: 12px;">Level</th>
+							<th style="width: 10%; font-size: 12px;">{{::('viewExpT.language'|$translate)}}</th>
+							<th style="width: 90%; font-size: 12px;">{{::('viewExpT.level'|$translate)}}</th>
 						</tr>
 						<tr ng-repeat="item in document.languageRating" style="padding-top: 5px;">
 							<td>
@@ -362,7 +362,7 @@
 		</section>
 
 		<div ng-if="document.additionalInformation||document.additionalDocuments">
-			<legend>Any other relevant information</legend>
+			<legend>{{::('viewExpT.otherRelevantInformation'|$translate)}}</legend>
 
 			<div ng-if="document.additionalInformation">
 				<div compare-val>
@@ -371,7 +371,7 @@
 			</div>
 
 			<div ng-if="document.additionalDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewExpT.additionalDocuments'|$translate)}}</label>
 				<div compare-val>
 				<div class="km-value" ng-if="document.additionalDocuments" km-link-list 
 					ng-model="document.additionalDocuments" style="margin-top: 5px;"></div>

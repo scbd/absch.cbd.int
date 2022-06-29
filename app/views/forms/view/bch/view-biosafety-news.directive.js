@@ -1,7 +1,8 @@
 import app from 'app';
 import template from "text!./view-biosafety-news.directive.html";
 import 'views/directives/record-options';
-app.directive("viewBiosafetyNews", [function () {
+import viewBiosafetyNewsT from '~/app-text/views/forms/view/bch/view-biosafety-news.json';
+app.directive("viewBiosafetyNews", ['translationService', function (translationService) {
 	return {
 		restrict   : "EA",
 		template: template ,
@@ -11,6 +12,9 @@ app.directive("viewBiosafetyNews", [function () {
 			document: "=ngModel",
 			locale  : "=",
 			target  : "@linkTarget",
+		},
+		link: function (){
+			translationService.set('viewBiosafetyNewsT', viewBiosafetyNewsT);
 		}
 	};
 }]);

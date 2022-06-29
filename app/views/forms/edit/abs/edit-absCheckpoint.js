@@ -2,15 +2,17 @@ import app from 'app';
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/view/abs/view-abs-checkpoint.directive';
+import editAbsCheckpointT from '~/app-text/views/forms/edit/abs/edit-absCheckpoint.json';
 
     export { default as template } from './edit-absCheckpoint.html';
 
-  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location","thesaurusService", function($scope, realm, $http, $filter, $q, $routeParams, $controller, $location, thesaurusService) {
+export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", "thesaurusService", "translationService",
+    function ($scope, realm, $http, $filter, $q, $routeParams, $controller, $location, thesaurusService, translationService) {
         $controller('editController', {
             $scope: $scope
         });
 
-
+        translationService.set('editAbsCheckpointT', editAbsCheckpointT);
         $scope.path = $location.path();
 
         _.extend($scope.options, {

@@ -10,15 +10,15 @@
 		<document-date></document-date>
 
 		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
-			<legend>Amendment</legend>
+			<legend>{{::('viewDecT.amendment'|$translate)}}</legend>
 			<div ng-if="document.isAmendment!=undefined">
-				<label>Is this an amendment to a decision or communication already published on the BCH?</label>
+				<label>{{::('viewDecT.isAmendment'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.amendedRecords">
-				<label>Decision(s) or communication(s) amended</label>
+				<label>{{::('viewDecT.decisionAamended'|$translate)}}</label>
 				<div class="km-value" compare-val="amendedRecords">
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
@@ -28,13 +28,13 @@
 				</div>
 			</div>
 			<div ng-if="document.amendmentsDetails">
-				<label>Brief summary of the amendment(s)</label>
+				<label>{{::('viewDecT.briefSummary'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.amendmentsDetails" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="amendedByRecords">
-				<label>The decision/communication in this record has been amended by the decision(s)/communication(s) in the following record(s)</label>
+				<label>{{::('viewDecT.decisionCommunication'|$translate)}}</label>
 				<div class="km-value" compare-val="amendedByRecords">
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
@@ -43,16 +43,16 @@
 			</div>
         </div>
 
-		<legend>General information</legend>		
+		<legend>{{::('viewDecT.generalInfo'|$translate)}}</legend>		
 		<div ng-if="document.government">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewDecT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a class="text-decoration-none" rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
 		<div ng-if="document.authorities">
-			<label>Competent National Authority(ies) responsible for the decision or communication</label>
+			<label>{{::('viewDecT.authorities'|$translate)}}</label>
 			<div class="km-value" compare-val="authorities">
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >
@@ -63,19 +63,19 @@
 		</div>
 
 		<div ng-if="document.title">
-			<label>Title / Reference number of the decision or communication</label>
+			<label>{{::('viewDecT.title'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.date">
-			<label>Date of the decision</label>
+			<label>{{::('viewDecT.date'|$translate)}}</label>
 			<div compare-val>
 			<div class="km-value" ng-bind-html="document.date | formatDate"></div>
 			</div>
 		</div>
 		<div ng-if="document.takenPriorEntryIntoForce != undefined">
-			<label>Is the decision taken prior to entry into force of the Protocol?</label>
+			<label>{{::('viewDecT.takenPriorEntryIntoForce'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.takenPriorEntryIntoForce" locales="locale"></km-value-bool>
 			</div>
@@ -90,21 +90,21 @@
 			</div>
 		</div> -->
 		<div ng-if="document.jurisdictionsDetails">
-			<label>Jurisdiction</label>
+			<label>{{::('viewDecT.jurisdiction'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.jurisdictionsDetails" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 	<div ng-if="document.decisionTypes">
-		<legend>Subject of the decision, notification, communication or declaration</legend>
+		<legend>{{::('viewDecT.subjectDecision'|$translate)}}</legend>
 		<div class="km-value" compare-val="decisionTypes">
 			<ul class="list">
 				<li  ng-style="{'margin-left': (item.identifier == 'A0F944AD-1578-47F4-BB71-A9805EC0EB7A' || item.identifier == '47B66371-7016-4F28-B33A-0DBFF43581CA' || item.identifier ==  '0D0BEEF4-54E4-44C1-ABB2-B89DC145E0B3' || item.identifier == 'C15E5CD8-B6F9-41AE-A09C-7EF5F73B0507') ? '40px' : '0'}"
 				ng-repeat="item in document.decisionTypes" >
 					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="item|term:locale"></span>
 					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-						Any other decisions, notifications, declarations or communications
+						{{::('viewDecT.otherSubject'|$translate)}}
 						<span ng-if="item.customValue">
 							(<span ng-bind="item.customValue|lstring:locale"></span>)
 						</span>
@@ -117,45 +117,45 @@
 
 		<!-- =============SECTION B START======================== -->
 	<div ng-if="isLmoDecisionForIntentionalIntroduction">
-		<legend>LMOs for intentional introduction into the environment</legend>
+		<legend>{{::('viewDecT.LMOEnvironment'|$translate)}}</legend>
 
 		<div ng-if="document.addressesTransboundaryMovement!=undefined">
-			<label>Was the decision triggered by a request for a transboundary movement of LMOs into your country?</label>
+			<label>{{::('viewDecT.addressesTransboundaryMovement'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.addressesTransboundaryMovement" locales="locale"></km-value-bool>
 			</div>
 		</div>
 
 		<div ng-if="document.intentionDecisions!=undefined">
-			<label>Was the decision taken in accordance with</label>
+			<label>{{::('viewDecT.intentionDecisions'|$translate)}}</label>
 			<div compare-val>
 			<view-terms-hierarchy  class="km-value" ng-model="document.intentionDecisions" locale="locale" term-domain="intentionDecisions"></view-terms-hierarchy>
 			</div>
 		</div>
 
 		<div ng-if="document.receiptDate">
-			<label>Date on which the notification was received</label>
+			<label>{{::('viewDecT.receiptDate'|$translate)}}</label>
 			<div compare-val>
 			<div class="km-value" ng-bind-html="document.receiptDate | formatDate"></div>
 			</div>
 		</div>
 
 		<div ng-if="document.receiptAcknowledgementDate">
-			<label>Date on which acknowledgement of receipt of the notification was sent to the notifier</label>
+			<label>{{::('viewDecT.receiptAcknowledgementDate'|$translate)}}</label>
 			<div compare-val>
 			<div class="km-value" ng-bind-html="document.receiptAcknowledgementDate | formatDate"></div>
 			</div>
 		</div>
 
 		<div ng-if="document.communicationDate">
-			<label>Date on which the decision was communicated to the notifier</label>
+			<label>{{::('viewDecT.communicationDate'|$translate)}}</label>
 			<div compare-val>
 			<div class="km-value" ng-bind-html="document.communicationDate | formatDate"></div>
 			</div>
 		</div>
 
 		<div ng-if="document.exporters">
-			<label>Exporter’s contact details</label>
+			<label>{{::('viewDecT.exporters'|$translate)}}</label>
 			<div class="km-value" compare-val="exporters">
 				<ul class="list">
 					<li ng-repeat="item in document.exporters">
@@ -165,7 +165,7 @@
 			</div>
 		</div>
 		<div ng-if="document.importers && document.addressesTransboundaryMovement">
-			<label>Importer’s contact details</label>
+			<label>{{::('viewDecT.importers'|$translate)}}</label>
 			<div class="km-value" compare-val="importers">
 				<ul class="list">
 					<li ng-repeat="item in document.importers">
@@ -176,13 +176,13 @@
 		</div>
 
 		<div ng-if="document.appliesToTransboundaryMovement!=undefined">
-			<label>Does the decision apply to transboundary movements of LMO(s) into the country?</label>
+			<label>{{::('viewDecT.transboundaryMovements'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.appliesToTransboundaryMovement" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-if="document.importers && !document.addressesTransboundaryMovement">
-			<label>Applicant’s contact details</label>
+			<label>{{::('viewDecT.applicantDetails'|$translate)}}</label>
 			<div class="km-value" compare-val="importers">
 				<ul class="list">
 					<li ng-repeat="item in document.importers">
@@ -193,19 +193,19 @@
 		</div>
 
 		<div ng-if="document.involvesFieldTrial!=undefined">
-			<label>Does the decision involve field trials?</label>
+			<label>{{::('viewDecT.involvesFieldTrial'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.involvesFieldTrial" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-if="document.involvesCommercialRelease!=undefined">
-			<label>Does the decision involve commercial release?</label>
+			<label>{{::('viewDecT.decisionInvolveCommercial'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.involvesCommercialRelease" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-if="document.appliesToSubsequentIntroductions!=undefined">
-			<label>Will the decision apply to subsequent introductions of the same LMO(s) into the environment?</label>
+			<label>{{::('viewDecT.subsequentIntroductions'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.appliesToSubsequentIntroductions" locales="locale"></km-value-bool>
 			</div>
@@ -216,9 +216,9 @@
 
 		<!-- =============SECTION C START======================== -->
 	<div ng-if="isLmoDecisionForDirectUse">
-			<legend>LMOs for direct use as food or feed, or for processing (LMOs-FFP)</legend>
+			<legend>{{::('viewDecT.LMOProcessing'|$translate)}}</legend>
 			<div ng-if="document.uses">
-				<label>Use(s) of LMO</label>
+				<label>{{::('viewDecT.uses'|$translate)}}</label>
 				<div class="km-value" compare-val="uses">
 					<ul class="list">
 						<li ng-repeat="item in document.uses" ng-bind="item|term:locale"></li>
@@ -226,7 +226,7 @@
 				</div>
 			</div>
 			<div ng-if="document.takenInAccordanceWithA116!=undefined">
-				<label>Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?</label>
+				<label>{{::('viewDecT.takenInAccordanceWithA116'|$translate)}}</label>
 				<div comapre-val>
 					<km-value-bool value="document.takenInAccordanceWithA116" locales="locale"></km-value-bool>
 				</div>
@@ -234,7 +234,7 @@
 
 
 			<div ng-if="document.directUseDecisions">
-				<legend>Type of decision</legend>
+				<legend>{{::('viewDecT.typeOfDecision'|$translate)}}</legend>
 				<div compare-val="directUseDecisions">
 					<ul class="list">
 						<li ng-repeat="item in document.directUseDecisions">
@@ -244,7 +244,7 @@
 				</div>
 			</div>
 			<div ng-if="document.exporters && isDecisionOnLmoImport">
-				<label>Exporter’s contact details</label>
+				<label>{{::('viewDecT.exporters'|$translate)}}</label>
 				<div class="km-value" compare-val="exporters">
 					<ul class="list">
 						<li ng-repeat="item in document.exporters">
@@ -254,8 +254,8 @@
 				</div>
 			</div>
 			<div ng-if="document.importers && (isDecisionOnLmoDomesticUse || isDecisionOnLmoImport)">
-				<label ng-if="isDecisionOnLmoImport">Importer's/Applicant's contact details</label>
-				<label ng-if="isDecisionOnLmoDomesticUse">Applicant’s contact details</label>
+				<label ng-if="isDecisionOnLmoImport">{{::('viewDecT.importerApplicant'|$translate)}}</label>
+				<label ng-if="isDecisionOnLmoDomesticUse">{{::('viewDecT.applicantDetails'|$translate)}}</label>
 				<div class="km-value" compare-val="importers">
 					<ul class="list">
 						<li ng-repeat="item in document.importers">
@@ -273,28 +273,28 @@
 
 
 	<div ng-if="isLmoDecisionForIntentionalIntroduction || isLmoDecisionForDirectUse">
-		<legend>Result of the decision</legend>
+		<legend>{{::('viewDecT.resultDecision'|$translate)}}</legend>
 		<div ng-if="document.decisionResult">
-			<label>Result of the decision</label>
+			<label>{{::('viewDecT.resultDecision'|$translate)}}</label>
 			<div compare-val>
 				<div class="km-value" ng-bind="document.decisionResult | term:locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.conditions">
-			<label>Conditions</label>
+			<label>{{::('viewDecT.conditions'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.conditions" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.reasons">
-			<label>Reasons</label>
+			<label>{{::('viewDecT.reasons'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml html value="document.reasons" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.extensionPeriod">
-			<label>Specify the time extension in days</label>
+			<label>{{::('viewDecT.extensionPeriod'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.extensionPeriod" locales="locale"></km-value-ml>
 			</div>
@@ -306,15 +306,15 @@
 
 		<!-- =============SECTION E START======================== -->
 	<div ng-if="isSimplifiedProcedure">
-		<legend>Simplified procedure</legend>
+		<legend>{{::('viewDecT.procedure'|$translate)}}</legend>
 		<div ng-if="document.movementAllowedUnderA131A || document.exemptedFromAIA">
-			<label>Subject of the decision under the simplified procedure</label>
+			<label>{{::('viewDecT.simplifiedProcedure'|$translate)}}</label>
 			<div class="km-value" compare-val>
-				<div ng-if="document.movementAllowedUnderA131A">Case(s) in which the intentional transboundary movement of LMOs may take place at the same time of the notification to the Party of import</div>
-				<div ng-if="document.exemptedFromAIA">Decision specifying that the import of the LMO is exempt from the Advance Informed Agreement (AIA) procedure</div>
+				<div ng-if="document.movementAllowedUnderA131A">{{::('viewDecT.simplifiedProcedureInfo'|$translate)}}</div>
+				<div ng-if="document.exemptedFromAIA">{{::('viewDecT.exemptedFromAIA'|$translate)}}</div>
 			</div>
 			<div ng-if="document.appliesToSubsequentImports!=undefined">
-				<label>Does the decision apply to subsequent similar imports of LMOs?</label>
+				<label>{{::('viewDecT.appliesToSubsequentImports'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.appliesToSubsequentImports" locales="locale"></km-value-bool>
 				</div>
@@ -325,65 +325,65 @@
 
 	<!--=============SECTION F START======================== -->
 	<div ng-if="isTransboundaryMovement">
-		<legend>Illegal transboundary movement or unintentional transboundary movement</legend>
+		<legend>{{::('viewDecT.transboundaryMovement'|$translate)}}</legend>
 
 		<div ng-if="document.transboundaryMovementType">
-			<label>Type of transboundary movement</label>
+			<label>{{::('viewDecT.transboundaryMovementType'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.transboundaryMovementType|term:locale"></span>
 			</div>
 		</div>
 
 		<div ng-if="document.releaseInformation">
-			<label>Information on the place where the occurrence and/or release occurred</label>
+			<label>{{::('viewDecT.releaseInformation'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml locales="locale" value="document.releaseInformation"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.estimatedQuantities">
-			<label>Available relevant information on the estimated quantities and relevant characteristics and/or traits of the living modified organism</label>
+			<label>{{::('viewDecT.estimatedQuantities'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml locales="locale" value="document.estimatedQuantities"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.releaseCircumstance">
-			<label>Information on the circumstances of the release</label>
+			<label>{{::('viewDecT.releaseCircumstance'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml locales="locale" value="document.releaseCircumstance"></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.releaseDate">
-			<label>Information on the estimated date of the release</label>
+			<label>{{::('viewDecT.releaseDate'|$translate)}}</label>
 			<div compare-val>
 			<div class="km-value" ng-bind-html="document.releaseDate | formatDate"></div>
 			</div>
 		</div>
 
 		<div ng-if="document.lmoUseInformation">
-			<label>Information on the use of the living modified organism in the originating Party</label>
+			<label>{{::('viewDecT.lmoUseInformation'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml locales="locale" value="document.lmoUseInformation"></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.adverseEffectInformation">
-			<label>Information about the possible adverse effects on the conservation and sustainable use of biological diversity, taking also into account risks to human health, as well as available information about possible risk management measures</label>
+			<label>{{::('viewDecT.conservationInformation'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml locales="locale" value="document.adverseEffectInformation"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.otherTransboundryInformation">
-			<label ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">Any other relevant information</label>
-			<label ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">Brief description where it has not been possible to identify the LMO in question</label>
+			<label ng-if="document.transboundaryMovementType.identifier=='22B915C4-193E-4087-89ED-D104EEEC4330'">{{::('viewDecT.otherTransboundryInformation'|$translate)}}</label>
+			<label ng-if="document.transboundaryMovementType.identifier=='A9A800DC-F313-4F79-B3E4-768E41088D11'">{{::('viewDecT.otherTransboundryBrief'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml locales="locale" value="document.otherTransboundryInformation"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.pointOfContact">
-			<label>A point of contact for further information</label>
+			<label>{{::('viewDecT.pointOfContact'|$translate)}}</label>
 			<div  class="km-value" compare-val="pointOfContact">
 				<ul class="list">
 					<li ng-repeat="item in document.pointOfContact">
@@ -398,32 +398,32 @@
 <!--=============SECTION G START========================-->
 
 	<div ng-if="document.isForCommercialUse!=undefined && (isDecisionOnContainedUseOfLMOs || isLmoDecisionForIntentionalIntroduction || isSimplifiedProcedure || isLmoDecisionForDirectUse)">
-		<legend>Information sharing with other databases</legend>
+		<legend>{{::('viewDecT.sharing'|$translate)}}</legend>
 		<div ng-if="document.isForCommercialUse!=undefined">
-			<label>Is this decision related to an LMO for commercial use?</label>
+			<label>{{::('viewDecT.isForCommercialUse'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 			</div>
 			<div ng-if="document.forwardToOECD!=undefined">
-				<label>Should this decision be forwarded to the OECD Secretariat for possible inclusion in the <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> BioTrack Product Database</a>?</label>
+				<label>{{::('viewDecT.isForCommercialUseInfo'|$translate)}} <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> {{::('viewDecT.isForCommercialUseLink'|$translate)}}</a>?</label>
 				<div  compare-val>
 					<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.isForFoodSafety!=undefined">
-				<label>Is this decision related to food safety?</label>
+				<label>{{::('viewDecT.foodSafety'|$translate)}}</label>
 				<div  compare-val>
 					<km-value-bool value="document.isForFoodSafety" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.codexConducted!=undefined">
-				<label>Was it conducted in accordance with the Codex Alimentarius <em>Guideline for the Conduct of Food Safety Assessment of Foods Derived from Recombinant-DNA Plants?</em></label>
+				<label>{{::('viewDecT.isForFoodSafety'|$translate)}} <em>{{::('viewDecT.guidelineSafety'|$translate)}}</em></label>
 				<div  compare-val>
 					<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.forwardToFAO!=undefined">
-				<label>Should this information be forwarded to the Secretariat of the <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>FAO GM Foods Platform</u></a>?</label>
+				<label>{{::('viewDecT.codexConducted'|$translate)}} <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>{{::('viewDecT.codexConductedLink'|$translate)}}</u></a>?</label>
 				<div compare-val>
 					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 				</div>
@@ -437,9 +437,9 @@
 <!--=============SECTION H start ========================-->
 
 	<div ng-if="document.modifiedOrganisms || document.riskAssessments">
-		<legend>LMO identification & risk assessment</legend>
+		<legend>{{::('viewDecT.LMOIdentification'|$translate)}}</legend>
 		<div ng-if="document.modifiedOrganisms">
-			<label>LMO identification</label>
+			<label>{{::('viewDecT.modifiedOrganisms'|$translate)}}</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.modifiedOrganisms">
@@ -450,7 +450,7 @@
 		</div>
 
 		<div ng-if="document.riskAssessments">
-			<label>Risk assessment</label>
+			<label>{{::('viewDecT.riskAssessments'|$translate)}}</label>
 			<div  class="km-value" compare-val="riskAssessments">
 				<ul class="list">
 					<li ng-repeat="item in document.riskAssessments">
@@ -465,7 +465,7 @@
 <!--=============SECTION I Start ========================-->
 
 	<div ng-if="document.documents">
-		<legend>Document on the decision, communication, notification or declaration</legend>
+		<legend>{{::('viewDecT.documentDecision'|$translate)}}</legend>
 		<div class="km-value" compare-val="documents">
 			<km-link-list  ng-model="document.documents"></km-link-list>
 			
@@ -475,7 +475,7 @@
 
 	<!--=============SECTION K START ========================-->
 	<div ng-if="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewDecT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-if="document.relevantInformation">
 				<div compare-val>
@@ -485,7 +485,7 @@
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewDecT.otherRelevantWebsite'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 					

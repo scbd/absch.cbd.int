@@ -4,13 +4,15 @@ import _ from 'lodash';
 import '../directives/breadcrumbs';
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
-import 'components/scbd-angularjs-controls/main'; ;
+import 'components/scbd-angularjs-controls/main';
+import bchHeaderT from '~/app-text/templates/bch/header.json';
 
-app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q','realm',  function (locale, $location, breadcrumbs, commonjs, $q, realm) {
+app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q','realm','translationService',  function (locale, $location, breadcrumbs, commonjs, $q, realm, translationService) {
     return {
         restrict: 'E',
         template: html,
         link: function($scope) {
+            translationService.set('bchHeaderT', bchHeaderT);
             $scope.locale = locale
             $scope.isABS = realm.is('ABS');
             $scope.isBCH = realm.is('BCH');

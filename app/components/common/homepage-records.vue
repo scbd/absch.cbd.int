@@ -1,6 +1,6 @@
 <template>
 <div class="home-page-records">
-  <h6 class="card-title ps-1">Recently published</h6>
+  <h6 class="card-title ps-1">{{ $t("recentlyPublished") }}</h6>
   <div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
   <div class="row row-cols-1 " v-bind:class="{ 'row-cols-md-1': rows == 4, 'row-cols-md-2': rows == 8}">
   <div class="d-block row-cols-1 row-cols-md-1 p-0">
@@ -39,7 +39,7 @@
   </div>
 
   <div class="text-end mt-2 card-down-margin">
-    <a class="nav-link fs-6 text-muted text-uppercase fw-bold cursor-pointer"  @click="seeMore()">See more 
+    <a class="nav-link fs-6 text-muted text-uppercase fw-bold cursor-pointer"  @click="seeMore()">{{ $t("seeMore") }} 
       <i class="bi bi-arrow-right-short fw-bolder fs-3 lh-1 align-bottom"></i> </a>
   </div>
 </div>
@@ -47,7 +47,7 @@
 
 <script>
     import ArticlesApi  from '../kb/article-api';
-	  import i18n from '../../locales/en/components/export.json';
+	  import i18n from '../../app-text/components/common/homepage-records.json';
     import "../kb/filters";
 
 	export default {

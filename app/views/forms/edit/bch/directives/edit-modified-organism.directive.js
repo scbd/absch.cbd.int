@@ -9,9 +9,10 @@ import "~/views/forms/view/bch/view-lmo.directive";
 import '~/views/forms/directives/traits-selector.directive';
 import '~/views/forms/directives/view-terms-hierarchy';
 import { uniqIdentifiers } from '~/services/common'
+import editModifiedOrganismT from '~/app-text/views/forms/edit/bch/directives/edit-modified-organism.json';
 
-	app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr', '$timeout',
-		 function($http, $controller, thesaurusService, storage, $q, realm, solr, $timeout) {
+app.directive("editModifiedOrganism", ["$http", "$controller", "thesaurusService", 'IStorage', '$q', 'realm', 'solr', '$timeout', 'translationService',
+	function ($http, $controller, thesaurusService, storage, $q, realm, solr, $timeout, translationService) {
 		
 		return {
 			restrict   : "EA",
@@ -22,6 +23,7 @@ import { uniqIdentifiers } from '~/services/common'
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
+				translationService.set('editModifiedOrganismT', editModifiedOrganismT);
 				var oldGenes = [];
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];

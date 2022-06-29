@@ -5,9 +5,10 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-biosafety-decision.directive";
+import editBiosafetyDecisionT from '~/app-text/views/forms/edit/bch/directives/edit-biosafety-decision.json';
 
-    app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm','$timeout',
-        function($controller, thesaurusService, $routeParams, solr, editFormUtility, realm, $timeout) {
+app.directive("editBiosafetyDecision", ["$controller", "thesaurusService", "$routeParams", "solr", 'editFormUtility', 'realm', '$timeout', 'translationService',
+    function ($controller, thesaurusService, $routeParams, solr, editFormUtility, realm, $timeout, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -17,7 +18,7 @@ import "~/views/forms/view/bch/view-biosafety-decision.directive";
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-                
+                translationService.set('editBiosafetyDecisionT', editBiosafetyDecisionT);  
 				$scope.container        = $attr.container;
     			$scope.isDialog         = $attr.isDialog;  
 				$scope.type 			= $attr.documentType; 

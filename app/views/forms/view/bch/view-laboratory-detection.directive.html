@@ -8,21 +8,21 @@
 	<div class="record-body panel-body">
 
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>{{::('viewLabDetectionT.generalInfo'|$translate)}}</legend>
 		<div ng-if="document.organization">
-			<legend>Laboratory name and coordinates</legend>
+			<legend>{{::('viewLabDetectionT.organization'|$translate)}}</legend>
 			<div class="km-value" compare-val>
 				<div view-record-reference ng-model="document.organization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.relatedOrganization">
-			<legend>Related Organization</legend>
+			<legend>{{::('viewLabDetectionT.relatedOrganization'|$translate)}}</legend>
 			<div class="km-value" compare-val>
 				<div view-record-reference ng-model="document.relatedOrganization" locale="locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.services">
-			<label>Services and activities performed</label>
+			<label>{{::('viewLabDetectionT.services'|$translate)}}</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.services" ng-bind="term|term"></li>
@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<div ng-if="document.agreements || document.agreementLinks">
-			<label>Collaborative agreements</label>
+			<label>{{::('viewLabDetectionT.collaborativeAgreements'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.agreements" locales="locale" html></km-value-ml>
 			</div>
@@ -43,20 +43,20 @@
 			</div>
 		</div>
 		<div ng-if="document.certifications">
-			<label>Accreditations and certifications of the laboratory</label>
+			<label>{{::('viewLabDetectionT.certifications'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.certifications" locales="locale" html></km-value-ml>
 			</div>
 		</div>
 		<div ng-if="document.detectionMethods">
-			<label>Types of detection/identification method(s) available for use in the laboratory</label>
+			<label>{{::('viewLabDetectionT.detectionMethods'|$translate)}}</label>
 			<div compare-val>
 				<view-terms-hierarchy class="km-value" ng-model="document.detectionMethods" locale="locale" term-domain="detectionMethods" on-terms-loaded="onDetectionTerms(terms)"></view-terms-hierarchy>
 			</div>		
 		</div>			
 
 		<div ng-if="document.lmoTypes">
-			<label>Types of LMOs</label>
+			<label>{{::('viewLabDetectionT.lmoTypes'|$translate)}}</label>
 			<div  class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.lmoTypes" ng-bind="term|term"></li>
@@ -65,7 +65,7 @@
 		</div>	
 
 		<div ng-if="document.detectableLmos">
-			<label>LMO(s) detectable by the laboratory</label>
+			<label>{{::('viewLabDetectionT.detectableLmos'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableLmos">
@@ -79,7 +79,7 @@
 		</div>
 
 		<div ng-if="document.detectableGenes">
-			<label>Genetic element(s) detectable by the laboratory</label>
+			<label>{{::('viewLabDetectionT.detectableGenes'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<table class="table table-stripped">
 					<tr ng-repeat="item in document.detectableGenes">
@@ -92,14 +92,14 @@
 		</div>
 
 		<div ng-if="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewLabDetectionT.additionalInformation'|$translate)}}</legend>
 
 			<div compare-val ng-if="document.relevantInformation">
 				<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewLabDetectionT.relevantDocuments'|$translate)}}</label>
 				<div compare-val>
 					<div class="km-value" ng-if="document.relevantDocuments" km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></div>		
 				</div>		

@@ -6,9 +6,10 @@ import 'views/forms/edit/edit';
 import 'views/forms/edit/document-selector';
 import '~/views/forms/edit/warning-message-cna';
 import '~/views/forms/view/view-authority.directive'; 
+import editAuthorityT from '~/app-text/views/forms/edit/directives/edit-authority.json';
  
-    const authorityController = ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr",'thesaurusService',
-        function($http, Thesaurus, $q, $controller, $location, realm, solr,thesaurusService) {
+const authorityController = ["$http", "Thesaurus", "$q", "$controller", "$location", "realm", "solr", 'thesaurusService', 'translationService',
+        function($http, Thesaurus, $q, $controller, $location, realm, solr, thesaurusService, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -18,7 +19,7 @@ import '~/views/forms/view/view-authority.directive';
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-                
+                translationService.set('editAuthorityT', editAuthorityT);
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;
@@ -54,7 +55,7 @@ import '~/views/forms/view/view-authority.directive';
 
                 //==================================
                 $scope.showResponsibleforAllMsg = function() {
-
+                    
                     //TODO: you need to gain access to the promise in order to do this correctly.a Otherwise the document won't be loaded when angular evaluated the ng-show.
                     if (!$scope.document || (!$scope.document.responsibleForAll || !$scope.validationReport))
                         return false;

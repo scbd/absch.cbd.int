@@ -1,12 +1,12 @@
 ﻿<div id="docketSideBar" class="container-full page-content">
     <div class="sidebar-header">
         <a class="closebtn" ng-click="closeLeftSideBar()">&times;</a>
-        <div class="sidenav-heading"><span ng-click="back();" ng-if="showArticle"><i class="fa fa-arrow-left"></i>&nbsp; &nbsp; Back</span><p ng-bind="type"></p>
+        <div class="sidenav-heading"><span ng-click="back();" ng-if="showArticle"><i class="fa fa-arrow-left"></i>&nbsp; &nbsp; {{::('dockedSideBarT.back'|$translate)}}</span><p ng-bind="type"></p>
         </div>
         <div class="search-field">
            <div class="form-group has-feedback has-search">
               <span class="bi bi-search form-control-feedback"></span>
-              <input type="search" class="form-control"  placeholder="Search..." class="form-control" ng-model="freeText" 
+              <input type="search" class="form-control"  placeholder="{{::('dockedSideBarT.search'|$translate)}}..." class="form-control" ng-model="freeText" 
                 ng-change="search(freeText);"
                 ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0, '*': 1000 } }"/>
            </div>
@@ -14,7 +14,7 @@
     </div>
     <div class="side-bar-widget">
         <div ng-if="loading" style="margin: 50%">
-            <i class="fa fa-spin fa-spinner fa-3x"></i> Loading...
+            <i class="fa fa-spin fa-spinner fa-3x"></i> {{::('dockedSideBarT.loading'|$translate)}}...
         </div>        
         <div  ng-if="!loading && (type=='announcements' || type=='help')">
             <div class="row" ng-if="!articleData" >
@@ -36,7 +36,7 @@
                 </div>
                 <div ng-if="!articles.length" class="easing">
                     <div class="card details-articles" >
-                        <h2 class="article-heading" >No help available.</h2>
+                        <h2 class="article-heading" >{{::('dockedSideBarT.noHelp'|$translate)}}</h2>
                     </div>
                 </div>
             </div>
@@ -66,10 +66,10 @@
 
     <div class="side-nav-bottom">
         <ul>
-            <li><a rel="noopener" href="https://bch.cbd.int/about/contact-us/">  Contact us</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/contact-us/">  {{::('dockedSideBarT.contactUs'|$translate)}}</a></li>
             <!-- <li><a rel="noopener" href="https://bch.cbd.int/resources/site-map/">Site Map</a></li> -->
-            <li><a rel="noopener" href="https://bch.cbd.int/about/link-policy/"> Linkages Policy</a></li>
-            <li><a rel="noopener" href="https://bch.cbd.int/about/disclaimer/">  Disclaimer </a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/link-policy/"> {{::('dockedSideBarT.linkagesPolicy'|$translate)}}</a></li>
+            <li><a rel="noopener" href="https://bch.cbd.int/about/disclaimer/">  {{::('dockedSideBarT.disclaimer'|$translate)}} </a></li>
         </ul>
     </div>
 </div>

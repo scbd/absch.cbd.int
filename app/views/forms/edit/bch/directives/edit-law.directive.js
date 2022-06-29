@@ -5,8 +5,10 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-biosafety-law.directive";
+import editLawT from '~/app-text/views/forms/edit/bch/directives/edit-law.json';
 
-	app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter","Enumerable", "realm", "solr", function($controller, thesaurusService, $q, $filter,Enumerable, realm, solr) {
+app.directive("editBiosafetyLaw", ["$controller", "thesaurusService", "$q", "$filter", "Enumerable", "realm", "solr", "translationService",
+	function ($controller, thesaurusService, $q, $filter, Enumerable, realm, solr, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -16,6 +18,7 @@ import "~/views/forms/view/bch/view-biosafety-law.directive";
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
+				translationService.set('editLawT', editLawT);
 				$scope.ctrl = $scope;
 				$scope.regionalMeasuresMapping = {
 					"eu"    : "bd12d7fb-91f7-4b2d-996c-e70f18a51f0e"

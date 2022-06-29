@@ -3,9 +3,7 @@
         <div class="container">
 
             <h1 class="lh-sm color-white mx-0 mx-md-3 pt-md-5 pb-md-2 pt-lg-5 pb-lg-2 fs-size-paragraph pt-2">
-                The Biosafety Clearing-House (BCH) is an online platform for exchanging information on Living Modified
-                Organisms (LMOs) and a key tool for facilitating the implementation of the Cartagena Protocol on
-                Biosafety.</h1>
+                {{::('bchHomeT.bchDescription'|$translate)}}</h1>
 
             <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
 
@@ -16,18 +14,18 @@
                                
                                 <i class="bi bi-lightbulb display-4 color-orange main-page-boxes-icons" alt="learn about bch"></i>
                                 <div class="ps-2">
-                                    <h2 class="fw-bold text-left mt-2 mb-2">Learn about the BCH</h2>
+                                    <h2 class="fw-bold text-left mt-2 mb-2">{{::('bchHomeT.aboutBch'|$translate)}}</h2>
                                     <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="kb">About the BCH</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://bch.cbd.int/protocol">About the Protocol</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/faqs">FAQs</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="kb">{{::('bchHomeT.aboutBch'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://bch.cbd.int/protocol">{{::('bchHomeT.aboutProtocol'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/faqs">{{::('bchHomeT.faq'|$translate)}}</a></li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                         <div class="rounded-0 card-footer link-card-footer text-muted p-0">
                             <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white py-0 d-flex justify-content-end align-items-center" rel="noopener" translation-url href="kb">
-                                <p class="m-0">Get Started</p>
+                                <p class="m-0">{{::('bchHomeT.getStarted'|$translate)}}</p>
                                 <i class="bi bi-arrow-right-short fw-bolder fs-3"></i> </a>
                         </div>
                     </div>
@@ -39,13 +37,13 @@
                             <div class="d-flex position-relative ">
                                 <i class="bi bi-search display-4 color-orange main-page-boxes-icons" alt="search bch"></i>
                                 <div  class="ps-2">
-                                    <h2 class="fw-bold text-left mt-2 mb-2">Search records</h2>
+                                    <h2 class="fw-bold text-left mt-2 mb-2">{{::('bchHomeT.searchRecords'|$translate)}}</h2>
 
                                     <ul>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?openTour">Take the Tour</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/finding-information/Searching-for-information-in-the-BCH/619c553a4f1f30000140eeb2">Help using the Search</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="registries">Registries: LMO-Organism-Gene</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?currentPage=1&tab=nationalRecords&group=government&group=schema&schema=cpbNationalReport4">Fourth National Reports</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?openTour">{{::('bchHomeT.takeTour'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/finding-information/Searching-for-information-in-the-BCH/619c553a4f1f30000140eeb2">{{::('bchHomeT.helpSearch'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="registries">{{::('bchHomeT.registries'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?currentPage=1&tab=nationalRecords&group=government&group=schema&schema=cpbNationalReport4">{{::('bchHomeT.fourthNR'|$translate)}}</a></li>
                                     </ul>
 
 
@@ -54,7 +52,7 @@
                         </div>
                         <div class="rounded-0 card-footer link-card-footer text-muted p-0">
                             <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white py-0 d-flex justify-content-end align-items-center" rel="noopener" translation-url href="search">
-                                <p class="m-0">Search </p>
+                                <p class="m-0">{{::('bchHomeT.search'|$translate)}} </p>
                                 <i class="bi bi-arrow-right-short fw-bolder fs-3"></i> </a>
                         </div>
                     </div>
@@ -67,12 +65,12 @@
                             <div class="d-flex position-relative ">
                                 <i class="bi bi-upload display-4 color-orange main-page-boxes-icons" alt="search bch"></i>
                                 <div class="ps-2">
-                                    <h2 class="fw-bold text-left mt-2 mb-2">Submit records</h2>
+                                    <h2 class="fw-bold text-left mt-2 mb-2">{{::('bchHomeT.submitRecords'|$translate)}}</h2>
                                     
                                     <ul>
-                                        <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="signin">Sign in</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="register?openTour">Take the Tour</a></li>
-                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/619c554858029700017ff45f">Help submitting records</a></li>
+                                        <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="signin">{{::('bchHomeT.signIn'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="register?openTour">{{::('bchHomeT.takeTour'|$translate)}}</a></li>
+                                        <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Step-by-step-guide-for-submitting-and-publishing-a-new-record-in-the-BCH/619c554858029700017ff45f">{{::('bchHomeT.helpRecords'|$translate)}}</a></li>
                                     </ul>
                                    
                                 </div>
@@ -80,7 +78,7 @@
                         </div>
                         <div class="rounded-0 card-footer link-card-footer text-muted p-0">
                             <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white py-0 d-flex justify-content-end align-items-center" rel="noopener" translation-url href="register">
-                                <p class="m-0">Submit</p>
+                                <p class="m-0">{{::('bchHomeT.submit'|$translate)}}</p>
                                 <i class="bi bi-arrow-right-short fw-bolder fs-3"></i> </a>
                         </div>
                     </div>
@@ -90,7 +88,7 @@
             </div>
             <div class="mt-2 mt-lg-5 p-2 text-center d-none d-lg-block">
                 <a class= "text-decoration-none cursor-pointer" ng-click="exploreMore();">
-                  <span class="rounded fs-3 py-2 px-4 color-white new-explore-btn">Explore the map <i class="bi bi-arrow-down-short fs-1 fw-bolder"></i></span>
+                  <span class="rounded fs-3 py-2 px-4 color-white new-explore-btn">{{::('bchHomeT.exploreMap'|$translate)}} <i class="bi bi-arrow-down-short fs-1 fw-bolder"></i></span>
                 </a>
             </div >
             
@@ -104,7 +102,7 @@
 
     <div class="">
         <div class="container">
-            <p class="fs-1 m-0 pt-md-4 mt-4 fw-bold">Announcements
+            <p class="fs-1 m-0 pt-md-4 mt-4 fw-bold">{{::('bchHomeT.announcements'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="announcementCounts">
@@ -112,14 +110,14 @@
             </div>
             <div class="text-end mt-4 card-down-margin">
                 <a rel="noopener" translation-url class="nav-link fs-6 text-muted fw-bold text-uppercase py-0 d-flex justify-content-end align-items-center" href="kb/tags/bch-announcement/">
-                    <p class="m-0">See more</p>
+                    <p class="m-0">{{::('bchHomeT.seeMore'|$translate)}}</p>
                     <i class="bi bi-arrow-right-short fw-bolder fs-3 lh-1"></i> </a>
             </div>
         </div>
     </div>
     <div class="home-page-record">
         <div class="container ">
-            <p class="fs-1 m-0 fw-bold">National records
+            <p class="fs-1 m-0 fw-bold">{{::('bchHomeT.nationalRecords'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="exportVueComponent">
@@ -129,7 +127,7 @@
     </div>
     <div class="home-page-record">
         <div class="container ">
-            <p class="fs-1 m-0 fw-bold">Reference records
+            <p class="fs-1 m-0 fw-bold">{{::('bchHomeT.referenceRecords'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="exportVueComponent">

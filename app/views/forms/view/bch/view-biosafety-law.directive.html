@@ -13,15 +13,15 @@
 
 
 		<div ng-if="document.isAmendment!= undefined || amendedByRecords">
-			<legend>Amendment</legend>
+			<legend>{{::('viewBiosafetyLawT.amendment'|$translate)}}</legend>
 			<div ng-if="document.isAmendment!=undefined">
-				<label>Is this an amendment to a law, regulation, guideline or agreement already published on the BCH?</label>
+				<label>{{::('viewBiosafetyLawT.isAmendment'|$translate)}}</label>
 				<div compare-val>
 					<km-value-bool value="document.isAmendment" locales="locale"></km-value-bool>
 				</div>
 			</div>
 			<div ng-if="document.amendedRecords">
-				<label>Law(s)/regulation(s) amended</label>
+				<label>{{::('viewBiosafetyLawT.amendedRecords'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.amendedRecords">
@@ -31,13 +31,13 @@
 				</div>
 			</div>
 			<div ng-if="document.amendmentsDetails">
-				<label>Brief summary of the amendment(s)</label>
+				<label>{{::('viewBiosafetyLawT.amendmentsDetails'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.amendmentsDetails" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="amendedByRecords">
-				<label>The law/regulation in this record has been amended by the law(s)/regulation(s) in the following record(s)</label>
+				<label>{{::('viewBiosafetyLawT.amendedByRecords'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<div ng-repeat="referenced in amendedByRecords">
 						<view-record-reference ng-model="referenced"></view-record-reference>
@@ -46,32 +46,32 @@
 			</div>
 		</div>
 
-		<legend>General information</legend>
+		<legend>{{::('viewBiosafetyLawT.generalInfo'|$translate)}}</legend>
 
 		<div ng-if="document.government">
-			<label name="country">Country submitting a law, regulation, guideline or agreement</label>
+			<label name="country">{{::('viewBiosafetyLawT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
 		<div ng-if="document.title">
-			<label>Title</label>			
+			<label>{{::('viewBiosafetyLawT.title'|$translate)}}</label>			
 			<div compare-val>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
-		<legend>Legislative details</legend>
+		<legend>{{::('viewBiosafetyLawT.legislativeDetails'|$translate)}}</legend>
 		<div>
 			<div ng-if="document.type">
-				<label>Type of Law / Regulation</label>
+				<label>{{::('viewBiosafetyLawT.typeRegulation'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-if="item.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type|term:locale"></span>
 					<span ng-if="item.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.type.customValue|lstring:locale"></span>
 				</div>
 			</div>
 			<div ng-if="document.jurisdiction">
-				<label>Area of jurisdiction</label>
+				<label>{{::('viewBiosafetyLawT.jurisdiction'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-if="document.jurisdiction.identifier!='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction|term:locale"></span>
 					<span ng-if="document.jurisdiction.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" ng-bind="document.jurisdiction.customValue|lstring:locale"></span>
@@ -79,7 +79,7 @@
 			</div>
 
 			<div ng-if="document.jurisdictionScope">
-				<label>Geographical or political/economic group(s)</label>	
+				<label>{{::('viewBiosafetyLawT.jurisdictionScope'|$translate)}}</label>	
 				<div class="km-value" compare-val>
 					<ul ng-if="document.jurisdictionScope" class="list">
 						<li ng-repeat="item in document.jurisdictionScope">
@@ -90,26 +90,26 @@
 			</div>
 
 			<div ng-if="document.cpbSubjectAreas">
-				<label>Subject areas</label>
+				<label>{{::('viewBiosafetyLawT.cpbSubjectAreas'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<view-terms-hierarchy  ng-model="document.cpbSubjectAreas" locale="locale" term-domain="subjectAreas" on-terms-loaded="onSubjectAreasTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 			<div ng-if="document.cpbOrganismTypes">
-				<label>Types of organisms addressed</label>
+				<label>{{::('viewBiosafetyLawT.typesOrganismsAddressed'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<view-terms-hierarchy ng-model="document.cpbOrganismTypes" locale="locale" term-domain="typeOfOrganisms" on-terms-loaded="onOrganismTypesTerms(terms)"></view-terms-hierarchy>
 				</div>
 			</div>
 
 			<div ng-if="document.description">
-				<label>Brief description of the document including objective and scope</label>
+				<label>{{::('viewBiosafetyLawT.description'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.description" html locales="locale"></km-value-ml>
 				</div>
 			</div>
 			<div ng-if="document.entryIntoForce">
-				<label>Date of entry into force</label>
+				<label>{{::('viewBiosafetyLawT.entryIntoForce'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.entryIntoForce|formatDate"></span>
 				</div>
@@ -118,16 +118,16 @@
 
 
 		<div ng-if="document.documents || document.unofficialDocuments || document.documentsInfo">
-			<legend>Document details</legend>
+			<legend>{{::('viewBiosafetyLawT.documentDetails'|$translate)}}</legend>
 			<div ng-if="document.documents">
-				<label>Document text</label>
+				<label>{{::('viewBiosafetyLawT.documentText'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<km-link-list  ng-model="document.documents"></km-link-list>
 				</div>
 			</div>
 
 			<div ng-if="document.unofficialDocuments">
-				<label>Unofficial Documents</label>
+				<label>{{::('viewBiosafetyLawT.unofficialDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<km-link-list  ng-model="document.unofficialDocuments"></km-link-list>
 				</div>			
@@ -138,9 +138,9 @@
 		</div>
 
 		<div ng-if="document.relatedRecords || document.relationDetails">
-			<legend>Relationship with other laws/regulations</legend>
+			<legend>{{::('viewBiosafetyLawT.relatedRecords'|$translate)}}</legend>
 			<div ng-if="document.relatedRecords">
-				<label>Record(s) containing the related measure(s)</label>
+				<label>{{::('viewBiosafetyLawT.relatedMeasure'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.relatedRecords">
@@ -150,7 +150,7 @@
 				</div>
 			</div>
 			<div ng-if="document.relationDetails">
-				<label>Description of the relationship between the measures</label>
+				<label>{{::('viewBiosafetyLawT.relationDetails'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.relationDetails" html locales="locale"></km-value-ml>
 				</div>
@@ -159,8 +159,8 @@
 
 
 		<div ng-if="document.authorities">
-			<legend>Regulatory contact information</legend>
-			<label>Competent National Authority(ies) and/or Supplementary Protocol Competent Authority(ies)</label>
+			<legend>{{::('viewBiosafetyLawT.regulatoryInformation'|$translate)}}</legend>
+			<label>{{::('viewBiosafetyLawT.authorities'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.authorities" >						
@@ -171,14 +171,14 @@
 		</div>
 
 		<div ng-if="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewBiosafetyLawT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-if="document.relevantInformation">
 				<div class="km-value" compare-val ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-if="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewBiosafetyLawT.relevantDocuments'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 					</div>

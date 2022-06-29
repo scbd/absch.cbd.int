@@ -2,12 +2,12 @@
 
     <div ng-if="currentCountry.code">
         <div class="mt-3 p-2 color-white text-start" ng-class="{'bg-party': currentCountry.isParty, 'country-bg-nonparty':!currentCountry.isParty, 'bg-inbetween': currentCountry.isInbetweenParty}">
-            <span class="fw-bold" ng-if="currentCountry.isParty">Party to the Cartagena Protocol</span>
-            <span class="fw-bold" ng-if="currentCountry.isInbetweenParty">Ratified, not yet Party</span>
-            <span class="fw-bold" ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty">Not a Party to the Cartagena Protocol</span>
+            <span class="fw-bold" ng-if="currentCountry.isParty">{{::('homepinPopupBchTranslation.partyToCartagenaProtocol'|$translate)}}</span>
+            <span class="fw-bold" ng-if="currentCountry.isInbetweenParty">{{::('homepinPopupBchTranslation.ratifiedNotYetParty'|$translate)}}</span>
+            <span class="fw-bold" ng-if="!currentCountry.isParty && !currentCountry.isInbetweenParty">{{::('homepinPopupBchTranslation.notPartyToCartagenaProtocol'|$translate)}}</span>
         </div>
         <div ng-if="currentCountry.isNKLSParty" class="mt-1 p-2 color-white text-start bg-NKLSParty">
-            <span class="fw-bold party-counts">Party to the Supplementary Protocol</span>
+            <span class="fw-bold party-counts">{{::('homepinPopupBchTranslation.partyToSuppProtocol'|$translate)}}</span>
         </div>
 
         <span class="mt-2" ng-if="countryMapScope.currentCountry.exceptionCountry=='dk'||countryMapScope.currentCountry.code.toLowerCase()=='dk'||
@@ -15,22 +15,21 @@
                 countryMapScope.currentCountry.exceptionCountry=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb'">
            
                 <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='dk')">
-                    Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.
+                    {{::('homepinPopupBchTranslation.dkText'|$translate)}}
                 </div>
                 <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'"  >
-                    A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern
-                    Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+                    {{::('homepinPopupBchTranslation.fkText'|$translate)}}
                 </div>
                 <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'" >
-                    Non-Self Governing Territory.
+                    {{::('homepinPopupBchTranslation.ehText'|$translate)}}
                 </div>
                 <div ng-if="(countryMapScope.currentCountry.code.toLowerCase()=='gb')" >
-                    The UK’s ratification of the Cartagena Protocol does not extend to the
+                    {{::('homepinPopupBchTranslation.gbText'|$translate)}}
                     <a rel="noopener" ng-href="#"  class="text-muted gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">13 Overseas Territories </a>
-                    or
+                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="{{::('homepinPopupBchTranslation.gbTitle13'|$translate)}}"> {{::('homepinPopupBchTranslation.overseasTerritories'|$translate)}}</a>
+                    {{::('homepinPopupBchTranslation.or'|$translate)}}
                     <a rel="noopener" ng-href="#" class="text-muted gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                        data-bs-toggle="tooltip" data-placement="left" title=" {{::('homepinPopupBchTranslation.gbTitle3'|$translate)}}">  {{::('homepinPopupBchTranslation.crownDependencies'|$translate)}}</a>
                 </div>
             </span>
       </div>

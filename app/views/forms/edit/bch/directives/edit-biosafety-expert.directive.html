@@ -15,13 +15,13 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <ul class="pagination page-tabs nav nav-tabs" id="expertTabs" ng-click="setTab($event)">
-                                <li class="active nav-item"><a class="nav-link" translation-url href="#part1" data-bs-toggle="tab">Part I</a></li>
-                                <li class="nav-item"><a class="nav-link" translation-url href="#part2" data-bs-toggle="tab">Part II</a></li>
-                                <li class="nav-item"><a class="nav-link" translation-url href="#part3" data-bs-toggle="tab">Part III</a></li>
-                                <li  class="nav-item"><a class="nav-link" translation-url href="#part4" data-bs-toggle="tab">Part IV</a></li>
-                                <li  class="nav-item"><a class="nav-link" translation-url href="#part5" data-bs-toggle="tab">Part V</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part6" data-bs-toggle="tab">Part VI</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part7" data-bs-toggle="tab">Part VII</a></li>
+                                <li class="active nav-item"><a class="nav-link" translation-url href="#part1" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part1'|$translate)}}</a></li>
+                                <li class="nav-item"><a class="nav-link" translation-url href="#part2" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part2'|$translate)}}</a></li>
+                                <li class="nav-item"><a class="nav-link" translation-url href="#part3" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part3'|$translate)}}</a></li>
+                                <li  class="nav-item"><a class="nav-link" translation-url href="#part4" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part4'|$translate)}}</a></li>
+                                <li  class="nav-item"><a class="nav-link" translation-url href="#part5" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part5'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part6" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part6'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part7" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part7'|$translate)}}</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,10 +33,10 @@
 
                                         <section>
                                             <div class="no-shadow bg-white">
-                                                <legend>General information</legend>
+                                                <legend>{{::('editBiosafetyExpertT.generalInfo'|$translate)}}</legend>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                                        <div class="km-control-group" name="header.languages" required caption="{{::('editBiosafetyExpertT.languageToPublish'|$translate)}}">
                                                             <div class="indent">
                                                                 <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                             </div>
@@ -45,9 +45,9 @@
 												</div>  
 												<div class="row">
 													<div class="col-sm-12">
-														<div class="km-control-group" name="government" required caption="Country">
+														<div class="km-control-group" name="government" required caption="{{::('editBiosafetyExpertT.country'|$translate)}}">
 															<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editBiosafetyExpertT.selectOption'|$translate)}}"></div>
 														</div>
 													</div>
 												</div>
@@ -58,11 +58,11 @@
                                     <div class="tab-pane" id="part2">
 
 										<div class="no-shadow bg-white">
-											<legend>Profile of the expert</legend>
+											<legend>{{::('editBiosafetyExpertT.ProfileExpert'|$translate)}}</legend>
 											<div class="row">
 												<div class="col-sm-12">
-													<div class="km-control-group" required name="profile" caption="Brief profile">
-														<div class="help-block">Briefly describe the relevant experience of the expert (150 words).</div>
+													<div class="km-control-group" required name="profile" caption="{{::('editBiosafetyExpertT.briefProfile'|$translate)}}">
+														<div class="help-block">{{::('editBiosafetyExpertT.briefProfileInfo'|$translate)}}</div>
 														<div km-rich-textbox name="profile" required ng-model="document.profile" locales="document.header.languages"></div>
 													</div>
 												</div>
@@ -70,7 +70,7 @@
 											<div class="row">
 				
 												<div class="col-xs-12">
-													<div class="km-control-group" required name="contact" caption="Contact details">
+													<div class="km-control-group" required name="contact" caption="{{::('editBiosafetyExpertT.contactDetails'|$translate)}}">
 														<div document-selector required type="radio" ng-model="document.contact" allow-new="true" allow-new-schema="contact"
 															question="contact"
 															on-build-query="onContactQuery(searchText)"
@@ -84,19 +84,19 @@
 											<div class="row">
 
 												<div class="col-md-2">
-													<div class="km-control-group" name="birthYear" caption="Year of birth">
+													<div class="km-control-group" name="birthYear" caption="{{::('editBiosafetyExpertT.birthYear'|$translate)}}">
 														<input type="number" class="form-control" name="birthYear" ng-model="document.birthYear" min="1950" />
 													</div>
 												</div>
 
 												<div class="col-md-2">
-													<div class="km-control-group country-list" name="birthCountry" caption="Country of birth">
+													<div class="km-control-group country-list" name="birthCountry" caption="{{::('editBiosafetyExpertT.birthCountry'|$translate)}}">
 														<div km-select name="birthCountry" ng-model="document.birthCountry" 
 														items="options.countries()" filter-type="startsWith"></div>
 													</div>
 												</div>
 												<div class="col-md-8">
-													<div class="km-control-group country-list" name="nationalities"  caption="Nationality(ies)">
+													<div class="km-control-group country-list" name="nationalities"  caption="{{::('editBiosafetyExpertT.nationalities'|$translate)}}">
 														<div km-select multiple name="nationalities" ng-model="document.nationalities" 
 														filter-type="startsWith" items="options.nationalities()"></div>
 													</div>
@@ -109,11 +109,11 @@
 										
                                         <section>
                                             <div class="no-shadow bg-white">
-                                                <legend>Details of current employment</legend>
+                                                <legend>{{::('editBiosafetyExpertT.detailsEmployment'|$translate)}}</legend>
                                                 <div class="row">
 		
 														<div class="col-xs-12">
-															<div class="km-control-group" required name="currentEmployment.name" caption="Name of Employer / Organization / Company">
+															<div class="km-control-group" required name="currentEmployment.name" caption="{{::('editBiosafetyExpertT.currentEmployment'|$translate)}}">
 																<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
 																	placeholder="example: University of Montreal" pause="400" 
 																	on-search="onSearchOrganizations(text, locale)" 
@@ -123,12 +123,12 @@
 													</div>
 													<div class="row">
 														<div class="col-md-6">
-															<div class="km-control-group" required name="currentEmployment.title" caption="Job title">
+															<div class="km-control-group" required name="currentEmployment.title" caption="{{::('editBiosafetyExpertT.jobTitle'|$translate)}}">
 																<div km-textbox-ml required name="currentEmployment.title" ng-model="document.currentEmployment.title"locales="document.header.languages"></div>
 															</div>
 														</div>
 														<div class="col-md-6">
-															<div class="km-control-group" required name="currentEmployment.department" caption="Department / Division / Unit">
+															<div class="km-control-group" required name="currentEmployment.department" caption="{{::('editBiosafetyExpertT.department'|$translate)}}">
 																<div km-textbox-ml required name="currentEmployment.department" ng-model="document.currentEmployment.department"locales="document.header.languages"></div>
 															</div>
 														</div>
@@ -136,20 +136,20 @@
 		
 												<div class="row">
 													<div class="col-md-6">
-														<div class="km-control-group" required name="currentEmployment.startDate" caption="Start date"
-														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+														<div class="km-control-group" required name="currentEmployment.startDate" caption="{{::('editBiosafetyExpertT.startDate'|$translate)}}"
+														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 															<div km-date placeholder="YYYY-MM" name="currentEmployment.startDate" required 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.currentEmployment.startDate"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group organization-dropdown" required name="currentEmployment.organizationType" caption="Type of organization">
+														<div class="km-control-group organization-dropdown" required name="currentEmployment.organizationType" caption="{{::('editBiosafetyExpertT.organizationType'|$translate)}}">
 															<div km-select name="currentEmployment.organizationType" required ng-model="document.currentEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 															<div ng-if="document.currentEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'" class="pt-1">
-																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="Other type of organization">
-																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
+																<div class="km-control-group" required name="currentEmployment.organizationTypeOther" caption="{{::('editBiosafetyExpertT.organizationTypeOther'|$translate)}}">
+																	<div km-textbox-ml name="organizationTypeName" ng-model="document.currentEmployment.organizationType.customValue" placeholder="{{::('editBiosafetyExpertT.SCBD'|$translate)}}" locales="document.header.languages"></div>
 																</div>
 																
 															</div>
@@ -159,9 +159,9 @@
 						
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" required name="currentEmployment.responsibilities" caption="Main Areas of Responsibility">
+														<div class="km-control-group" required name="currentEmployment.responsibilities" caption="{{::('editBiosafetyExpertT.responsibilities'|$translate)}}">
 															<div class="help-block">
-																Briefly describe how your work relates to biosafety and the area(s) of expertise for which you are being nominated.
+																{{::('editBiosafetyExpertT.responsibilitiesInfo'|$translate)}}
 															</div>
 															<div km-rich-textbox name="currentEmployment.responsibilities" ng-model="document.currentEmployment.responsibilities" rows="2" locales="document.header.languages"></div>
 														</div>
@@ -172,40 +172,40 @@
 										
 										<section>
                                             <div class="no-shadow bg-white">
-												<legend>Employment history</legend>
+												<legend>{{::('editBiosafetyExpertT.employmentHistory'|$translate)}}</legend>
 												<div class="help-block">
-													Please give details of relevant previous employment.
+													{{::('editBiosafetyExpertT.previousEmployment'|$translate)}}
 												</div>
 												
                                                 <div class="row">
 													<div class="col-xs-12">
-														<label>Countries or regions where you have worked</label>
+														<label>{{::('editBiosafetyExpertT.countriesWorked'|$translate)}}</label>
 													</div>
 	
 													<div class="col-md-5 mt-1">
 														
-														<div class="km-control-group small country-list countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="Countries">
+														<div class="km-control-group small country-list countries-dropdown"  name="countryRegionsWorkedIn.countries" caption="{{::('editBiosafetyExpertT.countries'|$translate)}}">
 															<div km-select multiple name="countryRegionsWorkedIn.countries" 
-															ng-model="countryRegionsWorkedIn.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+															ng-model="countryRegionsWorkedIn.countries" placeholder="{{::('editBiosafetyExpertT.selectPptions'|$translate)}}" items="options.countries()"></div>
 														</div>
 													</div>
-													<div class="col-md-1 small">and/or</div>
+													<div class="col-md-1 small">{{::('editBiosafetyExpertT.andOr'|$translate)}}</div>
 
 													 <div class="col-md-6">
-														<div class="km-control-group small regions-list"  name="countryRegionsWorkedIn.regions" caption="Geographical or political/economic group(s)">
+														<div class="km-control-group small regions-list"  name="countryRegionsWorkedIn.regions" caption="{{::('editBiosafetyExpertT.regions'|$translate)}}">
 															<div km-select multiple name="countryRegionsWorkedIn.regions"
-																 ng-model="countryRegionsWorkedIn.regions" placeholder="Please select option(s)"
+																 ng-model="countryRegionsWorkedIn.regions" placeholder="{{::('editBiosafetyExpertT.selectPptions'|$translate)}}"
 																 items="options.regions()"></div>
 														</div>
 													</div>
 													
 													<div class="col-xs-12">
 														<div class="help-block">
-															Most recent previous professional experience<hr/>
+															{{::('editBiosafetyExpertT.professionalExperience'|$translate)}}<hr/>
 														</div>
 													</div>
 													<div class="col-xs-6">
-														<div class="km-control-group" name="previousEmployment.name" caption="Name of Previous Employer / Organization / Company">
+														<div class="km-control-group" name="previousEmployment.name" caption="{{::('editBiosafetyExpertT.nameOfPreviousEmployer'|$translate)}}">
 															<div km-textbox-ac name="previousEmployment.name" ng-model="document.previousEmployment.name" locales="document.header.languages"
 															placeholder="example: University of Montreal" pause="400" 
 															on-search="onSearchOrganizations(text, locale)" 
@@ -214,7 +214,7 @@
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.department" caption="Department / Division / Unit">
+														<div class="km-control-group" name="previousEmployment.department" caption="{{::('editBiosafetyExpertT.department'|$translate)}}">
 															<div km-textbox-ml name="previousEmployment.department" ng-model="document.previousEmployment.department" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -222,16 +222,16 @@
 												
 												<div class="row">
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.startDate" caption="Start date"
-														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+														<div class="km-control-group" name="previousEmployment.startDate" caption="{{::('editBiosafetyExpertT.startDate'|$translate)}}"
+														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 															<div km-date placeholder="YYYY-MM" name="previousEmployment.startDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.startDate"></div>
 														</div>
 													</div>
 													<div class="col-md-6">
-														<div class="km-control-group" name="previousEmployment.endDate" caption="End date"
-														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+														<div class="km-control-group" name="previousEmployment.endDate" caption="{{::('editBiosafetyExpertT.endDate'|$translate)}}"
+														help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 															<div km-date placeholder="YYYY-MM" name="previousEmployment.endDate" 
 															format="yyyy-mm" start-view="months" min-view-mode="months"
 															ng-model="document.previousEmployment.endDate"></div>
@@ -241,13 +241,13 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group organization-dropdown" name="previousEmployment.organizationType" caption="Type of organization">
+														<div class="km-control-group organization-dropdown" name="previousEmployment.organizationType" caption="{{::('editBiosafetyExpertT.organizationType'|$translate)}}">
 															<div km-select name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType"
 																items="options.organizationTypes()"></div>
 														</div>
 														<div  ng-show="document.previousEmployment.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-															<div class="km-control-group organization-dropdown" name="previousEmployment.organizationTypeOther" caption="Other type of organization">
-																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
+															<div class="km-control-group organization-dropdown" name="previousEmployment.organizationTypeOther" caption="{{::('editBiosafetyExpertT.organizationTypeOther'|$translate)}}">
+																<div km-textbox-ml name="previousEmployment.organizationType" ng-model="document.previousEmployment.organizationType.customValue" placeholder="{{::('editBiosafetyExpertT.SCBD'|$translate)}}" locales="document.header.languages"></div>
 															</div>
 														</div>
 													</div>
@@ -255,8 +255,8 @@
 			
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="previousEmployment.responsibilities" caption="Main Areas of Responsibility">
-															<div class="help-block">Briefly describe how your work relates to biosafety and the area(s) of expertise for which you are being nominated.</div>
+														<div class="km-control-group" name="previousEmployment.responsibilities" caption="{{::('editBiosafetyExpertT.responsibilities'|$translate)}}">
+															<div class="help-block">{{::('editBiosafetyExpertT.responsibilitiesInfo'|$translate)}}</div>
 															<div km-rich-textbox name="previousEmployment.responsibilities" ng-model="document.previousEmployment.responsibilities" rows="2" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -269,22 +269,22 @@
     
                                         <section>
                                             <div class="no-shadow bg-white">
-                                                <legend>Post-secondary education</legend>
+                                                <legend>{{::('editBiosafetyExpertT.postEducation'|$translate)}}</legend>
 
 												<section>
 													<div class="no-shadow bg-white">
-														<legend><h3>A.	Formal education</h3></legend>
+														<legend><h3>{{::('editBiosafetyExpertT.a'|$translate)}}.    {{::('editBiosafetyExpertT.formalEducation'|$translate)}}</h3></legend>
 														<div class="panel panel-default" name="primaryEducation">
-															<div class="panel-heading pb-1">First Degree (e.g. B.Sc. in Microbiology)</div>
+															<div class="panel-heading pb-1">{{::('editBiosafetyExpertT.firstDegree'|$translate)}}</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.title" caption="Title of the Degree or other academic distinction and subject">
-																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="example: B.Sc. in Microbiology" locales="document.header.languages"></div>
+																		<div class="km-control-group" required name="primaryEducation.title" caption="{{::('editBiosafetyExpertT.titleDegree'|$translate)}}">
+																			<div km-textbox-ml name="primaryEducation.title" required ng-model="document.primaryEducation.title"  placeholder="{{::('editBiosafetyExpertT.microbiology'|$translate)}}" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.institution" caption="Name of academic institution">
+																		<div class="km-control-group" required name="primaryEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
 																			<div km-textbox-ac name="primaryEducation.institution" required ng-model="document.primaryEducation.institution"  
 																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
 																			on-search="onSearchOrganizations(text, locale)" 
@@ -296,16 +296,16 @@
 																
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.startDate" caption="Start date"
-																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																		<div class="km-control-group" required name="primaryEducation.startDate" caption="{{::('editBiosafetyExpertT.startDate'|$translate)}}"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 																			<div km-date placeholder="YYYY-MM" name="primaryEducation.startDate" required 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			ng-model="document.primaryEducation.startDate"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.endDate" caption="End date"
-																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																		<div class="km-control-group" required name="primaryEducation.endDate" caption="{{::('editBiosafetyExpertT.endDate'|$translate)}}"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 																			<div km-date placeholder="YYYY-MM" name="primaryEducation.endDate" required 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			ng-model="document.primaryEducation.endDate"></div>
@@ -316,16 +316,16 @@
 														</div>
 														<br/>
 														<div class="panel panel-default">
-															<div class="panel-heading pb-1">Second Degree (e.g. M.Sc. in Microbiology)</div>
+															<div class="panel-heading pb-1">{{::('editBiosafetyExpertT.secondDegree'|$translate)}}</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.title" caption="Title of the Degree or other academic distinction and subject">
-																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="example: B.Sc. in Microbiology" locales="document.header.languages"></div>
+																		<div class="km-control-group"  name="secondaryEducation.title" caption="{{::('editBiosafetyExpertT.titleDegree'|$translate)}}">
+																			<div km-textbox-ml name="secondaryEducation.title"  ng-model="document.secondaryEducation.title"  placeholder="{{::('editBiosafetyExpertT.microbiology'|$translate)}}" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.institution" caption="Name of academic institution">
+																		<div class="km-control-group"  name="secondaryEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
 																			<div km-textbox-ac name="secondaryEducation.institution"  ng-model="document.secondaryEducation.institution"  
 																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
 																			on-search="onSearchOrganizations(text, locale)" 
@@ -337,16 +337,16 @@
 																
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.startDate" caption="Start date"
-																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																		<div class="km-control-group"  name="secondaryEducation.startDate" caption="{{::('editBiosafetyExpertT.startDate'|$translate)}}"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 																			<div km-date placeholder="YYYY-MM" name="secondaryEducation.startDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			 ng-model="document.secondaryEducation.startDate"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.endDate" caption="End date"
-																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																		<div class="km-control-group"  name="secondaryEducation.endDate" caption="{{::('editBiosafetyExpertT.endDate'|$translate)}}"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 																			<div km-date placeholder="YYYY-MM" name="secondaryEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			 ng-model="document.secondaryEducation.endDate"></div>
@@ -357,16 +357,16 @@
 														</div>
 														<br/>
 														<div class="panel panel-default">
-															<div class="panel-heading pb-1">Third Degree (e.g. Ph.D. in Microbiology)</div>
+															<div class="panel-heading pb-1">{{::('editBiosafetyExpertT.thirdDegree'|$translate)}}</div>
 															<div class="panel-body">
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.title" caption="Title of the Degree or other academic distinction and subject">
-																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="example: B.Sc. in Microbiology" locales="document.header.languages"></div>
+																		<div class="km-control-group"  name="thirdEducation.title" caption="{{::('editBiosafetyExpertT.titleDegree'|$translate)}}">
+																			<div km-textbox-ml name="thirdEducation.title"  ng-model="document.thirdEducation.title"  placeholder="{{::('editBiosafetyExpertT.microbiology'|$translate)}}" locales="document.header.languages"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.institution" caption="Name of academic institution">
+																		<div class="km-control-group"  name="thirdEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
 																			<div km-textbox-ac name="thirdEducation.institution"  ng-model="document.thirdEducation.institution" 
 																			 placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
 																			 on-search="onSearchOrganizations(text, locale)" 
@@ -378,16 +378,16 @@
 																
 																<div class="row">
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.startDate" caption="Start date"
-																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																		<div class="km-control-group"  name="thirdEducation.startDate" caption="{{::('editBiosafetyExpertT.startDate'|$translate)}}"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 																			<div km-date placeholder="YYYY-MM" name="thirdEducation.startDate"  
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			ng-model="document.thirdEducation.startDate"></div>
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.endDate" caption="End date"
-																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: Biosafety Expert">
+																		<div class="km-control-group"  name="thirdEducation.endDate" caption="{{::('editBiosafetyExpertT.endDate'|$translate)}}"
+																		help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="{{::('editBiosafetyExpertT.helpBiosafetyExpert'|$translate)}}">
 																			<div km-date placeholder="YYYY-MM" name="thirdEducation.endDate" 
 																			format="yyyy-mm" start-view="months" min-view-mode="months"
 																			 ng-model="document.thirdEducation.endDate"></div>
@@ -400,11 +400,11 @@
 												</section>
 												<section>
 													<div class="no-shadow bg-white">
-														<legend>B. Other professional qualifications</legend>
+														<legend>{{::('editBiosafetyExpertT.otherQualifications'|$translate)}}</legend>
 														<div class="row">
 															<div class="col-md-12">
-																<div class="km-control-group" name="professionalQualification" caption="List a maximum of three other relevant professional qualifications.">
-																	<div class="help-block">(e.g. specialized training, certifications obtained, etc.)</div>
+																<div class="km-control-group" name="professionalQualification" caption="{{::('editBiosafetyExpertT.professionalQualification'|$translate)}}">
+																	<div class="help-block">{{::('editBiosafetyExpertT.professionalQualificationInfo'|$translate)}}</div>
 																	<div  km-inputtext-list max-entries="3" type="lstring" name="professionalQualification" ng-model="document.professionalQualification" locales="document.header.languages"></div>
 																</div>
 															</div>
@@ -418,13 +418,13 @@
     
                                         <section>
                                             <div class="no-shadow bg-white">
-                                                <legend>Areas of expertise</legend>
+                                                <legend>{{::('editBiosafetyExpertT.areasOfExpertise'|$translate)}}</legend>
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="expertise" required caption="Expertise">
+														<div class="km-control-group" name="expertise" required caption="{{::('editBiosafetyExpertT.expertise'|$translate)}}">
 															<div class="help-block">
-																Please select one or more areas of academic and professional expertise that most closely match the experience of the nominee. 
+																{{::('editBiosafetyExpertT.expertiseInfo'|$translate)}}
 															</div>
 															<div km-term-check required ng-model="document.expertise" locales="document.header.languages"
 																terms="options.areaOfExpertise" show-other="true" binding-type="term[]"></div>
@@ -436,12 +436,12 @@
 										
 										<section>
                                             <div class="no-shadow bg-white">
-                                                <legend>Publications</legend>
+                                                <legend>{{::('editBiosafetyExpertT.publications'|$translate)}}</legend>
 
 												<div class="row">
 													<div class="col-md-12">
 														<div class="km-control-group" name="relevantPublication" caption="">
-															<div class="help-block">List your three most important publications related to your main field of expertise.</div>
+															<div class="help-block">{{::('editBiosafetyExpertT.relevantPublicationInfo'|$translate)}}</div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="relevantPublication" ng-model="document.relevantPublication" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -451,19 +451,20 @@
 										
 										<section>
                                             <div class="no-shadow bg-white">
-                                                <legend>Professional memberships </legend>
+                                                <legend>{{::('editBiosafetyExpertT.professionalMemberships'|$translate)}} </legend>
 												<div class="row">
 													<div class="col-md-12">
 														<div class="km-control-group" name="professionalMemberships" caption="Professional memberships">
-															<div class="help-block">List <u>up to three</u> relevant professional societies or organizations of which you are a member.</div>
+															<div class="help-block">{{::('editBiosafetyExpertT.list'|$translate)}} <u>{{::('editBiosafetyExpertT.upToThree'|$translate)}}</u> {{::('editBiosafetyExpertT.relevantProfessionalSocieties'|$translate)}}</div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="professionalMemberships" ng-model="document.professionalMemberships" locales="document.header.languages"></div>
 														</div>
 													</div>
 												</div>
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="panelServed" caption="Technical committees, expert panels or advisory bodies served">
-															<div class="help-block">List <u>up to three</u> relevant technical committees, expert panels or advisory bodies on which you have served and briefly describe your specific responsibilities.</div>
+														<div class="km-control-group" name="panelServed" caption="{{::('editBiosafetyExpertT.panelServed'|$translate)}}">
+															<div class="help-block">{{::('editBiosafetyExpertT.list'|$translate)}} <u>{{::('editBiosafetyExpertT.upToThree'|$translate)}}</u>
+															{{::('editBiosafetyExpertT.relevantTechnicalCommittees'|$translate)}}</div>
 															<div  km-inputtext-list max-entries="3" type="lstring" name="panelServed" ng-model="document.panelServed" locales="document.header.languages"></div>
 														</div>
 													</div>
@@ -475,19 +476,19 @@
     
                                         <section>
                                             <div class="no-shadow bg-white">
-                                                <legend>Language proficiency</legend>
+                                                <legend>{{::('editBiosafetyExpertT.languageProficiency'|$translate)}}</legend>
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="motherTongue" required caption="Mother tongue">
+														<div class="km-control-group" name="motherTongue" required caption="{{::('editBiosafetyExpertT.motherTongue'|$translate)}}">
 															<div km-term-check required ng-model="motherTongue.unLanguages" locales="document.header.languages"
 																terms="options.languages" show-other="false" binding-type="term[]"></div>
 															<div ng-repeat="lang in motherTongue.otherLanguages" style="max-width: 200px;padding-left: 15px;padding-bottom: 10px;">
 																<div afc-autocomplete name="otherMotherTongue{{$index}}" ng-model="motherTongue.otherLanguages[$index]" source="options.otherLanguages" style="display: inline-block;"
-																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a language..." ng-change="onLangChange()"></div>
-																<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">Remove</button>
+																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editBiosafetyExpertT.selectLanguage'|$translate)}}" ng-change="onLangChange()"></div>
+																<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">{{::('editBiosafetyExpertT.remove'|$translate)}}</button>
 															</div>
-															<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">Add other language</button>
+															<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">{{::('editBiosafetyExpertT.addOtherLanguage'|$translate)}}</button>
 														</div>
 													</div>
 												</div>
@@ -495,7 +496,7 @@
 												
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="otherTongue" caption="Other languages">
+														<div class="km-control-group" name="otherTongue" caption="{{::('editBiosafetyExpertT.otherLanguages'|$translate)}}">
 															<div>
 																<table>
 																	<tr ng-repeat="language in languageRating | orderBy:'name'">																		
@@ -503,31 +504,31 @@
 																			<span ng-if="language.isUNLanguage" ng-bind="language.title|lstring:locale"></span>
 																			<div  ng-if="!language.isUNLanguage" class="input-group">
 																				<div afc-autocomplete name="otherLanguageRating{{$index}}" ng-model="languageRating[$index]" source="options.otherLanguages" style="display: inline-block;"
-																				filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a language..."></div>																				
+																				filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editBiosafetyExpertT.selectLanguage'|$translate)}}"></div>																				
 																			</div>
 																		</td>
 																		<td>
 																			<div class="btn-group">
 																				<label class="btn">
 																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="excellent" />
-																					Excellent
+																					{{::('editBiosafetyExpertT.excellent'|$translate)}}
 																				</label>
 																				<label class="btn">
 																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="good" />
-																					Good
+																					{{::('editBiosafetyExpertT.good'|$translate)}}
 																				</label>
 																				<label class="btn">
 																					<input type="radio" ng-model="language.level" name="{{$index}}_langLevel" value="fair" />
-																					Fair
+																					{{::('editBiosafetyExpertT.fair'|$translate)}}
 																				</label>
 																			</div>
-																			<button type="button" class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">Clear</button>
-																			<button type="button" class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >Remove</button>
+																			<button type="button" class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">{{::('editBiosafetyExpertT.clear'|$translate)}}</button>
+																			<button type="button" class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >{{::('editBiosafetyExpertT.remove'|$translate)}}</button>
 																		</td>
 																	</tr>
 																	<tr>
 																		<td colspan="2">
-																			<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">Add other language</button>
+																			<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">{{::('editBiosafetyExpertT.addOtherLanguage'|$translate)}}</button>
 																		</td>
 																	</tr>
 																</table>
@@ -544,9 +545,9 @@
     
                                         <section>
                                             <div class="no-shadow bg-white">
-												<legend>Timeframe for confirmation or updating of information</legend>
+												<legend>{{::('editBiosafetyExpertT.timeFrame'|$translate)}}</legend>
 												<div class="help-info">
-													Please note that according to decision BS-IV/4, experts’ records are maintained on the roster for a period of <u>four</u> years from the last update of their information, after which they will be deleted from the roster unless re-nominated.
+													{{::('editBiosafetyExpertT.timeFrameInfo'|$translate)}}
 												</div>
 
                                             </div>
@@ -554,11 +555,11 @@
 										
                                         <section>
                                             <div class="no-shadow bg-white">
-												<legend>Any other relevant information</legend>
+												<legend>{{::('editBiosafetyExpertT.otherRelevantInformation'|$translate)}}</legend>
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="additionalInformation" caption="Additional Information">
-															<div class="help-info">Please provide any other information relevant to your role as an expert (max. 300 words).</div>
+														<div class="km-control-group" name="additionalInformation" caption="{{::('editBiosafetyExpertT.additionalInformation'|$translate)}}">
+															<div class="help-info">{{::('editBiosafetyExpertT.additionalInformationInfo'|$translate)}}</div>
 															<div km-rich-textbox name="additionalInformation" rows="6" ng-model="document.additionalInformation"
 																locales="document.header.languages"></div>
 														</div>
@@ -567,8 +568,8 @@
 
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="additionalDocuments" caption="Any other relevant documents">
-															<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+														<div class="km-control-group" name="additionalDocuments" caption="{{::('editBiosafetyExpertT.anyrelevantDocuments'|$translate)}}">
+															<div class="help-info">{{::('editBiosafetyExpertT.anyrelevantDocumentsInfo'|$translate)}}</div>
 															<div km-link name="additionalDocuments" ng-model="document.additionalDocuments"
 																identifier="document.header.identifier"></div>
 														</div>
@@ -582,12 +583,12 @@
                                 </div>
 
                                 <section>
-                                    <legend>Notes</legend>								
+                                    <legend>{{::('editBiosafetyExpertT.notes'|$translate)}}</legend>								
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="km-control-group" name="notes">
                                                 <span class="help-block">
-                                                    The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+													{{::('editBiosafetyExpertT.notesInfos'|$translate)}}
                                                 </span>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
@@ -604,13 +605,13 @@
 					<div class="row">
                         <div class="col-xs-12">
 							<ul class="pagination page-tabs nav nav-tabs" id="expertTabs" ng-click="setTab($event)">
-								<li class="active nav-item"><a class="nav-link" translation-url href="#part1" data-bs-toggle="tab">Part I</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part2" data-bs-toggle="tab">Part II</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part3" data-bs-toggle="tab">Part III</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part4" data-bs-toggle="tab">Part IV</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part5" data-bs-toggle="tab">Part V</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part6" data-bs-toggle="tab">Part VI</a></li>
-								<li class="nav-item"><a class="nav-link" translation-url href="#part7" data-bs-toggle="tab">Part VII</a></li>
+								<li class="active nav-item"><a class="nav-link" translation-url href="#part1" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part1'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part2" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part2'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part3" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part3'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part4" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part4'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part5" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part5'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part6" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part6'|$translate)}}</a></li>
+								<li class="nav-item"><a class="nav-link" translation-url href="#part7" data-bs-toggle="tab">{{::('editBiosafetyExpertT.part7'|$translate)}}</a></li>
 							</ul>
                         </div>
                     </div>

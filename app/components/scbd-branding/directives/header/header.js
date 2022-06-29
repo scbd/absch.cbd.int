@@ -9,13 +9,15 @@ import './accounts-validation';
 import './login';
 import './xuser-notifications-icon';
 import 'components/scbd-angularjs-services/main';
+import commonText from '~/app-data/commonText.json';
+
     app.directive('scbdHeader', function() {
         return {
             restrict: 'E',
             priority: 10, //parent has 0 priority
             template: template,
-            controller: ['$scope', '$rootScope', 'authentication', 'socketioService', 'apiToken', 'locale',
-                function($scope, $rootScope, authentication, socketioService, apiToken, locale) {
+            controller: ['$scope', '$rootScope', 'authentication', 'socketioService', 'apiToken', 'locale', 'translationService',
+                function($scope, $rootScope, authentication, socketioService, apiToken, locale, translationService) {
                     $scope.locale = locale;
                     
                     authentication.getUser().then(function(u) {
@@ -29,6 +31,7 @@ import 'components/scbd-angularjs-services/main';
 
                     });
 
+                    translationService.set('commonText', commonText);
 
                     $rootScope.$on('signOut', function(){
                         socketioService.disconnect(true);

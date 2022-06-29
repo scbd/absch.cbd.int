@@ -23,7 +23,7 @@
                 &nbsp; | &nbsp; 
                 <a rel="noopener" translation-url class="text-decoration-none text-white" rel="noopener" href="{{pdfUrl}}" target="_blank" >                    
                     <i class="bi bi-file-earmark-pdf"></i>
-                    <span class="d-none d-sm-inline-block">PDF</span>
+                    <span class="d-none d-sm-inline-block">{{::('recordOptionsT.pdf'|$translate)}}</span>
                 </a>
                 &nbsp;
                 <span class="text-light"> | </span> &nbsp;
@@ -31,10 +31,10 @@
             <a class="text-decoration-none text-white" rel="noopener" href="#" ng-click="print()">
                 <i class="bi bi-arrow-repeat pe-1" ng-if="printing"></i>
                 <i class="bi bi-printer-fill" aria-hidden="true" ng-if="!printing"></i>
-                <span class="d-none d-sm-inline-block">Print</span>
+                <span class="d-none d-sm-inline-block">{{::('recordOptionsT.print'|$translate)}}</span>
             </a>
             <span ng-show="internalDocument.header.languages.length>1" style="color:#ddd"> &nbsp; | &nbsp; </span>
-            <span class="xlabel hidden-xs hidden-sm text-white fw-bold" ng-if="internalDocument.header.languages.length>1">languages available:</span>
+            <span class="xlabel hidden-xs hidden-sm text-white fw-bold" ng-if="internalDocument.header.languages.length>1">{{::('recordOptionsT.languagesAvailable'|$translate)}}:</span>
            
             <div class="btn-group  btn-group-sm" role="group" ng-if="internalDocument.header.languages.length>1">
                 <button type="button" class="btn btn-lang btn-default btn-xs lang-tooltip" ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"

@@ -10,37 +10,37 @@
             
             <document-date></document-date>
     
-            <legend ng-if="document.government || document.name">General information</legend>
+            <legend ng-if="document.government || document.name">{{::('viewNMCCT.generalInfo'|$translate)}}</legend>
     
             <div ng-show="document.government">
-                <label name="country">Country</label>
+                <label name="country">{{::('viewNMCCT.country'|$translate)}}</label>
                 <div class="km-value" compare-val>
                     <a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
                 </div>
             </div>
     
-            <legend>General Information</legend>
+            <legend>{{::('viewNMCCT.generalInfo'|$translate)}}</legend>
              <div ng-show="document.title">
-                 <label>Title</label>
+                 <label>{{::('viewNMCCT.title'|$translate)}}</label>
                  <div class="km-value" compare-val>
                  <strong><span ng-bind="document.title | lstring:locale"></span></strong>
                  </div>
              </div>
              <div ng-show="document.description">
-                <label> Summary or abstract</label>
+                <label> {{::('viewNMCCT.summary'|$translate)}}</label>
                  <div compare-val>
                 <km-value-ml value="document.description" locales="locale" km-pre html></km-value-ml>
                  </div>
             </div>
             <div ng-show="document.jurisdiction">
-                <label>Area of Jurisdiction</label>
+                <label>{{::('viewNMCCT.jurisdiction'|$translate)}}</label>
                 <div class="km-value" compare-val>
                     <span ng-bind="document.jurisdiction|term"></span>
                 </div>
             </div>
     
             <div ng-show="document.relevantMeasures">
-                <label>Relevant ABS Measure(s)</label>
+                <label>{{::('viewNMCCT.relevantMeasures'|$translate)}}</label>
                 <div compare-val>
                 <div class="km-value" ng-repeat="measure in document.relevantMeasures">
                     <div view-record-reference ng-model="measure.identifier" locale="locale"></div>
@@ -49,7 +49,7 @@
             </div>
     
             <div ng-show="document.keywords">
-                <label>Keywords</label>
+                <label>{{::('viewNMCCT.keywords'|$translate)}}</label>
                 <div class="km-value" compare-val>
                     <ul class="list">
                         <li ng-repeat="term in document.keywords"><span ng-bind="term | term:locale"></span></li>
@@ -58,7 +58,7 @@
             </div>
     
             <div ng-show="document.keywords">
-                <label>Thematic area(s)</label>
+                <label>{{::('viewNMCCT.thematicArea'|$translate)}}</label>
                 <div class="km-value" compare-val>
                     <ul class="list">
                       <li ng-repeat="term in document.thematicAreas"><span ng-bind="term | term:locale"></span></li>
@@ -66,17 +66,17 @@
                 </div>
             </div>
             <div ng-show="document.relevantInformation||document.relevantDocuments">
-                <legend>Attached files, documents, or resources </legend>
+                <legend>{{::('viewNMCCT.attachments'|$translate)}} </legend>
     
                 <div ng-show="document.relevantInformation">
-                        <label>Additional information</label>
+                        <label>{{::('viewNMCCT.addInfo'|$translate)}}</label>
                     <div compare-val>
                     <km-value-ml value="document.relevantInformation" locales="locale" km-pre html></km-value-ml>
                     </div>
                 </div>
     
                 <div ng-show="document.relevantDocuments">
-                        <label>Links or attached files or documents</label>
+                        <label>{{::('viewNMCCT.links'|$translate)}}</label>
                     <div class="km-value" compare-val="relevantDocuments">
                         <km-link-list ng-model="document.relevantDocuments"></km-link-list>
                     </div>

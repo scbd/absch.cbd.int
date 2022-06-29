@@ -1,0 +1,19 @@
+{
+    "generalInfo": "General Information",
+    "languageToPublish": "Please select in which language(s) you wish to submit this record:",
+    "country": "Country",
+    "title": "Title of the record",
+    "selectOption": "Please select a country...",
+    "links": "Relevant link(s)",
+    "linksInfo": "Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. ‘Convention on Biological Diversity’).",
+    "abstract": "Abstract",
+    "abstractInfo": "(max. 80 words)",
+    "newsText": "News text",
+    "newsTextInfo": "(max. 300 words)",
+    "otherRelevantInformation": "Any other relevant information",
+    "relevantInformationInfo": "Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.",
+    "anyrelevantDocuments": "Any other relevant documents",
+    "anyrelevantDocumentsInfo": "Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.",
+    "notes": "Notes",
+    "notesInfos": "The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information."
+}

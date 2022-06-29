@@ -16,7 +16,7 @@
 											<br>
 											<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+														<div class="km-control-group" name="header.languages" required caption=" {{::('editContactT.languageToPublish'|$translate)}}">
 															<div class="indent">
 																<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 															</div>
@@ -24,23 +24,23 @@
 													</div>
 												</div>
 										
-												<legend>General Information</legend>
+												<legend>{{::('editContactT.generalInfo'|$translate)}}</legend>
 
 
 										<div class="row" ng-if="isNationalUser">
 											<div class="col-sm-12">
-												<div class="km-control-group" name="government" required caption="Country">
-													<div afc-autocomplete required name="government" ng-disabled="!canEditGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+												<div class="km-control-group" name="government" required caption="{{::('editContactT.country'|$translate)}}">
+													<div afc-autocomplete required name="government" ng-disabled="!canEditGovernment" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editContactT.selectCountry'|$translate)}}"></div>
 												</div>
 											</div>
 										</div>
 										<div class="row">
 											<div class="col-xs-12">
-												<div class="km-control-group" name="type" caption="Contact Type">												
+												<div class="km-control-group" name="type" caption="{{::('editContactT.contactType'|$translate)}}">												
 													<label class="radio-inline">
-														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />Organization</label>
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="organization" name="editionContactType" />{{::('editContactT.organization'|$translate)}}</label>
 													<label class="radio-inline ps-1">
-														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />Person</label>
+														<input type="radio" class="me-1" ng-disabled="prefilledContactType" ng-model="document.type" value="person" name="editionContactType" />{{::('editContactT.person'|$translate)}}</label>
 												</div>
 											</div>
 										</div>
@@ -55,30 +55,30 @@
 			
 										<div ng-if="document.type=='person'">
 			
-											<legend>Personal Information</legend>
+											<legend>{{::('editContactT.personalInformation'|$translate)}}</legend>
 			
 											<div class="row">
 			
 												<div class="col-md-4 col-sm-4 col-xs-12">
-													<div class="km-control-group" name="prefix" caption="Title">
+													<div class="km-control-group" name="prefix" caption="{{::('editContactT.title'|$translate)}}">
 														<div km-textbox-ml name="prefix" ng-model="document.prefix" locales="document.header.languages"></div>
 													</div>
 												</div>
 			
 												<div class="col-md-8 col-sm-8 col-xs-12">
-													<div class="km-control-group" name="firstName" ng-required="!form.contact_firstNameX.$valid" caption="First name" required>
+													<div class="km-control-group" name="firstName" ng-required="!form.contact_firstNameX.$valid" caption="{{::('editContactT.firstName'|$translate)}}" required>
 														<input type="text" class="form-control" name="firstNameX" ng-model="document.firstName" ng-required="document.type=='person'" />
 													</div>
 												</div>
 			
 												<div class="col-md-4 col-sm-4 col-xs-12">
-													<div class="km-control-group" name="middleName" caption="Middle name">
+													<div class="km-control-group" name="middleName" caption="{{::('editContactT.middleName'|$translate)}}">
 														<input type="text" class="form-control" name="middleName" ng-model="document.middleName" />
 													</div>
 												</div>
 			
 												<div class="col-md-8 col-sm-8 col-xs-12">
-													<div class="km-control-group" name="lastName" ng-required="!form.contact_lastNameX.$valid" caption="Last name" required>
+													<div class="km-control-group" name="lastName" ng-required="!form.contact_lastNameX.$valid" caption="{{::('editContactT.lastName'|$translate)}}" required>
 														<input type="text" class="form-control" name="lastNameX" ng-model="document.lastName" ng-required="document.type=='person'" />
 													</div>
 												</div>
@@ -86,7 +86,7 @@
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="km-control-group" name="organization" caption="Organization">
+													<div class="km-control-group" name="organization" caption="{{::('editContactT.organization'|$translate)}}">
 														<div document-selector ng-model="document.contactOrganization" type="radio"
 															question="contactOrganization" allow-new="{{allowNew}}"
 															government="document.government" ng-change="contactOrganizationChanged()"
@@ -98,62 +98,62 @@
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="km-control-group" name="department" caption="Department / Division / Unit">
+													<div class="km-control-group" name="department" caption="{{::('editContactT.department'|$translate)}}">
 														<div km-textbox-ml name="department" ng-model="document.department" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="km-control-group" name="designation" caption="Job title">
+													<div class="km-control-group" name="designation" caption="{{::('editContactT.jobTitle'|$translate)}}">
 														<div km-textbox-ml name="designation" ng-model="document.designation" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 										</div>
 										<div ng-if="document.type=='organization'">
-											<legend>Organization Information</legend>
+											<legend>{{::('editContactT.organizationInformation'|$translate)}}</legend>
 											<div class="row">
 												<div class="col-md-7 col-xs-12">
-													<div class="km-control-group" name="organization" ng-required="!form.organization.$valid && document.type!='person'" caption="Organization">
-														<div class="help-info">Full name without abbreviation</div>
+													<div class="km-control-group" name="organization" ng-required="!form.organization.$valid && document.type!='person'" caption="{{::('editContactT.organization'|$translate)}}">
+														<div class="help-info">{{::('editContactT.organizationFullName'|$translate)}}</div>
 														<div ng-if="document.header.schema=='organization'" km-textbox-ml name="organization" ng-model="document.name" required locales="document.header.languages"></div>
 														<div ng-if="document.type=='organization' && document.header.schema=='contact'" km-textbox-ml name="organization" ng-model="document.organization" locales="document.header.languages"></div>
 													</div>
 												</div>
 			
 												<div class="col-md-5 col-xs-12">
-													<div class="km-control-group" name="organizationAcronym" caption="Acronym">
-														<div class="help-info">Abbreviation for long name</div>
-														<div ng-if="document.header.schema=='organization'" km-textbox-ml name="organizationAcronym" ng-model="document.acronym" placeholder="example: SCBD" locales="document.header.languages"></div>
-														<div ng-if="document.type=='organization'  && document.header.schema=='contact'" km-textbox-ml name="organizationAcronym" ng-model="document.organizationAcronym" placeholder="example: SCBD" locales="document.header.languages"></div>
+													<div class="km-control-group" name="organizationAcronym" caption="{{::('editContactT.acronym'|$translate)}}">
+														<div class="help-info">{{::('editContactT.acronymLongName'|$translate)}}</div>
+														<div ng-if="document.header.schema=='organization'" km-textbox-ml name="organizationAcronym" ng-model="document.acronym" placeholder="{{::('editContactT.exampleSCBD'|$translate)}}" locales="document.header.languages"></div>
+														<div ng-if="document.type=='organization'  && document.header.schema=='contact'" km-textbox-ml name="organizationAcronym" ng-model="document.organizationAcronym" placeholder="{{::('editContactT.exampleSCBD'|$translate)}}" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 			
 											<div class="row">
 												<div class="col-md-8">
-													<div class="km-control-group organization-dropdown" name="organizationType" caption="Type of organization">
+													<div class="km-control-group organization-dropdown" name="organizationType" caption="{{::('editContactT.typeOfOrganization'|$translate)}}">
 														<div km-select name="organizationType" ng-model="document.organizationType" items="options.organizationTypes()"></div>
 													</div>
 												</div>
 												<div class="col-md-4" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
-													<div class="km-control-group" name="organizationTypeName" caption="Other organization type">
-														<div km-textbox-ml name="organizationTypeName" ng-model="document.organizationType.customValue" placeholder="example: SCBD" locales="document.header.languages"></div>
+													<div class="km-control-group" name="organizationTypeName" caption="{{::('editContactT.otherOrganization'|$translate)}}">
+														<div km-textbox-ml name="organizationTypeName" ng-model="document.organizationType.customValue" placeholder="{{::('editContactT.exampleSCBD'|$translate)}}" locales="document.header.languages"></div>
 													</div>
 												</div>
 											</div>
 										</div>
 										<div>
-											<legend>Address</legend>
+											<legend>{{::('editContactT.address'|$translate)}}</legend>
 											<div ng-show="document.contactOrganization">
 												<div class="row">
 													<div class="col-xs-12">
-														<div class="km-control-group" name="addressType" caption="Address type">												
+														<div class="km-control-group" name="addressType" caption="{{::('editContactT.addressType'|$translate)}}">												
 															<label class="radio-inline">
-																<input type="radio" class="me-1" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />Use organization address</label>
+																<input type="radio" class="me-1" ng-model="document.addressType" value="organization" name="editionAddressType" ng-change="loadOrganizationAddress()" />{{::('editContactT.useOrganizationAddress'|$translate)}}</label>
 															<label class="radio-inline ms-2">
-																<input type="radio" class="me-1" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>Add personal coordinates, if different from organization’s coordinates. </label>
+																<input type="radio" class="me-1" ng-model="document.addressType" value="person" name="editionAddressType" ng-change="loadOrganizationAddress()"/>{{::('editContactT.addPersonalCoordinates'|$translate)}}</label>
 														</div>
 													</div>
 												</div>
@@ -161,22 +161,22 @@
 											<div ng-if="!document.contactOrganization || (document.contactOrganization && document.addressType=='person')">
 												<div class="row">
 													<div class="col-md-12">
-														<div class="km-control-group" name="address" caption="Street address">
-															<div km-textbox-ml name="address" ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800" locales="document.header.languages" ng-change="setAddressType()"></div>
+														<div class="km-control-group" name="address" caption="{{::('editContactT.streetAddress'|$translate)}}">
+															<div km-textbox-ml name="address" ng-model="document.address" rows="2" placeholder="{{::('editContactT.exampleaddress'|$translate)}}" locales="document.header.languages" ng-change="setAddressType()"></div>
 														</div>
 													</div>
 												</div>
 				
 												<div class="row">
 													<div class="col-md-6">
-														<div class="km-control-group" name="city" caption="City" >
-															<div km-textbox-ml name="city" ng-model="document.city" locales="document.header.languages" placeholder="example: Montreal" ng-change="setAddressType()"></div>
+														<div class="km-control-group" name="city" caption="{{::('editContactT.city'|$translate)}}" >
+															<div km-textbox-ml name="city" ng-model="document.city" locales="document.header.languages" placeholder="{{::('editContactT.exampleCity'|$translate)}}" ng-change="setAddressType()"></div>
 														</div>
 													</div>
 				
 													<div class="col-md-6">
-														<div class="km-control-group" name="state" caption="State or Province">
-															<div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages" placeholder="example: Quebec" ng-change="setAddressType()"></div>
+														<div class="km-control-group" name="state" caption="{{::('editContactT.stateProvince'|$translate)}}">
+															<div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages" placeholder="{{::('editContactT.exampleQuebec'|$translate)}}" ng-change="setAddressType()"></div>
 														</div>
 													</div>
 												</div>
@@ -184,15 +184,15 @@
 												<div class="row">
 				
 													<div class="col-md-6">
-														<div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
-															<div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages" placeholder="example: H2Y 1N9" ng-change="setAddressType()"></div>
+														<div class="km-control-group" name="postalCode" caption="{{::('editContactT.postalZip'|$translate)}}">
+															<div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages" placeholder="{{::('editContactT.example'|$translate)}}: H2Y 1N9" ng-change="setAddressType()"></div>
 														</div>
 													</div>
 				
 													<div class="col-md-6">
-														<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country of Contact">
+														<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="{{::('editContactT.countryOfContact'|$translate)}}">
 															<div afc-autocomplete name="country" ng-model="document.country" source="options.countries" 
-															filter="startsWithFilter" mapping="genericMapping" maxmatches="50" selectbox="true" placeholder="Please select a country..." ng-change="setAddressType()"></div>
+															filter="startsWithFilter" mapping="genericMapping" maxmatches="50" selectbox="true" placeholder="{{::('editContactT.selectCountry'|$translate)}}" ng-change="setAddressType()"></div>
 														</div>
 													</div>
 												</div>
@@ -201,7 +201,7 @@
 												<div block-region activate="!organization" style="position: relative;">
 													<div class="row">
 														<div class="col-md-12">
-															<div class="km-control-group" name="address" caption="Street address">
+															<div class="km-control-group" name="address" caption="{{::('editContactT.streetAddress'|$translate)}}">
 																<div km-value-ml value="organization.address||'&nbsp;'" html km-pre locales="organization.header.languages"></div>
 															</div>
 														</div>
@@ -209,13 +209,13 @@
 					
 													<div class="row">
 														<div class="col-md-6">
-															<div class="km-control-group" name="city" caption="City" >
+															<div class="km-control-group" name="city" caption="{{::('editContactT.city'|$translate)}}" >
 																<div km-value-ml value="organization.city||'&nbsp;'" locales="organization.header.languages"></div>
 															</div>
 														</div>
 					
 														<div class="col-md-6">
-															<div class="km-control-group" name="state" caption="State or Province">
+															<div class="km-control-group" name="state" caption="{{::('editContactT.stateProvince'|$translate)}}">
 																<div km-value-ml value="organization.state||'&nbsp;'" locales="organization.header.languages" ></div>
 															</div>
 														</div>
@@ -224,13 +224,13 @@
 													<div class="row">
 					
 														<div class="col-md-6">
-															<div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
+															<div class="km-control-group" name="postalCode" caption="{{::('editContactT.postalZip'|$translate)}}">
 																<div km-value-ml value="organization.postalCode||'&nbsp;'" locales="organization.header.languages"></div>
 															</div>
 														</div>
 					
 														<div class="col-md-6">
-															<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="Country of Contact">
+															<div class="km-control-group" name="country" ng-required="!form.contact_country.$valid" caption="{{::('editContactT.countryOfContact'|$translate)}}">
 																<div class="km-value" ng-bind="organization.country | term">
 																</div>
 															</div>
@@ -240,34 +240,34 @@
 											</div>
 										</div>
 			
-										<legend>Contact Information</legend>
+										<legend>{{::('editContactT.contactInformation'|$translate)}}</legend>
 			
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="phones" caption="Phone number(s)">
-													<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
-													<div km-inputtext-list name="phones" ng-model="document.phones" placeholder="example: +1 514.288.2220"></div>
+												<div class="km-control-group" name="phones" caption="{{::('editContactT.phoneNumber'|$translate)}}">
+													<div class="help-info">{{::('editContactT.phoneFormate'|$translate)}}</div>
+													<div km-inputtext-list name="phones" ng-model="document.phones" placeholder="{{::('editContactT.example'|$translate)}}: +1 514.288.2220"></div>
 												</div>
 											</div>
 			
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="faxes" caption="Fax number(s)">
-													<div class="help-info">Please use the following format: +[country code] [city code] [telephone number] [extension, if necessary].</div>
-													<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
+												<div class="km-control-group" name="faxes" caption="{{::('editContactT.faxNumber'|$translate)}}">
+													<div class="help-info">{{::('editContactT.phoneFormate'|$translate)}}</div>
+													<div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="{{::('editContactT.example'|$translate)}}: +1 514.288.6588"></div>
 												</div>
 											</div>
 										</div>
 			
 										<div class="row">
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="emails" caption="Email(s)" required>
-													<div km-inputtext-list name="emails" type="email" ng-model="document.emails" placeholder="example: secretariat@cbd.int"></div>
+												<div class="km-control-group" name="emails" caption="{{::('editContactT.emails'|$translate)}}" required>
+													<div km-inputtext-list name="emails" type="email" ng-model="document.emails" placeholder="{{::('editContactT.example'|$translate)}}: secretariat@cbd.int"></div>
 												</div>
 											</div>
 			
 											<div class="col-md-6 col-xs-12">
-												<div class="km-control-group" name="websites" caption="Website address(es)">
-													<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="example: http://www.cbd.int"></div>
+												<div class="km-control-group" name="websites" caption="{{::('editContactT.webAddress'|$translate)}}">
+													<div km-inputtext-list name="websites" type="url" ng-model="formFields.websites" placeholder="{{::('editContactT.example'|$translate)}}: http://www.cbd.int"></div>
 												</div>
 											</div>
 										</div>
@@ -275,11 +275,11 @@
 			
 									<section>
 			
-										<legend>Notes</legend>
+										<legend>{{::('editContactT.notes'|$translate)}}</legend>
 										<div class="row">
 											<div class="col-xs-12">
 												<div class="km-control-group" name="notes">
-													<div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+													<div class="help-info">{{::('editContactT.notesInfos'|$translate)}}</div>
 													<div km-notes name="notes" ng-model="document.notes"></div>
 												</div>
 											</div>

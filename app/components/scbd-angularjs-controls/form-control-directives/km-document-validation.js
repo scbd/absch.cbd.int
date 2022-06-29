@@ -1,13 +1,14 @@
 import app from 'app';
 import template from 'text!./km-document-validation.html';
 import $ from 'jquery';
-import messages from 'app-data/validation-errors.json'; ;
+import messages from '~/app-text/components/scbd-angularjs-controls/form-control-directives/validation-errors.json';
+import kmDocumentValidationT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-document-validation.json';
 
     //============================================================
     //
     //
     //============================================================
-    app.directive('kmDocumentValidation', ["$timeout", function($timeout) {
+    app.directive('kmDocumentValidation', ["$timeout", "translationService",  function($timeout, translationService) {
         return {
             restrict: 'EAC',
             template: template,
@@ -17,7 +18,8 @@ import messages from 'app-data/validation-errors.json'; ;
                 report: '=ngModel',
             },
             link: function($scope, $element, $attr) {
-
+                
+			    translationService.set('kmDocumentValidationT', kmDocumentValidationT);
                 var container  = $attr.container || 'body,html';
                 $attr.$observe('container', function(){
                     container = $attr.container|| 'body,html'

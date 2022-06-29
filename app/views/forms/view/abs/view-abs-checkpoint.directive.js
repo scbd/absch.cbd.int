@@ -3,11 +3,13 @@ import template from "text!./view-abs-checkpoint.directive.html";
 import 'views/directives/record-options';
  import _ from "lodash";
  import 'views/forms/directives/view-terms-hierarchy';
+import viewCheckpointT from '~/app-text/views/forms/view/abs/view-abs-checkpoint.json';
+
 	// });
 //	 require("app")
 	// console.log(app);
 //	return {
-			app.directive("viewAbsCheckpoint", [function () {
+			app.directive("viewAbsCheckpoint", ['translationService', function (translationService) {
 					
 				return {
 					restrict   : "EAC",
@@ -23,6 +25,7 @@ import 'views/directives/record-options';
 					},
 					link : function ($scope)
 					{
+						translationService.set('viewCheckpointT', viewCheckpointT);
 						$scope.contacts = undefined;
 					},
 					controller : ["$scope", "IStorage", function ($scope, storage)

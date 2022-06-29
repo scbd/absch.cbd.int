@@ -4,7 +4,7 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
-import joyRideText      from '~/app-data/search-joyride-tour.json';
+import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
 import {getLimitedTerms} from 'services/common';

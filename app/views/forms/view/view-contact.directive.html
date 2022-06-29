@@ -8,7 +8,7 @@
 	<div class="record-body panel-body bg-white">
 		<document-date></document-date>
 		<div ng-show="document.type">
-			<label>Type</label>
+			<label>{{::('viewContactT.type'|$translate)}}</label>
 			<div class="km-value" compare-val>				
 				<span class="capitalize-first-letter" ng-bind="document.type | lstring:locale"></span>
 			</div>
@@ -16,19 +16,19 @@
 		<div ng-show="document.type=='organization'">
 			
 			<div ng-show="document.government">
-				<label>Country</label>
+				<label>{{::('viewContactT.country'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.government | term:locale"></span>
 				</div>
 			</div>
 			<div ng-show="document.organization || document.organizationAcronym">
-                <label>Name</label>
+                <label>{{::('viewContactT.name'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.organization | lstring:locale"></span> <i ng-show="document.organizationAcronym">(<span ng-bind="document.organizationAcronym | lstring:locale"></span>)</i>
 				</div>
 			</div>
 			<div ng-show="document.organizationType">
-				<label>Type of organization</label>
+				<label>{{::('viewContactT.typeOfOrganization'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.organizationType | term:locale"></span>
 				</div>
@@ -39,14 +39,14 @@
 
 		<div ng-show="document.type=='person'">
 			 <div ng-show="document.government">
-  			   <label>Country</label>
+  			   <label>{{::('viewContactT.country'|$translate)}}</label>
   			   <div class="km-value" compare-val>
   				   <span ng-bind="document.government | term:locale"></span>
   			   </div>
   		   </div>
 
             <div>
-				<label>Name</label>
+				<label>{{::('viewContactT.name'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.prefix | lstring:locale"></span> <span ng-bind="document.firstName"></span> <span ng-bind="document.middleName"></span> <span ng-bind="document.lastName"></span>
 				</div>
@@ -54,21 +54,21 @@
 
 
 			<div ng-show="document.designation">
-				<label>Job title</label>
+				<label>{{::('viewContactT.jobTitle'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.designation| lstring:locale"></span>
 				</div>
 			</div>
 
             <div ng-show="document.department">
-				<label>Department / Division / Unit</label>
+				<label>{{::('viewContactT.department'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.department| lstring:locale"></span>
 				</div>
 			</div>
 
             <div ng-show="document.contactOrganization">
-				<legend>Organization</legend>
+				<legend>{{::('viewContactT.organization'|$translate)}}</legend>
 				<div class="km-value" compare-val>
 					<view-record-reference ng-model='document.contactOrganization' locale="locale"></view-record-reference>
 				</div>
@@ -76,7 +76,7 @@
 
 		</div>
 		<div ng-show="document.address || document.city || document.state || document.postalCode || document.country">
-			<label>Address of Contact</label>
+			<label>{{::('viewContactT.addressContact'|$translate)}}</label>
 			<div compare-val>
 				<address class="km-value">
 					<div class="km-pre" ng-bind="document.address | lstring:locale"></div>
@@ -88,7 +88,7 @@
 			</div>
 		</div>
         <div ng-show="document.phones" >
-            <label>Phone number(s)</label>
+            <label>{{::('viewContactT.phoneNumber'|$translate)}}</label>
             	<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.phones"><span ng-bind="item"></span></li>
@@ -97,7 +97,7 @@
         </div>
 
         <div ng-show="document.faxes">
-            <label>Fax number(s)</label>
+            <label>{{::('viewContactT.faxNumber'|$translate)}}</label>
             	<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.faxes"><span ng-bind="item"></span></li>
@@ -106,7 +106,7 @@
         </div>
 
         <div ng-show="document.emails">
-            <label>Email(s)</label>
+            <label>{{::('viewContactT.emails'|$translate)}}</label>
             <div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.emails">
@@ -116,7 +116,7 @@
         </div>
 
         <div ng-show="document.websites">
-			<label>Website address(es)</label>
+			<label>{{::('viewContactT.webAddress'|$translate)}}</label>
 			<div compare-val>
 				<div class="km-value" ng-repeat="item in document.websites">
 					<a rel="noopener" translation-url  target="{{target}}" ng-href="{{item.url|encodeURI}}" ng-bind="item.name||item.url"></a>
@@ -126,14 +126,14 @@
 
 		<div>
 			<div ng-show="document.relevantInformation||document.relevantDocuments">
-				<legend>Additional Information</legend>
+				<legend>{{::('viewContactT.additionalInfo'|$translate)}}</legend>
 
 				<div ng-show="document.relevantInformation" compare-val>
 					<km-value-ml html value="document.relevantInformation" locales="locale"></km-value-ml>
 				</div>
 
 				<div ng-show="document.relevantDocuments">
-					<label>Other relevant website addresses and/or attached documents</label>
+					<label>{{::('viewContactT.otherRelevant'|$translate)}}</label>
 					<div class="km-value" compare-val="relevantDocuments">
 						<km-link-list ng-model="document.relevantDocuments" style="margin-top: 5px;"></km-link-list>
 					</div>

@@ -6,8 +6,10 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-laboratory-detection.directive";
 import '~/views/forms/directives/view-terms-hierarchy';
+import editLabDetectionT from '~/app-text/views/forms/edit/bch/directives/edit-laboratory-detection.json';
 
-	app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", 'realm', function($controller, thesaurusService, realm) {
+app.directive("editLaboratoryDetection", ["$controller", "thesaurusService", 'realm', 'translationService',
+	function ($controller, thesaurusService, realm, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -18,7 +20,7 @@ import '~/views/forms/directives/view-terms-hierarchy';
 			},
 			link: function($scope, $element, $attr){
 				$scope.self = $scope;
-
+				translationService.set('editLabDetectionT', editLabDetectionT);
 				$scope.self.detectionMethods = [];
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];

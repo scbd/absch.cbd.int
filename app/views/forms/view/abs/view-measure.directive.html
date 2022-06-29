@@ -11,31 +11,31 @@
 		<document-date></document-date>
 
 		<legend ng-if="document.government || document.title || document.description || document.jurisdiction || document.jurisdictionRegions || document.status || document.adoption">
-			General information</legend>
+			{{::('viewMeasureT.generalInfo'|$translate)}}</legend>
 
 		<div ng-show="document.government">
-			<label name="country">Country</label>
+			<label name="country">{{::('viewMeasureT.country'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<a rel="noopener" ng-href="countries/{{document.government.identifier|uppercase|encodeURIComponent}}" target="{{target}}" ng-bind="document.government|term:locale"></a>
 			</div>
 		</div>
 
 		<div ng-show="document.title">
-			<label>Title</label>
+			<label>{{::('viewMeasureT.title'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<strong><span ng-bind="document.title | lstring:locale"></span></strong>
 			</div>
 		</div>
 
 		<div ng-show="document.description">
-			<label>Brief description</label>
+			<label>{{::('viewMeasureT.description'|$translate)}}</label>
 			<div compare-val>
 				<div class="km-value" ng-bind-html="document.description | lstring:locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.jurisdiction">
-			<label>Jurisdiction(s)</label>
+			<label>{{::('viewMeasureT.jurisdiction'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.jurisdiction|term:locale"></span>
 				<span ng-if="document.jurisdictionName ">(<span ng-bind="document.jurisdictionName | lstring:locale"></span>)</span>
@@ -44,7 +44,7 @@
 
 
 		<div ng-show="document.jurisdictionRegions">
-			<label>Country name and/or Geographical or political/economic group(s)</label>
+			<label>{{::('viewMeasureT.jurisdictionRegions'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="term in document.jurisdictionRegions"><span ng-bind="term|term:locale"></span></li>
@@ -54,42 +54,42 @@
 
 
 		<div ng-show="document.status">
-			<label>Current status of the measure</label>
+			<label>{{::('viewMeasureT.status'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.status|term:locale"></span>
 			</div>
 		</div>
 
 		<div ng-show="document.adoption">
-			<label>Date of adoption</label>
+			<label>{{::('viewMeasureT.adoption'|$translate)}}</label>
 			<div class="km-value" compare-val><span ng-bind="document.adoption | formatDate"></span></div>
 		</div>
 
 		<div ng-show="document.entryIntoForce">
-			<label>Date of entry into force</label>
+			<label>{{::('viewMeasureT.entryIntoForce'|$translate)}}</label>
 			<div class="km-value" compare-val><span ng-bind="document.entryIntoForce | formatDate"></span></div>
 		</div>
 
 		<div ng-show="document.retired">
-			<label>Date of retirement</label>
+			<label>{{::('viewMeasureT.retired'|$translate)}}</label>
 			<div class="km-value" compare-val><span ng-bind="document.retired | formatDate"></span></div>
 		</div>
 
 		<div ng-show="document.limitedApplication">
-			<label>Date of measure no longer in force</label>
+			<label>{{::('viewMeasureT.limitedApplication'|$translate)}}</label>
 			<div class="km-value" compare-val><span ng-bind="document.limitedApplication | formatDate"></span></div>
 		</div>
 
 
 		<div ng-show="document.type">
-			<label>Type of document / measure</label>
+			<label>{{::('viewMeasureT.type'|$translate)}}</label>
 			<div class="km-value"  compare-val>
 				<span ng-bind="document.type|term:locale"></span>
 			</div>
 		</div>
 
 		<div ng-show="document.isModelContractualClause">
-			<label>The measure contains model contractual clauses</label>
+			<label>{{::('viewMeasureT.isModelContractualClause'|$translate)}}</label>
 			<div class="km-value" compare-val ng-if="document.modelContractualClauseDescription">
 				<span ng-bind="document.modelContractualClauseDescription|lstring:locale"></span>
 			</div>
@@ -102,24 +102,24 @@
 		</div>
 
 		<div ng-show="document.documents">
-			<legend>Document details</legend>
-			<label>Document text</label>
+			<legend>{{::('viewMeasureT.documentDetails'|$translate)}}</legend>
+			<label>{{::('viewMeasureT.documentText'|$translate)}}</label>
 			<div class="km-value" compare-val="documents">
 				<km-link-list ng-model="document.documents"></km-link-list>
 			</div>
 		</div>
 
 		<div ng-show="document.documentTranslations">
-			<label>Translation</label>
+			<label>{{::('viewMeasureT.translation'|$translate)}}</label>
 			<div class="km-value" compare-val="documentTranslations">
 				<km-link-list ng-model="document.documentTranslations"></km-link-list>
 			</div>
 		</div>
 
 		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
-			<legend>Amendments</legend>
+			<legend>{{::('viewMeasureT.amendments'|$translate)}}</legend>
 			<div ng-show="document.amendedMeasures">
-				<label>This measure is amending the following:</label>
+				<label>{{::('viewMeasureT.amendedMeasures'|$translate)}}:</label>
 
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -130,7 +130,7 @@
 				</div>
 			</div>
 			<div ng-show="document.amendmentsDescription">
-				<label>Summary of the amendments</label>
+				<label>{{::('viewMeasureT.summaryAmendments'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.amendmentsDescription" locales="locale"></km-value-ml>
 				</div>
@@ -139,15 +139,15 @@
 		</div>
 
 		<div ng-show="document.authorities ">
-			<legend>Regulatory contact information</legend>
+			<legend>{{::('viewMeasureT.authorities'|$translate)}}</legend>
 			<div ng-repeat="item in document.authorities">
 				<div view-record-reference ng-model="item" locale="locale" class="km-value"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
-			<legend>Amendments</legend>
-			<label>This measure has been amended by:</label>
+			<legend>{{::('viewMeasureT.amendments'|$translate)}}</legend>
+			<label>{{::('viewMeasureT.measureAmendedBy'|$translate)}}:</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.measureAmendedBy">
@@ -158,9 +158,9 @@
 		</div>
 
 		<div ng-show="(document.linkedMeasures && document.linkedMeasures.length>0) || document.linkedMeasuresDescription">
-			<legend>Relationships</legend>			
+			<legend>{{::('viewMeasureT.relationships'|$translate)}}</legend>			
 			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
-				<label>This measure is related to:</label>
+				<label>{{::('viewMeasureT.relatedTo'|$translate)}}:</label>
 				<ul class="list">
 					<li ng-repeat="item in document.linkedMeasures">
 						<div view-record-reference ng-model="item.identifier" locale="locale"></div>
@@ -168,13 +168,13 @@
 				</ul>
 			</div>
 			<div ng-show="document.linkedMeasuresDescription">
-				<label>Relationships description</label>
+				<label>{{::('viewMeasureT.relationshipsDescription'|$translate)}}</label>
 				<div class="km-value km-pre" compare-val ng-bind-html="document.linkedMeasuresDescription | lstring:review.locale"></div>
 			</div>
 		</div>
 		<div ng-if="document.absMesasureNotApplicable">
-			<legend>Elements of the measure</legend>
-			<span class="km-value confidential-text">The elements of the measure are not applicable for this measure.</span>
+			<legend>{{::('viewMeasureT.elements'|$translate)}}</legend>
+			<span class="km-value confidential-text">{{::('viewMeasureT.elementsText'|$translate)}}</span>
 		</div>
 		<div ng-if="document.absMeasures">
 			<div measure-matrix-elements name="absMeasures" type="single" ng-model="document.absMeasures" 
@@ -183,14 +183,14 @@
 		</div>
 
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewMeasureT.addInfo'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val="relevantInformation" class="km-value" ng-bind-html="document.relevantInformation | lstring:locale"></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewMeasureT.relevantDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>

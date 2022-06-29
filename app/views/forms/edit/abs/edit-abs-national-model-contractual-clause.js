@@ -2,15 +2,17 @@
 import _ from 'lodash';
 import 'views/forms/edit/edit';
 import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive';
-
+import editABSNationalMCCT from '~/app-text/views/forms/edit/abs/edit-abs-national-model-contractual-clause.json';
+ 
     export { default as template } from './edit-abs-national-model-contractual-clause.html';
 
-  export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", function($scope, realm, $http, $filter, $q, $routeParams, $controller, $location) {
+export default ["$scope", "realm", "$http", "$filter", "$q", "$routeParams", "$controller", "$location", "translationService", 
+    function ($scope, realm, $http, $filter, $q, $routeParams, $controller, $location, translationService) {
         $controller('editController', {
             $scope: $scope
         });
 
-
+        translationService.set('editABSNationalMCCT', editABSNationalMCCT);
         $scope.path = $location.path();
 
         _.extend($scope.options, {

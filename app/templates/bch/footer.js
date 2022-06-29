@@ -1,9 +1,12 @@
 import template from 'text!./footer.html';
 import app from 'app';
-
-app.directive('bchFooter', [function () {
+import bchFooterT from '~/app-text/templates/bch/footer.json';
+app.directive('bchFooter', ['translationService', function (translationService) {
     return {
         restrict: 'E',
-        template: template
+        template: template,
+        link: function(){
+            translationService.set('bchFooterT', bchFooterT);
+        }
     };
 }]);

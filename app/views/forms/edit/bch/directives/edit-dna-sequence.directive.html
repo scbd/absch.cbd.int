@@ -15,10 +15,10 @@
 
                                 <section>
                                     <div class="no-shadow bg-white">
-                                        <legend>General information about the genetic element</legend>
+                                       <legend>{{::('editDnaSequenceT.generalInfo'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                                <div class="km-control-group" name="header.languages" required caption="{{::('editDnaSequenceT.languageToPublish'|$translate)}}">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -27,14 +27,14 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="name" caption="Name of genetic element">
+                                                <div class="km-control-group" required name="name" caption="{{::('editDnaSequenceT.name'|$translate)}}">
                                                     <div km-textbox-ml name="name" ng-model="document.name" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="synonymNames" caption="Alternate genetic element name(s) (synonym(s))">
+                                                <div class="km-control-group" name="synonymNames" caption="{{::('editDnaSequenceT.synonymNames'|$translate)}}">
                                                     <div ng-repeat="synonym in synonymNames" class="pb-1 d-block input-group">
                                                         <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input float-start pb-1" style="width: 97%;" ng-model="synonym.value" locales="document.header.languages"></div>
                                                         <span ng-class="{'disable':synonymNames.length==1}" class="input-group-text cursor-pointer float-end trash-value"
@@ -42,20 +42,20 @@
                                                             <i class="fa fa-trash-o icon"></i>
                                                         </span>
                                                     </div>
-                                                    <button type="button" class="btn btn-primary" ng-click="synonymNames.push({})">Add item</button>
+                                                    <button type="button" class="btn btn-primary" ng-click="synonymNames.push({})">{{::('editDnaSequenceT.addItem'|$translate)}}</button>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="abbreviation" caption="Abbreviation">
+                                                <div class="km-control-group" required name="abbreviation" caption="{{::('editDnaSequenceT.abbreviation'|$translate)}}">
                                                     <div km-textbox-ml name="abbreviation" ng-model="document.abbreviation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="family" required caption="Category">
+                                                <div class="km-control-group" name="family" required caption="{{::('editDnaSequenceT.category'|$translate)}}">
                                                     <div km-term-radio required ng-model="document.family" locales="document.header.languages"
                                                         terms="options.family" binding-type="term" show-other="true"></div>
                                                 </div>	
@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="isSynthetic" required caption="Is the genetic element a synthetic molecule?">
+                                                <div class="km-control-group" name="isSynthetic" required caption="{{::('editDnaSequenceT.isSynthetic'|$translate)}}">
                                                     <div km-yes-no required ng-model="document.isSynthetic" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -73,31 +73,31 @@
 
                                 <section>
                                     <div class="no-shadow bg-white">
-                                        <legend>Donor organism</legend>
+                                        <legend>{{::('editDnaSequenceT.donorOrganism'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganisms" caption="Donor organism(s)">											
+                                                <div class="km-control-group" required="{{!document.isSynthetic}}" name="donorOrganisms" caption="{{::('editDnaSequenceT.donorOrganisms'|$translate)}}">											
                                                     <div document-selector ng-model="document.donorOrganisms" question="donorOrganisms" type="checkbox"
                                                             on-build-query="onBuildOrganismQuery(searchText)" allow-new="true" allow-new-schema="organism"></div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="donorOrganismCollectionPoint" caption="Point of collection or acquisition of the donor organism(s)">												
+                                                <div class="km-control-group" name="donorOrganismCollectionPoint" caption="{{::('editDnaSequenceT.donorOrganismCollectionPoint'|$translate)}}">												
                                                     <div km-rich-textbox ng-model="document.donorOrganismCollectionPoint" rows="4" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-xs-12">
-                                                <span>and/or</span>
+                                                <span>{{::('editDnaSequenceT.andOr'|$translate)}}</span>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" caption="Geographic coordinates">
+                                                <div class="km-control-group" caption="{{::('editDnaSequenceT.geographicCoordinates'|$translate)}}">
                                                     <div class="help-block">
-                                                        Limited to .geojson files (<a rel="noopener" translation-url href="http://www.geojson.org/" target="_blank">http://www.geojson.org/</a>)
+                                                        {{::('editDnaSequenceT.geographicCoordinatesInfo'|$translate)}} (<a rel="noopener" translation-url href="http://www.geojson.org/" target="_blank">http://www.geojson.org/</a>)
                                                     </div>
                                                     <div km-link name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                                 </div>
@@ -107,24 +107,24 @@
 
                                 <section ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">
                                     <div class="no-shadow bg-white">
-                                        <legend>Characteristics of the protein coding sequence</legend>
+                                        <legend>{{::('editDnaSequenceT.characteristicsSequence'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="proteinName" caption="Name of the protein expressed by the coding sequence">
+                                                <div class="km-control-group" name="proteinName" caption="{{::('editDnaSequenceT.proteinName'|$translate)}}">
                                                     <div km-textbox-ml name="proteinName" ng-model="document.proteinName" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="biologicalFunction" caption="Biological function of the protein">
+                                                <div class="km-control-group" name="biologicalFunction" caption="{{::('editDnaSequenceT.biologicalFunction'|$translate)}}">
                                                     <div km-textbox-ml name="biologicalFunction" rows="3" ng-model="document.biologicalFunction" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" required name="traits" caption="Related trait(s) or use(s) in biotechnology">												
+                                                <div class="km-control-group" required name="traits" caption="{{::('editDnaSequenceT.traits'|$translate)}}">												
                                                     <traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
                                                 </div>
                                             </div>
@@ -134,13 +134,11 @@
 
                                 <section>
                                     <div class="no-shadow bg-white">
-                                        <legend>Additional information</legend>
+                                        <legend>{{::('editDnaSequenceT.additionalInformation'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="address" caption="Any other relevant information">
-                                                    <div class="help-block">Please use this field to provide any other relevant information that may not have
-                                                        been addressed elsewhere in
-                                                        the record.</div>
+                                                <div class="km-control-group" name="address" caption="{{::('editDnaSequenceT.anyOtherInformation'|$translate)}}">
+                                                    <div class="help-block">{{::('editDnaSequenceT.relevantInformationInfo'|$translate)}}</div>
                                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -148,10 +146,9 @@
 
                                         <div class="row">
                                             <div class="col-sm-12">
-                                                <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+                                                <div class="km-control-group" name="relevantDocuments" caption="{{::('editDnaSequenceT.relevantDocuments'|$translate)}}">
                                                     <div class="help-block">
-                                                        Please use this field to provide any other relevant website addresses and/or one or more
-                                                        relevant documents that will be stored in the database for users to download.
+                                                        {{::('editDnaSequenceT.relevantDocumentsInfo'|$translate)}}
                                                     </div>
                                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
                                                     identifier="document.header.identifier"></div>
@@ -161,12 +158,12 @@
                                     </div>
                                 </section>
                                 <section>
-                                    <legend>Notes</legend>
+                                    <legend>{{::('editDnaSequenceT.notes'|$translate)}}</legend>
 
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <div class="km-control-group" name="notes">
-                                                <div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+                                                <div class="help-block">{{::('editDnaSequenceT.notesInfo'|$translate)}}</div>
                                                 <div km-notes name="notes" ng-model="document.notes"></div>
                                             </div>
                                         </div>

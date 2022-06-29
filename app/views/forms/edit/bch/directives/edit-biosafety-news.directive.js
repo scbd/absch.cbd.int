@@ -3,7 +3,9 @@ import _ from 'lodash';
 import template from 'text!./edit-biosafety-news.directive.html';
 import 'views/forms/edit/edit';
 import "~/views/forms/view/bch/view-biosafety-news.directive"; 
-	app.directive("editBiosafetyNews", ["$controller", function($controller) {
+import editBiosafetyNewsT from '~/app-text/views/forms/edit/bch/directives/edit-biosafety-news.json';
+
+app.directive("editBiosafetyNews", ["$controller", "translationService", function ($controller, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -15,7 +17,8 @@ import "~/views/forms/view/bch/view-biosafety-news.directive";
 			link: function($scope, $element, $attr){  
 				$scope.container        = $attr.container;
     			$scope.isDialog         = $attr.isDialog;  
-				$scope.type 			= $attr.documentType;  
+				$scope.type 			= $attr.documentType;
+				translationService.set('editBiosafetyNewsT', editBiosafetyNewsT);  
                 $controller('editController', {
                     $scope: $scope
                 }); 

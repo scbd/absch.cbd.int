@@ -68,9 +68,9 @@
 			<div class="table-responsive">
 				<table id="forExport" class="table table-hover">
 					<tr>
-						<th>Country</th>
-						<th>Status</th>
-						<th ng-if="regions.length>0">Regions</th>
+						<th>{{::('countryListTranslation.country'|$translate)}}</th>
+						<th>{{::('countryListTranslation.status'|$translate)}}</th>
+						<th ng-if="regions.length>0">{{::('countryListTranslation.regions'|$translate)}}</th>
 						<th ng-repeat="header in headerCount">
 							<span ng-bind="header.title|lstring"></span>
 							(<span ng-bind="header.shortCode"></span>)
@@ -81,8 +81,8 @@
 						<td ng-bind="country.name|lstring:locale"></td>
 						<td>
 							<span ng-if="!country.isParty"
-								class="color-grey color-non-party me-2 fs-small-6">Non-Party</span>
-							<span ng-if="country.isParty" class="color-party me-2 fs-small-6">Party</span>
+								class="color-grey color-non-party me-2 fs-small-6">{{::('countryListTranslation.nonParty'|$translate)}}</span>
+							<span ng-if="country.isParty" class="color-party me-2 fs-small-6">{{::('countryListTranslation.party'|$translate)}}</span>
 						</td>
 						<td ng-if="regions.length>0" ng-bind="::getRegions(country.code)"></td>
 						<td ng-repeat="schema in country.schemas" ng-bind="schema.count"></td>
@@ -97,7 +97,7 @@
 					<a class="text-decoration-none text-dark me-md-1" rel="noopener" ng-href="#"
 						class="help-tour link2 text-decoration-none" ng-click="tour()">
 						<i class="bi bi-question-circle-fill"></i>
-						<span class="d-none d-lg-inline">TAKE COUNTRY PROFILES TOUR</span>
+						<span class="d-none d-lg-inline">{{::('countryListTranslation.takeTour'|$translate)}}</span>
 					</a>
 				</span>
 			</div>
@@ -111,7 +111,7 @@
 						<i ng-if="sortTerm==='name.en'" class="fa"
 							ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}"
 							style="width:20px;"></i>
-						<span ng-if="sortTerm!=='name.en'">Ordered by: <strong> <span
+						<span ng-if="sortTerm!=='name.en'">{{::('countryListTranslation.orderedBy'|$translate)}}: <strong> <span
 									ng-bind="sortTerm|schemaShortName"></span></strong></span>
 						<span class="caret"></span>
 					</button>
@@ -120,13 +120,13 @@
 								ng-click="sortTable('name.en', 'ASC')">
 								<i class="bi bi-sort-alpha-down"></i>
 								<!-- <i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> -->
-								Sort alphabetical A-Z </a>
+								{{::('countryListTranslation.sortAlphabeticalAz'|$translate)}} </a>
 						</li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
 								ng-click="sortTable('name.en', 'DESC')">
-								<i class="bi bi-sort-alpha-down"></i>Sort alphabetical Z-A
-								<!-- <i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> -->
-								Sort alphabetical Z-A
+								<i class="bi bi-sort-alpha-down"></i>{{::('countryListTranslation.sortAlphabeticalZa'|$translate)}}
+								<!-- <i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> 
+								Sort alphabetical Z-A-->
 							</a>
 						</li>
 						<li role="separator" class="divider"></li>
@@ -145,46 +145,42 @@
 						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						<span>
 							<span ng-if="partyFilter==='All' || !partyFilter">
-								<span class="d-none d-md-inline">Party Status</span>
+								<span class="d-none d-md-inline">{{::('countryListTranslation.partyStatus'|$translate)}}</span>
 								<span class="d-md-none">PS</span>
 							</span>
 							<span ng-if="partyFilter == 'party'"><i class="color-party fa fa-square"></i>
-								<span class="hidden-sm hidden-xs">Parties</span> <span ng-if="isBCH"> to the Cartagena
-									Protocol</span>
+								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.parties'|$translate)}}</span> <span ng-if="isBCH"> {{::('countryListTranslation.toCartagenaProtocol'|$translate)}} </span>
 							</span>
 							<span ng-if="partyFilter == 'NKLSParty'"><i class="color-NKLSP fa fa-square"></i>
-								<span class="hidden-sm hidden-xs">Parties to the Supplementary Protocol</span>
+								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.partiesToSuppProtocol'|$translate)}}</span>
 							</span>
 							<span ng-if="partyFilter == 'inbetween'"><i class="color-inbetween fa fa-square"></i>
-								<span class="hidden-sm hidden-xs">Ratified, not yet Party<span ng-if="isBCH"> to the
-										Cartagena Protocol</span></span>
+								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.ratified'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}} </span></span>
 							</span>
 							<span ng-if="partyFilter == 'nonparty'"><i class="color-non-party fa fa-square"></i>
-								<span class="hidden-sm hidden-xs">Non-Parties<span ng-if="isBCH"> to the Cartagena
-										Protocol</span></span>
+								<span class="hidden-sm hidden-xs">{{::('countryListTranslation.nonParties'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></span>
 							</span>
 						</span>
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
-								ng-click="setPartyFilter('All');"> Show all </a>
+								ng-click="setPartyFilter('All');">{{::('countryListTranslation.showAll'|$translate)}}</a>
 						</li>
 						<li role="separator" class="divider"></li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
-								ng-click="setPartyFilter('party');"> <i class="color-party fa fa-square"></i> Parties
-								<span ng-if="isBCH"> to the Cartagena
-									Protocol</span></a></li>
+								ng-click="setPartyFilter('party');"> <i class="color-party fa fa-square"></i>{{::('countryListTranslation.parties'|$translate)}}
+								<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}
+									</span></a></li>
 						<li ng-if="isBCH"><a class="text-decoration-none" rel="noopener" translation-url href="#"
 								ng-click="setPartyFilter('NKLSParty');"> <i class="color-NKLSP fa fa-square"></i>
-								Parties to the Supplementary Protocol</a></li>
+								{{::('countryListTranslation.partiesToSuppProtocol'|$translate)}}</a></li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
 								ng-click="setPartyFilter('inbetween');"> <i class="color-inbetween fa fa-square"></i>
-								Ratified, not yet Party <span ng-if="isBCH">to the Cartagena Protocol</span></a></li>
+								{{::('countryListTranslation.ratified'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></a></li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
 								ng-click="setPartyFilter('nonparty');"> <i class="color-non-party fa fa-square"></i>
-								Non-Parties <span ng-if="isBCH">to the
-									Cartagena Protocol</span></a></li>
+								{{::('countryListTranslation.nonParties'|$translate)}}<span ng-if="isBCH">{{::('countryListTranslation.toCartagenaProtocol'|$translate)}}</span></a></li>
 					</ul>
 				</div>
 
@@ -197,7 +193,7 @@
 					class="btn btn-default btn-sm bg-white" ng-click="export()"
 					ng-disabled="readyForExport||loading">
 					<i class="fa fa-download"></i>
-					<span class="d-none d-md-inline">Export</span>
+					<span class="d-none d-md-inline">{{::('countryListTranslation.export'|$translate)}}</span>
 				</button>
 			</div>
 			<div class="col-md-7 evenly-spaced center-text d-none d-lg-grid justify-content-between">
@@ -214,7 +210,7 @@
 		</div>
 		<!--end row-->
 		<div ng-if="!list.length" class="row m-0 border-bottom border-2 px-3 pt-1 pb-2">
-			<span>No countries found for selected filter</span>
+			<span>{{::('countryListTranslation.noCountries'|$translate)}}</span>
 		</div>
 		<div class="row linkWhite m-0 border-bottom border-2 px-0 pt-1 pb-2" ng-click="gotoCountryProfile(country.code)"
 			ng-repeat="country in list = (countries | filter:hasCountries | filter: hasStatus | filter: hasRegions | orderBy:sortTermFilter:orderList) track by country.name.en">
@@ -230,23 +226,18 @@
 				<div class="ms-4 ps-2 text-uppercase fw-bold">
 					<div ng-if="isABS">
 						<span ng-if="!country.isParty && !country.isInbetweenParty"
-							class="color-grey color-non-party fs-small-6 me-2">Non-Party</span>
-						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">Party to the Nagoya
-							Protocol</span>
-						<span ng-if="country.isInbetweenParty" class="color-inbetween fs-small-6 me-2">Ratified,
-							not yet Party</span>
+							class="color-grey color-non-party fs-small-6 me-2">{{::('countryListTranslation.nonParty'|$translate)}}</span>
+						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">{{::('countryListTranslation.partyToNagoyaProtocol'|$translate)}}</span>
+						<span ng-if="country.isInbetweenParty" class="color-inbetween fs-small-6 me-2">{{::('countryListTranslation.ratified'|$translate)}}</span>
 						<!-- <span ng-if="country.isSignatory" class="fs-small-6 me-2">Signatory</span> -->
 						<span ng-if="country.entryIntoForce"
-							class="color-grey color-non-party fs-small-6 me-3">since <span
+							class="color-grey color-non-party fs-small-6 me-3">{{::('countryListTranslation.since'|$translate)}} <span
 								ng-bind="country.entryIntoForce|formatDate"></span></span>
 					</div>
 					<div ng-if="isBCH">
-						<span ng-if="!country.isParty" class="color-grey color-non-party fs-small-6 me-2">Non-Party
-							to the Cartagena Protocol</span>
-						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">Party to the Cartagena
-							Protocol</span>
-						<span ng-if="isBCH && country.isNKLSParty" class="color-NKLSP fs-small-6 me-2">PARTY TO THE
-							SUPPLEMENTARY PROTOCOL</span>
+						<span ng-if="!country.isParty" class="color-grey color-non-party fs-small-6 me-2">{{::('countryListTranslation.nonPartyToCartagena'|$translate)}}</span>
+						<span ng-if="country.isParty" class="color-party fs-small-6 me-2">{{::('countryListTranslation.partyToCartagena'|$translate)}}</span>
+						<span ng-if="isBCH && country.isNKLSParty" class="color-NKLSP fs-small-6 me-2">{{::('countryListTranslation.partyToSuppProtocol'|$translate)}}</span>
 					</div>
 				</div>
 			</div>

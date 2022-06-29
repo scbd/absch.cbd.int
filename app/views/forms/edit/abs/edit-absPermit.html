@@ -40,9 +40,9 @@
                                 <label for="invalidForm" style="width:100%">
                                     <div class="alert alert-danger" ng-show="isIRCCRevoked">
                                         <div class="text-center">
-                                            <h1>THIS CERTIFICATE HAS BEEN REVOKED</h1>
+                                            <h1>{{::('editAbsPermitT.IRCCRevoked'|$translate)}}</h1>
                                             <p>
-                                                Revoked or cancelled certificates are not editable.
+                                                {{::('editAbsPermitT.IRCCRevokedInfo'|$translate)}}
                                             </p>
                                         </div>
                                     </div>
@@ -54,7 +54,7 @@
                                     
                                     <section ng-show="documentExists">
                                         
-                                        <legend>Amendment intent</legend>
+                                        <legend>{{::('editAbsPermitT.amendmentIntent'|$translate)}}</legend>
                                         <!--<div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="amendmentIntent" required caption="Please indicate what the intent of the modification is">
@@ -68,11 +68,10 @@
                                         </div>-->
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                    <div class="alert alert-info"><h3>Please note that by amending a published internationally recognized certificate
-                                                    of compliance (IRCC) a new IRCC will be constituted and the old IRCC will no longer be valid.
+                                                    <div class="alert alert-info"><h3>{{::('editAbsPermitT.amendmentInfo'|$translate)}}
                                                     </h3></div>
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="amendmentDescription" required caption="Provide a summary of the reason for the update of the record">
+                                                    <div class="km-control-group" name="amendmentDescription" required caption="{{::('editAbsPermitT.amendmentDescription'|$translate)}}">
                                                         <div km-rich-textbox ng-model="document.amendmentDescription" rows="3" placeholder="" locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -82,10 +81,10 @@
                                     </section>
             
                                     <section>
-                                        <legend>General information</legend>
+                                        <legend>{{::('editAbsPermitT.generalInfo'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12" >
-                                                <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                                <div class="km-control-group" name="header.languages" required caption="{{::('editAbsPermitT.languageToPublish'|$translate)}}">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -94,18 +93,16 @@
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="government" required caption="Country">
-                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                                <div class="km-control-group" name="government" required caption="{{::('editAbsPermitT.country'|$translate)}}">
+                                                    <div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsPermitT.selectOption'|$translate)}}"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="permit" caption="Links to other internationally recognized certificate(s) of compliance (IRCC) that relate(s) to this permit">
-                                                        <div class="help-info">Sometimes a permit can be related to other previously issued permits, for instance to a permit for accessing a soil sample. Depending on the MAT, it is possible that some countries decide to issue specific permits
-                                                            for subsequently identified genetic resources from the taken soil sample. For such cases, the ABS Clearing-House offers the possibility to link different IRCCs together. IRCCs linked through this mechanism
-                                                            will be displayed together and thus facilitate tracking of the IRCCs. </div>
+                                                    <div class="km-control-group" name="permit" caption="{{::('editAbsPermitT.permit'|$translate)}}">
+                                                        <div class="help-info">{{::('editAbsPermitT.permitInfo'|$translate)}} </div>
                                                             <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildHideSelfQuery(searchText)" ng-model="document.relatedIRCCs" question="relatedIRCCs"></div>
                                                     </div>
                                                 </div>
@@ -113,11 +110,11 @@
                                         </div>
                                     </section>
                                     <section>
-                                        <legend>Issuing Authority</legend>
+                                        <legend>{{::('editAbsPermitT.issuingAuthority'|$translate)}}</legend>
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="absCNA" required caption="Competent national authority (CNA) responsible for issuing this permit or its equivalent">
+                                                <div class="km-control-group" name="absCNA" required caption="{{::('editAbsPermitT.CNAResponsible'|$translate)}}">
                                                     <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildQuery(searchText, 'authority')" ng-model="document.absCNA" question="absCNA" type="radio"></div>
                                                 </div>
                                             </div>
@@ -125,13 +122,13 @@
                                     </section>
             
                                     <section>
-                                        <legend>Details of the permit or its equivalent</legend>
+                                        <legend>{{::('editAbsPermitT.detailsPermit'|$translate)}}</legend>
             
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group">
-                                                    <div class="km-control-group" name="title" required caption="Reference number of the permit or its equivalent">
-                                                        <span class="help-info">This field will also appear as the title of this record.
+                                                    <div class="km-control-group" name="title" required caption="{{::('editAbsPermitT.title'|$translate)}}">
+                                                        <span class="help-info">{{::('editAbsPermitT.titleInfo'|$translate)}}
                                                         </span>
                                                         <div km-textbox-ml ng-model="document.title" rows="1" placeholder="" locales="document.header.languages"></div>
                                                     </div>
@@ -141,8 +138,8 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="referenceToNationalPermit" caption="Additional national references or identifiers">
-                                                    <span class="help-info">Please provide information on any national identifiers that may aid users to search and retrieve information related to the permit or its equivalent.</span>
+                                                <div class="km-control-group" name="referenceToNationalPermit" caption="{{::('editAbsPermitT.referenceToNationalPermit'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.referenceToNationalPermitInfo'|$translate)}}</span>
                                                     <div km-rich-textbox ng-model="document.referenceToNationalPermit" rows="6" placeholder="" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -150,16 +147,15 @@
             
                                         <div class="row">
                                             <div class="col-xs-6">
-                                                <div class="km-control-group" name="dateOfIssuance" required caption="Date of issuance of the permit or its equivalent">
-                                                    <div class="help-info">This field refers to the date of issuance of the national permit. This information is mandatory and key to ensure legal certainty regarding the right of the user to utilize the genetic resource covered by the permit.</div>
+                                                <div class="km-control-group" name="dateOfIssuance" required caption="{{::('editAbsPermitT.dateOfIssuance'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsPermitT.dateOfIssuanceInfo'|$translate)}}</div>
                                                     <div km-date placeholder="YYYY-MM-DD" required name="dateOfIssuance" ng-model="document.dateOfIssuance"></div>
                                                 </div>
                                             </div>
                                             <div class="col-xs-6">
-                                                <div class="km-control-group" name="dateOfExpiry" caption="Date of expiry of the permit or its equivalent">
+                                                <div class="km-control-group" name="dateOfExpiry" caption="{{::('editAbsPermitT.dateOfExpiry'|$translate)}}">
                                                     <div class="help-info">
-                                                        If the national ABS permit, or equivalent, includes an expiry date please add it here.
-                                                        Please note, two months before the permit expires, an email is sent to the CNA alerting of the date of expiry of the IRCC. </div>
+                                                        {{::('editAbsPermitT.dateOfExpiryInfo'|$translate)}}</div>
                                                     <div km-date placeholder="YYYY-MM-DD" name="dateOfExpiry" ng-model="document.dateOfExpiry"></div>
                                                 </div>
                                             </div>
@@ -167,7 +163,7 @@
                                     </section>
             
                                     <section>
-                                        <legend>Prior Informed Consent (PIC) Information</legend>
+                                        <legend>{{::('editAbsPermitT.priorInformation'|$translate)}}</legend>
             
                                         <div class="row bg-light">
                                             <div class="col-xs-12">
@@ -176,12 +172,12 @@
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.providersConfidential}">
                                                         <input type="checkbox" name="providersConfidential" ng-model="document.providersConfidential" watch-items />
-                                                        This information is confidential
+                                                        {{::('editAbsPermitT.confidentialInformation'|$translate)}}
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.providersConfidential}">
-                                                        <div class="km-control-group " name="providers" required caption="The provider" style="margin-top:0;">
-                                                            <span class="help-info">Please provide the name and contact details of the person or entity that holds the right to grant access to the genetic resources in accordance with domestic legislation.</span>
+                                                        <div class="km-control-group " name="providers" required caption=" {{::('editAbsPermitT.theProvider'|$translate)}}" style="margin-top:0;">
+                                                            <span class="help-info">{{::('editAbsPermitT.providersInfo'|$translate)}}</span>
                                                             <div ng-show="!document.providersConfidential">
                                                                 <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.providers" question="providers"
                                                                            allow-new="true" allow-new-schema="contact"></div>
@@ -195,27 +191,27 @@
             
                                         <div class="row mt-4">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required name="picGranted" caption="Confirmation that prior informed consent (PIC) was obtained or granted">
-                                                    <span class="help-info">If PIC has not been obtained or granted,  this record cannot be posted in the ABS Clearing-House and, therefore, the internationally recognized certificate of compliance will not be issued.</span>
-                                                    <button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">Yes</button>
+                                                <div class="km-control-group" required name="picGranted" caption="{{::('editAbsPermitT.picGranted'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.picGrantedInfo'|$translate)}}</span>
+                                                    <button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.picGranted, 'btn-default': !document.picGranted}" ng-click="document.picGranted=!document.picGranted">{{::('editAbsPermitT.yes'|$translate)}}</button>
                                                 </div>
                                             </div>
                                         </div>
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="picInformation" caption="Additional information about the prior informed consent (PIC)">
+                                                <div class="km-control-group" name="picInformation" caption="{{::('editAbsPermitT.picInformation'|$translate)}}">
                                                     <span class="help-info">
-                                                If applicable, please provide any additional information about the prior informed consent (PIC). Detailed information may be provided in an attached document
+                                                {{::('editAbsPermitT.picInformationInfo'|$translate)}}
                                             </span>
                                                     <div km-rich-textbox name="picInformation" rows="4" ng-model="document.picInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
             
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="picDocuments" caption="Additional information about the prior informed consent (PIC) - Documents">
+                                                <div class="km-control-group" name="picDocuments" caption="{{::('editAbsPermitT.picDocuments'|$translate)}}">
                                                     <span class="help-info">
-                                                If applicable, please provide the link or upload the documents.</span>
+                                                        {{::('editAbsPermitT.picDocumentsInfo'|$translate)}}"</span>
                                                     <div km-link name="picDocuments" ng-model="document.picDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
@@ -228,13 +224,13 @@
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.entitiesToWhomPICGrantedConfidential}">
                                                         <input type="checkbox" name="entitiesToWhomPICGrantedConfidential" ng-model="document.entitiesToWhomPICGrantedConfidential" watch-items />
-                                                        This information is confidential
+                                                        {{::('editAbsPermitT.confidentialInformation'|$translate)}}
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.entitiesToWhomPICGrantedConfidential}">
-                                                        <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="Person or entity to whom prior informed consent (PIC) was granted" style="margin-top:0;">
+                                                        <div class="km-control-group " name="entitiesToWhomPICGranted" required required caption="{{::('editAbsPermitT.entitiesConfidential'|$translate)}}" style="margin-top:0;">
                                                             <div ng-show="!document.entitiesToWhomPICGrantedConfidential">
-                                                                <div class="help-info">Please provide the name and contact details of all people or entities (both foreign and domestic) to whom prior informed consent was granted. If the information is marked as confidential that person will not be able to receive the courtesy copy of the IRCC or the CPC. </div>
+                                                                <div class="help-info">{{::('editAbsPermitT.entitiesConfidentialInfo'|$translate)}} </div>
                                                                <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" ng-model="document.entitiesToWhomPICGranted" question="entitiesToWhomPICGranted"
                                                                      allow-new="true" allow-new-schema="contact"></div>
                                                             </div>
@@ -249,13 +245,13 @@
                                     </section>
             
                                     <section>
-                                        <legend>Mutually Agreed Terms (MAT) Information</legend>
+                                        <legend>{{::('editAbsPermitT.mutuallyInformation'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required name="matEstablished" caption="Confirmation that mutually agreed terms (MAT) were established">
-                                                    <span class="help-info">If no mutually agreed terms (MAT) have been established, this record cannot be published in the ABS Clearing-House and, therefore, an internationally recognized certificate of compliance can not be issued.</span>
+                                                <div class="km-control-group" required name="matEstablished" caption="{{::('editAbsPermitT.matEstablished'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.matEstablishedInfo'|$translate)}}</span>
             
-                                                    <button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">Yes</button>
+                                                    <button data-bs-toggle="buttons-checkbox" type="button" class="btn" ng-class="{'btn-primary':document.matEstablished, 'btn-default':!document.matEstablished}" ng-click="document.matEstablished=!document.matEstablished">{{::('editAbsPermitT.yes'|$translate)}}</button>
             
                                                 </div>
                                             </div>
@@ -263,18 +259,18 @@
                                         <div class="row">
                                             <div class="col-xs-12">
             
-                                                <div class="km-control-group" name="matInformation" caption="Additional information about the mutually agreed terms (MAT) - Information">
+                                                <div class="km-control-group" name="matInformation" caption="{{::('editAbsPermitT.matInformation'|$translate)}}">
                                                     <span class="help-info">
-                                                If applicable,  please provide any information about the MAT. For example, this may include information on conditions for access and for benefit-sharing and other relevant information included in the MAT. Detailed information may be provided in an attached document.</span>
+                                                        {{::('editAbsPermitT.matInformationInfo'|$translate)}}</span>
                                                     <div km-rich-textbox name="matInformation" rows="4" ng-model="document.matInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
             
             
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="matDocuments" caption="Additional information about the mutually agreed terms (MAT) - Documents">
+                                                <div class="km-control-group" name="matDocuments" caption="{{::('editAbsPermitT.matDocuments'|$translate)}}">
                                                     <span class="help-info">
-                                                If applicable,  please provide the link or upload the documents.</span>
+                                                        {{::('editAbsPermitT.matDocumentsInfo'|$translate)}}</span>
                                                     <div km-link name="matDocuments" ng-model="document.matDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
@@ -284,7 +280,7 @@
             
             
                                     <section>
-                                        <legend>Subject-matter or genetic resource</legend>
+                                        <legend>{{::('editAbsPermitT.subjectMatter'|$translate)}}</legend>
                                         <div class="row bg-light">
                                             <div class="col-xs-12">
             
@@ -293,12 +289,12 @@
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.subjectMatterConfidential}">
                                                         <input type="checkbox" name="subjectMatterConfidential" ng-model="document.subjectMatterConfidential" watch-items />
-                                                        This information is confidential
+                                                        {{::('editAbsPermitT.confidentialInformation'|$translate)}}
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.subjectMatterConfidential}">
-                                                        <div class="km-control-group" required name="subjectMatter" caption="Subject-matter or genetic resources covered by the permit or its equivalent">
-                                                            <span class="help-info">Please provide information on the subject matter or genetic resources covered by the permit. This could include biota at any taxonomic rank, which may carry a taxonomic name. It may also include a locality of collection of the material. It may also be possible to identify the genetic resource through reference to a voucher specimen or field notes held in an identified archive or collection.</span>
+                                                        <div class="km-control-group" required name="subjectMatter" caption="{{::('editAbsPermitT.subjectMatterConfidential'|$translate)}}">
+                                                            <span class="help-info">{{::('editAbsPermitT.subjectMatterConfidentialInfo'|$translate)}}</span>
             
                                                             <div ng-show="!document.subjectMatterConfidential">
                                                                 <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter" locales="document.header.languages"></div>
@@ -312,11 +308,11 @@
             
                                         <div class="row" style="margin-top:20px;">
                                             <div class="col-xs-12">
-                                                <div class="legend2">Additional subject matter or genetic resource information
-                                                    <span class="help-info">Providing details about the subject matter or genetic resource covered by the permit or its equivalent can provide additional legal certainty.</span>
+                                                <div class="legend2">{{::('editAbsPermitT.additionalSubjectInformation'|$translate)}}
+                                                    <span class="help-info">{{::('editAbsPermitT.provideSubjectDetails'|$translate)}}</span>
                                                 </div>
-                                                <div class="km-control-group" name="specimens" caption="Specimen data">
-                                                    <span class="help-info">Link to a voucher specimen held in an appropriate facility</span>
+                                                <div class="km-control-group" name="specimens" caption="{{::('editAbsPermitT.specimens'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.specimensInfo'|$translate)}}</span>
                                                     <div km-link name="specimens" ng-model="document.specimens" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
@@ -324,8 +320,8 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="taxonomies" caption="Taxonomy">
-                                                    <span class="help-info">Link to record in external taxonomy database, e.g. GBIF, Catalogue of Life</span>
+                                                <div class="km-control-group" name="taxonomies" caption="{{::('editAbsPermitT.taxonomy'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.taxonomyInfo'|$translate)}}</span>
                                                     <div km-link name="taxonomies" ng-model="document.taxonomies" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
@@ -334,23 +330,23 @@
                                         <div class="row">
                                             <div class="col-xs-12" ng-class="{'warning':isInvalid('gisFiles')}">
                                                 <div class="km-control-group">
-                                                    <label class="control-label" for="gisFiles">Geographic coordinates</label>
-                                                    <span class="help-info">Limited to .geojson files (<a rel="noopener" target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span>
+                                                    <label class="control-label" for="gisFiles">{{::('editAbsPermitT.geographicCoordinates'|$translate)}}</label>
+                                                    <span class="help-info">{{::('editAbsPermitT.geographicCoordinatesInfo'|$translate)}} (<a rel="noopener" target="_blank" href="http://www.geojson.org/">http://www.geojson.org/</a>)</span>
                                                     <div km-link required name="gisFiles" ng-model="document.gisFiles" allow-link="false" identifier="document.header.identifier" mime-types="application/json"></div>
                                                 </div>
             
                                                 <div ng-if="document.gisFiles">
                                                     <div class="input-prepend input-append">
                                                         <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" />
-                                                        <span class="add-on">lat</span>
+                                                        <span class="add-on">{{::('editAbsPermitT.lat'|$translate)}}</span>
                                                     </div>
                                                     <div class="input-prepend input-append">
                                                         <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}" />
-                                                        <span class="add-on">long</span>
+                                                        <span class="add-on">{{::('editAbsPermitT.long'|$translate)}}</span>
                                                     </div>
                                                     <div class="input-prepend input-append">
                                                         <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}" />
-                                                        <span class="add-on">zoom</span>
+                                                        <span class="add-on">{{::('editAbsPermitT.zoom'|$translate)}}</span>
                                                     </div>
             
                                                     <div class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
@@ -362,15 +358,15 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
-                                                    <span class="help-info">The collection of this information is important for facilitating harmonized searches throughout the records. Please select all relevant keywords that could assist in describing the subject-matter or genetic resource(s) covered by the permit or its equivalent.</span>
+                                                <div class="km-control-group" name="keywords" caption="{{::('editAbsPermitT.keywords'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.keywordsInfo'|$translate)}} </span>
                                                     <div km-select multiple show-description="true" required name="keywords" ng-model="document.keywords" items="options.keywords()"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12" ng-show="isOthers()">
-                                                <div class="km-control-group" required name="keywordOther" caption="Other keywords">
+                                                <div class="km-control-group" required name="keywordOther" caption="{{::('editAbsPermitT.keywordOther'|$translate)}}">
                                                     <div km-textbox-ml required name="keywordOther" rows="1" ng-model="document.keywordOther" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -379,8 +375,8 @@
             
             
                                     <section>
-                                        <legend>Information on the utilization of the genetic resource(s)</legend>
-                                        <span class="help-info">The information included in this section of the IRCC is meant to allow anyone verifying that the use of the genetic resource at any stage of research, development, innovation, pre-commercialization or commercialization is done in accordance with the conditions of use of PIC and MAT.</span>
+                                        <legend>{{::('editAbsPermitT.informationUtilization'|$translate)}}</legend>
+                                        <span class="help-info">{{::('editAbsPermitT.informationUtilizationInfo'|$translate)}}</span>
                                         <div class="row bg-light">
                                             <div class="col-xs-12">
             
@@ -389,11 +385,11 @@
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.usagesConfidential}">
                                                         <input type="checkbox" name="usagesConfidential" ng-model="document.usagesConfidential" watch-items />
-                                                        This information is confidential
+                                                        {{::('editAbsPermitT.confidentialInformation'|$translate)}}
                                                     </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.usagesConfidential}">
-                                                        <div class="km-control-group" required name="usages" caption="Indicate if the permit or its equivalent covers commercial and/or non-commercial use">
+                                                        <div class="km-control-group" required name="usages" caption="{{::('editAbsPermitT.usages'|$translate)}}">
                                                             <div ng-show="!document.usagesConfidential">
                                                                 <div km-select multiple required name="usages" ng-model="document.usages" items="options.usages()"></div>
                                                             </div>
@@ -408,8 +404,8 @@
             
                                         <div class="row" style="margin-top:20px;">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="usagesDescription" caption="Additional information about the specified uses covered by the permit or its equivalent or use restrictions">
-                                                    <span class="help-info">Access can be granted only for specified uses (e.g. for medical use), or on the contrary access could be granted for multiple uses but with specific restrictions applying (e.g. restriction to obtain intellectual property rights). If applicable, please provide any additional information about the specific uses or any use restrictions covered by the permit or its equivalent.</span>
+                                                <div class="km-control-group" name="usagesDescription" caption="{{::('editAbsPermitT.usagesDescription'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.usagesDescriptionInfo'|$translate)}}</span>
                                                     <div km-rich-textbox name="usagesDescription" rows="6" ng-model="document.usagesDescription" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -418,26 +414,26 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="thirdPartyTransferCondition" caption="Conditions for third party transfer">
-                                                    <span class="help-info">Where a permit or its equivalent establish conditions or restrictions regarding the transfer to a third party, it will help to make this information available through the ABS Clearing-House in order to monitor the utilization of genetic resources and enhance legal certainty. </span>
+                                                <div class="km-control-group" name="thirdPartyTransferCondition" caption="{{::('editAbsPermitT.thirdPartyTransferCondition'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.thirdPartyTransferConditionInfo'|$translate)}}</span>
                                                     <div km-rich-textbox name="thirdPartyTransferCondition" rows="4" ng-model="document.thirdPartyTransferCondition" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </section>
                                     <section>
-                                        <legend>Documentation</legend>
+                                        <legend>{{::('editAbsPermitT.documentation'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="permitFiles" caption="Copy of the permit or its equivalent, or other relevant open-access document">
-                                                    <span class="help-info">Please use this field to upload a copy of the permit or its equivalent or other relevant document if desired, or provide a link to its equivalent on a national website. Include a short description of the link or attachment. Note that this information will be made publicly available through the ABS Clearing-House and therefore should not contain confidential information, nor links to information that has restricted access.</span>
+                                                <div class="km-control-group" name="permitFiles" caption="{{::('editAbsPermitT.permitFiles'|$translate)}}">
+                                                    <span class="help-info">{{::('editAbsPermitT.permitFilesInfo'|$translate)}}</span>
                                                     <div km-link name="permitFiles" ng-model="document.permitFiles" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="permitDescription" caption="Short description of the attached link(s) and/or file(s)">
+                                                <div class="km-control-group" name="permitDescription" caption="{{::('editAbsPermitT.permitDescription'|$translate)}}">
                                                     <div km-rich-textbox name="permitDescription" rows="6" ng-model="document.permitDescription" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -446,11 +442,11 @@
                                     </section>
             
                                     <section>
-                                        <legend>Additional Information</legend>
+                                        <legend>{{::('editAbsPermitT.additionalInformation'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="relevantInformation" caption="Additional Information">
-                                                    <div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+                                                <div class="km-control-group" name="relevantInformation" caption="{{::('editAbsPermitT.additionalInformation'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsPermitT.relevantInformationInfo'|$translate)}}</div>
                                                     <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation" locales="document.header.languages"></div>
                                                 </div>
                                             </div>
@@ -458,7 +454,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="relevantDocuments" caption="Other relevant website addresses and/or attached documents">
+                                                <div class="km-control-group" name="relevantDocuments" caption="{{::('editAbsPermitT.relevantDocumentsInfo'|$translate)}}">
                                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" identifier="document.header.identifier"></div>
                                                 </div>
                                             </div>
@@ -466,11 +462,11 @@
                                     </section>
             
                                     <section>
-                                        <legend>Notes</legend>
+                                        <legend>{{::('editAbsPermitT.notes'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="notes">
-                                                    <div class="help-info">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+                                                    <div class="help-info">{{::('editAbsPermitT.notesInfos'|$translate)}}</div>
                                                     <div km-notes name="notes" ng-model="document.notes"></div>
                                                 </div>
                                             </div>

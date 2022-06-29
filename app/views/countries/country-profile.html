@@ -15,61 +15,61 @@
                 </h1>
                 <div class="p-3 bg-white">
                         <div class="mb-1 fs-6" ng-if="isABS">
-                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Nagoya Protocol</span>
-                            <span ng-if="country.isParty" class="color-party bold">Party to the Nagoya Protocol</span>
-                            <span ng-if="country.isInbetweenParty" class="color-inbetween bold">Ratified, not yet Party to the Nagoya Protocol</span>
+                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyToNagoya'|$translate)}}</span>
+                            <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyToNagoya'|$translate)}}</span>
+                            <span ng-if="country.isInbetweenParty" class="color-inbetween bold">{{::('countryProfileT.ratified'|$translate)}}</span>
                         </div>
                         <div class="mb-1 fs-6" ng-if="isBCH">
-                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">Not a Party to the Cartagena Protocol on Biosafety</span>
-                            <span ng-if="country.isParty" class="color-party bold">Party to the Cartagena Protocol on Biosafety</span>
+                            <span ng-if="!country.isParty && !country.isInbetweenParty" class="color-grey color-non-party bold">{{::('countryProfileT.notPartyToCartagena'|$translate)}}</span>
+                            <span ng-if="country.isParty" class="color-party bold">{{::('countryProfileT.partyToCartagena'|$translate)}}</span>
                         </div>
                         <div ng-if="country.isParty || country.isInbetweenParty" class="mt-1 mb-2" >
                             <span class="bold" ng-class="{' color-party': country.isParty, ' color-non-party':!country.isParty && !country.isInbetweenParty, ' color-inbetween': country.isInbetweenParty}">
-                                (<span ng-if="country.isInbetweenParty">Entry into force on:</span><span ng-if="country.isParty && !country.isInbetweenParty">since</span> 
+                                (<span ng-if="country.isInbetweenParty">{{::('countryProfileT.entry'|$translate)}}:</span><span ng-if="country.isParty && !country.isInbetweenParty">{{::('countryProfileT.since'|$translate)}}</span> 
                                 <span ng-bind="country.entryIntoForce|formatDate"></span>)
                             </span>
                         </div>
                         <div ng-if="isBCH && country.isNKLSParty" class="mt-1 mb-2">
-                            <span class="color-NKLSP bold fs-6">Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
+                            <span class="color-NKLSP bold fs-6">{{::('countryProfileT.partyToSuppProtocol'|$translate)}}</span>
                             <div ng-if="country.partyToNKLSPDate">
-                                <span class="color-NKLSP bold">(since <span  ng-bind="country.partyToNKLSPDate|formatDate"></span>)</span>
+                                <span class="color-NKLSP bold">({{::('countryProfileT.since'|$translate)}} <span  ng-bind="country.partyToNKLSPDate|formatDate"></span>)</span>
                             </div>
                         </div>
                         <div ng-if="isBCH && !country.isNKLSParty" class="mt-1 mb-2">
-                            <span class="color-non-party bold fs-6">Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress</span>
+                            <span class="color-non-party bold fs-6">{{::('countryProfileT.notPartyToSuppProtocol'|$translate)}}</span>
                         </div>
 
                         <div ng-if="isABS" class="m-0 my-2">
-                            <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Nagoya Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
+                            <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> {{::('countryProfileT.dkTextNagoya'|$translate)}}</div>
                             <div ng-if="country.code==='gb'">
                                  <i class="fa fa-info-circle"></i> 
-                                 The UK’s ratification of the Nagoya Protocol does not extend to the 
-                                 <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands" >14 Overseas Territories </a>
+                                 {{::('countryProfileT.gbTextNagoya'|$translate)}} 
+                                 <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" title="{{::('countryProfileT.gbTitle14'|$translate)}}" >{{::('countryProfileT.overseasTerritories14'|$translate)}} </a>
                                 or <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" 
-                                title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                                title="{{::('countryProfileT.gbTitle3'|$translate)}}">{{::('countryProfileT.crownDependencies'|$translate)}}</a>
                             </div>
                         </div>
                         <div ng-if="isBCH" class="m-0 my-2">
-                            <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.</div>
+                            <div ng-if="country.code==='dk'"><i class="fa fa-info-circle"></i> {{::('countryProfileT.dkTextCartagena'|$translate)}}</div>
                             <div ng-if="country.code==='gb'">
                                  <i class="fa fa-info-circle"></i> 
-                                 The UK’s ratification of the Cartagena Protocol does not extend to the 
-                                 <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands" >13 Overseas Territories </a>
+                                 {{::('countryProfileT.gbTextCartagena'|$translate)}} 
+                                 <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" title="{{::('countryProfileT.gbTitle13'|$translate)}}" >{{::('countryProfileT.overseasTerritories13'|$translate)}} </a>
                                 or <a rel="noopener" ng-href="#" class="gb-territories" data-bs-toggle="tooltip" data-placement="bottom" 
-                                title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                                title="{{::('countryProfileT.gbTitle3'|$translate)}}">{{::('countryProfileT.crownDependencies'|$translate)}}</a>
                             </div>
                         </div>
 
                         <div class="mb-1" ng-if="isABS">
-                            <label class="fw-bold">Signatory:</label>
-                            <span ng-if="country.isSignatory && !country.dateSigned" >Signatory</span>
-                            <span ng-if="country.isSignatory && country.dateSigned" >Signed on <span ng-bind="country.dateSigned|formatDate"></span> </span>
-                            <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">No</span>
+                            <label class="fw-bold">{{::('countryProfileT.signatory'|$translate)}}:</label>
+                            <span ng-if="country.isSignatory && !country.dateSigned" >{{::('countryProfileT.signatory'|$translate)}}Signatory</span>
+                            <span ng-if="country.isSignatory && country.dateSigned" >{{::('countryProfileT.signedOn'|$translate)}} <span ng-bind="country.dateSigned|formatDate"></span> </span>
+                            <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">{{::('countryProfileT.no'|$translate)}}</span>
                         </div>
 
                        
                         <div class="mb-1 text-nowrap overflow-hidden">
-                            <label  class="fw-bold">CBD Country Profile:</label>
+                            <label  class="fw-bold">{{::('countryProfileT.CbdCountryProfile'|$translate)}}:</label>
                             <a class="text-decoration-none" rel="noopener" translation-url href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
                         </div>
                             
@@ -77,7 +77,7 @@
             </div>
             <div class="col-12" ng-if="countryProfile && countryProfile.profile">
                 <div class="card bg-white cp-header"> 
-                    <legend class="ps-3">Additional information for the country profile</legend>
+                    <legend class="ps-3">{{::('countryProfileT.addIno'|$translate)}}</legend>
                     <span class="p-3" ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
                 </div>
             </div>

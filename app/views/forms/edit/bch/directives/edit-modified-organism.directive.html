@@ -16,10 +16,10 @@
 
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>General information</legend>
+									<legend>{{::('editModifiedOrganismT.generalInfo'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-xs-12">
-											<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+											<div class="km-control-group" name="header.languages" required caption="{{::('editModifiedOrganismT.languageToPublish'|$translate)}}">
 												<div class="indent">
 													<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 												</div>
@@ -31,60 +31,59 @@
 
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Identity of the living modified organism (LMO)</legend>
+									<legend>{{::('editModifiedOrganismT.identityLMO'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="identity" caption="LMO name">
-												<div class="help-block">Name commonly used to identify the LMO, such as the commercial name (e.g. Roundup soy, NewLeaf® potato, etc.)</div>
+											<div class="km-control-group"  name="identity" caption="{{::('editModifiedOrganismT.LMOName'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.LMONameInfo'|$translate)}}</div>
 												<div km-textbox-ml name="identity"  ng-model="document.identity" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="transformationEvent" caption="Transformation event">
-												<div class="help-block">Name of the transformation event, e.g. MON810</div>
+											<div class="km-control-group" required name="transformationEvent" caption="{{::('editModifiedOrganismT.transformationEvent'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.transformationEventInfo'|$translate)}}</div>
 												<input type="text" class="form-control" name="transformationEvent" required ng-model="document.transformationEvent"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="hasUniqueIdentification" required caption="Does this LMO have a unique identifier?">
-												<div class="help-block">The BCH is currently using the Unique Identifier system as set out in the OECD Guidance for the Designation of Unique Identifiers for Transgenic Plants (example MON-ØØ81Ø-6). 
-													For more information see <a rel="noopener" href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">https://bch.cbddev.xyz/en/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef</a>.</div>
+											<div class="km-control-group" name="hasUniqueIdentification" required caption="{{::('editModifiedOrganismT.hasUniqueIdentification'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.hasUniqueIdentificationInfo'|$translate)}} <a rel="noopener" href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">https://bch.cbddev.xyz/en/kb/tags/lmo-gene-orga/What-are-Unique-Identifiers-UIDs-/5ff77cb5261fe900012a0fef</a>.</div>
 												<div km-yes-no required ng-model="document.hasUniqueIdentification" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12" ng-if="document.hasUniqueIdentification">
-											<div class="km-control-group" required name="uniqueIdentification" caption="Unique identifier">
+											<div class="km-control-group" required name="uniqueIdentification" caption="{{::('editModifiedOrganismT.uniqueIdentification'|$translate)}}">
 												<input type="text" class="form-control" name="uniqueIdentification" required ng-model="document.uniqueIdentification"
 													ng-change="lookupDetections()"/>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="developers" caption="Developer(s)">	
+											<div class="km-control-group" required name="developers" caption="{{::('editModifiedOrganismT.developer'|$translate)}}">	
 												<div document-selector ng-model="document.developers" caption="Contact" question="developers"
 														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="description" caption="Description">
+											<div class="km-control-group" required name="description" caption="{{::('editModifiedOrganismT.description'|$translate)}}">
 												<div km-rich-textbox rows="4" name="description" required ng-model="document.description" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="recipientOrganisms" caption="“Recipient Organism” or “Parental Organisms”">	
-												<div class="help-block">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.</div>
-												<div document-selector required ng-model="document.recipientOrganisms" caption="Add Organism / Living Modified Organism" question="recipientOrganisms"
+											<div class="km-control-group" required name="recipientOrganisms" caption="{{::('editModifiedOrganismT.recipientOrganisms'|$translate)}}">	
+												<div class="help-block">{{::('editModifiedOrganismT.recipientOrganismsInfo'|$translate)}}</div>
+												<div document-selector required ng-model="document.recipientOrganisms" caption="{{::('editModifiedOrganismT.recipientOrganismsTitle'|$translate)}}" question="recipientOrganisms"
 														on-build-query="onRecipientOrganismsQuery(searchText)" allow-new="true" allow-new-schema="organism,modifiedOrganism"></div>
 											</div>
 										</div>
 
 										<div class="col-sm-12">
-											<div class="km-control-group"  name="recipientOrganismCollectionPoint" caption="Point of collection or acquisition of the recipient organism or parental organisms">
+											<div class="km-control-group"  name="recipientOrganismCollectionPoint" caption="{{::('editModifiedOrganismT.recipientOrganismCollectionPoint'|$translate)}}">
 												<div km-textbox-ml name="recipientOrganismCollectionPoint"  ng-model="document.recipientOrganismCollectionPoint" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="linkedModifiedOrganisms" caption="Related LMO(s)">	
-												<div class="help-block">This field relates to other LMOs with similar characteristics.</div>
+											<div class="km-control-group" name="linkedModifiedOrganisms" caption="{{::('editModifiedOrganismT.linkedModifiedOrganisms'|$translate)}}">	
+												<div class="help-block">{{::('editModifiedOrganismT.linkedModifiedOrganismsInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.linkedModifiedOrganisms" question="linkedModifiedOrganism"
 															on-build-query="onBuildQuery(searchText, 'modifiedOrganism')" allow-new="true" allow-new-schema="modifiedOrganism"></div>
 											</div>
@@ -96,23 +95,23 @@
 
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Characteristics of the modification process</legend>
+									<legend>{{::('editModifiedOrganismT.modificationProcess'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="vector" caption="Vector">
-												<div class="help-block">Vectors are used to incorporate a DNA sequence (typically the promoter-gene-terminator construct) to assist its transfer into the recipient organism. Examples: Agrobacterium Ti plasmid and pBIN19.</div>
+											<div class="km-control-group" required name="vector" caption="{{::('editModifiedOrganismT.vector'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.vectorInfo'|$translate)}}</div>
 												<div km-textbox-ml name="vector"  ng-model="document.vector" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" required name="techniqueUsed" caption="Techniques used for the modification">
+											<div class="km-control-group" required name="techniqueUsed" caption="{{::('editModifiedOrganismT.techniqueUsed'|$translate)}}">
 												<div km-term-check name="techniqueUsed" required ng-model="document.techniqueUsed"
 													 terms="options.techniqueUsed" binding-type="term[]" locales="document.header.languages"></div>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" required name="genes" caption="Introduced or modified genetic element(s)">	
-												<div class="help-block">Preferably all genetic elements that were introduced into this LMO, such as promoters, protein coding sequences and terminators, must be referenced in this section. At least ALL protein coding sequences are mandatory.</div>
+											<div class="km-control-group" required name="genes" caption="{{::('editModifiedOrganismT.genes'|$translate)}}">	
+												<div class="help-block">{{::('editModifiedOrganismT.genesInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.genes" question="genes" ng-change="onModifiedGeneChange(document.genes)"
 															caption="Genetic element" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
@@ -122,13 +121,13 @@
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="geneConstructs" caption="Genetic elements construct">
+											<div class="km-control-group" name="geneConstructs" caption="{{::('editModifiedOrganismT.geneConstructs'|$translate)}}">
 												<lmo-construct ng-model="document.geneConstructs" ng-change="onConstructChange()"></lmo-construct>
 											</div>
 										</div>
 										<div class="col-xs-12">
-											<div class="km-control-group" name="geneNotes" caption="Notes regarding the genetic elements present in this LMO">	
-												<div class="help-block">Please specify if any of these elements have been modified from the sequence registered in the BCH Genetic Element Registry and how they relate to each other in this LMO, for instance “<i>epsps</i> protein coding sequence under control of the <i>35S</i> promoter and <i>nos</i> terminator”.</div>
+											<div class="km-control-group" name="geneNotes" caption="{{::('editModifiedOrganismT.geneNotes'|$translate)}}">	
+												<div class="help-block">{{::('editModifiedOrganismT.geneNotesInfo'|$translate)}} “<i>{{::('editModifiedOrganismT.epsps'|$translate)}}</i> {{::('editModifiedOrganismT.proteinCoding'|$translate)}} <i>{{::('editModifiedOrganismT.35S'|$translate)}}</i> {{::('editModifiedOrganismT.promoterAnd'|$translate)}} <i>{{::('editModifiedOrganismT.nos'|$translate)}}</i> {{::('editModifiedOrganismT.terminator'|$translate)}}”.</div>
 												<div km-rich-textbox name="geneNotes" rows="4"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
 											</div>
 										</div>
@@ -139,7 +138,7 @@
 							
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>LMO characteristics</legend>
+									<legend>{{::('editModifiedOrganismT.LMOCharacteristics'|$translate)}}</legend>
 									<div class="row">
 										<!-- <div class="col-xs-12">
 											<div class="km-control-group" name="isGeneEdited" required
@@ -149,18 +148,16 @@
 											</div>
 										</div> -->
 										<div class="col-sm-12">
-											<div  block-region activate="loadingGeneTraits" block-text="Updating trait...">
-												<div class="km-control-group" required name="traits" caption="Modified traits">												
+											<div  block-region activate="loadingGeneTraits" block-text="{{::('editModifiedOrganismT.updatingTrait'|$translate)}}">
+												<div class="km-control-group" required name="traits" caption="{{::('editModifiedOrganismT.modifiedTraits'|$translate)}}">												
 													<traits-selector ng-model="document.traits" locales="document.header.languages"></traits-selector>													
 												</div>
 											</div>
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGenes"
-												caption="Other gene(s) whose expression was affected by the transformation">
-												<div class="help-block">This section should be used to specify changes in the expression of
-													genes other than those that were inserted into the LMO; for example, gene silencing or
-													induction.</div>
+												caption="{{::('editModifiedOrganismT.affectedGenes'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.affectedGenesInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
 														caption="Genetic element" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
@@ -171,14 +168,14 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="affectedGeneNotes"
-												caption="Please describe how the expression of the gene(s) was affected">
+												caption="{{::('editModifiedOrganismT.affectedGeneNotes'|$translate)}}">
 												<div km-rich-textbox name="affectedGeneNotes" ng-model="document.affectedGeneNotes"
 													locales="document.header.languages" rows="4"></div>
 											</div>
 										</div>
 										<div class="col-sm-12">
-											<div class="km-control-group" name="commonUses" caption="Common use(s) of the LMO">
-												<div class="help-block">Choose as many options as applicable.</div>
+											<div class="km-control-group" name="commonUses" caption="{{::('editModifiedOrganismT.commonUses'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.commonUsesInfo'|$translate)}}</div>
 												<div km-term-check name="commonUses" required ng-model="document.commonUses"
 													terms="options.commonUses" binding-type="term[]" locales="document.header.languages"></div>
 											</div>
@@ -188,13 +185,13 @@
 							</section>
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Detection method(s)</legend>
+									<legend>{{::('editModifiedOrganismT.dtectionMethod'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="help-block">
-												Detection methods information from the CropLife International Detection Methods Database and the EU Reference Laboratory for GM Food and Feed (EURL-GMFF) is dynamically imported from each respective database. As such, these links cannot be manually edited or removed.
+												{{::('editModifiedOrganismT.dtectionMethodInfo'|$translate)}}
 											</div>
-											<div class="km-control-group" name="externalLinks" caption="External link(s)">
+											<div class="km-control-group" name="externalLinks" caption="{{::('editModifiedOrganismT.externalLinks'|$translate)}}">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
 													identifier="document.header.identifier" ></div>
 												<div km-link name="externalLinks" ng-model="externalLinks" ng-if="externalLinks" allow-link="false" allow-file="false" identifier="document.header.identifier"></div>
@@ -203,7 +200,7 @@
 									</div>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="detectionMethod" caption="Additional information">
+											<div class="km-control-group" name="detectionMethod" caption="{{::('editModifiedOrganismT.additionalInformation'|$translate)}}">
 												<div km-rich-textbox ng-model="document.detectionMethod" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -212,13 +209,11 @@
 							</section>
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>Additional information</legend>
+									<legend>{{::('editModifiedOrganismT.additionalInformation'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="address" caption="Any other relevant information">
-												<div class="help-block">Please use this field to provide any other relevant information that may not have
-													been addressed elsewhere in
-													the record.</div>
+											<div class="km-control-group" name="address" caption="{{::('editModifiedOrganismT.relevantInformation'|$translate)}}">
+												<div class="help-block">{{::('editModifiedOrganismT.relevantInformationInfo'|$translate)}}</div>
 												<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
@@ -226,10 +221,9 @@
 
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
+											<div class="km-control-group" name="relevantDocuments" caption="{{::('editModifiedOrganismT.relevantDocuments'|$translate)}}">
 												<div class="help-block">
-													Please use this field to provide any other relevant website addresses and/or one or more
-													relevant documents that will be stored in the database for users to download.
+													{{::('editModifiedOrganismT.relevantDocumentsInfo'|$translate)}}
 												</div>
 												<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true"
 												 identifier="document.header.identifier"></div>
@@ -239,12 +233,12 @@
 								</div>
 							</section>
 							<section>
-								<legend>Notes</legend>
+							<legend>{{::('editModifiedOrganismT.notes'|$translate)}}</legend>
 
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="km-control-group" name="notes">
-											<div class="help-block">The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.</div>
+											<div class="help-block">{{::('editModifiedOrganismT.notesInfo'|$translate)}}</div>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>
 									</div>

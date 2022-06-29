@@ -5,8 +5,9 @@ import 'views/directives/record-options';
 import 'services/main';
 import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/view-terms-hierarchy';
+import viewAuthorityT from '~/app-text/views/forms/view/view-authority.json';
 
-	app.directive("viewAuthority", ["IStorage", "realm", function (storage, realm) {
+	app.directive("viewAuthority", ["IStorage", "realm", "translationService", function (storage, realm, translationService) {
 		return {
 			restrict   : "EAC",
 			template: template ,
@@ -21,6 +22,7 @@ import 'views/forms/directives/view-terms-hierarchy';
 			},
 			link : function ($scope)
 			{
+				translationService.set('viewAuthorityT', viewAuthorityT);
 				if(realm.is('ABS'))		$scope.isABS=true;
 				else if(realm.is('BCH'))$scope.isBCH=true;
 

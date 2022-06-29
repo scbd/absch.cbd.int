@@ -5,11 +5,11 @@ import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'views/forms/view/directives/view-record-reference.directive';
 import 'views/forms/directives/view-terms-hierarchy';
 import _ from 'lodash';
+import viewRiskAssesmentT from '~/app-text/views/forms/view/bch/view-risk-assessment.json';
+app.directive("viewNationalRiskAssessment", ["translationService", viewRiskAssessment]);
+app.directive("viewIndependentRiskAssessment", ["translationService", viewRiskAssessment]);
 
-app.directive("viewNationalRiskAssessment", viewRiskAssessment);
-app.directive("viewIndependentRiskAssessment", viewRiskAssessment);
-
-function viewRiskAssessment() {
+function viewRiskAssessment(translationService) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -21,7 +21,8 @@ function viewRiskAssessment() {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		link:function($scope){
+		link: function ($scope){
+			translationService.set('viewRiskAssesmentT', viewRiskAssesmentT);
 			$scope.onRiskAssessmentScopeTerms = function(terms){
 				if(($scope.document||{}).scopes){
 					_.forEach(terms, function(item){

@@ -6,9 +6,10 @@ import "~/views/forms/view/view-contact.directive";
 import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'views/forms/edit/editFormUtility';
+import editContactT from '~/app-text/views/forms/edit/directives/edit-contact.json';
 
-app.directive("editContact", [ "$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller',
-function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller){
+app.directive("editContact", ["$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller', 'translationService',
+function($http, $filter, $rootScope, $location, $q, storage, roleService, thesaurusService, editFormUtility, locale, $controller, translationService){
 
 	return {
 		restrict   : "E",
@@ -20,6 +21,7 @@ function($http, $filter, $rootScope, $location, $q, storage, roleService, thesau
             onPostSubmitFn   : "&onPostSubmit"
 		},
 		link : function($scope, $element, $attr){
+            translationService.set('editContactT', editContactT);
             $scope.formFields = {};
             $scope.type = $attr.documentType;
             $controller('editController', {$scope: $scope});

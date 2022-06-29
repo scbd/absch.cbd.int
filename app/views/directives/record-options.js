@@ -3,13 +3,15 @@ import template from 'text!./record-options.html';
 import _ from 'lodash';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
+import recordOptionsT from '~/app-text/views/directives/record-options.json';
 
-app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm',
-    function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm) {
+app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm', 'translationService',
+    function (appLocale, $route, $timeout, appConfigService, $filter, $compile, commonjs, realm, translationService) {
         return {
             restrict: 'EAC',
             template : template,
             link: function ($scope, $element, attrs) {              
+                translationService.set('recordOptionsT', recordOptionsT);             
                 $scope.termLocales = {};
                 if(!$scope.currentLocale){
                     $scope.currentLocale = appLocale;

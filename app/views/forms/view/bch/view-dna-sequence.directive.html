@@ -10,23 +10,23 @@
 
 
 		<document-date></document-date>
-		<legend>General information</legend>
+		<legend>{{::('viewDnaSequenceT.generalInfo'|$translate)}}</legend>
 
 		<div ng-show="document.title">
-			<label>Title</label>
+			<label>{{::('viewDnaSequenceT.title'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<strong ng-bind="document.title | lstring:locale"></strong>
 			</div>
 		</div>
 
 		<div ng-show="document.name">
-			<label>Name of genetic element</label>
+			<label>{{::('viewDnaSequenceT.name'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml value="document.name" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.synonymNames">
-			<label> Alternate genetic element name(s) (synonym(s))</label>
+			<label> {{::('viewDnaSequenceT.synonymNames'|$translate)}}</label>
 			<div compare-val>
 			<ul class="list" style="padding-left:0px">
 				<li ng-repeat="synonym in document.synonymNames" style="padding-bottom:5px;">
@@ -37,31 +37,31 @@
 			
 		</div>
 		<div ng-show="document.abbreviation">
-			<label>Abbreviation</label>
+			<label>{{::('viewDnaSequenceT.abbreviation'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.abbreviation" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.family">
-			<label>Category</label>
+			<label>{{::('viewDnaSequenceT.category'|$translate)}}</label>
 			<div compare-val>
 				<div class="km-value" ng-bind="document.family | term:locale"></div>
 			</div>
 		</div>
 
 		<div ng-show="document.isSynthetic!=undefined">
-			<label>Is this genetic element a synthetic molecule?</label>
+			<label>{{::('viewDnaSequenceT.isSynthetic'|$translate)}}</label>
 			<div compare-val>
-				<div class="km-value" ng-if="document.isSynthetic">Yes</div>
-				<div class="km-value" ng-if="!document.isSynthetic">No</div>
+				<div class="km-value" ng-if="document.isSynthetic">{{::('viewDnaSequenceT.yes'|$translate)}}</div>
+				<div class="km-value" ng-if="!document.isSynthetic">{{::('viewDnaSequenceT.no'|$translate)}}</div>
 			</div>
 		</div>
 	
 	<div ng-if="document.donorOrganisms || document.donorOrganismCollectionPoint || document.gisFiles ">
-		<legend>Donor organism</legend>
+		<legend>{{::('viewDnaSequenceT.donorOrganism'|$translate)}}</legend>
 
 		<div ng-show="document.donorOrganisms">
-			<label>Donor organism(s)</label>
+			<label>{{::('viewDnaSequenceT.donorOrganisms'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.donorOrganisms">
@@ -72,43 +72,43 @@
 		</div>
 
 		<div ng-show="document.donorOrganismCollectionPoint">
-			<label>Point of collection or acquisition of the donor organism(s)</label>
+			<label>{{::('viewDnaSequenceT.donorOrganismCollectionPoint'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.donorOrganismCollectionPoint"  html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.gisFiles">
-			<label>Geographic coordinates</label>
+			<label>{{::('viewDnaSequenceT.geographicCoordinates'|$translate)}}</label>
 			<km-link-list class="km-value" ng-model="document.gisFiles"></km-link-list>
 		</div>
 	</div>
 	<div ng-if="document.family.identifier=='1ECB698D-3F3D-41BC-BEBD-DD5C734BCDCF'">
-		<legend>Characteristics of the protein coding sequence</legend>
+		<legend>{{::('viewDnaSequenceT.characteristicsSequence'|$translate)}}</legend>
 
 		<div ng-show="document.proteinName">
-			<label>Name of the protein expressed by the coding sequence</label>
+			<label>{{::('viewDnaSequenceT.proteinName'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.proteinName" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.biologicalFunction">
-			<label>Biological function of the protein</label>
+			<label>{{::('viewDnaSequenceT.biologicalFunction'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.biologicalFunction" html locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.traits">
-			<label>Related trait(s) or use(s) in biotechnology</label>
+			<label>{{::('viewDnaSequenceT.traits'|$translate)}}</label>
 			<div compare-val>
 				<view-terms-hierarchy class="km-value" ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
 	</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewDnaSequenceT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
 				<div compare-val>
@@ -117,7 +117,7 @@
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewDnaSequenceT.anyOtherInformation'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 				</div>

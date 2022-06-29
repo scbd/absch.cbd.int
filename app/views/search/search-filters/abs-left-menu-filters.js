@@ -1,4 +1,4 @@
-import absFilters from '~/app-data/abs/abs-left-menu-filters.json';
+import absFilters from '~/app-text/views/search/search-filters/abs-left-menu-filters.json';
 
 export const absLeftMenuFilters = {
 	"contact" : [{

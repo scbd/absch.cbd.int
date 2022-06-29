@@ -9,43 +9,44 @@
 		<div class="float-end">
 			<a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/decisions">
 				<i class="fa fa-external-link"></i> 
-				Decisions on the LMO
+				{{::('viewLmoT.decisionsLMO'|$translate)}}
 			</a>
 			<a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/risk-assessments" >
 				<i class="fa fa-external-link"></i> 
-				Risk Assessments
+				{{::('viewLmoT.riskAssessments'|$translate)}}
 			</a> &nbsp;
 			<document-date></document-date>
 		</div>
 		
-		<legend>Living Modified Organism identity</legend>
+		<legend>{{::('viewLmoT.lmoIdentity'|$translate)}}</legend>
 		<div ng-show="document.info.documentID" style="text-align: center">
 			<div class="help-info">
-					The image below identifies the LMO through its unique identifier, trade name and a link to this page of the BCH. Click on it to download a larger image on your computer. For help on how to use it go to the LMO quick-links page. 
+				{{::('viewLmoT.lmoIdentityInfo'|$translate)}}	
+				
 			</div>		
 			<a rel="noopener" ng-href="/api/v2020/bch/lmo-qrcode/{{document.header.identifier|encodeURIComponent}}?download=true">
 				<img style="max-width:100%;" class="responsive" border="none" ng-src="/api/v2020/bch/lmo-qrcode/{{document.header.identifier}}">
 			</a>
 		</div>
 		<div ng-show="document.identity">
-			<label>Name</label>
+			<label>{{::('viewLmoT.name'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.identity" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.transformationEvent">
-			<label>Transformation event</label>
+			<label>{{::('viewLmoT.transformationEvent'|$translate)}}</label>
 			<div compare-val>
 				<div ng-bind="document.transformationEvent" class="km-value"></div>
 			</div>
 		</div>
 		<div ng-show="document.uniqueIdentification">
-			<label>Unique identifier</label>
+			<label>{{::('viewLmoT.uniqueIdentification'|$translate)}}</label>
 			<div compare-val>
 			<div ng-bind="document.uniqueIdentification" class="km-value"></div></div>
 		</div>
 		<div ng-show="document.developers">
-			<label>Developer(s)	</label>
+			<label>{{::('viewLmoT.developer'|$translate)}}	</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.developers" >						
@@ -56,14 +57,14 @@
 		</div>
 		
 		<div ng-show="document.description">
-			<label>Description</label>
+			<label>{{::('viewLmoT.description'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml html value="document.description" locales="locale"></km-value-ml></div>
 		</div>
 
 		<div ng-show="document.recipientOrganisms">
-			<label>Recipient Organism or Parental Organisms</label>
-			<div class="help-info" style="font-size: 10px;">The term “Recipient organism” refers to an organism (either already modified or non-modified) that was subjected to genetic modification, whereas “Parental organisms” refers to those that were involved in cross breeding or cell fusion.
+			<label>{{::('viewLmoT.recipientOrganisms'|$translate)}}</label>
+			<div class="help-info" style="font-size: 10px;">{{::('viewLmoT.recipientOrganismsInfo'|$translate)}}
 			</div>
 			<div class="km-value" compare-val>
 				<ul class="list">
@@ -75,12 +76,12 @@
 		</div>
 
 		<div ng-show="document.recipientOrganismCollectionPoint">
-			<label>Point of collection or acquisition of the recipient organism or parental organisms</label>
+			<label>{{::('viewLmoT.recipientOrganismCollectionPoint'|$translate)}}</label>
 			<div compare-val>			
 			<km-value-ml html value="document.recipientOrganismCollectionPoint" locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.linkedModifiedOrganisms">
-			<label>Related LMO(s)</label>	
+			<label>{{::('viewLmoT.linkedModifiedOrganisms'|$translate)}}</label>	
 			<div class="km-value" compare-val>	
 				<ul class="list">
 					<li ng-repeat="item in document.linkedModifiedOrganisms" >						
@@ -90,14 +91,14 @@
 			</div>
 		</div>
 		
-		<legend>Characteristics of the modification process</legend>
+		<legend>{{::('viewLmoT.characteristics'|$translate)}}</legend>
 		
 		<div ng-show="document.vector">
-			<label>Vector</label><div compare-val>
+			<label>{{::('viewLmoT.vector'|$translate)}}</label><div compare-val>
 			<km-value-ml value="document.vector" locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.techniqueUsed">
-			<label>Techniques used for the modification</label>
+			<label>{{::('viewLmoT.techniqueUsed'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="use in document.techniqueUsed" ng-bind="use | term:locale"></li>
@@ -106,7 +107,7 @@
 		</div>
 
 		<div ng-show="document.geneConstructs">
-			<label>Genetic elements construct</label>
+			<label>{{::('viewLmoT.geneConstructs'|$translate)}}</label>
 
 			<div class="km-value" compare-val ng-class="{'lmo-gene-construct-scroll':!printMode}">
 				<div ng-repeat="construct in document.geneConstructs" style="margin-bottom:5px;">
@@ -115,9 +116,8 @@
 			</div>
 		</div>
 		<div ng-show="document.genes">
-			<label>Introduced or modified genetic element(s)</label>
-			<div class="help-info" style="font-size: 10px;">Some of these genetic elements may be present as fragments or truncated 
-					forms. Please see notes below, where applicable.</div>
+			<label>{{::('viewLmoT.genes'|$translate)}}</label>
+			<div class="help-info" style="font-size: 10px;">{{::('viewLmoT.genesInfo'|$translate)}}</div>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						
@@ -128,21 +128,21 @@
 		</div>
 
 		<div ng-show="document.geneNotes">
-			<label>Notes regarding the genetic elements present in this LMO</label>
+			<label>{{::('viewLmoT.geneNotes'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml html value="document.geneNotes" locales="locale"></km-value-ml></div>
 		</div>
 
 
-		<legend>LMO characteristics</legend>		
+		<legend>{{::('viewLmoT.LmoCharacteristics'|$translate)}}</legend>		
 		<div ng-show="document.traits">
-			<label>Modified traits</label>
+			<label>{{::('viewLmoT.traits'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<view-terms-hierarchy ng-model="document.traits" locale="locale" term-domain="dnaSequenceTraits"></view-terms-hierarchy>
 			</div>
 		</div>
 		<div ng-show="document.affectedGenes">
-			<label>Other gene(s) whose expression was affected by the transformation</label>			
+			<label>{{::('viewLmoT.affectedGenes'|$translate)}}</label>			
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.affectedGenes" >						
@@ -152,12 +152,12 @@
 			</div>
 		</div>
 		<div ng-show="document.affectedGeneNotes">
-			<label>How the expression of the gene(s) was affected</label>
+			<label>{{::('viewLmoT.affectedGeneNotes'|$translate)}}</label>
 			<div compare-val>
 			<km-value-ml value="document.affectedGeneNotes" html locales="locale"></km-value-ml></div>
 		</div>
 		<div ng-show="document.commonUses">
-			<label>Common use(s) of the LMO</label>
+			<label>{{::('viewLmoT.commonUses'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="use in document.commonUses" ng-bind="use | term:locale"></li>
@@ -165,29 +165,29 @@
 			</div>
 		</div>
 		<div ng-show="document.detectionMethod||detectionMethodLinks.length">
-			<legend>Detection method(s)</legend>
+			<legend>{{::('viewLmoT.detectionMethod'|$translate)}}</legend>
 			<div ng-show="detectionMethodLinks.length">
-				<label>External link(s)</label>
+				<label>{{::('viewLmoT.externalLink'|$translate)}}</label>
 				<div compare-val>
 				<km-link-list class="km-value" ng-model="detectionMethodLinks"></km-link-list></div>
 			</div>
 			<div ng-show="document.detectionMethod">
-				<label>Additional Information</label>
+				<label>{{::('viewLmoT.addInfo'|$translate)}}</label>
 				<div compare-val="detectionMethodAddInformation">
 				<km-value-ml value="document.detectionMethod" html locales="locale"></km-value-ml></div>
 			</div>
 		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewLmoT.addInfo'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
-				<label>Additional Information</label>
+				<label>{{::('viewLmoT.addInfo'|$translate)}}</label>
 				<div compare-val>
 				<km-value-ml value="document.relevantInformation" html locales="locale"></km-value-ml></div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewLmoT.relevantDocuments'|$translate)}}</label>
 				<div class="km-value" compare-val="relevantDocuments">
 					<km-link-list  ng-model="document.relevantDocuments"></km-link-list>
 					

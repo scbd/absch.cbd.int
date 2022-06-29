@@ -3,6 +3,7 @@ import _ from 'lodash';
 import template from "text!./view-biosafety-decision.directive.html";
 import 'views/directives/record-options';
 import 'components/scbd-angularjs-controls/main';
+import viewDecT from '~/app-text/views/forms/view/bch/view-biosafety-decision.json';
 
 app.directive("viewBiosafetyDecision", [function () {
 	return {
@@ -16,8 +17,10 @@ app.directive("viewBiosafetyDecision", [function () {
 			target  : "@linkTarget",
 			hide	: "@"
 		},
-		controller : ["$scope" ,"$timeout" ,"$element", function ($scope, $timeout, $element)
-		{
+		controller: ["$scope", "$timeout", "$element", "translationService",
+			function ($scope, $timeout, $element, translationService)
+			{
+				translationService.set('viewDecT', viewDecT);
 			function onOtherDecisionChanged (decisionTypes){
 				if(!decisionTypes){
 					return;

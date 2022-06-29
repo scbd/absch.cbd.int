@@ -19,17 +19,17 @@
                     <i class="fa fa-plus" ng-if="!openingDialog"></i>
                     <i class="fa fa-spin fa-spinner" ng-if="openingDialog"></i> 
                     <span ng-if="caption" ng-bind="caption"> </span>
-                    <span ng-if="!caption && type=='radio'">Add record</span>
-                    <span ng-if="!caption && type!=='radio'">Add record(s)</span>
+                    <span ng-if="!caption && type=='radio'">{{::('documentSelectorT.addRecord'|$translate)}}</span>
+                    <span ng-if="!caption && type!=='radio'">{{::('documentSelectorT.addRecords'|$translate)}}</span>
                 </button>
 
-                <span ng-show="model.length==0 || !model"> <i class="color-blue"> No records have been linked. </i> </span>
+                <span ng-show="model.length==0 || !model"> <i class="color-blue"> {{::('documentSelectorT.noRecords'|$translate)}} </i> </span>
 
                 <a rel="noopener" translation-url  class="bold" href="#" ng-click="areVisible = true" ng-show="!areVisible && model.length>0" name="showRecords">
-                    <i class="fa fa-chevron-circle-right"></i><span ng-bind="model.length"></span> linked records.
+                    <i class="fa fa-chevron-circle-right"></i><span ng-bind="model.length"></span> {{::('documentSelectorT.linkedRecords'|$translate)}}
                 </a>
                 <a rel="noopener" translation-url  class="bold" href="#" name="hideRecords" ng-click="areVisible=false" ng-show="areVisible && model.length>0 ">
-                    <i class="fa fa-chevron-circle-down"></i><span ng-bind="model.length"></span> linked records.
+                    <i class="fa fa-chevron-circle-down"></i><span ng-bind="model.length"></span> {{::('documentSelectorT.linkedRecords'|$translate)}}
                 </a>
             </div>
         </div>
@@ -75,36 +75,36 @@
         <div class="rounded bg-dropshadow document-selection-modal" id="{{question}}">
             <div class="modal-header bg-grey d-block">
                 <div ng-if="!allowNew.editingOn">
-                    <h3>Please select from the list of published records below:</h3>
-                    <div class="help-info">If the record is not listed, please create a new record.</div>
+                    <h3> {{::('documentSelectorT.pleaseSelect'|$translate)}}</h3>
+                    <div class="help-info">{{::('documentSelectorT.pleaseSelectInfo'|$translate)}}</div>
                     <div class="d-block">
                         <ul class="nav nav-tabs float-start mb-0">
                             <li class="nav-item">
-                                <a rel="noopener" data-bs-toggle="tab" class="nav-link active" href="#allRecords" ng-click="changeTab('allRecords')">All</a>
+                                <a rel="noopener" data-bs-toggle="tab" class="nav-link active" href="#allRecords" ng-click="changeTab('allRecords')">{{::('documentSelectorT.all'|$translate)}}</a>
                             </li>
                             <li class="dropdown nav-item" ng-if="userGov && showMyGovFilter">
                                 <a class="dropdown-toggle nav-link" data-bs-toggle="dropdown" href="#">
-                                    <span ng-if="activeTab!='myGovernmentRecords'">My records</span>
-                                    <span ng-if="activeTab=='myGovernmentRecords'">My government records</span>
+                                    <span ng-if="activeTab!='myGovernmentRecords'">{{::('documentSelectorT.myRecords'|$translate)}}</span>
+                                    <span ng-if="activeTab=='myGovernmentRecords'">{{::('documentSelectorT.myGovernmentRecords'|$translate)}}</span>
                                 <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My records</a></li>
-                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">My government records</a></li>
+                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">{{::('documentSelectorT.myRecords'|$translate)}}</a></li>
+                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">{{::('documentSelectorT.myGovernmentRecords'|$translate)}}</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item" ng-if="!userGov || !showMyGovFilter">
-                                <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">My records</a>
+                                <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">{{::('documentSelectorT.myRecords'|$translate)}}</a>
                             </li>
                             <li class="nav-item pe-4">
-                                <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">Selected <span ng-if="recordCount"></span></a>
+                                <a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#selectedRecords" ng-click="changeTab('selectedRecords');loadSelectedRecordDetails()">{{::('documentSelectorT.selected'|$translate)}} <span ng-if="recordCount"></span></a>
                             </li>
                         </ul>
                         <div class="float-end d-none d-md-block w-50">                                
                             <form ng-submit="searchFreeText(search.keyword)" class="input-group">
-                                <input type="textbox" ng-model="search.keyword" placeholder="filter records by keywords or unique identifier or any other text"
+                                <input type="textbox" ng-model="search.keyword" placeholder="{{::('documentSelectorT.filterRecords'|$translate)}}"
                                    class="float-end form-control">
                                 <span type="submit" ng-click="searchFreeText(search.keyword)" class="input-group-text d-block cursor-pointer" id="basic-addon2">
-                                   <i class="fa fa-search"></i> Search</span>
+                                   <i class="fa fa-search"></i> {{::('documentSelectorT.search'|$translate)}}</span>
                             </form>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                 </div>
                 <div ng-if="allowNew.editingOn">
                     <h3>
-                        Create new <span ng-bind="allowNew.activeSchema|schemaName"></span>
+                        {{::('documentSelectorT.createNew'|$translate)}} <span ng-bind="allowNew.activeSchema|schemaName"></span>
                     </h3>
                 </div>
             </div>
@@ -144,23 +144,23 @@
                                     <tr>
                                         <th></th>
                                         <th></th>
-                                        <th class="text-nowrap"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">Type</a>  
+                                        <th class="text-nowrap"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">{{::('documentSelectorT.type'|$translate)}}</a>  
                                             <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">Title</a> 
+                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">{{::('documentSelectorT.title'|$translate)}}</a> 
                                             <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
                                         <!-- <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_countryName', search.sortSequence)">Owner</a>
                                             <span ng-show="search.sort == 'rec_countryName'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> -->
 
-                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">Unique Identifier</a>
+                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">{{::('documentSelectorT.uniqueIdentifier'|$translate)}}</a>
                                             <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">Smmary</a>
+                                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">{{::('documentSelectorT.smmary'|$translate)}}</a>
                                             <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
                                         <th class="text-nowrap col-title">
                                             <!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> -->
-                                            Meta Information
+                                            {{::('documentSelectorT.metaInformation'|$translate)}}
                                             <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span> -->
                                         </th>
                                     </tr>
@@ -184,13 +184,13 @@
                                     </tr>
                                 </tbody>
                             </table>
-                            <div ng-if="!$parent.tempSelectedDocuments.length"> You have not selected records.</div>
+                            <div ng-if="!$parent.tempSelectedDocuments.length"> {{::('documentSelectorT.noRecordSelected'|$translate)}}</div>
                         </div>
                     </div>
                 
                 </div>
                 <div  ng-show="allowNew.editingOn" class="row mw-100">
-                    <span ng-if="loadingEditDirective" style="margin:40%"><i class="fa fa-spin fa-spinner"></i> loading...</span>
+                    <span ng-if="loadingEditDirective" style="margin:40%"><i class="fa fa-spin fa-spinner"></i> {{::('documentSelectorT.loading'|$translate)}}</span>
                     <div id="divNewRecord" class="col-lg-12 m-4">
                     </div>
                 </div>
@@ -200,12 +200,12 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <a rel="noopener" translation-url  type="button" class="btn btn-primary float-start  me-1 color-white" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">Select</a>
-                        <a rel="noopener" translation-url  type="button" class="btn btn-primary float-start me-1 color-white" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">Clear selected records</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-primary float-start  me-1 color-white" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">{{::('documentSelectorT.select'|$translate)}}</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-primary float-start me-1 color-white" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">{{::('documentSelectorT.clearRecords'|$translate)}}</a>
 
                         <div class="dropdown  float-start me-1"  ng-if="allowNew.schemas && allowNew.schemas.length>1 && !allowNew.editingOn" class="ms-1">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                            <span ng-if="!allowNew.title">Create</span>
+                            <span ng-if="!allowNew.title">{{::('documentSelectorT.create'|$translate)}}</span>
                             <span ng-if="allowNew.title" ng-bind="allowNew.title"></span>
                             <span class="caret"></span></button>
                             <ul class="dropdown-menu">
@@ -218,13 +218,13 @@
                         </div>
                         <a rel="noopener" href="#" type="button" class="btn btn-primary float-start  me-1" ng-if="allowNew.schemas && allowNew.schemas.length==1 && !allowNew.editingOn"
                             ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(allowNew.schemas[0])">
-                            Create <span ng-bind="allowNew.schemas[0]|schemaName"></span>
+                            {{::('documentSelectorT.create'|$translate)}} <span ng-bind="allowNew.schemas[0]|schemaName"></span>
                         </a>
                         
 
-                        <a rel="noopener" translation-url  type="button" class="btn btn-info float-start e-1 text-white" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">Show Existing</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-info float-start e-1 text-white" ng-show="allowNew.editingOn"   ng-click="allowNew.editingOn=!allowNew.editingOn">{{::('documentSelectorT.showExisting'|$translate)}}</a>
                     
-                        <a rel="noopener" translation-url  type="button" class="btn btn-warning float-end" data-bs-dismiss="modal" ng-click="closeDialog()">Cancel</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-warning float-end" data-bs-dismiss="modal" ng-click="closeDialog()">{{::('documentSelectorT.cancel'|$translate)}}</a>
                     </div>
                 </div>
             </div>
@@ -262,25 +262,25 @@
                     <tr>
                         <th></th>
                         <th></th>
-                        <th class="text-nowrap"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">type</a>  
+                        <th class="text-nowrap"><a rel="noopener" href="#" class="col-title" ng-click="onSort('schema_s', search.sortSequence)">{{::('documentSelectorT.type'|$translate)}}</a>  
                             <span ng-show="search.sort == 'schema_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">title</a> 
+                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_title', search.sortSequence)">{{::('documentSelectorT.title'|$translate)}}</a> 
                             <span ng-show="search.sort == 'rec_title'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
 
                         <th class="text-nowrap">
                             <a rel="noopener" href="#"class="col-title"  ng-click="onSort('uniqueIdentifier_s', search.sortSequence)">
-                                record uid
+                                {{::('documentSelectorT.recordUid'|$translate)}}
                             </a>
                             <span ng-show="search.sort == 'uniqueIdentifier_s'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
-                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">summary</a>
+                        <th class="text-nowrap"><a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_summary', search.sortSequence)">{{::('documentSelectorT.smmary'|$translate)}}</a>
                             <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th>
 
                         <th class="text-nowrap col-title">
                             <!-- <a rel="noopener" href="#"class="col-title"  ng-click="onSort('rec_meta', search.sortSequence)"></a> -->
-                            Meta Information
+                            {{::('documentSelectorT.metaInformation'|$translate)}}
                             <!-- <span ng-show="search.sort == 'rec_summary'" ng-class="{'fa-caret-down': search.sortSequence==' asc' , 'fa-caret-up': search.sortSequence==' desc'}" class="fa"></span></th> -->
                     
                     </tr>
@@ -303,8 +303,8 @@
                 </tbody>
             </table>
         </div> 
-        <div ng-if="isLoading" class="text-center"> <i class="fa fa-spinner fa-spin"></i> Loading...</div>
-        <div ng-if="!isLoading && rawDocuments.numFound===0" class="text-center"> no records found.</div>
+        <div ng-if="isLoading" class="text-center"> <i class="fa fa-spinner fa-spin"></i> {{::('documentSelectorT.loading'|$translate)}}</div>
+        <div ng-if="!isLoading && rawDocuments.numFound===0" class="text-center"> {{::('documentSelectorT.noRecordFound'|$translate)}}</div>
 
         <div class="col-md-12">
             <div class="float-end btn-group" ng-if="rawDocuments.docs.length">

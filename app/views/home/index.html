@@ -3,8 +3,8 @@
         <div class="container">
 
             <h1 class="lh-sm color-white mx-3 pt-md-5 pb-md-2 pb-lg-2 fs-size-paragraph pt-2">
-                The Access and Benefit-sharing Clearing-House (ABSCH) is a platform for exchanging information on access and benefit-sharing and is a key tool to facilitate the implementation of the Nagoya Protocol. 
-                <a href="kb/tags/about/About" class="color-white text-decoration-underline">Learn more</a></h1>
+                {{::('absHomeT.absDescription'|$translate)}}
+                <a href="kb/tags/about/About" class="color-white text-decoration-underline">{{::('absHomeT.learnMore'|$translate)}}</a></h1>
 
                 <div class="row justify-content-md-center p-0 pt-sm-2 pt-sm-3  ">
 
@@ -15,18 +15,18 @@
 
                                     <i class="bi bi-lightbulb display-4 submit-record-icon-color main-page-boxes-icons" alt="Learn about the ABSCH"></i>
                                     <div class="ps-2">
-                                        <h2 class="fw-bold text-left mt-2 mb-2">Learn about the ABSCH</h2>
+                                        <h2 class="fw-bold text-left mt-2 mb-2">{{::('absHomeT.aboutAbs'|$translate)}}</h2>
                                         <ul>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="kb">About the ABSCH</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="http://www.cbd.int/abs">About the Nagoya Protocol</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/faqs">FAQs</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url  href="kb">{{::('absHomeT.aboutAbs'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="http://www.cbd.int/abs">{{::('absHomeT.aboutProtocol'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/faqs">{{::('absHomeT.faq'|$translate)}}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
                             <div class="rounded-0 card-footer card-footer-link text-muted p-0">
                                 <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white" rel="noopener" translation-url href="kb/tags/about/About">
-                                    Get Started
+                                    {{::('absHomeT.getStarted'|$translate)}}
                                     <i class="fa fa-arrow-right"></i> </a>
                             </div>
                         </div>
@@ -37,13 +37,13 @@
                                 <div class="d-flex position-relative ">
                                     <i class="bi bi-search display-4 submit-record-icon-color main-page-boxes-icons" alt="Search records"></i>
                                     <div class="ps-2">
-                                        <h2 class="fw-bold text-left mt-2 mb-2">Search records</h2>
+                                        <h2 class="fw-bold text-left mt-2 mb-2">{{::('absHomeT.searchRecords'|$translate)}}</h2>
 
                                         <ul>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?openTour">Take the tour</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/finding-information">Help finding information</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="countries">Country Profiles</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="reports">National Reports</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="search?openTour">{{::('absHomeT.takeTour'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/finding-information">{{::('absHomeT.helpFindingInfo'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="countries">{{::('absHomeT.countryProfiles'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="reports">{{::('absHomeT.nationalReports'|$translate)}}</a></li>
                                         </ul>
 
 
@@ -51,7 +51,7 @@
                                 </div>
                             </div>
                             <div class="rounded-0 card-footer card-footer-link text-muted p-0">
-                                <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white" rel="noopener" translation-url href="search">Search <i class="fa fa-arrow-right"></i> </a>
+                                <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white" rel="noopener" translation-url href="search">{{::('absHomeT.search'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
                             </div>
                         </div>
 
@@ -63,20 +63,20 @@
 
                                     <i class="bi bi-upload display-4 submit-record-icon-color main-page-boxes-icons" alt="Submit records"></i>
                                     <div class="ps-2">
-                                        <h2 class="fw-bold text-left mt-2 mb-2">Submit records</h2>
+                                        <h2 class="fw-bold text-left mt-2 mb-2">{{::('absHomeT.submitRecords'|$translate)}}</h2>
 
                                         <ul>
-                                            <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="signin">Sign-in</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/profile">Get your account</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="register?openTour">Take the tour</a></li>
-                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Submitting-information">Help publishing records</a></li>
+                                            <li ng-if="!user.isAuthenticated"><a class="link-dark text-decoration-none" rel="noopener" translation-url href="signin">{{::('absHomeT.signIn'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/profile">{{::('absHomeT.getAccount'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="register?openTour">{{::('absHomeT.takeTour'|$translate)}}</a></li>
+                                            <li><a class="link-dark text-decoration-none" rel="noopener" translation-url href="kb/tags/submitting-information/Submitting-information">{{::('absHomeT.helpPublishingRecords'|$translate)}}</a></li>
                                         </ul>
 
                                     </div>
                                 </div>
                             </div>
                             <div class="rounded-0 card-footer card-footer-link text-muted p-0">
-                                <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white" rel="noopener" translation-url href="register">Submit
+                                <a class="text-end nav-link fs-6 fw-bold text-uppercase color-white" rel="noopener" translation-url href="register">{{::('absHomeT.submit'|$translate)}}
                                     <i class="fa fa-arrow-right"></i> </a>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
 
                 <div class="mt-2 mt-lg-5 p-2 text-center d-none d-lg-block">
                     <a class= "text-decoration-none cursor-pointer" ng-click="exploreMore();">
-                      <span class="rounded fs-3 py-2 px-4 color-white new-explore-btn bg-green">Explore the map <i class="fa  fa-arrow-down"></i></span>
+                      <span class="rounded fs-3 py-2 px-4 color-white new-explore-btn bg-green">{{::('absHomeT.exploreMap'|$translate)}} <i class="fa  fa-arrow-down"></i></span>
                     </a>
                 </div >
 
@@ -101,7 +101,7 @@
 
     <div class="">
         <div class="container">
-            <p class="fs-1 m-0 pt-md-4 mt-4 fw-bold ">Announcements
+            <p class="fs-1 m-0 pt-md-4 mt-4 fw-bold ">{{::('absHomeT.announcements'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="announcementCounts">
@@ -109,13 +109,13 @@
             </div>
             <div class="text-end mt-4 card-down-margin">
                 <a class="nav-link fs-6 text-muted fw-bold text-uppercase" href="kb/tags/absch-announcement/">
-                    See more <i class="fa fa-arrow-right"></i> </a>
+                    {{::('absHomeT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
             </div>
         </div>
     </div>
     <div class="max-vh-100 home-page-record">
         <div class="container ">
-            <p class="fs-2 m-0 fw-bold">National records
+            <p class="fs-2 m-0 fw-bold">{{::('absHomeT.nationalRecords'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="exportVueComponent">
@@ -125,7 +125,7 @@
     </div>
     <div class="home-page-record">
         <div class="container ">
-            <p class="fs-2 m-0 fw-bold">Reference records
+            <p class="fs-2 m-0 fw-bold">{{::('absHomeT.referenceRecords'|$translate)}}
                 <hr class="m-0">
             </p>
             <div ng-if="exportVueComponent">

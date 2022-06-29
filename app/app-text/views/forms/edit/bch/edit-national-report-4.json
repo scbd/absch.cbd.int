@@ -1,0 +1,17 @@
+{
+    "generalInfo": "General Information",
+    "languageToPublish": "Please select in which language(s) you wish to submit this record:",
+    "country": "Country",
+    "selectOption": "Please select a country...",
+    "question": "Question",
+    "showPrevious": "Show previous answer",
+    "hidePrevious": "Hide previous answer",
+    "contactPerson": "Contact person submitting the report",
+    "organizationsStakeholders": "Organizations/stakeholders who were consulted or participated in the preparation of this report",
+    "timePeriod": "Time period covered by this report",
+    "fourthNationalReport": "Fourth national report",
+    "previousAnswerMapping": "Please note that the period covered by this question is different in each reporting format.",
+    "NR4Info": "Only one record of the fourth national report is allowed for each government, the fourth national report already exists for your government, you will be redirected to the record in",
+    "seconds": "seconds.",
+    "redirectNow": "Redirect now"
+}

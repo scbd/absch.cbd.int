@@ -4,9 +4,10 @@ import 'views/forms/edit/edit';
 import '~/views/forms/view/view-capacity-building-initiative.directive';
 import 'services/main';
 import template from './edit-capacity-building-initiative.directive.html';
+import editCBIT from '~/app-text/views/forms/edit/directives/edit-capacity-building-initiative.json';
 
-app.directive("editCapacityBuildingInitiative",  ["$http", "$filter", "$q", "$routeParams", "$controller","$location", "realm","thesaurusService", "Thesaurus", "$timeout", 
-function ($http, $filter, $q, $routeParams, $controller,$location, realm, thesaurusService, Thesaurus, $timeout) {
+app.directive("editCapacityBuildingInitiative", ["$http", "$filter", "$q", "$routeParams", "$controller", "$location", "realm", "thesaurusService", "Thesaurus", "$timeout", "translationService",
+  function ($http, $filter, $q, $routeParams, $controller, $location, realm, thesaurusService, Thesaurus, $timeout, translationService) {
 
   return {
     restrict   : "E",
@@ -17,7 +18,7 @@ function ($http, $filter, $q, $routeParams, $controller,$location, realm, thesau
       onPostSubmitFn   : "&onPostSubmit"
     },
     link : function($scope, $element, $attr){
-
+      translationService.set('editCBIT', editCBIT);
       $scope.container      = $attr.container;
       $scope.isDialog       = $attr.isDialog;
       $scope.type           = $attr.documentType;

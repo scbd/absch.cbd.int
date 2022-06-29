@@ -9,30 +9,30 @@
 
 		<document-date></document-date> <br>
 
-		<legend>General information</legend>
+		<legend>{{::('viewCdiT.generalInfo'|$translate)}}</legend>
 		<div ng-show="document.title">
-			<label>Title of the initiative</label>
+			<label>{{::('viewCdiT.titleInitiative'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.title" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-show="document.projectNumber">
-			<label>Project number or identifier</label>
+			<label>{{::('viewCdiT.projectIdentifier'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.projectNumber" locales="locale"></km-value-ml>
 			</div>
 		</div>
 
 		<div ng-if="document.projectDocument">
-			<label>Website address(es)</label>
+			<label>{{::('viewCdiT.websiteAddress'|$translate)}}</label>
 			<div compare-val>
 				<km-link-list class="km-value" ng-model="document.projectDocument"></km-link-list>
 			</div>
 		</div>
 
 		<div ng-if="document.contacts">
-			<label>Contact person</label>
+			<label>{{::('viewCdiT.contactPerson'|$translate)}}</label>
 			<div class="km-value" compare-val="Contact person">
 				<div ng-repeat="contact in document.contacts">
 					<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -42,14 +42,14 @@
 
 
 		<div ng-show="document.geographicScope">
-			<label>Geographic scope</label>
+			<label>{{::('viewCdiT.geographicScope'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.geographicScope|term:locale"></span>
 			</div>
 		</div>
 
 		<div ng-show="document.countryRegions">
-			<label>Geographical or political/economic group(s) and/or country(ies)</label>
+			<label>{{::('viewCdiT.geographicalGroup'|$translate)}}</label>
 			<div class="km-value" compare-val="Geographical or political/economic">
 				<ul class="list">
 					<li ng-repeat="val in document.countryRegions" ng-bind="val | term:locale"></li>
@@ -58,7 +58,7 @@
 		</div>
 
 		<div ng-show="document.geographicScope.countries">
-			<label>Countries</label>
+			<label>{{::('viewCdiT.countries'|$translate)}}</label>
 			<div class="km-value" compare-val="Countries">
 				<ul class="list">
 					<li ng-repeat="val in document.geographicScope.countries" ng-bind="val | term:locale"></li>
@@ -67,7 +67,7 @@
 		</div>
 
 		<div ng-show="document.status">
-			<label>Status</label>
+			<label>{{::('viewCdiT.status'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.status|term:locale"></span>
 			</div>
@@ -76,13 +76,13 @@
 		<div ng-show="(document.startDate && document.endDate) || document.durationPeriod || document.durationText">
 			<div class="row" ng-show="document.startDate && document.endDate">
 				<div class="col-md-6" ng-if="document.startDate">
-					<label>Start date</label>
+					<label>{{::('viewCdiT.startDate'|$translate)}}</label>
 					<div compare-val>
 						<div class="km-value" ng-bind="document.startDate | formatDate"></div>
 					</div>
 				</div>
 				<div class="col-md-6" ng-if="document.endDate">
-					<label>End date</label>
+					<label>{{::('viewCdiT.endDate'|$translate)}}</label>
 					<div compare-val>
 						<div class="km-value" ng-bind="document.endDate | formatDate"></div>
 					</div>
@@ -91,7 +91,7 @@
 
 			<div class="row" ng-show="document.durationPeriod || document.durationText">
 				<div class="col-md-12">
-					<label>Duration</label>
+					<label>{{::('viewCdiT.duration'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<span ng-bind="document.durationPeriod | lstring:locale"></span>
 						<span ng-bind="document.durationText | lstring:locale"></span>
@@ -102,25 +102,25 @@
 
 
 		<div ng-show="document.activityScope">
-			<label>Type of capacity development initiative</label>
+			<label>{{::('viewCdiT.typeOfCapacityDevelopment'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<span ng-bind="document.activityScope|term:locale"></span>
 			</div>
 		</div>
 		<div ng-show="document.isProjectProgramme!=undefined">
-			<label>Is this part of a larger project or programme?</label>
+			<label>{{::('viewCdiT.isThisProgramme'|$translate)}}</label>
 			<div compare-val>
 				<km-value-bool value="document.isProjectProgramme" locales="locale"></km-value-bool>
 			</div>
 		</div>
 		<div ng-show="document.projectProgrammeName">
-			<label>Name of project or programme</label>
+			<label>{{::('viewCdiT.projectProgrammeName'|$translate)}}</label>
 			<div compare-val>
 				<km-value-ml value="document.projectProgrammeName" locales="locale"></km-value-ml>
 			</div>
 		</div>
 		<div ng-show="document.broaderProjects">
-			<label>Clearing-house record about this project or programme</label>
+			<label>{{::('viewCdiT.broaderProjects'|$translate)}}</label>
 			<div class="km-value" compare-val="Clearing-house record">
 				<div ng-repeat="broaderProject in document.broaderProjects">
 					<div view-record-reference ng-model="broaderProject" locale="locale"></div>
@@ -131,7 +131,7 @@
 			ng-show="document.isImplementedByAgencies || document.isExecutededByAgencies || document.isCollaboratededByPartners">
 
 			<div ng-show="document.isImplementedByAgencies && document.implementingAgencies">
-				<label>Implementing agency(ies) or organization(s)</label>
+				<label>{{::('viewCdiT.implementingAgenciesOrOrg'|$translate)}}</label>
 				<div class="km-value" compare-val="Implementing agency(ies)">
 					<div ng-repeat="contact in document.implementingAgencies">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -140,7 +140,7 @@
 			</div>
 
 			<div ng-show="document.isExecutededByAgencies && document.executingAgencies">
-				<label>Executing agency(ies) or organization(s)</label>
+				<label>{{::('viewCdiT.executingAgencyOrganization'|$translate)}}</label>
 				<div class="km-value" compare-val="Executing agency(ies)">
 					<div ng-repeat="contact in document.executingAgencies">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -149,7 +149,7 @@
 			</div>
 
 			<div ng-show="document.isCollaboratededByPartners && document.collaboratingPartners">
-				<label>Collaborating partner(s)</label>
+				<label>{{::('viewCdiT.isCollaboratedByPartners'|$translate)}}</label>
 				<div class="km-value" compare-val="Collaborating partner(s)">
 					<div ng-repeat="contact in document.collaboratingPartners">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -158,16 +158,16 @@
 			</div>
 		</div>
 		<div ng-if="document.description || document.categories || document.targetGroups">
-			<legend>Detailed information</legend>
+			<legend>{{::('viewCdiT.detailedInformation'|$translate)}}</legend>
 
 			<div ng-show="document.description">
-				<label>Short description of the initiative, including its goals and objectives</label>
+				<label>{{::('viewCdiT.shortDescription'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.description" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 			<div ng-show="document.categories">
-				<label>Category(ies) of capacity development activities</label>
+				<label>{{::('viewCdiT.categories'|$translate)}}</label>
 				<div class="km-value" compare-val="categories">
 					<ul class="list">
 						<li ng-repeat="val in document.categories" ng-bind="val | term:locale"></li>
@@ -175,7 +175,7 @@
 				</div>
 			</div>
 			<div ng-show="document.targetGroups">
-				<label>Main target group(s)/beneficiary(ies)</label>
+				<label>{{::('viewCdiT.targetGroups'|$translate)}}</label>
 				<div class="km-value" compare-val="Main target group(s)">
 					<view-terms-hierarchy ng-model="document.targetGroups" locale="locale" term-domain="cbiAudience"
 						on-terms-loaded="onTargetGroupsTerms(terms)"></view-terms-hierarchy>
@@ -184,10 +184,10 @@
 		</div>
 		<div ng-show="document.cbdSubjects || document.aichiTargets">
 
-			<legend>Information on thematic coverage of the initiative</legend>
+			<legend>{{::('viewCdiT.informationOnThematic'|$translate)}}</legend>
 
 			<div ng-show="document.cbdSubjects">
-				<label>Related CBD subject areas</label>
+				<label>{{::('viewCdiT.relatedCbdSubject'|$translate)}}</label>
 				<div class="km-value" compare-val="Related CBD subject areas">
 					<view-terms-hierarchy ng-model="document.cbdSubjects" locale="locale" term-domain="cbdSubjects"
 						on-terms-loaded="onCbdSubjectsTerms(terms)"></view-terms-hierarchy>
@@ -195,7 +195,7 @@
 			</div>
 
 			<div ng-show="document.aichiTargets && isABS">
-				<label>Aichi target(s)</label>
+				<label>{{::('viewCdiT.aichiTargets'|$translate)}}</label>
 				<div class="km-value" compare-val="Aichi target(s)">
 					<ul class="list">
 						<li ng-repeat="val in document.aichiTargets" ng-bind="val | term:locale"></li>
@@ -205,9 +205,9 @@
 		</div>
 
 		<div ng-show="document.absKeyAreas">
-			<label>ABS thematic areas</label>
+			<label>{{::('viewCdiT.absKeyAreas'|$translate)}}</label>
 
-			<label>Key areas and strategic measures for capacity-building and development</label>
+			<label>{{::('viewCdiT.keyAreasAndStrategic'|$translate)}}</label>
 			<div class="km-value" compare-val="Key areas and strategic measures">
 				<ul class="list">
 					<li ng-repeat="val in document.absKeyAreas" ng-bind="val | term:locale"></li>
@@ -216,7 +216,7 @@
 		</div>
 
 		<div ng-show="document.cpbThematicAreas">
-			<label>Biosafety thematic areas</label>
+			<label>{{::('viewCdiT.cpbThematicAreas'|$translate)}}</label>
 			<div class="km-value" compare-val="Biosafety thematic areas">
 				<view-terms-hierarchy ng-model="document.cpbThematicAreas" locale="locale"
 					term-domain="cpbThematicAreas" on-terms-loaded="onThematicAreasTerms(terms)"></view-terms-hierarchy>
@@ -226,10 +226,10 @@
 
 		<div
 			ng-show="document.fundingSourceTypes || document.coreFundingSources || document.coFinancingSources || document.totalBudget">
-			<legend>Information on funding</legend>
+			<legend>{{::('viewCdiT.informationOnFunding'|$translate)}}</legend>
 
 			<div ng-show="document.fundingSourceTypes">
-				<label>Type(s) of funding source(s)</label>
+				<label>{{::('viewCdiT.fundingSourceTypes'|$translate)}}</label>
 				<div class="km-value" compare-val="Type(s) of funding source(s)">
 					<ul class="list">
 						<li ng-repeat="val in document.fundingSourceTypes" ng-bind="val | term:locale"></li>
@@ -237,7 +237,7 @@
 				</div>
 			</div>
 			<div ng-show="document.coreFundingSources">
-				<label>Primary funding source(s)</label>
+				<label>{{::('viewCdiT.primaryFunding'|$translate)}}</label>
 				<div class="km-value" compare-val="Primary funding source(s)">
 					<div ng-repeat="contact in document.coreFundingSources">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -246,7 +246,7 @@
 			</div>
 
 			<div ng-show="document.coFinancingSources">
-				<label>Co-financing source(s)</label>
+				<label>{{::('viewCdiT.coFinancingSources'|$translate)}}</label>
 				<div class="km-value" compare-val="Co-financing source(s)">
 					<div ng-repeat="contact in document.coFinancingSources">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -255,7 +255,7 @@
 			</div>
 
 			<div ng-show="document.totalBudget">
-				<label>Total budget (amount, in US dollars)</label>
+				<label>{{::('viewCdiT.totalBudget'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.totalBudget | currency:'USD$'" locales="locale"></km-value-ml>
 				</div>
@@ -263,24 +263,24 @@
 
 		</div>
 		<div ng-show="document.resultsAchievements || document.resultsOutputs || document.bestPractices || document.resultsReference">
-			<legend>Capacity development outcomes</legend>
+			<legend>{{::('viewCdiT.capacityDevelopmentOutcomes'|$translate)}}</legend>
 
 			<div ng-show="document.resultsAchievements">
-				<div><strong>Results</strong></div>
-				<label>Main achievements</label>
+				<div><strong>{{::('viewCdiT.results'|$translate)}}</strong></div>
+				<label>{{::('viewCdiT.mainAchievements'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.resultsAchievements" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 
 			<div ng-show="document.resultsOutputs">
-				<label>Main outputs</label>
+				<label>{{::('viewCdiT.mainOutputs'|$translate)}}</label>
 				<div compare-val="Main outputs">
 					<km-link-list class="km-value" ng-model="document.resultsOutputs"></km-link-list>
 				</div>
 			</div>
 			<div ng-show="document.resultsReference">
-				<label>Virtual library record number</label>
+				<label>{{::('viewCdiT.VirtualLibraryNumber'|$translate)}}</label>
 				<div class="km-value" compare-val="Virtual library record number">
 					<div ng-repeat="contact in document.resultsReference">
 						<div view-record-reference ng-model="contact" locale="locale"></div>
@@ -289,24 +289,24 @@
 			</div>
 
 			<div ng-show="document.bestPractices">
-				<label>Good practices and lessons learned</label>
+				<label>{{::('viewCdiT.bestPractices'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.bestPractices" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 		</div>
 		<div ng-show="document.relevantInformation||document.relevantDocuments">
-			<legend>Additional Information</legend>
+			<legend>{{::('viewCdiT.additionalInformation'|$translate)}}</legend>
 
 			<div ng-show="document.relevantInformation">
-				<label>Any other relevant information</label>
+				<label>{{::('viewCdiT.otherRelevantInformation'|$translate)}}</label>
 				<div compare-val>
 					<km-value-ml value="document.relevantInformation" locales="locale" html></km-value-ml>
 				</div>
 			</div>
 
 			<div ng-show="document.relevantDocuments">
-				<label>Other relevant website addresses and/or attached documents</label>
+				<label>{{::('viewCdiT.otherRelevantWebsite'|$translate)}}</label>
 				<div class="km-value" compare-val="Other relevant website addresses and/or attached documents">
 					<km-link-list ng-model="document.relevantDocuments"></km-link-list>
 				</div>

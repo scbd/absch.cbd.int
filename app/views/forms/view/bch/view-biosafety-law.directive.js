@@ -4,8 +4,9 @@ import 'views/directives/record-options';
 import 'views/forms/directives/view-terms-hierarchy';
 import _ from 'lodash';
 import 'services/main';
+import viewBiosafetyLawT from '~/app-text/views/forms/view/bch/view-biosafety-law.json';
 
-app.directive("viewBiosafetyLaw", [function () {
+app.directive("viewBiosafetyLaw", ['translationService', function (translationService) {
 	return {
 		restrict   : "EAC",
 		template: template ,
@@ -19,6 +20,7 @@ app.directive("viewBiosafetyLaw", [function () {
 		},
 		controller : ["$scope", function ($scope)
 		{
+			translationService.set('viewBiosafetyLawT', viewBiosafetyLawT);
 			function removeTerms(terms, root,termId){
 				if(root){
 					return _.filter(terms, function(t){

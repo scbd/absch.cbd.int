@@ -160,7 +160,7 @@
 
         <div class="row border-bottom ">
 
-                <p ng-if="showTitle" class="fs-1 fw-bold text-center pt-3"> Parties to the
+                <p ng-if="showTitle" class="fs-1 fw-bold text-center pt-3">{{::('countryMapTranslation.partiesToThe'|$translate)}}
                     <span ng-bind="options.protocol"></span></p>
 
                   
@@ -169,23 +169,19 @@
                 <!-- ToDo style="min-height:550px"  -->
                 <div id="chartdiv" style="min-height:550px" class="px-3"></div>
 
-                <div class="map-disclaimer" data-bs-toggle="modal" href="#dialogDisclaimer">Disclaimer</div>
+                <div class="map-disclaimer" data-bs-toggle="modal" href="#dialogDisclaimer">{{::('countryMapTranslation.disclaimer'|$translate)}}</div>
                 <div id="dialogDisclaimer" class="modal">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-bs-dismiss="modal">&times;</button>
-                                <h2 class="modal-title">Disclaimer</h2>
+                                <h2 class="modal-title">{{::('countryMapTranslation.disclaimer'|$translate)}}</h2>
                             </div>
                             <div class="modal-body">
-                                The designations employed and the presentation of material in this map do not imply the
-                                expression of any opinion whatsoever on the part of the Secretariat concerning the legal
-                                status
-                                of any country, territory, city or area or of its authorities, or concerning
-                                the delimitation of its frontiers or boundaries.
+                                {{::('countryMapTranslation.disclaimerText'|$translate)}}
                             </div>
                             <div class="modal-footer" style="text-align:left;">
-                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{::('countryMapTranslation.close'|$translate)}} </button>
                             </div>
                         </div>
                     </div>
@@ -199,7 +195,7 @@
                     <div class="pb-1">
                     <a rel="noopener" class="fs-3 fw-bold link-dark text-decoration-none" ng-if="!currentCountry.code"
                         translation-url href="{{translationUrl}}/search?tab=nationalRecords">
-                        <span class="mb-2" ng-if="!currentCountry.code"> National Records </span>
+                        <span class="mb-2" ng-if="!currentCountry.code"> {{::('countryMapTranslation.nationalRecords'|$translate)}}</span>
                     </a>
 
                     <a rel="noopener" class="fs-4 fw-bold link-dark text-decoration-none" ng-if="currentCountry.code"
@@ -222,23 +218,23 @@
                     <div class="col-md-4 text-center ">
                         <span class="rounded label text-white fw-bold bg-party" ng-bind="numParty"></span>
                         <a rel="noopener" translation-url href="/countries/status/party"
-                            class="link-dark text-decoration-none">Parties to the <span ng-bind="options.protocol"></span>
+                            class="link-dark text-decoration-none">{{::('countryMapTranslation.partiesToThe'|$translate)}}<span ng-bind="options.protocol"></span>
                         </a>
                     </div>
 
                     <div class="col-md-4 text-center" data-bs-toggle="tooltip" delay="0"
-                    title="Countries that have deposited their instrument of ratification but have not yet completed the 90 day waiting period before the Protocol enters into force for their country. ">
+                    title="{{::('countryMapTranslation.ratifiedTitle'|$translate)}}  ">
                         <span class="rounded label text-white fw-bold bg-inbetween" ng-bind="numRatified"></span>
 
                         <a rel="noopener" translation-url href="/countries/status/inbetween"
-                            class="link-dark text-decoration-none">Ratified, not yet Party <i class="fa fa-info-circle"></i></a>
+                            class="link-dark text-decoration-none">{{::('countryMapTranslation.ratified'|$translate)}} <i class="fa fa-info-circle"></i></a>
 
                     </div>
 
                     <div class="col-md-4 text-center">
                         <span class="rounded label text-white fw-bold bg-non-party" ng-bind="numNonParty" ></span>
                         <a rel="noopener" translation-url href="/countries/status/nonparty"
-                            class="link-dark text-decoration-none">Non-Parties</a>
+                            class="link-dark text-decoration-none">{{::('countryMapTranslation.nonParties'|$translate)}} </a>
                     </div>
                 </div>
             </div>

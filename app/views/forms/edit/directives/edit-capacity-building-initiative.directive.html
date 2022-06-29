@@ -22,11 +22,11 @@
 						<section>
 							<div class="no-shadow bg-white">
 
-								<legend>General information</legend>
+								<legend>{{::('editCBIT.generalInfo'|$translate)}}</legend>
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+										<div class="km-control-group" name="header.languages" required caption="{{::('editCBIT.languageToPublish'|$translate)}}">
 											<div class="indent">
 												<div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
 											</div>
@@ -35,7 +35,7 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required name="title" caption="Title of the initiative">
+										<div class="km-control-group" required name="title" caption="{{::('editCBIT.titleInitiative'|$translate)}}">
 											<div km-textbox-ml required ng-model="document.title" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -43,8 +43,8 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" name="projectNumber" caption="Project number or identifier">
-										<div class="help-info">Please provide any project number, identifier or reference number, if applicable.</div>
+									<div class="km-control-group" name="projectNumber" caption="{{::('editCBIT.projectIdentifier'|$translate)}}">
+										<div class="help-info">{{::('editCBIT.projectNumber'|$translate)}}</div>
 										<div km-textbox-ml name="projectNumber" ng-model="document.projectNumber" locales="document.header.languages"></div>
 									</div>
 								</div>
@@ -52,8 +52,8 @@
 
 							<div class="row">
 								<div class="col-md-12">
-									<div class="km-control-group" name="projectDocument" caption="Website address(es)">
-									<div class="help-info">Please provide the URL of the website (e.g. http://www.cbd.int) and the name of the website (e.g. 'Convention on Biological Diversity').</div>
+									<div class="km-control-group" name="projectDocument" caption="{{::('editCBIT.websiteAddress'|$translate)}}">
+									<div class="help-info">{{::('editCBIT.provideTheUrl'|$translate)}}</div>
 									<div km-link name="projectDocument" required ng-model="document.projectDocument" allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
 									</div>
 								</div>
@@ -61,7 +61,7 @@
 		
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required name="contacts" caption="Contact person">
+										<div class="km-control-group" required name="contacts" caption="{{::('editCBIT.contactPerson'|$translate)}}">
 											<div document-selector ng-model="document.contacts" question="contacts"
 													on-build-query="onContactQuery(searchText)" allow-new="true" filter="true"
 													allow-new-schema="contact"></div>
@@ -72,9 +72,9 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required name="geographicScope" caption="Geographic scope">
+										<div class="km-control-group" required name="geographicScope" caption="{{::('editCBIT.geographicScope'|$translate)}}">
 											<div km-select name="geographicScope" required ng-model="document.geographicScope"
-													placeholder="Please select one option" items="options.geographicScope()"></div>
+													placeholder="{{::('editCBIT.selectOption'|$translate)}}" items="options.geographicScope()"></div>
 										</div>
 									</div>
 								</div>
@@ -85,21 +85,21 @@
 												<div class="col-md-3" ng-show="!isNational()">
 
 													<div class="km-control-group" required name="geographicScope" caption="">
-															<label name="countryRegions" class="control-label" for="geographicScope">Geographical or political/economic group(s)</label>
+															<label name="countryRegions" class="control-label" for="geographicScope">{{::('editCBIT.geographicalGroup'|$translate)}}</label>
 														<div km-select multiple required name="regions"
-																ng-model="countryRegions.regions" placeholder="Please select option(s)"
+																ng-model="countryRegions.regions" placeholder="{{::('editCBIT.selecOptions'|$translate)}}"
 																items="options.regions()"></div>
 													</div>
 												</div>
 												<div class="col-md-1" ng-hide="!isGlobalOrRegional()">
-													and/or
+													{{::('editCBIT.andOr'|$translate)}}
 												</div>
 												<div class="col-md-3">
 													<div class="km-control-group countries-dropdown" style="text-align: left;"  caption="">
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">
-															Country(ies)
+															{{::('editCBIT.countries'|$translate)}}
 														</label>
-														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" items="options.countries()"></div>
 													</div>
 												</div>
 											</div>
@@ -110,17 +110,17 @@
 									<div class="col-md-12">
 										<div class="km-control-group countries-dropdown" name="countryRegions" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">
-												Country(ies)
+												{{::('editCBIT.countries'|$translate)}}
 											</label>
-											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" items="options.countries()"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="km-control-group"  name="geographicScope.customValue" caption="">
 											<label name="geographicScope.customValue" required="isSubnational()" class="control-label" for="geographicScope.customValue">
-												Name of the sub-national jurisdiction
+												{{::('editCBIT.nameSubJurisdiction'|$translate)}}
 											</label>
-											<div km-textbox-ml required="isSubnational()"  ng-model="document.geographicScope.customValue" placeholder="Please select option(s)" locales="document.header.languages"></div>
+											<div km-textbox-ml required="isSubnational()"  ng-model="document.geographicScope.customValue" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
@@ -128,15 +128,15 @@
 									<div class="col-md-12">
 										<div class="km-control-group countries-dropdown"  name="countries" caption="">
 											<label name="countryRegions" required class="control-label" for="countryRegions">
-												Country(ies)
+												{{::('editCBIT.countries'|$translate)}}
 											</label>
-											<div km-select multiple required ng-model="countryRegions.countries" placeholder="Please select option(s)" items="options.countries()"></div>
+											<div km-select multiple required ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" items="options.countries()"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
 										<div class="km-control-group" name="geographicScope.customValue" caption="">
 											<label name="geographicScope.customValue" required="isCommunity()" class="control-label" for="geographicScope.customValue">
-												Community name
+												{{::('editCBIT.communityName'|$translate)}}
 											</label>
 											<div km-textbox-ml required="isCommunity()" ng-model="document.geographicScope.customValue" placeholder="" locales="document.header.languages"></div>
 										</div>
@@ -144,48 +144,48 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required name="status" caption="Status">
+										<div class="km-control-group" required name="status" caption="{{::('editCBIT.status'|$translate)}}">
 											<div km-select name="status" required ng-model="document.status" id="documentStatus"
-													placeholder="Please select one option" items="options.status()"  show-description="true"></div>
+													placeholder="{{::('editCBIT.selecOption'|$translate)}}" items="options.status()"  show-description="true"></div>
 										</div>
 									</div>
 								</div>
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="timeframe" required caption="Timeframe">
+										<div class="km-control-group" name="timeframe" required caption="{{::('editCBIT.timeFrame'|$translate)}}">
 												<div class="row">
 													<div class="col-md-3">
-														<div class="km-control-group" name="startDate" caption="Start date"
+														<div class="km-control-group" name="startDate" caption="{{::('editCBIT.startDate'|$translate)}}"
 																	help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: CDI, Start date">
 															<div km-date name="startDate" ng-model="document.startDate"></div>
 														</div>
 													</div>
 													<div class="col-md-3">
-														<div class="km-control-group" name="endDate" caption="End date"
+														<div class="km-control-group" name="endDate" caption="{{::('editCBIT.endDate'|$translate)}}"
 																	help-content="<img src='/app/img/help-images/datetime_control.gif' />"  help-title="Help: CDI, End date">
 															<div km-date name="startDate" ng-model="document.endDate"></div>
 														</div>
 													</div>
 													<div class="col-md-1 text-center" ng-show="!document.status || isProposedOrApproved()">
-														<div class="km-control-group bold" style="margin-top:30px;" > OR </div>
+														<div class="km-control-group bold" style="margin-top:30px;" > {{::('editCBIT.or'|$translate)}} </div>
 													</div>
 													<div class="col-md-5">
 														
-														<div class="km-control-group" name="duration" caption="Duration" ng-show="!document.status || isProposedOrApproved()">
+														<div class="km-control-group" name="duration" caption="{{::('editCBIT.duration'|$translate)}}" ng-show="!document.status || isProposedOrApproved()">
 															<div class="row">
 																<div class="col-md-2">
 																	<input type="number" name="durationPeriod" ng-model="document.durationPeriod"
-																		minlength="1" placeholder="eg. 24" ng-change="clearDates()" class="form-control"
+																		minlength="1" placeholder="{{::('editCBIT.eg24'|$translate)}}" ng-change="clearDates()" class="form-control"
 																		style="display:inline-block;width:100px"/>
 																</div>
 																<div class="col-md-2">
 																	<div name="durationText" caption="">
 																		<div style="display: none;" name="durationText">
-																			<label name="durationText" for="durationText">Duration period in day(s)/month(s)/year(s)</label>
+																			<label name="durationText" for="durationText">{{::('editCBIT.durationPeriod'|$translate)}}</label>
 																		</div>
 																		<select name="durationText" ng-model="document.durationText"  class="form-control form-select"
-																			style="display:inline-block;width:100px" placeholder="eg. Months"
+																			style="display:inline-block;width:100px" placeholder="{{::('editCBIT.egMonths'|$translate)}}"
 																			ng-options="obj.value as obj.text for obj in timing">
 																		</select>
 																		
@@ -201,7 +201,7 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group type-cap-initiative" name="activityScope" caption="Type of capacity development initiative">
+										<div class="km-control-group type-cap-initiative" name="activityScope" caption="{{::('editCBIT.typeOfCapacityDevelopment'|$translate)}}">
 											<div km-term-radio class="pb-1" name="activityScope" ng-model="document.activityScope" terms="options.activityScope()"
 													show-description="true" binding-type="term" locales="document.header.languages"></div>
 										</div>
@@ -209,13 +209,13 @@
 								</div>
 								<div class="row mt-2">
 									<div class="col-md-12">
-										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="Is this part of a larger project or programme?">
+										<div class="km-control-group"  bold="true" required name="isProjectProgramme" caption="{{::('editCBIT.isThisProgramme'|$translate)}}">
 											<div class="km-yes-no" required name="isProjectProgramme" ng-model="document.isProjectProgramme" ng-click="isBroaderProjectSelected(!document.isProjectProgramme)"></div>
 										</div>
 									</div>
 									<div class="col-md-12" ng-if="document.isProjectProgramme">
 										<div class="col-md-5">
-										<div class="km-control-group" required name="projectProgrammeName" caption="Please specify the name of project or programme.">
+										<div class="km-control-group" required name="projectProgrammeName" caption="{{::('editCBIT.specifyProgramme'|$translate)}}">
 											<div km-textbox-ml required ng-model="document.projectProgrammeName" locales="document.header.languages"></div>
 										</div>
 										</div>
@@ -223,7 +223,7 @@
 											and/or
 										</div>
 										<div class="col-md-5">
-										<div class="km-control-group" required name="broaderProjects" caption="Please link to a clearing-house record about this project or programme.">
+										<div class="km-control-group" required name="broaderProjects" caption="{{::('editCBIT.linkProjectOrProgramme'|$translate)}}">
 											<div document-selector ng-model="document.broaderProjects" question="broaderProjects"
 													on-build-query="onBuildQuery(searchText,'capacityBuildingInitiative')" allow-new-schema="capacityBuildingInitiative" allow-new="true" filter="true"></div>
 										</div>
@@ -232,17 +232,14 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required  caption="Agency(ies) or organisation(s) implementing and/or executing the initiative">
-											<div class="help-info">In some instances, an agency could play both the implementing and executing roles. In those cases, please select both boxes.</div>
+										<div class="km-control-group" required  caption="{{::('editCBIT.agencyOrganization'|$translate)}}">
+											<div class="help-info">{{::('editCBIT.inExecutingRoles'|$translate)}}</div>
 											<div class="checkbox"><label for="isImplementedByAgencies" class="pb-2"><input type="checkbox" class="me-2" id="isImplementedByAgencies" ng-model="document.isImplementedByAgencies" ng-click="isImpAgencies(!document.isImplementedByAgencies)" />Implementing agency(ies) or organization(s)</label></div>
 
 											<div class="row" >
 												<div class="col-md-12">
-													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="Please select the implementing agency(ies) or organization(s)">
-														<div class="help-info pt-1">Implementing agency refers to the organisation or legal entity responsible for developing the initiative and overseeing its
-															implementation, monitoring and evaluation, including making funding available, ensuring that fiduciary standards and quality
-															assurance are applied, and preparation of the project completion reports. The implementing agency is ultimately the entity
-															responsible for the completion of the initiative and is accountable to the donor.</div>
+													<div class="km-control-group" ng-show="document.isImplementedByAgencies" name="implementingAgencies" caption="{{::('editCBIT.implementingAgencies'|$translate)}}">
+														<div class="help-info pt-1">{{::('editCBIT.implementingAgenciesInfo'|$translate)}}</div>
 
 														<div document-selector name="implementingAgencies" ng-model="document.implementingAgencies" question="implementingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
@@ -250,24 +247,21 @@
 												</div>
 											</div>
 
-											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />Executing agency(ies) or organization(s)</label></div>
+											<div class="checkbox"><label for="isExecutededByAgencies" class="pb-2"><input id="isExecutededByAgencies" class="me-2" type="checkbox" ng-model="document.isExecutededByAgencies" ng-click="isExcAgencies(!document.isExecutededByAgencies)" />{{::('editCBIT.executingAgencyOrganization'|$translate)}}</label></div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="Please select the executing agency(ies) or organization(s)">
-														<div class="help-info pt-1">Executing agency refers to the organisation/institution directly managing the initiative, including the day-to-day planning,
-															coordination and execution of its activities, monitoring and reporting on the progress made, procuring and managing resources
-															(staff, funds, equipment, etc.), and carrying out other project management functions.</div>
+													<div class="km-control-group" ng-show="document.isExecutededByAgencies" name="executingAgencies" caption="{{::('editCBIT.executingAgencies'|$translate)}}">
+														<div class="help-info pt-1">{{::('editCBIT.executingAgenciesInfo'|$translate)}}</div>
 														<div document-selector ng-model="document.executingAgencies" question="executingAgencies"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
 													</div>
 												</div>
 											</div>
-											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />Collaborating partner(s)</label></div>
+											<div class="checkbox"><label for="isCollaboratededByPartners" class="pb-2"><input type="checkbox" id="isCollaboratededByPartners" class="me-2" ng-model="document.isCollaboratededByPartners" />{{::('editCBIT.isCollaboratedByPartners'|$translate)}}</label></div>
 											<div class="row">
 												<div class="col-md-12">
-													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="Please select the collaborating partner(s)">
-														<div class="help-info pt-1">Collaborating partners refer to entities or organizations making significant financial or other contribution to the initiative and/or
-															actively supporting or collaborating in the implementation of the initiative.
+													<div class="km-control-group" ng-show="document.isCollaboratededByPartners" name="collaboratingPartners" caption="{{::('editCBIT.collaboratingPartners'|$translate)}}">
+														<div class="help-info pt-1">{{::('editCBIT.collaboratingPartnersInfo'|$translate)}}
 														</div>
 														<div document-selector ng-model="document.collaboratingPartners" question="collaboratingPartners"
 																on-build-query="onBuildQuery(searchText,'organization')"  allow-new-schema="organization" allow-new="true" filter="true"></div>
@@ -281,25 +275,25 @@
 						</section>
 						<section>
 							<div class="no-shadow bg-white">
-								<legend>Detailed information</legend>
+								<legend>{{::('editCBIT.detailedInformation'|$translate)}}</legend>
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required name="description" caption="Short description of the initiative, including its goals and objectives (max 150 words)">
+										<div class="km-control-group" required name="description" caption="{{::('editCBIT.shortDescription'|$translate)}}">
 											<div km-textbox-ml required ng-model="document.description" rows="4" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" required  name="categories" caption="Category(ies) of capacity development activities">
+										<div class="km-control-group" required  name="categories" caption="{{::('editCBIT.categories'|$translate)}}">
 											<div km-term-check required show-description="true" name="categories" ng-model="document.categories" terms="options.absCategories()" binding-type="term[]" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="targetGroups" caption="Main target group(s)/beneficiary(ies)">
+										<div class="km-control-group" name="targetGroups" caption="{{::('editCBIT.targetGroups'|$translate)}}">
 											<div km-term-check name="targetGroups"  ng-model="document.targetGroups" terms="options.targetGroups()" binding-type="term[]" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -310,7 +304,7 @@
 
 						<section>
 							<div class="no-shadow bg-white">
-								<legend>Information on thematic coverage of the initiative</legend>
+								<legend>{{::('editCBIT.informationOnThematic'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group tabular-term-check" name="cbdSubjects"
@@ -334,10 +328,8 @@
 								<div class="row" ng-if="isABS">
 									<div class="col-md-12">
 										<div class="km-control-group" name="absKeyAreas"
-												caption="Key areas and strategic measures for capacity-building and development">
-											<div class="help-info">The key areas have been identified by the Strategic Framework for
-												capacity-building and development to support the effective implementation of the Nagoya Protocol
-												(decision NP-1/8).</div>
+												caption="{{::('editCBIT.keyAreasAndStrategic'|$translate)}}">
+											<div class="help-info">{{::('editCBIT.keyAreasAndStrategicInfo'|$translate)}}</div>
 											<div km-term-check name="absKeyAreas" ng-model="document.absKeyAreas" terms="options.absKeyAreas()"
 													binding-type="term[]"></div>
 										</div>
@@ -358,25 +350,25 @@
 
 						<section>
 							<div class="no-shadow bg-white">
-								<legend>Information on funding</legend>
+								<legend>{{::('editCBIT.informationOnFunding'|$translate)}}</legend>
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="fundingSourceTypes" caption="Type(s) of funding source(s)">
+										<div class="km-control-group" name="fundingSourceTypes" caption="{{::('editCBIT.fundingSourceTypes'|$translate)}}">
 											<div km-term-check show-description="true" name="fundingSourceTypes" ng-model="document.fundingSourceTypes" 
 												terms="options.fundingSources()" binding-type="term[]" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
 
-							<div class="km-control-group" ng-show="isSelfFunding()" name="selfFunding" caption="Please provide further information on funding">
+							<div class="km-control-group" ng-show="isSelfFunding()" name="selfFunding" caption="{{::('editCBIT.selfFunding'|$translate)}}">
 								<!-- ToDO: isSelfFunding method can also be used -->
 								<div km-textbox-ml required="isSelfFunding()" rows="2" name="selfFunding" ng-model="document.fundingSourceTypes[document.fundingSourceTypes.length-1].customValue" placeholder="" locales="document.header.languages"></div>
 							</div>
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="coFinancingSources" caption="Primary funding source(s)">
+										<div class="km-control-group" name="coFinancingSources" caption="{{::('editCBIT.primaryFunding'|$translate)}}">
 											<div document-selector ng-model="document.coreFundingSources" question="coreFundingSources"
 													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
 
@@ -386,7 +378,7 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="coFinancingSources" caption="Co-funding source(s)">
+										<div class="km-control-group" name="coFinancingSources" caption="{{::('editCBIT.coFundingSources'|$translate)}}">
 											<div document-selector ng-model="document.coFinancingSources" question="coFinancingSources"
 													on-build-query="onBuildQuery(searchText,'organization')" allow-new-schema="organization" allow-new="true" filter="true"></div>
 
@@ -397,10 +389,10 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="totalBudget" caption="Total budget (amount, in US dollars)">
-											<div class="help-info">This may include in-kind contributions expressed in monetary terms. Please do not use spaces, periods or commas when you enter the amount.</div>
+										<div class="km-control-group" name="totalBudget" caption="{{::('editCBIT.totalBudget'|$translate)}}">
+											<div class="help-info">{{::('editCBIT.totalBudgetInfo'|$translate)}}</div>
 											<div class="input-group">
-												<span class="input-group-text">USD$</span>
+												<span class="input-group-text">{{::('editCBIT.usd'|$translate)}}$</span>
 												<input type="text" class="form-control" style="width:200px" required name="totalBudget" ng-model="document.totalBudget" />
 											</div>
 										</div>
@@ -411,14 +403,14 @@
 						</section>
 						<section>
 							<div class="no-shadow bg-white">
-								<legend>Capacity development outcomes</legend>
-								<strong>Results</strong>
-								<div class="help-info">This information can be provided once there are some results (outputs, outcomes or impacts) or best practices and lessons learned from the ongoing or completed initiative.</div>
+								<legend>{{::('editCBIT.capacityDevelopmentOutcomes'|$translate)}}</legend>
+								<strong>{{::('editCBIT.results'|$translate)}}</strong>
+								<div class="help-info">{{::('editCBIT.informationCompletedInitiative'|$translate)}}</div>
 									<div class="km-control-group" name="resultsAchievements" caption="">
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="resultsAchievements" caption="Main achievements">
-													<span class="help-info">Please provide a short summary of the main achievements of the initiative, including those related to advancing gender equality in achieving the objectives of the Convention and its Protocols, if applicable (max 200 words).</span>
+												<div class="km-control-group" name="resultsAchievements" caption="{{::('editCBIT.mainAchievements'|$translate)}}">
+													<span class="help-info">{{::('editCBIT.mainAchievementsInfo'|$translate)}}</span>
 													<div km-rich-textbox name="resultsAchievements" ng-model="document.resultsAchievements" rows="4" locales="document.header.languages"></div>
 												</div>
 											</div>
@@ -426,8 +418,8 @@
 
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="resultsOutputs" caption="Main outputs">
-													<span class="help-info">Please provide a web link to, or attach a copy of, the relevant products (e.g. tools and materials) developed by the initiative and/or reports.</span>
+												<div class="km-control-group" name="resultsOutputs" caption="{{::('editCBIT.mainOutputs'|$translate)}}">
+													<span class="help-info">{{::('editCBIT.mainOutputsInfo'|$translate)}}</span>
 													<div km-link name="resultsOutputs" ng-model="document.resultsOutputs" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
 												</div>
 											</div>
@@ -435,7 +427,7 @@
 
 										<div class="row">
 											<div class="col-md-12">
-												<div class="km-control-group" name="resultsReference" caption="Please select the virtual library record number containing relevant information.">
+												<div class="km-control-group" name="resultsReference" caption="{{::('editCBIT.resultsReference'|$translate)}}">
 													<div document-selector ng-model="document.resultsReference" question="resultsReference"
 													on-build-query="onBuildQuery(searchText,'resource')" allow-new="true" filter="true"
 															allow-new-schema="resource"></div>
@@ -446,8 +438,8 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="bestPractices" caption="Good practices and lessons learned">
-											<span class="help-info">Please provide a short summary of the best practices and lessons learned (max 500 words).</span>
+										<div class="km-control-group" name="bestPractices" caption="{{::('editCBIT.bestPractices'|$translate)}}">
+											<span class="help-info">{{::('editCBIT.bestPracticesInfo'|$translate)}}</span>
 											<div km-rich-textbox name="bestPractices" ng-model="document.bestPractices" rows="4" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -457,11 +449,11 @@
 
 						<section>
 							<div class="no-shadow bg-white">
-								<legend>Additional information</legend>
+								<legend>{{::('editCBIT.additionalInformation'|$translate)}}</legend>
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="address" caption=" Any other relevant information" >
-											<div class="help-info">Please use this field to provide any other relevant information that may not have been addressed elsewhere in the record.</div>
+										<div class="km-control-group" name="address" caption=" {{::('editCBIT.otherRelevantInformation'|$translate)}}" >
+											<div class="help-info">{{::('editCBIT.relevantInformationInfo'|$translate)}}</div>
 											<div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
 										</div>
 									</div>
@@ -469,8 +461,8 @@
 
 								<div class="row">
 									<div class="col-md-12">
-										<div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-											<div class="help-info">Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download.</div>
+										<div class="km-control-group" name="relevantDocuments" caption="{{::('editCBIT.relevantDocuments'|$translate)}}">
+											<div class="help-info">{{::('editCBIT.relevantDocumentsInfo'|$translate)}}</div>
 											<div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier" ></div>
 										</div>
 									</div>
@@ -479,9 +471,9 @@
 								<div class="row">
 									<div class="col-md-12">
 										<div class="km-control-group" name="notes">
-											<legend>Notes</legend>
+											<legend>{{::('editCBIT.notes'|$translate)}}</legend>
 											<span class="help-info">
-													The “Notes” field is for personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information.
+													{{::('editCBIT.notesInfos'|$translate)}}
 												</span>
 											<div km-notes name="notes" ng-model="document.notes"></div>
 										</div>

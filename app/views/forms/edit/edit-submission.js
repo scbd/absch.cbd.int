@@ -3,12 +3,13 @@ import _ from 'lodash';
 import 'views/forms/edit/edit';
 import '~/views/forms/view/view-submission.directive';
 import 'services/main';
+import editsubmissionT from '~/app-text/views/forms/edit/edit-submission.json';
 
   export { default as template } from './edit-submission.html';
 
-  export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService',
-   function ($scope, $http, $controller, realm, searchService, solr, thesaurusService) {
-
+export default ["$scope", "$http", "$controller", "realm", 'searchService', 'solr', 'thesaurusService', 'translationService',
+  function ($scope, $http, $controller, realm, searchService, solr, thesaurusService, translationService) {
+    translationService.set('editsubmissionT', editsubmissionT);
     $scope.isBch = realm.is('BCH');
     $scope.isAbs = realm.is('ABS');
     $scope.notificationQuery = {

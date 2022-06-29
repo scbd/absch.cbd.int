@@ -4,15 +4,16 @@ import 'views/forms/edit/edit';
 import 'views/forms/edit/document-selector';
 import 'views/forms/view/abs/view-abs-national-report.directive';
 import 'services/main';
+import editAbsNrT from '~/app-text/views/forms/edit/abs/edit-abs-national-report.json';
 
   export { default as template } from './edit-absNationalReport.html';
 
-  export default ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService","appConfigService", 'solr',
-  function ($scope, $http, $filter, $controller,$location, $q, realm, searchService, appConfigService, solr) {
+export default ["$scope", "$http", "$filter", "$controller", "$location", "$q", "realm", "searchService", "appConfigService", 'solr', 'translationService',
+    function ($scope, $http, $filter, $controller, $location, $q, realm, searchService, appConfigService, solr, translationService) {
 
     $controller('editController', {$scope: $scope});
     $scope.showHelp = { hasHelp : true };
-
+        translationService.set('editAbsNrT', editAbsNrT);
     $scope.setTab = function () {
         $scope.tab = 'intro';
     };

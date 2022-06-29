@@ -6,13 +6,13 @@
     'bg-inbetween': currentCountry.isInbetweenParty}">
         <div>
             <span class="color-white fw-bold" ng-if="((isABS && currentCountry.isParty) || (isBCH && currentCountry.isParty)) && !currentCountry.isInbetweenParty">
-                Party to the Nagoya Protocol</span>
+                {{::('homepinPopupAbsTranslation.partyToNagoyaProtocol'|$translate)}}</span>
             
                 <span  class="color-white fw-bold" ng-if="(isABS && currentCountry.isInbetweenParty)">
-                    Ratified, not yet Party</span>
+                    {{::('homepinPopupAbsTranslation.ratifiedNotYetParty'|$translate)}}</span>
 
                 <span  class="color-white fw-bold" ng-if="(isABS && !currentCountry.isParty && !currentCountry.isInbetweenParty) || (isBCH && !currentCountry.isParty)">
-                    Not a Party to the Nagoya Protocol</span>
+                    {{::('homepinPopupAbsTranslation.notPartyToNagoyaProtocol'|$translate)}}</span>
 
         </div>
 
@@ -25,25 +25,24 @@
                 ng-if="(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='dk' || countryMapScope.currentCountry.code.toLowerCase()=='dk')" 
                 class="small  color-white"
                     style="margin-top:5px;white-space: normal;padding:3px;">
-                    Denmark’s ratification of the Protocol does not apply in respect of Greenland and the Faroe Islands.
+                    {{::('homepinPopupAbsTranslation.dkText'|$translate)}}
                 </div>
                 <div ng-if="countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='fk'" 
                 class="small " style="margin-top:5px;white-space: normal;padding:3px;">
-                    A dispute exists between the Governments of Argentina and the United Kingdom of Great Britain and Northern
-                    Ireland concerning sovereignty over the Falkland Islands (Malvinas).
+                {{::('homepinPopupAbsTranslation.fkText'|$translate)}}
                 </div>
                 <div ng-if="countryMapScope.currentCountry.code.toLowerCase()=='eh'"  class="color-white small " style="margin-top:25px;white-space: normal;padding:3px;font-size: x-large;">
-                    Non-Self Governing Territory.
+                    {{::('homepinPopupAbsTranslation.ehText'|$translate)}}
                 </div>
                 <div 
                 ng-if="(countryMapScope.currentCountry.exceptionCountry.toLowerCase()=='gb'||countryMapScope.currentCountry.code.toLowerCase()=='gb')" 
                 class="color-white small" style="margin-top:5px;white-space: normal;padding:3px;">
-                    The UK’s ratification of the Nagoya Protocol does not extend to the
+                {{::('homepinPopupAbsTranslation.gbText'|$translate)}}
                     <a rel="noopener" ng-href="#"  class=" color-white gb-territories" 
-                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="Anguilla; Bermuda; British Antarctic Territory; British Indian Ocean Territory; British Virgin Islands; Cayman Islands; Falkland Islands; Gibraltar; Montserrat; Pitcairn Islands; Saint Helena, Ascension and Tristan da Cunha; South Georgia and the South Sandwich Islands; Sovereign Base Areas of Akrotiri and Dhekelia; Turks and Caicos Islands">14 Overseas Territories </a>
-                    or
+                    data-container="body" data-bs-toggle="tooltip" data-placement="top" title="{{::('homepinPopupAbsTranslation.gbTitle14'|$translate)}}">{{::('homepinPopupAbsTranslation.overseasTerritories'|$translate)}}</a>
+                    {{::('homepinPopupAbsTranslation.or'|$translate)}}
                     <a rel="noopener" ng-href="#" class=" color-white gb-territories"  data-container="body" 
-                        data-bs-toggle="tooltip" data-placement="left" title="Bailiwick of Jersey, the Bailiwick of Guernsey and the Isle of Man">3 Crown Dependencies</a>
+                        data-bs-toggle="tooltip" data-placement="left" title="{{::('homepinPopupAbsTranslation.gbTitle3'|$translate)}}">{{::('homepinPopupAbsTranslation.crownDependencies'|$translate)}}</a>
                 </div>
             </div>
         </div>

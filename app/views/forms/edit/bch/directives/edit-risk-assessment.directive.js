@@ -5,10 +5,11 @@ import 'views/forms/edit/edit';
 import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-risk-assessment.directive";
+import editRiskAssessmentT from '~/app-text/views/forms/edit/bch/directives/edit-risk-assessment.json';
 
 	const riskAssessmentDirective = (type)=>{
 
-		return ["$controller", "thesaurusService", "$routeParams", "realm", function($controller, thesaurusService, $routeParams, realm) {
+		return ["$controller", "thesaurusService", "$routeParams", "realm", "translationService", function ($controller, thesaurusService, $routeParams, realm, translationService) {
 			return {
 				restrict   : "EA",
 				template: template,
@@ -18,7 +19,7 @@ import "~/views/forms/view/bch/view-risk-assessment.directive";
 					onPostSubmitFn   : "&onPostSubmit"
 				},
 				link: function($scope, $element, $attr){
-
+					translationService.set('editRiskAssessmentT', editRiskAssessmentT); 
 					$scope.scientificNameSynonyms = [{}];
 					$scope.commonNames = [{}];
 					$scope.container        = $attr.container;

@@ -1,0 +1,31 @@
+{
+    "addRecord": "Add record",
+    "addRecords": "Add record(s)",
+    "noRecords.": "No records have been linked.",
+    "linkedRecords": "linked records.",
+    "pleaseSelect": "Please select from the list of published records below:",
+    "pleaseSelectInfo": "If the record is not listed, please create a new record.",
+    "all": "All",
+    "myRecords": "My records",
+    "myGovernmentRecords": "My government records",
+    "selected": "Selected",
+    "filterRecords": "filter records by keywords or unique identifier or any other text",
+    "search": "Search",
+    "createNew": "Create new",
+    "type": "Type",
+    "title": "Title",
+    "uniqueIdentifier": "Unique Identifier",
+    "smmary": "Smmary",
+    "recordUid": "record uid",
+    "metaInformation": "Meta Information",
+    "noRecordSelected": "You have not selected records.",
+    "loading": "loading...",
+    "select": "Select",
+    "clearRecords": "Clear selected records",
+    "create": "Create",
+    "showExisting": "Show Existing",
+    "cancel": "Cancel",
+    "noRecordFound": "no records found."
+
+
+}

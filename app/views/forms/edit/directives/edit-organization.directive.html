@@ -11,10 +11,10 @@
             <edit-form>
                 <form name="editForm" class="editForm" style="margin-top:10px">
                     <div class="no-shadow bg-white">
-                        <legend>General information</legend>
+                        <legend>{{::('editOrganizationT.generalInfo'|$translate)}}</legend>
                         <div class="row">
                             <div class="col-xs-12" >
-                                <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                <div class="km-control-group" name="header.languages" required caption="{{::('editOrganizationT.languageToPublish'|$translate)}}">
                                     <div class="indent">
                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                     </div>
@@ -23,24 +23,24 @@
                         </div>
                         <div class="row">
                             <div class="col-md-7 col-xs-12">
-                                <div class="km-control-group" name="name" required caption="Name of the organization">
-                                    <div class="help-block">Please provide the name of the organization as you would like it to appear in the title of the record. For example, United Nations Environment Programme.</div>
-                                    <div km-textbox-ml name="name" required ng-model="document.name" placeholder="For eg. United Nations Environment Programme"
+                                <div class="km-control-group" name="name" required caption="{{::('editOrganizationT.nameOfTheOrganization'|$translate)}}">
+                                    <div class="help-block">{{::('editOrganizationT.nameOfTheOrganizationInfo'|$translate)}}</div>
+                                    <div km-textbox-ml name="name" required ng-model="document.name" placeholder="{{::('editOrganizationT.UNEProgramme'|$translate)}}"
                                         locales="document.header.languages"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-5 col-xs-12">
-                                <div class="km-control-group" name="acronym" caption="Acronym">
-                                    <div class="help-block">If applicable, please provide an acronym commonly used to refer to the organization. For example, UNEP.</div>
+                                <div class="km-control-group" name="acronym" caption="{{::('editOrganizationT.acronym'|$translate)}}">
+                                    <div class="help-block">{{::('editOrganizationT.acronymInfo'|$translate)}}</div>
                                     <div km-textbox-ml name="acronym" ng-model="document.acronym"
-                                        placeholder="For eg. UNEP" locales="document.header.languages"></div>
+                                        placeholder="{{::('editOrganizationT.UNEP'|$translate)}}" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="contacts" caption="Contact person(s)">
+                                <div class="km-control-group" name="contacts" caption="{{::('editOrganizationT.contactPerson'|$translate)}}">
                                     <div document-selector ng-model="document.contacts" allow-new="true" allow-new-schema="contact"
                                          question="contacts"
                                          on-build-query="onContactQuery(searchText)"
@@ -53,11 +53,11 @@
                     </div>
 
                     <div class="no-shadow bg-white">
-                        <legend>Organization coordinates</legend>
+                        <legend>{{::('editOrganizationT.organizationCoordinates'|$translate)}}</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group" name="address" caption="Address">
-                                    <div km-textbox-ml ng-model="document.address" rows="2" placeholder="example: 413 St-Jacques Ouest, Suite 800"
+                                <div class="km-control-group" name="address" caption="{{::('editOrganizationT.address'|$translate)}}">
+                                    <div km-textbox-ml ng-model="document.address" rows="2" placeholder="{{::('editOrganizationT.exampleAddress'|$translate)}}"
                                         locales="document.header.languages"></div>
                                 </div>
                             </div>
@@ -65,16 +65,16 @@
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="city" required caption="City">
+                                <div class="km-control-group" name="city" required caption="{{::('editOrganizationT.city'|$translate)}}">
                                     <div km-textbox-ml required name="city" ng-model="document.city" locales="document.header.languages"
-                                        placeholder="example: Montreal"></div>
+                                        placeholder="{{::('editOrganizationT.exampleCity'|$translate)}}"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="state" caption="State or Province">
+                                <div class="km-control-group" name="state" caption="{{::('editOrganizationT.stateProvince'|$translate)}}">
                                     <div km-textbox-ml name="state" ng-model="document.state" locales="document.header.languages"
-                                        placeholder="example: Quebec"></div>
+                                        placeholder="{{::('editOrganizationT.exampleQuebec'|$translate)}}"></div>
                                 </div>
                             </div>
                         </div>
@@ -82,16 +82,16 @@
                         <div class="row">
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="postalCode" caption="Postal Code or Zip">
+                                <div class="km-control-group" name="postalCode" caption="{{::('editOrganizationT.postalZip'|$translate)}}">
                                     <div km-textbox-ml name="postalCode" ng-model="document.postalCode" locales="document.header.languages"
-                                        placeholder="example: H2Y 1N9"></div>
+                                        placeholder="{{::('editOrganizationT.examplePostalCode'|$translate)}}"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="country" required caption="Country">
+                                <div class="km-control-group" name="country" required caption="{{::('editOrganizationT.country'|$translate)}}">
                                     <div afc-autocomplete name="country" ng-model="document.country" source="options.countries"
-                                                mapping="genericMapping" selectbox="true" placeholder="Please select a country..."
+                                                mapping="genericMapping" selectbox="true" placeholder="{{::('editOrganizationT.selectCountry'|$translate)}}"
                                                 required filter="startsWithFilter" maxmatches="50"></div>
                                 </div>
                             </div>
@@ -99,33 +99,31 @@
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="phones" required caption="Phone number(s)">
-                                    <div class="help-info">Please use the following format: +[country code] [city code]
-                                        [telephone number] [extension, if necessary].</div>
+                                <div class="km-control-group" name="phones" required caption="{{::('editOrganizationT.phoneNumber'|$translate)}}">
+                                    <div class="help-info">{{::('editOrganizationT.phoneFormate'|$translate)}}</div>
                                     <div km-inputtext-list required name="phones" ng-model="document.phones"
-                                        placeholder="example: +1 514.288.2220"></div>
+                                        placeholder="{{::('editOrganizationT.examplePhones'|$translate)}}"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="faxes" caption="Fax number(s)">
-                                    <div class="help-info">Please use the following format: +[country code] [city code]
-                                        [telephone number] [extension, if necessary].</div>
-                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="example: +1 514.288.6588"></div>
+                                <div class="km-control-group" name="faxes" caption="{{::('editOrganizationT.faxNumber'|$translate)}}">
+                                    <div class="help-info">{{::('editOrganizationT.phoneFormate'|$translate)}}</div>
+                                    <div km-inputtext-list name="faxes" ng-model="document.faxes" placeholder="{{::('editOrganizationT.examplePhones'|$translate)}}"></div>
                                 </div>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="emails" required caption="Email(s)">
+                                <div class="km-control-group" name="emails" required caption="{{::('editOrganizationT.emails'|$translate)}}">
                                     <div km-inputtext-list required name="emails" ng-model="document.emails"
-                                        placeholder="example: secretariat@cbd.int"></div>
+                                        placeholder="{{::('editOrganizationT.exampleEmail'|$translate)}}"></div>
                                 </div>
                             </div>
 
                             <div class="col-md-6 col-xs-12">
-                                <div class="km-control-group" name="websites" caption="Website address(es)">
+                                <div class="km-control-group" name="websites" caption="{{::('editOrganizationT.webAddress'|$translate)}}">
                                     <div km-link name="websites" ng-model="document.websites" allow-link="true"
                                         allow-file="false"></div>
                                 </div>
@@ -137,7 +135,7 @@
                         <legend>Detailed information</legend>
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="km-control-group organization-dropdown" name="organizationType" required caption="Type of organization">
+                                <div class="km-control-group organization-dropdown" name="organizationType" required caption="{{::('editOrganizationT.typeOfOrganization'|$translate)}}">
                                     <div km-select name="organizationType" required ng-model="document.organizationType"
                                         items="options.organizationTypes()"></div>
                                 </div>
@@ -145,7 +143,7 @@
                             <div class="col-md-12" ng-show="document.organizationType.identifier=='5B6177DD-5E5E-434E-8CB7-D63D67D5EBED'">
                                 <div class="km-control-group" name="organizationTypeName" required caption="Other type of organization">
                                     <div km-textbox-ml name="organizationTypeName" required ng-model="document.organizationType.customValue"
-                                        placeholder="example: SCBD" locales="document.header.languages"></div>
+                                        placeholder="{{::('editOrganizationT.exampleCBD'|$translate)}}" locales="document.header.languages"></div>
                                 </div>
                             </div>
                         </div>
@@ -154,8 +152,8 @@
 
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <div class="km-control-group" name="areasOfWork" caption="Areas of work">                                
-                                        <div class="help-block">Please provide keywords only.</div>
+                                    <div class="km-control-group" name="areasOfWork" caption="{{::('editOrganizationT.areasOfWork'|$translate)}}">                                
+                                        <div class="help-block">{{::('editOrganizationT.areasOfWorkInfo'|$translate)}}</div>
                                         <div ng-repeat="areaOfWork in areasOfWork" class="pb-1 d-block input-group">
                                             <div km-textbox-ml name="areaOfWork{{$index}}" class="areas-of-work-input float-start pb-1" style="width:97%;" ng-model="areaOfWork.value" locales="document.header.languages"></div>
                                             <span ng-class="{'disable':areasOfWork.length==1}" class="cursor-pointer input-group-text float-end trash-value"
@@ -163,7 +161,7 @@
                                                 <i class="fa fa-trash-o icon"></i>
                                             </span>
                                         </div>
-                                        <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">Add item</button>
+                                        <button type="button" class="btn btn-primary" ng-click="addItem(areasOfWork)">{{::('editOrganizationT.addItem'|$translate)}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -177,9 +175,9 @@
                             </div> -->
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="km-control-group"  name="operationalRegions" caption="Regional area(s) of operations or political/economic group(s)">
+                                    <div class="km-control-group"  name="operationalRegions" caption="{{::('editOrganizationT.operationalRegions'|$translate)}}">
                                         <div km-select multiple required name="operationalRegions" 
-                                        ng-model="document.operationalRegions" placeholder="Please select" 
+                                        ng-model="document.operationalRegions" placeholder="{{::('editOrganizationT.pleaseSelect'|$translate)}}" 
                                         items="options.geographicRegions()"></div>
                                     </div>
                                 </div>
@@ -187,9 +185,9 @@
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="km-control-group" name="profile" required caption="Organization’s profile">
-                                        <div class="help-block">Please provide or attach a short profile of the organization and its relevance to biosafety.</div>
-                                        <div km-rich-textbox ng-model="document.profile" rows="2" placeholder="Organization’s profile"
+                                    <div class="km-control-group" name="profile" required caption="{{::('editOrganizationT.profile'|$translate)}}">
+                                        <div class="help-block">{{::('editOrganizationT.profileInfo'|$translate)}}</div>
+                                        <div km-rich-textbox ng-model="document.profile" rows="2" placeholder="{{::('editOrganizationT.profile'|$translate)}}"
                                         locales="document.header.languages"></div>
                                         <br/>
                                         <div km-link name="profileLink" ng-model="document.profileLink" identifier="document.header.identifier"></div>
@@ -199,8 +197,8 @@
                             
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class="km-control-group" name="linkedOrganizations" caption="Linked organizations">
-                                        <div class="help-block">Please use this field to link to any other related organizations that may be in the database (e.g. GEF and UNEP-GEF).</div>
+                                    <div class="km-control-group" name="linkedOrganizations" caption="{{::('editOrganizationT.linkedOrganizations'|$translate)}}">
+                                        <div class="help-block">{{::('editOrganizationT.linkedOrganizationsInfo'|$translate)}}</div>
                                         <div document-selector ng-model="document.linkedOrganizations" allow-new="true" allow-new-schema="organization"
                                              question="linkedOrganizations"
                                              on-build-query="onBuildQuery(searchText)"
@@ -214,19 +212,18 @@
                     </div>
                     
                     <div class="no-shadow bg-white">
-                        <legend>Timeframe for confirmation or updating of information</legend>
+                        <legend>{{::('editOrganizationT.timeframeConfirmation'|$translate)}}</legend>
                         <div class="help-info">
-                            Please note that this category of information requires confirmation or updating after one year from the date of submission. After the deadline you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as “Non-confirmed”. 
+                            {{::('editOrganizationT.categoryOfInformation'|$translate)}}
                         </div>
                     </div>
 
                     <div class="no-shadow bg-white">
-                        <legend>Additional information</legend>
+                        <legend>{{::('editOrganizationT.additionalInformation'|$translate)}}</legend>
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="address" caption="Any other relevant information">
-                                    <div class="help-block">Please use this field to provide any other relevant information that may not have been addressed elsewhere in
-                                        the record.</div>
+                                <div class="km-control-group" name="address" caption="{{::('editOrganizationT.otherRelevantInformation'|$translate)}}">
+                                    <div class="help-block">{{::('editOrganizationT.relevantInformationInfo'|$translate)}}</div>
                                     <div km-rich-textbox ng-model="document.relevantInformation" rows="4" placeholder="" locales="document.header.languages"></div>
                                 </div>
                             </div>
@@ -234,21 +231,20 @@
 
                         <div class="row">
                             <div class="col-sm-12">
-                                <div class="km-control-group" name="relevantDocuments" caption="Any other relevant documents">
-                                    <div class="help-block">Please use this field to provide any other relevant website addresses and/or one or more 
-                                        relevant documents that will be stored in the database for users to download.</div>
+                                <div class="km-control-group" name="relevantDocuments" caption="{{::('editOrganizationT.relevantDocuments'|$translate)}}">
+                                    <div class="help-block">{{::('editOrganizationT.relevantDocumentsInfo'|$translate)}}</div>
                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments" allow-link="true" allow-file="true" identifier="document.header.identifier"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="no-shadow bg-white">
-                        <legend>Notes</legend>								
+                        <legend>{{::('editOrganizationT.notes'|$translate)}}</legend>								
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="km-control-group" name="notes">
                                     <span class="help-block">
-                                        The “Notes” field is for personal reference and can be seen only when the record is being edited. It will be hidden once the record is published. This field is not meant to be used for confidential information.
+                                        {{::('editOrganizationT.notesInfos'|$translate)}}
                                     </span>
                                     <div km-notes name="notes" ng-model="document.notes"></div>
                                 </div>

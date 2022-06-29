@@ -1,0 +1,21 @@
+{
+    "generalInfo": "General information",
+    "country": "Country",
+    "description": "Description of the ABS Procedure",
+    "title": "Title",
+    "jurisdiction": "Area of Jurisdiction",
+    "contactsLinks": "Where should applications for access be made",
+    "requirements": "Conditions or requirements a potential user needs to fulfil to apply for access",
+    "descriptionLinks": "Step-by step description or a visual representation of the ABS procedure",
+    "hasApplicationDocuments": "Does the applicant need to provide any documents",
+    "applicationInformation": "Information on application forms or required documents",
+    "applicationLinks": "Relevant application form/documents or a link to website",
+    "applicationContacts": "Information on whom the application should be sent to",
+    "hasApplicationFees": "Are there application fees",
+    "applicationFeesInformation": "Additional information on application fees",
+    "duration": "How long does the application process take",
+    "relevantMeasures": "Relevant ABS measure(s)",
+    "keywords": "Keywords",
+    "addInfo": "Additional Information",
+    "relevantDocuments": "Other relevant links or attached documents"
+}

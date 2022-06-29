@@ -5,19 +5,24 @@ import 'views/directives/home-country-dashboard-directive';
 import 'views/directives/map/home-map';
 import 'views/directives/home-articles';
 import homepageRecords from '~/components/common/homepage-records.vue';
-
 import 'angular-cookies';
-    export { default as template } from './index.html';
-export default ['$scope','$rootScope',
-    function ($scope, $rootScope) {
+import absHomeT from '~/app-text/views/home/index.json';
+
+export { default as template } from './index.html';
+
+export default ['$scope','$rootScope', 'translationService', function ($scope, $rootScope, translationService) {
+
+        translationService.set('absHomeT', absHomeT);
 
         $scope.recordCount = 4;
         $scope.announcementCounts = 3;
+        $scope.locale = 'en';
+
         if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
           $scope.recordCount = 8;
           $scope.announcementCounts = 6;
         }
-        $scope.locale = 'en';
+
         var today= moment.utc();
         var entry= moment.utc("2014-10-12");
         $scope.entryintoforce = today.diff(entry, 'hours', true) >= 0 ? true:false;

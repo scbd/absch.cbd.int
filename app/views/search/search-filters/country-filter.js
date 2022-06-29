@@ -2,7 +2,7 @@ import app from 'app';
 import template from 'text!./country-filter.html';
 import _ from 'lodash';
 import 'services/main';
-import alphabets from '~/app-data/common/search/alphabets.json'
+import alphabets from '~/app-text/views/search/alphabets.json';
 
     app.directive('countryFilter', ['locale', function(locale) {
         return {

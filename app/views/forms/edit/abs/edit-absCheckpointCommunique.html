@@ -18,10 +18,10 @@
                                 <div ng-show="tab=='edit'" km-tab="edit">
                                         
                                     <section>
-                                        <legend name="generalInfo">General information</legend>
+                                        <legend name="generalInfo">{{::('editAbsCheckpointCT.generalInfo'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12" >
-                                                <div class="km-control-group" name="header.languages" required caption=" Please select in which language(s) you wish to submit this record:">
+                                                <div class="km-control-group" name="header.languages" required caption="{{::('editAbsCheckpointCT.languageToPublish'|$translate)}}">
                                                     <div class="indent">
                                                         <div km-form-languages multiple required name="header.languages" ng-model="document.header.languages"></div>
                                                     </div>
@@ -31,10 +31,10 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="control-group">
-                                                    <div class="km-control-group" name="government" required caption="Country issuing this checkpoint communique">
+                                                    <div class="km-control-group" name="government" required caption="{{::('editAbsCheckpointCT.government'|$translate)}}">
                                                         <div afc-autocomplete required name="government" ng-disabled="userGovernment()"
                                                             ng-model="document.government" source="options.countries" filter="genericFilter"
-                                                            mapping="genericMapping" selectbox="true" placeholder="Please select a country..."></div>
+                                                            mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsCheckpointCT.selectOption'|$translate)}}"></div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -43,11 +43,9 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="control-group">
-                                                    <div class="km-control-group" name="title" required caption="Title of this checkpoint communique">
-                                                        <div class="help-info">This field serves as the title of the record,
-                                                            therefore it should be distinct and help to easily identify the record
-                                                            in the ABS Clearing-House.</div>
-                                                        <div km-textbox-ml ng-model="document.title" rows="1" placeholder="Title of this checkpoint communique"
+                                                    <div class="km-control-group" name="title" required caption="{{::('editAbsCheckpointCT.title'|$translate)}}">
+                                                        <div class="help-info">{{::('editAbsCheckpointCT.titleInfo'|$translate)}}</div>
+                                                        <div km-textbox-ml ng-model="document.title" rows="1" placeholder="{{::('editAbsCheckpointCT.title'|$translate)}}"
                                                             locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
@@ -60,10 +58,8 @@
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="control-group">
-                                                    <div class="km-control-group" name="absCheckpoints" required caption="Checkpoint/s that collected or received the information">
-                                                        <div class="help-info"> In this field you can select from the existing
-                                                            ABS-CH records, the record of the checkpoint/s that collected or
-                                                            received the information.</div>
+                                                    <div class="km-control-group" name="absCheckpoints" required caption="{{::('editAbsCheckpointCT.checkpoints'|$translate)}}">
+                                                        <div class="help-info"> {{::('editAbsCheckpointCT.checkpointsInfo'|$translate)}}</div>
             
                                                        <div document-selector ng-disabled="!document.government.identifier" on-build-query="onBuildQuery(searchText)"
                                                                   ng-model="document.absCheckpoints" question="absCheckpoints" filter="true"></div>
@@ -74,8 +70,7 @@
                                     </section>
             
                                     <section>
-                                        <legend name="certificate">Details of the internationally recognized certificate of
-                                            compliance</legend>
+                                        <legend name="certificate">{{::('editAbsCheckpointCT.certificate'|$translate)}}</legend>
             
                                         <div class="row">
                                             <div class="col-xs-12">
@@ -83,20 +78,13 @@
                                                     <div class="panel-heading">
                                                         <span ng-class="{'confidential-text':document.absIRCCsNotAvailable}">
                                                             <input type="checkbox" name="absIRCCsNotAvailable" ng-model="document.absIRCCsNotAvailable"
-                                                                watch-items> The internationally recognized certificate of
-                                                            compliance (IRCC) is not available
+                                                                watch-items> {{::('editAbsCheckpointCT.IRCCsNotAvailable'|$translate)}}
                                                         </span>
                                                     </div>
                                                     <div class="panel-body panel-body-confidential" ng-class="{'disable':document.absIRCCsNotAvailable}">
                                                         <div class="km-control-group" style="margin-bottom:20px;" name="absIRCCs"
-                                                            required caption="Links to internationally recognized certificate(s) of compliance (IRCC) that relate to this communiqué">
-                                                            <div class="help-info">Here, the reference of the IRCC is to be
-                                                                included if a user of a genetic resource presented an IRCC to the
-                                                                checkpoint. Use the different filters or the unique identifier in
-                                                                the text field to search for the existing relevant IRCC. If the
-                                                                IRCC is not available you need to select the option “This
-                                                                information is not available” and the grey box below will be
-                                                                enabled.</div>
+                                                            required caption="{{::('editAbsCheckpointCT.IRCCs'|$translate)}}">
+                                                            <div class="help-info">{{::('editAbsCheckpointCT.IRCCsInfo'|$translate)}}</div>
                                                            <div document-selector on-build-query="onBuildIRCCsQuery(searchText)"
                                                                       ng-model="document.absIRCCs" question="absIRCCs"
                                                                       disabled="isAbsIRCCsNotAvailable()" filter="true"></div>
@@ -114,56 +102,42 @@
                                             class="no-shadow py-0" style="padding-top:0;padding-bottom:0;">
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <h3>This section is required when the internationally recognized certificate of
-                                                        compliance (IRCC) is not available.</h3>
+                                                    <h3>{{::('editAbsCheckpointCT.IRCCComplain'|$translate)}}</h3>
                                                 </div>
                                             </div>
             
-                                            <legend>Source of the genetic resource</legend>
+                                            <legend>{{::('editAbsCheckpointCT.geneticResource'|$translate)}}</legend>
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="control-group">
-                                                        <div class="km-control-group" name="sourceCountries" required caption="Source of the genetic resource">
-                                                            <div class="help-info">Select the country/ies which is/are the source
-                                                                of the genetic resource. The country/ies selected will be notified once this record is published.
-                                                            The source country should not include the country publishing this Checkpoint Communiqué.
-                                                            </div>
+                                                        <div class="km-control-group" name="sourceCountries" required caption="{{::('editAbsCheckpointCT.geneticResource'|$translate)}}">
+                                                            <div class="help-info">{{::('editAbsCheckpointCT.geneticResourceInfo'|$translate)}}</div>
                                                             <div km-select required name="sourceCountries" ng-model="document.sourceCountries"
-                                                                multiple items="options.countries()" placeholder="Please select a country..."></div>
+                                                                multiple items="options.countries()" placeholder="{{::('editAbsCheckpointCT.selectOption'|$translate)}}"></div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
             
             
-                                            <legend>Subject-matter or genetic resource</legend>
+                                            <legend>{{::('editAbsCheckpointCT.subjectMatterTitle'|$translate)}}</legend>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="subjectMatter" required caption="Subject-matter or genetic resources relevant to the information collected or received">
-                                                        <div class="help-info">Please provide details on the subject-matter or
-                                                            genetic resources relevant to the information collected or received by
-                                                            the checkpoint. This could include biota at any taxonomic rank, which
-                                                            may carry a taxonomic
-                                                            name. It may also include a locality of collection of the material. It
-                                                            may also be possible to identify the genetic resource through reference
-                                                            to a voucher specimen or field notes held in an identified archive
-                                                            or collection. </div>
+                                                    <div class="km-control-group" name="subjectMatter" required caption="{{::('editAbsCheckpointCT.subjectMatter'|$translate)}}">
+                                                        <div class="help-info">{{::('editAbsCheckpointCT.subjectMatterInfo'|$translate)}} </div>
                                                         <div km-rich-textbox name="subjectMatter" rows="6" ng-model="document.subjectMatter"
                                                             locales="document.header.languages"></div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="legend2">Additional subject matter or genetic resource information
-                                                    <span class="help-info">Providing details about the subject matter or genetic
-                                                        resource covered by the permit or its equivalent can provide additional
-                                                        legal certainty.</span>
+                                                <div class="legend2">{{::('editAbsCheckpointCT.additionalTitle'|$translate)}}
+                                                    <span class="help-info">{{::('editAbsCheckpointCT.additionalInfo'|$translate)}}</span>
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="specimens" caption="Specimen data">
-                                                            <span class="help-info">Link to a voucher specimen held in an
-                                                                appropriate facility</span>
+                                                        <div class="km-control-group" name="specimens" caption="{{::('editAbsCheckpointCT.specimens'|$translate)}}">
+                                                            <span class="help-info">{{::('editAbsCheckpointCT.specimensInfo'|$translate)}}</span>
                                                             <div km-link name="specimens" ng-model="document.specimens" allow-link="true"
                                                                 allow-file="false" identifier="document.header.identifier"></div>
                                                         </div>
@@ -171,9 +145,8 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="taxonomies" caption="Taxonomy">
-                                                            <span class="help-info">Link to record in external taxonomy database,
-                                                                e.g. GBIF, Catalogue of Life</span>
+                                                        <div class="km-control-group" name="taxonomies" caption="{{::('editAbsCheckpointCT.taxonomies'|$translate)}}">
+                                                            <span class="help-info">{{::('editAbsCheckpointCT.taxonomiesInfo'|$translate)}}</span>
                                                             <div km-link name="taxonomies" ng-model="document.taxonomies"
                                                                 allow-link="true" allow-file="false" identifier="document.header.identifier"></div>
                                                         </div>
@@ -182,8 +155,8 @@
                                                 <div class="row">
                                                     <div class="col-xs-12" ng-class="{'warning':isInvalid('gisFiles')}">
                                                         <div class="km-control-group">
-                                                            <label class="control-label" for="gisFiles">Geographic coordinates</label>
-                                                            <span class="help-info">Limited to .geojson files (<a rel="noopener" translation-url
+                                                            <label class="control-label" for="gisFiles">{{::('editAbsCheckpointCT.geographicCoordinates'|$translate)}}</label>
+                                                            <span class="help-info">{{::('editAbsCheckpointCT.geographicCoordinatesInfo'|$translate)}} (<a rel="noopener" translation-url
                                                                     href="http://www.geojson.org/" target="_blank">http://www.geojson.org/</a>)</span>
                                                             <div km-link required name="gisFiles" ng-model="document.gisFiles"
                                                                 allow-link="false" identifier="document.header.identifier"
@@ -193,7 +166,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12">
-                                                        <div class="km-control-group" name="keywords" caption="Keywords to describe the subject-matter or genetic resource(s) covered by the permit or its equivalent">
+                                                        <div class="km-control-group" name="keywords" caption="{{::('editAbsCheckpointCT.keywords'|$translate)}}">
                                                             <div class="help-info"></div>
                                                             <div km-select multiple show-description="true" required name="keywords"
                                                                 ng-model="document.keywords" items="options.keywords()"></div>
@@ -202,7 +175,7 @@
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-xs-12" ng-show="isOthers()">
-                                                        <div class="km-control-group" required name="keywordOther" caption="Other keywords">
+                                                        <div class="km-control-group" required name="keywordOther" caption="{{::('editAbsCheckpointCT.keywordOther'|$translate)}}">
                                                             <div km-textbox-ml required name="keywordOther" rows="1" ng-model="document.keywordOther"
                                                                 locales="document.header.languages"></div>
                                                         </div>
@@ -213,28 +186,25 @@
                                             <div ng-show="document.gisFiles">
                                                 <div class="input-prepend input-append">
                                                     <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lat | number:6}}" />
-                                                    <span class="add-on">lat</span>
+                                                    <span class="add-on">{{::('editAbsCheckpointCT.lat'|$translate)}}</span>
                                                 </div>
                                                 <div class="input-prepend input-append">
                                                     <input class="input-small" type="text" readonly value="{{document.gisMapCenter.lng | number:6}}" />
-                                                    <span class="add-on">long</span>
+                                                    <span class="add-on">{{::('editAbsCheckpointCT.long'|$translate)}}</span>
                                                 </div>
                                                 <div class="input-prepend input-append">
                                                     <input class="input-small" type="text" readonly value="{{document.gisMapCenter.zoom | number:0}}" />
-                                                    <span class="add-on">zoom</span>
+                                                    <span class="add-on">{{::('editAbsCheckpointCT.zoom'|$translate)}}</span>
                                                 </div>
                                             </div>
                                             <div ng-show="document.gisFiles" class="leaflet" center="document.gisMapCenter" layers="gisLayer"></div>
             
-                                            <legend>Evidence of PIC and MAT</legend>
+                                            <legend>{{::('editAbsCheckpointCT.evidence'|$translate)}}</legend>
             
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="evidenceOfPIC" caption="Reference or evidence of prior informed consent (PIC)">
-                                                        <div class="help-info">This field is to provide information on PIC. This
-                                                            includes information on any national reference or identifiers that may
-                                                            aid countries to search and retrieve information related to PIC, or the
-                                                            permit or its equivalent in their national files.</div>
+                                                    <div class="km-control-group" name="evidenceOfPIC" caption="{{::('editAbsCheckpointCT.evidenceOfPIC'|$translate)}}">
+                                                        <div class="help-info">{{::('editAbsCheckpointCT.evidenceOfPICInfo'|$translate)}}</div>
                                                         <div km-rich-textbox name="evidenceOfPIC" rows="4" ng-model="document.evidenceOfPIC"
                                                             locales="document.header.languages"></div>
                                                     </div>
@@ -242,7 +212,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="entityWhoGrantedPIC" caption="Person or entity who granted prior informed consent (PIC)">
+                                                    <div class="km-control-group" name="entityWhoGrantedPIC" caption="{{::('editAbsCheckpointCT.entityWhoGrantedPIC'|$translate)}}">
                                                         <div document-selector on-build-query="onContactSkipGovernmentQuery(searchText)"
                                                                   ng-model="document.entityWhoGrantedPIC" type="radio" list-view="true"
                                                                   question="entityWhoGrantedPIC"
@@ -252,9 +222,8 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="entityToWhomPICGranted" caption="Person or entity to whom prior informed consent (PIC) was granted">
-                                                        <span class="help-info">Please provide the contact details of the person or
-                                                            entity to whom prior informed consent was granted.</span>
+                                                    <div class="km-control-group" name="entityToWhomPICGranted" caption="{{::('editAbsCheckpointCT.entityToWhomPICGranted'|$translate)}}">
+                                                        <span class="help-info">{{::('editAbsCheckpointCT.entityToWhomPICGrantedInfo'|$translate)}}</span>
                                                         <div document-selector on-build-query="onContactSkipGovernmentQuery(searchText)"
                                                                     ng-model="document.entityToWhomPICGranted" type="radio" list-view="true"
                                                                     question="entityToWhomPICGranted" filter="true" allow-new="true" allow-new-schema="contact"></div>
@@ -264,11 +233,8 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-xs-12">
-                                                    <div class="km-control-group" name="evidenceOfMAT" caption="Reference or evidence of establishment of mutually agreed terms (MAT)">
-                                                        <div class="help-info">This field is to provide information on MAT. This
-                                                            includes information on any national reference or identifiers that may
-                                                            aid countries to search and retrieve information related to MAT, or the
-                                                            permit or its equivalent in their national files.</div>
+                                                    <div class="km-control-group" name="evidenceOfMAT" caption="{{::('editAbsCheckpointCT.evidenceOfMAT'|$translate)}}">
+                                                        <div class="help-info">{{::('editAbsCheckpointCT.evidenceOfMATInfo'|$translate)}}</div>
                                                         <div km-rich-textbox name="evidenceOfMAT" rows="4" ng-model="document.evidenceOfMAT"
                                                             locales="document.header.languages"></div>
                                                     </div>
@@ -277,7 +243,7 @@
             
                                             <div class="row">
                                                 <div class="col-xs-12 col-md-3">
-                                                    <div class="km-control-group" name="dateOfAccess" caption="Date of access to the genetic resources">
+                                                    <div class="km-control-group" name="dateOfAccess" caption="{{::('editAbsCheckpointCT.dateOfAccess'|$translate)}}">
                                                         <div km-date placeholder="YYYY-MM-DD" required name="dateOfAccess" ng-model="document.dateOfAccess"></div>
                                                     </div>
                                                 </div>
@@ -285,17 +251,12 @@
                                     </section>
                                     <section>
             
-                                        <legend>Information on the utilization of the genetic resource(s)</legend>
+                                        <legend>{{::('editAbsCheckpointCT.informationUtilization'|$translate)}}</legend>
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" required name="description" caption="Short description of the information collected or received by the checkpoint relevant to the utilization of genetic resources, including  the type of use">
-                                                    <div class="help-info">This could include information on utilization of genetic
-                                                        resources at, inter alia, any stage of research, development, innovation,
-                                                        pre-commercialization or commercialization. The information provided will
-                                                        allow the provider of the genetic resource to check whether the use of the
-                                                        genetic resource is in conformity with PIC and MAT and that benefits are
-                                                        shared in accordance with MAT.</div>
+                                                <div class="km-control-group" required name="description" caption="{{::('editAbsCheckpointCT.description'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsCheckpointCT.descriptionInfo'|$translate)}}</div>
                                                     <div km-rich-textbox name="description" rows="4" ng-model="document.description"
                                                         locales="document.header.languages"></div>
                                                 </div>
@@ -304,12 +265,8 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="personsAtCheckpoint" caption=" Person or entity making information available to the checkpoint on the utilization of the genetic resource ">
-                                                    <div class="help-info">This information allows the provider of the genetic
-                                                        resource to check whether the person or entity to whom the PIC was granted
-                                                        is the same person or entity providing evidence of PIC and MAT at the
-                                                        checkpoint. In case of discrepancy, providers can verify information and
-                                                        conditions related to third party transfer.</div>
+                                                <div class="km-control-group" name="personsAtCheckpoint" caption=" {{::('editAbsCheckpointCT.personsAtCheckpoint'|$translate)}} ">
+                                                    <div class="help-info">{{::('editAbsCheckpointCT.personsAtCheckpointInfo'|$translate)}}</div>
                                                     <div document-selector ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)"
                                                                ng-model="document.personsAtCheckpoint" question="personsAtCheckpoint"
                                                                filter="true" allow-new="true" allow-new-schema="contact"></div>
@@ -317,20 +274,20 @@
                                             </div>
                                         </div>
             
-                                        <label>Date on which the information was collected or received at the checkpoint</label>
+                                        <label>{{::('editAbsCheckpointCT.dateOfInformation'|$translate)}}</label>
                                         <div class="row" style="margin-bottom:20px;">
-                                            <div class="col-xs-4">
+                                            <div class="col-4">
                                                 <div km-date placeholder="YYYY-MM-DD" required name="dateCollected" ng-model="document.dateCollected"></div>
                                             </div>
-                                            <div class="col-xs-1 bg-grey">
+                                            <div class="col-2">
                                                 <div style="font-size:16px;font-weight:bold;padding: 6px;text-align: center;" name="dateOR"
-                                                    caption="OR">OR</div>
+                                                    caption="OR">{{::('editAbsCheckpointCT.or'|$translate)}}</div>
                                             </div>
-                                            <div class="col-xs-3 text-right">
-                                                <div km-date placeholder="FROM" required name="dateCollectedFrom" ng-model="document.dateCollectedFrom"></div>
+                                            <div class="col-3 text-right">
+                                                <div km-date placeholder="{{::('editAbsCheckpointCT.from'|$translate)}}" required name="dateCollectedFrom" ng-model="document.dateCollectedFrom"></div>
                                             </div>
-                                            <div class="col-xs-3  text-right">
-                                                <div km-date placeholder="TO" required name="ddateCollectedTo" ng-model="document.dateCollectedTo"></div>
+                                            <div class="col-3 text-right">
+                                                <div km-date placeholder="{{::('editAbsCheckpointCT.to'|$translate)}}" required name="ddateCollectedTo" ng-model="document.dateCollectedTo"></div>
                                             </div>
                                         </div>
             
@@ -338,12 +295,11 @@
             
                                     <section>
             
-                                        <legend>Additional Information</legend>
+                                        <legend>{{::('editAbsCheckpointCT.additionalInformation'|$translate)}}</legend>
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="relevantInformation" caption="Additional Information">
-                                                    <div class="help-info">Please use this field to provide any other relevant
-                                                        information that may not have been addressed elsewhere in the record.</div>
+                                                <div class="km-control-group" name="relevantInformation" caption="{{::('editAbsCheckpointCT.additionalInformation'|$translate)}}">
+                                                    <div class="help-info">{{::('editAbsCheckpointCT.relevantInformationInfo'|$translate)}}</div>
                                                     <div km-rich-textbox name="relevantInformation" rows="6" ng-model="document.relevantInformation"
                                                         locales="document.header.languages"></div>
                                                 </div>
@@ -352,7 +308,7 @@
             
                                         <div class="row">
                                             <div class="col-xs-12">
-                                                <div class="km-control-group" name="relevantDocuments" caption="Other relevant website addresses and/or attached documents">
+                                                <div class="km-control-group" name="relevantDocuments" caption="{{::('editAbsCheckpointCT.relevantDocumentsInfo'|$translate)}}">
                                                     <div km-link name="relevantDocuments" ng-model="document.relevantDocuments"
                                                         identifier="document.header.identifier"></div>
                                                 </div>
@@ -360,14 +316,12 @@
                                         </div>
                                     </section>
                                     <section>
-                                        <legend>Notes</legend>
+                                        <legend>{{::('editAbsCheckpointCT.notes'|$translate)}}</legend>
             
                                         <div class="row">
                                             <div class="col-xs-12">
                                                 <div class="km-control-group" name="notes">
-                                                    <div class="help-info">The “Notes” field is for your personal notes or comments
-                                                        and will be hidden when viewing the record. This field is not meant to be
-                                                        used for confidential information.</div>
+                                                    <div class="help-info">{{::('editAbsCheckpointCT.notesInfos'|$translate)}}</div>
                                                     <textarea class="form-control" rows="4" name="notes" ng-model="document.notes"></textarea>
                                                 </div>
                                             </div>

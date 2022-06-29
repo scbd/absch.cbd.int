@@ -4,9 +4,10 @@ import 'angular'
 import _ from 'lodash'
 import 'ngDialog'
 import 'components/scbd-angularjs-services/main';
+import documentSharingT from '~/app-text/views/forms/directives/document-sharing.json';
 
-app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout', 'IGenericService', '$document', '$window', '$rootScope', 'realm', 'locale',
-    function ($http, $q, $route, ngDialog, $timeout, genericService, $document, $window, $rootScope, realm, locale) {
+app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout', 'IGenericService', '$document', '$window', '$rootScope', 'realm', 'locale', 'translationService',
+    function ($http, $q, $route, ngDialog, $timeout, genericService, $document, $window, $rootScope, realm, locale, translationService) {
     return {
         restrict   : 'E',
         template   : template,
@@ -25,7 +26,7 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
             $scope.self = $scope;
             $scope.status   = "";
             $scope.error    = null;
-            
+            translationService.set('documentSharingT', documentSharingT);
 
             $scope.shareDocument = function(){
                 

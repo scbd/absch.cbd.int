@@ -6,8 +6,9 @@ import 'services/main';
 import 'views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-dna-sequence.directive";
 import '~/views/forms/directives/traits-selector.directive';
+import editDnaSequenceT from '~/app-text/views/forms/edit/bch/directives/edit-dna-sequence.json';
 
-	app.directive("editDnaSequence", ["$controller", "thesaurusService", "realm", function($controller, thesaurusService, realm) {
+app.directive("editDnaSequence", ["$controller", "thesaurusService", "realm", "translationService", function ($controller, thesaurusService, realm, translationService) {
 		return {
 			restrict   : "EA",
 			template: template,
@@ -17,7 +18,7 @@ import '~/views/forms/directives/traits-selector.directive';
 				onPostSubmitFn   : "&onPostSubmit"
 			},
 			link: function($scope, $element, $attr){
-
+				translationService.set('editDnaSequenceT', editDnaSequenceT);
 				$scope.scientificNameSynonyms = [{}];
 				$scope.commonNames = [{}];
 				$scope.container        = $attr.container;

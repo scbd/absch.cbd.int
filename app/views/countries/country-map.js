@@ -9,9 +9,10 @@ import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import 'components/scbd-angularjs-services/main';
 import './directives/homepin-popup-bch';
 import './directives/homepin-popup-abs';
+import countryMapTranslation from '~/app-text/views/countries/country-map.json';
 
 
-  app.directive('countryMap', ['$timeout', function($timeout) {
+  app.directive('countryMap', ['$timeout', 'translationService', function($timeout, translationService) {
     return {
       restrict: 'EAC',
       template: template,
@@ -23,7 +24,7 @@ import './directives/homepin-popup-abs';
         mapHeight: '@mapHeight'
       },
       link: function($scope, $element, $attr, requiredDirectives) {
-
+        translationService.set('countryMapTranslation', countryMapTranslation);
         var ammap3 = requiredDirectives[0];
 
       }, //link

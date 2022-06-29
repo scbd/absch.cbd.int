@@ -7,7 +7,7 @@ import 'ngDialog';
 import 'toastr';
 import '~/views/forms/directives/document-sharing';
 import 'ck-editor-css';
-import toasterMessages from '~/app-data/toaster-messages.json';
+import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
 
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
