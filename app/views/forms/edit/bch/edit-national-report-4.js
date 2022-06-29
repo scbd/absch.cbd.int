@@ -11,7 +11,7 @@ import '~/views/forms/view/bch/view-national-report-4.directive';
 import 'components/scbd-angularjs-services/main';
 import 'ngDialog';
 import editNR4T from '~/app-text/views/forms/edit/bch/edit-national-report-4.json';
-
+import numbers from '~/app-text/numbers.json';
     export { default as template } from './edit-national-report-4.html';
 
   export default ["$scope", "$http", "$rootScope", "locale", "$q", "$controller", "$timeout", 
@@ -22,6 +22,7 @@ import editNR4T from '~/app-text/views/forms/edit/bch/edit-national-report-4.jso
         // map string to ETerm ({identifier:'xxxx-xxx'}) type which is the type expected by term-checkbox.
         $scope.multiTermModel = {};
         translationService.set('editNR4T', editNR4T);
+        translationService.set('numbers', numbers);
         $scope.tab = 'intro';
         var user = $rootScope.user;
         $scope.activeTab = 1

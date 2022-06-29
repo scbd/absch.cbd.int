@@ -23,7 +23,7 @@
 
                 <div ng-show="document.stakeholders">
                     </br>
-                    <label>{{::('viewNationalReportT.organizationsStakeholders'|$translate)}} </label>
+                    <label>{{::('numbers.nine'|$translate)}}. {{::('viewNationalReportT.organizationsStakeholders'|$translate)}} </label>
                     <div comapre-val>
                     <km-value-ml value="document.stakeholders" locales="locale"></km-value-ml>
                     </div>
@@ -31,7 +31,7 @@
 
                 <div ng-show="document.reportPeriodStartDate || document.reportPeriodEndDate">
                     </br>
-                    <label>{{::('viewNationalReportT.timePeriod'|$translate)}}</label>
+                    <label>{{::('numbers.ten'|$translate)}}. {{::('viewNationalReportT.timePeriod'|$translate)}}</label>
                     <div class="row">
                         <div class="col-xs-6" ng-if="document.reportPeriodStartDate">
                             <label>{{::('viewNationalReportT.from'|$translate)}}</label>
