@@ -9,11 +9,12 @@ import * as searchUserDialog from './search-user-dialog';
 import * as editUserDialog   from './edit-user-dialog';
 import * as editRolesDialog  from './edit-roles-dialog';
 import * as commitDialog     from './commit-dialog';
+import nationalUserListT from '~/app-text/views/register/national-user/national-user-list.json';
 
 export { default as template } from './national-user-list.html';
 
-export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService',
-    function($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService) {
+export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'appConfigService', 'translationService',
+    function ($scope, $http, $q, ngDialog, $rootScope, realm, appConfigService, translationService) {
         var users;
         var roles = {};
         var contextRoles = {};
@@ -32,7 +33,7 @@ export default ['$scope', '$http', '$q', 'ngDialog', '$rootScope', 'realm', 'app
         $scope.isContextRole       = isContextRole;
         $scope.isNotContextRole    = function(id) { return !isContextRole(id); };
         $scope.sortKey             = sortKey;
-
+        translationService.set('nationalUserListT', nationalUserListT);
         refresh();
 
         return this;

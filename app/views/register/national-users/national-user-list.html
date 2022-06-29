@@ -21,7 +21,7 @@
 
         <div class="register-content-header bg-darkgrey text-white">
             <div class="p-2">
-                <h3> User Management
+                <h3>{{::('nationalUserListT.userManagement'|$translate)}}
                     <span class="helpinfoInline">
                         <i class="bi bi-info-circle-fill helpicon float-end" ng-click="showInfo = !showInfo"></i>
                     </span>
@@ -29,44 +29,24 @@
 
                 <!--help info---------------------------->
                 <div ng-if="showInfo" class="p-3 card well-help">
-                    <strong>User Management for ABS-CH authorized users</strong>
+                    <strong>{{::('nationalUserListT.userManagementUsers'|$translate)}}</strong>
                     <p>
-                        This page allows focal points (NFP) to designate or make changes to the designation of the
-                        publishing authority (PA) and the publishing authority (PA) to designate or update national
-                        authorized users (NAU). Listed below you will find all ABS-CH authorized
-                        users that have been granted permission to work on national records for your country. You can
-                        select a particular CBD account, and click on edit to assign/ revoke roles (for instance, change
-                        the PA or delete a NAU). If a person
-                        already holding a CBD account does not appear as an ABS-CH authorized user for your country, you
-                        can find them by clicking ‘Add Authorized User’. Through this feature, you can search among all
-                        CBD accounts using their email addresses,
-                        and assign them a PA or NAU role. This feature also allows you to assign roles to someone who
-                        does not yet have a CBD account. To do this, click on ‘Add Authorized User’, and enter an email
-                        address and other details of the person
-                        you wish to include as PA or NAU. The ABS Clearing-House will send them an automated email
-                        request to activate their account. Once they have activated their CBD account, they can start
-                        working on national records.
+                        {{::('nationalUserListT.keepUpToDate'|$translate)}}
                     </p>
-                    <strong>Functions of the publishing authorities (PA)</strong>
+                    <strong>{{::('nationalUserListT.functionsPA'|$translate)}}</strong>
                     <p>
-                        The PA is responsible for:
+                        {{::('nationalUserListT.responsible'|$translate)}}
                     <ul>
-                        <li>Authorizing the publication of all national records registered in the ABS Clearing-House;
+                        <li>{{::('nationalUserListT.functionsAuth'|$translate)}}
                         </li>
-                        <li>Deleting records already published in the ABS Clearing-House, if necessary;</li>
-                        <li>Ensuring that the information made available in the ABS Clearing-House is complete, relevant
-                            and up-to-date; and</li>
-                        <li>Ensuring that no confidential data is published in the ABS Clearing-House. The ABS
-                            Clearing-House does not host any confidential information and all information published in
-                            the ABS Clearing-House is publicly available and
-                            can be accessed by the general public.</li>
+                        <li>{{::('nationalUserListT.functionsDelete'|$translate)}}</li>
+                        <li>{{::('nationalUserListT.functionsEnsure'|$translate)}}</li>
+                        <li>{{::('nationalUserListT.functionsEnsureConfidential'|$translate)}}</li>
                     </ul>
                     </p>
-                    <strong>Functions of national authorized users (NAUs)</strong>
+                    <strong>{{::('nationalUserListT.NAU'|$translate)}}</strong>
                     <p>
-                        The function of NAUs is to assist the PA in the preparation of draft national records. NAUs are
-                        only allowed to create and manage draft records which are then forwarded to the PA for
-                        publication.
+                        {{::('nationalUserListT.NAUInfo'|$translate)}}
                     </p>
 
                 </div>
@@ -82,14 +62,13 @@
 
                     <div ng-switch="error.code + '-' + error.field">
                         <div class="alert alert-warning" ng-switch-when="mandatory-government">
-                            <b>Oops...</b> You are not authorized access this page. This page is only available to
-                            national users. Please contact the absch@cbd.int if you require assistance.
+                            <b>{{::('nationalUserListT.oops'|$translate)}}</b> {{::('nationalUserListT.authorizedAccess'|$translate)}} absch@cbd.int {{::('nationalUserListT.authorizedAccessLink'|$translate)}}
                         </div>
                         <div class="alert alert-warning" ng-switch-when="forbidden-">
-                            <b>Oups...</b> We're sorry, but you are not authorized access this page.
+                            <b>{{::('nationalUserListT.oups'|$translate)}}</b> {{::('nationalUserListT.notAuthorized'|$translate)}}
                         </div>
                         <div class="alert alert-danger" ng-switch-default>
-                            <b>Oops...</b> We're sorry, but something went wrong.<span ng-bind="error|json"></span>
+                            <b>{{::('nationalUserListT.oops'|$translate)}}</b> {{::('nationalUserListT.somethingWentWrong'|$translate)}}<span ng-bind="error|json"></span>
                         </div>
                     </div>
 
@@ -110,13 +89,13 @@
                         <table class="table table-hover table-light w-100">
                             <thead>
                                 <tr class="text-secondary">
-                                    <th>User</th>
-                                    <th>Organization/Division</th>
-                                    <th style="max-width:20rem">Roles</th>
+                                    <th>{{::('nationalUserListT.user'|$translate)}}</th>
+                                    <th>{{::('nationalUserListT.organization'|$translate)}}</th>
+                                    <th style="max-width:20rem">{{::('nationalUserListT.roles'|$translate)}}</th>
                                     <th class="text-end">
                                         <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
                                             ng-click="search()" ng-disabled="loading || !canAdd()">
-                                            Add <span class="d-none d-sm-inline">Authorized User</span> <i
+                                            {{::('nationalUserListT.add'|$translate)}} <span class="d-none d-sm-inline">{{::('nationalUserListT.authorizedUser'|$translate)}}</span> <i
                                                 class="bi bi-plus-circle"></i>
                                         </button>
                                     </th>
@@ -144,9 +123,9 @@
                                     <a class="text-decoration-none" rel="noopener" translation-url href="#"
                                         style="font-size:75%" ng-click="u.showExtraRoles=!u.showExtraRoles"
                                         ng-show="(u.roles|filter:isNotContextRole).length">
-                                        <span ng-show="!u.showExtraRoles">Show additional roles <i
+                                        <span ng-show="!u.showExtraRoles">{{::('nationalUserListT.showAdditionalRoles'|$translate)}} <i
                                                 class="fa fa-caret-down"></i></span>
-                                        <span ng-show=" u.showExtraRoles">Hide additional roles <i
+                                        <span ng-show=" u.showExtraRoles">{{::('nationalUserListT.hideAdditionalRoles'|$translate)}} <i
                                                 class="fa fa-caret-up"></i></span>
                                     </a>
     
@@ -171,7 +150,7 @@
 
                             <tr class="text-secondary" ng-if="!users">
                                 <td colspan="4">
-                                    <i class="fa fa-cog fa-spin fa-fw"></i> Loading...
+                                    <i class="fa fa-cog fa-spin fa-fw"></i> {{::('nationalUserListT.loading'|$translate)}}
                                 </td>
                             </tr>
 
@@ -182,17 +161,17 @@
                                     |
                                     <a class="text-decoration-none" rel="noopener" translation-url href="#"
                                         ng-show="!$parent.showAll"
-                                        ng-click="$parent.showAll=true;$parent.searchText={}">Show more
+                                        ng-click="$parent.showAll=true;$parent.searchText={}">{{::('nationalUserListT.showMore'|$translate)}}
                                         <i class="bi bi-caret-down-fill"></i></a>
                                     <a class="text-decoration-none" rel="noopener" translation-url href="#"
                                         ng-show=" $parent.showAll"
-                                        ng-click="$parent.showAll=false;$parent.searchText={}">Show less 
+                                        ng-click="$parent.showAll=false;$parent.searchText={}">{{::('nationalUserListT.showLess'|$translate)}}
                                         <i class="bi bi-caret-up-fill"></i></a>
                                 </td>
                                 <td class="text-end">
                                     <button type="button" class="btn btn-outline-secondary btn-sm m-1 text-nowrap"
                                      ng-click="search()" ng-disabled="loading || !canAdd()">
-                                     Add Authorized User <i class="bi bi-plus-circle"></i>
+                                    {{::('nationalUserListT.addAuthorizedUser'|$translate)}} <i class="bi bi-plus-circle"></i>
                                     </button>
                                 </td>
                             </tr>

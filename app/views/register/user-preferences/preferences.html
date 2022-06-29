@@ -6,13 +6,13 @@
 
 		<div class="register-content-header bg-secondary text-white">
 			<div class="p-2">
-				<h3>User Preferences</h3>
+				<h3>{{::('preferencesT.userPreferences'|$translate)}}</h3>
 			</div>
 		</div>
 
 		<div class="p-2 bg-white">
 			<h1 class="border-bottom my-4">
-				Email notifications and predefined searches <small class="fs-6">Keep up to date when records are published.</small>
+				{{::('preferencesT.emailNotification'|$translate)}} <small class="fs-6">{{::('preferencesT.keepUpToDate'|$translate)}}</small>
 			</h1>
 
 			<user-alerts  collection="subscriptions" collection-filter='{{alertFilter}}'

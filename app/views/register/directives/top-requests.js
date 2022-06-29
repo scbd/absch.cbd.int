@@ -2,9 +2,10 @@
 import template from 'text!./top-requests.html';
 import _ from 'lodash';
 import 'services/main';
+import topRequestsT from '~/app-text/views/register/directives/top-requests.json';
 
-    app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleService', "$location", "$filter",
-    function($q, IWorkflows, realm, $rootScope, roleService, $location, $filter) {
+app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleService', "$location", "$filter", "translationService",
+        function ($q, IWorkflows, realm, $rootScope, roleService, $location, $filter, translationService) {
         return {
             restrict: "EA",
             template: template, 
@@ -14,7 +15,7 @@ import 'services/main';
                 viewAllUrl: '@'
             },
             link: function($scope, element, attrs ) {
-                                
+                translationService.set('topRequestsT', topRequestsT);            
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
                 $scope.today = new Date();
