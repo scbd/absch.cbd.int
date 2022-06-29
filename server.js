@@ -72,7 +72,7 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
         global.app.version = appVersion;
         res.setHeader('Cache-Control', 'public');    
         res.cookie('VERSION', appVersion);
-        res.setHeader('X-Frame-Options', 'DENY')
+        // res.setHeader('X-Frame-Options', 'DENY')
         next();
     },  
     translation.renderApplicationTemplate

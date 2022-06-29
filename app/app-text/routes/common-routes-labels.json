@@ -32,5 +32,6 @@
   "userRoleReport":"User role report",
   "commonIssues":"Common issues",
   "matrix":"Matrix",
-  "kb":"Knowledge base"
+  "kb":"Knowledge base",
+  "embed": "Embed url"
 }

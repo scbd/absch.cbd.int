@@ -6,7 +6,7 @@ import 'services/main';
 export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService', 'realm',
 		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService, realm){
 				$scope.chShortName = realm.chShortName;
-				$scope.email = realm.originalObject.email;
+				$scope.email = realm.email;
 			    var lang = 'en';
 				if($routeParams.langCode)
 					lang = $routeParams.langCode;

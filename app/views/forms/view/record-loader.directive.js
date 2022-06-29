@@ -16,6 +16,7 @@ import 'views/forms/view/directives/view-reference-records.directive';
 import 'views/forms/directives/compare-val';
 import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
+import shareRecord from '~/components/common/share-record.vue';
 
 	app.run(function($templateCache){
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
@@ -23,9 +24,9 @@ import printFooterTemplate from 'text!./print-footer.html';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-	"$filter", "$http", "$http", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta',
+	"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$rootScope', 'apiToken',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		$http, $httpAWS, realm, $compile, searchService, IWorkflows, appLocale, ngMeta) {
+		realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $rootScope, apiToken) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -41,6 +42,8 @@ import printFooterTemplate from 'text!./print-footer.html';
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
+
+				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')
 					$scope.linkTarget = '_new';
@@ -70,6 +73,27 @@ import printFooterTemplate from 'text!./print-footer.html';
 						}
 					});
 
+					$scope.shareVueComponent = {
+						components:{shareRecord}
+					}
+
+					$scope.getQuery = function () {
+						let recordKey = $filter("uniqueID")($scope.internalDocument.info);
+						const type = "chm-document";
+						return {type, recordKey}
+					}
+
+					$scope.userStatus = function () {
+						if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
+						var signIn = $scope.$on('signIn', function (evt, data) {
+							signIn();
+						});
+						$('#loginDialog').modal("show");
+						return false;
+						} else {
+						return true;
+						}
+					}
 
 					$scope.getUserCountry = function (id) {
                         var term = {};
@@ -289,7 +313,7 @@ import printFooterTemplate from 'text!./print-footer.html';
 						if ($scope.internalDocumentInfo?.workingDocumentLock) {
 							IWorkflows.get($scope.internalDocumentInfo.workingDocumentLock.lockID.replace('workflow-', ''))
 								.then(function (workflow) {
-									if (workflow && workflow.type.name == 'delete-record')
+									if (workflow && workflow.type.name == 'deleteRecord')
 										$scope.workflowRequestType = "deletion";
 									else
 										$scope.workflowRequestType = "publishing";

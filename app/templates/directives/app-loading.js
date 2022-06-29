@@ -5,7 +5,7 @@ app.directive("appLoading", ['$animate', '$location', function ($animate, $locat
     return ({
         template:'',
         restrict: "E",
-        link: function link(scope, element, attributes) {
+        link: function link($scope, element, attributes) {
 
             $animate.leave(element.children().eq(1)).then(
                 function cleanupAfterAnimation() {
@@ -24,14 +24,17 @@ app.directive("appLoading", ['$animate', '$location', function ($animate, $locat
                 window.addEventListener('message', (evt)=>{
                     if(evt.data){
                         const data = JSON.parse(evt.data);
-                        if(data.type == 'getClientHeight'){
-                            var height = $('#recordContent').height()+20;
+                        if(data.type == 'getClientHeight' && window.scbdEmbedData){
+
+                            console.log($(window.scbdEmbedData.selector));
+                            var height = $(window.scbdEmbedData.selector).height()+50;
                             data.height = height;
                             data.type = 'setClientHeight';
                             window.parent.postMessage(JSON.stringify(data), evt.origin);
                         }
                     }
                 });
+                
             }
         }
     });    

@@ -69,7 +69,7 @@ import countryListTranslation from '~/app-text/views/countries/country-list.json
 
 
                     ngMeta.resetMeta();  
-                    var url   = realm.originalObject.baseURL + '/' + locale  + '/countries'
+                    var url   = realm.baseURL + '/' + locale  + '/countries'
                     // ngMeta.setTag('description', summary || window.scbdApp.title);
                     ngMeta.setTag('canonical', $sce.trustAsResourceUrl(url))
                 });

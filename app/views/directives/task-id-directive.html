@@ -14,8 +14,8 @@
 
         <div class="alert alert-danger" style="border-color:#DDD; background-color: #f5f5f5;" role="alert">
             <h3 class="color-black;" style="margin-top:0;border-bottom:1px solid #999;">
-                    <span ng-if="workflow.type.name != 'delete-record'">Publishing </span>
-                    <span ng-if="workflow.type.name == 'delete-record'">Deletion </span>
+                    <span ng-if="workflow.type.name != 'deleteRecord'">Publishing </span>
+                    <span ng-if="workflow.type.name == 'deleteRecord'">Deletion </span>
                     Request
             </h3>
             <div>
@@ -79,7 +79,7 @@
                     <div ng-if="isAdmin()">
                         <br/>
                         <strong>The workflow is assigned to following users </strong> (visible only to admin users)
-                        <table class="table table-bordered mt-2">
+                        <table class="table table-bordered mt-2" width="100%">
                             <tr ng-repeat="user in activity.assignedTo_info">
                                 <td ng-bind="user.userID"></td>
                                 <td class="ps-2" ng-bind="user.firstName + ' ' + user.lastName"></td>

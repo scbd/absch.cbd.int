@@ -75,8 +75,7 @@
 </template>
 
 <script>
-    import { Modal } from 'vue-2-bootstrap-3'
-	import i18n from '../../app-text/components/common/export.json';
+	import i18n from '../../app-text/components/export.json';
 	import '../kb/filters';
     
     const fields = [
@@ -90,6 +89,7 @@
         'rec_meta4:meta4_EN_txt',
         'rec_date:updatedDate_dt',
     ]
+    var Modal = {};
 	export default {
         components : {Modal},
 		props:['getDownloadRecords', 'fileName'],

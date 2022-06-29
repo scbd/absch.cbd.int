@@ -1,6 +1,7 @@
 
-const origin = 'http://localhost:2010';//'https://absch.cbddev.xyz';
+const origin = findOrigin() || 'https://absch.cbddev.xyz';
 
+// new URL(x.src).origin
 let iframeCommunicationReceived = false;
 function embedIFrame(widget, options){
 
@@ -11,15 +12,16 @@ function embedIFrame(widget, options){
     console.log(widget);
     iframe.setAttribute('name', Math.floor((1 + Math.random()) * 0x10000).toString(16));
     iframe.setAttribute('src', options.src);
-    iframe.setAttribute('width', options.width);
-    iframe.setAttribute('height', options.height);
+    iframe.setAttribute('width', options.width||300);
+    iframe.setAttribute('height', options.height||500);
     iframe.setAttribute('frameborder', '0');
-    // iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('scrolling', 'no');
 
     widget.parentNode.replaceChild(iframe, widget);
     //TODO: no need to be inside loop
     registerIframeCommunication(iframe, {type:'getClientHeight', iframe:iframe.name});
     window.addEventListener('message', function(evt){
+        console.log(evt);
         iframeCommunicationReceived = true;
         if(evt.data){
             var data = JSON.parse(evt.data);
@@ -33,6 +35,7 @@ function embedIFrame(widget, options){
 function embedRecord(){
     // if(!id)id, options
     //     return; widget.dataset
+
     var widgetInfo;
     widgetInfo = [...document.getElementsByClassName('scbd-ch-embed')];
     for (var key in widgetInfo) {
@@ -71,17 +74,53 @@ function getAttributeValue(widget, attribute){
         return widget.dataset[attribute];
 }
 function onReady(callbackFunc) {
+
     if (document.readyState !== 'loading') {//already loaded
         callbackFunc();
     } else if (document.addEventListener) {//modern browser
         document.addEventListener('DOMContentLoaded', callbackFunc);
     } else {//old IE
         document.attachEvent('onreadystatechange', function() {
-        if (document.readyState === 'complete') {
-            callbackFunc();
-        }
+            if (document.readyState === 'complete') {
+                callbackFunc();
+            }
         });
     }
+}
+
+function initWidget(){
+    const widgets = findScbdWidgets();
+    
+    for (var key in widgets) {
+        if (Object.hasOwnProperty.call(widgets, key)) {
+            const widget = widgets[key];           
+            if(widget.dataset.accessKey){            
+                var width = getAttributeValue(widget, 'width')   || '300';
+                var height = getAttributeValue(widget, 'height') || '500';
+                var type = getAttributeValue(widget, 'type')   || 'chm-document';
+                
+                var iframeSrc = `${origin}/share/embed/${type}/${widget.dataset.accessKey}?embed=true`
+                var options = {
+                    src : iframeSrc,
+                    width : width,
+                    height: height
+                }
+                embedIFrame(widget, options)
+            }
+            else{
+                embedIFrame(widget, {src: `${origin}/app/assets/param-missing.html`})
+            }
+        }
+    }
+}
+
+function findScbdWidgets(className){
+    className = className || ['scbd-chm-embed']
+    const widgetElements = className.map(e=>{
+                                return [...document.getElementsByClassName(e)];
+                            });
+    
+    return widgetElements.flat();
 }
 
 function registerIframeCommunication(iframe, data){
@@ -93,10 +132,25 @@ function registerIframeCommunication(iframe, data){
     }
 }
 
-window.scbdChEmbed = {
-    embedRecord,
-    embedCountryProfile,
-    embedSearchResult
+function findOrigin(){
+    var scripts = document.getElementsByTagName('script');
+
+    for (let i = 0; i < scripts.length; i++) {
+        const element = scripts[i];
+        if(element.src){
+            const url = new URL(element.src)       
+            if(/\/widgets\.js/.test(url.pathname) && (/\.cbd\.int/.test(url.host) || 
+                            /\.cbddev\.xyz/.test(url.host) ||  /localhost:2010/.test(url.host))){
+                return url.origin;
+            }
+        }
+    }
 }
-onReady(embedRecord);
+
+// window.scbdChEmbed = {
+//     embedRecord,
+//     embedCountryProfile,
+//     embedSearchResult
+// }
+onReady(initWidget);
     

@@ -60,6 +60,7 @@ const commonRouteUrls = {
     register_admin_user_role_report             : { component: ()=>import('~/views/register/admin/user-role-report') },
     register_admin_common_issues                : { component: ()=>import('~/views/register/admin/common-issues') },
     reports_matrix                              : { component: ()=>import('~/views/reports/matrix/index') },
+    embed                                       : { component: ()=>import('~/views/embed/index') },
 
     kb                                          : { component: ()=>import('~/views/kb/home.vue') },
     kbFaqs                                          : { component: ()=>import('~/views/kb/faqs.vue') },
@@ -154,6 +155,10 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/kb/tags/:tag/:title?',                              { ...mapView(vueViewWrapper),                        "label":"Articles by tag",             "resolve":{ ...commonRouteUrls.kbTags,                                       },"param":"true","resolveController":true}).
   whenAsync('/kb/tags/:tag/:title/:id',                           { ...mapView(vueViewWrapper),                        "label":"Tag Article",                 "resolve":{ ...commonRouteUrls.kbArticles,                                   },"param":"true","resolveController":true}).
   whenAsync('/kb/articles/:id/:title/:tag',                       { ...mapView(vueViewWrapper),                        "label":"Articles",                    "resolve":{ ...commonRouteUrls.kbArticles,                                   },"param":"true","resolveController":true}).
+
+ whenAsync('/share/embed/:type/:accessKey',                      { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
+  whenAsync('/share/link/:type/:accessKey',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
+  whenAsync('/share/email/:type/:accessKey',                       { ...mapView(angularViewWrapper),                    "label":routesLabels.embed,           "resolve":{ ...commonRouteUrls.embed,                                         },"param":"true","resolveController":true}).
 
   whenAsync('/database',                                          {"redirectTo":"/search","label":routesLabels.search,"resolve":{}})
 }]);

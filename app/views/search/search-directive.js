@@ -96,7 +96,7 @@ import 'angular-vue'
                             regionsFilter   : {},
                             searchKeyword   : ''
                         }   
-
+                        $scope.hideSubFilters = false;
                     ////////////////////////////////////////////
                     ////// scope functions
                     ////////////////////////////////////////////
@@ -570,30 +570,19 @@ import 'angular-vue'
                             if(query.viewType)
                                 $scope.searchResult.viewType = query.viewType;
 
-                            if($routeParams.id && !$scope.isAlertSearch) {
+                            if(query.searchShareQueryId){
+                                $scope.hideSubFilters = true;
+                                $scope.clearFilter();
+                                $scope.searchAlertError = '';
+                                const filters = localStorageService.get($routeParams.searchShareQueryId);
+                                setExternalFilters(filters);
+                            }
+                            else if($routeParams.id && !$scope.isAlertSearch) {
                                 $scope.clearFilter();
                                 $scope.searchAlertError = '';
                                 IGenericService.get('v2016', 'me/subscriptions', $routeParams.id)
                                 .then(function (data) {
-                                    const mainFilters = data.filters;
-                                    mainFilters.forEach( e => {
-                                        $scope.saveFilter( e );
-                                    } );
-
-                                    if ( data.subFilters ) {
-                                        const subFilters = data.subFilters;
-                                        for ( const subFilterKey in subFilters) {
-                                            const subFilter = subFilters[subFilterKey];
-                                            subFilter.forEach( filter => {
-                                            if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
-                                                let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
-                                                filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
-                                            }
-                                            } )
-                                        }
-
-                                        $scope.$emit( 'evt:updateLeftMenuFilters', leftMenuFilters );
-                                    }
+                                    setExternalFilters(data);
                                 })
                                 .catch(function (err) {
                                     console.error(err)//ToDo: will update for correct error text
@@ -629,7 +618,27 @@ import 'angular-vue'
                         $scope.pageInitialized = true;
                     }
 
-                    
+                    function setExternalFilters(filters){
+                        const mainFilters = filters.filters;
+                        mainFilters.forEach( e => {
+                            $scope.saveFilter( e );
+                        } );
+
+                        if ( filters.subFilters ) {
+                            const subFilters = filters.subFilters;
+                            for ( const subFilterKey in subFilters) {
+                                const subFilter = subFilters[subFilterKey];
+                                subFilter.forEach( filter => {
+                                    if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
+                                        let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
+                                        filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
+                                    }
+                                })
+                            }
+
+                            $scope.$emit( 'evt:updateLeftMenuFilters', leftMenuFilters );
+                        }
+                    }
                     function loadFilters() {
                 
                         if (_.isEmpty($scope.searchFilters)) {
@@ -706,7 +715,6 @@ import 'angular-vue'
                     function getFilter(id) {
                         return $scope.searchFilters[id];
                     };
-
 
                     function loadSchemaFilters() {
 
@@ -1032,6 +1040,26 @@ import 'angular-vue'
                             })
                             .finally(function(){$scope.searchResult.loading = false;})
                         }, 0)
+                    }
+
+
+                    function getAllSearchFilters() {
+                        
+                        let leftFilterQuery = {}
+                        _.forEach(leftMenuFilters, function (f, key) {
+                            _.forEach(f, function (filter) {
+                                if (!_.isEmpty(filter.selectedItems)) {
+                                    leftFilterQuery[key] = leftFilterQuery[key] || [];
+                                    const { field, relatedField, searchRelated, term, title, type } = filter
+                                    leftFilterQuery[key].push({ field, relatedField, searchRelated, selectedItems: filter.selectedItems, term, title, type });
+                                }
+                            });
+                        });
+
+                        return {
+                            filters     :   _.values($scope.setFilters),
+                            subFilters  :   leftFilterQuery                            
+                        }
                     }
 
                     function buildSearchQuery(){
@@ -1392,78 +1420,79 @@ import 'angular-vue'
 
 	                $scope.showSaveFilter = function ( filters ) {
 
-                    if ( $rootScope.user && !$rootScope.user.isAuthenticated ) {
-                        var signIn = $scope.$on( 'signIn', function ( evt, data ) {
-                            $scope.addEdit();
-                            signIn();
-                        } );
+                        if (!$rootScope.user || !$rootScope.user.isAuthenticated ) {
+                            var signIn = $scope.$on( 'signIn', function ( evt, data ) {
+                                $scope.addEdit();
+                                signIn();
+                            } );
 
-                        $( '#loginDialog' ).modal( "show" );
-                    } else {
+                            $( '#loginDialog' ).modal( "show" );
+                        } else {
 
-                        ngDialog.open({
-                            className: 'ngdialog-theme-default wide save-this-search-alert',
-                            template: 'saveMySearchDialog',
-                            controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
-                                $scope.saveThisFilter = filters;
-                                $scope.save = function (document) {
-                                    $scope.errors = [];
-                                    if (!document || document.queryTitle == '') {
-                                        $scope.errors.push('Please enter title of the alert')
-                                    }
-                                    if (!$scope.saveThisFilter || _.isEmpty($scope.saveThisFilter)) {
-                                        $scope.errors.push('Please select at least one filter')
-                                    }
-                                    if ($scope.errors && $scope.errors.length > 0) {
-                                        $("#dialog-errors").animate({
-                                            scrollTop: 0
-                                        }, 600);
-                                        return;
-                                    }
+                            ngDialog.open({
+                                className: 'ngdialog-theme-default wide save-this-search-alert',
+                                template: 'saveMySearchDialog',
+                                controller: ['$scope', 'IGenericService', '$timeout', 'realm', function ($scope, IGenericService, $timeout, realm) {
+                                    $scope.saveThisFilter = filters;
+                                    $scope.save = function (document) {
+                                        $scope.errors = [];
+                                        if (!document || document.queryTitle == '') {
+                                            $scope.errors.push('Please enter title of the alert')
+                                        }
+                                        if (!$scope.saveThisFilter || _.isEmpty($scope.saveThisFilter)) {
+                                            $scope.errors.push('Please select at least one filter')
+                                        }
+                                        if ($scope.errors && $scope.errors.length > 0) {
+                                            $("#dialog-errors").animate({
+                                                scrollTop: 0
+                                            }, 600);
+                                            return;
+                                        }
 
-                                    $scope.loading = true;
-                                    var operation;
+                                        $scope.loading = true;
+                                        var operation;
 
-                                    document.isSystemAlert = false;
-                                    let leftFilterQuery = {}
-                                    _.forEach(leftMenuFilters, function(f, key){
-                                        _.forEach(f, function(filter){
-                                            if(!_.isEmpty(filter.selectedItems)){
-                                                leftFilterQuery[key] = leftFilterQuery[key] || [];
-                                                const  {field, relatedField, searchRelated, term, title, type } = filter
-                                                leftFilterQuery[key].push({field, relatedField, searchRelated, selectedItems:filter.selectedItems, term, title, type});
-                                            }
+                                        document.isSystemAlert = false;
+                                        let leftFilterQuery = {}
+                                        _.forEach(leftMenuFilters, function(f, key){
+                                            _.forEach(f, function(filter){
+                                                if(!_.isEmpty(filter.selectedItems)){
+                                                    leftFilterQuery[key] = leftFilterQuery[key] || [];
+                                                    const  {field, relatedField, searchRelated, term, title, type } = filter
+                                                    leftFilterQuery[key].push({field, relatedField, searchRelated, selectedItems:filter.selectedItems, term, title, type});
+                                                }
+                                            });
                                         });
-                                    });
-                                    document.filters = _.values($scope.saveThisFilter);
-                                    document.subFilters = leftFilterQuery; // pass only selected sub-filters query
-                                    document.realm = realm.value;
-                                    if (!document._id)
-                                        operation = IGenericService.create('v2016', 'me/subscriptions', document);
-                                    else
-                                        operation = IGenericService.update('v2016', 'me/subscriptions', document._id, document);
-
-                                    operation.then(function (data) {
-                                        $scope.closeDialog();
+                                        document.filters = _.values($scope.saveThisFilter);
+                                        document.subFilters = leftFilterQuery; // pass only selected sub-filters query
+                                        document.realm = realm.value;
                                         if (!document._id)
-                                            document._id = data.id;
-                                    });
-                                };
-		                            $scope.getFilterName = function (name) {
-			                            return (typeof name === "object")?name[locale]:name;
-		                            }
-                                $scope.closeDialog = function () {
-                                    ngDialog.close();
-                                };
+                                            operation = IGenericService.create('v2016', 'me/subscriptions', document);
+                                        else
+                                            operation = IGenericService.update('v2016', 'me/subscriptions', document._id, document);
 
-                            }]
-                        });
+                                        operation.then(function (data) {
+                                            $scope.closeDialog();
+                                            if (!document._id)
+                                                document._id = data.id;
+                                        });
+                                    };
+                                        $scope.getFilterName = function (name) {
+                                            return (typeof name === "object")?name[locale]:name;
+                                        }
+                                    $scope.closeDialog = function () {
+                                        ngDialog.close();
+                                    };
+
+                                }]
+                            });
+                        }
                     }
-                }
 
 
                     init();
 
+                    this.getAllSearchFilters      = getAllSearchFilters     ;
                     this.getSearchFilters         = getSearchFilters        ;
                     this.addFilter                = addFilter               ;
                     this.removeGlobalFilter       = removeGlobalFilter      ;
