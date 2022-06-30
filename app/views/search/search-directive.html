@@ -184,10 +184,7 @@
             </style>
             <div class="row m-0">
                 <div class="col-xs-12 bg-grey1 pt-4 rounded">
-                    <a rel="noopener" translation-url href="#" ng-click="showFilters=false;searchKeyword='';"
-                        class="float-end color-black">
-                        <i id="closeFilterTab" class="fa fa-2x fa-times-circle" aria-hidden="true"></i> <br>
-                    </a>
+                    <button type="button"  id="closeFilterTab" ng-click="showFilters=false;searchKeyword='';" class="btn-lg btn-close float-end" aria-label="Close"></button>
                     <div ng-if="searchKeyword" id="Search-Filter" class="m-2">
                         <a rel="noopener" translation-url class="filter country-heading text-decoration-none"
                             ng-click="saveFreeTextFilter(searchKeyword);">
@@ -231,7 +228,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button ng-href="#top" class="btn btn-sm btn-default bold" style="cursor:pointer;"
+                        <button ng-href="#top" class="m-3 bg-white btn btn-sm btn-default bold" style="cursor:pointer;"
                             ng-click="showFilters=false;searchKeyword='';scrollToTop();">
                             <i class="bi bi-x-circle-fill" aria-hidden="true"></i> CLOSE </button>
                     </div>
