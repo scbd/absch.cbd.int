@@ -1,9 +1,10 @@
 ﻿import app from 'app';
 import template from 'text!./top-records.html';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
+import 'cormponents/scbd-angularjs-services/main';
+import topeRecordsT from '~/app-text/views/register/directives/top-records.json';
 
-    app.directive("topRecords", ['IStorage', '$q', function(storage, $q) {
+app.directive("topRecords", ['IStorage', '$q', 'translationService', function (storage, $q, translationService) {
 
         return {
             restrict: "EA",
@@ -18,7 +19,7 @@ import 'components/scbd-angularjs-services/main';
                 viewAllUrl: '@'
             },
             link: function($scope, element, attrs) {
-                                
+                translationService.set('topeRecordsT', topeRecordsT);             
                 $scope.self = $scope
 
                 $scope.showSchemaName = attrs.showSchemaName;

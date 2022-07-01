@@ -1,9 +1,9 @@
 import _ from 'lodash';
-
+import commitDialogT from '~/app-text/views/register/national-user/commit-dialog.json';
     export { default as template } from './commit-dialog.html';
-    export default  ['$scope', '$http', '$q', 'user',       'government',     'grantRoles',   'revokeRoles',
-    function ($scope,   $http,   $q,   targetUser,   targetGovernment, rolesToGrant,   rolesToRevoke) {
-
+export default ['$scope', '$http', '$q', 'user', 'government', 'grantRoles', 'revokeRoles', 'translationService',
+    function ($scope, $http, $q, targetUser, targetGovernment, rolesToGrant, rolesToRevoke, translationService) {
+        translationService.set('commitDialogT', commitDialogT);
         var _ctrl = this;
 
         _ctrl.save  = commit;

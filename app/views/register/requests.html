@@ -8,7 +8,7 @@
 
         <div class="register-content-header bg-darkgrey color-white">
             <div class="p-2">
-                <h3>Requests</h3>
+                <h3>{{::('requestsT.requests'|$translate)}}</h3>
             </div>
         </div>
         <div class="register-content-content">
@@ -16,7 +16,7 @@
             <div class="registerpage-content mt-3">
 
                 <div class="alert alert-danger" ng-show="__error">
-                    <strong>Error: </strong><span ng-bind="__error"></span>
+                    <strong>{{::('requestsT.error'|$translate)}} </strong><span ng-bind="__error"></span>
                 </div>
 
                 <table>
@@ -25,21 +25,21 @@
                             <div class="btn-group" role="group">
                                 <button type="button" ng-model="filterStatus" class="btn btn-default btn-sm dropdown-toggle"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span ng-if="filterStatus=='Pending'">Pending Approval</span>
-                                    <span ng-if="filterStatus=='Approved'">Approved</span>
-                                    <span ng-if="filterStatus=='Rejected'">Rejected</span>
-                                    <span ng-if="filterStatus=='Canceled'">Canceled</span>
-                                    <span ng-if="filterStatus=='Expired'">Expired</span>
-                                    <span ng-if="filterStatus=='All'">All</span>
+                                    <span ng-if="filterStatus=='Pending'">{{::('requestsT.pendingApproval'|$translate)}}</span>
+                                    <span ng-if="filterStatus=='Approved'">{{::('requestsT.approved'|$translate)}}</span>
+                                    <span ng-if="filterStatus=='Rejected'">{{::('requestsT.rejected'|$translate)}}</span>
+                                    <span ng-if="filterStatus=='Canceled'">{{::('requestsT.canceled'|$translate)}}</span>
+                                    <span ng-if="filterStatus=='Expired'">{{::('requestsT.expired'|$translate)}}</span>
+                                    <span ng-if="filterStatus=='All'">{{::('requestsT.all'|$translate)}}</span>
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Pending')">Pending Approval</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Approved')">Approved</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Rejected')">Rejected</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Canceled')">Canceled</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Expired')">Expired</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('All')">All</a></li>
+                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Pending')">{{::('requestsT.pendingApproval'|$translate)}}</a></li>
+                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Approved')">{{::('requestsT.approved'|$translate)}}</a></li>
+                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Rejected')">{{::('requestsT.rejected'|$translate)}}</a></li>
+                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Canceled')">{{::('requestsT.canceled'|$translate)}}</a></li>
+                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Expired')">{{::('requestsT.expired'|$translate)}}</a></li>
+                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('All')">{{::('requestsT.all'|$translate)}}</a></li>
                                 </ul>
                             </div>
                         </td>
@@ -47,13 +47,13 @@
                                 <div class="row">
                                         <div class="col-12">
                                             <div class="float-start">
-                                                <km-select  ng-model="filterType" multiple binding-type="string" placeholder="Record Type" items="options.filterTypes()"></km-select>
+                                                <km-select  ng-model="filterType" multiple binding-type="string" placeholder="{{::('requestsT.recordType'|$translate)}}" items="options.filterTypes()"></km-select>
                                             </div>
                                         </div>
                                     </div>
                         </td>
                         <td class="w-100">
-                                <div class="mt-1 ms-3 text-lowercase"><span class="badge bg-secondary rounded-circle" ng-bind="itemCount"></span> {{filterStatus == "All" ? "" : filterStatus}} requests found</div>
+                                <div class="mt-1 ms-3 text-lowercase"><span class="badge bg-secondary rounded-circle" ng-bind="itemCount"></span> {{filterStatus == "('requestsT.all'|$translate)" ? "" : filterStatus}} {{::('requestsT.requestsFound'|$translate)}}</div>
                         </td>
                     </tr>
                 </table>
@@ -62,26 +62,26 @@
 
                     <div class="row header1 bold p-2 mt-2 regeister-request">
                         <div class="col-12 col-sm-6">
-                            <span class="cursor-pointer" ng-click="sortTable('workflow.data.title.en')">Title</i>
+                            <span class="cursor-pointer" ng-click="sortTable('workflow.data.title.en')">{{::('requestsT.title'|$translate)}}</i>
                                 <i ng-show="sortTerm=='workflow.data.title.en'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i>
                         </div>
                         <div class="col-lg-2 d-none d-lg-flex">
-                            <span class="cursor-pointer" ng-click="sortTable('workflow.data.metadata.schema')">Type</i>
+                            <span class="cursor-pointer" ng-click="sortTable('workflow.data.metadata.schema')">{{::('requestsT.type'|$translate)}}</i>
                                 <i ng-show="sortTerm=='workflow.data.metadata.schema'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i>
                         </div>
                         <div class="col-md-3 col-lg-2 d-none d-md-flex text-left">
-                            <span class="cursor-pointer" ng-click="sortTable('workflow.createdOn')">Requested
+                            <span class="cursor-pointer" ng-click="sortTable('workflow.createdOn')">{{::('requestsT.requested'|$translate)}}
                                 <i ng-show="sortTerm=='workflow.createdOn'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i>
                         </div>
                         <div class="col-md-3 col-lg-2 d-none d-md-flex text-left">
-                            <span class="cursor-pointer" ng-click="sortTable('activity.name')">Status
+                            <span class="cursor-pointer" ng-click="sortTable('activity.name')">{{::('requestsT.status'|$translate)}}
                                 <i ng-show="sortTerm=='activity.name'" ng:class="{true:'down-caret', false:'up-caret'}[orderList]"></i>
                         </div>
                     </div>
 
                     <div id="taskList">
 
-                        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg"></i> loading...</span>
+                        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg"></i> {{::('requestsT.loading'|$translate)}}</span>
 
                         <div ng-repeat="task in tasks| orderBy:sortTerm:orderList" id="{{task.workflow._id}}">
                             <div class="row border-bottom p-1">
@@ -91,13 +91,13 @@
                                         <i ng-class="{'bi bi-plus-sign': !tasksDisplay, 'bi bi-minus-sign': tasksDisplay}"></i>
                                         <span class="text-uppercase fw-bold ps-2 fs-small-8">
                                             <span ng-if="task.workflow.type.name =='publishReferenceRecord'" class="text-secondary">
-                                                PUBLISH
+                                                {{::('requestsT.publish'|$translate)}}
                                             </span>
                                             <span ng-if="task.workflow.type.name =='publishNationalRecord'" class="text-secondary">
-                                                PUBLISH
+                                                {{::('requestsT.publish'|$translate)}}
                                             </span>
                                             <span ng-if="task.workflow.type.name=='deleteRecord'" class="text-danger">
-                                                DELETE </span>
+                                                {{::('requestsT.delete'|$translate)}} </span>
                                             <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}">
                                                 <span ng-bind="' - '+task.workflow.data.metadata.schema|schemaName"></span>
                                             </span>
@@ -116,7 +116,7 @@
                                     <!-- Requested on -->
                                     <div class="text-lowercase fw-bold fs-small-8" ng-bind="task.workflow.createdOn | moment:'fromNow'"></div>
                                     <a rel="noopener" class="text-secondary fs-small-8" href="mailto:{{task.workflow.createdBy_info.email}}">
-                                        by <span ng-bind="task.workflow.createdBy_info.firstName"></span>
+                                        {{::('requestsT.by'|$translate)}} <span ng-bind="task.workflow.createdBy_info.firstName"></span>
                                         <span ng-bind="task.workflow.createdBy_info.lastName"></span>
                                         (<span ng-bind="task.workflow.createdBy_info.email"></span>)
                                     </a>
@@ -128,7 +128,7 @@
                                             <div ng-show="task.activity.completedOn && task.activity" ng-switch="task.activity.result.action">
 
                                                 <span ng-switch-when="approve">
-                                                    <span class="bold color-green">APPROVED</span>
+                                                    <span class="bold color-green">{{::('requestsT.approvedUpper'|$translate)}}</span>
                                                     <span ng-if="task.activity.result.reason">
                                                         (<span ng-bind="task.activity.result.reason"></span>)
                                                     </span>
@@ -141,13 +141,13 @@
                                                 </span>
 
                                                 <span ng-switch-when="reject">
-                                                    <span class="bold color-red">REJECTED</span>
+                                                    <span class="bold color-red">{{::('requestsT.rejectedUpper'|$translate)}}</span>
                                                     <span ng-if="task.activity.result.reason">
                                                         (<span ng-bind="task.activity.result.reason"></span>)
                                                     </span>
                                                     <div class="text-lowercase fw-bold fs-small-8" ng-bind="task.activity.completedOn | moment:'fromNow'"></div>
                                                     <a rel="noopener" class="text-secondary fs-small-8" href="mailto:{{task.activity.completedBy_info.email}}">
-                                                        by <span ng-bind="task.activity.completedBy_info.firstName"></span>
+                                                         {{::('requestsT.by'|$translate)}} <span ng-bind="task.activity.completedBy_info.firstName"></span>
                                                         <span ng-bind="task.activity.completedBy_info.lastName"></span>
                                                         (<span ng-bind="task.activity.completedBy_info.email"></span>)
                                                     </a>
@@ -155,29 +155,29 @@
                                             </div>
                                         </div>
                                         <div ng-switch-when="canceled" class='bold'>
-                                            CANCELLED
+                                            {{::('requestsT.canceledUpper'|$translate)}}
                                         </div>
                                         <div ng-switch-when="timedOut" class='bold'>
-                                            EXPIRED
+                                            {{::('requestsT.expiredUpper'|$translate)}}
                                         </div>
                                         <div ng-switch-when="running">
                                             <div ng-if="task.workflow.workflowExpiryDate < today" class='bold'>
-                                                EXPIRED
+                                                {{::('requestsT.expiredUpper'|$translate)}}
                                             </div>
                                             <div ng-if="task.workflow.workflowExpiryDate >= today" class='bold'>
                                                 <span ng-if="task.workflow.type.name == 'publishReferenceRecord'"
-                                                    class="color-orange"> PENDING SCBD REVIEW </span>
+                                                    class="color-orange"> {{::('requestsT.scbdReview'|$translate)}} </span>
                                             
                                                 <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"> 
-                                                        <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> PENDING    
-                                                        <span ng-if="roles.isPublishingAuthority"> YOUR </span>
+                                                        <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> {{::('requestsT.pending'|$translate)}}
+                                                        <span ng-if="roles.isPublishingAuthority"> {{::('requestsT.your'|$translate)}} </span>
                                                         <span ng-if="!roles.isPublishingAuthority && isBch"> BCH-NFP </span>
                                                         <span ng-if="!roles.isPublishingAuthority && !isBch"> PA </span>
-                                                        APPROVAL 
+                                                            {{::('requestsT.approval'|$translate)}}
                                                     </span>
                                             </div>
                                             <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating">
-                                                <span class="text-secondary fs-small-8">Expires on
+                                                <span class="text-secondary fs-small-8">{{::('requestsT.expiresOn'|$translate)}}
                                                     <span ng-bind="task.workflow.workflowExpiryDate|formatDate"></span>
                                                 </span>
                                             </div>
@@ -185,7 +185,7 @@
                                     </div>
                                     <div ng-show="task.activity.isUpdating">
                                         <a rel="noopener" translation-url class="btn btn-info p-1" type="button" ng-click="return">
-                                            <strong><i class="fa fa-spin fa-cog"></i> Processing...</strong>
+                                            <strong><i class="fa fa-spin fa-cog"></i> {{::('requestsT.processing'|$translate)}}</strong>
                                         </a>
                                     </div>
                                 </div>
@@ -214,7 +214,7 @@
                                         <!-- Requested on -->
                                         <div ng-bind="history.workflow.createdOn|date:'short'"></div>
                                         <div>
-                                            <em> by <span ng-bind="history.workflow.createdBy_info.firstName"></span>
+                                            <em> {{::('requestsT.by'|$translate)}} <span ng-bind="history.workflow.createdBy_info.firstName"></span>
                                                 <span ng-bind="history.workflow.createdBy_info.lastName"></span>
                                                 (<span ng-bind="task.workflow.createdBy_info.email"></span>)</em>
                                         </div>
@@ -226,9 +226,9 @@
                                                 <div ng-show="history.activity.completedOn">
                                                     <span ng-show="history.activity" ng-switch="history.activity.result.action">
                                                         <span ng-switch-when="approve"><i class="bi bi-ok"></i>
-                                                            Approved</span>
+                                                            {{::('requestsT.approved'|$translate)}}</span>
                                                         <span ng-switch-when="reject"><i class="bi bi-remove"></i>
-                                                            Rejected</span>
+                                                            {{::('requestsT.rejected'|$translate)}}</span>
                                                         <span ng-show="history.activity.result.reason">
                                                             <STRONG ng-bind="'for'+history.activity.result.reason | limitTo:50"></STRONG>
                                                         </span>
@@ -247,7 +247,7 @@
 
                         </div>
                         <h4 class="m-3 text-secondary" ng-show="!tasks || tasks.length==0">
-                            No <span class="text-lowercase" ng-bind="filterStatus"></span> requests found.
+                            {{::('requestsT.no'|$translate)}} <span class="text-lowercase" ng-bind="filterStatus"></span> {{::('requestsT.requestsFound'|$translate)}}.
                         </h4>
                     </div>
                 </div>
