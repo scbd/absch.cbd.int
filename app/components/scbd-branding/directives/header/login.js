@@ -3,6 +3,7 @@ import template from 'text!./login.html';
 import $ from 'jquery';
 import 'css!components/scbd-branding/directives/header/login';
 import 'components/scbd-angularjs-services/main';
+import loginAccountT from '~/app-text/components/scbd-branding/directives/header/login.json';
 
 app.directive('loginAccount', [function() {
         return {
@@ -12,9 +13,9 @@ app.directive('loginAccount', [function() {
             scope: {
                  user: '=',
             },
-            controller: ['$scope', '$http', '$window', '$location', '$browser','authentication','$rootScope','$timeout', '$route',
-             function ($scope, $http, $window, $location, $browser, authentication, $rootScope,$timeout, $route) {
-              
+            controller: ['$scope', '$http', '$window', '$location', '$browser','authentication','$rootScope','$timeout', '$route', 'translationService',
+             function ($scope, $http, $window, $location, $browser, authentication, $rootScope,$timeout, $route, translationService) {
+              translationService.set('loginAccountT', loginAccountT);
               $scope.sessionExpiredAlert = false
               $scope.email = null;
               $scope.password = null;
