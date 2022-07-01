@@ -12,7 +12,6 @@ app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q
         restrict: 'E',
         template: html,
         link: function($scope) {
-            console.log("kkkkkkkkkkkk",bchHeaderT)
             translationService.set('bchHeaderT', bchHeaderT);
             $scope.locale = locale
             $scope.isABS = realm.is('ABS');
