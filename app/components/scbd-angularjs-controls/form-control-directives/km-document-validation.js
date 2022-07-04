@@ -70,7 +70,7 @@ import kmDocumentValidationT from '~/app-text/components/scbd-angularjs-controls
 
                             qBody.stop().animate({
                                 scrollTop: scrollNum
-                            }, 1000);
+                            }, 100);
                         });
                     }
                 };
