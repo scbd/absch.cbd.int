@@ -1,7 +1,7 @@
 ﻿<span class="km-select-item">
 	<script type="text/ng-template"  id="select-tree-renderer.html">
 		<a rel="noopener" ng-click="clicked(item)" href=""
-		  ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'" class="text-decoration-none text-secondary ps-3">
+		  ng-bind="item.title||item.name | lstring:currentLocale | truncate:120:'...'" class="text-decoration-none text-secondary ps-3 dropdown-item">
 		</a>
 		<div class="km-select-description py-1 px-5" ng-if="showDescription=='true' && item.description" ng-bind="item.description">
 		</div>
@@ -17,9 +17,8 @@
 		</div>
 	</div>
 
-	<span>
-
-		<div class="btn-group" role="group" id="select-dropdown">
+	<span>		
+		<div class="btn-group dropdown" role="group" id="select-dropdown">
 			<button id="btnGroupDrop1" type="button" style="padding: 7px;" class="btn btn-default dropdown-toggle fs-small-8" ng-click="autoInit()" ng-class="{disabled:ngDisabledFn(), 'btn-info' : hasSelectedItems() }" data-bs-toggle="dropdown" aria-expanded="false">
 				{{getTitle(displayCount, true)}}
 				<span class="caret"></span>
@@ -40,7 +39,7 @@
 						<span class="input-group-text cursor-pointer" id="basic-addon1" title="Clear search text" ng-click="clearFilter($event)">
 							<i  class="fa" ng-class="{'fa-remove color-red' : filterText, 'fa-search': !filterText}"></i>
 						</span>
-					  </div>
+					</div>
 					<div>
 						<button type="button" style="padding: 7px;" class="btn btn-outline-secondary fs-small-8" ng-show="hasSelectedItems()"type ="button" ng-click="clearSelection()" ng-disabled="!hasSelectedItems()">Clear selection</button>
 						<button style="padding: 7px;" class="btn btn-outline-secondary fs-small-8" ng-show="allowOther == 'true'" type="button" ng-click="chooseOther()"    ng-show="allowOther">Specify another value</button>
