@@ -7,13 +7,14 @@ import 'views/register/directives/register-top-menu';
 import 'views/directives/task-id-directive';
 import 'components/scbd-angularjs-services/main';
 import 'views/forms/view/record-loader.directive';
+import requestsT from '~/app-text/views/register/requests.json';
 
         
         export { default as template } from './requests.html';
 
-        export default ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale",
-            function ($scope, IWorkflows, realm, $rootScope, roleService, $q, locale) {
-
+export default ["$scope", "IWorkflows", "realm", '$rootScope', 'roleService', "$q", "locale", "translationService",
+    function ($scope, IWorkflows, realm, $rootScope, roleService, $q, locale, translationService) {
+                translationService.set('requestsT', requestsT);   
                 $scope.sortTerm = 'createdOn';
                 $scope.orderList = true;
                 $scope.today = new Date();

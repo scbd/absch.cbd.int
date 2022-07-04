@@ -2,36 +2,35 @@
     <header class="px-3 d-sm-none d-md-none">
         <nav class="navbar navbar-sm navbar-light bg-light rounded">
             <div ng-click="showNav = !showNav" style="cursor: pointer;">
-                <span class="realm-base-acronym fw-bold color-green"> ABS </span>
-                <span class="realm-base-acronym text-uppercase color-green fw-bold">Clearing-House</span>
+                <span class="realm-base-acronym fw-bold color-green"> {{::('abschHeaderT.abs'|$translate)}} </span>
+                <span class="realm-base-acronym text-uppercase color-green fw-bold">{{::('abschHeaderT.clearingHouse'|$translate)}}</span>
                 </span>
 
                 <span ng-if="isDEV" class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
-                    DEVELOPEMENT</span> <span ng-if="isTRG"
+                    {{::('abschHeaderT.development'|$translate)}}</span> <span ng-if="isTRG"
                     class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
-                    TRAINING</span>
+                    {{::('abschHeaderT.training'|$translate)}}</span>
             </div>
             <div ng-if="showNav" class="navbar-collapse">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href=".">Home</a></li>
+                            href=".">{{::('abschHeaderT.home'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="kb/tags/about/About-the-ABS-Clearing-House/5bbcfe17f05916000167781d">About the
-                            ABSCH</a></li>
+                            href="kb/tags/about/About-the-ABS-Clearing-House/5bbcfe17f05916000167781d">{{::('abschHeaderT.aboutAbsch'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="search">Search</a></li>
+                            href="search">{{::('abschHeaderT.search'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="reports">National Report Analyzer</a></li>
+                            href="reports">{{::('abschHeaderT.nra'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="register">Submit</a></li>
+                            href="register">{{::('abschHeaderT.submit'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="countries">Country Profiles</a></li>
+                            href="countries">{{::('abschHeaderT.countryProfiles'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="kb">Help</a></li>
+                            href="kb">{{::('abschHeaderT.help'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="https://bch.cbd.int/onlineconferences/">Forums</a></li>
+                            href="https://bch.cbd.int/onlineconferences/">{{::('abschHeaderT.forums'|$translate)}}</a></li>
                     <li class="nav-item"><a class="nav-link active" aria-current="page" rel="noopener" translation-url
-                            href="https://www.cbd.int/">About the Nagoya Protocol</a></li>
+                            href="https://www.cbd.int/">{{::('abschHeaderT.aboutNagoya'|$translate)}}</a></li>
                 </ul>
             </div>
         </nav>
@@ -39,13 +38,13 @@
     <header class="pt-2 d-none d-sm-inline-block d-md-inline-block">
         <div class="">
             <a href="." class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span
-                    class="fw-normal">ABSCH</span>
+                    class="fw-normal">{{::('abschHeaderT.absch'|$translate)}}</span>
                 <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
-                    <span> Access and Benefit-sharing </span> Clearing-House</span> <span ng-if="isDEV"
+                    <span> {{::('abschHeaderT.accessBenefitSharing'|$translate)}} </span> {{::('abschHeaderT.clearingHouse'|$translate)}}</span> <span ng-if="isDEV"
                     class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
-                    DEVELOPEMENT</span> <span ng-if="isTRG"
+                    {{::('abschHeaderT.development'|$translate)}}</span> <span ng-if="isTRG"
                     class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
-                    TRAINING</span> </a>
+                    {{::('abschHeaderT.training'|$translate)}}</span> </a>
         </div>
     </header>
     <nav class="border-bottom nav-lg-header" ng-class="{'text-white':isTRG}">
@@ -54,30 +53,29 @@
                 <li class="nav-item">
                     <a rel="noopener" translation-url href="."
                         class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0" aria-current="page">
-                        <span>Home</span> </a>
+                        <span>{{::('abschHeaderT.home'|$translate)}}</span> </a>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="kb"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">about</a></li>
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('abschHeaderT.about'|$translate)}}</a></li>
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a rel="noopener" translation-url
                         href="search"
                         class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
-                        id="dropdownMenuButton1" aria-expanded="false">Search</a>
+                        id="dropdownMenuButton1" aria-expanded="false">{{::('abschHeaderT.search'|$translate)}}</a>
                     <ul class="dropdown-menu" style="font-size: .9rem;" aria-labelledby="dropdownMenuButton1">
                         <li><a rel="noopener" translation-url class="fw-bold dropdown-item fs-small-8 color-grey"
-                                href="search">Records</a></li>
+                                href="search">{{::('abschHeaderT.records'|$translate)}}</a></li>
                         <li><a rel="noopener" translation-url
-                                class="dropdown-item fs-small-8 color-grey fw-bold link-dark " href="reports">National
-                                Report Analyzer</a></li>
+                                class="dropdown-item fs-small-8 color-grey fw-bold link-dark " href="reports">{{::('abschHeaderT.nra'|$translate)}}</a></li>
                     </ul>
                 </li>
                 <li class="nav-item"><a rel="noopener" translation-url href="register"
-                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">submit</a> </li>
+                        class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 ">{{::('abschHeaderT.submit'|$translate)}}</a> </li>
                 <li hover-effect=".dropdown-menu" class="nav-item dropdown">
                     <a id="countryProfile" rel="noopener" translation-url href="countries"
                         class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
                         id="dropdownMenuButton2" aria-expanded="false"> <span
-                            class="d-sm-none d-md-inline-block">country profiles</span> <span
-                            class="d-none d-sm-inline-block d-md-none"> countries </span>
+                            class="d-sm-none d-md-inline-block">{{::('abschHeaderT.countryProfiles'|$translate)}}</span> <span
+                            class="d-none d-sm-inline-block d-md-none"> {{::('abschHeaderT.countries'|$translate)}} </span>
                     </a>
                     <ul class="dropdown-menu bg-green">
                     
@@ -97,35 +95,34 @@
                         </ul>
                     </li>
                         <li class="text-center m-2 mb-1">
-                            <a class="link-light" rel="noopener" translation-url href="countries"> Overview - List all countries
+                            <a class="link-light" rel="noopener" translation-url href="countries"> {{::('abschHeaderT.overviewAllCountries'|$translate)}}
                                 <i class="fa fa-arrow-right"></i> </a>
                         </li>
                     </ul>
             </li>
             <li hover-effect=".dropdown-menu" class="nav-item dropdown"> <a href="kb"
                     class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0 dropdown-toggle"
-                    type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">help</a>
+                    type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">{{::('abschHeaderT.help'|$translate)}}</a>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton3">
                     <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                            href="kb">Knowledge Base</a></li>
+                            href="kb">{{::('abschHeaderT.kb'|$translate)}}</a></li>
                     <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                            href="kb/faqs">FAQs</a></li>
+                            href="kb/faqs">{{::('abschHeaderT.faq'|$translate)}}</a></li>
                     <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                            href="https://training-absch.cbd.int">Training Site</a></li>
+                            href="https://training-absch.cbd.int">{{::('abschHeaderT.trainingSite'|$translate)}}</a></li>
                     <li><a class="dropdown-item fw-bold fs-small-8 color-grey" rel="noopener" translation-url
-                            href="kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">Contact us</a></li>
+                            href="kb/articles/5cf0296f3bb8b3000197273a/Contact-us/abs">{{::('abschHeaderT.contactUs'|$translate)}}</a></li>
                 </ul>
             </li>
             <li class="nav-item"><a href="forums"
-                    class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">forums</a></li>
+                    class="fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">{{::('abschHeaderT.forums'|$translate)}}</a></li>
             <li ng-if="isTRG" class="nav-item"><a href="https://absch.cbd.int/en/"
-                    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">Leave Training
-                    Site</a></li>
+                    class="bg-yellow fw-bold menu-navigation-link nav-link link-dark px-2 px-md-3 py-0">{{::('abschHeaderT.leaveTrainingSite'|$translate)}}</a></li>
             </ul>
             <ul class="nav">
                 <li class="nav-item"><a rel="noopener" translation-url href="https://www.cbd.int/abs" target="new_"
                         class="fw-bold menu-navigation-link nav-link p-0 link-dark px-2 "><span
-                            class="hiddex-xs hidden-sm">Nagoya</span> Protocol </a></li>
+                            class="hiddex-xs hidden-sm">{{::('abschHeaderT.nagoya'|$translate)}}</span> {{::('abschHeaderT.protocol'|$translate)}} </a></li>
                 </li>
             </ul>
         </div>

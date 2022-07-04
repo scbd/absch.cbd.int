@@ -1,8 +1,8 @@
-
-
+import searchUserDialogT from '~/app-text/views/register/national-user/search-user-dialog.json';
     export { default as template } from './search-user-dialog.html';
-export default ['$scope', '$http', 'government', '$q', function ($scope, $http, government, $q) {
-
+export default ['$scope', '$http', 'government', '$q', 'translationService',
+    function ($scope, $http, government, $q, translationService) {
+        translationService.set('searchUserDialogT', searchUserDialogT);
         var _ctrl = this;
 
         var pendingRequest = null;

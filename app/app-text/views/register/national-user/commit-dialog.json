@@ -1,0 +1,14 @@
+{
+    "actions": "Actions",
+    "oups": "Oups",
+    "oupsInfo": "We're sorry, but you are not authorized to nominate a user.",
+    "oops": "Oops",
+    "oopsInfo": "We're sorry, but something went wrong.",
+    "userToBeCreated": "User to be created:",
+    "governmentAffiliationGranted": "Government affiliation will be granted:",
+    "governmentAffiliationRevoked": "Government affiliation will be revoked:",
+    "granted": "Role(s) to be granted:",
+    "revoked": "Role(s) to be revoked:",
+    "cancel": "Cancel",
+    "proceed": "Proceed"
+}

@@ -2,12 +2,13 @@ import app from 'app';
 import _ from 'lodash';
 import 'css!/app/css/registry.css';
 import 'services/main'; ;
+import indexRegistriesT from '~/app-text/views/reports/bch/registries/index.json';
 
 	export { default as template } from './index.html';
-export default ['$scope', 'searchService', 'toastr', '$log', 'solr',
-			function ($scope, searchService, toastr, $log, solr) {
+export default ['$scope', 'searchService', 'toastr', '$log', 'solr', 'translationService',
+	function ($scope, searchService, toastr, $log, solr, translationService) {
 				var schemas = ["organism", "modifiedOrganism", "dnaSequence"];
-				
+				translationService.set('indexRegistriesT', indexRegistriesT);      
 				loadRecords();
 				function loadRecords(schema) {
 					var recordQuery = { 

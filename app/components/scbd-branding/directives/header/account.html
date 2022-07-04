@@ -3,7 +3,7 @@
   <a rel="noopener" ng-if="!user.isAuthenticated" href="#" class="text-nowrap float-end color-darkgrey" id="btnSignIn" data-slug="signin"
    data-bs-toggle="modal" data-bs-target="#loginDialog" data-keyboard="false" data-backdrop="false">
    <img src="/app/img/new-home/person-fill.svg" alt="Signin">
-   <strong class="signin-text" style="position: relative; top:2px;right: 5px;">SIGN IN </strong>
+   <strong class="signin-text" style="position: relative; top:2px;right: 5px;">{{::('accountHeaderT.signIn'|$translate)}} </strong>
   </a>
   <a rel="noopener" ng-if="user.isAuthenticated" class="d-none d-md-block" href="#" data-bs-toggle="dropdown">
     <span class="text-nowrap color-black"><strong><span ng-bind="user.name" style="margin:2px"></span> <i class="fw-bold bi bi-chevron-down"></i></strong> </span>
@@ -18,27 +18,27 @@
   <ul ng-if="user.isAuthenticated" id="dropdown-menu" class="dropdown-menu drop-menu-position p-1" role="menu" aria-labelledby="dropdownMenu1">
     <li>
       <a rel="noopener" translation-url class="color-black" href="#" ng-click="actionProfile()">
-        <i class="bi bi-person-fill fs-6"></i>&nbsp; Profile</a>
+        <i class="bi bi-person-fill fs-6"></i>&nbsp; {{::('accountHeaderT.profile'|$translate)}}</a>
     </li>
    
     <li>
       <a rel="noopener" translation-url class="color-black" href="#" ng-click="actionPassword()">
-        <i class="fa fa-key fs-6"></i>&nbsp; Password</a>
+        <i class="fa fa-key fs-6"></i>&nbsp; {{::('accountHeaderT.password'|$translate)}}</a>
     </li>
     <hr style="margin: 10px 0 0 0;padding: 0;"/>
  
     <li>
       <a rel="noopener" translation-url class="color-black" href="/register/user-preferences/subscriptions">
-        <i class="bi bi-envelope-fill"></i>&nbsp; Email Alerts</a>
+        <i class="bi bi-envelope-fill"></i>&nbsp; {{::('accountHeaderT.emailAlerts'|$translate)}}</a>
     </li>
     <li>
       <a rel="noopener" translation-url class="color-black" href="/register/user-preferences/saved-searches">
-        <i class="bi bi-save2-fill"></i>&nbsp; Saved Searches</a>
+        <i class="bi bi-save2-fill"></i>&nbsp; {{::('accountHeaderT.savedSearches'|$translate)}}</a>
     </li>    
       <hr style="margin: 10px 0 0 0;padding: 0;"/>
     <li>
       <a rel="noopener" translation-url class="color-black" href="#" ng-click="actionSignOut()">
-        <i class="fa fa-sign-out fs-6"></i>&nbsp; Sign-out</a>
+        <i class="fa fa-sign-out fs-6"></i>&nbsp; {{::('accountHeaderT.signOut'|$translate)}}</a>
     </li>
   </ul>
 </div>

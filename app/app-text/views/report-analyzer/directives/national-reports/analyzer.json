@@ -1,0 +1,22 @@
+{
+    "countResponses": "Count of responses",
+    "percentageRow": "Percentage by row",
+    "percentageColumn": "Percentage by column",
+    "percentageOverall": "Percentage overall",
+    "toggleDropdown": "Toggle Dropdown",
+    "backToSettings": "Back to settings",
+    "currentAnalysis": "The current analysis is filtered to show only reports where",
+    "removeFilter": "Remove filter",
+    "question": "Question",
+    "follows": "Has been answered as follows:",
+    "changeNumber": "Change how numbers are calculated",
+    "sum": "Displays the absolute number of responses received for a given combination of row (answers) and column (groups).",
+    "percentRow": "Displays the percentages within the different groups selected (columns). In this case the sum of all values in a row is 100%.",
+    "percentColumn": "Displays the percentages within different given answers (rows). In this case the sum of all values in a column is 100%.",
+    "percentGlobal": "Displays the percentages within all given responses. In this case the sum of all values (rows and columns) is 100%.",
+    "close": "Close",
+    "subSection": "Sub section",
+    "country": "Country",
+    "export": "Export",
+    "print": "Print"
+}

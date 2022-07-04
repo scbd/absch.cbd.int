@@ -4,7 +4,7 @@
         <span ng-click="showAll=!showAll">
             <i class="bi bi-chevron-down cursor-pointer" ng-show="!showAll" aria-hidden="true"></i>
             <i class="bi bi-chevron-up cursor-pointer" ng-show="showAll" aria-hidden="true"></i>
-            Pending requests
+             {{::('topRequestsT.pendingRequests'|$translate)}}
             <!-- <span class="badge" style="position:relative;top:-2px;font-size:14px;" ng-bind="tasks.length"></span> -->
             <span ng-bind="tasks.length" class="badge align-bottom rounded-pill bg-danger">
                
@@ -14,7 +14,7 @@
 
     <div class="bg-light shadow p-2" ng-show="showAll">
 
-        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" ></i> loading...</span>
+        <span ng-show="loading"> <i class="fa fa-cog fa-spin fa-lg" ></i> {{::('topRequestsT.loading'|$translate)}}</span>
 
         <div class="row" style="background-color:#fff;border:1px solid #ddd; margin:5px 1px 5px 1px; cursor: pointer; border-radius: 3px;"
             ng-click="gotoRequest(task.workflow.data.metadata.schema, task.identifier)" ng-repeat="task in tasks|filter:keywords|orderBy:sortTerm:orderList"
@@ -22,9 +22,9 @@
 
             <div class="col-sm-5">
                 <span style="text-transform: uppercase;font-size:10px;font-weight: 450">
-                    <span ng-if="task.workflow.type.name =='publishReferenceRecord'" style="color:#888;"> PUBLISH
+                    <span ng-if="task.workflow.type.name =='publishReferenceRecord'" style="color:#888;"> {{::('topRequestsT.publish'|$translate)}}
                     </span>
-                    <span ng-if="task.workflow.type.name =='publishNationalRecord' " style="color:#888;"> PUBLISH
+                    <span ng-if="task.workflow.type.name =='publishNationalRecord' " style="color:#888;"> {{::('topRequestsT.publish'|$translate)}}
                     </span>
                     <span ng-if="task.workflow.type.name=='deleteRecord'" class=" color-red"> DELETE </span>
                     <span ng-class="{'color-orange' : task.workflow.type.name == 'publishReferenceRecord', 'color-blue' : task.workflow.type.name != 'publishReferenceRecord'}">
@@ -44,18 +44,18 @@
             </div>
             <div class="col-sm-3  hidden-xs">
                 <div style="font-size: 12px;" ng-if="task.workflow.workflowExpiryDate >= today" class='bold'>
-                    <span ng-if="task.workflow.type.name == 'publishReferenceRecord'" class="color-orange"> PENDING
-                        SCBD REVIEW </span>
+                    <span ng-if="task.workflow.type.name == 'publishReferenceRecord'" class="color-orange"> 
+                        {{::('topRequestsT.SCBDReview'|$translate)}} </span>
                     <span ng-if="task.workflow.type.name != 'publishReferenceRecord'" ng-class="{'color-red': roles.isPublishingAuthority }"> 
-                            <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> PENDING    
-                        <span ng-if="roles.isPublishingAuthority"> YOUR </span>
+                            <i class="fa fa-star" ng-if="roles.isPublishingAuthority"></i> {{::('topRequestsT.pending'|$translate)}}
+                        <span ng-if="roles.isPublishingAuthority"> {{::('topRequestsT.your'|$translate)}} </span>
                         <span ng-if="!roles.isPublishingAuthority && isBch"> BCH-NFP </span>
                         <span ng-if="!roles.isPublishingAuthority && !isBch"> PA </span>
-                        APPROVAL 
+                        {{::('topRequestsT.approval'|$translate)}}
                     </span>
                 </div>
                 <div ng-if="task.workflow.workflowExpiryDate >= today && !task.activity.isUpdating">
-                    <span style="color:#888; font-size: 12px;">Expires on
+                    <span style="color:#888; font-size: 12px;"> {{::('topRequestsT.expiresOn'|$translate)}}
                        <span ng-bind="task.workflow.workflowExpiryDate|formatDate"></span>
                     </span>
                 </div>
@@ -64,7 +64,7 @@
 
         <div class="text-end">
             <a class="link-secondary bold text-uppercase" style="font-size: 12px;" href="{{viewAllUrl}}">
-                See more <i class="fa fa-arrow-right"></i> </a>
+                {{::('topRequestsT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i> </a>
         </div>
        
 

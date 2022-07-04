@@ -2,14 +2,15 @@ import app from 'app';
 import _ from 'lodash';
 import 'css!/app/css/registry.css';
 import 'services/main'; ;
+import viewGeneRegistryT from '~/app-text/views/reports/bch/registries/view-gene-registry.json';
 
 export { default as template } from './view-gene-registry.html';
-export default ['$scope','searchService','$element', '$rootScope',
-function($scope,searchService,$element, $rootScope) {  
+export default ['$scope', 'searchService', '$element', '$rootScope', 'translationService',
+function($scope,searchService,$element, $rootScope, translationService) {  
 		$scope.isLoading = false;
 		$scope.isError = false;
 		$scope.deviceSize = $rootScope.deviceSize;
-		
+		translationService.set('viewGeneRegistryT', viewGeneRegistryT);
 		function loadRecords(){ 
 
 			$scope.isLoading = true;

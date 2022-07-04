@@ -2,42 +2,39 @@
 	<div class="container-fluid">
 		<div class="panel panel-default registry-details overflow-hidden">
 			<div class="panel-heading">
-				<h2>Living Modified Organism (LMO) Registry</h2>
+				<h2>{{::('viewLmoRegistryT.lmoRegistry'|$translate)}}</h2>
 			</div>
 			<div class="panel-body">
 				<div class="row bg-white">
 					<div class="col-md-2"> 
 						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100 mx-2">
 							<button ng-if="deviceSize=='xs'" type="button" class="w-100 btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<i class="fa fa-bars"></i> Registries <span class="caret"></span>
+									<i class="fa fa-bars"></i> {{::('viewLmoRegistryT.registries'|$translate)}} <span class="caret"></span>
 							</button>
 							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
-								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registries</b></li>
-								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/living-modified-organisms">LMO Registry</a></li>
-								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">Organism Registry</a></li>
-								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">Genetic Element Registry</a></li>
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>{{::('viewLmoRegistryT.registries'|$translate)}}</b></li>
+								<li class="list-group-item active"><a rel="noopener" translation-url href="/registries/living-modified-organisms">{{::('viewLmoRegistryT.lmoTitle'|$translate)}}</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/organisms">{{::('viewLmoRegistryT.organismRegistry'|$translate)}}</a></li>
+								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url href="/registries/genetic-elements">{{::('viewLmoRegistryT.geneticElementRegistry'|$translate)}}</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-12 col-md-10 ps-3">
 						<p class="pt-2 mx-2">
-							The LMO Registry provides summary information on all living modified organisms registered in the BCH,
-							 including transformation events, genetic modifications and the 
-							 <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">unique identification code</a> (if available) 
-							 for each record. Links to all decisions and risk assessment reports that refer to these organisms are accessible
-							  through the records in the registry.
+							{{::('viewLmoRegistryT.lmoInfo'|$translate)}} 
+							 <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">{{::('viewLmoRegistryT.uniqueCode'|$translate)}}</a> 
+							 {{::('viewLmoRegistryT.lmoLink'|$translate)}}
 						</p>
 						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url
-							href="/search?currentPage=1&schema=modifiedOrganism">here</a> to perform an in-depth
-						search of all LMO records available in this Registry.</p>
-						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
+							href="/search?currentPage=1&schema=modifiedOrganism">{{::('viewLmoRegistryT.here'|$translate)}}</a> {{::('viewLmoRegistryT.perform'|$translate)}}</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> {{::('viewLmoRegistryT.loading'|$translate)}}</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> {{::('viewLmoRegistryT.error'|$translate)}}</h3></div>
 						<div ng-if="!isLoading && !isError" class="mx-2">						
 						<div class="row">
 							<div class="col-md-12">
-								<strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong>							
+								<strong>{{::('viewLmoRegistryT.totalRecords'|$translate)}}  <span ng-bind="::numFound" class="text-bold"></span></strong>							
 								<button type="button" class="btn btn-sm btn-default float-end me-1 mb-1" ng-click="export()" ng-disabled="!lmoRecords.length || readyForExport">
-									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Export
+									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> {{::('viewLmoRegistryT.export'|$translate)}}
 								</button>
 							</div>
 						</div>
@@ -45,11 +42,11 @@
 							<table class="table" id="lmoExport">
 								<thead>
 									<tr>
-										<th style="width: 10rem;">Record ID</th>
-										<th>Unique identification</th>
-										<th class="d-none d-md-table-cell">Identity & transformation event</th>
-										<th class="d-none d-md-table-cell">Organism</th>
-										<th class="d-none d-md-table-cell">Description</th>
+										<th style="width: 10rem;">{{::('viewLmoRegistryT.recordID'|$translate)}}</th>
+										<th>{{::('viewLmoRegistryT.name'|$translate)}}</th>
+										<th class="d-none d-md-table-cell">{{::('viewLmoRegistryT.identity'|$translate)}}</th>
+										<th class="d-none d-md-table-cell">{{::('viewLmoRegistryT.organism'|$translate)}}</th>
+										<th class="d-none d-md-table-cell">{{::('viewLmoRegistryT.description'|$translate)}}</th>
 									</tr>
 								</thead>
 								<tbody>

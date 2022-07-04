@@ -16,7 +16,7 @@
             <span aria-hidden="true">&times;</span>
         </button>
         <h3 class="modal-title">
-            Actions - <span ng-bind="commitDialogCtrl.user.firstName+' '+commitDialogCtrl.user.lastName"></span>
+            {{::('commitDialogT.actions'|$translate)}} - <span ng-bind="commitDialogCtrl.user.firstName+' '+commitDialogCtrl.user.lastName"></span>
         </h3>
         <span ng-bind="commitDialogCtrl.user.email"></span>
     </div>
@@ -27,10 +27,10 @@
 
             <div ng-switch="commitDialogCtrl.error.code">
                 <div class="alert alert-warning" ng-switch-when="forbidden">
-                    <b>Oups...</b> We're sorry, but you are not authorized to nominate a user.
+                    <b>{{::('commitDialogT.oups'|$translate)}}</b> {{::('commitDialogT.oupsInfo'|$translate)}}
                 </div>
                 <div class="alert alert-danger" ng-switch-default>
-                    <b>Oops...</b> We're sorry, but something went wrong.
+                    <b>{{::('commitDialogT.oops'|$translate)}}</b> {{::('commitDialogT.oopsInfo'|$translate)}}
                     <br> <span ng-bind="commitDialogCtrl.error|json"></span>
                 </div>
             </div>
@@ -42,7 +42,7 @@
             <!-- CREATE USER -->
             <tr ng-if="(commitDialogCtrl.transactions | filter:{type:'createUser'}).length">
                 <td colspan="3">
-                    <b>User to be created:</b>
+                    <b>{{::('commitDialogT.userToBeCreated'|$translate)}}</b>
                 </td>
             </tr>
 
@@ -62,7 +62,7 @@
 
             <tr ng-if="(commitDialogCtrl.transactions | filter:{type:'addGovernment'}).length">
                 <td colspan="3">
-                    <b>Government affiliation will be granted:</b>
+                    <b>{{::('commitDialogT.governmentAffiliationGranted'|$translate)}}</b>
                 </td>
             </tr>
 
@@ -79,7 +79,7 @@
             <!-- GRANT -->
             <tr ng-if="(commitDialogCtrl.transactions | filter:{type:'grantRole'}).length">
                 <td colspan="3">
-                    <b>Role(s) to be granted:</b>
+                    <b>{{::('commitDialogT.granted'|$translate)}}</b>
                 </td>
             </tr>
 
@@ -98,7 +98,7 @@
             <!-- REVOKE -->
             <tr ng-if="(commitDialogCtrl.transactions | filter:{type:'revokeRoles'}).length">
                 <td colspan="3">
-                    <b>Role(s) to be revoked:</b>
+                    <b>{{::('commitDialogT.revoked'|$translate)}}</b>
                 </td>
             </tr>
 
@@ -118,7 +118,7 @@
 
             <tr ng-if="(commitDialogCtrl.transactions | filter:{type:'deleteGovernment'}).length">
                 <td colspan="3">
-                    <b>Government affiliation will be revoked:</b>
+                    <b>{{::('commitDialogT.governmentAffiliationRevoked'|$translate)}}</b>
                 </td>
             </tr>
 
@@ -137,7 +137,7 @@
     </div>
 
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()" ng-disabled="commitDialogCtrl.loading">Cancel</button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="commitDialogCtrl.save()" ng-disabled="commitDialogCtrl.loading">Proceed »</button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()" ng-disabled="commitDialogCtrl.loading">{{::('commitDialogT.cancel'|$translate)}}</button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="commitDialogCtrl.save()" ng-disabled="commitDialogCtrl.loading">{{::('commitDialogT.proceed'|$translate)}} »</button>
     </div>
 </div>

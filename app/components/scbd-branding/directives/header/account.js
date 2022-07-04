@@ -2,6 +2,7 @@ import app from 'app';
 import template from 'text!./account.html';
 import 'css!components/scbd-branding/directives/header/account';
 import 'components/scbd-angularjs-services/main';
+import accountHeaderT from '~/app-text/components/scbd-branding/directives/header/account.json';
      app.directive('accountHeader', function() { // parent directive header
 
          return { restrict: 'E' ,
@@ -10,8 +11,9 @@ import 'components/scbd-angularjs-services/main';
                   scope: {
                        user: '=',
                   },
-                  controller: ['$scope', '$window', '$location','authentication', '$http',
-                  function($scope, $window, $location,authentication, $http) {
+                  controller: ['$scope', '$window', '$location','authentication', '$http', 'translationService',
+                  function($scope, $window, $location,authentication, $http, translationService) {
+                    translationService.set('accountHeaderT', accountHeaderT);
                     if(!$scope.user || !$scope.user.isAuthenticated )
                       getUser();
                     //==========================

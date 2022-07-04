@@ -6,8 +6,9 @@ import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'angucomplete-alt';
 import 'views/directives/block-region-directive';
 import '~/views/forms/view/bch/icons';
+import riskAssessmentsT from '~/app-text/views/reports/bch/risk-assessments.json';
 
-app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchService, solr) {
+app.directive("lmoRiskAssessments", ['searchService', 'solr', 'translationService', function (searchService, solr, translationService) {
 	return{
 		template:template,
 		restrict:'EA',
@@ -16,7 +17,7 @@ app.directive("lmoRiskAssessments", ['searchService', 'solr', function(searchSer
 			identifier:'@'
 		},
 		link($scope){
-
+			translationService.set('riskAssessmentsT', riskAssessmentsT);
 			function loadLMORiskAssessments(identifier){			
 				var query = {
 					query : 'schema_s:nationalRiskAssessment AND referenceRecord_ss:' + solr.escape(identifier),

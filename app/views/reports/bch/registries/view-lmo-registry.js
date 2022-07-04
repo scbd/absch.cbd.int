@@ -1,14 +1,15 @@
 import app from 'app';
 import 'css!/app/css/registry.css';
 import 'services/main'; ;
+import viewLmoRegistryT from '~/app-text/views/reports/bch/registries/view-lmo-registry.json';
 
 export { default as template } from './view-lmo-registry.html';
-export default ['$scope','searchService','$element', '$rootScope',
-function($scope,searchService,$element, $rootScope) { 
+export default ['$scope', 'searchService', '$element', '$rootScope', 'translationService',
+	function ($scope, searchService, $element, $rootScope, translationService) { 
 		$scope.isLoading = false;
 		$scope.isError = false;
 		$scope.deviceSize = $rootScope.deviceSize;
-		
+		translationService.set('viewLmoRegistryT', viewLmoRegistryT);
 		function loadRecords(){ 
 
 			$scope.isLoading = true;

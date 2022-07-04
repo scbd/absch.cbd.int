@@ -51,7 +51,7 @@
     </style>
 
     <div class="modal-header">
-        <h3 class="modal-title">Search for a nominee</h3>
+        <h3 class="modal-title">{{::('searchUserDialogT.searchNominee'|$translate)}}</h3>
         <button type="button" class="close bg-transparent border-0 fs-5 text-secondary" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -61,10 +61,10 @@
     <div class="modal-body">
         <form name="form" novalidate ng-submit="searchUserDialogCtrl.search()">
 
-            <p>Please enter the email address of the person you want to nominate and click the search button <i class="fa fa-search"></i>.</p>
+            <p>{{::('searchUserDialogT.searchNomineeInfo'|$translate)}} <i class="fa fa-search"></i>.</p>
 
             <div class="form-group" ng-class="{ 'has-warning': form.email.$invalid }">
-                <label>Email address of the nominee</label>
+                <label>{{::('searchUserDialogT.emailAddress'|$translate)}}</label>
                 <div class="input-group ps-0 mb-1">
                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                     <input type="email" name="email" class="form-control fs-small-8" ng-model="searchUserDialogCtrl.email" ng-change='searchUserDialogCtrl.search()' ng-keydown="searchUserDialogCtrl.user=null" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 300, 'blur': 0 } }" placeholder="email@domain.xyz" required />
@@ -74,8 +74,8 @@
                         </button>
                     </span>
                 </div>
-                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">This field is mandatory</p>
-                <p class="help-info error" ng-show="form.email.$error.email">Email is invalid or incomplete</p>
+                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">{{::('searchUserDialogT.mandatory'|$translate)}}</p>
+                <p class="help-info error" ng-show="form.email.$error.email">{{::('searchUserDialogT.emailIncomplete'|$translate)}}</p>
             </div>
 
         </form>
@@ -84,10 +84,10 @@
 
             <div ng-switch="searchUserDialogCtrl.error.code">
                 <div class="alert alert-warning" ng-switch-when="forbidden">
-                    <b>Oups...</b> We're sorry, but you are not authorized to nominate a new user.
+                    <b>{{::('searchUserDialogT.oups'|$translate)}}</b> {{::('searchUserDialogT.oupsInfo'|$translate)}}
                 </div>
                 <div class="alert alert-danger" ng-switch-default>
-                    <b>Oops...</b> We're sorry, but something went wrong.
+                    <b>{{::('searchUserDialogT.oops'|$translate)}}</b> {{::('searchUserDialogT.oopsInfo'|$translate)}}
                     <br> <span ng-bind="searchUserDialogCtrl.error|json"></span>
                 </div>
             </div>
@@ -103,17 +103,15 @@
 
                     <div class="alert alert-warning" role="alert">
                         <p>
-                            <b>User not found: </b> <i ng-bind="searchUserDialogCtrl.email"></i>
+                            <b>{{('searchUserDialogT.userNotFound'|$translate)}} </b> <i ng-bind="searchUserDialogCtrl.email"></i>
                         </p>
                         <p>
-                            Please note the specified email address does not correspond to any existing User Account.
-                            You can however proceed with nomination by initiating the creation of a new User Account.
-                            The new user will receive an e-mail with a link to activate her/his account and create a password.
+                            {{::('searchUserDialogT.userInfo'|$translate)}}
                         </p>
                     </div>
 
                     <button type="button" class="btn btn-lg btn-block btn-success" ng-click="searchUserDialogCtrl.save()">
-                        Nominate a new user using following email address<br>
+                        {{::('searchUserDialogT.nominateEmailAddress'|$translate)}}<br>
                         <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b>
                     </button>
 
@@ -129,14 +127,14 @@
 
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="firstName">First name</label>
+                                <label for="firstName">{{::('searchUserDialogT.firstName'|$translate)}}</label>
                                 <input type="text" class="form-control fs-small-8" name="firstName" ng-model="searchUserDialogCtrl.user.firstName" ng-disabled="true" placeholder="first name" />
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-12">
                             <div class="form-group">
-                                <label for="lastName">Last name</label>
+                                <label for="lastName">{{::('searchUserDialogT.lastName'|$translate)}}</label>
                                 <input type="text" class="form-control fs-small-8" name="lastName" ng-model="searchUserDialogCtrl.user.lastName" ng-disabled="true" />
                             </div>
                         </div>
@@ -147,7 +145,7 @@
 
                         <div class="col-12">
                             <div class="form-group">
-                                <label for="organization">Organization</label>
+                                <label for="organization">{{::('searchUserDialogT.organization'|$translate)}}</label>
                                 <input type="text" class="form-control fs-small-8" name="organization" ng-model="searchUserDialogCtrl.user.organization" ng-disabled="true" />
                             </div>
                         </div>
@@ -166,7 +164,7 @@
                     </div>
 
                     <button type="button" class="btn btn-lg btn-block btn-primary w-100 fs-6" ng-click="searchUserDialogCtrl.save()">
-                        Continue with <b><span ng-bind="searchUserDialogCtrl.user.firstName+' '+searchUserDialogCtrl.user.lastName"></span></b><br>
+                        {{::('searchUserDialogT.continue'|$translate)}} <b><span ng-bind="searchUserDialogCtrl.user.firstName+' '+searchUserDialogCtrl.user.lastName"></span></b><br>
                         <b><span ng-bind="searchUserDialogCtrl.user.email"></span></b>
                     </button>
                 </div>
@@ -175,7 +173,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">Cancel</button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="searchUserDialogCtrl.save()" ng-disabled="form.$invalid || !searchUserDialogCtrl.user">Next »</button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">{{::('searchUserDialogT.cancel'|$translate)}}</button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="searchUserDialogCtrl.save()" ng-disabled="form.$invalid || !searchUserDialogCtrl.user">{{::('searchUserDialogT.next'|$translate)}} »</button>
     </div>
 </div>

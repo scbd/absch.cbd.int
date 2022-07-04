@@ -1,7 +1,7 @@
 ﻿<div class="row p-3 mb-2" ng-show="loading || self.records.Items.length > 0">
     <h4 ng-if="self.title" class="p-1 border-bottom mt-0" ng-bind="self.title"></h4>
 
-    <span class="fw-bold text-secondary px-2 pb-2 text-nowrap "> Latest 10 records
+    <span class="fw-bold text-secondary px-2 pb-2 text-nowrap "> {{::('topeRecordsT.latestTenRecords'|$translate)}}
         <i class="fa fa-spin fa-spinner" ng-if="loading"></i>
     </span>
 
@@ -9,9 +9,9 @@
         <thead>
             <tr>
                 <th></th>
-                <th>Status</th>
-                <th>Title</th>
-                <th>Updated by</th>
+                <th>{{::('topeRecordsT.status'|$translate)}}</th>
+                <th>{{::('topeRecordsT.title'|$translate)}}</th>
+                <th>{{::('topeRecordsT.updatedBy'|$translate)}}</th>
             </tr>
         </thead>
         <tbody>
@@ -34,10 +34,10 @@
                     </div>
                 </td>
                 <td >
-                    <span class="badge bg-success" ng-if="record.documentID">Published</span>
+                    <span class="badge bg-success" ng-if="record.documentID">{{::('topeRecordsT.published'|$translate)}}</span>
                     <span class="badge bg-secondary"
-                        ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">Draft</span>
-                    <span class="badge bg-warnin bg-request" ng-if="record.workingDocumentLock">Request</span>
+                        ng-if="record.workingDocumentCreatedOn && !record.workingDocumentLock">{{::('topeRecordsT.draft'|$translate)}}</span>
+                    <span class="badge bg-warnin bg-request" ng-if="record.workingDocumentLock">{{::('topeRecordsT.request'|$translate)}}</span>
                 </td>
                 <td class="w-50" >
                     <span>
@@ -53,7 +53,7 @@
                             href="mailto:{{record.workingDocumentUpdatedBy.email|encodeURIComponent}}">
                             <span ng-bind="record.workingDocumentUpdatedBy.firstName+' '+record.workingDocumentUpdatedBy.lastName"></span>
                         </a>
-                        <i class="text-secondary ps-2 pe-2">on</i>
+                        <i class="text-secondary ps-2 pe-2">{{::('topeRecordsT.on'|$translate)}}</i>
                         <span class="text-nowrap text-uppercase"
                             ng-bind="record.workingDocumentUpdatedOn | formatDateWithTime"></span>
                     </div>
@@ -62,7 +62,7 @@
                             href="mailto:{{record.workingDocumentCreatedBy.email|encodeURIComponent}}">
                             <span ng-bid="record.workingDocumentCreatedBy.firstName+' '+record.workingDocumentCreatedBy.lastName"></span>
                         </a>
-                        <i class="text-secondary ps-2 pe-2">on</i>
+                        <i class="text-secondary ps-2 pe-2">{{::('topeRecordsT.on'|$translate)}}</i>
                         <span class="text-nowrap   text-uppercase"
                             ng-bind="record.workingDocumentCreatedBy | formatDateWithTime"></span>
                     </div>
@@ -80,7 +80,7 @@
                                 href="mailto:{{record.createdBy.email|encodeURIComponent}}">
                                 <span ng-bind="record.createdBy.firstName+' '+record.createdBy.lastName"></span>
                             </a>
-                            <i class="text-secondary ps-2 pe-2">on</i>
+                            <i class="text-secondary ps-2 pe-2">{{::('topeRecordsT.on'|$translate)}}</i>
                             <span class="text-nowrap   text-uppercase" ng-bind="record.createdOn | formatDateWithTime"></span>
                         </div>
                     </div>
@@ -93,9 +93,9 @@
 
         <span ng-if="self.records.Count > 0" class="float-end">
             <a rel="noopener" class="link-secondary bold text-uppercase" translation-url
-                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">See more <i class="fa fa-arrow-right"></i></a>
+                ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}" ng-if="!self.viewAllUrl">{{::('topeRecordsT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i></a>
             <a rel="noopener" class="link-secondary bold text-uppercase " translation-url ng-href="{{self.viewAllUrl}}"
-                ng-if="self.viewAllUrl">See more <i class="fa fa-arrow-right"></i></a>
+                ng-if="self.viewAllUrl">{{::('topeRecordsT.seeMore'|$translate)}} <i class="fa fa-arrow-right"></i></a>
             
         </span>
 

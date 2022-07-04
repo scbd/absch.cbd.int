@@ -3,8 +3,10 @@ import template from "text!./register-top-menu.html";
 import _ from 'lodash';
 import 'services/main';
 import 'moment';
+import registerTopMenuT from '~/app-text/views/register/directives/register-top-menu.json';
 
-    app.directive("registerTopMenu", ['roleService',"IWorkflows", '$rootScope', '$location', 'realm', function(roleService, IWorkflows,  $rootScope, $location, realm) {
+app.directive("registerTopMenu", ['roleService', "IWorkflows", '$rootScope', '$location', 'realm', 'translationService',
+    function (roleService, IWorkflows, $rootScope, $location, realm, translationService) {
 
         return {
             restrict: "EA",
@@ -13,7 +15,7 @@ import 'moment';
             transclude: false,
             scope: {},
             link: function($scope, element, attrs) {
-
+                translationService.set('registerTopMenuT', registerTopMenuT);      
                 $scope.deviceSize = $rootScope.deviceSize;
                 $scope.roles = {
                     isAdministrator: roleService.isAdministrator()

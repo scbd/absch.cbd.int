@@ -1,0 +1,11 @@
+{
+    "dashboard": "Dashboard",
+    "requests": "Requests",
+    "notifications": "Notifications",
+    "alerts": "Alerts",
+    "userManagement": "User Management",
+    "preferences": "Preferences",
+    "admin": "ADMIN",
+    "menu": "Menu",
+    "reports": "Reports"
+}

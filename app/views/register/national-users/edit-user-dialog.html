@@ -50,8 +50,8 @@
         <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close" ng-click="closeThisDialog()">
             <span aria-hidden="true">&times;</span>
         </button>
-        <h3 class="modal-title">New user - <span ng-bind="editUserDialogCtrl.user.firstName+' '+editUserDialogCtrl.user.lastName">
-            <span ng-if="!editUserDialogCtrl.user.firstName && !editUserDialogCtrl.user.lastName">contact details</span>
+        <h3 class="modal-title">{{::('editUserDialogT.newUser'|$translate)}} - <span ng-bind="editUserDialogCtrl.user.firstName+' '+editUserDialogCtrl.user.lastName">
+            <span ng-if="!editUserDialogCtrl.user.firstName && !editUserDialogCtrl.user.lastName">{{::('editUserDialogT.contactDetails'|$translate)}}</span>
         </h3>
         <h4 class="modal-title" ng-bind="editUserDialogCtrl.user.email"></h4>
     </div>
@@ -59,7 +59,7 @@
     <div class="modal-body">
         <form name="form" novalidate>
 
-            <p>Please fill the following basic contact details information of the nominee</p>
+            <p>{{::('editUserDialogT.nominee'|$translate)}}</p>
 
             <div class="panel panel-default panel-identity" style="min-height:300px;position:relative">
                 <div class="panel-body">
@@ -67,17 +67,17 @@
 
                         <div class="col-sm-6 col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.firstName.$invalid }">
-                                <label for="firstName">First name</label>
+                                <label for="firstName">{{::('editUserDialogT.firstName'|$translate)}}</label>
                                 <input type="text" class="form-control" name="firstName" ng-model="editUserDialogCtrl.user.firstName" required />
-                                <p class="help-info error" ng-show="form.firstName.$invalid">This field is mandatory</p>
+                                <p class="help-info error" ng-show="form.firstName.$invalid">{{::('editUserDialogT.mandatory'|$translate)}}</p>
                             </div>
                         </div>
 
                         <div class="col-sm-6 col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.lastName.$invalid }">
-                                <label for="lastName">Last name</label>
+                                <label for="lastName">{{::('editUserDialogT.lastName'|$translate)}}</label>
                                 <input type="text" class="form-control" name="lastName" ng-model="editUserDialogCtrl.user.lastName" required />
-                                <p class="help-info error" ng-show="form.lastName.$invalid">This field is mandatory</p>
+                                <p class="help-info error" ng-show="form.lastName.$invalid">{{::('editUserDialogT.mandatory'|$translate)}}</p>
                             </div>
                         </div>
 
@@ -86,9 +86,9 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.organization.$invalid }">
-                                <label for="organization">Organization</label>
+                                <label for="organization">{{::('editUserDialogT.organization'|$translate)}}</label>
                                 <input type="text" class="form-control" name="organization" ng-model="editUserDialogCtrl.user.organization" required />
-                                <p class="help-info error" ng-show="form.organization.$invalid">This field is mandatory</p>
+                                <p class="help-info error" ng-show="form.organization.$invalid">{{::('editUserDialogT.mandatory'|$translate)}}</p>
                             </div>
                         </div>
                     </div>
@@ -96,13 +96,13 @@
                     <div class="row">
                         <div class="col-xs-12">
                             <div class="form-group" ng-class="{ 'has-warning': form.email.$invalid }">
-                                <label>Email</label>
+                                <label>{{::('editUserDialogT.email'|$translate)}}</label>
                                 <div class="input-group" style="margin-bottom:2px; padding-left: 0px">
                                     <span class="input-group-text"><i class="fa fa-envelope"></i></span>
                                     <input type="email" name="email" class="form-control" ng-model="editUserDialogCtrl.user.email" ng-disabled="true" placeholder="email@domain.xyz" required />
                                 </div>
-                                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">This field is mandatory</p>
-                                <p class="help-info error" ng-show="form.email.$error.email">Email is invalid or incomplete</p>
+                                <p class="help-info error" ng-show="form.email.$invalid && !form.email.$error.email">{{::('editUserDialogT.mandatory'|$translate)}}</p>
+                                <p class="help-info error" ng-show="form.email.$error.email">{{::('editUserDialogT.emailIncomplete'|$translate)}}</p>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">Cancel</button>
-        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editUserDialogCtrl.save()" ng-disabled="form.$invalid">Next »</button>
+        <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeThisDialog()">{{::('editUserDialogT.cancel'|$translate)}}</button>
+        <button type="button" class="btn btn-primary" aria-label="Save" ng-click="editUserDialogCtrl.save()" ng-disabled="form.$invalid">{{::('editUserDialogT.next'|$translate)}} »</button>
     </div>
 </div>
