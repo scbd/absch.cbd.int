@@ -1,0 +1,14 @@
+{
+    "registries": "Registries",
+    "geneticElementRegistry": "Genetic Element Registry",
+    "lmoTitle": "LMO Registry",
+    "organismRegistry": "Organism Registry",
+    "organismInfo": "The Organism Registry includes summary information on those organisms that have been registered in the BCH as parental, recipient or donor organisms. The registry includes links to the records on each organism where further information about relevant biological characteristics, including information on taxonomic classification, common name, origin, centre of origin and centre of genetic diversity can be found. Links to records that reference the organism are provided at the bottom of each individual record.",
+    "here": "here",
+    "perform": "to perform an in-depth search of all Organism records available in this Registry.",
+    "loading": "Loading...",
+    "error": "Error loading registry records, please try again.",
+    "totalRecords": "Total records:",
+    "export": "Export",
+    "click": "Click"
+}
