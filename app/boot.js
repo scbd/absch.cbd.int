@@ -10,7 +10,6 @@ export const bundleUrls = {
         'npm/angular-animate@1.7.4/angular-animate.min.js',
         'npm/angular-cache@4.6.0/dist/angular-cache.min.js',
         'npm/jqueryui@1.11.1/jquery-ui.min.js',
-        'npm/bootstrap@5.1.2/dist/js/bootstrap.bundle.min.js',
         'npm/linq@3.0.5/linq.min.js',
         'npm/lodash@4.17.15/lodash.min.js',
         'npm/moment@2.9.0/min/moment-with-locales.min.js',
@@ -221,7 +220,7 @@ export default function bootApp(window, require, defineX) {
     const noop = ()=>warnImport
     const warnImport = ()=>{ console.warn('lib loaded in bundle, import not required!'); }
 
-    defineX('angular'              , [],          ()  =>window.angular);
+    defineX('angular'              , ['bootstrap'],() =>window.angular);
     defineX('angular-flex'         , ['angular'], (ng)=>{ warnImport(); return ng; });
     defineX('angular-route'        , ['angular'], (ng)=>{ warnImport(); return ng; });
     defineX('angular-cookies'      , ['angular'], (ng)=>{ warnImport(); return ng; });
