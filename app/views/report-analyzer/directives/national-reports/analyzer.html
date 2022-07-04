@@ -125,7 +125,7 @@
     <div class="float-end" style="position:relative;top:-20px;">   
         <a rel="noopener" href="" ng-click="print('#secNrAnalyzer')" class="links" id="btnPrint">
             <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
-            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>  Print
+            <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i> {{::('analyzerT.print'|$translate)}}
         </a>             
     </div>
  
@@ -140,29 +140,29 @@
                 <span ng-switch-when="npNonParties">Breakdown by Nagoya Protocol Non-Parties</span>
         </h3> -->
 
-        <div ng-show="sections" id="sumTypeButton" class="btn-group float-end" title="Change how numbers are calculated">
+        <div ng-show="sections" id="sumTypeButton" class="btn-group float-end" title="{{::('analyzerT.changeNumber'|$translate)}}">
             <button type="button" class="btn btn-primary" ng-click="showSumTypeSelector()">∑
                 <span ng-switch="sumType">
-                    <span ng-switch-when="sum">Count of responses</span>
-                    <span ng-switch-when="percentRow">Percentage by row</span>
-                    <span ng-switch-when="percentColumn">Percentage by column</span>
-                    <span ng-switch-when="percentGlobal">Percentage overall</span>
+                    <span ng-switch-when="sum">{{::('analyzerT.changeNumber'|$translate)}}</span>
+                    <span ng-switch-when="percentRow">{{::('analyzerT.percentageRow'|$translate)}}</span>
+                    <span ng-switch-when="percentColumn">{{::('analyzerT.percentageColumn'|$translate)}}</span>
+                    <span ng-switch-when="percentGlobal">{{::('analyzerT.percentageOverall'|$translate)}}</span>
                 </span>
             </button>
 
             <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="caret"></span>
-                <span class="sr-only">Toggle Dropdown</span>
+                <span class="sr-only">{{::('analyzerT.toggleDropdown'|$translate)}}</span>
             </button>
 
             <ul class="dropdown-menu">
                 <li ng-repeat="type in ::sumTypes">
                     <a rel="noopener" href="#" ng-click="setSumType(type)">
                         <span ng-switch="type">
-                            <span ng-switch-when="sum">Count of responses</span>
-                            <span ng-switch-when="percentRow">Percentage by row</span>
-                            <span ng-switch-when="percentColumn">Percentage by column</span>
-                            <span ng-switch-when="percentGlobal">Percentage overall</span>
+                            <span ng-switch-when="sum">{{::('analyzerT.countResponses'|$translate)}}</span>
+                            <span ng-switch-when="percentRow">{{::('analyzerT.percentageRow'|$translate)}}</span>
+                            <span ng-switch-when="percentColumn">{{::('analyzerT.percentageColumn'|$translate)}}</span>
+                            <span ng-switch-when="percentGlobal">{{::('analyzerT.percentageOverall'|$translate)}}</span>
                         </span>
                     </a>
                 </li>
@@ -170,7 +170,7 @@
         </div>
 
         <button ng-show="sections" type="button" class="btn btn-default"  ng-click="showSettings();" id="returnQuestions">
-            « Back to settings
+            « {{::('analyzerT.backToSettings'|$translate)}}
         </button>
 
         <div class="clearfix"></div>
@@ -182,11 +182,11 @@
                     <td>
                         <h3 style="color:inherit; margin-top:10px">
                             <i class="fa fa-exclamation-triangle"></i>
-                            <b>The current analysis is filtered to show only reports where &nbsp;</b>
+                            <b>{{::('analyzerT.currentAnalysis'|$translate)}} &nbsp;</b>
                         </h3>
                     </td>
                     <td class="text-right">
-                        <button type="button" class="btn btn-xs btn-default" ng-click="clearFilter()">&times; Remove filter</button>
+                        <button type="button" class="btn btn-xs btn-default" ng-click="clearFilter()">&times; {{::('analyzerT.removeFilter'|$translate)}}</button>
                     </td>
                 </tr>
             </table>
@@ -194,11 +194,11 @@
         <div class="panel-body">
             <div class="alert alert-info" style="margin-bottom:0px" ng-show="filter">
                 <p style="margin-bottom:10px">
-                    <b>Question <span ng-bind="filter.question.number"></span></b><br/>
+                    <b>{{::('analyzerT.question'|$translate)}} <span ng-bind="filter.question.number"></span></b><br/>
                     <span ng-bind="filter.question.title|lstring"></span>
                 </p>
                 <p>
-                    <i>Has been answered as follows:</i>
+                    <i>{{::('analyzerT.follows'|$translate)}}</i>
                     <b><span ng-bind="filter.option.title|lstring"></span></b>
                 </p>
             </div>
@@ -216,7 +216,7 @@
 
                 <div class="d-block modal-header">
                     <button type="button" class="close btn float-end" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Change how numbers are calculated</i></h4>
+                    <h4 class="modal-title">{{::('analyzerT.changeNumber'|$translate)}}</i></h4>
                 </div>
 
                 <div class="modal-body" style="max-height:75vh;overflow-y: auto;">
@@ -229,20 +229,20 @@
                                 <div class="panel-heading  text-center">
                                     <h2 style="color:inherit;margin:5px">
                                             <span ng-switch="type">
-                                                <span ng-switch-when="sum">Count of responses</span>
-                                                <span ng-switch-when="percentRow">Percentage by row</span>
-                                                <span ng-switch-when="percentColumn">Percentage by column</span>
-                                                <span ng-switch-when="percentGlobal">Percentage overall</span>
+                                                <span ng-switch-when="sum">{{::('analyzerT.countResponses'|$translate)}}</span>
+                                                <span ng-switch-when="percentRow">{{::('analyzerT.percentageRow'|$translate)}}</span>
+                                                <span ng-switch-when="percentColumn">{{::('analyzerT.percentageColumn'|$translate)}}</span>
+                                                <span ng-switch-when="percentGlobal">{{::('analyzerT.percentageOverall'|$translate)}}</span>
                                             </span>
                                     </h2>
                                 </div>
                                 <div class="panel-body hidden-xs highlight" style="height:195px;overflow-y:auto">
                                         <img ng-src="/app/views/report-analyzer/resources/{{type | kebabcase}}.png"><br/>
                                         <div ng-switch="type" class="text-justify" style="margin-top:5px">
-                                            <span ng-switch-when="sum">Displays the absolute number of responses received for a given combination of row (answers) and column (groups).</span>
-                                            <span ng-switch-when="percentRow">Displays the percentages within the different groups selected (columns). In this case the sum of all values in a row is 100%.</span>
-                                            <span ng-switch-when="percentColumn">Displays the percentages within different given answers (rows). In this case the sum of all values in a column is 100%.</span>
-                                            <span ng-switch-when="percentGlobal">Displays the percentages within all given responses. In this case the sum of all values (rows and columns) is 100%.</span>
+                                            <span ng-switch-when="sum">{{::('analyzerT.sum'|$translate)}}</span>
+                                            <span ng-switch-when="percentRow">{{::('analyzerT.percentRow'|$translate)}}</span>
+                                            <span ng-switch-when="percentColumn">{{::('analyzerT.percentColumn'|$translate)}}</span>
+                                            <span ng-switch-when="percentGlobal">{{::('analyzerT.percentGlobal'|$translate)}}</span>
                                         </div>
                                 </div>
                             </div>
@@ -252,7 +252,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{::('analyzerT.close'|$translate)}}</button>
                 </div>
             </div>
         </div>
@@ -266,10 +266,10 @@
 
                 <div class="modal-header">
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">Question <span ng-bind="currentQuestion.number"></span>.</h4>
+                    <h4 class="modal-title">{{::('analyzerT.question'|$translate)}} <span ng-bind="currentQuestion.number"></span>.</h4>
                     <span ng-bind="currentQuestion.title|lstring"></span>
                     <span ng-if="subTitle"><br/>
-                        <b>Sub section :-</b> <span ng-bind="subTitle|lstring"></span>
+                        <b>{{::('analyzerT.subSection'|$translate)}} :-</b> <span ng-bind="subTitle|lstring"></span>
                     </span>    
                 </div>
 
@@ -308,13 +308,13 @@
                                     <tr>
                                         <td></td>
                                         <td colspan="5">
-                                            Question <span ng-bind="currentQuestion.number"></span>.
+                                            {{::('analyzerT.question'|$translate)}} <span ng-bind="currentQuestion.number"></span>.
                                             <span ng-bind="currentQuestion.title|lstring"></span>
-                                            Sub section :-<span ng-bind="subTitle|lstring"></span>
+                                            {{::('analyzerT.subSection'|$translate)}} :-<span ng-bind="subTitle|lstring"></span>
                                        </td>
                                     </tr>
                                     <tr>
-                                        <th>Country</th>
+                                        <th>{{::('analyzerT.country'|$translate)}}</th>
                                         <td ng-repeat="lang in ['en', 'ar', 'fr', 'es', 'zh', 'ru']" class="tableexport-string">
                                             <span ng-bind="lang|languageLongName"></span>
                                         </td>
@@ -347,14 +347,14 @@
                         <button type="button"  ng-click="export()" class="btn btn-primary record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'">
                                 <i class="fa fa-spin fa-spinner" ng-if="exporting" ></i> 
                                 <i class="fa fa-table" aria-hidden="true" ng-if="!exporting"></i>
-                                Export 
+                                {{::('analyzerT.export'|$translate)}}
                             </button>   
                         <button type="button"  ng-click="print('#textsDialog-model-content')" class="btn btn-primary record-link-style" id="btnPrint">
                             <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
                             <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
-                            Print 
+                            {{::('analyzerT.print'|$translate)}}
                         </button>   
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" id="btnClose">Close</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" id="btnClose">{{::('analyzerT.close'|$translate)}}</button>
                 </div>
             </div>
         </div>

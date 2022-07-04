@@ -8,6 +8,7 @@ import '../../filters/cases';
 import 'components/scbd-angularjs-services/main';
 import 'views/directives/view-reference-document';
 import 'views/report-analyzer/reportAnalyzerService'; ;
+import analyzerT from '~/app-text/views/report-analyzer/directives/national-reports/analyzer.json';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -31,8 +32,8 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication', 'realm', 'reportAnalyzerService',
-     function($http, $q, locale, $filter, $timeout, authentication, realm, reportAnalyzerService) {
+app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$timeout', 'authentication', 'realm', 'reportAnalyzerService', 'translationService',
+        function ($http, $q, locale, $filter, $timeout, authentication, realm, reportAnalyzerService, translationService) {
         return {
             restrict : 'E',
             replace : true,
@@ -51,7 +52,7 @@ import 'views/report-analyzer/reportAnalyzerService'; ;
                 
                 // $element.find("#sumTypeButton").affix({ offset: { top : $element.find('#nrAnalyzer').offset().top } });
                 // $element.find("#filterBox"    ).affix({ offset: { top : 340 } });
-
+                translationService.set('analyzerT', analyzerT);
                 $scope.allRegionsMap = {};
 
                 $scope.filters = [];

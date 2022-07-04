@@ -1,16 +1,16 @@
 import './directives/national-reports/questions-selector';
 import './directives/national-reports/analyzer'; 
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
+import reportAnalyzerT from '~/app-text/views/report-analyzer/analyzer.json';
 
     export { default as template } from './analyzer.html';
-export default ['$scope', '$location', 'realm', '$timeout',
-     function($scope, $location, realm, $timeout) {
-        
+export default ['$scope', '$location', 'realm', '$timeout', 'translationService',
+    function ($scope, $location, realm, $timeout, translationService) {
         var appName         = realm.value.replace(/-.*/,'').toLowerCase();
         $scope.showAnalyzer = false;
         $scope.self         = $scope;
         $scope.reportData   = analyzerMapping[appName];
-
+        translationService.set('reportAnalyzerT', reportAnalyzerT);
         $timeout(function(){
 
             delete $scope.selectedReportType;
