@@ -11,13 +11,14 @@ import 'components/scbd-angularjs-services/main';
 import 'views/register/directives/top-records';
 import 'views/register/directives/top-requests';
 import 'ngDialog';
+import dashboardT from '~/app-text/views/register/dashboard.json';
     
     export { default as template } from './dashboard.html';
 export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesService", "realm", "$q",
                     "$routeParams", '$location', "$filter", "ngDialog", "$timeout", 'toastr',
-                    'IWorkflows', 'commonjs',"joyrideService","$element",
+    'IWorkflows', 'commonjs', "joyrideService", "$element", "translationService",
         function($rootScope, $scope, storage, roleService, articlesService, realm, $q, $routeParams, 
-                $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs, joyrideService, $element) {
+            $location, $filter, ngDialog, $timeout, toastr, IWorkflows, commonjs, joyrideService, $element, translationService) {
             
             $scope.schemas          = realm.schemas        
             $scope.languages        = commonjs.languages;
@@ -30,6 +31,7 @@ export default ["$rootScope", "$scope", "IStorage", "roleService", "articlesServ
             $scope.isBch            = realm.is('BCH');
             $scope.isAbs            = realm.is('ABS');
 
+            translationService.set('dashboardT', dashboardT);
             var schemaFacets = {};
             $scope.showRecordsSection=true;
             //====================================================================================

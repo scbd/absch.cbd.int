@@ -6,12 +6,14 @@ import 'services/main';
 import 'components/scbd-angularjs-services/main';
 import 'components/scbd-angularjs-controls/main';
 import '../directives/breadcrumbs';
+import abschHeaderT from '~/app-text/templates/absch/header.json';
 
-    app.directive('abschHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q', 'realm' , function (locale, $location, breadcrumbs, commonjs, $q, realm) {
+    app.directive('abschHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q', 'realm' , 'translationService', function (locale, $location, breadcrumbs, commonjs, $q, realm, translationService) {
         return {
             restrict: 'E',
             template: html,
             link: function($scope) {
+                translationService.set('abschHeaderT', abschHeaderT);
                 $scope.locale = locale
                 $scope.breadcrumbs     = breadcrumbs;
 

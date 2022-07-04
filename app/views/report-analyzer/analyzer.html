@@ -7,7 +7,7 @@
         </h1>
 
         <h1 ng-show="self.showAnalyzer">
-            <span class="bold">Report: </span>
+            <span class="bold">{{::('reportAnalyzerT.report'|$translate)}} </span>
             <span style="font-weight:normal;" ng-bind="self.activeReport.title">
                 <!-- <span > Interim <span class="hidden-sm hidden-md hidden-lg">NR</span>
             <span class="hidden-xs">National Report<span> 
@@ -16,14 +16,14 @@
         </h1>
 
         <h2 ng-show="self.showAnalyzer">
-            Analysis:
+            {{::('reportAnalyzerT.analysis'|$translate)}}
             <span ng-show="self.showAnalyzer" style="padding:0;margin:0; display:inline;font-weight:normal;"
                 ng-switch="self.selectedRegionsPreset">
-                <span ng-switch-when="cbdRegions">Breakdown by CBD regions</span>
-                <span ng-switch-when="countries">Select countries</span>
-                <span ng-switch-when="regions">Select regions</span>
-                <span ng-switch-when="npParties">Breakdown by Protocol Parties</span>
-                <span ng-switch-when="npNonParties">Breakdown by Protocol Non-Parties</span>
+                <span ng-switch-when="cbdRegions">{{::('reportAnalyzerT.breakdownCbdRegions'|$translate)}}</span>
+                <span ng-switch-when="countries">{{::('reportAnalyzerT.selectCountries'|$translate)}}</span>
+                <span ng-switch-when="regions">{{('reportAnalyzerT.selectRegions'|$translate)}}</span>
+                <span ng-switch-when="npParties">{{::('reportAnalyzerT.breakdownProtocolParties'|$translate)}}</span>
+                <span ng-switch-when="npNonParties">{{::('reportAnalyzerT.breakdownProtocolNonParties'|$translate)}}</span>
             </span>
         </h2>
 
@@ -38,12 +38,11 @@
                     <table style="width:100%">
                         <tr>
                             <td style="width:99%">
-                                <h4 class="panel-title">National report analyzer</h4>
-                                This tool allows you to select specific sections or questions of the report and to
-                                display the results by country/region.
+                                <h4 class="panel-title">{{::('reportAnalyzerT.nationalReportAnalyzer'|$translate)}}</h4>
+                                    {{::('reportAnalyzerT.nationalReportAnalyzerInfo'|$translate)}}
                             </td>
                             <td>
-                                <button type="button" class="btn btn-primary" ng-click="analyze(true);">Analyze
+                                <button type="button" class="btn btn-primary" ng-click="analyze(true);">{{::('reportAnalyzerT.analyze'|$translate)}}
                                     »</button>
                             </td>
                         </tr>
@@ -54,7 +53,7 @@
                     regions-preset="self.selectedRegionsPreset" report-data="self.reportData"
                     regions-preset-filter="self.selectedRegionsPresetFilter"></national-report-questions-selector>
                 <div class="panel-footer text-right">
-                    <button type="button" class="btn btn-primary" ng-click="analyze(true)">Analyze »</button>
+                    <button type="button" class="btn btn-primary" ng-click="analyze(true)">{{::('reportAnalyzerT.analyze'|$translate)}} »</button>
                 </div>
             </div>
             <national-report-analyzer ng-if="self.showAnalyzer" max-date="self.maxDate"

@@ -6,9 +6,10 @@ import 'views/forms/view/bch/view-lmo-reference.directive';
 import 'angucomplete-alt';
 import 'views/directives/block-region-directive';
 import 'services/main'; ;
+import lmoDecisionsT from '~/app-text/views/reports/bch/lmo-decisions.json';
 
-app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q',
-	function($http, solr, $cookies, searchService, commonjs, $q) {
+app.directive("lmoDecisions", ['$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q', 'translationService',
+	function ($http, solr, $cookies, searchService, commonjs, $q, translationService) {
 	
 		return{
 			template:template,
@@ -18,7 +19,7 @@ app.directive("lmoDecisions", [ '$http', 'solr', '$cookies', 'searchService', 'c
 				identifier:'@'
 			},
 			link($scope){
-
+				translationService.set('lmoDecisionsT', lmoDecisionsT);
 				var countries  = {};
 
 				//============================================================

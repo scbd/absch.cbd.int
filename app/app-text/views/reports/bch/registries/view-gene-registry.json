@@ -1,0 +1,18 @@
+{
+    "registries": "Registries",
+    "geneticElementRegistry": "Genetic Element Registry",
+    "lmoTitle": "LMO Registry",
+    "organismRegistry": "Organism Registry",
+    "geneInfo": "The Genetic Element Registry provides a summary of information on the genetic elements associated with the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. The registry includes links to the records on each genetic element where more details may be found. LMOs containing the particular genetic element are referenced at the bottom of the individual record.",
+    "here": "here",
+    "perform": "to perform an in-depth search of all Genetic Element records available in this Registry.",
+    "loading": "Loading...",
+    "error": "Error loading registry records, please try again.",
+    "totalRecords": "Total records:",
+    "export": "Export",
+    "recordID": "Record ID",
+    "name": "Name",
+    "traits": "Trait(s)",
+    "donorOrganism": "Donor organism",
+    "function": "Function"
+}

@@ -1,0 +1,11 @@
+{
+    "lmoTitle": "Living Modified Organism (LMO) Registry",
+    "lmoInfo": "The LMO Registry provides summary information on all living modified organisms registered in the BCH, including transformation events, genetic modifications and the",
+    "uniqueCode": "unique identification code",
+    "lmoLink": "(if available) for each record. Links to all decisions and risk assessment reports that refer to these organisms are accessible through the records in the registry.",
+    "viewRegistry": "View registry",
+    "organismRegistry": "Organism Registry",
+    "organismInfo": "The Organism Registry includes summary information on those organisms that have been registered in the BCH as parental, recipient or donor organisms. The registry includes links to the records on each organism where further information about relevant biological characteristics, including information on taxonomic classification, common name, origin, centre of origin and centre of genetic diversity can be found. Links to records that reference the organism are provided at the bottom of each individual record.",
+    "geneticElementRegistry": "Genetic Element Registry",
+    "geneInfo": "The Genetic Element Registry provides a summary of information on the genetic elements associated with the LMOs registered in the BCH, including information on the donor organism, conferred traits and biological function. The registry includes links to the records on each genetic element where more details may be found. LMOs containing the particular genetic element are referenced at the bottom of the individual record."
+}

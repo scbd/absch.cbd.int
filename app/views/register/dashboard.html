@@ -8,12 +8,12 @@
         <div class="text-end">
             <a rel="noopener" ng-href="#" class="link-dark" ng-click="tour()">
                 <i class="fa fa-question-circle" aria-hidden="true"></i>
-                <span class="hidden-sm"> TAKE DASHBOARD TOUR</span>
+                <span class="hidden-sm"> {{::('dashboardT.dashboardTour'|$translate)}}</span>
             </a>
         </div>
 
         <div class="register-content-header bg-darkgrey color-white">
-                <h3 class="p-2 m-0">Dashboard </h3>
+                <h3 class="p-2 m-0">{{::('dashboardT.dashboard'|$translate)}} </h3>
         </div>
 
         <div class="register-content-content bg-white" style="border-bottom: 0.125rem solid #ccc">
@@ -25,21 +25,23 @@
                     <i class="bi bi-chevron-up cursor" ng-show="showProfileInfo" aria-hidden="true"
                         ng-click="showProfileInfo=false"></i>
                     <span id="showProfileInfo" class="color-black">
-                        <span class="table_display_none">Welcome </span>
+                        <span class="table_display_none">{{::('dashboardT.welcome'|$translate)}} </span>
                         <span class="fw-bold" ng-bind="::user.name"></span>
                         <a class="badge bg-secondary align-bottom link-light" ng-click="showUserRoles()">
-                            <span ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">Registered
-                                User</span>
-                            <span ng-if="::(roles.isPublishingAuthority && isAbs)">Publishing
-                                Authority</span>
-                            <span class="comma-space" ng-if="::(roles.isNationalFocalPoint && isAbs)">ABS National Focal
-                                Point</span>
-                            <span class="comma-space d" ng-if="::(roles.isPublishingAuthority && isBch)">BCH National
-                                Focal Point</span>
+                            <span ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
+                                {{::('dashboardT.registeredUser'|$translate)}}
+                            </span>
+                            <span ng-if="::(roles.isPublishingAuthority && isAbs)">
+                                {{::('dashboardT.publishingAuthority'|$translate)}}
+                            </span>
+                            <span class="comma-space" ng-if="::(roles.isNationalFocalPoint && isAbs)">
+                                {{::('dashboardT.absNationalFocalPoint'|$translate)}}</span>
+                            <span class="comma-space d" ng-if="::(roles.isPublishingAuthority && isBch)">
+                                {{::('dashboardT.bchNationalPoint'|$translate)}}</span>
                             <span class="comma-space " ng-if="::(roles.isNationalFocalPoint && isBch)">Cartagena
-                                National Focal Point</span>
-                            <span class="comma-space" ng-if="::roles.isNationalAuthorizedUser">National
-                                Authorized User</span>
+                                {{::('dashboardT.nationalFocalPoint'|$translate)}}</span>
+                            <span class="comma-space" ng-if="::roles.isNationalAuthorizedUser">
+                                {{::('dashboardT.nationalAuthorizedUser'|$translate)}}</span>
                         </a>
                     </span>
                 </h4>
@@ -48,25 +50,25 @@
                         <table>
                             <tr>
                                 <td>
-                                    <label>Name:</label>
+                                    <label>{{::('dashboardT.name'|$translate)}}</label>
                                 </td>
                                 <td ng-bind="::user.name"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Primary email:</label>
+                                    <label>{{::('dashboardT.primaryEmail'|$translate)}}</label>
                                 </td>
                                 <td ng-bind="user.email"></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Country affiliation:</label>
+                                    <label>{{::('dashboardT.countryAffiliation'|$translate)}}</label>
                                 </td>
                                 <td ng-if="user.government">
                                     <a class="text-decoration-none" rel="noopener" translation-url href="/countries/{{user.government | uppercase}}" ng-bind="userCountry|term"></a>
                                 </td>
                                 <td ng-if="!user.government">
-                                    none
+                                    {{::('dashboardT.none'|$translate)}}
                                 </td>
                             </tr>
                         </table>
@@ -75,61 +77,61 @@
                         <table>
                             <tr>
                                 <td>
-                                    <label>Role(s):</label>
+                                    <label>{{::('dashboardT.roles'|$translate)}}</label>
                                 </td>
                                 <td>
                                     <span class="comma" ng-if="::roles.isNationalFocalPoint">
                                         <span ng-if="isAbs">
-                                            National Focal Point
+                                            {{::('dashboardT.nationalFocalPoint'|$translate)}}
                                             <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
                                                 data-bs-toggle="tooltip" data-html="true" data-container="body"
-                                                title="The National Focal Point is responsible for liaison with the Secretariat as well as for designating themselves or another user as a Publishing Authority."></span>
+                                                title="{{::('dashboardT.nationalFocalPointInfo'|$translate)}}"></span>
                                         </span>
                                         <span ng-if="isBch">
-                                            Cartagena National Focal Point (CPB-NFP)
+                                            Cartagena {{::('dashboardT.nationalFocalPoint'|$translate)}} (CPB-NFP)
                                             <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
                                                 data-bs-toggle="tooltip" data-html="true" data-container="body"
-                                                title="The National Focal Points are responsible for liaison with the Secretariat as well as for designating themselves or another user as a BCH focal point. The National Focal Point can create draft national records and submit them to the BCH focal point for publication."></span>
+                                                title="{{::('dashboardT.cartagenaInfo'|$translate)}}"></span>
                                         </span>
                                     </span>
 
                                     <span class="comma" ng-if="::roles.isPublishingAuthority">
-                                        <span ng-if="isAbs"> Publishing Authority (PA)  
+                                        <span ng-if="isAbs">{{::('dashboardT.isPublishingAuthority'|$translate)}}
                                             <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                            title="Each country can designate only one Publishing Authority (PA). The PA’s job is to make information publicly available by verifying and publishing records. A PA can also designate National Authorized Users who can prepare draft records for their country and submit them to the PA to verify and publish"></span>
+                                            title="{{::('dashboardT.isPublishingAuthorityInfo'|$translate)}}"></span>
                                         </span>  
                                         <span ng-if="isBch">  
-                                            BCH National Focal Point (BCH-NFP)           
+                                            BCH {{::('dashboardT.nationalFocalPoint'|$translate)}} (BCH-NFP)           
                                             <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                                title="Each country can designate one BCH focal point whose role it is to publish national records in the BCH. The BCH focal point can create, edit and publish national records. The BCH focal point can also designate National Authorized Users who can prepare draft records for their country and submit them to the BCH focal point to verify and publish.">
+                                                title="{{::('dashboardT.countryDesignation'|$translate)}}">
                                             </span>
                                         </span>
                                     </span>
 
                                     <span class="comma" ng-if="::roles.isNationalAuthorizedUser">
-                                        National Authorized User (NAU) 
+                                        {{::('dashboardT.NAU'|$translate)}}
                                         <span ng-if="isBch" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                            title="National Authorized User (NAU) can create draft national records and submit them to the BCH focal point to verify and publish.">
+                                            title="{{::('dashboardT.bchNAU'|$translate)}}">
                                         </span><span ng-if="isAbs" href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                            title="National Authorized User (NAUs) can create draft national records and submit them to the Publishing Authority to verify and publish."></span></span>
+                                            title="{{::('dashboardT.absNAU'|$translate)}}"></span></span>
                                     </span>
 
                                     <span class="comma" ng-if="::(roles.isUser && (!roles.isNationalFocalPoint && !roles.isPublishingAuthority && !roles.isNationalAuthorizedUser))">
-                                        Registered User 
+                                        {{::('dashboardT.registeredUser'|$translate)}}
                                         <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey" data-bs-toggle="tooltip" data-html="true" data-container="body" 
-                                            title="Regular users can create draft reference records and request their publication from the CBD Secretariat."></span></span>
+                                            title="{{::('dashboardT.CBDSecretariat'|$translate)}}"></span></span>
                                         <span class="comma" ng-if="::roles.isAdministrator">
-                                            <strong class="color-pink">Admin</strong>
+                                            <strong class="color-pink">{{::('dashboardT.admin'|$translate)}}</strong>
                                         </span>
 
                                     </span>
 
                                 </td>
-                                <td class="ps-2"><a rel="noopener" class="badge bg-secondary link-light" href="#" ng-click="showUserRoles()">show all my roles</a></td>
+                                <td class="ps-2"><a rel="noopener" class="badge bg-secondary link-light" href="#" ng-click="showUserRoles()">{{::('dashboardT.allRoles'|$translate)}}</a></td>
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Update profile:</label>
+                                    <label>{{::('dashboardT.updateProfile'|$translate)}}</label>
                                 </td>
                                 <td>
                                     <a class="text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/profile" target="_blank">
@@ -139,7 +141,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label>Update password:</label>
+                                    <label>{{::('dashboardT.updatePassword'|$translate)}}</label>
                                 </td>
                                 <td>
                                     <a class="text-decoration-none" rel="noopener" translation-url href="https://accounts.cbd.int/password" target="_blank">
@@ -161,7 +163,7 @@
                     <i class="bi bi-chevron-up cursor" ng-show="showRecordsSection" aria-hidden="true"
                         ng-click="showRecordsSection=false"></i>
 
-                Record overview
+                {{::('dashboardT.recordOverview'|$translate)}}
             </h4>
 
             <div class="row bg-light m-0 pt-2 py-1" ng-if="showRecordsSection==true">
@@ -178,24 +180,24 @@
                                     <tbody>
                                         <tr class="fw-bold">
                                             <td>
-                                                <span class="color-blue">National records</span>
+                                                <span class="color-blue">{{::('dashboardT.nationalRecords'|$translate)}}</span>
                                                 <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
                                                     data-bs-toggle="tooltip" data-html="true" data-container="body"
                                                     ng-if="isAbs"
-                                                    title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant for the implementation of the Protocol.">
+                                                    title="{{::('dashboardT.nationalRecordsAbs'|$translate)}}">
                                                 </span>
                                                 <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
                                                     data-bs-toggle="tooltip" data-html="true" data-container="body"
                                                     ng-if="isBch"
-                                                    title="National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant to the implementation of the Protocol.">
+                                                    title="{{::('dashboardT.nationalRecordsBch'|$translate)}}">
                                                 </span>
                                             </td>
                                             <td class="table_display_none">
-                                                <span id="offlineFormat" class="float-end pe-4">Offline formats</span>
+                                                <span id="offlineFormat" class="float-end pe-4">{{::('dashboardT.offlineFormats'|$translate)}}</span>
                                             </td>
-                                            <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">Published</td>
-                                            <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
-                                            <td style="width: 7%;" class="text-center table_display_none">Requests</td>
+                                            <td style="width: 7%;" id="publishFormat" class="text-center table_display_none">{{::('dashboardT.published'|$translate)}}</td>
+                                            <td style="width: 7%;" class="text-center table_display_none">{{::('dashboardT.drafts'|$translate)}}</td>
+                                            <td style="width: 7%;" class="text-center table_display_none">{{::('dashboardT.requests'|$translate)}}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -209,21 +211,21 @@
                                         <div class="btn-group btn-group-sm p-0 table_width" role="group">
                                             <button disabled type="button"
                                                 class="btn btn-outline-secondary bg-litegrey  p-0"
-                                                title="Quick view latest 10 records" data-bs-toggle="tooltip"><i
+                                                title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"><i
                                                     class="bi bi-chevron-down cursor-pointer p-1"></i></button>
                                             <button disabled type="button"
                                                 class="btn btn-outline-secondary bg-litegrey  p-0"
-                                                title="Add new record" data-bs-toggle="tooltip"><i
+                                                title="{{::('dashboardT.addRecord'|$translate)}}" data-bs-toggle="tooltip"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                             <button disabled type="button"
                                                 class="btn btn-outline-secondary bg-litegrey  p-0"
-                                                title="View list of all records" data-bs-toggle="tooltip"><i
+                                                title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                         </div>
                                     </td>
                                     <td class="table-min-width">
                                         <span translation-url class="ps-2 text-dark text-decoration-none">
-                                            National Focal Point (NFP)</span>
+                                            {{::('dashboardT.nationalFocalPoint'|$translate)}} (NFP)</span>
                                         <span ng-if="schemas['focalPoint'].description" href="#"
                                             class="helpinfoInline fa fa-info-circle color-litegrey"
                                             data-bs-toggle="tooltip" data-html="true"
@@ -241,12 +243,12 @@
                                     <td style="width:21%;" colspan="3" class="text-center table_display_none">
 
                                         <span rel="noopener" ng-if="isAbs" class="ps-2 bold small text-secondary">
-                                            ABS-NFP designation must be submitted offline
+                                            {{::('dashboardT.designationOffline'|$translate)}}
                                         </span>
 
                                         <a ng-if="isBch" class="ps-2 bold small  text-secondary" target="_new"
                                             href="/kb/tags/getting-started/Procedure-for-nominating-National-Focal-Points/619c555d4f1f30000140eef4">
-                                            Explanatory Note on the appointment of NFPs <i
+                                            {{::('dashboardT.explanatoryAppointment'|$translate)}} <i
                                                 class="fa fa-external-link"></i>
                                         </a>
 
@@ -264,21 +266,21 @@
                                         <div class="btn-group btn-group-sm table_width" role="group">
                                             <button disabled type="button"
                                                 class="btn bg-litegrey btn-outline-secondary p-0"
-                                                title="Quick view latest 10 records" data-bs-toggle="tooltip"><i
+                                                title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"><i
                                                     class="bi bi-chevron-down cursor-pointer p-1"></i></button>
                                             <button type="button" class="btn btn-outline-dark p-0"
-                                                ng-click="goto('/register/national-users')" title="Add/update PA"
+                                                ng-click="goto('/register/national-users')" title="{{::('dashboardT.addUpdatePA'|$translate)}}"
                                                 data-bs-toggle="tooltip"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                             <button disabled type="button"
                                                 class="btn btn-outline-secondary bg-litegrey p-0"
-                                                title="View list of all records" data-bs-toggle="tooltip"><i
+                                                title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                         </div>
                                     </td>
                                     <td class="table-min-width">
                                         <span rel="noopener" class="ps-2 text-decoration-none">
-                                            ABS Publishing Authority (PA) </span>
+                                            {{::('dashboardT.ABSPA'|$translate)}} </span>
 
 
                                     </td>
@@ -292,7 +294,7 @@
                                         <a rel="noopener" translation-url class="ps-2 small bold link-secondary"
                                             target="_new"
                                             href="/kb/tags/abs/Designating-or-updating-the-Publishing-Authority-PA-or-National-Authorized-Users-NAUs-/619ea0429b7a7500012450c3">
-                                            More on designating national users <i class="fa fa-external-link"></i>
+                                            {{::('dashboardT.moreOnNationalUsers'|$translate)}} <i class="fa fa-external-link"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -307,17 +309,17 @@
                                     <td class="table_width">
                                         <div class="btn-group bg-white btn-group-sm table_width" role="group">
                                             <button type="button" class="btn btn-outline-dark p-0"
-                                                title="Quick view latest 10 records" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="showTopRecords($event,schema)">
                                                 <i class="bi bi-chevron-down cursor-pointer p-1"
                                                     ng-class="{'bi bi-chevron-down':!topRecords[schema], 'bi bi-chevron-up':topRecords[schema]}"
                                                     aria-hidden="true"></i></button>
                                             <button type="button" class="btn btn-outline-dark p-0"
-                                                title="Add new record" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.addRecord'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoNew($event,schema)"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                             <button type="button" class="btn btn-outline-dark p-0"
-                                                title="View list of all records" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoList($event,schema)"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                         </div>
@@ -379,25 +381,25 @@
                                 <tbody>
                                     <tr class="fw-bold">
                                         <td>
-                                            <span class="color-orange"> Reference records
+                                            <span class="color-orange"> {{::('dashboardT.referenceRecords'|$translate)}}
                                                 <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
                                                     data-bs-toggle="tooltip" data-html="true" data-container="body"
                                                     ng-if="isAbs"
-                                                    title="Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication."></span>
+                                                    title="{{::('dashboardT.referenceRecordsAbs'|$translate)}}"></span>
                                                 <span href="#" class="helpinfoInline fa fa-info-circle color-litegrey"
                                                     data-bs-toggle="tooltip" data-html="true" data-container="body"
                                                     ng-if="isBch"
-                                                    title="Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication."></span>
+                                                    title="{{::('dashboardT.referenceRecordsBch'|$translate)}}"></span>
                                             </span>
                                         </td>
                                         <td class="table_display_none text-end">
-                                            <span id="offlineFormat" class="pe-4">Offline formats</span>
+                                            <span id="offlineFormat" class="pe-4">{{::('dashboardT.offlineFormats'|$translate)}}</span>
                                         </td>
                                         <td style="width: 7%;" id="publishFormat"
                                             class="text-center table_display_none">
-                                            Published</td>
-                                        <td style="width: 7%;" class="text-center table_display_none">Drafts</td>
-                                        <td style="width: 7%;" class="text-center table_display_none">Requests</td>
+                                            {{::('dashboardT.published'|$translate)}}</td>
+                                        <td style="width: 7%;" class="text-center table_display_none">{{::('dashboardT.drafts'|$translate)}}</td>
+                                        <td style="width: 7%;" class="text-center table_display_none">{{::('dashboardT.requests'|$translate)}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -414,17 +416,17 @@
                                 <td class="table_width">
                                     <div class="btn-group align-middle btn-group-sm table_width" role="group">
                                         <button type="button" class="btn btn-outline-dark p-0"
-                                            title="Quick view latest 10 records" data-bs-toggle="tooltip"
+                                            title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
                                             ng-click="showTopRecords($event,schema)">
                                             <i class="bi bi-chevron-down cursor-pointer p-1"
                                                 ng-class="{'bi bi-chevron-down':!topRecords[schema], 'bi bi-chevron-up':topRecords[schema]}"
                                                 aria-hidden="true"></i>
                                             <button type="button" class="btn btn-outline-dark p-0"
-                                                title="Add new record" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.addRecord'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoNew($event,schema)"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                             <button type="button" class="btn btn-outline-dark p-0"
-                                                title="View list of all records" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoList($event,schema)"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                     </div>
@@ -473,7 +475,7 @@
                 </div>
 
                 <div ng-if="::roles.isSchemaUser('contact') || roles.is('Administrator')"  class="pt-3">
-                    <div class="mb-1 border-bottom bold color-darkgrey">Contact records</div>
+                    <div class="mb-1 border-bottom bold color-darkgrey">{{::('dashboardT.contactRecords'|$translate)}}</div>
                     <div class="pb-2">
                         <table class="overview table w-100">
                             <thead></thead>
@@ -482,17 +484,17 @@
                                     <td class="table_width">
                                         <div class="btn-group btn-group-sm table_width" role="group">
                                             <button id="quickViewContact" type="button" class="btn btn-outline-dark p-0"
-                                                title="Quick view latest 10 records" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.quickView'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="showTopRecords($event,'contact')">
                                                 <i class="bi bi-chevron-down p-1 cursor-pointer"
                                                     ng-class="{'bi bi-chevron-down':!topRecords['contact'], 'bi bi-chevron-up':topRecords['contact']}"
                                                     aria-hidden="true"></i></button>
                                             <button id="addNewRecordContact" type="button"
-                                                class="btn btn-outline-dark p-0" title="Add new record"
+                                                class="btn btn-outline-dark p-0" title="{{::('dashboardT.addRecord'|$translate)}}"
                                                 data-bs-toggle="tooltip" ng-click="gotoNew($event,'contact')"><i
                                                     class="bi bi-plus fs-5 fw-bold d-inline-flex"></i></button>
                                             <button id="viewListContact" type="button" class="btn btn-outline-dark p-0"
-                                                title="View list of all records" data-bs-toggle="tooltip"
+                                                title="{{::('dashboardT.viewAllRecords'|$translate)}}" data-bs-toggle="tooltip"
                                                 ng-click="gotoList($event,'contact')"><i
                                                     class="bi bi-list fs-5 fw-bold d-inline-flex"></i></button>
                                         </div>
@@ -552,7 +554,7 @@
             <script type="text/ng-template" trados-translation="true" id="rolesDialog">
                 <div class="modal-header">
                     <h3 class="modal-title">
-                        My Roles
+                        {{::('dashboardT.myRoles'|$translate)}}
                     </h3>
                 </div>
                 <div class="modal-body"> 
@@ -563,7 +565,7 @@
                     </table>  
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Close</button>
+                    <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('dashboardT.close'|$translate)}}</button>
                 </div>
             </script>
 

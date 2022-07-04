@@ -1,8 +1,8 @@
 import _ from 'lodash';
-
+import editRolesDialogT from '~/app-text/views/register/national-user/edit-roles-dialog.json';
     export { default as template } from './edit-roles-dialog.html';
-export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', 'realm', function ($scope, user, manageableRoles, governmentPARole, realm) {
-
+export default ['$scope', 'user', 'manageableRoles', 'governmentPARole', 'realm', 'translationService', function ($scope, user, manageableRoles, governmentPARole, realm, translationService) {
+    translationService.set('editRolesDialogT', editRolesDialogT);
         var _ctrl = this;
 
         _ctrl.user = user;

@@ -2,7 +2,7 @@
 	<div class="container-fluid">
 		<div class="panel panel-default registry-details">
 			<div class="panel-heading">
-				<h2>Organism Registry</h2>
+				<h2>{{::('viewOrgaRegistryT.organismRegistry'|$translate)}}</h2>
 			</div>
 			<div class="panel-body bg-white">
 				<div class="row">
@@ -10,36 +10,32 @@
 						<div ng-class="{'btn-group':deviceSize=='xs'}" class="w-100">
 							<button ng-if="deviceSize=='xs'" type="button" class="w-100 btn btn-default dropdown-toggle"
 								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<i class="fa fa-bars"></i> Registries <span class="caret"></span>
+								<i class="fa fa-bars"></i> {{::('viewOrgaRegistryT.registries'|$translate)}} <span class="caret"></span>
 							</button>
 							<ul ng-class="{'dropdown-menu':deviceSize=='xs','list-group':deviceSize!='xs'}">
-								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>Registries</b></li>
+								<li class="list-group-item  bg-darkgrey" ng-if="deviceSize!='xs'"><b>{{::('viewOrgaRegistryT.registries'|$translate)}}</b></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
-										href="/registries/living-modified-organisms">LMO Registry</a></li>
+										href="/registries/living-modified-organisms">{{::('viewOrgaRegistryT.lmoTitle'|$translate)}}</a></li>
 								<li class="list-group-item active"><a rel="noopener" translation-url
-										href="/registries/organisms">Organism Registry</a></li>
+										href="/registries/organisms">{{::('viewOrgaRegistryT.organismRegistry'|$translate)}}</a></li>
 								<li class="list-group-item bg-litegrey"><a rel="noopener" translation-url
-										href="/registries/genetic-elements">Genetic Element Registry</a></li>
+										href="/registries/genetic-elements">{{::('viewOrgaRegistryT.geneticElementRegistry'|$translate)}}</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-12 col-md-10 ps-3">
 						<p class="p-borders p-bo pt-2">
-							The Organism Registry includes summary information on those organisms that have been registered in the BCH as parental,
-							 recipient or donor organisms. The registry includes links to the records on each organism where further information 
-							 about relevant biological characteristics, including information on taxonomic classification, common name, origin,
-							  centre of origin and centre of genetic diversity can be found. Links to records that reference
-							   the organism are provided at the bottom of each individual record.
+							{{::('viewOrgaRegistryT.organismInfo'|$translate)}}
 						</p>
-						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=organism" >here</a> to perform an in-depth search of all Organism records available in this Registry.</p>
-						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> Loading...</h1>
-						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> Error loading registry records, please try again.</h3></div>
+						<p class="fst-italic py-2 color-black fw-bold">{{::('viewOrgaRegistryT.click'|$translate)}} <a class="text-decoration-underline" rel="noopener" translation-url href="/search?currentPage=1&schema=organism" >{{::('viewOrgaRegistryT.here'|$translate)}}</a> {{::('viewOrgaRegistryT.perform'|$translate)}}</p>
+						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> {{::('viewOrgaRegistryT.loading'|$translate)}}</h1>
+						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> {{::('viewOrgaRegistryT.error'|$translate)}}</h3></div>
 						<div ng-if="!isLoading && !isError">						
 						<div class="row">
 							<div class="col-md-12">
-								<strong>Total records:  <span ng-bind="::numFound" class="text-bold"></span></strong>							
+								<strong>{{::('viewOrgaRegistryT.totalRecords'|$translate)}}  <span ng-bind="::numFound" class="text-bold"></span></strong>							
 								<button type="button" class="btn btn-default float-end" style="margin-right: 5px; margin-bottom: 5px;" ng-click="export()" ng-disabled="!orgaRecords.length || readyForExport">
-									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> Export
+									<i class="fa fa-table" ng-class="{'fa-spin fa-spinner':readyForExport}"></i> {{::('viewOrgaRegistryT.export'|$translate)}}
 								</button>
 							</div>
 						</div>

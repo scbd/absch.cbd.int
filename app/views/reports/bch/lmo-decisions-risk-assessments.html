@@ -9,8 +9,8 @@
 		</div>
 		<div class="register-content-content " style="margin: 10px;">
 			<div style="border: 1px solid #eee;padding: 15px;">
-                <strong>Search LMO</strong>
-                <angucomplete-alt id="lmos" placeholder="Search LMOs" pause="400" selected-object="newLmo" remote-api-handler="loadLMos" 
+                <strong>{{::('lmoDecisionsRiskAssessmentsT.searchLMO'|$translate)}}</strong>
+                <angucomplete-alt id="lmos" placeholder="{{::('lmoDecisionsRiskAssessmentsT.searchLMOs'|$translate)}}" pause="400" selected-object="newLmo" remote-api-handler="loadLMos" 
                     data-field="suggestions" title-field="title" description-field="summary" 
                     input-class="form-control form-control-small"></angucomplete-alt>
             </div>
@@ -22,13 +22,13 @@
 
                 <ul class="nav nav-tabs pt-3 pb-1">
                     <li role="presentation" >
-                        <a class="nav-link" ng-class="{'active' : tab=='lmo'}" rel="noopener" data-bs-toggle="tab" href="#lmo" ng-click="changeTab('lmo')">LMO Information</a>
+                        <a class="nav-link" ng-class="{'active' : tab=='lmo'}" rel="noopener" data-bs-toggle="tab" href="#lmo" ng-click="changeTab('lmo')">{{::('lmoDecisionsRiskAssessmentsT.lmoInformation'|$translate)}}</a>
                     </li>
                     <li role="presentation" >
-                        <a class="nav-link" ng-class="{'active' : tab=='decisions'}" rel="noopener" data-bs-toggle="tab" href="#decisions" ng-click="changeTab('decisions')">Decisions on the LMO</a>
+                        <a class="nav-link" ng-class="{'active' : tab=='decisions'}" rel="noopener" data-bs-toggle="tab" href="#decisions" ng-click="changeTab('decisions')">{{::('lmoDecisionsRiskAssessmentsT.decisions'|$translate)}}</a>
                     </li>
                     <li role="presentation" >
-                        <a class="nav-link" ng-class="{'active' : tab=='risk-assessments'}" rel="noopener" data-bs-toggle="tab" href="#risk-assessments" ng-click="changeTab('risk-assessments')">Risk Assessments</a>
+                        <a class="nav-link" ng-class="{'active' : tab=='risk-assessments'}" rel="noopener" data-bs-toggle="tab" href="#risk-assessments" ng-click="changeTab('risk-assessments')">{{::('lmoDecisionsRiskAssessmentsT.riskAssessments'|$translate)}}</a>
                     </li>
                 </ul>
                 <div class="tab-content">

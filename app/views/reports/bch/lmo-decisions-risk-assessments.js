@@ -7,12 +7,13 @@ import 'views/directives/block-region-directive';
 import 'views/reports/bch/lmo-decisions';
 import 'views/reports/bch/risk-assessments';
 import 'views/forms/view/record-loader.directive'; ;
+import lmoDecisionsRiskAssessmentsT from '~/app-text/views/reports/bch/lmo-decisions-risk-assessments.json';
 
 export { default as template } from './lmo-decisions-risk-assessments.html';
 
-export default ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout',
-	function($scope, $routeParams, $route, solr, searchService, $timeout) {
-
+export default ['$scope', '$routeParams', '$route', 'solr', 'searchService', '$timeout', 'translationService',
+	function ($scope, $routeParams, $route, solr, searchService, $timeout, translationService) {
+		translationService.set('lmoDecisionsRiskAssessmentsT', lmoDecisionsRiskAssessmentsT);
         $scope.tab = $routeParams.tab;
 		$scope.identifier = $route.current.params.documentId;		
 		

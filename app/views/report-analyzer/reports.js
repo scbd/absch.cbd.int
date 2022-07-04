@@ -2,13 +2,15 @@
 import moment from 'moment';
 import 'views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
+import reportsT from '~/app-text/views/report-analyzer/reports.json';
 
     export { default as template } from './reports.html'
-    export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm',
-    function($scope, $location, commonjs, $q, $http, realm) {
+export default ['$scope', '$location', 'commonjs', '$q', '$http', 'realm', 'translationService',
+    function ($scope, $location, commonjs, $q, $http, realm, translationService) {
         $scope.isABS = realm.is('ABS');
         $scope.isBCH = realm.is('BCH');
         var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
+        translationService.set('reportsT', reportsT); 
         $scope.overview = {};
             //========================================
             //

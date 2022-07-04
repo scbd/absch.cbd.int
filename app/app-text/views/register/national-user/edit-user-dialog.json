@@ -1,0 +1,13 @@
+{
+    "newUser": "New user",
+    "contactDetails": "contact details",
+    "nominee": "Please fill the following basic contact details information of the nominee",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "organization": "Organization",
+    "email": "Email",
+    "mandatory": "This field is mandatory",
+    "emailIncomplete": "Email is invalid or incomplete",
+    "cancel": "cancel",
+    "next": "Next"
+}
