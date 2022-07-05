@@ -1,7 +1,7 @@
 <template>
     <div class="latest-faq">
         <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@scbd/ckeditor5-build-inline-full@24.0.0/build/ckeditor.css">
-				   <h4>FAQs</h4>
+				   <h4>{{ $t("faqs") }}</h4>
 						<hr>
 						<div class="loading" v-if="loading"><i class="fa fa-cog fa-spin fa-lg" ></i> {{ $t("loading") }}...</div>
 						<ul v-for="title in help">
