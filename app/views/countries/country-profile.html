@@ -75,10 +75,10 @@
                             
                 </div>
             </div>
-            <div class="col-12" ng-if="countryProfile && countryProfile.profile">
+            <div class="col-12 mt-3" ng-if="countryProfile && countryProfile.profile">
                 <div class="card bg-white cp-header"> 
                     <legend class="ps-3">{{::('countryProfileT.addIno'|$translate)}}</legend>
-                    <span class="p-3" ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
+                    <span class="ps-3 mb-3" ng-bind-html="countryProfile.profile|lstring:locale|toTrusted"></span> 
                 </div>
             </div>
         </div>
