@@ -7,6 +7,7 @@ import 'services/main';
 import 'views/register/directives/register-top-menu';
 import 'views/register/user-preferences/user-alerts';
 import 'components/scbd-angularjs-services/main';
+import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.json';
 
     app.directive("userAlerts", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
 
@@ -21,8 +22,8 @@ import 'components/scbd-angularjs-services/main';
                 collectionFilter: '@?'
             },
             link: function ($scope, element, attrs) {},
-            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService','solr','locale',
-                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale) {
+            controller: ['$rootScope', '$scope', '$http', 'IGenericService', 'realm', '$timeout', '$location', 'roleService', '$route', '$element', 'localStorageService', 'solr', 'locale', 'translationService',
+                function ($rootScope, $scope, $http, IGenericService, realm, $timeout, $location, roleService, $route, $element, localStorageService, solr, locale, translationService) {
                     $scope.realm = realm;
                     var systemSearches = [];
                     $scope.user = $rootScope.user;
@@ -32,7 +33,7 @@ import 'components/scbd-angularjs-services/main';
                     $scope.isABS = realm.is('ABS');
                     $scope.skipKeywordsFilter = true;
                     $scope.skipTextFilter = true;
-                
+                    translationService.set('userAlertsT', userAlertsT); 
                     if ($scope.user?.government) {
                         if($scope.isABS){
                             systemSearches = [{
