@@ -1,7 +1,8 @@
+import angular from 'angular-flex';
 import app from '~/app'
 import 'angular-animate';
 
-app.directive("appLoading", ['$animate', '$location', function ($animate, $location) {
+app.directive("appLoading", ['$animate', '$location', '$window', function ($animate, $location, $window) {
     return ({
         template:'',
         restrict: "E",
@@ -21,20 +22,34 @@ app.directive("appLoading", ['$animate', '$location', function ($animate, $locat
             }
             if(queryString && queryString.embed){
                 $('body').addClass('embed');
+
+                let windowHeight;
+                let iframeOriginData;
+                function sendIframeCommunication(){
+                    const height = $(window.scbdEmbedData.selector).height()+50;
+                    if(windowHeight != height){
+                        windowHeight = height;
+                        const data = {
+                            ...iframeOriginData,
+                            height  : windowHeight,
+                            type    : 'setClientHeight'
+                        };
+                        window.parent.postMessage(JSON.stringify(data), iframeOriginData);
+                    }
+                }
                 window.addEventListener('message', (evt)=>{
                     if(evt.data){
                         const data = JSON.parse(evt.data);
                         if(data.type == 'getClientHeight' && window.scbdEmbedData){
-
-                            console.log($(window.scbdEmbedData.selector));
-                            var height = $(window.scbdEmbedData.selector).height()+50;
-                            data.height = height;
-                            data.type = 'setClientHeight';
-                            window.parent.postMessage(JSON.stringify(data), evt.origin);
+                            iframeOriginData = data;
+                            sendIframeCommunication();
+                            resize_ob.observe(document.querySelector("#wrapper"));
                         }
                     }
-                });
-                
+                });                
+                const resize_ob = new ResizeObserver(function(entries) {
+                    sendIframeCommunication();
+                });                
             }
         }
     });    

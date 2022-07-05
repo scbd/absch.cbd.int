@@ -150,8 +150,12 @@ body{
 
 body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
 body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer,
-body.embed .mastHead.bg-bch, body.embed .mastHead.bg-abs{
+body.embed .mastHead.bg-bch, body.embed .mastHead.bg-abs,
+body.embed #search-new #searchResult .search-tabs{
     display: none!important
+}
+body.embed #search-new #searchResult .tab-content pagination.bottom-pagination nav{
+    display: block!important;
 }
 body.embed {
     margin: 3px!important;
