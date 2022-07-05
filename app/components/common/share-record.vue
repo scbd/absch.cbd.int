@@ -238,7 +238,6 @@ export default {
       if (this.sharedData.storageType == "chm-country-profile") {
         this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
       }
-      console.log(this.sharedData);
     },
     closeDialog() {
       this.sharedData = {
