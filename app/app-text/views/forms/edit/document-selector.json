@@ -1,7 +1,7 @@
 {
     "addRecord": "Add record",
     "addRecords": "Add record(s)",
-    "noRecords.": "No records have been linked.",
+    "noRecords": "No records have been linked.",
     "linkedRecords": "linked records.",
     "pleaseSelect": "Please select from the list of published records below:",
     "pleaseSelectInfo": "If the record is not listed, please create a new record.",
@@ -15,7 +15,7 @@
     "type": "Type",
     "title": "Title",
     "uniqueIdentifier": "Unique Identifier",
-    "smmary": "Smmary",
+    "summary": "Summary",
     "recordUid": "record uid",
     "metaInformation": "Meta Information",
     "noRecordSelected": "You have not selected records.",

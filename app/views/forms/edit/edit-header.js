@@ -2,14 +2,15 @@ import app from  'app';
 import template from 'text!./edit-header.html';
 import 'angular-joyride';
 import joyRideText from '~/app-text/views/forms/edit/submit-intro-joyride-tour.json';
+import editHeaderT from '~/app-text/views/forms/edit/edit-header.json';
 
-app.directive('editHeader', ['joyrideService','$timeout', function(joyrideService, $timeout){
+app.directive('editHeader', ['joyrideService', '$timeout', 'translationService', function (joyrideService, $timeout, translationService){
     return {
         restrict   : "E",
 		template: template,
 		replace    : true,
         link:function($scope, $element){
-
+            translationService.set('editHeaderT', editHeaderT);
             $scope.tour = function(){
                 $scope.tourOn = true;
                 var joyride = joyrideService;
