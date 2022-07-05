@@ -18,15 +18,19 @@
                   <a href="#" class="icon share-link" v-bind:class="{ selected: sharedData.type == 'link' }" @click="loadTabData('link')" :disabled="loading">
                     <div class="tooltip">{{ $t("link") }}</div>
                     <span><i class="bi bi-link"></i></span>
+                    <br/>
+                    <span class="button-text">{{ $t("link") }}</span>
                   </a>
                   <a href="#" class="icon embed" v-bind:class="{selected: sharedData.type == 'embed'}" @click="loadTabData('embed')" :disabled="loading">
                     <div class="tooltip">{{ $t("embed") }}</div>
-                    <span><i class="bi bi-code-slash"></i></span>
+                    <span><i class="bi bi-code-slash"></i></span><br/>
+                    <span class="button-text">{{ $t("embed") }}</span>
                   </a>
                   <a href="#" class="icon email" v-bind:class="{
                       selected: sharedData.type == 'email'}" @click="loadTabData('email')" :disabled="loading">
                     <div class="tooltip">{{ $t("email") }}</div>
-                    <span><i class="bi bi-envelope"></i></span>
+                    <span><i class="bi bi-envelope"></i></span><br/>
+                    <span class="button-text">{{ $t("email") }}</span>
                   </a>
                 </div>
               </div>
@@ -66,12 +70,12 @@
                       <input  type="textbox" style="height:0px;width:0px" class="" id="shareLink" aria-label="embed code" 
                         v-model="sharedData[sharedData.type].link" readonly disabled />                            
                     </p>
-                    <button class="btn btn-primary" @click="copy('shareLink')"
+                    <button class="btn btn-primary float-right" @click="copy('shareLink')"
                       data-bs-toggle="tooltip" data-bs-placement="top" :title="$t('copyToClipboard')" :data-original-title="$t('copyToClipboard')">
                       {{$t('Copy')}}
                     </button>
                   </div>
-                  <button class="btn btn-primary" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
+                  <button class="btn btn-primary float-end" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
                     :disabled="loading" v-bind:class="{ disabled: loading }">
                       <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       <span v-if="loading" class="visually-hidden">{{$t('loading')}}...</span>
@@ -80,7 +84,7 @@
                 </div>
               </div>
               <div class="row" v-if="sharedData.type == 'email'">
-                <div class="col-md-12 " v-if="!sharedData[sharedData.type].emails || !isValidEmail">
+                <div class="col-md-12 " v-if="!sharedData[sharedData.type].emails">
                   <div class="alert alert-info">
                     {{$t('emailInfo')}}
                   </div>
@@ -91,10 +95,11 @@
                        <label for="inputPassword2">{{$t('emails')}}</label>
                        <input type="email" class="form-control"
                         multiple pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$"
-                        v-model="sharedData[sharedData.type].emails" :placeholder="$t('emails')"/>                      
+                        v-model="sharedData[sharedData.type].emails" :placeholder="$t('emails')"/> 
+                        <div style="font-size: small;color: black;">{{$t('emailInstructions')}}</div>                     
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary float-right" @click.prevent="shareLinkMail()" :disabled="loading || !sharedData[sharedData.type].emails" >
+                      <button class="btn btn-primary float-end" @click.prevent="shareLinkMail()" :disabled="loading || !sharedData[sharedData.type].emails" >
                         {{$t('send')}}
                       </button>
                     </div>
@@ -103,32 +108,34 @@
               </div>
 
               <div class="row" v-if="sharedData.type == 'embed'">
-                <div class="col-12 " v-if="!sharedData[sharedData.type].domain || !isValidDomain" >
+                <div class="col-md-12 " v-if="!sharedData[sharedData.type].domain" >
                   <div class="alert alert-info">
                     {{$t('domainInfo')}}
                   </div>
                 </div>
-                <form class="row g-3">
-                  <div class="col-12">
-                    <label for="inputPassword2">{{$t('domain')}}</label>
-                    <input v-model="sharedData[sharedData.type].domain"
-                      type="url" :placeholder="$t('urlEg')" class="form-control float-right" @change="onDomainChange" />
-                  </div>
-                  <div class="col-12">
-                    <!-- || !isValidDomain -->
-                    <button
-                      class="btn btn-primary"
-                      @click.prevent="generateEmbedCode()"
-                      :disabled="loading || !sharedData[sharedData.type].domain"
-                      v-bind:class="{
-                        disabled:
-                          loading || !sharedData[sharedData.type].domain || !isValidDomain,
-                      }"
-                    >
-                      {{$t('generateCode')}}
-                    </button>
-                  </div>
-                </form>
+                <div class="col-md-12 ">
+                  <form class="row g-3">
+                    <div class="col-12">
+                      <label for="inputPassword2">{{$t('domain')}}</label>
+                      <input v-model="sharedData[sharedData.type].domain"
+                        type="url" :placeholder="$t('urlEg')" class="form-control float-right" @change="onDomainChange" />
+                    </div>
+                    <div class="col-12">
+                      <!-- || !isValidDomain -->
+                      <button
+                        class="btn btn-primary float-end"
+                        @click.prevent="generateEmbedCode()"
+                        :disabled="loading || !sharedData[sharedData.type].domain"
+                        v-bind:class="{
+                          disabled:
+                            loading || !sharedData[sharedData.type].domain || !isValidDomain,
+                        }"
+                      >
+                        {{$t('generateCode')}}
+                      </button>
+                    </div>
+                  </form>
+                </div>
                 <div class="row g-3" v-if="sharedData[sharedData.type].code">
                     <div class="col-12">
                         <div class="input-group mb-3">                            
@@ -145,7 +152,7 @@
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-secondary"
+              class="btn btn-secondary float-end"
               @click="modal.hide()"
             >
               {{$t('cancel')}}
@@ -559,5 +566,10 @@ export default {
 .wrapper code{
   word-break: keep-all;
   white-space: normal;
+}
+.wrapper .button-text{
+  font-size: small;
+  margin: 0.7em!important;
+  color: black!important;;
 }
 </style>
