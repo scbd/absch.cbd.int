@@ -42,6 +42,7 @@ body a:focus {
 
 /* ToDo:  */
 body {
+    scrollbar-width: thin;
     min-height: 800px;
     font-family: "Helvetica Neue", Helvetica, sans-serif, Trebuchet MS;
     text-rendering: optimizeLegibility;
