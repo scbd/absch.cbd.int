@@ -4,17 +4,17 @@
         <li id="viewType">
             <a rel="noopener" href="#" class="cursor-pointer text-decoration-none">
                 <select class="fw-bold" style="border:0;color:#555!important;" ng-model="viewType" ng-change="viewTypeChange(viewType);">
-                    <option ng-value="'default'">DEFAULT VIEW</option>
-                    <option ng-value="'list'">LIST</option>
-                    <option ng-value="'group'">GROUP</option>
-                    <option ng-value="'matrix'">MATRIX</option>
+                    <option ng-value="'default'">{{::('resultViewOptionsT.defaultView'|$translate)}}</option>
+                    <option ng-value="'list'">{{::('resultViewOptionsT.list'|$translate)}}</option>
+                    <option ng-value="'group'">{{::('resultViewOptionsT.group'|$translate)}}</option>
+                    <option ng-value="'matrix'">{{::('resultViewOptionsT.matrix'|$translate)}}</option>
                 </select>
                 <i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
             </a>
         </li>        
         <li id="sortBy">
             <a rel="noopener" class="cursor-pointer text-decoration-none" ng-click="showSortDialog()">
-                Sort
+                {{::('resultViewOptionsT.sort'|$translate)}}
                 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> 
             </a>
         </li>    
@@ -25,7 +25,7 @@
       
         <li id="exportRecords" ng-if="viewType=='matrix'">
             <a rel="noopener" class="cursor-pointer text-decoration-none" ng-click="onMatrixExportClick()">
-                Export
+                {{::('resultViewOptionsT.export'|$translate)}}
                 <i class="fa fa-download" aria-hidden="true"></i> 
             </a>
         </li>
@@ -38,7 +38,7 @@
         <script type="text/ng-template" trados-translation="true" id="sortByDialog">
             <div class="modal-header">
                 <strong class="modal-title">
-                    Sort by fields (select one or more)
+                    {{::('resultViewOptionsT.sortByField'|$translate)}}
                 </strong>
             </div>
             <div class="modal-body">		
@@ -63,38 +63,37 @@
                         </li>
                     </div>  
                     <div ng-if="selectedFields.length">  
-                        <div>Sort By </div>
+                        <div>{{::('resultViewOptionsT.sortBy'|$translate)}} </div>
                         <ul class="pagination">                         
                             <li ng-repeat-start="field in selectedFields track by $index">                                                             
                                 <span ng-bind="field.title + ' (' + field.direction + ')'"></span>
                             </li>
                             <li ng-repeat-end>
-                                <span ng-if="!$last">&nbsp; then by&nbsp;</span>
+                                <span ng-if="!$last">&nbsp; {{::('resultViewOptionsT.thenBy'|$translate)}}&nbsp;</span>
                             </li>
                         </ul> 
                     </div>
                     <div  ng-if="selectedFields.length && selectedFields[0].field=='relevance'">
                         <div class="alert alert-info">
-                            <strong>Relevance:</strong>
-                            Relevancy ranking is the process of sorting the document results so that those documents 
-                            which are most likely to be relevant to your query are shown at the top.
+                            <strong>{{::('resultViewOptionsT.relevance'|$translate)}}</strong>
+                                {{::('resultViewOptionsT.relevanceInfo'|$translate)}}
                             <br/>
-                            <strong>Relevance cannot be used with other fields.<strong>
+                            <strong>{{::('resultViewOptionsT.relevanceLink'|$translate)}}<strong>
                         </div>
                     </div>
                     
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-                <button type="button" class="btn btn-primary float-start" ng-click="apply()"  ng-disabled="!selectedFields.length">Apply</button>
+                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('resultViewOptionsT.cancel'|$translate)}}</button>
+                <button type="button" class="btn btn-primary float-start" ng-click="apply()"  ng-disabled="!selectedFields.length">{{::('resultViewOptionsT.apply'|$translate)}}</button>
             </div>
         </script>
 
         <script type="text/ng-template" trados-translation="true" id="groupByDialog">
             <div class="modal-header"style="padding:0px">
                 <h3 class="modal-title">
-                    Group by fields (select one or more)
+                    {{::('resultViewOptionsT.groupByField'|$translate)}}
                 </h3>
             </div>
             <div class="modal-body">		
@@ -108,27 +107,27 @@
                         </li>
                     </div>
                     <div ng-if="selectedFields.length">  
-                        <div>Group By </div>
+                        <div>{{::('resultViewOptionsT.groupBy'|$translate)}} </div>
                         <ul class="pagination">                         
                             <li ng-repeat-start="selected in selectedFields track by $index">                                                             
                                 <span ng-include="'groupByFields'" onload="field=selected.field"></span>
                             </li>
                             <li ng-repeat-end>
-                                <span ng-if="!$last"> &nbsp; then by &nbsp;</span>
+                                <span ng-if="!$last"> &nbsp; {{::('resultViewOptionsT.thenBy'|$translate)}} &nbsp;</span>
                             </li>
                         </ul> 
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()">Cancel</button>
-                <button type="button" class="btn btn-primary float-start" ng-click="apply()" ng-disabled="!selectedFields.length">Apply</button>
+                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()">{{::('resultViewOptionsT.cancel'|$translate)}}</button>
+                <button type="button" class="btn btn-primary float-start" ng-click="apply()" ng-disabled="!selectedFields.length">{{::('resultViewOptionsT.apply'|$translate)}}</button>
             </div>
         </script>
         <script type="text/ng-template"  trados-translation="true" id="groupByFields">
             <span ng-switch="field">
-                <span ng-switch-when="government">Government</span>
-                <span ng-switch-when="schema">Record Type</span>
+                <span ng-switch-when="government"> {{::('resultViewOptionsT.government'|$translate)}}</span>
+                <span ng-switch-when="schema"> {{::('resultViewOptionsT.recordType'|$translate)}}</span>
                 <!-- <span ng-switch-when="submissionYear">Submission year</span> -->
             </span>
         </script>

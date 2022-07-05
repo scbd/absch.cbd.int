@@ -1,7 +1,8 @@
 import app from 'app';
 import template from 'text!./national-filter.html';
+import nationalFilterT from '~/app-text/views/search/search-filters/national-filter.json';
 
-    app.directive('nationalFilter', function($timeout) {
+app.directive('nationalFilter', ['$timeout', 'translationService', function ($timeout, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -10,7 +11,7 @@ import template from 'text!./national-filter.html';
             template: template, 
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-               
+               translationService.set('nationalFilterT', nationalFilterT);
                $scope.nf_searchFilters = searchDirectiveCtrl.getSearchFilters('schema', function(item){
                    return item.otherType == 'national'
                });
@@ -23,5 +24,5 @@ import template from 'text!./national-filter.html';
    
             }//link
         };
-    });
+    }]);
 

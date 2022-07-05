@@ -3,8 +3,9 @@ import template from 'text!./country-filter.html';
 import _ from 'lodash';
 import 'services/main';
 import alphabets from '~/app-text/views/search/alphabets.json';
+import countryFilterT from '~/app-text/views/search/search-filters/country-filter.json';
 
-    app.directive('countryFilter', ['locale', function(locale) {
+app.directive('countryFilter', ['locale', 'translationService', function (locale, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -13,7 +14,7 @@ import alphabets from '~/app-text/views/search/alphabets.json';
             template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-               
+               translationService.set('countryFilterT', countryFilterT);
                $scope.cf_countries = searchDirectiveCtrl.getSearchFilters("country");
                $scope.cf_countryFilter = null;
                $scope.cf_partyFilter = null;

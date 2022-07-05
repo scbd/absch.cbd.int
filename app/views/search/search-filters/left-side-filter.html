@@ -4,7 +4,7 @@
             
        </style>
         <div style="border-bottom: 1px solid #eee">
-             <h5 class="bold">SUB-FILTERS</h5> 
+             <h5 class="bold">{{::('leftSideFilterT.subFilter'|$translate)}}</h5> 
         </div>
         <ul class="list-group">
             <li class="list-group-item no-left-right-bottom-border" style=" cursor: pointer;padding:0px;padding-top:0px; margin-bottom:20px;"
@@ -18,9 +18,9 @@
                             </button>
                             <ul class="dropdown-menu search-filter-settings" aria-labelledby="dropdownMenu1">                            
                                 <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema)">
-                                    <i class="bi bi-x-circle-fill" aria-hidden="true"></i> Clear all filters</a></li>
+                                    <i class="bi bi-x-circle-fill" aria-hidden="true"></i> {{::('leftSideFilterT.clearAllFilters'|$translate)}}</a></li>
                                 <li><a rel="noopener" href="#" ng-click="removeSchema(schema)">
-                                    <i class="fa fa-trash" aria-hidden="true"></i> Remove</a></li>
+                                    <i class="fa fa-trash" aria-hidden="true"></i> {{::('leftSideFilterT.remove'|$translate)}}</a></li>
                             </ul>
                         </div>
                         <div class="bold color-white p-2" 
@@ -41,22 +41,22 @@
                             </button>
                             <ul class="dropdown-menu search-filter-settings">
                                 <li><a rel="noopener" href="#" ng-if="!filter.disabled" ng-click="filter.disabled=true;recordSelected();">
-                                    <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a></li>
+                                    <i class="fa fa-eye" aria-hidden="true"></i> {{::('leftSideFilterT.temporarilyDisable'|$translate)}}</a></li>
                                 <li><a rel="noopener" href="#" ng-if="filter.disabled" ng-click="filter.disabled=false;recordSelected();">
-                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a></li>
+                                    <i class="fa fa-eye-slash" aria-hidden="true"></i> {{::('leftSideFilterT.reEnable'|$translate)}}</a></li>
                                 <li><a rel="noopener" href="#" ng-if="!filter.excludeResult" ng-click="filter.excludeResult=true;recordSelected();">
-                                    <i class="fa fa-minus-square-o" aria-hidden="true"></i> Exclude results</a></li>
+                                    <i class="fa fa-minus-square-o" aria-hidden="true"></i> {{::('leftSideFilterT.excludeResults'|$translate)}}</a></li>
                                 <li><a rel="noopener" href="#" ng-if="filter.excludeResult" ng-click="filter.excludeResult=false;recordSelected();">
-                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i> Include results</a></li>
+                                    <i class="fa fa-plus-square-o" aria-hidden="true"></i> {{::('leftSideFilterT.includeResults'|$translate)}}</a></li>
                                 <li><a rel="noopener" href="#" ng-click="clearFilterOptions(schema, filter);filter.disabled=false;filter.excludeResult=false;">
-                                    <i class="bi bi-x-circle-fill" aria-hidden="true"></i> Clear filters</a></li>
+                                    <i class="bi bi-x-circle-fill" aria-hidden="true"></i> {{::('leftSideFilterT.clearFilters'|$translate)}}</a></li>
                             </ul>
                         </div>
                         <div >
                             <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='freeText' && filter.type!='yesNo'" class="color-darkgrey not" style="cursor: pointer;" 
                                 ng-click="showFilterDialog(schema, filter, searchResult.data.facets.keywords)" ng-class="{'disabled strikeout':filter.disabled}">
                                 <div ng-class="{'exclude-filter':filter.excludeResult}" class="overflow-auto">
-                                    <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                    <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
                                     <strong ng-bind="filter.title"></strong>
                                     <span class="fa fa-chevron-right float-end"></span>    
                                     <!-- <i class="fa fa-chevron-right float-end" style="margin-top:5px" aria-hidden="true"></i>           -->
@@ -64,27 +64,27 @@
                             </div>
                             <div ng-if="filter.type=='date'" >
                                 <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
-                                <button type="button" ng-if="filter.filterValue" class="btn btn-xs btn-default float-end" ng-click="clearFilterDate(filter)">clear</button>
+                                <button type="button" ng-if="filter.filterValue" class="btn btn-xs btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
                                 <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
                             </div>
                             <div ng-if="filter.type=='freeText'">
                                     <label ng-bind="filter.title" ng-if="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
                                 <form ng-submit="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group" >
-                                    <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="Search in {{schema | schemaNamePlural}}"
+                                    <input type="text" ng-model="filter.searchKeyword" class="form-control" placeholder="{{::('leftSideFilterT.searchIn'|$translate)}} {{schema | schemaNamePlural}}"
                                         style="font-weight:bold;" ng-disabled="filter.disabled">
                                     <span type="submit" style="cursor:pointer" ng-click="saveSchemaFreeText(filter, filter.searchKeyword)" class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></span>
                                 </form>
                             </div>
                             <div ng-if="filter.type=='yesNo'" >
                                 <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
-                                <button type="button" ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined" class="btn btn-xs btn-default float-end" ng-click="clearFilterDate(filter)">clear</button>
-                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> Yes </label>
-                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> No </label>
+                                <button type="button" ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined" class="btn btn-xs btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
+                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> {{::('leftSideFilterT.yes'|$translate)}} </label>
+                                <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> {{::('leftSideFilterT.no'|$translate)}} </label>
                             </div>
                             <div ng-if="filter.type=='solrRecords'">
                                 <div block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">                                    
                                     <div ng-class="{'exclude-filter':filter.excludeResult}">
-                                        <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
+                                        <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
                                         <div document-selector identifier-without-revision="true" ng-model="filter.selectedItems" question="searchResult" type="checkbox"
                                             on-build-query="onBuildQuery(searchText, tab, filter)" on-records-fetched="onRecordsFetched(data, query, filter)"
                                             lookup-field={{::filter.query.lookupField}} skip-sync-documents="true" instance-id="{{filter.$$hashKey}}"
@@ -97,7 +97,7 @@
                                             </select-records>
                                             <selected-records>
                                                 <div ng-if="$parent.isLoadingSelectedRawDocuments">
-                                                    <i class="fa fa-clog fa-spin"></i> loading...
+                                                    <i class="fa fa-clog fa-spin"></i> {{::('leftSideFilterT.loading'|$translate)}}
                                                 </div>
                                                 <div style="height:1px;width:0px"></div>
                                                 <div  ng-repeat="option in $parent.selectedRawDocuments" ng-click="removeSchemaFilters(option, filter);$parent.$parent.removeDocument(option);" 
@@ -118,8 +118,8 @@
                             </div>
                             <div ng-if="filter.type!='solrRecords' && filter.type!='date' && filter.type!='yesNo'" block-region activate="filter.disabled" skip-loading-icon="true" style="position: relative;">
                                 <div ng-class="{'exclude-filter':filter.excludeResult}">
-                                    <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">NOT</span>
-                                    <span class="label label-info float-end" ng-if="filter.searchRelated && hasItems(filter.selectedItems)">Search in Relation</span>
+                                    <span ng-if="filter.excludeResult" class="label label-danger" style="border-bottom: 1px solid;">{{::('leftSideFilterT.not'|$translate)}}</span>
+                                    <span class="label label-info float-end" ng-if="filter.searchRelated && hasItems(filter.selectedItems)">{{::('leftSideFilterT.searchRelation'|$translate)}}</span>
                                     <div  ng-repeat="option in filter.selectedItems" ng-click="removeSchemaFilters(option, filter)" 
                                         class="list-group-item-expand filter" role="button" id="{{option.identifier}}"
                                         data-bs-toggle="tooltip" data-title="{{option.title|lstring:locale}}" data-container="body" data-placement="right">                            
@@ -154,7 +154,7 @@
                 <div class="row">            
                     <div class="col-md-12">
                         <label class="float-end" ng-if="filter.relatedField">
-                            <input type="checkbox" ng-model="searchRelated"> Search related
+                            <input type="checkbox" ng-model="searchRelated"> {{::('leftSideFilterT.searchRelated'|$translate)}}
                         </label>
                         <km-term-check ng-model="treeViewSelected" terms="treeOptions()" binding-type="term[]" 
                             enable-search="false" before-search="onBeforeSearch(keyword)" tabular-shape="false">
@@ -164,8 +164,8 @@
             </div>
         </div>
         <div class="modal-footer" style=" background:#f0f0f0">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary float-start" ng-click="applyFilter()">Apply</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('leftSideFilterT.cancel'|$translate)}}</button>
+            <button type="button" class="btn btn-primary float-start" ng-click="applyFilter()">{{::('leftSideFilterT.apply'|$translate)}}</button>
         </div>
     </script>
 </div>

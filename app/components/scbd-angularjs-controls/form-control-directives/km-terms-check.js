@@ -5,12 +5,14 @@ import template from 'text!./km-terms-check.html';
 import Enumerable from 'linqjs';
 import _ from 'lodash';
 import 'components/scbd-angularjs-services/main'; ;
+import kmTermCheckT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-term-check.json';
 
     //============================================================
     //
     //
     //============================================================
-    app.directive('kmTermCheck',["$q", "Thesaurus", '$timeout', 'locale', function($q, thesaurus, $timeout, locale) {
+app.directive('kmTermCheck', ["$q", "Thesaurus", '$timeout', 'locale', 'translationService',
+    function ($q, thesaurus, $timeout, locale, translationService ) {
         return {
             restrict: 'EAC',
             template: template,
@@ -27,7 +29,7 @@ import 'components/scbd-angularjs-services/main'; ;
                 beforeSearch: '&?'
             },
             link: function($scope, $element, $attr, ngModelController) {
-
+                translationService.set('kmTermCheckT', kmTermCheckT);
                 var hasNarrowerTerms = false;
                 $scope.otherTermIdentifier = '5B6177DD-5E5E-434E-8CB7-D63D67D5EBED';
                 $scope.selectedItems = null;

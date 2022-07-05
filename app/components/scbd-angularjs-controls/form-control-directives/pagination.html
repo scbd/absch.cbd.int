@@ -3,17 +3,17 @@
     <ul class="pagination">
         <li class="page-item d-none d-lg-inline-block disabled pagination-page-count">
             <a rel="noopener" class="page-link" disabled>
-                <strong>Page <span ng-bind="currentPage"></span> of <span ng-bind="pageCount"></span></strong>
+                <strong>{{::('paginationT.page'|$translate)}} <span ng-bind="currentPage"></span> {{::('paginationT.of'|$translate)}} <span ng-bind="pageCount"></span></strong>
             </a>
         </li>
         <li ng-class="{'disabled': currentPage-1 == 0}" class="page-item d-none d-sm-inline-block pagination-btn-first">
             <a rel="noopener" class="page-link" ng-disabled="currentPage-1 == 0" 
-                translation-url href ng-click="currentPage-1 > 0 && actionSetPage(1)">« First</a>
+                translation-url href ng-click="currentPage-1 > 0 && actionSetPage(1)">« {{::('paginationT.first'|$translate)}}</a>
         </li>
         <li ng-class="{'disabled': currentPage-1 == 0}" class="page-item pagination-btn-prev">
             <a rel="noopener" class="page-link" ng-disabled="currentPage-1 == 0" 
                 translation-url href ng-click="currentPage-1 > 0 && actionSetPage(currentPage-1)">‹ 
-                <span class="d-none d-sm-inline-block">Prev</span></a>
+                <span class="d-none d-sm-inline-block">{{::('paginationT.prev'|$translate)}}</span></a>
         </li>
         <li ng-repeat="n in range(pageCount)" ng-class="{active: n+1 == currentPage}" ng-click="actionSetPage(n+1)" class="page-item pagination-btn-page-number">
         <a rel="noopener"class="page-link" translation-url href ng-bind="n+1"></a>
@@ -21,29 +21,29 @@
         <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}" class="page-item pagination-btn-next">
             <a rel="noopener" class="page-link" ng-disabled="currentPage-1 >= pageCount - 1" 
                 translation-url href ng-click="currentPage-1 < pageCount - 1 && actionSetPage(currentPage+1)">
-                <span  class="d-none d-sm-inline-block">Next</span> ›</a>
+                <span  class="d-none d-sm-inline-block">{{::('paginationT.next'|$translate)}}</span> ›</a>
         </li>
         <li ng-class="{'disabled': currentPage-1 >= pageCount - 1}"  class="page-item d-none d-sm-inline-block pagination-btn-last">
             <a rel="noopener" class="page-link" ng-disabled="currentPage-1 >= pageCount - 1"
-                translation-url href ng-click="currentPage-1 < pageCount - 1 && actionSetPage(pageCount)">Last »</a>
+                translation-url href ng-click="currentPage-1 < pageCount - 1 && actionSetPage(pageCount)">{{::('paginationT.last'|$translate)}} »</a>
         </li>
         <li class="page-item d-none d-lg-inline-block disabled pagination-record-count">
             <a rel="noopener" class="page-link" disabled>
                 <strong> 
-                    <span ng-bind="((currentPage-1)*pageSize)+1 + ' - ' + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)"></span> of 
+                    <span ng-bind="((currentPage-1)*pageSize)+1 + ' - ' + (currentPage*pageSize>numFound ? numFound:currentPage*pageSize)"></span> {{::('paginationT.of'|$translate)}}
                     <span ng-bind="(pageCount*pageSize)>numFound ? numFound:pageCount*pageSize"></span>
                 </strong>
             </a>
         </li>
         <li class="page-item d-none d-md-inline-block pagination-items-per-page">
                 <a rel="noopener" class="page-link" disabled data-title="Items per page" data-bs-toggle="tooltip">
-                <span class="d-none d-lg-inline-block">Items per page</span>
+                <span class="d-none d-lg-inline-block">{{::('paginationT.itemsPerPage'|$translate)}}</span>
                 <select style="color: #0d6efd;" ng-model="pageSize" ng-change="onPageSizeChanged({size:pageSize});">
-                    <option ng-value="25">25</option>
-                    <option ng-value="50">50</option>
-                    <option ng-value="100">100</option>
-                    <option ng-value="200">200</option>
-                    <option ng-value="300">300</option>
+                    <option ng-value="25">{{::('numbers.twentyFive'|$translate)}}</option>
+                    <option ng-value="50">{{::('numbers.fifty'|$translate)}}</option>
+                    <option ng-value="100">{{::('numbers.oneHundred'|$translate)}}</option>
+                    <option ng-value="200">{{::('numbers.towHundred'|$translate)}}</option>
+                    <option ng-value="300">{{::('numbers.threeHundred'|$translate)}}</option>
                 </select>
             </a>
         </li>

@@ -1,8 +1,9 @@
 import app from 'app';
 import template from 'text!./keyword-filter.html';
 import _ from 'lodash';
+import keywordFilterT from '~/app-text/views/search/search-filters/keyword-filter.json';
 
-    app.directive('keywordFilter', function() {
+app.directive('keywordFilter', ['translationService', function (translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -11,7 +12,7 @@ import _ from 'lodash';
             template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-              
+               translationService.set('keywordFilterT', keywordFilterT);
                $scope.keywordSearchFilters = searchDirectiveCtrl.getSearchFilters("keyword");
                $scope.relatedFilters = {};
 
@@ -25,5 +26,5 @@ import _ from 'lodash';
                 }
             }
         };
-    });
+    }]);
 

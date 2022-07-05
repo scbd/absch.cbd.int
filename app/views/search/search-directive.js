@@ -25,6 +25,7 @@ import './search-results/group-view';
 import './directives/result-view-options';
 import 'views/reports/matrix/data-matrix.directive';
 import 'angular-vue'
+import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
     app.directive('searchDirective', function() {
         return {
@@ -33,14 +34,15 @@ import 'angular-vue'
             template: template, 
             controller: ['$scope','$q', 'realm', '$element', 'commonjs', 'localStorageService', '$filter', 'Thesaurus' ,
              'appConfigService', '$routeParams', '$location', 'ngDialog', '$attrs', '$rootScope', 'thesaurusService',
-             'joyrideService', '$timeout', 'locale', 'solr', 'toastr','$log','IGenericService',
+                'joyrideService', '$timeout', 'locale', 'solr', 'toastr', '$log', 'IGenericService', 'translationService',
             function($scope, $q, realm, $element, commonjs, localStorageService, $filter, thesaurus, 
                     appConfigService, $routeParams, $location, ngDialog, $attrs, $rootScope, thesaurusService, joyrideService, 
-                    $timeout, locale, solr, toastr, $log, IGenericService) {
+                $timeout, locale, solr, toastr, $log, IGenericService, translationService) {
                         var customQueryFn = {
                             buildExpiredPermitQuery : buildExpiredPermitQuery,
                             buildContactsUserCountryfn : buildContactsUserCountryfn
                         }
+                        translationService.set('searchDirectiveT', searchDirectiveT);
                         var leftMenuSchemaFieldMapping;
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';

@@ -98,5 +98,9 @@
   "ninetySeven":   "97",
   "ninetyEight":   "98",
   "ninetyNine":   "99",
-  "oneHundred":   "100"
+  "oneHundred":   "100",
+  "towHundred":   "200",
+  "threeHundred":   "300",
+  "fourHundred":   "400",
+  "fiveHundred":   "500"
 }

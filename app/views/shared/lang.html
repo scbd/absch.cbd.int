@@ -1,13 +1,13 @@
 ﻿<div>
     <div style="margin:0 10% 0 10%" >
         <h1 class="dropshadow1 color-green" style="font-size:250%;margin-bottom:20px;">
-            Language switch</h1>
+            {{::('langT.languageSwitch'|$translate)}}</h1>
         <hr>
        <div class="card">
            <p>
-               Please wait while we redirect you to <span ng-bind="chShortName"></span> Clearing-House <span ng-bind="currentLanguage"></span> site
+               {{::('langT.pleaseWait'|$translate)}} <span ng-bind="chShortName"></span> {{::('langT.ch'|$translate)}} <span ng-bind="currentLanguage"></span> {{::('langT.site'|$translate)}}
            </p>
-           <h3 class="color-green">For technical support please contact our help desk at: <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
+           <h3 class="color-green">{{::('langT.technicalSupport'|$translate)}} <span class="color-blue" style="text-transform: lowercase" ng-bind="email"></span></h3>
        </div>
       </div>
     </div>
