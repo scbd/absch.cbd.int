@@ -9,7 +9,7 @@ function embedIFrame(widget, options){
         return;
         
     var iframe = document.createElement('iframe');
-    console.log(widget);
+    
     iframe.setAttribute('name', Math.floor((1 + Math.random()) * 0x10000).toString(16));
     iframe.setAttribute('src', options.src);
     iframe.setAttribute('width', options.width||300);
@@ -21,7 +21,7 @@ function embedIFrame(widget, options){
     //TODO: no need to be inside loop
     registerIframeCommunication(iframe, {type:'getClientHeight', iframe:iframe.name});
     window.addEventListener('message', function(evt){
-        console.log(evt);
+        
         iframeCommunicationReceived = true;
         if(evt.data){
             var data = JSON.parse(evt.data);
