@@ -2,6 +2,7 @@ import templateHtml from 'text!./analyzer-question.html';
 import app from 'app';
 import _ from 'lodash';
 import 'angular-sanitize';
+import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-reports/analyzer-question.json';
 
     var WHITE      = { R:255, G:255, B:255 };
     var SHADE_BASE = { R: 70, G:163, B:230 };
@@ -10,7 +11,7 @@ import 'angular-sanitize';
     //
     //
     //==============================================
-    app.directive('nationalReportAnalyzerQuestion', ['$timeout', 'realm', function($timeout, realm) {
+    app.directive('nationalReportAnalyzerQuestion', ['$timeout', 'realm', 'translationService', function($timeout, realm, translationService) {
         return {
             restrict : 'E',
             replace : true,
@@ -25,6 +26,7 @@ import 'angular-sanitize';
                 previousQuestionsValueMapping : '='
             },
             link: function ($scope, el, attr, nrAnalyzer) {
+                translationService.set('nraQuestionT', nraQuestionT);
 
                 $scope.selectedMapping = _.keys($scope.previousQuestionsMapping)[0];
 

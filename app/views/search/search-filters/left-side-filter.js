@@ -5,9 +5,10 @@ import 'ngDialog';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
 import 'views/forms/edit/document-selector'
+import leftSideFilterT from '~/app-text/views/search/search-filters/left-side-filter.json';
 
-        app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeout',
-         function (ngDialog, locale, solr, realm, $timeout) {
+app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeout', 'translationService',
+    function (ngDialog, locale, solr, realm, $timeout, translationService) {
             return {
                 restrict: 'EA',
                 replace: true,
@@ -15,7 +16,7 @@ import 'views/forms/edit/document-selector'
                 template: template,
                 scope: false,
                 link:async function ($scope, $element, $attrs, searchDirectiveCtrl) {
-                    
+                    translationService.set('leftSideFilterT', leftSideFilterT);  
                     $scope.isBCH        = realm.is('BCH');
                     $scope.isABS        = realm.is('ABS');    
                     

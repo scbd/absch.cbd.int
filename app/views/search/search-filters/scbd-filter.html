@@ -1,10 +1,10 @@
 ﻿<div id="Search-Filter"  class="row"  ng-show="sf_filters.length" style="margin-bottom:30px;">
     <div  class="col-md-12">
-        <div class="heading" ng-if="sf_filters.length">SCBD Records </div>
+        <div class="heading" ng-if="sf_filters.length">{{::('scbdFilterT.scbdRecords'|$translate)}} </div>
             <hr class="heading"  ng-if="sf_filters.length">
 
         <p class="helpinfo" ng-if="sf_filters.length"><i class="fa fa-info-circle helpicon" ></i> 
-            Information published by the SCBD. This includes meetings, news stories, notifications and statements.
+            {{::('scbdFilterT.scbdFilterInfo'|$translate)}}
         </p>
         
         <div ng-repeat="doc in sf_filters = (sf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])">

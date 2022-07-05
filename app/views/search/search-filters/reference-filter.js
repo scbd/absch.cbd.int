@@ -1,7 +1,8 @@
 import app from 'app';
 import template from 'text!./reference-filter.html';
+import referenceFilterT from '~/app-text/views/search/search-filters/reference-filter.json';
 
-    app.directive('referenceFilter', function($timeout) {
+app.directive('referenceFilter', ['$timeout', 'translationService', function ($timeout, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -10,6 +11,7 @@ import template from 'text!./reference-filter.html';
             template: template, 
             scope:false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
+               translationService.set('referenceFilterT', referenceFilterT);
                $scope.rf_searchFilters = searchDirectiveCtrl.getSearchFilters('schema', function(item){
                 return item.otherType == 'reference'
             })
@@ -21,5 +23,5 @@ import template from 'text!./reference-filter.html';
                
             }//link
         };
-    });
+    }]);
 

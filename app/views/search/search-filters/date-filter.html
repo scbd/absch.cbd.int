@@ -1,16 +1,16 @@
 ﻿<div id="Search-Filter"  style="margin-bottom:30px;" >
      <div>
-        <span class="country-heading">Date</span>
+         <span class="country-heading">{{::('dateFilterT.date'|$translate)}}</span>
         <hr class="heading" />
-         <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> Search for record(s) published within a date range.</p>
+         <p class="helpinfo"><i class="fa fa-info-circle helpicon"></i> {{::('dateFilterT.search'|$translate)}}</p>
         
     </div>
     <div style="max-height:400px;">
             <div class="filter col-lg-4">
                 
                 <div class="row" style="margin-top:6px">
-                    <div class="col-md-3 text-sm-start text-md-end text-lg-naveed published-on-label">
-                        <label class="mx-0 float-start">Published on</label>
+                    <div class="col-md-3 text-sm-start text-md-end">
+                        <label class="mx-0 float-start">{{::('dateFilterT.publishedOn'|$translate)}}</label>
                     </div>
                     <div class="col-md-7">
                         <div km-date-range ng-model="dateFilter.value" ng-change="onChange()"></div>

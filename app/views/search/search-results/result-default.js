@@ -4,8 +4,9 @@ import _ from 'lodash';
 import 'services/main';
 import '~/views/forms/view/record-loader.directive';
 import '~/views/forms/view/bch/icons';
+import resultDefaultT from '~/app-text/views/search/search-results/result-default.json';
 
-    app.directive('resultDefault', ["$timeout", function($timeout) {
+app.directive('resultDefault', ["$timeout", "translationService", function ($timeout, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -15,7 +16,7 @@ import '~/views/forms/view/bch/icons';
                 type:'@'
             },
             link: function($scope, $element, $attr) {
-                
+                translationService.set('resultDefaultT', resultDefaultT);
                 $scope.showExternalLink = $attr.externalLink=='true'
                 $scope.api = {};
                 $scope.$watch('showDoc', function(newVal){

@@ -33,13 +33,13 @@
                 num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
         </div>            
         <div ng-if="loading" class="w-100 ">
-            <i class="fa fa-spin fa-spinner m-auto"></i> loading..
+            <i class="fa fa-spin fa-spinner m-auto"></i> {{::('viewResultT.loading'|$translate)}}
         </div>
 
         <div ng-repeat="group in searchResult.docs" class="my-3 mx-1">
             <div ng-include="'group-result'"></div>          
         </div>
-        <h4 class="bg-white" ng-if="!loading && (searchResult.numFound||0) === 0">no records found</h4>
+        <h4 class="bg-white" ng-if="!loading && (searchResult.numFound||0) === 0">{{::('viewResultT.noRecordsFound'|$translate)}}</h4>
         <div class="d-flex justify-content-center">
             <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
                 page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
@@ -51,8 +51,8 @@
             <div class="search-result-heading level_{{::group.level||1}}" ng-if="::group.levelKey">
                 <span class="schemaTitle color-darkgrey" class="animate-if" ng-if="::!group.href">
                     <span ng-if="::group.title!='reference' && group.title!='scbd'" ng-bind="::group.title"></span>
-                    <span ng-if="::group.title=='reference'">Reference records</span>
-                    <span ng-if="::group.title=='scbd'">SCBD records</span>
+                    <span ng-if="::group.title=='reference'">{{::('viewResultT.referenceRecords'|$translate)}}</span>
+                    <span ng-if="::group.title=='scbd'">{{::('viewResultT.scbdRecords'|$translate)}}</span>
                 </span>
                 <a rel="noopener" translation-url ng-if="::group.href" ng-href="{{group.href}}" class="color-black link" ng-bind="::group.title"></a>
                  (<span ng-bind="::group.numFound" ng-class="::{'color-darkgrey':group.level>1}"></span>)
@@ -65,13 +65,13 @@
                 <div class="btn-group" ng-if="group.numFound >  group.docs.length">
                     <button type="button" class="btn btn-default bold text-uppercase" style="font-size: 10px;" 
                     ng-if="group.numFound-group.docs.length > 10" ng-click="loadRecords(group,10)" ng-disabled="group.isLoading">
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> Show next 10 records
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> {{::('viewResultT.showNext'|$translate)}}
                     </button>
                     <button type="button" ng-if="group.isLoading" class="btn btn-default text-uppercase" ng-disabled="true" style="font-size: 10px;">
-                        <i class="fa fa-spin fa-spinner float-start" ></i> loading...
+                        <i class="fa fa-spin fa-spinner float-start" ></i> {{::('viewResultT.loading'|$translate)}}
                     </button>
                     <button type="button" class="btn btn-default bold text-uppercase" ng-click="loadRecords(group)" style="font-size: 10px;"  ng-disabled="group.isLoading"  >
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> show remaining <span ng-bind="group.numFound-group.docs.length"></span> records
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> {{::('viewResultT.showRemaining'|$translate)}} <span ng-bind="group.numFound-group.docs.length"></span> {{::('groupViewT.records'|$translate)}}
                     </button>
                 </div>
             </div>

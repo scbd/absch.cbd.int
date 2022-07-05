@@ -1,11 +1,11 @@
 ﻿<div class="default-result-page p-0 m-0 mb-3">
-    
+   
     <div class="float-end pe-2 position-relative btn-close-record" ng-show="showDoc" >
         <span class="color-white">|&nbsp;</span>
-        <a rel="noopener" title="Close"
+        <a rel="noopener" title="{{::('resultDefaultT.close'|$translate)}}"
             class="btn btn-sm action-button p-0 px-1 color-white"
             ng-click="showDoc=false">
-            <i class="bi bi-x-circle color-white"></i> <span class="d-none d-sm-inline-block">Close</span>
+            <i class="bi bi-x-circle color-white"></i> <span class="d-none d-sm-inline-block">"{{::('resultDefaultT.close'|$translate)}}</span>
         </a>
     </div>
     <div ng-if="showDoc" class="animate-if p-0 py-2 m-0">
@@ -36,30 +36,30 @@
                         <span ng-if="doc.rec_summary.length > 500">...</span>
                     </div>
 
-                    <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
+                  <div ng-if="doc.schema_s=='capacityBuildingInitiative'">
                         <span ng-if="doc.implementingAgencies_EN_txt">
-                            <strong>Implemented by</strong>  
+                            <strong>{{::('resultDefaultT.implementedBy'|$translate)}}</strong>  
                                 <span ng-repeat="item in doc.implementingAgencies_EN_txt" ng-bind="item">
                                     <span ng-if="!$last">|</span>
                                 </span>
                         </span> 
                         <span ng-if="doc.executingAgencies_EN_txt">
-                            <strong>executed by</strong>
+                            <strong>{{::('resultDefaultT.executedBy'|$translate)}}</strong>
                                 <span ng-repeat="item in doc.executingAgencies_EN_txt" ng-bind="item">
                                     <span ng-if="!$last">|</span>
                                 </span>
                         </span>
                         <span ng-if="doc.collaboratingPartners_EN_txt">
-                        <strong> with the collaboration of </strong> 
+                        <strong> {{::('resultDefaultT.collaboration'|$translate)}} </strong> 
                                 <span ng-repeat="item in doc.collaboratingPartners_EN_txt" ng-bind="item">
                                     <span ng-if="!$last">|</span>
                                 </span>
                         </span>
                     </div>
                     <div ng-if="doc.schema_s=='resource'">
-                        <span ng-if="doc.authors_t">Author(s): <span ng-bind="doc.authors_t"></span></span>
+                        <span ng-if="doc.authors_t">{{::('resultDefaultT.author'|$translate)}} <span ng-bind="doc.authors_t"></span></span>
                         <span ng-if="doc.organizations_EN_txt">
-                            <strong>Organizations </strong>  
+                            <strong>{{::('resultDefaultT.collaboration'|$translate)}} </strong>  
                                 <span ng-repeat="item in doc.organizations_EN_txt" ng-bind="item">
                                     <span ng-if="!$last">|</span>
                                 </span>
@@ -91,7 +91,7 @@
                         <span ng-bind="doc.rec_meta1.join(', ')"></span>
                     </li>
                     <li class="hidden-xs" ng-if="::doc.rec_meta2 && doc.schema_s !=='absPermit' && type != reference" id="meta2">
-                        <span ng-if="::doc.schema_s ==='absCheckpointCommunique'" class="text-secondary">SOURCE:</span>
+                        <span ng-if="::doc.schema_s ==='absCheckpointCommunique'" class="text-secondary">{{::('resultDefaultT.source'|$translate)}}</span>
                         <span ng-bind="doc.rec_meta2.join(', ')"></span>
                     </li>
                     <li class="hidden-xs" ng-if="::doc.rec_meta3 && type != reference" id="meta3">

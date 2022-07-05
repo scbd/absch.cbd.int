@@ -1,0 +1,19 @@
+{
+    "systemAlert": "system alert",
+    "certificatesInfo": "Certificates (IRCC) published indicating that prior informed consent (PIC) has been granted to a user within my jurisdiction",
+    "emailMe": "Email me",
+    "search": "Search",
+    "edit": "Edit",
+    "delete": "Delete",
+    "addNew": "Add new",
+    "loading": "Loading...",
+    "isAuthenticated": "You do not have any saved searches/alerts.",
+    "isNotAuthenticated": "Please log in to view your saved searches/alerts.",
+    "searchFilter": "Create or edit a saved search filter",
+    "filterTitle": "Title for this saved search",
+    "selectFilters:": "Select search filters:",
+    "sendEmail": "Send me an email when records relevant to this search are added or updated.",
+    "cancel": "Cancel",
+    "save": "Save",
+    "searchTitle": "Search title"
+}

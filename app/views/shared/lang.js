@@ -2,9 +2,11 @@ import app from 'app';
 import moment from 'angular-cookies';
 import 'components/scbd-angularjs-services/main';
 import 'services/main';
+import langT from '~/app-text/views/shared/lang.json';
     export { default as template } from './lang.html';
-export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService', 'realm',
-		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService, realm){
+export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService', 'realm', 'translationService',
+		function ($scope, $location, locale, $timeout, $window, $routeParams, $cookies, localStorageService, realm, translationService){
+				translationService.set('langT', langT);
 				$scope.chShortName = realm.chShortName;
 				$scope.email = realm.email;
 			    var lang = 'en';

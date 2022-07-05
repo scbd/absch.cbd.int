@@ -5,9 +5,10 @@ import 'services/main';
 import '~/views/directives/party-status';
 import './result-default';
 import { iconFields } from '~/views/forms/view/bch/icons';
+import viewResultT from '~/app-text/views/search/search-results/view-result.json';
 
-    app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 
-    function(searchService, realm, $timeout, $location, $q, solr) {
+app.directive('searchResultGroupView', ['searchService', 'realm', '$timeout', '$location', '$q', 'solr', 'translationService', 
+        function (searchService, realm, $timeout, $location, $q, solr, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -18,7 +19,7 @@ import { iconFields } from '~/views/forms/view/bch/icons';
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
                 var queryCanceler;
-                
+                translationService.set('viewResultT', viewResultT);
                 $scope.recordLoader = {};
                 $scope.api = {
                     updateResult : updateResult

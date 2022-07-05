@@ -5,8 +5,10 @@ import 'services/main';
 import '~/views/directives/party-status';
 import './result-default';
 import { iconFields } from '~/views/forms/view/bch/icons';
+import viewResultT from '~/app-text/views/search/search-results/view-result.json';
 
-    app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', function(searchService, realm, $timeout, $location) {
+app.directive('searchResultListView', ['searchService', 'realm', '$timeout', '$location', 'translationService',
+    function (searchService, realm, $timeout, $location, translationService) {
         return {
             restrict: 'EA',
             replace: true,
@@ -16,7 +18,7 @@ import { iconFields } from '~/views/forms/view/bch/icons';
                 api:'='
             },
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-                
+                translationService.set('viewResultT', viewResultT);
                 $scope.recordLoader = {};
                 $scope.api = {
                     updateResult : updateResult,

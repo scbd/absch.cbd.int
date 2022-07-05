@@ -1,14 +1,14 @@
 ﻿<div id="Search-Filter"  class="row" ng-show="rf_filters.length" style="margin-bottom:30px;">
     <div  class="col-md-12"  >
-    <div class="heading color-orange" ng-if="rf_filters.length">Reference Records </div>
+    <div class="heading color-orange" ng-if="rf_filters.length">{{::('referenceFilterT.referenceRecords'|$translate)}} </div>
     <hr class="heading" ng-if="rf_filters.length">
         <p class="helpinfo" ng-if="rf_filters.length">
         <i class="fa fa-info-circle helpicon" ></i> 
         <span ng-if="realm.is('ABS')">
-            Reference records include a number of ABS-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication.
+            {{::('referenceFilterT.absPublication'|$translate)}}
         </span>
         <span ng-if="realm.is('BCH')">
-            Reference records include a number of biosafety-related resources and information that can be submitted by any registered user and are validated by the Secretariat prior to their publication.
+            {{::('referenceFilterT.bchPublication'|$translate)}}
         </span>
     </p>
         

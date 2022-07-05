@@ -10,15 +10,16 @@ import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import joyRideText from '~/app-text/views/register/submit-summary-joyride-tour.json';
+import recordListT from '~/app-text/views/register/record-list.json';
 
         export { default as template } from './record-list.html';
 
         export default ["$timeout", "commonjs", "$http", "IWorkflows", "IStorage", '$rootScope',
             'searchService', 'toastr', "$routeParams", "roleService", "$scope", "$q", "guid", "editFormUtility", "$filter", 
-            "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr','joyrideService',
+    "$element", "breadcrumbs", "localStorageService", "ngDialog", 'realm', 'ngMeta', 'solr', 'joyrideService', 'translationService',
             function ($timeout, commonjs, $http, IWorkflows, storage, $rootScope, searchService, toastr, $routeParams, roleService,
-                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService) {
-
+                $scope, $q, guid, editFormUtility, $filter, $element, breadcrumbs, localStorageService, ngDialog, realm, ngMeta, solr, joyrideService, translationService) {
+                translationService.set('recordListT', recordListT);
                 $scope.languages = commonjs.languages;
                 $scope.amendmentDocument = {locales:['en']};
 
