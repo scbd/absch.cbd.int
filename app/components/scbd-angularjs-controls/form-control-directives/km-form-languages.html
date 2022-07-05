@@ -1,6 +1,6 @@
 <span> 
     <div ng-class="{'alert alert-danger':ctrl.showLanguageError}" ng-if="initialized">
-        <div ng-if="ctrl.showLanguageError" >Please select at least one UN language to continue.</div>
+        <div ng-if="ctrl.showLanguageError" >{{::('kmFormLanguagesT.error'|$translate)}}</div>
         <span km-select data-multiple="{{ctrl.multiple}}" ng-model="ctrl.binding" binding-type="string"
             placeholder="Available Languages" items="ctrl.options.locales()" minimum="1"
             show-others="ctrl.options.otherLocales()" ng-change="ctrl.validateUNLanguage()" 

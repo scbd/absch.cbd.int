@@ -3,13 +3,13 @@ import template from 'text!./km-form-languages.html';
 import _ from 'lodash';
 import './km-select';
 import 'services/main';
-  ;
+import kmFormLanguagesT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-form-languages.json';
   //============================================================
   //
   //
   //============================================================
   //TODO: out of date, needs to be updated with current select, or select needs to be updated.
-  app.directive('kmFormLanguages', ['thesaurusService', '$timeout', 'guid', function(thesaurusService, $timeout, guid) {
+app.directive('kmFormLanguages', ['thesaurusService', '$timeout', 'guid', 'translationService', function (thesaurusService, $timeout, guid, translationService) {
       return {
           restrict: 'EA',
           template: template,
@@ -19,7 +19,7 @@ import 'services/main';
               binding: '=ngModel',
           },
           link:  function($scope, $element, $attr, ngModelController) {
-
+            translationService.set('kmFormLanguagesT', kmFormLanguagesT);
             var unLanguages  = ['ar', 'en', 'fr', 'es', 'ru', 'zh'];
             $scope.ctrl      = $scope;
             $scope.multiple  = $attr.multiple=='true' || $attr.multiple==""; // incase if empty is defined

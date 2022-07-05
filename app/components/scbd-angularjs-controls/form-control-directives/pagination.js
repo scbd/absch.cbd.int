@@ -1,8 +1,10 @@
 ﻿import template from 'text!./pagination.html';
 import app from 'app';
-    ;
+import paginationT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/pagination.json';
+import numbers from '~/app-text/numbers.json';
 
-    app.directive('pagination', ['$location', function ($location) {
+app.directive('pagination', ['$location', 'translationService', 
+    function ($location, translationService) {
         return {
             restrict: 'EA',
             template: template,
@@ -15,7 +17,8 @@ import app from 'app';
                 onPageSizeChanged: '&?'
             },
             link: function ($scope, $element, $attr) {
-
+                translationService.set('paginationT', paginationT);
+                translationService.set('numbers', numbers);
                 $scope.range = function (start, end) {
                     if(end<1)
                         return

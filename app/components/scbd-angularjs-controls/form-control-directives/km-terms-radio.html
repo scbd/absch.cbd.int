@@ -2,7 +2,7 @@
 	<div class="col-xs-12">
 		<button type="button" class="btn btn-default btn-xs float-end" ng-click="clear()" ng-if="binding.identifier" ng-disabled="ngDisabledFn()">
 			<i class="fa fa-remove"></i>
-			Clear selection
+			  {{::('kmTermRadioT.clearSelection'|$translate)}}
 		</button>
 		<ul class="list-unstyled">
 
@@ -41,7 +41,7 @@
 			</li>
 
 			<li ng-show="__loading">
-				<i class="fa fa-spinner fa-spin"></i> Loading...	
+				<i class="fa fa-spinner fa-spin"></i> {{::('kmTermRadioT.loading'|$translate)}}
 			</li>
 		</ul>
 	</div>

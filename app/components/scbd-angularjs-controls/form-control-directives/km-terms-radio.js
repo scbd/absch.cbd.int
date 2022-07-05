@@ -3,13 +3,15 @@ import angular from 'angular';
 import $ from 'jquery';
 import template from 'text!./km-terms-radio.html';
 import Enumerable from 'linqjs';
-import 'components/scbd-angularjs-services/main'; ;
+import 'components/scbd-angularjs-services/main'; 
+import kmTermRadioT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-term-radio.json';
 //need Enumerable
     //============================================================
     //
     //
     //============================================================
-    app.directive('kmTermRadio', ["$q","Thesaurus", "$timeout", function($q,thesaurus, $timeout){
+app.directive('kmTermRadio', ["$q", "Thesaurus", "$timeout", "translationService",
+    function ($q, thesaurus, $timeout, translationService){
         return {
             restrict: 'EAC',
             template: template,
@@ -28,7 +30,7 @@ import 'components/scbd-angularjs-services/main'; ;
                 ngDisabledFn  : '&ngDisabled'
             },
             link: function($scope, $element, $attr, ngModelController) {
-
+                translationService.set('kmTermRadioT', kmTermRadioT);
                 $scope.uniqueId = (Math.random()).toString().split('.')[1];
                 $scope.description = $scope.description!== undefined ? $scope.description : true;
 

@@ -3,12 +3,12 @@
 	<div class="col-12" ng-show="enableSearch" style="margin-bottom: 5px;">
 
 		<div class="input-group float-start" style="max-width:400px;">
-			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="Search the list (min 3 chars to begin search)"/>
+			<input  type="text" ng-model="searchKeyword" class="form-control" placeholder="{{::('kmTermCheckT.search'|$translate)}}"/>
 			<span class="input-group-text" id="basic-addon2">
 				<i class="fa fa-search" ></i>
 			</span>
 		</div>
-		<span style="position: relative; top:10px; margin-left:20px"> <i class="color-blue"><span ng-bind="binding.length || '0'"></span> keywords selected.</i></span>
+		<span style="position: relative; top:10px; margin-left:20px"> <i class="color-blue"><span ng-bind="binding.length || '0'"></span> keywords selected.{{::('kmTermCheckT.keywords'|$translate)}}</i></span>
 	</div>
 	</div>
 	<div class="row">
@@ -31,13 +31,13 @@
 					</tr>
 				</tfoot>
 			</table>
-			<p ng-hide="filteredList.length"> Keyword not found. </p>
+			<p ng-hide="filteredList.length"> {{::('kmTermCheckT.keywordNotFound'|$translate)}} </p>
 		</div>
 
 		<div ng-class="{'searchbox': enableSearch}" >
 
 			<button type="button" class="btn btn-default btn-xs float-end easing" ng-click="clear()" ng-if="binding.length>0">
-				<i class="fa fa-remove"  ></i> Clear selection
+				<i class="fa fa-remove"  ></i> {{::('kmTermCheckT.clearSelection'|$translate)}}
 			</button>
 			<ul ng-if="!tabularShape" class="list-unstyled">	
 
@@ -49,7 +49,7 @@
 				</li>
 
 				<li ng-show="__loading">
-					<i class="fa fa-spinner fa-spin"></i> Loading...
+					<i class="fa fa-spinner fa-spin"></i> {{::('kmTermCheckT.loading'|$translate)}}
 				</li>
 
 				
@@ -68,7 +68,7 @@
 					<input ng-if="term.type=='int'" type="number" placeholder="{{::customValuePlaceholder}}"
 					ng-model="selectedItems[term.identifier].customValue" class="km-terms-check-add-input-int" ng-change="save()" />
 					<div ng-if="term.type=='lstring'" style="padding-left:50px;"> 
-						<strong>(Please specify) </strong>
+						<strong>({{::('kmTermCheckT.pleaseSpecify'|$translate)}}) </strong>
 						<div km-textbox-ml name="custom value"  placeholder="{{::customValuePlaceholder}}"
 							required ng-model="selectedItems[term.identifier].customValue" locales="locales"  ng-change="save()"></div>
 					</div>
@@ -80,7 +80,7 @@
 								<i class="fa fa-remove color-red" style="cursor:pointer" ng-if="otherElements[term.identifier].length > 1 && !$last" ng-click="deleteOtherElement(element, otherElements[term.identifier]);"></i>
 							</td>
 							<td>
-								<div km-textbox-ml ng-model="element.customValue" locales="locales" required="true" placeholder="other element" ng-change="appendEmptyOther(otherElements[term.identifier])"></div>
+								<div km-textbox-ml ng-model="element.customValue" locales="locales" required="true" placeholder="{{::('kmTermCheckT.otherElement'|$translate)}}" ng-change="appendEmptyOther(otherElements[term.identifier])"></div>
 							</td>
 						</tr>
 					</table>
