@@ -1,4 +1,4 @@
-﻿<div class="row mb-3">
+<div class="row mb-3">
     <style>
         .margin-bottom-20 {
             margin-bottom: 20px;
@@ -374,14 +374,14 @@
     </script>
 
 
-    <div id="dialogCancel" class="modal" data-backdrop="static">
+    <div id="dialogCancel" class="modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header d-block bg-red">
-                    <button type="button" class="btn fs-4 close float-end" ng-click="closeDialog()" aria-hidden="true">×</button>
+                    <button type="button" class="btn fs-4 close float-end cancelClose" ng-click="closeDialog()" aria-hidden="true">×</button>
                     <h4>CLOSE AND CANCEL CHANGES</h4>
                 </div>
-                <div class="modal-body text-center">
+                <div class="modal-body">
                     <h1>Are you sure you want to close this record without saving? <span class="color-red">Any changes
                             will be lost.</span> </h1>
                 </div>
@@ -395,7 +395,7 @@
         </div>
     </div>
 
-    <div id="divAdditionalInfo" class="modal" data-backdrop="static">
+    <div id="divAdditionalInfo" class="modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-red color-white">
@@ -417,7 +417,7 @@
         </div>
     </div>
 
-    <div id="divWorkflowDraft" class="modal" data-backdrop="static">
+    <div id="divWorkflowDraft" class="modal fade" data-backdrop="static" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-red color-white">

@@ -17,18 +17,23 @@ import 'views/directives/block-region-directive';
                     scope.isRouteLoading = false;
                 });
 
-                // $rootScope.$on('$routeChangeError',
-                //     function(event, current, previous, rejection) {
-                //         var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
-                //             'unknown target';
-                //         var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
-                //         /**
-                //          * Optionally log using a custom service or $log.
-                //          * (Don't forget to inject custom service)
-                //          */
-                //         logger.warning(msg, [current]);
-                //     }
-                // );
+                $rootScope.$on('$routeChangeError', function(event, current, previous, rejection) {
+                        scope.isRouteLoading = false;
+                        // var destination = (current && (current.title || current.name || current.loadedTemplateUrl)) ||
+                        //     'unknown target';
+                        // var msg = 'Error routing to ' + destination + '. ' + (rejection.msg || '');
+                        // /**
+                        //  * Optionally log using a custom service or $log.
+                        //  * (Don't forget to inject custom service)
+                        //  */
+                        // logger.warning(msg, [current]);
+                    }
+                );
+
+                //custom error when 
+                $rootScope.$on('$locationChangeCancelled', function(event) {
+                    scope.isRouteLoading = false;
+                });
             }
         };
     }])

@@ -578,7 +578,9 @@ import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
 				//====================
 				$scope.closeDialog = function()
 				{
-					return $q.all([$scope.showCancelDialog(false)]).finally(function(){
+					return $q.all([$scope.showCancelDialog(false)])
+                    .finally(function(){
+                        $rootScope.$emit('$locationChangeCancelled', {});
                         $scope.loading = false;
                         $scope.blockText        = undefined;
 					});
@@ -929,7 +931,8 @@ import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
 								}
 							})
 							.catch(function(err){
-								console.log(err);
+                                if(err.status != 404)
+								    console.log(err);
 							});
 						}
 					}
@@ -1019,7 +1022,6 @@ import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
                             return;
 
                         evt.preventDefault();
-
                         $('#dialogCancel').modal('show');
                         $rootScope.next_url = next;
                         consideringClosing = true;
@@ -1039,7 +1041,7 @@ import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
                         if(!originalDocument || !formChanged){
                             return;
                         }
-                        console.log(e);
+                        // console.log(e);
                         e.preventDefault();	// Cancel the event as stated by the standard.					
                         if (e) {
                             e.returnValue = '';// Chrome requires returnValue to be set.

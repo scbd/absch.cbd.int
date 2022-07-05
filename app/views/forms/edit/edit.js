@@ -373,7 +373,7 @@ app.controller('editController', ["$rootScope", "$scope", "$http", "$window", "g
 
         $scope.document = doc;
 
-        $scope.origanalDocument = angular.copy(doc);
+        $scope.originalDocument = angular.copy(doc);
 
         if(!$scope.isDialog && $routeParams.tour)
         {
