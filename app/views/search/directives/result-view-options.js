@@ -4,8 +4,10 @@ import _ from 'lodash';
 import 'ngDialog';
 import tableExport from '~/components/common/export.vue';
 import shareRecord from '~/components/common/share-record.vue';
+import resultViewOptionsT from '~/app-text/views/search/directives/result-view-options.json';
 
-    app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale','apiToken','$rootScope', function ($location, ngDialog, locale, apiToken, $rootScope ) {
+app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken', '$rootScope', 'translationService',
+    function ($location, ngDialog, locale, apiToken, $rootScope, translationService) {
         return {
             restrict: 'EA',
             template: template,
@@ -20,7 +22,7 @@ import shareRecord from '~/components/common/share-record.vue';
                 onExport        : '&?'
             },
             link: function ($scope, $element, $attr, searchDirectiveCtrl) {
-               
+                translationService.set('resultViewOptionsT', resultViewOptionsT);
                 $scope.exportVueComponent = {
                     components:{tableExport}
                 }

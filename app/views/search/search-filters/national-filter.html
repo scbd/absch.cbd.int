@@ -1,15 +1,15 @@
 ﻿<div id="Search-Filter" class="row" >
 
       <div  class="col-md-7" ng-show="nf_filters.length" style="margin-bottom:30px;" >
-        <div class="heading color-blue" ng-if="nf_filters.length">National Records </div>
+        <div class="heading color-blue" ng-if="nf_filters.length">{{::('nationalFilterT.nationalRecords'|$translate)}} </div>
         <hr  class="heading" ng-if="nf_filters.length" />
         <p class="helpinfo" ng-if="nf_filters.length" >
           <i class="fa fa-info-circle helpicon" ></i> 
           <span ng-if="realm.is('ABS')">
-            National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant for the implementation of the Protocol.
+            {{::('nationalFilterT.absProtocol'|$translate)}}
           </span>
           <span ng-if="realm.is('BCH')">
-            National records are published by governments and include information Parties are obliged to provide in accordance with the Protocol as well as other national information relevant to the implementation of the Protocol.
+            {{::('nationalFilterT.bchProtocol'|$translate)}}
           </span>
         </p>
         <div ng-repeat="doc in nf_filters = (nf_searchFilters | filter:searchKeyword | orderBy:['filterSort', 'sort'])" ng-class="{'contact-spacing': doc.id=='contact'}">
@@ -26,7 +26,7 @@
       </div>
       
       <div  class="col-md-5" ng-show="nf_filters.length" style="margin-bottom:30px;">
-        <div class="heading" ng-if="nf_status.length">Party Status</div>
+        <div class="heading" ng-if="nf_status.length">{{::('nationalFilterT.partyStatus'|$translate)}}</div>
         <hr  class="heading" ng-if="nf_status.length" />
         
         <div ng-repeat="doc in nf_status = (nf_partyStatus | filter:searchKeyword | orderBy:['filterSort', 'sort'])">

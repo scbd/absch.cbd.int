@@ -1,6 +1,6 @@
 ﻿<div id="innerPage">
     <div class="mastHead pt-4" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
-        <h1 class="text-white">Search</h1>
+        <h1 class="text-white">{{::('searchDirectiveT.search'|$translate)}}</h1>
         <div id="search-new" >
             <div class="row">
                 <div class="col-md-12 pb-2">
@@ -14,7 +14,7 @@
                                     <input type="textbox" ng-model="filter.editValue"
                                         ng-keydown="onKeyDown($event, filter)" class="form-control form-control-small">
                                     <span class="btn btn-xs bold filter-chips-edit-addon input-group-text"
-                                        title="Save filter" ng-click="onEditFreeTextFilterDone(filter)">
+                                        title="{{::('searchDirectiveT.saveFilter'|$translate)}}" ng-click="onEditFreeTextFilterDone(filter)">
                                         <i class="fa fa-check"></i>
                                     </span>
                                     <span class="btn btn-xs bold filter-chips-edit-addon input-group-text"
@@ -27,37 +27,37 @@
                                     aria-haspopup="true" aria-expanded="true" ng-if="!filter.edit"
                                     ng-class="{'strikeout':filter.disabled}">
                                     <i class="fa fa-cog color-white" aria-hidden="true"></i>
-                                    <span ng-if="filter.excludeResult" class="label label-danger border-bottom">NOT</span>
+                                    <span ng-if="filter.excludeResult" class="label label-danger border-bottom">{{::('searchDirectiveT.not'|$translate)}}</span>
                                     <span ng-bind="filter.name|lstring:locale" class="text-white"></span>
                                 </span>
                                 <ul class="dropdown-menu filter-chip-settings" ng-if="!filter.edit">
                                     <li ng-if="filter.type=='freeText'">
                                         <a rel="noopener" href="#" ng-click="onEditFreeTextFilter(filter)"><i
-                                                class="fa fa-edit" aria-hidden="true"></i> Edit filter</a>
+                                                class="fa fa-edit" aria-hidden="true"></i> {{::('searchDirectiveT.editFilter'|$translate)}}</a>
                                     </li>
                                     <li>
                                         <a rel="noopener" href="#" ng-if="!filter.disabled"
                                             ng-click="filter.disabled=true;recordSelected();">
-                                            <i class="fa fa-eye" aria-hidden="true"></i> Temporarily disable</a>
+                                            <i class="fa fa-eye" aria-hidden="true"></i> {{::('searchDirectiveT.temporarilyDisable'|$translate)}}</a>
                                     </li>
                                     <li>
                                         <a rel="noopener" href="#" ng-if="filter.disabled"
                                             ng-click="filter.disabled=false;recordSelected();">
-                                            <i class="fa fa-eye-slash" aria-hidden="true"></i> Re-enable</a>
+                                            <i class="fa fa-eye-slash" aria-hidden="true"></i> {{::('searchDirectiveT.reEnable'|$translate)}}</a>
                                     </li>
                                     <li>
                                         <a rel="noopener" href="#" ng-if="!filter.excludeResult"
                                             ng-click="filter.excludeResult=true;recordSelected();">
-                                            <i class="fa fa-minus-square-o" aria-hidden="true"></i> Exclude results</a>
+                                            <i class="fa fa-minus-square-o" aria-hidden="true"></i> {{::('searchDirectiveT.excludeResult'|$translate)}}</a>
                                     </li>
                                     <li>
                                         <a rel="noopener" href="#" ng-if="filter.excludeResult"
                                             ng-click="filter.excludeResult=false;recordSelected();">
-                                            <i class="fa fa-plus-square-o" aria-hidden="true"></i> Include results</a>
+                                            <i class="fa fa-plus-square-o" aria-hidden="true"></i> {{::('searchDirectiveT.includeResults'|$translate)}}</a>
                                     </li>
                                     <li>
                                         <a rel="noopener" href="#" ng-click="removeFilter(filter)">
-                                            <i class="bi bi-x-circle-fill" aria-hidden="true"></i> Delete filter</a>
+                                            <i class="bi bi-x-circle-fill" aria-hidden="true"></i> {{::('searchDirectiveT.deleteFilter'|$translate)}}</a>
                                     </li>
                                 </ul>
                             </span>
@@ -69,11 +69,11 @@
                     </span>
                     <button ng-href="#" id="clearSearchFilter" ng-if="canShowSaveFilter()"
                         class="bg-white cusor-pointer btn btn-sm btn-default bold" ng-click="clearFilter()"> <i
-                            class="bi bi-x-circle-fill" aria-hidden="true"></i> Clear filters </button>
+                            class="bi bi-x-circle-fill" aria-hidden="true"></i> {{::('searchDirectiveT.clearFilters'|$translate)}} </button>
                     <span class="btn-group float-end dashboard-tour">
                         <a rel="noopener" ng-href="#" class="text-decoration-none help-tour link2" ng-click="tour()">
                             <i class="fa fa-question-circle color-white" aria-hidden="true"></i>
-                            <span class="d-none d-lg-inline-block  color-white">TAKE SEARCH TOUR</span>
+                            <span class="d-none d-lg-inline-block  color-white">{{::('searchDirectiveT.tour'|$translate)}}</span>
                         </a>
                     </span>
                 </div>
@@ -105,7 +105,7 @@
                     <ul>
                         <li class="text-uppercase px-1"
                             ng-click="showFilters=null">
-                            <span id="globalSearch">GLOBAL FILTERS:</span>
+                            <span id="globalSearch">{{::('searchDirectiveT.globalFilter'|$translate)}}</span>
                         </li>
                         <li id="recordTypesFilterTab"> <a id="recordTypesFilterTabJR" rel="noopener" href=""
                                 ng-class="{'active':showFilters=='recordTypesFilter', 'text-bch':(isBCH && showFilters=='recordTypesFilter'), 'text-abs':(isABS && showFilters=='recordTypesFilter')}"
@@ -114,7 +114,7 @@
                                 <i ng-if="showFilters=='recordTypesFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='recordTypesFilter'"
                                     class="fa fa-caret-down"></i>
-                                &nbsp;Record types</a> </li>
+                                &nbsp;{{::('searchDirectiveT.recordTypes'|$translate)}}</a> </li>
                         <li id="keywordsFilterTab" ng-show="!skipKeywordsFilter"> <a id="keywordsFilterTabJR"
                                 rel="noopener" href=""
                                 ng-class="{'active':showFilters=='keywordsFilter', 'text-bch':(isBCH && showFilters=='keywordsFilter'), 'text-abs':(isABS && showFilters=='keywordsFilter')}"
@@ -122,28 +122,28 @@
                                 class="btn color-white">
                                 <i ng-if="showFilters=='keywordsFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='keywordsFilter'" class="fa fa-caret-down"></i>
-                                &nbsp;Keywords</a> </li>
+                                &nbsp;{{::('searchDirectiveT.keywords'|$translate)}}</a> </li>
                         <li id="countryFilterTab"> <a id="countryFilterTabJR" rel="noopener" href=""
                                 ng-class="{'active':showFilters=='countryFilter', 'text-bch':(isBCH && showFilters=='countryFilter'), 'text-abs':(isABS && showFilters=='countryFilter')}"
                                 ng-click="showFilters=(showFilters=='countryFilter' ? false : 'countryFilter')"
                                 class="btn color-white">
                                 <i ng-if="showFilters=='countryFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='countryFilter'" class="fa fa-caret-down"></i>
-                                &nbsp;Country</a> </li>
+                                &nbsp;{{::('searchDirectiveT.country'|$translate)}}</a> </li>
                         <li id="regionFilterTab"> <a id="regionFilterTabJR" rel="noopener" href=""
                                 ng-class="{'active':showFilters=='regionFilter', 'text-bch':(isBCH && showFilters=='regionFilter'), 'text-abs':(isABS && showFilters=='regionFilter')}"
                                 ng-click="showFilters=(showFilters=='regionFilter' ? false : 'regionFilter')"
                                 class="btn color-white">
                                 <i ng-if="showFilters =='regionFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='regionFilter'" class="fa fa-caret-down"></i>
-                                &nbsp;Regions</a></li>
+                                &nbsp;{{::('searchDirectiveT.regions'|$translate)}}</a></li>
                         <li id="dateFilterTab" ng-show="!skipDateFilter"> <a id="dateFilterTabJR" rel="noopener" href=""
                                 ng-class="{'active':showFilters=='dateFilter', 'text-bch':(isBCH && showFilters=='dateFilter'), 'text-abs':(isABS && showFilters=='dateFilter')}"
                                 ng-click="showFilters=(showFilters=='dateFilter' ? false : 'dateFilter')"
                                 class="btn color-white">
                                 <i ng-if="showFilters=='dateFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='dateFilter'" class="fa fa-caret-down"></i>
-                                &nbsp;Date</a> </li>
+                                &nbsp;{{::('searchDirectiveT.date'|$translate)}}</a> </li>
 
                         <li id="searchFilterTab" ng-show="user && user.isAuthenticated"> <a rel="noopener" href=""
                                 ng-class="{'active':showFilters=='userSearchFilter'}"
@@ -151,11 +151,11 @@
                                 class="btn color-orange">
                                 <i ng-if="showFilters=='userSearchFilter'" class="bi bi-x-circle-fill"></i>
                                 <i ng-if="!showFilters || showFilters!='userSearchFilter'" class="fa fa-caret-down"></i>
-                                &nbsp; My saved searches</a> </li>
+                                &nbsp; {{::('searchDirectiveT.mySearches'|$translate)}}</a> </li>
                         <li ng-if="canShowSaveFilter() && !isAlertSearch" class="float-end"><a rel="noopener"
                                 ng-href="#" class="link2 cursor-pointer color-orange"
                                 ng-click="showSaveFilter(setFilters)"><i class="bi bi-bookmark color-orange me-1"
-                                   ></i>Save this search</a></li>
+                                   ></i>{{::('searchDirectiveT.saveThisSearch'|$translate)}}</a></li>
 
                     </ul>
                 </div>
@@ -193,7 +193,7 @@
                             ng-click="saveFreeTextFilter(searchKeyword);">
                             <i class="fa check"
                                 ng-class="{'fa-check-square':isFilterOn('freeText_'+searchKeyword),'fa-square':!isFilterOn('freeText_'+searchKeyword)}"></i>
-                            Free text search:
+                            {{::('searchDirectiveT.freeText'|$translate)}}
                             <span class="text-primary">"<span ng-bind="searchKeyword"></span>"</span>
                         </a>
                     </div>
@@ -221,19 +221,18 @@
                     </region-filter>
                     <date-filter ng-if="showFilters==='dateFilter' && !skipDateFilter"></date-filter>
                     <div ng-if="showFilters==='userSearchFilter' && !skipSaveFilter">
-                        <h4 class="mt-5 ms-2">Your saved searches <small class="fs-6"> - Select or edit items from the
-                                list below</small></h4>
+                        <h4 class="mt-5 ms-2">{{::('searchDirectiveT.savedSearches'|$translate)}} <small class="fs-6"> - {{::('searchDirectiveT.selectFromList'|$translate)}}</small></h4>
                         <user-alerts run-query-in-page="true"></user-alerts>
                     </div>
                     <div class="sticky-bar" ng-if="searchResult.loading">
-                        <span  class="align-middle"><i class="fa fa-spin fa-spinner"></i>Updating
-                            results...</span>
+                        <span  class="align-middle"><i class="fa fa-spin fa-spinner"></i>{{::('searchDirectiveT.updating'|$translate)}}
+                            {{::('searchDirectiveT.results'|$translate)}}</span>
                     </div>
 
                     <div class="text-center">
                         <button ng-href="#top" class="btn btn-sm btn-default bold" style="cursor:pointer;"
                             ng-click="showFilters=false;searchKeyword='';scrollToTop();">
-                            <i class="bi bi-x-circle-fill" aria-hidden="true"></i> CLOSE </button>
+                            <i class="bi bi-x-circle-fill" aria-hidden="true"></i> {{::('searchDirectiveT.close'|$translate)}} </button>
                     </div>
                 </div>
             </div>
@@ -265,7 +264,7 @@
                                         ng-class="{'active':searchResult.currentTab==='allRecords'}">
                                         <a rel="noopener" class="nav-link color-darkgrey" translation-url href="#"
                                             ng-click="switchTab('allRecords')">
-                                            All <span class="d-none d-sm-inline-block">records</span>
+                                            {{::('searchDirectiveT.all'|$translate)}} <span class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
                                             <span class="badge rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.all?searchResult.data.facets.schemaTypes.all:0"></span>
                                         </a>
@@ -274,15 +273,15 @@
                                         ng-class="{'active':searchResult.currentTab==='nationalRecords'}">
                                         <a rel="noopener" translation-url href="#" class="nav-link text-primary"
                                             ng-click="switchTab('nationalRecords')">
-                                            National <span class="d-none d-sm-inline-block">records</span> <span
+                                            {{::('searchDirectiveT.national'|$translate)}} <span class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
                                                 class="badge rounded-pill bg-primary"
                                                 ng-bind="searchResult.data.facets.schemaTypes.national?searchResult.data.facets.schemaTypes.national:0"></span></a>
                                     </li>
                                     <li id="referenceRecordsTab" class="nav-item"
                                         ng-class="{'active':searchResult.currentTab==='referenceRecords'}"><a
                                             translation-url href="#" class="nav-link color-orange"
-                                            ng-click="switchTab('referenceRecords')">Reference <span
-                                                class="d-none d-sm-inline-block">records</span> <span
+                                            ng-click="switchTab('referenceRecords')">{{::('searchDirectiveT.reference'|$translate)}} <span
+                                                class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span> <span
                                                 class=" badge rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.reference?searchResult.data.facets.schemaTypes.reference:0"></span></a>
                                     </li>
@@ -290,7 +289,7 @@
                                         ng-class="{'active':searchResult.currentTab==='scbdRecords'}">
                                         <a rel="noopener" translation-url href="#" class="nav-link color-darkgrey"
                                             ng-click="switchTab('scbdRecords')">
-                                            SCBD <span class="d-none d-sm-inline-block">records</span>
+                                            SCBD <span class="d-none d-sm-inline-block">{{::('searchDirectiveT.records'|$translate)}}</span>
                                             <span class="badge rounded-pill"
                                                 ng-bind="searchResult.data.facets.schemaTypes.scbd?searchResult.data.facets.schemaTypes.scbd:0"></span>
                                         </a>
@@ -392,15 +391,15 @@
 
          <div class="modal-header">
             <h3 class="modal-title">
-                Save Filter
+                {{::('searchDirectiveT.saveFilter'|$translate)}}
             </h3>
         </div>
         <div class="modal-body">
             <form>
                 <fieldset>
                     <div class="form-group">
-                        <label for="filterTitle">Filter title</label>
-                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="Filter title" />
+                        <label for="filterTitle">{{::('searchDirectiveT.filterTitle'|$translate)}}</label>
+                        <input if="filterTitle" type="text" ng-model="record.queryTitle" class="form-control" placeholder="{{::('searchDirectiveT.filterTitle'|$translate)}}" />
                     </div>
                     <div class="form-group">
                         <label for="filters">Filters</label><br/>
@@ -414,31 +413,31 @@
                     <div class="form-group">
                         <label for="sendEmail">
                             <input type="checkbox" name="sendEmail" ng-model="record.sendEmail" />
-                             Send me an email when records relevant to this search are added or updated.
+                             {{::('searchDirectiveT.email'|$translate)}}
                         </label>
                     </div>
                 </fieldset>
             </form>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="saveFilter()" ng-disabled="loading">Save</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('searchDirectiveT.cancel'|$translate)}}</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="saveFilter()" ng-disabled="loading">{{::('searchDirectiveT.save'|$translate)}}</button>
         </div>
     </script>
 
     <div class="d-none">
-        <span id="exportDisabledMessage">Please wait for the query to finish before exporting.</span>
+        <span id="exportDisabledMessage">{{::('searchDirectiveT.exportDisabled'|$translate)}}</span>
     </div>
     <joyride ng-if="tourOn"></joyride>
     <script type="text/ng-template" trados-translation="true" id="saveMySearchDialog">
         <div class="modal-header">
             <h3 class="modal-title">
-                Create or edit a saved search filter
+                {{::('searchDirectiveT.createFilter'|$translate)}}
             </h3>
         </div>
         <div class="modal-body">
             <div class="form-group">
-                <label class="color-black fw-bold pb-2" for="filterTitle">Title for this saved search:</label>
+                <label class="color-black fw-bold pb-2" for="filterTitle">{{::('searchDirectiveT.title'|$translate)}}</label>
                 <input type="text" ng-model="document.queryTitle" class="form-control" placeholder="Search title" />
             </div>
             <div>
@@ -447,7 +446,7 @@
                 </div>
             </div>
             <input type="checkbox"if="sendEmail" type="text" ng-model="document.sendEmail" />
-            <label class="color-black fw-bold m-2" for="sendEmail"> Send me an email when records relevant to this search are added or updated.</label>
+            <label class="color-black fw-bold m-2" for="sendEmail"> {{::('searchDirectiveT.email'|$translate)}}</label>
             <div class="alert alert-danger" role="alert" ng-if="errors && errors.length > 0">
                 <p ng-repeat="error in errors" ng-bind="error"></p>
             </div>
@@ -460,8 +459,8 @@
             </span>
         </span>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default float-start" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">Cancel</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">Save</button>
+            <button type="button" class="btn btn-default float-start" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('searchDirectiveT.cancel'|$translate)}}</button>
+            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">{{::('searchDirectiveT.save'|$translate)}}</button>
         </div>
     </script>
 </div>

@@ -6,14 +6,14 @@
                 num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
         </div>    
         <div ng-if="loading">
-            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
+            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> {{::('viewResultT.loading'|$translate)}}
         </div>
         <div ng-repeat="doc in searchResult.docs" class="mt-1">
             <result-default doc="doc" external-link="true" type="{{::searchResult.schemas[doc.schema_s].type}}"></result-default>  
         </div>
-        <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">no records found</h4>
+        <h4 class="bg-white" ng-if="!loading && searchResult.docs.length === 0">{{::('viewResultT.noRecordsFound'|$translate)}}</h4>
         <div ng-if="loading && searchResult.pageCount>0">
-            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> loading..
+            <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> {{::('viewResultT.loading'|$translate)}}
         </div>
         <div class="d-flex justify-content-center">
             <pagination  class="text-center" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 

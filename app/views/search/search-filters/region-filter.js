@@ -2,8 +2,9 @@ import app from 'app';
 import template from 'text!./region-filter.html';
 import _ from 'lodash';
 import 'services/main';
+import regionFilterT from '~/app-text/views/search/search-filters/region-filter.json';
 
-    app.directive('regionFilter', ['locale', function(locale) {
+app.directive('regionFilter', ['locale', 'translationService', function (locale, translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -12,7 +13,7 @@ import 'services/main';
             template: template, 
             scope: false,
             link: function($scope, $element, $attrs, searchDirectiveCtrl) {
-
+               translationService.set('regionFilterT', regionFilterT);
                $scope.cf_regions = searchDirectiveCtrl.getSearchFilters("region");
                $scope.regionAlphabetFilter = null;
                $scope.alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' ];

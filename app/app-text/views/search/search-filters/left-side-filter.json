@@ -1,0 +1,20 @@
+{
+    "subFilter": "SUB-FILTERS",
+    "clearAllFilters": "Clear all filters",
+    "remove": "Remove",
+    "temporarilyDisable": "Temporarily disable",
+    "reEnable": "Re-enable",
+    "excludeResults": "Exclude results",
+    "includeResults": "Include results",
+    "clearFilters": "Clear filters",
+    "clear": "clear",
+    "yes": "Yes",
+    "no": "No",
+    "not": "NOT",
+    "searchRelation": "Search in Relation",
+    "loading": "loading...",
+    "searchRelated": "Search related",
+    "cancel": "Cancel",
+    "apply": "Apply",
+    "searchIn": "Search in"
+}
