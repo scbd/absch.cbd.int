@@ -30,18 +30,18 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
                     if(windowHeight != height){
                         windowHeight = height;
                         const data = {
-                            ...iframeOriginData,
+                            ...iframeOriginData.data,
                             height  : windowHeight,
                             type    : 'setClientHeight'
                         };
-                        window.parent.postMessage(JSON.stringify(data), iframeOriginData);
+                        window.parent.postMessage(JSON.stringify(data), iframeOriginData.origin);
                     }
                 }
                 window.addEventListener('message', (evt)=>{
                     if(evt.data){
                         const data = JSON.parse(evt.data);
                         if(data.type == 'getClientHeight' && window.scbdEmbedData){
-                            iframeOriginData = data;
+                            iframeOriginData = {data, origin :evt.origin };
                             sendIframeCommunication();
                             resize_ob.observe(document.querySelector("#wrapper"));
                         }
