@@ -1,0 +1,12 @@
+{
+  "countryInformation": "国家信息",
+  "map": "地图",
+  "selectCountry": "选择国家/地区",
+  "filterByStatus": "按名古屋议定书缔约方身份筛选",
+  "all": "全部",
+  "party": "缔约方",
+  "nonParty": "非缔约方",
+  "filterByRecordTypes": "按记录类型筛选国家/地区",
+  "countries": "国家/地区",
+  "records": "记录"
+}

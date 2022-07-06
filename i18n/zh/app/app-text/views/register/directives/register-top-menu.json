@@ -1,0 +1,11 @@
+{
+  "dashboard": "仪表板",
+  "requests": "请求",
+  "notifications": "通知",
+  "alerts": "提示",
+  "userManagement": "用户管理",
+  "preferences": "首选项",
+  "admin": "管理",
+  "menu": "菜单",
+  "reports": "报告"
+}

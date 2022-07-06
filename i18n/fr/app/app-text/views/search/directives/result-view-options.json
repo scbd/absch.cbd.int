@@ -1,0 +1,20 @@
+{
+  "defaultView": "VUE PAR DÉFAUT",
+  "list": "LISTE",
+  "group": "GROUPE",
+  "matrix": "MATRICE",
+  "sort": "Trier",
+  "export": "Exporter",
+  "sortByField": "Trier par champs (sélectionnez un ou plusieurs champs)",
+  "sortBy": "Trier par",
+  "thenBy": "puis par",
+  "relevance": "Pertinence :",
+  "relevanceInfo": "Le classement par pertinence est le processus de tri des résultats des documents de sorte que les documents les plus susceptibles d'être pertinents pour votre requête sont affichés en haut.",
+  "relevanceLink": "La pertinence ne peut être combinées à aucun autre champs.",
+  "cancel": "Annuler",
+  "apply": "Appliquer",
+  "groupByField": "Trier par champs (sélectionnez un ou plusieurs champs)",
+  "groupBy": "",
+  "government": "",
+  "recordType": "Type de fichier"
+}

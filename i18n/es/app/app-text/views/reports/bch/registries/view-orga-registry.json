@@ -1,0 +1,14 @@
+{
+  "registries": "",
+  "geneticElementRegistry": "Directorio de elementos genéticos",
+  "lmoTitle": "Directorio de OVM",
+  "organismRegistry": "",
+  "organismInfo": "El Directorio de organismos incluye información resumida sobre aquellos organismos que se han registrado en el CIISB como organismos parentales, receptores o donantes. El Directorio incluye enlaces a los registros de cada organismo en los que puede encontrarse información adicional sobre características biológicas pertinentes, incluidos datos como la clasificación taxonómica, el nombre común, el origen, el centro de origen y el centro de diversidad genética. Al pie de cada registro individual, se proporcionan enlaces a los registros de OMV pertinentes.",
+  "here": "aquí",
+  "perform": "",
+  "loading": "Cargando...",
+  "error": "",
+  "totalRecords": "Registros totales:",
+  "export": "Exportar",
+  "click": "Hacer clic"
+}

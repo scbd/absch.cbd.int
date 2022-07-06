@@ -1,0 +1,19 @@
+{
+  "generalInfo": "",
+  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
+  "country": "Pays",
+  "title": "Titre du dossier",
+  "selectOption": "Veuillez choisir un pays...",
+  "links": "Lien(s) utile(s)",
+  "linksInfo": "Veuillez indiquer l'URL du site Web (par exemple http://www.cbd.int) et le nom du site Web (par exemple «La Convention sur la diversité biologique»).",
+  "abstract": "Résumé analytique",
+  "abstractInfo": "(80 mots maximum)",
+  "newsText": "Texte de la nouvelle",
+  "newsTextInfo": "(300 mots maximum)",
+  "otherRelevantInformation": "Tout autre information utile",
+  "relevantInformationInfo": "",
+  "anyrelevantDocuments": "Autres documents pertinents",
+  "anyrelevantDocumentsInfo": "Veuillez utiliser ce champ pour toutes autres adresses de sites Web et/ou documents pertinents à conserver dans la base de données aux fins de téléchargement par les utilisateurs.",
+  "notes": "Notes",
+  "notesInfos": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles."
+}

@@ -1,0 +1,23 @@
+{
+  "generalInfo": "一般信息",
+  "languageToPublish": "请选择您希望提交之记录的语言：",
+  "country": " 国家",
+  "title": " ",
+  "selectOption": "请选择一个国家...",
+  "summary": "3.摘要",
+  "jurisdiction": "4.辖区：",
+  "jurisdictionInfo": "与此国家示范合同条款相关的辖区",
+  "nameSubJurisdiction": "次国家辖区名称",
+  "communityName": "社区名称",
+  "jurisdictionName": "其他辖区名称",
+  "relevantMeasures": "5.相关获取和惠益分享措施：",
+  "relevantMeasuresInfo": "请提供相关获取和惠益分享措施。",
+  "keywords": "6.请选择相关关键词：",
+  "thematicArea": "7.专题领域：",
+  "attachments": "附件",
+  "resourceLinks": "资源链接",
+  "relevantInformation": "8. a) 关于附件的相关信息：",
+  "relevantDocuments": "",
+  "notes": "备注",
+  "notesInfos": "“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+}

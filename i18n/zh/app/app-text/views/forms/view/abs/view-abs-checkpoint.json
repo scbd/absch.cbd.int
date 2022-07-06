@@ -1,0 +1,15 @@
+{
+  "generalInfo": "一般信息",
+  "country": "国家",
+  "checkpointName": "检查点名称",
+  "cpResponsibilities": "检查点职责",
+  "stage": "所收集或接收信息的阶段",
+  "jurisdiction": "辖区",
+  "authority": "接收检查站公报抄送本的机构",
+  "authorityInfo": "以下所示的联络人将以电子邮件方式收取含此检查站收集或收到并发布之信息的检查站公报。",
+  "allCnaOne": "",
+  "allCnaTow": "",
+  "noAddAuthorities": "未选任何其他当局以电子邮件方式自动接收此检查站发布的检查站公报。",
+  "additionalInformation": "更多信息",
+  "relevantLinks": "其他相关链接或附件"
+}

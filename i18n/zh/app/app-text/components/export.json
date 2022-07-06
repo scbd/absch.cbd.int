@@ -1,0 +1,22 @@
+{
+  "exportButton": "导出",
+  "dialogTitle": "导出",
+  "downloadFormat": "下载格式",
+  "xls": "XLS (Excel)",
+  "xlsx": "XLSX (Excel)",
+  "csv": "CSV（逗号分隔）",
+  "processing": "正在处理...",
+  "recordsFound": "已找到记录",
+  "type": "类型",
+  "uid": "",
+  "government": "政府",
+  "title": "标题",
+  "info1": "信息 1",
+  "info2": "信息 2",
+  "info3": "信息 3",
+  "info4": "信息 4",
+  "publishedDate": "发布日期",
+  "sampleMessage": "以下为待导出信息的样本。所有通过此搜索检索到的记录都将包括该导出中。",
+  "cancel": "取消",
+  "download": "下载"
+}

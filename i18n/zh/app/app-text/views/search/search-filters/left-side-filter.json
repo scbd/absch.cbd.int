@@ -1,0 +1,20 @@
+{
+  "subFilter": "子筛选条件",
+  "clearAllFilters": "清除所有筛选条件",
+  "remove": "删除",
+  "temporarilyDisable": "暂时禁用",
+  "reEnable": "重新启用",
+  "excludeResults": "排除结果",
+  "includeResults": "包括结果",
+  "clearFilters": "清除筛选条件",
+  "clear": "清除",
+  "yes": "是",
+  "no": "否",
+  "not": "否",
+  "searchRelation": "",
+  "loading": "正在加载...",
+  "searchRelated": "搜索相关",
+  "cancel": "取消",
+  "apply": "应用",
+  "searchIn": ""
+}

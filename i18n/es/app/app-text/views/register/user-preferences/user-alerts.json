@@ -1,0 +1,19 @@
+{
+  "systemAlert": "",
+  "certificatesInfo": "",
+  "emailMe": "",
+  "search": "Buscar",
+  "edit": "Editar",
+  "delete": "Eliminar",
+  "addNew": "Agregar nuevo",
+  "loading": "Cargando...",
+  "isAuthenticated": "",
+  "isNotAuthenticated": "",
+  "searchFilter": "",
+  "filterTitle": "",
+  "selectFilters:": "Seleccionar filtros de búsqueda:",
+  "sendEmail": "Enviarme un correo electrónico cuando se agreguen o actualicen registros pertinentes.",
+  "cancel": "Cancelar",
+  "save": "Guardar",
+  "searchTitle": "Buscar título"
+}

@@ -1,0 +1,21 @@
+{
+  "generalInfo": "Informations générales",
+  "country": "Pays",
+  "description": "Description des procédures d’APA",
+  "title": "Titre",
+  "jurisdiction": "Domaine de juridiction",
+  "contactsLinks": "Où faire des demandes d’accès",
+  "requirements": "Conditions ou exigences auxquelles un utilisateur potentiel doit répondre pour demander l'accès",
+  "descriptionLinks": "Description étape par étape ou représentation visuelle de la procédure d’APA",
+  "hasApplicationDocuments": "Le demandeur doit-il fournir des documents",
+  "applicationInformation": "Informations sur les formulaires de demande ou les documents requis",
+  "applicationLinks": "Formulaire, document de demande ou lien vers le site Web",
+  "applicationContacts": "Informations sur le destinataire de la demande (à qui doit-elle être envoyée)",
+  "hasApplicationFees": "Y a-t-il des frais liés à une demande",
+  "applicationFeesInformation": "Informations supplémentaires sur les frais de demande",
+  "duration": "Combien de temps dure le processus de demande",
+  "relevantMeasures": "Mesures d’APA pertinentes",
+  "keywords": "Mots-clés",
+  "addInfo": "Informations supplémentaires",
+  "relevantDocuments": "Autres sites Internet ou fichiers en pièces jointes"
+}

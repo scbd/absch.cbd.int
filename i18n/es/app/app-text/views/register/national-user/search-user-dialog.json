@@ -1,0 +1,21 @@
+{
+  "searchNominee": "Buscar una persona designada",
+  "searchNomineeInfo": "",
+  "emailAddress": "Dirección de correo electrónico de la persona designada",
+  "mandatory": "Este campo es obligatorio",
+  "emailIncomplete": "Correo electrónico inválido o incompleto",
+  "oups": "¡Uy!",
+  "oupsInfo": "Lo lamentamos, pero no está autorizado a designar un nuevo usuario.",
+  "oops": "¡Uy!",
+  "oopsInfo": "Lo lamentamos, pero hubo un problema.",
+  "userNotFound": "Usuario no encontrado:",
+  "userInfo": "Sírvase observar que la dirección de correo electrónico especificada no corresponde a ninguna Cuenta de usuario existente. No obstante puede realizar la designación creando una nueva Cuenta de usuario. El usuario nuevo recibirá un correo electrónico con un enlace para activar su cuenta y crear una contraseña.",
+  "nominateEmailAddress": "Designar un nuevo usuario usando la siguiente dirección de correo electrónico",
+  "firstName": "Nombre",
+  "lastName": "Apellido",
+  "organization": "Organización",
+  "email": "Correo electrónico",
+  "continue": "Seguir con",
+  "cancel": "cancelar",
+  "next": "Siguiente"
+}

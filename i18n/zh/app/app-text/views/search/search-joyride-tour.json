@@ -1,0 +1,74 @@
+{
+  "welcome": {
+    "title": "欢迎使用搜索页面",
+    "content": "<p> </p>"
+  },
+  "globalSearch": {
+    "title": "全局筛选条件",
+    "content": "<p></p>"
+  },
+  "freeText": {
+    "title": "自由文本搜索",
+    "content": "<p></u> </p>"
+  },
+  "recordTypesFilterTab": {
+    "title": "根据记录类型进行过滤",
+    "content": "<p> </p>"
+  },
+  "keywordsFilterTab": {
+    "title": "按关键词搜索",
+    "content": "<p></p>"
+  },
+  "countryFilterTab": {
+    "title": "按国家搜索",
+    "content": "<p></u>  </p>"
+  },
+  "regionFilterTab": {
+    "title": "按地区搜索",
+    "content": "<p></p>"
+  },
+  "dateFilterTab": {
+    "title": "按日期搜索",
+    "content": "<p> </p>"
+  },
+  "closeFilterTab": {
+    "title": "搜索结果",
+    "content": "<p></p>"
+  },
+  "searchResult": {
+    "title": "搜索结果：选项卡",
+    "content": "<p> </u> </p>"
+  },
+  "subFilters": {
+    "title": "子筛选条件",
+    "content": "<p></p>"
+  },
+  "recordView": {
+    "title": "搜索结果：查看记录",
+    "content": "<p></p>"
+  },
+  "viewType": {
+    "title": "搜索结果：查看类型",
+    "content": "<p></p>"
+  },
+  "sortBy": {
+    "title": "搜索结果：排序",
+    "content": "<p></p>"
+  },
+  "sendRecords": {
+    "title": "搜索结果：分享",
+    "content": "<p></p>"
+  },
+  "exportRecords": {
+    "title": "搜索结果：导出",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "需要帮助吗？",
+    "content": "单击此处，以访问上下文帮助，在这里您可以找到更多与搜索页面有关的信息。"
+  },
+  "needMoreHelp": {
+    "title": "需要更多帮助吗？",
+    "content": "使用聊天功能给我们发消息以获得更多支持。"
+  }
+}

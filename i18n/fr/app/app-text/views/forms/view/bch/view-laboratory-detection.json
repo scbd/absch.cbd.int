@@ -1,0 +1,14 @@
+{
+  "generalInfo": "",
+  "organization": "Nom du laboratoire et coordonnées",
+  "relatedOrganization": "Organisations reliées",
+  "services": "Services et activités menés",
+  "collaborativeAgreements": "Accords de collaboration",
+  "certifications": "Accréditations et certifications du laboratoire",
+  "detectionMethods": "Types de méthodes de détection/identification utilisés par le laboratoire",
+  "lmoTypes": "Types d'OVM",
+  "detectableLmos": "OVM(s) détectable(s) par le laboratoire",
+  "detectableGenes": "Élément(s) génétique(s) détectable(s) par le laboratoire",
+  "additionalInformation": "Informations supplémentaires",
+  "relevantDocuments": "Autres sites web pertinents et/ou documents en pièce jointe"
+}

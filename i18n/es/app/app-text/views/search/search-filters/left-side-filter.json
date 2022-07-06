@@ -1,0 +1,20 @@
+{
+  "subFilter": "FILTROS SUBORDINADOS",
+  "clearAllFilters": "Borrar todos los filtros",
+  "remove": "Eliminar",
+  "temporarilyDisable": "Desactivar temporariamente",
+  "reEnable": "Reactivar",
+  "excludeResults": "Excluir resultados",
+  "includeResults": "Incluir resultados",
+  "clearFilters": "Borrar filtros",
+  "clear": "borrar",
+  "yes": "Sí",
+  "no": "No",
+  "not": "NO",
+  "searchRelation": "",
+  "loading": "cargando...",
+  "searchRelated": "Buscar relacionado",
+  "cancel": "Cancelar",
+  "apply": "Aplicar",
+  "searchIn": ""
+}
