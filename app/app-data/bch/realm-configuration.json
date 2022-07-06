@@ -1,495 +1,878 @@
-﻿{
-  "_id" : "5aa98c5f7d20f19bfaf66400",
-  "hosts" : [ 
-      "bch.cbddev.xyz", 
-      "localhost:2010", 
-      "bch.local"
-  ],
-  "protocol" : "Cartagena Protocol",
-  "protocolShortName" : "BCH",
-  "uIdPrefix" : "BCH",
-  "realm" : "BCH-DEV",
-  "displayName" : "Biosafety Clearing-House-Dev",
-  "email" : "bch@cbd.int",
-  "adminRoles" : [ 
-      "BchDocumentValidationTeamMember-dev"
-  ],
-  "nfpRoles" : [ 
-      "BchPublishingAuthorities-dev"
-  ],
-  "notificationTemplateFolder" : "BCH",
-  "baseURL" : "https://bch.cbddev.xyz",
-  "envMsg" : "This record is from BCH-Dev (test environment)",
-  "roles" : {
-      "administrator" : [ 
-          "Administrator", 
-          "BchAdministrator-dev"
+﻿[
+    {
+      "_id": "5400a10fb02e1ab8752d2125",
+      "hosts": [
+        "bch.cbd.int",
+        "new-bch.cbd.int"
       ],
-      "publishingAuthorities" : [ 
-          "BchNationalFocalPoint-Dev", 
+      "protocol": "Cartagena Protocol",
+      "protocolShortName": "BCH",
+      "uIdPrefix": "BCH",
+      "realm": "BCH",
+      "displayName": "Biosafety Clearing-House",
+      "email": "bch@cbd.int",
+      "adminRoles": [
+        "BchAdministrator"
+      ],
+      "nfpRoles": [
+        "NationalFocalPoint"
+      ],
+      "notificationTemplateFolder": "BCH",
+      "baseURL": "https://bch.cbd.int",
+      "roles": {
+        "administrator": [
+          "Administrator",
+          "BchAdministrator"
+        ],
+        "publishingAuthorities": [
           "NationalFocalPoint"
-      ],
-      "iac" : [],
-      "nationalAuthorizedUser" : [ 
-          "BchAuthorizedUser-Dev", 
-          "AuthorizedUser", 
+        ],
+        "iac": [],
+        "nationalAuthorizedUser": [
+          "AuthorizedUser",
           "NFP-CPB"
-      ],
-      "nationalFocalPoint" : [ 
-          "BchNationalFocalPoint-Dev", 
+        ],
+        "nationalFocalPoint": [
           "NFP-CPB"
-      ],
-      "scbdPublishingAuthorities" : [ 
-          "BchDocumentValidationTeamMember-dev"
-      ]
-  },
-  "schemas" : {
-      "focalPoint" : {
-          "type" : "national",
-          "title" : {
-              "en" : "National Focal Points"
-          },
-          "description" : {
-              "en" : "Cartagena Protocol on Biosafety National Focal Points (responsible for liaising with the Secretariat), Biosafety Clearing-House National Focal Points (responsible for publishing information in the BCH), Emergency Measures Contact Points (responsible for receiving notifications under Art. 17)."
-          },
-          "shortCode" : "NFP",
-          "titlePlural" : {
-              "en" : "National Focal Points"
-          }
+        ],
+        "scbdPublishingAuthorities": [
+          "BchAdministrator"
+        ]
       },
-      "authority" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Competent National Authority"
-          },
-          "description" : {
-              "en" : "Entities designated by governments to perform the administrative functions required by the Protocol (Article 19)."
-          },
-          "shortCode" : "CNA",
-          "titlePlural" : {
-              "en" : "Competent National Authorities"
-          }
+      "schemas": {
+        "focalPoint": {
+            "type": "national",
+            "title": {
+                "en": "National Focal Points",
+                "zh": "国家联络点",
+                "ru": "Национальные координационные центры",
+                "fr": "Correspondants nationaux",
+                "es": "Puntos focales nacionales",
+                "ar": "نقاط الاتصال الوطنية"
+            },
+            "description": {
+                "en": "Cartagena Protocol on Biosafety National Focal Points (responsible for liaising with the Secretariat), Biosafety Clearing-House National Focal Points (responsible for publishing information in the BCH), Emergency Measures Contact Points (responsible for receiving notifications under Art. 17).",
+                "zh": "卡塔赫纳生物安全议定书国家联络点（负责与秘书处联络），生物安全信息交换所国家联络点（负责在生物安全信息交换所发布信息），紧急措施联络点（负责接受第17条项下通知）。",
+                "ru": "Национальные координационные центры по Картахенскому протоколу по биобезопасности (отвечающие за связь с Секретариатом), национальные координационные центры по Механизму посредничества по биобезопасности (отвечающие за опубликование информации в МПБ), контактные пункты по чрезвычайным мерам (отвечающие за получение уведомлений в соответствии со статьей 17).",
+                "fr": "Correspondants nationaux du Protocole de Cartagena sur la prévention des risques biotechnologiques (responsables de la liaison avec le Secrétariat), Correspondants nationaux du Centre d'échange pour la prévention des risques biotechnologiques (responsables de la publication des informations dans le BCH), Points de contact pour les mesures d'urgence (responsables de la réception des notifications en vertu de l'article 17).",
+                "es": "Puntos focales nacionales del Protocolo de Cartagena (responsables de los vínculos con la Secretaría), Puntos focales nacionales del Centro de Intercambio de Información sobre Seguridad de la Biotecnología (responsables de la publicación de información en el CIISB), Puntos de contacto para medidas de emergencia (responsables de la recepción de notificaciones según lo estipulado en el artículo 17).",
+                "ar": "بروتوكول قرطاجنة بشأن نقاط الاتصال الوطنية للسلامة الأحيائية (المسؤولة عن التواصل مع الأمانة)، ونقاط الاتصال الوطنية لغرفة تبادل معلومات السلامة الأحيائية (المسؤولة عن نشر المعلومات في غرفة تبادل معلومات السلامة الأحيائية)، ونقاط الاتصال لتدابير الطوارئ (المسؤولة عن تلقي الإخطارات بموجب المادة 17)."
+            },
+            "shortCode": "NFP",
+            "titlePlural": {
+                "en": "National Focal Points",
+                "zh": "国家联络点",
+                "ru": "Национальные координационные центры",
+                "fr": "Correspondants nationaux",
+                "es": "Puntos focales nacionales",
+                "ar": "نقاط الاتصال الوطنية"
+            }
+        },
+        "authority": {
+            "type": "national",
+            "title": {
+                "en": "Competent National Authority",
+                "zh": "国家主管部门",
+                "ru": "Компетентный национальный орган",
+                "fr": "Autorité nationale compétente",
+                "es": "Autoridad Nacional Competente",
+                "ar": "السلطة الوطنية المختصة"
+            },
+            "description": {
+                "en": "Entities designated by governments to perform the administrative functions required by the Protocol (Article 19).",
+                "zh": "政府指定执行议定书（第19条）要求的行政管理职能的实体。",
+                "ru": "Учреждения, назначенные правительствами для выполнения административных функций, требуемых Протоколом (статья 19).",
+                "fr": "Les entités nommées par les gouvernements pour assurer les fonctions administratives requises par le Protocole (article 19)",
+                "es": "Entidades designadas por los gobiernos para llevar a cabo las funciones administrativas requeridas por el protocolo (artículo 19).",
+                "ar": "الكيانات التي عينتها الحكومات لأداء الوظائف الإدارية التي ينص عليها البروتوكول (المادة 19)."
+            },
+            "shortCode": "CNA",
+            "titlePlural": {
+                "en": "Competent National Authorities",
+                "zh": "国家主管部门",
+                "ru": "Компетентные национальные органы",
+                "fr": "Autorités nationales compétentes",
+                "es": "Autoridades nacionales competentes",
+                "ar": "السلطات الوطنية المختصة"
+            }
+        },
+        "supplementaryAuthority": {
+            "type": "national",
+            "title": {
+                "en": "Supplementary Protocol Competent Authority",
+                "zh": "补充议定书主管部门",
+                "ru": "Компетентный орган по Дополнительному протоколу",
+                "fr": "Autorités compétentes au Protocole additionnel",
+                "es": "Autoridades competentes para el Protocolo suplementario",
+                "ar": "السلطة المختصة بالبروتوكول التكميلي"
+            },
+            "description": {
+                "en": "Entities designated to perform the functions set out in Article 5 of the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress.",
+                "zh": "指定执行责任和补救问题名古屋-吉隆坡补充议定书第5条所载职能的实体。",
+                "ru": "Учреждения, назначенные для выполнения функций, изложенных в статье 5 Нагойско-Куала-Лумпурского дополнительного протокола об ответственности и возмещении.",
+                "fr": "Entités désignées pour exercer les fonctions énoncées à l'article 5 du Protocole additionnel de Nagoya - Kuala Lumpur sur la responsabilité et la réparation.",
+                "es": "Entidades designadas para llevar a cabo las funciones establecidas en el artículo 5 del Protocolo suplementario de Nagoya-Kuala Lumpur sobre responsabilidad y compensación.",
+                "ar": "الكيانات المعينة لأداء المهام المنصوص عليها في المادة 5 من بروتوكول ناغويا - كوالالمبور التكميلي بشأن المسؤولية والجبر التعويضي."
+            },
+            "shortCode": "SPCA",
+            "titlePlural": {
+                "en": "Supplementary Protocol Competent Authorities",
+                "zh": "补充议定书主管部门",
+                "ru": "Компетентные органы по Дополнительному протоколу",
+                "fr": "Autorités compétentes au Protocole additionnel",
+                "es": "Autoridades competentes para el Protocolo suplementario",
+                "ar": "السلطة المختصة بالبروتوكول التكميلي"
+            }
+        },
+        "biosafetyLaw": {
+            "type": "national",
+            "title": {
+                "en": "Biosafety Law, Regulation, Guidelines and Agreements",
+                "zh": "生物安全法、条例、准则和协议",
+                "ru": "Законодательство, нормативные положения, руководящие принципы и соглашения по биобезопасности",
+                "fr": "Lois, règlementations, lignes directrices, accords et lois sur la prévention des risques biotechnologiques",
+                "es": "Leyes, reglamentos, directrices y acuerdos en materia de seguridad de la biotecnología",
+                "ar": "القوانين واللوائح والمبادئ التوجيهية والاتفاقيات المتعلقة بالسلامة الأحيائية"
+            },
+            "description": {
+                "en": "Legal, administrative and other measures to implement the Cartagena Protocol and any bilateral, regional and multilateral agreements regarding the intentional transboundary movement of living modified organisms.",
+                "zh": "执行卡塔赫纳议定书及任何有关改性活生物体有意越境转移的双边、区域和多边协议的法律、行政和其他措施。",
+                "ru": "Законодательные, административные и другие меры для осуществления Картахенского протокола и любые двусторонние, региональные и многосторонние соглашения в отношении преднамеренного трансграничного перемещения живых измененных организмов.",
+                "fr": "Mesures juridiques, administratives et autres pour mettre en œuvre le Protocole de Cartagena et tout accord bilatéral, régional et multilatéral concernant le mouvement transfrontière intentionnel d'organismes vivants modifiés.",
+                "es": "Medidas jurídicas, administrativas y de otro tipo necesarias para aplicar el Protocolo de Cartagena y los acuerdos bilaterales, regionales y multilaterales relativos a los movimientos transfronterizos intencionales de organismos vivos modificados.",
+                "ar": "التدابير القانونية والإدارية وغيرها من التدابير لتنفيذ بروتوكول قرطاجنة وأي اتفاقات ثنائية وإقليمية ومتعددة الأطراف تتعلق بالنقل المقصود للكائنات الحية المُحوَّرة عبر الحدود."
+            },
+            "shortCode": "LAW",
+            "titlePlural": {
+                "en": "Biosafety Laws, Regulations, Guidelines and Agreements",
+                "zh": "生物安全法、条例、准则和协议",
+                "ru": "Законы, нормативные положения, руководящие принципы и соглашения по биобезопасности",
+                "fr": "Lois, règlementations, lignes directrices, accords et lois sur la prévention des risques biotechnologiques",
+                "es": "Leyes, reglamentos, directrices y acuerdos en materia de seguridad de la biotecnología",
+                "ar": "القوانين واللوائح والمبادئ التوجيهية والاتفاقيات المتعلقة بالسلامة الأحيائية"
+            },
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForLaws",
+                "NFP-CPB"
+            ]
+        },
+        "biosafetyDecision": {
+            "type": "national",
+            "title": {
+                "en": "Country's Decision or any other Communication",
+                "zh": "各国的决定或其它通讯往来",
+                "ru": "Решение страны или любое другое сообщение",
+                "fr": "Décision de pays ou tout autre communication",
+                "es": "Decisión o cualquier otra comunicación de un país",
+                "ar": "قرار البلد وأي وثيقة أو منشور آخر"
+            },
+            "description": {
+                "en": "National decisions, notifications, declarations or communications under the Cartagena Protocol.",
+                "zh": "卡塔赫纳议定书下的国家决定、通知、声明或通信。",
+                "ru": "Национальные решения, уведомления, заявления или сообщения по Картахенскому протоколу.",
+                "fr": "Décisions, notifications, déclarations ou communications nationales au titre du Protocole de Cartagena.",
+                "es": "Decisiones, notificaciones, declaraciones o comunicaciones en el marco del Protocolo de Cartagena.",
+                "ar": "القرارات أو الإخطارات أو الإعلانات أو الوثائق الوطنية بمقتضى  بروتوكول قرطاجنة."
+            },
+            "shortCode": "DEC",
+            "titlePlural": {
+                "en": "Countries' Decisions or any other Communications",
+                "zh": "各国的决定或其它通讯往来",
+                "ru": "Решения страны или любые другие сообщения",
+                "fr": "Décisions des pays ou toute autre communication",
+                "es": "Decisiones o cualquier otra comunicación de un país",
+                "ar": "قرارات البلدان وأي وثائق ومنشورات أخرى"
+            },
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForDecisions",
+                "NFP-CPB"
+            ]
+        },
+        "nationalRiskAssessment": {
+            "type": "national",
+            "title": {
+                "en": "Risk Assessment generated by a regulatory process",
+                "zh": "根据规定方式作出的风险评估",
+                "ru": "Оценка рисков, проводимая в рамках регламентационного процесса",
+                "fr": "Évaluation des risques générée par un processus de réglementation",
+                "es": "Evaluación del riesgo generada por un proceso regulatorio",
+                "ar": "تقرير تقييم المخاطر الذي تم إعداده في إطار رسمي"
+            },
+            "description": {
+                "en": "Summaries of risk assessments or environmental reviews of living modified organisms generated by a regulatory process and carried out in accordance with Article 15.",
+                "zh": "根据第15条按规定方式对改性活生物体作出的风险评估或环境审查的结论摘要。",
+                "ru": "Резюме итогов оценок риска или экологических обзоров в отношении живых измененных организмов, проводимых в рамках регламентационного процесса и осуществляемых в соответствии со статьей 15.",
+                "fr": "Résumés d'évaluations des risques ou d'examens environnementaux d'organismes vivants modifiés générés par un processus réglementaire et réalisés conformément à l'article 15 du Protocole de Cartagena.",
+                "es": "Resúmenes de evaluaciones del riesgo o exámenes ambientales de organismos vivos modificados generados por un proceso regulatorio y realizados de conformidad con el artículo 15.",
+                "ar": "ملخصات تقارير تقييم المخاطر أو المراجعات البيئية للكائنات الحية المُحوّرة التي تم إعدادها في إطار رسمي وتنفيذها بمقتضى المادة 15 من بروتوكول قرطاجنة."
+            },
+            "shortCode": "RA",
+            "titlePlural": {
+                "en": "Risk Assessments generated by a regulatory process",
+                "zh": "根据规定方式作出的风险评估",
+                "ru": "Оценки рисков, проводимые в рамках регламентационного процесса",
+                "fr": "Évaluation des risques générés par un processus réglementaire",
+                "es": "Evaluaciones del riesgo generadas por un proceso regulatorio",
+                "ar": "تقارير تقييم المخاطر الذي تم إعداده في إطار رسمي"
+            }
+        },
+        "database": {
+            "type": "national",
+            "title": {
+                "en": "National Biosafety Website or Database",
+                "zh": "国家生物安全性网站或数据库",
+                "ru": "Национальный веб-сайт или национальная база данных по биобезопасности",
+                "fr": "Site Web ou base de donnée nationaux pour la prévention des risques biotechnologiques",
+                "es": "Sitio web o base de datos nacional en materia de seguridad de la biotecnología",
+                "ar": "الموقع الإلكتروني أو قاعدة البيانات الوطنية للسلامة الأحيائية"
+            },
+            "description": {
+                "en": "National websites and databases related to biosafety.",
+                "zh": "与生物安全相关的国家网站及数据库",
+                "ru": "Национальные веб-сайты и базы данных по вопросам биобезопасности.",
+                "fr": "Sites Web et bases de données nationaux liés à la prévention des risques biotechnologiques",
+                "es": "Sitios web y bases de datos nacionales relacionados con la seguridad de la biotecnología.",
+                "ar": "المواقع الإلكترونية وقواعد البيانات الوطنية المتعلقة بالسلامة الأحيائية."
+            },
+            "shortCode": "NDB",
+            "titlePlural": {
+                "en": "National Biosafety Websites or Databases",
+                "zh": "国家生物安全性网站或数据库",
+                "ru": "Национальные веб-сайты или базы данных по биобезопасности",
+                "fr": "Sites Web ou bases de données nationales sur la prévention des risques biotechnologiques",
+                "es": "Sitios web o bases de datos nacionales en materia de seguridad de la biotecnología",
+                "ar": "المواقع الإلكترونية أو قواعد البيانات الوطنية المتعلقة بالسلامة الأحيائية"
+            }
+        },
+        "cpbNationalReport4": {
+            "type": "national",
+            "title": {
+                "en": "Fourth National Report on the Implementation of the Cartagena Protocol on Biosafety",
+                "ar": "التقرير الوطني الرابع حول تنفيذ بروتوكول قرطاجنة للسلامة الأحيائية",
+                "ru": "Четвёртый национальный доклад об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Quatrième rapport national sur l'application du Protocole de Cartagena sur la biosécurité",
+                "es": "Cuarto informe nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第四次国家报告"
+            },
+            "description": {
+                "en": "Fourth National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 1 October 2019)",
+                "zh": "关于卡塔赫纳生物安全议定书实施情况的第四次国家报告（2019年10月1日截止）",
+                "ru": "Четвертые национальные доклады об осуществлении Картахенского протокола по биобезопасности (подлежат представлению 1 октября 2019 года)",
+                "fr": "Quatrièmes rapports nationaux sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques (prévu pour le 1 octobre 2019). ",
+                "es": "Cuarto Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología (previsto para el 1 de octubre de 2019) ",
+                "ar": "الإصدار الرابع للتقارير المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية (المقرر إطلاقها في 1 أكتوبر/تشرين الأول 2019)"
+            },
+            "shortCode": "NR4",
+            "titlePlural": {
+                "en": "Fourth National Reports on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "关于卡塔赫纳生物安全议定书实施情况的第四次国家报告",
+                "ru": "Четвертые национальные доклады об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Quatrièmes rapports nationaux sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Cuarto Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الرابع للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "publishingAuthorities": [
+                "NationalFocalPoint"
+            ],
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForNationalReports",
+                "NFP-CPB"
+            ]
+        },
+        "cpbNationalReport3": {
+            "type": "national",
+            "title": {
+                "en": "Third National Report on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第三次国家报告",
+                "ru": "Третий национальный доклад об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Troisième rapport national sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Tercer Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الثالث للتقرير الوطني المتعلق بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "description": {
+                "en": "Third National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 31 October 2015)",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第三次国家报告（2015年10月31日截止）",
+                "ru": "Третьи национальные доклады об осуществлении Картахенского протокола по биобезопасности (подлежат представлению 31 октября 2015 года)",
+                "fr": "Troisièmes rapports nationaux sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques (prévu pour le 31 octobre 2015)",
+                "es": "Tercer Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología (previsto para el 31 de octubre de 2015)",
+                "ar": "الإصدار الثالث للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية (المقرر إطلاقها في 31 أكتوبر/تشرين الأول 2015)"
+            },
+            "shortCode": "NR3",
+            "titlePlural": {
+                "en": "Third National Reports on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第三次国家报告",
+                "ru": "Третьи национальные доклады об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Troisièmes rapport nationaux sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Tercer Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الثالث للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForNationalReports",
+                "NFP-CPB"
+            ]
+        },
+        "cpbNationalReport2": {
+            "type": "national",
+            "title": {
+                "en": "Second National Report on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第二次国家报告",
+                "ru": "Второй национальный доклад об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Deuxième rapport national sur l’application du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Segundo Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الثاني للتقرير الوطني المتعلق بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "description": {
+                "en": "Second National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 30 September 2011)",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第二次国家报告（2011年9月30日截止）",
+                "ru": "Вторые национальные доклады об осуществлении Картахенского протокола по биобезопасности (подлежат представлению 30 сентября 2011 года)",
+                "fr": "Deuxièmes rapports nationaux sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques (prévu pour le 31 octobre 2015)",
+                "es": "Segundo Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología (previsto para el 30 de septiembre de 2011)",
+                "ar": "الإصدار الثاني للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية (المقرر إطلاقها في 30 سبتمبر/|أيلول 2011)"
+            },
+            "shortCode": "NR2",
+            "titlePlural": {
+                "en": "Second National Reports on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第二次国家报告",
+                "ru": "Вторые национальные доклады об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Deuxièmes rapports nationaux sur l’application du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Segundo Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الثاني للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForNationalReports",
+                "NFP-CPB"
+            ]
+        },
+        "cpbNationalReport1": {
+            "type": "national",
+            "title": {
+                "en": "First National Report on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第一次国家报告",
+                "ru": "Первый национальный доклад об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Premier rapport national sur l’application du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Primer Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الأول للتقرير الوطني المتعلق بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "description": {
+                "en": "First National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 11 September 2007)",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第一次国家报告（2007年9月11日截止）",
+                "ru": "Первые национальные доклады об осуществлении Картахенского протокола по биобезопасности (подлежат представлению 11 сентября 2017 года)",
+                "fr": "Premier rapport national sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques (prévu pour le 11 septembre 2007)",
+                "es": "Primer Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología (previsto para el 11 de septiembre de 2007)",
+                "ar": "الإصدار الأول للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية (المقرر إطلاقها في 11 سبتمبر/أيلول 2007)"
+            },
+            "shortCode": "NR1",
+            "titlePlural": {
+                "en": "First National Reports on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况第一次国家报告",
+                "ru": "Первые национальные доклады об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Premiers rapports nationaux sur l’application du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Primer Informe Nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "الإصدار الأول للتقارير الوطنية المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الإحيائية"
+            },
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForNationalReports",
+                "NFP-CPB"
+            ]
+        },
+        "cpbNationalReportInterim": {
+            "type": "national",
+            "title": {
+                "en": "Interim National Report on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况临时国家报告",
+                "ru": "Промежуточный национальный доклад об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Rapport national intérimaire sur l’application du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Informe Nacional provisional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "التقرير الوطني المؤقت المتعلق بتنفيذ بروتوكول قرطاجنة للسلامة الأحيائية"
+            },
+            "description": {
+                "en": "Interim National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 11 September 2005)",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况临时国家报告（2005年9月11日截止）",
+                "ru": "Промежуточные национальные доклады об осуществлении Картахенского протокола по биобезопасности (подлежат представлению 11 сентября 2005 года)",
+                "fr": "Rapports nationaux sur la mise en œuvre du Protocole de Cartagena sur la prévention des risques biotechnologiques (prévu pour le 11 septembre 2005)",
+                "es": "Informe Nacional provisional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología (previsto para el 11 de septiembre de 2005)",
+                "ar": "التقارير الوطنية المؤقتة المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الأحيائية (المقرر إطلاقها في 11 سبتمبر/أيلول 2005)"
+            },
+            "shortCode": "NRI",
+            "titlePlural": {
+                "en": "Interim National Reports on the Implementation of the Cartagena Protocol on Biosafety",
+                "zh": "《卡塔赫纳生物安全议定书》执行情况临时国家报告",
+                "ru": "Промежуточные национальные доклады об осуществлении Картахенского протокола по биобезопасности",
+                "fr": "Rapports nationaux intérimaires sur l’application du Protocole de Cartagena sur la prévention des risques biotechnologiques",
+                "es": "Informe Nacional provisional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
+                "ar": "التقارير الوطنية المؤقتة المتعلقة بتنفيذ بروتوكول قرطاجنة للسلامة الأحيائية"
+            },
+            "nationalAuthorizedUser": [
+                "AuthorizedUser",
+                "AuthorizedUserForNationalReports",
+                "NFP-CPB"
+            ]
+        },
+        "biosafetyExpert": {
+            "type": "national",
+            "title": {
+                "en": "Biosafety Expert",
+                "zh": "生物安全专家",
+                "ru": "Эксперт по биобезопасности",
+                "fr": "Expert en prévention des risques biotechnologiques",
+                "es": "Experto en la Seguridad de la Biotecnología",
+                "ar": "خبير في السلامة الأحيائية"
+            },
+            "description": {
+                "en": "Biosafety experts in the roster of experts.",
+                "zh": "列入专家名册的生物安全专家",
+                "ru": "Эксперты по биобезопасности, включенные в реестр экспертов.",
+                "fr": "Expert en prévention des risques biotechnologiques pour la liste des experts",
+                "es": "Expertos en seguridad de la biotecnología que figuran en la lista de expertos.",
+                "ar": "خبراء في السلامة الأحيائية ضمن قائمة الخبراء"
+            },
+            "shortCode": "EXP",
+            "titlePlural": {
+                "en": "Biosafety Experts",
+                "zh": "生物安全专家",
+                "ru": "Эксперты по биобезопасности",
+                "fr": "Experts en prévention des risques biotechnologiques",
+                "es": "Expertos en seguridad de la biotecnología",
+                "ar": "خبراء في السلامة الأحيائية"
+            }
+        },
+        "countryProfile": {
+            "type": "national",
+            "title": {
+                "en": "Country Profile for Biosafety Clearing-House",
+                "zh": "生物安全信息交换所国家概况",
+                "ru": "Профиль страны в Механизме посредничества по биобезопасности",
+                "fr": "Profil des pays pour le Centre d'échange sur la prévention des risques biotechnologiques.",
+                "es": "Perfil del país para el Centro de Intercambio de la Información sobre Seguridad de la Biotecnología",
+                "ar": "معلومات البلد في غرفة تبادل معلومات السلامة الأحيائية"
+            },
+            "description": {
+                "en": "Additional information that appears as part of the country profile.",
+                "zh": "作为国家概况一部分出现的更多信息。",
+                "ru": "Дополнительная информация, включенная в профиль страны.",
+                "fr": "Information supplémentaire qui apparaît comme partie intégrante du profil du pays",
+                "es": "Información adicional que aparece dentro del perfil del país",
+                "ar": "تفاصيل ومعلومات إضافية تظهر ضمن صفحة معلومات البلد."
+            },
+            "shortCode": "BCP",
+            "titlePlural": {
+                "en": "Country Profiles for Biosafety Clearing-House",
+                "zh": "生物安全信息交换所国家概况",
+                "ru": "Профили стран в Механизме посредничества по биобезопасности",
+                "fr": "Profil des pays pour le Centre d'échange sur la prévention des risques biotechnologiques.",
+                "es": "Perfiles de los países para el Centro de Intercambio de la Información sobre Seguridad de la Biotecnología",
+                "ar": "معلومات البلدان في غرفة تبادل معلومات السلامة الأحيائية"
+            }
+        },
+        "contact": {
+            "type": "national",
+            "title": {
+                "en": "Contact",
+                "zh": "联系方式",
+                "ru": "Контакт",
+                "fr": "Personne-ressource",
+                "es": "Contacto",
+                "ar": "نقطة الاتصال"
+            },
+            "titlePlural": {
+                "en": "Contacts",
+                "zh": "联系人",
+                "ru": "Контакты",
+                "fr": "Contacts",
+                "es": "Contactos",
+                "ar": "نقاط الاتصال"
+            },
+            "description": {
+                "en": "Contact details of a person or organization.",
+                "zh": "个人或组织联系方式。",
+                "ru": "Контактные данные физического лица или организации",
+                "fr": "Coordonnées d’une personne ou une organisation",
+                "es": "Información de contacto de una persona u organización",
+                "ar": "تفاصيل الاتصال بشخص أو منظمة."
+            },
+            "publishingAuthorities": [
+                "NationalFocalPoint",
+                "Administrator",
+                "BchAdministrator",
+                "NFP-CPB",
+                "User",
+                "AuthorizedUserForContacts",
+                "AuthorizedUserForDecisions",
+                "AuthorizedUserForLaws",
+                "AuthorizedUserForNationalReports",
+                "AuthorizedUser"
+            ],
+            "shortCode": "CON"
+        },
+        "resource": {
+            "type": "reference",
+            "title": {
+                "en": "Biosafety Virtual Library Resources",
+                "zh": "生物安全虚拟图书馆资源",
+                "ru": "Ресурсы виртуальной библиотеки по биобезопасности",
+                "fr": "Ressources de la bibliothèque virtuelle sur le prévention des risques biotechnologiques",
+                "es": "Recursos de la Biblioteca virtual sobre seguridad de la biotecnología",
+                "ar": "المصادر والمراجع الافتراضية حول السلامة الأحيائية"
+            },
+            "description": {
+                "en": "An electronic catalogue of biosafety-related publications and information resources, including literature on biosafety, reports and case studies, awareness-raising materials, videos, capacity-building resources, etc.",
+                "zh": "生物安全相关出版物和资料资源的电子目录，包括生物安全文献、报告和案例研究、提高认识材料、视频、能力建设资源等。",
+                "ru": "Электронный каталог публикаций и информационных ресурсов по вопросам биобезопасности, включая литературу по биобезопасности, доклады и тематические исследования, материалы по информированию общественности, видеоматериалы, ресурсы по созданию потенциала и т. д.",
+                "fr": "Un catalogue électronique de publications et de ressources d'information liées à la prévention des risques biotechnologiques, y compris de la documentation sur la prévention des risques biotechnologiques, des rapports et des études de cas, du matériel de sensibilisation, des vidéos, des ressources de renforcement des capacités, etc.",
+                "es": "Un catálogo electrónico de publicaciones e información relacionadas con la seguridad de la biotecnología, entre ellas, bibliografía sobre seguridad de la biotecnología, informes y estudios de casos, materiales de sensibilización, videos, recursos para la creación de capacidad, etc.",
+                "ar": "فهرس إلكتروني للمطبوعات والإصدارات ومصادر المعلومات المتعلقة بالسلامة الأحيائية، التي تشمل الدراسات حول السلامة الأحيائية، والتقارير ودراسات الحالة، ومراجع تعزيز الوعي، ومقاطع الفيديو، ومراجع بناء القدرات، وغير ذلك."
+            },
+            "shortCode": "VLR",
+            "titlePlural": {
+                "en": "Biosafety Virtual Library Resources",
+                "zh": "生物安全虚拟图书馆资源",
+                "ru": "Ресурсы виртуальной библиотеки по биобезопасности",
+                "fr": "Ressources de la bibliothèque virtuelle sur le prévention des risques biotechnologiques",
+                "es": "Recursos de la Biblioteca virtual sobre seguridad de la biotecnología",
+                "ar": "المصادر والمراجع الافتراضية حول السلامة الأحيائية"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam"
+            ]
+        },
+        "organization": {
+            "type": "reference",
+            "title": {
+                "en": "Biosafety Organization",
+                "zh": "生物安全组织",
+                "ru": "Организация по биобезопасности",
+                "fr": "Organisation de prévention des risques biotechnologiques",
+                "es": "Organización relacionada con la seguridad de la biotecnología",
+                "ar": "منظمة عاملة في السلامة الأحيائية"
+            },
+            "description": {
+                "en": "Organizations involved in activities relevant to the Cartagena Protocol on Biosafety with summaries of their activities and contact information.",
+                "zh": "参与卡塔赫纳生物安全议定书相关活动的组织及其活动摘要和联络资料。",
+                "ru": "Организации, занимающиеся деятельностью, имеющей отношение к Картахенскому протоколу по биобезопасности, включая резюме их деятельности и контактную информацию.",
+                "fr": "Organisations impliquées dans des activités pertinentes pour le Protocole de Cartagena sur la prévention des risques biotechnologiques avec des résumés de leurs activités et leurs coordonnées.",
+                "es": "Organizaciones que participan en actividades pertinentes para el Protocolo de Cartagena sobre Seguridad de la Biotecnología, incluidas una síntesis de sus actividades y la información de contacto.",
+                "ar": "منظمات مشاركة في الأنشطة ذات الصلة ببروتوكول قرطاجنة للسلامة الأحيائية مع ملخصات لأنشطتها ومعلومات الاتصال بها."
+            },
+            "shortCode": "ORG",
+            "titlePlural": {
+                "en": "Biosafety Organizations",
+                "zh": "生物安全组织",
+                "ru": "Организации по биобезопасности",
+                "fr": "Organisations pour la prévention des risques biotechnologiques",
+                "es": "Organizaciones relacionadas con la seguridad de la biotecnología",
+                "ar": "منظمات عاملة في السلامة الأحيائية"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam-ORG"
+            ]
+        },
+        "laboratoryDetection": {
+            "type": "reference",
+            "title": {
+                "en": "Laboratory for detection and identification of LMOs",
+                "zh": "检测和识别改性活生物体的实验室",
+                "ru": "Лаборатория по обнаружению и идентификации ЖИО",
+                "fr": "Laboratoire pour la détection et d'identification des OVM",
+                "es": "Laboratorio dedicado a la detección e identificación de OVM",
+                "ar": "مختبر لكشف الكائنات الحية المحورة وتحديد هويتها"
+            },
+            "description": {
+                "en": "Laboratories involved in the detection and identification of LMOs.",
+                "zh": "参与检测和识别改性活生物体的实验室。",
+                "ru": "Лаборатории, занимающиеся обнаружением и идентификацией ЖИО.",
+                "fr": "Laboratoires impliqués dans la détection et l'identification des OVM",
+                "es": "Laboratorios dedicados a la detección e identificación de OVM.",
+                "ar": "مختبرات مشاركة في كشف الكائنات الحية المحورة وتحديد هويتها."
+            },
+            "shortCode": "LAB",
+            "titlePlural": {
+                "en": "Laboratories for detection and identification of LMOs",
+                "zh": "检测和识别改性活生物体的实验室",
+                "ru": "Лаборатории по обнаружению и идентификации ЖИО",
+                "fr": "Laboratoires de détection et d'identification des OVM",
+                "es": "Laboratorios dedicados a la detección e identificación de OVM",
+                "ar": "مختبرات لكشف الكائنات الحية المحورة وتحديد هويتها"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam"
+            ]
+        },
+        "modifiedOrganism": {
+            "type": "reference",
+            "title": {
+                "en": "Living Modified Organism",
+                "zh": "改性活生物体",
+                "ru": "Живой измененный организм",
+                "fr": "Organisme vivant modifié",
+                "es": "Organismos vivos modificados",
+                "ar": "الكائنات الحية المحوّرة"
+            },
+            "description": {
+                "en": "Living modified organisms, including information on the introduced genetic elements, parental and donor organisms, biotechnological traits, transformation event, the unique identification code (if available) and detection methods.",
+                "zh": "改性活生物体，包括有关引入基因片段、亲本和供体生物体、生物技术特征、转化事件、唯一识别码（如有）和检测方法的信息。",
+                "ru": "Живые измененные организмы, включая информацию об интродуцированных генетических элементах, родительских и донорских организмах, биотехнологических признаках, событии трансформации, уникальном идентификационном коде (если имеется) и методах обнаружения.",
+                "fr": "Organismes vivants modifiés (OVM), y compris des informations sur les éléments génétiques introduits, le ou les organismes parent(s) et/ou donneur, le(s) trait(s) biotechnologique(s), l'événement de transformation, le code d'identification unique (si disponible) et les méthodes de détection.",
+                "es": "Organismos vivos modificados, incluida información sobre los elementos genéticos introducidos, los organismos parentales y donantes, los rasgos biotecnológicos, el evento de transformación, el código identificador único (si está disponible) y los métodos de detección.",
+                "ar": "معلومات حول الكائنات الحية المُحوّرة تشمل معلومات عن العناصر الجينية المُضافة، والكائنات الحية المصدر والمانحة، وسمات التكنولوجيا الحيوية، وحدث التحول، ورمز التعريف الفريد (إن وجد)، ووسائل الكشف."
+            },
+            "shortCode": "LMO",
+            "titlePlural": {
+                "en": "Living Modified Organisms",
+                "zh": "改性活生物体",
+                "ru": "Живые измененные организмы",
+                "fr": "Organismes vivants modifiés",
+                "es": "Organismos vivos modificados",
+                "ar": "الكائنات الحية المحوّرة"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam"
+            ]
+        },
+        "dnaSequence": {
+            "type": "reference",
+            "title": {
+                "en": "Genetic element ",
+                "zh": "基因片段 ",
+                "ru": "Генетический элемент ",
+                "fr": "Élément génétique ",
+                "es": "Elemento genético ",
+                "ar": "العنصر الجيني "
+            },
+            "description": {
+                "en": "Information on introduced genetic elements, including donor organism, type of genetic element, biological function and biotechnological trait.",
+                "zh": "关于引入遗传片段的信息，包括供体生物体、遗传片段类型、生物功能和生物技术性状。",
+                "ru": "Информация об интродуцированных генетических элементах, в том числе о донорском организме, типе генетического элемента, биологической функции и биотехнологическом признаке.",
+                "fr": "Informations sur les éléments génétiques introduits, y compris l'organisme donneur, le type d'élément génétique, la fonction biologique et le ou les caractères biotechnologiques.",
+                "es": "Información sobre elementos genéticos introducidos, incluidos el organismo donante, el tipo de elemento genético, la función biológica y el rasgo biotecnológico.",
+                "ar": "معلومات حول العناصر الجينية المضافة تشمل الكائن الحي المانح، ونوع العنصر الجيني، والوظيفة البيولوجية، وسمات التكنولوجيا الحيوية."
+            },
+            "shortCode": "GENE",
+            "titlePlural": {
+                "en": "Genetic elements",
+                "zh": "基因片段",
+                "ru": "Генетические элементы",
+                "fr": "Éléments génétiques",
+                "es": "Elementos genéticos",
+                "ar": "العناصر الجينية"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam"
+            ]
+        },
+        "organism": {
+            "type": "reference",
+            "title": {
+                "en": "Organism",
+                "zh": "生物体",
+                "ru": "Организм",
+                "fr": "Organisme",
+                "es": "Organismo",
+                "ar": "الكائن الحي"
+            },
+            "description": {
+                "en": "Information on parental, recipient and donor organisms related to the living modified organisms and genetic elements registered in the BCH.",
+                "zh": "与在生物安全信息交换所注册的改性活生物体和基因片段有关的亲本、受体和供体生物体的信息。",
+                "ru": "Информация о родительских организмах, организмах-реципиентах и донорских организмах, имеющих отношение к живым измененным организмам и генетическим элементам, зарегистрированным в МПБ.",
+                "fr": "Informations sur les organismes parentaux, receveurs ou donneurs liés aux organismes vivants modifiés et aux éléments génétiques enregistrés dans le CEPRB.",
+                "es": "Información sobre organismos parentales, receptores o donantes relacionados con los organismos vivos modificados y los elementos genéticos registrados en el CIISB.",
+                "ar": "معلومات حول الكائنات المصدر والمستقبلة والمانحة ذات الصلة بالكائنات الحية المُحوّرة والعناصر الجينية المسجلة في غرفة تبادل معلومات السلامة الأحيائية."
+            },
+            "shortCode": "ORGA",
+            "titlePlural": {
+                "en": "Organisms",
+                "zh": "生物体",
+                "ru": "Организмы",
+                "fr": "Organismes",
+                "es": "Organismos",
+                "ar": "الكائنات الحية"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam"
+            ]
+        },
+        "independentRiskAssessment": {
+            "type": "reference",
+            "title": {
+                "en": "Risk Assessment generated by an independent or non-regulatory process",
+                "zh": "根据独立的或非规定方式作出的风险评估",
+                "ru": "Оценка рисков, проводимая в рамках независимого или нерегламентационного процесса",
+                "fr": "Évaluations des risques générées par un processus indépendant ou non réglementaire",
+                "es": "Evaluación del riesgo generada por un proceso independiente o no regulatorio",
+                "ar": "تقرير تقييم المخاطر الذي تم إعداده في إطار مستقل أو غير رسمي"
+            },
+            "description": {
+                "en": "Summaries of a risk assessment or environmental review of living modified organisms other than those generated by a regulatory process.",
+                "zh": "对改性活生物体的风险评估或环境审查的摘要，但并非监管程序产生的风险评估或环境审查摘要。",
+                "ru": "Резюме итогов оценки рисков или экологического обзора живых измененных организмов, проводимых вне рамок регламентационного процесса.",
+                "fr": "Résumés d'une évaluation des risques ou d'un examen environnemental des organismes vivants modifiés autres que ceux générés par un processus réglementaire.",
+                "es": "Resúmenes de una evaluación del riesgo o examen ambiental de organismos vivos modificados que no se hayan generado por un proceso regulatorio.",
+                "ar": "ملخصات تقرير تقييم المخاطر أو المراجعة البيئية للكائنات الحية المحورة بخلاف التقارير التي تم إعدادها في إطار رسمي."
+            },
+            "shortCode": "IRA",
+            "titlePlural": {
+                "en": "Risk Assessments generated by an independent or non-regulatory process",
+                "zh": "根据独立的或非规定方式作出的风险评估",
+                "ru": "Оценки рисков, проводимые в рамках независимого или нерегламентационного процесса",
+                "fr": "Évaluations des risques générées par un processus indépendant ou non réglementaire",
+                "es": "Evaluación del riesgo generada por un proceso independiente o no regulatorio",
+                "ar": "تقارير تقييم المخاطر التي تم إعدادها في إطار مستقل أو غير رسمي"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam-IRA"
+            ]
+        },
+        "submission": {
+            "type": "reference",
+            "title": {
+                "en": "Submissions",
+                "zh": "提交情况",
+                "ru": "Представленные материалы",
+                "fr": "Soumissions",
+                "es": "Presentaciones",
+                "ar": "البيانات والوثائق المرسلة"
+            },
+            "description": {
+                "en": "Submissions from Parties, other Governments or relevant organizations in response to notifications issued by the Secretariat.",
+                "zh": "缔约方、其他政府或相关组织针对秘书处发出的通知提交的材料。",
+                "ru": "Материалы, представленные Сторонами, другими правительствами или соответствующими организациями в ответ на уведомления, выпущенные Секретариатом.",
+                "fr": "Soumissions des Parties, autres gouvernements ou organisations pertinentes en réponse aux notifications émises par le Secrétariat.",
+                "es": "Presentaciones de las Partes, otros gobiernos u organizaciones pertinentes en respuesta a notificaciones emitidas por la Secretaría.",
+                "ar": "البيانات والوثائق المرسلة من الأطراف والحكومات الأخرى أو المنظمات ذات الصلة استجابة للإخطارات التي أصدرتها الأمانة."
+            },
+            "shortCode": "SUB",
+            "titlePlural": {
+                "en": "Submissions",
+                "zh": "提交情况",
+                "ru": "Представленные материалы",
+                "fr": "Soumissions",
+                "es": "Presentaciones",
+                "ar": "البيانات والوثائق المرسلة"
+            },
+            "publishingAuthorities": [
+                "BchAdministrator"
+            ],
+            "nationalAuthorizedUser": [
+                "BchAdministrator"
+            ]
+        },
+        "capacityBuildingInitiative": {
+            "type": "reference",
+            "title": {
+                "en": "Capacity Development Initiative",
+                "zh": "能力发展倡议",
+                "ru": "Инициатива по развитию потенциала",
+                "fr": "Initiative de développement des capacités",
+                "es": "Iniciativa de desarrollo de las capacidades",
+                "ar": "مبادرة لبناء القدرات"
+            },
+            "description": {
+                "en": "Information on capacity development initiatives at national, regional and international levels, including activities and outcomes.",
+                "zh": "有关国家、区域及国际层面能力发展举措的信息，包括活动和成果。",
+                "ru": "Информация об инициативах по развитию потенциала на национальном, региональном и международном уровнях, в том числе о мероприятиях и итогах.",
+                "fr": "Informations sur les initiatives de renforcement des capacités aux niveaux national, régional et international, y compris les activités et les résultats.",
+                "es": "Información sobre iniciativas de desarrollo de las capacidades a nivel nacional, regional e internacional, incluidos sus actividades y resultados.",
+                "ar": "معلومات حول مبادرات بناء القدرات على المستويات الوطنية والإقليمية والدولية، تشمل الأنشطة والنتائج."
+            },
+            "shortCode": "CDI",
+            "titlePlural": {
+                "en": "Capacity Development Initiatives",
+                "zh": "能力发展倡议",
+                "ru": "Инициативы по развитию потенциала",
+                "fr": "Initiatives de développement des capacités",
+                "es": "Iniciativas de desarrollo de las capacidades",
+                "ar": "مبادرات لبناء القدرات"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam-CDI"
+            ]
+        },
+        "biosafetyNews": {
+            "type": "reference",
+            "title": {
+                "en": "BCH News",
+                "zh": "生物安全信息交换所新闻",
+                "ru": "Новости МПБ",
+                "fr": "Nouvelles du CEPRB",
+                "es": "Noticias del CIISB",
+                "ar": "أخبار غرفة تبادل معلومات السلامة الأحيائية"
+            },
+            "description": {
+                "en": "News related to the Biosafety Clearing-House.",
+                "zh": "生物安全信息交换所相关新闻。",
+                "ru": "Новости, имеющие отношение к Механизму посредничества по биобезопасности.",
+                "fr": "Nouvelles liées au Centre d'échange pour la prévention des risques biotechnologiques",
+                "es": "Noticias del Centro de Intercambio de Información sobre Seguridad de la Biotecnología.",
+                "ar": "أخبار متعلقة بغرفة تبادل معلومات السلامة الأحيائية."
+            },
+            "shortCode": "BCHN",
+            "titlePlural": {
+                "en": "BCH News",
+                "zh": "生物安全信息交换所新闻",
+                "ru": "Новости МПБ",
+                "fr": "Nouvelles du CEPRB",
+                "es": "Noticias del CIISB",
+                "ar": "أخبار غرفة تبادل معلومات السلامة الأحيائية"
+            },
+            "publishingAuthorities": [
+                "bchDocumentValidationTeam"
+            ]
+        }
       },
-      "supplementaryAuthority" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Supplementary Protocol Competent Authority"
-          },
-          "description" : {
-              "en" : "Entities designated to perform the functions set out in Article 5 of the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress."
-          },
-          "shortCode" : "SPCA",
-          "titlePlural" : {
-              "en" : "Supplementary Protocol Competent Authorities"
-          }
-      },
-      "biosafetyLaw" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Biosafety Law, Regulation, Guidelines and Agreements"
-          },
-          "description" : {
-              "en" : "Legal, administrative and other measures to implement the Cartagena Protocol and any bilateral, regional and multilateral agreements regarding the intentional transboundary movement of living modified organisms."
-          },
-          "shortCode" : "LAW",
-          "titlePlural" : {
-              "en" : "Biosafety Laws, Regulations, Guidelines and Agreements"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForLaws", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "biosafetyDecision" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Country's Decision or any other Communication"
-          },
-          "description" : {
-              "en" : "National decisions, notifications, declarations or communications under the Cartagena Protocol."
-          },
-          "shortCode" : "DEC",
-          "titlePlural" : {
-              "en" : "Countries' Decisions or any other Communications"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForDecisions", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "nationalRiskAssessment" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Risk Assessment generated by a regulatory process"
-          },
-          "description" : {
-              "en" : "Summaries of risk assessments or environmental reviews of living modified organisms generated by a regulatory process and carried out in accordance with Article 15."
-          },
-          "shortCode" : "RA",
-          "titlePlural" : {
-              "en" : "Risk Assessments generated by a regulatory process"
-          }
-      },
-      "database" : {
-          "type" : "national",
-          "title" : {
-              "en" : "National Biosafety Website or Database"
-          },
-          "description" : {
-              "en" : "National websites and databases related to biosafety."
-          },
-          "shortCode" : "NDB",
-          "titlePlural" : {
-              "en" : "National Biosafety Websites or Databases"
-          }
-      },
-      "cpbNationalReport4" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Fourth National Report on the Implementation of the Cartagena Protocol on Biosafety",
-              "ar" : "التقرير الوطني الرابع حول تنفيذ بروتوكول قرطاجنة للسلامة الأحيائية",
-              "ru" : "Четвёртый национальный доклад об осуществлении Картахенского протокола по биобезопасности",
-              "fr" : "Quatrième rapport national sur l'application du Protocole de Cartagena sur la biosécurité",
-              "es" : "Cuarto informe nacional sobre la aplicación del Protocolo de Cartagena sobre Seguridad de la Biotecnología",
-              "zh" : "《卡塔赫纳生物安全议定书》执行情况第四次国家报告"
-          },
-          "description" : {
-              "en" : "Fourth National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 1 October 2019)"
-          },
-          "shortCode" : "NR4",
-          "titlePlural" : {
-              "en" : "Fourth National Reports on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForNationalReports", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "cpbNationalReport3" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Third National Report on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "description" : {
-              "en" : "Third National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 31 October 2015)"
-          },
-          "shortCode" : "NR3",
-          "titlePlural" : {
-              "en" : "Third National Reports on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForNationalReports", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "cpbNationalReport2" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Second National Report on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "description" : {
-              "en" : "Second National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 30 September 2011)"
-          },
-          "shortCode" : "NR2",
-          "titlePlural" : {
-              "en" : "Second National Reports on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForNationalReports", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "cpbNationalReport1" : {
-          "type" : "national",
-          "title" : {
-              "en" : "First National Report on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "description" : {
-              "en" : "First National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 11 September 2007)"
-          },
-          "shortCode" : "NR1",
-          "titlePlural" : {
-              "en" : "First National Reports on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForNationalReports", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "cpbNationalReportInterim" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Interim National Report on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "description" : {
-              "en" : "Interim National Reports on the Implementation of the Cartagena Protocol on Biosafety (due 11 September 2005)"
-          },
-          "shortCode" : "NRI",
-          "titlePlural" : {
-              "en" : "Interim National Reports on the Implementation of the Cartagena Protocol on Biosafety"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-AuthorizedUserForNationalReports", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "biosafetyExpert" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Biosafety Expert"
-          },
-          "description" : {
-              "en" : "Biosafety experts in the roster of experts."
-          },
-          "shortCode" : "EXP",
-          "titlePlural" : {
-              "en" : "Biosafety Experts"
-          },
-          "nationalAuthorizedUser" : [ 
-              "BCH-DEV-NationalExpert", 
-              "BchAuthorizedUser-Dev", 
-              "AuthorizedUser", 
-              "NFP-CPB"
-          ]
-      },
-      "countryProfile" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Country Profile for Biosafety Clearing-House"
-          },
-          "description" : {
-              "en" : "Additional information that appears as part of the country profile."
-          },
-          "shortCode" : "BCP",
-          "titlePlural" : {
-              "en" : "Country Profiles for Biosafety Clearing-House"
-          }
-      },
-      "contact" : {
-          "type" : "national",
-          "title" : {
-              "en" : "Contact"
-          },
-          "titlePlural" : {
-              "en" : "Contacts"
-          },
-          "description" : {
-              "en" : "Contacts (CON) are used to provide information on individuals and/or organizations that are linked to other National or Reference records. Contact records can be published by all registered users and are made available in the Search only when they are referenced in other clearing-house records"
-          },
-          "publishingAuthorities" : [ 
-              "BchAuthorizedUser-Dev", 
-              "BchNationalFocalPoint-Dev", 
-              "Administrator", 
-              "BchAdministrator-dev", 
-              "AuthorizedUser", 
-              "NationalFocalPoint", 
-              "NFP-CPB", 
-              "User"
+      "pdf": {
+        "documents": {
+          "path": "database/records/:documentID/:revision?print=true",
+          "fields": [
+            "documentID",
+            "revision"
           ],
-          "shortCode" : "CON",
-          "titlePlural" : {
-              "en" : "Contacts"
-          }
-      },
-      "resource" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Biosafety Virtual Library Resources"
+          "fileName": ":documentID-:revision",
+          "s3": {
+            "bucket": "pdf-cache-prod",
+            "folder": "bch"
           },
-          "description" : {
-              "en" : "An electronic catalogue of biosafety-related publications and information resources, including literature on biosafety, reports and case studies, awareness-raising materials, videos, capacity-building resources, etc."
-          },
-          "shortCode" : "VLR",
-          "titlePlural" : {
-              "en" : "Biosafety Virtual Library Resources"
-          }
-      },
-      "organization" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Biosafety Organization"
-          },
-          "description" : {
-              "en" : "Organizations involved in activities relevant to the Cartagena Protocol on Biosafety with summaries of their activities and contact information."
-          },
-          "shortCode" : "ORG",
-          "titlePlural" : {
-              "en" : "Biosafety Organizations"
-          }
-      },
-      "laboratoryDetection" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Laboratory for detection and identification of LMOs"
-          },
-          "description" : {
-              "en" : "Laboratories involved in the detection and identification of LMOs."
-          },
-          "shortCode" : "LAB",
-          "titlePlural" : {
-              "en" : "Laboratories for detection and identification of LMOs"
-          }
-      },
-      "modifiedOrganism" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Living Modified Organism"
-          },
-          "description" : {
-              "en" : "Living modified organisms, including information on the introduced genetic elements, parental and donor organisms, biotechnological traits, transformation event, the unique identification code (if available) and detection methods."
-          },
-          "shortCode" : "LMO",
-          "titlePlural" : {
-              "en" : "Living Modified Organisms"
-          }
-      },
-      "dnaSequence" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Genetic element "
-          },
-          "description" : {
-              "en" : "Information on introduced genetic elements, including donor organism, type of genetic element, biological function and biotechnological trait."
-          },
-          "shortCode" : "GENE",
-          "titlePlural" : {
-              "en" : "Genetic elements"
-          }
-      },
-      "organism" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Organism"
-          },
-          "description" : {
-              "en" : "Information on parental, recipient and donor organisms related to the living modified organisms and genetic elements registered in the BCH."
-          },
-          "shortCode" : "ORGA",
-          "titlePlural" : {
-              "en" : "Organisms"
-          }
-      },
-      "independentRiskAssessment" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Risk Assessment generated by an independent or non-regulatory process"
-          },
-          "description" : {
-              "en" : "Summaries of a risk assessment or environmental review of living modified organisms other than those generated by a regulatory process."
-          },
-          "shortCode" : "IRA",
-          "titlePlural" : {
-              "en" : "Risk Assessments generated by an independent or non-regulatory process"
-          }
-      },
-      "submission" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Submissions"
-          },
-          "description" : {
-              "en" : "Submissions from Parties, other Governments or relevant organizations in response to notifications issued by the Secretariat."
-          },
-          "shortCode" : "SUB",
-          "titlePlural" : {
-              "en" : "Submissions"
-          },
-          "publishingAuthorities" : [ 
-              "BchAuthorizedUser-Dev"
+          "usePrincePdf": true
+        },
+        "scbd-records": {
+          "path": "database/:schema/:documentID/:revision?print=true",
+          "fields": [
+            "documentID",
+            "revision",
+            "schema"
           ],
-          "nationalAuthorizedUser" : [ 
-              "BchAuthorizedUser-Dev"
-          ]
-      },
-      "capacityBuildingInitiative" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "Capacity Development Initiative"
+          "fileName": ":documentID",
+          "s3": {
+            "bucket": "pdf-cache-prod",
+            "folder": "bch"
           },
-          "description" : {
-              "en" : "Information on capacity development initiatives at national, regional and international levels, including activities and outcomes."
+          "usePrincePdf": true
+        },
+        "contacts": {
+          "path": "/pdf-templates/contacts/:schema",
+          "fields": [
+            "schema"
+          ],
+          "fileName": "absch-all-:schema",
+          "s3": {
+            "bucket": "pdf-cache-prod",
+            "folder": "bch"
           },
-          "shortCode" : "CDI",
-          "titlePlural" : {
-              "en" : "Capacity Development Initiatives"
-          }
-      },
-      "biosafetyNews" : {
-          "type" : "reference",
-          "title" : {
-              "en" : "BCH News"
-          },
-          "description" : {
-              "en" : "News related to the Biosafety Clearing-House."
-          },
-          "shortCode" : "BCHN",
-          "titlePlural" : {
-              "en" : "BCH News"
-          }
+          "usePrincePdf": true
+        },
+        "draft-documents": {
+          "path": "database/share/:code?print=true&mixLocale=:mixLocale",
+          "fields": [
+            "code",
+            "mixLocale"
+          ],
+          "fileName": "language:documentID-:revision",
+          "usePrincePdf": true
+        }
       }
-  },
-  "pdf" : {
-      "documents" : {
-          "path" : "database/records/:documentID/:revision?print=true",
-          "fields" : [ 
-              "documentID", 
-              "revision"
-          ],
-          "fileName" : ":documentID-:revision",
-          "s3" : {
-              "bucket" : "pdf-cache-prod",
-              "folder" : "bch-dev"
-          },
-          "usePrincePdf" : true
-      },
-      "scbd-records" : {
-          "path" : "database/:schema/:documentID/:revision?print=true",
-          "fields" : [ 
-              "documentID", 
-              "revision", 
-              "schema"
-          ],
-          "fileName" : ":documentID",
-          "s3" : {
-              "bucket" : "pdf-cache-prod",
-              "folder" : "bch-dev"
-          },
-          "usePrincePdf" : true
-      },
-      "contacts" : {
-          "path" : "/pdf-templates/contacts/:schema",
-          "fields" : [ 
-              "schema"
-          ],
-          "fileName" : "absch-all-:schema",
-          "s3" : {
-              "bucket" : "pdf-cache-prod",
-              "folder" : "bch-dev"
-          },
-          "usePrincePdf" : true
-      },
-      "draft-documents" : {
-          "path" : "database/share/:code?print=true&mixLocale=:mixLocale",
-          "fields" : [ 
-              "code", 
-              "mixLocale"
-          ],
-          "fileName" : "language:documentID-:revision",
-          "usePrincePdf" : true
-      }
-  }
-}
+    }
+  ]
