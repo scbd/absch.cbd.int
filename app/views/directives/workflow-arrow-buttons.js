@@ -8,13 +8,14 @@ import 'toastr';
 import '~/views/forms/directives/document-sharing';
 import 'ck-editor-css';
 import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
+import workflowButtonsT from '~/app-text/views/directives/workflow-arrow-buttons.json';
 
     app.directive('workflowArrowButtons',["$rootScope", "IStorage", "editFormUtility", "$route","IWorkflows",
     'toastr', '$location', '$filter', '$routeParams', 'appConfigService', 'realm', '$http','$timeout', '$q', 
-    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window',
+    'localStorageService', 'articlesService', 'roleService', 'locale', 'commonjs', 'ngDialog', '$window', 'translationService',
     function ($rootScope,  storage, editFormUtility, $route, IWorkflows, toastr, $location, $filter, 
             $routeParams, appConfigService, realm, $http, $timeout, $q, localStorageService, 
-            articlesService, roleService, locale, commonjs, ngDialog, $window, joyrideService){
+            articlesService, roleService, locale, commonjs, ngDialog, $window, translationService,  joyrideService){
 
     	return{
     		restrict: 'EA',
@@ -47,7 +48,7 @@ import toasterMessages from '~/app-text/views/directives/toaster-messages.json';
 				onPreSaveDraftVersionFn	  : "&onPreSaveDraftVersion"
     		},
             link : function($scope, $element, $attr){
-                
+                translationService.set('workflowButtonsT', workflowButtonsT);
                 let documentLoadError = false;
                 var originalDocument;
                 var next_fs;                
