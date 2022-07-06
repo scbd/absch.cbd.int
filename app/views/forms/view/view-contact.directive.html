@@ -45,7 +45,7 @@
   			   </div>
   		   </div>
 
-            <div>
+            <div ng-show="document.firstName || document.middleName || document.lastName">
 				<label>{{::('viewContactT.name'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<span ng-bind="document.prefix | lstring:locale"></span> <span ng-bind="document.firstName"></span> <span ng-bind="document.middleName"></span> <span ng-bind="document.lastName"></span>
