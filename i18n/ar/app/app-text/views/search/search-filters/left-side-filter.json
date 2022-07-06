@@ -1,0 +1,20 @@
+{
+  "subFilter": "فلاتر التصفية الفرعية",
+  "clearAllFilters": "إزالة كل الترشيحات",
+  "remove": "إزالة",
+  "temporarilyDisable": "تعطيل مؤقت",
+  "reEnable": "إعادة تمكين",
+  "excludeResults": "استبعاد النتائج",
+  "includeResults": "إدراج النتائج",
+  "clearFilters": "إزالة التصفية",
+  "clear": "مسح",
+  "yes": "نعم",
+  "no": "لا",
+  "not": "لا",
+  "searchRelation": "",
+  "loading": "",
+  "searchRelated": "بحث متعلق",
+  "cancel": "إلغاء",
+  "apply": "تفعيل",
+  "searchIn": ""
+}

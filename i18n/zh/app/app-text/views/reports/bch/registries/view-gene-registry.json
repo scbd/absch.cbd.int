@@ -1,0 +1,18 @@
+{
+  "registries": "登记簿",
+  "geneticElementRegistry": "基因片段登记簿",
+  "lmoTitle": "改性活生物体登记薄",
+  "organismRegistry": "生物体登记薄",
+  "geneInfo": "基因片段登记簿汇总了与在生物安全信息交换所登记的改性活生物体有关的基因片段的信息，包括供体生物体、赋予性状和生物功能等信息。该登记簿包括每个基因片段的记录链接，可通过此类链接找到更多详细信息。含有特定基因片段的改性活生物体在单个记录的最下方提及。",
+  "here": "这里",
+  "perform": "",
+  "loading": "正在加载...",
+  "error": "载入登记簿记录时出错，请重试。",
+  "totalRecords": "总记录数量：",
+  "export": "导出",
+  "recordID": "记录 ID",
+  "name": "名称",
+  "traits": "性状",
+  "donorOrganism": "供体生物体",
+  "function": "职能"
+}

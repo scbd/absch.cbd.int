@@ -1,0 +1,15 @@
+{
+  "generalInfo": "Información general",
+  "country": "País",
+  "checkpointName": "Nombre del punto de verificación",
+  "cpResponsibilities": "Responsabilidades del punto de verificación",
+  "stage": "Etapa en la que se recopila o recoge la información",
+  "jurisdiction": "Zona de jurisdicción",
+  "authority": "Autoridad(es) para recibir las copias de cortesía de los comunicados del punto de verificación",
+  "authorityInfo": "Los contactos indicados a continuación recibirán copias por correo electrónico de los comunicados del punto de verificación que contengan información recopilada o recibida y publicada originada en ese punto de verificación.",
+  "allCnaOne": "",
+  "allCnaTow": "",
+  "noAddAuthorities": "No se han seleccionado autoridades adicionales para recibir las copias automáticas por correo electrónico de los comunicados del punto de verificación publicados por dicho punto de verificación.",
+  "additionalInformation": "Información adicional",
+  "relevantLinks": "Otros enlaces o documentos adjuntos pertinentes"
+}

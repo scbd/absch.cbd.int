@@ -1,0 +1,8 @@
+{
+  "accessPermission": "",
+  "selectFunction": "请选择要分配给这位用户的职能",
+  "granted": "角色将授予",
+  "revoked": "角色将撤销",
+  "cancel": "",
+  "next": ""
+}

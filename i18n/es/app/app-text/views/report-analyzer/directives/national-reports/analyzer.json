@@ -1,0 +1,22 @@
+{
+  "countResponses": "Recuento de respuestas",
+  "percentageRow": "Porcentaje por fila",
+  "percentageColumn": "Porcentaje por columna",
+  "percentageOverall": "Porcentaje total",
+  "toggleDropdown": "Tecla Desplegar",
+  "backToSettings": "",
+  "currentAnalysis": "El análisis actual se realiza con filtros para mostrar solo informes en los que",
+  "removeFilter": "Eliminar filtro",
+  "question": "Pregunta",
+  "follows": "Se ha contestado como a continuación:",
+  "changeNumber": "Cambiar la manera de calcular las cantidades",
+  "sum": "Muestra la cantidad absoluta de respuestas recibidas para una determinada combinación de fila (respuestas) y columna (grupos).",
+  "percentRow": "Muestra el porcentaje dentro de los diferentes grupos seleccionados (columnas). En este caso, la suma de todos los valores en una fila es el 100%.",
+  "percentColumn": "Muestra los porcentajes dentro de las diferentes respuestas (filas). En este caso, la suma de todos los valores en una columna es el 100%.",
+  "percentGlobal": "Muestra los porcentajes dentro de todas las respuestas. En este caso, la suma de todos los valores (filas y columnas) es el 100%.",
+  "close": "Cerrar",
+  "subSection": "",
+  "country": "País",
+  "export": "Exportar",
+  "print": "Imprimir"
+}

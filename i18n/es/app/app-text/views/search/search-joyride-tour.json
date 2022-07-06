@@ -1,0 +1,74 @@
+{
+  "welcome": {
+    "title": "Bienvenidos a la página Buscar",
+    "content": "<p> </p>"
+  },
+  "globalSearch": {
+    "title": "Filtros generales",
+    "content": "<p></p>"
+  },
+  "freeText": {
+    "title": "Búsqueda con texto libre",
+    "content": "<p></u> </p>"
+  },
+  "recordTypesFilterTab": {
+    "title": "Filtrar por Tipos de registros",
+    "content": "<p> </p>"
+  },
+  "keywordsFilterTab": {
+    "title": "Buscar por Palabra clave",
+    "content": "<p></p>"
+  },
+  "countryFilterTab": {
+    "title": "Buscar por País",
+    "content": "<p></u>  </p>"
+  },
+  "regionFilterTab": {
+    "title": "Seleccionar por Región",
+    "content": "<p></p>"
+  },
+  "dateFilterTab": {
+    "title": "Buscar por Fecha",
+    "content": "<p> </p>"
+  },
+  "closeFilterTab": {
+    "title": "Resultados de la búsqueda",
+    "content": "<p></p>"
+  },
+  "searchResult": {
+    "title": "Resultados de la búsqueda: Pestañas",
+    "content": "<p> </u> </p>"
+  },
+  "subFilters": {
+    "title": "Filtros subordinados",
+    "content": "<p></p>"
+  },
+  "recordView": {
+    "title": "Resultados de la búsqueda: Ver los registros",
+    "content": "<p></p>"
+  },
+  "viewType": {
+    "title": "Resultados de la búsqueda: Tipo de vista",
+    "content": "<p></p>"
+  },
+  "sortBy": {
+    "title": "Resultados de la búsqueda: Ordenar",
+    "content": "<p></p>"
+  },
+  "sendRecords": {
+    "title": "Resultados de la búsqueda: Compartir",
+    "content": "<p></p>"
+  },
+  "exportRecords": {
+    "title": "Resultados de la búsqueda: Exportar",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "¿Necesita ayuda?",
+    "content": "Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con la página Buscar."
+  },
+  "needMoreHelp": {
+    "title": "¿Necesita más ayuda?",
+    "content": "Use la función de chat para enviarnos un mensaje si necesita más ayuda."
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "websiteDatabaseDetails": "تفاصيل موقع الإلكتروني أو قاعدة البيانات",
+  "languageToPublish": "يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:",
+  "country": "البلد",
+  "website": "اسم موقع الويب أو قاعدة البيانات",
+  "selectOption": "",
+  "exampleTitle": "مثال: العنوان",
+  "exampleDescription": "مثال: الوصف",
+  "websiteInfo": "",
+  "description": "الوصف",
+  "descriptionInfo": "يُرجى إدخال وصف قصير للموقع الإلكتروني أو قاعدة الويب الوطنية يتضمن الغرض أو معلومات متاحة في الموقع أو قاعدة البيانات.",
+  "websiteAddress": "",
+  "websiteAddressInfo": "يُرجى ذكر الرابط الكامل لموقع الويب (مثال: http://www.cbd.int).",
+  "timeframeInformation": "",
+  "categoryInformation": "  ",
+  "additionalInformation": "معلومات إضافية",
+  "relevantinformation": "أي معلومات أخرى ذات صلة",
+  "relevantInformationInfo": "يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.",
+  "relevantDocuments": "أي وثائق أخرى ذات صلة",
+  "relevantDocumentsInfo": "",
+  "notes": "ملاحظات",
+  "notesInfos": "خانة \"الملاحظات\" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. "
+}

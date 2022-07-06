@@ -1,0 +1,11 @@
+{
+  "resistanceDiseasesAndPests": "مقاومة الأمراض والآفات",
+  "resistanceToHerbicides": "مقاومة مبيدات الأعشاب",
+  "resistanceToAtibiotics": "مقاومة المضادات الحيوية",
+  "toleranceToAbioticStress": "تحمل الإجهاد الحيوي",
+  "changesInPhysiology": "التغييرات في الوظائف و/أو الإنتاج",
+  "changesInQualityContent": "التغييرات في الجودة والمحتوى الأيضي",
+  "productionOfMedical": "إنتاج المركبات الطبية أو العقاقير (للبشر أو الحيوانات)",
+  "useInIndustrialApplications": "الاستخدام في التطبيقات الصناعية",
+  "engineeredApplication": "تطبيق محرك الجينات المُصمَّم هندسيًا"
+}

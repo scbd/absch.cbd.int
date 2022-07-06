@@ -1,0 +1,21 @@
+{
+  "generalInfo": "معلومات عامة",
+  "title": "العنوان",
+  "name": "اسم العنصر الوراثي",
+  "synonymNames": "",
+  "abbreviation": "الاختصار",
+  "category": "الفئة",
+  "isSynthetic": "هل العنصر الوراثي جزيء تركيبي؟",
+  "yes": "نعم",
+  "no": "لا",
+  "donorOrganism": "",
+  "donorOrganisms": "الكائنات المانحة",
+  "donorOrganismCollectionPoint": "",
+  "geographicCoordinates": "الإحداثيات الجغرافية",
+  "characteristicsSequence": "خصائص تسلسل ترميز البروتين",
+  "proteinName": "اسم البروتين المذكور في تسلسل الترميز",
+  "biologicalFunction": "الوظيفة البيولوجية للبروتين",
+  "traits": "",
+  "additionalInformation": "معلومات إضافية",
+  "anyOtherInformation": ""
+}

@@ -1,0 +1,21 @@
+{
+  "generalInfo": "معلومات عامة",
+  "languageToPublish": "يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:",
+  "country": "البلد",
+  "jurisdiction": "",
+  "selectOption": "",
+  "or": "أو",
+  "submissionInformation": "بيانات الملفات المقدمة",
+  "titleSubmission": "عنوان الملفات المقدمة",
+  "organization": "",
+  "helpTitle": " ",
+  "dateSubmission": "تاريخ التقديم",
+  "notifications": "الإشعارات ذات الصلة",
+  "records": "السجلات المرتبطة",
+  "thematicAreas": "",
+  "documents": "الوثائق والمستندات",
+  "otherRelevantInformation": "أي معلومات أخرى ذات صلة",
+  "relevantInformationInfo": "يُرجى استخدام هذه الخانة في إضافة أي معلومات أخرى ذات صلة لم تُذكر أو لم تُستخدم في مكان آخر في هذا السجل.",
+  "notes": "الملاحظات",
+  "notesInfos": "خانة \"الملاحظات\" مخصصة للاستخدام الشخصي. وتظهر فقط أثناء تحرير السجل أو تعديله لكنها لا تظهر بعد نشر السجل. "
+}

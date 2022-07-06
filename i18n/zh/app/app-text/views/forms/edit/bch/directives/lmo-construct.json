@@ -1,0 +1,14 @@
+{
+  "addConstruct": "添加构造",
+  "geneConstruct": "基因构造",
+  "geneConstructInfo": "请使用鼠标拖动一个形状，将其添加到一个丢放位置的构件",
+  "dragConstruct": "拖动该形状到此处，以移除构件",
+  "dropLocation": "放下位置",
+  "Cancel": "取消",
+  "save": "保存",
+  "transcriptionStart": "",
+  "transcriptionStop": "",
+  "transcriptionElement": "",
+  "selectGene": "选择基因",
+  "kb": ""
+}

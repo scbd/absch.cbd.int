@@ -1,0 +1,13 @@
+{
+  "newUser": "",
+  "contactDetails": "",
+  "nominee": "请填写被提名人的以下基本联系方式信息",
+  "firstName": "名字",
+  "lastName": "姓氏",
+  "organization": "机构",
+  "email": "电子邮件",
+  "mandatory": "此字段为必填字段",
+  "emailIncomplete": "电子邮件无效或不完整",
+  "cancel": "",
+  "next": ""
+}

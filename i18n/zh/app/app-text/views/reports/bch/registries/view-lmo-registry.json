@@ -1,0 +1,21 @@
+{
+  "registries": "登记簿",
+  "geneticElementRegistry": "基因片段登记簿",
+  "lmoTitle": "改性活生物体登记薄",
+  "organismRegistry": "生物体登记薄",
+  "lmoRegistry": "改性活生物体（LMO）登记薄",
+  "lmoInfo": "",
+  "uniqueCode": "",
+  "lmoLink": " 可通过登记薄记录访问所有提及这些生物体之决定和风险评估报告的链接。",
+  "here": "这里",
+  "perform": "",
+  "loading": "正在加载...",
+  "error": "载入登记簿记录时出错，请重试。",
+  "totalRecords": "总记录数量：",
+  "export": "导出",
+  "recordID": "记录 ID",
+  "name": "唯一标识",
+  "identity": "身份和转化事件",
+  "organism": "生物体",
+  "description": "描述"
+}
