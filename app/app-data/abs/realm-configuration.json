@@ -1,376 +1,638 @@
 ﻿[
-    {
-      "_id": "5aa2db157d20f19bfaf663fd",
-      "hosts": [
-        "absch.cbddev.xyz",
-        "absch.local",
-        "absch.cbd.local"
+  {
+    "_id": "54009e5ab02e1ab8752d2123",
+    "hosts": [
+      "absch.cbd.int"
+    ],
+    "protocol": "Nagoya Protocol",
+    "protocolShortName": "ABSCH",
+    "uIdPrefix": "ABSCH",
+    "realm": "ABS",
+    "displayName": "Access and Benefit-Sharing Clearing-House",
+    "email": "absch@cbd.int",
+    "adminRoles": [
+      "AbsDocumentValidationTeamMember"
+    ],
+    "nfpRoles": [
+      "AbsPublishingAuthorities"
+    ],
+    "notificationTemplateFolder": "ABS",
+    "baseURL": "https://absch.cbd.int",
+    "roles": {
+      "administrator": [
+        "AbsAdministrator",
+        "Administrator"
       ],
-      "protocol": "Nagoya Protocol",
-      "protocolShortName": "ABSCH",
-      "uIdPrefix": "ABSCH",
-      "realm": "ABS-DEV",
-      "displayName": "Access and Benefit-Sharing Clearing-House-Dev",
-      "email": "absch@cbd.int",
-      "adminRoles": [
-        "AbsDocumentValidationTeamMember-dev"
+      "publishingAuthorities": [
+        "AbsPublishingAuthorities"
       ],
-      "nfpRoles": [
-        "AbsPublishingAuthorities-dev"
+      "iac": [
+        "abschiac"
       ],
-      "notificationTemplateFolder": "ABS",
-      "baseURL": "https://absch.cbddev.xyz",
-      "envMsg": "This record is from ABSCH-Dev (test environment)",
-      "roles": {
-        "administrator": [
-          "AbsAdministrator-dev",
-          "Administrator"
-        ],
-        "publishingAuthorities": [
-          "AbsPublishingAuthorities-dev"
-        ],
-        "iac": [
-          "abschiac"
-        ],
-        "nationalAuthorizedUser": [
-          "AbsNationalAuthorizedUser-dev"
-        ],
-        "nationalFocalPoint": [
-          "AbsNationalFocalPoint-dev"
-        ]
-      },
-      "schemas": {
-        "focalPoint": {
+      "nationalAuthorizedUser": [
+        "AbsNationalAuthorizedUser"
+      ],
+      "nationalFocalPoint": [
+        "AbsNationalFocalPoint"
+      ]
+    },
+    "schemas": {
+      "focalPoint": {
           "type": "national",
           "title": {
-            "en": "ABS National Focal Point"
+              "en": "ABS National Focal Point",
+              "ar": "نقطة الاتصال الوطنية بشأن الحصول على الموارد وتقاسم المنافع",
+              "es": "Punto focal nacional en materia de APB",
+              "fr": "Correspondants nationaux de l’APA",
+              "ru": "Национальный координационный центр по ДГРСИВ",
+              "zh": "获取和惠益分享国家联络点"
           },
           "description": {
-            "en": "Nagoya Protocol National Focal Points are designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1)"
+              "en": "Nagoya Protocol National Focal Points are designated to liaise with the Secretariat and make available information on procedures for accessing genetic resources and establishing mutually agreed terms, including information on competent national authorities, relevant indigenous and local communities and relevant stakeholders (Article 13.1)",
+              "ar": "نقاط الاتصال الوطنية بشأن بروتوكول ناغويا هي المنوطة بالتواصل والتنسيق مع الأمانة وإتاحة معلومات عن إجراءات الحصول على الموارد الجينية ووضع شروط متفق عليها بصورة متبادلة، تشمل معلومات عن السلطات الوطنية المختصة والمجتمعات الأصلية والمحلية المعنية والجهات المعنية (المادة 13,1).",
+              "es": "Los puntos focales nacionales para el Protocolo de Nagoya se designan para mantener los vínculos con la Secretaría y poner a disposición la información sobre los procedimientos para acceder a recursos genéticos y establecer las condiciones mutuamente acordadas, entre ellas, la información sobre autoridades nacionales competentes, comunidades indígenas y locales pertinentes, así como las partes interesadas pertinentes (artículo párrafo 13,1)",
+              "fr": "Le correspondant national au Protocole de Nagoya  - est responsable d’assurer la liaison avec le Secrétariat et de rendre disponible l’information sur les procédures pour accéder aux ressources génétiques et d’établir les conditions convenues d’un commun accord, qui comprennent des informations sur les autorités nationales compétentes,les communautés autochtones et locales ainsi que les parties prenantes concernées. (article 13, paragraphe 13,1).",
+              "ru": "Национальные координационные центры по Нагойскому протоколу, назначаемые для за обеспечение связи с Секретариатом и предоставления информации о порядке получения доступа к генетическим ресурсам и заключения взаимосогласованных условий, включая информацию о компетентных национальных органах, соответствующих коренных и местных общинах и соответствующих субъектах деятельности (статья 13.1)",
+              "zh": "名古屋议定书国家联络点，获指定与秘书处联络，并提供有关获取遗传资源和确立共同商定条件程序的相关信息，包括关于国家主管当局、相关土著和地方社区以及相关利益攸关方的信息（第13.1条）"
           },
           "shortCode": "NFP",
           "titlePlural": {
-            "en": "ABS National Focal Points"
+              "en": "ABS National Focal Points",
+              "ar": "نقاط الاتصال الوطنية المعنية بالحصول على الموارد وتقاسم المنافع",
+              "es": "Puntos focales nacionales en materia de APB",
+              "fr": "Correspondants nationaux de l’APA",
+              "ru": "Национальные координационные центры по ДГРСИВ",
+              "zh": "获取和惠益分享国家联络点"
           }
-        },
-        "authority": {
+      },
+      "authority": {
           "type": "national",
           "title": {
-            "en": "Competent National Authority"
+              "en": "Competent National Authority",
+              "ar": "السلطة الوطنية المختصة",
+              "es": "Autoridad Nacional Competente",
+              "fr": "Autorité nationale compétente",
+              "ru": "Компетентный национальный орган",
+              "zh": "国家主管部门"
           },
           "description": {
-            "en": "Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)"
+              "en": "Entities designated to, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms (Article 13.2)",
+              "ar": "السلطات الوطنية المختصة مسؤولة، وفقا للتدابير التشريعية أو الإدارية أو السياساتية الوطنية الواجبة التطبيق، عن منح حق الحصول، أو عند الاقتضاء، إصدار إقرار كتابي يؤكد على استيفاء متطلبات الحصول على الموارد ومسؤولة عن الإبلاغ عن الإجراءات والشروط السارية للحصول على الموافقة المسبقة عن علم وإبرام شروط متفق عليها بصورة متبادلة (المادة 13,2)",
+              "es": "Entidades designadas con arreglo a las medidas legislativas, administrativas o de política correspondientes, encargadas de conceder el acceso o, según proceda, de emitir una prueba por escrito de que se ha cumplido con los requisitos de acceso, y responsables de asesorar sobre los procedimientos y requisitos correspondientes para obtener el consentimiento fundamentado previo y concertar condiciones mutuamente acordadas (artículo 13.2)",
+              "fr": "Les entités nommées, en conformité avec les mesures législatives et administratives ainsi que les politiques nationales applicables, sont chargées d’accorder l’accès ou, s’il y a lieu, de livrer une preuve écrite que les conditions d’accès ont été respectées, et de fournir des conseils sur les procédures et les conditions d’obtention du consentement préalable donné en connaissance de cause et de conclusion de conditions convenues d’un commun accord  (article 13,2)",
+              "ru": "Назначаемые учреждения, которые отвечают в соответствии с применимыми национальными законодательными, административными или политическими мерами за предоставление доступа или выдачу в соответствующих случаях письменного подтверждения того, что требования, регулирующие доступ, выполнены, и отвечают за консультирование по вопросам действующих процедур и требований, регулирующих получение предварительного обоснованного согласия и заключение взаимосогласованных условий (статья 13.2)",
+              "zh": "依照适用的国家立法、行政或政策措施，负责批准获取或酌情签发符合获取要求的书面证明，并负责就获得事先知情同意和设立共同商定条件的适用程序与要求提供建议的指定实体（第13条第2款）。"
           },
           "shortCode": "CNA",
           "titlePlural": {
-            "en": "Competent National Authorities"
+              "en": "Competent National Authorities",
+              "ar": "السلطات الوطنية المختصة",
+              "es": "Autoridades nacionales competentes",
+              "fr": "Autorités nationales compétentes",
+              "ru": "Компетентные национальные органы",
+              "zh": "国家主管部门"
           },
           "publishingAuthorities": [
-            "AbsPublishingAuthorities-dev"
+              "AbsPublishingAuthorities"
           ],
           "nationalAuthorizedUser": [
-            "AbsNationalAuthorizedUser-dev"
+              "AbsNationalAuthorizedUser"
           ]
-        },
-        "measure": {
+      },
+      "measure": {
           "type": "national",
           "title": {
-            "en": "Legislative, Administrative or Policy Measure"
+              "en": "Legislative, Administrative or Policy Measure",
+              "ar": "التدبير التشريعي أو الإداري أو السياساتي",
+              "es": "Medidas legislativas, administrativas o de política",
+              "fr": "Mesures juridiques, administratives ou politiques",
+              "ru": "Законодательная, административная и политическая мера",
+              "zh": "立法、行政或政策措施"
           },
           "description": {
-            "en": "Legislative, Administrative or Policy Measures"
+              "en": "Legislative, Administrative or Policy Measures",
+              "ar": "التدابير التشريعية أو الإدارية أو السياساتية",
+              "es": "Medidas legislativas, administrativas o de política",
+              "fr": "Mesures juridiques, administratives ou politiques",
+              "ru": "Законодательные, административные или политические меры",
+              "zh": "立法、行政或政策措施"
           },
           "shortCode": "MSR",
           "titlePlural": {
-            "en": "Legislative, Administrative or Policy Measures"
+              "en": "Legislative, Administrative or Policy Measures",
+              "ar": "التدابير التشريعية أو الإدارية أو السياساتية",
+              "es": "Medidas legislativas, administrativas o de política",
+              "fr": "Mesures juridiques, administratives ou politiques",
+              "ru": "Законодательные, административные или политические меры",
+              "zh": "立法、行政或政策措施"
           }
-        },
-        "absProcedure": {
+      },
+      "absProcedure": {
           "type": "national",
           "title": {
-            "en": "ABS Procedure"
+              "en": "ABS Procedure",
+              "ar": "إجراء الحصول على الموارد وتقاسم المنافع",
+              "es": "Procedimiento en materia de APB",
+              "fr": "Procédures APA",
+              "ru": "Процедура ДГРСИВ",
+              "zh": "获取和惠益分享程序"
           },
           "description": {
-            "en": "ABS Procedure"
+              "en": "ABS Procedure",
+              "ar": "إجراء الحصول على الموارد وتقاسم المنافع",
+              "es": "Procedimiento en materia de APB",
+              "fr": "Procédures APA",
+              "ru": "Процедура ДГРСИВ",
+              "zh": "获取和惠益分享程序"
           },
           "shortCode": "PRO",
           "titlePlural": {
-            "en": "ABS Procedures"
+              "en": "ABS Procedures",
+              "ar": "إجراءات الحصول على الموارد وتقاسم المنافع",
+              "es": "Procedimientos en materia de APB",
+              "fr": "Procédures APA",
+              "ru": "Процедуры ДГРСИВ",
+              "zh": "获取和惠益分享程序"
           }
-        },
-        "absNationalModelContractualClause": {
+      },
+      "absNationalModelContractualClause": {
           "type": "national",
           "title": {
-            "en": "National Model Contractual Clause"
+              "en": "National Model Contractual Clause",
+              "ar": "البند التعاقدي النموذجي الوطني",
+              "es": "Cláusula contractual modelo nacional",
+              "fr": "Modèle national de clause contractuelle type",
+              "ru": "Национальное типовое договорное положение",
+              "zh": "国家合同条款范文"
           },
           "description": {
-            "en": "National Model Contractual Clause"
+              "en": "National Model Contractual Clause",
+              "ar": "البند التعاقدي النموذجي الوطني",
+              "es": "Cláusula contractual modelo nacional",
+              "fr": "Modèle national de clause contractuelle type",
+              "ru": "Национальное типовое договорное положение",
+              "zh": "国家合同条款范文"
           },
           "shortCode": "NMCC",
           "titlePlural": {
-            "en": "National Model Contractual Clauses"
+              "en": "National Model Contractual Clauses",
+              "ar": "البنود التعاقدية النموذجية الوطنية",
+              "es": "Cláusulas contractuales modelo nacionales",
+              "fr": "Modèle national de clause contractuelle type",
+              "ru": "Национальные типовые договорные положения",
+              "zh": "国家合同条款范文"
           }
-        },
-        "absPermit": {
+      },
+      "absPermit": {
           "type": "national",
           "title": {
-            "en": "Internationally Recognized Certificates of Compliance"
+              "en": "Internationally Recognized Certificates of Compliance",
+              "ar": "شهادة الامتثال المعترف بها دوليًا",
+              "es": "Certificado de cumplimiento reconocido internacionalmente",
+              "fr": "Certificat de respect des obligations internationalement reconnu",
+              "ru": "Международно признанные сертификаты о соответствии требованиям",
+              "zh": "国际公认合规证书"
           },
           "description": {
-            "en": "Internationally Recognized Certificates of Compliance"
+              "en": "Internationally Recognized Certificates of Compliance",
+              "ar": "شهادة الامتثال المعترف بها دوليًا",
+              "es": "Certificado de cumplimiento reconocido internacionalmente",
+              "fr": "Certificat de respect des obligations internationalement reconnu",
+              "ru": "Международно признанные сертификаты о соответствии требованиям",
+              "zh": "国际公认合规证书"
           },
           "shortCode": "IRCC",
           "titlePlural": {
-            "en": "Internationally Recognized Certificates of Compliance"
+              "en": "Internationally Recognized Certificates of Compliance",
+              "ar": "شهادة الامتثال المعترف بها دوليًا",
+              "es": "Certificado de cumplimiento reconocido internacionalmente",
+              "fr": "Certificat de respect des obligations internationalement reconnu",
+              "ru": "Международно признанные сертификаты о соответствии требованиям",
+              "zh": "国际公认合规证书"
           }
-        },
-        "database": {
+      },
+      "database": {
           "type": "national",
           "title": {
-            "en": "National Websites or Databases"
+              "en": "National Websites or Databases",
+              "ar": "المواقع الإلكترونية أو قواعد البيانات الوطنية",
+              "es": "Sitios web o bases de datos nacionales",
+              "fr": "Base de données ou site Web national",
+              "ru": "Национальные веб-сайты или базы данных",
+              "zh": "国家网站或数据库"
           },
           "description": {
-            "en": "National websites and databases related to ABS."
+              "en": "National websites and databases related to ABS.",
+              "ar": "المواقع الإلكترونية وقواعد البيانات الوطنية المتعلقة بالحصول على الموارد وتقاسم المنافع.",
+              "es": "Sitios web y bases de datos nacionales en materia de APB",
+              "fr": "Sites Web et bases de données nationaux liés à l’APA",
+              "ru": "Национальные веб-сайты или базы данных по вопросам ДГРСИВ.",
+              "zh": "与获取和惠益分享有关的国家网站和数据库。"
           },
           "shortCode": "NDB",
           "titlePlural": {
-            "en": "National Websites or Databases"
+              "en": "National Websites or Databases",
+              "ar": "المواقع الإلكترونية أو قواعد البيانات الوطنية",
+              "es": "Sitios web o bases de datos nacionales",
+              "fr": "Base de données ou site Web national",
+              "ru": "Национальные веб-сайты или базы данных",
+              "zh": "国家网站或数据库"
           }
-        },
-        "absCheckpoint": {
+      },
+      "absCheckpoint": {
           "type": "national",
           "title": {
-            "en": "Checkpoint"
+              "en": "Checkpoint",
+              "ar": "نقطة تفتيش",
+              "es": "Punto de verificación",
+              "fr": "Points de contrôle",
+              "ru": "Контрольный пункт",
+              "zh": "检查点"
           },
           "description": {
-            "en": "Checkpoints"
+              "en": "Checkpoints",
+              "ar": "نقاط التفتيش",
+              "es": "Puntos de verificación",
+              "fr": "Points de contrôle",
+              "ru": "Контрольные пункты",
+              "zh": "检查点"
           },
           "shortCode": "CP",
           "titlePlural": {
-            "en": "Checkpoints"
+              "en": "Checkpoints",
+              "ar": "نقاط التفتيش",
+              "es": "Puntos de verificación",
+              "fr": "Points de contrôle",
+              "ru": "Контрольные пункты",
+              "zh": "检查点"
           }
-        },
-        "absCheckpointCommunique": {
+      },
+      "absCheckpointCommunique": {
           "type": "national",
           "title": {
-            "en": "Checkpoint Communiqué"
+              "en": "Checkpoint Communiqué",
+              "ar": "بيان نقطة التفتيش",
+              "es": "Comunicado del punto de verificación",
+              "fr": "Communiqués du point de contrôle",
+              "ru": "Коммюнике контрольных пунктов",
+              "zh": "检查站公报"
           },
           "description": {
-            "en": "Checkpoint Communiqués"
+              "en": "Checkpoint Communiqués",
+              "ar": "بيانات نقاط التفتيش",
+              "es": "Comunicados del punto de verificación",
+              "fr": "Communiqués du point de contrôle",
+              "ru": "Коммюнике контрольных пунктов",
+              "zh": "检查站公报"
           },
           "shortCode": "CPC",
           "titlePlural": {
-            "en": "Checkpoint Communiqués"
+              "en": "Checkpoint Communiqués",
+              "ar": "بيانات نقاط التفتيش",
+              "es": "Comunicados del punto de verificación",
+              "fr": "Communiqués du point de contrôle",
+              "ru": "Коммюнике контрольных пунктов",
+              "zh": "检查站公报"
           }
-        },
-        "absNationalReport": {
+      },
+      "absNationalReport": {
           "type": "national",
           "title": {
-            "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
+              "en": "Interim National Reports on the Implementation of the Nagoya Protocol",
+              "ar": "التقارير الوطنية المؤقتة المتعلقة بتنفيذ بروتوكول ناغويا",
+              "es": "Informes nacionales provisionales sobre la aplicación del Protocolo de Nagoya",
+              "fr": "Rapport national intérimaire sur la mise en œuvre du Protocole de Nagoya",
+              "ru": "Промежуточные национальные доклады об осуществлении Нагойского протокола",
+              "zh": "《名古屋议定书》执行情况临时国家报告"
           },
           "description": {
-            "en": "Interim national reports on implementation of the Nagoya Protocol on Access and Benefit-sharing (due 1 November 2017)"
+              "en": "Interim national reports on implementation of the Nagoya Protocol on Access and Benefit-sharing (due 1 November 2017)",
+              "ar": "التقارير الوطنية المؤقتة المتعلقة بتنفيذ بروتوكول ناغويا بشأن الحصول على الموارد وتقاسم المنافع (المقرر إطلاقها في 1 نوفمبر 2017)",
+              "es": "Informes nacionales provisionales sobre la aplicación del Protocolo de Nagoya sobre el Acceso y la Participación en los Beneficios (previstos para el 1 de noviembre de 2017)",
+              "fr": "Rapports nationaux intérimaires sur la mise en œuvre du Protocole de Nagoya sur l'accès et le partage des avantages (dû le 1er novembre 2017)",
+              "ru": "Промежуточные национальные доклады об осуществлении Нагойского протокола о доступе к генетическим ресурсам и совместном использовании выгод (подлежат представлению 1 ноября 2017 года)",
+              "zh": "获取和惠益分享名古屋议定书执行情况临时国家报告（2017年11月1日截止）"
           },
           "shortCode": "NR",
           "titlePlural": {
-            "en": "Interim National Reports on the Implementation of the Nagoya Protocol"
+              "en": "Interim National Reports on the Implementation of the Nagoya Protocol",
+              "ar": "التقارير الوطنية المؤقتة المتعلقة بتنفيذ بروتوكول ناغويا",
+              "es": "Informes nacionales provisionales sobre la aplicación del Protocolo de Nagoya",
+              "fr": "Rapport national intérimaire sur la mise en œuvre du Protocole de Nagoya",
+              "ru": "Промежуточные национальные доклады об осуществлении Нагойского протокола",
+              "zh": "《名古屋议定书》执行情况临时国家报告"
           }
-        },
-        "resource": {
+      },
+      "resource": {
           "type": "reference",
           "publishingAuthorities": [
-            "AbsDocumentValidationTeamMember-dev"
+              "AbsDocumentValidationTeamMember"
           ],
           "title": {
-            "en": "Virtual Library Resource"
+              "en": "Virtual Library Resource",
+              "ar": "مصدر ومرجع افتراضي",
+              "es": "Recursos de la biblioteca virtual",
+              "fr": "Ressources de la bibliothèque virtuelle",
+              "ru": "Ресурс виртуальной библиотеки",
+              "zh": "虚拟图书馆资源"
           },
           "description": {
-            "en": "An electronic catalogue of ABS-related resources, including literature on ABS, reports and case studies, awareness-raising materials, videos, capacity-building resources, etc."
+              "en": "An electronic catalogue of ABS-related resources, including literature on ABS, reports and case studies, awareness-raising materials, videos, capacity-building resources, etc.",
+              "ar": "فهرس إلكتروني للمطبوعات والإصدارات ومصادر المعلومات المتعلقة بالحصول على الموارد وتقاسم المنافع، التي تشمل الدراسات حول الحصول على الموارد وتقاسم المنافع، والتقارير ودراسات الحالة، ومراجع تعزيز الوعي، ومقاطع الفيديو، ومراجع بناء القدرات، وغير ذلك.",
+              "es": "Un catálogo electrónico de recursos relacionados con el acceso y la participación en los beneficios, entre ellos, bibliografía sobre APB, informes y estudios de casos, materiales de sensibilización, videos, recursos para la creación de capacidad, etc.",
+              "fr": "Un catalogue électronique de ressources d'information liées à l’APA, y compris de la documentation sur la prévention des risques biotechnologiques, des rapports et des études de cas, du matériel de sensibilisation, des vidéos, des ressources de renforcement des capacités, etc.",
+              "ru": "Электронный каталог ресурсов по вопросам ДГРСИВ, включая литературу по ДГРСИВ, доклады и тематические исследования, материалы по информированию общественности, видеоматериалы, ресурсы по созданию потенциала и т. д.",
+              "zh": "获取和惠益分享相关资源的电子目录，包括获取和惠益分享文献、报告和案例研究、提高认识材料、视频、能力建设资源等。"
           },
           "shortCode": "VLR",
           "titlePlural": {
-            "en": "Virtual Library Resources"
+              "en": "Virtual Library Resources",
+              "ar": "المصادر والمراجع الافتراضية",
+              "es": "Recursos de la biblioteca virtual",
+              "fr": "Ressources de la bibliothèque virtuelle",
+              "ru": "Ресурсы виртуальной библиотеки",
+              "zh": "虚拟图书馆资源"
           }
-        },
-        "organization": {
+      },
+      "organization": {
           "type": "reference",
           "publishingAuthorities": [
-            "AbsDocumentValidationTeamMember-dev"
+              "AbsDocumentValidationTeamMember"
           ],
           "title": {
-            "en": "Organization"
+              "en": "Organization",
+              "ar": "منظمة",
+              "es": "Organización",
+              "fr": "Organisation",
+              "ru": "Организация",
+              "zh": "机构"
           },
           "description": {
-            "en": "Organizations"
+              "en": "Organizations",
+              "ar": "منظمات",
+              "es": "Organizaciones",
+              "fr": "Organisations",
+              "ru": "Организации",
+              "zh": "生物体"
           },
           "shortCode": "ORG",
           "titlePlural": {
-            "en": "Organizations"
+              "en": "Organizations",
+              "ar": "منظمات",
+              "es": "Organizaciones",
+              "fr": "Organisations",
+              "ru": "Организации",
+              "zh": "生物体"
           }
-        },
-        "capacityBuildingInitiative": {
+      },
+      "capacityBuildingInitiative": {
           "type": "reference",
           "assign": [
-            "AbsPACapacityBuildingInitiative-dev"
+              "AbsPACapacityBuildingInitiative"
           ],
           "notify": [
-            "AbsPACapacityBuildingInitiative-dev"
+              "AbsPACapacityBuildingInitiative"
           ],
           "title": {
-            "en": "Capacity development Initiative"
+              "en": "Capacity development Initiative",
+              "ar": "مبادرة لبناء القدرات",
+              "es": "Iniciativa de desarrollo de las capacidades",
+              "fr": "Initiative de développement des capacités",
+              "ru": "Инициатива по развитию потенциала",
+              "zh": "能力发展倡议"
           },
           "description": {
-            "en": "Information on capacity-building Initiatives at national, regional and international levels, including activities and outcomes."
+              "en": "Information on capacityelopment Initiatives at national, regional and international levels, including activities and outcomes.",
+              "ar": "معلومات عن مبادرات بناء القدرات على المستويات الوطنية والإقليمية والدولية، تشمل الأنشطة والنتائج.",
+              "es": "Información sobre iniciativas de desarrollo de las capacidades a nivel nacional, regional e internacional, incluidos sus actividades y resultados.",
+              "fr": "Informations sur les initiatives de renforcement des capacités aux niveaux national, régional et international, y compris les activités et les résultats.",
+              "ru": "Информация об инициативах по созданию потенциала на национальном, региональном и международном уровнях, в том числе о мероприятиях и итогах.",
+              "zh": "有关国家、区域及国际层面能力建设举措的信息，包括活动和成果。"
           },
           "shortCode": "CDI",
           "titlePlural": {
-            "en": "Capacity development Initiatives"
+              "en": "Capacity development Initiatives",
+              "ar": "مبادرات لبناء القدرات",
+              "es": "Iniciativas de desarrollo de las capacidades",
+              "fr": "Initiatives de développement des capacités",
+              "ru": "Инициативы по развитию потенциала",
+              "zh": "能力发展倡议"
           }
-        },
-        "capacityBuildingResource": {
+      },
+      "capacityBuildingResource": {
           "type": "reference",
           "assign": [
-            "AbsPACapacityBuildingResource-dev"
+              "AbsPACapacityBuildingResource"
           ],
           "notify": [
-            "AbsPACapacityBuildingResource-dev"
+              "AbsPACapacityBuildingResource"
           ],
           "title": {
-            "en": "Capacity-building Resource"
+              "en": "Capacity-building Resource",
+              "ar": "مصدر مرجعي حول بناء القدرات",
+              "es": "Recurso para la creación de capacidad",
+              "fr": "Ressources pour le renforcement des capacités",
+              "ru": "Ресурс по созданию потенциала",
+              "zh": "能力建设资源"
           },
           "description": {
-            "en": "Capacity-building Resources"
+              "en": "Capacity-building Resources",
+              "ar": "المصادر والمراجع حول بناء القدرات",
+              "es": "Recursos para la creación de capacidad",
+              "fr": "Ressources pour le renforcement des capacités",
+              "ru": "Ресурсы по созданию потенциала",
+              "zh": "能力建设资源"
           },
           "shortCode": "CBR",
           "titlePlural": {
-            "en": "Capacity-building Resources"
+              "en": "Capacity-building Resources",
+              "ar": "المصادر والمراجع حول بناء القدرات",
+              "es": "Recursos para la creación de capacidad",
+              "fr": "Ressources pour le renforcement des capacités",
+              "ru": "Ресурсы по созданию потенциала",
+              "zh": "能力建设资源"
           }
-        },
-        "modelContractualClause": {
+      },
+      "modelContractualClause": {
           "type": "reference",
           "assign": [
-            "AbsPAModelContractualClause-dev"
+              "AbsPAModelContractualClause"
           ],
           "notify": [
-            "AbsPAModelContractualClause-dev"
+              "AbsPAModelContractualClause"
           ],
           "title": {
-            "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard"
+              "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standard",
+              "ar": "البنود التعاقدية النموذجية، ومدونات السلوك، والمبادئ التوجيهية، وأفضل الممارسات والمعايير",
+              "es": "Cláusulas contractuales modelo, códigos de conducta, directrices y prácticas óptimas o normas",
+              "fr": "Clauses contractuelles types, codes de conduite volontaires, lignes directrices et bonnes pratiques et/ou normes",
+              "ru": "Типовые договорные положения, кодексы поведения, руководящие указания и передовые методы и/или стандарт",
+              "zh": "示范合同条款、行为准则、指导方针和最佳做法和/或标准"
           },
           "description": {
-            "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards"
+              "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards",
+              "ar": "البنود التعاقدية النموذجية، ومدونات السلوك، والمبادئ التوجيهية، وأفضل الممارسات والمعايير",
+              "es": "Cláusulas contractuales modelo, códigos de conducta, directrices y prácticas óptimas o normas",
+              "fr": "Clauses contractuelles types, codes de conduite volontaires, lignes directrices et bonnes pratiques et/ou normes",
+              "ru": "Типовые договорные положения, кодексы поведения, руководящие указания и передовые методы и/или стандарты",
+              "zh": "示范合同条款、行为准则、指导方针和最佳做法和/或标准"
           },
           "shortCode": "A19A20",
           "titlePlural": {
-            "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards"
+              "en": "Model Contractual Clauses, Codes of Conduct, Guidelines, Best Practices and/or Standards",
+              "ar": "البنود التعاقدية النموذجية، ومدونات السلوك، والمبادئ التوجيهية، وأفضل الممارسات والمعايير",
+              "es": "Cláusulas contractuales modelo, códigos de conducta, directrices y prácticas óptimas o normas",
+              "fr": "Clauses contractuelles types, codes de conduite volontaires, lignes directrices et bonnes pratiques et/ou normes",
+              "ru": "Типовые договорные положения, кодексы поведения, руководящие указания и передовые методы и/или стандарты",
+              "zh": "示范合同条款、行为准则、指导方针和最佳做法和/或标准"
           }
-        },
-        "communityProtocol": {
+      },
+      "communityProtocol": {
           "type": "reference",
           "assign": [
-            "AbsPACommunityProtocol-dev"
+              "AbsPACommunityProtocol"
           ],
           "notify": [
-            "AbsPACommunityProtocol-dev"
+              "AbsPACommunityProtocol"
           ],
           "title": {
-            "en": "Community Protocols and Procedures and Customary Law"
+              "en": "Community Protocols and Procedures and Customary Law",
+              "ar": "البروتوكولات والإجراءات المجتمعية والقوانين العرفية",
+              "es": "Protocolos comunitarios y procedimientos y leyes consuetudinarios",
+              "fr": "Protocoles et procédures communautaires et lois coutumières",
+              "ru": "Общинные протоколы и процедуры и норма обычного права",
+              "zh": "社区协议和程序法及习惯法"
           },
           "description": {
-            "en": "Community Protocols and Procedures and Customary Laws"
+              "en": "Community Protocols and Procedures and Customary Laws",
+              "ar": "البروتوكولات والإجراءات المجتمعية والقوانين العرفية",
+              "es": "Protocolos comunitarios y procedimientos y leyes consuetudinarios",
+              "fr": "Protocoles et procédures communautaires et lois coutumières",
+              "ru": "Общинные протоколы и процедуры и нормы обычного права",
+              "zh": "社区协议和程序法和习惯法"
           },
           "shortCode": "CPP",
           "titlePlural": {
-            "en": "Community Protocols and Procedures and Customary Laws"
+              "en": "Community Protocols and Procedures and Customary Laws",
+              "ar": "البروتوكولات والإجراءات المجتمعية والقوانين العرفية",
+              "es": "Protocolos comunitarios y procedimientos y leyes consuetudinarios",
+              "fr": "Protocoles et procédures communautaires et lois coutumières",
+              "ru": "Общинные протоколы и процедуры и нормы обычного права",
+              "zh": "社区协议和程序法和习惯法"
           }
-        },
-        "contact": {
+      },
+      "contact": {
           "type": "national",
           "publishingAuthorities": [
-            "AbsAdministrator-dev",
-            "AbsNationalFocalPoint-dev",
-            "AbsPublishingAuthorities-dev",
-            "AbsNationalAuthorizedUser-dev"
+              "AbsAdministrator",
+              "AbsNationalFocalPoint",
+              "AbsPublishingAuthorities",
+              "AbsNationalAuthorizedUser"
           ],
           "title": {
-            "en": "Contact"
+              "en": "Contact",
+              "ar": "نقطة الاتصال",
+              "es": "Contacto",
+              "fr": "Personne-ressource",
+              "ru": "Контакт",
+              "zh": "联系方式"
           },
           "description": {
-            "en": "Contacts (CON) are used to provide information on individuals and/or organizations that are linked to other National or Reference records. Contact records can be published by all registered users and are made available in the Search only when they are referenced in other clearing-house records"
+              "en": "Contact",
+              "ar": "نقطة الاتصال",
+              "es": "Contacto",
+              "fr": "Personne-ressource",
+              "ru": "Контакт",
+              "zh": "联系方式"
           },
           "shortCode": "CON",
           "titlePlural": {
-            "en": "Contacts"
+              "en": "Contacts",
+              "ar": "نقاط الاتصال",
+              "es": "Contactos",
+              "fr": "Contacts",
+              "ru": "Контакты",
+              "zh": "联系方式"
           }
-        }
+      }
+    },
+    "pdf": {
+      "documents": {
+        "path": "database/records/:documentID/:revision?print=true",
+        "fields": [
+          "documentID",
+          "revision"
+        ],
+        "fileName": ":documentID-:revision",
+        "s3": {
+          "bucket": "absch.documents.abs",
+          "folder": "records"
+        },
+        "usePrincePdf": true
       },
-      "pdf": {
-        "documents": {
-          "path": "database/records/:documentID/:revision?print=true",
-          "fields": [
-            "documentID",
-            "revision"
-          ],
-          "fileName": ":documentID-:revision",
-          "s3": {
-            "bucket": "absch.documents.abs-dev",
-            "folder": "records"
-          },
-          "usePrincePdf": true
+      "scbd-records": {
+        "path": "database/:schema/:documentID/:revision?print=true",
+        "fields": [
+          "documentID",
+          "revision",
+          "schema"
+        ],
+        "fileName": ":documentID",
+        "s3": {
+          "bucket": "absch.documents.abs",
+          "folder": "records"
         },
-        "scbd-records": {
-          "path": "database/:schema/:documentID/:revision?print=true",
-          "fields": [
-            "documentID",
-            "revision",
-            "schema"
-          ],
-          "fileName": ":documentID",
-          "s3": {
-            "bucket": "absch.documents.abs-dev",
-            "folder": "records"
-          },
-          "usePrincePdf": true
+        "usePrincePdf": true
+      },
+      "abs-contacts": {
+        "path": "/pdf-templates/contacts/:schema",
+        "fields": [
+          "schema",
+          "realm"
+        ],
+        "fileName": "absch-all-:schema",
+        "s3": {
+          "bucket": "absch.documents.abs",
+          "folder": "contacts.pdf"
         },
-        "country-profile": {},
-        "ircc-certificate": {
-          "path": "pdf-templates/ircc/:documentID-:revision",
-          "fields": [
-            "documentID",
-            "revision"
-          ],
-          "fileName": ":documentID-:revision",
-          "s3": {
-            "bucket": "absch.documents.abs-dev",
-            "folder": "abs-permit"
-          },
-          "usePrincePdf": true
+        "usePrincePdf": true
+      },
+      "country-profile": {},
+      "ircc-certificate": {
+        "path": "pdf-templates/ircc/:documentID-:revision",
+        "fields": [
+          "documentID",
+          "revision"
+        ],
+        "fileName": ":documentID-:revision",
+        "s3": {
+          "bucket": "absch.documents.abs",
+          "folder": "abs-permit"
         },
-        "cpc-certificate": {
-          "path": "pdf-templates/checkpoint-communique/:documentID-:revision",
-          "fields": [
-            "documentID",
-            "revision"
-          ],
-          "fileName": ":documentID-:revision",
-          "s3": {
-            "bucket": "absch.documents.abs-dev",
-            "folder": "abs-checkpoint-communique"
-          },
-          "usePrincePdf": true
+        "usePrincePdf": true
+      },
+      "cpc-certificate": {
+        "path": "pdf-templates/checkpoint-communique/:documentID-:revision",
+        "fields": [
+          "documentID",
+          "revision"
+        ],
+        "fileName": ":documentID-:revision",
+        "s3": {
+          "bucket": "absch.documents.abs",
+          "folder": "abs-checkpoint-communique"
         },
-        "abs-contacts": {
-          "path": "/pdf-templates/contacts/:schema",
-          "fields": [
-            "schema"
-          ],
-          "fileName": "absch-all-:schema",
-          "s3": {
-            "bucket": "absch.documents.abs-dev",
-            "folder": "contacts.pdf"
-          },
-          "usePrincePdf": true
-        }
+        "usePrincePdf": true
+      },
+      "draft-documents": {
+        "path": "database/share/:code?print=true&mixLocale=:mixLocale",
+        "fields": [
+          "code",
+          "mixLocale"
+        ],
+        "fileName": "language:documentID-:revision",
+        "usePrincePdf": true
       }
     }
-  ]
+  }
+]
