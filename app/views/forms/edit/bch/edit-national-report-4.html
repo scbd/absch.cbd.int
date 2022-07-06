@@ -64,17 +64,17 @@
                                                                 <div class="col-md-12" style="padding-left:0px;padding-right: 0px;">
                                                                     <div class="form-group" ng-class="{'has-error' : hasError(question.key) }" style="margin-bottom:5px">
 
-                                                                        <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold" 
+                                                                        <label name="{{::question.key}}" for="{{::question.key}}" class="control-label bold d-inline" 
                                                                             ng-bind-html="::(spaceSubQuestion(question.number) + question.title)" ng-required="question.mandatory">
                                                                         </label>                                                          
-                                                                        <div class="float-end show-previous-answer">
+                                                                        <div class="float-end">
                                                                             <button type="button" ng-if="previousAnswerMapping[question.key] && !question.showPrevious" ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">{{::('editNR4T.showPrevious'|$translate)}}</button>
                                                                             <button type="button" ng-if="previousAnswerMapping[question.key] && question.showPrevious"  ng-click="question.showPrevious = !question.showPrevious" class="btn btn-primary btn-sm">{{::('editNR4T.hidePrevious'|$translate)}}</button>
                                                                         </div>
                                                                     </div>         
                                                                 </div>
 
-                                                                <div ng-if="question.type !='legend'">
+                                                                <div ng-if="question.type !='legend'" class="mt-3">
                                                                     <!-- Incase of subquestion wrap questions inside new section -->
                                                                     <div ng-if="question.type=='sub-section'" style="padding:20px">
                                                                         <div ng-repeat="subQuestion in question.questions" style="border:1px solid #eee;margin:5px;padding:10px"
@@ -82,16 +82,16 @@
                                                                             <div class="col-md-12" style="padding-left:0px;padding-right: 0px;" block-region activate="isQuestionDisabled(subQuestion)" skip-loading-icon="true">
 
                                                                                 <div class="form-group" ng-class="{'has-error' : hasError(subQuestion.key) }" style="margin-bottom:5px">
-                                                                                    <label name="{{::subQuestion.key}}" for="{{::subQuestion.key}}" class="control-label bold" 
+                                                                                    <label name="{{::subQuestion.key}}" for="{{::subQuestion.key}}" class="control-label bold d-inline" 
                                                                                         ng-bind-html="::(spaceSubQuestion(subQuestion.number) + subQuestion.title)" ng-required="subQuestion.mandatory">
                                                                                     </label>        
-                                                                                    <div class="float-end" style="margin-bottom:5px;">
-                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">{{::('editNR4T.showPrevious'|$translate)}}</button>
-                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-xs">{{::('editNR4T.hidePrevious'|$translate)}}</button>
+                                                                                    <div class="float-end">
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && !subQuestion.showPrevious" ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-sm">{{::('editNR4T.showPrevious'|$translate)}}</button>
+                                                                                        <button type="button" ng-if="previousAnswerMapping[subQuestion.key] && subQuestion.showPrevious"  ng-click="subQuestion.showPrevious = !subQuestion.showPrevious" class="btn btn-primary btn-sm">{{::('editNR4T.hidePrevious'|$translate)}}</button>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div ng-include="'question'" onload="question=subQuestion"></div>
+                                                                            <div ng-include="'question'" onload="question=subQuestion" class="mt-2 pe-0"></div>
                                                                         </div>
                                                                     </div>
                                                                     <div ng-if="question.type!=='sub-section'">
