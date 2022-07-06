@@ -150,7 +150,7 @@
     </div>
 
     <div class="d-none" id="msgDraftSaveMessage">
-        Your record has been saved as a draft.
+        {{::('workflowButtonsT.savedAsDraft'|$translate)}}
     </div>
 
     <div class="row" id="divShowError" ng-show="errorMessage">
@@ -158,7 +158,7 @@
             <div class="alert alert-danger" role="alert">
                 <button type="button" class="close" ng-click="errorMessage=undefined">
                     <span aria-hidden="true">&times;</span>
-                    <span class="sr-only">Close</span>
+                    <span class="sr-only">{{::('workflowButtonsT.close'|$translate)}}</span>
                 </button> <span ng-bind="errorMessage"></span>
             </div>
         </div>
@@ -169,7 +169,7 @@
             <i ng-if="tab=='intro' && loading" class="fa fa-spinner fa-spin"></i>
             <div class="border p-3 mb-5">
                 <a rel="noopener" class="btn btn-primary" ng-if="isAdmin"
-                    ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">Edit</a>
+                    ng-href="https://www.cbd.int/management/articles/{{article._id|encodeURIComponent}}/edit">{{::('workflowButtonsT.edit'|$translate)}}</a>
                 <h2 ng-bind="article.title|lstring:locale"></h2>
                 <br>
                 <p class="ck ck-content ck-rounded-corners ck-blurred"
@@ -180,15 +180,15 @@
 
     <div ng-show="tab=='edit'" km-tab="edit" class="edit-form editForm">
         <div class="alert alert-danger" role="alert" ng-if="rejectedWorkflow">
-            <h4 class="alert-heading"><i class="fa fa-warning"></i> Information!</h4>
+            <h4 class="alert-heading"><i class="fa fa-warning"></i> {{::('workflowButtonsT.information'|$translate)}}!</h4>
             <p>
-                This draft version request for publishing was rejected by
+                {{::('workflowButtonsT.rejectedBy'|$translate)}}
                 <span
                     ng-bind="rejectedWorkflow.completedBy_info.firstName + ' ' + rejectedWorkflow.completedBy_info.lastName"></span>
-                on <span ng-bind="rejectedWorkflow.completedOn | formatDateWithTime"></span>
+                {{::('workflowButtonsT.on'|$translate)}} <span ng-bind="rejectedWorkflow.completedOn | formatDateWithTime"></span>
             </p>
             <p ng-if="rejectedWorkflow.result.reason">
-                <strong>Reason :</strong>
+                <strong>{{::('workflowButtonsT.reason'|$translate)}} :</strong>
                 <span ng-bind="rejectedWorkflow.result.reason"></span>
             </p>
         </div>
@@ -216,20 +216,18 @@
             <div class="col-12">
 
                 <div class="card p-3">
-                    <p class="fs-6"> <strong>Please ensure that the information in this record is correct,
-                            complete, relevant and not confidential. </strong> This clearing-house does not host any
-                        confidential information and all information published will become publicly available. </p>
+                    <p class="fs-6"> <strong>{{::('workflowButtonsT.ensureThat'|$translate)}} </strong> {{::('workflowButtonsT.doesNotHost'|$translate)}} </p>
                     <ul class="list-unstyled m-0 p-0 pt-2">
                         <li class="d-inline" ng-show="security.canSave">
                             <button type="button" class="btn btn-danger bg-published btn-lg " width="50px"
-                                ng-click="tab='publish';publish()" ng-disabled="loading">Publish
+                                ng-click="tab='publish';publish()" ng-disabled="loading">{{::('workflowButtonsT.publish'|$translate)}}
                                 <i ng-show="tab=='publish' && loading" class="fa fa-spinner fa-spin"></i>
                             </button>
                         </li>
                         <li class="d-inline"
                             ng-show="security.canSave!==undefined && (!security.canSave && security.canSaveDraft)">
                             <button id="publish_button" type="button" class="btn btn-danger bg-request btn-lg"
-                                ng-href="#" ng-click="publishRequest()" ng-disabled="loading">Request Publication
+                                ng-href="#" ng-click="publishRequest()" ng-disabled="loading">{{::('workflowButtonsT.requestPublication'|$translate)}}
                                 <i ng-show="loading" class="fa fa-spinner fa-spin"></i>
                             </button>
                         </li>
@@ -249,8 +247,7 @@
                     <span ng-bind="lang | uppercase"></span>
                 </button>
             </div>
-            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">languages
-                available:</span>
+            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">{{::('workflowButtonsT.languagesAvailable'|$translate)}}:</span>
         </div>
         <div ng-transclude="reviewForm"></div>
     </div>
@@ -276,16 +273,16 @@
                  <div class="col-10 p-0">
                     <ul class="steps"style="width: 32rem;" >
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
-                            <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Introduction</a>
+                            <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.introduction'|$translate)}}</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
-                            <a id="workflowSubFor" rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Submission form</a>
+                            <a id="workflowSubFor" rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.submissionForm'|$translate)}}</a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
-                            <a id="workflowReview" rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</a>
+                            <a id="workflowReview" rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.review'|$translate)}}</a>
                         </li>
                         <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
-                            <a id="workflowPublish" rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</a>
+                            <a id="workflowPublish" rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.publish'|$translate)}}</a>
                         </li>
                     </ul>
                 </div>
@@ -304,19 +301,19 @@
                 </button>
         
                 <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='intro'}">
-                    <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Intro</span>
+                    <span ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.intro'|$translate)}}</span>
                 </button>
 
                 <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='edit'}">
-                    <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Form</span>
+                    <span href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.form'|$translate)}}</span>
                 </button>
 
                 <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='review'}">
-                    <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Review</span>
+                    <span href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.review'|$translate)}}</span>
                 </button>
 
                 <button type="button" class="btn btn-outline-secondary" ng-class="{'btnSelected': workflowScope.tab=='publish'}">
-                    <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">Publish</span>
+                    <span href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.publish'|$translate)}}</span>
                 </button>
 
                 <button type="button" class="btn btn-outline-secondary" ng-click="goNextTab(workflowScope.tab)"  ng-disabled="disableNextBtn">
@@ -331,7 +328,7 @@
 
                     <div class="float-end d-none d-lg-block">
                         <div class="btn border" ng-if="offlineFormats">
-                            <span ng-if="!container">Offline format:</span>
+                            <span ng-if="!container">{{::('workflowButtonsT.offlineFormat'|$translate)}}:</span>
                             <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
                                 ng-show="::offlineFormats[documentType][code]">
                                 <a class="text-decoration-none" rel="noopener" target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>
@@ -344,7 +341,7 @@
                         <button id="workflowSaveDraft" type="button" class="btn btn-default bg-draft p-1" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
                         ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                             <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
-                            Save Draft</button>
+                            {{::('workflowButtonsT.saveDraft'|$translate)}}</button>
                             <document-sharing ng-disabled="disabled" ng-if="documentShare.workingDocumentID" class="pt-0" 
                             class="btn btn-sm" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
                             identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
@@ -379,17 +376,17 @@
             <div class="modal-content">
                 <div class="modal-header d-block bg-red">
                     <button type="button" class="btn fs-4 close float-end cancelClose" ng-click="closeDialog()" aria-hidden="true">×</button>
-                    <h4>CLOSE AND CANCEL CHANGES</h4>
+                    <h4>{{::('workflowButtonsT.closeCancel'|$translate)}}</h4>
                 </div>
                 <div class="modal-body">
-                    <h1>Are you sure you want to close this record without saving? <span class="color-red">Any changes
-                            will be lost.</span> </h1>
+                    <h2>{{::('workflowButtonsT.areYouSure'|$translate)}} <span class="color-red">
+                        {{::('workflowButtonsT.anyChange'|$translate)}}</span> 
+                    </h2>
                 </div>
                 <div class="modal-footer mt-0 d-block">
-                    <button type="button" ng-click="closeDialog()" class="btn btn-default float-end cancelClose">Cancel</button>
+                    <button type="button" ng-click="closeDialog()" class="btn btn-default float-end cancelClose">{{::('workflowButtonsT.cancel'|$translate)}}</button>
                     <button type="button" ng-click="close(true)"
-                        class="btn btn-warning closeWithoutSaving float-start color-white">Close
-                        without saving</button>
+                        class="btn btn-warning closeWithoutSaving float-start color-white">{{::('workflowButtonsT.closeWithoutSaving'|$translate)}}</button>
                 </div>
             </div>
         </div>
@@ -401,17 +398,16 @@
                 <div class="modal-header bg-red color-white">
                     <button type="button" class="close" ng-click="closeAddInfoDialog(false)"
                         aria-hidden="true">×</button>
-                    <h2>Publishing Request</h2>
+                    <h2>{{::('workflowButtonsT.publishingRequest'|$translate)}}</h2>
                 </div>
                 <div class="modal-body">
-                    <p>Would you like to add additional information for the publishing request?</p>
+                    <p>{{::('workflowButtonsT.wouldYouLike'|$translate)}}</p>
                     <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
                 </div>
                 <div class="modal-footer mt-0">
-                    <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">Cancel</button>
+                    <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">{{::('workflowButtonsT.cancel'|$translate)}}</button>
                     <button type="button" id="continueRequest" class="btn btn-primary float-start"
-                        ng-disabled="loading">Send
-                        Request</button>
+                        ng-disabled="loading">{{::('workflowButtonsT.sendRequest'|$translate)}}</button>
                 </div>
             </div>
         </div>
@@ -421,18 +417,15 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-red color-white">
-                    <h2>Edit Publishing Request</h2>
+                    <h2>{{::('workflowButtonsT.editPublishingRequest'|$translate)}}</h2>
                 </div>
                 <div class="modal-body">
-                    <p>Editing and saving as draft a publishing request will cancel the publishing request and
-                        send it back to draft mode.
-                        <br />Are you sure you want to continue?
-                    </p>
+                    <p ng-bind="{{::('workflowButtonsT.editingAndSaving'|$translate)}}"></p>
                 </div>
                 <div class="modal-footer mt-0">
-                    <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">No</button>
+                    <button type="button" class="btn btn-default" ng-click="closeWorkflowDraftDialog(false)">{{::('workflowButtonsT.no'|$translate)}}</button>
                     <button type="button" id="continueWorkflowDraftRequest" class="btn btn-primary float-start"
-                        ng-disabled="loading">Yes</button>
+                        ng-disabled="loading">{{::('workflowButtonsT.yes'|$translate)}}</button>
                 </div>
             </div>
         </div>
@@ -441,16 +434,15 @@
     <script id="dialogUnauthorise" type="text/ng-template" trados-translation="true">
 
         <div class="modal-header bg-red">
-            <h4>Unauthorized Access</h4>
+            <h4>{{::('workflowButtonsT.unauthorizedAccess'|$translate)}}</h4>
         </div>
         <div class="modal-body">
             <div class="alert alert-danger" role="alert">
-                <h4 class="alert-heading"><i class="fa fa-warning"></i> Warning!</h4>
+                <h4 class="alert-heading"><i class="fa fa-warning"></i> {{::('workflowButtonsT.warning'|$translate)}}!</h4>
                 <p>
-                    You do not have rights to submit information. 
+                    {{::('workflowButtonsT.rights'|$translate)}} 
                 </p>
-                <p>If you think this is an error please try reloading the page 
-                    or contact the Secretariat using the ? icon at the bottom of the page 
+                <p>{{::('workflowButtonsT.rightsMsg'|$translate)}} 
                 </p>
             </div>
         </div>

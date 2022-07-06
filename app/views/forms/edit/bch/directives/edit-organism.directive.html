@@ -123,8 +123,8 @@
 												
 												<div class="help-block">{{::('editOrganismT.commonNamesInfo'|$translate)}}</div>
 												<div ng-repeat="commonName in commonNames" class="input-group pb-1">
-													<div km-textbox-ml name="commonNames{{$index}}" style="width: 97%;" class="common-name-input" ng-model="commonName.value" locales="document.header.languages"></div>
-													<span ng-class="{'disable':commonNames.length==1}" class="input-group-text cursor-pointer" 
+													<div km-textbox-ml name="commonNames{{$index}}" class="common-name-input trash-text-ml" ng-model="commonName.value" locales="document.header.languages"></div>
+													<span ng-class="{'disable':commonNames.length==1}" class="input-group-text cursor-pointer trash-section" 
 													 ng-click="removeItem(commonNames, $index)">
 														<i class="fa fa-trash-o icon"></i>
 													</span>

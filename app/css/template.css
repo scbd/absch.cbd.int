@@ -3242,10 +3242,7 @@ div legend {
 .d-flow-root{
     display:flow-root;
 }
-.trash-value{
-    width: 3%;
-    padding: 10px;
-}
+
 .type-cap-initiative .control-label{
     padding-bottom: 5px;
 }
@@ -3333,4 +3330,17 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 #search-new  .input-option label.heading {
     font-weight: normal !important;
     margin-top: 15px;
+}
+.editForm .trash-text-ml {
+    width: calc(100% - 38px);
+}
+.editForm  .input-group .trash-section{
+    width: 38px;
+    padding: 10px;
+}
+.ac-search .km-inputtext-ac .lang-tooltip, .ac-search .km-inputtext-ac .lang-tooltip{
+    width: 49px;
+}
+.ac-search .km-inputtext-ac angucomplete-alt {
+    width: calc(100% - 49px);
 }

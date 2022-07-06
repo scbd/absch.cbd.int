@@ -36,8 +36,8 @@
                                             <div class="col-sm-12">
                                                 <div class="km-control-group" name="synonymNames" caption="{{::('editDnaSequenceT.synonymNames'|$translate)}}">
                                                     <div ng-repeat="synonym in synonymNames" class="pb-1 d-block input-group">
-                                                        <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input float-start pb-1" style="width: 97%;" ng-model="synonym.value" locales="document.header.languages"></div>
-                                                        <span ng-class="{'disable':synonymNames.length==1}" class="input-group-text cursor-pointer float-end trash-value"
+                                                        <div km-textbox-ml name="synonymNames_{{$index}}" class="synonym-name-input float-start pb-1 trash-text-ml" ng-model="synonym.value" locales="document.header.languages"></div>
+                                                        <span ng-class="{'disable':synonymNames.length==1}" class="input-group-text cursor-pointer float-end trash-section"
                                                         ng-click="removeItem(synonymNames, $index)">
                                                             <i class="fa fa-trash-o icon"></i>
                                                         </span>

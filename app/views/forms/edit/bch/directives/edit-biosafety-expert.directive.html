@@ -113,7 +113,7 @@
                                                 <div class="row">
 		
 														<div class="col-xs-12">
-															<div class="km-control-group" required name="currentEmployment.name" caption="{{::('editBiosafetyExpertT.currentEmployment'|$translate)}}">
+															<div class="km-control-group ac-search" required name="currentEmployment.name" caption="{{::('editBiosafetyExpertT.currentEmployment'|$translate)}}">
 																<div km-textbox-ac name="currentEmployment.name" required ng-model="document.currentEmployment.name" locales="document.header.languages"
 																	placeholder="example: University of Montreal" pause="400" 
 																	on-search="onSearchOrganizations(text, locale)" 
@@ -205,7 +205,7 @@
 														</div>
 													</div>
 													<div class="col-xs-6">
-														<div class="km-control-group" name="previousEmployment.name" caption="{{::('editBiosafetyExpertT.nameOfPreviousEmployer'|$translate)}}">
+														<div class="km-control-group  ac-search" name="previousEmployment.name" caption="{{::('editBiosafetyExpertT.nameOfPreviousEmployer'|$translate)}}">
 															<div km-textbox-ac name="previousEmployment.name" ng-model="document.previousEmployment.name" locales="document.header.languages"
 															placeholder="example: University of Montreal" pause="400" 
 															on-search="onSearchOrganizations(text, locale)" 
@@ -284,7 +284,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group" required name="primaryEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
+																		<div class="km-control-group ac-search" required name="primaryEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
 																			<div km-textbox-ac name="primaryEducation.institution" required ng-model="document.primaryEducation.institution"  
 																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
 																			on-search="onSearchOrganizations(text, locale)" 
@@ -325,7 +325,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="secondaryEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
+																		<div class="km-control-group ac-search"  name="secondaryEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
 																			<div km-textbox-ac name="secondaryEducation.institution"  ng-model="document.secondaryEducation.institution"  
 																			placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
 																			on-search="onSearchOrganizations(text, locale)" 
@@ -366,7 +366,7 @@
 																		</div>
 																	</div>
 																	<div class="col-md-6">
-																		<div class="km-control-group"  name="thirdEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
+																		<div class="km-control-group ac-search"  name="thirdEducation.institution" caption="{{::('editBiosafetyExpertT.institution'|$translate)}}">
 																			<div km-textbox-ac name="thirdEducation.institution"  ng-model="document.thirdEducation.institution" 
 																			 placeholder="example: University of Montreal" locales="document.header.languages" pause="400" 
 																			 on-search="onSearchOrganizations(text, locale)" 

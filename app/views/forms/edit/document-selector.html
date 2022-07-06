@@ -88,8 +88,8 @@
                                     <span ng-if="activeTab=='myGovernmentRecords'">{{::('documentSelectorT.myGovernmentRecords'|$translate)}}</span>
                                 <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
-                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">{{::('documentSelectorT.myRecords'|$translate)}}</a></li>
-                                  <li><a rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">{{::('documentSelectorT.myGovernmentRecords'|$translate)}}</a></li>
+                                  <li><a class="dropdown-item" rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myRecords" ng-click="changeTab('myRecords')">{{::('documentSelectorT.myRecords'|$translate)}}</a></li>
+                                  <li><a class="dropdown-item" rel="noopener" data-bs-toggle="tab" class="nav-link" href="#myGovernmentRecords" ng-click="changeTab('myGovernmentRecords')">{{::('documentSelectorT.myGovernmentRecords'|$translate)}}</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item" ng-if="!userGov || !showMyGovFilter">
