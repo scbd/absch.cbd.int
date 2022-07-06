@@ -1,0 +1,11 @@
+{
+  "sessionExpired": "",
+  "sessionHasExpired": "您的会话已过期，请登录以继续。",
+  "loginFailed": "",
+  "incorrectMsg": "您输入的电子邮件地址和密码组合不正确。",
+  "operationFailed": "",
+  "serviceNotAvailable": "此服务不可用。请稍后再试。",
+  "signInAccount": "登录您的帐户",
+  "forgotPassword": "",
+  "createAccount": ""
+}

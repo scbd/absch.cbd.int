@@ -1,0 +1,12 @@
+{
+  "report": "Доклад:",
+  "analysis": "Анализ:",
+  "breakdownCbdRegions": "Разбивка по регионам КБР",
+  "selectCountries": "Выбрать страны",
+  "selectRegions": "Выбрать регионы",
+  "breakdownProtocolParties": "",
+  "breakdownProtocolNonParties": "Разбивка по государствам, не являющимся Сторонами Протокола",
+  "nationalReportAnalyzer": "Анализатор национальных докладов",
+  "nationalReportAnalyzerInfo": "",
+  "analyze": ""
+}

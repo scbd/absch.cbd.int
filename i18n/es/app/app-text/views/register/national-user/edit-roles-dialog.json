@@ -1,0 +1,8 @@
+{
+  "accessPermission": "",
+  "selectFunction": "Sírvase seleccionar qué funciones desea asignar al usuario",
+  "granted": "se concederán función(es)",
+  "revoked": "se revocarán función(es)",
+  "cancel": "cancelar",
+  "next": "Siguiente"
+}

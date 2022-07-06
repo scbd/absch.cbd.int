@@ -1,0 +1,19 @@
+{
+  "systemAlert": "",
+  "certificatesInfo": "",
+  "emailMe": "",
+  "search": "Поиск",
+  "edit": "",
+  "delete": "Удалить",
+  "addNew": "",
+  "loading": "Загрузка ....",
+  "isAuthenticated": "",
+  "isNotAuthenticated": "",
+  "searchFilter": "",
+  "filterTitle": "",
+  "selectFilters:": "Выбрать фильтры поиска:",
+  "sendEmail": "Отправить электронное письмо на мой адрес, когда будут добавлены или обновлены записи, имеющие отношение к этому поиску.",
+  "cancel": "Отменить",
+  "save": "Сохранить",
+  "searchTitle": ""
+}

@@ -1,0 +1,14 @@
+{
+  "generalInfo": "一般信息",
+  "organization": "实验室名称和联系方式",
+  "relatedOrganization": "相关机构",
+  "services": "所开展的服务和活动",
+  "collaborativeAgreements": "协作协议",
+  "certifications": "实验室的认可与认证",
+  "detectionMethods": "可供实验室使用之探测/查明方法的类型",
+  "lmoTypes": "改性活生物体类型",
+  "detectableLmos": "可由实验室探测的改性活生物体",
+  "detectableGenes": "可由实验室探测的基因片段",
+  "additionalInformation": "更多信息",
+  "relevantDocuments": "其他相关网站地址和/或附加文件"
+}

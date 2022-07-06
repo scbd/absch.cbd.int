@@ -1,0 +1,21 @@
+{
+  "registries": "",
+  "geneticElementRegistry": "Directorio de elementos genéticos",
+  "lmoTitle": "Directorio de OVM",
+  "organismRegistry": "",
+  "lmoRegistry": "Directorio de organismos vivos modificados (OVM)",
+  "lmoInfo": "",
+  "uniqueCode": "",
+  "lmoLink": " ",
+  "here": "aquí",
+  "perform": "",
+  "loading": "Cargando...",
+  "error": "",
+  "totalRecords": "Registros totales:",
+  "export": "Exportar",
+  "recordID": "Identificación del registro",
+  "name": "Idenficación única",
+  "identity": "Identidad y evento de transformación",
+  "organism": "Organismo",
+  "description": "Descripción"
+}

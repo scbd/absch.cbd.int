@@ -1,0 +1,21 @@
+{
+  "generalInfo": "",
+  "languageToPublish": "Veuillez sélectionner la ou les langues dans lesquelles vous souhaitez soumettre ce fichier :",
+  "country": "Pays",
+  "jurisdiction": "Zone de juridiction :",
+  "selectOption": "Veuillez choisir un pays...",
+  "or": "OU",
+  "submissionInformation": "Soumettre une information",
+  "titleSubmission": "Titre de la soumission",
+  "organization": "Organisation(s)",
+  "helpTitle": " Soumission",
+  "dateSubmission": "Date de soumission",
+  "notifications": "Notifications connexes",
+  "records": "Fichier(s) connexe(s) :",
+  "thematicAreas": "Domaines thématiques",
+  "documents": "Documents",
+  "otherRelevantInformation": "Tout autre information utile",
+  "relevantInformationInfo": "",
+  "notes": "Notes",
+  "notesInfos": "Le champs ‘Notes’ est réservé à votre usage personnel. Il peut seulement être vu lorsqu’un dossier est en mode édition mais n’est pas visible lorsque celui-ci est publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles."
+}

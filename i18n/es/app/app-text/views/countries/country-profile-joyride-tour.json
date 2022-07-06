@@ -1,0 +1,42 @@
+{
+  "countryProfiles": {
+    "title": "Perfiles de los países",
+    "content": ""
+  },
+  "listOfRecords": {
+    "title": "Lista de registros",
+    "content": "En esta página, se accede a un panorama de todos los registros nacionales. Los números que se muestran en círculos negros representan la cantidad total de registros publicados en cada tipo de registro. <br><br> <u> PFN) para ver el título completo del tipo de registro nacional."
+  },
+  "sortingRecords": {
+    "title": "Organización de los registros",
+    "content": "Puede ordenar los registros en orden alfabético ascendente/descendente, así como por tipo de registro."
+  },
+  "sortingRecordsNFP": {
+    "title": "Organización de los registros",
+    "content": "Haga clic en la sigla o en el número del círculo negro del tipo de registro que le interese para ordenar por el número de registros más publicados de ese tipo. Vuelva a hacer clic para invertir el modo de organización."
+  },
+  "sortingRecordsCountries": {
+    "title": "Organización de los registros: Países",
+    "content": "</u> "
+  },
+  "sortingRecordsPartyStatus": {
+    "title": "Organización de los registros: Situación de la Parte",
+    "content": "Haga clic aquí para filtrar por la situación de la Parte."
+  },
+  "sortingRecordsRegions": {
+    "title": "Organización de los registros: Regiones",
+    "content": "Haga clic aquí para filtrar por región. </u> "
+  },
+  "exportingRecords": {
+    "title": "Exportar registros",
+    "content": "Haga clic aquí para exportar la lista del panorama general en un archivo Excel. Si utilizó filtros, los datos se exportarán según sus selecciones."
+  },
+  "needHelp": {
+    "title": "¿Necesita ayuda?",
+    "content": "Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con la página de los Perfiles de los países."
+  },
+  "needMoreHelp": {
+    "title": "¿Necesita más ayuda?",
+    "content": "Use la función de chat para enviarnos un mensaje si necesita más ayuda."
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "theBch": "生物安全信息交换所",
+  "submit": "提交",
+  "new": "新",
+  "edit": "编辑",
+  "lmoDecisions": "改性活生物体决定",
+  "registries": "登记簿",
+  "lmoRegistry": "改性活生物体登记薄",
+  "organismsRegistry": "生物体登记库",
+  "geneRegistry": "基因登记薄",
+  "forbidden": "已禁止",
+  "notFound": "未找到",
+  "pageNotFound": "页面未找到"
+}
