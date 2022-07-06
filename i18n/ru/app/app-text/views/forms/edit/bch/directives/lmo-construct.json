@@ -1,0 +1,14 @@
+{
+  "addConstruct": "Добавить конструкцию",
+  "geneConstruct": "Генетическая конструкция",
+  "geneConstructInfo": "Чтобы добавить форму к конструкции, перетащите ее с помощью мыши в место сброса",
+  "dragConstruct": "Чтобы удалить конструкцию, перетащите форму в это место",
+  "dropLocation": "Место сброса",
+  "Cancel": "Отменить",
+  "save": "Сохранить",
+  "transcriptionStart": "",
+  "transcriptionStop": "",
+  "transcriptionElement": "",
+  "selectGene": "выбрать ген",
+  "kb": "КБ"
+}

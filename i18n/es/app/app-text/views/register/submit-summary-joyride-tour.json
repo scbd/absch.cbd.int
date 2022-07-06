@@ -1,0 +1,38 @@
+{
+  "welcome": {
+    "title": "Resumen de registros",
+    "content": "<p> <br><br></p>"
+  },
+  "filters": {
+    "title": "Filtros",
+    "content": "<p></p>"
+  },
+  "Keyword": {
+    "title": "Palabra clave",
+    "content": "<p></p>"
+  },
+  "adding": {
+    "title": "Agregar un registro nuevo",
+    "content": "<p></p>"
+  },
+  "duplicate": {
+    "title": "Duplicar un registro",
+    "content": "<p></p>"
+  },
+  "edit": {
+    "title": "Editar un registro",
+    "content": "<p></p>"
+  },
+  "delete": {
+    "title": "Borrar un registro",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "¿Necesita ayuda?",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "¿Necesita más ayuda?",
+    "content": "<p></p>"
+  }
+}

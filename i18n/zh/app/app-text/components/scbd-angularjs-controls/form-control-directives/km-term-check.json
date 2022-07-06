@@ -1,0 +1,9 @@
+{
+  "keywords": "所选关键词。",
+  "search": "搜索列表（搜索至少需要 3 个字符）",
+  "keywordNotFound": "未找到关键词",
+  "clearSelection": "清除选择",
+  "loading": "正在加载...",
+  "pleaseSpecify": "请指明",
+  "otherElement": "其他元素"
+}

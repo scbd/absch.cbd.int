@@ -1,0 +1,42 @@
+{
+  "welcome": {
+    "title": "Bienvenidos a la página Presentar: Tablero de control",
+    "content": "<p> </p>"
+  },
+  "personalInformation": {
+    "title": "Su información personal",
+    "content": "<p> </p>"
+  },
+  "recordOverview": {
+    "title": "",
+    "content": "<p> </p>"
+  },
+  "yourRecordsStatus": {
+    "title": "Sus registros: situación",
+    "content": "<p> </p>"
+  },
+  "yourRecordsOffline": {
+    "title": "Sus registros: formatos fuera de línea",
+    "content": "<p> </p>"
+  },
+  "quickView": {
+    "title": "Vista rápida",
+    "content": "<p></p>"
+  },
+  "addNewRecord": {
+    "title": "Agregar un registro nuevo",
+    "content": "<p></p>"
+  },
+  "viewAllRecords": {
+    "title": "Ver todos los registros",
+    "content": "<p> </u>  </p>"
+  },
+  "needHelp": {
+    "title": "¿Necesita ayuda?",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "¿Necesita más ayuda?",
+    "content": "<p></p>"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "welcome": {
+    "title": "Résumé des fichiers",
+    "content": "<p> <br><br></p>"
+  },
+  "filters": {
+    "title": "Filtres",
+    "content": "<p></p>"
+  },
+  "Keyword": {
+    "title": "Mot clé",
+    "content": "<p></p>"
+  },
+  "adding": {
+    "title": "Ajouter un nouveau fichier",
+    "content": "<p></p>"
+  },
+  "duplicate": {
+    "title": "Dupliquer le fichier",
+    "content": "<p></p>"
+  },
+  "edit": {
+    "title": "Éditer un fichier",
+    "content": "<p></p>"
+  },
+  "delete": {
+    "title": "Supprimer un fichier",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "Besoin d'aide?",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "Encore besoin d’aide?",
+    "content": "<p></p>"
+  }
+}

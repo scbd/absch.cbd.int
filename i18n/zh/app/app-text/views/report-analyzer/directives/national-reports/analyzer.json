@@ -1,0 +1,22 @@
+{
+  "countResponses": "答复数量",
+  "percentageRow": "各行比例",
+  "percentageColumn": "各列比例",
+  "percentageOverall": "总体比例",
+  "toggleDropdown": "切换下拉列表",
+  "backToSettings": "",
+  "currentAnalysis": "目前的分析经过筛选仅显示符合以下条件的报告",
+  "removeFilter": "删除筛选条件",
+  "question": "问题",
+  "follows": "已按如下方式答复：",
+  "changeNumber": "更改数字的计算方式",
+  "sum": "针对给定的行（回答）与列（分组）组合，显示所收到答复的绝对数量。",
+  "percentRow": "显示所选各组（列）之间的比例。在此情况中，一行的所有值之和是 100％。",
+  "percentColumn": "显示各个给定回答（行）之间的比例。在此情况中，一列的所有值之和是 100％。",
+  "percentGlobal": "显示所有给定回答之间的比例。在此情况中，所有值之和（行和列）是 100％。",
+  "close": "关闭",
+  "subSection": "",
+  "country": "国家",
+  "export": "导出",
+  "print": "打印"
+}

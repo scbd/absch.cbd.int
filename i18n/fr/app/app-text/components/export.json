@@ -1,0 +1,22 @@
+{
+  "exportButton": "Exporter",
+  "dialogTitle": "Exporter",
+  "downloadFormat": "Format de téléchargement",
+  "xls": "XLS (Excel)",
+  "xlsx": "XLS (Excel)",
+  "csv": "CSV (la virgule sépare les entrées)",
+  "processing": "En cours...",
+  "recordsFound": "Fichiers trouvés",
+  "type": "Type",
+  "uid": "UID",
+  "government": "Gouvernement",
+  "title": "Titre",
+  "info1": "Info 1",
+  "info2": "Info 2",
+  "info3": "Info 3",
+  "info4": "Info 4",
+  "publishedDate": "Date de publication",
+  "sampleMessage": "Il s’agit du seul échantillon d’informations devant être exporté Tous les fichiers extraits de cette recherche seront inclus dans l'exportation",
+  "cancel": "Annuler",
+  "download": "Télécharger"
+}

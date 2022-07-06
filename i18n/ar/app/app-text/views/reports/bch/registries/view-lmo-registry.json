@@ -1,0 +1,21 @@
+{
+  "registries": "السجلات",
+  "geneticElementRegistry": "تسجيل العناصر الجينية",
+  "lmoTitle": "تسجيل كائن حي مُحوَّر",
+  "organismRegistry": "تسجيل الكائنات الحية",
+  "lmoRegistry": "سجل الكائنات الحية المُحوّرة",
+  "lmoInfo": "",
+  "uniqueCode": "",
+  "lmoLink": " ",
+  "here": "هنا",
+  "perform": "",
+  "loading": "",
+  "error": "خطأ في تحميل مدونات التسجيل، يُرجى المحاولة مرة أخرى.",
+  "totalRecords": "إجمالي عدد السجلات:",
+  "export": "تصدير",
+  "recordID": "معرف السجل",
+  "name": "التعريف الفريد",
+  "identity": "حدث تحديد الهوية والتحول",
+  "organism": "الكائن الحي",
+  "description": "الوصف"
+}

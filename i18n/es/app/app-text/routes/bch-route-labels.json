@@ -1,0 +1,14 @@
+{
+  "theBch": "CIISB",
+  "submit": "Presentar",
+  "new": "Nuevo",
+  "edit": "Editar",
+  "lmoDecisions": "Decisiones en materia de OVM",
+  "registries": "",
+  "lmoRegistry": "Registro de organismos vivos modificados",
+  "organismsRegistry": "Directorio de organismos",
+  "geneRegistry": "Registro de genes",
+  "forbidden": "Prohibido",
+  "notFound": "No encontrado",
+  "pageNotFound": "Página no encontrada"
+}

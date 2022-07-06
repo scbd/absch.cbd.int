@@ -1,0 +1,11 @@
+{
+  "resistanceDiseasesAndPests": "抗病性和抗虫性",
+  "resistanceToHerbicides": "杂草抗药性",
+  "resistanceToAtibiotics": "抗生素抗性",
+  "toleranceToAbioticStress": "非生物胁迫耐受性",
+  "changesInPhysiology": "生理和/或产量变化",
+  "changesInQualityContent": "质量和/或代谢物变化",
+  "productionOfMedical": "医学或药物化合物（人类或动物）的生产",
+  "useInIndustrialApplications": "用于工业用途",
+  "engineeredApplication": "经过工程处理（基因驱动用途）"
+}

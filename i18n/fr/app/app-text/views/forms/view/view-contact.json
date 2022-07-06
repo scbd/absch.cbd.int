@@ -1,0 +1,16 @@
+{
+  "type": "Type",
+  "country": "Pays",
+  "name": "Nom",
+  "typeOfOrganization": "Type d'organisation",
+  "jobTitle": "Titre du poste",
+  "department": "Section / division / unité",
+  "organization": "Organisation",
+  "addressContact": "Adresse de la personne ressource",
+  "phoneNumber": "Téléphone (s) :",
+  "faxNumber": "Télécopieur :",
+  "emails": "courriel(s)",
+  "webAddress": "Adresse(s) du/des site(s) Web",
+  "additionalInfo": "Informations supplémentaires",
+  "otherRelevant": "Autres sites web pertinents et/ou documents en pièce jointe"
+}
