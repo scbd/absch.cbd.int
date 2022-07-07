@@ -21,7 +21,7 @@ const update = async () => {
                          `export { default as template } from './${name.replace(/\.js$/, '.html')}.html';\nexport default [`)
             console.log(filePath);
 
-            await fs.writeFile(filePath, fileData, {encoding:"utf8"})
+            await fs.writeFile(filePath, fileData)
             // exit;
         }
     }
