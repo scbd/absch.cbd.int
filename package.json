@@ -45,7 +45,7 @@
   "scripts": {
     "server": "node server",
     "start": "node server.js",
-    "build": "rm -rf ./dist && npx rollup -c",
+    "build": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c --watch",
     "eslint": "npx eslint . --fix",
     "clean-reinstall": "rm -rf ./node_modules && rm -rf ./package-lock.json && yarn install",

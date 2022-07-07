@@ -6,7 +6,7 @@ const path      = require("path");
 const util      = require("util");
 const _         = require('lodash');
 const touch     = require("touch")
-const { rename, copyFile, mkdir, stat, readDir } = require('fs').promises;
+const { rename, copyFile, mkdir, stat, readDir, readFile, writeFile } = require('fs').promises;
 const asyncGlob = util.promisify(glob)
 
 const log = function(...args) {
@@ -95,6 +95,10 @@ export const processFiles = async (ignoreForRollupFiles) =>{
             const enFilePath = file.replace(/\/(ar|en|fr|es|ru|zh)\//, '/en/')
             if(fileModifiedDates['en'][enFilePath] > fileModifiedDates[lang][file]){
                 enFileOverridePromises.push(copyFile(enFilePath, file));
+            }
+            //TODO: Remove once one round of translation is done 
+            else{
+                enFileOverridePromises.push(copyMissingTranslationProps(file, enFilePath));
             }
         })
     });
@@ -185,9 +189,40 @@ async function getAllDirectoryFiles(dir, options){
             }
         }
         catch(e){
-            console.log(e, file)
+            log(e, file)
         }
     }))
     return fileList;
 
+}
+
+async function copyMissingTranslationProps(languageFilePath, enFilePath){
+    try{
+        let languageFileData   = await readFile(languageFilePath, {encoding:"utf8"});
+        let enFileData         = await readFile(enFilePath, {encoding:"utf8"});
+
+        languageFileData = copyProps(JSON.parse(languageFileData.trim()), JSON.parse(enFileData.trim()));
+
+        await writeFile(languageFilePath, JSON.stringify(languageFileData));
+    }
+    catch(e){
+        log(e)
+    }
+}
+
+function copyProps(languageProps, enProps){
+
+    for (const languageProp in languageProps) {
+        if (Object.hasOwnProperty.call(languageProps, languageProp)) {
+            const languageVal = languageProps[languageProp];
+            const enVal       = enProps[languageProp];
+            
+            if(languageVal == "")
+                languageProps[languageProp] = enVal;
+            else if(_.isArray(languageVal) || _.isObject(enVal))
+                languageProps[languageProp] = copyProps(languageVal, enVal);
+        }
+    }
+
+    return languageProps;
 }
