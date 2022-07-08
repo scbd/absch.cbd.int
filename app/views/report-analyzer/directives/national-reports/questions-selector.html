@@ -10,7 +10,7 @@
 
     <table class="table table-hover bg-white mb-0">
         <tr>
-            <th style="width:20%">National Report</th>
+            <th style="width:20%">{{::('questionSelectorT.nationalReport'|$translate)}}</th>
             <td>
                 <select style="Width: 100%;" ng-model="selectedReportType" ng-change="reportTypeChanged()"  class="form-select form-control">
                     <option ng-repeat="report in (reportData|filter:hasAnalyzer)" value="{{report.type}}" ng-bind="report.title">
@@ -20,27 +20,27 @@
             </td>
         </tr>
         <tr>
-            <th>Filter by country(ies) or region(s)</th>
+            <th>{{::('questionSelectorT.nationalReport'|$translate)}}</th>
             <td>
                 <select style="width: 100%;" ng-model="selectedRegionsPreset" ng-change="regionsPresetChanged()" class="form-select form-control">
-                    <option value="cbdRegions">Breakdown by CBD regions</option>
-                    <option value="countries">Select countries</option>
-                    <option value="regions">Select regions</option>
-                    <option value="protocolParties">Breakdown by Parties to the Cartagena Protocol</option>
-                    <option value="protocolNonParties">Breakdown by Non-Parties to the Cartagena Protocol</option>
-                    <option ng-if="isBch" value="NKLSParty">Breakdown by Parties to the Supplementary Protocol</option>
+                    <option value="cbdRegions">{{::('questionSelectorT.breakdownRegions'|$translate)}}</option>
+                    <option value="countries">{{::('questionSelectorT.selectCountries'|$translate)}}</option>
+                    <option value="regions">{{::('questionSelectorT.selectRegions'|$translate)}}</option>
+                    <option value="protocolParties">{{::('questionSelectorT.protocolParties'|$translate)}}</option>
+                    <option value="protocolNonParties">{{::('questionSelectorT.protocolNonParties'|$translate)}}</option>
+                    <option ng-if="isBch" value="NKLSParty">{{::('questionSelectorT.nklsParty'|$translate)}}</option>
                 </select>
             </td>
         </tr>
         <tr ng-if="selectedRegionsPreset!='cbdRegions'">
             <td class="text-center">
-                <button type="button" class="btn btn-default btn-sm" ng-click="$parent.showCountries=true;" ng-show="selectedRegionsPreset=='countries'">Select countries</button>
-                <button type="button" class="btn btn-default btn-sm" ng-click="$parent.showRegions=true;"   ng-show="selectedRegionsPreset=='regions'">Select regions</button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="$parent.showCountries=true;" ng-show="selectedRegionsPreset=='countries'">{{::('questionSelectorT.selectCountries'|$translate)}}</button>
+                <button type="button" class="btn btn-default btn-sm" ng-click="$parent.showRegions=true;"   ng-show="selectedRegionsPreset=='regions'">{{::('questionSelectorT.selectRegions'|$translate)}}</button>
             </td>
             <td>
 
                 <div ng-hide="selectedRegions.length || showCountries || showRegions" class="alert alert-warning" role="alert" style="margin-bottom:0px">
-                    No countries or regions selected
+                    {{::('questionSelectorT.selectMessage'|$translate)}}
                 </div>
 
                 <ul ng-if="selectedRegions.length && selectedRegions[0] != undefined" class="list-unstyled">
@@ -62,7 +62,7 @@
                 <input type="checkbox"  ng-model="allSelected" indeterminate="allSelected===null" ng-change="allSectionsClicked()" />
             </td>
             <th class="Title" colspan="4" ng-click="allSelected=!allSelected; allSectionsClicked();">
-                All questions and/or sections of the report
+                {{::('questionSelectorT.allQuestions'|$translate)}}
             </th>
         </tr>
 
@@ -79,8 +79,8 @@
             <td><input type="checkbox" ng-model="question.selected" ng-change="questionClicked(question)" /></td>
             <td ng-click="question.selected=!question.selected; questionClicked(question)" class="text-nowrap">
                 <span ng-switch="question.key[0]">
-                    <span ng-switch-when="S">Survey Question <span ng-bind="::question.number"></span>.</span>
-                    <span ng-switch-default>Question <span ng-bind="::question.number"></span>.</span>
+                    <span ng-switch-when="S">{{::('questionSelectorT.surveyQuestion'|$translate)}} <span ng-bind="::question.number"></span>.</span>
+                    <span ng-switch-default>{{::('questionSelectorT.question'|$translate)}} <span ng-bind="::question.number"></span>.</span>
                 </span>
 
             </td>
@@ -92,7 +92,7 @@
 
     </table>
 
-    <terms-dialog title="Countries" visible="showCountries" selection="selectedRegions" terms="getCountries()" columns="2"></terms-dialog>
-    <terms-dialog title="Regions"   visible="showRegions"   selection="selectedRegions" terms="getRegions()"></terms-dialog>
+    <terms-dialog title="{{::('questionSelectorT.countries'|$translate)}}" visible="showCountries" selection="selectedRegions" terms="getCountries()" columns="2"></terms-dialog>
+    <terms-dialog title="{{::('questionSelectorT.regions'|$translate)}}"   visible="showRegions"   selection="selectedRegions" terms="getRegions()"></terms-dialog>
 
 </div>

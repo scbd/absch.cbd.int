@@ -9,7 +9,7 @@
 
             <div class="modal-body" style="max-height:75vh;overflow-y: auto;">
 
-                <h4 ng-show="loading"><i class="fa fa-cog fa-spin"></i> Loading...</h4>
+                <h4 ng-show="loading"><i class="fa fa-cog fa-spin"></i> {{::('termsDialogT.loading'|$translate)}}</h4>
 
                 <table>
                     <tr>
@@ -22,7 +22,8 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary px-3" ng-click="clearSelection()">Clear</button>
+                <button type="button" class="btn btn-default" ng-click="clearSelection()">{{::('termsDialogT.clear'|$translate)}}</button>
+                <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{::('termsDialogT.close'|$translate)}}</button>
             </div>
             
         </div><!-- /.modal-content -->

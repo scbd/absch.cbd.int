@@ -1,0 +1,16 @@
+{
+    "nationalReport": "National Report",
+    "filter": "Filter by country(ies) or region(s)",
+    "breakdownRegions": "Breakdown by CBD regions",
+    "selectCountries": "Select countries",
+    "selectRegions": "Select regions",
+    "protocolParties": "Breakdown by Parties to the Cartagena Protocol",
+    "protocolNonParties": "Breakdown by Non-Parties to the Cartagena Protocol",
+    "nklsParty": "Breakdown by Parties to the Supplementary Protocol",
+    "selectMessage": "No countries or regions selected",
+    "allQuestions": "All questions and/or sections of the report",
+    "surveyQuestion": "Survey Question",
+    "question": "Question",
+    "countries": "Countries",
+    "regions": "Regions"
+}

@@ -4,23 +4,23 @@
         <div block-region activate="loading" dynamic-text="matrixProgress" style="background-color: black;"></div>
     </div>
     <div style="display: none;">
-        <span id="loadingMessage">Loading Matrix data</span>
-        <span id="resetFilterMessage">Filter changed, restarting data fetch</span>
+        <span id="loadingMessage">{{::('dataMatrixT.loading'|$translate)}}</span>
+        <span id="resetFilterMessage">{{::('dataMatrixT.filter'|$translate)}}</span>
     </div>
 
 	<script type="text/ng-template" trados-translation="true" id="exportDialog">
         <div class="modal-header">
             <h3 class="modal-title">
-                Export result 
+                {{::('dataMatrixT.exportResult'|$translate)}} 
             </h3>
         </div>
         <div class="modal-body matrix-export-dialog" ng-disabled="forTour">
             <div class="form-group">
-                    Download Format :
+                     {{::('dataMatrixT.format'|$translate)}} 
                     <span class="radio" style="display: initial;" ng-if="exportType=='excel'">
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls" ng-model="$parent.downloadFormat" />XLS (Excel)</label>                   
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" ng-model="$parent.downloadFormat" />XLSX (Excel)</label>                   
-                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv" ng-model="$parent.downloadFormat" />CSV (comma separated values)</label>
+                        <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="csv" ng-model="$parent.downloadFormat" />CSV ({{::('dataMatrixT.csv'|$translate)}})</label>
                     </span>
                     <span class="radio" style="display: initial;" ng-if="exportType=='chart'">
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="svg" ng-model="$parent.downloadFormat" />SVG</label>                   
@@ -29,7 +29,7 @@
                         <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="webp" ng-model="$parent.downloadFormat" />WEBP</label>
                     </span>
                     <span style="display:inline" class="float-end">
-                        <label>File name :</label>
+                        <label>{{::('dataMatrixT.name'|$translate)}} </label>
                         <input type="text" ng-model="fileName" />
                     </span>
             </div>
@@ -44,9 +44,9 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">Close</button>
+            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">{{::('dataMatrixT.close'|$translate)}}</button>
             <button type="button" class="btn btn-primary float-start" aria-label="Download" ng-click="downloadData()"  ng-disabled="loading||forTour" id="downloadDataFile">
-                <i class="fa fa-spin fa-spinner" ng-if="loading" ></i> Download
+                <i class="fa fa-spin fa-spinner" ng-if="loading" ></i> {{::('dataMatrixT.download'|$translate)}}
             </button>  
         </div>
     </script>

@@ -6,9 +6,10 @@ import '~/services/main';
 import '~/views/directives/block-region-directive';
 import 'pivottable';
 import 'ngDialog'; ;
+import dataMatrixT from '~/app-text/views/reports/matrix/data-matrix.json';
 
-app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter',
-function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter) {
+app.directive("matrixView", ["$q", "searchService", '$http', 'locale', 'thesaurusService', 'realm', '$timeout', 'ngDialog', '$filter', 'translationService',
+    function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, ngDialog, $filter, translationService) {
 	
 		return{
 			template:template,
@@ -20,7 +21,7 @@ function ($q, searchService, $http, locale, thesaurusService, realm, $timeout, n
                 'onRecordFormatting'    : '&'
             },
 			link($scope, $element, $attr, searchDirectiveCtrl){
-                
+                translationService.set('dataMatrixT', dataMatrixT);
                 require(['pivottable', 'plotly.js', 'plotly-renderers'], function(){});
 
                 var pivotUIConf;

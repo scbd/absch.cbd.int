@@ -1,0 +1,10 @@
+{
+    "loading": "Loading Matrix data",
+    "filter": "Filter changed, restarting data fetch",
+    "exportResult": "Export result",
+    "format": "Download Format :",
+    "csv": "comma separated values",
+    "name": "File name :",
+    "close": "Close",
+    "download": "Download"
+}
