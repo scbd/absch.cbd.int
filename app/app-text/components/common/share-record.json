@@ -5,7 +5,7 @@
     "embed" : "Embed",
     "share" : "Share",
     "send" : "Send",
-    "modalTitle" : "Share Clearing-House ",
+    "modalTitle" : "Share",
     "copy" : "Copy",
     "clipboardSuccess" : "Copied to clipboard",
     "processing": "Processing",
@@ -16,14 +16,16 @@
 
     "generateLink":"Generate link",
     "loading":"Loading",
-    "emailInfo":"Please enter email(s) separated by , or ;",
-    "domainInfo":"Please enter domain where you intent to embed",
+    "emailInstructions":"Use commas or semi-colons to separate multiple email addresses.",
+    "emailInfo":"Recipients will receive an email with a link to view this page.",
+    "domainInfo":"Please enter domain where you intent to embed this page",
     "domain":"Domain",
     "urlEg":"for eg. https://www.cbd.int",
     "generateCode":"Generate Code",
-    "cancel":"Cancel",
+    "cancel":"Close",
 
     "searchResultLinkError":"Error generating link, please try again.",
     "emailError":"Error sending email, please try again.",
     "embedCodeError":"Error generating embed code, please try again"
+    
 }
