@@ -3,8 +3,8 @@
     <a id="shareSearchDomId" rel="noopener" href="#" class="share-button" @click="openModel()">
       <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t("share") }} 
     </a>
-    <div class="modal fade" ref="shareModal" tabindex="-1" aria-hidden="true" id="share-modal">      
-      <div class="modal-dialog">
+    <div class="modal fade" ref="shareModal" data-backdrop="static"  tabindex="-1" aria-hidden="true" id="share-modal">      
+      <div class="modal-dialog"  role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">{{ $t("modalTitle") }}:
@@ -45,7 +45,12 @@
               <div class="row" v-if="loading || sharedData[sharedData.type].success || error">
                 <div class="col-md-12">
                   <div v-if="!loading && sharedData[sharedData.type].success" class="alert alert-success">
-                    <span v-if="sharedData.type=='email'">{{$t('emailSent')}}</span>
+                    <span v-if="sharedData.type=='email'">
+                      {{$t('emailSent')}}
+                      <ul v-if="sharedData[sharedData.type].emailsSentTo.length>0">
+                        <li v-for="(email, index) in sharedData[sharedData.type].emailsSentTo" :key="index">{{email}}</li>
+                      </ul>
+                    </span>
                   </div>
                   <div v-if="loading" class="alert alert-info">
                     <div class="text-center">
@@ -83,10 +88,11 @@
                   </button>
                 </div>
               </div>
-              <div class="row" v-if="sharedData.type == 'email'">
+              <div class="row" v-if="sharedData.type == 'email' && isUserSignedIn">
                 <div class="col-md-12 " v-if="!sharedData[sharedData.type].emails">
                   <div class="alert alert-info">
                     {{$t('emailInfo')}}
+
                   </div>
                 </div>
                 <div class="col-md-12 ">
@@ -94,20 +100,19 @@
                     <div class="col-12">
                        <label for="inputPassword2">{{$t('emails')}}</label>
                        <input type="email" class="form-control"
-                        multiple pattern="^([\w+-.%]+@[\w-.]+\.[A-Za-z]{2,4},*[\W]*)+$"
+                        multiple @change="onEmailChange"
                         v-model="sharedData[sharedData.type].emails" :placeholder="$t('emails')"/> 
                         <div style="font-size: small;color: black;">{{$t('emailInstructions')}}</div>                     
                     </div>
                     <div class="col-12">
-                      <button class="btn btn-primary float-end" @click.prevent="shareLinkMail()" :disabled="loading || !sharedData[sharedData.type].emails" >
+                      <button class="btn btn-primary float-end" @click.prevent="shareLinkMail()" :disabled="loading || !sharedData[sharedData.type].emails || sharedData[sharedData.type]._id" >
                         {{$t('send')}}
                       </button>
                     </div>
                   </form>
                 </div>
               </div>
-
-              <div class="row" v-if="sharedData.type == 'embed'">
+              <div class="row" v-if="sharedData.type == 'embed' && isUserSignedIn">
                 <div class="col-md-12 " v-if="!sharedData[sharedData.type].domain" >
                   <div class="alert alert-info">
                     {{$t('domainInfo')}}
@@ -147,6 +152,14 @@
                     </div>
                 </div>
               </div>
+              <div class="row" v-if="(sharedData.type == 'embed' || sharedData.type == 'email') && !isUserSignedIn">
+                 <div class="alert alert-info">
+                    {{$t('requireLogin')}} 
+                    <div class="align-items-center">
+                      <button class="btn btn-primary btn-sm" @click="signIn()">{{$t('signIn')}}</button>
+                    </div>
+                  </div>
+              </div>
             </div>
           </div>
           <div class="modal-footer">
@@ -180,7 +193,7 @@ import i18n from "../../app-text/components/common/share-record.json";
 
 export default {
   components: {},
-  props: ["getQuery", "tokenReader", "userStatus", "generateLink"],
+  props: ["getQuery", "tokenReader", "userStatus", "generateLink", "isUserSignedIn"],
   data: () => {
     return {
       modal: null,
@@ -188,6 +201,7 @@ export default {
       loading: false,
       isValidEmail: true,
       isValidDomain: true,
+      userToken:null,
       sharedData: {
         link       : {},
         embed      : {},
@@ -198,27 +212,39 @@ export default {
       error : null,
     };
   },
+  watch:{
+    isUserSignedIn(isSignedIn){
+      if(isSignedIn){
+        this.openModel();
+      }
+    }
+  },
   created() {
     this.documentShareApi = new DocumentShareApi(this.tokenReader);
     this.subscriptionsApi = new SubscriptionsApi(this.tokenReader);
   },
   async mounted() {
     this.modal = new Modal(this.$refs.shareModal);
-    this.toast = new Toast(this.$refs.clipboardToast)
+    this.toast = new Toast(this.$refs.clipboardToast);
   },
   methods: {
     async openModel() {
-      
-      const token = await this.tokenReader();
-      if (!token) {
-        await this.userStatus();
-        return;
-      } 
-      else {
-        this.modal.show();
-        this.loadTabData('link');
-        return true;
-      }
+      if(!this.userToken)
+        this.userToken = await this.tokenReader();
+
+      if(this.userToken && !this.isUserSignedIn)
+        this.isUserSignedIn = true;
+      // if(this.userToken){
+
+        if(!this.modal._isShown)
+          this.modal.show('static');
+
+        if(this.sharedData.type != 'link' && !this.userToken)
+          this.userStatus();
+        else
+          this.loadTabData(this.sharedData.type || 'link');
+
+        $(`#${this.$refs.shareModal.id}`).on('hidden.bs.modal', this.closeDialog);
     },
     async loadTabData(type) {
 
@@ -230,12 +256,19 @@ export default {
       this.sharedData.storageType     = storageType;
 
       if (this.sharedData.storageType == "chm-document") {
-        this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/database/${this.sharedData[type].recordKey}`;
+        return this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/database/${this.sharedData[type].recordKey}`;
       }
-      if (this.sharedData.storageType == "chm-search-result") {
+
+      if (!this.userToken && this.sharedData.type != 'link'&& 
+          (this.sharedData.storageType == "chm-search-result" || this.sharedData.storageType == "chm-country-profile")){
+          await this.userStatus();
+          return;
+      }
+
+      if (this.userToken && this.sharedData.storageType == "chm-search-result") {
         this.sharedData[type].searchQuery = query;
       }
-      if (this.sharedData.storageType == "chm-country-profile") {
+      if (this.userToken && this.sharedData.storageType == "chm-country-profile") {
         this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
       }
     },
@@ -260,8 +293,8 @@ export default {
       this.error = undefined;
       if (
         !this.sharedData[this.sharedData.type].emails ||
-        !/^([a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])[;,]?)+$/i.test(
-          this.sharedData[this.sharedData.type].emails
+        !/^([a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])[;,\s]?)+$/i.test(
+          this.sharedData[this.sharedData.type].emails.replace(/\s/g, '')
         )
       ) {
         this.isValidEmail = false;
@@ -280,7 +313,9 @@ export default {
 
         this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].shortUrlHash}`;
 
-        this.sharedData[this.sharedData.type].success = true;
+        this.sharedData[this.sharedData.type].success      = true;
+        this.sharedData[this.sharedData.type].emailsSentTo = this.sharedData[this.sharedData.type].emails.replace(/\s/g, '').split(/,|;| /g);
+        this.sharedData[this.sharedData.type].emails       = undefined;
 
       } catch (err) {
         console.log(err);
@@ -328,31 +363,19 @@ export default {
       }
 
     },
-    async saveShareDocument() {
-      const data = {
-        expiry      : new Date(new Date().getTime()+12*12*30*24*60*60*1000), // 12 years long expiry
-        storageType: this.sharedData.storageType,
-        shareType: this.sharedData.type,        
-        sharedData: {
-          realm     : this.$realm.value,
-        },
-        sharedWith : {}
-      };
+    async saveShareDocument(data) {
+      
+      data = data || this.getShareDocumentData();
+      let shareDetails;
 
-      if(['embed', 'link'].includes(this.sharedData.type)){
-        data.sharedWith = {
-          link: true,
-        }
-        if(this.sharedData.type == 'embed')
-          data.sharedData.domain    = this.sharedData[this.sharedData.type].domain;
+      if(this.sharedData[this.sharedData.type].recordKey){
+        data.sharedData.recordKey = this.sharedData[this.sharedData.type].recordKey;
+        shareDetails  = await this.documentShareApi.shareDocument(data);
       }
-      else if(this.sharedData.type == 'email'){
-        data.sharedWith.emails = this.sharedData[this.sharedData.type].emails;
+      else{
+        shareDetails  = await this.documentShareApi.anonShareDocument(data);
       }
-
-      data.sharedData.recordKey = this.sharedData[this.sharedData.type].recordKey;
-
-      const shareDetails            = await this.documentShareApi.shareDocument(data);
+      
       const existingSharedDocument  = await this.documentShareApi.getSharedDocument(shareDetails.id);
 
       this.sharedData[this.sharedData.type] = {
@@ -380,11 +403,21 @@ export default {
       this.error = undefined;
       this.loading = true;
       try{
-        if (!this.sharedData[this.sharedData.type]._id) {          
+        if (!this.sharedData[this.sharedData.type]._id) { 
+          const data = {}
           if (this.sharedData.storageType == "chm-search-result") {
-            await this.saveSearchQuery();            
+            const {filters, subFilters } = this.sharedData[this.sharedData.type].searchQuery
+            data.searchQuery = {
+              filters      : filters,
+              isShareQuery : true,
+              queryTitle   : `Share query : ${Math.floor((1 + Math.random()) * 0x10000).toString(16)}`,
+              realm        : this.$realm.value,
+              subFilters   : subFilters
+            }
           }
-          await this.saveShareDocument();
+
+          data.share = this.getShareDocumentData();
+          await this.saveShareDocument(data);
         }
 
         this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].shortUrlHash}`;
@@ -406,6 +439,37 @@ export default {
       }
       this.isValidDomain = true;
     },
+    onEmailChange(){
+      this.sharedData[this.sharedData.type]._id = undefined;
+      this.sharedData[this.sharedData.type].emailsSentTo = undefined
+    },
+    signIn(){
+      this.userStatus();
+    },
+    getShareDocumentData(){
+      const data = {
+        expiry      : new Date(new Date().getTime()+12*12*30*24*60*60*1000), // 12 years long expiry
+        storageType: this.sharedData.storageType,
+        shareType: this.sharedData.type,        
+        sharedData: {
+          realm     : this.$realm.value,
+        },
+        sharedWith : {}
+      };
+
+      if(['embed', 'link'].includes(this.sharedData.type)){
+        data.sharedWith = {
+          link: true,
+        }
+        if(this.sharedData.type == 'embed')
+          data.sharedData.domain    = this.sharedData[this.sharedData.type].domain;
+      }
+      else if(this.sharedData.type == 'email'){
+        data.sharedWith.emails = this.sharedData[this.sharedData.type].emails;
+      }
+
+      return data;
+    }
   },
   i18n: {
     messages: {
@@ -571,4 +635,29 @@ export default {
   margin: 0.7em!important;
   color: black!important;;
 }
+        
+/* scrollbar */
+.wrapper ::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.wrapper ::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+.wrapper ::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper ::-webkit-scrollbar-thumb:window-inactive {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+    </style>
 </style>

@@ -26,6 +26,8 @@
 
     "searchResultLinkError":"Error generating link, please try again.",
     "emailError":"Error sending email, please try again.",
-    "embedCodeError":"Error generating embed code, please try again"
+    "embedCodeError":"Error generating embed code, please try again",
     
+    "requireLogin": "Pleas sign in to access this feature",
+    "signIn"   : "Sign in"
 }

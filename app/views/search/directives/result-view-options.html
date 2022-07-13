@@ -20,7 +20,7 @@
         </li>    
         
         <li ng-if="shareVueComponent">
-            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
+            <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus" :is-user-signed-in="isUserSignedIn"></share-record>
         </li>    
       
         <li id="exportRecords" ng-if="viewType=='matrix'">
