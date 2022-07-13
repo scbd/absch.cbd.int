@@ -30,7 +30,7 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
                 $scope.shareVueComponent = {
                     components:{shareRecord}
                 }
-
+                $scope.isUserSignedIn = false;
             //    if(!$scope.viewType)
             //         $scope.viewType = 'list';
 
@@ -137,18 +137,24 @@ app.directive('resultViewOptions', ['$location', 'ngDialog', 'locale', 'apiToken
 
                 $scope.userStatus  = function(){
                     if (!$rootScope.user || !$rootScope.user.isAuthenticated) {
-                        console.log('hello')
+                        
                         var signInEvent = $scope.$on('signIn', function (evt, data) {
                             signInEvent();
-                            $('#shareSearchDomId')[0].click();
+                            $scope.isUserSignedIn = true
+                            // $('#shareSearchDomId')[0].click();
                         });
                         $('#loginDialog').on('hidden.bs.modal', function () {
                             signInEvent();
+                            $('.modal-backdrop').removeClass('multi-modal')
+                        });
+                        $('#loginDialog').on('shown.bs.modal', function () {
+                            $('.modal-backdrop').addClass('multi-modal')
                         });
                         $( '#loginDialog' ).modal( "show" );
                         return false;
                     } 
                     else {
+                        $scope.isUserSignedIn = true;
                         return true;
                     }
                 }
