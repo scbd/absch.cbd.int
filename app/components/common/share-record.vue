@@ -7,8 +7,11 @@
       <div class="modal-dialog"  role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{ $t("modalTitle") }}:
-              {{$t('by')}} {{$t(sharedData.type)}}</h5>
+            <h5 class="modal-title">
+              <span v-if="sharedData.type=='link'" >{{$t('modalTitleLink')}}</span>
+              <span v-if="sharedData.type=='embed'">{{$t('modalTitleEmbed')}}</span>
+              <span v-if="sharedData.type=='email'">{{$t('modalTitleEmail')}}</span>
+            </h5>
             <button type="button" class="btn-close" @click="closeDialog()" aria-label="Close" ></button>
           </div>
           <div class="modal-body">
@@ -368,15 +371,18 @@ export default {
       data = data || this.getShareDocumentData();
       let shareDetails;
 
+      let existingSharedDocument;
       if(this.sharedData[this.sharedData.type].recordKey){
         data.sharedData.recordKey = this.sharedData[this.sharedData.type].recordKey;
         shareDetails  = await this.documentShareApi.shareDocument(data);
+        existingSharedDocument  = await this.documentShareApi.getSharedDocument(shareDetails.id);
       }
       else{
         shareDetails  = await this.documentShareApi.anonShareDocument(data);
+        existingSharedDocument  = shareDetails;
+        existingSharedDocument.id = existingSharedDocument._id;
       }
       
-      const existingSharedDocument  = await this.documentShareApi.getSharedDocument(shareDetails.id);
 
       this.sharedData[this.sharedData.type] = {
         ...this.sharedData[this.sharedData.type], 
@@ -386,17 +392,11 @@ export default {
     },
     async saveSearchQuery(){
 
-      const {filters, subFilters } = this.sharedData[this.sharedData.type].searchQuery
-      const data = {
-        filters      : filters,
-        isShareQuery : true,
-        queryTitle   : `Share query : ${Math.floor((1 + Math.random()) * 0x10000).toString(16)}`,
-        realm        : this.$realm.value,
-        subFilters   : subFilters
-      }
+      const data = this.getSearchQueryData();
       const searchQueryId = (await this.subscriptionsApi.addSubscription(data)).id;
 
       this.sharedData[this.sharedData.type].recordKey = searchQueryId;
+
     },
     async generateSearchResultLink(){
 
@@ -406,14 +406,7 @@ export default {
         if (!this.sharedData[this.sharedData.type]._id) { 
           const data = {}
           if (this.sharedData.storageType == "chm-search-result") {
-            const {filters, subFilters } = this.sharedData[this.sharedData.type].searchQuery
-            data.searchQuery = {
-              filters      : filters,
-              isShareQuery : true,
-              queryTitle   : `Share query : ${Math.floor((1 + Math.random()) * 0x10000).toString(16)}`,
-              realm        : this.$realm.value,
-              subFilters   : subFilters
-            }
+            data.searchQuery = this.getSearchQueryData()
           }
 
           data.share = this.getShareDocumentData();
@@ -469,6 +462,17 @@ export default {
       }
 
       return data;
+    },
+    getSearchQueryData() {
+        const { filters, subFilters }=this.sharedData[this.sharedData.type].searchQuery||{};
+        const data={
+          filters: filters,
+          isShareQuery: true,
+          queryTitle: `Share query : ${Math.floor((1+Math.random())*0x10000).toString(16)}`,
+          realm: this.$realm.value,
+          subFilters: subFilters
+        };
+        return data;
     }
   },
   i18n: {
