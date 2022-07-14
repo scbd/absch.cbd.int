@@ -314,7 +314,7 @@ export default {
           await this.saveShareDocument();
         }
 
-        this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].shortUrlHash}`;
+        this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].urlHash}`;
 
         this.sharedData[this.sharedData.type].success      = true;
         this.sharedData[this.sharedData.type].emailsSentTo = this.sharedData[this.sharedData.type].emails.replace(/\s/g, '').split(/,|;| /g);
@@ -339,7 +339,7 @@ export default {
           if (this.sharedData.storageType == "chm-search-result") {
             await this.saveSearchQuery();            
           }
-          if(!this.sharedData.embed.shortUrlHash)
+          if(!this.sharedData.embed.urlHash)
             await this.saveShareDocument();
         }
 
@@ -347,13 +347,13 @@ export default {
             this.sharedData.embed.code = `<script src='${this.$realm.baseURL}/widgets.js'><\/script>`;
             
             if (this.sharedData.storageType == "chm-document") {
-              this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-document" data-access-key="${this.sharedData.embed.shortUrlHash}" width="100%"></div>`;
+              this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-document" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
             } 
             else if (this.sharedData.storageType == "chm-search-result") {
-              this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${this.sharedData.embed.shortUrlHash}" width="100%"></div>`;
+              this.sharedData.embed.code += `<div class="scbd-chm-embed" data-type="chm-search-result" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
             } 
             else if (this.sharedData.embed.storageType == "chm-country-profile") {
-              this.sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${this.sharedData.embed.shortUrlHash}" width="100%"></div>`;
+              this.sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
             }
         }
         this.sharedData = Object.assign({}, this.sharedData);
@@ -413,7 +413,7 @@ export default {
           await this.saveShareDocument(data);
         }
 
-        this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].shortUrlHash}`;
+        this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].urlHash}`;
       }
       catch(err){
         console.error(err);
