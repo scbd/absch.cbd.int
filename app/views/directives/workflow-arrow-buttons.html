@@ -76,7 +76,9 @@
         .steps li:first-child a {
             padding-left: 24px;
         }
-
+        .steps li:last-child {
+            margin-right: 2rem;
+        }
         .steps li:a {
             background: #ccc;
         }
@@ -263,14 +265,14 @@
 
             <!-- one page form -->
 
-                    <div class="row d-none d-lg-flex float-start">
-                           <div class="col-1 p-0">
-                            <button type="button" class="btn btn-light" ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
-                                <i class="bi bi-skip-backward-fill"></i>
-                            </button>
-                        </div>
-                 
-                 <div class="col-10 p-0">
+            <div class="d-none d-lg-flex float-start">
+                <div class=" p-0">
+                    <button type="button" class="btn btn-light" ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
+                        <i class="bi bi-skip-backward-fill"></i>
+                    </button>
+                </div>
+                
+                 <div class="p-0">
                     <ul class="steps"style="width: 32rem;" >
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
                             <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.introduction'|$translate)}}</a>
@@ -287,7 +289,7 @@
                     </ul>
                 </div>
 
-                <div class="col-1 ps-1">
+                <div class=" ps-1">
                     <button type="button" class="btn btn-light" ng-click="goNextTab(workflowScope.tab)" ng-disabled="disableNextBtn">
                         <i class="bi bi-skip-forward-fill"></i>
                     </button>
