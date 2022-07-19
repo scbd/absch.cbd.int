@@ -97,3 +97,14 @@ body[lang=ar] #search-new .dropdown-menu::after {
     left: unset;
     right: 5%;
 }
+body[lang=ar] .workflow-arrows-buttons .steps {
+    transform: rotate(180deg);
+}
+body[lang=ar] .workflow-arrows-buttons .steps li a span {
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+body[lang=ar] .workflow-arrows-buttons .btn.btn-light{
+    transform: rotate(180deg);
+}
