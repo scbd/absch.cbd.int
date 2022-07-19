@@ -108,3 +108,7 @@ body[lang=ar] .workflow-arrows-buttons .steps li a span {
 body[lang=ar] .workflow-arrows-buttons .btn.btn-light{
     transform: rotate(180deg);
 }
+body[lang=ar]  #CBD-Branding .locale-menu {
+    right: initial;
+    left: 0;
+}
