@@ -78,10 +78,10 @@ body[lang=ar] #dropdownNotification .xuser-notification-count {
         padding-left: 25%;
         padding-right: 0;
     }
-        body[lang=ar] #wrapper.toggled {
+    body[lang=ar] #wrapper.toggled {
         padding-left: 0;
     }
-    #wrapper #sidebar-wrapper {
+    body[lang=ar] #wrapper #sidebar-wrapper {
         left: 0;
         right: initial !important;
     }
