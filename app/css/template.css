@@ -312,7 +312,6 @@ ul.km-value {
     text-overflow: ellipsis;
     white-space: nowrap !important;
     overflow: hidden;
-    float: left;
     margin-top: 2px;
     margin-left: -5px;
 }
