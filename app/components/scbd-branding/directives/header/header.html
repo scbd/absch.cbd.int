@@ -2,19 +2,10 @@
   <!-- sign in -->
   <accounts-validation-header></accounts-validation-header>
   <nav class="navbar navbar-cbd navbar-default bg-white navbar-static-top p-0" id="anchorTop">
-    <style>
-      .arabic-Header {
-          margin-right: 200px;
-      }
-      .arabic-cbd-nav-bar {
-          float : right!important;
-      }
-
-    </style>
     <div class="container-fluid container-cbd bg-white">
       <!-- Brand and toggle get grouped for better mobile display -->
       <div class="navbar-header" >
-        <span class=" text-dark left-part" ng-click="toggleMenu = !toggleMenu" ng-class="{'arabic-Header' : locale=='ar'}">
+        <span class="float-start text-dark left-part" ng-click="toggleMenu = !toggleMenu">
           <i class="fa fa-bars color-darkgrey"></i> {{::('scbdHeaderT.conventionBiologicalDiversity'|$translate)}}
         </span>
 
@@ -22,7 +13,7 @@
           <img src="/app/components/scbd-branding/images/cbd-leaf-green.svg" class="header-nav-img" style="padding-left:8px;"/>
           <span class="brand">{{::('scbdHeaderT.CBD'|$translate)}}</span>
         </span>
-        <ul class="navbar-left navlist menu-open"  ng-class="{'arabic-cbd-nav-bar' : locale=='ar'}">
+        <ul class="navbar-left navlist menu-open">
           <li ng-if="toggleMenu" ><a rel="noopener" translation-url href="http://www.cbd.int/convention/" class="text-dark">{{::('scbdHeaderT.theConvention'|$translate)}}</a></li>
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://bch.cbd.int/protocol" class="text-dark">{{::('scbdHeaderT.cartagenaProtocol'|$translate)}}</a></li>
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/abs/" class="text-dark">{{::('scbdHeaderT.nagoyaProtocol'|$translate)}}</a></li>
@@ -30,11 +21,11 @@
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/information/" class="text-dark">{{::('scbdHeaderT.information'|$translate)}}</a></li>
           <li ng-if="toggleMenu"><a rel="noopener" translation-url  href="http://www.cbd.int/secretariat/" class="text-dark">{{::('scbdHeaderT.secretariat'|$translate)}}</a></li>
         </ul>
-        <div class="right-part">
+        <div class="float-end right-part">
           <account-header user="user" class="rp-signin text-decoration-none float-start fs-small-8 pe-3" ></account-header>
           <xuser-notifications-icon class="rp-n float-start pe-3" style="padding-top: 2px; padding-bottom: 5px;"></xuser-notifications-icon>
           <locale-header class="rp-lang float-start pe-3" id="CBD-Branding"></locale-header>
-          <a id="needHelp" href="#" ng-class="{'active':activeHelpMenu=='help'}"class="d-none d-md-block pe-3 text-decoration-none float-start" ng-click="openSideBlock('help')">
+          <a id="needHelp" href="#" ng-class="{'active':activeHelpMenu=='help'}"class="d-none d-md-block pe-1 text-decoration-none float-start" ng-click="openSideBlock('help')">
             <i class="bi bi-question-circle-fill text-dark" style="font-size:20px; position: relative;top:2px;"></i></a>
 
         </div>
