@@ -12,7 +12,7 @@ function embedIFrame(widget, options){
     
     iframe.setAttribute('name', Math.floor((1 + Math.random()) * 0x10000).toString(16));
     iframe.setAttribute('src', options.src);
-    iframe.setAttribute('width', options.width||300);
+    iframe.setAttribute('width', options.width||'100%');
     iframe.setAttribute('height', options.height||500);
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('scrolling', 'no');
@@ -43,7 +43,7 @@ function embedRecord(){
             const widget = widgetInfo[key];                
             if(widget.dataset.type == 'record' && widget.dataset.recordId){            
                 var iframeSrc = `${origin}/database/${widget.dataset.recordId}?embed=true`
-                var width = getAttributeValue(widget, 'width') || '300';
+                var width = getAttributeValue(widget, 'width') || '100%';
                 var height = getAttributeValue(widget, 'height') || '500';
                 
                 var options = {
@@ -93,13 +93,20 @@ function initWidget(){
     
     for (var key in widgets) {
         if (Object.hasOwnProperty.call(widgets, key)) {
-            const widget = widgets[key];           
-            if(widget.dataset.accessKey){            
-                var width = getAttributeValue(widget, 'width')   || '300';
+            const widget = widgets[key];   
+            const locale = widget.dataset.locale || 'en'        
+            if(widget.dataset.accessKey || (widget.dataset.legacySchema && widget.dataset.legacyCountries)){            
+
+                var width = getAttributeValue(widget, 'width')   || '100%';
                 var height = getAttributeValue(widget, 'height') || '500';
                 var type = getAttributeValue(widget, 'type')   || 'chm-document';
                 
-                var iframeSrc = `${origin}/share/embed/${type}/${widget.dataset.accessKey}?embed=true`
+                let iframeSrc = `${origin}/${locale}/share/embed/${type}/`
+                if(widget.dataset.accessKey)
+                    iframeSrc += `${widget.dataset.accessKey}?embed=true`;
+                else if(widget.dataset.legacySchema && widget.dataset.legacyCountries){
+                    iframeSrc += `legacy-widget?schema=${widget.dataset.legacySchema}&countries=${widget.dataset.legacyCountries}&embed=true`;
+                }
                 var options = {
                     src : iframeSrc,
                     width : width,

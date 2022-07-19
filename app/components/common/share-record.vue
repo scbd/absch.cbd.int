@@ -92,7 +92,7 @@
                 </div>
               </div>
               <div class="row" v-if="sharedData.type == 'email' && isUserSignedIn">
-                <div class="col-md-12 " v-if="!sharedData[sharedData.type].emails">
+                <div class="col-md-12 ">
                   <div class="alert alert-info">
                     {{$t('emailInfo')}}
 
@@ -116,7 +116,7 @@
                 </div>
               </div>
               <div class="row" v-if="sharedData.type == 'embed' && isUserSignedIn">
-                <div class="col-md-12 " v-if="!sharedData[sharedData.type].domain" >
+                <div class="col-md-12 ">
                   <div class="alert alert-info">
                     {{$t('domainInfo')}}
                   </div>
