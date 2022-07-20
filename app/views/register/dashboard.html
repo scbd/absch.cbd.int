@@ -5,15 +5,14 @@
 
     <div class="innerPageContent register-content m-0 p-3">
 
-        <div class="text-end">
-            <a rel="noopener" ng-href="#" class="link-dark" ng-click="tour()">
-                <i class="fa fa-question-circle" aria-hidden="true"></i>
-                <span class="hidden-sm"> {{::('dashboardT.dashboardTour'|$translate)}}</span>
-            </a>
-        </div>
-
         <div class="register-content-header bg-darkgrey color-white">
-                <h3 class="p-2 m-0">{{::('dashboardT.dashboard'|$translate)}} </h3>
+                <h3 class="p-2 m-0 d-inline-flex">{{::('dashboardT.dashboard'|$translate)}} </h3>
+                <div class="float-end d-inline-flex p-2">
+                    <a rel="noopener" ng-href="#" class="color-white" ng-click="tour()">
+                        <i class="fa fa-question-circle" aria-hidden="true"></i>
+                        <span class="hidden-sm"> {{::('dashboardT.dashboardTour'|$translate)}}</span>
+                    </a>
+                </div>
         </div>
 
         <div class="register-content-content bg-white" style="border-bottom: 0.125rem solid #ccc">
