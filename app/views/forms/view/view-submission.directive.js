@@ -1,9 +1,9 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-submission.directive.html";
-import 'views/directives/record-options';
-import 'services/main';
-import 'views/forms/directives/view-terms-hierarchy';
+import '~/views/directives/record-options';
+import '~/services/main';
+import '~/views/forms/directives/view-terms-hierarchy';
 
     app.directive("viewSubmission", ['searchService', 'solr', function (searchService, solr) {
         return {

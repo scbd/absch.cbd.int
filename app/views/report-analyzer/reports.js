@@ -1,6 +1,6 @@
 ﻿import _ from 'lodash';
 import moment from 'moment';
-import 'views/report-analyzer/directives/national-reports/questions-selector';
+import '~/views/report-analyzer/directives/national-reports/questions-selector';
 import {analyzerMapping} from '~/app-data/report-analyzer-mapping';
 import reportsT from '~/app-text/views/report-analyzer/reports.json';
 

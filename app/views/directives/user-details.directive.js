@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./user-details-directive.html';
 
 app.directive('userDetails', function($http){

@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
 
 import '~/views/search/search-results/result-default';
-import 'services/main';
-import 'views/directives/export-directive';
+import '~/services/main';
+import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import countryProfileT from '~/app-text/views/countries/country-profile-directive.json';
 

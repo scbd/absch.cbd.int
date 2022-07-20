@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./date-filter.html';
 import _ from 'lodash';
 import moment from 'moment';
-import 'services/main';
-import 'components/scbd-angularjs-controls/main';
+import '~/services/main';
+import '~/components/scbd-angularjs-controls/main';
 import 'bootstrap-datepicker';
 import dateFilterT from '~/app-text/views/search/search-filters/date-filter.json';
 

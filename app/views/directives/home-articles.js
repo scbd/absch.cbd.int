@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./home-articles.html';
-import _ from 'services/main';
+import '~/services/main';
         app.directive('homeArticles', function($http) {
             return {
                 restrict: 'EAC',

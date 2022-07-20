@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json';
 import '../services/locale';
-import 'services/main';
+import '~/services/main';
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {

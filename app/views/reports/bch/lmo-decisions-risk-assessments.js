@@ -1,12 +1,12 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/view/bch/view-lmo-reference.directive';
-import 'services/main';
+import '~/views/forms/view/bch/view-lmo-reference.directive';
+import '~/services/main';
 import 'angucomplete-alt';
-import 'views/directives/block-region-directive';
-import 'views/reports/bch/lmo-decisions';
-import 'views/reports/bch/risk-assessments';
-import 'views/forms/view/record-loader.directive'; ;
+import '~/views/directives/block-region-directive';
+import '~/views/reports/bch/lmo-decisions';
+import '~/views/reports/bch/risk-assessments';
+import '~/views/forms/view/record-loader.directive'; ;
 import lmoDecisionsRiskAssessmentsT from '~/app-text/views/reports/bch/lmo-decisions-risk-assessments.json';
 
 export { default as template } from './lmo-decisions-risk-assessments.html';

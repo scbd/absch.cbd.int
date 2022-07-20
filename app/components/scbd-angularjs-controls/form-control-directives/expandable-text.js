@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
   var directive = function() {
       return function($scope, $element) {
           $element.bind('focus', function() {

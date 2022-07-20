@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'css!/app/css/registry.css';
-import 'services/main'; ;
+import '~/services/main'; ;
 import indexRegistriesT from '~/app-text/views/reports/bch/registries/index.json';
 
 	export { default as template } from './index.html';

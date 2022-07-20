@@ -1,11 +1,11 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./lmo-decisions.html';
 import 'angular-cookies';
-import 'views/forms/view/bch/view-lmo-reference.directive';
+import '~/views/forms/view/bch/view-lmo-reference.directive';
 import 'angucomplete-alt';
-import 'views/directives/block-region-directive';
-import 'services/main'; ;
+import '~/views/directives/block-region-directive';
+import '~/services/main'; ;
 import lmoDecisionsT from '~/app-text/views/reports/bch/lmo-decisions.json';
 
 app.directive("lmoDecisions", ['$http', 'solr', '$cookies', 'searchService', 'commonjs', '$q', 'translationService',

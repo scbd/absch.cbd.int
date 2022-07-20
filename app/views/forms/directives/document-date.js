@@ -1,4 +1,4 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import template from 'text!./document-date.html';
 import moment from 'moment';
     app.directive('documentDate', function () {

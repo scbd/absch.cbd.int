@@ -1,7 +1,7 @@
-import app from 'app';
-import 'services/main';
-import 'views/directives/map/home-map';
-import 'views/directives/home-articles';
+import app from '~/app';
+import '~/services/main';
+import '~/views/directives/map/home-map';
+import '~/views/directives/home-articles';
 import homepageRecords from '~/components/common/homepage-records.vue';
 export { default as template } from './bch.html';
 import bchHomeT from '~/app-text/views/home/bch.json';

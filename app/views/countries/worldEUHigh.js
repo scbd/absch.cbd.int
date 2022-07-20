@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import ammap from 'libs/ammap3/ammap/ammap';	
 
 	// (c) ammap.com | SVG (in JSON format) map of World EU - High

@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-database.directive.html";
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
 import viewDatabaseT from '~/app-text/views/forms/view/view-database.json';
 
 app.directive("viewDatabase", ["translationService", function (translationService) {

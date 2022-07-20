@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-expert-assignment.directive.html";
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
 
 app.directive("viewExpertAssignment", [function () {
 	return {

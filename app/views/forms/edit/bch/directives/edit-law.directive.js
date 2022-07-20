@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-law.directive.html';
-import 'views/forms/edit/edit';
-import 'services/main';
-import 'views/forms/edit/document-selector';
+import '~/views/forms/edit/edit';
+import '~/services/main';
+import '~/views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-biosafety-law.directive";
 import editLawT from '~/app-text/views/forms/edit/bch/directives/edit-law.json';
 

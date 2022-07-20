@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-capacity-building-initiative.directive';
-import 'services/main';
+import '~/services/main';
 import template from './edit-capacity-building-initiative.directive.html';
 import editCBIT from '~/app-text/views/forms/edit/directives/edit-capacity-building-initiative.json';
 

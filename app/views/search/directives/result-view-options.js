@@ -1,5 +1,5 @@
 ﻿import template from 'text!./result-view-options.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'ngDialog';
 import tableExport from '~/components/common/export.vue';

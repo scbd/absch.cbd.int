@@ -1,13 +1,13 @@
 import templateHtml from 'text!./analyzer.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import require from 'require';
 import $ from 'jquery';
 import './analyzer-section';
 import '../../filters/cases';
-import 'components/scbd-angularjs-services/main';
-import 'views/directives/view-reference-document';
-import 'views/report-analyzer/reportAnalyzerService'; ;
+import '~/components/scbd-angularjs-services/main';
+import '~/views/directives/view-reference-document';
+import '~/views/report-analyzer/reportAnalyzerService'; ;
 import analyzerT from '~/app-text/views/report-analyzer/directives/national-reports/analyzer.json';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');

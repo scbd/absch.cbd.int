@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./left-side-filter.html';
 import _ from 'lodash';
 import 'ngDialog';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
-import 'views/forms/edit/document-selector'
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/views/forms/edit/document-selector'
 import leftSideFilterT from '~/app-text/views/search/search-filters/left-side-filter.json';
 
 app.directive('leftSideFilter', ['ngDialog', 'locale', 'solr', 'realm', '$timeout', 'translationService',

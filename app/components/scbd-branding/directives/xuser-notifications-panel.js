@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./xuser-notifications-panel.html';
 import _ from 'lodash';
 import moment from 'moment';
 import 'css!components/scbd-branding/directives/xuser-notifications-panel';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import 'ngInfiniteScroll';
 import './header/xuser-notification-config-service';
     

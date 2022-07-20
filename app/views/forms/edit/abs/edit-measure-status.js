@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import angular from 'angular';
-import 'views/forms/edit/edit';
-import 'services/main';
-import 'views/forms/edit/document-selector';
-import 'views/forms/view/abs/view-measure-status.directive';
+import '~/views/forms/edit/edit';
+import '~/services/main';
+import '~/views/forms/edit/document-selector';
+import '~/views/forms/view/abs/view-measure-status.directive';
 
 export { default as template } from './edit-measure-status.html';
 

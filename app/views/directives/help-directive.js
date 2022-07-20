@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'angular-joyride';
         app.directive('help', function ($http) {

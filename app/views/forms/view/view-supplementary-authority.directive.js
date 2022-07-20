@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-supplementary-authority.directive.html";
 import "views/forms/view/view-authority.directive";
 

@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import 'lodash';
-import 'services/main';
+import '~/services/main';
 import 'moment';
-import 'components/scbd-angularjs-controls/main';
-import 'views/register/directives/register-top-menu';
+import '~/components/scbd-angularjs-controls/main';
+import '~/views/register/directives/register-top-menu';
 import 'chart-js';
 
         

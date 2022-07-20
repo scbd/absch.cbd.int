@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
-import 'components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
 
     app.factory("htmlUtility", function() {
       return {

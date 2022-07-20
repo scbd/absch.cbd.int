@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import '~/views/forms/edit/bch/directives/edit-organism.directive';
 
 	export { default as template } from './edit-organism.html';

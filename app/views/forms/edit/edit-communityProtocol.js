@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import '~/views/forms/edit/directives/edit-resource-schema-base-directive';
 import '~/views/forms/view/view-resource.directive';
 

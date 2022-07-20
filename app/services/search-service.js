@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import './local-storage-service';
 import './app-config-service';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import './solr';
 
     app.factory('searchService', ['$http', '$q', 'realm', 'localStorageService', 'appConfigService', 'locale', 'solr',

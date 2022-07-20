@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./message-list-directive.html';
 import _ from 'lodash';
     app.directive('mailboxMessageList', function() {

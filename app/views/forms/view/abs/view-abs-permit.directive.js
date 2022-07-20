@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-abs-permit.directive.html";
-import 'views/directives/record-options';
-import 'views/forms/view/directives/view-reference-records.directive';
+import '~/views/directives/record-options';
+import '~/views/forms/view/directives/view-reference-records.directive';
 import viewAbsPermitT from '~/app-text/views/forms/view/abs/view-abs-permit.json';
 //,'views/forms/view/view-releated-checkpoint-communique-directive.html'
 app.directive("viewAbsPermit", ['translationService', function (translationService) {

@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./country-filter.html';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import alphabets from '~/app-text/views/search/alphabets.json';
 import countryFilterT from '~/app-text/views/search/search-filters/country-filter.json';
 

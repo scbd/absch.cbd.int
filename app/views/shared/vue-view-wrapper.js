@@ -1,6 +1,6 @@
 import 'angular-vue'
 import VueI18n from 'vue-i18n'
-import 'components/scbd-branding/main';
+import '~/components/scbd-branding/main';
 
 export { default as template } from './vue-view-wrapper.html';
 

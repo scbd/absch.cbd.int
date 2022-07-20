@@ -1,7 +1,7 @@
-import app from "app";
+import app from '~/app';
 import template from "text!./view-measure-status.directive.html";
-import 'views/directives/record-options';
-import 'views/forms/view/directives/view-record-reference.directive';
+import '~/views/directives/record-options';
+import '~/views/forms/view/directives/view-record-reference.directive';
 
 	app.directive("viewMeasureStatus", [function () {
 

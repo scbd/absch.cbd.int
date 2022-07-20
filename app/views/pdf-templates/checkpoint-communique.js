@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import './ircc-directive';
 import 'css!/app/css/print-friendly.css';
 import 'css!/app/css/abs/pdf-communique.css';

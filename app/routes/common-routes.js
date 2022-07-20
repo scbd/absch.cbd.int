@@ -1,8 +1,8 @@
-﻿import app from "app";
+﻿import app from '~/app';
 import _ from "lodash";
 import "angular-route";
-import "services/main";
-import "components/scbd-angularjs-services/main";
+import "~/services/main";
+import "~/components/scbd-angularjs-services/main";
 import routesLabels from '~/app-text/routes/common-routes-labels.json';
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as vueViewWrapper     from '~/views/shared/vue-view-wrapper'

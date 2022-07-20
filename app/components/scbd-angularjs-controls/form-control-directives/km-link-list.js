@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./km-link-list.html';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main'; ;
+import '~/components/scbd-angularjs-services/main'; ;
 //============================================================
 //
 //

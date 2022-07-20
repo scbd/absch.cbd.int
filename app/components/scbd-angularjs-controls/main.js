@@ -1,4 +1,4 @@
-import 'app';
+import '~/app';
 import './form-control-directives/afc-autocomplete';
 import './form-control-directives/afc-input';
 import './form-control-directives/expandable-text';

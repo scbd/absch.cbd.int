@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
-import 'views/forms/view/abs/view-abs-procedure.directive';
+import '~/views/forms/edit/edit';
+import '~/views/forms/view/abs/view-abs-procedure.directive';
 import editAbsProcedureT from '~/app-text/views/forms/edit/abs/edit-absProcedure.json';
 
     export { default as template } from './edit-absProcedure.html';

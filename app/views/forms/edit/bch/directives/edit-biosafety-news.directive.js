@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-biosafety-news.directive.html';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import "~/views/forms/view/bch/view-biosafety-news.directive"; 
 import editBiosafetyNewsT from '~/app-text/views/forms/edit/bch/directives/edit-biosafety-news.json';
 

@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import angular from 'angular';
 import _ from 'lodash';
 import $ from 'jquery';

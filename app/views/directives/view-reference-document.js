@@ -1,8 +1,8 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import template from 'text!./view-reference-document.html';
-import 'components/scbd-angularjs-services/main';
-import 'views/search/search-results/result-default';
-import 'views/forms/view/record-loader.directive';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/search/search-results/result-default';
+import '~/views/forms/view/record-loader.directive';
 
     app.directive('viewReferenceDocument', ['IStorage', '$q', function(storageService, $q) {
 

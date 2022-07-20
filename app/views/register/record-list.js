@@ -1,11 +1,11 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
-import 'components/scbd-angularjs-controls/main';
-import 'views/register/directives/register-top-menu';
-import 'views/directives/block-region-directive';
-import 'views/forms/edit/editFormUtility';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/components/scbd-angularjs-controls/main';
+import '~/views/register/directives/register-top-menu';
+import '~/views/directives/block-region-directive';
+import '~/views/forms/edit/editFormUtility';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';

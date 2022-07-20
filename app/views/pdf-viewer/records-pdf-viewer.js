@@ -1,6 +1,6 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import pdfObject from 'pdf-object';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
     app.directive( 'elemReady', function( $parse ) {
         return {
             restrict: 'A',

@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-organism.directive.html';
-import 'views/forms/edit/edit';
-import 'services/main';
-import 'views/forms/edit/document-selector';
+import '~/views/forms/edit/edit';
+import '~/services/main';
+import '~/views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-organism.directive";
 import editOrganismT from '~/app-text/views/forms/edit/bch/directives/edit-organism.json';
 

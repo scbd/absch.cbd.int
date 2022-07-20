@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import '~/views/forms/edit/directives/edit-resource.directive'
 
 export { default as template } from './edit-resource.html';

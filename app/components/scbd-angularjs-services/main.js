@@ -1,4 +1,4 @@
-import 'app';
+import '~/app';
 import './filters/scbd-filters';
 import './services/workflows';
 import './services/user-notifications';

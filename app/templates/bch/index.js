@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import angular from 'angular';
 
-import 'routes/bch';
+import '../../routes/bch';
 import './header';
 import './footer';
 import './embed-footer';

@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./workflow-history-directive.html';
 

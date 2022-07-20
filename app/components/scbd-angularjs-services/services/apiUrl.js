@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 
     app.factory('apiUrl', ["$q", "$location", function($q, $location) {
 

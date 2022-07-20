@@ -1,7 +1,7 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
-import 'views/forms/view/abs/view-abs-national-model-contractual-clause.directive';
+import '~/views/forms/edit/edit';
+import '~/views/forms/view/abs/view-abs-national-model-contractual-clause.directive';
 import editABSNationalMCCT from '~/app-text/views/forms/edit/abs/edit-abs-national-model-contractual-clause.json';
  
     export { default as template } from './edit-abs-national-model-contractual-clause.html';

@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./document-reference-history.html';
-import 'views/search/search-results/result-default';
-import 'services/main';
+import '~/views/search/search-results/result-default';
+import '~/services/main';
     app.directive('documentReferenceHistory', function ($http) {
         return {
             restrict: 'EAC',

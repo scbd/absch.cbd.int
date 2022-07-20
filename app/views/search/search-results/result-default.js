@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./result-default.html';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import '~/views/forms/view/record-loader.directive';
 import '~/views/forms/view/bch/icons';
 import resultDefaultT from '~/app-text/views/search/search-results/result-default.json';

@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./scbd-filter.html';
 import scbdFilterT from '~/app-text/views/search/search-filters/scbd-filter.json';
 

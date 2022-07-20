@@ -1,5 +1,5 @@
 import templateHtml from 'text!./analyzer-question.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'angular-sanitize';
 import nraQuestionT from '~/app-text/views/report-analyzer/directives/national-reports/analyzer-question.json';

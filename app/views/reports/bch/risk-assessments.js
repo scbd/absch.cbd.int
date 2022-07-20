@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./risk-assessments.html';
-import 'services/main';
-import 'views/forms/view/bch/view-lmo-reference.directive';
+import '~/services/main';
+import '~/views/forms/view/bch/view-lmo-reference.directive';
 import 'angucomplete-alt';
-import 'views/directives/block-region-directive';
+import '~/views/directives/block-region-directive';
 import '~/views/forms/view/bch/icons';
 import riskAssessmentsT from '~/app-text/views/reports/bch/risk-assessments.json';
 

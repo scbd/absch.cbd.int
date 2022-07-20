@@ -1,8 +1,8 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-submission.directive';
-import 'services/main';
+import '~/services/main';
 import editsubmissionT from '~/app-text/views/forms/edit/edit-submission.json';
 
   export { default as template } from './edit-submission.html';

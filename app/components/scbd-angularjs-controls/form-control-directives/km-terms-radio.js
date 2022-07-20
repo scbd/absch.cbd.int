@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import angular from 'angular';
 import $ from 'jquery';
 import template from 'text!./km-terms-radio.html';
 import Enumerable from 'linqjs';
-import 'components/scbd-angularjs-services/main'; 
+import '~/components/scbd-angularjs-services/main'; 
 import kmTermRadioT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-term-radio.json';
 //need Enumerable
     //============================================================

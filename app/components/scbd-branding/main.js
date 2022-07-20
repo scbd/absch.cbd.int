@@ -1,5 +1,5 @@
 // TODO: simplify BF 04-09-2021
-import 'app';
+import '~/app';
 import './directives/footer';
 import './directives/xuser-notifications-panel';
 import './directives/header/branding.html';

@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./search-filter-dates.partial.html';
-import 'components/scbd-angularjs-controls/main';
+import '~/components/scbd-angularjs-controls/main';
 import 'bootstrap-datepicker';
-import 'services/main';
+import '~/services/main';
 
 app.directive('searchFilterDates', function ($http) {
     return {

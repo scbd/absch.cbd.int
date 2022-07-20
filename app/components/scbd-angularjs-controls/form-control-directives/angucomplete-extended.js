@@ -4,7 +4,7 @@
  * By Daryl Rowland
  */
 
-import app from 'app';
+import app from '~/app';
 
 app.directive('angucomplete', function ($parse, $http, $sce, $timeout) {
     return {

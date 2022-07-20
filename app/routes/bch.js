@@ -1,4 +1,4 @@
-import app from "app";
+import app from '~/app';
 import commonRoutes from "./common-routes";
 import "angular-route";
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';

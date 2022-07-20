@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-dna-sequence.directive.html';
-import 'views/forms/edit/edit';
-import 'services/main';
-import 'views/forms/edit/document-selector';
+import '~/views/forms/edit/edit';
+import '~/services/main';
+import '~/views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-dna-sequence.directive";
 import '~/views/forms/directives/traits-selector.directive';
 import editDnaSequenceT from '~/app-text/views/forms/edit/bch/directives/edit-dna-sequence.json';

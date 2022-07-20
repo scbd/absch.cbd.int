@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-laboratory-detection.directive.html";
-import 'views/directives/record-options';
-import 'views/forms/view/directives/view-record-reference.directive';
-import 'views/forms/view/bch/view-lmo.directive';
+import '~/views/directives/record-options';
+import '~/views/forms/view/directives/view-record-reference.directive';
+import '~/views/forms/view/bch/view-lmo.directive';
 import _ from "lodash";
 import viewLabDetectionT from '~/app-text/views/forms/view/bch/view-laboratory-detection.json';
     app.directive("viewLaboratoryDetection", ['translationService', function (translationService) {

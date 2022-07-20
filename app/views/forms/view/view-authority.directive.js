@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-authority.directive.html";
-import 'views/directives/record-options';
-import 'services/main';
-import 'views/forms/view/directives/view-reference-records.directive';
-import 'views/forms/directives/view-terms-hierarchy';
+import '~/views/directives/record-options';
+import '~/services/main';
+import '~/views/forms/view/directives/view-reference-records.directive';
+import '~/views/forms/directives/view-terms-hierarchy';
 import viewAuthorityT from '~/app-text/views/forms/view/view-authority.json';
 
 	app.directive("viewAuthority", ["IStorage", "realm", "translationService", function (storage, realm, translationService) {

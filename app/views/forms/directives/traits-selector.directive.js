@@ -1,4 +1,4 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./traits-selector.directive.html';
 import traitSelectorsT from '~/app-text/views/forms/directives/trait-selectors.json';

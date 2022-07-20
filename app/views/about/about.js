@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'views/about/article-search.directive';
-import 'views/about/article-guides.directive';
-import 'services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/about/article-search.directive';
+import '~/views/about/article-guides.directive';
+import '~/services/main';
 import 'ng-breadcrumbs';
 
   export { default as template } from './about.html';
