@@ -53,7 +53,8 @@ async function loadAsyncHeaders(baseConfig) {
 
   if(tokenReader) {
     const tokenDetails = await tokenReader();
-    headers.Authorization = `${tokenType||'Bearer'} ${tokenDetails.token}`;
+    if(tokenDetails)
+      headers.Authorization = `${tokenType||'Bearer'} ${tokenDetails.token}`;
   }
 
   return axios.create({ ...config, headers } );

@@ -18,7 +18,7 @@ function($scope, $http, $q, $route, locale, $location, $rootScope){
 
                     if(['chm-search-result', 'chm-document', 'chm-country-profile'].includes($scope.sharedData.storageType)){
                         console.log('hi')
-                        $location.url(`/share/${$scope.sharedData.shareType}/${$scope.sharedData.storageType}/${$scope.sharedData.shortUrlHash}`);
+                        $location.url(`/share/${$scope.sharedData.shareType}/${$scope.sharedData.storageType}/${$scope.sharedData.urlHash}`);
                         
                     }
                     else{
