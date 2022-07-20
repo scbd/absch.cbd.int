@@ -1,0 +1,21 @@
+{
+  "generalInfo": "Información general",
+  "country": "País",
+  "description": "Descripción del procedimiento en materia de APB",
+  "title": "Título",
+  "jurisdiction": "Zona de jurisdicción",
+  "contactsLinks": "Lugar para realizar las presentaciones para el acceso",
+  "requirements": "Condiciones o requisitos que necesita cumplir un usuario potencial para solicitar el acceso",
+  "descriptionLinks": "Descripción detallada o representación visual del procedimiento en materia de APB",
+  "hasApplicationDocuments": "¿El solicitante tiene que aportar documentación?",
+  "applicationInformation": "Información sobre formularios para la presentación o documentos requeridos",
+  "applicationLinks": "Formulario o documentos pertinentes para la aplicación o un enlace al sitio web",
+  "applicationContacts": "Información sobre a quién se debe enviar la solicitud",
+  "hasApplicationFees": "¿Hay que pagar por la presentación?",
+  "applicationFeesInformation": "Información adicional sobre tarifas",
+  "duration": "Duración del proceso de la presentación",
+  "relevantMeasures": "Medida(s) pertinentes en materia de APB",
+  "keywords": "Palabras clave",
+  "addInfo": "Información adicional",
+  "relevantDocuments": "Otros enlaces o documentos adjuntos pertinentes"
+}

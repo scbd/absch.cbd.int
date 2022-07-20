@@ -1,0 +1,19 @@
+{
+  "systemAlert": "",
+  "certificatesInfo": "",
+  "emailMe": "",
+  "search": "Recherche",
+  "edit": "Modifier",
+  "delete": "Supprimer",
+  "addNew": "Ajouter une nouvelle alerte",
+  "loading": "Chargement en cours...",
+  "isAuthenticated": "",
+  "isNotAuthenticated": "",
+  "searchFilter": "",
+  "filterTitle": "",
+  "selectFilters:": "Sélectionner les filtres de recherche :",
+  "sendEmail": "Envoyez-moi un courriel lorsque des fichiers pertinents à cette recherche seront ajoutés ou modifiés.",
+  "cancel": "Annuler",
+  "save": "Sauvegarder",
+  "searchTitle": "Titre de la recherche"
+}

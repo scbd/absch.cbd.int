@@ -1,0 +1,12 @@
+{
+  "report": "Informe:",
+  "analysis": "Análisis:",
+  "breakdownCbdRegions": "Desglosar por regiones del CDB",
+  "selectCountries": "Seleccionar países",
+  "selectRegions": "Seleccionar regiones",
+  "breakdownProtocolParties": "",
+  "breakdownProtocolNonParties": "Desglosar por No Partes en el Protocolo",
+  "nationalReportAnalyzer": "Analizador de informes nacionales",
+  "nationalReportAnalyzerInfo": "Esta herramienta le permite seleccionar secciones o preguntas específicas del informe y mostrar los resultados por país o región.",
+  "analyze": ""
+}

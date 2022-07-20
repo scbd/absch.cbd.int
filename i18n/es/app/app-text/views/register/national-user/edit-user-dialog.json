@@ -1,0 +1,13 @@
+{
+  "newUser": "",
+  "contactDetails": "",
+  "nominee": "Sírvase completar la siguiente información de contacto básica de la persona designada",
+  "firstName": "Nombre",
+  "lastName": "Apellido",
+  "organization": "Organización",
+  "email": "Correo electrónico",
+  "mandatory": "Este campo es obligatorio",
+  "emailIncomplete": "Correo electrónico inválido o incompleto",
+  "cancel": "cancelar",
+  "next": "Siguiente"
+}

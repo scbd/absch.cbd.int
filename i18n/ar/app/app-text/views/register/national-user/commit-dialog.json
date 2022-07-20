@@ -1,0 +1,14 @@
+{
+  "actions": "خطوات مقترحة",
+  "oups": "",
+  "oupsInfo": "معذرة، ولكنك غير مفوض لترشيح مستخدم.",
+  "oops": "",
+  "oopsInfo": "معذرة. ثمة خطأ قد حدث.",
+  "userToBeCreated": "المستخدم الذي سيتم إنشاؤه:",
+  "governmentAffiliationGranted": "الانتساب الحكومي الذي سيتم منحه:",
+  "governmentAffiliationRevoked": "الانتساب الحكومي الذي سيتم رفضه:",
+  "granted": "",
+  "revoked": "الأدوار التي سيتم رفضها:",
+  "cancel": "إلغاء",
+  "proceed": ""
+}

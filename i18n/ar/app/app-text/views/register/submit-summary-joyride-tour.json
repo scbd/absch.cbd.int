@@ -1,0 +1,38 @@
+{
+  "welcome": {
+    "title": "ملخص السجلات",
+    "content": "<p> <br><br></p>"
+  },
+  "filters": {
+    "title": "",
+    "content": "<p></p>"
+  },
+  "Keyword": {
+    "title": "",
+    "content": "<p></p>"
+  },
+  "adding": {
+    "title": "إنشاء سجل جديد",
+    "content": "<p></p>"
+  },
+  "duplicate": {
+    "title": "تكرار السجل",
+    "content": "<p></p>"
+  },
+  "edit": {
+    "title": "تعديل السجل",
+    "content": "<p></p>"
+  },
+  "delete": {
+    "title": "حذف السجل",
+    "content": "<p></p>"
+  },
+  "needHelp": {
+    "title": "هل تحتاج لمساعدة؟",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "هل تحتاج لمساعدة أخرى؟",
+    "content": "<p></p>"
+  }
+}

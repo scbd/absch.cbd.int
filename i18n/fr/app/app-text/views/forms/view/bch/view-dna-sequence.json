@@ -1,0 +1,21 @@
+{
+  "generalInfo": "Informations générales",
+  "title": "Titre",
+  "name": "Nom de l'élément génétique",
+  "synonymNames": "Nom(s) de l’élément génétique alternatif (synonymes)",
+  "abbreviation": "Abréviation",
+  "category": "Catégorie",
+  "isSynthetic": "Cet élément génétique est-il une molécule synthétique?",
+  "yes": "Oui",
+  "no": "Non",
+  "donorOrganism": "Organisme donneur",
+  "donorOrganisms": "Organisme(s) donneur",
+  "donorOrganismCollectionPoint": "Point de collecte ou d'acquisition de l'organisme donneur",
+  "geographicCoordinates": "Coordonnées géographiques",
+  "characteristicsSequence": "Caractéristiques de la séquence codante de la protéine",
+  "proteinName": "Nom de la protéine exprimé par la séquence codante",
+  "biologicalFunction": "Fonction biologique de la protéine",
+  "traits": "Caractéristiques ou utilisations connexes en biotechnologie",
+  "additionalInformation": "Informations supplémentaires",
+  "anyOtherInformation": "Autres sites web pertinents et/ou documents en pièce jointe"
+}

@@ -1,0 +1,14 @@
+{
+  "overview": "نبذة عامة",
+  "report": "التقرير",
+  "deadline": "الموعد النهائي",
+  "numberOfParties": "",
+  "atTheDeadline": "",
+  "byParties": "حسب الأطراف*",
+  "byNonParties": "حسب غير الأطراف*",
+  "total": "الإجمالي",
+  "partyStatusReport": "",
+  "nationalReportAnalyzer": "",
+  "nationalReportAnalyzerInfo": "تتيح لك هذه الأداة تحديد أقسام أو أسئلة مُحدّدة من التقرير وعرض النتائج حسب البلد/المنطقة.",
+  "analyze": ""
+}

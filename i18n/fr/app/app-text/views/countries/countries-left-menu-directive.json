@@ -1,0 +1,12 @@
+{
+  "countryInformation": "Information sur le pays",
+  "map": "Carte",
+  "selectCountry": "Sélectionnez un pays",
+  "filterByStatus": "Filtrer selon le statut de la Partie au Protocole de Nagoya",
+  "all": "Ensemble",
+  "party": "Partie",
+  "nonParty": "Non Partie",
+  "filterByRecordTypes": "Filtrer les pays par types de fichiers",
+  "countries": "Pays",
+  "records": "Fichiers"
+}

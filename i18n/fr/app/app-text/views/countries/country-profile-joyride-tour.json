@@ -1,0 +1,42 @@
+{
+  "countryProfiles": {
+    "title": "Profils des pays",
+    "content": ""
+  },
+  "listOfRecords": {
+    "title": "Liste des fichiers",
+    "content": "Sur cette page, vous pouvez voir un aperçu de tous les fichiers nationaux. Les numéros indiqués dans les cercles noirs représentent le nombre total de fichiers publiés sous chaque type de fichier. <br><br> <u> CN) afin de voir le titre complet du type de fichier national."
+  },
+  "sortingRecords": {
+    "title": "Classer les fichiers",
+    "content": "Vous pouvez trier les fichiers par ordre alphabétique croissant/décroissant, ainsi que par type de fichier."
+  },
+  "sortingRecordsNFP": {
+    "title": "Classer les fichiers",
+    "content": "Cliquez sur l'acronyme ou le numéro dans le cercle noir du type de fichier qui vous intéresse pour trier par le nombre de fichiers les plus publiés de ce type. Cliquez à nouveau pour inverser le tri."
+  },
+  "sortingRecordsCountries": {
+    "title": "Classer les fichiers : Pays",
+    "content": "</u> "
+  },
+  "sortingRecordsPartyStatus": {
+    "title": "Classer les fichiers : Statut de la Partie",
+    "content": "Cliquez ici pour filtrer par Statut de la Partie."
+  },
+  "sortingRecordsRegions": {
+    "title": "Classer les fichiers : Régions",
+    "content": "Cliquez ici pour filtrer par région. </u> "
+  },
+  "exportingRecords": {
+    "title": "Exporter des fichiers",
+    "content": "Cliquez ici pour exporter la liste résumé en format Excel. Si vous utilisez des filtres, les données seront exportées sur la base de vos filtres."
+  },
+  "needHelp": {
+    "title": "Besoin d’aide?",
+    "content": "Cliquez ici pour accéder à du soutien contextuel qui vous donnera plus d’informations sur les pages de profil des pays."
+  },
+  "needMoreHelp": {
+    "title": "Encore besoin d’aide?",
+    "content": "Utilisez la fonction de clavardage pour nous envoyer un message et obtenir plus d’aide."
+  }
+}

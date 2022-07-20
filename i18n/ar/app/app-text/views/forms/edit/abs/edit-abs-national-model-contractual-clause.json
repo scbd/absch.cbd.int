@@ -1,0 +1,23 @@
+{
+  "generalInfo": "معلومات عامة",
+  "languageToPublish": "يُرجى تحديد اللغات التي تريد إرسال هذا السجل بها:",
+  "country": " البلد",
+  "title": " العنوان",
+  "selectOption": "",
+  "summary": "3. الموجز أو الملخص",
+  "jurisdiction": "4 منطقة الاختصاص:",
+  "jurisdictionInfo": "",
+  "nameSubJurisdiction": "اسم منطقة الاختصاص دون الوطنية",
+  "communityName": "اسم المجتمع",
+  "jurisdictionName": "اسم منطقة اختصاص أخرى",
+  "relevantMeasures": "5. التدابير الملائمة للحصول على الموارد وتقاسم المنافع:",
+  "relevantMeasuresInfo": "يُرجى إضافة التدابير الملائمة للحصول على الموارد وتقاسم المنافع.",
+  "keywords": "6 ",
+  "thematicArea": "7 ",
+  "attachments": "المرفقات",
+  "resourceLinks": "",
+  "relevantInformation": "8. (أ) معلومات ذات صلة حول المرفق (المرفقات):",
+  "relevantDocuments": "",
+  "notes": "",
+  "notesInfos": "خانة \"الملاحظات\" للاستخدام الشخصي ولن تظهر إلا عند تعديل السجل. وبعد نشر السجل ستختفي الخانة مرة أخرى. "
+}

@@ -1,0 +1,42 @@
+{
+  "welcome": {
+    "title": "مرحبًا بكم في صفحة التقديم: لوحة التحكم",
+    "content": "<p> </p>"
+  },
+  "personalInformation": {
+    "title": "المعلومات الشخصية الخاصة بك",
+    "content": "<p> </p>"
+  },
+  "recordOverview": {
+    "title": "نبذة عامة عن السجل",
+    "content": "<p> </p>"
+  },
+  "yourRecordsStatus": {
+    "title": "سجلك الخاص: الحالة",
+    "content": "<p> </p>"
+  },
+  "yourRecordsOffline": {
+    "title": "سجلاتك: تنسيقات غير متصلة بالإنترنت",
+    "content": "<p> </p>"
+  },
+  "quickView": {
+    "title": "عرض سريع",
+    "content": "<p></p>"
+  },
+  "addNewRecord": {
+    "title": "إنشاء سجل جديد",
+    "content": "<p></p>"
+  },
+  "viewAllRecords": {
+    "title": "عرض جميع السجلات",
+    "content": "<p> </u>  </p>"
+  },
+  "needHelp": {
+    "title": "هل تحتاج لمساعدة؟",
+    "content": "<p></p>"
+  },
+  "needMoreHelp": {
+    "title": "هل تحتاج لمساعدة أخرى؟",
+    "content": "<p></p>"
+  }
+}

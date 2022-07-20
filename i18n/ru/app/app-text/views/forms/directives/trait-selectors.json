@@ -1,0 +1,11 @@
+{
+  "resistanceDiseasesAndPests": "Устойчивость к болезням и вредителям",
+  "resistanceToHerbicides": "Устойчивость к гербицидам",
+  "resistanceToAtibiotics": "Устойчивость к антибиотикам",
+  "toleranceToAbioticStress": "Толерантность к абиотическому стрессу",
+  "changesInPhysiology": "Изменения в физиологии и/или продуктивности",
+  "changesInQualityContent": "Изменения качества и/или состава метаболитов",
+  "productionOfMedical": "Производство соединений, применяемых в области медицины и фармацевтики (на людях или животных)",
+  "useInIndustrialApplications": "Использование в промышленных целях",
+  "engineeredApplication": "Прикладная разработка (на основе технологии генного драйва)"
+}

@@ -1,0 +1,19 @@
+{
+  "systemAlert": "",
+  "certificatesInfo": "",
+  "emailMe": "",
+  "search": "",
+  "edit": "تعديل",
+  "delete": "حذف",
+  "addNew": "إضافة جديد",
+  "loading": "قيد التحميل ...",
+  "isAuthenticated": "",
+  "isNotAuthenticated": "",
+  "searchFilter": "",
+  "filterTitle": "",
+  "selectFilters:": "تحديد فلاتر البحث:",
+  "sendEmail": "",
+  "cancel": "إلغاء",
+  "save": "حفظ",
+  "searchTitle": "عنوان البحث"
+}

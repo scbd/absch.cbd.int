@@ -1,0 +1,42 @@
+{
+  "countryProfiles": {
+    "title": "国家概况",
+    "content": ""
+  },
+  "listOfRecords": {
+    "title": "记录列表",
+    "content": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。 <br><br> <u> 国家联络点（NFP））来查看该国家记录类型的全称。"
+  },
+  "sortingRecords": {
+    "title": "记录排序",
+    "content": "您可以按照字母顺序的升序/降序对记录进行排序，也可以按照记录类型进行排序。"
+  },
+  "sortingRecordsNFP": {
+    "title": "记录排序",
+    "content": "单击感兴趣的记录类型的首字母缩写或黑圈中的数字，即可按该类型记录的发布数量（从大到小）排序。再单击一下，即可反转排序。"
+  },
+  "sortingRecordsCountries": {
+    "title": "记录排序：国家/地区",
+    "content": "</u> "
+  },
+  "sortingRecordsPartyStatus": {
+    "title": "记录排序：缔约方身份",
+    "content": "单击此处，以按缔约国状态筛选。"
+  },
+  "sortingRecordsRegions": {
+    "title": "记录排序：区域",
+    "content": "单击此处，以按地区筛选。 </u> "
+  },
+  "exportingRecords": {
+    "title": "导出记录",
+    "content": "单击此处，以将概览列表导出为Excel文件。如果您使用了筛选条件，则数据将根据您所选的条件导出。"
+  },
+  "needHelp": {
+    "title": "需要帮助吗？",
+    "content": "单击此处，以访问上下文帮助，在这里您可以找到更多与国家概况有关的信息。"
+  },
+  "needMoreHelp": {
+    "title": "需要更多帮助吗？",
+    "content": "使用聊天功能给我们发消息以获得更多支持。"
+  }
+}

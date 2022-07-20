@@ -1,0 +1,14 @@
+{
+  "overview": "Panorama",
+  "report": "Informe",
+  "deadline": "Plazo",
+  "numberOfParties": "",
+  "atTheDeadline": "",
+  "byParties": "Por Partes*",
+  "byNonParties": "Por Países que no son Partes*",
+  "total": "Total",
+  "partyStatusReport": "",
+  "nationalReportAnalyzer": "Analizador de informes nacionales",
+  "nationalReportAnalyzerInfo": "Esta herramienta le permite seleccionar secciones o preguntas específicas del informe y mostrar los resultados por país o región.",
+  "analyze": ""
+}

@@ -1,0 +1,14 @@
+{
+  "overview": "Общий обзор",
+  "report": "Доклад",
+  "deadline": "Крайний срок",
+  "numberOfParties": "",
+  "atTheDeadline": "",
+  "byParties": "В разбивке по Сторонам*",
+  "byNonParties": "В разбивке по государствам, не являющимся Сторонами*",
+  "total": "Итого",
+  "partyStatusReport": "",
+  "nationalReportAnalyzer": "Анализатор национальных докладов",
+  "nationalReportAnalyzerInfo": "",
+  "analyze": ""
+}
