@@ -17,4 +17,9 @@ export default class DocumentShareApi extends ApiBase
     async shareDocument(params)  {
         return this.http.post(`api/v2018/document-sharing`,params).then(res => res.data).catch(tryCastToApiError);
     }
+
+    async anonShareDocument(params)  {
+        return this.http.post(`api/v2022/document-sharing/anon-sharing`, params).then(res => res.data).catch(tryCastToApiError);
+    }
+    
 }

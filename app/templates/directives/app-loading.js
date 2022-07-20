@@ -39,7 +39,9 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
                 }
                 window.addEventListener('message', (evt)=>{
                     if(evt.data){
-                        const data = JSON.parse(evt.data);
+                        let data = evt.data;
+                        if(typeof evt.data == 'string')
+                            data = JSON.parse(evt.data);
                         if(data.type == 'getClientHeight' && window.scbdEmbedData){
                             iframeOriginData = {data, origin :evt.origin };
                             sendIframeCommunication();

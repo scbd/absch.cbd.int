@@ -57,7 +57,7 @@ export default async function() {
                       }));
     i18nFiles.forEach(m=>{
       externals.push(m);
-      if(/assets\/widgets\.js$/.test(m))
+      if(/assets\/(widgets|legacy\-ajax\-plugin)\.js$/.test(m))
         bundleFiles.push(bundleWidget(m)); 
       else 
         bundleFiles.push(bundle(m)); 
@@ -75,7 +75,7 @@ export default async function() {
                     }));
     enFiles.forEach(m=>{
           externals.push(m);
-          if(/assets\/widgets\.js$/.test(m))
+          if(/assets\/(widgets|legacy\-ajax\-plugin)\.js$/.test(m))
             bundleFiles.push(bundleWidget(m, 'app')); 
           else 
             bundleFiles.push(bundle(m, 'app')); 
