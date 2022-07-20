@@ -69,8 +69,10 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
             $scope.createLink = function(){
                                     
                 var newDocument = {}
+                newDocument.shareType   = "link";
                 newDocument.storageType = "km-document";
                 newDocument.sharedData = {
+                    realm                   : realm.value,
                     "identifier"            : $scope.identifier,
                     "restrictionField"      : $scope.restrictionField
                 };
@@ -87,8 +89,10 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                     return;
 
                 let document = {
+                    shareType  : "email",
                     storageType: "km-document",
                     sharedData : {
+                        realm            : realm.value,
                         identifier       : $scope.identifier,
                         restrictionField : $scope.restrictionField
                     },

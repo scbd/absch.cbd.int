@@ -11,9 +11,10 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
         function getPdfLink(){
             //15 minute expiry
             var document = {
+                shareType   : "link",
                 storageType : "km-document",
                 expiry      : new Date(new Date().getTime()+(60*60*1000)),
-                sharedData  : { "identifier": uniqueId },
+                sharedData  : { "identifier": uniqueId, realm : realm.value },
                 sharedWith  : { "link" : true },
                 forPdf      : true
             }             
