@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./report-record.html';
-import 'views/directives/block-region-directive';
+import '~/views/directives/block-region-directive';
 import 'ngDialog';
         app.directive('reportRecord', ['ngDialog','$rootScope', '$http', 'toastr', 'realm', 
             function (ngDialog, $rootScope, $http, toastr, realm) {

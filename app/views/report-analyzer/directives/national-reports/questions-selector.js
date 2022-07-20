@@ -1,12 +1,12 @@
 import templateHtml from 'text!./questions-selector.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import require from 'require';
 import '../selectors/terms-dialog';
 import '../intermediate';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
-import 'views/report-analyzer/reportAnalyzerService';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/views/report-analyzer/reportAnalyzerService';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 

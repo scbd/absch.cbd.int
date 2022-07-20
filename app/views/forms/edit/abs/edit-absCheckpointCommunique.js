@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
-import 'views/forms/view/abs/view-abs-checkpoint-communique.directive';
-import 'views/forms/edit/permit-selection-directive';
-import 'services/main';
+import '~/views/forms/edit/edit';
+import '~/views/forms/view/abs/view-abs-checkpoint-communique.directive';
+import '~/views/forms/edit/permit-selection-directive';
+import '~/services/main';
 import editAbsCheckpointCT from '~/app-text/views/forms/edit/abs/edit-absCheckpointCommunique.json';
 
     export { default as template } from './edit-absCheckpointCommunique.html';

@@ -1,8 +1,8 @@
-import app from 'app';
-import 'views/countries/country-profile-directive';
-import 'views/directives/block-region-directive';
-import 'services/main';
-import 'components/scbd-angularjs-services/main';
+import app from '~/app';
+import '~/views/countries/country-profile-directive';
+import '~/views/directives/block-region-directive';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
 import 'ng-breadcrumbs';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
 import countryProfileT from '~/app-text/views/countries/country-profile.json';

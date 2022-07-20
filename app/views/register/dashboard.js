@@ -1,15 +1,15 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import ng from 'angular';
 import 'angular-animate';
 import 'angular-joyride';
 import joyRideText from '~/app-text/views/register/dashboard-joyride-tour.json';
-import 'services/main';
-import 'views/register/directives/register-top-menu';
+import '~/services/main';
+import '~/views/register/directives/register-top-menu';
 import 'toastr';
-import 'components/scbd-angularjs-services/main';
-import 'views/register/directives/top-records';
-import 'views/register/directives/top-requests';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/register/directives/top-records';
+import '~/views/register/directives/top-requests';
 import 'ngDialog';
 import dashboardT from '~/app-text/views/register/dashboard.json';
     

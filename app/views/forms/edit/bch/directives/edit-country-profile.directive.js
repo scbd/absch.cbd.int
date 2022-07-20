@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-country-profile.directive.html';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import "~/views/forms/view/bch/view-country-profile.directive";
-import 'services/main'; 
+import '~/services/main'; 
 import editCountryProfileT from '~/app-text/views/forms/edit/bch/directives/edit-country-profile.json';
 
 app.directive("editCountryProfile", ["$controller", '$routeParams', 'ngDialog', "searchService", 'solr', 'translationService',

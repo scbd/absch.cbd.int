@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./km-form-languages.html';
 import _ from 'lodash';
 import './km-select';
-import 'services/main';
+import '~/services/main';
 import kmFormLanguagesT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-form-languages.json';
   //============================================================
   //

@@ -1,4 +1,5 @@
-const jsdelivr = 'https://cdn.jsdelivr.net/'
+export const cdnUrl = 'https://cdn.jsdelivr.net/'
+
 export const bundleUrls = {
     angularBundle : [ 
         'npm/jquery@2.2.4/dist/jquery.min.js',
@@ -36,9 +37,12 @@ export const bundleUrls = {
     ].join(','),
 }
 export default function bootApp(window, require, defineX) {
-    if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
-    var cdnHost = jsdelivr+'npm/';
-    var nameToUrl = require.s.contexts._.nameToUrl;
+//SB    if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
+
+    const cdnHost = cdnUrl+'npm/';
+    const templateName = window.scbdApp.template;
+    
+    //SB    var nameToUrl = require.s.contexts._.nameToUrl;
 
     window.getHashFileName = function(url){
         
@@ -159,35 +163,32 @@ export default function bootApp(window, require, defineX) {
             'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             'vue-pagination-2'              : { 'deps': ['angular-vue'] }
             
-        },
-        urlArgs: function(id, url){
-            
-            if(!window.scbdApp.version || window.scbdApp.version === '-')
-                return '';
-                
-            if(/^\//.test(url))            
-                return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
-
-            return '';
         }
     });
 
-    require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
+    // require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
 
-        var url = nameToUrl(moduleName, ext, skipExt);
-        url = window.getHashFileName(url);
+    //     console.log("nameToUrl", { moduleName, ext, skipExt });
+
+    //     var url = nameToUrl(moduleName, ext, skipExt);
+    //     var oldUrl = url;
+
+    //     url = window.getHashFileName(url);
         
-        var isHashUrl = window.hasHashUrl(url);
-        if(isHashUrl){//remove version param from url since its a hash url
-            url = removeParamFromUrl(url, 'v')
-        }
+    //     var isHashUrl = window.hasHashUrl(url);
+    //     if(isHashUrl){//remove version param from url since its a hash url
+    //         url = removeParamFromUrl(url, 'v')
+    //     }
         
-        if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
-            url = '/'+window.scbdApp.lang + url;
-        }
+    //     if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
+    //         url = '/'+window.scbdApp.lang + url;
+    //     }
+
+    //     console.log("nameToUrl", { moduleName, ext, skipExt, oldUrl, newUrl: url });
+
         
-        return url;
-    }
+    //     return url;
+    // }
 
     require.onError = function (err) {
         console.log(err.requireType);
@@ -228,7 +229,7 @@ export default function bootApp(window, require, defineX) {
     defineX('angular-animate'      , ['angular'], (ng)=>{ warnImport(); return ng; });
     defineX('angular-cache'        , ['angular'], (ng)=>{ warnImport(); });
     
-    defineX('angular-dependencies' , ['angular', `${jsdelivr}combine/${bundleUrls.angularDependencies}`], (ng)=>{ warnImport(); });
+    defineX('angular-dependencies' , ['angular', `${cdnUrl}combine/${bundleUrls.angularDependencies}`], (ng)=>{ warnImport(); });
     defineX('ng-breadcrumbs'       , ['angular-dependencies'], ()=>{ warnImport(); });
     defineX('ngSmoothScroll'       , ['angular-dependencies'], ()=>{ warnImport(); });
     defineX('jquery-ui'       , ['angular-dependencies'], ()=>{ warnImport(); });
@@ -249,15 +250,11 @@ export default function bootApp(window, require, defineX) {
         return window._slaask;
     });
 
-    if(window.scbdApp.template){
-        require(['/'+window.scbdApp.lang+'/app/hash-file-mapping.js'], function(hashMapping){
-            // console.log(jsd)
-            window.hashUrlsMapping = hashMapping
-            require([window.scbdApp.template], function(){})
-        })
+    if(templateName){
+        import(`./templates/${templateName}/index.js`);
     }
-    else{
-        alert('Unable to load files from server: ' + err.requireModules);
+    else {
+        window.alert('Unable to load files from server: ' + `./templates/${templateName}/index.js`);
     }
 
     function removeParamFromUrl(url, param) {

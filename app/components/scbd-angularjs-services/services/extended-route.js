@@ -1,5 +1,5 @@
 import require from 'require';
-import app from 'app';
+import app from '~/app';
 import angular from 'angular';
 import 'angular-route'; ;
 

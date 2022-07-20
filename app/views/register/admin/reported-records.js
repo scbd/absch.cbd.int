@@ -1,9 +1,9 @@
-import app from 'app';
-import 'services/main';
-import 'views/forms/view/record-loader.directive';
-import 'views/register/directives/register-top-menu';
+import app from '~/app';
+import '~/services/main';
+import '~/views/forms/view/record-loader.directive';
+import '~/views/register/directives/register-top-menu';
 import 'ngDialog';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
     export { default as template } from './reported-records.html';
 export default ['$scope', '$http', '$timeout', '$element', 'ngDialog', '$routeParams', 'IGenericService','realm', '$q',
         function ($scope, $http, $timeout, $element, ngDialog, $routeParams, IGenericService, realm, $q) {

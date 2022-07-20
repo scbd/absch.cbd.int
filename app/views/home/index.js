@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import moment from 'moment';
-import 'services/main';
-import 'views/directives/home-country-dashboard-directive';
-import 'views/directives/map/home-map';
-import 'views/directives/home-articles';
+import '~/services/main';
+import '~/views/directives/home-country-dashboard-directive';
+import '~/views/directives/map/home-map';
+import '~/views/directives/home-articles';
 import homepageRecords from '~/components/common/homepage-records.vue';
 import 'angular-cookies';
 import absHomeT from '~/app-text/views/home/index.json';

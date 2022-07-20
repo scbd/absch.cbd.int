@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-national-report-3.directive.html";
 import _ from 'lodash';
 import {cpbNationalReport3} from 'app-data/bch/report-analyzer/cpbNationalReport3';
-import 'views/forms/view/bch/view-national-report.directive';
-import 'views/directives/record-options';
+import '~/views/forms/view/bch/view-national-report.directive';
+import '~/views/directives/record-options';
 
 	app.directive("viewCpbNationalReport3", [function () {
 		return {

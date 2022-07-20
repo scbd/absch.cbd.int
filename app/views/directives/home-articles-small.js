@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./home-articles-small.html';
 import _ from 'services/main';
         app.directive('homeArticlesSmall', function($http) {

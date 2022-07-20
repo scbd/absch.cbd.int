@@ -1,8 +1,8 @@
 import templateHtml from 'text!./terms-dialog.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import '../../filters/ascii';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import './tree-selector';
 
     //==============================================

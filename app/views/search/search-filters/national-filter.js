@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./national-filter.html';
 import nationalFilterT from '~/app-text/views/search/search-filters/national-filter.json';
 

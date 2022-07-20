@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 
   var directiveFn = function($compile) {
       // directive factory creates a link function

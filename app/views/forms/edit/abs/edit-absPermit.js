@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
-import 'services/main';
-import 'views/forms/view/abs/view-abs-permit.directive';
+import '~/views/forms/edit/edit';
+import '~/services/main';
+import '~/views/forms/view/abs/view-abs-permit.directive';
 import editAbsPermitT from '~/app-text/views/forms/edit/abs/edit-absPermit.json';
 
   export { default as template } from './edit-absPermit.html';

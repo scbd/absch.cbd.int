@@ -1,11 +1,11 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-biosafety-expert.directive.html';
-import 'views/forms/edit/edit';
-import 'views/forms/edit/document-selector';
+import '~/views/forms/edit/edit';
+import '~/views/forms/edit/document-selector';
 import "~/views/forms/view/bch/view-biosafety-expert.directive";
-import 'components/scbd-angularjs-controls/main';
-import 'services/main';
+import '~/components/scbd-angularjs-controls/main';
+import '~/services/main';
 import editBiosafetyExpertT from '~/app-text/views/forms/edit/bch/directives/edit-biosafety-expert.json';
 
 app.directive("editBiosafetyExpert", ["locale", "$filter", "searchService", "$q", "$controller", "thesaurusService", 'solr', 'Thesaurus', 'realm', '$timeout', 'translationService',

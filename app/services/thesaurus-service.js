@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 
     app.factory('thesaurusService', ['$http', '$q', 'cacheService', function ($http, $q, cacheService) {

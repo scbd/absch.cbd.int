@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-biosafety-news.directive.html";
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
 import viewBiosafetyNewsT from '~/app-text/views/forms/view/bch/view-biosafety-news.json';
 app.directive("viewBiosafetyNews", ['translationService', function (translationService) {
 	return {

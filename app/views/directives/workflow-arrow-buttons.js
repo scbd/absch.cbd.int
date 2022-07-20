@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./workflow-arrow-buttons.html';
 import 'lodash';
-import 'views/directives/workflow-history-directive';
-import 'services/main';
+import '~/views/directives/workflow-history-directive';
+import '~/services/main';
 import 'ngDialog';
 import 'toastr';
 import '~/views/forms/directives/document-sharing';

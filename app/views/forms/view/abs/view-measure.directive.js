@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-measure.directive.html";
-import 'views/measure-matrix/measure-matrix-elements-directive';
-import 'services/main';
-import 'views/forms/view/directives/view-record-reference.directive';
-import 'views/directives/record-options';
+import '~/views/measure-matrix/measure-matrix-elements-directive';
+import '~/services/main';
+import '~/views/forms/view/directives/view-record-reference.directive';
+import '~/views/directives/record-options';
 import viewMeasureT from '~/app-text/views/forms/view/abs/view-measure.json';
 
 app.directive("viewMeasure", ['translationService', function (translationService) {

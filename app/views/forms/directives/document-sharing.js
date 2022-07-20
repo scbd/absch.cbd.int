@@ -3,7 +3,7 @@ import app from '~/app'
 import 'angular'
 import _ from 'lodash'
 import 'ngDialog'
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import documentSharingT from '~/app-text/views/forms/directives/document-sharing.json';
 
 app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout', 'IGenericService', '$document', '$window', '$rootScope', 'realm', 'locale', 'translationService',

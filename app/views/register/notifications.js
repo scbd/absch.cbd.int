@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
-import 'components/scbd-branding/main';
-import 'views/register/directives/register-top-menu';
+import '~/services/main';
+import '~/components/scbd-branding/main';
+import '~/views/register/directives/register-top-menu';
 import notificationsT from '~/app-text/views/register/notifications.json';
 
     export { default as template } from './notifications.html';

@@ -1,4 +1,4 @@
-import 'app'; 
+import '~/app'; 
 
     export { default as template } from './record-types.html';
 export default ["$scope", "$http", function ($scope, $http, user) {

@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./view-meeting.directive.html';
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
 
 app.directive('viewMeeting', [function() {
 	return {

@@ -1,11 +1,11 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
 import 'ngInfiniteScroll';
 import 'moment';
-import 'components/scbd-angularjs-controls/main';
-import 'views/register/directives/register-top-menu';
+import '~/components/scbd-angularjs-controls/main';
+import '~/views/register/directives/register-top-menu';
 
         
         export { default as template } from './error-logs.html';

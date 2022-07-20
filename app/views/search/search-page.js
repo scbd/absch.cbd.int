@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import exportExcel from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'views/register/user-preferences/user-alerts';
-import 'views/search/search-directive';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/register/user-preferences/user-alerts';
+import '~/views/search/search-directive';
 import 'css!/app/css/search.css';
     
     export { default as template } from './search-page.html';

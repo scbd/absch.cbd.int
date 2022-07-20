@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-authority.directive.html';
-import 'services/main';
-import 'views/forms/edit/edit';
-import 'views/forms/edit/document-selector';
+import '~/services/main';
+import '~/views/forms/edit/edit';
+import '~/views/forms/edit/document-selector';
 import '~/views/forms/edit/warning-message-cna';
 import '~/views/forms/view/view-authority.directive'; 
 import editAuthorityT from '~/app-text/views/forms/edit/directives/edit-authority.json';

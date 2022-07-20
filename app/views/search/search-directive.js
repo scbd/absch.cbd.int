@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'ngDialog';
 import 'angular-animate';
@@ -8,9 +8,9 @@ import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
 import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
 import {getLimitedTerms} from 'services/common';
-import 'services/main';
+import '~/services/main';
 import '~/views/directives/export-directive';
-import 'components/scbd-angularjs-controls/main';
+import '~/components/scbd-angularjs-controls/main';
 import './search-filters/keyword-filter';
 import './search-filters/national-filter';
 import './search-filters/reference-filter';
@@ -23,7 +23,7 @@ import './search-results/result-default';
 import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
-import 'views/reports/matrix/data-matrix.directive';
+import '~/views/reports/matrix/data-matrix.directive';
 import 'angular-vue'
 import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 

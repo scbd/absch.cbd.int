@@ -1,7 +1,7 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import template from 'text!./top-requests.html';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import topRequestsT from '~/app-text/views/register/directives/top-requests.json';
 
 app.directive("topRequests", ['$q', "IWorkflows", "realm", '$rootScope', 'roleService', "$location", "$filter", "translationService",

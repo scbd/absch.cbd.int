@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-capacity-building-initiative.directive.html";
-import 'views/directives/record-options';
-import 'views/forms/view/directives/view-record-reference.directive';
+import '~/views/directives/record-options';
+import '~/views/forms/view/directives/view-record-reference.directive';
 import _ from "lodash";
-import 'views/forms/directives/view-terms-hierarchy';
+import '~/views/forms/directives/view-terms-hierarchy';
 import viewCdiT from '~/app-text/views/forms/view/view-capacity-building-initiative.json';
 
 app.directive("viewCapacityBuildingInitiative", ["translationService", function (translationService) {

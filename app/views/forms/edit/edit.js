@@ -1,14 +1,14 @@
 //fixed a bug with the comment up here ;)
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import Enumerable from 'linqjs';
-import 'services/main';
+import '~/services/main';
 import '~/views/forms/edit/editFormUtility';
 import '~/views/forms/view/record-loader.directive';
 import '~/views/forms/view/view-history-directive';
 import '~/views/forms/edit/document-selector';
 import '~/views/register/directives/register-top-menu';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import '~/views/directives/workflow-arrow-buttons';
 import './edit-header';
 

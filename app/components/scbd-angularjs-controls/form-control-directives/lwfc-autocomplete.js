@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./lwfc-autocomplete.html';
   app.directive('lwfcAutocomplete', function() {
       return {

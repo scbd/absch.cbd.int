@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-resource.directive.html';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import './edit-resource-schema-base-directive';
 
 app.directive("editResource", ["$controller", "$location", function ($controller, $location) {

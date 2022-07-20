@@ -1,9 +1,9 @@
 
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./warning-message-cna.html";
-import 'services/main';
-import 'views/search/search-results/result-default';
+import '~/services/main';
+import '~/views/search/search-results/result-default';
 
     app.directive('warningMessageCna', function() {
         return {

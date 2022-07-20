@@ -1,4 +1,4 @@
-import app from 'app'
+import app from '~/app'
 import cbdFooterHtml from 'text!./cbd-footer.html';
 import cbdFooterT from '~/app-text/templates/directives/cbd-footer.json';
 

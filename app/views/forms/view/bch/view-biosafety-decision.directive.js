@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-biosafety-decision.directive.html";
-import 'views/directives/record-options';
-import 'components/scbd-angularjs-controls/main';
+import '~/views/directives/record-options';
+import '~/components/scbd-angularjs-controls/main';
 import viewDecT from '~/app-text/views/forms/view/bch/view-biosafety-decision.json';
 
 app.directive("viewBiosafetyDecision", [function () {

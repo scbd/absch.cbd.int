@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import 'css!/app/css/registry.css';
-import 'services/main'; ;
+import '~/services/main'; ;
 import viewOrgaRegistryT from '~/app-text/views/reports/bch/registries/view-orga-registry.json';
 
 export { default as template } from './view-orga-registry.html';

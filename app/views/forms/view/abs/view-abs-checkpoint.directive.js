@@ -1,8 +1,8 @@
- import app from "app";
+ import app from '~/app';
 import template from "text!./view-abs-checkpoint.directive.html";
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
  import _ from "lodash";
- import 'views/forms/directives/view-terms-hierarchy';
+ import '~/views/forms/directives/view-terms-hierarchy';
 import viewCheckpointT from '~/app-text/views/forms/view/abs/view-abs-checkpoint.json';
 
 	// });

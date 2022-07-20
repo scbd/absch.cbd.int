@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-lmo.directive.html";
-import 'views/directives/record-options';
-import 'views/forms/view/bch/view-lmo-reference.directive';
-import 'views/forms/view/bch/view-lmo-gene.directive';
-import 'views/forms/view/directives/view-record-reference.directive';
-import 'views/forms/directives/view-terms-hierarchy';
+import '~/views/directives/record-options';
+import '~/views/forms/view/bch/view-lmo-reference.directive';
+import '~/views/forms/view/bch/view-lmo-gene.directive';
+import '~/views/forms/view/directives/view-record-reference.directive';
+import '~/views/forms/directives/view-terms-hierarchy';
 import { uniqIdentifiers } from '~/services/common'
 import viewLmoT from '~/app-text/views/forms/view/bch/view-lmo.json';
 

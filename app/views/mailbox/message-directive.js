@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./message-directive.html';
 import _ from 'lodash';
     app.directive('mailboxMessage', function() {

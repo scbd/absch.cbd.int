@@ -1,10 +1,10 @@
 import ng from 'angular';
 import _ from 'lodash';
 import require from 'require';
-import app from 'app';
+import app from '~/app';
 import 'ngDialog';
-import 'services/main';
-import 'views/register/directives/register-top-menu'; 
+import '~/services/main';
+import '~/views/register/directives/register-top-menu'; 
 import * as searchUserDialog from './search-user-dialog';
 import * as editUserDialog   from './edit-user-dialog';
 import * as editRolesDialog  from './edit-roles-dialog';

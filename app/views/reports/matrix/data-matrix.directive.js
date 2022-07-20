@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./data-matrix.directive.html';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
-import 'views/directives/block-region-directive';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/views/directives/block-region-directive';
 import 'pivottable';
 import 'ngDialog'; ;
 

@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
-import 'views/forms/edit/document-selector';
-import 'views/forms/view/abs/view-abs-national-report.directive';
-import 'services/main';
+import '~/views/forms/edit/edit';
+import '~/views/forms/edit/document-selector';
+import '~/views/forms/view/abs/view-abs-national-report.directive';
+import '~/services/main';
 import editAbsNrT from '~/app-text/views/forms/edit/abs/edit-abs-national-report.json';
 
   export { default as template } from './edit-absNationalReport.html';

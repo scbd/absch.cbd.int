@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'ng-breadcrumbs';
 import 'cbd-forums';
-import 'services/main';
+import '~/services/main';
 
     export { default as template } from './post-list-view.html';
 export default ["$scope", "$http", "$q", "$route", "$routeParams","commonjs","$rootScope",'breadcrumbs',

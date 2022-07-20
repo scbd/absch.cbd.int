@@ -1,9 +1,9 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
-import 'components/scbd-angularjs-services/main';
-import 'views/directives/block-region-directive';
-import 'components/scbd-angularjs-controls/main';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/directives/block-region-directive';
+import '~/components/scbd-angularjs-controls/main';
 import 'angular-joyride';
 import joyRideText from '~/app-text/views/countries/country-profile-joyride-tour.json';
 import countryListTranslation from '~/app-text/views/countries/country-list.json';

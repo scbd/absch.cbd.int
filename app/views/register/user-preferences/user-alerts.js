@@ -1,12 +1,12 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./user-alerts.html";
 import _ from 'lodash';
 import moment from 'moment';
 import 'ngDialog';
-import 'services/main';
-import 'views/register/directives/register-top-menu';
-import 'views/register/user-preferences/user-alerts';
-import 'components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/views/register/directives/register-top-menu';
+import '~/views/register/user-preferences/user-alerts';
+import '~/components/scbd-angularjs-services/main';
 import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.json';
 
     app.directive("userAlerts", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {

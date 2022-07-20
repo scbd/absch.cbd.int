@@ -1,4 +1,4 @@
-import app from "app";
+import app from '~/app';
 
 export { default as template } from './verify-email.html';
 

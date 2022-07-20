@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import diacritics from 'diacritics'; ;
 
     app.filter("ascii", [function() {

@@ -1,4 +1,4 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import template from 'text!./search-content.html';
 import lunr from 'lunr';
 import 'jquery-highlight';

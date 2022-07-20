@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
-import 'views/forms/view/abs/view-abs-checkpoint.directive';
+import '~/views/forms/edit/edit';
+import '~/views/forms/view/abs/view-abs-checkpoint.directive';
 import editAbsCheckpointT from '~/app-text/views/forms/edit/abs/edit-absCheckpoint.json';
 
     export { default as template } from './edit-absCheckpoint.html';

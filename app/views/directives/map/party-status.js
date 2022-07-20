@@ -1,5 +1,5 @@
 import template from 'text!./party-status.html';
-import app from 'app';
+import app from '~/app';
   ;
 
   app.directive('partyStatus', function() {

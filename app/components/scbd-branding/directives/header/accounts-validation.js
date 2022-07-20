@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./accounts-validation.html';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
      app.directive('accountsValidationHeader', function() {
          return { restrict: 'E' ,
                   scope: {

@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./footer.html';
 import $ from 'css!components/scbd-branding/directives/footer';
      app.directive('scbdFooter', function() {

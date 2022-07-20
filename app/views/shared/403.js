@@ -1,4 +1,4 @@
-import app from "app";
+import app from '~/app';
 
 import { default as template } from './verify-email';
 import unauthorizedAccessT from '~/app-text/views/shared/403.json';

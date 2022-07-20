@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
   var directiveFn =  function() {
         return {
             restrict: 'A',

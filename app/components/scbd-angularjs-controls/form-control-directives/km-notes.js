@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./km-notes.html';
 import angular from 'angular';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 
     app.directive('kmNotes',  ["$http", "$filter", "authentication", function ($http, $filter, authentication) {
 	    return {
