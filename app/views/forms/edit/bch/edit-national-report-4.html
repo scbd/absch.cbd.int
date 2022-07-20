@@ -162,7 +162,7 @@
 
                 <div class="row">
                     <div class="col-xs-12">
-                        <div class="km-control-group" name="contact" caption="Contact person submitting the report" required>											
+                        <div class="km-control-group" name="contact" caption="{{::('editNR4T.contactPerson'|$translate)}}" required>											
                             <div document-selector ng-model="document.contact" question="contact"  type="radio"
                             ng-disabled="!document.government.identifier" on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>			
                         </div>
@@ -183,7 +183,7 @@
                                     <div km-date placeholder="YYYY-MM-DD" name="reportPeriodStartDate" required ng-model="document.reportPeriodStartDate"></div>
                                 </div> 
                                 <div class="col-sm-2 text-center">
-                                    <strong>TO</strong>
+                                    <strong>{{::('editNR4T.to'|$translate)}}</strong>
                                 </div>
                                 <div class="col-md-5 col-sm-12">
                                     <div km-date placeholder="YYYY-MM-DD" name="reportPeriodEndDate" required ng-model="document.reportPeriodEndDate"></div>

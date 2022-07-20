@@ -7,7 +7,7 @@
     "General_title":"Party to the Cartagena Protocol on Biosafety",
     "General_questions0_title":"Is your country a Party to the Cartagena Protocol on Biosafety (CPB)?",
     "General_questions1_title":"If your country is not a Party to the Cartagena Protocol on Biosafety (CPB), is there any national process in place towards becoming a Party?",
-    "General_questions2_title":"Here you may provide further details",
+    "General_questions2_title":"Here you may provide further details:",
     "Article2":"Article2",
     "Article2_title":"Article 2 – General provisions",
     "Article2_description":"<i>Article 2 requires each Party to take the necessary and appropriate legal, administrative and other measures to implement its obligations under the Protocol</i>",
@@ -378,7 +378,7 @@
     "Article20_questions0_questions16_options1_title":"Information available but not in the BCH",
     "Article20_questions0_questions16_options2_title":"Information available but only partially available in the BCH",
     "Article20_questions0_questions16_options3_title":"Information not available",
-    "Article20_questions1_title":"Please provide a brief explanation if you answered that the information is available <i>but not in the BCH or only partially available in the BCH</i> to any item under question 112",
+    "Article20_questions1_title":"Please provide a brief explanation if you answered that the information is available <i>but not in the BCH or only partially available in the BCH</i> to any item under question 112:",
     "Article20_questions2_title":"Has your country established a mechanism for strengthening the capacity of the BCH National Focal Point to perform its administrative functions?",
     "Article20_questions2_options1_title":"Yes, to some extent",
     "Article20_questions3_title":"Has your country established a mechanism for the coordination among the BCH National Focal Point, the Cartagena Protocol focal point, and the competent national authority(ies) for making information available to the BCH?",
@@ -470,7 +470,7 @@
     "Article22_questions11_options15_title":"Liability and redress",
     "Article22_questions12_title":"Has your country developed a capacity-building strategy or action plan?",
     "Article22_questions13_title":"Does your country have in place a functional national mechanism for coordinating biosafety capacity-building initiatives?",
-    "Article22_questions14_title":"Here you may provide further details on the implementation of Article 22 in your country, including further details about your experience in accessing GEF funds",
+    "Article22_questions14_title":"Here you may provide further details on the implementation of Article 22 in your country, including further details about your experience in accessing GEF funds:",
     "Article23":"Article23",
     "Article23_title":"Article 23 – Public awareness and participation",
     "Article23_questions0_title":"Is biosafety public awareness, education and/or participation addressed in legislation or policy in your country?",
@@ -620,5 +620,5 @@
     "AdditionalInformation_questions0_title":"Please use this field to provide any other information on issues related to national implementation of the Protocol, including any obstacles or impediments encountered.",
     "Comments":"Comments",
     "Comments_title":"Comments on reporting format",
-    "Comments_questions0_title":"Please use this field to provide any other information on difficulties that you have encountered in filling in this report"
+    "Comments_questions0_title":"Please use this field to provide any other information on difficulties that you have encountered in filling in this report."
  }
