@@ -33,5 +33,6 @@
   "commonIssues":"Common issues",
   "matrix":"Matrix",
   "kb":"Knowledge base",
-  "embed": "Embed url"
+  "embed": "Embed url",
+  "sharedUrls": "Shared URLs"
 }

@@ -29,6 +29,7 @@ const commonRouteUrls = {
     register                                    : { component: ()=>import('~/views/register/dashboard') },
     register_requests                           : { component: ()=>import('~/views/register/requests') },
     register_user_preferences_tab               : { component: ()=>import('~/views/register/user-preferences/preferences') },
+    shared_urls                                 : { component: ()=>import('~/views/register/vue/shared-urls.vue') },
     register_admin                              : { component: ()=>import('~/views/register/admin') },
     register_notifications                      : { component: ()=>import('~/views/register/notifications') },
     register_stats                              : { component: ()=>import('~/views/register/manage/stats') },
@@ -114,6 +115,7 @@ app.config(["$routeProvider", "$locationProvider", function ($routeProvider, $lo
   whenAsync('/register/dashboard',                                { ...mapView(angularViewWrapper),                    "label":routesLabels.dashboard,"resolve":{ ...commonRouteUrls.register,                                          "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/requests',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.pendingRequests,"resolve":{ ...commonRouteUrls.register_requests,                                           "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/user-preferences/:tab?',                   { ...mapView(angularViewWrapper),                    "label":routesLabels.admin,"resolve":{ ...commonRouteUrls.register_user_preferences_tab,                               "securized":securize()},"param":"true","resolveController":true}).
+  whenAsync('/register/shared-urls',                              { ...mapView(vueViewWrapper),                        "label":routesLabels.sharedUrls, "resolve": { ...commonRouteUrls.shared_urls,}, "param": "true", "resolveController": true }).
   whenAsync('/register/admin',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.admin,"resolve":{ ...commonRouteUrls.register_admin,                                              "securized":securize(['Administrator'])},"param":"true","resolveController":true}).
   whenAsync('/register/notifications',                            { ...mapView(angularViewWrapper),                    "label":routesLabels.registerNotifications,"resolve":{ ...commonRouteUrls.register_notifications,                                      "securized":securize()},"param":"true","resolveController":true}). 
   whenAsync('/register/stats',                                    { ...mapView(angularViewWrapper),                    "label":routesLabels.registerStats,"resolve":{ ...commonRouteUrls.register_stats,                                              "securized":securize()},"param":"true","resolveController":true}). 

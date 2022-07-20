@@ -64,6 +64,7 @@
                             ng-class="{'tabactivated':path.indexOf('reports') > 0}"> Reports</a></li> -->
                     <li ng-if="roles.isAdministrator"><a rel="noopener" translation-url href="/register/admin"
                             class="bg-pink linkDark"><span ng-class="{'color-white':deviceSize!='xs'}"> {{::('registerTopMenuT.admin'|$translate)}} </span></a></li>
+                    <li><a rel="noopener" translation-url href="/register/shared-urls"> {{::('registerTopMenuT.sharedUrls'|$translate)}} </a></li>
                 </ul>
             </div>
 
