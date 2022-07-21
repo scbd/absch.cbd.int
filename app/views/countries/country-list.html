@@ -143,7 +143,7 @@
 				<div id="sortingRecordsPartyStatus" class="dropdown d-inline">
 					<button class="btn btn-default btn-sm dropdown-toggle bg-white" type="button" id="dropdownMenu2"
 						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<span>
+						<span style="color: #212529;">
 							<span ng-if="partyFilter==='All' || !partyFilter">
 								<span class="d-none d-md-inline">{{::('countryListTranslation.partyStatus'|$translate)}}</span>
 								<span class="d-md-none">PS</span>
@@ -190,10 +190,10 @@
 				</div>
 
 				<button ng-if="list.length" id="exportingRecords" type="button"
-					class="btn btn-default btn-sm bg-white" ng-click="export()"
+					class="d-none d-md-inline btn btn-default btn-sm bg-white" ng-click="export()"
 					ng-disabled="readyForExport||loading">
-					<i class="fa fa-download"></i>
-					<span class="d-none d-md-inline">{{::('countryListTranslation.export'|$translate)}}</span>
+					<i class="fa fa-download"></i> 
+					{{::('countryListTranslation.export'|$translate)}}
 				</button>
 			</div>
 			<div class="col-md-7 evenly-spaced center-text d-none d-lg-grid justify-content-between">
