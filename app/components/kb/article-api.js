@@ -1,6 +1,6 @@
 
 import axios from 'axios'
-import { isFunction, isEmpty, cloneDeep } from 'lodash'
+import { isFunction } from 'lodash'
 
 let sitePrefixUrl = 'https://api.cbd.int';
 

@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import Pagination from 'vue-pagination-2';
+import 'vue-pagination-2';
 
 export default {
     name:'kbPagination',
