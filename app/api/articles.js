@@ -1,5 +1,4 @@
 
-import { isFunction, isEmpty, cloneDeep } from 'lodash'
 import ApiBase, { tryCastToApiError } from './api-base';
 
 export default class ArticlesApi extends ApiBase
