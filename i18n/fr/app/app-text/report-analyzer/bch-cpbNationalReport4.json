@@ -7,7 +7,7 @@
   "General_title": "Partie au Protocole de Cartagena sur la prévention des risques biotechnologiques",
   "General_questions0_title": "Votre pays fait-il parti des membres du Protocole de Cartagena sur la biosécurité ?",
   "General_questions1_title": "Si votre pays n'est pas Partie au Protocole de Cartagena sur la prévention des risques biotechnologiques, dispose-t-il d’un processus national en vue de le devenir ?",
-  "General_questions2_title": "Vous pouvez fournir de plus amples renseignements ici même",
+  "General_questions2_title": "Vous pouvez fournir de plus amples renseignements ici même:",
   "Article2": "Article2",
   "Article2_title": "Article 2 – Dispositions générales",
   "Article2_description": "<i>L'article 2 exige que chaque Partie prenne les mesures juridiques, administratives et autres mesures nécessaires et appropriées pour s'acquitter de ses obligations au titre du Protocole</i>",
@@ -470,7 +470,7 @@
   "Article22_questions11_options15_title": "Responsabilité et réparation",
   "Article22_questions12_title": "Votre pays a-t-il développé une stratégie ou un plan d’action pour la création de capacités ?",
   "Article22_questions13_title": "Votre pays a-t-il mis en place un mécanisme national opérationnel de coordination des initiatives de création de capacités en matière de prévention des risques biotechnologiques ?",
-  "Article22_questions14_title": "Vous pouvez fournir de plus amples détails ici sur la mise en oeuvre de l’article 22 dans votre pays, notamment plus de détails sur votre expérience pour accéder aux fonds du FEM.",
+  "Article22_questions14_title": "Vous pouvez fournir de plus amples détails ici sur la mise en oeuvre de l’article 22 dans votre pays, notamment plus de détails sur votre expérience pour accéder aux fonds du FEM.:",
   "Article23": "Article23",
   "Article23_title": "Article 23 – Sensibilisation et participation du public",
   "Article23_questions0_title": "La sensibilisation, l'éducation ou la participation du public à la prévention des risques biotechnologiques sont-elles prises en compte dans la législation ou la politique de votre pays ?",
@@ -620,5 +620,5 @@
   "AdditionalInformation_questions0_title": "Vous pouvez fournir ici de plus amples informations sur les questions relatives à la mise en œuvre du Protocole de Cartagena et du Protocole additionnel à l’échelle nationale, y compris les obstacles et les difficultés rencontrés.",
   "Comments": "Commentaires",
   "Comments_title": "Commentaires sur le modèle de rapport",
-  "Comments_questions0_title": "Vous pouvez fournir ici tout autre renseignement sur les difficultés que vous avez éprouvées à remplir ce rapport."
+  "Comments_questions0_title": "Vous pouvez fournir ici tout autre renseignement sur les difficultés que vous avez éprouvées à remplir ce rapport.:"
 }
