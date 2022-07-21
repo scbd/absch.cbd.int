@@ -1,6 +1,6 @@
 ﻿<div>
     <div class="record-Options-div d-inline-block ms-1 mb-1">
-        <div class="d-md-none">
+        <div class="d-md-none hide-on-print">
             <span ng-if="!hidePdf">
                 <a rel="noopener" translation-url href="{{pdfUrl}}" target="_blank" class="text-decoration-none text-white">
                     <i class="bi bi-file-earmark-pdf"></i>
@@ -8,8 +8,7 @@
             </span>
             &nbsp; | &nbsp;
             <a rel="noopener" href="#" ng-click="print()" class="text-decoration-none text-white">
-                <i class="bi bi-printer-fill" ng-if="!printing"></i>
-              
+                <i class="bi bi-printer-fill" ng-if="!printing"></i>              
             </a>
         </div>
         <div class="float-end d-none d-md-block">
@@ -19,7 +18,7 @@
                     <i class="bi bi-box-arrow-up-right"></i> <span ng-bind="internalDocumentInfo|uniqueID"></span> 
                 </a>
             </span>            
-            <span ng-if="!hidePdf">
+            <span class="hide-on-print"ng-if="!hidePdf">
                 &nbsp; | &nbsp; 
                 <a rel="noopener" translation-url class="text-decoration-none text-white" rel="noopener" href="{{pdfUrl}}" target="_blank" >                    
                     <i class="bi bi-file-earmark-pdf"></i>
@@ -28,7 +27,7 @@
                 &nbsp;
                 <span class="text-light"> | </span> &nbsp;
             </span>
-            <a class="text-decoration-none text-white" rel="noopener" href="#" ng-click="print()">
+            <a class="text-decoration-none text-white hide-on-print" rel="noopener" href="#" ng-click="print()">
                 <i class="bi bi-arrow-repeat pe-1" ng-if="printing"></i>
                 <i class="bi bi-printer-fill" aria-hidden="true" ng-if="!printing"></i>
                 <span class="d-none d-sm-inline-block">{{::('recordOptionsT.print'|$translate)}}</span>
@@ -41,19 +40,7 @@
                     ng-click="setCurrentLocale(loc)" data-bs-toggle="tooltip" data-title="{{termLocales[loc]|term}}">
                     <span ng-bind="loc | uppercase"></span>
                 </button>
-            </div>  
-            
-            
-
-            <!-- <div class="btn-group btn-group-sm" role="group" ng-if="internalDocument.header.languages.length>1">
-                <button id="btnGroupDrop1" type="button" class="btn btn-primary btn-sm dropdown-toggle lang-tooltip btn-lang"
-                ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"
-                ng-click="setCurrentLocale(loc)" data-bs-toggle="tooltip" data-title="{{termLocales[loc]|term}}"
-                aria-expanded="false">
-                <span ng-bind="loc | uppercase"></span>
-                </button>
-              
-            </div> -->
+            </div>              
 
         </div>
 
