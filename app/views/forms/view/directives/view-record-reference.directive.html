@@ -3,7 +3,7 @@
     <div style="padding:10px" ng-show="loading||errorCode==404||error">
         <span ng-if="loading"><i class="fa fa-spin fa-spinner" aria-hidden="true"></i> {{::('viewRecordReferenceT.loadingRecord'|$translate)}}</span>
         <span ng-if="errorCode==404" class="alert alert-warning" role="alert">
-            <strong ng-bind="::('viewRecordReferenceT.invalidReference'|$translate)"></strong> 
+            <strong ng-bind-html="::('viewRecordReferenceT.invalidReference'|$translate)"></strong> 
             (<span ng-bind="model.identifier||model"></span>)
         </span>
         <span ng-if="error" class="alert alert-warning" role="alert">{{::('viewRecordReferenceT.errorLoading'|$translate)}} (<span ng-bind="model"></span>)</span>
