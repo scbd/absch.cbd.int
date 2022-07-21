@@ -1,6 +1,6 @@
 import app from '~/app';
 import template from 'text!./xuser-notifications-icon.html';
-import 'css!components/scbd-branding/directives/header/xuser-notifications-icon';
+import 'css!~/components/scbd-branding/directives/header/xuser-notifications-icon';
 import '~/components/scbd-angularjs-services/main';
 import './xuser-notifications';
     app.directive('xuserNotificationsIcon', function() {

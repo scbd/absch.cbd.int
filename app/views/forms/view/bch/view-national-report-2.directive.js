@@ -1,7 +1,7 @@
 import app from '~/app';
 import template from "text!./view-national-report-2.directive.html";
 import _ from 'lodash';
-import {cpbNationalReport2} from 'app-data/bch/report-analyzer/cpbNationalReport2';
+import {cpbNationalReport2} from '~/app-data/bch/report-analyzer/cpbNationalReport2';
 import '~/views/forms/view/bch/view-national-report.directive';
 import '~/views/directives/record-options';
 

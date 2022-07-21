@@ -82,7 +82,7 @@ export default function bootApp(window, require, defineX) {
 
     require.config({
         waitSeconds: 120,
-        baseUrl : '/app/',
+        baseUrl : '/',
         'paths': {
             'css'                       : cdnHost + 'require-css@0.1.8/css.min',
             'text'                      : cdnHost + 'requirejs-text@2.0.15/text',
