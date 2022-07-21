@@ -2,7 +2,7 @@
 import template from 'text!./km-rich-textbox.html';
 import angular from 'angular';
 import 'angular-trix';
-import 'css!components/scbd-angularjs-controls/form-control-directives/km-control.css';
+import 'css!~/components/scbd-angularjs-controls/form-control-directives/km-control.css';
 
 	app.directive('kmRichTextbox', ['$filter', '$timeout', function($filter, $timeout) {
 			return {

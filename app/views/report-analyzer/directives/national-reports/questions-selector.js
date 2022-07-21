@@ -74,7 +74,16 @@ import '~/views/report-analyzer/reportAnalyzerService';
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    let res = await  import(reportTypeDetails.questionsUrl)
+
+                    console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 86"); alert("ROLLUP UPGRADE TO REVIEW line 86");  throw new Error("ROLLUP UPGRADE TO REVIEW line 86")
+
+                    const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
+
+                    const clearingHouse = reportTypeDetails.questionsUrl.replace(pathPattern, "$1");
+                    const reportVersion    = reportTypeDetails.questionsUrl.replace(pathPattern, "$2");
+                                            
+// BEFORE ROLLUP    let res = await import(reportTypeDetails.questionsUrl)
+                    let res = await  import(`../../../../app-data/${clearingHouse}/report-analyzer/${reportVersion}.js`)
                     if(res) {
                                            
                             $scope.sections = reportAnalyzerService.flattenQuestions(res[reportType]);

@@ -5,9 +5,9 @@ import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
 import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
-import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
+import  { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
-import {getLimitedTerms} from 'services/common';
+import {getLimitedTerms} from '~/services/common';
 import '~/services/main';
 import '~/views/directives/export-directive';
 import '~/components/scbd-angularjs-controls/main';
@@ -842,7 +842,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
                     async function getFocalPointTypes(){
                         const chFolder = realm.is('BCH') ? 'bch' : 'abs';
-                        const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
+                        const { categories } = await import(`../../app-data/${chFolder}/focal-point-category.js`);
 
                         return categories.map(category=>{
                             return { 

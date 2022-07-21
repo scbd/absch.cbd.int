@@ -1,8 +1,8 @@
 import app from '~/app';
 import _ from 'lodash';
 import '~/services/main';
-import 'css!/app/css/print-friendly.css';
-import 'css!/app/css/pdf-permit.css';
+import 'css!~/css/print-friendly.css';
+//  import 'css!~/css/pdf-permit.css';  ROLLUP UPGRADE - THIS FILE DO NOT EXIST ANYMORE
 
 import printHeaderTemplate from 'text!../forms/view/print-header.html';
 import printFooterTemplate from 'text!../forms/view/print-footer.html';

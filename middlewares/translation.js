@@ -59,15 +59,15 @@ async function renderLanguageFile(req, res, next) {
     if(!dirExists || !dirExists.isDirectory())
         preferredLang = 'en';
 
-    let hashMapping   = require(`${global.app.rootPath}/dist/${preferredLang}/app/hash-file-mapping.js.json`);
-    
     if(req.params.lang)
       urlPreferredLang = req.params.lang;
    
     if(!urlPreferredLang && preferredLang)//&& preferredLang!= 'en'
         return res.redirect('/'+preferredLang + (req.originalUrl||''));
 
-    req.url = `${global.app.rootPath}/dist/${preferredLang}/app/templates/${process.env.CLEARINGHOUSE}/${process.env.CLEARINGHOUSE}.ejs`;
+    req.url = `${global.app.rootPath}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`;
+
+    const locale =  urlPreferredLang || preferredLang || 'en';
  
     let langFilepath =  req.url;//await getLanguageFile(req, preferredLang);
     let options = { 
@@ -79,7 +79,6 @@ async function renderLanguageFile(req, res, next) {
                     cdnUrl             : global.app.cdnUrl,
                     angularBundle      : bundleUrls.angularBundle,
                     initialCss         : bundleUrls.initialCss,
-                    bootFile           : hashMapping['boot.js']
                 };
     if(langFilepath){
         return res.render(langFilepath, options);

@@ -1,4 +1,4 @@
-import app from  'app';
+import app from  '~/app';
 import template from 'text!./edit-header.html';
 import 'angular-joyride';
 import joyRideText from '~/app-text/views/forms/edit/submit-intro-joyride-tour.json';

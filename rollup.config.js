@@ -12,7 +12,7 @@ import { terser }               from 'rollup-plugin-terser';
 import bootWebApp, { cdnUrl }   from './app/boot.js';
 
 const isWatchOn = process.argv.includes('--watch');
-const outputDir = 'dist';
+const outputDir = 'dist/en';
 
 let externals = [
   'require', 
@@ -51,6 +51,7 @@ function bundle(relativePath, baseDir='app') {
         { find: /^text!(.*)/, replacement:`$1` },
         { find: /^cdn!(.*)/,  replacement:`${cdnUrl}$1` },
       ]}),
+      stripBom(),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
       injectCssToDom(),
@@ -181,3 +182,18 @@ function injectCssToDom(options = {}) {
   }
 }
  
+
+function stripBom(options = {}) {
+
+  return {
+    name: 'stripBom',
+
+    transform(code, id) {
+
+      if (typeof (code) == "string" && code.charCodeAt(0) === 0xFEFF)
+        code = code.slice(1);
+
+      return code;
+    }
+  };
+}

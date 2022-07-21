@@ -152,7 +152,7 @@
         // In IE boot.js is executing before this script was executed so move it before boot.js       
         
         window.scbdApp = {
-            template         : 'templates/bch/bch',
+            template         : 'bch',
             host             : '<%=clearingHouseHost%>',
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',
@@ -164,7 +164,7 @@
     <script src="<%=cdnUrl%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
     <script src="<%=cdnUrl%>combine/<%=angularBundle%>"></script>
     <script>
-        require(["app/<%=bootFile%>"], function(boot){
+        require(["app/boot.js"], function(boot){
             var bootFn = boot.default || boot;
             bootFn(window, require, define);
         });

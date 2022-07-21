@@ -182,7 +182,10 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                 
               async  function loadJsonFile(path){
 
-                    const res = await import(path)
+                    console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 187"); alert("ROLLUP UPGRADE TO REVIEW line 187"); throw new Error("ROLLUP UPGRADE TO REVIEW line 187")
+
+                    //const res = await import(path)
+
                     if(res) 
                        return res;
                 }
@@ -195,7 +198,14 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
 
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
-                    let res = await import($scope.activeReport.questionsUrl)
+
+                    console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 207"); alert("ROLLUP UPGRADE TO REVIEW line 207"); throw new Error("ROLLUP UPGRADE TO REVIEW line 207")
+
+                    const clearingHouse = $scope.activeReport.questionsUrl.replace(pathPattern, "$1");
+                    const reportVersion = $scope.activeReport.questionsUrl.replace(pathPattern, "$2");
+
+// BEFORE ROLLUP    let res = await import($scope.activeReport.questionsUrl)
+                    let res = await import(`../../../../app-data/${clearingHouse}/report-analyzer/${reportVersion}.js`)
                     if (res) {
                         res = reportAnalyzerService.flattenQuestions(res[reportType]);
 
