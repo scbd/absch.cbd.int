@@ -245,7 +245,10 @@ import numbers from '~/app-text/numbers.json';
 			return $scope.sanitizeDocument(document);
 		};
         
-        $scope.setTab = function(index){
+        $scope.setTab = function(index, isScroll){
+            if(isScroll){
+                window.scrollTo(0, 0);
+            }
             $("ul.page-tabs").find("li").removeClass("active");
             $timeout(function(){
                 $('ul.page-tabs a[href="#tab' + index + '"]').tab('show');              

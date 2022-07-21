@@ -1,0 +1,17 @@
+{
+    "loadingRecord": "loading record details...",
+    "invalidReference": "The reference is <i>invalid</i>, the item may have been unpublished.",
+    "errorLoading": "Error loading details for",
+    "cna": "Competent National Authority",
+    "nfp": "National Focal Point",
+    "person": "Person",
+    "organization": "Organization",
+    "relatedOrganization": "Related Organization",
+    "deleted": "This linked record has been deleted.",
+    "phone": "Phone:",
+    "fax": "Fax:",
+    "email": "Email:",
+    "website": "Website:",
+    "pendingApproval": "THE RECORD IS PENDING APPROVAL",
+    "viewRequest": "View Request"
+}
