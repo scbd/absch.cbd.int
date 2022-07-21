@@ -30,7 +30,7 @@
     "@rollup/plugin-node-resolve": "11.1.0",
     "@vue/compiler-sfc": "3.0.5",
     "glob": "^7.1.6",
-    "rollup": "2.33.1",
+    "rollup": "2.77.0",
     "rollup-plugin-amd": "^4.0.0",
     "rollup-plugin-dynamic-import-variables": "^1.1.0",
     "rollup-plugin-string": "^3.0.0",

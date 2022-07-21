@@ -1,5 +1,6 @@
 // rollup.config.js (building more than one bundle)
 import path                     from 'path'
+import fs                       from 'fs'
 import { getBabelOutputPlugin } from '@rollup/plugin-babel';
 import alias                    from '@rollup/plugin-alias';
 import nodeResolve              from '@rollup/plugin-node-resolve'
@@ -12,7 +13,7 @@ import { terser }               from 'rollup-plugin-terser';
 import bootWebApp, { cdnUrl }   from './app/boot.js';
 
 const isWatchOn = process.argv.includes('--watch');
-const outputDir = 'dist/en';
+const outputDir = 'dist';
 
 let externals = [
   'require', 
@@ -25,12 +26,13 @@ export default async function(){
   
   externals = [...externals, ...await loadExternals()];
 
-  return [
-    bundle('boot.js') 
-  ];
+  const locales = isWatchOn ? ['en']
+                            : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
+  
+  return locales.map(locale => bundle('boot.js', locale));
 }
 
-function bundle(relativePath, baseDir='app') {
+function bundle(relativePath, locale, baseDir='app') {
 
   const ext = path.extname(relativePath);
 
@@ -39,19 +41,23 @@ function bundle(relativePath, baseDir='app') {
     output: [{
       format   : 'amd',
       sourcemap: true,
-      dir : path.join(outputDir, path.dirname(relativePath)),
+      dir : path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(relativePath)),
       name : relativePath.replace(/[^a-z0-9]/ig, "_"),
       exports: 'named'
     }],
     external: externals,
     plugins : [
       alias({ entries : [
-        { find: /^~\/(.*)/,   replacement:`${process.cwd()}/app/$1` },
+        { find: /^~\/(.*)/,   replacement:`${process.cwd()}/${baseDir}/$1` },
         { find: /^json!(.*)/, replacement:`$1` },
         { find: /^text!(.*)/, replacement:`$1` },
         { find: /^cdn!(.*)/,  replacement:`${cdnUrl}$1` },
       ]}),
       stripBom(),
+      resolveLocalized({ 
+        baseDir:      `${process.cwd()}/${baseDir}`,
+        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`
+      }),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
       injectCssToDom(),
@@ -164,11 +170,6 @@ function injectCssToDom(options = {}) {
     }
   }
 
-  function isUsePlugin(url) {
-    return /^[a-z]+!/i.test(url);
-  }
-
-
   function generateCode(css) {
     var code = `
     ((document)=>{
@@ -190,10 +191,43 @@ function stripBom(options = {}) {
 
     transform(code, id) {
 
-      if (typeof (code) == "string" && code.charCodeAt(0) === 0xFEFF)
-        code = code.slice(1);
+      if (typeof (code) == "string")
+        code = code.replace(/^\uFEFF/gm, "").replace(/^\u00BB\u00BF/gm,"");
 
-      return code;
+      return { code, map: this.getCombinedSourcemap() };
     }
+  };
+}
+
+
+function resolveLocalized(options = {}) {
+
+  const { 
+    baseDir,
+    localizedDir 
+  } = options;
+
+  return {
+    name: 'loadLocalized',
+
+    resolveId(importeeId, importer) {
+
+      if(importeeId.indexOf(baseDir)==0) {
+
+        const relativeFilePath = path.relative(baseDir, importeeId);
+        const originalFilePath  = importeeId;
+        const localizedFilePath = path.join(localizedDir, relativeFilePath);
+
+        const exists = fs.existsSync(localizedFilePath);
+        const isFile = exists && fs.statSync(localizedFilePath).isFile();
+
+        if(isFile) {
+          return this.resolve(localizedFilePath, importer, { skipSelf: true });
+        }
+      }
+
+      return null;
+    }
+    
   };
 }
