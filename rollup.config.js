@@ -218,16 +218,28 @@ function resolveLocalized(options = {}) {
         const originalFilePath  = importeeId;
         const localizedFilePath = path.join(localizedDir, relativeFilePath);
 
-        const exists = fs.existsSync(localizedFilePath);
-        const isFile = exists && fs.statSync(localizedFilePath).isFile();
-
-        if(isFile) {
+        const shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
+        
+        if(shouldUse) {
           return this.resolve(localizedFilePath, importer, { skipSelf: true });
         }
       }
 
       return null;
     }
-    
   };
+
+  function isUseLocalizedVersion(oFilePath, lFilePath) {
+
+    if(!fs.existsSync(oFilePath)) return false;
+    if(!fs.existsSync(lFilePath)) return false;
+
+    const oStats = fs.statSync(oFilePath);
+    const lStats = fs.statSync(lFilePath);
+
+    if(!oStats.isFile()) return false;
+    if(!lStats.isFile()) return false;
+
+    return lStats.mtimeMs >= oStats.mtimeMs;
+  }
 }
