@@ -87,7 +87,7 @@
 													<div class="km-control-group" required name="geographicScope" caption="">
 															<label name="countryRegions" class="control-label" for="geographicScope">{{::('editCBIT.geographicalGroup'|$translate)}}</label>
 														<div km-select multiple required name="regions"
-																ng-model="countryRegions.regions" placeholder="{{::('editCBIT.selecOptions'|$translate)}}"
+																ng-model="countryRegions.regions" placeholder="{{::('editCBIT.selectOptions'|$translate)}}"
 																items="options.regions()"></div>
 													</div>
 												</div>
@@ -99,7 +99,7 @@
 														<label name="countryRegions" ng-required="isNational()" class="control-label" for="countryRegions">
 															{{::('editCBIT.countries'|$translate)}}
 														</label>
-														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" items="options.countries()"></div>
+														<div km-select multiple required filter-type="startsWith" ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selectOptions'|$translate)}}" items="options.countries()"></div>
 													</div>
 												</div>
 											</div>
@@ -112,7 +112,7 @@
 											<label name="countryRegions" required class="control-label" for="countryRegions">
 												{{::('editCBIT.countries'|$translate)}}
 											</label>
-											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" items="options.countries()"></div>
+											<div km-select multiple required  ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selectOptions'|$translate)}}" items="options.countries()"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -120,7 +120,7 @@
 											<label name="geographicScope.customValue" required="isSubnational()" class="control-label" for="geographicScope.customValue">
 												{{::('editCBIT.nameSubJurisdiction'|$translate)}}
 											</label>
-											<div km-textbox-ml required="isSubnational()"  ng-model="document.geographicScope.customValue" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" locales="document.header.languages"></div>
+											<div km-textbox-ml required="isSubnational()"  ng-model="document.geographicScope.customValue" placeholder="{{::('editCBIT.selectOptions'|$translate)}}" locales="document.header.languages"></div>
 										</div>
 									</div>
 								</div>
@@ -130,7 +130,7 @@
 											<label name="countryRegions" required class="control-label" for="countryRegions">
 												{{::('editCBIT.countries'|$translate)}}
 											</label>
-											<div km-select multiple required ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selecOptions'|$translate)}}" items="options.countries()"></div>
+											<div km-select multiple required ng-model="countryRegions.countries" placeholder="{{::('editCBIT.selectOptions'|$translate)}}" items="options.countries()"></div>
 										</div>
 									</div>
 									<div class="col-md-12">
@@ -146,7 +146,7 @@
 									<div class="col-md-12">
 										<div class="km-control-group" required name="status" caption="{{::('editCBIT.status'|$translate)}}">
 											<div km-select name="status" required ng-model="document.status" id="documentStatus"
-													placeholder="{{::('editCBIT.selecOption'|$translate)}}" items="options.status()"  show-description="true"></div>
+													placeholder="{{::('editCBIT.selectOption'|$translate)}}" items="options.status()"  show-description="true"></div>
 										</div>
 									</div>
 								</div>

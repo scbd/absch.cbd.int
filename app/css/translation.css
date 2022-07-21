@@ -61,7 +61,31 @@ body[lang=ar] .terms-radio label > input[type=radio]{
     margin-left: 5px!important;
     margin-right: unset;
 }
+body[lang=ar] #dropdownNotification .dropdown-menu[role="menu"] {
+    left: 0;
+    width: 48%;
+    right: initial !important;
+}
+body[lang=ar] #dropdownNotification .xuser-notification-bell {
+    margin-left: -15px;
+}
+body[lang=ar] #dropdownNotification .xuser-notification-count {
+   margin-left: -5px
+}
+@media(min-width:768px) {
 
+    body[lang=ar] #wrapper {
+        padding-left: 25%;
+        padding-right: 0;
+    }
+    body[lang=ar] #wrapper.toggled {
+        padding-left: 0;
+    }
+    body[lang=ar] #wrapper #sidebar-wrapper {
+        left: 0;
+        right: initial !important;
+    }
+}
 #export-modal .radio label > input[type=radio],
 body[lang=ar] div[edit-measure-matrix] label > input[type=radio],
 body[lang=ar] div[edit-measure-matrix] label > input[type=checkbox]{
@@ -72,4 +96,19 @@ body[lang=ar] div[edit-measure-matrix] label > input[type=checkbox]{
 body[lang=ar] #search-new .dropdown-menu::after {
     left: unset;
     right: 5%;
+}
+body[lang=ar] .workflow-arrows-buttons .steps {
+    transform: rotate(180deg);
+}
+body[lang=ar] .workflow-arrows-buttons .steps li a span {
+    transform: rotate(180deg);
+    display: inline-block;
+}
+
+body[lang=ar] .workflow-arrows-buttons .btn.btn-light{
+    transform: rotate(180deg);
+}
+body[lang=ar]  #CBD-Branding .locale-menu {
+    right: initial;
+    left: 0;
 }

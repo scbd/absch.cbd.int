@@ -4,12 +4,7 @@
         <span ng-bind="currentLanguage|uppercase"></span>
       </span>
     </a>
-    <style>
-      .arabic-locale-menu{
-        right:initial;
-      }
-    </style>
-    <ul id="dropdown-menu" class="dropdown-menu locale-menu" role="menu" ng-class="{'arabic-locale-menu':currentLanguage=='ar'}">
+    <ul id="dropdown-menu" class="dropdown-menu locale-menu" role="menu">
       <li class="disabled fw-bold ms-2 fs-6" style="color:#BBB;">LANGUAGES</li>
       <hr style="padding:0;margin:0;">
       <li class="ps-3"><a rel="noopener" translation-url class="color-black" ng-class="{'bold':currentLanguage=='ar'}" ng-click="changeLanguage('ar')"  ng-href="#">العربية</a></li>      <!--ng-click="changeLanguage('ar')"-->

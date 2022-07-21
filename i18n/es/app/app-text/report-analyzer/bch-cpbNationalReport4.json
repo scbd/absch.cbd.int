@@ -7,7 +7,7 @@
   "General_title": "Parte en el Protocolo de Cartagena sobre Seguridad de la Biotecnología",
   "General_questions0_title": "¿Es su país Parte en el Protocolo de Cartagena sobre la Seguridad de la Biotecnología?",
   "General_questions1_title": "Si su país no es Parte en el Protocolo de Cartagena sobre Seguridad de la Biotecnología, ¿se está implementando algún proceso para convertirse en Parte?",
-  "General_questions2_title": "Puede proporcionar más información a continuación",
+  "General_questions2_title": "Puede proporcionar más información a continuación:",
   "Article2": "Artículo 2",
   "Article2_title": "Artículo 2 – Disposiciones generales",
   "Article2_description": "<i>El artículo 2 establece que cada Parte tomará las medidas legislativas, administrativas y de otro tipo necesarias y convenientes para cumplir sus obligaciones dimanantes del Protocolo</i>",
@@ -378,7 +378,7 @@
   "Article20_questions0_questions16_options1_title": "Información disponible pero no en el CIISB",
   "Article20_questions0_questions16_options2_title": "Información disponible pero solo parcialmente en el CIISB",
   "Article20_questions0_questions16_options3_title": "Información no disponible",
-  "Article20_questions1_title": "Si en algún ítem de la pregunta 112 respondió que la información se encuentra disponible <i>pero no en el CIISB o solo parcialmente disponible en el CIISB</i>, proporcione una breve explicación",
+  "Article20_questions1_title": "Si en algún ítem de la pregunta 112 respondió que la información se encuentra disponible <i>pero no en el CIISB o solo parcialmente disponible en el CIISB</i>, proporcione una breve explicación:",
   "Article20_questions2_title": "¿Ha establecido su país un mecanismo para fortalecer la capacidad del centro focal nacional para el CIISB a fin de que desempeñe sus funciones administrativas?",
   "Article20_questions2_options1_title": "Sí, en cierta medida",
   "Article20_questions3_title": "¿Ha establecido su país un mecanismo para la coordinación entre el centro focal nacional para el CIISB, el centro focal para el Protocolo de Cartagena y la autoridad nacional competente a fin de que la información esté a disposición del CIISB?",
@@ -470,7 +470,7 @@
   "Article22_questions11_options15_title": "Responsabilidad y compensación",
   "Article22_questions12_title": "¿Ha elaborado su país una estrategia o un plan de acción para la creación de capacidad?",
   "Article22_questions13_title": "¿Cuenta su país con un mecanismo funcional nacional para coordinar iniciativas de creación de capacidad en materia de seguridad de la biotecnología?",
-  "Article22_questions14_title": "En este espacio puede proporcionar más información sobre la aplicación del artículo 22 en su país, incluida una pormenorización de su experiencia en la obtención de fondos del FMAM",
+  "Article22_questions14_title": "En este espacio puede proporcionar más información sobre la aplicación del artículo 22 en su país, incluida una pormenorización de su experiencia en la obtención de fondos del FMAM:",
   "Article23": "Artículo 23",
   "Article23_title": "Artículo 23 – Concienciación y participación del público",
   "Article23_questions0_title": "¿Está contemplada la concienciación, educación o participación del público en la legislación o la política de su país?",
@@ -620,5 +620,5 @@
   "AdditionalInformation_questions0_title": "Utilice este campo para proporcionar cualquier otra información sobre cuestiones relacionadas con la aplicación nacional del Protocolo de Cartagena y del Protocolo Suplementario, incluidos obstáculos o impedimentos que se hayan enfrentado.",
   "Comments": "Observaciones",
   "Comments_title": "Observaciones sobre el formato de presentación de informes",
-  "Comments_questions0_title": "Utilice este campo para proporcionar cualquier otra información sobre dificultades que haya enfrentado para completar este informe."
+  "Comments_questions0_title": "Utilice este campo para proporcionar cualquier otra información sobre dificultades que haya enfrentado para completar este informe.:"
 }

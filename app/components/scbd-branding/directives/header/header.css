@@ -67,7 +67,7 @@
 
  #CBD-Branding .navlist {
   margin: 0;
-  padding: 0 0 0 20px;
+  padding:0 20px;
   display: inline;
   line-height: 2rem;
 }

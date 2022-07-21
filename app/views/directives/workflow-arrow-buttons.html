@@ -1,4 +1,4 @@
-<div class="row mb-3">
+<div class="workflow-arrows-buttons row mb-3">
     <style>
         .margin-bottom-20 {
             margin-bottom: 20px;
@@ -76,7 +76,9 @@
         .steps li:first-child a {
             padding-left: 24px;
         }
-
+        .steps li:last-child {
+            margin-right: 2rem;
+        }
         .steps li:a {
             background: #ccc;
         }
@@ -257,37 +259,36 @@
     </div>
 
     <script type="text/ng-template" trados-translation="true" id="template/workflow-arrows">
-        <!-- <div class="hidden-xs"> -->
 
           
 
             <!-- one page form -->
 
-                    <div class="row d-none d-lg-flex float-start">
-                           <div class="col-1 p-0">
-                            <button type="button" class="btn btn-light" ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
-                                <i class="bi bi-skip-backward-fill"></i>
-                            </button>
-                        </div>
-                 
-                 <div class="col-10 p-0">
-                    <ul class="steps"style="width: 32rem;" >
+            <div class="d-none d-lg-flex float-start">
+                <div class=" p-0">
+                    <button type="button" class="btn btn-light" ng-click="previousTab(workflowScope.tab)" ng-disabled="disablePreviousBtn">
+                        <i class="bi bi-skip-backward-fill"></i>
+                    </button>
+                </div>
+                
+                 <div class="p-0">
+                    <ul class="steps">
                         <li ng-class="{'arrowSelected': workflowScope.tab=='intro'}">
-                            <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.introduction'|$translate)}}</a>
+                            <a id="workflowIntro" rel="noopener" href="#" ng-click="workflowScope.switchTab('intro')" ng-disabled="workflowScope.loading || workflowScope.security==undefined"><span ng-bind="::('workflowButtonsT.introduction'|$translate)"></span></a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='edit'}">
-                            <a id="workflowSubFor" rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.submissionForm'|$translate)}}</a>
+                            <a id="workflowSubFor" rel="noopener" href="#" ng-click="workflowScope.switchTab('edit')" ng-disabled="workflowScope.loading || workflowScope.security==undefined"><span ng-bind="::('workflowButtonsT.submissionForm'|$translate)"></span></a>
                         </li>
                         <li ng-class="{'arrowSelected': workflowScope.tab=='review'}">
-                            <a id="workflowReview" rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.review'|$translate)}}</a>
+                            <a id="workflowReview" rel="noopener" href="#" ng-click="workflowScope.switchTab('review')" ng-disabled="workflowScope.loading || workflowScope.security==undefined"><span ng-bind="::('workflowButtonsT.review'|$translate)"></span></a>
                         </li>
                         <li class="publish" ng-class="{'publish arrowSelected': workflowScope.tab=='publish'}">
-                            <a id="workflowPublish" rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined">{{::('workflowButtonsT.publish'|$translate)}}</a>
+                            <a id="workflowPublish" rel="noopener" href="#" ng-click="workflowScope.switchTab('publish')" ng-disabled="workflowScope.loading || workflowScope.security==undefined"><span ng-bind="::('workflowButtonsT.publish'|$translate)"></span></a>
                         </li>
                     </ul>
                 </div>
 
-                <div class="col-1 ps-1">
+                <div class=" ps-1">
                     <button type="button" class="btn btn-light" ng-click="goNextTab(workflowScope.tab)" ng-disabled="disableNextBtn">
                         <i class="bi bi-skip-forward-fill"></i>
                     </button>
@@ -366,8 +367,6 @@
                     id="close_button" ng-if="!isDialog">
                     <i class="bi bi-x-circle-fill"></i></a>
                 </div>
-
-            </div>
     </script>
 
 
@@ -396,9 +395,8 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header bg-red color-white">
-                    <button type="button" class="close" ng-click="closeAddInfoDialog(false)"
-                        aria-hidden="true">×</button>
                     <h2>{{::('workflowButtonsT.publishingRequest'|$translate)}}</h2>
+                    <button type="button" class="close" ng-click="closeAddInfoDialog(false)" aria-hidden="true">×</button>
                 </div>
                 <div class="modal-body">
                     <p>{{::('workflowButtonsT.wouldYouLike'|$translate)}}</p>

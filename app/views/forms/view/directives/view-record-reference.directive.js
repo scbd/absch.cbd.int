@@ -2,8 +2,9 @@ import app from 'app';
 import _ from 'lodash';
 import template from "text!./view-record-reference.directive.html";
 import 'components/scbd-angularjs-services/main';
+import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 
-app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage, $timeout) {
+app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', function (storage, $timeout, translationService) {
 	return {
 		restrict: "EA",
 		template: template ,
@@ -19,6 +20,7 @@ app.directive("viewRecordReference", ["IStorage", '$timeout', function (storage,
 			onDocumentLoadFn: '&onDocumentLoad'
 		},
 		link:function($scope, $element, $attr){
+			translationService.set('viewRecordReferenceT', viewRecordReferenceT);
 
 			$scope.self = $scope;
 			$scope.hideSchema = $attr.hideSchema=='true'
