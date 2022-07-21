@@ -190,10 +190,10 @@
 				</div>
 
 				<button ng-if="list.length" id="exportingRecords" type="button"
-					class="d-none d-md-inline btn btn-default btn-sm bg-white" ng-click="export()"
+					class="btn btn-default btn-sm bg-white" ng-click="export()"
 					ng-disabled="readyForExport||loading">
-					<i class="fa fa-download"></i> 
-					{{::('countryListTranslation.export'|$translate)}}
+					<i class="fa fa-download"></i>
+					<span class="d-none d-md-inline"  style="color: #212529;">{{::('countryListTranslation.export'|$translate)}}</span>
 				</button>
 			</div>
 			<div class="col-md-7 evenly-spaced center-text d-none d-lg-grid justify-content-between">
