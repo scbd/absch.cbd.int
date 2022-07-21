@@ -68,7 +68,7 @@
 		<div ng-if="document.modifiedOrganisms || document.scopes || document.documents || document.documentsSummary">
 			<legend>{{::('viewRiskAssesmentT.riskAssessmentDetails'|$translate)}}</legend>
 			<div ng-if="document.modifiedOrganisms">
-				<label>(s){{::('viewRiskAssesmentT.modifiedOrganisms'|$translate)}}</label>
+				<label>{{::('viewRiskAssesmentT.modifiedOrganisms'|$translate)}}</label>
 				<div class="km-value" compare-val>
 					<ul class="list">
 						<li ng-repeat="item in document.modifiedOrganisms" >						

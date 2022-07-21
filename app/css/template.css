@@ -312,6 +312,7 @@ ul.km-value {
     text-overflow: ellipsis;
     white-space: nowrap !important;
     overflow: hidden;
+    float: left;
     margin-top: 2px;
     margin-left: -5px;
 }
@@ -3197,10 +3198,6 @@ div legend {
 }
 .km-select-item .bi-check{
     margin-top: -1.7rem; 
-    left: -0.3rem;
-}
-.editForm .country-list .km-select-item .bi-check, span[km-form-languages] .km-select-item .bi-check{
-    margin-top: -0.2rem; 
     left: -0.3rem;
 }
 .jr_container .jr_button.disabled {
