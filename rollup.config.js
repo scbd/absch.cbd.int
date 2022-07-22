@@ -7,6 +7,7 @@ import json                     from '@rollup/plugin-json';
 import commonjs                 from '@rollup/plugin-commonjs';
 import dynamicImportVariables   from 'rollup-plugin-dynamic-import-variables';
 import vue                      from 'rollup-plugin-vue'
+import copy                     from 'rollup-plugin-copy'
 import { string }               from "rollup-plugin-string";
 import { terser }               from 'rollup-plugin-terser';
 import bootWebApp, { cdnUrl }   from './app/boot.js';
@@ -28,23 +29,24 @@ export default async function(){
   
   externals = [...externals, ...await loadExternals()];
 
-  const locales = isWatchOn ? ['en']
+  const locales = isWatchOn ? ['en', 'fr']
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
   return locales.map(locale => bundle('boot.js', locale));
 }
 
-function bundle(relativePath, locale, baseDir='app') {
+function bundle(entryPoint, locale, baseDir='app') {
 
-  const ext = path.extname(relativePath);
+  const entryPointPath = path.join(baseDir||'', entryPoint);
+  const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
 
   return {
-    input : path.join(baseDir||'', relativePath),
+    input : entryPointPath,
     output: [{
       format   : 'amd',
       sourcemap: true,
-      dir : path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(relativePath)),
-      name : relativePath.replace(/[^a-z0-9]/ig, "_"),
+      dir : targetDir,
+      name : entryPoint.replace(/[^a-z0-9]/ig, "_"),
       exports: 'named'
     }],
     external: externals,
@@ -59,6 +61,13 @@ function bundle(relativePath, locale, baseDir='app') {
       resolveLocalized({ 
         baseDir:      `${process.cwd()}/${baseDir}`,
         localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`
+      }),
+      copy({
+        verbose: true,
+        targets: [
+          { src: `${baseDir}/templates/absch/index.ejs`, dest: path.join(targetDir, 'templates'), rename: "absch.ejs" },
+          { src: `${baseDir}/templates/bch/index.ejs`,   dest: path.join(targetDir, 'templates'), rename: "bch.ejs"   }
+        ]
       }),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
