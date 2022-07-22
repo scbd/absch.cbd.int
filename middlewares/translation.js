@@ -78,7 +78,7 @@ async function renderLanguageFile(req, res, next) {
                     initialCss         : bundleUrls.initialCss,
                 };
 
-    return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}.ejs`, options);
+    return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);
  }
  
  function getPreferredLanguage(req){

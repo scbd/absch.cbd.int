@@ -54,6 +54,8 @@ app.use('/es',                                       express.static(`${__dirname
 app.use('/fr',                                       express.static(`${__dirname}/dist/fr`, { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/ru',                                       express.static(`${__dirname}/dist/ru`, { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/zh',                                       express.static(`${__dirname}/dist/zh`, { setHeaders: cacheControl.setCustomCacheControl }));
+
+// TMP
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/app',         { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));
