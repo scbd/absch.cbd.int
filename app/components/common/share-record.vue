@@ -268,10 +268,10 @@ export default {
           return;
       }
 
-      if (this.userToken && this.sharedData.storageType == "chm-search-result") {
+      if (this.sharedData.storageType == "chm-search-result") {
         this.sharedData[type].searchQuery = query;
       }
-      if (this.userToken && this.sharedData.storageType == "chm-country-profile") {
+      if (this.sharedData.storageType == "chm-country-profile") {
         this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
       }
     },
