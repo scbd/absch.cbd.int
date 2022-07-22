@@ -2,8 +2,10 @@ FROM node:14.0-alpine
 
 RUN apk update  -q && \
     apk upgrade -q && \
-    apk add     -q --no-cache bash git curl python3 wget && \
-    wget https://raw.githubusercontent.com/MestreLion/git-tools/main/git-restore-mtime -O /usr/bin/git-restore-mtime && \
+    apk add     -q --no-cache bash git curl python3 && \
+    rm -rf /var/cache/apk/*
+
+RUN curl https://raw.githubusercontent.com/MestreLion/git-tools/main/git-restore-mtime > /usr/bin/git-restore-mtime && \
     chmod u+x /usr/bin/git-restore-mtime
 
 ARG BRANCH='master'
@@ -11,29 +13,22 @@ ENV BRANCH $BRANCH
 
 RUN echo 'branch:' $BRANCH
 
-ARG VERSION
-ENV VERSION $VERSION
-
 WORKDIR /usr/src/app
 
-# clone primary repo
-# ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
-RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/src/app
-RUN git -c advice.detachedHead=false checkout $VERSION
-RUN git restore-mtime
+COPY . ./
 
-RUN yarn install && \
-    echo 'running on branch ' $VERSION
+RUN git restore-mtime --force
 
-# run rollup build script 
-RUN yarn run build
-
-RUN yarn install --production --ignore-scripts --prefer-offline && \
+RUN yarn install --ignore-scripts --prefer-offline && \
     yarn cache clean && \
     rm -rf /usr/src/app/.git \
+    rm -rf /usr/src/app/dist \
     rm -fr /usr/share/doc && rm -fr /usr/share/locale && \
     rm -fr /usr/local/share/.cache/yarn && rm -rf /var/cache/apk/* && \
     rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+# run rollup build script 
+RUN yarn run build
 
 ENV PORT 8000
 EXPOSE 8000

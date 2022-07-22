@@ -1,3 +1,13 @@
-.git
-node_modules
 app/libs
+.DS_Store
+.circleci
+.dockerignore
+.gitattributes
+.gitignore
+.jshintrc
+.nyc_output
+.vscode
+Dockerfile
+deploy.sh
+dist
+node_modules
