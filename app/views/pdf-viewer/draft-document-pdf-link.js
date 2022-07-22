@@ -9,7 +9,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
         var language = ($route.current.params.lang||$location.search()?.lang||''); 
 
         function getPdfLink(){
-            //15 minute expiry
+            //60 minute expiry
             var document = {
                 shareType   : "link",
                 storageType : "km-document",
