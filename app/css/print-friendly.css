@@ -165,6 +165,7 @@ body.embed {
         padding: 0px;
     }
 }
+body.print .page-content,
 body.embed .page-content {
     background-color: #fff;
     /* padding: 10px 20px 20px 20px;*/

@@ -8,7 +8,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
         var uniqueId = $route.current.params.documentId;
         var language = ($route.current.params.lang||$location.search()?.lang||''); 
 
-        function getPdfLink(){
+        async function getPdfLink(){
             //60 minute expiry
             var document = {
                 shareType   : "link",
@@ -20,17 +20,16 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             }             
 
             $scope.status = "creatingLink";
-            return $q.when($http.post('/api/v2018/document-sharing', document))
-            .then(function(response){
-                var id= response.data.id;
-                return $q.when($http.get('/api/v2018/document-sharing/'+id))
-                        .then(function(result){                          
-                            $location.url('/pdf/draft-documents/'+uniqueId + '/'+ 
-                                            result.data.urlHash +
-                                            `?lang=${language}`+
-                                            (language ? '': 'mixLocale=true&shareId='+id))
-                        })
-            });
+            const response = (await $http.post('/api/v2018/document-sharing', document)).data
+            const id       = response.id;
+            
+            const documentShare = (await $http.get('/api/v2018/document-sharing/'+id)).data
+            const documentShareInfo = (await $http.get('/api/v2018/document-sharing/'+documentShare.urlHash)).data
+                            // console.log(result);            
+            let schema = documentShareInfo.sharedData?.document?.type || uniqueId  
+            
+            $location.url(`/pdf/draft-documents/${schema}/${documentShare.urlHash}?code=${documentShare.urlHash}&shareId=${id}&${(language ? `lang=${language}`: '&mixLocale=true')}`);
+
         }
 
         getPdfLink();
