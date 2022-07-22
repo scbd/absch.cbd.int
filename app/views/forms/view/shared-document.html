@@ -89,9 +89,9 @@
 									
 									<div class="row" style="padding-bottom:20px;" ng-if="status=='ready'">
 										<div class="col-xs-12 ">	
-												<div class="float-end record-Options-div" ng-if="printMode">
-													<span class="hidden-xs">Document status</span> <span class="label label-warning">Draft</span>
-													<span class="hidden-xs">Generated on</span> <span class="date label label-default" ng-bind="options.currentDate | formatDateWithTime"></span>
+												<div class="float-end draft-document-status pe-3" ng-if="printMode">
+													<span class="hidden-xs">Document status</span> <span class="badge bg-warning">Draft</span>
+													<span class="hidden-xs">Generated on</span> <span class="date badge bg-secondary" ng-bind="options.currentDate | formatDateWithTime"></span>
 												</div>
 											<record-loader link-target="_blank" document="document" document-info="documentInfo" locale="options.locale"></record-loader>
 										</div>
