@@ -2,7 +2,9 @@ FROM node:14.0-alpine
 
 RUN apk update  -q && \
     apk upgrade -q && \
-    apk add     -q --no-cache bash git curl
+    apk add     -q --no-cache bash git curl python3 wget && \
+    wget https://raw.githubusercontent.com/MestreLion/git-tools/main/git-restore-mtime -O /usr/bin/git-restore-mtime && \
+    chmod u+x /usr/bin/git-restore-mtime
 
 ARG BRANCH='master'
 ENV BRANCH $BRANCH
@@ -17,10 +19,8 @@ WORKDIR /usr/src/app
 # clone primary repo
 # ADD "https://www.random.org/cgi-bin/randbyte?nbytes=10&format=h" skipcache
 RUN git clone -n https://github.com/scbd/absch.cbd.int.git /usr/src/app
-
 RUN git -c advice.detachedHead=false checkout $VERSION
-
-COPY rollup.config.js ./
+RUN git restore-mtime
 
 RUN yarn install && \
     echo 'running on branch ' $VERSION
