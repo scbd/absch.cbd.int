@@ -51,8 +51,7 @@
     "build": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c",
     "dev": "rm -rf ./dist && rm -rf ./i18n-build && npx rollup -c --watch",
     "eslint": "npx eslint . --fix",
-    "clean-reinstall": "rm -rf ./node_modules && rm -rf ./package-lock.json && yarn install",
-    "copy-ejs-to-dist": "node -r esm scripts/copy-ejs-files"
+    "clean-reinstall": "rm -rf ./node_modules && rm -rf ./package-lock.json && yarn install"
   },
   "engines": {
     "yarn": ">= 1.0.0"

@@ -29,7 +29,7 @@ export default async function(){
   
   externals = [...externals, ...await loadExternals()];
 
-  const locales = isWatchOn ? ['en', 'fr']
+  const locales = isWatchOn ? ['en']
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
   return locales.map(locale => bundle('boot.js', locale));
@@ -64,10 +64,19 @@ function bundle(entryPoint, locale, baseDir='app') {
       }),
       copy({
         verbose: true,
-        targets: [
-          { src: `${baseDir}/templates/absch/index.ejs`, dest: path.join(targetDir, 'templates'), rename: "absch.ejs" },
-          { src: `${baseDir}/templates/bch/index.ejs`,   dest: path.join(targetDir, 'templates'), rename: "bch.ejs"   }
-        ]
+        flatten: false,
+        copyOnce: isWatchOn,
+        targets: [{
+          src: [
+            `${baseDir}/**/*.ejs`, 
+            // `${baseDir}/**/*.css`, 
+            // `${baseDir}/**/*.jpeg`, 
+            // `${baseDir}/**/*.jpg`, 
+            // `${baseDir}/**/*.png`, 
+            // `${baseDir}/**/*.svg`, 
+          ], 
+          dest: path.join(targetDir) 
+        }]
       }),
       string({ include: "**/*.html" }),
       json({ namedExports: true }),
