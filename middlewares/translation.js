@@ -65,26 +65,20 @@ async function renderLanguageFile(req, res, next) {
     if(!urlPreferredLang && preferredLang)//&& preferredLang!= 'en'
         return res.redirect('/'+preferredLang + (req.originalUrl||''));
 
-    req.url = `${global.app.rootPath}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`;
-
     const locale =  urlPreferredLang || preferredLang || 'en';
  
-    let langFilepath =  req.url;//await getLanguageFile(req, preferredLang);
     let options = { 
                     baseUrl            : ('/' + (urlPreferredLang || preferredLang || '') + '/').replace("//", '/'),
                     appVersion         : global.app.version,
                     clearingHouseHost  : process.env.CLEARINGHOUSE_HOST,
-                    preferredLanguage  : preferredLang||'en',
+                    preferredLanguage  : locale,
                     googleAnalyticsCode: process.env.GOOGLE_ANALYTICS_CODE,
                     cdnUrl             : global.app.cdnUrl,
                     angularBundle      : bundleUrls.angularBundle,
                     initialCss         : bundleUrls.initialCss,
                 };
-    if(langFilepath){
-        return res.render(langFilepath, options);
-    } 
 
-    return res.render(`${global.app.rootPath}/app/templates/${process.env.CLEARINGHOUSE}/${process.env.CLEARINGHOUSE}.ejs`, options);
+    return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}.ejs`, options);
  }
  
  function getPreferredLanguage(req){
