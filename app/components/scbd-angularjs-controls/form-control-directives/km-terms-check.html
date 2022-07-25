@@ -26,7 +26,7 @@
 				<tfoot>
 					<tr>
 						<td>
-							<button type="button" class="btn btn-xs btn-primary" ng-click="$parent.searchKeyword=undefined">Close</button>
+							<button type="button" class="btn btn-primary" ng-click="$parent.searchKeyword=undefined">Close</button>
 						</td>
 					</tr>
 				</tfoot>
@@ -36,8 +36,8 @@
 
 		<div ng-class="{'searchbox': enableSearch}" >
 
-			<button type="button" class="btn btn-default btn-xs float-end easing" ng-click="clear()" ng-if="binding.length>0">
-				<i class="fa fa-remove"  ></i> {{::('kmTermCheckT.clearSelection'|$translate)}}
+			<button type="button" class="btn btn-default float-end easing" ng-click="clear()" ng-if="binding.length>0">
+				{{::('kmTermCheckT.clearSelection'|$translate)}}
 			</button>
 			<ul ng-if="!tabularShape" class="list-unstyled">	
 

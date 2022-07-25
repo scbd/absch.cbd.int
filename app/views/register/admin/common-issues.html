@@ -8,7 +8,7 @@
         <h3 ng-bind-html="article.title | lstring:locale"></h3> 
         <span ng-repeat="tag in article.adminTags track by tag._id" style='margin-top:10px;'>
                
-            <a rel="noopener" href="https://jira.cbd.int/issues/?jql=labels%3D{{tag.title.en}}%20ORDER%20BY%20priority%20DESC%2C%20status%20DESC%2C%20updated%20DESC" target="issues" style="padding:3px; margin-right:3px;" class="btn-xs bg-blue" ng-if="tag.title.en != 'ABSCH-template'" ng-bind="tag.title.en"></a>
+            <a rel="noopener" href="https://jira.cbd.int/issues/?jql=labels%3D{{tag.title.en}}%20ORDER%20BY%20priority%20DESC%2C%20status%20DESC%2C%20updated%20DESC" target="issues" style="padding:3px; margin-right:3px;" class="btn-sm bg-blue" ng-if="tag.title.en != 'ABSCH-template'" ng-bind="tag.title.en"></a>
             
         </span>
       

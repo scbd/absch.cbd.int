@@ -106,7 +106,7 @@
 			<div class="col-12 col-lg-5">
 
 				<div class="dropdown d-inline" id="sortingRecords">
-					<button class="btn btn-default btn-sm dropdown-toggle bg-white" type="button" id="dropdownMenu1"
+					<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu1"
 						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
 						<i ng-if="sortTerm==='name.en'" class="fa"
 							ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}"
@@ -141,9 +141,9 @@
 					icon="fa-globe"></div>
 
 				<div id="sortingRecordsPartyStatus" class="dropdown d-inline">
-					<button class="btn btn-default btn-sm dropdown-toggle bg-white" type="button" id="dropdownMenu2"
+					<button class="btn btn-primary btn-sm dropdown-toggle" type="button" id="dropdownMenu2"
 						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<span style="color: #212529;">
+						<span>
 							<span ng-if="partyFilter==='All' || !partyFilter">
 								<span class="d-none d-md-inline">{{::('countryListTranslation.partyStatus'|$translate)}}</span>
 								<span class="d-md-none">PS</span>
@@ -190,10 +190,10 @@
 				</div>
 
 				<button ng-if="list.length" id="exportingRecords" type="button"
-					class="btn btn-default btn-sm bg-white" ng-click="export()"
+					class="btn btn-primary btn-sm" ng-click="export()"
 					ng-disabled="readyForExport||loading">
 					<i class="fa fa-download"></i>
-					<span class="d-none d-md-inline"  style="color: #212529;">{{::('countryListTranslation.export'|$translate)}}</span>
+					<span class="d-none d-md-inline">{{::('countryListTranslation.export'|$translate)}}</span>
 				</button>
 			</div>
 			<div class="col-md-7 evenly-spaced center-text d-none d-lg-grid justify-content-between">

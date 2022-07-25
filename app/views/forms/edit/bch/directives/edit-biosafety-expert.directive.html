@@ -486,9 +486,9 @@
 															<div ng-repeat="lang in motherTongue.otherLanguages" style="max-width: 200px;padding-left: 15px;padding-bottom: 10px;">
 																<div afc-autocomplete name="otherMotherTongue{{$index}}" ng-model="motherTongue.otherLanguages[$index]" source="options.otherLanguages" style="display: inline-block;"
 																filter="startsWithFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editBiosafetyExpertT.selectLanguage'|$translate)}}" ng-change="onLangChange()"></div>
-																<button type="button" class="btn btn-danger btn-xs" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">{{::('editBiosafetyExpertT.remove'|$translate)}}</button>
+																<button type="button" class="btn btn-danger btn-sm" ng-click="removeItem(motherTongue.otherLanguages, $index)" style="position: absolute;margin-left: 5px;">{{::('editBiosafetyExpertT.remove'|$translate)}}</button>
 															</div>
-															<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">{{::('editBiosafetyExpertT.addOtherLanguage'|$translate)}}</button>
+															<button type="button" class="btn btn-primary btn-sm" ng-click="addOtherLanguageItem(motherTongue.otherLanguages)" style="margin-left: 15px;">{{::('editBiosafetyExpertT.addOtherLanguage'|$translate)}}</button>
 														</div>
 													</div>
 												</div>
@@ -522,13 +522,13 @@
 																					{{::('editBiosafetyExpertT.fair'|$translate)}}
 																				</label>
 																			</div>
-																			<button type="button" class="btn btn-danger btn-xs" ng-if="language.level" ng-click="language.level=undefined">{{::('editBiosafetyExpertT.clear'|$translate)}}</button>
-																			<button type="button" class="btn btn-danger btn-xs" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >{{::('editBiosafetyExpertT.remove'|$translate)}}</button>
+																			<button type="button" class="btn btn-danger btn-sm" ng-if="language.level" ng-click="language.level=undefined">{{::('editBiosafetyExpertT.clear'|$translate)}}</button>
+																			<button type="button" class="btn btn-danger btn-sm" ng-if="!language.isUNLanguage" ng-click="removeItem(languageRating, $index)" >{{::('editBiosafetyExpertT.remove'|$translate)}}</button>
 																		</td>
 																	</tr>
 																	<tr>
 																		<td colspan="2">
-																			<button type="button" class="btn btn-primary" ng-click="addOtherLanguageItem(languageRating)">{{::('editBiosafetyExpertT.addOtherLanguage'|$translate)}}</button>
+																			<button type="button" class="btn btn-primary btn-sm" ng-click="addOtherLanguageItem(languageRating)">{{::('editBiosafetyExpertT.addOtherLanguage'|$translate)}}</button>
 																		</td>
 																	</tr>
 																</table>

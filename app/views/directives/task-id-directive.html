@@ -39,32 +39,28 @@
                 <span style="font-size:12px"> This request expires in: </span>
                 <span><span ng-bind="workflow.daysToApproval"></span> days</span>
             </div> 
-
+            <!-- need to change to json -->
             <div ng-repeat="activity in workflow.activities|filter:isOpen|orderBy:'createdOn'" style="padding-top:20px;">
 
                     <div  id="buttonsDiv" ng-show="isAssignedToMe(activity) || isAdmin()">
                         <div  style="display:inline;padding:5px;" ng-show="activity.name != 'deleteRecord' ">
                             <button type="button" class="btn btn-success bold" ng-click="updateActivity({ action : 'approve' })" ng-disabled="isUpdating">
-                            <i class="fa fa-check-circle"></i>
                             <span >Approve</span>
                         </button>
                         </div>
                         <div  style="display:inline;padding:5px;"  ng-show="activity.name != 'deleteRecord' && document.amendmentIntent != 1">
                             <button type="button" class="btn btn-info bold  color-white" ng-click="edit(workflow, activity, workflow._id)" ng-disabled="isUpdating">
-                            <i class="fa fa-pencil-square-o"></i>
                             <span >Edit</span>
                         </button>
                         </div>
                         <div style="display:inline;padding:5px;" >
                             <button type="button" class="btn btn-warning bold" ng-click="showRejectDialog()" ng-disabled="isUpdating">
-                            <i class="fa fa-times-circle"></i>
                            <span ng-if="activity.name == 'deleteRecord'" >Reject (do not delete)</span>
                            <span ng-if="activity.name != 'deleteRecord'" >Reject</span>
                         </button>
                         </div>
                         <div style="display:inline;padding:5px;"  ng-show="activity.name == 'deleteRecord'">
                                 <button type="button" class="btn btn-danger bold" ng-click="confirmDelete()" ng-disabled="isUpdating">
-                                <i class="fa fa-check-circle"></i>
                                 <span >Delete</span>
                             </button>
                         </div>
@@ -72,7 +68,6 @@
 
                     <div ng-show="workFlowIsCreatedByMe()">
                         <button type="button" class="btn btn-warning bold" ng-click="askCancelWorkflowRequest()" ng-disabled="isUpdating">
-                            <i class="fa fa-rotate-left"></i>
                             <span> Cancel request</span>                           
                         </button>
                     </div>
@@ -110,7 +105,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning bold float-start" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="fa fa-times-circle"></i> Reject</button>
+                <button type="button" class="btn btn-warning bold float-start" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="bi bi-x-circle-fill"></i> Reject</button>
                 <button type="button" class="btn btn-default" ng-click="closeDialog();">Cancel</button>
             </div>
         </form>

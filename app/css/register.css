@@ -47,11 +47,10 @@
 	-o-border-radius: 2px;
 	margin-right:3px;
 }
-}
 
 section {
 	padding: 5px 10px 20px 10px;
-	background-color: #ccc;
+	/* background-color: #ccc; */
 	margin-top: 20px;
 	border-radius: 4px;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);

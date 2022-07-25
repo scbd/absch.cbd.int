@@ -1,8 +1,8 @@
 ﻿<div style="margin-bottom:20px">
 	<div>
 		<div ng-transclude="linkControls" style="padding-bottom: 5px;">
-			<button type="button" class="btn btn-default" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="fa fa-file-o"></i> Add file</button>
-			<button type="button" class="btn btn-default" ng-click="addLink()" ng-if="isAllowLink()"><i class="fa fa-globe"></i> Add link</button>
+			<button type="button" class="btn btn-primary btn-sm" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="bi bi-plus"></i> Add file</button>
+			<button type="button" class="btn btn-primary btn-sm" ng-click="addLink()" ng-if="isAllowLink()"><i class="bi bi-plus"></i> Add link</button>
 		</div>
 
 		<div ng-transclude="linkDisplay">
@@ -65,8 +65,9 @@
 					</form>
 				</div>
 				<div class="modal-footer d-block">
-					<button type="button" class="btn btn-default float-end" ng-click="editor.close()">Cancel</button>
-					<button type="button" class="btn btn-primary" ng-click="linkForm.$invalid || editor.save()" ng-disabled="linkForm.$invalid" >Save</button>
+					<button type="button" class="btn btn-primary px-3 float-end" ng-click="linkForm.$invalid || editor.save()"
+						ng-disabled="linkForm.$invalid">Save</button>
+					<button type="button" class="btn btn-default px-3 float-end" ng-click="editor.close()">Close</button>
 				</div>
 			</div>
 		</div>

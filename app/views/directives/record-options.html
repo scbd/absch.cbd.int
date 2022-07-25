@@ -36,7 +36,7 @@
             <span class="xlabel hidden-xs hidden-sm text-white fw-bold" ng-if="internalDocument.header.languages.length>1">{{::('recordOptionsT.languagesAvailable'|$translate)}}:</span>
            
             <div class="btn-group  btn-group-sm" role="group" ng-if="internalDocument.header.languages.length>1">
-                <button type="button" class="btn btn-lang btn-default btn-xs lang-tooltip" ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"
+                <button type="button" class="btn btn-lang btn-default btn-sm lang-tooltip" ng-class="{'btn-info' : currentLocale==loc}" ng-repeat="loc in internalDocument.header.languages"
                     ng-click="setCurrentLocale(loc)" data-bs-toggle="tooltip" data-title="{{termLocales[loc]|term}}">
                     <span ng-bind="loc | uppercase"></span>
                 </button>

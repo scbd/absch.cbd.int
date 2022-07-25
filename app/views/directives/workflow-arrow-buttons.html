@@ -182,7 +182,7 @@
 
     <div ng-show="tab=='edit'" km-tab="edit" class="edit-form editForm">
         <div class="alert alert-danger" role="alert" ng-if="rejectedWorkflow">
-            <h4 class="alert-heading"><i class="fa fa-warning"></i> {{::('workflowButtonsT.information'|$translate)}}!</h4>
+            <h4 class="alert-heading">{{::('workflowButtonsT.information'|$translate)}}!</h4>
             <p>
                 {{::('workflowButtonsT.rejectedBy'|$translate)}}
                 <span
@@ -200,7 +200,7 @@
     <div ng-show="tab=='review'" km-tab="review" id="schemaView" class="mb-5 mt-2">
         <div class="record-Options-div language-btn-options float-end">
             <div class="btn-group btn-group-xs" role="group" ng-if="languages.length>1">
-                <button type="button" class="btn btn-lang btn-default btn-xs"
+                <button type="button" class="btn btn-lang btn-default btn-sm"
                     ng-class="{'btn-info' : selectedLanguage==lang}" ng-repeat="lang in languages"
                     ng-click="onReviewLanguageChange(lang)">
                     <span ng-bind="lang | uppercase"></span>
@@ -243,7 +243,7 @@
 
         <div class="record-Options-div me-1 mt-1">
             <div class="btn-group btn-group-xs" role="group" ng-if="languages.length>1">
-                <button type="button" class="btn btn-lang btn-default btn-xs"
+                <button type="button" class="btn btn-lang btn-default btn-sm"
                     ng-class="{'btn-info' : selectedLanguage==lang}" ng-repeat="lang in languages"
                     ng-click="onReviewLanguageChange(lang)">
                     <span ng-bind="lang | uppercase"></span>
@@ -339,7 +339,7 @@
 
 
 
-                        <button id="workflowSaveDraft" type="button" class="btn btn-default bg-draft p-1" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
+                        <button id="workflowSaveDraft" type="button" class="btn btn-sm btn-primary" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
                         ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                             <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                             {{::('workflowButtonsT.saveDraft'|$translate)}}</button>
@@ -374,7 +374,9 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header d-block bg-red">
-                    <button type="button" class="btn fs-4 close float-end cancelClose" ng-click="closeDialog()" aria-hidden="true">×</button>
+                    <button type="button" class="btn fs-4 close float-end cancelClose" ng-click="closeDialog()" aria-hidden="true">
+                        <i class="bi bi-x-circle-fill"></i>
+                    </button>
                     <h4>{{::('workflowButtonsT.closeCancel'|$translate)}}</h4>
                 </div>
                 <div class="modal-body">
@@ -383,9 +385,9 @@
                     </h2>
                 </div>
                 <div class="modal-footer mt-0 d-block">
-                    <button type="button" ng-click="closeDialog()" class="btn btn-default float-end cancelClose">{{::('workflowButtonsT.cancel'|$translate)}}</button>
+                    <!-- <button type="button" ng-click="closeDialog()" class="btn btn-default float-end cancelClose">{{::('workflowButtonsT.cancel'|$translate)}}</button> -->
                     <button type="button" ng-click="close(true)"
-                        class="btn btn-warning closeWithoutSaving float-start color-white">{{::('workflowButtonsT.closeWithoutSaving'|$translate)}}</button>
+                        class="btn btn-default bg-red rounded-0 px-3 w-25 closeWithoutSaving float-end">{{::('workflowButtonsT.closeWithoutSaving'|$translate)}}</button>
                 </div>
             </div>
         </div>
@@ -403,7 +405,7 @@
                     <textarea class="form-control" rows="5" name="info" ng-model="InfoDoc.additionalInfo"></textarea>
                 </div>
                 <div class="modal-footer mt-0">
-                    <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">{{::('workflowButtonsT.cancel'|$translate)}}</button>
+                    <!-- <button type="button" class="btn btn-default" ng-click="closeAddInfoDialog(false)">{{::('workflowButtonsT.cancel'|$translate)}}</button> -->
                     <button type="button" id="continueRequest" class="btn btn-primary float-start"
                         ng-disabled="loading">{{::('workflowButtonsT.sendRequest'|$translate)}}</button>
                 </div>

@@ -28,7 +28,7 @@
                         <div class="col-xs-12">
                             <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
                                 <li class="nav-item" ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index)" style="cursor: hand">
-                                    <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab" ng-class="{'disabled': !tab.render}" >
+                                    <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
                                         {{::('editNR4T.question'|$translate)}} <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>
@@ -124,7 +124,7 @@
                         <div class="col-xs-12">
                             <ul class="pagination page-tabs nav nav-tabs" id="nrTabs">
                                 <li class="nav-item" ng-repeat="tab in nr4Tabs" ng-class="{'active': $index==activeTab-1}" ng-click="setTab($index,true)" style="cursor: hand">
-                                    <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab" ng-class="{'disabled': !tab.render}">
+                                    <a rel="noopener" class="nav-link" translation-url href="#tab{{$index}}" data-bs-toggle="tab">
                                         {{::('editNR4T.question'|$translate)}} <span ng-bind="::tab.title"></span>
                                     </a>
                                 </li>

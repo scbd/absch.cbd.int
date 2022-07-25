@@ -64,10 +64,10 @@
                         </a>
                         <a type="button" class="btn btn-primary btn-sm p-0 px-1" id="add-new-btn" rel="noopener" translation-url 
                         ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
-                        <i class="fa fa-plus float-start pt-1"></i><span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
+                            <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
                         </a>
-                        <a type="button" class="btn btn-primary btn-sm p-0 px-1" rel="noopener" translation-url  ng-href="/register" id="close_button">
-                            <i class="bi bi-x-circle-fill float-start"></i>  <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.close'|$translate)}}</span>
+                        <a type="button" class="btn btn-default btn-sm p-0 px-1" rel="noopener" translation-url  ng-href="/register" id="close_button">
+                            <span class="d-none d-md-block ps-1 float-end pe-2 ps-2 border">{{::('recordListT.close'|$translate)}}</span>
                         </a>
 
                     </div>
@@ -324,7 +324,7 @@
 
                     </div>
                     <div class="modal-footer" >
-                        <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.cancel'|$translate)}}</button>
+                        <!-- <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.cancel'|$translate)}}</button> -->
                     </div>
             </script>
 

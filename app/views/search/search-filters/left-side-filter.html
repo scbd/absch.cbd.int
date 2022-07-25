@@ -12,7 +12,7 @@
                 
                     <div ng-class="{'bg-abs' : isABS, 'bg-bch': isBCH }">
                         <div class="dropdown float-start bring-to-front1">
-                            <button class="btn btn-xs btn-default" type="button"
+                            <button class="btn btn-sm btn-default" type="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="background-color:transparent;border: none; vertical-align: unset;">
                                 <i class="fa fa-cog color-white" aria-hidden="true"></i>
                             </button>
@@ -35,7 +35,7 @@
                     <div class="list-group-item filter-item" ng-repeat="filter in filters"  ng-show="!state[schema]">
                         
                         <div class="dropdown float-start bring-to-front" ng-if="filter.filterValue!=undefined||hasItems(filter.selectedItems)">
-                            <button class="btn btn-xs btn-default search-cog-button" type="button"
+                            <button class="btn btn-sm btn-default search-cog-button" type="button"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                 <i class="fa fa-cog pe-2" aria-hidden="true"></i>
                             </button>
@@ -64,7 +64,7 @@
                             </div>
                             <div ng-if="filter.type=='date'" >
                                 <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
-                                <button type="button" ng-if="filter.filterValue" class="btn btn-xs btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
+                                <button type="button" ng-if="filter.filterValue" class="btn btn-sm btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
                                 <div km-date-range ng-model="filter.filterValue" ng-change="onFilterDateChange(filter)"></div>
                             </div>
                             <div ng-if="filter.type=='freeText'">
@@ -77,7 +77,7 @@
                             </div>
                             <div ng-if="filter.type=='yesNo'" >
                                 <label ng-bind="filter.title"  ng-class="{'disabled strikeout':filter.disabled}"></label>
-                                <button type="button" ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined" class="btn btn-xs btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
+                                <button type="button" ng-disabled="filter.disabled" ng-if="filter.filterValue!==undefined" class="btn btn-sm btn-default float-end" ng-click="clearFilterDate(filter)">{{::('leftSideFilterT.clear'|$translate)}}</button>
                                 <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="true"   ng-change="onFilterDateChange(filter)"/> {{::('leftSideFilterT.yes'|$translate)}} </label>
                                 <label  class="radio-inline"><input ng-disabled="filter.disabled" type="radio" ng-model="filter.filterValue" ng-value="false"  ng-change="onFilterDateChange(filter)"/> {{::('leftSideFilterT.no'|$translate)}} </label>
                             </div>

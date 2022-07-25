@@ -82,8 +82,8 @@
         </div>
     </div>
     <br>
-    <button type="button" class="btn btn-primary btn-sm float-end" ng-click="addEdit()"><i class="bi bi-plus-circle-fill"></i> {{::('userAlertsT.addNew'|$translate)}}</button>
-    <div class="clearfix"></div>
+    <button  ng-if="!loading" type="button" class="btn btn-primary btn-sm float-end add-edit-search fw-bold" ng-click="addEdit()">{{::('userAlertsT.addNew'|$translate)}}</button>
+    <div class="clearfix d-inline-block"></div>
     <div ng-if="loading" class="text-center mb-5"> <i class="fa fa-spinner fa-spin"></i> {{::('userAlertsT.loading'|$translate)}}</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">
         <div class="alert  bg-grey mt-3" role="alert">
@@ -121,9 +121,9 @@
                     <p ng-repeat="error in errors" ng-bind="error"></p>
                 </div>
         </div>
-        <div class="modal-footer d-flex justify-content-between">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('userAlertsT.cancel'|$translate)}}</button>
-            <button type="button" class="btn btn-primary" aria-label="Save" ng-click="save(document)" ng-disabled="loading">{{::('userAlertsT.save'|$translate)}}</button>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('userAlertsT.cancel'|$translate)}}</button> -->
+            <button type="button" class="btn btn-primary px-4 rounded-0 fw-bold" aria-label="Save" ng-click="save(document)" ng-disabled="loading">{{::('userAlertsT.save'|$translate)}}</button>
         </div>
     </script>
 </div>

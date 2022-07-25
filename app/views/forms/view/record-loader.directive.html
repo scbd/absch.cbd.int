@@ -99,9 +99,8 @@
             <h3>
                 <span class="fa fa-window-restore"></span>
                 Comparing version <strong ng-bind="comparingRevision"></strong> with latest version <strong ng-bind="internalDocumentInfo.latestRevision"></strong>
-                <button ng-disabled="isComparing" class="btn btn-default btn-success btn-xs float-end" type="button"
-                    ng-click="closeComparison()">
-                    <span class="bi bi-x-circle-fill"></span> Close comparison
+                <button ng-disabled="isComparing" class="btn btn-default btn-sm float-end" type="button"
+                    ng-click="closeComparison()"> Close comparison
                 </button>
             </h3>
         </div>
@@ -155,7 +154,7 @@
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div ng-if="shareVueComponent" class="share-single-document full-text-display pull-right compare-buttons">
+        <div id="sendRecords" ng-if="shareVueComponent" class="share-single-document full-text-display pull-right compare-buttons">
             <span class="color-white">|&nbsp;</span>
             <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
         </div>

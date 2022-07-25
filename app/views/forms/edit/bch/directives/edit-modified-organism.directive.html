@@ -59,7 +59,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" required name="developers" caption="{{::('editModifiedOrganismT.developer'|$translate)}}">	
-												<div document-selector ng-model="document.developers" caption="Contact" question="developers"
+												<div document-selector ng-model="document.developers" caption="{{::('editModifiedOrganismT.addContact'|$translate)}}" question="developers"
 														on-build-query="onContactQuery(searchText)" allow-new="true" allow-new-schema="contact"></div>
 											</div>
 										</div>
@@ -185,11 +185,11 @@
 							</section>
 							<section>
 								<div class="no-shadow bg-white">
-									<legend>{{::('editModifiedOrganismT.dtectionMethod'|$translate)}}</legend>
+									<legend>{{::('editModifiedOrganismT.detectionMethod'|$translate)}}</legend>
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="help-block">
-												{{::('editModifiedOrganismT.dtectionMethodInfo'|$translate)}}
+												{{::('editModifiedOrganismT.detectionMethodInfo'|$translate)}}
 											</div>
 											<div class="km-control-group" name="externalLinks" caption="{{::('editModifiedOrganismT.externalLinks'|$translate)}}">
 												<div km-link name="detectionMethodLinks" ng-model="document.detectionMethodLinks" allow-link="true" allow-file="true"
