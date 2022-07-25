@@ -174,12 +174,9 @@ export default {
 function whenAsync(path, route) {
   route = route || ({});
   var localBaseUrl = baseUrl;
-  if (route.templateUrl && !(/^\//).test(route.templateUrl)) {
-    route.templateUrl = localBaseUrl + window.getHashFileName(route.templateUrl + ".js");
-  }
+
   if (!route.controller && route.resolveController) {
-    var module = route.templateUrl.replace(new RegExp("^" + escapeRegExp(localBaseUrl)), "").replace(/(\.[a-z0-9]{8})?\.html(\.js)?/i, "");
-    module = window.getHashFileName(module + ".js").replace(/\.js$/, "");
+    var module = route.templateUrl.replace(new RegExp("^" + escapeRegExp(localBaseUrl)), "").replace(/\.html(\.js)?/i, "");
     route.controller = importQ(module);
   }
   if (route.controller && angular.isFunction(route.controller)) {
