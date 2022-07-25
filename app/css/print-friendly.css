@@ -178,3 +178,10 @@ body.embed ng-view > .container {
     margin-top: 0px;
     padding-top: 0px;
 }
+
+embed-footer{
+    display: block;
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+}

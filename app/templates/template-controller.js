@@ -83,7 +83,8 @@ export const templateController = ['$rootScope', '$location', '$window', '$scope
                 $scope.production_env = false;
                 $scope.env_name = "TRAINING";
             }
-                
+            $scope.embed = $location.search().embed;   
+            console.log($scope.embed) 
         }
 
         $rootScope.$on('signOut', function () {

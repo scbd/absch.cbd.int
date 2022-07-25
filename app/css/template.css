@@ -3351,3 +3351,6 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 .modal-open .multi-modal.modal-backdrop{
     z-index: 100000!important;
 }
+embed-footer{
+    display: none;
+}
