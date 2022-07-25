@@ -37,7 +37,6 @@ export const bundleUrls = {
     ].join(','),
 }
 export default function bootApp(window, require, defineX) {
-//SB    if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
 
     const cdnHost = cdnUrl+'npm/';
     const templateName = window.scbdApp.template;
@@ -45,6 +44,12 @@ export default function bootApp(window, require, defineX) {
     //SB    var nameToUrl = require.s.contexts._.nameToUrl;
 
     window.getHashFileName = function(url){
+
+        console.trace("ROLLUP UPGRADE: To remove")
+
+        return url;
+        
+        // ROLLUP UPGRADE: To remove vvv
         
         if(!window.hasHashUrl(url) && window.hashUrlsMapping && !/^http/.test(url)){
             var hashUrl = url.replace(/^\/(ar|en|es|fr|ru|zh)\/app\//, '')
@@ -64,15 +69,26 @@ export default function bootApp(window, require, defineX) {
     }
 
     window.hasHashUrl = (url)=>{
-        let hashFileRegex  = /\.[a-z0-9]{8}\./i
+
+        console.trace("ROLLUP UPGRADE: To remove")
+
+        return false;
+
+        // ROLLUP UPGRADE: To remove vvv
+
+        let hashFileRegex  = /-[a-z0-9]{8}\./i
 
         return hashFileRegex.test(url);
     }
 
     window.addAppVersionToUrl = (url, force)=>{
 
-        if(!force && window.hasHashUrl(url))
-            return url;
+        // ROLLUP UPGRADE: To review vvv
+
+        console.warn("ROLLUP UPGRADE: To review")
+
+        // if(!force && window.hasHashUrl(url))
+        //     return url;
 
         if(/^\//.test(url))            
             return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
@@ -162,32 +178,20 @@ export default function bootApp(window, require, defineX) {
             'angular-vue'                   : { 'deps': ['angular-flex', 'vue'] },
             'vue-pagination-2'              : { 'deps': ['angular-vue'] }
             
+        },
+        urlArgs: function(id, url) {
+
+            const hasHash  = (o)=> /-[a-f0-9]{8}$/i.test(o);
+            const isAbsUrl = (o)=> /^https?:\/\//i.test(o);
+        
+            if(isAbsUrl(url)) return '';
+            if(isAbsUrl(id))  return '';
+            if(hasHash(id))   return '';
+        
+            const sep = url.indexOf('?') === -1 ? '?' : '&';
+            return `${sep}v=${encodeURIComponent(window.scbdApp.version)}`;
         }
     });
-
-    // require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
-
-    //     console.log("nameToUrl", { moduleName, ext, skipExt });
-
-    //     var url = nameToUrl(moduleName, ext, skipExt);
-    //     var oldUrl = url;
-
-    //     url = window.getHashFileName(url);
-        
-    //     var isHashUrl = window.hasHashUrl(url);
-    //     if(isHashUrl){//remove version param from url since its a hash url
-    //         url = removeParamFromUrl(url, 'v')
-    //     }
-        
-    //     if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
-    //         url = '/'+window.scbdApp.lang + url;
-    //     }
-
-    //     console.log("nameToUrl", { moduleName, ext, skipExt, oldUrl, newUrl: url });
-
-        
-    //     return url;
-    // }
 
     require.onError = function (err) {
         console.log(err.requireType);
