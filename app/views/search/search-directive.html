@@ -236,7 +236,7 @@
                     </div>
 
                     <div class="float-end p-2">
-                        <button ng-href="#top" class="btn btn-sm btn-default px-3 fw-bold bg-white rounded-0 cursor-pointer"
+                        <button ng-href="#top" class="btn btn-sm btn-secondary px-3 cursor-pointer"
                             ng-click="showFilters=false;searchKeyword='';scrollToTop();">
                             {{::('searchDirectiveT.close'|$translate)}}
                         </button>
@@ -467,7 +467,7 @@
         </span>
         <div class="modal-footer">
             <!-- <button type="button" class="btn btn-default float-start" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('searchDirectiveT.cancel'|$translate)}}</button> -->
-            <button type="button" class="btn btn-primary px-4 rounded-0 fw-bold" aria-label="Save" ng-click="save(document)" ng-disabled="loading">{{::('searchDirectiveT.save'|$translate)}}</button>
+            <button type="button" class="btn btn-primary px-4" aria-label="Save" ng-click="save(document)" ng-disabled="loading">{{::('searchDirectiveT.save'|$translate)}}</button>
         </div>
     </script>
 </div>
