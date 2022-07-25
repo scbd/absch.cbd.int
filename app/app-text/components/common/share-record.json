@@ -19,7 +19,7 @@
     "loading":"Loading",
     "emailInstructions":"Use commas or semi-colons to separate multiple email addresses.",
     "emailInfo":"Recipients will receive an email with a link to view this page.",
-    "domainInfo":"Please enter the domain where you intend to embed this page",
+    "domainInfo":"Please enter the domain where you intend to embed this page.",
     "domain":"Domain",
     "urlEg":"for eg. https://www.cbd.int",
     "generateCode":"Generate Code",
