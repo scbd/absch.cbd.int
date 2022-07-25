@@ -3120,7 +3120,6 @@ div legend {
 }
 #sortingRecordsRegions #btnGroupDrop1.btn, #sortingRecordsCountries #btnGroupDrop1.btn{
     line-height: 1.5;
-    background-color: #fff;
 }
 #sortingRecordsRegions #btnGroupDrop1.btn-info, #sortingRecordsCountries #btnGroupDrop1.btn-info {
     background-color: #5bc0de !important;
@@ -3177,9 +3176,6 @@ div legend {
 #dialogCancel .modal-content .btn.close {
     margin: -1rem;
 }
-.registerpage-content .dropdown-toggle {
-    padding: 7px;
-}
 .registerpage-content .regeister-request {
     background-color: #eee!important;
     border-bottom: 1px solid #dee2e6;
@@ -3205,7 +3201,10 @@ div legend {
     left: -0.3rem;
 }
 .jr_container .jr_button.disabled {
-    color: #868686 !important;
+    color: #fff !important;
+}
+.jr_container .jr_right_buttons .jr_button:first-child {
+    margin-right: -5px !important;
 }
 .btn-check:focus+.btn, .btn:focus {
     box-shadow: none !important;
@@ -3353,4 +3352,36 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 }
 embed-footer{
     display: none;
+}
+.modal button.close {
+    background: transparent;
+    font-size: large;
+    border: 0;
+    margin: -10px;
+}
+.ngdialog.ngdialog-theme-default .ngdialog-close:before {
+    display: block;
+    padding: 3px;
+    color: #bbb;
+    content: '\00D7';
+    font-size: 26px;
+    font-weight: 400;  
+    line-height: 18px;
+    text-align: center;
+    border-radius: 20px;
+    background: #000;
+    width: 25px;
+    height: 25px;
+    margin: 10px;
+}
+/* .km-select-item #btnGroupDrop1 {
+    background-color: #428bca!important;
+} */
+#searchPage .add-edit-search {
+    margin-top: 30px;
+    border-radius: 0;
+    line-height: 19px;
+}
+.icon-lg {
+    font-size: 1.25rem !important;
 }
