@@ -15,7 +15,7 @@ function embedIFrame(widget, options){
     iframe.setAttribute('width', options.width||'100%');
     iframe.setAttribute('height', options.height||500);
     iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('scrolling', 'no');
+    iframe.setAttribute('scrolling', 'yes');
 
     widget.parentNode.replaceChild(iframe, widget);
     //TODO: no need to be inside loop
