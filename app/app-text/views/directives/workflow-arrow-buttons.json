@@ -21,7 +21,7 @@
     "closeCancel": "CLOSE AND CANCEL CHANGES",
     "areYouSure": "Are you sure you want to close this record without saving?",
     "anyChange": "Any changes will be lost.",
-    "closeWithoutSaving": "Close without saving",
+    "closeWithoutSaving": "Exit without saving",
     "publishingRequest": "Publishing Request",
     "wouldYouLike": "Would you like to add additional information for the publishing request?",
     "cancel": "Cancel",
