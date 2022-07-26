@@ -4,7 +4,7 @@
     "geneConstructInfo": "Please use the mouse to drag the a shape to add to the construct on a drop location",
     "dragConstruct": "Drag the shape here to remove the construct",
     "dropLocation": "Drop location",
-    "Cancel": "Cancel",
+    "cancel": "Cancel",
     "save": "Save",
     "transcriptionStart": "transcription start",
     "transcriptionStop": "transcription stop",

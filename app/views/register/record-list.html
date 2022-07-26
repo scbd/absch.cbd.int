@@ -7,7 +7,7 @@
         
         <div class="register-content-header"  ng-class="{'bg-blue': schemaType != 'referenceRecords','bg-orange': schemaType == 'referenceRecords' }">
             <div class="p-1">
-                <span class="btn-group float-end dashboard-tour">
+                <span class="btn-group float-end dashboard-tour pt-1">
                     <a class="text-decoration-none text-secondary d-inline-flex text-white help-tour link2" rel="noopener" ng-href="#" ng-click="tour()"> 
                         <i class="bi bi-question-circle"></i> 
                         <span class="d-none d-sm-block ps-1"> {{::('recordListT.tour'|$translate)}}</span>
@@ -27,20 +27,20 @@
             <div class="row">
                 <div class="col-md-7 col-12">
                     <div class="btn-group-sm cf-xs-btn">
-                        <button type="button" ng-click="changeFilter('')" class="filterbtn fw-bold btn btn-primary fw-normal">
+                    <button type="button" ng-click="changeFilter('')" class="btn btn-primary btn-sm fw-bold">
                         <i  class="bi bi-check-square" ng-class="{'bi-square':recordFilter}"></i>
                         <strong>{{::('recordListT.all'|$translate)}}</strong> <span class="badge badge-default" ng-bind="::listCount.all"></span>
                     </button>
-                        <button type="button" ng-click="changeFilter('isRequest')"  class="filterbtn fw-bold btn btn-danger fw-normal">
+                    <button type="button" ng-click="changeFilter('isRequest')"  class="btn btn-danger btn-sm fw-bold">
                         <i class="bi bi-check-square" ng-class="{'bi-square':recordFilter!='isRequest'}"></i>
                         {{::('recordListT.requests'|$translate)}}
                         <span class="badge badge-default" ng-bind="listCount.request"></span>
                     </button>
-                        <button id="publishedRecords" type="button" ng-click="changeFilter('isPublished')" class="filterbtn fw-bold btn btn-success fw-normal">
+                    <button id="publishedRecords" type="button" ng-click="changeFilter('isPublished')" class="btn btn-success btn-sm fw-bold">
                         <i  class="bi bi-check-square" ng-class="{'bi-square':recordFilter!='isPublished'}"></i> {{::('recordListT.published'|$translate)}}
                         <span class="badge badge-default" ng-bind="listCount.publish"></span>
                     </button>
-                        <button type="button" ng-click="changeFilter('isDraft')" class="filterbtn fw-bold btn btn-draft fw-normal">
+                    <button type="button" ng-click="changeFilter('isDraft')" class="btn btn-secondary btn-sm fw-bold">
                         <i class="bi bi-check-square" ng-class="{'bi-square':recordFilter!='isDraft'}"></i> {{::('recordListT.drafts'|$translate)}}
                         <span class="badge badge-default" ng-bind="listCount.draft"></span>
                     </button>
@@ -59,15 +59,17 @@
                             </span>
                         </div>
                         
-                        <a type="button" class="btn btn-outline-secondary btn-sm p-0 px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
+                        <a type="button" class="btn btn-outline-secondary btn-sm px-1" ng-click="refreshList(schema);" ng-if="showAddButton()">
                             <i class="bi bi-arrow-repeat float-start"></i> <span class="fs-small-8 d-none d-md-block ps-1 float-end">{{::('recordListT.refresh'|$translate)}}</span>
                         </a>
-                        <a type="button" class="btn btn-primary btn-sm p-0 px-1" id="add-new-btn" rel="noopener" translation-url 
-                        ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
+                        <a type="button" class="btn btn-primary btn-sm px-1" id="add-new-btn" rel="noopener" translation-url 
+                            ng-href="/register/{{schema|urlSchemaShortName|encodeURIComponent}}/new">
+                            <i class="fa fa-plus float-start  d-block d-md-none"></i>
                             <span class="d-none d-md-block ps-1 float-end">{{::('recordListT.addNew'|$translate)}}</span>
                         </a>
-                        <a type="button" class="btn btn-default btn-sm p-0 px-1" rel="noopener" translation-url  ng-href="/register" id="close_button">
-                            <span class="d-none d-md-block ps-1 float-end pe-2 ps-2 border">{{::('recordListT.close'|$translate)}}</span>
+                        <a type="button" class="btn btn-secondary btn-sm px-1" rel="noopener" translation-url  ng-href="/register" id="close_button">
+                            <i class="bi bi-x-circle-fill float-start d-block d-md-none"></i>
+                            <span class="d-none d-md-block float-end px-2">{{::('recordListT.close'|$translate)}}</span>
                         </a>
 
                     </div>
