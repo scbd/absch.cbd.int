@@ -21,5 +21,9 @@ export default class DocumentShareApi extends ApiBase
     async anonShareDocument(params)  {
         return this.http.post(`api/v2022/document-sharing/anon-sharing`, params).then(res => res.data).catch(tryCastToApiError);
     }
+
+    async deleteShareDocument(link) {
+        return this.http.delete(`api/v2018/document-sharing/${link}/revoke`).then(res => res.data).catch(tryCastToApiError);
+    }
     
 }
