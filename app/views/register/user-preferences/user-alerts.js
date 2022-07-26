@@ -5,7 +5,6 @@ import moment from 'moment';
 import 'ngDialog';
 import '~/services/main';
 import '~/views/register/directives/register-top-menu';
-import '~/views/register/user-preferences/user-alerts';
 import '~/components/scbd-angularjs-services/main';
 import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.json';
 

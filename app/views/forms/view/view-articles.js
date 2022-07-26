@@ -1,6 +1,5 @@
 import app from '~/app';
 import _ from 'lodash';
-import '~/views/forms/view/view-articles';
 import '~/components/scbd-angularjs-services/main';
 import '~/services/main';
 import 'ng-breadcrumbs';

@@ -1,5 +1,5 @@
 import app from '~/app';
-import moment from 'angular-cookies';
+import 'angular-cookies';
 import '~/components/scbd-angularjs-services/main';
 import '~/services/main';
 import langT from '~/app-text/views/shared/lang.json';
