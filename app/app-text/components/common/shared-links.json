@@ -1,0 +1,12 @@
+{
+    "sharedUrls": "Shared Urls",
+    "expiryStatus": "Expiry/Status",
+    "linkEmail": "Link/Email(s)",
+    "createdOn": "Created on",
+    "active": "active",
+    "expired": "expired",
+    "revoked": "revoked",
+    "Open": "Open",
+    "copy": "copy",
+    "revoke": "revoke"
+}
