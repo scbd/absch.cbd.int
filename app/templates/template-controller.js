@@ -27,7 +27,7 @@ app.config(["toastrConfig", function(toastrConfig) {
     });
 }]);
 
-export const templateController = ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
+export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
     function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger, ngMeta) {
 
         var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
