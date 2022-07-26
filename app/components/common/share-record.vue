@@ -268,10 +268,10 @@ export default {
           return;
       }
 
-      if (this.userToken && this.sharedData.storageType == "chm-search-result") {
+      if (this.sharedData.storageType == "chm-search-result") {
         this.sharedData[type].searchQuery = query;
       }
-      if (this.userToken && this.sharedData.storageType == "chm-country-profile") {
+      if (this.sharedData.storageType == "chm-country-profile") {
         this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
       }
     },
@@ -466,11 +466,11 @@ export default {
     getSearchQueryData() {
         const { filters, subFilters }=this.sharedData[this.sharedData.type].searchQuery||{};
         const data={
-          filters: filters,
-          isShareQuery: true,
+          filters: Object.keys(filters).length == 0 ? undefined : filters,
+          isSharedQuery: true,
           queryTitle: `Share query : ${Math.floor((1+Math.random())*0x10000).toString(16)}`,
           realm: this.$realm.value,
-          subFilters: subFilters
+          subFilters: Object.keys(subFilters).length == 0 ? undefined : subFilters
         };
         return data;
     }

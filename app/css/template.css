@@ -1879,6 +1879,10 @@ legend+ .help-info {
         font-weight: 500;
         text-transform: uppercase;
     }
+    .draft-document-status{
+        position: relative;
+        top: 210px;
+    }
     .record-Options-div{
         top:210px;
     }
@@ -3346,4 +3350,7 @@ span[km-form-languages] #select-dropdown .dropdown-menu{
 }
 .modal-open .multi-modal.modal-backdrop{
     z-index: 100000!important;
+}
+embed-footer{
+    display: none;
 }

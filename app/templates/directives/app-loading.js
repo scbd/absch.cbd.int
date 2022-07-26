@@ -45,7 +45,7 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
                         if(data.type == 'getClientHeight' && window.scbdEmbedData){
                             iframeOriginData = {data, origin :evt.origin };
                             sendIframeCommunication();
-                            resize_ob.observe(document.querySelector("#wrapper"));
+                            resize_ob.observe(document.querySelector("#page-content-wrapper"));
                         }
                     }
                 });                

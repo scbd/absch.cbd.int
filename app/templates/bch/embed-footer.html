@@ -1,0 +1,10 @@
+    <div class="text-center">
+        <a ng-href="{{url}}" class="realm-base-acronym color-orange mx-3 px-lg-4" target="_blank">
+            {{::('bchHeaderT.bch'|$translate)}}
+            <span class="fw-bold ch-name">{{::('bchHeaderT.biosafetyClearingHouse'|$translate)}}</span>
+            <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                {{::('bchHeaderT.development'|$translate)}}</span>
+            <span ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                    {{::('bchHeaderT.training'|$translate)}}</span>
+        </a>
+    </div>

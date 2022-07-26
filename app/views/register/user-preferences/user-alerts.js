@@ -58,7 +58,8 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                             $scope.showSystemAlerts = true;
                             var query = {
                                 realm: realm.value,
-                                isSystemAlert: true
+                                isSystemAlert: true,
+                                $or : [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}]
                             };
     
                             IGenericService.query('v2016', 'me/subscriptions', query)
@@ -77,7 +78,7 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                                 query = JSON.parse($scope.collectionFilter);
                             $scope.loading = true;
                             query.realm = realm.value;
-                            query['$or'] = [{ isShareQuery : false},{ isShareQuery :{$exists: false}}];
+                            query['$or'] = [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}];
                             
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {

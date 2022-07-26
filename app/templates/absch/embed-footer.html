@@ -1,0 +1,12 @@
+    <div class="text-center">
+        <a ng-href="{{url}}" class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3" target="_blank"> 
+            <span class="fw-normal">{{::('abschHeaderT.absch'|$translate)}}</span>
+            <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
+                <span> {{::('abschHeaderT.accessBenefitSharing'|$translate)}} </span>
+                {{::('abschHeaderT.clearingHouse'|$translate)}}</span> 
+            <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                {{::('abschHeaderT.development'|$translate)}}</span> 
+            <span ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                {{::('abschHeaderT.training'|$translate)}}</span> 
+        </a>
+    </div>
