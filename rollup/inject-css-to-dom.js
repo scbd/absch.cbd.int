@@ -1,6 +1,9 @@
+import path from 'path'
+import crypto  from 'crypto';
+
 export default function injectCssToDom(options = {}) {
 
-  const injectable = ['a']
+  const injectable = []
   const cssPluginTag = /^css!/; 
 
   return {
@@ -8,15 +11,34 @@ export default function injectCssToDom(options = {}) {
 
     resolveId(importeeId, importer) {
 
-      if(!cssPluginTag.test(importeeId)) return null;
+      let   updatedId = importeeId;
+      let   isCss     = false;
 
-      const updatedId = importeeId.replace(cssPluginTag, '');
+      if(cssPluginTag.test(importeeId)) {
+        updatedId = importeeId.replace(cssPluginTag, '');
+        isCss     = true;
+      }
+
+      const extension = path.extname(importeeId);
+
+      if(extension == '.css') {
+        isCss = true;
+      }
+
+      if(!isCss) return null;
 
       if(isUrl(updatedId)) {// link to URL => let RequireJS handle it for now
         return {id: importeeId, external: true};
       }
 
+      if(extension != '.css') {
+        console.warn("css!", "missing file extension (.css)", importeeId, "->", importer);
+      }
+
+
       return this.resolve(updatedId, importer, { skipSelf: true }).then((resolved) => {
+
+   //     console.log("css", importeeId, resolved);
         if(!resolved)          return { id: updatedId }
         if(resolved.external)  return null;
         if(isUrl(resolved.id)) return { id: `css!${resolved.id}`, external: true}
@@ -33,7 +55,7 @@ export default function injectCssToDom(options = {}) {
       try {
         const parsed = JSON.stringify(css);
         return {
-          code: generateCode(css),
+          code: generateCode(css, id),
           map: { mappings: '' }
         };
       } catch (err) {
@@ -54,13 +76,24 @@ function isUrl(url) {
   }
 }
 
-function generateCode(css) {
-  var code = `
-  ((document)=>{
-    const head  = document.getElementsByTagName('head')[0];
-    const style = document.createElement('style'); 
+function generateCode(css, importeeId) {
+
+  const filename = path.basename(importeeId);
+  const id       = `css-inject-${crypto.createHash('md5').update(css).digest('hex')}`;
+
+  const code = `
+  (function(document) {
+    var id = ${JSON.stringify(id)};
+
+    if(document.getElementById(id)) return;
+
+    var head  = document.getElementsByTagName('head')[0];
+    var style = document.createElement('style'); 
+    style.type = "text/css";
+    style.id = id;
     style.innerHTML = ${JSON.stringify(css)}
-    head.appendChild(style)
+    style.setAttribute("filename", ${JSON.stringify(filename)});
+    head.appendChild(style);
   })(document);`.trim();
 
   return code;

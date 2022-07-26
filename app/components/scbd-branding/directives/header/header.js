@@ -1,8 +1,8 @@
 import app from '~/app';
 import template from 'text!./header.html';
 import $ from 'jquery';
-import 'css!~/components/scbd-branding/css/colors.css';
-import 'css!~/components/scbd-branding/directives/header/header.css';
+import '~/components/scbd-branding/css/colors.css';
+import '~/components/scbd-branding/directives/header/header.css';
 import './account';
 import './locale';
 import './accounts-validation';

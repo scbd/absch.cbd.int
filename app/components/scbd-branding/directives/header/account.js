@@ -1,6 +1,6 @@
 import app from '~/app';
 import template from 'text!./account.html';
-import 'css!~/components/scbd-branding/directives/header/account.css';
+import '~/components/scbd-branding/directives/header/account.css';
 import '~/components/scbd-angularjs-services/main';
 import accountHeaderT from '~/app-text/components/scbd-branding/directives/header/account.json';
      app.directive('accountHeader', function() { // parent directive header
