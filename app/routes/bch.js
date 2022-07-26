@@ -4,9 +4,10 @@ import "angular-route";
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper';
 import routesLabels from '~/app-text/routes/bch-route-labels.json';
+import * as theBch from '~/views/home/bch';
 
 const bchRouteUrls = {
-  thBch                                : { component: ()=>import('~/views/home/bch') },
+  theBch,
   submit                               : { component: ()=>import('~/views/register/record-types') },
   register_BCHN_new                    : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-news') },
   register_DEC_new                     : { component: ()=>import('~/views/forms/edit/bch/edit-biosafety-decision') },
@@ -48,7 +49,7 @@ const bchRouteUrls = {
 
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.
-  whenAsync('/',                                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.theBch,"resolve":{ ...bchRouteUrls.thBch }}).
+  whenAsync('/',                                                  { ...mapView(bchRouteUrls.theBch),                   "label":routesLabels.theBch}).
   whenAsync('/submit',                                            { ...mapView(angularViewWrapper),                    "label":routesLabels.submit,"resolve":{ ...bchRouteUrls.submit,                                                      "user":securize()}}).
   whenAsync('/database/reports*',                                 {"redirectTo":"/reports"}). 
   whenAsync('/register/BCHN/new',                                 { ...mapView(angularViewWrapper),                    "label":routesLabels.new,"param":"true","resolveController":true,"documentType":"BCHN","resolve":{ ...bchRouteUrls.register_BCHN_new,                                           "securized":securize(null,true,true)}}).
