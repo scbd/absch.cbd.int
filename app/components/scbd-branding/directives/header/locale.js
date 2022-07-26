@@ -1,6 +1,6 @@
 import app from '~/app';
 import template from 'text!./locale.html';
-import 'css!~/components/scbd-branding/directives/header/locale.css';
+import '~/components/scbd-branding/directives/header/locale.css';
 import '~/components/scbd-angularjs-services/main';
      app.directive('localeHeader', function() {
          return { restrict: 'ECA' ,

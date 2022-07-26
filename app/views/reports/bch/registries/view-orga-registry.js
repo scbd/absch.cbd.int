@@ -1,5 +1,5 @@
 import app from '~/app';
-//import 'css!~/css/registry.css';  ROLLUP UPGRADE - THIS FILE DO NOT EXIST ANYMORE
+//import '~/css/registry.css';  ROLLUP UPGRADE - THIS FILE DO NOT EXIST ANYMORE
 import '~/services/main'; ;
 import viewOrgaRegistryT from '~/app-text/views/reports/bch/registries/view-orga-registry.json';
 

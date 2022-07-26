@@ -1,6 +1,6 @@
 import app from '~/app';
 import template from 'text!./footer.html';
-import 'css!~/components/scbd-branding/directives/footer.css';
+import '~/components/scbd-branding/directives/footer.css';
      app.directive('scbdFooter', function() {
          return { restrict: 'E' ,
                   priority: 0,// child of header

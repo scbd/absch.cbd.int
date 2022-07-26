@@ -2,7 +2,7 @@
 import _ from 'lodash';
 import lmoConstructTemplate from 'text!./lmo-construct.html';
 import 'drag-and-drop';
-import 'css!~/css/bch/lmo-construct.css';
+import '~/css/bch/lmo-construct.css';
 import 'ngDialog';
 import '~/views/forms/edit/document-selector';
 import '~/components/scbd-angularjs-services/main';
