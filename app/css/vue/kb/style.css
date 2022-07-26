@@ -528,3 +528,19 @@
 .knowledge-base .kb-faq details > summary::-webkit-details-marker {
 	display: none;
 }
+.shared-links .input-group-addon{
+	cursor: pointer;
+	padding: 12px 18px;
+	font-size: 14px;
+	line-height: 1;
+	background-color: #eee;
+	border: 1px solid #ccc;
+}
+.shared-links .link-date {
+        vertical-align: middle;
+}
+.shared-links .action {
+    display: inherit;
+    background-color: #5cb85c;
+    border-radius: 4px;
+}
