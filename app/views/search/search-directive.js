@@ -737,7 +737,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         }
 
                         //SCBD
-                        console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 741"); alert("ROLLUP UPGRADE TO REVIEW line 741"); throw new Error("ROLLUP UPGRADE TO REVIEW line 741")
+                        console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 741"); alert("ROLLUP UPGRADE TO REVIEW line 741");
 // BEFORE ROLLUP        _.forEach(scbdSchemas.defaults, function (schema, key) {
                         _.forEach(scbdSchemas, function (schema, key) {
                             addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 

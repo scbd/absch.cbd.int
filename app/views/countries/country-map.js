@@ -1,8 +1,8 @@
 import template from 'text!./country-map.html';
 import app from '~/app';
 import _ from 'lodash';
-import ammap from 'libs/ammap3/ammap/ammap';
-import worldEUHigh from '~/views/countries/worldEUHigh';
+import 'libs/ammap3/ammap/ammap';
+import '~/views/countries/worldEUHigh';
 import 'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]';
 import '~/services/main';
 import 'css!https://cdn.cbd.int/flag-icon-css@3.0.0/css/flag-icon.min.css';
