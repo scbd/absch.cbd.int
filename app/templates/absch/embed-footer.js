@@ -1,13 +1,13 @@
-import app from 'app';
-import html from 'text!./embed-footer.html';
-import bchHeaderT from '~/app-text/templates/absch/header.json';
+import app from '~/app';
+import html from './embed-footer.html';
+import headerT from '~/app-text/templates/absch/header.json';
 
 app.directive('embedFooter', ['translationService',  function (translationService) {
     return {
         restrict: 'E',
         template: html,
         link: function($scope) {
-            translationService.set('abschHeaderT', bchHeaderT);
+            translationService.set('abschHeaderT', headerT);
             console.log(window.location)
             $scope.url  = window.location.href.replace(/&?embed=true/, '');
         }
