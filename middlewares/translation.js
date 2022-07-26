@@ -6,45 +6,6 @@ let cacheControl = require('./cache-control')
 
 const { bundleUrls } = require('../app/boot.js');
 
-async function renderLanguageFile(req, res, next) {
-   
-         let langFilepath = await getLanguageFile(req);
-         if(langFilepath){
-            cacheControl.setCustomCacheControl(res);
-            return res.sendFile(langFilepath);
-         }    
-             
-         next();
- }
- 
- async function getLanguageFile(req, preferredLang){
- 
-     if(!preferredLang)
-         preferredLang = getPreferredLanguage(req);
- 
-     if(preferredLang){
-
-         let requestedUrl = url.parse(req.url).pathname;
-         let path = `/i18n/${preferredLang}/app${requestedUrl}`;               
- 
-         let statsLang;
-         try{
-             statsLang  = await stat(global.app.rootPath + path);
-         }catch(e){}
-
-         if (statsLang && statsLang.isFile()) {
-             
-             let statsEN    = await stat(`${global.app.rootPath}/app${requestedUrl}`);
- 
-             let mLangtime  = new Date(util.inspect(statsLang.mtime));
-             let mENtime    = new Date(util.inspect(statsEN.mtime));
-             if(mLangtime >= mENtime)
-                 return `${global.app.rootPath}${path}`;
-
-         }
-     }           
- }
-
  async function renderApplicationTemplate(req, res){
 
     let urlPreferredLang;
@@ -101,8 +62,6 @@ async function renderLanguageFile(req, res, next) {
 
 
  module.exports = {
-    renderLanguageFile,
-    getLanguageFile,
     getPreferredLanguage,
     renderApplicationTemplate
  }
