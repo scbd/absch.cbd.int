@@ -3388,3 +3388,7 @@ embed-footer{
 .text-gray-66 {
     color: #666;
 }
+.km-control-group [km-form-languages] #btnGroupDrop1 {
+    padding: 7px;
+    font-size: 1rem;
+}
