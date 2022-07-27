@@ -377,7 +377,7 @@
                     <button type="button" class="btn fs-4 close float-end cancelClose" ng-click="closeDialog()" aria-hidden="true">
                         <i class="bi bi-x-circle-fill"></i>
                     </button>
-                    <h4>{{::('workflowButtonsT.closeCancel'|$translate)}}</h4>
+                    <h4>{{::('workflowButtonsT.exit'|$translate)}}</h4>
                 </div>
                 <div class="modal-body">
                     <h2>{{::('workflowButtonsT.areYouSure'|$translate)}} <span class="color-red">
@@ -385,9 +385,8 @@
                     </h2>
                 </div>
                 <div class="modal-footer mt-0 d-block">
-                    <!-- <button type="button" ng-click="closeDialog()" class="btn btn-default float-end cancelClose">{{::('workflowButtonsT.cancel'|$translate)}}</button> -->
-                    <button type="button" ng-click="close(true)"
-                        class="btn btn-warning px-3 float-end">{{::('workflowButtonsT.closeWithoutSaving'|$translate)}}</button>
+                    <button type="button" ng-click="close(true)" class="btn btn-warning px-3 float-end">{{::('workflowButtonsT.closeWithoutSaving'|$translate)}}</button>
+                    <button type="button" ng-click="closeDialog()" class="btn btn-secondary float-end">{{::('workflowButtonsT.stay'|$translate)}}</button>
                 </div>
             </div>
         </div>
