@@ -18,26 +18,26 @@
         <div block-region activate="loading||isComparing"></div>
 
         <div class="alert alert-danger text-center" ng-if="error && !loading">
-            <strong>Error!</strong>
-            This was an error loading the requested record.
-            <p ng-if="error.status == 404">Record was not found!</p>
+            <strong>{{::('recordLoaderT.error'|$translate)}}</strong>
+            {{::('recordLoaderT.requestedRecord'|$translate)}}
+            <p ng-if="error.status == 404">{{::('recordLoaderT.recordNotFound'|$translate)}}</p>
             <p ng-if="error.status != 404" ng-bind="error.message||error"></p>
         </div>
         <div class="jumbotron bg-white" role="alert" ng-if="documentSuccess">
-            <h2>Thank you for downloading document <span ng-bind="documentUID"></span>.</h2>
-            <p>If the document did not download try clicking
-                <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">here...</a>
+            <h2>{{::('recordLoaderT.thankForDownloading'|$translate)}} <span ng-bind="documentUID"></span>.</h2>
+            <p>{{::('recordLoaderT.clickOnDownload'|$translate)}}
+                <a rel="noopener" translation-url href="{{documentUrl}}" class="alert-link">{{::('recordLoaderT.here'|$translate)}}</a>
             </p>
             </br>
             </br>
             </br>
             </br>
-            This window will close automatically in <span ng-bind="timeLaspe"></span> seconds.
+            {{::('recordLoaderT.closeAutomatically'|$translate)}} <span ng-bind="timeLaspe"></span> {{::('recordLoaderT.seconds'|$translate)}}
         </div>
 
         <div class="jumbotron bg-white" role="alert" ng-if="documentError">
-            <h2>Thank you for requesting document <span ng-bind="documentUID"></span>.</h2>
-            <p>The document does not exists, if you think this file should be available, please report to
+            <h2>{{::('recordLoaderT.thanks'|$translate)}} <span ng-bind="documentUID"></span>.</h2>
+            <p>{{::('recordLoaderT.report'|$translate)}}
                 <a rel="noopener" translation-url href="mailto:absch@cbd.int" class="alert-link">absch@cbd.int</a>
             </p>
         </div>
@@ -46,31 +46,31 @@
             <div class="row">
                 <div class="col-12">
                     <div class="card card p-3">
-                        <h3 class="border-bottom p-0 m-0 mb-2">Record Information</h3>
+                        <h3 class="border-bottom p-0 m-0 mb-2">{{::('recordLoaderT.recordInformation'|$translate)}}</h3>
                         <div>
-                            <span class="fs-small-8">Type: </span>
+                            <span class="fs-small-8">{{::('recordLoaderT.type'|$translate)}} </span>
                             <span ng-bind="internalDocumentInfo.metadata.schema | schemaName"></span>
                         </div>
                         <div>
-                            <span class="fs-small-8">Status: </span>
+                            <span class="fs-small-8">{{::('recordLoaderT.status'|$translate)}} </span>
                             <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && (internalDocumentInfo.latestRevision == 0 || internalDocumentInfo.revision === '0')">
-                                DRAFT
+                                {{::('recordLoaderT.draft'|$translate)}}
                             </span>
                             <span class="color-green" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > 0 && internalDocumentInfo.revision > 0">
-                                PUBLISHED
+                                {{::('recordLoaderT.published'|$translate)}}
                             </span>
                             <span class="color-red" ng-if="internalDocument.amendmentIntent!=1 && !internalDocumentInfo.deletedOn && internalDocumentInfo.workingDocumentLock">
-                                [Locked: Pending <span ng-bind="workflowRequestType"></span> request]
+                                [{{::('recordLoaderT.locked'|$translate)}} {{::('recordLoaderT.pending'|$translate)}} <span ng-bind="workflowRequestType"></span> {{::('recordLoaderT.request'|$translate)}}]
                             </span>
                             <span class="color-grey" ng-if="internalDocument.amendmentIntent!=1 && internalDocumentInfo.deletedOn && internalDocumentInfo.revision > 0">
-                                DELETED
+                                {{::('recordLoaderT.deleted'|$translate)}}
                             </span>
                             <span ng-show="!internalDocument.deletedOn && internalDocument.amendmentIntent==1  && internalDocument.type!='absCheckpointCommunique'">
-                                <span class="bold color-red"> REVOKED</span>
+                                <span class="bold color-red"> {{::('recordLoaderT.revoked'|$translate)}}</span>
                             </span>
                         </div>
                         <div>
-                            <span class="fs-small-8">History: </span>
+                            <span class="fs-small-8">{{::('recordLoaderT.history'|$translate)}} </span>
                             <div view-history document-id="internalDocumentInfo.identifier"></div>
                         </div>
 
@@ -82,37 +82,37 @@
 
         <div class="alert alert-danger" role="alert" ng-if="!internalDocumentInfo && !loading">
             <h3>
-                You are viewing a DELETED record. 
+                {{::('recordLoaderT.viewing'|$translate)}}
             </h3>
-            <p>This record information is displayed for reference purpose only and should be not used.</p>
+            <p>{{::('recordLoaderT.recordInformationDisplayed'|$translate)}}</p>
         </div>
 
         <div class="alert alert-danger" role="alert" ng-show="!internalDocumentInfo.deletedOn && internalDocumentInfo.latestRevision > internalDocumentInfo.revision && revisionNo != 'draft'">
             <h3>
-                This document has been updated. This is not the latest published version.
+                {{::('recordLoaderT.publishedVersion'|$translate)}}
                 <a rel="noopener" translation-url ng-href="/database/{{internalDocument.header.schema | urlSchemaShortName|encodeURIComponent}}/{{internalDocument | uniqueIDWithoutRevision|encodeURIComponent}}"
-                    target="new">Click here to view the latest version of the record.</a>
+                    target="new">{{::('recordLoaderT.latestVersion'|$translate)}}</a>
             </h3>
         </div>
 
         <div class="alert alert-success comapre-message" role="alert" ng-show="comparingRevision">
             <h3>
                 <span class="fa fa-window-restore"></span>
-                Comparing version <strong ng-bind="comparingRevision"></strong> with latest version <strong ng-bind="internalDocumentInfo.latestRevision"></strong>
-                <button ng-disabled="isComparing" class="btn btn-default btn-sm float-end" type="button"
-                    ng-click="closeComparison()"> Close comparison
+                {{::('recordLoaderT.comparingVersion'|$translate)}} <strong ng-bind="comparingRevision"></strong> {{::('recordLoaderT.withLatestVersion'|$translate)}} <strong ng-bind="internalDocumentInfo.latestRevision"></strong>
+                <button ng-disabled="isComparing" class="btn btn-secondary btn-sm float-end" type="button"
+                    ng-click="closeComparison()"> {{::('recordLoaderT.closeComparison'|$translate)}}
                 </button>
             </h3>
         </div>
 
         <div class="float-end position-relative btn-edit-record" ng-if="!isIRCCRevoked && internalCanEdit">
             <div>
-                <span class="color-white">|&nbsp;</span>
-                <a rel="noopener" translation-url title="Edit" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
+            {{::('recordLoaderT.edit'|$translate)}}  <span class="color-white">|&nbsp;</span>
+                <a rel="noopener" translation-url title="{{::('recordLoaderT.edit'|$translate)}}" ng-show="!internalDocumentInfo.deletedOn && !internalDocumentInfo.workingDocumentLock" type="button"
                     class="btn btn-sm text-black action-button p-0 px-1 color-white" ng-href="/register/{{internalDocument.header.schema|urlSchemaShortName|encodeURIComponent}}/{{internalDocument.header.identifier|encodeURIComponent}}/edit">
-                    <i class="bi bi-pencil-square color-white"></i> <span class="d-none d-sm-inline-block">Edit</span>
+                    <i class="bi bi-pencil-square color-white"></i> <span class="d-none d-sm-inline-block">{{::('recordLoaderT.edit'|$translate)}}</span>
                 </a>
-                <button title="Delete" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button"
+                <button title="{{::('recordLoaderT.delete'|$translate)}}" ng-show="!isRequest(record) && showAddButton()" ng-class="{'red':(record.type == 'absPermit' && isPublished(record))}" type="button"
                     class="btn btn-default" ng-click="askDelete(record)">
                     <i class="fa fa-trash-o"></i>
                 </button>
@@ -122,7 +122,7 @@
             style="top:7px;">
             <button type="button" ng-if="!showComparison" ng-disabled="isComparing" class="btn btn-success btn-sm"
                 ng-click="showDifference()">
-                <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> Show Difference
+                <i class="fa" ng-class="{'fa-check-square-o':showDifferenceOn, 'fa-square-o': !showDifferenceOn}"></i> {{::('recordLoaderT.showDifference'|$translate)}}
             </button>
             <!-- for comparing with older versions -->
             <!-- ng-if="showDifferenceButton"  style="display: none;"-->
@@ -134,14 +134,14 @@
                     ng-click="loadRecordRevisions()">
                     <span class="color-white">|&nbsp;&nbsp;</span>
                     <i class="fa fa-history color-white"></i>
-                    <span class="color-white d-none d-sm-inline-block" ng-if="!comparingRevision">Compare </span>
-                    <span class="color-white d-none d-sm-inline-block" ng-if="comparingRevision">Comparing <span
+                    <span class="color-white d-none d-sm-inline-block" ng-if="!comparingRevision">{{::('recordLoaderT.compare'|$translate)}} </span>
+                    <span class="color-white d-none d-sm-inline-block" ng-if="comparingRevision">{{::('recordLoaderT.comparing'|$translate)}} <span
                             ng-bind="recordRevisions[comparingRevision-1].uniqueIdentifier"></span></span>
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="comparisonMenu">
                     <li ng-if="loadingRevisions" ng-disabled="isComparing">
-                        <a class="dropdown-item" ng-href="#"><i class="fa fa-spin fa-spinner"></i> Loading...</a>
+                        <a class="dropdown-item" ng-href="#"><i class="fa fa-spin fa-spinner"></i> {{::('recordLoaderT.loading'|$translate)}}</a>
                     </li>
                     <li ng-if="!loadingRevisions" ng-repeat="revision in recordRevisions" ng-disabled="isComparing"
                         ng-class="{'active':revision.revision==comparingRevision}">
@@ -161,7 +161,7 @@
         <div class="float-end pe-2 position-relative text-white" style="top:7px;" ng-show="!loading && !error && internalDocumentInfo">
             <div record-options></div>
         </div>
-        <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>
+        <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> {{::('recordLoaderT.loading'|$translate)}}</span>
         <div id="schemaView" ng-show="internalDocument"></div>
     </div>
     <div id="printContentFooter" ng-if="printMode" ng-include="'view-print-footer.html'"></div>

@@ -6,8 +6,9 @@ import '~/components/scbd-branding/directives/xuser-notifications-panel.css';
 import '~/components/scbd-angularjs-services/main';
 import 'ngInfiniteScroll';
 import './header/xuser-notification-config-service';
-    
-    app.directive('xuserNotificationsPanel', function() {
+import xuserNotificationsPanelT from '~/app-text/components/scbd-branding/directives/xuser-notifications-panel.json';
+
+app.directive('xuserNotificationsPanel', ["translationService", function (translationService) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -18,6 +19,7 @@ import './header/xuser-notification-config-service';
                  docId: '=',
             },
             link: function ($scope, element, attrs){
+              translationService.set('xuserNotificationsPanelT', xuserNotificationsPanelT);
               if(attrs.hideCloseButton)
                 $scope.hideCloseButton=attrs.hideCloseButton;
               else
@@ -275,6 +277,6 @@ import './header/xuser-notification-config-service';
             ]
 
         };
-    });
+    }]);
 
 
