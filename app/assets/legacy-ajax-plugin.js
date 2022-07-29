@@ -12,9 +12,16 @@ function GenerateRecords(_type, _country, _locale)
 	const iframePlaceholder = document.getElementById(placeHolderID);
 
 	if(iframePlaceholder){
-	iframePlaceholder.innerHTML = "<div class='scbd-chm-embed' data-type='chm-search-result' data-legacy-schema='" + _type + "' " +
-									"data-legacy-countries='" + _country + "' data-locale='" + _locale + "' " + 
-									"width='100%' ></div>";
+		
+		var code = "<div class='scbd-chm-embed' data-type='chm-search-result'"
+		if(_type)
+			code += ` data-legacy-schema='${_type}'`;
+		if(_country && _country!= '*')
+			code = ` data-legacy-countries='${_country}'`
+		
+		code += ` data-locale='${_locale}' "width='100%' ></div>`;
+		
+		iframePlaceholder.innerHTML = code;
 	}
 
 }

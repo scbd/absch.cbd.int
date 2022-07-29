@@ -95,17 +95,26 @@ function initWidget(){
         if (Object.hasOwnProperty.call(widgets, key)) {
             const widget = widgets[key];   
             const locale = widget.dataset.locale || 'en'        
-            if(widget.dataset.accessKey || (widget.dataset.legacySchema && widget.dataset.legacyCountries)){            
+            if(widget.dataset.accessKey || widget.dataset.legacySchema || widget.dataset.legacyCountries){            
 
                 var width = getAttributeValue(widget, 'width')   || '100%';
                 var height = getAttributeValue(widget, 'height') || '500';
                 var type = getAttributeValue(widget, 'type')   || 'chm-document';
                 
-                let iframeSrc = `${origin}/${locale}/share/embed/${type}/`
+                let iframeSrc = `${origin}/${locale}/share/embed/${type}`
                 if(widget.dataset.accessKey)
-                    iframeSrc += `${widget.dataset.accessKey}?embed=true`;
-                else if(widget.dataset.legacySchema && widget.dataset.legacyCountries){
-                    iframeSrc += `legacy-widget?schema=${widget.dataset.legacySchema}&countries=${widget.dataset.legacyCountries}&embed=true`;
+                    iframeSrc += `/${widget.dataset.accessKey}?embed=true`;
+                else if(widget.dataset.legacySchema || widget.dataset.legacyCountries){
+                    iframeSrc += `/legacy-widget?embed=true`
+
+                    if(widget.dataset.legacySchema){
+                        var schemas = widget.dataset.legacySchema.split(/;|,|\s/)
+                        iframeSrc += `&schema=${schemas.join('&schema=')}`;
+                    }
+                    if(widget.dataset.legacyCountries){
+                        var countries = widget.dataset.legacyCountries.split(/;|,|\s/)
+                        iframeSrc += `&country=${countries.join('&country=')}`;
+                    }
                 }
                 var options = {
                     src : iframeSrc,

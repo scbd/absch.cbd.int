@@ -22,26 +22,37 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                 if($routeParams.accessKey == 'legacy-widget'){
                     const realmSchemas = [...realm.nationalSchemas, ...realm.referenceSchemas, ...realm.scbdSchemas];
                     //old bch schema names were not case sensitive, find from realm
-                    const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == searchQuery.schema.toLowerCase())                    
-                    const schema       = realm.schemas[realmSchema]
+                    let schemas = searchQuery.schema;
+                    if(typeof schemas == 'string')
+                        schemas = [schemas];
 
-                    data = {
-                        storageType : 'chm-search-result',
-                        sharedData  : { 
-                            realm : realm.value,
-                            searchQuery : { 
-                                _id : `${$routeParams.accessKey}_${realmSchema}`,
-                                filters : [{
-                                    id: realmSchema,
-                                    name: $filter('lstring')(schema.title, locale),
-                                    otherType: schema.type,
-                                    type: "schema"
-                                }] 
-                            } 
-                        } 
-                    };
-                    if(searchQuery.countries && searchQuery.countries != '*'){
-                        const countries = searchQuery.countries.split(/\s/g);
+                    for (let i = 0; i < schemas.length; i++) {
+
+                        const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemas[i].toLowerCase())                    
+                        const schema       = realm.schemas[realmSchema]
+                        if(schema){
+                            data = {
+                                storageType : 'chm-search-result',
+                                sharedData  : { 
+                                    realm : realm.value,
+                                    searchQuery : { 
+                                        _id : `${$routeParams.accessKey}_${realmSchema}`,
+                                        filters : [{
+                                            id: realmSchema,
+                                            name: $filter('lstring')(schema.title, locale),
+                                            otherType: schema.type,
+                                            type: "schema"
+                                        }] 
+                                    } 
+                                } 
+                            };
+                        }
+                    }
+
+                    if(searchQuery.countries){
+                        let countries = searchQuery.countries;
+                        if(typeof countries == 'string')
+                            countries = [countries]
                         for (let i = 0; i < countries.length; i++) {
                            
                             data.sharedData.searchQuery.filters.push({
