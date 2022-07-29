@@ -2173,6 +2173,9 @@ a.disabled{
     background-color: #e3e3e3;
     margin-right: 15px;
 }
+.nav-lg-header .protocol-options ul {
+    left: -65px; 
+}
 
 @media (max-width: 767px){
     .tabular-term-check .tabular-terms {
@@ -2201,6 +2204,11 @@ a.disabled{
     #search-new .bg-grey1 .float-end.color-black{
         position: relative;
         z-index: 1;
+    }
+}
+@media (max-width: 955px) {
+    .nav-lg-header .protocol-options ul {
+         left: -20px; 
     }
 }
 .easing {
@@ -2994,6 +3002,9 @@ a {
         margin-right: -1rem;
         padding: 0;
     }
+    .nav-lg-header .protocol-options ul {
+        left: 0;
+    }   
 }
 #hover_color:hover {
     background: #333 !important;
