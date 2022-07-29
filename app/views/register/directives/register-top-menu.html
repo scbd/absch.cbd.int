@@ -44,27 +44,32 @@
 
 
             <div class="menu-tabs d-none d-md-block">
-                <ul>
-                    <li><a rel="noopener" translation-url href="/register/dashboard"
-                            ng-class="{'tabactivated':path.indexOf('dashboard') > 0}">{{::('registerTopMenuT.dashboard'|$translate)}} </a></li>
-                    <li><a rel="noopener" translation-url href="/register/requests"
-                            ng-class="{'tabactivated':path.indexOf('requests') > 0}"> {{::('registerTopMenuT.requests'|$translate)}} <span
-                                ng-if="isPA && pendingCount>0 " ng-bind="pendingCount"></span></a></li>
-                    <li><a rel="noopener" translation-url href="/register/notifications"
-                            ng-class="{'tabactivated':path.indexOf('notifications') > 0}">
-                            <span ng-if="isABS"> {{::('registerTopMenuT.notifications'|$translate)}} </span>
-                            <span ng-if="isBCH"> {{::('registerTopMenuT.alerts'|$translate)}} </span>
-                        </a></li>
-                    <li ng-if="user.government || roles.isAdministrator"><a rel="noopener" translation-url
-                            ng-class="{'tabactivated':path.indexOf('national-users')>0}"
-                            href="/register/national-users"> {{::('registerTopMenuT.userManagement'|$translate)}} </a></li>
-                    <li><a rel="noopener" translation-url href="/register/user-preferences"
-                            ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> {{::('registerTopMenuT.preferences'|$translate)}} </a></li>
-                    <!-- <li><a rel="noopener" translation-url href="/register/reports"
-                            ng-class="{'tabactivated':path.indexOf('reports') > 0}"> Reports</a></li> -->
-                    <li ng-if="roles.isAdministrator"><a rel="noopener" translation-url href="/register/admin"
-                            class="bg-pink linkDark"><span ng-class="{'color-white':deviceSize!='xs'}"> {{::('registerTopMenuT.admin'|$translate)}} </span></a></li>
-                </ul>
+                <a type="button" class="btn btn-light btn-sm mx-1 fw-bold border-0 text-gray-66" rel="noopener" translation-url href="/register/dashboard" ng-class="{'tabactivated':path.indexOf('dashboard') > 0}">
+                    {{::('registerTopMenuT.dashboard'|$translate)}} 
+                </a>
+                <a type="button" class="btn btn-light btn-sm mx-1 fw-bold border-0 text-gray-66" rel="noopener" translation-url href="/register/requests" ng-class="{'tabactivated':path.indexOf('requests') > 0}">
+                    {{::('registerTopMenuT.requests'|$translate)}} 
+                    <span ng-if="isPA && pendingCount>0 " ng-bind="pendingCount"></span>
+                </a>
+                <a type="button" class="btn btn-light btn-sm mx-1 fw-bold border-0 text-gray-66" rel="noopener" translation-url href="/register/notifications" ng-class="{'tabactivated':path.indexOf('notifications') > 0}">
+                    <span ng-if="isABS"> {{::('registerTopMenuT.notifications'|$translate)}} </span>
+                    <span ng-if="isBCH"> {{::('registerTopMenuT.alerts'|$translate)}} </span>
+                </a>
+                <a ng-if="user.government || roles.isAdministrator" type="button" class="btn btn-light btn-sm mx-1 border-0 fw-bold text-gray-66" rel="noopener" translation-url
+                    ng-class="{'tabactivated':path.indexOf('national-users')>0}" href="/register/national-users"> 
+                    {{::('registerTopMenuT.userManagement'|$translate)}}
+                </a>
+
+
+                <a type="button" class="btn btn-light btn-sm mx-1 fw-bold border-0 text-gray-66" rel="noopener" translation-url href="/register/user-preferences"
+                    ng-class="{'tabactivated':path.indexOf('user-preferences') > 0}"> 
+                    {{::('registerTopMenuT.preferences'|$translate)}} 
+                </a>
+                    
+                <a type="button" class="btn btn-light btn-sm mx-1 fw-bold border-0 bg-pink linkDark" ng-if="roles.isAdministrator" rel="noopener" translation-url href="/register/admin">
+                    <span ng-class="{'color-white':deviceSize!='xs'}">{{::('registerTopMenuT.admin'|$translate)}}</span>
+                </a>
+
             </div>
 
             <div class="btn-group d-block d-md-none px-2 w-100" role="group">

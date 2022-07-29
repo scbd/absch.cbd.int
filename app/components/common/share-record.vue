@@ -12,7 +12,7 @@
               <span v-if="sharedData.type=='embed'">{{$t('modalTitleEmbed')}}</span>
               <span v-if="sharedData.type=='email'">{{$t('modalTitleEmail')}}</span>
             </h5>
-            <button type="button" class="btn-close" @click="closeDialog()" aria-label="Close" ></button>
+            <button type="button" class="border-0 close" @click="closeDialog()" aria-label="Close" ><i class="bi bi-x-circle-fill icon-lg"></i></button>
           </div>
           <div class="modal-body">
             <div class="wrapper">
@@ -165,7 +165,7 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <!-- <div class="modal-footer">
             <button
               type="button"
               class="btn btn-secondary float-end"
@@ -173,7 +173,7 @@
             >
               {{$t('cancel')}}
             </button>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

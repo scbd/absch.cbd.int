@@ -42,7 +42,7 @@
                         <div class="col-3">
                             <input type="button" class="btn btn-primary" value="View Record" ng-click="record.showDoc=!record.showDoc;loadDocumentDetails(record.showDoc, record)" />
                             <input type="button" class="btn btn-primary" value="Add Comments" ng-click="addComments($event, record)" />
-                            <input type="button" class="btn btn-warning" value="Delete" ng-click="delete($event, record)" />
+                            <input type="button" class="btn btn-danger" value="Delete" ng-click="delete($event, record)" />
                         </div>
                     </div>
                     <div ng-if="record.history">

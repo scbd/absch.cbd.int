@@ -9,13 +9,13 @@
                     <option ng-value="'group'">{{::('resultViewOptionsT.group'|$translate)}}</option>
                     <option ng-value="'matrix'">{{::('resultViewOptionsT.matrix'|$translate)}}</option>
                 </select>
-                <i class="fa fa-cog" ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
+                <i ng-if="viewType=='group' || (viewType=='default' && currentTab =='nationalRecords')" ng-click="viewTypeChange(viewType,currentTab);"></i>
             </a>
         </li>        
         <li id="sortBy">
             <a rel="noopener" class="cursor-pointer text-decoration-none" ng-click="showSortDialog()">
-                {{::('resultViewOptionsT.sort'|$translate)}}
                 <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> 
+                {{::('resultViewOptionsT.sort'|$translate)}}
             </a>
         </li>    
         
@@ -85,13 +85,13 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('resultViewOptionsT.cancel'|$translate)}}</button>
+                <!-- <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading">{{::('resultViewOptionsT.cancel'|$translate)}}</button> -->
                 <button type="button" class="btn btn-primary float-start" ng-click="apply()"  ng-disabled="!selectedFields.length">{{::('resultViewOptionsT.apply'|$translate)}}</button>
             </div>
         </script>
 
         <script type="text/ng-template" trados-translation="true" id="groupByDialog">
-            <div class="modal-header"style="padding:0px">
+            <div class="modal-header">
                 <h3 class="modal-title">
                     {{::('resultViewOptionsT.groupByField'|$translate)}}
                 </h3>
@@ -120,7 +120,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()">{{::('resultViewOptionsT.cancel'|$translate)}}</button>
+                <!-- <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()">{{::('resultViewOptionsT.cancel'|$translate)}}</button> -->
                 <button type="button" class="btn btn-primary float-start" ng-click="apply()" ng-disabled="!selectedFields.length">{{::('resultViewOptionsT.apply'|$translate)}}</button>
             </div>
         </script>

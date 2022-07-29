@@ -17,7 +17,7 @@
         <div smooth-scroll duration="100" offset="200" scroll-if="{{!$root.stopSmoothScroll}}"></div>
         <div block-region activate="loading||isComparing"></div>
 
-        <div class="alert alert-danger text-center" ng-show="error" ng-if="error && !loading">
+        <div class="alert alert-danger text-center" ng-if="error && !loading">
             <strong>Error!</strong>
             This was an error loading the requested record.
             <p ng-if="error.status == 404">Record was not found!</p>
@@ -80,7 +80,7 @@
             </div>
         </div>
 
-        <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
+        <div class="alert alert-danger" role="alert" ng-if="!internalDocumentInfo && !loading">
             <h3>
                 You are viewing a DELETED record. 
             </h3>
@@ -99,9 +99,8 @@
             <h3>
                 <span class="fa fa-window-restore"></span>
                 Comparing version <strong ng-bind="comparingRevision"></strong> with latest version <strong ng-bind="internalDocumentInfo.latestRevision"></strong>
-                <button ng-disabled="isComparing" class="btn btn-default btn-success btn-xs float-end" type="button"
-                    ng-click="closeComparison()">
-                    <span class="bi bi-x-circle-fill"></span> Close comparison
+                <button ng-disabled="isComparing" class="btn btn-default btn-sm float-end" type="button"
+                    ng-click="closeComparison()"> Close comparison
                 </button>
             </h3>
         </div>
@@ -155,11 +154,11 @@
                 <div id="compareSchemaView"></div>
             </div>
         </div>
-        <div ng-if="shareVueComponent" class="share-single-document full-text-display pull-right compare-buttons">
+        <div id="sendRecords" ng-if="shareVueComponent && internalDocumentInfo" class="share-single-document full-text-display pull-right compare-buttons">
             <span class="color-white">|&nbsp;</span>
             <share-record ng-vue="shareVueComponent" :get-query="getQuery" :token-reader="tokenReader" :user-status="userStatus"></share-record>
         </div>
-        <div class="float-end pe-2 position-relative text-white" style="top:7px;" ng-show="!loading && !error">
+        <div class="float-end pe-2 position-relative text-white" style="top:7px;" ng-show="!loading && !error && internalDocumentInfo">
             <div record-options></div>
         </div>
         <span ng-if="loading" class="record-loader-loading"><i class="fa fa-spinner fa-spin"></i> loading...</span>

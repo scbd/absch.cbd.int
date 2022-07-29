@@ -26,7 +26,7 @@
                         <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"> </i> Reminders</span>
                         <span ng-if="typeFilter=='approved'"><i class="fa fa-check-circle"> </i> Approved Requests</span>
                         <span ng-if="typeFilter=='recalled'"><i class="fa fa-rotate-left"> </i> Recalled Requests</span>
-                        <span ng-if="typeFilter=='rejected'"><i class="fa fa-times-circle"> </i> Rejected Requests</span>
+                        <span ng-if="typeFilter=='rejected'"><i class="bi bi-x-circle-fill"> </i> Rejected Requests</span>
                         <span ng-if="typeFilter=='timedout'"><i class="fa fa-clock-o"> </i> Expired Requests</span>
                         <span class="caret"></span>
                     </button>
@@ -51,7 +51,7 @@
                             <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'recalled'"> <i class="fa fa-rotate-left"> </i> Recalled Requests </a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'rejected'"> <i class="fa fa-times-circle"> </i> Rejected Requests </a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'rejected'"> <i class="bi bi-x-circle-fill"> </i> Rejected Requests </a>
                         </li>
                         <li>
                             <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'timedout'"> <i class="fa fa-clock-o"> </i> Expired Requests</a>
@@ -242,14 +242,14 @@
             <div class="row notification-spacing10" ng-if="notification.data.action==='rejected'">
                 <div class="col-2 text-center d-none d-sm-inline-block">
                     <div class="notification-spacing5">
-                        <i class="fa fa-lg fa-times-circle"> </i>
+                        <i class="bi bi-x-circle-fill icon-lg"> </i>
                         <br/>
                         <span class="notification-icon-text"> Request rejected </span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
-                        <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-times-circle"> </i>
+                        <i class="hidden-sm hidden-md hidden-lg icon-lg bi bi-x-circle-fill"> </i>
                         <span class="notification-title">Request Rejected
                             <span class="d-none d-sm-inline-block">: 
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
