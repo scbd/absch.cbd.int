@@ -1,0 +1,27 @@
+{
+    "addFile": "Add file",
+    "addLink": "Add link",
+    "editingLink": "Editing link",
+    "urlOfTheWebsite": "Please provide the URL of the website (e.g.",
+    "website": "and the name of the website (e.g. \"The Convention on Biological Diversity\").",
+    "warning": "Warning!",
+    "specifiedValidUrl": "Specified value is not a valid URL.",
+    "linkType": "make sure the URL starts with http:// or https://",
+    "protocol": "Protocol is required (https:// or http://)",
+    "validUrl": "Please provide valid URL",
+    "url": "Url",
+    "name": "Name",
+    "language": "Language",
+    "selectLanguage": "Please select Language",
+    "cancel": "Cancel",
+    "save": "Save",
+    "uploadingFile": "Uploading file",
+    "error": "An error has occurred",
+    "uploading": "Uploading",
+    "fileName": "File name",
+    "tags": "Tags",
+    "example": "example",
+    "examplWebsite": "example: SCBD website",
+    "exampleBiodiversityarget": "example: Biodiversity, Aichi target"
+
+}

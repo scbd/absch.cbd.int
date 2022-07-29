@@ -1,8 +1,8 @@
 ﻿<div style="margin-bottom:20px">
 	<div>
 		<div ng-transclude="linkControls" style="padding-bottom: 5px;">
-			<button type="button" class="btn btn-primary btn-sm" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="bi bi-plus"></i> Add file</button>
-			<button type="button" class="btn btn-primary btn-sm" ng-click="addLink()" ng-if="isAllowLink()"><i class="bi bi-plus"></i> Add link</button>
+			<button type="button" class="btn btn-primary btn-sm" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="bi bi-plus"></i> {{::('kmLinkT.addFile'|$translate)}}</button>
+			<button type="button" class="btn btn-primary btn-sm" ng-click="addLink()" ng-if="isAllowLink()"><i class="bi bi-plus"></i> {{::('kmLinkT.addLink'|$translate)}}</button>
 		</div>
 
 		<div ng-transclude="linkDisplay">
@@ -32,32 +32,32 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>Editing link</h3>
+					<h3>{{::('kmLinkT.editingLink'|$translate)}}</h3>
 				</div>
 				<div class="modal-body"  ng-if="editor.visible && editor.type=='link'">
-					<div class="alert alert-info">Please provide the URL of the website (e.g. <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">https://www.cbd.int</a>) and the name of the website (e.g. "The Convention on Biological Diversity").</div>
+					<div class="alert alert-info">{{::('kmLinkT.urlOfTheWebsite'|$translate)}} <a rel="noopener" translation-url target="_blank" href="http://www.cbd.int">https://www.cbd.int</a>) {{::('kmLinkT.website'|$translate)}}</div>
 					<form name="linkForm">
 						<fieldset>
 							<div class="alert alert-warning" ng-if="linkForm.$error.url">
-								<strong>Warning!</strong>
-								Specified value is not a valid URL.
-								<ul><li> make sure the URL starts with http:// or https://</li></ul>
+								<strong>{{::('kmLinkT.warning'|$translate)}}</strong>
+								{{::('kmLinkT.specifiedValidUrl'|$translate)}}
+								<ul><li> {{::('kmLinkT.linkType'|$translate)}}</li></ul>
 							</div>
 							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
-								<label class="control-label" ng-required="editor.visible" for="url">Url</label>
-								<div class="help-block">Protocol is required (https:// or http://)</div>
-								<div ng-if="editor.urlMissing" style="color: #e32">Please provide valid URL</div>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="example: https://www.cbd.int" />
+								<label class="control-label" ng-required="editor.visible" for="url">{{::('kmLinkT.url'|$translate)}}</label>
+								<div class="help-block">{{::('kmLinkT.protocol'|$translate)}}</div>
+								<div ng-if="editor.urlMissing" style="color: #e32">{{::('kmLinkT.validUrl'|$translate)}}</div>
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="{{::('kmLinkT.example'|$translate)}}: https://www.cbd.int" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">
-								<label>Name</label>
-								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="example: SCBD website" />
+								<label>{{::('kmLinkT.name'|$translate)}}</label>
+								<input class="form-control" type="text" style="width:98%" ng-model="editor.name"  placeholder="{{::('kmLinkT.examplWebsite'|$translate)}}" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
-								<label class="control-label" ng-required="editor.visible" for="Language">Language</label>
-								<div ng-if="editor.isLanguageSelect" style="color: #e32">Please select Language</div>
+								<label class="control-label" ng-required="editor.visible" for="Language">{{::('kmLinkT.language'|$translate)}}</label>
+								<div ng-if="editor.isLanguageSelect" style="color: #e32">{{::('kmLinkT.selectLanguage'|$translate)}}</div>
 								<div km-form-languages required name="linkLanguage" ng-model="editor.language" data-multiple="false" 
 								require-un-language="false"></div>
 							</div>
@@ -66,8 +66,8 @@
 				</div>
 				<div class="modal-footer d-block">
 					<button type="button" class="btn btn-primary px-3 rounded-0 float-end" ng-click="linkForm.$invalid || editor.save()"
-						ng-disabled="linkForm.$invalid">Save</button>
-					<button type="button" class="btn btn-default px-3 rounded-0 float-end" ng-click="editor.close()">Close</button>
+						ng-disabled="linkForm.$invalid">{{::('kmLinkT.save'|$translate)}}</button>
+					<button type="button" class="btn btn-secondary px-3 rounded-0 float-end" ng-click="editor.close()">{{::('kmLinkT.cancel'|$translate)}}</button>
 				</div>
 			</div>
 		</div>
@@ -78,11 +78,11 @@
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h3>Uploading file</h3>
+					<h3>{{::('kmLinkT.uploadingFile'|$translate)}}</h3>
 				</div>
 				<div class="modal-body" ng-if="editor.visible && editor.type=='file'">
 					<div class="alert alert-danger" ng-if="editor.error!=null">
-						<h4>An error has occurred</h4>
+						<h4>{{::('kmLinkT.error'|$translate)}}</h4>
 						<span ng-bind="editor.error"></span>
 					</div>
 					<div ng-if="editor.progress">
@@ -92,23 +92,23 @@
 						</div>
 					</div>
 					<div class="control-group" >
-						<label>File name</label>
+						<label>{{::('kmLinkT.fileName'|$translate)}}</label>
 						<input class="form-control" type="text" style="width:98%" ng-model="editor.name" />
 					</div>
 					<div class="control-group" ng-class="{error: linkForm.editor.language.$invalid}">
-						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">Language</label>
-						<div ng-if="editor.isLanguageSelect" style="color: #e32">Please select Language</div>
+						<label class="control-label" ng-required="editor.visible && editor.isLanguageMandatory" for="Language">{{::('kmLinkT.language'|$translate)}}</label>
+						<div ng-if="editor.isLanguageSelect" style="color: #e32">{{::('kmLinkT.selectLanguage'|$translate)}}</div>
 						<div km-form-languages required name="fileLanguage" ng-model="editor.language" data-multiple="false" require-un-language="false"></div>
 					</div>
 					<br/>
 					<div class="control-group" >
-						<label>Tags</label>
-						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="example: Biodiversity, Aichi target" />
+						<label>{{::('kmLinkT.tags'|$translate)}}</label>
+						<input class="form-control" type="text" style="width:98%" ng-model="editor.tag"  placeholder="{{::('kmLinkT.exampleBiodiversityarget'|$translate)}}" />
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">Cancel</button>
-					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress || editor.error!=null">Save</button>
+					<button type="button" class="btn btn-default" ng-click="editor.close()">{{::('kmLinkT.cancel'|$translate)}}</button>
+					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress || editor.error!=null">{{::('kmLinkT.save'|$translate)}}</button>
 				</div>
 				<div id="uploadPlaceholder" style="display:none"></div>
 			</div>

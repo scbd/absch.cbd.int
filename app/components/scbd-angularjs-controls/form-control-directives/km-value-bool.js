@@ -3,8 +3,8 @@ import ng from 'angular';
 import $ from 'jquery';
 import _ from 'lodash';
 import template from 'text!./km-value-bool.html'; ;
-
-	app.directive('kmValueBool', [function ()
+import kmValueBoolT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-value-bool.json'; 
+	app.directive('kmValueBool', ["translationService",function (translationService)
 	{
 		return {
 			restrict: 'EAC',
@@ -15,7 +15,8 @@ import template from 'text!./km-value-bool.html'; ;
 				locales    : '='
 			},
 			link: function ($scope, element, attrs)
-			{				
+			{		
+				translationService.set('kmValueBoolT', kmValueBoolT);		
 			}
 		};
 	}]);

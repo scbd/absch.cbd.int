@@ -5,74 +5,74 @@
             <div class="btn-group" role="group">
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span ng-if="!stateFilter || stateFilter=='All'">All</span>
-                        <span ng-if="stateFilter=='unread'">Unread</span>
-                        <span ng-if="stateFilter=='read'">Read</span>
+                        <span ng-if="!stateFilter || stateFilter=='All'">{{::('xuserNotificationsPanelT.all'|$translate)}}</span>
+                        <span ng-if="stateFilter=='unread'">{{::('xuserNotificationsPanelT.unread'|$translate)}}</span>
+                        <span ng-if="stateFilter=='read'">{{::('xuserNotificationsPanelT.read'|$translate)}}</span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'All'">All</a></li>
-                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'unread'">Unread</a></li>
-                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'read'">Read</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'All'">{{::('xuserNotificationsPanelT.all'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'unread'">{{::('xuserNotificationsPanelT.unread'|$translate)}}</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="stateFilter = 'read'">{{::('xuserNotificationsPanelT.read'|$translate)}}</a></li>
                     </ul>
                 </div>
 
                 <div class="btn-group" role="group">
                     <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span ng-if="!typeFilter || typeFilter=='All'">All Types</span>
-                        <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"> </i> Alerts</span>
-                        <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"> </i> Messages</span>
-                        <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"> </i> Publishing Requests</span>
-                        <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"> </i> Reminders</span>
-                        <span ng-if="typeFilter=='approved'"><i class="fa fa-check-circle"> </i> Approved Requests</span>
-                        <span ng-if="typeFilter=='recalled'"><i class="fa fa-rotate-left"> </i> Recalled Requests</span>
-                        <span ng-if="typeFilter=='rejected'"><i class="bi bi-x-circle-fill"> </i> Rejected Requests</span>
-                        <span ng-if="typeFilter=='timedout'"><i class="fa fa-clock-o"> </i> Expired Requests</span>
+                        <span ng-if="!typeFilter || typeFilter=='All'">{{::('xuserNotificationsPanelT.allTypes'|$translate)}}</span>
+                        <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"> </i> {{::('xuserNotificationsPanelT.alerts'|$translate)}}</span>
+                        <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"> </i> {{::('xuserNotificationsPanelT.messages'|$translate)}}</span>
+                        <span ng-if="typeFilter=='request'"><i class="fa fa-rotate-right"> </i> {{::('xuserNotificationsPanelT.publishingRequests'|$translate)}}</span>
+                        <span ng-if="typeFilter=='reminder'"><i class="fa fa-calendar"> </i> {{::('xuserNotificationsPanelT.reminders'|$translate)}}</span>
+                        <span ng-if="typeFilter=='approved'"><i class="fa fa-check-circle"> </i> {{::('xuserNotificationsPanelT.approvedRequests'|$translate)}}</span>
+                        <span ng-if="typeFilter=='recalled'"><i class="fa fa-rotate-left"> </i> {{::('xuserNotificationsPanelT.recalledRequests'|$translate)}}</span>
+                        <span ng-if="typeFilter=='rejected'"><i class="bi bi-x-circle-fill"> </i> {{::('xuserNotificationsPanelT.rejectedRequests'|$translate)}}</span>
+                        <span ng-if="typeFilter=='timedout'"><i class="fa fa-clock-o"> </i> {{::('xuserNotificationsPanelT.expiredRequests'|$translate)}}</span>
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'All'"> All Types</a></li>
+                        <li><a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'All'"> {{::('xuserNotificationsPanelT.allTypes'|$translate)}}</a></li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'alert'"> <i class="fa fa-bolt"> </i> Alerts</a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'alert'"> <i class="fa fa-bolt"> </i> {{::('xuserNotificationsPanelT.alerts'|$translate)}}</a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'message'"> <i class="fa fa-envelope-o"> </i> Messages</a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'message'"> <i class="fa fa-envelope-o"> </i> {{::('xuserNotificationsPanelT.messages'|$translate)}}</a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'request'"> <i class="fa fa-rotate-right"> </i> Publishing Requests</a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'request'"> <i class="fa fa-rotate-right"> </i> {{::('xuserNotificationsPanelT.publishingRequests'|$translate)}}</a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'reminder'"> <i class="fa fa-calendar"> </i> Reminders</a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'reminder'"> <i class="fa fa-calendar"> </i> {{::('xuserNotificationsPanelT.reminders'|$translate)}}</a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'approved'"> <i class="fa fa-check-circle"> </i> Approved Requests</a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'approved'"> <i class="fa fa-check-circle"> </i> {{::('xuserNotificationsPanelT.approvedRequests'|$translate)}}</a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'recalled'"> <i class="fa fa-rotate-left"> </i> Recalled Requests </a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'recalled'"> <i class="fa fa-rotate-left"> </i> {{::('xuserNotificationsPanelT.recalledRequests'|$translate)}} </a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'rejected'"> <i class="bi bi-x-circle-fill"> </i> Rejected Requests </a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'rejected'"> <i class="bi bi-x-circle-fill"> </i> {{::('xuserNotificationsPanelT.rejectedRequests'|$translate)}} </a>
                         </li>
                         <li>
-                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'timedout'"> <i class="fa fa-clock-o"> </i> Expired Requests</a>
+                            <a rel="noopener" translation-url  href="#" ng-click="typeFilter = 'timedout'"> <i class="fa fa-clock-o"> </i> {{::('xuserNotificationsPanelT.expiredRequests'|$translate)}}</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="btn-group" role="group">
-                    <input type="text" class="form-control" ng-model="keyword" placeholder="search by keyword" style="width:12rem" />
+                    <input type="text" class="form-control" ng-model="keyword" placeholder="{{::('xuserNotificationsPanelT.searchByKeyword'|$translate)}}" style="width:12rem" />
                 </div>
             </div>
 
             <div class="float-end">
-                <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">mark all read</a>
+                <a rel="noopener" type="button" class="color-litegrey" href="#" ng-click="markAllRead()">{{::('xuserNotificationsPanelT.markAllRead'|$translate)}}</a>
             </div>
         </div>
     </div>
 
     <div class="row notification-panel-header p-2 mt-3">
         <div class="col-3 text-center">
-            <strong>Message</strong>
+            <strong>{{::('xuserNotificationsPanelT.message'|$translate)}}</strong>
         </div>
         <div class="col-6">
 
@@ -91,22 +91,22 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-clock-o"> </i>
                         <span class="notification-icon-text">
-                            <br/> Request Expired</span>
+                            <br/> {{::('xuserNotificationsPanelT.requestExpired'|$translate)}}</span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <span class="notification-title">
-                            <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-clock-o"> </i> Publishing request expired
-                            <span class="d-none d-sm-inline-block">: The requested record has been placed back into the owners draft folder</span>
+                            <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-clock-o"> </i> {{::('xuserNotificationsPanelT.publishingRequestExpired'|$translate)}}
+                            <span class="d-none d-sm-inline-block">: {{::('xuserNotificationsPanelT.draftFolder'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Details: </span>
-                            <span class="notification-label">Publishing Requests are automatically expired by the system after 90 days </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.detail'|$translate)}} </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.expired'|$translate)}} </span>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -129,22 +129,22 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-rotate-right"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Publishing Request </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.publishingRequest'|$translate)}}</span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-right"> </i>
-                        <span class="notification-title" ng-if="notification.data.action==='request'">Publishing request</span>
-                        <span class="notification-title" ng-if="notification.data.action==='delete-request'">Delete request</span>
+                        <span class="notification-title" ng-if="notification.data.action==='request'">{{::('xuserNotificationsPanelT.publishingRequest'|$translate)}}</span>
+                        <span class="notification-title" ng-if="notification.data.action==='delete-request'">{{::('xuserNotificationsPanelT.deleteRequest'|$translate)}}</span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Requested by: </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.requestedBy'|$translate)}} </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
-                            <span class="notification-label"> on </span>
+                            <span class="notification-label"> {{::('xuserNotificationsPanelT.on'|$translate)}} </span>
                             <span> {{notification.createdOn | formatDateWithTime}} </span>
                         </div>
                     </div>
@@ -155,7 +155,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -167,22 +167,22 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-calendar"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Reminder </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.reminder'|$translate)}} </span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-calendar"> </i>
-                        <span class="notification-title" ng-if="notification.data.action==='request'">Reminder: Publishing request pending approval. </span>
-                        <span class="notification-title" ng-if="notification.data.action==='delete-request'">Reminder: Delete request pending approval. </span>
+                        <span class="notification-title" ng-if="notification.data.action==='request'">{{::('xuserNotificationsPanelT.reminderPendingApproval'|$translate)}} </span>
+                        <span class="notification-title" ng-if="notification.data.action==='delete-request'">{{::('xuserNotificationsPanelT.reminderDeleteApproval'|$translate)}} </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Requested by: </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.requestedBy'|$translate)}} </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
-                            <span class="notification-label"> on </span>
+                            <span class="notification-label"> {{::('xuserNotificationsPanelT.on'|$translate)}} </span>
                             <span> {{notification.createdOn | formatDateWithTime}} </span>
                         </div>
                     </div>
@@ -193,7 +193,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -205,23 +205,23 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-rotate-left"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Request recalled </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.requestRecalled'|$translate)}} </span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-rotate-left"> </i>
-                        <span class="notification-title">Request Recalled
-                            <span class="d-none d-sm-inline-block">: The requester has cancelled their request for publishing a record</span>
+                        <span class="notification-title">{{::('xuserNotificationsPanelT.requestRecalled'|$translate)}}
+                            <span class="d-none d-sm-inline-block">: {{::('xuserNotificationsPanelT.cancelled'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Recalled by: </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.recalledBy'|$translate)}} </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
-                            <span class="notification-label"> on </span>
+                            <span class="notification-label"> {{::('xuserNotificationsPanelT.on'|$translate)}} </span>
                             <span> {{notification.createdOn | formatDateWithTime}} </span>
                         </div>
                     </div>
@@ -232,7 +232,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -244,30 +244,30 @@
                     <div class="notification-spacing5">
                         <i class="bi bi-x-circle-fill icon-lg"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Request rejected </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.requestRejected'|$translate)}} </span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg icon-lg bi bi-x-circle-fill"> </i>
-                        <span class="notification-title">Request Rejected
+                        <span class="notification-title">{{::('xuserNotificationsPanelT.requestRejected'|$translate)}}
                             <span class="d-none d-sm-inline-block">: 
-                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
-                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">{{::('xuserNotificationsPanelT.publishingAuthority'|$translate)}}</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">{{::('xuserNotificationsPanelT.bchNationalFocalPoint'|$translate)}}</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
-                                 has rejected as request for publishing</span>
+                                {{::('xuserNotificationsPanelT.hasRejectedForPublishing'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Rejected by: </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.rejectedBy'|$translate)}} </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
-                            <span class="notification-label"> on </span>
+                            <span class="notification-label"> {{::('xuserNotificationsPanelT.on'|$translate)}} </span>
                             <span> {{notification.createdOn | formatDateWithTime}}</span>
                             <div ng-if="notification.data.info">
-                                <span class="notification-label" ng-if="notification.data.info">Reason :</span>
+                                <span class="notification-label" ng-if="notification.data.info">{{::('xuserNotificationsPanelT.reason'|$translate)}}</span>
                                 <span  ng-bind="notification.data.info"></span>
                             </div>
                         </div>
@@ -279,7 +279,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -292,27 +292,27 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-check-circle"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Request approved </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.requestApproved'|$translate)}} </span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-check-circle"> </i>
-                        <span class="notification-title">Request Approved
+                        <span class="notification-title">{{::('xuserNotificationsPanelT.requestApproved'|$translate)}}
                             <span class="d-none d-sm-inline-block">: 
-                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">Publishing Authority</span>
-                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">BCH National Focal Point</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isABS">{{::('xuserNotificationsPanelT.publishingAuthority'|$translate)}}</span>
+                                <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'national' && isBCH">{{::('xuserNotificationsPanelT.bchNationalFocalPoint'|$translate)}}</span>
                                 <span ng-if="schemaType(notification.data.documentInfo.metadata.schema) == 'reference'">SCBD</span>
-                                 has approved a request and published the record</span>
+                                {{::('xuserNotificationsPanelT.hasApproved'|$translate)}}</span>
                         </span>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
                             <span> {{notification.data.documentInfo.title | lstring:locale }} </span>
                         </div>
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Approved by: </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.approvedBy'|$translate)}} </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
-                            <span class="notification-label"> on </span>
+                            <span class="notification-label"> {{::('xuserNotificationsPanelT.on'|$translate)}} </span>
                             <span> {{notification.createdOn | formatDateWithTime}} </span>
                         </div>
                     </div>
@@ -323,7 +323,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -335,7 +335,7 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-envelope-o"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Message </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.message'|$translate)}} </span>
                     </div>
                 </div>
                 <div class="col-8">
@@ -344,9 +344,9 @@
                         <div class="notification-title notification-spacing5">{{notification.data.message}}</div>
 
                         <div class="d-none d-sm-inline-block notification-spacing5">
-                            <span class="notification-label">Sent from: </span>
+                            <span class="notification-label">{{::('xuserNotificationsPanelT.sentFrom'|$translate)}} </span>
                             <span> {{notification.createdBy_info.firstName}} {{notification.createdBy_info.lastName}} </span>
-                            <span class="notification-label"> on </span>
+                            <span class="notification-label"> {{::('xuserNotificationsPanelT.on'|$translate)}} </span>
                             <span> {{notification.createdOn | formatDateWithTime}} </span>
                         </div>
                     </div>
@@ -357,7 +357,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -369,14 +369,14 @@
                     <div class="notification-spacing5">
                         <i class="fa fa-lg fa-bolt"> </i>
                         <br/>
-                        <span class="notification-icon-text"> Alert </span>
+                        <span class="notification-icon-text"> {{::('xuserNotificationsPanelT.alert'|$translate)}} </span>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="notification-message" ng-click="goto(notification);">
                         <i class="hidden-sm hidden-md hidden-lg fa fa-lg fa-envelope-o"> </i>
                         <div class="notification-title notification-spacing5">
-                            {{notification.data.message || 'A new record has been published'}}
+                            {{notification.data.message || '{{::('xuserNotificationsPanelT.newRecordPublished'|$translate)}}'}}
                         </div>
                         <div class="notification-spacing5">
                             <span class="notification-label">{{notification.data.documentInfo.metadata.schema | schemaName}}: </span>
@@ -396,7 +396,7 @@
                         <a rel="noopener" translation-url  href="#" ng-show="notification.state==='read'" ng-click="updateStatus(notification);"><i class="fa fa-check-square-o fa-lg"></i></a>
                         <br>
                         <span class="notification-timer">{{notification.createdOn | moment:'startOf':'minutes' | moment:'fromNow'}}
-                            <span class="d-none d-sm-inline-block">ago</span>
+                            <span class="d-none d-sm-inline-block">{{::('xuserNotificationsPanelT.ago'|$translate)}}</span>
                         </span>
                     </div>
                 </div>
@@ -404,7 +404,7 @@
             
             <div class="mt-2" ng-if="!notifications">
                 <div class="col-12 text-center">
-                    <span class="color-grey"> no notifications </span>
+                    <span class="color-grey"> {{::('xuserNotificationsPanelT.noNotifications'|$translate)}} </span>
                 </div>
             </div>
 
@@ -412,6 +412,6 @@
     </div>
 
     <div ng-if="!notifications || (notifications | filter:keyword | filter:hasState | filter:hasType).length <= 0">
-       <h4> <strong>You have no new notifications or requests</strong></h5>
+       <h4> <strong>{{::('xuserNotificationsPanelT.noNewRequests'|$translate)}}</strong></h5>
     </div>
 </div>
