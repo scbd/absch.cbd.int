@@ -14,11 +14,11 @@
         .nr-analyzer tr.filter.filter-on > td.filter > i { color:#337ab7; }
         .nr-analyzer tr > td.filter:hover > i { color:#337ab7; }
         .nr-analyzer tr > td.filter > i[disabled] { color:#ccc; }
-        .nr-analyzer .panel.panel-collapse > .panel-heading { border-bottom: none; }
-        .nr-analyzer .panel.panel-collapse > .panel-body    { display: none; }
-        .nr-analyzer .panel.sum:hover.panel-default { border-color: #bce8f1; }
-        .nr-analyzer .panel.sum:hover.panel-default > .panel-body { background-color: #eee}
-        .nr-analyzer .panel.sum:hover.panel-default > .panel-heading {
+        .nr-analyzer .card.card-collapse > .card-header { border-bottom: none; }
+        .nr-analyzer .card.card-collapse > .card-body    { display: none; }
+        .nr-analyzer .card.sum:hover.bg-light { border-color: #bce8f1; }
+        .nr-analyzer .card.sum:hover.bg-light > .card-body { background-color: #eee}
+        .nr-analyzer .card.sum:hover.bg-light > .card-header {
           color: #31708f;
           background-color: #d9edf7;
           border-color: #bce8f1;
@@ -175,8 +175,8 @@
 
         <div class="clearfix"></div>
 
-    <div id="filterBox" class="filter panel panel-primary" ng-show="filter">
-        <div class="panel-heading">
+    <div id="filterBox" class="filter card bg-primary" ng-show="filter">
+        <div class="card-header">
             <table style="width:100%;color:inherit">
                 <tr>
                     <td>
@@ -191,7 +191,7 @@
                 </tr>
             </table>
         </div>
-        <div class="panel-body">
+        <div class="card-body">
             <div class="alert alert-info" style="margin-bottom:0px" ng-show="filter">
                 <p style="margin-bottom:10px">
                     <b>{{::('analyzerT.question'|$translate)}} <span ng-bind="filter.question.number"></span></b><br/>
@@ -225,8 +225,8 @@
                         <div class="col-lg-6 col-sm-6 col-xs-12" ng-repeat="type in ::sumTypes">
 
                             <a rel="noopener" style="color:inherit;text-decoration:none" href="#" ng-click="setSumType(type)">
-                            <div class="panel sum" ng-class="{ 'panel-primary' : sumType==type, 'panel-default' : sumType!=type }">
-                                <div class="panel-heading  text-center">
+                            <div class="card sum" ng-class="{ 'bg-primary' : sumType==type, 'bg-light' : sumType!=type }">
+                                <div class="card-header  text-center">
                                     <h2 style="color:inherit;margin:5px">
                                             <span ng-switch="type">
                                                 <span ng-switch-when="sum">{{::('analyzerT.countResponses'|$translate)}}</span>
@@ -236,7 +236,7 @@
                                             </span>
                                     </h2>
                                 </div>
-                                <div class="panel-body hidden-xs highlight" style="height:195px;overflow-y:auto">
+                                <div class="card-body hidden-xs highlight" style="height:195px;overflow-y:auto">
                                         <img ng-src="/app/views/report-analyzer/resources/{{type | kebabcase}}.png"><br/>
                                         <div ng-switch="type" class="text-justify" style="margin-top:5px">
                                             <span ng-switch-when="sum">{{::('analyzerT.sum'|$translate)}}</span>

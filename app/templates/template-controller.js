@@ -83,8 +83,7 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
                 $scope.production_env = false;
                 $scope.env_name = "TRAINING";
             }
-            $scope.embed = $location.search().embed;   
-            console.log($scope.embed) 
+            $scope.embed = $location.search().embed;
         }
 
         $rootScope.$on('signOut', function () {
