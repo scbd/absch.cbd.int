@@ -26,7 +26,7 @@ function embedIFrame(widget, options){
         if(evt.data){
             var data = JSON.parse(evt.data);
             if(data.type == 'setClientHeight' && data.iframe == iframe.name){
-                iframe.setAttribute('height', data.height||iframe.height);
+                iframe.setAttribute('height', data.height ? (data.height+20) : iframe.height);
             }
         }
     })

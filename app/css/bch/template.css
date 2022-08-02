@@ -131,3 +131,6 @@
 	-webkit-box-orient: vertical;
 	
 }
+embed-footer {
+    bottom: -60px!important; 
+}
