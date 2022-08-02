@@ -1,5 +1,4 @@
 import app from '~/app';
-//import '~/css/registry.css'; ROLLUP UPGRADE - THIS FILE DO NOT EXIST ANYMORE
 import '~/services/main'; ;
 import viewLmoRegistryT from '~/app-text/views/reports/bch/registries/view-lmo-registry.json';
 

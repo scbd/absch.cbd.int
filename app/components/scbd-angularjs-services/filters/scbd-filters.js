@@ -3,7 +3,6 @@ import _ from 'lodash';
 import moment from 'moment';
 import scbdSchemaDetails from './schema-name.json';
 import '../services/locale';
-//ROLLUP UPGRADE - Circular dependencies //import '~/services/main';
     
   app.directive("translationUrl", ['$browser', function($browser){
     return {

@@ -1,6 +1,5 @@
 import app from '~/app';
 import _ from 'lodash';
-//import '~/css/registry.css';  ROLLUP UPGRADE - THIS FILE DO NOT EXIST ANYMORE
 import '~/services/main'; ;
 import indexRegistriesT from '~/app-text/views/reports/bch/registries/index.json';
 
