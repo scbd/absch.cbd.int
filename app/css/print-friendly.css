@@ -185,3 +185,12 @@ embed-footer{
     position: absolute;
     width: 100%;
 }
+
+body.embed .container-fluid.m-2{
+    margin: 0.5rem!important;
+}
+
+body.embed #innerPage .innerPageContent,
+body.embed .col-12.tab-content.bg-white.p-3 {
+    padding: 0px!important;
+}

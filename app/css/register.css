@@ -406,20 +406,7 @@ form label[required]:before
   -webkit-transform:rotatey(-180deg); /* Safari and Chrome */
   -o-transform:rotatey(-180deg); /* Opera */
 }
-.card {
-	
-  height: 100%;
-  -webkit-transform-style: preserve-3d;
-  -webkit-transition: 0.5s;
-  -moz-transform-style: preserve-3d;
-  -moz-transition: 0.5s;
-  -ms-transform-style: preserve-3d;
-  -ms-transition: 0.5s;
-  -o-transform-style: preserve-3d;
-  -o-transition: 0.5s;
-  transform-style: preserve-3d;
-  transition: 0.5s;
-}
+
 
 .card .front {
   position: absolute;
