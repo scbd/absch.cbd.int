@@ -241,7 +241,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#sendRecords",
+                                    selector    : "#shareRecord",
                                     title       : joyRideText.sendRecords.title,
                                     content     : joyRideText.sendRecords.content,
                                     placement   : 'top',
@@ -737,8 +737,6 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         }
 
                         //SCBD
-                        console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 741"); alert("ROLLUP UPGRADE TO REVIEW line 741");
-// BEFORE ROLLUP        _.forEach(scbdSchemas.defaults, function (schema, key) {
                         _.forEach(scbdSchemas, function (schema, key) {
                             addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
                                     'description': $filter('lstring')((schema.description || {})), otherType:'scbd' });

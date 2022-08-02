@@ -1,6 +1,5 @@
 import app from '~/app';
 import _ from 'lodash';
-//ROLLUP UPGRADE - Circular dependencies //import '~/services/main';
 import '~/components/scbd-angularjs-services/main';
 
     app.factory("htmlUtility", function() {
