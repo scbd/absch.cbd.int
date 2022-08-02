@@ -21,7 +21,7 @@
     "instruction": "Use commas to separate multiple email addresses. Recipients must log in to the Clearing-House with this email address in order to view the draft record.",
     "updating": "updating...",
     "close": "Close",
-    "generatePDFRecord:": "Generate a PDF of this draft record:",
+    "generatePDFRecord": "Generate a PDF of this draft record:",
     "pleaseNote": "Please Note!",
     "processTakesTime": "This process takes a long time to load. The recommended method to share draft records is to use the",
     "function": "function.",

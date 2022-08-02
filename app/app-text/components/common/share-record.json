@@ -14,7 +14,6 @@
     "copyToClipboard" : "Copy to clipboard",
     "selectOneOption":"Please select one option",
     "emailSent":"Email(s) sent successfully.",
-
     "generateLink":"Generate link",
     "loading":"Loading",
     "emailInstructions":"Use commas or semi-colons to separate multiple email addresses.",

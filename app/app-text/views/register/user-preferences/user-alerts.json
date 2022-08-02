@@ -11,7 +11,7 @@
     "isNotAuthenticated": "Please log in to view your saved searches/alerts.",
     "searchFilter": "Create or edit a saved search filter",
     "filterTitle": "Title for this saved search",
-    "selectFilters:": "Select search filters:",
+    "selectFilters": "Select search filters:",
     "sendEmail": "Send me an email when records relevant to this search are added or updated.",
     "cancel": "Cancel",
     "save": "Save",
