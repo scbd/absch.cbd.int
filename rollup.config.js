@@ -32,7 +32,11 @@ export default async function(){
   const locales = isWatchOn ? ['en']
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
-  return locales.map(locale => bundle('boot.js', locale));
+  return[
+          simpleBundle('assets/widgets.js', 'en'),
+          simpleBundle('assets/legacy-ajax-plugin.js', 'en'),
+          ...locales.map(locale => bundle('boot.js', locale))
+        ];
 }
 
 function bundle(entryPoint, locale, baseDir='app') {
@@ -85,6 +89,30 @@ function bundle(entryPoint, locale, baseDir='app') {
       dynamicImportVariables({ }),
       commonjs({ include: 'node_modules/**/*.js'}),
       nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
+      getBabelOutputPlugin({
+        presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
+        allowAllFormats: true
+      }),
+      isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV
+    ]
+  }
+}
+
+function simpleBundle(entryPoint, locale, baseDir='app') {
+
+  const entryPointPath = path.join(baseDir||'', entryPoint);
+  const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
+
+  return {
+    input : entryPointPath,
+    output: [{
+      format   : 'iife',
+      sourcemap: true,
+      dir : targetDir,
+      name : entryPoint.replace(/[^a-z0-9]/ig, "_"),
+      exports: 'named'
+    }],
+    plugins : [,
       getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
         allowAllFormats: true
