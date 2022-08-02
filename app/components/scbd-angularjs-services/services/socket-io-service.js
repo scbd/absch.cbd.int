@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import io from 'socket.io';
 import _ from 'lodash';
 import './authentication';

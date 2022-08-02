@@ -1,11 +1,11 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/view/record-loader.directive';
-import 'services/main';
+import '~/views/forms/view/record-loader.directive';
+import '~/services/main';
 import 'toastr';
-import 'views/directives/block-region-directive';
-import 'views/register/directives/register-top-menu';
-import 'views/directives/task-id-directive';
+import '~/views/directives/block-region-directive';
+import '~/views/register/directives/register-top-menu';
+import '~/views/directives/task-id-directive';
     
     export { default as template } from './record-details.html';
 

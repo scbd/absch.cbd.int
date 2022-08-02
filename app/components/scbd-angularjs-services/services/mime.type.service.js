@@ -1,5 +1,5 @@
 
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
     
     const mimedb = {

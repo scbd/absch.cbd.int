@@ -1,6 +1,6 @@
 import app from '~/app'
-import 'views/forms/view/record-loader.directive';
-import 'components/scbd-angularjs-services/main';
+import '~/views/forms/view/record-loader.directive';
+import '~/components/scbd-angularjs-services/main';
     
 export {default as template } from './shared-document.html';
 export default ['$scope', '$http', '$q', '$route', 'locale', '$location', '$rootScope',

@@ -1,8 +1,8 @@
-import app from 'app';
-import 'views/mailbox/message-directive';
-import 'views/mailbox/compose-directive';
-import 'views/mailbox/mailbox-menu-directive';
-import 'views/mailbox/message-list-directive';
+import app from '~/app';
+import '~/views/mailbox/message-directive';
+import '~/views/mailbox/compose-directive';
+import '~/views/mailbox/mailbox-menu-directive';
+import '~/views/mailbox/message-list-directive';
     export default["$scope", "$rootScope",
         function($scope, $rootScope) {
 

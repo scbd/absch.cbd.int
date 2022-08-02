@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./text.html';
 import $ from 'jquery';
 import 'angular-sanitize';

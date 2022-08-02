@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'components/scbd-angularjs-controls/main';
-import 'views/measure-matrix/measure-matrix-elements-directive';
-import 'views/forms/view/record-loader.directive';
+import '~/components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-controls/main';
+import '~/views/measure-matrix/measure-matrix-elements-directive';
+import '~/views/forms/view/record-loader.directive';
 
     export { default as template } from './measure-matrix-countries.html';
 export default ['$scope', '$http', 'realm', '$q', '$filter', '$routeParams', '$element',

@@ -1,6 +1,6 @@
-﻿import app from "app";
+﻿import app from '~/app';
 import _ from 'lodash';
-import scbdSchemas from 'components/scbd-angularjs-services/main';
+import { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import './common';
 
 

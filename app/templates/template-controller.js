@@ -1,14 +1,14 @@
 import angular from 'angular-flex';
-import app from 'app';
+import app from '~/app';
 import 'bootstrap';
 import 'ng-breadcrumbs';
 import 'toastr';
 import 'angular-animate';
 import 'angular-loggly-logger';
-import 'services/main'; 
-import 'components/scbd-branding/main';
-import 'components/scbd-angularjs-services/main';
-import 'views/directives/route-loading-directive';
+import '~/services/main'; 
+import '~/components/scbd-branding/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/directives/route-loading-directive';
 import '~/views/directives/docked-side-bar';
 import './directives/cbd-footer';
 import './directives/app-loading';
@@ -27,7 +27,7 @@ app.config(["toastrConfig", function(toastrConfig) {
     });
 }]);
 
-export const templateController = ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
+export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm', 'localStorageService', 'LogglyLogger','ngMeta',
     function ($rootScope, $location, $window, $scope, locale, realm, localStorageService, logglyLogger, ngMeta) {
 
         var basePath = (angular.element('base').attr('href') || '').replace(/\/+$/g, '');
@@ -83,8 +83,7 @@ export const templateController = ['$rootScope', '$location', '$window', '$scope
                 $scope.production_env = false;
                 $scope.env_name = "TRAINING";
             }
-            $scope.embed = $location.search().embed;   
-            console.log($scope.embed) 
+            $scope.embed = $location.search().embed;
         }
 
         $rootScope.$on('signOut', function () {

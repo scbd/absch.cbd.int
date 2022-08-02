@@ -1,15 +1,16 @@
-import app from "app";
+import app from '~/app';
 import commonRoutes from "./common-routes";
 import { securize, resolveLiteral, mapView, currentUser, importQ, injectRouteParams } from './mixin';
 import * as angularViewWrapper from '~/views/shared/angular-view-wrapper'
 import routesLabels from '~/app-text/routes/abs-route-labels.json';
+import * as theAbs from '~/views/home/index';
 
 app.value("showHelp", {
   value: false
 });
 
 const abschRouteUrls = {
-   theAbs                                         : { component: ()=>import('~/views/home/index') },
+   theAbs,
    forums                                         : { component: ()=>import('~/views/forums/forum-list-view') },
    forums_cc                                      : { component: ()=>import('~/views/forums/thread-list-view') },
    post_list_view                                 : { component: ()=>import('~/views/forums/post-list-view') },   
@@ -37,7 +38,7 @@ const abschRouteUrls = {
 
 app.config(["$routeProvider", function ($routeProvider) {
   $routeProvider.
-  whenAsync('/',                                                  { ...mapView(angularViewWrapper),                    "label":routesLabels.theAbs,"resolveController":true,"resolveUser":true,"resolve":{ ...abschRouteUrls.theAbs,                                                            }}).
+  whenAsync('/',                                                  { ...mapView(abschRouteUrls.theAbs),                 "label":routesLabels.theAbs,"resolveController":true,"resolveUser":true}).
   whenAsync('/partners/idlo/events',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.idlo,"resolveController":false,"resolveUser":false,"resolve":{ ...abschRouteUrls.partners_idlo_events,                                        }}).
   whenAsync('/forums',                                            { ...mapView(angularViewWrapper),                    "label":routesLabels.forums,"resolveController":true,"resolve":{ ...abschRouteUrls.forums,                                                      "securized":securize()}}).
   whenAsync('/forums/cc',                                         { ...mapView(angularViewWrapper),                    "label":routesLabels.complianceCommittee3,"resolveController":true,"resolve":{ ...abschRouteUrls.forums_cc,                                                   "securized":securize()},"forumId":17451,"postUrl":"/forums/cc","text":"Compliance Committee 3"}).

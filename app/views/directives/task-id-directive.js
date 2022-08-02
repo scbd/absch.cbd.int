@@ -1,12 +1,12 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./task-id-directive.html';
-import 'views/forms/view/record-loader.directive';
+import '~/views/forms/view/record-loader.directive';
 import 'toastr';
 import 'ngDialog';
-import 'views/directives/document-reference-history';
-import 'services/main';
-import 'views/directives/block-region-directive';
+import '~/views/directives/document-reference-history';
+import '~/services/main';
+import '~/views/directives/block-region-directive';
 
 	app.directive('taskId', function () {
         return {

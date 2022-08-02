@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import $ from 'jquery';
 import 'toastr';
 import 'ngStorage'; ;

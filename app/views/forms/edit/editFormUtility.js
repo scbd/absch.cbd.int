@@ -1,5 +1,5 @@
-﻿import app from 'app';
-import 'services/main';
+﻿import app from '~/app';
+import '~/services/main';
 
 app.factory("editFormUtility", ["IStorage", "IWorkflows", "$q", "realm","commonjs", "roleService",
  function(storage, workflows, $q, realm, commonjs, roleService) {

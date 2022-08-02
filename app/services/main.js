@@ -1,4 +1,4 @@
-import 'app';
+import '~/app';
 import './app-config-service';
 import './articles-service';
 import './cache-service';

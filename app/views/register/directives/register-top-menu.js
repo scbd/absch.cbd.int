@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./register-top-menu.html";
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import 'moment';
 import registerTopMenuT from '~/app-text/views/register/directives/register-top-menu.json';
 

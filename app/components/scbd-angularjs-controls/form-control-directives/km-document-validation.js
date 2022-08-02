@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./km-document-validation.html';
 import $ from 'jquery';
 import messages from '~/app-text/components/scbd-angularjs-controls/form-control-directives/validation-errors.json';

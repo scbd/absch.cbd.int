@@ -1,4 +1,4 @@
-import app from 'app'
+import app from '~/app'
 import 'ng-breadcrumbs';
 import breadcrumbsHtml from 'text!./breadcrumbs.html';
 

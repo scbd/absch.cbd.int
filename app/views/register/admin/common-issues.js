@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
 
   export { default as template } from './common-issues.html';
 

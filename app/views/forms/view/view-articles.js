@@ -1,10 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/view/view-articles';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
 import 'ng-breadcrumbs';
-import 'components/scbd-angularjs-controls/main';
+import '~/components/scbd-angularjs-controls/main';
 import 'ck-editor-css';
 
   export { default as template } from './view-articles.html';

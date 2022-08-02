@@ -6,45 +6,6 @@ let cacheControl = require('./cache-control')
 
 const { bundleUrls } = require('../app/boot.js');
 
-async function renderLanguageFile(req, res, next) {
-   
-         let langFilepath = await getLanguageFile(req);
-         if(langFilepath){
-            cacheControl.setCustomCacheControl(res);
-            return res.sendFile(langFilepath);
-         }    
-             
-         next();
- }
- 
- async function getLanguageFile(req, preferredLang){
- 
-     if(!preferredLang)
-         preferredLang = getPreferredLanguage(req);
- 
-     if(preferredLang){
-
-         let requestedUrl = url.parse(req.url).pathname;
-         let path = `/i18n/${preferredLang}/app${requestedUrl}`;               
- 
-         let statsLang;
-         try{
-             statsLang  = await stat(global.app.rootPath + path);
-         }catch(e){}
-
-         if (statsLang && statsLang.isFile()) {
-             
-             let statsEN    = await stat(`${global.app.rootPath}/app${requestedUrl}`);
- 
-             let mLangtime  = new Date(util.inspect(statsLang.mtime));
-             let mENtime    = new Date(util.inspect(statsEN.mtime));
-             if(mLangtime >= mENtime)
-                 return `${global.app.rootPath}${path}`;
-
-         }
-     }           
- }
-
  async function renderApplicationTemplate(req, res){
 
     let urlPreferredLang;
@@ -59,33 +20,26 @@ async function renderLanguageFile(req, res, next) {
     if(!dirExists || !dirExists.isDirectory())
         preferredLang = 'en';
 
-    let hashMapping   = require(`${global.app.rootPath}/dist/${preferredLang}/app/hash-file-mapping.js.json`);
-    
     if(req.params.lang)
       urlPreferredLang = req.params.lang;
    
     if(!urlPreferredLang && preferredLang)//&& preferredLang!= 'en'
         return res.redirect('/'+preferredLang + (req.originalUrl||''));
 
-    req.url = `${global.app.rootPath}/dist/${preferredLang}/app/templates/${process.env.CLEARINGHOUSE}/${process.env.CLEARINGHOUSE}.ejs`;
+    const locale =  urlPreferredLang || preferredLang || 'en';
  
-    let langFilepath =  req.url;//await getLanguageFile(req, preferredLang);
     let options = { 
                     baseUrl            : ('/' + (urlPreferredLang || preferredLang || '') + '/').replace("//", '/'),
                     appVersion         : global.app.version,
                     clearingHouseHost  : process.env.CLEARINGHOUSE_HOST,
-                    preferredLanguage  : preferredLang||'en',
+                    preferredLanguage  : locale,
                     googleAnalyticsCode: process.env.GOOGLE_ANALYTICS_CODE,
                     cdnUrl             : global.app.cdnUrl,
                     angularBundle      : bundleUrls.angularBundle,
                     initialCss         : bundleUrls.initialCss,
-                    bootFile           : hashMapping['boot.js']
                 };
-    if(langFilepath){
-        return res.render(langFilepath, options);
-    } 
 
-    return res.render(`${global.app.rootPath}/app/templates/${process.env.CLEARINGHOUSE}/${process.env.CLEARINGHOUSE}.ejs`, options);
+    return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);
  }
  
  function getPreferredLanguage(req){
@@ -108,8 +62,6 @@ async function renderLanguageFile(req, res, next) {
 
 
  module.exports = {
-    renderLanguageFile,
-    getLanguageFile,
     getPreferredLanguage,
     renderApplicationTemplate
  }

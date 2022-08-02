@@ -1,7 +1,7 @@
-import app from 'app';
-import 'components/scbd-angularjs-services/main';
-import 'views/forms/view/record-loader.directive';
-import 'services/main';
+import app from '~/app';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/forms/view/record-loader.directive';
+import '~/services/main';
 
     export { default as template } from './records-id.html';
 

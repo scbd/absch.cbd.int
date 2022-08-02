@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import 'cbd-forums';
-import 'services/main';
+import '~/services/main';
 
 
     export { default as template } from './thread-list-view.html';

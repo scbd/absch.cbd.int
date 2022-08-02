@@ -1,7 +1,7 @@
- import app from "app";
+ import app from '~/app';
 import template from "text!./view-abs-procedure.directive.html";
-import 'views/directives/record-options';
-import 'views/forms/view/directives/view-record-reference.directive';
+import '~/views/directives/record-options';
+import '~/views/forms/view/directives/view-record-reference.directive';
 import viewAbsProcedureT from '~/app-text/views/forms/view/abs/view-abs-procedure.json';
 
 			app.directive("viewAbsProcedure", ['translationService', function (translationService) {

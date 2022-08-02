@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./options.html';
 import $ from 'jquery'; ;
 app.directive('afcOptions', function() {

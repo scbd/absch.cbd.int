@@ -1,6 +1,6 @@
 import $ from 'jquery';
-import html404 from 'text!./403.html';
-import html403 from 'app'; 
+import html404 from 'text!./404.html';
+import html403 from 'text!./403.html';
 
     function escapeRegExp(str) {
       return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");

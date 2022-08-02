@@ -1,8 +1,8 @@
 import template from 'text!./home-map.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import popoverTemplate from 'views/directives/block-region-directive';
-import 'services/main';
+import '~/views/directives/block-region-directive';
+import '~/services/main';
   ;
 
   app.directive('homeMap', [function() {

@@ -1,6 +1,5 @@
-import app from 'app';
-import 'css!/app/css/registry.css';
-import 'services/main'; ;
+import app from '~/app';
+import '~/services/main'; ;
 import viewLmoRegistryT from '~/app-text/views/reports/bch/registries/view-lmo-registry.json';
 
 export { default as template } from './view-lmo-registry.html';

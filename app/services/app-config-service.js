@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import scbdJSonSchemas from '~/components/scbd-angularjs-services/filters/schema-name.json';
+import  { scbdSchemas as scbdJSonSchemas } from '~/components/scbd-angularjs-services/main';
 import realmConfigurations from 'realmConf';
     
         // var realmConfigurations = {};        

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import 'components/scbd-branding/main';
+import '~/components/scbd-branding/main';
 import loginDialogT from '~/app-text/views/shared/login-dialog.json';
 
     export { default as template } from './login-dialog.html';

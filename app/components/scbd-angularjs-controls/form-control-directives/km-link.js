@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import angular from 'angular';
 import $ from 'jquery';
 import template from 'text!./km-link.html';

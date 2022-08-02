@@ -1,7 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'css!/app/css/registry.css';
-import 'services/main'; ;
+import '~/services/main'; ;
 import viewGeneRegistryT from '~/app-text/views/reports/bch/registries/view-gene-registry.json';
 
 export { default as template } from './view-gene-registry.html';

@@ -26,9 +26,9 @@
     <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>npm/font-awesome@4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="<%=cdnUrl%>combine/<%=initialCss%>" />
     <link rel="stylesheet" type="text/css" href="/app/css/template.css?v=<%=appVersion%>">
-    <link rel="stylesheet" type="text/css" href="/app/css/bch/template.css?v=<%=appVersion%>">
-
-    <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <link rel="stylesheet" type="text/css" href="/app/css/abs/template.css?v=<%=appVersion%>"
+    
+  
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -36,9 +36,9 @@
     <![endif]-->
 
 </head>
-<body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
-    <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
-    <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
+<body ng-controller="AbschTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    <span style='display:none' id="appTitle">Access and Benefit-Sharing Clearing-House</span>
+    <span style='display:none' id="appDescription">Access and Benefit-Sharing Clearing-House</span>
     <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
     <app-loading>
         <div class="m-app-loading" ng-animate-children>
@@ -88,17 +88,17 @@
             <div class="animated-container">
                 <div class="messaging">
                     <span class="color-orange ng-scope" ng-if="development_env" style="font-size:48px;font-weight:bold;"> 
-                        <img src="/app/img/cbd-logo-green-en.svg" style="height:80px;">
+                        <img src="https://absch.cbd.int/app/img/cbd-logo-green-en.svg" style="height:80px;">
                     </span>
                    
                     <h1>
                         <br/>                  
                        <div class="color-black" id="appLoadingMessage">
-                            loading the <br/>Biosafety Clearing-House                       
+                            loading the <br/>ABS Clearing-House                        
                         </div>
                         version <%=appVersion%>
                         <div class="color-red" id="appLoadingError" style="display: none;">
-                            <span>Error loading the <br/>Biosafety Clearing-House   </span>
+                            <span>Error loading the <br/>ABS Clearing-House   </span>
                             <br/>
                             <span>Please contact the Secretariat</span>
                             <div>
@@ -113,46 +113,49 @@
             </div>
         </div>
     </app-loading>
-
     <div class="alert alert-info alert-dismissible lang-alert" ng-if="'<%=preferredLanguage%>'!='en'" style="margin-bottom:1px">
         <a rel="noopener" href="#" class="close" data-bs-dismiss="alert" aria-label="close">&times;</a>
-         <strong>Please note that the translation of the Biosafety Clearing-House is in progress.</strong>
+         <strong>Please note that the translation of the ABS Clearing-House is in progress.</strong>
     </div>
-    <!-- PAGE -->
-    <div class="ng-cloak">
-        <scbd-header></scbd-header>
-       
-        <div id="wrapper" class="toggled">
-            <div id="sidebar-wrapper" ng-class="{'activate':openSideBarType}">
-                <div  ng-if="openSideBarType" class="easing" >
-                    <docked-side-bar type="openSideBarType"></docked-side-bar>
+
+<!-- PAGE -->
+<div class="ng-cloak">
+    <scbd-header></scbd-header>
+   
+    <div id="wrapper" class="toggled">
+        <div id="sidebar-wrapper" ng-class="{'activate':openSideBarType}">
+            <div  ng-if="openSideBarType" class="easing" >
+                <docked-side-bar type="openSideBarType"></docked-side-bar>
+            </div>
+        </div>
+    
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="easing">
+                    <absch-header></absch-header>
+                    <div class="page-content">
+                        <route-loading></route-loading>
+                        <ng-view autoscroll="true"></ng-view>                
+                    </div>
+                    <embed-footer ng-if="embed"></embed-footer>
                 </div>
             </div>
-        
-            <div id="page-content-wrapper">
-                <div class="container-fluid">
-                    <div class="easing">
-                        <bch-header></bch-header>
-                        <div class="page-content">
-                            <route-loading></route-loading>
-                            <ng-view autoscroll="true"></ng-view>                
-                        </div>
-                        <embed-footer ng-if="embed"></embed-footer>
-                    </div>
-                </div>
-            </div>    
-        </div>
-
-        <bch-footer></bch-footer>
-        <cbd-footer></cbd-footer>
-
+        </div>    
     </div>
+
+    <absch-footer></absch-footer>
+    <cbd-footer></cbd-footer>
+
+</div>
     
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->        
     <script>
         // In IE boot.js is executing before this script was executed so move it before boot.js       
         
         window.scbdApp = {
-            template         : 'templates/bch/bch',
+            template         : 'absch',
             host             : '<%=clearingHouseHost%>',
             version          : '<%=appVersion%>',
             lang             : '<%=preferredLanguage%>',
@@ -164,16 +167,20 @@
     <script src="<%=cdnUrl%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
     <script src="<%=cdnUrl%>combine/<%=angularBundle%>"></script>
     <script>
-        require(["app/<%=bootFile%>"], function(boot){
+        require.config({ baseUrl : "<%=baseUrl%>app/" });
+
+        require(["boot"], function(boot){
             var bootFn = boot.default || boot;
             bootFn(window, require, define);
         });
     </script>
     
-    
     <script async src='https://www.google-analytics.com/analytics.js'></script>
     <script>
-       function addLoadEvent(func) {
+        /**************************
+          For outdate browser check
+        **************************/
+        function addLoadEvent(func) {
             var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } 
         }
         addLoadEvent(function() {
@@ -190,9 +197,8 @@
             ga('set',    'hostname', window.location.hostname);
             ga('set',    'location', undefined);
         }
-        
-    </script>
 
+    </script>
 
 </body>
 

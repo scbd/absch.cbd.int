@@ -1,9 +1,9 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import './ircc-directive';
-import 'css!/app/css/print-friendly.css';
-import 'css!/app/css/abs/pdf-communique.css';
+import '~/css/print-friendly.css';
+import '~/css/abs/pdf-communique.css';
 
 import printHeaderTemplate from 'text!../forms/view/print-header.html';
 import printFooterTemplate from 'text!../forms/view/print-footer.html';

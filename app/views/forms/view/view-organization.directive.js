@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-organization.directive.html";
-import 'views/forms/view/directives/view-record-reference.directive';
-import 'views/directives/record-options';
+import '~/views/forms/view/directives/view-record-reference.directive';
+import '~/views/directives/record-options';
 
 app.directive("viewOrganization", [function () {
 	return {

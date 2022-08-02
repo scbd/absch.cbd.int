@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./record-options.html';
 import _ from 'lodash';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
 import recordOptionsT from '~/app-text/views/directives/record-options.json';
 
 app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigService', '$filter', '$compile', 'commonjs', 'realm', 'translationService',

@@ -1,4 +1,4 @@
-import 'app';
+import '~/app';
 import './filters/scbd-filters';
 import './services/workflows';
 import './services/user-notifications';
@@ -11,4 +11,4 @@ import './services/mime.type.service';
 import './services/locale';
 import './services/extended-route';
 import './services/apiUrl';
-export * as scbdSchemas from './filters/schema-name.json'
+export {default as scbdSchemas} from './filters/schema-name.json'

@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./region-filter.html';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import regionFilterT from '~/app-text/views/search/search-filters/region-filter.json';
 
 app.directive('regionFilter', ['locale', 'translationService', function (locale, translationService) {

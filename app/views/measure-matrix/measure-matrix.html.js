@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/measure-matrix/measure-matrix-elements-directive';
+import '~/views/measure-matrix/measure-matrix-elements-directive';
 
     export { default as template } from './measure-matrix.html';
 export default ['$scope', '$http','realm','$q','$filter','$routeParams','Thesaurus','$timeout',

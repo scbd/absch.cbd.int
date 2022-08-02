@@ -1208,7 +1208,7 @@ div.recordDefault:hover {
     margin: 0!important;
     border: 0!important;
 }
-.card {
+#record1.card {
     background-color: #eee;
     border-radius: 0;
     padding: 0;

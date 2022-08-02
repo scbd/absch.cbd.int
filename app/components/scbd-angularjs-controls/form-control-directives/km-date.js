@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./km-date.html';
 import 'bootstrap-datepicker';
   ;

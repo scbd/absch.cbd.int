@@ -1,4 +1,5 @@
-const jsdelivr = 'https://cdn.jsdelivr.net/'
+export const cdnUrl = 'https://cdn.jsdelivr.net/'
+
 export const bundleUrls = {
     angularBundle : [ 
         'npm/jquery@2.2.4/dist/jquery.min.js',
@@ -36,11 +37,19 @@ export const bundleUrls = {
     ].join(','),
 }
 export default function bootApp(window, require, defineX) {
-    if(/Safari/.test(navigator.userAgent) && !/Chrome/i.test(navigator.userAgent)) { console.log = function(){}; }
-    var cdnHost = jsdelivr+'npm/';
-    var nameToUrl = require.s.contexts._.nameToUrl;
+
+    const cdnHost = cdnUrl+'npm/';
+    const templateName = window.scbdApp.template;
+    
+    //SB    var nameToUrl = require.s.contexts._.nameToUrl;
 
     window.getHashFileName = function(url){
+
+        console.trace("ROLLUP UPGRADE: To remove")
+
+        return url;
+        
+        // ROLLUP UPGRADE: To remove vvv
         
         if(!window.hasHashUrl(url) && window.hashUrlsMapping && !/^http/.test(url)){
             var hashUrl = url.replace(/^\/(ar|en|es|fr|ru|zh)\/app\//, '')
@@ -60,15 +69,26 @@ export default function bootApp(window, require, defineX) {
     }
 
     window.hasHashUrl = (url)=>{
-        let hashFileRegex  = /\.[a-z0-9]{8}\./i
+
+        console.trace("ROLLUP UPGRADE: To remove")
+
+        return false;
+
+        // ROLLUP UPGRADE: To remove vvv
+
+        let hashFileRegex  = /-[a-z0-9]{8}\./i
 
         return hashFileRegex.test(url);
     }
 
     window.addAppVersionToUrl = (url, force)=>{
 
-        if(!force && window.hasHashUrl(url))
-            return url;
+        // ROLLUP UPGRADE: To review vvv
+
+        console.warn("ROLLUP UPGRADE: To review boot.js line 88", url)
+
+        // if(!force && window.hasHashUrl(url))
+        //     return url;
 
         if(/^\//.test(url))            
             return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
@@ -78,7 +98,6 @@ export default function bootApp(window, require, defineX) {
 
     require.config({
         waitSeconds: 120,
-        baseUrl : '/app/',
         'paths': {
             'css'                       : cdnHost + 'require-css@0.1.8/css.min',
             'text'                      : cdnHost + 'requirejs-text@2.0.15/text',
@@ -160,34 +179,19 @@ export default function bootApp(window, require, defineX) {
             'vue-pagination-2'              : { 'deps': ['angular-vue'] }
             
         },
-        urlArgs: function(id, url){
-            
-            if(!window.scbdApp.version || window.scbdApp.version === '-')
-                return '';
-                
-            if(/^\//.test(url))            
-                return (url.indexOf('?') === -1 ? '?' : '&') + 'v=' + window.scbdApp.version;
+        urlArgs: function(id, url) {
 
-            return '';
+            const hasHash  = (o)=> /-[a-f0-9]{8}$/i.test(o);
+            const isAbsUrl = (o)=> /^https?:\/\//i.test(o);
+        
+            if(isAbsUrl(url)) return '';
+            if(isAbsUrl(id))  return '';
+            if(hasHash(id))   return '';
+        
+            const sep = url.indexOf('?') === -1 ? '?' : '&';
+            return `${sep}v=${encodeURIComponent(window.scbdApp.version)}`;
         }
     });
-
-    require.s.contexts._.nameToUrl = function (moduleName, ext, skipExt) {
-
-        var url = nameToUrl(moduleName, ext, skipExt);
-        url = window.getHashFileName(url);
-        
-        var isHashUrl = window.hasHashUrl(url);
-        if(isHashUrl){//remove version param from url since its a hash url
-            url = removeParamFromUrl(url, 'v')
-        }
-        
-        if(/^\//.test(url) && !/^\/(ar|en|es|fr|ru|zh)\//.test(url) && !/^\/api\//.test(url)) {
-            url = '/'+window.scbdApp.lang + url;
-        }
-        
-        return url;
-    }
 
     require.onError = function (err) {
         console.log(err.requireType);
@@ -228,7 +232,7 @@ export default function bootApp(window, require, defineX) {
     defineX('angular-animate'      , ['angular'], (ng)=>{ warnImport(); return ng; });
     defineX('angular-cache'        , ['angular'], (ng)=>{ warnImport(); });
     
-    defineX('angular-dependencies' , ['angular', `${jsdelivr}combine/${bundleUrls.angularDependencies}`], (ng)=>{ warnImport(); });
+    defineX('angular-dependencies' , ['angular', `${cdnUrl}combine/${bundleUrls.angularDependencies}`], (ng)=>{ warnImport(); });
     defineX('ng-breadcrumbs'       , ['angular-dependencies'], ()=>{ warnImport(); });
     defineX('ngSmoothScroll'       , ['angular-dependencies'], ()=>{ warnImport(); });
     defineX('jquery-ui'       , ['angular-dependencies'], ()=>{ warnImport(); });
@@ -249,15 +253,11 @@ export default function bootApp(window, require, defineX) {
         return window._slaask;
     });
 
-    if(window.scbdApp.template){
-        require(['/'+window.scbdApp.lang+'/app/hash-file-mapping.js'], function(hashMapping){
-            // console.log(jsd)
-            window.hashUrlsMapping = hashMapping
-            require([window.scbdApp.template], function(){})
-        })
+    if(templateName){
+        import(`./templates/${templateName}/index.js`);
     }
-    else{
-        alert('Unable to load files from server: ' + err.requireModules);
+    else {
+        window.alert('Unable to load files from server: ' + `./templates/${templateName}/index.js`);
     }
 
     function removeParamFromUrl(url, param) {

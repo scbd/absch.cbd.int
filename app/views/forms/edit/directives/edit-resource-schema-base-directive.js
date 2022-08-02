@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from 'text!./edit-resource-schema-base-directive.html';
-import 'views/forms/edit/edit';
-import 'services/main';
+import '~/views/forms/edit/edit';
+import '~/services/main';
 import "~/views/forms/view/view-resource.directive";
-import {getLimitedTerms} from 'services/common';
+import {getLimitedTerms} from '~/services/common';
 import editVLRT from '~/app-text/views/forms/edit/directives/edit-resource-schema-base.json';
 
 	app.directive('convertToNumber', function() {

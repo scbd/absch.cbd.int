@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./view-focalpoint.directive.html';
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
 
 app.directive('viewFocalPoint', ['realm', function(realm) {
 	return {
@@ -15,7 +15,7 @@ app.directive('viewFocalPoint', ['realm', function(realm) {
 		controller: ['$scope','commonjs', '$q', async function ($scope, commonjs, $q) {
 
 			const chFolder = realm.is('BCH') ? 'bch' : 'abs';
-			const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
+			const { categories } = await import(`../../../../app-data/${chFolder}/focal-point-category.js`);
 
 			$scope.nfpCategory = function(category){
 				if(categories){

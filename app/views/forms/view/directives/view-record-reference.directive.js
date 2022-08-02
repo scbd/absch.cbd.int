@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-record-reference.directive.html";
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import viewRecordReferenceT from '~/app-text/views/forms/view/directives/view-record-reference.json';
 
 app.directive("viewRecordReference", ["IStorage", '$timeout', 'translationService', function (storage, $timeout, translationService) {

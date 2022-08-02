@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-abs-checkpoint-communique.directive.html";
-import 'views/directives/record-options';
+import '~/views/directives/record-options';
 import viewCPCT from '~/app-text/views/forms/view/abs/view-abs-checkpoint-communique.json';
 
 app.directive("viewAbsCheckpointCommunique", ['translationService', function (translationService) {

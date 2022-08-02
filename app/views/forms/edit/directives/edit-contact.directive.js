@@ -1,11 +1,11 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import template from "text!./edit-contact.directive.html";
 import _ from 'lodash';
-import 'views/directives/workflow-arrow-buttons';
+import '~/views/directives/workflow-arrow-buttons';
 import "~/views/forms/view/view-contact.directive";
-import 'services/main';
-import 'components/scbd-angularjs-services/main';
-import 'views/forms/edit/editFormUtility';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/views/forms/edit/editFormUtility';
 import editContactT from '~/app-text/views/forms/edit/directives/edit-contact.json';
 
 app.directive("editContact", ["$http", "$filter", "$rootScope", "$location", "$q", 'IStorage', 'roleService', 'thesaurusService', 'editFormUtility', 'locale', '$controller', 'translationService',

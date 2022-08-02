@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import html from 'text!./header.html';
 import _ from 'lodash';
 import '../directives/breadcrumbs';
-import 'services/main';
-import 'components/scbd-angularjs-services/main';
-import 'components/scbd-angularjs-controls/main';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-controls/main';
 import bchHeaderT from '~/app-text/templates/bch/header.json';
 
 app.directive('bchHeader', ['locale', '$location','breadcrumbs', 'commonjs', '$q','realm','translationService',  function (locale, $location, breadcrumbs, commonjs, $q, realm, translationService) {

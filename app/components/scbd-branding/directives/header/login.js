@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./login.html';
 import $ from 'jquery';
-import 'css!components/scbd-branding/directives/header/login';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-branding/directives/header/login.css';
+import '~/components/scbd-angularjs-services/main';
 import loginAccountT from '~/app-text/components/scbd-branding/directives/header/login.json';
 
 app.directive('loginAccount', [function() {

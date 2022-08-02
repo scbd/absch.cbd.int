@@ -1,8 +1,8 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
-import 'components/scbd-angularjs-controls/main';
-import 'views/register/directives/register-top-menu';
+import '~/services/main';
+import '~/components/scbd-angularjs-controls/main';
+import '~/views/register/directives/register-top-menu';
 
     "use strict";
     export { default as template } from './user-role-report.html';

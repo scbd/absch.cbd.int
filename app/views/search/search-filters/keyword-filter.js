@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./keyword-filter.html';
 import _ from 'lodash';
 import keywordFilterT from '~/app-text/views/search/search-filters/keyword-filter.json';

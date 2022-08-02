@@ -1,14 +1,14 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./header.html';
 import $ from 'jquery';
-import 'css!components/scbd-branding/css/colors';
-import 'css!components/scbd-branding/directives/header/header';
+import '~/components/scbd-branding/css/colors.css';
+import '~/components/scbd-branding/directives/header/header.css';
 import './account';
 import './locale';
 import './accounts-validation';
 import './login';
 import './xuser-notifications-icon';
-import 'components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-services/main';
 import scbdHeaderT from '~/app-text/components/scbd-branding/directives/header/header.json';
 
     app.directive('scbdHeader', function() {

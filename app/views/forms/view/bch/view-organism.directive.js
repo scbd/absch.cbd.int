@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-organism.directive.html";
-import 'views/forms/directives/view-terms-hierarchy';
-import 'views/directives/record-options';
+import '~/views/forms/directives/view-terms-hierarchy';
+import '~/views/directives/record-options';
 
 app.directive("viewOrganism", [function () {
 	return {

@@ -1,11 +1,11 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
 import lmoConstructTemplate from 'text!./lmo-construct.html';
 import 'drag-and-drop';
-import 'css!/app/css/bch/lmo-construct.css';
+import '~/css/bch/lmo-construct.css';
 import 'ngDialog';
-import 'views/forms/edit/document-selector';
-import 'components/scbd-angularjs-services/main';
+import '~/views/forms/edit/document-selector';
+import '~/components/scbd-angularjs-services/main';
 import '~/views/forms/view/bch/view-lmo-gene.directive';
 import lmoConstructT from '~/app-text/views/forms/edit/bch/directives/lmo-construct.json';
 

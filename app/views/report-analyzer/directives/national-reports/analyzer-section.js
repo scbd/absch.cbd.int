@@ -1,5 +1,5 @@
 import templateHtml from 'text!./analyzer-section.html';
-import app from 'app';
+import app from '~/app';
 import './analyzer-question'; ;
 
     //==============================================

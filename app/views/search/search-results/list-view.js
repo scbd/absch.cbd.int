@@ -1,7 +1,7 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./list-view.html';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import '~/views/directives/party-status';
 import './result-default';
 import { iconFields } from '~/views/forms/view/bch/icons';

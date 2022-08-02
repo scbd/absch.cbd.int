@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./km-inputtext-ac.html';
 import angular from 'angular';
 import 'angucomplete-alt';
-import 'css!components/scbd-angularjs-controls/form-control-directives/km-control.css';
+import '~/components/scbd-angularjs-controls/form-control-directives/km-control.css';
   //============================================================
   //
   //

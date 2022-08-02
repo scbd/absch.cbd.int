@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'services/main';
+import '~/services/main';
 import template from './docked-side-bar.html';
 import 'ck-editor-css';
 import dockedSideBarT from '~/app-text/views/directives/docked-side-bar.json';

@@ -1,292 +1,151 @@
 // rollup.config.js (building more than one bundle)
-import path                                       from 'path'
-import vue                                        from 'rollup-plugin-vue'
-import nodeResolve                                from '@rollup/plugin-node-resolve'
-import commonjs                                   from '@rollup/plugin-commonjs';
-import alias                                      from '@rollup/plugin-alias';
-import json                                       from '@rollup/plugin-json';
-import amd                                        from 'rollup-plugin-amd';
-import glob                                       from 'glob';
-import util                                       from 'util';
-import cheerio                                    from 'cheerio';
-import { processFiles, copyFiles                } from './scripts/pre-build-process';
-import { terser                                 } from 'rollup-plugin-terser';
-import { string                                 } from "rollup-plugin-string";
-import { getBabelOutputPlugin                   } from '@rollup/plugin-babel';
-import { readFileSync, writeFileSync, mkdirSync } from 'fs'
-import _                                          from 'lodash';
+import path                     from 'path'
+import { getBabelOutputPlugin } from '@rollup/plugin-babel';
+import alias                    from '@rollup/plugin-alias';
+import nodeResolve              from '@rollup/plugin-node-resolve'
+import json                     from '@rollup/plugin-json';
+import commonjs                 from '@rollup/plugin-commonjs';
+import dynamicImportVariables   from 'rollup-plugin-dynamic-import-variables';
+import vue                      from 'rollup-plugin-vue'
+import copy                     from 'rollup-plugin-copy'
+import { string }               from "rollup-plugin-string";
+import { terser }               from 'rollup-plugin-terser';
+import bootWebApp, { cdnUrl }   from './app/boot.js';
+import injectCssToDom           from './rollup/inject-css-to-dom';
+import resolveLocalized         from './rollup/resolve-localized';
+import stripBom                 from './rollup/strip-bom';
 
-const isLocalDev = process.argv.includes('--watch');// || true;
-
-const asyncGlob = util.promisify(glob)
+const isWatchOn = process.argv.includes('--watch');
 const outputDir = 'dist';
-let globalHashMapping = {};
 
-const externals = ['app', '_', 'Vue', 'Vue', 'ky', 'angular', 'angular-route', 'angular-cookies', 'angular-sanitize', 'angular-animate', 'css', 
-'text', 'json', 'linqjs', 'async', 'domReady', 'bootstrap-datepicker', 'datepicker-range', 'jquery', 'bootstrap', 'lodash', 'moment', 
-'ng-breadcrumbs', 'ngSmoothScroll', 'angular-joyride', 'toastr', 'ngStorage', 'ngDialog', 'ngInfiniteScroll', 'tableexport', 'blobjs', 'file-saverjs', 'xlsx', 'jszip', 
-'webui-popover', 'chart-js', 'printThis', 'diacritics', 'pdfjs-dist/build/pdf', 'pdfjs-dist/build/pdf.worker', 'pdf-object', 'angular-trix', 'trix', 'ngMeta', 
-'angular-loggly-logger', 'drag-and-drop', 'angucomplete-alt', 'angular-cache', 'jquery-ui', 'pivottable', 'plotly-renderers', 'angular-vue', 'ky', 'socket.io', 
-'cbd-forums', 'shim', 'view-abs-checkpoint', 'angular-flex', 'babel-polyfill', 'realmConf',
-'css!components/scbd-branding/directives/footer', 'angular-vue-plugins'
-];  
-const bundleFiles = [ ];
-const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
-const ignoreForRollupFiles = {
-  // cpbNationalReport2 : 'app-data/bch/report-analyzer/cpbNationalReport2.js',
-  // cpbNationalReport3 : 'app-data/bch/report-analyzer/cpbNationalReport3.js',
-  // cpbNationalReport4 : 'app-data/bch/report-analyzer/cpbNationalReport4.js',
-};
-const ignoreFileGlobPattern = _(ignoreForRollupFiles).values().map(e=>`**/${e}`).value();
+let externals = [
+  'require', 
+  'libs/ammap3/ammap/ammap',
+  'shim!libs/ammap3/ammap/themes/light[libs/ammap3/ammap/ammap]',
+  'https://cdn.slaask.com/chat.js',
+];
 
-export default async function() {
-
-  const appDir = 'i18n';
-  const i18nDir = 'i18n-build';
-  const globOptions = {
-    pattern: '**/*.{js,html,json,vue}',
-    ignore : ['hash-file-mapping.js', '**/views/pdf-viewer/pdfjs/**'],
-  }
+export default async function(){
   
-  //don't process i18n files when running locally
-  if(!isLocalDev){
-    await processFiles(ignoreForRollupFiles);
-    const i18nFiles = (await  asyncGlob(globOptions.pattern, { 
-                        cwd: path.join(process.cwd(), i18nDir),
-                        ignore:globOptions.ignore
-                      }));
-    i18nFiles.forEach(m=>{
-      externals.push(m);
-      if(/assets\/(widgets|legacy\-ajax\-plugin)\.js$/.test(m))
-        bundleFiles.push(bundleWidget(m)); 
-      else 
-        bundleFiles.push(bundle(m)); 
-    }); 
-  }
-  else{ //en files only
-    //copy ejs files to dist folder
-    await copyFiles(process.cwd(), 'app', ['en'], 'dist', '**/*.ejs');
-      
-    //copy pdfviewer files //TODO: find best way, for now it can be in /app to avoid duplication
-    // await copyFiles(process.cwd(), 'app', languages, 'dist', '**/views/pdf-viewer/pdfjs/**');
-    const enFiles = (await  asyncGlob(globOptions.pattern, { 
-                      cwd: path.join(process.cwd(), 'app'),
-                      ignore: globOptions.ignore
-                    }));
-    enFiles.forEach(m=>{
-          externals.push(m);
-          if(/assets\/(widgets|legacy\-ajax\-plugin)\.js$/.test(m))
-            bundleFiles.push(bundleWidget(m, 'app')); 
-          else 
-            bundleFiles.push(bundle(m, 'app')); 
-      });
-  }
+  externals = [...externals, ...await loadExternals()];
 
-  return bundleFiles;
+  const locales = isWatchOn ? ['en']
+                            : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
+  
+  return[
+          simpleBundle('assets/widgets.js', 'en'),
+          simpleBundle('assets/legacy-ajax-plugin.js', 'en'),
+          ...locales.map(locale => bundle('boot.js', locale))
+        ];
 }
 
-function bundle(relativePath, baseDir='i18n-build') {
- 
-  let requireSourcemap = false;
-  const extension = path.extname(relativePath);
-  let outputFileExt = extension;  
-  if(extension=='.json')outputFileExt = '.json.js'; 
-  if(extension=='.html')outputFileExt = '.html.js';
+function bundle(entryPoint, locale, baseDir='app') {
 
-  let outputFileName   = `[name].[hash]${outputFileExt}`;
-  
-  if(/\.json\.js/.test(extension) || /\.json/.test(extension))
-    requireSourcemap=false;
- 
-  //when running for local development add en folder path else the i18n-build has good path so need for adjustments
-  let enFolder='en/app';
-  let absolutePath = '';
-  if(!isLocalDev){
-    let language = relativePath.match(/(ar|en|fr|es|ru|zh)\//)
-    enFolder = '';
-    if(language.length)
-      absolutePath = `/i18n-build/${language[1]}`; 
-  } 
- 
+  const entryPointPath = path.join(baseDir||'', entryPoint);
+  const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
+
   return {
-    input : path.join(baseDir||'', relativePath),
+    input : entryPointPath,
     output: [{
       format   : 'amd',
-      sourcemap: requireSourcemap,
-      dir : path.join(outputDir, enFolder, path.dirname(relativePath)),
-      name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}`,
-      entryFileNames: outputFileName,
-      chunkFileNames: outputFileName,      
+      sourcemap: true,
+      dir : targetDir,
+      name : entryPoint.replace(/[^a-z0-9]/ig, "_"),
+      exports: 'named'
     }],
-
     external: externals,
     plugins : [
       alias({ entries : [
-          { find: /^~\/(.*)/, replacement:`${process.cwd()}${absolutePath}/app/$1` },
-          { find: /^json!(.*)/, replacement:`$1` },
-          { find: /^text!(.*)/, replacement:`$1` },
-        ] 
-      }), 
-      sanitizeString(),
-      addLanguageAttribute(),     
-      json({namedExports:false}),  
-      string({ include: "**/*.html"}),
-      amd({ include: `**/*.js`, exclude: ignoreFileGlobPattern }),
+        { find: /^~\/(.*)/,   replacement:`${process.cwd()}/${baseDir}/$1` },
+        { find: /^json!(.*)/, replacement:`$1` },
+        { find: /^text!(.*)/, replacement:`$1` },
+        { find: /^cdn!(.*)/,  replacement:`${cdnUrl}$1` },
+      ]}),
+      stripBom(),
+      resolveLocalized({ 
+        baseDir:      `${process.cwd()}/${baseDir}`,
+        localizedDir: `${process.cwd()}/i18n/${locale}/${baseDir}`
+      }),
+      copy({
+        verbose: true,
+        flatten: false,
+        copyOnce: isWatchOn,
+        targets: [{
+          src: [
+            `${baseDir}/**/*.ejs`, 
+            // `${baseDir}/**/*.css`, 
+            // `${baseDir}/**/*.jpeg`, 
+            // `${baseDir}/**/*.jpg`, 
+            // `${baseDir}/**/*.png`, 
+            // `${baseDir}/**/*.svg`, 
+          ], 
+          dest: path.join(targetDir) 
+        }]
+      }),
+      string({ include: "**/*.html" }),
+      json({ namedExports: true }),
+      injectCssToDom(),
       vue(),
+      dynamicImportVariables({ }),
+      commonjs({ include: 'node_modules/**/*.js'}),
+      nodeResolve({ browser: true, mainFields: [ 'browser', 'module', 'main' ] }),
       getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
-        allowAllFormats: true,
-        exclude: [ '*.json', ..._(ignoreForRollupFiles).values() ],
+        allowAllFormats: true
       }),
-      // isLocalDev ? null : terser({ ecma: 5, mangle:false }),
-      saveHashFileNames(),
-    ], 
+      isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV
+    ]
   }
 }
 
-function bundleWidget(relativePath, baseDir='i18n-build') {
- 
-  const extension = path.extname(relativePath);
-  let outputFileExt = extension;  
-  let outputFileName   = `[name]${outputFileExt}`;
-   
-  //when running for local development add en folder path else the i18n-build has good path so need for adjustments
-  let enFolder='en/app'; 
-  if(!isLocalDev)
-    enFolder = '';
+function simpleBundle(entryPoint, locale, baseDir='app') {
+
+  const entryPointPath = path.join(baseDir||'', entryPoint);
+  const targetDir      = path.join(`${outputDir}/${locale}/${baseDir}`, path.dirname(entryPoint));
 
   return {
-    input : path.join(baseDir||'', relativePath),
+    input : entryPointPath,
     output: [{
       format   : 'iife',
       sourcemap: true,
-      dir : path.join(outputDir, enFolder, path.dirname(relativePath)),
-      name : `${relativePath.replace(/[^a-z0-9]/ig, "_")}`,
-      entryFileNames: outputFileName,
-      chunkFileNames: outputFileName,      
+      dir : targetDir,
+      name : entryPoint.replace(/[^a-z0-9]/ig, "_"),
+      exports: 'named'
     }],
-    plugins : [
-      alias({ entries : [
-          { find: /^~\/(.*)/, replacement:`${process.cwd()}/app/$1` }
-        ] 
-      }), 
+    plugins : [,
       getBabelOutputPlugin({
         presets: [['@babel/preset-env', { targets: "> 0.25%, IE 10, not dead"}]],
-        allowAllFormats: true,
-        exclude: [ '*.json' ],
+        allowAllFormats: true
       }),
-      isLocalDev ? null : terser({ ecma: 5, mangle:true })
-    ], 
+      isWatchOn ? null : terser({ mangle: false }) // DISABLE IN DEV
+    ]
   }
 }
 
-//custom plugins
+async function loadExternals() {
 
-function saveHashFileNames(){
+  const externals = [];
 
-  return {
-    name:'saveHashFileNames',
-    generateBundle: async function(OutputOptions, bundle){
-      const langRegex = /\/(ar|en|fr|es|ru|zh)\//;
-      const hashFileName = Object.keys(bundle)[0]; 
-      const fileName     = bundle[hashFileName].facadeModuleId.replace(/\\/g, '/').replace(/.*app\//, '').replace(/\.html$/, '.html.js');
-      const langMatch    = OutputOptions.dir.match(langRegex); 
-      let lang           = 'en'
-      if(langMatch)
-        lang = langMatch[1];
+  //Define requireJS configuration (define() + config.paths ) as externals
 
-      const hashMapFileName = `${process.cwd()}/${outputDir}/${lang}/app/hash-file-mapping.js`;
-      // console.log(fileName, langMatch, OutputOptions);
-      
-      if(!globalHashMapping[lang])
-        globalHashMapping[lang] = {};
+  // Shim dependencies 
+  const window     = { 
+    location : { pathname: '/' },
+    scbdApp  : { host: '' },
+    alert    : () => {}
+  }; 
 
-      globalHashMapping[lang][fileName] = hashFileName;
-      const defineSyntax = `define(function () {
-                                return ${JSON.stringify(globalHashMapping[lang])};
-                            });`
-      mkdirSync(`${process.cwd()}/${outputDir}/${lang}/app`, {recursive:true});
-      writeFileSync(hashMapFileName, defineSyntax);
-      writeFileSync(`${hashMapFileName}.json`, JSON.stringify(globalHashMapping[lang], null, 4));
-    }
+  const defineJs   = (module) => { if(typeof(module)==='string') externals.push(module) };
+  const requireJs  = ( )      => { };
+  requireJs.config = (config) => { 
+    const modules = [
+      ...Object.keys(config.paths || {}),
+      ...(config.packages || []).map(p=>p.name)
+    ]
+    modules.forEach(defineJs)
   }
 
-}
+  bootWebApp(window, requireJs, defineJs);
 
-
-function sanitizeString(options){
-
-    if ( options === void 0 ) options = {};
-
-    return {
-      name: 'sanitizeString',
-
-      // eslint-disable-next-line no-shadow
-      transform: function(text, id) {
-
-        if (id.slice(-5) == '.html') { 
-          try{
-              return {
-                        code: text.replace(/^\uFEFF/gm, "").replace(/^\u00BB\u00BF/gm,""),
-                        map: { mappings: '' }
-                    };
-          }
-          catch (err) {
-            var message = 'Failed to remove bom chars from html string';
-            var position = parseInt(/[\d]/.exec(err.message)[0], 10);
-            this.warn({ message: message, id: id, position: position });
-            return null;
-          }
-        }
-        else if (/\.json\.js$/.test(id) || /\.json$/.test(id)) {  
-              
-          try { 
-            const data = {
-                code: text.replace(/\s(?=(?:"[^"]*"|[^"])*$)/g, ''),
-                map: { mappings: '' }
-            };
-            return data;
-          } catch (err) {
-            var message = 'Failed to remove line feed';
-            var position = parseInt(/[\d]/.exec(err.message)[0], 10);
-            this.warn({ message: message, id: id, position: position });
-            return null;
-          }
-        }
-
-        return null; 
-      }
-    };
-}
-
-function addLanguageAttribute(){
-
-  return {
-    name: 'languageAttribute',
-
-    // eslint-disable-next-line no-shadow
-    transform: function(content, filePath) {  
-      if(content && /\.html$/.test(filePath)){
-
-          const $html = cheerio.load(`<div class="my-lang-selector">${content}</div>`, {decodeEntities: false});
-          let contentHtml = $html('.my-lang-selector').children()
-          if(!contentHtml.attr('lang')){
-
-              let lang = 'en'
-              const match = filePath.match(/(?:^|\/)(ar|en|es|fr|ru|zh)\/.*/);
-              if(match && match.length > 1)
-                  lang = match[1];
-                  
-              contentHtml.attr('lang', lang);
-          }
-
-          return {
-            code : $html('.my-lang-selector').html(),
-            map  : { mappings: '' }
-          };
-      }
-
-      return content;
-    }
-  }
+  return externals;
 }

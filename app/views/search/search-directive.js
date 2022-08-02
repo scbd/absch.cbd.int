@@ -1,16 +1,16 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
 import 'toastr';
 import joyRideText      from '~/app-text/views/search/search-joyride-tour.json';
-import  { scbdSchemas } from 'components/scbd-angularjs-services/main';
+import  { scbdSchemas } from '~/components/scbd-angularjs-services/main';
 import template         from 'text!./search-directive.html';
-import {getLimitedTerms} from 'services/common';
-import 'services/main';
+import {getLimitedTerms} from '~/services/common';
+import '~/services/main';
 import '~/views/directives/export-directive';
-import 'components/scbd-angularjs-controls/main';
+import '~/components/scbd-angularjs-controls/main';
 import './search-filters/keyword-filter';
 import './search-filters/national-filter';
 import './search-filters/reference-filter';
@@ -23,7 +23,7 @@ import './search-results/result-default';
 import './search-results/list-view';
 import './search-results/group-view';
 import './directives/result-view-options';
-import 'views/reports/matrix/data-matrix.directive';
+import '~/views/reports/matrix/data-matrix.directive';
 import 'angular-vue'
 import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
@@ -241,7 +241,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 {
                                     appendToBody: true,
                                     type        : 'element',
-                                    selector    : "#sendRecords",
+                                    selector    : "#shareRecord",
                                     title       : joyRideText.sendRecords.title,
                                     content     : joyRideText.sendRecords.content,
                                     placement   : 'top',
@@ -737,7 +737,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         }
 
                         //SCBD
-                        _.forEach(scbdSchemas.defaults, function (schema, key) {
+                        _.forEach(scbdSchemas, function (schema, key) {
                             addFilter(key, { 'sort': schema.sort, 'type': 'schema', 'name': $filter('lstring')(schema.titlePlural||schema.title), 'id': key, 
                                     'description': $filter('lstring')((schema.description || {})), otherType:'scbd' });
                         });
@@ -842,7 +842,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
                     async function getFocalPointTypes(){
                         const chFolder = realm.is('BCH') ? 'bch' : 'abs';
-                        const { categories } = await import(`/app/app-data/${chFolder}/focal-point-category.js`);
+                        const { categories } = await import(`../../app-data/${chFolder}/focal-point-category.js`);
 
                         return categories.map(category=>{
                             return { 

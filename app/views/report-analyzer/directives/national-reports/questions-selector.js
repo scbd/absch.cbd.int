@@ -1,12 +1,12 @@
 import templateHtml from 'text!./questions-selector.html';
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import require from 'require';
 import '../selectors/terms-dialog';
 import '../intermediate';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
-import 'views/report-analyzer/reportAnalyzerService';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
+import '~/views/report-analyzer/reportAnalyzerService';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -74,7 +74,13 @@ import 'views/report-analyzer/reportAnalyzerService';
                         return;
                     
                     var reportTypeDetails = _.find($scope.reportData, {type:reportType});    
-                    let res = await  import(reportTypeDetails.questionsUrl)
+
+                    const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
+
+                    const clearingHouse = reportTypeDetails.questionsUrl.replace(pathPattern, "$1");
+                    const reportVersion    = reportTypeDetails.questionsUrl.replace(pathPattern, "$2");
+                                            
+                    let res = await  import(`../../../../app-data/${clearingHouse}/report-analyzer/${reportVersion}.js`)
                     if(res) {
                                            
                             $scope.sections = reportAnalyzerService.flattenQuestions(res[reportType]);

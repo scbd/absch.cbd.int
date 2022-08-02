@@ -44,15 +44,18 @@ if(process.env.COMPRESS=='true'){
 }
 
 // Set routes
-app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
 app.use('/widgets.js',                               require('./middlewares/widget'));
 app.use('/legacy-ajax-plugin.js',                    require('./middlewares/widget'));
-app.use('(/en)?/app',                                express.static(`${__dirname}/dist/en/app`, { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/ar/app',                                   express.static(`${__dirname}/dist/ar/app`, { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/es/app',                                   express.static(`${__dirname}/dist/es/app`, { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/fr/app',                                   express.static(`${__dirname}/dist/fr/app`, { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/ru/app',                                   express.static(`${__dirname}/dist/ru/app`, { setHeaders: cacheControl.setCustomCacheControl }));
-app.use('/zh/app',                                   express.static(`${__dirname}/dist/zh/app`, { setHeaders: cacheControl.setCustomCacheControl }));
+
+app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/ar',                                       express.static(`${__dirname}/dist/ar`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/en',                                       express.static(`${__dirname}/dist/en`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/es',                                       express.static(`${__dirname}/dist/es`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/fr',                                       express.static(`${__dirname}/dist/fr`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/ru',                                       express.static(`${__dirname}/dist/ru`, { setHeaders: cacheControl.setCustomCacheControl }));
+app.use('/zh',                                       express.static(`${__dirname}/dist/zh`, { setHeaders: cacheControl.setCustomCacheControl }));
+
+// TMP
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app',          express.static(__dirname + '/app',         { setHeaders: cacheControl.setCustomCacheControl }));
 
 app.use('/cbd-forums',      express.static(__dirname + '/node_modules/@bower_components/cbd-forums', { setHeaders: cacheControl.setCustomCacheControl }));

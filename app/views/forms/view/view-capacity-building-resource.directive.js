@@ -1,4 +1,4 @@
-import app from 'app';
+import app from '~/app';
 import template from "text!./view-capacity-building-resource.directive.html";
 
 app.directive("viewCapacityBuildingResource", [function () {

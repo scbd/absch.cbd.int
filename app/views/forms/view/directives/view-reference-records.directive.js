@@ -1,8 +1,8 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
 import template from "text!./view-reference-records.directive.html";
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
 import '~/views/forms/view/bch/icons';
 import { iconFields } from '~/views/forms/view/bch/icons';
 import viewReferenceRecordsT from '~/app-text/views/forms/view/directives/view-reference-records.json';

@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import template from 'text!./party-status.html';
-import 'services/main';
+import '~/services/main';
 import partyStatusT from '~/app-text/views/directives/party-status.json';
 
 app.directive('ngPartyStatus', function () {

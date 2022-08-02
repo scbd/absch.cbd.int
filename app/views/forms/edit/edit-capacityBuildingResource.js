@@ -1,6 +1,6 @@
-import app from 'app';
+import app from '~/app';
 import _ from 'lodash';
-import 'views/forms/edit/edit';
+import '~/views/forms/edit/edit';
 import '~/views/forms/view/view-capacity-building-resource.directive';
 
   export { default as template } from './edit-capacityBuildingResource.html';

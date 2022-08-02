@@ -1,7 +1,7 @@
-﻿import app from 'app';
+﻿import app from '~/app';
 import _ from 'lodash';
-import videosData from 'app-data/help-videos.json';
-import 'views/about/youtube';
+import videosData from '~/app-data/help-videos.json';
+import '~/views/about/youtube';
 import 'ngDialog';
 export { default as template } from './videos.html';
 

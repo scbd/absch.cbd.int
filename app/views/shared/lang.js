@@ -1,7 +1,7 @@
-import app from 'app';
-import moment from 'angular-cookies';
-import 'components/scbd-angularjs-services/main';
-import 'services/main';
+import app from '~/app';
+import 'angular-cookies';
+import '~/components/scbd-angularjs-services/main';
+import '~/services/main';
 import langT from '~/app-text/views/shared/lang.json';
     export { default as template } from './lang.html';
 export default ["$scope", "$location", "locale","$timeout", "$window", "$routeParams", "$cookies", 'localStorageService', 'realm', 'translationService',

@@ -1,10 +1,10 @@
-import app from 'app';
+import app from '~/app';
 import html from 'text!./header.html';
 import _ from 'lodash';
 import 'ng-breadcrumbs';
-import 'services/main';
-import 'components/scbd-angularjs-services/main';
-import 'components/scbd-angularjs-controls/main';
+import '~/services/main';
+import '~/components/scbd-angularjs-services/main';
+import '~/components/scbd-angularjs-controls/main';
 import '../directives/breadcrumbs';
 import abschHeaderT from '~/app-text/templates/absch/header.json';
 
