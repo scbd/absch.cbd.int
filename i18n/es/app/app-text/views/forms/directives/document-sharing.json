@@ -21,7 +21,7 @@
   "instruction": "Utilice comas para separar direcciones de correo electrónico múltiples. Los destinatarios deben registrarse en el Centro de Intercambio de Información con esa dirección de correo electrónico para poder ver el registro borrador.",
   "updating": "actualizando...",
   "close": "Cerrar",
-  "generatePDFRecord:": "Generar un PDF de este registro borrador:",
+  "generatePDFRecord": "Generar un PDF de este registro borrador:",
   "pleaseNote": "¡Por favor, tener en cuenta!",
   "processTakesTime": "Este proceso tarde bastante en cargar. ",
   "function": "",

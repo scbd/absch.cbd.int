@@ -11,7 +11,7 @@
   "isNotAuthenticated": "",
   "searchFilter": "",
   "filterTitle": "",
-  "selectFilters:": "Seleccionar filtros de búsqueda:",
+  "selectFilters": "Seleccionar filtros de búsqueda:",
   "sendEmail": "Enviarme un correo electrónico cuando se agreguen o actualicen registros pertinentes.",
   "cancel": "Cancelar",
   "save": "Guardar",

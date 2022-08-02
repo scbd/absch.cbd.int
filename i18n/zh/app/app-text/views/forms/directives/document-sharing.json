@@ -21,7 +21,7 @@
   "instruction": "使用逗号来分隔多个电子邮件地址。收件人必须用此电子邮件地址登录信息交换所，以查看该记录草稿。",
   "updating": "更新",
   "close": "关闭",
-  "generatePDFRecord:": "生成该记录草稿的 PDF 文件：",
+  "generatePDFRecord": "生成该记录草稿的 PDF 文件：",
   "pleaseNote": "请注意！",
   "processTakesTime": "加载这个进程需要较长时间。 ",
   "function": "",
