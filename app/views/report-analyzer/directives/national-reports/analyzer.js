@@ -182,9 +182,10 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                 
               async  function loadJsonFile(path){
 
-                    console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 187"); alert("ROLLUP UPGRADE TO REVIEW line 187"); throw new Error("ROLLUP UPGRADE TO REVIEW line 187")
-
-                    //const res = await import(path)
+                    const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/mapping\/(.*).json$/i;
+                    const clearingHouse = path.replace(pathPattern, "$1");
+                    const reportVersion = path.replace(pathPattern, "$2");
+                    const res = await import(`../../../../app-data/${clearingHouse}/report-analyzer/mapping/${reportVersion}.json`)
 
                     if(res) 
                        return res;
@@ -199,12 +200,10 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                     var reportType = $scope.selectedReportType;
                     var deferred = $q.defer();
 
-                    console.warn("ROLLUP UPGRADE TO REVIEW IMPORT() line 207"); alert("ROLLUP UPGRADE TO REVIEW line 207"); throw new Error("ROLLUP UPGRADE TO REVIEW line 207")
-
+                    const pathPattern   = /^app-data\/(\w+)\/report-analyzer\/(\w+)$/i;
                     const clearingHouse = $scope.activeReport.questionsUrl.replace(pathPattern, "$1");
                     const reportVersion = $scope.activeReport.questionsUrl.replace(pathPattern, "$2");
 
-// BEFORE ROLLUP    let res = await import($scope.activeReport.questionsUrl)
                     let res = await import(`../../../../app-data/${clearingHouse}/report-analyzer/${reportVersion}.js`)
                     if (res) {
                         res = reportAnalyzerService.flattenQuestions(res[reportType]);
@@ -247,6 +246,10 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                 function htmlEncode(value){
                   return $('<div/>').text(value).html();
                 }
+
+                function safeApply(fn) {
+                    ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
+                }  
 
                 //==============================================
                 //
@@ -347,8 +350,8 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
                 var sumTypeDialog = $element.find("#sumTypeDialog");
 
                 sumTypeDialog.on("shown.bs.modal",    function() { sumTypeDialog.find('button').focus(); });
-                sumTypeDialog.on("shown.bs.modal",    function() { $scope.$apply(function() { $scope.sumTypeDialogVisible = true;  }); });
-                sumTypeDialog.on("hidden.bs.modal",   function() { $scope.$apply(function() { $scope.sumTypeDialogVisible = false; }); });
+                sumTypeDialog.on("shown.bs.modal",    function() {safeApply(function() { $scope.sumTypeDialogVisible = true;  }); });
+                sumTypeDialog.on("hidden.bs.modal",   function() {safeApply(function() { $scope.sumTypeDialogVisible = false; }); });
                 $scope.$watch('sumTypeDialogVisible', function(visible) {
 
                     if(sumTypeDialog.is(":visible") != (visible || false)) {
@@ -366,8 +369,8 @@ app.directive('nationalReportAnalyzer', ['$http', '$q', 'locale', '$filter', '$t
 
                 textsDialog.on("shown.bs.modal",  function() { textsDialog.find(".modal-body").scrollTop(0); });
                 textsDialog.on("shown.bs.modal",  function() { textsDialog.find('button').focus(); });
-                textsDialog.on("shown.bs.modal",  function() { $scope.$apply(function() { $scope.textsDialogVisible = true;  }); });
-                textsDialog.on("hidden.bs.modal", function() { $scope.$apply(function() { $scope.textsDialogVisible = false; }); });
+                textsDialog.on("shown.bs.modal",  function() {safeApply(function() { $scope.textsDialogVisible = true;  }); });
+                textsDialog.on("hidden.bs.modal", function() {safeApply(function() { $scope.textsDialogVisible = false; }); });
                 $scope.$watch('textsDialogVisible', function(visible) {
 
                     if(sumTypeDialog.is(":visible") != (visible || false)) {
