@@ -85,7 +85,7 @@ export default function bootApp(window, require, defineX) {
 
         // ROLLUP UPGRADE: To review vvv
 
-        console.warn("ROLLUP UPGRADE: To review")
+        console.warn("ROLLUP UPGRADE: To review boot.js line 88", url)
 
         // if(!force && window.hasHashUrl(url))
         //     return url;
