@@ -55,7 +55,9 @@ app.directive('recordOptions', ['locale', '$route', '$timeout', 'appConfigServic
                 }
 
 
-                $scope.print = async function(){
+                $scope.print = async function($evt){
+                    
+                    $evt.preventDefault()
                     $scope.printing = true;
 
                                   await import('printThis');

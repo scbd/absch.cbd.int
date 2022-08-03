@@ -1,12 +1,31 @@
-    <div class="text-center">
-        <a ng-href="{{url}}" class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3" target="_blank"> 
-            <span class="fw-normal">{{::('abschHeaderT.absch'|$translate)}}</span>
-            <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
-                <span> {{::('abschHeaderT.accessBenefitSharing'|$translate)}} </span>
-                {{::('abschHeaderT.clearingHouse'|$translate)}}</span> 
-            <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
-                {{::('abschHeaderT.development'|$translate)}}</span> 
-            <span ng-if="isTRG" class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
-                {{::('abschHeaderT.training'|$translate)}}</span> 
-        </a>
-    </div>
+<div class="text-center mt-3">
+    <header class="px-3 d-sm-none d-md-none">
+        <nav class="navbar navbar-sm navbar-light bg-light rounded">
+            <a ng-href="{{url}}">
+                <span class="realm-base-acronym fw-bold color-green"> {{::('abschHeaderT.abs'|$translate)}} </span>
+                <span
+                    class="realm-base-acronym text-uppercase color-green fw-bold">{{::('abschHeaderT.clearingHouse'|$translate)}}</span>
+                </span>
+
+                <span ng-if="isDEV" class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                    {{::('abschHeaderT.development'|$translate)}}</span> <span ng-if="isTRG"
+                    class="fs-5 fw-bold bg-yellow badge text-uppercase link-dark">
+                    {{::('abschHeaderT.training'|$translate)}}</span>
+            </a>
+        </nav>
+    </header>
+    <header class="pt-2 d-none d-sm-inline-block d-md-inline-block">
+        <div class="">
+            <a ng-href="{{url}}" class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span
+                    class="fw-normal">{{::('abschHeaderT.absch'|$translate)}}</span>
+                <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
+                    <span> {{::('abschHeaderT.accessBenefitSharing'|$translate)}} </span>
+                    {{::('abschHeaderT.clearingHouse'|$translate)}}</span> <span ng-if="isDEV"
+                    class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
+                    {{::('abschHeaderT.development'|$translate)}}</span> <span ng-if="isTRG"
+                    class="fs-3 fw-bold bg-yellow badge text-uppercase link-dark">
+                    {{::('abschHeaderT.training'|$translate)}}</span> </a>
+        </div>
+    </header>
+
+</div>
