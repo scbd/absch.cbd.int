@@ -26,7 +26,7 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
                 let windowHeight;
                 let iframeOriginData;
                 function sendIframeCommunication(){
-                    const height = $(window.scbdEmbedData.selector).height()+50;
+                    const height = $('#page-content-wrapper').height();
                     if(windowHeight != height){
                         windowHeight = height;
                         const data = {
@@ -42,7 +42,7 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
                         let data = evt.data;
                         if(typeof evt.data == 'string')
                             data = JSON.parse(evt.data);
-                        if(data.type == 'getClientHeight' && window.scbdEmbedData){
+                        if(data.type == 'getClientHeight'){
                             iframeOriginData = {data, origin :evt.origin };
                             sendIframeCommunication();
                             resize_ob.observe(document.querySelector("#page-content-wrapper"));

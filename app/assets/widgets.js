@@ -15,7 +15,7 @@ function embedIFrame(widget, options){
     iframe.setAttribute('width', options.width||'100%');
     iframe.setAttribute('height', options.height||500);
     iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('scrolling', 'yes');
+    iframe.setAttribute('scrolling', 'no');
 
     widget.parentNode.replaceChild(iframe, widget);
     //TODO: no need to be inside loop
@@ -26,6 +26,7 @@ function embedIFrame(widget, options){
         if(evt.data){
             var data = JSON.parse(evt.data);
             if(data.type == 'setClientHeight' && data.iframe == iframe.name){
+                // console.log(data.height);
                 iframe.setAttribute('height', data.height ? (data.height+20) : iframe.height);
             }
         }

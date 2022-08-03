@@ -73,9 +73,6 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                     console.error('wrong realm for share id loaded')
                     return;
                 }
-                window.scbdEmbedData = {
-                    selector : elementMapping[data.storageType]
-                }
 
                 if(data.storageType == 'chm-document'){
                     safeapply(()=>{
