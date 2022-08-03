@@ -8,7 +8,6 @@ app.directive('embedFooter', ['translationService',  function (translationServic
         template: html,
         link: function($scope) {
             translationService.set('abschHeaderT', headerT);
-            console.log(window.location)
             $scope.url  = window.location.href.replace(/&?embed=true/, '');
         }
     };
