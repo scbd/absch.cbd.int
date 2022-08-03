@@ -181,17 +181,16 @@ body.embed ng-view > .container {
 
 embed-footer{
     display: block;
-    bottom: 0px;
-    position: absolute;
     width: 100%;
 }
 
 body.embed .container-fluid.m-2{
-    margin: 0.5rem!important;
+    margin: 0.5rem 0.5em 0em 0.5em!important;
 }
 
 body.embed #innerPage .innerPageContent{
-    padding:0px!important
+    padding:0px!important;
+    margin-bottom: 0px;
 }
 body.embed .col-12.tab-content.bg-white.p-3 {
     padding: 0px 10px 5px 0px!important;
