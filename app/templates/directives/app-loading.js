@@ -6,7 +6,7 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
     return ({
         template:'',
         restrict: "E",
-        link: function link($scope, element, attributes) {
+        link: async function($scope, element, attributes) {
 
             $animate.leave(element.children().eq(1)).then(
                 function cleanupAfterAnimation() {
@@ -16,11 +16,13 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
             );
 
             var queryString = $location.search();
-            if(queryString && (queryString.print || queryString.embed)){
-                require(['css!/app/css/print-friendly'], function(){})
+            if(queryString && (queryString.print)){
+                await import('~/css/print-friendly.css')
                 $('body').addClass('print');
             }
             if(queryString && queryString.embed){
+                await import('~/css/print-friendly.css')
+                await import('~/css/embed.css')
                 $('body').addClass('embed');
 
                 let windowHeight;

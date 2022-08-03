@@ -1,0 +1,57 @@
+
+@media (max-width: 768px){
+    body {
+        padding: 0px;
+    }
+}
+
+body.embed {
+    margin: 3px!important;
+}
+
+body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
+body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer,
+body.embed .mastHead.bg-bch, body.embed .mastHead.bg-abs,
+body.embed #search-new #searchResult .search-tabs{
+    display: none!important
+}
+
+body.embed #search-new #searchResult .tab-content pagination.bottom-pagination nav{
+    display: block!important;
+}
+
+body.embed .page-content {
+    background-color: #fff;
+    /* padding: 10px 20px 20px 20px;*/
+}
+
+body.embed ng-view > .container {
+    padding-right: 5px;
+    padding-left: 5px;
+    max-width: 100%;
+    margin-top: 0px;
+    padding-top: 0px;
+}
+
+embed-footer{
+    display: block;
+    width: 100%;
+}
+
+body.embed .container-fluid.m-2{
+    margin: 0.5rem 0.5em 0em 0.5em!important;
+}
+
+body.embed #innerPage .innerPageContent{
+    padding:0px!important;
+    margin-bottom: 0px;
+}
+body.embed .col-12.tab-content.bg-white.p-3 {
+    padding: 0px 10px 5px 0px!important;
+}
+
+/* @media (max-width: 575.98px){
+    body.embed embed-footer > header.nav-lg-header {
+        display: block!important;
+    }
+} */
