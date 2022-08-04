@@ -83,7 +83,7 @@
                       {{$t('Copy')}}
                     </button>
                   </div>
-                  <button class="btn btn-primary float-end" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
+                  <button class="btn btn-primary btn-sm rounded-0 float-end" v-if="!sharedData[sharedData.type].link" @click="generateSearchResultLink()" 
                     :disabled="loading" v-bind:class="{ disabled: loading }">
                       <span v-if="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                       <span v-if="loading" class="visually-hidden">{{$t('loading')}}...</span>

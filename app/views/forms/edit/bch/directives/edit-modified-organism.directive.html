@@ -113,7 +113,7 @@
 											<div class="km-control-group" required name="genes" caption="{{::('editModifiedOrganismT.genes'|$translate)}}">	
 												<div class="help-block">{{::('editModifiedOrganismT.genesInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.genes" question="genes" ng-change="onModifiedGeneChange(document.genes)"
-															caption="Genetic element" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
+															caption="{{::('editModifiedOrganismT.addGeneticElement'|$translate)}}" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
 													</selected-records>
@@ -159,7 +159,7 @@
 												caption="{{::('editModifiedOrganismT.affectedGenes'|$translate)}}">
 												<div class="help-block">{{::('editModifiedOrganismT.affectedGenesInfo'|$translate)}}</div>
 												<div document-selector ng-model="document.affectedGenes" question="affectedGenes"
-														caption="Genetic element" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
+														caption="{{::('editModifiedOrganismT.addGeneticElement'|$translate)}}" on-build-query="onBuildQuery(searchText, 'dnaSequence')" allow-new="true" allow-new-schema="dnaSequence">
 													<selected-records>
 														<div ng-include="'lmo-reference-display'" onload="docSelector=$parent"></div>
 													</selected-records>

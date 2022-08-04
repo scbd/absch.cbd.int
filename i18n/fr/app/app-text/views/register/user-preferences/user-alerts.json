@@ -11,7 +11,7 @@
   "isNotAuthenticated": "",
   "searchFilter": "",
   "filterTitle": "",
-  "selectFilters:": "Sélectionner les filtres de recherche :",
+  "selectFilters": "Sélectionner les filtres de recherche :",
   "sendEmail": "Envoyez-moi un courriel lorsque des fichiers pertinents à cette recherche seront ajoutés ou modifiés.",
   "cancel": "Annuler",
   "save": "Sauvegarder",

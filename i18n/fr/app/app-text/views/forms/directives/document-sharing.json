@@ -21,7 +21,7 @@
   "instruction": "Utiliser les virgules pour séparer plusieurs adresses courriel. Les destinataires doivent se connecter au Centre d’échange avec cette adresse courriel afin de visualiser le projet de document.",
   "updating": "Mise à jour...",
   "close": "Fermer",
-  "generatePDFRecord:": "Générer un PDF à parti de ce projet de fichier :",
+  "generatePDFRecord": "Générer un PDF à parti de ce projet de fichier :",
   "pleaseNote": "Attention!",
   "processTakesTime": "Ce processus prend beaucoup de temps à télécharger. ",
   "function": "",
