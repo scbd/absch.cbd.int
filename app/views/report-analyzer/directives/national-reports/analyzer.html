@@ -155,7 +155,7 @@
                 <span class="sr-only">{{::('analyzerT.toggleDropdown'|$translate)}}</span>
             </button>
 
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu p-2">
                 <li ng-repeat="type in ::sumTypes">
                     <a rel="noopener" href="#" ng-click="setSumType(type)">
                         <span ng-switch="type">
@@ -215,7 +215,7 @@
             <div class="modal-content">
 
                 <div class="d-block modal-header">
-                    <button type="button" class="close btn float-end" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close btn float-end" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle-fill"></i></button>
                     <h4 class="modal-title">{{::('analyzerT.changeNumber'|$translate)}}</i></h4>
                 </div>
 
@@ -252,7 +252,6 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">{{::('analyzerT.close'|$translate)}}</button>
                 </div>
             </div>
         </div>
@@ -264,13 +263,15 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content" id="textsDialog-model-content">
 
-                <div class="modal-header">
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title">{{::('analyzerT.question'|$translate)}} <span ng-bind="currentQuestion.number"></span>.</h4>
-                    <span ng-bind="currentQuestion.title|lstring"></span>
-                    <span ng-if="subTitle"><br/>
-                        <b>{{::('analyzerT.subSection'|$translate)}} :-</b> <span ng-bind="subTitle|lstring"></span>
-                    </span>    
+                <div class="modal-header d-block">
+                    <button type="button" id="btnClose" class="close float-end" data-bs-dismiss="modal" aria-label="Close"><i class="bi bi-x-circle-fill"></i></button>
+                    <div class="mt-1">
+                        <h4 class="modal-title">{{::('analyzerT.question'|$translate)}} <span ng-bind="currentQuestion.number"></span>.</h4>
+                        <span class="mt-2" ng-bind-html="currentQuestion.title|lstring"></span>
+                        <span ng-if="subTitle"><br/>
+                            <b>{{::('analyzerT.subSection'|$translate)}} :-</b> <span ng-bind="subTitle|lstring"></span>
+                        </span>
+                    </div>      
                 </div>
 
                 <div class="modal-body ">
@@ -344,17 +345,16 @@
                 </div>
 
                 <div class="modal-footer">
-                        <button type="button"  ng-click="export()" class="btn btn-primary record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'">
+                        <button type="button"  ng-click="export()" class="btn btn-primary btn-sm rounded-0 record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'">
                                 <i class="fa fa-spin fa-spinner" ng-if="exporting" ></i> 
                                 <i class="fa fa-table" aria-hidden="true" ng-if="!exporting"></i>
                                 {{::('analyzerT.export'|$translate)}}
                             </button>   
-                        <button type="button"  ng-click="print('#textsDialog-model-content')" class="btn btn-primary record-link-style" id="btnPrint">
+                        <button type="button"  ng-click="print('#textsDialog-model-content')" class="btn btn-primary btn-sm rounded-0 record-link-style" id="btnPrint">
                             <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
                             <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
                             {{::('analyzerT.print'|$translate)}}
                         </button>   
-                    <button type="button" class="btn btn-default" data-bs-dismiss="modal" id="btnClose">{{::('analyzerT.close'|$translate)}}</button>
                 </div>
             </div>
         </div>
