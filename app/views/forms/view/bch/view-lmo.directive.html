@@ -6,7 +6,7 @@
 		</h4>
 	</div>
 	<div class="record-body panel-body">
-		<div class="float-end">
+		<div>
 			<a rel="noopener" ng-if="document.info.documentID" target="_blank" ng-href="reports/lmo/{{document.info.identifier|encodeURIComponent}}/decisions">
 				<i class="fa fa-external-link"></i> 
 				{{::('viewLmoT.decisionsLMO'|$translate)}}
@@ -40,7 +40,18 @@
 				<div ng-bind="document.transformationEvent" class="km-value"></div>
 			</div>
 		</div>
-		<div ng-show="document.uniqueIdentification">
+		<div ng-if="document.hasUniqueIdentification!= undefined">
+			<label>{{::('viewLmoT.hasUniqueIdentification'|$translate)}}</label>
+			<!-- <div class="help-info fs-small-6">{{::('viewLmoT.hasUniqueIdentificationInfo'|$translate)}} 
+				<a rel="noopener" href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">
+					https://bch.cbd.int/en/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28
+				</a>.
+			</div> -->
+			<div compare-val>
+				<km-value-bool value="document.hasUniqueIdentification" locales="locale"></km-value-bool>
+			</div>
+		</div>
+		<div ng-show="document.uniqueIdentification && document.hasUniqueIdentification">
 			<label>{{::('viewLmoT.uniqueIdentification'|$translate)}}</label>
 			<div compare-val>
 			<div ng-bind="document.uniqueIdentification" class="km-value"></div></div>
@@ -64,7 +75,7 @@
 
 		<div ng-show="document.recipientOrganisms">
 			<label>{{::('viewLmoT.recipientOrganisms'|$translate)}}</label>
-			<div class="help-info" style="font-size: 10px;">{{::('viewLmoT.recipientOrganismsInfo'|$translate)}}
+			<div class="help-info fs-small-6">{{::('viewLmoT.recipientOrganismsInfo'|$translate)}}
 			</div>
 			<div class="km-value" compare-val>
 				<ul class="list">
@@ -117,7 +128,7 @@
 		</div>
 		<div ng-show="document.genes">
 			<label>{{::('viewLmoT.genes'|$translate)}}</label>
-			<div class="help-info" style="font-size: 10px;">{{::('viewLmoT.genesInfo'|$translate)}}</div>
+			<div class="help-info fs-small-6">{{::('viewLmoT.genesInfo'|$translate)}}</div>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.genes" >						

@@ -6,6 +6,8 @@
     "lmoIdentityInfo": "The image below identifies the LMO through its unique identifier, trade name and a link to this page of the BCH. Click on it to download a larger image on your computer. For help on how to use it go to the LMO quick-links page.",
     "name": "Name",
     "transformationEvent": "Transformation event",
+    "hasUniqueIdentification": "Does this LMO have a unique identifier?",
+    "hasUniqueIdentificationInfo": "The BCH is currently using the Unique Identifier system as set out in the OECD Guidance for the Designation of Unique Identifiers for Transgenic Plants (example MON-ØØ81Ø-6). For more information see",
     "uniqueIdentification": "Unique identifier",
     "developer": "Developer(s)",
     "description": "Description",

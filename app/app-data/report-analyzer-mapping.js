@@ -92,13 +92,13 @@ export const analyzerMapping =
                                 {"title": "Compare with 2nd National Report Question", "url":"app-data/bch/report-analyzer/mapping/cpbNationalReport4-2.json"}
                               ],
             "offlineFormats": [
-                                  {"lang": "en", "url":"https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_en.doc"},
-                                  {"lang": "fr", "url":"https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_fr.doc"},
-                                  {"lang": "es", "url":"https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_es.doc"},
-                                  {"lang": "ru", "url":"https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_ru.doc"},
-                                  {"lang": "ar", "url":"https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_ar.doc"},
-                                  {"lang": "zh", "url":"https://bch.cbd.int/resources/common-formats/nationalrecord_4th_nationalreportcartagenaprotocol_zh.doc"}
-                              ]
+                                  {"lang": "ar", "url":"https://bch.cbd.int/resources/common-formats/ar/nationalrecord_4th_nationalreportcartagenaprotocol_ar.docx"},
+                                  {"lang": "en", "url":"https://bch.cbd.int/resources/common-formats/en/nationalrecord_4th_nationalreportcartagenaprotocol_en.docx"},
+                                  {"lang": "es", "url":"https://bch.cbd.int/resources/common-formats/es/nationalrecord_4th_nationalreportcartagenaprotocol_es.docx"},
+                                  {"lang": "fr", "url":"https://bch.cbd.int/resources/common-formats/fr/nationalrecord_4th_nationalreportcartagenaprotocol_fr.docx"},
+                                  {"lang": "ru", "url":"https://bch.cbd.int/resources/common-formats/ru/nationalrecord_4th_nationalreportcartagenaprotocol_ru.docx"},
+                                  {"lang": "zh", "url":"https://bch.cbd.int/resources/common-formats/zh/nationalrecord_4th_nationalreportcartagenaprotocol_zh.docx"}
+                              ]	
         }
     ]
 }
