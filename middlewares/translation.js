@@ -37,6 +37,7 @@ const { bundleUrls } = require('../app/boot.js');
                     cdnUrl             : global.app.cdnUrl,
                     angularBundle      : bundleUrls.angularBundle,
                     initialCss         : bundleUrls.initialCss,
+                    captchaV2BadgeKey  : process.env.CAPTCHA_V2Badge_KEY
                 };
 
     return res.render(`${global.app.rootPath}/dist/${locale}/app/templates/${process.env.CLEARINGHOUSE}/index.ejs`, options);

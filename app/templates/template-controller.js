@@ -12,6 +12,7 @@ import '~/views/directives/route-loading-directive';
 import '~/views/directives/docked-side-bar';
 import './directives/cbd-footer';
 import './directives/app-loading';
+import { initializeRecaptcha } from '~/services/reCaptcha';
 
 app.config(["toastrConfig", function(toastrConfig) {
     angular.extend(toastrConfig, {
@@ -84,6 +85,8 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
                 $scope.env_name = "TRAINING";
             }
             $scope.embed = $location.search().embed; 
+
+            initializeRecaptcha('g-recaptcha', $window.scbdApp.captchaV2BadgeKey)
         }
 
         $rootScope.$on('signOut', function () {

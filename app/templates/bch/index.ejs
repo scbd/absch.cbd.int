@@ -146,6 +146,7 @@
         <bch-footer></bch-footer>
         <cbd-footer></cbd-footer>
 
+        <div id="g-recaptcha"></div>
     </div>
     
     <script>
@@ -158,7 +159,8 @@
             lang             : '<%=preferredLanguage%>',
             title            : document.getElementById('appTitle').innerText,
             description      : document.getElementById('appDescription').innerText,
-            analytics        : '<%=googleAnalyticsCode%>'
+            analytics        : '<%=googleAnalyticsCode%>',
+            captchaV2BadgeKey: '<%=captchaV2BadgeKey%>'
         }        
     </script>
     <script src="<%=cdnUrl%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
@@ -174,6 +176,7 @@
     
     
     <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script src="https://www.recaptcha.net/recaptcha/api.js"></script>
     <script>
        function addLoadEvent(func) {
             var oldonload = window.onload; if (typeof window.onload != 'function') { window.onload = func; } else { window.onload = function() { if (oldonload) { oldonload(); } func(); } } 
@@ -194,7 +197,6 @@
         }
         
     </script>
-
 
 </body>
 

@@ -50,7 +50,7 @@
                   <div v-if="!loading && sharedData[sharedData.type].success" class="alert alert-success">
                     <span v-if="sharedData.type=='email'">
                       {{$t('emailSent')}}
-                      <ul v-if="sharedData[sharedData.type].emailsSentTo.length>0">
+                      <ul v-if="sharedData[sharedData.type].emailsSentTo && sharedData[sharedData.type].emailsSentTo.length>0">
                         <li v-for="(email, index) in sharedData[sharedData.type].emailsSentTo" :key="index">{{email}}</li>
                       </ul>
                     </span>
@@ -163,17 +163,10 @@
                     </div>
                   </div>
               </div>
+              <invisible-recaptcha ref="shareRecaptcha" :sitekey="captchaV2BadgeKey" 
+                :elementId="'shareRecaptcha'" :badgePosition="'left'"></invisible-recaptcha>
             </div>
           </div>
-          <!-- <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary float-end"
-              @click="modal.hide()"
-            >
-              {{$t('cancel')}}
-            </button>
-          </div> -->
         </div>
       </div>
     </div>
@@ -193,9 +186,12 @@ import DocumentShareApi from "~/api/document-share";
 import SubscriptionsApi from "~/api/subscriptions";
 import { Modal, Toast } from "bootstrap";
 import i18n from "../../app-text/components/common/share-record.json";
+import { getRecaptchaToken } from '~/services/reCaptcha'
+
+
 
 export default {
-  components: {},
+  components: {  },
   props: ["getQuery", "tokenReader", "userStatus", "generateLink", "isUserSignedIn"],
   data: () => {
     return {
@@ -212,7 +208,7 @@ export default {
         storageType: '',
         type       : 'link'
       },
-      error : null,
+      error : null
     };
   },
   watch:{
@@ -274,6 +270,9 @@ export default {
       if (this.sharedData.storageType == "chm-country-profile") {
         this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
       }
+      console.log(this.sharedData)
+      this.refreshSharedData();
+      
     },
     closeDialog() {
       this.sharedData = {
@@ -294,31 +293,38 @@ export default {
     },
     async shareLinkMail() {
       this.error = undefined;
-      if (
-        !this.sharedData[this.sharedData.type].emails ||
-        !/^([a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])[;,\s]?)+$/i.test(
-          this.sharedData[this.sharedData.type].emails.replace(/\s/g, '')
-        )
-      ) {
+      const emailsRegex = /^([a-z0-9!#$%&'*+=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])[;,\s]?)+$/i;
+      const emails = this.sharedData[this.sharedData.type].emails;
+      if (!emails || !emailsRegex.test(emails.replace(/\s/g, ''))) {
         this.isValidEmail = false;
+        return;
+      }
+      if(emails.split(/,|;| /g).length > 10){
+        this.error = i18n.excessEmailError;
+        this.isValidEmail = true;
         return;
       }
       this.isValidEmail = true;
       try {
         this.loading = true;
+        this.sharedData[this.sharedData.type].emails = [...(new Set(emails.replace(/(,|;|\s)$/, '').split(/,|;| /g)))].join(',')
+
+        const captchaToken   = await getRecaptchaToken();
 
          if (!this.sharedData[this.sharedData.type]._id) {          
           if (this.sharedData.storageType == "chm-search-result") {
             await this.saveSearchQuery();            
           }
-          await this.saveShareDocument();
+          await this.saveShareDocument(undefined, captchaToken);
         }
 
         this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].urlHash}`;
 
         this.sharedData[this.sharedData.type].success      = true;
-        this.sharedData[this.sharedData.type].emailsSentTo = this.sharedData[this.sharedData.type].emails.replace(/\s/g, '').split(/,|;| /g);
+        this.sharedData[this.sharedData.type].emailsSentTo = [...(this.sharedData[this.sharedData.type].emailsSentTo||[]), 
+                                                              ...this.sharedData[this.sharedData.type].emails.replace(/\s/g, '').split(/,|;| /g)];
         this.sharedData[this.sharedData.type].emails       = undefined;
+        this.refreshSharedData();
 
       } catch (err) {
         console.log(err);
@@ -335,12 +341,14 @@ export default {
       this.loading = true;
      
       try {
+        const captchaToken   = await getRecaptchaToken();
+
         if (!this.sharedData.embed._id) {
           if (this.sharedData.storageType == "chm-search-result") {
             await this.saveSearchQuery();            
           }
           if(!this.sharedData.embed.urlHash)
-            await this.saveShareDocument();
+            await this.saveShareDocument(undefined, captchaToken);
         }
 
         if (this.sharedData.embed._id) {
@@ -356,7 +364,7 @@ export default {
               this.sharedData.code += `<div class="scbd-chm-embed" data-type="chm-country-profile" data-access-key="${this.sharedData.embed.urlHash}" width="100%"></div>`;
             }
         }
-        this.sharedData = Object.assign({}, this.sharedData);
+        this.refreshSharedData();
         
       } catch (err) {
         console.log(err)
@@ -366,7 +374,7 @@ export default {
       }
 
     },
-    async saveShareDocument(data) {
+    async saveShareDocument(data, captchaToken) {
       
       data = data || this.getShareDocumentData();
       let shareDetails;
@@ -374,11 +382,11 @@ export default {
       let existingSharedDocument;
       if(this.sharedData[this.sharedData.type].recordKey){
         data.sharedData.recordKey = this.sharedData[this.sharedData.type].recordKey;
-        shareDetails  = await this.documentShareApi.shareDocument(data);
+        shareDetails  = await this.documentShareApi.shareDocument(data, captchaToken);
         existingSharedDocument  = await this.documentShareApi.getSharedDocument(shareDetails.id);
       }
       else{
-        shareDetails  = await this.documentShareApi.anonShareDocument(data);
+        shareDetails  = await this.documentShareApi.anonShareDocument(data, captchaToken);
         existingSharedDocument  = shareDetails;
         existingSharedDocument.id = existingSharedDocument._id;
       }
@@ -388,6 +396,7 @@ export default {
         ...this.sharedData[this.sharedData.type], 
         ...existingSharedDocument
       };      
+      this.refreshSharedData();
 
     },
     async saveSearchQuery(){
@@ -396,6 +405,7 @@ export default {
       const searchQueryId = (await this.subscriptionsApi.addSubscription(data)).id;
 
       this.sharedData[this.sharedData.type].recordKey = searchQueryId;
+      this.refreshSharedData();
 
     },
     async generateSearchResultLink(){
@@ -404,20 +414,27 @@ export default {
       this.loading = true;
       try{
         if (!this.sharedData[this.sharedData.type]._id) { 
+          
+        const captchaToken   = await getRecaptchaToken();
+
           const data = {}
           if (this.sharedData.storageType == "chm-search-result") {
             data.searchQuery = this.getSearchQueryData()
           }
 
           data.share = this.getShareDocumentData();
-          await this.saveShareDocument(data);
+          await this.saveShareDocument(data, captchaToken);
         }
 
         this.sharedData[this.sharedData.type].link = `${this.$realm.baseURL}/${this.$locale}/share/link/${this.sharedData.storageType}/${this.sharedData[this.sharedData.type].urlHash}`;
+        this.refreshSharedData();
       }
       catch(err){
         console.error(err);
-        this.error = i18n.searchResultLinkError;
+        if(err?.code == "INVALID_CAPTCHA_SCORE")
+          this.error = err.message;
+        else
+          this.error = i18n.searchResultLinkError;
       } 
       finally{
         this.loading = false;
@@ -431,10 +448,11 @@ export default {
         return;
       }
       this.isValidDomain = true;
+      
     },
     onEmailChange(){
       this.sharedData[this.sharedData.type]._id = undefined;
-      this.sharedData[this.sharedData.type].emailsSentTo = undefined
+      this.refreshSharedData();
     },
     signIn(){
       this.userStatus();
@@ -473,6 +491,9 @@ export default {
           subFilters: Object.keys(subFilters).length == 0 ? undefined : subFilters
         };
         return data;
+    },
+    refreshSharedData(){
+      this.sharedData = Object.assign({}, this.sharedData);
     }
   },
   i18n: {
@@ -484,184 +505,182 @@ export default {
 </script>
 
 <style>
-#shareRecord{
-  display: inline;
-}
-.modal-body {
-  background: #ddd;
-}
-.wrapper {
-  /* text-align: center; */
-}
-.wrapper .icon {
-  position: relative;
-  background-color: #ffffff;
-  border-radius: 50%;
-  margin-left: 15px!important;
-  margin: 10px;
-  width: 50px;
-  height: 50px;
-  line-height: 50px;
-  font-size: 22px;
-  display: inline-block;
-  align-items: center;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  color: #333;
-  text-decoration: none;
-}
-.wrapper .tooltip {
-  position: absolute;
-  top: 0;
-  line-height: 1.5;
-  font-size: 14px;
-  background-color: #ffffff;
-  color: #ffffff;
-  padding: 5px 8px;
-  border-radius: 5px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.wrapper .tooltip::before {
-  position: absolute;
-  content: "";
-  height: 8px;
-  width: 8px;
-  background-color: #ffffff;
-  bottom: -3px;
-  left: 50%;
-  transform: translate(-50%) rotate(45deg);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-.wrapper .icon:hover .tooltip {
-  top: -45px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-/* .wrapper .icon.share-link:hover .tooltip {
-    left: -25px;
-    width: 80px!important;
-} */
+    #shareRecord{
+      display: inline;
+    }
+    .modal-body {
+      background: #ddd;
+    }
+    .wrapper {
+      /* text-align: center; */
+    }
+    .wrapper .icon {
+      position: relative;
+      background-color: #ffffff;
+      border-radius: 50%;
+      margin-left: 15px!important;
+      margin: 10px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 22px;
+      display: inline-block;
+      align-items: center;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      color: #333;
+      text-decoration: none;
+    }
+    .wrapper .tooltip {
+      position: absolute;
+      top: 0;
+      line-height: 1.5;
+      font-size: 14px;
+      background-color: #ffffff;
+      color: #ffffff;
+      padding: 5px 8px;
+      border-radius: 5px;
+      box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .wrapper .tooltip::before {
+      position: absolute;
+      content: "";
+      height: 8px;
+      width: 8px;
+      background-color: #ffffff;
+      bottom: -3px;
+      left: 50%;
+      transform: translate(-50%) rotate(45deg);
+      transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    .wrapper .icon:hover .tooltip {
+      top: -45px;
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+    /* .wrapper .icon.share-link:hover .tooltip {
+        left: -25px;
+        width: 80px!important;
+    } */
 
-.wrapper .icon:hover span,
-.wrapper .icon:hover .tooltip {
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
-}
-.wrapper .share-link.selected,
-.wrapper .share-link:hover,
-.wrapper .share-link:hover .tooltip,
-.wrapper .share-link:hover .tooltip::before {
-  background-color: #3b5999;
-  color: #ffffff;
-}
-.wrapper .embed.selected,
-.wrapper .embed:hover,
-.wrapper .embed:hover .tooltip,
-.wrapper .embed:hover .tooltip::before {
-  background-color: #46c1f6;
-  color: #ffffff;
-}
-.wrapper .email.selected,
-.wrapper .email:hover,
-.wrapper .email:hover .tooltip,
-.wrapper .email:hover .tooltip::before {
-  background-color: #e1306c;
-  color: #ffffff;
-}
-.wrapper .share-link span,
-.wrapper .embed span,
-.wrapper .email span {
-  margin: inherit;
-}
+    .wrapper .icon:hover span,
+    .wrapper .icon:hover .tooltip {
+      text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+    }
+    .wrapper .share-link.selected,
+    .wrapper .share-link:hover,
+    .wrapper .share-link:hover .tooltip,
+    .wrapper .share-link:hover .tooltip::before {
+      background-color: #3b5999;
+      color: #ffffff;
+    }
+    .wrapper .embed.selected,
+    .wrapper .embed:hover,
+    .wrapper .embed:hover .tooltip,
+    .wrapper .embed:hover .tooltip::before {
+      background-color: #46c1f6;
+      color: #ffffff;
+    }
+    .wrapper .email.selected,
+    .wrapper .email:hover,
+    .wrapper .email:hover .tooltip,
+    .wrapper .email:hover .tooltip::before {
+      background-color: #e1306c;
+      color: #ffffff;
+    }
+    .wrapper .share-link span,
+    .wrapper .embed span,
+    .wrapper .email span {
+      margin: inherit;
+    }
 
-.wrapper .field {
-  margin: 15px 0px -5px 0px;
-  height: 40px;
-  border: 1px solid #0d6efd;
-  border-radius: 5px;
-}
+    .wrapper .field {
+      margin: 15px 0px -5px 0px;
+      height: 40px;
+      border: 1px solid #0d6efd;
+      border-radius: 5px;
+    }
 
-.wrapper .field.active {
-  border-color: #0d6efd;
-}
+    .wrapper .field.active {
+      border-color: #0d6efd;
+    }
 
-.wrapper .field span {
-  width: 50px;
-  font-size: 1.1rem;
-}
+    .wrapper .field span {
+      width: 50px;
+      font-size: 1.1rem;
+    }
 
-.wrapper .field.active span {
-  color: #0d6efd;
-}
+    .wrapper .field.active span {
+      color: #0d6efd;
+    }
 
-.wrapper .field .copy-link {
-  border: none;
-  outline: none;
-  font-size: 0.89rem;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-  padding: 0px;
-  margin: 5px 0px;
-  white-space: nowrap;
-  overflow: scroll;
-  padding-top: 8px;
-}
+    .wrapper .field .copy-link {
+      border: none;
+      outline: none;
+      font-size: 0.89rem;
+      width: 100%;
+      height: 100%;
+      background: #fff;
+      padding: 0px;
+      margin: 5px 0px;
+      white-space: nowrap;
+      overflow: scroll;
+      padding-top: 8px;
+    }
 
-.btn-clipboard:hover,
-.btn-clipboard:focus {
-  color: #fff!important;
-  background-color: #0d6efd;
-}
+    .btn-clipboard:hover,
+    .btn-clipboard:focus {
+      color: #fff!important;
+      background-color: #0d6efd;
+    }
 
-.bd-clipboard {
-  position: relative;
-  float: right;
-}
-.highlight {
-    background-color: #fff!important;
-    padding: 10px;
-    border-radius: 0.25rem;
-    min-height: 150px;     
-}
+    .bd-clipboard {
+      position: relative;
+      float: right;
+    }
+    .highlight {
+        background-color: #fff!important;
+        padding: 10px;
+        border-radius: 0.25rem;
+        min-height: 150px;     
+    }
 
 
-.wrapper code{
-  word-break: keep-all;
-  white-space: normal;
-}
-.wrapper .button-text{
-  font-size: small;
-  margin: 0.7em!important;
-  color: black!important;;
-}
-        
-/* scrollbar */
-.wrapper ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
+    .wrapper code{
+      word-break: keep-all;
+      white-space: normal;
+    }
+    .wrapper .button-text{
+      font-size: small;
+      margin: 0.7em!important;
+      color: black!important;;
+    }
+            
+    /* scrollbar */
+    .wrapper ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
 
-.wrapper ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-}
+    .wrapper ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
 
-.wrapper ::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.3);
-  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
+    .wrapper ::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.3);
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    }
 
-.wrapper ::-webkit-scrollbar-thumb:window-inactive {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-    </style>
+    .wrapper ::-webkit-scrollbar-thumb:window-inactive {
+      background: rgba(255, 255, 255, 0.3);
+    }
 </style>

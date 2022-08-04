@@ -3402,3 +3402,16 @@ embed-footer{
     padding: 7px;
     font-size: 1rem;
 }
+
+.grecaptcha-badge {
+    z-index: 1000;
+}
+.grecaptcha-badge {
+    width: 70px !important;
+    overflow: hidden;
+    transition: all 0.2s ease !important;
+    left: 0px;
+}
+.grecaptcha-badge:hover {
+    width: 256px !important;
+}
