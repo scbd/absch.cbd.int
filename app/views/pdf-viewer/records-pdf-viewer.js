@@ -73,7 +73,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             if(devRealm.test(realm.value))
                 baseApiUrl = '';
 
-            var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}';
+            var src = baseApiUrl + '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?documentID={{documentId}}&revision={{revision}}&schema={{schema}}&code={{documentId}}';
             
             if($route.current.params.code){
                 src = '/api/v2017/generate-pdf/{{realm}}/{{type}}/{{locale}}?code={{code}}';
@@ -86,7 +86,7 @@ export default ["$scope", "$http", "$q", "$location", '$sce', 'locale', '$route'
             src = src   .replace("{{realm}}", realm.value)
                         .replace("{{locale}}", pdfLocale)
                         .replace("{{type}}", $route.current.params.type)
-                        .replace("{{documentId}}", $route.current.params.documentId)
+                        .replace(/\{\{documentId\}\}/ig, $route.current.params.documentId)
                         .replace("{{revision}}", $route.current.params.revision)
                         .replace("{{schema}}", $route.current.params.schema)
                         .replace("{{code}}", $route.current.params.code);

@@ -7,7 +7,7 @@
                 </a>
             </span>
             &nbsp; | &nbsp;
-            <a rel="noopener" href="#" ng-click="print()" class="text-decoration-none text-white">
+            <a rel="noopener" href="#" ng-click="print($event)" class="text-decoration-none text-white">
                 <i class="bi bi-printer-fill" ng-if="!printing"></i>              
             </a>
         </div>
@@ -27,7 +27,7 @@
                 &nbsp;
                 <span class="text-light"> | </span> &nbsp;
             </span>
-            <a class="text-decoration-none text-white hide-on-print" rel="noopener" href="#" ng-click="print()">
+            <a class="text-decoration-none text-white hide-on-print" rel="noopener" href="#" ng-click="print($event)">
                 <i class="bi bi-arrow-repeat pe-1" ng-if="printing"></i>
                 <i class="bi bi-printer-fill" aria-hidden="true" ng-if="!printing"></i>
                 <span class="d-none d-sm-inline-block">{{::('recordOptionsT.print'|$translate)}}</span>
