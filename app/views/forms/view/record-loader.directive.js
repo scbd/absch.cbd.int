@@ -17,6 +17,7 @@ import '~/views/forms/directives/compare-val';
 import printHeaderTemplate from 'text!./print-header.html';
 import printFooterTemplate from 'text!./print-footer.html';
 import shareRecord from '~/components/common/share-record.vue';
+import recordLoaderT from '~/app-text/views/forms/view/record-loader.json';
 
 	app.run(function($templateCache){
 		$templateCache.put('view-print-header.html', printHeaderTemplate)
@@ -24,9 +25,9 @@ import shareRecord from '~/components/common/share-record.vue';
 	});
 	
 	app.directive('recordLoader', ["$route", 'IStorage', "authentication", "$q", "$location", "commonjs", "$timeout",
-	"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$rootScope', 'apiToken',
+		"$filter", "realm", '$compile', 'searchService', "IWorkflows", "locale", 'ngMeta', '$rootScope', 'apiToken', 'translationService',
 	function ($route, storage, authentication, $q, $location, commonjs, $timeout, $filter,
-		realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $rootScope, apiToken) {
+		realm, $compile, searchService, IWorkflows, appLocale, ngMeta, $rootScope, apiToken, translationService) {
 		return {
 			restrict: 'EAC',
 			template: template,
@@ -42,7 +43,7 @@ import shareRecord from '~/components/common/share-record.vue';
 				documentInfo: "=?",
 			},
 			link: function ($scope, $element, $attr) {
-
+				translationService.set('recordLoaderT', recordLoaderT);
 				$scope.tokenReader = function(){ return apiToken.get()}
 
 				if (!$scope.linkTarget || $scope.linkTarget == '')

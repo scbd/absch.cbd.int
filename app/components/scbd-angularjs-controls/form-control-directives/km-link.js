@@ -4,12 +4,12 @@ import $ from 'jquery';
 import template from 'text!./km-link.html';
 import _ from 'lodash';
 import './km-form-languages'; ;
-
+import kmLinkT from '~/app-text/components/scbd-angularjs-controls/form-control-directives/km-link.json'; 
 //============================================================
 //
 //
 //============================================================
-app.directive('kmLink', ['IStorage', function (storage)
+app.directive('kmLink', ['IStorage', 'translationService', function (storage, translationService)
 	{
 		return {
 			restrict: 'EAC',
@@ -30,6 +30,7 @@ app.directive('kmLink', ['IStorage', function (storage)
 			},
 			link: function ($scope, $element, $attr, ngModelController)
 			{
+				translationService.set('kmLinkT', kmLinkT);	
 				$scope.locales = {
 					"lang-ar" :"Arabic"  ,
 					"lang-en" :"English" ,
