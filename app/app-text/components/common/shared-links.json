@@ -1,5 +1,11 @@
 {
     "sharedUrls": "Shared Urls",
+    "sharedType": "Shared type",
+    "storageType": "Storage type",
+    "document": "Document",
+    "search": "Search",
+    "sharedWith": "Shared with",
+    "countryProfile": "Country Profile",
     "expiryStatus": "Expiry/Status",
     "linkEmail": "Link/Email(s)",
     "createdOn": "Created on",

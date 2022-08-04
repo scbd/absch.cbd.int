@@ -528,3 +528,12 @@
 .knowledge-base .kb-faq details > summary::-webkit-details-marker {
 	display: none;
 }
+
+.shared-links .link-date {
+        vertical-align: middle;
+}
+.shared-links .action {
+    display: inherit;
+    background-color: #5cb85c;
+    border-radius: 4px;
+}
