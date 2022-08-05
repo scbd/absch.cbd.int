@@ -25,5 +25,6 @@
     "signedOn":    "Signed on",
     "no": "No",
     "CbdCountryProfile": "CBD Country Profile:",
-    "addIno": "Additional information for the country profile"
+    "addIno": "Additional information for the country profile",
+    "lastUpdated": "Last updated"
 }
