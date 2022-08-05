@@ -37,6 +37,7 @@
 
 </head>
 <body ng-controller="BchTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    <div id="g-recaptcha"></div>
     <span style='display:none' id="appTitle">Biosafety Clearing-House</span>
     <span style='display:none' id="appDescription">The Biosafety Clearing-House</span>
     <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
@@ -146,7 +147,6 @@
         <bch-footer></bch-footer>
         <cbd-footer></cbd-footer>
 
-        <div id="g-recaptcha"></div>
     </div>
     
     <script>

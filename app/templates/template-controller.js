@@ -73,7 +73,7 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
 
             return null;
         }
-        function init(){
+        async function init(){
 
             $rootScope.deviceSize = updateSize();
             setupTranslationValidation();
@@ -86,7 +86,7 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
             }
             $scope.embed = $location.search().embed; 
 
-            initializeRecaptcha('g-recaptcha', $window.scbdApp.captchaV2BadgeKey)
+            await initializeRecaptcha('g-recaptcha', $window.scbdApp.captchaV2BadgeKey)
         }
 
         $rootScope.$on('signOut', function () {

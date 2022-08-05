@@ -20,7 +20,6 @@ export default class DocumentShareApi extends ApiBase
     }
 
     async anonShareDocument(params, grecaptchaToken)  {
-        console.log(grecaptchaToken)
         return this.http.post(`api/v2018/document-sharing/anon-sharing`, params,{ headers: {'x-captcha-v2-badge-token':grecaptchaToken}})
                    .then(res => res.data).catch(tryCastToApiError);
     }

@@ -270,7 +270,6 @@ export default {
       if (this.sharedData.storageType == "chm-country-profile") {
         this.sharedData[type].link = `${this.$realm.baseURL}/${this.$locale}/countries/${this.sharedData[type].recordKey}`;
       }
-      console.log(this.sharedData)
       this.refreshSharedData();
       
     },
@@ -414,7 +413,7 @@ export default {
       this.loading = true;
       try{
         if (!this.sharedData[this.sharedData.type]._id) { 
-          
+
         const captchaToken   = await getRecaptchaToken();
 
           const data = {}
