@@ -8,16 +8,17 @@
 			<thead>
 				<tr>
 					<th scope="col">#</th>
+                    <th scope="col">{{ $t("createdOn") }}</th>
 					<th scope="col">{{ $t("expiryStatus") }}</th>
-                    <th scope="col">{{ $t("storageType") }}</th>
-                    <th scope="col">{{ $t("sharedWith") }}</th>
+                    <th scope="col">{{ $t("sharedDetail") }}</th>
 					<th scope="col" colspan="4">{{ $t("linkEmail") }}</th>
-					<th scope="col">{{ $t("createdOn") }}</th>
+					
 				</tr>
 			</thead>
 			<tbody>
 				<tr v-for="(link, index) in sharedLinks.slice().reverse()">
 					<th scope="row">{{index+1}}</th>
+                    <td class="link-date">{{link.meta.createdOn|formatDate}}</td>
 					<td> <span>{{link.expiry|formatDate}}</span>
                         <span v-if="hasStatus('active', link)" class="action badge bg-primary">{{ $t("active") }}</span>
                         <span v-if="hasStatus('expired', link)" class="action badge bg-warning text-dark">{{ $t("expired") }}</span>
@@ -29,10 +30,13 @@
                         <span v-if="hasStorageType('document', link)" class="action badge bg-primary">{{ $t("document") }}</span>
                         <span v-if="hasStorageType('search', link)" class="action badge bg-warning text-dark">{{ $t("search") }}</span>
                         <span v-if="hasStorageType('country-profile', link)" class="action badge bg-danger">{{ $t("countryProfile") }}</span>
-                    </td>
-                    <td>
+                        <br>
                         <span v-if="link.shareType =='email' && link.sharedWith.emails">Email(s): {{link.sharedWith.emails}}</span>
                         <span v-if="link.shareType =='embed' && link.sharedData.domain">Domain: {{link.sharedData.domain}}</span>
+                        <span v-if="link.shareType =='link'"> 
+                            Link
+                            <span v-if="link.sharedWith.emails" v-bind="link.sharedWith.emails" ></span>
+                         </span>
                     </td>
 
         			<td colspan="4">
@@ -55,7 +59,7 @@
                             </span>
                         </div>
 					</td>
-                    <td class="link-date">{{link.meta.createdOn|formatDate}}</td>
+                    
 				</tr>
 			</tbody>
 		</table>
