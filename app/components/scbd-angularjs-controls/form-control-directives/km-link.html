@@ -47,7 +47,7 @@
 								<label class="control-label" ng-required="editor.visible" for="url">{{::('kmLinkT.url'|$translate)}}</label>
 								<div class="help-block">{{::('kmLinkT.protocol'|$translate)}}</div>
 								<div ng-if="editor.urlMissing" style="color: #e32">{{::('kmLinkT.validUrl'|$translate)}}</div>
-								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="{{::('kmLinkT.example'|$translate)}}: https://www.cbd.int" />
+								<input class="form-control" type="url" style="width:98%" ng-model="editor.url" ng-required="editor.visible" placeholder="{{::('kmLinkT.example'|$translate)}} https://www.cbd.int" />
 							</div>
 
 							<div class="control-group" ng-class="{error: linkForm.name.$invalid}">

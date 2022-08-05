@@ -12,7 +12,7 @@
     "crownDependencies": "3 Crown Dependencies",
     "partyToCartagena": "Party to the Cartagena Protocol on Biosafety",
     "notPartyToCartagena": "Not a Party to the Cartagena Protocol on Biosafety",
-    "entry": "Entry into force on",
+    "entry": "Entry into force on:",
     "partyToSuppProtocol": "Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress",
     "notPartyToSuppProtocol": "Not a Party to the Nagoya - Kuala Lumpur Supplementary Protocol on Liability and Redress",
     "dkTextCartagena": "Denmark’s ratification of the Cartagena Protocol does not apply in respect of Greenland and the Faroe Islands.",
@@ -21,9 +21,9 @@
     "overseasTerritories13": "13 Overseas Territories",
     "or":   "or",
     "since":    "since",
-    "signatory":    "Signatory",
+    "signatory":    "Signatory:",
     "signedOn":    "Signed on",
     "no": "No",
-    "CbdCountryProfile": "CBD Country Profile",
+    "CbdCountryProfile": "CBD Country Profile:",
     "addIno": "Additional information for the country profile"
 }

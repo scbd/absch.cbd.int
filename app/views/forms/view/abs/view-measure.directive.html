@@ -119,7 +119,7 @@
 		<div ng-show="document.amendedMeasures || document.amendmentsDescription">
 			<legend>{{::('viewMeasureT.amendments'|$translate)}}</legend>
 			<div ng-show="document.amendedMeasures">
-				<label>{{::('viewMeasureT.amendedMeasures'|$translate)}}:</label>
+				<label>{{::('viewMeasureT.amendedMeasures'|$translate)}}</label>
 
 				<div class="km-value" compare-val>
 					<ul class="list">
@@ -147,7 +147,7 @@
 
 		<div ng-show="document.measureAmendedBy && document.measureAmendedBy.length>0">
 			<legend>{{::('viewMeasureT.amendments'|$translate)}}</legend>
-			<label>{{::('viewMeasureT.measureAmendedBy'|$translate)}}:</label>
+			<label>{{::('viewMeasureT.measureAmendedBy'|$translate)}}</label>
 			<div class="km-value" compare-val>
 				<ul class="list">
 					<li ng-repeat="item in document.measureAmendedBy">
@@ -160,7 +160,7 @@
 		<div ng-show="(document.linkedMeasures && document.linkedMeasures.length>0) || document.linkedMeasuresDescription">
 			<legend>{{::('viewMeasureT.relationships'|$translate)}}</legend>			
 			<div class="km-value" ng-show="document.linkedMeasures && document.linkedMeasures.length>0">
-				<label>{{::('viewMeasureT.relatedTo'|$translate)}}:</label>
+				<label>{{::('viewMeasureT.relatedTo'|$translate)}}</label>
 				<ul class="list">
 					<li ng-repeat="item in document.linkedMeasures">
 						<div view-record-reference ng-model="item.identifier" locale="locale"></div>

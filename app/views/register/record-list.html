@@ -270,13 +270,13 @@
                         <div ng-show="isDraft(recordToDelete)" class="card fs-small-8">
                             <div class="mb-2 border-bottom text-light text-uppercase fw-bold fs-small-6">{{::('recordListT.draftRecord'|$translate)}} </div>
                             <div class="row">     
-                                <div class="col-2 color-litegrey">{{::('recordListT.title'|$translate)}}:</div> <div class="col-10 fw-bold" ng-bind="recordToDelete.workingDocumentTitle|lstring"></div>
+                                <div class="col-2 color-litegrey">{{::('recordListT.title'|$translate)}}</div> <div class="col-10 fw-bold" ng-bind="recordToDelete.workingDocumentTitle|lstring"></div>
                               </div>
                              <div class="row">    
-                                <div class="col-2 small color-litegrey">{{::('recordListT.uniqueId'|$translate)}}:</div> <div class="col-10 fw-bold"> <i>{{::('recordListT.draftUpper'|$translate)}} </i></div>
+                                <div class="col-2 small color-litegrey">{{::('recordListT.uniqueId'|$translate)}}</div> <div class="col-10 fw-bold"> <i>{{::('recordListT.draftUpper'|$translate)}} </i></div>
                              </div>
                             <div class="row"> 
-                                <div class="col-2 color-litegrey" >{{::('recordListT.summary'|$translate)}}:</div> <div class="col-10 fw-bold"> <span ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></span></div>
+                                <div class="col-2 color-litegrey" >{{::('recordListT.summary'|$translate)}}</div> <div class="col-10 fw-bold"> <span ng-bind-html="recordToDelete.workingDocumentSummary|lstring"></span></div>
                              </div>
                             <div class="row mt-2"> 
                                 <div class="col-12"> <button type="button" class="btn btn-danger" ng-disabled="loading" ng-click="deleteDraft(recordToDelete)">{{::('recordListT.deleteDraft'|$translate)}}</button></div>
@@ -291,13 +291,13 @@
                                 </div>
                               </div>
                             <div class="row">     
-                                <div class="col-2 color-litegrey">{{::('recordListT.title'|$translate)}}:</div> <div class="col-10 fw-bold" ng-bind="recordToDelete.title|lstring"></div>
+                                <div class="col-2 color-litegrey">{{::('recordListT.title'|$translate)}}</div> <div class="col-10 fw-bold" ng-bind="recordToDelete.title|lstring"></div>
                               </div>
                              <div class="row">    
-                                <div class="col-2 small color-litegrey">{{::('recordListT.uniqueId'|$translate)}}:</div> <div class="col-10 fw-bold"> <a class="text-decoration-none" rel="noopener" translation-url  href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_blank" ng-bind="recordToDelete | uniqueIDWithoutRevision"></a></div>
+                                <div class="col-2 small color-litegrey">{{::('recordListT.uniqueId'|$translate)}}</div> <div class="col-10 fw-bold"> <a class="text-decoration-none" rel="noopener" translation-url  href="/database/{{recordToDelete | uniqueIDWithoutRevision}}" target="_blank" ng-bind="recordToDelete | uniqueIDWithoutRevision"></a></div>
                              </div>
                             <div class="row"> 
-                                <div class="col-2 color-litegrey" >{{::('recordListT.summary'|$translate)}}:</div> <div class="col-10 fw-bold"> <span ng-bind-html="recordToDelete.summary|lstring"></span></div>
+                                <div class="col-2 color-litegrey" >{{::('recordListT.summary'|$translate)}}</div> <div class="col-10 fw-bold"> <span ng-bind-html="recordToDelete.summary|lstring"></span></div>
                              </div>
 
                               <div class="row" ng-show="isIRCC"> 

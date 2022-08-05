@@ -21,7 +21,7 @@
         class="color-inbetween">{{::('partyStatusT.ratified'|$translate)}}</a>
         <span ng-if="partyStatus.isSignatory" class="mx-3">{{::('partyStatusT.signatory'|$translate)}}</span>
         <span ng-if="partyStatus.entryIntoForce" class="color-grey color-non-party">
-            (<span ng-if="partyStatus.isInbetweenParty">{{::('partyStatusT.entersIntoForce'|$translate)}}: </span><span ng-if="partyStatus.isParty">{{::('partyStatusT.since'|$translate)}} </span>
+            (<span ng-if="partyStatus.isInbetweenParty">{{::('partyStatusT.entersIntoForce'|$translate)}} </span><span ng-if="partyStatus.isParty">{{::('partyStatusT.since'|$translate)}} </span>
             <span ng-bind="partyStatus.entryIntoForce|formatDate"></span>)
         </span>
     </span>

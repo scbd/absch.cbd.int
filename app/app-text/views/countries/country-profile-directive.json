@@ -1,12 +1,12 @@
 {
-    "lastUpdated": "Last updated on",
+    "lastUpdated": "Last updated on:",
     "loading": "Loading...",
     "show10": "show next 10 records",
     "showRemaining": "show remaining",
     "records": "records",
     "selectMeasures": "Select the ABS Measures to be displayed in the overview",
-    "entry": "Entry into force",
-    "adoption": "Adoption",
+    "entry": "Entry into force:",
+    "adoption": "Adoption:",
     "until": "until",
-    "retired": "Retired"
+    "retired": "Retired:"
 }
