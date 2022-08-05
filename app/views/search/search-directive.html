@@ -83,7 +83,7 @@
                 <div id="freeText" class="col-lg-7" ng-show="!skipTextFilter">
                     <form ng-submit="saveFreeTextFilter(searchKeyword, $event)" class="input-group">
                         <input type="text" ng-model="searchKeyword" class="form-control fw-bold"
-                            placeholder="Search the Clearing-House">
+                            placeholder="{{::('searchDirectiveT.searchTheCH'|$translate)}}">
                         <span type="submit" ng-click="saveFreeTextFilter(searchKeyword)"
                             class="input-group-text cursor-pointer" id="basic-addon2"><i
                                 class="fa fa-search"></i></span>
