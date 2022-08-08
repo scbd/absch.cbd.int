@@ -37,5 +37,6 @@
     "SearchTitle": "Search title",
     "searchClearingHouse": "Search the Clearing-House",
     "saveFilter": "Save filter",
-    "closeEditing": "Close editing"
+    "closeEditing": "Close editing",
+    "obsoleteSchemaMessage" : "The query includes schema(s) from legacy BCH which are no longer in use and are excluded in below search result. Please update your embed code!"
 }

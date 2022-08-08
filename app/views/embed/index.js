@@ -1,5 +1,5 @@
 import app from '~/app';
-
+import { S4 } from '~/components/scbd-angularjs-services/services/utilities'
 export { default as template } from './index.html';
 
 export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'localStorageService', 'realm', '$filter',
@@ -20,32 +20,62 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                 let data;
                 
                 if($routeParams.accessKey == 'legacy-widget'){
+                    const uniqueKey = `${$routeParams.accessKey}_${S4()}`
+                    localStorageService.remove(`${uniqueKey}_obsoleteSchemas`);
+                    localStorageService.remove(`${uniqueKey}`);
+
                     const realmSchemas = [...realm.nationalSchemas, ...realm.referenceSchemas, ...realm.scbdSchemas];
                     //old bch schema names were not case sensitive, find from realm
                     let schemas = searchQuery.schema;
                     if(typeof schemas == 'string')
                         schemas = [schemas];
-
-                    for (let i = 0; i < schemas.length; i++) {
-
-                        const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemas[i].toLowerCase())                    
-                        const schema       = realm.schemas[realmSchema]
-                        if(schema){
-                            data = {
-                                storageType : 'chm-search-result',
-                                sharedData  : { 
-                                    realm : realm.value,
-                                    searchQuery : { 
-                                        _id : `${$routeParams.accessKey}_${realmSchema}`,
-                                        filters : [{
-                                            id: realmSchema,
-                                            name: $filter('lstring')(schema.title, locale),
-                                            otherType: schema.type,
-                                            type: "schema"
-                                        }] 
-                                    } 
+console.log(schemas)
+                    if(!schemas?.length){
+                        data = {
+                            storageType : 'chm-search-result',
+                            sharedData  : { 
+                                realm : realm.value,
+                                searchQuery : { 
+                                    _id : `${uniqueKey}`,
+                                    filters : [] 
                                 } 
-                            };
+                            } 
+                        };
+                    }
+                    else {
+                        const obsoleteSchemas = [];
+                        for (let i = 0; i < schemas.length; i++) {
+                            let schemaName = schemas[i].toLowerCase();
+
+                            if(isSchemaObsolete(schemaName)){
+                                console.warn(`Schema is obsolete in new BCH, ${schemaName}`)
+                                obsoleteSchemas.push(schemaName);
+                            }
+                            else{
+                                schemaName         = legacyBchMapping(schemaName)
+                                const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemaName.toLowerCase())                    
+                                const schema       = realm.schemas[realmSchema]
+                                if(schema){
+                                    data = {
+                                        storageType : 'chm-search-result',
+                                        sharedData  : { 
+                                            realm : realm.value,
+                                            searchQuery : { 
+                                                _id : `${uniqueKey}`,
+                                                filters : [{
+                                                    id: realmSchema,
+                                                    name: $filter('lstring')(schema.title, locale),
+                                                    otherType: schema.type,
+                                                    type: "schema"
+                                                }] 
+                                            } 
+                                        } 
+                                    };
+                                }
+                            }
+
+                            if(obsoleteSchemas.length)
+                                localStorageService.set(`${uniqueKey}_obsoleteSchemas`, obsoleteSchemas);
                         }
                     }
 
@@ -80,7 +110,7 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                     })
                 }
                 else if(data.storageType == 'chm-search-result'){
-                    localStorageService.set(data.sharedData.searchQuery._id, data.sharedData.searchQuery);
+                    localStorageService.set(data.sharedData.searchQuery._id, data.sharedData?.searchQuery);
                     safeapply(()=>{
 
                         if($routeParams.accessKey == 'legacy-widget'){
@@ -97,6 +127,7 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
         }
         catch(err){
             console.log(err);
+            $scope.error = 'There was an error loading this page. Please try again.'
         }
         finally{
             $scope.loading = false;
@@ -104,7 +135,33 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
     }
     function safeapply(fn) {
         ($scope.$$phase || $scope.$root.$$phase) ? fn() : $scope.$apply(fn);
-    }  
+    } 
+    
+    function legacyBchMapping(schema){
+        //lowercase because in legacy bch schema names were not case sensitive
+        const schemaMapping = {
+            "biosafetyexpert": "biosafetyExpert",
+            "capacitybuildingneeds": "capacityBuildingInitiative",            
+            "decision": "biosafetyDecision",
+            "law": "biosafetyLaw",
+            "nationaldatabase": "database",
+            "news": "biosafetyNews",
+            "riskassessment": "nationalRiskAssessment"            
+        }
+
+        return schemaMapping[schema] || schema;
+    }
+
+    function isSchemaObsolete(schema){
+        const obsoleteSchemas = [
+            "bibliographicreference",
+            "biosafetyexpertassignment",
+            "syntheticbiologyexpert",
+            "cpbnews"
+        ]
+
+        return obsoleteSchemas.includes(schema);
+    }
     // function registerIframeCommunication(selector){
 
     //     window.addEventListener('message', (evt)=>{

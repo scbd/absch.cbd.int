@@ -2,7 +2,7 @@ import app from '~/app';
 import _ from 'lodash';
 import Enumerable from 'linqjs';
     ;
-
+    
     app.factory('Thesaurus', [function() {
         return {
             buildTree: function(terms) {
@@ -49,9 +49,7 @@ import Enumerable from 'linqjs';
 
 
     app.factory('guid', function() {
-        function S4() {
-            return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
-        }
+        
         return function() {
             return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4()).toUpperCase();
         }
@@ -110,3 +108,6 @@ import Enumerable from 'linqjs';
             }
     }])
 
+export function S4() {
+    return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+}
