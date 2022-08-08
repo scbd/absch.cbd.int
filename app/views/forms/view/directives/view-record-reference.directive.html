@@ -71,15 +71,15 @@
                 <span ng-if="options.showContact" class="bold"> - </span>
                 <span class="selected-reference-uid">
                     
-                    <span ng-if="options.isCNA"> <span class="color-blue"> {{::('viewRecordReferenceT.cna'|$translate)}}:</span>
+                    <span ng-if="options.isCNA"> <span class="color-blue"> {{::('viewRecordReferenceT.cna'|$translate)}}</span>
                         <!-- <span ng-bind="(document || document) | uniqueID"></span> --> </span> 
-                    <span ng-if="options.isNFP"><span class="color-blue uppercase">{{::('viewRecordReferenceT.npf'|$translate)}}:</span>
+                    <span ng-if="options.isNFP"><span class="color-blue uppercase">{{::('viewRecordReferenceT.nfp'|$translate)}}</span>
                         <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
                         <span ng-bind="document.body.lastName"></span></span>
-                    <span ng-if="options.isContactTypePerson && !options.isNFP"><span class="color-blue uppercase-sm">{{::('viewRecordReferenceT.person'|$translate)}}:</span>
+                    <span ng-if="options.isContactTypePerson && !options.isNFP"><span class="color-blue uppercase-sm">{{::('viewRecordReferenceT.person'|$translate)}}</span>
                         <span ng-bind="document.body.prefix | lstring:locale"></span> <span ng-bind="document.body.firstName"></span> <span ng-bind="document.body.middleName"></span>
                         <span ng-bind="document.body.lastName"></span></span>
-                    <span ng-if="options.isContactTypeOrganization && !options.isCNA"><span class="color-blue">{{::('viewRecordReferenceT.organization'|$translate)}}:</span>
+                    <span ng-if="options.isContactTypeOrganization && !options.isCNA"><span class="color-blue">{{::('viewRecordReferenceT.organization'|$translate)}}</span>
                         <span ng-bind="(document.body.name||document.body.organization) | lstring:locale"></span>
                         <span ng-show="document.body.acronym">(<span ng-bind="(document.body.acronym||document.body.organizationAcronym) | lstring:locale"></span>)</span>
                     </span>      

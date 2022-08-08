@@ -25,7 +25,7 @@
                         </div>
                         <div ng-if="country.isParty || country.isInbetweenParty" class="mt-1 mb-2" >
                             <span class="bold" ng-class="{' color-party': country.isParty, ' color-non-party':!country.isParty && !country.isInbetweenParty, ' color-inbetween': country.isInbetweenParty}">
-                                (<span ng-if="country.isInbetweenParty">{{::('countryProfileT.entry'|$translate)}}:</span><span ng-if="country.isParty && !country.isInbetweenParty">{{::('countryProfileT.since'|$translate)}}</span> 
+                                (<span ng-if="country.isInbetweenParty">{{::('countryProfileT.entry'|$translate)}}</span><span ng-if="country.isParty && !country.isInbetweenParty">{{::('countryProfileT.since'|$translate)}}</span> 
                                 <span ng-bind="country.entryIntoForce|formatDate"></span>)
                             </span>
                         </div>
@@ -61,7 +61,7 @@
                         </div>
 
                         <div class="mb-1" ng-if="isABS">
-                            <label class="fw-bold">{{::('countryProfileT.signatory'|$translate)}}:</label>
+                            <label class="fw-bold">{{::('countryProfileT.signatory'|$translate)}}</label>
                             <span ng-if="country.isSignatory && !country.dateSigned" >{{::('countryProfileT.signatory'|$translate)}}Signatory</span>
                             <span ng-if="country.isSignatory && country.dateSigned" >{{::('countryProfileT.signedOn'|$translate)}} <span ng-bind="country.dateSigned|formatDate"></span> </span>
                             <span ng-if="!country.isSignatory" class="color-grey color-non-party bold">{{::('countryProfileT.no'|$translate)}}</span>
@@ -69,7 +69,7 @@
 
                        
                         <div class="mb-1 text-nowrap overflow-hidden">
-                            <label  class="fw-bold">{{::('countryProfileT.CbdCountryProfile'|$translate)}}:</label>
+                            <label  class="fw-bold">{{::('countryProfileT.CbdCountryProfile'|$translate)}}</label>
                             <a class="text-decoration-none" rel="noopener" translation-url href="https://www.cbd.int/countries/?country={{country.code}}" target="_blank"> www.cbd.int/countries/?country={{country.code}} </a>
                         </div>
                             

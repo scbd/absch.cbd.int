@@ -190,7 +190,7 @@
                 {{::('workflowButtonsT.on'|$translate)}} <span ng-bind="rejectedWorkflow.completedOn | formatDateWithTime"></span>
             </p>
             <p ng-if="rejectedWorkflow.result.reason">
-                <strong>{{::('workflowButtonsT.reason'|$translate)}} :</strong>
+                <strong>{{::('workflowButtonsT.reason'|$translate)}}</strong>
                 <span ng-bind="rejectedWorkflow.result.reason"></span>
             </p>
         </div>
@@ -249,7 +249,7 @@
                     <span ng-bind="lang | uppercase"></span>
                 </button>
             </div>
-            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">{{::('workflowButtonsT.languagesAvailable'|$translate)}}:</span>
+            <span class="xlabel hidden-xs hidden-sm text-white" ng-if="languages.length>1">{{::('workflowButtonsT.languagesAvailable'|$translate)}}</span>
         </div>
         <div ng-transclude="reviewForm"></div>
     </div>
@@ -329,7 +329,7 @@
 
                     <div class="float-end d-none d-lg-block">
                         <div class="btn border" ng-if="offlineFormats">
-                            <span ng-if="!container">{{::('workflowButtonsT.offlineFormat'|$translate)}}:</span>
+                            <span ng-if="!container">{{::('workflowButtonsT.offlineFormat'|$translate)}}</span>
                             <span ng-repeat="(code, lang) in ::offlineLanguages" data-title="{{::lang}}" data-bs-toggle="tooltip" data-container="body" 
                                 ng-show="::offlineFormats[documentType][code]">
                                 <a class="text-decoration-none" rel="noopener" target="_blank" ng-href="{{::offlineFormats[documentType][code]|encodeURI}}" ng-bind="::code"></a>

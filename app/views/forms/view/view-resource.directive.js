@@ -2,7 +2,8 @@ import app from '~/app';
 import template from "text!./view-resource.directive.html";
 import '~/views/directives/record-options';
 import '~/views/forms/directives/view-terms-hierarchy';
-app.directive("viewResource", [function () {
+import viewResourceT from '~/app-text/views/forms/view/view-resource.json';
+app.directive("viewResource", ['translationService', function (translationService) {
 	return {
 		restrict   : "EAC",
 		template: template, 
@@ -16,6 +17,7 @@ app.directive("viewResource", [function () {
 		},
 		controller : ["$scope", "IStorage", "$http","realm",function ($scope, storage, $http, realm)
 		{
+			translationService.set('viewResourceT', viewResourceT);
 			$scope.isABS = realm.is('ABS');
 			$scope.isBCH = realm.is('BCH');
 			

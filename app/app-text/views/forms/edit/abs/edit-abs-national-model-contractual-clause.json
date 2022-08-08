@@ -2,7 +2,7 @@
     "generalInfo": "General Information",
     "languageToPublish": "Please select in which language(s) you wish to submit this record:",
     "country": "1. Country",
-    "title": "2. Title",
+    "title": "2. Title:",
     "selectOption": "Please select a country...",
     "summary": "3. Summary or abstract",
     "jurisdiction": "4. Area of jurisdiction:",

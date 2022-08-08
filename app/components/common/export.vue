@@ -12,7 +12,7 @@
             </div>
             <div>
                 <div class="form-group">
-                        {{$t('downloadFormat')}} :
+                        {{$t('downloadFormat')}}
                         <span class="radio" style="display: initial;">
                             <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xls"  v-model="downloadFormat" />{{$t('xls')}}</label>                   
                             <label class="radio-inline"><input type="radio" name="downloadFormatOption" value="xlsx" v-model="downloadFormat" />{{$t('xlsx')}}</label>                   
@@ -24,7 +24,7 @@
                 </div>
                 <div id="divTable"  style="max-height:300px;overflow:scroll; ">
                         <div>
-                            {{$t('recordsFound')}} :
+                            {{$t('recordsFound')}}
                             {{numFound}}
                         </div>
 

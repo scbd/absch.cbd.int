@@ -31,7 +31,7 @@
     "responsibleForAll": "Is this the only designated competent national authority (CNA) in your country? If “no”, please describe the responsibilities of this competent national authority (CNA).",
     "responsibleForAllNO": "If \"no\", the following information is required.",
     "sectionNotRequired.": "This section is not required.",
-    "responsibleForAllFalse": "This section is required when there is more than one competent national authority (CNA). Please ensure that the responsibilities for each competent national authority (CNA) are card described in all published records.",
+    "responsibleForAllFalse": "This section is required when there is more than one competent national authority (CNA). Please ensure that the responsibilities for each competent national authority (CNA) are well described in all published records.",
     "resShortDesc": "Short description of CNA responsibilities (maximum 300 characters).",
     "article13Info": "Article 13, paragraph 2 provides that “Competent national authorities shall, in accordance with applicable national legislative, administrative or policy measures, be responsible for granting access or, as applicable, issuing written evidence that access requirements have been met and be responsible for advising on applicable procedures and requirements for obtaining prior informed consent and entering into mutually agreed terms”. Remember that the purpose of this section is to help users understand responsibilities regarding access to genetic resources and should answer the question: Who grants access for what? The description of responsibilities should be short and clear to understand.",
     "areaOfJurisdiction": "Area of jurisdiction for granting access to genetic resources",

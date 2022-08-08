@@ -88,7 +88,7 @@
                                             <div class="row">
                                                 <div class="col-xs-12">
                                                     <div class="km-control-group" name="government" required bold="true"
-                                                        caption="Country">
+                                                        caption="{{::('editAbsNrT.country'|$translate)}}">
                                                         <span class="help-inline color-blue bold" ng-if="userGovernment()">
                                                             {{::('editAbsNrT.countryChange'|$translate)}} </span>
                                                         <div afc-autocomplete required name="government" ng-disabled="userGovernment()"

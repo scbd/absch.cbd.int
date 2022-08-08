@@ -111,7 +111,7 @@
 						<i ng-if="sortTerm==='name.en'" class="fa"
 							ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}"
 							style="width:20px;"></i>
-						<span ng-if="sortTerm!=='name.en'">{{::('countryListTranslation.orderedBy'|$translate)}}: <strong> <span
+						<span ng-if="sortTerm!=='name.en'">{{::('countryListTranslation.orderedBy'|$translate)}} <strong> <span
 									ng-bind="sortTerm|schemaShortName"></span></strong></span>
 						<span class="caret"></span>
 					</button>

@@ -288,10 +288,7 @@
                                         <div class="alert alert-warning">
                                             <h4 class="color-blue">
                                                     <i class='fa fa-info-circle'></i>
-                                                    <strong>
-                                                    {{::('editAbsMeasureT.format'|$translate)}} <i>{{::('editAbsMeasureT.elements'|$translate)}}</i> {{::('editAbsMeasureT.manuallyUpdated'|$translate)}}
-                                                     <i>{{::('editAbsMeasureT.elements'|$translate)}}</i> {{::('editAbsMeasureT.previousVersion'|$translate)}}
-                                                    </strong>
+                                                    <strong ng-bind-html="::('editAbsMeasureT.formatMessage'|$translate)"></strong>
                                             </h4>
                                             <span ng-repeat="elm in document.absMeasuresForDelete">
                                                 <span ng-bind="$index+1"></span>. <span ng-bind="elm|term"></span> <span ng-if="elm.customValue" ng-bind="elm.customValue"></span> &nbsp;
