@@ -577,6 +577,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 $scope.clearFilter();
                                 $scope.searchAlertError = '';
                                 const filters = localStorageService.get($routeParams.searchShareQueryId);
+                                $scope.obsoleteSchemas = localStorageService.get(`${$routeParams.searchShareQueryId}_obsoleteSchemas`);
                                 setExternalFilters(filters);
                             }
                             else if($routeParams.id && !$scope.isAlertSearch) {

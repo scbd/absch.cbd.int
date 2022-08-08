@@ -6,10 +6,11 @@
     <div class="row">
 
         <div class="col-12">
-            <div class="text-center">
+            <div class="text-center" ng-if="!error">
                 <div class="spinner-border" role="status" aria-hidden="true"></div>
                 <strong>Loading...</strong>
             </div>
+            <div class="alert alert-danger" ng-if="error">{{error}}</div>
         </div>
         <!-- <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
         <span class="visually-hidden">Loading...</span>

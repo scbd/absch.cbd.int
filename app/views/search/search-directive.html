@@ -172,9 +172,7 @@
 
 
 
-        <div class="container-fluid position-relative" ng-show="showFilters || searchKeyword"
-           
-            >
+        <div class="container-fluid position-relative" ng-show="showFilters || searchKeyword">
             <style>
                 .sticky-bar {
                     position: fixed;
@@ -308,6 +306,15 @@
                                 <div class="tab-pane bg-white"
                                     ng-class="{'active':searchResult.currentTab==='allRecords'}"
                                     ng-if="searchResult.currentTab==='allRecords'">
+                                    <div ng-if="obsoleteSchemas.length" class="alert alert-info">
+                                        <i class="bi-exclamation-octagon-fill"></i>
+                                        <strong>
+                                            {{::('searchDirectiveT.obsoleteSchemaMessage'|$translate)}}
+                                        </strong>
+                                        <ul>
+                                           <li ng-repeat="item in obsoleteSchemas">{{$index+1}} {{item}}</li>
+                                        </ul>
+                                    </div>
                                     <div ng-switch="searchResult.viewType">
                                         <div ng-switch-when="default">
                                             <div search-result-list-view api="searchResult.listViewApi"></div>
@@ -324,7 +331,7 @@
                                     </div>
                                 </div>
 
-                                <div>
+                                <div>                                   
                                     <div class="tab-pane bg-white"
                                         ng-class="{'active':searchResult.currentTab==='nationalRecords'}"
                                         ng-if="searchResult.currentTab==='nationalRecords'">

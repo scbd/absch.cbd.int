@@ -37,6 +37,7 @@
 
 </head>
 <body ng-controller="AbschTemplateController" id="top" lang="<%=preferredLanguage||'en'%>">
+    <div id="g-recaptcha"></div>
     <span style='display:none' id="appTitle">Access and Benefit-Sharing Clearing-House</span>
     <span style='display:none' id="appDescription">Access and Benefit-Sharing Clearing-House</span>
     <span id="appBaseUrl" style="display:none"><%=baseUrl%></span>
@@ -161,7 +162,8 @@
             lang             : '<%=preferredLanguage%>',
             title            : document.getElementById('appTitle').innerText,
             description      : document.getElementById('appDescription').innerText,
-            analytics        : '<%=googleAnalyticsCode%>'
+            analytics        : '<%=googleAnalyticsCode%>',
+            captchaV2BadgeKey: '<%=captchaV2BadgeKey%>'
         }        
     </script>
     <script src="<%=cdnUrl%>npm/regenerator-runtime@0.13.7/runtime.js"></script>
@@ -176,6 +178,7 @@
     </script>
     
     <script async src='https://www.google-analytics.com/analytics.js'></script>
+    <script src="https://www.recaptcha.net/recaptcha/api.js"></script>
     <script>
         /**************************
           For outdate browser check

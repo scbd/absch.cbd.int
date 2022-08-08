@@ -6,13 +6,13 @@ import app from '~/app';
         //===========================
         //
         //===========================
-        function create(version, schema, data) {
+        function create(version, schema, data, config) {
 
             // var body = {
             //     data: data
             // };
 
-            return $http.post("/api/"+version+"/"+schema, data)
+            return $http.post("/api/"+version+"/"+schema, data, config)
                         .then(function(resp) {
                             return resp.data;
                         });
@@ -33,8 +33,8 @@ import app from '~/app';
         //===========================
         //
         //===========================
-        function update(version, schema, id, data) {
-            return $http.put("/api/"+version+"/"+schema+"/" + id, data).then(
+        function update(version, schema, id, data, config) {
+            return $http.put("/api/"+version+"/"+schema+"/" + id, data, config).then(
                 function(resp) {
                     return resp.data;
                 });

@@ -5,6 +5,7 @@ import _ from 'lodash'
 import 'ngDialog'
 import '~/components/scbd-angularjs-services/main';
 import documentSharingT from '~/app-text/views/forms/directives/document-sharing.json';
+import { getRecaptchaToken } from '~/services/reCaptcha'
 
 app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout', 'IGenericService', '$document', '$window', '$rootScope', 'realm', 'locale', 'translationService',
     function ($http, $q, $route, ngDialog, $timeout, genericService, $document, $window, $rootScope, realm, locale, translationService) {
@@ -106,14 +107,16 @@ app.directive('documentSharing', ["$http", "$q", "$route", 'ngDialog', '$timeout
                 saveLink(document);
             }
 
-            function saveLink(document){
+            async function saveLink(document){
+
+                const captchaToken   = await getRecaptchaToken();
 
                 var operation;
 
                 if(document._id)
-                    operation = genericService.update('v2018', 'document-sharing', document._id, document);
+                    operation = genericService.update('v2018', 'document-sharing', document._id, document, { headers: {'x-captcha-v2-badge-token':captchaToken}});
                 else
-                    operation = genericService.create('v2018', 'document-sharing', document);
+                    operation = genericService.create('v2018', 'document-sharing', document, { headers: {'x-captcha-v2-badge-token':captchaToken}});
 
                 $scope.status = "creatingLink";
                 return $q.when(operation)
