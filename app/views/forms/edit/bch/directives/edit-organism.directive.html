@@ -208,7 +208,7 @@
 
 										<div class="col-xs-12">
 											<div class="km-control-group" name="geographicalDistribution" caption="{{::('editOrganismT.geographicalDistribution'|$translate)}}">
-												<div class="help-block">{{::('editOrganismT.geographicalDistributionInfo'|$translate)}} (<i>{{::('editOrganismT.populusDeltoides'|$translate)}}</i>) {{::('editOrganismT.occursInNorthAmerica'|$translate)}}</div>
+												<div class="help-block" ng-bind-html="::('editOrganismT.geographicalDistributionInfo'|$translate)"></div>
 												<div km-rich-textbox ng-model="document.geographicalDistribution" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
