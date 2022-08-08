@@ -1,7 +1,6 @@
 
 const origin = findOrigin() || 'https://absch.cbddev.xyz';
 
-// new URL(x.src).origin
 let iframeCommunicationReceived = false;
 function embedIFrame(widget, options){
 
@@ -21,7 +20,9 @@ function embedIFrame(widget, options){
     //TODO: no need to be inside loop
     registerIframeCommunication(iframe, {type:'getClientHeight', iframe:iframe.name});
     window.addEventListener('message', function(evt){
-        
+        if(evt.origin != this.origin)
+            return;
+            
         iframeCommunicationReceived = true;
         if(evt.data){
             var data = JSON.parse(evt.data);
@@ -143,7 +144,7 @@ function findScbdWidgets(className){
 function registerIframeCommunication(iframe, data){
     if(!iframeCommunicationReceived){
         setTimeout(function(){
-            iframe.contentWindow.postMessage(JSON.stringify(data), '*');//'http://absch-widget.cbddev.xyz:2010');  
+            iframe.contentWindow.postMessage(JSON.stringify(data), origin);//'http://absch-widget.cbddev.xyz:2010');  
             registerIframeCommunication(iframe, data)          
         }, 2000);
     }

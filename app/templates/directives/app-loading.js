@@ -40,6 +40,10 @@ app.directive("appLoading", ['$animate', '$location', '$window', function ($anim
                     }
                 }
                 window.addEventListener('message', (evt)=>{
+                    
+                    if (evt.origin !== window.origin)
+                        return;
+                        
                     if(evt.data){
                         let data = evt.data;
                         if(typeof evt.data == 'string')
