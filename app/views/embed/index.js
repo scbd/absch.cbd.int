@@ -30,60 +30,63 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                     if(typeof schemas == 'string')
                         schemas = [schemas];
 
-                    data = {
-                        storageType : 'chm-search-result',
-                        sharedData  : { 
-                            realm : realm.value,
-                            searchQuery : { 
-                                _id : `${uniqueKey}`,
-                                filters : [] 
+                    if(!schemas?.length){
+                        data = {
+                            storageType : 'chm-search-result',
+                            sharedData  : { 
+                                realm : realm.value,
+                                searchQuery : { 
+                                    _id : `${uniqueKey}`,
+                                    filters : [] 
+                                } 
                             } 
-                        } 
-                    };
-                    
-                    const obsoleteSchemas = [];
-                    for (let i = 0; i < schemas.length; i++) {
-                        let schemaName = schemas[i].toLowerCase();
+                        };
+                    }
+                    else {
+                                           
+                        const obsoleteSchemas = [];
+                        for (let i = 0; i < schemas.length; i++) {
+                            let schemaName = schemas[i].toLowerCase();
 
-                        if(isSchemaObsolete(schemaName)){
-                            console.warn(`Schema is obsolete in new BCH, ${schemaName}`)
-                            obsoleteSchemas.push(schemaName);
+                            if(isSchemaObsolete(schemaName)){
+                                console.warn(`Schema is obsolete in new BCH, ${schemaName}`)
+                                obsoleteSchemas.push(schemaName);
+                            }
+                            else{
+                                schemaName         = legacyBchMapping(schemaName)
+                                const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemaName.toLowerCase())                    
+                                const schema       = realm.schemas[realmSchema]
+                                if(schema){
+                                    data.sharedData.searchQuery.filters.push(
+                                        {
+                                            id: realmSchema,
+                                            name: $filter('lstring')(schema.title, locale),
+                                            otherType: schema.type,
+                                            type: "schema"
+                                        });
+                                }
+                            }
+
+                            if(obsoleteSchemas.length)
+                                localStorageService.set(`${uniqueKey}_obsoleteSchemas`, obsoleteSchemas);
                         }
-                        else{
-                            schemaName         = legacyBchMapping(schemaName)
-                            const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemaName.toLowerCase())                    
-                            const schema       = realm.schemas[realmSchema]
-                            if(schema){
-                                data.sharedData.searchQuery.filters.push(
-                                    {
-                                        id: realmSchema,
-                                        name: $filter('lstring')(schema.title, locale),
-                                        otherType: schema.type,
-                                        type: "schema"
-                                    });
+                    
+
+                        if(searchQuery.countries){
+                            let countries = searchQuery.countries;
+                            if(typeof countries == 'string')
+                                countries = [countries]
+                            for (let i = 0; i < countries.length; i++) {
+                            
+                                data.sharedData.searchQuery.filters.push({
+                                    id: countries[i],
+                                    name: countries[i],
+                                    otherType: undefined,
+                                    type: "country"
+                                });                            
                             }
                         }
-
-                        if(obsoleteSchemas.length)
-                            localStorageService.set(`${uniqueKey}_obsoleteSchemas`, obsoleteSchemas);
-                    }
-                    
-
-                    if(searchQuery.countries){
-                        let countries = searchQuery.countries;
-                        if(typeof countries == 'string')
-                            countries = [countries]
-                        for (let i = 0; i < countries.length; i++) {
-                           
-                            data.sharedData.searchQuery.filters.push({
-                                id: countries[i],
-                                name: countries[i],
-                                otherType: undefined,
-                                type: "country"
-                            });                            
-                        }
-                    }
-                    
+                    }                    
                 }
                 else{
                     data = (await $http.get(`/api/v2018/document-sharing/${$routeParams.accessKey}`)).data;
