@@ -1,43 +1,36 @@
 let reCaptchaPromise = undefined;
-let reCaptchaIntiPromise = undefined;
 let gAssignedId = undefined;
+let initResult
 
 export function initializeRecaptcha(elementId, sitekey){
 
-    if(gAssignedId){
-        console.warn(`Recaptcha already initialized, ${gAssignedId}`)
-        return;
+    if(!initResult){
+
+        initResult = new Promise((resolve, reject)=>{
+                
+            let checkIntervalRunCount = 0;
+            const checkInterval = setInterval(() => {
+
+                if(checkIntervalRunCount > 2000){
+
+                    clearInterval(checkInterval);
+                    reject('Unable to initialize reCaptcha');
+                }
+
+                checkIntervalRunCount++;
+
+                if (window.grecaptcha && window.grecaptcha.hasOwnProperty('render')){
+                    clearInterval(checkInterval);
+                    gAssignedId = render(elementId, sitekey);
+                    resolve(gAssignedId);
+                }
+
+            }, 100)
+
+        })
     }
 
-    if(reCaptchaIntiPromise?.reject){
-        return reCaptchaIntiPromise.reject();
-    }
-
-    return new Promise((resolve, reject)=>{
-        reCaptchaIntiPromise = { resolve, reject};
-
-        let checkIntervalRunCount = 0;
-        const checkInterval = setInterval(() => {
-
-            if(checkIntervalRunCount > 2000){
-
-                clearInterval(checkInterval);
-                reCaptchaIntiPromise.reject('Unable to initialize reCaptcha');
-                reCaptchaIntiPromise = undefined;
-            }
-
-            checkIntervalRunCount++;
-
-            if (window.grecaptcha && window.grecaptcha.hasOwnProperty('render')){
-                clearInterval(checkInterval);
-                render(elementId, sitekey);
-            }
-
-        }, 100)
-
-    })
-
-    
+    return initResult;
 }
 
 export function getRecaptchaToken(){
@@ -59,7 +52,7 @@ export function resetRecaptcha(){
 }
 
 function render(elementId, sitekey){
-    gAssignedId = window.grecaptcha.render(elementId, {
+    return window.grecaptcha.render(elementId, {
         sitekey: sitekey,
         size: 'invisible',
         'callback': (recaptchaToken) => {
@@ -82,6 +75,4 @@ function render(elementId, sitekey){
         }
     });
 
-    reCaptchaIntiPromise.resolve(gAssignedId);
-    reCaptchaIntiPromise = undefined;
 }
