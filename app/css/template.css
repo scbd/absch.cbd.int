@@ -89,7 +89,8 @@ h3 {
     width: max-content;
 }
 #select-dropdown .dropdown-menu{
-    width: 26rem;
+    /* width: 26rem; */
+    width: auto;
 }
 @media (max-width:767px) {
     .hidden-xs{

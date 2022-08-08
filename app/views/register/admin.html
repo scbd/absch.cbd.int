@@ -8,7 +8,7 @@
   <div class="innerPageContent register-content card card-1-notrans m-0 p-3">
     <div class="register-content-header bg-pink color-white">
       <div class="px-2">
-        <h3>ABSCH Admin </h3>
+        <h3>ABSCH {{::('registerAdminT.admin'|$translate)}} </h3>
       </div>
     </div>
     <div class="register-content-content" ng-if="roles.isAdministrator">
@@ -22,54 +22,54 @@
                   <tbody>
 
                     <tr>
-                      <td>View list of records reported by users </td>
+                      <td>{{::('registerAdminT.viewList'|$translate)}} </td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">Manage Reported Records</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/reported-records">{{::('registerAdminT.manageReportedRecords'|$translate)}}</a></td>
                     </tr>
                     <tr>
-                        <td>Common ABSCH Issues</td>
+                        <td>{{::('registerAdminT.commonAbschIssues'|$translate)}}</td>
                         <td>
-                          <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">Common issues</a></td>
+                          <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/common-issues">{{::('registerAdminT.commonIssues'|$translate)}}</a></td>
                       </tr>
                     <tr>
-                      <td>View ABSCH records workflow status</td>
+                      <td>{{::('registerAdminT.viewStatus'|$translate)}}</td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">Manage Workflow Records</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/requests">{{::('registerAdminT.manageWorkflowRecords'|$translate)}}</a></td>
                     </tr>
                     <tr>
-                      <td>View ABSCH counts with graph option and mutiple filters</td>
+                      <td>{{::('registerAdminT.multipleFilters'|$translate)}}</td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">Report counts</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/report-counts">{{::('registerAdminT.reportCounts'|$translate)}}</a></td>
 
                     </tr>
                     <tr>
-                      <td>View IRCC count</td>
+                      <td>{{::('registerAdminT.viewIrrcCount'|$translate)}}</td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">IRCC counts</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/ircc-counts">{{::('registerAdminT.irrcCounts'|$translate)}}</a></td>
 
                     </tr>
                     <tr>
-                      <td>View countries with/without ABSCH roles</td>
+                      <td>{{::('registerAdminT.viewCountries'|$translate)}}</td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">User Role Report</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/user-role-report">{{::('registerAdminT.userRoleReport'|$translate)}}</a></td>
                     </tr>
                     <tr>
-                      <td>View list of users using the email subscription.</td>
+                      <td>{{::('registerAdminT.viewEmailList'|$translate)}}</td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">Subscriptions</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/subscriptions">{{::('registerAdminT.subscriptions'|$translate)}}</a></td>
                     </tr>
                     <tr>
-                      <td>View client side errors</td>
+                      <td>{{::('registerAdminT.viewClientError'|$translate)}}</td>
                       <td>
-                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">Error Logs</a></td>
+                        <a rel="noopener" translation-url class="btn btn-default" ng-href="/register/admin/error-logs">{{::('registerAdminT.errorLogs'|$translate)}}</a></td>
                     </tr>
                     <tr>
                       <td>
-                        Validate translation
+                        {{::('registerAdminT.validateTranslation'|$translate)}}
                       </td>
                       <td>
                         <button type="button" class="btn btn-primary" ng-click="validateTranslation(!isValidatingTranslation)">
-                          <span ng-if="!isValidatingTranslation">Enable</span><span ng-if="isValidatingTranslation">Disable</span>
+                          <span ng-if="!isValidatingTranslation">{{::('registerAdminT.enable'|$translate)}}</span><span ng-if="isValidatingTranslation">{{::('registerAdminT.disable'|$translate)}}</span>
                         </button>
                       </td>
                     </tr>

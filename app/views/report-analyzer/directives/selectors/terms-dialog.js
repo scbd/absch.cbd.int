@@ -4,12 +4,14 @@ import _ from 'lodash';
 import '../../filters/ascii';
 import '~/components/scbd-angularjs-services/main';
 import './tree-selector';
+import termsDialogT from '~/app-text/views/report-analyzer/directives/selectors/terms-dialog.json';
 
     //==============================================
     //
     //
     //==============================================
-    app.directive('termsDialog', ['$http', '$timeout', '$q', '$filter', function($http, $timeout, $q, $filter) {
+app.directive('termsDialog', ['$http', '$timeout', '$q', '$filter', 'translationService',
+    function ($http, $timeout, $q, $filter, translationService) {
         return {
             restrict : 'E',
             replace : true,
@@ -22,7 +24,7 @@ import './tree-selector';
                 visible : '='
             },
             link: function ($scope, $dialog) {
-
+                translationService.set('termsDialogT', termsDialogT);
                 var allTerms = [];
                 var skipSelectionWatch = false;
 

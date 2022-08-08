@@ -7,6 +7,7 @@ import '../intermediate';
 import '~/components/scbd-angularjs-services/main';
 import '~/services/main';
 import '~/views/report-analyzer/reportAnalyzerService';
+import questionSelectorT from '~/app-text/views/report-analyzer/directives/national-reports/question-selector.json';
 
     var baseUrl = require.toUrl('').replace(/\?v=.*$/,'');
 
@@ -22,8 +23,8 @@ import '~/views/report-analyzer/reportAnalyzerService';
     //
     //
     //==============================================
-    app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService',
-     function($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService) {
+app.directive('nationalReportQuestionsSelector', ['$http', 'locale', 'commonjs', '$q', '$timeout', 'realm', 'reportAnalyzerService', 'translationService',
+        function ($http, locale, commonjs, $q, $timeout, realm, reportAnalyzerService, translationService) {
         return {
             restrict : 'E',
             replace : true,
@@ -37,7 +38,7 @@ import '~/views/report-analyzer/reportAnalyzerService';
                 reportData  : '=reportData'
             },
             link: function ($scope) {
-                
+                translationService.set('questionSelectorT', questionSelectorT);
                 $scope.isBch        = realm.is('BCH');
                 $scope.selectedReportType = $scope.selectedReportType || _.last($scope.reportData, function(r){return r.dataUrl}).type;
                 

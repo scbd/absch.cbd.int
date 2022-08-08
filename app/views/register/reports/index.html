@@ -18,7 +18,7 @@
     <div class="innerPageContent shadow-sm register-content card card-1-notrans m-0 p-3">
         <div class="register-content-header bg-darkgrey color-white">
             <div class="px-2">
-                <h3>Reports </h3>
+                <h3>{{::('reportsIndexT.reports'|$translate)}} </h3>
             </div>
         </div>
         <div class="register-content-content bg-white">
@@ -29,17 +29,17 @@
                         <img ng-src="{{report.image}}" alt="Image not available" class="w-100">
                         <div class="container">
                             <h4><b ng-bind="report.title"></b></h4>
-                            <p><a rel="noopener" ng-href="{{report.url}}">View</a></p>
+                            <p><a rel="noopener" ng-href="{{report.url}}">{{::('reportsIndexT.view'|$translate)}}</a></p>
                         </div>
                     </div>
                     <div ng-if="!reports.length && !loading">
                         <div class="alert alert-info">
-                            No reports available at this moment.
+                            {{::('reportsIndexT.noReportsAvailable'|$translate)}}
                         </div>
                     </div>
                     <div ng-if="loading">
                         <div class="alert alert-info">
-                            <i class="fa fa-spin fa-spinner"></i> Loading...
+                            <i class="fa fa-spin fa-spinner"></i> {{::('reportsIndexT.loading'|$translate)}}
                         </div>
                     </div>
                 </div>
