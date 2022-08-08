@@ -29,6 +29,23 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                     let schemas = searchQuery.schema;
                     if(typeof schemas == 'string')
                         schemas = [schemas];
+console.log(schemas)
+                    if(!schemas?.length){
+                        data = {
+                            storageType : 'chm-search-result',
+                            sharedData  : { 
+                                realm : realm.value,
+                                searchQuery : { 
+                                    _id : `${uniqueKey}`,
+                                    filters : [] 
+                                } 
+                            } 
+                        };
+                    }
+                    else {
+                        const obsoleteSchemas = [];
+                        for (let i = 0; i < schemas.length; i++) {
+                            let schemaName = schemas[i].toLowerCase();
 
                     data = {
                         storageType : 'chm-search-result',
