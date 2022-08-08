@@ -1,7 +1,7 @@
 <div class="text-center mt-3">
     <header class="px-2 d-sm-none d-md-none">
         <nav class="navbar navbar-sm navbar-light bg-light rounded" >
-            <a ng-href="{{url}}">
+            <a ng-href="{{url}}" target="_blank">
                 <span class="realm-base-acronym fw-bold color-orange"> {{::('bchHeaderT.bch'|$translate)}}  </span> 
                 <span class="fw-bold fs-md-4 text-uppercase color-orange ">{{::('bchHeaderT.biosafetyClearingHouse'|$translate)}}</span>
                 <span ng-if="isDEV" class="fs-size-paragraph fw-bold bg-yellow badge text-uppercase link-dark">
@@ -13,7 +13,7 @@
     </header>
 
     <header class="pt-2 nav-lg-header">
-        <a ng-href="{{url}}" class="realm-base-acronym color-orange mx-3 px-lg-4">
+        <a ng-href="{{url}}" class="realm-base-acronym color-orange mx-3 px-lg-4" target="_blank">
             {{::('bchHeaderT.bch'|$translate)}}
             <span class="fw-bold ch-name">{{::('bchHeaderT.biosafetyClearingHouse'|$translate)}}</span>
             <span ng-if="isDEV" class="fs-3 fw-bold px-2 bg-yellow badgetext-uppercase link-dark">
