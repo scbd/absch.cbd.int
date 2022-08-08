@@ -1,6 +1,9 @@
 // rollup.config.js (building more than one bundle)
 import path from 'path'
 import fs   from 'fs'
+import _    from 'lodash'
+
+const mappings = {};
 
 export default function resolveLocalized(options = {}) {
 
@@ -8,7 +11,7 @@ export default function resolveLocalized(options = {}) {
     baseDir,
     localizedDir 
   } = options;
-
+  
   return {
     name: 'loadLocalized',
 
@@ -22,14 +25,35 @@ export default function resolveLocalized(options = {}) {
 
         const shouldUse = isUseLocalizedVersion(originalFilePath, localizedFilePath);
         
-        if(shouldUse) {
-          return this.resolve(localizedFilePath, importer, { skipSelf: true });
-        }
+        if(path.extname(originalFilePath) == '.json' && fs.existsSync(originalFilePath))
+          mappings[localizedFilePath] = originalFilePath;
+       
+       if(shouldUse) {
+         return this.resolve(localizedFilePath, importer, { skipSelf: true });
+       }
+     }
+
+     return null;
+    },
+    transform(code, id) {
+
+      if(mappings[id]) {
+        
+        const enFileData   = fs.readFileSync(mappings[id], {encoding:"utf8"});
+
+        let enJson       = JSON.parse(enFileData.trim());
+        let languageJson = JSON.parse(code.trim());
+
+        languageJson = copyProps(languageJson, enJson);
+        
+        code = JSON.stringify(languageJson);
       }
 
-      return null;
+      return { code, map: this.getCombinedSourcemap() };
+
     }
   };
+
 }
 
 function isUseLocalizedVersion(oFilePath, lFilePath) {
@@ -44,4 +68,21 @@ function isUseLocalizedVersion(oFilePath, lFilePath) {
   if(!oStats.isFile()) return false;
 
   return lStats.mtimeMs >= oStats.mtimeMs;
+}
+
+function copyProps(languageProps, enProps){
+
+  for (const languageProp in languageProps) {
+      if (Object.hasOwnProperty.call(languageProps, languageProp)) {
+          const languageVal = languageProps[languageProp];
+          const enVal       = enProps[languageProp];
+          
+          if(languageVal == "")
+              languageProps[languageProp] = enVal;
+          else if(_.isArray(languageVal) || _.isObject(enVal))
+              languageProps[languageProp] = copyProps(languageVal, enVal);
+      }
+  }
+
+  return languageProps;
 }
