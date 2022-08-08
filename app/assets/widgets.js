@@ -20,7 +20,7 @@ function embedIFrame(widget, options){
     //TODO: no need to be inside loop
     registerIframeCommunication(iframe, {type:'getClientHeight', iframe:iframe.name});
     window.addEventListener('message', function(evt){
-        if(evt.origin != this.origin)
+        if(!~evt.data.indexOf(iframe.name))
             return;
             
         iframeCommunicationReceived = true;
