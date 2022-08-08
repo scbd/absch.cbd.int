@@ -38,5 +38,5 @@
     "searchClearingHouse": "Search the Clearing-House",
     "saveFilter": "Save filter",
     "closeEditing": "Close editing",
-    "obsoleteSchemaMessage" : "The query includes schema(s) from legacy BCH which are no longer in use and are excluded in below search result. Please update your embed code!"
+    "obsoleteSchemaMessage" : "The following formats are no longer supported on the Biosafety Clearing-House. For more information, please visit bch.cbd.int or contact bch@cbd.int :"
 }
