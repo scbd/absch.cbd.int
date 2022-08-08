@@ -29,55 +29,45 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                     let schemas = searchQuery.schema;
                     if(typeof schemas == 'string')
                         schemas = [schemas];
-console.log(schemas)
-                    if(!schemas?.length){
-                        data = {
-                            storageType : 'chm-search-result',
-                            sharedData  : { 
-                                realm : realm.value,
-                                searchQuery : { 
-                                    _id : `${uniqueKey}`,
-                                    filters : [] 
-                                } 
+
+                    data = {
+                        storageType : 'chm-search-result',
+                        sharedData  : { 
+                            realm : realm.value,
+                            searchQuery : { 
+                                _id : `${uniqueKey}`,
+                                filters : [] 
                             } 
-                        };
-                    }
-                    else {
-                        const obsoleteSchemas = [];
-                        for (let i = 0; i < schemas.length; i++) {
-                            let schemaName = schemas[i].toLowerCase();
+                        } 
+                    };
+                    
+                    const obsoleteSchemas = [];
+                    for (let i = 0; i < schemas.length; i++) {
+                        let schemaName = schemas[i].toLowerCase();
 
-                            if(isSchemaObsolete(schemaName)){
-                                console.warn(`Schema is obsolete in new BCH, ${schemaName}`)
-                                obsoleteSchemas.push(schemaName);
-                            }
-                            else{
-                                schemaName         = legacyBchMapping(schemaName)
-                                const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemaName.toLowerCase())                    
-                                const schema       = realm.schemas[realmSchema]
-                                if(schema){
-                                    data = {
-                                        storageType : 'chm-search-result',
-                                        sharedData  : { 
-                                            realm : realm.value,
-                                            searchQuery : { 
-                                                _id : `${uniqueKey}`,
-                                                filters : [{
-                                                    id: realmSchema,
-                                                    name: $filter('lstring')(schema.title, locale),
-                                                    otherType: schema.type,
-                                                    type: "schema"
-                                                }] 
-                                            } 
-                                        } 
-                                    };
-                                }
-                            }
-
-                            if(obsoleteSchemas.length)
-                                localStorageService.set(`${uniqueKey}_obsoleteSchemas`, obsoleteSchemas);
+                        if(isSchemaObsolete(schemaName)){
+                            console.warn(`Schema is obsolete in new BCH, ${schemaName}`)
+                            obsoleteSchemas.push(schemaName);
                         }
+                        else{
+                            schemaName         = legacyBchMapping(schemaName)
+                            const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemaName.toLowerCase())                    
+                            const schema       = realm.schemas[realmSchema]
+                            if(schema){
+                                data.sharedData.searchQuery.filters.push(
+                                    {
+                                        id: realmSchema,
+                                        name: $filter('lstring')(schema.title, locale),
+                                        otherType: schema.type,
+                                        type: "schema"
+                                    });
+                            }
+                        }
+
+                        if(obsoleteSchemas.length)
+                            localStorageService.set(`${uniqueKey}_obsoleteSchemas`, obsoleteSchemas);
                     }
+                    
 
                     if(searchQuery.countries){
                         let countries = searchQuery.countries;

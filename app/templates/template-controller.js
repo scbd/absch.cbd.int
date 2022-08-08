@@ -86,7 +86,8 @@ export default ['$rootScope', '$location', '$window', '$scope', 'locale', 'realm
             }
             $scope.embed = $location.search().embed; 
 
-            await initializeRecaptcha('g-recaptcha', $window.scbdApp.captchaV2BadgeKey)
+            if(!$location.search().print)
+                await initializeRecaptcha('g-recaptcha', $window.scbdApp.captchaV2BadgeKey)
         }
 
         $rootScope.$on('signOut', function () {
