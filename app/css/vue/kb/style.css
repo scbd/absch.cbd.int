@@ -529,8 +529,14 @@
 	display: none;
 }
 
-.shared-links .link-date {
-        vertical-align: middle;
+.shared-links .email-links {
+    width: 275px;
+}
+.shared-links .email-links ul li {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 .shared-links .action {
     display: inherit;

@@ -24,7 +24,7 @@ export default class DocumentShareApi extends ApiBase
                    .then(res => res.data).catch(tryCastToApiError);
     }
     
-    async revokeSharedDocument(id) {
+    async revoke(id) {
         return this.http.delete(`api/v2018/document-sharing/${id}/revoke`).then(res => res.data).catch(tryCastToApiError);
     }
 }

@@ -9,60 +9,79 @@
 				<tr>
 					<th scope="col">#</th>
                     <th scope="col">{{ $t("createdOn") }}</th>
-					<th scope="col">{{ $t("expiryStatus") }}</th>
-                    <th scope="col">{{ $t("sharedDetail") }}</th>
-					<th scope="col" colspan="4">{{ $t("linkEmail") }}</th>
-					
+					<th scope="col" class="d-none d-sm-table-cell">{{ $t("expiryStatus") }}</th>
+                    <th scope="col" class="d-none d-sm-table-cell">{{ $t("sharedDetail") }}</th>
+					<th scope="col" colspan="4">{{ $t("linkEmail") }}</th>	
 				</tr>
 			</thead>
 			<tbody>
 				<tr v-for="(link, index) in sharedLinks.slice().reverse()">
 					<th scope="row">{{index+1}}</th>
-                    <td class="link-date">{{link.meta.createdOn|formatDate}}</td>
-					<td> <span>{{link.expiry|formatDate}}</span>
+                    <td>{{link.meta.createdOn|formatDate}}</td>
+					<td class="d-none d-sm-table-cell"> <span>{{link.expiry|formatDate}}</span>
                         <span v-if="hasStatus('active', link)" class="action badge bg-primary">{{ $t("active") }}</span>
                         <span v-if="hasStatus('expired', link)" class="action badge bg-warning text-dark">{{ $t("expired") }}</span>
                         <span v-if="hasStatus('revoked', link)" class="action badge bg-danger">{{ $t("revoked") }}</span>
                     </td>
-
-
-                    <td>
+                    <td colspan="1" class="d-none d-sm-table-cell">
                         <span v-if="hasStorageType('document', link)" class="action badge bg-primary">{{ $t("document") }}</span>
                         <span v-if="hasStorageType('search', link)" class="action badge bg-warning text-dark">{{ $t("search") }}</span>
                         <span v-if="hasStorageType('country-profile', link)" class="action badge bg-danger">{{ $t("countryProfile") }}</span>
-                        <br>
-                        <span v-if="link.shareType =='email' && link.sharedWith.emails">Email(s): {{link.sharedWith.emails}}</span>
-                        <span v-if="link.shareType =='embed' && link.sharedData.domain">Domain: {{link.sharedData.domain}}</span>
-                        <span v-if="link.shareType =='link'"> 
-                            Link
-                            <span v-if="link.sharedWith.emails" v-bind="link.sharedWith.emails" ></span>
-                         </span>
+                        <div class="mt-1 email-links d-none d-sm-inline-block">
+                            <span v-if="link.shareType =='email' && link.sharedWith.emails">
+                                <span class="fw-bold">{{ $t("email") }}</span>
+                                <ul v-if="link.sharedWith.emails.length>0">
+                                    <li v-for="email in link.sharedWith.emails.split(',')">{{email}}</li>
+                                </ul>
+                            </span>
+                            <span v-if="link.shareType =='embed' && link.sharedData.domain"><span class="fw-bold">{{ $t("domain") }}</span> {{link.sharedData.domain}}</span>
+                        </div>
                     </td>
 
         			<td colspan="4">
                         <div class="input-group" >
-                            <input v-if="link.sharedWith.emails" type="text" width="100%" class="highlight form-control d-none d-sm-inline-block" :value="link.sharedWith.emails" disabled readonly/>
-                            <input v-if="!link.sharedWith.emails" ref="textToCopy" type="text" width="100%" class="highlight form-control d-none d-sm-inline-block" :value="getUrl(link.urlHash)" disabled readonly/>
-                            <span  v-if="!link.sharedWith.emails && !link.revoked" class="input-group-text cursor-pointer" id="basic-addon1">
+                            <input ref="textToCopy" type="text" width="100%" class="highlight form-control" :value="getUrl(link.urlHash)" disabled readonly/>
+                            <span class="input-group-text cursor-pointer" id="basic-addon1">
                                 <a :href="getUrl(link.urlHash)" target="_blank"><i class="bi bi-link"> </i> 
                                     <span class="d-none d-sm-inline-block">{{ $t("Open") }}</span></a>
                             </span>
-                            <span  v-if="!link.sharedWith.emails && !link.revoked" class="input-group-text cursor-pointer" id="basic-addon2" @click="copyUrl(link.urlHash)">
-                                <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copy") }}</span></span>
-                            <span  v-if="hasStorageType('search', link)" class="input-group-text cursor-pointer" id="basic-addon1">
-                                <a :href="`/register/user-preferences/?id=${link.sharedData.recordKey}`" target="_blank"><i class="bi bi-pencil-square"> </i> 
-                                    <span class="d-none d-sm-inline-block">{{ $t("edit") }}</span></a>
-                            </span>
-                            <span v-if="hasStatus('active', link) && !link.revoked" disabled="link.status=='revokingLink'" class="input-group-text cursor-pointer" id="basic-addon3" @click="revokeLink(link)">
-                                <i class="spinner-border pe-2" v-if="link.status=='revokingLink'"></i>
-                                <i class="bi bi-hand-thumbs-down-fill pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("revoke") }}</span>
-                            </span>
+                            <span class="display-content" v-if="!link.revoked">
+                                <span class="input-group-text cursor-pointer" id="basic-addon2" @click="copyUrl(link.urlHash)">
+                                    <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copy") }}</span>
+                                </span>
+                                <span  v-if="hasStorageType('search', link)" class="input-group-text cursor-pointer" id="basic-addon1">
+                                    <a :href="`/register/user-preferences/?id=${link.sharedData.recordKey}`" target="_blank"><i class="bi bi-pencil-square"> </i> 
+                                        <span class="d-none d-sm-inline-block">{{ $t("edit") }}</span></a>
+                                </span>
+                                <span  v-if="link.sharedWith.domain" class="input-group-text cursor-pointer" id="basic-addon2" 
+                                    data-bs-toggle="modal" data-bs-target="#exampleModal" @click="embed(link.storageType, link.urlHash)">
+                                    <i class="bi bi-code-slash pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("embed") }}</span>
+                                </span>
+                                <span v-if="hasStatus('active', link)" disabled="link.status=='revokingLink'" class="input-group-text cursor-pointer" id="basic-addon3" @click="revokeLink(link)">
+                                    <i class="spinner-border pe-2" v-if="link.status=='revokingLink'"></i>
+                                    <i class="bi bi-hand-thumbs-down-fill pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("revoke") }}</span>
+                                </span>
+                            </span>    
                         </div>
 					</td>
                     
 				</tr>
 			</tbody>
 		</table>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{ $t("embedLink") }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <a :href="embededLink" target="_blank">
+                        {{embededLink}}</a>
+                </div>
+                </div>
+            </div>
+        </div>
 	</div>
 </template>
 
@@ -79,7 +98,8 @@
         props: ["tokenReader"],
         data:  () => {
             return {
-            sharedLinks: [],
+                embededLink: null,
+                sharedLinks: [],
             }
         },
         created() {
@@ -148,7 +168,7 @@
             },
 
             async revokeLink(link){
-                const revoke = await this.documentShareApi.revokeSharedDocument(`${link._id}`);
+                const revoke = await this.documentShareApi.revoke(`${link._id}`);
                 // ToDo: Api should Response on revoked, then apply if condition here
                 this.sharedLinks = this.sharedLinks.map(list => {
                     if (list._id == link._id) {
@@ -156,6 +176,9 @@
                     }
                     return list;
                 });
+            },
+            embed(storageType, urlHash){
+                this.embededLink = `${this.$realm.baseURL}/${this.$locale}/share/link/${storageType}/${urlHash}`;
             }
         },
         i18n: { messages:{ en: i18n }} 

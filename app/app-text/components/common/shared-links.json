@@ -12,8 +12,13 @@
     "createdOn": "Created on",
     "active": "active",
     "expired": "expired",
-    "revoked": "revoked",
+    "revoked": "Revoked",
     "Open": "Open",
-    "copy": "copy",
-    "revoke": "revoke"
+    "copy": "Copy",
+    "revoke": "Revoke",
+    "embed": "Embed",
+    "edit": "Edit query",
+    "embedLink": "Embed link",
+    "domain": "Domain:",
+    "email": "Email(s):"
 }
