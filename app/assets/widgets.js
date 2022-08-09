@@ -1,7 +1,6 @@
 
 const origin = findOrigin() || 'https://absch.cbddev.xyz';
 
-let iframeCommunicationReceived = false;
 function embedIFrame(widget, options){
 
     if(!options.src)
@@ -10,24 +9,27 @@ function embedIFrame(widget, options){
     var iframe = document.createElement('iframe');
     
     iframe.setAttribute('name', Math.floor((1 + Math.random()) * 0x10000).toString(16));
-    iframe.setAttribute('src', options.src);
+    iframe.setAttribute('src', `${options.src}&iframe=${iframe.name}`);
     iframe.setAttribute('width', options.width||'100%');
     iframe.setAttribute('height', options.height||500);
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('scrolling', 'no');
 
     widget.parentNode.replaceChild(iframe, widget);
-    //TODO: no need to be inside loop
-    registerIframeCommunication(iframe, {type:'getClientHeight', iframe:iframe.name});
+    
     window.addEventListener('message', function(evt){
-        if(!~evt.data.indexOf(iframe.name))
-            return;
+        var trustedHosts = [
+            /.*\.cbddev\.xyz$/i, /.*\.cbd\.int$/i,
+            /localhost:\d/
+        ];
+        
+        const isTrustedHost = trustedHosts.find(e=>{
+            return e.test(evt.origin)
+        });
             
-        iframeCommunicationReceived = true;
-        if(evt.data){
+        if(isTrustedHost && evt.data){
             var data = JSON.parse(evt.data);
             if(data.type == 'setClientHeight' && data.iframe == iframe.name){
-                // console.log(data.height);
                 iframe.setAttribute('height', data.height ? (data.height+20) : iframe.height);
             }
         }
@@ -141,14 +143,6 @@ function findScbdWidgets(className){
     return widgetElements.flat();
 }
 
-function registerIframeCommunication(iframe, data){
-    if(!iframeCommunicationReceived){
-        setTimeout(function(){
-            iframe.contentWindow.postMessage(JSON.stringify(data), origin);//'http://absch-widget.cbddev.xyz:2010');  
-            registerIframeCommunication(iframe, data)          
-        }, 2000);
-    }
-}
 
 function findOrigin(){
     var scripts = document.getElementsByTagName('script');
