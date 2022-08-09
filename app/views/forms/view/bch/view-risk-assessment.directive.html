@@ -171,7 +171,7 @@
 					</div>
 				</div>
 				<div ng-if="document.codexConducted!=undefined">
-					<label>{{::('viewRiskAssesmentT.isForFoodSafetyInfo'|$translate)}} <i>{{::('viewRiskAssesmentT.isForFoodSafetyInfoItalic'|$translate)}}</i></label>
+					<label ng-bind-html="::('viewRiskAssesmentT.isForFoodSafetyInfo'|$translate)"></label>
 					<div  compare-val>
 						<km-value-bool value="document.codexConducted" locales="locale"></km-value-bool>
 					</div>
