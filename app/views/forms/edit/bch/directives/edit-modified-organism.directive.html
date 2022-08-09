@@ -127,7 +127,7 @@
 										</div>
 										<div class="col-xs-12">
 											<div class="km-control-group" name="geneNotes" caption="{{::('editModifiedOrganismT.geneNotes'|$translate)}}">	
-												<div class="help-block">{{::('editModifiedOrganismT.geneNotesInfo'|$translate)}} “<i>{{::('editModifiedOrganismT.epsps'|$translate)}}</i> {{::('editModifiedOrganismT.proteinCoding'|$translate)}} <i>{{::('editModifiedOrganismT.35S'|$translate)}}</i> {{::('editModifiedOrganismT.promoterAnd'|$translate)}} <i>{{::('editModifiedOrganismT.nos'|$translate)}}</i> {{::('editModifiedOrganismT.terminator'|$translate)}}”.</div>
+												<div class="help-block" ng-bind-html="::('editModifiedOrganismT.geneNotesInfo'|$translate)"></div>
 												<div km-rich-textbox name="geneNotes" rows="4"  ng-model="document.geneNotes" locales="document.header.languages"></div>	
 											</div>
 										</div>
