@@ -26,14 +26,14 @@
                         <span v-if="hasStatus('revoked', link)" class="action badge bg-danger">{{ $t("revoked") }}</span>
                     </td>
                     <td colspan="1" class="d-none d-sm-table-cell">
-                        <span v-if="hasStorageType('document', link)" style="display:initial" class="action badge bg-info">{{ $t("document") }}</span>
+                        <span v-if="hasStorageType('document', link)" style="display:initial" class="action badge bg-info">{{ $t("record") }}</span>
                         <span v-if="hasStorageType('search', link)" style="display:initial" class="action badge bg-primary">{{ $t("search") }}</span>
                         <span v-if="hasStorageType('country-profile', link)" style="display:initial" class="action badge bg-secondary">{{ $t("countryProfile") }}</span>
                         <span v-if="link.shareType =='embed' && link.sharedData.domain">
-                            {{ $t("embeddedIn") }} {{link.sharedData.domain}}
+                            <span class="fw-bold">{{ $t("embeddedIn") }}</span> {{link.sharedData.domain}}
                         </span>
                         <span v-if="link.shareType =='email' && link.sharedWith.emails" style="display:initial">
-                            <span>{{ $t("emailedTo") }} </span> 
+                            <span class="fw-bold">{{ $t("emailedTo") }} </span> 
                             <span> {{link.sharedWith.emails.split(',')[0]}}</span>
                             <span v-if="link.sharedWith.emails.split(',').length>1">
                                 <a data-bs-toggle="collapse" class="show-emails" :href="'#toggle'+index" role="button" aria-expanded="false">
@@ -51,14 +51,14 @@
                         </span>
                     </td>
 
-        			<td colspan="4">
+        			<td colspan="4" class="float-end">
                         <div class="input-group" >
-                            <input ref="textToCopy" type="text" width="100%" class="highlight form-control" :value="getUrl(link.urlHash)" disabled readonly/>
+                            <input v-if="link.shareType !='embed'" ref="textToCopy" type="text" width="100%" class="highlight form-control" :value="getUrl(link.urlHash)" disabled readonly/>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
-                                <a type="button" class="btn btn-outline-primary rounded-0" :href="getUrl(link.urlHash)" target="_blank"><i class="bi bi-link"> </i> 
+                                <a v-if="!link.revoked" type="button" class="btn btn-outline-primary" :href="getUrl(link.urlHash)" target="_blank"><i class="bi bi-link"> </i> 
                                     <span class="d-none d-sm-inline-block">{{ $t("Open") }}</span>
                                 </a>
-                                    <span v-if="!link.revoked" type="button" class="btn btn-outline-primary" @click="copyCode(link.urlHash)">
+                                    <span v-if="!link.revoked && link.shareType !='embed'" type="button" class="btn btn-outline-primary" @click="copyCode(link.urlHash)">
                                         <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copy") }}</span>
                                     </span>
                                     <span  v-if="!link.revoked && hasStorageType('search', link)" type="button" class="btn btn-outline-primary">
@@ -67,7 +67,7 @@
                                     </span>
                                     <span  v-if="!link.revoked && link.sharedData.domain" data-bs-toggle="collapse" :href="'#embed'+index" role="button" aria-expanded="false" class="btn btn-outline-primary"
                                         @click="embed(link.storageType, link.urlHash)">
-                                        <i class="bi bi-code-slash pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("embed") }}</span>
+                                        <i class="bi bi-code-slash pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("showCode") }}</span>
                                     </span>
                                     <span v-if="!link.revoked && hasStatus('active', link)" disabled="link.status=='revokingLink'" type="button" class="btn btn-outline-secondary" @click="revokeLink(link)">
                                         <i class="spinner-border pe-2" v-if="link.status=='revokingLink'"></i>
@@ -76,9 +76,9 @@
                             </div>  
                         </div>
                         <div v-if="!link.revoked && link.sharedData.domain" class="pt-2 collapse input-group" :id="'embed'+index">
-                            <input :id="'embedText'+link.urlHash" type="text" width="100%" class="highlight form-control" :value="`<script src='https://bch.cbddev.xyz/widgets.js'></script><div class='scbd-chm-embed' data-type='chm-search-result' data-access-key='${link.urlHash}' width='100%'></div>`" />
+                            <textarea rows="3" :id="'embedText'+link.urlHash" type="text" width="100%" class="highlight form-control" :value="`<script src='https://bch.cbddev.xyz/widgets.js'></script><div class='scbd-chm-embed' data-type='chm-search-result' data-access-key='${link.urlHash}' width='100%'></div>`"></textarea>
                             <span type="button" class="btn btn-primary" @click="copyCode(link.urlHash, true)">
-                                        <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copyEmbedCode") }}</span>
+                                        <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copy") }}</span>
                             </span>
                         </div>
 					</td>

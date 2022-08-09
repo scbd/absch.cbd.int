@@ -4,7 +4,8 @@
     "sharedType": "Shared type",
     "storageType": "Storage type",
     "document": "Document",
-    "search": "Search",
+    "search": "Search result",
+    "record": "Record",
     "sharedWith": "Shared with",
     "countryProfile": "Country Profile",
     "expiry": "Expiry",
@@ -12,8 +13,8 @@
     "linkEmail": "Link/Email(s)",
     "actions": "Actions",
     "createdOn": "Created on",
-    "active": "active",
-    "expired": "expired",
+    "active": "Active",
+    "expired": "Expired",
     "revoked": "Revoked",
     "Open": "Open",
     "copy": "Copy",
@@ -23,8 +24,8 @@
     "embedLink": "Embed link",
     "domain": "Domain:",
     "email": "Email(s):",
-    "embeddedIn": "embedded in:",
-    "emailedTo": "emailed to:",
-    "copyEmbedCode": "Copy embed code",
-    "clipboardSuccess": "Copied to clipboard"
+    "embeddedIn": "Embedded in:",
+    "emailedTo": "Emailed to:",
+    "clipboardSuccess": "Copied to clipboard",
+    "showCode": "Show code"
 }
