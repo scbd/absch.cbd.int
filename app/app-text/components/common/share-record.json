@@ -21,7 +21,7 @@
     "domainInfo":"Please enter the domain where you intend to embed this page.",
     "domain":"Domain",
     "urlEg":"for eg. https://www.cbd.int",
-    "generateCode":"Generate Code",
+    "generateCode":"Generate code",
     "cancel":"Close",
 
     "searchResultLinkError":"Error generating link, please try again.",
