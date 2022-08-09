@@ -53,7 +53,7 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                             schemaName         = legacyBchMapping(schemaName)
                             const realmSchema  = realmSchemas.find(e=>e.toLowerCase() == schemaName.toLowerCase())                    
                             const schema       = realm.schemas[realmSchema]
-                            if(schema && !data.sharedData.searchQuery.filters.find(e=>e.id == schema)){
+                            if(schema && !data.sharedData.searchQuery.filters.find(e=>e.id == realmSchema)){
                                 data.sharedData.searchQuery.filters.push(
                                     {
                                         id: realmSchema,
