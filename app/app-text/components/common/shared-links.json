@@ -1,5 +1,5 @@
 {
-    "sharedUrls": "Shared Urls",
+    "mySharing": "My sharing",
     "sharedDetail": "Shared Details",
     "sharedType": "Shared type",
     "storageType": "Storage type",
@@ -7,8 +7,10 @@
     "search": "Search",
     "sharedWith": "Shared with",
     "countryProfile": "Country Profile",
-    "expiryStatus": "Expiry/Status",
+    "expiry": "Expiry",
+    "status": "Status",
     "linkEmail": "Link/Email(s)",
+    "actions": "Actions",
     "createdOn": "Created on",
     "active": "active",
     "expired": "expired",
@@ -20,5 +22,8 @@
     "edit": "Edit query",
     "embedLink": "Embed link",
     "domain": "Domain:",
-    "email": "Email(s):"
+    "email": "Email(s):",
+    "embeddedIn": "embedded in:",
+    "emailedTo": "emailed to:",
+    "copyEmbedCode": "Copy embed code"
 }
