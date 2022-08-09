@@ -58,7 +58,7 @@
                                 <a type="button" class="btn btn-outline-primary rounded-0" :href="getUrl(link.urlHash)" target="_blank"><i class="bi bi-link"> </i> 
                                     <span class="d-none d-sm-inline-block">{{ $t("Open") }}</span>
                                 </a>
-                                    <span v-if="!link.revoked" type="button" class="btn btn-outline-primary" @click="copyUrl(link.urlHash)">
+                                    <span v-if="!link.revoked" type="button" class="btn btn-outline-primary" @click="copyCode(link.urlHash)">
                                         <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copy") }}</span>
                                     </span>
                                     <span  v-if="!link.revoked && hasStorageType('search', link)" type="button" class="btn btn-outline-primary">
@@ -77,7 +77,7 @@
                         </div>
                         <div v-if="!link.revoked && link.sharedData.domain" class="pt-2 collapse input-group" :id="'embed'+index">
                             <input :id="'embedText'+link.urlHash" type="text" width="100%" class="highlight form-control" :value="`<script src='https://bch.cbddev.xyz/widgets.js'></script><div class='scbd-chm-embed' data-type='chm-search-result' data-access-key='${link.urlHash}' width='100%'></div>`" />
-                            <span type="button" class="btn btn-primary" @click="copyUrl(link.urlHash, true)">
+                            <span type="button" class="btn btn-primary" @click="copyCode(link.urlHash, true)">
                                         <i class="bi bi-clipboard pe-1"> </i> <span class="d-none d-sm-inline-block">{{ $t("copyEmbedCode") }}</span>
                             </span>
                         </div>
@@ -86,6 +86,14 @@
 				</tr>
 			</tbody>
 		</table>
+        <div class="position-fixed bottom-0 start-0 p-3" style="z-index: 11">
+            <div ref="clipboardToast" class="toast hide" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                <strong class="me-auto">{{$t('clipboardSuccess')}}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
 	</div>
 </template>
 
@@ -97,11 +105,13 @@
     import DocumentShareApi from "~/api/document-share";
     import i18n from "../../app-text/components/common/shared-links.json"; 
     import '../kb/filters';
+    import { Modal, Toast } from "bootstrap";
     export default {
         name:'mySharing',
         props: ["tokenReader"],
         data:  () => {
             return {
+                toast:null,
                 sharedLinks: [],
             }
         },
@@ -109,7 +119,8 @@
             this.documentShareApi = new DocumentShareApi(this.tokenReader);
         },
         async mounted() {
-         const params = {
+            this.toast = new Toast(this.$refs.clipboardToast);
+            const params = {
                     q: {
                     storageType : { $in : ["chm-document","chm-search-result","chm-country-profile"]}
                 }
@@ -120,9 +131,10 @@
             getUrl(hash){
                 return location.origin + '/database/share/' + hash;
             },
-            copyUrl(hash, isembed){
+
+            copyCode(hash, isEmbed){
                 const el = document.createElement('textarea');  
-                if(isembed){
+                if(isEmbed){
                     const embededValue = document.getElementById("embedText"+hash);
                     el.value = embededValue.value;
                 } else{
@@ -140,6 +152,7 @@
                     document.getSelection().removeAllRanges();    
                     document.getSelection().addRange(selected);   
                 }
+                this.toast.show();
             },
 
             hasStatus(status, link){                
