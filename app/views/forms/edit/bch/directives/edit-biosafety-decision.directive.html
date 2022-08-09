@@ -28,8 +28,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="{{::('editBiosafetyDecisionT.country'|$translate)}}">
-												<div class="help-block" ng-if="isEuMember">
-													<u><i>{{::('editBiosafetyDecisionT.EUMemeber'|$translate)}}</i></u> {{::('editBiosafetyDecisionT.countryInfo'|$translate)}}
+												<div class="help-block" ng-if="isEuMember" ng-bind-html="::('editBiosafetyDecisionT.EUMemberInfo'|$translate)"> 
 												</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government" source="options.countries"
 													filter="genericFilter" mapping="genericMapping" selectbox="true" ng-change="onCountryChange(document.government.identifier)" placeholder="{{::('editBiosafetyDecisionT.selectOption'|$translate)}}">
@@ -256,8 +255,7 @@
 									<div class="row" >
 										<div class="col-xs-12">
 											<div class="alert alert-danger" ng-if="isLmoDecisionForIntentionalIntroduction">
-												<strong>{{::('editBiosafetyDecisionT.note'|$translate)}}</strong> {{::('editBiosafetyDecisionT.categoriesField'|$translate)}} <i>{{::('editBiosafetyDecisionT.subjectOfDecision'|$translate)}}</i> {{::('editBiosafetyDecisionT.selectedIndicating'|$translate)}}
-												 <i>{{::('editBiosafetyDecisionT.typeOfDecision'|$translate)}}</i>, {{::('editBiosafetyDecisionT.activeInformation'|$translate)}}
+												<span ng-bind-html="::('editBiosafetyDecisionT.note'|$translate)"></span>
 											</div>
 										</div>
 									</div>
@@ -470,7 +468,7 @@
 													<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 													<div ng-if="document.isForFoodSafety" style="padding-left:57px; margin-top: 15px;">
 														<div class="control-group">
-															<label>{{::('editBiosafetyDecisionT.isForFoodSafety'|$translate)}} <i>{{::('editBiosafetyDecisionT.guidelineSafety'|$translate)}}</i></label>
+															<label ng-bind-html="::('editBiosafetyDecisionT.guidelineSafety'|$translate)"></label>
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 														<div class="control-group mt-2">
