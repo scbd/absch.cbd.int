@@ -1,7 +1,7 @@
 <div class="text-center mt-3">
     <header class="px-3 d-sm-none d-md-none">
         <nav class="navbar navbar-sm navbar-light bg-light rounded">
-            <a ng-href="{{url}}">
+            <a ng-href="{{url}}" target="_blank">
                 <span class="realm-base-acronym fw-bold color-green"> {{::('abschHeaderT.abs'|$translate)}} </span>
                 <span
                     class="realm-base-acronym text-uppercase color-green fw-bold">{{::('abschHeaderT.clearingHouse'|$translate)}}</span>
@@ -16,7 +16,7 @@
     </header>
     <header class="pt-2 d-none d-sm-inline-block d-md-inline-block">
         <div class="">
-            <a ng-href="{{url}}" class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3"> <span
+            <a ng-href="{{url}}" class="realm-base-acronym color-green mx-3 mx-md-3 px-md-3" target="_blank"> <span
                     class="fw-normal">{{::('abschHeaderT.absch'|$translate)}}</span>
                 <span if="!isDEV && !isTRG" class="ch-name fw-bold text-uppercase link-dark">
                     <span> {{::('abschHeaderT.accessBenefitSharing'|$translate)}} </span>

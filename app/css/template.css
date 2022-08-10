@@ -3400,8 +3400,8 @@ embed-footer{
     color: #666;
 }
 .km-control-group [km-form-languages] #btnGroupDrop1 {
-    padding: 7px;
-    font-size: 1rem;
+    /* padding: 7px; */
+    /* font-size: 1rem; */
 }
 
 .grecaptcha-badge {

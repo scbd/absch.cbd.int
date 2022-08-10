@@ -12,7 +12,8 @@ body.embed {
 body.embed scbd-header, body.embed bch-header,  body.embed bch-footer, 
 body.embed absch-header,  body.embed absch-footer, body.embed scbd-footer,
 body.embed .mastHead.bg-bch, body.embed .mastHead.bg-abs,
-body.embed #search-new #searchResult .search-tabs{
+body.embed #search-new #searchResult .search-tabs,
+body.embed #sendRecords{
     display: none!important
 }
 
