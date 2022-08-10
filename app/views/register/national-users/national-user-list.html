@@ -62,13 +62,13 @@
 
                     <div ng-switch="error.code + '-' + error.field">
                         <div class="alert alert-warning" ng-switch-when="mandatory-government">
-                            <b>{{::('nationalUserListT.oops'|$translate)}}</b> {{::('nationalUserListT.authorizedAccess'|$translate)}} absch@cbd.int {{::('nationalUserListT.authorizedAccessLink'|$translate)}}
+                            <span ng-bind-html="::('nationalUserListT.oops'|$translate)"></span> absch@cbd.int {{::('nationalUserListT.authorizedAccessLink'|$translate)}}
                         </div>
                         <div class="alert alert-warning" ng-switch-when="forbidden-">
-                            <b>{{::('nationalUserListT.oups'|$translate)}}</b> {{::('nationalUserListT.notAuthorized'|$translate)}}
+                            <span ng-bind-html="::('nationalUserListT.oups'|$translate)"></span>
                         </div>
                         <div class="alert alert-danger" ng-switch-default>
-                            <b>{{::('nationalUserListT.oops'|$translate)}}</b> {{::('nationalUserListT.somethingWentWrong'|$translate)}}<span ng-bind="error|json"></span>
+                            <span ng-bind-html="::('nationalUserListT.somethingWentWrong'|$translate)"></span> <span ng-bind="error|json"></span>
                         </div>
                     </div>
 

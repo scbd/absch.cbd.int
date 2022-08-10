@@ -166,8 +166,6 @@
                 <span ng-switch-when="cpbNationalReport4"> {{::('nraQuestionT.ForthNR'|$translate)}}</span>
             </span>
         </div>
-
-        <b>{{::('nraQuestionT.note'|$translate)}}</b> {{::('nraQuestionT.noteInfo'|$translate)}}
-
+        <span ng-bind-html="::('nraQuestionT.note'|$translate)"></span>
     </div>
 </div>

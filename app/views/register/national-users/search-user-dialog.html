@@ -84,10 +84,10 @@
 
             <div ng-switch="searchUserDialogCtrl.error.code">
                 <div class="alert alert-warning" ng-switch-when="forbidden">
-                    <b>{{::('searchUserDialogT.oups'|$translate)}}</b> {{::('searchUserDialogT.oupsInfo'|$translate)}}
+                    <span ng-bind-html="::('searchUserDialogT.oups'|$translate)"></span>
                 </div>
                 <div class="alert alert-danger" ng-switch-default>
-                    <b>{{::('searchUserDialogT.oops'|$translate)}}</b> {{::('searchUserDialogT.oopsInfo'|$translate)}}
+                    <span ng-bind-html="::('searchUserDialogT.oops'|$translate)"></span>
                     <br> <span ng-bind="searchUserDialogCtrl.error|json"></span>
                 </div>
             </div>

@@ -1,9 +1,7 @@
 {
     "actions": "Actions",
-    "oups": "Oups",
-    "oupsInfo": "We're sorry, but you are not authorized to nominate a user.",
-    "oops": "Oops",
-    "oopsInfo": "We're sorry, but something went wrong.",
+    "oups": "<b>Oups</b> We're sorry, but you are not authorized to nominate a user.",
+    "oops": "<b>Oops</b> We're sorry, but something went wrong.",
     "userToBeCreated": "User to be created:",
     "governmentAffiliationGranted": "Government affiliation will be granted:",
     "governmentAffiliationRevoked": "Government affiliation will be revoked:",

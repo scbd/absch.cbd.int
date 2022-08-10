@@ -23,7 +23,7 @@
     "type": "Type of document/measure",
     "otherTypeName": "Name of the other type of document/measure",
     "jurisdiction": "Area of jurisdiction",
-    "firstSelectCountry.": "Please first select a country.",
+    "firstSelectCountry": "Please first select a country.",
     "jurisdictionInfo": "Please specify the geographical area of application of the ABS measure. The measure could apply at regional or multilateral, national or federal, subnational or community levels. For multilateral or regional measures, please indicate which countries are covered by the measure by selecting from the drop down menu the relevant geographical or political/economic group. The list is extensive; therefore it is likely that that the specific group to which the measure applies is already listed. However, if the measure applies to a group of countries that is not covered by any of the existing groups, select each of the countries concerned by the measure separately from the drop down menu.",
     "jurisdictionRegional": "Please note that regional or multilateral measures only need to be registered once in the ABS Clearing-House and that each of the countries selected as being covered by the regional measure will have the measure displayed as part of their legal framework in their country profile. It is recommended that one country agrees to register the measure on behalf of the regional organization or the group of countries that share the same measure.",
     "jurisdictionRegions": "Country name(s) and/or Geographical or political/economic group(s)",

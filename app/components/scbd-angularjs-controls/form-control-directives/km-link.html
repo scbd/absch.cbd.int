@@ -39,8 +39,7 @@
 					<form name="linkForm">
 						<fieldset>
 							<div class="alert alert-warning" ng-if="linkForm.$error.url">
-								<strong>{{::('kmLinkT.warning'|$translate)}}</strong>
-								{{::('kmLinkT.specifiedValidUrl'|$translate)}}
+								<span ng-bind-html="::('kmLinkT.warning'|$translate)"></span>
 								<ul><li> {{::('kmLinkT.linkType'|$translate)}}</li></ul>
 							</div>
 							<div class="control-group" ng-class="{error: linkForm.editor.url.$invalid}">
