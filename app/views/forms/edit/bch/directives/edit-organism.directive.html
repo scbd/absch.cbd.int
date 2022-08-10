@@ -35,9 +35,7 @@
 										
 										<div class="col-sm-12">
 											<div class="km-control-group" required name="scientificName" caption="{{::('editOrganismT.scientificName'|$translate)}}">
-												<div class="help-block">
-													{{::('editOrganismT.scientificNameInfo'|$translate)}} <l>{{::('editOrganismT.OryzaSativa'|$translate)}}</l> {{::('editOrganismT.isScientificName'|$translate)}}
-												</div>
+												<div class="help-block" ng-bind-html="::('editOrganismT.scientificNameInfo'|$translate)"></div>
 												<input type="text" class="form-control" name="scientificName" ng-model="document.scientificName"/>
 											</div>
 										</div>
