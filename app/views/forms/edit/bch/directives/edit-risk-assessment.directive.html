@@ -213,7 +213,7 @@
 															<div class="km-yes-no" name="isForFoodSafety" ng-model="document.isForFoodSafety"></div>
 															<div ng-if="document.isForFoodSafety" style="padding-left:57px;">
 																<div class="control-group inner-padding">
-																	<label>{{::('editRiskAssessmentT.isForFoodSafetyInfo'|$translate)}} <i>{{::('editRiskAssessmentT.isForFoodSafetyInfoItalic'|$translate)}}</i></label>
+																	<label ng-bind-html="::('editRiskAssessmentT.isForFoodSafetyInfo'|$translate)"></label>
 																</div>															
 																<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 																<div class="control-group inner-padding">

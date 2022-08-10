@@ -27,10 +27,10 @@
 
             <div ng-switch="commitDialogCtrl.error.code">
                 <div class="alert alert-warning" ng-switch-when="forbidden">
-                    <b>{{::('commitDialogT.oups'|$translate)}}</b> {{::('commitDialogT.oupsInfo'|$translate)}}
+                    <span ng-bind-html="::('commitDialogT.oups'|$translate)"></span>
                 </div>
                 <div class="alert alert-danger" ng-switch-default>
-                    <b>{{::('commitDialogT.oops'|$translate)}}</b> {{::('commitDialogT.oopsInfo'|$translate)}}
+                    <span ng-bind-html="::('commitDialogT.oops'|$translate)"></span>
                     <br> <span ng-bind="commitDialogCtrl.error|json"></span>
                 </div>
             </div>

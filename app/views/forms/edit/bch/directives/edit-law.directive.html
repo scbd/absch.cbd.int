@@ -28,9 +28,7 @@
 									<div class="row">
 										<div class="col-sm-12">
 											<div class="km-control-group" name="government" required caption="{{::('editLawT.country'|$translate)}}">
-												<div class="help-block" ng-if="isEuMember">
-													<u><i>{{::('editLawT.countryInfoItalic'|$translate)}}</i></u>: 
-													{{::('editLawT.lawAppliesTo'|$translate)}} <u>{{::('editLawT.all'|$translate)}}</u> {{::('editLawT.EUMemebers'|$translate)}}
+												<div class="help-block" ng-if="isEuMember" ng-bind-html="::('editLawT.EUMembers'|$translate)">
 												</div>
 												<div afc-autocomplete required name="government" ng-disabled="userGovernment()" ng-model="document.government"
 												 source="options.countries" filter="genericFilter" mapping="genericMapping" selectbox="true" 
@@ -78,9 +76,7 @@
 									<div class="row">
 										<div class="col-xs-12">
 											<div class="km-control-group" name="type" required caption="{{::('editLawT.typeRegulation'|$translate)}}">
-												<div class="help-block">
-													{{::('editLawT.a'|$translate)}} <i>{{::('editLawT.law'|$translate)}}</i> {{::('editLawT.usuallyLegislation'|$translate)}} <i>{{::('editLawT.regulation'|$translate)}}</i> {{::('editLawT.usuallyProcess'|$translate)}}
-													 <i>{{::('editLawT.guideline'|$translate)}}</i> {{::('editLawT.usuallyDocument'|$translate)}} <i>{{::('editLawT.regulatorySummary'|$translate)}}</i> {{::('editLawT.textSummary'|$translate)}}
+												<div class="help-block" ng-bind-html="::('editLawT.typeRegulationInfo'|$translate)">
 												</div>
 												<div km-term-radio required ng-model="document.type" locales="document.header.languages"
 													terms="options.legislationAgreementTypes()" binding-type="term" show-other="true"></div>
@@ -151,10 +147,10 @@
 										<div class="col-sm-12">
 											<div class="km-control-group" name="description" caption="{{::('editLawT.description'|$translate)}}">
 												<div class="help-block">
-													<i>{{::('editLawT.objective'|$translate)}}</i> {{::('editLawT.example'|$translate)}} "{{::('editLawT.objectiveInfo'|$translate)}}"
+														<span ng-bind-html="::('editLawT.objective'|$translate)"></span>
 													<br/> <br/>
-													<i>{{::('editLawT.scopes'|$translate)}}</i> {{::('editLawT.example'|$translate)}} "{{::('editLawT.scopeInfo'|$translate)}}"
-												</div>
+														<span ng-bind-html="::('editLawT.scopes'|$translate)"></span>
+													</div>
 												<div km-rich-textbox ng-model="document.description" rows="4" placeholder="" locales="document.header.languages"></div>
 											</div>
 										</div>
