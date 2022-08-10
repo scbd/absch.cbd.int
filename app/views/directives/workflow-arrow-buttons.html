@@ -339,7 +339,7 @@
 
 
 
-                        <button id="workflowSaveDraft" type="button" class="btn btn-sm btn-primary" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
+                        <button id="workflowSaveDraft" type="button" class="btn btn-primary" ng-click="workflowScope.tab='draft';workflowScope.saveDraft()"
                         ng-disabled="workflowScope.loading" ng-show="workflowScope.security.canSaveDraft">
                             <i ng-show="workflowScope.tab=='draft' && (workflowScope.loading || workflowScope.security==undefined)" class="fa fa-spinner fa-spin"></i>
                             {{::('workflowButtonsT.saveDraft'|$translate)}}</button>
@@ -347,7 +347,7 @@
                             class="btn btn-sm" restriction-field="workingDocumentID" restriction-field-value="documentShare.workingDocumentID" 
                             identifier="documentShare.identifier" title="{{documentShare.title|lstring:locale}}" get-locales="getLocales()"></document-sharing>
                             <a rel="noopener" translation-url  ng-href="/register/{{documentType|urlSchemaShortName|encodeURIComponent}}" 
-                            class="btn btn-sm btn-primary text-white" id="close_button" ng-if="!isDialog">
+                            class="btn btn-primary text-white" id="close_button" ng-if="!isDialog">
                                     <i class="bi bi-x-circle-fill"></i> <span class="hidden-xs"></span> 
                             </a>                     
 
