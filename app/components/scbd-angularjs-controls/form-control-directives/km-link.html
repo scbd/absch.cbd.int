@@ -1,8 +1,8 @@
 ﻿<div style="margin-bottom:20px">
 	<div>
 		<div ng-transclude="linkControls" style="padding-bottom: 5px;">
-			<button type="button" class="btn btn-primary btn-sm" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="bi bi-plus"></i> {{::('kmLinkT.addFile'|$translate)}}</button>
-			<button type="button" class="btn btn-primary btn-sm" ng-click="addLink()" ng-if="isAllowLink()"><i class="bi bi-plus"></i> {{::('kmLinkT.addLink'|$translate)}}</button>
+			<button type="button" class="btn btn-outline-secondary btn-sm" ng-click="addFile()" ng-if="isAllowFile()" ng-disabled="!identifier"><i class="bi bi-plus"></i> {{::('kmLinkT.addFile'|$translate)}}</button>
+			<button type="button" class="btn btn-outline-secondary btn-sm" ng-click="addLink()" ng-if="isAllowLink()"><i class="bi bi-plus"></i> {{::('kmLinkT.addLink'|$translate)}}</button>
 		</div>
 
 		<div ng-transclude="linkDisplay">

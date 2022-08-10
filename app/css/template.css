@@ -3136,9 +3136,6 @@ div legend {
     background-color: #5bc0de !important;
     border-color: #46b8da !important;
 }
-#listOfRecords #select-dropdown #btnGroupDrop1.btn{
-    padding: 4px !important;
-}
 #RegisterPage .table>:not(caption)>*>* {
     padding: 0 !important;
 }

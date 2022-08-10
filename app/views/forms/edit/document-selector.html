@@ -15,7 +15,7 @@
     <div ng-transclude="selectRecords">   
         <div class="row">
             <div class="col-12">             
-                <button type="button" class="btn btn-primary btn-sm me-4" ng-click="openAddDialog();" ng-disabled="disabled">
+                <button type="button" class="btn btn-outline-secondary btn-sm me-4" ng-click="openAddDialog();" ng-disabled="disabled">
                     <i class="bi bi-plus" ng-if="!openingDialog"></i>
                     <i class="fa fa-spin fs-small-8 fa-spinner" ng-if="openingDialog"></i> 
                     <span ng-if="caption" ng-bind="caption"> </span>
