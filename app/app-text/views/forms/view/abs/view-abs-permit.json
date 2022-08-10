@@ -1,11 +1,7 @@
 {
     "generalInfo": "General Information",
-    "thisCertificate":    "THIS CERTIFICATE HAS BEEN",
-    "revoked": "REVOKED",
-    "updated": "UPDATED",
-    "noValid": "AND IS NO LONGER VALID",
-    "newVersion": "A NEW VERSION HAS BEEN CONSTITUTED AND",
-    "versionNoValid": "THIS VERSION IS NO LONGER VALID.",
+    "revokeCertificate":    "THIS CERTIFICATE HAS BEEN <u>REVOKED</u> AND IS NO LONGER VALID",
+    "updatedCertificate": "THIS CERTIFICATE HAS BEEN <u>UPDATED</u>. A NEW VERSION HAS BEEN CONSTITUTED AND <u>THIS VERSION IS NO LONGER VALID.</u>",
     "SeeAmendmentHistory": "See amendment history for more information.",
     "country": "Country",
     "uniqueIdentifier": "ABSCH Unique Identifier",
