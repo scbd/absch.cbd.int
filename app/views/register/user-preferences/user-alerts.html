@@ -82,7 +82,7 @@
         </div>
     </div>
     <br>
-    <button  ng-if="!loading" type="button" class="btn btn-primary btn-sm float-end add-edit-search rounded-1" ng-click="addEdit()">{{::('userAlertsT.addNew'|$translate)}}</button>
+    <button  ng-if="!loading" type="button" class="btn btn-primary btn-sm float-end add-edit-search rounded-1" ng-click="addEdit()"><i class="bi bi-plus"></i>{{::('userAlertsT.addNew'|$translate)}}</button>
     <div class="clearfix d-inline-block"></div>
     <div ng-if="loading" class="text-center mb-5"> <i class="fa fa-spinner fa-spin"></i> {{::('userAlertsT.loading'|$translate)}}</div>
     <div ng-show="!loading && (!userFilters || userFilters.length==0) && !showSystemAlerts">

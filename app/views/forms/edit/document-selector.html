@@ -15,7 +15,7 @@
     <div ng-transclude="selectRecords">   
         <div class="row">
             <div class="col-12">             
-                <button type="button" class="btn btn-primary btn-sm me-4" ng-click="openAddDialog();" ng-disabled="disabled">
+                <button type="button" class="btn btn-outline-secondary btn-sm me-4" ng-click="openAddDialog();" ng-disabled="disabled">
                     <i class="bi bi-plus" ng-if="!openingDialog"></i>
                     <i class="fa fa-spin fs-small-8 fa-spinner" ng-if="openingDialog"></i> 
                     <span ng-if="caption" ng-bind="caption"> </span>
@@ -200,8 +200,9 @@
                 <div class="row">
                     <div class="col-12">
 
-                        <a rel="noopener" translation-url  type="button" class="btn btn-primary float-end  me-1" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">{{::('documentSelectorT.select'|$translate)}}</a>
+                        
                         <a rel="noopener" translation-url  type="button" class="btn btn-secondary float-end me-1" ng-hide="allowNew.editingOn" ng-click="clearSelectedDocuments()">{{::('documentSelectorT.clearRecords'|$translate)}}</a>
+                        <a rel="noopener" translation-url  type="button" class="btn btn-primary float-end  me-1" ng-hide="allowNew.editingOn" ng-click="saveDocuments()">{{::('documentSelectorT.select'|$translate)}}</a>
 
                         <div class="dropdown  float-start me-1"  ng-if="allowNew.schemas && allowNew.schemas.length>1 && !allowNew.editingOn" class="ms-1">
                             <button class="btn btn-primary dropdown-toggle" type="button" data-bs-toggle="dropdown">
@@ -216,7 +217,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <a rel="noopener" href="#" type="button" class="btn btn-primary float-end  me-1" ng-if="allowNew.schemas && allowNew.schemas.length==1 && !allowNew.editingOn"
+                        <a rel="noopener" href="#" type="button" class="btn btn-primary float-start  me-1" ng-if="allowNew.schemas && allowNew.schemas.length==1 && !allowNew.editingOn"
                             ng-click="allowNew.editingOn=!allowNew.editingOn;loadEditDirective(allowNew.schemas[0])">
                             {{::('documentSelectorT.create'|$translate)}} <span ng-bind="allowNew.schemas[0]|schemaName"></span>
                         </a>

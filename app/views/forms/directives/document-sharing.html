@@ -1,10 +1,10 @@
 ﻿<div class="document-sharing">
-    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-share" ng-click="shareDocument()"
+    <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="shareDocument()"
     title="Share">
         <i class="fa fa-firefox"></i>
         <span class="d-none d-sm-inline-block">{{::('documentSharingT.share'|$translate)}}</span>
     </button>
-    <button ng-disabled="disabled" type="button" class="btn btn-primary btn-sm btn-pdf" ng-click="getPdf()"
+    <button ng-disabled="disabled" type="button" class="btn btn-primary" ng-click="getPdf()"
     title="PDF">
         <i class="fa fa-file-pdf-o"></i>
         <span class="d-none d-sm-inline-block">PDF</span>    
@@ -124,9 +124,6 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="row">
-                        <button type="button" class="btn btn-primary float-end" ng-click="close()" >{{::('documentSharingT.close'|$translate)}}</button>
-                    </div>
                 </div>
             </div>
         </div>
@@ -155,7 +152,6 @@
                 </div>
             </div> 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary float-end" ng-click="close()" >{{::('documentSharingT.close'|$translate)}}</button>
             </div>
         </div>
     </script>
