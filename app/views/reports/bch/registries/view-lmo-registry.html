@@ -25,8 +25,9 @@
 							 <a rel="noopener" translation-url href="/kb/tags/lmo-gene-orga/LMO-Unique-Identifiers-UIDs-/619c55400c1ff000011c1c28">{{::('viewLmoRegistryT.uniqueCode'|$translate)}}</a> 
 							 {{::('viewLmoRegistryT.lmoLink'|$translate)}}
 						</p>
-						<p class="fst-italic py-2 color-black fw-bold">Click <a class="text-decoration-underline" rel="noopener" translation-url
-							href="/search?currentPage=1&schema=modifiedOrganism">{{::('viewLmoRegistryT.here'|$translate)}}</a> {{::('viewLmoRegistryT.perform'|$translate)}}</p>
+						<p class="fst-italic py-2 color-black fw-bold">
+							<span ng-bind-html="::('viewLmoRegistryT.clickHere'|$translate)"></span>
+						</p>
 						<h1 class="text-center padding-top-10" ng-if="isLoading"><i class="fa fa-cog fa-spin"></i> {{::('viewLmoRegistryT.loading'|$translate)}}</h1>
 						<div ng-if="isError && !isLoading" class="alert alert-danger"><h3> {{::('viewLmoRegistryT.error'|$translate)}}</h3></div>
 						<div ng-if="!isLoading && !isError" class="mx-2">						

@@ -456,10 +456,7 @@
 												<div km-yes-no ng-model="document.isForCommercialUse" locales="document.header.languages"></div>
 												<div ng-if="document.isForCommercialUse" style="padding-left:50px; margin-top: 15px;">
 													<div class="control-group">
-														<label>
-															{{::('editBiosafetyDecisionT.isForCommercialUseInfo'|$translate)}} 
-															<a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> {{::('editBiosafetyDecisionT.isForCommercialUseLink'|$translate)}}</a>?
-														</label>
+														<label ng-bind-html="::('editBiosafetyDecisionT.isForCommercialUseInfo'|$translate)"></label>
 													</div>
 													<div class="km-yes-no" name="forwardToOECD" ng-model="document.forwardToOECD"></div>
 													<div class="control-group mt-2">
@@ -472,8 +469,7 @@
 														</div>
 														<div class="km-yes-no" name="codexConducted" ng-model="document.codexConducted"></div>
 														<div class="control-group mt-2">
-															<label>{{::('editBiosafetyDecisionT.codexConducted'|$translate)}}
-															<a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>{{::('editBiosafetyDecisionT.codexConductedLink'|$translate)}}</u></a>?</label>
+															<label ng-bind-html="::('editBiosafetyDecisionT.codexConducted'|$translate)"></label>
 														</div>
 														<div class="km-yes-no" name="forwardToFAO" ng-model="document.forwardToFAO"></div>
 													</div>

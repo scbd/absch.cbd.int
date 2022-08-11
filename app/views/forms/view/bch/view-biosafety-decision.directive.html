@@ -405,7 +405,7 @@
 				<km-value-bool value="document.isForCommercialUse" locales="locale"></km-value-bool>
 			</div>
 			<div ng-if="document.forwardToOECD!=undefined">
-				<label>{{::('viewDecT.isForCommercialUseInfo'|$translate)}} <a rel="noopener" translation-url href="https://biotrackproductdatabase.oecd.org/" target="_blank"> {{::('viewDecT.isForCommercialUseLink'|$translate)}}</a>?</label>
+				<label ng-bind-html="::('viewDecT.isForCommercialUseInfo'|$translate)"></label>
 				<div  compare-val>
 					<km-value-bool value="document.forwardToOECD" locales="locale"></km-value-bool>
 				</div>
@@ -423,7 +423,7 @@
 				</div>
 			</div>
 			<div ng-if="document.forwardToFAO!=undefined">
-				<label>{{::('viewDecT.codexConducted'|$translate)}} <a rel="noopener" translation-url href="https://www.fao.org/food/food-safety-quality/gm-foods-platform/en/" target="_blank"><u>{{::('viewDecT.codexConductedLink'|$translate)}}</u></a>?</label>
+				<label ng-bind-html="::('viewDecT.codexConducted'|$translate)"></label>
 				<div compare-val>
 					<km-value-bool value="document.forwardToFAO" locales="locale"></km-value-bool>
 				</div>
