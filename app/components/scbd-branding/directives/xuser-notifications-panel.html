@@ -4,7 +4,7 @@
         <div class="col-12">
             <div class="btn-group" role="group">
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span ng-if="!stateFilter || stateFilter=='All'">{{::('xuserNotificationsPanelT.all'|$translate)}}</span>
                         <span ng-if="stateFilter=='unread'">{{::('xuserNotificationsPanelT.unread'|$translate)}}</span>
                         <span ng-if="stateFilter=='read'">{{::('xuserNotificationsPanelT.read'|$translate)}}</span>
@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="btn-group" role="group">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <span ng-if="!typeFilter || typeFilter=='All'">{{::('xuserNotificationsPanelT.allTypes'|$translate)}}</span>
                         <span ng-if="typeFilter=='alert'"><i class="fa fa-bolt"> </i> {{::('xuserNotificationsPanelT.alerts'|$translate)}}</span>
                         <span ng-if="typeFilter=='message'"><i class="fa fa-envelope-o"> </i> {{::('xuserNotificationsPanelT.messages'|$translate)}}</span>
