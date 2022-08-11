@@ -21,14 +21,14 @@
                     <td colspan="1">{{link.meta.createdOn|formatDate}}</td>
                     <td colspan="1" class="d-none d-sm-table-cell">{{link.expiry|formatDate}}</td>
 					<td colspan="1"> 
-                        <span v-if="hasStatus('active', link)" class="action badge bg-success">{{ $t("active") }}</span>
-                        <span v-if="hasStatus('expired', link)" class="action badge bg-warning text-dark">{{ $t("expired") }}</span>
-                        <span v-if="hasStatus('revoked', link)" class="action badge bg-danger">{{ $t("revoked") }}</span>
+                        <span v-if="hasStatus('active', link)" class="badge bg-success">{{ $t("active") }}</span>
+                        <span v-if="hasStatus('expired', link)" class="badge bg-warning text-dark">{{ $t("expired") }}</span>
+                        <span v-if="hasStatus('revoked', link)" class="badge bg-danger">{{ $t("revoked") }}</span>
                     </td>
                     <td colspan="1" class="d-none d-sm-table-cell">
-                        <span v-if="hasStorageType('document', link)" style="display:initial" class="action badge bg-info">{{ $t("record") }}</span>
-                        <span v-if="hasStorageType('search', link)" style="display:initial" class="action badge bg-primary">{{ $t("search") }}</span>
-                        <span v-if="hasStorageType('country-profile', link)" style="display:initial" class="action badge bg-secondary">{{ $t("countryProfile") }}</span>
+                        <span v-if="hasStorageType('document', link)" style="display:initial" class="badge bg-info">{{ $t("record") }}</span>
+                        <span v-if="hasStorageType('search', link)" style="display:initial" class="badge bg-primary">{{ $t("search") }}</span>
+                        <span v-if="hasStorageType('country-profile', link)" style="display:initial" class="badge bg-secondary">{{ $t("countryProfile") }}</span>
                         <span v-if="link.shareType =='embed' && link.sharedData.domain">
                             <span class="fw-bold">{{ $t("embeddedIn") }}</span> {{link.sharedData.domain}}
                         </span>
@@ -41,7 +41,7 @@
                                     <i class="bi bi-chevron-up"></i>
                                 </a>                        
                                 <div class="mt-1 email-links collapse" :id="'toggle'+index"> 
-                                        <ul class="ms-3" v-if="link.sharedWith.emails.length > 0">
+                                        <ul class="ms-5" v-if="link.sharedWith.emails.length > 0">
                                             <li v-for="(email, e) in link.sharedWith.emails.split(',')" v-if="e!=0">
                                                 <span>{{email}}</span>
                                             </li>

@@ -535,11 +535,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-.shared-links .action {
-    display: inherit;
-    background-color: #5cb85c;
-    border-radius: 4px;
-}
+
 .shared-links .show-emails[aria-expanded=false] .bi-chevron-up {
   display: none;
 }
