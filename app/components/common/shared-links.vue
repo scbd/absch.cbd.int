@@ -51,7 +51,7 @@
                         </span>
                     </td>
 
-        			<td colspan="4" class="float-end">
+        			<td colspan="4">
                         <div class="input-group" >
                             <input v-if="link.shareType !='embed'" ref="textToCopy" type="text" width="100%" class="highlight form-control" :value="getUrl(link.urlHash)" disabled readonly/>
                             <div class="btn-group" role="group" aria-label="Basic outlined example">
