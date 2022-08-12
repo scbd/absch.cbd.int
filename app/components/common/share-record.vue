@@ -51,7 +51,7 @@
                     <span v-if="sharedData.type=='email'">
                       {{$t('emailSent')}}
                       <ul v-if="sharedData[sharedData.type].emailsSentTo && sharedData[sharedData.type].emailsSentTo.length>0">
-                        <li v-for="(email, index) in sharedData[sharedData.type].emailsSentTo" :key="index">{{email}}</li>
+                        <li v-for="(email, index) in sharedData[sharedData.type].emailsSentTo" :key="index" v-if="email && email.length>0">{{email}}</li>
                       </ul>
                     </span>
                   </div>
