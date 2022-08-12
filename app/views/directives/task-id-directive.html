@@ -105,7 +105,7 @@
                 </p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-warning px-3 rounded-0 float-end" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="bi bi-x-circle-fill"></i> {{::('taskIdT.reject'|$translate)}}</button>
+                <button type="button" class="btn btn-warning px-3 float-end" data-bs-dismiss="modal" ng-disabled="rejectForm.reason.$error.required" ng-click="updateActivity({ action : 'reject', reason: rejectReason })"><i class="bi bi-x-circle-fill"></i> {{::('taskIdT.reject'|$translate)}}</button>
             </div>
         </form>
     </script>
@@ -119,7 +119,7 @@
                 <h2>{{::('taskIdT.cancelPublishingRequestConfirm'|$translate)}}</h2>
             </div>
             <div class="modal-footer" style="margin-top:0">
-                 <button ng-disabled="loading==true" type="button" ng-click="cancelWorkflowRequest(workflow)" class="btn btn-primary rounded-0 px-3">{{::('taskIdT.yes'|$translate)}}</button>
+                 <button ng-disabled="loading==true" type="button" ng-click="cancelWorkflowRequest(workflow)" class="btn btn-primary px-3">{{::('taskIdT.yes'|$translate)}}</button>
             </div>
         </div>
     </script>
@@ -135,7 +135,7 @@
             <span ng-bind="document"></span>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-danger rounded-0 px-3 float-end" ng-click="updateActivity()" ng-disabled="isUpdating">
+            <button type="button" class="btn btn-danger px-3 float-end" ng-click="updateActivity()" ng-disabled="isUpdating">
                             <span class="hidden-xs">{{::('taskIdT.deleteRecord'|$translate)}}</span>
                         </button>
         </div>
