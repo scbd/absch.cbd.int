@@ -345,12 +345,12 @@
                 </div>
 
                 <div class="modal-footer">
-                        <button type="button"  ng-click="export()" class="btn btn-primary btn-sm rounded-0 record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'">
+                        <button type="button"  ng-click="export()" class="btn btn-primary btn-sm record-link-style" id="btnExport" ng-if="questionType!='documentReferenceIDs' && questionType!='relevantDocuments' && questionType!='number'">
                                 <i class="fa fa-spin fa-spinner" ng-if="exporting" ></i> 
                                 <i class="fa fa-table" aria-hidden="true" ng-if="!exporting"></i>
                                 {{::('analyzerT.export'|$translate)}}
                             </button>   
-                        <button type="button"  ng-click="print('#textsDialog-model-content')" class="btn btn-primary btn-sm rounded-0 record-link-style" id="btnPrint">
+                        <button type="button"  ng-click="print('#textsDialog-model-content')" class="btn btn-primary btn-sm record-link-style" id="btnPrint">
                             <i class="fa fa-spin fa-spinner" ng-if="printing" ></i> 
                             <i class="fa fa-print" aria-hidden="true" ng-if="!printing"></i>
                             {{::('analyzerT.print'|$translate)}}
