@@ -3419,3 +3419,7 @@ embed-footer{
 .km-rtl .input-group-text{
     width: 46px;
 }
+/* Since its not required on all pages, hide it and show only when required */
+#g-recaptcha{
+    display: none;
+}

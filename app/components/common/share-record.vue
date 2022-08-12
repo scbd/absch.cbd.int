@@ -4,7 +4,7 @@
       <i class="fa fa-paper-plane" aria-hidden="true"></i> {{ $t("share") }} 
     </a>
     <div class="modal fade" ref="shareModal" data-backdrop="static"  tabindex="-1" aria-hidden="true" id="share-modal">      
-      <div class="modal-dialog"  role="document">
+      <div class="modal-dialog modal-dialog-centered"  role="document">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">
@@ -163,8 +163,6 @@
                     </div>
                   </div>
               </div>
-              <invisible-recaptcha ref="shareRecaptcha" :sitekey="captchaV2BadgeKey" 
-                :elementId="'shareRecaptcha'" :badgePosition="'left'"></invisible-recaptcha>
             </div>
           </div>
         </div>
@@ -186,7 +184,7 @@ import DocumentShareApi from "~/api/document-share";
 import SubscriptionsApi from "~/api/subscriptions";
 import { Modal, Toast } from "bootstrap";
 import i18n from "../../app-text/components/common/share-record.json";
-import { getRecaptchaToken } from '~/services/reCaptcha'
+import { getRecaptchaToken, resetRecaptcha } from '~/services/reCaptcha'
 
 
 
@@ -281,6 +279,8 @@ export default {
         storageType: '',
         type       : 'link'
       };
+      this.loading = false;
+      resetRecaptcha();
       this.modal.hide();
     },
     async copy(id) {
@@ -503,12 +503,13 @@ export default {
 };
 </script>
 
-<style>
+<style >
     #shareRecord{
       display: inline;
     }
     .modal-body {
-      background: #ddd;
+      /* background: #ddd; */
+      color:black;
     }
     .wrapper {
       /* text-align: center; */
