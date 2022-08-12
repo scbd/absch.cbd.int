@@ -1,4 +1,4 @@
-import 'views/register/directives/register-top-menu';
+import '~/views/register/directives/register-top-menu';
 import sharedLinks from '~/components/common/shared-links.vue';
 export { default as template } from './shared-urls.html';
 export default ['$scope','apiToken',
