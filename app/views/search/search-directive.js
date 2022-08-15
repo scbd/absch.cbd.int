@@ -549,6 +549,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
                     async function init(){
 
+                        leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
                         loadFilters().then(()=>{
 
                             var query =  $location.search();
@@ -573,7 +574,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 $scope.searchResult.viewType = query.viewType;
 
                             if(query.searchShareQueryId){
-                                $scope.hideSubFilters = true;
+                                if(query.embed)
+                                    $scope.hideSubFilters = true;
                                 $scope.clearFilter();
                                 $scope.searchAlertError = '';
                                 const filters = localStorageService.get($routeParams.searchShareQueryId);
@@ -616,8 +618,6 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
                             $timeout(function(){updateQueryResult(currentPage);}, 200)
                         });
-
-                        leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
                         $scope.pageInitialized = true;
                     }
 
