@@ -28,7 +28,6 @@ export default ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 				params.identifier = docNum[3]+'@'+docNum[4]
 			}
 		}
-
 		var document = 			$http.get('/api/v2013/documents/' +  encodeURIComponent(params.identifier), { });
 		var documentInfo = 		$http.get('/api/v2013/documents/' +  encodeURIComponent(params.identifier) + '?info', { });
 
@@ -36,7 +35,6 @@ export default ['$scope','$http','$sce','$filter','$q', '$routeParams', 'realm',
 
 				$scope.document = result[0].data;
 				$scope.documentInfo = result[1].data;
-				$scope.realm = $scope.documentInfo.Realm;
 
 				var documentVersion=	$http.get('/api/v2013/documents/'+encodeURIComponent($scope.document.header.identifier)+'/versions?body=true&cache=true')
 				var qs = { q 	: { "identifier": $scope.document.header.identifier+"@"+$scope.documentInfo.revision }, fo 	: 1 }
