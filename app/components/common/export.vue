@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button" class="btn btn-default float-end" aria-label="Close" @click="closeDialog()" :disabled="loading">{{$t('cancel')}}</button>
+                        <button type="button" class="btn btn-secondary float-end" aria-label="Close" @click="closeDialog()" :disabled="loading">{{$t('cancel')}}</button>
                         <button type="button" class="btn btn-primary float-start" aria-label="Download" @click="exportRecords(downloadFormat)" :disabled="loading" id="downloadDataFile">
                             {{$t('download')}}
                         </button>    
