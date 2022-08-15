@@ -24,7 +24,7 @@
 			</div>
 		</div>
 
-        <button type="button" class="btn btn-outline-secondary btn-sm" ng-click="openContructDialog()"><i class="bi bi-plus color-white"></i>{{::('lmoConstructT.addConstruct'|$translate)}}</button>
+        <button type="button" class="btn btn-outline-secondary btn-sm" ng-click="openContructDialog()"><i class="bi bi-plus"></i>{{::('lmoConstructT.addConstruct'|$translate)}}</button>
     
     </div>
 
@@ -215,7 +215,7 @@
             </div>
         </div>
         <div class="modal-footer">
-            <button type="button" class="btn btn-default" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">{{::('lmoConstructT.cancel'|$translate)}}</button>
+            <button type="button" class="btn btn-secondary" aria-label="Close" ng-click="closeDialog()" ng-disabled="loading||forTour">{{::('lmoConstructT.cancel'|$translate)}}</button>
             <button type="button" class="btn btn-primary float-start" aria-label="Save" ng-click="saveConstruct()" >{{::('lmoConstructT.save'|$translate)}}</button>   
         </div>
 

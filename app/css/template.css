@@ -3223,7 +3223,6 @@ div legend {
 }
 #globalSearch{
     cursor: default;
-    vertical-align: bottom;
     font-size: 1rem;
 }
 #recordContent .btn-edit-record {
@@ -3412,4 +3411,11 @@ embed-footer{
 }
 .grecaptcha-badge:hover {
     width: 256px !important;
+}
+
+.km-rtl trix-editor{
+    width: calc(100% - 44px);
+}
+.km-rtl .input-group-text{
+    width: 46px;
 }

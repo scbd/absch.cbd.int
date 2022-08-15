@@ -93,7 +93,7 @@
                                                 <div class="help-info">
                                                     {{::('editAbsMeasureT.legalStatusInfo'|$translate)}}
                                                 </div>
-                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectStatus'|$translate)}}"></div>
+                                                <div class="col-sm-6 border-identical rounded-1" afc-autocomplete required name="status" ng-model="document.status" source="options.statuses" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectStatus'|$translate)}}"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -147,7 +147,7 @@
                                                 <div class="help-info">
                                                     {{::('editAbsMeasureT.jurisdictionInfo'|$translate)}}</div>
     
-                                                <div class="col-sm-6 border-identical" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectJurisdiction'|$translate)}}"></div>
+                                                <div class="col-sm-6 border-identical rounded-1" afc-autocomplete required name="jurisdiction" ng-model="document.jurisdiction" source="options.jurisdictions" filter="genericFilter" mapping="genericMapping" selectbox="true" placeholder="{{::('editAbsMeasureT.selectJurisdiction'|$translate)}}"></div>
                                                 <div ng-if="isJurisdictionRegional()">
                                                     <div class="color-red" ng-if="!document.government.identifier">{{::('editAbsMeasureT.firstSelectCountry'|$translate)}}</div>
                                                 </div>
