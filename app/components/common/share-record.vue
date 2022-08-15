@@ -306,7 +306,7 @@ export default {
       this.isValidEmail = true;
       try {
         this.loading = true;
-        this.sharedData[this.sharedData.type].emails = [...(new Set(emails.replace(/(,|;|\s)$/, '').split(/,|;| /g)))].join(',')
+        this.sharedData[this.sharedData.type].emails = [...(new Set(emails.replace(/(,|;|\s)$/, '').split(/,|;| /g)))].filter(e=>e).join(',')
 
         const captchaToken   = await getRecaptchaToken();
 
