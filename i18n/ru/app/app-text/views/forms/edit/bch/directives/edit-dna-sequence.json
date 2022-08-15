@@ -15,7 +15,7 @@
   "geographicCoordinates": "Географические координаты",
   "geographicCoordinatesInfo": "",
   "characteristicsSequence": "Характеристики кодирующей белок последовательности",
-  "proteinName": "",
+  "proteinName": "Название белка, экспрессированного с помощью данной кодирующей последовательности",
   "biologicalFunction": "Биологическая функция белка",
   "traits": "Связанный(-ые) признак(и) или использование в биотехнологии",
   "additionalInformation": "Дополнительная информация",

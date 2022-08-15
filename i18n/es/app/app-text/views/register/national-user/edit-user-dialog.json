@@ -1,6 +1,6 @@
 {
-  "newUser": "",
-  "contactDetails": "",
+  "newUser": "Usuario nuevo",
+  "contactDetails": "información de contacto",
   "nominee": "Sírvase completar la siguiente información de contacto básica de la persona designada",
   "firstName": "Nombre",
   "lastName": "Apellido",

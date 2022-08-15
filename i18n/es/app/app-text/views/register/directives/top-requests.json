@@ -1,12 +1,12 @@
 {
   "pendingRequests": "Solicitudes pendientes",
   "loading...": "cargando...",
-  "publish": "",
-  "delete": "",
-  "SCBDReview": "",
-  "pending": "",
-  "your": "",
-  "approval": "",
+  "publish": "PUBLICAR",
+  "delete": "BORRAR",
+  "SCBDReview": "PENDIENTE DE EXAMEN POR PARTE DE LA SECRETARÍA DEL CDB",
+  "pending": "PENDIENTE",
+  "your": "SU",
+  "approval": "APROBACIÓN",
   "expiresOn": "Expira el",
-  "seeMore": ""
+  "seeMore": "Más información"
 }

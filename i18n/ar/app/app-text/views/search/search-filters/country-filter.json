@@ -1,7 +1,7 @@
 {
   "countries": "البلدان",
-  "all": "",
-  "parties": "",
-  "nonParties": "",
-  "ratified": ""
+  "all": "الكل",
+  "parties": "الأطراف",
+  "nonParties": "غير الأطراف",
+  "ratified": "صدقت على البروتوكول لكنها ليست طرفًا بعد"
 }

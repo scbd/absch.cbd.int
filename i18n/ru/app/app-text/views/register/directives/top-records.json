@@ -1,11 +1,11 @@
 {
-  "latestTenRecords": "",
-  "status": "",
-  "title": "",
-  "updatedBy": "",
+  "latestTenRecords": "Последние 10 записей",
+  "status": "Статус",
+  "title": "Название",
+  "updatedBy": "Обновлено",
   "published": "Опубликовано",
   "draft": "Черновик",
-  "request": "",
+  "request": "Запрос",
   "on": "",
   "seeMore": ""
 }

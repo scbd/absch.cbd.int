@@ -1,14 +1,12 @@
 {
   "actions": "行动",
   "oups": "",
-  "oupsInfo": "抱歉，但您没有提名用户的授权。",
   "oops": "",
-  "oopsInfo": "抱歉，但出错了。",
   "userToBeCreated": "要创建的用户：",
   "governmentAffiliationGranted": "将授予政府隶属关系：",
   "governmentAffiliationRevoked": "将撤销政府隶属关系：",
   "granted": "要授予的角色：",
   "revoked": "要撤销的角色：",
   "cancel": "取消",
-  "proceed": ""
+  "proceed": "继续"
 }

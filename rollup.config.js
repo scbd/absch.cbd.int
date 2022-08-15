@@ -15,7 +15,7 @@ import injectCssToDom           from './rollup/inject-css-to-dom';
 import resolveLocalized         from './rollup/resolve-localized';
 import stripBom                 from './rollup/strip-bom';
 
-const isWatchOn = process.argv.includes('--watch');
+const isWatchOn = false;//process.argv.includes('--watch');
 const outputDir = 'dist';
 
 let externals = [
@@ -29,7 +29,7 @@ export default async function(){
   
   externals = [...externals, ...await loadExternals()];
 
-  const locales = isWatchOn ? ['en']
+  const locales = isWatchOn ? ['es', 'fr', 'ar', 'en']
                             : ['en', 'es', 'fr', 'ar', 'ru', 'zh'];
   
   return[

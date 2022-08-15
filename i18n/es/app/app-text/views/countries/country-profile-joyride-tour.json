@@ -1,11 +1,11 @@
 {
   "countryProfiles": {
     "title": "Perfiles de los países",
-    "content": ""
+    "content": "La lista desplegable de los \"Perfiles de los países\" que se encuentra en la barra de navegación superior permite seleccionar un país para ver la página de su perfil.<br><br> Es posible acceder a un panorama general de los registros nacionales de todos los países.<br><br> Exploremos el rubro \"Panorama general - Lista de todos los países\"."
   },
   "listOfRecords": {
     "title": "Lista de registros",
-    "content": "En esta página, se accede a un panorama de todos los registros nacionales. Los números que se muestran en círculos negros representan la cantidad total de registros publicados en cada tipo de registro. <br><br> <u> PFN) para ver el título completo del tipo de registro nacional."
+    "content": "En esta página, se accede a un panorama de todos los registros nacionales. Los números que se muestran en círculos negros representan la cantidad total de registros publicados en cada tipo de registro. Los números que aparecen en <span style='color:#1FA65D;'>recuadros grises</span> indican la cantidad de registros de este tipo para un país determinado.<br><br> <u>Consejo:</u> coloque el cursor en una sigla (por ejemplo, PFN) para ver el título completo del tipo de registro nacional."
   },
   "sortingRecords": {
     "title": "Organización de los registros",
@@ -17,7 +17,7 @@
   },
   "sortingRecordsCountries": {
     "title": "Organización de los registros: Países",
-    "content": "</u> "
+    "content": "Haga clic para seleccionar uno o múltiples países.<br><br><u> Consejo:</u> haga clic en el nombre de un país en el <span style='color:#1FA65D;'>recuadro gris</span> para ir directamente a la página del perfil del país."
   },
   "sortingRecordsPartyStatus": {
     "title": "Organización de los registros: Situación de la Parte",
@@ -25,7 +25,7 @@
   },
   "sortingRecordsRegions": {
     "title": "Organización de los registros: Regiones",
-    "content": "Haga clic aquí para filtrar por región. </u> "
+    "content": "Haga clic aquí para filtrar por región. Se pueden seleccionar múltiples regiones o subregiones.<br><br><u> Consejo:</u> para buscar por los cinco grupos regionales de las Naciones Unidas, escriba 'CDB' en el recuadro de búsqueda y luego seleccione la región o regiones de su interés."
   },
   "exportingRecords": {
     "title": "Exportar registros",
@@ -37,6 +37,6 @@
   },
   "needMoreHelp": {
     "title": "¿Necesita más ayuda?",
-    "content": "Use la función de chat para enviarnos un mensaje si necesita más ayuda."
+    "content": "Use la función de Chat para enviarnos un mensaje si necesita más ayuda."
   }
 }

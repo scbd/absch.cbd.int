@@ -1,12 +1,12 @@
 {
-  "since": "",
-  "partyToThe": "",
-  "nonParty": "Не является Стороной",
-  "nonPartyToCartagena": "",
+  "since": "с",
+  "partyToThe": "Сторона",
+  "nonParty": "Государство, не являющееся Стороной",
+  "nonPartyToCartagena": "Государство, не являющееся Стороной Картахенского протокола",
   "cartagenaProtocol": "Картахенский протокол по биобезопасности",
-  "ratified": "",
-  "signatory": "",
+  "ratified": "Ратифицировавшее, но еще не являющееся Стороной государство",
+  "signatory": "Подписавшее государство",
   "entersIntoForce": "",
-  "suppProtocol": "",
-  "nagoyaProtocol": ""
+  "suppProtocol": "Дополнительный протокол",
+  "nagoyaProtocol": "Нагойский протокол"
 }

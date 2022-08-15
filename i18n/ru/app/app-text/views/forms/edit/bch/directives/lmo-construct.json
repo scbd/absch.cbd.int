@@ -4,11 +4,11 @@
   "geneConstructInfo": "Чтобы добавить форму к конструкции, перетащите ее с помощью мыши в место сброса",
   "dragConstruct": "Чтобы удалить конструкцию, перетащите форму в это место",
   "dropLocation": "Место сброса",
-  "Cancel": "Отменить",
+  "cancel": "Отменить",
   "save": "Сохранить",
-  "transcriptionStart": "",
-  "transcriptionStop": "",
-  "transcriptionElement": "",
+  "transcriptionStart": "начало транскрипции",
+  "transcriptionStop": "окончание транскрипции",
+  "transcriptionElement": "транскрипционный элемент",
   "selectGene": "выбрать ген",
   "kb": "КБ"
 }

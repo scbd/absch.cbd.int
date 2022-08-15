@@ -1,34 +1,34 @@
 {
   "welcome": {
     "title": "Bienvenido a la sección que permite agregar un registro nuevo",
-    "content": "<p>    Publicar</p>"
+    "content": "<p>En esta página se puede agregar (crear) un registro nuevo. <br>Para agregar un registro nuevo hay que dar cuatro pasos principales: <br>Paso 1: Introducción<br> Paso 2: Formulario de presentación<br> Paso 3: Revisión<br> Paso 4: Publicar</p>"
   },
   "introduction": {
     "title": "Agregar un registro nuevo: Introducción",
-    "content": "<p></p>"
+    "content": "<p>En la \"Introducción\" se presenta un resumen breve del tipo de registro seleccionado e instrucciones sobre el modo de presentar la información.</p>"
   },
   "submissionForm": {
     "title": "Agregar un registro nuevo: Formulario de presentación",
-    "content": "</u>  En algunos campos se presenta texto descriptivo, que es una ayuda para completar el formulario."
+    "content": "Completar los campos que figuran en el \"Formulario de presentación\".<br><u> Nota:</u> los campos marcados con un asterisco <span style='color: red;'>rojo</span> (<span style='color: red;'>*</span>) son obligatorios. En algunos campos se presenta un texto descriptivo, que es una ayuda para completar el formulario."
   },
   "saveDraft": {
     "title": "Guardar un borrador",
-    "content": " una vez que se ha guardado el borrador, podrá enviarlo por correo electrónico o exportarlo como PDF."
+    "content": "Se recomienda guardar el registro periódicamente durante el proceso de presentación. <br>También se puede guardar el registro como borrador y continuar con la presentación en otro momento.<br><u> Nota</u>: una vez que se ha guardado el borrador, podrá enviarlo por correo electrónico o exportarlo como PDF."
   },
   "review": {
     "title": "Agregar un registro nuevo: Revisión",
-    "content": " Asegúrese de completarlos para pasar a publicar el registro."
+    "content": "Una vez que se ha completado el \"Formulario de presentación\", haga clic aquí para revisarlo. <br>Si no se han completado los campos obligatorios, en la \"Revisión\" aparecerán destacados. Asegúrese de completarlos para pasar a publicar el registro."
   },
   "publish": {
     "title": "Publicar",
-    "content": "Hacer clic en \"Publicar\" para completar el proceso"
+    "content": "Haga clic en \"Publicar\" para completar el proceso"
   },
   "needHelp": {
     "title": "¿Necesita ayuda?",
-    "content": "<p></p>"
+    "content": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con el proceso de presentación.</p>"
   },
   "needMoreHelp": {
     "title": "¿Necesita más ayuda?",
-    "content": "<p></p>"
+    "content": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>"
   }
 }

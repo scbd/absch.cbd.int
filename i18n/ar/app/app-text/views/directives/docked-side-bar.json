@@ -1,9 +1,9 @@
 {
-  "back": "",
-  "loading": "",
-  "noHelp": "لا تتوفر معلومات مساعدة",
+  "back": "السابق",
+  "loading": "قيد التحميل",
+  "noHelp": "معلومات المساعدة غير متاحة",
   "contactUs": "اتصل بنا",
   "linkagesPolicy": "سياسة الروابط",
   "disclaimer": "إخلاء المسؤولية",
-  "search": ""
+  "search": "بحث"
 }

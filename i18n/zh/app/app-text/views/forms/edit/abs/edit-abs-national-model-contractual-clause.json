@@ -1,8 +1,8 @@
 {
   "generalInfo": "一般信息",
   "languageToPublish": "请选择您希望提交之记录的语言：",
-  "country": " 国家",
-  "title": " ",
+  "country": "1.国家",
+  "title": "2.称谓：",
   "selectOption": "请选择一个国家...",
   "summary": "3.摘要",
   "jurisdiction": "4.辖区：",
@@ -17,7 +17,7 @@
   "attachments": "附件",
   "resourceLinks": "资源链接",
   "relevantInformation": "8. a) 关于附件的相关信息：",
-  "relevantDocuments": "",
-  "notes": "备注",
-  "notesInfos": "“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+  "relevantDocuments": "8. b) 请附加相关文件、文档或资源",
+  "notes": "注",
+  "notesInfos": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
 }

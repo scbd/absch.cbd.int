@@ -11,10 +11,10 @@
   "yes": "Да",
   "no": "Нет",
   "not": "НЕТ",
-  "searchRelation": "",
-  "loading": "",
+  "searchRelation": "Поиск по связи",
+  "loading": "загрузка ...",
   "searchRelated": "Поиск связанных элементов",
   "cancel": "Отменить",
   "apply": "Применить",
-  "searchIn": ""
+  "searchIn": "Поиск в:"
 }

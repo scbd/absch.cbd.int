@@ -7,8 +7,8 @@
   "jurisdiction": "Zona de jurisdicción",
   "authority": "Autoridad(es) para recibir las copias de cortesía de los comunicados del punto de verificación",
   "authorityInfo": "Los contactos indicados a continuación recibirán copias por correo electrónico de los comunicados del punto de verificación que contengan información recopilada o recibida y publicada originada en ese punto de verificación.",
-  "allCnaOne": "",
-  "allCnaTow": "",
+  "allCnaOne": "Todas las autoridades nacionales competentes designadas",
+  "allCnaTow": "han sido seleccionadas para recibir automáticamente por correo electrónico los comunicados del punto de verificación publicados que se hayan originado en dicho punto de verificación.",
   "noAddAuthorities": "No se han seleccionado autoridades adicionales para recibir las copias automáticas por correo electrónico de los comunicados del punto de verificación publicados por dicho punto de verificación.",
   "additionalInformation": "Información adicional",
   "relevantLinks": "Otros enlaces o documentos adjuntos pertinentes"

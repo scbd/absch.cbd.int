@@ -1,9 +1,9 @@
 {
   "generalInfo": "Información general",
   "languageToPublish": "Sírvase seleccionar el/los idioma(s) en los que desea presentar este registro:",
-  "country": " País",
-  "title": " Título",
-  "selectOption": "",
+  "country": "1. País",
+  "title": "2. Título:",
+  "selectOption": "Seleccione un país…",
   "summary": "3. Resumen",
   "jurisdiction": "4. Zona de jurisdicción:",
   "jurisdictionInfo": "Jurisdicción en la que esta cláusula contractual modelo es pertinente.",
@@ -17,7 +17,7 @@
   "attachments": "Adjuntos",
   "resourceLinks": "Enlace al/a los recurso(s)",
   "relevantInformation": "8. a) Información pertinente sobre el/los adjunto(s):",
-  "relevantDocuments": "",
-  "notes": "",
+  "relevantDocuments": "8. b) Sírvase adjuntar archivos, documentos o recursos pertinentes.",
+  "notes": "Notas",
   "notesInfos": "El campo “Notas” es para referencia personal y solo puede verse mientras se edita el registro. Se ocultará una vez que se haya publicado el registro. Este campo no está destinado a ser usado para información confidencial."
 }

@@ -1,42 +1,42 @@
 {
   "welcome": {
     "title": "Bienvenidos a la página Presentar: Tablero de control",
-    "content": "<p> </p>"
+    "content": "<p>El Tablero de control es su espacio de trabajo personal. Aquí puede ver, presentar, examinar y editar registros, según cuál sea su función como usuario, así como actualizar la información de su perfil.</p>"
   },
   "personalInformation": {
     "title": "Su información personal",
-    "content": "<p> </p>"
+    "content": "<p>La sección \"Bienvenidos\" se abre al hacer clic en la \"flecha hacia abajo\". Aquí es posible ver y actualizar la información de su perfil.</p>"
   },
   "recordOverview": {
-    "title": "",
-    "content": "<p> </p>"
+    "title": "Panorama general de los registros",
+    "content": "<p>En esta sección se categorizan los registros como <i>Registros nacionales</i> y <i>Registros de referencia</i> y se muestra cada uno de ellos según cuál sea su función como usuario. También se muestra el estado de diferentes registros.</p>"
   },
   "yourRecordsStatus": {
     "title": "Sus registros: situación",
-    "content": "<p> </p>"
+    "content": "<p>Las últimas tres columnas indican el estado de los registros para cada tipo de registro. Los números que figuran en cada columna indican el número de registros publicados, los registros que son borradores y los registros aún pendientes de aprobación. <br><br><u>Consejo:</u> haga clic en cualquier número para ver la lista de todos los registros y su situación en relación con el tipo de registro seleccionado.</p>"
   },
   "yourRecordsOffline": {
     "title": "Sus registros: formatos fuera de línea",
-    "content": "<p> </p>"
+    "content": "<p>En esta columna puede ver y descargar los formatos fuera de línea en el idioma que usted elija. <br>Los formatos fuera de línea son archivos Word que contienen la misma información que el \"Formulario de presentación\" en línea. Su objetivo principal es servir de ayuda para recopilar la información antes de presentarla en línea.</p>"
   },
   "quickView": {
     "title": "Vista rápida",
-    "content": "<p></p>"
+    "content": "<p>Haga clic en la \"flecha hacia abajo\" para ver los últimos 10 registros.</p>"
   },
   "addNewRecord": {
     "title": "Agregar un registro nuevo",
-    "content": "<p></p>"
+    "content": "<p>Haga clic en el símbolo “+” para crear un registro nuevo.</p>"
   },
   "viewAllRecords": {
     "title": "Ver todos los registros",
-    "content": "<p> </u>  </p>"
+    "content": "<p>Haga clic en el símbolo “Lista” para ver un resumen de todos los registros relacionados con el tipo de registro correspondiente. En la página que se abre podrá filtrar los registros existentes y crear nuevos, así como duplicar, editar o borrar un registro.<br><br><u> Consejo:</u>  también puede hacer clic en el título del tipo de registro (por ejemplo, haga clic en \"Contacto (CON)\").</p>"
   },
   "needHelp": {
     "title": "¿Necesita ayuda?",
-    "content": "<p></p>"
+    "content": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con el Tablero de control.</p>"
   },
   "needMoreHelp": {
     "title": "¿Necesita más ayuda?",
-    "content": "<p></p>"
+    "content": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>"
   }
 }

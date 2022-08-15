@@ -1,5 +1,5 @@
 {
   "userPreferences": "Preferencias del usuario",
-  "emailNotification": "",
-  "keepUpToDate": ""
+  "emailNotification": "Notificaciones de correo electrónico y búsquedas predefinidas",
+  "keepUpToDate": "Mantener actualizado cuando se publican registros."
 }

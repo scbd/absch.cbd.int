@@ -1,12 +1,12 @@
 {
-  "newUser": "",
-  "contactDetails": "",
+  "newUser": "مستخدم جديد",
+  "contactDetails": "تفاصيل الاتصال",
   "nominee": "يُرجى تعبئة تفاصيل الاتصال الأساسية التالية للمرشح",
   "firstName": "الاسم الأول",
   "lastName": "الاسم الأخير",
-  "organization": "المنظمة/المؤسسة",
+  "organization": "",
   "email": "البريد الإلكتروني",
-  "mandatory": "",
+  "mandatory": "هذه الخانة إلزامية",
   "emailIncomplete": "البريد الإلكتروني غير صالح أو غير مكتمل",
   "cancel": "إلغاء",
   "next": "التالي"

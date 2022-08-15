@@ -13,7 +13,7 @@
   "jobTitle": "Должность",
   "department": "Управление/отдел/подразделение",
   "startDate": "Дата поступления на работу",
-  "endDate": "Дата окончания",
+  "endDate": "Дата увольнения",
   "responsibilities": "Основные области ответственности",
   "employmentHistory": "Трудовой стаж",
   "countriesWorked": "Страны или регионы, в которых работал эксперт",
@@ -35,6 +35,6 @@
   "otherLanguages": "Другие языки",
   "language": "Язык",
   "level": "Уровень",
-  "otherRelevantInformation": "Любая другая актуальная информация.",
+  "otherRelevantInformation": "",
   "additionalDocuments": "Адреса других соответствующих веб-сайтов/или прилагаемые документы"
 }

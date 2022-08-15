@@ -1,12 +1,12 @@
 {
-  "recordsReferencing": "",
-  "showInSearch": "",
+  "recordsReferencing": "السجلات التي تشير إلى هذه الوثيقة",
+  "showInSearch": "إظهار في البحث",
   "recordType": "نوع السجل",
   "field": "المجال",
-  "records": "",
-  "hide": "",
+  "records": "السجلات",
+  "hide": "إخفاء",
   "show": "إظهار",
-  "country": "",
+  "country": "البلد",
   "title": "العنوان",
   "updatedOn": "تاريخ التحديث"
 }

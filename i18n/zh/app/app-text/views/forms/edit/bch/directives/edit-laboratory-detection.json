@@ -17,11 +17,11 @@
   "detectableGenes": "可由实验室探测的基因片段",
   "timeFrame": "确认或更新信息的时间表",
   "timeFrameInfo": "请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。在此阶段之后，如果没有收到确认，该记录将被标记为“未确认”。",
-  "additionalInformation": "更多信息",
+  "additionalInformation": "额外信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",
   "relevantInformation": "其它相关信息",
-  "relevantDocumentsInfo": "",
-  "notes": "备注",
-  "notesInfo": "“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+  "relevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档",
+  "notes": "注",
+  "notesInfo": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
 }

@@ -19,8 +19,8 @@
   "yes": "Sí",
   "no": "No",
   "shortDescriptionRegulatory": "Descripción detallada de las funciones normativas",
-  "ShortDescriptionResponsibilities": "",
-  "additionalInformation": "",
+  "ShortDescriptionResponsibilities": "Descripción breve de las responsabilidades de la autoridad competente.",
+  "additionalInformation": "Información adicional",
   "otherRelevantWebsite": "Otras direcciones de sitios web y/o documentos adjuntos pertinentes",
-  "administrativeFunctions": ""
+  "administrativeFunctions": "Funciones administrativas"
 }

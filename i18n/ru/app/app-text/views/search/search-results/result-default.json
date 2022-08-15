@@ -1,9 +1,9 @@
 {
   "close": "Закрыть",
-  "implementedBy": "",
-  "executedBy": "",
-  "collaboration": "",
+  "implementedBy": "Осуществлено",
+  "executedBy": "выполнено",
+  "collaboration": "в сотрудничестве с",
   "author": "Автор(ы):",
-  "organizations": "",
+  "organizations": "Организации",
   "source": "ИСТОЧНИК:"
 }

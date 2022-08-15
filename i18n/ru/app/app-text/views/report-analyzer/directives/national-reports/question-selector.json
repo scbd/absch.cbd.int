@@ -1,0 +1,16 @@
+{
+  "nationalReport": "Национальный доклад",
+  "filter": "",
+  "breakdownRegions": "Разбивка по регионам КБР",
+  "selectCountries": "Выбрать страны",
+  "selectRegions": "Выбрать регионы",
+  "protocolParties": "",
+  "protocolNonParties": "",
+  "nklsParty": "",
+  "selectMessage": "Страны или регионы не выбраны",
+  "allQuestions": "Все вопросы и/или разделы доклада",
+  "surveyQuestion": "Вопрос обследования",
+  "question": "Вопрос",
+  "countries": "",
+  "regions": "Регионы"
+}

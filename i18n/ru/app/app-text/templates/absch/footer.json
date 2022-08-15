@@ -4,15 +4,15 @@
   "aboutNagoya": "О Нагойском протоколе",
   "searchRecords": "Поиск записей",
   "submitRecords": "Представить записи",
-  "countryProfiles": "",
+  "countryProfiles": "Профили стран",
   "nra": "Анализатор национальных докладов",
   "abs": "ДРГСИВ",
-  "help": "",
-  "introduction": "",
-  "howMonitoring": "",
+  "help": "Нужна помощь?",
+  "introduction": "Вводная информация о МП-ДГРСИВ",
+  "howMonitoring": "Как осуществляется мониторинг использования",
   "gettingStarted": "Начало работы",
-  "InfoSharingObligations": "",
-  "interoperability": "",
+  "InfoSharingObligations": "Обязательства по обмену информацией",
+  "interoperability": "Функциональная совместимость",
   "offlineFormats": "Оффлайновые общие форматы",
-  "contactUs": ""
+  "contactUs": "Свяжитесь с нами"
 }

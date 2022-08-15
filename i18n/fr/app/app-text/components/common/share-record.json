@@ -5,12 +5,13 @@
   "embed": "",
   "share": "Partager",
   "send": "Émetteur",
-  "modalTitle": "Partager",
+  "modalTitleLink": " ",
+  "modalTitleEmbed": " ",
+  "modalTitleEmail": " Envoyé par email",
   "copy": "Copie",
   "clipboardSuccess": "",
   "processing": "En cours",
   "copyToClipboard": "",
-  "by": "",
   "selectOneOption": "Veuillez choisir une option",
   "emailSent": "",
   "generateLink": "",
@@ -24,5 +25,8 @@
   "cancel": "Fermer",
   "searchResultLinkError": "",
   "emailError": "",
-  "embedCodeError": ""
+  "embedCodeError": "",
+  "excessEmailError": "",
+  "requireLogin": "",
+  "signIn": "Ouvrir une session"
 }

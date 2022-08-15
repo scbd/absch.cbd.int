@@ -1,6 +1,6 @@
 {
   "generalInfo": "一般信息",
-  "title": "称谓",
+  "title": "标题",
   "name": "基因片段名称",
   "synonymNames": "备选基因片段名称（同义词）",
   "abbreviation": "缩写",
@@ -16,6 +16,6 @@
   "proteinName": "编码序列表达之蛋白质的名称",
   "biologicalFunction": "该蛋白质的生物功能",
   "traits": "生物科技中的相关性状或用途",
-  "additionalInformation": "更多信息",
+  "additionalInformation": "",
   "anyOtherInformation": "其他相关网站地址和/或附加文件"
 }

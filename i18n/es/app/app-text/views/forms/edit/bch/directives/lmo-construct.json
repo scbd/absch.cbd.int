@@ -4,11 +4,11 @@
   "geneConstructInfo": "Por favor, utilice el ratón para arrastrar la forma a fin de agregar el constructo en una ubicación en la que soltarlo",
   "dragConstruct": "Arrastre la forma aquí para eliminar el constructo",
   "dropLocation": "Ubicación para soltar",
-  "Cancel": "Cancelar",
+  "cancel": "Cancelar",
   "save": "Guardar",
-  "transcriptionStart": "",
-  "transcriptionStop": "",
-  "transcriptionElement": "",
+  "transcriptionStart": "empieza transcripción",
+  "transcriptionStop": "se detiene transcripción",
+  "transcriptionElement": "elemento de la transcripción",
   "selectGene": "seleccionar gen",
   "kb": ""
 }

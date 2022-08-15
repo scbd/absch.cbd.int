@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "",
-  "loading": "",
+  "lastUpdated": "تاريخ آخر تحديث:",
+  "loading": "قيد التحميل ...",
   "show10": "عرض 10 سجلات تالية",
-  "showRemaining": "",
-  "records": "سجلات",
+  "showRemaining": "عرض السجلات",
+  "records": "الباقية",
   "selectMeasures": "حدّد تدابير الحصول على الموارد وتقاسم المنافع التي سيتم عرضها في النبذة العامة",
-  "entry": "",
+  "entry": "تاريخ السريان:",
   "adoption": "",
-  "until": "",
-  "retired": "موقوف أو معطل"
+  "until": "حتى",
+  "retired": ""
 }

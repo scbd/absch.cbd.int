@@ -5,6 +5,8 @@
   "lmoIdentityInfo": "En la imagen que se encuentra abajo se identifica el OVM mediante su identificador único, nombre comercial y enlace a esta página del CIISB. Haga clic en el enlace para descargar una imagen más grande en su computadora. Para obtener ayuda sobre cómo utilizarlo, vaya a las páginas de enlace rápido al OVM.",
   "name": "Nombre",
   "transformationEvent": "Eventos de transformación",
+  "hasUniqueIdentification": "¿Este OVM tiene un identificador único?",
+  "hasUniqueIdentificationInfo": "El CIISB está utilizando actualmente el sistema de identificador único que figura en la Guía de la OCDE para la designación de los identificadores únicos para los vegetales transgénicos (por ejemplo, MON-ØØ81Ø-6). Para obtener más información consulte",
   "uniqueIdentification": "Identificador único",
   "developer": "Creador(es)",
   "description": "Descripción",

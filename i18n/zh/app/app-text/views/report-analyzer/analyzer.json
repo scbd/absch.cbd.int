@@ -4,9 +4,9 @@
   "breakdownCbdRegions": "按生物多样性公约地区细分",
   "selectCountries": "选择国家或地区",
   "selectRegions": "选择地区",
-  "breakdownProtocolParties": "",
+  "breakdownProtocolParties": "按议定书缔约方细分",
   "breakdownProtocolNonParties": "按议定书非缔约方细分",
   "nationalReportAnalyzer": "国家报告分析器",
   "nationalReportAnalyzerInfo": "此工具让您可以选择报告的特定部分或问题，并按国家或地区显示结果。",
-  "analyze": ""
+  "analyze": "分析"
 }

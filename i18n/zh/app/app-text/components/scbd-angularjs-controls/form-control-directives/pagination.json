@@ -1,9 +1,9 @@
 {
-  "page": "",
+  "page": "页码",
   "of": "/",
-  "next": "",
-  "first": "第一次",
-  "last": "",
+  "next": "下一项",
+  "first": "第一项",
+  "last": "最后一项",
   "prev": "上一项",
   "itemsPerPage": "每页项目数"
 }

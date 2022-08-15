@@ -1,13 +1,13 @@
 {
   "quickLinks": "Enlaces rápidos",
-  "aboutBCH": "",
-  "aboutCartagena": "",
-  "suppProtocol": "",
+  "aboutBCH": "Acerca del CIISB",
+  "aboutCartagena": "Acerca del Protocolo de Cartagena",
+  "suppProtocol": "Protocolo suplementario",
   "signIn": "Iniciar sesión",
   "searchRecords": "Buscar registros",
   "submitRecords": "Presentar registros",
-  "registries": "",
-  "LmoOrganismGene": "",
+  "registries": "Directorios:",
+  "LmoOrganismGene": "OVM-Organismo-Gen",
   "countryProfiles": "Perfiles de los países",
   "nra": "Analizador de informes nacionales",
   "forums": "Foros",
@@ -16,10 +16,10 @@
   "help": "¿Necesita ayuda?",
   "kb": "Base de conocimientos",
   "faq": "Preguntas frecuentes",
-  "trainingSite": "",
+  "trainingSite": "Sitio de capacitación",
   "trainingMaterials": "Materiales de capacitación",
-  "contactUs": "    bch@cbd.int",
+  "contactUs": "Contáctenos:    bch@cbd.int",
   "BiosafetyClearingHouse": "Centro de Intercambio de Información sobre Seguridad de la Biotecnología",
-  "subscribeEmail": "",
-  "subscribeNews": ""
+  "subscribeEmail": "Suscribirse a las notificaciones por correo electrónico",
+  "subscribeNews": "Suscribirse a nuestro boletín"
 }

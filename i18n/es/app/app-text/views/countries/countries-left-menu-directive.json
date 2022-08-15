@@ -3,7 +3,7 @@
   "map": "Mapa",
   "selectCountry": "Seleccionar un país",
   "filterByStatus": "Filtrar por situación de la Parte en el Protocolo de Nagoya",
-  "all": "Todo",
+  "all": "",
   "party": "Parte",
   "nonParty": "No Parte",
   "filterByRecordTypes": "Filtrar el país por tipos de registro",

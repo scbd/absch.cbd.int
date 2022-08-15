@@ -1,12 +1,12 @@
 {
-  "since": "",
-  "partyToThe": "",
+  "since": "始自：",
+  "partyToThe": "缔约方：",
   "nonParty": "非缔约方",
-  "nonPartyToCartagena": "",
+  "nonPartyToCartagena": "非卡塔赫纳议定书缔约方",
   "cartagenaProtocol": "卡塔赫纳生物安全议定书",
   "ratified": "已批准，但尚未成为缔约方",
-  "signatory": "",
+  "signatory": "签字方",
   "entersIntoForce": "",
-  "suppProtocol": "",
+  "suppProtocol": "补充议定书",
   "nagoyaProtocol": "名古屋议定书"
 }

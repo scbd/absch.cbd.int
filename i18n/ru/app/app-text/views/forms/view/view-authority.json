@@ -19,8 +19,8 @@
   "yes": "Да",
   "no": "Нет",
   "shortDescriptionRegulatory": "Краткое описание регуляторных функций",
-  "ShortDescriptionResponsibilities": "",
-  "additionalInformation": "",
+  "ShortDescriptionResponsibilities": "Краткое описание обязанностей компетентного органа",
+  "additionalInformation": "Дополнительная информация",
   "otherRelevantWebsite": "Адреса других соответствующих веб-сайтов/или прилагаемые документы",
   "administrativeFunctions": "Административные функции"
 }

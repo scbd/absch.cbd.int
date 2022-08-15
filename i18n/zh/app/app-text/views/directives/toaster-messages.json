@@ -1,8 +1,8 @@
 {
-  "draftSaveMessage": "",
-  "closeWithoutSaving": "",
-  "publishRequestedSCBD": " ",
-  "publishRequestedABS": " ",
-  "publishRequestedBCH": " ",
-  "recordPublished": " "
+  "draftSaveMessage": "您的记录已存为草稿",
+  "closeWithoutSaving": "您的记录已关闭且未作保存。",
+  "publishRequestedSCBD": "保存已保存。已向您的生物多样性公约秘书处发送了一个发布请求。",
+  "publishRequestedABS": "保存已保存。已向您的发布机构发出了发布请求。",
+  "publishRequestedBCH": "保存已保存。已向您的生物安全信息交换所国家联络点发送了一个发布请求。",
+  "recordPublished": "记录已发布。该记录现可在信息交换所公开访问。"
 }

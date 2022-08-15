@@ -26,7 +26,7 @@
   "resource.genes": "Идентификация гена(-ов)",
   "capacityBuildingInitiative.contacts": "Контактное лицо",
   "capacityBuildingInitiative.broaderProjects": "",
-  "capacityBuildingInitiative.implementingAgencies": "",
+  "capacityBuildingInitiative.implementingAgencies": "Осуществляющее(-ие) учреждение(-я) или осуществляющая(-ие) организация(-и)",
   "capacityBuildingInitiative.executingAgencies": "учреждение(-ия)-исполнитель (исполнители) или организация(-ии)-исполнитель (исполнители)",
   "capacityBuildingInitiative.collaboratingPartners": "Сотрудничающий(-ие) партнер(ы)",
   "capacityBuildingInitiative.coreFundingSources": "Источник(и) финансирования",
