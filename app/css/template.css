@@ -2891,7 +2891,7 @@ padding-right: 23%;
 
 #innerPage .mastHead{
 	background-color: #00405C;
-	color:white;
+	/* color:white; */
 	padding:10px 20px 40px 20px;
 	margin:0;
 }
@@ -3224,6 +3224,7 @@ div legend {
 #globalSearch{
     cursor: default;
     font-size: 1rem;
+    color: #fff;
 }
 #recordContent .btn-edit-record {
     padding-top: 7px;
