@@ -604,12 +604,20 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 if(query.text){
                                     $scope.saveFreeTextFilter(query.text);
                                 }
-                                if(query.country){
-                                    $scope.saveFilter(query.country);
-                                }
                                 if(query.schema){
                                     $scope.saveFilter(query.schema);
                                 }
+                            }
+
+                            if(query.country){
+                                let countries = query.country;
+                                if(typeof countries == 'string')
+                                    countries = [countries];
+
+                                countries.forEach(e=>{
+                                    const countryFilter = $scope.searchFilters[e]
+                                    $scope.saveFilter({...countryFilter});
+                                });                                
                             }
 
                             if(query["raw-query"]){
@@ -622,12 +630,13 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     }
 
                     function setExternalFilters(filters){
-                        const mainFilters = filters.filters;
-                        mainFilters.forEach( e => {
-                            $scope.saveFilter( e );
-                        } );
+                        if (filters?.filters ) {
+                            filters.filters.forEach( e => {
+                                $scope.saveFilter( e );
+                            } );
+                        }
 
-                        if ( filters.subFilters ) {
+                        if (filters?.subFilters ) {
                             const subFilters = filters.subFilters;
                             for ( const subFilterKey in subFilters) {
                                 const subFilter = subFilters[subFilterKey];
