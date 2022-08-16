@@ -317,7 +317,7 @@ app.directive("documentSelector", ["$timeout", 'locale', "$filter", "$q", "searc
                 }
                 if(rawQuery.fields){
                     const metaFields = ['rec_meta1:meta1_EN_txt', 'rec_meta2:meta2_EN_txt', 'rec_meta3:meta3_EN_txt',
-                    'uniqueIdentifier_s:uniqueIdentifier_s', 'rec_summary:summary_t']
+                    'uniqueIdentifier_s:uniqueIdentifier_s', 'rec_summary:summary_t', 'url_ss']
                     metaFields.forEach(f=>{
                         if(rawQuery.fields.indexOf(f)<0)
                             rawQuery.fields += `,${f}`;

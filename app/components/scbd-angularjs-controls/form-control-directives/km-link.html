@@ -16,8 +16,8 @@
 								<span ng-if="link.tag" ng-bind="'('+link.tag+')'"></span>
 							</td>
 							<td style="white-space:nowrap;text-align:right;vertical-align:top">
-								<button type="button" class="btn btn-default" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
-								<button type="button" class="btn btn-default" ng-click="remove(link)"><i class="fa fa-trash-o"></i></button>
+								<button type="button" class="btn btn-outline-secondary" ng-click="edit(link)"><i class="fa fa-edit"></i></button>
+								<button type="button" class="btn btn-outline-secondary" ng-click="remove(link)"><i class="fa fa-trash-o"></i></button>
 							</td>
 						</tr>
 					</table>
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-default" ng-click="editor.close()">{{::('kmLinkT.cancel'|$translate)}}</button>
+					<button type="button" class="btn btn-secondary" ng-click="editor.close()">{{::('kmLinkT.cancel'|$translate)}}</button>
 					<button type="button" class="btn btn-primary" ng-click="editor.save()" ng-disabled="editor.progress || editor.error!=null">{{::('kmLinkT.save'|$translate)}}</button>
 				</div>
 				<div id="uploadPlaceholder" style="display:none"></div>
