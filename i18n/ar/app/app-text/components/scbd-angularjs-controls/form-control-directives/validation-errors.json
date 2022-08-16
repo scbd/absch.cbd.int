@@ -1,6 +1,6 @@
 {
   "unknown": "خطأ غير معروف",
-  "mandatory": "",
+  "mandatory": "الخانة إلزامية",
   "mandatoryAnyOf": "إحدى هذه الخانات إلزامية",
   "invalidValue": "القيمة المحددة غير صالحة",
   "invalidProperty": "تعذر تحديد هذه القيمة",

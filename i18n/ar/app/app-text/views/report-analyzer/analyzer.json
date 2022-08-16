@@ -1,12 +1,12 @@
 {
   "report": "تقرير:",
   "analysis": "التحليل:",
-  "breakdownCbdRegions": "",
-  "selectCountries": "تحديد الدول",
+  "breakdownCbdRegions": "تصنيف حسب مناطق اتفاقية التنوع البيولوجي",
+  "selectCountries": "تحديد البلدان",
   "selectRegions": "تحديد المناطق",
-  "breakdownProtocolParties": "",
+  "breakdownProtocolParties": "تصنيف حسب الأطراف في البروتوكول",
   "breakdownProtocolNonParties": "تصنيف حسب غير الأطراف في البروتوكول",
-  "nationalReportAnalyzer": "",
+  "nationalReportAnalyzer": "أداة تحليل التقرير الوطني",
   "nationalReportAnalyzerInfo": "تتيح لك هذه الأداة تحديد أقسام أو أسئلة مُحدّدة من التقرير وعرض النتائج حسب البلد/المنطقة.",
   "analyze": ""
 }

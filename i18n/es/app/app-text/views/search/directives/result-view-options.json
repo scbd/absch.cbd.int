@@ -4,7 +4,7 @@
   "group": "GRUPO",
   "matrix": "MATRIZ",
   "sort": "Ordenar",
-  "export": "Exportar",
+  "export": "exportar",
   "sortByField": "Ordenar por campos (seleccionar uno o más campos)",
   "sortBy": "Ordenar por",
   "thenBy": "Luego por",
@@ -14,7 +14,7 @@
   "cancel": "Cancelar",
   "apply": "Aplicar",
   "groupByField": "Agrupar por campos (seleccionar uno o más campos)",
-  "groupBy": "",
+  "groupBy": "Agrupar por",
   "government": "Gobierno",
   "recordType": "Tipo de registro"
 }

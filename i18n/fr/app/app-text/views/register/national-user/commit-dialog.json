@@ -1,9 +1,7 @@
 {
   "actions": "Actions",
   "oups": "",
-  "oupsInfo": "Nous sommes désolés, vous n’êtes pas autorisé à nominer un usager.",
   "oops": "",
-  "oopsInfo": "Nous sommes désolés, une erreur est survenue.",
   "userToBeCreated": "Usager à ajouter :",
   "governmentAffiliationGranted": "Affiliation à un gouvernement",
   "governmentAffiliationRevoked": "L’affiliation gouvernementale sera révoquée :",

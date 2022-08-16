@@ -5,6 +5,8 @@
   "lmoIdentityInfo": "L’image ci-dessous identifie l’OVM par son identificateur unique, son nom commercial et un lien vers cette page du Centre d’échange Cliquer dessus pour télécharger une plus grande image sur votre ordinateur Pour du soutien sur comment utiliser, aller dans la page de liens rapides OVM.",
   "name": "Nom",
   "transformationEvent": "Événement de transformation",
+  "hasUniqueIdentification": "Cet OVM possède-t-il un identifiant unique?",
+  "hasUniqueIdentificationInfo": "Le BCH utilise actuellement le système d'identifiant unique figurant dans les Directives de l'OCDE pour la désignation des identifiants uniques pour les plantes transgéniques (par ex. MON-ØØ81Ø-6). ",
   "uniqueIdentification": "Identifiant unique",
   "developer": "Développeur(s)",
   "description": "Description",

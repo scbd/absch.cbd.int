@@ -1,5 +1,5 @@
 {
   "userPreferences": "用户首选项",
-  "emailNotification": "",
-  "keepUpToDate": ""
+  "emailNotification": "电子邮件通知和预定义搜索",
+  "keepUpToDate": "记录发布时应为最新。"
 }

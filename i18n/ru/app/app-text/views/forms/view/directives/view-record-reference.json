@@ -1,0 +1,17 @@
+{
+  "loadingRecord": "загрузка сведений о записи...",
+  "invalidReference": "",
+  "errorLoading": "",
+  "cna": "",
+  "nfp": "Национальный координационный центр:",
+  "person": "Физическое лицо:",
+  "organization": "Организация:",
+  "relatedOrganization": "",
+  "deleted": "Эта связанная запись удалена.",
+  "phone": "",
+  "fax": "",
+  "email": "",
+  "website": "Веб-сайт:",
+  "pendingApproval": "",
+  "viewRequest": ""
+}

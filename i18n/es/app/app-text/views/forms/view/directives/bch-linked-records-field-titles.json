@@ -25,7 +25,7 @@
   "organization.linkedOrganizations": "Enlace a cualquier otra organización relacionada que pueda estar en la base de datos (por ejemplo, FMAM y PNUMA-FMAM)",
   "laboratoryDetection.organization": "Nombre del laboratorio y de la organización relacionada o que coordina",
   "laboratoryDetection.detectableLmos": "OVM detectable(s) por el laboratorio",
-  "laboratoryDetection.detectableGenes": "Elemento(s) genético(s) detectables por el laboratorio",
+  "laboratoryDetection.detectableGenes": "",
   "resource.organizations": "Organización(es) a cargo de la autoría",
   "resource.modifiedOrganisms": "Identificación del/de los OVM",
   "resource.organisms": "Identificación del/de los organismo(s)",

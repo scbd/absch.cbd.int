@@ -1,9 +1,9 @@
 {
-  "page": "",
+  "page": "Página:",
   "of": "de",
   "next": "Siguiente",
-  "first": "Primer",
-  "last": "",
+  "first": "Primera",
+  "last": "Última",
   "prev": "Prev",
   "itemsPerPage": "Elementos por página"
 }

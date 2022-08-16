@@ -4,7 +4,7 @@
   "loginFailed": "Error de inicio de sesión.",
   "incorrectMsg": "La dirección de correo electrónico o la contraseña ingresada son incorrectas.",
   "operationFailed": "Error de operación.",
-  "serviceNotAvailable": "El servicio no está disponible. Sírvase intentar nuevamente.",
+  "serviceNotAvailable": "El servicio no está disponible. Intente nuevamente.",
   "signInAccount": "Inicie sesión en su cuenta.",
   "forgotPassword": "¿Olvidó su contraseña?",
   "createAccount": "Crear una cuenta"

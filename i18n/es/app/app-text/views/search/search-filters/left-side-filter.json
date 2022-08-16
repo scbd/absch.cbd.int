@@ -11,10 +11,10 @@
   "yes": "Sí",
   "no": "No",
   "not": "NO",
-  "searchRelation": "",
+  "searchRelation": "Buscar en relación",
   "loading": "cargando...",
   "searchRelated": "Buscar relacionado",
   "cancel": "Cancelar",
   "apply": "Aplicar",
-  "searchIn": ""
+  "searchIn": "Buscar en"
 }

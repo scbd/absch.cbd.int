@@ -2,13 +2,13 @@
   "overview": "Panorama",
   "report": "Informe",
   "deadline": "Plazo",
-  "numberOfParties": "",
-  "atTheDeadline": "",
+  "numberOfParties": "Número de Partes",
+  "atTheDeadline": "en la fecha del plazo establecido",
   "byParties": "Por Partes*",
   "byNonParties": "Por Países que no son Partes*",
   "total": "Total",
-  "partyStatusReport": "",
+  "partyStatusReport": "Estado de la Parte en la fecha del plazo establecido para la presentación del informe",
   "nationalReportAnalyzer": "Analizador de informes nacionales",
   "nationalReportAnalyzerInfo": "Esta herramienta le permite seleccionar secciones o preguntas específicas del informe y mostrar los resultados por país o región.",
-  "analyze": ""
+  "analyze": "Analizar"
 }

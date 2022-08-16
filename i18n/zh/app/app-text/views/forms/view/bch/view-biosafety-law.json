@@ -1,12 +1,12 @@
 {
-  "amendment": "",
+  "amendment": "修改",
   "isAmendment": "是对已在生物安全信息交换所中发布的法律、法规、指南或协议的修改吗？",
   "amendedRecords": "经修改的法律/法规",
   "amendmentsDetails": "修改摘要",
   "amendedByRecords": "本记录中的法律/法规已由以下记录中的法律/法规所修改",
   "generalInfo": "一般信息",
   "country": "提交法律、法规、指南或协议的国家",
-  "title": "称谓",
+  "title": "标题",
   "legislativeDetails": "立法细节",
   "typeRegulation": "法律/法规的类型",
   "jurisdiction": "辖区",
@@ -23,6 +23,6 @@
   "relationDetails": "描述这些措施之间的关系",
   "regulatoryInformation": "监管联系方式",
   "authorities": "国家主管部门和/或补充议定书主管部门",
-  "additionalInformation": "更多信息",
+  "additionalInformation": "",
   "relevantDocuments": "其他相关网站地址和/或附加文件"
 }

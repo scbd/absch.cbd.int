@@ -1,15 +1,11 @@
 {
   "generalInfo": "معلومات عامة",
-  "thisCertificate": "",
-  "revoked": "",
-  "updated": "",
-  "noValid": "",
-  "newVersion": "",
-  "versionNoValid": "",
+  "revokeCertificate": "تم  <u>رفض</u> هذه الشهادة ولم تعد صالحة",
+  "updatedCertificate": "تم <u>تحديث</u> هذه الشهادة. تم إنشاء إصدار جديد <u>ولم يعد هذا الإصدار صالحًا.</u>",
   "SeeAmendmentHistory": "انظر تاريخ التعديلات لمعرفة المزيد من المعلومات.",
-  "country": "",
+  "country": "البلد",
   "uniqueIdentifier": "المعرف الفريد في غرفة تبادل المعلومات بشأن الحصول على الموارد وتقاسم المنافع",
-  "referenceNumber": "الرقم (الأرقام) المرجعية لشهادة (شهادات) الامتثال المعترف بها دوليًا التي ترتبط بهذا التصريح",
+  "referenceNumber": "الأرقام المرجعية لشهادات الامتثال المعترف بها دوليًا المرتبطة بهذا التصريح",
   "amendmentDescription": "يُرجى إضافة موجز لسبب تحديث السجل",
   "issuingAuthorityResponsible": "سلطة الإصدار (السلطة المسؤولة عن إصدار هذا التصريح)",
   "detailsPermit": "تفاصيل التصريح أو ما يعادله",
@@ -43,5 +39,5 @@
   "addInfo": "معلومات إضافية",
   "relevantDocuments": "",
   "amendmentHistory": "تاريخ التعديلات السابقة",
-  "infoUtilization": ""
+  "infoUtilization": "معلومات عن استخدام الموارد الجينية"
 }

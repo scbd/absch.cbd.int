@@ -1,9 +1,9 @@
 {
-  "addRecord": "",
-  "addRecords": "",
+  "addRecord": "Добавить запись",
+  "addRecords": "Добавить запись(-и)",
   "noRecords": "Связанных записей нет.",
   "linkedRecords": "связанные записи.",
-  "pleaseSelect": "",
+  "pleaseSelect": "Выберите опубликованные записи из списка ниже:",
   "pleaseSelectInfo": "Если запись отсутствует в списке, создайте новую запись.",
   "all": "Все",
   "myRecords": "Мои записи",
@@ -21,9 +21,9 @@
   "noRecordSelected": "Записи не выбраны.",
   "loading": "загрузка...",
   "select": "Выбрать",
-  "clearRecords": "",
+  "clearRecords": "Очистить выбранные записи",
   "create": "Создать",
-  "showExisting": "",
-  "cancel": "",
+  "showExisting": "Показать существующие",
+  "cancel": "Отменить",
   "noRecordFound": "записей не найдено."
 }

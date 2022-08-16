@@ -1,11 +1,11 @@
 {
-  "since": "",
-  "partyToThe": "",
+  "since": "منذ",
+  "partyToThe": "طرف في",
   "nonParty": "غير طرف",
-  "nonPartyToCartagena": "",
-  "cartagenaProtocol": "",
-  "ratified": "",
-  "signatory": "",
+  "nonPartyToCartagena": "غير طرف في بروتوكول قرطاجنة",
+  "cartagenaProtocol": "بروتوكول قرطاجنة للسلامة الأحيائية",
+  "ratified": "صدقت على البروتوكول لكنها ليست طرفًا بعد",
+  "signatory": "الطرف المُوقع",
   "entersIntoForce": "",
   "suppProtocol": "البروتوكول التكميلي",
   "nagoyaProtocol": "بروتوكول ناغويا"

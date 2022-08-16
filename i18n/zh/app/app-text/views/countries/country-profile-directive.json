@@ -1,12 +1,12 @@
 {
-  "lastUpdated": "",
+  "lastUpdated": "上次更新日期：",
   "loading": "正在加载...",
   "show10": "显示下 10 条记录",
-  "showRemaining": "",
-  "records": "记录",
+  "showRemaining": "显示剩余",
+  "records": "条记录",
   "selectMeasures": "选择要在概览中显示的获取和惠益分享措施",
-  "entry": "生效",
+  "entry": "",
   "adoption": "",
-  "until": "",
-  "retired": "已淘汰"
+  "until": "止至：",
+  "retired": ""
 }

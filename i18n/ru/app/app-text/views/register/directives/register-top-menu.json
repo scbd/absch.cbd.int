@@ -2,10 +2,10 @@
   "dashboard": "Личный кабинет",
   "requests": "Запросы",
   "notifications": "Уведомления",
-  "alerts": "",
+  "alerts": "Оповещения",
   "userManagement": "Управление пользователями",
   "preferences": "Настройки",
   "admin": "АДМИН",
   "menu": "Меню",
-  "reports": ""
+  "reports": "Отчеты"
 }

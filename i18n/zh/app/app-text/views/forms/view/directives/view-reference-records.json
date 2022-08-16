@@ -1,12 +1,12 @@
 {
-  "recordsReferencing": "",
-  "showInSearch": "",
+  "recordsReferencing": "引用本文件的记录",
+  "showInSearch": "在搜索中显示",
   "recordType": "记录类型",
   "field": "字段",
   "records": "记录",
-  "hide": "",
-  "show": "",
+  "hide": "隐藏",
+  "show": "显示",
   "country": "国家",
-  "title": "称谓",
+  "title": "标题",
   "updatedOn": "更新日期："
 }

@@ -7,17 +7,17 @@
   "exampleTitle": "例如：标题",
   "exampleDescription": "例如：描述",
   "websiteInfo": "请输入您想要在记录标题中显示的网站或数据库名称。",
-  "description": "",
+  "description": "描述",
   "descriptionInfo": "请输入有关国家网站或数据库的简短描述，如其功能或所提供的信息。",
   "websiteAddress": "网址",
   "websiteAddressInfo": "请提供网站的完整网址（如：http://bch.cbd.int）",
   "timeframeInformation": "确认或更新信息的时间表",
-  "categoryInformation": "请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。 ",
-  "additionalInformation": "更多信息",
+  "categoryInformation": "请注意，此类别的信息要求在提交一年之后进行确认和更新。在到期之后，我们将要求您在3个月内确认或更新该记录。在此阶段之后，如果没有收到确认，该记录将被标记为“未确认”",
+  "additionalInformation": "",
   "relevantinformation": "其它相关信息",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",
   "relevantDocumentsInfo": "请在此处提供任何其它相关网站地址和/或将储存在数据库中供用户下载的一个或多个相关文档。",
-  "notes": "备注",
-  "notesInfos": "“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+  "notes": "注",
+  "notesInfos": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
 }

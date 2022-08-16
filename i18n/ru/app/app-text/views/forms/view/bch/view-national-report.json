@@ -1,12 +1,12 @@
 {
   "generalInfo": "Общая информация",
-  "contactPerson": "",
+  "contactPerson": "Контактное лицо, представляющее доклад",
   "country": "Страна",
   "organizationsStakeholders": "Организации/субъекты деятельности, с которыми проводились консультации или которые участвовали в подготовке настоящего доклада",
-  "timePeriod": "",
+  "timePeriod": "Период времени, охватываемый настоящим докладом",
   "from": "С",
   "to": "По",
-  "additionalInformation": "",
-  "seconds": "",
-  "redirectNow": ""
+  "additionalInformation": "Дополнительная информация",
+  "seconds": "секунд.",
+  "redirectNow": "Перенаправить сейчас"
 }

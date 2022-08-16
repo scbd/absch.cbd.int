@@ -1,12 +1,12 @@
 {
   "generalInfo": "معلومات عامة",
   "contactPerson": "مسؤول الاتصال الذي أرسل التقرير",
-  "country": "",
+  "country": "البلد",
   "organizationsStakeholders": "المنظمات/الجهات المعنية التي شاركت أو قدمت استشارتها أثناء إعداد هذا التقرير",
-  "timePeriod": "",
+  "timePeriod": "الفترة الزمنية التي يغطيها هذا التقرير",
   "from": "من",
   "to": "إلى",
   "additionalInformation": "معلومات إضافية",
-  "seconds": "",
+  "seconds": "ثانية",
   "redirectNow": "إعادة التوجيه الآن"
 }

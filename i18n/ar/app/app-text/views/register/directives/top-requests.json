@@ -1,12 +1,12 @@
 {
   "pendingRequests": "طلبات معلقة",
-  "loading...": "",
-  "publish": "",
-  "delete": "",
-  "SCBDReview": "",
-  "pending": "",
-  "your": "",
-  "approval": "",
-  "expiresOn": "",
-  "seeMore": ""
+  "loading...": "قيد التحميل...",
+  "publish": "نشر",
+  "delete": "حذف",
+  "SCBDReview": "قيد مراجعة أمانة اتفاقية التنوع البيولوجي",
+  "pending": "متوقف",
+  "your": "على",
+  "approval": "موافقتك",
+  "expiresOn": "تنتهي الصلاحية في",
+  "seeMore": "انظر المزيد"
 }

@@ -1,38 +1,38 @@
 {
   "welcome": {
     "title": "记录汇总",
-    "content": "<p> <br><br></p>"
+    "content": "<p> <br><br>您可以筛选现有记录和创建新记录，也可以复制、编辑或删除记录。</p>"
   },
   "filters": {
     "title": "筛选条件",
-    "content": "<p></p>"
+    "content": "<p>使用这些筛选条件，可以列出所有记录、已发布记录、草稿或待批准记录。</p>"
   },
   "Keyword": {
     "title": "关键词",
-    "content": "<p></p>"
+    "content": "<p>通过输入自己所选的词来搜索列表。</p>"
   },
   "adding": {
     "title": "添加新记录",
-    "content": "<p></p>"
+    "content": "<p>单击<b>“新添”</b>按钮，开始创建一格新记录。</p>"
   },
   "duplicate": {
     "title": "复制记录",
-    "content": "<p></p>"
+    "content": "<p>单击此处，以复制现有记录。</p>"
   },
   "edit": {
     "title": "编辑记录",
-    "content": "<p></p>"
+    "content": "<p>单击此处，以编辑一条现有记录。</p>"
   },
   "delete": {
     "title": "删除记录",
-    "content": "<p></p>"
+    "content": "<p>单击此处，以删除一条记录。</p>"
   },
   "needHelp": {
     "title": "需要帮助吗？",
-    "content": "<p></p>"
+    "content": "<p>单击这里，以访问上下文帮助，在这里您可以找到更多与本页有关的信息。</p>"
   },
   "needMoreHelp": {
     "title": "需要更多帮助吗？",
-    "content": "<p></p>"
+    "content": "<p>使用聊天功能给我们发消息以获得更多支持。</p>"
   }
 }

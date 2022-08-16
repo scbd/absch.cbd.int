@@ -1,11 +1,11 @@
 {
-  "recordsReferencing": "",
-  "showInSearch": "",
+  "recordsReferencing": "Registros que hacen referencia a este documento",
+  "showInSearch": "Mostrar en la búsqueda",
   "recordType": "Tipo de registro",
   "field": "Campo",
   "records": "Registro(s)",
-  "hide": "",
-  "show": "",
+  "hide": "Ocultar",
+  "show": "Mostrar",
   "country": "País",
   "title": "Título",
   "updatedOn": "Actualizado el"

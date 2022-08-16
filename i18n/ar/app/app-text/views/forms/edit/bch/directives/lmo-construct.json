@@ -4,11 +4,11 @@
   "geneConstructInfo": "يرجى استخدام الماوس لسحب الشكل لإضافته إلى التكوين على موقع الإسقاط",
   "dragConstruct": "اسحب الشكل هنا لإزالة التكوين",
   "dropLocation": "موقع الإسقاط",
-  "Cancel": "إلغاء",
+  "cancel": "إلغاء",
   "save": "حفظ",
-  "transcriptionStart": "",
-  "transcriptionStop": "",
-  "transcriptionElement": "",
+  "transcriptionStart": "بداية النسخ",
+  "transcriptionStop": "نهاية النسخ",
+  "transcriptionElement": "عنصر النسخ",
   "selectGene": "تحديد الجين",
   "kb": "كيلوبايت"
 }

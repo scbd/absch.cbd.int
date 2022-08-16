@@ -1,11 +1,11 @@
 {
   "dashboard": "لوحة التحكم",
   "requests": "طلبات",
-  "notifications": "",
+  "notifications": "الإشعارات",
   "alerts": "التنبيهات",
   "userManagement": "إدارة المستخدمين",
   "preferences": "تفضيلات",
-  "admin": "المدير",
+  "admin": "الإدارة",
   "menu": "القائمة",
   "reports": "التقارير"
 }

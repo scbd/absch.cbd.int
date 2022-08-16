@@ -1,7 +1,7 @@
 {
   "languageChange": "تغيير اللغة",
   "signin": "تسجيل الدخول",
-  "verifyEmail": "لم يتم التحقق من البريد الإلكتروني بعد.",
+  "verifyEmail": "لم يتم بعد التحقق من البريد الإلكتروني",
   "help_403": "خطأ 403",
   "mailbox": "صندوق البريد",
   "search": "بحث",
@@ -10,7 +10,7 @@
   "reports": "التقارير",
   "reportsAnalyzer": "أداة التحليل",
   "announcements": "الإعلانات",
-  "articles": "مقالات",
+  "articles": "المقالات",
   "articleTitle": "article_title",
   "sharedCode": "وثيقة مشتركة",
   "record": "سجل",
@@ -23,7 +23,7 @@
   "documentType": "document_type",
   "registerNew": "الجديد",
   "registerEdit": "تعديل",
-  "view": "مشاهدة",
+  "view": "عرض",
   "pendingRequests": "طلبات معلقة",
   "reportedRecords": "سجلات تم الإبلاغ عنها",
   "reportCounts": "إنشاء تقارير بالإحصائيات",
@@ -32,6 +32,6 @@
   "userRoleReport": "تقرير أدوار المستخدمين",
   "commonIssues": "المسائل المشتركة",
   "matrix": "جدول",
-  "kb": "",
-  "embed": ""
+  "kb": "قاعدة المعرفة",
+  "embed": "دمج رابط عنوان الموقع"
 }

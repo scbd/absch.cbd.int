@@ -21,9 +21,10 @@
   "overseasTerritories13": "",
   "or": "ou",
   "since": "",
-  "signatory": "",
+  "signatory": "Signataire :",
   "signedOn": "",
   "no": "Non",
-  "CbdCountryProfile": "",
-  "addIno": "Informations supplémentaires pour le profil du pays"
+  "CbdCountryProfile": "Profil CDB du pays :",
+  "addIno": "Informations supplémentaires pour le profil du pays",
+  "lastUpdated": "Dernier fichier mis à jour"
 }

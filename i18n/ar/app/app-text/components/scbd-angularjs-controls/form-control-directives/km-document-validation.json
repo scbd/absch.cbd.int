@@ -2,6 +2,6 @@
   "analyzingDocument": "تحليل المستند...",
   "savingDocument": "حفظ المستند...",
   "valid": "المستند صالح.",
-  "contains": "",
-  "errors": ""
+  "contains": "مستندك يحتوي على",
+  "errors": "أخطاء."
 }

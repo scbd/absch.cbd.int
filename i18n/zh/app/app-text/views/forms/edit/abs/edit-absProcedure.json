@@ -1,7 +1,7 @@
 {
   "generalInfo": "一般信息",
   "languageToPublish": "请选择您希望提交之记录的语言：",
-  "country": " 国家",
+  "country": "1.国家",
   "selectCountry": "请选择一个国家...",
   "descriptionProcedure": "获取和惠益分享程序说明",
   "procedurName": "2.以下是相关获取和惠益分享程序：",
@@ -21,18 +21,19 @@
   "applicationLinks": "请附上相关申请表/文件或提供网站链接",
   "applicationLinksInfo": "请提供应向谁提出申请的信息：",
   "hasApplicationFees": "8.需付申请费吗？",
-  "hasApplicationFeesInfo": "请提供关于申请费的补充信息",
+  "hasApplicationFeesInfo": "请提供关于申请费的额外信息",
   "duration": "9.申请过程需要多长时间：",
   "days": "日",
   "months": "月",
   "years": "年",
   "relevantMeasures": "10.相关获取和惠益分享措施：",
   "keywords": "11.关键词",
-  "additionalInformation": "更多信息",
-  "additionalInformation12": "12.更多信息",
+  "additionalInformation": "",
+  "additionalInformation12": "12. ",
   "relevantInformationInfo": "请在此处提供记录中其它位置未能提到的任何其它相关信息。",
   "relevantDocuments": "任何其他相关文件",
   "relevantDocumentsInfo": "其他相关网站地址和/或附加文件",
-  "notes": "备注",
-  "notesInfo": "“备注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。"
+  "notes": "注",
+  "notesInfo": "“注”字段供个人参考之用，并仅在编辑记录时方可看到。一旦记录发布，其即会隐藏。此字段不适用于保密信息。",
+  "absProcedure": "获取和惠益分享程序说明"
 }

@@ -1,67 +1,67 @@
 {
   "welcome": {
     "title": "Bienvenidos a la página Buscar",
-    "content": "<p> </p>"
+    "content": "<p>La página Buscar permite consultar toda la información publicada en el Centro de Intercambio de Información. Los registros pueden encontrarse escribiendo una palabra en el campo de búsqueda con texto libre y/o utilizando una combinación de filtros para restringir la búsqueda.</p>"
   },
   "globalSearch": {
     "title": "Filtros generales",
-    "content": "<p></p>"
+    "content": "<p>Los filtros generales permiten buscar en toda la base de datos a lo largo de todas las categorías de registros seleccionando una o múltiples opciones entre los siguientes filtros: <b>Tipos de registros, Palabras clave, País, Regiones</b> y <b>Fecha</b>.</p>"
   },
   "freeText": {
     "title": "Búsqueda con texto libre",
-    "content": "<p></u> </p>"
+    "content": "<p>Este recuadro para búsquedas permite consultar en toda la base de datos escribiendo la(s) palabra(s) que desee.<br><br><u> Consejo:</u> cambie el idioma del sitio web (parte superior derecha) antes de escribir en ese idioma.</p>"
   },
   "recordTypesFilterTab": {
     "title": "Filtrar por Tipos de registros",
-    "content": "<p> </p>"
+    "content": "<p>Seleccione uno o más tipos de registros para buscar por categoría(s) de registros específica(s): Nacional, de Referencia o de la Secretaría del CDB.</p>"
   },
   "keywordsFilterTab": {
     "title": "Buscar por Palabra clave",
-    "content": "<p></p>"
+    "content": "<p>Seleccione una o más palabras clave de la lista. <br>Si ya ha filtrado por tipo de registro, los filtros de palabra clave que se muestran se aplicarán específicamente a ese tipo de registro.</p>"
   },
   "countryFilterTab": {
     "title": "Buscar por País",
-    "content": "<p></u>  </p>"
+    "content": "<p>Seleccione uno o más países de la lista.<br><br><u> Consejo:</u> haga clic en una letra para ver todos los países cuyo nombre comienza con esa letra. También es posible filtrar por países que son una \"Parte\" y que \"no son una Parte\" o \"Ratificado, pero todavía no es Parte\".</p>"
   },
   "regionFilterTab": {
-    "title": "Seleccionar por Región",
-    "content": "<p></p>"
+    "title": "Buscar por Región",
+    "content": "<p>Seleccione de la lista predefinida de regiones y/o grupos regionales.</p>"
   },
   "dateFilterTab": {
     "title": "Buscar por Fecha",
-    "content": "<p> </p>"
+    "content": "<p>El filtro <b>Fecha</b> permite buscar por registros publicados dentro de i) un intervalo de fechas predeterminado (por ej., \"Últimos siete días\") o ii) un intervalo de fechas que es posible especificar (\"Intervalo personalizado\") o iii) una fecha concreta. </p>"
   },
   "closeFilterTab": {
     "title": "Resultados de la búsqueda",
-    "content": "<p></p>"
+    "content": "<p>Para ver los resultados de la búsqueda, desplácese hacia abajo o haga clic en el botón <b>(x)</b> que se encuentra en la esquina superior derecha.</p>"
   },
   "searchResult": {
     "title": "Resultados de la búsqueda: Pestañas",
-    "content": "<p> </u> </p>"
+    "content": "<p>Los resultados de la búsqueda se muestran en pestañas separadas organizadas por categoría de registro. Haga clic en una pestaña para ver los registros asociados a esa categoría.<br><br><u> Nota:</u> el círculo negro indica la cantidad total de registros para cada categoría y cambiará de manera automática sobre la base de sus selecciones de búsqueda.</p>"
   },
   "subFilters": {
     "title": "Filtros subordinados",
-    "content": "<p></p>"
+    "content": "<p>Los filtros subordinados aparecen cuando se seleccionan uno o más tipos de registros dentro del filtro general</b> <br>Tipos de registros.<br> Aparecen a la izquierda y están asociados a cada tipo de registro seleccionado. <b>Pueden usarse filtros subordinados en combinación con filtros generales para restringir aún más la búsqueda.</p>"
   },
   "recordView": {
-    "title": "Resultados de la búsqueda: Ver los registros",
-    "content": "<p></p>"
+    "title": "Resultados de la búsqueda: ver los registros",
+    "content": "<p>Una vez que se haya ubicado el registro de su interés, haga clic en este para ver toda la información.</p>"
   },
   "viewType": {
-    "title": "Resultados de la búsqueda: Tipo de vista",
-    "content": "<p></p>"
+    "title": "Resultados de la búsqueda: tipo de vista",
+    "content": "<p>Se puede cambiar la presentación de los registros seleccionando la opción preferida en la lista desplegable.</p>"
   },
   "sortBy": {
-    "title": "Resultados de la búsqueda: Ordenar",
-    "content": "<p></p>"
+    "title": "Resultados de la búsqueda: ordenar",
+    "content": "<p>Ordenar los resultados de la búsqueda seleccionando uno o más campos.</p>"
   },
   "sendRecords": {
-    "title": "Resultados de la búsqueda: Compartir",
-    "content": "<p></p>"
+    "title": "Resultados de la búsqueda: compartir",
+    "content": "<p>Haga clic aquí para compartir los resultados de la búsqueda.</p>"
   },
   "exportRecords": {
-    "title": "Resultados de la búsqueda: Exportar",
-    "content": "<p></p>"
+    "title": "Resultados de la búsqueda: exportar",
+    "content": "<p>Haga clic aquí para exportar la información a un formato de hoja de cálculo.</p>"
   },
   "needHelp": {
     "title": "¿Necesita ayuda?",
@@ -69,6 +69,6 @@
   },
   "needMoreHelp": {
     "title": "¿Necesita más ayuda?",
-    "content": "Use la función de chat para enviarnos un mensaje si necesita más ayuda."
+    "content": "Use la función de Chat para enviarnos un mensaje si necesita más ayuda."
   }
 }

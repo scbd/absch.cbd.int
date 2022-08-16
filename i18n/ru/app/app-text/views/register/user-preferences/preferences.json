@@ -1,5 +1,5 @@
 {
   "userPreferences": "Пользовательские настройки",
-  "emailNotification": "",
-  "keepUpToDate": ""
+  "emailNotification": "Уведомления по электронной почте и заданные условия поиска",
+  "keepUpToDate": "Получать уведомления о публикации записей."
 }

@@ -1,38 +1,38 @@
 {
   "welcome": {
     "title": "Resumen de registros",
-    "content": "<p> <br><br></p>"
+    "content": "<p>En esta página, es posible ver una lista de todos los registros  según el tipo de registro que haya seleccionado, así como su estado. <br><br>Es posible filtrar los registros existentes y crear nuevos, así como duplicar, editar o borrar un registro.</p>"
   },
   "filters": {
     "title": "Filtros",
-    "content": "<p></p>"
+    "content": "<p>Usar estos filtros para ver una lista de todos los registros, publicados, borradores o registros pendientes de aprobación.</p>"
   },
   "Keyword": {
     "title": "Palabra clave",
-    "content": "<p></p>"
+    "content": "<p>Buscar en la lista escribiendo una palabra.</p>"
   },
   "adding": {
     "title": "Agregar un registro nuevo",
-    "content": "<p></p>"
+    "content": "<p>Haga clic en el botón <b>“Agregar nuevo\"</b> para empezar a crear un registro nuevo.</p>"
   },
   "duplicate": {
     "title": "Duplicar un registro",
-    "content": "<p></p>"
+    "content": "<p>Haga clic aquí para crear un duplicado del registro existente.</p>"
   },
   "edit": {
     "title": "Editar un registro",
-    "content": "<p></p>"
+    "content": "<p>Haga clic aquí para editar un registro existente.</p>"
   },
   "delete": {
     "title": "Borrar un registro",
-    "content": "<p></p>"
+    "content": "<p>Haga clic aquí para borrar un registro.</p>"
   },
   "needHelp": {
     "title": "¿Necesita ayuda?",
-    "content": "<p></p>"
+    "content": "<p>Haga clic aquí para acceder a la ayuda contextual cuando quiera encontrar más información relacionada con esta página.</p>"
   },
   "needMoreHelp": {
     "title": "¿Necesita más ayuda?",
-    "content": "<p></p>"
+    "content": "<p>Use la función de Chat para enviarnos un mensaje si necesita más ayuda.</p>"
   }
 }

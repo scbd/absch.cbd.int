@@ -2,8 +2,8 @@
   "categories.title": "文章类别",
   "loading": "正在加载",
   "the": "",
-  "knowledgeBase": "",
-  "kbParagraph": "",
+  "knowledgeBase": "知识库",
+  "kbParagraph": "是一个在线工具，旨在帮助用户熟悉信息交换所，学习如何提交记录、搜索信息和完成其他重要任务。",
   "exploreTopics": "探索话题",
   "exploreParagraph": "我们尽力涵盖与该产品有关的所有话题。每个部分的数字表示每个类别中话题的数量。",
   "viewMore": "查看更多",
@@ -17,8 +17,8 @@
   "supportedText": "如果您在知识库中找不到答案，您可以",
   "contactUs": "联系我们",
   "furtherHelp": "寻求进一步帮助",
-  "for": "",
+  "for": "寻求",
   "faqs": "常见问题",
   "searchResults": "搜索结果",
-  "back": ""
+  "back": "后退"
 }

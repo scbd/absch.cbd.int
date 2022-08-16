@@ -15,7 +15,7 @@
   "absCheckpoint.contactsToInform": "您希望发送给其一份公报的任意国家主管机构",
   "absCheckpointCommunique.absCheckpoints": "收集或收到此信息的检查点",
   "absCheckpointCommunique.absIRCCs": "指同与本公报有关的国际公认合规证书（IRCC）的链接",
-  "absCheckpointCommunique.entityWhoGrantedPIC": "授予事先知情同意书的个人或实体",
+  "absCheckpointCommunique.entityWhoGrantedPIC": "授予事先知情同意的个人或实体",
   "absCheckpointCommunique.entityToWhomPICGranted": "获授事先知情同意（PIC）的个人或实体；",
   "absCheckpointCommunique.personsAtCheckpoint": "向检查站提供遗传资源利用相关信息的个人或实体",
   "organization.contacts": "联系方式",

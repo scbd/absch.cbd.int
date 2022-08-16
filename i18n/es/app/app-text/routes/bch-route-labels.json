@@ -4,10 +4,10 @@
   "new": "Nuevo",
   "edit": "Editar",
   "lmoDecisions": "Decisiones en materia de OVM",
-  "registries": "",
-  "lmoRegistry": "Registro de organismos vivos modificados",
+  "registries": "Directorios",
+  "lmoRegistry": "Directorio de OVM",
   "organismsRegistry": "Directorio de organismos",
-  "geneRegistry": "Registro de genes",
+  "geneRegistry": "Directorio de genes",
   "forbidden": "Prohibido",
   "notFound": "No encontrado",
   "pageNotFound": "Página no encontrada"

@@ -34,5 +34,6 @@
   "relevantDocuments": "Autres documents pertinents",
   "relevantDocumentsInfo": "Autres sites web pertinents et/ou documents en pièce jointe",
   "notes": "Notes",
-  "notesInfo": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles."
+  "notesInfo": "Le champ « Notes » est réservé à votre usage personnel. Il ne peut être vu que pendant la modification du fichier. Il sera caché une fois le fichier publié. Ce champ n’est pas destiné à être utilisé pour des informations confidentielles.",
+  "absProcedure": "Description des procédures d’APA"
 }

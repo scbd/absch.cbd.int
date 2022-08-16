@@ -1,12 +1,12 @@
 {
-  "since": "",
-  "partyToThe": "",
+  "since": "desde",
+  "partyToThe": "Parte en el",
   "nonParty": "No Parte",
-  "nonPartyToCartagena": "",
+  "nonPartyToCartagena": "No Parte en el Protocolo de Cartagena",
   "cartagenaProtocol": "Protocolo de Cartagena sobre Seguridad de la Biotecnología",
   "ratified": "Ratificado, pero todavía no es Parte",
-  "signatory": "",
+  "signatory": "Signatario",
   "entersIntoForce": "",
-  "suppProtocol": "",
+  "suppProtocol": "Protocolo suplementario",
   "nagoyaProtocol": "Protocolo de Nagoya"
 }

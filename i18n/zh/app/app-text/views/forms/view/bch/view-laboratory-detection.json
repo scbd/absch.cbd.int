@@ -9,6 +9,6 @@
   "lmoTypes": "改性活生物体类型",
   "detectableLmos": "可由实验室探测的改性活生物体",
   "detectableGenes": "可由实验室探测的基因片段",
-  "additionalInformation": "更多信息",
+  "additionalInformation": "",
   "relevantDocuments": "其他相关网站地址和/或附加文件"
 }

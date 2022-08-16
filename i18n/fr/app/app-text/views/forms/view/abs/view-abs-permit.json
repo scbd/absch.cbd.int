@@ -1,11 +1,7 @@
 {
   "generalInfo": "",
-  "thisCertificate": "",
-  "revoked": "",
-  "updated": "",
-  "noValid": "",
-  "newVersion": "",
-  "versionNoValid": "",
+  "revokeCertificate": "CE CERTIFICAT A ÉTÉ <u>RÉVOQUÉ</u> ET N'EST PLUS VALIDE",
+  "updatedCertificate": "CE CERTIFICAT A ÉTÉ <u>MIS À JOUR</u>. UNE NOUVELLE VERSION A ÉTÉ ÉLABORÉE ET <u>CETTE VERSION N’EST PLUS DISPONIBLE.</u>",
   "SeeAmendmentHistory": "Voir l'historique des modifications pour plus d'informations.",
   "country": "Pays",
   "uniqueIdentifier": "Identifiant unique CE-APA",

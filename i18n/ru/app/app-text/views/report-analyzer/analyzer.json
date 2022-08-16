@@ -4,9 +4,9 @@
   "breakdownCbdRegions": "Разбивка по регионам КБР",
   "selectCountries": "Выбрать страны",
   "selectRegions": "Выбрать регионы",
-  "breakdownProtocolParties": "",
+  "breakdownProtocolParties": "Разбивка по Сторонам Протокола",
   "breakdownProtocolNonParties": "Разбивка по государствам, не являющимся Сторонами Протокола",
   "nationalReportAnalyzer": "Анализатор национальных докладов",
-  "nationalReportAnalyzerInfo": "",
-  "analyze": ""
+  "nationalReportAnalyzerInfo": "Данный инструмент позволяет выбрать конкретные разделы доклада или рассматриваемые в нем вопросы и отобразить результаты в разбивке по странам/регионам.",
+  "analyze": "Анализировать"
 }

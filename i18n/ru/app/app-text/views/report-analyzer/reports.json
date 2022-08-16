@@ -2,13 +2,13 @@
   "overview": "Общий обзор",
   "report": "Доклад",
   "deadline": "Крайний срок",
-  "numberOfParties": "",
-  "atTheDeadline": "",
+  "numberOfParties": "Число Сторон",
+  "atTheDeadline": "по состоянию на дату крайнего срока",
   "byParties": "В разбивке по Сторонам*",
   "byNonParties": "В разбивке по государствам, не являющимся Сторонами*",
   "total": "Итого",
-  "partyStatusReport": "",
+  "partyStatusReport": "* Статус Стороны по состоянию на дату крайнего срока представления доклада",
   "nationalReportAnalyzer": "Анализатор национальных докладов",
-  "nationalReportAnalyzerInfo": "",
-  "analyze": ""
+  "nationalReportAnalyzerInfo": "Данный инструмент позволяет выбрать конкретные разделы доклада или рассматриваемые в нем вопросы и отобразить результаты в разбивке по странам/регионам.",
+  "analyze": "Анализировать"
 }

@@ -1,14 +1,12 @@
 {
   "actions": "Medidas",
   "oups": "",
-  "oupsInfo": "Lo lamentamos, pero no está autorizado a designar un usuario.",
   "oops": "",
-  "oopsInfo": "Lo lamentamos, pero hubo un problema.",
   "userToBeCreated": "Usuario a crear:",
   "governmentAffiliationGranted": "Se otorgará la afiliación del Gobierno:",
   "governmentAffiliationRevoked": "Se revocará la afiliación del gobierno:",
   "granted": "Función(es) a otorgar:",
   "revoked": "Función(es) a revocar:",
   "cancel": "Cancelar",
-  "proceed": ""
+  "proceed": "Proceder"
 }

@@ -1,11 +1,11 @@
 {
-  "latestTenRecords": "",
+  "latestTenRecords": "最新 10 条记录",
   "status": "状态",
-  "title": "",
-  "updatedBy": "",
+  "title": "标题",
+  "updatedBy": "更新人：",
   "published": "已发布",
   "draft": "草案",
-  "request": "",
+  "request": "请求",
   "on": "日期：",
-  "seeMore": ""
+  "seeMore": "查看更多"
 }

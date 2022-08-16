@@ -1,11 +1,11 @@
 {
-  "latestTenRecords": "",
-  "status": "",
+  "latestTenRecords": "Últimos 10 registros",
+  "status": "Estado",
   "title": "Título",
-  "updatedBy": "",
-  "published": "",
+  "updatedBy": "Actualizado por",
+  "published": "Publicado",
   "draft": "Borrador",
-  "request": "",
+  "request": "Solicitud",
   "on": "el",
-  "seeMore": ""
+  "seeMore": "Más información"
 }

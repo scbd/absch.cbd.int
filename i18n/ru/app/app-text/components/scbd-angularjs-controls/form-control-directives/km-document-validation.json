@@ -1,7 +1,7 @@
 {
-  "analyzingDocument": "",
+  "analyzingDocument": "Анализ вашего документа ...",
   "savingDocument": "Сохранение вашего документа...",
   "valid": "Ваш документ является допустимым.",
-  "contains": "",
-  "errors": ""
+  "contains": "В вашем документе имеются",
+  "errors": "ошибки."
 }

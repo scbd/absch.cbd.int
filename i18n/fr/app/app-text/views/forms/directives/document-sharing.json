@@ -22,8 +22,6 @@
   "updating": "Mise à jour...",
   "close": "Fermer",
   "generatePDFRecord": "Générer un PDF à parti de ce projet de fichier :",
-  "pleaseNote": "Attention!",
-  "processTakesTime": "Ce processus prend beaucoup de temps à télécharger. ",
-  "function": "",
+  "pleaseNote": "<strong>Attention!</strong> Ce processus prend beaucoup de temps à télécharger. ",
   "selectLanguage": "Sélectionner une langue pour initier le processus de création de PDF."
 }

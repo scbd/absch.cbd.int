@@ -1,19 +1,19 @@
 {
-  "systemAlert": "",
-  "certificatesInfo": "",
-  "emailMe": "",
-  "search": "",
+  "systemAlert": "تنبيهات النظام",
+  "certificatesInfo": "شهادات امتثال معترف بها دوليًا منشورة توضح أن الموافقة المسبقة عن علم (PIC) قد مُنحت لمستخدم في منطقة اختصاصي",
+  "emailMe": "راسلني بالبريد الإلكتروني",
+  "search": "بحث",
   "edit": "تعديل",
   "delete": "حذف",
   "addNew": "إضافة جديد",
   "loading": "قيد التحميل ...",
-  "isAuthenticated": "",
-  "isNotAuthenticated": "",
-  "searchFilter": "",
-  "filterTitle": "",
+  "isAuthenticated": "ليس لديك أي عمليات بحث/تنبيهات محفوظة.",
+  "isNotAuthenticated": "يرجى تسجيل الدخول لعرض التنبيهات المحفوظة.",
+  "searchFilter": "إنشاء أو تعديل فلتر محفوظ لنتائج البحث",
+  "filterTitle": "عنوان لاستعلام البحث المحفوظ",
   "selectFilters": "تحديد فلاتر البحث:",
   "sendEmail": "",
   "cancel": "إلغاء",
   "save": "حفظ",
-  "searchTitle": "عنوان البحث"
+  "searchTitle": "عنوان استعلام البحث"
 }

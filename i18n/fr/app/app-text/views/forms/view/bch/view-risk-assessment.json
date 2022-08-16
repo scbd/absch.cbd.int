@@ -24,12 +24,9 @@
   "informationSharing": "Partage d’informations avec d’autres bases de données",
   "isForCommercialUse": "Est-ce que cette évaluation des risques est liée à un OVM pour une utilisation commerciale?",
   "isForCommercialUseInfo": "",
-  "bioTrackProductDatabase": "",
   "isForFoodSafety": "Est-ce que cette évaluatino de risques est liée à la sécurité alimentaire?",
-  "isForFoodSafetyInfo": "",
-  "isForFoodSafetyInfoItalic": "",
-  "codexConducted": "",
-  "codexConductedLink": "",
+  "isForFoodSafetyInfo": "A-t-elle été menée conformément aux directives du <i>Codex Alimentarius pour la conduite de l'évaluation de la sécurité sanitaire des aliments dérivés de plantes à ADN recombiné?</i>",
+  "forwardToFAO": "",
   "additionalInformation": "Information supplémentaire",
   "otherRelevantInformation": "Autres sites web pertinents et/ou documents en pièce jointe"
 }

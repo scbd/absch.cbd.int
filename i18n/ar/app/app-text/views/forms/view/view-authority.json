@@ -9,7 +9,7 @@
   "linksRelevantLegislative": "روابط للتدابير التشريعية أو الإدارية أو السياساتية",
   "additionalInfoOnLegal": "أساس أهلية السلطة الوطنية المختصة من الناحية القانونية أو الإدارية أو السياساتية",
   "summaryAbsResponsibilities": "موجز بمسؤوليات الحصول على الموارد وتقاسم المنافع",
-  "responsibleGeneticResources": "المسؤول عن كل الموارد الجينية ",
+  "responsibleGeneticResources": "المسؤول عن كل الموارد الجينية فقط السلطة الوطنية المختصة المُعينة للبلد.",
   "functions": "الوظائف",
   "jurisdictionByCNA": "الاختصاصات التي تشملها السلطة الوطنية المختصة",
   "keywordsToHelp": "كلمات مفتاحية لوصف مسؤوليات السلطة الوطنية المختصة",
@@ -18,9 +18,9 @@
   "designatedCA": "هل هذه هي السلطة المختصة الوحيدة المُعيَّنة بموجب البروتوكول التكميلي في بلدك؟",
   "yes": "نعم",
   "no": "لا",
-  "shortDescriptionRegulatory": "",
-  "ShortDescriptionResponsibilities": "",
+  "shortDescriptionRegulatory": "وصف مُختصر للوظائف التنظيمية",
+  "ShortDescriptionResponsibilities": "وصف مختصر لمسؤوليات السلطة المختصة",
   "additionalInformation": "معلومات إضافية",
   "otherRelevantWebsite": "",
-  "administrativeFunctions": "الوظائف الإدارية"
+  "administrativeFunctions": ""
 }

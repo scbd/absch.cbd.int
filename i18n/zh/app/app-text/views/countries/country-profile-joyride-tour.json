@@ -1,11 +1,11 @@
 {
   "countryProfiles": {
     "title": "国家概况",
-    "content": ""
+    "content": "在顶部导航栏的“国家概况”下拉列表中，您可以选择一个感兴趣的国家来查看其概况页面。<br><br>您也可以访问所有国家的国家记录概览。<br><br>让我们探索“概述 — 列出所有国家”。"
   },
   "listOfRecords": {
     "title": "记录列表",
-    "content": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。 <br><br> <u> 国家联络点（NFP））来查看该国家记录类型的全称。"
+    "content": "在本页上，您可以看到所有国家记录的概览。黑圈中的数字代表每个记录类型下已发布记录的总数。 <br><br> <u>提示：</u>将光标放在一个缩写词（例如：国家联络点（NFP））上来查看该国家记录类型的全称。"
   },
   "sortingRecords": {
     "title": "记录排序",
@@ -17,7 +17,7 @@
   },
   "sortingRecordsCountries": {
     "title": "记录排序：国家/地区",
-    "content": "</u> "
+    "content": "</u> 单击国家/地区名称或<span style='color:#1FA65D;'>绿色方块</span>，直接前往该国家的概况页面。"
   },
   "sortingRecordsPartyStatus": {
     "title": "记录排序：缔约方身份",
@@ -25,7 +25,7 @@
   },
   "sortingRecordsRegions": {
     "title": "记录排序：区域",
-    "content": "单击此处，以按地区筛选。 </u> "
+    "content": "单击此处，以按地区筛选。 </u> 如要按联合国5个区域集团进行搜索，在搜索框中输入“生物多样性公约（CBD）”，然后选择感兴趣的区域。"
   },
   "exportingRecords": {
     "title": "导出记录",

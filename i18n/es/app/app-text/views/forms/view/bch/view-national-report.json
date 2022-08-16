@@ -3,10 +3,10 @@
   "contactPerson": "Persona responsable que envía el informe",
   "country": "País",
   "organizationsStakeholders": "Organizaciones/interesados directos a los que se consultó o que participaron en la preparación de este informe",
-  "timePeriod": "",
+  "timePeriod": "Período que abarca este informe",
   "from": "Desde",
   "to": "Hasta",
-  "additionalInformation": "",
-  "seconds": "",
+  "additionalInformation": "Información adicional",
+  "seconds": "segundos.",
   "redirectNow": "Redirigir ahora"
 }

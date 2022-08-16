@@ -4,12 +4,12 @@
   "title": "此检查站公报的标题",
   "checkpoints": "收集或收到此信息的检查点",
   "recipients": "检查点公报收件人",
-  "recipientsNote": "注意：获取和惠益分享信息交换所不保证自动生成电子邮件的接收。",
+  "recipientsNote": "注：获取和惠益分享信息交换所不保证自动生成电子邮件的接收。",
   "informationCollected": "检查站收集或收到的信息",
   "referenceNumbers": "与本公报相关的国际公认合规证书的参考编号",
   "IRCCsNotAvailable": "国际公认合规证书（IRCC）暂不可用",
   "geneticResource": "遗传资源的来源",
-  "entityWhoGrantedPIC": "",
+  "entityWhoGrantedPIC": "授予事先知情同意的个人或实体",
   "subjectMatter": "与收集或收到的信息相关的主题或遗传资源",
   "addSubjectMatter": "可选附加主题细节",
   "specimens": "样本数据",
@@ -28,6 +28,6 @@
   "dateCollectedTo": "检查点收到信息的日期",
   "relevantDocument": "相关文件",
   "information": "相关资料副本",
-  "additionalInformation": "更多信息",
+  "additionalInformation": "",
   "relevantDocumentsInfo": "其他相关网站地址和/或附加文件"
 }

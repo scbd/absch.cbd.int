@@ -1,8 +1,8 @@
 {
   "display": "Mostrar referencias cruzadas con base(s) de datos externa(s)",
   "none": "Ninguna",
-  "databaseInfo": "",
-  "databaseLink": "",
+  "databaseInfo": "Para más información sobre la base de datos externa, haga clic en el nombre de la base de datos que se presenta a continuación; para visitar la página original de la base de datos que contiene información sobre este OVM, haga clic en",
+  "databaseLink": "el símbolo  que se encuentra al lado del nombre de la base de datos",
   "country": "País",
   "decisions": "Decisiones",
   "approved": "Aprobado con condiciones",
