@@ -20,6 +20,8 @@ let cdnUrl              = (process.env.CDN_URL || 'https://cdn.jsdelivr.net/').r
     global.app.rootPath = __dirname; //to use in subfolders
     global.app.cdnUrl   = cdnUrl;
 
+const iframeAllowedUrls = [/^\/((ar|en|es|fr|ru|zh)\/)?share\/embed/]
+
 if(!appVersion || appVersion.trim()==''){
     appVersion =  ((process.env.BRANCH||'') + '-'+ (process.env.VERSION ||''))||process.env.COMMIT;
 }  
@@ -77,9 +79,16 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
         global.app.version = appVersion;
         res.setHeader('Cache-Control', 'public');    
         res.cookie('VERSION', appVersion);
-        // res.setHeader('X-Frame-Options', 'DENY')
+        
+        for (let i = 0; i < iframeAllowedUrls.length; i++) {
+            const url = iframeAllowedUrls[i];
+            if(url.test(req.url))
+                res.setHeader('X-Frame-Options', '*')
+        }     
+        
         next();
-    },  
+    },
+      
     translation.renderApplicationTemplate
 );
 
