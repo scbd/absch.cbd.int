@@ -83,7 +83,7 @@ app.get('/(:lang(ar|en|es|fr|ru|zh)(/|$))?*',
         for (let i = 0; i < iframeAllowedUrls.length; i++) {
             const url = iframeAllowedUrls[i];
             if(url.test(req.url))
-                res.setHeader('X-Frame-Options', '*')
+                res.setHeader('X-Frame-Options', 'ALLOW')
         }     
         
         next();
