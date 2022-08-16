@@ -46,8 +46,8 @@ if(process.env.COMPRESS=='true'){
 }
 
 // Set routes
-app.use('/widgets.js',                               require('./middlewares/widget'));
-app.use('/legacy-ajax-plugin.js',                    require('./middlewares/widget'));
+app.use('/widgets.js',                               express.static(`${__dirname}/dist/en/app/assets/widgets.js`));
+app.use('/legacy-ajax-plugin.js',                    express.static(`${__dirname}/dist/en/app/assets/legacy-ajax-plugin.js`));
 app.use('/app/assets/widget-example.html',           express.static(`${__dirname}/app/assets/${process.env.CLEARINGHOUSE}-widget-example.html`));
 
 app.use('(/:lang(ar|en|es|fr|ru|zh))?/app/libs',     express.static(__dirname + '/node_modules/@bower_components', { setHeaders: cacheControl.setCustomCacheControl }));
