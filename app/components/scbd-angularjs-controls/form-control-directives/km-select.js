@@ -41,7 +41,7 @@ import '~/components/scbd-angularjs-services/main';
         $scope.displayCount  = $attrs.displayCount || 3;
         $scope.filterType    = $attrs.filterType || 'contains';
         $scope.searchEnabled = $attrs.searchEnabled=='true'||false;
-        $scope.btnClass   = $attrs.btnClass || 'btn-sm';
+        $scope.size          = `btn-${$attrs.size||'sm'}`;
 
         if ($scope.showDescription === undefined)
           $scope.showDescription = 'false';
