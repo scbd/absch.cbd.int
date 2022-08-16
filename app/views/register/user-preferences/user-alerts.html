@@ -73,7 +73,7 @@
                     <div class="cursor-pointer" ng-hide="del" ng-click="addEdit(record)" ng-disabled="!record._id">
                         <i class="bi bi-pencil-square fs-4"></i></div>
                 </div>
-                <div class="col-1 text-center text-secondary">
+                <div ng-if="!isDeleteAllow" class="col-1 text-center text-secondary">
                     <small class="d-none d-md-block">{{::('userAlertsT.delete'|$translate)}}</small>
                     <div class="cursor-pointer" ng-hide="del" ng-click="del=!!record._id;confirmDelete(record)" ng-disabled="!record._id">
                         <i class="bi bi-trash-fill fs-4"></i></div>

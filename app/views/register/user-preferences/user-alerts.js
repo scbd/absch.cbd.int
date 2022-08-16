@@ -8,7 +8,7 @@ import '~/views/register/directives/register-top-menu';
 import '~/components/scbd-angularjs-services/main';
 import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.json';
 
-    app.directive("userAlerts", ['$rootScope', 'ngDialog', function ($rootScope, ngDialog) {
+    app.directive("userAlerts", ['$rootScope', 'ngDialog', '$routeParams', function ($rootScope, ngDialog, $routeParams) {
 
         return {
             restrict: "EA",
@@ -27,11 +27,12 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                     var systemSearches = [];
                     $scope.user = $rootScope.user;
                     $scope.skipKeywordsFilter = false;
+                    $scope.skipKeywordsFilter = true; // ToDo: remove one skipKeywordsFilter
                     $scope.skipTextFilter = false;
+                    $scope.skipTextFilter = true; // ToDo: remove one skipTextFilter
                     $scope.systemAlertsSubscription = [];
                     $scope.isABS = realm.is('ABS');
-                    $scope.skipKeywordsFilter = true;
-                    $scope.skipTextFilter = true;
+                    $scope.isDeleteAllow = false ;
                     translationService.set('userAlertsT', userAlertsT); 
                     if ($scope.user?.government) {
                         if($scope.isABS){
@@ -73,12 +74,17 @@ import userAlertsT from '~/app-text/views/register/user-preferences/user-alerts.
                         $scope.loading = false;
                         if ($scope.user && $scope.user.isAuthenticated) {
                             var query = {};
+                            if ($routeParams.id) {
+                                    query['_id'] = { $oid : $routeParams.id};
+                                    $scope.isDeleteAllow = true;
+                            }
+                            else{
                             if ($scope.collectionFilter)
                                 query = JSON.parse($scope.collectionFilter);
-                            $scope.loading = true;
-                            query.realm = realm.value;
-                            query['$or'] = [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}];
-                            
+                                $scope.loading = true;
+                                query.realm = realm.value;
+                                query['$or'] = [{ isSharedQuery : false},{ isSharedQuery :{$exists: false}}];
+                            } 
                             IGenericService.query('v2016', 'me/subscriptions', query)
                                 .then(function (data) {
                                     // if ($scope.collection == "search-queries" && $scope.user.government) {

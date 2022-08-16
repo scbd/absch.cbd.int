@@ -528,3 +528,17 @@
 .knowledge-base .kb-faq details > summary::-webkit-details-marker {
 	display: none;
 }
+
+.shared-links .email-links ul li {
+    width: 200px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.shared-links .show-emails[aria-expanded=false] .bi-chevron-up {
+  display: none;
+}
+.shared-links .show-emails[aria-expanded=true] .bi-chevron-down {
+  display: none;
+}
