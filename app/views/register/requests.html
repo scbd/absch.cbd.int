@@ -19,44 +19,37 @@
                     <strong>{{::('requestsT.error'|$translate)}} </strong><span ng-bind="__error"></span>
                 </div>
 
-                <table>
-                    <tr>
-                        <td>
-                            <div class="btn-group" role="group">
-                                <button type="button" ng-model="filterStatus" class="btn btn-outline-secondary dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span ng-if="filterStatus=='Pending'">{{::('requestsT.pendingApproval'|$translate)}}</span>
-                                    <span ng-if="filterStatus=='Approved'">{{::('requestsT.approved'|$translate)}}</span>
-                                    <span ng-if="filterStatus=='Rejected'">{{::('requestsT.rejected'|$translate)}}</span>
-                                    <span ng-if="filterStatus=='Canceled'">{{::('requestsT.canceled'|$translate)}}</span>
-                                    <span ng-if="filterStatus=='Expired'">{{::('requestsT.expired'|$translate)}}</span>
-                                    <span ng-if="filterStatus=='All'">{{::('requestsT.all'|$translate)}}</span>
-                                    <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Pending')">{{::('requestsT.pendingApproval'|$translate)}}</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Approved')">{{::('requestsT.approved'|$translate)}}</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Rejected')">{{::('requestsT.rejected'|$translate)}}</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Canceled')">{{::('requestsT.canceled'|$translate)}}</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('Expired')">{{::('requestsT.expired'|$translate)}}</a></li>
-                                    <li><a rel="noopener" translation-url href="#" class="fs-small-8" ng-click="filterByStatus('All')">{{::('requestsT.all'|$translate)}}</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                        <td>
-                                <div class="row">
-                                        <div class="col-12">
-                                            <div class="float-start">
-                                                <km-select size="std" ng-model="filterType" multiple binding-type="string" placeholder="{{::('requestsT.recordType'|$translate)}}" items="options.filterTypes()"></km-select>
-                                            </div>
-                                        </div>
-                                    </div>
-                        </td>
-                        <td class="w-100">
-                                <div class="mt-1 ms-3 text-lowercase"><span class="badge bg-secondary rounded-circle" ng-bind="itemCount"></span> {{filterStatus == "('requestsT.all'|$translate)" ? "" : filterStatus}} {{::('requestsT.requestsFound'|$translate)}}</div>
-                        </td>
-                    </tr>
-                </table>
+                
+                <div class="row">
+                    <div class="col-12">
+                        <div class="btn-group pr-1" role="group">
+                            <button type="button" ng-model="filterStatus" class="btn btn-outline-secondary dropdown-toggle"
+                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span ng-if="filterStatus=='Pending'">{{::('requestsT.pendingApproval'|$translate)}}</span>
+                                <span ng-if="filterStatus=='Approved'">{{::('requestsT.approved'|$translate)}}</span>
+                                <span ng-if="filterStatus=='Rejected'">{{::('requestsT.rejected'|$translate)}}</span>
+                                <span ng-if="filterStatus=='Canceled'">{{::('requestsT.canceled'|$translate)}}</span>
+                                <span ng-if="filterStatus=='Expired'">{{::('requestsT.expired'|$translate)}}</span>
+                                <span ng-if="filterStatus=='All'">{{::('requestsT.all'|$translate)}}</span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown-item" ng-click="filterByStatus('Pending')">{{::('requestsT.pendingApproval'|$translate)}}</li>
+                                <li class="dropdown-item" ng-click="filterByStatus('Approved')">{{::('requestsT.approved'|$translate)}}</li>
+                                <li class="dropdown-item" ng-click="filterByStatus('Rejected')">{{::('requestsT.rejected'|$translate)}}</li>
+                                <li class="dropdown-item" ng-click="filterByStatus('Canceled')">{{::('requestsT.canceled'|$translate)}}</li>
+                                <li class="dropdown-item" ng-click="filterByStatus('Expired')">{{::('requestsT.expired'|$translate)}}</li>
+                                <li class="dropdown-item" ng-click="filterByStatus('All')">{{::('requestsT.all'|$translate)}}</li>
+                            </ul>
+                        </div>     
+                        <km-select class="pr-1" size="std" ng-model="filterType" multiple binding-type="string" placeholder="{{::('requestsT.recordType'|$translate)}}" items="options.filterTypes()"></km-select>
+                        <span class="badge bg-info">
+                            <span class="badge bg-secondary rounded-circle" ng-bind="itemCount"></span> 
+                            {{filterStatus == "('requestsT.all'|$translate)" ? "" : filterStatus}} {{::('requestsT.requestsFound'|$translate)}}
+                        </span>                   
+                    </div>
+                </div>
+                        
 
                 <div class="table p-1">
 
