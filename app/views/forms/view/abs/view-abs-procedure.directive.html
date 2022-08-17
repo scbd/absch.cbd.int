@@ -70,7 +70,7 @@
 
 		<div ng-show="document.hasApplicationDocuments!=undefined">
 			<legend>{{::('viewAbsProcedureT.hasApplicationDocuments'|$translate)}}</legend>
-			<div class="km-value" compare-val>
+			<div compare-val="hasApplicationDocuments">
 				<km-value-bool value="document.hasApplicationDocuments" locales="locale"></km-value-bool>
 			</div>
 		</div>
@@ -99,7 +99,7 @@
 
 		<div ng-show="document.hasApplicationFees!=undefined">
 			<legend>{{::('viewAbsProcedureT.hasApplicationFees'|$translate)}}</legend>
-				<div class="km-value" compare-val>
+				<div compare-val="hasApplicationFees">
 					<km-value-bool value="document.hasApplicationFees" locales="locale"></km-value-bool>
 				</div>
 			
