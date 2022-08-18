@@ -8,7 +8,7 @@ function GenerateRecords(_type, _country, _locale)
 	if(document.getElementById(placeHolderID)==null)
 		document.writeln('<div id="'+placeHolderID+'"></div>');
 		
-	document.writeln("<script type='text/javascript' charset='utf-8' src='/widgets.js'></script>");
+	document.writeln("<script type='text/javascript' charset='utf-8' src='https://bch.cbd.int/widgets.js'></script>");
 	const iframePlaceholder = document.getElementById(placeHolderID);
 
 	if(iframePlaceholder){
@@ -17,7 +17,7 @@ function GenerateRecords(_type, _country, _locale)
 		if(_type)
 			code += ` data-legacy-schema='${_type}'`;
 		if(_country && _country!= '*')
-			code = ` data-legacy-countries='${_country}'`
+			code += ` data-legacy-countries='${_country}'`
 		
 		code += ` data-locale='${_locale}' "width='100%' ></div>`;
 		
