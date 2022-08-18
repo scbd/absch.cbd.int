@@ -1,4 +1,4 @@
-﻿<div id="innerPage">
+<div id="innerPage">
     <div class="mastHead pt-4" ng-class="{'bg-bch': isBCH, 'bg-abs':isABS}">
         <h1 class="text-white">{{::('searchDirectiveT.search'|$translate)}}</h1>
         <div id="search-new" >
@@ -306,6 +306,9 @@
                                 <div class="tab-pane bg-white"
                                     ng-class="{'active':searchResult.currentTab==='allRecords'}"
                                     ng-if="searchResult.currentTab==='allRecords'">
+                                    <div class="d-flex justify-content-center" ng-if="!pageInitialized">
+                                        <span class="spinner-border spinner-border-sm mr-1" role="status"></span>  {{::('searchDirectiveT.loading'|$translate)}}...
+                                    </div> 
                                     <div ng-if="obsoleteSchemas.length" class="alert alert-info">
                                         <i class="bi-exclamation-octagon-fill"></i>
                                         <strong>

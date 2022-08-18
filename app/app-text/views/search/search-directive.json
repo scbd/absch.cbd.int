@@ -39,5 +39,6 @@
     "searchClearingHouse": "Search the Clearing-House",
     "saveFilter": "Save filter",
     "closeEditing": "Close editing",
-    "obsoleteSchemaMessage" : "The following formats are no longer supported on the Biosafety Clearing-House. For more information, please visit bch.cbd.int or contact bch@cbd.int :"
+    "obsoleteSchemaMessage" : "The following formats are no longer supported on the Biosafety Clearing-House. For more information, please visit bch.cbd.int or contact bch@cbd.int :",
+    "loading": "loading"
 }

@@ -548,7 +548,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     ////////////////////////////////////////////
 
                     async function init(){
-
+                        $scope.searchResult.loading = true;
                         leftMenuSchemaFieldMapping = await loadLeftMenuFieldMapping();
                         loadFilters().then(()=>{
 
@@ -619,14 +619,42 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     $scope.saveFilter({...countryFilter});
                                 });                                
                             }
+                            
+                            if(query.region){
+                                let regions = query.region;
+                                if(typeof regions == 'string')
+                                    regions = [regions];
+
+                                    regions.forEach(e=>{
+                                    const regionFilter = $scope.searchFilters[e]
+                                    $scope.saveFilter({...regionFilter});
+                                });                                
+                            }
+                            if(query.keyword){
+                                let keywords = query.keyword;
+                                if(typeof keywords == 'string')
+                                    keywords = [keywords];
+
+                                    keywords.forEach(e=>{
+                                    const keywordFilter = $scope.searchFilters[e]
+                                    $scope.saveFilter({...keywordFilter});
+                                });                                
+                            }
 
                             if(query["raw-query"]){
                                 saveRawQueryFilter(query["raw-query"]);
                             }
 
                             $timeout(function(){updateQueryResult(currentPage);}, 200)
+                        })
+                        .catch(e=>{
+                            console.error(e)
+                            $scope.searchResult.loading = false;
+                        })
+                        .finally(()=>{
+                            $scope.pageInitialized = true;
                         });
-                        $scope.pageInitialized = true;
+                        
                     }
 
                     function setExternalFilters(filters){
