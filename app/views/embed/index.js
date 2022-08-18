@@ -134,7 +134,11 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
             "law": "biosafetyLaw",
             "nationaldatabase": "database",
             "news": "biosafetyNews",
-            "riskassessment": "nationalRiskAssessment"            
+            "riskassessment": "nationalRiskAssessment",            
+            "nationalreport0"  : "cpbNationalReport0",
+            "nationalreport1"  : "cpbNationalReport1",
+            "nationalreport2"  : "cpbNationalReport2",
+            "nationalreport3"  : "cpbNationalReport3",
         }
 
         return schemaMapping[schema] || schema;
