@@ -672,6 +672,13 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     if ( leftMenuFilters && leftMenuFilters[subFilterKey] ) {
                                         let filterItem = leftMenuFilters[subFilterKey].find( q => q.field == filter.field );
                                         filterItem.selectedItems = filter.selectedItemsIds || filter.selectedItems;
+                                        //update subfilter text
+                                        for (const item in filterItem.selectedItems) {
+                                            filterItem.selectedItems[item] = { 
+                                                ...filterItem.selectedItems[item], 
+                                                ...($scope.searchFilters[item]||{})
+                                            }
+                                        };
                                     }
                                 })
                             }
@@ -931,7 +938,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         // var schemaFieldMap = _.cloneDeep(bchSchemaFieldMapping[schemaFieldKey]);
 
                         var existingFilter = _.find($scope.searchFilters, function(fil){
-                            return fil.name[locale] == $filter('lstring')(keyword.title)
+                            return fil.name == $filter('lstring')(keyword.title)
                         })
                         if(existingFilter){                           
                             // _.each(schemaFieldMap, function(field){
@@ -941,7 +948,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             // existingFilter.schemaFields = _.union(schemaFieldMap, existingFilter.schemaFields||[])                            
                         }
                         else{
-                            var filter = {  'type': 'keyword', 'name': keyword.title, 'id': keyword.identifier, 'description': '', 'broader': broader };
+                            var filter = {  'type': 'keyword', 'name': $filter('lstring')(keyword.title), 'title': keyword.title, 'id': keyword.identifier, 'description': '', 'broader': broader };
                             addFilter(keyword.identifier, filter);
                         }
 
