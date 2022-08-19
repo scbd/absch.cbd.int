@@ -38,6 +38,7 @@
     "LMOProcessing": "LMOs for direct use as food or feed, or for processing (LMOs-FFP)",
     "uses": "Use(s) of LMO",
     "takenInAccordanceWithA116": "Has the decision been taken in the absence of a domestic regulatory framework and in accordance with Article 11.6?",
+    "typeOfDecision": "Type of decision",
     "note": "<strong>Note:</strong> The first two categories in the field <i>Subject of the decision, notification, communication or declaration</i> above have been selected indicating that this record refers to a decision addressing an LMO for both intentional introduction into the environment AND for direct use as food or feed, or for processing. Accordingly, the field below, <i>Type of decision</i>, is not active because the information (including information on the contact details of the importer/exporter or applicant) has already been provided. Should this not be the case, please create two different records, one for a decision on an LMO for intentional introduction into the environment and one for a decision on an LMO-FFP.",
     "resultDecision": "Result of the decision",
     "conditions": "Specify the conditions",
