@@ -1,7 +1,7 @@
 ﻿<div class="row">
     <div class="col-md-12">
         <div class="d-flex justify-content-center">
-            <pagination  class="text-center top-pagination" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+            <pagination  class="text-center top-pagination" ng-if="searchResult.pageCount>0 && searchResult.numFound > 25" current-page="searchResult.currentPage" 
                 page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
         </div>    
@@ -16,7 +16,7 @@
             <i class="fa fa-spin fa-spinner"  style="margin-left:50%"></i> {{::('viewResultT.loading'|$translate)}}
         </div>
         <div class="d-flex justify-content-center">
-            <pagination  class="text-center bottom-pagination" ng-if="searchResult.pageCount>0" current-page="searchResult.currentPage" 
+            <pagination  class="text-center bottom-pagination" ng-if="searchResult.pageCount>0 && searchResult.numFound > 25" current-page="searchResult.currentPage" 
                 page-count="searchResult.pageCount" on-page-change="onPageChange(page)" page-size="searchResult.rowsPerPage"
                 num-found="searchResult.numFound" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
         </div>        
