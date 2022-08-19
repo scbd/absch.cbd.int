@@ -1,12 +1,12 @@
 <div id="innerPage">
-    <div class="mastHead text-white">
+    <div class="mastHead">
 
-        <h1 ng-show="!self.showAnalyzer">
+        <h1 class="text-white" ng-show="!self.showAnalyzer">
             <span ng-bind="self.activeReport.title"></span>
             <!-- <span class="hidden-xs">National Report<span> <span class="hidden-xs hidden-sm">on the Implementation of the Nagoya Protocol (NR)</span> -->
         </h1>
 
-        <h1 ng-show="self.showAnalyzer">
+        <h1 class="text-white" ng-show="self.showAnalyzer">
             <span class="bold">{{::('reportAnalyzerT.report'|$translate)}} </span>
             <span style="font-weight:normal;" ng-bind="self.activeReport.title">
                 <!-- <span > Interim <span class="hidden-sm hidden-md hidden-lg">NR</span>
@@ -15,7 +15,7 @@
             </span>
         </h1>
 
-        <h2 ng-show="self.showAnalyzer">
+        <h2 class="text-white" ng-show="self.showAnalyzer">
             {{::('reportAnalyzerT.analysis'|$translate)}}
             <span ng-show="self.showAnalyzer" style="padding:0;margin:0; display:inline;font-weight:normal;"
                 ng-switch="self.selectedRegionsPreset">
