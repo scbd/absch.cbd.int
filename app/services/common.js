@@ -485,3 +485,13 @@ export function uniqIdentifiers(originalIdentifiers){
     return uniqueIdentifiers;
 
 }
+
+export function stringToHash(text, radix){
+    const hash = text.split("")
+                    .reduce(function(a,b){
+                        a = ((a<<5)-a)+b.charCodeAt(0);
+                        return a&a
+                    }, 0);
+
+    return Math.abs(hash).toString(radix||24);
+}

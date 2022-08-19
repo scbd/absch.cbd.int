@@ -75,7 +75,7 @@
     "documents": "Document text",
     "documentsInfo": "An attachment is preferred. Otherwise, provide the location of the document (i.e. web address including the URL of the website (e.g. http: //www.cbd.int) and the name of the website (e.g. “Convention on Biological Diversity”).",
     "timeframeInformation": "Timeframe for confirmation or updating of information",
-    "expires": "ould this information be confirmed or updated after two years from the date of submission?",
+    "expires": "Should this information be confirmed or updated after two years from the date of submission?",
     "expiresInfo": "If the answer to this question is \"Yes\", after two years from the date of submission you will be asked to confirm or update the record within 3 months. After this period, if no confirmation has been received, the record will be marked as \"Not Confirmed\".",
     "otherSubject": "Any other decisions, notifications, declarations or communications",
     "eg24": "eg. 24",
@@ -85,5 +85,6 @@
     "relevantInformation": "Any other relevant information",
     "relevantDocumentsInfo": "Please use this field to provide any other relevant website addresses and/or one or more relevant documents that will be stored in the database for users to download",
     "notes": "Notes",
-    "notesInfo": "The “Notes” field is for personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information."
+    "notesInfo": "The “Notes” field is for personal use. It can only be seen when the record is being edited but is not visible when the record is published. This field is not meant to be used for confidential information.",
+    "typeOfDecision" : "Type of decision"
 }

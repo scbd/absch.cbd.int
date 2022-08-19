@@ -12,7 +12,7 @@ app.value("showHelp", {
 const abschRouteUrls = {
    theAbs,
    forums                                         : { component: ()=>import('~/views/forums/forum-list-view') },
-   forums_cc                                      : { component: ()=>import('~/views/forums/thread-list-view') },
+   forums_list_view                                      : { component: ()=>import('~/views/forums/thread-list-view') },
    post_list_view                                 : { component: ()=>import('~/views/forums/post-list-view') },   
    register_admin_ircc_counts                     : { component: ()=>import('~/views/register/admin/ircc-counts') },
    register_MSR_edit                   : { component: ()=>import('~/views/forms/edit/abs/edit-measure') },
@@ -41,7 +41,7 @@ app.config(["$routeProvider", function ($routeProvider) {
   whenAsync('/',                                                  { ...mapView(abschRouteUrls.theAbs),                 "label":routesLabels.theAbs,"resolveController":true,"resolveUser":true}).
   whenAsync('/partners/idlo/events',                              { ...mapView(angularViewWrapper),                    "label":routesLabels.idlo,"resolveController":false,"resolveUser":false,"resolve":{ ...abschRouteUrls.partners_idlo_events,                                        }}).
   whenAsync('/forums',                                            { ...mapView(angularViewWrapper),                    "label":routesLabels.forums,"resolveController":true,"resolve":{ ...abschRouteUrls.forums,                                                      "securized":securize()}}).
-  whenAsync('/forums/cc',                                         { ...mapView(angularViewWrapper),                    "label":routesLabels.complianceCommittee3,"resolveController":true,"resolve":{ ...abschRouteUrls.forums_cc,                                                   "securized":securize()},"forumId":17451,"postUrl":"/forums/cc","text":"Compliance Committee 3"}).
+  whenAsync('/forums/cc',                                         { ...mapView(angularViewWrapper),                    "label":routesLabels.complianceCommittee3,"resolveController":true,"resolve":{ ...abschRouteUrls.forums_list_view,                                                   "securized":securize()},"forumId":17451,"postUrl":"/forums/cc","text":"Compliance Committee 3"}).
   whenAsync('/forums/cc/:threadId',                               { ...mapView(angularViewWrapper),                    "label":routesLabels.threadSubject,"resolveController":true,"resolve":{ ...abschRouteUrls.post_list_view ,                                          "securized":securize()},"forumId":17451,"forumListUrl":"/forums/cc/","text":"Compliance Committee 3"}).
   whenAsync('/forums/iac4',                                       { ...mapView(angularViewWrapper),                    "label":routesLabels.iac4,"resolveController":true,"resolve":{ ...abschRouteUrls.forums_list_view,                                                 "securized":securize()},"forumId":17607,"postUrl":"/forums/iac4","text":"IAC 4"}).
   whenAsync('/forums/iac4/:threadId',                             { ...mapView(angularViewWrapper),                    "label":routesLabels.threadSubject,"resolveController":true,"resolve":{ ...abschRouteUrls.post_list_view ,                                        "securized":securize()},"forumId":17607,"forumListUrl":"/forums/iac4/","text":"IAC 4"}).

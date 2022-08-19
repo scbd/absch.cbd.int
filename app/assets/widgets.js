@@ -108,7 +108,7 @@ function initWidget(){
                 let iframeSrc = `${origin}/${locale}/share/embed/${type}`
                 if(widget.dataset.accessKey)
                     iframeSrc += `/${widget.dataset.accessKey}?embed=true`;
-                else if(widget.dataset.legacySchema || widget.dataset.legacyCountries){
+                else if(widget.dataset.legacySchema || widget.dataset.legacyCountries || widget.dataset.legacyRegions){
                     iframeSrc += `/legacy-widget?embed=true`
 
                     if(widget.dataset.legacySchema){
@@ -118,6 +118,10 @@ function initWidget(){
                     if(widget.dataset.legacyCountries){
                         var countries = widget.dataset.legacyCountries.split(/;|,|\s/)
                         iframeSrc += `&country=${countries.join('&country=')}`;
+                    }
+                    if(widget.dataset.legacyRegions){
+                        var regions = widget.dataset.legacyRegions.split(/;|,|\s/)
+                        iframeSrc += `&region=${regions.join('&region=')}`;
                     }
                 }
                 var options = {
