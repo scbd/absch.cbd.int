@@ -266,7 +266,7 @@
                                 <!-- END IF NO SECTION -->
                             </section>
 
-                            <section ng-if="isBch">
+                            <section ng-if="isBch" class="pb-0">
                                 <legend>{{::('editAuthorityT.responsibilities'|$translate)}}</legend>
                                 <div class="help-info">
                                     <span ng-if="type!='SPCA'">
@@ -304,7 +304,7 @@
                                     </div>                                        
                                 </div>
                             </section>
-                            <section  ng-if="isBch && type=='SPCA'">
+                            <section  ng-if="isBch && type=='SPCA'" class="mt-0">
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <div class="km-control-group" name="responsibleForAll" required caption="{{::('editAuthorityT.responsibleForAllBchSPA'|$translate)}}">
