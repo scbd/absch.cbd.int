@@ -79,8 +79,8 @@
                 </div>
             </div>
         </div>
-
-        <div class="alert alert-danger" role="alert" ng-if="!internalDocumentInfo && !loading">
+        <!-- ToDo: internalDocumentInfo.deletedOn is not available, need to add ng-if="!internalDocumentInfo && !loading && !internalDocument" -->
+        <div class="alert alert-danger" role="alert" ng-show="internalDocumentInfo.deletedOn">
             <h3>
                 {{::('recordLoaderT.viewing'|$translate)}}
             </h3>
