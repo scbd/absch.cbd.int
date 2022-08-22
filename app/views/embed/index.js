@@ -72,21 +72,7 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
                 
                     if(obsoleteSchemas.length)
                         localStorageService.set(`${uniqueKey}_obsoleteSchemas`, obsoleteSchemas);
-
-                    if(searchQuery.countries){
-                        let countries = searchQuery.countries;
-                        if(typeof countries == 'string')
-                            countries = [countries]
-                        for (let i = 0; i < countries.length; i++) {
-                        
-                            data.sharedData.searchQuery.filters.push({
-                                id: countries[i],
-                                name: countries[i],
-                                otherType: undefined,
-                                type: "country"
-                            });                            
-                        }
-                    }              
+                 
                 }
                 else{
                     data = (await $http.get(`/api/v2018/document-sharing/${$routeParams.accessKey}`)).data;
@@ -108,7 +94,6 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
 
                         if($routeParams.accessKey == 'legacy-widget'){
                             $location.search('schema', undefined);
-                            $location.search('countries', undefined);
                         }
 
                         $location.path(`/search`);
@@ -138,7 +123,6 @@ export default ['$scope', '$routeParams', '$http', '$location', 'locale', 'local
             "decision"             : "biosafetyDecision",
             "decisionunderaia"     : "biosafetyDecision",
             "decisionundera11"     : "biosafetyDecision",
-            "decision"             : "biosafetyDecision",
             "law"                  : "biosafetyLaw",
             "nationaldatabase"     : "database",
             "news"                 : "biosafetyNews",

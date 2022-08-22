@@ -615,8 +615,9 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     countries = [countries];
 
                                 countries.forEach(e=>{
-                                    const countryFilter = $scope.searchFilters[e]
-                                    $scope.saveFilter({...countryFilter});
+                                    const countryFilter = $scope.searchFilters[e.toLowerCase()]
+                                    if(!$scope.setFilters[countryFilter.id])
+                                        $scope.saveFilter({...countryFilter});
                                 });                                
                             }
                             
@@ -625,9 +626,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 if(typeof regions == 'string')
                                     regions = [regions];
 
-                                    regions.forEach(e=>{
-                                    const regionFilter = $scope.searchFilters[e]
-                                    $scope.saveFilter({...regionFilter});
+                                regions.forEach(e=>{
+                                    const regionFilter = $scope.searchFilters[e.toUpperCase()]
+                                    if(!$scope.setFilters[regionFilter.id])
+                                        $scope.saveFilter({...regionFilter});
                                 });                                
                             }
                             if(query.keyword){
@@ -635,9 +637,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                 if(typeof keywords == 'string')
                                     keywords = [keywords];
 
-                                    keywords.forEach(e=>{
+                                keywords.forEach(e=>{
                                     const keywordFilter = $scope.searchFilters[e]
-                                    $scope.saveFilter({...keywordFilter});
+                                    if(!$scope.setFilters[keywordFilter.id])
+                                        $scope.saveFilter({...keywordFilter});
                                 });                                
                             }
 
