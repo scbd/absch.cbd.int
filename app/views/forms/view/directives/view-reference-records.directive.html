@@ -30,6 +30,15 @@
                     <tr ng-if="field.showRecords">
                         <td width="15%" colspan="4" class="p-0">
                             <table class="table table-bordered table-condensed w-100 mb-0">
+                                <tr>
+                                    <td colspan="4">
+                                        <div class="d-flex justify-content-center">
+                                            <pagination  class="text-center top-pagination" ng-if="1>0" current-page="1" 
+                                                page-count="100" on-page-change="onPageChange(1)" page-size="10"
+                                                num-found="1000" on-page-size-changed="onPageSizeChanged(size)"></pagination> 
+                                        </div>
+                                    </td>
+                                </tr>
                                 <tr class="border-bottom">
                                    <td  ng-show="record.schemaType=='national'" ng-class="{'bold':sortField=='government'}">
                                     {{::('viewReferenceRecordsT.country'|$translate)}}

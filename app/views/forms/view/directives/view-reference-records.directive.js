@@ -22,63 +22,85 @@ app.directive("viewReferencedRecords", [function () {
 		controller: ["$scope", "solr", '$q', 'searchService', 'realm', 'commonjs', 'translationService', function ($scope, solr, $q, searchService, realm, commonjs, translationService) {
 			translationService.set('viewReferenceRecordsT', viewReferenceRecordsT);
 			$scope.sortField='updatedDate_dt';
-			$scope.sortSequence='desc'
+			$scope.sortSequence='desc';
+			$scope.searchResult = {};
 			// //==================================
 			// //
 			// //==================================
 			$scope.$watch('model', function(newValue, oldValue){
 				if(newValue){
-
-					var searchQuery = {
-						rowsPerPage:5000,
-						query 	: "referenceRecord_ss:" + solr.escape($scope.model),
-						fields	: 'updatedOn:updatedDate_dt,title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:identifier_s, uniqueId:uniqueIdentifier_s, government_s,government:government_EN_s,schemaType:schemaType_s,',
-						sort	: 'updatedDate_dt desc'
-					}
-					if(realm.is('BCH')){
-						searchQuery.fields += `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
-					}
-					$q.when(searchService.list(searchQuery))
-					.then(function(data) {
-
-						if(data.data.response.docs.length > 0){
-							return getFieldTitles().then(fieldTitles=>{
-								_.forEach(data.data.response.docs, function(record){
-									_.forEach(record.referenceRecord_info_ss, function(info){
-										info = JSON.parse(info);
-										const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
-										_.uniq(info.identifiers).forEach((identifier)=>{
-											if(removeRevisionNumber(identifier) == $scope.model){
-												if(!$scope.referenceRecords)
-													$scope.referenceRecords = {};
-
-												if(!$scope.referenceRecords[record.schemaCode]){
-													$scope.referenceRecords[record.schemaCode] = {
-														schema	  : record.schema,
-														fields 	  : {},
-														schemaType: record.schemaType,
-														fieldTitle: fieldTitle
-													};
-												}
-
-												$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
-												$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
-												$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push( record );
-											}
-										});
-									});
-								})
-								if(typeof $scope.onDataFetch == 'function'){
-									$scope.onDataFetch({data:$scope.referenceRecords})
-								}
-								
-							})
-						}
-					});
-
+					loadReferenceRecords(false, 2000, 0);
 				}
 			});
 
+			async function loadReferenceRecords(loadAll, rowsPerPage, pageNumber){
+				loadAll     = loadAll     || false
+				rowsPerPage = rowsPerPage || 25
+				pageNumber  = pageNumber  || 0
+				var searchQuery = {
+					rowsPerPage:rowsPerPage,
+					currentPage: pageNumber,
+					query 	: "referenceRecord_ss:" + solr.escape($scope.model),
+					fields	: 'updatedOn:updatedDate_dt,title:title_EN_t, referenceRecord_ss, referenceRecord_info_ss,schemaCode:schema_s,schema:schema_EN_s, identifier:identifier_s, uniqueId:uniqueIdentifier_s, government_s,government:government_EN_s,schemaType:schemaType_s,',
+					sort	: 'updatedDate_dt desc'
+				}
+				if(realm.is('BCH')){
+					searchQuery.fields += `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
+				}
+				$q.when(searchService.list(searchQuery))
+				.then(function(data) {
+					// $scope.searchResult.numFound = data.data.response.numFound ;
+					// $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
+					// $scope.searchResult.currentPage = pageNumber;
+
+					if(data.data.response.docs.length > 0){
+						
+						return getFieldTitles().then(fieldTitles=>{
+							_.forEach(data.data.response.docs, function(record){
+								_.forEach(record.referenceRecord_info_ss, function(info){
+									info = JSON.parse(info);
+									const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
+									_.uniq(info.identifiers).forEach((identifier)=>{
+										if(removeRevisionNumber(identifier) == $scope.model){
+											if(!$scope.referenceRecords)
+												$scope.referenceRecords = {};
+
+											if(!$scope.referenceRecords[record.schemaCode]){
+												$scope.referenceRecords[record.schemaCode] = {
+													schema	  : record.schema,
+													fields 	  : {},
+													schemaType: record.schemaType,
+													fieldTitle: fieldTitle
+												};
+											}
+
+											$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
+											$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
+											$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push( record );
+										}
+									});
+								});
+							})
+							if(typeof $scope.onDataFetch == 'function'){
+								$scope.onDataFetch({data:$scope.referenceRecords})
+							}
+							
+						})
+					}
+				});
+
+			}
+
+
+			$scope.onPageSizeChanged = function(size){
+				$scope.searchResult.rowsPerPage = size;  
+				$scope.searchResult.currentPage = 1; //reset to page 1                   
+				// $scope.onPageChange($scope.searchResult.currentPage);
+				loadReferenceRecords(false, $scope.searchResult.rowsPerPage, $scope.searchResult.currentPage);
+				
+			}
+			// --------------------------------------------------------------
+			// -----------------------------------------------------------------
 			$scope.encode = function(query){
 				return encodeURIComponent(query);
 			}
