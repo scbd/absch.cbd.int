@@ -39,13 +39,13 @@
         <li class="p-1 ps-0 align-items-center list-group-item list-group-item-action  border-0  fs-5 d-flex justify-content-between align-items-start"  ng-repeat="schema in countryMapScope.currentCountry.schemas" ng-if="hideCartagena(schema.shortCode)">
               <!-- counts of the schema  -->
             <span class="rounded badge bg-bch ms-2"  ng-class="{'bg-gray-300' : schema.count==0}" ng-bind="schema.count"></span>
-            
-            <!-- schema titles  -->
-            <a rel="noopener" class="fs-5 link-dark text-decoration-none" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  >
-                <span ng-bind="schema.title | lstring:locale"></span>
+            <a rel="noopener" class="fs-5 link-dark text-decoration-none cursor-pointer" 
+                ng-if="currentCountry.code" translation-url
+                ng-click="ToggleCountyList(schema.shortCode,currentCountry.code)">
                 <span ng-if="schema.isRegional">
-                    - <span ng-bind="schema.regionalGovernment|term:locale"></span>
+                    (<i>{{schema.regionalGovernment.identifier|uppercase}}</i>)
                 </span>
+                <span ng-bind="schema.title | lstring:locale"></span>
             </a>
 
             <a rel="noopener" class="fs-5 link-dark text-decoration-none "  ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}&tab=nationalRecords" >
