@@ -421,6 +421,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                             dateField:dateVal.field
                         };
 
+                        updateQueryString(dateVal.field, name);
                         updateQueryResult();
                     };
 
@@ -1304,8 +1305,9 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         if (!(filters||[]).length){     
                             return;
                         }
+                        updateQueryString(filterType,  _.map(filters, 'id'));
                         var query = buildAdvanceSettingsQuery(filters, field);
-                        
+                         
                         return query;
                     }
 
