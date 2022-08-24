@@ -27,14 +27,45 @@ app.directive("viewReferencedRecords", [function () {
 			// //==================================
 			// //
 			// //==================================
-			$scope.$watch('model', function(newValue, oldValue){
+			$scope.$watch('model', async function(newValue, oldValue){
 				if(newValue){
-					loadReferenceRecords(false, 2000, 0);
+					const { docs } = await loadReferenceRecords(undefined, 1000, 0);
+					return getFieldTitles().then(fieldTitles=>{
+						_.forEach(docs, function(record){
+							_.forEach(record.referenceRecord_info_ss, function(info){
+								info = JSON.parse(info);
+								const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
+								_.uniq(info.identifiers).forEach((identifier)=>{
+									if(removeRevisionNumber(identifier) == $scope.model){
+										if(!$scope.referenceRecords)
+											$scope.referenceRecords = {};
+
+										if(!$scope.referenceRecords[record.schemaCode]){
+											$scope.referenceRecords[record.schemaCode] = {
+												schema	  : record.schema,
+												fields 	  : {},
+												schemaType: record.schemaType,
+												fieldTitle: fieldTitle
+											};
+										}
+
+										$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
+										$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
+										$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push( record );
+									}
+								});
+							});
+						})
+						if(typeof $scope.onDataFetch == 'function'){
+							$scope.onDataFetch({data:$scope.referenceRecords})
+						}
+						
+					})
 				}
 			});
 
-			async function loadReferenceRecords(loadAll, rowsPerPage, pageNumber){
-				loadAll     = loadAll     || false
+			async function loadReferenceRecords(docs, rowsPerPage, pageNumber){
+				docs = docs || []
 				rowsPerPage = rowsPerPage || 25
 				pageNumber  = pageNumber  || 0
 				var searchQuery = {
@@ -47,47 +78,15 @@ app.directive("viewReferencedRecords", [function () {
 				if(realm.is('BCH')){
 					searchQuery.fields += `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
 				}
-				$q.when(searchService.list(searchQuery))
-				.then(function(data) {
-					// $scope.searchResult.numFound = data.data.response.numFound ;
-					// $scope.searchResult.pageCount   = Math.ceil(result.data.response.numFound / $scope.searchResult.rowsPerPage);
-					// $scope.searchResult.currentPage = pageNumber;
+				const result = await searchService.list(searchQuery)
+							let    { docs:newDocs, numFound } = result.data.response; 
+							docs    = [...docs, ...newDocs];
 
-					if(data.data.response.docs.length > 0){
-						
-						return getFieldTitles().then(fieldTitles=>{
-							_.forEach(data.data.response.docs, function(record){
-								_.forEach(record.referenceRecord_info_ss, function(info){
-									info = JSON.parse(info);
-									const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
-									_.uniq(info.identifiers).forEach((identifier)=>{
-										if(removeRevisionNumber(identifier) == $scope.model){
-											if(!$scope.referenceRecords)
-												$scope.referenceRecords = {};
-
-											if(!$scope.referenceRecords[record.schemaCode]){
-												$scope.referenceRecords[record.schemaCode] = {
-													schema	  : record.schema,
-													fields 	  : {},
-													schemaType: record.schemaType,
-													fieldTitle: fieldTitle
-												};
-											}
-
-											$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
-											$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
-											$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push( record );
-										}
-									});
-								});
-							})
-							if(typeof $scope.onDataFetch == 'function'){
-								$scope.onDataFetch({data:$scope.referenceRecords})
+							if(docs.length < numFound){
+								({ docs, numFound } = await loadReferenceRecords(docs,rowsPerPage, pageNumber+1));
 							}
 							
-						})
-					}
-				});
+							return  { docs, numFound };
 
 			}
 
