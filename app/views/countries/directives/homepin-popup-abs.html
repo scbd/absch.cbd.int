@@ -54,7 +54,7 @@
                     <span class="rounded badge ms-2"  ng-class="{'bg-gray-300' : schema.count==0, 'bg-abs':schema.count>0 }" ng-bind="schema.count"></span>
                 </td>
                 <td>
-                    <a rel="noopener" ng-if="currentCountry.code" translation-url href="{{translationUrl}}/countries/{{currentCountry.code}}/{{schema.shortCode}}"  style="color:#fff">
+                    <a rel="noopener" ng-if="currentCountry.code" translation-url ng-click="ToggleCountyList(schema.shortCode,currentCountry.code)" class="cursor-pointer"  style="color:#fff">
                         <span ng-bind="schema.title | lstring:locale"></span>
                     </a>
                     <a rel="noopener" ng-if="!currentCountry.code" translation-url href="{{translationUrl}}/search?schema={{schema.shortCode|mapSchema}}"  style="color:#fff">
