@@ -98,6 +98,9 @@ h3 {
     #select-dropdown .dropdown-menu{
         width: 15rem !important;
     }
+    .country-profile-list .jurisdiction ul:first-of-type {
+        display: block !important;
+    }
 }
 @media (min-width:768px) and (max-width:991px){
     .hidden-sm{
@@ -3417,5 +3420,15 @@ embed-footer{
 }
 /* Since its not required on all pages, hide it and show only when required */
 #g-recaptcha{
+    display: none;
+}
+
+.country-profile-list .jurisdiction ul:first-of-type {
+    display: flex;
+}
+.country-profile-list .jurisdiction ul:first-of-type li{
+    margin: -5px 10px;
+}
+.country-profile-list .jurisdiction ul:first-of-type li.other-term{
     display: none;
 }

@@ -466,6 +466,18 @@ import '../services/locale';
     };
 
   }]);
+  app.filter('SearchTerms', function () {
+    return function(terms, search) {
+      if(search == undefined || search.length == 0) {
+        return terms;
+      }
+
+      terms = _.filter(terms, function (t) {
+        return _.includes(search, t.jurisdiction_s)
+      })
+      return terms;
+    };
+  }); 
   
   function normalizeText(text) {
 

@@ -24,6 +24,7 @@ app.directive('countryProfile', function() {
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
                 }
+                $scope.jurisdictionTerms = thesaurusService.getDomainTerms('msrJurisdictions', { other: true, otherType: 'lstring' });
                 $scope.loadRecords  = loadRecords;
                 $scope.sortMeasure  = "[jurisdiction_sort, type_sort, status_sort, createdDate_dt, title_t]";
                 var countryRecords  = {};
@@ -61,10 +62,29 @@ app.directive('countryProfile', function() {
                 
                 }
 
+                $scope.onJurisdictionChange = async function (jurisdiction) {
+                    $scope.jd = [];
+                    if (jurisdiction){
+                        _.forEach(jurisdiction, function (term) { 
+                            $scope.jd.push(term.identifier) 
+                        }); 
+                    } 
+                }
+
+                $scope.toggleAll = function (event) {
+                    let isChecked = event.currentTarget.checked;
+                    let ele = document.getElementsByClassName('msr-chk');
+                    for (var i = 0; i < ele.length; i++) {
+                        if (isChecked)
+                            ele[i].checked = true;
+                        else ele[i].checked = false;
+                    }
+                }
+
                 function loadCountryRecords(code){
                     const groupField = 'grp_government_schema_s';
                     var searchQuery = $scope.exportQuery = {
-                        fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
+                        fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, jurisdiction_s, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
                         fieldQuery     : [`schema_s:(${nationalSchemas.map(solr.escape).join(' ')})`],
                         rowsPerPage    : 500,
                         sort           : 'updatedDate_dt desc',
@@ -136,7 +156,7 @@ app.directive('countryProfile', function() {
                     schema.isLoading = true;
                     schema.start = schema.start||10;
                     var query = {
-                        fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
+                        fields  : 'id, rec_date:updatedDate_dt, identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, jurisdiction_s, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt, entryIntoForce_dt,adoption_dt,retired_dt,limitedApplication_dt',
                         query   : 'schema_s:(' + key +') AND government_s:' + solr.escape(schema.code || $scope.code.toLowerCase()),
                         rowsPerPage    : number||5000,
                         sort           : 'updatedDate_dt desc',
