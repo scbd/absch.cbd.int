@@ -1,6 +1,7 @@
 import app from '~/app';
 import template from 'text!./country-profile-directive.html';
 import _ from 'lodash';
+import '~/views/search/search-results/result-default'
 
 import '~/views/search/search-results/result-default';
 import '~/services/main';

@@ -50,30 +50,8 @@
                     <div ng-repeat="measure in schema.docs|orderBy:sortMeasure" class="py-1 border-bottom" 
                        ng-class="{'bg-nationalmsr':measure.rec_meta1[0] === 'National / Federal','bg-subnationalmsr':measure.rec_meta1[0] === 'Sub-national','bg-communitymsr':measure.rec_meta1[0] === 'Community','bg-regionalmsr':measure.rec_meta1[0] === 'Regional / Multilateral'
                        ,'bg-othermsr':measure.rec_meta1[0] === 'Other' }">
-                        <div> 
-                            <input type="checkbox" ng-model="measure.measureMatrix" class="ms-1" />
-                            <a rel="noopener" translation-url  target="_blank" ng-href="database/record/{{measure|uniqueID|encodeURIComponent}}"> 
-                               <span class="color-black ms-2" ng-bind="$index+1 + '.'"></span>
-                               <span class="bold" ng-bind="measure.rec_title"> </span>
-                            </a>
-                        </div>
-                        <div class="recordDefault">
-                           <ul class="metadata bold ms-3 fs-small-8">
-                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_meta1" ng-bind="measure.rec_meta1[0]"></span></li>
-                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_type" ng-bind="measure.rec_type"></span></li>
-                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_meta3" ng-bind="measure.rec_meta3[0]"></span></li>
-                                <li><span class="fs-small-8 px-2 text-secondary" ng-if="measure.rec_meta5" ng-bind="measure.rec_meta5[0]"></span></li>
-                                <li class="border-0">
-                                    <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.entryIntoForce_dt">
-                                        {{::('countryProfileT.entry'|$translate)}} <span ng-bind="measure.entryIntoForce_dt|formatDate"></span> <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.limitedApplication_dt"> until <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span></span>
-                                    <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.adoption_dt">
-                                        {{::('countryProfileT.adoption'|$translate)}} <span ng-bind="measure.adoption_dt|formatDate"></span> 
-                                         <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.limitedApplication_dt">{{::('countryProfileT.until'|$translate)}}  <span ng-bind="measure.limitedApplication_dt|formatDate"></span> </span> </span>
-                                   
-                                    <span class="fs-small-8 px-2 text-secondary border-0" ng-if="measure.retired_dt">{{::('countryProfileT.retired'|$translate)}} <span ng-bind="measure.retired_dt|formatDate"></span></span>
-                                </li>
-                           </ul>
-                        </div>
+                       <input type="checkbox" ng-model="measure.measureMatrix" class="ms-1" />
+                       <result-default doc="measure" external-link="true" type="measure"></result-default> 
                     </div>
                        <!--<a rel="noopener" translation-url  class="link" style="margin-top:20px;" ng-click="selectAllForMatrix()" > select <span ng-if="!measureMatrixDocuments.selectAll">all</span><span ng-if="measureMatrixDocuments.selectAll">none</span></a>-->
                    </div>    
