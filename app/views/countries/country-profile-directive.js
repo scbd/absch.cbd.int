@@ -74,8 +74,12 @@ app.directive('countryProfile', function() {
                     if(realm.is('BCH')){
                         searchQuery.additionalFields = `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
                     }
-                    searchQuery.query = [`government_s:${solr.escape(code)} OR (countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`]
-                    //TODO: not sure why this query existed here // OR (countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))
+                    if(isEuMember(code)){
+                        searchQuery.query = [`government_s:${solr.escape(code)} OR (countryRegions_REL_ss:${solr.escape(code)} AND schema_s:(biosafetyLaw biosafetyDecision))`];
+                    }
+                    else{
+                        searchQuery.query = [`government_s:${solr.escape(code)}`];
+                    }
                     searchService.group(searchQuery)
                     .then(function(result){
 
@@ -165,6 +169,12 @@ app.directive('countryProfile', function() {
                     });
                 }
 
+               async function isEuMember(code){
+                    const euTerms = await thesaurusService.getTerms(solr.escape('eu'), { relations: true });
+                    if (euTerms) {
+                        return (euTerms.narrowerTerms.indexOf(code) !== -1) ? true : false;
+                    }
+                }
                 init();
             }]
 
