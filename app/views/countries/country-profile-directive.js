@@ -7,7 +7,7 @@ import '~/views/search/search-results/result-default';
 import '~/services/main';
 import '~/views/directives/export-directive';
 import { iconFields } from '~/views/forms/view/bch/icons';
-import countryProfileT from '~/app-text/views/countries/country-profile-directive.json';
+import countryProfileDirectiveT from '~/app-text/views/countries/country-profile-directive.json';
 
 app.directive('countryProfile', function() {
     return {
@@ -20,7 +20,7 @@ app.directive('countryProfile', function() {
         },
         controller: ["$scope", "$routeParams",  "realm", '$element', '$timeout','searchService', '$filter', 'solr','thesaurusService', 'translationService',
             function($scope, $routeParams, realm, $element, $timeout, searchService, $filter, solr, thesaurusService, translationService) {
-                translationService.set('countryProfileT', countryProfileT);
+                translationService.set('countryProfileDirectiveT', countryProfileDirectiveT);
                 $scope.api = {
                     loadCountryDetails : loadCountryRecords
                 }
