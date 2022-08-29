@@ -28,43 +28,63 @@ app.directive("viewReferencedRecords", [function () {
 			// //
 			// //==================================
 			$scope.$watch('model', async function(newValue, oldValue){
-				if(newValue){
-					const { docs } = await loadReferenceRecords(undefined, 1000, 0);
-					return getFieldTitles().then(fieldTitles=>{
-						_.forEach(docs, function(record){
-							_.forEach(record.referenceRecord_info_ss, function(info){
-								info = JSON.parse(info);
-								const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
-								_.uniq(info.identifiers).forEach((identifier)=>{
-									if(removeRevisionNumber(identifier) == $scope.model){
-										if(!$scope.referenceRecords)
-											$scope.referenceRecords = {};
-
-										if(!$scope.referenceRecords[record.schemaCode]){
-											$scope.referenceRecords[record.schemaCode] = {
-												schema	  : record.schema,
-												fields 	  : {},
-												schemaType: record.schemaType,
-												fieldTitle: fieldTitle
-											};
-										}
-
-										$scope.referenceRecords[record.schemaCode].fields[info.field] = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
-										$scope.referenceRecords[record.schemaCode].fields[info.field].count += 1;
-										$scope.referenceRecords[record.schemaCode].fields[info.field].docs.push( record );
-									}
-								});
-							});
-						})
-						if(typeof $scope.onDataFetch == 'function'){
-							$scope.onDataFetch({data:$scope.referenceRecords})
-						}
-						
-					})
+				if(newValue && !$scope.referenceRecords && !$scope.loading){
+					await loadReferencedRecords();
 				}
 			});
 
-			async function loadReferenceRecords(docs, rowsPerPage, pageNumber){
+			async function loadReferencedRecords(){
+				$scope.loading = true;
+				try{
+					const { docs } = await loadSolrRecords(undefined, 1000, 0);
+					const fieldTitles = await getFieldTitles()
+					_.forEach(docs, function(record){
+						_.forEach(record.referenceRecord_info_ss, function(info){
+							info = JSON.parse(info);
+							const fieldTitle = fieldTitles[record.schemaCode+"."+info.field] || info.field;	
+							_.uniq(info.identifiers).forEach((identifier)=>{
+								if(removeRevisionNumber(identifier) == $scope.model){
+									if(!$scope.referenceRecords)
+										$scope.referenceRecords = {};
+
+									if(!$scope.referenceRecords[record.schemaCode]){
+										$scope.referenceRecords[record.schemaCode] = {
+											schema	  : record.schema,
+											fields 	  : {},
+											schemaType: record.schemaType,
+											fieldTitle: fieldTitle
+										};
+									}
+									
+									let fieldInfo = $scope.referenceRecords[record.schemaCode].fields[info.field] || {count : 0, docs : [], schema : record.schema, fieldTitle};
+									fieldInfo.docs.push(record);
+
+									fieldInfo = {
+										...fieldInfo,
+										count : fieldInfo.count+1,
+										pageSize : 25,
+										currentPage : 1,
+										pageCount : Math.ceil(fieldInfo.docs.length / 25),
+										pagedDocs : fieldInfo.docs.filter((e,i)=>i<25)
+									}
+
+									$scope.referenceRecords[record.schemaCode].fields[info.field] = fieldInfo;
+								}
+							});
+						});
+					})
+					if(typeof $scope.onDataFetch == 'function'){
+						$scope.onDataFetch({data:$scope.referenceRecords})
+					}
+				}
+				catch(e){
+					console.error(e);					
+				}
+				finally{
+					$scope.loading = false;
+				}
+			}
+			async function loadSolrRecords(docs, rowsPerPage, pageNumber){
 				docs = docs || []
 				rowsPerPage = rowsPerPage || 25
 				pageNumber  = pageNumber  || 0
@@ -79,24 +99,27 @@ app.directive("viewReferencedRecords", [function () {
 					searchQuery.fields += `${iconFields.lmo},${iconFields.decision},${iconFields.organisms}`;
 				}
 				const result = await searchService.list(searchQuery)
-							let    { docs:newDocs, numFound } = result.data.response; 
-							docs    = [...docs, ...newDocs];
+				let    { docs:newDocs, numFound } = result.data.response; 
+				docs    = [...docs, ...newDocs];
 
-							if(docs.length < numFound){
-								({ docs, numFound } = await loadReferenceRecords(docs,rowsPerPage, pageNumber+1));
-							}
-							
-							return  { docs, numFound };
+				if(docs.length < numFound){
+					({ docs, numFound } = await loadSolrRecords(docs,rowsPerPage, pageNumber+1));
+				}
+				
+				return  { docs, numFound };
 
 			}
 
-
-			$scope.onPageSizeChanged = function(size){
-				$scope.searchResult.rowsPerPage = size;  
-				$scope.searchResult.currentPage = 1; //reset to page 1                   
-				// $scope.onPageChange($scope.searchResult.currentPage);
-				loadReferenceRecords(false, $scope.searchResult.rowsPerPage, $scope.searchResult.currentPage);
-				
+			$scope.onPageChange = (pageNumber, field)=>{
+				console.log(field.docs)
+				field.currentPage = pageNumber
+				field.pagedDocs = field.docs.filter((e,i)=>i >= field.pageSize * (pageNumber-1) && i< field.pageSize * pageNumber);
+			}
+			$scope.onPageSizeChanged = function(size, field){
+				field.currentPage = 1;
+				field.pageSize = size;
+				field.pageCount = Math.ceil(field.docs.length / size);
+				field.pagedDocs = field.docs.filter((e,i)=>i<size);
 			}
 			// --------------------------------------------------------------
 			// -----------------------------------------------------------------
