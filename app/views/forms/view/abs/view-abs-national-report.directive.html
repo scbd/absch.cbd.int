@@ -22,13 +22,13 @@
 				</div>
 
 				<div ng-show="document.title">
-					<label>{{::('viewAbsNRT.q1'|$translate)}}</label>
+					<label>{{::('numbers.one'|$translate)}}. {{::('viewAbsNRT.q1'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<strong><span ng-bind="document.title | lstring:locale"></span></strong>
 					</div>
 				</div>
 				<div>
-					<label>{{::('viewAbsNRT.q2'|$translate)}}</label>
+					<label>{{::('numbers.two'|$translate)}}. {{::('viewAbsNRT.q2'|$translate)}}</label>
 					<div class="km-value" compare-val>
 						<div view-record-reference ng-model="document.contact" locale="locale"  ng-if="document.contact"></div>
 					</div>
