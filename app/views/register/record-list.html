@@ -263,7 +263,7 @@
             <script type="text/ng-template" trados-translation="true" id="deleteRecordModal">              
                 
                     <div class="modal-header">
-                        <h4 class="modal-title" >{{::('recordListT.confirmChanges'|$translate)}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
+                        <h4 class="modal-title" >{{::('recordListT.confirmDelete'|$translate)}} <i ng-show="loading" class="fa fa-spinner fa-spin"></i></h4>
                     </div>
                     <div class="modal-body bg-white" >
                         
@@ -351,7 +351,7 @@
                         <h2>{{::('recordListT.permission'|$translate)}}</h2>
                     </div>
                     <div class="modal-footer mt-0">
-                        <button type="button" class="btn btn-default" ng-click="closeDialog()">{{::('recordListT.doNotCancel'|$translate)}}</button>
+                        <button type="button" class="btn btn-secondary" ng-click="closeDialog()">{{::('recordListT.doNotCancel'|$translate)}}</button>
                         <button ng-disabled="loading" type="button" ng-click="deleteWorkflowRequest(recordForDeleteWorkflowRequest)" class="btn btn-primary float-start">{{::('recordListT.cancelRequest'|$translate)}}</button>
 
                     </div>
