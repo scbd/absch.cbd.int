@@ -100,14 +100,13 @@
                             {{::('registerTopMenuT.preferences'|$translate)}} </a>
                     </li>
                     <li>
-                        <a rel="noopener" translation-url href="/register/reports" class="dropdown-item"
-                            id="hover_color">
-                            <span ng-class="{'color-white':deviceSize!='xs'}"> {{::('registerTopMenuT.reports'|$translate)}} </span>
+                        <a rel="noopener" translation-url href="/register/reports" class="dropdown-item" id="hover_color">
+                             {{::('registerTopMenuT.reports'|$translate)}}
                         </a>
                     </li>
                     <li ng-if="roles.isAdministrator">
                         <a rel="noopener" translation-url href="/register/admin" class="dropdown-item">
-                            <span ng-class="{'color-white':deviceSize!='xs'}"> {{::('registerTopMenuT.admin'|$translate)}} </span>
+                            {{::('registerTopMenuT.admin'|$translate)}}
                         </a>
                     </li>
 
