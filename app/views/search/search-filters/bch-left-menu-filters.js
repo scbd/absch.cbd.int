@@ -428,7 +428,8 @@ export const bchLeftMenuFilters = {
                 "lookupField":"uniqueIdentification_s"
             },
             "title": bchFilters.modifiedOrganismUniqueIdentification,
-            "field": "uniqueIdentification_s"
+            "field": "uniqueIdentification_s",
+            "exactSearch":true //add "" around the search query for exact search.
         },
         {
             "type": "solrRecords",
