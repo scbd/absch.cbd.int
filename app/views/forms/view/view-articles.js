@@ -50,7 +50,6 @@ import 'ck-editor-css';
         var agCount = [];
         var itemCountQuery;
 
-console.log($routeParams);
         const tags = [encodeURIComponent($routeParams.type)]
         tags.push(encodeURIComponent(realm.value.replace(/\-.*/, '')))
 

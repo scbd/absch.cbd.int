@@ -1,6 +1,7 @@
 import app from '~/app';
 import _ from 'lodash';
 import '~/components/scbd-angularjs-services/main';
+import '~/views/report-analyzer/filters/ascii';
 
     app.factory("htmlUtility", function() {
       return {
@@ -22,8 +23,8 @@ import '~/components/scbd-angularjs-services/main';
             return _;
        }])
     app.factory('commonjs', ['$http', 'thesaurusService', '$rootScope', 'realm', 'IStorage', '$filter', '$q', 
-    'localStorageService', 'Thesaurus',
-        function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus) {
+    'localStorageService', 'Thesaurus', 'locale',
+        function($http, thesaurusService, $rootScope, realm, storage, $filter, $q, localStorageService, thesaurus, locale) {
             return new function() {
 
                 const isBch        = realm.is('BCH');
@@ -80,16 +81,17 @@ import '~/components/scbd-angularjs-services/main';
                 //==================================================================================
                 this.getCountries = function(sort) {
 
+                    var sortField = sort||'name.'+(locale||'en');
+                    var sortBy = {};
+
                     var fromStorage = localStorageService.get('countries');
                     if(fromStorage){//&& fromStorage.expiry < new date())
                         if(sort){
-                            return $filter('orderBy')(fromStorage, sort)
+                            return $filter('orderBy')(fromStorage, sort, false, sortAscii)
                         }
                         return fromStorage;
                     }
 
-                    var sortField = sort||'name.en';
-                    var sortBy = {};
                     sortBy[sortField] = 1;
                     return $http.get('/api/v2013/countries', {
                             cache: true, params : { s : sortBy }
@@ -97,7 +99,8 @@ import '~/components/scbd-angularjs-services/main';
                         .then(function(response) {
                             var countries = _.map(response.data,formatCountry);
                             localStorageService.set('countries', countries);
-                            return countries;
+
+                            return $filter('orderBy')(countries, sort, false, sortAscii);
                         });
                 };
                 //=================================================================================
@@ -419,7 +422,37 @@ import '~/components/scbd-angularjs-services/main';
                     return entity && entity.treaties.XXVII8.party != null;
                 }
 
+                //https://github.com/angular/angular.js/blob/v1.5.7/src/ng/filter/orderBy.js#L663
+                function sortAscii(v1,v2){
 
+                    var result = 0;
+                    var type1 = v1.type;
+                    var type2 = v2.type;
+                
+                    if (type1 === type2) {
+                      var value1 = $filter("ascii")(v1.value);
+                      var value2 = $filter("ascii")(v2.value);
+                
+                      if (type1 === 'string') {
+                        // Compare strings case-insensitively
+                        value1 = value1.toLowerCase();
+                        value2 = value2.toLowerCase();
+                      } else if (type1 === 'object') {
+                        // For basic objects, use the position of the object
+                        // in the collection instead of the value
+                        if (_.isObject(value1)) value1 = v1.index;
+                        if (_.isObject(value2)) value2 = v2.index;
+                      }
+                
+                      if (value1 !== value2) {
+                        result = value1 < value2 ? -1 : 1;
+                      }
+                    } else {
+                      result = type1 < type2 ? -1 : 1;
+                    }
+                
+                    return result;
+                }
             }
         }
     ]);

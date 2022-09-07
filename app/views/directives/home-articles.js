@@ -34,8 +34,9 @@ import '~/services/main';
                         loadArticles();
                         //---------------------------------------------------------------------
                         function loadArticles(){
+                            const tag = $scope.tags||"absch-announcement";
                             var ag = [];
-                            ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent($scope.tags||"absch-announcement")}]}});
+                            ag.push({"$match":{"$and":[{"adminTags":encodeURIComponent(tag)}]}});
                             ag.push({"$project" : {"title":1, "content":1, "coverImage":1, "meta":1, "summary":1}});
                             ag.push({ "$limit": parseInt($scope.counts)});
                             ag.push({"$sort": { 'meta.createdOn': -1 }})
@@ -43,8 +44,13 @@ import '~/services/main';
                               "ag" : JSON.stringify(ag)
                             };
 
-                            articlesService.getArticles(qs).then(function(data){
-                                $scope.articles = data;
+                            articlesService.getArticles(qs)
+                            .then(function(data){
+                                $scope.articles = data.map(e=>{
+                                    const title = $filter('lstring')(e.title, locale)?.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-');
+                                    e.url = `kb/tags/${tag}/${title}/${e._id}`
+                                    return e;
+                                });
                               })
 
                           }
@@ -56,12 +62,7 @@ import '~/services/main';
                             .replace(/attachments.cbd.int\//, '$&'+size+'/')
                             .replace(/\.s3-website-us-east-1\.amazonaws\.com\//, '$&'+size+'/')
                         }
-                        //---------------------------------------------------------------------
-                        $scope.loadArticle = function(id){
-                            $location.path('/articles/' + id );
-                        }
-                       
-
+                        
                     }
                 ]
             };

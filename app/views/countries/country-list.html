@@ -104,26 +104,25 @@
 		</div>
 		<div id="listOfRecords" class="row bg-grey1 m-0 my-1 p-0 py-1 border">
 			<div class="col-12 col-lg-5">
-
 				<div class="dropdown d-inline" id="sortingRecords">
 					<button class="btn btn-outline-secondary  dropdown-toggle" type="button" id="dropdownMenu1"
 						data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-						<i ng-if="sortTerm==='name.en'" class="fa"
+						<i ng-if="sortTerm===countryNameField" class="fa"
 							ng-class="{'fa-sort-alpha-asc':!orderList, 'fa-sort-alpha-desc':orderList}"
 							style="width:20px;"></i>
-						<span ng-if="sortTerm!=='name.en'">{{::('countryListTranslation.orderedBy'|$translate)}} <strong> <span
-									ng-bind="sortTerm|schemaShortName"></span></strong></span>
+						<span ng-if="sortTerm && sortTerm!==countryNameField">{{::('countryListTranslation.orderedBy'|$translate)}} <strong> 
+							<span ng-bind="sortTerm|schemaShortName"></span></strong></span>
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
-								ng-click="sortTable('name.en', 'ASC')">
+								ng-click="sortTable(countryNameField, 'ASC')">
 								<i class="bi bi-sort-alpha-down"></i>
 								<!-- <i class=" fa fa-sort-alpha-asc" style="width:20px;"></i> -->
 								{{::('countryListTranslation.sortAlphabeticalAz'|$translate)}} </a>
 						</li>
 						<li><a class="text-decoration-none" rel="noopener" translation-url href="#"
-								ng-click="sortTable('name.en', 'DESC')">
+								ng-click="sortTable(countryNameField, 'DESC')">
 								<i class="bi bi-sort-alpha-down"></i>{{::('countryListTranslation.sortAlphabeticalZa'|$translate)}}
 								<!-- <i class=" fa fa-sort-alpha-desc" style="width:20px;"></i> 
 								Sort alphabetical Z-A-->

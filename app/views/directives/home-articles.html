@@ -12,13 +12,10 @@
                     &nbsp;
                 </div>
         
-                <div class="card-body border-top position-relative" style="min-height:80px;">
 
-                   
-
-                    <a class="stretched-link text-dark text-decoration-none card-title"
-                        ng-click="loadArticle(article._id)">
-                       <h6 class="fw-bold" style="overflow: hidden;"> <span ng-bind="article.title | lstring:locale"></span></h6>
+                <div class="card-body border-top" style="min-height:120px;">
+                    <a class="stretched-link text-dark text-decoration-none card-title" ng-href="{{article.url}}">
+                       <h6 class="fw-bold"> <span ng-bind="article.title | lstring:locale"></span></h6>
                     </a>
                     <p ng-if="summary" class="card-text mt-2" style="overflow: hidden;"> <span ng-bind="article.summary | lstring:locale"></span></p>
                 </div>
@@ -52,33 +49,6 @@
             </div>
         </div>
 </div>
-
-<!-- 
-<div class="row" ng-if="horizontal" ng-repeat="article in articles | orderBy:'meta.createdOn':true">
-    <div class="col">
-   
-
-      <div class="card mb-3" style="max-width: 540px;">
-        <div class="row g-0">
-          <div class="col-md-4">
-            <img src="{{::getSizedImage(article.coverImage.url, imageSize._400)}}" class="card-img-top" alt="...">
-          </div>
-          <div class="col-md-8">
-            <div class="card-body position-relative">
-                <span class="badge bg-secondary position-absolute top-0 end-0"><span ng-bind="article.meta.createdOn | formatDateWithUtc"></span></span>
-              <h5 class="card-title">
-                <span ng-bind="article.title | lstring:locale"></span></h5>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-</div> -->
-
-
-   
-
 
 
 </div>
