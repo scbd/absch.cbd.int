@@ -44,15 +44,19 @@
             </div>
         </div>
     </div>  
-        <div pagination ng-if="itemCount > itemsPerPage" num-found="itemCount" class="text-center" page-size="itemsPerPage" current-page="currentPage" page-count="pageCount" on-page-change="onPageChange(page)" on-page-size-changed="onPageSizeChanged(itemsPerPage)"></div> 
-
+    <div class="d-flex aligns-items-center text-center justify-content-center" >
+        <pagination ng-if="itemCount > itemsPerPage" num-found="itemCount" 
+            page-size="itemsPerPage" current-page="currentPage" page-count="pageCount" on-page-change="onPageChange(page)" on-page-size-changed="onPageSizeChanged(itemsPerPage)">
+        </pagination> 
+    </div>
         <div class="row"  ng-if="articles">
             <div  ng-repeat="article in articles | orderBy:'meta.createdOn':true" style="cursor:pointer;" class="col-xs-12 col-md-6 col-lg-4"  >
                 <div  class='row' style="margin:0px 0px;">
                         <table  style="width:100%;height:140px;background-color:#f9f9f9;border-top:1px solid #ddd; border-bottom:1px solid #ddd;margin:5px 0px;" ng-click="loadArticle(article._id)">
                             <tr>
-                                <td style="width:160px;vertical-align: top; height:100px;overflow: hidden; background-image: url('{{getSizedImage(article.coverImage.url, \'160x100\')}}');background-position: center;  background-repeat: no-repeat"> 
-                                    <img src=""  style="width:100%;height:auto;" height="42" width="42"></img>
+                                <td style="width:160px;vertical-align: top; height:100px;overflow: hidden;background-position: center;  background-repeat: no-repeat"> 
+                                    <img src="{{getSizedImage(article.coverImage.url, '160x100')}}"  style="width:100%;height:auto;" height="42" width="42"
+                                    ng-if="article.coverImage.url" ></img>
                                 </td>
                                 <td style="vertical-align: top;">
                                         <span class="news-date" ng-bind="article.meta.createdOn | formatDateWithUtc"></span>

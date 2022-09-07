@@ -1216,7 +1216,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                             var field = filter.field;
                                             if(filter.searchRelated && filter.relatedField)
                                                 field = filter.relatedField;
-                                            subQuery = field + ':(' + _.map(ids, solr.escape).join(' ') + ')';
+                                            if(filter.exactSearch)
+                                                subQuery = field + ':("' + _.map(ids, solr.escape).join('" "') + '")';
+                                            else
+                                                subQuery = field + ':(' + _.map(ids, solr.escape).join(' ') + ')';
                                         }
                                     }
                                     else if(filter.type == 'date' && filter.filterValue){

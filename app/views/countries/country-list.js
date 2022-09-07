@@ -7,18 +7,21 @@ import '~/components/scbd-angularjs-controls/main';
 import 'angular-joyride';
 import joyRideText from '~/app-text/views/countries/country-profile-joyride-tour.json';
 import countryListTranslation from '~/app-text/views/countries/country-list.json';
+import '~/views/report-analyzer/filters/ascii';
 
     export { default as template } from './country-list.html';
 
   export default ["$http", "$scope", "$element", "$location", "commonjs", "$q", 'searchService','$sce', 
-    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService',
+    '$routeParams', '$compile', '$timeout', 'locale', 'realm', 'ngMeta', 'joyrideService', 'translationService', '$filter',
         function ($http, $scope, $element, $location, commonjs, $q, searchService, $sce, $routeParams, $compile, 
-            $timeout, locale, realm, ngMeta, joyrideService, translationService) {
+            $timeout, locale, realm, ngMeta, joyrideService, translationService, $filter) {
             var regionRelations = {};            
             $scope.isBCH        = realm.is('BCH');
-            $scope.isABS        = realm.is('ABS');    
-            $scope.sortTerm     = "name.en";
+            $scope.isABS        = realm.is('ABS');
+            $scope.countryNameField = "name."+locale;
+            $scope.sortTerm     = "name."+locale;
             $scope.loading      = true;
+            $scope.locale       = locale;
 
             translationService.set('countryListTranslation', countryListTranslation);
             $scope.options = {
@@ -28,7 +31,7 @@ import countryListTranslation from '~/app-text/views/countries/country-list.json
                     .then(function(countries){
                             return _.sortBy(_.map(countries, function(country){
                                 return _.extend(country, {identifier:country.code});
-                            }), function(country){return country.name[locale];})
+                            }), function(country){return $filter('ascii')(country.name[locale]);})
                     });
                 }
             }
@@ -228,9 +231,9 @@ import countryListTranslation from '~/app-text/views/countries/country-list.json
                 if ($scope.sortTerm == "isParty")
                     return data.isParty + ' ' + data.entryIntoForce;
                 else if ($scope.sortTerm == "!isParty")
-                    return !!data.isParty + ' ' + data.name.en;
-                else if ($scope.sortTerm == "name.en")
-                    return data.name.en;
+                    return !!data.isParty + ' ' + data.name[locale];
+                else if ($scope.sortTerm == "name."+locale)
+                    return $filter("ascii")(data.name[locale]);
                 else if (!data.schemas)
                     return ($scope.orderList ? -9999999 : 999999);
                 else if (data.schemas[$scope.sortTerm]) {
