@@ -210,43 +210,43 @@ export const categories = [{
     ],
     "articles": [{
         "title": "What are “National Records”, “Reference Records” and “SCBD records”?",
-        "identifier": "619c55594f1f30000140eeee"
+        "identifier": "619c553f4f1f30000140eeba"
       },
       {
         "title": "What is the general process for submitting a record in the BCH",
-        "identifier": "619c556058029700017ff479"
+        "identifier": "619c554758029700017ff45d"
       },
       {
         "title": "What is the Dashboard?",
-        "identifier": "619c555f4f1f30000140eef8"
+        "identifier": "619c55474f1f30000140eeca"
       },
       {
         "title": "What steps do I take to submit and publish a new record in the BCH?",
-        "identifier": "619c556058029700017ff47b"
+        "identifier": "619c554858029700017ff45f"
       },
       {
         "title": "How do I edit an already published record?",
-        "identifier": "619c556158029700017ff47f"
+        "identifier": "619c554a0c1ff000011c1c40"
       },
       {
         "title": "How can I share my draft record?",
-        "identifier": "619c55620c1ff000011c1c4c"
+        "identifier": "619c554b4f1f30000140eed2"
       },
       {
         "title": "What is “inline” record creation and how do I create a record inline?",
-        "identifier": "619c55634f1f30000140eefc"
+        "identifier": "619c554c4f1f30000140eed4"
       },
       {
         "title": "How can I search for information in the BCH?",
-        "identifier": "619c55664f1f30000140eefe"
+        "identifier": "619c553a4f1f30000140eeb2"
       },
       {
         "title": "What is Record UID?",
-        "identifier": "619c55664f1f30000140ef00"
+        "identifier": "619c553c58029700017ff443"
       },
       {
         "title": "How do I reset my password?",
-        "identifier": "619c555b0c1ff000011c1c48"
+        "identifier": "619c55430c1ff000011c1c2c"
       }
     ]
   }
