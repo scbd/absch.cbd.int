@@ -39,7 +39,7 @@
 			<button type="button" class="btn btn-outline-secondary btn-sm float-end easing" ng-click="clear()" ng-if="binding.length>0">
 				{{::('kmTermCheckT.clearSelection'|$translate)}}
 			</button>
-			<ul ng-if="!tabularShape" class="list-unstyled">	
+			<ul ng-if="!tabularShape" class="list-unstyled pl-0">	
 
 				<li ng:repeat="term in rootTerms" ng-class="{'other-term': otherTermIdentifier==term.identifier}" ng-include="'term-check-tree-renderer.html'"></li>
 
