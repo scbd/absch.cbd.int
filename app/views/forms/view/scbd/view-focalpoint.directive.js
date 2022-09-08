@@ -26,6 +26,8 @@ app.directive('viewFocalPoint', ['realm', function(realm) {
 			}
 
 			$scope.$watch('::document', function(newVal){
+				if(!newVal)
+					return
 				$scope.focalPointDetails = {
 					categoryIdentifiers : (newVal.categories||[]).map(e=>{return {identifier:e}})
 				}
