@@ -1,5 +1,6 @@
 import app from '~/app';
 import _ from 'lodash';
+import moment from 'moment';
 import 'ngDialog';
 import 'angular-animate';
 import 'angular-joyride';
@@ -47,7 +48,7 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         var activeFilter;
                         var base_fields = 'id, rec_date:updatedDate_dt, rec_creationDate:createdDate_dt,identifier_s, uniqueIdentifier_s, url_ss, government_s, schema_s, government_EN_t, schemaSort_i, sort1_i, sort2_i, sort3_i, sort4_i, _revision_i,';
                         var en_fields =  'rec_countryName:government_EN_t, rec_title:title_EN_t, rec_summary:summary_t,rec_type:type_EN_t, rec_meta1:meta1_EN_txt, rec_meta2:meta2_EN_txt, rec_meta3:meta3_EN_txt,rec_meta4:meta4_EN_txt,rec_meta5:meta5_EN_txt';
-    
+                        const dateFormat = 'YYYY-MM-DD';
                         var groupFieldMapping = [
                             {
                                 field:'government', 
@@ -404,23 +405,23 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     };
 
                     $scope.saveDateFilter = function (filterID, query, dateVal) {
+                        let name = ''
+                        let dateQuery = dateVal.value.start.format(dateFormat) + ' - ' + dateVal.value.end.format(dateFormat);
+                            
                         if(dateVal.field=='updatedDate_dt') 
                         {
-                             var name = 'Date published ('+dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' ;
+                            name = 'Date published ('+dateQuery+ ')' ;
                         }
 
-                        if(dateVal.field=='createdDate_dt') 
-                        {
-                             var name = 'Date created ('+dateVal.value.start.format('DD-MM-YYYY') + ' - ' + dateVal.value.end.format('DD-MM-YYYY') + ')' ;
-                        }
                         $scope.setFilters[filterID] = {
                             type: $scope.searchFilters[filterID].type,
-                            query: query,
+                            query: dateVal.value,
                             name: name,
                             id: $scope.searchFilters[filterID].id,
                             dateField:dateVal.field
                         };
 
+                        updateQueryString('dateFilter', dateQuery);
                         updateQueryResult();
                     };
 
@@ -484,6 +485,10 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
 
                     $scope.clearFilter = function(){
                         updateQueryString('schema');
+                        updateQueryString('country');
+                        updateQueryString('region');
+                        updateQueryString('keyword');
+                        updateQueryString('dateFilter');
                         $scope.setFilters = {};
                         leftMenuFilters = [];
                         $scope.RemoveLeftMenuFilters()
@@ -600,15 +605,14 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                     }
                                 });
                             }
-                            else if(query){
-                                if(query.text){
-                                    $scope.saveFreeTextFilter(query.text);
-                                }
+                            else{                               
                                 if(query.schema){
                                     $scope.saveFilter(query.schema);
                                 }
                             }
-
+                            if(query.text){
+                                    $scope.saveFreeTextFilter(query.text);
+                            }
                             if(query.country){
                                 let countries = query.country;
                                 if(typeof countries == 'string')
@@ -643,7 +647,17 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                                         $scope.saveFilter({...keywordFilter});
                                 });                                
                             }
-
+                            if(query.dateFilter){
+                                var dates = query.dateFilter.split(' - ');
+                                const dateFilter = {
+                                    field:'updatedDate_dt',
+                                    value : {
+                                        start : moment(dates[0], dateFormat),
+                                        end : moment(dates[1], dateFormat)
+                                    }
+                                }
+                                $scope.saveDateFilter(dateFilter.field, undefined, dateFilter)
+                            }
                             if(query["raw-query"]){
                                 saveRawQueryFilter(query["raw-query"]);
                             }
@@ -1122,11 +1136,11 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         var partyStatusQuery    = buildPartyStatusQuery();
                         var regionQuery         = _.compact([buildFieldQuery('region',   'countryRegions_ss'), buildFieldQuery('region',   'countryRegions_REL_ss')]).join(' OR ');
                         var textQuery           = buildFreeTextQuery('freeText', 'text_EN_txt');
-                        var rawQuery            = buildRawQuery();
+                        // var rawQuery            = buildRawQuery(); //TODO find if there is any use and switch to new query based approach
 
                         var dateQuery           = buildDateQuery();
 
-                        var queries            = _.compact([dateQuery, textQuery, rawQuery]);
+                        var queries            = _.compact([dateQuery, textQuery]);//, rawQuery
                         var query              = '';
                         const highlight        = textQuery!=undefined||schemaSubQuery.freeTextQuery!=undefined;
                         if(queries.length)
@@ -1267,9 +1281,9 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         _.forEach(filters, function (filter) {
                             if(filter.exclude)
                                 return;
-
-                            let dateQuery = filter.dateField+':' + filter.query;
-
+                            
+                            let dateQuery =  buildDateFieldQuery({field : filter.dateField, filterValue :filter.query});
+                            
                             if(filter.excludeResult)
                                 dateQuery = `(*:* NOT (${dateQuery}))`;
 
@@ -1282,8 +1296,8 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                     function buildDateFieldQuery({ field, filterValue:date }) {
                         
                         if(date.start || date.end) {
-                            const start   = date.start ? solr.escape(date.start.locale('en').format('YYYY-MM-DD')   + 'T00:00:00.000Z')  : '*';
-                            const end     = date.end   ? solr.escape(date.end.locale('en').format('YYYY-MM-DD')     + 'T23:59:59.999Z') : '*';
+                            const start   = date.start ? solr.escape(date.start.locale('en').format(dateFormat)   + 'T00:00:00.000Z')  : '*';
+                            const end     = date.end   ? solr.escape(date.end.locale('en').format(dateFormat)     + 'T23:59:59.999Z') : '*';
     
                             return field + ':[ ' + start + ' TO ' + end + ' ]';
                         } 
@@ -1310,8 +1324,9 @@ import searchDirectiveT from '~/app-text/views/search/search-directive.json';
                         if (!(filters||[]).length){     
                             return;
                         }
+                        updateQueryString(filterType,  _.map(filters, 'id'));
                         var query = buildAdvanceSettingsQuery(filters, field);
-                        
+                         
                         return query;
                     }
 

@@ -9,5 +9,9 @@
     "error": "Error loading registry records, please try again.",
     "totalRecords": "Total records:",
     "export": "Export",
-    "click": "Click"
+    "click": "Click",
+    "recordID": "Record ID",
+    "scientificName": "Scientific name",
+    "commonName": "Common name",
+    "description": "Description"
 }

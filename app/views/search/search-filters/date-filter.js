@@ -23,18 +23,8 @@ app.directive('dateFilter', ['solr', 'translationService', function (solr, trans
                     value:{start : null, end : null}
                 };
 
-                $scope.onChange = function(){
-                    var query;
-
-                    if($scope.dateFilter.value.start || $scope.dateFilter.value.end) {
-                        const startDate = moment($scope.dateFilter.value.start);
-                        const endDate = moment($scope.dateFilter.value.end);
-                        var start = startDate ? solr.escape(startDate.locale('en').format('YYYY-MM-DD') + 'T00:00:00.000Z') : '*';
-                        var end = endDate ? solr.escape(endDate.locale('en').format('YYYY-MM-DD') + 'T23:59:59.999Z') : '*';
-
-                        query = '[ ' + start + ' TO ' + end + ' ]';
-                    } 
-                    $scope.saveDateFilter($scope.dateFilter.field, query, $scope.dateFilter);
+                $scope.onChange = function(){                    
+                    $scope.saveDateFilter($scope.dateFilter.field, undefined, $scope.dateFilter);
                 }
 
             }
