@@ -24,7 +24,7 @@
     "fieldCurrentRevision": "Field Current Revision",
     "referenceRecordRevision": "Reference Record Revision",
     "update": "Update",
-    "confirmChanges": "Confirm change to the following record(s)",
+    "confirmDelete": "Are you sure you want to delete this record?",
     "draftRecord": "DRAFT RECORD",
     "uniqueId": "Unique ID:",
     "summary": "Summary:",

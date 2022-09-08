@@ -13,7 +13,7 @@ import kmTermRadioT from '~/app-text/components/scbd-angularjs-controls/form-con
 app.directive('kmTermRadio', ["$q", "Thesaurus", "$timeout", "translationService",
     function ($q, thesaurus, $timeout, translationService){
         return {
-            restrict: 'EAC',
+            restrict: 'EA',
             template: template,
             replace: true,
             transclude: false,
