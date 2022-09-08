@@ -41,6 +41,31 @@
 								</button>
 							</div>
 						</div>
+						<div>
+							<table class="table" id="orgaExport">
+								<thead>
+									<tr>
+										<th class="display-18">{{::('viewOrgaRegistryT.recordID'|$translate)}}</th>
+										<th class="display-20">{{::('viewOrgaRegistryT.scientificName'|$translate)}}</th>
+										<th class="display-17 hidden-xs">{{::('viewOrgaRegistryT.commonName'|$translate)}}</th>
+										<th class="display-45 hidden-xs">{{::('viewOrgaRegistryT.description'|$translate)}}</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="row in ::orgaRecords">
+										<td class="tableexport-string">
+											<a rel="noopener" translation-url target="_blank" ng-if="::row.url_ss.length" rel="noopener" ng-href="{{::row.url_ss[0]}}">
+												<span class="text-uppercase" ng-bind="::row.recordId"></span>
+											</a>
+										</td>
+										<td class="tableexport-string"><span ng-bind="::row.taxonomicStatus"></span></td>
+										<td class="tableexport-string hidden-xs"><span ng-bind="::row.commonName.join(', ')"></span></td>
+										<td class="tableexport-string truncate-description hidden-xs"><span ng-bind="::row.description"></span></td>
+
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
