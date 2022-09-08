@@ -5,7 +5,7 @@ import '~/services/main';
 import alphabets from '~/app-text/views/search/alphabets.json';
 import countryFilterT from '~/app-text/views/search/search-filters/country-filter.json';
 
-app.directive('countryFilter', ['locale', 'translationService', function (locale, translationService) {
+app.directive('countryFilter', ['locale', 'translationService', '$filter',  function (locale, translationService, $filter) {
         return {
             restrict: 'EAC',
             replace: true,
@@ -60,8 +60,9 @@ app.directive('countryFilter', ['locale', 'translationService', function (locale
                     }
                };
                
-               
-              
+               $scope.sortCountries = function (item) {
+                    return $filter("ascii")(item.name[locale]||item.name);
+               }             
              
 
             }//link
