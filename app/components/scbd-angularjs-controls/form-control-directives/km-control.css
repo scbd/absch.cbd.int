@@ -207,6 +207,11 @@ trix-editor a:hover{cursor: pointer;color: #428bca !important;}
 .km-terms-check .no-border{
     border-top:none!important;
 }
-.km-terms-check ul{
-    padding: 0px 0px 0px 20px;
+.km-terms-check ul.list-unstyled,
+.km-terms-radio ul.list-unstyled{
+    padding-left: 20px;
+}
+/* //unable to access BS5 class so overide */
+.pl-0{
+    padding-left:0px!important
 }
