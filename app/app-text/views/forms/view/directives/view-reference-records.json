@@ -8,5 +8,6 @@
     "show": "Show",
     "country": "Country",
     "title": "Title",
-    "updatedOn": "Updated on"
+    "updatedOn": "Updated on",
+    "noRecords":"This record is not referenced in other record(s)"
 }

@@ -251,7 +251,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressOrganisms" caption="{{::('editVLRT.organismIdentification'|$translate)}}" required>
+											<div class="km-control-group" name="biosafety.addressOrganisms" caption="{{::('editVLRT.addressOrganisms'|$translate)}}" required>
 												<div km-yes-no required name="biosafety.addressOrganisms" ng-model="document.biosafety.addressOrganisms"  
 													ng-click="onAddressOrganismsChange(document.biosafety.addressOrganisms)" locales="document.header.languages"></div>
 												<div ng-if="document.biosafety.addressOrganisms" style="margin-top: 15px;">
@@ -271,7 +271,7 @@
 
 									<div class="row">
 										<div  class="col-xs-12">
-											<div class="km-control-group" name="biosafety.addressGenes" caption="{{::('editVLRT.geneIdentification'|$translate)}}" required>
+											<div class="km-control-group" name="biosafety.addressGenes" caption="{{::('editVLRT.addressGenes'|$translate)}}" required>
 												<div class="help-block">
 													{{::('editVLRT.geneIdentificationInfo'|$translate)}}
 												</div>

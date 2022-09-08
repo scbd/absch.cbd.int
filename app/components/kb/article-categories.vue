@@ -11,7 +11,10 @@
                             <a v-if="article.url" :href="article.url" target="_blank">{{article.title}}</a>
                         </li>
                     </ul>
-                    <a class="float-end text-decoration-none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
+                    <hr class="mt-3"></hr>
+                    <div>
+                        <a class="float-end text-decoration-none" :href="`${tagUrl(category)}`">{{ $t("viewMore") }}</a>
+                    </div>
                 </div>
             </div>
         </div>
