@@ -12,7 +12,6 @@ export default ['$scope', 'articlesService', '$rootScope', 'translationService',
         $scope.announcementCounts = 3;
         if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
           $scope.recordCount = 8;
-          //$scope.announcementCounts = 6;
         }
         $scope.exportVueComponent = {
           components: { homepageRecords }

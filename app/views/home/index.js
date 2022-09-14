@@ -20,7 +20,6 @@ export default ['$scope','$rootScope', 'translationService', function ($scope, $
 
         if($rootScope.deviceSize == 'lg' || $rootScope.deviceSize == 'xl'){
           $scope.recordCount = 8;
-          //$scope.announcementCounts = 6;
         }
 
         var today= moment.utc();
